@@ -1,0 +1,25 @@
+id: band-relation
+name: Band relation
+description: |
+  Fix u : X → ℝ non-constant and ε > 0. Define an asymmetric relation P by
+  p P q iff EU_u(p) − EU_u(q) ∈ (ε, 2ε], and let p ≽ q iff not q P p. Then
+  ≽ is complete (P is asymmetric) and ≻ = P. P is acyclic because EU_u
+  strictly increases along any P-chain. But P is not transitive: with
+  EU_u(p), EU_u(q), EU_u(r) = 3ε, 1.5ε, 0 we have p P q and q P r while
+  EU_u(p) − EU_u(r) = 3ε ∉ (ε, 2ε].
+satisfies:
+- completeness
+- acyclicity
+violates:
+- quasi-transitivity
+status: proved
+certificate:
+  provenance: ai
+  lean: none
+  produced_by: Claude Fable 5.1 (Cowork session)
+  checked_by: []
+  date: '2026-09-08'
+sources: []
+notes: Sanity-checked numerically in checks/countermodels.py. Not yet checked by a human.
+checks:
+- topics/decision-theory/checks/countermodels.py

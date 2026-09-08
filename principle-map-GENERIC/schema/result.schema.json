@@ -1,0 +1,148 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "result.schema.json",
+ "title": "Result",
+ "description": "An implication: premises (with the topic background) entail conclusion. Independences are not recorded as results; they are derived from models.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "id",
+  "premises",
+  "conclusion",
+  "certificate",
+  "sources"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+  },
+  "premises": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "uniqueItems": true
+  },
+  "conclusion": {
+   "type": "string"
+  },
+  "status": {
+   "type": "string",
+   "enum": [
+    "proved",
+    "conjectured"
+   ],
+   "default": "proved"
+  },
+  "certificate": {
+   "type": "object",
+   "additionalProperties": false,
+   "anyOf": [
+    {
+     "required": [
+      "source_id"
+     ]
+    },
+    {
+     "required": [
+      "provenance"
+     ]
+    }
+   ],
+   "properties": {
+    "source_id": {
+     "type": "string",
+     "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+     "description": "Direct source in topic.source_catalog, or misc for one-off work. This drives source filters and badges."
+    },
+    "provenance": {
+     "type": "string",
+     "enum": [
+      "human",
+      "human-assisted",
+      "ai"
+     ],
+     "description": "Origin of the mathematical result or model, not authorship of its database transcription."
+    },
+    "lean": {
+     "type": "string",
+     "enum": [
+      "none",
+      "stated",
+      "verified"
+     ],
+     "default": "none",
+     "description": "none: no Lean. stated: the generated statement elaborates, the proof is still sorry. verified: a machine-checked proof of the generated statement, free of sorryAx. Only pmap lean-check may set verified."
+    },
+    "lean_ref": {
+     "type": "string"
+    },
+    "produced_by": {
+     "type": "string"
+    },
+    "recorded_by": {
+     "type": "string",
+     "description": "Who transcribed or translated the database record, separately from the mathematical author."
+    },
+    "checked_by": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "date": {
+     "type": "string"
+    }
+   },
+   "if": {
+    "properties": {
+     "lean": {
+      "const": "verified"
+     }
+    },
+    "required": [
+     "lean"
+    ]
+   },
+   "then": {
+    "required": [
+     "lean_ref"
+    ]
+   }
+  },
+  "proof": {
+   "type": "string"
+  },
+  "sources": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "\\S"
+   }
+  },
+  "source_names": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "\\S"
+   },
+   "description": "Short display names, one per sources entry in the same order; full citations remain in sources."
+  },
+  "notes": {
+   "type": "string"
+  }
+ },
+ "if": {
+  "properties": {
+   "status": {
+    "const": "conjectured"
+   }
+  }
+ },
+ "else": {
+  "required": [
+   "proof"
+  ]
+ }
+}

@@ -1,0 +1,28 @@
+id: symmetry-implies-shift-transfer
+premises:
+- rich-outcomes
+- totality
+- stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- independence
+- negative-affine-anti-invariance
+conclusion: shift-transfer
+status: proved
+certificate:
+  source_id: symmetries-of-value
+  lean: none
+  produced_by: Zachary Goodsell (cited paper)
+  checked_by: []
+  date: '2026-09-08'
+  recorded_by: GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation
+proof: This is Theorem 3 transported from laws to random variables using Stochastic Equivalence. Reflection,
+  Totality and Independence first make a half-mixture of V and −V indifferent to 0. Shift invariance then
+  gives M_1/2(V+c,−V)~c/2. Pair the terms on the two sides of the proposed transfer with their negatives;
+  both reduce to the same simple constant mixture. Independence cancels the common terms.
+sources:
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 3, pp. 25–26
+notes: Source-based result or immediate restriction/composition. Premises are sufficient; minimality is
+  not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.
+source_names:
+- Symmetries of Value

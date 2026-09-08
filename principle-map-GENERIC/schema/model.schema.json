@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "model.schema.json",
+  "title": "Model",
+  "description": "A structure in the topic's framework, with the principles known to hold and to fail in it. Witnesses the consistency of the package satisfies ∪ {¬v : v ∈ violates}; every independence is derived from models.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "satisfies", "violates", "certificate", "sources"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "name": { "type": "string" },
+    "description": { "type": "string", "description": "The construction, and the verification of each listed principle. Required for proved models." },
+    "satisfies": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "violates": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "minItems": 1 },
+    "status": { "type": "string", "enum": ["proved", "conjectured"], "default": "proved" },
+    "certificate": { "$ref": "result.schema.json#/properties/certificate" },
+    "checks": { "type": "array", "items": { "type": "string" }, "description": "Paths of executable sanity checks (numerical, Lean, …)." },
+    "sources": { "type": "array", "items": { "type": "string", "pattern": "\\S" } },
+    "source_names": { "type": "array", "items": { "type": "string", "pattern": "\\S" }, "description": "Short display names corresponding to sources, in the same order." },
+    "notes": { "type": "string" }
+  },
+  "if": { "properties": { "status": { "const": "conjectured" } } },
+  "else": { "required": ["description"] }
+}

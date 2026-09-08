@@ -1,0 +1,36 @@
+id: affine-symmetric-extension
+name: Total affine-symmetric extension (source existence construction)
+satisfies:
+- rich-outcomes
+- totality
+- stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- independence
+- negative-affine-anti-invariance
+- l1-continuity
+violates:
+- countable-sure-thing
+- archimedean-gambles
+status: proved
+certificate:
+  source_id: symmetries-of-value
+  lean: none
+  produced_by: Zachary Goodsell (cited paper)
+  checked_by: []
+  date: '2026-09-08'
+  recorded_by: GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation
+description: Goodsell (2026), Theorem 2 constructs a total preference satisfying DTU, both affine symmetry
+  principles, and L¹ Continuity. Start with the cone of Theorem 12, use Theorem 13 to extend any nontotal
+  cone while preserving convexity, scale and reflection, and apply Zorn’s lemma. Fixed required comparisons
+  preserve finite EU, dominance and prospect shifts; the end of §5 asserts preservation of L¹ Continuity.
+  Pull the resulting ordering back from laws to all real-valued random variables. The two violations follow
+  from the explicit St Petersburg witnesses in this topic. See the write-up for the scope of this source-based
+  existence certificate.
+sources:
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 2, p. 24; Theorems
+  12–13 and end of §5, pp. 35–36
+notes: This is a nonconstructive existence model, not an implemented comparator. Its existence and L¹
+  clause are source-attributed. No numerical test is claimed to verify Zorn’s lemma or the source proof.
+source_names:
+- Symmetries of Value

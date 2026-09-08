@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preference axioms over lotteries</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #F4F5F7;
+    --panel: #FFFFFF;
+    --panel-2: #EEF0F3;
+    --line: #D8DCE2;
+    --line-strong: #B9BFC8;
+    --ink: #1B2230;
+    --ink-2: #4B5563;
+    --ink-3: #7C8594;
+    --accent: #2B3F6B;
+    --human: #2E6F95;
+    --assisted: #6E5BA6;
+    --ai: #C4762B;
+    --derived: #8A9098;
+    --indep: #B8394B;
+    --open: #E3E6EA;
+    --open-ink: #8A9098;
+    --conj: #C9A227;
+    --node-fill: #FFFFFF;
+    --node-stroke: #8E96A3;
+    --junction: #4B5563;
+    --hl: #FFF3C4;
+    --focus: #2B3F6B;
+    --shadow: 0 1px 2px rgba(27,34,48,.08), 0 6px 18px rgba(27,34,48,.06);
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #151920; --panel: #1D2230; --panel-2: #242A38; --line: #313849; --line-strong: #454D60;
+      --ink: #E6E9EF; --ink-2: #B4BAC6; --ink-3: #7F8798; --accent: #9DB4E6;
+      --human: #5FA3CC; --assisted: #A594DB; --ai: #E09A55; --derived: #7B8393; --indep: #E06A7A;
+      --open: #2A3140; --open-ink: #6B7383; --conj: #D9B64A;
+      --node-fill: #232938; --node-stroke: #5A6274; --junction: #B4BAC6; --hl: #3B3A22; --focus: #9DB4E6;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #151920; --panel: #1D2230; --panel-2: #242A38; --line: #313849; --line-strong: #454D60;
+    --ink: #E6E9EF; --ink-2: #B4BAC6; --ink-3: #7F8798; --accent: #9DB4E6;
+    --human: #5FA3CC; --assisted: #A594DB; --ai: #E09A55; --derived: #7B8393; --indep: #E06A7A;
+    --open: #2A3140; --open-ink: #6B7383; --conj: #D9B64A;
+    --node-fill: #232938; --node-stroke: #5A6274; --junction: #B4BAC6; --hl: #3B3A22; --focus: #9DB4E6;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 var(--sans); }
+  button, input, select { font: inherit; color: inherit; }
+  a { color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .app { display: grid; grid-template-rows: auto 1fr; height: 100vh; }
+  header.top { display: flex; align-items: baseline; gap: 18px; padding: 12px 20px; border-bottom: 1px solid var(--line); background: var(--panel); flex-wrap: wrap; }
+  header.top h1 { font: 600 22px/1.2 var(--serif); margin: 0; text-wrap: balance; }
+  header.top .sub { color: var(--ink-3); font-size: 12.5px; max-width: 80ch; }
+  .stats { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel-2); font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .chip b { color: var(--ink); font-weight: 600; }
+
+  .body { display: grid; grid-template-columns: 1fr; min-height: 0; }
+  @media (max-width: 1100px) { .detail { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); max-height: 40vh; } }
+  aside.controls { min-width: 0; min-height: 0; overflow: hidden; background: var(--panel); display: grid; grid-template-rows: minmax(0, 1fr) 9px var(--background-height, clamp(145px, 27vh, 230px)); }
+  .controls-scroll { min-height: 0; overflow: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 16px; scrollbar-gutter: stable; overflow-anchor: none; }
+  .background-dock { min-height: 0; border-top: 1px solid var(--line-strong); padding: 12px 16px; display: flex; flex-direction: column; gap: 7px; background: var(--panel-2); }
+  .background-dock h2 { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .background-dock h2 .lnk { margin-left: auto; }
+  .background-hint, .background-status { font-size: 11px; color: var(--ink-3); margin: 0; }
+  #background-list { overflow: auto; min-height: 0; flex: 1; scrollbar-gutter: stable; overflow-anchor: none; }
+  .background-row, .pr-row { display: flex; align-items: flex-start; gap: 6px; }
+  .background-row { font-size: 12px; padding: 3px 0; }
+  .background-row .lnk, .pr-row .principle-name { flex: 1; min-width: 0; }
+  .pr-row .principle-name { color: var(--ink); text-align: left; }
+  .pr-row input[type=checkbox] { flex: none; margin: 3px 2px 0 0; cursor: pointer; }
+  .background-row.is-removed, .pr-row.in-background { visibility: hidden; pointer-events: none; }
+  .background-row.is-collapsed, .pr-row.is-collapsed { display: none; }
+  .background-move { flex: none; min-width: 23px; padding: 0 3px; border: 1px solid var(--line); border-radius: 4px; color: var(--accent); background: var(--panel); cursor: pointer; }
+  .background-move:hover { border-color: var(--accent); }
+  .background-fixed { color: var(--ink-3); font-size: 10px; }
+  aside.controls h2 .lnk { font: inherit; text-transform: none; letter-spacing: 0; margin-left: 6px; }
+  aside.controls h2, .detail h2 { font: 500 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
+  .ctl { display: flex; flex-direction: column; gap: 6px; }
+  .ctl label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .ctl input[type=checkbox] { accent-color: var(--accent); }
+  #pr-filters { gap: 16px; }
+  .pr-category { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
+  .pr-category:first-child { border-top: 0; padding-top: 0; }
+  .pr-category h3 { font: 600 13px/1.35 var(--sans); color: var(--ink); margin: 0 0 5px; }
+  .pr-category-actions { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; margin-bottom: 9px; font-size: 11px; }
+  .pr-category-actions .lnk:disabled { opacity: .45; cursor: default; }
+  .pr-category-count { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-left: auto; }
+  .pr-category .principle-name { font-size: 13px; }
+  .pr-category input { flex: none; margin-top: 3px; }
+  .sw { width: 22px; height: 0; border-top: 3px solid; border-radius: 2px; flex: none; }
+  .sw.dotted { border-top-style: dotted; }
+  .sw.dashed { border-top-style: dashed; }
+  .sw.human { border-color: var(--human); } .sw.assisted { border-color: var(--assisted); } .sw.ai { border-color: var(--ai); }
+  .sw.derived { border-color: var(--derived); } .sw.conj { border-color: var(--conj); }
+  .search { width: 260px; margin: 0 0 12px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--panel); }
+  .legend-note { color: var(--ink-3); font-size: 12px; }
+  .framework { font-size: 12.5px; color: var(--ink-2); }
+  .framework p { margin: 0 0 6px; }
+  .btn { padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--panel); cursor: pointer; }
+  .btn:hover { background: var(--panel-2); }
+  .btn.small { padding: 3px 8px; font-size: 12px; }
+
+  main { display: grid; grid-template-rows: auto 1fr; min-height: 0; min-width: 0; }
+  .tabs { display: flex; gap: 2px; padding: 8px 14px 0; border-bottom: 1px solid var(--line); background: var(--panel); }
+  .tab { padding: 8px 12px; border: 1px solid transparent; border-bottom: 0; border-radius: 6px 6px 0 0; background: none; cursor: pointer; color: var(--ink-2); }
+  .tab[aria-selected="true"] { background: var(--bg); border-color: var(--line); color: var(--ink); margin-bottom: -1px; }
+  .tab .n { color: var(--ink-3); font-size: 12px; margin-left: 4px; font-variant-numeric: tabular-nums; }
+  .pane { display: none; min-height: 0; overflow: auto; }
+  .pane[data-active="true"] { display: block; }
+  #pane-graph[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
+  .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
+  .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
+  .pane-divider[aria-orientation="vertical"] { cursor: col-resize; }
+  .pane-divider[aria-orientation="vertical"]::after { width: 3px; height: 36px; top: calc(50% - 18px); left: 3px; }
+  .pane-divider[aria-orientation="horizontal"] { cursor: row-resize; }
+  .pane-divider[aria-orientation="horizontal"]::after { height: 3px; width: 36px; left: calc(50% - 18px); top: 3px; }
+  .pane-divider:hover, .pane-divider:focus-visible, .pane-divider.dragging { background: var(--hl); }
+  .pane-divider:focus-visible { outline-offset: -2px; }
+  .pane-divider:hover::after, .pane-divider:focus-visible::after, .pane-divider.dragging::after { background: var(--accent); }
+  body.resizing-panes, body.resizing-panes * { cursor: var(--resize-cursor) !important; user-select: none !important; }
+  .graph-area { position: relative; overflow: hidden; min-width: 0; }
+  #graph { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+  #graph:active { cursor: grabbing; }
+  .graph-tools { position: absolute; right: 12px; top: 12px; display: flex; gap: 6px; }
+  .graph-warning { position: absolute; inset: 24px; overflow: auto; padding: 24px; border: 2px solid #b42318; border-radius: 8px; background: #fff1f0; color: #b42318; }
+  .graph-warning h2 { margin: 0 0 12px; font-size: 21px; }
+  .graph-warning .lnk { color: #912018; text-decoration: underline; }
+  .graph-warning li { margin: 10px 0; }
+
+  /* SVG */
+  .edge { fill: none; stroke-width: 1.6; }
+  .edge.source { stroke: var(--source-color); }
+  .badge.source { background: var(--source-color); }
+  .source-group { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .source-group legend { font-size: 11px; color: var(--ink-3); margin-bottom: 5px; }
+  .source-group label { font-size: 12px; margin-bottom: 6px; }
+  .model-category { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
+  .model-category h3 { font-size: 13px; margin: 0 0 8px; }
+  .edge.human { stroke: var(--human); } .edge.assisted { stroke: var(--assisted); } .edge.ai { stroke: var(--ai); }
+  .edge.derived { stroke: var(--derived); stroke-dasharray: 2 4; stroke-width: 1.3; }
+  .edge.conjectured { stroke-dasharray: 7 5; }
+  .edge.lean { stroke-width: 3; }
+  .edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+  .edge-g.dim .edge { opacity: .18; }
+  .edge-g.hot .edge { stroke-width: 3; }
+  .node { cursor: pointer; }
+  .node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; }
+  .node.dim { opacity: .3; }
+  .node.hot rect, .node.selected rect { stroke: var(--accent); stroke-width: 2.2; }
+  .node.selected rect { fill: var(--hl); }
+  .node.from-background rect { fill: var(--hl); stroke: var(--accent); }
+  .node text { font: 500 12.5px var(--sans); fill: var(--ink); pointer-events: none; }
+  .node text[data-principle] { pointer-events: auto; cursor: pointer; }
+  .node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
+  .node.iso rect { stroke-dasharray: 4 3; }
+  .junction { cursor: pointer; }
+  .junction circle { fill: var(--panel); stroke: var(--junction); stroke-width: 1.4; }
+  .junction.source circle { stroke: var(--source-color); }
+  .junction.human circle { stroke: var(--human); } .junction.assisted circle { stroke: var(--assisted); } .junction.ai circle { stroke: var(--ai); }
+  .junction text { font: 600 10px var(--sans); fill: var(--ink-2); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .junction.dim { opacity: .3; }
+  .layer-label { font: 400 10px var(--mono); fill: var(--ink-3); }
+
+  /* matrix */
+  .matrix-wrap { padding: 16px 20px; }
+  table.matrix { border-collapse: separate; border-spacing: 2px; font-size: 12px; }
+  table.matrix th { font-weight: 500; color: var(--ink-2); text-align: left; padding: 2px 6px; white-space: nowrap; }
+  table.matrix th.col { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; vertical-align: bottom; height: 215px; padding: 6px 2px; }
+  table.matrix td { width: 26px; height: 26px; border-radius: 3px; cursor: pointer; text-align: center; font: 500 10px var(--mono); }
+  td.c-implies { background: var(--human); color: #fff; }
+  td.c-implies.prov-ai { background: var(--ai); } td.c-implies.prov-assisted { background: var(--assisted); }
+  td.c-derived { background: color-mix(in srgb, var(--human) 45%, var(--panel)); }
+  td.c-independent { background: var(--indep); color: #fff; }
+  td.c-independent.derived { background: color-mix(in srgb, var(--indep) 45%, var(--panel)); }
+  td.c-open { background: var(--open); color: var(--open-ink); }
+  td.c-conj { background: repeating-linear-gradient(45deg, var(--open) 0 4px, color-mix(in srgb, var(--conj) 50%, var(--panel)) 4px 8px); }
+  td.c-self { background: transparent; cursor: default; }
+  td.hot { outline: 2px solid var(--accent); }
+  .matrix-legend { display: flex; gap: 14px; flex-wrap: wrap; margin: 12px 0 0; font-size: 12px; color: var(--ink-2); }
+  .matrix-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .matrix-legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+  .matrix-wrap p.hint { color: var(--ink-3); font-size: 12.5px; margin: 0 0 12px; max-width: 65ch; }
+
+  /* lists */
+  .list { padding: 16px 20px; }
+  table.results { border-collapse: collapse; width: 100%; font-size: 13px; }
+  table.results th { text-align: left; font-weight: 500; color: var(--ink-3); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  table.results td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.results tr { cursor: pointer; }
+  table.results tr:hover td { background: var(--panel-2); }
+  table.results tr.filtered td { opacity: .4; }
+  .stmt { font-family: var(--serif); font-size: 14px; }
+  .open-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+  .open-item { padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); cursor: pointer; font-family: var(--serif); }
+  .open-item:hover { border-color: var(--accent); }
+  .list h3 { font: 600 16px var(--serif); margin: 18px 0 8px; }
+  .list h3:first-child { margin-top: 0; }
+  .list p.hint { color: var(--ink-3); font-size: 12.5px; max-width: 65ch; margin: 0 0 12px; }
+
+  /* badges */
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font: 500 11px var(--sans); letter-spacing: .02em; color: #fff; white-space: nowrap; }
+  .badge.source { white-space: normal; }
+  .badge.human { background: var(--human); } .badge.assisted { background: var(--assisted); } .badge.ai { background: var(--ai); }
+  .badge.lean { background: transparent; color: var(--ink-2); border: 1px solid var(--line-strong); }
+  .badge.lean.verified { border-color: var(--ink); color: var(--ink); font-weight: 600; }
+  .badge.conj { background: var(--conj); color: #1B2230; }
+  .badge.kind { background: var(--panel-2); color: var(--ink-2); }
+  .badge.indep { background: var(--indep); }
+
+  /* detail */
+  .detail { border-left: 1px solid var(--line); background: var(--panel); overflow: auto; padding: 16px 18px; }
+  .detail .empty { color: var(--ink-3); font-size: 13px; }
+  .detail h2.title { font: 600 18px/1.25 var(--serif); letter-spacing: 0; text-transform: none; color: var(--ink); margin: 0 0 4px; text-wrap: balance; }
+  .detail .id { font: 12px var(--mono); color: var(--ink-3); margin-bottom: 10px; }
+  .detail .badges { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+  .detail .statement { font: 15px/1.5 var(--serif); margin: 0 0 12px; }
+  .detail .formal { font: 12px var(--mono); background: var(--panel-2); padding: 6px 8px; border-radius: 4px; overflow-x: auto; margin: 0 0 12px; }
+  .detail .proof { font: 13px/1.5 var(--serif); background: var(--panel-2); padding: 10px 12px; border-radius: 6px; margin: 0 0 12px; }
+  .detail dl { margin: 0 0 12px; display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px; font-size: 12.5px; }
+  .detail dt { color: var(--ink-3); }
+  .detail dd { margin: 0; }
+  .detail ul.rel { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 3px; }
+  .detail ul.rel li { display: flex; gap: 6px; align-items: baseline; }
+  .detail ul.rel button { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; text-align: left; }
+  .detail ul.rel button:hover { text-decoration: underline; }
+  .detail .via { font: 11px var(--mono); color: var(--ink-3); }
+  .detail .src { font-size: 12.5px; color: var(--ink-2); padding-left: 16px; margin: 0 0 12px; }
+  .detail .file { font: 11px var(--mono); color: var(--ink-3); }
+  .rel-head { font: 500 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin: 10px 0 4px; }
+
+  @media (prefers-reduced-motion: no-preference) { .node rect, .edge { transition: opacity .15s, stroke-width .15s; } }
+
+  /* additions */
+  .pkg-pick { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--line-strong); border-radius: 999px; cursor: pointer; background: var(--panel); font-size: 13px; }
+  .pill.on { background: var(--hl); border-color: var(--accent); }
+  .pill input { margin: 0; accent-color: var(--accent); }
+  .pkg-head { font: 600 16px var(--serif); margin: 4px 0 10px; }
+  .note { font-size: 12.5px; color: var(--ink-2); }
+  .warn { color: var(--indep); font-size: 12.5px; }
+  .mono { font: 11px var(--mono); color: var(--ink-3); }
+  .dim { color: var(--ink-3); font-size: 11px; }
+  .lnk { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; text-align: left; font: inherit; }
+  .lnk:hover { text-decoration: underline; }
+  .list h3 .n, .list h3 span.n { color: var(--ink-3); font: 400 13px var(--sans); }
+  table.matrix tr.filtered td, table.matrix tr.filtered th { opacity: .4; }
+  table.matrix th button.lnk { color: var(--ink); }
+  .list ul.rel { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 3px; }
+  .list ul.rel li { display: flex; gap: 8px; align-items: baseline; }
+  .list ul.rel button { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; text-align: left; font: inherit; }
+  .list ul.rel button:hover { text-decoration: underline; }
+  .list .via { font: 11px var(--mono); color: var(--ink-3); }
+  .list .via button { color: var(--ink-3); font: inherit; }
+  .list .empty { color: var(--ink-3); }
+
+  /* explorer */
+  .ex { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(320px, 1.4fr); gap: 28px; align-items: start; }
+  .ex-head { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
+  .ex-head .n { font: 400 12px var(--mono); }
+  .ex-list { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; }
+  .ex-p { display: flex; align-items: center; gap: 10px; padding: 4px 6px; border-radius: 5px; }
+  .ex-p.in { background: color-mix(in srgb, var(--human) 14%, transparent); }
+  .ex-p.out { background: color-mix(in srgb, var(--indep) 14%, transparent); }
+  .ex-p.fin, .ex-p.fout { color: var(--ink-2); }
+  .ex-p .lnk { color: var(--ink); }
+  .ex-p.model-in { background: color-mix(in srgb, var(--human) 14%, transparent); }
+  .ex-p.model-out { background: color-mix(in srgb, var(--indep) 14%, transparent); }
+  .ex-p > .lnk { flex: 1; text-align: left; }
+  .verdict { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; background: none; border: 1px solid var(--line); border-radius: 4px; padding: 3px 5px; color: inherit; cursor: pointer; }
+  .pop-sources { font-size: 12px; margin: 9px 0; }
+  .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 5px; overflow: hidden; flex: none; }
+  .seg button { border: 0; background: var(--panel); width: 26px; height: 22px; cursor: pointer; color: var(--ink-3); font-size: 12px; padding: 0; }
+  .seg button + button { border-left: 1px solid var(--line-strong); }
+  .seg button.on { background: var(--ink); color: var(--panel); }
+  .seg button.auto { color: var(--ink); background: var(--panel-2); }
+  .ex-m { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; padding: 5px 8px; border-bottom: 1px solid var(--line); }
+  .ex-m.sel { background: var(--hl); }
+  .ex-m .lnk { color: var(--ink); font: 500 13.5px var(--sans); }
+  .ex-m .ex-sum { margin-left: auto; white-space: nowrap; }
+  .ex .empty { color: var(--ink-3); padding: 4px 8px; }
+  .models-background-dock { height: 230px; min-height: 140px; max-height: 65vh; resize: vertical; overflow: auto; border: 1px solid var(--line-strong); border-radius: 6px; margin-bottom: 22px; }
+  .models-background-dock #models-background-list { flex: 1; min-height: 0; overflow: auto; scrollbar-gutter: stable; overflow-anchor: none; }
+  .models-background-dock h2 { margin: 0; font-size: 13px; }
+  .model-bg-placeholder { visibility: hidden; pointer-events: none; }
+
+  /* page */
+  .page { padding: 20px 28px 40px; max-width: 78ch; }
+  .page h1 { font: 600 24px/1.25 var(--serif); margin: 12px 0 8px; text-wrap: balance; }
+  .page h2 { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 22px 0 8px; }
+  .page .prose { font: 15px/1.55 var(--serif); }
+  .page .prose.statement { font-size: 16px; }
+  .page .plist { list-style: none; padding: 0; margin: 0; font: 15px/1.55 var(--serif); display: flex; flex-direction: column; gap: 6px; }
+  .page .badges { display: flex; gap: 6px; margin: 0 0 10px; }
+  .page dl { display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px; font-size: 12.5px; margin: 0; }
+  .page dt { color: var(--ink-3); } .page dd { margin: 0; }
+  .page .src { font-size: 13px; color: var(--ink-2); padding-left: 18px; }
+  .page .file { margin-top: 24px; font: 11px var(--mono); color: var(--ink-3); }
+  .page .formal { font: 12.5px var(--mono); background: var(--panel-2); padding: 6px 8px; border-radius: 4px; margin-top: 8px; overflow-x: auto; }
+  .page .id { font: 12px var(--mono); color: var(--ink-3); margin-bottom: 8px; }
+  .page table.results tr { cursor: default; } .page table.results tr[data-result], .page table.results tr[data-model] { cursor: pointer; }
+  .nowrap { white-space: nowrap; }
+  .detail .goto { margin: 0 0 12px; }
+
+  .links { font-size: 12.5px; margin: 0 0 10px; } .links a { color: var(--accent); }
+  .goto-row { display: flex; gap: 12px; align-items: center; margin: 0 0 12px; } .goto-row .goto, .goto-row .links { margin: 0; }
+  .dl { display: flex; gap: 10px; font-size: 12.5px; align-self: center; } .dl a { color: var(--ink-3); }
+
+  .pop { position: fixed; z-index: 20; max-width: 380px; background: var(--panel); border: 1px solid var(--line-strong); border-radius: 8px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 13px; }
+  .pop .pop-t { font: 600 15px/1.3 var(--serif); margin-bottom: 4px; }
+  .pop .pop-t + .pop-t { margin-top: 10px; }
+  .pop .pop-s { font: 13.5px/1.45 var(--serif); }
+  .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
+  .pop .pop-l { font-size: 12px; color: var(--ink-2); margin-top: 6px; } .pop code { font: 12px var(--mono); }
+  .pop .badges { display: flex; gap: 6px; margin: 6px 0; } .pop .links { margin: 4px 0 0; }
+
+  .ex-p.bad { background: color-mix(in srgb, var(--indep) 32%, transparent); outline: 1.5px solid var(--indep); }
+  .ex-bad { border: 1px solid var(--indep); color: var(--indep); border-radius: 6px; padding: 8px 10px; margin: 0 0 10px; font-size: 13px; }
+  .ex-bad .lnk { color: var(--indep); text-decoration: underline; }
+
+  .prose-page { font: 15px/1.55 var(--serif); } .prose-page h2 { margin-top: 20px; } .prose-page p { margin: 0 0 10px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div>
+      <h1 id="title"></h1>
+      <div class="sub" id="subtitle"></div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="dl" id="downloads"></div>
+  </header>
+  <div class="body">
+    <main>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="background" aria-selected="false">Background</button>
+        <button class="tab" role="tab" data-tab="graph" aria-selected="true">Graph</button>
+        <button class="tab" role="tab" data-tab="models" aria-selected="false">Models <span class="n" id="n-models"></span></button>
+        <button class="tab" role="tab" data-tab="open" aria-selected="false">Conjectures <span class="n" id="n-open"></span></button>
+        <button class="tab" role="tab" data-tab="results" aria-selected="false">Changes <span class="n" id="n-results"></span></button>
+        <button class="tab" role="tab" data-tab="contribute" aria-selected="false" hidden>Contribute</button>
+      </div>
+      <section class="pane" id="pane-graph" data-active="true">
+    <aside class="controls" id="graph-sidebar">
+      <div class="controls-scroll" id="principle-controls">
+      <div>
+        <h2>Sources</h2>
+        <div class="ctl" id="source-filters"></div>
+        <div class="ctl">
+          <label><input type="checkbox" id="lean-only"><span class="sw" style="border-color:var(--ink)"></span>Lean-verified only</label>
+        </div>
+      </div>
+      <div>
+        <h2>Graph</h2>
+        <div class="ctl">
+          <label><input type="checkbox" id="show-derived"><span class="sw derived dotted"></span>Derived implications</label>
+          <label><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjectures</label>
+          <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
+        </div>
+      </div>
+      <div>
+        <h2>Principles <button class="lnk dim" id="pr-all">select all</button> <button class="lnk dim" id="pr-none">unselect all</button></h2>
+        <div class="ctl" id="pr-filters"></div>
+      </div>
+      </div>
+      <div class="pane-divider" id="background-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize background pane" aria-controls="background-dock principle-controls" title="Drag to resize background · Arrow keys to adjust · Double-click to reset"></div>
+      <section class="background-dock" id="background-dock" aria-labelledby="background-heading">
+        <h2 id="background-heading">Background <span id="background-count"></span><button class="lnk" id="background-reset">reset</button></h2>
+        <p class="background-hint">↓ assume a principle · ↑ return it to the list</p>
+        <div id="background-list" class="ctl"></div>
+        <p id="background-status" class="background-status" role="status" aria-live="polite"></p>
+      </section>
+    </aside>
+        <div class="pane-divider" id="sidebar-divider" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize left sidebar" aria-controls="graph-sidebar" title="Drag to resize sidebar · Arrow keys to adjust · Double-click to reset"></div>
+        <div class="graph-area">
+          <svg id="graph" role="img" aria-label="Implication graph"></svg>
+          <div id="graph-warning" class="graph-warning" role="alert" hidden></div>
+          <div class="graph-tools"><button class="btn small" id="fit">Fit</button></div>
+        </div>
+      </section>
+      <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
+      <section class="pane" id="pane-results"><div class="list"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><div id="results"></div></div></section>
+      <section class="pane" id="pane-open"><div class="list" id="open"></div></section>
+      <section class="pane" id="pane-page"><div class="page" id="page"></div></section>
+      <section class="pane" id="pane-background"><div class="page prose-page" id="background"></div></section>
+      <section class="pane" id="pane-contribute"><div class="page prose-page" id="contribute"></div></section>
+    </main>
+  </div>
+</div>
+<div id="pop" class="pop" hidden></div>
+
+<script>
+const DATA = {"topic": {"id": "decision-theory", "title": "Preference axioms over lotteries", "description": "", "framework": "≽ a reflexive binary relation on Δ(X), X finite with |X| ≥ 3; ≻, ~ its asymmetric and symmetric parts.\n", "background": [], "notation": ""}, "principles": [{"id": "acyclicity", "name": "Acyclicity", "statement": "There is no finite cycle of strict preferences p₁ ≻ p₂ ≻ … ≻ pₙ ≻ p₁.\n", "formal": "∀n ∀p₁…pₙ. ¬(p₁ ≻ p₂ ∧ … ∧ pₙ ≻ p₁)", "aliases": [], "tags": ["ordering"], "sources": ["Sen (1970), Collective Choice and Social Welfare, ch. 1*"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/acyclicity.yaml"}, {"id": "archimedean", "name": "Archimedean", "statement": "For all p, q, r ∈ Δ(X): if p ≻ q ≻ r then there are α, β ∈ (0,1) with αp + (1−α)r ≻ q and q ≻ βp + (1−β)r.\n", "formal": "∀p q r. p ≻ q ≻ r → ∃α β∈(0,1). αp+(1−α)r ≻ q ∧ q ≻ βp+(1−β)r", "aliases": ["Jensen continuity", "Weak continuity"], "tags": ["axiom", "topological"], "sources": ["Jensen (1967), An introduction to Bernoullian utility theory I, Swedish Journal of Economics 69"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/archimedean.yaml"}, {"id": "betweenness", "name": "Betweenness", "statement": "For all p, q ∈ Δ(X) and λ ∈ (0,1): if p ≻ q then p ≻ λp + (1−λ)q ≻ q, and if p ~ q then p ~ λp + (1−λ)q.\n", "formal": "∀p q, ∀λ∈(0,1). (p ≻ q → p ≻ λp+(1−λ)q ≻ q) ∧ (p ~ q → p ~ λp+(1−λ)q)", "aliases": ["Mixture betweenness"], "tags": ["axiom", "mixture"], "sources": ["Chew (1983), A generalization of the quasilinear mean…, Econometrica 51", "Dekel (1986), An axiomatic characterization of preferences under uncertainty, JET 40"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/betweenness.yaml"}, {"id": "closed-graph-continuity", "name": "Closed-graph continuity", "statement": "The set {(p, q) ∈ Δ(X) × Δ(X) : p ≽ q} is closed in the product topology.\n", "formal": "IsClosed {(p,q) | p ≽ q}", "aliases": ["Continuity (DMO)", "Topological continuity"], "tags": ["axiom", "topological"], "sources": ["Dubra, Maccheroni & Ok (2004), JET 115, Axiom C"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/closed-graph-continuity.yaml"}, {"id": "completeness", "name": "Completeness", "statement": "For all p, q ∈ Δ(X): p ≽ q or q ≽ p.\n", "formal": "∀p q. p ≽ q ∨ q ≽ p", "aliases": ["Connectedness", "Totality"], "tags": ["ordering"], "sources": ["von Neumann & Morgenstern (1944), Theory of Games and Economic Behavior, §3.5"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/completeness.yaml"}, {"id": "continuity", "name": "Mixture continuity", "statement": "For all p, q, r ∈ Δ(X) the sets {λ ∈ [0,1] : λp + (1−λ)q ≽ r} and {λ ∈ [0,1] : r ≽ λp + (1−λ)q} are closed.\n", "formal": "∀p q r. closed {λ | λp+(1−λ)q ≽ r} ∧ closed {λ | r ≽ λp+(1−λ)q}", "aliases": ["Herstein–Milnor continuity", "Closedness"], "tags": ["axiom", "topological"], "sources": ["Herstein & Milnor (1953), Econometrica 21, Axiom 2"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/continuity.yaml"}, {"id": "eu-representation", "name": "Expected-utility representation", "statement": "There is a function u : X → ℝ such that for all p, q ∈ Δ(X): p ≽ q if and only if EU_u(p) ≥ EU_u(q).\n", "formal": "∃u:X→ℝ. ∀p q. p ≽ q ↔ Σ_x p(x)u(x) ≥ Σ_x q(x)u(x)", "aliases": ["vNM representation", "Linear utility representation"], "tags": ["representation"], "sources": ["von Neumann & Morgenstern (1944)"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/eu-representation.yaml"}, {"id": "independence", "name": "Independence", "statement": "For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.\n", "formal": "∀p q r, ∀λ∈(0,1]. p ≽ q ↔ λp+(1−λ)r ≽ λq+(1−λ)r", "aliases": ["Substitution axiom", "vNM independence", "Linearity"], "tags": ["axiom", "mixture"], "sources": ["Marschak (1950), Rational behavior, uncertain prospects, and measurable utility, Econometrica 18", "Herstein & Milnor (1953), An axiomatic approach to measurable utility, Econometrica 21"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/independence.yaml"}, {"id": "multi-utility", "name": "Expected multi-utility representation", "statement": "There is a set U of functions u : X → ℝ such that for all p, q ∈ Δ(X): p ≽ q if and only if EU_u(p) ≥ EU_u(q) for every u ∈ U.\n", "formal": "∃U ⊆ (X→ℝ). ∀p q. p ≽ q ↔ ∀u∈U. EU_u(p) ≥ EU_u(q)", "aliases": ["Incomplete expected utility", "Unanimity representation"], "tags": ["representation"], "sources": ["Aumann (1962), Utility theory without the completeness axiom, Econometrica 30", "Dubra, Maccheroni & Ok (2004), Expected utility theory without the completeness axiom, JET 115"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/multi-utility.yaml"}, {"id": "quasi-transitivity", "name": "Quasi-transitivity", "statement": "Strict preference is transitive: if p ≻ q and q ≻ r then p ≻ r.\n", "formal": "∀p q r. p ≻ q → q ≻ r → p ≻ r", "aliases": ["PP-transitivity"], "tags": ["ordering"], "sources": ["Sen (1969), Quasi-transitivity, rational choice and collective decisions, Review of Economic Studies 36"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/quasi-transitivity.yaml"}, {"id": "transitivity", "name": "Transitivity", "statement": "For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.\n", "formal": "∀p q r. p ≽ q → q ≽ r → p ≽ r", "aliases": [], "tags": ["ordering"], "sources": ["von Neumann & Morgenstern (1944), §3.5"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/transitivity.yaml"}, {"id": "weak-order", "name": "Weak order", "statement": "≽ is complete and transitive.\n", "formal": "Completeness ∧ Transitivity", "aliases": ["Total preorder", "Ordering axiom"], "tags": ["ordering", "bundle"], "sources": [], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/weak-order.yaml"}], "results": [{"id": "archimedean-independence-imply-continuity", "premises": ["transitivity", "independence", "archimedean"], "conclusion": "continuity", "status": "conjectured", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "", "sources": [], "notes": "Known with completeness added (Jensen 1967). Without it the cone K = {q − p : q ≽ p} is convex; the question is whether the Archimedean axiom forces it to be closed.\n", "file": "topics/decision-theory/results/archimedean-independence-imply-continuity.yaml", "files": {"md": "writeups/archimedean-independence-imply-continuity.md", "handwritten": false, "html": "writeups/archimedean-independence-imply-continuity.html"}}, {"id": "betweenness-continuity-imply-transitivity", "premises": ["completeness", "closed-graph-continuity", "betweenness"], "conclusion": "transitivity", "status": "conjectured", "certificate": {"provenance": "human", "lean": "none", "produced_by": "ZG", "checked_by": [], "date": "2026-09-08"}, "proof": "", "sources": [], "notes": "Sample conjecture.", "file": "topics/decision-theory/results/betweenness-continuity-imply-transitivity.yaml", "files": {"md": "writeups/betweenness-continuity-imply-transitivity.md", "handwritten": false, "html": "writeups/betweenness-continuity-imply-transitivity.html"}}, {"id": "closed-graph-implies-mixture-continuity", "premises": ["closed-graph-continuity"], "conclusion": "continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "λ ↦ (λp+(1−λ)q, r) and λ ↦ (r, λp+(1−λ)q) are continuous maps\n[0,1] → Δ(X)×Δ(X); the two sections are their preimages of the closed\ngraph of ≽.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/closed-graph-implies-mixture-continuity.yaml", "files": {"md": "writeups/closed-graph-implies-mixture-continuity.md", "handwritten": false, "html": "writeups/closed-graph-implies-mixture-continuity.html"}}, {"id": "continuity-completeness-imply-archimedean", "premises": ["continuity", "completeness"], "conclusion": "archimedean", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let p ≻ q ≻ r and set A = {λ : λp+(1−λ)r ≽ q}, B = {λ : q ≽ λp+(1−λ)r}.\nBoth are closed by continuity and A ∪ B = [0,1] by completeness. Since\n1 ∉ B (as p ≻ q) and [0,1]∖B is open, some interval (1−ε, 1] lies in\n[0,1]∖B ⊆ A; any α in it with α < 1 gives αp+(1−α)r ≻ q. Symmetrically,\n0 ∉ A (as q ≻ r) yields [0, ε) ⊆ B∖A and any β in it with β > 0 gives\nq ≻ βp+(1−β)r.\n", "sources": [], "notes": "Completeness is used to conclude λ ∈ A from λ ∉ B; whether continuity alone suffices is left open here.\n", "file": "topics/decision-theory/results/continuity-completeness-imply-archimedean.yaml", "files": {"md": "writeups/continuity-completeness-imply-archimedean.md", "handwritten": false, "html": "writeups/continuity-completeness-imply-archimedean.html"}}, {"id": "dmo-theorem", "premises": ["transitivity", "independence", "closed-graph-continuity"], "conclusion": "multi-utility", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "proof": "Dubra–Maccheroni–Ok, Theorem 1, for compact metric X (finite X is a\nspecial case): a reflexive transitive relation on Δ(X) satisfying\nindependence and closed-graph continuity has an expected multi-utility\nrepresentation. The proof identifies ≽ with a closed convex cone of\nsigned measures and takes U to be the dual cone.\n", "sources": ["Dubra, Maccheroni & Ok (2004), Expected utility theory without the completeness axiom, JET 115, Theorem 1"], "notes": "Reflexivity is a standing assumption of the framework.\n", "file": "topics/decision-theory/results/dmo-theorem.yaml", "files": {"md": "writeups/dmo-theorem.md", "handwritten": false, "html": "writeups/dmo-theorem.html"}}, {"id": "eu-implies-completeness", "premises": ["eu-representation"], "conclusion": "completeness", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Real numbers are totally ordered: EU_u(p) ≥ EU_u(q) or EU_u(q) ≥ EU_u(p).\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/eu-implies-completeness.yaml", "files": {"md": "writeups/eu-implies-completeness.md", "handwritten": false, "html": "writeups/eu-implies-completeness.html"}}, {"id": "eu-implies-multi-utility", "premises": ["eu-representation"], "conclusion": "multi-utility", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Take U = {u}.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/eu-implies-multi-utility.yaml", "files": {"md": "writeups/eu-implies-multi-utility.md", "handwritten": false, "html": "writeups/eu-implies-multi-utility.html"}}, {"id": "independence-implies-betweenness", "premises": ["independence"], "conclusion": "betweenness", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Fix λ ∈ (0,1) and write m = λp + (1−λ)q. Independence with r = p and\nmixing weight 1−λ gives p ≽ q ⟺ (1−λ)p+λp ≽ (1−λ)q+λp, i.e. p ≽ q ⟺ p ≽ m,\nand likewise q ≽ p ⟺ m ≽ p. Hence p ≻ q ⟺ p ≻ m and p ~ q ⟺ p ~ m.\nIndependence with r = q and weight λ gives p ≽ q ⟺ m ≽ q and\nq ≽ p ⟺ q ≽ m, so p ≻ q ⟺ m ≻ q. Together: p ≻ q ⟹ p ≻ m ≻ q and\np ~ q ⟹ p ~ m.\n", "sources": [], "notes": "No ordering assumptions are needed because independence is taken in the biconditional form.\n", "file": "topics/decision-theory/results/independence-implies-betweenness.yaml", "files": {"md": "writeups/independence-implies-betweenness.md", "handwritten": false, "html": "writeups/independence-implies-betweenness.html"}}, {"id": "mixture-continuity-implies-closed-graph", "premises": ["transitivity", "independence", "continuity"], "conclusion": "closed-graph-continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let V = {x ∈ ℝ^X : Σx = 0} and D = Δ(X) − Δ(X) ⊆ V (compact, convex,\ncontains 0). Put K = {q − p : q ≽ p}.\n\n(i) Membership in K depends only on the difference: if q − p = q' − p'\nthen ½q + ½p' = ½q' + ½p, and by independence (λ = ½, mixing with p'\nresp. p) q ≽ p ⟺ ½q+½p' ≽ ½p+½p' and q' ≽ p' ⟺ ½q'+½p ≽ ½p'+½p; the two\nright-hand sides are the same pair. So \"x ∈ K\" is well defined for x ∈ D.\n\n(ii) K is a cone in D: if x ∈ K and tx ∈ D (t > 0) then tx ∈ K. For\nt < 1 use independence with r = p: q ≽ p ⟹ tq+(1−t)p ≽ p, whose\ndifference is t(q−p). For t > 1 apply the t < 1 case to tx.\n\n(iii) K is convex: with x = q−p, y = q'−p' in K, independence gives\n½q+½q' ≽ ½p+½q' and ½q'+½p ≽ ½p'+½p, and transitivity gives\n½q+½q' ≽ ½p+½p', whose difference is ½x+½y.\n\n(iv) K is closed along every line. Let [x₀, x₁] = ℓ ∩ D for a line ℓ and\nx(λ) = λx₁ + (1−λ)x₀. Pick ε > 0 and the uniform lottery c so that\nc + εx(λ) ∈ Δ(X) for all λ ∈ [0,1]. By (ii), x(λ) ∈ K ⟺ εx(λ) ∈ K ⟺\nc + εx(λ) ≽ c. Since c + εx(λ) = λ(c+εx₁) + (1−λ)(c+εx₀), the set\n{λ : x(λ) ∈ K} is a section of the form {λ : λa+(1−λ)b ≽ c}, closed by\nmixture continuity.\n\n(v) A convex subset of a finite-dimensional space that meets every line\nin a closed set is closed (if x ∈ cl K ∖ K and y is in the relative\ninterior of K then [y, x) ⊆ K by the accessibility lemma, so K ∩ line(y,x)\nis not closed). Hence K is closed, and if (pₙ, qₙ) → (p, q) with qₙ ≽ pₙ\nthen qₙ − pₙ ∈ K → q − p ∈ K, i.e. q ≽ p.\n", "sources": [], "notes": "This is the bridge between the mixture-continuity axiom used in the vNM literature and the closed-graph axiom used by Dubra–Maccheroni–Ok. It has not been checked by a human; if it fails, the map still reaches multi-utility from closed-graph continuity via dmo-theorem.\n", "file": "topics/decision-theory/results/mixture-continuity-implies-closed-graph.yaml", "files": {"md": "writeups/mixture-continuity-implies-closed-graph.md", "handwritten": true, "html": "writeups/mixture-continuity-implies-closed-graph.html"}}, {"id": "multi-utility-implies-closed-graph", "premises": ["multi-utility"], "conclusion": "closed-graph-continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "{(p,q) : p ≽ q} = ⋂_{u∈U} {(p,q) : EU_u(p) − EU_u(q) ≥ 0}, an intersection\nof preimages of [0,∞) under continuous (indeed linear) maps on Δ(X)×Δ(X).\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-closed-graph.yaml", "files": {"md": "writeups/multi-utility-implies-closed-graph.md", "handwritten": false, "html": "writeups/multi-utility-implies-closed-graph.html"}}, {"id": "multi-utility-implies-independence", "premises": ["multi-utility"], "conclusion": "independence", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "EU_u is affine in mixtures, so for λ ∈ (0,1]:\nEU_u(λp+(1−λ)r) − EU_u(λq+(1−λ)r) = λ(EU_u(p) − EU_u(q)),\nwhich is ≥ 0 iff EU_u(p) ≥ EU_u(q). Quantify over u ∈ U.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-independence.yaml", "files": {"md": "writeups/multi-utility-implies-independence.md", "handwritten": false, "html": "writeups/multi-utility-implies-independence.html"}}, {"id": "multi-utility-implies-transitivity", "premises": ["multi-utility"], "conclusion": "transitivity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "If EU_u(p) ≥ EU_u(q) and EU_u(q) ≥ EU_u(r) for every u ∈ U then\nEU_u(p) ≥ EU_u(r) for every u ∈ U.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-transitivity.yaml", "files": {"md": "writeups/multi-utility-implies-transitivity.md", "handwritten": false, "html": "writeups/multi-utility-implies-transitivity.html"}}, {"id": "quasi-transitivity-implies-acyclicity", "premises": ["quasi-transitivity"], "conclusion": "acyclicity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "If p₁ ≻ p₂ ≻ … ≻ pₙ ≻ p₁ then by induction on n, transitivity of ≻ gives\np₁ ≻ pₙ, and with pₙ ≻ p₁ this contradicts asymmetry of ≻.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/quasi-transitivity-implies-acyclicity.yaml", "files": {"md": "writeups/quasi-transitivity-implies-acyclicity.md", "handwritten": false, "html": "writeups/quasi-transitivity-implies-acyclicity.html"}}, {"id": "transitivity-implies-quasi-transitivity", "premises": ["transitivity"], "conclusion": "quasi-transitivity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let p ≻ q ≻ r. Then p ≽ q ≽ r, so p ≽ r. If also r ≽ p then r ≽ p ≽ q\ngives r ≽ q, contradicting q ≻ r. So p ≻ r.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/transitivity-implies-quasi-transitivity.yaml", "files": {"md": "writeups/transitivity-implies-quasi-transitivity.md", "handwritten": false, "html": "writeups/transitivity-implies-quasi-transitivity.html"}}, {"id": "vnm-theorem", "premises": ["completeness", "transitivity", "independence", "continuity"], "conclusion": "eu-representation", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "proof": "The von Neumann–Morgenstern theorem in the Herstein–Milnor mixture-set form.\nContinuity plus weak order give, for any p ≽ q ≽ r with p ≻ r, a unique\nλ with q ~ λp + (1−λ)r (connectedness of [0,1] and closedness of both\nsections). Fix a best and a worst lottery (exist since X is finite and ≽\nis a weak order respecting mixtures), define U(q) as that λ, and use\nindependence to show U is affine in mixtures; then u(x) = U(δ_x)\nrepresents ≽ by expected utility.\n", "sources": ["von Neumann & Morgenstern (1944), Theory of Games and Economic Behavior, appendix", "Herstein & Milnor (1953), An axiomatic approach to measurable utility, Econometrica 21, Theorem 8", "Kreps (1988), Notes on the Theory of Choice, Theorem 5.15"], "notes": "", "file": "topics/decision-theory/results/vnm-theorem.yaml", "files": {"md": "writeups/vnm-theorem.md", "handwritten": false, "html": "writeups/vnm-theorem.html"}}, {"id": "weak-order-def-completeness", "premises": ["weak-order"], "conclusion": "completeness", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-completeness.yaml", "files": {"md": "writeups/weak-order-def-completeness.md", "handwritten": false, "html": "writeups/weak-order-def-completeness.html"}}, {"id": "weak-order-def-forward", "premises": ["completeness", "transitivity"], "conclusion": "weak-order", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-forward.yaml", "files": {"md": "writeups/weak-order-def-forward.md", "handwritten": false, "html": "writeups/weak-order-def-forward.html"}}, {"id": "weak-order-def-transitivity", "premises": ["weak-order"], "conclusion": "transitivity", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-transitivity.yaml", "files": {"md": "writeups/weak-order-def-transitivity.md", "handwritten": false, "html": "writeups/weak-order-def-transitivity.html"}}], "models": [{"id": "band-relation", "name": "Band relation", "description": "Fix u : X → ℝ non-constant and ε > 0. Define an asymmetric relation P by\np P q iff EU_u(p) − EU_u(q) ∈ (ε, 2ε], and let p ≽ q iff not q P p. Then\n≽ is complete (P is asymmetric) and ≻ = P. P is acyclic because EU_u\nstrictly increases along any P-chain. But P is not transitive: with\nEU_u(p), EU_u(q), EU_u(r) = 3ε, 1.5ε, 0 we have p P q and q P r while\nEU_u(p) − EU_u(r) = 3ε ∉ (ε, 2ε].\n", "satisfies": ["completeness", "acyclicity"], "violates": ["quasi-transitivity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Sanity-checked numerically in checks/countermodels.py. Not yet checked by a human.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/band-relation.yaml", "files": {"md": "writeups/band-relation.md", "handwritten": false, "html": "writeups/band-relation.html"}}, {"id": "incomplete-continuous-non-archimedean", "name": "Incomplete, continuous, non-Archimedean", "description": "", "satisfies": ["transitivity", "continuity"], "violates": ["archimedean"], "status": "conjectured", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Completeness is used essentially in continuity-completeness-imply-archimedean; no countermodel yet.", "file": "topics/decision-theory/models/incomplete-continuous-non-archimedean.yaml", "files": {"md": "writeups/incomplete-continuous-non-archimedean.md", "handwritten": false, "html": "writeups/incomplete-continuous-non-archimedean.html"}}, {"id": "lexicographic-eu", "name": "Lexicographic EU", "description": "Lexicographic expected utility. With X = {a, b, c} let p ≽ q iff\np(a) > q(a), or p(a) = q(a) and p(b) ≥ q(b). This is complete and\ntransitive (a lexicographic order on ℝ²), and satisfies independence\nbecause mixing with r multiplies the vector of differences by λ, which\npreserves lexicographic sign. But {λ : λδ_a + (1−λ)δ_c ≽ δ_b} = (0, 1],\nwhich is not closed.\n\nThe same lexicographic order (p ≽ q iff p(a) > q(a), or p(a) = q(a) and\np(b) ≥ q(b)). Here δ_a ≻ δ_b ≻ δ_c, but every mixture βδ_a + (1−β)δ_c\nwith β > 0 puts positive weight on a and so is strictly preferred to\nδ_b; no β with δ_b ≻ βδ_a + (1−β)δ_c exists.\n", "satisfies": ["completeness", "transitivity", "independence"], "violates": ["continuity", "archimedean"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Hausner (1954), Multidimensional utilities, in Decision Processes (Thrall, Coombs & Davis eds.)", "Fishburn (1971), A study of lexicographic expected utility, Management Science 17", "Hausner (1954), Multidimensional utilities", "Fishburn (1971), A study of lexicographic expected utility, Management Science 17"], "notes": "Derivable from lexicographic-not-archimedean together with continuity-completeness-imply-archimedean (the validator reports it as redundant); kept because it is the form the literature states.", "file": "topics/decision-theory/models/lexicographic-eu.yaml", "files": {"md": "writeups/lexicographic-eu.md", "handwritten": false, "html": "writeups/lexicographic-eu.html"}}, {"id": "non-convex-cone", "name": "Non-convex cone", "description": "Let X = {a, b, c} and identify a difference q − p of lotteries with the\npoint (q(a) − p(a), q(b) − p(b)) ∈ ℝ². Let C ⊆ ℝ² be the closed upper\nhalf-plane together with the closed sector of directions [225°, 270°],\nand define q ≽ p iff q − p ∈ C.\n\nCompleteness: C ∪ (−C) = ℝ² since −C contains the closed lower\nhalf-plane. Independence: mixing both sides with r multiplies the\ndifference by λ > 0, and C is a cone. Closed graph: (p, q) ↦ q − p is\ncontinuous and C is closed. Reflexivity: 0 ∈ C.\n\nTransitivity fails: take x at direction 240° and y at direction 170°,\nboth in C and small enough that p, q = p + x… are lotteries; x + y has\ndirection ≈ 205°, which is not in C. So with q − p = x and r − q = y we\nhave q ≽ p and r ≽ q but not r ≽ p.\n", "satisfies": ["completeness", "independence", "closed-graph-continuity"], "violates": ["transitivity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Sanity-checked numerically in checks/countermodels.py (completeness and independence hold, transitivity fails on random samples). Not yet checked by a human. Any non-convex closed cone C with C ∪ −C = ℝ² works.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/non-convex-cone.yaml", "files": {"md": "writeups/non-convex-cone.md", "handwritten": false, "html": "writeups/non-convex-cone.html"}}, {"id": "rational-levels", "name": "Rational levels", "description": "Let X = {a, b, c} and define a three-valued function V on Δ(X):\nV(p) = 2 if p(a) ∈ ℚ; V(p) = 1 if p(a) ∉ ℚ and p(b) ∈ ℚ; V(p) = 0\notherwise. Let p ≽ q iff V(p) ≥ V(q). This is a weak order.\n\nMixture continuity fails: along the line from δ_a to δ_b the mixture\nλδ_a + (1−λ)δ_b has V = 2 exactly when λ ∈ ℚ, so\n{λ : λδ_a + (1−λ)δ_b ≽ δ_c} = ℚ ∩ [0,1] is not closed.\n\nArchimedean holds: a chain p ≻ q ≻ r forces V(p) = 2, V(q) = 1, V(r) = 0,\nso p(a) ∈ ℚ and r(a) ∉ ℚ, in particular p(a) ≠ r(a). Along\nm(α) = αp + (1−α)r the coordinate m(α)(a) = r(a) + α(p(a) − r(a)) is\nrational for a dense set of α, so some α ∈ (0,1) close to 1 has\nV(m(α)) = 2 > V(q). For the other half, m(β)(a) is irrational for all but\ncountably many β; and m(β)(b) = r(b) + β(p(b) − r(b)) is irrational for\nall but countably many β when p(b) ≠ r(b), and equals r(b) ∉ ℚ when\np(b) = r(b) (because V(r) = 0). So some β ∈ (0,1) close to 0 has\nV(m(β)) = 0 < V(q).\n", "satisfies": ["completeness", "transitivity", "archimedean"], "violates": ["continuity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "The construction is deliberately artificial: it shows that the Archimedean axiom cannot replace mixture continuity even for weak orders, unless something like independence is added. Not yet checked by a human.", "file": "topics/decision-theory/models/rational-levels.yaml", "files": {"md": "writeups/rational-levels.md", "handwritten": false, "html": "writeups/rational-levels.html"}}, {"id": "semiorder", "name": "Semiorder", "description": "A semiorder with a just-noticeable difference. Fix u : X → ℝ non-constant\nand ε > 0, and let p ≽ q iff EU_u(p) ≥ EU_u(q) − ε. Completeness: one of\nthe two differences is ≥ 0 > −ε. Quasi-transitivity: p ≻ q iff\nEU_u(p) > EU_u(q) + ε, and this is transitive. Closed graph: the graph is\nthe preimage of [−ε, ∞) under a continuous map. Transitivity fails: pick\np, q, r with EU_u equal to 0, −0.8ε, −1.6ε; then p ≽ q ≽ r but not p ≽ r.\n", "satisfies": ["completeness", "quasi-transitivity", "closed-graph-continuity"], "violates": ["transitivity", "independence"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": ["Luce (1956), Semiorders and a theory of utility discrimination, Econometrica 24"], "notes": "Sanity-checked numerically in checks/countermodels.py. The relation is Luce's semiorder; the verification that it fits this framework is AI-produced and unchecked.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/semiorder.yaml", "files": {"md": "writeups/semiorder.md", "handwritten": false, "html": "writeups/semiorder.html"}}, {"id": "ssb", "name": "SSB utility", "description": "", "satisfies": ["completeness", "closed-graph-continuity", "archimedean"], "violates": ["transitivity", "independence"], "status": "conjectured", "certificate": {"provenance": "human", "lean": "none", "produced_by": "ZG", "checked_by": [], "date": "2026-09-08"}, "sources": ["Fishburn (1982), Nontransitive measurable utility, Journal of Mathematical Psychology 26"], "notes": "Sample conjecture; which of betweenness and quasi-transitivity hold is to be checked.", "file": "topics/decision-theory/models/ssb.yaml", "files": {"md": "writeups/ssb.md", "handwritten": false, "html": "writeups/ssb.html"}}, {"id": "unanimity-two-utilities", "name": "Unanimity over two utilities", "description": "Unanimity over two utilities. With X = {a, b, c} let p ≽ q iff\np(a) ≥ q(a) and p(b) ≥ q(b) (U = {u₁, u₂} with u₁ = 1_a, u₂ = 1_b).\nThis is an expected multi-utility representation, hence transitive,\nindependent and closed-graph continuous; but δ_a and δ_b are\nincomparable.\n", "satisfies": ["transitivity", "independence", "closed-graph-continuity", "multi-utility"], "violates": ["completeness"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Aumann (1962), Utility theory without the completeness axiom, Econometrica 30", "Dubra, Maccheroni & Ok (2004), JET 115"], "notes": "", "file": "topics/decision-theory/models/unanimity-two-utilities.yaml", "files": {"md": "writeups/unanimity-two-utilities.md", "handwritten": false, "html": "writeups/unanimity-two-utilities.html"}}, {"id": "weighted-utility", "name": "Weighted utility", "description": "Weighted utility. Fix u : X → ℝ and a weight w : X → (0,∞) that is not\nconstant, and let V(p) = Σ p(x)w(x)u(x) / Σ p(x)w(x); put p ≽ q iff\nV(p) ≥ V(q). V is continuous on Δ(X), so ≽ is a weak order with closed\ngraph. Its indifference sets are the intersections of Δ(X) with\nhyperplanes {p : Σ p(x)w(x)(u(x) − v) = 0}, which are straight, so\nbetweenness holds. Since w is not constant these hyperplanes are not\nparallel, so ≽ is not an expected-utility order and (being a continuous\nweak order) must violate independence.\n", "satisfies": ["completeness", "transitivity", "closed-graph-continuity", "betweenness"], "violates": ["independence"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Chew (1983), A generalization of the quasilinear mean with applications to the measurement of income inequality and decision theory resolving the Allais paradox, Econometrica 51", "Dekel (1986), An axiomatic characterization of preferences under uncertainty: weakening the independence axiom, JET 40"], "notes": "", "file": "topics/decision-theory/models/weighted-utility.yaml", "files": {"md": "writeups/weighted-utility.md", "handwritten": false, "html": "writeups/weighted-utility.html"}}], "generated": "2026-09-08T15:53:16+00:00", "server_analysis": {"classes": [["acyclicity"], ["archimedean"], ["betweenness"], ["closed-graph-continuity"], ["completeness"], ["continuity"], ["eu-representation"], ["independence"], ["multi-utility"], ["quasi-transitivity"], ["transitivity"], ["weak-order"]], "open_pairs": [["acyclicity", "betweenness"], ["archimedean", "acyclicity"], ["archimedean", "betweenness"], ["archimedean", "completeness"], ["archimedean", "quasi-transitivity"], ["betweenness", "acyclicity"], ["betweenness", "quasi-transitivity"], ["closed-graph-continuity", "acyclicity"], ["closed-graph-continuity", "archimedean"], ["closed-graph-continuity", "betweenness"], ["closed-graph-continuity", "quasi-transitivity"], ["completeness", "acyclicity"], ["completeness", "betweenness"], ["continuity", "acyclicity"], ["continuity", "archimedean"], ["continuity", "betweenness"], ["continuity", "closed-graph-continuity"], ["continuity", "quasi-transitivity"], ["independence", "acyclicity"], ["independence", "quasi-transitivity"], ["multi-utility", "archimedean"], ["quasi-transitivity", "betweenness"], ["transitivity", "betweenness"], ["weak-order", "betweenness"]], "unknown": {"band-relation": ["archimedean", "betweenness", "closed-graph-continuity", "continuity", "independence"], "lexicographic-eu": [], "non-convex-cone": ["acyclicity", "quasi-transitivity"], "rational-levels": ["betweenness", "independence"], "semiorder": ["betweenness"], "unanimity-two-utilities": ["archimedean"], "weighted-utility": []}, "problems": [], "infos": []}, "downloads": {"bundle": "decision-theory-map.zip", "json": "data.json", "zip": "source.zip"}, "background_md": "## Framework\n\n≽ a reflexive binary relation on Δ(X), X finite with |X| ≥ 3; ≻, ~ its asymmetric and symmetric parts. *(placeholder)*\n\n## Notation\n\n*(placeholder)*\n\n## Conventions\n\n*(placeholder — e.g. which form of independence is meant, what \"continuity\" means by default)*\n\n## Certificates\n\n*(placeholder — what human / human-assisted / AI / Lean mean here)*\n\n## Literature\n\n*(placeholder)*\n", "background_html": "<h2 id=\"framework\">Framework<\/h2>\n<p>≽ a reflexive binary relation on Δ(X), X finite with |X| ≥ 3; ≻, ~ its asymmetric and symmetric parts. <em>(placeholder)<\/em><\/p>\n<h2 id=\"notation\">Notation<\/h2>\n<p><em>(placeholder)<\/em><\/p>\n<h2 id=\"conventions\">Conventions<\/h2>\n<p><em>(placeholder — e.g. which form of independence is meant, what “continuity” means by default)<\/em><\/p>\n<h2 id=\"certificates\">Certificates<\/h2>\n<p><em>(placeholder — what human / human-assisted / AI / Lean mean here)<\/em><\/p>\n<h2 id=\"literature\">Literature<\/h2>\n<p><em>(placeholder)<\/em><\/p>\n"};
+
+// ---------------------------------------------------------------- engine (mirrors scripts/pmap.py)
+function closure(seed, rules, background) {
+  const facts = new Set([...background, ...seed]);
+  const why = new Map(); for (const f of facts) why.set(f, null);
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const r of rules) if (!facts.has(r.conclusion) && r.premises.every(p => facts.has(p))) { facts.add(r.conclusion); why.set(r.conclusion, r.id); changed = true; }
+  }
+  return { facts, why };
+}
+function chain(target, why, byId) {
+  const out = [], seen = new Set();
+  (function visit(f) { const rid = why.get(f); if (rid == null || seen.has(rid)) return; seen.add(rid); for (const p of byId.get(rid).premises) visit(p); out.push(rid); })(target);
+  return out;
+}
+class Engine {
+  constructor(ids, results, models, background) {
+    this.ids = ids; this.background = background; this.rules = results; this.byId = new Map(results.map(r => [r.id, r])); this.models = models;
+    this.holds = new Map(); this.fails = new Map(); this.failWhy = new Map();
+    for (const m of models) {
+      this.holds.set(m.id, closure(m.satisfies, results, background).facts);
+      const f = new Set(), fw = new Map();
+      for (const c of ids) {
+        const { facts, why } = closure([...m.satisfies, c], results, background);
+        const hit = m.violates.find(v => facts.has(v));
+        if (hit !== undefined) { f.add(c); fw.set(c, [m.id, ...chain(hit, why, this.byId)]); }
+      }
+      this.fails.set(m.id, f); this.failWhy.set(m.id, fw);
+    }
+  }
+  cl(P) { return closure(P, this.rules, this.background); }
+  entails(P, c) { const { facts, why } = this.cl(P); return facts.has(c) ? chain(c, why, this.byId) : null; }
+  separates(P, c) { return this.models.filter(m => P.every(p => this.holds.get(m.id).has(p)) && this.fails.get(m.id).has(c)); }
+  pair(a, b) {
+    const via = this.entails([a], b); if (via) return { status: 'implies', via };
+    const ms = this.separates([a], b); if (ms.length) return { status: 'independent', via: this.failWhy.get(ms[0].id).get(b), models: ms.map(m => m.id) };
+    return { status: 'open', via: [] };
+  }
+  package(P) {
+    const { facts, why } = this.cl(P); const out = { entails: [], separated: [], open: [] };
+    for (const c of this.ids) {
+      if (P.includes(c)) continue;
+      if (facts.has(c)) out.entails.push([c, chain(c, why, this.byId)]);
+      else { const ms = this.separates(P, c); if (ms.length) out.separated.push([c, ms.map(m => m.id)]); else out.open.push([c, []]); }
+    }
+    return out;
+  }
+}
+
+// ---------------------------------------------------------------- state
+const P = DATA.principles, R = DATA.results, MODELS = DATA.models, T = DATA.topic;
+const byPid = new Map(P.map(p => [p.id, p])), byRid = new Map(R.map(r => [r.id, r])), byMid = new Map(MODELS.map(m => [m.id, m]));
+const ids = P.map(p => p.id);
+const topicBackground = T.background || [];
+const backgroundPresets = T.background_presets || [];
+const backgroundParams = new URLSearchParams(window.location.search);
+const initialBackground = backgroundParams.has('assume') ? (backgroundParams.get('assume') || '').split(',') : backgroundPresets.filter(p => p.default).flatMap(p => p.principles);
+const background = new Set([...topicBackground, ...initialBackground.filter(id => byPid.has(id))]);
+const sourceCatalog = [...(T.source_catalog || [])];
+if (!sourceCatalog.some(s => s.id === 'misc')) sourceCatalog.push({ id: 'misc', name: 'Misc.', kind: 'misc' });
+const sourceOf = x => sourceCatalog.find(s => s.id === x.certificate?.source_id) || sourceCatalog.find(s => s.id === 'misc');
+const sourceColor = s => `hsl(${(sourceCatalog.indexOf(s) * 137 + 205) % 360} 45% 45%)`;
+const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showDerived: false, showConj: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', pkg: new Set(), out: new Set(), excluded: new Set() };
+let E = null, EC = null, baseE = null, baseEC = null, A = null, layout = null, backgroundConflicts = [];
+function conflictingPairs(facts, principles) {
+  const pairs = new Map();
+  for (const p of principles) if (facts.has(p.id) && facts.has(p.negates)) {
+    const pair = [p.id, p.negates].sort(); pairs.set(pair.join('|'), pair);
+  }
+  return [...pairs.values()].sort((a, b) => a.join('|').localeCompare(b.join('|')));
+}
+function passes(x) { return state.allowed.has(sourceOf(x).id) && (!state.leanOnly || x.certificate.lean === 'verified'); }
+function recompute() {
+  const rules = R.filter(r => r.status === 'proved' && passes(r));
+  const models = MODELS.filter(m => m.status === 'proved' && passes(m));
+  baseE = new Engine(ids, rules, models, topicBackground);
+  baseEC = new Engine(ids, R.filter(passes), MODELS.filter(passes), topicBackground);
+  // A model with unknown or false background assumptions is not a witness
+  // for the restricted theory. Never manufacture its missing assumptions.
+  const fits = engine => engine.models.filter(m => [...background].every(p => engine.holds.get(m.id).has(p)));
+  E = new Engine(ids, rules, fits(baseE), [...background]);
+  backgroundConflicts = conflictingPairs(E.cl([]).facts, P);
+  EC = new Engine(ids, R.filter(passes), fits(baseEC), [...background]);
+  const pair = new Map(); for (const a of ids) for (const b of ids) if (a !== b) pair.set(a + '|' + b, E.pair(a, b));
+  const classes = [], seen = new Set();
+  for (const a of ids) { if (seen.has(a)) continue; const cls = [a, ...ids.filter(b => b !== a && pair.get(a + '|' + b).status === 'implies' && pair.get(b + '|' + a).status === 'implies')]; cls.forEach(x => seen.add(x)); classes.push(cls); }
+  A = { pair, classes };
+}
+function pairStatus(a, b) {
+  const base = A.pair.get(a + '|' + b);
+  if (base.status !== 'open' || !state.showConj) return base;
+  const c = EC.pair(a, b); return c.status !== 'open' ? { ...c, status: c.status + '?' } : base;
+}
+function name(id) { return byPid.get(id)?.name || id; }
+function esc(s) { return String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function fmt(s) { return esc(s.trim()).split(/\n\s*\n/).map(x => x.replace(/\s*\n\s*/g, ' ')).join('<br><br>'); }
+
+// ---------------------------------------------------------------- layout
+function buildGraph() {
+  const cls = A.classes;
+  const assumedFacts = E.cl([]).facts;
+  const hidden = id => state.excluded.has(id) || background.has(id);
+  const classOf = new Map(); cls.forEach((c, i) => c.forEach(x => classOf.set(x, i)));
+  const hiddenClass = new Set(cls.map((c, i) => i).filter(i => cls[i].every(hidden)));
+  const nodes = cls.map((c, i) => ({ id: 'c' + i, kind: 'class', members: c.filter(x => !hidden(x)) })).filter((n, i) => !hiddenClass.has(i));
+  const edges = [];
+  const remainingPremises = r => r.premises.filter(p => !assumedFacts.has(p));
+  const shown = R.filter(r => passes(r) && (r.status === 'proved' || state.showConj) && !assumedFacts.has(r.conclusion) && ![...remainingPremises(r), r.conclusion].some(x => hiddenClass.has(classOf.get(x))));
+  for (const r of shown) {
+    const to = 'c' + classOf.get(r.conclusion);
+    const prem = [...new Set(remainingPremises(r).map(p => 'c' + classOf.get(p)))].filter(x => x !== to);
+    if (prem.length === 0) continue;               // within-class definitional edge: shown in panel only
+    if (prem.length === 1) edges.push({ id: r.id, from: prem[0], to, r, type: 'direct' });
+    else {
+      const j = { id: 'j:' + r.id, kind: 'junction', r };
+      nodes.push(j);
+      prem.forEach(p => edges.push({ id: r.id + '←' + p, from: p, to: j.id, r, type: 'direct', toJunction: true }));
+      edges.push({ id: r.id + '→', from: j.id, to, r, type: 'direct', fromJunction: true });
+    }
+  }
+  if (state.showDerived) {
+    const have = new Set(edges.filter(e => !e.toJunction && !e.fromJunction).map(e => e.from + '>' + e.to));
+    for (let i = 0; i < cls.length; i++) for (let j = 0; j < cls.length; j++) {
+      if (i === j || hiddenClass.has(i) || hiddenClass.has(j)) continue;
+      if (cls[j].every(p => assumedFacts.has(p))) continue;
+      const st = A.pair.get(cls[i][0] + '|' + cls[j][0]);
+      if (st.status !== 'implies' || have.has('c' + i + '>c' + j)) continue;
+      // transitive reduction over visible classes: skip if some visible k with i⇒k⇒j
+      let reducible = false;
+      for (let k = 0; k < cls.length && !reducible; k++) {
+        if (k === i || k === j || hiddenClass.has(k)) continue;
+        if (A.pair.get(cls[i][0] + '|' + cls[k][0]).status === 'implies' && A.pair.get(cls[k][0] + '|' + cls[j][0]).status === 'implies') reducible = true;
+      }
+      if (!reducible) edges.push({ id: 'd:' + i + '>' + j, from: 'c' + i, to: 'c' + j, type: 'derived', via: st.via });
+    }
+  }
+  return { nodes, edges, classOf };
+}
+
+function computeLayout(g) {
+  const nodes = g.nodes, edges = g.edges;
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const out = new Map(nodes.map(n => [n.id, []])), inn = new Map(nodes.map(n => [n.id, []]));
+  for (const e of edges) { out.get(e.from).push(e); inn.get(e.to).push(e); }
+  const degree = n => out.get(n.id).length + inn.get(n.id).length;
+  const visible = nodes.filter(n => n.kind === 'junction' || degree(n) > 0 || state.showIso);
+  const vis = new Set(visible.map(n => n.id));
+  const classes = visible.filter(n => n.kind === 'class');
+  const rep = n => n.members[0];
+  const implies = (a, b) => A.pair.get(rep(a) + '|' + rep(b)).status === 'implies';
+  // Layering follows logical strength: the derived implication order on classes
+  // (a DAG, since classes are its strongly connected components), plus junction
+  // constraints for results whose conclusion is not stronger than every premise.
+  const rankEdges = [];  // [fromId, toId, priority]
+  for (const a of classes) for (const b of classes) if (a !== b && implies(a, b)) {
+    const reducible = classes.some(k => k !== a && k !== b && implies(a, k) && implies(k, b));
+    if (!reducible) rankEdges.push([a.id, b.id, 0]);
+  }
+  const upward = new Set();
+  for (const j of visible.filter(n => n.kind === 'junction')) {
+    const prem = edges.filter(e => e.to === j.id).map(e => byId.get(e.from));
+    const concl = byId.get(edges.find(e => e.from === j.id).to);
+    if (prem.every(p => implies(concl, p))) { upward.add(j.id); continue; }
+    if (j.r.status === 'conjectured') continue;   // conjectures do not shape the layering
+    prem.forEach(p => rankEdges.push([p.id, j.id, 1]));
+    rankEdges.push([j.id, concl.id, 1]);
+  }
+  // break any remaining cycles (mixed junctions) by DFS, preferring to keep strength edges
+  const rOut = new Map(visible.map(n => [n.id, []]));
+  rankEdges.sort((p, q) => p[2] - q[2]).forEach(e => rOut.get(e[0]).push(e));
+  const color = new Map(); const dropped = new Set();
+  const dfs = u => { color.set(u, 1); for (const e of rOut.get(u)) { const c = color.get(e[1]) || 0; if (c === 1) dropped.add(e); else if (c === 0) dfs(e[1]); } color.set(u, 2); };
+  for (const n of visible) if (!color.get(n.id)) dfs(n.id);
+  const fwd = rankEdges.filter(e => !dropped.has(e));
+  const rank = new Map(visible.map(n => [n.id, 0]));
+  let changed = true, guard = 0;
+  while (changed && guard++ < 1000) { changed = false; for (const [f, t] of fwd) { const r = rank.get(f) + 1; if (r > rank.get(t)) { rank.set(t, r); changed = true; } } }
+  // classes on even layers; junctions just above (or, for upward results, just below) their conclusion
+  const layerOf = new Map();
+  for (const n of classes) layerOf.set(n.id, 2 * rank.get(n.id));
+  for (const j of visible.filter(n => n.kind === 'junction')) {
+    const concl = edges.find(e => e.from === j.id).to;
+    layerOf.set(j.id, layerOf.get(concl) + (upward.has(j.id) ? 1 : -1));
+  }
+  // compress empty layers
+  const used = [...new Set(layerOf.values())].sort((a, b) => a - b);
+  const compact = new Map(used.map((l, i) => [l, i]));
+  const layers = used.map(() => []);
+  for (const n of visible) layers[compact.get(layerOf.get(n.id))].push(n);
+  const back = new Set(edges.filter(e => vis.has(e.from) && vis.has(e.to) && layerOf.get(e.from) >= layerOf.get(e.to)).map(e => e.id));
+  // node sizes
+  const measure = n => {
+    if (n.kind === 'junction') return { w: 22, h: 22 };
+    const longest = Math.max(...n.members.map(m => name(m).length));
+    return { w: Math.max(80, longest * 7.2 + 26), h: 16 + 17 * n.members.length + (n.members.length > 1 ? 12 : 0) };
+  };
+  const size = new Map(visible.map(n => [n.id, measure(n)]));
+  // ordering by barycenter sweeps
+  const pos = new Map(); layers.forEach(L => L.forEach((n, i) => pos.set(n.id, i)));
+  const neighbors = (n, dir) => (dir > 0 ? inn : out).get(n.id).filter(e => vis.has(e.from) && vis.has(e.to)).map(e => dir > 0 ? e.from : e.to);
+  for (let it = 0; it < 12; it++) {
+    const down = it % 2 === 0;
+    const order = down ? layers.keys() : [...layers.keys()].reverse();
+    for (const li of order) {
+      const L = layers[li];
+      const bc = new Map(L.map(n => { const nb = neighbors(n, down ? 1 : -1); return [n.id, nb.length ? nb.reduce((s, x) => s + pos.get(x), 0) / nb.length : pos.get(n.id)]; }));
+      L.sort((a, b) => bc.get(a.id) - bc.get(b.id) || pos.get(a.id) - pos.get(b.id));
+      L.forEach((n, i) => pos.set(n.id, i));
+    }
+  }
+  // initial x by cumulative widths, centred
+  const GAP = 28, ROW = 96;
+  const x = new Map(), y = new Map();
+  layers.forEach((L, li) => {
+    let cx = 0; const widths = L.map(n => size.get(n.id).w); const total = widths.reduce((s, w) => s + w, 0) + GAP * (L.length - 1);
+    cx = -total / 2;
+    L.forEach((n, i) => { x.set(n.id, cx + widths[i] / 2); cx += widths[i] + GAP; y.set(n.id, li * ROW); });
+  });
+  // straightening: move toward neighbour mean, then resolve overlaps in-layer keeping order
+  for (let it = 0; it < 40; it++) {
+    for (const L of layers) {
+      for (const n of L) {
+        const nb = [...neighbors(n, 1), ...neighbors(n, -1)];
+        if (!nb.length) continue;
+        const target = nb.reduce((s, m) => s + x.get(m), 0) / nb.length;
+        x.set(n.id, x.get(n.id) + (target - x.get(n.id)) * 0.5);
+      }
+      // resolve overlaps
+      for (let i = 1; i < L.length; i++) {
+        const a = L[i - 1], b = L[i];
+        const minX = x.get(a.id) + size.get(a.id).w / 2 + GAP + size.get(b.id).w / 2;
+        if (x.get(b.id) < minX) { const shift = (minX - x.get(b.id)) / 2; x.set(b.id, x.get(b.id) + shift); x.set(a.id, x.get(a.id) - shift); }
+      }
+      for (let i = 1; i < L.length; i++) {
+        const a = L[i - 1], b = L[i];
+        const minX = x.get(a.id) + size.get(a.id).w / 2 + GAP + size.get(b.id).w / 2;
+        if (x.get(b.id) < minX) x.set(b.id, minX);
+      }
+    }
+  }
+  return { visible, vis, edges: edges.filter(e => vis.has(e.from) && vis.has(e.to)), back, size, x, y, layers, byId };
+}
+
+// ---------------------------------------------------------------- render graph
+const svg = document.getElementById('graph');
+const view = { k: 1, tx: 0, ty: 0 };
+function edgePath(e, L) {
+  const s = L.size.get(e.from), t = L.size.get(e.to);
+  let x1 = L.x.get(e.from), y1 = L.y.get(e.from) + s.h / 2, x2 = L.x.get(e.to), y2 = L.y.get(e.to) - t.h / 2;
+  if (L.back.has(e.id) || y2 < y1) {              // upward edge (premise weaker than conclusion)
+    y1 = L.y.get(e.from) - s.h / 2; y2 = L.y.get(e.to) + t.h / 2;
+    const dy = Math.max(30, (y1 - y2) / 2);
+    return `M${x1},${y1} C${x1},${y1 - dy} ${x2},${y2 + dy} ${x2},${y2}`;
+  }
+  const dy = Math.max(30, (y2 - y1) / 2);
+  return `M${x1},${y1} C${x1},${y1 + dy} ${x2},${y2 - dy} ${x2},${y2}`;
+}
+function renderGraph() {
+  const warning = document.getElementById('graph-warning');
+  warning.hidden = !backgroundConflicts.length;
+  document.getElementById('fit').disabled = !!backgroundConflicts.length;
+  if (backgroundConflicts.length) {
+    const { why } = E.cl([]);
+    warning.innerHTML = `<h2>Background is inconsistent</h2><p>The background assumptions imply both a principle and its negation. All graph arrows are hidden.</p><ul>${backgroundConflicts.map(pair => {
+      const rules = [...new Set(pair.flatMap(id => chain(id, why, E.byId)))];
+      return `<li>${pair.map(id => `<button class="lnk" data-principle="${id}">${esc(name(id))}</button>`).join(' conflicts with ')}${rules.length ? `<details><summary>Supporting results</summary><ul>${rules.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul></details>` : '<div>Both are assumed in the background.</div>'}</li>`;
+    }).join('')}</ul><p>Return a conflicting assumption to the principles list, or reset the added background assumptions. This check uses proved results under the current source filters.</p>`;
+    wire(warning);
+    svg.innerHTML = ''; layout = null;
+    return;
+  }
+  warning.innerHTML = '';
+  const backgroundFacts = E.cl([]).facts;
+  const g = buildGraph(); layout = computeLayout(g);
+  const L = layout;
+  const defs = `<defs>${[...sourceCatalog.map(s => [sourceMarker(s), sourceColor(s)]), ['derived', 'var(--derived)']].map(([id, color]) => `<marker id="arr-${id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${color}"/></marker>`).join('')}</defs>`;
+  let edgesHtml = '';
+  for (const e of L.edges) {
+    const source = e.type === 'derived' ? null : sourceOf(e.r);
+    const cls = source ? 'source' : 'derived';
+    const conj = e.type !== 'derived' && e.r.status === 'conjectured';
+    const lean = e.type !== 'derived' && e.r.certificate.lean === 'verified';
+    const marker = e.toJunction ? '' : `marker-end="url(#arr-${source ? sourceMarker(source) : 'derived'})"`;
+    const key = e.type === 'derived' ? e.id : e.r.id;
+    edgesHtml += `<g class="edge-g" data-edge="${esc(key)}" data-from="${e.from}" data-to="${e.to}"${source ? ` data-source="${esc(source.id)}" style="--source-color:${sourceColor(source)}"` : ''}><path class="edge-hit" d="${edgePath(e, L)}"/><path class="edge ${cls}${conj ? ' conjectured' : ''}${lean ? ' lean' : ''}" d="${edgePath(e, L)}" ${marker}/></g>`;
+  }
+  let nodesHtml = '';
+  for (const n of L.visible) {
+    const s = L.size.get(n.id), x = L.x.get(n.id), y = L.y.get(n.id);
+    if (n.kind === 'junction') {
+      nodesHtml += `<g class="junction source" style="--source-color:${sourceColor(sourceOf(n.r))}" data-source="${sourceOf(n.r).id}" data-result="${esc(n.r.id)}" transform="translate(${x},${y})"><circle r="11"/><text>∧</text></g>`;
+    } else {
+      const iso = layout.edges.every(e => e.from !== n.id && e.to !== n.id);
+      const lines = n.members.map((m, i) => `<text data-principle="${esc(m)}" x="0" y="${-s.h / 2 + 8 + 17 * (i + 1) - 4 + (n.members.length > 1 ? 10 : 0)}" text-anchor="middle">${esc(name(m))}</text>`).join('');
+      const eq = n.members.length > 1 ? `<text class="equiv" x="0" y="${-s.h / 2 + 12}" text-anchor="middle">equivalent</text>` : '';
+      const fromBackground = n.members.every(p => backgroundFacts.has(p));
+      nodesHtml += `<g class="node${iso ? ' iso' : ''}${fromBackground ? ' from-background' : ''}" data-class="${n.id}" data-members="${n.members.join(',')}" transform="translate(${x},${y})">${fromBackground ? '<title>Follows from the background assumptions</title>' : ''}<rect x="${-s.w / 2}" y="${-s.h / 2}" width="${s.w}" height="${s.h}" rx="5"/>${eq}${lines}</g>`;
+    }
+  }
+  svg.innerHTML = `${defs}<g id="vp"><g id="edges">${edgesHtml}</g><g id="nodes">${nodesHtml}</g></g>`;
+  applyView(); applySelection();
+}
+function applyView() { const vp = document.getElementById('vp'); if (vp) vp.setAttribute('transform', `translate(${view.tx},${view.ty}) scale(${view.k})`); }
+function fit() {
+  const L = layout; if (!L || !L.visible.length) return;
+  const xs = L.visible.map(n => L.x.get(n.id) - L.size.get(n.id).w / 2), xe = L.visible.map(n => L.x.get(n.id) + L.size.get(n.id).w / 2);
+  const ys = L.visible.map(n => L.y.get(n.id) - L.size.get(n.id).h / 2), ye = L.visible.map(n => L.y.get(n.id) + L.size.get(n.id).h / 2);
+  const minX = Math.min(...xs) - 70, maxX = Math.max(...xe) + 70, minY = Math.min(...ys) - 40, maxY = Math.max(...ye) + 40;
+  const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
+  view.k = Math.min(W / (maxX - minX), H / (maxY - minY), 1.4);
+  view.tx = (W - (maxX + minX) * view.k) / 2; view.ty = (H - (maxY + minY) * view.k) / 2;
+  applyView();
+}
+// pan / zoom
+(function () {
+  let drag = null;
+  svg.addEventListener('pointerdown', ev => { if (ev.button !== 0) return; drag = { x: ev.clientX, y: ev.clientY, tx: view.tx, ty: view.ty, moved: false, target: ev.target }; svg.setPointerCapture(ev.pointerId); });
+  svg.addEventListener('pointermove', ev => { if (!drag) return; const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true; view.tx = drag.tx + dx; view.ty = drag.ty + dy; applyView(); });
+  svg.addEventListener('pointerup', () => { if (drag && !drag.moved) handleGraphClick(drag.target); drag = null; });
+  svg.addEventListener('wheel', ev => { ev.preventDefault(); const f = Math.exp(-ev.deltaY * 0.0015); const r = svg.getBoundingClientRect(); const mx = ev.clientX - r.left, my = ev.clientY - r.top; view.tx = mx - (mx - view.tx) * f; view.ty = my - (my - view.ty) * f; view.k *= f; applyView(); }, { passive: false });
+  svg.addEventListener('pointermove', ev => { const t = ev.target.closest('.node,.junction,.edge-g'); hover(t ? (t.dataset.class ? { node: t.dataset.class } : { result: t.dataset.result || t.dataset.edge }) : null); });
+  svg.addEventListener('pointerleave', () => hover(null));
+})();
+function handleGraphClick(target) {
+  const t = target.closest('.node,.junction,.edge-g');
+  if (!t) { select(null); return; }
+  if (t.dataset.class) select({ type: 'principle', id: target.closest('[data-principle]')?.dataset.principle || t.dataset.members.split(',')[0] });
+  else if (t.dataset.result) select({ type: 'result', id: t.dataset.result });
+  else if (t.dataset.edge) { const key = t.dataset.edge; if (key.startsWith('d:')) { const [i, j] = key.slice(2).split('>').map(Number); select({ type: 'pair', a: A.classes[i][0], b: A.classes[j][0] }); } else select({ type: 'result', id: key }); }
+}
+function hover(h) {
+  const nodes = svg.querySelectorAll('.node,.junction'), edges = svg.querySelectorAll('.edge-g');
+  if (!h) { nodes.forEach(n => n.classList.remove('dim', 'hot')); edges.forEach(e => e.classList.remove('dim', 'hot')); return; }
+  const hotNodes = new Set(), hotEdges = new Set();
+  if (h.node) {
+    hotNodes.add(h.node);
+    edges.forEach(e => { if (e.dataset.from === h.node || e.dataset.to === h.node) { hotEdges.add(e.dataset.edge); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    // junction: include its other endpoints
+    edges.forEach(e => { if (hotNodes.has(e.dataset.from) && e.dataset.from.startsWith('j:') || hotNodes.has(e.dataset.to) && e.dataset.to.startsWith('j:')) { hotEdges.add(e.dataset.edge); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+  } else if (h.result) {
+    edges.forEach(e => { if (e.dataset.edge === h.result) { hotEdges.add(e.dataset.edge); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    hotNodes.add('j:' + h.result);
+  }
+  nodes.forEach(n => { const id = n.dataset.class || ('j:' + n.dataset.result); n.classList.toggle('hot', hotNodes.has(id)); n.classList.toggle('dim', !hotNodes.has(id)); });
+  edges.forEach(e => { e.classList.toggle('hot', hotEdges.has(e.dataset.edge)); e.classList.toggle('dim', !hotEdges.has(e.dataset.edge)); });
+}
+function applySelection() {
+  const sel = state.selected;
+  svg.querySelectorAll('.node').forEach(n => n.classList.toggle('selected', !!sel && sel.type === 'principle' && n.dataset.members.split(',').includes(sel.id)));
+}
+
+
+
+// ---------------------------------------------------------------- model explorer
+function principleOrder() { return layout ? [...new Set(layout.layers.flat().filter(n => n.kind === 'class').flatMap(n => n.members).concat(ids))] : ids; }
+function modelEvidence(m, c) {
+  if (!m || !passes(m) || (m.status !== 'proved' && !state.showConj)) return null;
+  if (m.satisfies.includes(c)) return { value: true, items: [m], rules: [], direct: true };
+  if (m.violates.includes(c)) return { value: false, items: [m], rules: [], direct: true };
+  if (m.status !== 'proved') return null;
+  let value, rules, contradiction;
+  if (baseE.holds.get(m.id)?.has(c)) {
+    value = true;
+    rules = chain(c, baseE.cl(m.satisfies).why, baseE.byId);
+  } else if (baseE.fails.get(m.id)?.has(c)) {
+    value = false;
+    const trial = baseE.cl([...m.satisfies, c]);
+    contradiction = m.violates.find(v => trial.facts.has(v));
+    rules = chain(contradiction, trial.why, baseE.byId);
+  } else return null;
+  return { value, rules, contradiction, direct: false, items: [m, ...rules.map(id => byRid.get(id))] };
+}
+function evidenceBadges(e) {
+  return [...new Set(e.items.map(sourceOf))].map(sourceBadge).join('') + (e.items.some(x => x.status === 'conjectured') ? '<span class="badge conj">conjecture</span>' : '');
+}
+function sourceBadge(s) { return `<span class="badge source" data-source="${esc(s.id)}" style="--source-color:${sourceColor(s)}">${esc(s.name)}</span>`; }
+function verdictButton(m, c, e) {
+  return e ? `<button class="verdict" data-verdict="${c}" data-verdict-model="${m.id}" title="View evidence for ${esc(name(c))}" aria-label="${esc(name(c))}: ${e.value ? 'satisfied' : 'violated'}${e.direct ? '' : ', derived'}; view evidence">${e.value ? '✓' : '✗'}${e.direct ? '' : ' derived'} ${evidenceBadges(e)}</button>` : '<span class="via">? unknown</span>';
+}
+const modelBackgroundSlots = new Map();
+function principleGroups() {
+  const sorted = [...P].sort((a, b) => a.name.localeCompare(b.name));
+  const categories = T.principle_categories || [];
+  if (!categories.length) return [{ id: 'all', name: 'Principles', principles: sorted }];
+  const groups = categories.map(c => ({ ...c, principles: sorted.filter(p => p.category === c.id) }));
+  const ungrouped = sorted.filter(p => !categories.some(c => c.id === p.category));
+  if (ungrouped.length) groups.push({ id: 'uncategorized', name: 'Other principles', principles: ungrouped });
+  return groups.filter(g => g.principles.length);
+}
+function renderModels() {
+  const candidate = byMid.get(state.modelId);
+  const inspected = candidate && passes(candidate) && (candidate.status === 'proved' || state.showConj) ? candidate : null;
+  const IN = [...new Set([...background, ...state.pkg])], OUT = [...state.out];
+  const clIn = E.cl(IN).facts;
+  const bad = OUT.filter(o => clIn.has(o));
+  const forcedOut = new Set(bad.length ? [] : ids.filter(c => !clIn.has(c) && OUT.some(o => E.cl([...IN, c]).facts.has(o))));
+  let h = `<div class="ex"><div class="ex-col"><div class="ex-head">Principles <button class="btn small" id="ex-clear">clear</button></div>`;
+  h += `<p class="background-hint">${inspected ? `Inspecting <b>${esc(inspected.name)}</b>. Click a verdict for its evidence. <button class="lnk" id="ex-deselect">clear selection</button>` : 'Click a model to inspect its principles. Use ✓ / ✗ to filter models.'}</p>`;
+  h += `<p class="background-hint">↓ move a principle to the shared background</p><div id="model-principles">`;
+  for (const group of principleGroups()) {
+  h += `<section class="model-category" data-model-category="${esc(group.id)}"><h3>${esc(group.name)}</h3><ul class="ex-list">`;
+  for (const c of group.principles.map(p => p.id)) {
+    if (background.has(c)) {
+      if (modelBackgroundSlots.has(c)) h += `<li class="model-bg-placeholder" aria-hidden="true" style="height:${modelBackgroundSlots.get(c)}px"></li>`;
+      continue;
+    }
+    const st = state.pkg.has(c) ? 'in' : state.out.has(c) ? 'out' : clIn.has(c) ? 'fin' : forcedOut.has(c) ? 'fout' : '';
+    const evidence = inspected && modelEvidence(inspected, c);
+    h += `<li class="ex-p ${inspected ? (evidence ? evidence.value ? 'model-in' : 'model-out' : 'model-unknown') : st}"><span class="seg"><button data-in="${c}" class="${st === 'in' ? 'on' : st === 'fin' ? 'auto' : ''}" title="Filter: must satisfy">✓</button><button data-out="${c}" class="${st === 'out' ? 'on' : st === 'fout' ? 'auto' : ''}" title="Filter: must violate">✗</button></span><button class="lnk" data-principle="${c}">${esc(name(c))}</button>${inspected ? verdictButton(inspected, c, evidence) : st === 'fin' ? '<span class="via">⇐ in</span>' : st === 'fout' ? '<span class="via">⇐ out</span>' : ''}<button class="background-move" data-model-add-background="${c}" title="Move ${esc(name(c))} to background" aria-label="Move ${esc(name(c))} to background">↓</button></li>`;
+  }
+  h += `</ul></section>`;
+  }
+  h += `</div></div><div class="ex-col"><section class="background-dock models-background-dock" id="models-background-dock" aria-labelledby="models-background-heading"><h2 id="models-background-heading">Background <span id="models-background-count"></span><button class="lnk" id="models-background-reset">reset</button></h2><p class="background-hint">Shared with the Graph tab · ↑ return to principles</p><div id="models-background-list" class="ctl"></div><p id="models-background-status" class="background-status" role="status" aria-live="polite"></p></section>`;
+  const ms = MODELS.filter(m => passes(m) && (m.status === 'proved' || state.showConj));
+  const H = m => m.status === 'proved' ? baseE.holds.get(m.id) : new Set(m.satisfies), F = m => m.status === 'proved' ? baseE.fails.get(m.id) : new Set(m.violates);
+  const known = [], unknown = [];
+  for (const m of ms) {
+    const h_ = H(m), f_ = F(m);
+    if (IN.some(p => f_.has(p)) || OUT.some(o => h_.has(o))) continue;
+    const gaps = [...IN.filter(p => !h_.has(p)), ...OUT.filter(o => !f_.has(o))];
+    (gaps.length || m.status !== 'proved' ? unknown : known).push([m, gaps]);
+  }
+  const row = ([m, gaps]) => `<li class="ex-m${state.modelId === m.id ? ' sel' : ''}"><button class="lnk" data-model="${m.id}" aria-pressed="${state.modelId === m.id}">${esc(m.name)}</button>${certBadges(m)}<span class="via">${gaps.length ? '? ' + gaps.map(name).map(esc).join(', ') : ''}</span><span class="via ex-sum">${m.satisfies.length}✓ ${m.violates.length}✗</span></li>`;
+  if (bad.length) { const { why } = E.cl(IN); h += `<div class="ex-head">Models</div><div class="ex-bad">Inconsistent: ${bad.map(o => `${esc(name(o))} follows from ${chain(o, why, E.byId).map(v => `<button class="lnk" data-result="${v}">${resultStmt(byRid.get(v))}</button>`).join(', ')}`).join('; ')}.</div>`; } else {
+  h += `<div class="ex-head">Models <span class="n">${known.length}</span></div><ul class="ex-list">${known.map(row).join('') || '<li class="empty">—</li>'}</ul>`;
+  h += `<div class="ex-head">Unknown <span class="n">${unknown.length}</span></div><ul class="ex-list">${unknown.map(row).join('') || '<li class="empty">—</li>'}</ul>`; }
+  h += `</div></div>`;
+  const el = document.getElementById('models'), dock = document.getElementById('models-background-dock');
+  el.innerHTML = h;
+  if (dock) el.querySelector('#models-background-dock').replaceWith(dock);
+  else {
+    el.querySelector('#models-background-reset').addEventListener('click', resetBackground);
+    wireBackgroundCompaction(el.querySelector('#models-background-list'));
+  }
+  renderBackground();
+  el.querySelectorAll('[data-model-add-background]').forEach(b => b.addEventListener('click', () => {
+    const row = b.closest('.ex-p');
+    modelBackgroundSlots.set(b.dataset.modelAddBackground, row.getBoundingClientRect().height || 34);
+    changeBackground(b.dataset.modelAddBackground, true);
+  }));
+  const principlesList = el.querySelector('#model-principles');
+  const compact = () => { modelBackgroundSlots.clear(); principlesList.querySelectorAll('.model-bg-placeholder').forEach(row => row.remove()); };
+  principlesList.addEventListener('pointerleave', compact);
+  principlesList.addEventListener('focusout', ev => { if (!principlesList.contains(ev.relatedTarget) && !principlesList.matches(':hover')) compact(); });
+  el.querySelectorAll('button[data-in]').forEach(b => b.addEventListener('click', () => { state.modelId = null; const c = b.dataset.in; if (state.pkg.has(c)) state.pkg.delete(c); else { state.pkg.add(c); state.out.delete(c); } renderModels(); }));
+  el.querySelectorAll('button[data-out]').forEach(b => b.addEventListener('click', () => { state.modelId = null; const c = b.dataset.out; if (state.out.has(c)) state.out.delete(c); else { state.out.add(c); state.pkg.delete(c); } renderModels(); }));
+  el.querySelector('#ex-clear').addEventListener('click', () => { state.modelId = null; state.pkg.clear(); state.out.clear(); renderModels(); });
+  el.querySelector('#ex-deselect')?.addEventListener('click', () => { state.modelId = null; select(null); renderModels(); });
+  wire(el);
+  document.getElementById('n-models').textContent = MODELS.length;
+}
+
+// ---------------------------------------------------------------- results & open
+function certBadges(r) {
+  const c = r.certificate;
+  return `${sourceBadge(sourceOf(r))}${c.lean === 'verified' ? '<span class="badge lean verified">Lean ✓</span>' : ''}${r.status === 'conjectured' ? '<span class="badge conj">conjecture</span>' : ''}`;
+}
+function resultStmt(r) { return `${r.premises.length ? r.premises.map(name).map(esc).join(' ∧ ') : '⊤'} ⇒ ${esc(name(r.conclusion))}`; }
+function modelStmt(m) { return `${m.satisfies.map(name).map(esc).join(' ∧ ') || '⊤'} ∧ ${m.violates.map(v => '¬' + esc(name(v))).join(' ∧ ')}`; }
+function dateOf(x) { return x.satisfies || x.premises ? (x.certificate.date || '') : (x.date || ''); }
+function kindOf(x) { return x.satisfies ? 'model' : x.premises ? 'result' : 'principle'; }
+function renderResults() {
+  const q = state.search.trim().toLowerCase();
+  const items = [...P, ...R, ...MODELS].filter(x => !q || JSON.stringify(x).toLowerCase().includes(q))
+    .sort((a, b) => dateOf(b).localeCompare(dateOf(a)));
+  let h = `<table class="results changes"><tbody>`;
+  for (const x of items) {
+    const k = kindOf(x);
+    const stmt = k === 'principle' ? `<b>${esc(x.name)}</b> &nbsp; ${esc(x.statement)}` : k === 'result' ? resultStmt(x) : `<b>${esc(x.name)}</b> &nbsp; ${modelStmt(x)}`;
+    const by = k === 'principle' ? '' : esc(x.certificate.produced_by || '');
+    h += `<tr data-kind="${k}" data-id="${x.id}" class="${k !== 'principle' && !passes(x) ? 'filtered' : ''}"><td class="mono nowrap">${esc(dateOf(x))}</td><td><span class="badge ${k === 'model' ? 'indep' : 'kind'}">${x.status === 'conjectured' ? 'conjecture' : k}</span></td><td class="stmt">${stmt}</td><td>${k === 'principle' ? '' : certBadges(x)}</td><td class="mono">${by}</td></tr>`;
+  }
+  h += '</tbody></table>';
+  const el = document.getElementById('results'); el.innerHTML = h;
+  el.querySelectorAll('tr[data-id]').forEach(tr => tr.addEventListener('click', () => select({ type: tr.dataset.kind, id: tr.dataset.id })));
+  document.getElementById('n-results').textContent = items.length;
+}
+function renderOpen() {
+  const conj = [...R.filter(r => r.status === 'conjectured'), ...MODELS.filter(m => m.status === 'conjectured')];
+  let h = `<table class="results"><tbody>`;
+  for (const x of conj) {
+    const isM = !!x.satisfies;
+    h += `<tr data-${isM ? 'model' : 'result'}="${x.id}" class="${passes(x) ? '' : 'filtered'}"><td class="stmt">${isM ? `<b>${esc(x.name)}</b> &nbsp; ${modelStmt(x)}` : resultStmt(x)}${x.notes ? `<div class="note">${fmt(x.notes)}</div>` : ''}</td><td><span class="badge ${isM ? 'indep' : 'kind'}">${isM ? 'model' : 'entailment'}</span></td><td>${x.certificate.produced_by ? esc(x.certificate.produced_by) : ''}<div class="mono">${x.certificate.date || ''}</div></td><td class="mono">${x.id}</td></tr>`;
+  }
+  h += `</tbody></table>`;
+  const sa = DATA.server_analysis || {};
+  if ((sa.problems || []).length) h += `<h3>Contradictions</h3><ul>${sa.problems.map(p => `<li>${esc(p)}</li>`).join('')}</ul>`;
+  const el = document.getElementById('open'); el.innerHTML = h;
+  el.querySelectorAll('tr[data-result]').forEach(tr => tr.addEventListener('click', () => select({ type: 'result', id: tr.dataset.result })));
+  el.querySelectorAll('tr[data-model]').forEach(tr => tr.addEventListener('click', () => select({ type: 'model', id: tr.dataset.model })));
+  document.getElementById('n-open').textContent = conj.length;
+}
+
+// ---------------------------------------------------------------- write-up page
+function sourceEntries(items) {
+  const entries = new Map();
+  for (const x of items) (x.sources || []).forEach((source, i) => {
+    if (!entries.has(source)) entries.set(source, { source, label: (x.source_names || [])[i] || (source.length <= 80 ? source : `Source ${entries.size + 1}`) });
+  });
+  return [...entries.values()];
+}
+function sourceSummary(items) {
+  const entries = sourceEntries(items);
+  return `<div class="pop-sources"><b>Source${entries.length === 1 ? '' : 's'}:</b> ${entries.length ? entries.map(x => `<span title="${esc(x.source)}">${esc(x.label)}</span>`).join('; ') : 'not recorded'}</div>`;
+}
+function sourceList(items) {
+  const entries = sourceEntries(items);
+  return entries.length ? `<h2>Sources</h2><ul class="src">${entries.map(x => `<li><b>${esc(x.label)}</b>${x.label === x.source ? '' : ' — ' + esc(x.source)}</li>`).join('')}</ul>` : '';
+}
+function fileLinks(x) {
+  const f = x.files || {}; const parts = [];
+  if (f.html) parts.push(`<a href="${f.html}" target="_blank">html</a>`);
+  if (f.pdf) parts.push(`<a href="${f.pdf}" target="_blank">pdf</a>`);
+  if (f.md) parts.push(`<a href="${f.md}" target="_blank">md</a>`);
+  if (x.certificate.lean_ref && (DATA.downloads || {}).lean) parts.push(`<a href="${DATA.downloads.lean}" target="_blank">lean</a>`);
+  return parts.length ? `<div class="links">${parts.join(' · ')}${f.handwritten ? ' <span class="dim">(hand-written)</span>' : ''}</div>` : '';
+}
+function pstmt(id) { const p = byPid.get(id); return `<li><button class="lnk" data-principle="${id}"><b>${esc(p.name)}</b></button> ${esc(p.statement)}</li>`; }
+function renderPage(sel) {
+  const el = document.getElementById('page');
+  let h = `<button class="btn small" id="page-back">← back</button>`;
+  if (sel.type === 'result') {
+    const r = byRid.get(sel.id);
+    h += `<h1>${resultStmt(r)}</h1><div class="badges">${certBadges(r)}</div>${fileLinks(r)}${certDl(r.certificate)}`;
+    h += `<h2>Premises</h2><ul class="plist">${r.premises.map(pstmt).join('') || '<li>⊤</li>'}</ul><h2>Conclusion</h2><ul class="plist">${pstmt(r.conclusion)}</ul>`;
+    if (r.proof) h += `<h2>Proof</h2><div class="prose">${fmt(r.proof)}</div>`;
+    if (r.notes) h += `<h2>Notes</h2><div class="prose">${fmt(r.notes)}</div>`;
+    h += sourceList([r]);
+    h += `<div class="file">${esc(r.file)}</div>`;
+  } else if (sel.type === 'model') {
+    const m = byMid.get(sel.id);
+    h += `<h1>${esc(m.name)}</h1><div class="badges">${certBadges(m)}</div>${fileLinks(m)}${certDl(m.certificate)}`;
+    h += `<h2>Package</h2><div class="prose">${modelStmt(m)}</div>`;
+    if (m.description) h += `<h2>Construction</h2><div class="prose">${fmt(m.description)}</div>`;
+    const st = c => verdictButton(m, c, modelEvidence(m, c));
+    h += `<h2>Principles</h2><table class="results"><tbody>${principleOrder().map(c => `<tr><td class="mono nowrap">${st(c)}</td><td><button class="lnk" data-principle="${c}">${esc(name(c))}</button></td></tr>`).join('')}</tbody></table>`;
+    if (m.notes) h += `<h2>Notes</h2><div class="prose">${fmt(m.notes)}</div>`;
+    if ((m.checks || []).length) h += `<h2>Checks</h2><ul class="src">${m.checks.map(x => `<li class="mono">${esc(x)}</li>`).join('')}</ul>`;
+    h += sourceList([m]);
+    h += `<div class="file">${esc(m.file)}</div>`;
+  } else if (sel.type === 'model-verdict') {
+    const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
+    h += `<h1>${esc(m.name)}: ${esc(name(sel.principle))}</h1>`;
+    if (!e) h += '<p>No evidence is available under the current filters.</p>';
+    else {
+      h += `<div class="badges">${e.value ? '✓ satisfied' : '✗ violated'} ${evidenceBadges(e)}</div>`;
+      h += `<p>${e.direct ? 'This assertion is recorded in the model write-up.' : e.value ? 'This follows from the model’s recorded properties using the results below.' : `Assuming ${esc(name(sel.principle))} in this model would imply ${esc(name(e.contradiction))}, which the model violates.`}</p>`;
+      h += `<h2>Model evidence</h2><p><button class="lnk" data-open-model="${m.id}">${esc(m.name)} — write-up</button> ${certBadges(m)}</p>`;
+      if (e.rules.length) h += `<h2>Derivation</h2><ol>${e.rules.map(id => `<li><button class="lnk" data-open-result="${id}">${resultStmt(byRid.get(id))} — write-up</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
+      if (!e.direct && topicBackground.length) h += `<p>Standing background: ${topicBackground.map(name).map(esc).join(', ')}.</p>`;
+      h += sourceList(e.items);
+    }
+  } else if (sel.type === 'principle') {
+    const p = byPid.get(sel.id);
+    h += `<h1>${esc(p.name)}</h1>${(p.aliases || []).length ? `<div class="id">${esc(p.aliases.join(', '))}</div>` : ''}<div class="prose statement">${esc(p.statement)}</div>${p.formal ? `<div class="formal">${esc(p.formal)}</div>` : ''}`;
+    if (p.notes) h += `<h2>Notes</h2><div class="prose">${fmt(p.notes)}</div>`;
+    const inR = R.filter(r => r.premises.includes(p.id) || r.conclusion === p.id), inM = MODELS.filter(m => m.satisfies.includes(p.id) || m.violates.includes(p.id));
+    h += `<h2>Results</h2><table class="results"><tbody>${inR.map(r => `<tr data-result="${r.id}"><td class="stmt">${resultStmt(r)}</td><td>${certBadges(r)}</td></tr>`).join('') || '<tr><td>—</td></tr>'}</tbody></table>`;
+    h += `<h2>Models</h2><table class="results"><tbody>${inM.map(m => `<tr data-model="${m.id}"><td class="mono nowrap">${m.satisfies.includes(p.id) ? '✓' : '✗'}</td><td class="stmt"><b>${esc(m.name)}</b> &nbsp; ${modelStmt(m)}</td><td>${certBadges(m)}</td></tr>`).join('') || '<tr><td>—</td></tr>'}</tbody></table>`;
+    h += sourceList([p]);
+    h += `<div class="file">${esc(p.file)}</div>`;
+  }
+  el.innerHTML = h;
+  el.querySelectorAll('tr[data-result]').forEach(tr => tr.addEventListener('click', () => select({ type: 'result', id: tr.dataset.result })));
+  el.querySelectorAll('tr[data-model]').forEach(tr => tr.addEventListener('click', () => select({ type: 'model', id: tr.dataset.model })));
+  el.querySelector('#page-back').addEventListener('click', () => showTab(state.tab));
+  wire(el);
+}
+function openPage(sel) { renderPage(sel); document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', 'false')); document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-page')); }
+function showTab(tab) {
+  state.tab = tab;
+  document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x.dataset.tab === tab));
+  document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-' + tab));
+  if (tab === 'graph') fit();
+}
+
+// ---------------------------------------------------------------- detail
+function wire(el) {
+  el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', () => select({ type: 'principle', id: b.dataset.principle })));
+  el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
+  el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
+  el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
+  el.querySelectorAll('button[data-open-model]').forEach(b => b.addEventListener('click', () => openPage({ type: 'model', id: b.dataset.openModel })));
+  el.querySelectorAll('button[data-open-result]').forEach(b => b.addEventListener('click', () => openPage({ type: 'result', id: b.dataset.openResult })));
+}
+function relList(items) { return items.length ? `<ul class="rel">${items.map(([id, via]) => `<li><button data-principle="${id}">${esc(name(id))}</button>${via ? `<span class="via">${via}</span>` : ''}</li>`).join('')}</ul>` : `<div class="empty">—</div>`; }
+function certDl(c) { return `<dl>${c.produced_by ? `<dt>by</dt><dd>${esc(c.produced_by)}</dd>` : ''}${c.recorded_by ? `<dt>recorded by</dt><dd>${esc(c.recorded_by)}</dd>` : ''}${(c.checked_by || []).length ? `<dt>checked</dt><dd>${esc(c.checked_by.join(', '))}</dd>` : ''}${c.lean_ref ? `<dt>Lean</dt><dd class="mono">${esc(c.lean_ref)}</dd>` : ''}${c.date ? `<dt>date</dt><dd>${esc(c.date)}</dd>` : ''}</dl>`; }
+let popAt = null;
+function renderDetail() {
+  const el = document.getElementById('pop'); const sel = state.selected;
+  if (!sel || sel.type === 'pair' || sel.type === 'cell') { el.hidden = true; return; }
+  let h = '';
+  if (sel.type === 'principle') {
+    for (const mid of [sel.id]) {
+      const m = byPid.get(mid);
+      h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(m.statement)}</div>${m.formal ? `<div class="formal">${esc(m.formal)}</div>` : ''}${m.lean && m.lean.ref ? `<div class="pop-l">Lean: <code>${esc(m.lean.ref)}</code></div>` : ''}${sourceSummary([m])}`;
+    }
+    h += '<div class="links"><button class="lnk" data-goto="1">write-up</button></div>';
+  } else if (sel.type === 'model-verdict') {
+    const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
+    h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
+    if (e) h += `<div class="badges">${evidenceBadges(e)}</div><div class="pop-l">${e.direct ? 'Recorded in the model write-up.' : 'Derived from the model and the recorded implications.'}</div>${sourceSummary(e.items)}<div class="links"><button class="lnk" data-goto="1">write-up</button></div>`;
+  } else {
+    const x = sel.type === 'result' ? byRid.get(sel.id) : byMid.get(sel.id);
+    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'model' ? `<div class="pop-s">${modelStmt(x)}</div>` : ''}<div class="badges">${certBadges(x)}</div>${sourceSummary([x])}${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">write-up</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
+  }
+  el.innerHTML = h; el.hidden = false;
+  el.querySelector('button[data-goto]')?.addEventListener('click', () => { const e = sel.type === 'model-verdict' && modelEvidence(byMid.get(sel.id), sel.principle); openPage(e && e.direct ? { type: 'model', id: sel.id } : sel); el.hidden = true; });
+  const W = window.innerWidth, H = window.innerHeight, r = el.getBoundingClientRect();
+  let x = (popAt ? popAt.x + 12 : W - r.width - 24), y = (popAt ? popAt.y + 12 : 80);
+  if (x + r.width > W - 8) x = Math.max(8, (popAt ? popAt.x : W) - r.width - 12);
+  if (y + r.height > H - 8) y = Math.max(8, H - r.height - 8);
+  el.style.left = x + 'px'; el.style.top = y + 'px';
+}
+document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !el.contains(ev.target)) el.hidden = true; });
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape') document.getElementById('pop').hidden = true; });
+function select(sel) {
+  if (sel?.type === 'model') { state.modelId = sel.id; renderModels(); }
+  state.selected = sel; renderDetail(); applySelection();
+}
+
+// ---------------------------------------------------------------- header
+function renderHeader() {
+  document.getElementById('title').textContent = T.title;
+  document.getElementById('subtitle').textContent = (T.description || '').trim();
+  const all = [...R, ...MODELS].filter(x => x.status === 'proved');
+  const leanCount = all.filter(r => r.certificate.lean === 'verified').length;
+  let implies = 0, indep = 0, open = 0;
+  for (const v of A.pair.values()) { if (v.status === 'implies') implies++; else if (v.status === 'independent') indep++; else open++; }
+  const dl = DATA.downloads || {};
+  document.getElementById('downloads').innerHTML = [dl.bundle && `<a href="${dl.bundle}">AI bundle (zip)</a>`, dl.json && `<a href="${dl.json}">data.json</a>`, dl.zip && `<a href="${dl.zip}">source.zip</a>`, dl.lean && `<a href="${dl.lean}">lean/</a>`].filter(Boolean).join('') || '<span class="dim">—</span>';
+  document.getElementById('stats').innerHTML = [`<b>${ids.length}</b> principles`, `<b>${R.length}</b> results`, `<b>${MODELS.length}</b> models`,
+    `<b>${background.size}</b> background assumptions`,
+    `<b>${new Set(all.map(x => sourceOf(x).id)).size}</b> sources`,
+    `Lean <b>${leanCount}</b>`, `<b>${implies}</b> ⇒ · <b>${indep}</b> ⇏ · <b>${open}</b> open`].map(s => `<span class="chip">${s}</span>`).join('');
+}
+
+// ---------------------------------------------------------------- wiring
+let refreshPrincipleControls = () => {};
+function changeBackground(id, assumed) {
+  if (!byPid.has(id) || (!assumed && topicBackground.includes(id))) return;
+  assumed ? background.add(id) : background.delete(id);
+  state.pkg.delete(id); state.out.delete(id);
+  saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+function saveBackground() {
+  // Keep exploration shareable/reloadable without changing the source topic.
+  const additions = [...background].filter(p => !topicBackground.includes(p)).sort();
+  try {
+    const url = new URL(window.location.href);
+    if (additions.length || backgroundPresets.some(p => p.default)) url.searchParams.set('assume', additions.join(','));
+    else url.searchParams.delete('assume');
+    window.history.replaceState(window.history.state, '', url);
+  } catch { /* Some local-file viewers do not allow history updates. */ }
+}
+function renderBackground() {
+  document.querySelectorAll('[data-background-preset]').forEach(button => {
+    const preset = backgroundPresets.find(p => p.id === button.dataset.backgroundPreset);
+    button.disabled = preset.principles.every(id => background.has(id));
+  });
+  for (const prefix of ['', 'models-']) {
+  const list = document.getElementById(prefix + 'background-list');
+  if (!list) continue;
+  list.querySelectorAll('.background-row').forEach(row => {
+    const removed = !background.has(row.dataset.backgroundId);
+    row.classList.toggle('is-removed', removed);
+    row.inert = removed;
+    if (!removed) row.classList.remove('is-collapsed');
+  });
+  for (const id of background) {
+    if ([...list.querySelectorAll('.background-row')].some(row => row.dataset.backgroundId === id)) continue;
+    const row = document.createElement('div');
+    row.className = 'background-row'; row.dataset.backgroundId = id;
+    row.innerHTML = `<button class="lnk" data-background-principle="${esc(id)}">${esc(name(id))}</button>${topicBackground.includes(id) ? '<span class="background-fixed">fixed</span>' : `<button type="button" class="background-move" data-remove-background="${esc(id)}" title="Return ${esc(name(id))} to principles" aria-label="Return ${esc(name(id))} to principles">↑</button>`}`;
+    row.querySelector('[data-background-principle]').addEventListener('click', () => select({ type: 'principle', id }));
+    row.querySelector('[data-remove-background]')?.addEventListener('click', () => changeBackground(id, false));
+    list.appendChild(row);
+  }
+  document.getElementById(prefix + 'background-count').textContent = background.size;
+  document.getElementById(prefix + 'background-reset').disabled = background.size === topicBackground.length;
+  const consequences = [...E.cl([]).facts].filter(p => !background.has(p));
+  document.getElementById(prefix + 'background-status').textContent = backgroundConflicts.length ? 'Inconsistent background — see the graph warning.' : background.size ? `${consequences.length} further principles follow · ${E.models.length} known models` : 'No additional assumptions.';
+  }
+}
+function renderAll(refit) {
+  recompute(); renderHeader(); renderBackground();
+  document.querySelector('[data-tab="contribute"]').hidden = !DATA.contribute_html;
+  document.getElementById('contribute').innerHTML = DATA.contribute_html || '';
+  const current = background.size ? `<h2>Current background assumptions</h2><ul>${[...background].map(p => `<li>${esc(name(p))}</li>`).join('')}</ul>` : '';
+  document.getElementById('background').innerHTML = current + (DATA.background_html || '<p class="dim">—</p>');
+  renderGraph(); if (refit) fit(); renderModels(); renderResults(); renderOpen(); renderDetail();
+}
+function resetBackground() {
+  for (const id of [...background]) if (!topicBackground.includes(id)) background.delete(id);
+  modelBackgroundSlots.clear();
+  saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+document.getElementById('background-reset').addEventListener('click', resetBackground);
+function wireBackgroundCompaction(list) {
+  const compact = () => list.querySelectorAll('.is-removed').forEach(row => row.classList.add('is-collapsed'));
+  list.addEventListener('pointerleave', compact);
+  list.addEventListener('focusout', ev => { if (!list.contains(ev.relatedTarget) && !list.matches(':hover')) compact(); });
+}
+wireBackgroundCompaction(document.getElementById('background-list'));
+(function renderSourceFilters() {
+  const el = document.getElementById('source-filters');
+  el.innerHTML = [['published-paper', 'Published papers'], ['online-submission', 'Online submissions'], ['misc', 'Miscellaneous']].map(([kind, label]) => {
+    const sources = sourceCatalog.filter(s => s.kind === kind);
+    return sources.length ? `<fieldset class="source-group"><legend>${label}</legend>${sources.map(s => `<label><input type="checkbox" data-source-filter="${esc(s.id)}" checked><span class="sw" style="border-color:${sourceColor(s)}"></span>${esc(s.name)}</label>`).join('')}</fieldset>` : '';
+  }).join('');
+  el.querySelectorAll('[data-source-filter]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? state.allowed.add(cb.dataset.sourceFilter) : state.allowed.delete(cb.dataset.sourceFilter); renderAll(true); }));
+})();
+document.getElementById('lean-only').addEventListener('change', e => { state.leanOnly = e.target.checked; renderAll(true); });
+document.getElementById('show-derived').addEventListener('change', e => { state.showDerived = e.target.checked; renderAll(true); });
+document.getElementById('show-conj').addEventListener('change', e => { state.showConj = e.target.checked; renderAll(true); });
+document.getElementById('show-iso').addEventListener('change', e => { state.showIso = e.target.checked; renderAll(true); });
+document.getElementById('fit').addEventListener('click', fit);
+(function () {
+  const el = document.getElementById('pr-filters');
+  const sorted = [...P].sort((a, b) => a.name.localeCompare(b.name));
+  const categories = T.principle_categories || [];
+  const groups = principleGroups();
+  const labels = principles => principles.map(p => `<div class="pr-row${background.has(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${esc(p.id)}"><input type="checkbox" data-pid="${esc(p.id)}" aria-label="Show ${esc(p.name)} on graph"${state.excluded.has(p.id) ? '' : ' checked'}><button type="button" class="lnk principle-name" data-principle="${esc(p.id)}" title="View principle details">${esc(p.name)}</button><button type="button" class="background-move" data-add-background="${esc(p.id)}" title="Move ${esc(p.name)} to background" aria-label="Move ${esc(p.name)} to background">↓</button></div>`).join('');
+  el.innerHTML = categories.length ? groups.filter(g => g.principles.length).map((g, i) => `
+    <section class="pr-category" data-category="${esc(g.id)}" aria-labelledby="pr-category-${i}">
+      <h3 id="pr-category-${i}">${esc(g.name)}</h3>
+      ${backgroundPresets.filter(p => p.category === g.id).map(p => `<button type="button" class="btn small" data-background-preset="${esc(p.id)}" style="margin-bottom:8px">Add ${esc(p.name)} to background</button>`).join('')}
+      <div class="pr-category-actions">
+        <button type="button" class="lnk" data-category-select="all" aria-label="Select all ${esc(g.name)}">select all</button>
+        <button type="button" class="lnk" data-category-select="none" aria-label="Unselect all ${esc(g.name)}">unselect all</button>
+        <span class="pr-category-count" aria-live="polite"></span>
+      </div>
+      <div class="ctl">${labels(g.principles)}</div>
+    </section>`).join('') : labels(sorted);
+  const updateCounts = () => {
+    el.querySelectorAll('.pr-category').forEach(group => {
+      const checkboxes = [...group.querySelectorAll('input[data-pid]')].filter(cb => !cb.disabled);
+      const selected = checkboxes.filter(cb => cb.checked).length;
+      group.querySelector('.pr-category-count').textContent = `${selected}/${checkboxes.length}`;
+      group.querySelector('[data-category-select="all"]').disabled = selected === checkboxes.length;
+      group.querySelector('[data-category-select="none"]').disabled = selected === 0;
+    });
+  };
+  const setSelection = (checkboxes, selected) => {
+    checkboxes.forEach(cb => {
+      if (cb.disabled) return;
+      cb.checked = selected;
+      selected ? state.excluded.delete(cb.dataset.pid) : state.excluded.add(cb.dataset.pid);
+    });
+    updateCounts(); renderGraph(); fit();
+  };
+  el.querySelectorAll('input[data-pid]').forEach(cb => cb.addEventListener('change', () => {
+    cb.checked ? state.excluded.delete(cb.dataset.pid) : state.excluded.add(cb.dataset.pid);
+    updateCounts(); renderGraph(); fit();
+  }));
+  el.querySelectorAll('button[data-category-select]').forEach(button => button.addEventListener('click', () => {
+    setSelection(button.closest('.pr-category').querySelectorAll('input[data-pid]'), button.dataset.categorySelect === 'all');
+  }));
+  document.getElementById('pr-all').addEventListener('click', () => setSelection(el.querySelectorAll('input[data-pid]'), true));
+  document.getElementById('pr-none').addEventListener('click', () => setSelection(el.querySelectorAll('input[data-pid]'), false));
+  el.querySelectorAll('[data-add-background]').forEach(button => button.addEventListener('click', () => changeBackground(button.dataset.addBackground, true)));
+  el.querySelectorAll('[data-background-preset]').forEach(button => button.addEventListener('click', () => {
+    const preset = backgroundPresets.find(p => p.id === button.dataset.backgroundPreset);
+    for (const id of preset.principles) { background.add(id); state.pkg.delete(id); state.out.delete(id); }
+    saveBackground(); refreshPrincipleControls(); renderAll(true);
+  }));
+  wire(el);
+  const compact = () => el.querySelectorAll('.pr-row.in-background').forEach(row => row.classList.add('is-collapsed'));
+  el.addEventListener('pointerleave', compact);
+  el.addEventListener('focusout', ev => { if (!el.contains(ev.relatedTarget) && !el.matches(':hover')) compact(); });
+  refreshPrincipleControls = () => {
+    el.querySelectorAll('.pr-row').forEach(row => {
+      const id = row.dataset.prRow, assumed = background.has(id);
+      row.classList.toggle('in-background', assumed); row.inert = assumed;
+      if (!assumed) row.classList.remove('is-collapsed');
+      const checkbox = row.querySelector('input[data-pid]');
+      checkbox.disabled = assumed; checkbox.checked = !assumed && !state.excluded.has(id);
+      row.querySelector('[data-add-background]').disabled = assumed;
+    });
+    updateCounts();
+  };
+  refreshPrincipleControls();
+})();
+document.getElementById('search').addEventListener('input', e => {
+  state.search = e.target.value; renderResults();
+  const q = state.search.trim().toLowerCase(); if (!q) { hover(null); return; }
+  const hit = P.find(p => (p.name + ' ' + p.id + ' ' + (p.aliases || []).join(' ')).toLowerCase().includes(q));
+  if (hit) hover({ node: 'c' + A.classes.findIndex(c => c.includes(hit.id)) });
+});
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+// Resize without rebuilding either list, so selections, scroll positions and click slots survive.
+(function setupPaneDividers() {
+  const pane = document.getElementById('pane-graph');
+  const sidebar = document.getElementById('graph-sidebar');
+  const storageKey = 'principle-map:pane-sizes:v1';
+  let saved = {};
+  try {
+    const stored = JSON.parse(localStorage.getItem(storageKey));
+    for (const key of ['sidebar', 'background']) if (Number.isFinite(stored?.[key]) && stored[key] > 0) saved[key] = stored[key];
+  } catch (_) { /* Resizing also works when storage is unavailable. */ }
+  const handles = { sidebar: document.getElementById('sidebar-divider'), background: document.getElementById('background-divider') };
+  const current = {};
+  let drag = null;
+  function limits(key) {
+    const width = pane.clientWidth || window.innerWidth;
+    const height = sidebar.clientHeight || pane.clientHeight || window.innerHeight;
+    return key === 'sidebar'
+      ? { min: Math.min(200, width * .4), max: Math.max(0, width - Math.min(240, width * .4) - 9), initial: 250 }
+      : { min: Math.min(130, height * .3), max: Math.max(0, height - Math.min(140, height * .3) - 9), initial: Math.min(230, Math.max(145, window.innerHeight * .27)) };
+  }
+  function apply() {
+    if (pane.dataset.active !== 'true') return;
+    const previousWidth = current.sidebar;
+    for (const key of Object.keys(handles)) {
+      const bounds = limits(key), min = Math.min(bounds.min, bounds.max);
+      const value = Math.round(Math.max(min, Math.min(bounds.max, saved[key] ?? bounds.initial)));
+      current[key] = value;
+      pane.style.setProperty(key === 'sidebar' ? '--sidebar-width' : '--background-height', `${value}px`);
+      const handle = handles[key];
+      handle.setAttribute('aria-valuemin', Math.round(min));
+      handle.setAttribute('aria-valuemax', Math.round(bounds.max));
+      handle.setAttribute('aria-valuenow', value);
+      handle.setAttribute('aria-valuetext', `${value} pixels ${key === 'sidebar' ? 'wide' : 'high'}`);
+    }
+    if (previousWidth !== current.sidebar) fit();
+  }
+  function persist() { try { localStorage.setItem(storageKey, JSON.stringify(saved)); } catch (_) {} }
+  function setSize(key, value) { saved[key] = value; apply(); saved[key] = current[key]; }
+  function finish(cancel = false) {
+    if (!drag) return;
+    const previous = drag; drag = null;
+    if (cancel) { saved = previous.saved; apply(); } else persist();
+    handles[previous.key].classList.remove('dragging');
+    document.body.classList.remove('resizing-panes');
+    document.body.style.removeProperty('--resize-cursor');
+    if (handles[previous.key].hasPointerCapture?.(previous.pointerId)) handles[previous.key].releasePointerCapture(previous.pointerId);
+  }
+  for (const [key, handle] of Object.entries(handles)) {
+    handle.addEventListener('pointerdown', ev => {
+      if (ev.button !== 0 || drag) return;
+      ev.preventDefault(); handle.focus(); apply();
+      drag = { key, pointerId: ev.pointerId, coordinate: key === 'sidebar' ? ev.clientX : ev.clientY, size: current[key], saved: { ...saved } };
+      handle.setPointerCapture?.(ev.pointerId);
+      handle.classList.add('dragging');
+      document.body.style.setProperty('--resize-cursor', key === 'sidebar' ? 'col-resize' : 'row-resize');
+      document.body.classList.add('resizing-panes');
+      document.getElementById('pop').hidden = true;
+    });
+    handle.addEventListener('lostpointercapture', () => finish());
+    handle.addEventListener('dblclick', () => { finish(); delete saved[key]; apply(); persist(); });
+    handle.addEventListener('keydown', ev => {
+      if (drag) return;
+      const bounds = limits(key), step = ev.shiftKey ? 40 : 10;
+      const increase = key === 'sidebar' ? 'ArrowRight' : 'ArrowUp';
+      const decrease = key === 'sidebar' ? 'ArrowLeft' : 'ArrowDown';
+      if (![increase, decrease, 'Home', 'End', 'Enter'].includes(ev.key)) return;
+      ev.preventDefault();
+      if (ev.key === 'Enter') { delete saved[key]; apply(); }
+      else setSize(key, ev.key === 'Home' ? bounds.min : ev.key === 'End' ? bounds.max : current[key] + (ev.key === increase ? step : -step));
+      persist();
+    });
+  }
+  window.addEventListener('pointermove', ev => {
+    if (!drag || ev.pointerId !== drag.pointerId) return;
+    const delta = (drag.key === 'sidebar' ? ev.clientX : -ev.clientY) - (drag.key === 'sidebar' ? drag.coordinate : -drag.coordinate);
+    setSize(drag.key, drag.size + delta);
+  });
+  window.addEventListener('pointerup', ev => { if (drag?.pointerId === ev.pointerId) finish(); });
+  window.addEventListener('pointercancel', ev => { if (drag?.pointerId === ev.pointerId) finish(true); });
+  window.addEventListener('blur', () => finish());
+  window.addEventListener('keydown', ev => { if (ev.key === 'Escape' && drag) { ev.preventDefault(); finish(true); } });
+  window.addEventListener('resize', apply);
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', apply));
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(apply).observe(pane);
+  apply();
+})();
+window.addEventListener('resize', () => { if (state.tab === 'graph') fit(); });
+renderAll(true);
+requestAnimationFrame(fit);
+</script>
+
+</body>
+</html>

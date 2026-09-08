@@ -1,0 +1,1535 @@
+#!/usr/bin/env python3
+"""pmap — principle map tooling.
+
+Subcommands
+  validate [TOPIC ...]      schema + reference + consistency checks
+  build    [TOPIC ...]      write build/<topic>/ (viewer, data.json, source.zip, AI bundle, write-ups)
+  lean     [TOPIC ...]      regenerate the Lean statements from the records
+  lean-check [TOPIC ...]    build the Lean library and verify every lean: claim
+  bundle   [TOPIC ...]      write build/<topic>/<topic>-map.zip only: a self-contained
+                            working copy (MAP.md, OPEN-QUESTIONS.md, README, records, tooling)
+  status   [TOPIC ...]      print a text summary (counts, open pairs, redundancies)
+  new-topic TOPIC           scaffold topics/TOPIC/
+  new-principle TOPIC ID    scaffold a principle file
+  new-result TOPIC ID       scaffold an implication file
+  new-model TOPIC ID        scaffold a model (countermodel) file
+  selftest                  run the derivation engine's unit tests
+
+All commands run from anywhere; paths are resolved relative to the repo root
+(the directory containing this scripts/ folder).
+"""
+from __future__ import annotations
+
+import argparse
+import datetime as _dt
+import json
+import sys
+from pathlib import Path
+
+try:
+    import yaml
+    import jsonschema
+except ImportError:  # pragma: no cover
+    sys.exit("pmap needs pyyaml and jsonschema:  pip install -r requirements.txt")
+
+ROOT = Path(__file__).resolve().parent.parent
+TOPICS = ROOT / "topics"
+SCHEMA = ROOT / "schema"
+BUILD = ROOT / "build"
+TEMPLATE = ROOT / "viewer" / "template.html"
+
+
+# ----------------------------------------------------------------------------
+# Loading
+# ----------------------------------------------------------------------------
+
+def _normalise(obj):
+    """YAML turns bare dates into date objects; keep them as ISO strings."""
+    if isinstance(obj, dict):
+        return {k: _normalise(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_normalise(v) for v in obj]
+    if isinstance(obj, (_dt.date, _dt.datetime)):
+        return obj.isoformat()
+    return obj
+
+
+def _load_yaml(path: Path):
+    with path.open(encoding="utf-8") as fh:
+        return _normalise(yaml.safe_load(fh) or {})
+
+
+def _schema(name: str):
+    sch = json.loads((SCHEMA / f"{name}.schema.json").read_text(encoding="utf-8"))
+    if name == "model":  # inline the certificate definition shared with results
+        sch["properties"]["certificate"] = _schema("result")["properties"]["certificate"]
+    return sch
+
+
+def list_topics() -> list[str]:
+    return sorted(p.name for p in TOPICS.iterdir() if (p / "topic.yaml").exists())
+
+
+def load_topic(topic_id: str) -> dict:
+    """Load a topic directory into a plain dict. Does not validate."""
+    tdir = TOPICS / topic_id
+    if not (tdir / "topic.yaml").exists():
+        sys.exit(f"no such topic: {topic_id} (expected {tdir / 'topic.yaml'})")
+    topic = _load_yaml(tdir / "topic.yaml")
+    principles, results = [], []
+    for p in sorted((tdir / "principles").glob("*.yaml")):
+        d = _load_yaml(p)
+        d["_file"] = str(p.relative_to(ROOT))
+        principles.append(d)
+    models = []
+    for sub, lst in (("results", results), ("models", models)):
+        for p in sorted((tdir / sub).glob("*.yaml")):
+            d = _load_yaml(p)
+            d["_file"] = str(p.relative_to(ROOT))
+            d.setdefault("status", "proved")
+            d.setdefault("certificate", {}).setdefault("lean", "none")
+            lst.append(d)
+    return {"topic": topic, "principles": principles, "results": results, "models": models}
+
+
+# ----------------------------------------------------------------------------
+# Derivation engine (mirrored in viewer/template.html — keep the two in sync)
+# ----------------------------------------------------------------------------
+#
+# Results are Horn clauses  premises ⇒ conclusion, read relative to the topic
+# background B.  cl(S) = least set ⊇ B ∪ S closed under the results.
+# A model M records sat(M) and viol(M).  Derived from M:
+#   holds(M)   = cl(sat(M))
+#   fails(M)   = { c : cl(sat(M) ∪ {c}) ∩ viol(M) ≠ ∅ }
+# and M is inconsistent (data error) if holds(M) ∩ viol(M) ≠ ∅.
+# For a package P:  P ⇒ c  iff c ∈ cl(P);   P ⇏ c  iff some M has P ⊆ holds(M), c ∈ fails(M).
+
+def closure(seed, rules, background=()):
+    facts = set(background) | set(seed)
+    why = {f: None for f in facts}
+    changed = True
+    while changed:
+        changed = False
+        for rid, prem, concl in rules:
+            if concl not in facts and prem <= facts:
+                facts.add(concl)
+                why[concl] = rid
+                changed = True
+    return facts, why
+
+
+def conflicting_pairs(facts, principles):
+    """Explicit negation pairs present in a closure; absence of models is not a conflict."""
+    return sorted({tuple(sorted((p["id"], p["negates"]))) for p in principles
+                   if p.get("negates") in facts and p["id"] in facts})
+
+
+def proof_chain(target, why, rules_by_id):
+    out, seen = [], set()
+
+    def visit(f):
+        rid = why.get(f)
+        if rid is None or rid in seen:
+            return
+        seen.add(rid)
+        for p in rules_by_id[rid][1]:
+            visit(p)
+        out.append(rid)
+
+    visit(target)
+    return out
+
+
+class Engine:
+    def __init__(self, ids, results, models, background=()):
+        self.ids = list(ids)
+        self.background = tuple(background)
+        self.rules = [(r["id"], frozenset(r["premises"]), r["conclusion"]) for r in results]
+        self.rules_by_id = {r[0]: r for r in self.rules}
+        self.models = list(models)
+        self.holds, self.fails, self.fail_why = {}, {}, {}
+        for m in self.models:
+            h, _ = closure(m["satisfies"], self.rules, self.background)
+            self.holds[m["id"]] = h
+            f, fw = set(), {}
+            for c in self.ids:
+                fc, why = closure(set(m["satisfies"]) | {c}, self.rules, self.background)
+                hit = [v for v in m["violates"] if v in fc]
+                if hit:
+                    f.add(c)
+                    fw[c] = [m["id"]] + proof_chain(hit[0], why, self.rules_by_id)
+            self.fails[m["id"]], self.fail_why[m["id"]] = f, fw
+
+    def cl(self, seed):
+        return closure(seed, self.rules, self.background)
+
+    def entails(self, P, c):
+        facts, why = self.cl(P)
+        return (True, proof_chain(c, why, self.rules_by_id)) if c in facts else (False, [])
+
+    def separates(self, P, c):
+        """Model ids witnessing P ⇏ c, with derivation for the first."""
+        P = set(P)
+        wits = [m["id"] for m in self.models if P <= self.holds[m["id"]] and c in self.fails[m["id"]]]
+        return wits, (self.fail_why[wits[0]][c] if wits else [])
+
+    def package(self, P):
+        P = set(P)
+        entailed, _ = self.cl(P)
+        out = {"entails": [], "separated": [], "open": []}
+        for c in self.ids:
+            if c in P:
+                continue
+            if c in entailed:
+                out["entails"].append(c)
+            elif self.separates(P, c)[0]:
+                out["separated"].append(c)
+            else:
+                out["open"].append(c)
+        return out
+
+    def pair(self, a, b):
+        ok, via = self.entails({a}, b)
+        if ok:
+            return {"status": "implies", "via": via}
+        wits, via = self.separates({a}, b)
+        if wits:
+            return {"status": "independent", "via": via, "models": wits}
+        return {"status": "open", "via": []}
+
+
+def analyse(data: dict, *, include_conjectures=False) -> dict:
+    topic, principles = data["topic"], data["principles"]
+    ids = [p["id"] for p in principles]
+    ok = lambda x: x["status"] == "proved" or include_conjectures
+    E = Engine(ids, [r for r in data["results"] if ok(r)], [m for m in data["models"] if ok(m)], topic.get("background", []))
+
+    pair = {(a, b): E.pair(a, b) for a in ids for b in ids if a != b}
+    classes, seen = [], set()
+    for a in ids:
+        if a in seen:
+            continue
+        cls = [a] + [b for b in ids if b != a and pair[(a, b)]["status"] == "implies" and pair[(b, a)]["status"] == "implies"]
+        seen.update(cls)
+        classes.append(cls)
+
+    problems, infos = [], []
+    for a, b in conflicting_pairs(E.cl([])[0], principles):
+        problems.append(f"background is inconsistent: both {a} and {b} follow")
+    for m in E.models:
+        for a, b in conflicting_pairs(E.holds[m["id"]], principles):
+            problems.append(f"model {m['id']} is inconsistent: both {a} and {b} follow")
+        bad = [v for v in m["violates"] if v in E.holds[m["id"]]]
+        if bad:
+            _, why = E.cl(m["satisfies"])
+            problems.append(f"model {m['id']}: violates {bad}, but they follow from its satisfies via {proof_chain(bad[0], why, E.rules_by_id)}")
+        for m2 in E.models:
+            if m2 is not m and set(m["satisfies"]) <= E.holds[m2["id"]] and set(m["violates"]) <= E.fails[m2["id"]]:
+                infos.append(f"model {m['id']} is subsumed by {m2['id']}")
+                break
+    for rid, prem, concl in E.rules:
+        if concl in prem:
+            problems.append(f"{rid}: conclusion is among its premises")
+        others = [x for x in E.rules if x[0] != rid]
+        facts, why = closure(set(prem), others, E.background)
+        if concl in facts:
+            infos.append(f"{rid} is redundant: derivable from {proof_chain(concl, why, {x[0]: x for x in others})}")
+
+    return {
+        "engine": E,
+        "pair": pair,
+        "classes": classes,
+        "problems": problems,
+        "infos": infos,
+        "open_pairs": [k for k, v in pair.items() if v["status"] == "open"],
+        "unknown": {m["id"]: [c for c in ids if c not in E.holds[m["id"]] and c not in E.fails[m["id"]]] for m in E.models},
+    }
+
+
+# ----------------------------------------------------------------------------
+# Validation
+# ----------------------------------------------------------------------------
+
+def validate_topic(topic_id: str, *, quiet=False) -> bool:
+    data = load_topic(topic_id)
+    errors, warnings = [], []
+    tschema, pschema, rschema = _schema("topic"), _schema("principle"), _schema("result")
+
+    def check(schema, obj, where):
+        for e in jsonschema.Draft202012Validator(schema).iter_errors({k: v for k, v in obj.items() if not k.startswith("_")}):
+            loc = "/".join(str(x) for x in e.absolute_path) or "(root)"
+            errors.append(f"{where}: {loc}: {e.message}")
+        if isinstance(obj.get("source_names"), list) and isinstance(obj.get("sources", []), list):
+            if len(obj["source_names"]) != len(obj.get("sources", [])):
+                errors.append(f"{where}: source_names must have one name for each source")
+
+    check(tschema, data["topic"], f"topics/{topic_id}/topic.yaml")
+    if data["topic"].get("id") != topic_id:
+        errors.append(f"topic.yaml id '{data['topic'].get('id')}' does not match directory '{topic_id}'")
+
+    ids = set()
+    categories = data["topic"].get("principle_categories", [])
+    category_ids = [c["id"] for c in categories if isinstance(c, dict) and "id" in c]
+    if len(set(category_ids)) != len(category_ids):
+        errors.append("topic.yaml: duplicate principle category id")
+    for p in data["principles"]:
+        check(pschema, p, p["_file"])
+        stem = Path(p["_file"]).stem
+        if p.get("id") != stem:
+            errors.append(f"{p['_file']}: id '{p.get('id')}' must equal file stem '{stem}'")
+        if p.get("id") in ids:
+            errors.append(f"{p['_file']}: duplicate id {p['id']}")
+        ids.add(p.get("id"))
+        if p.get("category") is not None and p["category"] not in category_ids:
+            errors.append(f"{p['_file']}: unknown principle category '{p['category']}'")
+
+    for p in data["principles"]:
+        if isinstance(p.get("negates"), str):
+            if p["negates"] not in ids:
+                errors.append(f"{p['_file']}: unknown negated principle '{p['negates']}'")
+            elif p["negates"] == p["id"]:
+                errors.append(f"{p['_file']}: a principle cannot negate itself")
+
+    preset_ids = set()
+    source_ids = [s['id'] for s in data['topic'].get('source_catalog', []) if isinstance(s, dict) and isinstance(s.get('id'), str)]
+    if len(source_ids) != len(set(source_ids)):
+        errors.append('topic.yaml: duplicate source catalog id')
+    for preset in data["topic"].get("background_presets", []):
+        if not isinstance(preset, dict):
+            continue
+        preset_id = preset.get("id", "")
+        if preset_id in preset_ids:
+            errors.append(f"topic.yaml: duplicate background preset '{preset_id}'")
+        preset_ids.add(preset_id)
+        if preset.get("category") not in category_ids:
+            errors.append(f"topic.yaml: unknown category for background preset '{preset_id}'")
+        for pid in preset.get("principles", []):
+            if pid not in ids:
+                errors.append(f"topic.yaml: background preset '{preset_id}' references unknown principle '{pid}'")
+
+    for b in data["topic"].get("background", []):
+        if b not in ids:
+            errors.append(f"topic.yaml: background principle '{b}' does not exist")
+
+    mschema = _schema("model")
+    rids = set()
+    for r in data["results"] + data["models"]:
+        is_model = "satisfies" in r
+        check(mschema if is_model else rschema, r, r["_file"])
+        if data["topic"].get("require_sources") and not r.get("sources"):
+            errors.append(f"{r['_file']}: a result or model must have at least one source")
+        stem = Path(r["_file"]).stem
+        if r.get("id") != stem:
+            errors.append(f"{r['_file']}: id '{r.get('id')}' must equal file stem '{stem}'")
+        if r.get("id") in rids:
+            errors.append(f"{r['_file']}: duplicate id {r['id']}")
+        rids.add(r.get("id"))
+        refs = (r.get("satisfies", []) + r.get("violates", [])) if is_model else (list(r.get("premises", [])) + [r.get("conclusion")])
+        for pid in refs:
+            if pid not in ids:
+                errors.append(f"{r['_file']}: unknown principle '{pid}'")
+        if is_model and set(r.get("satisfies", [])) & set(r.get("violates", [])):
+            errors.append(f"{r['_file']}: a principle is both satisfied and violated")
+        cert = r.get("certificate", {})
+        if cert.get('source_id', 'misc') not in source_ids + ['misc']:
+            errors.append(f"{r['_file']}: unknown direct source '{cert['source_id']}'")
+        if not is_model:
+            if r.get("status") == "proved" and not (r.get("proof") or "").strip():
+                errors.append(f"{r['_file']}: proved result needs a proof")
+            if r.get("conclusion") in r.get("premises", []):
+                errors.append(f"{r['_file']}: conclusion is among the premises")
+
+    if not errors:
+        an = analyse(data)
+        errors += [f"CONTRADICTION: {p}" for p in an["problems"]]
+        warnings += an["infos"]
+
+    if not quiet:
+        for e in errors:
+            print(f"ERROR   {e}")
+        for w in warnings:
+            print(f"note    {w}")
+        print(f"{topic_id}: {len(data['principles'])} principles, {len(data['results'])} results, {len(data['models'])} models — "
+              f"{'OK' if not errors else str(len(errors)) + ' error(s)'}")
+    return not errors
+
+
+# ----------------------------------------------------------------------------
+# Build
+# ----------------------------------------------------------------------------
+
+def export_json(topic_id: str) -> dict:
+    data = load_topic(topic_id)
+    an = analyse(data)
+    clean = lambda d: {k: v for k, v in d.items() if not k.startswith("_")}
+    return {
+        "topic": data["topic"],
+        "principles": [clean(p) | {"file": p["_file"]} for p in data["principles"]],
+        "results": [clean(r) | {"file": r["_file"]} for r in data["results"]],
+        "models": [clean(m) | {"file": m["_file"]} for m in data["models"]],
+        "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+        "server_analysis": {
+            "classes": an["classes"],
+            "open_pairs": an["open_pairs"],
+            "unknown": an["unknown"],
+            "problems": an["problems"],
+            "infos": an["infos"],
+        },
+    }
+
+
+def enriched_payload(topic_id: str, downloads: dict) -> dict:
+    """export_json plus the topic's prose, so a downloaded data.json is self-explaining."""
+    payload = export_json(topic_id)
+    payload["downloads"] = downloads
+    for name, key in (("background", "background"), ("contribute", "contribute"), ("extraction", "extraction")):
+        path = TOPICS / topic_id / f"{name}.md"
+        if path.exists():
+            md = path.read_text(encoding="utf-8")
+            payload[f"{key}_md"] = md
+            if key != "extraction":
+                payload[f"{key}_html"] = _md_to_html(md)
+    return payload
+
+
+# ----------------------------------------------------------------------------
+# Write-ups
+# ----------------------------------------------------------------------------
+
+WRITEUP_CSS = """body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}"""
+
+
+def _stmt_line(pid: str, names: dict, stmts: dict) -> str:
+    return f"- **{names[pid]}.** {stmts[pid].strip()}"
+
+
+def generate_writeup(item: dict, data: dict) -> str:
+    """Markdown write-up generated from the YAML record."""
+    names = {p["id"]: p["name"] for p in data["principles"]}
+    stmts = {p["id"]: p["statement"] for p in data["principles"]}
+    c = item["certificate"]
+    source = next((s['name'] for s in data['topic'].get('source_catalog', []) if s['id'] == c.get('source_id')), 'Misc.')
+    cert = f"Source: {source}" + (f", Lean `{c['lean_ref']}`" if c.get("lean") == "verified" else "") \
+        + (f"; produced by {c['produced_by']}" if c.get("produced_by") else "") \
+        + (f"; recorded by {c['recorded_by']}" if c.get("recorded_by") else "") \
+        + (f"; checked by {', '.join(c['checked_by'])}" if c.get("checked_by") else "")
+    conj = item.get("status") == "conjectured"
+    out = []
+    if "satisfies" in item:
+        title = item["name"]
+        out += [f"# {title}", "", f"<p class='cert'>Model{' (conjectured)' if conj else ''} — {cert}.</p>", ""]
+        out += ["## Package", ""]
+        out += [_stmt_line(x, names, stmts) for x in item["satisfies"]]
+        out += [f"- **¬ {names[x]}.** {stmts[x].strip()}" for x in item["violates"]]
+        if item.get("description", "").strip():
+            out += ["", "## Construction", "", item["description"].strip()]
+    else:
+        prem = " ∧ ".join(names[x] for x in item["premises"]) or "⊤"
+        title = f"{prem} ⇒ {names[item['conclusion']]}"
+        out += [f"# {title}", "", f"<p class='cert'>{'Conjecture' if conj else 'Result'} — {cert}.</p>", ""]
+        out += ["## Premises", ""] + ([_stmt_line(x, names, stmts) for x in item["premises"]] or ["- ⊤"])
+        out += ["", "## Conclusion", "", _stmt_line(item["conclusion"], names, stmts)]
+        if item.get("proof", "").strip():
+            out += ["", "## Proof", "", item["proof"].strip()]
+    if item.get("notes", "").strip():
+        out += ["", "## Notes", "", item["notes"].strip()]
+    if item.get("sources"):
+        labels = item.get("source_names", [])
+        out += ["", "## Sources", ""] + [f"- **{labels[i]}** — {x}" if i < len(labels) else f"- {x}" for i, x in enumerate(item["sources"])]
+    out += ["", f"<p class='cert'>Record: <code>{item['_file']}</code></p>", ""]
+    return "\n".join(out)
+
+
+def _md_to_html(md: str) -> str:
+    import shutil, subprocess
+    pandoc = shutil.which("pandoc")
+    if pandoc:
+        return subprocess.run([pandoc, "--mathml", "-f", "markdown", "-t", "html"], input=md, capture_output=True, text=True, check=True).stdout
+    import markdown
+    return markdown.markdown(md, extensions=["extra"])
+
+
+def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True) -> dict:
+    """Write build/<topic>/writeups/<id>.{md,html,pdf}; return {id: {md, html, pdf}}."""
+    import shutil, subprocess
+    wdir = outdir / "writeups"
+    wdir.mkdir(parents=True, exist_ok=True)
+    src = TOPICS / topic_id / "writeups"
+    pandoc = shutil.which("pandoc")
+    xelatex = shutil.which("xelatex")
+    files = {}
+    for item in data["results"] + data["models"]:
+        iid = item["id"]
+        hand = src / f"{iid}.md"
+        md = hand.read_text(encoding="utf-8") if hand.exists() else generate_writeup(item, data)
+        title = md.splitlines()[0].lstrip("# ").strip() if md.startswith("#") else iid
+        (wdir / f"{iid}.md").write_text(md, encoding="utf-8")
+        body_md = wdir / f".{iid}.body.md"   # heading stripped; pandoc gets the title as metadata
+        body_md.write_text(md.split("\n", 1)[1] if md.startswith("#") else md, encoding="utf-8")
+        entry = {"md": f"writeups/{iid}.md", "handwritten": hand.exists()}
+        html_path = wdir / f"{iid}.html"
+        if pandoc:
+            subprocess.run([pandoc, str(body_md), "-s", "--mathml", "--metadata", f"title={title}",
+                            "-o", str(html_path)], check=True, capture_output=True)
+            html = html_path.read_text(encoding="utf-8").replace("</head>", f"<style>{WRITEUP_CSS}</style></head>", 1)
+            html_path.write_text(html, encoding="utf-8")
+        else:
+            import markdown
+            body = markdown.markdown(md, extensions=["extra"])
+            html_path.write_text(f"<!doctype html><meta charset='utf-8'><title>{title}</title><style>{WRITEUP_CSS}</style>{body}", encoding="utf-8")
+        entry["html"] = f"writeups/{iid}.html"
+        if pdf and pandoc and xelatex:
+            r = subprocess.run([pandoc, str(body_md), "-o", str(wdir / f"{iid}.pdf"), "--pdf-engine=xelatex",
+                                f"--template={ROOT / 'viewer' / 'writeup.tex'}", "--metadata", f"title={title}",
+                                "-V", "mainfont=DejaVu Sans"], capture_output=True, text=True)
+            if r.returncode == 0:
+                entry["pdf"] = f"writeups/{iid}.pdf"
+            else:
+                print(f"  pdf failed for {iid}: {r.stderr.strip().splitlines()[-1] if r.stderr.strip() else '?'}")
+        body_md.unlink()
+        files[iid] = entry
+    return files
+
+
+def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = False, pdf: bool = True) -> Path:
+    """Build build/<topic>/ : index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/, sources/, lean/.
+    With --out, write only the viewer HTML to that path (fragment=True omits the page skeleton)."""
+    import shutil
+    if not validate_topic(topic_id, quiet=True):
+        validate_topic(topic_id)
+        sys.exit(f"{topic_id}: fix validation errors before building")
+    data = load_topic(topic_id)
+    outdir = BUILD / topic_id
+    outdir.mkdir(parents=True, exist_ok=True)
+    generate_lean_statements(topic_id)
+    files = render_writeups(topic_id, data, outdir, pdf=pdf and out is None)
+    # database + source + lean + AI bundle
+    zip_tree(TOPICS / topic_id, topic_id, outdir / "source.zip")
+    sources_dir = TOPICS / topic_id / "sources"
+    if sources_dir.exists():
+        shutil.copytree(sources_dir, outdir / "sources", dirs_exist_ok=True)
+    lean_dir = TOPICS / topic_id / "lean"
+    downloads = {"bundle": f"{topic_id}-map.zip", "json": "data.json", "zip": "source.zip"}
+    if lean_dir.exists() and any(lean_dir.iterdir()):
+        shutil.copytree(lean_dir, outdir / "lean", dirs_exist_ok=True,
+                        ignore=shutil.ignore_patterns(*IGNORE))
+        downloads["lean"] = "lean/"
+    payload = enriched_payload(topic_id, downloads)
+    for item in payload["results"] + payload["models"]:
+        item["files"] = files.get(item["id"], {})
+    (outdir / "data.json").write_text(json.dumps(payload, indent=1, ensure_ascii=False), encoding="utf-8")
+    bundle_topic(topic_id)
+    html = TEMPLATE.read_text(encoding="utf-8")
+    blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
+    html = html.replace("/*__PMAP_DATA__*/null", blob)
+    html = html.replace("__PMAP_TITLE__", payload["topic"]["title"])
+    if not fragment:
+        head, body = html.split('<div class="app">', 1)
+        html = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+                '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+                f'{head}</head>\n<body>\n<div class="app">{body}\n</body>\n</html>\n')
+    out = out or outdir / "index.html"
+    out.write_text(html, encoding="utf-8")
+    return out
+
+
+# ----------------------------------------------------------------------------
+# Lean integration
+# ----------------------------------------------------------------------------
+#
+# The YAML is the single source of truth for *statements*. Each principle names one
+# hand-written Lean definition in `lean_def`; every result and model statement is then
+# generated from its premises and conclusion. A proof cannot silently drift from the
+# recorded claim, because the statement it must inhabit is machine-written from the
+# record. `lean-check` builds the library and refuses to call anything verified while it
+# still depends on `sorryAx`.
+
+
+def _lean_name(rid: str) -> str:
+    return rid.replace("-", "_")
+
+
+def lean_lib_dir(topic_id: str, data: dict) -> tuple[Path, str] | None:
+    lib = data["topic"].get("lean_lib")
+    root = TOPICS / topic_id / "lean"
+    return (root, lib) if lib and root.exists() else None
+
+
+def lean_coverage(data: dict) -> dict:
+    """Which records can be stated in Lean yet: every principle they mention needs a lean_def."""
+    defs = {p["id"]: p["lean_def"] for p in data["principles"] if p.get("lean_def")}
+    ready, blocked = [], {}
+    for item in data["results"] + data["models"]:
+        used = (item["premises"] + [item["conclusion"]]) if "premises" in item \
+            else (item["satisfies"] + item["violates"])
+        missing = sorted({x for x in used if x not in defs})
+        (ready.append(item) if not missing else blocked.setdefault(item["id"], missing))
+    return {"defs": defs, "ready": ready, "blocked": blocked}
+
+
+def generate_lean_statements(topic_id: str) -> Path | None:
+    """Write <lib>/Statements.lean: one generated Prop per statable record."""
+    data = load_topic(topic_id)
+    loc = lean_lib_dir(topic_id, data)
+    if loc is None:
+        return None
+    root, lib = loc
+    cov = lean_coverage(data)
+    defs, names = cov["defs"], {p["id"]: p["name"] for p in data["principles"]}
+    ns = defs[next(iter(defs))].rsplit(".", 1)[0] if defs else lib
+
+    out = [f"import {lib}.Principles", "",
+           "/-!", "# Generated statements", "",
+           "Written by `pmap lean " + topic_id + "` from the YAML records. **Do not edit.**",
+           "",
+           "Each declaration below is the statement of one database record, assembled from its",
+           "premises and conclusion. A proof is supplied by inhabiting the corresponding `Prop`,",
+           "so a Lean proof cannot drift from the claim the map displays. Regenerate after any",
+           "change to a record or to a principle's `lean_def`.", "-/", "",
+           f"namespace {ns}.Statements", f"open {ns}", ""]
+
+    for item in cov["ready"]:
+        nm = _lean_name(item["id"])
+        conj = item.get("status") == "conjectured"
+        if "premises" in item:
+            head = " ∧ ".join(names[x] for x in item["premises"]) or "⊤"
+            out += [f"/-- `{item['id']}`" + ("  (conjectured)" if conj else ""), "",
+                    f"{head} ⇒ {names[item['conclusion']]} -/",
+                    f"def {nm} : Prop :=",
+                    "  ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O),"]
+            for x in item["premises"]:
+                out.append(f"    {defs[x]} P →")
+            out += [f"    {defs[item['conclusion']]} P", ""]
+        else:
+            out += [f"/-- `{item['id']}`" + ("  (conjectured)" if conj else ""), "",
+                    f"{item['name']}: a witness satisfying {len(item['satisfies'])} principles",
+                    f"and violating {len(item['violates'])}. -/",
+                    f"def {nm} : Prop :=", "  ∃ W : Witness,"]
+            lines = [f"    {defs[x]} W.pref" for x in item["satisfies"]] + \
+                    [f"    ¬ {defs[x]} W.pref" for x in item["violates"]]
+            out += [" ∧\n".join(lines), ""]
+
+    out += [f"end {ns}.Statements", ""]
+    path = root / lib / "Statements.lean"
+    path.write_text("\n".join(out), encoding="utf-8")
+
+    # keep the library root importing it
+    rootfile = root / f"{lib}.lean"
+    want = f"import {lib}.Statements"
+    text = rootfile.read_text(encoding="utf-8") if rootfile.exists() else ""
+    if want not in text:
+        rootfile.write_text(text.rstrip() + "\n" + want + "\n", encoding="utf-8")
+    return path
+
+
+def lean_check(topic_id: str) -> bool:
+    """Build the topic's Lean library and report what is genuinely proved.
+
+    A declaration counts as verified only if it elaborates at the generated statement's
+    type and its axiom dependencies exclude sorryAx.
+    """
+    import subprocess, shutil
+    data = load_topic(topic_id)
+    loc = lean_lib_dir(topic_id, data)
+    if loc is None:
+        print(f"{topic_id}: no Lean library (set lean_lib in topic.yaml and add topics/{topic_id}/lean/)")
+        return True
+    root, lib = loc
+    if not shutil.which("lake"):
+        sys.exit("lean-check needs lake on PATH (install Lean via elan)")
+    cov = lean_coverage(data)
+    generate_lean_statements(topic_id)
+
+    print(f"{topic_id}: building {lib} …")
+    r = subprocess.run(["lake", "build"], cwd=root, capture_output=True, text=True)
+    if r.returncode != 0:
+        print(r.stdout[-4000:]); print(r.stderr[-4000:])
+        print(f"{topic_id}: LEAN BUILD FAILED")
+        return False
+
+    # ask Lean itself which claimed proofs are real
+    claimed = {i["id"]: i for i in data["results"] + data["models"]
+               if i["certificate"].get("lean") in ("stated", "verified")}
+    ns = (cov["defs"][next(iter(cov["defs"]))].rsplit(".", 1)[0]) if cov["defs"] else lib
+    probe = ["import " + lib, "open " + ns]
+    for rid, item in sorted(claimed.items()):
+        ref = item["certificate"].get("lean_ref")
+        if ref:
+            probe += [f"example : {ns}.Statements.{_lean_name(rid)} := {ref}",
+                      f"#print axioms {ref}"]
+    verdict = {}
+    if len(probe) > 2:
+        pf = root / "_pmap_probe.lean"
+        pf.write_text("\n".join(probe) + "\n", encoding="utf-8")
+        p = subprocess.run(["lake", "env", "lean", str(pf)], cwd=root, capture_output=True, text=True)
+        pf.unlink()
+        for line in (p.stdout + p.stderr).splitlines():
+            if "depends on axioms" in line or "does not depend on any axioms" in line:
+                who = line.split("'")[1] if "'" in line else "?"
+                verdict[who] = "sorryAx" not in line
+        if p.returncode != 0:
+            print(p.stdout[-3000:] + p.stderr[-3000:])
+
+    ready = {i["id"] for i in cov["ready"]}
+    print(f"  statements generated: {len(ready)} of {len(data['results']) + len(data['models'])} records")
+    if cov["blocked"]:
+        need = sorted({x for v in cov["blocked"].values() for x in v})
+        print(f"  not yet statable: {len(cov['blocked'])} records, waiting on lean_def for {len(need)} principles")
+        for x in need[:10]:
+            print(f"    - {x}")
+    bad = []
+    for rid, item in sorted(claimed.items()):
+        ref = item["certificate"].get("lean_ref")
+        state = item["certificate"]["lean"]
+        ok = verdict.get(ref)
+        if state == "verified" and ok is not True:
+            bad.append(f"{rid}: claims lean: verified but {'uses sorry' if ok is False else 'has no checked proof'}")
+        print(f"  {rid:50} {state:9} {'sorry-free' if ok else 'unproved' if ok is None else 'uses sorry'}")
+    for b in bad:
+        print(f"ERROR   {b}")
+    print(f"{topic_id}: {'OK' if not bad else str(len(bad)) + ' bad Lean claim(s)'}")
+    return not bad
+
+
+# ----------------------------------------------------------------------------
+# AI bundle:  one zip that unpacks into a self-contained working copy
+# ----------------------------------------------------------------------------
+#
+# Layout inside the archive (root = <topic>-map/):
+#   README.md             what this is, the semantics, how to add records
+#   AGENTS.md / CLAUDE.md the same rules in imperative form, auto-read by agents
+#   MAP.md                every principle, proof, model and derived verdict
+#   OPEN-QUESTIONS.md     everything the map does not settle, and how to settle it
+#   data.json derived.json  the same content structured
+#   scripts/ schema/ viewer/ topics/ Makefile requirements.txt
+# so that `python3 scripts/pmap.py validate` works straight after unzipping.
+
+
+IGNORE = ("__pycache__", "*.pyc", ".DS_Store", ".lake", "*.olean", "*.ilean", "*.trace")
+
+
+def _ignored(name: str) -> bool:
+    from fnmatch import fnmatch
+    return any(fnmatch(name, pat) for pat in IGNORE)
+
+
+def zip_tree(root: Path, base: str, dest: Path) -> Path:
+    """Zip root as base/... , skipping build caches. Replaces make_archive, which cannot filter."""
+    import zipfile
+    if dest.exists():
+        dest.unlink()
+    with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
+        for path in sorted(root.rglob("*")):
+            rel = path.relative_to(root)
+            if any(_ignored(part) for part in rel.parts):
+                continue
+            if path.is_file():
+                z.write(path, str(Path(base) / rel))
+    return dest
+
+
+def _relink(md: str, topic_id: str) -> str:
+    """Rewrite topic-relative links for a file that will sit at the bundle root."""
+    return (md.replace("](sources/", f"](topics/{topic_id}/sources/")
+              .replace("](writeups/", f"](topics/{topic_id}/writeups/"))
+
+
+def _demote(md: str, levels: int) -> str:
+    """Push an inlined write-up's own headings below the section that contains it."""
+    out, fence = [], False
+    for ln in md.split("\n"):
+        if ln.lstrip().startswith("```"):
+            fence = not fence
+        elif not fence and ln.startswith("#"):
+            ln = "#" * levels + ln
+        out.append(ln)
+    return "\n".join(out)
+
+
+def _source_lines(item: dict, indent: str = "") -> list[str]:
+    labels = item.get("source_names") or []
+    out = []
+    for i, s in enumerate(item.get("sources") or []):
+        s = " ".join(str(s).split())
+        out.append(f"{indent}- **{labels[i]}** — {s}" if i < len(labels) else f"{indent}- {s}")
+    return out or [f"{indent}- (none recorded)"]
+
+
+def _cert_line(item: dict, catalog: dict) -> str:
+    c = item.get("certificate", {}) or {}
+    bits = [f"source **{catalog.get(c.get('source_id'), 'Misc.')}**"]
+    if c.get("provenance"):
+        bits.append(f"legacy provenance {c['provenance']}")
+    if c.get("produced_by"):
+        bits.append(f"produced by {c['produced_by']}")
+    if c.get("recorded_by"):
+        bits.append(f"recorded by {c['recorded_by']}")
+    bits.append("checked by " + (", ".join(c["checked_by"]) if c.get("checked_by") else "nobody"))
+    if c.get("lean") and c.get("lean") != "none":
+        bits.append(f"Lean {c['lean']}")
+    if c.get("date"):
+        bits.append(str(c["date"]))
+    return "; ".join(bits) + "."
+
+
+def _para(text: str) -> list[str]:
+    text = (text or "").strip()
+    return ["", text, ""] if text else []
+
+
+def _premise_packages(data: dict) -> list[list[str]]:
+    """Distinct multi-premise packages actually used by proved results, largest first."""
+    seen = {}
+    for r in data["results"]:
+        if r["status"] == "proved" and len(r["premises"]) > 1:
+            seen.setdefault(frozenset(r["premises"]), list(r["premises"]))
+    return [v for _, v in sorted(seen.items(), key=lambda kv: (-len(kv[1]), sorted(kv[1])))]
+
+
+def _handwritten(topic_id: str) -> dict:
+    d = TOPICS / topic_id / "writeups"
+    return {p.stem: p.read_text(encoding="utf-8") for p in sorted(d.glob("*.md"))} if d.exists() else {}
+
+
+def bundle_map_md(topic_id: str, data: dict, an: dict) -> str:
+    """MAP.md — the whole topic as one readable document."""
+    topic = data["topic"]
+    names = {p["id"]: p["name"] for p in data["principles"]}
+    catalog = {s["id"]: s["name"] for s in topic.get("source_catalog", [])}
+    catalog.setdefault("misc", "Misc.")
+    hand = _handwritten(topic_id)
+    E, pair = an["engine"], an["pair"]
+    ids = [p["id"] for p in data["principles"]]
+    proved = [r for r in data["results"] if r["status"] == "proved"]
+    conj_r = [r for r in data["results"] if r["status"] != "proved"]
+    label = lambda i: f"{names.get(i, i)} (`{i}`)"
+    arrow = lambda r: " ∧ ".join(names.get(x, x) for x in r["premises"]) or "⊤"
+
+    o = [f"# {topic['title']} — complete map", ""]
+    o += [f"Topic `{topic_id}`. Generated {_dt.datetime.now(_dt.timezone.utc).isoformat(timespec='seconds')}.",
+          "",
+          f"{len(data['principles'])} principles, {len(proved)} proved results, {len(conj_r)} recorded conjectures, "
+          f"{len(data['models'])} models.", "",
+          "This file is self-contained. Every principle statement, every proof, every model "
+          "construction and every derived verdict in the database is reproduced below. "
+          "`README.md` gives the semantics and the rules for adding to it; "
+          "`OPEN-QUESTIONS.md` lists what is not settled.", ""]
+    if topic.get("description"):
+        o += _para(topic["description"])
+
+    o += ["## 1. Framework", ""]
+    o += _para(topic.get("framework", ""))
+    if topic.get("notation"):
+        o += ["**Notation.** " + " ".join(topic["notation"].split()), ""]
+    bg = topic.get("background") or []
+    o += [f"**Fixed background assumptions.** {', '.join(label(b) for b in bg) if bg else 'None. Every principle below is optional and must be assumed explicitly.'}", ""]
+    for pre in topic.get("background_presets", []):
+        o += [f"**Named package `{pre['id']}` ({pre['name']}).** " + ", ".join(label(x) for x in pre["principles"]) + "."
+              + (" Loaded by default in the viewer." if pre.get("default") else ""), ""]
+
+    bgmd = (TOPICS / topic_id / "background.md")
+    if bgmd.exists():
+        body = bgmd.read_text(encoding="utf-8").strip()
+        body = "\n".join(body.split("\n")[1:]).strip()          # drop its own H1
+        body = _demote(body, 1)
+        o += ["## 2. Background and standing conventions", "",
+              "*Reproduced from `topics/%s/background.md`.*" % topic_id, "",
+              _relink(body, topic_id), ""]
+
+    o += ["## 3. Principles", ""]
+    cats = topic.get("principle_categories") or []
+    groups = [(c["id"], c["name"]) for c in cats] or [(None, "All principles")]
+    placed = set()
+    for cid, cname in groups:
+        members = [p for p in data["principles"] if (p.get("category") == cid or cid is None)]
+        if not members:
+            continue
+        o += [f"### {cname}", ""]
+        for p in members:
+            placed.add(p["id"])
+            o += [f"#### {p['name']} — `{p['id']}`", ""]
+            o += _para(p.get("statement", ""))
+            if p.get("formal"):
+                o += [f"Formal: `{p['formal']}`", ""]
+            if p.get("negates"):
+                o += [f"Explicit negation of {label(p['negates'])}.", ""]
+            if p.get("tags"):
+                o += [f"Tags: {', '.join(p['tags'])}.", ""]
+            if (p.get("notes") or "").strip():
+                o += [f"Notes. {p['notes'].strip()}", ""]
+            o += ["Sources:", ""] + _source_lines(p) + [""]
+    leftover = [p for p in data["principles"] if p["id"] not in placed]
+    if leftover:
+        o += ["### Uncategorised", ""]
+        for p in leftover:
+            o += [f"#### {p['name']} — `{p['id']}`", ""] + _para(p.get("statement", ""))
+
+    def render_result(r):
+        out = [f"#### {arrow(r)} ⇒ {names.get(r['conclusion'], r['conclusion'])} — `{r['id']}`", ""]
+        out += [("Conjecture" if r["status"] != "proved" else "Proved result") + "; " + _cert_line(r, catalog), ""]
+        out += ["Premises:", ""] + ([f"- {label(x)}" for x in r["premises"]] or ["- ⊤ (no premises)"]) + [""]
+        out += [f"Conclusion: {label(r['conclusion'])}", ""]
+        if (r.get("proof") or "").strip():
+            out += ["Proof.", "", r["proof"].strip(), ""]
+        elif r["status"] != "proved":
+            out += ["No proof is recorded. This is a conjecture only.", ""]
+        if (r.get("notes") or "").strip():
+            out += [f"Notes. {r['notes'].strip()}", ""]
+        out += ["Sources:", ""] + _source_lines(r) + [""]
+        out += [f"Record: `{r['_file']}`.", ""]
+        if r["id"] in hand:
+            out += ["<details><summary>Hand-written write-up</summary>", "",
+                    _demote(_relink(hand[r["id"]].strip(), topic_id), 3), "", "</details>", ""]
+        return out
+
+    o += ["## 4. Results", "",
+          "Each result is a Horn clause: the conjunction of its premises entails its conclusion, "
+          "relative to the framework above. Premises are sufficient; minimality is not claimed.", ""]
+    o += ["### 4.1 Proved", ""]
+    for r in proved:
+        o += render_result(r)
+    if conj_r:
+        o += ["### 4.2 Recorded conjectures", "",
+              "These are displayed but never used as evidence in any derivation below.", ""]
+        for r in conj_r:
+            o += render_result(r)
+
+    o += ["## 5. Models", "",
+          "A model witnesses consistency, and so refutes every implication from what it satisfies "
+          "to what it violates. Independence is never recorded directly; the model is the record.", ""]
+    for m in data["models"]:
+        o += [f"### {m['name']} — `{m['id']}`", ""]
+        o += [("Conjectured model" if m["status"] != "proved" else "Model") + "; " + _cert_line(m, catalog), ""]
+        o += ["Satisfies:", ""] + [f"- {label(x)}" for x in m["satisfies"]] + [""]
+        o += ["Violates:", ""] + [f"- {label(x)}" for x in m["violates"]] + [""]
+        unk = an["unknown"].get(m["id"], [])
+        o += ["Unknown in this model: " + (", ".join(label(x) for x in unk) if unk else "nothing; every principle is settled.") , ""]
+        if (m.get("description") or "").strip():
+            o += ["Construction.", "", m["description"].strip(), ""]
+        if m.get("checks"):
+            o += ["Executable checks: " + ", ".join(f"`{c}`" for c in m["checks"]) + ".", ""]
+        if (m.get("notes") or "").strip():
+            o += [f"Notes. {m['notes'].strip()}", ""]
+        o += ["Sources:", ""] + _source_lines(m) + [""]
+        o += [f"Record: `{m['_file']}`.", ""]
+        if m["id"] in hand:
+            o += ["Write-up.", "", _demote(_relink(hand[m["id"]].strip(), topic_id), 3), ""]
+
+    # ---- derived state -------------------------------------------------
+    o += ["## 6. Derived state", "",
+          "Computed from the proved records only, by the closure rules in `README.md`. "
+          "Conjectures take no part. A missing entry means *not recorded*, not *false*.", ""]
+    multi = [c for c in an["classes"] if len(c) > 1]
+    o += ["### 6.1 Interderivable principles", ""]
+    o += ([f"- {' ⇔ '.join(label(x) for x in c)}" for c in multi] if multi
+          else ["No two principles are currently interderivable."]) + [""]
+
+    imp = sorted(k for k, v in pair.items() if v["status"] == "implies")
+    ind = sorted(k for k, v in pair.items() if v["status"] == "independent")
+    o += [f"### 6.2 Settled single-premise implications ({len(imp)})", ""]
+    if imp:
+        o += ["| From | To | Via |", "| --- | --- | --- |"]
+        o += [f"| {names.get(a,a)} | {names.get(b,b)} | {', '.join('`%s`' % v for v in pair[(a,b)]['via']) or 'directly'} |" for a, b in imp]
+    else:
+        o += ["None."]
+    o += [""]
+    o += [f"### 6.3 Refuted single-premise implications ({len(ind)})", "",
+          "Read *A ⇏ B*: assuming A alone does not yield B, as the named model shows.", ""]
+    if ind:
+        o += ["| From | To | Witness model |", "| --- | --- | --- |"]
+        o += [f"| {names.get(a,a)} | {names.get(b,b)} | {', '.join('`%s`' % m for m in pair[(a,b)].get('models', []))} |" for a, b in ind]
+    else:
+        o += ["None."]
+    o += ["", f"### 6.4 Open single-premise pairs ({len(an['open_pairs'])})", "",
+          "Listed in `OPEN-QUESTIONS.md`.", ""]
+
+    packs = _premise_packages(data)
+    if packs:
+        o += ["### 6.5 What the recorded premise packages entail", "",
+              "Every multi-premise package used by a proved result, with its full consequence set.", ""]
+        for P in packs:
+            res = E.package(P)
+            o += [f"#### {' + '.join(names.get(x, x) for x in P)}", ""]
+            o += ["Assumes: " + ", ".join(f"`{x}`" for x in P) + ".", ""]
+            o += ["- Entails: " + (", ".join(label(x) for x in res["entails"]) if res["entails"] else "nothing further") ]
+            o += ["- Refuted (a model satisfies the package and violates these): "
+                  + (", ".join(label(x) for x in res["separated"]) if res["separated"] else "nothing")]
+            o += ["- Open: " + (", ".join(label(x) for x in res["open"]) if res["open"] else "nothing") , ""]
+
+    extras = {k: v for k, v in hand.items() if k not in {x["id"] for x in data["results"] + data["models"]}}
+    if extras:
+        o += ["## 7. Additional write-ups", "",
+              "Hand-written notes not attached to a single record.", ""]
+        for k, v in extras.items():
+            o += [f"### `{k}`", "", _demote(_relink(v.strip(), topic_id), 3), ""]
+
+    o += ["## 8. Where this came from", "",
+          f"Source documents are in `topics/{topic_id}/sources/`. "
+          f"The extraction log, with transcription decisions and deliberately deferred items, "
+          f"is `topics/{topic_id}/extraction.md`. Read it before trusting any single page reference.", ""]
+    return "\n".join(o).rstrip() + "\n"
+
+
+def bundle_open_md(topic_id: str, data: dict, an: dict) -> str:
+    """OPEN-QUESTIONS.md — what is unsettled, and how to settle it."""
+    topic = data["topic"]
+    names = {p["id"]: p["name"] for p in data["principles"]}
+    label = lambda i: f"{names.get(i, i)} (`{i}`)"
+    E = an["engine"]
+    conj = [r for r in data["results"] if r["status"] != "proved"] + [m for m in data["models"] if m["status"] != "proved"]
+
+    o = [f"# Open questions — {topic['title']}", "",
+         "Everything the database does not currently settle. Each item is a place where a new "
+         "result or a new model would be a real contribution.", "",
+         "**\"Open\" means not settled by the records in this bundle.** It does not mean unsolved "
+         "in the literature, and it does not mean hard. Many entries below are routine and simply "
+         "have not been added yet. Check the sources before assuming a question is new.", ""]
+
+    o += ["## 1. Recorded conjectures", ""]
+    if conj:
+        o += ["Stated but unproved. They take no part in any derivation.", ""]
+        for c in conj:
+            if "premises" in c:
+                head = " ∧ ".join(names.get(x, x) for x in c["premises"]) + " ⇒ " + names.get(c["conclusion"], c["conclusion"])
+            else:
+                head = c.get("name", c["id"])
+            o += [f"### {head} — `{c['id']}`", ""]
+            if (c.get("notes") or "").strip():
+                o += [c["notes"].strip(), ""]
+            o += _source_lines(c) + ["", f"Record: `{c['_file']}`.", ""]
+    else:
+        o += ["None recorded.", ""]
+
+    o += ["## 2. Open questions under each recorded package", "",
+          "The most useful place to work: these are open *given* assumptions the sources already make.", ""]
+    packs = []
+    for pre in topic.get("background_presets", []):
+        packs.append((pre["name"], pre["principles"]))
+    for P in _premise_packages(data):
+        nm = " + ".join(names.get(x, x) for x in P)
+        if not any(set(p[1]) == set(P) for p in packs):
+            packs.append((nm, P))
+    for nm, P in packs:
+        res = E.package(P)
+        if not res["open"]:
+            continue
+        o += [f"### {nm}", "", "Assuming " + ", ".join(f"`{x}`" for x in P) + ", these remain open:", ""]
+        o += [f"- {label(x)}" for x in res["open"]] + [""]
+
+    o += ["## 3. Unknown verdicts inside each model", "",
+          "For these principles the model has not been checked either way. Deciding one is a "
+          "self-contained calculation in a construction that is already written down.", ""]
+    for m in data["models"]:
+        unk = an["unknown"].get(m["id"], [])
+        o += [f"### {m['name']} — `{m['id']}`", ""]
+        o += ([f"- {label(x)}" for x in unk] if unk else ["Fully determined; nothing unknown."]) + [""]
+
+    op = sorted(an["open_pairs"])
+    o += [f"## 4. Open single-premise pairs ({len(op)})", "",
+          "*A ⇒ B ?* means no recorded chain of results proves it and no recorded model refutes it. "
+          "Grouped by antecedent. Most are open only because the obvious model has not been added.", ""]
+    by_a = {}
+    for a, b in op:
+        by_a.setdefault(a, []).append(b)
+    for a in sorted(by_a, key=lambda x: names.get(x, x)):
+        o += [f"- **{names.get(a,a)}** (`{a}`) ⇒ " + ", ".join(names.get(b, b) for b in sorted(by_a[a], key=lambda x: names.get(x, x)))]
+    o += [""]
+
+    o += ["## 5. Deliberately deferred", "",
+          f"`topics/{topic_id}/extraction.md` has a section listing claims that were **not** recorded "
+          "because they need a further reading of the sources. Those are marked deferred rather than "
+          "open: the answer is likely in the literature and needs transcribing, not discovering. "
+          "Read that section before starting work.", ""]
+
+    o += ["## 6. How to record an answer", "",
+          "- Proved an implication? Add `topics/%s/results/<id>.yaml` with the full premise list and the proof." % topic_id,
+          "- Refuted one? Add `topics/%s/models/<id>.yaml` listing what you verified in `satisfies` and `violates`." % topic_id,
+          "- Not sure? Add it with `status: conjectured`, an empty proof, and say in `notes` what would settle it.",
+          "- Then run `python3 scripts/pmap.py validate` and `status`. Never hand-edit the derived counts.", "",
+          "`README.md` has the exact record shapes and the sourcing rules. Follow them; an unsourced "
+          "or misattributed record is worse than an absent one.", ""]
+    return "\n".join(o).rstrip() + "\n"
+
+
+def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
+    topic = data["topic"]
+    proved = [r for r in data["results"] if r["status"] == "proved"]
+    cat = topic.get("source_catalog", [])
+    o = [f"# {topic['title']} — working bundle", "",
+         "A self-contained copy of one principle map: the axioms of a subject, the implications "
+         "between them, the countermodels that refute the remaining implications, and the proofs "
+         "for all of it. Unzip anywhere and start working.", "",
+         f"Contains {len(data['principles'])} principles, {len(proved)} proved results, "
+         f"{len(data['results']) - len(proved)} conjectures and {len(data['models'])} models, "
+         f"with the source documents they were extracted from.", "",
+         "## Read in this order", "",
+         "1. **`MAP.md`** — everything, in one file: framework, principle statements, every proof, "
+         "every model construction, and the derived verdicts. Start here.",
+         "2. **`OPEN-QUESTIONS.md`** — what the map does not settle, grouped so each entry is a "
+         "concrete piece of work.",
+         f"3. **`topics/{topic_id}/extraction.md`** — how the records were read out of the sources, "
+         "which transcription decisions were made, and what was deliberately left out.",
+         f"4. **`topics/{topic_id}/sources/`** — the original papers.", "",
+         "`data.json` and `derived.json` hold the same content structured, if you would rather "
+         "compute over it than read it.", "",
+         "## Layout", "", "```",
+         f"MAP.md OPEN-QUESTIONS.md      the map as prose",
+         f"data.json derived.json        records, and every derived verdict",
+         f"topics/{topic_id}/",
+         f"  topic.yaml                  title, source catalog, categories, viewer packages",
+         f"  background.md               the framework in full",
+         f"  extraction.md               source inventory, transcription decisions, deferred items",
+         f"  principles/<id>.yaml        one principle per file",
+         f"  results/<id>.yaml           premises ⇒ conclusion, with its proof",
+         f"  models/<id>.yaml            satisfies [...] / violates [...]",
+         f"  writeups/<id>.md            hand-written write-up, overrides the generated one",
+         f"  checks/                     executable sanity checks for the models",
+         f"  sources/                    original papers",
+         "scripts/pmap.py schema/ viewer/  the tooling, so validate and build work here",
+         "```", "",
+         "## Semantics", "",
+         "Everything is relative to the topic background B (see `MAP.md` §1).", "",
+         "- A **result** is a Horn clause, premises ⇒ conclusion. `cl(S)` is the closure of B ∪ S "
+         "under all proved results.",
+         "- A **model** M records `sat(M)` and `viol(M)` and witnesses that "
+         "`sat(M) ∪ {¬v : v ∈ viol(M)}` is consistent. Derived: `holds(M) = cl(sat(M))`, and "
+         "`fails(M) = {c : cl(sat(M) ∪ {c}) ∩ viol(M) ≠ ∅}`. Everything else is unknown in M.",
+         "- **P ⇒ c** iff `c ∈ cl(P)`. **P ⇏ c** iff some model has `P ⊆ holds(M)` and `c ∈ fails(M)`. "
+         "Otherwise the pair is **open**.",
+         "- Mutually derivable principles collapse to one node.",
+         "- Conjectures are displayed but never used as evidence.",
+         "- `holds(M) ∩ viol(M) ≠ ∅` is a validation error, not a discovery.", "",
+         "**A missing arrow means nothing was recorded.** The map is curated, not exhaustive.", "",
+         "## Adding to it", "",
+         "```yaml", "# topics/%s/results/<id>.yaml   —   file name must equal the id" % topic_id,
+         "id: my-new-result",
+         "premises: [principle-a, principle-b]     # every assumption actually used",
+         "conclusion: principle-c",
+         "status: proved                            # or: conjectured",
+         "certificate:",
+         "  source_id: misc                         # a source_catalog id; misc for original work",
+         "  lean: none",
+         "  produced_by: \"who proved the mathematics\"",
+         "  recorded_by: \"who transcribed it\"       # optional, kept separate",
+         "  checked_by: []                          # only actual checkers",
+         "  date: 'YYYY-MM-DD'",
+         "proof: |",
+         "  The argument, at the level of detail a referee would want.",
+         "sources:",
+         "  - Full reference, with theorem or section and page.",
+         "source_names: [Short label]               # one per source, same order",
+         "notes: \"\"", "```", "",
+         "```yaml", "# topics/%s/models/<id>.yaml" % topic_id,
+         "id: my-new-model", "name: Human-readable name",
+         "satisfies: [principle-a, principle-b]     # only what you actually verified",
+         "violates: [principle-c]                   # the engine derives the rest",
+         "status: proved",
+         "certificate: {source_id: misc, lean: none, produced_by: \"...\", checked_by: [], date: 'YYYY-MM-DD'}",
+         "description: |", "  The construction, and why it has these properties.",
+         "sources: [Full reference or an identifiable original proof]",
+         "source_names: [Short label]", "```", "",
+         "Independences are **only** ever recorded as models. Never as a result.", "",
+         "## Sourcing rules", "",
+         "These are what make the map worth anything. Follow them exactly.", "",
+         "- Every result and model needs a nonempty `sources`. Give the paper with theorem/section "
+         "and page, or an identifiable original proof for new work.",
+         "- `certificate.source_id` names the **direct** source. Declared sources here:",
+         ] + [f"  - `{s['id']}` — {s['name']} ({s['kind']})" for s in cat] + [
+         "- Use `misc` for original proofs, one-off prompts and user suggestions. Citing a paper's "
+         "definitions does **not** make that paper the source of your new proof.",
+         "- `produced_by` credits the mathematics; `recorded_by` credits transcription only.",
+         "- Leave `checked_by: []` unless a named person actually checked it. A human-authored "
+         "source does not mean a human checked this database's translation of it.",
+         "- Never invent an author, a date, a page or a submission label. If you are unsure of a "
+         "reference, say so in `notes` rather than guessing.",
+         "- If you are unsure of the mathematics, record `status: conjectured` with an empty proof "
+         "and write in `notes` what would settle it. That is a useful contribution; a wrong "
+         "`proved` is not.",
+         "- Do not change the mathematical content of an existing published or human-authored "
+         "proof. Add a note, or a new record, instead.",
+         "- File name equals `id`, kebab-case. Never rename an id that other files reference.",
+         "- Keep the framework fixed. A principle needing a different setting belongs to a "
+         "different topic.", "",
+         "## Lean", "",
+         "If `topics/%s/lean/` is present, the topic has a formalisation. The YAML is the" % topic_id,
+         "source of truth for statements: each principle names its Lean definition in `lean_def`,",
+         "and every result and model statement is generated from its premises and conclusion into",
+         "`Statements.lean`. To prove a record, inhabit its generated `Prop`. Never edit the",
+         "generated file, and never hand-set `lean: verified` -- `pmap lean-check` builds the",
+         "library, confirms the proof inhabits the generated statement, and rejects anything",
+         "still depending on `sorryAx`. `lean: stated` means the statement elaborates and the",
+         "proof is missing. See that folder's README for the modelling choices.", "",
+         "## Commands", "", "```sh",
+         "pip install -r requirements.txt",
+         "python3 scripts/pmap.py validate            # schema, references, consistency. Must pass.",
+         "python3 scripts/pmap.py status              # counts, open pairs, redundancies",
+         f"python3 topics/{topic_id}/checks/countermodels.py   # numerical checks of the models",
+         "python3 scripts/pmap.py build --no-pdf      # regenerate build/<topic>/index.html, the map viewer",
+         "python3 scripts/pmap.py selftest            # the derivation engine's own tests",
+         "python3 scripts/pmap.py lean                # regenerate the Lean statements",
+         "python3 scripts/pmap.py lean-check          # build the Lean library and audit lean: claims",
+         "```", "",
+         "A `CONTRADICTION` from `validate` means the data is inconsistent and must be fixed "
+         "before anything else. Rerun `validate` after every batch of edits.", "",
+         "## Sending work back", "",
+         f"The whole of `topics/{topic_id}/` is portable: copy it back over the same folder in the "
+         "main repository, or send the individual new YAML files. Nothing outside that folder "
+         "needs to change.", ""]
+    contrib = TOPICS / topic_id / "contribute.md"
+    if contrib.exists():
+        body = contrib.read_text(encoding="utf-8").strip()
+        body = "\n".join(body.split("\n")[1:]).strip()
+        o += [body, ""]
+    return "\n".join(o).rstrip() + "\n"
+
+
+def bundle_agents_md(topic_id: str, data: dict) -> str:
+    cat = data["topic"].get("source_catalog", [])
+    return "\n".join([
+        "# Instructions for AI agents working in this bundle", "",
+        "Read `MAP.md` before answering anything about this subject. It is the whole database. "
+        "`OPEN-QUESTIONS.md` lists what is unsettled. `README.md` has the semantics and the record "
+        "formats. This file is the short version of the rules.", "",
+        "## Always", "",
+        "- Run `python3 scripts/pmap.py validate` after every batch of edits. It must pass.",
+        "- Give every new result and model a nonempty `sources` with theorem/section and page, and "
+        "set `certificate.source_id` to the direct source: "
+        + ", ".join(f"`{s['id']}`" for s in cat) + ".",
+        "- Record independence as a **model**, never as a result.",
+        "- List in a model's `satisfies` and `violates` only what you actually verified. The engine "
+        "derives the rest and reports what stays unknown.",
+        "- Write the real proof in `proof`, at referee detail. Put anything longer than a paragraph "
+        f"in `topics/{topic_id}/writeups/<id>.md` instead.",
+        "- Prefer `status: conjectured` with an empty proof and a note saying what would settle it, "
+        "over a `proved` you are not certain of.", "",
+        "## Never", "",
+        "- Never invent an author, date, page, DOI or submission label. Unsure means say so in `notes`.",
+        "- Never cite a paper as `source_id` for a proof you produced yourself. That is `misc`.",
+        "- Never put anything in `checked_by` unless a named person actually checked it.",
+        "- Never change the mathematical content of an existing published or human-authored proof. "
+        "Add a note or a new record.",
+        "- Never rename an `id` that other files reference. File name equals id.",
+        "- Never treat a missing arrow as a proof of non-implication. Missing means not recorded.",
+        "- Never use a conjecture as evidence for anything.",
+        "- Never edit `Statements.lean`; it is generated from the records by `pmap lean`.",
+        "- Never set `lean: verified` by hand. Only `pmap lean-check` may conclude that, and only",
+        "for a proof that inhabits the generated statement without `sorryAx`.", "",
+        "## Reading the derived state", "",
+        "`MAP.md` §6 and `derived.json` are computed from the proved records by closure. Do not "
+        "hand-edit them; they regenerate. If a verdict looks wrong, the fix is in the YAML.", "",
+    ]) + "\n"
+
+
+def bundle_derived_json(data: dict, an: dict) -> dict:
+    names = {p["id"]: p["name"] for p in data["principles"]}
+    pairs = []
+    for (a, b), v in sorted(an["pair"].items()):
+        row = {"from": a, "to": b, "status": v["status"]}
+        if v.get("via"):
+            row["via"] = v["via"]
+        if v.get("models"):
+            row["models"] = v["models"]
+        pairs.append(row)
+    packages = []
+    for P in _premise_packages(data):
+        res = an["engine"].package(P)
+        packages.append({"premises": P, **res})
+    for pre in data["topic"].get("background_presets", []):
+        packages.append({"id": pre["id"], "name": pre["name"], "premises": pre["principles"],
+                         **an["engine"].package(pre["principles"])})
+    return {
+        "note": "Derived by closure over proved records only; conjectures excluded. "
+                "status 'open' means not recorded, not false. Regenerate with pmap.py; do not hand-edit.",
+        "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+        "principle_names": names,
+        "classes": an["classes"],
+        "pairs": pairs,
+        "counts": {s: sum(1 for p in pairs if p["status"] == s) for s in ("implies", "independent", "open")},
+        "unknown_in_model": an["unknown"],
+        "packages": packages,
+        "problems": an["problems"],
+        "infos": an["infos"],
+    }
+
+
+def bundle_topic(topic_id: str) -> Path:
+    """Write build/<topic>/<topic>-map.zip — a self-contained working copy."""
+    import shutil, tempfile
+    data = load_topic(topic_id)
+    an = analyse(data)
+    outdir = BUILD / topic_id
+    outdir.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp) / f"{topic_id}-map"
+        (root / "topics").mkdir(parents=True)
+        shutil.copytree(TOPICS / topic_id, root / "topics" / topic_id,
+                        ignore=shutil.ignore_patterns(*IGNORE))
+        (root / "scripts").mkdir()
+        shutil.copy2(Path(__file__).resolve(), root / "scripts" / "pmap.py")
+        shutil.copytree(SCHEMA, root / "schema")
+        (root / "viewer").mkdir()
+        for f in (ROOT / "viewer").glob("*"):
+            if f.is_file():
+                shutil.copy2(f, root / "viewer" / f.name)
+        shutil.copy2(ROOT / "requirements.txt", root / "requirements.txt")
+        (root / "README.md").write_text(bundle_readme_md(topic_id, data, an), encoding="utf-8")
+        (root / "AGENTS.md").write_text(bundle_agents_md(topic_id, data), encoding="utf-8")
+        (root / "CLAUDE.md").write_text(
+            "See [AGENTS.md](AGENTS.md) for the rules, [MAP.md](MAP.md) for the database, "
+            "and [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) for what is unsettled.\n", encoding="utf-8")
+        (root / "MAP.md").write_text(bundle_map_md(topic_id, data, an), encoding="utf-8")
+        (root / "OPEN-QUESTIONS.md").write_text(bundle_open_md(topic_id, data, an), encoding="utf-8")
+        (root / "data.json").write_text(json.dumps(
+            enriched_payload(topic_id, {"json": "data.json", "derived": "derived.json"}),
+            indent=1, ensure_ascii=False), encoding="utf-8")
+        (root / "derived.json").write_text(json.dumps(bundle_derived_json(data, an), indent=1, ensure_ascii=False), encoding="utf-8")
+        (root / "Makefile").write_text(
+            "PY ?= python3\n.PHONY: validate status build checks lean\n"
+            "validate: ; $(PY) scripts/pmap.py validate\n"
+            "status: ; $(PY) scripts/pmap.py status\n"
+            "build: ; $(PY) scripts/pmap.py build --no-pdf\n"
+            f"checks: ; $(PY) topics/{topic_id}/checks/countermodels.py\n"
+            f"lean: ; $(PY) scripts/pmap.py lean-check {topic_id}\n", encoding="utf-8")
+        zip_tree(root, root.name, outdir / f"{topic_id}-map.zip")
+    return outdir / f"{topic_id}-map.zip"
+
+
+# ----------------------------------------------------------------------------
+# Status
+# ----------------------------------------------------------------------------
+
+def status(topic_id: str):
+    data = load_topic(topic_id)
+    an = analyse(data)
+    names = {p["id"]: p["name"] for p in data["principles"]}
+    n = len(data["principles"])
+    print(f"== {data['topic']['title']} ==")
+    print(f"{n} principles, {len(data['results'])} results, {len(data['models'])} models, background = {data['topic'].get('background', [])}")
+    tally = {}
+    for kind, lst in (("result", data["results"]), ("model", data["models"])):
+        for r in lst:
+            key = (kind, r["status"], r["certificate"].get("source_id", "misc"), r["certificate"].get("lean", "none"))
+            tally[key] = tally.get(key, 0) + 1
+    for k in sorted(tally):
+        print(f"  {k[0]:7} {k[1]:11} {k[2]:15} lean={k[3]:9} {tally[k]}")
+    counts = {"implies": 0, "independent": 0, "open": 0}
+    for v in an["pair"].values():
+        counts[v["status"]] += 1
+    print(f"ordered pairs: {counts['implies']} ⇒, {counts['independent']} ⇏, {counts['open']} open (of {n * (n - 1)})")
+    for c in an["classes"]:
+        if len(c) > 1:
+            print("  " + " ⇔ ".join(names[x] for x in c))
+    for m in data["models"]:
+        u = an["unknown"].get(m["id"], [])
+        if u:
+            print(f"model {m['id']}: unknown for {', '.join(names[x] for x in u)}")
+    if an["open_pairs"]:
+        print("open pairs:")
+        for a, b in an["open_pairs"]:
+            print(f"  {names[a]} ⇒ {names[b]} ?")
+    for p in an["problems"]:
+        print(f"CONTRADICTION: {p}")
+    for i in an["infos"]:
+        print(f"note: {i}")
+
+
+# ----------------------------------------------------------------------------
+# Scaffolding
+# ----------------------------------------------------------------------------
+
+def new_topic(topic_id: str):
+    tdir = TOPICS / topic_id
+    if tdir.exists():
+        sys.exit(f"{tdir} already exists")
+    (tdir / "principles").mkdir(parents=True)
+    (tdir / "results").mkdir()
+    (tdir / "models").mkdir()
+    (tdir / "sources").mkdir()
+    (tdir / "topic.yaml").write_text(
+        f"""id: {topic_id}
+title: {topic_id.replace('-', ' ').title()}
+require_sources: true
+description: >
+  One paragraph on what this map covers.
+framework: >
+  State the setting every principle lives in: the objects, the primitive
+  relation(s) or functions, and any standing conventions (e.g. "≽ is a binary
+  relation on Δ(X); ≻ and ~ are its asymmetric and symmetric parts").
+background: []
+notation: ""
+""", encoding="utf-8")
+    (tdir / "background.md").write_text("## Framework\n\n## Notation\n\n## Conventions\n", encoding="utf-8")
+    (tdir / "principles" / ".gitkeep").touch()
+    (tdir / "results" / ".gitkeep").touch()
+    (tdir / "models" / ".gitkeep").touch()
+    (tdir / "sources" / ".gitkeep").touch()
+    print(f"created {tdir.relative_to(ROOT)}; add principles with:  pmap new-principle {topic_id} <id>")
+
+
+def new_principle(topic_id: str, pid: str):
+    path = TOPICS / topic_id / "principles" / f"{pid}.yaml"
+    if path.exists():
+        sys.exit(f"{path} already exists")
+    path.write_text(
+        f"""id: {pid}
+name: {pid.replace('-', ' ').title()}
+statement: >
+  Precise informal statement.
+formal: ""
+aliases: []
+tags: []
+sources: []
+notes: ""
+date: {_dt.date.today().isoformat()}
+lean: null
+""", encoding="utf-8")
+    print(f"created {path.relative_to(ROOT)}")
+
+
+def new_model(topic_id: str, mid: str, source_id: str):
+    path = TOPICS / topic_id / "models" / f"{mid}.yaml"
+    if path.exists():
+        sys.exit(f"{path} already exists")
+    path.parent.mkdir(exist_ok=True)
+    today = _dt.date.today().isoformat()
+    path.write_text(
+        f"""id: {mid}
+name: {mid.replace('-', ' ').title()}
+description: |
+  The construction, then the verification of each listed principle.
+satisfies: []
+violates: []
+status: proved
+certificate:
+  source_id: {source_id}
+  lean: none
+  produced_by: ""
+  checked_by: []
+  date: {today}
+checks: []
+sources: []
+notes: ""
+""", encoding="utf-8")
+    print(f"created {path.relative_to(ROOT)}")
+
+
+def new_result(topic_id: str, rid: str, source_id: str):
+    path = TOPICS / topic_id / "results" / f"{rid}.yaml"
+    if path.exists():
+        sys.exit(f"{path} already exists")
+    today = _dt.date.today().isoformat()
+    path.write_text(
+        f"""id: {rid}
+premises: []
+conclusion: ""
+status: proved
+certificate:
+  source_id: {source_id}
+  lean: none
+  produced_by: ""
+  checked_by: []
+  date: {today}
+proof: |
+  Proof sketch.
+sources: []
+notes: ""
+""", encoding="utf-8")
+    print(f"created {path.relative_to(ROOT)}")
+
+
+# ----------------------------------------------------------------------------
+# Self-test of the engine
+# ----------------------------------------------------------------------------
+
+def selftest():
+    P = lambda i: {"id": i, "name": i}
+    R = lambda i, prem, c: {"id": i, "premises": prem, "conclusion": c, "status": "proved", "certificate": {"provenance": "human", "lean": "none"}}
+    M = lambda i, sat, viol: {"id": i, "satisfies": sat, "violates": viol, "status": "proved", "certificate": {"provenance": "human", "lean": "none"}}
+    data = {
+        "topic": {"id": "t", "title": "t", "framework": "", "background": ["bg"]},
+        "principles": [P(x) for x in "bg a b c d e f".split()],
+        "results": [R("r1", ["a"], "b"), R("r2", ["b"], "a"), R("r3", ["a", "c"], "d"), R("r6", ["e"], "c")],
+        "models": [M("m1", ["a"], ["d"]), M("m2", ["b", "c"], ["e"])],
+    }
+    an = analyse(data)
+    pair, E = an["pair"], an["engine"]
+    assert pair[("a", "b")]["status"] == "implies" and pair[("b", "a")]["status"] == "implies"
+    assert any(set(c) == {"a", "b"} for c in an["classes"])
+    assert pair[("a", "d")]["status"] == "independent"
+    assert pair[("b", "d")]["status"] == "independent", "b ⇔ a and m1 separates a from d"
+    assert pair[("a", "c")]["status"] == "independent", "c would give d in m1"
+    assert pair[("b", "e")]["status"] == "independent"
+    assert pair[("d", "a")]["status"] == "open"
+    assert E.package(["a", "c"]) == {"entails": ["bg", "b", "d"], "separated": ["e"], "open": ["f"]}, E.package(["a", "c"])
+    assert an["unknown"]["m1"] == ["f"] and an["unknown"]["m2"] == ["f"], an["unknown"]
+    assert not an["problems"]
+    data["models"].append(M("m3", ["a", "c"], ["d"]))
+    assert analyse(data)["problems"], "m3 is inconsistent with r3"
+    negated = [P('a'), dict(P('not-a'), negates='a'), P('b')]
+    assert not conflicting_pairs({'a'}, negated)
+    assert conflicting_pairs({'a', 'not-a'}, negated) == [('a', 'not-a')]
+    trial = {'topic': {'background': ['b', 'not-a']}, 'principles': negated,
+             'results': [R('ba', ['b'], 'a')], 'models': []}
+    assert any('background is inconsistent' in p for p in analyse(trial)['problems'])
+    trial['results'][0]['status'] = 'conjectured'
+    assert not analyse(trial)['problems'], 'A conjecture or lack of models does not prove inconsistency'
+    print("selftest OK")
+
+
+# ----------------------------------------------------------------------------
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog="pmap", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    for name in ("validate", "build", "status", "bundle", "lean", "lean-check"):
+        s = sub.add_parser(name)
+        s.add_argument("topics", nargs="*")
+        if name == "build":
+            s.add_argument("--out", help="output HTML path (single topic only)")
+            s.add_argument("--fragment", action="store_true", help="omit the <html>/<head>/<body> wrapper")
+            s.add_argument("--no-pdf", action="store_true", help="skip PDF write-ups")
+    s = sub.add_parser("new-topic"); s.add_argument("topic")
+    s = sub.add_parser("new-principle"); s.add_argument("topic"); s.add_argument("id")
+    for name in ("new-result", "new-model"):
+        s = sub.add_parser(name); s.add_argument("topic"); s.add_argument("id")
+        s.add_argument("--source", default="misc", help="Direct source id from topic.source_catalog (default: misc)")
+    sub.add_parser("selftest")
+    a = ap.parse_args(argv)
+
+    if a.cmd == "selftest":
+        return selftest()
+    if a.cmd == "new-topic":
+        return new_topic(a.topic)
+    if a.cmd == "new-principle":
+        return new_principle(a.topic, a.id)
+    if a.cmd == "new-result":
+        return new_result(a.topic, a.id, a.source)
+    if a.cmd == "new-model":
+        return new_model(a.topic, a.id, a.source)
+
+    topics = a.topics or list_topics()
+    ok = True
+    for t in topics:
+        if a.cmd == "validate":
+            ok &= validate_topic(t)
+        elif a.cmd == "status":
+            status(t)
+        elif a.cmd == "lean":
+            path = generate_lean_statements(t)
+            print(f"wrote {path.relative_to(ROOT)}" if path else f"{t}: no Lean library configured")
+        elif a.cmd == "lean-check":
+            ok &= lean_check(t)
+        elif a.cmd == "bundle":
+            z = bundle_topic(t)
+            print(f"wrote {z.relative_to(ROOT)}")
+        elif a.cmd == "build":
+            out = build_topic(t, Path(a.out) if getattr(a, "out", None) else None, fragment=getattr(a, "fragment", False), pdf=not getattr(a, "no_pdf", False))
+            print(f"built {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
+    if not ok:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

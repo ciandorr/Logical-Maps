@@ -1,0 +1,19 @@
+id: independence
+name: Mixture Independence
+statement: For all X,Y,Z and 0<p<1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection
+  construction described in the background.
+formal: X ≽ Y ⇔ M_p(X,Z) ≽ M_p(Y,Z)
+tags:
+- mixture
+sources:
+- Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2,
+  p. 679
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 23
+notes: Mixture identities are identities in law; without Stochastic Equivalence they cannot be substituted
+  as preference identities. Bridges to Sure-Thing explicitly retain Stochastic Equivalence.
+date: '2026-09-08'
+category: basic-decision-theory
+source_names:
+- Decision Theory Unbound
+- Symmetries of Value
+lean_def: UnboundedUtility.MixtureIndependence

@@ -1,0 +1,21 @@
+id: simple-eu
+name: Simple Expected Utility
+statement: 'The normalized real utility chart u is defined on every outcome, is measurable, and ranks
+  every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)].
+  Surjectivity of u is not included here.'
+formal: X,Y simple ⇒ (X ≽ Y ⇔ E[u(X)] ≥ E[u(Y)])
+tags:
+- expectation
+- finite
+sources:
+- Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2,
+  p. 680
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 23
+notes: The papers sometimes bundle a bijective representation with Simple EUT. Here its surjectivity is
+  split out as Rich Outcomes. This principle does entail Archimedean Outcomes.
+date: '2026-09-08'
+category: basic-decision-theory
+source_names:
+- Decision Theory Unbound
+- Symmetries of Value
+lean_def: UnboundedUtility.SimpleEU

@@ -1,0 +1,5135 @@
+{
+ "topic": {
+  "id": "unbounded-utility",
+  "require_sources": true,
+  "source_catalog": [
+   {
+    "id": "decision-theory-unbound",
+    "name": "Decision Theory Unbound",
+    "kind": "published-paper"
+   },
+   {
+    "id": "symmetries-of-value",
+    "name": "Symmetries of Value",
+    "kind": "published-paper"
+   },
+   {
+    "id": "misc",
+    "name": "Misc.",
+    "kind": "misc"
+   }
+  ],
+  "title": "Unbounded utility: random variables",
+  "description": "First source-based extraction from Goodsell (2024, 2026). Preordering is standing; stochastic equivalence, outcome richness, and outcome Archimedeanness are explicit principles.",
+  "framework": "Gambles are measurable outcome-valued random variables on an atomless standard probability space. All such variables are available (Prospect Richness is standing). ≽ is reflexive and transitive, not assumed total or law-invariant. Outcomes are linearly ordered, with distinct reference outcomes 0 and 1, and sure-indifferent outcomes identified. A possibly partial real utility chart is defined by binary certainty comparisons; see background.md. Rich Outcomes supplies all real levels; Archimedean Outcomes rules out outcomes beyond the finite chart. M_p(X,Y) is randomized selection, never the pointwise sum pX+(1-p)Y.",
+  "background": [],
+  "background_presets": [
+   {
+    "id": "du",
+    "name": "DU",
+    "category": "basic-decision-theory",
+    "default": true,
+    "principles": [
+     "rich-outcomes",
+     "totality",
+     "stochastic-equivalence",
+     "simple-eu",
+     "stochastic-dominance",
+     "independence"
+    ]
+   }
+  ],
+  "notation": "X ≽ Y; X ≻ Y iff X ≽ Y and not Y ≽ X; X ~ Y iff both. L(X) is the law, X|E is X on E and sure 0 elsewhere. Numerical expressions use the normalized utility chart.",
+  "principle_categories": [
+   {
+    "id": "basic-decision-theory",
+    "name": "Basic decision theory"
+   },
+   {
+    "id": "invariance-principles",
+    "name": "Invariance principles"
+   },
+   {
+    "id": "extensions-of-eut",
+    "name": "Extensions of EUT"
+   },
+   {
+    "id": "prospect-evaluations",
+    "name": "Prospect evaluations"
+   }
+  ],
+  "lean_lib": "UnboundedUtility"
+ },
+ "principles": [
+  {
+   "id": "alternating-st-petersburg-value",
+   "name": "Alternating St Petersburg = −1/2",
+   "statement": "Every X with P(u(X)=(−2)^n)=2^(−n), n≥1, is indifferent to sure utility −1/2.",
+   "formal": "",
+   "tags": [
+    "evaluation"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 9, p. 30"
+   ],
+   "notes": "A comparison with a sure outcome, not an assertion that the ordinary expected utility exists.",
+   "date": "2026-09-08",
+   "category": "prospect-evaluations",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/alternating-st-petersburg-value.yaml"
+  },
+  {
+   "id": "archimedean-gambles",
+   "name": "Archimedean Gambles",
+   "statement": "For any gambles X ≻ Y ≻ Z, there is p ∈ (0,1) with Y ~ M_p(X,Z). Unlike Archimedean Outcomes, X,Y,Z may themselves be unbounded gambles.",
+   "formal": "",
+   "tags": [
+    "mixture",
+    "continuity"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 22, footnote 3"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/archimedean-gambles.yaml"
+  },
+  {
+   "id": "archimedean-outcomes",
+   "name": "Archimedean Outcomes",
+   "statement": "For any three sure outcomes a ≻ b ≻ c, some nontrivial mixture of the outer two is equally good as the intermediate one: b ~ M_p(a,c) for some p ∈ (0,1). Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.",
+   "formal": "a ≻ b ≻ c ⇒ ∃p∈(0,1): b ~ M_p(a,c)",
+   "tags": [
+    "outcomes"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 22, footnote 3",
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 678"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Symmetries of Value",
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.ArchimedeanOutcomes",
+   "file": "topics/unbounded-utility/principles/archimedean-outcomes.yaml"
+  },
+  {
+   "id": "arroyo-value",
+   "name": "Arroyo = ln 2",
+   "statement": "Every X with P(u(X)=(−1)^(n+1)(n+1))=1/[n(n+1)], n≥1, is indifferent to sure utility ln 2.",
+   "formal": "",
+   "tags": [
+    "evaluation"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 8, pp. 29–30"
+   ],
+   "notes": "A comparison with a sure outcome, not an assertion that the ordinary expected utility exists.",
+   "date": "2026-09-08",
+   "category": "prospect-evaluations",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/arroyo-value.yaml"
+  },
+  {
+   "id": "countable-sure-thing",
+   "name": "Countable Sure-Thing",
+   "statement": "For every countable measurable partition (E_n) into events of positive probability, if X|E_n ≽ Y|E_n for every n, then X ≽ Y. If one conditional comparison is strict, X ≻ Y.",
+   "formal": "",
+   "tags": [
+    "conditioning",
+    "countable"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.2, p. 674"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/principles/countable-sure-thing.yaml"
+  },
+  {
+   "id": "expected-utility",
+   "name": "Expected Utility",
+   "statement": "The normalized chart u is defined on all outcomes and is measurable. Whenever u(X),u(Y) are integrable, X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Expectations here are finite Lebesgue expectations; this says nothing about two +∞ expectations or conditionally convergent sums.",
+   "formal": "",
+   "tags": [
+    "expectation"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §4.1, p. 685",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 23"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "extensions-of-eut",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "lean_def": "UnboundedUtility.ExpectedUtility",
+   "file": "topics/unbounded-utility/principles/expected-utility.yaml"
+  },
+  {
+   "id": "failure-archimedean-gambles",
+   "name": "Failure of Archimedean Gambles",
+   "negates": "archimedean-gambles",
+   "statement": "There exist X ≻ Y ≻ Z such that no p ∈ (0,1) satisfies Y ~ M_p(X,Z).",
+   "formal": "",
+   "tags": [
+    "incompatibility"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 22"
+   ],
+   "notes": "Logical negation of archimedean-gambles; the negates link enables inconsistency detection.",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/failure-archimedean-gambles.yaml"
+  },
+  {
+   "id": "failure-countable-sure-thing",
+   "name": "Failure of Countable Sure-Thing",
+   "negates": "countable-sure-thing",
+   "statement": "Countable Sure-Thing is false: there are X,Y and a countable positive-probability partition satisfying its conditional premises but failing its corresponding weak or strict conclusion.",
+   "formal": "",
+   "tags": [
+    "incompatibility"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §§2.2–2.3, pp. 674–676"
+   ],
+   "notes": "This node is the logical negation of countable-sure-thing. The negates link enables inconsistency detection; see extraction.md.",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/principles/failure-countable-sure-thing.yaml"
+  },
+  {
+   "id": "folded-expectation",
+   "name": "Folded Expectation",
+   "statement": "Put h_X(t)=P(u(X)>t)−P(u(X)<−t) for t≥0. If ∫₀∞|h_X(t)|dt and ∫₀∞|h_Y(t)|dt are finite, compare X,Y exactly by F(X)=∫₀∞h_X(t)dt and F(Y). Boundary atoms do not change these integrals.",
+   "formal": "",
+   "tags": [
+    "expectation"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, pp. 27–29"
+   ],
+   "notes": "Absolute Lebesgue integrability of the combined tail difference is essential. Mere convergence of an improper integral is a different proposal. Symmetric laws have F=0, however heavy their tails.",
+   "date": "2026-09-08",
+   "category": "extensions-of-eut",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/folded-expectation.yaml"
+  },
+  {
+   "id": "independence",
+   "name": "Mixture Independence",
+   "statement": "For all X,Y,Z and 0<p<1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.",
+   "formal": "X ≽ Y ⇔ M_p(X,Z) ≽ M_p(Y,Z)",
+   "tags": [
+    "mixture"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 679",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 23"
+   ],
+   "notes": "Mixture identities are identities in law; without Stochastic Equivalence they cannot be substituted as preference identities. Bridges to Sure-Thing explicitly retain Stochastic Equivalence.",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "lean_def": "UnboundedUtility.MixtureIndependence",
+   "file": "topics/unbounded-utility/principles/independence.yaml"
+  },
+  {
+   "id": "l1-continuity",
+   "name": "L¹ Continuity (random variables)",
+   "statement": "On variables with real utility levels, if E|u(X_n)−u(X)| → 0 and X_n ≽ Y for every n, then X ≽ Y. Only the upper-section clause is imposed, matching the paper. Distance can be infinite between other pairs.",
+   "formal": "E|u(X_n)−u(X)|→0 and ∀n X_n ≽ Y ⇒ X ≽ Y",
+   "tags": [
+    "continuity"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 23"
+   ],
+   "notes": "Uses the actual coupling of random variables, so does not build in law invariance. With Stochastic Equivalence and the standing availability of all variables this is equivalent to the paper’s extended Wasserstein-1 (infimum-over-couplings) formulation; see writeups/l1-translation.md.",
+   "date": "2026-09-08",
+   "category": "extensions-of-eut",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/l1-continuity.yaml"
+  },
+  {
+   "id": "negative-affine-anti-invariance",
+   "name": "Negative Affine Anti-Invariance",
+   "statement": "For all real a>0 and b, X ≽ Y iff −aY+b ≽ −aX+b.",
+   "formal": "",
+   "tags": [
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §4.2, pp. 686–688",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24"
+   ],
+   "notes": "Arithmetic uses the utility chart, on finite-level variables with the required transformed outcomes available. The source’s full ℝ setting is supplied by Rich Outcomes and Simple EU in theorem packages.",
+   "date": "2026-09-08",
+   "category": "invariance-principles",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/negative-affine-anti-invariance.yaml"
+  },
+  {
+   "id": "negative-self-similarity",
+   "name": "Uniqueness of Negative Self-Similarity",
+   "statement": "Fix 0<p<1, a>0, b∈ℝ and Z. If X ~ M_p(−aX+b,Z) and Y ~ M_p(−aY+b,Z), then X ~ Y. This records the uniqueness-in-value content of Theorem 10.",
+   "formal": "",
+   "tags": [
+    "mixture",
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 10, pp. 30–31"
+   ],
+   "notes": "The paper also supplies a geometric-mixture solution. Its expanded formula has an apparent sign/power typo; the extraction records the unambiguous uniqueness statement.",
+   "date": "2026-09-08",
+   "category": "invariance-principles",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/negative-self-similarity.yaml"
+  },
+  {
+   "id": "pasadena-value",
+   "name": "Pasadena = ln 2",
+   "statement": "Every X with P(u(X)=−(−2)^n/n)=2^(−n), n≥1, is indifferent to sure utility ln 2.",
+   "formal": "",
+   "tags": [
+    "evaluation"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 11, pp. 32–33"
+   ],
+   "notes": "A comparison with a sure outcome, not an assertion that the ordinary expected utility exists.",
+   "date": "2026-09-08",
+   "category": "prospect-evaluations",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/pasadena-value.yaml"
+  },
+  {
+   "id": "positive-affine-invariance",
+   "name": "Positive Affine Invariance",
+   "statement": "For all real a>0 and b, X ≽ Y iff aX+b ≽ aY+b.",
+   "formal": "",
+   "tags": [
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §4.2, pp. 686–688",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24"
+   ],
+   "notes": "Arithmetic uses the utility chart, on finite-level variables with the required transformed outcomes available. The source’s full ℝ setting is supplied by Rich Outcomes and Simple EU in theorem packages.",
+   "date": "2026-09-08",
+   "category": "invariance-principles",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/positive-affine-invariance.yaml"
+  },
+  {
+   "id": "reflection-anti-invariance",
+   "name": "Reflection Anti-Invariance",
+   "statement": "X ≽ Y iff −Y ≽ −X, using the one fixed normalized origin 0.",
+   "formal": "",
+   "tags": [
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §4.2, pp. 686–688",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24"
+   ],
+   "notes": "Arithmetic changes outcomes via their utility levels; it is not a relabeling of the utility function. Applies to finite-level variables when the indicated outcome transformation is available. Full-group implications explicitly assume Rich Outcomes. Reflection reverses the comparison; the displayed same-direction sign on p. 24 of Symmetries is a source typo, as its other definitions and proofs confirm.",
+   "date": "2026-09-08",
+   "category": "invariance-principles",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/reflection-anti-invariance.yaml"
+  },
+  {
+   "id": "relative-expectation",
+   "name": "Relative Expectation",
+   "statement": "For real-utility variables X,Y on the same probability space, if E|u(X)−u(Y)|<∞, then X ≽ Y iff E[u(X)−u(Y)] ≥ 0. Their individual expectations may both be undefined.",
+   "formal": "",
+   "tags": [
+    "expectation",
+    "relative"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, p. 26"
+   ],
+   "notes": "This is a same-space random-variable principle. Stochastic Equivalence is retained separately when importing the paper’s arbitrary-coupling formulation about laws.",
+   "date": "2026-09-08",
+   "category": "extensions-of-eut",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/relative-expectation.yaml"
+  },
+  {
+   "id": "restricted-stochastic-equivalence",
+   "name": "Restricted Stochastic Equivalence",
+   "statement": "If simple gambles X,Y have the same law, then X ~ Y.",
+   "formal": "",
+   "tags": [
+    "distribution",
+    "finite"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.3, p. 675"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.RestrictedStochasticEquivalence",
+   "file": "topics/unbounded-utility/principles/restricted-stochastic-equivalence.yaml"
+  },
+  {
+   "id": "restricted-totality",
+   "name": "Restricted Totality",
+   "statement": "Every two simple (finite-valued) gambles are comparable. Outcome comparability is already standing in this topic.",
+   "formal": "",
+   "tags": [
+    "ordering",
+    "finite"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.3, p. 675"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.RestrictedTotality",
+   "file": "topics/unbounded-utility/principles/restricted-totality.yaml"
+  },
+  {
+   "id": "rich-outcomes",
+   "name": "Rich Outcomes",
+   "statement": "Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.",
+   "formal": "∀r∈ℝ ∃o∈O_fin: u(o)=r",
+   "tags": [
+    "outcomes"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.2, p. 673 (called Unbounded Utility)",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, pp. 22–23"
+   ],
+   "notes": "Stronger than merely having no upper bound. Kept separate from Archimedean Outcomes at the user’s request. No Rich Outcomes ⇒ Archimedean Outcomes edge is asserted.",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "lean_def": "UnboundedUtility.RichOutcomes",
+   "file": "topics/unbounded-utility/principles/rich-outcomes.yaml"
+  },
+  {
+   "id": "scale-invariance",
+   "name": "Scale Invariance",
+   "statement": "For every real a>0, X ≽ Y iff aX ≽ aY.",
+   "formal": "",
+   "tags": [
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §4.2, pp. 686–688",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24"
+   ],
+   "notes": "Arithmetic uses the utility chart, on finite-level variables with the required transformed outcomes available. The source’s full ℝ setting is supplied by Rich Outcomes and Simple EU in theorem packages.",
+   "date": "2026-09-08",
+   "category": "invariance-principles",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/scale-invariance.yaml"
+  },
+  {
+   "id": "shift-invariance",
+   "name": "Shift Invariance",
+   "statement": "For every real b, X ≽ Y iff X+b ≽ Y+b.",
+   "formal": "",
+   "tags": [
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §4.2, pp. 686–688",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24"
+   ],
+   "notes": "Arithmetic uses the utility chart, on finite-level variables with the required transformed outcomes available. The source’s full ℝ setting is supplied by Rich Outcomes and Simple EU in theorem packages.",
+   "date": "2026-09-08",
+   "category": "invariance-principles",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/shift-invariance.yaml"
+  },
+  {
+   "id": "shift-transfer",
+   "name": "Transfer of a Shift Across a Mixture",
+   "statement": "For all real b and 0<p<1, M_p(X+b/p,Y) ~ M_p(X,Y+b/(1−p)). Variables and transformed outcomes are in the real utility chart.",
+   "formal": "",
+   "tags": [
+    "mixture",
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 3, pp. 25–26"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "invariance-principles",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/shift-transfer.yaml"
+  },
+  {
+   "id": "simple-eu",
+   "name": "Simple Expected Utility",
+   "statement": "The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Surjectivity of u is not included here.",
+   "formal": "X,Y simple ⇒ (X ≽ Y ⇔ E[u(X)] ≥ E[u(Y)])",
+   "tags": [
+    "expectation",
+    "finite"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 680",
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 23"
+   ],
+   "notes": "The papers sometimes bundle a bijective representation with Simple EUT. Here its surjectivity is split out as Rich Outcomes. This principle does entail Archimedean Outcomes.",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound",
+    "Symmetries of Value"
+   ],
+   "lean_def": "UnboundedUtility.SimpleEU",
+   "file": "topics/unbounded-utility/principles/simple-eu.yaml"
+  },
+  {
+   "id": "simple-relative-expectation",
+   "name": "Simple Relative Expectation",
+   "statement": "For real-utility variables X,Y on the same probability space, if u(X)−u(Y) takes finitely many values, X ≽ Y iff E[u(X)−u(Y)] ≥ 0. X and Y themselves need not be simple or integrable.",
+   "formal": "",
+   "tags": [
+    "expectation",
+    "relative",
+    "finite"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, p. 26"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "extensions-of-eut",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/simple-relative-expectation.yaml"
+  },
+  {
+   "id": "statewise-dominance",
+   "name": "Statewise Dominance",
+   "statement": "If X ≥ Y almost surely in the sure-outcome order, then X ≽ Y; if also P(X>Y)>0, then X ≻ Y.",
+   "formal": "",
+   "tags": [
+    "dominance"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, pp. 678–679"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.StatewiseDominance",
+   "file": "topics/unbounded-utility/principles/statewise-dominance.yaml"
+  },
+  {
+   "id": "stochastic-dominance",
+   "name": "Stochastic Dominance",
+   "statement": "If P(X>o) ≥ P(Y>o) for every outcome threshold o, then X ≽ Y; if one threshold inequality is strict, X ≻ Y. Thresholds use the sure-outcome order.",
+   "formal": "",
+   "tags": [
+    "dominance",
+    "distribution"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 678"
+   ],
+   "notes": "Includes the weak clause, as in the random-variable statement of the 2024 paper. The 2026 distribution formulation writes only the strict clause because equality of laws has already been identified there.",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.StochasticDominance",
+   "file": "topics/unbounded-utility/principles/stochastic-dominance.yaml"
+  },
+  {
+   "id": "stochastic-equivalence",
+   "name": "Stochastic Equivalence",
+   "statement": "If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.",
+   "formal": "L(X)=L(Y) ⇒ X ~ Y",
+   "tags": [
+    "distribution"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.2, p. 674"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.StochasticEquivalence",
+   "file": "topics/unbounded-utility/principles/stochastic-equivalence.yaml"
+  },
+  {
+   "id": "sure-thing",
+   "name": "Sure-Thing",
+   "statement": "For an event E with 0<P(E)<1, if X|E ~ Y|E, then X ≽ Y iff X|Eᶜ ≽ Y|Eᶜ. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.",
+   "formal": "",
+   "tags": [
+    "conditioning"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.2, p. 673"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.SureThing",
+   "file": "topics/unbounded-utility/principles/sure-thing.yaml"
+  },
+  {
+   "id": "symmetric-neutrality",
+   "name": "Symmetric Gambles Are Neutral",
+   "statement": "If u(X) and −u(X) have the same law, then X ~ 0.",
+   "formal": "",
+   "tags": [
+    "evaluation",
+    "symmetry"
+   ],
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, p. 27"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "prospect-evaluations",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/principles/symmetric-neutrality.yaml"
+  },
+  {
+   "id": "totality",
+   "name": "Totality",
+   "statement": "For all gambles X,Y, either X ≽ Y or Y ≽ X.",
+   "formal": "",
+   "tags": [
+    "ordering"
+   ],
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.2, p. 673"
+   ],
+   "notes": "",
+   "date": "2026-09-08",
+   "category": "basic-decision-theory",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "lean_def": "UnboundedUtility.Totality",
+   "file": "topics/unbounded-utility/principles/totality.yaml"
+  }
+ ],
+ "results": [
+  {
+   "id": "archimedean-gambles-restricts",
+   "premises": [
+    "archimedean-gambles"
+   ],
+   "conclusion": "archimedean-outcomes",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Sure outcomes are particular gambles. Restrict the triple of quantified gambles to constants.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, p. 22, footnote 3",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/archimedean-gambles-restricts.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/archimedean-gambles-restricts.yaml",
+   "files": {
+    "md": "writeups/archimedean-gambles-restricts.md",
+    "handwritten": false,
+    "html": "writeups/archimedean-gambles-restricts.html"
+   }
+  },
+  {
+   "id": "countable-sure-thing-outcomes-to-gambles",
+   "premises": [
+    "countable-sure-thing",
+    "archimedean-outcomes"
+   ],
+   "conclusion": "archimedean-gambles",
+   "status": "conjectured",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "User suggestion, 2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08"
+   },
+   "proof": "",
+   "sources": [
+    "User suggestion in this project's conversation, 2026-09-08; proposed implication, not a completed proof.",
+    "Possible related reference, not verified as establishing this exact arrow: Jeffrey Sanford Russell and Yoaav Isaacs, Infinite Prospects, Philosophy and Phenomenological Research 103 (2021), 178–198, DOI 10.1111/phpr.12704. Author-hosted manuscript, §§4–5 and Appendix A, especially pp. 15, 22, 25: https://www.yoaavisaacs.com/uploads/6/9/2/0/69204575/infinite-prospects-final.pdf"
+   ],
+   "notes": "Record the user's two-premise proposal as stated, relative to this topic's standing framework. The related Russell–Isaacs theorem uses Countable Independence, complete preferences, and countably supported lotteries; its passage from acts to lotteries assumes law invariance. A proof in the present random-variable framework, or identification of any additional necessary premises, is still required. Neither Totality nor Stochastic Equivalence should silently be treated as background. Excluded from proved deductions until verified.\n",
+   "source_names": [
+    "User suggestion 8 Sep",
+    "Infinite Prospects (candidate source)"
+   ],
+   "file": "topics/unbounded-utility/results/countable-sure-thing-outcomes-to-gambles.yaml",
+   "files": {
+    "md": "writeups/countable-sure-thing-outcomes-to-gambles.md",
+    "handwritten": false,
+    "html": "writeups/countable-sure-thing-outcomes-to-gambles.html"
+   }
+  },
+  {
+   "id": "countable-sure-thing-simple-to-full-eu",
+   "premises": [
+    "countable-sure-thing",
+    "simple-eu"
+   ],
+   "conclusion": "expected-utility",
+   "status": "conjectured",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "User suggestion, 2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08"
+   },
+   "proof": "",
+   "sources": [
+    "User suggestion in this project's conversation, 2026-09-08; proposed implication, not a completed proof.",
+    "Related motivation rather than a verified theorem with these exact premises: Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473, §4.1, pp. 685–686."
+   ],
+   "notes": "Candidate extension from finite-valued gambles to all integrable utility random variables. Verification must cover the full measurable domain, including variables with non-atomic distributions, and both directions of the expected-utility comparison. Do not silently add Rich Outcomes, Totality, Stochastic Equivalence, or Sure-Thing as premises. Rich Outcomes is optional here; the existing unbounded-utility inconsistency argument is not by itself a proof of this two-premise implication. Excluded from proved deductions until verified.\n",
+   "source_names": [
+    "User suggestion 8 Sep",
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/countable-sure-thing-simple-to-full-eu.yaml",
+   "files": {
+    "md": "writeups/countable-sure-thing-simple-to-full-eu.md",
+    "handwritten": false,
+    "html": "writeups/countable-sure-thing-simple-to-full-eu.html"
+   }
+  },
+  {
+   "id": "dominance-implies-equivalence",
+   "premises": [
+    "stochastic-dominance"
+   ],
+   "conclusion": "stochastic-equivalence",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Equal laws give equal upper-tail probabilities at every outcome threshold. Apply the weak dominance clause in both directions.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 678"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/dominance-implies-equivalence.yaml",
+   "files": {
+    "md": "writeups/dominance-implies-equivalence.md",
+    "handwritten": false,
+    "html": "writeups/dominance-implies-equivalence.html"
+   }
+  },
+  {
+   "id": "dominance-implies-statewise",
+   "premises": [
+    "archimedean-outcomes",
+    "stochastic-dominance"
+   ],
+   "conclusion": "statewise-dominance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Use the real outcome chart supplied by Archimedean Outcomes. If X≥Y almost surely, {Y>t}⊆{X>t} modulo null events. If P(X>Y)>0, the countable family of rational cuts contains a cut with P(Y≤t<X)>0; approximate by a realized outcome threshold if necessary. The strict tail inequality then gives strict preference.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, pp. 678–679 and footnote 19"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/dominance-implies-statewise.yaml",
+   "files": {
+    "md": "writeups/dominance-implies-statewise.md",
+    "handwritten": false,
+    "html": "writeups/dominance-implies-statewise.html"
+   }
+  },
+  {
+   "id": "dtu-l1-implies-eu",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "l1-continuity"
+   ],
+   "conclusion": "expected-utility",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Source-stated implication, §3, p. 23: adding L¹ Continuity to DTU yields Expected Utility. Stochastic Equivalence makes the quotient ordering on laws well-defined; the remaining premises give exactly the source’s DTU, with the surjectivity part of its Simple EU supplied separately by Rich Outcomes. The L¹ translation write-up establishes that the random-variable continuity axiom implies the source’s metric continuity. Apply the stated theorem and pull its expected-utility comparison back to X,Y. The source does not supply an expanded proof of the underlying implication; this is a theorem application and translation, not a new proof of that theorem.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 23"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/dtu-l1-implies-eu.yaml",
+   "files": {
+    "md": "writeups/dtu-l1-implies-eu.md",
+    "handwritten": false,
+    "html": "writeups/dtu-l1-implies-eu.html"
+   }
+  },
+  {
+   "id": "dtu-refutes-archimedean-gambles",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence"
+   ],
+   "conclusion": "failure-archimedean-gambles",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Let S have P(u(S)=2^n)=2^(−n). For any real c choose N with N>c. The simple truncation min(S,2^N) has expectation N+1 and is stochastically dominated by S. Thus S≻c. In particular S≻1≻0. Every M_p(S,0), p>0, is also better than every sure outcome: its simple truncations have arbitrarily large finite expectations. Hence none is indifferent to 1. This violates Archimedean Gambles while preserving Archimedean Outcomes.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 22"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/dtu-refutes-archimedean-gambles.yaml",
+   "files": {
+    "md": "writeups/dtu-refutes-archimedean-gambles.md",
+    "handwritten": false,
+    "html": "writeups/dtu-refutes-archimedean-gambles.html"
+   }
+  },
+  {
+   "id": "equivalence-and-statewise-imply-dominance",
+   "premises": [
+    "rich-outcomes",
+    "archimedean-outcomes",
+    "stochastic-equivalence",
+    "statewise-dominance"
+   ],
+   "conclusion": "stochastic-dominance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "On the full real chart, first-order dominance permits quantile realizations X′,Y′ using the same uniform random variable with X′≥Y′ almost surely. Distinct laws give P(X′>Y′)>0. Statewise Dominance compares these realizations, and Stochastic Equivalence plus transitivity transfers that comparison to X,Y. All realizations exist by standing Prospect Richness.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, footnote 19 (RV/quantile translation)"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/equivalence-and-statewise-imply-dominance.yaml",
+   "files": {
+    "md": "writeups/equivalence-and-statewise-imply-dominance.md",
+    "handwritten": false,
+    "html": "writeups/equivalence-and-statewise-imply-dominance.html"
+   }
+  },
+  {
+   "id": "expected-utility-implies-simple",
+   "premises": [
+    "expected-utility"
+   ],
+   "conclusion": "simple-eu",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "stated",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "All simple variables have finite real expected utility. Restrict Expected Utility to them.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §4.1, p. 685",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/expected-utility-implies-simple.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/expected-utility-implies-simple.yaml",
+   "files": {
+    "md": "writeups/expected-utility-implies-simple.md",
+    "handwritten": false,
+    "html": "writeups/expected-utility-implies-simple.html"
+   }
+  },
+  {
+   "id": "folded-implies-eu",
+   "premises": [
+    "archimedean-outcomes",
+    "folded-expectation"
+   ],
+   "conclusion": "expected-utility",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "For an integrable real utility variable, the integral of the absolute folded tail difference is bounded by E|u(X)|, and the tail-integral formula gives F(X)=E[u(X)]. Archimedean Outcomes makes the chart total. Restrict the Folded Expectation comparison to integrable X,Y.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, p. 27",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/folded-implies-eu.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/folded-implies-eu.yaml",
+   "files": {
+    "md": "writeups/folded-implies-eu.md",
+    "handwritten": false,
+    "html": "writeups/folded-implies-eu.html"
+   }
+  },
+  {
+   "id": "folded-implies-symmetric-neutrality",
+   "premises": [
+    "rich-outcomes",
+    "folded-expectation"
+   ],
+   "conclusion": "symmetric-neutrality",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "For a symmetric real law, h_X(t)=0 almost everywhere, so F(X)=0. The zero constant also has folded value zero; apply Folded Expectation.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, pp. 27–28"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/folded-implies-symmetric-neutrality.yaml",
+   "files": {
+    "md": "writeups/folded-implies-symmetric-neutrality.md",
+    "handwritten": false,
+    "html": "writeups/folded-implies-symmetric-neutrality.html"
+   }
+  },
+  {
+   "id": "independence-to-sure-thing",
+   "premises": [
+    "stochastic-equivalence",
+    "independence"
+   ],
+   "conclusion": "sure-thing",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Let p=P(E). Realize the conditional laws on E and Eᶜ as A,B for X and C,D for Y. Law invariance gives X~M_p(A,B), Y~M_p(C,D), X|E~M_p(A,0), Y|E~M_p(C,0). Independence cancels 0 to yield A~C from the hypothesis. Replace indifferent mixture components and cancel the common E component: X≽Y iff B≽D. The latter is equivalent to X|Eᶜ≽Y|Eᶜ by independence and law invariance.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 679 and p. 682, footnote 28"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/independence-to-sure-thing.yaml",
+   "files": {
+    "md": "writeups/independence-to-sure-thing.md",
+    "handwritten": false,
+    "html": "writeups/independence-to-sure-thing.html"
+   }
+  },
+  {
+   "id": "negative-affine-implies-positive-affine",
+   "premises": [
+    "rich-outcomes",
+    "negative-affine-anti-invariance"
+   ],
+   "conclusion": "positive-affine-invariance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Compose x↦−x with x↦−ax+b. Both reverse the ordering, so their composition x↦ax+b preserves it. Rich Outcomes supplies all intermediate outcome levels.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/negative-affine-implies-positive-affine.yaml",
+   "files": {
+    "md": "writeups/negative-affine-implies-positive-affine.md",
+    "handwritten": false,
+    "html": "writeups/negative-affine-implies-positive-affine.html"
+   }
+  },
+  {
+   "id": "negative-affine-implies-reflection",
+   "premises": [
+    "negative-affine-anti-invariance"
+   ],
+   "conclusion": "reflection-anti-invariance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Set a=1,b=0. The order is reversed.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24 (corrected sign)"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/negative-affine-implies-reflection.yaml",
+   "files": {
+    "md": "writeups/negative-affine-implies-reflection.md",
+    "handwritten": false,
+    "html": "writeups/negative-affine-implies-reflection.html"
+   }
+  },
+  {
+   "id": "original-dtu-implies-simple-eu",
+   "premises": [
+    "rich-outcomes",
+    "archimedean-outcomes",
+    "totality",
+    "stochastic-dominance",
+    "sure-thing"
+   ],
+   "conclusion": "simple-eu",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Goodsell §3.2 gives the finite-lottery representation consequence of the original DTU axioms. Stochastic Dominance includes law invariance; Sure-Thing becomes Independence on laws. Restrict to finite gambles and use the outcome mixture calibrations to obtain the normalized vNM utility representation. Prospect Richness, Preordering and comparable outcomes are standing here.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, pp. 679–681 (representation result)"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/original-dtu-implies-simple-eu.yaml",
+   "files": {
+    "md": "writeups/original-dtu-implies-simple-eu.md",
+    "handwritten": false,
+    "html": "writeups/original-dtu-implies-simple-eu.html"
+   }
+  },
+  {
+   "id": "positive-affine-implies-scale",
+   "premises": [
+    "positive-affine-invariance"
+   ],
+   "conclusion": "scale-invariance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Set b=0.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/positive-affine-implies-scale.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/positive-affine-implies-scale.yaml",
+   "files": {
+    "md": "writeups/positive-affine-implies-scale.md",
+    "handwritten": false,
+    "html": "writeups/positive-affine-implies-scale.html"
+   }
+  },
+  {
+   "id": "positive-affine-implies-shift",
+   "premises": [
+    "positive-affine-invariance"
+   ],
+   "conclusion": "shift-invariance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Set a=1.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/positive-affine-implies-shift.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/positive-affine-implies-shift.yaml",
+   "files": {
+    "md": "writeups/positive-affine-implies-shift.md",
+    "handwritten": false,
+    "html": "writeups/positive-affine-implies-shift.html"
+   }
+  },
+  {
+   "id": "positive-reflection-imply-negative",
+   "premises": [
+    "rich-outcomes",
+    "positive-affine-invariance",
+    "reflection-anti-invariance"
+   ],
+   "conclusion": "negative-affine-anti-invariance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Apply reflection to reverse the comparison, then the positive transformation x↦ax+b to preserve that reversed comparison.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/positive-reflection-imply-negative.yaml",
+   "files": {
+    "md": "writeups/positive-reflection-imply-negative.md",
+    "handwritten": false,
+    "html": "writeups/positive-reflection-imply-negative.html"
+   }
+  },
+  {
+   "id": "reflection-implies-symmetric-neutrality",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "independence",
+    "reflection-anti-invariance"
+   ],
+   "conclusion": "symmetric-neutrality",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Let H=M_1/2(X,−X). Its reflected law equals its own law, so H~−H. If H≻0, reflection gives −H≺0, contradiction; likewise if H≺0. Totality gives H~0. If X itself has symmetric law, Stochastic Equivalence gives −X~X and H~X, since the mixture then has X’s law. Thus X~0.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, pp. 25, 27"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/reflection-implies-symmetric-neutrality.yaml",
+   "files": {
+    "md": "writeups/reflection-implies-symmetric-neutrality.md",
+    "handwritten": false,
+    "html": "writeups/reflection-implies-symmetric-neutrality.html"
+   }
+  },
+  {
+   "id": "relative-implies-eu",
+   "premises": [
+    "archimedean-outcomes",
+    "relative-expectation"
+   ],
+   "conclusion": "expected-utility",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Archimedean Outcomes makes the real chart total. If u(X),u(Y) are integrable, so is their difference, and E[u(X)−u(Y)]=E[u(X)]−E[u(Y)]. Apply Relative Expectation.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, pp. 26–27",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/relative-implies-eu.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/relative-implies-eu.yaml",
+   "files": {
+    "md": "writeups/relative-implies-eu.md",
+    "handwritten": false,
+    "html": "writeups/relative-implies-eu.html"
+   }
+  },
+  {
+   "id": "relative-implies-simple-relative",
+   "premises": [
+    "relative-expectation"
+   ],
+   "conclusion": "simple-relative-expectation",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "A finite-valued difference is integrable. Restrict Relative Expectation to such pairs.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, p. 26",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/relative-implies-simple-relative.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/relative-implies-simple-relative.yaml",
+   "files": {
+    "md": "writeups/relative-implies-simple-relative.md",
+    "handwritten": false,
+    "html": "writeups/relative-implies-simple-relative.html"
+   }
+  },
+  {
+   "id": "rich-simple-sure-thing-refutes-countable",
+   "premises": [
+    "rich-outcomes",
+    "simple-eu",
+    "sure-thing"
+   ],
+   "conclusion": "failure-countable-sure-thing",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Use the strengthened St Petersburg contradiction from §2.3. Simple EU supplies Restricted Totality, Restricted Stochastic Equivalence and finite conditional EU calculations. With independent sequences of fair tosses let A be first-toss St Petersburg, B the same starting at toss 2, and C an independent St Petersburg variable. Conditional on B=2^n, A is a fair mixture of 2 and 2^(n+1), so its conditional expected value exceeds B by 1; Countable Sure-Thing would give A≻B. Partition the A,C space by the maximum of their finite stopping times. On each cell they are simple and their restricted laws coincide, so Countable Sure-Thing would give A~C. Repeat for B,C to get B~C, contradicting Preordering. Null sets can be assigned a finite outcome without changing the simple-law comparisons.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.3, pp. 675–676"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/rich-simple-sure-thing-refutes-countable.yaml",
+   "files": {
+    "md": "writeups/rich-simple-sure-thing-refutes-countable.md",
+    "handwritten": false,
+    "html": "writeups/rich-simple-sure-thing-refutes-countable.html"
+   }
+  },
+  {
+   "id": "shift-scale-imply-positive-affine",
+   "premises": [
+    "rich-outcomes",
+    "shift-invariance",
+    "scale-invariance"
+   ],
+   "conclusion": "positive-affine-invariance",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Apply Scale Invariance and then Shift Invariance. Rich Outcomes supplies all intermediate outcome levels.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §§3, 5, pp. 24, 34",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/shift-scale-imply-positive-affine.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/shift-scale-imply-positive-affine.yaml",
+   "files": {
+    "md": "writeups/shift-scale-imply-positive-affine.md",
+    "handwritten": false,
+    "html": "writeups/shift-scale-imply-positive-affine.html"
+   }
+  },
+  {
+   "id": "simple-eu-implies-archimedean-outcomes",
+   "premises": [
+    "simple-eu"
+   ],
+   "conclusion": "archimedean-outcomes",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "For a≻b≻c put p=(u(b)−u(c))/(u(a)−u(c)). Then 0<p<1 and the simple variable M_p(a,c) has expectation u(b), so is indifferent to b.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, p. 22, footnote 3"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/simple-eu-implies-archimedean-outcomes.yaml",
+   "files": {
+    "md": "writeups/simple-eu-implies-archimedean-outcomes.md",
+    "handwritten": false,
+    "html": "writeups/simple-eu-implies-archimedean-outcomes.html"
+   }
+  },
+  {
+   "id": "simple-eu-implies-restricted-equivalence",
+   "premises": [
+    "simple-eu"
+   ],
+   "conclusion": "restricted-stochastic-equivalence",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Equal laws of simple variables give equal finite expectations. Simple EU therefore gives both preference directions.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §§2.3, 3.2"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/simple-eu-implies-restricted-equivalence.yaml",
+   "files": {
+    "md": "writeups/simple-eu-implies-restricted-equivalence.md",
+    "handwritten": false,
+    "html": "writeups/simple-eu-implies-restricted-equivalence.html"
+   }
+  },
+  {
+   "id": "simple-eu-implies-restricted-totality",
+   "premises": [
+    "simple-eu"
+   ],
+   "conclusion": "restricted-totality",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Finite real expectations are comparable, and Simple EU represents the preference in both directions.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, pp. 22–23"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/simple-eu-implies-restricted-totality.yaml",
+   "files": {
+    "md": "writeups/simple-eu-implies-restricted-totality.md",
+    "handwritten": false,
+    "html": "writeups/simple-eu-implies-restricted-totality.html"
+   }
+  },
+  {
+   "id": "stochastic-equivalence-restricts",
+   "premises": [
+    "stochastic-equivalence"
+   ],
+   "conclusion": "restricted-stochastic-equivalence",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "stated",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Restrict the quantifiers to simple random variables.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.3, p. 675",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/stochastic-equivalence-restricts.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/stochastic-equivalence-restricts.yaml",
+   "files": {
+    "md": "writeups/stochastic-equivalence-restricts.md",
+    "handwritten": false,
+    "html": "writeups/stochastic-equivalence-restricts.html"
+   }
+  },
+  {
+   "id": "sure-thing-to-independence",
+   "premises": [
+    "rich-outcomes",
+    "archimedean-outcomes",
+    "totality",
+    "stochastic-dominance",
+    "sure-thing"
+   ],
+   "conclusion": "independence",
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "stated",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Source reduction, §3.2: in the original DTU framework, Stochastic Dominance yields Stochastic Equivalence. Preferences therefore descend to laws. Every law and its conditional realizations are available by Prospect Richness, and the paper identifies Sure-Thing in this quotient with von Neumann–Morgenstern Independence. Pull this implication back along X↦L(X). The full original DTU assumptions are retained; a weaker converse for arbitrary incomplete orders has not been extracted.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 679"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/results/sure-thing-to-independence.yaml",
+   "files": {
+    "md": "writeups/sure-thing-to-independence.md",
+    "handwritten": false,
+    "html": "writeups/sure-thing-to-independence.html"
+   }
+  },
+  {
+   "id": "symmetry-evaluates-alternating",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance"
+   ],
+   "conclusion": "alternating-st-petersburg-value",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "The law identity A =d M_1/2(−2,−2A) gives indifference by Stochastic Equivalence. If A≻−1/2 then −2A≺1, so Independence and Simple EU imply A~M_1/2(−2,−2A)≺M_1/2(−2,1)~−1/2, contradiction. The opposite strict case is analogous. Totality gives A~−1/2.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 9, p. 30"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-evaluates-alternating.yaml",
+   "files": {
+    "md": "writeups/symmetry-evaluates-alternating.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-evaluates-alternating.html"
+   }
+  },
+  {
+   "id": "symmetry-implies-negative-self-similarity",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance"
+   ],
+   "conclusion": "negative-self-similarity",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "If X≻Y, negative affine anti-invariance makes −aX+b≺−aY+b. Independence with the common Z then reverses the strict comparison between their mixtures. The assumed fixed-point indifferences imply X≺Y, contradiction. Interchange X,Y for the other strict case and use Totality.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 10, pp. 30–31"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-implies-negative-self-similarity.yaml",
+   "files": {
+    "md": "writeups/symmetry-implies-negative-self-similarity.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-implies-negative-self-similarity.html"
+   }
+  },
+  {
+   "id": "symmetry-implies-shift-transfer",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance"
+   ],
+   "conclusion": "shift-transfer",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "This is Theorem 3 transported from laws to random variables using Stochastic Equivalence. Reflection, Totality and Independence first make a half-mixture of V and −V indifferent to 0. Shift invariance then gives M_1/2(V+c,−V)~c/2. Pair the terms on the two sides of the proposed transfer with their negatives; both reduce to the same simple constant mixture. Independence cancels the common terms.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 3, pp. 25–26"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-implies-shift-transfer.yaml",
+   "files": {
+    "md": "writeups/symmetry-implies-shift-transfer.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-implies-shift-transfer.html"
+   }
+  },
+  {
+   "id": "symmetry-implies-simple-relative",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance"
+   ],
+   "conclusion": "simple-relative-expectation",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Theorem 4. If D=u(X)−u(Y) has finite range, work with the diluted variables M_1/2(X,0), M_1/2(Y,0). Partition into the finitely many values of D. Transfer each constant difference to the zero branch by Theorem 3. Finite mixture substitution leaves M_1/2(Y,D) in place of M_1/2(X,0). Independence and Simple EU reduce the comparison to E[D]≥0. Law invariance permits each rearrangement of branches.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 4, pp. 26–27"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-implies-simple-relative.yaml",
+   "files": {
+    "md": "writeups/symmetry-implies-simple-relative.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-implies-simple-relative.html"
+   }
+  },
+  {
+   "id": "symmetry-l1-evaluates-arroyo",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance",
+    "l1-continuity"
+   ],
+   "conclusion": "arroyo-value",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Theorem 8 evaluates the folded tail difference of A+1/2. Pair its positive and negative tails: the residual weights are 1/[2n(2n−1)]−1/[2n(2n+1)] at heights 2n+1/2, a positive integrable tail whose expectation is 1/2+ln 2. Folded Expectation gives A+1/2~1/2+ln 2. Shift Invariance gives A~ln 2.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 8, pp. 29–30"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-l1-evaluates-arroyo.yaml",
+   "files": {
+    "md": "writeups/symmetry-l1-evaluates-arroyo.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-l1-evaluates-arroyo.html"
+   }
+  },
+  {
+   "id": "symmetry-l1-evaluates-pasadena",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance",
+    "l1-continuity"
+   ],
+   "conclusion": "pasadena-value",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Theorem 11. Couple Pasadena P with Highland Park H, retaining each outcome probability and replacing each negative denominator 2n by 2n−1. Then E[H−P]=−ln 2 with integrable difference. The paper writes H as M_2/3(Q,−2Q). It proves by Relative Expectation that Q~M_1/4(4Q,0), then Totality and affine invariance give Q~M_1/2(2Q,0). Reflection and Independence yield H~0; Relative Expectation together with shift transfer then gives P~ln 2. These are preference equalities, not ordinary expectations of P or H.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 11, pp. 32–33"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-l1-evaluates-pasadena.yaml",
+   "files": {
+    "md": "writeups/symmetry-l1-evaluates-pasadena.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-l1-evaluates-pasadena.html"
+   }
+  },
+  {
+   "id": "symmetry-l1-implies-folded",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance",
+    "l1-continuity"
+   ],
+   "conclusion": "folded-expectation",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Theorem 6 couples the positive and negative utility tails in opposing order. Absolute integrability of the folded tail difference yields an integrable difference of these tail variables, with expectation F(X). Relative Expectation (Corollary 5) and reflection identify X with sure F(X). Apply the same construction to Y and compare the constants. Law invariance transfers the chosen couplings to the original variables.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 6, p. 27 and Figure 7, p. 29"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-l1-implies-folded.yaml",
+   "files": {
+    "md": "writeups/symmetry-l1-implies-folded.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-l1-implies-folded.html"
+   }
+  },
+  {
+   "id": "symmetry-l1-implies-relative",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance",
+    "l1-continuity"
+   ],
+   "conclusion": "relative-expectation",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Corollary 5. Approximate an integrable difference u(X)−u(Y) in L¹ by simple differences, apply Theorem 4, and use L¹ continuity to pass to the limit. This is recorded with the full source context DTU+Sym; the equivalence between its law metric and this topic’s random-variable continuity requires Stochastic Equivalence.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Corollary 5, p. 27"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-l1-implies-relative.yaml",
+   "files": {
+    "md": "writeups/symmetry-l1-implies-relative.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-l1-implies-relative.html"
+   }
+  },
+  {
+   "id": "symmetry-relative-implies-l1",
+   "premises": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance",
+    "relative-expectation"
+   ],
+   "conclusion": "l1-continuity",
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "This is the reverse direction of Corollary 5 in its full DTU+Sym context. Pull preferences down to probability laws using Stochastic Equivalence and apply the source equivalence between Relative Expectation Theory and the extended L¹ metric continuity. Actual-coupling convergence implies convergence in that infimum metric, giving the random-variable clause. The source states this as a corollary without an expanded reverse-direction proof; no claim of an independent proof audit is made.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Corollary 5, p. 27"
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/results/symmetry-relative-implies-l1.yaml",
+   "files": {
+    "md": "writeups/symmetry-relative-implies-l1.md",
+    "handwritten": false,
+    "html": "writeups/symmetry-relative-implies-l1.html"
+   }
+  },
+  {
+   "id": "totality-restricts",
+   "premises": [
+    "totality"
+   ],
+   "conclusion": "restricted-totality",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "stated",
+    "produced_by": "GPT-6 (Codex), 2026-09-08",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "proof": "Restrict the quantifiers to simple random variables.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.3, p. 675",
+    "GPT-6 (Codex), 2026-09-08: elementary connecting proof in topics/unbounded-utility/results/totality-restricts.yaml (proof field), using the cited paper’s definitions; not a separately stated paper theorem."
+   ],
+   "notes": "Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.",
+   "source_names": [
+    "Decision Theory Unbound",
+    "GPT-6 generated 8 Sep"
+   ],
+   "file": "topics/unbounded-utility/results/totality-restricts.yaml",
+   "files": {
+    "md": "writeups/totality-restricts.md",
+    "handwritten": false,
+    "html": "writeups/totality-restricts.html"
+   }
+  }
+ ],
+ "models": [
+  {
+   "id": "affine-symmetric-extension",
+   "name": "Total affine-symmetric extension (source existence construction)",
+   "satisfies": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "negative-affine-anti-invariance",
+    "l1-continuity"
+   ],
+   "violates": [
+    "countable-sure-thing",
+    "archimedean-gambles"
+   ],
+   "status": "proved",
+   "certificate": {
+    "source_id": "symmetries-of-value",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "description": "Goodsell (2026), Theorem 2 constructs a total preference satisfying DTU, both affine symmetry principles, and L¹ Continuity. Start with the cone of Theorem 12, use Theorem 13 to extend any nontotal cone while preserving convexity, scale and reflection, and apply Zorn’s lemma. Fixed required comparisons preserve finite EU, dominance and prospect shifts; the end of §5 asserts preservation of L¹ Continuity. Pull the resulting ordering back from laws to all real-valued random variables. The two violations follow from the explicit St Petersburg witnesses in this topic. See the write-up for the scope of this source-based existence certificate.",
+   "sources": [
+    "Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 2, p. 24; Theorems 12–13 and end of §5, pp. 35–36"
+   ],
+   "notes": "This is a nonconstructive existence model, not an implemented comparator. Its existence and L¹ clause are source-attributed. No numerical test is claimed to verify Zorn’s lemma or the source proof.",
+   "source_names": [
+    "Symmetries of Value"
+   ],
+   "file": "topics/unbounded-utility/models/affine-symmetric-extension.yaml",
+   "files": {
+    "md": "writeups/affine-symmetric-extension.md",
+    "handwritten": true,
+    "html": "writeups/affine-symmetric-extension.html"
+   }
+  },
+  {
+   "id": "eventual-clipped-expectation",
+   "name": "Eventual ordering of clipped expectations",
+   "satisfies": [
+    "rich-outcomes",
+    "archimedean-outcomes",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "sure-thing",
+    "scale-invariance",
+    "reflection-anti-invariance",
+    "symmetric-neutrality",
+    "failure-archimedean-gambles"
+   ],
+   "violates": [
+    "totality",
+    "expected-utility",
+    "l1-continuity",
+    "countable-sure-thing",
+    "archimedean-gambles",
+    "alternating-st-petersburg-value"
+   ],
+   "status": "proved",
+   "checks": [
+    "topics/unbounded-utility/checks/countermodels.py"
+   ],
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "description": "Take all real-valued random variables and let c_t(x)=max(−t,min(x,t)). Define X≽Y iff ∃s∀t>s E[c_t(X)]≥E[c_t(Y)]. The full construction, verification, and explicit witnesses are in the accompanying write-up. This is the incomplete model from Decision theory unbound, Theorem 2. It witnesses consistency of the unbounded framework and failure of full EU despite finite EU.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Theorem 2, pp. 683–685; Theorems 7 and 9, p. 693"
+   ],
+   "notes": "Clipping sends tails to ±t; it is not deletion of tail mass. No Shift Invariance claim is needed for this model.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/models/eventual-clipped-expectation.yaml",
+   "files": {
+    "md": "writeups/eventual-clipped-expectation.md",
+    "handwritten": true,
+    "html": "writeups/eventual-clipped-expectation.html"
+   }
+  },
+  {
+   "id": "total-continuous-ultrafilter",
+   "name": "Continuous ultrafilter model: EU without full affine symmetry",
+   "satisfies": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "expected-utility",
+    "shift-invariance",
+    "reflection-anti-invariance"
+   ],
+   "violates": [
+    "scale-invariance",
+    "countable-sure-thing",
+    "archimedean-gambles"
+   ],
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "description": "Take all real-valued random variables and a cobounded ultrafilter U. Define X≽Y iff for every ε>0, {t:E[c_t(X)]≥E[c_t(Y)]−ε}∈U. This is the continuous-hyperreal quotient ordering in the proof of Theorem 3. Its EU, shift, reflection, and failed scale claims are given in Appendix B; see the accompanying write-up. Consequently Expected Utility does not imply Positive Affine Invariance, even with DTU.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Lemma 6 and proof of Theorem 3, p. 691; Theorems 7, 8 and 10, pp. 693–695"
+   ],
+   "notes": "No L¹ Continuity or Relative Expectation flag is inferred merely from the word continuous; these are distinct claims. Scale failure is source-attributed as above.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/models/total-continuous-ultrafilter.yaml",
+   "files": {
+    "md": "writeups/total-continuous-ultrafilter.md",
+    "handwritten": true,
+    "html": "writeups/total-continuous-ultrafilter.html"
+   }
+  },
+  {
+   "id": "total-exact-ultrafilter",
+   "name": "Total ordering by an ultrafilter of clipped expectations",
+   "satisfies": [
+    "rich-outcomes",
+    "totality",
+    "stochastic-equivalence",
+    "simple-eu",
+    "stochastic-dominance",
+    "independence",
+    "reflection-anti-invariance"
+   ],
+   "violates": [
+    "expected-utility",
+    "scale-invariance",
+    "countable-sure-thing",
+    "archimedean-gambles"
+   ],
+   "status": "proved",
+   "certificate": {
+    "source_id": "decision-theory-unbound",
+    "lean": "none",
+    "produced_by": "Zachary Goodsell (cited paper)",
+    "checked_by": [],
+    "date": "2026-09-08",
+    "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
+   },
+   "description": "Take all real-valued random variables. Choose a cobounded ultrafilter U on positive truncation levels; define X≽Y iff {t:E[c_t(X)]≥E[c_t(Y)]}∈U. This is the exact hyperreal ordering of Theorem 1, not its continuous quotient. The accompanying write-up explains the satisfied axioms and EU counterexample; failure of Scale Invariance is the source’s Theorem 10.",
+   "sources": [
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Theorem 1, pp. 690–691; Theorems 3 and 10, pp. 691, 693–695"
+   ],
+   "notes": "The scale failure is recorded from the source theorem; its printed analytic witness has apparent typographical issues itemized in extraction.md. This record is a literature extraction, not a separately audited reconstruction of that witness.",
+   "source_names": [
+    "Decision Theory Unbound"
+   ],
+   "file": "topics/unbounded-utility/models/total-exact-ultrafilter.yaml",
+   "files": {
+    "md": "writeups/total-exact-ultrafilter.md",
+    "handwritten": true,
+    "html": "writeups/total-exact-ultrafilter.html"
+   }
+  }
+ ],
+ "generated": "2026-09-08T15:53:21+00:00",
+ "server_analysis": {
+  "classes": [
+   [
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "archimedean-gambles"
+   ],
+   [
+    "archimedean-outcomes"
+   ],
+   [
+    "arroyo-value"
+   ],
+   [
+    "countable-sure-thing"
+   ],
+   [
+    "expected-utility"
+   ],
+   [
+    "failure-archimedean-gambles"
+   ],
+   [
+    "failure-countable-sure-thing"
+   ],
+   [
+    "folded-expectation"
+   ],
+   [
+    "independence"
+   ],
+   [
+    "l1-continuity"
+   ],
+   [
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "negative-self-similarity"
+   ],
+   [
+    "pasadena-value"
+   ],
+   [
+    "positive-affine-invariance"
+   ],
+   [
+    "reflection-anti-invariance"
+   ],
+   [
+    "relative-expectation"
+   ],
+   [
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "restricted-totality"
+   ],
+   [
+    "rich-outcomes"
+   ],
+   [
+    "scale-invariance"
+   ],
+   [
+    "shift-invariance"
+   ],
+   [
+    "shift-transfer"
+   ],
+   [
+    "simple-eu"
+   ],
+   [
+    "simple-relative-expectation"
+   ],
+   [
+    "statewise-dominance"
+   ],
+   [
+    "stochastic-dominance"
+   ],
+   [
+    "stochastic-equivalence"
+   ],
+   [
+    "sure-thing"
+   ],
+   [
+    "symmetric-neutrality"
+   ],
+   [
+    "totality"
+   ]
+  ],
+  "open_pairs": [
+   [
+    "alternating-st-petersburg-value",
+    "archimedean-outcomes"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "arroyo-value"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "expected-utility"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "folded-expectation"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "independence"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "l1-continuity"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "negative-self-similarity"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "pasadena-value"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "positive-affine-invariance"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "reflection-anti-invariance"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "relative-expectation"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "restricted-totality"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "rich-outcomes"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "scale-invariance"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "shift-invariance"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "shift-transfer"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "simple-eu"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "simple-relative-expectation"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "statewise-dominance"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "stochastic-dominance"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "stochastic-equivalence"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "sure-thing"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "symmetric-neutrality"
+   ],
+   [
+    "alternating-st-petersburg-value",
+    "totality"
+   ],
+   [
+    "archimedean-gambles",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "archimedean-gambles",
+    "arroyo-value"
+   ],
+   [
+    "archimedean-gambles",
+    "countable-sure-thing"
+   ],
+   [
+    "archimedean-gambles",
+    "expected-utility"
+   ],
+   [
+    "archimedean-gambles",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "archimedean-gambles",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "archimedean-gambles",
+    "folded-expectation"
+   ],
+   [
+    "archimedean-gambles",
+    "independence"
+   ],
+   [
+    "archimedean-gambles",
+    "l1-continuity"
+   ],
+   [
+    "archimedean-gambles",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "archimedean-gambles",
+    "negative-self-similarity"
+   ],
+   [
+    "archimedean-gambles",
+    "pasadena-value"
+   ],
+   [
+    "archimedean-gambles",
+    "positive-affine-invariance"
+   ],
+   [
+    "archimedean-gambles",
+    "reflection-anti-invariance"
+   ],
+   [
+    "archimedean-gambles",
+    "relative-expectation"
+   ],
+   [
+    "archimedean-gambles",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "archimedean-gambles",
+    "restricted-totality"
+   ],
+   [
+    "archimedean-gambles",
+    "rich-outcomes"
+   ],
+   [
+    "archimedean-gambles",
+    "scale-invariance"
+   ],
+   [
+    "archimedean-gambles",
+    "shift-invariance"
+   ],
+   [
+    "archimedean-gambles",
+    "shift-transfer"
+   ],
+   [
+    "archimedean-gambles",
+    "simple-eu"
+   ],
+   [
+    "archimedean-gambles",
+    "simple-relative-expectation"
+   ],
+   [
+    "archimedean-gambles",
+    "statewise-dominance"
+   ],
+   [
+    "archimedean-gambles",
+    "stochastic-dominance"
+   ],
+   [
+    "archimedean-gambles",
+    "stochastic-equivalence"
+   ],
+   [
+    "archimedean-gambles",
+    "sure-thing"
+   ],
+   [
+    "archimedean-gambles",
+    "symmetric-neutrality"
+   ],
+   [
+    "archimedean-gambles",
+    "totality"
+   ],
+   [
+    "archimedean-outcomes",
+    "arroyo-value"
+   ],
+   [
+    "archimedean-outcomes",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "archimedean-outcomes",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "archimedean-outcomes",
+    "independence"
+   ],
+   [
+    "archimedean-outcomes",
+    "negative-self-similarity"
+   ],
+   [
+    "archimedean-outcomes",
+    "pasadena-value"
+   ],
+   [
+    "archimedean-outcomes",
+    "reflection-anti-invariance"
+   ],
+   [
+    "archimedean-outcomes",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "archimedean-outcomes",
+    "restricted-totality"
+   ],
+   [
+    "archimedean-outcomes",
+    "rich-outcomes"
+   ],
+   [
+    "archimedean-outcomes",
+    "shift-invariance"
+   ],
+   [
+    "archimedean-outcomes",
+    "shift-transfer"
+   ],
+   [
+    "archimedean-outcomes",
+    "simple-eu"
+   ],
+   [
+    "archimedean-outcomes",
+    "simple-relative-expectation"
+   ],
+   [
+    "archimedean-outcomes",
+    "statewise-dominance"
+   ],
+   [
+    "archimedean-outcomes",
+    "stochastic-dominance"
+   ],
+   [
+    "archimedean-outcomes",
+    "stochastic-equivalence"
+   ],
+   [
+    "archimedean-outcomes",
+    "sure-thing"
+   ],
+   [
+    "archimedean-outcomes",
+    "symmetric-neutrality"
+   ],
+   [
+    "arroyo-value",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "arroyo-value",
+    "archimedean-outcomes"
+   ],
+   [
+    "arroyo-value",
+    "expected-utility"
+   ],
+   [
+    "arroyo-value",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "arroyo-value",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "arroyo-value",
+    "folded-expectation"
+   ],
+   [
+    "arroyo-value",
+    "independence"
+   ],
+   [
+    "arroyo-value",
+    "l1-continuity"
+   ],
+   [
+    "arroyo-value",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "arroyo-value",
+    "negative-self-similarity"
+   ],
+   [
+    "arroyo-value",
+    "pasadena-value"
+   ],
+   [
+    "arroyo-value",
+    "positive-affine-invariance"
+   ],
+   [
+    "arroyo-value",
+    "reflection-anti-invariance"
+   ],
+   [
+    "arroyo-value",
+    "relative-expectation"
+   ],
+   [
+    "arroyo-value",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "arroyo-value",
+    "restricted-totality"
+   ],
+   [
+    "arroyo-value",
+    "rich-outcomes"
+   ],
+   [
+    "arroyo-value",
+    "scale-invariance"
+   ],
+   [
+    "arroyo-value",
+    "shift-invariance"
+   ],
+   [
+    "arroyo-value",
+    "shift-transfer"
+   ],
+   [
+    "arroyo-value",
+    "simple-eu"
+   ],
+   [
+    "arroyo-value",
+    "simple-relative-expectation"
+   ],
+   [
+    "arroyo-value",
+    "statewise-dominance"
+   ],
+   [
+    "arroyo-value",
+    "stochastic-dominance"
+   ],
+   [
+    "arroyo-value",
+    "stochastic-equivalence"
+   ],
+   [
+    "arroyo-value",
+    "sure-thing"
+   ],
+   [
+    "arroyo-value",
+    "symmetric-neutrality"
+   ],
+   [
+    "arroyo-value",
+    "totality"
+   ],
+   [
+    "countable-sure-thing",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "countable-sure-thing",
+    "archimedean-gambles"
+   ],
+   [
+    "countable-sure-thing",
+    "archimedean-outcomes"
+   ],
+   [
+    "countable-sure-thing",
+    "arroyo-value"
+   ],
+   [
+    "countable-sure-thing",
+    "expected-utility"
+   ],
+   [
+    "countable-sure-thing",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "countable-sure-thing",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "countable-sure-thing",
+    "folded-expectation"
+   ],
+   [
+    "countable-sure-thing",
+    "independence"
+   ],
+   [
+    "countable-sure-thing",
+    "l1-continuity"
+   ],
+   [
+    "countable-sure-thing",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "countable-sure-thing",
+    "negative-self-similarity"
+   ],
+   [
+    "countable-sure-thing",
+    "pasadena-value"
+   ],
+   [
+    "countable-sure-thing",
+    "positive-affine-invariance"
+   ],
+   [
+    "countable-sure-thing",
+    "reflection-anti-invariance"
+   ],
+   [
+    "countable-sure-thing",
+    "relative-expectation"
+   ],
+   [
+    "countable-sure-thing",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "countable-sure-thing",
+    "restricted-totality"
+   ],
+   [
+    "countable-sure-thing",
+    "rich-outcomes"
+   ],
+   [
+    "countable-sure-thing",
+    "scale-invariance"
+   ],
+   [
+    "countable-sure-thing",
+    "shift-invariance"
+   ],
+   [
+    "countable-sure-thing",
+    "shift-transfer"
+   ],
+   [
+    "countable-sure-thing",
+    "simple-eu"
+   ],
+   [
+    "countable-sure-thing",
+    "simple-relative-expectation"
+   ],
+   [
+    "countable-sure-thing",
+    "statewise-dominance"
+   ],
+   [
+    "countable-sure-thing",
+    "stochastic-dominance"
+   ],
+   [
+    "countable-sure-thing",
+    "stochastic-equivalence"
+   ],
+   [
+    "countable-sure-thing",
+    "sure-thing"
+   ],
+   [
+    "countable-sure-thing",
+    "symmetric-neutrality"
+   ],
+   [
+    "countable-sure-thing",
+    "totality"
+   ],
+   [
+    "expected-utility",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "expected-utility",
+    "arroyo-value"
+   ],
+   [
+    "expected-utility",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "expected-utility",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "expected-utility",
+    "folded-expectation"
+   ],
+   [
+    "expected-utility",
+    "independence"
+   ],
+   [
+    "expected-utility",
+    "l1-continuity"
+   ],
+   [
+    "expected-utility",
+    "negative-self-similarity"
+   ],
+   [
+    "expected-utility",
+    "pasadena-value"
+   ],
+   [
+    "expected-utility",
+    "reflection-anti-invariance"
+   ],
+   [
+    "expected-utility",
+    "relative-expectation"
+   ],
+   [
+    "expected-utility",
+    "rich-outcomes"
+   ],
+   [
+    "expected-utility",
+    "shift-invariance"
+   ],
+   [
+    "expected-utility",
+    "shift-transfer"
+   ],
+   [
+    "expected-utility",
+    "simple-relative-expectation"
+   ],
+   [
+    "expected-utility",
+    "statewise-dominance"
+   ],
+   [
+    "expected-utility",
+    "stochastic-dominance"
+   ],
+   [
+    "expected-utility",
+    "stochastic-equivalence"
+   ],
+   [
+    "expected-utility",
+    "sure-thing"
+   ],
+   [
+    "expected-utility",
+    "symmetric-neutrality"
+   ],
+   [
+    "expected-utility",
+    "totality"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "archimedean-outcomes"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "arroyo-value"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "independence"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "negative-self-similarity"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "pasadena-value"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "reflection-anti-invariance"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "restricted-totality"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "rich-outcomes"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "shift-invariance"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "shift-transfer"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "simple-eu"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "simple-relative-expectation"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "statewise-dominance"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "stochastic-dominance"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "stochastic-equivalence"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "sure-thing"
+   ],
+   [
+    "failure-archimedean-gambles",
+    "symmetric-neutrality"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "archimedean-outcomes"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "arroyo-value"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "independence"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "negative-self-similarity"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "pasadena-value"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "reflection-anti-invariance"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "restricted-totality"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "rich-outcomes"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "shift-invariance"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "shift-transfer"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "simple-eu"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "simple-relative-expectation"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "statewise-dominance"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "stochastic-dominance"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "stochastic-equivalence"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "sure-thing"
+   ],
+   [
+    "failure-countable-sure-thing",
+    "symmetric-neutrality"
+   ],
+   [
+    "folded-expectation",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "folded-expectation",
+    "archimedean-outcomes"
+   ],
+   [
+    "folded-expectation",
+    "arroyo-value"
+   ],
+   [
+    "folded-expectation",
+    "expected-utility"
+   ],
+   [
+    "folded-expectation",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "folded-expectation",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "folded-expectation",
+    "independence"
+   ],
+   [
+    "folded-expectation",
+    "l1-continuity"
+   ],
+   [
+    "folded-expectation",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "folded-expectation",
+    "negative-self-similarity"
+   ],
+   [
+    "folded-expectation",
+    "pasadena-value"
+   ],
+   [
+    "folded-expectation",
+    "positive-affine-invariance"
+   ],
+   [
+    "folded-expectation",
+    "reflection-anti-invariance"
+   ],
+   [
+    "folded-expectation",
+    "relative-expectation"
+   ],
+   [
+    "folded-expectation",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "folded-expectation",
+    "restricted-totality"
+   ],
+   [
+    "folded-expectation",
+    "rich-outcomes"
+   ],
+   [
+    "folded-expectation",
+    "scale-invariance"
+   ],
+   [
+    "folded-expectation",
+    "shift-invariance"
+   ],
+   [
+    "folded-expectation",
+    "shift-transfer"
+   ],
+   [
+    "folded-expectation",
+    "simple-eu"
+   ],
+   [
+    "folded-expectation",
+    "simple-relative-expectation"
+   ],
+   [
+    "folded-expectation",
+    "statewise-dominance"
+   ],
+   [
+    "folded-expectation",
+    "stochastic-dominance"
+   ],
+   [
+    "folded-expectation",
+    "stochastic-equivalence"
+   ],
+   [
+    "folded-expectation",
+    "sure-thing"
+   ],
+   [
+    "folded-expectation",
+    "symmetric-neutrality"
+   ],
+   [
+    "folded-expectation",
+    "totality"
+   ],
+   [
+    "independence",
+    "archimedean-outcomes"
+   ],
+   [
+    "independence",
+    "arroyo-value"
+   ],
+   [
+    "independence",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "independence",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "independence",
+    "negative-self-similarity"
+   ],
+   [
+    "independence",
+    "pasadena-value"
+   ],
+   [
+    "independence",
+    "reflection-anti-invariance"
+   ],
+   [
+    "independence",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "independence",
+    "restricted-totality"
+   ],
+   [
+    "independence",
+    "rich-outcomes"
+   ],
+   [
+    "independence",
+    "shift-invariance"
+   ],
+   [
+    "independence",
+    "shift-transfer"
+   ],
+   [
+    "independence",
+    "simple-eu"
+   ],
+   [
+    "independence",
+    "simple-relative-expectation"
+   ],
+   [
+    "independence",
+    "statewise-dominance"
+   ],
+   [
+    "independence",
+    "stochastic-dominance"
+   ],
+   [
+    "independence",
+    "stochastic-equivalence"
+   ],
+   [
+    "independence",
+    "sure-thing"
+   ],
+   [
+    "independence",
+    "symmetric-neutrality"
+   ],
+   [
+    "l1-continuity",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "l1-continuity",
+    "archimedean-outcomes"
+   ],
+   [
+    "l1-continuity",
+    "arroyo-value"
+   ],
+   [
+    "l1-continuity",
+    "expected-utility"
+   ],
+   [
+    "l1-continuity",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "l1-continuity",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "l1-continuity",
+    "folded-expectation"
+   ],
+   [
+    "l1-continuity",
+    "independence"
+   ],
+   [
+    "l1-continuity",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "l1-continuity",
+    "negative-self-similarity"
+   ],
+   [
+    "l1-continuity",
+    "pasadena-value"
+   ],
+   [
+    "l1-continuity",
+    "positive-affine-invariance"
+   ],
+   [
+    "l1-continuity",
+    "reflection-anti-invariance"
+   ],
+   [
+    "l1-continuity",
+    "relative-expectation"
+   ],
+   [
+    "l1-continuity",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "l1-continuity",
+    "restricted-totality"
+   ],
+   [
+    "l1-continuity",
+    "rich-outcomes"
+   ],
+   [
+    "l1-continuity",
+    "scale-invariance"
+   ],
+   [
+    "l1-continuity",
+    "shift-invariance"
+   ],
+   [
+    "l1-continuity",
+    "shift-transfer"
+   ],
+   [
+    "l1-continuity",
+    "simple-eu"
+   ],
+   [
+    "l1-continuity",
+    "simple-relative-expectation"
+   ],
+   [
+    "l1-continuity",
+    "statewise-dominance"
+   ],
+   [
+    "l1-continuity",
+    "stochastic-dominance"
+   ],
+   [
+    "l1-continuity",
+    "stochastic-equivalence"
+   ],
+   [
+    "l1-continuity",
+    "sure-thing"
+   ],
+   [
+    "l1-continuity",
+    "symmetric-neutrality"
+   ],
+   [
+    "l1-continuity",
+    "totality"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "archimedean-outcomes"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "arroyo-value"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "expected-utility"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "folded-expectation"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "independence"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "l1-continuity"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "negative-self-similarity"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "pasadena-value"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "positive-affine-invariance"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "relative-expectation"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "restricted-totality"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "rich-outcomes"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "scale-invariance"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "shift-invariance"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "shift-transfer"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "simple-eu"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "simple-relative-expectation"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "statewise-dominance"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "stochastic-dominance"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "stochastic-equivalence"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "sure-thing"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "symmetric-neutrality"
+   ],
+   [
+    "negative-affine-anti-invariance",
+    "totality"
+   ],
+   [
+    "negative-self-similarity",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "negative-self-similarity",
+    "archimedean-outcomes"
+   ],
+   [
+    "negative-self-similarity",
+    "arroyo-value"
+   ],
+   [
+    "negative-self-similarity",
+    "expected-utility"
+   ],
+   [
+    "negative-self-similarity",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "negative-self-similarity",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "negative-self-similarity",
+    "folded-expectation"
+   ],
+   [
+    "negative-self-similarity",
+    "independence"
+   ],
+   [
+    "negative-self-similarity",
+    "l1-continuity"
+   ],
+   [
+    "negative-self-similarity",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "negative-self-similarity",
+    "pasadena-value"
+   ],
+   [
+    "negative-self-similarity",
+    "positive-affine-invariance"
+   ],
+   [
+    "negative-self-similarity",
+    "reflection-anti-invariance"
+   ],
+   [
+    "negative-self-similarity",
+    "relative-expectation"
+   ],
+   [
+    "negative-self-similarity",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "negative-self-similarity",
+    "restricted-totality"
+   ],
+   [
+    "negative-self-similarity",
+    "rich-outcomes"
+   ],
+   [
+    "negative-self-similarity",
+    "scale-invariance"
+   ],
+   [
+    "negative-self-similarity",
+    "shift-invariance"
+   ],
+   [
+    "negative-self-similarity",
+    "shift-transfer"
+   ],
+   [
+    "negative-self-similarity",
+    "simple-eu"
+   ],
+   [
+    "negative-self-similarity",
+    "simple-relative-expectation"
+   ],
+   [
+    "negative-self-similarity",
+    "statewise-dominance"
+   ],
+   [
+    "negative-self-similarity",
+    "stochastic-dominance"
+   ],
+   [
+    "negative-self-similarity",
+    "stochastic-equivalence"
+   ],
+   [
+    "negative-self-similarity",
+    "sure-thing"
+   ],
+   [
+    "negative-self-similarity",
+    "symmetric-neutrality"
+   ],
+   [
+    "negative-self-similarity",
+    "totality"
+   ],
+   [
+    "pasadena-value",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "pasadena-value",
+    "archimedean-outcomes"
+   ],
+   [
+    "pasadena-value",
+    "arroyo-value"
+   ],
+   [
+    "pasadena-value",
+    "expected-utility"
+   ],
+   [
+    "pasadena-value",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "pasadena-value",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "pasadena-value",
+    "folded-expectation"
+   ],
+   [
+    "pasadena-value",
+    "independence"
+   ],
+   [
+    "pasadena-value",
+    "l1-continuity"
+   ],
+   [
+    "pasadena-value",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "pasadena-value",
+    "negative-self-similarity"
+   ],
+   [
+    "pasadena-value",
+    "positive-affine-invariance"
+   ],
+   [
+    "pasadena-value",
+    "reflection-anti-invariance"
+   ],
+   [
+    "pasadena-value",
+    "relative-expectation"
+   ],
+   [
+    "pasadena-value",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "pasadena-value",
+    "restricted-totality"
+   ],
+   [
+    "pasadena-value",
+    "rich-outcomes"
+   ],
+   [
+    "pasadena-value",
+    "scale-invariance"
+   ],
+   [
+    "pasadena-value",
+    "shift-invariance"
+   ],
+   [
+    "pasadena-value",
+    "shift-transfer"
+   ],
+   [
+    "pasadena-value",
+    "simple-eu"
+   ],
+   [
+    "pasadena-value",
+    "simple-relative-expectation"
+   ],
+   [
+    "pasadena-value",
+    "statewise-dominance"
+   ],
+   [
+    "pasadena-value",
+    "stochastic-dominance"
+   ],
+   [
+    "pasadena-value",
+    "stochastic-equivalence"
+   ],
+   [
+    "pasadena-value",
+    "sure-thing"
+   ],
+   [
+    "pasadena-value",
+    "symmetric-neutrality"
+   ],
+   [
+    "pasadena-value",
+    "totality"
+   ],
+   [
+    "positive-affine-invariance",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "positive-affine-invariance",
+    "archimedean-outcomes"
+   ],
+   [
+    "positive-affine-invariance",
+    "arroyo-value"
+   ],
+   [
+    "positive-affine-invariance",
+    "expected-utility"
+   ],
+   [
+    "positive-affine-invariance",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "positive-affine-invariance",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "positive-affine-invariance",
+    "folded-expectation"
+   ],
+   [
+    "positive-affine-invariance",
+    "independence"
+   ],
+   [
+    "positive-affine-invariance",
+    "l1-continuity"
+   ],
+   [
+    "positive-affine-invariance",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "positive-affine-invariance",
+    "negative-self-similarity"
+   ],
+   [
+    "positive-affine-invariance",
+    "pasadena-value"
+   ],
+   [
+    "positive-affine-invariance",
+    "reflection-anti-invariance"
+   ],
+   [
+    "positive-affine-invariance",
+    "relative-expectation"
+   ],
+   [
+    "positive-affine-invariance",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "positive-affine-invariance",
+    "restricted-totality"
+   ],
+   [
+    "positive-affine-invariance",
+    "rich-outcomes"
+   ],
+   [
+    "positive-affine-invariance",
+    "shift-transfer"
+   ],
+   [
+    "positive-affine-invariance",
+    "simple-eu"
+   ],
+   [
+    "positive-affine-invariance",
+    "simple-relative-expectation"
+   ],
+   [
+    "positive-affine-invariance",
+    "statewise-dominance"
+   ],
+   [
+    "positive-affine-invariance",
+    "stochastic-dominance"
+   ],
+   [
+    "positive-affine-invariance",
+    "stochastic-equivalence"
+   ],
+   [
+    "positive-affine-invariance",
+    "sure-thing"
+   ],
+   [
+    "positive-affine-invariance",
+    "symmetric-neutrality"
+   ],
+   [
+    "positive-affine-invariance",
+    "totality"
+   ],
+   [
+    "reflection-anti-invariance",
+    "archimedean-outcomes"
+   ],
+   [
+    "reflection-anti-invariance",
+    "arroyo-value"
+   ],
+   [
+    "reflection-anti-invariance",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "reflection-anti-invariance",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "reflection-anti-invariance",
+    "independence"
+   ],
+   [
+    "reflection-anti-invariance",
+    "negative-self-similarity"
+   ],
+   [
+    "reflection-anti-invariance",
+    "pasadena-value"
+   ],
+   [
+    "reflection-anti-invariance",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "reflection-anti-invariance",
+    "restricted-totality"
+   ],
+   [
+    "reflection-anti-invariance",
+    "rich-outcomes"
+   ],
+   [
+    "reflection-anti-invariance",
+    "shift-invariance"
+   ],
+   [
+    "reflection-anti-invariance",
+    "shift-transfer"
+   ],
+   [
+    "reflection-anti-invariance",
+    "simple-eu"
+   ],
+   [
+    "reflection-anti-invariance",
+    "simple-relative-expectation"
+   ],
+   [
+    "reflection-anti-invariance",
+    "statewise-dominance"
+   ],
+   [
+    "reflection-anti-invariance",
+    "stochastic-dominance"
+   ],
+   [
+    "reflection-anti-invariance",
+    "stochastic-equivalence"
+   ],
+   [
+    "reflection-anti-invariance",
+    "sure-thing"
+   ],
+   [
+    "reflection-anti-invariance",
+    "symmetric-neutrality"
+   ],
+   [
+    "relative-expectation",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "relative-expectation",
+    "archimedean-outcomes"
+   ],
+   [
+    "relative-expectation",
+    "arroyo-value"
+   ],
+   [
+    "relative-expectation",
+    "expected-utility"
+   ],
+   [
+    "relative-expectation",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "relative-expectation",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "relative-expectation",
+    "folded-expectation"
+   ],
+   [
+    "relative-expectation",
+    "independence"
+   ],
+   [
+    "relative-expectation",
+    "l1-continuity"
+   ],
+   [
+    "relative-expectation",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "relative-expectation",
+    "negative-self-similarity"
+   ],
+   [
+    "relative-expectation",
+    "pasadena-value"
+   ],
+   [
+    "relative-expectation",
+    "positive-affine-invariance"
+   ],
+   [
+    "relative-expectation",
+    "reflection-anti-invariance"
+   ],
+   [
+    "relative-expectation",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "relative-expectation",
+    "restricted-totality"
+   ],
+   [
+    "relative-expectation",
+    "rich-outcomes"
+   ],
+   [
+    "relative-expectation",
+    "scale-invariance"
+   ],
+   [
+    "relative-expectation",
+    "shift-invariance"
+   ],
+   [
+    "relative-expectation",
+    "shift-transfer"
+   ],
+   [
+    "relative-expectation",
+    "simple-eu"
+   ],
+   [
+    "relative-expectation",
+    "statewise-dominance"
+   ],
+   [
+    "relative-expectation",
+    "stochastic-dominance"
+   ],
+   [
+    "relative-expectation",
+    "stochastic-equivalence"
+   ],
+   [
+    "relative-expectation",
+    "sure-thing"
+   ],
+   [
+    "relative-expectation",
+    "symmetric-neutrality"
+   ],
+   [
+    "relative-expectation",
+    "totality"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "archimedean-outcomes"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "arroyo-value"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "independence"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "negative-self-similarity"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "pasadena-value"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "reflection-anti-invariance"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "restricted-totality"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "rich-outcomes"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "shift-invariance"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "shift-transfer"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "simple-eu"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "simple-relative-expectation"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "statewise-dominance"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "stochastic-dominance"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "stochastic-equivalence"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "sure-thing"
+   ],
+   [
+    "restricted-stochastic-equivalence",
+    "symmetric-neutrality"
+   ],
+   [
+    "restricted-totality",
+    "archimedean-outcomes"
+   ],
+   [
+    "restricted-totality",
+    "arroyo-value"
+   ],
+   [
+    "restricted-totality",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "restricted-totality",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "restricted-totality",
+    "independence"
+   ],
+   [
+    "restricted-totality",
+    "negative-self-similarity"
+   ],
+   [
+    "restricted-totality",
+    "pasadena-value"
+   ],
+   [
+    "restricted-totality",
+    "reflection-anti-invariance"
+   ],
+   [
+    "restricted-totality",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "restricted-totality",
+    "rich-outcomes"
+   ],
+   [
+    "restricted-totality",
+    "shift-invariance"
+   ],
+   [
+    "restricted-totality",
+    "shift-transfer"
+   ],
+   [
+    "restricted-totality",
+    "simple-eu"
+   ],
+   [
+    "restricted-totality",
+    "simple-relative-expectation"
+   ],
+   [
+    "restricted-totality",
+    "statewise-dominance"
+   ],
+   [
+    "restricted-totality",
+    "stochastic-dominance"
+   ],
+   [
+    "restricted-totality",
+    "stochastic-equivalence"
+   ],
+   [
+    "restricted-totality",
+    "sure-thing"
+   ],
+   [
+    "restricted-totality",
+    "symmetric-neutrality"
+   ],
+   [
+    "rich-outcomes",
+    "archimedean-outcomes"
+   ],
+   [
+    "rich-outcomes",
+    "arroyo-value"
+   ],
+   [
+    "rich-outcomes",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "rich-outcomes",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "rich-outcomes",
+    "independence"
+   ],
+   [
+    "rich-outcomes",
+    "negative-self-similarity"
+   ],
+   [
+    "rich-outcomes",
+    "pasadena-value"
+   ],
+   [
+    "rich-outcomes",
+    "reflection-anti-invariance"
+   ],
+   [
+    "rich-outcomes",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "rich-outcomes",
+    "restricted-totality"
+   ],
+   [
+    "rich-outcomes",
+    "shift-invariance"
+   ],
+   [
+    "rich-outcomes",
+    "shift-transfer"
+   ],
+   [
+    "rich-outcomes",
+    "simple-eu"
+   ],
+   [
+    "rich-outcomes",
+    "simple-relative-expectation"
+   ],
+   [
+    "rich-outcomes",
+    "statewise-dominance"
+   ],
+   [
+    "rich-outcomes",
+    "stochastic-dominance"
+   ],
+   [
+    "rich-outcomes",
+    "stochastic-equivalence"
+   ],
+   [
+    "rich-outcomes",
+    "sure-thing"
+   ],
+   [
+    "rich-outcomes",
+    "symmetric-neutrality"
+   ],
+   [
+    "scale-invariance",
+    "archimedean-outcomes"
+   ],
+   [
+    "scale-invariance",
+    "arroyo-value"
+   ],
+   [
+    "scale-invariance",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "scale-invariance",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "scale-invariance",
+    "independence"
+   ],
+   [
+    "scale-invariance",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "scale-invariance",
+    "negative-self-similarity"
+   ],
+   [
+    "scale-invariance",
+    "pasadena-value"
+   ],
+   [
+    "scale-invariance",
+    "positive-affine-invariance"
+   ],
+   [
+    "scale-invariance",
+    "reflection-anti-invariance"
+   ],
+   [
+    "scale-invariance",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "scale-invariance",
+    "restricted-totality"
+   ],
+   [
+    "scale-invariance",
+    "rich-outcomes"
+   ],
+   [
+    "scale-invariance",
+    "shift-invariance"
+   ],
+   [
+    "scale-invariance",
+    "shift-transfer"
+   ],
+   [
+    "scale-invariance",
+    "simple-eu"
+   ],
+   [
+    "scale-invariance",
+    "simple-relative-expectation"
+   ],
+   [
+    "scale-invariance",
+    "statewise-dominance"
+   ],
+   [
+    "scale-invariance",
+    "stochastic-dominance"
+   ],
+   [
+    "scale-invariance",
+    "stochastic-equivalence"
+   ],
+   [
+    "scale-invariance",
+    "sure-thing"
+   ],
+   [
+    "scale-invariance",
+    "symmetric-neutrality"
+   ],
+   [
+    "shift-invariance",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "shift-invariance",
+    "archimedean-outcomes"
+   ],
+   [
+    "shift-invariance",
+    "arroyo-value"
+   ],
+   [
+    "shift-invariance",
+    "expected-utility"
+   ],
+   [
+    "shift-invariance",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "shift-invariance",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "shift-invariance",
+    "folded-expectation"
+   ],
+   [
+    "shift-invariance",
+    "independence"
+   ],
+   [
+    "shift-invariance",
+    "l1-continuity"
+   ],
+   [
+    "shift-invariance",
+    "negative-self-similarity"
+   ],
+   [
+    "shift-invariance",
+    "pasadena-value"
+   ],
+   [
+    "shift-invariance",
+    "reflection-anti-invariance"
+   ],
+   [
+    "shift-invariance",
+    "relative-expectation"
+   ],
+   [
+    "shift-invariance",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "shift-invariance",
+    "restricted-totality"
+   ],
+   [
+    "shift-invariance",
+    "rich-outcomes"
+   ],
+   [
+    "shift-invariance",
+    "shift-transfer"
+   ],
+   [
+    "shift-invariance",
+    "simple-eu"
+   ],
+   [
+    "shift-invariance",
+    "simple-relative-expectation"
+   ],
+   [
+    "shift-invariance",
+    "statewise-dominance"
+   ],
+   [
+    "shift-invariance",
+    "stochastic-dominance"
+   ],
+   [
+    "shift-invariance",
+    "stochastic-equivalence"
+   ],
+   [
+    "shift-invariance",
+    "sure-thing"
+   ],
+   [
+    "shift-invariance",
+    "symmetric-neutrality"
+   ],
+   [
+    "shift-invariance",
+    "totality"
+   ],
+   [
+    "shift-transfer",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "shift-transfer",
+    "archimedean-outcomes"
+   ],
+   [
+    "shift-transfer",
+    "arroyo-value"
+   ],
+   [
+    "shift-transfer",
+    "expected-utility"
+   ],
+   [
+    "shift-transfer",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "shift-transfer",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "shift-transfer",
+    "folded-expectation"
+   ],
+   [
+    "shift-transfer",
+    "independence"
+   ],
+   [
+    "shift-transfer",
+    "l1-continuity"
+   ],
+   [
+    "shift-transfer",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "shift-transfer",
+    "negative-self-similarity"
+   ],
+   [
+    "shift-transfer",
+    "pasadena-value"
+   ],
+   [
+    "shift-transfer",
+    "positive-affine-invariance"
+   ],
+   [
+    "shift-transfer",
+    "reflection-anti-invariance"
+   ],
+   [
+    "shift-transfer",
+    "relative-expectation"
+   ],
+   [
+    "shift-transfer",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "shift-transfer",
+    "restricted-totality"
+   ],
+   [
+    "shift-transfer",
+    "rich-outcomes"
+   ],
+   [
+    "shift-transfer",
+    "scale-invariance"
+   ],
+   [
+    "shift-transfer",
+    "shift-invariance"
+   ],
+   [
+    "shift-transfer",
+    "simple-eu"
+   ],
+   [
+    "shift-transfer",
+    "simple-relative-expectation"
+   ],
+   [
+    "shift-transfer",
+    "statewise-dominance"
+   ],
+   [
+    "shift-transfer",
+    "stochastic-dominance"
+   ],
+   [
+    "shift-transfer",
+    "stochastic-equivalence"
+   ],
+   [
+    "shift-transfer",
+    "sure-thing"
+   ],
+   [
+    "shift-transfer",
+    "symmetric-neutrality"
+   ],
+   [
+    "shift-transfer",
+    "totality"
+   ],
+   [
+    "simple-eu",
+    "arroyo-value"
+   ],
+   [
+    "simple-eu",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "simple-eu",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "simple-eu",
+    "independence"
+   ],
+   [
+    "simple-eu",
+    "negative-self-similarity"
+   ],
+   [
+    "simple-eu",
+    "pasadena-value"
+   ],
+   [
+    "simple-eu",
+    "reflection-anti-invariance"
+   ],
+   [
+    "simple-eu",
+    "rich-outcomes"
+   ],
+   [
+    "simple-eu",
+    "shift-invariance"
+   ],
+   [
+    "simple-eu",
+    "shift-transfer"
+   ],
+   [
+    "simple-eu",
+    "simple-relative-expectation"
+   ],
+   [
+    "simple-eu",
+    "statewise-dominance"
+   ],
+   [
+    "simple-eu",
+    "stochastic-dominance"
+   ],
+   [
+    "simple-eu",
+    "stochastic-equivalence"
+   ],
+   [
+    "simple-eu",
+    "sure-thing"
+   ],
+   [
+    "simple-eu",
+    "symmetric-neutrality"
+   ],
+   [
+    "simple-relative-expectation",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "simple-relative-expectation",
+    "archimedean-outcomes"
+   ],
+   [
+    "simple-relative-expectation",
+    "arroyo-value"
+   ],
+   [
+    "simple-relative-expectation",
+    "expected-utility"
+   ],
+   [
+    "simple-relative-expectation",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "simple-relative-expectation",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "simple-relative-expectation",
+    "folded-expectation"
+   ],
+   [
+    "simple-relative-expectation",
+    "independence"
+   ],
+   [
+    "simple-relative-expectation",
+    "l1-continuity"
+   ],
+   [
+    "simple-relative-expectation",
+    "negative-affine-anti-invariance"
+   ],
+   [
+    "simple-relative-expectation",
+    "negative-self-similarity"
+   ],
+   [
+    "simple-relative-expectation",
+    "pasadena-value"
+   ],
+   [
+    "simple-relative-expectation",
+    "positive-affine-invariance"
+   ],
+   [
+    "simple-relative-expectation",
+    "reflection-anti-invariance"
+   ],
+   [
+    "simple-relative-expectation",
+    "relative-expectation"
+   ],
+   [
+    "simple-relative-expectation",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "simple-relative-expectation",
+    "restricted-totality"
+   ],
+   [
+    "simple-relative-expectation",
+    "rich-outcomes"
+   ],
+   [
+    "simple-relative-expectation",
+    "scale-invariance"
+   ],
+   [
+    "simple-relative-expectation",
+    "shift-invariance"
+   ],
+   [
+    "simple-relative-expectation",
+    "shift-transfer"
+   ],
+   [
+    "simple-relative-expectation",
+    "simple-eu"
+   ],
+   [
+    "simple-relative-expectation",
+    "statewise-dominance"
+   ],
+   [
+    "simple-relative-expectation",
+    "stochastic-dominance"
+   ],
+   [
+    "simple-relative-expectation",
+    "stochastic-equivalence"
+   ],
+   [
+    "simple-relative-expectation",
+    "sure-thing"
+   ],
+   [
+    "simple-relative-expectation",
+    "symmetric-neutrality"
+   ],
+   [
+    "simple-relative-expectation",
+    "totality"
+   ],
+   [
+    "statewise-dominance",
+    "archimedean-outcomes"
+   ],
+   [
+    "statewise-dominance",
+    "arroyo-value"
+   ],
+   [
+    "statewise-dominance",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "statewise-dominance",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "statewise-dominance",
+    "independence"
+   ],
+   [
+    "statewise-dominance",
+    "negative-self-similarity"
+   ],
+   [
+    "statewise-dominance",
+    "pasadena-value"
+   ],
+   [
+    "statewise-dominance",
+    "reflection-anti-invariance"
+   ],
+   [
+    "statewise-dominance",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "statewise-dominance",
+    "restricted-totality"
+   ],
+   [
+    "statewise-dominance",
+    "rich-outcomes"
+   ],
+   [
+    "statewise-dominance",
+    "shift-invariance"
+   ],
+   [
+    "statewise-dominance",
+    "shift-transfer"
+   ],
+   [
+    "statewise-dominance",
+    "simple-eu"
+   ],
+   [
+    "statewise-dominance",
+    "simple-relative-expectation"
+   ],
+   [
+    "statewise-dominance",
+    "stochastic-dominance"
+   ],
+   [
+    "statewise-dominance",
+    "stochastic-equivalence"
+   ],
+   [
+    "statewise-dominance",
+    "sure-thing"
+   ],
+   [
+    "statewise-dominance",
+    "symmetric-neutrality"
+   ],
+   [
+    "stochastic-dominance",
+    "archimedean-outcomes"
+   ],
+   [
+    "stochastic-dominance",
+    "arroyo-value"
+   ],
+   [
+    "stochastic-dominance",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "stochastic-dominance",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "stochastic-dominance",
+    "independence"
+   ],
+   [
+    "stochastic-dominance",
+    "negative-self-similarity"
+   ],
+   [
+    "stochastic-dominance",
+    "pasadena-value"
+   ],
+   [
+    "stochastic-dominance",
+    "reflection-anti-invariance"
+   ],
+   [
+    "stochastic-dominance",
+    "restricted-totality"
+   ],
+   [
+    "stochastic-dominance",
+    "rich-outcomes"
+   ],
+   [
+    "stochastic-dominance",
+    "shift-invariance"
+   ],
+   [
+    "stochastic-dominance",
+    "shift-transfer"
+   ],
+   [
+    "stochastic-dominance",
+    "simple-eu"
+   ],
+   [
+    "stochastic-dominance",
+    "simple-relative-expectation"
+   ],
+   [
+    "stochastic-dominance",
+    "statewise-dominance"
+   ],
+   [
+    "stochastic-dominance",
+    "sure-thing"
+   ],
+   [
+    "stochastic-dominance",
+    "symmetric-neutrality"
+   ],
+   [
+    "stochastic-equivalence",
+    "archimedean-outcomes"
+   ],
+   [
+    "stochastic-equivalence",
+    "arroyo-value"
+   ],
+   [
+    "stochastic-equivalence",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "stochastic-equivalence",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "stochastic-equivalence",
+    "independence"
+   ],
+   [
+    "stochastic-equivalence",
+    "negative-self-similarity"
+   ],
+   [
+    "stochastic-equivalence",
+    "pasadena-value"
+   ],
+   [
+    "stochastic-equivalence",
+    "reflection-anti-invariance"
+   ],
+   [
+    "stochastic-equivalence",
+    "restricted-totality"
+   ],
+   [
+    "stochastic-equivalence",
+    "rich-outcomes"
+   ],
+   [
+    "stochastic-equivalence",
+    "shift-invariance"
+   ],
+   [
+    "stochastic-equivalence",
+    "shift-transfer"
+   ],
+   [
+    "stochastic-equivalence",
+    "simple-eu"
+   ],
+   [
+    "stochastic-equivalence",
+    "simple-relative-expectation"
+   ],
+   [
+    "stochastic-equivalence",
+    "statewise-dominance"
+   ],
+   [
+    "stochastic-equivalence",
+    "stochastic-dominance"
+   ],
+   [
+    "stochastic-equivalence",
+    "sure-thing"
+   ],
+   [
+    "stochastic-equivalence",
+    "symmetric-neutrality"
+   ],
+   [
+    "sure-thing",
+    "archimedean-outcomes"
+   ],
+   [
+    "sure-thing",
+    "arroyo-value"
+   ],
+   [
+    "sure-thing",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "sure-thing",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "sure-thing",
+    "independence"
+   ],
+   [
+    "sure-thing",
+    "negative-self-similarity"
+   ],
+   [
+    "sure-thing",
+    "pasadena-value"
+   ],
+   [
+    "sure-thing",
+    "reflection-anti-invariance"
+   ],
+   [
+    "sure-thing",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "sure-thing",
+    "restricted-totality"
+   ],
+   [
+    "sure-thing",
+    "rich-outcomes"
+   ],
+   [
+    "sure-thing",
+    "shift-invariance"
+   ],
+   [
+    "sure-thing",
+    "shift-transfer"
+   ],
+   [
+    "sure-thing",
+    "simple-eu"
+   ],
+   [
+    "sure-thing",
+    "simple-relative-expectation"
+   ],
+   [
+    "sure-thing",
+    "statewise-dominance"
+   ],
+   [
+    "sure-thing",
+    "stochastic-dominance"
+   ],
+   [
+    "sure-thing",
+    "stochastic-equivalence"
+   ],
+   [
+    "sure-thing",
+    "symmetric-neutrality"
+   ],
+   [
+    "symmetric-neutrality",
+    "archimedean-outcomes"
+   ],
+   [
+    "symmetric-neutrality",
+    "arroyo-value"
+   ],
+   [
+    "symmetric-neutrality",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "symmetric-neutrality",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "symmetric-neutrality",
+    "independence"
+   ],
+   [
+    "symmetric-neutrality",
+    "negative-self-similarity"
+   ],
+   [
+    "symmetric-neutrality",
+    "pasadena-value"
+   ],
+   [
+    "symmetric-neutrality",
+    "reflection-anti-invariance"
+   ],
+   [
+    "symmetric-neutrality",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "symmetric-neutrality",
+    "restricted-totality"
+   ],
+   [
+    "symmetric-neutrality",
+    "rich-outcomes"
+   ],
+   [
+    "symmetric-neutrality",
+    "shift-invariance"
+   ],
+   [
+    "symmetric-neutrality",
+    "shift-transfer"
+   ],
+   [
+    "symmetric-neutrality",
+    "simple-eu"
+   ],
+   [
+    "symmetric-neutrality",
+    "simple-relative-expectation"
+   ],
+   [
+    "symmetric-neutrality",
+    "statewise-dominance"
+   ],
+   [
+    "symmetric-neutrality",
+    "stochastic-dominance"
+   ],
+   [
+    "symmetric-neutrality",
+    "stochastic-equivalence"
+   ],
+   [
+    "symmetric-neutrality",
+    "sure-thing"
+   ],
+   [
+    "totality",
+    "alternating-st-petersburg-value"
+   ],
+   [
+    "totality",
+    "archimedean-outcomes"
+   ],
+   [
+    "totality",
+    "arroyo-value"
+   ],
+   [
+    "totality",
+    "failure-archimedean-gambles"
+   ],
+   [
+    "totality",
+    "failure-countable-sure-thing"
+   ],
+   [
+    "totality",
+    "independence"
+   ],
+   [
+    "totality",
+    "negative-self-similarity"
+   ],
+   [
+    "totality",
+    "pasadena-value"
+   ],
+   [
+    "totality",
+    "reflection-anti-invariance"
+   ],
+   [
+    "totality",
+    "restricted-stochastic-equivalence"
+   ],
+   [
+    "totality",
+    "rich-outcomes"
+   ],
+   [
+    "totality",
+    "shift-invariance"
+   ],
+   [
+    "totality",
+    "shift-transfer"
+   ],
+   [
+    "totality",
+    "simple-eu"
+   ],
+   [
+    "totality",
+    "simple-relative-expectation"
+   ],
+   [
+    "totality",
+    "statewise-dominance"
+   ],
+   [
+    "totality",
+    "stochastic-dominance"
+   ],
+   [
+    "totality",
+    "stochastic-equivalence"
+   ],
+   [
+    "totality",
+    "sure-thing"
+   ],
+   [
+    "totality",
+    "symmetric-neutrality"
+   ]
+  ],
+  "unknown": {
+   "affine-symmetric-extension": [],
+   "eventual-clipped-expectation": [
+    "arroyo-value",
+    "negative-affine-anti-invariance",
+    "negative-self-similarity",
+    "pasadena-value",
+    "positive-affine-invariance",
+    "shift-invariance",
+    "shift-transfer",
+    "simple-relative-expectation"
+   ],
+   "total-continuous-ultrafilter": [
+    "alternating-st-petersburg-value",
+    "arroyo-value",
+    "folded-expectation",
+    "l1-continuity",
+    "negative-self-similarity",
+    "pasadena-value",
+    "relative-expectation",
+    "shift-transfer",
+    "simple-relative-expectation"
+   ],
+   "total-exact-ultrafilter": [
+    "alternating-st-petersburg-value",
+    "arroyo-value",
+    "negative-self-similarity",
+    "pasadena-value",
+    "shift-invariance",
+    "shift-transfer",
+    "simple-relative-expectation"
+   ]
+  },
+  "problems": [],
+  "infos": []
+ },
+ "downloads": {
+  "bundle": "unbounded-utility-map.zip",
+  "json": "data.json",
+  "zip": "source.zip",
+  "lean": "lean/"
+ },
+ "background_md": "# Unbounded utility: random variables\n\nThis topic records a first reading of **Decision theory unbound** (Goodsell,\n2024; published online in 2023) and **Symmetries of value** (Goodsell, 2026).\nThe source PDFs are in this topic's `sources/` directory:\n[Decision theory unbound](sources/Nous%20-%202023%20-%20Goodsell%20-%20Decision%20theory%20unbound%20%281%29.pdf)\nand [Symmetries of value](sources/Goodsell%20-%202026%20-%20Symmetries%20of%20value.pdf).\nSee `extraction.md` for the source inventory, limitations, and transcription notes.\n\n## Objects and standing assumptions\n\nA gamble is a measurable **outcome-valued random variable** X on a fixed\natomless standard probability space, which can be represented by [0,1] with\nLebesgue measure or by countably many independent fair coin tosses. All such\nvariables are available. Thus the first paper's **Prospect Richness** is a\ndomain convention here; it is different from the **Rich Outcomes** node.\n\nThe relation ≽ on gambles is reflexive and transitive. Write X ~ Y when both\ncomparisons hold, and X ≻ Y when X ≽ Y but not Y ≽ X. **Totality is optional.**\nOutcomes themselves are linearly ordered by their sure comparisons; outcomes\nindifferent for sure are identified. There are two distinct reference outcomes\ncalled 0 and 1, with 1 ≻ 0. These are outcome and nondegeneracy conventions,\nnot an assumption that all gambles are comparable.\n\nEqual random variables are the same object, but random variables with the same\nlaw need not be indifferent. **Stochastic Equivalence is optional.** In\nparticular, do not replace a variable with an independent copy in a preference\ncomparison without an axiom that licenses the replacement. Almost-sure\nindifference also follows from the dominance or equivalence axioms when used;\nit is not an extra background preference axiom.\n\n## Mixtures and restrictions\n\nM_p(X,Y) means a p chance of X and a 1-p chance of Y. Fix the following lift on\n[0,1], with an arbitrary fixed convention at endpoints:\n\n- if 0 ≤ w < p, M_p(X,Y)(w) = X(w/p);\n- otherwise, M_p(X,Y)(w) = Y((w-p)/(1-p)).\n\nIts law is the mixture of the input laws. It is **not** the pointwise utility\naverage pX+(1-p)Y. Associativity and commutativity of probability mixtures are\nidentities of laws; their use as preference identities requires Stochastic\nEquivalence. All theorem imports from the distribution formulation retain that\naxiom explicitly or obtain it from Stochastic Dominance.\n\nX|E equals X on E and the reference outcome 0 off E. Set X ≽_E Y iff\nX|E ≽ Y|E. This is the first paper's definition, not conditional expectation\nand not a fresh ranking conditional on a changed probability measure.\n\n## Real utility levels and the two outcome principles\n\nDo not make all outcomes real-valued utilities by definition: doing so would\nhide the outcome assumption the user wants to inspect. Start with an ordered\nstandard Borel outcome space O. Its finite real utility chart u is calibrated by\nbinary comparisons relative to 0 and 1, as in Decision theory unbound, §2.1,\nfootnote 9:\n\n- for 0 ≤ r ≤ 1, u(o)=r means o ~ M_r(1,0);\n- for r > 1, u(o)=r means 1 ~ M_(1/r)(o,0);\n- for r < 0, u(o)=r means 0 ~ M_(-r/(1-r))(1,o).\n\nThe better outcome is placed first in each binary mixture. In the negative\nbranch this exchanges the two branches of the source's notation, to align\nthe fixed random-variable lift with Archimedean Outcomes. Under the source's\nStochastic Equivalence the two conventions agree. No branch exchange is\nsilently used as an indifference when Stochastic Equivalence is absent.\n\nThe chart, wherever defined, is understood to be single-valued, measurable,\nand compatible with the sure-outcome order; sure-indifferent outcomes have\nalready been identified. These are the source's utility-level conventions.\nThey are not a representation of preferences over all gambles. The remaining\naxioms constrain how these binary comparisons extend to other random variables.\n\n**Rich Outcomes:** every r ∈ ℝ occurs in this chart. This does not exclude\nadditional outcomes lacking a finite level. It is the first paper's axiom\ncalled \"Unbounded Utility\", which is stronger than mere unboundedness.\n\n**Archimedean Outcomes:** whenever sure a ≻ b ≻ c, there is p ∈ (0,1) such\nthat b ~ M_p(a,c). This supplies a finite chart coordinate for every outcome:\napply the condition to o and the reference pair 0,1 in their order. It does\nnot require that every real coordinate be realized. In particular it must not\nbe conflated with **Archimedean Gambles**, which quantifies over arbitrary\ngambles in all three positions.\n\nThe **Simple Expected Utility** node asserts that this chart is total and\nrepresents every finite-valued gamble by its expectation. Surjectivity is\ndeliberately omitted from that node and supplied by **Rich Outcomes**.\nConsequently Simple EU implies Archimedean Outcomes, but no implication from\nRich Outcomes to Archimedean Outcomes is recorded.\n\nArithmetic notation such as X+b and −X abbreviates transforming the **utility\nlevels of the outcomes of X**, using u and its inverse on realized levels.\nNumerical principles quantify over variables in the finite chart for which\nthe indicated transformed outcomes are available; they make no claim about\noutcomes outside that chart. Full affine-group composition uses Rich Outcomes.\nThe source theorem packages include Rich Outcomes and Simple EU, so their\nchart is all of ℝ and all the operations exist. Thus, throughout the numerical\nproofs, X may simply be read as the real random variable u(X).\n\n## Expectation and continuity\n\nAn ordinary expected utility in this dataset is **finite**: E|u(X)|<∞.\nThe sources treat St Petersburg as lacking an expected utility for their EU\nprinciple. No rule comparing equal +∞ expectations is imported, and a\nconditionally convergent series is not treated as a Lebesgue expectation.\n\nRelative Expectation uses the expectation of the **pointwise difference**\nu(X)-u(Y), which can be integrable when neither variable is. Mixtures remain\nrandomized selection, so these are different operations.\n\nThe L¹ node uses E|u(X_n)-u(X)|→0 for the variables' actual coupling, and the\nupper-section closure clause printed in Symmetries, p. 23. This does not impose\nStochastic Equivalence by definition. With Stochastic Equivalence and the full\nrandom-variable domain it is equivalent to the source's infimum-over-couplings\nmetric; the translation is explained in `writeups/l1-translation.md`.\n\nFolded expectation requires absolute integrability of the *combined tail\ndifference*. It does not require each tail to be integrable and does not mean\nmerely taking a conditionally convergent improper integral.\n\n## Source theorem packages\n\nPreordering and availability of all random variables are standing throughout.\nThe 2026 paper's DTU is represented by:\n\n**Rich Outcomes + Totality + Stochastic Equivalence + Simple EU + Stochastic\nDominance + Mixture Independence.**\n\nThe Stochastic Equivalence premise is redundant given this topic's weak-plus-\nstrict Dominance node, but is retained in imports to make the translation\nvisible. Archimedean Outcomes follows from Simple EU. **DTU + Sym** additionally\nassumes Negative Affine Anti-Invariance, which supplies Positive Affine\nInvariance as well as reflection. The elementary decomposition is recorded.\n\nFull sufficient premise packages are preferred over unproved claims that a\npaper's assumptions are minimal. There are no Lean files or Lean claims.\n\n## Evidence and logical limitations\n\nProvenance names the direct source: **Decision Theory Unbound**, **Symmetries\nof Value**, or **Misc.** for original connecting proofs and one-off suggestions.\nAll records retain precise source references. The certificate names the mathematical author in\n`produced_by` and credits AI transcription separately in `recorded_by`.\nThe checker list remains empty: human authorship of the source does not assert\nhuman checking of its database transcription. A proved status here includes\n**an application of a cited source theorem**; it does not mean that every\npublished proof has been independently audited. The record states when a\nsource supplies no expanded proof.\n\nCountermodels witness non-implication. Source-based existence models are not\nimplemented comparison algorithms. The executable checks verify selected\nconcrete witness calculations, not arbitrary infinite or nonconstructive claims.\n\nThe two \"Failure of ...\" nodes express genuine negations, recorded with\nexplicit `negates` links. If the background implies both sides of either pair,\nthe graph displays a red inconsistency warning and hides all arrows. This\ncheck uses proved results under the current source filters. The inference\nengine still uses positive Horn rules; it does not infer arbitrary statements\nfrom a contradiction. Missing arrows and missing model flags mean **not recorded**.\n",
+ "background_html": "<h1 id=\"unbounded-utility-random-variables\">Unbounded utility: random variables</h1>\n<p>This topic records a first reading of <strong>Decision theory unbound</strong> (Goodsell, 2024; published online in 2023) and <strong>Symmetries of value</strong> (Goodsell, 2026). The source PDFs are in this topic’s <code>sources/</code> directory: <a href=\"sources/Nous%20-%202023%20-%20Goodsell%20-%20Decision%20theory%20unbound%20%281%29.pdf\">Decision theory unbound</a> and <a href=\"sources/Goodsell%20-%202026%20-%20Symmetries%20of%20value.pdf\">Symmetries of value</a>. See <code>extraction.md</code> for the source inventory, limitations, and transcription notes.</p>\n<h2 id=\"objects-and-standing-assumptions\">Objects and standing assumptions</h2>\n<p>A gamble is a measurable <strong>outcome-valued random variable</strong> X on a fixed atomless standard probability space, which can be represented by [0,1] with Lebesgue measure or by countably many independent fair coin tosses. All such variables are available. Thus the first paper’s <strong>Prospect Richness</strong> is a domain convention here; it is different from the <strong>Rich Outcomes</strong> node.</p>\n<p>The relation ≽ on gambles is reflexive and transitive. Write X ~ Y when both comparisons hold, and X ≻ Y when X ≽ Y but not Y ≽ X. <strong>Totality is optional.</strong> Outcomes themselves are linearly ordered by their sure comparisons; outcomes indifferent for sure are identified. There are two distinct reference outcomes called 0 and 1, with 1 ≻ 0. These are outcome and nondegeneracy conventions, not an assumption that all gambles are comparable.</p>\n<p>Equal random variables are the same object, but random variables with the same law need not be indifferent. <strong>Stochastic Equivalence is optional.</strong> In particular, do not replace a variable with an independent copy in a preference comparison without an axiom that licenses the replacement. Almost-sure indifference also follows from the dominance or equivalence axioms when used; it is not an extra background preference axiom.</p>\n<h2 id=\"mixtures-and-restrictions\">Mixtures and restrictions</h2>\n<p>M_p(X,Y) means a p chance of X and a 1-p chance of Y. Fix the following lift on [0,1], with an arbitrary fixed convention at endpoints:</p>\n<ul>\n<li>if 0 ≤ w &lt; p, M_p(X,Y)(w) = X(w/p);</li>\n<li>otherwise, M_p(X,Y)(w) = Y((w-p)/(1-p)).</li>\n</ul>\n<p>Its law is the mixture of the input laws. It is <strong>not</strong> the pointwise utility average pX+(1-p)Y. Associativity and commutativity of probability mixtures are identities of laws; their use as preference identities requires Stochastic Equivalence. All theorem imports from the distribution formulation retain that axiom explicitly or obtain it from Stochastic Dominance.</p>\n<p>X|E equals X on E and the reference outcome 0 off E. Set X ≽_E Y iff X|E ≽ Y|E. This is the first paper’s definition, not conditional expectation and not a fresh ranking conditional on a changed probability measure.</p>\n<h2 id=\"real-utility-levels-and-the-two-outcome-principles\">Real utility levels and the two outcome principles</h2>\n<p>Do not make all outcomes real-valued utilities by definition: doing so would hide the outcome assumption the user wants to inspect. Start with an ordered standard Borel outcome space O. Its finite real utility chart u is calibrated by binary comparisons relative to 0 and 1, as in Decision theory unbound, §2.1, footnote 9:</p>\n<ul>\n<li>for 0 ≤ r ≤ 1, u(o)=r means o ~ M_r(1,0);</li>\n<li>for r &gt; 1, u(o)=r means 1 ~ M_(1/r)(o,0);</li>\n<li>for r &lt; 0, u(o)=r means 0 ~ M_(-r/(1-r))(1,o).</li>\n</ul>\n<p>The better outcome is placed first in each binary mixture. In the negative branch this exchanges the two branches of the source’s notation, to align the fixed random-variable lift with Archimedean Outcomes. Under the source’s Stochastic Equivalence the two conventions agree. No branch exchange is silently used as an indifference when Stochastic Equivalence is absent.</p>\n<p>The chart, wherever defined, is understood to be single-valued, measurable, and compatible with the sure-outcome order; sure-indifferent outcomes have already been identified. These are the source’s utility-level conventions. They are not a representation of preferences over all gambles. The remaining axioms constrain how these binary comparisons extend to other random variables.</p>\n<p><strong>Rich Outcomes:</strong> every r ∈ ℝ occurs in this chart. This does not exclude additional outcomes lacking a finite level. It is the first paper’s axiom called “Unbounded Utility”, which is stronger than mere unboundedness.</p>\n<p><strong>Archimedean Outcomes:</strong> whenever sure a ≻ b ≻ c, there is p ∈ (0,1) such that b ~ M_p(a,c). This supplies a finite chart coordinate for every outcome: apply the condition to o and the reference pair 0,1 in their order. It does not require that every real coordinate be realized. In particular it must not be conflated with <strong>Archimedean Gambles</strong>, which quantifies over arbitrary gambles in all three positions.</p>\n<p>The <strong>Simple Expected Utility</strong> node asserts that this chart is total and represents every finite-valued gamble by its expectation. Surjectivity is deliberately omitted from that node and supplied by <strong>Rich Outcomes</strong>. Consequently Simple EU implies Archimedean Outcomes, but no implication from Rich Outcomes to Archimedean Outcomes is recorded.</p>\n<p>Arithmetic notation such as X+b and −X abbreviates transforming the <strong>utility levels of the outcomes of X</strong>, using u and its inverse on realized levels. Numerical principles quantify over variables in the finite chart for which the indicated transformed outcomes are available; they make no claim about outcomes outside that chart. Full affine-group composition uses Rich Outcomes. The source theorem packages include Rich Outcomes and Simple EU, so their chart is all of ℝ and all the operations exist. Thus, throughout the numerical proofs, X may simply be read as the real random variable u(X).</p>\n<h2 id=\"expectation-and-continuity\">Expectation and continuity</h2>\n<p>An ordinary expected utility in this dataset is <strong>finite</strong>: E|u(X)|&lt;∞. The sources treat St Petersburg as lacking an expected utility for their EU principle. No rule comparing equal +∞ expectations is imported, and a conditionally convergent series is not treated as a Lebesgue expectation.</p>\n<p>Relative Expectation uses the expectation of the <strong>pointwise difference</strong> u(X)-u(Y), which can be integrable when neither variable is. Mixtures remain randomized selection, so these are different operations.</p>\n<p>The L¹ node uses E|u(X_n)-u(X)|→0 for the variables’ actual coupling, and the upper-section closure clause printed in Symmetries, p. 23. This does not impose Stochastic Equivalence by definition. With Stochastic Equivalence and the full random-variable domain it is equivalent to the source’s infimum-over-couplings metric; the translation is explained in <code>writeups/l1-translation.md</code>.</p>\n<p>Folded expectation requires absolute integrability of the <em>combined tail difference</em>. It does not require each tail to be integrable and does not mean merely taking a conditionally convergent improper integral.</p>\n<h2 id=\"source-theorem-packages\">Source theorem packages</h2>\n<p>Preordering and availability of all random variables are standing throughout. The 2026 paper’s DTU is represented by:</p>\n<p><strong>Rich Outcomes + Totality + Stochastic Equivalence + Simple EU + Stochastic Dominance + Mixture Independence.</strong></p>\n<p>The Stochastic Equivalence premise is redundant given this topic’s weak-plus- strict Dominance node, but is retained in imports to make the translation visible. Archimedean Outcomes follows from Simple EU. <strong>DTU + Sym</strong> additionally assumes Negative Affine Anti-Invariance, which supplies Positive Affine Invariance as well as reflection. The elementary decomposition is recorded.</p>\n<p>Full sufficient premise packages are preferred over unproved claims that a paper’s assumptions are minimal. There are no Lean files or Lean claims.</p>\n<h2 id=\"evidence-and-logical-limitations\">Evidence and logical limitations</h2>\n<p>Provenance names the direct source: <strong>Decision Theory Unbound</strong>, <strong>Symmetries of Value</strong>, or <strong>Misc.</strong> for original connecting proofs and one-off suggestions. All records retain precise source references. The certificate names the mathematical author in <code>produced_by</code> and credits AI transcription separately in <code>recorded_by</code>. The checker list remains empty: human authorship of the source does not assert human checking of its database transcription. A proved status here includes <strong>an application of a cited source theorem</strong>; it does not mean that every published proof has been independently audited. The record states when a source supplies no expanded proof.</p>\n<p>Countermodels witness non-implication. Source-based existence models are not implemented comparison algorithms. The executable checks verify selected concrete witness calculations, not arbitrary infinite or nonconstructive claims.</p>\n<p>The two “Failure of …” nodes express genuine negations, recorded with explicit <code>negates</code> links. If the background implies both sides of either pair, the graph displays a red inconsistency warning and hides all arrows. This check uses proved results under the current source filters. The inference engine still uses positive Horn rules; it does not infer arbitrary statements from a contradiction. Missing arrows and missing model flags mean <strong>not recorded</strong>.</p>\n",
+ "contribute_md": "# Contribute\n\nEmail me (Zach) at [zacharyw.goodsell@gmail.com](mailto:zacharyw.goodsell@gmail.com) with further suggestions.\n\nTo contribute to Unbounded Utility, please include **[Unbounded Utility]** in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!\n\nTo contribute to the Logical Maps project in general, please include **[Logical Maps]** in the subject line.\n",
+ "contribute_html": "<h1 id=\"contribute\">Contribute</h1>\n<p>Email me (Zach) at <a href=\"mailto:zacharyw.goodsell@gmail.com\">zacharyw.goodsell@gmail.com</a> with further suggestions.</p>\n<p>To contribute to Unbounded Utility, please include <strong>[Unbounded Utility]</strong> in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!</p>\n<p>To contribute to the Logical Maps project in general, please include <strong>[Logical Maps]</strong> in the subject line.</p>\n",
+ "extraction_md": "# Source extraction: 8 September 2026\n\n## Sources\n\n| Key | Supplied file | Published reference |\n| --- | --- | --- |\n| U | `sources/Nous - 2023 - Goodsell - Decision theory unbound (1).pdf` | Goodsell, *Decision theory unbound*, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473; online 2023 |\n| S | `sources/Goodsell - 2026 - Symmetries of value.pdf` | Goodsell, *Symmetries of value*, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549 |\n\nPage references in the YAML are **printed journal pages**. For U, PDF page 1\nis printed p. 669; for S, PDF page 1 is printed p. 16. Local PDFs were read\ndirectly; no other papers were used as substitute evidence.\n\n## Main extracted relations\n\nAll rows are relative to the framework in `background.md`; DTU and Sym are\nexpanded there and in each YAML record.\n\n| Relation | Source |\n| --- | --- |\n| Simple EU ⇒ Archimedean Outcomes, Restricted Totality, Restricted Stochastic Equivalence | S p. 22 n. 3; U §§2.3, 3.2 |\n| Stochastic Dominance ⇒ Stochastic Equivalence; with Archimedean Outcomes ⇒ Statewise Dominance | U pp. 678–679 |\n| Rich + Archimedean Outcomes + Stochastic Equivalence + Statewise Dominance ⇒ Stochastic Dominance | U p. 678 n. 19; real quantile translation |\n| Stochastic Equivalence + Mixture Independence ⇒ Sure-Thing | U p. 679 and p. 682 n. 28 |\n| Original DTU axiom package ⇒ Simple EU and Mixture Independence | U pp. 679–681 |\n| Rich Outcomes + Simple EU + Sure-Thing ⇒ failure of Countable Sure-Thing | U §2.3, pp. 675–676 |\n| DTU ⇒ failure of Archimedean Gambles | S p. 22 |\n| Under Rich Outcomes: shift + scale ⇔ positive affine invariance | U §4.2; S §5 |\n| Under Rich Outcomes: negative affine anti-invariance ⇔ positive affine invariance + reflection anti-invariance | S p. 24 |\n| DTU + L¹ Continuity ⇒ Expected Utility | S p. 23 |\n| DTU + Sym ⇒ shift transfer and Simple Relative Expectation | S Theorems 3–4 |\n| Under DTU + Sym: Relative Expectation ⇔ L¹ Continuity | S Corollary 5 |\n| DTU + Sym + L¹ Continuity ⇒ Folded Expectation | S Theorem 6 |\n| DTU + Sym ⇒ alternating St Petersburg ~ −1/2 and uniqueness of negative self-similarity | S Theorems 9–10 |\n| DTU + Sym + L¹ Continuity ⇒ Arroyo ~ ln 2 and Pasadena ~ ln 2 | S Theorems 8, 11 |\n| DTU + Sym + L¹ Continuity is consistent | S Theorem 2, with construction in §5 |\n| DTU does not imply Expected Utility, and is consistent with it | U Theorems 1–3, Appendix B |\n| DTU + EU + shift + reflection does not imply scale invariance | U Theorems 7, 8, 10 |\n\nThese are implications with **joint premises**, not separate arrows from each\npremise. Straightforward restrictions (for example EU ⇒ Simple EU) and the\nreflection/symmetric-neutrality observation are also recorded.\n\n## Models\n\n1. **Eventual clipped expectations** (U Theorem 2): incomplete, satisfies\n   finite EU and dominance; violates EU. Its lack of Totality has an explicit\n   alternating-St-Petersburg witness. The checks also exhibit failure of L¹\n   Continuity.\n2. **Exact ultrafilter ordering** (U Theorem 1): total, satisfies DTU, violates\n   EU. Source Theorem 10 supplies failure of scale invariance.\n3. **Continuous ultrafilter quotient** (U Theorem 3): satisfies DTU and EU,\n   shift and reflection. Source Theorem 10 supplies failure of scale invariance.\n4. **Affine-symmetric extension** (S Theorem 2): a source-attributed\n   nonconstructive existence model for DTU + Sym + L¹ Continuity. Its\n   Countable Sure-Thing and Archimedean Gambles failures follow from the same\n   St Petersburg arguments as for other DTU models.\n\nEach satisfies/violates entry is either explained in its write-up, inherited\nfrom a recorded implication, or explicitly attributed to a source theorem.\nSource-attributed is weaker evidence than an independent proof audit. The direct\nsource is identified by `certificate.source_id`; `produced_by`, `recorded_by`,\nand the empty checker list describe authorship and the separate transcription.\n\n## Provenance and display categories\n\nDirect source filters distinguish **Decision Theory Unbound** (11 records),\n**Symmetries of Value** (19 records), and **Misc.** (12 records: ten connecting\nproofs and two user-suggested conjectures). Every arrow and model retains its\nauthor, date, and precise source references.\nThe ten AI arrows are restrictions/compositions added to connect definitions:\n`totality-restricts`, `stochastic-equivalence-restricts`,\n`expected-utility-implies-simple`, `archimedean-gambles-restricts`,\n`positive-affine-implies-shift`, `positive-affine-implies-scale`,\n`shift-scale-imply-positive-affine`, `relative-implies-simple-relative`,\n`relative-implies-eu`, and `folded-implies-eu`. Their sources explicitly\nidentify the AI proof as well as the paper definitions it uses.\n\nThe graph filter groups all 31 principles into Basic decision theory (15),\nInvariance principles (7), Extensions of EUT (5), and Prospect evaluations (4).\nEach group has independent select-all/unselect-all controls. Category and\ncheckbox changes only affect display, not the underlying implication rules.\n\n## Transcription decisions and issues needing care\n\n- S p. 24 prints a same-direction sign in the displayed **Reflection\n  Anti-Invariance** definition. Read it as X≽Y iff −X≼−Y. This is forced by\n  the negative-affine definition directly above, the introduction, and the\n  subsequent proofs. It was checked visually in the PDF.\n- The intended reflection axiom uses **one fixed utility origin**, as the\n  explanatory prose on p. 24 says. Requiring reflection around every possible\n  origin would also imply shifts. The literal phrase \"for any utility\n  representation\" in that display should not silently strengthen this node.\n- U p. 673 n. 9 prints an impossible interval in the middle branch of the\n  utility definition. The normalized branch is 0≤r≤1, as required for the\n  described probabilities. The negative and greater-than-one branches are\n  kept separate.\n- U pp. 683–684 defines **clipping**: mass beyond ±t moves to the endpoints.\n  Its shorthand integral with bounds ±t must not be implemented as deleting\n  the tails. We use E[max(−t,min(X,t))]. The prose and figure were checked\n  visually. The cone discussion in S §5 inherits a related notational issue.\n- S p. 28's Pasadena prose omits `/n`; Table 2 and Theorem 11 include it.\n  This extraction uses −(−2)^n/n, probability 2^(−n).\n- S Theorem 9 repeats one strict-comparison sign in the concluding sentence;\n  the second case is the opposite strict comparison.\n- S Theorem 10's expanded formula appears to print `−a^n` where the\n  geometric recursion requires `(−a)^n`. The extracted principle records its\n  clear **uniqueness in value** conclusion. No questionable expansion is used\n  as a formula in the map.\n- S p. 27's informal comparison with a reflection needs attention to a\n  factor of two if it is used numerically. We do not import that sentence as\n  a separate theorem or algorithm.\n- U Theorem 10's displayed scale identity should be interpreted using\n  E[c_t(aX)] = a E[c_(t/a)(X)]. The printed oscillating-function witness also\n  has endpoint and normalization issues. Scale non-implication is recorded\n  as the **source theorem's claim**, not as a numerically reconstructed proof.\n\n## Deferred rather than silently asserted\n\n- S Theorem 1 states stronger non-implications even after adding L¹, Relative\n  Expectation, Weak Expectation, and Principal Value principles. The present\n  models record the weaker, clearly identified U witnesses; they are **not**\n  given these extra satisfies flags without a further proof audit.\n- Weak Expectation and Principal Value theories are discussed and distinguished\n  in S §4, but their full source definitions would need another careful pass.\n  Their relative strength is not guessed from the words \"principal value\".\n- The conjecture at the end of S §4 that DTU + Sym + L¹ entails either of those\n  theories remains a conjecture. Pasadena's evaluation does not prove it.\n- U's Coherent Extensibility concerns a class of alternative orderings and\n  extension relations, beyond this topic's single primitive preorder. Its\n  role in the consistency discussion is noted but it is not forced into an\n  axiom about an individual random variable.\n- No Rich Outcomes ⇒ Archimedean Outcomes implication has been inferred from\n  the papers' convenient identification of outcomes with ℝ.\n- No blanket EU ⇒ affine symmetry, EU ⇒ full Stochastic Equivalence, or\n  Countable Sure-Thing equivalence is asserted. EU only governs integrable\n  variables; full symmetry and law invariance cover more variables.\n- The two explicit negation pairs now have `negates` links. A background\n  deriving both sides triggers a red graph warning and suppresses arrows.\n  This is a consistency check; the Horn rules do not use explosion.\n\n## Reproduce\n\n### Candidate additions from the user\n\nTwo further **human-proposed conjectures** were recorded on 8 September 2026:\n\n- Countable Sure-Thing + Archimedean Outcomes ⇒ Archimedean Gambles.\n- Countable Sure-Thing + Simple EU ⇒ Expected Utility.\n\nThese supplement the 36 proved records above. They appear in Conjectures and\nas dashed arrows when the graph's Conjectures option is enabled; they do not\nparticipate in proved deductions. Each record identifies the user's proposal\nas its source and lists the remaining verification work. The Russell–Isaacs\nreference attached to the first is related literature, not a verified\nattribution of the exact two-premise claim.\n\nThe map is deliberately selective and can grow through later additions.\nAn unrecorded implication need not be an open problem in the literature.\n\n### Commands\n\nFrom `principle-map-GENERIC/`, with its Python requirements installed:\n\n```sh\npython3 scripts/pmap.py validate unbounded-utility\npython3 topics/unbounded-utility/checks/countermodels.py\npython3 scripts/pmap.py build unbounded-utility --no-pdf\n```\n\nOpen `build/unbounded-utility/index.html`. Source YAML, the framework, and\nwrite-ups remain under `topics/unbounded-utility/`; the original example topic\nand shared renderer are unchanged.\n"
+}

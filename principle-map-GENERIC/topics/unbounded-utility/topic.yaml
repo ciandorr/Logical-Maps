@@ -1,0 +1,47 @@
+id: unbounded-utility
+require_sources: true
+source_catalog:
+- id: decision-theory-unbound
+  name: Decision Theory Unbound
+  kind: published-paper
+- id: symmetries-of-value
+  name: Symmetries of Value
+  kind: published-paper
+- id: misc
+  name: Misc.
+  kind: misc
+title: 'Unbounded utility: random variables'
+description: First source-based extraction from Goodsell (2024, 2026). Preordering is standing; stochastic
+  equivalence, outcome richness, and outcome Archimedeanness are explicit principles.
+framework: Gambles are measurable outcome-valued random variables on an atomless standard probability
+  space. All such variables are available (Prospect Richness is standing). ≽ is reflexive and transitive,
+  not assumed total or law-invariant. Outcomes are linearly ordered, with distinct reference outcomes
+  0 and 1, and sure-indifferent outcomes identified. A possibly partial real utility chart is defined
+  by binary certainty comparisons; see background.md. Rich Outcomes supplies all real levels; Archimedean
+  Outcomes rules out outcomes beyond the finite chart. M_p(X,Y) is randomized selection, never the pointwise
+  sum pX+(1-p)Y.
+background: []
+background_presets:
+- id: du
+  name: DU
+  category: basic-decision-theory
+  default: true
+  principles:
+  - rich-outcomes
+  - totality
+  - stochastic-equivalence
+  - simple-eu
+  - stochastic-dominance
+  - independence
+notation: X ≽ Y; X ≻ Y iff X ≽ Y and not Y ≽ X; X ~ Y iff both. L(X) is the law, X|E is X on E and sure
+  0 elsewhere. Numerical expressions use the normalized utility chart.
+principle_categories:
+- id: basic-decision-theory
+  name: Basic decision theory
+- id: invariance-principles
+  name: Invariance principles
+- id: extensions-of-eut
+  name: Extensions of EUT
+- id: prospect-evaluations
+  name: Prospect evaluations
+lean_lib: UnboundedUtility

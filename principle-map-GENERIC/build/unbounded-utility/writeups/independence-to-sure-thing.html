@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Stochastic Equivalence ∧ Mixture Independence ⇒ Sure-Thing</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Stochastic Equivalence ∧ Mixture Independence ⇒ Sure-Thing</h1>
+</header>
+<p class="cert">
+Result — Source: Decision Theory Unbound; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.
+</p>
+<h2 id="premises">Premises</h2>
+<ul>
+<li><strong>Stochastic Equivalence.</strong> If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.</li>
+<li><strong>Mixture Independence.</strong> For all X,Y,Z and 0&lt;p&lt;1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Sure-Thing.</strong> For an event E with 0&lt;P(E)&lt;1, if X|E ~ Y|E, then X ≽ Y iff X|Eᶜ ≽ Y|Eᶜ. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.</li>
+</ul>
+<h2 id="proof">Proof</h2>
+<p>Let p=P(E). Realize the conditional laws on E and Eᶜ as A,B for X and C,D for Y. Law invariance gives X~M_p(A,B), Y~M_p(C,D), X|E~M_p(A,0), Y|E~M_p(C,0). Independence cancels 0 to yield A~C from the hypothesis. Replace indifferent mixture components and cancel the common E component: X≽Y iff B≽D. The latter is equivalent to X|Eᶜ≽Y|Eᶜ by independence and law invariance.</p>
+<h2 id="notes">Notes</h2>
+<p>Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><strong>Decision Theory Unbound</strong> — Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §3.2, p. 679 and p. 682, footnote 28</li>
+</ul>
+<p class="cert">
+Record: <code>topics/unbounded-utility/results/independence-to-sure-thing.yaml</code>
+</p>
+</body>
+</html>

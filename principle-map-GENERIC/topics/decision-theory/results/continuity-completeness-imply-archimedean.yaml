@@ -1,0 +1,21 @@
+id: continuity-completeness-imply-archimedean
+premises: [continuity, completeness]
+conclusion: archimedean
+status: proved
+certificate:
+  provenance: ai
+  lean: none
+  produced_by: "Claude Fable 5.1 (Cowork session)"
+  checked_by: []
+  date: 2026-09-08
+proof: |
+  Let p ≻ q ≻ r and set A = {λ : λp+(1−λ)r ≽ q}, B = {λ : q ≽ λp+(1−λ)r}.
+  Both are closed by continuity and A ∪ B = [0,1] by completeness. Since
+  1 ∉ B (as p ≻ q) and [0,1]∖B is open, some interval (1−ε, 1] lies in
+  [0,1]∖B ⊆ A; any α in it with α < 1 gives αp+(1−α)r ≻ q. Symmetrically,
+  0 ∉ A (as q ≻ r) yields [0, ε) ⊆ B∖A and any β in it with β > 0 gives
+  q ≻ βp+(1−β)r.
+sources: []
+notes: >
+  Completeness is used to conclude λ ∈ A from λ ∉ B; whether continuity
+  alone suffices is left open here.

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Weighted utility</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Weighted utility</h1>
+</header>
+<p class="cert">
+Model — Source: Misc.; produced by literature.
+</p>
+<h2 id="package">Package</h2>
+<ul>
+<li><strong>Completeness.</strong> For all p, q ∈ Δ(X): p ≽ q or q ≽ p.</li>
+<li><strong>Transitivity.</strong> For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.</li>
+<li><strong>Closed-graph continuity.</strong> The set {(p, q) ∈ Δ(X) × Δ(X) : p ≽ q} is closed in the product topology.</li>
+<li><strong>Betweenness.</strong> For all p, q ∈ Δ(X) and λ ∈ (0,1): if p ≻ q then p ≻ λp + (1−λ)q ≻ q, and if p ~ q then p ~ λp + (1−λ)q.</li>
+<li><strong>¬ Independence.</strong> For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.</li>
+</ul>
+<h2 id="construction">Construction</h2>
+<p>Weighted utility. Fix u : X → ℝ and a weight w : X → (0,∞) that is not constant, and let V(p) = Σ p(x)w(x)u(x) / Σ p(x)w(x); put p ≽ q iff V(p) ≥ V(q). V is continuous on Δ(X), so ≽ is a weak order with closed graph. Its indifference sets are the intersections of Δ(X) with hyperplanes {p : Σ p(x)w(x)(u(x) − v) = 0}, which are straight, so betweenness holds. Since w is not constant these hyperplanes are not parallel, so ≽ is not an expected-utility order and (being a continuous weak order) must violate independence.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li>Chew (1983), A generalization of the quasilinear mean with applications to the measurement of income inequality and decision theory resolving the Allais paradox, Econometrica 51</li>
+<li>Dekel (1986), An axiomatic characterization of preferences under uncertainty: weakening the independence axiom, JET 40</li>
+</ul>
+<p class="cert">
+Record: <code>topics/decision-theory/models/weighted-utility.yaml</code>
+</p>
+</body>
+</html>

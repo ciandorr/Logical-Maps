@@ -1,0 +1,15 @@
+id: transitivity-implies-quasi-transitivity
+premises: [transitivity]
+conclusion: quasi-transitivity
+status: proved
+certificate:
+  provenance: ai
+  lean: none
+  produced_by: "Claude Fable 5.1 (Cowork session)"
+  checked_by: []
+  date: 2026-09-08
+proof: |
+  Let p ≻ q ≻ r. Then p ≽ q ≽ r, so p ≽ r. If also r ≽ p then r ≽ p ≽ q
+  gives r ≽ q, contradicting q ≻ r. So p ≻ r.
+sources: []
+notes: ""

@@ -1,0 +1,64 @@
+id: lexicographic-folded-extension
+name: "Folded-tail cone: lexicographic extension"
+satisfies:
+- rich-outcomes
+- totality
+- stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- independence
+- cdf-area-extension
+- relative-expectation
+- folded-expectation
+- reflection-anti-invariance
+- shift-invariance
+violates:
+- l1-continuity
+- scale-invariance
+- negative-self-similarity
+- alternating-st-petersburg-value
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex) (folded-tail quotient and infinitesimal separation), adapting Zachary Goodsell's area-cone and total-extension methods
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+description: Take all real-valued random variables. In the vector space spanned by their folded-tail
+  profiles h_X(t)=P(X>t)−P(X<−t), t>0, quotient out every integrable profile of integral zero.
+  The base positive cone consists of profiles with integrable negative part and nonnegative
+  finite or positive-infinite integral. Put e=[h_1], q=−1/2, and f=[h_A−h_q] for the alternating
+  St Petersburg gamble A. Both sign areas of h_A−h_q are infinite, so this cone meets span(e,f)
+  only in the nonnegative e ray. Add the lexicographic cone a e+b f>0 iff a>0 or a=0,b>0,
+  then extend the resulting pointed cone to a total pointed cone by Zorn's lemma. Define
+  X≽Y by membership of [h_X−h_Y]. The write-up verifies every satisfied axiom. In particular
+  q≺A≺q+ε for every ε>0. Hence constants q+1/n converge in L¹ to q and all exceed A,
+  while q does not weakly exceed A; the recorded upper-section L¹ Continuity fails.
+  The distributional recursion of A gives a scaling reversal and nonunique negative
+  self-similarity. The total extension is an existence construction, not an algorithm.
+sources:
+- GPT-6 (Codex), original model adaptation and separation in Logical Maps, 9 September 2026;
+  writeups/lexicographic-folded-extension.md.
+- Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549,
+  Folded Expectation and its tail representation, pp. 27–29; alternating St Petersburg and
+  negative self-similarity, pp. 29–31; cone-extension framework, §5, pp. 33–37.
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript
+  marked “do not cite” and erroneous; §3, pp. 7–8, the base area preorder. Its withdrawn
+  symmetric-extension theorem is not used.
+source_names:
+- GPT-6 model adaptation 9 Sep
+- Symmetries of Value
+- Unbounded Utility and Background Risk (unpublished)
+notes: 'Original work: substantial model adaptation and separation. Goodsell supplies the area-order
+  idea, folded-tail evaluations, alternating-game recursion and use of total cone extensions.
+  Work here passes to folded profiles modulo zero-integral L1 profiles, inserts an infinitesimal
+  lexicographic comparison, proves that the two cones remain compatible, and gives an explicit
+  upper-section continuity counterexample. This establishes DTU + Folded Expectation (even with
+  Relative Expectation, reflection, shift and CDF-Area Extension) does not imply L1 Continuity.
+  It does not contradict the source equivalence under full affine symmetry: Scale Invariance
+  fails in this model. This is work accounting, not a claim of literature priority. The executable
+  diagnostic checks exact dyadic tails and finite lexicographic witnesses; it does not execute
+  the nonconstructive extension or certify the quantified axioms.'
+checks:
+- topics/unbounded-utility/checks/lexicographic_folded_extension.py

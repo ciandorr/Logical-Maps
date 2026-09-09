@@ -1,0 +1,52 @@
+id: geometric-continuous-ultrafilter
+name: "Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]"
+satisfies:
+- rich-outcomes
+- totality
+- stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- independence
+- cdf-area-extension
+- l1-continuity
+- folded-expectation
+- reflection-anti-invariance
+- shift-invariance
+violates:
+- scale-invariance
+- alternating-st-petersburg-value
+- negative-self-similarity
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (continuous clipping construction); GPT-6 (Codex) (geometric-cutoff specialization
+    and additional verifications)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+description: Use real outcomes with identity utility, choose a free ultrafilter U on positive integers,
+  and put v_X(n)=E[max(−4^n,min(X,4^n))]. Define X ≽ Y iff for every ε>0, {n:v_X(n)≥v_Y(n)−ε} belongs
+  to U. This specializes Goodsell’s continuous clipped-expectation construction to geometric cutoffs.
+  The write-up proves DTU, CDF-Area Extension, L¹ Continuity and Folded Expectation directly, with reflection
+  and shift. For alternating St Petersburg A, v_A(n)=−1/3 and v_(2A)(n)=−4/3 for every n≥1, so A ≻ −1/2
+  while 2A ≺ −1. This verifies failure of Scale Invariance and the recorded alternating evaluation without
+  relying on the printed scale witness. A and sure −1/2 both satisfy the same negative self-similarity
+  equation, but have different values, so that uniqueness principle also fails.
+sources:
+- 'Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473,
+  Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Theorems 7–10, pp. 693–695: underlying
+  continuous clipping construction and original scale-failure strategy.'
+- 'GPT-6 (Codex), 9 September 2026, writeups/geometric-continuous-ultrafilter.md: geometric-cutoff specialization,
+  explicit alternating-St-Petersburg witness, and additional CDF-area/L¹/folded-expectation verifications.'
+source_names:
+- Decision Theory Unbound
+- GPT-6 model adaptation 9 Sep
+notes: 'Original work: model adaptation and direct verification. Reuses Goodsell’s continuous ultrafilter
+  ordering; the preference construction is not claimed as original. New work here chooses cutoffs 4^n
+  to fix an exact alternating-game value, gives an explicit scaling reversal and nonunique self-similarity
+  witness, and proves additional area/continuity/folded flags. This describes work performed in this project,
+  not a claim of novelty in the literature. A free ultrafilter is nonconstructive; the numerical check
+  verifies the finite formulas and estimates, not ultrafilter existence or all quantified axioms.'
+checks:
+- topics/unbounded-utility/checks/geometric_clipping.py

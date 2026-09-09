@@ -1,4 +1,4 @@
-# Total ordering by an ultrafilter of clipped expectations
+# Clipped expectation: exact ultrafilter dominance
 
 Source: Goodsell, *Decision theory unbound*, Appendix B, Theorems 1, 3,
 and 10. Human model: Zachary Goodsell.

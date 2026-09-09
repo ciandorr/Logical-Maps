@@ -1,0 +1,63 @@
+id: asymmetric-continuous-ultrafilter
+name: "Clipped expectation: continuous ultrafilter dominance [−t, 2t]"
+satisfies:
+- rich-outcomes
+- totality
+- stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- independence
+- expected-utility
+- l1-continuity
+- relative-expectation
+- cdf-area-extension
+- shift-invariance
+- shift-transfer
+violates:
+- symmetric-neutrality
+- reflection-anti-invariance
+- negative-affine-anti-invariance
+- folded-expectation
+- negative-self-similarity
+- alternating-st-petersburg-value
+status: proved
+certificate:
+  source_id: symmetries-of-value
+  lean: none
+  produced_by: Zachary Goodsell (construction and source non-implication); GPT-6 (Codex) (explicit specialization
+    and additional property calculations)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+description: Take all real-valued random variables and q_t(x)=max(-t,min(x,2t)). For a cobounded ultrafilter
+  U on t>0, put X≽Y iff for every ε>0 the set {t:E[q_t(X)]≥E[q_t(Y)]−ε} belongs to U. The continuous quotient
+  preserves DTU, finite EU, L¹ Continuity, Relative Expectation, CDF-Area Extension, Shift Invariance,
+  and Transfer of a Shift Across a Mixture. A standard symmetric Cauchy variable has value ln(2)/π>0,
+  violating neutral symmetry, reflection and Folded Expectation. It and zero provide distinct fixed values
+  for the negative self-similarity map X↦M_(1/2)(−2X,0). Paired atoms give Alternating St Petersburg value
+  zero. The accompanying write-up proves every recorded flag.
+sources:
+- Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 1, p.
+  24. Already states the failure of affine-symmetry implications under DTU, including with L¹ Continuity
+  and Relative Expectation, and cites Decision theory unbound, Remark 3, for the reflection countermodel.
+- GPT-6 (Codex), explicit source-model specialization and additional calculations, 9 September 2026; writeups/asymmetric-continuous-ultrafilter.md,
+  in response to Zachary Goodsell's request to investigate consequences and countermodels from DU.
+- Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473,
+  Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Remark 3 and Corollary 3, pp.
+  692–693. Source of the clipped-expectation ultrafilter, continuous quotient, and asymmetric-cutoff strategy,
+  including the possibility of assigning nonzero values to symmetric gambles.
+source_names:
+- Symmetries of Value
+- GPT-6 generated 9 Sep
+- Decision Theory Unbound
+notes: 'Original work: source-model specialization and additional verification. The asymmetric construction
+  and the non-implication of reflection even under DTU + L¹ Continuity + Relative Expectation are already
+  Goodsell’s: Symmetries of value, Theorem 1 (p. 24), citing Decision theory unbound, Remark 3. They are
+  not new AI results. The 2024 paper supplies the continuous quotient and separate increasing cutoffs;
+  Corollary 3 already permits nonzero values for symmetric gambles. Work recorded here chooses f(t)=2t
+  and g(t)=t and spells out the CDF-area/shift-transfer verification and exact Cauchy, alternating-game
+  and negative-self-similarity witnesses. These added calculations are not a claim of literature novelty.
+  No scale or sum-invariance verdict is asserted without proof. Diagnostic checks do not certify the general
+  axioms or ultrafilter existence.'
+checks:
+- topics/unbounded-utility/checks/asymmetric_continuous_ultrafilter.py

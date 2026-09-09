@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Rich Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Mixture Independence ∧ Symmetric Gambles Are Neutral ⇒ Reflection Anti-Invariance</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Rich Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Mixture Independence ∧ Symmetric Gambles Are Neutral ⇒ Reflection Anti-Invariance</h1>
+</header>
+<p class="cert">
+Result — Source: Unbounded Utility and Background Risk (unpublished); produced by Zachary Goodsell (unpublished manuscript); recorded by GPT-6 (Codex), 2026-09-09; extraction and random-variable translation.
+</p>
+<h2 id="premises">Premises</h2>
+<ul>
+<li><strong>Rich Outcomes.</strong> Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.</li>
+<li><strong>Totality.</strong> For all gambles X,Y, either X ≽ Y or Y ≽ X.</li>
+<li><strong>Stochastic Equivalence.</strong> If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.</li>
+<li><strong>Mixture Independence.</strong> For all X,Y,Z and 0&lt;p&lt;1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.</li>
+<li><strong>Symmetric Gambles Are Neutral.</strong> If u(X) and −u(X) have the same law, then X ~ 0.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Reflection Anti-Invariance.</strong> X ≽ Y iff −Y ≽ −X, using the one fixed normalized origin 0.</li>
+</ul>
+<h2 id="proof">Proof</h2>
+<p>Suppose X ≽ Y but not −Y ≽ −X. Totality gives −X ≻ −Y. Mixture Independence (including its strict consequence), transitivity, and Stochastic Equivalence to interchange mixture branches give M_½(X,−X) ≻ M_½(Y,−Y). Each mixture has a symmetric law, so Symmetric Neutrality makes both indifferent to 0, a contradiction. Therefore −Y ≽ −X. Applying the same implication to −Y,−X proves the converse. Rich Outcomes supplies the reflected variables.</p>
+<h2 id="notes">Notes</h2>
+<p>The draft calls Symmetric Neutrality “Reflection Symmetry”. This argument does not use the failed extension lemma.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><strong>Unbounded Utility and Background Risk (unpublished)</strong> — Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not cite” and erroneous; p. 12 n. 1 (continuing on p. 13)</li>
+</ul>
+<p class="cert">
+Record: <code>topics/unbounded-utility/results/neutrality-totality-independence-imply-reflection.yaml</code>
+</p>
+</body>
+</html>

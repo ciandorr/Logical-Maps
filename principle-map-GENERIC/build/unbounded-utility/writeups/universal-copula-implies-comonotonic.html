@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Universal Copula Sum Invariance ⇒ Comonotonic Sum Invariance</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Universal Copula Sum Invariance ⇒ Comonotonic Sum Invariance</h1>
+</header>
+<p class="cert">
+Result — Source: Misc.; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09.
+</p>
+<h2 id="premises">Premises</h2>
+<ul>
+<li><strong>Universal Copula Sum Invariance.</strong> For every copula C, SC(C) holds. A copula C is a Borel probability measure on [0,1]² with both marginals uniform. Write H_C(u,v)=C([0,u]×[0,v]). A real-utility pair (A,B) admits C when P(A≤a,B≤b)=H_C(F_A(a),F_B(b)) for every real a,b. Define SC(C): for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same C, X ≽ Y iff X+Z ≽ Y+Z.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Comonotonic Sum Invariance.</strong> If X and Z are comonotonic, and Y and Z are comonotonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is comonotonic when its members admit nondecreasing representations in one common uniform random variable.</li>
+</ul>
+<h2 id="proof">Proof</h2>
+<p>Use the diagonal copula, the law of (U,U) for uniform U, with H(u,v)=min(u,v). For a comonotonic pair, the lower-threshold events are nested up to null sets, so its joint CDF is min(F_A(a),F_B(b)). Thus both comonotonic pairs (X,Z) and (Y,Z) admit this same copula. Applying SC(C) gives the desired biconditional for the actual X,Y,Z. No replacement of variables in a preference comparison is used.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><strong>GPT-6 generated 9 Sep</strong> — GPT-6 (Codex), original copula sum consistency definitions and connecting proofs recorded in this project, 9 September 2026, implementing Zachary Goodsell’s proposal.</li>
+<li><strong>Zach Goodsell proposal 9 Sep</strong> — Zachary Goodsell, project TODO.md copula-sum proposal and request to add universal/existential variants, 9 September 2026; precise definitions recorded by GPT-6 (Codex).</li>
+</ul>
+<p class="cert">
+Record: <code>topics/unbounded-utility/results/universal-copula-implies-comonotonic.yaml</code>
+</p>
+</body>
+</html>

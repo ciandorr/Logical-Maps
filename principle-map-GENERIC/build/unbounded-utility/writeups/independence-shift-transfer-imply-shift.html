@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Mixture Independence and Shift Transfer imply Shift Invariance</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Mixture Independence and Shift Transfer imply Shift Invariance</h1>
+</header>
+<p><strong>Claim.</strong> Mixture Independence + Shift Transfer imply Shift Invariance.</p>
+<p>Fix real-utility variables <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>∈</mo><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle></mrow><annotation encoding="application/x-tex">b\in\mathbb R</annotation></semantics></math> such that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">X+b</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">Y+b</annotation></semantics></math> are available. Apply Shift Transfer with mixture weight <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">1/2</annotation></semantics></math> and transfer parameter <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">b/2</annotation></semantics></math>, first to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X,X)</annotation></semantics></math> and then to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(Y,X)</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">M_{1/2}(X+b,X)\sim M_{1/2}(X,X+b),</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">M_{1/2}(Y+b,X)\sim M_{1/2}(Y,X+b).</annotation></semantics></math></p>
+<p>Transitivity of the standing preorder lets an indifferent object replace either side of a weak comparison. Therefore</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right"><mi>X</mi><mo>≽</mo><mi>Y</mi></mtd><mtd columnalign="left"><mo>⇔</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>≽</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right"></mtd><mtd columnalign="left"><mo>⇔</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>≽</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right"></mtd><mtd columnalign="left"><mo>⇔</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo>≽</mo><mi>Y</mi><mo>+</mo><mi>b</mi><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+X\succeq Y
+&amp;\iff M_{1/2}(X,X+b)\succeq M_{1/2}(Y,X+b)\\
+&amp;\iff M_{1/2}(X+b,X)\succeq M_{1/2}(Y+b,X)\\
+&amp;\iff X+b\succeq Y+b.
+\end{aligned}</annotation></semantics></math></p>
+<p>The first and last equivalences are exactly Mixture Independence, with common second arguments <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">X+b</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> respectively.</p>
+<p>No branch interchange, independent copy, totality assumption or law identity occurs. Using <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> as the common gamble also avoids assuming the availability of a new sure outcome at utility <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>: all transformations used were already stipulated to exist in this instance of Shift Invariance.</p>
+<p><strong>Original work: direct consequence.</strong> This is a two-application specialization followed by mixture cancellation. The choice of common gamble is the small domain check needed to avoid unnecessary outcome-richness assumptions. No literature novelty is asserted.</p>
+<p><strong>Attribution.</strong> GPT-6 (Codex), 9 September 2026, original connecting argument for this project. No independent checker or Lean proof is claimed.</p>
+</body>
+</html>

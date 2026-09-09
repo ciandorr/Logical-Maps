@@ -1,0 +1,30 @@
+id: independent-sum-and-equivalence-imply-existential-copula
+premises:
+- independent-sum-consistency
+- stochastic-equivalence
+conclusion: existential-copula-sum-consistency
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: Choose the product copula once. For an eligible triple admitting that copula in both pairs, Z is
+  separately independent of X and Y, but need not be independent of (X,Y). On the standing atomless space
+  realize independent uniforms U,V, and utility coordinates X′=Q_X(U), Y′=Q_Y(U), Z′=Q_Z(V). Now Z′ is
+  independent of (X′,Y′). The marginal laws and both pair laws agree with those of the original triple;
+  consequently so do the two sum laws. Independent Sum Invariance gives the biconditional for the new
+  triple. Stochastic Equivalence and transitivity transfer it to the original comparisons. This establishes
+  SC(C) for the product copula.
+sources:
+- GPT-6 (Codex), original copula sum consistency definitions and connecting proofs recorded in this project,
+  9 September 2026, implementing Zachary Goodsell’s proposal.
+- Zachary Goodsell, project TODO.md copula-sum proposal and request to add universal/existential variants,
+  9 September 2026; precise definitions recorded by GPT-6 (Codex).
+source_names:
+- GPT-6 generated 9 Sep
+- Zach Goodsell proposal 9 Sep
+notes: The Stochastic Equivalence premise licenses copying the variables; pairwise independence alone
+  does not license applying the existing jointly-independent sum principle to the original triple.

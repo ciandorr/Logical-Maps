@@ -1,4 +1,4 @@
-# Eventual ordering of clipped expectations
+# Clipped expectation: eventual dominance
 
 Source: Goodsell, *Decision theory unbound*, Theorem 2, pp. 683–685;
 Theorems 7 and 9, p. 693. Human model: Zachary Goodsell.
@@ -26,7 +26,8 @@ of the upper-tail functions on [-t,t]. It is nonnegative. If one tail
 inequality is strict, right continuity supplies an interval with positive
 integral; all sufficiently large truncations therefore have a positive gap.
 The preference is strictly better. This proves the weak and strict dominance
-clauses, and the topic's Statewise Dominance consequence follows.
+clauses, and the topic's Statewise Dominance consequence follows. Thus this
+is a DU model. It is not a DTU model, since Totality fails as shown below.
 
 Reflection gives v_(-X)(t)=-v_X(t). Positive rescaling gives
 v_(aX)(t)=a v_X(t/a); eventual comparisons are unchanged by this

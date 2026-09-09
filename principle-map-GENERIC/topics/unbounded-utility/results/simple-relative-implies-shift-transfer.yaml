@@ -1,0 +1,24 @@
+id: simple-relative-implies-shift-transfer
+premises:
+- simple-relative-expectation
+conclusion: shift-transfer
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: Put A=M_p(X+b/p,Y) and B=M_p(X,Y+b/(1−p)), using the same fixed mixture lift. Their actual utility
+  difference is b/p on the first branch, of probability p, and −b/(1−p) on the second branch. It is simple
+  and has mean zero. Simple Relative Expectation in both directions therefore gives A~B. No law replacement
+  or independence assumption is used.
+sources:
+- GPT-6 (Codex), original connecting proof and premise audit in the Logical Maps project, 9 September
+  2026; see the accompanying handwritten write-up.
+source_names:
+- GPT-6 generated 9 Sep
+notes: 'Original work: direct consequence. Observe that the two mixtures have a two-valued, zero-mean
+  difference under the actual common lift, and apply Simple Relative Expectation. This describes the work
+  needed for this database entry, not a claim of novelty in the literature.'

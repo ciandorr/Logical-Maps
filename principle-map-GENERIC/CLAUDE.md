@@ -70,13 +70,26 @@ When you (an AI) add or edit a result or model:
   `source.zip`. Add originals to the topic folder, not only to generated output.
   Keep a source inventory with short names and full references in the topic.
 - File name = `id`. Kebab-case. Never rename an id that other files reference.
+- Give models short, systematic names describing their construction or ordering
+  rule: family first, then the rule and any distinguishing variant. For example,
+  `Clipped expectation: eventual dominance` and
+  `Clipped expectation: continuous ultrafilter dominance [−t, 2t]`.
+  Keep authorship, conjecture status, and lists of satisfied/violated principles
+  in their existing metadata fields, not in the model name. Match the write-up
+  title to the model name. For conjectured extensions, name the proposed extension
+  without inventing a construction that has not been supplied.
 - Run `validate` after every batch of edits; a CONTRADICTION means the data is
   inconsistent and must be fixed before building.
 - Keep the topic's framework fixed. A principle that needs a different setting
   belongs in a different topic.
-- For an explicit logical negation principle, set `negates: <other-principle-id>`
-  on either side. Do not infer negation from names or a lack of known models.
-  This enables background warnings and validation of recorded contradictions.
+- Record incompatibility as ordinary premises with `conclusion: false`.
+  For A + B ⇒ ¬C, store premises [a, b, c] and conclude false. False is a
+  logical constant, never a principle, premise, model assertion or background
+  assumption. Do not introduce separate failure/negates nodes.
+- Keep exclusions (P ⇒ ¬C) distinct from countermodels (P ⇏ C). The former
+  need not establish a model of P. Unknown is neither true nor false.
+- After engine changes, also run `python3 scripts/check_falsity.py` (needs
+  Node) to compare Python and browser semantics against truth-table oracles.
 - Optional display categories are declared in `topic.yaml` as ordered
   `principle_categories: [{id, name}, ...]`; assign each principle a `category`
   id. These group graph filters and do not change logical inference.
@@ -84,3 +97,16 @@ When you (an AI) add or edit a result or model:
   `name`, `category`, `principles`, and optional `default: true`. Defaults are
   removable and overridden by explicit URL selections; do not promote them
   to fixed `background` assumptions or remove premises from recorded theorems.
+- In unbounded utility, **DU excludes Totality; DTU = DU + Totality**. The DU
+  preset uses Rich Outcomes, Archimedean Outcomes, Stochastic Equivalence,
+  Stochastic Dominance and Mixture Independence. **Simple EU is derived, not
+  assumed in the preset**: the recorded result
+  `rich-archimedean-dominance-independence-imply-simple-eu` uses Rich Outcomes,
+  Archimedean Outcomes, Stochastic Dominance and Mixture Independence; do not
+  claim that Rich Outcomes and Archimedean Outcomes alone suffice. Restricted
+  Totality follows from Simple EU; it is not Totality for arbitrary gambles.
+  The source formulation with Simple EU instead of Archimedean Outcomes is
+  equivalent under the other DU assumptions. Preserve each result's explicit
+  premises, and call the package with Totality DTU in summaries and sources.
+  Named conjunctions are display abbreviations, never principle IDs to insert
+  into result premises or model assertions.

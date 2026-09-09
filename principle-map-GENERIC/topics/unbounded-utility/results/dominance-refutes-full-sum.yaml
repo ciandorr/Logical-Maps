@@ -1,0 +1,30 @@
+id: dominance-refutes-full-sum
+premises:
+- rich-outcomes
+- stochastic-dominance
+- full-sum-consistency
+conclusion: false
+status: proved
+certificate:
+  source_id: unpublished-background-risk
+  lean: none
+  produced_by: Zachary Goodsell (unpublished manuscript)
+  checked_by: []
+  date: '2026-09-09'
+  recorded_by: GPT-6 (Codex), 2026-09-09; extraction and random-variable translation
+proof: 'Let P,Q each have St Petersburg law P(P=2ⁿ)=2⁻ⁿ, n≥1, coupled antitonically so exactly one equals 2.
+  Dominance supplies Stochastic Equivalence, hence P~Q. Full Sum Invariance with common summand P would give
+  2P~P+Q. But P+Q has the law of 2P+2: for n≥2 it takes 2ⁿ+2 with probability 2^(1−n). This strictly stochastically
+  dominates the law of 2P, contradicting the asserted indifference. Rich Outcomes and standing prospect richness
+  supply the variables and sums.'
+sources:
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §6.1, p. 17
+source_names:
+- Unbounded Utility and Background Risk (unpublished)
+notes: 'The draft credits the earlier full-sum impossibility to Seidenfeld, Schervish and Kadane. This record
+  uses the explicit witness in the supplied manuscript; it is not a new attribution of their exact theorem.
+
+
+  Representation update: the former negative conclusion is expressed by adding full-sum-consistency to the
+  premises and concluding False. The mathematical claim, source, and proof are unchanged.'

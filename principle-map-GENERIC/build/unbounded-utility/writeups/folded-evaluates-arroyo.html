@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Folded Expectation directly evaluates Arroyo</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Folded Expectation directly evaluates Arroyo</h1>
+</header>
+<p><strong>Source and work accounting.</strong> Zachary Goodsell’s <em>Symmetries of value</em>, pp. 29–30, explicitly states that Arroyo has folded expectation (2), and Theorem 8 gives its evaluation. The unshifted tail calculation below was supplied by GPT-6 (Codex), 9 September 2026, to expose the smaller sufficient package. It is a source extraction with a small calculation and premise audit, not a new discovery of Arroyo’s value. No independent checker or Lean certification is asserted.</p>
+<p>Assume Rich Outcomes and Folded Expectation. Let</p>
+<p>[ (A=(-1)^{n+1}(n+1))=1{n(n+1)},n1, ]</p>
+<p>and write (h(t)=(A&gt;t)-(A&lt;-t)) for (t0). For (t\in[m+1,m+2)), (m1), apart from immaterial endpoints,</p>
+<p>[ h(t)=_{n=m+1}^{}. ]</p>
+<p>The alternating-series estimate gives</p>
+<p>[ |h(t)|1{(m+1)(m+2)}. ]</p>
+<p>On ([0,2)) the tail difference is bounded by one. Thus</p>
+<p>[ <em>0^|h(t)|,dt 2+</em>{m=1}^{}1{(m+1)(m+2)}&lt;. ]</p>
+<p>For a symmetric cutoff (T=N+1), bounded tail integration gives</p>
+<p>[ _0<sup>{N+1}h(t),dt =<em>{n=1}^{N}n +(N+1)</em>{n=N+1}</sup>{}. ]</p>
+<p>The final term has absolute value at most (1/(N+2)), while the finite alternating harmonic sum tends to (2). Therefore Arroyo’s absolutely defined folded expectation is (2). Sure (2), available by Rich Outcomes, has the same folded expectation. The axiom gives</p>
+<p>[ A2. ]</p>
+<p>This holds for every random variable with the indicated utility law because the folded-tail condition itself depends only on that law. No separate Stochastic Equivalence, shift symmetry, continuity or DU package is needed. The use of the limit above computes an already absolutely integrable folded tail; it does not silently interpret a conditionally convergent expected utility as an ordinary Lebesgue expectation.</p>
+</body>
+</html>

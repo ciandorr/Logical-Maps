@@ -1,6 +1,49 @@
-# Source extraction: 8 September 2026
+# Source extraction: updated 9 September 2026
 
-## Sources
+## Addition: unpublished background-risk manuscript (9 September)
+
+The new supplied source is Goodsell, *Unbounded Utility and Background Risk*,
+5 June 2026, `sources/Goodsell - Unpublished (do not cite) - Erroneous.pdf`.
+It is **unpublished, marked “do not cite”, and erroneous**. Its own provenance
+name is **Unbounded Utility and Background Risk (unpublished)**.
+
+The [detailed inventory and audit](writeups/symmetric-dtu-refutes-independent-sum-candidate.md)
+records all extracted concepts and separates surviving arguments from the
+withdrawn symmetry/total-extension claims. New entries add Full, Independent,
+Comonotonic, and Antitonic Sum Invariance, separate independent-sum forward
+preservation and cancellation, and CDF-Area Extension. The sum
+incompatibilities are expressed as implications to False. Existing reflection and mixture nodes receive terminology
+aliases rather than duplicates.
+
+The [CDF-area dominance](writeups/cdf-area-preorder.md) is an explicit proved
+incomplete model; the [CDF-area conclosure: total extension](writeups/conjectured-total-independent-sum-extension.md)
+now has a proved existence construction, including Independent Sum
+Consistency. Goodsell’s conclosure and total-extension construction
+preserves the original strict comparisons and supplies totality. The model’s
+direct source is his unpublished manuscript; GPT-6 is credited for the
+cone-language exposition and additional proof details, not for originating
+the construction. Neither reflection requirement is assumed or recorded as
+violated. The user's recalled stable-law obstruction remains a conjectured
+implication pending an exact witness.
+
+After the falsity migration, this addition contributes **seven principles,
+16 relations (15 proved, one conjectured), and two proved models**.
+The full topic now has **36 principles, 55 relations, and six models**.
+Five former failure nodes were removed: their claims are constraints
+concluding False, with the existing result IDs, sources, and proof text
+preserved. Their old descriptions are archived in `writeups/falsity-migration.md`. New concrete checks
+are in `checks/background_risk.py`. No Lean formalization was added.
+
+A subsequent premise audit records **Rich Outcomes + Simple EU + Stochastic
+Dominance + Archimedean Gambles ⇒ False** using the same Goodsell
+St Petersburg argument. This strengthens the available connection beyond
+the original full-DTU package; its proof and attribution are in
+`results/rich-simple-dominance-refutes-archimedean-gambles.yaml`.
+
+The counts and descriptions below document the original two-paper extraction
+of 8 September; they are not current totals.
+
+## Original sources
 
 | Key | Supplied file | Published reference |
 | --- | --- | --- |
@@ -43,15 +86,15 @@ reflection/symmetric-neutrality observation are also recorded.
 
 ## Models
 
-1. **Eventual clipped expectations** (U Theorem 2): incomplete, satisfies
+1. **Clipped expectation: eventual dominance** (U Theorem 2): incomplete, satisfies
    finite EU and dominance; violates EU. Its lack of Totality has an explicit
    alternating-St-Petersburg witness. The checks also exhibit failure of L¹
    Continuity.
-2. **Exact ultrafilter ordering** (U Theorem 1): total, satisfies DTU, violates
+2. **Clipped expectation: exact ultrafilter dominance** (U Theorem 1): total, satisfies DTU, violates
    EU. Source Theorem 10 supplies failure of scale invariance.
-3. **Continuous ultrafilter quotient** (U Theorem 3): satisfies DTU and EU,
+3. **Clipped expectation: continuous ultrafilter dominance** (U Theorem 3): satisfies DTU and EU,
    shift and reflection. Source Theorem 10 supplies failure of scale invariance.
-4. **Affine-symmetric extension** (S Theorem 2): a source-attributed
+4. **Signed-measure cone: affine-symmetric extension** (S Theorem 2): a source-attributed
    nonconstructive existence model for DTU + Sym + L¹ Continuity. Its
    Countable Sure-Thing and Archimedean Gambles failures follow from the same
    St Petersburg arguments as for other DTU models.
@@ -135,9 +178,10 @@ checkbox changes only affect display, not the underlying implication rules.
 - No blanket EU ⇒ affine symmetry, EU ⇒ full Stochastic Equivalence, or
   Countable Sure-Thing equivalence is asserted. EU only governs integrable
   variables; full symmetry and law invariance cover more variables.
-- The two explicit negation pairs now have `negates` links. A background
-  deriving both sides triggers a red graph warning and suppresses arrows.
-  This is a consistency check; the Horn rules do not use explosion.
+- The original failure nodes have now been migrated to implications to
+  False. Deriving False triggers a red graph warning and suppresses arrows.
+  The Horn rules do not use explosion; model violations can also follow
+  from these incompatibility constraints.
 
 ## Reproduce
 
@@ -171,3 +215,83 @@ python3 scripts/pmap.py build unbounded-utility --no-pdf
 Open `build/unbounded-utility/index.html`. Source YAML, the framework, and
 write-ups remain under `topics/unbounded-utility/`; the original example topic
 and shared renderer are unchanged.
+
+
+### Copula sum invariance additions — 9 September 2026
+
+Zach Goodsell proposed the common-copula generalization in `TODO.md` and requested
+universal and existential versions. GPT-6 (Codex) recorded the precise definitions
+and supplied the connecting proofs, attributed to Misc. rather than to the
+unpublished paper. The general copula terminology follows Benth, Di Nunno and
+Schroers, [Definition 2.1 and Theorem 2.3](https://arxiv.org/html/2012.11530v2);
+that reference is not the source of the new preference principles.
+
+For a fixed copula C, SC(C) compares actual X,Y before and after adding the same
+actual Z whenever both pair laws (X,Z) and (Y,Z) admit C. The universal principle
+is ∀C SC(C); the existential principle is ∃C SC(C), with C chosen once for all
+triples and marginal laws. Atomic marginals are included, with no uniqueness of
+a pair's compatible copula assumed. Numerical operations retain the existing
+finite-chart scope.
+
+Recorded connections: Full Sum ⇒ Universal Copula Sum; Universal Copula Sum ⇒
+Existential Copula Sum and each of the three existing dependence-restricted sum
+principles; Existential Copula Sum ⇒ Shift Invariance. Each existing restricted
+sum principle, together with Stochastic Equivalence, also implies Existential
+Copula Sum. The latter proofs explicitly transfer comparisons from quantile
+realizations. In particular, product copula compatibility is only pairwise
+independence from Z, whereas the existing Independent Sum principle requires
+independence of Z from the pair (X,Y).
+
+The existing Rich Outcomes + Stochastic Dominance + Antitonic Sum incompatibility
+already rules out Universal Copula Sum under those background assumptions; no
+duplicate incompatibility record is needed. No model flags or Lean definitions
+were added, and the separate background/Lean tasks remain pending.
+
+
+### Further DU and DTU connections and resistant questions — 9 September 2026
+
+The source download includes `DU-RESEARCH-2026-09-09-ROUND2.md`, recording
+the new implication proofs, source-model specializations and an infinitesimal
+folded-tail countermodel. In particular, under DTU, L¹ Continuity implies
+Relative Expectation, which is equivalent to CDF-Area Extension; even Folded
+Expectation does not imply L¹ Continuity. Three precise outstanding questions
+are recorded as conjectures and do not contribute proved deductions. Each
+addition describes reused source material and newly supplied work.
+
+
+### DU and DTU terminology correction — 9 September 2026
+
+DU does not assume Totality over arbitrary gambles; DTU is DU plus Totality.
+The DU/DTU distinction follows *Decision theory unbound*, §3.3, pp. 681–682.
+The preset initially used the equivalent formulation with Simple EU; the
+subsequent finite-lottery proof below permits treating Simple EU as derived.
+DTU has a separate optional preset. Both presets explicitly include Archimedean
+Outcomes. Named conjunctions abbreviate these packages while retaining each
+record's full, original premises.
+
+The two research reports previously called the six-axiom package DU. Their
+package-level summaries, complete-model labels and totality-dependent conjectures
+now say DTU. Exact result premises and model flags are unchanged. Incomplete
+DU models are eligible under the default background. Claims whose listed
+premises do not need Totality remain valid DU consequences.
+
+### Simple EU as a derived DU consequence — 9 September 2026
+
+The new record `rich-archimedean-dominance-independence-imply-simple-eu`
+proves Simple EU from Rich Outcomes, Archimedean Outcomes, Stochastic
+Dominance and Mixture Independence. It uses common binary endpoints for
+finite lotteries, checks all three normalized-chart calibrations and
+measurability, and never assumes Totality or Restricted Totality.
+
+The DU preset therefore assumes Rich Outcomes, Archimedean Outcomes,
+Stochastic Equivalence, Stochastic Dominance and Mixture Independence;
+Simple EU is displayed as a consequence. DTU adds Totality. Together with
+the existing Simple EU ⇒ Archimedean Outcomes record, the new proof makes
+this equivalent to the previous Simple-EU-based package.
+
+The literal two-premise implication Rich Outcomes + Archimedean Outcomes
+⇒ Simple EU is false. The `finite-two-sample-minimum` model supplies an
+explicit witness, even with Totality and Stochastic Equivalence. Both new
+records identify the connecting work as GPT-6 (Codex), 9 September 2026;
+the source finite-lottery argument remains credited to Goodsell. Existing
+source-attributed theorem premises and proofs are unchanged.

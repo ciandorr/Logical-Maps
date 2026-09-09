@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Simple Relative Expectation implies Shift Transfer</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Simple Relative Expectation implies Shift Transfer</h1>
+</header>
+<p><strong>Claim.</strong> Simple Relative Expectation implies Transfer of a Shift Across a Mixture, without additional preference axioms.</p>
+<p>Fix an eligible pair of real-utility variables <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math>, a real number <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>p</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;p&lt;1</annotation></semantics></math>. Here and below arithmetic acts on their normalized utility levels. Set</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><msub><mi>M</mi><mi>p</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>+</mo><mi>b</mi><mi>/</mi><mi>p</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>B</mi><mo>=</mo><msub><mi>M</mi><mi>p</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo>+</mo><mi>b</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">A=M_p(X+b/p,Y),\qquad B=M_p(X,Y+b/(1-p)).</annotation></semantics></math></p>
+<p>The fixed mixture lift uses the same branch event and the same rescaled sample in both variables. Consequently</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>u</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left"><mi>b</mi><mi>/</mi><mi>p</mi><mo>,</mo></mtd><mtd columnalign="left"><mn>0</mn><mo>≤</mo><mi>w</mi><mo>&lt;</mo><mi>p</mi><mo>,</mo></mtd></mtr><mtr><mtd columnalign="left"><mo>−</mo><mi>b</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mtd><mtd columnalign="left"><mi>p</mi><mo>≤</mo><mi>w</mi><mo>≤</mo><mn>1</mn><mi>.</mi></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">u(A)-u(B)=\begin{cases}b/p,&amp;0\leq w&lt;p,\\-b/(1-p),&amp;p\leq w\leq1.\end{cases}</annotation></semantics></math></p>
+<p>Thus the difference is simple and its expectation is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mfrac><mi>b</mi><mi>p</mi></mfrac><mo>−</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mfrac><mi>b</mi><mrow><mn>1</mn><mo>−</mo><mi>p</mi></mrow></mfrac><mo>=</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">p\frac bp-(1-p)\frac b{1-p}=0.</annotation></semantics></math></p>
+<p>Simple Relative Expectation gives both <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>≽</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\succeq B</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>≽</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">B\succeq A</annotation></semantics></math>, as required. Any exceptional fixed endpoint convention affects only finitely many null sample points, so it neither destroys finiteness of the difference’s range nor changes its mean.</p>
+<p>The argument concerns the actual random variables. It does not replace them by equal-law copies, and it uses only the transformed outcomes already required to state Shift Transfer. In particular, neither Stochastic Equivalence nor Rich Outcomes is a hidden premise.</p>
+<p><strong>Original work: direct consequence.</strong> The work is identifying the two-valued difference and checking that the fixed random-variable mixture convention licenses its use. This is a database connection, with no claim of literature novelty.</p>
+<p><strong>Attribution.</strong> Connecting argument: GPT-6 (Codex), 9 September 2026. The principles themselves were extracted from Zachary Goodsell, <em>Symmetries of value</em>, Theorems 3–4. No independent checker or Lean proof is claimed.</p>
+</body>
+</html>

@@ -1,0 +1,53 @@
+id: finite-two-sample-minimum
+name: "Two-sample minimum: zero extension"
+satisfies:
+- rich-outcomes
+- archimedean-outcomes
+- totality
+- restricted-totality
+- stochastic-equivalence
+- restricted-stochastic-equivalence
+violates:
+- simple-eu
+- independence
+- stochastic-dominance
+- statewise-dominance
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+description: >-
+  Take all measurable real-valued random variables. When the law of X has finite
+  support, put V(X)=E[min(X1,X2)] for independent copies X1,X2; for every other
+  law put V(X)=0. Rank all gambles by their finite real scores V. This is a total
+  law-invariant preorder with sure score V(x)=x. The raw outcome coordinate x
+  differs from the normalized utility chart: the outcome at chart level r is
+  x=r² for r>=0 and x=−r²/(1−2r) for r<0. This is a continuous increasing
+  bijection of the real line, satisfying all three binary calibration clauses.
+  Thus the chart is total, measurable and onto, and Archimedean Outcomes holds:
+  a binary mixture of a>c has score c+(a−c)p², which reaches any intermediate b
+  at p=sqrt((b−c)/(a−c)). Nevertheless the fair raw-outcome gamble {1,4} has
+  score 7/4, below sure 9/4, although both have expected chart utility 3/2.
+  The write-up also gives exact mixture-independence and dominance failures.
+sources:
+- 'GPT-6 (Codex), Logical Maps project discussion, 9 September 2026: counterexample developed in response to the proposed Rich Outcomes plus Archimedean Outcomes implication to Simple Expected Utility; full construction and proofs in writeups/finite-two-sample-minimum.md.'
+source_names:
+- GPT-6 counterexample 9 Sep
+notes: >-
+  Original work: elementary countermodel construction, calibration audit and
+  explicit finite witnesses. This records the work performed for the project,
+  without asserting literature novelty. Finite support refers to the probability
+  law, so changes on null sets do not change the assigned score. The value-zero
+  clause for all other laws makes the construction a total preorder on the
+  full standing domain; its dominance failures are explicit. The example shows
+  that Rich Outcomes and Archimedean Outcomes alone do not entail Simple EU,
+  even after adding Totality and Stochastic Equivalence. Additional DU premises
+  such as Mixture Independence remain essential to the separate representation
+  argument. Other principle verdicts are left to recorded implications or future
+  analysis. No independent checker or Lean verification is asserted.
+checks:
+- topics/unbounded-utility/checks/finite_two_sample_minimum.py

@@ -1,0 +1,40 @@
+id: conjectured-dtu-cancellation-implies-preservation
+premises:
+- rich-outcomes
+- totality
+- stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- independence
+- independent-sum-cancellation
+conclusion: independent-sum-preservation
+status: conjectured
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex)
+  checked_by: []
+  date: '2026-09-09'
+proof: ''
+sources:
+- 'GPT-6 (Codex), 9 September 2026, follow-up question and partial analysis in writeups/conjectured-dtu-cancellation-implies-preservation.md.'
+- 'Zachary Goodsell, Unbounded Utility and Background Risk, unpublished manuscript, 5 June 2026, Lemma 1, pp. 7–8: source for the separated sum principles, not this conjecture.'
+source_names:
+- GPT-6 conjecture 9 Sep
+- Unbounded Utility and Background Risk (unpublished)
+notes: >-
+  Original work: conjecture formulation and partial analysis, not a proof
+  or consistency witness. Totality plus cancellation already preserves
+  strict comparisons. The unsettled issue is whether DTU forces common
+  independent noise to preserve indifference as well. The new proved
+  result continuous-total-cancellation-implies-preservation settles this
+  after adding L1 Continuity: shift the upper variable by 1/n and pass
+  to the limit. Without continuity that limiting step is unavailable.
+  A proof must close the indifference gap without assuming continuity;
+  a countermodel must satisfy all six DTU axioms plus cancellation and
+  exhibit a tied pair that independent noise separates. Such a model
+  would necessarily violate L1 Continuity. The existing total
+  independent-sum extension satisfies both directions and does not
+  separate them. This is an open entry in this map, not a claim about
+  whether the question has been settled in the literature.

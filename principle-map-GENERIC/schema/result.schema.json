@@ -2,7 +2,7 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "result.schema.json",
  "title": "Result",
- "description": "An implication: premises (with the topic background) entail conclusion. Independences are not recorded as results; they are derived from models.",
+ "description": "An implication: premises entail a principle or False. A False conclusion records incompatibility. Counterexamples to implications are recorded as models.",
  "type": "object",
  "additionalProperties": false,
  "required": [
@@ -25,7 +25,15 @@
    "uniqueItems": true
   },
   "conclusion": {
-   "type": "string"
+   "oneOf": [
+    {
+     "type": "string"
+    },
+    {
+     "const": false
+    }
+   ],
+   "description": "A principle id, or false (YAML boolean false or the string \"false\") for incompatible premises. False is a logical constant, not a principle."
   },
   "status": {
    "type": "string",

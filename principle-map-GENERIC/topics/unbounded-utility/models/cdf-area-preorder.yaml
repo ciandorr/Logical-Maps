@@ -1,0 +1,49 @@
+id: cdf-area-preorder
+name: "CDF-area dominance"
+satisfies:
+- rich-outcomes
+- archimedean-outcomes
+- cdf-area-extension
+- expected-utility
+- relative-expectation
+- stochastic-equivalence
+- stochastic-dominance
+- independence
+- reflection-anti-invariance
+- positive-affine-invariance
+- comonotonic-sum-consistency
+- independent-sum-preservation
+violates:
+- totality
+- symmetric-neutrality
+- folded-expectation
+- full-sum-consistency
+- antitonic-sum-consistency
+status: proved
+certificate:
+  source_id: unpublished-background-risk
+  lean: none
+  produced_by: Zachary Goodsell (unpublished manuscript)
+  checked_by: []
+  date: '2026-09-09'
+  recorded_by: GPT-6 (Codex), 2026-09-09; extraction and random-variable translation
+description: Use real outcomes with their identity utility. For d=S_X−S_Y, define X ≽R Y iff ∫d₋<∞ and ∫d₊≥∫d₋.
+  This is the manuscript’s explicit base preorder, satisfying DU but not DTU because Totality fails. Its elementary properties, comonotonic sum consistency,
+  and forward independent-sum preservation are established in the accompanying write-up, with the quantile-area
+  argument made valid for infinite areas. The draft’s proof does not establish reverse independent-sum cancellation,
+  so full Independent Sum Invariance is not asserted. Symmetric Cauchy versus zero has both areas infinite,
+  witnessing incompleteness and failure of Symmetric Neutrality and Folded Expectation. The St Petersburg arguments
+  supply the two sum-consistency violations.
+sources:
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §3, pp. 7–8; Theorems 6–7, pp. 19–20
+- GPT-6 (Codex), original connecting proof recorded 9 September 2026 in this project; explicit quantile-area/Tonelli
+  details and Cauchy witnesses in writeups/cdf-area-preorder.md
+source_names:
+- Unbounded Utility and Background Risk (unpublished)
+- GPT-6 generated 9 Sep
+notes: This is the concrete base construction, not the draft’s withdrawn total symmetric extension. Strict
+  comparisons are part of the construction. No claim that convolution cancellation is false is inferred from
+  a gap in its proof.
+checks:
+- topics/unbounded-utility/checks/background_risk.py

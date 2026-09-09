@@ -4,6 +4,9 @@ A Lake project holding the formal counterpart of this topic. It is at **stage on
 the framework and twelve principles are defined, and statements are generated for every
 record they cover. No theorem is proved yet.
 
+Before starting a proof campaign, address the foundation-contract and verification-gate
+issues recorded in [the 9 September 2026 review](REVIEW.md).
+
 ```
 UnboundedUtility/Framework.lean    the setting: sample space, gambles, mixtures, the chart
 UnboundedUtility/Principles.lean   one definition per principle node
@@ -22,6 +25,21 @@ Regenerate after changing any record.
 inhabit their generated statement and whether they depend on `sorryAx`. A record may only
 say `lean: verified` if that check passes. `lean: stated` means the statement elaborates
 and the proof is still missing.
+
+## Notation
+
+Scoped notation mirrors the papers, with the preference structure carried explicitly:
+
+| Lean | Meaning |
+| --- | --- |
+| `X ≽[P] Y` | `X` is at least as good as `Y` under `P` |
+| `X ≻[P] Y` | strict preference |
+| `X ∼[P] Y` | indifference |
+
+The structure stays a parameter rather than a typeclass on purpose. Models here compare
+several preference structures over one gamble type, an extension against the relation it
+extends, and instance resolution would silently choose one of them. Writing `P` in the
+brackets keeps that choice visible in every statement.
 
 ## Deliberate modelling choices
 

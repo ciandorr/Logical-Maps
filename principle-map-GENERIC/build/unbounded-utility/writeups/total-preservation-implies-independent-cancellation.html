@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Under Totality, strict sum preservation supplies cancellation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Under Totality, strict sum preservation supplies cancellation</h1>
+</header>
+<p><strong>Proved implication:</strong> Totality + Independent Sum Preservation implies Independent Sum Cancellation.</p>
+<p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math> be independent of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X,Y)</annotation></semantics></math>, and suppose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>+</mo><mi>Z</mi><mo>≽</mo><mi>Y</mi><mo>+</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">X+Z\succeq Y+Z</annotation></semantics></math>. If <span class="math inline">$X\not\succeq Y$</span>, Totality gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≻</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succ X</annotation></semantics></math>. The strict clause of Independent Sum Preservation then gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>+</mo><mi>Z</mi><mo>≻</mo><mi>X</mi><mo>+</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">Y+Z\succ X+Z</annotation></semantics></math>, which includes <span class="math inline">$X+Z\not\succeq Y+Z$</span>. This contradicts the assumption. Therefore <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≽</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\succeq Y</annotation></semantics></math>.</p>
+<p>Consequently, under DTU, <strong>Independent Sum Preservation is equivalent to Independent Sum Invariance</strong>: cancellation follows by this argument, and the existing preservation/cancellation decomposition supplies the biconditional. In an incomplete preorder, lack of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≽</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\succeq Y</annotation></semantics></math> need not give <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≻</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succ X</annotation></semantics></math>, so the same reasoning does not apply to the incomplete CDF-area model.</p>
+<p>The current Preservation node demands both weak and strict preservation. Keeping that strict clause visible is essential to this deduction.</p>
+<p><strong>Original work: elementary connecting deduction.</strong> GPT-6 (Codex), 9 September 2026. The definitions were extracted from Zachary Goodsell, <em>Unbounded Utility and Background Risk</em> (unpublished), Lemma 1, pp. 7–8; the connecting proof above is recorded under Misc., not attributed to the manuscript. No independent checker or Lean verification is claimed.</p>
+</body>
+</html>

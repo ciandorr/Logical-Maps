@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Independent Sum Invariance ∧ Stochastic Equivalence ⇒ Existential Copula Sum Invariance</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Independent Sum Invariance ∧ Stochastic Equivalence ⇒ Existential Copula Sum Invariance</h1>
+</header>
+<p class="cert">
+Result — Source: Misc.; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09.
+</p>
+<h2 id="premises">Premises</h2>
+<ul>
+<li><strong>Independent Sum Invariance.</strong> Whenever Z is independent of the pair (X,Y), X ≽ Y iff X+Z ≽ Y+Z.</li>
+<li><strong>Stochastic Equivalence.</strong> If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Existential Copula Sum Invariance.</strong> There exists one copula C such that SC(C) holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on [0,1]² with both marginals uniform. Write H_C(u,v)=C([0,u]×[0,v]). A real-utility pair (A,B) admits C when P(A≤a,B≤b)=H_C(F_A(a),F_B(b)) for every real a,b. Define SC(C): for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same C, X ≽ Y iff X+Z ≽ Y+Z.</li>
+</ul>
+<h2 id="proof">Proof</h2>
+<p>Choose the product copula once. For an eligible triple admitting that copula in both pairs, Z is separately independent of X and Y, but need not be independent of (X,Y). On the standing atomless space realize independent uniforms U,V, and utility coordinates X′=Q_X(U), Y′=Q_Y(U), Z′=Q_Z(V). Now Z′ is independent of (X′,Y′). The marginal laws and both pair laws agree with those of the original triple; consequently so do the two sum laws. Independent Sum Invariance gives the biconditional for the new triple. Stochastic Equivalence and transitivity transfer it to the original comparisons. This establishes SC(C) for the product copula.</p>
+<h2 id="notes">Notes</h2>
+<p>The Stochastic Equivalence premise licenses copying the variables; pairwise independence alone does not license applying the existing jointly-independent sum principle to the original triple.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><strong>GPT-6 generated 9 Sep</strong> — GPT-6 (Codex), original copula sum consistency definitions and connecting proofs recorded in this project, 9 September 2026, implementing Zachary Goodsell’s proposal.</li>
+<li><strong>Zach Goodsell proposal 9 Sep</strong> — Zachary Goodsell, project TODO.md copula-sum proposal and request to add universal/existential variants, 9 September 2026; precise definitions recorded by GPT-6 (Codex).</li>
+</ul>
+<p class="cert">
+Record: <code>topics/unbounded-utility/results/independent-sum-and-equivalence-imply-existential-copula.yaml</code>
+</p>
+</body>
+</html>

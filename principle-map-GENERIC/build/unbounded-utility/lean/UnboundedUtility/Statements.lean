@@ -71,6 +71,17 @@ def original_dtu_implies_simple_eu : Prop :=
     UnboundedUtility.SureThing P →
     UnboundedUtility.SimpleEU P
 
+/-- `rich-archimedean-dominance-independence-imply-simple-eu`
+
+Rich Outcomes ∧ Archimedean Outcomes ∧ Stochastic Dominance ∧ Mixture Independence ⇒ Simple Expected Utility -/
+def rich_archimedean_dominance_independence_imply_simple_eu : Prop :=
+  ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O),
+    UnboundedUtility.RichOutcomes P →
+    UnboundedUtility.ArchimedeanOutcomes P →
+    UnboundedUtility.StochasticDominance P →
+    UnboundedUtility.MixtureIndependence P →
+    UnboundedUtility.SimpleEU P
+
 /-- `simple-eu-implies-archimedean-outcomes`
 
 Simple Expected Utility ⇒ Archimedean Outcomes -/
@@ -122,5 +133,22 @@ def totality_restricts : Prop :=
   ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O),
     UnboundedUtility.Totality P →
     UnboundedUtility.RestrictedTotality P
+
+/-- `finite-two-sample-minimum`
+
+Two-sample minimum: zero extension: a witness satisfying 6 principles
+and violating 4. -/
+def finite_two_sample_minimum : Prop :=
+  ∃ W : Witness,
+    UnboundedUtility.RichOutcomes W.pref ∧
+    UnboundedUtility.ArchimedeanOutcomes W.pref ∧
+    UnboundedUtility.Totality W.pref ∧
+    UnboundedUtility.RestrictedTotality W.pref ∧
+    UnboundedUtility.StochasticEquivalence W.pref ∧
+    UnboundedUtility.RestrictedStochasticEquivalence W.pref ∧
+    ¬ UnboundedUtility.SimpleEU W.pref ∧
+    ¬ UnboundedUtility.MixtureIndependence W.pref ∧
+    ¬ UnboundedUtility.StochasticDominance W.pref ∧
+    ¬ UnboundedUtility.StatewiseDominance W.pref
 
 end UnboundedUtility.Statements

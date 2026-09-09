@@ -1,0 +1,25 @@
+id: universal-copula-implies-antitonic
+premises:
+- universal-copula-sum-consistency
+conclusion: antitonic-sum-consistency
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: Use the antidiagonal copula, the law of (U,1−U), with H(u,v)=max(u+v−1,0). In an antitonic pair
+  one lower-threshold event is an initial uniform interval and the other is a final interval; their intersection
+  has this probability, including for atomic marginals. Both antitonic pairs therefore admit the same
+  copula. SC(C) applies to the original triple, with no law-invariance premise.
+sources:
+- GPT-6 (Codex), original copula sum consistency definitions and connecting proofs recorded in this project,
+  9 September 2026, implementing Zachary Goodsell’s proposal.
+- Zachary Goodsell, project TODO.md copula-sum proposal and request to add universal/existential variants,
+  9 September 2026; precise definitions recorded by GPT-6 (Codex).
+source_names:
+- GPT-6 generated 9 Sep
+- Zach Goodsell proposal 9 Sep
+notes: ''

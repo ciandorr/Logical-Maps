@@ -8,10 +8,10 @@
   "required": ["id", "name", "satisfies", "violates", "certificate", "sources"],
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-    "name": { "type": "string" },
+    "name": { "type": "string", "description": "Short construction or ordering name: family, rule, and distinguishing variant. Keep authorship, conjecture status, and lists of satisfied/violated principles in their own fields. Match the write-up title; keep the id stable." },
     "description": { "type": "string", "description": "The construction, and the verification of each listed principle. Required for proved models." },
     "satisfies": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
-    "violates": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "minItems": 1 },
+    "violates": { "type": "array", "items": { "type": "string" }, "uniqueItems": true, "description": "Known failures, or the proposed failures for a conjectured model. May be empty for a consistency construction; an omitted axiom is not thereby negated." },
     "status": { "type": "string", "enum": ["proved", "conjectured"], "default": "proved" },
     "certificate": { "$ref": "result.schema.json#/properties/certificate" },
     "checks": { "type": "array", "items": { "type": "string" }, "description": "Paths of executable sanity checks (numerical, Lean, …)." },

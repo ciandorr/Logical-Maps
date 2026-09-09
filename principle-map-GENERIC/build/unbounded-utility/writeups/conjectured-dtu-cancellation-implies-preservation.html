@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Does DTU alone turn cancellation into full independent-sum invariance?</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Does DTU alone turn cancellation into full independent-sum invariance?</h1>
+</header>
+<p><strong>Conjectured implication, not proved:</strong> DTU + Independent Sum Cancellation implies Independent Sum Preservation.</p>
+<p>Here DTU is the complete displayed package: Rich Outcomes, Totality, Stochastic Equivalence, Simple Expected Utility, Stochastic Dominance, and Mixture Independence. No continuity axiom is included.</p>
+<h2 id="what-is-already-established">What is already established</h2>
+<p>Cancellation and Totality preserve strict comparisons. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≻</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\succ Y</annotation></semantics></math> but <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>+</mo><mi>Z</mi><mo>≽</mo><mi>X</mi><mo>+</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">Y+Z\succeq X+Z</annotation></semantics></math>, cancellation would give <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≽</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succeq X</annotation></semantics></math>, a contradiction. Totality of the sums therefore gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>+</mo><mi>Z</mi><mo>≻</mo><mi>Y</mi><mo>+</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">X+Z\succ Y+Z</annotation></semantics></math>.</p>
+<p>Under these assumptions, weak preservation can fail only by breaking an existing indifference. Thus the exact remaining question is:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>Y</mi><mo>,</mo><mspace width="1.0em"></mspace><mi>Z</mi><mo>⊥</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mspace width="1.0em"></mspace><mover><mo>⇒</mo><mo accent="false">?</mo></mover><mspace width="1.0em"></mspace><mi>X</mi><mo>+</mo><mi>Z</mi><mo>∼</mo><mi>Y</mi><mo>+</mo><mi>Z</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">X\sim Y,\quad Z\perp(X,Y)
+\quad\stackrel{?}{\Longrightarrow}\quad X+Z\sim Y+Z.</annotation></semantics></math></p>
+<p>Adding L¹ Continuity settles this affirmatively by <a href="continuous-total-cancellation-implies-preservation.html">the new constant-shift proof</a>. For every <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>, dominance gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>+</mo><mn>1</mn><mi>/</mi><mi>n</mi><mo>≻</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X+1/n\succ Y</annotation></semantics></math>, and strict preservation gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>+</mo><mi>Z</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn><mi>/</mi><mi>n</mi><mo>≻</mo><mi>Y</mi><mo>+</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">(X+Z)+1/n\succ Y+Z</annotation></semantics></math>. Upper-section L¹ closure yields the required weak comparison, and exchanging <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math> supplies the other one.</p>
+<h2 id="the-obstruction-to-removing-continuity">The obstruction to removing continuity</h2>
+<p>The last limiting inference is not a consequence of preorder totality. The framework intentionally allows non-Archimedean comparisons of unbounded gambles. Having all the positively shifted approximants above a fixed gamble does not, by itself, put their limit above it.</p>
+<p>It would therefore be insufficient to repeat that proof and silently take the limit. A positive solution must use further structure from DTU, for example Mixture Independence, to show that independent noise cannot split an indifferent pair. A negative solution must construct a DTU preorder satisfying Cancellation and give a tied pair whose independent sums become strictly ranked. The proved continuity result guarantees that any such countermodel violates L¹ Continuity.</p>
+<p>The existing total CDF-area conclosure extension satisfies full Independent Sum Invariance; it cannot distinguish Cancellation from Preservation. The incomplete exact area model cannot do so either without additional work: it lacks Totality, and its cancellation property is not established.</p>
+<p><strong>Original work: conjecture formulation and partial analysis.</strong> GPT-6 (Codex), 9 September 2026. The sum principles come from Goodsell’s <em>Unbounded Utility and Background Risk</em> (unpublished), Lemma 1, pp. 7–8. The proposed implication is recorded under Misc. and is not attributed to that manuscript. This is an unresolved entry in this project, not a claim of literature novelty. No independent checker or Lean verification is claimed.</p>
+</body>
+</html>

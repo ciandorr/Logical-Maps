@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4²ⁿ]</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4²ⁿ]</h1>
+</header>
+<p><strong>Source and work accounting.</strong> This uses Zachary Goodsell’s asymmetric continuous clipping construction from <em>Decision theory unbound</em>, Appendix B, Definition 3, Lemma 6, Remark 3 and Corollary 3, pp. 691–693. Its compatibility with DTU, Relative Expectation and L¹ Continuity while failing reflection is already recorded in <em>Symmetries of value</em>, Theorem 1, p. 24. The work supplied by GPT-6 (Codex), 9 September 2026, is the cutoff choice and the explicit Pasadena/Arroyo evaluations below, with verification of inherited properties. This is a model specialization, not a new invention of asymmetric clipping or a claim of priority in the literature. No independent checker or Lean certification is asserted.</p>
+<h2 id="the-source-construction-with-upper-cutoff-equal-to-the-square-of-the-lower">1. The source construction with upper cutoff equal to the square of the lower</h2>
+<p>Use all real-valued random variables on the standing sample space. Let</p>
+<p>[ L_n=4<sup>n,U_n=4</sup>{2n}, q_n(x)=(-L_n,(x,U_n)),v_X(n)=E[q_n(X)]. ]</p>
+<p>Choose a free ultrafilter (U) on the positive integers and set</p>
+<p>[ XY &gt;0 {n:v_X(n)-v_Y(n)-}U.  ]</p>
+<p>A comparison difference converging to a finite number is ranked by its sign, with indifference at zero. If (v_X(n)+), then (X) is strictly better than every sure real outcome; this does not assign a real certainty equivalent to (X).</p>
+<p>Reflexivity follows directly from (1). To prove transitivity, intersect the two ultrafilter-large comparison sets for tolerance (/2). If (XY), some positive tolerance is violated on an ultrafilter-large set, making (YX). Thus the relation is total. Changing any comparison sequence by an ordinary sequence tending to zero does not affect it.</p>
+<p>The clipped expectations depend only on laws. Bounded, in particular simple, variables are eventually unchanged by clipping, so the utility chart is the identity and simple gambles have ordinary expected utility comparisons. All real sure outcomes are available. Moreover,</p>
+<p>[ v_{M_p(X,Z)}=p v_X+(1-p)v_Z, ]</p>
+<p>so cancellation and rescaling tolerances prove both directions of Mixture Independence. These facts establish all DTU clauses except dominance.</p>
+<p>For survival functions (S_X), bounded layer integration gives</p>
+<p>[ v_X(n)-v_Y(n)=_{-L_n}^{U_n}(S_X(t)-S_Y(t)),dt.  ]</p>
+<p>Dominance makes this integrand nonnegative. If it is positive at one threshold, right-continuity makes its integral positive on some bounded interval. Once that interval is inside the cutoffs, there is a fixed positive comparison gap. This establishes weak and strict Stochastic Dominance and completes DTU.</p>
+<h2 id="the-stronger-expectation-continuity-and-shift-properties">2. The stronger expectation, continuity and shift properties</h2>
+<p>The intervals in (2) increase to all of (R). If at least one of the positive and negative areas of (S_X-S_Y) is finite, monotone convergence of the two nonnegative areas makes the clipped differences tend to their well-defined extended difference. Equation (1) therefore gives exactly <strong>CDF-Area Extension</strong>, including strict infinite-area cases and the zero case.</p>
+<p>For any actually coupled (X,Y), clipping is 1-Lipschitz and tends pointwise to the identity. If (E|X-Y|&lt;), then</p>
+<p>[ |q_n(X)-q_n(Y)||X-Y|, v_X(n)-v_Y(n)E[X-Y]. ]</p>
+<p>Dominated convergence and (1) prove <strong>Relative Expectation</strong> directly. Likewise, if (E|X_k-X|0), then for every cutoff</p>
+<p>[ |v_{X_k}(n)-v_X(n)|E|X_k-X|. ]</p>
+<p>If every (X_kY), choose one (k) with this error below (/2), and use its ultrafilter-large comparison set with tolerance (/2). This proves (XY) and hence the recorded upper-section <strong>L¹ Continuity</strong>.</p>
+<p>For any constant (b), dominated convergence applied to (q_n(X+b)-q_n(X)) gives limit (b), since this difference is bounded in absolute value by (|b|). The two shifts cancel in a comparison, proving <strong>Shift Invariance</strong>. The fixed-lift variables in <strong>Shift Transfer</strong> have integrable difference (b/p) on a set of probability (p) and (-b/(1-p)) on its complement; its mean is zero. Relative Expectation proves their indifference.</p>
+<h2 id="pasadena-has-value-322">3. Pasadena has value ((3/2)2)</h2>
+<p>For Pasadena (P), separate its odd and even indices:</p>
+[
+<span class="math display">$$\begin{array}{c|c|c}
+ &amp;\text{payoff}&amp;\text{probability}\\\hline
+\text{positive branch }k&amp;4^k/[2(2k-1)]&amp;2/4^k\\
+\text{negative branch }k&amp;-4^k/(2k)&amp;1/4^k
+\end{array}$$</span>
+<p>]</p>
+<p>Let (K_+(n)) be the largest positive index whose payoff does not exceed (U_n), and (K_-(n)) the largest negative index whose magnitude does not exceed (L_n). The defining inequalities show</p>
+<p>[ K_+(n)=2n+O(n),K_-(n)=n+O(n).  ]</p>
+<p>For example, take logarithms of (4<sup>{K_+}/[2(2K_+-1)]4</sup>{2n}&lt;4^{K_++1}/[2(2K_++1)]); the corresponding negative-branch inequalities work identically.</p>
+<p>Summing the clipped geometric tails exactly yields</p>
+<p>[ v_P(n)= <em>{k=1}^{K</em>+(n)}1{2k-1} -<em>{k=1}^{K</em>-(n)}1{2k} + -.  ]</p>
+<p>The two clipped-tail terms tend to zero: the next positive-payoff inequality bounds the positive term by (4/[3(2K_++1)]), and the next negative-payoff inequality bounds the negative term’s magnitude by (2/[3(K_-+1)]). Writing (H_j=_{k=1}^j1/k=j++o(1)), the finite part of (4) is</p>
+<p>[ H_{2K_+}-12H_{K_+}-12H_{K_-} =2+12(K_+/K_-)+o(1). ]</p>
+<p>By (3), the ratio tends to two. Thus</p>
+<p>[ v_P(n)322, P3222. ]</p>
+<p>This disproves the recorded Pasadena evaluation in this model. The argument uses convergent clipped expectations, not an ordinary expectation of Pasadena.</p>
+<h2 id="arroyo-lies-strictly-above-every-sure-outcome">4. Arroyo lies strictly above every sure outcome</h2>
+<p>For Arroyo (A), the positive branch indexed by (k) has payoff (2k) and probability (1/[(2k-1)2k]). The negative branch has payoff (-(2k+1)) and probability (1/[2k(2k+1)]). The last unclipped indices are</p>
+<p>[ J_+=U_n/2,J_-=L_n/2-1. ]</p>
+<p>Its clipped expectation is exactly</p>
+<p>[ <em>{k=1}^{J</em>+}1{2k-1} -<em>{k=1}^{J</em>-}1{2k} +U_n<em>{k&gt;J</em>+}1{(2k-1)2k} -L_n<em>{k&gt;J</em>-}1{2k(2k+1)}.  ]</p>
+<p>Each probability-tail summand is asymptotic to (1/(4k^2)), and the corresponding tail sum is asymptotic to (1/(4J)), by comparison with the integral of (k^{-2}). Each of the last two magnitudes in (5) therefore tends to (1/2), so their difference tends to zero. The harmonic prefix has asymptotic value</p>
+<p>[ 2+12(J_+/J_-)+o(1) =2+12(U_n/L_n)+o(1) =(n+1)2+o(1). ]</p>
+<p>Consequently (v_A(n)+). In (1), this yields (Ac) for every real sure outcome (c), and in particular (A2). Although Arroyo’s folded expectation is (2), this model does not obey Folded Expectation.</p>
+<h2 id="a-symmetric-neutrality-witness">5. A symmetric-neutrality witness</h2>
+<p>Let (C) have the standard symmetric Cauchy law. Symmetry cancels its clipped tails up to (L_n), leaving</p>
+<p>[ v_C(n)=_{L_n}^{U_n}(12-)dt =1(U_n/L_n)+o(1) =+o(1). ]</p>
+<p>The asymptotic follows from the integrand (1/(t)+O(t^{-3})); its integrated error tends to zero. Thus the symmetric gamble (C) is strictly above every sure outcome, and Symmetric Neutrality fails. This mechanism belongs to Goodsell’s general asymmetric construction; only these chosen cutoff rates and calculations are additions here.</p>
+<h2 id="scope-and-diagnostics">Scope and diagnostics</h2>
+<p>The model satisfies DTU, Relative Expectation, L¹ Continuity, CDF-Area Extension, and the shift properties, yet fails both named game evaluations. Its failure of Negative Self-Similarity follows from the new Pasadena implication; further exclusions are left to the map’s inference engine rather than separately asserted without evidence. No Scale Invariance or sum-invariance verdict is claimed here.</p>
+<p><code>checks/calculation_factorizations.py</code> verifies the exact Pasadena clipping formula against direct finite atom sums with bounded remainders, tests the displayed cutoff asymptotic, and checks finite Arroyo sums. It also verifies the exact coupling identities in the accompanying Pasadena proof. These are diagnostics supporting quantified arguments, not simulations of a free ultrafilter or proofs of all universal axioms.</p>
+</body>
+</html>

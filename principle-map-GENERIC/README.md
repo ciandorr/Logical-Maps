@@ -69,14 +69,48 @@ source zip and the bundle.
 
 ## Semantics
 
-Relative to the topic background B. Results are Horn clauses; cl(S) is the closure of B ∪ S under them. A model M records sat(M) and viol(M) and witnesses consistency of sat(M) ∪ {¬v : v ∈ viol(M)}. Derived:
+Relative to the topic background B, each result is a conjunction of principle
+premises implying either another principle or **False**. For example:
 
-- holds(M) = cl(sat(M)); fails(M) = {c : cl(sat(M) ∪ {c}) ∩ viol(M) ≠ ∅}; the rest is unknown in M.
-- P ⇒ c iff c ∈ cl(P). P ⇏ c iff some M has P ⊆ holds(M) and c ∈ fails(M). Otherwise open.
-- Mutually derivable principles collapse to one graph node.
-- holds(M) ∩ viol(M) ≠ ∅ is a validation error; a model subsumed by another, or a result derivable from the others, is a note.
+```yaml
+id: incompatible-example
+premises: [a, b, c, d]
+conclusion: false
+# Add the usual proof, status, certificate, and sources.
+```
 
-Independences are never recorded directly; a model is the record.
+This says A ∧ B ∧ C ⇒ ¬D, equivalently that A, B, C and D cannot all hold.
+It also lets A, B and D rule out C. False is a reserved logical constant,
+never a principle, selectable assumption, or premise. YAML `false` and the
+string `'false'` are accepted; exported JSON uses the string `"false"`.
+
+The engine computes Horn closure `cl(S)` under the proved records. It does
+not enumerate Boolean combinations or create a node for each negation.
+
+- A package is known inconsistent when `False ∈ cl(P)`. Report that conflict
+  and its proof; do not display consequences by explosion.
+- For a consistent package, P ⇒ c when c ∈ cl(P), and **P ⇒ ¬c** when
+  `False ∈ cl(P ∪ {c})`. The latter is an exclusion.
+- A model M records `satisfies` and `violates`. Its known positive properties
+  follow by closure. It also fails c when adjoining c derives either False
+  or one of its explicitly violated principles.
+- **P ⇏ c** requires an actual model satisfying P and failing c. It is
+  distinct from P ⇒ ¬c, which alone need not establish any model of P.
+- Everything else is unknown. Failing to find a model proves no inconsistency.
+- Mutually derivable principles collapse to one graph node. Inconsistent
+  antecedents are reported separately, rather than collapsing all principles.
+- Deriving False or an explicitly violated property from a proved model is
+  a validation error. Conjectures never supply proved evidence.
+
+This deliberately supports positive-premise Horn rules and incompatibility
+constraints. General disjunctions and arbitrary negative-premise formulas
+are outside the current record format. The additional work for exclusions
+is a closure query per candidate, not enumeration of all combinations.
+
+Run `python3 scripts/pmap.py selftest` and `python3 scripts/check_falsity.py`
+after engine changes. The latter needs Node and checks both engines against
+small exhaustive truth tables, plus native Lean False generation. Optional
+DOM regression checks are in `scripts/check_falsity_ui.cjs` (requires jsdom).
 
 The map is curated and need not contain every true implication. Add useful
 connections incrementally. "Open" means not settled by the current records,
@@ -85,6 +119,17 @@ be recorded as human-proposed conjectures, separately from verified literature
 results, without attributing an unverified theorem to a cited paper.
 
 ## Certificates
+
+Model names describe the construction or ordering rule, using a consistent
+family first and a variant only when needed: for example,
+**Clipped expectation: eventual dominance** or
+**Clipped expectation: continuous ultrafilter dominance [−t, 2t]**.
+The three standard clipped-expectation models use bounds [−t, t]; explicit
+bounds distinguish the other variants. Here “continuous” means the ultrafilter
+comparison ignores infinitesimal errors. Model names and write-up titles match;
+authorship, conjecture status, and satisfied/violated principles have their own
+fields. A conjectured extension's name describes the proposed extension without
+claiming an unknown construction. Display names can change; record IDs stay fixed.
 
 `certificate.source_id` identifies the direct source of a result or model.
 Declare each source in `topic.yaml` under `source_catalog` with `id`, short
@@ -111,6 +156,10 @@ Add `source_names` alongside `sources`, with one short label per reference in th
 ## Viewer
 
 Graph: implications, ∧ nodes for multi-premise results, stronger principles higher. Models: principles use the same categories and ordering as Graph; mark them in/out to filter; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and its satisfied/violated principles while preserving the model list and current filters. Click a verdict's source badge for its sources and write-up. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: recorded conjectures (results or models with `status: conjectured`). Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Sidebar: the AI bundle zip, data.json, and source.zip.
+
+Isolated principles are packed into compact rows just below the connected
+graph. Showing or hiding them leaves the connected layout intact. If no
+arrows are visible, the principles form a compact grid instead of one long row.
 
 Use **↓** beside a principle to assume it in the background, and **↑** in the
 fixed panel below to return it. Background assumptions leave the ordinary
@@ -141,24 +190,45 @@ and use arrow keys (Shift for larger steps), or Home/End for its limits.
 Double-click or press Enter to restore its default size; Escape cancels a drag.
 
 The unbounded-utility map opens with DU in the background: Rich Outcomes,
-Totality, Stochastic Equivalence, Simple EU, Stochastic Dominance, and Mixture
-Independence (the DTU package described in the source notes). Basic decision
-theory has an **Add DU to background** button to add the package again without
-removing other assumptions. These defaults remain removable. An explicit
+Archimedean Outcomes, Stochastic Equivalence, Stochastic Dominance, and Mixture
+Independence. **DU does not assume Totality; DTU is DU plus Totality.**
+Simple EU is a derived consequence, rather than a preset assumption:
+Rich Outcomes, Archimedean Outcomes, Stochastic Dominance and Mixture
+Independence [imply Simple EU](topics/unbounded-utility/writeups/rich-archimedean-dominance-independence-imply-simple-eu.md).
+Simple EU supplies Restricted Totality (comparison of simple gambles), not
+Totality for arbitrary gambles. The source's formulation with Simple EU in
+place of Archimedean Outcomes is equivalent, since Simple EU also implies
+Archimedean Outcomes.
+Basic decision theory has **Add DU to background** and **Add DTU to background**
+buttons in both Graph and Models. They add the chosen package without removing
+other assumptions; adding DU does not remove a separately selected Totality.
+These defaults remain removable. An explicit
 `?assume=...` selection overrides them; `?assume=` saves an empty background.
 Reset clears the removable assumptions, including DU.
 
 Configure such packages with `background_presets` in `topic.yaml`: each has an
 `id`, `name`, display `category`, `principles` list, and optional `default: true`.
 These are viewer defaults and do not change the mathematical standing background.
+The same packages abbreviate long conjunctions in result and model summaries:
+for example, **DTU ∧ L¹ Continuity ⇒ Expected Utility**. The largest matching
+package is preferred. Matching uses proved implications under the active source
+filters and the fixed framework, so redundant premises such as Archimedean
+Outcomes in a record already assuming Simple EU need not be repeated. The
+selected background and conjectures never supply missing premises for an abbreviation. Pop-ups offer
+**Show full conjunction**, and result write-ups retain every exact premise.
 
-When the background implies a principle and its explicitly recorded negation,
-the graph is replaced by a red inconsistency warning with links to the conflict
-and supporting results. Arrows return when the conflict is removed. This uses
-proved results under the current source filters; conjectures and absence
-of a known model do not establish inconsistency. Declare `negates: <id>` on
-either of two principles to identify a logical negation pair. The validator
-also checks fixed backgrounds and model assertions for these conflicts.
+Implications to **False (⊥)** appear as arrows to one special logical node.
+A principle ruled out by the selected background has a red outline; its
+popup gives the supporting results and sources. False does not appear in the
+principle selection list. Model verdicts use the same incompatibility rules
+and link their derived failures to the source proofs.
+
+When the background derives False, the graph is replaced by a red warning
+and its proof chain. All arrows return when the conflict is removed. This
+uses proved results under the current source filters. The same check applies
+to Models filters and validation. Conjectures and absence of known models do
+not establish inconsistency. Old `negates` nodes should be migrated to rules
+concluding false, with model assertions moved to `violates` as appropriate.
 
 ## Adding
 

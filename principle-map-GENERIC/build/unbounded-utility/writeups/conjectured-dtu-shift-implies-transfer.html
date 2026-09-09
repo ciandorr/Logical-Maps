@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Does DTU plus Shift Invariance imply Shift Transfer?</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Does DTU plus Shift Invariance imply Shift Transfer?</h1>
+</header>
+<p><strong>Status: unresolved question in this map.</strong> The implication is entered as conjectured so that it appears in the Conjectures tab. No proof or separating model is claimed, and the entry expresses neither confidence in its truth nor a claim that the literature has left it open.</p>
+<p>The question was formulated by GPT-6 (Codex), 9 September 2026. The principles and the stronger affine-symmetry derivations are Zachary Goodsell’s <em>Symmetries of value</em>, Theorems 3–4, pp. 25–27; the paper is not attributed this reduced-premise conjecture. Original work here consists of identifying the precise remaining gap and checking the available model families.</p>
+<p>With all six DTU axioms assumed, does</p>
+<p>[ XYX+bY+b b ]</p>
+<p>already force</p>
+<p>[ M_p(X+b/p,Y)M_p(X,Y+b/(1-p)) (0&lt;p&lt;1)? ]</p>
+<p>Under DTU, the recorded implications make the latter equivalent to Simple Relative Expectation, so the question can equally be read as whether a common-shift symmetry determines comparisons under every simple pointwise perturbation.</p>
+<p>Two additional hypotheses settle it:</p>
+<ul>
+<li><strong>Symmetric Neutrality:</strong> the new <a href="neutrality-shift-imply-shift-transfer.md">neutrality-and-shift proof</a> centers paired laws, then cancels a common mixture branch. Scale Invariance is unnecessary, but the neutral value of the centered laws is essential to that proof.</li>
+<li><strong>L¹ Continuity:</strong> DTU plus L¹ Continuity gives Expected Utility, and the <a href="eu-independence-l1-imply-relative.md">conditional-truncation proof</a> then gives Relative Expectation. That implies Simple Relative Expectation and Shift Transfer, even without a prior shift-symmetry assumption.</li>
+</ul>
+<p>A countermodel must therefore fail <strong>both</strong> Symmetric Neutrality and L¹ Continuity. The symmetric and asymmetric continuous clipping models already satisfy Relative Expectation and so cannot separate the question. The <a href="lexicographic-folded-extension.md">Folded-tail cone: lexicographic extension</a> does fail L¹ Continuity, but retains neutrality and Relative Expectation, so it also satisfies transfer. The exact clipping records do not establish the required Shift Invariance and cannot simply be claimed as counterexamples.</p>
+<p>To settle the entry positively, one must derive the transfer equality without using either supplementary hypothesis. To settle it negatively, one must verify a model of all six DTU axioms and Shift Invariance, and exhibit particular (X,Y,b,p) for which the displayed transfer indifference fails. A failure of one attempted proof, or an unverified model flag, would not suffice.</p>
+</body>
+</html>

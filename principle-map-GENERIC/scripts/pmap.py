@@ -37,6 +37,7 @@ TOPICS = ROOT / "topics"
 SCHEMA = ROOT / "schema"
 BUILD = ROOT / "build"
 TEMPLATE = ROOT / "viewer" / "template.html"
+FALSE = "false"  # Logical constant, never an ordinary principle or premise.
 
 
 # ----------------------------------------------------------------------------
@@ -86,6 +87,8 @@ def load_topic(topic_id: str) -> dict:
         for p in sorted((tdir / sub).glob("*.yaml")):
             d = _load_yaml(p)
             d["_file"] = str(p.relative_to(ROOT))
+            if sub == "results" and d.get("conclusion") is False:
+                d["conclusion"] = FALSE
             d.setdefault("status", "proved")
             d.setdefault("certificate", {}).setdefault("lean", "none")
             lst.append(d)
@@ -96,13 +99,11 @@ def load_topic(topic_id: str) -> dict:
 # Derivation engine (mirrored in viewer/template.html — keep the two in sync)
 # ----------------------------------------------------------------------------
 #
-# Results are Horn clauses  premises ⇒ conclusion, read relative to the topic
-# background B.  cl(S) = least set ⊇ B ∪ S closed under the results.
-# A model M records sat(M) and viol(M).  Derived from M:
-#   holds(M)   = cl(sat(M))
-#   fails(M)   = { c : cl(sat(M) ∪ {c}) ∩ viol(M) ≠ ∅ }
-# and M is inconsistent (data error) if holds(M) ∩ viol(M) ≠ ∅.
-# For a package P:  P ⇒ c  iff c ∈ cl(P);   P ⇏ c  iff some M has P ⊆ holds(M), c ∈ fails(M).
+# Results are Horn clauses premises ⇒ principle-or-False, relative to background B.
+# False is a terminal contradiction, never a principle or an explosion rule.
+# P ⇒ ¬c when cl(P ∪ {c}) contains False, provided cl(P) does not.
+# A model can additionally refute c when that trial reaches one of its explicit
+# violations. Such model witnesses of P ⇏ c are distinct from P ⇒ ¬c.
 
 def closure(seed, rules, background=()):
     facts = set(background) | set(seed)
@@ -118,12 +119,6 @@ def closure(seed, rules, background=()):
     return facts, why
 
 
-def conflicting_pairs(facts, principles):
-    """Explicit negation pairs present in a closure; absence of models is not a conflict."""
-    return sorted({tuple(sorted((p["id"], p["negates"]))) for p in principles
-                   if p.get("negates") in facts and p["id"] in facts})
-
-
 def proof_chain(target, why, rules_by_id):
     out, seen = [], set()
 
@@ -132,7 +127,7 @@ def proof_chain(target, why, rules_by_id):
         if rid is None or rid in seen:
             return
         seen.add(rid)
-        for p in rules_by_id[rid][1]:
+        for p in sorted(rules_by_id[rid][1]):
             visit(p)
         out.append(rid)
 
@@ -147,41 +142,72 @@ class Engine:
         self.rules = [(r["id"], frozenset(r["premises"]), r["conclusion"]) for r in results]
         self.rules_by_id = {r[0]: r for r in self.rules}
         self.models = list(models)
-        self.holds, self.fails, self.fail_why = {}, {}, {}
+        self._cache = {}
+        self.holds, self.fails, self.fail_why, self.model_conflicts = {}, {}, {}, {}
         for m in self.models:
-            h, _ = closure(m["satisfies"], self.rules, self.background)
-            self.holds[m["id"]] = h
+            h, _ = self.cl(m["satisfies"])
+            self.holds[m["id"]] = h - {FALSE}
+            conflict = self.conflict(m["satisfies"], m["violates"])
+            if conflict is not None:
+                self.model_conflicts[m["id"]] = conflict
             f, fw = set(), {}
-            for c in self.ids:
-                fc, why = closure(set(m["satisfies"]) | {c}, self.rules, self.background)
-                hit = [v for v in m["violates"] if v in fc]
-                if hit:
-                    f.add(c)
-                    fw[c] = [m["id"]] + proof_chain(hit[0], why, self.rules_by_id)
+            if conflict is None:
+                for c in self.ids:
+                    hit = self.conflict([*m["satisfies"], c], m["violates"])
+                    if hit is not None:
+                        f.add(c)
+                        fw[c] = [m["id"], *hit["via"]]
             self.fails[m["id"]], self.fail_why[m["id"]] = f, fw
 
     def cl(self, seed):
-        return closure(seed, self.rules, self.background)
+        key = frozenset(seed)
+        if key not in self._cache:
+            self._cache[key] = closure(key, self.rules, self.background)
+        return self._cache[key]
+
+    def conflict(self, seed, violates=()):
+        """A proof of False, or a fact forbidden by this model/filter; None means unknown."""
+        facts, why = self.cl(seed)
+        target = FALSE if FALSE in facts else next((v for v in violates if v in facts), None)
+        if target is None:
+            return None
+        return {"target": target, "via": proof_chain(target, why, self.rules_by_id)}
 
     def entails(self, P, c):
         facts, why = self.cl(P)
+        # Do not display consequences of an inconsistent package by explosion.
+        if FALSE in facts and c != FALSE:
+            return False, []
         return (True, proof_chain(c, why, self.rules_by_id)) if c in facts else (False, [])
 
+    def excludes(self, P, c):
+        """P entails not-c iff adjoining c reaches False. P must itself be consistent."""
+        if self.conflict(P) is not None:
+            return None
+        return self.conflict([*P, c])
+
     def separates(self, P, c):
-        """Model ids witnessing P ⇏ c, with derivation for the first."""
+        """Model witnesses P does not imply c; distinct from P implying not-c."""
         P = set(P)
-        wits = [m["id"] for m in self.models if P <= self.holds[m["id"]] and c in self.fails[m["id"]]]
+        wits = [m["id"] for m in self.models if m["id"] not in self.model_conflicts
+                and P <= self.holds[m["id"]] and c in self.fails[m["id"]]]
         return wits, (self.fail_why[wits[0]][c] if wits else [])
 
     def package(self, P):
         P = set(P)
+        conflict = self.conflict(P)
+        out = {"inconsistent": conflict is not None, "via": conflict["via"] if conflict else [],
+               "entails": [], "excludes": [], "separated": [], "open": []}
+        if conflict is not None:
+            return out
         entailed, _ = self.cl(P)
-        out = {"entails": [], "separated": [], "open": []}
         for c in self.ids:
             if c in P:
                 continue
             if c in entailed:
                 out["entails"].append(c)
+            elif self.excludes(P, c) is not None:
+                out["excludes"].append(c)
             elif self.separates(P, c)[0]:
                 out["separated"].append(c)
             else:
@@ -189,10 +215,16 @@ class Engine:
         return out
 
     def pair(self, a, b):
+        conflict = self.conflict([a])
+        if conflict is not None:
+            return {"status": "inconsistent", "via": conflict["via"]}
         ok, via = self.entails({a}, b)
         if ok:
             return {"status": "implies", "via": via}
-        wits, via = self.separates({a}, b)
+        excluded = self.excludes([a], b)
+        if excluded is not None:
+            return {"status": "excludes", "via": excluded["via"]}
+        wits, via = self.separates(P=[a], c=b)
         if wits:
             return {"status": "independent", "via": via, "models": wits}
         return {"status": "open", "via": []}
@@ -214,15 +246,13 @@ def analyse(data: dict, *, include_conjectures=False) -> dict:
         classes.append(cls)
 
     problems, infos = [], []
-    for a, b in conflicting_pairs(E.cl([])[0], principles):
-        problems.append(f"background is inconsistent: both {a} and {b} follow")
+    conflict = E.conflict([])
+    if conflict is not None:
+        problems.append(f"background is inconsistent: False follows via {conflict['via']}")
     for m in E.models:
-        for a, b in conflicting_pairs(E.holds[m["id"]], principles):
-            problems.append(f"model {m['id']} is inconsistent: both {a} and {b} follow")
-        bad = [v for v in m["violates"] if v in E.holds[m["id"]]]
-        if bad:
-            _, why = E.cl(m["satisfies"])
-            problems.append(f"model {m['id']}: violates {bad}, but they follow from its satisfies via {proof_chain(bad[0], why, E.rules_by_id)}")
+        if m["id"] in E.model_conflicts:
+            conflict = E.model_conflicts[m["id"]]
+            problems.append(f"model {m['id']} is inconsistent: {conflict['target']} follows via {conflict['via']}")
         for m2 in E.models:
             if m2 is not m and set(m["satisfies"]) <= E.holds[m2["id"]] and set(m["violates"]) <= E.fails[m2["id"]]:
                 infos.append(f"model {m['id']} is subsumed by {m2['id']}")
@@ -279,16 +309,15 @@ def validate_topic(topic_id: str, *, quiet=False) -> bool:
             errors.append(f"{p['_file']}: id '{p.get('id')}' must equal file stem '{stem}'")
         if p.get("id") in ids:
             errors.append(f"{p['_file']}: duplicate id {p['id']}")
+        if p.get("id") == FALSE:
+            errors.append(f"{p['_file']}: false is a reserved logical conclusion, not a principle")
         ids.add(p.get("id"))
         if p.get("category") is not None and p["category"] not in category_ids:
             errors.append(f"{p['_file']}: unknown principle category '{p['category']}'")
 
     for p in data["principles"]:
-        if isinstance(p.get("negates"), str):
-            if p["negates"] not in ids:
-                errors.append(f"{p['_file']}: unknown negated principle '{p['negates']}'")
-            elif p["negates"] == p["id"]:
-                errors.append(f"{p['_file']}: a principle cannot negate itself")
+        if p.get("negates"):
+            errors.append(f"{p['_file']}: migrate negates to a result with the incompatible premises and conclusion: false")
 
     preset_ids = set()
     source_ids = [s['id'] for s in data['topic'].get('source_catalog', []) if isinstance(s, dict) and isinstance(s.get('id'), str)]
@@ -326,7 +355,7 @@ def validate_topic(topic_id: str, *, quiet=False) -> bool:
         rids.add(r.get("id"))
         refs = (r.get("satisfies", []) + r.get("violates", [])) if is_model else (list(r.get("premises", [])) + [r.get("conclusion")])
         for pid in refs:
-            if pid not in ids:
+            if pid not in ids and not (not is_model and pid == FALSE and r.get("conclusion") == FALSE and pid not in r.get("premises", [])):
                 errors.append(f"{r['_file']}: unknown principle '{pid}'")
         if is_model and set(r.get("satisfies", [])) & set(r.get("violates", [])):
             errors.append(f"{r['_file']}: a principle is both satisfied and violated")
@@ -407,8 +436,8 @@ def _stmt_line(pid: str, names: dict, stmts: dict) -> str:
 
 def generate_writeup(item: dict, data: dict) -> str:
     """Markdown write-up generated from the YAML record."""
-    names = {p["id"]: p["name"] for p in data["principles"]}
-    stmts = {p["id"]: p["statement"] for p in data["principles"]}
+    names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
+    stmts = {FALSE: "These premises cannot all hold together.", **{p["id"]: p["statement"] for p in data["principles"]}}
     c = item["certificate"]
     source = next((s['name'] for s in data['topic'].get('source_catalog', []) if s['id'] == c.get('source_id')), 'Misc.')
     cert = f"Source: {source}" + (f", Lean `{c['lean_ref']}`" if c.get("lean") == "verified" else "") \
@@ -564,7 +593,7 @@ def lean_coverage(data: dict) -> dict:
     for item in data["results"] + data["models"]:
         used = (item["premises"] + [item["conclusion"]]) if "premises" in item \
             else (item["satisfies"] + item["violates"])
-        missing = sorted({x for x in used if x not in defs})
+        missing = sorted({x for x in used if x != FALSE and x not in defs})
         (ready.append(item) if not missing else blocked.setdefault(item["id"], missing))
     return {"defs": defs, "ready": ready, "blocked": blocked}
 
@@ -577,7 +606,7 @@ def generate_lean_statements(topic_id: str) -> Path | None:
         return None
     root, lib = loc
     cov = lean_coverage(data)
-    defs, names = cov["defs"], {p["id"]: p["name"] for p in data["principles"]}
+    defs, names = cov["defs"], {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
     ns = defs[next(iter(defs))].rsplit(".", 1)[0] if defs else lib
 
     out = [f"import {lib}.Principles", "",
@@ -601,7 +630,8 @@ def generate_lean_statements(topic_id: str) -> Path | None:
                     "  ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O),"]
             for x in item["premises"]:
                 out.append(f"    {defs[x]} P →")
-            out += [f"    {defs[item['conclusion']]} P", ""]
+            conclusion = "False" if item["conclusion"] == FALSE else f"{defs[item['conclusion']]} P"
+            out += [f"    {conclusion}", ""]
         else:
             out += [f"/-- `{item['id']}`" + ("  (conjectured)" if conj else ""), "",
                     f"{item['name']}: a witness satisfying {len(item['satisfies'])} principles",
@@ -796,7 +826,7 @@ def _handwritten(topic_id: str) -> dict:
 def bundle_map_md(topic_id: str, data: dict, an: dict) -> str:
     """MAP.md — the whole topic as one readable document."""
     topic = data["topic"]
-    names = {p["id"]: p["name"] for p in data["principles"]}
+    names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
     catalog = {s["id"]: s["name"] for s in topic.get("source_catalog", [])}
     catalog.setdefault("misc", "Misc.")
     hand = _handwritten(topic_id)
@@ -945,6 +975,11 @@ def bundle_map_md(topic_id: str, data: dict, an: dict) -> str:
     o += ["", f"### 6.4 Open single-premise pairs ({len(an['open_pairs'])})", "",
           "Listed in `OPEN-QUESTIONS.md`.", ""]
 
+    exc = sorted(k for k, v in pair.items() if v["status"] == "excludes")
+    o += [f"### Negative implications ({len(exc)})", "",
+          "Read A ⇒ ¬B: A and B cannot hold together. This does not by itself witness a model of A.", ""]
+    o += [f"- {label(a)} ⇒ ¬ {label(b)}; via {', '.join(pair[(a,b)]['via'])}." for a, b in exc] or ["None."]
+    o += [""]
     packs = _premise_packages(data)
     if packs:
         o += ["### 6.5 What the recorded premise packages entail", "",
@@ -953,6 +988,10 @@ def bundle_map_md(topic_id: str, data: dict, an: dict) -> str:
             res = E.package(P)
             o += [f"#### {' + '.join(names.get(x, x) for x in P)}", ""]
             o += ["Assumes: " + ", ".join(f"`{x}`" for x in P) + ".", ""]
+            if res["inconsistent"]:
+                o += ["**Inconsistent:** these premises imply False via " + ", ".join(res["via"]) + ". No consequences by explosion are listed.", ""]
+                continue
+            o += ["- Rules out (entails their negations): " + (", ".join(label(x) for x in res["excludes"]) or "nothing further")]
             o += ["- Entails: " + (", ".join(label(x) for x in res["entails"]) if res["entails"] else "nothing further") ]
             o += ["- Refuted (a model satisfies the package and violates these): "
                   + (", ".join(label(x) for x in res["separated"]) if res["separated"] else "nothing")]
@@ -975,7 +1014,7 @@ def bundle_map_md(topic_id: str, data: dict, an: dict) -> str:
 def bundle_open_md(topic_id: str, data: dict, an: dict) -> str:
     """OPEN-QUESTIONS.md — what is unsettled, and how to settle it."""
     topic = data["topic"]
-    names = {p["id"]: p["name"] for p in data["principles"]}
+    names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
     label = lambda i: f"{names.get(i, i)} (`{i}`)"
     E = an["engine"]
     conj = [r for r in data["results"] if r["status"] != "proved"] + [m for m in data["models"] if m["status"] != "proved"]
@@ -1028,7 +1067,7 @@ def bundle_open_md(topic_id: str, data: dict, an: dict) -> str:
 
     op = sorted(an["open_pairs"])
     o += [f"## 4. Open single-premise pairs ({len(op)})", "",
-          "*A ⇒ B ?* means no recorded chain of results proves it and no recorded model refutes it. "
+          "*A ⇒ B ?* means neither implication nor incompatibility nor a countermodel is currently recorded. "
           "Grouped by antecedent. Most are open only because the obvious model has not been added.", ""]
     by_a = {}
     for a, b in op:
@@ -1091,22 +1130,23 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          "```", "",
          "## Semantics", "",
          "Everything is relative to the topic background B (see `MAP.md` §1).", "",
-         "- A **result** is a Horn clause, premises ⇒ conclusion. `cl(S)` is the closure of B ∪ S "
+         "- A **result** is a Horn clause, premises ⇒ principle or False. `cl(S)` is the closure of B ∪ S "
          "under all proved results.",
          "- A **model** M records `sat(M)` and `viol(M)` and witnesses that "
          "`sat(M) ∪ {¬v : v ∈ viol(M)}` is consistent. Derived: `holds(M) = cl(sat(M))`, and "
-         "`fails(M) = {c : cl(sat(M) ∪ {c}) ∩ viol(M) ≠ ∅}`. Everything else is unknown in M.",
+         "`fails(M) = {c : cl(sat(M) ∪ {c}) meets viol(M) or contains False}`. Everything else is unknown in M.",
          "- **P ⇒ c** iff `c ∈ cl(P)`. **P ⇏ c** iff some model has `P ⊆ holds(M)` and `c ∈ fails(M)`. "
-         "Otherwise the pair is **open**.",
+         "**P ⇒ ¬c** when adjoining c reaches False. This is an exclusion, not a model witness. "
+         "Inconsistent packages are reported separately, with no explosion. Otherwise the pair is **open**.",
          "- Mutually derivable principles collapse to one node.",
          "- Conjectures are displayed but never used as evidence.",
-         "- `holds(M) ∩ viol(M) ≠ ∅` is a validation error, not a discovery.", "",
+         "- Deriving False or an explicitly violated principle from a model is a validation error.", "",
          "**A missing arrow means nothing was recorded.** The map is curated, not exhaustive.", "",
          "## Adding to it", "",
          "```yaml", "# topics/%s/results/<id>.yaml   —   file name must equal the id" % topic_id,
          "id: my-new-result",
          "premises: [principle-a, principle-b]     # every assumption actually used",
-         "conclusion: principle-c",
+         "conclusion: principle-c                 # use false for incompatible premises",
          "status: proved                            # or: conjectured",
          "certificate:",
          "  source_id: misc                         # a source_catalog id; misc for original work",
@@ -1122,7 +1162,7 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          "source_names: [Short label]               # one per source, same order",
          "notes: \"\"", "```", "",
          "```yaml", "# topics/%s/models/<id>.yaml" % topic_id,
-         "id: my-new-model", "name: Human-readable name",
+         "id: my-new-model", "name: 'Construction family: ordering rule'",
          "satisfies: [principle-a, principle-b]     # only what you actually verified",
          "violates: [principle-c]                   # the engine derives the rest",
          "status: proved",
@@ -1130,7 +1170,15 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          "description: |", "  The construction, and why it has these properties.",
          "sources: [Full reference or an identifiable original proof]",
          "source_names: [Short label]", "```", "",
-         "Independences are **only** ever recorded as models. Never as a result.", "",
+         "Give models short, systematic names describing their construction or ordering rule: "
+         "family first, then the rule and any distinguishing variant. Match the write-up title. "
+         "Keep authorship, conjecture status, and lists of satisfied/violated principles in their "
+         "own fields. For a conjectured extension, name the proposed extension without inventing "
+         "a construction. Keep existing record IDs unchanged.", "",
+         "For A ∧ B ⇒ ¬C, record `premises: [a, b, c]` and `conclusion: false`. "
+         "False is a reserved conclusion, not a principle. The same constraint lets A and C rule out B.", "",
+         "Counterexamples to implications are recorded as models. A result concluding false "
+         "instead proves incompatibility; it does not establish that any premise package has a model.", "",
          "## Sourcing rules", "",
          "These are what make the map worth anything. Follow them exactly.", "",
          "- Every result and model needs a nonempty `sources`. Give the paper with theorem/section "
@@ -1168,6 +1216,7 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          f"python3 topics/{topic_id}/checks/countermodels.py   # numerical checks of the models",
          "python3 scripts/pmap.py build --no-pdf      # regenerate build/<topic>/index.html, the map viewer",
          "python3 scripts/pmap.py selftest            # the derivation engine's own tests",
+         "python3 scripts/check_falsity.py            # Python/browser semantics and False; needs Node",
          "python3 scripts/pmap.py lean                # regenerate the Lean statements",
          "python3 scripts/pmap.py lean-check          # build the Lean library and audit lean: claims",
          "```", "",
@@ -1194,10 +1243,16 @@ def bundle_agents_md(topic_id: str, data: dict) -> str:
         "formats. This file is the short version of the rules.", "",
         "## Always", "",
         "- Run `python3 scripts/pmap.py validate` after every batch of edits. It must pass.",
+        "- After changing the engine or viewer, run `python3 scripts/pmap.py selftest` and "
+        "`python3 scripts/check_falsity.py` (requires Node).",
         "- Give every new result and model a nonempty `sources` with theorem/section and page, and "
         "set `certificate.source_id` to the direct source: "
         + ", ".join(f"`{s['id']}`" for s in cat) + ".",
         "- Record independence as a **model**, never as a result.",
+        "- Name models by their construction or ordering rule: family first, then the rule and "
+        "any distinguishing variant. Match the write-up title. Keep authorship, conjecture status, "
+        "and lists of satisfied/violated principles in their own fields. For conjectured extensions, "
+        "do not invent an unknown construction. Keep existing record IDs unchanged.",
         "- List in a model's `satisfies` and `violates` only what you actually verified. The engine "
         "derives the rest and reports what stays unknown.",
         "- Write the real proof in `proof`, at referee detail. Put anything longer than a paragraph "
@@ -1211,6 +1266,8 @@ def bundle_agents_md(topic_id: str, data: dict) -> str:
         "- Never change the mathematical content of an existing published or human-authored proof. "
         "Add a note or a new record.",
         "- Never rename an `id` that other files reference. File name equals id.",
+        "- Record incompatible premises with `conclusion: false`, not a duplicate failure principle. "
+        "Never use false as a principle, premise, model assertion, or background assumption.",
         "- Never treat a missing arrow as a proof of non-implication. Missing means not recorded.",
         "- Never use a conjecture as evidence for anything.",
         "- Never edit `Statements.lean`; it is generated from the records by `pmap lean`.",
@@ -1223,7 +1280,7 @@ def bundle_agents_md(topic_id: str, data: dict) -> str:
 
 
 def bundle_derived_json(data: dict, an: dict) -> dict:
-    names = {p["id"]: p["name"] for p in data["principles"]}
+    names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
     pairs = []
     for (a, b), v in sorted(an["pair"].items()):
         row = {"from": a, "to": b, "status": v["status"]}
@@ -1241,12 +1298,14 @@ def bundle_derived_json(data: dict, an: dict) -> dict:
                          **an["engine"].package(pre["principles"])})
     return {
         "note": "Derived by closure over proved records only; conjectures excluded. "
-                "status 'open' means not recorded, not false. Regenerate with pmap.py; do not hand-edit.",
+                "status excludes means implication to a negation; independent means a countermodel to the positive implication; "
+                "inconsistent means the antecedent implies False. No explosion is used. "
+                "status open means not recorded, not false. Regenerate with pmap.py; do not hand-edit.",
         "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
-        "principle_names": names,
+        "principle_names": {k: v for k, v in names.items() if k != FALSE},
         "classes": an["classes"],
         "pairs": pairs,
-        "counts": {s: sum(1 for p in pairs if p["status"] == s) for s in ("implies", "independent", "open")},
+        "counts": {s: sum(1 for p in pairs if p["status"] == s) for s in ("implies", "excludes", "independent", "inconsistent", "open")},
         "unknown_in_model": an["unknown"],
         "packages": packages,
         "problems": an["problems"],
@@ -1268,6 +1327,9 @@ def bundle_topic(topic_id: str) -> Path:
                         ignore=shutil.ignore_patterns(*IGNORE))
         (root / "scripts").mkdir()
         shutil.copy2(Path(__file__).resolve(), root / "scripts" / "pmap.py")
+        check = ROOT / "scripts" / "check_falsity.py"
+        if check.exists():
+            shutil.copy2(check, root / "scripts" / check.name)
         shutil.copytree(SCHEMA, root / "schema")
         (root / "viewer").mkdir()
         for f in (ROOT / "viewer").glob("*"):
@@ -1303,7 +1365,7 @@ def bundle_topic(topic_id: str) -> Path:
 def status(topic_id: str):
     data = load_topic(topic_id)
     an = analyse(data)
-    names = {p["id"]: p["name"] for p in data["principles"]}
+    names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
     n = len(data["principles"])
     print(f"== {data['topic']['title']} ==")
     print(f"{n} principles, {len(data['results'])} results, {len(data['models'])} models, background = {data['topic'].get('background', [])}")
@@ -1314,10 +1376,10 @@ def status(topic_id: str):
             tally[key] = tally.get(key, 0) + 1
     for k in sorted(tally):
         print(f"  {k[0]:7} {k[1]:11} {k[2]:15} lean={k[3]:9} {tally[k]}")
-    counts = {"implies": 0, "independent": 0, "open": 0}
+    counts = {s: 0 for s in ("implies", "excludes", "independent", "inconsistent", "open")}
     for v in an["pair"].values():
         counts[v["status"]] += 1
-    print(f"ordered pairs: {counts['implies']} ⇒, {counts['independent']} ⇏, {counts['open']} open (of {n * (n - 1)})")
+    print(f"ordered pairs: {counts['implies']} ⇒, {counts['excludes']} ⇒¬, {counts['independent']} ⇏, {counts['inconsistent']} inconsistent, {counts['open']} open (of {n * (n - 1)})")
     for c in an["classes"]:
         if len(c) > 1:
             print("  " + " ⇔ ".join(names[x] for x in c))
@@ -1369,6 +1431,8 @@ notation: ""
 
 
 def new_principle(topic_id: str, pid: str):
+    if pid == FALSE:
+        sys.exit("false is a logical conclusion, not a principle")
     path = TOPICS / topic_id / "principles" / f"{pid}.yaml"
     if path.exists():
         sys.exit(f"{path} already exists")
@@ -1462,19 +1526,45 @@ def selftest():
     assert pair[("a", "c")]["status"] == "independent", "c would give d in m1"
     assert pair[("b", "e")]["status"] == "independent"
     assert pair[("d", "a")]["status"] == "open"
-    assert E.package(["a", "c"]) == {"entails": ["bg", "b", "d"], "separated": ["e"], "open": ["f"]}, E.package(["a", "c"])
+    assert E.package(["a", "c"]) == {"inconsistent": False, "via": [], "entails": ["bg", "b", "d"], "excludes": [], "separated": ["e"], "open": ["f"]}, E.package(["a", "c"])
     assert an["unknown"]["m1"] == ["f"] and an["unknown"]["m2"] == ["f"], an["unknown"]
     assert not an["problems"]
     data["models"].append(M("m3", ["a", "c"], ["d"]))
     assert analyse(data)["problems"], "m3 is inconsistent with r3"
-    negated = [P('a'), dict(P('not-a'), negates='a'), P('b')]
-    assert not conflicting_pairs({'a'}, negated)
-    assert conflicting_pairs({'a', 'not-a'}, negated) == [('a', 'not-a')]
-    trial = {'topic': {'background': ['b', 'not-a']}, 'principles': negated,
-             'results': [R('ba', ['b'], 'a')], 'models': []}
-    assert any('background is inconsistent' in p for p in analyse(trial)['problems'])
-    trial['results'][0]['status'] = 'conjectured'
-    assert not analyse(trial)['problems'], 'A conjecture or lack of models does not prove inconsistency'
+    # A+B+C+D -> False supplies each negative orientation without Boolean nodes.
+    constraint = R('abcd-impossible', ['a', 'b', 'c', 'd'], FALSE)
+    e = Engine(list('abcde'), [constraint], [])
+    for candidate in 'abcd':
+        premise = [x for x in 'abcd' if x != candidate]
+        assert e.excludes(premise, candidate) == {'target': FALSE, 'via': ['abcd-impossible']}
+        assert e.package(premise)['excludes'] == [candidate]
+    assert e.package(['a','b','c','d'])['inconsistent']
+    assert not e.entails(['a','b','c','d'], 'e')[0], 'No explosion'
+    assert not e.excludes(['a'], 'b'), 'A missing model or missing comparison proves nothing'
+    assert e.pair('a','b')['status'] == 'open'
+    # Follow indirect implications before checking a constraint.
+    rules = [R('ae',['a'],'e'), R('be-conflict',['b','e'],FALSE)]
+    e = Engine(list('abef'), rules, [M('witness',['a'],[])])
+    assert e.pair('a','b')['status'] == 'excludes'
+    assert e.excludes(['a'],'b')['via'] == ['ae','be-conflict']
+    assert e.excludes(['b'],'a')['via'] == ['ae','be-conflict']
+    assert 'b' in e.fails['witness'] and 'f' not in e.fails['witness']
+    assert e.fail_why['witness']['b'] == ['witness','ae','be-conflict']
+    assert Engine(list('ab'), [], [M('m',['a'],['b'])]).pair('a','b')['status'] == 'independent'
+    # A conditional failure cannot be upgraded to unconditional incompatibility.
+    assert Engine(list('ab'), [], [M('m',['a'],['b'])]).excludes(['a'],'b') is None
+    bad = {'topic': {'background': ['a','b']}, 'principles': [P(x) for x in 'abe'],
+           'results': rules, 'models': []}
+    assert any('background is inconsistent' in p for p in analyse(bad)['problems'])
+    bad['topic']['background'] = []
+    bad['models'] = [M('invalid',['a','b'],[])]
+    assert any('model invalid is inconsistent' in p for p in analyse(bad)['problems'])
+    rules[-1]['status'] = 'conjectured'
+    assert not analyse(bad)['problems'], 'Conjectures cannot establish inconsistency'
+    # False needs no topic principle definition to generate a Lean proposition.
+    cov = lean_coverage({'principles': [dict(P('a'), lean_def='Example.A')],
+                         'results': [R('not-a',['a'],FALSE)], 'models': []})
+    assert len(cov['ready']) == 1 and not cov['blocked']
     print("selftest OK")
 
 

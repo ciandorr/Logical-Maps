@@ -1,0 +1,23 @@
+id: cdf-area-implies-relative
+premises:
+- cdf-area-extension
+conclusion: relative-expectation
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex)
+  checked_by: []
+  date: '2026-09-09'
+  recorded_by: GPT-6 (Codex), 2026-09-09; extraction and random-variable translation
+proof: For the actual coupling, ∫|S_X−S_Y|dt ≤ E|u(X)−u(Y)|. If the latter is finite, Fubini applied to 1_{u(X)>t}−1_{u(Y)>t}
+  gives ∫(S_X−S_Y)dt=E[u(X)−u(Y)]. Both areas are finite, so the CDF-area comparison is exactly the comparison
+  of this expectation with zero.
+sources:
+- GPT-6 (Codex), original connecting proof recorded 9 September 2026 in this project
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §3, pp. 7–8
+source_names:
+- GPT-6 generated 9 Sep
+- Unbounded Utility and Background Risk (unpublished)
+notes: ''

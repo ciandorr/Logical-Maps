@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Two-sample minimum: zero extension</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Two-sample minimum: zero extension</h1>
+</header>
+<p>This model satisfies <strong>Rich Outcomes, Archimedean Outcomes, Totality and Stochastic Equivalence</strong>, while violating Simple Expected Utility and Mixture Independence. The distinction between the <strong>raw outcome coordinate</strong> and the <strong>normalized utility chart</strong> is essential to the construction.</p>
+<p><strong>Source and work accounting.</strong> GPT-6 (Codex), Logical Maps project discussion, 9 September 2026. This is an elementary countermodel construction with an explicit calibration audit and finite witnesses, recorded under Misc. The work accounting concerns this project and makes no claim of literature novelty. No independent checker or Lean verification is asserted.</p>
+<h2 id="the-preference-on-the-full-domain">The preference on the full domain</h2>
+<p>Take outcomes to be the real line with its usual Borel structure and order, and take all measurable real-valued random variables on the standing atomless probability space. Reference outcomes are the raw numbers 0 and 1.</p>
+<p>For a finitely supported law</p>
+<p>[ =<em>{i=1}^n p_i</em>{x_i}, ]</p>
+<p>put</p>
+<p>[ V()=_{i,j=1}^n p_i p_j(x_i,x_j).  ]</p>
+<p>This is the expected minimum of two independent draws from that law. For every law that does <strong>not</strong> have finite support, put <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">V(\mu)=0</annotation></semantics></math>. Define</p>
+<p>[ XY V(L(X))V(L(Y)).  ]</p>
+<p>Every score is a finite real number. Consequently (2) is reflexive, transitive and total. It depends only on laws, proving Stochastic Equivalence. It also proves Restricted Totality and Restricted Stochastic Equivalence. Finite support is a property of the law: a variable with infinitely many exceptional values on a null set receives the same score as its almost-sure finite-valued representative.</p>
+<p>A sure raw outcome <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> has score <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>, so the sure preference order agrees exactly with the ordinary order on the outcome space, as the framework requires.</p>
+<h2 id="binary-mixtures-and-archimedean-outcomes">Binary mixtures and Archimedean Outcomes</h2>
+<p>For raw outcomes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a&gt;c</annotation></semantics></math>, a mixture with probability <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math> has minimum</p>
+<p>[ (X_1,X_2)=a ]</p>
+<p>only when both independent draws give <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, an event of probability <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>p</mi><mn>2</mn></msup><annotation encoding="application/x-tex">p^2</annotation></semantics></math>. Thus</p>
+<p>[ V(M_p(a,c))=c+(a-c)p^2.  ]</p>
+<p>For any <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mi>b</mi><mo>&gt;</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">a&gt;b&gt;c</annotation></semantics></math>, choose</p>
+<p>[ p=(0,1). ]</p>
+<p>Equation (3) gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>p</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">M_p(a,c)\sim b</annotation></semantics></math>, proving Archimedean Outcomes.</p>
+<h2 id="the-actual-normalized-chart">The actual normalized chart</h2>
+<p>The framework defines a chart level <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> by binary comparisons with reference outcomes 0 and 1. It does not identify that level with an arbitrary numerical label on outcomes. In this model the raw outcome at chart level <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> is</p>
+[ f(r)=
+<span class="math display">$$\begin{cases}
+r^2,&amp;r\ge0,\\
+-\dfrac{r^2}{1-2r},&amp;r&lt;0.
+\end{cases}
+\tag{4}$$</span>
+<p>]</p>
+<p>All three branches of the chart definition can be checked directly:</p>
+<ul>
+<li>For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>r</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0\le r\le1</annotation></semantics></math>, equation (3) gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>M</mi><mi>r</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>r</mi><mn>2</mn></msup><mo>=</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">V(M_r(1,0))=r^2=f(r)</annotation></semantics></math>.</li>
+<li>For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">r&gt;1</annotation></semantics></math>, it gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mi>r</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><msup><mi>r</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">V(M_{1/r}(f(r),0))=f(r)/r^2=1</annotation></semantics></math>.</li>
+<li>For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">r&lt;0</annotation></semantics></math>, put <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mo>−</mo><mi>r</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo stretchy="false" form="postfix">)</mo><mo>∈</mo><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=-r/(1-r)\in(0,1)</annotation></semantics></math>. Then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>M</mi><mi>p</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><msup><mi>p</mi><mn>2</mn></msup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">V(M_p(1,f(r)))=f(r)+(1-f(r))p^2=0</annotation></semantics></math>.</li>
+</ul>
+<p>These equations also determine the raw outcome uniquely. The first branch requires a raw outcome between 0 and 1, the second one strictly above 1, and the last one strictly below 0: a nontrivial binary-mixture score is strictly between the scores of its distinct endpoints. Solving in the respective ranges gives exactly (4).</p>
+<p>The function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math> is a continuous strictly increasing bijection of the real line. On the negative half-line,</p>
+<p>[ f’(r)=&gt;0; ]</p>
+<p>its limits at the ends of the real line are <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">-\infty</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>+</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">+\infty</annotation></semantics></math>, and its two formulas meet at zero. The normalized utility chart is therefore the continuous inverse</p>
+[ u(x)=f^{-1}(x)=
+<span class="math display">$$\begin{cases}
+\sqrt{x},&amp;x\ge0,\\
+x-\sqrt{x^2-x},&amp;x&lt;0.
+\end{cases}
+\tag{5}$$</span>
+<p>]</p>
+<p>The chart is single-valued, defined on every outcome, measurable and onto the real line. In particular, <strong>Rich Outcomes holds with precisely the framework’s calibration-based meaning</strong>, including every negative level.</p>
+<h2 id="simple-expected-utility-fails">Simple Expected Utility fails</h2>
+<p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mn>4</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X=M_{1/2}(4,1)</annotation></semantics></math>, with 4 and 1 still denoting raw outcomes, and let</p>
+<p>[ Y=9/4. ]</p>
+<p>Their normalized chart utilities satisfy</p>
+<p>[ E[u(X)]=122+121=32 =u(9/4)=E[u(Y)]. ]</p>
+<p>But their scores are</p>
+<p>[ V(X)=1+(4-1)(12)^2=74, V(Y)=94. ]</p>
+<p>Thus <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≻</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succ X</annotation></semantics></math>, contradicting the indifference required by Simple Expected Utility. Another normalized chart cannot repair this discrepancy, because the calibration computation established that (5) is the unique chart.</p>
+<h2 id="mixture-independence-fails">Mixture Independence fails</h2>
+<p>Put <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mn>4</mn><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">L=M_{1/2}(4,0)</annotation></semantics></math>. Equation (3) gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><mi>L</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">V(L)=1</annotation></semantics></math>, so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>∼</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">L\sim1</annotation></semantics></math>. The law of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>L</mi><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_{1/2}(L,1)</annotation></semantics></math> gives raw outcomes 0, 1 and 4 probabilities</p>
+<p>[ 14,12,14. ]</p>
+<p>For two independent draws from this law, the minimum is at least 1 with probability <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>9</mn><mi>/</mi><mn>16</mn></mrow><annotation encoding="application/x-tex">9/16</annotation></semantics></math>, and is 4 with probability <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>16</mn></mrow><annotation encoding="application/x-tex">1/16</annotation></semantics></math>. Hence</p>
+<p>[ V(M_{1/2}(L,1))=9{16}+31{16}=34&lt;1 =V(M_{1/2}(1,1)). ]</p>
+<p>The true comparison <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>≽</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">L\succeq1</annotation></semantics></math> becomes false after mixing both sides equally with sure 1, violating Mixture Independence.</p>
+<h2 id="the-explicit-dominance-failures">The explicit dominance failures</h2>
+<p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo stretchy="false" form="prefix">(</mo><mi>ω</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>2</mn><mo>+</mo><mi>ω</mi></mrow><annotation encoding="application/x-tex">U(\omega)=2+\omega</annotation></semantics></math> on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math> with Lebesgue measure. Its law is uniform on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[2,3]</annotation></semantics></math>, so the second clause of the construction assigns</p>
+<p>[ V(U)=0&lt;1=V(1). ]</p>
+<p>Nevertheless <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">U&gt;1</annotation></semantics></math> at every state. This disproves Statewise Dominance. It also disproves Stochastic Dominance: the survival probability for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math> is at least that of sure 1 at every threshold, and is strictly greater at threshold 1. The preference ranks sure 1 strictly above <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>.</p>
+<p>The model therefore witnesses that even Rich Outcomes, Archimedean Outcomes, Totality and Stochastic Equivalence together do not imply Simple EU. The separate DU representation argument must use its additional premises.</p>
+<p>The accompanying exact-arithmetic diagnostic checks the displayed finite scores and representative calibrations in all three chart ranges. The analytic arguments above establish the universal claims.</p>
+</body>
+</html>

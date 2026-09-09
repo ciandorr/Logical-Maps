@@ -1,0 +1,36 @@
+id: relative-neutrality-shift-imply-folded
+premises:
+- rich-outcomes
+- stochastic-equivalence
+- relative-expectation
+- symmetric-neutrality
+- shift-invariance
+conclusion: folded-expectation
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (source argument); GPT-6 (Codex) (adaptation and premise audit)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: For a foldable real-utility X, couple a copy A of X and a copy B of −X comonotonically as A=Q_X(U),
+  B=−Q_X(1−U). The survival-function difference is h_X(t) for t>0 and h_X(−t) for t<0, except at countably
+  many atom thresholds. Thus E|A−B|=2∫₀∞|h_X| and E(A−B)=2F(X). The midpoint Z=(A+B)/2 has a symmetric
+  law, while A−Z is integrable with mean F(X). Relative Expectation gives A~Z+F(X); Symmetric Neutrality
+  and Shift Invariance give Z+F(X)~F(X). Stochastic Equivalence gives X~A. Therefore each foldable X is
+  indifferent to its folded expectation, and the standing sure-outcome order compares any two such variables
+  exactly by these real numbers.
+sources:
+- GPT-6 (Codex), proof adaptation and premise audit in the Logical Maps project, 9 September 2026; see
+  the accompanying handwritten write-up.
+- Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 6, pp.
+  27–29. The cited argument is adapted with the explicitly listed sufficient premises; the reduced-premise
+  claim is the present project contribution.
+source_names:
+- GPT-6 generated 9 Sep
+- Symmetries of Value
+notes: 'Original work: proof adaptation. Expand the quantile symmetrization behind Goodsell’s folded-expectation
+  argument and retain only Relative Expectation, neutrality, shift invariance and the explicit domain/law
+  assumptions; full affine symmetry and Totality are unnecessary. This describes the work needed for this
+  database entry, not a claim of novelty in the literature.'

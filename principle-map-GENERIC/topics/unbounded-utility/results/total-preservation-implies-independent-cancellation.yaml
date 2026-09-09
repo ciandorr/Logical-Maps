@@ -1,0 +1,33 @@
+id: total-preservation-implies-independent-cancellation
+premises:
+- totality
+- independent-sum-preservation
+conclusion: independent-sum-cancellation
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex)
+  checked_by: []
+  date: '2026-09-09'
+proof: >-
+  Suppose Z is independent of (X,Y) and X+Z is weakly preferred to Y+Z.
+  If X were not weakly preferred to Y, Totality would give Y strictly
+  preferred to X. The strict clause of Independent Sum Preservation
+  would then give Y+Z strictly preferred to X+Z, contradicting the
+  assumed weak comparison. Hence X is weakly preferred to Y.
+sources:
+- 'GPT-6 (Codex), 9 September 2026, original strict-order argument in writeups/total-preservation-implies-independent-cancellation.md.'
+- 'Zachary Goodsell, Unbounded Utility and Background Risk, unpublished manuscript, 5 June 2026, Lemma 1, pp. 7–8: source for the separated preservation/cancellation principles, not this connecting proof.'
+source_names:
+- GPT-6 generated 9 Sep
+- Unbounded Utility and Background Risk (unpublished)
+notes: >-
+  Original work: elementary connecting deduction; no model construction
+  or imported theorem proof is needed. Preservation in this project
+  includes STRICT preservation. Under Totality, that extra clause makes
+  preservation equivalent to full Independent Sum Invariance by the
+  already recorded decomposition. Weak preservation alone would not
+  justify this implication. No dominance, mixture independence,
+  stochastic equivalence, continuity, or outcome richness is used.

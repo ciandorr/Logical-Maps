@@ -14,7 +14,10 @@
   "id": {
    "type": "string",
    "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-   "description": "Stable kebab-case identifier; must equal the file name without .yaml. Referenced by results."
+   "description": "Stable kebab-case identifier; must equal the file name without .yaml. Referenced by results.",
+   "not": {
+    "const": "false"
+   }
   },
   "name": {
    "type": "string",
@@ -27,7 +30,7 @@
   "negates": {
    "type": "string",
    "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-   "description": "Id of the principle this proposition logically negates. Declare on either side; both cannot hold together."
+   "description": "Deprecated: migrate this negative node to results concluding false; do not add new negates nodes."
   },
   "statement": {
    "type": "string",

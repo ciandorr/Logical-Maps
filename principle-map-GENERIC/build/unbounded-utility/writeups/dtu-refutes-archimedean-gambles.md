@@ -1,4 +1,4 @@
-# Rich Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Simple Expected Utility ∧ Stochastic Dominance ∧ Mixture Independence ⇒ Failure of Archimedean Gambles
+# Rich Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Simple Expected Utility ∧ Stochastic Dominance ∧ Mixture Independence ∧ Archimedean Gambles ⇒ False (⊥)
 
 <p class='cert'>Result — Source: Symmetries of Value; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
 
@@ -10,10 +10,11 @@
 - **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Surjectivity of u is not included here.
 - **Stochastic Dominance.** If P(X>o) ≥ P(Y>o) for every outcome threshold o, then X ≽ Y; if one threshold inequality is strict, X ≻ Y. Thresholds use the sure-outcome order.
 - **Mixture Independence.** For all X,Y,Z and 0<p<1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.
+- **Archimedean Gambles.** For any gambles X ≻ Y ≻ Z, there is p ∈ (0,1) with Y ~ M_p(X,Z). Unlike Archimedean Outcomes, X,Y,Z may themselves be unbounded gambles.
 
 ## Conclusion
 
-- **Failure of Archimedean Gambles.** There exist X ≻ Y ≻ Z such that no p ∈ (0,1) satisfies Y ~ M_p(X,Z).
+- **False (⊥).** These premises cannot all hold together.
 
 ## Proof
 
@@ -22,6 +23,8 @@ Let S have P(u(S)=2^n)=2^(−n). For any real c choose N with N>c. The simple tr
 ## Notes
 
 Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.
+
+Representation update: the former negative conclusion is expressed by adding archimedean-gambles to the premises and concluding False. The mathematical claim, source, and proof are unchanged.
 
 ## Sources
 

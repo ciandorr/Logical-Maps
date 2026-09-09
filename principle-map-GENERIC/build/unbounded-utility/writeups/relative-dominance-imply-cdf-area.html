@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Relative Expectation and Dominance recover CDF-area comparisons</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Relative Expectation and Dominance recover CDF-area comparisons</h1>
+</header>
+<p><strong>Proved implication:</strong> Rich Outcomes + Archimedean Outcomes + Stochastic Dominance + Relative Expectation imply CDF-Area Extension.</p>
+<p><strong>Original work: connecting argument and proof adaptation.</strong> GPT-6 (Codex), 9 September 2026, combines the existing quantile-area identity with a one-sided truncation of the utility difference. Goodsell’s unpublished <em>Unbounded Utility and Background Risk</em>, §3, supplies the area rule; this converse is a project connecting proof, not attributed as a theorem from that manuscript. No independent checker, Lean verification or literature-novelty claim is made.</p>
+<h2 id="framework-and-the-quantile-identity">Framework and the quantile identity</h2>
+<p>Archimedean Outcomes makes the utility chart total; its measurability is a standing chart convention. Rich Outcomes supplies every finite real level used below. Write numerical utility variables as (X,Y), and put</p>
+<p>[ d(t)=S_X(t)-S_Y(t),A_=<em>{R}d</em>(t),dt. ]</p>
+<p>Dominance implies Stochastic Equivalence, so preferences can be transferred to new realizations once their marginal laws have been checked. Let (U) be uniform on the standing sample space and set (A=Q_X(U), B=Q_Y(U)) using increasing quantiles. These have the original marginal laws. Assign finite valid outcomes at the null quantile endpoints.</p>
+<p>For each threshold, the upper-level events of these two nondecreasing functions of (U) are nested. Thus</p>
+<p>[ P(A&gt;t,Bt)=(S_X(t)-S_Y(t))_+. ]</p>
+<p>Integrating the elementary identity ((a-b)_+=1_{{bt&lt;a}},dt) and applying Tonelli gives</p>
+<p>[ E[(A-B)_+]=A_+,E[(A-B)_-]=A_-.  ]</p>
+<p>These equalities allow infinite values and do not subtract two infinities.</p>
+<h2 id="both-areas-finite">Both areas finite</h2>
+<p>If (A_+,A_-&lt;), equation (1) shows that the actual difference (A-B) is integrable, with mean (A_+-A_-). Relative Expectation gives (ABA_+A_-). Stochastic Equivalence transfers both directions to (X,Y), including indifference when the areas are equal.</p>
+<h2 id="exactly-one-infinite-area">Exactly one infinite area</h2>
+<p>Suppose (A_+=) and (A_-&lt;). Put (D=A-B), and for a positive integer (N) define</p>
+<p>[ Z_N=B+(D_+,N)-D_-. ]</p>
+<p>This is a measurable finite-valued-at-each-state utility variable, so the full real chart realizes it as a gamble. It need not be a <em>simple</em> gamble. Pointwise, (Z_NA), and</p>
+<p>[ E|Z_N-B|N+A_-&lt;, E[Z_N-B]=E[(D_+,N)]-A_-+. ]</p>
+<p>Choose (N) with positive mean. Relative Expectation gives (Z_NB), while pointwise domination gives stochastic domination, hence (AZ_N). In a preorder, a weak comparison followed by a strict comparison is strict, so (AB). Transfer to (X,Y) by Stochastic Equivalence. The case (A_+&lt;,A_-=) follows by exchanging the variables and gives (YX).</p>
+<p>These are all cases constrained by CDF-Area Extension. When both areas are infinite, neither that principle nor this proof demands a comparison.</p>
+<h2 id="consequence-under-du">Consequence under DU</h2>
+<p>DU supplies the outcome and dominance premises. Combined with the already recorded implication from CDF-Area Extension to Relative Expectation, this establishes their equivalence under DU. No continuity, mixture independence, totality or affine symmetry is used in this proof.</p>
+</body>
+</html>

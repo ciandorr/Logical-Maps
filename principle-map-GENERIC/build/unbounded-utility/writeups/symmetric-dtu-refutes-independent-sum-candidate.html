@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Symmetric DTU versus independent sums — settled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
+h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
+code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Symmetric DTU versus independent sums — settled</h1>
+</header>
+<p><strong>Proved implication:</strong> DTU + Symmetric Gambles Are Neutral + Independent Sum Invariance implies <strong>False</strong>.</p>
+<p><strong>Proof.</strong> Independent Sum Invariance supplies Independent Sum Preservation. Apply the <a href="levy-refutes-neutral-independent-preservation.html">completed Lévy obstruction</a>, which needs only Rich Outcomes, Stochastic Dominance, Mixture Independence, Symmetric Neutrality and that preservation property.</p>
+<p><strong>Original work: direct consequence of a proof completion.</strong> Goodsell supplied the claim and stable-law obstruction proposal; GPT-6 (Codex), 9 September 2026, supplied the specified witness and reduced-premise proof in the linked record. This larger-premise consequence needs no further construction. Source: Misc.; no independent checker or Lean verification is asserted.</p>
+<h2 id="historical-source-audit">Historical source audit</h2>
+<p>The audit below is preserved from before the proof completion. Its statements that the incompatibility was conjectured or lacked a proof describe that earlier state; they are superseded by the proved result above. The withdrawn manuscript argument is not reinstated.</p>
+<p><strong>Conjectured implication:</strong> Rich Outcomes + Totality + Stochastic Equivalence + Simple EU + Stochastic Dominance + Mixture Independence + Symmetric Neutrality + Independent Sum Invariance ⇒ False. There is no completed proof recorded for this implication. The audit below separates it from the verified portions of the manuscript.</p>
+<p><strong>Local source:</strong> Zachary Goodsell, <em>Unbounded Utility and Background Risk</em>, 5 June 2026, 21 pages. Supplied as <code>Goodsell - Unpublished (do not cite) - Erroneous.pdf</code> in <code>sources/</code>. <strong>Unpublished; do not cite; erroneous.</strong> The short provenance name in the map is <strong>Unbounded Utility and Background Risk (unpublished)</strong>. These references identify which supplied document an entry came from; they do not endorse its claims or describe it as a published paper. PDF and printed page numbers coincide.</p>
+<p>Extraction recorded by GPT-6 (Codex), 9 September 2026, following Goodsell’s request to preserve the interesting principles and extension construction. No separate checker or formal verification is claimed.</p>
+<h2 id="principle-inventory">Principle inventory</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Manuscript discussion</th>
+<th>Map representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Expected Utility, pp. 3–4</td>
+<td>Existing Expected Utility; finite expectations retain the topic’s established scope</td>
+</tr>
+<tr class="even">
+<td>Totality, p. 4</td>
+<td>Existing Totality; reflexivity and transitivity remain standing</td>
+</tr>
+<tr class="odd">
+<td>Preferences over probability distributions</td>
+<td>Existing optional Stochastic Equivalence; translated to random variables</td>
+</tr>
+<tr class="even">
+<td>Stochastic Dominance, pp. 3–4</td>
+<td>Existing weak-plus-strict Stochastic Dominance</td>
+</tr>
+<tr class="odd">
+<td>Independence / Convexity, pp. 3, 6</td>
+<td>Existing Mixture Independence, with a source terminology alias</td>
+</tr>
+<tr class="even">
+<td>Reflection Symmetry, pp. 3–4</td>
+<td>Existing Symmetric Neutrality, with an alias; not a second node</td>
+</tr>
+<tr class="odd">
+<td>Reflection Anti-Invariance, pp. 3–4</td>
+<td>Existing Reflection Anti-Invariance</td>
+</tr>
+<tr class="even">
+<td>Full Sum Invariance, pp. 1–2, 17</td>
+<td>New arbitrary-dependence sum biconditional</td>
+</tr>
+<tr class="odd">
+<td>Independent Sum Invariance / Convolution Invariance, pp. 1–6</td>
+<td>New independent-common-summand biconditional</td>
+</tr>
+<tr class="even">
+<td>Forward and reverse portions of Lemma 1, p. 8</td>
+<td>Separate Independent Sum Preservation (weak and strict) and Cancellation</td>
+</tr>
+<tr class="odd">
+<td>Relative-area base relation and strict extension, pp. 7–8</td>
+<td>New CDF-Area Extension, plus the exact incomplete model</td>
+</tr>
+<tr class="even">
+<td>Fixed-copula sum-consistency family, p. 18</td>
+<td>General family documented below; independent, comonotonic and antitonic nodes instantiated</td>
+</tr>
+<tr class="odd">
+<td>Comonotonic Sum Invariance, pp. 18–20</td>
+<td>New node; verified in the explicit area model</td>
+</tr>
+<tr class="even">
+<td>Antitonic Sum Invariance, pp. 18–19</td>
+<td>New node; incompatibility with dominance recorded</td>
+</tr>
+<tr class="odd">
+<td>Real-valued utility domain throughout</td>
+<td>Existing Rich Outcomes and Archimedean Outcomes remain distinct</td>
+</tr>
+</tbody>
+</table>
+<p>Full, Antitonic, and Independent Sum incompatibilities are now recorded as implications to False, with the relevant sum principle added to the other premises. There are no separate failure nodes. The independent-sum incompatibility currently has only a <strong>conjectured</strong> arrow. It must not trigger a known-inconsistency warning.</p>
+<p>For a fixed copula <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>, the general schema compares <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>U</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>Q</mi><mi>Z</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Q_X(U)+Q_Z(V)</annotation></semantics></math> with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>U</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>Q</mi><mi>Z</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Q_Y(U)+Q_Z(V)</annotation></semantics></math> for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>κ</mi></mrow><annotation encoding="application/x-tex">(U,V)\sim\kappa</annotation></semantics></math>. A choice of copula specifies an axiom; the schema is not silently promoted to one axiom universally quantifying over every copula. The three distinguished instances are the product, comonotonic, and antitonic copulas. All comparisons in the database remain comparisons of random variables, and law identities are used in proofs only with Stochastic Equivalence or a premise implying it.</p>
+<p>“Coherent Indifference” is mentioned in the introduction as background to an earlier impossibility result, but not defined in this manuscript. No new axiom is invented from that mention. Conclosure and extension are construction operations on relations, not additional primitive properties of an individual gamble. The model write-up preserves them in their appropriate role.</p>
+<h2 id="what-survives">What survives</h2>
+<p>The full-sum St Petersburg counterexample (§6.1) and antitonic impossibility (Theorem 6) are recorded with explicit proofs. The latter requires neither Totality nor Symmetric Neutrality. Full Sum Invariance restricts to the three dependence-specific principles. Each of those implies Shift Invariance by taking a constant summand. Independent Sum Invariance splits into forward preservation and reverse cancellation.</p>
+<p>The footnote on pp. 12–13 establishes, under totality, law invariance and mixture independence, that Symmetric Neutrality implies Reflection Anti-Invariance. This argument is independent of the failed construction.</p>
+<p>The base area preorder is a proved incomplete model. Theorem 7’s comonotonic argument can be made rigorous using separate positive and negative quantile areas, avoiding undefined differences of infinities. Its independent-sum <strong>forward</strong> property follows from Tonelli. See <a href="cdf-area-preorder.html">the detailed construction</a>.</p>
+<p>CDF-Area Extension implies Expected Utility, Relative Expectation, and Stochastic Dominance. It does <strong>not</strong> automatically transfer the exact model’s invariance properties to every extension: newly supplied comparisons must themselves respect any requested invariance axioms.</p>
+<h2 id="failed-claims-and-remaining-gaps">Failed claims and remaining gaps</h2>
+<ul>
+<li><strong>Lemma 3 / Theorem 4, pp. 10–12:</strong> the manuscript explicitly acknowledges that the symmetry-extension proof fails. Convolving an odd function with an arbitrary probability law need not preserve oddness. Convolution with a nonzero point mass already translates the function away from its symmetry center. The claimed symmetric consistency model is not entered as proved.</li>
+<li><strong>Lemma 1, p. 8:</strong> convolved positive and negative parts can overlap. The asserted identification with the positive and negative parts of the convolved difference is false. This invalidates the given cancellation proof; it does not by itself disprove cancellation for the base relation.</li>
+<li><strong>Equation (16), p. 8:</strong> reflection substitution introduces an incorrect minus sign. The area model’s anti-invariance nevertheless has a direct corrected proof.</li>
+<li><strong>Lemma 2, pp. 9–10:</strong> the proposed chain construction shows forward transformation closure, not the reverse cancellation clauses its use requires. Taking the genuine closure by intersection is possible, but the total-extension write-up now spells out Goodsell’s conclosure in cone language, including strictness-preservation details that do not rely on this lemma’s chain description.</li>
+<li><strong>Theorem 5, pp. 12–14:</strong> neither the failed symmetric seed nor the questionable closure calculation establishes the symmetric total extension. A separate <a href="conjectured-total-independent-sum-extension.html">proved total extension without either reflection requirement</a> uses Goodsell’s conclosure and total-extension strategy, with cone-language exposition and additional proof details recorded by GPT-6. It establishes the previously conjectured package, including Independent Sum Invariance, without rehabilitating the original symmetry lemma.</li>
+<li><strong>Cauchy discussion, pp. 15–16:</strong> the draft’s objections to a particular attempted dominance comparison do not establish its own consistency theorem. No new consistency or incompatibility arrow is inferred from its plots or tail heuristics.</li>
+</ul>
+<h2 id="users-recalled-stable-law-obstruction">User’s recalled stable-law obstruction</h2>
+<p>Goodsell reports that the main consistency claim is false and recalls balanced mixtures involving stable parameters 1 and 1/2. By symmetry, the relevant prospects should both be indifferent to zero; convolution with a common parameter-1/2 law is recalled to create strict stochastic dominance. If those specifications work, independent-sum invariance transports the initial indifference to the convolved pair, contradicting strict dominance.</p>
+<p>The recollection does not yet fix whether the parameters refer to stability indices or another parameter, nor the skewness, scale, location, mixture weights, and full dominance comparison. The map records the resulting proposed incompatibility with a sufficient DTU-plus-neutrality package as <strong>conjectured</strong>, source <strong>Goodsell proposal 9 Sep</strong>. No numerical plot or partially specified stable law is used as a proof. This leaves the author’s withdrawal explicit while separating it from a checked mathematical witness.</p>
+<h2 id="provenance-and-scope">Provenance and scope</h2>
+<p>New manuscript arguments and its explicit construction use the manuscript’s own direct source. Original restriction/decomposition proofs use <strong>Misc.</strong>, with <strong>GPT-6 generated 9 Sep</strong> identifying the contribution. The total-extension model is attributed directly to <strong>Unbounded Utility and Background Risk (unpublished)</strong>: its CDF-area construction, conclosure, and extension strategy are Goodsell’s. The cone-language exposition and additional proof details are separately credited as <strong>GPT-6 proof details 9 Sep</strong>, not as a new AI construction. The remaining stable-law conjecture uses <strong>Misc.</strong>, with <strong>Goodsell proposal 9 Sep</strong>. Source definitions are cited separately, and no published proof was rewritten.</p>
+<p>After migrating the failure nodes, the additions are seven principles, sixteen implications (fifteen proved and one conjectured), one proved incomplete model, and one proved total extension model. The graph remains selective; no claim is made to exhaust all true consequences. No Lean formalization was added.</p>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# Continuous ultrafilter model
+# Clipped expectation: continuous ultrafilter dominance
 
 Source: Goodsell, *Decision theory unbound*, Appendix B, Lemma 6 and proof
 of Theorem 3 (p. 691), Theorems 7, 8, and 10 (pp. 693–695).

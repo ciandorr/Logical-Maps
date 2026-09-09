@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Eventual ordering of clipped expectations</title>
+  <title>Clipped expectation: eventual dominance</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text
 code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}</style></head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Eventual ordering of clipped expectations</h1>
+<h1 class="title">Clipped expectation: eventual dominance</h1>
 </header>
 <p>Source: Goodsell, <em>Decision theory unbound</em>, Theorem 2, pp. 683–685; Theorems 7 and 9, p. 693. Human model: Zachary Goodsell. Recorded and translated by GPT-6 (Codex); no transcription checker asserted.</p>
 <p>Take O=ℝ, all measurable random variables, and</p>
@@ -27,7 +27,7 @@ code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b
 <p>Define X≽Y iff there is s such that v_X(t)≥v_Y(t) for every t&gt;s.</p>
 <p>Reflexivity is immediate; transitivity follows by taking the larger of the two thresholds. Equal-law variables have identical v-functions. Constants have v_x(t)=x for all sufficiently large t. Hence Rich Outcomes holds, and finite mixtures of constants have their usual expected utilities. In particular Simple EU and Archimedean Outcomes hold.</p>
 <p>For a randomized mixture, v_M(t)=p v_X(t)+(1-p)v_Z(t). Since p&gt;0, comparison with a common Z cancels, proving Independence. The recorded implication using Stochastic Equivalence gives Sure-Thing.</p>
-<p>For first-order dominance, use the tail-integral identity for clipped expectations. The difference v_X(t)-v_Y(t) is the integral of the difference of the upper-tail functions on [-t,t]. It is nonnegative. If one tail inequality is strict, right continuity supplies an interval with positive integral; all sufficiently large truncations therefore have a positive gap. The preference is strictly better. This proves the weak and strict dominance clauses, and the topic’s Statewise Dominance consequence follows.</p>
+<p>For first-order dominance, use the tail-integral identity for clipped expectations. The difference v_X(t)-v_Y(t) is the integral of the difference of the upper-tail functions on [-t,t]. It is nonnegative. If one tail inequality is strict, right continuity supplies an interval with positive integral; all sufficiently large truncations therefore have a positive gap. The preference is strictly better. This proves the weak and strict dominance clauses, and the topic’s Statewise Dominance consequence follows. Thus this is a DU model. It is not a DTU model, since Totality fails as shown below.</p>
 <p>Reflection gives v_(-X)(t)=-v_X(t). Positive rescaling gives v_(aX)(t)=a v_X(t/a); eventual comparisons are unchanged by this reparametrization. Thus reflection and scale invariance hold. No Shift Invariance flag is needed or claimed here.</p>
 <p>If X has symmetric law, every clipped expectation is zero by the oddness of c_t. Thus X~0 in this model, verifying Symmetric Gambles Are Neutral even though Totality fails.</p>
 <h2 id="failure-of-totality">Failure of Totality</h2>

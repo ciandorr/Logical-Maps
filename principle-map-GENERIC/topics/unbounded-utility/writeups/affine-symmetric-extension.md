@@ -1,4 +1,4 @@
-# Affine-symmetric total extension: source existence model
+# Signed-measure cone: affine-symmetric extension
 
 Source: Goodsell, *Symmetries of value*, Theorem 2 (p. 24), with the
 construction in Theorems 12–13 and the end of §5 (pp. 35–36).

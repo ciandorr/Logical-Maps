@@ -110,14 +110,29 @@ structure Pref (O : Type*) [MeasurableSpace O] [LinearOrder O] where
   /-- Sure comparisons are exactly the outcome order. -/
   sure_pref : ∀ a b : O, pref (sure a) (sure b) ↔ b ≤ a
 
+/-- `X ≽[P] Y`: `X` is at least as good as `Y` under `P`.
+
+The preference structure stays an explicit parameter rather than a typeclass. Models in
+this topic compare several preference structures on one gamble type, so instance
+resolution would silently pick the wrong one. -/
+scoped notation:50 X:51 " ≽[" P "] " Y:51 => Pref.pref P X Y
+
 namespace Pref
 variable {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O)
 
-/-- `X ~ Y`. -/
-def Indiff (X Y : Gamble O) : Prop := P.pref X Y ∧ P.pref Y X
+/-- `X ∼[P] Y`: indifference. -/
+def Indiff (X Y : Gamble O) : Prop := X ≽[P] Y ∧ Y ≽[P] X
 
-/-- `X ≻ Y`. -/
-def Strict (X Y : Gamble O) : Prop := P.pref X Y ∧ ¬ P.pref Y X
+/-- `X ≻[P] Y`: strict preference. -/
+def Strict (X Y : Gamble O) : Prop := X ≽[P] Y ∧ ¬ Y ≽[P] X
+
+end Pref
+
+@[inherit_doc Pref.Indiff] scoped notation:50 X:51 " ∼[" P "] " Y:51 => Pref.Indiff P X Y
+@[inherit_doc Pref.Strict] scoped notation:50 X:51 " ≻[" P "] " Y:51 => Pref.Strict P X Y
+
+namespace Pref
+variable {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O)
 
 /-- The normalized utility chart, defined relationally by binary certainty comparisons
 against the reference outcomes, following background.md. `Chart P o r` says the outcome
@@ -126,9 +141,9 @@ outcome is placed first in each binary mixture. The chart is partial by design: 
 outcome may have no level, and Rich Outcomes is the separate claim that every real
 level is occupied. -/
 def Chart (o : O) (r : ℝ) : Prop :=
-  (0 ≤ r ∧ r ≤ 1 ∧ P.Indiff (sure o) (mix r (sure P.one) (sure P.zero)))
-  ∨ (1 < r ∧ P.Indiff (sure P.one) (mix (1 / r) (sure o) (sure P.zero)))
-  ∨ (r < 0 ∧ P.Indiff (sure P.zero) (mix (-r / (1 - r)) (sure P.one) (sure o)))
+  (0 ≤ r ∧ r ≤ 1 ∧ sure o ∼[P] mix r (sure P.one) (sure P.zero))
+  ∨ (1 < r ∧ sure P.one ∼[P] mix (1 / r) (sure o) (sure P.zero))
+  ∨ (r < 0 ∧ sure P.zero ∼[P] mix (-r / (1 - r)) (sure P.one) (sure o))
 
 
 open scoped Classical in

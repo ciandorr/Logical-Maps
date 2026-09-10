@@ -1,0 +1,34 @@
+name: Rebuild personal website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'principle-map-GENERIC/build/**'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Trigger Cloudflare Pages
+        env:
+          WEBSITE_DEPLOY_HOOK: ${{ secrets.WEBSITE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$WEBSITE_DEPLOY_HOOK" ]; then
+            echo "::error::Add the WEBSITE_DEPLOY_HOOK repository Actions secret first."
+            exit 1
+          fi
+          response_file="$RUNNER_TEMP/pages-deploy-response.json"
+          curl --fail --silent --show-error \
+            --connect-timeout 10 --max-time 60 \
+            --output "$response_file" \
+            --request POST "$WEBSITE_DEPLOY_HOOK"
+          if ! jq --exit-status '.success == true' "$response_file" > /dev/null; then
+            echo "::error::Cloudflare did not accept the deployment request."
+            exit 1
+          fi
+          echo "Cloudflare accepted the website rebuild. Check Pages for deployment status."

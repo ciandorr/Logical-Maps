@@ -38,3 +38,7 @@ The theory **DU** is the weakest background considered in my papers. In addition
 - Russell, J. S., & Isaacs, Y. (2021). Infinite prospects. *Philosophy and Phenomenological Research*, 103(1), 178–198.
 - Seidenfeld, T., Schervish, M., & Kadane, J. (2009). Preference for equivalent random variables: A price for unbounded utilities. *Journal of Mathematical Economics*, 45, 329–340.
 - Smith, N. J. J. (2014). Is evaluative compositionality a requirement of rationality? *Mind*, 123(490), 457–502.
+
+## AI Involvement
+
+This page is heavily vibe-coded. It seems correct to me but no guarantees.

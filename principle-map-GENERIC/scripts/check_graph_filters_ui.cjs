@@ -45,7 +45,7 @@ try{
  doc.getElementById('show-iso').click();
  assert.ok(conjectures().length>0,'Conjectures remain visible with all sources off');
  assert.ok(doc.querySelector('#graph .node'),'Conjectures keep their endpoint boxes with isolated principles off');
- assert.equal(doc.querySelectorAll('#graph .edge:not(.conjectured)').length,0,'Only conjectural arrows remain');
+ assert.equal(doc.querySelectorAll('#graph .edge:not(.conjectured):not(.premise)').length,0,'Only conjectural arrows remain');
  doc.getElementById('show-conj').click();doc.getElementById('pr-none').click();
  assert.equal(doc.querySelectorAll('#graph .node').length,0);
  doc.getElementById('show-conj').click();
@@ -64,7 +64,7 @@ try{
   assert.deepEqual(arrow.premises,[premise],id+' has only its additional premise');
  }
  assert.ok(graph.edges.every(e=>!e.premises.includes('simple-eu')),'Simple EU is automatic, never an extra premise');
- assert.equal(doc.querySelectorAll('#graph .edge:not(.conjectured)').length,0,'Background proofs do not reappear as arrows');
+ assert.equal(doc.querySelectorAll('#graph .edge:not(.conjectured):not(.premise)').length,0,'Background proofs do not reappear as arrows');
  doc.getElementById('lean-only').click();
  assert.equal(w.eval("literalFollows('simple-eu')"),true,'Lean display filter cannot undo background consequences');
  doc.getElementById('lean-only').click();

@@ -50,6 +50,7 @@
   .sw.dashed { border-top-style: dashed; }
   .sw.human { border-color: var(--human); } .sw.assisted { border-color: var(--assisted); } .sw.ai { border-color: var(--ai); }
   .sw.derived { border-color: var(--derived); } .sw.conj { border-color: var(--conj); }
+  .graph-hint { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-3); margin: 4px 0 8px; }
   .search { width: min(100%, 320px); margin: 0 0 12px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--panel); }
   .legend-note { color: var(--ink-3); font-size: 12px; }
   .framework { font-size: 12.5px; color: var(--ink-2); }
@@ -124,7 +125,7 @@
   .model-category { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
   .model-category h3 { font-size: 13px; margin: 0 0 8px; }
   .edge.human { stroke: var(--human); } .edge.assisted { stroke: var(--assisted); } .edge.ai { stroke: var(--ai); }
-  .edge.derived { stroke: var(--derived); stroke-dasharray: 2 4; stroke-width: 1.3; }
+  .edge.derived, .edge.premise { stroke: var(--derived); stroke-width: 1.3; }
   .edge.conjectured { stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; }
   .edge.lean { stroke-width: 3; }
   .edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
@@ -422,6 +423,7 @@
       </div>
       <div id="graph-options">
         <h2>Graph</h2>
+        <p class="graph-hint" title="Solid neutral arrows are derived proofs. Click an arrow for its proof steps and sources; intermediate principles may be hidden or combined."><span class="sw derived"></span>Derived proofs</p>
         <div class="ctl">
           <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
@@ -703,7 +705,7 @@ function buildGraph() {
     }
   });
   const nodeIds = new Set(nodes.map(n => n.id));
-  const edges = [], signatures = new Set();
+  const edges = [], signatures = new Set(), junctionByPremises = new Map();
   function addRule(r, premises, conclusion, key, contraposed = false) {
     // Assumed premises disappear from the displayed conjunction. An explicitly
     // forbidden conclusion becomes False, while the original record is retained.
@@ -725,8 +727,13 @@ function buildGraph() {
     const common = {r, type: 'direct', key, display, contraposed, premises: remaining, conclusion};
     if (prem.length === 1) edges.push({...common, id: key, from: prem[0], to});
     else {
-      const j = {id: 'j:' + key, kind: 'junction', r, key, display}; nodes.push(j);
-      prem.forEach(from => edges.push({...common, id: key + '←' + from, from, to: j.id, toJunction: true}));
+      const premiseKey = [...prem].sort().join(',');
+      let j = junctionByPremises.get(premiseKey);
+      if (!j) {
+        j = {id: 'j:' + key, kind: 'junction', r, key, display};
+        junctionByPremises.set(premiseKey, j); nodes.push(j);
+        prem.forEach(from => edges.push({...common, id: key + '←' + from, from, to: j.id, toJunction: true}));
+      }
       edges.push({...common, id: key + '→', from: j.id, to, fromJunction: true});
     }
   }
@@ -820,8 +827,10 @@ function buildGraph() {
   // A junction can still have another, nonredundant conclusion. Keep its full
   // premise collection, and point inspection at that surviving implication.
   for (const j of keptNodes.filter(n => n.kind === 'junction')) {
-    const anchor = keptEdges.find(e => e.from === j.id);
-    if (anchor.key === j.key) continue;
+    const consequences = keptEdges.filter(e => e.from === j.id);
+    const anchor = consequences.find(e => !(e.conjectured || e.r?.status === 'conjectured')) || consequences[0];
+    j.shared = consequences.length > 1;
+    j.premises = anchor.premises;
     j.key = anchor.key; j.display = anchor.display;
     for (const incoming of keptEdges.filter(e => e.to === j.id)) {
       const {id, from, to} = incoming;
@@ -863,11 +872,12 @@ function computeLayout(g) {
   const upward = new Set();
   for (const j of connected.filter(n => n.kind === 'junction')) {
     const prem = edges.filter(e => e.to === j.id).map(e => byId.get(e.from));
-    const concl = byId.get(edges.find(e => e.from === j.id).to);
-    if (prem.every(p => implies(concl, p))) { upward.add(j.id); continue; }
-    if (j.r.status === 'conjectured' && !conjectureOnly) continue;
+    const consequences = edges.filter(e => e.from === j.id);
+    if (consequences.every(e => prem.every(p => implies(byId.get(e.to), p)))) { upward.add(j.id); continue; }
+    const ranked = conjectureOnly ? consequences : consequences.filter(e => !(e.conjectured || e.r?.status === 'conjectured'));
+    if (!ranked.length) continue;
     prem.forEach(p => rankEdges.push([p.id, j.id, 1]));
-    rankEdges.push([j.id, concl.id, 1]);
+    ranked.forEach(e => rankEdges.push([j.id, e.to, 1]));
   }
   // break any remaining cycles (mixed junctions) by DFS, preferring to keep strength edges
   const rOut = new Map(connected.map(n => [n.id, []]));
@@ -883,8 +893,8 @@ function computeLayout(g) {
   const layerOf = new Map();
   for (const n of connected.filter(n => n.kind !== 'junction')) layerOf.set(n.id, 2 * rank.get(n.id));
   for (const j of connected.filter(n => n.kind === 'junction')) {
-    const concl = edges.find(e => e.from === j.id).to;
-    layerOf.set(j.id, layerOf.get(concl) + (upward.has(j.id) ? 1 : -1));
+    const conclusionLayers = edges.filter(e => e.from === j.id).map(e => layerOf.get(e.to));
+    layerOf.set(j.id, upward.has(j.id) ? Math.max(...conclusionLayers) + 1 : Math.min(...conclusionLayers) - 1);
   }
   // compress empty layers
   const used = [...new Set(layerOf.values())].sort((a, b) => a - b);
@@ -1031,7 +1041,8 @@ function animateFlow() {
   let html = '', count = 0;
   for (const element of svg.querySelectorAll('.edge-g.hot')) {
     const edge = layout.edges.find(e => e.id === element.dataset.segment);
-    if (!edge || count >= 48) break;
+    if (count >= 48) break;
+    if (!edge || edge.toJunction) continue;
     const color = edge.r ? sourceColor(sourceOf(edge.r)) : 'var(--derived)';
     const duration = Math.max(1, edge.geometry.length / 65);
     for (let i = 0; i < 2 && count < 48; i++, count++) html += `<g class="flow-chevron" style="stroke:${color}"><path d="M-5,-4 L0,0 L-5,4"/><animateMotion path="${edge.geometry.d}" dur="${duration}s" begin="${-i * duration/2}s" repeatCount="indefinite" rotate="auto"/></g>`;
@@ -1065,21 +1076,24 @@ function renderGraph() {
   const defs = `<defs>${[...sourceCatalog.map(s => [sourceMarker(s), sourceColor(s)]), ['derived', 'var(--derived)']].map(([id, color]) => `<marker id="arr-${id}" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="${color}"/></marker>`).join('')}</defs>`;
   let edgesHtml = '';
   for (const e of L.edges) {
-    const source = e.type === 'derived' ? null : sourceOf(e.r);
-    const cls = source ? 'source' : 'derived';
-    const conj = e.conjectured || e.r?.status === 'conjectured';
-    const lean = e.type !== 'derived' && e.r.certificate.lean === 'verified';
+    const source = e.toJunction || e.type === 'derived' ? null : sourceOf(e.r);
+    const cls = e.toJunction ? 'premise' : source ? 'source' : 'derived';
+    const conj = !e.toJunction && (e.conjectured || e.r?.status === 'conjectured');
+    const lean = !e.toJunction && e.type !== 'derived' && e.r.certificate.lean === 'verified';
     const marker = e.toJunction ? '' : `marker-end="url(#arr-${source ? sourceMarker(source) : 'derived'})"`;
     const key = e.key; graphEdgesByKey.set(key, e);
     e.geometry = edgeGeometry(e, L);
     const geometry = e.geometry;
-    edgesHtml += `<g class="edge-g" data-edge="${esc(key)}" data-segment="${esc(e.id)}" data-from="${e.from}" data-to="${e.to}"${source ? ` data-source="${esc(source.id)}" style="--source-color:${sourceColor(source)}"` : ''}><title>${conj ? 'Conjecture: ' : ''}${esc(e.display)}${e.contraposed ? " (contrapositive of the recorded result)" : ""}</title><path class="edge-hit" d="${geometry.d}"/><path class="edge ${cls}${conj ? ' conjectured' : ''}${lean ? ' lean' : ''}" d="${geometry.d}" ${marker}/><path class="direction-chevron" style="stroke:${source ? sourceColor(source) : 'var(--derived)'}" d="M-4,-3 L0,0 L-4,3" transform="translate(${geometry.mid.x},${geometry.mid.y}) rotate(${geometry.angle})"/></g>`;
+    const junction = e.toJunction && L.byId.get(e.to).shared ? e.to : null;
+    const label = e.toJunction ? 'Joint premises: ' + e.premises.map(name).join(' ∧ ')
+      : `${conj ? 'Conjecture' : e.type === 'derived' ? 'Derived proof' : 'Recorded proof'}: ${e.display}${e.contraposed ? ' (contrapositive)' : ''}. ${source ? source.name + '. ' : ''}Click for ${conj ? 'supporting statements' : 'proof steps and sources'}.`;
+    edgesHtml += `<g class="edge-g" data-edge="${esc(key)}" data-segment="${esc(e.id)}" data-from="${e.from}" data-to="${e.to}"${junction ? ` data-junction="${esc(junction)}"` : ''}${source ? ` data-source="${esc(source.id)}" style="--source-color:${sourceColor(source)}"` : ''}><title>${esc(label)}</title><path class="edge-hit" d="${geometry.d}"/><path class="edge ${cls}${conj ? ' conjectured' : ''}${lean ? ' lean' : ''}" d="${geometry.d}" ${marker}/>${e.toJunction ? '' : `<path class="direction-chevron" style="stroke:${source ? sourceColor(source) : 'var(--derived)'}" d="M-4,-3 L0,0 L-4,3" transform="translate(${geometry.mid.x},${geometry.mid.y}) rotate(${geometry.angle})"/>`}</g>`;
   }
   let nodesHtml = '';
   for (const n of L.visible) {
     const s = L.size.get(n.id), x = L.x.get(n.id), y = L.y.get(n.id);
     if (n.kind === 'junction') {
-      nodesHtml += `<g class="junction source" style="--source-color:${sourceColor(sourceOf(n.r))}" data-source="${sourceOf(n.r).id}" data-result="${esc(n.r.id)}" data-connection="${esc(n.key)}" data-graph-node="${esc(n.id)}" transform="translate(${x},${y})"><circle r="11"/><text>∧</text></g>`;
+      nodesHtml += `<g class="junction" ${n.shared ? `data-junction="${esc(n.id)}"` : `data-connection="${esc(n.key)}"`} data-graph-node="${esc(n.id)}" transform="translate(${x},${y})"><title>${esc(n.premises.map(name).join(' ∧ '))}: all premises together. Click for consequences.</title><circle r="11"/><text>∧</text></g>`;
     } else if (n.kind === 'falsity') {
       nodesHtml += `<g class="node falsity" data-falsity="true" transform="translate(${x},${y})"><title>False: the incoming premises are incompatible</title><rect x="${-s.w/2}" y="${-s.h/2}" width="${s.w}" height="${s.h}" rx="5"/><text text-anchor="middle" y="5">False (⊥)</text></g>`;
     } else {
@@ -1139,19 +1153,23 @@ function fit() {
   svg.addEventListener('pointermove', ev => { if (!drag) return; const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true; view.tx = drag.tx + dx; view.ty = drag.ty + dy; applyView(); });
   svg.addEventListener('pointerup', () => { if (drag && !drag.moved) handleGraphClick(drag.target); drag = null; });
   svg.addEventListener('wheel', ev => { ev.preventDefault(); const f = Math.exp(-ev.deltaY * 0.0015); const r = svg.getBoundingClientRect(); const mx = ev.clientX - r.left, my = ev.clientY - r.top; view.tx = mx - (mx - view.tx) * f; view.ty = my - (my - view.ty) * f; view.k *= f; applyView(); }, { passive: false });
-  svg.addEventListener('pointermove', ev => { const t = ev.target.closest('.node,.junction,.edge-g'); hover(t ? (t.dataset.falsity ? { node: 'falsity' } : t.dataset.class ? { node: t.dataset.class } : { result: t.dataset.connection || t.dataset.edge }) : null); });
+  svg.addEventListener('pointermove', ev => { const t = ev.target.closest('.node,.junction,.edge-g'); hover(t ? (t.dataset.falsity ? { node: 'falsity' } : t.dataset.junction ? { node: t.dataset.junction } : t.dataset.class ? { node: t.dataset.class } : { result: t.dataset.connection || t.dataset.edge }) : null); });
   svg.addEventListener('pointerleave', () => hover(null));
 })();
 function handleGraphClick(target) {
   const t = target.closest('.node,.junction,.edge-g');
   if (!t) { select(null); return; }
   if (t.dataset.falsity) select({type: 'falsity'});
+  else if (t.dataset.junction) select({type: 'junction', id: t.dataset.junction});
   else if (t.dataset.class) select({ type: 'principle', id: target.closest('[data-principle]')?.dataset.principle || t.dataset.members.split(',')[0] });
   else {
     const edge = graphEdgesByKey.get(t.dataset.connection || t.dataset.edge);
-    if (edge?.r) select({type: 'result', id: edge.r.id, display: edge.display, contraposed: edge.contraposed});
-    else if (edge) select({type: 'pair', a: edge.a, b: edge.b, premises: edge.premises, via: edge.via, conjectured: edge.conjectured});
+    selectGraphEdge(edge);
   }
+}
+function selectGraphEdge(edge) {
+  if (edge?.r) select({type: 'result', id: edge.r.id, display: edge.display, contraposed: edge.contraposed});
+  else if (edge) select({type: 'pair', a: edge.a, b: edge.b, premises: edge.premises, via: edge.via, conjectured: edge.conjectured});
 }
 function hover(h) {
   const key = h ? (h.node ? 'node:' + h.node : 'edge:' + h.result) : null;
@@ -1162,16 +1180,16 @@ function hover(h) {
   const hotNodes = new Set(), hotEdges = new Set();
   if (h.node) {
     hotNodes.add(h.node);
-    edges.forEach(e => { if (e.dataset.from === h.node || e.dataset.to === h.node) { hotEdges.add(e.dataset.edge); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    edges.forEach(e => { if (e.dataset.from === h.node || e.dataset.to === h.node) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
     // junction: include its other endpoints
-    edges.forEach(e => { if (hotNodes.has(e.dataset.from) && e.dataset.from.startsWith('j:') || hotNodes.has(e.dataset.to) && e.dataset.to.startsWith('j:')) { hotEdges.add(e.dataset.edge); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    edges.forEach(e => { if (hotNodes.has(e.dataset.from) && e.dataset.from.startsWith('j:') || hotNodes.has(e.dataset.to) && e.dataset.to.startsWith('j:')) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
   } else if (h.result) {
-    edges.forEach(e => { if (e.dataset.edge === h.result) { hotEdges.add(e.dataset.edge); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    edges.forEach(e => { if (e.dataset.edge === h.result) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
     hotNodes.add('j:' + h.result);
-    edges.forEach(e => { if (e.dataset.to.startsWith('j:') && hotNodes.has(e.dataset.to)) { hotEdges.add(e.dataset.edge); hotNodes.add(e.dataset.from); } });
+    edges.forEach(e => { if (e.dataset.to.startsWith('j:') && hotNodes.has(e.dataset.to)) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); } });
   }
   nodes.forEach(n => { const id = n.dataset.falsity ? 'falsity' : n.dataset.class || n.dataset.graphNode; n.classList.toggle('hot', hotNodes.has(id)); n.classList.toggle('dim', !hotNodes.has(id)); });
-  edges.forEach(e => { e.classList.toggle('hot', hotEdges.has(e.dataset.edge)); e.classList.toggle('dim', !hotEdges.has(e.dataset.edge)); });
+  edges.forEach(e => { e.classList.toggle('hot', hotEdges.has(e.dataset.segment)); e.classList.toggle('dim', !hotEdges.has(e.dataset.segment)); });
   animateFlow();
 }
 function applySelection() {
@@ -1504,6 +1522,7 @@ function showTab(tab) {
 
 // ---------------------------------------------------------------- detail
 function wire(el) {
+  el.querySelectorAll('button[data-graph-connection]').forEach(b => b.addEventListener('click', () => selectGraphEdge(graphEdgesByKey.get(b.dataset.graphConnection))));
   el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', () => select({ type: 'principle', id: b.dataset.principle })));
   el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
   el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
@@ -1518,9 +1537,14 @@ function renderDetail() {
   const el = document.getElementById('pop'); const sel = state.selected;
   if (!sel || sel.type === 'cell') { el.hidden = true; return; }
   let h = '';
-  if (sel.type === 'pair') {
+  if (sel.type === 'junction') {
+    const junction = layout?.byId.get(sel.id);
+    if (!junction) { el.hidden = true; return; }
+    const consequences = layout.edges.filter(e => e.from === junction.id);
+    h += `<div class="pop-t">${esc(junction.premises.map(name).join(' ∧ '))}</div><p class="note">All these premises together. Select a consequence for its evidence.</p><ul>${consequences.map(e => `<li><button class="lnk" data-graph-connection="${esc(e.key)}">${esc(name(e.conclusion || e.b))}</button> ${e.r ? certBadges(e.r) : `<span class="badge ${e.conjectured ? 'conj' : 'kind'}">${e.conjectured ? 'conjecture' : 'derived proof'}</span>`}</li>`).join('')}</ul>`;
+  } else if (sel.type === 'pair') {
     const via = sel.via || pairStatus(sel.a, sel.b).via || [];
-    h += `<div class="pop-t">${esc((sel.premises || [sel.a]).map(name).join(' ∧ '))} ⇒ ${esc(name(sel.b))}</div><p class="note">${sel.conjectured ? 'Conditional on the conjectures below, under the current background.' : 'Derived under the current assumptions.'}</p><ol>${via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
+    h += `<div class="pop-t">${esc((sel.premises || [sel.a]).map(name).join(' ∧ '))} ⇒ ${esc(name(sel.b))}</div><p class="note">${sel.conjectured ? 'Conditional on the conjectures below, under the current background.' : 'Derived proof using the results below and the current background. Intermediate principles may be hidden or used together.'}</p><ol>${via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
   } else if (sel.type === 'falsity') {
     h += '<div class="pop-t">False (⊥)</div><div class="pop-s">The incoming premises cannot all hold together. This is not an optional principle.</div><div class="links"><button class="lnk" data-goto="1">write-up</button></div>';
   } else if (sel.type === 'principle') {

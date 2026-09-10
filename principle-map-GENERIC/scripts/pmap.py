@@ -499,9 +499,7 @@ def enriched_payload(topic_id: str, downloads: dict) -> dict:
                 payload[f"{key}_html"] = _md_to_html(md)
     if downloads.get("starter"):
         section = ("\n\n## Create your own logical map\n\n"
-                   f"[Download the starter project (ZIP)]({downloads['starter']}) — "
-                   "a blank map, a small worked example, the viewer and build tools, "
-                   "and instructions for you and your coding agent. Lean is optional.\n")
+                   f"[Download the starter project (ZIP)]({downloads['starter']})\n")
         payload["contribute_md"] = payload.get("contribute_md", "# Contribute\n") + section
         payload["contribute_html"] = _md_to_html(payload["contribute_md"])
     return payload

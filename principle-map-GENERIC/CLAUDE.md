@@ -4,6 +4,11 @@ This is a database of principles and the logical connections between them, with
 a build step that derives consequences and renders an interactive map. Read
 README.md first.
 
+## Presentation preference
+
+Keep interface copy concise and functional. Do not add unsolicited editorial
+sentences, promotional descriptions, or commentary beneath headings and links.
+
 ## Commands
 
 - `python3 scripts/pmap.py validate` — must pass before any commit.

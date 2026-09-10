@@ -105,7 +105,12 @@ Only proved records support deductions. Implications use Horn closure over
 conjoined positive premises; contradictions conclude False. Negative assumptions
 forbid their positive facts, without treating absence as falsity. Inconsistency
 does not generate arbitrary conclusions. Equivalent positive principles share
-a node; conjunction arrows retain the whole premise package.
+a node; conjunction arrows retain the whole premise package. Results with the
+same displayed premise set share one ∧ node and separate outgoing consequences.
+Click the shared node to inspect its consequences and their evidence.
+Proved arrows are solid; neutral arrows are derived proofs, which may use hidden
+intermediates or combined premises. Dashed arrows are conjectural. Incoming ∧
+links collect premises and do not themselves assert implications.
 When a displayed A ⇒ C already suffices, the graph hides the redundant
 A ∧ B ⇒ C in that context. A conjecture never hides a proved implication.
 The records remain available even when their graph arrows are redundant.

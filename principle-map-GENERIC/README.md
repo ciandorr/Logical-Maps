@@ -238,6 +238,18 @@ A conjecture cannot suppress a proved implication. The original records and
 their write-ups remain available, and changing background or source filters
 recomputes which arrows are redundant.
 
+Results with the same displayed premises share one ∧ node, with one incoming
+link per premise and separate outgoing consequences. This grouping is recomputed
+after background simplification and equivalence grouping. Click a shared ∧ node
+to list its consequences, then select one to inspect its evidence.
+
+Proved arrows are solid: source colours identify recorded results, and neutral
+arrows identify derived proofs. Dashed arrows are conjectural. Derived proofs
+can use hidden intermediate principles, background facts, or combined premises;
+they need not correspond to a simple path visible on the graph. Clicking an
+arrow shows its supporting results. Links collecting premises into ∧ have no
+arrowheads or flow chevrons, since an individual conjunct does not imply the whole.
+
 Graph controls use **✓** to show a principle and **✗** to show its negation;
 both can be displayed together. **Clear** hides both forms. **Background** moves
 the principle into the shared assumptions, assuming it positively unless only

@@ -1,0 +1,36 @@
+id: relative-vanishing-shifts-imply-l1
+premises:
+- rich-outcomes
+- relative-expectation
+- vanishing-shift-continuity
+conclusion: l1-continuity
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: >-
+  Suppose E|u(X_n)−u(X)| tends to zero and X_n ≽ Y for every n. Fix ε>0.
+  Rich Outcomes supplies X+ε in the real utility chart. For a sufficiently
+  large n, the actual difference (X+ε)−X_n is integrable and has expectation
+  at least ε−E|u(X_n)−u(X)|>0. Relative Expectation applied in both
+  directions gives X+ε ≻ X_n, so transitivity gives X+ε ≽ Y. This holds
+  for every ε>0. Continuity under Vanishing Shifts yields X ≽ Y, exactly
+  the recorded upper-section L1 Continuity clause. Neither transporting
+  a preference by a shift nor closing a lower section is required.
+sources:
+- >-
+  GPT-6 (Codex), 9 September 2026, original connecting proof in the Logical
+  Maps investigation of the CDF-area model and weak continuity.
+source_names:
+- GPT-6 connecting proof 9 Sep
+notes: >-
+  Original work: short positive-buffer argument. With Rich Outcomes and
+  Relative Expectation, Continuity under Vanishing Shifts and L1 Continuity
+  are equivalent, using the separately recorded reverse implication.
+  The proof concerns actual coupled utility differences and assumes neither
+  Totality nor Stochastic Equivalence nor Shift Invariance. This describes
+  the work performed for the map, not literature priority.

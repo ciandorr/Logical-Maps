@@ -1,0 +1,26 @@
+id: vanishing-shift-continuity
+name: Continuity under Vanishing Shifts
+statement: >-
+  For real-utility variables X,Y, if X+ε ≽ Y for every ε>0, then X ≽ Y.
+  The shifts act on utility levels, and all the displayed variables must be
+  available. Only this upper-section closure condition is imposed.
+formal: '(∀ε>0, X+ε ≽ Y) ⇒ X ≽ Y'
+category: basic-decision-theory
+tags:
+- continuity
+- shift
+sources:
+- >-
+  GPT-6 (Codex), 9 September 2026, formulation in the Logical Maps project
+  following Zachary Goodsell's suggestion to investigate CDF-area comparisons
+  and Shift Transfer under DU, Shift Invariance, and a little continuity.
+source_names:
+- GPT-6 formulation 9 Sep
+notes: >-
+  This closes comparisons under arbitrarily small constant improvements of
+  the first gamble. It does not assume Shift Invariance, Totality, or closure
+  of lower sections. L1 Continuity implies it directly. The strength of the
+  converse depends on the other decision-theoretic axioms; a restricted-looking
+  continuity condition need not remain weaker once those axioms are imposed.
+date: '2026-09-09'
+lean_def: UnboundedUtility.VanishingShiftContinuity

@@ -1,0 +1,29 @@
+id: strict-chain-on-two
+name: 'Two objects: strict chain'
+description: Let S={0,1} and R={(0,1)}. It is not reflexive because neither self-pair
+  occurs. It is not symmetric because (1,0) is absent. There are no composable pairs
+  x R y and y R z, so transitivity holds vacuously. The only distinct objects are
+  comparable via 0 R 1, so connectedness holds. The failed reflexivity and symmetry
+  exclude equivalence.
+satisfies:
+- transitive
+- connected
+violates:
+- reflexive
+- symmetric
+- equivalence
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: OpenAI Codex
+  recorded_by: OpenAI Codex
+  checked_by: []
+  date: '2026-09-10'
+checks:
+- topics/example/checks/relations.py
+sources:
+- Original construction and elementary verification by OpenAI Codex, 10 September
+  2026, Logical Maps starter record strict-chain-on-two.
+source_names:
+- Starter construction

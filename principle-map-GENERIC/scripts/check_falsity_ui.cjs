@@ -28,21 +28,21 @@ w.eval("changeBackground('d',true)");
 assert.equal(d.getElementById('graph-warning').hidden,false);
 assert.equal(d.querySelectorAll('#graph .edge').length,0);
 assert.match(d.getElementById('graph-warning').textContent,/A submission/);
-d.querySelector('[data-source-filter="submission"]').click();assert.equal(d.getElementById('graph-warning').hidden,true);
+d.querySelector('[data-source-filter="submission"]').click();assert.equal(d.getElementById('graph-warning').hidden,false,'Hiding an arrow cannot repair an inconsistent background');
 d.querySelector('[data-source-filter="submission"]').click();assert.equal(d.getElementById('graph-warning').hidden,false);
-d.getElementById('models-background-reset').click();assert.equal(d.getElementById('graph-warning').hidden,true);
+d.getElementById('ex-clear').click();assert.equal(d.getElementById('graph-warning').hidden,true);
 // Models derive violations from incompatibility even when violates is empty.
 d.querySelector('#models [data-model="m"]').click();
 const verdict=d.querySelector('#models [data-verdict="d"]');assert.match(verdict.textContent,/✗/);
-assert.match(verdict.textContent,/A paper/);assert.match(verdict.textContent,/A submission/);
-verdict.click();d.querySelector('#pop [data-goto]').click();
+verdict.click();assert.match(d.getElementById('pop').textContent,/A paper/);assert.match(d.getElementById('pop').textContent,/A submission/);
+d.querySelector('#pop [data-goto]').click();
 assert.match(d.getElementById('page').textContent,/False.*contradiction/);
 d.querySelector('[data-source-filter="submission"]').click();assert.equal(d.querySelector('#models [data-verdict="d"]'),null);
 d.querySelector('[data-source-filter="submission"]').click();
-// An impossible Models filter package gets the same warning, without changing background.
-for(const p of 'abcd')d.querySelector(`#models [data-in="${p}"]`).click();
-assert.match(d.querySelector('#models .ex-bad').textContent,/selected principles imply False/);
-assert.equal(d.getElementById('graph-warning').hidden,true);
+// Explorer assumptions update the graph and surface the same contradiction.
+for(const p of 'abcd')d.querySelector(`#models [data-assume-positive="${p}"]`).click();
+assert.match(d.querySelector('#models .ex-bad').textContent,/assumptions are inconsistent/);
+assert.equal(d.getElementById('graph-warning').hidden,false);
 d.getElementById('ex-clear').click();
 // Conjectures can draw a dashed falsity edge but cannot establish any failure or warning.
 const conjecture=JSON.parse(JSON.stringify(fixture));conjecture.results[1].status='conjectured';
@@ -66,19 +66,19 @@ const assumptions=p=>JSON.parse(p.window.eval('JSON.stringify([...background].so
 assert.deepEqual(assumptions(real),du);
 assert.equal(real.window.eval("background.has('simple-eu')"),false);
 assert.equal(real.window.eval("E.cl([]).facts.has('simple-eu')"),true);
-assert.ok(rd.querySelector('#pr-filters [data-pid="simple-eu"]'));
-assert.ok(rd.querySelector('#models [data-in="simple-eu"]').classList.contains('auto'));
+assert.ok(rd.querySelector('#pr-filters [data-show-positive="simple-eu"]'));
+assert.ok(rd.querySelector('#models [data-assume-positive="simple-eu"]').classList.contains('auto-positive'));
 assert.equal(real.window.eval("E.cl([]).facts.has('totality')"),false);
 assert.equal(real.window.eval("backgroundExcluded.has('totality')"),false);
 for(const scope of ['#pr-filters','#models']){
- assert.equal(rd.querySelector(`${scope} [data-background-preset="du"]`).textContent,'Add DU to background');
- assert.equal(rd.querySelector(`${scope} [data-background-preset="dtu"]`).textContent,'Add DTU to background');
+ assert.equal(rd.querySelector(`${scope} [data-background-preset="du"]`).textContent,'Background DU');
+ assert.equal(rd.querySelector(`${scope} [data-background-preset="dtu"]`).textContent,'Background DTU');
 }
 // DU visibly rules out Archimedean Gambles and Countable Sure-Thing.
 for(const id of ['archimedean-gambles','countable-sure-thing']){
- const row=rd.querySelector(`#models [data-out="${id}"]`).closest('.ex-p');
- assert.ok(row.classList.contains('fout'));
- assert.ok(row.querySelector('[data-out]').classList.contains('auto'));
+ const row=rd.querySelector(`#models [data-assume-negative="${id}"]`).closest('.ex-p');
+ assert.ok(row.querySelector('[data-assume-negative]').classList.contains('auto-negative'));
+ assert.equal(row.querySelector('[data-assume-negative]').getAttribute('aria-pressed'),'false');
  assert.doesNotMatch(row.textContent,/⇐ (?:in|out)/);
 }
 assert.ok(rd.querySelector('#graph [data-edge="rich-simple-dominance-refutes-archimedean-gambles"]'));
@@ -94,7 +94,7 @@ assert.deepEqual(assumptions(page(data,real.window.location.href)),dtu);
 for(const id of incomplete){
  assert.equal(rd.querySelector(`#models .ex-m [data-model="${id}"]`),null);
 }
-rd.querySelector('#models-background-list [data-remove-background="totality"]').click();
+rd.querySelector('#models [data-assume-positive="totality"]').click();
 assert.deepEqual(assumptions(real),du);
 assert.deepEqual(assumptions(page(data,real.window.location.href)),du);
 for(const id of incomplete)assert.ok(rd.querySelector(`#models .ex-m [data-model="${id}"]`));
@@ -119,6 +119,6 @@ for(const p of ['rich-outcomes','stochastic-dominance','antitonic-sum-consistenc
 assert.equal(rd.getElementById('graph-warning').hidden,false);
 assert.match(rd.getElementById('graph-warning').textContent,/Unbounded Utility and Background Risk \(unpublished\)/);
 rd.querySelector('[data-source-filter="unpublished-background-risk"]').click();
-assert.equal(rd.getElementById('graph-warning').hidden,true);
+assert.equal(rd.getElementById('graph-warning').hidden,false,'Background consistency uses all recorded proofs');
 assert.deepEqual(errors,[]);pages.forEach(p=>p.window.close());
 console.log('PASS: falsity graph, all exclusion orientations, source evidence, model deductions/filters, conjecture isolation, and migrated topic UI.');

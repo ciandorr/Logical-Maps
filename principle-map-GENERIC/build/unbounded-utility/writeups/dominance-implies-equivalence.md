@@ -1,6 +1,6 @@
 # Stochastic Dominance ⇒ Stochastic Equivalence
 
-<p class='cert'>Result — Source: Decision Theory Unbound; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
+<p class='cert'>Result — Source: Decision Theory Unbound, Lean `UnboundedUtility.Proofs.dominance_implies_equivalence`; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
 
 ## Premises
 

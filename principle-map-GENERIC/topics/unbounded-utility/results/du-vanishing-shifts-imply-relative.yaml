@@ -1,0 +1,68 @@
+id: du-vanishing-shifts-imply-relative
+premises:
+- rich-outcomes
+- archimedean-outcomes
+- stochastic-equivalence
+- stochastic-dominance
+- independence
+- vanishing-shift-continuity
+conclusion: relative-expectation
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: >-
+  The DU premises give Simple EU by the recorded finite-lottery representation.
+  First, any integrable survival difference g that is nonnegative outside a
+  compact interval and has positive integral gives a strict preference: choose
+  a compact finite-step minorant n<=g with positive integral; write
+  n=q(S_mu−S_nu) for finite laws with E[mu]>E[nu]. Dominance compares the
+  enlarged mixtures X+q nu and Y+q mu, finite EU and Independence replace
+  mu by nu strictly, and common-mixture cancellation gives X strictly above Y.
+  Now suppose D=X−Y is integrable with ED>=0, and set d=S_X−S_Y.
+  This d is integrable and of bounded variation. Its local envelope
+  h(t)=sup_{|s−t|<2}|d(s)| is integrable. Choose a nonnegative weight r(t)
+  tending to infinity in both tails with K=integral(rh) finite and positive,
+  and let Z have density rh/K. If d is identically zero, use Stochastic
+  Equivalence instead. For each 0<epsilon<=1, sufficiently far in either
+  tail the increment S_{Z+epsilon}(t)−S_Z(t) is at least |d(t)|.
+  Therefore A=M_1/2(X,Z) and B=M_1/2(Y,Z) have survival difference
+  S_{A+epsilon}−S_B nonnegative outside a compact interval, integrable
+  everywhere, and of integral ED/2+epsilon>0. The first step gives
+  A+epsilon strictly above B. Dominance extends this to larger epsilon.
+  Vanishing-shift continuity yields A weakly above B, and Independence
+  cancels Z to give X weakly above Y. Apply this weak conclusion to
+  X and Y+ED/2 when ED>0 to obtain strict preference by Dominance.
+  Swap X,Y when ED<0, and apply the weak conclusion in both directions
+  when ED=0. This is exactly Relative Expectation. Totality, Shift
+  Invariance and lower-section continuity are never assumed.
+sources:
+- 'GPT-6 (Codex), Logical Maps project discussion, 9 September 2026: connecting proof developed in response to the proposed link between DU, weak continuity, CDF-area comparison and Shift Transfer; full common-mixture construction and proof in writeups/du-vanishing-shifts-imply-relative.md.'
+- 'Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026 (unpublished), §3, pp. 7–8: source of the CDF-area comparison method; the new continuity theorem and auxiliary density construction are not attributed to the manuscript.'
+- 'Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695, §3.2–3.3, pp. 678–682: source framework and finite expected-utility formulation. The representation from the current DU preset uses the separate project proof rich-archimedean-dominance-independence-imply-simple-eu.'
+source_names:
+- GPT-6 continuity proof 9 Sep
+- Unbounded Utility and Background Risk (unpublished)
+- Decision Theory Unbound
+notes: >-
+  Original work: substantial connecting proof with an auxiliary common-mixture
+  law. The main step turns a positive-area comparison into dominance outside
+  a compact interval after every positive shift; finite EU handles the compact
+  remainder, one upper-section continuity step removes the shift, and mixture
+  cancellation removes the auxiliary law. The source papers supply the
+  framework and area method, not this proved implication. Source accounting
+  does not assert literature priority. The auxiliary law can have undefined
+  expectation; only actual differences are integrated. Stochastic Equivalence
+  is listed explicitly for law replacements, although Stochastic Dominance
+  already implies it. The proof also applies directly with Simple EU in place
+  of the representation assumptions. No Totality, prior Shift Invariance,
+  symmetry or lower-section continuity is used. No independent checker or
+  Lean verification is asserted. Combining the result with the recorded
+  area implications and the exact CDF-area model's L1 continuity shows that
+  the exact area preorder is the least DU-plus-vanishing-shift-continuity
+  model on the common real-utility domain, with all its strict comparisons
+  preserved by every such extension; equality of all extensions is not claimed.

@@ -37,10 +37,14 @@ Two additional hypotheses settle it:
   centers paired laws, then cancels a common mixture branch. Scale Invariance
   is unnecessary, but the neutral value of the centered laws is essential
   to that proof.
-- **L¹ Continuity:** DTU plus L¹ Continuity gives Expected Utility, and the
-  [conditional-truncation proof](eu-independence-l1-imply-relative.md) then
-  gives Relative Expectation. That implies Simple Relative Expectation and
-  Shift Transfer, even without a prior shift-symmetry assumption.
+- **Continuity under Vanishing Shifts:** the
+  [common-mixture proof](du-vanishing-shifts-imply-relative.html) gives
+  Relative Expectation already under DU, without Totality or a prior
+  shift-symmetry assumption. This implies Simple Relative Expectation and
+  Shift Transfer. Under DU, this continuity condition is equivalent to
+  L¹ Continuity; a separate
+  [conditional-approximation proof](du-l1-implies-relative.html) also
+  establishes the L¹ route.
 
 A countermodel must therefore fail **both** Symmetric Neutrality and L¹
 Continuity. The symmetric and asymmetric continuous clipping models already
@@ -49,6 +53,15 @@ satisfy Relative Expectation and so cannot separate the question. The
 L¹ Continuity, but retains neutrality and Relative Expectation, so it also
 satisfies transfer. The exact clipping records do not establish the required
 Shift Invariance and cannot simply be claimed as counterexamples.
+
+The new
+[Stochastic dominance: finite-support compensation](finite-support-compensated-dominance.html)
+model does satisfy DU and Shift Invariance while violating Shift Transfer,
+with the explicit pair $M_{1/2}(U+1,0)$ and $M_{1/2}(U,1)$ for uniform
+$U$ on $[0,1]$. It also violates Totality, so it settles the version with
+DU but leaves this DTU conjecture unresolved. Its failure of continuity
+under vanishing shifts is witnessed by $U+\varepsilon\succeq1/2$ for every
+$\varepsilon>0$ while $U$ is incomparable with $1/2$.
 
 To settle the entry positively, one must derive the transfer equality without
 using either supplementary hypothesis. To settle it negatively, one must

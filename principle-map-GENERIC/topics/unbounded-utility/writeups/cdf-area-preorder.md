@@ -2,6 +2,13 @@
 
 This is a model of **DU**, but not **DTU**, because Totality fails.
 
+It is also the **least DU preorder with L¹ Continuity**, equivalently with
+Continuity under Vanishing Shifts. The continuity verification below and
+the new [DU continuity theorem](du-vanishing-shifts-imply-relative.html)
+establish this: every such ordering preserves all of this model's weak
+and strict comparisons. Extensions can add comparisons for pairs with
+both signed areas infinite.
+
 **Source:** Zachary Goodsell, *Unbounded Utility and Background Risk*, 5 June
 2026, §3 (pp. 7–8) and Theorem 7 (pp. 19–20). The supplied manuscript is
 **unpublished, marked “do not cite”, and erroneous**. This local provenance
@@ -108,6 +115,49 @@ A [total extension satisfying Independent Sum Invariance](conjectured-total-inde
 is now proved separately: saturating the area cone first supplies
 cancellation while preserving its strict comparisons, after which an
 invariant maximal-cone argument supplies totality.
+
+## L¹ Continuity
+
+**Additional proof: GPT-6 (Codex), 9 September 2026.** The exact area preorder
+satisfies the recorded upper-section L¹ Continuity axiom. This is an elementary
+closure argument for Goodsell's construction, not a claim that the manuscript
+states or proves this additional property.
+
+Suppose $X_n\succeq_R Y$ for every $n$ and
+$\delta_n=E|X_n-X|\to0$. Write
+
+$$d=S_X-S_Y,\qquad d_n=S_{X_n}-S_Y=d+e_n,
+\qquad e_n=S_{X_n}-S_X.$$
+
+For all sufficiently large $n$, $\delta_n$ is finite. The pointwise indicator
+identity and Tonelli give
+
+$$\int_{\mathbb R}|e_n(t)|\,dt
+\le E\int_{\mathbb R}
+ |\mathbf1_{\{X_n>t\}}-\mathbf1_{\{X>t\}}|\,dt
+=E|X_n-X|=\delta_n. \tag{1}$$
+
+The assumed comparison gives $\int(d_n)_-<\infty$ and a nonnegative
+signed integral of $d_n$. Choose one sufficiently large index. Since
+
+$$d_-\le(d_n)_-+|e_n|,$$
+
+we obtain $\int d_-<\infty$. If $\int d_+=\infty$, the area rule already
+gives $X\succeq_RY$. Otherwise $d$ is integrable. Equation (1) then makes
+every sufficiently late $d_n$ integrable too, and
+
+$$\int d=\int d_n-\int e_n\ge-\|e_n\|_1\ge-\delta_n.$$
+
+Taking $n\to\infty$ gives $\int d\ge0$, again proving $X\succeq_RY$.
+No subtraction of infinite areas occurs: the case of infinite positive area
+was settled separately after negative-area integrability was established.
+
+The same argument applies when $Y_n\to Y$ in L¹ with $X$ fixed, and even
+when both arguments converge in L¹, since the change in survival difference
+has L¹ norm at most $E|X_n-X|+E|Y_n-Y|$. Only the upper-section property is
+recorded as a principle in this model. No Totality or symmetry assumption is
+used in this closure proof. Original work consists of this short verification;
+the CDF-area construction remains attributed to Goodsell.
 
 ## Verified failures
 

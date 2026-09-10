@@ -41,7 +41,11 @@
     "proved",
     "conjectured"
    ],
-   "default": "proved"
+   "default": "conjectured"
+  },
+  "was_conjectured": {
+   "type": "boolean",
+   "description": "Historical marker for a record that began as a conjecture. It does not change proof status or supply inference evidence."
   },
   "certificate": {
    "type": "object",
@@ -81,7 +85,7 @@
       "verified"
      ],
      "default": "none",
-     "description": "none: no Lean. stated: the generated statement elaborates, the proof is still sorry. verified: a machine-checked proof of the generated statement, free of sorryAx. Only pmap lean-check may set verified."
+     "description": "none: no Lean statement. stated: the generated statement elaborates; its proof remains pending. verified: a checked proof of the generated statement using only propext, Classical.choice, and Quot.sound. Only pmap lean-check --update may set verified."
     },
     "lean_ref": {
      "type": "string"

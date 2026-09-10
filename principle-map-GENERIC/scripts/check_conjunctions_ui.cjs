@@ -67,6 +67,7 @@ const fixture = {
 
 try {
   const dom = page(fixture), doc = dom.window.document;
+  assert.match(doc.querySelector('[data-tab="models"]').textContent, /^Theory explorer\s/);
   // A proved consequence can complete a named package; the largest fitting
   // package wins, while extra hypotheses retain their own stronger content.
   assert.equal(stmt(dom, 'result', {premises: ['a', 'b'], conclusion: 'z'}), 'DU ⇒ Z');
@@ -129,12 +130,18 @@ try {
   const premiseIds = [...doc.querySelector('#page ul.plist').querySelectorAll('[data-principle]')].map(p => p.dataset.principle);
   assert.deepEqual(premiseIds, ['a', 'b', 'h', 't']);
   pop = select(dom, 'model', 'du-model');
-  assert.equal(pop.querySelector('.pop-s').textContent, 'DU ∧ ¬T ∧ ¬X');
-  assert.deepEqual([...pop.querySelectorAll('.full-conjunction-statement')].map(p => p.textContent), [
-    'Recorded conjunction: A ∧ B ∧ ¬T ∧ ¬X', 'DU = A ∧ B ∧ H',
-  ]);
+  // The explorer already displays model verdicts. Its info popup and model
+  // page omit the redundant package, while preserving sources and navigation.
+  assert.equal(pop.querySelector('.pop-t').textContent, 'Model du-model');
+  assert.equal(pop.querySelector('.pop-s'), null);
+  assert.equal(pop.querySelector('details.full-conjunction'), null);
+  assert.match(pop.textContent, /Fixture source/);
+  assert.ok(pop.querySelector('.badges'));
   pop.querySelector('[data-goto]').click();
-  assert.equal(doc.querySelector('#page .full-conjunction-statement').textContent, 'Recorded conjunction: A ∧ B ∧ ¬T ∧ ¬X');
+  assert.equal(doc.querySelector('#page h1').textContent, 'Model du-model');
+  assert.equal(doc.querySelector('#page .full-conjunction-statement'), null);
+  assert.ok(![...doc.querySelectorAll('#page h2')].some(h => h.textContent === 'Package'));
+  assert.ok(doc.querySelector('#page [data-verdict="t"]'));
   assert.equal(stmt(dom, 'model', fixture.models[0], false), 'A ∧ B ∧ ¬T ∧ ¬X');
 
   // Topics with no packages retain the old conjunction display. Fixed topic

@@ -1,6 +1,6 @@
 # Totality ⇒ Restricted Totality
 
-<p class='cert'>Result — Source: Misc.; produced by GPT-6 (Codex), 2026-09-08; recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
+<p class='cert'>Result — Source: Misc., Lean `UnboundedUtility.Proofs.totality_restricts`; produced by GPT-6 (Codex), 2026-09-08; recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
 
 ## Premises
 

@@ -1,0 +1,74 @@
+id: finite-support-compensated-dominance
+name: 'Stochastic dominance: finite-support compensation'
+satisfies:
+- rich-outcomes
+- archimedean-outcomes
+- stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- independence
+- shift-invariance
+- positive-affine-invariance
+- reflection-anti-invariance
+violates:
+- totality
+- expected-utility
+- simple-relative-expectation
+- relative-expectation
+- cdf-area-extension
+- shift-transfer
+- symmetric-neutrality
+- l1-continuity
+- vanishing-shift-continuity
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+description: >-
+  Use real outcomes with identity utility and all measurable real random
+  variables. In the vector space V of survival profiles of finite signed
+  measures with total mass zero, modulo almost-everywhere equality, let
+  P be the cone of nonnegative profiles and N the subspace of compactly
+  supported finite-step profiles with integral zero. Define X>=Y iff
+  S_X-S_Y belongs to P+N. This orders gambles by stochastic dominance
+  after allowing a finite-support zero-mean compensation. The cone is
+  preserved by common translations, positive affine changes and reflected
+  comparison reversal. Its indifferent part is exactly N. Finite gambles
+  are compared by their ordinary expectations, giving Simple EU and the
+  identity chart, while strict stochastic dominance remains strict.
+  A finite-mixture cancellation argument shows that this is the least
+  DU preorder on real utility laws: every DU preorder preserves all its
+  weak and strict comparisons.
+  For U uniform on [0,1], U and sure 1/2 are incomparable despite their
+  equal finite means. Nevertheless U+epsilon>=1/2 for every epsilon>0:
+  sufficiently fine lower finite quantizations have mean at least 1/2.
+  Thus Continuity under Vanishing Shifts and L1 Continuity fail. Shift Transfer also fails
+  explicitly: M_(1/2)(U+1,0) and M_(1/2)(U,1) have equal means but a
+  non-step survival difference, so are incomparable. Coupling their
+  branches with the same fair coin gives a simple difference taking
+  values +1 and -1, also refuting Simple Relative Expectation.
+sources:
+- 'GPT-6 (Codex), Logical Maps, 9 September 2026: original finite-support compensation cone construction and exact analytic witnesses in writeups/finite-support-compensated-dominance.md.'
+- 'Zachary Goodsell, project conversation, 9 September 2026: prompt to investigate the role of CDF-area dominance, DU, Shift Invariance and continuity in deriving Shift Transfer.'
+source_names:
+- GPT-6 cone construction 9 Sep
+- Goodsell research prompt 9 Sep
+notes: >-
+  Original work: substantive elementary cone construction with direct axiom
+  checks, a least-DU characterization, and explicit separating examples,
+  motivated by the user's question.
+  The construction and new proofs are credited to GPT-6, not to a paper
+  merely because the paper also uses cones or supplies principle definitions.
+  This describes work performed in the project and makes no literature-priority
+  claim. DU holds, but DTU fails because Totality fails. Therefore this model
+  settles the failure of DU plus Shift Invariance to imply Shift Transfer;
+  it does not settle the separately recorded DTU conjecture. All comparisons
+  refer to the full standing domain, and all listed failures have exact
+  witnesses in the write-up. No independent checker or Lean verification is
+  asserted; no numerical computation is used as a proof of a universal axiom.
+checks:
+- topics/unbounded-utility/checks/shift_continuity.py

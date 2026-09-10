@@ -10,6 +10,11 @@ README.md first.
 - `python3 scripts/pmap.py build` — regenerates `build/<topic>/index.html`,
   `data.json`, write-ups, and downloadable topic files.
 - `python3 scripts/pmap.py status` — counts, open pairs, redundancies.
+- `python3 scripts/pmap.py starter` — build the reusable starter ZIP. Normal
+  builds also regenerate it and add a relative Contribute download. Keep its
+  allowlist limited to shared tooling and `starter/` assets. Run
+  `python3 scripts/check_starter.py` after changing packaging or scaffolding;
+  `--python /path/to/venv/bin/python` tests a clean requirements-only environment.
 - `python3 scripts/pmap.py bundle` — writes `build/<topic>/<topic>-map.zip`, the
   self-contained working copy handed to a person or an AI (MAP.md, OPEN-QUESTIONS.md,
   README/AGENTS rules, data.json, derived.json, the YAML tree, and the tooling).
@@ -55,6 +60,22 @@ When you (an AI) add or edit a result or model:
   it replaces the generated one in the build.
 - If you are not sure, record it as `status: conjectured` with an empty proof
   and say in `notes` what would settle it.
+- New scaffolds and omitted statuses default to conjectured. Do not restore a
+  proved default. Explicitly promote a record only after its proof or model
+  verification is supplied.
+- Preserve conjecture history with optional `was_conjectured: true` on results
+  and models. When changing a conjecture to `proved`, set this flag, keep its
+  stable ID and add the proof of the same statement. For a substantially
+  changed statement, keep the original question and add a separate proved record.
+  A refuted proposal stays `status: conjectured`; record its proved refuting
+  evidence separately. Do not add a `refuted` proof status.
+- Conjecture verdicts are computed from the selected background and proved
+  sources, not persisted as global resolutions. Source filters restrict answer
+  evidence, not the question inventory. For non-False conclusions, incompatible
+  premises are reported separately; an inconsistent background suppresses verdicts.
+  Refuting an implication requires an actual countermodel; matching a model's required flags
+  proves existence, not necessarily its proposed construction. The viewer hides
+  currently proved/refuted questions unless **Show resolved** is checked.
 - Do not edit an existing paper/submission proof or a legacy human-authored
   proof to change its mathematical content — add a note or a new result instead.
 - Independences are recorded as models (`models/<id>.yaml`), never as results.

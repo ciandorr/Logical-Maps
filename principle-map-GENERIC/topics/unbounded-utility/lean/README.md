@@ -1,64 +1,80 @@
 # Lean formalisation
 
-A Lake project holding the formal counterpart of this topic. It is at **stage one**:
-the framework and twelve principles are defined, and statements are generated for every
-record they cover. No theorem is proved yet.
-
-Before starting a proof campaign, address the foundation-contract and verification-gate
-issues recorded in [the 9 September 2026 review](REVIEW.md).
+All **39 principle nodes** have Lean definitions. All **101 result/model records**
+have generated statements. Completed proofs live separately from statements; defining
+a proposition does not prove it. See [VERIFICATION.md](VERIFICATION.md) for the audited
+coverage and remaining work.
 
 ```
-UnboundedUtility/Framework.lean    the setting: sample space, gambles, mixtures, the chart
-UnboundedUtility/Principles.lean   one definition per principle node
-UnboundedUtility/Statements.lean   GENERATED from the YAML, do not edit
+UnboundedUtility/Framework.lean   sample space, gambles, mixtures, preferences, partial chart
+UnboundedUtility/Numerical.lean   finite-chart gambles, arithmetic, dependence, copulas
+UnboundedUtility/Principles.lean  all 39 principle definitions, plus DU and DTU packages
+UnboundedUtility/Statements.lean  GENERATED from YAML; do not edit
+UnboundedUtility/Proofs.lean      proofs of generated result statements
 ```
 
-## The point of the generated file
+## Checking and certificates
 
-The YAML is the single source of truth for statements. Each principle record names its
-Lean definition in `lean_def`. Every result and model statement is then assembled by
-`pmap lean` from that record's premises and conclusion. To prove a result you inhabit the
-generated `Prop`, so a Lean proof cannot silently drift from the claim the map displays.
-Regenerate after changing any record.
-
-`pmap lean-check` builds the library, then asks Lean itself which claimed proofs really
-inhabit their generated statement and whether they depend on `sorryAx`. A record may only
-say `lean: verified` if that check passes. `lean: stated` means the statement elaborates
-and the proof is still missing.
-
-## Notation
-
-Scoped notation mirrors the papers, with the preference structure carried explicitly:
-
-| Lean | Meaning |
-| --- | --- |
-| `X ≽[P] Y` | `X` is at least as good as `Y` under `P` |
-| `X ≻[P] Y` | strict preference |
-| `X ∼[P] Y` | indifference |
-
-The structure stays a parameter rather than a typeclass on purpose. Models here compare
-several preference structures over one gamble type, an extension against the relation it
-extends, and instance resolution would silently choose one of them. Writing `P` in the
-brackets keeps that choice visible in every statement.
-
-## Deliberate modelling choices
-
-* The sample space is fixed as the unit interval under Lebesgue measure. Its richness is
-  framework here, not a principle node, so it is not an axiom you can drop.
-* Gambles are **not** quotiented by almost-sure equality. Same-law variables stay distinct
-  objects, which is what keeps Stochastic Equivalence an optional axiom.
-* The utility chart is partial and relational, `Chart P o r`, calibrated by binary
-  certainty comparisons. It is deliberately not a function `O → ℝ`, so Rich Outcomes and
-  Archimedean Outcomes stay separate nodes.
-* The mixture is the fixed randomized-selection lift written in `background.md`, not a
-  pointwise average.
-* `Pref.ChartSingleValued` records the background's convention that the chart is
-  single-valued where defined. It is stated but never assumed; decide whether it belongs
-  in the framework before proving anything that needs it.
-
-## Commands
+From the project root:
 
 ```sh
-lake update && lake build          # first run fetches Mathlib
-python3 ../../../scripts/pmap.py lean-check unbounded-utility
+python3 scripts/pmap.py lean-check unbounded-utility
+python3 scripts/pmap.py lean-check unbounded-utility --update
+python3 scripts/check_lean_audit.py
 ```
+
+The first command builds the library and checks every supplied `lean_ref` against its
+**generated theorem type**, through an audit-wrapper theorem. It checks that wrapper's
+complete axiom dependencies. Any elaboration failure rejects the whole proof batch.
+Only `propext`, `Classical.choice`, and `Quot.sound` are allowed: these are the usual
+[classical Lean axioms](https://lean-lang.org/doc/reference/latest/Axioms/).
+`sorryAx`, custom axioms, missing reports, and incorrectly typed references fail.
+
+`--update` changes certificate metadata only after a successful audit: `verified` for
+checked proofs, `stated` for generated statements whose proofs remain pending, and
+`none` for records that cannot yet be stated. It never changes mathematical claims or
+conjecture status. Conjectures must first be resolved in the database before receiving
+a verified proof certificate. The regression script checks real Lean failures, not
+just synthetic success messages.
+
+From this directory, `lake build` checks the library. The pinned Lean and Mathlib
+versions remain v4.33.1. Dependency caches are excluded from both ZIP downloads.
+
+## Formalisation contract
+
+* Gambles are measurable outcome-valued functions on the unit interval with Lebesgue
+  probability measure. They are **not** quotiented by almost-sure equality or by law.
+  Stochastic Equivalence remains an optional principle.
+* Preference is a preorder and is carried explicitly as `P`. `X ≽[P] Y`, `X ≻[P] Y`,
+  and `X ∼[P] Y` mean weak preference, strict preference, and indifference.
+* `mix` is randomized selection, not an arithmetic average. Probability-zero and
+  probability-one mixtures now equal their selected gambles **pointwise**. Interior
+  probabilities retain the original rescaling construction.
+* The normalized chart is relational and partial. Every generated universal theorem
+  and every model witness now explicitly requires `Pref.Regular`: a standard Borel
+  outcome space, measurable order, unique and order-compatible chart coordinates,
+  measurable chart domain, and a measurable extension of the coordinates. Values of
+  that extension outside the domain do **not** place those outcomes in the chart.
+  These are formalisation assumptions, not conclusions proved from the bare preorder.
+  They repair the previously unenforced chart contract described in [REVIEW.md](REVIEW.md).
+* Rich Outcomes supplies every real level. It does not make every outcome finite.
+  Archimedean Outcomes remains a separate axiom. DU uses Rich Outcomes, Archimedean
+  Outcomes, Stochastic Equivalence, Stochastic Dominance, and Mixture Independence;
+  DTU adds Totality. Neither package silently assumes Simple EU.
+* `Numeric P` bundles an actual gamble with measurable finite chart coordinates.
+  Affine transformations and sums quantify over explicitly supplied resulting gambles.
+  There is no arbitrary default outcome for an unavailable utility level.
+* Independent noise is independent of the **pair** `(X,Y)`. Comonotonic and antitonic
+  conditions use common uniform representations almost surely. Copula compatibility
+  is the recorded joint-CDF equality, permits atoms and nonunique copulas, and never
+  identifies the actual gambles. The existential copula is chosen once, outside the
+  quantifier over triples.
+* Relative expectation requires integrability of the difference. Folded expectation
+  requires absolute Lebesgue integrability of the combined tails. CDF areas and L1
+  distances use nonnegative extended-real integrals, avoiding accidental `∞ − ∞`
+  or an infinite Bochner integral being read as zero. Continuity closes upper sections
+  only. Countable Sure-Thing includes finite as well as infinite partitions.
+
+These choices make the theorem types precise. Lean checks proofs of those types; it
+does not itself certify the translation from the papers. Difficult representation,
+coupling, integral, and model-construction proofs remain explicit work items.

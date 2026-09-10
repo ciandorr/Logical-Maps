@@ -1,6 +1,6 @@
 # Full Sum Invariance ⇒ Universal Copula Sum Invariance
 
-<p class='cert'>Result — Source: Misc.; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09.</p>
+<p class='cert'>Result — Source: Misc., Lean `UnboundedUtility.Proofs.full_sum_implies_universal_copula`; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09.</p>
 
 ## Premises
 

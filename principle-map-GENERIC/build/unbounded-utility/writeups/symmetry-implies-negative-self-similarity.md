@@ -1,6 +1,6 @@
 # Rich Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Simple Expected Utility ∧ Stochastic Dominance ∧ Mixture Independence ∧ Negative Affine Anti-Invariance ⇒ Uniqueness of Negative Self-Similarity
 
-<p class='cert'>Result — Source: Symmetries of Value; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
+<p class='cert'>Result — Source: Symmetries of Value, Lean `UnboundedUtility.Proofs.symmetry_implies_negative_self_similarity`; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
 
 ## Premises
 

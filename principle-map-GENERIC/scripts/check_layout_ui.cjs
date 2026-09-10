@@ -160,7 +160,8 @@ try {
   doc.querySelector('[data-source-filter="submission"]').click();
   const filtered=geometry(dom);
   verifyIsolation(filtered);
-  assert.equal(filtered.edges.length,initial.edges.length-1);
+  assert.equal(initial.edges.length,3, 'A ⇒ B ⇒ C also displays A ⇒ C.');
+  assert.equal(filtered.edges.length,1, 'Removing B ⇒ C also removes the transitive A ⇒ C.');
   assert.ok(filtered.nodes.some(n=>n.members.includes('c')&&!n.connected));
   doc.querySelector('[data-source-filter="paper"]').click();
   assert.equal(geometry(dom).edges.length,0);

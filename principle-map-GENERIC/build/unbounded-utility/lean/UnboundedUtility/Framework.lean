@@ -1,4 +1,10 @@
-import Mathlib
+import Mathlib.MeasureTheory.Constructions.UnitInterval
+import Mathlib.MeasureTheory.Constructions.Polish.Basic
+import Mathlib.MeasureTheory.Integral.Bochner.Basic
+import Mathlib.Probability.Independence.Basic
+import Mathlib.Topology.Order.ProjIcc
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import Mathlib.Tactic
 
 /-!
 # The unbounded-utility framework
@@ -84,11 +90,15 @@ lemma measurable_mixFun (p : ℝ) (X Y : Gamble O) : Measurable (mixFun p X Y) :
   · exact Y.measurable.comp (measurable_proj.comp ((hc.sub_const p).div_const (1 - p)))
 
 /-- `M_p (X, Y)`: a `p` chance of `X` and a `1 - p` chance of `Y`. -/
-def mix (p : ℝ) (X Y : Gamble O) : Gamble O := ⟨mixFun p X Y, measurable_mixFun p X Y⟩
+def mix (p : ℝ) (X Y : Gamble O) : Gamble O :=
+  if p = 0 then Y else if p = 1 then X else ⟨mixFun p X Y, measurable_mixFun p X Y⟩
 
-@[simp] lemma mix_apply (p : ℝ) (X Y : Gamble O) (w : Sample) :
-    mix p X Y w = if (w : ℝ) < p then X (proj ((w : ℝ) / p)) else Y (proj (((w : ℝ) - p) / (1 - p))) :=
-  rfl
+@[simp] lemma mix_zero (X Y : Gamble O) : mix 0 X Y = Y := by simp [mix]
+@[simp] lemma mix_one (X Y : Gamble O) : mix 1 X Y = X := by simp [mix]
+
+@[simp] lemma mix_apply (p : ℝ) (X Y : Gamble O) (w : Sample) (h0 : p ≠ 0) (h1 : p ≠ 1) :
+    mix p X Y w = if (w : ℝ) < p then X (proj ((w : ℝ) / p)) else Y (proj (((w : ℝ) - p) / (1 - p))) := by
+  simp [mix, h0, h1, mixFun]
 
 end Mixture
 
@@ -159,6 +169,26 @@ framework convention, not a node in the map; record it explicitly rather than as
 it silently. -/
 def ChartSingleValued : Prop := ∀ (o : O) (r s : ℝ), P.Chart o r → P.Chart o s → r = s
 
+/-- The regularity contract of the partial normalized chart. It does not make the
+chart total or surjective and imposes no comparison between non-sure gambles.
+The measurable extension only assigns arbitrary numbers *outside* the chart domain.
+Generated statements and model witnesses explicitly require this contract. -/
+class Regular : Prop where
+  standardBorel : StandardBorelSpace O
+  measurable_order : MeasurableSet {p : O × O | p.1 ≤ p.2}
+  chart_unique : P.ChartSingleValued
+  chart_order : ∀ a b r s, P.Chart a r → P.Chart b s → (a ≤ b ↔ r ≤ s)
+  chart_domain : MeasurableSet {o | ∃ r, P.Chart o r}
+  chart_measurable : ∃ u : O → ℝ, Measurable u ∧ ∀ o r, P.Chart o r → u o = r
+
+@[simp] lemma indiff_self (X : Gamble O) : X ∼[P] X := ⟨P.pref_refl X, P.pref_refl X⟩
+
+lemma chart_zero : P.Chart P.zero 0 := by
+  exact Or.inl ⟨le_rfl, zero_le_one, by simp⟩
+
+lemma chart_one : P.Chart P.one 1 := by
+  exact Or.inl ⟨zero_le_one, le_rfl, by simp⟩
+
 end Pref
 
 /-- An outcome space bundled with a preference structure on it. Consistency claims
@@ -168,8 +198,9 @@ structure Witness where
   [meas : MeasurableSpace O]
   [ord : LinearOrder O]
   pref : Pref O
+  [regular : pref.Regular]
 
-attribute [instance] Witness.meas Witness.ord
+attribute [instance] Witness.meas Witness.ord Witness.regular
 
 /-- A gamble is simple when it takes finitely many outcomes. -/
 def Simple {O : Type*} [MeasurableSpace O] (X : Gamble O) : Prop :=

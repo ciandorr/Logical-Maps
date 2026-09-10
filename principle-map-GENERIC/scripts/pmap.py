@@ -13,6 +13,7 @@ Subcommands
   new-principle TOPIC ID    scaffold a principle file
   new-result TOPIC ID       scaffold an implication file
   new-model TOPIC ID        scaffold a model (countermodel) file
+  starter                  package the reusable Logical Maps starter ZIP
   selftest                  run the derivation engine's unit tests
 
 All commands run from anywhere; paths are resolved relative to the repo root
@@ -89,7 +90,7 @@ def load_topic(topic_id: str) -> dict:
             d["_file"] = str(p.relative_to(ROOT))
             if sub == "results" and d.get("conclusion") is False:
                 d["conclusion"] = FALSE
-            d.setdefault("status", "proved")
+            d.setdefault("status", "conjectured")
             d.setdefault("certificate", {}).setdefault("lean", "none")
             lst.append(d)
     return {"topic": topic, "principles": principles, "results": results, "models": models}
@@ -136,9 +137,10 @@ def proof_chain(target, why, rules_by_id):
 
 
 class Engine:
-    def __init__(self, ids, results, models, background=()):
+    def __init__(self, ids, results, models, background=(), negative_background=()):
         self.ids = list(ids)
         self.background = tuple(background)
+        self.negative_background = tuple(negative_background)
         self.rules = [(r["id"], frozenset(r["premises"]), r["conclusion"]) for r in results]
         self.rules_by_id = {r[0]: r for r in self.rules}
         self.models = list(models)
@@ -168,12 +170,15 @@ class Engine:
     def conflict(self, seed, violates=()):
         """A proof of False, or a fact forbidden by this model/filter; None means unknown."""
         facts, why = self.cl(seed)
-        target = FALSE if FALSE in facts else next((v for v in violates if v in facts), None)
+        target = FALSE if FALSE in facts else next((v for v in (*self.negative_background, *violates) if v in facts), None)
         if target is None:
             return None
         return {"target": target, "via": proof_chain(target, why, self.rules_by_id)}
 
     def entails(self, P, c):
+        conflict = self.conflict(P)
+        if conflict is not None:
+            return (True, conflict["via"]) if c == FALSE else (False, [])
         facts, why = self.cl(P)
         # Do not display consequences of an inconsistent package by explosion.
         if FALSE in facts and c != FALSE:
@@ -192,6 +197,69 @@ class Engine:
         wits = [m["id"] for m in self.models if m["id"] not in self.model_conflicts
                 and P <= self.holds[m["id"]] and c in self.fails[m["id"]]]
         return wits, (self.fail_why[wits[0]][c] if wits else [])
+
+    def resolve_conjecture(self, item):
+        """Answer a result/model question using this proved-only engine.
+
+        The caller supplies only models fitting the selected background.
+        Historical metadata never supplies evidence. The via list contains rule
+        ids for the proof, or for the first of the returned model witnesses.
+        """
+        def answer(status, via=(), models=()):
+            return {"status": status, "via": list(via), "models": list(models)}
+
+        conflict = self.conflict([])
+        if conflict is not None:
+            return answer("inconsistent-background", conflict["via"])
+
+        valid_models = [m for m in self.models if m["id"] not in self.model_conflicts]
+
+        def witness_answer(status, witnesses, positive, negative=()):
+            first = next(m for m in valid_models if m["id"] == witnesses[0])
+            _, why = self.cl(first["satisfies"])
+            via = []
+            for p in positive:
+                via.extend(proof_chain(p, why, self.rules_by_id))
+            for p in negative:
+                # Existing failure evidence starts with its model id.
+                via.extend(self.fail_why[first["id"]][p][1:])
+            return answer(status, dict.fromkeys(via), witnesses)
+
+        if "satisfies" in item:
+            positive, negative = item["satisfies"], item["violates"]
+            conflict = self.conflict(positive, negative)
+            if conflict is not None:
+                return answer("refuted", conflict["via"])
+            witnesses = [m["id"] for m in valid_models
+                         if set(positive) <= self.holds[m["id"]]
+                         and set(negative) <= self.fails[m["id"]]]
+            if witnesses:
+                return witness_answer("proved", witnesses, positive, negative)
+            return answer("open")
+
+        premises = item["premises"]
+        conclusion = FALSE if item["conclusion"] is False else item["conclusion"]
+        if conclusion == FALSE:
+            proved, via = self.entails(premises, FALSE)
+            if proved:
+                return answer("proved", via)
+            witnesses = [m["id"] for m in valid_models
+                         if set(premises) <= self.holds[m["id"]]]
+            if witnesses:
+                return witness_answer("refuted", witnesses, premises)
+            return answer("open")
+
+        conflict = self.conflict(premises)
+        if conflict is not None:
+            return answer("incompatible", conflict["via"])
+        proved, via = self.entails(premises, conclusion)
+        if proved:
+            return answer("proved", via)
+        witnesses, _ = self.separates(premises, conclusion)
+        if witnesses:
+            return witness_answer("refuted", witnesses, premises, [conclusion])
+        # An exclusion without an actual model does not refute an implication.
+        return answer("open")
 
     def package(self, P):
         P = set(P)
@@ -265,6 +333,15 @@ def analyse(data: dict, *, include_conjectures=False) -> dict:
         if concl in facts:
             infos.append(f"{rid} is redundant: derivable from {proof_chain(concl, why, {x[0]: x for x in others})}")
 
+    proved_engine = E if not include_conjectures else Engine(
+        ids, [r for r in data["results"] if r["status"] == "proved"],
+        [m for m in data["models"] if m["status"] == "proved"], topic.get("background", []))
+    conjectures = {
+        item["id"]: proved_engine.resolve_conjecture(item)
+        for item in [*data["results"], *data["models"]]
+        if item["status"] == "conjectured" or item.get("was_conjectured", False)
+    }
+
     return {
         "engine": E,
         "pair": pair,
@@ -273,6 +350,7 @@ def analyse(data: dict, *, include_conjectures=False) -> dict:
         "infos": infos,
         "open_pairs": [k for k, v in pair.items() if v["status"] == "open"],
         "unknown": {m["id"]: [c for c in ids if c not in E.holds[m["id"]] and c not in E.fails[m["id"]]] for m in E.models},
+        "conjectures": conjectures,
     }
 
 
@@ -403,6 +481,7 @@ def export_json(topic_id: str) -> dict:
             "unknown": an["unknown"],
             "problems": an["problems"],
             "infos": an["infos"],
+            "conjectures": an["conjectures"],
         },
     }
 
@@ -418,6 +497,13 @@ def enriched_payload(topic_id: str, downloads: dict) -> dict:
             payload[f"{key}_md"] = md
             if key != "extraction":
                 payload[f"{key}_html"] = _md_to_html(md)
+    if downloads.get("starter"):
+        section = ("\n\n## Create your own logical map\n\n"
+                   f"[Download the starter project (ZIP)]({downloads['starter']}) — "
+                   "a blank map, a small worked example, the viewer and build tools, "
+                   "and instructions for you and your coding agent. Lean is optional.\n")
+        payload["contribute_md"] = payload.get("contribute_md", "# Contribute\n") + section
+        payload["contribute_html"] = _md_to_html(payload["contribute_md"])
     return payload
 
 
@@ -425,9 +511,17 @@ def enriched_payload(topic_id: str, downloads: dict) -> dict:
 # Write-ups
 # ----------------------------------------------------------------------------
 
-WRITEUP_CSS = """body{max-width:72ch;margin:2rem auto;padding:0 1rem;font:16px/1.55 Georgia,'DejaVu Serif',serif;color:#1b2230}
-h1{font-size:1.5rem;line-height:1.3}h2{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#7c8594;margin-top:2rem}
-code,pre{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.cert{color:#4b5563;font-size:.9em}"""
+def theme_head() -> str:
+    """Embed shared presentation assets so downloaded HTML stays self-contained."""
+    viewer = ROOT / "viewer"
+    css = (viewer / "theme.css").read_text(encoding="utf-8")
+    js = (viewer / "theme.js").read_text(encoding="utf-8")
+    return f"<style>{css}</style>\n<script>{js}</script>"
+
+
+WRITEUP_NAV = ('<nav class="writeup-nav" aria-label="Write-up navigation">'
+               '<a href="../index.html">← Back to map</a>'
+               '<button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button></nav>')
 
 
 def _stmt_line(pid: str, names: dict, stmts: dict) -> str:
@@ -502,12 +596,18 @@ def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True
         if pandoc:
             subprocess.run([pandoc, str(body_md), "-s", "--mathml", "--metadata", f"title={title}",
                             "-o", str(html_path)], check=True, capture_output=True)
-            html = html_path.read_text(encoding="utf-8").replace("</head>", f"<style>{WRITEUP_CSS}</style></head>", 1)
+            html = html_path.read_text(encoding="utf-8").replace("</head>", f"{theme_head()}</head>", 1)
+            html = html.replace("<body>", '<body class="writeup-page">' + WRITEUP_NAV, 1)
             html_path.write_text(html, encoding="utf-8")
         else:
             import markdown
             body = markdown.markdown(md, extensions=["extra"])
-            html_path.write_text(f"<!doctype html><meta charset='utf-8'><title>{title}</title><style>{WRITEUP_CSS}</style>{body}", encoding="utf-8")
+            from html import escape
+            html_path.write_text(
+                f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
+                f'<meta name="viewport" content="width=device-width, initial-scale=1">'
+                f'<title>{escape(title)}</title>{theme_head()}</head>'
+                f'<body class="writeup-page">{WRITEUP_NAV}{body}</body></html>', encoding="utf-8")
         entry["html"] = f"writeups/{iid}.html"
         if pdf and pandoc and xelatex:
             r = subprocess.run([pandoc, str(body_md), "-o", str(wdir / f"{iid}.pdf"), "--pdf-engine=xelatex",
@@ -522,7 +622,32 @@ def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True
     return files
 
 
-def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = False, pdf: bool = True) -> Path:
+def render_lean_index(data: dict, source: Path, destination: Path) -> None:
+    """Keep the Lean download usable on hosts that disable directory listings."""
+    from html import escape
+    from urllib.parse import quote
+    definitions = sum(bool(p.get("lean_def")) for p in data["principles"])
+    results = sum(r["certificate"].get("lean") == "verified" for r in data["results"])
+    models = sum(m["certificate"].get("lean") == "verified" for m in data["models"])
+    files = sorted(p.relative_to(source) for p in source.rglob("*")
+                   if p.is_file() and not any(_ignored(part) for part in p.relative_to(source).parts))
+    links = ''.join(f'<li><a href="{quote(str(path))}">{escape(str(path))}</a></li>' for path in files)
+    title = escape(data["topic"]["title"] + ' — Lean files')
+    html = (f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
+            f'<meta name="viewport" content="width=device-width, initial-scale=1">'
+            f'<title>{title}</title>{theme_head()}</head>'
+            f'<body class="writeup-page">{WRITEUP_NAV}<h1>Lean formalisation</h1>'
+            f'<p>{definitions}/{len(data["principles"])} principles defined; '
+            f'{results}/{len(data["results"])} result proofs verified; '
+            f'{models}/{len(data["models"])} model witnesses verified.</p>'
+            '<p>Definitions and generated statements describe the claims. Only completed, '
+            'audited proofs receive a Lean-verified certificate. The verification report '
+            'records the remaining work and the formalisation assumptions.</p>'
+            f'<ul>{links}</ul></body></html>')
+    (destination / "index.html").write_text(html, encoding="utf-8")
+
+
+def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = False, pdf: bool = True, starter_archive: Path | None = None) -> Path:
     """Build build/<topic>/ : index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/, sources/, lean/.
     With --out, write only the viewer HTML to that path (fragment=True omits the page skeleton)."""
     import shutil
@@ -541,16 +666,20 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
         shutil.copytree(sources_dir, outdir / "sources", dirs_exist_ok=True)
     lean_dir = TOPICS / topic_id / "lean"
     downloads = {"bundle": f"{topic_id}-map.zip", "json": "data.json", "zip": "source.zip"}
+    if starter_archive:
+        shutil.copy2(starter_archive, outdir / starter_archive.name)
+        downloads["starter"] = starter_archive.name
     if lean_dir.exists() and any(lean_dir.iterdir()):
         shutil.copytree(lean_dir, outdir / "lean", dirs_exist_ok=True,
                         ignore=shutil.ignore_patterns(*IGNORE))
+        render_lean_index(data, lean_dir, outdir / "lean")
         downloads["lean"] = "lean/"
     payload = enriched_payload(topic_id, downloads)
     for item in payload["results"] + payload["models"]:
         item["files"] = files.get(item["id"], {})
     (outdir / "data.json").write_text(json.dumps(payload, indent=1, ensure_ascii=False), encoding="utf-8")
     bundle_topic(topic_id)
-    html = TEMPLATE.read_text(encoding="utf-8")
+    html = TEMPLATE.read_text(encoding="utf-8").replace("<!--__PMAP_THEME__-->", theme_head())
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     html = html.replace("/*__PMAP_DATA__*/null", blob)
     html = html.replace("__PMAP_TITLE__", payload["topic"]["title"])
@@ -619,6 +748,12 @@ def generate_lean_statements(topic_id: str) -> Path | None:
            "change to a record or to a principle's `lean_def`.", "-/", "",
            f"namespace {ns}.Statements", f"open {ns}", ""]
 
+    # Check definitions even when a principle is not yet used by an edge or model.
+    for pid, definition in sorted(defs.items()):
+        out += [f"/-- Principle definition check: `{pid}`. -/",
+                "example {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) : Prop :=",
+                f"  {definition} P", ""]
+
     for item in cov["ready"]:
         nm = _lean_name(item["id"])
         conj = item.get("status") == "conjectured"
@@ -627,7 +762,7 @@ def generate_lean_statements(topic_id: str) -> Path | None:
             out += [f"/-- `{item['id']}`" + ("  (conjectured)" if conj else ""), "",
                     f"{head} ⇒ {names[item['conclusion']]} -/",
                     f"def {nm} : Prop :=",
-                    "  ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O),"]
+                    "  ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) [P.Regular],"]
             for x in item["premises"]:
                 out.append(f"    {defs[x]} P →")
             conclusion = "False" if item["conclusion"] == FALSE else f"{defs[item['conclusion']]} P"
@@ -654,72 +789,103 @@ def generate_lean_statements(topic_id: str) -> Path | None:
     return path
 
 
-def lean_check(topic_id: str) -> bool:
-    """Build the topic's Lean library and report what is genuinely proved.
+LEAN_ALLOWED_AXIOMS = frozenset({"propext", "Classical.choice", "Quot.sound"})
 
-    A declaration counts as verified only if it elaborates at the generated statement's
-    type and its axiom dependencies exclude sorryAx.
+
+def lean_probe_verdicts(returncode: int, output: str, names: list[str]) -> dict[str, bool]:
+    """Fail closed: successful elaboration AND a complete, approved axiom report.
+
+    Audit wrapper theorems at the generated types, never the supplied reference alone.
+    A failed batch verifies nothing, including declarations before the error.
     """
-    import subprocess, shutil
+    import re
+    if returncode != 0:
+        return {name: False for name in names}
+    reports = {}
+    for match in re.finditer(r"'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^]]*)\])", output):
+        axioms = {a.strip() for a in (match.group(2) or "").split(",") if a.strip()}
+        reports[match.group(1)] = axioms <= LEAN_ALLOWED_AXIOMS
+    return {name: reports.get(name, False) for name in names}
+
+
+def lean_check(topic_id: str, update: bool = False) -> bool:
+    """Check generated types and axiom dependencies; optionally persist certificates."""
+    import subprocess, shutil, tempfile, re
     data = load_topic(topic_id)
     loc = lean_lib_dir(topic_id, data)
     if loc is None:
-        print(f"{topic_id}: no Lean library (set lean_lib in topic.yaml and add topics/{topic_id}/lean/)")
+        print(f"{topic_id}: no Lean library configured (not verified)")
         return True
     root, lib = loc
     if not shutil.which("lake"):
         sys.exit("lean-check needs lake on PATH (install Lean via elan)")
     cov = lean_coverage(data)
     generate_lean_statements(topic_id)
-
-    print(f"{topic_id}: building {lib} …")
+    print(f"{topic_id}: building {lib} …", flush=True)
     r = subprocess.run(["lake", "build"], cwd=root, capture_output=True, text=True)
     if r.returncode != 0:
-        print(r.stdout[-4000:]); print(r.stderr[-4000:])
+        print(r.stdout[-8000:]); print(r.stderr[-4000:])
         print(f"{topic_id}: LEAN BUILD FAILED")
         return False
-
-    # ask Lean itself which claimed proofs are real
-    claimed = {i["id"]: i for i in data["results"] + data["models"]
-               if i["certificate"].get("lean") in ("stated", "verified")}
-    ns = (cov["defs"][next(iter(cov["defs"]))].rsplit(".", 1)[0]) if cov["defs"] else lib
-    probe = ["import " + lib, "open " + ns]
-    for rid, item in sorted(claimed.items()):
-        ref = item["certificate"].get("lean_ref")
-        if ref:
-            probe += [f"example : {ns}.Statements.{_lean_name(rid)} := {ref}",
-                      f"#print axioms {ref}"]
-    verdict = {}
-    if len(probe) > 2:
-        pf = root / "_pmap_probe.lean"
-        pf.write_text("\n".join(probe) + "\n", encoding="utf-8")
-        p = subprocess.run(["lake", "env", "lean", str(pf)], cwd=root, capture_output=True, text=True)
-        pf.unlink()
-        for line in (p.stdout + p.stderr).splitlines():
-            if "depends on axioms" in line or "does not depend on any axioms" in line:
-                who = line.split("'")[1] if "'" in line else "?"
-                verdict[who] = "sorryAx" not in line
-        if p.returncode != 0:
-            print(p.stdout[-3000:] + p.stderr[-3000:])
-
+    records = data["results"] + data["models"]
     ready = {i["id"] for i in cov["ready"]}
-    print(f"  statements generated: {len(ready)} of {len(data['results']) + len(data['models'])} records")
-    if cov["blocked"]:
-        need = sorted({x for v in cov["blocked"].values() for x in v})
-        print(f"  not yet statable: {len(cov['blocked'])} records, waiting on lean_def for {len(need)} principles")
-        for x in need[:10]:
-            print(f"    - {x}")
-    bad = []
-    for rid, item in sorted(claimed.items()):
-        ref = item["certificate"].get("lean_ref")
-        state = item["certificate"]["lean"]
-        ok = verdict.get(ref)
-        if state == "verified" and ok is not True:
-            bad.append(f"{rid}: claims lean: verified but {'uses sorry' if ok is False else 'has no checked proof'}")
-        print(f"  {rid:50} {state:9} {'sorry-free' if ok else 'unproved' if ok is None else 'uses sorry'}")
-    for b in bad:
-        print(f"ERROR   {b}")
-    print(f"{topic_id}: {'OK' if not bad else str(len(bad)) + ' bad Lean claim(s)'}")
+    ns = cov["defs"][next(iter(cov["defs"]))].rsplit(".", 1)[0] if cov["defs"] else lib
+    references = [i for i in records if i["certificate"].get("lean_ref")]
+    probe = ["import " + lib, "namespace PmapAudit"]
+    wrappers = {}
+    for index, item in enumerate(references):
+        wrapper = f"proof_{index}"
+        wrappers[item["id"]] = f"PmapAudit.{wrapper}"
+        probe += [f"theorem {wrapper} : {ns}.Statements.{_lean_name(item['id'])} := {item['certificate']['lean_ref']}",
+                  f"#print axioms {wrapper}"]
+    probe += ["end PmapAudit"]
+    verdicts, bad = {}, []
+    if references:
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".lean", prefix="_pmap_audit_", dir=root, delete=False) as f:
+            f.write("\n".join(probe) + "\n")
+            pf = Path(f.name)
+        try:
+            result = subprocess.run(["lake", "env", "lean", str(pf)], cwd=root, capture_output=True, text=True)
+        finally:
+            pf.unlink(missing_ok=True)
+        output = result.stdout + result.stderr
+        verdicts = lean_probe_verdicts(result.returncode, output, list(wrappers.values()))
+        if result.returncode:
+            print(output[-10000:])
+        for item in references:
+            if not verdicts.get(wrappers[item["id"]], False):
+                bad.append(f"{item['id']}: proof failed its generated type or axiom audit")
+            if item.get("status") == "conjectured":
+                bad.append(f"{item['id']}: resolve conjecture status before certifying a proof")
+    for item in records:
+        state = item["certificate"].get("lean", "none")
+        if state in ("stated", "verified") and item["id"] not in ready:
+            bad.append(f"{item['id']}: claims {state} but has no generated statement")
+        if state == "verified" and not verdicts.get(wrappers.get(item["id"]), False):
+            bad.append(f"{item['id']}: claims verified but has no checked proof")
+    print(f"  principle definitions: {len(cov['defs'])}/{len(data['principles'])}")
+    print(f"  generated statements: {len(ready)}/{len(records)}")
+    verified = {rid for rid, wrapper in wrappers.items() if verdicts.get(wrapper, False)}
+    print(f"  verified proofs: {len(verified)}/{len(records)}")
+    for item in records:
+        rid = item["id"]
+        print(f"  {rid:58} {'verified' if rid in verified else 'stated / proof pending' if rid in ready else 'definition missing'}")
+    if update and not bad:
+        for item in records:
+            rid = item["id"]
+            state = "verified" if rid in verified else "stated" if rid in ready else "none"
+            kind = "results" if "premises" in item else "models"
+            path = TOPICS / topic_id / kind / f"{rid}.yaml"
+            text = path.read_text(encoding="utf-8")
+            # Only certificate metadata changes; preserve mathematical prose and formatting.
+            text, count = re.subn(r"(?m)^(  lean:) (?:none|stated|verified)\s*$", lambda m: m.group(1) + " " + state, text)
+            if count != 1:
+                raise ValueError(f"{path}: expected exactly one certificate lean field")
+            path.write_text(text, encoding="utf-8")
+        print("  updated Lean certificates after successful audit")
+    for issue in bad:
+        print(f"ERROR   {issue}")
+    print(f"{topic_id}: {'OK (pending proofs remain)' if not bad and len(verified) < len(records) else 'OK' if not bad else 'FAILED'}")
     return not bad
 
 
@@ -1017,29 +1183,67 @@ def bundle_open_md(topic_id: str, data: dict, an: dict) -> str:
     names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
     label = lambda i: f"{names.get(i, i)} (`{i}`)"
     E = an["engine"]
-    conj = [r for r in data["results"] if r["status"] != "proved"] + [m for m in data["models"] if m["status"] != "proved"]
+    conj = [item for item in [*data["results"], *data["models"]]
+            if item["status"] == "conjectured" or item.get("was_conjectured", False)]
+    resolutions = an["conjectures"]
 
     o = [f"# Open questions — {topic['title']}", "",
-         "Everything the database does not currently settle. Each item is a place where a new "
-         "result or a new model would be a real contribution.", "",
+         "Recorded conjectures, their current answers, and remaining gaps where a new "
+         "result or model would contribute to the map.", "",
          "**\"Open\" means not settled by the records in this bundle.** It does not mean unsolved "
          "in the literature, and it does not mean hard. Many entries below are routine and simply "
          "have not been added yet. Check the sources before assuming a question is new.", ""]
 
-    o += ["## 1. Recorded conjectures", ""]
-    if conj:
-        o += ["Stated but unproved. They take no part in any derivation.", ""]
-        for c in conj:
+    o += ["## 1. Recorded conjectures and their answers", "",
+          "Answers below are recomputed from proved records under the fixed topic background. "
+          "A conjectured record supplies no evidence for its own answer. Records marked "
+          "was_conjectured remain in this history after promotion to proved; their proved "
+          "status, rather than the historical marker, determines whether they supply evidence. "
+          "Original sources and notes are retained below each answer.", ""]
+    groups = [
+        ("1.1 Unresolved", {"open"}),
+        ("1.2 Resolved", {"proved", "refuted"}),
+        ("1.3 Incompatible with background", {"incompatible", "inconsistent-background"}),
+    ]
+    answer_names = {
+        "open": "Open", "proved": "Proved", "refuted": "Refuted",
+        "incompatible": "Incompatible premises", "inconsistent-background": "Inconsistent background",
+    }
+    for heading, statuses in groups:
+        questions = [c for c in conj if resolutions[c["id"]]["status"] in statuses]
+        o += [f"### {heading} ({len(questions)})", ""]
+        if not questions:
+            o += ["None.", ""]
+        for c in questions:
+            resolved = resolutions[c["id"]]
             if "premises" in c:
-                head = " ∧ ".join(names.get(x, x) for x in c["premises"]) + " ⇒ " + names.get(c["conclusion"], c["conclusion"])
+                conclusion = FALSE if c["conclusion"] is False else c["conclusion"]
+                head = (" ∧ ".join(names.get(x, x) for x in c["premises"]) or "⊤") + " ⇒ " + names.get(conclusion, conclusion)
             else:
                 head = c.get("name", c["id"])
-            o += [f"### {head} — `{c['id']}`", ""]
+            answer_name = answer_names[resolved["status"]]
+            if "satisfies" in c:
+                answer_name = {"proved": "Existence witnessed", "refuted": "Existence refuted"}.get(resolved["status"], answer_name)
+            o += [f"#### {head} — `{c['id']}`", "",
+                  f"**Answer: {answer_name}.**", ""]
+            if "satisfies" in c and resolved["status"] == "proved":
+                o += ["A proved model meets the recorded satisfies/violates requirements. "
+                      "This witnesses their consistency, not necessarily the proposed construction.", ""]
+            if resolved["status"] == "incompatible":
+                o += ["The premises cannot hold with this background. This is not a countermodel "
+                      "and no consequence by explosion is reported.", ""]
+            elif resolved["status"] == "inconsistent-background":
+                o += ["The fixed background is inconsistent, so no answer to this question is "
+                      "reported under it.", ""]
+            if resolved["via"]:
+                o += ["Supporting result ids: " + ", ".join(f"`{rid}`" for rid in resolved["via"]) + ".", ""]
+            if resolved["models"]:
+                o += ["Model witness ids: " + ", ".join(f"`{mid}`" for mid in resolved["models"]) + ".", ""]
+            if resolved["status"] == "proved" and not resolved["via"] and not resolved["models"]:
+                o += ["This follows directly from the stated premises or fixed background.", ""]
             if (c.get("notes") or "").strip():
-                o += [c["notes"].strip(), ""]
+                o += ["Original record notes:", "", c["notes"].strip(), ""]
             o += _source_lines(c) + ["", f"Record: `{c['_file']}`.", ""]
-    else:
-        o += ["None recorded.", ""]
 
     o += ["## 2. Open questions under each recorded package", "",
           "The most useful place to work: these are open *given* assumptions the sources already make.", ""]
@@ -1085,6 +1289,11 @@ def bundle_open_md(topic_id: str, data: dict, an: dict) -> str:
     o += ["## 6. How to record an answer", "",
           "- Proved an implication? Add `topics/%s/results/<id>.yaml` with the full premise list and the proof." % topic_id,
           "- Refuted one? Add `topics/%s/models/<id>.yaml` listing what you verified in `satisfies` and `violates`." % topic_id,
+          "- Settling an existing conjecture? For a proof of the same statement, keep its ID, "
+          "set `was_conjectured: true`, and change its status to `proved`. If the statement changes "
+          "substantially, retain the original and add a separate record. Refuted proposals stay "
+          "`status: conjectured`, with proved refuting evidence recorded separately. Answers under "
+          "extra exploration assumptions are contextual, not global record statuses.",
           "- Not sure? Add it with `status: conjectured`, an empty proof, and say in `notes` what would settle it.",
           "- Then run `python3 scripts/pmap.py validate` and `status`. Never hand-edit the derived counts.", "",
           "`README.md` has the exact record shapes and the sourcing rules. Follow them; an unsourced "
@@ -1147,25 +1356,24 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          "id: my-new-result",
          "premises: [principle-a, principle-b]     # every assumption actually used",
          "conclusion: principle-c                 # use false for incompatible premises",
-         "status: proved                            # or: conjectured",
+         "status: conjectured                       # promote only after supplying a proof",
          "certificate:",
          "  source_id: misc                         # a source_catalog id; misc for original work",
          "  lean: none",
-         "  produced_by: \"who proved the mathematics\"",
+         "  produced_by: \"who proposed the claim\"",
          "  recorded_by: \"who transcribed it\"       # optional, kept separate",
          "  checked_by: []                          # only actual checkers",
          "  date: 'YYYY-MM-DD'",
-         "proof: |",
-         "  The argument, at the level of detail a referee would want.",
+         'proof: ""',
          "sources:",
          "  - Full reference, with theorem or section and page.",
          "source_names: [Short label]               # one per source, same order",
-         "notes: \"\"", "```", "",
+         "notes: \"State what would settle this proposal.\"", "```", "",
          "```yaml", "# topics/%s/models/<id>.yaml" % topic_id,
          "id: my-new-model", "name: 'Construction family: ordering rule'",
          "satisfies: [principle-a, principle-b]     # only what you actually verified",
          "violates: [principle-c]                   # the engine derives the rest",
-         "status: proved",
+         "status: conjectured                      # promote only after checking the model",
          "certificate: {source_id: misc, lean: none, produced_by: \"...\", checked_by: [], date: 'YYYY-MM-DD'}",
          "description: |", "  The construction, and why it has these properties.",
          "sources: [Full reference or an identifiable original proof]",
@@ -1213,7 +1421,7 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          "pip install -r requirements.txt",
          "python3 scripts/pmap.py validate            # schema, references, consistency. Must pass.",
          "python3 scripts/pmap.py status              # counts, open pairs, redundancies",
-         f"python3 topics/{topic_id}/checks/countermodels.py   # numerical checks of the models",
+         *[f"python3 {p.relative_to(ROOT)}   # topic checks" for p in sorted((TOPICS / topic_id / "checks").glob("*.py"))],
          "python3 scripts/pmap.py build --no-pdf      # regenerate build/<topic>/index.html, the map viewer",
          "python3 scripts/pmap.py selftest            # the derivation engine's own tests",
          "python3 scripts/check_falsity.py            # Python/browser semantics and False; needs Node",
@@ -1231,6 +1439,10 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
         body = contrib.read_text(encoding="utf-8").strip()
         body = "\n".join(body.split("\n")[1:]).strip()
         o += [body, ""]
+    if (ROOT / "starter" / "LICENSE").exists():
+        o += ["## Tooling licence", "", "The reusable scripts, schemas, viewer, and starter templates "
+              "are supplied under [the MIT licence](starter/LICENSE). This does not grant rights "
+              "to this topic's papers or other separately supplied content.", ""]
     return "\n".join(o).rstrip() + "\n"
 
 
@@ -1330,6 +1542,12 @@ def bundle_topic(topic_id: str) -> Path:
         check = ROOT / "scripts" / "check_falsity.py"
         if check.exists():
             shutil.copy2(check, root / "scripts" / check.name)
+        if (ROOT / "starter").is_dir():
+            shutil.copytree(ROOT / "starter", root / "starter", ignore=shutil.ignore_patterns(*IGNORE))
+            shutil.copy2(ROOT / "scripts" / "starter.py", root / "scripts" / "starter.py")
+        audit_check = ROOT / "scripts" / "check_lean_audit.py"
+        if topic_id == "unbounded-utility" and audit_check.exists():
+            shutil.copy2(audit_check, root / "scripts" / audit_check.name)
         shutil.copytree(SCHEMA, root / "schema")
         (root / "viewer").mkdir()
         for f in (ROOT / "viewer").glob("*"):
@@ -1352,7 +1570,8 @@ def bundle_topic(topic_id: str) -> Path:
             "validate: ; $(PY) scripts/pmap.py validate\n"
             "status: ; $(PY) scripts/pmap.py status\n"
             "build: ; $(PY) scripts/pmap.py build --no-pdf\n"
-            f"checks: ; $(PY) topics/{topic_id}/checks/countermodels.py\n"
+            "checks: ; $(PY) scripts/pmap.py selftest\n"
+            + "".join(f"\t$(PY) {p.relative_to(ROOT)}\n" for p in sorted((TOPICS / topic_id / "checks").glob("*.py"))) +
             f"lean: ; $(PY) scripts/pmap.py lean-check {topic_id}\n", encoding="utf-8")
         zip_tree(root, root.name, outdir / f"{topic_id}-map.zip")
     return outdir / f"{topic_id}-map.zip"
@@ -1420,6 +1639,10 @@ framework: >
   relation(s) or functions, and any standing conventions (e.g. "≽ is a binary
   relation on Δ(X); ≻ and ~ are its asymmetric and symmetric parts").
 background: []
+source_catalog:
+  - id: misc
+    name: Misc.
+    kind: misc
 notation: ""
 """, encoding="utf-8")
     (tdir / "background.md").write_text("## Framework\n\n## Notation\n\n## Conventions\n", encoding="utf-8")
@@ -1465,7 +1688,7 @@ description: |
   The construction, then the verification of each listed principle.
 satisfies: []
 violates: []
-status: proved
+status: conjectured
 certificate:
   source_id: {source_id}
   lean: none
@@ -1488,15 +1711,14 @@ def new_result(topic_id: str, rid: str, source_id: str):
         f"""id: {rid}
 premises: []
 conclusion: ""
-status: proved
+status: conjectured
 certificate:
   source_id: {source_id}
   lean: none
   produced_by: ""
   checked_by: []
   date: {today}
-proof: |
-  Proof sketch.
+proof: ""
 sources: []
 notes: ""
 """, encoding="utf-8")
@@ -1576,10 +1798,15 @@ def main(argv=None):
     for name in ("validate", "build", "status", "bundle", "lean", "lean-check"):
         s = sub.add_parser(name)
         s.add_argument("topics", nargs="*")
+        if name == "lean-check":
+            s.add_argument("--update", action="store_true", help="persist stated/verified certificates after a successful audit")
         if name == "build":
             s.add_argument("--out", help="output HTML path (single topic only)")
             s.add_argument("--fragment", action="store_true", help="omit the <html>/<head>/<body> wrapper")
             s.add_argument("--no-pdf", action="store_true", help="skip PDF write-ups")
+            s.add_argument("--no-starter", action="store_true", help="skip the reusable starter download")
+    s = sub.add_parser("starter")
+    s.add_argument("--out", help="output ZIP path (default: build/logical-maps-starter.zip)")
     s = sub.add_parser("new-topic"); s.add_argument("topic")
     s = sub.add_parser("new-principle"); s.add_argument("topic"); s.add_argument("id")
     for name in ("new-result", "new-model"):
@@ -1590,6 +1817,10 @@ def main(argv=None):
 
     if a.cmd == "selftest":
         return selftest()
+    if a.cmd == "starter":
+        from starter import build_starter
+        print(f"wrote {build_starter(Path(a.out) if a.out else None)}")
+        return
     if a.cmd == "new-topic":
         return new_topic(a.topic)
     if a.cmd == "new-principle":
@@ -1600,6 +1831,10 @@ def main(argv=None):
         return new_model(a.topic, a.id, a.source)
 
     topics = a.topics or list_topics()
+    starter_archive = None
+    if a.cmd == "build" and not a.no_starter and (ROOT / "starter").is_dir():
+        from starter import build_starter
+        starter_archive = build_starter()
     ok = True
     for t in topics:
         if a.cmd == "validate":
@@ -1610,12 +1845,12 @@ def main(argv=None):
             path = generate_lean_statements(t)
             print(f"wrote {path.relative_to(ROOT)}" if path else f"{t}: no Lean library configured")
         elif a.cmd == "lean-check":
-            ok &= lean_check(t)
+            ok &= lean_check(t, update=a.update)
         elif a.cmd == "bundle":
             z = bundle_topic(t)
             print(f"wrote {z.relative_to(ROOT)}")
         elif a.cmd == "build":
-            out = build_topic(t, Path(a.out) if getattr(a, "out", None) else None, fragment=getattr(a, "fragment", False), pdf=not getattr(a, "no_pdf", False))
+            out = build_topic(t, Path(a.out) if getattr(a, "out", None) else None, fragment=getattr(a, "fragment", False), pdf=not getattr(a, "no_pdf", False), starter_archive=starter_archive)
             print(f"built {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
     if not ok:
         sys.exit(1)

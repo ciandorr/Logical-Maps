@@ -3,7 +3,7 @@
 ## Addition: unpublished background-risk manuscript (9 September)
 
 The new supplied source is Goodsell, *Unbounded Utility and Background Risk*,
-5 June 2026, `sources/Goodsell - Unpublished (do not cite) - Erroneous.pdf`.
+5 June 2026. The draft itself is not included in the public downloads.
 It is **unpublished, marked “do not cite”, and erroneous**. Its own provenance
 name is **Unbounded Utility and Background Risk (unpublished)**.
 
@@ -104,6 +104,13 @@ from a recorded implication, or explicitly attributed to a source theorem.
 Source-attributed is weaker evidence than an independent proof audit. The direct
 source is identified by `certificate.source_id`; `produced_by`, `recorded_by`,
 and the empty checker list describe authorship and the separate transcription.
+
+The later [DU, shift, and continuity investigation](DU-SHIFT-CONTINUITY-2026-09-09.md)
+records the precise canonical role of the standalone
+[CDF-area dominance](writeups/cdf-area-preorder.md) model and adds
+[Stochastic dominance: finite-support compensation](writeups/finite-support-compensated-dominance.md).
+The latter satisfies DU and Shift Invariance but refutes Shift Transfer;
+continuity under vanishing shifts suffices to force CDF-area comparisons.
 
 ## Provenance and display categories
 

@@ -28,9 +28,8 @@ Neutrality + Independent Sum Invariance ⇒ False. There is no completed
 proof recorded for this implication. The audit below separates it from the
 verified portions of the manuscript.
 
-**Local source:** Zachary Goodsell, *Unbounded Utility and Background Risk*,
-5 June 2026, 21 pages. Supplied as
-`Goodsell - Unpublished (do not cite) - Erroneous.pdf` in `sources/`.
+**Source:** Zachary Goodsell, *Unbounded Utility and Background Risk*,
+5 June 2026, 21 pages. The draft itself is not included in the public downloads.
 **Unpublished; do not cite; erroneous.** The short provenance name in the map
 is **Unbounded Utility and Background Risk (unpublished)**. These references identify
 which supplied document an entry came from; they do not endorse its claims

@@ -1,6 +1,6 @@
 # Independent Sum Preservation ∧ Independent Sum Cancellation ⇒ Independent Sum Invariance
 
-<p class='cert'>Result — Source: Misc.; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09; extraction and random-variable translation.</p>
+<p class='cert'>Result — Source: Misc., Lean `UnboundedUtility.Proofs.preservation_cancellation_imply_independent_sum`; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09; extraction and random-variable translation.</p>
 
 ## Premises
 

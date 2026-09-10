@@ -1,0 +1,28 @@
+id: identity-on-two
+name: 'Two objects: identity relation'
+description: Let S={0,1} and R={(0,0),(1,1)}. Every object is related to itself. Each
+  pair equals its reversal. If x R y and y R z, then x=y=z, hence x R z. Thus R is
+  reflexive, symmetric, transitive, and an equivalence relation. Neither 0 R 1 nor
+  1 R 0 holds, so it is not connected.
+satisfies:
+- reflexive
+- symmetric
+- transitive
+- equivalence
+violates:
+- connected
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: OpenAI Codex
+  recorded_by: OpenAI Codex
+  checked_by: []
+  date: '2026-09-10'
+checks:
+- topics/example/checks/relations.py
+sources:
+- Original construction and elementary verification by OpenAI Codex, 10 September
+  2026, Logical Maps starter record identity-on-two.
+source_names:
+- Starter construction

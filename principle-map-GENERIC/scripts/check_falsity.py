@@ -43,11 +43,12 @@ def main():
                 continue
             rules.append(dict(id=f'r{n}-{j}', premises=prem, conclusion=conclusion))
         bg = rng.choice(subsets)
+        negative_bg = rng.choice(subsets) if n % 2 else []
         models = [dict(id='m', satisfies=rng.choice(subsets), violates=rng.sample(ids, rng.randrange(3)))]
-        fixture = dict(ids=ids, rules=rules, models=models, background=bg, probes=subsets)
+        fixture = dict(ids=ids, rules=rules, models=models, background=bg, negative_background=negative_bg, probes=subsets)
         fixtures.append(fixture)
-        e = pmap.Engine(ids, rules, models, bg)
-        valuations = [set(v) for v in subsets if set(bg) <= set(v) and all(
+        e = pmap.Engine(ids, rules, models, bg, negative_bg)
+        valuations = [set(v) for v in subsets if set(bg) <= set(v) and not set(negative_bg) & set(v) and all(
             not set(r['premises']) <= set(v) or r['conclusion'] in v for r in rules)]
         for seed in subsets:
             valid = [v for v in valuations if set(seed) <= v]
@@ -81,7 +82,7 @@ const input=JSON.parse(fs.readFileSync(0,'utf8'));
 const context=vm.createContext({});
 vm.runInContext('const FALSE="false";'+input.code+';globalThis.Engine=Engine;',context);
 const output=input.fixtures.map(f=>{
- const e=new context.Engine(f.ids,f.rules,f.models,f.background);
+ const e=new context.Engine(f.ids,f.rules,f.models,f.background,f.negative_background || []);
  const pack=p=>{const r=e.package(p);for(const k of ['entails','excludes','separated','open'])r[k]=r[k].map(x=>x[0]);return r;};
  return {pairs:f.ids.flatMap(a=>f.ids.filter(b=>b!==a).map(b=>[a,b,e.pair(a,b).status])),
  holds:Object.fromEntries([...e.holds].map(([k,v])=>[k,[...v].sort()])),
@@ -91,7 +92,7 @@ const output=input.fixtures.map(f=>{
 process.stdout.write(JSON.stringify(output));
 '''
     actual = json.loads(subprocess.run(['node','-e',harness],input=json.dumps({'code':js,'fixtures':fixtures}),capture_output=True,text=True,check=True).stdout)
-    expected = [summary(pmap.Engine(f['ids'], f['rules'], f['models'], f['background']), f['probes']) for f in fixtures]
+    expected = [summary(pmap.Engine(f['ids'], f['rules'], f['models'], f['background'], f.get('negative_background', [])), f['probes']) for f in fixtures]
     assert actual == expected, 'Python and browser engines disagree'
     # Test actual generated Lean text, not merely the coverage count.
     with tempfile.TemporaryDirectory() as d:
@@ -103,7 +104,7 @@ process.stdout.write(JSON.stringify(output));
         generated = path.read_text()
         assert 'Test.A P →\n    False' in generated
         assert 'False P' not in generated
-    print('PASS: 40 exhaustive small Horn theories, topic Python/JavaScript parity, model conflicts, and native Lean False generation.')
+    print('PASS: 40 exhaustive Horn theories with positive/negative backgrounds, topic Python/JavaScript parity, model conflicts, and native Lean False generation.')
 
 
 if __name__ == '__main__':

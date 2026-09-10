@@ -100,3 +100,22 @@ After the repairs, establish a small end-to-end example: one proved implication,
 one implication to `False`, and one model with a proved violation, all checked
 against their generated statements. Then divide independent proof modules among
 agents while one owner controls the shared framework and principle definitions.
+
+
+## Follow-up — 10 September 2026
+
+The proof campaign addressed the four foundation/gate issues above:
+
+1. `Pref.Regular` now carries chart uniqueness, order compatibility, measurability,
+   and its measurable domain, and is required by generated theorems and `Witness`.
+2. That contract also supplies standard-Borel and measurable-order requirements.
+3. Mixtures at probabilities 0 and 1 now select the corresponding gamble pointwise;
+   `mix_zero`, `mix_one`, `chart_zero`, and `chart_one` are proved in the framework.
+4. The audit checks wrapper theorems at generated types, rejects any failed batch,
+   and permits only the three standard classical axioms. Actual Lean regression
+   cases cover valid proofs, wrong types, `sorry`, custom axioms, and batch failures.
+
+All principle definitions and record statements are now present. Current proof
+coverage and unresolved scope issues are recorded in [VERIFICATION.md](VERIFICATION.md).
+The historical observations above describe the pre-campaign files, not the current
+implementation. No model witness or implication to False has yet been certified.

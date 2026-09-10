@@ -2,6 +2,28 @@
 
 Principles, implications, and countermodels for a topic, with derived consequences and an interactive map. Topic-agnostic; seeded with preference axioms over lotteries.
 
+## Reusable starter
+
+`python3 scripts/pmap.py starter` creates `build/logical-maps-starter.zip` from
+the curated `starter/` assets and shared tooling. It contains a blank `my-map`
+topic, a binary-relation example with executable checks, prebuilt previews,
+README/AGENTS instructions, format and update guides, and an MIT licence for
+the reusable starter. Research topics and their source documents are not copied
+into this archive. See [starter/README.md](starter/README.md).
+
+Normal builds regenerate the archive, copy it beside each topic, and append a
+**Create your own logical map** download to Contribute. Publish the complete
+topic directory so that relative download works; the central ZIP can also be
+linked from a future generic Logical Maps home page. `build --no-starter`
+skips regenerating that download when it is not needed.
+
+New result/model scaffolds, schema defaults, and records with omitted status
+default to `conjectured`. Existing explicitly proved records keep their status.
+`python3 scripts/check_starter.py --python /path/to/clean/venv/bin/python`
+tests the downloaded package, its previews and nested bundles, scaffold defaults,
+and relative links with Pandoc and Lean absent. Install `requirements.txt` in
+that environment first.
+
 ```
 topics/<topic>/topic.yaml             title, background principle ids
 topics/<topic>/background.md          Background tab (markdown)
@@ -61,10 +83,10 @@ model statement from its premises and conclusion into a generated `Statements.le
 proof is supplied by inhabiting the generated `Prop`, so it cannot drift from the recorded
 claim.
 
-`pmap lean-check` builds the library and asks Lean which claimed proofs really inhabit
-their statement and whether they use `sorryAx`. The `lean` certificate field is `none`,
+`pmap lean-check` builds the library and audits wrapper proofs at the generated
+statement types. Failed elaboration, `sorryAx`, and nonstandard axioms are rejected. The `lean` certificate field is `none`,
 `stated` (statement elaborates, proof missing), or `verified` (machine-checked, sorry-free);
-only `lean-check` may conclude the last. Build caches under `.lake/` are excluded from the
+only `lean-check --update` may persist the last. See the topic's `lean/VERIFICATION.md` for current coverage. Build caches under `.lake/` are excluded from the
 source zip and the bundle.
 
 ## Semantics
@@ -85,7 +107,8 @@ never a principle, selectable assumption, or premise. YAML `false` and the
 string `'false'` are accepted; exported JSON uses the string `"false"`.
 
 The engine computes Horn closure `cl(S)` under the proved records. It does
-not enumerate Boolean combinations or create a node for each negation.
+not enumerate Boolean combinations. The viewer can display a principle and its
+negation as separate nodes without adding either to the source records.
 
 - A package is known inconsistent when `False ∈ cl(P)`. Report that conflict
   and its proof; do not display consequences by explosion.
@@ -143,7 +166,9 @@ Citing a paper's definitions does not make it the source of a new proof.
 transcription. `checked_by` records actual checks. Every result/model needs
 nonempty `sources`, with optional parallel `source_names` for short labels.
 `status: conjectured` is displayed but never used as proved evidence. Source
-filters recompute deductions from the surviving records. Legacy author-type
+filters recompute evidence-based verdicts from the surviving records. On the
+graph, hidden sources still supply proved consequences of the background;
+arrow visibility does not withdraw those automatic facts. Legacy author-type
 `provenance` is still accepted in old datasets; records without a direct source
 are displayed under Misc. until attributed. Lean fields remain optional.
 
@@ -155,33 +180,98 @@ Add `source_names` alongside `sources`, with one short label per reference in th
 
 ## Viewer
 
-Graph: implications, ∧ nodes for multi-premise results, stronger principles higher. Models: principles use the same categories and ordering as Graph; mark them in/out to filter; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and its satisfied/violated principles while preserving the model list and current filters. Click a verdict's source badge for its sources and write-up. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: recorded conjectures (results or models with `status: conjectured`). Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Sidebar: the AI bundle zip, data.json, and source.zip.
+Graph: implications, ∧ nodes for multi-premise results, stronger principles higher. Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Header downloads: **Full bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Topic sources (ZIP)** contains the editable topic folder; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
+
+The Conjectures tab shares the background controls. **Show resolved** is off
+by default, hiding questions currently proved or refuted. Verdicts are computed
+from proved evidence under the selected background and sources; they are not
+stored record statuses. Source filters change which proofs and witnesses can
+answer a question, not which questions exist. **Open** means no resolution in
+all recorded proved evidence under that background. **Unresolved by selected
+evidence** distinguishes a missing selected proof or witness from a genuinely
+open question; its evidence disclosure shows the verdict and supporting records
+available with all evidence. The tab count includes only open questions, so
+hiding a source or enabling Lean-only does not inflate it. These comparisons
+use the same background and never use conjectures as proofs. For a non-False conclusion,
+incompatible premises are shown separately; an inconsistent background
+suppresses verdicts. An implication is refuted only by an actual countermodel.
+If omitted evidence shows the background is inconsistent, a warning prevents
+the remaining questions from being presented as open with all evidence.
+A matching model witnesses the background and the conjecture's required
+`satisfies`/`violates` flags; it need not verify the particular construction
+proposed in its description.
+
+Optional `was_conjectured: true` on a result or model retains its question
+history, whether its status is `conjectured` or `proved`. When changing a
+conjecture to `proved`, set this flag, retain its stable ID and add the proof.
+If the statement changes substantially, retain the original question and add
+a separate proved record. A refuted proposal remains `status: conjectured`,
+with the proved refuting evidence recorded separately. Never save a verdict
+obtained only under a selected background as a global resolution.
+
+Model info pop-ups show the model name, sources, and write-up links. Model
+properties are displayed in Theory explorer; the pop-up and model page omit
+the redundant conjunction of satisfied and violated principles.
 
 Isolated principles are packed into compact rows just below the connected
 graph. Showing or hiding them leaves the connected layout intact. If no
 arrows are visible, the principles form a compact grid instead of one long row.
 
-Use **↓** beside a principle to assume it in the background, and **↑** in the
-fixed panel below to return it. Background assumptions leave the ordinary
-checkbox list and graph. Their consequences are recomputed, and arrows omit
-premises already supplied by the background; their write-ups retain the full
-original statement and source. Highlighted nodes follow from the background.
-Only models known to satisfy the assumptions can witness non-implication;
-models with unknown assumptions remain in the Models tab's Unknown list.
+Graph **Arrow sources** and **Lean-verified only** control displayed proofs.
+Background consequences always use all recorded proved results, including
+hidden arrows. For example, DTU still supplies Simple Expected Utility in a
+conjectures-only view, so conjecture arrows retain only their additional
+premises. Transitive proofs retain the supporting background derivations.
+Conjectures never supply automatic background facts or exclusions.
 
-The Models tab has the same **↓**, **↑**, and background reset controls, with
-its Background panel above the model list. Both tabs share one background:
-changes immediately update model eligibility, the graph, and the saved URL.
-The Models panel can be enlarged using its bottom-right resize handle.
-Clearing model filters leaves the shared background intact.
+Graph **Conjectures only** hides proved arrows. **Unpublished only** restricts
+arrows to sources classified as online submissions or miscellaneous sources,
+including unpublished manuscripts. Select both to see unpublished conjectures.
+These modes temporarily hide isolated principles and leave background
+consequences and other tabs' evidence selections intact.
 
-The two lists scroll separately. A moved row reserves its space until the
-pointer or keyboard focus leaves the list, so another move button cannot jump
-under the current click. Category select-all controls apply only to ordinary
-principles. Background choices are saved in the URL (`?assume=id,id`) for
-reloads and sharing; the source YAML and downloads remain the original topic.
-Reset removes the added assumptions. Any background axioms declared in the
-source topic are fixed, since its results already presuppose them.
+For the same conclusion, the graph suppresses an arrow whose displayed premise
+set strictly contains another sufficient displayed premise set. Thus A ⇒ C
+replaces the redundant A ∧ B ⇒ C in the current context. This also applies to
+transitive conjunction arrows, while ordinary A ⇒ B ⇒ C and A ⇒ C arrows remain.
+A conjecture cannot suppress a proved implication. The original records and
+their write-ups remain available, and changing background or source filters
+recomputes which arrows are redundant.
+
+Graph controls use **✓** to show a principle and **✗** to show its negation;
+both can be displayed together. **Clear** hides both forms. **Background** moves
+the principle into the shared assumptions, assuming it positively unless only
+✗ was selected. In the background, ✓ and ✗ are exclusive. **Return** displays
+the assumed sign on the graph again. Standing topic axioms remain fixed.
+
+Theory explorer edits those same assumptions directly in one principle list.
+There is no separate model-filter package or second background panel. Clicking
+the selected ✓ or ✗ again removes that assumption. Solid buttons show explicit
+assumptions; tinted buttons show consequences. Evidence links sit inline with
+principle names, and the Potential models list retains unverified candidates. Contradictory assumptions show their evidence and suppress
+inferred graph arrows and model matches. Unknown model properties remain unknown.
+
+Positive assumptions are saved as `?assume=id,id`; negative assumptions use
+`deny=id,id`. Both apply to Graph, Theory explorer and Conjectures. Reloading
+restores them without changing source YAML, proofs, or downloads. **Clear background** removes all removable positive and negative assumptions.
+
+Negative assumptions are forbidden facts in the Horn engine. A negative conclusion
+is proved by adjoining its positive counterpart and deriving a conflict. Signed
+graph connections retain the complete contextual premise conjunction: A ∧ B ⇒ C
+allows A ∧ ¬C ⇒ ¬B. Source attribution and write-ups remain attached to the
+original result; the graph identifies contraposed connections. Negative nodes
+have a ¬ prefix and dashed outline. Derived signed arrows use the same proof
+queries, without enumerating truth assignments.
+
+Arrow endpoints meet node boundaries along the curve's tangent. Static chevrons
+show direction even without highlighting. Highlighted connections have native
+SVG chevron motion, capped at 48 moving chevrons, with no per-frame JavaScript.
+Motion stops on pointer leave, tab changes, or a hidden document; reduced-motion
+preferences retain static chevrons only.
+
+The graph's principle list and background list scroll independently. Moved rows
+reserve their space until the pointer or focus leaves the list, preventing the
+next move control from jumping under the current click.
 
 Drag the divider beside the sidebar to change its width, or the divider above
 Background to change the list's height. Sizes are remembered in this browser
@@ -199,12 +289,12 @@ Simple EU supplies Restricted Totality (comparison of simple gambles), not
 Totality for arbitrary gambles. The source's formulation with Simple EU in
 place of Archimedean Outcomes is equivalent, since Simple EU also implies
 Archimedean Outcomes.
-Basic decision theory has **Add DU to background** and **Add DTU to background**
-buttons in both Graph and Models. They add the chosen package without removing
+Basic decision theory has **Background DU** and **Background DTU**
+buttons in both Graph and Theory explorer. They add the chosen package without removing
 other assumptions; adding DU does not remove a separately selected Totality.
 These defaults remain removable. An explicit
 `?assume=...` selection overrides them; `?assume=` saves an empty background.
-Reset clears the removable assumptions, including DU.
+**Clear background** removes the removable assumptions, including DU.
 
 Configure such packages with `background_presets` in `topic.yaml`: each has an
 `id`, `name`, display `category`, `principles` list, and optional `default: true`.
@@ -214,7 +304,7 @@ for example, **DTU ∧ L¹ Continuity ⇒ Expected Utility**. The largest matchi
 package is preferred. Matching uses proved implications under the active source
 filters and the fixed framework, so redundant premises such as Archimedean
 Outcomes in a record already assuming Simple EU need not be repeated. The
-selected background and conjectures never supply missing premises for an abbreviation. Pop-ups offer
+selected background and conjectures never supply missing premises for an abbreviation. Result pop-ups offer
 **Show full conjunction**, and result write-ups retain every exact premise.
 
 Implications to **False (⊥)** appear as arrows to one special logical node.
@@ -223,10 +313,11 @@ popup gives the supporting results and sources. False does not appear in the
 principle selection list. Model verdicts use the same incompatibility rules
 and link their derived failures to the source proofs.
 
-When the background derives False, the graph is replaced by a red warning
+When the background derives False or a negatively assumed principle, the graph is replaced by a red warning
 and its proof chain. All arrows return when the conflict is removed. This
-uses proved results under the current source filters. The same check applies
-to Models filters and validation. Conjectures and absence of known models do
+uses all recorded proofs, including hidden arrows. Theory explorer verdicts
+continue to use the selected evidence sources; validation checks all proved records.
+Conjectures and absence of known models do
 not establish inconsistency. Old `negates` nodes should be migrated to rules
 concluding false, with model assertions moved to `violates` as appropriate.
 
@@ -240,3 +331,8 @@ python3 scripts/pmap.py new-topic modal-logic
 ```
 
 For a model, list every principle you have actually checked, both ways; the engine fills in the rest and reports what remains unknown.
+
+Run `node scripts/check_signed_ui.cjs` with jsdom available to check signed controls,
+URL restoration, contextual contraposition against truth tables, and arrow geometry.
+`python3 scripts/check_falsity.py` also checks negative backgrounds and agreement
+between the Python and browser engines.

@@ -77,7 +77,7 @@ def main():
             assert payload['downloads']['starter'] == 'logical-maps-starter.zip'
             assert 'Create your own logical map' in payload['contribute_html']
             assert (root / 'build' / topic / payload['downloads']['starter']).exists()
-            # The ordinary Full bundle also works when handed to someone else.
+            # The ordinary Content bundle also works when handed to someone else.
             with zipfile.ZipFile(root / 'build' / topic / f'{topic}-map.zip') as z:
                 z.extractall(temp / 'bundles')
             bundle = temp / 'bundles' / f'{topic}-map'

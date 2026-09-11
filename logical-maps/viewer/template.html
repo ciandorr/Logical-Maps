@@ -1752,8 +1752,7 @@ function renderHeader() {
   document.getElementById('subtitle').textContent = (T.description || '').trim();
   const dl = DATA.downloads || {};
   const downloadLinks = [
-    [dl.bundle, 'Full bundle (ZIP)', 'Complete working copy of this topic: editable sources, map summaries, data, viewer, and tools to check and rebuild it. Suitable for people or AI tools.'],
-    [dl.zip, 'Topic sources (ZIP)', 'Editable topic files: YAML records, write-ups, checks, source documents, and Lean files where available. The full bundle also includes the viewer and build tools.'],
+    [dl.bundle, 'Content bundle (ZIP)', 'Complete working copy of this topic: editable sources, map summaries, data, viewer, and tools to check and rebuild it. Suitable for people or AI tools.'],
     [dl.lean, 'Lean files', 'Browse the Lean formalisation files: definitions, theorem statements, and available proofs.'],
   ];
   document.getElementById('downloads').innerHTML = downloadLinks.filter(([href]) => href).map(([href, label, description]) => `<a href="${esc(href)}" title="${esc(description)}" aria-label="${esc(label + ': ' + description)}">${label}</a>`).join('') || '<span class="dim">—</span>';

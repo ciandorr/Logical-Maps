@@ -527,6 +527,8 @@ def enriched_payload(topic_id: str, downloads: dict) -> dict:
             {"label": site["title"], "url": site["url"]},
             {"label": site["home_label"], "url": site["home_url"]},
         ]
+        if site.get("repository_url"):
+            payload["navigation"].append({"label": "GitHub", "url": site["repository_url"]})
     payload["downloads"] = downloads
     for name, key in (("background", "background"), ("contribute", "contribute"), ("extraction", "extraction")):
         path = TOPICS / topic_id / f"{name}.md"

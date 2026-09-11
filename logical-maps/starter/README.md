@@ -112,7 +112,7 @@ you intend and have permission to distribute.
 | `VERSION` | Starter release version |
 
 See [UPDATING.md](UPDATING.md) for updating the tools while retaining your data.
-The **Full bundle** download on a built map contains that map and its tools;
+The **Content bundle** download on a built map contains that map and its tools;
 **Topic sources** contains the editable topic folder. A Contribute link offers
 the reusable starter, generated from `starter/`, not your topic content.
 

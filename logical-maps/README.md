@@ -11,7 +11,7 @@ Normal builds also generate `build/index.html`, served by the website at
 It is initially blank on the page. Add future topic IDs to the `maps` list in
 [site/config.yaml](site/config.yaml), then rebuild; only built maps are linked.
 The config also sets the website and GitHub links. Listed maps receive header
-links to the collection homepage and zacharygoodsell.com.
+links to the collection homepage, zacharygoodsell.com, and GitHub.
 
 The website importer copies this whole `build/` directory, so the homepage and
 starter download travel with the topic pages. Commit and push the exports here,
@@ -202,7 +202,7 @@ Add `source_names` alongside `sources`, with one short label per reference in th
 
 ## Viewer
 
-Graph: implications, ∧ nodes for multi-premise results, stronger principles higher. Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Header downloads: **Full bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Topic sources (ZIP)** contains the editable topic folder; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
+Graph: implications, ∧ nodes for multi-premise results, stronger principles higher. Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 
 The Conjectures tab shares the background controls. **Show resolved** is off
 by default, hiding questions currently proved or refuted. Verdicts are computed

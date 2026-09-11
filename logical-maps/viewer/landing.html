@@ -6,6 +6,37 @@
   <title>__LANDING_TITLE__</title>
   <!--__PMAP_THEME__-->
   <style>
+    /* Aged paper palette for the collection homepage. */
+    @media screen {
+      :root {
+        --bg: #f3e7c9;
+        --panel: #f9f0da;
+        --panel-2: #e9d8b0;
+        --line: #d5c49c;
+        --line-strong: #b3a074;
+        --ink: #423822;
+        --ink-2: #6a5938;
+        --ink-3: #75623f;
+        --accent: #77531f;
+        --link-hover: #964a2d;
+        --focus: #964a2d;
+        --hl: #e5ce8f;
+      }
+      :root[data-theme="dark"] {
+        --bg: #221e15;
+        --panel: #2a251a;
+        --panel-2: #332c1e;
+        --line: #4d432d;
+        --line-strong: #776645;
+        --ink: #e9ddbd;
+        --ink-2: #c4b38b;
+        --ink-3: #ad9c73;
+        --accent: #d6b36c;
+        --link-hover: #e3bd8c;
+        --focus: #e3bd8c;
+        --hl: #504126;
+      }
+    }
     .landing { width: min(1040px, calc(100% - 64px)); margin: 28px auto 64px; }
     .landing-nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line); font-size: 13px; }
     h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 650; line-height: 1.15; letter-spacing: -.035em; margin: 38px 0 24px; }
@@ -31,10 +62,7 @@
 <body>
   <main class="landing">
     <nav class="landing-nav" aria-label="Site navigation">
-      <div class="resources">
-        <a href="__HOME_URL__">__HOME_LABEL__</a>
-        <a href="__REPOSITORY_URL__">GitHub</a>
-      </div>
+      <a href="__HOME_URL__">__HOME_LABEL__</a>
       <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
     </nav>
     <h1>__LANDING_TITLE__</h1>
@@ -44,6 +72,7 @@
       <h2 id="create-heading">Create your own logical map</h2>
       <div class="resources">
         __STARTER_LINK__
+        <a href="__REPOSITORY_URL__">GitHub</a>
       </div>
       __SUGGESTIONS__
     </section>

@@ -1,6 +1,6 @@
 # Rich Outcomes ∧ Simple Expected Utility ∧ Sure-Thing ∧ Countable Sure-Thing ⇒ False (⊥)
 
-<p class='cert'>Result — Source: Russell & Isaacs (2021) — Infinite prospects; produced by Jeffrey Sanford Russell and Yoaav Isaacs (Countable Sure-Thing obstruction); Zachary Goodsell (strengthened version recorded here); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
+<p class='cert'>Result — Source: Infinite Prospects; produced by Jeffrey Sanford Russell and Yoaav Isaacs (Countable Sure-Thing obstruction); Zachary Goodsell (strengthened version recorded here); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.</p>
 
 ## Premises
 

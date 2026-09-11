@@ -1752,6 +1752,7 @@ function renderHeader() {
   document.getElementById('subtitle').textContent = (T.description || '').trim();
   const dl = DATA.downloads || {};
   const downloadLinks = [
+    [DATA.repository_url, 'GitHub', 'Browse the Logical Maps repository.'],
     [dl.bundle, 'Content bundle (ZIP)', 'Complete working copy of this topic: editable sources, map summaries, data, viewer, and tools to check and rebuild it. Suitable for people or AI tools.'],
     [dl.lean, 'Lean files', 'Browse the Lean formalisation files: definitions, theorem statements, and available proofs.'],
   ];

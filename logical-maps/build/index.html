@@ -152,6 +152,37 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 })();
 </script>
   <style>
+    /* Aged paper palette for the collection homepage. */
+    @media screen {
+      :root {
+        --bg: #f3e7c9;
+        --panel: #f9f0da;
+        --panel-2: #e9d8b0;
+        --line: #d5c49c;
+        --line-strong: #b3a074;
+        --ink: #423822;
+        --ink-2: #6a5938;
+        --ink-3: #75623f;
+        --accent: #77531f;
+        --link-hover: #964a2d;
+        --focus: #964a2d;
+        --hl: #e5ce8f;
+      }
+      :root[data-theme="dark"] {
+        --bg: #221e15;
+        --panel: #2a251a;
+        --panel-2: #332c1e;
+        --line: #4d432d;
+        --line-strong: #776645;
+        --ink: #e9ddbd;
+        --ink-2: #c4b38b;
+        --ink-3: #ad9c73;
+        --accent: #d6b36c;
+        --link-hover: #e3bd8c;
+        --focus: #e3bd8c;
+        --hl: #504126;
+      }
+    }
     .landing { width: min(1040px, calc(100% - 64px)); margin: 28px auto 64px; }
     .landing-nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line); font-size: 13px; }
     h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 650; line-height: 1.15; letter-spacing: -.035em; margin: 38px 0 24px; }
@@ -177,10 +208,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <body>
   <main class="landing">
     <nav class="landing-nav" aria-label="Site navigation">
-      <div class="resources">
-        <a href="https://www.zacharygoodsell.com/">zacharygoodsell.com</a>
-        <a href="https://github.com/zwlgzwlg/Logical-Maps">GitHub</a>
-      </div>
+      <a href="https://www.zacharygoodsell.com/">zacharygoodsell.com</a>
       <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
     </nav>
     <h1>Logical Maps</h1>
@@ -199,6 +227,7 @@ A logical map leaves formalization optional. The primary goal of a logical map i
       <h2 id="create-heading">Create your own logical map</h2>
       <div class="resources">
         <a href="logical-maps-starter.zip">Download the starter project (ZIP)</a>
+        <a href="https://github.com/zwlgzwlg/Logical-Maps">GitHub</a>
       </div>
       <p>For suggestions, email me at <a href="mailto:zacharyw.goodsell@gmail.com?subject=%5BLogical%20Maps%5D">zacharyw.goodsell@gmail.com</a>, and make sure to put [Logical Maps] in the subject line.</p>
 

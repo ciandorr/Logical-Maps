@@ -1,0 +1,63 @@
+id: continuous-total-cancellation-implies-preservation
+premises:
+- rich-outcomes
+- totality
+- stochastic-dominance
+- l1-continuity
+- independent-sum-cancellation
+conclusion: independent-sum-preservation
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex)
+  checked_by: []
+  date: '2026-09-09'
+proof: >-
+  First, Totality and Independent Sum Cancellation preserve every strict
+  comparison: if X is strictly preferred to Y but X+Z were not strictly
+  preferred to Y+Z, Totality of the sums would give Y+Z weakly preferred
+  to X+Z, and cancellation would contradict X strictly preferred to Y.
+  Now suppose X is weakly preferred to Y. For each n>=1, X+1/n strictly
+  stochastically dominates X, so X+1/n is strictly preferred to Y.
+  The shifts exist by Rich Outcomes and Z stays independent of the
+  pair (X+1/n,Y). Strict preservation therefore gives
+  (X+Z)+1/n strictly preferred to Y+Z. These upper gambles converge to
+  X+Z in the actual L1 distance, which is exactly 1/n, regardless of
+  whether X or Z has a finite expectation. The upper-section clause
+  of L1 Continuity yields X+Z weakly preferred to Y+Z. Together with
+  the first step this is weak and strict Independent Sum Preservation.
+sources:
+- 'GPT-6 (Codex), 9 September 2026, original shift-and-continuity argument in writeups/continuous-total-cancellation-implies-preservation.md.'
+- 'Zachary Goodsell, Symmetries of value, Noûs 60 (2026), §3, p. 23: source for the upper-section L1 Continuity axiom only.'
+- 'Zachary Goodsell, Unbounded Utility and Background Risk, unpublished manuscript, 5 June 2026, Lemma 1, pp. 7–8: source for the independent-sum principles only.'
+source_names:
+- GPT-6 generated 9 Sep
+- Symmetries of Value
+- Unbounded Utility and Background Risk (unpublished)
+notes: >-
+  Original work: connecting proof by a strict-order argument and a
+  constant-shift L1 limit. This is not claimed as a new model or as a
+  theorem already proved in the cited papers. Only the existing UPPER
+  continuity clause is used. No integrability of X,Y,Z, mixture
+  independence, or stochastic-equivalence substitution is required.
+  Rich Outcomes ensures the arbitrarily small real shifts are available;
+  arithmetic remains restricted to the finite real chart. Under DTU plus
+  L1 Continuity, Cancellation, Preservation and full Independent Sum
+  Invariance are therefore equivalent. Combining this with the existing
+  Levy obstruction rules out Cancellation under DTU plus L1 Continuity
+  and Symmetric Neutrality, without adding a redundant incompatibility
+  record.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: '§3, p. 23: source for the upper-section L1 Continuity axiom only'
+- paper: unpublished-background-risk
+  role: background
+  locator: 'Lemma 1, pp. 7–8: source for the independent-sum principles only'
+- paper: wilkinson-2025
+  role: background
+  locator: §6.1
+  note: Source of Independent Sum Consistency; see the principle reference for the changed independence condition.
+    The proof or conjecture recorded here retains its separate attribution.

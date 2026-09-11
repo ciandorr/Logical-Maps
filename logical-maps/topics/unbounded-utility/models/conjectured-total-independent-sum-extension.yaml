@@ -1,0 +1,66 @@
+id: conjectured-total-independent-sum-extension
+name: "CDF-area conclosure: total extension"
+satisfies:
+- rich-outcomes
+- archimedean-outcomes
+- totality
+- stochastic-equivalence
+- cdf-area-extension
+- expected-utility
+- simple-eu
+- stochastic-dominance
+- independence
+- independent-sum-consistency
+- relative-expectation
+violates:
+- full-sum-consistency
+- antitonic-sum-consistency
+- countable-sure-thing
+- archimedean-gambles
+status: proved
+was_conjectured: true
+certificate:
+  source_id: unpublished-background-risk
+  lean: stated
+  produced_by: Zachary Goodsell — CDF-area construction, conclosure, and total-extension strategy
+  checked_by: []
+  date: '2026-09-09'
+  recorded_by: GPT-6 (Codex), 2026-09-09 — cone-language exposition and additional proof details for strictness
+    preservation and total extension
+description: 'Use real outcomes with identity utility. In the vector space of survival functions of finite
+  signed measures of mass zero, let C be the CDF-area cone. Its weak and strict comparisons are preserved by
+  forward convolution. Take Goodsell’s conclosure of C, expressed in cone language by declaring v positive
+  whenever some convolution Tξv belongs to C; commutation ensures cone closure and full convolution cancellation,
+  and forward strict preservation prevents collapse of old strict comparisons. A convolution-invariant cone
+  D can be extended to orient any incomparable v: first adjoin all d+aTξv, then saturate. Convex mixtures of
+  convolution kernels show that this intermediate cone has the same indifferent part as D and preserves strictness
+  under forward convolution. Zorn’s lemma yields a total invariant cone extending C strictly. Pull its order
+  back to random variables through survival differences. This proves Totality, CDF-Area Extension, Mixture
+  Independence and Independent Sum Invariance; expectation and dominance follow from the area rule. The accompanying
+  write-up proves every closure and orientation step. Known violations follow from the recorded St Petersburg/DU
+  impossibility arguments.'
+sources:
+- 'Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026 (unpublished), §§3–4, pp. 7–14: CDF-area
+  construction, conclosure, and total-extension strategy. Supplied manuscript marked “do not cite” and erroneous
+  in its symmetry-extension claim.'
+- 'GPT-6 (Codex), 9 September 2026, writeups/conjectured-total-independent-sum-extension.md: cone-language
+  exposition of Goodsell’s conclosure and additional details establishing strictness preservation and the total-extension
+  step; not an independently originated construction.'
+- 'Zachary Goodsell, project conversation, 9 September 2026: extension without reflection and clarification
+  that the saturation construction is conclosure.'
+source_names:
+- Unbounded Utility and Background Risk (unpublished)
+- GPT-6 proof details 9 Sep
+- Goodsell clarification 9 Sep
+notes: 'The construction, conclosure operation, and total-extension strategy are attributed to Zachary Goodsell
+  and his unpublished manuscript. GPT-6 supplied the cone-language exposition and additional proof details
+  in the write-up; these are not attributed verbatim to the manuscript, and no independently originated AI
+  construction is claimed. Upgraded from conjectured after those details were recorded; the stable ID is retained.
+  Neither reflection requirement is assumed or listed as violated. The raw area cone’s cancellation remains
+  unasserted: conclosure can enlarge it. This is nonconstructive existence using Zorn’s lemma. No independent
+  checker or Lean verification is claimed.'
+references:
+- paper: unpublished-background-risk
+  role: proof
+  locator: '§§3–4, pp. 7–14: CDF-area construction, conclosure, and total-extension strategy. Supplied manuscript
+    marked “do not cite” and erroneous in its symmetry-extension claim'

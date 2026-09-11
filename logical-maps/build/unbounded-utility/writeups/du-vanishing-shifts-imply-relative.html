@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DU and continuity under vanishing shifts imply Relative Expectation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+<style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key !== key && event.key !== null) return;
+    preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+    apply(initial());
+  });
+})();
+</script></head>
+<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button></nav>
+<header id="title-block-header">
+<h1 class="title">DU and continuity under vanishing shifts imply Relative Expectation</h1>
+</header>
+<p><strong>Proved implication:</strong> Rich Outcomes + Archimedean Outcomes + Stochastic Equivalence + Stochastic Dominance + Mixture Independence + Continuity under Vanishing Shifts imply Relative Expectation.</p>
+<p>Here the continuity assumption is only</p>
+<p>[ XY.  ]</p>
+<p>The proof uses no Totality, Shift Invariance, symmetry or lower-section continuity. In particular, it proves a stronger implication than the proposed route through Shift Invariance and Shift Transfer.</p>
+<p><strong>Source and work accounting.</strong> GPT-6 (Codex), Logical Maps project discussion, 9 September 2026. This is a substantial connecting proof using an auxiliary common-mixture law. Goodsell’s unpublished <em>Unbounded Utility and Background Risk</em>, §3, supplies the area-comparison method; <em>Decision theory unbound</em>, §3.2–3.3, supplies the DU framework and finite expected-utility formulation. The separate project representation proof derives Simple EU from the current DU preset. The continuity theorem and auxiliary density construction below are recorded under Misc., and are not attributed to either paper. This accounts for work performed for the project, without asserting literature priority or an independent checker or Lean certificate.</p>
+<h2 id="framework-and-the-integrable-difference-identity">1. Framework and the integrable-difference identity</h2>
+<p>The recorded <a href="rich-archimedean-dominance-independence-imply-simple-eu.html">finite-lottery representation</a> derives Simple Expected Utility from the displayed DU premises. Work in the resulting real utility chart, writing its numerical variables as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math>. Rich Outcomes supplies every real utility level; the standing realization conventions supply the laws and shifted variables used below.</p>
+<p>For any actually coupled pair with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>−</mo><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">E|X-Y|&lt;\infty</annotation></semantics></math>, put</p>
+<p>[ d(t)=S_X(t)-S_Y(t),S_X(t)=P(X&gt;t). ]</p>
+<p>The pointwise indicator identity and Fubini give</p>
+<p>[ <em>{R}|d(t)|,dtE|X-Y|,  </em>{R}d(t),dt=E(X-Y).  ]</p>
+<p>Indeed, for each pair of finite values <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x,y</annotation></semantics></math>, the integral of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mstyle mathvariant="bold"><mn>1</mn></mstyle><mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>&gt;</mo><mi>t</mi><mo stretchy="false" form="postfix">}</mo></mrow></msub><mo>−</mo><msub><mstyle mathvariant="bold"><mn>1</mn></mstyle><mrow><mo stretchy="false" form="prefix">{</mo><mi>y</mi><mo>&gt;</mo><mi>t</mi><mo stretchy="false" form="postfix">}</mo></mrow></msub></mrow><annotation encoding="application/x-tex">\mathbf1_{\{x&gt;t\}}-\mathbf1_{\{y&gt;t\}}</annotation></semantics></math> is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>−</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x-y</annotation></semantics></math>, and its absolute integral is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>x</mi><mo>−</mo><mi>y</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|x-y|</annotation></semantics></math>. Thus (1) never subtracts two undefined expectations.</p>
+<p>A survival difference is right-continuous and has total variation at most 2. Both its integrability and its bounded variation will be needed.</p>
+<h2 id="a-comparison-whose-negative-part-lies-in-a-compact-interval">2. A comparison whose negative part lies in a compact interval</h2>
+<p>We first establish a finite-mixture lemma using only Simple EU, Stochastic Dominance and Mixture Independence, with law replacements licensed by Stochastic Equivalence.</p>
+<p><strong>Lemma.</strong> Suppose the survival difference</p>
+<p>[ g=S_F-S_G ]</p>
+<p>is integrable, nonnegative outside a compact interval, and has <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∫</mo><mi>g</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\int g&gt;0</annotation></semantics></math>. Then <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>≻</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F\succ G</annotation></semantics></math>.</p>
+<p>Choose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> large enough that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">g\ge0</annotation></semantics></math> outside a smaller interval contained in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo>−</mo><mi>R</mi><mo>,</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(-R,R)</annotation></semantics></math> and</p>
+<p>[ _{-R}^{R}g&gt;0. ]</p>
+<p>On a sufficiently fine finite partition of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mo>−</mo><mi>R</mi><mo>,</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">[-R,R)</annotation></semantics></math>, replace <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math> by its infimum on each half-open interval, and set the resulting function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> to zero outside <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mo>−</mo><mi>R</mi><mo>,</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">[-R,R)</annotation></semantics></math>. This makes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> a right-continuous finite-step function with</p>
+<p>[ ng,n&gt;0.  ]</p>
+<p>To justify the last inequality, bounded variation bounds the integral error of this lower approximation by the partition mesh times the total variation on the interval. That error tends to zero. At <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> and outside the partition the comparison <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>g</mi></mrow><annotation encoding="application/x-tex">0\le g</annotation></semantics></math> holds by the choice of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.</p>
+<p>The signed finite measure given by the negative jumps of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> has total mass zero and survival function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>. Write its positive and negative parts as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mi>μ</mi></mrow><annotation encoding="application/x-tex">q\mu</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mi>ν</mi></mrow><annotation encoding="application/x-tex">q\nu</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">q&gt;0</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>,</mo><mi>ν</mi></mrow><annotation encoding="application/x-tex">\mu,\nu</annotation></semantics></math> are finitely supported probability laws. Consequently</p>
+<p>[ n=q(S_-S_), E_-E_=1qn&gt;0.  ]</p>
+<p>Simple EU gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>≻</mo><mi>ν</mi></mrow><annotation encoding="application/x-tex">\mu\succ\nu</annotation></semantics></math>. Set <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>1</mn><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>q</mi><mo stretchy="false" form="postfix">)</mo><mo>∈</mo><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p=1/(1+q)\in(0,1)</annotation></semantics></math>. By (2)–(3), the survival difference of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>p</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>F</mi><mo>,</mo><mi>ν</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_p(F,\nu)</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>p</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>G</mi><mo>,</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_p(G,\mu)</annotation></semantics></math> is</p>
+<p>[ 0. ]</p>
+<p>Stochastic Dominance and then Mixture Independence give</p>
+<p>[ M_p(F,)M_p(G,)M_p(G,). ]</p>
+<p>The strict comparison in the last step follows from <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>≻</mo><mi>ν</mi></mrow><annotation encoding="application/x-tex">\mu\succ\nu</annotation></semantics></math> by putting the common <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> branch first or last as appropriate. Transitivity and cancellation of the common <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ν</mi><annotation encoding="application/x-tex">\nu</annotation></semantics></math> branch yield <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>≻</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">F\succ G</annotation></semantics></math>. This proves the lemma without extending the preference to a total order.</p>
+<h2 id="one-auxiliary-law-for-every-positive-shift">3. One auxiliary law for every positive shift</h2>
+<p>Now suppose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>−</mo><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">E|X-Y|&lt;\infty</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m=E(X-Y)\ge0</annotation></semantics></math>. The difference <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>=</mo><msub><mi>S</mi><mi>X</mi></msub><mo>−</mo><msub><mi>S</mi><mi>Y</mi></msub></mrow><annotation encoding="application/x-tex">d=S_X-S_Y</annotation></semantics></math> satisfies (1).</p>
+<p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> is identically zero, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math> have the same law and Stochastic Equivalence gives their indifference. Hence assume <span class="math inline">$d\not\equiv0$</span>.</p>
+<p>Define its local envelope</p>
+<p>[ h(t)=_{|s-t|&lt;2}|d(s)|.  ]</p>
+<p>Right-continuity permits the same supremum to be taken over rational <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math> in the indicated open interval, so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math> is measurable. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>D</mi><mi>d</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|Dd|</annotation></semantics></math> denotes the finite total-variation measure of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>, then</p>
+<p>[ h(t)|d(t)|+|Dd|((t-2,t+2)). ]</p>
+<p>Tonelli therefore gives</p>
+<p>[ h|d|+4|Dd|(R)&lt;.  ]</p>
+<p>The right-continuous nonzero function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> makes this integral positive. Choose numbers <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo>↑</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">R_n\uparrow\infty</annotation></semantics></math>, with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>n</mi></msub><mo>≥</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">R_n\ge n</annotation></semantics></math>, such that</p>
+<p>[ _{{|t|&gt;R_n}}h(t),dt2^{-n}, ]</p>
+<p>and put</p>
+<p>[ r(t)=1+<em>{n=1}^{}1</em>{{|t|&gt;R_n}},  K=_{R}r(t)h(t),dt.  ]</p>
+<p>The sum is finite at every finite <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>→</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">r(t)\to\infty</annotation></semantics></math> as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>t</mi><mo stretchy="false" form="prefix">|</mo><mo>→</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">|t|\to\infty</annotation></semantics></math>, and</p>
+<p>[ 0&lt;Kh+_{n=1}<sup>{}2</sup>{-n}&lt;. ]</p>
+<p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math> have probability density</p>
+<p>[ f_Z(t)=K.  ]</p>
+<p>This is a single fixed law, chosen independently of the positive shift. It need not have a finite expectation.</p>
+<p>Fix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>ε</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;\varepsilon\le1</annotation></semantics></math>. Sufficiently far in either tail, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mi>K</mi><mi>/</mi><mi>ε</mi></mrow><annotation encoding="application/x-tex">r(u)\ge K/\varepsilon</annotation></semantics></math> for every <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>∈</mo><mo stretchy="false" form="prefix">[</mo><mi>t</mi><mo>−</mo><mi>ε</mi><mo>,</mo><mi>t</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">u\in[t-\varepsilon,t]</annotation></semantics></math>. For all those <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>, the interval in (4) contains <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>, so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>u</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mo stretchy="false" form="prefix">|</mo><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">h(u)\ge|d(t)|</annotation></semantics></math>. Consequently</p>
+<p>[ \begin{aligned} S_{Z+}(t)-S_Z(t) &amp;=P(t-&lt;Zt)\ &amp;=_{t-}^{t}f_Z(u),du |d(t)|. \end{aligned}  ]</p>
+<p>The compact interval outside which (8) holds can depend on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ε</mi><annotation encoding="application/x-tex">\varepsilon</annotation></semantics></math>. That is sufficient for the finite-mixture lemma.</p>
+<h2 id="shift-compare-close-and-cancel">4. Shift, compare, close, and cancel</h2>
+<p>Use the same fixed mixture lift to form</p>
+<p>[ A=M_{1/2}(X,Z),B=M_{1/2}(Y,Z). ]</p>
+<p>For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>ε</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;\varepsilon\le1</annotation></semantics></math>, their shifted survival difference is</p>
+<p>[ g_(t) =S_{A+}(t)-S_B(t) =12(S_{X+}(t)-S_Y(t)) +12(S_{Z+}(t)-S_Z(t)).  ]</p>
+<p>Since <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>X</mi><mo>+</mo><mi>ε</mi></mrow></msub><mo>≥</mo><msub><mi>S</mi><mi>X</mi></msub></mrow><annotation encoding="application/x-tex">S_{X+\varepsilon}\ge S_X</annotation></semantics></math>, equation (8) makes (9) nonnegative outside a compact interval:</p>
+<p>[ g_(t)12(d(t)+|d(t)|)0. ]</p>
+<p>Under the actual common mixture lift, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>−</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A-B</annotation></semantics></math> is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>−</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X-Y</annotation></semantics></math> on the first branch and zero on the second. Thus</p>
+<p>[ E|A-B|=12E|X-Y|,E(A-B)=m2. ]</p>
+<p>The pair <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>+</mo><mi>ε</mi><mo>,</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A+\varepsilon,B</annotation></semantics></math> also has integrable actual difference, so (1) applies to give</p>
+<p>[ g_L^1, g_=m2+&gt;0.  ]</p>
+<p>The lemma of section 2 now yields <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>+</mo><mi>ε</mi><mo>≻</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A+\varepsilon\succ B</annotation></semantics></math>. For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\varepsilon&gt;1</annotation></semantics></math>, weak Stochastic Dominance gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>+</mo><mi>ε</mi><mo>≽</mo><mi>A</mi><mo>+</mo><mn>1</mn><mo>≻</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A+\varepsilon\succeq A+1\succ B</annotation></semantics></math>, so in fact</p>
+<p>[ &gt;0,A+B. ]</p>
+<p>Apply the single upper-section clause (VSC):</p>
+<p>[ AB. ]</p>
+<p>Mixture Independence cancels the common <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math> branch, giving <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≽</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\succeq Y</annotation></semantics></math>. We have proved</p>
+<p>[ E|X-Y|&lt;,E(X-Y)0 XY.  ]</p>
+<h2 id="strict-comparisons-and-the-full-biconditional">5. Strict comparisons and the full biconditional</h2>
+<p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m&gt;0</annotation></semantics></math>, apply (11) to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>+</mo><mi>m</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">Y+m/2</annotation></semantics></math>. Their actual difference is integrable with positive mean <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">m/2</annotation></semantics></math>, so</p>
+<p>[ XY+m/2. ]</p>
+<p>Every positive shift of a real-valued variable strictly stochastically dominates it. For completeness, if <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c&gt;0</annotation></semantics></math>, some interval <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mi>c</mi><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>c</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">(kc,(k+1)c]</annotation></semantics></math> has positive <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>-probability, and its upper endpoint supplies a strict survival comparison for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>+</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">Y+c</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>. Thus</p>
+<p>[ XY+m/2Y. ]</p>
+<p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m&lt;0</annotation></semantics></math>, swap the variables to obtain <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≻</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succ X</annotation></semantics></math>, which excludes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≽</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\succeq Y</annotation></semantics></math>. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m=0</annotation></semantics></math>, apply (11) in both directions to get indifference. Altogether,</p>
+<p>[  ]</p>
+<p>This is Relative Expectation. Both comparisons in the zero-mean case arise from separate applications of the same upper-section argument.</p>
+<h2 id="consequences-and-scope">Consequences and scope</h2>
+<p>Relative Expectation implies Simple Relative Expectation and hence the recorded Shift Transfer principle. Under DU it is also equivalent to CDF-Area Extension by the existing quantile-area implications. The theorem therefore supplies the proposed area and transfer consequences without assuming Shift Invariance first.</p>
+<p>Combined with <a href="relative-vanishing-shifts-imply-l1.html">Relative Expectation plus vanishing-shift continuity</a>, the theorem also gives L¹ Continuity under DU. Conversely, L¹ Continuity immediately implies (VSC). Thus these two continuity principles are equivalent under DU, even though (VSC) mentions only constant positive perturbations of one variable.</p>
+<p>There is a precise minimality conclusion. The <a href="cdf-area-preorder.html">exact CDF-area preorder</a> itself satisfies DU and L¹ Continuity, as established in its continuity section. Every DU + (VSC) model extends that preorder and preserves its strict comparisons, by the CDF-Area Extension consequence above. On the common real-utility domain, the exact CDF-area preorder is therefore the <strong>least</strong> such model under inclusion of weak preference comparisons; it is also the least DU + L¹ Continuity model. This does not assert that all these models coincide: an extension can supply further comparisons when both CDF areas are infinite.</p>
+<p>The proof applies directly to Rich Outcomes + Simple EU + Stochastic Dominance + Mixture Independence + (VSC); Stochastic Equivalence follows from Dominance. The recorded statement uses the more basic DU premises and its separately proved finite-lottery representation.</p>
+<p>No comparison of two undefined individual expectations occurs: the only unbounded integrations are of actual differences, survival differences, and the nonnegative envelope defining a probability density. The auxiliary law is used in a randomized mixture, so no independent-sum principle is assumed.</p>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Background: Unbounded Utility and Background Risk.</strong> Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. — §3, pp. 7–8: source of the CDF-area comparison method; the new continuity theorem and auxiliary density construction are not attributed to the manuscript</li>
+<li><strong>Background: <a href="https://doi.org/10.1111/nous.12473">Decision theory unbound</a>.</strong> Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — §3.2–3.3, pp. 678–682: source framework and finite expected-utility formulation. The representation from the current DU preset uses the separate project proof rich-archimedean-dominance-independence-imply-simple-eu</li>
+</ul>
+</body>
+</html>

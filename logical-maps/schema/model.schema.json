@@ -1,0 +1,132 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "model.schema.json",
+ "title": "Model",
+ "description": "A structure in the topic's framework, with the principles known to hold and to fail in it. Witnesses the consistency of the package satisfies ∪ {¬v : v ∈ violates}; every independence is derived from models.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "id",
+  "name",
+  "satisfies",
+  "violates",
+  "certificate",
+  "sources"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+  },
+  "name": {
+   "type": "string",
+   "description": "Short construction or ordering name: family, rule, and distinguishing variant. Keep authorship, conjecture status, and lists of satisfied/violated principles in their own fields. Match the write-up title; keep the id stable."
+  },
+  "description": {
+   "type": "string",
+   "description": "The construction, and the verification of each listed principle. Required for proved models."
+  },
+  "satisfies": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "uniqueItems": true
+  },
+  "violates": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "uniqueItems": true,
+   "description": "Known failures, or the proposed failures for a conjectured model. May be empty for a consistency construction; an omitted axiom is not thereby negated."
+  },
+  "status": {
+   "type": "string",
+   "enum": [
+    "proved",
+    "conjectured"
+   ],
+   "default": "conjectured"
+  },
+  "was_conjectured": {
+   "type": "boolean",
+   "description": "Historical marker for a record that began as a conjecture. It does not change proof status or supply inference evidence."
+  },
+  "certificate": {
+   "$ref": "result.schema.json#/properties/certificate"
+  },
+  "checks": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Paths of executable sanity checks (numerical, Lean, …)."
+  },
+  "sources": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "\\S"
+   }
+  },
+  "source_names": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "\\S"
+   },
+   "description": "Short display names corresponding to sources, in the same order."
+  },
+  "notes": {
+   "type": "string"
+  },
+  "references": {
+   "type": "array",
+   "description": "References to papers.yaml; roles distinguish definition origins and background from direct proofs.",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "paper",
+     "role"
+    ],
+    "properties": {
+     "paper": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+     },
+     "role": {
+      "enum": [
+       "origin",
+       "formulation",
+       "proof",
+       "background",
+       "related"
+      ]
+     },
+     "locator": {
+      "type": "string",
+      "minLength": 1
+     },
+     "note": {
+      "type": "string",
+      "minLength": 1
+     }
+    }
+   }
+  }
+ },
+ "if": {
+  "properties": {
+   "status": {
+    "const": "conjectured"
+   }
+  }
+ },
+ "else": {
+  "required": [
+   "description"
+  ]
+ }
+}

@@ -1,0 +1,30 @@
+id: independent-sum-preservation
+name: Independent Sum Preservation
+statement: Whenever Z is independent of (X,Y), X ≽ Y implies X+Z ≽ Y+Z, and X ≻ Y implies X+Z ≻ Y+Z.
+formal: ''
+category: invariance-principles
+tags:
+- background-risk
+sources:
+- Hayden Wilkinson (2025). Flummoxing expectations. Noûs, 59(3), 700–728. First published online in 2024. §6.1,
+  Independent Sum Consistency. https://doi.org/10.1111/nous.12530
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; Lemma 1, pp. 7–8 (forward direction)
+source_names:
+- Wilkinson (2025)
+- Unbounded Utility and Background Risk (unpublished)
+notes: 'Numerical scope: real-utility variables for which the indicated sums exist in the outcome chart. These
+  are pointwise utility sums, not randomized mixtures. Stochastic Equivalence remains a separate principle.
+  An explicit separation of the valid forward part of the source’s convolution claim. Weak preservation alone
+  would not ensure preservation of strict preference.'
+date: '2026-09-09'
+lean_def: UnboundedUtility.IndependentSumPreservation
+references:
+- paper: wilkinson-2025
+  role: formulation
+  locator: §6.1, Independent Sum Consistency
+  note: Forward direction of the map’s adapted Independent Sum Consistency; the common addend is independent
+    of the compared pair.
+- paper: unpublished-background-risk
+  role: formulation
+  locator: Lemma 1, pp. 7–8 (forward direction)

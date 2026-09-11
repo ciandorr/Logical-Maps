@@ -1,0 +1,52 @@
+id: relative-self-similarity-evaluates-pasadena
+premises:
+- rich-outcomes
+- stochastic-equivalence
+- independence
+- relative-expectation
+- negative-self-similarity
+conclusion: pasadena-value
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: Zachary Goodsell (Highland Park and Q constructions); GPT-6 (Codex) (negative-self-similarity factorization and explicit couplings)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: >-
+  For Pasadena P, replace the negative payoff -4^k/(2k) by
+  -4^k/(2k-1) to obtain Highland Park H. The actual pointwise
+  difference P-H is nonnegative and has expectation ln 2.
+  Write H in law as M_(2/3)(Q,-2Q), where Q takes
+  2^(2k-1)/(2k-1) with probability 3/4^k. Couple Q with
+  S of law M_(1/4)(4Q,0) by sending its first atom to zero
+  and its kth atom, k>=2, to four times its (k-1)st value.
+  The difference has absolute expectation 3 and expectation zero,
+  so Relative Expectation gives Q~S. Substitute this comparison
+  into the Q branch of H and regroup: H~M_(1/2)(-2H,0).
+  Zero solves the same fixed-value equation. Negative Self-Similarity
+  yields H~0. Relative Expectation gives P~H+ln 2; a half-mixture
+  shift transfer, itself an integrable zero-mean comparison, and
+  Independence give H+ln 2~ln 2. All distributional replacements
+  are licensed by Stochastic Equivalence.
+sources:
+- 'GPT-6 (Codex), 9 September 2026, writeups/relative-self-similarity-evaluates-pasadena.md: factorization through negative self-similarity and explicit integrable couplings.'
+- 'Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549, Theorem 11, pp. 32–33: Pasadena, Highland Park, and Q constructions and relative-expectation identities.'
+source_names:
+- GPT-6 factorization 9 Sep
+- Symmetries of Value
+notes: >-
+  Original work: moderate proof adaptation. The two distributions and
+  integrable-difference identities come from Goodsell's Theorem 11.
+  The new step factors the proof through the already recorded uniqueness
+  principle: H is a fixed value of X -> M_(1/2)(-2X,0), so one can
+  replace the source's Totality/positive-affine square-root argument
+  by Negative Self-Similarity. No separate Totality, Scale Invariance,
+  Reflection Anti-Invariance, or L1 Continuity is required. Exact
+  couplings and remainder bounds are supplied in the write-up and
+  diagnostic. This is work accounting, not a claim of literature novelty.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: 'Theorem 11, pp. 32–33: Pasadena, Highland Park, and Q constructions and relative-expectation identities'

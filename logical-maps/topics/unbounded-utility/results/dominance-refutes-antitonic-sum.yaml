@@ -1,0 +1,31 @@
+id: dominance-refutes-antitonic-sum
+premises:
+- rich-outcomes
+- stochastic-dominance
+- antitonic-sum-consistency
+conclusion: false
+status: proved
+certificate:
+  source_id: unpublished-background-risk
+  lean: stated
+  produced_by: Zachary Goodsell (unpublished manuscript)
+  checked_by: []
+  date: '2026-09-09'
+  recorded_by: GPT-6 (Codex), 2026-09-09; extraction and random-variable translation
+proof: Let P have St Petersburg law and S have the symmetric mixture ½P+½(−P). Write ⊕Anti for the law of the
+  antitonic sum. Since P has law ½δ₂+½(2P), pairing opposite quantiles gives S⊕Anti P = ½(P+2)+½P, which strictly
+  stochastically dominates P=0⊕Anti P. Antitonic Sum Invariance would therefore give S ≻ 0 (both weak directions
+  allow strict cancellation). Applying it again with common summand of law S gives S⊕Anti S ≻ 0⊕Anti S. Symmetry
+  of the quantiles makes the left law δ₀ and the right law S, so 0 ≻ S, a contradiction. Dominance supplies
+  Stochastic Equivalence for every law identity used. This does not assume Symmetric Neutrality or Totality.
+sources:
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; Theorem 6, p. 19
+source_names:
+- Unbounded Utility and Background Risk (unpublished)
+notes: 'Representation update: the former negative conclusion is expressed by adding antitonic-sum-consistency
+  to the premises and concluding False. The mathematical claim, source, and proof are unchanged.'
+references:
+- paper: unpublished-background-risk
+  role: proof
+  locator: Theorem 6, p. 19

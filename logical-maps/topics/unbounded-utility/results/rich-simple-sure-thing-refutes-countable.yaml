@@ -1,0 +1,45 @@
+id: rich-simple-sure-thing-refutes-countable
+premises:
+- rich-outcomes
+- simple-eu
+- sure-thing
+- countable-sure-thing
+conclusion: false
+status: proved
+certificate:
+  source_id: russell-isaacs-2021
+  lean: stated
+  produced_by: Jeffrey Sanford Russell and Yoaav Isaacs (Countable Sure-Thing obstruction); Zachary Goodsell
+    (strengthened version recorded here)
+  checked_by: []
+  date: '2026-09-08'
+  recorded_by: GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation
+proof: Use the strengthened St Petersburg contradiction from §2.3. Simple EU supplies Restricted Totality,
+  Restricted Stochastic Equivalence and finite conditional EU calculations. With independent sequences of fair
+  tosses let A be first-toss St Petersburg, B the same starting at toss 2, and C an independent St Petersburg
+  variable. Conditional on B=2^n, A is a fair mixture of 2 and 2^(n+1), so its conditional expected value exceeds
+  B by 1; Countable Sure-Thing would give A≻B. Partition the A,C space by the maximum of their finite stopping
+  times. On each cell they are simple and their restricted laws coincide, so Countable Sure-Thing would give
+  A~C. Repeat for B,C to get B~C, contradicting Preordering. Null sets can be assigned a finite outcome without
+  changing the simple-law comparisons.
+sources:
+- Russell, J. S., & Isaacs, Y. (2021). Infinite prospects. Philosophy and Phenomenological Research, 103(1),
+  178–198. §2, author’s April 2020 manuscript pp. 6–8; §4, p. 15, footnote 17. https://doi.org/10.1111/phpr.12704
+- Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, §2.3, pp.
+  675–676
+notes: Russell and Isaacs supply the Countable Sure-Thing principle and original St Petersburg obstruction.
+  Goodsell, Decision theory unbound, §2.3, pp. 675–676 supplies the strengthened version and proof recorded
+  here. The arrow is attributed to the original result, with the strengthening credited separately. Premises,
+  proof and verification status are unchanged.
+source_names:
+- Russell & Isaacs (2021)
+- Decision Theory Unbound
+references:
+- paper: russell-isaacs-2021
+  role: origin
+  locator: §2, author’s April 2020 manuscript pp. 6–8; §4, p. 15, footnote 17
+  note: Original St Petersburg obstruction to Countable Sure-Thing with unbounded real utilities. The sufficient
+    premises and proof recorded here follow Goodsell’s strengthened version in Decision theory unbound, §2.3.
+- paper: decision-theory-unbound
+  role: proof
+  locator: §2.3, pp. 675–676

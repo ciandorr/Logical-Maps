@@ -1,0 +1,2085 @@
+<title>__PMAP_TITLE__</title>
+<!--__PMAP_THEME__-->
+<style>
+  html, body { height: 100%; }
+  body { display: flow-root; }
+  .app { display: grid; grid-template-rows: auto 1fr; height: calc(100vh - 64px); height: calc(100dvh - 64px); min-height: 420px; margin: 32px 0; border-bottom: 1px solid var(--line); }
+  header.top { display: flex; align-items: baseline; gap: 18px; padding: 0 24px 18px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
+  header.top h1 { font: 700 22px/1.4 var(--sans); margin: 0; text-wrap: balance; }
+  .title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 20px; }
+  .site-links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; }
+  .site-links[hidden] { display: none; }
+  header.top .sub { color: var(--ink-3); font-size: 12.5px; max-width: 80ch; margin-top: 4px; }
+
+  .body { display: grid; grid-template-columns: 1fr; min-height: 0; }
+  @media (max-width: 1100px) { .detail { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); max-height: 40vh; } }
+  aside.controls { min-width: 0; min-height: 0; overflow: hidden; background: var(--panel); display: grid; grid-template-rows: minmax(0, 1fr) 9px var(--background-height, clamp(145px, 27vh, 230px)); }
+  .controls-scroll { min-height: 0; overflow: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 10px; scrollbar-gutter: stable; overflow-anchor: none; }
+  .background-dock { min-height: 0; border-top: 1px solid var(--line-strong); padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; background: var(--panel-2); }
+  .background-dock h2 { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .background-dock h2 .lnk { margin-left: auto; }
+  .background-hint, .background-status { font-size: 11px; color: var(--ink-3); margin: 0; }
+  .background-status:not(.is-conflict) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .background-status.is-conflict { color: var(--indep); }
+  #background-list { overflow: auto; min-height: 0; flex: 1; scrollbar-gutter: stable; overflow-anchor: none; }
+  .background-row, .pr-row { display: flex; align-items: flex-start; gap: 6px; }
+  .background-row { font-size: 12px; padding: 3px 0; }
+  .background-row .lnk, .pr-row .principle-name { flex: 1; min-width: 0; }
+  .pr-row .principle-name { color: var(--ink); text-align: left; }
+  .pr-row input[type=checkbox] { flex: none; margin: 3px 2px 0 0; cursor: pointer; }
+  .background-row.is-removed, .pr-row.in-background { visibility: hidden; pointer-events: none; }
+  .background-row.is-collapsed, .pr-row.is-collapsed { display: none; }
+  .background-move { flex: none; min-width: 23px; padding: 0 3px; border: 1px solid var(--line); border-radius: 4px; color: var(--accent); background: var(--panel); cursor: pointer; }
+  .background-move:hover { border-color: var(--accent); }
+  .background-fixed { color: var(--ink-3); font-size: 10px; }
+  aside.controls h2 .lnk { font: inherit; text-transform: none; letter-spacing: 0; margin-left: 6px; }
+  aside.controls h2, .detail h2 { font: 500 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
+  .ctl { display: flex; flex-direction: column; gap: 6px; }
+  .ctl label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .ctl input[type=checkbox] { accent-color: var(--accent); }
+  aside.controls .ctl { gap: 2px; }
+  aside.controls h2 { margin-bottom: 5px; line-height: 1.4; }
+  #pr-filters { gap: 8px; }
+  .pr-category { min-width: 0; border-top: 1px solid var(--line); padding-top: 8px; }
+  .pr-category:first-child { border-top: 0; padding-top: 0; }
+  .pr-category h3 { font: 600 13px/1.35 var(--sans); color: var(--ink); margin: 0 0 5px; }
+  .pr-category-actions { display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: center; margin-bottom: 3px; font-size: 11px; }
+  .pr-category-actions .lnk:disabled { opacity: .45; cursor: default; }
+  .pr-category-count { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-left: auto; }
+  .pr-category .principle-name { font-size: 13px; }
+  .pr-category input { flex: none; margin-top: 3px; }
+  .sw { width: 22px; height: 0; border-top: 3px solid; border-radius: 2px; flex: none; }
+  .sw.dotted { border-top-style: dotted; }
+  .sw.dashed { border-top-style: dashed; }
+  .sw.human { border-color: var(--human); } .sw.assisted { border-color: var(--assisted); } .sw.ai { border-color: var(--ai); }
+  .sw.derived { border-color: var(--derived); } .sw.conj { border-color: var(--conj); }
+  .graph-hint { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-3); margin: 4px 0 8px; }
+  .search { width: min(100%, 320px); margin: 0 0 12px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--panel); }
+  .legend-note { color: var(--ink-3); font-size: 12px; }
+  .framework { font-size: 12.5px; color: var(--ink-2); }
+  .framework p { margin: 0 0 6px; }
+  .btn { padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--panel); cursor: pointer; }
+  .btn:hover { background: var(--panel-2); }
+  .btn.small { padding: 3px 8px; font-size: 12px; }
+
+  main { display: grid; grid-template-rows: auto 1fr; min-height: 0; min-width: 0; }
+  .tabs { display: flex; gap: 2px; padding: 0 24px; gap: 22px; flex-wrap: wrap; border-bottom: 1px solid var(--line); background: var(--panel); }
+  .tab { padding: 12px 0; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; cursor: pointer; color: var(--ink-2); }
+  .tab[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .tab:hover { color: var(--link-hover); }
+  .tab .n { color: var(--ink-3); font-size: 12px; margin-left: 4px; font-variant-numeric: tabular-nums; }
+  .pane { display: none; min-height: 0; overflow: auto; }
+  .pane[data-active="true"] { display: block; }
+  #pane-graph[data-active="true"], #pane-open[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
+  #conjecture-options, .conjecture-hint { display: none; }
+  #pane-open #conjecture-options, #pane-open .conjecture-hint { display: block; }
+  #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open [data-clear-graph], #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
+  .open-content { overflow: auto; min-width: 0; min-height: 0; }
+  #open-warning { position: static; margin: 16px 20px 0; }
+  .conjecture-row { padding: 16px 0; border-top: 1px solid var(--line); }
+  .conjecture-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 8px; }
+  .conjecture-heading .stmt { flex: 1; min-width: min(240px, 100%); text-align: left; }
+  .resolution { font-size: 12px; color: var(--ink-2); }
+  .resolution.proved { color: var(--human); }
+  .resolution.refuted, .resolution.incompatible { color: var(--indep); }
+  .resolution.evidence-limited { color: var(--conj); }
+  .conjecture-row .note, .conjecture-evidence { margin-top: 8px; }
+  .conjecture-evidence summary, #open-incompatible > summary { cursor: pointer; }
+  .conjecture-evidence li { margin: 8px 0; }
+  #open-incompatible { margin-top: 20px; }
+  .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
+  .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
+  .pane-divider[aria-orientation="vertical"] { cursor: col-resize; }
+  .pane-divider[aria-orientation="vertical"]::after { width: 3px; height: 36px; top: calc(50% - 18px); left: 3px; }
+  .pane-divider[aria-orientation="horizontal"] { cursor: row-resize; }
+  .pane-divider[aria-orientation="horizontal"]::after { height: 3px; width: 36px; left: calc(50% - 18px); top: 3px; }
+  .pane-divider:hover, .pane-divider:focus-visible, .pane-divider.dragging { background: var(--hl); }
+  .pane-divider:focus-visible { outline-offset: -2px; }
+  .pane-divider:hover::after, .pane-divider:focus-visible::after, .pane-divider.dragging::after { background: var(--accent); }
+  body.resizing-panes, body.resizing-panes * { cursor: var(--resize-cursor) !important; user-select: none !important; }
+  .graph-area { position: relative; overflow: hidden; min-width: 0; }
+  #graph { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+  #graph:active { cursor: grabbing; }
+  .graph-tools { position: absolute; left: 12px; right: 12px; top: 12px; display: flex; align-items: flex-start; gap: 6px; pointer-events: none; }
+  .graph-tools > * { pointer-events: auto; }
+  .graph-tools #fit { margin-left: auto; }
+  .graph-search { width: 280px; max-width: calc(100% - 48px); min-width: 0; }
+  .graph-search .search { width: 100%; margin: 0; }
+  #graph-search-status { display: block; width: fit-content; max-width: 100%; background: var(--panel); color: var(--ink-2); font-size: 12px; }
+  #graph-search-status:not(:empty) { padding: 2px 6px; }
+  .pr-row.search-match, .background-row.search-match { background: var(--hl); box-shadow: inset 3px 0 var(--focus); border-radius: 3px; }
+  .pr-row.search-current, .background-row.search-current { outline: 2px solid var(--focus); outline-offset: 1px; }
+  #graph .node.search-match { opacity: 1; }
+  #graph .node.search-match rect { stroke: var(--focus); stroke-width: 3; vector-effect: non-scaling-stroke; }
+  #graph .node.search-current rect { stroke-width: 4; }
+  .graph-warning { position: absolute; inset: 24px; overflow: auto; padding: 24px; border: 1px solid var(--indep); border-radius: 4px; background: var(--warning-bg); color: var(--indep); }
+  .graph-warning h2 { margin: 0 0 12px; font-size: 21px; }
+  .graph-warning .lnk { color: var(--indep); text-decoration: underline; }
+  .graph-warning li { margin: 10px 0; }
+  .graph-empty { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(360px, calc(100% - 32px)); color: var(--ink-3); background: var(--bg); text-align: center; padding: 12px; }
+
+  /* SVG */
+  .edge { fill: none; stroke-width: 1.6; }
+  .edge.source { stroke: var(--source-color); }
+  .badge.source { background: var(--source-color); }
+  .source-group { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .source-group-head { display: flex; align-items: baseline; gap: 6px; }
+  .source-group-head label { flex: 1; min-width: 0; }
+  .source-group-head button { flex: none; font-size: 11px; }
+  #published-source-list { padding-left: 17px; margin-top: 3px; }
+  .source-group legend { font-size: 11px; color: var(--ink-3); margin-bottom: 1px; }
+  .source-group label { font-size: 12px; line-height: 1.4; margin-bottom: 2px; }
+  .model-category { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
+  .model-category h3 { font-size: 13px; margin: 0 0 8px; }
+  .edge.human { stroke: var(--human); } .edge.assisted { stroke: var(--assisted); } .edge.ai { stroke: var(--ai); }
+  .edge.derived, .edge.premise { stroke: var(--derived); stroke-width: 1.3; }
+  .edge.conjectured { stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; }
+  .edge.lean { stroke-width: 3; }
+  .edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+  .edge-g.dim .edge { opacity: .18; }
+  .edge-g.hot .edge { stroke-width: 3; }
+  .node { cursor: pointer; }
+  .node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; }
+  .node.dim { opacity: .3; }
+  .node.hot rect, .node.selected rect { stroke: var(--accent); stroke-width: 2.2; }
+  .node.selected rect { fill: var(--hl); }
+  .node.from-background rect { fill: var(--hl); stroke: var(--accent); }
+  .node text { font: 500 12.5px var(--sans); fill: var(--ink); pointer-events: none; }
+  .node text[data-principle] { pointer-events: auto; cursor: pointer; }
+  .node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
+  .node.iso rect { stroke-dasharray: 4 3; }
+  .junction { cursor: pointer; }
+  .junction circle { fill: var(--panel); stroke: var(--junction); stroke-width: 1.4; }
+  .junction.source circle { stroke: var(--source-color); }
+  .junction.human circle { stroke: var(--human); } .junction.assisted circle { stroke: var(--assisted); } .junction.ai circle { stroke: var(--ai); }
+  .junction text { font: 600 10px var(--sans); fill: var(--ink-2); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .junction.dim { opacity: .3; }
+  .layer-label { font: 400 10px var(--mono); fill: var(--ink-3); }
+
+  /* matrix */
+  .matrix-wrap { padding: 16px 20px; }
+  table.matrix { border-collapse: separate; border-spacing: 2px; font-size: 12px; }
+  table.matrix th { font-weight: 500; color: var(--ink-2); text-align: left; padding: 2px 6px; white-space: nowrap; }
+  table.matrix th.col { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; vertical-align: bottom; height: 215px; padding: 6px 2px; }
+  table.matrix td { width: 26px; height: 26px; border-radius: 3px; cursor: pointer; text-align: center; font: 500 10px var(--mono); }
+  td.c-implies { background: var(--human); color: var(--badge-ink); }
+  td.c-implies.prov-ai { background: var(--ai); } td.c-implies.prov-assisted { background: var(--assisted); }
+  td.c-derived { background: color-mix(in srgb, var(--human) 45%, var(--panel)); }
+  td.c-independent { background: var(--indep); color: var(--badge-ink); }
+  td.c-independent.derived { background: color-mix(in srgb, var(--indep) 45%, var(--panel)); }
+  td.c-open { background: var(--open); color: var(--open-ink); }
+  td.c-conj { background: repeating-linear-gradient(45deg, var(--open) 0 4px, color-mix(in srgb, var(--conj) 50%, var(--panel)) 4px 8px); }
+  td.c-self { background: transparent; cursor: default; }
+  td.hot { outline: 2px solid var(--accent); }
+  .matrix-legend { display: flex; gap: 14px; flex-wrap: wrap; margin: 12px 0 0; font-size: 12px; color: var(--ink-2); }
+  .matrix-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .matrix-legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+  .matrix-wrap p.hint { color: var(--ink-3); font-size: 12.5px; margin: 0 0 12px; max-width: 65ch; }
+
+  /* lists */
+  .list { padding: 16px 20px; }
+  table.results { border-collapse: collapse; width: 100%; font-size: 13px; }
+  table.results th { text-align: left; font-weight: 500; color: var(--ink-3); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  table.results td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.results tr { cursor: pointer; }
+  table.results tr:hover td { background: var(--panel-2); }
+  table.results tr.filtered td { opacity: .4; }
+  .stmt { font-family: var(--serif); font-size: 14px; }
+  .open-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+  .open-item { padding: 8px 10px; border: 1px solid var(--line); border-radius: 3px; background: var(--panel); cursor: pointer; font-family: var(--serif); }
+  .open-item:hover { border-color: var(--accent); }
+  .list h3 { font: 600 16px var(--serif); margin: 18px 0 8px; }
+  .list h3:first-child { margin-top: 0; }
+  .list p.hint { color: var(--ink-3); font-size: 12.5px; max-width: 65ch; margin: 0 0 12px; }
+
+  /* badges */
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 4px; font: 500 11px var(--sans); letter-spacing: .02em; color: var(--badge-ink); white-space: nowrap; }
+  .badge.source { white-space: normal; }
+  .badge.human { background: var(--human); } .badge.assisted { background: var(--assisted); } .badge.ai { background: var(--ai); }
+  .badge.lean { background: transparent; color: var(--ink-2); border: 1px solid var(--line-strong); }
+  .badge.lean.verified { border-color: var(--ink); color: var(--ink); font-weight: 600; }
+  .badge.conj { background: var(--conj); color: var(--badge-ink); }
+  .badge.kind { background: var(--panel-2); color: var(--ink-2); }
+  .badge.indep { background: var(--indep); }
+
+  /* detail */
+  .detail { border-left: 1px solid var(--line); background: var(--panel); overflow: auto; padding: 16px 18px; }
+  .detail .empty { color: var(--ink-3); font-size: 13px; }
+  .detail h2.title { font: 600 18px/1.25 var(--serif); letter-spacing: 0; text-transform: none; color: var(--ink); margin: 0 0 4px; text-wrap: balance; }
+  .detail .id { font: 12px var(--mono); color: var(--ink-3); margin-bottom: 10px; }
+  .detail .badges { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+  .detail .statement { font: 15px/1.5 var(--serif); margin: 0 0 12px; }
+  .detail .formal { font: 12px var(--mono); background: var(--panel-2); padding: 6px 8px; border-radius: 4px; overflow-x: auto; margin: 0 0 12px; }
+  .detail .proof { font: 13px/1.5 var(--serif); background: var(--panel-2); padding: 10px 12px; border-radius: 3px; margin: 0 0 12px; }
+  .detail dl { margin: 0 0 12px; display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px; font-size: 12.5px; }
+  .detail dt { color: var(--ink-3); }
+  .detail dd { margin: 0; }
+  .detail ul.rel { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 3px; }
+  .detail ul.rel li { display: flex; gap: 6px; align-items: baseline; }
+  .detail ul.rel button { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; text-align: left; }
+  .detail ul.rel button:hover { text-decoration: underline; }
+  .detail .via { font: 11px var(--mono); color: var(--ink-3); }
+  .detail .src { font-size: 12.5px; color: var(--ink-2); padding-left: 16px; margin: 0 0 12px; }
+  .detail .file { font: 11px var(--mono); color: var(--ink-3); }
+  .rel-head { font: 500 11px var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin: 10px 0 4px; }
+
+  @media (prefers-reduced-motion: no-preference) { .node rect, .edge { transition: opacity .15s, stroke-width .15s; } }
+
+  /* additions */
+  .pkg-pick { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--line-strong); border-radius: 3px; cursor: pointer; background: var(--panel); font-size: 13px; }
+  .pill.on { background: var(--hl); border-color: var(--accent); }
+  .pill input { margin: 0; accent-color: var(--accent); }
+  .pkg-head { font: 600 16px var(--serif); margin: 4px 0 10px; }
+  .note { font-size: 12.5px; color: var(--ink-2); }
+  .warn { color: var(--indep); font-size: 12.5px; }
+  .mono { font: 11px var(--mono); color: var(--ink-3); }
+  .dim { color: var(--ink-3); font-size: 11px; }
+  .lnk { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; text-align: left; font: inherit; }
+  .lnk:hover { text-decoration: underline; }
+  .conjunction-abbreviation { font-weight: 600; white-space: nowrap; }
+  .full-conjunction { margin: 8px 0; font: 13px/1.45 var(--sans); }
+  .full-conjunction summary { color: var(--accent); cursor: pointer; }
+  .full-conjunction-statement { margin-top: 6px; color: var(--ink-2); }
+  .list h3 .n, .list h3 span.n { color: var(--ink-3); font: 400 13px var(--sans); }
+  table.matrix tr.filtered td, table.matrix tr.filtered th { opacity: .4; }
+  table.matrix th button.lnk { color: var(--ink); }
+  .list ul.rel { list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 3px; }
+  .list ul.rel li { display: flex; gap: 8px; align-items: baseline; }
+  .list ul.rel button { border: 0; background: none; padding: 0; color: var(--accent); cursor: pointer; text-align: left; font: inherit; }
+  .list ul.rel button:hover { text-decoration: underline; }
+  .list .via { font: 11px var(--mono); color: var(--ink-3); }
+  .list .via button { color: var(--ink-3); font: inherit; }
+  .list .empty { color: var(--ink-3); }
+
+  /* explorer */
+  .ex { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(320px, 1.4fr); gap: 28px; align-items: start; }
+  .ex-head { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
+  .ex-head .n { font: 400 12px var(--mono); }
+  .ex-list { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; }
+  .ex-p { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 6px 10px; padding: 6px; border-radius: 5px; }
+  .ex-p.in { background: color-mix(in srgb, var(--human) 14%, transparent); }
+  .ex-p.out { background: color-mix(in srgb, var(--indep) 14%, transparent); }
+  .ex-p .lnk { color: var(--ink); }
+  .ex-p > .seg { grid-column: 1; grid-row: 1; }
+  .ex-p > .lnk { grid-column: 2; grid-row: 1; min-width: 0; text-align: left; overflow-wrap: normal; word-break: normal; }
+  .ex-p > .background-move { grid-column: 3; grid-row: 1; }
+  .ex-p > .verdict, .ex-p > .via { grid-column: 2 / -1; min-width: 0; max-width: 100%; justify-self: start; text-align: left; }
+  .ex-p .badge.source { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+  .ex-p .model-flag { white-space: nowrap; }
+  .verdict { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; background: none; border: 1px solid var(--line); border-radius: 4px; padding: 3px 5px; color: inherit; cursor: pointer; }
+  .pop-sources { font-size: 12px; margin: 9px 0; }
+  .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 5px; overflow: hidden; flex: none; }
+  .seg button { border: 0; background: var(--panel); width: 26px; height: 22px; cursor: pointer; color: var(--ink-3); font-size: 12px; padding: 0; }
+  .seg button + button { border-left: 1px solid var(--line-strong); }
+  .seg button.on { background: var(--indep); color: var(--panel); }
+  .seg button.auto { color: var(--indep); background: color-mix(in srgb, var(--indep) 12%, var(--panel)); }
+  .model-flag { color: var(--indep); font-weight: 600; }
+  .ex-m { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; padding: 5px 8px; border-bottom: 1px solid var(--line); }
+  .ex-m.sel { background: var(--hl); }
+  .ex-m .lnk { color: var(--ink); font: 500 13.5px var(--sans); }
+  .ex-m .ex-sum { margin-left: auto; white-space: nowrap; }
+  .ex .empty { color: var(--ink-3); padding: 4px 8px; }
+
+  /* page */
+  .page { padding: 20px 28px 40px; }
+  .page h1 { font: 600 24px/1.25 var(--serif); margin: 12px 0 8px; text-wrap: balance; }
+  .page h2 { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 22px 0 8px; }
+  .page .prose { font: 16px/1.65 var(--sans); }
+  .page .prose.statement { font-size: 16px; }
+  .page .plist { list-style: none; padding: 0; margin: 0; font: 16px/1.65 var(--sans); display: flex; flex-direction: column; gap: 6px; }
+  .page .badges { display: flex; gap: 6px; margin: 0 0 10px; }
+  .page dl { display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px; font-size: 12.5px; margin: 0; }
+  .page dt { color: var(--ink-3); } .page dd { margin: 0; }
+  .page .src { font-size: 13px; color: var(--ink-2); padding-left: 18px; }
+  .page .file { margin-top: 24px; font: 11px var(--mono); color: var(--ink-3); }
+  .page .formal { font: 12.5px var(--mono); background: var(--panel-2); padding: 6px 8px; border-radius: 4px; margin-top: 8px; overflow-x: auto; }
+  .page .id { font: 12px var(--mono); color: var(--ink-3); margin-bottom: 8px; }
+  .page table.results tr { cursor: default; } .page table.results tr[data-result], .page table.results tr[data-model] { cursor: pointer; }
+  .nowrap { white-space: nowrap; }
+  .detail .goto { margin: 0 0 12px; }
+
+  .links { font-size: 12.5px; margin: 0 0 10px; } .links a { color: var(--accent); }
+  .goto-row { display: flex; gap: 12px; align-items: center; margin: 0 0 12px; } .goto-row .goto, .goto-row .links { margin: 0; }
+  .dl { display: flex; gap: 10px; margin-left: auto; font-size: 12.5px; align-self: center; } .dl a { color: var(--ink-3); }
+
+  .pop { position: fixed; z-index: 20; max-width: min(380px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: auto; background: var(--panel); border: 1px solid var(--line-strong); border-radius: 4px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 13px; }
+  .pop .pop-t { font: 600 15px/1.3 var(--serif); margin-bottom: 4px; }
+  .pop .pop-t + .pop-t { margin-top: 10px; }
+  .pop .pop-s { font: 13.5px/1.45 var(--serif); }
+  .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
+  .pop .pop-l { font-size: 12px; color: var(--ink-2); margin-top: 6px; } .pop code { font: 12px var(--mono); }
+  .pop .badges { display: flex; gap: 6px; margin: 6px 0; } .pop .links { margin: 4px 0 0; }
+
+  .ex-p.bad { background: color-mix(in srgb, var(--indep) 32%, transparent); outline: 1.5px solid var(--indep); }
+  .ex-bad { border: 1px solid var(--indep); color: var(--indep); border-radius: 3px; padding: 8px 10px; margin: 0 0 10px; font-size: 13px; }
+  .ex-bad .lnk { color: var(--indep); text-decoration: underline; }
+
+  .prose-page { font: 16px/1.65 var(--sans); } .prose-page h2 { margin-top: 20px; } .prose-page p { margin: 0 0 10px; }
+  .node.falsity rect, .node.ruled-out rect { stroke: var(--indep); stroke-width: 2; }
+  .node.falsity text { fill: var(--indep); font-weight: 700; }
+  /* Fine rules and readable prose mirror the supplied reference. */
+  .dl { flex-wrap: wrap; gap: 6px 14px; }
+  .dl a { color: var(--accent); }
+  .page h2 { font: 600 17px/1.4 var(--sans); text-transform: none; letter-spacing: 0; color: var(--ink); border-top: 1px solid var(--line); padding-top: 16px; }
+  .page .prose, .prose-page { overflow-wrap: anywhere; }
+  .prose-page pre { max-width: 100%; overflow-x: auto; padding: 12px; background: var(--panel-2); }
+  .prose-page math[display="block"] { display: block; overflow-x: auto; }
+  .badge { border-radius: 2px; }
+  .ex > div { min-width: 0; }
+  /* Shared signed controls and a quieter Theory Explorer. */
+  .seg button { min-height: 26px; }
+  .seg button[aria-pressed="true"] { background: var(--human); color: var(--badge-ink); }
+  .seg button[data-show-negative][aria-pressed="true"], .seg button[data-assume-negative][aria-pressed="true"] { background: var(--indep); }
+  .seg button:disabled { cursor: default; opacity: .7; }
+  .pr-row, .background-row { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 6px; padding: 2px 0; }
+  aside.controls .seg button { width: 24px; min-height: 24px; }
+  .sidebar-principle-line { min-width: 0; font-size: 13px; line-height: 1.5; padding-top: 2px; }
+  .sidebar-principle-line > .lnk { display: inline; max-width: 100%; overflow-wrap: normal; word-break: normal; }
+  .pr-actions { display: inline; font-size: 11px; }
+  .pr-actions .lnk, .background-row [data-remove-background], .background-row .background-fixed { margin-left: 7px; font-size: 11px; white-space: nowrap; }
+  #pane-open .pr-row { grid-template-columns: minmax(0, 1fr); }
+  .explorer-actions, .background-presets { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+  .background-presets:empty { display: none; }
+  .background-dock .background-presets { margin: 0; flex-shrink: 0; }
+  .background-dock .background-presets .btn { padding: 2px 5px; font-size: 11px; }
+  .ex { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; }
+  .ex-p { grid-template-columns: auto minmax(0, 1fr); gap: 8px; padding: 5px 6px; border-radius: 0; border-bottom: 1px solid var(--line); }
+  .principle-line { min-width: 0; line-height: 1.6; }
+  .principle-line > .lnk { display: inline; max-width: 100%; text-align: left; overflow-wrap: normal; }
+  .principle-line > .verdict { display: inline; border: 0; padding: 0; margin-left: 7px; font-size: 11px; white-space: nowrap; }
+  .principle-line > .via { margin-left: 7px; white-space: nowrap; }
+  .principle-line .evidence-link { margin-left: 5px; }
+  .ex-p.fin, .ex-p.model-in { background: color-mix(in srgb, var(--human) 10%, transparent); }
+  .ex-p.fout, .ex-p.model-out { background: color-mix(in srgb, var(--indep) 10%, transparent); }
+  .seg button.auto-positive { color: var(--human); background: color-mix(in srgb, var(--human) 18%, var(--panel)); }
+  .seg button.auto-negative { color: var(--indep); background: color-mix(in srgb, var(--indep) 18%, var(--panel)); }
+  #model-principles .model-category { padding-top: 8px; }
+  #model-principles .model-category h3 { margin-bottom: 5px; }
+  #model-principles .ex-list { margin-bottom: 10px; }
+  .evidence-link { color: var(--accent); font-size: 11px; }
+  .ex-p .model-flag { color: var(--ink-2); font-weight: 500; }
+  .ex-head { line-height: 1.5; }
+  .ex-m { display: block; padding: 7px 0; }
+  .model-heading { display: flex; align-items: baseline; gap: 12px; }
+  .model-heading > .lnk { min-width: 0; flex: 1; font-size: 14px; line-height: 1.55; text-align: left; }
+  .ex-m.sel { padding-inline: 12px; border-left: 2px solid var(--accent); }
+  .inspection-note { font-size: 12px; color: var(--ink-2); margin-bottom: 8px; }
+  .inspection-note > .lnk { display: inline-block; margin-left: 10px; font-size: 11px; }
+  .node.negative rect { stroke-dasharray: 6 3; }
+  .direction-chevron, .flow-chevron { fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+  #flow { pointer-events: none; }
+  .edge-g.dim .direction-chevron { opacity: .18; }
+  .edge-g.hot .direction-chevron { stroke-width: 2.4; }
+  @media (prefers-reduced-motion: reduce) { .flow-chevron { display: none; } }
+  @media (max-width: 1000px) { .ex { gap: 24px; } }
+  @media (max-width: 760px) {
+    .principle-line { font-size: 13px; line-height: 1.5; }
+    .app { margin: 16px 0 0; height: calc(100vh - 16px); height: calc(100dvh - 16px); }
+    header.top { gap: 8px 16px; padding: 0 16px 14px; }
+    header.top > div:first-child { flex: 1 1 100%; }
+    .dl { margin-left: 0; flex: 1; }
+    .tabs { padding: 0 16px; gap: 0 18px; }
+    .tab { padding: 10px 0; font-size: 13px; }
+    .ex { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .list, .page { padding: 18px 16px 32px; }
+    .controls-scroll { padding: 12px 10px; }
+    .background-dock { padding: 10px; }
+    .graph-warning { inset: 10px; padding: 14px; }
+    .goto-row, .page .badges { flex-wrap: wrap; }
+    .open-list { grid-template-columns: minmax(0, 1fr); }
+    .page dl { grid-template-columns: minmax(0, 1fr); }
+    .page dd { margin-bottom: 8px; }
+  }
+  @media (max-height: 600px) {
+    .app { margin-block: 8px; height: calc(100vh - 16px); height: calc(100dvh - 16px); }
+  }
+.paper-entry { border-bottom: 1px solid var(--line); padding: 1rem 0; scroll-margin-top: 1rem; overflow-wrap: anywhere; }
+#paper-catalogue > #papers > section > h3 { margin: .6rem 0; font-size: 1.05rem; }
+.paper-entry:first-of-type { padding-top: 0; }
+.page .paper-entry h4 { margin: 0 0 .4rem; padding: 0; border: 0; font-size: 1.1rem; }
+.paper-entry h5 { margin: .65rem 0 .3rem; font-size: .9rem; }
+.paper-entry .src { margin: .3rem 0 .7rem; }
+.paper-entry .src p { margin: .2rem 0 .5rem; }
+.paper-entry summary { cursor: pointer; }
+.paper-entry:focus { outline: 2px solid var(--accent); outline-offset: .3rem; }
+</style>
+<div class="app">
+  <header class="top">
+    <div>
+      <div class="title-row"><h1 id="title"></h1><nav id="site-links" class="site-links" aria-label="Site navigation" hidden></nav></div>
+      <div class="sub" id="subtitle"></div>
+    </div>
+    <div class="dl" id="downloads"></div>
+    <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
+  </header>
+  <div class="body">
+    <main>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="background" aria-selected="false">Background</button>
+        <button class="tab" role="tab" data-tab="graph" aria-selected="true">Graph</button>
+        <button class="tab" role="tab" data-tab="models" aria-selected="false">Theory explorer</button>
+        <button class="tab" role="tab" data-tab="open" aria-selected="false">Conjectures <span class="n" id="n-open"></span></button>
+        <button class="tab" role="tab" data-tab="results" aria-selected="false">Changes <span class="n" id="n-results"></span></button>
+        <button class="tab" role="tab" data-tab="contribute" aria-selected="false" hidden>Contribute</button>
+      </div>
+      <section class="pane" id="pane-graph" data-active="true">
+    <aside class="controls" id="graph-sidebar">
+      <div class="controls-scroll" id="principle-controls">
+      <div id="conjecture-options">
+        <h2>Conjectures</h2>
+        <div class="ctl"><label><input type="checkbox" id="show-resolved">Show resolved</label></div>
+      </div>
+      <div>
+        <h2 id="source-filter-heading" title="Filter displayed arrows. Background consequences always use all recorded proofs.">Arrow sources</h2>
+        <div class="ctl" id="source-filters"></div>
+        <div class="ctl">
+          <label><input type="checkbox" id="lean-only"><span class="sw" style="border-color:var(--ink)"></span>Lean-verified only</label>
+        </div>
+      </div>
+      <div id="graph-options">
+        <h2>Graph</h2>
+        <p class="graph-hint" title="Solid neutral arrows are derived proofs. Click an arrow for its proof steps and sources; intermediate principles may be hidden or combined."><span class="sw derived"></span>Derived proofs</p>
+        <div class="ctl">
+          <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
+          <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
+          <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
+          <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
+        </div>
+      </div>
+      <div>
+        <h2>Principles <button class="lnk dim" id="pr-all">show positive</button> <button class="lnk dim" id="pr-none">clear</button></h2>
+        <p class="background-hint conjecture-hint">Choose a principle’s positive or negative form, then move it to background.</p>
+        <div class="ctl" id="pr-filters"></div>
+      </div>
+      </div>
+      <div class="pane-divider" id="background-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize background pane" aria-controls="background-dock principle-controls" title="Drag to resize background · Arrow keys to adjust · Double-click to reset"></div>
+      <section class="background-dock" id="background-dock" aria-labelledby="background-heading">
+        <h2 id="background-heading">Background <span id="background-count"></span><button class="lnk" id="background-reset">clear background</button></h2>
+        <div id="background-presets" class="background-presets"></div>
+        <div id="background-list" class="ctl"></div>
+        <p id="background-status" class="background-status" role="status" aria-live="polite"></p>
+      </section>
+    </aside>
+        <div class="pane-divider" id="sidebar-divider" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize left sidebar" aria-controls="graph-sidebar" title="Drag to resize sidebar · Arrow keys to adjust · Double-click to reset"></div>
+        <div class="graph-area">
+          <svg id="graph" role="img" aria-label="Implication graph"></svg>
+          <div id="graph-warning" class="graph-warning" role="alert" hidden></div>
+          <div id="graph-empty" class="graph-empty" role="status" hidden></div>
+          <div class="graph-tools"><div class="graph-search"><input class="search" id="graph-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the graph" aria-describedby="graph-search-status" autocomplete="off"><span id="graph-search-status" role="status" aria-live="polite"></span></div><button class="btn small" id="fit">Fit</button></div>
+        </div>
+      </section>
+      <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
+      <section class="pane" id="pane-results"><div class="list"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><div id="results"></div></div></section>
+      <section class="pane" id="pane-open"><div class="open-content"><div id="open-warning" class="graph-warning" role="alert" hidden></div><div class="list" id="open"></div></div></section>
+      <section class="pane" id="pane-page"><div class="page" id="page"></div></section>
+      <section class="pane" id="pane-background"><div class="page prose-page" id="background"></div></section>
+      <section class="pane" id="pane-contribute"><div class="page prose-page" id="contribute"></div></section>
+    </main>
+  </div>
+</div>
+<div id="pop" class="pop" hidden></div>
+
+<script>
+const DATA = /*__PMAP_DATA__*/null;
+const FALSE = "false";
+const papers = DATA.papers || [];
+const byPaperId = new Map(papers.map(p => [p.id, p]));
+
+// ---------------------------------------------------------------- engine (mirrors scripts/pmap.py)
+function closure(seed, rules, background) {
+  const facts = new Set([...background, ...seed]);
+  const why = new Map(); for (const f of facts) why.set(f, null);
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const r of rules) if (!facts.has(r.conclusion) && r.premises.every(p => facts.has(p))) { facts.add(r.conclusion); why.set(r.conclusion, r.id); changed = true; }
+  }
+  return { facts, why };
+}
+function chain(target, why, byId) {
+  const out = [], seen = new Set();
+  (function visit(f) { const rid = why.get(f); if (rid == null || seen.has(rid)) return; seen.add(rid); for (const p of [...byId.get(rid).premises].sort()) visit(p); out.push(rid); })(target);
+  return out;
+}
+class Engine {
+  constructor(ids, results, models, background = [], negativeBackground = []) {
+    this.negativeBackground = negativeBackground;
+    this.ids = ids; this.background = background; this.rules = results; this.byId = new Map(results.map(r => [r.id, r])); this.models = models;
+    this.cache = new Map(); this.holds = new Map(); this.fails = new Map(); this.failWhy = new Map(); this.modelConflicts = new Map();
+    for (const m of models) {
+      this.holds.set(m.id, new Set([...this.cl(m.satisfies).facts].filter(c => c !== FALSE)));
+      const conflict = this.conflict(m.satisfies, m.violates);
+      if (conflict) this.modelConflicts.set(m.id, conflict);
+      const f = new Set(), fw = new Map();
+      if (!conflict) for (const c of ids) {
+        const hit = this.conflict([...m.satisfies, c], m.violates);
+        if (hit) { f.add(c); fw.set(c, [m.id, ...hit.via]); }
+      }
+      this.fails.set(m.id, f); this.failWhy.set(m.id, fw);
+    }
+  }
+  cl(P) {
+    const key = JSON.stringify([...new Set(P)].sort());
+    if (!this.cache.has(key)) this.cache.set(key, closure(P, this.rules, this.background));
+    return this.cache.get(key);
+  }
+  conflict(P, violates = []) {
+    const {facts, why} = this.cl(P);
+    const target = facts.has(FALSE) ? FALSE : [...this.negativeBackground, ...violates].find(v => facts.has(v));
+    return target === undefined ? null : {target, via: chain(target, why, this.byId)};
+  }
+  entails(P, c) {
+    const conflict = this.conflict(P);
+    if (conflict) return c === FALSE ? conflict.via : null;
+    const { facts, why } = this.cl(P);
+    if (facts.has(FALSE) && c !== FALSE) return null;
+    return facts.has(c) ? chain(c, why, this.byId) : null;
+  }
+  excludes(P, c) { return this.conflict(P) ? null : this.conflict([...P, c]); }
+  separates(P, c) { return this.models.filter(m => !this.modelConflicts.has(m.id) && P.every(p => this.holds.get(m.id).has(p)) && this.fails.get(m.id).has(c)); }
+  resolveConjecture(item) {
+    const answer = (status, via = [], models = []) => ({status, via, models});
+    const backgroundConflict = this.conflict([]);
+    if (backgroundConflict) return answer('inconsistent-background', backgroundConflict.via);
+    const witnesses = (positive, negative) => this.models.filter(m => !this.modelConflicts.has(m.id)
+      && positive.every(p => this.holds.get(m.id).has(p)) && negative.every(p => this.fails.get(m.id).has(p)));
+    const witnessAnswer = (status, models, positive, negative) => {
+      const first = models[0], via = new Set();
+      const {why} = this.cl(first.satisfies);
+      for (const p of positive) for (const id of chain(p, why, this.byId)) via.add(id);
+      for (const p of negative) for (const id of this.failWhy.get(first.id).get(p).slice(1)) via.add(id);
+      return answer(status, [...via], models.map(m => m.id));
+    };
+    if (Array.isArray(item.satisfies)) {
+      const conflict = this.conflict(item.satisfies, item.violates);
+      if (conflict) return answer('refuted', conflict.via);
+      const models = witnesses(item.satisfies, item.violates);
+      return models.length ? witnessAnswer('proved', models, item.satisfies, item.violates) : answer('open');
+    }
+    const conclusion = item.conclusion === false ? FALSE : item.conclusion;
+    if (conclusion === FALSE) {
+      const via = this.entails(item.premises, FALSE);
+      if (via !== null) return answer('proved', via);
+      const models = witnesses(item.premises, []);
+      return models.length ? witnessAnswer('refuted', models, item.premises, []) : answer('open');
+    }
+    const conflict = this.conflict(item.premises);
+    if (conflict) return answer('incompatible', conflict.via);
+    const via = this.entails(item.premises, conclusion);
+    if (via !== null) return answer('proved', via);
+    const models = this.separates(item.premises, conclusion);
+    return models.length ? witnessAnswer('refuted', models, item.premises, [conclusion]) : answer('open');
+  }
+  pair(a, b) {
+    const conflict = this.conflict([a]); if (conflict) return {status: 'inconsistent', via: conflict.via};
+    const via = this.entails([a], b); if (via) return { status: 'implies', via };
+    const excluded = this.excludes([a], b); if (excluded) return {status: 'excludes', via: excluded.via};
+    const ms = this.separates([a], b); if (ms.length) return { status: 'independent', via: this.failWhy.get(ms[0].id).get(b), models: ms.map(m => m.id) };
+    return { status: 'open', via: [] };
+  }
+  package(P) {
+    const conflict = this.conflict(P);
+    const out = {inconsistent: !!conflict, via: conflict?.via || [], entails: [], excludes: [], separated: [], open: []};
+    if (conflict) return out;
+    const { facts, why } = this.cl(P);
+    for (const c of this.ids) {
+      if (P.includes(c)) continue;
+      if (facts.has(c)) out.entails.push([c, chain(c, why, this.byId)]);
+      else {
+        const excluded = this.excludes(P, c);
+        if (excluded) out.excludes.push([c, excluded.via]);
+        else { const ms = this.separates(P, c); if (ms.length) out.separated.push([c, ms.map(m => m.id)]); else out.open.push([c, []]); }
+      }
+    }
+    return out;
+  }
+}
+
+// ---------------------------------------------------------------- state
+const P = DATA.principles, R = DATA.results.map(r => ({...r, conclusion: r.conclusion === false ? FALSE : r.conclusion})), MODELS = DATA.models, T = DATA.topic;
+const byPid = new Map(P.map(p => [p.id, p])), byRid = new Map(R.map(r => [r.id, r])), byMid = new Map(MODELS.map(m => [m.id, m]));
+const ids = P.map(p => p.id);
+const topicBackground = T.background || [];
+const backgroundPresets = T.background_presets || [];
+const backgroundParams = new URLSearchParams(window.location.search);
+const initialBackground = backgroundParams.has('assume') ? (backgroundParams.get('assume') || '').split(',') : backgroundPresets.filter(p => p.default).flatMap(p => p.principles);
+const background = new Set([...topicBackground, ...initialBackground.filter(id => byPid.has(id))]);
+const negativeBackground = new Set((backgroundParams.get('deny') || '').split(',').filter(id => byPid.has(id) && !topicBackground.includes(id)));
+for (const id of negativeBackground) background.delete(id);
+const inBackground = id => background.has(id) || negativeBackground.has(id);
+const backgroundIds = () => ids.filter(inBackground);
+const baseId = literal => literal.startsWith('!') ? literal.slice(1) : literal;
+const isNegative = literal => literal.startsWith('!');
+const negate = literal => isNegative(literal) ? baseId(literal) : '!' + literal;
+const sourceCatalog = [...(T.source_catalog || [])];
+if (!sourceCatalog.some(s => s.id === 'misc')) sourceCatalog.push({ id: 'misc', name: 'Misc.', kind: 'misc' });
+const sourceOf = x => sourceCatalog.find(s => s.id === x.certificate?.source_id) || sourceCatalog.find(s => s.id === 'misc');
+// Named sources keep their colour when the catalog is reordered or filtered.
+const sourcePalette = ['forest', 'rust', 'ochre', 'slate', 'berry', 'olive'];
+const sourceHues = { 'decision-theory-unbound': 'forest', 'symmetries-of-value': 'rust', 'unpublished-background-risk': 'ochre', 'seidenfeld-schervish-kadane-2009': 'slate', 'russell-isaacs-2021': 'olive', 'wilkinson-2025': 'berry', misc: 'misc' };
+const sourceColor = s => {
+  const hash = [...s.id].reduce((value, char) => (value * 31 + char.charCodeAt(0)) >>> 0, 0);
+  return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
+};
+const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const graphSearch = { matches: new Set(), index: 0 };
+let graphRelations = new Map();
+let E = null, EC = null, baseE = null, baseEC = null, A = null, layout = null, backgroundConflicts = [], backgroundExcluded = new Map();
+let graphBackgroundE = null, graphInferenceE = null, graphBackgroundConflict = null, graphBackgroundExcluded = new Map();
+let allEvidenceBaseE = null, allEvidenceE = null;
+function passes(x) { return state.allowed.has(sourceOf(x).id) && (!state.leanOnly || x.certificate.lean === 'verified'); }
+function graphRuleVisible(r) {
+  if (state.unpublishedOnly && sourceOf(r).kind === 'published-paper') return false;
+  if (r.status === 'proved') return !state.conjectureOnly && passes(r);
+  return (state.showConj || state.conjectureOnly) && (!state.leanOnly || r.certificate.lean === 'verified');
+}
+function recompute() {
+  graphRelations.clear();
+  // Hiding an arrow does not withdraw a proved consequence of the selected
+  // background. Keep this graph context separate from source-filtered evidence
+  // in the theory explorer and conjecture-resolution views. Never use conjectures
+  // to establish automatic premises, exclusions, or background consistency.
+  graphBackgroundE = new Engine(ids, R.filter(r => r.status === 'proved'), [], [...background], [...negativeBackground]);
+  graphBackgroundConflict = graphBackgroundE.conflict([]);
+  graphBackgroundExcluded = new Map(graphBackgroundConflict ? [] : ids.map(id => [id, graphBackgroundE.excludes([], id)]).filter(([, proof]) => proof));
+  const rules = R.filter(r => r.status === 'proved' && passes(r));
+  // Retain the actual proofs of automatic positive facts in transitive queries,
+  // so hidden background arrows remain traceable without restoring other arrows
+  // from deselected sources.
+  const automatic = graphBackgroundE.cl([]);
+  const backgroundProofs = new Set([...automatic.facts].flatMap(p => chain(p, automatic.why, graphBackgroundE.byId)));
+  graphInferenceE = new Engine(ids, R.filter(r => r.status === 'proved' && (graphRuleVisible(r) || backgroundProofs.has(r.id))), [], [...background], [...new Set([...negativeBackground, ...graphBackgroundExcluded.keys()])]);
+  const models = MODELS.filter(m => m.status === 'proved' && passes(m));
+  baseE = new Engine(ids, rules, models, topicBackground);
+  baseEC = new Engine(ids, R.filter(passes), MODELS.filter(passes), topicBackground);
+  // A model with unknown or false background assumptions is not a witness
+  // for the restricted theory. Never manufacture its missing assumptions.
+  const fits = engine => engine.models.filter(m => !engine.modelConflicts.has(m.id) && [...background].every(p => engine.holds.get(m.id).has(p)) && [...negativeBackground].every(p => engine.fails.get(m.id).has(p)));
+  // Compare the selected evidence with the complete recorded proved evidence,
+  // under exactly the same background. Missing sources do not reopen a question.
+  allEvidenceBaseE ||= new Engine(ids, R.filter(r => r.status === 'proved'), MODELS.filter(m => m.status === 'proved'), topicBackground);
+  allEvidenceE = new Engine(ids, allEvidenceBaseE.rules, fits(allEvidenceBaseE), [...background], [...negativeBackground]);
+  E = new Engine(ids, rules, fits(baseE), [...background], [...negativeBackground]);
+  const conflict = E.conflict([]);
+  backgroundConflicts = conflict ? [conflict] : [];
+  backgroundExcluded = new Map(conflict ? [] : ids.map(id => [id, E.excludes([], id)]).filter(([,proof]) => proof));
+  EC = new Engine(ids, R.filter(passes), fits(baseEC), [...background], [...negativeBackground]);
+  const pair = new Map(); for (const a of ids) for (const b of ids) if (a !== b) pair.set(a + '|' + b, E.pair(a, b));
+  const classes = [], seen = new Set();
+  for (const a of ids) { if (seen.has(a)) continue; const cls = [a, ...ids.filter(b => b !== a && pair.get(a + '|' + b).status === 'implies' && pair.get(b + '|' + a).status === 'implies')]; cls.forEach(x => seen.add(x)); classes.push(cls); }
+  A = { pair, classes };
+}
+function pairStatus(a, b) {
+  if (isNegative(a) || isNegative(b)) return literalPair(a, b);
+  const base = A.pair.get(a + '|' + b);
+  if (base.status !== 'open' || !state.showConj) return base;
+  const c = EC.pair(a, b); return c.status !== 'open' ? { ...c, status: c.status + '?' } : base;
+}
+function name(id) { if (isNegative(id)) return '¬' + name(baseId(id)); return id === FALSE ? "False (⊥)" : byPid.get(id)?.name || id; }
+function esc(s) { return String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function fmt(s) { return esc(s.trim()).split(/\n\s*\n/).map(x => x.replace(/\s*\n\s*/g, ' ')).join('<br><br>'); }
+
+// ---------------------------------------------------------------- layout
+// Signed queries stay within Horn logic: negative assumptions forbid facts.
+// A query for ¬Q tests whether adding Q causes a conflict; no truth-table search.
+function literalPair(a, b) {
+  const key = a + '|' + b;
+  if (graphRelations.has(key)) return graphRelations.get(key);
+  const result = literalImplication([a], b);
+  graphRelations.set(key, result);
+  return result;
+}
+function literalImplication(premises, b) {
+  const positive = premises.filter(p => !isNegative(p)), negative = premises.filter(isNegative).map(baseId);
+  const conflict = graphInferenceE.conflict(positive, negative);
+  const conflictProof = proof => [...new Set([...proof.via, ...(graphBackgroundExcluded.get(proof.target)?.via || [])])];
+  let result = {status: 'open', via: []};
+  if (conflict) result = {status: 'inconsistent', via: conflictProof(conflict)};
+  else if (isNegative(b)) {
+    const proof = graphInferenceE.conflict([...positive, baseId(b)], negative);
+    if (proof) result = {status: 'implies', via: conflictProof(proof)};
+  } else {
+    const {facts, why} = graphInferenceE.cl(positive);
+    if (facts.has(b)) result = {status: 'implies', via: chain(b, why, graphInferenceE.byId)};
+  }
+  return result;
+}
+function literalFollows(literal) {
+  return isNegative(literal) ? graphBackgroundExcluded.has(baseId(literal)) : graphBackgroundE.cl([]).facts.has(literal);
+}
+function buildGraph() {
+  const cls = A.classes;
+  const classOf = new Map(); cls.forEach((c, i) => c.forEach(x => classOf.set(x, i)));
+  // Search reveals matching positive nodes temporarily, preserving the user's
+  // graph selections and background when the query is cleared.
+  const hidden = literal => inBackground(baseId(literal)) || (isNegative(literal) ? !state.negativeShown.has(baseId(literal)) : state.excluded.has(literal) && !graphSearch.matches.has(literal));
+  const nodeFor = literal => literal === FALSE ? 'falsity' : (isNegative(literal) ? 'n' : 'c') + classOf.get(baseId(literal));
+  const nodes = [];
+  cls.forEach((c, i) => {
+    for (const negative of [false, true]) {
+      const members = c.map(p => negative ? '!' + p : p).filter(p => !hidden(p));
+      if (members.length) nodes.push({id: (negative ? 'n' : 'c') + i, kind: 'class', members});
+    }
+  });
+  const nodeIds = new Set(nodes.map(n => n.id));
+  const edges = [], signatures = new Set(), junctionByPremises = new Map();
+  function addRule(r, premises, conclusion, key, contraposed = false) {
+    // Assumed premises disappear from the displayed conjunction. An explicitly
+    // forbidden conclusion becomes False, while the original record is retained.
+    const remaining = premises.filter(p => !literalFollows(p));
+    if (literalFollows(conclusion)) return;
+    if (literalFollows(negate(conclusion))) conclusion = FALSE;
+    if (!remaining.length || remaining.some(p => !nodeIds.has(nodeFor(p)))) return;
+    const to = nodeFor(conclusion);
+    if (to !== 'falsity' && !nodeIds.has(to)) return;
+    const prem = [...new Set(remaining.map(nodeFor))];
+    if (prem.includes(to)) return;
+    const signature = r.id + '|' + [...prem].sort().join(',') + '>' + to;
+    if (signatures.has(signature)) return;
+    signatures.add(signature);
+    if (to === 'falsity' && !nodeIds.has(to)) {
+      nodes.push({id: to, kind: 'falsity', members: [FALSE]}); nodeIds.add(to);
+    }
+    const display = remaining.map(name).join(' ∧ ') + ' ⇒ ' + name(conclusion);
+    const common = {r, type: 'direct', key, display, contraposed, premises: remaining, conclusion};
+    if (prem.length === 1) edges.push({...common, id: key, from: prem[0], to});
+    else {
+      const premiseKey = [...prem].sort().join(',');
+      let j = junctionByPremises.get(premiseKey);
+      if (!j) {
+        j = {id: 'j:' + key, kind: 'junction', r, key, display};
+        junctionByPremises.set(premiseKey, j); nodes.push(j);
+        prem.forEach(from => edges.push({...common, id: key + '←' + from, from, to: j.id, toJunction: true}));
+      }
+      edges.push({...common, id: key + '→', from: j.id, to, fromJunction: true});
+    }
+  }
+  for (const r of R.filter(graphRuleVisible)) {
+    addRule(r, r.premises, r.conclusion, r.id);
+    for (const p of r.premises) {
+      // A ∧ B ⇒ C gives A ∧ ¬C ⇒ ¬B, never ¬C ⇒ ¬B by itself.
+      if (hidden('!' + p) && !background.has(p)) continue;
+      const premises = r.premises.filter(q => q !== p);
+      if (r.conclusion !== FALSE) premises.push('!' + r.conclusion);
+      addRule(r, premises, '!' + p, r.id + ':not:' + p, true);
+    }
+  }
+  {
+    const classes = nodes.filter(n => n.kind === 'class');
+    const have = new Set(edges.filter(e => !e.toJunction).map(e => e.from + '>' + e.to));
+    function addTransitive(from, to, premises, conclusion, via) {
+      const pair = from + '>' + to;
+      if (from === to || have.has(pair)) return;
+      if (from.startsWith('j:') && premises.some(p => nodeFor(p) === to)) return;
+      have.add(pair);
+      const key = 'd:' + pair;
+      edges.push({id: key, key, from, to, type: 'derived', fromJunction: from.startsWith('j:'),
+        via: [...new Set(via)], premises, a: premises[0], b: conclusion,
+        conjectured: via.some(id => byRid.get(id)?.status === 'conjectured'),
+        display: premises.map(name).join(' ∧ ') + ' ⇒ ' + name(conclusion)});
+    }
+    // Include the complete proved implication relation, even when an
+    // intermediate principle is hidden. Do not apply transitive reduction.
+    for (const a of classes) for (const b of classes) {
+      if (a === b || literalFollows(b.members[0]) || have.has(a.id + '>' + b.id)) continue;
+      const st = literalPair(a.members[0], b.members[0]);
+      if (st.status !== 'implies') continue;
+      addTransitive(a.id, b.id, [a.members[0]], b.members[0], st.via);
+    }
+    // Later rules can need both an earlier conclusion and one of the original
+    // conjuncts. Query the full premise set, never each conjunct separately.
+    for (const j of nodes.filter(n => n.kind === 'junction')) {
+      const origin = edges.find(e => e.from === j.id);
+      const inputs = new Set(edges.filter(e => e.to === j.id).map(e => e.from));
+      for (const b of classes) {
+        if (inputs.has(b.id) || literalFollows(b.members[0])) continue;
+        const st = literalImplication(origin.premises, b.members[0]);
+        if (st.status === 'implies') addTransitive(j.id, b.id, origin.premises, b.members[0], st.via);
+      }
+    }
+    // A conjunction's downstream consequences start at its junction. Incoming
+    // strokes only collect premises: A → (A ∧ B) is not an implication.
+    const outgoing = new Map(nodes.map(n => [n.id, []]));
+    for (const e of edges) if (!e.toJunction) outgoing.get(e.from).push(e);
+    const byNode = new Map(nodes.map(n => [n.id, n]));
+    for (const start of nodes.filter(n => n.kind !== 'falsity')) {
+      const first = outgoing.get(start.id);
+      const premises = start.kind === 'junction' ? first[0].premises : [start.members[0]];
+      const seen = new Set([start.id]), queue = [{id: start.id, via: []}];
+      for (let i = 0; i < queue.length; i++) {
+        const step = queue[i];
+        for (const edge of outgoing.get(step.id)) {
+          if (seen.has(edge.to)) continue;
+          seen.add(edge.to);
+          const via = [...step.via, ...(edge.via || [edge.r.id])];
+          queue.push({id: edge.to, via});
+          addTransitive(start.id, edge.to, premises, byNode.get(edge.to).members[0], via);
+        }
+      }
+    }
+  }
+  // For the same conclusion, A ⇒ C makes A ∧ B ⇒ C redundant in this
+  // context. Compare actual displayed premise sets, after background reduction
+  // and transitive expansion. Keep ordinary singleton transitive arrows.
+  const byConclusion = new Map();
+  for (const edge of edges.filter(e => !e.toJunction)) {
+    const candidate = {edge, premises: new Set(edge.premises.map(nodeFor)),
+      conjectured: edge.conjectured || edge.r?.status === 'conjectured'};
+    if (!byConclusion.has(edge.to)) byConclusion.set(edge.to, []);
+    byConclusion.get(edge.to).push(candidate);
+  }
+  const redundant = new Set();
+  for (const candidates of byConclusion.values()) for (const wider of candidates) {
+    if (wider.premises.size < 2) continue;
+    if (candidates.some(narrower => narrower.premises.size < wider.premises.size
+        && [...narrower.premises].every(p => wider.premises.has(p))
+        // A conjecture cannot displace an established implication.
+        && (wider.conjectured || !narrower.conjectured))) redundant.add(wider.edge.id);
+  }
+  const remaining = edges.filter(e => !redundant.has(e.id));
+  const junctions = new Set(remaining.filter(e => e.fromJunction).map(e => e.from));
+  const keptEdges = remaining.filter(e => !e.toJunction || junctions.has(e.to));
+  const keptNodes = nodes.filter(n => n.kind === 'junction' ? junctions.has(n.id)
+    : n.kind !== 'falsity' || keptEdges.some(e => e.to === n.id));
+  // A junction can still have another, nonredundant conclusion. Keep its full
+  // premise collection, and point inspection at that surviving implication.
+  for (const j of keptNodes.filter(n => n.kind === 'junction')) {
+    const consequences = keptEdges.filter(e => e.from === j.id);
+    const anchor = consequences.find(e => !(e.conjectured || e.r?.status === 'conjectured')) || consequences[0];
+    j.shared = consequences.length > 1;
+    j.premises = anchor.premises;
+    j.key = anchor.key; j.display = anchor.display;
+    for (const incoming of keptEdges.filter(e => e.to === j.id)) {
+      const {id, from, to} = incoming;
+      Object.assign(incoming, anchor, {id, from, to, r: anchor.r, contraposed: anchor.contraposed, toJunction: true, fromJunction: false});
+    }
+  }
+  return {nodes: keptNodes, edges: keptEdges, classOf};
+}
+
+function computeLayout(g) {
+  const nodes = g.nodes, edges = g.edges;
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const out = new Map(nodes.map(n => [n.id, []])), inn = new Map(nodes.map(n => [n.id, []]));
+  for (const e of edges) { out.get(e.from).push(e); inn.get(e.to).push(e); }
+  const degree = n => out.get(n.id).length + inn.get(n.id).length;
+  const showIsolated = state.showIso && !state.conjectureOnly && !state.unpublishedOnly;
+  const visible = nodes.filter(n => n.kind === 'junction' || degree(n) > 0 || showIsolated || n.members?.some(p => graphSearch.matches.has(baseId(p))));
+  const vis = new Set(visible.map(n => n.id));
+  // Unconnected nodes have no neighbours to follow during straightening.
+  // Keep them out of the tree layout and pack them against its final bounds.
+  const isolated = visible.filter(n => degree(n) === 0);
+  const connected = visible.filter(n => degree(n) > 0);
+  const classes = connected.filter(n => n.kind === 'class');
+  const rep = n => n.members[0];
+  const implies = (a, b) => a.kind === 'class' && b.kind === 'class' && literalPair(rep(a), rep(b)).status === 'implies';
+  // Layering follows logical strength: the derived implication order on classes
+  // (a DAG, since classes are its strongly connected components), plus junction
+  // constraints for results whose conclusion is not stronger than every premise.
+  const rankEdges = [];  // [fromId, toId, priority]
+  // With only conjectures visible, their direction still needs a readable
+  // layout. These placement constraints never enter the proof engine.
+  const conjectureOnly = edges.length > 0 && edges.every(e => e.conjectured || e.r?.status === 'conjectured');
+  if (conjectureOnly) for (const e of edges) if (!e.toJunction && !e.fromJunction) rankEdges.push([e.from, e.to, 2]);
+  for (const e of edges) if (byId.get(e.to).kind === 'falsity' && !e.fromJunction && e.r?.status === 'proved') rankEdges.push([e.from, e.to, 1]);
+  for (const a of classes) for (const b of classes) if (a !== b && implies(a, b)) {
+    const reducible = classes.some(k => k !== a && k !== b && implies(a, k) && implies(k, b));
+    if (!reducible) rankEdges.push([a.id, b.id, 0]);
+  }
+  const upward = new Set();
+  for (const j of connected.filter(n => n.kind === 'junction')) {
+    const prem = edges.filter(e => e.to === j.id).map(e => byId.get(e.from));
+    const consequences = edges.filter(e => e.from === j.id);
+    if (consequences.every(e => prem.every(p => implies(byId.get(e.to), p)))) { upward.add(j.id); continue; }
+    const ranked = conjectureOnly ? consequences : consequences.filter(e => !(e.conjectured || e.r?.status === 'conjectured'));
+    if (!ranked.length) continue;
+    prem.forEach(p => rankEdges.push([p.id, j.id, 1]));
+    ranked.forEach(e => rankEdges.push([j.id, e.to, 1]));
+  }
+  // break any remaining cycles (mixed junctions) by DFS, preferring to keep strength edges
+  const rOut = new Map(connected.map(n => [n.id, []]));
+  rankEdges.sort((p, q) => p[2] - q[2]).forEach(e => rOut.get(e[0]).push(e));
+  const color = new Map(); const dropped = new Set();
+  const dfs = u => { color.set(u, 1); for (const e of rOut.get(u)) { const c = color.get(e[1]) || 0; if (c === 1) dropped.add(e); else if (c === 0) dfs(e[1]); } color.set(u, 2); };
+  for (const n of connected) if (!color.get(n.id)) dfs(n.id);
+  const fwd = rankEdges.filter(e => !dropped.has(e));
+  const rank = new Map(connected.map(n => [n.id, 0]));
+  let changed = true, guard = 0;
+  while (changed && guard++ < 1000) { changed = false; for (const [f, t] of fwd) { const r = rank.get(f) + 1; if (r > rank.get(t)) { rank.set(t, r); changed = true; } } }
+  // classes on even layers; junctions just above (or, for upward results, just below) their conclusion
+  const layerOf = new Map();
+  for (const n of connected.filter(n => n.kind !== 'junction')) layerOf.set(n.id, 2 * rank.get(n.id));
+  for (const j of connected.filter(n => n.kind === 'junction')) {
+    const conclusionLayers = edges.filter(e => e.from === j.id).map(e => layerOf.get(e.to));
+    layerOf.set(j.id, upward.has(j.id) ? Math.max(...conclusionLayers) + 1 : Math.min(...conclusionLayers) - 1);
+  }
+  // compress empty layers
+  const used = [...new Set(layerOf.values())].sort((a, b) => a - b);
+  const compact = new Map(used.map((l, i) => [l, i]));
+  const layers = used.map(() => []);
+  for (const n of connected) layers[compact.get(layerOf.get(n.id))].push(n);
+  const back = new Set(edges.filter(e => vis.has(e.from) && vis.has(e.to) && layerOf.get(e.from) >= layerOf.get(e.to)).map(e => e.id));
+  // node sizes
+  const measure = n => {
+    if (n.kind === 'junction') return { w: 22, h: 22 };
+    const longest = Math.max(...n.members.map(m => name(m).length));
+    return { w: Math.max(80, longest * 7.2 + 26), h: 16 + 17 * n.members.length + (n.members.length > 1 ? 12 : 0) };
+  };
+  const size = new Map(visible.map(n => [n.id, measure(n)]));
+  // ordering by barycenter sweeps
+  const pos = new Map(); layers.forEach(L => L.forEach((n, i) => pos.set(n.id, i)));
+  const neighbors = (n, dir) => (dir > 0 ? inn : out).get(n.id).filter(e => vis.has(e.from) && vis.has(e.to)).map(e => dir > 0 ? e.from : e.to);
+  for (let it = 0; it < 12; it++) {
+    const down = it % 2 === 0;
+    const order = down ? layers.keys() : [...layers.keys()].reverse();
+    for (const li of order) {
+      const L = layers[li];
+      const bc = new Map(L.map(n => { const nb = neighbors(n, down ? 1 : -1); return [n.id, nb.length ? nb.reduce((s, x) => s + pos.get(x), 0) / nb.length : pos.get(n.id)]; }));
+      L.sort((a, b) => bc.get(a.id) - bc.get(b.id) || pos.get(a.id) - pos.get(b.id));
+      L.forEach((n, i) => pos.set(n.id, i));
+    }
+  }
+  // initial x by cumulative widths, centred
+  const GAP = 28, ROW = 96;
+  const x = new Map(), y = new Map();
+  layers.forEach((L, li) => {
+    let cx = 0; const widths = L.map(n => size.get(n.id).w); const total = widths.reduce((s, w) => s + w, 0) + GAP * (L.length - 1);
+    cx = -total / 2;
+    L.forEach((n, i) => { x.set(n.id, cx + widths[i] / 2); cx += widths[i] + GAP; y.set(n.id, li * ROW); });
+  });
+  // Move toward neighbours, then find the nearest non-overlapping positions
+  // in this layer. Pool adjacent blocks whose desired positions conflict;
+  // unlike one-way overlap pushes, this preserves their centre of mass and
+  // cannot accumulate a sideways drift on each straightening pass.
+  for (let it = 0; it < 40; it++) {
+    for (const L of layers) {
+      const offsets = [], blocks = [];
+      let offset = 0;
+      L.forEach((n, i) => {
+        if (i) offset += size.get(L[i - 1].id).w / 2 + GAP + size.get(n.id).w / 2;
+        offsets.push(offset);
+        const nb = [...neighbors(n, 1), ...neighbors(n, -1)];
+        const target = nb.length ? nb.reduce((s, m) => s + x.get(m), 0) / nb.length : x.get(n.id);
+        blocks.push({start: i, end: i, sum: (x.get(n.id) + target) / 2 - offset, count: 1});
+        while (blocks.length > 1) {
+          const b = blocks[blocks.length - 1], a = blocks[blocks.length - 2];
+          if (a.sum / a.count <= b.sum / b.count) break;
+          blocks.splice(-2, 2, {start: a.start, end: b.end, sum: a.sum + b.sum, count: a.count + b.count});
+        }
+      });
+      for (const block of blocks) for (let i = block.start; i <= block.end; i++)
+        x.set(L[i].id, block.sum / block.count + offsets[i]);
+    }
+  }
+  // Disconnected components must not push one another around in the global
+  // straightening sweeps. Lay each one out independently, then pack its bounds.
+  const remaining = new Set(connected.map(n => n.id)), components = [];
+  while (remaining.size) {
+    const ids = [remaining.values().next().value]; remaining.delete(ids[0]);
+    for (let i = 0; i < ids.length; i++) {
+      for (const e of [...out.get(ids[i]), ...inn.get(ids[i])]) {
+        const next = e.from === ids[i] ? e.to : e.from;
+        if (remaining.delete(next)) ids.push(next);
+      }
+    }
+    components.push(new Set(ids));
+  }
+  if (components.length > 1) {
+    const gap = 40;
+    const pieces = components.map(members => {
+      const part = computeLayout({nodes: connected.filter(n => members.has(n.id)), edges: edges.filter(e => members.has(e.from) && members.has(e.to))});
+      const xs = [], ys = [];
+      for (const n of part.visible) {
+        const s = part.size.get(n.id);
+        xs.push(part.x.get(n.id) - s.w/2, part.x.get(n.id) + s.w/2);
+        ys.push(part.y.get(n.id) - s.h/2, part.y.get(n.id) + s.h/2);
+      }
+      // Reserve space for curved arrows as well as boxes; components must not
+      // overlap when a backwards arrow bends above the top row.
+      for (const e of part.edges) for (const p of edgeGeometry(e, part).points) { xs.push(p.x); ys.push(p.y); }
+      const left = Math.min(...xs), top = Math.min(...ys);
+      return {part, left, top, width: Math.max(...xs) - left, height: Math.max(...ys) - top};
+    }).sort((a, b) => b.width*b.height - a.width*a.height);
+    const area = pieces.reduce((sum, p) => sum + (p.width + gap)*(p.height + gap), 0);
+    const widest = Math.max(...pieces.map(p => p.width));
+    function pack(wrapWidth) {
+      const placed = [];
+      for (const original of pieces) {
+        const piece = {...original};
+        // Bottom-left skyline packing fills space beside tall clusters instead
+        // of leaving a whole shelf empty beneath their shorter neighbours.
+        const candidates = [0, ...placed.map(p => p.px + p.width + gap)];
+        let best = null;
+        for (const px of candidates) {
+          if (px + piece.width > wrapWidth + .001) continue;
+          const below = placed.filter(p => px < p.px + p.width + gap - .001 && px + piece.width + gap > p.px + .001);
+          const py = Math.max(0, ...below.map(p => p.py + p.height + gap));
+          if (!best || py < best.py || py === best.py && px < best.px) best = {px, py};
+        }
+        Object.assign(piece, best); placed.push(piece);
+      }
+      const width = Math.max(...placed.map(p => p.px + p.width));
+      const height = Math.max(...placed.map(p => p.py + p.height));
+      return {placed, score: Math.max(width / 1.6, height), area: width * height};
+    }
+    // A single estimated width can miss a column by a few pixels and create
+    // a needlessly tall arrangement. Try a few widths and choose the best fit.
+    const choices = [...new Set([.85, 1, 1.2, 1.5].map(f => Math.max(widest, Math.sqrt(area * 1.6) * f)))].map(pack);
+    choices.sort((a, b) => a.score - b.score || a.area - b.area);
+    const placed = choices[0].placed;
+    const centre = Math.max(...placed.map(p => p.px + p.width))/2;
+    layers.length = 0; back.clear();
+    for (const piece of placed) {
+      for (const n of piece.part.visible) {
+        x.set(n.id, piece.part.x.get(n.id) + piece.px - piece.left - centre);
+        y.set(n.id, piece.part.y.get(n.id) + piece.py - piece.top);
+      }
+      for (const id of piece.part.back) back.add(id);
+      layers.push(...piece.part.layers);
+    }
+  }
+  if (isolated.length) {
+    const gapX = 24, gapY = 20, treeGap = 56;
+    const left = connected.length ? Math.min(...connected.map(n => x.get(n.id) - size.get(n.id).w / 2)) : 0;
+    const right = connected.length ? Math.max(...connected.map(n => x.get(n.id) + size.get(n.id).w / 2)) : 0;
+    const bottom = connected.length ? Math.max(...connected.map(n => y.get(n.id) + size.get(n.id).h / 2)) : 0;
+    const widest = Math.max(...isolated.map(n => size.get(n.id).w));
+    const area = isolated.reduce((sum, n) => sum + (size.get(n.id).w + gapX) * (size.get(n.id).h + gapY), 0);
+    const naturalWidth = Math.max(480, Math.sqrt(area * 1.6));
+    const wrapWidth = Math.max(widest, connected.length ? Math.min(Math.max(480, right - left), naturalWidth) : naturalWidth);
+    const rows = [];
+    let row = [], rowWidth = 0;
+    for (const n of isolated) {
+      const width = size.get(n.id).w;
+      if (row.length && rowWidth + gapX + width > wrapWidth) {
+        rows.push(row); row = []; rowWidth = 0;
+      }
+      rowWidth += (row.length ? gapX : 0) + width;
+      row.push(n);
+    }
+    if (row.length) rows.push(row);
+    const heights = rows.map(row => Math.max(...row.map(n => size.get(n.id).h)));
+    const totalHeight = heights.reduce((sum, height) => sum + height, 0) + gapY * (rows.length - 1);
+    let top = connected.length ? bottom + treeGap : -totalHeight / 2;
+    rows.forEach((row, i) => {
+      const width = row.reduce((sum, n) => sum + size.get(n.id).w, 0) + gapX * (row.length - 1);
+      let cursor = (left + right - width) / 2;
+      for (const n of row) {
+        x.set(n.id, cursor + size.get(n.id).w / 2);
+        y.set(n.id, top + heights[i] / 2);
+        cursor += size.get(n.id).w + gapX;
+      }
+      top += heights[i] + gapY;
+    });
+    // Sidebar ordering also uses layers; retain every packed principle there.
+    layers.push(...rows);
+  }
+  return { visible, vis, edges: edges.filter(e => vis.has(e.from) && vis.has(e.to)), back, size, x, y, layers, byId };
+}
+
+// ---------------------------------------------------------------- render graph
+const svg = document.getElementById('graph');
+const view = { k: 1, tx: 0, ty: 0 };
+let graphEdgesByKey = new Map(), hoverKey = null;
+const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+function curvePoint(points, t) {
+  const u = 1 - t, [a, b, c, d] = points;
+  return {x: u*u*u*a.x + 3*u*u*t*b.x + 3*u*t*t*c.x + t*t*t*d.x,
+          y: u*u*u*a.y + 3*u*u*t*b.y + 3*u*t*t*c.y + t*t*t*d.y};
+}
+function edgeGeometry(e, L) {
+  const a = {x: L.x.get(e.from), y: L.y.get(e.from)}, d = {x: L.x.get(e.to), y: L.y.get(e.to)};
+  const dx = d.x - a.x, dy = d.y - a.y;
+  const b = {x: a.x + dx * .35, y: a.y + dy * .18};
+  const c = {x: d.x - dx * .35, y: d.y - dy * .18};
+  if (Math.abs(dy) < (L.size.get(e.from).h + L.size.get(e.to).h) / 2 + 12) {
+    b.y = c.y = Math.min(a.y, d.y) - Math.max(55, L.size.get(e.from).h, L.size.get(e.to).h);
+  }
+  function clip(center, control, id) {
+    const size = L.size.get(id), vx = control.x - center.x, vy = control.y - center.y;
+    const scale = L.byId.get(id).kind === 'junction' ? 11 / (Math.hypot(vx, vy) || 1) : 1 / Math.max(Math.abs(vx) / (size.w / 2), Math.abs(vy) / (size.h / 2), .0001);
+    return {x: center.x + vx * scale, y: center.y + vy * scale};
+  }
+  const start = clip(a, b, e.from), end = clip(d, c, e.to);
+  // Keep control points beyond the endpoints even for closely spaced nodes.
+  const moveOutside = (center, point, control) => {
+    if (Math.hypot(control.x-center.x, control.y-center.y) <= Math.hypot(point.x-center.x, point.y-center.y)) {
+      control.x = point.x + (point.x-center.x) * .25;
+      control.y = point.y + (point.y-center.y) * .25;
+    }
+  };
+  moveOutside(a, start, b); moveOutside(d, end, c);
+  const points = [start, b, c, end];
+  let length = 0, previous = start;
+  for (let i = 1; i <= 20; i++) { const next = curvePoint(points, i/20); length += Math.hypot(next.x-previous.x, next.y-previous.y); previous = next; }
+  const mid = curvePoint(points, .52), near = curvePoint(points, .521);
+  const angle = Math.atan2(near.y-mid.y, near.x-mid.x) * 180 / Math.PI;
+  return {points, length, mid, angle, d: `M${start.x},${start.y} C${b.x},${b.y} ${c.x},${c.y} ${end.x},${end.y}`};
+}
+function edgePath(e, L) { return edgeGeometry(e, L).d; }
+function stopFlow() { document.getElementById('flow')?.replaceChildren(); }
+function animateFlow() {
+  stopFlow();
+  if (reducedMotion?.matches || document.hidden || state.tab !== 'graph') return;
+  const layer = document.getElementById('flow'); if (!layer) return;
+  // At most 48 chevrons, only while highlighted. Native SVG motion requires
+  // no animation library, layout reads or per-frame JavaScript work.
+  let html = '', count = 0;
+  for (const element of svg.querySelectorAll('.edge-g.hot')) {
+    const edge = layout.edges.find(e => e.id === element.dataset.segment);
+    if (count >= 48) break;
+    if (!edge || edge.toJunction) continue;
+    const color = edge.r ? sourceColor(sourceOf(edge.r)) : 'var(--derived)';
+    const duration = Math.max(1, edge.geometry.length / 65);
+    for (let i = 0; i < 2 && count < 48; i++, count++) html += `<g class="flow-chevron" style="stroke:${color}"><path d="M-5,-4 L0,0 L-5,4"/><animateMotion path="${edge.geometry.d}" dur="${duration}s" begin="${-i * duration/2}s" repeatCount="indefinite" rotate="auto"/></g>`;
+  }
+  layer.innerHTML = html;
+}
+reducedMotion?.addEventListener('change', () => { if (reducedMotion.matches) stopFlow(); else animateFlow(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden) { hover(null); stopFlow(); } });
+
+function renderGraph() {
+  stopFlow(); hoverKey = null; graphEdgesByKey.clear();
+  const empty = document.getElementById('graph-empty');
+  empty.hidden = true;
+  const warning = document.getElementById('graph-warning');
+  warning.hidden = !graphBackgroundConflict;
+  document.getElementById('fit').disabled = !!graphBackgroundConflict;
+  if (graphBackgroundConflict) {
+    warning.innerHTML = `<h2>Background is inconsistent</h2><p>The background assumptions imply False: they cannot all hold together. All graph arrows are hidden.</p><ol>${graphBackgroundConflict.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol><p>Return a conflicting assumption to the principles list, or clear the added background assumptions. This check uses all recorded proofs, including hidden arrows.</p>`;
+    wire(warning);
+    svg.innerHTML = ''; layout = null;
+    applyGraphSearch();
+    return;
+  }
+  warning.innerHTML = '';
+  const g = buildGraph(); layout = computeLayout(g);
+  const L = layout;
+  empty.hidden = !(state.conjectureOnly || state.unpublishedOnly) || L.edges.length > 0 || graphSearch.matches.size > 0;
+  empty.textContent = state.conjectureOnly && state.leanOnly
+    ? 'No arrows match these filters. Turn off Lean-verified only to show conjectures.'
+    : 'No arrows match these filters.';
+  const defs = `<defs>${[...sourceCatalog.map(s => [sourceMarker(s), sourceColor(s)]), ['derived', 'var(--derived)']].map(([id, color]) => `<marker id="arr-${id}" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="${color}"/></marker>`).join('')}</defs>`;
+  let edgesHtml = '';
+  for (const e of L.edges) {
+    const source = e.toJunction || e.type === 'derived' ? null : sourceOf(e.r);
+    const cls = e.toJunction ? 'premise' : source ? 'source' : 'derived';
+    const conj = !e.toJunction && (e.conjectured || e.r?.status === 'conjectured');
+    const lean = !e.toJunction && e.type !== 'derived' && e.r.certificate.lean === 'verified';
+    const marker = e.toJunction ? '' : `marker-end="url(#arr-${source ? sourceMarker(source) : 'derived'})"`;
+    const key = e.key; graphEdgesByKey.set(key, e);
+    e.geometry = edgeGeometry(e, L);
+    const geometry = e.geometry;
+    const junction = e.toJunction && L.byId.get(e.to).shared ? e.to : null;
+    const label = e.toJunction ? 'Joint premises: ' + e.premises.map(name).join(' ∧ ')
+      : `${conj ? 'Conjecture' : e.type === 'derived' ? 'Derived proof' : 'Recorded proof'}: ${e.display}${e.contraposed ? ' (contrapositive)' : ''}. ${source ? source.name + '. ' : ''}Click for ${conj ? 'supporting statements' : 'proof steps and sources'}.`;
+    edgesHtml += `<g class="edge-g" data-edge="${esc(key)}" data-segment="${esc(e.id)}" data-from="${e.from}" data-to="${e.to}"${junction ? ` data-junction="${esc(junction)}"` : ''}${source ? ` data-source="${esc(source.id)}" style="--source-color:${sourceColor(source)}"` : ''}><title>${esc(label)}</title><path class="edge-hit" d="${geometry.d}"/><path class="edge ${cls}${conj ? ' conjectured' : ''}${lean ? ' lean' : ''}" d="${geometry.d}" ${marker}/>${e.toJunction ? '' : `<path class="direction-chevron" style="stroke:${source ? sourceColor(source) : 'var(--derived)'}" d="M-4,-3 L0,0 L-4,3" transform="translate(${geometry.mid.x},${geometry.mid.y}) rotate(${geometry.angle})"/>`}</g>`;
+  }
+  let nodesHtml = '';
+  for (const n of L.visible) {
+    const s = L.size.get(n.id), x = L.x.get(n.id), y = L.y.get(n.id);
+    if (n.kind === 'junction') {
+      nodesHtml += `<g class="junction" ${n.shared ? `data-junction="${esc(n.id)}"` : `data-connection="${esc(n.key)}"`} data-graph-node="${esc(n.id)}" transform="translate(${x},${y})"><title>${esc(n.premises.map(name).join(' ∧ '))}: all premises together. Click for consequences.</title><circle r="11"/><text>∧</text></g>`;
+    } else if (n.kind === 'falsity') {
+      nodesHtml += `<g class="node falsity" data-falsity="true" transform="translate(${x},${y})"><title>False: the incoming premises are incompatible</title><rect x="${-s.w/2}" y="${-s.h/2}" width="${s.w}" height="${s.h}" rx="5"/><text text-anchor="middle" y="5">False (⊥)</text></g>`;
+    } else {
+      const iso = layout.edges.every(e => e.from !== n.id && e.to !== n.id);
+      const lines = n.members.map((m, i) => `<text data-principle="${esc(m)}" x="0" y="${-s.h / 2 + 8 + 17 * (i + 1) - 4 + (n.members.length > 1 ? 10 : 0)}" text-anchor="middle">${esc(name(m))}</text>`).join('');
+      const eq = n.members.length > 1 ? `<text class="equiv" x="0" y="${-s.h / 2 + 12}" text-anchor="middle">equivalent</text>` : '';
+      const fromBackground = n.members.every(literalFollows);
+      nodesHtml += `<g class="node${iso ? ' iso' : ''}${fromBackground ? ' from-background' : ''}${n.members.some(p => literalFollows(negate(p))) ? ' ruled-out' : ''}${isNegative(n.members[0]) ? ' negative' : ''}" data-class="${n.id}" data-members="${n.members.join(',')}" transform="translate(${x},${y})">${fromBackground ? '<title>Follows from the background assumptions</title>' : ''}<rect x="${-s.w / 2}" y="${-s.h / 2}" width="${s.w}" height="${s.h}" rx="5"/>${eq}${lines}</g>`;
+    }
+  }
+  svg.innerHTML = `${defs}<g id="vp"><g id="edges">${edgesHtml}</g><g id="flow" aria-hidden="true"></g><g id="nodes">${nodesHtml}</g></g>`;
+  applyView(); applySelection(); applyGraphSearch();
+}
+function applyGraphSearch(focus = false) {
+  const matches = [...graphSearch.matches], current = matches[graphSearch.index];
+  document.querySelectorAll('#pr-filters .pr-row, #background-list .background-row').forEach(row => {
+    const id = row.dataset.prRow || row.dataset.backgroundId;
+    row.classList.toggle('search-match', graphSearch.matches.has(id));
+    row.classList.toggle('search-current', id === current);
+  });
+  svg.querySelectorAll('.node').forEach(node => {
+    const members = (node.dataset.members || '').split(',').map(baseId);
+    node.classList.toggle('search-match', members.some(p => graphSearch.matches.has(p)));
+    node.classList.toggle('search-current', members.includes(current));
+  });
+  const status = document.getElementById('graph-search-status');
+  status.textContent = !document.getElementById('graph-search').value.trim() ? '' : !matches.length ? 'No matching principles' :
+    `${graphSearch.index + 1} of ${matches.length}${inBackground(current) ? ' · In background' : state.excluded.has(current) ? ' · Temporarily shown' : ''}${matches.length > 1 ? ' · Enter for next' : ''}`;
+  if (!focus || !current) return;
+  const row = document.querySelector(inBackground(current) ? `[data-background-id="${current}"]` : `[data-pr-row="${current}"]`);
+  row?.scrollIntoView?.({block: 'nearest', inline: 'nearest'});
+  const node = layout?.visible.find(n => n.members?.includes(current));
+  if (node) {
+    const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
+    view.k = Math.min(1.4, (W - 32) / layout.size.get(node.id).w);
+    view.tx = W / 2 - layout.x.get(node.id) * view.k;
+    view.ty = H / 2 - layout.y.get(node.id) * view.k;
+    applyView();
+  }
+}
+function applyView() { const vp = document.getElementById('vp'); if (vp) vp.setAttribute('transform', `translate(${view.tx},${view.ty}) scale(${view.k})`); }
+function fit() {
+  const L = layout; if (!L || !L.visible.length) return;
+  const xs = L.visible.map(n => L.x.get(n.id) - L.size.get(n.id).w / 2), xe = L.visible.map(n => L.x.get(n.id) + L.size.get(n.id).w / 2);
+  const ys = L.visible.map(n => L.y.get(n.id) - L.size.get(n.id).h / 2), ye = L.visible.map(n => L.y.get(n.id) + L.size.get(n.id).h / 2);
+  const controls = L.edges.flatMap(e => e.geometry?.points || []);
+  const minX = Math.min(...xs, ...controls.map(p => p.x)) - 70, maxX = Math.max(...xe, ...controls.map(p => p.x)) + 70, minY = Math.min(...ys, ...controls.map(p => p.y)) - 40, maxY = Math.max(...ye, ...controls.map(p => p.y)) + 40;
+  const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
+  view.k = Math.min(W / (maxX - minX), H / (maxY - minY), 1.4);
+  view.tx = (W - (maxX + minX) * view.k) / 2; view.ty = (H - (maxY + minY) * view.k) / 2;
+  applyView();
+}
+// pan / zoom
+(function () {
+  let drag = null;
+  svg.addEventListener('pointerdown', ev => { if (ev.button !== 0) return; drag = { x: ev.clientX, y: ev.clientY, tx: view.tx, ty: view.ty, moved: false, target: ev.target }; svg.setPointerCapture(ev.pointerId); });
+  svg.addEventListener('pointermove', ev => { if (!drag) return; const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true; view.tx = drag.tx + dx; view.ty = drag.ty + dy; applyView(); });
+  svg.addEventListener('pointerup', () => { if (drag && !drag.moved) handleGraphClick(drag.target); drag = null; });
+  svg.addEventListener('wheel', ev => { ev.preventDefault(); const f = Math.exp(-ev.deltaY * 0.0015); const r = svg.getBoundingClientRect(); const mx = ev.clientX - r.left, my = ev.clientY - r.top; view.tx = mx - (mx - view.tx) * f; view.ty = my - (my - view.ty) * f; view.k *= f; applyView(); }, { passive: false });
+  svg.addEventListener('pointermove', ev => { const t = ev.target.closest('.node,.junction,.edge-g'); hover(t ? (t.dataset.falsity ? { node: 'falsity' } : t.dataset.junction ? { node: t.dataset.junction } : t.dataset.class ? { node: t.dataset.class } : { result: t.dataset.connection || t.dataset.edge }) : null); });
+  svg.addEventListener('pointerleave', () => hover(null));
+})();
+function handleGraphClick(target) {
+  const t = target.closest('.node,.junction,.edge-g');
+  if (!t) { select(null); return; }
+  if (t.dataset.falsity) select({type: 'falsity'});
+  else if (t.dataset.junction) select({type: 'junction', id: t.dataset.junction});
+  else if (t.dataset.class) select({ type: 'principle', id: target.closest('[data-principle]')?.dataset.principle || t.dataset.members.split(',')[0] });
+  else {
+    const edge = graphEdgesByKey.get(t.dataset.connection || t.dataset.edge);
+    selectGraphEdge(edge);
+  }
+}
+function selectGraphEdge(edge) {
+  if (edge?.r) select({type: 'result', id: edge.r.id, display: edge.display, contraposed: edge.contraposed});
+  else if (edge) select({type: 'pair', a: edge.a, b: edge.b, premises: edge.premises, via: edge.via, conjectured: edge.conjectured});
+}
+function hover(h) {
+  const key = h ? (h.node ? 'node:' + h.node : 'edge:' + h.result) : null;
+  if (key === hoverKey) return;
+  hoverKey = key; stopFlow();
+  const nodes = svg.querySelectorAll('.node,.junction'), edges = svg.querySelectorAll('.edge-g');
+  if (!h) { nodes.forEach(n => n.classList.remove('dim', 'hot')); edges.forEach(e => e.classList.remove('dim', 'hot')); return; }
+  const hotNodes = new Set(), hotEdges = new Set();
+  if (h.node) {
+    hotNodes.add(h.node);
+    edges.forEach(e => { if (e.dataset.from === h.node || e.dataset.to === h.node) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    // junction: include its other endpoints
+    edges.forEach(e => { if (hotNodes.has(e.dataset.from) && e.dataset.from.startsWith('j:') || hotNodes.has(e.dataset.to) && e.dataset.to.startsWith('j:')) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+  } else if (h.result) {
+    edges.forEach(e => { if (e.dataset.edge === h.result) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    hotNodes.add('j:' + h.result);
+    edges.forEach(e => { if (e.dataset.to.startsWith('j:') && hotNodes.has(e.dataset.to)) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); } });
+  }
+  nodes.forEach(n => { const id = n.dataset.falsity ? 'falsity' : n.dataset.class || n.dataset.graphNode; n.classList.toggle('hot', hotNodes.has(id)); n.classList.toggle('dim', !hotNodes.has(id)); });
+  edges.forEach(e => { e.classList.toggle('hot', hotEdges.has(e.dataset.segment)); e.classList.toggle('dim', !hotEdges.has(e.dataset.segment)); });
+  animateFlow();
+}
+function applySelection() {
+  const sel = state.selected;
+  svg.querySelectorAll('.node').forEach(n => n.classList.toggle('selected', !!sel && sel.type === 'principle' && (n.dataset.members || '').split(',').includes(sel.negative ? '!' + sel.id : sel.id)));
+}
+
+
+
+// ---------------------------------------------------------------- model explorer
+function principleOrder() { return layout ? [...new Set(layout.layers.flat().filter(n => n.kind === 'class').flatMap(n => n.members.map(baseId)).concat(ids))] : ids; }
+function modelEvidence(m, c) {
+  if (!m || !passes(m) || (m.status !== 'proved' && !state.showConj)) return null;
+  if (m.satisfies.includes(c)) return { value: true, items: [m], rules: [], direct: true };
+  if (m.violates.includes(c)) return { value: false, items: [m], rules: [], direct: true };
+  if (m.status !== 'proved') return null;
+  let value, rules, contradiction;
+  if (baseE.holds.get(m.id)?.has(c)) {
+    value = true;
+    rules = chain(c, baseE.cl(m.satisfies).why, baseE.byId);
+  } else if (baseE.fails.get(m.id)?.has(c)) {
+    value = false;
+    const trial = baseE.conflict([...m.satisfies, c], m.violates);
+    contradiction = trial.target; rules = trial.via;
+  } else return null;
+  return { value, rules, contradiction, direct: false, items: [m, ...rules.map(id => byRid.get(id))] };
+}
+function evidenceBadges(e) {
+  return [...new Set(e.items.map(sourceOf))].map(sourceBadge).join('') + (e.items.some(x => x.status === 'conjectured') ? '<span class="badge conj">conjecture</span>' : '');
+}
+function sourceBadge(s) { return `<span class="badge source" data-source="${esc(s.id)}" style="--source-color:${sourceColor(s)}">${esc(s.name)}</span>`; }
+function verdictButton(m, c, e, compact = false) {
+  return e ? `<button class="verdict" data-verdict="${c}" data-verdict-model="${m.id}" title="View evidence for ${esc(name(c))}" aria-label="${esc(name(c))}: ${e.value ? 'satisfied' : 'violated'}${e.direct ? '' : ', derived'}; view evidence"><span class="model-flag">${e.value ? '✓' : '✗'}${e.direct ? '' : ' derived'}</span> ${compact ? '<span class="evidence-link">evidence ↗</span>' : evidenceBadges(e)}</button>` : '<span class="via">? unknown</span>';
+}
+function principleGroups() {
+  const sorted = [...P].sort((a, b) => a.name.localeCompare(b.name));
+  const categories = T.principle_categories || [];
+  if (!categories.length) return [{ id: 'all', name: 'Principles', principles: sorted }];
+  const groups = categories.map(c => ({ ...c, principles: sorted.filter(p => p.category === c.id) }));
+  const ungrouped = sorted.filter(p => !categories.some(c => c.id === p.category));
+  if (ungrouped.length) groups.push({ id: 'uncategorized', name: 'Other principles', principles: ungrouped });
+  return groups.filter(g => g.principles.length);
+}
+function assumptionButtons(id, follows = false, ruledOut = false) {
+  const fixed = topicBackground.includes(id);
+  return `<span class="seg assumption-choice" role="group" aria-label="Assume ${esc(name(id))}"><button data-assume-positive="${id}" class="${follows && !background.has(id) ? 'auto-positive' : ''}" title="${follows && !background.has(id) ? 'Follows from background; click to assume explicitly' : background.has(id) ? 'Click again to remove this assumption' : 'Assume this principle'}" aria-label="Assume ${esc(name(id))}" aria-pressed="${background.has(id)}"${fixed ? ' disabled' : ''}>✓</button><button data-assume-negative="${id}" class="${ruledOut && !negativeBackground.has(id) ? 'auto-negative' : ''}" title="${ruledOut && !negativeBackground.has(id) ? 'Ruled out by background; click to assume explicitly' : negativeBackground.has(id) ? 'Click again to remove this assumption' : 'Assume this negation'}" aria-label="Assume not ${esc(name(id))}" aria-pressed="${negativeBackground.has(id)}"${fixed ? ' disabled' : ''}>✗</button></span>`;
+}
+function wireAssumptions(el) {
+  for (const [attribute, sign] of [['assume-positive', 'positive'], ['assume-negative', 'negative']]) {
+    el.querySelectorAll(`[data-${attribute}]`).forEach(button => button.addEventListener('click', () => {
+      const id = button.getAttribute('data-' + attribute);
+      // In the background these choices are exclusive, never graph visibility.
+      const selected = sign === 'positive' ? background.has(id) : negativeBackground.has(id);
+      setAssumption(id, selected ? null : sign);
+    }));
+  }
+}
+function renderModels() {
+  const candidate = byMid.get(state.modelId);
+  const inspected = candidate && passes(candidate) && (candidate.status === 'proved' || state.showConj) ? candidate : null;
+  const IN = [...background], OUT = [...negativeBackground];
+  const conflict = E.conflict([]), implied = conflict ? new Set() : E.cl([]).facts;
+  let h = `<div class="ex"><div class="ex-col"><div class="ex-head">Principles <span class="n">${backgroundIds().length} assumed</span></div><div class="explorer-actions">${backgroundPresets.map(p => `<button class="btn small" data-background-preset="${esc(p.id)}">Background ${esc(p.name)}</button>`).join('')}<button class="btn small" id="ex-clear">clear background</button></div>`;
+  if (inspected) h += `<div class="inspection-note">Inspecting <b>${esc(inspected.name)}</b> <button class="lnk" id="ex-deselect">clear selection</button></div>`;
+  h += '<div id="model-principles">';
+  for (const group of principleGroups()) {
+    h += `<section class="model-category" data-model-category="${esc(group.id)}"><h3>${esc(group.name)}</h3><ul class="ex-list">`;
+    for (const p of group.principles) {
+      const id = p.id, positive = background.has(id), negative = negativeBackground.has(id);
+      const follows = !conflict && implied.has(id), ruledOut = !conflict && backgroundExcluded.has(id);
+      const evidence = inspected && modelEvidence(inspected, id);
+      const tint = inspected ? evidence ? evidence.value ? 'model-in' : 'model-out' : '' : positive ? 'in' : negative ? 'out' : follows ? 'fin' : ruledOut ? 'fout' : '';
+      h += `<li class="ex-p ${tint}" data-assumption-row="${id}">${assumptionButtons(id, follows, ruledOut)}<div class="principle-line"><button class="lnk" data-principle="${id}">${esc(name(id))}</button>${inspected ? ' ' + verdictButton(inspected, id, evidence, true) : ''}</div></li>`;
+
+    }
+    h += '</ul></section>';
+  }
+  h += '</div></div><div class="ex-col explorer-models">';
+  const ms = MODELS.filter(m => passes(m) && (m.status === 'proved' || state.showConj));
+  const known = [], unknown = [];
+  for (const m of ms) {
+    const holds = m.status === 'proved' ? baseE.holds.get(m.id) : new Set(m.satisfies);
+    const fails = m.status === 'proved' ? baseE.fails.get(m.id) : new Set(m.violates);
+    if (IN.some(p => fails.has(p)) || OUT.some(p => holds.has(p))) continue;
+    const gaps = [...IN.filter(p => !holds.has(p)), ...OUT.filter(p => !fails.has(p)).map(p => '!' + p)];
+    (gaps.length || m.status !== 'proved' ? unknown : known).push([m, gaps]);
+  }
+  const row = ([m, gaps]) => `<li class="ex-m${state.modelId === m.id ? ' sel' : ''}"><div class="model-heading"><button class="lnk" data-model="${m.id}" aria-pressed="${state.modelId === m.id}">${esc(m.name)}</button><span class="via ex-sum">${m.satisfies.length}✓ ${m.violates.length}✗</span></div></li>`;
+
+  if (conflict) h += `<h2 class="ex-head">Models</h2><div class="ex-bad" role="alert">These assumptions are inconsistent. Clear or change an assumption to compare models.${conflict.via.length ? `<ul>${conflict.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>` : ''}</div>`;
+  else {
+    h += `<h2 class="ex-head">Matching models <span class="n">${known.length}</span></h2><ul class="ex-list">${known.map(row).join('') || '<li class="empty">No known matching model.</li>'}</ul>`;
+    h += `<h2 class="ex-head">Potential models <span class="n">${unknown.length}</span></h2><ul class="ex-list">${unknown.map(row).join('') || '<li class="empty">—</li>'}</ul>`;
+  }
+  h += '</div></div>';
+  const el = document.getElementById('models');
+  const focused = el.contains(document.activeElement) ? ['data-assume-positive', 'data-assume-negative'].map(a => [a, document.activeElement.getAttribute(a)]).find(([,id]) => id) : null;
+  el.innerHTML = h;
+  wireAssumptions(el);
+  el.querySelectorAll('[data-background-preset]').forEach(button => { button.disabled = backgroundPresets.find(p => p.id === button.dataset.backgroundPreset).principles.every(id => background.has(id)); button.addEventListener('click', () => addBackgroundPreset(button.dataset.backgroundPreset)); });
+  el.querySelector('#ex-clear').addEventListener('click', resetBackground);
+  el.querySelector('#ex-deselect')?.addEventListener('click', () => { state.modelId = null; select(null); renderModels(); });
+  wire(el);
+  if (focused) el.querySelector(`[${focused[0]}="${focused[1]}"]`)?.focus({preventScroll: true});
+}
+
+function certBadges(r) {
+  const c = r.certificate;
+  return `${sourceBadge(sourceOf(r))}${c.lean === 'verified' ? '<span class="badge lean verified">Lean ✓</span>' : ''}${r.status === 'conjectured' ? '<span class="badge conj">conjecture</span>' : ''}`;
+}
+// Abbreviate only equivalent positive conjunctions. These are presentation
+// aliases: the original records and the engines' premise arrays stay intact.
+// baseE uses proved, source-filtered rules and the fixed topic framework;
+// exploration background and conjectures must never complete a named package.
+function abbreviateConjunction(principleIds) {
+  let remaining = [...principleIds];
+  const presets = [];
+  if (baseE) for (const preset of [...backgroundPresets].sort((a, b) => b.principles.length - a.principles.length)) {
+    const members = preset.principles;
+    if (!members.length || !members.every(id => byPid.has(id))) continue;
+    const packageFacts = baseE.cl(members).facts;
+    if (packageFacts.has(FALSE)) continue;
+    const remainingFacts = baseE.cl(remaining).facts;
+    if (!members.every(id => remainingFacts.has(id))) continue;
+    // A stronger remaining assumption may help imply the package without
+    // being replaceable by it. Remove only terms the package implies back.
+    const consumed = remaining.filter(id => packageFacts.has(id));
+    if (consumed.length < 2) continue;
+    presets.push({ id: preset.id, name: preset.name, principles: [...members], consumed });
+    remaining = remaining.filter(id => !packageFacts.has(id));
+  }
+  return { presets, remaining, abbreviated: presets.length > 0 };
+}
+function conjunctionStmt(positiveIds, negativeIds = [], abbreviated = true) {
+  const grouped = abbreviated ? abbreviateConjunction(positiveIds) : { presets: [], remaining: positiveIds };
+  return [
+    ...grouped.presets.map(p => `<span class="conjunction-abbreviation" data-preset="${esc(p.id)}">${esc(p.name)}</span>`),
+    ...grouped.remaining.map(name).map(esc),
+    ...negativeIds.map(id => '¬' + esc(name(id)))
+  ].join(' ∧ ') || '⊤';
+}
+function resultStmt(r, abbreviated = true) { return `${conjunctionStmt(r.premises, [], abbreviated)} ⇒ ${esc(name(r.conclusion))}`; }
+function modelStmt(m, abbreviated = true) { return conjunctionStmt(m.satisfies, m.violates, abbreviated); }
+function fullConjunctionDetails(x) {
+  const isResult = Array.isArray(x.premises);
+  const grouped = abbreviateConjunction(isResult ? x.premises : x.satisfies);
+  if (!grouped.abbreviated) return '';
+  const statement = isResult ? resultStmt(x, false) : modelStmt(x, false);
+  const definitions = grouped.presets.map(p => `<div class="full-conjunction-statement"><b>${esc(p.name)}</b> = ${p.principles.map(name).map(esc).join(' ∧ ')}</div>`).join('');
+  return `<details class="full-conjunction"><summary>Show full conjunction</summary><div class="full-conjunction-statement"><b>Recorded conjunction:</b> ${statement}</div>${definitions}</details>`;
+}
+function dateOf(x) { return x.satisfies || x.premises ? (x.certificate.date || '') : (x.date || ''); }
+function kindOf(x) { return x.satisfies ? 'model' : x.premises ? 'result' : 'principle'; }
+function renderResults() {
+  const q = state.search.trim().toLowerCase();
+  const items = [...P, ...R, ...MODELS].filter(x => !q || [JSON.stringify(x), x.premises ? resultStmt(x, false) : x.satisfies ? modelStmt(x, false) : ''].join(' ').toLowerCase().includes(q))
+    .sort((a, b) => dateOf(b).localeCompare(dateOf(a)));
+  let h = `<table class="results changes"><tbody>`;
+  for (const x of items) {
+    const k = kindOf(x);
+    const stmt = k === 'principle' ? `<b>${esc(x.name)}</b> &nbsp; ${esc(x.statement)}` : k === 'result' ? resultStmt(x) : `<b>${esc(x.name)}</b> &nbsp; ${modelStmt(x)}`;
+    const by = k === 'principle' ? '' : esc(x.certificate.produced_by || '');
+    h += `<tr data-kind="${k}" data-id="${x.id}" class="${k !== 'principle' && !passes(x) ? 'filtered' : ''}"><td class="mono nowrap">${esc(dateOf(x))}</td><td><span class="badge ${k === 'model' ? 'indep' : 'kind'}">${x.status === 'conjectured' ? 'conjecture' : k}</span></td><td class="stmt">${stmt}</td><td>${k === 'principle' ? '' : certBadges(x)}</td><td class="mono">${by}</td></tr>`;
+  }
+  h += '</tbody></table>';
+  const el = document.getElementById('results'); el.innerHTML = h;
+  el.querySelectorAll('tr[data-id]').forEach(tr => tr.addEventListener('click', () => select({ type: tr.dataset.kind, id: tr.dataset.id })));
+  document.getElementById('n-results').textContent = items.length;
+}
+function conjectureEvidence(answer, evidenceBase = baseE, summary = 'Evidence') {
+  // The rule chains returned for a witness certify the first matching model.
+  const witness = answer.models.length ? byMid.get(answer.models[0]) : null;
+  const via = new Set();
+  if (witness) {
+    // Include the proof that the witness fits the background, using the same
+    // evidence set that established its verdict (selected or complete).
+    const {why} = evidenceBase.cl(witness.satisfies);
+    for (const p of background) for (const id of chain(p, why, evidenceBase.byId)) via.add(id);
+    for (const p of negativeBackground) for (const id of (evidenceBase.failWhy.get(witness.id).get(p) || []).slice(1)) via.add(id);
+  }
+  for (const id of answer.via) via.add(id);
+  const items = [...(witness ? [witness] : []), ...[...via].map(id => byRid.get(id))];
+  if (!items.length) return '<p class="note">This follows directly from the selected assumptions and the question’s requirements.</p>';
+  return `<details class="conjecture-evidence"><summary>${esc(summary)} ${evidenceBadges({items})}</summary><ol>${items.map(x => `<li><button class="lnk" data-open-${kindOf(x)}="${esc(x.id)}">${x.satisfies ? esc(x.name) : resultStmt(x)} — write-up</button> ${certBadges(x)}</li>`).join('')}</ol>${sourceSummary(items)}</details>`;
+}
+function renderOpen() {
+  const questions = [...R, ...MODELS].filter(x => x.status === 'conjectured' || x.was_conjectured)
+    .map(item => {
+      const answer = E.resolveConjecture(item), allAnswer = allEvidenceE.resolveConjecture(item);
+      const status = answer.status === 'open' && allAnswer.status !== 'open'
+        ? allAnswer.status === 'inconsistent-background' ? 'inconsistent-background' : 'evidence-limited'
+        : answer.status;
+      return {item, answer, allAnswer, status};
+    });
+  const inconsistent = backgroundConflicts.length > 0;
+  const allConflict = allEvidenceE.conflict([]);
+  const assumedFacts = inconsistent ? new Set() : E.cl([]).facts;
+  const labels = {open: 'Open', 'evidence-limited': 'Unresolved by selected evidence', proved: '✓ Proved', refuted: '✗ Refuted', incompatible: 'Incompatible premises', 'inconsistent-background': 'Resolution unavailable'};
+  const verdictLabel = (x, status) => Array.isArray(x.satisfies) && status === 'proved' ? '✓ Existence witnessed' : Array.isArray(x.satisfies) && status === 'refuted' ? '✗ Existence refuted' : labels[status];
+  const row = ({item: x, answer, allAnswer, status}) => {
+    const isM = Array.isArray(x.satisfies);
+    const shown = isM ? {...x, satisfies: x.satisfies.filter(p => !assumedFacts.has(p)), violates: x.violates.filter(p => !backgroundExcluded.has(p))}
+      : {...x, premises: x.premises.filter(p => !assumedFacts.has(p))};
+    const statement = isM ? esc(x.name) : resultStmt(shown);
+    const requirements = isM ? `<div class="stmt">${shown.satisfies.length || shown.violates.length ? `Exists: ${modelStmt(shown)}` : 'Exists: a model of the current background.'}</div>` : '';
+    let evidence = '';
+    if (status === 'open') evidence = '<p class="note">No resolution in all recorded proved evidence under this background.</p>';
+    else if (status === 'evidence-limited') {
+      evidence = conjectureEvidence(allAnswer, allEvidenceBaseE, `${verdictLabel(x, allAnswer.status)} with all recorded evidence`);
+      if (allAnswer.status === 'incompatible') evidence += '<p class="note">The full evidence makes the premises incompatible with this background; this does not settle the implication.</p>';
+      if (isM && allAnswer.status === 'proved') evidence += '<p class="note">A proved model meets the requirements; this need not establish the proposed construction.</p>';
+    }
+    else if (!inconsistent) {
+      if (isM && answer.status === 'proved') evidence += '<p class="note">A proved model meets these requirements. This settles their consistency; it need not establish the proposed construction.</p>';
+      if (answer.status === 'incompatible') evidence += '<p class="note">The premises conflict with this background. This is not counted as a resolution of the implication.</p>';
+      if (status !== 'inconsistent-background') evidence += conjectureEvidence(answer);
+    }
+    return `<article class="conjecture-row" data-conjecture-id="${esc(x.id)}" data-resolution="${status}" data-selected-resolution="${answer.status}" data-full-resolution="${allAnswer.status}"><div class="conjecture-heading"><button class="lnk stmt" data-${isM ? 'model' : 'result'}="${esc(x.id)}">${statement}</button><span class="resolution ${status}">${verdictLabel(x, status)}</span></div>${requirements}<div class="note">Recorded question: ${sourceBadge(sourceOf(x))} ${esc(x.certificate.date || '')}</div>${evidence}${x.notes ? `<details class="note"><summary>Notes on the recorded question</summary><p>${fmt(x.notes)}</p></details>` : ''}</article>`;
+  };
+  const warning = document.getElementById('open-warning');
+  warning.hidden = !inconsistent && !allConflict;
+  warning.innerHTML = inconsistent ? `<h2>Background is inconsistent</h2><p>These assumptions cannot all hold together. Conjecture resolutions are unavailable until the conflicting assumptions are removed.</p>${conjectureEvidence({via: backgroundConflicts[0].via, models: []})}<p>This check uses proved results under the current evidence filters.</p>` : allConflict ? `<h2>Additional evidence shows the background is inconsistent</h2><p>Verdicts from the selected evidence cannot establish which questions remain open with all recorded evidence.</p>${conjectureEvidence({via: allConflict.via, models: []}, allEvidenceBaseE, 'Background conflict with all recorded evidence')}` : '';
+  wire(warning);
+  const visible = questions.filter(q => q.answer.status !== 'incompatible' && (state.showResolved || !['proved', 'refuted'].includes(q.answer.status)));
+  const incompatible = questions.filter(q => q.answer.status === 'incompatible');
+  let h = '<h3>Conjectures</h3><p class="hint">“Open” means unresolved by all recorded proved evidence under this background. “Unresolved by selected evidence” means the filters omit evidence available below. Background assumptions are omitted from statements; click a question for its full statement.</p>';
+  h += visible.map(row).join('') || `<p class="empty">${questions.length ? 'No open questions apply to this background. Use “Show resolved” to include resolved questions.' : 'No conjectures have been recorded.'}</p>`;
+  if (incompatible.length) h += `<details id="open-incompatible"><summary>Incompatible with this background (${incompatible.length})</summary>${incompatible.map(row).join('')}</details>`;
+  const el = document.getElementById('open'); el.innerHTML = h;
+  wire(el);
+  const count = document.getElementById('n-open');
+  count.textContent = inconsistent || allConflict ? '—' : questions.filter(q => q.status === 'open').length;
+  count.title = 'Open with all recorded evidence; questions unresolved only by the selected evidence are not counted.';
+}
+
+// ---------------------------------------------------------------- write-up page
+function sourceEntries(items) {
+  const entries = new Map();
+  for (const x of items) (x.sources || []).forEach((source, i) => {
+    if (!entries.has(source)) entries.set(source, { source, label: (x.source_names || [])[i] || (source.length <= 80 ? source : `Source ${entries.size + 1}`) });
+  });
+  return [...entries.values()];
+}
+function paperReferences(items) {
+  const refs = new Map();
+  for (const item of items) for (const ref of item.references || []) {
+    const key = JSON.stringify(ref);
+    if (byPaperId.has(ref.paper)) refs.set(key, ref);
+  }
+  const priority = {origin: 0, proof: 0, formulation: 1, related: 2, background: 3};
+  return [...refs.values()].sort((a, b) => priority[a.role] - priority[b.role]);
+}
+function paperButton(ref) {
+  return `<button class="lnk" data-paper="${esc(ref.paper)}" title="${esc(byPaperId.get(ref.paper).citation)}">${esc(byPaperId.get(ref.paper).title)}</button>`;
+}
+function sourceSummary(items) {
+  const refs = paperReferences(items);
+  const cited = new Set(refs.map(r => r.paper));
+  const entries = sourceEntries(items).filter(e => ![...cited].some(id => e.source.toLowerCase().includes(byPaperId.get(id).title.toLowerCase())));
+  const links = [...new Map(refs.map(r => [r.paper, paperButton(r)])).values()];
+  const provenance = entries.map(x => `<span title="${esc(x.source)}">${esc(x.label)}</span>`);
+  return `<div class="pop-sources"><b>References:</b> ${[...links, ...provenance].join('; ') || 'not recorded'}</div>`;
+}
+function sourceList(items) {
+  const refs = paperReferences(items), entries = sourceEntries(items);
+  const linked = refs.length ? `<h2>Paper references</h2><ul class="src">${refs.map(ref => `<li><b>${esc(ref.role[0].toUpperCase() + ref.role.slice(1))}:</b> ${paperButton(ref)}${ref.locator ? ' — ' + esc(ref.locator) : ''}${ref.note ? `<p>${esc(ref.note)}</p>` : ''}</li>`).join('')}</ul>` : '';
+  return linked + (entries.length ? `<h2>Record provenance</h2><ul class="src">${entries.map(x => `<li><b>${esc(x.label)}</b>${x.label === x.source ? '' : ' — ' + esc(x.source)}</li>`).join('')}</ul>` : '');
+}
+function mountPaperCatalogue() {
+  if (!papers.length) return;
+  const backgroundPage = document.getElementById('background');
+  let catalogue = backgroundPage.querySelector('#paper-catalogue');
+  if (!catalogue) {
+    backgroundPage.insertAdjacentHTML('beforeend', '<h2>Literature</h2><section id="paper-catalogue"></section>');
+    catalogue = backgroundPage.querySelector('#paper-catalogue');
+  }
+  catalogue.innerHTML = '<input class="search" id="paper-search" type="search" placeholder="Find a paper, author or principle…" aria-label="Search literature"><div id="papers"></div>';
+  document.getElementById('paper-search').addEventListener('input', renderPapers);
+  renderPapers();
+}
+function renderPapers() {
+  const query = document.getElementById('paper-search').value.trim().toLowerCase();
+  const records = [...DATA.principles, ...DATA.results, ...DATA.models];
+  const linked = paper => records.filter(x => (x.references || []).some(ref => ref.paper === paper.id));
+  const matching = papers.filter(p => [p.title, p.citation, p.note || '', ...linked(p).flatMap(x => [x.name || x.id, ...(x.aliases || [])])].join(' ').toLowerCase().includes(query));
+  const el = document.getElementById('papers');
+  const renderPaper = p => {
+    const items = linked(p);
+    const principles = items.filter(x => DATA.principles.includes(x));
+    const results = items.filter(x => DATA.results.includes(x));
+    const models = items.filter(x => DATA.models.includes(x));
+    const refsFor = x => (x.references || []).filter(ref => ref.paper === p.id);
+    const referenceNote = x => refsFor(x).map(ref => `<span class="dim">${esc(ref.role)}${ref.locator ? ' · ' + esc(ref.locator) : ''}</span>${ref.note ? `<p>${esc(ref.note)}</p>` : ''}`).join('');
+    const principleList = principles.length ? `<h5>Principles</h5><ul class="src">${principles.map(x => `<li><button class="lnk" data-open-principle="${esc(x.id)}">${esc(x.name)}</button> — ${referenceNote(x)}</li>`).join('')}</ul>` : '';
+    const evidenceList = (xs, kind, label) => xs.length ? `<details><summary>${label} (${xs.length})</summary><ul class="src">${xs.map(x => `<li><button class="lnk" data-open-${kind}="${esc(x.id)}">${kind === 'result' ? resultStmt(x) : esc(x.name)}</button> — ${referenceNote(x)}</li>`).join('')}</ul></details>` : '';
+    const link = /^https?:\/\//.test(p.url || '') ? ` <a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">Paper ↗</a>` : '';
+    return `<article class="paper-entry" id="paper-${esc(p.id)}" tabindex="-1"><h4>${esc(p.title)}</h4><p>${esc(p.citation)}${link}</p>${p.note ? `<p class="dim">${esc(p.note)}</p>` : ''}${principleList}${evidenceList(results, 'result', 'Results')}${evidenceList(models, 'model', 'Models')}</article>`;
+  };
+  el.innerHTML = [
+    ['source-literature', 'Source literature', matching.filter(p => linked(p).length)],
+    ['other-literature', 'Other relevant literature', matching.filter(p => !linked(p).length)]
+  ].map(([id, title, group]) => `<section id="${id}"><h3>${title}</h3>${group.map(renderPaper).join('') || '<p class="empty">No matching papers.</p>'}</section>`).join('');
+  wire(el);
+}
+function openPaper(id) {
+  if (!byPaperId.has(id)) return;
+  state.selected = null; document.getElementById('pop').hidden = true;
+  document.getElementById('paper-search').value = '';
+  renderPapers(); showTab('background');
+  const target = document.getElementById('paper-' + id);
+  target.scrollIntoView({block: 'start'}); target.focus({preventScroll: true});
+}
+function fileLinks(x) {
+  const f = x.files || {}; const parts = [];
+  if (f.html) parts.push(`<a href="${f.html}" target="_blank">html</a>`);
+  if (f.pdf) parts.push(`<a href="${f.pdf}" target="_blank">pdf</a>`);
+  if (f.md) parts.push(`<a href="${f.md}" target="_blank">md</a>`);
+  if (x.certificate.lean_ref && (DATA.downloads || {}).lean) parts.push(`<a href="${DATA.downloads.lean}" target="_blank">lean</a>`);
+  return parts.length ? `<div class="links">${parts.join(' · ')}${f.handwritten ? ' <span class="dim">(hand-written)</span>' : ''}</div>` : '';
+}
+function pstmt(id) { if (id === FALSE) return "<li><b>False (⊥).</b> These premises cannot all hold together.</li>"; const p = byPid.get(id); return `<li><button class="lnk" data-principle="${id}"><b>${esc(p.name)}</b></button> ${esc(p.statement)}</li>`; }
+function renderPage(sel) {
+  const el = document.getElementById('page');
+  let h = `<button class="btn small" id="page-back">← back</button>`;
+  if (sel.type === 'falsity') {
+    h += '<h1>False (⊥)</h1><p>An implication to False says that its premises cannot all hold together. False is a logical constant, not another optional principle.</p>';
+    h += `<h2>Incompatibilities</h2><ul>${R.filter(r => r.conclusion === FALSE && passes(r) && (r.status === 'proved' || state.showConj)).map(r => `<li><button class="lnk" data-result="${r.id}">${resultStmt(r)}</button> ${certBadges(r)}</li>`).join('')}</ul>`;
+  } else if (sel.type === 'result') {
+    const r = byRid.get(sel.id);
+    h += `<h1>${resultStmt(r)}</h1>${fullConjunctionDetails(r)}<div class="badges">${certBadges(r)}</div>${fileLinks(r)}${certDl(r.certificate)}`;
+    h += `<h2>Premises</h2><ul class="plist">${r.premises.map(pstmt).join('') || '<li>⊤</li>'}</ul><h2>Conclusion</h2><ul class="plist">${pstmt(r.conclusion)}</ul>`;
+    if (r.proof) h += `<h2>Proof</h2><div class="prose">${fmt(r.proof)}</div>`;
+    if (r.notes) h += `<h2>Notes</h2><div class="prose">${fmt(r.notes)}</div>`;
+    h += sourceList([r]);
+    h += `<div class="file">${esc(r.file)}</div>`;
+  } else if (sel.type === 'model') {
+    const m = byMid.get(sel.id);
+    h += `<h1>${esc(m.name)}</h1><div class="badges">${certBadges(m)}</div>${fileLinks(m)}${certDl(m.certificate)}`;
+    if (m.description) h += `<h2>Construction</h2><div class="prose">${fmt(m.description)}</div>`;
+    const st = c => verdictButton(m, c, modelEvidence(m, c));
+    h += `<h2>Principles</h2><table class="results"><tbody>${principleOrder().map(c => `<tr><td class="mono nowrap">${st(c)}</td><td><button class="lnk" data-principle="${c}">${esc(name(c))}</button></td></tr>`).join('')}</tbody></table>`;
+    if (m.notes) h += `<h2>Notes</h2><div class="prose">${fmt(m.notes)}</div>`;
+    if ((m.checks || []).length) h += `<h2>Checks</h2><ul class="src">${m.checks.map(x => `<li class="mono">${esc(x)}</li>`).join('')}</ul>`;
+    h += sourceList([m]);
+    h += `<div class="file">${esc(m.file)}</div>`;
+  } else if (sel.type === 'model-verdict') {
+    const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
+    h += `<h1>${esc(m.name)}: ${esc(name(sel.principle))}</h1>`;
+    if (!e) h += '<p>No evidence is available under the current filters.</p>';
+    else {
+      h += `<div class="badges">${e.value ? '✓ satisfied' : '✗ violated'} ${evidenceBadges(e)}</div>`;
+      h += `<p>${e.direct ? 'This assertion is recorded in the model write-up.' : e.value ? 'This follows from the model’s recorded properties using the results below.' : `Assuming ${esc(name(sel.principle))} in this model would imply ${esc(name(e.contradiction))}, ${e.contradiction === FALSE ? 'a contradiction' : 'which the model violates'}.`}</p>`;
+      h += `<h2>Model evidence</h2><p><button class="lnk" data-open-model="${m.id}">${esc(m.name)} — write-up</button> ${certBadges(m)}</p>`;
+      if (e.rules.length) h += `<h2>Derivation</h2><ol>${e.rules.map(id => `<li><button class="lnk" data-open-result="${id}">${resultStmt(byRid.get(id))} — write-up</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
+      if (!e.direct && topicBackground.length) h += `<p>Standing background: ${topicBackground.map(name).map(esc).join(', ')}.</p>`;
+      h += sourceList(e.items);
+    }
+  } else if (sel.type === 'principle') {
+    const p = byPid.get(sel.id);
+    h += `<h1>${sel.negative ? '¬' : ''}${esc(p.name)}</h1>${sel.negative ? '<p>Negation of the following principle:</p>' : ''}${(p.aliases || []).length ? `<div class="id">${esc(p.aliases.join(', '))}</div>` : ''}<div class="prose statement">${esc(p.statement)}</div>${p.formal ? `<div class="formal">${esc(p.formal)}</div>` : ''}`;
+    if (p.notes) h += `<h2>Notes</h2><div class="prose">${fmt(p.notes)}</div>`;
+    const inR = R.filter(r => r.premises.includes(p.id) || r.conclusion === p.id), inM = MODELS.filter(m => m.satisfies.includes(p.id) || m.violates.includes(p.id));
+    h += `<h2>Results</h2><table class="results"><tbody>${inR.map(r => `<tr data-result="${r.id}"><td class="stmt">${resultStmt(r)}</td><td>${certBadges(r)}</td></tr>`).join('') || '<tr><td>—</td></tr>'}</tbody></table>`;
+    h += `<h2>Models</h2><table class="results"><tbody>${inM.map(m => `<tr data-model="${m.id}"><td class="mono nowrap">${m.satisfies.includes(p.id) ? '✓' : '✗'}</td><td class="stmt"><b>${esc(m.name)}</b> &nbsp; ${modelStmt(m)}</td><td>${certBadges(m)}</td></tr>`).join('') || '<tr><td>—</td></tr>'}</tbody></table>`;
+    h += sourceList([p]);
+    h += `<div class="file">${esc(p.file)}</div>`;
+  }
+  el.innerHTML = h;
+  el.querySelectorAll('tr[data-result]').forEach(tr => tr.addEventListener('click', () => select({ type: 'result', id: tr.dataset.result })));
+  el.querySelectorAll('tr[data-model]').forEach(tr => tr.addEventListener('click', () => select({ type: 'model', id: tr.dataset.model })));
+  el.querySelector('#page-back').addEventListener('click', () => showTab(state.tab));
+  wire(el);
+}
+function openPage(sel) { hover(null); stopFlow(); renderPage(sel); document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', 'false')); document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-page')); }
+function showTab(tab) {
+  hover(null); stopFlow();
+  state.tab = tab;
+  if (tab === 'graph' || tab === 'open') {
+    // Reuse the controls so background, source selections and click slots are shared.
+    const pane = document.getElementById('pane-' + tab);
+    pane.prepend(document.getElementById('graph-sidebar'), document.getElementById('sidebar-divider'));
+    const heading = document.getElementById('source-filter-heading');
+    heading.textContent = tab === 'open' ? 'Evidence sources' : 'Arrow sources';
+    heading.title = tab === 'open' ? 'Filter the evidence used to assess conjectures.' : 'Filter displayed arrows. Background consequences always use all recorded proofs.';
+  }
+  document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x.dataset.tab === tab));
+  document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-' + tab));
+  if (tab === 'graph') fit();
+}
+
+// ---------------------------------------------------------------- detail
+function wire(el) {
+  el.querySelectorAll('button[data-paper]').forEach(b => b.addEventListener('click', () => openPaper(b.dataset.paper)));
+  el.querySelectorAll('button[data-open-principle]').forEach(b => b.addEventListener('click', () => openPage({ type: 'principle', id: b.dataset.openPrinciple })));
+  el.querySelectorAll('button[data-graph-connection]').forEach(b => b.addEventListener('click', () => selectGraphEdge(graphEdgesByKey.get(b.dataset.graphConnection))));
+  el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', () => select({ type: 'principle', id: b.dataset.principle })));
+  el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
+  el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
+  el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
+  el.querySelectorAll('button[data-open-model]').forEach(b => b.addEventListener('click', () => openPage({ type: 'model', id: b.dataset.openModel })));
+  el.querySelectorAll('button[data-open-result]').forEach(b => b.addEventListener('click', () => openPage({ type: 'result', id: b.dataset.openResult })));
+}
+function relList(items) { return items.length ? `<ul class="rel">${items.map(([id, via]) => `<li><button data-principle="${id}">${esc(name(id))}</button>${via ? `<span class="via">${via}</span>` : ''}</li>`).join('')}</ul>` : `<div class="empty">—</div>`; }
+function certDl(c) { return `<dl>${c.produced_by ? `<dt>by</dt><dd>${esc(c.produced_by)}</dd>` : ''}${c.recorded_by ? `<dt>recorded by</dt><dd>${esc(c.recorded_by)}</dd>` : ''}${(c.checked_by || []).length ? `<dt>checked</dt><dd>${esc(c.checked_by.join(', '))}</dd>` : ''}${c.lean_ref ? `<dt>Lean</dt><dd class="mono">${esc(c.lean_ref)}</dd>` : ''}${c.date ? `<dt>date</dt><dd>${esc(c.date)}</dd>` : ''}</dl>`; }
+let popAt = null;
+function renderDetail() {
+  const el = document.getElementById('pop'); const sel = state.selected;
+  if (!sel || sel.type === 'cell') { el.hidden = true; return; }
+  let h = '';
+  if (sel.type === 'junction') {
+    const junction = layout?.byId.get(sel.id);
+    if (!junction) { el.hidden = true; return; }
+    const consequences = layout.edges.filter(e => e.from === junction.id);
+    h += `<div class="pop-t">${esc(junction.premises.map(name).join(' ∧ '))}</div><p class="note">All these premises together. Select a consequence for its evidence.</p><ul>${consequences.map(e => `<li><button class="lnk" data-graph-connection="${esc(e.key)}">${esc(name(e.conclusion || e.b))}</button> ${e.r ? certBadges(e.r) : `<span class="badge ${e.conjectured ? 'conj' : 'kind'}">${e.conjectured ? 'conjecture' : 'derived proof'}</span>`}</li>`).join('')}</ul>`;
+  } else if (sel.type === 'pair') {
+    const via = sel.via || pairStatus(sel.a, sel.b).via || [];
+    h += `<div class="pop-t">${esc((sel.premises || [sel.a]).map(name).join(' ∧ '))} ⇒ ${esc(name(sel.b))}</div><p class="note">${sel.conjectured ? 'Conditional on the conjectures below, under the current background.' : 'Derived proof using the results below and the current background. Intermediate principles may be hidden or used together.'}</p><ol>${via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
+  } else if (sel.type === 'falsity') {
+    h += '<div class="pop-t">False (⊥)</div><div class="pop-s">The incoming premises cannot all hold together. This is not an optional principle.</div><div class="links"><button class="lnk" data-goto="1">write-up</button></div>';
+  } else if (sel.type === 'principle') {
+    for (const mid of [sel.id]) {
+      const m = byPid.get(mid);
+      h += `<div class="pop-t">${sel.negative ? '¬' : ''}${esc(m.name)}</div>${sel.negative ? '<p class="note">Negation of the following principle:</p>' : ''}<div class="pop-s">${esc(m.statement)}</div>${m.formal ? `<div class="formal">${esc(m.formal)}</div>` : ''}${m.lean && m.lean.ref ? `<div class="pop-l">Lean: <code>${esc(m.lean.ref)}</code></div>` : ''}${sourceSummary([m])}`;
+      const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
+      if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
+    }
+    h += '<div class="links"><button class="lnk" data-goto="1">write-up</button></div>';
+  } else if (sel.type === 'model-verdict') {
+    const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
+    h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
+    if (e) h += `<div class="badges">${evidenceBadges(e)}</div><div class="pop-l">${e.direct ? 'Recorded in the model write-up.' : 'Derived from the model and the recorded implications.'}</div>${sourceSummary(e.items)}<div class="links"><button class="lnk" data-goto="1">write-up</button></div>`;
+  } else {
+    const x = sel.type === 'result' ? byRid.get(sel.id) : byMid.get(sel.id);
+    if (sel.type === 'model') {
+      const holds = x.status === 'proved' ? baseE.holds.get(x.id) : new Set(x.satisfies);
+      const fails = x.status === 'proved' ? baseE.fails.get(x.id) : new Set(x.violates);
+      const gaps = [...background].filter(p => !holds.has(p)).concat([...negativeBackground].filter(p => !fails.has(p)).map(p => '!' + p));
+      if (gaps.length) h += `<p class="pop-l">Unknown assumptions: ${gaps.map(name).map(esc).join(', ')}</p>`;
+    }
+    if (sel.display) h += `<div class="pop-t">${esc(sel.display)}</div><p class="note">${sel.contraposed ? 'Contrapositive, under the current assumptions.' : 'Shown under the current assumptions.'} Original result:</p>`;
+    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="badges">${certBadges(x)}</div>${sourceSummary([x])}${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">write-up</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
+  }
+  el.innerHTML = h; el.hidden = false; wire(el);
+  el.querySelector('button[data-goto]')?.addEventListener('click', () => { const e = sel.type === 'model-verdict' && modelEvidence(byMid.get(sel.id), sel.principle); openPage(e && e.direct ? { type: 'model', id: sel.id } : sel); el.hidden = true; });
+  const anchor = popAt ? { ...popAt } : null;
+  const position = () => {
+    const W = window.innerWidth, H = window.innerHeight, r = el.getBoundingClientRect();
+    let x = (anchor ? anchor.x + 12 : W - r.width - 24), y = (anchor ? anchor.y + 12 : 80);
+    if (x + r.width > W - 8) x = Math.max(8, (anchor ? anchor.x : W) - r.width - 12);
+    if (y + r.height > H - 8) y = Math.max(8, H - r.height - 8);
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+  };
+  el.querySelectorAll('details.full-conjunction').forEach(details => details.addEventListener('toggle', position));
+  position();
+}
+document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !el.contains(ev.target)) el.hidden = true; });
+document.addEventListener('keydown', ev => { if (ev.key === 'Escape') document.getElementById('pop').hidden = true; });
+function select(sel) {
+  if (sel?.type === 'principle' && isNegative(sel.id)) sel = {...sel, id: baseId(sel.id), negative: true};
+  if (sel?.type === 'model') { state.modelId = sel.id; renderModels(); }
+  state.selected = sel; renderDetail(); applySelection();
+}
+
+// ---------------------------------------------------------------- header
+function renderHeader() {
+  document.getElementById('title').textContent = T.title;
+  const navigation = document.getElementById('site-links');
+  navigation.hidden = !DATA.navigation?.length;
+  navigation.replaceChildren(...(DATA.navigation || []).map(item => {
+    const link = document.createElement('a'); link.href = item.url; link.textContent = item.label; return link;
+  }));
+  document.getElementById('subtitle').textContent = (T.description || '').trim();
+  const dl = DATA.downloads || {};
+  const downloadLinks = [
+    [dl.bundle, 'Full bundle (ZIP)', 'Complete working copy of this topic: editable sources, map summaries, data, viewer, and tools to check and rebuild it. Suitable for people or AI tools.'],
+    [dl.zip, 'Topic sources (ZIP)', 'Editable topic files: YAML records, write-ups, checks, source documents, and Lean files where available. The full bundle also includes the viewer and build tools.'],
+    [dl.lean, 'Lean files', 'Browse the Lean formalisation files: definitions, theorem statements, and available proofs.'],
+  ];
+  document.getElementById('downloads').innerHTML = downloadLinks.filter(([href]) => href).map(([href, label, description]) => `<a href="${esc(href)}" title="${esc(description)}" aria-label="${esc(label + ': ' + description)}">${label}</a>`).join('') || '<span class="dim">—</span>';
+}
+
+// ---------------------------------------------------------------- wiring
+let refreshPrincipleControls = () => {};
+function setAssumption(id, sign) {
+  if (!byPid.has(id) || topicBackground.includes(id)) return;
+  background.delete(id); negativeBackground.delete(id);
+  if (sign === 'positive') background.add(id);
+  if (sign === 'negative') negativeBackground.add(id);
+  state.modelId = null; state.selected = null;
+  saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+function changeBackground(id, assumed) {
+  if (!assumed) {
+    // Returning an assumption reveals the same sign on the graph.
+    if (negativeBackground.has(id)) { state.negativeShown.add(id); state.excluded.add(id); }
+    else { state.excluded.delete(id); state.negativeShown.delete(id); }
+    setAssumption(id, null);
+  } else setAssumption(id, state.excluded.has(id) && state.negativeShown.has(id) ? 'negative' : 'positive');
+}
+function addBackgroundPreset(presetId) {
+  const preset = backgroundPresets.find(p => p.id === presetId);
+  if (!preset) return;
+  for (const id of preset.principles) { background.add(id); negativeBackground.delete(id); }
+  state.modelId = null; state.selected = null;
+  saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+function saveBackground() {
+  try {
+    const url = new URL(window.location.href);
+    const additions = [...background].filter(p => !topicBackground.includes(p)).sort();
+    if (additions.length || backgroundPresets.some(p => p.default)) url.searchParams.set('assume', additions.join(','));
+    else url.searchParams.delete('assume');
+    negativeBackground.size ? url.searchParams.set('deny', [...negativeBackground].sort().join(',')) : url.searchParams.delete('deny');
+    window.history.replaceState(window.history.state, '', url);
+  } catch { /* Local files may not allow history updates. */ }
+}
+function renderBackground() {
+  document.querySelectorAll('[data-background-preset]').forEach(button => {
+    const preset = backgroundPresets.find(p => p.id === button.dataset.backgroundPreset);
+    button.disabled = preset.principles.every(id => background.has(id));
+  });
+  const list = document.getElementById('background-list');
+  // Keep existing rows in place while clicking exclusive choices.
+  list.querySelectorAll('.background-row').forEach(row => {
+    const removed = !inBackground(row.dataset.backgroundId);
+    row.classList.toggle('is-removed', removed); row.inert = removed;
+    if (!removed) row.classList.remove('is-collapsed');
+  });
+  for (const id of backgroundIds()) {
+    let row = [...list.querySelectorAll('.background-row')].find(row => row.dataset.backgroundId === id);
+    if (!row) {
+      row = document.createElement('div'); row.className = 'background-row'; row.dataset.backgroundId = id;
+      row.innerHTML = `${assumptionButtons(id)}<span class="sidebar-principle-line"><button class="lnk" data-background-principle="${id}">${esc(name(id))}</button>${topicBackground.includes(id) ? '<span class="background-fixed">fixed</span>' : `<button class="lnk" data-remove-background="${id}" aria-label="Return ${esc(name(id))} to graph">return</button>`}</span>`;
+      row.querySelector('[data-background-principle]').addEventListener('click', () => select({type: 'principle', id}));
+      row.querySelector('[data-remove-background]')?.addEventListener('click', () => changeBackground(id, false));
+      wireAssumptions(row); list.appendChild(row);
+    }
+    row.querySelector('[data-assume-positive]').setAttribute('aria-pressed', background.has(id));
+    row.querySelector('[data-assume-negative]').setAttribute('aria-pressed', negativeBackground.has(id));
+  }
+  document.getElementById('background-count').textContent = backgroundIds().length;
+  document.getElementById('background-reset').disabled = background.size === topicBackground.length && !negativeBackground.size;
+  const consequences = [...E.cl([]).facts].filter(p => p !== FALSE && !background.has(p));
+  const excluded = [...backgroundExcluded.keys()].filter(p => !negativeBackground.has(p));
+  const status = document.getElementById('background-status');
+  status.classList.toggle('is-conflict', backgroundConflicts.length > 0);
+  status.textContent = backgroundConflicts.length ? 'Inconsistent background — change or return an assumption.' : `${consequences.length} further principles follow · ${excluded.length} ruled out · ${E.models.length} known models`;
+}
+
+function renderAll(refit) {
+  // Filter/background changes must not reopen the last inspected item's popup.
+  // Only an explicit select() opens details.
+  state.selected = null; document.getElementById('pop').hidden = true;
+  recompute(); renderHeader(); renderBackground();
+  document.querySelector('[data-tab="contribute"]').hidden = !DATA.contribute_html;
+  document.getElementById('contribute').innerHTML = DATA.contribute_html || '';
+  const backgroundPage = document.getElementById('background');
+  if (!backgroundPage.dataset.ready) {
+    backgroundPage.innerHTML = DATA.background_html || '<p class="dim">—</p>';
+    mountPaperCatalogue(); backgroundPage.dataset.ready = 'true';
+  }
+  renderGraph(); if (refit) fit(); renderModels(); renderResults(); renderOpen();
+}
+function resetBackground() {
+  for (const id of [...background]) if (!topicBackground.includes(id)) background.delete(id);
+  negativeBackground.clear(); state.modelId = null; state.selected = null;
+  saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+document.getElementById('background-reset').addEventListener('click', resetBackground);
+function wireBackgroundCompaction(list) {
+  const compact = () => list.querySelectorAll('.is-removed').forEach(row => row.classList.add('is-collapsed'));
+  list.addEventListener('pointerleave', compact);
+  list.addEventListener('focusout', ev => { if (!list.contains(ev.relatedTarget) && !list.matches(':hover')) compact(); });
+}
+wireBackgroundCompaction(document.getElementById('background-list'));
+(function renderSourceFilters() {
+  const el = document.getElementById('source-filters');
+  const published = sourceCatalog.filter(s => s.kind === 'published-paper');
+  const sourceCheckboxes = sources => sources.map(s => `<label><input type="checkbox" data-source-filter="${esc(s.id)}" checked><span class="sw" style="border-color:${sourceColor(s)}"></span>${esc(s.name)}</label>`).join('');
+  el.innerHTML = (published.length ? `<div class="source-group"><div class="source-group-head"><label title="Papers credited with the results or models, including original results presented here in an adapted form."><input type="checkbox" id="all-published-sources" checked>Published papers</label><button type="button" class="lnk" id="expand-published-sources" aria-expanded="false" aria-controls="published-source-list">Show papers</button></div><fieldset class="source-group" id="published-source-list" aria-label="Individual published papers" hidden>${sourceCheckboxes(published)}</fieldset></div>` : '')
+    + [['online-submission', 'Online submissions'], ['misc', 'Miscellaneous']].map(([kind, label]) => {
+      const sources = sourceCatalog.filter(s => s.kind === kind);
+      return sources.length ? `<fieldset class="source-group"><legend>${label}</legend>${sourceCheckboxes(sources)}</fieldset>` : '';
+    }).join('');
+  const master = document.getElementById('all-published-sources');
+  function syncMaster() {
+    if (!master) return;
+    const count = published.filter(s => state.allowed.has(s.id)).length;
+    master.checked = count === published.length;
+    master.indeterminate = count > 0 && count < published.length;
+  }
+  el.querySelectorAll('[data-source-filter]').forEach(cb => cb.addEventListener('change', () => {
+    cb.checked ? state.allowed.add(cb.dataset.sourceFilter) : state.allowed.delete(cb.dataset.sourceFilter);
+    syncMaster(); renderAll(true);
+  }));
+  master?.addEventListener('change', () => {
+    for (const s of published) master.checked ? state.allowed.add(s.id) : state.allowed.delete(s.id);
+    el.querySelectorAll('#published-source-list [data-source-filter]').forEach(cb => { cb.checked = state.allowed.has(cb.dataset.sourceFilter); });
+    syncMaster(); renderAll(true);
+  });
+  document.getElementById('expand-published-sources')?.addEventListener('click', e => {
+    const list = document.getElementById('published-source-list');
+    list.hidden = !list.hidden;
+    e.currentTarget.setAttribute('aria-expanded', String(!list.hidden));
+    e.currentTarget.textContent = list.hidden ? 'Show papers' : 'Hide papers';
+  });
+})();
+document.getElementById('lean-only').addEventListener('change', e => { state.leanOnly = e.target.checked; renderAll(true); });
+document.getElementById('show-conj').addEventListener('change', e => {
+  state.showConj = e.target.checked;
+  if (state.showConj) {
+    for (const r of R.filter(r => r.status === 'conjectured')) {
+      for (const p of [...r.premises, r.conclusion]) state.excluded.delete(p);
+    }
+  }
+  refreshPrincipleControls();
+  renderAll(true);
+});
+function refreshGraphModeControls() {
+  const only = state.conjectureOnly || state.unpublishedOnly;
+  const conjectures = document.getElementById('show-conj'), isolated = document.getElementById('show-iso');
+  conjectures.checked = state.showConj || state.conjectureOnly;
+  conjectures.disabled = state.conjectureOnly;
+  isolated.checked = state.showIso && !only;
+  isolated.disabled = only;
+}
+for (const [id, key] of [['conjecture-only', 'conjectureOnly'], ['unpublished-only', 'unpublishedOnly']]) {
+  document.getElementById(id).addEventListener('change', e => {
+    state[key] = e.target.checked;
+    if (state[key]) for (const r of R.filter(graphRuleVisible)) {
+      for (const p of [...r.premises, r.conclusion]) state.excluded.delete(p);
+    }
+    refreshGraphModeControls(); refreshPrincipleControls(); renderAll(true);
+  });
+}
+document.getElementById('show-resolved').checked = state.showResolved;
+document.getElementById('show-resolved').addEventListener('change', e => {
+  state.showResolved = e.target.checked;
+  try {
+    const url = new URL(window.location.href);
+    state.showResolved ? url.searchParams.set('resolved', '1') : url.searchParams.delete('resolved');
+    window.history.replaceState(window.history.state, '', url);
+  } catch { /* Local-file viewers may not allow history updates. */ }
+  renderOpen();
+});
+document.getElementById('show-iso').addEventListener('change', e => { state.showIso = e.target.checked; renderAll(true); });
+document.getElementById('fit').addEventListener('click', fit);
+(function () {
+  const el = document.getElementById('pr-filters');
+  const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-clear-graph="${p.id}">clear</button><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
+  el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
+  const repaint = () => { refreshPrincipleControls(); renderGraph(); fit(); };
+  el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
+  el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
+  el.querySelectorAll('[data-clear-graph]').forEach(b => b.addEventListener('click', () => { state.excluded.add(b.dataset.clearGraph); state.negativeShown.delete(b.dataset.clearGraph); repaint(); }));
+  const setSelection = (rows, selected) => {
+    rows.forEach(row => { const id = row.dataset.prRow; if (inBackground(id)) return; selected ? state.excluded.delete(id) : state.excluded.add(id); if (!selected) state.negativeShown.delete(id); }); repaint();
+  };
+  el.querySelectorAll('[data-category-select]').forEach(b => b.addEventListener('click', () => setSelection(b.closest('.pr-category').querySelectorAll('.pr-row'), b.dataset.categorySelect === 'all')));
+  document.getElementById('pr-all').addEventListener('click', () => setSelection(el.querySelectorAll('.pr-row'), true));
+  document.getElementById('pr-none').addEventListener('click', () => setSelection(el.querySelectorAll('.pr-row'), false));
+  el.querySelectorAll('[data-add-background]').forEach(b => b.addEventListener('click', () => changeBackground(b.dataset.addBackground, true)));
+  const presets = document.getElementById('background-presets');
+  presets.innerHTML = backgroundPresets.map(p => `<button class="btn small" data-background-preset="${esc(p.id)}">Background ${esc(p.name)}</button>`).join('');
+  presets.querySelectorAll('[data-background-preset]').forEach(b => b.addEventListener('click', () => addBackgroundPreset(b.dataset.backgroundPreset)));
+  wire(el);
+  const compact = () => el.querySelectorAll('.pr-row.in-background').forEach(row => row.classList.add('is-collapsed'));
+  el.addEventListener('pointerleave', compact);
+  el.addEventListener('focusout', ev => { if (!el.contains(ev.relatedTarget) && !el.matches(':hover')) compact(); });
+  refreshPrincipleControls = () => {
+    el.querySelectorAll('.pr-row').forEach(row => {
+      const id = row.dataset.prRow, assumed = inBackground(id);
+      row.classList.toggle('in-background', assumed); row.inert = assumed;
+      if (!assumed) row.classList.remove('is-collapsed');
+      row.querySelector('[data-show-positive]').setAttribute('aria-pressed', !state.excluded.has(id));
+      row.querySelector('[data-show-negative]').setAttribute('aria-pressed', state.negativeShown.has(id));
+    });
+    el.querySelectorAll('.pr-category').forEach(group => {
+      const ordinary = [...group.querySelectorAll('.pr-row')].filter(row => !inBackground(row.dataset.prRow));
+      group.querySelector('.pr-category-count').textContent = `${ordinary.filter(row => !state.excluded.has(row.dataset.prRow) || state.negativeShown.has(row.dataset.prRow)).length}/${ordinary.length}`;
+    });
+  };
+  refreshPrincipleControls();
+})();
+document.getElementById('search').addEventListener('input', e => {
+  state.search = e.target.value; renderResults();
+});
+document.getElementById('graph-search').addEventListener('input', e => {
+  const normalize = value => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const query = normalize(e.target.value);
+  const terms = query.split(/\s+/);
+  graphSearch.matches = new Set(query ? P.filter(p => {
+    const text = normalize([p.name, p.id, ...(p.aliases || [])].join(' '));
+    return terms.every(term => text.includes(term));
+  }).map(p => p.id) : []);
+  graphSearch.index = 0;
+  select(null); renderGraph();
+  if (!query) fit();
+  applyGraphSearch(true);
+});
+document.getElementById('graph-search').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && graphSearch.matches.size) {
+    e.preventDefault();
+    graphSearch.index = (graphSearch.index + (e.shiftKey ? -1 : 1) + graphSearch.matches.size) % graphSearch.matches.size;
+    applyGraphSearch(true);
+  } else if (e.key === 'Escape') {
+    e.preventDefault(); e.target.value = ''; e.target.dispatchEvent(new Event('input', {bubbles: true}));
+  }
+});
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
+// Resize without rebuilding either list, so selections, scroll positions and click slots survive.
+(function setupPaneDividers() {
+  const panes = ['graph', 'open'].map(tab => document.getElementById('pane-' + tab));
+  const sidebar = document.getElementById('graph-sidebar');
+  const storageKey = 'principle-map:pane-sizes:v1';
+  let saved = {};
+  try {
+    const stored = JSON.parse(localStorage.getItem(storageKey));
+    for (const key of ['sidebar', 'background']) if (Number.isFinite(stored?.[key]) && stored[key] > 0) saved[key] = stored[key];
+  } catch (_) { /* Resizing also works when storage is unavailable. */ }
+  const handles = { sidebar: document.getElementById('sidebar-divider'), background: document.getElementById('background-divider') };
+  const current = {};
+  let drag = null;
+  function limits(key) {
+    const pane = sidebar.closest('.pane');
+    const width = pane.clientWidth || window.innerWidth;
+    const height = sidebar.clientHeight || pane.clientHeight || window.innerHeight;
+    return key === 'sidebar'
+      ? { min: Math.min(200, width * .4), max: Math.max(0, width - Math.min(240, width * .4) - 9), initial: 250 }
+      : { min: Math.min(130, height * .3), max: Math.max(0, height - Math.min(140, height * .3) - 9), initial: Math.min(230, Math.max(145, window.innerHeight * .27)) };
+  }
+  function apply() {
+    const pane = sidebar.closest('.pane');
+    if (pane.dataset.active !== 'true') return;
+    const previousWidth = current.sidebar;
+    for (const key of Object.keys(handles)) {
+      const bounds = limits(key), min = Math.min(bounds.min, bounds.max);
+      const value = Math.round(Math.max(min, Math.min(bounds.max, saved[key] ?? bounds.initial)));
+      current[key] = value;
+      for (const target of panes) target.style.setProperty(key === 'sidebar' ? '--sidebar-width' : '--background-height', `${value}px`);
+      const handle = handles[key];
+      handle.setAttribute('aria-valuemin', Math.round(min));
+      handle.setAttribute('aria-valuemax', Math.round(bounds.max));
+      handle.setAttribute('aria-valuenow', value);
+      handle.setAttribute('aria-valuetext', `${value} pixels ${key === 'sidebar' ? 'wide' : 'high'}`);
+    }
+    if (pane.id === 'pane-graph' && previousWidth !== current.sidebar) fit();
+  }
+  function persist() { try { localStorage.setItem(storageKey, JSON.stringify(saved)); } catch (_) {} }
+  function setSize(key, value) { saved[key] = value; apply(); saved[key] = current[key]; }
+  function finish(cancel = false) {
+    if (!drag) return;
+    const previous = drag; drag = null;
+    if (cancel) { saved = previous.saved; apply(); } else persist();
+    handles[previous.key].classList.remove('dragging');
+    document.body.classList.remove('resizing-panes');
+    document.body.style.removeProperty('--resize-cursor');
+    if (handles[previous.key].hasPointerCapture?.(previous.pointerId)) handles[previous.key].releasePointerCapture(previous.pointerId);
+  }
+  for (const [key, handle] of Object.entries(handles)) {
+    handle.addEventListener('pointerdown', ev => {
+      if (ev.button !== 0 || drag) return;
+      ev.preventDefault(); handle.focus(); apply();
+      drag = { key, pointerId: ev.pointerId, coordinate: key === 'sidebar' ? ev.clientX : ev.clientY, size: current[key], saved: { ...saved } };
+      handle.setPointerCapture?.(ev.pointerId);
+      handle.classList.add('dragging');
+      document.body.style.setProperty('--resize-cursor', key === 'sidebar' ? 'col-resize' : 'row-resize');
+      document.body.classList.add('resizing-panes');
+      document.getElementById('pop').hidden = true;
+    });
+    handle.addEventListener('lostpointercapture', () => finish());
+    handle.addEventListener('dblclick', () => { finish(); delete saved[key]; apply(); persist(); });
+    handle.addEventListener('keydown', ev => {
+      if (drag) return;
+      const bounds = limits(key), step = ev.shiftKey ? 40 : 10;
+      const increase = key === 'sidebar' ? 'ArrowRight' : 'ArrowUp';
+      const decrease = key === 'sidebar' ? 'ArrowLeft' : 'ArrowDown';
+      if (![increase, decrease, 'Home', 'End', 'Enter'].includes(ev.key)) return;
+      ev.preventDefault();
+      if (ev.key === 'Enter') { delete saved[key]; apply(); }
+      else setSize(key, ev.key === 'Home' ? bounds.min : ev.key === 'End' ? bounds.max : current[key] + (ev.key === increase ? step : -step));
+      persist();
+    });
+  }
+  window.addEventListener('pointermove', ev => {
+    if (!drag || ev.pointerId !== drag.pointerId) return;
+    const delta = (drag.key === 'sidebar' ? ev.clientX : -ev.clientY) - (drag.key === 'sidebar' ? drag.coordinate : -drag.coordinate);
+    setSize(drag.key, drag.size + delta);
+  });
+  window.addEventListener('pointerup', ev => { if (drag?.pointerId === ev.pointerId) finish(); });
+  window.addEventListener('pointercancel', ev => { if (drag?.pointerId === ev.pointerId) finish(true); });
+  window.addEventListener('blur', () => finish());
+  window.addEventListener('keydown', ev => { if (ev.key === 'Escape' && drag) { ev.preventDefault(); finish(true); } });
+  window.addEventListener('resize', apply);
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', apply));
+  if (typeof ResizeObserver !== 'undefined') {
+    const observer = new ResizeObserver(apply);
+    for (const pane of panes) observer.observe(pane);
+  }
+  apply();
+})();
+window.addEventListener('resize', () => { if (state.tab === 'graph') fit(); });
+renderAll(true);
+requestAnimationFrame(fit);
+</script>

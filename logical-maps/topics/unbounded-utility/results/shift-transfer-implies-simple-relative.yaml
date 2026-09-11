@@ -1,0 +1,40 @@
+id: shift-transfer-implies-simple-relative
+premises:
+- rich-outcomes
+- stochastic-equivalence
+- simple-eu
+- independence
+- shift-transfer
+conclusion: simple-relative-expectation
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: Zachary Goodsell (source argument); GPT-6 (Codex) (adaptation and premise audit)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: Write D=u(X)−u(Y), with finitely many values d_i of positive probabilities p_i, and let Y_i have
+  the conditional law of Y given D=d_i. The law of M_1/2(X,0) is the finite mixture with weights p_i of
+  M_1/2(Y_i+d_i,0). Shift Transfer gives M_1/2(Y_i+d_i,0)~M_1/2(Y_i,d_i). Mixture Independence propagates
+  these indifferences through the finite mixture; Stochastic Equivalence licenses conditional-law realizations,
+  regrouping and branch exchanges. The resulting law is M_1/2(Y,D), so M_1/2(X,0)~M_1/2(Y,D). Two mixture
+  cancellations then give X≽Y iff D≽0, and Simple EU makes this equivalent to E[D]≥0. Rich Outcomes supplies
+  the sure d_i and the simple gamble realizing D.
+sources:
+- GPT-6 (Codex), proof adaptation and premise audit in the Logical Maps project, 9 September 2026; see
+  the accompanying handwritten write-up.
+- Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 4, pp.
+  26–27. The cited argument is adapted with the explicitly listed sufficient premises; the reduced-premise
+  claim is the present project contribution.
+source_names:
+- GPT-6 generated 9 Sep
+- Symmetries of Value
+notes: 'Original work: proof adaptation. Isolate the actual inputs to Goodsell’s Theorem 4: once Shift
+  Transfer is supplied as a principle, neither Totality, Stochastic Dominance nor full affine symmetry
+  is needed. This describes the work needed for this database entry, not a claim of novelty in the literature.'
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: Theorem 4, pp. 26–27. The cited argument is adapted with the explicitly listed sufficient premises;
+    the reduced-premise claim is the present project contribution

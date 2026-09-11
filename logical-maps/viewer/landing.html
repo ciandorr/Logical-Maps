@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>__LANDING_TITLE__</title>
+  <!--__PMAP_THEME__-->
+  <style>
+    .landing { width: min(1040px, calc(100% - 64px)); margin: 28px auto 64px; }
+    .landing-nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line); font-size: 13px; }
+    h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 650; line-height: 1.15; letter-spacing: -.035em; margin: 38px 0 24px; }
+    #introduction { max-width: 75ch; font-size: 16px; line-height: 1.75; }
+    #introduction:empty { display: none; }
+    #introduction p { margin: 0 0 20px; }
+    section { margin-top: 34px; }
+    h2 { font-size: 13px; font-weight: 600; margin: 0 0 12px; color: var(--ink-2); }
+    .map-list { list-style: none; padding: 0; margin: 34px 0 0; border-top: 1px solid var(--line); }
+    .map-list li { border-bottom: 1px solid var(--line); }
+    .map-link { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 0; font-size: 21px; font-weight: 550; }
+    .map-link:hover { text-decoration: none; }
+    .map-link:hover .map-name { text-decoration: underline; text-underline-offset: 4px; }
+    .map-link .arrow { color: inherit; font-size: 24px; font-weight: 400; }
+    .resources { display: flex; gap: 12px 28px; flex-wrap: wrap; }
+    @media (max-width: 600px) {
+      .landing { width: calc(100% - 32px); margin-top: 16px; }
+      h1 { margin-top: 28px; }
+      .map-link { font-size: 19px; padding: 16px 0; }
+    }
+  </style>
+</head>
+<body>
+  <main class="landing">
+    <nav class="landing-nav" aria-label="Site navigation">
+      <a href="__HOME_URL__">__HOME_LABEL__</a>
+      <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
+    </nav>
+    <h1>__LANDING_TITLE__</h1>
+    <section id="introduction" aria-label="Introduction">__INTRODUCTION__</section>
+    <ul class="map-list" aria-label="Logical maps">__MAP_LINKS__</ul>
+    <section aria-labelledby="create-heading">
+      <h2 id="create-heading">Create your own logical map</h2>
+      <div class="resources">
+        __STARTER_LINK__
+        <a href="__REPOSITORY_URL__">GitHub</a>
+      </div>
+      __SUGGESTIONS__
+    </section>
+  </main>
+</body>
+</html>

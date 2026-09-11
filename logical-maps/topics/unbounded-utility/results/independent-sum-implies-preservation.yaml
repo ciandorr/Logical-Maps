@@ -1,0 +1,32 @@
+id: independent-sum-implies-preservation
+premises:
+- independent-sum-consistency
+conclusion: independent-sum-preservation
+status: proved
+certificate:
+  source_id: misc
+  lean: verified
+  lean_ref: UnboundedUtility.Proofs.independent_sum_implies_preservation
+  produced_by: GPT-6 (Codex)
+  checked_by: []
+  date: '2026-09-09'
+  recorded_by: GPT-6 (Codex), 2026-09-09; extraction and random-variable translation
+proof: Take the forward weak implication. If X ≻ Y but Y+Z ≽ X+Z, the reverse implication with X,Y swapped
+  gives Y ≽ X, a contradiction. Thus strict preference is preserved too.
+sources:
+- GPT-6 (Codex), original connecting proof recorded 9 September 2026 in this project
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §1–2; Lemma 1, p. 8
+source_names:
+- GPT-6 generated 9 Sep
+- Unbounded Utility and Background Risk (unpublished)
+notes: ''
+references:
+- paper: unpublished-background-risk
+  role: background
+  locator: §1–2; Lemma 1, p. 8
+- paper: wilkinson-2025
+  role: background
+  locator: §6.1
+  note: Source of Independent Sum Consistency; see the principle reference for the changed independence condition.
+    The proof or conjecture recorded here retains its separate attribution.

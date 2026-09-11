@@ -1,0 +1,38 @@
+id: negative-self-similarity-evaluates-alternating
+premises:
+- rich-outcomes
+- stochastic-equivalence
+- simple-eu
+- negative-self-similarity
+conclusion: alternating-st-petersburg-value
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: Zachary Goodsell (source argument); GPT-6 (Codex) (adaptation and premise audit)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: 'Let A have P(u(A)=(−2)^n)=2^(−n), n≥1. Splitting off the first atom gives L(A)=L(M_1/2(−2A,−2));
+  hence A~M_1/2(−2A,−2) by Stochastic Equivalence. The sure gamble c=−1/2 is another fixed point in value:
+  M_1/2(−2c,−2)=M_1/2(1,−2) has simple expectation −1/2, so Simple EU gives c~M_1/2(−2c,−2). Negative
+  Self-Similarity at p=1/2,a=2,b=0,Z=−2 now gives A~c. Rich Outcomes supplies all outcomes used. No Totality,
+  Mixture Independence or affine invariance is required once the uniqueness principle itself is assumed.'
+sources:
+- GPT-6 (Codex), proof adaptation and premise audit in the Logical Maps project, 9 September 2026; see
+  the accompanying handwritten write-up.
+- Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorems 9–10,
+  pp. 30–31. The cited argument is adapted with the explicitly listed sufficient premises; the reduced-premise
+  claim is the present project contribution.
+source_names:
+- GPT-6 generated 9 Sep
+- Symmetries of Value
+notes: 'Original work: proof adaptation. Recognize the alternating St Petersburg law and the sure value
+  −1/2 as two solutions of the same negative self-similarity equation, and apply the already extracted
+  uniqueness principle. This describes the work needed for this database entry, not a claim of novelty
+  in the literature.'
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: Theorems 9–10, pp. 30–31. The cited argument is adapted with the explicitly listed sufficient premises;
+    the reduced-premise claim is the present project contribution

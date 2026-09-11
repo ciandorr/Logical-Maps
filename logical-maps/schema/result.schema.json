@@ -1,0 +1,195 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "result.schema.json",
+ "title": "Result",
+ "description": "An implication: premises entail a principle or False. A False conclusion records incompatibility. Counterexamples to implications are recorded as models.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "id",
+  "premises",
+  "conclusion",
+  "certificate",
+  "sources"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+  },
+  "premises": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "uniqueItems": true
+  },
+  "conclusion": {
+   "oneOf": [
+    {
+     "type": "string"
+    },
+    {
+     "const": false
+    }
+   ],
+   "description": "A principle id, or false (YAML boolean false or the string \"false\") for incompatible premises. False is a logical constant, not a principle."
+  },
+  "status": {
+   "type": "string",
+   "enum": [
+    "proved",
+    "conjectured"
+   ],
+   "default": "conjectured"
+  },
+  "was_conjectured": {
+   "type": "boolean",
+   "description": "Historical marker for a record that began as a conjecture. It does not change proof status or supply inference evidence."
+  },
+  "certificate": {
+   "type": "object",
+   "additionalProperties": false,
+   "anyOf": [
+    {
+     "required": [
+      "source_id"
+     ]
+    },
+    {
+     "required": [
+      "provenance"
+     ]
+    }
+   ],
+   "properties": {
+    "source_id": {
+     "type": "string",
+     "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+     "description": "Mathematical source in topic.source_catalog; credit adaptations or alternative proofs separately. Use misc for original one-off work. Drives source filters and badges."
+    },
+    "provenance": {
+     "type": "string",
+     "enum": [
+      "human",
+      "human-assisted",
+      "ai"
+     ],
+     "description": "Origin of the mathematical result or model, not authorship of its database transcription."
+    },
+    "lean": {
+     "type": "string",
+     "enum": [
+      "none",
+      "stated",
+      "verified"
+     ],
+     "default": "none",
+     "description": "none: no Lean statement. stated: the generated statement elaborates; its proof remains pending. verified: a checked proof of the generated statement using only propext, Classical.choice, and Quot.sound. Only pmap lean-check --update may set verified."
+    },
+    "lean_ref": {
+     "type": "string"
+    },
+    "produced_by": {
+     "type": "string"
+    },
+    "recorded_by": {
+     "type": "string",
+     "description": "Who transcribed or translated the database record, separately from the mathematical author."
+    },
+    "checked_by": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "date": {
+     "type": "string"
+    }
+   },
+   "if": {
+    "properties": {
+     "lean": {
+      "const": "verified"
+     }
+    },
+    "required": [
+     "lean"
+    ]
+   },
+   "then": {
+    "required": [
+     "lean_ref"
+    ]
+   }
+  },
+  "proof": {
+   "type": "string"
+  },
+  "sources": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "\\S"
+   }
+  },
+  "source_names": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "\\S"
+   },
+   "description": "Short display names, one per sources entry in the same order; full citations remain in sources."
+  },
+  "notes": {
+   "type": "string"
+  },
+  "references": {
+   "type": "array",
+   "description": "References to papers.yaml; roles distinguish definition origins and background from direct proofs.",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "paper",
+     "role"
+    ],
+    "properties": {
+     "paper": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+     },
+     "role": {
+      "enum": [
+       "origin",
+       "formulation",
+       "proof",
+       "background",
+       "related"
+      ]
+     },
+     "locator": {
+      "type": "string",
+      "minLength": 1
+     },
+     "note": {
+      "type": "string",
+      "minLength": 1
+     }
+    }
+   }
+  }
+ },
+ "if": {
+  "properties": {
+   "status": {
+    "const": "conjectured"
+   }
+  }
+ },
+ "else": {
+  "required": [
+   "proof"
+  ]
+ }
+}

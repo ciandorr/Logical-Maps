@@ -1,0 +1,37 @@
+id: totality-independence-negative-affine-imply-self-similarity
+premises:
+- totality
+- independence
+- negative-affine-anti-invariance
+conclusion: negative-self-similarity
+status: proved
+certificate:
+  source_id: misc
+  lean: verified
+  lean_ref: UnboundedUtility.Proofs.totality_independence_negative_affine_imply_self_similarity
+  produced_by: Zachary Goodsell (source argument); GPT-6 (Codex) (adaptation and premise audit)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: Fix p,a,b,Z and write T(V)=−aV+b and F(V)=M_p(T(V),Z). Negative Affine Anti-Invariance reverses
+  strict preference under T, while Mixture Independence preserves strict preference between first arguments
+  with the common Z. Hence F reverses strict preference. If X~F(X) and Y~F(Y) but X≻Y, then F(Y)≻F(X),
+  so Y≻X by the two indifferences, a contradiction. The case Y≻X is symmetric. Totality leaves only X~Y.
+  The other premises in the original full DTU+Sym package are unused.
+sources:
+- GPT-6 (Codex), proof adaptation and premise audit in the Logical Maps project, 9 September 2026; see
+  the accompanying handwritten write-up.
+- Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 10, pp.
+  30–31. The cited argument is adapted with the explicitly listed sufficient premises; the reduced-premise
+  claim is the present project contribution.
+source_names:
+- GPT-6 generated 9 Sep
+- Symmetries of Value
+notes: 'Original work: proof adaptation. Audit Goodsell’s Theorem 10 argument and remove its unused Rich
+  Outcomes, Stochastic Equivalence, Simple EU and Stochastic Dominance premises. This describes the work
+  needed for this database entry, not a claim of novelty in the literature.'
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: Theorem 10, pp. 30–31. The cited argument is adapted with the explicitly listed sufficient premises;
+    the reduced-premise claim is the present project contribution

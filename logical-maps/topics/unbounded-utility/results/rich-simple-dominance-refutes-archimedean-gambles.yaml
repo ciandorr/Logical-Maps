@@ -1,0 +1,41 @@
+id: rich-simple-dominance-refutes-archimedean-gambles
+premises:
+- rich-outcomes
+- simple-eu
+- stochastic-dominance
+- archimedean-gambles
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: Zachary Goodsell (St Petersburg argument); GPT-6 (Codex), explicit reduction of the sufficient
+    premises
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: Let S take utility 2ⁿ with probability 2⁻ⁿ for n≥1. Rich Outcomes and standing prospect richness supply
+  S, its finite truncations T_N=min(S,2ᴺ), and the required mixtures. For N≥1, E[T_N]=N+1. By Simple EU, T_N
+  is indifferent to the sure utility N+1. Stochastic Dominance gives S ≽ T_N, hence S ≻ c for every real c
+  by choosing N+1>c. Thus S ≻ 1 ≻ 0. Fix any p∈(0,1) and choose N with p(N+1)>1. The mixture M_p(S,0) stochastically
+  dominates the finite-valued mixture M_p(T_N,0), which Simple EU makes indifferent to the sure utility p(N+1)>1.
+  Therefore M_p(S,0) ≻ 1 for every p∈(0,1). Archimedean Gambles would require one such mixture to be indifferent
+  to 1, a contradiction. Only the standing preorder is used to compose these comparisons; no Totality or Mixture
+  Independence is required.
+sources:
+- 'GPT-6 (Codex), project premise audit, 9 September 2026: the St Petersburg proof recorded in dtu-refutes-archimedean-gambles
+  uses only Rich Outcomes, Simple EU, and Stochastic Dominance. This record makes that sufficient subpackage
+  explicit.'
+- 'Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 22: St Petersburg
+  obstruction to Archimedean Gambles.'
+source_names:
+- GPT-6 premise audit 9 Sep
+- Symmetries of Value
+notes: This is the existing Goodsell argument with its sufficient assumptions made explicit, not a new counterexample.
+  The original source-attributed DTU result is retained unchanged. Stochastic Equivalence follows from this
+  topic’s dominance axiom, but is not separately needed in the displayed proof. Relative to these assumptions,
+  Archimedean Gambles is ruled out; adding it to the background yields False.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: '§3, p. 22: St Petersburg obstruction to Archimedean Gambles'

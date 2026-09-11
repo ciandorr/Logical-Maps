@@ -1,0 +1,34 @@
+id: independent-sum-consistency
+name: Independent Sum Invariance
+statement: Whenever Z is independent of the pair (X,Y), X ≽ Y iff X+Z ≽ Y+Z.
+formal: ''
+category: invariance-principles
+tags:
+- background-risk
+sources:
+- Hayden Wilkinson (2025). Flummoxing expectations. Noûs, 59(3), 700–728. First published online in 2024. §6.1,
+  Independent Sum Consistency. https://doi.org/10.1111/nous.12530
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §1, pp. 1–4; §2, p. 6
+source_names:
+- Wilkinson (2025)
+- Unbounded Utility and Background Risk (unpublished)
+notes: 'Numerical scope: real-utility variables for which the indicated sums exist in the outcome chart. These
+  are pointwise utility sums, not randomized mixtures. Stochastic Equivalence remains a separate principle.
+  With Stochastic Equivalence and the full real domain this is the manuscript’s Convolution Invariance: compare
+  the two laws before and after convolution by the same probability law. Joint independence supplies a canonical
+  common-noise realization; it does not assume that X and Y are independent.'
+date: '2026-09-09'
+aliases:
+- Independent Sum Consistency
+- Convolution Invariance
+lean_def: UnboundedUtility.IndependentSumConsistency
+references:
+- paper: wilkinson-2025
+  role: origin
+  locator: §6.1, Independent Sum Consistency
+  note: Wilkinson assumes the three options are mutually independent; the map requires only that the common
+    addend Z be independent of (X,Y).
+- paper: unpublished-background-risk
+  role: formulation
+  locator: §1, pp. 1–4; §2, p. 6

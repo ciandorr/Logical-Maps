@@ -1,0 +1,46 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "papers.schema.json",
+ "title": "Source-paper catalogue",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "papers"
+ ],
+ "properties": {
+  "papers": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "id",
+     "title",
+     "citation"
+    ],
+    "properties": {
+     "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+     },
+     "title": {
+      "type": "string",
+      "minLength": 1
+     },
+     "citation": {
+      "type": "string",
+      "minLength": 1
+     },
+     "url": {
+      "type": "string",
+      "pattern": "^https?://[^\\s]+$"
+     },
+     "note": {
+      "type": "string",
+      "minLength": 1
+     }
+    }
+   }
+  }
+ }
+}

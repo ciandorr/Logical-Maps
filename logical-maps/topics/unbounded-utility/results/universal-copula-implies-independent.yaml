@@ -1,0 +1,31 @@
+id: universal-copula-implies-independent
+premises:
+- universal-copula-sum-consistency
+conclusion: independent-sum-consistency
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: If Z is independent of (X,Y), it is independent of X and independent of Y. Hence the joint CDFs
+  of (X,Z) and (Y,Z) both factor through the product copula H(u,v)=uv. Instantiate Universal Copula Sum
+  Consistency at that copula and apply it to the original triple.
+sources:
+- GPT-6 (Codex), original copula sum consistency definitions and connecting proofs recorded in this project,
+  9 September 2026, implementing Zachary Goodsell’s proposal.
+- Zachary Goodsell, project TODO.md copula-sum proposal and request to add universal/existential variants,
+  9 September 2026; precise definitions recorded by GPT-6 (Codex).
+source_names:
+- GPT-6 generated 9 Sep
+- Zach Goodsell proposal 9 Sep
+notes: 'The converse construction needs care: the product-copula condition gives pairwise independence
+  from Z, which need not be independence from the pair (X,Y).'
+references:
+- paper: wilkinson-2025
+  role: background
+  locator: §6.1
+  note: Source of Independent Sum Consistency; see the principle reference for the changed independence condition.
+    The proof or conjecture recorded here retains its separate attribution.

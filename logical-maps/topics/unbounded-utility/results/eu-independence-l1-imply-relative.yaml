@@ -1,0 +1,46 @@
+id: eu-independence-l1-imply-relative
+premises:
+- rich-outcomes
+- expected-utility
+- stochastic-equivalence
+- independence
+- stochastic-dominance
+- l1-continuity
+conclusion: relative-expectation
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: GPT-6 (Codex) (connecting proof by conditional truncation)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: First take an integrable actual difference D=X−Y with ED=0. On E_n={|X|≤n,|Y|≤n},
+  put p_n=P(E_n) and c_n=E[D 1_E_n]/p_n, starting after p_n>0. Set X_n=X−c_n on
+  E_n and X_n=Y elsewhere. The conditional laws of X−c_n and Y on E_n are bounded
+  with equal expectations, so Expected Utility, Stochastic Equivalence and Mixture
+  Independence give X_n~Y; when p_n=1 use Expected Utility directly. Furthermore
+  E|X_n−X|≤E[|D|1_(E_n complement)]+|E[D1_E_n]|→0. Upper-section L1 Continuity
+  gives X≽Y. Interchanging X,Y proves Y≽X. For arbitrary mean m, apply this
+  zero-mean argument to X and Y+m to obtain X~Y+m. Stochastic Dominance compares
+  Y+m with Y strictly according to the sign of m, giving exactly Relative Expectation.
+sources:
+- GPT-6 (Codex), original connecting proof in Logical Maps, 9 September 2026; writeups/eu-independence-l1-imply-relative.md.
+- Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549,
+  L1 Continuity and DTU+L1 implying Expected Utility, §3, p. 23; Relative Expectation
+  and Corollary 5 in the full DTU+Sym context, pp. 26–27.
+source_names:
+- GPT-6 generated 9 Sep
+- Symmetries of Value
+notes: 'Original work: moderate connecting argument by truncation adaptation. The source supplies
+  the expectation/continuity principles and their implication with full affine symmetry. This
+  proof instead compares bounded conditional pieces and corrects their means before taking
+  upper-section limits. In combination with the existing DTU+L1-to-EU record, it removes
+  symmetry from the DTU+L1-to-Relative implication. No lower-section continuity, prior
+  Relative Expectation, Shift Transfer or Shift Invariance is assumed. This is work accounting,
+  not a claim of literature priority. Stochastic Equivalence is retained to show the conditional-
+  law replacements explicitly, although it follows from Stochastic Dominance in this topic.'
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: §3, p. 23; Relative Expectation and Corollary 5 in the full DTU+Sym context, pp. 26–27

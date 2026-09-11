@@ -1,0 +1,27 @@
+id: relative-expectation
+name: Relative Expectation
+statement: For real-utility variables X,Y on the same probability space, if E|u(X)−u(Y)|<∞, then X ≽ Y iff
+  E[u(X)−u(Y)] ≥ 0. Their individual expectations may both be undefined.
+formal: ''
+tags:
+- expectation
+- relative
+sources:
+- Colyvan, M. (2008). Relative expectation theory. Journal of Philosophy, 105(1), 37–44. pp. 37–44. https://doi.org/10.5840/jphil200810519
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §4, p. 26
+notes: This is a same-space random-variable principle. Stochastic Equivalence is retained separately when importing
+  the paper’s arbitrary-coupling formulation about laws.
+date: '2026-09-08'
+category: extensions-of-eut
+source_names:
+- Colyvan (2008)
+- Symmetries of Value
+lean_def: UnboundedUtility.RelativeExpectation
+references:
+- paper: colyvan-2008
+  role: origin
+  locator: pp. 37–44
+  note: The map uses the same-space, integrable-difference formulation recorded in Symmetries of value.
+- paper: symmetries-of-value
+  role: formulation
+  locator: §4, p. 26

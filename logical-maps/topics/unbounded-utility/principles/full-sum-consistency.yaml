@@ -1,0 +1,31 @@
+id: full-sum-consistency
+name: Full Sum Invariance
+statement: For all X,Y,Z, with arbitrary dependence, X ≽ Y iff X+Z ≽ Y+Z.
+formal: ''
+category: invariance-principles
+tags:
+- background-risk
+sources:
+- 'Seidenfeld, T., Schervish, M., & Kadane, J. (2009). Preference for equivalent random variables: A price
+  for unbounded utilities. Journal of Mathematical Economics, 45, 329–340. §1, p. 330; §3.1, Example 3.1, p.
+  333. https://doi.org/10.1016/j.jmateco.2008.12.002'
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §1, pp. 1–2; §6.1, p. 17
+source_names:
+- Seidenfeld, Schervish & Kadane (2009)
+- Unbounded Utility and Background Risk (unpublished)
+notes: 'Numerical scope: real-utility variables for which the indicated sums exist in the outcome chart. These
+  are pointwise utility sums, not randomized mixtures. Stochastic Equivalence remains a separate principle.'
+date: '2026-09-09'
+aliases:
+- Full Sum Consistency
+lean_def: UnboundedUtility.FullSumConsistency
+references:
+- paper: seidenfeld-schervish-kadane-2009
+  role: origin
+  locator: §1, p. 330; §3.1, Example 3.1, p. 333
+  note: The map expresses the sum-coherence requirement as unrestricted common-addend invariance. SSK formulate
+    coherence through differences of indifferent variables.
+- paper: unpublished-background-risk
+  role: formulation
+  locator: §1, pp. 1–2; §6.1, p. 17

@@ -1,0 +1,68 @@
+id: du-l1-implies-relative
+premises:
+- rich-outcomes
+- archimedean-outcomes
+- stochastic-equivalence
+- stochastic-dominance
+- independence
+- l1-continuity
+conclusion: relative-expectation
+status: proved
+certificate:
+  source_id: misc
+  lean: stated
+  produced_by: GPT-6 (Codex)
+  recorded_by: GPT-6 (Codex), 2026-09-09
+  checked_by: []
+  date: '2026-09-09'
+proof: >-
+  The existing finite-lottery representation argument derives Simple EU from
+  Rich Outcomes, Archimedean Outcomes, Stochastic Dominance and Independence.
+  For any bounded utility variable V, upward finite quantizations Q_n satisfy
+  Q_n~E Q_n by Simple EU, Q_n>=V by dominance, and E Q_n>=E V. Thus
+  Q_n>=E V and the sure E Q_n>=V. Their two upper-section L1 limits give
+  V~E V. Now let D=X-Y be integrable with mean m>=0. On
+  E_n={|X|<=n,|Y|<=n}, with p_n=P(E_n)>0, quantize X upward within 1/n
+  to a finite-valued q_n and set c_n=(E[(q_n-Y)1_E_n]-m)/p_n. Define
+  Z_n=q_n-c_n on E_n and Z_n=Y elsewhere. Its changed conditional branch
+  has mean at least that of Y, by m/p_n; bounded EU, law invariance and
+  Independence therefore give Z_n>=Y. At p_n=1 bounded EU gives this
+  directly. Moreover E|Z_n-X|<=2E[|D|1_(E_n complement)]+2/n tends to zero,
+  so upper L1 gives X>=Y. If m>0, replace Y on a sufficiently small
+  positive-probability event where Y is bounded by a strictly better sure
+  outcome. The resulting Y' strictly dominates Y and has
+  0<E(Y'-Y)<m. The weak result gives X>=Y', hence X>Y. For m=0 apply
+  the weak result in both directions; for m<0 interchange the variables.
+  This proves the Relative Expectation biconditional without Totality,
+  Shift Invariance, lower-section continuity or assumed full Expected Utility.
+sources:
+- 'GPT-6 (Codex), Logical Maps, 9 September 2026; user-inspired DU premise audit and connecting proof in writeups/du-l1-implies-relative.md.'
+- 'GPT-6 (Codex), Logical Maps, 9 September 2026; prior conditional-truncation proof in writeups/eu-independence-l1-imply-relative.md and finite-lottery proof in writeups/rich-archimedean-dominance-independence-imply-simple-eu.md.'
+- 'Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549, §3 p. 23 (upper-section L1 Continuity and the DTU consequence for Expected Utility), pp. 26–27 (Relative Expectation and Corollary 5 in the symmetry setting).'
+- 'Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473, §3.2 pp. 678–681 and §3.3 pp. 681–682 (finite expected utility and the DU/DTU distinction).'
+source_names:
+- GPT-6 DU continuity proof 9 Sep
+- GPT-6 earlier connecting proofs 9 Sep
+- Symmetries of Value
+- Decision Theory Unbound
+notes: >-
+  Original work: moderate connecting proof and premise reduction. A short
+  upward-quantization lemma derives bounded EU; the earlier conditional
+  truncation argument is then adapted with finite quantization, mean
+  correction and a bounded-event proof of strictness. This removes both
+  assumed full Expected Utility and global Totality from the earlier
+  DTU+L1 consequence. Finite-valued replacements suffice for the proof;
+  no arbitrary outcome-space translation map is required. Under DU, the
+  existing Relative-to-CDF and Relative-to-Simple-Relative-to-Shift-Transfer
+  results give CDF-Area Extension and Shift Transfer as well. The five DU
+  axioms remain explicit, including Stochastic Equivalence even though
+  dominance implies it. No minimality, literature priority, independent
+  certification or Lean verification is claimed.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: §3 p. 23 (upper-section L1 Continuity and the DTU consequence for Expected Utility), pp. 26–27 (Relative
+    Expectation and Corollary 5 in the symmetry setting)
+- paper: decision-theory-unbound
+  role: background
+  locator: §3.2 pp. 678–681 and §3.3 pp. 681–682 (finite expected utility and the DU/DTU distinction)

@@ -1,0 +1,135 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "principle.schema.json",
+ "title": "Principle",
+ "description": "One principle (axiom, condition, representation, or other proposition) within a topic.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "id",
+  "name",
+  "statement"
+ ],
+ "properties": {
+  "id": {
+   "type": "string",
+   "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+   "description": "Stable kebab-case identifier; must equal the file name without .yaml. Referenced by results.",
+   "not": {
+    "const": "false"
+   }
+  },
+  "name": {
+   "type": "string",
+   "description": "Short display name."
+  },
+  "category": {
+   "type": "string",
+   "description": "Display category id declared in topic.principle_categories."
+  },
+  "negates": {
+   "type": "string",
+   "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+   "description": "Deprecated: migrate this negative node to results concluding false; do not add new negates nodes."
+  },
+  "statement": {
+   "type": "string",
+   "description": "Informal but precise statement, in the topic's framework."
+  },
+  "formal": {
+   "type": "string",
+   "description": "Optional formal rendering (LaTeX or symbolic)."
+  },
+  "aliases": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Other names used in the literature."
+  },
+  "tags": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   },
+   "description": "Free-form grouping, e.g. axiom, representation, ordering."
+  },
+  "sources": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "source_names": {
+   "type": "array",
+   "items": {
+    "type": "string",
+    "pattern": "\\S"
+   },
+   "description": "Short display names corresponding to sources, in the same order."
+  },
+  "notes": {
+   "type": "string"
+  },
+  "lean": {
+   "description": "Reserved for Lean formalisation of the statement (null until set up).",
+   "type": [
+    "null",
+    "object"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "ref": {
+     "type": "string",
+     "description": "Fully qualified Lean declaration name."
+    },
+    "file": {
+     "type": "string"
+    }
+   }
+  },
+  "date": {
+   "type": "string",
+   "description": "ISO date added."
+  },
+  "lean_def": {
+   "type": "string",
+   "description": "Fully qualified Lean declaration stating this principle, e.g. UnboundedUtility.RichOutcomes."
+  },
+  "references": {
+   "type": "array",
+   "description": "References to papers.yaml; roles distinguish definition origins and background from direct proofs.",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "paper",
+     "role"
+    ],
+    "properties": {
+     "paper": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+     },
+     "role": {
+      "enum": [
+       "origin",
+       "formulation",
+       "proof",
+       "background",
+       "related"
+      ]
+     },
+     "locator": {
+      "type": "string",
+      "minLength": 1
+     },
+     "note": {
+      "type": "string",
+      "minLength": 1
+     }
+    }
+   }
+  }
+ }
+}

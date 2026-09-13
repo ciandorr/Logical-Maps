@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Countable Sure-Thing ∧ Simple Expected Utility ⇒ Expected Utility</title>
+  <title>Countable Sure-Thing and Simple EU ⇒ Expected Utility?</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -163,30 +163,16 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 </script></head>
 <body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button></nav>
 <header id="title-block-header">
-<h1 class="title">Countable Sure-Thing ∧ Simple Expected Utility ⇒ Expected Utility</h1>
+<h1 class="title">Countable Sure-Thing and Simple EU ⇒ Expected Utility?</h1>
 </header>
-<p class="cert">
-Conjecture — Source: Misc.; produced by User suggestion, 2026-09-08; recorded by GPT-6 (Codex), 2026-09-08.
-</p>
-<h2 id="premises">Premises</h2>
-<ul>
-<li><strong>Countable Sure-Thing.</strong> For every countable measurable partition (E_n) into events of positive probability, if X|E_n ≽ Y|E_n for every n, then X ≽ Y. If one conditional comparison is strict, X ≻ Y.</li>
-<li><strong>Simple Expected Utility.</strong> The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Surjectivity of u is not included here.</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<ul>
-<li><strong>Expected Utility.</strong> The normalized chart u is defined on all outcomes and is measurable. Whenever u(X),u(Y) are integrable, X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Expectations here are finite Lebesgue expectations; this says nothing about two +∞ expectations or conditionally convergent sums.</li>
-</ul>
-<h2 id="notes">Notes</h2>
-<p>Candidate extension from finite-valued gambles to all integrable utility random variables. Verification must cover the full measurable domain, including variables with non-atomic distributions, and both directions of the expected-utility comparison. Do not silently add Rich Outcomes, Totality, Stochastic Equivalence, or Sure-Thing as premises. Rich Outcomes is optional here; the existing unbounded-utility inconsistency argument is not by itself a proof of this two-premise implication. Excluded from proved deductions until verified.</p>
-<h2 id="sources">Sources</h2>
-<ul>
-<li><strong>User suggestion 8 Sep</strong> — User suggestion in this project’s conversation, 2026-09-08; proposed implication, not a completed proof.</li>
-<li><strong>Decision Theory Unbound</strong> — Related motivation rather than a verified theorem with these exact premises: Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473, §4.1, pp. 685–686.</li>
-</ul>
-<p class="cert">
-Record: <code>topics/unbounded-utility/results/countable-sure-thing-simple-to-full-eu.yaml</code>
-</p>
+<p><strong>Refuted on the full measurable domain.</strong> The original two-premise proposal is preserved, with refutation supplied by the proved <a href="lexicographic-nonatomic-mass.html">Lexicographic expectation: nonatomic mass</a> model. The model satisfies both stated premises and violates the conclusion.</p>
+<p>Take outcomes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math> and rank all measurable gambles lexicographically by</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo>,</mo><mi>c</mi><mo stretchy="false" form="prefix">(</mo><mstyle mathvariant="script"><mi>ℒ</mi></mstyle><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">V(X)=\bigl(E[X],c(\mathcal L(X))\bigr),</annotation></semantics></math></p>
+<p>where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> is the total mass of the nonatomic part of a law. The linked write-up proves Countable Sure-Thing for every countable measurable partition, including the strict clause.</p>
+<p>For <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math> uniform on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math>, the model has <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo>≻</mo><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">U\succ1/2</annotation></semantics></math> despite equal finite expected utilities. Every simple law has second coordinate zero, so Simple EU holds with the unique normalized chart <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">u(x)=x</annotation></semantics></math>.</p>
+<p>The model also satisfies Totality, Stochastic Equivalence, Stochastic Dominance, Mixture Independence and Sure-Thing. It violates Rich Outcomes. With DU or DTU selected, Countable Sure-Thing instead conflicts with the background by the recorded St Petersburg obstruction.</p>
+<p><strong>Attribution and conjecture history.</strong> Zachary Goodsell proposed this arrow on 8 September 2026. GPT-6 (Codex) supplied the countermodel on 13 September, following Goodsell’s request for proofs and a source check. The original implication keeps its ID, premises and conjectured status; the viewer computes its verdict from proved evidence and the selected background. No independent checker or Lean proof is claimed.</p>
+<p><strong>Russell–Isaacs source comparison.</strong> <em>Infinite Prospects</em>, §§4–5 and Appendix A, treats countably supported lotteries and complete preferences. Its passage from acts to lotteries uses conditional-law dependence. See the author’s April 2020 manuscript, pp. 15–16, 22 and 25–26: <a href="https://www.yoaavisaacs.com/uploads/6/9/2/0/69204575/infinite-prospects-final.pdf">author’s manuscript</a>. In the new model, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> vanishes on every countably supported law. Its restriction to that domain is ordinary bounded EU; the counterexample uses a nonatomic law. The published theorem therefore does not establish the full-domain arrow recorded here.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12473">Decision theory unbound</a>.</strong> Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — §4.1, pp. 685–686</li>

@@ -1,4 +1,4 @@
-# Countable Sure-Thing and Simple EU ⇒ Expected Utility?
+# Countable Sure-Thing and Archimedean Outcomes ⇒ Archimedean Gambles?
 
 **Refuted on the full measurable domain.** The original two-premise
 proposal is preserved, with refutation supplied by the proved
@@ -14,9 +14,9 @@ where $c$ is the total mass of the nonatomic part of a law. The linked
 write-up proves Countable Sure-Thing for every countable measurable
 partition, including the strict clause.
 
-For $U$ uniform on $[0,1]$, the model has $U\succ1/2$ despite equal
-finite expected utilities. Every simple law has second coordinate zero,
-so Simple EU holds with the unique normalized chart $u(x)=x$.
+For $U$ uniform on $[0,1]$, the model has $1\succ U\succ0$, but
+$V(M_p(1,0))=(p,0)$ never equals $V(U)=(1/2,1)$. Nevertheless its sure
+outcomes satisfy Archimedean Outcomes.
 
 The model also satisfies Totality, Stochastic Equivalence, Stochastic
 Dominance, Mixture Independence and Sure-Thing. It violates Rich Outcomes.
@@ -41,7 +41,3 @@ restriction to that domain is ordinary bounded EU; the counterexample
 uses a nonatomic law. The published theorem therefore does not establish
 the full-domain arrow recorded here.
 
-## Paper references
-
-- **Background: [Decision theory unbound](https://doi.org/10.1111/nous.12473).** Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — §4.1, pp. 685–686
-- **Background: [Infinite prospects](https://doi.org/10.1111/phpr.12704).** Russell, J. S., & Isaacs, Y. (2021). Infinite prospects. Philosophy and Phenomenological Research, 103(1), 178–198. — §2. Source of the Countable Sure-Thing principle; the recorded result or conjecture has its own attribution.

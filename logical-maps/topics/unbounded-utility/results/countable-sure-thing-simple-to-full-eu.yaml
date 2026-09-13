@@ -16,17 +16,26 @@ sources:
 - User suggestion in this project's conversation, 2026-09-08; proposed implication, not a completed proof.
 - 'Related motivation rather than a verified theorem with these exact premises: Goodsell, Decision theory
   unbound, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473, §4.1, pp. 685–686.'
-notes: 'Candidate extension from finite-valued gambles to all integrable utility random variables. Verification
-  must cover the full measurable domain, including variables with non-atomic distributions, and both directions
-  of the expected-utility comparison. Do not silently add Rich Outcomes, Totality, Stochastic Equivalence,
-  or Sure-Thing as premises. Rich Outcomes is optional here; the existing unbounded-utility inconsistency
-  argument is not by itself a proof of this two-premise implication. Excluded from proved deductions until
-  verified.
-
-  '
+- 'GPT-6 (Codex), Logical Maps, 13 September 2026: full-domain refutation in writeups/lexicographic-nonatomic-mass.md and source comparison in writeups/countable-sure-thing-simple-to-full-eu.md.'
+notes: >-
+  Refuted on the standing full measurable domain by the proved
+  lexicographic-nonatomic-mass model, supplied by GPT-6 (Codex) on
+  13 September 2026. It satisfies both proposed premises, as well as
+  Totality, Stochastic Equivalence, Stochastic Dominance, Mixture
+  Independence and Sure-Thing, while violating both Expected Utility
+  and Archimedean Gambles. Its outcome chart is [0,1], so Rich Outcomes
+  fails; that principle is not a premise of this question. The
+  Russell–Isaacs theorem concerns countably supported lotteries:
+  its domain excludes the nonatomic witness used here. The original
+  ID, premises, authorship and conjectured status are preserved.
+  Refutation is computed from the separate proved model and selected
+  background; under DU or DTU the premises instead conflict with the
+  background. See the handwritten write-up for the witness and source
+  comparison. No independent checking or Lean proof is claimed.
 source_names:
 - User suggestion 8 Sep
 - Decision Theory Unbound
+- GPT-6 countermodel 13 Sep
 references:
 - paper: decision-theory-unbound
   role: background

@@ -169,9 +169,10 @@ def check_record_integration():
     witnesses, _ = engine.separates([*du, 'shift-invariance'], 'shift-transfer')
     assert 'finite-support-compensated-dominance' in witnesses
     assert not engine.entails([*du, 'shift-invariance'], 'shift-transfer')[0]
-    # The recorded stronger question is still open in this map: conjectured
-    # implications are deliberately excluded from this engine.
-    assert 'shift-transfer' in engine.package([*dtu, 'shift-invariance'])['open']
+    # The seed stays incomplete; its separately proved finite-shift total
+    # extension now separates the stronger DTU question as well.
+    assert 'shift-transfer' in engine.package([*dtu, 'shift-invariance'])['separated']
+    assert 'finite-shift-total-extension' in engine.separates([*dtu, 'shift-invariance'], 'shift-transfer')[0]
     assert 'totality' in engine.fails['finite-support-compensated-dominance']
 
 

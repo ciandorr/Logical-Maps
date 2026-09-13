@@ -8,42 +8,56 @@ premises:
 - independence
 - independent-sum-cancellation
 conclusion: independent-sum-preservation
-status: conjectured
+status: proved
+was_conjectured: true
 certificate:
   source_id: misc
   lean: stated
-  produced_by: GPT-6 (Codex)
-  recorded_by: GPT-6 (Codex)
+  produced_by: GPT-6 (Codex), conjecture and geometric-noise proof; Zachary Goodsell, resolution proposal and strict-comparison argument
+  recorded_by: GPT-6 (Codex), 2026-09-13
   checked_by: []
-  date: '2026-09-09'
-proof: ''
+  date: '2026-09-13'
+proof: >-
+  Totality plus Cancellation preserves strict comparisons by contraposition.
+  Suppose X is indifferent to Y but X+Z strictly exceeds Y+Z. Let nu be the
+  law of Z and let rho be the law of a sum of N independent copies of Z,
+  where P(N=n)=2^(-n-1) for n>=0. This is an admissible real law and
+  2 rho - nu*rho = delta_0. Put A=M_(2/3)(X,Y+Z) and
+  B=M_(2/3)(Y,X+Z). Mixture Independence gives B strictly above A,
+  hence B+W strictly above A+W for independent W of law rho.
+  With alpha=law X, beta=law Y, and
+  eta=(alpha*nu*rho+beta*nu*rho)/2, the renewal identity rewrites
+  law(A+W)=alpha/3+2 eta/3 and law(B+W)=beta/3+2 eta/3.
+  Mixture Independence and Stochastic Equivalence therefore make the
+  sums indifferent, a contradiction. Ties are preserved, and strict
+  preservation supplies the rest. The write-up checks the law
+  realizations and all finite-mixture substitutions; no continuity,
+  moment assumption or countable mixture independence is used.
 sources:
-- 'GPT-6 (Codex), 9 September 2026, follow-up question and partial analysis in writeups/conjectured-dtu-cancellation-implies-preservation.md.'
-- 'Zachary Goodsell, Unbounded Utility and Background Risk, unpublished manuscript, 5 June 2026, Lemma 1, pp. 7–8: source for the separated sum principles, not this conjecture.'
+- 'GPT-6 (Codex), 9 September 2026: original conjecture and partial analysis; 13 September 2026: geometric-noise proof in writeups/conjectured-dtu-cancellation-implies-preservation.md.'
+- 'Zachary Goodsell, project conversation, 13 September 2026: request to resolve Cancellation implies Preservation and the contraposition argument for strict comparisons.'
+- 'Zachary Goodsell, Unbounded Utility and Background Risk, unpublished manuscript, 5 June 2026, Lemma 1, pp. 7–8: source for the separated sum principles, not this connecting theorem.'
 source_names:
-- GPT-6 conjecture 9 Sep
+- GPT-6 conjecture 9 Sep; proof 13 Sep
+- Goodsell argument 13 Sep
 - Unbounded Utility and Background Risk (unpublished)
 notes: >-
-  Original work: conjecture formulation and partial analysis, not a proof
-  or consistency witness. Totality plus cancellation already preserves
-  strict comparisons. The unsettled issue is whether DTU forces common
-  independent noise to preserve indifference as well. The new proved
-  result continuous-total-cancellation-implies-preservation settles this
-  after adding L1 Continuity: shift the upper variable by 1/n and pass
-  to the limit. Without continuity that limiting step is unavailable.
-  A proof must close the indifference gap without assuming continuity;
-  a countermodel must satisfy all six DTU axioms plus cancellation and
-  exhibit a tied pair that independent noise separates. Such a model
-  would necessarily violate L1 Continuity. The existing total
-  independent-sum extension satisfies both directions and does not
-  separate them. This is an open entry in this map, not a claim about
-  whether the question has been settled in the literature.
+  The original seven-premise conjecture is proved without changing its
+  statement; was_conjectured preserves its history. The geometric
+  renewal law closes the earlier indifference gap. The existing proof
+  with L1 Continuity remains valid but its extra premise is unnecessary.
+  Under DTU, Cancellation, Preservation and Independent Sum Invariance
+  are equivalent by this theorem and the existing converse deductions.
+  Arbitrary independent noise is essential to the argument: the
+  geometric auxiliary law generally has infinite support. No full-noise
+  property is thereby established for the finite-shift total extension.
+  Original connecting work under Misc.; no literature-priority claim,
+  independent checker or Lean verification is asserted.
 references:
 - paper: unpublished-background-risk
   role: background
-  locator: 'Lemma 1, pp. 7–8: source for the separated sum principles, not this conjecture'
+  locator: 'Lemma 1, pp. 7–8: source for the separated sum principles, not this theorem'
 - paper: wilkinson-2025
   role: background
   locator: §6.1
-  note: Source of Independent Sum Consistency; see the principle reference for the changed independence condition.
-    The proof or conjecture recorded here retains its separate attribution.
+  note: Source of Independent Sum Consistency; see the principle reference for the changed independence condition. The connecting theorem retains its separate attribution.

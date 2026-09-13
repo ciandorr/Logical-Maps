@@ -263,7 +263,9 @@ $E|X_k-U|=1/k\to0$ and $X_k\succeq_C1/2$ for every $k$, while the limit
 comparison fails. Thus the recorded upper-section **L¹ Continuity** fails.
 
 The countermodel establishes that DU plus Shift Invariance alone is
-insufficient for Shift Transfer. Since it fails Totality, it does not
-settle the existing conjecture with **DTU** as antecedent. The examples
-also identify a precise continuity condition that this construction lacks;
-no additional unproved principle verdict is inferred from that observation.
+insufficient for Shift Transfer. This seed fails Totality. Its separately
+recorded [finite-shift total extension](finite-shift-total-extension.html),
+added on 13 September 2026, preserves a strict ranking of the transfer pair
+and supplies the separation with **DTU** as antecedent. The original seed
+and its properties remain unchanged. Its examples also identify the
+continuity condition that it lacks.

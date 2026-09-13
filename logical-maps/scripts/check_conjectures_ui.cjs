@@ -184,10 +184,10 @@ try {
   doc.querySelector('#background-list [data-remove-background="c"]').click();
   assert.deepEqual(assumptions(dom),[]);
 
-  // Actual topic: historical entries are drawn from explicit recorded history,
-  // and a still-open DTU implication can resolve only in a stronger background.
+  // Actual topic: a new model refutes the preserved DTU conjecture. Stronger
+  // backgrounds can prove it, while source filters can remove either answer.
   const data=JSON.parse(fs.readFileSync(path.join(root,'build/unbounded-utility/data.json'),'utf8'));
-  const historical=['symmetric-dtu-refutes-independent-sum-candidate','conjectured-total-independent-sum-extension'];
+  const historical=['symmetric-dtu-refutes-independent-sum-candidate','conjectured-total-independent-sum-extension','conjectured-dtu-cancellation-implies-preservation'];
   for(const id of historical) {
     const entry=[...data.results,...data.models].find(x=>x.id===id);
     assert.equal(entry.status,'proved');
@@ -195,11 +195,38 @@ try {
   }
   const real=page(data,'http://localhost/'),rd=real.window.document;
   const du=assumptions(real),shift='conjectured-dtu-shift-implies-transfer';
+  const countableQuestions=['countable-sure-thing-outcomes-to-gambles','countable-sure-thing-simple-to-full-eu'];
+  const empty=page(data),ed=empty.window.document;
+  show(empty,'open');
+  for(const id of countableQuestions) assert.equal(row(empty,id),null,'Refuted questions are hidden by default');
+  setResolved(empty,true);
+  for(const id of countableQuestions) {
+    assert.equal(resolution(empty,id),'refuted');
+    assert.ok(row(empty,id).querySelector('[data-open-model="lexicographic-nonatomic-mass"]'));
+    assert.equal(data.results.find(r=>r.id===id).status,'conjectured');
+  }
+  ed.querySelector('[data-source-filter="misc"]').click();
+  for(const id of countableQuestions) {
+    assert.equal(resolution(empty,id),'evidence-limited');
+    assert.equal(row(empty,id).dataset.fullResolution,'refuted');
+  }
+  ed.querySelector('[data-source-filter="misc"]').click();
+  empty.window.addBackgroundPreset('dtu');
+  for(const id of countableQuestions) assert.equal(resolution(empty,id),'incompatible');
   show(real,'open');
-  assert.equal(resolution(real,shift),'open');
+  assert.equal(row(real,shift),null,'The refuted question is hidden until Show resolved is checked.');
   for(const id of historical) assert.equal(row(real,id),null);
   setResolved(real,true);
   for(const id of historical) assert.equal(resolution(real,id),'proved');
+  assert.equal(resolution(real,shift),'refuted');
+  assert.ok(row(real,shift).querySelector('[data-open-model="finite-shift-total-extension"]'));
+  assert.equal(data.results.find(r=>r.id===shift).status,'conjectured','Refutation does not rewrite the question status.');
+  rd.querySelector('[data-source-filter="misc"]').click();
+  assert.equal(resolution(real,shift),'evidence-limited');
+  assert.equal(row(real,shift).dataset.fullResolution,'refuted');
+  assert.ok(row(real,shift).querySelector('[data-open-model="finite-shift-total-extension"]'));
+  rd.querySelector('[data-source-filter="misc"]').click();
+  assert.equal(resolution(real,shift),'refuted');
   setResolved(real,false);
   assert.ok(visible(real,rd.querySelector('#background-dock [data-background-preset="du"]')));
   assert.ok(visible(real,rd.querySelector('#background-dock [data-background-preset="dtu"]')));
@@ -223,19 +250,19 @@ try {
   rd.querySelector('[data-source-filter="misc"]').click();
   assert.equal(resolution(real,shift),'proved');
   rd.querySelector('#background-list [data-remove-background="l1-continuity"]').click();
-  assert.equal(resolution(real,shift),'open');
+  assert.equal(resolution(real,shift),'refuted');
   assert.deepEqual(assumptions(real),du);
 
   // Inconsistent backgrounds have their own warning; no explosion is used to
   // silently settle the remaining questions, and removing the cause restores
-  // the original background-sensitive open state.
+  // the original background-sensitive refutation.
   rd.querySelector('#pr-filters [data-add-background="archimedean-gambles"]').click();
   assert.equal(rd.getElementById('open-warning').hidden,false);
   assert.match(rd.getElementById('open-warning').textContent,/inconsistent/i);
   assert.equal(rd.getElementById('graph-warning').hidden,false);
   rd.querySelector('#background-list [data-remove-background="archimedean-gambles"]').click();
   assert.equal(rd.getElementById('open-warning').hidden,true);
-  assert.equal(resolution(real,shift),'open');
+  assert.equal(resolution(real,shift),'refuted');
   assert.deepEqual(assumptions(real),du);
   // Hidden inconsistent evidence cannot turn a question into a genuine open
   // question, nor may inconsistency manufacture a proof by explosion.

@@ -1,6 +1,6 @@
 # Lean formalisation
 
-All **39 principle nodes** have Lean definitions. All **101 result/model records**
+All **39 principle nodes** have Lean definitions. All **103 result/model records**
 have generated statements. Completed proofs live separately from statements; defining
 a proposition does not prove it. See [VERIFICATION.md](VERIFICATION.md) for the audited
 coverage and remaining work.

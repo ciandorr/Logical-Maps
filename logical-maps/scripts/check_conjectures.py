@@ -214,6 +214,7 @@ def main():
         ],
         "results": [r for r in records if "premises" in r],
         "models": [*model_records, *[q for q in questions if "satisfies" in q]],
+        "papers": [],
     }
     before = deepcopy(data)
     analysis = pmap.analyse(data)

@@ -1,12 +1,29 @@
-# Verification report — 10 September 2026
+# Verification report — 13 September 2026
 
-**39/39 principles defined; 101/101 records stated; 23/87 result proofs verified; 0/14 model witnesses verified.**
+**39/39 principles defined; 103/103 records stated; 23/87 result proofs verified; 0/16 model witnesses verified.**
 
-The remaining **64 results and 14 models are unproved in Lean**. A `stated` certificate
+The remaining **64 results and 16 models are unproved in Lean**. A `stated` certificate
 does not certify an implication, the existence of a model, or the correctness of a paper.
 Existing mathematical claims and source attribution are unchanged.
 
 ## Audit
+
+The 13 September audit reran `lean-check unbounded-utility --update` after
+adding `finite-shift-total-extension` and `lexicographic-nonatomic-mass`,
+and promoting the cancellation-to-preservation conjecture with its
+geometric-noise proof. All generated statements elaborate. These new
+mathematical proofs are not formalized; the two Countable Sure-Thing
+questions retain their conjectured statements and have separate refuting
+model evidence. All 23 existing proof references passed again, and no new
+record received a verified certificate.
+
+The audit passed again after expanding `lexicographic-nonatomic-mass`
+to classify all 39 principles (23 satisfied, 16 violated). Its expanded
+existence statement elaborates, and all 23 existing proof references
+still pass. The added classifications, including their bounded-chart
+scope qualifications, remain written proofs without a Lean witness.
+
+The original 10 September audit is recorded below.
 
 `python3 scripts/pmap.py lean-check unbounded-utility --update` successfully built the
 library and checked the 23 proof references at their exact generated types. Every proof
@@ -186,9 +203,11 @@ engine self-tests, and Python/JavaScript/False-generation checks passed.
 - `conjectured-total-independent-sum-extension`
 - `eventual-clipped-expectation`
 - `finite-support-compensated-dominance`
+- `finite-shift-total-extension`
 - `finite-two-sample-minimum`
 - `geometric-continuous-ultrafilter`
 - `lexicographic-folded-extension`
+- `lexicographic-nonatomic-mass`
 - `polynomial-asymmetric-continuous-ultrafilter`
 - `total-continuous-ultrafilter`
 - `total-exact-ultrafilter`

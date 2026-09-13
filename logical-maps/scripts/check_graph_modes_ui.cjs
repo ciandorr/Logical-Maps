@@ -48,8 +48,9 @@ try{
  const real=page(data,'https://maps.example/');real.window.addBackgroundPreset('dtu');
  real.window.document.getElementById('conjecture-only').click();
  assert.ok(graph(real).edges.every(conjectural));
- const cancellation=graph(real).edges.find(e=>e.key==='conjectured-dtu-cancellation-implies-preservation');
- assert.deepEqual(cancellation.premises,['independent-sum-cancellation']);
+ assert.ok(!graph(real).edges.some(e=>e.key==='conjectured-dtu-cancellation-implies-preservation'),'The promoted theorem is no longer a conjectural arrow');
+ const transfer=graph(real).edges.find(e=>e.key==='conjectured-dtu-shift-implies-transfer');
+ assert.deepEqual(transfer.premises,['shift-invariance']);
  assert.ok(!graph(real).edges.some(e=>e.premises.includes('simple-eu')));
  real.window.document.getElementById('unpublished-only').click();
  assert.ok(graph(real).edges.length>0);assert.ok(graph(real).edges.every(conjectural));

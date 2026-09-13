@@ -236,7 +236,7 @@ def comonotonic_sum_implies_shift : Prop :=
     UnboundedUtility.ComonotonicSumConsistency P →
     UnboundedUtility.ShiftInvariance P
 
-/-- `conjectured-dtu-cancellation-implies-preservation`  (conjectured)
+/-- `conjectured-dtu-cancellation-implies-preservation`
 
 Rich Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Simple Expected Utility ∧ Stochastic Dominance ∧ Mixture Independence ∧ Independent Sum Cancellation ⇒ Independent Sum Preservation -/
 def conjectured_dtu_cancellation_implies_preservation : Prop :=
@@ -1210,6 +1210,30 @@ def eventual_clipped_expectation : Prop :=
     ¬ UnboundedUtility.ArchimedeanGambles W.pref ∧
     ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref
 
+/-- `finite-shift-total-extension`
+
+Stochastic dominance: finite-shift total extension: a witness satisfying 8 principles
+and violating 9. -/
+def finite_shift_total_extension : Prop :=
+  ∃ W : Witness,
+    UnboundedUtility.RichOutcomes W.pref ∧
+    UnboundedUtility.ArchimedeanOutcomes W.pref ∧
+    UnboundedUtility.Totality W.pref ∧
+    UnboundedUtility.StochasticEquivalence W.pref ∧
+    UnboundedUtility.SimpleEU W.pref ∧
+    UnboundedUtility.StochasticDominance W.pref ∧
+    UnboundedUtility.MixtureIndependence W.pref ∧
+    UnboundedUtility.ShiftInvariance W.pref ∧
+    ¬ UnboundedUtility.ShiftTransfer W.pref ∧
+    ¬ UnboundedUtility.SimpleRelativeExpectation W.pref ∧
+    ¬ UnboundedUtility.RelativeExpectation W.pref ∧
+    ¬ UnboundedUtility.ExpectedUtility W.pref ∧
+    ¬ UnboundedUtility.CDFAreaExtension W.pref ∧
+    ¬ UnboundedUtility.VanishingShiftContinuity W.pref ∧
+    ¬ UnboundedUtility.L1Continuity W.pref ∧
+    ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
+    ¬ UnboundedUtility.ReflectionAntiInvariance W.pref
+
 /-- `finite-support-compensated-dominance`
 
 Stochastic dominance: finite-support compensation: a witness satisfying 9 principles
@@ -1294,6 +1318,52 @@ def lexicographic_folded_extension : Prop :=
     ¬ UnboundedUtility.ScaleInvariance W.pref ∧
     ¬ UnboundedUtility.NegativeSelfSimilarity W.pref ∧
     ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref
+
+/-- `lexicographic-nonatomic-mass`
+
+Lexicographic expectation: nonatomic mass: a witness satisfying 23 principles
+and violating 16. -/
+def lexicographic_nonatomic_mass : Prop :=
+  ∃ W : Witness,
+    UnboundedUtility.ArchimedeanOutcomes W.pref ∧
+    UnboundedUtility.Totality W.pref ∧
+    UnboundedUtility.RestrictedTotality W.pref ∧
+    UnboundedUtility.StochasticEquivalence W.pref ∧
+    UnboundedUtility.RestrictedStochasticEquivalence W.pref ∧
+    UnboundedUtility.SimpleEU W.pref ∧
+    UnboundedUtility.StochasticDominance W.pref ∧
+    UnboundedUtility.StatewiseDominance W.pref ∧
+    UnboundedUtility.MixtureIndependence W.pref ∧
+    UnboundedUtility.SureThing W.pref ∧
+    UnboundedUtility.CountableSureThing W.pref ∧
+    UnboundedUtility.PositiveAffineInvariance W.pref ∧
+    UnboundedUtility.ShiftInvariance W.pref ∧
+    UnboundedUtility.ScaleInvariance W.pref ∧
+    UnboundedUtility.ReflectionAntiInvariance W.pref ∧
+    UnboundedUtility.ShiftTransfer W.pref ∧
+    UnboundedUtility.SimpleRelativeExpectation W.pref ∧
+    UnboundedUtility.SymmetricNeutrality W.pref ∧
+    UnboundedUtility.NegativeSelfSimilarity W.pref ∧
+    UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
+    UnboundedUtility.PasadenaValue W.pref ∧
+    UnboundedUtility.ArroyoValue W.pref ∧
+    UnboundedUtility.VanishingShiftContinuity W.pref ∧
+    ¬ UnboundedUtility.RichOutcomes W.pref ∧
+    ¬ UnboundedUtility.ExpectedUtility W.pref ∧
+    ¬ UnboundedUtility.ArchimedeanGambles W.pref ∧
+    ¬ UnboundedUtility.RelativeExpectation W.pref ∧
+    ¬ UnboundedUtility.CDFAreaExtension W.pref ∧
+    ¬ UnboundedUtility.FoldedExpectation W.pref ∧
+    ¬ UnboundedUtility.L1Continuity W.pref ∧
+    ¬ UnboundedUtility.NegativeAffineAntiInvariance W.pref ∧
+    ¬ UnboundedUtility.IndependentSumConsistency W.pref ∧
+    ¬ UnboundedUtility.IndependentSumCancellation W.pref ∧
+    ¬ UnboundedUtility.IndependentSumPreservation W.pref ∧
+    ¬ UnboundedUtility.FullSumConsistency W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref ∧
+    ¬ UnboundedUtility.AntitonicSumConsistency W.pref ∧
+    ¬ UnboundedUtility.ExistentialCopulaSumConsistency W.pref ∧
+    ¬ UnboundedUtility.UniversalCopulaSumConsistency W.pref
 
 /-- `polynomial-asymmetric-continuous-ultrafilter`
 

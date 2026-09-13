@@ -77,7 +77,8 @@ try{
  w.addBackgroundPreset('dtu');
  assert.equal(w.eval("literalFollows('simple-eu')"),true);
  const graph=JSON.parse(w.eval('JSON.stringify(buildGraph())'));
- for(const [id,premise] of [['conjectured-dtu-cancellation-implies-preservation','independent-sum-cancellation'],['conjectured-dtu-shift-implies-transfer','shift-invariance']]){
+ assert.ok(!graph.edges.some(e=>e.key==='conjectured-dtu-cancellation-implies-preservation'),'The proved cancellation theorem is absent from conjecture-only arrows');
+ for(const [id,premise] of [['conjectured-dtu-shift-implies-transfer','shift-invariance']]){
   const arrow=graph.edges.find(e=>e.key===id);
   assert.ok(arrow,id+' remains visible under DTU');
   assert.deepEqual(arrow.premises,[premise],id+' has only its additional premise');

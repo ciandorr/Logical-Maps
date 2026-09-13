@@ -1,4 +1,39 @@
-# Source extraction: updated 9 September 2026
+# Source extraction: updated 13 September 2026
+
+## Cancellation and Countable Sure-Thing questions (13 September)
+
+The original `conjectured-dtu-cancellation-implies-preservation` statement
+is now proved, with its conjecture history retained. Goodsell supplied
+the strict-comparison argument; GPT-6 (Codex) supplied the geometric-noise
+and finite-mixture argument preserving ties. No continuity premise is
+needed. The separated sum principles retain their manuscript attribution;
+the connecting proof is recorded under Misc.
+
+The two Countable Sure-Thing proposals are refuted on the standing full
+measurable domain by `lexicographic-nonatomic-mass`. On outcomes [0,1],
+it orders by mean and then nonatomic mass. Countable additivity proves
+Countable Sure-Thing, while a uniform gamble supplies failures of both
+Expected Utility and Archimedean Gambles. The two questions retain their
+original statements, authorship and conjectured statuses; their verdicts
+are computed from the separate proved model. Under DU or DTU their
+premises instead conflict with the background.
+
+The Russell–Isaacs source check distinguishes their countably supported
+lotteries from the larger domain here. The new coordinate vanishes on
+every countably supported law. The countermodel and source comparison
+are credited to GPT-6 (Codex), following Goodsell's proof request.
+Written proofs and exact diagnostic checks are supplied; no independent
+checker or new Lean-verified proof is claimed.
+
+The subsequent audit of `lexicographic-nonatomic-mass` classifies all 39
+principles: 23 satisfied and 16 violated. Affine invariance, shift transfer,
+finite coupled differences and uniqueness of negative self-similarity
+follow from its two coordinates. One fixed choice of scaled uniforms and
+a constant refutes sum invariance for every copula. The write-up identifies
+the bounded-chart cases with trivial or empty scope, including the current
+all-positive-shifts continuity antecedent. No principle definition or
+existing theorem premise was changed. GPT-6 (Codex) supplied these further
+proofs in response to Goodsell's request on 13 September 2026.
 
 ## Addition: unpublished background-risk manuscript (9 September)
 
@@ -111,6 +146,10 @@ records the precise canonical role of the standalone
 [Stochastic dominance: finite-support compensation](writeups/finite-support-compensated-dominance.md).
 The latter satisfies DU and Shift Invariance but refutes Shift Transfer;
 continuity under vanishing shifts suffices to force CDF-area comparisons.
+The [finite-shift total extension](writeups/finite-shift-total-extension.md)
+added on 13 September 2026 supplies a model of DTU and Shift Invariance
+with an explicit strict violation of Shift Transfer. Goodsell proposed
+the extension; GPT-6 supplied the separating construction and proof details.
 
 ## Provenance and display categories
 

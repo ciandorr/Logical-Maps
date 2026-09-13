@@ -1,53 +1,129 @@
-# Does DTU alone turn cancellation into full independent-sum invariance?
+# DTU turns cancellation into full independent-sum invariance
 
-**Conjectured implication, not proved:** DTU + Independent Sum Cancellation
-implies Independent Sum Preservation.
+**Proved:** DTU + Independent Sum Cancellation implies Independent Sum
+Preservation. The geometric-noise argument below closes the indifference
+gap without a continuity axiom.
 
-Here DTU is the complete displayed package: Rich Outcomes, Totality,
-Stochastic Equivalence, Simple Expected Utility, Stochastic Dominance,
-and Mixture Independence. No continuity axiom is included.
+The recorded premises are unchanged: Rich Outcomes, Totality, Stochastic
+Equivalence, Simple EU, Stochastic Dominance, Mixture Independence and
+Independent Sum Cancellation. Rich Outcomes and the total measurable
+normalized chart identify the outcome domain with the real utility
+levels, so the auxiliary real-valued laws below are available.
 
-## What is already established
+**Source and work accounting.** GPT-6 (Codex) recorded the conjecture and
+partial analysis on 9 September 2026. Zachary Goodsell asked for its
+resolution and gave the strict-comparison contraposition argument on
+13 September. GPT-6 (Codex) supplied the geometric-noise construction and
+finite-mixture proof on 13 September. Goodsell's *Unbounded Utility and
+Background Risk* (unpublished), Lemma 1, pp. 7–8, supplies the separated
+sum principles, not this connecting theorem. The record retains its
+original ID and conjecture history. No independent checker, literature
+priority or Lean verification is claimed.
 
-Cancellation and Totality preserve strict comparisons. If $X\succ Y$ but
-$Y+Z\succeq X+Z$, cancellation would give $Y\succeq X$, a contradiction.
-Totality of the sums therefore gives $X+Z\succ Y+Z$.
+## Strict comparisons are preserved
 
-Under these assumptions, weak preservation can fail only by breaking an
-existing indifference. Thus the exact remaining question is:
+If $X\succ Y$ but $Y+Z\succeq X+Z$, Cancellation would give
+$Y\succeq X$, a contradiction. Totality of the sums therefore gives
 
-$$X\sim Y,\quad Z\perp(X,Y)
-\quad\stackrel{?}{\Longrightarrow}\quad X+Z\sim Y+Z.$$
+$$X\succ Y\quad\Longrightarrow\quad X+Z\succ Y+Z. \tag{1}$$
 
-Adding L¹ Continuity settles this affirmatively by
-[the new constant-shift proof](continuous-total-cancellation-implies-preservation.html).
-For every $n$, dominance gives $X+1/n\succ Y$, and strict preservation gives
-$(X+Z)+1/n\succ Y+Z$. Upper-section L¹ closure yields the required weak
-comparison, and exchanging $X,Y$ supplies the other one.
+This works for every independent noise law, including the auxiliary law
+constructed below. Thus Preservation could fail only by breaking a tie.
+Suppose $X\sim Y$ and, after exchanging their names if necessary,
 
-## The obstruction to removing continuity
+$$X+Z\succ Y+Z. \tag{2}$$
 
-The last limiting inference is not a consequence of preorder totality.
-The framework intentionally allows non-Archimedean comparisons of
-unbounded gambles. Having all the positively shifted approximants above a
-fixed gamble does not, by itself, put their limit above it.
+## Geometric noise
 
-It would therefore be insufficient to repeat that proof and silently take
-the limit. A positive solution must use further structure from DTU, for
-example Mixture Independence, to show that independent noise cannot split
-an indifferent pair. A negative solution must construct a DTU preorder
-satisfying Cancellation and give a tied pair whose independent sums become
-strictly ranked. The proved continuity result guarantees that any such
-countermodel violates L¹ Continuity.
+Let $\nu=\mathcal L(Z)$. Choose an independent geometric count $N$ and
+independent copies $Z_1,Z_2,\ldots$ of $Z$, with
 
-The existing total CDF-area conclosure extension satisfies full Independent
-Sum Invariance; it cannot distinguish Cancellation from Preservation.
-The incomplete exact area model cannot do so either without additional
-work: it lacks Totality, and its cancellation property is not established.
+$$P(N=n)=2^{-(n+1)}\quad(n=0,1,\ldots),\qquad
+W=\sum_{i=1}^{N}Z_i.$$
 
-**Original work: conjecture formulation and partial analysis.**
-GPT-6 (Codex), 9 September 2026. The sum principles come from Goodsell's
-*Unbounded Utility and Background Risk* (unpublished), Lemma 1, pp. 7–8.
-The proposed implication is recorded under Misc. and is not attributed to
-that manuscript. This is an unresolved entry in this project, not a claim
-of literature novelty. No independent checker or Lean verification is claimed.
+The empty sum is zero. Since $N$ is finite almost surely, $W$ is a
+real-valued gamble; no moment assumption is required. Its probability
+law $\rho$ satisfies the exact renewal identity
+
+$$\rho=\tfrac12\delta_0+\tfrac12\nu*\rho,\qquad
+2\rho-\nu*\rho=\delta_0. \tag{3}$$
+
+Indeed, conditional on $N\geq1$, the remaining number of summands again
+has the law of $N$. Equivalently,
+$\rho=\sum_{n\geq0}2^{-(n+1)}\nu^{*n}$. This is an identity of probability
+measures, with no limiting inference about preferences.
+
+Stochastic Equivalence allows fresh realizations of the relevant laws,
+with $W$ independent of $X,Y,Z$ and the mixture randomizers. The standing
+atomless standard space realizes the required countable product of real
+laws. We do not need to adjoin independent noise to a previously fixed
+variable that already generates the entire sigma-algebra: independent
+sums have convolution laws, and the rankings depend only on those laws.
+
+## Two finite mixtures give a contradiction
+
+Set
+
+$$A=M_{2/3}(X,Y+Z),\qquad B=M_{2/3}(Y,X+Z).$$
+
+Since $X\sim Y$, Mixture Independence makes
+$A\sim M_{2/3}(Y,Y+Z)$. By (2), Mixture Independence on the other branch
+makes $B\succ M_{2/3}(Y,Y+Z)$; exchanging mixture branches is licensed by
+Stochastic Equivalence. Hence $B\succ A$. Applying (1) with $W$ gives
+
+$$B+W\succ A+W. \tag{4}$$
+
+Write $\alpha=\mathcal L(X)$ and $\beta=\mathcal L(Y)$, and let $H$
+have the probability law
+
+$$\eta=\tfrac12\alpha*\nu*\rho+\tfrac12\beta*\nu*\rho.$$
+
+Using (3),
+
+$$\begin{aligned}
+\mathcal L(A+W)
+ &=\tfrac23\alpha*\rho+\tfrac13\beta*\nu*\rho\\
+ &=\tfrac13\alpha+\tfrac13\alpha*\nu*\rho
+                       +\tfrac13\beta*\nu*\rho\\
+ &=\tfrac13\alpha+\tfrac23\eta.
+\end{aligned}$$
+
+Similarly,
+
+$$\mathcal L(B+W)=\tfrac13\beta+\tfrac23\eta.$$
+
+Thus $A+W$ and $B+W$ have the laws of $M_{1/3}(X,H)$ and
+$M_{1/3}(Y,H)$ respectively. Since $X\sim Y$, Mixture Independence and
+Stochastic Equivalence give $A+W\sim B+W$, contradicting (4).
+
+No tie can be broken. Every weak comparison is either strict or an
+indifference, so this and (1) prove both clauses of Independent Sum
+Preservation.
+
+## Scope and consequences
+
+All preference substitutions use **binary mixtures**. The construction
+requires neither Countable Sure-Thing nor countable mixture independence,
+and uses no continuity or integrability assumption.
+
+Together with the recorded
+[Totality + Preservation ⇒ Cancellation](total-preservation-implies-independent-cancellation.html)
+and the defining combination of both directions, this makes Cancellation,
+Preservation and Independent Sum Invariance equivalent under DTU.
+
+The earlier
+[proof with L¹ Continuity](continuous-total-cancellation-implies-preservation.html)
+remains valid. Its limiting step is unnecessary for the present theorem.
+
+The auxiliary $W$ generally has infinite support even for finite-valued
+$Z$. Cancellation must therefore cover arbitrary independent noise.
+This argument does not establish full independent-sum invariance for the
+[finite-shift total extension](finite-shift-total-extension.html), whose
+verified noise properties concern finite-valued summands.
+
+In cone notation, the same calculation is $R(2I-T)=I$, where $T$ and $R$
+are convolution by $\nu$ and $\rho$. If an indifferent vector $v$ were
+sent to a strictly positive $Tv$, then $2v-Tv$ would be strictly negative.
+Strict preservation by $R$ would make $v$ strictly negative, a
+contradiction. The finite-mixture proof above proves this directly
+without needing a separate cone representation theorem.

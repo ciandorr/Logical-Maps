@@ -202,7 +202,58 @@ Add `source_names` alongside `sources`, with one short label per reference in th
 
 ## Viewer
 
-Graph: implications, ∧ nodes for multi-premise results, stronger principles higher. Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
+An optional `topics/<topic>/theme.css` overrides the shared palette for that
+topic's map, HTML write-ups, and Lean index. Define light and dark CSS variables
+inside `@media screen` to preserve the shared print styling. The stylesheet is
+embedded in generated pages and included in the topic downloads.
+
+Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
+
+### Graph layout
+
+Vertical position is logical strength. ⊥ is the floor, stronger principles sit
+lower, weaker ones higher, and every implication arrow points upward. An ∧ is
+the meet of its premises: it hangs beneath them, their strokes descend into it
+(dotted, without arrowheads), and its arrow ascends to the conclusion. When the
+conclusion implies every premise, the ∧ sits directly above that conclusion
+instead, as its equivalent, and its short arrow drops into it. Otherwise only
+arrows into ⊥ descend; principles inconsistent with the background stay in
+the row beside ⊥ (a chain of them stacks upward from it), and a conjectured
+refutation does not move a principle there. Principles
+are ranked by the longest chain of stronger principles beneath them, then
+lifted to just below their lowest consequence when that shortens more arrows
+than it lengthens; the order within a row comes from barycenter sweeps and
+adjacent swaps that remove crossings. ⊥ weighs more than other neighbours in
+that ordering, so collapsing principles gather around it. Principles without
+displayed arrows are packed in labelled bands above the diagram: background
+consequences (weakest of all) nearest the diagram, then principles with no
+displayed arrows at all. Nothing sits beneath ⊥. Separate connected clusters
+are packed side by side, with the cluster containing ⊥ beneath the rest.
+
+A hollow arrowhead means the converse implication is an open question, so the
+two sides may be equivalent; a filled head means a recorded model or proof
+refutes the converse (arrows into ⊥ are always filled). Each arrow's pop-up
+reports the converse, and for multi-premise arrows whether the remaining
+premises still suffice without each one. **Transitive reduction** hides an
+arrow when a chain of other displayed arrows already gives it, as in a Hasse
+diagram; a proved arrow is never hidden through a conjectural chain, nothing
+is hidden inside a cycle, and node positions do not change, since the layout
+always uses the full arrow set.
+
+Clicking a principle (on the graph or in the sidebar) shades every other
+principle by its relation to it: entailed, excluded (the two are jointly
+inconsistent), separated by a model (the principle does not entail it), open,
+or conjectured when conjecture arrows are shown; principles inconsistent with
+the background are counted apart, since everything excludes them. A corner
+glyph (⇒, ¬, ⇏, ?) repeats the reading without colour, and a legend beneath
+the graph shows the counts. Proofs come from the arrow engine (displayed
+sources plus background proofs), models from the selected evidence, exactly as
+in the theory explorer; a witness available only outside the selected sources
+is reported as such. Shift-click a second principle, or use **Compare with…**,
+for a readout of both directions and their joint consistency with the proofs
+and witness models linked. A background-inconsistent principle shades nothing:
+its consequences by explosion are never shown. The shading survives reading an
+arrow's pop-up and clears with Escape or a click on empty space.
 
 The Conjectures tab shares the background controls. **Show resolved** is off
 by default, hiding questions currently proved or refuted. Verdicts are computed
@@ -370,5 +421,9 @@ For a model, list every principle you have actually checked, both ways; the engi
 
 Run `node scripts/check_signed_ui.cjs` with jsdom available to check signed controls,
 URL restoration, contextual contraposition against truth tables, and arrow geometry.
+`scripts/check_hasse_layout_ui.cjs` checks the layout convention (floor, ascending
+arrows, meets, pinned collapses, bands, hollow heads, transitive reduction) on
+fixtures and on every graph mode of the built topics; `scripts/check_relations_ui.cjs`
+checks relation shading, comparison, converse readouts and their evidence discipline.
 `python3 scripts/check_falsity.py` also checks negative backgrounds and agreement
 between the Python and browser engines.

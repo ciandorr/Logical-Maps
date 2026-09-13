@@ -1,0 +1,28 @@
+id: self-necessitation-implies-propositional-extensionality
+premises:
+- self-necessitation
+conclusion: propositional-extensionality
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), connecting proof
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: 'Given p↔q, instantiate self-necessitation at the proposition p↔q to obtain □(p↔q). The zero-argument
+  form of the proved intensionality lemma gives p=q: it follows by necessitation-free substitution into
+  the closed identity ((p↔q)∧p)=((p↔q)∧q). Discharge and generalize p,q.'
+sources:
+- Codex (GPT-6), connecting proof self-necessitation-implies-propositional-extensionality, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §2.2, pp. 5–6;
+  §5.5, p. 37 (definitions/background).
+source_names:
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §2.2, pp. 5–6; §5.5, p. 37
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

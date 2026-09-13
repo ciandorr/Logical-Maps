@@ -18,6 +18,12 @@ into a public submodule. Public files remain public even during private work.
 Keep interface copy concise and functional. Do not add unsolicited editorial
 sentences, promotional descriptions, or commentary beneath headings and links.
 
+Keep the collection maps' contribution protocol consistent with
+`topics/unbounded-utility/contribute.md`, including supporting documents and
+crediting contributors. Use `[Logical Maps] <topic title>` for topic-specific
+email subjects and `[Logical Maps]` for general project suggestions; prefill
+the topic subject in each map's email link.
+
 ## Commands
 
 - `python3 scripts/pmap.py validate` — must pass before any commit.
@@ -43,6 +49,11 @@ sentences, promotional descriptions, or commentary beneath headings and links.
 - `python3 scripts/pmap.py selftest` — engine unit tests. Run after touching the
   derivation code in `scripts/pmap.py` **or** `viewer/template.html` — the two
   implementations must stay in sync.
+- `NODE_PATH=<node_modules with jsdom> node scripts/check_<name>_ui.cjs` — DOM
+  checks of the viewer. Run them all after touching `viewer/template.html`;
+  `check_hasse_layout_ui.cjs` and `check_relations_ui.cjs` guard the graph
+  layout convention (⊥ is the floor, arrows ascend, ∧ below its premises) and
+  the relation shading and comparison readouts. Keep those invariants.
 - `python3 topics/decision-theory/checks/countermodels.py` — numerical sanity
   checks of the AI-produced countermodels for that topic.
 

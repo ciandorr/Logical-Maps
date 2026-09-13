@@ -1,0 +1,31 @@
+id: ii-implies-four-necessity
+premises: []
+conclusion: four-necessity
+status: proved
+certificate:
+  source_id: the-broadest-necessity
+  lean: none
+  produced_by: Andrew Bacon; intuitionistic proof as presented by Zachary Goodsell
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+proof: If p = ⊤, Leibniz substitution gives (p = ⊤) = (⊤ = ⊤). The reflexivity theorem ⊤ = ⊤ is identical
+  to ⊤ by assumption-free propositional intensionality. Transitivity gives (p = ⊤) = ⊤. Discharge and
+  generalize.
+sources:
+- Andrew Bacon (2018), The Broadest Necessity, Journal of Philosophical Logic 47.5, pp. 733–783; attribution
+  in Goodsell, Theorem 1.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §3.2, Theorem 1,
+  p. 9.
+source_names:
+- The Broadest Necessity
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: the-broadest-necessity
+  role: origin
+  note: Original attribution follows Goodsell; the supplied proof is the intuitionistic presentation in
+    Goodsell.
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §3.2, Theorem 1, p. 9
+notes: Informal proof; no independent checker or Lean verification.

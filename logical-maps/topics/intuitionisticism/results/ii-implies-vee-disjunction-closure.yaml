@@ -1,0 +1,27 @@
+id: ii-implies-vee-disjunction-closure
+premises: []
+conclusion: vee-disjunction-closure
+status: proved
+certificate:
+  source_id: possibility-in-intuitionistic-higher-order-logic
+  lean: none
+  produced_by: Zachary Goodsell; proof transcribed and expanded from the manuscript
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+proof: 'Assume the two candidate predicates, which are themselves □-stable identities with ⊤. For R =
+  λp.(Pp∨Qp), PSa follows by cases from the PSa clauses of P and Q. Neither disjunct of R⊥ can hold by
+  their PSb clauses. For PSc, split P(p∨q)∨Q(p∨q), apply the respective PSc clause, and inject into Rp∨Rq.
+  The same finite deduction is available necessarily: the candidate conditions are necessary, and necessitated
+  logical theorems plus K transport the deduction under □. Thus the conjunction defining Possibility_∨(R)
+  is identical to ⊤. Discharge and generalize P,Q.'
+sources:
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.2, Theorem 9,
+  Eq. (36), pp. 19–20.
+source_names:
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §4.2, Theorem 9, Eq. (36), pp. 19–20
+notes: Informal proof; no independent checker or Lean verification.

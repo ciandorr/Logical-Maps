@@ -1,0 +1,27 @@
+id: propositional-extensionality-implies-self-necessitation
+premises:
+- propositional-extensionality
+conclusion: self-necessitation
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), connecting proof
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: Assume p. Then p↔⊤. Instantiate the selected extensionality sentence at p,⊤ to obtain p=⊤, hence
+  □p. Discharge and generalize p.
+sources:
+- Codex (GPT-6), connecting proof propositional-extensionality-implies-self-necessitation, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §2.1, p. 5; §5.5,
+  p. 37 (definitions/background).
+source_names:
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §2.1, p. 5; §5.5, p. 37
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

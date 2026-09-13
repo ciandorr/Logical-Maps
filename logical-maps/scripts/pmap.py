@@ -557,10 +557,14 @@ def enriched_payload(topic_id: str, downloads: dict) -> dict:
 # Write-ups
 # ----------------------------------------------------------------------------
 
-def theme_head() -> str:
-    """Embed shared presentation assets so downloaded HTML stays self-contained."""
+def theme_head(topic_id: str | None = None) -> str:
+    """Embed shared assets and optional topic styling in self-contained HTML."""
     viewer = ROOT / "viewer"
     css = (viewer / "theme.css").read_text(encoding="utf-8")
+    if topic_id is not None:
+        topic_css = TOPICS / topic_id / "theme.css"
+        if topic_css.is_file():
+            css += "\n" + topic_css.read_text(encoding="utf-8")
     js = (viewer / "theme.js").read_text(encoding="utf-8")
     return f"<style>{css}</style>\n<script>{js}</script>"
 
@@ -700,7 +704,7 @@ def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True
         if pandoc:
             subprocess.run([pandoc, str(body_md), "-s", "--mathml", "--metadata", f"title={title}",
                             "-o", str(html_path)], check=True, capture_output=True)
-            html = html_path.read_text(encoding="utf-8").replace("</head>", f"{theme_head()}</head>", 1)
+            html = html_path.read_text(encoding="utf-8").replace("</head>", f"{theme_head(topic_id)}</head>", 1)
             html = html.replace("<body>", '<body class="writeup-page">' + WRITEUP_NAV, 1)
             html_path.write_text(html, encoding="utf-8")
         else:
@@ -710,7 +714,7 @@ def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True
             html_path.write_text(
                 f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
                 f'<meta name="viewport" content="width=device-width, initial-scale=1">'
-                f'<title>{escape(title)}</title>{theme_head()}</head>'
+                f'<title>{escape(title)}</title>{theme_head(topic_id)}</head>'
                 f'<body class="writeup-page">{WRITEUP_NAV}{body}</body></html>', encoding="utf-8")
         entry["html"] = f"writeups/{iid}.html"
         if pdf and pandoc and xelatex:
@@ -739,7 +743,7 @@ def render_lean_index(data: dict, source: Path, destination: Path) -> None:
     title = escape(data["topic"]["title"] + ' — Lean files')
     html = (f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width, initial-scale=1">'
-            f'<title>{title}</title>{theme_head()}</head>'
+            f'<title>{title}</title>{theme_head(data["topic"]["id"])}</head>'
             f'<body class="writeup-page">{WRITEUP_NAV}<h1>Lean formalisation</h1>'
             f'<p>{definitions}/{len(data["principles"])} principles defined; '
             f'{results}/{len(data["results"])} result proofs verified; '
@@ -790,7 +794,7 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
         item["files"] = files.get(item["id"], {})
     (outdir / "data.json").write_text(json.dumps(payload, indent=1, ensure_ascii=False), encoding="utf-8")
     bundle_topic(topic_id)
-    html = TEMPLATE.read_text(encoding="utf-8").replace("<!--__PMAP_THEME__-->", theme_head())
+    html = TEMPLATE.read_text(encoding="utf-8").replace("<!--__PMAP_THEME__-->", theme_head(topic_id))
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     html = html.replace("/*__PMAP_DATA__*/null", blob)
     html = html.replace("__PMAP_TITLE__", payload["topic"]["title"])

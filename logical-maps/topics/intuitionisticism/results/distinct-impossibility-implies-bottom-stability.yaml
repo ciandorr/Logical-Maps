@@ -1,0 +1,23 @@
+id: distinct-impossibility-implies-bottom-stability
+premises:
+- impossibility-necessary-falsehood-distinct-from-bottom
+conclusion: bottom-identity-stability
+status: proved
+certificate:
+  source_id: possibility-in-intuitionistic-higher-order-logic
+  lean: none
+  produced_by: Zachary Goodsell; proof transcribed and expanded from the manuscript
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+proof: Rewrite ¬(p≠⊥) as ¬¬(p=⊥), and □¬p as p=⊥, using the II identity in footnote 5. Generalize p.
+sources:
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §3.2, Eqs. (17)–(18),
+  p. 11.
+source_names:
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §3.2, Eqs. (17)–(18), p. 11
+notes: Informal proof; no independent checker or Lean verification.

@@ -1,0 +1,50 @@
+id: full-branching-extensional-frame
+name: 'Full frame: extensional branching'
+description: 'Take the full model on worlds a,b,c, rooted at a, with ≤ᵢ=≤ₘ the reflexive branching order
+  a≤b and a≤c. This makes the paper’s extensional-frame discussion concrete. Interpret all types and logical
+  constants by Definitions 8–9 and Theorem 22.
+
+
+  For informational upsets, truth at a world already implies truth at all of its metaphysical successors,
+  so □p and p have the same truth set. Equality of propositions at w is equivalence on the informational
+  cone, exactly the truth condition of their material biconditional at w. This verifies universal self-necessitation
+  and propositional extensionality. Also p=⊥ is ¬p; stability of negations therefore verifies both stability
+  principles for every proposition.
+
+
+  Let p={b} and q={c}. At a, ¬p and ¬¬p have truth sets {c} and {b}, so weak excluded middle fails, as
+  does excluded middle. The union p∨q is dense: ¬¬(p∨q) holds at a. But neither ¬¬p nor ¬¬q holds there.
+  Since ≠⊥ has the truth function of double negation in this frame, PSc for ≠⊥ and the nonfalsity-to-distinct-disjunct
+  condition fail at the same evaluation. These are failures of the universally quantified formulas, witnessed
+  by the displayed propositions.'
+satisfies:
+- propositional-extensionality
+- self-necessitation
+- bottom-identity-stability
+- necessary-falsehood-stability
+violates:
+- weak-excluded-middle
+- excluded-middle
+- nonfalsity-disjunction
+- ps-c-distinct-from-bottom
+- nonfalsity-distinct-disjunction
+status: proved
+certificate:
+  source_id: possibility-in-intuitionistic-higher-order-logic
+  lean: none
+  produced_by: Zachary Goodsell; construction transcribed and made explicit from the manuscript
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+sources:
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §3.2, Eqs. (13)–(16),
+  p. 10; §5.5, p. 37.
+source_names:
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §3.2, Eqs. (13)–(16), p. 10; §5.5, p. 37
+notes: Informal model verification; no independent checker or Lean verification.
+checks:
+- topics/intuitionisticism/checks/finite_frames.py

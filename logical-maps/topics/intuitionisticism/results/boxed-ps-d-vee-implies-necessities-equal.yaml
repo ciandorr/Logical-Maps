@@ -1,0 +1,34 @@
+id: boxed-ps-d-vee-implies-necessities-equal
+premises:
+- necessary-ps-d-possibility-vee
+conclusion: necessities-equal
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), connecting proof
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: 'Let A be □PSd(◇_∨). The standing necessary PSa, PSb and PSc clauses for ◇_∨, and the standing
+  necessary normality of □, show that □ and ◇_∨ form a qualified married pair. Thus Necessity₂(□). Instantiating
+  the definition of □₂p with this candidate yields □₂p→□p for every p. The reverse comparison is an II
+  theorem.
+
+
+  After discharging A, the pointwise argument is a closed theorem A→∀p.(□₂p↔□p). Since A is boxed, 4 gives
+  A→□A. Necessitate the closed conditional and apply K to obtain □∀p.(□₂p↔□p). Apply the proved predicate
+  intensionality lemma to identify □₂ and □.'
+sources:
+- Codex (GPT-6), connecting proof boxed-ps-d-vee-implies-necessities-equal, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §§4.2–4.5, pp.
+  18–27 (definitions/background).
+source_names:
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §§4.2–4.5, pp. 18–27
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

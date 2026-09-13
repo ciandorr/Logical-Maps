@@ -1,0 +1,28 @@
+id: function-extensionality-implies-modalized-functionality
+premises:
+- function-extensionality
+conclusion: modalized-functionality
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), connecting proof
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: Fix arbitrary σ,τ and f,g:σ→τ. Under □∀x.fx=gx, T gives ∀x.fx=gx. Use the selected function-extensionality
+  instance at exactly these σ,τ to get f=g. Discharge, generalize f,g, and then observe that σ,τ were
+  arbitrary. This supplies every target instance.
+sources:
+- Codex (GPT-6), connecting proof function-extensionality-implies-modalized-functionality, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §5.2, Eq. (70),
+  p. 32 (definitions/background).
+source_names:
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §5.2, Eq. (70), p. 32
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

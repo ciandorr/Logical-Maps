@@ -1,0 +1,28 @@
+id: necessary-classicality-excludes-distinct-necessary-nonfalsity
+premises:
+- necessary-excluded-middle
+- necessary-nonfalsity-with-distinct-truth
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), 13 September 2026
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+proof: The closed intuitionistic implication from quantified excluded middle to ∀p.(¬¬p→p) can be necessitated.
+  With necessary excluded middle, K and necessitated universal instantiation give □(¬¬p→p) for each p.
+  Choose the existential witness with □¬¬p and p≠⊤; K yields □p, which is p=⊤, contradicting p≠⊤.
+sources:
+- Codex (GPT-6), connecting proof recorded 13 September 2026 in necessary-classicality-excludes-distinct-necessary-nonfalsity.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §6.4, Eq. (85),
+  p. 45.
+source_names:
+- Codex connecting proof, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §6.4, Eq. (85), p. 45
+notes: Informal proof; no independent checker or Lean verification.

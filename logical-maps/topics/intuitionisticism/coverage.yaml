@@ -1,0 +1,467 @@
+paper: Possibility in Intuitionistic Higher-Order Logic
+manuscript_date: '2026-08-21'
+recorded_date: '2026-09-13'
+recorded_by: Codex (GPT-6)
+checked_by: []
+numbered_results:
+- number: 1
+  kind: Theorem
+  title: K, T, 4 and necessitation for □
+  locator: §3.2, p. 9
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-k-necessity
+  - ii-implies-t-necessity
+  - ii-implies-four-necessity
+  - ii-implies-necessitation
+  account: 'Original attribution: Andrew Bacon (2018). Goodsell supplies an intuitionistic proof; all four parts
+    are recorded with that distinction.'
+- number: 2
+  kind: Theorem
+  title: Monotonic existential modal semantics iff Frame Condition 1
+  locator: §3.4, pp. 14–15
+  coverage_status: semantic-proof
+  records: []
+  account: 'For necessity of FC1, a missing completion of aRb and a≤ᵢc is witnessed by the upward closure of b:
+    the relational existential operator holds at a but not c. Conversely, transport an existential witness b across
+    a≤ᵢc using FC1 to obtain d≥ᵢb with cRd; upward closure preserves truth. This is a theorem about arbitrary birelation
+    frames, not a new II axiom.'
+- number: 3
+  kind: Theorem
+  title: IK and IS4 completeness for Plotkin–Stirling frames
+  locator: §3.4, p. 15
+  coverage_status: literature-statement
+  records: []
+  account: Attributed to Plotkin and Stirling (1986); proof referred to Simpson (1994), Chapter 3. IK uses FC1 and
+    FC2; IS4 additionally requires R reflexive and transitive. The cited external proof has not been independently
+    transcribed. R is not identified with ≤ₘ in this theorem.
+- number: 4
+  kind: Theorem
+  title: WK completeness with Wijesekera semantics
+  locator: §3.4, p. 15
+  coverage_status: literature-statement
+  records: []
+  account: Attributed to Wijesekera (1990). The existential condition is ∀w′≥ᵢw ∃v.(w′Rv ∧ v∈p). WK retains K for
+    its necessity, necessitation, PSa and PSb, but drops PSc and PSd. This is a separate relational interpretation,
+    not a new designated possibility in II.
+- number: 5
+  kind: Theorem
+  title: Two relative-consistency obstructions to possibility
+  locator: §4.1, pp. 16–17; §6.2, pp. 42–44
+  coverage_status: proof-recorded
+  records:
+  - full-infinite-comb
+  - full-binary-tree-canopy
+  - uniform-counterexamples-exclude-ps-b-c-d
+  account: 'Part (i): the comb forces ¬∃f.(PSb f∧PSd f). Part (ii): the tree forces ∀f.((PSb f∧PSc f)→∃p.(¬fp∧p≠⊥)).
+    The finite warmup only fails the existential at its root and does not force its negation.'
+- number: 6
+  kind: Theorem
+  title: ◇_∨ is a Possibility_∨
+  locator: §4.2, p. 19
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-necessary-ps-a-possibility-vee
+  - ii-implies-necessary-ps-b-possibility-vee
+  - ii-implies-necessary-ps-c-possibility-vee
+  account: The necessary PSa, PSb and PSc components are separate graph nodes; their conjunction is the displayed
+    candidate predicate. Witness elimination proves each clause before closed necessitation.
+- number: 7
+  kind: Theorem
+  title: Truth is a Possibility_∨; T for ◇_∨
+  locator: §4.2, p. 19
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-t-possibility-vee
+  account: Truth=λp.p satisfies all three candidate clauses by intuitionistic logic and T for □. It witnesses p→◇_∨p.
+- number: 8
+  kind: Theorem
+  title: Nonfalsity qualifies exactly under necessary weak excluded middle
+  locator: §4.2, Eq. (34), p. 19
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-nonfalsity-candidate-characterization
+  - necessary-weak-excluded-middle-implies-necessary-nonfalsity-disjunction
+  - necessary-nonfalsity-disjunction-implies-necessary-weak-excluded-middle
+  account: The operator-candidate characterization is an identity of propositions, not merely an unboxed biconditional.
+    The corresponding unboxed distribution/weak-LEM equivalence is also recorded.
+- number: 9
+  kind: Theorem
+  title: Composition and disjunction closure; 4 for ◇_∨
+  locator: §4.2, Eqs. (35)–(36), pp. 19–20
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-vee-composition-closure
+  - ii-implies-vee-disjunction-closure
+  - ii-implies-four-possibility-vee
+  account: Necessary candidate conditions are used with K and their □-stability. Selected formulas are not treated
+    as assumption-free theorems.
+- number: 10
+  kind: Theorem
+  title: Exact IS4− logic for □ and ◇_∨
+  locator: §4.2, p. 20; §6.3, p. 44
+  coverage_status: partial
+  records: []
+  account: 'The displayed IS4− axioms have recorded II proofs. Exactness remains pending: the trirelation definitions
+    in §3.5 and the unwinding construction in §6.3 are unfinished. Question 1 later asks for this same logic. No
+    graph nonimplications are inferred from exactness.'
+- number: 11
+  kind: Theorem
+  title: Prime propositions are ◇_∨-possible
+  locator: §4.2, p. 20
+  coverage_status: pending
+  records:
+  - ii-implies-prime-possibility
+  account: The manuscript offers a short candidate-operator argument. The necessity and primeness scopes of that
+    candidate have not been checked in full; the graph record has conjectured status and empty proof.
+- number: 12
+  kind: Theorem
+  title: ◇_∞ qualifies and obeys T and 4
+  locator: §4.4, pp. 23–24
+  coverage_status: partial
+  records:
+  - ii-implies-necessary-ps-a-possibility-infinity
+  - ii-implies-necessary-ps-b-possibility-infinity
+  - ii-implies-necessary-infinitary-distribution-possibility-infinity
+  - ii-implies-t-possibility-infinity
+  - ii-implies-four-possibility-infinity
+  account: Direct existential-witness proofs establish the defining necessary PSa, PSb and PSc∞^t clauses, and Truth
+    establishes T. The composition step needed for 4 remains pending. Binary PSc and the type-reduction claim are
+    also pending for the printed infinitary definition.
+- number: 13
+  kind: Theorem
+  title: Exact IS4− logic for □ and ◇_∞
+  locator: §4.4, p. 24; §6.3, p. 44
+  coverage_status: pending
+  records: []
+  account: Depends on the unfinished unwinding argument and on the infinitary-to-binary/composition issues. Exactness
+    is not encoded as an object-language axiom.
+- number: 14
+  kind: Theorem
+  title: □₂ and ◇₂ are married
+  locator: §4.5, Eq. (57), pp. 25–26
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-necessary-ps-a-paired-two
+  - ii-implies-necessary-ps-d-paired-two
+  account: Both paired PS clauses are recorded under outer □, which is the identity-with-⊤ modality used in Married.
+    The inner necessity in those clauses is □₂.
+- number: 15
+  kind: Theorem
+  title: □₂ and ◇₂ belong to their paired candidate classes
+  locator: §4.5, p. 26
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-k-necessity-two
+  - ii-implies-necessitation-two
+  - ii-implies-necessary-ps-b-possibility-two
+  - ii-implies-necessary-ps-c-possibility-two
+  account: Universal normality for □₂, its value at ⊤, and the necessary PSb/PSc clauses for ◇₂ combine with Theorem
+    14. Eq. (47) is explicitly read with the universal closure its use as a candidate property requires; the printed
+    free variables are documented.
+- number: 16
+  kind: Theorem
+  title: Truth is a necessity and possibility, married to itself
+  locator: §4.5, p. 26
+  coverage_status: proof-recorded
+  records:
+  - ii-implies-t-necessity-two
+  - ii-implies-t-possibility-two
+  account: All candidate and marriage clauses at Truth reduce to intuitionistic tautologies; their closed derivations
+    can be necessitated. These witnesses establish both T laws.
+- number: 17
+  kind: Theorem
+  title: At least IS4 for □₂ and ◇₂
+  locator: §4.5, p. 26
+  coverage_status: partial
+  records:
+  - ii-implies-four-necessity-two
+  - ii-implies-four-possibility-two
+  account: K, paired PSa–PSd, necessitation, and both T laws have recorded proofs. The two 4 clauses retain the
+    paper’s stated status but are conjectured in the database until its composition analogy is expanded. The conjectured
+    exactness and the double-negation transport claim are separately pending.
+- number: 18
+  kind: Theorem
+  title: Distinct □₂-equivalent propositions are consistent
+  locator: §4.5, Eq. (61), p. 27
+  coverage_status: proof-recorded
+  records:
+  - full-binary-tree-canopy
+  account: In the tree, C≠⊥ while ¬◇₂C yields □₂¬C by paired PSd. Thus C and ⊥ refute □₂-intensionalism. The model
+    also separates □ from □₂.
+- number: 19
+  kind: Lemma
+  title: Term interpretations stay in the local domain
+  locator: §5.2, p. 31
+  coverage_status: semantic-proof
+  records: []
+  account: Convert a term to applicative combinator form. Its free variables are in the local domain by hypothesis;
+    the required constants and combinators are locally available. Closure of application under the logical relations
+    inductively keeps every subterm, hence the whole interpretation, in the domain.
+- number: 20
+  kind: Lemma
+  title: Rerooting along metaphysical accessibility preserves models
+  locator: §5.2, p. 31
+  coverage_status: semantic-proof
+  records: []
+  account: If w≥ₘw₀, the local domains contain the original root’s distinguished elements by monotonicity of the
+    logical relations. Changing only the distinguished root to w preserves richness and all interpretation clauses.
+    This licenses testing assumption-free theorems at metaphysically accessible worlds.
+- number: 21
+  kind: Theorem
+  title: Soundness and completeness of bimodalized domain semantics
+  locator: §5.2, pp. 31–32
+  coverage_status: semantic-proof-sketch
+  records:
+  - ii-implies-modalized-functionality
+  account: 'The interpretation clauses validate IH. Quasifunctionality gives Eq. (70): truth of □∀x.fx=gx means
+    equality on every metaphysically accessible local domain, so f∼g at the root. For intensionality, apply validity
+    of an assumption-free premise at each rerooted model, then use propositional congruence or quasifunctionality.
+    Completeness is Theorem 29. This is a retained metatheoretic proof outline, not an additional assumption in
+    the graph. The later connection audit supplies an all-types syntactic proof of Eq. (70), with its original attribution
+    and separate alternative-proof credit.'
+- number: 22
+  kind: Theorem
+  title: Full structures are rich and quasifunctional
+  locator: §5.3, p. 33
+  coverage_status: semantic-proof-sketch
+  records: []
+  account: Take all informational upsets at type t and all set functions at function types, with recursively defined
+    local congruence. Quasifunctionality follows from that definition. For Univ, f∼g at w entails agreement on every
+    local input at each informational successor of every metaphysical successor; hence their universal truth sets
+    agree on the metaphysical cone. The manuscript treats the logical functions and combinators similarly. The explicit
+    countermodels invoke this construction at every type, not only their finite propositional projection.
+- number: 23
+  kind: Theorem
+  title: FC1 forces nonfalsity to give a distinct disjunct
+  locator: §5.5, Eq. (77), pp. 37–38
+  coverage_status: semantic-proof
+  records: []
+  account: If ¬¬(p∨q) holds at w, choose an informational successor u in one disjunct, say p. Since ≤ᵢ⊆≤ₘ, w≤ₘu.
+    For every v≥ᵢw, FC1 gives d≥ᵢu with v≤ₘd; persistence makes p true at d. Thus p=⊥ fails at every v≥ᵢw, so p≠⊥
+    holds at w. The q case is symmetric. The graph contains the object-language conclusion as an optional principle;
+    FC1 remains a condition on representations, not an II axiom. The prose proof’s occurrence of ⊤ where ⊥ is needed
+    is not used.
+- number: 24
+  kind: Lemma
+  title: Prime-theory extension avoiding an underivable sentence
+  locator: §6.1, p. 39
+  coverage_status: semantic-proof-sketch
+  records: []
+  account: The Henkin-style construction extends a small closed theory while avoiding p, successively choosing disjuncts
+    and fresh existential witnesses; compactness preserves avoidance at unions. The manuscript cites Henkin (1950),
+    p. 86 for the construction. The constant-reserve and enumeration details have not been independently completed
+    here.
+- number: 25
+  kind: Lemma
+  title: Propositional local classes embed in truth sets on the modal cone
+  locator: §6.1, p. 40
+  coverage_status: semantic-proof-sketch
+  records: []
+  account: If p=q is absent from w, the manuscript uses the equations of w and prime extension to obtain a metaphysical
+    successor distinguishing p and q. This separates the corresponding truth sets. The passage from equations to
+    provable material equivalence is retained as part of the source proof outline, not separately formalized.
+- number: 26
+  kind: Lemma
+  title: The term structure is rich
+  locator: §6.1, pp. 40–41
+  coverage_status: semantic-proof-sketch
+  records: []
+  account: Use classes of the logical constants and combinators. For implication, a missing implication permits
+    an extension containing its antecedent without its consequent. Existential truth follows from witness completeness.
+    For the reverse universal clause use a fresh constant and prime extension. The source supplies these cases;
+    the other applicative checks are schematic.
+- number: 27
+  kind: Lemma
+  title: The term structure is quasifunctional
+  locator: §6.1, p. 41
+  coverage_status: semantic-proof-sketch
+  records: []
+  account: Agreement on every local input at every metaphysical successor yields ∀x.fx=gx there by the fresh-constant
+    argument. Lemma 25 gives its identity with ⊤ at w, and modalized functionality gives f=g. This retains the dependencies
+    on Lemma 25 and Eq. (70).
+- number: 28
+  kind: Theorem
+  title: Term models exist and their root theory is exactly w₀
+  locator: §6.1, p. 41
+  coverage_status: semantic-proof-sketch
+  records: []
+  account: Interpret each term by its relative equivalence class. Lemmas 25–27 provide the required model structure;
+    truth at the root is membership in w₀ by construction. The source’s immediate proof is recorded with these dependencies.
+- number: 29
+  kind: Theorem
+  title: Strong completeness for II
+  locator: §6.1, pp. 41–42
+  coverage_status: semantic-proof
+  records: []
+  account: If Γ does not prove p, Lemma 24 gives a prime theory extending Γ and omitting p. Root its term model
+    there. By Theorem 28 all of Γ is true and p is false in that model, contradicting semantic entailment. The argument
+    is conditional on the prime extension and term-model lemmas, as in the manuscript.
+- number: 30
+  kind: Theorem
+  title: Comb semantics and failure of relational representation for ◇_∨
+  locator: §6.2, p. 44
+  coverage_status: partial
+  records:
+  - full-infinite-comb
+  - full-comb-infinitary-collapse
+  account: At a spine world, ◇_∨ holds exactly for upsets with a spine tail or infinitely many teeth. The detailed
+    model record proves this. Every singleton tooth is impossible there but their infinite union is possible, precluding
+    any fixed accessibility relation with existential semantics on all propositions. The separate assertion that
+    ◇_∞=Truth is pending for the printed infinitary definition.
+- number: 31
+  kind: Theorem
+  title: Marriage in the comb and collapse to Truth in the tree
+  locator: §6.2, p. 44
+  coverage_status: partial
+  records:
+  - full-binary-tree-canopy
+  account: The tree assertion ◇_∨=Truth is proved by splitting a proposition absent at a node into its child-cone
+    pieces. The same verification gives ◇₂=Truth. The comb-spouse expression is missing in the manuscript, so no
+    spouse is invented.
+numbered_definitions:
+- number: 1
+  title: Birelation frame
+  locator: §3.4, pp. 13–14
+  account: A nonempty W, preorder ≤ᵢ, and arbitrary relation R; FC1 and FC2 are optional extra conditions.
+- number: 2
+  title: Metaphysical birelation frame
+  locator: §5.2, p. 29
+  account: A distinguished world w₀ and preorders ≤ᵢ⊆≤ₘ on W.
+- number: 3
+  title: Prop
+  locator: §5.2, Eq. (63), p. 29
+  account: The set of all ≤ᵢ-upward-closed subsets of W.
+- number: 4
+  title: Bimodalized domain structure
+  locator: §5.2, pp. 29–30
+  account: Disjoint nonempty type domains, a truth map to a Heyting subalgebra of Prop, application, and local partial
+    equivalence relations respecting application and persisting in ≤ₘ. Propositional congruence means agreement
+    on the metaphysical cone.
+- number: 5
+  title: Rich structure
+  locator: §5.2, Eqs. (66)–(69), p. 30
+  account: Locally available implication, quantifier and equality interpretations and K/S combinators with the specified
+    semantic behavior.
+- number: 6
+  title: Quasifunctional structure
+  locator: §5.2, p. 30
+  account: Functions agreeing on all local arguments at every metaphysical successor are congruent at the original
+    world.
+- number: 7
+  title: Bimodalized domain model
+  locator: §5.2, p. 31
+  account: A rich quasifunctional structure equipped with the specified variable, application, lambda and logical-constant
+    interpretations. Formula truth is truth of its interpretation at the chosen root and assignment.
+- number: 8
+  title: Full structure
+  locator: §5.3, pp. 32–33
+  account: All informational upsets at t, all set functions at function types, and recursively defined congruence
+    on every metaphysical cone; local domains are the self-congruent elements.
+- number: 9
+  title: Full model
+  locator: §5.3, p. 33
+  account: The interpretation associated with the full structure; the source invokes Theorem 22 for existence.
+- number: 10
+  title: Term structure
+  locator: §6.1, p. 40
+  account: Prime theories as worlds, inclusion as ≤ᵢ, preservation of equations as ≤ₘ; terms represented by their
+    world-indexed local equivalence classes; application induced by syntax.
+- number: 11
+  title: Term model
+  locator: §6.1, p. 41
+  account: The term structure interpreted by classes of the logical constants and terms, with root truth given by
+    membership.
+questions:
+- number: 1
+  title: Exact propositional modal logic of □ and ◇_∨
+  locator: §7.1, pp. 45–46
+  account: Conflicts with the asserted exactness of Theorem 10; retained as unresolved while §6.3 is incomplete.
+- number: 2
+  title: Exact propositional modal logic of □₂ and ◇₂
+  locator: §7.1, p. 46
+  account: Theorem 17 states the IS4 lower bound and conjectures exactness. The two 4 proofs still need expansion
+    in this map.
+- number: 3
+  title: Spouse uniqueness for □ and general monogamy
+  locator: §7.1, p. 46
+  account: Both qualified uniqueness statements are principle nodes. §4.5 contains contrary draft remarks about
+    polygamy, but no completed countermodel is supplied.
+- number: 4
+  title: Consequences of Descriptions over II
+  locator: §7.1, p. 46
+  account: The type-ambiguous necessary description principle is recorded. No S5 conclusion is imported from the
+    discussion of Classicism.
+equation_coverage:
+- numbers: 1–3
+  subject: Standing intensionality rules and the hypothetical extensional rule
+  location: Framework; propositional-extensionality
+- numbers: '4'
+  subject: Quantifier/implication scope example
+  location: Notation only; not an asserted law
+- numbers: 5–11
+  subject: Reduction of logical constants
+  location: Background definitions
+- numbers: 12–18
+  subject: Disjunction, nonfalsity and necessary falsehood
+  location: Named operator PS conditions, weak-LEM and stability records
+- numbers: 19–21
+  subject: Relational semantic clauses
+  location: Semantic background; Theorems 2–4
+- numbers: 22–25
+  subject: PSa–PSd as properties of functions
+  location: Background definitions and named instances
+- numbers: 26–29
+  subject: Consistency obstructions and stability
+  location: Comb/tree models and stability graph
+- numbers: 30–31
+  subject: General quantifier recipe for broad modalities
+  location: Background explanation; no extra unindexed modality
+- numbers: 32–36
+  subject: Possibility_∨ and closure
+  location: Definitions; Theorems 6–9
+- numbers: 37–41
+  subject: World/prime reductions and recovery of IK
+  location: Prime-representation nodes; necessary PSd edge pending
+- numbers: 42–45
+  subject: Inextensibility and Possibility_∞
+  location: Definitions, named distribution instances, type-reduction question
+- numbers: 46–56
+  subject: Normality, marriage and paired modalities
+  location: Definitions; universal-closure decision for Eq. (47) explicit
+- numbers: 57–60
+  subject: Marriage of □₂ and ◇₂
+  location: Theorem 14 proof records
+- numbers: '61'
+  subject: Failure of □₂-intensionalism
+  location: Tree/canopy model
+- numbers: '62'
+  subject: Infinitary normality
+  location: Type-ambiguous K∞ principles for □ and □₂
+- numbers: 63–69
+  subject: Domain-model structure
+  location: Definitions 3–5, semantic background
+- numbers: '70'
+  subject: Modalized functionality
+  location: Type-ambiguous principle; all-types syntactic proof now recorded
+- numbers: 71–72
+  subject: Universal-quantifier congruence calculation
+  location: Theorem 22 semantic proof sketch
+- numbers: 73–75
+  subject: Ideal and accessibility descriptions of possibility
+  location: Semantic background; infinitary identification pending
+- numbers: 76–79
+  subject: Weak LEM and consequences of FC1/self-necessitation
+  location: Theorem 23 and graph connections
+- numbers: 80–84
+  subject: Frames (80), (81), (84) and classical rewrite (82)–(83)
+  location: Explicit models and excluded-middle-to-PSd(≠⊥) proof; unwinding remains pending
+- numbers: '85'
+  subject: Necessary nonfalsity without necessity
+  location: Full classical-root chain model
+- numbers: '86'
+  subject: Descriptions
+  location: Type-ambiguous necessary axiom schema
+- numbers: 87–88
+  subject: Contingency and incontingency candidates
+  location: Background definitions at each named possibility; no unsupported collapse

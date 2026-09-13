@@ -1,0 +1,25 @@
+id: uniform-counterexamples-exclude-ps-b-c-d
+premises:
+- uniform-possibility-counterexamples
+- exists-ps-b-c-d
+conclusion: false
+status: proved
+certificate:
+  source_id: possibility-in-intuitionistic-higher-order-logic
+  lean: none
+  produced_by: Zachary Goodsell; proof transcribed and expanded from the manuscript
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+proof: Choose f with PSb, PSc and PSd. The uniform counterexample formula at f gives p with ¬fp and p≠⊥.
+  PSd at p,⊥ turns ¬fp into □¬p, hence p=⊥ by footnote 5. Contradiction.
+sources:
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.1, Theorem 5(ii),
+  p. 17.
+source_names:
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §4.1, Theorem 5(ii), p. 17
+notes: Informal proof; no independent checker or Lean verification.

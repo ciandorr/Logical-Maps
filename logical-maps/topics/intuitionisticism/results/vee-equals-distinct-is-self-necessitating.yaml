@@ -1,0 +1,29 @@
+id: vee-equals-distinct-is-self-necessitating
+premises:
+- vee-equals-distinct
+conclusion: boxed-vee-equals-distinct
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), connecting proof
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: For any same-typed terms a,b, assume a=b. Leibniz substitution gives (a=b)=(b=b). Reflexivity is
+  an assumption-free theorem, so standing propositional intensionality gives (b=b)=⊤. Therefore (a=b)=⊤,
+  namely □(a=b). Instantiate a,b with the two operators in the selected identity. This proof applies at
+  function types as well as at t.
+sources:
+- Codex (GPT-6), connecting proof vee-equals-distinct-is-self-necessitating, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §2.2, pp. 5–6;
+  §3.2, Theorem 1, p. 9 (same substitution method) (definitions/background).
+source_names:
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §2.2, pp. 5–6; §3.2, Theorem 1, p. 9 (same substitution method)
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

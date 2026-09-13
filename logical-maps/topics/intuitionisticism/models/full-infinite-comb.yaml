@@ -1,0 +1,63 @@
+id: full-infinite-comb
+name: 'Full frame: infinite comb'
+description: 'Let the worlds be aᵢ,bᵢ for i∈ℕ, rooted at a₀. Informational accessibility is aᵢ≤ᵢaⱼ exactly
+  when i≤j, together with the reflexive arrows at the bᵢ. Metaphysical accessibility additionally has
+  aᵢ≤ₘbⱼ whenever i≤j. Each bᵢ sees only itself. Take the full model at all types, as in Definitions 8–9.
+
+
+  For pᵢ={bᵢ}, the identity pᵢ=⊥ fails at aᵢ and holds at every aⱼ with j>i. Hence ¬¬(pᵢ=⊥) holds at aᵢ
+  while the identity itself fails. If f satisfies PSb at aᵢ, then fpᵢ cannot hold at any informational
+  extension of aᵢ: at a later spine world pᵢ=⊥, and persistence and substitution would contradict PSb.
+  Thus ¬fpᵢ holds at aᵢ, and PSd(f) would imply pᵢ=⊥. The same argument works at every aⱼ and for every
+  function in its local domain. Consequently the root forces ¬∃f.(PSb(f)∧PSd(f)), exactly Eq. (26), not
+  merely failure of that existential. This also refutes the three-clause existence principle and PSd for
+  the two named operators with proved PSb. Excluded middle fails at a₀ for the upset {aⱼ:j≥1}.
+
+
+  The operator ≠⊥ holds of X at aᵢ exactly when every later metaphysical cone meets X. For an informational
+  upset this means X contains a spine tail or infinitely many teeth bⱼ. Finite unions have this property
+  only if at least one summand does, by the ordinary classical reasoning used in the external model construction.
+  At a tooth the operator is Truth. Thus its PSc formula holds at every world.
+
+
+  Here is the verification of the part of Theorem 30 used in the map. The displayed cofinal truth function
+  respects local congruence and satisfies PSa, PSb and PSc everywhere, so ≠⊥ is a Possibility_∨ in this
+  full model. Conversely, any X without a spine tail or infinitely many teeth has only finitely many teeth.
+  Each singleton tooth is impossible for any PSb candidate at aᵢ by the persistence argument above; finite
+  union distribution therefore makes X impossible for every Possibility_∨ candidate. At teeth, PSb forces
+  bottom to be impossible and the Truth candidate supplies the other case. Thus ◇_∨ and ≠⊥ agree at all
+  worlds on all propositions, which is their function congruence at a₀ in the full structure. This verifies
+  the operator identity, not merely a pointwise biconditional at a₀.
+
+
+  The claim in Theorem 30 that ◇_∞ is Truth is tracked separately as pending; this model record does not
+  assume a repair of the manuscript’s infinitary definition.'
+satisfies:
+- ps-c-distinct-from-bottom
+- vee-equals-distinct
+violates:
+- exists-ps-b-d
+- exists-ps-b-c-d
+- bottom-identity-stability
+- necessary-falsehood-stability
+- ps-d-possibility-vee
+- ps-d-distinct-from-bottom
+- excluded-middle
+status: proved
+certificate:
+  source_id: possibility-in-intuitionistic-higher-order-logic
+  lean: none
+  produced_by: Zachary Goodsell; construction transcribed and made explicit from the manuscript
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+sources:
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.1, Theorem 5(i),
+  Eq. (26), p. 17; §6.2, Eq. (81), pp. 42–44; Theorem 30, p. 44.
+source_names:
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §4.1, Theorem 5(i), Eq. (26), p. 17; §6.2, Eq. (81), pp. 42–44; Theorem 30, p. 44
+notes: Informal model verification; no independent checker or Lean verification.

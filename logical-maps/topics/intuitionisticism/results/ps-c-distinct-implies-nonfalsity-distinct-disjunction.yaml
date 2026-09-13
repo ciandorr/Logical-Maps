@@ -1,0 +1,27 @@
+id: ps-c-distinct-implies-nonfalsity-distinct-disjunction
+premises:
+- ps-c-distinct-from-bottom
+conclusion: nonfalsity-distinct-disjunction
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), connecting proof
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: 'If ¬¬(p∨q), then (p∨q)≠⊥: an identity with ⊥ would give ¬(p∨q), contradicting its double negation.
+  Instantiate PSc for ≠⊥ at p,q to obtain p≠⊥∨q≠⊥. Discharge and generalize p,q.'
+sources:
+- Codex (GPT-6), connecting proof ps-c-distinct-implies-nonfalsity-distinct-disjunction, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §3.2, Eqs. (13)–(16),
+  p. 10; §5.5, Eq. (77), p. 37 (definitions/background).
+source_names:
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §3.2, Eqs. (13)–(16), p. 10; §5.5, Eq. (77), p. 37
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

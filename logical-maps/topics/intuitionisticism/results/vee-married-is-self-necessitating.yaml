@@ -1,0 +1,32 @@
+id: vee-married-is-self-necessitating
+premises:
+- vee-married
+conclusion: boxed-vee-married
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), connecting proof
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: 'For use below, the spouse sentence is self-necessitating. Each necessary candidate or marriage
+  clause is a boxed sentence, hence implies its own box by 4. A conjunction of such clauses has the same
+  property. Also, if B(x)→□B(x) is a closed theorem, then ∃x.B(x)→□∃x.B(x): choose the same witness x,
+  obtain □B(x), and apply K to the necessitated existential-introduction theorem B(x)→∃y.B(y). This is
+  the valid direction using an existing witness, not a converse Barcan assumption. Expanding Necessity₂(N)
+  shows it is a conjunction and existential combination of boxed clauses. Therefore ∃N.(Necessity₂(N)∧Married(N,P))
+  implies its own □, for each fixed P.'
+sources:
+- Codex (GPT-6), connecting proof vee-married-is-self-necessitating, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §§4.2–4.5, pp.
+  18–27 (definitions/background).
+source_names:
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §§4.2–4.5, pp. 18–27
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

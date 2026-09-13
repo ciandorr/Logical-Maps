@@ -1,0 +1,75 @@
+id: full-binary-tree-canopy
+name: 'Full frame: binary tree with canopy'
+description: 'The branching worlds are finite binary words s∈{0,1}*, and the canopy worlds are infinite
+  binary sequences α∈{0,1}^ℕ. Root at the empty word. On branching worlds, informational accessibility
+  is the prefix order; a canopy world informationally sees only itself. Metaphysical accessibility extends
+  the informational relation by s≤ₘα whenever s is a prefix of α. A canopy world metaphysically sees only
+  itself. This makes precise the infinite tree and canopy in Figure 1. Use the full domains and logical
+  relations of Definitions 8–9.
+
+
+  Write C for all canopy worlds and Cₛ for the canopy extending s. At any branching world s, C is congruent
+  to Cₛ₀∨Cₛ₁. If f has PSb and PSc there and fC holds, PSc gives fCₛ₀∨fCₛ₁. The first disjunct persists
+  to s1, where Cₛ₀=⊥, contradicting PSb; the second similarly contradicts PSb at s0. The argument works
+  at every informational extension. Thus ¬fC holds at s. Meanwhile every branching world sees a canopy
+  point, so C=⊥ holds at no informational extension of s: C≠⊥ holds. This proves the fully quantified
+  Eq. (27), including its existential witness C for every f and at every informational extension. Combining
+  it with a PSd candidate would give C=⊥, so the three-clause existential and PSd for ◇_∨ and ◇₂ fail.
+
+
+  At the root, C is the union of C₀ and C₁. The whole union is distinct from ⊥, but C₀ becomes identical
+  to ⊥ at world 1 and C₁ at world 0. Thus neither disjunct is distinct from ⊥ at the root, which refutes
+  PSc for ≠⊥. Excluded middle fails for the upset of branching worlds extending 0: it is false at the
+  root and true at its 0-extension.
+
+
+  To verify Theorem 31’s tree assertion, let X be any proposition false at s. On the metaphysical cone
+  of s it splits into its two child-cone parts, each including the associated canopy. As in the previous
+  splitting argument, PSb and PSc prevent fX at s for every such candidate f. At canopy points the local
+  propositional quotient has just bottom and top, and PSb excludes the bottom case. Truth itself is a
+  candidate for both Possibility_∨ and Possibility₂ (Theorems 7 and 16). Hence ◇_∨ and ◇₂ each have exactly
+  the truth function X↦X throughout the model. Their identities with Truth, and with each other, follow
+  from full function congruence on every accessible cone. Truth is married to itself and is Necessity₂,
+  so ◇_∨ has a qualified spouse here.
+
+
+  Finally ¬◇₂C holds at every branching world. The proved paired PSd₂ theorem at C,⊥ gives □₂¬C, and normality
+  transports this to □₂(C↔⊥). Yet C≠⊥ holds. Thus (C,⊥) witnesses Eq. (61), refuting propositional intensionalism
+  for □₂. Also □₂¬C holds at the root while □¬C does not, which refutes identity of □₂ with □. No conclusion
+  about ◇_∞ is used.'
+satisfies:
+- uniform-possibility-counterexamples
+- vee-equals-truth
+- two-equals-truth
+- vee-equals-two
+- vee-married
+violates:
+- exists-ps-b-c-d
+- ps-c-distinct-from-bottom
+- ps-d-possibility-vee
+- ps-d-possibility-two
+- necessity-two-intensionalism
+- necessities-equal
+- excluded-middle
+status: proved
+certificate:
+  source_id: possibility-in-intuitionistic-higher-order-logic
+  lean: none
+  produced_by: Zachary Goodsell; construction transcribed and made explicit from the manuscript
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+sources:
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.1, Theorem 5(ii),
+  Eq. (27), p. 17; §4.5, Theorem 18, p. 27; §6.2, Figure 1 and Theorem 31, pp. 43–44.
+source_names:
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §4.1, Theorem 5(ii), Eq. (27), p. 17; §4.5, Theorem 18, p. 27; §6.2, Figure 1 and Theorem 31,
+    pp. 43–44
+notes: The explicit canopy is the set of infinite binary paths, a precise realization of Figure 1. The
+  phrase on p. 43 saying ≠⊥ fails PSb is inconsistent with its definition; this record verifies the stated
+  target, failure of PSc, instead. No claim from the unfinished comb-spouse sentence of Theorem 31 is
+  used.

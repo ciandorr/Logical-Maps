@@ -1,0 +1,26 @@
+# ⊤ ⇒ □ entails □₂
+
+<p class='cert'>Result — Source: Misc.; produced by Codex (GPT-6), 13 September 2026; recorded by Codex (GPT-6), manuscript transcription.</p>
+
+## Premises
+
+- ⊤
+
+## Conclusion
+
+- **□ entails □₂.** ∀p:t. □p → □₂p
+
+## Proof
+
+If p=⊤ and N is any qualified Necessity₂, its necessary normality implies N⊤. Substitution gives Np. Quantify N and then discharge and generalize p.
+
+## Notes
+
+Informal proof; no independent checker or Lean verification.
+
+## Sources
+
+- **Codex connecting proof, 13 Sep 2026** — Codex (GPT-6), connecting proof recorded 13 September 2026 in ii-implies-necessity-entails-two.
+- **Possibility in Intuitionistic Higher-Order Logic** — Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.5, Eqs. (51), (55), p. 25.
+
+<p class='cert'>Record: <code>topics/intuitionisticism/results/ii-implies-necessity-entails-two.yaml</code></p>

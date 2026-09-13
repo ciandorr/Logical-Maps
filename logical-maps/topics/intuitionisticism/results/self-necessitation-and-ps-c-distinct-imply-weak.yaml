@@ -1,0 +1,27 @@
+id: self-necessitation-and-ps-c-distinct-imply-weak
+premises:
+- self-necessitation
+- ps-c-distinct-from-bottom
+conclusion: weak-excluded-middle
+status: proved
+certificate:
+  source_id: possibility-in-intuitionistic-higher-order-logic
+  lean: none
+  produced_by: Zachary Goodsell; proof transcribed and expanded from the manuscript
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+proof: For arbitrary p, ¬¬(p∨¬p) is an intuitionistic theorem. It implies (p∨¬p)≠⊥, since identity with
+  ⊥ would contradict its double negation. PSc for ≠⊥ gives p≠⊥∨¬p≠⊥. The self-necessitation instances
+  at ¬p and ¬¬p, followed by contraposition and triple-negation reduction, turn these disjuncts into ¬¬p
+  and ¬p respectively. Generalize p.
+sources:
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §3.2, Eqs. (14)–(16),
+  p. 10; §5.5, pp. 37–38.
+source_names:
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: proof
+  locator: §3.2, Eqs. (14)–(16), p. 10; §5.5, pp. 37–38
+notes: Informal proof; no independent checker or Lean verification.

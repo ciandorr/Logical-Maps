@@ -1,0 +1,45 @@
+id: vee-spouse-implies-equality-two
+premises:
+- vee-married
+conclusion: vee-equals-two
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: User proposal; proof by Codex (GPT-6)
+  recorded_by: Codex (GPT-6)
+  checked_by: []
+  date: '2026-09-13'
+proof: 'Write S for Spouse(◇_∨). Given S, choose a qualified spouse N. Theorems 6 and 14–15''s definitions
+  give the necessary PSb/PSc clauses for ◇_∨ and the required marriage with N. Thus ◇_∨ itself is a Possibility₂
+  candidate, so ∀p.(◇_∨p→◇₂p). The reverse implication ∀p.(◇₂p→◇_∨p) is an II theorem by candidate inclusion.
+
+
+  For use below, the spouse sentence is self-necessitating. Each necessary candidate or marriage clause
+  is a boxed sentence, hence implies its own box by 4. A conjunction of such clauses has the same property.
+  Also, if B(x)→□B(x) is a closed theorem, then ∃x.B(x)→□∃x.B(x): choose the same witness x, obtain □B(x),
+  and apply K to the necessitated existential-introduction theorem B(x)→∃y.B(y). This is the valid direction
+  using an existing witness, not a converse Barcan assumption. Expanding Necessity₂(N) shows it is a conjunction
+  and existential combination of boxed clauses. Therefore ∃N.(Necessity₂(N)∧Married(N,P)) implies its
+  own □, for each fixed P.
+
+
+  The preceding pointwise proof, after discharging S, gives an assumption-free theorem S→∀p.(◇_∨p↔◇₂p).
+  Necessitate that closed implication and use □S and K to get □∀p.(◇_∨p↔◇₂p). The predicate form of the
+  proved modalized-functionality lemma then gives ◇_∨=◇₂. This final step establishes identity of operators,
+  not merely their material equivalence at the selected background.'
+sources:
+- 'User proposal in this conversation, 13 September 2026: ◇_∨ = ◇₂ is equivalent to ◇_∨ having a spouse.'
+- Codex (GPT-6), connecting proof vee-spouse-implies-equality-two, 2026-09-13.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §§4.2–4.5, pp.
+  18–27 (definitions/background).
+source_names:
+- User proposal, 13 Sep 2026
+- Codex connecting proofs, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §§4.2–4.5, pp. 18–27
+notes: Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible
+  for unrestricted necessitation.

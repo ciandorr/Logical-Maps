@@ -1,0 +1,27 @@
+id: excluded-middle-implies-bottom-stability
+premises:
+- excluded-middle
+conclusion: bottom-identity-stability
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Codex (GPT-6), 13 September 2026
+  recorded_by: Codex (GPT-6), manuscript transcription
+  checked_by: []
+  date: '2026-09-13'
+proof: Fix p and instantiate the selected quantified excluded-middle formula at the proposition p=⊥. Under
+  ¬¬(p=⊥), its negative disjunct is impossible, so p=⊥. Discharge and generalize p. The excluded-middle
+  assumption is not necessitated.
+sources:
+- Codex (GPT-6), connecting proof recorded 13 September 2026 in excluded-middle-implies-bottom-stability.
+- Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §2.5, p. 7; §4.1,
+  Eq. (29), p. 17.
+source_names:
+- Codex connecting proof, 13 Sep 2026
+- Possibility in Intuitionistic Higher-Order Logic
+references:
+- paper: possibility-in-intuitionistic-higher-order-logic
+  role: background
+  locator: §2.5, p. 7; §4.1, Eq. (29), p. 17
+notes: Informal proof; no independent checker or Lean verification.

@@ -275,13 +275,15 @@ members. Related, redundant and equivalent principles remain individually
 selected, and shading is relative to the whole selected conjunction. Use
 **Compare with…** to compare that selection with another principle or conjunction,
 with both directions, joint consistency, proofs and witness models shown.
-A background-inconsistent principle or conjunction shades nothing:
-its consequences by explosion are never shown. The shading survives reading an
+A background-inconsistent principle or conjunction highlights every box in the
+excluded colour, with an inconsistency notice. Proof readouts continue to report
+the inconsistent antecedent. The shading survives reading an
 arrow's details and clears with Escape or a click on empty space.
 
-Graph descriptions occupy a reserved, scrollable panel beside the graph on wide
-screens and below it on narrower screens. Opening or closing details does not
-cover or resize the graph. The panel lists selected principles with expandable
+Graph descriptions occupy a reserved bottom panel, with the fixed relation legend
+above the scrolling details. Drag its divider or use the arrow keys to resize it;
+double-click or press Enter to reset. The height is remembered. Opening or closing
+details does not cover or resize the graph. The panel lists selected principles with expandable
 definitions and individual remove buttons.
 
 The Conjectures tab shares the background controls. **Show resolved** is off

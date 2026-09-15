@@ -50,7 +50,9 @@ try {
   assert.match(d.getElementById('pop').textContent, /A ∧ B ⇒ V[\s\S]*refuted by a model/);
   assert.ok(d.querySelector('#pop [data-model="witness"]'));
   w.handleGraphClick(d.querySelector('[data-graph-node="j:abef"]'));
-  assert.ok(!d.getElementById('graph').classList.contains('shaded'), 'Impossible conjunctions do not shade explosion as proof');
+  assert.ok(d.getElementById('graph').classList.contains('inconsistent-selection'));
+  for (const n of d.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'), 'Impossible conjunctions mark every box, including True and False, as excluded');
+  assert.equal(w.eval("expressionStatus(['a','b','e'],'d').status"), 'inconsistent', 'The proof engine still identifies the inconsistent antecedent');
   assert.match(d.getElementById('relation-legend').textContent, /inconsistent/);
   // Labels inside constant boxes still inspect the individual principle.
   w.handleGraphClick(node('y').querySelector('[data-principle="y"]'));

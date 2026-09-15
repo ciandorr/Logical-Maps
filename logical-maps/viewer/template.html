@@ -100,14 +100,10 @@
   .pane-divider:hover::after, .pane-divider:focus-visible::after, .pane-divider.dragging::after { background: var(--accent); }
   body.resizing-panes, body.resizing-panes * { cursor: var(--resize-cursor) !important; user-select: none !important; }
   .graph-area { position: relative; overflow: hidden; min-width: 0; }
-  .graph-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 300px; min-width: 0; min-height: 0; overflow: hidden; }
-  .graph-details { min-width: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--line); background: var(--panel); }
-  #graph-details-empty { margin: 0; padding: 16px; color: var(--ink-3); font-size: 13px; }
+  .graph-workspace { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) 9px var(--details-height, 230px); min-width: 0; min-height: 0; overflow: hidden; }
+  .graph-details { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden; background: var(--panel); }
+  #graph-details-empty { flex: 1; min-height: 0; overflow: auto; margin: 0; padding: 16px; color: var(--ink-3); font-size: 13px; }
   .graph-details:has(.pop:not([hidden])) #graph-details-empty { display: none; }
-  @media (max-width: 1100px) {
-    .graph-workspace { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 2fr) minmax(0, 1fr); }
-    .graph-details { border-left: 0; border-top: 1px solid var(--line); }
-  }
   #graph { grid-row: 2; width: 100%; height: 100%; min-height: 0; display: block; cursor: grab; touch-action: none; }
   #graph:active { cursor: grabbing; }
   .graph-tools { grid-row: 1; display: flex; align-items: flex-start; gap: 6px; padding: 12px; pointer-events: none; }
@@ -328,7 +324,7 @@
   .dl { display: flex; gap: 10px; margin-left: auto; font-size: 12.5px; align-self: center; } .dl a { color: var(--ink-3); }
 
   .pop { position: fixed; z-index: 20; max-width: min(380px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: auto; background: var(--panel); border: 1px solid var(--line-strong); border-radius: 4px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 13px; }
-  .graph-details .pop { position: static; z-index: auto; max-width: none; max-height: none; overflow: visible; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
+  .graph-details .pop { position: static; flex: 1; min-height: 0; z-index: auto; max-width: none; max-height: none; overflow: auto; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
   .detail-close { float: right; margin: 0 0 8px 10px; font-size: 18px; line-height: 1; }
   .selection-list { list-style: none; padding: 0; margin: 12px 0; }
   .selection-list li { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line); }
@@ -415,9 +411,10 @@
   .node.rel-conjectured rect { fill: url(#hatch-conjectured); } .node.rel-conjectured .rel-mark { fill: var(--conj); }
   .node.rel-base rect { fill: var(--hl); }
   .node.rel-base rect, .node.rel-other rect { stroke: var(--accent); stroke-width: 2.4; }
+  #graph.inconsistent-selection .junction circle { fill: var(--rel-excluded); stroke: var(--indep); }
   #graph.shaded .node.dim { opacity: .7; }
-  .graph-area { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; }
-  .relation-legend { grid-row: 3; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 5px 12px; border-top: 1px solid var(--line); background: var(--panel); font-size: 12px; color: var(--ink-2); }
+  .graph-area { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .relation-legend { flex: none; min-width: 0; max-height: 60%; overflow: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--panel); font-size: 12px; color: var(--ink-2); }
   .relation-legend[hidden] { display: none; }
   .relation-legend b { color: var(--ink); }
   .relation-legend .key { display: inline-flex; flex: none; align-items: center; gap: 5px; }
@@ -545,10 +542,13 @@
           <svg id="graph" role="img" aria-label="Implication graph"></svg>
           <div id="graph-warning" class="graph-warning" role="alert" hidden></div>
           <div id="graph-empty" class="graph-empty" role="status" hidden></div>
-          <div id="relation-legend" class="relation-legend" role="status" aria-live="polite" hidden></div>
           <div class="graph-tools"><div class="graph-search"><input class="search" id="graph-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the graph" aria-describedby="graph-search-status" autocomplete="off"><span id="graph-search-status" role="status" aria-live="polite"></span></div><button class="btn small" id="fit">Fit</button></div>
         </div>
-        <aside id="graph-details" class="graph-details" aria-label="Selection details"><p id="graph-details-empty">Select a principle, conjunction or arrow to see its details here. Shift-click to add or remove principles.</p></aside>
+        <div class="pane-divider" id="details-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize selection details" aria-controls="graph-details" title="Drag to resize details · Arrow keys to adjust · Double-click to reset"></div>
+        <aside id="graph-details" class="graph-details" aria-label="Selection details">
+          <div id="relation-legend" class="relation-legend" role="status" aria-live="polite" hidden></div>
+          <p id="graph-details-empty">Select a principle, conjunction or arrow to see its details here. Shift-click to add or remove principles.</p>
+        </aside>
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
@@ -1777,13 +1777,13 @@ function applySelection() {
   const baseMembers = new Set(base == null ? [] : base === TRUE ? [TRUE] : expressionLiterals(base));
   const otherMembers = new Set(other == null ? [] : other === TRUE ? [TRUE] : expressionLiterals(other));
   const legend = document.getElementById('relation-legend');
-  const wasHidden = legend.hidden;
   const counts = {entailed: 0, excluded: 0, consistent: 0, separated: 0};
-  // A principle inconsistent with the background compares to nothing: its
-  // consequences by explosion are never shown.
+  // An inconsistent selection cannot hold with any node. Highlight every box
+  // as excluded while proof readouts retain their inconsistent-antecedent status.
   const baseInconsistent = !!base && !!layout && consistencyStatus(expressionLiterals(base)).status === 'inconsistent';
-  const shading = !!base && !!layout && !baseInconsistent;
+  const shading = !!base && !!layout;
   svg.classList.toggle('shaded', shading);
+  svg.classList.toggle('inconsistent-selection', baseInconsistent);
   svg.querySelectorAll('#nodes .node').forEach(n => {
     const members = (n.dataset.members || '').split(',').filter(Boolean), box = layout.byId.get(n.dataset.class);
     n.classList.remove(...relationClasses);
@@ -1793,7 +1793,11 @@ function applySelection() {
     n.querySelectorAll('text[data-principle]').forEach(label => label.classList.toggle('selection-member', baseMembers.has(label.dataset.principle) || otherMembers.has(label.dataset.principle)));
     let title = n.dataset.title || '', glyph = '';
     if (shading) {
-      if (inBase) { n.classList.add('rel-base'); title = `${expressionName(base)}: the selected ${baseMembers.size > 1 ? 'conjunction' : 'principle'}. Shift-click to add or remove principles.`; }
+      if (baseInconsistent) {
+        n.classList.add('rel-excluded'); counts.excluded++; glyph = relationGlyph.excluded;
+        title = `${expressionName(graphNodeExpression(box))}: excluded by ${expressionName(base)}. The selection is inconsistent with the background.`;
+      }
+      else if (inBase) { n.classList.add('rel-base'); title = `${expressionName(base)}: the selected ${baseMembers.size > 1 ? 'conjunction' : 'principle'}. Shift-click to add or remove principles.`; }
       else if (!n.classList.contains('from-background')) {
         const target = graphNodeExpression(box);
         // False, including everything equivalent to it under the background,
@@ -1821,16 +1825,9 @@ function applySelection() {
   const keys = key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
   const hint = state.compareArmed ? 'Click a principle or conjunction to compare with the selection' : '<button class="lnk" data-compare-arm="1">Compare with…</button> · Shift-click to add or remove principles · Esc clears';
   const modes = state.conjectureOnly || state.unpublishedOnly ? '<span class="legend-hint">Shading uses all selected proved evidence, not only the arrows shown.</span>' : '';
-  legend.innerHTML = shading
-    ? `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${keys}${modes}<span class="legend-hint">${hint}</span>`
-    : `<b title="${esc(fullLabel)}">${esc(label)}</b> <span class="rel-status inconsistent">is inconsistent with the background (⇒ ⊥); no consequences are shaded.</span>${keys}<span class="legend-hint">Esc clears</span>`;
+  const conflict = baseInconsistent ? '<span class="rel-status inconsistent">Selection is inconsistent with the background (⇒ ⊥); every box is excluded.</span>' : '';
+  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${conflict}${keys}${modes}<span class="legend-hint">${hint}</span>`;
   legend.querySelectorAll('button[data-compare-arm]').forEach(b => b.addEventListener('click', armCompare));
-  // The legend takes a strip from the graph area; keep the bottom row in view.
-  if (wasHidden && layout.visible.length) {
-    const bottom = Math.max(...layout.visible.map(n => layout.y.get(n.id) + layout.size.get(n.id).h / 2)) * view.k + view.ty;
-    const overflow = bottom + 12 - svg.clientHeight;
-    if (overflow > 0) { view.ty -= Math.min(overflow, legend.offsetHeight + 12); applyView(); }
-  }
 }
 
 
@@ -2362,7 +2359,6 @@ function renderDetail() {
   }
   el.innerHTML = '<button class="lnk detail-close" aria-label="Close details">×</button>' + h; el.hidden = false; el.scrollTop = 0; wire(el);
   el.querySelector('.detail-close').addEventListener('click', () => { el.hidden = true; });
-  if (el.parentElement.id === 'graph-details') el.parentElement.scrollTop = 0;
   el.querySelector('button[data-goto]')?.addEventListener('click', () => { const e = sel.type === 'model-verdict' && modelEvidence(byMid.get(sel.id), sel.principle); openPage(e && e.direct ? { type: 'model', id: sel.id } : sel); el.hidden = true; });
   const anchor = popAt ? { ...popAt } : null;
   const position = () => {
@@ -2384,7 +2380,7 @@ function placeDetail() {
 }
 document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && el.parentElement.id !== 'graph-details' && !el.contains(ev.target)) el.hidden = true; });
 document.addEventListener('keydown', ev => {
-  if (ev.key !== 'Escape' || ev.target.id === 'graph-search') return;
+  if (ev.key !== 'Escape' || ev.target.id === 'graph-search' || document.body.classList.contains('resizing-panes')) return;
   if (state.focus || state.compareArmed || state.selected?.type === 'principle' || state.selected?.type === 'compare') select(null);
   else document.getElementById('pop').hidden = true;
 });
@@ -2677,17 +2673,23 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
 (function setupPaneDividers() {
   const panes = ['graph', 'open'].map(tab => document.getElementById('pane-' + tab));
   const sidebar = document.getElementById('graph-sidebar');
+  const workspace = document.querySelector('.graph-workspace');
+  const properties = {sidebar: '--sidebar-width', background: '--background-height', details: '--details-height'};
   const storageKey = 'principle-map:pane-sizes:v1';
   let saved = {};
   try {
     const stored = JSON.parse(localStorage.getItem(storageKey));
-    for (const key of ['sidebar', 'background']) if (Number.isFinite(stored?.[key]) && stored[key] > 0) saved[key] = stored[key];
+    for (const key of Object.keys(properties)) if (Number.isFinite(stored?.[key]) && stored[key] > 0) saved[key] = stored[key];
   } catch (_) { /* Resizing also works when storage is unavailable. */ }
-  const handles = { sidebar: document.getElementById('sidebar-divider'), background: document.getElementById('background-divider') };
+  const handles = { sidebar: document.getElementById('sidebar-divider'), background: document.getElementById('background-divider'), details: document.getElementById('details-divider') };
   const current = {};
   let drag = null;
   function limits(key) {
     const pane = sidebar.closest('.pane');
+    if (key === 'details') {
+      const height = workspace.clientHeight || panes[0].clientHeight || window.innerHeight;
+      return { min: Math.min(160, height * .35), max: Math.max(0, height - Math.min(180, height * .4) - 9), initial: Math.min(260, height * .32) };
+    }
     const width = pane.clientWidth || window.innerWidth;
     const height = sidebar.clientHeight || pane.clientHeight || window.innerHeight;
     return key === 'sidebar'
@@ -2697,19 +2699,20 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
   function apply() {
     const pane = sidebar.closest('.pane');
     if (pane.dataset.active !== 'true') return;
-    const previousWidth = current.sidebar;
+    const previousWidth = current.sidebar, previousDetails = current.details;
     for (const key of Object.keys(handles)) {
+      if (key === 'details' && pane.id !== 'pane-graph') continue;
       const bounds = limits(key), min = Math.min(bounds.min, bounds.max);
       const value = Math.round(Math.max(min, Math.min(bounds.max, saved[key] ?? bounds.initial)));
       current[key] = value;
-      for (const target of panes) target.style.setProperty(key === 'sidebar' ? '--sidebar-width' : '--background-height', `${value}px`);
+      for (const target of panes) target.style.setProperty(properties[key], `${value}px`);
       const handle = handles[key];
       handle.setAttribute('aria-valuemin', Math.round(min));
       handle.setAttribute('aria-valuemax', Math.round(bounds.max));
       handle.setAttribute('aria-valuenow', value);
       handle.setAttribute('aria-valuetext', `${value} pixels ${key === 'sidebar' ? 'wide' : 'high'}`);
     }
-    if (pane.id === 'pane-graph' && previousWidth !== current.sidebar) fit();
+    if (pane.id === 'pane-graph' && (previousWidth !== current.sidebar || previousDetails !== current.details)) fit();
   }
   function persist() { try { localStorage.setItem(storageKey, JSON.stringify(saved)); } catch (_) {} }
   function setSize(key, value) { saved[key] = value; apply(); saved[key] = current[key]; }

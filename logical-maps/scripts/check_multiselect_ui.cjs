@@ -50,7 +50,8 @@ try {
   pop.querySelector('.detail-close').click();
   assert.equal(pop.hidden, true);
   assert.equal(graph.innerHTML, drawing, 'Closing details does not redraw the graph');
-  assert.equal(d.querySelector('.graph-workspace').children.length, 2, 'Space for details remains reserved');
+  assert.equal(d.querySelector('.graph-workspace').children.length, 3, 'The graph, divider and details keep their reserved space');
+  assert.equal(d.getElementById('relation-legend').parentElement.id, 'graph-details');
 
   shift('b'); selected(['a', 'b']); // A entails B; both remain selected.
   assert.equal(w.eval('state.selected.type'), 'selection');
@@ -95,11 +96,13 @@ try {
   assert.match(pop.textContent, /E ∧ A ∧ C ∧ D ∧ B ⇒ F.*proved/s);
   assert.equal(pop.parentElement.id, 'graph-details');
   shift('g');
-  assert.ok(!graph.classList.contains('shaded'), 'An inconsistent joint selection never shades explosion');
+  assert.ok(graph.classList.contains('inconsistent-selection'));
+  for (const n of graph.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'), 'An inconsistent joint selection highlights every box red');
   assert.match(d.getElementById('relation-legend').textContent, /inconsistent/);
   assert.ok(label('g').classList.contains('selection-member'));
   shift('g');
   assert.ok(graph.classList.contains('shaded'));
+  assert.ok(!graph.classList.contains('inconsistent-selection'), 'Removing the conflict restores ordinary shading');
 
   // Sidebar modifiers use the same selection, including negative literals.
   pointer(label('a'));
@@ -127,5 +130,5 @@ try {
   d.getElementById('page-back').click(); pointer(label('a'));
   assert.equal(pop.parentElement.id, 'graph-details');
   assert.deepEqual(errors, []);
-  console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, comparison, no explosion, and dedicated graph details.');
+  console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, comparison, red inconsistency highlighting, and bottom graph details.');
 } finally { w.close(); }

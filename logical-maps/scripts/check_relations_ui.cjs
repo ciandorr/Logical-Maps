@@ -110,15 +110,18 @@ try{
   w.armCompare(); w.select({type:'principle',id:'f'});
   assert.doesNotMatch(pop().textContent,/F is independent of A/,'One countermodel does not establish independence');
 
-  // A background-inconsistent focus shades nothing (no explosion).
+  // An inconsistent focus marks every box as excluded without changing proofs.
   w.select({type:'principle',id:'z'});
-  assert.equal(d.getElementById('graph').classList.contains('shaded'),false);
-  assert.deepEqual(rel('a'),[]);
+  assert.ok(d.getElementById('graph').classList.contains('inconsistent-selection'));
+  for(const n of d.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'));
+  assert.equal(legend().querySelector('.excluded .n').textContent,String(d.querySelectorAll('#nodes .node').length));
+  assert.equal(w.eval("expressionStatus('z','a').status"),'inconsistent','The red display does not fabricate implication proofs');
   assert.match(legend().textContent,/inconsistent with the background/);
   fixedKeys(d);
 
   // Escape clears the focus and the legend; Escape in the search box does not.
   w.select({type:'principle',id:'a'});
+  assert.ok(!d.getElementById('graph').classList.contains('inconsistent-selection'));
   d.getElementById('graph-search').dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
   assert.equal(w.eval('state.focus'),'a','Escape in the search box keeps the focus');
   d.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
@@ -190,5 +193,5 @@ try{
   assert.match(real.document.getElementById('relation-legend').textContent,/Relative to Folded Expectation:/);
   assert.ok(real.document.querySelector('#nodes [data-falsity]').classList.contains('rel-excluded'));
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: fixed four-key legend including zero counts, False excluded, combined consistency counts, relation shading, comparison, no explosion, filtered witnesses, conjecture discipline, and Folded Expectation.');
+  console.log('PASS: fixed four-key legend, False excluded, inconsistent selections exclude every box, unchanged proof status, consistency counts, comparison, filtered witnesses, and Folded Expectation.');
 }finally{pages.forEach(p=>p.window.close());}

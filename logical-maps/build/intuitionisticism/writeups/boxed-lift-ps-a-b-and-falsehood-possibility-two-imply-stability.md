@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **□PSa (◇₂).** □(∀p, q : t. (□(p → q) → (◇₂(p) → ◇₂(q))))
-- **□PSb (◇₂).** □(¬◇₂(⊥))
-- **□Impossibility ⇒ necessary falsehood (◇₂).** □(∀p:t. ¬◇₂(p) → □¬p)
+- **□PSa (◇₂).** $\Box (\forall p, q : t. (\Box (p \to q) \to (\Diamond _{2}(p) \to \Diamond _{2}(q))))$
+- **□PSb (◇₂).** $\Box (\neg \Diamond _{2}(\bot ))$
+- **□Impossibility ⇒ necessary falsehood (◇₂).** $\Box (\forall p:t. \neg \Diamond _{2}(p) \to \Box \neg p)$
 
 ## Conclusion
 
-- **□Stability of □¬.** □(∀p:t. ¬¬□¬p → □¬p)
+- **□Stability of □¬.** $\Box (\forall p:t. \neg \neg \Box \neg p \to \Box \neg p)$
 
 ## Proof
 

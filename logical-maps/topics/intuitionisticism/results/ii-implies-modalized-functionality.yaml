@@ -10,29 +10,17 @@ certificate:
   recorded_by: Codex (GPT-6)
   checked_by: []
   date: '2026-09-13'
-proof: 'Fix arbitrary types σ and τ. Since every type is built from t by arrows, write τ=τ₁→⋯→τₙ→t, allowing
-  n=0. Fix f,g:σ→τ, and put A:=∀x:σ. fx=gx. Choose x,y₁,…,yₙ fresh for A.
-
+proof: |-
+  Fix arbitrary types $\sigma$ and $\tau$. Since every type is built from t by arrows, write $\tau =\tau _{1}\to \cdots \to \tau _{n}\to t$, allowing $n=0$. Fix $f,g:\sigma \to \tau$, and put $A:=\forall x:\sigma . fx=gx$. Choose $x,y_{1},\ldots ,y_{n}$ fresh for A.
 
   With no assumptions, intuitionistic logic and substitution of equals prove
+  $(A \land f x y_{1}\cdots y_{n}) \leftrightarrow (A \land g x y_{1}\cdots y_{n})$.
+  Apply propositional intensionality to this assumption-free equivalence. Then apply function intensionality successively to $y_{n},\ldots ,y_{1},x$. This yields the assumption-free identity
+  $(\lambda x y_{1}\cdots y_{n}. A\land f x y_{1}\cdots y_{n}) = (\lambda x y_{1}\cdots y_{n}. A\land g x y_{1}\cdots y_{n})$.
 
-  (A ∧ f x y₁⋯yₙ) ↔ (A ∧ g x y₁⋯yₙ).
+  Now assume $\Box A$, that is $A=\top$. Leibniz substitution replaces A by $\top$ in that previously derived identity. The assumption-free identities $\top \land r=r$, abstracted using function intensionality, and $\eta$-conversion simplify its two sides to f and g. Hence $f=g$. Discharge $\Box A$ and generalize f,g. Since $\sigma ,\tau$ were arbitrary, this proves every instance of modalized functionality. Neither intensionality rule was applied under the $\Box A$ assumption.
 
-  Apply propositional intensionality to this assumption-free equivalence. Then apply function intensionality
-  successively to yₙ,…,y₁,x. This yields the assumption-free identity
-
-  (λx y₁⋯yₙ. A∧f x y₁⋯yₙ) = (λx y₁⋯yₙ. A∧g x y₁⋯yₙ).
-
-
-  Now assume □A, that is A=⊤. Leibniz substitution replaces A by ⊤ in that previously derived identity.
-  The assumption-free identities ⊤∧r=r, abstracted using function intensionality, and η-conversion simplify
-  its two sides to f and g. Hence f=g. Discharge □A and generalize f,g. Since σ,τ were arbitrary, this
-  proves every instance of modalized functionality. Neither intensionality rule was applied under the
-  □A assumption.
-
-
-  The same construction, starting with A:=∀x.(fx↔gx) when f,g:σ→t, proves the predicate form □∀x.(fx↔gx)→f=g.
-  The zero-argument case proves □(p↔q)→p=q. These forms will be used in the connecting proofs.'
+  The same construction, starting with $A:=\forall x.(fx\leftrightarrow gx)$ when $f,g:\sigma \to t$, proves the predicate form $\Box \forall x.(fx\leftrightarrow gx)\to f=g$. The zero-argument case proves $\Box (p\leftrightarrow q)\to p=q$. These forms will be used in the connecting proofs.
 sources:
 - Andrew Bacon and Cian Dorr (2024), Classicism, pp. 109–190; equivalence with function intensionality
   credited in Goodsell, §5.2, p. 32.
@@ -51,8 +39,6 @@ references:
 - paper: possibility-in-intuitionistic-higher-order-logic
   role: formulation
   locator: §5.2, Eq. (70), p. 32
-notes: Previously recorded with proof pending. The all-types syntactic proof now supplied uses the standing
-  empty-context intensionality rules and η-conversion, with no function-extensionality assumption. Original
-  attribution is retained; the alternative proof is separately credited. No independent checker or Lean
-  verification.
+notes: |-
+  Previously recorded with proof pending. The all-types syntactic proof now supplied uses the standing empty-context intensionality rules and $\eta$-conversion, with no function-extensionality assumption. Original attribution is retained; the alternative proof is separately credited. No independent checker or Lean verification.
 was_conjectured: true

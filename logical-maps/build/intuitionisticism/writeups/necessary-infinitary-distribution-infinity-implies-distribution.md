@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Infinitary distribution ($\Diamond_\infty$).** □(∀F:tt. Inex^t(F) → ($\Diamond_\infty$(∃x:t. F x) → ∃x:t. $\Diamond_\infty$(F x)))
+- **□Infinitary distribution ($\Diamond_\infty$).** $\Box (\forall F:tt. \operatorname{Inex}^t(F) \to$ ($\Diamond_\infty$$(\exists x:t. F x) \to \exists x:t$. $\Diamond_\infty$(F x)))
 
 ## Conclusion
 
-- **Infinitary distribution ($\Diamond_\infty$).** ∀F:tt. Inex^t(F) → ($\Diamond_\infty$(∃x:t. F x) → ∃x:t. $\Diamond_\infty$(F x))
+- **Infinitary distribution ($\Diamond_\infty$).** $\forall F:tt. \operatorname{Inex}^t(F) \to$ ($\Diamond_\infty$$(\exists x:t. F x) \to \exists x:t$. $\Diamond_\infty$(F x))
 
 ## Proof
 
-Apply □A → A to the displayed infinitary distribution sentence.
+Apply $\Box A \to A$ to the displayed infinitary distribution sentence.
 
 ## Notes
 

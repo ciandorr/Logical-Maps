@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSa (□₂, ◇₂).** □(∀p,q:t. □₂(p → q) → (◇₂p → ◇₂q))
+- **□PSa (□₂, ◇₂).** $\Box (\forall p,q:t. \Box _{2}(p \to q) \to (\Diamond _{2}p \to \Diamond _{2}q))$
 
 ## Proof
 
-Assume □₂(p→q) and ◇₂p. Choose a candidate P witnessing ◇₂p. The candidate definition supplies a qualified spouse N, so □₂(p→q) gives N(p→q). Extract PSa₂(N,P) from their marriage and infer Pq, hence ◇₂q. Discharge temporary assumptions and universally generalize p,q. Necessitate the resulting closed theorem with the standing □ rule, as required by the outer identity in Married.
+Assume $\Box _{2}(p\to q)$ and $\Diamond _{2}p$. Choose a candidate P witnessing $\Diamond _{2}p$. The candidate definition supplies a qualified spouse N, so $\Box _{2}(p\to q)$ gives $N(p\to q)$. Extract $\operatorname{PSa}_{2}(N,P)$ from their marriage and infer Pq, hence $\Diamond _{2}q$. Discharge temporary assumptions and universally generalize p,q. Necessitate the resulting closed theorem with the standing $\Box$ rule, as required by the outer identity in Married.
 
 ## Notes
 

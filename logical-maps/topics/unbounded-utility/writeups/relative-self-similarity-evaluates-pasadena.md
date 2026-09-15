@@ -11,7 +11,7 @@ independent checker or Lean certification is asserted.
 
 Assume Rich Outcomes, Stochastic Equivalence, Mixture Independence, Relative
 Expectation and Uniqueness of Negative Self-Similarity. We do not assume
-Totality, Scale Invariance, reflection, or L¹ Continuity. All arithmetic below
+Totality, Scale Invariance, reflection, or $L^{1}$ Continuity. All arithmetic below
 is within the real utility chart; Rich Outcomes supplies the required outcomes.
 
 ## 1. Pasadena and Highland Park have an integrable difference

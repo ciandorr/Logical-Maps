@@ -1,8 +1,10 @@
 id: ps-a-distinct-from-bottom
 name: PSa (≠⊥)
 category: distinct-from-bottom
-statement: For every p and q, □(p → q) implies that p ≠ ⊥ implies q ≠ ⊥, with □p defined as p = ⊤.
-formal: '∀p, q : t. (□(p → q) → ((p ≠ ⊥) → (q ≠ ⊥)))'
+statement: |-
+  For every p and $q, \Box (p \to q)$ implies that $p \ne \bot$ implies $q \ne \bot$, with $\Box p$ defined as $p = \top$.
+formal: |-
+  $\forall p, q : t. (\Box (p \to q) \to ((p \ne \bot ) \to (q \ne \bot )))$
 aliases:
 - PSa for ≠⊥
 tags:

@@ -1,6 +1,6 @@
 # Shift Transfer recovers Simple Relative Expectation
 
-**Claim.** Rich Outcomes + Stochastic Equivalence + Simple EU + Mixture Independence + Shift Transfer imply Simple Relative Expectation.
+**Claim.** Rich Outcomes + Stochastic Equivalence + Simple $\operatorname{EU} +$ Mixture Independence + Shift Transfer imply Simple Relative Expectation.
 
 Use numerical utility notation throughout. Suppose $D=X-Y$ has finitely many values. Ignore probability-zero values, and write its remaining values as $d_1,\ldots,d_k$, with probabilities $p_1,\ldots,p_k>0$. Rich Outcomes supplies a sure outcome for each $d_i$ and the simple gamble with utility variable $D$.
 

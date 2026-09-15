@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Completeness ∧ Closed-graph continuity ∧ Betweenness ⇒ Transitivity</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Completeness ∧ Closed-graph continuity ∧ Betweenness ⇒ Transitivity</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,28 +252,26 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Completeness ∧ Closed-graph continuity ∧ Betweenness ⇒ Transitivity</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Completeness ∧ Closed-graph continuity ∧ Betweenness ⇒ Transitivity</h1></header><p class="cert">
 Conjecture — Source: Misc.; produced by ZG.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Completeness.</strong> For all p, q ∈ Δ(X): p ≽ q or q ≽ p.</li>
-<li><strong>Closed-graph continuity.</strong> The set {(p, q) ∈ Δ(X) × Δ(X) : p ≽ q} is closed in the product topology.</li>
-<li><strong>Betweenness.</strong> For all p, q ∈ Δ(X) and λ ∈ (0,1): if p ≻ q then p ≻ λp + (1−λ)q ≻ q, and if p ~ q then p ~ λp + (1−λ)q.</li>
+<li><strong>Completeness.</strong> For all <span class="math inline">p, q \in \Delta (X): p \succeq q</span> or <span class="math inline">q \succeq p</span>.</li>
+<li><strong>Closed-graph continuity.</strong> The set <span class="math inline">\{(p, q) \in \Delta (X) \times \Delta (X) : p \succeq q\}</span> is closed in the product topology.</li>
+<li><strong>Betweenness.</strong> For all <span class="math inline">p, q \in \Delta (X)</span> and <span class="math inline">\lambda \in (0,1)</span>: if <span class="math inline">p \succ q</span> then <span class="math inline">p \succ \lambda p + (1- \lambda )q \succ q</span>, and if <span class="math inline">p \sim q</span> then <span class="math inline">p \sim \lambda p + (1- \lambda )q</span>.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Transitivity.</strong> For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.</li>
+<li><strong>Transitivity.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span>: if <span class="math inline">p \succeq q</span> and <span class="math inline">q \succeq r</span> then <span class="math inline">p \succeq r</span>.</li>
 </ul>
 <h2 id="notes">Notes</h2>
 <p>Sample conjecture.</p>
 <p class="cert">
 Record: <code>topics/decision-theory/results/betweenness-continuity-imply-transitivity.yaml</code>
 </p>
-</body>
-</html>
+</body></html>

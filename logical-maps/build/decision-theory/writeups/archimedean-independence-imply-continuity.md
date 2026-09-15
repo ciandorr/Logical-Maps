@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Transitivity.** For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.
-- **Independence.** For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.
-- **Archimedean.** For all p, q, r ∈ Δ(X): if p ≻ q ≻ r then there are α, β ∈ (0,1) with αp + (1−α)r ≻ q and q ≻ βp + (1−β)r.
+- **Transitivity.** For all $p, q, r \in \Delta (X)$: if $p \succeq q$ and $q \succeq r$ then $p \succeq r$.
+- **Independence.** For all $p, q, r \in \Delta (X)$ and $\lambda \in (0,1]: p \succeq q$ if and only if $\lambda p + (1- \lambda )r \succeq \lambda q + (1- \lambda )r$.
+- **Archimedean.** For all $p, q, r \in \Delta (X)$: if $p \succ q \succ r$ then there are $\alpha , \beta \in (0,1)$ with $\alpha p + (1- \alpha )r \succ q$ and $q \succ \beta p + (1- \beta )r$.
 
 ## Conclusion
 
-- **Mixture continuity.** For all p, q, r ∈ Δ(X) the sets {λ ∈ [0,1] : λp + (1−λ)q ≽ r} and {λ ∈ [0,1] : r ≽ λp + (1−λ)q} are closed.
+- **Mixture continuity.** For all $p, q, r \in \Delta (X)$ the sets $\{\lambda \in [0,1] : \lambda p + (1- \lambda )q \succeq r\}$ and $\{\lambda \in [0,1] : r \succeq \lambda p + (1- \lambda )q\}$ are closed.
 
 ## Notes
 
-Known with completeness added (Jensen 1967). Without it the cone K = {q − p : q ≽ p} is convex; the question is whether the Archimedean axiom forces it to be closed.
+Known with completeness added (Jensen 1967). Without it the cone $K = \{q - p : q \succeq p\}$ is convex; the question is whether the Archimedean axiom forces it to be closed.
 
 <p class='cert'>Record: <code>topics/decision-theory/results/archimedean-independence-imply-continuity.yaml</code></p>

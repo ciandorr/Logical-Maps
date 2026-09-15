@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = $\Diamond_\infty$).** □($\Diamond_\vee$ = $\Diamond_\infty$)
-- **□($\Diamond_\infty$ = ◇₂).** □($\Diamond_\infty$ = ◇₂)
+- **□($\Diamond_\vee$ = $\Diamond_\infty$).** $\Box$($\Diamond_\vee$ = $\Diamond_\infty$)
+- **□($\Diamond_\infty$ = ◇₂).** $\Box$($\Diamond_\infty$ $= \Diamond _{2}$)
 
 ## Conclusion
 
-- **□($\Diamond_\vee$ = ◇₂).** □($\Diamond_\vee$ = ◇₂)
+- **□($\Diamond_\vee$ = ◇₂).** $\Box$($\Diamond_\vee$ $= \Diamond _{2}$)
 
 ## Proof
 

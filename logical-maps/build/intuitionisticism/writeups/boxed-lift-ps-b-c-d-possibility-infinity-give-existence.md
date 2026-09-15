@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **□PSb ($\Diamond_\infty$).** □(¬$\Diamond_\infty$(⊥))
-- **□PSc ($\Diamond_\infty$).** □(∀p, q : t. ($\Diamond_\infty$(p ∨ q) → ($\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q))))
-- **□PSd ($\Diamond_\infty$).** □(∀p, q : t. (($\Diamond_\infty$(p) → □q) → □(p → q)))
+- **□PSb ($\Diamond_\infty$).** $\Box (\neg$$\Diamond_\infty$$(\bot )$)
+- **□PSc ($\Diamond_\infty$).** $\Box (\forall p, q : t$. ($\Diamond_\infty$$(p \lor q) \to$ ($\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q))))
+- **□PSd ($\Diamond_\infty$).** $\Box (\forall p, q : t$. (($\Diamond_\infty$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **□A PSb–PSc–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f))
+- **□A PSb–PSc–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f))$
 
 ## Proof
 

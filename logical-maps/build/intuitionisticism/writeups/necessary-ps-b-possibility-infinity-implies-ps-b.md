@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSb ($\Diamond_\infty$).** □(¬$\Diamond_\infty$(⊥))
+- **□PSb ($\Diamond_\infty$).** $\Box (\neg$$\Diamond_\infty$$(\bot )$)
 
 ## Conclusion
 
-- **PSb ($\Diamond_\infty$).** $\Diamond_\infty$ does not hold of the contradiction ⊥.
+- **PSb ($\Diamond_\infty$).** $\Diamond_\infty$ does not hold of the contradiction $\bot$.
 
 ## Proof
 
-Apply the standing theorem □A → A to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
+Apply the standing theorem $\Box A \to A$ to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
 
 ## Notes
 

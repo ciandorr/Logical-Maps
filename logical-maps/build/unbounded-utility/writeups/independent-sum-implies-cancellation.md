@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Independent Sum Invariance.** Whenever Z is independent of the pair (X,Y), X ≽ Y iff X+Z ≽ Y+Z.
+- **Independent Sum Invariance.** Whenever Z is independent of the pair $(X,Y), X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
-- **Independent Sum Cancellation.** Whenever Z is independent of (X,Y), X+Z ≽ Y+Z implies X ≽ Y.
+- **Independent Sum Cancellation.** Whenever Z is independent of $(X,Y), X+Z \succeq Y+Z$ implies $X \succeq Y$.
 
 ## Proof
 

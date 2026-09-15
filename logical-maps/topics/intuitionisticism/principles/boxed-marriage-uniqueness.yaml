@@ -1,9 +1,9 @@
 id: boxed-marriage-uniqueness
 name: □Marriage is monogamous
-statement: □(∀N,P,Q:tt. (Necessity₂(N) ∧ Possibility₂(P) ∧ Possibility₂(Q) ∧ Married(N,P) ∧ Married(N,Q))
-  → (P = Q))
-formal: □(∀N,P,Q:tt. (Necessity₂(N) ∧ Possibility₂(P) ∧ Possibility₂(Q) ∧ Married(N,P) ∧ Married(N,Q))
-  → (P = Q))
+statement: |-
+  $\Box (\forall N,P,Q:tt. (\operatorname{Necessity}_{2}(N) \land \operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}(N,P) \land \operatorname{Married}(N,Q)) \to (P = Q))$
+formal: |-
+  $\Box (\forall N,P,Q:tt. (\operatorname{Necessity}_{2}(N) \land \operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}(N,P) \land \operatorname{Married}(N,Q)) \to (P = Q))$
 category: candidate-laws
 sources:
 - Codex (GPT-6), connecting-principle formulation, 2026-09-13.

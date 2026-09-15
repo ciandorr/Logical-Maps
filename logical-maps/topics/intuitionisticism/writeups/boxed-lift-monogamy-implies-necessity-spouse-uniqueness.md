@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□Marriage is monogamous.** □(∀N,P,Q:tt. (Necessity₂(N) ∧ Possibility₂(P) ∧ Possibility₂(Q) ∧ Married(N,P) ∧ Married(N,Q)) → (P = Q))
+- **□Marriage is monogamous.** $\Box (\forall N,P,Q:tt. (\operatorname{Necessity}_{2}(N) \land \operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}(N,P) \land \operatorname{Married}(N,Q)) \to (P = Q))$
 
 ## Conclusion
 
-- **□Spouse uniqueness for □.** □(∀P,Q:tt. (Possibility₂(P) ∧ Possibility₂(Q) ∧ Married((λp:t. □p), P) ∧ Married((λp:t. □p), Q)) → (P = Q))
+- **□Spouse uniqueness for □.** $\Box (\forall P,Q:tt. (\operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}((\lambda p:t. \Box p), P) \land \operatorname{Married}((\lambda p:t. \Box p), Q)) \to (P = Q))$
 
 ## Proof
 

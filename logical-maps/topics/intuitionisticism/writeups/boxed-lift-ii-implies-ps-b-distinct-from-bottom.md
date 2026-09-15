@@ -4,11 +4,11 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSb (≠⊥).** □(¬(⊥ ≠ ⊥))
+- **□PSb (≠⊥).** $\Box (\neg (\bot \ne \bot ))$
 
 ## Proof
 

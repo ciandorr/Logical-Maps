@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□(□ = □₂).** □((λp:t. □p) = □₂)
+- **□(□ = □₂).** $\Box ((\lambda p:t. \Box p) = \Box _{2})$
 
 ## Conclusion
 
-- **□PSd (◇₂).** □(∀p, q : t. ((◇₂(p) → □q) → □(p → q)))
+- **□PSd (◇₂).** $\Box (\forall p, q : t. ((\Diamond _{2}(p) \to \Box q) \to \Box (p \to q)))$
 
 ## Proof
 

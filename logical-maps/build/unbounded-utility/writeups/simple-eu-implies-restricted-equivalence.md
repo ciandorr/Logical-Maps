@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Surjectivity of u is not included here.
+- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: $X \succeq Y$ iff $E[u(X)] \ge E[u(Y)]$. Surjectivity of u is not included here.
 
 ## Conclusion
 
-- **Restricted Stochastic Equivalence.** If simple gambles X,Y have the same law, then X ~ Y.
+- **Restricted Stochastic Equivalence.** If simple gambles X,Y have the same law, then $X \sim Y$.
 
 ## Proof
 

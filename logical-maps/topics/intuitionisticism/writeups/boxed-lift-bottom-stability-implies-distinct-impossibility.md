@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□Stability of =⊥.** □(∀p:t. ¬¬(p = ⊥) → (p = ⊥))
+- **□Stability of =⊥.** $\Box (\forall p:t. \neg \neg (p = \bot ) \to (p = \bot ))$
 
 ## Conclusion
 
-- **□Impossibility ⇒ necessary falsehood (≠⊥).** □(∀p:t. ¬(p ≠ ⊥) → □¬p)
+- **□Impossibility ⇒ necessary falsehood (≠⊥).** $\Box (\forall p:t. \neg (p \ne \bot ) \to \Box \neg p)$
 
 ## Proof
 

@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,38 +252,53 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]</h1>
-</header>
-<p>Source: <strong>Misc.</strong> Construction by Zachary Goodsell; specialization and the additional proofs below by GPT-6 (Codex), 9 September 2026. No independent checker or Lean verification is asserted.</p>
-<p><strong>Original work: model adaptation and direct verification.</strong> We reuse the continuous ultrafilter construction from <em>Decision theory unbound</em>, Appendix B, Definition 3, Lemma 6 and Theorem 3. Choosing geometric cutoffs supplies an explicit alternating-game evaluation and scaling reversal. The CDF-area, L¹ and folded-expectation verifications below establish extra properties of this construction. This is an account of work done for the map, not a claim that these observations are new in the literature.</p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]</h1></header><p>Source: <strong>Misc.</strong> Construction by Zachary Goodsell; specialization and the additional proofs below by GPT-6 (Codex), 9 September 2026. No independent checker or Lean verification is asserted.</p>
+<p><strong>Original work: model adaptation and direct verification.</strong> We reuse the continuous ultrafilter construction from <em>Decision theory unbound</em>, Appendix B, Definition 3, Lemma 6 and Theorem 3. Choosing geometric cutoffs supplies an explicit alternating-game evaluation and scaling reversal. The CDF-area, <span class="math inline">L^{1}</span> and folded-expectation verifications below establish extra properties of this construction. This is an account of work done for the map, not a claim that these observations are new in the literature.</p>
 <h2 id="construction-and-dtu">Construction and DTU</h2>
-<p>Outcomes are real utilities; all measurable random variables on the standing sample space are available. Choose a free ultrafilter (U) on the positive integers. Put (t_n=4^n), (c_t(x)=(-t,(x,t))), and</p>
-<p>[ v_X(n)=E[c_{t_n}(X)], XY &gt;0 {n:v_X(n)-v_Y(n)-}U. ]</p>
+<p>Outcomes are real utilities; all measurable random variables on the standing sample space are available. Choose a free ultrafilter <span class="math inline">\mathcal U</span> on the positive integers. Put <span class="math inline">t_n=4^n</span>, <span class="math inline">c_t(x)=\max(-t,\min(x,t))</span>, and</p>
+<p><span class="math display">
+v_X(n)=E[c_{t_n}(X)],\qquad
+X\succeq Y\iff
+\forall\varepsilon&gt;0\quad
+\{n:v_X(n)-v_Y(n)\ge-\varepsilon\}\in\mathcal U.
+</span></p>
 <p>Changing a comparison sequence by a sequence tending to zero leaves this relation unchanged. A positive lower bound on an ultrafilter-large set gives strict preference. If a difference converges to a finite number, its comparison is exactly the sign of that number, including indifference at zero.</p>
-<p>Reflexivity is immediate. For transitivity, intersect the two sets corresponding to tolerance (/2). If (XY), ultrafilter dichotomy gives an (&gt;0) and an ultrafilter-large set where (v_Y-v_X&gt;). Thus (YX), establishing totality. These statements use addition and positive scalar multiplication of comparison sequences; no multiplication of arbitrary unbounded quotient classes is needed.</p>
-<p>Equal laws have identical clipped expectations. For bounded, hence simple, variables clipping eventually disappears; their comparisons are ordinary expectations. In particular the normalized chart is the identity and every real utility is realized. Randomized mixtures satisfy (v_{M_p(X,Z)}=p v_X+(1-p)v_Z), so cancelling the common term and rescaling () proves both directions of Mixture Independence.</p>
-<p>For survival functions (S_X), bounded layer integration gives</p>
-<p>[ v_X(n)-v_Y(n)=_{-t_n}^{t_n}(S_X(s)-S_Y(s)),ds. ]</p>
+<p>Reflexivity is immediate. For transitivity, intersect the two sets corresponding to tolerance <span class="math inline">\varepsilon/2</span>. If <span class="math inline">X\not\succeq Y</span>, ultrafilter dichotomy gives an <span class="math inline">\varepsilon&gt;0</span> and an ultrafilter-large set where <span class="math inline">v_Y-v_X&gt;\varepsilon</span>. Thus <span class="math inline">Y\succ X</span>, establishing totality. These statements use addition and positive scalar multiplication of comparison sequences; no multiplication of arbitrary unbounded quotient classes is needed.</p>
+<p>Equal laws have identical clipped expectations. For bounded, hence simple, variables clipping eventually disappears; their comparisons are ordinary expectations. In particular the normalized chart is the identity and every real utility is realized. Randomized mixtures satisfy <span class="math inline">v_{M_p(X,Z)}=p v_X+(1-p)v_Z</span>, so cancelling the common term and rescaling <span class="math inline">\varepsilon</span> proves both directions of Mixture Independence.</p>
+<p>For survival functions <span class="math inline">S_X</span>, bounded layer integration gives</p>
+<p><span class="math display">
+v_X(n)-v_Y(n)=\int_{-t_n}^{t_n}(S_X(s)-S_Y(s))\,ds.
+</span></p>
 <p>Stochastic dominance makes the integrand nonnegative. If it is strictly positive at one threshold, right-continuity gives a positive integral over some bounded interval. Every sufficiently large cutoff therefore has a fixed positive gap. This proves strict as well as weak Stochastic Dominance, and finishes DTU.</p>
 <h2 id="additional-expectation-and-continuity-properties">Additional expectation and continuity properties</h2>
-<p>Write (d=S_X-S_Y) and (A_=d_). If at least one of these areas is finite, monotone convergence of the positive and negative parts over ([-t_n,t_n]) shows that the clipped difference tends to the well-defined extended difference (A_+-A_-). The preceding sign criterion proves <strong>CDF-Area Extension</strong>, including the equality case and both possible infinite signs. Consequently the recorded CDF-area implications give Relative Expectation and Expected Utility.</p>
+<p>Write <span class="math inline">d=S_X-S_Y</span> and <span class="math inline">A_\pm=\int d_\pm</span>. If at least one of these areas is finite, monotone convergence of the positive and negative parts over <span class="math inline">[-t_n,t_n]</span> shows that the clipped difference tends to the well-defined extended difference <span class="math inline">A_+-A_-</span>. The preceding sign criterion proves <strong>CDF-Area Extension</strong>, including the equality case and both possible infinite signs. Consequently the recorded CDF-area implications give Relative Expectation and Expected Utility.</p>
 <p>For <strong>L¹ Continuity</strong>, clipping is 1-Lipschitz, so for every cutoff</p>
-<p>[ |v_{X_k}(n)-v_X(n)|E|X_k-X|. ]</p>
-<p>If this last quantity tends to zero and every (X_kY), fix (&gt;0) and choose one (k) with error below (/2). On the ultrafilter-large set where (v_{X_k}-v_Y-/2), we have (v_X-v_Y-). This is exactly the required upper-section closure. It also applies when other distances in the domain are infinite.</p>
-<p>For <strong>Folded Expectation</strong>, put (h_X(s)=P(X&gt;s)-P(X&lt;-s)). Layer integration gives (v_X(n)=_0^{t_n}h_X(s),ds); boundary atoms change no integral. If (h_X,h_Y) are absolutely integrable, these converge to their folded expectations. Their finite difference is therefore compared by its sign.</p>
-<p>Reflection negates every clipped expectation, proving <strong>Reflection Anti-Invariance</strong>. For a real constant (b), (c_t(X+b)-c_t(X)b) pointwise with absolute value at most (|b|). Dominated convergence shows that shifting both compared variables changes the clipped difference by a sequence tending to zero. This proves <strong>Shift Invariance</strong>. No individual integrability of the variables is required.</p>
+<p><span class="math display">
+|v_{X_k}(n)-v_X(n)|\le E|X_k-X|.
+</span></p>
+<p>If this last quantity tends to zero and every <span class="math inline">X_k\succeq Y</span>, fix <span class="math inline">\varepsilon&gt;0</span> and choose one <span class="math inline">k</span> with error below <span class="math inline">\varepsilon/2</span>. On the ultrafilter-large set where <span class="math inline">v_{X_k}-v_Y\ge-\varepsilon/2</span>, we have <span class="math inline">v_X-v_Y\ge-\varepsilon</span>. This is exactly the required upper-section closure. It also applies when other distances in the domain are infinite.</p>
+<p>For <strong>Folded Expectation</strong>, put <span class="math inline">h_X(s)=P(X&gt;s)-P(X&lt;-s)</span>. Layer integration gives <span class="math inline">v_X(n)=\int_0^{t_n}h_X(s)\,ds</span>; boundary atoms change no integral. If <span class="math inline">h_X,h_Y</span> are absolutely integrable, these converge to their folded expectations. Their finite difference is therefore compared by its sign.</p>
+<p>Reflection negates every clipped expectation, proving <strong>Reflection Anti-Invariance</strong>. For a real constant <span class="math inline">b</span>, <span class="math inline">c_t(X+b)-c_t(X)\to b</span> pointwise with absolute value at most <span class="math inline">|b|</span>. Dominated convergence shows that shifting both compared variables changes the clipped difference by a sequence tending to zero. This proves <strong>Shift Invariance</strong>. No individual integrability of the variables is required.</p>
 <h2 id="explicit-failures-of-scale-alternating-evaluation-and-uniqueness">Explicit failures of scale, alternating evaluation and uniqueness</h2>
-<p>Let (A) have (P(A=(-2)<sup>j)=2</sup>{-j}), (j1). For (2<sup>kt2</sup>{k+1}), summing the finite prefix and the geometric tail gives</p>
-<p>[ E[c_t(A)] =_{j=1}<sup>k(-1)</sup>j+ . ]</p>
-<p>At (t_n=4^n), this equals (-1/3), whereas (E[c_{t_n}(2A)]=2E[c_{t_n/2}(A)]=-4/3). Hence</p>
-<p>[ A-1/3-1/2, 2A-4/3-1. ]</p>
+<p>Let <span class="math inline">A</span> have <span class="math inline">P(A=(-2)^j)=2^{-j}</span>, <span class="math inline">j\ge1</span>. For <span class="math inline">2^k\le t\le2^{k+1}</span>, summing the finite prefix and the geometric tail gives</p>
+<p><span class="math display">
+E[c_t(A)]
+=\sum_{j=1}^k(-1)^j+
+  \frac{(-1)^{k+1}t}{3\,2^k}.
+</span></p>
+<p>At <span class="math inline">t_n=4^n</span>, this equals <span class="math inline">-1/3</span>, whereas <span class="math inline">E[c_{t_n}(2A)]=2E[c_{t_n/2}(A)]=-4/3</span>. Hence</p>
+<p><span class="math display">
+A\sim-1/3\succ-1/2,
+\qquad 2A\sim-4/3\prec-1.
+</span></p>
 <p>This is a concrete scaling reversal in every free-ultrafilter choice used here. It also directly violates the recorded Alternating St Petersburg Value principle.</p>
-<p>The law of (A) is the half-mixture of (-2A) and sure (-2): the sure branch supplies the first atom and the other branch supplies all subsequent atoms. Stochastic Equivalence gives (AM_{1/2}(-2A,-2)). The sure gamble (q=-1/2) satisfies the same fixed-value equation by Simple EU, since (12(-2q)+12(-2)=q). Nevertheless (Aq). With (p=1/2,a=2,b=0,Z=-2), these are two witnesses refuting <strong>Uniqueness of Negative Self-Similarity</strong>.</p>
+<p>The law of <span class="math inline">A</span> is the half-mixture of <span class="math inline">-2A</span> and sure <span class="math inline">-2</span>: the sure branch supplies the first atom and the other branch supplies all subsequent atoms. Stochastic Equivalence gives <span class="math inline">A\sim M_{1/2}(-2A,-2)</span>. The sure gamble <span class="math inline">q=-1/2</span> satisfies the same fixed-value equation by Simple EU, since <span class="math inline">\frac12(-2q)+\frac12(-2)=q</span>. Nevertheless <span class="math inline">A\not\sim q</span>. With <span class="math inline">p=1/2,a=2,b=0,Z=-2</span>, these are two witnesses refuting <strong>Uniqueness of Negative Self-Similarity</strong>.</p>
 <h2 id="scope-and-validation">Scope and validation</h2>
-<p>The model satisfies DTU together with CDF-Area Extension, L¹ Continuity, Folded Expectation, reflection and shift, yet fails scale and the two calculation/evaluation principles just exhibited. Further exclusions are derived by the map’s implication records, not asserted without evidence. The free ultrafilter remains nonconstructive.</p>
+<p>The model satisfies DTU together with CDF-Area Extension, <span class="math inline">L^{1}</span> Continuity, Folded Expectation, reflection and shift, yet fails scale and the two calculation/evaluation principles just exhibited. Further exclusions are derived by the map’s implication records, not asserted without evidence. The free ultrafilter remains nonconstructive.</p>
 <p><code>checks/geometric_clipping.py</code> checks the geometric-tail calculation against a separate finite-sum calculation with a rigorous residual bound, the scaling reversal, and the finite Lipschitz estimate. Those checks are diagnostics; the quantified claims rely on the proofs above.</p>
 <h2 id="references">References</h2>
 <ul>
@@ -310,5 +309,4 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12473">Decision theory unbound</a>.</strong> Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Theorems 7–10, pp. 693–695: underlying continuous clipping construction and original scale-failure strategy</li>
 </ul>
-</body>
-</html>
+</body></html>

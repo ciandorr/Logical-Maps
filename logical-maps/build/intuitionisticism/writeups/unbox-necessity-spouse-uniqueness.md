@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Spouse uniqueness for □.** □(∀P,Q:tt. (Possibility₂(P) ∧ Possibility₂(Q) ∧ Married((λp:t. □p), P) ∧ Married((λp:t. □p), Q)) → (P = Q))
+- **□Spouse uniqueness for □.** $\Box (\forall P,Q:tt. (\operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}((\lambda p:t. \Box p), P) \land \operatorname{Married}((\lambda p:t. \Box p), Q)) \to (P = Q))$
 
 ## Conclusion
 
-- **Spouse uniqueness for □.** ∀P,Q:tt. (Possibility₂(P) ∧ Possibility₂(Q) ∧ Married((λp:t. □p), P) ∧ Married((λp:t. □p), Q)) → (P = Q)
+- **Spouse uniqueness for □.** $\forall P,Q:tt. (\operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}((\lambda p:t. \Box p), P) \land \operatorname{Married}((\lambda p:t. \Box p), Q)) \to (P = Q)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

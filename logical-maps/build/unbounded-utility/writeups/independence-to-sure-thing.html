@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Stochastic Equivalence ∧ Mixture Independence ⇒ Sure-Thing</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Stochastic Equivalence ∧ Mixture Independence ⇒ Sure-Thing</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,25 +252,24 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Stochastic Equivalence ∧ Mixture Independence ⇒ Sure-Thing</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Stochastic Equivalence ∧ Mixture Independence ⇒ Sure-Thing</h1></header><p class="cert">
 Result — Source: Decision Theory Unbound; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Stochastic Equivalence.</strong> If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.</li>
-<li><strong>Mixture Independence.</strong> For all X,Y,Z and 0&lt;p&lt;1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.</li>
+<li><strong>Stochastic Equivalence.</strong> If X and Y have the same probability law over outcomes, then <span class="math inline">X \sim Y</span>. The variables remain distinct objects; indifference is an additional axiom.</li>
+<li><strong>Mixture Independence.</strong> For all X,Y,Z and <span class="math inline">0&lt;p&lt;1, X \succeq Y</span> iff <span class="math inline">M_p(X,Z) \succeq M_p(Y,Z)</span>, where M is the fixed randomized-selection construction described in the background.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Sure-Thing.</strong> For an event E with 0&lt;P(E)&lt;1, if X|E ~ Y|E, then X ≽ Y iff X|Eᶜ ≽ Y|Eᶜ. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.</li>
+<li><strong>Sure-Thing.</strong> For an event E with <span class="math inline">0&lt;P(E)&lt;1</span>, if <span class="math inline">X|E \sim Y|E</span>, then <span class="math inline">X \succeq Y</span> iff <span class="math inline">X|E^{c} \succeq Y|E^{c}</span>. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let p=P(E). Realize the conditional laws on E and Eᶜ as A,B for X and C,D for Y. Law invariance gives X~M_p(A,B), Y~M_p(C,D), X|E~M_p(A,0), Y|E~M_p(C,0). Independence cancels 0 to yield A~C from the hypothesis. Replace indifferent mixture components and cancel the common E component: X≽Y iff B≽D. The latter is equivalent to X|Eᶜ≽Y|Eᶜ by independence and law invariance.</p>
+<p>Let <span class="math inline">p=P(E)</span>. Realize the conditional laws on E and <span class="math inline">E^{c}</span> as A,B for X and C,D for Y. Law invariance gives <span class="math inline">X\sim M_p(A,B), Y\sim M_p(C,D), X|E\sim M_p(A,0), Y|E\sim M_p(C,0)</span>. Independence cancels 0 to yield <span class="math inline">A\sim C</span> from the hypothesis. Replace indifferent mixture components and cancel the common E component: <span class="math inline">X\succeq Y</span> iff <span class="math inline">B\succeq D</span>. The latter is equivalent to <span class="math inline">X|E^{c}\succeq Y|E^{c}</span> by independence and law invariance.</p>
 <h2 id="notes">Notes</h2>
 <p>Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.</p>
 <h2 id="sources">Sources</h2>
@@ -300,5 +283,4 @@ Record: <code>topics/unbounded-utility/results/independence-to-sure-thing.yaml</
 <ul>
 <li><strong>Proof: <a href="https://doi.org/10.1111/nous.12473">Decision theory unbound</a>.</strong> Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — §3.2, p. 679 and p. 682, footnote 28</li>
 </ul>
-</body>
-</html>
+</body></html>

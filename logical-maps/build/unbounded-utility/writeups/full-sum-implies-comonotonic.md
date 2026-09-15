@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Full Sum Invariance.** For all X,Y,Z, with arbitrary dependence, X ≽ Y iff X+Z ≽ Y+Z.
+- **Full Sum Invariance.** For all X,Y,Z, with arbitrary dependence, $X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
-- **Comonotonic Sum Invariance.** If X and Z are comonotonic, and Y and Z are comonotonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is comonotonic when its members admit nondecreasing representations in one common uniform random variable.
+- **Comonotonic Sum Invariance.** If X and Z are comonotonic, and Y and Z are comonotonic, then $X \succeq Y$ iff $X+Z \succeq Y+Z$. A pair is comonotonic when its members admit nondecreasing representations in one common uniform random variable.
 
 ## Proof
 

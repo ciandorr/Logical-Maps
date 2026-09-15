@@ -8,7 +8,7 @@
 
 ## Conclusion
 
-- **□WLEM.** □(∀p:t. ¬p ∨ ¬¬p)
+- **□WLEM.** $\Box (\forall p:t. \neg p \lor \neg \neg p)$
 
 ## Proof
 

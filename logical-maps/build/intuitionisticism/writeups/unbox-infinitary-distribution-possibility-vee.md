@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Infinitary distribution ($\Diamond_\vee$).** □(∀F:tt. Inex^t(F) → ($\Diamond_\vee$(∃x:t. F x) → ∃x:t. $\Diamond_\vee$(F x)))
+- **□Infinitary distribution ($\Diamond_\vee$).** $\Box (\forall F:tt. \operatorname{Inex}^t(F) \to$ ($\Diamond_\vee$$(\exists x:t. F x) \to \exists x:t$. $\Diamond_\vee$(F x)))
 
 ## Conclusion
 
-- **Infinitary distribution ($\Diamond_\vee$).** ∀F:tt. Inex^t(F) → ($\Diamond_\vee$(∃x:t. F x) → ∃x:t. $\Diamond_\vee$(F x))
+- **Infinitary distribution ($\Diamond_\vee$).** $\forall F:tt. \operatorname{Inex}^t(F) \to$ ($\Diamond_\vee$$(\exists x:t. F x) \to \exists x:t$. $\Diamond_\vee$(F x))
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

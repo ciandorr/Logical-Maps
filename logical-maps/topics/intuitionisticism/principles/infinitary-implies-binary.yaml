@@ -1,8 +1,10 @@
 id: infinitary-implies-binary
 name: Infinitary candidates distribute over ∨
 category: candidate-laws
-statement: ∀P:tt. PSc∞^t(P) → PSc(P)
-formal: ∀P:tt. PSc∞^t(P) → PSc(P)
+statement: |-
+  $\forall P:tt. \operatorname{PSc}_{\infty }^t(P) \to \operatorname{PSc}(P)$
+formal: |-
+  $\forall P:tt. \operatorname{PSc}_{\infty }^t(P) \to \operatorname{PSc}(P)$
 sources:
 - Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.4, after Eq.
   (43), p. 23.
@@ -14,5 +16,5 @@ references:
   locator: §4.4, after Eq. (43), p. 23
 date: '2026-09-13'
 lean: null
-notes: Transcribes the claim as printed. The suggested F = λr.(r=p ∨ r=q) requires further checking against
-  Eq. (43); no proof is asserted here.
+notes: |-
+  Transcribes the claim as printed. The suggested $F = \lambda r.(r=p \lor r=q)$ requires further checking against Eq. (43); no proof is asserted here.

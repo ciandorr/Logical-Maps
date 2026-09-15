@@ -4,18 +4,18 @@
 
 ## Package
 
-- **Completeness.** For all p, q ∈ Δ(X): p ≽ q or q ≽ p.
-- **Acyclicity.** There is no finite cycle of strict preferences p₁ ≻ p₂ ≻ … ≻ pₙ ≻ p₁.
-- **¬ Quasi-transitivity.** Strict preference is transitive: if p ≻ q and q ≻ r then p ≻ r.
+- **Completeness.** For all $p, q \in \Delta (X): p \succeq q$ or $q \succeq p$.
+- **Acyclicity.** There is no finite cycle of strict preferences $p_{1} \succ p_{2} \succ \ldots \succ p_{n} \succ p_{1}$.
+- **¬ Quasi-transitivity.** Strict preference is transitive: if $p \succ q$ and $q \succ r$ then $p \succ r$.
 
 ## Construction
 
-Fix u : X → ℝ non-constant and ε > 0. Define an asymmetric relation P by
-p P q iff EU_u(p) − EU_u(q) ∈ (ε, 2ε], and let p ≽ q iff not q P p. Then
-≽ is complete (P is asymmetric) and ≻ = P. P is acyclic because EU_u
+Fix $u : X \to \mathbb{R}$ non-constant and $\epsilon > 0$. Define an asymmetric relation P by
+p P q iff $\operatorname{EU}_u(p) - \operatorname{EU}_u(q) \in (\epsilon , 2\epsilon ]$, and let $p \succeq q$ iff not q P p. Then
+$\succeq$ is complete (P is asymmetric) and $\succ = P$. P is acyclic because $\operatorname{EU}_u$
 strictly increases along any P-chain. But P is not transitive: with
-EU_u(p), EU_u(q), EU_u(r) = 3ε, 1.5ε, 0 we have p P q and q P r while
-EU_u(p) − EU_u(r) = 3ε ∉ (ε, 2ε].
+$\operatorname{EU}_u(p), \operatorname{EU}_u(q), \operatorname{EU}_u(r) = 3\epsilon , 1.5\epsilon , 0$ we have p P q and q P r while
+$\operatorname{EU}_u(p) - \operatorname{EU}_u(r) = 3\epsilon \notin (\epsilon , 2\epsilon ]$.
 
 ## Notes
 

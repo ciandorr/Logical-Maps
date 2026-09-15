@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **4 (□).** ∀p:t. □p → □□p
+- **4 (□).** $\forall p:t. \Box p \to \Box \Box p$
 
 ## Proof
 
-If p = ⊤, Leibniz substitution gives (p = ⊤) = (⊤ = ⊤). The reflexivity theorem ⊤ = ⊤ is identical to ⊤ by assumption-free propositional intensionality. Transitivity gives (p = ⊤) = ⊤. Discharge and generalize.
+If $p = \top$, Leibniz substitution gives $(p = \top ) = (\top = \top )$. The reflexivity theorem $\top = \top$ is identical to $\top$ by assumption-free propositional intensionality. Transitivity gives $(p = \top ) = \top$. Discharge and generalize.
 
 ## Notes
 

@@ -1,7 +1,7 @@
 # DU and upper-section L¹ Continuity imply Relative Expectation
 
 **Proved implication:** Rich Outcomes + Archimedean Outcomes + Stochastic
-Equivalence + Stochastic Dominance + Mixture Independence + L¹ Continuity
+Equivalence + Stochastic Dominance + Mixture Independence $+ L^{1}$ Continuity
 imply Relative Expectation. These are **DU + L¹ Continuity**; Totality is
 not included.
 
@@ -82,7 +82,7 @@ Dominance and (1) give
 $V+\varepsilon\succeq Q_n\succeq v$ and
 $v+\varepsilon\succeq v_n\succeq V$. Applying (3) twice proves
 (2). This is an observation about the bounded lemma only: the proof below
-still uses the recorded L¹ Continuity axiom for its conditional limits.
+still uses the recorded $L^{1}$ Continuity axiom for its conditional limits.
 Constructing and comparing a shifted variable here does not assume Shift
 Invariance of preferences.
 
@@ -172,7 +172,7 @@ Consequently the actual coupling in (4) satisfies
 \]
 
 Integrability of $D$ and dominated convergence justify the last limit.
-Apply upper-section L¹ Continuity to (6), with fixed right side $Y$:
+Apply upper-section $L^{1}$ Continuity to (6), with fixed right side $Y$:
 
 \[
 X\succeq Y

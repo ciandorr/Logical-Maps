@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **Necessitation (□).** For every formula A: from ⊢ A infer ⊢ □A; the assumption context must be empty.
+- **Necessitation (□).** For every formula A: from $\vdash A$ infer $\vdash \Box A$; the assumption context must be empty.
 
 ## Proof
 
-For any formula A with an assumption-free derivation, intuitionistic logic gives an assumption-free derivation of A ↔ ⊤. Apply standing propositional intensionality to get A = ⊤. This covers every admissible instance and does not permit necessitating a selected formula assumption.
+For any formula A with an assumption-free derivation, intuitionistic logic gives an assumption-free derivation of $A \leftrightarrow \top$. Apply standing propositional intensionality to get $A = \top$. This covers every admissible instance and does not permit necessitating a selected formula assumption.
 
 ## Notes
 

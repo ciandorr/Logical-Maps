@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□PSd (≠⊥).** □(∀p, q : t. (((p ≠ ⊥) → □q) → □(p → q)))
+- **□PSd (≠⊥).** $\Box (\forall p, q : t. (((p \ne \bot ) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **□Impossibility ⇒ necessary falsehood (≠⊥).** □(∀p:t. ¬(p ≠ ⊥) → □¬p)
+- **□Impossibility ⇒ necessary falsehood (≠⊥).** $\Box (\forall p:t. \neg (p \ne \bot ) \to \Box \neg p)$
 
 ## Proof
 

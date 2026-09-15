@@ -2,7 +2,7 @@
 
 **Direct source: Symmetries of Value.** Zachary Goodsell’s *Symmetries of
 value*, Theorem 1 (p. 24), already states that DTU does not imply the affine
-symmetry principles, including when L¹ Continuity and Relative Expectation
+symmetry principles, including when $L^{1}$ Continuity and Relative Expectation
 are added. Its reflection countermodel explicitly invokes *Decision theory
 unbound*, Remark 3. Thus both the asymmetric construction and this stronger
 non-implication belong to Goodsell; they are not new AI results.
@@ -14,10 +14,10 @@ cutoffs and symmetric gambles with arbitrary real values, including nonzero
 ones.
 
 **Original work: source-model specialization and additional verification.**
-GPT-6 (Codex), 9 September 2026, chose the explicit cutoffs f(t)=2t, g(t)=t
+GPT-6 (Codex), 9 September 2026, chose the explicit cutoffs $f(t)=2t, g(t)=t$
 and recorded the detailed proofs below. The added work is the displayed
 CDF-area and shift-transfer verification, exact Cauchy and alternating-game
-values, and negative-self-similarity witness. The L¹/Relative Expectation
+values, and negative-self-similarity witness. The $L^{1}/$Relative Expectation
 non-implication is already stated in the source; its proof here is an explicit
 verification, not a newly discovered separation. No literature-novelty claim,
 independent checker or Lean verification is asserted.
@@ -196,7 +196,7 @@ Thus $v_A(t)=0$ for every $t$, and $A\sim0$. In particular
 ## Scope of the verification
 
 This model establishes, among other separations, that DTU together with
-CDF-Area Extension, Relative Expectation, L¹ Continuity, and both shift
+CDF-Area Extension, Relative Expectation, $L^{1}$ Continuity, and both shift
 principles still does not force symmetric neutrality or reflection. No
 scale or sum-invariance verdict has been inferred from this construction.
 The map can derive further failures from its separately proved

@@ -260,7 +260,7 @@ satisfactions.
   $X+\varepsilon\succeq Y$ for **every** $\varepsilon>0$.
   Taking $\varepsilon=2$ makes availability impossible. Requiring
   comparisons only for sufficiently small available shifts would be
-  a different axiom and would fail here, as the L¹ example shows.
+  a different axiom and would fail here, as the $L^{1}$ example shows.
   The recorded principle and its quantifiers have not been changed.
 
 Together with the earlier sections, this assigns every one of the map's

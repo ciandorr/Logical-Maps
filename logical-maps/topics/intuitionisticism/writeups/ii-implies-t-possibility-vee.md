@@ -4,7 +4,7 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
@@ -12,7 +12,7 @@
 
 ## Proof
 
-Let Truth = λp.p. PSa follows from □(p→q)→(p→q); PSb and PSc reduce to intuitionistic tautologies. Each necessary candidate condition can be necessitated after its assumption-free derivation, so Truth is a qualified candidate. Given p, choose Truth in the existential definition of $\Diamond_\vee$p. Discharge and generalize p.
+Let $\operatorname{Truth} = \lambda p.p. \operatorname{PSa}$ follows from $\Box (p\to q)\to (p\to q); \operatorname{PSb}$ and PSc reduce to intuitionistic tautologies. Each necessary candidate condition can be necessitated after its assumption-free derivation, so Truth is a qualified candidate. Given p, choose Truth in the existential definition of $\Diamond_\vee$p. Discharge and generalize p.
 
 ## Notes
 

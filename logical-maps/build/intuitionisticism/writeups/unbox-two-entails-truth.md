@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□◇₂ entails Truth.** □(∀p:t. ◇₂p → p)
+- **□◇₂ entails Truth.** $\Box (\forall p:t. \Diamond _{2}p \to p)$
 
 ## Conclusion
 
-- **◇₂ entails Truth.** ∀p:t. ◇₂p → p
+- **◇₂ entails Truth.** $\forall p:t. \Diamond _{2}p \to p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

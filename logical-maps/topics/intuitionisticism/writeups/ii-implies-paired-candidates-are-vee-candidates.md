@@ -4,17 +4,17 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **Possibility₂ ⊆ $\mathrm{Possibility}_\vee$.** ∀P:tt. Possibility₂(P) → $\mathrm{Possibility}_\vee$(P)
+- **Possibility₂ ⊆ $\mathrm{Possibility}_\vee$.** $\forall P:tt. \operatorname{Possibility}_{2}(P) \to$ $\mathrm{Possibility}_\vee$(P)
 
 ## Proof
 
-Fix P and assume Possibility₂(P). Choose its spouse N, retaining □Normal(N), □PSa₂(N,P), □PSd₂(N,P), and □(PSb(P)∧PSc(P)). The closed substitution argument N⊤∧□r→Nr holds for every r: if r=⊤, replace equals in N⊤. By closing and necessitating this argument, □N⊤ gives the necessary version of ∀r.(□r→Nr).
+Fix P and assume $\operatorname{Possibility}_{2}(P)$. Choose its spouse N, retaining $\Box \operatorname{Normal}(N), \Box \operatorname{PSa}_{2}(N,P), \Box \operatorname{PSd}_{2}(N,P)$, and $\Box (\operatorname{PSb}(P)\land \operatorname{PSc}(P))$. The closed substitution argument $N\top \land \Box r\to Nr$ holds for every r: if $r=\top$, replace equals in $N\top$. By closing and necessitating this argument, $\Box N\top$ gives the necessary version of $\forall r.(\Box r\to Nr)$.
 
-Apply it to r=(p→q), and combine with the necessary PSa₂(N,P) clause. Necessitated logical implication and K give □PSa(P), now with the fixed necessity □. The necessary PSb and PSc clauses are already present. Their necessary conjunction is exactly $\mathrm{Possibility}_\vee$(P). Eliminate the spouse witness and discharge the candidate assumption; generalize P. Necessitation was used only on closed logical arguments, with boxed assumptions propagated by K.
+Apply it to $r=(p\to q)$, and combine with the necessary $\operatorname{PSa}_{2}(N,P)$ clause. Necessitated logical implication and K give $\Box \operatorname{PSa}(P)$, now with the fixed necessity $\Box$. The necessary PSb and PSc clauses are already present. Their necessary conjunction is exactly $\mathrm{Possibility}_\vee$(P). Eliminate the spouse witness and discharge the candidate assumption; generalize P. Necessitation was used only on closed logical arguments, with boxed assumptions propagated by K.
 
 ## Notes
 

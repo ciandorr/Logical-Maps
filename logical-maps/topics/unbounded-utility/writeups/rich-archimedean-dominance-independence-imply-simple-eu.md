@@ -141,10 +141,10 @@ Simple EU principle, including its measurability requirement.
 DU now assumes Rich Outcomes, Archimedean Outcomes, Stochastic Equivalence,
 Stochastic Dominance and Mixture Independence. This theorem derives Simple
 EU. DTU adds Totality to the same preset. The former Simple-EU-based
-formulation is equivalent, using the existing Simple EU ⇒ Archimedean
+formulation is equivalent, using the existing Simple $\operatorname{EU} \Rightarrow$ Archimedean
 Outcomes result for the reverse implication.
 
 The additional premises must not be dropped from the theorem record merely
 because the DU background usually supplies them. The
 [Two-sample minimum: zero extension](finite-two-sample-minimum.md) demonstrates why the
-unqualified Rich + Archimedean Outcomes ⇒ Simple EU arrow would be false.
+unqualified Rich + Archimedean Outcomes $\Rightarrow$ Simple EU arrow would be false.

@@ -24,8 +24,7 @@ try{
  assert.equal(w.eval("literalFollows('f')"),false,'A conjecture cannot make a premise automatic');
  assert.equal(w.eval("buildGraph().edges.some(e=>e.key==='cfe')"),false,'Proved C ⇒ E supersedes conjectured C ∧ F ⇒ E');
  d.querySelector('[data-source-filter="shown"]').click();
- const conjecture=JSON.parse(w.eval("JSON.stringify(buildGraph().edges.find(e=>e.key==='cfe'))"));
- assert.deepEqual(conjecture.premises,['c','f'],'The full conjectural premise set returns when the stronger proof is hidden');
+ assert.equal(w.eval("buildGraph().edges.some(e=>e.key==='cfe')"),false,'Hiding the resolving proof does not restore a conjecture arrow');
  assert.equal(w.eval("literalPair('c','e').status"),'open','Hiding an unrelated proof still removes its transitive arrows');
  assert.equal(w.eval("literalFollows('b')"),true);
  w.changeBackground('z',true);
@@ -33,6 +32,8 @@ try{
  assert.match(d.getElementById('graph-warning').textContent,/Background proof/);
  w.changeBackground('z',false);w.changeBackground('a',false);
  assert.equal(w.eval("literalFollows('b')"),false);assert.equal(w.eval("literalFollows('!z')"),false);
+ const conjecture=JSON.parse(w.eval("JSON.stringify(buildGraph().edges.find(e=>e.key==='cfe'))"));
+ assert.deepEqual(conjecture.premises,['c','f'],'Removing the resolving background restores the now-open conjecture');
  assert.deepEqual(errors.map(String),[]);
  console.log('PASS: hidden background proofs remain automatic and traceable, preserve exclusions and consistency, and never use conjectures as facts.');
 }finally{w.close();}

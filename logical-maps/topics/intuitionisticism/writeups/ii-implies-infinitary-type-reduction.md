@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **Infinitary distribution: type reduction.** For every σ: ∀P:tt. $\mathrm{PSc}^{t}_{\infty}$(P) → $\mathrm{PSc}^{\sigma}_{\infty}$(P)
+- **Infinitary distribution: type reduction.** For every $\sigma : \forall P:tt$. $\mathrm{PSc}^{t}_{\infty}$$(P) \to$ $\mathrm{PSc}^{\sigma}_{\infty}$(P)
 
 ## Notes
 
-The paper leaves the proof unfinished. A proof must cover every target type σ, not just propositional or finite instances.
+The paper leaves the proof unfinished. A proof must cover every target type $\sigma$, not just propositional or finite instances.
 
 ## Sources
 

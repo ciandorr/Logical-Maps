@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **$\Diamond_\vee$ entails ≠⊥.** ∀p:t. $\Diamond_\vee$p → (p ≠ ⊥)
+- **$\Diamond_\vee$ entails ≠⊥.** $\forall p:t$. $\Diamond_\vee$$p \to (p \ne \bot )$
 
 ## Proof
 
-Given $\Diamond_\vee$p, choose its candidate witness P with $\mathrm{Possibility}_\vee$(P) and Pp. The candidate predicate implies PSb(P), namely ¬P⊥. If p=⊥, substitution in Pp gives P⊥, a contradiction. Thus p≠⊥. Discharge and generalize p. This bound only needs PSb and does not assume the disputed infinitary-to-binary reduction.
+Given $\Diamond_\vee$p, choose its candidate witness P with $\mathrm{Possibility}_\vee$(P) and Pp. The candidate predicate implies $\operatorname{PSb}(P)$, namely $\neg P\bot$. If $p=\bot$, substitution in Pp gives $P\bot , a$ contradiction. Thus $p\ne \bot$. Discharge and generalize p. This bound only needs PSb and does not assume the disputed infinitary-to-binary reduction.
 
 ## Notes
 

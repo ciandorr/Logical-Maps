@@ -1,11 +1,9 @@
 id: existential-copula-sum-consistency
 name: Existential Copula Sum Invariance
-statement: 'There exists one copula C such that SC(C) holds for all eligible X,Y,Z. The copula is chosen
-  once for the preference relation, independently of the triple and its marginal laws. A copula C is a
-  Borel probability measure on [0,1]² with both marginals uniform. Write H_C(u,v)=C([0,u]×[0,v]). A real-utility
-  pair (A,B) admits C when P(A≤a,B≤b)=H_C(F_A(a),F_B(b)) for every real a,b. Define SC(C): for every eligible
-  triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same C, X ≽ Y iff X+Z ≽ Y+Z.'
-formal: ∃ C ∈ Cop₂, SC(C).
+statement: |-
+  There exists one copula C such that $\operatorname{SC}(C)$ holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on $[0,1]^{2}$ with both marginals uniform. Write $H_C(u,v)=C([0,u]\times [0,v])$. A real-utility pair (A,B) admits C when $P(A\le a,B\le b)=H_C(F_A(a),F_B(b))$ for every real a,b. Define $\operatorname{SC}(C)$: for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same $C, X \succeq Y$ iff $X+Z \succeq Y+Z$.
+formal: |-
+  $\exists C \in \operatorname{Cop}_{2}, \operatorname{SC}(C)$.
 category: invariance-principles
 tags:
 - background-risk

@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□(□ = □₂).** □((λp:t. □p) = □₂)
+- **□(□ = □₂).** $\Box ((\lambda p:t. \Box p) = \Box _{2})$
 
 ## Conclusion
 
-- **□Propositional intensionalism (□₂).** □(∀p,q:t. □₂(p ↔ q) → (p = q))
+- **□Propositional intensionalism (□₂).** $\Box (\forall p,q:t. \Box _{2}(p \leftrightarrow q) \to (p = q))$
 
 ## Proof
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Stability of □¬.** □(∀p:t. ¬¬□¬p → □¬p)
+- **□Stability of □¬.** $\Box (\forall p:t. \neg \neg \Box \neg p \to \Box \neg p)$
 
 ## Conclusion
 
-- **Stability of □¬.** ∀p:t. ¬¬□¬p → □¬p
+- **Stability of □¬.** $\forall p:t. \neg \neg \Box \neg p \to \Box \neg p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

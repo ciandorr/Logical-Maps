@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□WLEM.** □(∀p:t. ¬p ∨ ¬¬p)
+- **□WLEM.** $\Box (\forall p:t. \neg p \lor \neg \neg p)$
 
 ## Conclusion
 
-- **□Nonfalsity distributes over ∨.** □(∀p,q:t. ¬¬(p ∨ q) → (¬¬p ∨ ¬¬q))
+- **□Nonfalsity distributes over ∨.** $\Box (\forall p,q:t. \neg \neg (p \lor q) \to (\neg \neg p \lor \neg \neg q))$
 
 ## Proof
 

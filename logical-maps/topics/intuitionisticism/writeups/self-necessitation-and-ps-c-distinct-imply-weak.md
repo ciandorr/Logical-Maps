@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Universal self-necessitation.** ∀p:t. p → □p
-- **PSc (≠⊥).** For every p and q, (p ∨ q) ≠ ⊥ implies p ≠ ⊥ or q ≠ ⊥.
+- **Universal self-necessitation.** $\forall p:t. p \to \Box p$
+- **PSc (≠⊥).** For every p and $q, (p \lor q) \ne \bot$ implies $p \ne \bot$ or $q \ne \bot$.
 
 ## Conclusion
 
-- **WLEM.** ∀p:t. ¬p ∨ ¬¬p
+- **WLEM.** $\forall p:t. \neg p \lor \neg \neg p$
 
 ## Proof
 
-For arbitrary p, ¬¬(p∨¬p) is an intuitionistic theorem. It implies (p∨¬p)≠⊥, since identity with ⊥ would contradict its double negation. PSc for ≠⊥ gives p≠⊥∨¬p≠⊥. The self-necessitation instances at ¬p and ¬¬p, followed by contraposition and triple-negation reduction, turn these disjuncts into ¬¬p and ¬p respectively. Generalize p.
+For arbitrary $p, \neg \neg (p\lor \neg p)$ is an intuitionistic theorem. It implies $(p\lor \neg p)\ne \bot$, since identity with $\bot$ would contradict its double negation. PSc for $\ne \bot$ gives $p\ne \bot \lor \neg p\ne \bot$. The self-necessitation instances at $\neg p$ and $\neg \neg p$, followed by contraposition and triple-negation reduction, turn these disjuncts into $\neg \neg p$ and $\neg p$ respectively. Generalize p.
 
 ## Notes
 

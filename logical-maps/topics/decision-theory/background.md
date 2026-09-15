@@ -1,6 +1,6 @@
 ## Framework
 
-≽ a reflexive binary relation on Δ(X), X finite with |X| ≥ 3; ≻, ~ its asymmetric and symmetric parts. *(placeholder)*
+$\succeq a$ reflexive binary relation on $\Delta (X), X$ finite with $|X| \ge 3; \succ , \sim$ its asymmetric and symmetric parts. *(placeholder)*
 
 ## Notation
 

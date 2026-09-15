@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□Spouse ($\Diamond_\vee$).** □(∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\vee$))
+- **□Spouse ($\Diamond_\vee$).** $\Box (\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\vee$))
 
 ## Conclusion
 
-- **□($\Diamond_\vee$ = ◇₂).** □($\Diamond_\vee$ = ◇₂)
+- **□($\Diamond_\vee$ = ◇₂).** $\Box$($\Diamond_\vee$ $= \Diamond _{2}$)
 
 ## Proof
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **K (□₂).** ∀p,q:t. □₂(p → q) → (□₂p → □₂q)
+- **K (□₂).** $\forall p,q:t. \Box _{2}(p \to q) \to (\Box _{2}p \to \Box _{2}q)$
 
 ## Proof
 
-Assume □₂(p→q) and □₂p. For any qualified N, its necessary normality gives its universally quantified K condition. Instantiate that condition at p,q, and use N(p→q) and Np obtained from the two assumptions, to get Nq. Quantify N, discharge and generalize p,q.
+Assume $\Box _{2}(p\to q)$ and $\Box _{2}p$. For any qualified N, its necessary normality gives its universally quantified K condition. Instantiate that condition at p,q, and use $N(p\to q)$ and Np obtained from the two assumptions, to get Nq. Quantify N, discharge and generalize p,q.
 
 ## Notes
 

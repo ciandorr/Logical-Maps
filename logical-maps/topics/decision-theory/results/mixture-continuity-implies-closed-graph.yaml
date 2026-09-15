@@ -8,35 +8,35 @@ certificate:
   produced_by: "Claude Fable 5.1 (Cowork session)"
   checked_by: []
   date: 2026-09-08
-proof: |
-  Let V = {x ∈ ℝ^X : Σx = 0} and D = Δ(X) − Δ(X) ⊆ V (compact, convex,
-  contains 0). Put K = {q − p : q ≽ p}.
+proof: |-
+  Let $V = \{x \in \mathbb{R} ^X : \sum x = 0\}$ and $D = \Delta (X) - \Delta (X) \subseteq V$ (compact, convex,
+  contains 0). Put $K = \{q - p : q \succeq p\}$.
 
-  (i) Membership in K depends only on the difference: if q − p = q' − p'
-  then ½q + ½p' = ½q' + ½p, and by independence (λ = ½, mixing with p'
-  resp. p) q ≽ p ⟺ ½q+½p' ≽ ½p+½p' and q' ≽ p' ⟺ ½q'+½p ≽ ½p'+½p; the two
-  right-hand sides are the same pair. So "x ∈ K" is well defined for x ∈ D.
+  (i) Membership in K depends only on the difference: if $q - p = q' - p'$
+  then $\frac{1}{2} q + \frac{1}{2} p' = \frac{1}{2} q' + \frac{1}{2} p$, and by independence $(\lambda = \frac{1}{2}$, mixing with p'
+  resp. $p) q \succeq p \Longleftrightarrow \frac{1}{2} q+\frac{1}{2} p' \succeq \frac{1}{2} p+\frac{1}{2} p'$ and $q' \succeq p' \Longleftrightarrow \frac{1}{2} q'+\frac{1}{2} p \succeq \frac{1}{2} p'+\frac{1}{2} p$; the two
+  right-hand sides are the same pair. So "$x \in K$" is well defined for $x \in D$.
 
-  (ii) K is a cone in D: if x ∈ K and tx ∈ D (t > 0) then tx ∈ K. For
-  t < 1 use independence with r = p: q ≽ p ⟹ tq+(1−t)p ≽ p, whose
-  difference is t(q−p). For t > 1 apply the t < 1 case to tx.
+  (ii) K is a cone in D: if $x \in K$ and $tx \in D (t > 0)$ then $tx \in K$. For
+  $t < 1$ use independence with $r = p: q \succeq p \Longrightarrow tq+(1- t)p \succeq p$, whose
+  difference is $t(q- p)$. For $t > 1$ apply the $t < 1$ case to tx.
 
-  (iii) K is convex: with x = q−p, y = q'−p' in K, independence gives
-  ½q+½q' ≽ ½p+½q' and ½q'+½p ≽ ½p'+½p, and transitivity gives
-  ½q+½q' ≽ ½p+½p', whose difference is ½x+½y.
+  (iii) K is convex: with $x = q- p, y = q'- p'$ in K, independence gives
+  $\frac{1}{2} q+\frac{1}{2} q' \succeq \frac{1}{2} p+\frac{1}{2} q'$ and $\frac{1}{2} q'+\frac{1}{2} p \succeq \frac{1}{2} p'+\frac{1}{2} p$, and transitivity gives
+  $\frac{1}{2} q+\frac{1}{2} q' \succeq \frac{1}{2} p+\frac{1}{2} p'$, whose difference is $\frac{1}{2} x+\frac{1}{2} y$.
 
-  (iv) K is closed along every line. Let [x₀, x₁] = ℓ ∩ D for a line ℓ and
-  x(λ) = λx₁ + (1−λ)x₀. Pick ε > 0 and the uniform lottery c so that
-  c + εx(λ) ∈ Δ(X) for all λ ∈ [0,1]. By (ii), x(λ) ∈ K ⟺ εx(λ) ∈ K ⟺
-  c + εx(λ) ≽ c. Since c + εx(λ) = λ(c+εx₁) + (1−λ)(c+εx₀), the set
-  {λ : x(λ) ∈ K} is a section of the form {λ : λa+(1−λ)b ≽ c}, closed by
+  (iv) K is closed along every line. Let $[x_{0}, x_{1}] = \ell \cap D$ for a line $\ell$ and
+  $x(\lambda ) = \lambda x_{1} + (1- \lambda )x_{0}$. Pick $\epsilon > 0$ and the uniform lottery c so that
+  $c + \epsilon x(\lambda ) \in \Delta (X)$ for all $\lambda \in [0,1]$. By (ii)$, x(\lambda ) \in K \Longleftrightarrow \epsilon x(\lambda ) \in K \Longleftrightarrow$
+  $c + \epsilon x(\lambda ) \succeq c$. Since $c + \epsilon x(\lambda ) = \lambda (c+\epsilon x_{1}) + (1- \lambda )(c+\epsilon x_{0})$, the set
+  $\{\lambda : x(\lambda ) \in K\}$ is a section of the form $\{\lambda : \lambda a+(1- \lambda )b \succeq c\}$, closed by
   mixture continuity.
 
   (v) A convex subset of a finite-dimensional space that meets every line
-  in a closed set is closed (if x ∈ cl K ∖ K and y is in the relative
-  interior of K then [y, x) ⊆ K by the accessibility lemma, so K ∩ line(y,x)
-  is not closed). Hence K is closed, and if (pₙ, qₙ) → (p, q) with qₙ ≽ pₙ
-  then qₙ − pₙ ∈ K → q − p ∈ K, i.e. q ≽ p.
+  in a closed set is closed (if $x \in$ cl $K \setminus K$ and y is in the relative
+  interior of K then $[y, x) \subseteq K$ by the accessibility lemma, so $K \cap$ line(y,x)
+  is not closed). Hence K is closed, and if $(p_{n}, q_{n}) \to (p, q)$ with $q_{n} \succeq p_{n}$
+  then $q_{n} - p_{n} \in K \to q - p \in K, i.e. q \succeq p$.
 sources: []
 notes: >
   This is the bridge between the mixture-continuity axiom used in the vNM

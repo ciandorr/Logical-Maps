@@ -2,7 +2,7 @@
 
 Proposed model; verification pending.
 
-**Proposed true at the root:** $\Diamond_\infty$ = Truth, $\Diamond_\vee$ = ≠⊥.
+**Proposed true at the root:** $\Diamond_\infty$ $= \operatorname{Truth}$, $\Diamond_\vee$ $= \ne \bot$.
 
 **Proposed failures at the root:** $\Diamond_\vee$ = $\Diamond_\infty$.
 

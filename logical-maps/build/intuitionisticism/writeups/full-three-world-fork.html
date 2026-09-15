@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Full frame: three-world fork</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Full frame: three-world fork</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -319,17 +303,16 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Full frame: three-world fork</h1>
-</header>
-<p>Informally proved model; no independent checker or Lean verification.</p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full frame: three-world fork</h1></header><p>Informally proved model; no independent checker or Lean verification.</p>
 <p><strong>Verified true at the root:</strong> No additional flags recorded.</p>
-<p><strong>Verified failures at the root:</strong> Stability of =⊥, Stability of □¬, LEM, PSd (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math>), PSd (≠⊥), A PSb–PSd operator exists.</p>
-<p>Use the full bimodalized domain model of Definition 9, with distinguished world a. The worlds are a,b,c. Informational accessibility consists of the reflexive arrows and a≤ᵢc; metaphysical accessibility adds a≤ₘb. Both are preorders and ≤ᵢ is included in ≤ₘ. At propositional type use all informational upsets; at every function type use the full construction of Definition 8, with its recursively defined partial equivalence relations. Theorem 22 supplies an II model, including the higher types.</p>
-<p>Take p={b}. The truth set of p=⊥ is {c}. Its double negation holds at a, whereas p=⊥ does not. This verifies the two stability failures, using p=⊥↔□¬p. LEM fails at a for the proposition {c}: neither it nor its negation holds there.</p>
-<p>For any f in the domain at a satisfying PSb, suppose fp holds at a. It persists to c, where p=⊥ and PSb still holds. Substitution gives f⊥ there, a contradiction. Thus ¬fp holds at a. PSd(f) at p,⊥ would now yield □¬p, which fails at a. No f satisfies PSb and PSd at a, so the existential fails there. In particular, since II proves PSb for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math> and ≠⊥, their PSd sentences fail at a.</p>
+<p><strong>Verified failures at the root:</strong> Stability of <span class="math inline">=\bot</span>, Stability of <span class="math inline">\Box \neg</span>, LEM, PSd (<span class="math inline">\Diamond_\vee</span>)<span class="math inline">, \operatorname{PSd} (\ne \bot ), A \operatorname{PSb}</span>–PSd operator exists.</p>
+<p>Use the full bimodalized domain model of Definition 9, with distinguished world a. The worlds are a,b,c. Informational accessibility consists of the reflexive arrows and <span class="math inline">a\le _{i}c</span>; metaphysical accessibility adds <span class="math inline">a\le _{m} b</span>. Both are preorders and <span class="math inline">\le _{i}</span> is included in <span class="math inline">\le _{m}</span>. At propositional type use all informational upsets; at every function type use the full construction of Definition 8, with its recursively defined partial equivalence relations. Theorem 22 supplies an II model, including the higher types.</p>
+<p>Take <span class="math inline">p=\{b\}</span>. The truth set of <span class="math inline">p=\bot</span> is {c}. Its double negation holds at a, whereas <span class="math inline">p=\bot</span> does not. This verifies the two stability failures, using <span class="math inline">p=\bot \leftrightarrow \Box \neg p</span>. LEM fails at a for the proposition {c}: neither it nor its negation holds there.</p>
+<p>For any f in the domain at a satisfying PSb, suppose fp holds at a. It persists to c, where <span class="math inline">p=\bot</span> and PSb still holds. Substitution gives <span class="math inline">f\bot</span> there, a contradiction. Thus <span class="math inline">\neg fp</span> holds at <span class="math inline">a. \operatorname{PSd}(f)</span> at <span class="math inline">p,\bot</span> would now yield <span class="math inline">\Box \neg p</span>, which fails at a. No f satisfies PSb and PSd at a, so the existential fails there. In particular, since II proves PSb for <span class="math inline">\Diamond_\vee</span> and <span class="math inline">\ne \bot</span>, their PSd sentences fail at a.</p>
 <p>This is failure of the existential at a, not truth of its intuitionistic negation: the terminal world c admits the Truth candidate. The infinite comb is needed for the stronger negative sentence in Theorem 5(i).</p>
 <p>Informal model verification; no independent checker or Lean verification.</p>
 <p><strong>Source:</strong> Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §6.2, Eq. (80), p. 42.</p>
@@ -338,5 +321,4 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <ul>
 <li><strong>Proof: Possibility in Intuitionistic Higher-Order Logic.</strong> Zachary Goodsell (21 August 2026). Possibility in Intuitionistic Higher-Order Logic. Manuscript. — §6.2, Eq. (80), p. 42</li>
 </ul>
-</body>
-</html>
+</body></html>

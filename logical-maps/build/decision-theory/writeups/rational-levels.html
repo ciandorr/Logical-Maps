@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Rational levels</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Rational levels</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,29 +252,27 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Rational levels</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Rational levels</h1></header><p class="cert">
 Model — Source: Misc.; produced by Claude Fable 5.1 (Cowork session).
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>Completeness.</strong> For all p, q ∈ Δ(X): p ≽ q or q ≽ p.</li>
-<li><strong>Transitivity.</strong> For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.</li>
-<li><strong>Archimedean.</strong> For all p, q, r ∈ Δ(X): if p ≻ q ≻ r then there are α, β ∈ (0,1) with αp + (1−α)r ≻ q and q ≻ βp + (1−β)r.</li>
-<li><strong>¬ Mixture continuity.</strong> For all p, q, r ∈ Δ(X) the sets {λ ∈ [0,1] : λp + (1−λ)q ≽ r} and {λ ∈ [0,1] : r ≽ λp + (1−λ)q} are closed.</li>
+<li><strong>Completeness.</strong> For all <span class="math inline">p, q \in \Delta (X): p \succeq q</span> or <span class="math inline">q \succeq p</span>.</li>
+<li><strong>Transitivity.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span>: if <span class="math inline">p \succeq q</span> and <span class="math inline">q \succeq r</span> then <span class="math inline">p \succeq r</span>.</li>
+<li><strong>Archimedean.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span>: if <span class="math inline">p \succ q \succ r</span> then there are <span class="math inline">\alpha , \beta \in (0,1)</span> with <span class="math inline">\alpha p + (1- \alpha )r \succ q</span> and <span class="math inline">q \succ \beta p + (1- \beta )r</span>.</li>
+<li><strong>¬ Mixture continuity.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span> the sets <span class="math inline">\{\lambda \in [0,1] : \lambda p + (1- \lambda )q \succeq r\}</span> and <span class="math inline">\{\lambda \in [0,1] : r \succeq \lambda p + (1- \lambda )q\}</span> are closed.</li>
 </ul>
 <h2 id="construction">Construction</h2>
-<p>Let X = {a, b, c} and define a three-valued function V on Δ(X): V(p) = 2 if p(a) ∈ ℚ; V(p) = 1 if p(a) ∉ ℚ and p(b) ∈ ℚ; V(p) = 0 otherwise. Let p ≽ q iff V(p) ≥ V(q). This is a weak order.</p>
-<p>Mixture continuity fails: along the line from δ_a to δ_b the mixture λδ_a + (1−λ)δ_b has V = 2 exactly when λ ∈ ℚ, so {λ : λδ_a + (1−λ)δ_b ≽ δ_c} = ℚ ∩ [0,1] is not closed.</p>
-<p>Archimedean holds: a chain p ≻ q ≻ r forces V(p) = 2, V(q) = 1, V(r) = 0, so p(a) ∈ ℚ and r(a) ∉ ℚ, in particular p(a) ≠ r(a). Along m(α) = αp + (1−α)r the coordinate m(α)(a) = r(a) + α(p(a) − r(a)) is rational for a dense set of α, so some α ∈ (0,1) close to 1 has V(m(α)) = 2 &gt; V(q). For the other half, m(β)(a) is irrational for all but countably many β; and m(β)(b) = r(b) + β(p(b) − r(b)) is irrational for all but countably many β when p(b) ≠ r(b), and equals r(b) ∉ ℚ when p(b) = r(b) (because V(r) = 0). So some β ∈ (0,1) close to 0 has V(m(β)) = 0 &lt; V(q).</p>
+<p>Let <span class="math inline">X = \{a, b, c\}</span> and define a three-valued function V on <span class="math inline">\Delta (X)</span>: <span class="math inline">V(p) = 2</span> if <span class="math inline">p(a) \in \mathbb{Q} ; V(p) = 1</span> if <span class="math inline">p(a) \notin \mathbb{Q}</span> and <span class="math inline">p(b) \in \mathbb{Q} ; V(p) = 0</span> otherwise. Let <span class="math inline">p \succeq q</span> iff <span class="math inline">V(p) \ge V(q)</span>. This is a weak order.</p>
+<p>Mixture continuity fails: along the line from <span class="math inline">\delta _a</span> to <span class="math inline">\delta _b</span> the mixture <span class="math inline">\lambda \delta _a + (1- \lambda )\delta _b</span> has <span class="math inline">V = 2</span> exactly when <span class="math inline">\lambda \in \mathbb{Q}</span>, so <span class="math inline">\{\lambda : \lambda \delta _a + (1- \lambda )\delta _b \succeq \delta _c\} = \mathbb{Q} \cap [0,1]</span> is not closed.</p>
+<p>Archimedean holds: a chain <span class="math inline">p \succ q \succ r</span> forces <span class="math inline">V(p) = 2, V(q) = 1, V(r) = 0</span>, so <span class="math inline">p(a) \in \mathbb{Q}</span> and <span class="math inline">r(a) \notin \mathbb{Q}</span>, in particular <span class="math inline">p(a) \ne r(a)</span>. Along <span class="math inline">m(\alpha ) = \alpha p + (1- \alpha )r</span> the coordinate <span class="math inline">m(\alpha )(a) = r(a) + \alpha (p(a) - r(a))</span> is rational for a dense set of <span class="math inline">\alpha</span>, so some <span class="math inline">\alpha \in (0,1)</span> close to 1 has <span class="math inline">V(m(\alpha )) = 2 &gt; V(q)</span>. For the other half, <span class="math inline">m(\beta )(a)</span> is irrational for all but countably many <span class="math inline">\beta</span>; and <span class="math inline">m(\beta )(b) = r(b) + \beta (p(b) - r(b))</span> is irrational for all but countably many <span class="math inline">\beta</span> when <span class="math inline">p(b) \ne r(b)</span>, and equals <span class="math inline">r(b) \notin \mathbb{Q}</span> when <span class="math inline">p(b) = r(b)</span> (because <span class="math inline">V(r) = 0</span>). So some <span class="math inline">\beta \in (0,1)</span> close to 0 has <span class="math inline">V(m(\beta )) = 0 &lt; V(q)</span>.</p>
 <h2 id="notes">Notes</h2>
 <p>The construction is deliberately artificial: it shows that the Archimedean axiom cannot replace mixture continuity even for weak orders, unless something like independence is added. Not yet checked by a human.</p>
 <p class="cert">
 Record: <code>topics/decision-theory/models/rational-levels.yaml</code>
 </p>
-</body>
-</html>
+</body></html>

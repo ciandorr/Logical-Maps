@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□₂ entails □.** ∀p:t. □₂p → □p
+- **□₂ entails □.** $\forall p:t. \Box _{2}p \to \Box p$
 
 ## Conclusion
 
-- **Propositional intensionalism (□₂).** ∀p,q:t. □₂(p ↔ q) → (p = q)
+- **Propositional intensionalism (□₂).** $\forall p,q:t. \Box _{2}(p \leftrightarrow q) \to (p = q)$
 
 ## Proof
 
-Given □₂(p↔q), instantiate the selected reverse necessity comparison at p↔q to get □(p↔q). The proved propositional intensionality lemma yields p=q. Discharge and generalize p,q.
+Given $\Box _{2}(p\leftrightarrow q)$, instantiate the selected reverse necessity comparison at $p\leftrightarrow q$ to get $\Box (p\leftrightarrow q)$. The proved propositional intensionality lemma yields $p=q$. Discharge and generalize p,q.
 
 ## Notes
 

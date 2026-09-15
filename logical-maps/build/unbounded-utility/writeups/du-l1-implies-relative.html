@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>DU and upper-section L¹ Continuity imply Relative Expectation</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DU and upper-section L¹ Continuity imply Relative Expectation</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,58 +252,121 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">DU and upper-section L¹ Continuity imply Relative Expectation</h1>
-</header>
-<p><strong>Proved implication:</strong> Rich Outcomes + Archimedean Outcomes + Stochastic Equivalence + Stochastic Dominance + Mixture Independence + L¹ Continuity imply Relative Expectation. These are <strong>DU + L¹ Continuity</strong>; Totality is not included.</p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>DU and upper-section L¹ Continuity imply Relative Expectation</h1></header><p><strong>Proved implication:</strong> Rich Outcomes + Archimedean Outcomes + Stochastic Equivalence + Stochastic Dominance + Mixture Independence <span class="math inline">+ L^{1}</span> Continuity imply Relative Expectation. These are <strong>DU + L¹ Continuity</strong>; Totality is not included.</p>
 <p>The argument first derives expected-utility comparisons for bounded gambles. It then compares bounded conditional pieces of arbitrary gambles and takes an upper-section limit. Full Expected Utility, lower-section continuity, Shift Invariance and symmetry are not assumed.</p>
 <h2 id="utility-coordinates-and-finite-gambles">Utility coordinates and finite gambles</h2>
 <p>The existing <a href="rich-archimedean-dominance-independence-imply-simple-eu.html">finite-lottery representation proof</a> derives Simple EU from Rich Outcomes, Archimedean Outcomes, Stochastic Dominance and Mixture Independence, without Totality. It supplies a total, measurable normalized utility chart that strictly preserves the outcome order. Rich Outcomes supplies a sure outcome at every real utility level.</p>
-<p>Below, write <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi><mo>,</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">X,Y,V</annotation></semantics></math> for utility coordinates and write a real number <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> for a sure outcome at level <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>. All finite-valued replacements are available: choose their finitely many sure outcomes and paste them along the stated measurable events. This suffices for the main proof, so it does not require an arbitrary translated outcome-valued variable to be measurable.</p>
+<p>Below, write <span class="math inline">X,Y,V</span> for utility coordinates and write a real number <span class="math inline">c</span> for a sure outcome at level <span class="math inline">c</span>. All finite-valued replacements are available: choose their finitely many sure outcomes and paste them along the stated measurable events. This suffices for the main proof, so it does not require an arbitrary translated outcome-valued variable to be measurable.</p>
 <h2 id="bounded-eu-from-two-upper-section-limits">Bounded EU from two upper-section limits</h2>
-<p>Let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math> have a bounded law, and put <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>=</mo><mstyle mathvariant="double-struck"><mi>𝔼</mi></mstyle><mi>V</mi></mrow><annotation encoding="application/x-tex">v=\mathbb E V</annotation></semantics></math>. Null exceptional values can first be replaced using Stochastic Equivalence. Define upward finite quantizations</p>
-<p>[ Q_n=,v_n=E Q_n. ]</p>
-<p>They obey <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><msub><mi>Q</mi><mi>n</mi></msub><mo>−</mo><mi>V</mi><mo>≤</mo><mn>1</mn><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">0\le Q_n-V\le1/n</annotation></semantics></math> almost surely and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>≤</mo><msub><mi>v</mi><mi>n</mi></msub><mo>≤</mo><mi>v</mi><mo>+</mo><mn>1</mn><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">v\le v_n\le v+1/n</annotation></semantics></math>. Each <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Q</mi><mi>n</mi></msub><annotation encoding="application/x-tex">Q_n</annotation></semantics></math> has a finite range. Simple EU gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>n</mi></msub><mo>∼</mo><msub><mi>v</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">Q_n\sim v_n</annotation></semantics></math>, and Stochastic Dominance gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>n</mi></msub><mo>≽</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">Q_n\succeq V</annotation></semantics></math>. Comparison of sure outcomes therefore yields</p>
-<p>[ Q_nv,v_nV.  ]</p>
-<p>In the first comparison the left side converges in actual <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mn>1</mn></msup><annotation encoding="application/x-tex">L^1</annotation></semantics></math> distance to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>. In the second, the left side is a sequence of sure outcomes converging to the sure <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>. Applying the recorded upper-section continuity clause to each sequence gives</p>
-<p>[ Vv,vV. ]</p>
+<p>Let <span class="math inline">V</span> have a bounded law, and put <span class="math inline">v=\mathbb E V</span>. Null exceptional values can first be replaced using Stochastic Equivalence. Define upward finite quantizations</p>
+<p><span class="math display">
+Q_n=\frac{\lceil nV\rceil}{n},\qquad v_n=\mathbb E Q_n.
+</span></p>
+<p>They obey <span class="math inline">0\le Q_n-V\le1/n</span> almost surely and <span class="math inline">v\le v_n\le v+1/n</span>. Each <span class="math inline">Q_n</span> has a finite range. Simple EU gives <span class="math inline">Q_n\sim v_n</span>, and Stochastic Dominance gives <span class="math inline">Q_n\succeq V</span>. Comparison of sure outcomes therefore yields</p>
+<p><span class="math display">
+Q_n\succeq v,\qquad v_n\succeq V.
+\tag{1}
+</span></p>
+<p>In the first comparison the left side converges in actual <span class="math inline">L^1</span> distance to <span class="math inline">V</span>. In the second, the left side is a sequence of sure outcomes converging to the sure <span class="math inline">v</span>. Applying the recorded upper-section continuity clause to each sequence gives</p>
+<p><span class="math display">
+V\succeq v,\qquad v\succeq V.
+</span></p>
 <p>Consequently</p>
-<p>[ VE V V.  ]</p>
+<p><span class="math display">
+V\sim\mathbb E V
+\quad\text{for every bounded-law gamble }V.
+\tag{2}
+</span></p>
 <p>Together with the standing order on sure outcomes, (2) ranks any two bounded-law gambles exactly by their expectations, including strict comparisons. Both limits used upper sections; no closure of lower sections was inferred. This lemma itself does not use Mixture Independence once Simple EU is available.</p>
 <p><strong>Observation about weaker continuity.</strong> On real-valued gambles, this bounded lemma already follows from the weaker-looking closure clause</p>
-<p>[ (&gt;0, V+W)   VW.  ]</p>
-<p>For each <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\varepsilon&gt;0</annotation></semantics></math>, take <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>n</mi><mo>&lt;</mo><mi>ε</mi></mrow><annotation encoding="application/x-tex">1/n&lt;\varepsilon</annotation></semantics></math>. Dominance and (1) give <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>+</mo><mi>ε</mi><mo>≽</mo><msub><mi>Q</mi><mi>n</mi></msub><mo>≽</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">V+\varepsilon\succeq Q_n\succeq v</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>+</mo><mi>ε</mi><mo>≽</mo><msub><mi>v</mi><mi>n</mi></msub><mo>≽</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v+\varepsilon\succeq v_n\succeq V</annotation></semantics></math>. Applying (3) twice proves (2). This is an observation about the bounded lemma only: the proof below still uses the recorded L¹ Continuity axiom for its conditional limits. Constructing and comparing a shifted variable here does not assume Shift Invariance of preferences.</p>
+<p><span class="math display">
+\bigl(\forall\varepsilon&gt;0,\ V+\varepsilon\succeq W\bigr)
+\ \Longrightarrow\ V\succeq W.
+\tag{3}
+</span></p>
+<p>For each <span class="math inline">\varepsilon&gt;0</span>, take <span class="math inline">n</span> with <span class="math inline">1/n&lt;\varepsilon</span>. Dominance and (1) give <span class="math inline">V+\varepsilon\succeq Q_n\succeq v</span> and <span class="math inline">v+\varepsilon\succeq v_n\succeq V</span>. Applying (3) twice proves (2). This is an observation about the bounded lemma only: the proof below still uses the recorded <span class="math inline">L^{1}</span> Continuity axiom for its conditional limits. Constructing and comparing a shifted variable here does not assume Shift Invariance of preferences.</p>
 <h2 id="integrable-differences-with-nonnegative-mean">Integrable differences with nonnegative mean</h2>
 <p>Suppose</p>
-<p>[ D=X-YL^1,m=E D0. ]</p>
-<p>There is no assumption that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math> separately has an expectation. Set</p>
-<p>[ E_n={|X|n, |Y|n},p_n=(E_n). ]</p>
-<p>The events increase to the whole sample space, so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>n</mi></msub><mo>→</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">p_n\to1</annotation></semantics></math>. Discard initial indices with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>n</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">p_n=0</annotation></semantics></math>. On <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>n</mi></msub><annotation encoding="application/x-tex">E_n</annotation></semantics></math>, quantize <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> upward to</p>
-<p>[ q_n=. ]</p>
-<p>Only finitely many values occur on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>n</mi></msub><annotation encoding="application/x-tex">E_n</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><msub><mi>q</mi><mi>n</mi></msub><mo>−</mo><mi>X</mi><mo>≤</mo><mn>1</mn><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">0\le q_n-X\le1/n</annotation></semantics></math> there. Define</p>
-<p>[ c_n=,  Z_n=\begin{cases} q_n-c_n&amp;E_n,\ Y&amp;E_n. \end{cases}  ]</p>
-<p>The expectation in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>n</mi></msub><annotation encoding="application/x-tex">c_n</annotation></semantics></math> is finite because both variables in it are bounded on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>n</mi></msub><annotation encoding="application/x-tex">E_n</annotation></semantics></math>. The new branch <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>n</mi></msub><mo>−</mo><msub><mi>c</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">q_n-c_n</annotation></semantics></math> remains finite-valued, with its sure outcomes supplied by Rich Outcomes. For the expectation notation, extend <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mi>n</mi></msub><annotation encoding="application/x-tex">q_n</annotation></semantics></math> arbitrarily by zero off <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>n</mi></msub><annotation encoding="application/x-tex">E_n</annotation></semantics></math>; this has no effect on (4).</p>
-<p>The two conditional laws on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>n</mi></msub><annotation encoding="application/x-tex">E_n</annotation></semantics></math> are bounded and satisfy</p>
-<p>[ E[Z_nE_n]-E[YE_n]=0.  ]</p>
-<p>Realize these conditional laws on the standing atomless space. By bounded EU they compare in the direction displayed in (5). If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>n</mi></msub><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">p_n&lt;1</annotation></semantics></math>, both full laws have these as their <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>E</mi><mi>n</mi></msub><annotation encoding="application/x-tex">E_n</annotation></semantics></math> branches, with the same conditional law of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math> on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>E</mi><mi>n</mi><mi>c</mi></msubsup><annotation encoding="application/x-tex">E_n^c</annotation></semantics></math> as their other branch. Mixture Independence and Stochastic Equivalence give</p>
-<p>[ Z_nY.  ]</p>
-<p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>n</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">p_n=1</annotation></semantics></math>, both full laws are bounded and their means differ by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>; bounded EU gives (6) directly. Values on a null complement can be replaced using Stochastic Equivalence. There is no application of Independence with a forbidden weight of one.</p>
-<p>For convergence, use <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathvariant="double-struck"><mi>𝔼</mi></mstyle><mi>D</mi><mo>=</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">\mathbb E D=m</annotation></semantics></math> to obtain</p>
-<p>[ \begin{aligned} p_n|c_n| &amp;=|E[(q_n-Y)1_{E_n}]-m|\ &amp;+E[|D|1_{E_n^c}]. \end{aligned} ]</p>
+<p><span class="math display">
+D=X-Y\in L^1,\qquad m=\mathbb E D\ge0.
+</span></p>
+<p>There is no assumption that <span class="math inline">X</span> or <span class="math inline">Y</span> separately has an expectation. Set</p>
+<p><span class="math display">
+E_n=\{|X|\le n,\ |Y|\le n\},\qquad p_n=\Pr(E_n).
+</span></p>
+<p>The events increase to the whole sample space, so <span class="math inline">p_n\to1</span>. Discard initial indices with <span class="math inline">p_n=0</span>. On <span class="math inline">E_n</span>, quantize <span class="math inline">X</span> upward to</p>
+<p><span class="math display">
+q_n=\frac{\lceil nX\rceil}{n}.
+</span></p>
+<p>Only finitely many values occur on <span class="math inline">E_n</span>, and <span class="math inline">0\le q_n-X\le1/n</span> there. Define</p>
+<p><span class="math display">
+c_n=\frac{\mathbb E[(q_n-Y)\mathbf1_{E_n}]-m}{p_n},
+\qquad
+Z_n=\begin{cases}
+q_n-c_n&amp;\text{on }E_n,\\
+Y&amp;\text{off }E_n.
+\end{cases}
+\tag{4}
+</span></p>
+<p>The expectation in <span class="math inline">c_n</span> is finite because both variables in it are bounded on <span class="math inline">E_n</span>. The new branch <span class="math inline">q_n-c_n</span> remains finite-valued, with its sure outcomes supplied by Rich Outcomes. For the expectation notation, extend <span class="math inline">q_n</span> arbitrarily by zero off <span class="math inline">E_n</span>; this has no effect on (4).</p>
+<p>The two conditional laws on <span class="math inline">E_n</span> are bounded and satisfy</p>
+<p><span class="math display">
+\mathbb E[Z_n\mid E_n]-\mathbb E[Y\mid E_n]=\frac{m}{p_n}\ge0.
+\tag{5}
+</span></p>
+<p>Realize these conditional laws on the standing atomless space. By bounded EU they compare in the direction displayed in (5). If <span class="math inline">p_n&lt;1</span>, both full laws have these as their <span class="math inline">E_n</span> branches, with the same conditional law of <span class="math inline">Y</span> on <span class="math inline">E_n^c</span> as their other branch. Mixture Independence and Stochastic Equivalence give</p>
+<p><span class="math display">
+Z_n\succeq Y.
+\tag{6}
+</span></p>
+<p>If <span class="math inline">p_n=1</span>, both full laws are bounded and their means differ by <span class="math inline">m</span>; bounded EU gives (6) directly. Values on a null complement can be replaced using Stochastic Equivalence. There is no application of Independence with a forbidden weight of one.</p>
+<p>For convergence, use <span class="math inline">\mathbb E D=m</span> to obtain</p>
+<p><span class="math display">
+\begin{aligned}
+p_n|c_n|
+&amp;=\left|\mathbb E[(q_n-Y)\mathbf1_{E_n}]-m\right|\\
+&amp;\le \frac{p_n}{n}+\mathbb E[|D|\mathbf1_{E_n^c}].
+\end{aligned}
+</span></p>
 <p>Consequently the actual coupling in (4) satisfies</p>
-<p>[ \begin{aligned} E|Z_n-X| &amp;+p_n|c_n| +E[|D|1_{E_n^c}]\ &amp;+2E[|D|1_{E_n^c}] 0. \end{aligned}  ]</p>
-<p>Integrability of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> and dominated convergence justify the last limit. Apply upper-section L¹ Continuity to (6), with fixed right side <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>:</p>
-<p>[ XY X-YL^1 E(X-Y)0.  ]</p>
+<p><span class="math display">
+\begin{aligned}
+\mathbb E|Z_n-X|
+&amp;\le \frac{p_n}{n}+p_n|c_n|
+       +\mathbb E[|D|\mathbf1_{E_n^c}]\\
+&amp;\le \frac{2}{n}+2\mathbb E[|D|\mathbf1_{E_n^c}]
+\longrightarrow0.
+\end{aligned}
+\tag{7}
+</span></p>
+<p>Integrability of <span class="math inline">D</span> and dominated convergence justify the last limit. Apply upper-section <span class="math inline">L^{1}</span> Continuity to (6), with fixed right side <span class="math inline">Y</span>:</p>
+<p><span class="math display">
+X\succeq Y
+\quad\text{whenever }X-Y\in L^1
+\text{ and }\mathbb E(X-Y)\ge0.
+\tag{8}
+</span></p>
 <h2 id="strictness-and-the-full-biconditional">Strictness and the full biconditional</h2>
-<p>Suppose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m&gt;0</annotation></semantics></math>. Choose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">K\ge1</annotation></semantics></math> so <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mo stretchy="false" form="prefix">|</mo><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mo>≤</mo><mi>K</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">F=\{|Y|\le K\}</annotation></semantics></math> has positive probability. Atomlessness permits a measurable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo>⊆</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">G\subseteq F</annotation></semantics></math> with</p>
-<p>[ 0&lt;(G)&lt;. ]</p>
-<p>Replace <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math> on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math> by the sure outcome <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">K+1</annotation></semantics></math>, leaving it unchanged elsewhere; call the result <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">Y&#39;</annotation></semantics></math>. The replacement has an integrable positive difference and</p>
-<p>[ 0&lt;:=E(Y’-Y) (2K+1)(G)&lt;m. ]</p>
-<p>It weakly increases every upper tail and strictly increases the tail at threshold <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math> by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>Pr</mo><mo stretchy="false" form="prefix">(</mo><mi>G</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Pr(G)</annotation></semantics></math>. Stochastic Dominance therefore gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mi>′</mi><mo>≻</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y&#39;\succ Y</annotation></semantics></math>. Meanwhile <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>−</mo><mi>Y</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">X-Y&#39;</annotation></semantics></math> is integrable with mean <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mi>δ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m-\delta&gt;0</annotation></semantics></math>. The already proved weak result (8) gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≽</mo><mi>Y</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">X\succeq Y&#39;</annotation></semantics></math>, hence <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≻</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\succ Y</annotation></semantics></math> by transitivity.</p>
-<p>If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m=0</annotation></semantics></math>, apply (8) to both <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X,Y)</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(Y,X)</annotation></semantics></math>, obtaining <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\sim Y</annotation></semantics></math>. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">m&lt;0</annotation></semantics></math>, the positive-mean argument with the variables interchanged gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≻</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succ X</annotation></semantics></math>. These three cases establish precisely</p>
-<p>[ X-YL^1  (XYE(X-Y)0). ]</p>
+<p>Suppose <span class="math inline">m&gt;0</span>. Choose <span class="math inline">K\ge1</span> so <span class="math inline">F=\{|Y|\le K\}</span> has positive probability. Atomlessness permits a measurable <span class="math inline">G\subseteq F</span> with</p>
+<p><span class="math display">
+0&lt;\Pr(G)&lt;\frac{m}{2K+1}.
+</span></p>
+<p>Replace <span class="math inline">Y</span> on <span class="math inline">G</span> by the sure outcome <span class="math inline">K+1</span>, leaving it unchanged elsewhere; call the result <span class="math inline">Y&#39;</span>. The replacement has an integrable positive difference and</p>
+<p><span class="math display">
+0&lt;\delta:=\mathbb E(Y&#39;-Y)
+\le(2K+1)\Pr(G)&lt;m.
+</span></p>
+<p>It weakly increases every upper tail and strictly increases the tail at threshold <span class="math inline">K</span> by <span class="math inline">\Pr(G)</span>. Stochastic Dominance therefore gives <span class="math inline">Y&#39;\succ Y</span>. Meanwhile <span class="math inline">X-Y&#39;</span> is integrable with mean <span class="math inline">m-\delta&gt;0</span>. The already proved weak result (8) gives <span class="math inline">X\succeq Y&#39;</span>, hence <span class="math inline">X\succ Y</span> by transitivity.</p>
+<p>If <span class="math inline">m=0</span>, apply (8) to both <span class="math inline">(X,Y)</span> and <span class="math inline">(Y,X)</span>, obtaining <span class="math inline">X\sim Y</span>. If <span class="math inline">m&lt;0</span>, the positive-mean argument with the variables interchanged gives <span class="math inline">Y\succ X</span>. These three cases establish precisely</p>
+<p><span class="math display">
+X-Y\in L^1
+\quad\Longrightarrow\quad
+\bigl(X\succeq Y\iff\mathbb E(X-Y)\ge0\bigr).
+</span></p>
 <p>This is Relative Expectation. All additional variables in this main proof use finite-valued replacements on measurable events. No Shift Invariance or comparison of every arbitrary pair of gambles enters the argument.</p>
 <h2 id="consequences-and-attribution">Consequences and attribution</h2>
 <p>Combining this theorem with the existing <a href="relative-dominance-imply-cdf-area.html">Relative-to-CDF proof</a> gives <strong>DU + L¹ Continuity ⇒ CDF-Area Extension</strong>. Relative Expectation also restricts to Simple Relative Expectation, whose <a href="simple-relative-implies-shift-transfer.html">two-branch calculation</a> gives <strong>Shift Transfer</strong>. Neither consequence requires Totality or Shift Invariance as an additional assumption. Thus the previous DTU consequences extend to DU.</p>
@@ -330,5 +377,4 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — §3 p. 23 (upper-section L1 Continuity and the DTU consequence for Expected Utility), pp. 26–27 (Relative Expectation and Corollary 5 in the symmetry setting)</li>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12473">Decision theory unbound</a>.</strong> Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — §3.2 pp. 678–681 and §3.3 pp. 681–682 (finite expected utility and the DU/DTU distinction)</li>
 </ul>
-</body>
-</html>
+</body></html>

@@ -1,9 +1,9 @@
 id: boxed-necessity-spouse-uniqueness
 name: □Spouse uniqueness for □
-statement: □(∀P,Q:tt. (Possibility₂(P) ∧ Possibility₂(Q) ∧ Married((λp:t. □p), P) ∧ Married((λp:t. □p),
-  Q)) → (P = Q))
-formal: □(∀P,Q:tt. (Possibility₂(P) ∧ Possibility₂(Q) ∧ Married((λp:t. □p), P) ∧ Married((λp:t. □p), Q))
-  → (P = Q))
+statement: |-
+  $\Box (\forall P,Q:tt. (\operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}((\lambda p:t. \Box p), P) \land \operatorname{Married}((\lambda p:t. \Box p), Q)) \to (P = Q))$
+formal: |-
+  $\Box (\forall P,Q:tt. (\operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}((\lambda p:t. \Box p), P) \land \operatorname{Married}((\lambda p:t. \Box p), Q)) \to (P = Q))$
 category: candidate-laws
 sources:
 - Codex (GPT-6), connecting-principle formulation, 2026-09-13.

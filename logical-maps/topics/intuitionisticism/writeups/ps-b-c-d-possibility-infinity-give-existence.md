@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **PSb ($\Diamond_\infty$).** $\Diamond_\infty$ does not hold of the contradiction ⊥.
-- **PSc ($\Diamond_\infty$).** For every p and q, $\Diamond_\infty$(p ∨ q) implies $\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q).
-- **PSd ($\Diamond_\infty$).** For every p and q, if $\Diamond_\infty$(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSb ($\Diamond_\infty$).** $\Diamond_\infty$ does not hold of the contradiction $\bot$.
+- **PSc ($\Diamond_\infty$).** For every p and q, $\Diamond_\infty$$(p \lor q)$ implies $\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q).
+- **PSd ($\Diamond_\infty$).** For every p and q, if $\Diamond_\infty$(p) implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **A PSb–PSc–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f)
+- **A PSb–PSc–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f)$
 
 ## Proof
 

@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>□PSc (≠⊥) ⇒ $\Diamond_\vee$ = ≠⊥</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>□PSc (≠⊥) ⇒ $\Diamond_\vee$ = ≠⊥</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -319,25 +303,24 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">□PSc (≠⊥) ⇒ $\Diamond_\vee$ = ≠⊥</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□PSc (≠⊥) ⇒ $\Diamond_\vee$ = ≠⊥</h1></header><p class="cert">
 Result — Source: Misc.; produced by Codex (GPT-6), connecting proof; recorded by Codex (GPT-6).
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□PSc (≠⊥).</strong> □(∀p, q : t. (((p ∨ q) ≠ ⊥) → ((p ≠ ⊥) ∨ (q ≠ ⊥))))</li>
+<li><strong>□PSc (≠⊥).</strong> <span class="math inline">\Box (\forall p, q : t. (((p \lor q) \ne \bot ) \to ((p \ne \bot ) \lor (q \ne \bot ))))</span></li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math> = ≠⊥.</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math> = (λp:t. p ≠ ⊥)</li>
+<li><strong><span class="math inline">\Diamond_\vee</span> = ≠⊥.</strong> <span class="math inline">\Diamond_\vee</span> <span class="math inline">= (\lambda p:t. p \ne \bot )</span></li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>The necessary PSa and PSb conditions for ≠⊥ follow by necessitating their assumption-free II proofs. With the selected □PSc(≠⊥), this makes ≠⊥ a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mstyle mathvariant="normal"><mi>P</mi><mi>o</mi><mi>s</mi><mi>s</mi><mi>i</mi><mi>b</mi><mi>i</mi><mi>l</mi><mi>i</mi><mi>t</mi><mi>y</mi></mstyle><mo>∨</mo></msub><annotation encoding="application/x-tex">\mathrm{Possibility}_\vee</annotation></semantics></math> candidate. It follows that p≠⊥→<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math>p. Conversely, the II bound for every PSb candidate gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math>p→p≠⊥.</p>
-<p>The selected premise is boxed and implies its own box. Thus necessitating the discharged argument and using K yields □∀p.(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math>p↔p≠⊥). Apply the predicate intensionality lemma to obtain the identity of the two operators.</p>
+<p>The necessary PSa and PSb conditions for <span class="math inline">\ne \bot</span> follow by necessitating their assumption-free II proofs. With the selected <span class="math inline">\Box \operatorname{PSc}(\ne \bot )</span>, this makes <span class="math inline">\ne \bot a</span> <span class="math inline">\mathrm{Possibility}_\vee</span> candidate. It follows that <span class="math inline">p\ne \bot \to</span><span class="math inline">\Diamond_\vee</span>p. Conversely, the II bound for every PSb candidate gives <span class="math inline">\Diamond_\vee</span><span class="math inline">p\to p\ne \bot</span>.</p>
+<p>The selected premise is boxed and implies its own box. Thus necessitating the discharged argument and using K yields <span class="math inline">\Box \forall p</span>.(<span class="math inline">\Diamond_\vee</span><span class="math inline">p\leftrightarrow p\ne \bot</span>). Apply the predicate intensionality lemma to obtain the identity of the two operators.</p>
 <h2 id="notes">Notes</h2>
 <p>Informal proof; no independent checker or Lean verification. Formula assumptions are not eligible for unrestricted necessitation.</p>
 <h2 id="sources">Sources</h2>
@@ -352,5 +335,4 @@ Record: <code>topics/intuitionisticism/results/boxed-ps-c-distinct-implies-vee-e
 <ul>
 <li><strong>Background: Possibility in Intuitionistic Higher-Order Logic.</strong> Zachary Goodsell (21 August 2026). Possibility in Intuitionistic Higher-Order Logic. Manuscript. — §§4.2–4.5, pp. 18–27</li>
 </ul>
-</body>
-</html>
+</body></html>

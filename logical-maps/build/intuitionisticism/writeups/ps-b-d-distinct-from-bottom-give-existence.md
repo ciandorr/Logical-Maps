@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **PSb (≠⊥).** The contradiction is not distinct from itself: ¬(⊥ ≠ ⊥).
-- **PSd (≠⊥).** For every p and q, if p ≠ ⊥ implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSb (≠⊥).** The contradiction is not distinct from itself: $\neg (\bot \ne \bot )$.
+- **PSd (≠⊥).** For every p and q, if $p \ne \bot$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **A PSb–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSd(f)
+- **A PSb–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f)$
 
 ## Proof
 
-Use the defined operator ≠⊥ as the witness f in the existential formula.
+Use the defined operator $\ne \bot$ as the witness f in the existential formula.
 
 ## Notes
 

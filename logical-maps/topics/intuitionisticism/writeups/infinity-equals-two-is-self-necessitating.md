@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **$\Diamond_\infty$ = ◇₂.** $\Diamond_\infty$ = ◇₂
+- **$\Diamond_\infty$ = ◇₂.** $\Diamond_\infty$ $= \Diamond _{2}$
 
 ## Conclusion
 
-- **□($\Diamond_\infty$ = ◇₂).** □($\Diamond_\infty$ = ◇₂)
+- **□($\Diamond_\infty$ = ◇₂).** $\Box$($\Diamond_\infty$ $= \Diamond _{2}$)
 
 ## Proof
 
-For any same-typed terms a,b, assume a=b. Leibniz substitution gives (a=b)=(b=b). Reflexivity is an assumption-free theorem, so standing propositional intensionality gives (b=b)=⊤. Therefore (a=b)=⊤, namely □(a=b). Instantiate a,b with the two operators in the selected identity. This proof applies at function types as well as at t.
+For any same-typed terms a,b, assume $a=b$. Leibniz substitution gives $(a=b)=(b=b)$. Reflexivity is an assumption-free theorem, so standing propositional intensionality gives $(b=b)=\top$. Therefore $(a=b)=\top$, namely $\Box (a=b)$. Instantiate a,b with the two operators in the selected identity. This proof applies at function types as well as at t.
 
 ## Notes
 

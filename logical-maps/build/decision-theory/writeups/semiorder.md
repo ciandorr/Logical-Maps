@@ -4,20 +4,20 @@
 
 ## Package
 
-- **Completeness.** For all p, q ∈ Δ(X): p ≽ q or q ≽ p.
-- **Quasi-transitivity.** Strict preference is transitive: if p ≻ q and q ≻ r then p ≻ r.
-- **Closed-graph continuity.** The set {(p, q) ∈ Δ(X) × Δ(X) : p ≽ q} is closed in the product topology.
-- **¬ Transitivity.** For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.
-- **¬ Independence.** For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.
+- **Completeness.** For all $p, q \in \Delta (X): p \succeq q$ or $q \succeq p$.
+- **Quasi-transitivity.** Strict preference is transitive: if $p \succ q$ and $q \succ r$ then $p \succ r$.
+- **Closed-graph continuity.** The set $\{(p, q) \in \Delta (X) \times \Delta (X) : p \succeq q\}$ is closed in the product topology.
+- **¬ Transitivity.** For all $p, q, r \in \Delta (X)$: if $p \succeq q$ and $q \succeq r$ then $p \succeq r$.
+- **¬ Independence.** For all $p, q, r \in \Delta (X)$ and $\lambda \in (0,1]: p \succeq q$ if and only if $\lambda p + (1- \lambda )r \succeq \lambda q + (1- \lambda )r$.
 
 ## Construction
 
-A semiorder with a just-noticeable difference. Fix u : X → ℝ non-constant
-and ε > 0, and let p ≽ q iff EU_u(p) ≥ EU_u(q) − ε. Completeness: one of
-the two differences is ≥ 0 > −ε. Quasi-transitivity: p ≻ q iff
-EU_u(p) > EU_u(q) + ε, and this is transitive. Closed graph: the graph is
-the preimage of [−ε, ∞) under a continuous map. Transitivity fails: pick
-p, q, r with EU_u equal to 0, −0.8ε, −1.6ε; then p ≽ q ≽ r but not p ≽ r.
+A semiorder with a just-noticeable difference. Fix $u : X \to \mathbb{R}$ non-constant
+and $\epsilon > 0$, and let $p \succeq q$ iff $\operatorname{EU}_u(p) \ge \operatorname{EU}_u(q) - \epsilon . \operatorname{Completeness}$: one of
+the two differences is $\ge 0 > - \epsilon$. Quasi-transitivity: $p \succ q$ iff
+$\operatorname{EU}_u(p) > \operatorname{EU}_u(q) + \epsilon$, and this is transitive. Closed graph: the graph is
+the preimage of $[- \epsilon , \infty )$ under a continuous map. Transitivity fails: pick
+p, q, r with $\operatorname{EU}_u$ equal to $0, - 0.8\epsilon , - 1.6\epsilon$; then $p \succeq q \succeq r$ but not $p \succeq r$.
 
 ## Notes
 

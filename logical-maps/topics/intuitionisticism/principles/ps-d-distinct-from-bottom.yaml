@@ -1,8 +1,10 @@
 id: ps-d-distinct-from-bottom
 name: PSd (≠⊥)
 category: distinct-from-bottom
-statement: For every p and q, if p ≠ ⊥ implies □q, then □(p → q), with □p defined as p = ⊤.
-formal: '∀p, q : t. (((p ≠ ⊥) → □q) → □(p → q))'
+statement: |-
+  For every p and q, if $p \ne \bot$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
+formal: |-
+  $\forall p, q : t. (((p \ne \bot ) \to \Box q) \to \Box (p \to q))$
 aliases:
 - PSd for ≠⊥
 tags:

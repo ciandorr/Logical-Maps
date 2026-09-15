@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ = (λp:t. p ≠ ⊥)
+- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$
 
 ## Conclusion
 
-- **□PSc (≠⊥).** □(∀p, q : t. (((p ∨ q) ≠ ⊥) → ((p ≠ ⊥) ∨ (q ≠ ⊥))))
+- **□PSc (≠⊥).** $\Box (\forall p, q : t. (((p \lor q) \ne \bot ) \to ((p \ne \bot ) \lor (q \ne \bot ))))$
 
 ## Proof
 
-Theorem 6 proves □PSc($\Diamond_\vee$). Substitute the selected identity $\Diamond_\vee$=(≠⊥) inside that whole boxed sentence by Leibniz’s Law.
+Theorem 6 proves $\Box \operatorname{PSc}$($\Diamond_\vee$). Substitute the selected identity $\Diamond_\vee$$=(\ne \bot )$ inside that whole boxed sentence by Leibniz’s Law.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSd (□₂, ◇₂).** □(∀p,q:t. (◇₂p → □₂q) → □₂(p → q))
+- **□PSd (□₂, ◇₂).** $\Box (\forall p,q:t. (\Diamond _{2}p \to \Box _{2}q) \to \Box _{2}(p \to q))$
 
 ## Proof
 
-Assume ◇₂p→□₂q. For arbitrary qualified N choose its qualified spouse P. Then Pp→◇₂p→□₂q→Nq. Their PSd₂ clause gives N(p→q). Quantifying over qualified N gives □₂(p→q). Discharge temporary assumptions and universally generalize p,q. Necessitate the resulting closed theorem with the standing □ rule, as required by the outer identity in Married.
+Assume $\Diamond _{2}p\to \Box _{2}q$. For arbitrary qualified N choose its qualified spouse P. Then $Pp\to \Diamond _{2}p\to \Box _{2}q\to Nq$. Their $\operatorname{PSd}_{2}$ clause gives $N(p\to q)$. Quantifying over qualified N gives $\Box _{2}(p\to q)$. Discharge temporary assumptions and universally generalize p,q. Necessitate the resulting closed theorem with the standing $\Box$ rule, as required by the outer identity in Married.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSd (≠⊥).** □(∀p, q : t. (((p ≠ ⊥) → □q) → □(p → q)))
+- **□PSd (≠⊥).** $\Box (\forall p, q : t. (((p \ne \bot ) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **PSd (≠⊥).** For every p and q, if p ≠ ⊥ implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd (≠⊥).** For every p and q, if $p \ne \bot$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

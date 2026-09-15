@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **□PSa ($\Diamond_\infty$).** □(∀p, q : t. (□(p → q) → ($\Diamond_\infty$(p) → $\Diamond_\infty$(q))))
-- **□PSb ($\Diamond_\infty$).** □(¬$\Diamond_\infty$(⊥))
-- **□Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** □(∀p:t. ¬$\Diamond_\infty$(p) → □¬p)
+- **□PSa ($\Diamond_\infty$).** $\Box (\forall p, q : t. (\Box (p \to q) \to$ ($\Diamond_\infty$$(p) \to$ $\Diamond_\infty$(q))))
+- **□PSb ($\Diamond_\infty$).** $\Box (\neg$$\Diamond_\infty$$(\bot )$)
+- **□Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** $\Box (\forall p:t. \neg$$\Diamond_\infty$$(p) \to \Box \neg p$)
 
 ## Conclusion
 
-- **□Stability of □¬.** □(∀p:t. ¬¬□¬p → □¬p)
+- **□Stability of □¬.** $\Box (\forall p:t. \neg \neg \Box \neg p \to \Box \neg p)$
 
 ## Proof
 

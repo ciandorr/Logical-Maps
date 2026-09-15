@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Full Sum Invariance ⇒ Antitonic Sum Invariance</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Full Sum Invariance ⇒ Antitonic Sum Invariance</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,21 +252,20 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Full Sum Invariance ⇒ Antitonic Sum Invariance</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full Sum Invariance ⇒ Antitonic Sum Invariance</h1></header><p class="cert">
 Result — Source: Misc., Lean <code>UnboundedUtility.Proofs.full_sum_implies_antitonic</code>; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09; extraction and random-variable translation.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Full Sum Invariance.</strong> For all X,Y,Z, with arbitrary dependence, X ≽ Y iff X+Z ≽ Y+Z.</li>
+<li><strong>Full Sum Invariance.</strong> For all X,Y,Z, with arbitrary dependence, <span class="math inline">X \succeq Y</span> iff <span class="math inline">X+Z \succeq Y+Z</span>.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Antitonic Sum Invariance.</strong> If X and Z are antitonic, and Y and Z are antitonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.</li>
+<li><strong>Antitonic Sum Invariance.</strong> If X and Z are antitonic, and Y and Z are antitonic, then <span class="math inline">X \succeq Y</span> iff <span class="math inline">X+Z \succeq Y+Z</span>. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.</li>
 </ul>
 <h2 id="proof">Proof</h2>
 <p>Restrict the universal quantifier over X,Y,Z to triples satisfying the stated dependence condition. Both directions of the same biconditional remain available.</p>
@@ -299,5 +282,4 @@ Record: <code>topics/unbounded-utility/results/full-sum-implies-antitonic.yaml</
 <li><strong>Background: Unbounded Utility and Background Risk.</strong> Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. — §6.1–2, pp. 17–18</li>
 <li><strong>Related: <a href="https://doi.org/10.1016/j.jmateco.2008.12.002">Preference for equivalent random variables: A price for unbounded utilities</a>.</strong> Seidenfeld, T., Schervish, M., &amp; Kadane, J. (2009). Preference for equivalent random variables: A price for unbounded utilities. Journal of Mathematical Economics, 45, 329–340. — §1. Related coherence treatment of unbounded random variables; this is not an attribution of the recorded implication to the paper.</li>
 </ul>
-</body>
-</html>
+</body></html>

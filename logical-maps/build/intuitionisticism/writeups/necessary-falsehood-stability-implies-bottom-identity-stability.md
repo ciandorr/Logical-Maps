@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Stability of □¬.** ∀p:t. ¬¬□¬p → □¬p
+- **Stability of □¬.** $\forall p:t. \neg \neg \Box \neg p \to \Box \neg p$
 
 ## Conclusion
 
-- **Stability of =⊥.** ∀p:t. ¬¬(p = ⊥) → (p = ⊥)
+- **Stability of =⊥.** $\forall p:t. \neg \neg (p = \bot ) \to (p = \bot )$
 
 ## Proof
 
-Use the II identity (=⊥) = ((=⊤)∘¬) from footnote 5, so p=⊥ and □¬p can be replaced even inside negations. The entire quantified stability formula is thereby transformed into the other one.
+Use the II identity $(=\bot ) = ((=\top )\circ \neg )$ from footnote 5, so $p=\bot$ and $\Box \neg p$ can be replaced even inside negations. The entire quantified stability formula is thereby transformed into the other one.
 
 ## Notes
 

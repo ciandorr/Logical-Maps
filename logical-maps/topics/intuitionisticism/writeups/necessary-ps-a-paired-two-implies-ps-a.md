@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSa (□₂, ◇₂).** □(∀p,q:t. □₂(p → q) → (◇₂p → ◇₂q))
+- **□PSa (□₂, ◇₂).** $\Box (\forall p,q:t. \Box _{2}(p \to q) \to (\Diamond _{2}p \to \Diamond _{2}q))$
 
 ## Conclusion
 
-- **PSa (□₂, ◇₂).** ∀p,q:t. □₂(p → q) → (◇₂p → ◇₂q)
+- **PSa (□₂, ◇₂).** $\forall p,q:t. \Box _{2}(p \to q) \to (\Diamond _{2}p \to \Diamond _{2}q)$
 
 ## Proof
 
-Apply □A→A to the entire paired modal condition. The inner □₂ is unchanged.
+Apply $\Box A\to A$ to the entire paired modal condition. The inner $\Box _{2}$ is unchanged.
 
 ## Notes
 

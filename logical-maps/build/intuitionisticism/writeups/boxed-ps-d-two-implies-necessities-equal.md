@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSd (◇₂).** □(∀p, q : t. ((◇₂(p) → □q) → □(p → q)))
+- **□PSd (◇₂).** $\Box (\forall p, q : t. ((\Diamond _{2}(p) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Proof
 
-Necessary PSa, PSb and PSc for ◇₂ with the fixed □ are II theorems. Together with the selected □PSd(◇₂) and the necessary normality of □ they give Necessity₂(□). Hence □₂p→□p universally, while the reverse comparison is an II theorem. The selected premise is boxed and therefore self-necessitating; lift this discharged comparison proof under □ using K and 4, then apply predicate intensionality to obtain □₂=□.
+Necessary PSa, PSb and PSc for $\Diamond _{2}$ with the fixed $\Box$ are II theorems. Together with the selected $\Box \operatorname{PSd}(\Diamond _{2})$ and the necessary normality of $\Box$ they give $\operatorname{Necessity}_{2}(\Box )$. Hence $\Box _{2}p\to \Box p$ universally, while the reverse comparison is an II theorem. The selected premise is boxed and therefore self-necessitating; lift this discharged comparison proof under $\Box$ using K and 4, then apply predicate intensionality to obtain $\Box _{2}=\Box$.
 
 ## Notes
 

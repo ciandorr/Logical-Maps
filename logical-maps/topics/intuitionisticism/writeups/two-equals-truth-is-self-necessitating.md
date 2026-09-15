@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **◇₂ = Truth.** ◇₂ = (λp:t. p)
+- **◇₂ = Truth.** $\Diamond _{2} = (\lambda p:t. p)$
 
 ## Conclusion
 
-- **□(◇₂ = Truth).** □(◇₂ = (λp:t. p))
+- **□(◇₂ = Truth).** $\Box (\Diamond _{2} = (\lambda p:t. p))$
 
 ## Proof
 
-For any same-typed terms a,b, assume a=b. Leibniz substitution gives (a=b)=(b=b). Reflexivity is an assumption-free theorem, so standing propositional intensionality gives (b=b)=⊤. Therefore (a=b)=⊤, namely □(a=b). Instantiate a,b with the two operators in the selected identity. This proof applies at function types as well as at t.
+For any same-typed terms a,b, assume $a=b$. Leibniz substitution gives $(a=b)=(b=b)$. Reflexivity is an assumption-free theorem, so standing propositional intensionality gives $(b=b)=\top$. Therefore $(a=b)=\top$, namely $\Box (a=b)$. Instantiate a,b with the two operators in the selected identity. This proof applies at function types as well as at t.
 
 ## Notes
 

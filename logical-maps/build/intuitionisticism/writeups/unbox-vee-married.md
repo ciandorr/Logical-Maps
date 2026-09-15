@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Spouse ($\Diamond_\vee$).** □(∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\vee$))
+- **□Spouse ($\Diamond_\vee$).** $\Box (\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\vee$))
 
 ## Conclusion
 
-- **Spouse ($\Diamond_\vee$).** ∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\vee$)
+- **Spouse ($\Diamond_\vee$).** $\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\vee$)
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

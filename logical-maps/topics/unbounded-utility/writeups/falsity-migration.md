@@ -21,7 +21,7 @@ Sources:
 
 ## Failure of Archimedean Gambles (`failure-archimedean-gambles`)
 
-Negation of `archimedean-gambles`. There exist X ≻ Y ≻ Z such that no p ∈ (0,1) satisfies Y ~ M_p(X,Z).
+Negation of `archimedean-gambles`. There exist $X \succ Y \succ Z$ such that no $p \in (0,1)$ satisfies $Y \sim M_p(X,Z)$.
 
 Sources:
 

@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□PSd (◇₂).** □(∀p, q : t. ((◇₂(p) → □q) → □(p → q)))
+- **□PSd (◇₂).** $\Box (\forall p, q : t. ((\Diamond _{2}(p) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **□Impossibility ⇒ necessary falsehood (◇₂).** □(∀p:t. ¬◇₂(p) → □¬p)
+- **□Impossibility ⇒ necessary falsehood (◇₂).** $\Box (\forall p:t. \neg \Diamond _{2}(p) \to \Box \neg p)$
 
 ## Proof
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Antitonic Sum Invariance.** If X and Z are antitonic, and Y and Z are antitonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.
+- **Antitonic Sum Invariance.** If X and Z are antitonic, and Y and Z are antitonic, then $X \succeq Y$ iff $X+Z \succeq Y+Z$. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.
 
 ## Conclusion
 
-- **Shift Invariance.** For every real b, X ≽ Y iff X+b ≽ Y+b.
+- **Shift Invariance.** For every real $b, X \succeq Y$ iff $X+b \succeq Y+b$.
 
 ## Proof
 
-Choose Z to be the constant utility b. A constant is independent of every pair and is both comonotonic and antitonic with every variable, so the sum biconditional becomes X ≽ Y iff X+b ≽ Y+b. Apply this wherever the shifted outcomes exist.
+Choose Z to be the constant utility b. A constant is independent of every pair and is both comonotonic and antitonic with every variable, so the sum biconditional becomes $X \succeq Y$ iff $X+b \succeq Y+b$. Apply this wherever the shifted outcomes exist.
 
 ## Sources
 

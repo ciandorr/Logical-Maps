@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Function extensionality.** For every σ,τ: □(∀f,g:στ. (∀x:σ. f x = g x) → (f = g))
+- **□Function extensionality.** For every $\sigma ,\tau : \Box (\forall f,g:\sigma \tau . (\forall x:\sigma . f x = g x) \to (f = g))$
 
 ## Conclusion
 
-- **Function extensionality.** For every σ,τ: ∀f,g:στ. (∀x:σ. f x = g x) → (f = g)
+- **Function extensionality.** For every $\sigma ,\tau : \forall f,g:\sigma \tau . (\forall x:\sigma . f x = g x) \to (f = g)$
 
 ## Proof
 
-For every type instance, apply the standing theorem □A→A to that entire instance. Since the types are arbitrary this gives all instances of the unboxed schema.
+For every type instance, apply the standing theorem $\Box A\to A$ to that entire instance. Since the types are arbitrary this gives all instances of the unboxed schema.
 
 ## Notes
 

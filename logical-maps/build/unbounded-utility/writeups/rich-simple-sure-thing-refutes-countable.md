@@ -4,10 +4,10 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Surjectivity of u is not included here.
-- **Sure-Thing.** For an event E with 0<P(E)<1, if X|E ~ Y|E, then X ≽ Y iff X|Eᶜ ≽ Y|Eᶜ. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.
-- **Countable Sure-Thing.** For every countable measurable partition (E_n) into events of positive probability, if X|E_n ≽ Y|E_n for every n, then X ≽ Y. If one conditional comparison is strict, X ≻ Y.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: $X \succeq Y$ iff $E[u(X)] \ge E[u(Y)]$. Surjectivity of u is not included here.
+- **Sure-Thing.** For an event E with $0<P(E)<1$, if $X|E \sim Y|E$, then $X \succeq Y$ iff $X|E^{c} \succeq Y|E^{c}$. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.
+- **Countable Sure-Thing.** For every countable measurable partition $(E_n)$ into events of positive probability, if $X|E_n \succeq Y|E_n$ for every n, then $X \succeq Y$. If one conditional comparison is strict, $X \succ Y$.
 
 ## Conclusion
 
@@ -15,7 +15,7 @@
 
 ## Proof
 
-Use the strengthened St Petersburg contradiction from §2.3. Simple EU supplies Restricted Totality, Restricted Stochastic Equivalence and finite conditional EU calculations. With independent sequences of fair tosses let A be first-toss St Petersburg, B the same starting at toss 2, and C an independent St Petersburg variable. Conditional on B=2^n, A is a fair mixture of 2 and 2^(n+1), so its conditional expected value exceeds B by 1; Countable Sure-Thing would give A≻B. Partition the A,C space by the maximum of their finite stopping times. On each cell they are simple and their restricted laws coincide, so Countable Sure-Thing would give A~C. Repeat for B,C to get B~C, contradicting Preordering. Null sets can be assigned a finite outcome without changing the simple-law comparisons.
+Use the strengthened St Petersburg contradiction from §2.3. Simple EU supplies Restricted Totality, Restricted Stochastic Equivalence and finite conditional EU calculations. With independent sequences of fair tosses let A be first-toss St Petersburg, B the same starting at toss 2, and C an independent St Petersburg variable. Conditional on $B=2^n, A$ is a fair mixture of 2 and $2^{n+1}$, so its conditional expected value exceeds B by 1; Countable Sure-Thing would give $A\succ B$. Partition the A,C space by the maximum of their finite stopping times. On each cell they are simple and their restricted laws coincide, so Countable Sure-Thing would give $A\sim C$. Repeat for B,C to get $B\sim C$, contradicting Preordering. Null sets can be assigned a finite outcome without changing the simple-law comparisons.
 
 ## Notes
 

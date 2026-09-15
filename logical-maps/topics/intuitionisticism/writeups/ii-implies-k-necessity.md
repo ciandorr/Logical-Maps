@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **K (□).** ∀p,q:t. □(p → q) → (□p → □q)
+- **K (□).** $\forall p,q:t. \Box (p \to q) \to (\Box p \to \Box q)$
 
 ## Proof
 
-Intensionality applied to an assumption-free intuitionistic equivalence gives p ∧ q = p ∧ (p → q). Assume □(p → q) and □p. Substitution turns the right side into ⊤ ∧ ⊤ and the left side into ⊤ ∧ q. The assumption-free identities ⊤ ∧ ⊤ = ⊤ and ⊤ ∧ q = q now give q = ⊤. Discharge both assumptions and universally generalize p,q.
+Intensionality applied to an assumption-free intuitionistic equivalence gives $p \land q = p \land (p \to q)$. Assume $\Box (p \to q)$ and $\Box p$. Substitution turns the right side into $\top \land \top$ and the left side into $\top \land q$. The assumption-free identities $\top \land \top = \top$ and $\top \land q = q$ now give $q = \top$. Discharge both assumptions and universally generalize p,q.
 
 ## Notes
 

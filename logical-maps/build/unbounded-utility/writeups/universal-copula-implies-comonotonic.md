@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Universal Copula Sum Invariance.** For every copula C, SC(C) holds. A copula C is a Borel probability measure on [0,1]² with both marginals uniform. Write H_C(u,v)=C([0,u]×[0,v]). A real-utility pair (A,B) admits C when P(A≤a,B≤b)=H_C(F_A(a),F_B(b)) for every real a,b. Define SC(C): for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same C, X ≽ Y iff X+Z ≽ Y+Z.
+- **Universal Copula Sum Invariance.** For every copula $C, \operatorname{SC}(C)$ holds. A copula C is a Borel probability measure on $[0,1]^{2}$ with both marginals uniform. Write $H_C(u,v)=C([0,u]\times [0,v])$. A real-utility pair (A,B) admits C when $P(A\le a,B\le b)=H_C(F_A(a),F_B(b))$ for every real a,b. Define $\operatorname{SC}(C)$: for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same $C, X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
-- **Comonotonic Sum Invariance.** If X and Z are comonotonic, and Y and Z are comonotonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is comonotonic when its members admit nondecreasing representations in one common uniform random variable.
+- **Comonotonic Sum Invariance.** If X and Z are comonotonic, and Y and Z are comonotonic, then $X \succeq Y$ iff $X+Z \succeq Y+Z$. A pair is comonotonic when its members admit nondecreasing representations in one common uniform random variable.
 
 ## Proof
 
-Use the diagonal copula, the law of (U,U) for uniform U, with H(u,v)=min(u,v). For a comonotonic pair, the lower-threshold events are nested up to null sets, so its joint CDF is min(F_A(a),F_B(b)). Thus both comonotonic pairs (X,Z) and (Y,Z) admit this same copula. Applying SC(C) gives the desired biconditional for the actual X,Y,Z. No replacement of variables in a preference comparison is used.
+Use the diagonal copula, the law of (U,U) for uniform U, with $H(u,v)=\min (u,v)$. For a comonotonic pair, the lower-threshold events are nested up to null sets, so its joint CDF is $\min (F_A(a),F_B(b))$. Thus both comonotonic pairs (X,Z) and (Y,Z) admit this same copula. Applying $\operatorname{SC}(C)$ gives the desired biconditional for the actual X,Y,Z. No replacement of variables in a preference comparison is used.
 
 ## Sources
 

@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **PSa ($\Diamond_\infty$).** For every p and q, □(p → q) implies that $\Diamond_\infty$(p) implies $\Diamond_\infty$(q), with □p defined as p = ⊤.
-- **PSb ($\Diamond_\infty$).** $\Diamond_\infty$ does not hold of the contradiction ⊥.
-- **Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** ∀p:t. ¬$\Diamond_\infty$(p) → □¬p
+- **PSa ($\Diamond_\infty$).** For every p and $q, \Box (p \to q)$ implies that $\Diamond_\infty$(p) implies $\Diamond_\infty$(q), with $\Box p$ defined as $p = \top$.
+- **PSb ($\Diamond_\infty$).** $\Diamond_\infty$ does not hold of the contradiction $\bot$.
+- **Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** $\forall p:t. \neg$$\Diamond_\infty$$(p) \to \Box \neg p$
 
 ## Conclusion
 
-- **Stability of □¬.** ∀p:t. ¬¬□¬p → □¬p
+- **Stability of □¬.** $\forall p:t. \neg \neg \Box \neg p \to \Box \neg p$
 
 ## Proof
 
-PSa at (p,⊥), together with PSb, gives □¬p→¬$\Diamond_\infty$(p). Under ¬¬□¬p this gives ¬¬¬$\Diamond_\infty$(p), hence ¬$\Diamond_\infty$(p) by triple-negation reduction. The selected necessary-falsehood condition gives □¬p. Discharge and generalize p.
+PSa at $(p,\bot )$, together with PSb, gives $\Box \neg p\to \neg$$\Diamond_\infty$(p). Under $\neg \neg \Box \neg p$ this gives $\neg \neg \neg$$\Diamond_\infty$(p), hence $\neg$$\Diamond_\infty$(p) by triple-negation reduction. The selected necessary-falsehood condition gives $\Box \neg p$. Discharge and generalize p.
 
 ## Notes
 

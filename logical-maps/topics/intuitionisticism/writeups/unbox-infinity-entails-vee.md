@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□$\Diamond_\infty$ entails $\Diamond_\vee$.** □(∀p:t. $\Diamond_\infty$p → $\Diamond_\vee$p)
+- **□$\Diamond_\infty$ entails $\Diamond_\vee$.** $\Box (\forall p:t$. $\Diamond_\infty$$p \to$ $\Diamond_\vee$p)
 
 ## Conclusion
 
-- **$\Diamond_\infty$ entails $\Diamond_\vee$.** ∀p:t. $\Diamond_\infty$p → $\Diamond_\vee$p
+- **$\Diamond_\infty$ entails $\Diamond_\vee$.** $\forall p:t$. $\Diamond_\infty$$p \to$ $\Diamond_\vee$p
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

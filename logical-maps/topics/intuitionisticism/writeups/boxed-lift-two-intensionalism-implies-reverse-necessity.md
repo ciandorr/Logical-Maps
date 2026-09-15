@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□Propositional intensionalism (□₂).** □(∀p,q:t. □₂(p ↔ q) → (p = q))
+- **□Propositional intensionalism (□₂).** $\Box (\forall p,q:t. \Box _{2}(p \leftrightarrow q) \to (p = q))$
 
 ## Conclusion
 
-- **□□₂ entails □.** □(∀p:t. □₂p → □p)
+- **□□₂ entails □.** $\Box (\forall p:t. \Box _{2}p \to \Box p)$
 
 ## Proof
 

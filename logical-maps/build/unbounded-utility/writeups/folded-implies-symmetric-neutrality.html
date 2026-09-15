@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Rich Outcomes ∧ Folded Expectation ⇒ Symmetric Gambles Are Neutral</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Rich Outcomes ∧ Folded Expectation ⇒ Symmetric Gambles Are Neutral</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,25 +252,24 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Rich Outcomes ∧ Folded Expectation ⇒ Symmetric Gambles Are Neutral</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Rich Outcomes ∧ Folded Expectation ⇒ Symmetric Gambles Are Neutral</h1></header><p class="cert">
 Result — Source: Symmetries of Value; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Rich Outcomes.</strong> Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.</li>
-<li><strong>Folded Expectation.</strong> Put h_X(t)=P(u(X)&gt;t)−P(u(X)&lt;−t) for t≥0. If ∫₀∞|h_X(t)|dt and ∫₀∞|h_Y(t)|dt are finite, compare X,Y exactly by F(X)=∫₀∞h_X(t)dt and F(Y). Boundary atoms do not change these integrals.</li>
+<li><strong>Rich Outcomes.</strong> Every real number r occurs as a utility level of a sure outcome: for each <span class="math inline">r \in \mathbb{R}</span> there is an outcome <span class="math inline">o_r</span> with <span class="math inline">u(o_r)=r</span>, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.</li>
+<li><strong>Folded Expectation.</strong> Put <span class="math inline">h_X(t)=P(u(X)&gt;t)- P(u(X)&lt;- t)</span> for <span class="math inline">t\ge 0</span>. If <span class="math inline">\int _0^{\infty }|h_X(t)|dt</span> and <span class="math inline">\int _0^{\infty }|h_Y(t)|dt</span> are finite, compare X,Y exactly by <span class="math inline">F(X)=\int _0^{\infty }h_X(t)dt</span> and <span class="math inline">F(Y)</span>. Boundary atoms do not change these integrals.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Symmetric Gambles Are Neutral.</strong> If u(X) and −u(X) have the same law, then X ~ 0.</li>
+<li><strong>Symmetric Gambles Are Neutral.</strong> If <span class="math inline">u(X)</span> and <span class="math inline">- u(X)</span> have the same law, then <span class="math inline">X \sim 0</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>For a symmetric real law, h_X(t)=0 almost everywhere, so F(X)=0. The zero constant also has folded value zero; apply Folded Expectation.</p>
+<p>For a symmetric real <span class="math inline">\operatorname{law}, h_X(t)=0</span> almost everywhere, so <span class="math inline">F(X)=0</span>. The zero constant also has folded value zero; apply Folded Expectation.</p>
 <h2 id="notes">Notes</h2>
 <p>Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.</p>
 <h2 id="sources">Sources</h2>
@@ -300,5 +283,4 @@ Record: <code>topics/unbounded-utility/results/folded-implies-symmetric-neutrali
 <ul>
 <li><strong>Proof: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — §4, pp. 27–28</li>
 </ul>
-</body>
-</html>
+</body></html>

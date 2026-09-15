@@ -4,7 +4,7 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
@@ -12,7 +12,7 @@
 
 ## Proof
 
-Let Truth = λp.p. PSa follows from □(p→q)→(p→q), PSb is ¬⊥, and the infinitary clause becomes Inex(F)→(∃x.Fx→∃x.Fx). Each necessary candidate condition can be necessitated after its assumption-free derivation, so Truth is a qualified candidate. Given p, choose Truth in the existential definition of $\Diamond_\infty$p. Discharge and generalize p.
+Let $\operatorname{Truth} = \lambda p.p. \operatorname{PSa}$ follows from $\Box (p\to q)\to (p\to q), \operatorname{PSb}$ is $\neg \bot$, and the infinitary clause becomes $\operatorname{Inex}(F)\to (\exists x.Fx\to \exists x.Fx)$. Each necessary candidate condition can be necessitated after its assumption-free derivation, so Truth is a qualified candidate. Given p, choose Truth in the existential definition of $\Diamond_\infty$p. Discharge and generalize p.
 
 ## Notes
 

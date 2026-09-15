@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** ∀p:t. ¬$\Diamond_\vee$(p) → □¬p
+- **Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** $\forall p:t. \neg$$\Diamond_\vee$$(p) \to \Box \neg p$
 
 ## Proof
 
-Fix p and assume ¬$\Diamond_\vee$(p). Then $\Diamond_\vee$(p)→□⊥ by explosion. Instantiate PSd at p and q=⊥ to get □(p→⊥), which is □¬p. Discharge and generalize p.
+Fix p and assume $\neg$$\Diamond_\vee$(p). Then $\Diamond_\vee$$(p)\to \Box \bot$ by explosion. Instantiate PSd at p and $q=\bot$ to get $\Box (p\to \bot )$, which is $\Box \neg p$. Discharge and generalize p.
 
 ## Notes
 

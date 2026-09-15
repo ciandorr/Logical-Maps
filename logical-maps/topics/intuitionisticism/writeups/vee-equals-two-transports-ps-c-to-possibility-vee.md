@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **$\Diamond_\vee$ = ◇₂.** $\Diamond_\vee$ = ◇₂
-- **PSc (◇₂).** For every p and q, ◇₂(p ∨ q) implies ◇₂(p) ∨ ◇₂(q).
+- **$\Diamond_\vee$ = ◇₂.** $\Diamond_\vee$ $= \Diamond _{2}$
+- **PSc (◇₂).** For every p and $q, \Diamond _{2}(p \lor q)$ implies $\Diamond _{2}(p) \lor \Diamond _{2}(q)$.
 
 ## Conclusion
 
-- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$(p ∨ q) implies $\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q).
+- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$$(p \lor q)$ implies $\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q).
 
 ## Proof
 
-Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving □=(=⊤) unchanged.
+Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving $\Box =(=\top )$ unchanged.
 
 ## Notes
 

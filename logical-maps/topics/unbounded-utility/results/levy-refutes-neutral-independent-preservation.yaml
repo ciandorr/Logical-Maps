@@ -15,16 +15,8 @@ certificate:
   recorded_by: GPT-6 (Codex)
   checked_by: []
   date: '2026-09-09'
-proof: Let L be positive with density exp(-1/(4t))/(2 sqrt(pi) t^(3/2)), t>0. Its Laplace transform is exp(-sqrt(s)),
-  so independent copies L1+L2 have the law of 4L; its survival is erf(1/(2 sqrt(t))). Let epsilon be an independent
-  fair sign, W=epsilon L1, and D=L2-L1. Both W and D have symmetric laws, hence are indifferent to zero. Independent
-  Sum Preservation applied in both directions to W~0 gives W+L2~L2. The law of W+L2 is the equal mixture of
-  4L and D. Mixture Independence, D~0, and Stochastic Equivalence (entailed by Dominance) therefore give L~M_(1/2)(4L,0).
-  For t>0 the latter mixture has survival erf(1/sqrt(t))/2, strictly less than erf(1/(2 sqrt(t))) by strict
-  concavity of erf on the positive half-line. At negative thresholds both survivals equal one, and at zero
-  they are one and one half. Thus L strictly stochastically dominates that mixture, contradicting their indifference.
-  The write-up supplies the transform calculation, all law replacements, and the exact scope of the reduced
-  premises.
+proof: |-
+  Let L be positive with density $\exp (-1/(4t))/(2 \sqrt (\pi ) t^{3/2}), t>0$. Its Laplace transform is $\exp (-\sqrt (s))$, so independent copies $L1+L2$ have the law of 4L; its survival is $\operatorname{erf}(1/(2 \sqrt (t)))$. Let epsilon be an independent fair sign, $W=\epsilon L1$, and $D=L2-L1$. Both W and D have symmetric laws, hence are indifferent to zero. Independent Sum Preservation applied in both directions to $W\sim 0$ gives $W+L2\sim L2$. The law of $W+L2$ is the equal mixture of 4L and D. Mixture Independence, $D\sim 0$, and Stochastic Equivalence (entailed by Dominance) therefore give $L\sim M_{1/2}(4L,0)$. For $t>0$ the latter mixture has survival $\operatorname{erf}(1/\sqrt (t))/2$, strictly less than $\operatorname{erf}(1/(2 \sqrt (t)))$ by strict concavity of erf on the positive half-line. At negative thresholds both survivals equal one, and at zero they are one and one half. Thus L strictly stochastically dominates that mixture, contradicting their indifference. The write-up supplies the transform calculation, all law replacements, and the exact scope of the reduced premises.
 sources:
 - 'Zachary Goodsell, project conversation, 9 September 2026: proposal that neutral symmetric stable-law mixtures
   yield an obstruction after adding a common independent stable variable.'

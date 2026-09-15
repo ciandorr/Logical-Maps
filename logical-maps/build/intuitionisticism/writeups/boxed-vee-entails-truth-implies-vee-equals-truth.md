@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□$\Diamond_\vee$ entails Truth.** □(∀p:t. $\Diamond_\vee$p → p)
+- **□$\Diamond_\vee$ entails Truth.** $\Box (\forall p:t$. $\Diamond_\vee$$p \to p$)
 
 ## Conclusion
 
-- **$\Diamond_\vee$ = Truth.** $\Diamond_\vee$ = (λp:t. p)
+- **$\Diamond_\vee$ = Truth.** $\Diamond_\vee$ $= (\lambda p:t. p)$
 
 ## Proof
 
-The reverse implication, p→$\Diamond_\vee$p by Theorem 7, is an assumption-free II theorem; universally close and necessitate it. Combine this with the selected boxed pointwise implication using K and the necessitated propositional combination theorem to obtain □∀p.($\Diamond_\vee$p↔Truthp). The predicate form of modalized functionality proved in ii-implies-modalized-functionality gives identity of these functions (and symmetry gives the recorded orientation if needed).
+The reverse implication, $p\to$$\Diamond_\vee$p by Theorem 7, is an assumption-free II theorem; universally close and necessitate it. Combine this with the selected boxed pointwise implication using K and the necessitated propositional combination theorem to obtain $\Box \forall p$.($\Diamond_\vee$$p\leftrightarrow$Truthp). The predicate form of modalized functionality proved in ii-implies-modalized-functionality gives identity of these functions (and symmetry gives the recorded orientation if needed).
 
 ## Notes
 

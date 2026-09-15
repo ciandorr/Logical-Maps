@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **PSa ($\Diamond_\vee$).** For every p and q, □(p → q) implies that $\Diamond_\vee$(p) implies $\Diamond_\vee$(q), with □p defined as p = ⊤.
-- **PSb ($\Diamond_\vee$).** $\Diamond_\vee$ does not hold of the contradiction ⊥.
-- **Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** ∀p:t. ¬$\Diamond_\vee$(p) → □¬p
+- **PSa ($\Diamond_\vee$).** For every p and $q, \Box (p \to q)$ implies that $\Diamond_\vee$(p) implies $\Diamond_\vee$(q), with $\Box p$ defined as $p = \top$.
+- **PSb ($\Diamond_\vee$).** $\Diamond_\vee$ does not hold of the contradiction $\bot$.
+- **Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** $\forall p:t. \neg$$\Diamond_\vee$$(p) \to \Box \neg p$
 
 ## Conclusion
 
-- **Stability of □¬.** ∀p:t. ¬¬□¬p → □¬p
+- **Stability of □¬.** $\forall p:t. \neg \neg \Box \neg p \to \Box \neg p$
 
 ## Proof
 
-PSa at (p,⊥), together with PSb, gives □¬p→¬$\Diamond_\vee$(p). Under ¬¬□¬p this gives ¬¬¬$\Diamond_\vee$(p), hence ¬$\Diamond_\vee$(p) by triple-negation reduction. The selected necessary-falsehood condition gives □¬p. Discharge and generalize p.
+PSa at $(p,\bot )$, together with PSb, gives $\Box \neg p\to \neg$$\Diamond_\vee$(p). Under $\neg \neg \Box \neg p$ this gives $\neg \neg \neg$$\Diamond_\vee$(p), hence $\neg$$\Diamond_\vee$(p) by triple-negation reduction. The selected necessary-falsehood condition gives $\Box \neg p$. Discharge and generalize p.
 
 ## Notes
 

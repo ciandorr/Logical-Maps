@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Mixture Independence and Shift Transfer imply Shift Invariance</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mixture Independence and Shift Transfer imply Shift Invariance</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,24 +252,22 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Mixture Independence and Shift Transfer imply Shift Invariance</h1>
-</header>
-<p><strong>Claim.</strong> Mixture Independence + Shift Transfer imply Shift Invariance.</p>
-<p>Fix real-utility variables <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>∈</mo><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle></mrow><annotation encoding="application/x-tex">b\in\mathbb R</annotation></semantics></math> such that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">X+b</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">Y+b</annotation></semantics></math> are available. Apply Shift Transfer with mixture weight <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">1/2</annotation></semantics></math> and transfer parameter <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">b/2</annotation></semantics></math>, first to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(X,X)</annotation></semantics></math> and then to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(Y,X)</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">M_{1/2}(X+b,X)\sim M_{1/2}(X,X+b),</annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">M_{1/2}(Y+b,X)\sim M_{1/2}(Y,X+b).</annotation></semantics></math></p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Mixture Independence and Shift Transfer imply Shift Invariance</h1></header><p><strong>Claim.</strong> Mixture Independence + Shift Transfer imply Shift Invariance.</p>
+<p>Fix real-utility variables <span class="math inline">X,Y</span> and <span class="math inline">b\in\mathbb R</span> such that <span class="math inline">X+b</span> and <span class="math inline">Y+b</span> are available. Apply Shift Transfer with mixture weight <span class="math inline">1/2</span> and transfer parameter <span class="math inline">b/2</span>, first to <span class="math inline">(X,X)</span> and then to <span class="math inline">(Y,X)</span>:</p>
+<p><span class="math display">M_{1/2}(X+b,X)\sim M_{1/2}(X,X+b),</span> <span class="math display">M_{1/2}(Y+b,X)\sim M_{1/2}(Y,X+b).</span></p>
 <p>Transitivity of the standing preorder lets an indifferent object replace either side of a weak comparison. Therefore</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right"><mi>X</mi><mo>≽</mo><mi>Y</mi></mtd><mtd columnalign="left"><mo>⇔</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>≽</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right"></mtd><mtd columnalign="left"><mo>⇔</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>≽</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>+</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right"></mtd><mtd columnalign="left"><mo>⇔</mo><mi>X</mi><mo>+</mo><mi>b</mi><mo>≽</mo><mi>Y</mi><mo>+</mo><mi>b</mi><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+<p><span class="math display">\begin{aligned}
 X\succeq Y
 &amp;\iff M_{1/2}(X,X+b)\succeq M_{1/2}(Y,X+b)\\
 &amp;\iff M_{1/2}(X+b,X)\succeq M_{1/2}(Y+b,X)\\
 &amp;\iff X+b\succeq Y+b.
-\end{aligned}</annotation></semantics></math></p>
-<p>The first and last equivalences are exactly Mixture Independence, with common second arguments <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">X+b</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> respectively.</p>
-<p>No branch interchange, independent copy, totality assumption or law identity occurs. Using <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> as the common gamble also avoids assuming the availability of a new sure outcome at utility <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>: all transformations used were already stipulated to exist in this instance of Shift Invariance.</p>
+\end{aligned}</span></p>
+<p>The first and last equivalences are exactly Mixture Independence, with common second arguments <span class="math inline">X+b</span> and <span class="math inline">X</span> respectively.</p>
+<p>No branch interchange, independent copy, totality assumption or law identity occurs. Using <span class="math inline">X</span> as the common gamble also avoids assuming the availability of a new sure outcome at utility <span class="math inline">b</span>: all transformations used were already stipulated to exist in this instance of Shift Invariance.</p>
 <p><strong>Original work: direct consequence.</strong> This is a two-application specialization followed by mixture cancellation. The choice of common gamble is the small domain check needed to avoid unnecessary outcome-richness assumptions. No literature novelty is asserted.</p>
 <p><strong>Attribution.</strong> GPT-6 (Codex), 9 September 2026, original connecting argument for this project. No independent checker or Lean proof is claimed.</p>
-</body>
-</html>
+</body></html>

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Positive Affine Invariance.** For all real a>0 and b, X ≽ Y iff aX+b ≽ aY+b.
+- **Positive Affine Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $aX+b \succeq aY+b$.
 
 ## Conclusion
 
-- **Shift Invariance.** For every real b, X ≽ Y iff X+b ≽ Y+b.
+- **Shift Invariance.** For every real $b, X \succeq Y$ iff $X+b \succeq Y+b$.
 
 ## Proof
 
-Set a=1.
+Set $a=1$.
 
 ## Notes
 

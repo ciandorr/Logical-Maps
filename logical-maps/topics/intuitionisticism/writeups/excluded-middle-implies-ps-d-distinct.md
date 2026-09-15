@@ -8,11 +8,11 @@
 
 ## Conclusion
 
-- **PSd (≠⊥).** For every p and q, if p ≠ ⊥ implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd (≠⊥).** For every p and q, if $p \ne \bot$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Fix p,q and assume (p≠⊥)→□q. Instantiate excluded middle at p=⊥. If p=⊥, substitution and the closed identity (⊥→q)=⊤ give □(p→q). Otherwise p≠⊥, so □q; the necessitated intuitionistic theorem q→(p→q), with K, gives □(p→q). Discharge and generalize p,q. Only the closed intuitionistic theorem is necessitated, never excluded middle.
+Fix p,q and assume $(p\ne \bot )\to \Box q$. Instantiate excluded middle at $p=\bot$. If $p=\bot$, substitution and the closed identity $(\bot \to q)=\top$ give $\Box (p\to q)$. Otherwise $p\ne \bot$, so $\Box q$; the necessitated intuitionistic theorem $q\to (p\to q)$, with K, gives $\Box (p\to q)$. Discharge and generalize p,q. Only the closed intuitionistic theorem is necessitated, never excluded middle.
 
 ## Notes
 

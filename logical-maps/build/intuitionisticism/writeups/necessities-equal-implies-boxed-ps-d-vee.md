@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Conclusion
 
-- **□PSd ($\Diamond_\vee$).** □(∀p,q:t. (($\Diamond_\vee$(p) → □q) → □(p → q)))
+- **□PSd ($\Diamond_\vee$).** $\Box (\forall p,q:t$. (($\Diamond_\vee$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Proof
 
-Let E be □=□₂. Suppose $\Diamond_\vee$p→□q. Since ◇₂p→$\Diamond_\vee$p is an II theorem, E gives ◇₂p→□₂q. Paired PSd₂ yields □₂(p→q), and E converts this to □(p→q). Discharge and generalize p,q, retaining only E.
+Let E be $\Box =\Box _{2}$. Suppose $\Diamond_\vee$$p\to \Box q$. Since $\Diamond _{2}p\to$$\Diamond_\vee$p is an II theorem, E gives $\Diamond _{2}p\to \Box _{2}q$. Paired $\operatorname{PSd}_{2}$ yields $\Box _{2}(p\to q)$, and E converts this to $\Box (p\to q)$. Discharge and generalize p,q, retaining only E.
 
-This proves the closed implication E→PSd($\Diamond_\vee$). Identity implies its own □ by substituting equals into the reflexivity theorem, so E→□E. Necessitate the closed implication and apply K to obtain □PSd($\Diamond_\vee$).
+This proves the closed implication $E\to \operatorname{PSd}$($\Diamond_\vee$). Identity implies its own $\Box$ by substituting equals into the reflexivity theorem, so $E\to \Box E$. Necessitate the closed implication and apply K to obtain $\Box \operatorname{PSd}$($\Diamond_\vee$).
 
 ## Notes
 

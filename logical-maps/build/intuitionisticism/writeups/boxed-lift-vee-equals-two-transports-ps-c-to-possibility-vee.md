@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = ◇₂).** □($\Diamond_\vee$ = ◇₂)
-- **□PSc (◇₂).** □(∀p, q : t. (◇₂(p ∨ q) → (◇₂(p) ∨ ◇₂(q))))
+- **□($\Diamond_\vee$ = ◇₂).** $\Box$($\Diamond_\vee$ $= \Diamond _{2}$)
+- **□PSc (◇₂).** $\Box (\forall p, q : t. (\Diamond _{2}(p \lor q) \to (\Diamond _{2}(p) \lor \Diamond _{2}(q))))$
 
 ## Conclusion
 
-- **□PSc ($\Diamond_\vee$).** □(∀p, q : t. ($\Diamond_\vee$(p ∨ q) → ($\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q))))
+- **□PSc ($\Diamond_\vee$).** $\Box (\forall p, q : t$. ($\Diamond_\vee$$(p \lor q) \to$ ($\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q))))
 
 ## Proof
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□(◇₂ = Truth).** □(◇₂ = (λp:t. p))
+- **□(◇₂ = Truth).** $\Box (\Diamond _{2} = (\lambda p:t. p))$
 
 ## Conclusion
 
-- **◇₂ = Truth.** ◇₂ = (λp:t. p)
+- **◇₂ = Truth.** $\Diamond _{2} = (\lambda p:t. p)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

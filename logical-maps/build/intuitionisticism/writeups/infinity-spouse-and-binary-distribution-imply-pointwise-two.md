@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Spouse ($\Diamond_\infty$).** ∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\infty$)
-- **□PSc ($\Diamond_\infty$).** □(∀p, q : t. ($\Diamond_\infty$(p ∨ q) → ($\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q))))
+- **Spouse ($\Diamond_\infty$).** $\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\infty$)
+- **□PSc ($\Diamond_\infty$).** $\Box (\forall p, q : t$. ($\Diamond_\infty$$(p \lor q) \to$ ($\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q))))
 
 ## Conclusion
 
-- **$\Diamond_\infty$ entails ◇₂.** ∀p:t. $\Diamond_\infty$p → ◇₂p
+- **$\Diamond_\infty$ entails ◇₂.** $\forall p:t$. $\Diamond_\infty$$p \to \Diamond _{2}p$
 
 ## Proof
 
-The extra □PSc($\Diamond_\infty$) premise, together with the II theorem □PSb($\Diamond_\infty$), supplies the necessary binary candidate clauses. A qualified spouse then makes $\Diamond_\infty$ a Possibility₂ candidate. Choose it as the witness to ◇₂p whenever $\Diamond_\infty$p. The extra binary-distribution premise is kept explicit because the printed infinitary-to-binary reduction remains pending.
+The extra $\Box \operatorname{PSc}$($\Diamond_\infty$) premise, together with the II theorem $\Box \operatorname{PSb}$($\Diamond_\infty$), supplies the necessary binary candidate clauses. A qualified spouse then makes $\Diamond_\infty$ $a \operatorname{Possibility}_{2}$ candidate. Choose it as the witness to $\Diamond _{2}p$ whenever $\Diamond_\infty$p. The extra binary-distribution premise is kept explicit because the printed infinitary-to-binary reduction remains pending.
 
 ## Notes
 

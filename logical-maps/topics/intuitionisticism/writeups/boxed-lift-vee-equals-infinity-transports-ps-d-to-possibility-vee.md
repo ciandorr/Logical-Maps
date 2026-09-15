@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = $\Diamond_\infty$).** □($\Diamond_\vee$ = $\Diamond_\infty$)
-- **□PSd ($\Diamond_\infty$).** □(∀p, q : t. (($\Diamond_\infty$(p) → □q) → □(p → q)))
+- **□($\Diamond_\vee$ = $\Diamond_\infty$).** $\Box$($\Diamond_\vee$ = $\Diamond_\infty$)
+- **□PSd ($\Diamond_\infty$).** $\Box (\forall p, q : t$. (($\Diamond_\infty$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **□PSd ($\Diamond_\vee$).** □(∀p,q:t. (($\Diamond_\vee$(p) → □q) → □(p → q)))
+- **□PSd ($\Diamond_\vee$).** $\Box (\forall p,q:t$. (($\Diamond_\vee$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Proof
 

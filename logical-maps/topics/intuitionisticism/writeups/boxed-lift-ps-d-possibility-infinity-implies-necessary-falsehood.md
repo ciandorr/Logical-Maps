@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□PSd ($\Diamond_\infty$).** □(∀p, q : t. (($\Diamond_\infty$(p) → □q) → □(p → q)))
+- **□PSd ($\Diamond_\infty$).** $\Box (\forall p, q : t$. (($\Diamond_\infty$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **□Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** □(∀p:t. ¬$\Diamond_\infty$(p) → □¬p)
+- **□Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** $\Box (\forall p:t. \neg$$\Diamond_\infty$$(p) \to \Box \neg p$)
 
 ## Proof
 

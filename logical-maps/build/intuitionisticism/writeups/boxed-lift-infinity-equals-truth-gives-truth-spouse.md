@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□($\Diamond_\infty$ = Truth).** □($\Diamond_\infty$ = (λp:t. p))
+- **□($\Diamond_\infty$ = Truth).** $\Box$($\Diamond_\infty$ $= (\lambda p:t. p)$)
 
 ## Conclusion
 
-- **□Spouse ($\Diamond_\infty$).** □(∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\infty$))
+- **□Spouse ($\Diamond_\infty$).** $\Box (\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\infty$))
 
 ## Proof
 

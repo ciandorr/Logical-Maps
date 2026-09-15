@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□A PSb–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSd(f))
+- **□A PSb–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f))$
 
 ## Conclusion
 
-- **A PSb–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSd(f)
+- **A PSb–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

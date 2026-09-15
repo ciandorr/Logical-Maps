@@ -4,8 +4,8 @@
 
 ## Premises
 
-- **Uniform impossibility counterexamples.** ∀f:tt. (PSb(f) ∧ PSc(f)) → ∃p:t. (¬f p ∧ p ≠ ⊥)
-- **A PSb–PSc–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f)
+- **Uniform impossibility counterexamples.** $\forall f:tt. (\operatorname{PSb}(f) \land \operatorname{PSc}(f)) \to \exists p:t. (\neg f p \land p \ne \bot )$
+- **A PSb–PSc–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f)$
 
 ## Conclusion
 
@@ -13,7 +13,7 @@
 
 ## Proof
 
-Choose f with PSb, PSc and PSd. The uniform counterexample formula at f gives p with ¬fp and p≠⊥. PSd at p,⊥ turns ¬fp into □¬p, hence p=⊥ by footnote 5. Contradiction.
+Choose f with PSb, PSc and PSd. The uniform counterexample formula at f gives p with $\neg fp$ and $p\ne \bot . \operatorname{PSd}$ at $p,\bot$ turns $\neg fp$ into $\Box \neg p$, hence $p=\bot$ by footnote 5. Contradiction.
 
 ## Notes
 

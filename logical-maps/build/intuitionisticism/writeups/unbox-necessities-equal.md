@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□(□ = □₂).** □((λp:t. □p) = □₂)
+- **□(□ = □₂).** $\Box ((\lambda p:t. \Box p) = \Box _{2})$
 
 ## Conclusion
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

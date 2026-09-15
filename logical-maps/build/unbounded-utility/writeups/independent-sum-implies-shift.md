@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Independent Sum Invariance.** Whenever Z is independent of the pair (X,Y), X ≽ Y iff X+Z ≽ Y+Z.
+- **Independent Sum Invariance.** Whenever Z is independent of the pair $(X,Y), X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
-- **Shift Invariance.** For every real b, X ≽ Y iff X+b ≽ Y+b.
+- **Shift Invariance.** For every real $b, X \succeq Y$ iff $X+b \succeq Y+b$.
 
 ## Proof
 
-Choose Z to be the constant utility b. A constant is independent of every pair and is both comonotonic and antitonic with every variable, so the sum biconditional becomes X ≽ Y iff X+b ≽ Y+b. Apply this wherever the shifted outcomes exist.
+Choose Z to be the constant utility b. A constant is independent of every pair and is both comonotonic and antitonic with every variable, so the sum biconditional becomes $X \succeq Y$ iff $X+b \succeq Y+b$. Apply this wherever the shifted outcomes exist.
 
 ## Sources
 

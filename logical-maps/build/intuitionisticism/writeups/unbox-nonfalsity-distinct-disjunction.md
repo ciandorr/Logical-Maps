@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Nonfalsity gives distinct disjunct.** □(∀p,q:t. ¬¬(p ∨ q) → ((p ≠ ⊥) ∨ (q ≠ ⊥)))
+- **□Nonfalsity gives distinct disjunct.** $\Box (\forall p,q:t. \neg \neg (p \lor q) \to ((p \ne \bot ) \lor (q \ne \bot )))$
 
 ## Conclusion
 
-- **Nonfalsity gives distinct disjunct.** ∀p,q:t. ¬¬(p ∨ q) → ((p ≠ ⊥) ∨ (q ≠ ⊥))
+- **Nonfalsity gives distinct disjunct.** $\forall p,q:t. \neg \neg (p \lor q) \to ((p \ne \bot ) \lor (q \ne \bot ))$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

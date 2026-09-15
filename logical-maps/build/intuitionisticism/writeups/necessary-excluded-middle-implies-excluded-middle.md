@@ -12,7 +12,7 @@
 
 ## Proof
 
-Apply □A → A with A = ∀p.(p∨¬p).
+Apply $\Box A \to A$ with $A = \forall p.(p\lor \neg p)$.
 
 ## Notes
 

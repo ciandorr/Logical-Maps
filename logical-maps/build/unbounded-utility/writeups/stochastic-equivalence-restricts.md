@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.
+- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then $X \sim Y$. The variables remain distinct objects; indifference is an additional axiom.
 
 ## Conclusion
 
-- **Restricted Stochastic Equivalence.** If simple gambles X,Y have the same law, then X ~ Y.
+- **Restricted Stochastic Equivalence.** If simple gambles X,Y have the same law, then $X \sim Y$.
 
 ## Proof
 

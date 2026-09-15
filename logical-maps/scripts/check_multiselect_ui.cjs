@@ -90,10 +90,9 @@ try {
   assert.deepEqual(focus(), ['e', 'a', 'c', 'd'], 'Reading proof preserves the selection');
   shift('b'); selected(['e', 'a', 'c', 'd', 'b']);
 
-  // A joint selection remains available to the explicit comparison action.
-  pop.querySelector('[data-compare-arm]').click(); pointer(label('f'));
-  assert.equal(w.eval('state.selected.type'), 'compare');
-  assert.match(pop.textContent, /E ∧ A ∧ C ∧ D ∧ B ⇒ F.*proved/s);
+  // Further related principles extend the same joint selection.
+  assert.equal(pop.querySelector('[data-compare-arm]'), null);
+  shift('f'); selected(['e', 'a', 'c', 'd', 'b', 'f']);
   assert.equal(pop.parentElement.id, 'graph-details');
   shift('g');
   assert.ok(graph.classList.contains('inconsistent-selection'));
@@ -130,5 +129,5 @@ try {
   d.getElementById('page-back').click(); pointer(label('a'));
   assert.equal(pop.parentElement.id, 'graph-details');
   assert.deepEqual(errors, []);
-  console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, comparison, red inconsistency highlighting, and bottom graph details.');
+  console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, red inconsistency highlighting, and bottom graph details.');
 } finally { w.close(); }

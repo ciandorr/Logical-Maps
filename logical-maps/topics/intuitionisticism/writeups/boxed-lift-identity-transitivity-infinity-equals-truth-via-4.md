@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□(◇₂ = Truth).** □(◇₂ = (λp:t. p))
-- **□($\Diamond_\infty$ = ◇₂).** □($\Diamond_\infty$ = ◇₂)
+- **□(◇₂ = Truth).** $\Box (\Diamond _{2} = (\lambda p:t. p))$
+- **□($\Diamond_\infty$ = ◇₂).** $\Box$($\Diamond_\infty$ $= \Diamond _{2}$)
 
 ## Conclusion
 
-- **□($\Diamond_\infty$ = Truth).** □($\Diamond_\infty$ = (λp:t. p))
+- **□($\Diamond_\infty$ = Truth).** $\Box$($\Diamond_\infty$ $= (\lambda p:t. p)$)
 
 ## Proof
 

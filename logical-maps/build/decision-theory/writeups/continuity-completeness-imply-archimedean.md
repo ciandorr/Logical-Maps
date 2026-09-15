@@ -4,24 +4,24 @@
 
 ## Premises
 
-- **Mixture continuity.** For all p, q, r ∈ Δ(X) the sets {λ ∈ [0,1] : λp + (1−λ)q ≽ r} and {λ ∈ [0,1] : r ≽ λp + (1−λ)q} are closed.
-- **Completeness.** For all p, q ∈ Δ(X): p ≽ q or q ≽ p.
+- **Mixture continuity.** For all $p, q, r \in \Delta (X)$ the sets $\{\lambda \in [0,1] : \lambda p + (1- \lambda )q \succeq r\}$ and $\{\lambda \in [0,1] : r \succeq \lambda p + (1- \lambda )q\}$ are closed.
+- **Completeness.** For all $p, q \in \Delta (X): p \succeq q$ or $q \succeq p$.
 
 ## Conclusion
 
-- **Archimedean.** For all p, q, r ∈ Δ(X): if p ≻ q ≻ r then there are α, β ∈ (0,1) with αp + (1−α)r ≻ q and q ≻ βp + (1−β)r.
+- **Archimedean.** For all $p, q, r \in \Delta (X)$: if $p \succ q \succ r$ then there are $\alpha , \beta \in (0,1)$ with $\alpha p + (1- \alpha )r \succ q$ and $q \succ \beta p + (1- \beta )r$.
 
 ## Proof
 
-Let p ≻ q ≻ r and set A = {λ : λp+(1−λ)r ≽ q}, B = {λ : q ≽ λp+(1−λ)r}.
-Both are closed by continuity and A ∪ B = [0,1] by completeness. Since
-1 ∉ B (as p ≻ q) and [0,1]∖B is open, some interval (1−ε, 1] lies in
-[0,1]∖B ⊆ A; any α in it with α < 1 gives αp+(1−α)r ≻ q. Symmetrically,
-0 ∉ A (as q ≻ r) yields [0, ε) ⊆ B∖A and any β in it with β > 0 gives
-q ≻ βp+(1−β)r.
+Let $p \succ q \succ r$ and set $A = \{\lambda : \lambda p+(1- \lambda )r \succeq q\}, B = \{\lambda : q \succeq \lambda p+(1- \lambda )r\}$.
+Both are closed by continuity and $A \cup B = [0,1]$ by completeness. Since
+$1 \notin B$ (as $p \succ q$) and $[0,1]\setminus B$ is open, some interval $(1- \epsilon , 1]$ lies in
+$[0,1]\setminus B \subseteq A$; any $\alpha$ in it with $\alpha < 1$ gives $\alpha p+(1- \alpha )r \succ q$. Symmetrically,
+$0 \notin A$ (as $q \succ r$) yields $[0, \epsilon ) \subseteq B\setminus A$ and any $\beta$ in it with $\beta > 0$ gives
+$q \succ \beta p+(1- \beta )r$.
 
 ## Notes
 
-Completeness is used to conclude λ ∈ A from λ ∉ B; whether continuity alone suffices is left open here.
+Completeness is used to conclude $\lambda \in A$ from $\lambda \notin B$; whether continuity alone suffices is left open here.
 
 <p class='cert'>Record: <code>topics/decision-theory/results/continuity-completeness-imply-archimedean.yaml</code></p>

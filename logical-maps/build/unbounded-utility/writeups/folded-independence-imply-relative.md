@@ -42,7 +42,7 @@ indifference at zero and the failure of the weak comparison for negative mean.
 The proof uses identities of mixture laws to compute folded tails, but it does
 not replace one random variable with an equal-law variable in a preference.
 Folded Expectation itself licenses the two comparisons being used. Thus neither
-Stochastic Equivalence nor Totality is an omitted premise. No L¹ Continuity,
+Stochastic Equivalence nor Totality is an omitted premise. No $L^{1}$ Continuity,
 reflection axiom or full affine symmetry is needed.
 
 **Original work: small connecting proof.** The two expectation principles and

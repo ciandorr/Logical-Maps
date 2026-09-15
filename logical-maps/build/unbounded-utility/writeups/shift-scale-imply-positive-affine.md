@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Shift Invariance.** For every real b, X ≽ Y iff X+b ≽ Y+b.
-- **Scale Invariance.** For every real a>0, X ≽ Y iff aX ≽ aY.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Shift Invariance.** For every real $b, X \succeq Y$ iff $X+b \succeq Y+b$.
+- **Scale Invariance.** For every real $a>0, X \succeq Y$ iff $aX \succeq aY$.
 
 ## Conclusion
 
-- **Positive Affine Invariance.** For all real a>0 and b, X ≽ Y iff aX+b ≽ aY+b.
+- **Positive Affine Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $aX+b \succeq aY+b$.
 
 ## Proof
 

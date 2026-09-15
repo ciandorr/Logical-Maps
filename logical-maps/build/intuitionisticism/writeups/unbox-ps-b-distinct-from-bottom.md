@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSb (≠⊥).** □(¬(⊥ ≠ ⊥))
+- **□PSb (≠⊥).** $\Box (\neg (\bot \ne \bot ))$
 
 ## Conclusion
 
-- **PSb (≠⊥).** The contradiction is not distinct from itself: ¬(⊥ ≠ ⊥).
+- **PSb (≠⊥).** The contradiction is not distinct from itself: $\neg (\bot \ne \bot )$.
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

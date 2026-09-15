@@ -8,7 +8,7 @@
 
 ## Conclusion
 
-- **□PSd (≠⊥).** □(∀p, q : t. (((p ≠ ⊥) → □q) → □(p → q)))
+- **□PSd (≠⊥).** $\Box (\forall p, q : t. (((p \ne \bot ) \to \Box q) \to \Box (p \to q)))$
 
 ## Proof
 

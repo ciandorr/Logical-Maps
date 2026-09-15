@@ -4,21 +4,23 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Totality.** For all gambles X,Y, either X ≽ Y or Y ≽ X.
-- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.
-- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Surjectivity of u is not included here.
-- **Stochastic Dominance.** If P(X>o) ≥ P(Y>o) for every outcome threshold o, then X ≽ Y; if one threshold inequality is strict, X ≻ Y. Thresholds use the sure-outcome order.
-- **Mixture Independence.** For all X,Y,Z and 0<p<1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.
-- **Negative Affine Anti-Invariance.** For all real a>0 and b, X ≽ Y iff −aY+b ≽ −aX+b.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Totality.** For all gambles X,Y, either $X \succeq Y$ or $Y \succeq X$.
+- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then $X \sim Y$. The variables remain distinct objects; indifference is an additional axiom.
+- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: $X \succeq Y$ iff $E[u(X)] \ge E[u(Y)]$. Surjectivity of u is not included here.
+- **Stochastic Dominance.** If $P(X>o) \ge P(Y>o)$ for every outcome threshold o, then $X \succeq Y$; if one threshold inequality is strict, $X \succ Y$. Thresholds use the sure-outcome order.
+- **Mixture Independence.** For all X,Y,Z and $0<p<1, X \succeq Y$ iff $M_p(X,Z) \succeq M_p(Y,Z)$, where M is the fixed randomized-selection construction described in the background.
+- **Negative Affine Anti-Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $- aY+b \succeq - aX+b$.
 
 ## Conclusion
 
-- **Alternating St Petersburg = −1/2.** Every X with P(u(X)=(−2)^n)=2^(−n), n≥1, is indifferent to sure utility −1/2.
+- **Alternating St Petersburg = −1/2.** Every $X$ with
+$$P(u(X)=(-2)^n)=2^{-n},\qquad n\ge 1$$
+is indifferent to sure utility $-\frac{1}{2}$.
 
 ## Proof
 
-The law identity A =d M_1/2(−2,−2A) gives indifference by Stochastic Equivalence. If A≻−1/2 then −2A≺1, so Independence and Simple EU imply A~M_1/2(−2,−2A)≺M_1/2(−2,1)~−1/2, contradiction. The opposite strict case is analogous. Totality gives A~−1/2.
+The law identity $A =d M_{1/2}(- 2,- 2A)$ gives indifference by Stochastic Equivalence. If $A\succ - 1/2$ then $- 2A\prec 1$, so Independence and Simple EU imply $A\sim M_{1/2}(- 2,- 2A)\prec M_{1/2}(- 2,1)\sim - 1/2$, contradiction. The opposite strict case is analogous. Totality gives $A\sim - 1/2$.
 
 ## Notes
 

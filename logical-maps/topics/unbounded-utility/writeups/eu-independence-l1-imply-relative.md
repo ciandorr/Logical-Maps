@@ -1,9 +1,9 @@
 # Expected Utility, Independence and L¹ Continuity yield Relative Expectation
 
 **Claim.** Rich Outcomes + Expected Utility + Stochastic Equivalence + Mixture
-Independence + Stochastic Dominance + L¹ Continuity imply Relative Expectation.
+Independence + Stochastic Dominance $+ L^{1}$ Continuity imply Relative Expectation.
 
-In particular, the map's existing DTU + L¹ Continuity implication to Expected
+In particular, the map's existing DTU $+ L^{1}$ Continuity implication to Expected
 Utility shows that **DTU + L¹ Continuity implies Relative Expectation without
 affine symmetry**. Only the recorded upper-section continuity clause is used.
 
@@ -51,7 +51,7 @@ $$\begin{aligned}
 \end{aligned}$$
 
 Dominated convergence and $\mathbb E D=0$ justify the limit. The first weak
-comparison in (2), followed by upper-section L¹ Continuity with fixed $Y$,
+comparison in (2), followed by upper-section $L^{1}$ Continuity with fixed $Y$,
 gives $X\succeq Y$. Repeat the same construction with $X,Y$ interchanged to
 obtain $Y\succeq X$. We have therefore proved
 
@@ -96,10 +96,10 @@ assumptions in the stated sufficient package. It is credited as a connecting
 proof, not as a theorem already attributed to the paper. This describes work
 performed for the map, not literature priority.
 
-Combined with the existing source-based DTU + L¹ Continuity implication to
+Combined with the existing source-based DTU $+ L^{1}$ Continuity implication to
 Expected Utility, this yields the claimed DTU consequence. It does not claim
 the converse: the separate infinitesimal folded-tail model satisfies DTU,
-Relative Expectation and even Folded Expectation while violating L¹ Continuity.
+Relative Expectation and even Folded Expectation while violating $L^{1}$ Continuity.
 
 **Sources.** Zachary Goodsell, *Symmetries of value*, §3, p. 23, and pp. 26–27
 (Relative Expectation and Corollary 5). Connecting proof: GPT-6 (Codex),

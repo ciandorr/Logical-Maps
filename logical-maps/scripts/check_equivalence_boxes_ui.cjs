@@ -45,10 +45,11 @@ try {
   assert.ok(d.querySelector('#pop [data-result="abc"]')); assert.ok(d.querySelector('#pop [data-result="ca"]'));
   d.querySelector('#pop [data-graph-connection="abc"]').click();
   assert.equal(w.eval('state.selected.type'), 'result'); assert.deepEqual(json(w, 'state.focus'), ['a', 'b']);
-  w.armCompare(); w.handleGraphClick(node('v').querySelector('text[data-principle]'));
-  assert.equal(w.eval('state.selected.type'), 'compare');
-  assert.match(d.getElementById('pop').textContent, /A ∧ B ⇒ V[\s\S]*refuted by a model/);
-  assert.ok(d.querySelector('#pop [data-model="witness"]'));
+  assert.equal(w.eval("expressionStatus(['a','b'],'v').status"), 'independent');
+  w.handleGraphClick(node('v').querySelector('text[data-principle]'), true);
+  assert.deepEqual(json(w, 'state.focus'), ['a', 'b', 'v']);
+  assert.equal(w.eval('state.selected.type'), 'selection');
+  assert.match(d.getElementById('pop').textContent, /A ∧ B ∧ V/);
   w.handleGraphClick(d.querySelector('[data-graph-node="j:abef"]'));
   assert.ok(d.getElementById('graph').classList.contains('inconsistent-selection'));
   for (const n of d.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'), 'Impossible conjunctions mark every box, including True and False, as excluded');

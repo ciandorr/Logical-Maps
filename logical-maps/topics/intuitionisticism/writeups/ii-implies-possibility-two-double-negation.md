@@ -4,11 +4,11 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **Double-negation transport (◇₂).** ∀p:t. ◇₂(¬¬p) → ¬¬◇₂p
+- **Double-negation transport (◇₂).** $\forall p:t. \Diamond _{2}(\neg \neg p) \to \neg \neg \Diamond _{2}p$
 
 ## Notes
 

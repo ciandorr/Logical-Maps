@@ -1,8 +1,10 @@
 id: ps-c-distinct-from-bottom
 name: PSc (≠⊥)
 category: distinct-from-bottom
-statement: For every p and q, (p ∨ q) ≠ ⊥ implies p ≠ ⊥ or q ≠ ⊥.
-formal: '∀p, q : t. (((p ∨ q) ≠ ⊥) → ((p ≠ ⊥) ∨ (q ≠ ⊥)))'
+statement: |-
+  For every p and $q, (p \lor q) \ne \bot$ implies $p \ne \bot$ or $q \ne \bot$.
+formal: |-
+  $\forall p, q : t. (((p \lor q) \ne \bot ) \to ((p \ne \bot ) \lor (q \ne \bot )))$
 aliases:
 - PSc for ≠⊥
 tags:

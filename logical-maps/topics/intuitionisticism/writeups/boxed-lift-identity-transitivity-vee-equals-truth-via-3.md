@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\infty$ = Truth).** □($\Diamond_\infty$ = (λp:t. p))
-- **□($\Diamond_\vee$ = $\Diamond_\infty$).** □($\Diamond_\vee$ = $\Diamond_\infty$)
+- **□($\Diamond_\infty$ = Truth).** $\Box$($\Diamond_\infty$ $= (\lambda p:t. p)$)
+- **□($\Diamond_\vee$ = $\Diamond_\infty$).** $\Box$($\Diamond_\vee$ = $\Diamond_\infty$)
 
 ## Conclusion
 
-- **□($\Diamond_\vee$ = Truth).** □($\Diamond_\vee$ = (λp:t. p))
+- **□($\Diamond_\vee$ = Truth).** $\Box$($\Diamond_\vee$ $= (\lambda p:t. p)$)
 
 ## Proof
 

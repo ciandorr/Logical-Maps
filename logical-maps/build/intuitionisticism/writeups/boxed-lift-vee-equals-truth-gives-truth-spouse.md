@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = Truth).** □($\Diamond_\vee$ = (λp:t. p))
+- **□($\Diamond_\vee$ = Truth).** $\Box$($\Diamond_\vee$ $= (\lambda p:t. p)$)
 
 ## Conclusion
 
-- **□Spouse ($\Diamond_\vee$).** □(∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\vee$))
+- **□Spouse ($\Diamond_\vee$).** $\Box (\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\vee$))
 
 ## Proof
 

@@ -1,9 +1,9 @@
 id: multi-utility
 name: Expected multi-utility representation
-statement: >
-  There is a set U of functions u : X → ℝ such that for all p, q ∈ Δ(X):
-  p ≽ q if and only if EU_u(p) ≥ EU_u(q) for every u ∈ U.
-formal: "∃U ⊆ (X→ℝ). ∀p q. p ≽ q ↔ ∀u∈U. EU_u(p) ≥ EU_u(q)"
+statement: |-
+  There is a set U of functions $u : X \to \mathbb{R}$ such that for all $p, q \in \Delta (X): p \succeq q$ if and only if $\operatorname{EU}_u(p) \ge \operatorname{EU}_u(q)$ for every $u \in U$.
+formal: |-
+  $\exists U \subseteq (X\to \mathbb{R} ). \forall p q. p \succeq q \leftrightarrow \forall u\in U. \operatorname{EU}_u(p) \ge \operatorname{EU}_u(q)$
 aliases: [Incomplete expected utility, Unanimity representation]
 tags: [representation]
 sources:

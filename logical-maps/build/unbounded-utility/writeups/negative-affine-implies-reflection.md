@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Negative Affine Anti-Invariance.** For all real a>0 and b, X ≽ Y iff −aY+b ≽ −aX+b.
+- **Negative Affine Anti-Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $- aY+b \succeq - aX+b$.
 
 ## Conclusion
 
-- **Reflection Anti-Invariance.** X ≽ Y iff −Y ≽ −X, using the one fixed normalized origin 0.
+- **Reflection Anti-Invariance.** $X \succeq Y$ iff $- Y \succeq - X$, using the one fixed normalized origin 0.
 
 ## Proof
 
-Set a=1,b=0. The order is reversed.
+Set $a=1,b=0$. The order is reversed.
 
 ## Notes
 

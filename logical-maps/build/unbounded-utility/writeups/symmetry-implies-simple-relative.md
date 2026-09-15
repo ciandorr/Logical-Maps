@@ -4,21 +4,21 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Totality.** For all gambles X,Y, either X ≽ Y or Y ≽ X.
-- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.
-- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Surjectivity of u is not included here.
-- **Stochastic Dominance.** If P(X>o) ≥ P(Y>o) for every outcome threshold o, then X ≽ Y; if one threshold inequality is strict, X ≻ Y. Thresholds use the sure-outcome order.
-- **Mixture Independence.** For all X,Y,Z and 0<p<1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.
-- **Negative Affine Anti-Invariance.** For all real a>0 and b, X ≽ Y iff −aY+b ≽ −aX+b.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Totality.** For all gambles X,Y, either $X \succeq Y$ or $Y \succeq X$.
+- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then $X \sim Y$. The variables remain distinct objects; indifference is an additional axiom.
+- **Simple Expected Utility.** The normalized real utility chart u is defined on every outcome, is measurable, and ranks every pair of simple random variables exactly by finite expected utility: $X \succeq Y$ iff $E[u(X)] \ge E[u(Y)]$. Surjectivity of u is not included here.
+- **Stochastic Dominance.** If $P(X>o) \ge P(Y>o)$ for every outcome threshold o, then $X \succeq Y$; if one threshold inequality is strict, $X \succ Y$. Thresholds use the sure-outcome order.
+- **Mixture Independence.** For all X,Y,Z and $0<p<1, X \succeq Y$ iff $M_p(X,Z) \succeq M_p(Y,Z)$, where M is the fixed randomized-selection construction described in the background.
+- **Negative Affine Anti-Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $- aY+b \succeq - aX+b$.
 
 ## Conclusion
 
-- **Simple Relative Expectation.** For real-utility variables X,Y on the same probability space, if u(X)−u(Y) takes finitely many values, X ≽ Y iff E[u(X)−u(Y)] ≥ 0. X and Y themselves need not be simple or integrable.
+- **Simple Relative Expectation.** For real-utility variables X,Y on the same probability space, if $u(X)- u(Y)$ takes finitely many values, $X \succeq Y$ iff $E[u(X)- u(Y)] \ge 0$. X and Y themselves need not be simple or integrable.
 
 ## Proof
 
-Theorem 4. If D=u(X)−u(Y) has finite range, work with the diluted variables M_1/2(X,0), M_1/2(Y,0). Partition into the finitely many values of D. Transfer each constant difference to the zero branch by Theorem 3. Finite mixture substitution leaves M_1/2(Y,D) in place of M_1/2(X,0). Independence and Simple EU reduce the comparison to E[D]≥0. Law invariance permits each rearrangement of branches.
+Theorem 4. If $D=u(X)- u(Y)$ has finite range, work with the diluted variables $M_{1/2}(X,0), M_{1/2}(Y,0)$. Partition into the finitely many values of D. Transfer each constant difference to the zero branch by Theorem 3. Finite mixture substitution leaves $M_{1/2}(Y,D)$ in place of $M_{1/2}(X,0)$. Independence and Simple EU reduce the comparison to $E[D]\ge 0$. Law invariance permits each rearrangement of branches.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **A PSb–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSd(f)
+- **A PSb–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f)$
 
 ## Conclusion
 
-- **Stability of =⊥.** ∀p:t. ¬¬(p = ⊥) → (p = ⊥)
+- **Stability of =⊥.** $\forall p:t. \neg \neg (p = \bot ) \to (p = \bot )$
 
 ## Proof
 
-Choose f with PSb and PSd. Fix p and assume ¬¬(p=⊥). If p=⊥, substitution and PSb give ¬fp. Therefore the double-negated identity gives ¬¬¬fp, hence ¬fp by triple-negation reduction. PSd at p,⊥ then gives □¬p, equivalently p=⊥. Discharge and generalize p; the conclusion does not depend on the chosen f, so eliminate its existential witness.
+Choose f with PSb and PSd. Fix p and assume $\neg \neg (p=\bot )$. If $p=\bot$, substitution and PSb give $\neg fp$. Therefore the double-negated identity gives $\neg \neg \neg fp$, hence $\neg fp$ by triple-negation reduction. PSd at $p,\bot$ then gives $\Box \neg p$, equivalently $p=\bot$. Discharge and generalize p; the conclusion does not depend on the chosen f, so eliminate its existential witness.
 
 ## Notes
 

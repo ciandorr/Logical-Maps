@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Archimedean Outcomes.** For any three sure outcomes a ≻ b ≻ c, some nontrivial mixture of the outer two is equally good as the intermediate one: b ~ M_p(a,c) for some p ∈ (0,1). Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
-- **Folded Expectation.** Put h_X(t)=P(u(X)>t)−P(u(X)<−t) for t≥0. If ∫₀∞|h_X(t)|dt and ∫₀∞|h_Y(t)|dt are finite, compare X,Y exactly by F(X)=∫₀∞h_X(t)dt and F(Y). Boundary atoms do not change these integrals.
+- **Archimedean Outcomes.** For any three sure outcomes $a \succ b \succ c$, some nontrivial mixture of the outer two is equally good as the intermediate one: $b \sim M_p(a,c)$ for some $p \in (0,1)$. Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
+- **Folded Expectation.** Put $h_X(t)=P(u(X)>t)- P(u(X)<- t)$ for $t\ge 0$. If $\int _0^{\infty }|h_X(t)|dt$ and $\int _0^{\infty }|h_Y(t)|dt$ are finite, compare X,Y exactly by $F(X)=\int _0^{\infty }h_X(t)dt$ and $F(Y)$. Boundary atoms do not change these integrals.
 
 ## Conclusion
 
-- **Expected Utility.** The normalized chart u is defined on all outcomes and is measurable. Whenever u(X),u(Y) are integrable, X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Expectations here are finite Lebesgue expectations; this says nothing about two +∞ expectations or conditionally convergent sums.
+- **Expected Utility.** The normalized chart u is defined on all outcomes and is measurable. Whenever $u(X),u(Y)$ are integrable, $X \succeq Y$ iff $E[u(X)] \ge E[u(Y)]$. Expectations here are finite Lebesgue expectations; this says nothing about two $+\infty$ expectations or conditionally convergent sums.
 
 ## Proof
 
-For an integrable real utility variable, the integral of the absolute folded tail difference is bounded by E|u(X)|, and the tail-integral formula gives F(X)=E[u(X)]. Archimedean Outcomes makes the chart total. Restrict the Folded Expectation comparison to integrable X,Y.
+For an integrable real utility variable, the integral of the absolute folded tail difference is bounded by $E|u(X)|$, and the tail-integral formula gives $F(X)=E[u(X)]$. Archimedean Outcomes makes the chart total. Restrict the Folded Expectation comparison to integrable X,Y.
 
 ## Notes
 

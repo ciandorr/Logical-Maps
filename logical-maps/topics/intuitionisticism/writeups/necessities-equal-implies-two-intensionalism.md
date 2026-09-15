@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Conclusion
 
-- **Propositional intensionalism (□₂).** ∀p,q:t. □₂(p ↔ q) → (p = q)
+- **Propositional intensionalism (□₂).** $\forall p,q:t. \Box _{2}(p \leftrightarrow q) \to (p = q)$
 
 ## Proof
 
-The sentence ∀p,q.(□(p↔q)→p=q) is an II theorem by the zero-argument masking proof in ii-implies-modalized-functionality. Replace □ by □₂ with the selected operator identity using Leibniz’s Law.
+The sentence $\forall p,q.(\Box (p\leftrightarrow q)\to p=q)$ is an II theorem by the zero-argument masking proof in ii-implies-modalized-functionality. Replace $\Box$ by $\Box _{2}$ with the selected operator identity using Leibniz’s Law.
 
 ## Notes
 

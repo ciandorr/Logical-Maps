@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Positive Affine Invariance.** For all real a>0 and b, X ≽ Y iff aX+b ≽ aY+b.
+- **Positive Affine Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $aX+b \succeq aY+b$.
 
 ## Conclusion
 
-- **Scale Invariance.** For every real a>0, X ≽ Y iff aX ≽ aY.
+- **Scale Invariance.** For every real $a>0, X \succeq Y$ iff $aX \succeq aY$.
 
 ## Proof
 
-Set b=0.
+Set $b=0$.
 
 ## Notes
 

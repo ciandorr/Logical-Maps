@@ -62,7 +62,33 @@ pip install -r requirements.txt
 python3 scripts/pmap.py validate && python3 scripts/pmap.py build    # or: make
 ```
 
-`build/<topic>/` is a static site: open `index.html` locally or serve the directory. Write-ups are rendered with pandoc (HTML with MathML; PDF via xelatex when available, `--no-pdf` to skip); without pandoc the HTML falls back to python-markdown.
+`build/<topic>/` is a static site: open `index.html` locally or serve the directory. HTML maths uses locally bundled KaTeX, including when Pandoc is absent. Pandoc renders Markdown when available; otherwise the builder uses Python Markdown. PDFs use xelatex when available (`--no-pdf` to skip).
+
+### Mathematical notation
+
+Use `$...$` or `\(...\)` for inline maths and `$$...$$` or `\[...\]` for displayed
+equations in principle statements, formal formulations, notes, proofs, model
+descriptions and Markdown pages. For example:
+
+```yaml
+statement: |-
+  Every $X$ with $P(u(X)=(-1)^{n+1}(n+1))=\frac{1}{n(n+1)}$,
+  $n\ge 1$, is indifferent to sure utility $\ln 2$.
+```
+
+YAML block scalars (`|-`) or single-quoted strings preserve TeX backslashes.
+Use braces for grouped indices and powers: `X_{n+1}`, `(-1)^{n+1}`.
+KaTeX 0.18.7 supports standard mathematical LaTeX commands; see its
+[supported notation](https://katex.org/docs/supported). Code blocks and inline
+code remain literal. Graph labels retain their existing plain-text notation.
+The same renderer handles details opened after selection and fetched write-ups.
+
+The scripts, stylesheet, WOFF2 fonts and MIT licence live in
+`viewer/vendor/katex/` and are copied into each export's `math/` directory.
+Publish/copy the complete topic directory for offline use. Single-file `--out`
+exports embed these assets. Maths inherits the current dark/colourblind theme.
+Run `python3 scripts/check_math.py` and the UI checks after changing rendering or
+mathematical notation; the check requires Node and the Python requirements.
 
 Catalogue papers in `topics/<topic>/papers.yaml`. The Background tab’s Literature section
 shows citations, external links, and the principles/results/models referencing
@@ -212,7 +238,7 @@ embedded in generated pages and included in the topic downloads.
 across maps and HTML write-ups. Colourblind mode overrides topic palettes with
 one shared light/dark scheme based on [Okabe–Ito](https://jfly.uni-koeln.de/color/#pallet):
 sky blue replaces green, orange replaces red, and independence combines both
-coloured halves. Open nodes keep their normal fill; glyphs repeat the distinctions.
+coloured halves. Open nodes keep their normal fill.
 
 Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with a pdf link when one was built and the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 
@@ -241,18 +267,16 @@ adjacent swaps reduce crossings; separate connected clusters are packed side
 by side. Isolated principles occupy compact labelled bands above the diagram.
 False and True remain visible when their trivial arrows are hidden.
 
-A hollow arrowhead means the converse implication is an open question, so the
-two sides may be equivalent; a filled head means a recorded model or proof
-refutes the converse (arrows into ⊥ are always filled). Each arrow's pop-up
-reports the converse, and for multi-premise arrows whether the remaining
+Arrowheads are filled. Each arrow's details panel reports the converse, and for multi-premise arrows whether the remaining
 premises still suffice without each one. **Transitive reduction** hides an
 arrow when a chain of other displayed arrows already gives it, as in a Hasse
 diagram; a proved arrow is never hidden through a conjectural chain, nothing
 is hidden inside a cycle, and node positions do not change, since the layout
 always uses the full arrow set.
 
-Clicking a principle (on the graph or in the sidebar), or an ∧, shades every other
-principle by its relation to it. Entailed principles use solid green and
+Clicking a principle (on the graph or in the sidebar), or an ∧, shades other
+principles and conjunction circles by their relation to it. Each circle uses its
+full premise set, whether standalone or inside an equivalence box. Entailed principles use solid green and
 excluded principles solid red. A green upper-left triangle means a recorded model
 satisfies both the selection and the principle; a red lower-right triangle means
 a recorded model satisfies the selection and the principle's negation. An
@@ -265,16 +289,15 @@ or consistency witness is available. False and the principles equivalent to it
 are excluded by every consistent selection. The legend always shows four keys:
 **entailed**, **excluded**, **consistent**, and **negation is consistent**, including
 zero counts. A node with both coloured halves contributes to both consistency
-counts. Corner glyphs repeat the distinctions without relying on colour.
+counts. Standalone circles contribute to these counts; an enclosed circle is
+counted through its equivalence box. Hover text gives a concise relation label.
 Proofs come from the arrow engine (displayed
 sources plus background proofs), models from the selected evidence, exactly as
 in the theory explorer; a witness available only outside the selected sources
 is reported as such. **Shift-click** adds or removes principles from a joint
 selection; there is no two-principle limit. Clicking a conjunction selects its
 members. Related, redundant and equivalent principles remain individually
-selected, and shading is relative to the whole selected conjunction. Use
-**Compare with…** to compare that selection with another principle or conjunction,
-with both directions, joint consistency, proofs and witness models shown.
+selected, and shading is relative to the whole selected conjunction.
 A background-inconsistent principle or conjunction highlights every box in the
 excluded colour, with an inconsistency notice. Proof readouts continue to report
 the inconsistent antecedent. The shading survives reading an
@@ -328,7 +351,10 @@ Background consequences always use all recorded proved results, including
 hidden arrows. For example, DTU still supplies Simple Expected Utility in a
 conjectures-only view, so conjecture arrows retain only their additional
 premises. Transitive proofs retain the supporting background derivations.
-Conjectures never supply automatic background facts or exclusions.
+Conjectures never supply automatic background facts or exclusions. The graph
+shows only conjectures still open under all recorded proved evidence and the
+current background. Resolved questions remain available in the Conjectures tab
+under **Show resolved**; they supply neither conjectural arrows nor deductions.
 
 Graph **Conjectures only** hides proved arrows. **Unpublished only** restricts
 arrows to sources classified as online submissions or miscellaneous sources,
@@ -453,8 +479,8 @@ For a model, list every principle you have actually checked, both ways; the engi
 Run `node scripts/check_signed_ui.cjs` with jsdom available to check signed controls,
 URL restoration, contextual contraposition against truth tables, and arrow geometry.
 `scripts/check_hasse_layout_ui.cjs` checks the layout convention (floor, ascending
-arrows, meets, pinned collapses, bands, hollow heads, transitive reduction) on
+arrows, meets, pinned collapses, bands, filled heads, transitive reduction) on
 fixtures and on every graph mode of the built topics; `scripts/check_relations_ui.cjs`
-checks relation shading, comparison, converse readouts and their evidence discipline.
+checks relation shading, multiselection, converse readouts and their evidence discipline.
 `python3 scripts/check_falsity.py` also checks negative backgrounds and agreement
 between the Python and browser engines.

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **L¹ Continuity (random variables).** On variables with real utility levels, if E|u(X_n)−u(X)| → 0 and X_n ≽ Y for every n, then X ≽ Y. Only the upper-section clause is imposed, matching the paper. Distance can be infinite between other pairs.
+- **L¹ Continuity (random variables).** On variables with real utility levels, if $E|u(X_n)- u(X)| \to 0$ and $X_n \succeq Y$ for every n, then $X \succeq Y$. Only the upper-section clause is imposed, matching the paper. Distance can be infinite between other pairs.
 
 ## Conclusion
 
-- **Continuity under Vanishing Shifts.** For real-utility variables X,Y, if X+ε ≽ Y for every ε>0, then X ≽ Y. The shifts act on utility levels, and all the displayed variables must be available. Only this upper-section closure condition is imposed.
+- **Continuity under Vanishing Shifts.** For real-utility variables X,Y, if $X+\epsilon \succeq Y$ for every $\epsilon >0$, then $X \succeq Y$. The shifts act on utility levels, and all the displayed variables must be available. Only this upper-section closure condition is imposed.
 
 ## Proof
 
-Suppose all the eligible positive shifts X+ε satisfy X+ε ≽ Y. Use the actual coupling X_n=X+1/n. Its expected absolute utility difference from X is exactly 1/n, tending to zero. Upper-section L1 Continuity therefore yields X ≽ Y. No shift invariance, law replacement, or lower-section continuity is used.
+Suppose all the eligible positive shifts $X+\epsilon$ satisfy $X+\epsilon \succeq Y$. Use the actual coupling $X_n=X+1/n$. Its expected absolute utility difference from X is exactly 1/n, tending to zero. Upper-section L1 Continuity therefore yields $X \succeq Y$. No shift invariance, law replacement, or lower-section continuity is used.
 
 ## Notes
 

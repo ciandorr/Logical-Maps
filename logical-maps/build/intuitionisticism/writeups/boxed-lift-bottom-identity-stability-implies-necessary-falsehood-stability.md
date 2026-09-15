@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□Stability of =⊥.** □(∀p:t. ¬¬(p = ⊥) → (p = ⊥))
+- **□Stability of =⊥.** $\Box (\forall p:t. \neg \neg (p = \bot ) \to (p = \bot ))$
 
 ## Conclusion
 
-- **□Stability of □¬.** □(∀p:t. ¬¬□¬p → □¬p)
+- **□Stability of □¬.** $\Box (\forall p:t. \neg \neg \Box \neg p \to \Box \neg p)$
 
 ## Proof
 

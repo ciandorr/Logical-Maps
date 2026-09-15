@@ -4,7 +4,7 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
@@ -12,7 +12,7 @@
 
 ## Proof
 
-Theorem 6 supplies $\mathrm{Possibility}_\vee$($\Diamond_\vee$). Theorem 9 applied to that candidate twice supplies $\mathrm{Possibility}_\vee$($\Diamond_\vee$∘$\Diamond_\vee$). If $\Diamond_\vee$($\Diamond_\vee$p), this composition is a witness in the existential definition of $\Diamond_\vee$p. Discharge and generalize p.
+Theorem 6 supplies $\mathrm{Possibility}_\vee$($\Diamond_\vee$). Theorem 9 applied to that candidate twice supplies $\mathrm{Possibility}_\vee$($\Diamond_\vee$$\circ$$\Diamond_\vee$). If $\Diamond_\vee$($\Diamond_\vee$p), this composition is a witness in the existential definition of $\Diamond_\vee$p. Discharge and generalize p.
 
 ## Notes
 

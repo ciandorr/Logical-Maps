@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□PSc (≠⊥).** □(∀p, q : t. (((p ∨ q) ≠ ⊥) → ((p ≠ ⊥) ∨ (q ≠ ⊥))))
+- **□PSc (≠⊥).** $\Box (\forall p, q : t. (((p \lor q) \ne \bot ) \to ((p \ne \bot ) \lor (q \ne \bot ))))$
 
 ## Conclusion
 
-- **□Nonfalsity gives distinct disjunct.** □(∀p,q:t. ¬¬(p ∨ q) → ((p ≠ ⊥) ∨ (q ≠ ⊥)))
+- **□Nonfalsity gives distinct disjunct.** $\Box (\forall p,q:t. \neg \neg (p \lor q) \to ((p \ne \bot ) \lor (q \ne \bot )))$
 
 ## Proof
 

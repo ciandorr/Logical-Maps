@@ -4,11 +4,11 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **4 (□₂).** ∀p:t. □₂p → □₂□₂p
+- **4 (□₂).** $\forall p:t. \Box _{2}p \to \Box _{2}\Box _{2}p$
 
 ## Notes
 

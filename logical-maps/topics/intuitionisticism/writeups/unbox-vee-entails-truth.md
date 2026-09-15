@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□$\Diamond_\vee$ entails Truth.** □(∀p:t. $\Diamond_\vee$p → p)
+- **□$\Diamond_\vee$ entails Truth.** $\Box (\forall p:t$. $\Diamond_\vee$$p \to p$)
 
 ## Conclusion
 
-- **$\Diamond_\vee$ entails Truth.** ∀p:t. $\Diamond_\vee$p → p
+- **$\Diamond_\vee$ entails Truth.** $\forall p:t$. $\Diamond_\vee$$p \to p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

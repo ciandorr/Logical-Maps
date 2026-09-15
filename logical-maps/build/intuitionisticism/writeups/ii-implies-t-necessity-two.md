@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **T (□₂).** ∀p:t. □₂p → p
+- **T (□₂).** $\forall p:t. \Box _{2}p \to p$
 
 ## Proof
 
-Truth is a qualified Necessity₂: its normality and its marriage to Truth reduce to intuitionistic tautologies, all necessitable after closing the proof. Instantiate □₂p at N=Truth to get p. Discharge and generalize p.
+Truth is a qualified $\operatorname{Necessity}_{2}$: its normality and its marriage to Truth reduce to intuitionistic tautologies, all necessitable after closing the proof. Instantiate $\Box _{2}p$ at $N=\operatorname{Truth}$ to get p. Discharge and generalize p.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Universal self-necessitation.** □(∀p:t. p → □p)
+- **□Universal self-necessitation.** $\Box (\forall p:t. p \to \Box p)$
 
 ## Conclusion
 
-- **Universal self-necessitation.** ∀p:t. p → □p
+- **Universal self-necessitation.** $\forall p:t. p \to \Box p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

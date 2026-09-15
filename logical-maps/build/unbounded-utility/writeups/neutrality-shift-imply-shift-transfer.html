@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Symmetric neutrality and shifts suffice for transfer across mixtures</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Symmetric neutrality and shifts suffice for transfer across mixtures</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,34 +252,51 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Symmetric neutrality and shifts suffice for transfer across mixtures</h1>
-</header>
-<p><strong>Source and work accounting.</strong> The paired-reflection argument is Zachary Goodsell’s <em>Symmetries of value</em>, Theorem 3, pp. 25–26. The contribution here is a small premise reduction and an explicit cancellation proof, recorded by GPT-6 (Codex), 9 September 2026. No independent checker or Lean certification is asserted.</p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric neutrality and shifts suffice for transfer across mixtures</h1></header><p><strong>Source and work accounting.</strong> The paired-reflection argument is Zachary Goodsell’s <em>Symmetries of value</em>, Theorem 3, pp. 25–26. The contribution here is a small premise reduction and an explicit cancellation proof, recorded by GPT-6 (Codex), 9 September 2026. No independent checker or Lean certification is asserted.</p>
 <p>Assume Rich Outcomes, Stochastic Equivalence, Simple EU, Mixture Independence, Symmetric Neutrality and Shift Invariance. Totality and Scale Invariance are not used. Work in the normalized real utility chart.</p>
-<p>For a gamble <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> and real <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>, the law of</p>
-<p>[ M_{1/2}(X+c/2,-X-c/2) ]</p>
-<p>is symmetric. Neutrality makes this gamble indifferent to zero. Shift both outcomes by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">c/2</annotation></semantics></math>. Shift Invariance, followed by Stochastic Equivalence to identify the resulting fixed-lift realization, gives</p>
-<p>[ M_{1/2}(X+c,-X)c/2.  ]</p>
-<p>Fix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>p</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;p&lt;1</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>∈</mo><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle></mrow><annotation encoding="application/x-tex">b\in\mathbb R</annotation></semantics></math>, and put</p>
-<p>[ L=M_p(X+b/p,Y),R=M_p(X,Y+b/(1-p)). ]</p>
-<p>The law of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>L</mi><mo>,</mo><mo>−</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_{1/2}(L,-R)</annotation></semantics></math> can be regrouped as</p>
-<p>[ M_p( M_{1/2}(X+b/p,-X), M_{1/2}(Y,-Y-b/(1-p)) ). ]</p>
-<p>By (1), the two inner mixtures are indifferent to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">b/(2p)</annotation></semantics></math> and</p>
-<p>[ -, ]</p>
+<p>For a gamble <span class="math inline">X</span> and real <span class="math inline">c</span>, the law of</p>
+<p><span class="math display">
+M_{1/2}(X+c/2,-X-c/2)
+</span></p>
+<p>is symmetric. Neutrality makes this gamble indifferent to zero. Shift both outcomes by <span class="math inline">c/2</span>. Shift Invariance, followed by Stochastic Equivalence to identify the resulting fixed-lift realization, gives</p>
+<p><span class="math display">
+M_{1/2}(X+c,-X)\sim c/2. \tag{1}
+</span></p>
+<p>Fix <span class="math inline">0&lt;p&lt;1</span> and <span class="math inline">b\in\mathbb R</span>, and put</p>
+<p><span class="math display">
+L=M_p(X+b/p,Y),\qquad R=M_p(X,Y+b/(1-p)).
+</span></p>
+<p>The law of <span class="math inline">M_{1/2}(L,-R)</span> can be regrouped as</p>
+<p><span class="math display">
+M_p\left(
+ M_{1/2}(X+b/p,-X),
+ M_{1/2}(Y,-Y-b/(1-p))
+\right).
+</span></p>
+<p>By (1), the two inner mixtures are indifferent to <span class="math inline">b/(2p)</span> and</p>
+<p><span class="math display">
+-\frac{b}{2(1-p)},
+</span></p>
 <p>respectively. Mixture Independence propagates these indifferences; Simple EU makes their outer mixture indifferent to zero, since its expectation is</p>
-<p>[ p+(1-p)=0. ]</p>
-<p>Consequently <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>L</mi><mo>,</mo><mo>−</mo><mi>R</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">M_{1/2}(L,-R)\sim0</annotation></semantics></math>. Symmetric Neutrality also gives</p>
-<p>[ M_{1/2}(R,-R)0. ]</p>
+<p><span class="math display">
+p\frac{b}{2p}+(1-p)\frac{-b}{2(1-p)}=0.
+</span></p>
+<p>Consequently <span class="math inline">M_{1/2}(L,-R)\sim0</span>. Symmetric Neutrality also gives</p>
+<p><span class="math display">
+M_{1/2}(R,-R)\sim0.
+</span></p>
 <p>Transitivity of indifference and Mixture Independence cancel the common</p>
-<p>[ -R ]</p>
-<p>branch and yield <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>∼</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">L\sim R</annotation></semantics></math>, which is Shift Transfer. Every regrouping above is an identity of laws and uses Stochastic Equivalence before being used as a preference identity. Rich Outcomes supplies the finite constants and all the displayed translations.</p>
+<p><span class="math display">
+-R
+</span></p>
+<p>branch and yield <span class="math inline">L\sim R</span>, which is Shift Transfer. Every regrouping above is an identity of laws and uses Stochastic Equivalence before being used as a preference identity. Rich Outcomes supplies the finite constants and all the displayed translations.</p>
 <p>Under DU this gives a useful sufficient route to Simple Relative Expectation: Symmetric Neutrality plus Shift Invariance suffice. The source theorem’s full negative-affine package already supplies them, but its scale component is not needed for this conclusion. This is an account of work performed for the map, not a claim of priority in the literature.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 3, pp. 25–26: paired-reflection and centering argument</li>
 </ul>
-</body>
-</html>
+</body></html>

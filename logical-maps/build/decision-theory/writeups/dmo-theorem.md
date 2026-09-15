@@ -4,20 +4,20 @@
 
 ## Premises
 
-- **Transitivity.** For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.
-- **Independence.** For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.
-- **Closed-graph continuity.** The set {(p, q) ∈ Δ(X) × Δ(X) : p ≽ q} is closed in the product topology.
+- **Transitivity.** For all $p, q, r \in \Delta (X)$: if $p \succeq q$ and $q \succeq r$ then $p \succeq r$.
+- **Independence.** For all $p, q, r \in \Delta (X)$ and $\lambda \in (0,1]: p \succeq q$ if and only if $\lambda p + (1- \lambda )r \succeq \lambda q + (1- \lambda )r$.
+- **Closed-graph continuity.** The set $\{(p, q) \in \Delta (X) \times \Delta (X) : p \succeq q\}$ is closed in the product topology.
 
 ## Conclusion
 
-- **Expected multi-utility representation.** There is a set U of functions u : X → ℝ such that for all p, q ∈ Δ(X): p ≽ q if and only if EU_u(p) ≥ EU_u(q) for every u ∈ U.
+- **Expected multi-utility representation.** There is a set U of functions $u : X \to \mathbb{R}$ such that for all $p, q \in \Delta (X): p \succeq q$ if and only if $\operatorname{EU}_u(p) \ge \operatorname{EU}_u(q)$ for every $u \in U$.
 
 ## Proof
 
 Dubra–Maccheroni–Ok, Theorem 1, for compact metric X (finite X is a
-special case): a reflexive transitive relation on Δ(X) satisfying
+special case): a reflexive transitive relation on $\Delta (X)$ satisfying
 independence and closed-graph continuity has an expected multi-utility
-representation. The proof identifies ≽ with a closed convex cone of
+representation. The proof identifies $\succeq$ with a closed convex cone of
 signed measures and takes U to be the dual cone.
 
 ## Notes

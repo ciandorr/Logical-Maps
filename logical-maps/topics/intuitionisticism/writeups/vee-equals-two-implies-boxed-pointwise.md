@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **$\Diamond_\vee$ = ◇₂.** $\Diamond_\vee$ = ◇₂
+- **$\Diamond_\vee$ = ◇₂.** $\Diamond_\vee$ $= \Diamond _{2}$
 
 ## Conclusion
 
-- **□$\Diamond_\vee$ entails ◇₂.** □(∀p:t. $\Diamond_\vee$p → ◇₂p)
+- **□$\Diamond_\vee$ entails ◇₂.** $\Box (\forall p:t$. $\Diamond_\vee$$p \to \Diamond _{2}p$)
 
 ## Proof
 
-The reflexive sentence ∀p.($\Diamond_\vee$p→$\Diamond_\vee$p) is an assumption-free theorem and may be necessitated. Substitute the selected operator identity into the appropriate occurrences inside that boxed sentence, using Leibniz’s Law. This yields the entire boxed pointwise implication in the conclusion.
+The reflexive sentence $\forall p$.($\Diamond_\vee$$p\to$$\Diamond_\vee$p) is an assumption-free theorem and may be necessitated. Substitute the selected operator identity into the appropriate occurrences inside that boxed sentence, using Leibniz’s Law. This yields the entire boxed pointwise implication in the conclusion.
 
 ## Notes
 

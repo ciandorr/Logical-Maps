@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Archimedean Outcomes.** For any three sure outcomes a ≻ b ≻ c, some nontrivial mixture of the outer two is equally good as the intermediate one: b ~ M_p(a,c) for some p ∈ (0,1). Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
-- **Stochastic Dominance.** If P(X>o) ≥ P(Y>o) for every outcome threshold o, then X ≽ Y; if one threshold inequality is strict, X ≻ Y. Thresholds use the sure-outcome order.
+- **Archimedean Outcomes.** For any three sure outcomes $a \succ b \succ c$, some nontrivial mixture of the outer two is equally good as the intermediate one: $b \sim M_p(a,c)$ for some $p \in (0,1)$. Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
+- **Stochastic Dominance.** If $P(X>o) \ge P(Y>o)$ for every outcome threshold o, then $X \succeq Y$; if one threshold inequality is strict, $X \succ Y$. Thresholds use the sure-outcome order.
 
 ## Conclusion
 
-- **Statewise Dominance.** If X ≥ Y almost surely in the sure-outcome order, then X ≽ Y; if also P(X>Y)>0, then X ≻ Y.
+- **Statewise Dominance.** If $X \ge Y$ almost surely in the sure-outcome order, then $X \succeq Y$; if also $P(X>Y)>0$, then $X \succ Y$.
 
 ## Proof
 
-Use the real outcome chart supplied by Archimedean Outcomes. If X≥Y almost surely, {Y>t}⊆{X>t} modulo null events. If P(X>Y)>0, the countable family of rational cuts contains a cut with P(Y≤t<X)>0; approximate by a realized outcome threshold if necessary. The strict tail inequality then gives strict preference.
+Use the real outcome chart supplied by Archimedean Outcomes. If $X\ge Y$ almost surely, $\{Y>t\}\subseteq \{X>t\}$ modulo null events. If $P(X>Y)>0$, the countable family of rational cuts contains a cut with $P(Y\le t<X)>0$; approximate by a realized outcome threshold if necessary. The strict tail inequality then gives strict preference.
 
 ## Notes
 

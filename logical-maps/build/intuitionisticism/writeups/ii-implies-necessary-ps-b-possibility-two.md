@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSb (◇₂).** □(¬◇₂(⊥))
+- **□PSb (◇₂).** $\Box (\neg \Diamond _{2}(\bot ))$
 
 ## Proof
 
-If ◇₂⊥, its defining witness P has Possibility₂(P) and P⊥. The candidate condition includes □¬P⊥, hence ¬P⊥, a contradiction. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for □.
+If $\Diamond _{2}\bot$, its defining witness P has $\operatorname{Possibility}_{2}(P)$ and $P\bot$. The candidate condition includes $\Box \neg P\bot$, hence $\neg P\bot , a$ contradiction. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for $\Box$.
 
 ## Notes
 

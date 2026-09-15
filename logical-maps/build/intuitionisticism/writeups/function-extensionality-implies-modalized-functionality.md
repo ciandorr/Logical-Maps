@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Function extensionality.** For every σ,τ: ∀f,g:στ. (∀x:σ. f x = g x) → (f = g)
+- **Function extensionality.** For every $\sigma ,\tau : \forall f,g:\sigma \tau . (\forall x:\sigma . f x = g x) \to (f = g)$
 
 ## Conclusion
 
-- **Modalized functionality.** For every σ,τ: ∀f,g:στ. □(∀x:σ. f x = g x) → (f = g)
+- **Modalized functionality.** For every $\sigma ,\tau : \forall f,g:\sigma \tau . \Box (\forall x:\sigma . f x = g x) \to (f = g)$
 
 ## Proof
 
-Fix arbitrary σ,τ and f,g:σ→τ. Under □∀x.fx=gx, T gives ∀x.fx=gx. Use the selected function-extensionality instance at exactly these σ,τ to get f=g. Discharge, generalize f,g, and then observe that σ,τ were arbitrary. This supplies every target instance.
+Fix arbitrary $\sigma ,\tau$ and $f,g:\sigma \to \tau$. Under $\Box \forall x.fx=gx, T$ gives $\forall x.fx=gx$. Use the selected function-extensionality instance at exactly these $\sigma ,\tau$ to get $f=g$. Discharge, generalize f,g, and then observe that $\sigma ,\tau$ were arbitrary. This supplies every target instance.
 
 ## Notes
 

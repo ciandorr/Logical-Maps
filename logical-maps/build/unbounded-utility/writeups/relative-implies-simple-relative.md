@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if E|u(X)−u(Y)|<∞, then X ≽ Y iff E[u(X)−u(Y)] ≥ 0. Their individual expectations may both be undefined.
+- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if $E|u(X)- u(Y)|<\infty$, then $X \succeq Y$ iff $E[u(X)- u(Y)] \ge 0$. Their individual expectations may both be undefined.
 
 ## Conclusion
 
-- **Simple Relative Expectation.** For real-utility variables X,Y on the same probability space, if u(X)−u(Y) takes finitely many values, X ≽ Y iff E[u(X)−u(Y)] ≥ 0. X and Y themselves need not be simple or integrable.
+- **Simple Relative Expectation.** For real-utility variables X,Y on the same probability space, if $u(X)- u(Y)$ takes finitely many values, $X \succeq Y$ iff $E[u(X)- u(Y)] \ge 0$. X and Y themselves need not be simple or integrable.
 
 ## Proof
 

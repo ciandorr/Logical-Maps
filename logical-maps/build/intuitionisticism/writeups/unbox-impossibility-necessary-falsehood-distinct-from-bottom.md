@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Impossibility ⇒ necessary falsehood (≠⊥).** □(∀p:t. ¬(p ≠ ⊥) → □¬p)
+- **□Impossibility ⇒ necessary falsehood (≠⊥).** $\Box (\forall p:t. \neg (p \ne \bot ) \to \Box \neg p)$
 
 ## Conclusion
 
-- **Impossibility ⇒ necessary falsehood (≠⊥).** ∀p:t. ¬(p ≠ ⊥) → □¬p
+- **Impossibility ⇒ necessary falsehood (≠⊥).** $\forall p:t. \neg (p \ne \bot ) \to \Box \neg p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

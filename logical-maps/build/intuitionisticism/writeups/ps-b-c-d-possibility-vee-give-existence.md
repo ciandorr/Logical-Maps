@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **PSb ($\Diamond_\vee$).** $\Diamond_\vee$ does not hold of the contradiction ⊥.
-- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$(p ∨ q) implies $\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q).
-- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSb ($\Diamond_\vee$).** $\Diamond_\vee$ does not hold of the contradiction $\bot$.
+- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$$(p \lor q)$ implies $\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q).
+- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **A PSb–PSc–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f)
+- **A PSb–PSc–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f)$
 
 ## Proof
 

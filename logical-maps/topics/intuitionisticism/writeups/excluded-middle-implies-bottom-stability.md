@@ -8,11 +8,11 @@
 
 ## Conclusion
 
-- **Stability of =⊥.** ∀p:t. ¬¬(p = ⊥) → (p = ⊥)
+- **Stability of =⊥.** $\forall p:t. \neg \neg (p = \bot ) \to (p = \bot )$
 
 ## Proof
 
-Fix p and instantiate the selected quantified excluded-middle formula at the proposition p=⊥. Under ¬¬(p=⊥), its negative disjunct is impossible, so p=⊥. Discharge and generalize p. The excluded-middle assumption is not necessitated.
+Fix p and instantiate the selected quantified excluded-middle formula at the proposition $p=\bot$. Under $\neg \neg (p=\bot )$, its negative disjunct is impossible, so $p=\bot$. Discharge and generalize p. The excluded-middle assumption is not necessitated.
 
 ## Notes
 

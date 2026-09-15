@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSb (◇₂).** □(¬◇₂(⊥))
+- **□PSb (◇₂).** $\Box (\neg \Diamond _{2}(\bot ))$
 
 ## Conclusion
 
-- **PSb (◇₂).** ◇₂ does not hold of the contradiction ⊥.
+- **PSb (◇₂).** $\Diamond _{2}$ does not hold of the contradiction $\bot$.
 
 ## Proof
 
-Apply the standing theorem □A → A to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
+Apply the standing theorem $\Box A \to A$ to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
 
 ## Notes
 

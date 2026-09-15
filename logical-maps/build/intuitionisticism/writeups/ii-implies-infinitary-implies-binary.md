@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **Infinitary candidates distribute over ∨.** ∀P:tt. $\mathrm{PSc}^{t}_{\infty}$(P) → PSc(P)
+- **Infinitary candidates distribute over ∨.** $\forall P:tt$. $\mathrm{PSc}^{t}_{\infty}$$(P) \to \operatorname{PSc}(P)$
 
 ## Notes
 
-The suggested predicate F = λr.(r=p∨r=q) has ∃r.Fr provably true. Substituting it in the displayed Eq. (43) does not immediately give distribution over p∨q. Check the intended typing/formulation before promoting this claim.
+The suggested predicate $F = \lambda r.(r=p\lor r=q)$ has $\exists r$.Fr provably true. Substituting it in the displayed Eq. (43) does not immediately give distribution over $p\lor q$. Check the intended typing/formulation before promoting this claim.
 
 ## Sources
 

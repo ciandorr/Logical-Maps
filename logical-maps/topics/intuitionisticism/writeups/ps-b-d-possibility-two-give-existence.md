@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **PSb (◇₂).** ◇₂ does not hold of the contradiction ⊥.
-- **PSd (◇₂).** For every p and q, if ◇₂(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSb (◇₂).** $\Diamond _{2}$ does not hold of the contradiction $\bot$.
+- **PSd (◇₂).** For every p and q, if $\Diamond _{2}(p)$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **A PSb–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSd(f)
+- **A PSb–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f)$
 
 ## Proof
 
-Use the defined operator ◇₂ as the witness f in the existential formula.
+Use the defined operator $\Diamond _{2}$ as the witness f in the existential formula.
 
 ## Notes
 

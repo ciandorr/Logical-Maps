@@ -4,25 +4,25 @@
 
 ## Package
 
-- **Completeness.** For all p, q ∈ Δ(X): p ≽ q or q ≽ p.
-- **Transitivity.** For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.
-- **Independence.** For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.
-- **¬ Mixture continuity.** For all p, q, r ∈ Δ(X) the sets {λ ∈ [0,1] : λp + (1−λ)q ≽ r} and {λ ∈ [0,1] : r ≽ λp + (1−λ)q} are closed.
-- **¬ Archimedean.** For all p, q, r ∈ Δ(X): if p ≻ q ≻ r then there are α, β ∈ (0,1) with αp + (1−α)r ≻ q and q ≻ βp + (1−β)r.
+- **Completeness.** For all $p, q \in \Delta (X): p \succeq q$ or $q \succeq p$.
+- **Transitivity.** For all $p, q, r \in \Delta (X)$: if $p \succeq q$ and $q \succeq r$ then $p \succeq r$.
+- **Independence.** For all $p, q, r \in \Delta (X)$ and $\lambda \in (0,1]: p \succeq q$ if and only if $\lambda p + (1- \lambda )r \succeq \lambda q + (1- \lambda )r$.
+- **¬ Mixture continuity.** For all $p, q, r \in \Delta (X)$ the sets $\{\lambda \in [0,1] : \lambda p + (1- \lambda )q \succeq r\}$ and $\{\lambda \in [0,1] : r \succeq \lambda p + (1- \lambda )q\}$ are closed.
+- **¬ Archimedean.** For all $p, q, r \in \Delta (X)$: if $p \succ q \succ r$ then there are $\alpha , \beta \in (0,1)$ with $\alpha p + (1- \alpha )r \succ q$ and $q \succ \beta p + (1- \beta )r$.
 
 ## Construction
 
-Lexicographic expected utility. With X = {a, b, c} let p ≽ q iff
-p(a) > q(a), or p(a) = q(a) and p(b) ≥ q(b). This is complete and
-transitive (a lexicographic order on ℝ²), and satisfies independence
-because mixing with r multiplies the vector of differences by λ, which
-preserves lexicographic sign. But {λ : λδ_a + (1−λ)δ_c ≽ δ_b} = (0, 1],
+Lexicographic expected utility. With $X = \{a, b, c\}$ let $p \succeq q$ iff
+$p(a) > q(a)$, or $p(a) = q(a)$ and $p(b) \ge q(b)$. This is complete and
+transitive (a lexicographic order on $\mathbb{R} ^{2}$), and satisfies independence
+because mixing with r multiplies the vector of differences by $\lambda$, which
+preserves lexicographic sign. But $\{\lambda : \lambda \delta _a + (1- \lambda )\delta _c \succeq \delta _b\} = (0, 1]$,
 which is not closed.
 
-The same lexicographic order (p ≽ q iff p(a) > q(a), or p(a) = q(a) and
-p(b) ≥ q(b)). Here δ_a ≻ δ_b ≻ δ_c, but every mixture βδ_a + (1−β)δ_c
-with β > 0 puts positive weight on a and so is strictly preferred to
-δ_b; no β with δ_b ≻ βδ_a + (1−β)δ_c exists.
+The same lexicographic order $(p \succeq q$ iff $p(a) > q(a)$, or $p(a) = q(a)$ and
+$p(b) \ge q(b)$). Here $\delta _a \succ \delta _b \succ \delta _c$, but every mixture $\beta \delta _a + (1- \beta )\delta _c$
+with $\beta > 0$ puts positive weight on a and so is strictly preferred to
+$\delta _b$; no $\beta$ with $\delta _b \succ \beta \delta _a + (1- \beta )\delta _c$ exists.
 
 ## Notes
 

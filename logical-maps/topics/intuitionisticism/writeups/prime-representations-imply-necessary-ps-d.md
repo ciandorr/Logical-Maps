@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Prime representation of $\Diamond_\vee$.** $\Diamond_\vee$ = (λp:t. ∃w:t. Prime(w) ∧ □(w → p))
-- **Prime representation of □.** (λp:t. □p) = (λp:t. ∀w:t. Prime(w) → □(w → p))
+- **Prime representation of $\Diamond_\vee$.** $\Diamond_\vee$ $= (\lambda p:t. \exists w:t. \operatorname{Prime}(w) \land \Box (w \to p))$
+- **Prime representation of □.** $(\lambda p:t. \Box p) = (\lambda p:t. \forall w:t. \operatorname{Prime}(w) \to \Box (w \to p))$
 
 ## Conclusion
 
-- **□PSd ($\Diamond_\vee$).** □(∀p,q:t. (($\Diamond_\vee$(p) → □q) → □(p → q)))
+- **□PSd ($\Diamond_\vee$).** $\Box (\forall p,q:t$. (($\Diamond_\vee$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Notes
 
-The paper says PSd is recovered immediately by the quantified intuitionistic implication in Eq. (41). The necessary entailment and outer □ steps, under the two operator-identity assumptions, have not been fully transcribed here.
+The paper says PSd is recovered immediately by the quantified intuitionistic implication in Eq. (41). The necessary entailment and outer $\Box$ steps, under the two operator-identity assumptions, have not been fully transcribed here.
 
 ## Sources
 

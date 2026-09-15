@@ -1,10 +1,9 @@
 // NODE_PATH=/path/to/node_modules node scripts/check_relations_ui.cjs
 // Non-implications on the graph: clicking a principle shades every other
 // principle by its relation (entailed, excluded, consistent, negation consistent, independent, open),
-// "Compare with…" reads two principles against each other,
-// arrow popups report the converse and premise necessity, and hollow
-// arrowheads mark open converses. Nothing here may assert more than the
-// engine knows.
+// Shift-click extends the selection, arrow details report the converse and
+// premise necessity, and every arrowhead is filled. Nothing here may assert
+// more than the engine knows.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..');
@@ -52,16 +51,15 @@ try{
   assert.equal(fill('d'),'url(#split-independent)');
   for(const kind of ['consistent','separated','independent']) assert.ok(d.querySelector(`#split-${kind}`));
   assert.deepEqual(rel('z'),['rel-excluded'],'False and its background-equivalent principles are excluded by A');
-  assert.equal(node('z').querySelector('.rel-mark').textContent,'¬');
-  assert.match(node('z').querySelector('title').textContent,/False[\s\S]*excluded by A/);
-  assert.equal(node('b').querySelector('.rel-mark').textContent,'⇒');
-  assert.equal(node('e').querySelector('.rel-mark').textContent,'?');
-  assert.match(node('d').querySelector('title').textContent,/independent of/);
+  assert.equal(d.querySelector('.rel-mark'),null,'Relation colours do not have redundant corner glyphs');
+  assert.equal(node('z').querySelector('title').textContent,'Excluded by selection');
+  assert.equal(node('d').querySelector('title').textContent,'Independent of selection');
   assert.equal(legend().hidden,false);
   assert.match(legend().textContent,/Relative to A:/);
   fixedKeys(d);
-  for(const key of ['entailed 1','excluded 2','consistent 2','negation is consistent 3']) assert.ok(legend().textContent.includes(key),`legend shows ${key}: ${legend().textContent}`);
-  assert.match(pop().textContent,/shades each principle/);
+  for(const key of ['entailed 1','excluded 2','consistent 2','negation is consistent 4']) assert.ok(legend().textContent.includes(key),`legend shows ${key}: ${legend().textContent}`);
+  assert.equal(d.querySelector('[data-compare-arm]'),null);
+  assert.ok([...legend().querySelectorAll('.key i')].every(i=>!i.textContent),'Legend swatches use colour alone');
 
   // Reading an arrow keeps the shading; hovering dims gently rather than hiding it.
   w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))");
@@ -82,39 +80,29 @@ try{
   w.eval("selectGraphEdge(graphEdgesByKey.get('acf'))");
   assert.match(pop().textContent,/Without each premise[\s\S]*A[\s\S]*consistent/,'Dropping C leaves a satisfiable A');
 
-  // Compare explicitly; Shift-click now extends the joint selection.
+  // Shift-click selects the joint conjunction and links its consistency evidence.
   w.select({type:'principle',id:'a'});
-  w.armCompare(); w.handleGraphClick(node('d').querySelector('rect'));
-  assert.equal(w.eval('state.selected.type'),'compare');
-  assert.equal(w.eval('state.selected.a+"|"+state.selected.b'),'a|d');
-  assert.match(pop().textContent,/A ⇒ D[\s\S]*refuted by a model/);
-  assert.match(pop().textContent,/D ⇒ A[\s\S]*open/);
-  assert.match(pop().textContent,/D is independent of A/);
-  assert.equal(fill('d'),'url(#split-independent)','Comparison preserves the coloured halves');
-  assert.match(pop().textContent,/A ∧ D[\s\S]*consistent/);
-  assert.ok([...pop().querySelectorAll('button[data-model]')].some(b=>b.dataset.model==='m1'),'The separating model is linked');
-  assert.ok([...pop().querySelectorAll('button[data-model]')].some(b=>b.dataset.model==='m2'),'The joint witness is linked');
+  assert.equal(w.eval("expressionStatus('a','d').status"),'independent');
+  assert.equal(w.eval("expressionStatus('d','a').status"),'open');
+  w.handleGraphClick(node('d').querySelector('rect'),true);
+  assert.equal(w.eval('state.selected.type'),'selection');
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(state.focus)')),['a','d']);
+  assert.match(pop().textContent,/A ∧ D[\s\S]*Joint consistency[\s\S]*consistent/);
+  assert.ok(pop().querySelector('button[data-model="m2"]'),'The joint witness is linked');
   assert.ok(node('a').classList.contains('selected')&&node('d').classList.contains('selected'));
-  assert.deepEqual(rel('b'),['rel-entailed'],'Shading stays relative to A while comparing');
-
-  // Compare with… arms the next principle click, from the graph or the sidebar.
-  w.select({type:'principle',id:'a'});
-  pop().querySelector('button[data-compare-arm]').click();
-  assert.equal(w.eval('state.compareArmed'),true);
-  assert.match(legend().textContent,/Click a principle or conjunction to compare/);
+  assert.deepEqual(rel('b'),['rel-entailed'],'The whole conjunction implies B');
+  // A regular click replaces the selection; sidebar modifiers add to it.
   d.querySelector('#pr-filters button[data-principle="b"]').click();
-  assert.equal(w.eval('state.selected.type'),'compare');
-  assert.match(pop().textContent,/A ⇒ B[\s\S]*proved/);
-  assert.match(pop().textContent,/B ⇒ A[\s\S]*open/);
-  assert.equal(w.eval('state.compareArmed'),false);
-  w.armCompare(); w.select({type:'principle',id:'f'});
-  assert.doesNotMatch(pop().textContent,/F is independent of A/,'One countermodel does not establish independence');
+  assert.equal(w.eval('state.focus'),'b');
+  d.querySelector('#pr-filters button[data-principle="a"]').dispatchEvent(new w.MouseEvent('click',{bubbles:true,shiftKey:true}));
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(state.focus)')),['b','a']);
+  assert.equal(w.eval("selectionRelation('a','f').kind"),'separated','One countermodel does not establish independence');
 
   // An inconsistent focus marks every box as excluded without changing proofs.
   w.select({type:'principle',id:'z'});
   assert.ok(d.getElementById('graph').classList.contains('inconsistent-selection'));
   for(const n of d.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'));
-  assert.equal(legend().querySelector('.excluded .n').textContent,String(d.querySelectorAll('#nodes .node').length));
+  assert.equal(legend().querySelector('.excluded .n').textContent,String(d.querySelectorAll('#nodes .node, #nodes .junction:not([data-parent])').length));
   assert.equal(w.eval("expressionStatus('z','a').status"),'inconsistent','The red display does not fabricate implication proofs');
   assert.match(legend().textContent,/inconsistent with the background/);
   fixedKeys(d);
@@ -129,12 +117,13 @@ try{
   assert.equal(legend().hidden,true);
   assert.deepEqual(rel('b'),[]);
 
-  // Hollow arrowheads: G ⇒ A has a model-refuted converse, H ⇒ A an open one.
+  // Open and refuted converses use the same filled arrowhead.
   const marker=key=>d.querySelector(`[data-edge="${key}"] .edge`).getAttribute('marker-end');
-  assert.ok(!marker('ga').includes('-open'));
-  assert.ok(marker('ha').includes('-open'));
-  assert.match(d.querySelector('[data-edge="ha"] title').textContent,/Converse open/);
-  assert.match(d.querySelector('[data-edge="ga"] title').textContent,/Converse refuted/);
+  assert.equal(marker('ga'),marker('ha'));
+  assert.ok(!marker('ha').includes('-open'));
+  assert.equal(d.querySelector('marker[id$="-open"]'),null);
+  assert.doesNotMatch(d.querySelector('[data-edge="ha"] title').textContent,/Converse/);
+  assert.doesNotMatch(d.querySelector('[data-edge="ga"] title').textContent,/Converse/);
   assert.ok(node('z').classList.contains('falsity'),'Z belongs to the False equivalence box');
   assert.equal(d.querySelector('[data-edge="zf"]'),null,'No arrow is drawn inside an equivalence box');
 
@@ -142,17 +131,18 @@ try{
   d.querySelector('[data-source-filter="submission"]').click();
   w.select({type:'principle',id:'a'});
   assert.deepEqual(rel('d'),['rel-independent']);
-  assert.match(node('d').querySelector('title').textContent,/outside the selected sources/);
+  assert.equal(node('d').querySelector('title').textContent,'Independent of selection (outside selected sources)');
   w.select({type:'principle',id:'a'});
-  w.armCompare(); w.select({type:'principle',id:'d'});
-  assert.match(pop().textContent,/A ⇒ D[\s\S]*refuted by a model[\s\S]*outside the selected sources/);
+  assert.equal(w.eval("expressionStatus('a','d').limited"),true);
+  w.select({type:'principle',id:'d'},true);
+  assert.match(pop().textContent,/Joint consistency[\s\S]*consistent[\s\S]*outside the selected sources/);
   d.querySelector('[data-source-filter="submission"]').click();
 
-  // A negative literal compares through the same machinery.
+  // Negative literals can join the selection.
   w.eval("state.negativeShown.add('d');refreshPrincipleControls();renderAll(true)");
   w.select({type:'principle',id:'a'});
   assert.deepEqual(rel('!d'),['rel-independent'],'M1 and M2 witness both values of ¬D with A');
-  w.armCompare(); w.select({type:'principle',id:'!d'});
+  w.select({type:'principle',id:'!d'},true);
   assert.match(pop().textContent,/A ∧ ¬D[\s\S]*consistent/,'M1 witnesses A ∧ ¬D');
 
   // The relation query never uses conjectures as proofs.
@@ -193,5 +183,5 @@ try{
   assert.match(real.document.getElementById('relation-legend').textContent,/Relative to Folded Expectation:/);
   assert.ok(real.document.querySelector('#nodes [data-falsity]').classList.contains('rel-excluded'));
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: fixed four-key legend, False excluded, inconsistent selections exclude every box, unchanged proof status, consistency counts, comparison, filtered witnesses, and Folded Expectation.');
+  console.log('PASS: fixed four-key legend, False excluded, inconsistent selections exclude every box, unchanged proof status, consistency counts, multiselection, filled arrowheads, filtered witnesses, and Folded Expectation.');
 }finally{pages.forEach(p=>p.window.close());}

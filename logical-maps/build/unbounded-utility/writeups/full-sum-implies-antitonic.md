@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Full Sum Invariance.** For all X,Y,Z, with arbitrary dependence, X ≽ Y iff X+Z ≽ Y+Z.
+- **Full Sum Invariance.** For all X,Y,Z, with arbitrary dependence, $X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
-- **Antitonic Sum Invariance.** If X and Z are antitonic, and Y and Z are antitonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.
+- **Antitonic Sum Invariance.** If X and Z are antitonic, and Y and Z are antitonic, then $X \succeq Y$ iff $X+Z \succeq Y+Z$. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.
 
 ## Proof
 

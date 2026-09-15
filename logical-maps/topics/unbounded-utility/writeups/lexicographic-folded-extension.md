@@ -2,7 +2,7 @@
 
 **Result.** There exists a model of DTU + Folded Expectation + Relative Expectation
 + CDF-Area Extension + Reflection Anti-Invariance + Shift Invariance which fails
-L¹ Continuity. Scale Invariance, the alternating St Petersburg evaluation and
+$L^{1}$ Continuity. Scale Invariance, the alternating St Petersburg evaluation and
 Uniqueness of Negative Self-Similarity fail too.
 
 The construction assigns the alternating gamble a value *infinitesimally above*
@@ -224,7 +224,7 @@ says $A\not\sim q$.
 Goodsell supplies the base area-preorder idea, the folded-tail evaluation
 principle, the alternating-gamble recursion and the use of total cone
 extensions. The present model changes the ordered space to folded profiles
-modulo all zero-integral L¹ profiles, adds the compatible infinitesimal plane,
+modulo all zero-integral $L^{1}$ profiles, adds the compatible infinitesimal plane,
 and proves the explicit continuity separation. Its direct source is **Misc.**,
 with GPT-6 (Codex) credited for that adaptation. This is an account of work
 performed for the map, not a claim of literature priority.

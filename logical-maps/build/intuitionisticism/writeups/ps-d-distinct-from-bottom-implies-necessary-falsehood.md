@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **PSd (≠⊥).** For every p and q, if p ≠ ⊥ implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd (≠⊥).** For every p and q, if $p \ne \bot$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **Impossibility ⇒ necessary falsehood (≠⊥).** ∀p:t. ¬(p ≠ ⊥) → □¬p
+- **Impossibility ⇒ necessary falsehood (≠⊥).** $\forall p:t. \neg (p \ne \bot ) \to \Box \neg p$
 
 ## Proof
 
-Fix p and assume ¬(p≠⊥). Then (p≠⊥)→□⊥ by explosion. Instantiate PSd at p and q=⊥ to get □(p→⊥), which is □¬p. Discharge and generalize p.
+Fix p and assume $\neg (p\ne \bot )$. Then $(p\ne \bot )\to \Box \bot$ by explosion. Instantiate PSd at p and $q=\bot$ to get $\Box (p\to \bot )$, which is $\Box \neg p$. Discharge and generalize p.
 
 ## Notes
 

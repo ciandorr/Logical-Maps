@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSd ($\Diamond_\vee$).** □(∀p,q:t. (($\Diamond_\vee$(p) → □q) → □(p → q)))
+- **□PSd ($\Diamond_\vee$).** $\Box (\forall p,q:t$. (($\Diamond_\vee$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Apply □A→A to the full PSd sentence.
+Apply $\Box A\to A$ to the full PSd sentence.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□◇₂ entails Truth.** □(∀p:t. ◇₂p → p)
+- **□◇₂ entails Truth.** $\Box (\forall p:t. \Diamond _{2}p \to p)$
 
 ## Conclusion
 
-- **◇₂ = Truth.** ◇₂ = (λp:t. p)
+- **◇₂ = Truth.** $\Diamond _{2} = (\lambda p:t. p)$
 
 ## Proof
 
-The reverse implication, p→◇₂p by Theorem 16, is an assumption-free II theorem; universally close and necessitate it. Combine this with the selected boxed pointwise implication using K and the necessitated propositional combination theorem to obtain □∀p.(◇₂p↔Truthp). The predicate form of modalized functionality proved in ii-implies-modalized-functionality gives identity of these functions (and symmetry gives the recorded orientation if needed).
+The reverse implication, $p\to \Diamond _{2}p$ by Theorem 16, is an assumption-free II theorem; universally close and necessitate it. Combine this with the selected boxed pointwise implication using K and the necessitated propositional combination theorem to obtain $\Box \forall p.(\Diamond _{2}p\leftrightarrow$Truthp). The predicate form of modalized functionality proved in ii-implies-modalized-functionality gives identity of these functions (and symmetry gives the recorded orientation if needed).
 
 ## Notes
 

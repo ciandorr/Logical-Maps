@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSa ($\Diamond_\infty$).** □(∀p, q : t. (□(p → q) → ($\Diamond_\infty$(p) → $\Diamond_\infty$(q))))
+- **□PSa ($\Diamond_\infty$).** $\Box (\forall p, q : t. (\Box (p \to q) \to$ ($\Diamond_\infty$$(p) \to$ $\Diamond_\infty$(q))))
 
 ## Proof
 
-Given □(p → q) and $\Diamond_\infty$p, choose its defining witness P with $\mathrm{Possibility}_\infty$(P) and Pp. Extract PSa(P) using □A → A, and infer Pq, hence $\Diamond_\infty$q. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for □.
+Given $\Box (p \to q)$ and $\Diamond_\infty$p, choose its defining witness P with $\mathrm{Possibility}_\infty$(P) and Pp. Extract $\operatorname{PSa}(P)$ using $\Box A \to A$, and infer Pq, hence $\Diamond_\infty$q. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for $\Box$.
 
 ## Notes
 

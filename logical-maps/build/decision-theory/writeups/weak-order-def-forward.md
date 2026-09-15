@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **Completeness.** For all p, q ∈ Δ(X): p ≽ q or q ≽ p.
-- **Transitivity.** For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.
+- **Completeness.** For all $p, q \in \Delta (X): p \succeq q$ or $q \succeq p$.
+- **Transitivity.** For all $p, q, r \in \Delta (X)$: if $p \succeq q$ and $q \succeq r$ then $p \succeq r$.
 
 ## Conclusion
 
-- **Weak order.** ≽ is complete and transitive.
+- **Weak order.** $\succeq$ is complete and transitive.
 
 ## Proof
 

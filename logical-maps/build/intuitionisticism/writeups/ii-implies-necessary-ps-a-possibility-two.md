@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSa (◇₂).** □(∀p, q : t. (□(p → q) → (◇₂(p) → ◇₂(q))))
+- **□PSa (◇₂).** $\Box (\forall p, q : t. (\Box (p \to q) \to (\Diamond _{2}(p) \to \Diamond _{2}(q))))$
 
 ## Proof
 
-The assumption-free comparison □r→□₂r, applied to r=(p→q), followed by the assumption-free paired PSa theorem gives the PSa formula for ◇₂ with □. Universally close and necessitate that closed theorem.
+The assumption-free comparison $\Box r\to \Box _{2}r$, applied to $r=(p\to q)$, followed by the assumption-free paired PSa theorem gives the PSa formula for $\Diamond _{2}$ with $\Box$. Universally close and necessitate that closed theorem.
 
 ## Notes
 

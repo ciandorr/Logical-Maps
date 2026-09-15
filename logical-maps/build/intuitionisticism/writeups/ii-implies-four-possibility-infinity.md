@@ -4,7 +4,7 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 

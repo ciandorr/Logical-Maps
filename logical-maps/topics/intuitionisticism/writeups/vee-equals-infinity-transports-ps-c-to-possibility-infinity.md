@@ -5,15 +5,15 @@
 ## Premises
 
 - **$\Diamond_\vee$ = $\Diamond_\infty$.** $\Diamond_\vee$ = $\Diamond_\infty$
-- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$(p ∨ q) implies $\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q).
+- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$$(p \lor q)$ implies $\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q).
 
 ## Conclusion
 
-- **PSc ($\Diamond_\infty$).** For every p and q, $\Diamond_\infty$(p ∨ q) implies $\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q).
+- **PSc ($\Diamond_\infty$).** For every p and q, $\Diamond_\infty$$(p \lor q)$ implies $\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q).
 
 ## Proof
 
-Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving □=(=⊤) unchanged.
+Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving $\Box =(=\top )$ unchanged.
 
 ## Notes
 

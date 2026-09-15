@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Prime representation of $\Diamond_\vee$ ∧ Prime representation of □ ⇒ □PSd ($\Diamond_\vee$)</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Prime representation of $\Diamond_\vee$ ∧ Prime representation of □ ⇒ □PSd ($\Diamond_\vee$)</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -319,25 +303,24 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Prime representation of $\Diamond_\vee$ ∧ Prime representation of □ ⇒ □PSd ($\Diamond_\vee$)</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Prime representation of $\Diamond_\vee$ ∧ Prime representation of □ ⇒ □PSd ($\Diamond_\vee$)</h1></header><p class="cert">
 Conjecture — Source: Possibility in Intuitionistic Higher-Order Logic; produced by Zachary Goodsell; proof transcribed and expanded from the manuscript; recorded by Codex (GPT-6), manuscript transcription.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Prime representation of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math>.</strong> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math> = (λp:t. ∃w:t. Prime(w) ∧ □(w → p))</li>
-<li><strong>Prime representation of □.</strong> (λp:t. □p) = (λp:t. ∀w:t. Prime(w) → □(w → p))</li>
+<li><strong>Prime representation of <span class="math inline">\Diamond_\vee</span>.</strong> <span class="math inline">\Diamond_\vee</span> <span class="math inline">= (\lambda p:t. \exists w:t. \operatorname{Prime}(w) \land \Box (w \to p))</span></li>
+<li><strong>Prime representation of □.</strong> <span class="math inline">(\lambda p:t. \Box p) = (\lambda p:t. \forall w:t. \operatorname{Prime}(w) \to \Box (w \to p))</span></li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□PSd (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math>).</strong> □(∀p,q:t. ((<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mo>◇</mo><mo>∨</mo></msub><annotation encoding="application/x-tex">\Diamond_\vee</annotation></semantics></math>(p) → □q) → □(p → q)))</li>
+<li><strong>□PSd (<span class="math inline">\Diamond_\vee</span>).</strong> <span class="math inline">\Box (\forall p,q:t</span>. ((<span class="math inline">\Diamond_\vee</span><span class="math inline">(p) \to \Box q) \to \Box (p \to q</span>)))</li>
 </ul>
 <h2 id="notes">Notes</h2>
-<p>The paper says PSd is recovered immediately by the quantified intuitionistic implication in Eq. (41). The necessary entailment and outer □ steps, under the two operator-identity assumptions, have not been fully transcribed here.</p>
+<p>The paper says PSd is recovered immediately by the quantified intuitionistic implication in Eq. (41). The necessary entailment and outer <span class="math inline">\Box</span> steps, under the two operator-identity assumptions, have not been fully transcribed here.</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li><strong>Possibility in Intuitionistic Higher-Order Logic</strong> — Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.3, Eqs. (39)–(41), p. 21.</li>
@@ -349,5 +332,4 @@ Record: <code>topics/intuitionisticism/results/prime-representations-imply-neces
 <ul>
 <li><strong>Proof: Possibility in Intuitionistic Higher-Order Logic.</strong> Zachary Goodsell (21 August 2026). Possibility in Intuitionistic Higher-Order Logic. Manuscript. — §4.3, Eqs. (39)–(41), p. 21</li>
 </ul>
-</body>
-</html>
+</body></html>

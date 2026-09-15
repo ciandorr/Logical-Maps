@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Descriptions.** For every σ,τ: □(∀R:στt. ((∀x:σ. ∃!y:τ. R x y) → ∃f:στ. ∀x:σ. R x (f x)))
+- **□Descriptions.** For every $\sigma ,\tau : \Box (\forall R:\sigma \tau t. ((\forall x:\sigma . \exists !y:\tau . R x y) \to \exists f:\sigma \tau . \forall x:\sigma . R x (f x)))$
 
 ## Conclusion
 
-- **Descriptions.** For every σ,τ: ∀R:στt. ((∀x:σ. ∃!y:τ. R x y) → ∃f:στ. ∀x:σ. R x (f x))
+- **Descriptions.** For every $\sigma ,\tau : \forall R:\sigma \tau t. ((\forall x:\sigma . \exists !y:\tau . R x y) \to \exists f:\sigma \tau . \forall x:\sigma . R x (f x))$
 
 ## Proof
 
-For every type instance, apply the standing theorem □A→A to that entire instance. Since the types are arbitrary this gives all instances of the unboxed schema.
+For every type instance, apply the standing theorem $\Box A\to A$ to that entire instance. Since the types are arbitrary this gives all instances of the unboxed schema.
 
 ## Notes
 

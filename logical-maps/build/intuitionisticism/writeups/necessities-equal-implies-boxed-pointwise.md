@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Conclusion
 
-- **□□₂ entails □.** □(∀p:t. □₂p → □p)
+- **□□₂ entails □.** $\Box (\forall p:t. \Box _{2}p \to \Box p)$
 
 ## Proof
 
-The reflexive sentence ∀p.(□₂p→□₂p) is an assumption-free theorem and may be necessitated. Substitute the selected operator identity into the appropriate occurrences inside that boxed sentence, using Leibniz’s Law. This yields the entire boxed pointwise implication in the conclusion.
+The reflexive sentence $\forall p.(\Box _{2}p\to \Box _{2}p)$ is an assumption-free theorem and may be necessitated. Substitute the selected operator identity into the appropriate occurrences inside that boxed sentence, using Leibniz’s Law. This yields the entire boxed pointwise implication in the conclusion.
 
 ## Notes
 

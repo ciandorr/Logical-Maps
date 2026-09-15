@@ -4,19 +4,19 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Totality.** For all gambles X,Y, either X ≽ Y or Y ≽ X.
-- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.
-- **Mixture Independence.** For all X,Y,Z and 0<p<1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.
-- **Symmetric Gambles Are Neutral.** If u(X) and −u(X) have the same law, then X ~ 0.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Totality.** For all gambles X,Y, either $X \succeq Y$ or $Y \succeq X$.
+- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then $X \sim Y$. The variables remain distinct objects; indifference is an additional axiom.
+- **Mixture Independence.** For all X,Y,Z and $0<p<1, X \succeq Y$ iff $M_p(X,Z) \succeq M_p(Y,Z)$, where M is the fixed randomized-selection construction described in the background.
+- **Symmetric Gambles Are Neutral.** If $u(X)$ and $- u(X)$ have the same law, then $X \sim 0$.
 
 ## Conclusion
 
-- **Reflection Anti-Invariance.** X ≽ Y iff −Y ≽ −X, using the one fixed normalized origin 0.
+- **Reflection Anti-Invariance.** $X \succeq Y$ iff $- Y \succeq - X$, using the one fixed normalized origin 0.
 
 ## Proof
 
-Suppose X ≽ Y but not −Y ≽ −X. Totality gives −X ≻ −Y. Mixture Independence (including its strict consequence), transitivity, and Stochastic Equivalence to interchange mixture branches give M_½(X,−X) ≻ M_½(Y,−Y). Each mixture has a symmetric law, so Symmetric Neutrality makes both indifferent to 0, a contradiction. Therefore −Y ≽ −X. Applying the same implication to −Y,−X proves the converse. Rich Outcomes supplies the reflected variables.
+Suppose $X \succeq Y$ but not $- Y \succeq - X$. Totality gives $- X \succ - Y$. Mixture Independence (including its strict consequence), transitivity, and Stochastic Equivalence to interchange mixture branches give $M_{\frac{1}{2} }(X,- X) \succ M_{\frac{1}{2} }(Y,- Y)$. Each mixture has a symmetric law, so Symmetric Neutrality makes both indifferent to 0, a contradiction. Therefore $- Y \succeq - X$. Applying the same implication to −Y,−X proves the converse. Rich Outcomes supplies the reflected variables.
 
 ## Notes
 

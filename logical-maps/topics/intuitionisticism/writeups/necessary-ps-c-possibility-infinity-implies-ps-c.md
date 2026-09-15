@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSc ($\Diamond_\infty$).** □(∀p, q : t. ($\Diamond_\infty$(p ∨ q) → ($\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q))))
+- **□PSc ($\Diamond_\infty$).** $\Box (\forall p, q : t$. ($\Diamond_\infty$$(p \lor q) \to$ ($\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q))))
 
 ## Conclusion
 
-- **PSc ($\Diamond_\infty$).** For every p and q, $\Diamond_\infty$(p ∨ q) implies $\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q).
+- **PSc ($\Diamond_\infty$).** For every p and q, $\Diamond_\infty$$(p \lor q)$ implies $\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q).
 
 ## Proof
 
-Apply □A → A to the full binary PS condition.
+Apply $\Box A \to A$ to the full binary PS condition.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Propositional extensionality.** □(∀p,q:t. (p ↔ q) → (p = q))
+- **□Propositional extensionality.** $\Box (\forall p,q:t. (p \leftrightarrow q) \to (p = q))$
 
 ## Conclusion
 
-- **Propositional extensionality.** ∀p,q:t. (p ↔ q) → (p = q)
+- **Propositional extensionality.** $\forall p,q:t. (p \leftrightarrow q) \to (p = q)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

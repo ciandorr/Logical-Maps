@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Conclusion
 
-- **□PSd (◇₂).** □(∀p, q : t. ((◇₂(p) → □q) → □(p → q)))
+- **□PSd (◇₂).** $\Box (\forall p, q : t. ((\Diamond _{2}(p) \to \Box q) \to \Box (p \to q)))$
 
 ## Proof
 
-Substitute □=□₂ into the proved necessary paired PSd₂ sentence from Theorem 14. Leibniz’s Law applies within its outer □ and replaces both inner occurrences of □₂, leaving ◇₂ unchanged.
+Substitute $\Box =\Box _{2}$ into the proved necessary paired $\operatorname{PSd}_{2}$ sentence from Theorem 14. Leibniz’s Law applies within its outer $\Box$ and replaces both inner occurrences of $\Box _{2}$, leaving $\Diamond _{2}$ unchanged.
 
 ## Notes
 

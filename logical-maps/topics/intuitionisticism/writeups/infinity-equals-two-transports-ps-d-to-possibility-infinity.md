@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **$\Diamond_\infty$ = ◇₂.** $\Diamond_\infty$ = ◇₂
-- **PSd (◇₂).** For every p and q, if ◇₂(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **$\Diamond_\infty$ = ◇₂.** $\Diamond_\infty$ $= \Diamond _{2}$
+- **PSd (◇₂).** For every p and q, if $\Diamond _{2}(p)$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **PSd ($\Diamond_\infty$).** For every p and q, if $\Diamond_\infty$(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd ($\Diamond_\infty$).** For every p and q, if $\Diamond_\infty$(p) implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving □=(=⊤) unchanged.
+Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving $\Box =(=\top )$ unchanged.
 
 ## Notes
 

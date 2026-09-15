@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Independent Sum Invariance.** Whenever Z is independent of the pair (X,Y), X ≽ Y iff X+Z ≽ Y+Z.
+- **Independent Sum Invariance.** Whenever Z is independent of the pair $(X,Y), X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
-- **Independent Sum Preservation.** Whenever Z is independent of (X,Y), X ≽ Y implies X+Z ≽ Y+Z, and X ≻ Y implies X+Z ≻ Y+Z.
+- **Independent Sum Preservation.** Whenever Z is independent of $(X,Y), X \succeq Y$ implies $X+Z \succeq Y+Z$, and $X \succ Y$ implies $X+Z \succ Y+Z$.
 
 ## Proof
 
-Take the forward weak implication. If X ≻ Y but Y+Z ≽ X+Z, the reverse implication with X,Y swapped gives Y ≽ X, a contradiction. Thus strict preference is preserved too.
+Take the forward weak implication. If $X \succ Y$ but $Y+Z \succeq X+Z$, the reverse implication with X,Y swapped gives $Y \succeq X, a$ contradiction. Thus strict preference is preserved too.
 
 ## Sources
 

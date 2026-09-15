@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Marriage is monogamous.** □(∀N,P,Q:tt. (Necessity₂(N) ∧ Possibility₂(P) ∧ Possibility₂(Q) ∧ Married(N,P) ∧ Married(N,Q)) → (P = Q))
+- **□Marriage is monogamous.** $\Box (\forall N,P,Q:tt. (\operatorname{Necessity}_{2}(N) \land \operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}(N,P) \land \operatorname{Married}(N,Q)) \to (P = Q))$
 
 ## Conclusion
 
-- **Marriage is monogamous.** ∀N,P,Q:tt. (Necessity₂(N) ∧ Possibility₂(P) ∧ Possibility₂(Q) ∧ Married(N,P) ∧ Married(N,Q)) → (P = Q)
+- **Marriage is monogamous.** $\forall N,P,Q:tt. (\operatorname{Necessity}_{2}(N) \land \operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}(N,P) \land \operatorname{Married}(N,Q)) \to (P = Q)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ = (λp:t. p ≠ ⊥)
-- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$
+- **PSd ($\Diamond_\vee$).** For every p and q, if $\Diamond_\vee$(p) implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **PSd (≠⊥).** For every p and q, if p ≠ ⊥ implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd (≠⊥).** For every p and q, if $p \ne \bot$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving □=(=⊤) unchanged.
+Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving $\Box =(=\top )$ unchanged.
 
 ## Notes
 

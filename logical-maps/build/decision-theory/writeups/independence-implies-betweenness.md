@@ -4,20 +4,20 @@
 
 ## Premises
 
-- **Independence.** For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.
+- **Independence.** For all $p, q, r \in \Delta (X)$ and $\lambda \in (0,1]: p \succeq q$ if and only if $\lambda p + (1- \lambda )r \succeq \lambda q + (1- \lambda )r$.
 
 ## Conclusion
 
-- **Betweenness.** For all p, q ∈ Δ(X) and λ ∈ (0,1): if p ≻ q then p ≻ λp + (1−λ)q ≻ q, and if p ~ q then p ~ λp + (1−λ)q.
+- **Betweenness.** For all $p, q \in \Delta (X)$ and $\lambda \in (0,1)$: if $p \succ q$ then $p \succ \lambda p + (1- \lambda )q \succ q$, and if $p \sim q$ then $p \sim \lambda p + (1- \lambda )q$.
 
 ## Proof
 
-Fix λ ∈ (0,1) and write m = λp + (1−λ)q. Independence with r = p and
-mixing weight 1−λ gives p ≽ q ⟺ (1−λ)p+λp ≽ (1−λ)q+λp, i.e. p ≽ q ⟺ p ≽ m,
-and likewise q ≽ p ⟺ m ≽ p. Hence p ≻ q ⟺ p ≻ m and p ~ q ⟺ p ~ m.
-Independence with r = q and weight λ gives p ≽ q ⟺ m ≽ q and
-q ≽ p ⟺ q ≽ m, so p ≻ q ⟺ m ≻ q. Together: p ≻ q ⟹ p ≻ m ≻ q and
-p ~ q ⟹ p ~ m.
+Fix $\lambda \in (0,1)$ and write $m = \lambda p + (1- \lambda )q$. Independence with $r = p$ and
+mixing weight $1- \lambda$ gives $p \succeq q \Longleftrightarrow (1- \lambda )p+\lambda p \succeq (1- \lambda )q+\lambda p, i.e. p \succeq q \Longleftrightarrow p \succeq m$,
+and likewise $q \succeq p \Longleftrightarrow m \succeq p$. Hence $p \succ q \Longleftrightarrow p \succ m$ and $p \sim q \Longleftrightarrow p \sim m$.
+Independence with $r = q$ and weight $\lambda$ gives $p \succeq q \Longleftrightarrow m \succeq q$ and
+$q \succeq p \Longleftrightarrow q \succeq m$, so $p \succ q \Longleftrightarrow m \succ q$. Together: $p \succ q \Longrightarrow p \succ m \succ q$ and
+$p \sim q \Longrightarrow p \sim m$.
 
 ## Notes
 

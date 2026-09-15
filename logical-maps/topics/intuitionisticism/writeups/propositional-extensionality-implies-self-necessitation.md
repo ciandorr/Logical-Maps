@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Propositional extensionality.** ∀p,q:t. (p ↔ q) → (p = q)
+- **Propositional extensionality.** $\forall p,q:t. (p \leftrightarrow q) \to (p = q)$
 
 ## Conclusion
 
-- **Universal self-necessitation.** ∀p:t. p → □p
+- **Universal self-necessitation.** $\forall p:t. p \to \Box p$
 
 ## Proof
 
-Assume p. Then p↔⊤. Instantiate the selected extensionality sentence at p,⊤ to obtain p=⊤, hence □p. Discharge and generalize p.
+Assume p. Then $p\leftrightarrow \top$. Instantiate the selected extensionality sentence at $p,\top$ to obtain $p=\top$, hence $\Box p$. Discharge and generalize p.
 
 ## Notes
 

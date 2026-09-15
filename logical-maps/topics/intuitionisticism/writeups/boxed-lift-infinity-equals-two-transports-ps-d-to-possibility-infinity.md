@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\infty$ = ◇₂).** □($\Diamond_\infty$ = ◇₂)
-- **□PSd (◇₂).** □(∀p, q : t. ((◇₂(p) → □q) → □(p → q)))
+- **□($\Diamond_\infty$ = ◇₂).** $\Box$($\Diamond_\infty$ $= \Diamond _{2}$)
+- **□PSd (◇₂).** $\Box (\forall p, q : t. ((\Diamond _{2}(p) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **□PSd ($\Diamond_\infty$).** □(∀p, q : t. (($\Diamond_\infty$(p) → □q) → □(p → q)))
+- **□PSd ($\Diamond_\infty$).** $\Box (\forall p, q : t$. (($\Diamond_\infty$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Proof
 

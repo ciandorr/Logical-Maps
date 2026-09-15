@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Comonotonic Sum Invariance.** If X and Z are comonotonic, and Y and Z are comonotonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is comonotonic when its members admit nondecreasing representations in one common uniform random variable.
+- **Comonotonic Sum Invariance.** If X and Z are comonotonic, and Y and Z are comonotonic, then $X \succeq Y$ iff $X+Z \succeq Y+Z$. A pair is comonotonic when its members admit nondecreasing representations in one common uniform random variable.
 
 ## Conclusion
 
-- **Shift Invariance.** For every real b, X ≽ Y iff X+b ≽ Y+b.
+- **Shift Invariance.** For every real $b, X \succeq Y$ iff $X+b \succeq Y+b$.
 
 ## Proof
 
-Choose Z to be the constant utility b. A constant is independent of every pair and is both comonotonic and antitonic with every variable, so the sum biconditional becomes X ≽ Y iff X+b ≽ Y+b. Apply this wherever the shifted outcomes exist.
+Choose Z to be the constant utility b. A constant is independent of every pair and is both comonotonic and antitonic with every variable, so the sum biconditional becomes $X \succeq Y$ iff $X+b \succeq Y+b$. Apply this wherever the shifted outcomes exist.
 
 ## Sources
 

@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **□PSb (◇₂).** □(¬◇₂(⊥))
-- **□PSc (◇₂).** □(∀p, q : t. (◇₂(p ∨ q) → (◇₂(p) ∨ ◇₂(q))))
-- **□PSd (◇₂).** □(∀p, q : t. ((◇₂(p) → □q) → □(p → q)))
+- **□PSb (◇₂).** $\Box (\neg \Diamond _{2}(\bot ))$
+- **□PSc (◇₂).** $\Box (\forall p, q : t. (\Diamond _{2}(p \lor q) \to (\Diamond _{2}(p) \lor \Diamond _{2}(q))))$
+- **□PSd (◇₂).** $\Box (\forall p, q : t. ((\Diamond _{2}(p) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **□A PSb–PSc–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f))
+- **□A PSb–PSc–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f))$
 
 ## Proof
 

@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Expected multi-utility representation.** There is a set U of functions u : X → ℝ such that for all p, q ∈ Δ(X): p ≽ q if and only if EU_u(p) ≥ EU_u(q) for every u ∈ U.
+- **Expected multi-utility representation.** There is a set U of functions $u : X \to \mathbb{R}$ such that for all $p, q \in \Delta (X): p \succeq q$ if and only if $\operatorname{EU}_u(p) \ge \operatorname{EU}_u(q)$ for every $u \in U$.
 
 ## Conclusion
 
-- **Independence.** For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.
+- **Independence.** For all $p, q, r \in \Delta (X)$ and $\lambda \in (0,1]: p \succeq q$ if and only if $\lambda p + (1- \lambda )r \succeq \lambda q + (1- \lambda )r$.
 
 ## Proof
 
-EU_u is affine in mixtures, so for λ ∈ (0,1]:
-EU_u(λp+(1−λ)r) − EU_u(λq+(1−λ)r) = λ(EU_u(p) − EU_u(q)),
-which is ≥ 0 iff EU_u(p) ≥ EU_u(q). Quantify over u ∈ U.
+$\operatorname{EU}_u$ is affine in mixtures, so for $\lambda \in (0,1]$:
+$\operatorname{EU}_u(\lambda p+(1- \lambda )r) - \operatorname{EU}_u(\lambda q+(1- \lambda )r) = \lambda (\operatorname{EU}_u(p) - \operatorname{EU}_u(q))$,
+which is $\ge 0$ iff $\operatorname{EU}_u(p) \ge \operatorname{EU}_u(q)$. Quantify over $u \in U$.
 
 <p class='cert'>Record: <code>topics/decision-theory/results/multi-utility-implies-independence.yaml</code></p>

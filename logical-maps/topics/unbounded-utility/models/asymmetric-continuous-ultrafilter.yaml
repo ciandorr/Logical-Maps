@@ -29,13 +29,8 @@ certificate:
   recorded_by: GPT-6 (Codex), 2026-09-09
   checked_by: []
   date: '2026-09-09'
-description: Take all real-valued random variables and q_t(x)=max(-t,min(x,2t)). For a cobounded ultrafilter
-  U on t>0, put X≽Y iff for every ε>0 the set {t:E[q_t(X)]≥E[q_t(Y)]−ε} belongs to U. The continuous quotient
-  preserves DTU, finite EU, L¹ Continuity, Relative Expectation, CDF-Area Extension, Shift Invariance,
-  and Transfer of a Shift Across a Mixture. A standard symmetric Cauchy variable has value ln(2)/π>0,
-  violating neutral symmetry, reflection and Folded Expectation. It and zero provide distinct fixed values
-  for the negative self-similarity map X↦M_(1/2)(−2X,0). Paired atoms give Alternating St Petersburg value
-  zero. The accompanying write-up proves every recorded flag.
+description: |-
+  Take all real-valued random variables and $q_t(x)=\max (-t,\min (x,2t))$. For a cobounded ultrafilter U on $t>0$, put $X\succeq Y$ iff for every $\epsilon >0$ the set $\{t:E[q_t(X)]\ge E[q_t(Y)]- \epsilon \}$ belongs to U. The continuous quotient preserves DTU, finite $\operatorname{EU}, L^{1}$ Continuity, Relative Expectation, CDF-Area Extension, Shift Invariance, and Transfer of a Shift Across a Mixture. A standard symmetric Cauchy variable has value $\ln (2)/\pi >0$, violating neutral symmetry, reflection and Folded Expectation. It and zero provide distinct fixed values for the negative self-similarity map X↦$M_{1/2}(- 2X,0)$. Paired atoms give Alternating St Petersburg value zero. The accompanying write-up proves every recorded flag.
 sources:
 - Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 1, p.
   24. Already states the failure of affine-symmetry implications under DTU, including with L¹ Continuity
@@ -50,15 +45,8 @@ source_names:
 - Symmetries of Value
 - GPT-6 generated 9 Sep
 - Decision Theory Unbound
-notes: 'Original work: source-model specialization and additional verification. The asymmetric construction
-  and the non-implication of reflection even under DTU + L¹ Continuity + Relative Expectation are already
-  Goodsell’s: Symmetries of value, Theorem 1 (p. 24), citing Decision theory unbound, Remark 3. They are
-  not new AI results. The 2024 paper supplies the continuous quotient and separate increasing cutoffs;
-  Corollary 3 already permits nonzero values for symmetric gambles. Work recorded here chooses f(t)=2t
-  and g(t)=t and spells out the CDF-area/shift-transfer verification and exact Cauchy, alternating-game
-  and negative-self-similarity witnesses. These added calculations are not a claim of literature novelty.
-  No scale or sum-invariance verdict is asserted without proof. Diagnostic checks do not certify the general
-  axioms or ultrafilter existence.'
+notes: |-
+  Original work: source-model specialization and additional verification. The asymmetric construction and the non-implication of reflection even under DTU $+ L^{1}$ Continuity + Relative Expectation are already Goodsell’s: Symmetries of value, Theorem 1 (p. 24), citing Decision theory unbound, Remark 3. They are not new AI results. The 2024 paper supplies the continuous quotient and separate increasing cutoffs; Corollary 3 already permits nonzero values for symmetric gambles. Work recorded here chooses $f(t)=2t$ and $g(t)=t$ and spells out the CDF-area/shift-transfer verification and exact Cauchy, alternating-game and negative-self-similarity witnesses. These added calculations are not a claim of literature novelty. No scale or sum-invariance verdict is asserted without proof. Diagnostic checks do not certify the general axioms or ultrafilter existence.
 checks:
 - topics/unbounded-utility/checks/asymmetric_continuous_ultrafilter.py
 references:

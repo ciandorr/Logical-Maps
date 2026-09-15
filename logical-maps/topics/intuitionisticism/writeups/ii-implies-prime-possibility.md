@@ -4,11 +4,11 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **Prime propositions are $\Diamond_\vee$-possible.** ∀w:t. Prime(w) → $\Diamond_\vee$(w)
+- **Prime propositions are $\Diamond_\vee$-possible.** $\forall w:t. \operatorname{Prime}(w) \to$ $\Diamond_\vee$(w)
 
 ## Notes
 

@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **PSa (≠⊥).** For every p and q, □(p → q) implies that p ≠ ⊥ implies q ≠ ⊥, with □p defined as p = ⊤.
-- **PSb (≠⊥).** The contradiction is not distinct from itself: ¬(⊥ ≠ ⊥).
-- **Impossibility ⇒ necessary falsehood (≠⊥).** ∀p:t. ¬(p ≠ ⊥) → □¬p
+- **PSa (≠⊥).** For every p and $q, \Box (p \to q)$ implies that $p \ne \bot$ implies $q \ne \bot$, with $\Box p$ defined as $p = \top$.
+- **PSb (≠⊥).** The contradiction is not distinct from itself: $\neg (\bot \ne \bot )$.
+- **Impossibility ⇒ necessary falsehood (≠⊥).** $\forall p:t. \neg (p \ne \bot ) \to \Box \neg p$
 
 ## Conclusion
 
-- **Stability of □¬.** ∀p:t. ¬¬□¬p → □¬p
+- **Stability of □¬.** $\forall p:t. \neg \neg \Box \neg p \to \Box \neg p$
 
 ## Proof
 
-PSa at (p,⊥), together with PSb, gives □¬p→¬(p≠⊥). Under ¬¬□¬p this gives ¬¬¬(p≠⊥), hence ¬(p≠⊥) by triple-negation reduction. The selected necessary-falsehood condition gives □¬p. Discharge and generalize p.
+PSa at $(p,\bot )$, together with PSb, gives $\Box \neg p\to \neg (p\ne \bot )$. Under $\neg \neg \Box \neg p$ this gives $\neg \neg \neg (p\ne \bot )$, hence $\neg (p\ne \bot )$ by triple-negation reduction. The selected necessary-falsehood condition gives $\Box \neg p$. Discharge and generalize p.
 
 ## Notes
 

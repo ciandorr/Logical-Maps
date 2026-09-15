@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Independent Sum Invariance.** Whenever Z is independent of the pair (X,Y), X ≽ Y iff X+Z ≽ Y+Z.
-- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.
+- **Independent Sum Invariance.** Whenever Z is independent of the pair $(X,Y), X \succeq Y$ iff $X+Z \succeq Y+Z$.
+- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then $X \sim Y$. The variables remain distinct objects; indifference is an additional axiom.
 
 ## Conclusion
 
-- **Existential Copula Sum Invariance.** There exists one copula C such that SC(C) holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on [0,1]² with both marginals uniform. Write H_C(u,v)=C([0,u]×[0,v]). A real-utility pair (A,B) admits C when P(A≤a,B≤b)=H_C(F_A(a),F_B(b)) for every real a,b. Define SC(C): for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same C, X ≽ Y iff X+Z ≽ Y+Z.
+- **Existential Copula Sum Invariance.** There exists one copula C such that $\operatorname{SC}(C)$ holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on $[0,1]^{2}$ with both marginals uniform. Write $H_C(u,v)=C([0,u]\times [0,v])$. A real-utility pair (A,B) admits C when $P(A\le a,B\le b)=H_C(F_A(a),F_B(b))$ for every real a,b. Define $\operatorname{SC}(C)$: for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same $C, X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Proof
 
-Choose the product copula once. For an eligible triple admitting that copula in both pairs, Z is separately independent of X and Y, but need not be independent of (X,Y). On the standing atomless space realize independent uniforms U,V, and utility coordinates X′=Q_X(U), Y′=Q_Y(U), Z′=Q_Z(V). Now Z′ is independent of (X′,Y′). The marginal laws and both pair laws agree with those of the original triple; consequently so do the two sum laws. Independent Sum Invariance gives the biconditional for the new triple. Stochastic Equivalence and transitivity transfer it to the original comparisons. This establishes SC(C) for the product copula.
+Choose the product copula once. For an eligible triple admitting that copula in both pairs, Z is separately independent of X and Y, but need not be independent of (X,Y). On the standing atomless space realize independent uniforms U,V, and utility coordinates X′$=Q_X(U), Y$′$=Q_Y(U), Z$′$=Q_Z(V)$. Now Z′ is independent of (X′,Y′). The marginal laws and both pair laws agree with those of the original triple; consequently so do the two sum laws. Independent Sum Invariance gives the biconditional for the new triple. Stochastic Equivalence and transitivity transfer it to the original comparisons. This establishes $\operatorname{SC}(C)$ for the product copula.
 
 ## Notes
 

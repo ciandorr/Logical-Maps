@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **PSd (◇₂).** For every p and q, if ◇₂(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd (◇₂).** For every p and q, if $\Diamond _{2}(p)$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **Impossibility ⇒ necessary falsehood (◇₂).** ∀p:t. ¬◇₂(p) → □¬p
+- **Impossibility ⇒ necessary falsehood (◇₂).** $\forall p:t. \neg \Diamond _{2}(p) \to \Box \neg p$
 
 ## Proof
 
-Fix p and assume ¬◇₂(p). Then ◇₂(p)→□⊥ by explosion. Instantiate PSd at p and q=⊥ to get □(p→⊥), which is □¬p. Discharge and generalize p.
+Fix p and assume $\neg \Diamond _{2}(p)$. Then $\Diamond _{2}(p)\to \Box \bot$ by explosion. Instantiate PSd at p and $q=\bot$ to get $\Box (p\to \bot )$, which is $\Box \neg p$. Discharge and generalize p.
 
 ## Notes
 

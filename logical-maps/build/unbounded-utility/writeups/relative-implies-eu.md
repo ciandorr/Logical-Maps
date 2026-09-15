@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Archimedean Outcomes.** For any three sure outcomes a ≻ b ≻ c, some nontrivial mixture of the outer two is equally good as the intermediate one: b ~ M_p(a,c) for some p ∈ (0,1). Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
-- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if E|u(X)−u(Y)|<∞, then X ≽ Y iff E[u(X)−u(Y)] ≥ 0. Their individual expectations may both be undefined.
+- **Archimedean Outcomes.** For any three sure outcomes $a \succ b \succ c$, some nontrivial mixture of the outer two is equally good as the intermediate one: $b \sim M_p(a,c)$ for some $p \in (0,1)$. Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
+- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if $E|u(X)- u(Y)|<\infty$, then $X \succeq Y$ iff $E[u(X)- u(Y)] \ge 0$. Their individual expectations may both be undefined.
 
 ## Conclusion
 
-- **Expected Utility.** The normalized chart u is defined on all outcomes and is measurable. Whenever u(X),u(Y) are integrable, X ≽ Y iff E[u(X)] ≥ E[u(Y)]. Expectations here are finite Lebesgue expectations; this says nothing about two +∞ expectations or conditionally convergent sums.
+- **Expected Utility.** The normalized chart u is defined on all outcomes and is measurable. Whenever $u(X),u(Y)$ are integrable, $X \succeq Y$ iff $E[u(X)] \ge E[u(Y)]$. Expectations here are finite Lebesgue expectations; this says nothing about two $+\infty$ expectations or conditionally convergent sums.
 
 ## Proof
 
-Archimedean Outcomes makes the real chart total. If u(X),u(Y) are integrable, so is their difference, and E[u(X)−u(Y)]=E[u(X)]−E[u(Y)]. Apply Relative Expectation.
+Archimedean Outcomes makes the real chart total. If $u(X),u(Y)$ are integrable, so is their difference, and $E[u(X)- u(Y)]=E[u(X)]- E[u(Y)]$. Apply Relative Expectation.
 
 ## Notes
 

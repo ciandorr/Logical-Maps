@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **□PSb ($\Diamond_\vee$).** □(¬$\Diamond_\vee$(⊥))
-- **□PSc ($\Diamond_\vee$).** □(∀p, q : t. ($\Diamond_\vee$(p ∨ q) → ($\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q))))
-- **□PSd ($\Diamond_\vee$).** □(∀p,q:t. (($\Diamond_\vee$(p) → □q) → □(p → q)))
+- **□PSb ($\Diamond_\vee$).** $\Box (\neg$$\Diamond_\vee$$(\bot )$)
+- **□PSc ($\Diamond_\vee$).** $\Box (\forall p, q : t$. ($\Diamond_\vee$$(p \lor q) \to$ ($\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q))))
+- **□PSd ($\Diamond_\vee$).** $\Box (\forall p,q:t$. (($\Diamond_\vee$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **□A PSb–PSc–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f))
+- **□A PSb–PSc–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f))$
 
 ## Proof
 

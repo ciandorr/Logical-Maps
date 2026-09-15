@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **□PSa ($\Diamond_\vee$).** □(∀p, q : t. (□(p → q) → ($\Diamond_\vee$(p) → $\Diamond_\vee$(q))))
-- **□PSb ($\Diamond_\vee$).** □(¬$\Diamond_\vee$(⊥))
-- **□Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** □(∀p:t. ¬$\Diamond_\vee$(p) → □¬p)
+- **□PSa ($\Diamond_\vee$).** $\Box (\forall p, q : t. (\Box (p \to q) \to$ ($\Diamond_\vee$$(p) \to$ $\Diamond_\vee$(q))))
+- **□PSb ($\Diamond_\vee$).** $\Box (\neg$$\Diamond_\vee$$(\bot )$)
+- **□Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** $\Box (\forall p:t. \neg$$\Diamond_\vee$$(p) \to \Box \neg p$)
 
 ## Conclusion
 
-- **□Stability of □¬.** □(∀p:t. ¬¬□¬p → □¬p)
+- **□Stability of □¬.** $\Box (\forall p:t. \neg \neg \Box \neg p \to \Box \neg p)$
 
 ## Proof
 

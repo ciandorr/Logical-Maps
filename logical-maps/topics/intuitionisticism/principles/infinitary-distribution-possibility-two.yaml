@@ -1,8 +1,10 @@
 id: infinitary-distribution-possibility-two
 name: Infinitary distribution (◇₂)
 category: possibility-two
-statement: ∀F:tt. Inex^t(F) → (◇₂(∃x:t. F x) → ∃x:t. ◇₂(F x))
-formal: ∀F:tt. Inex^t(F) → (◇₂(∃x:t. F x) → ∃x:t. ◇₂(F x))
+statement: |-
+  $\forall F:tt. \operatorname{Inex}^t(F) \to (\Diamond _{2}(\exists x:t. F x) \to \exists x:t. \Diamond _{2}(F x))$
+formal: |-
+  $\forall F:tt. \operatorname{Inex}^t(F) \to (\Diamond _{2}(\exists x:t. F x) \to \exists x:t. \Diamond _{2}(F x))$
 sources:
 - Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.4, Eq. (43),
   p. 23.
@@ -14,5 +16,5 @@ references:
   locator: §4.4, Eq. (43), p. 23
 date: '2026-09-13'
 lean: null
-notes: The σ=t instance, using the named operator. This is kept distinct from the schema covering every
-  σ.
+notes: |-
+  The $\sigma =t$ instance, using the named operator. This is kept distinct from the schema covering every $\sigma$.

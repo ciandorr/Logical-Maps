@@ -33,6 +33,19 @@ function pointer(w, target, type, y) {
 try {
   const w = page(JSON.stringify({sidebar: 230, background: 155})), d = w.document;
   const handle = d.getElementById('details-divider'), pane = d.getElementById('graph-details'), legend = d.getElementById('relation-legend');
+  const hint = d.getElementById('graph-details-hint');
+  const instruction = 'Select a principle, conjunction or arrow to see its details and logical relations here. Shift-click to add or remove principles.';
+  function checkHint() {
+    assert.equal(hint.textContent, instruction);
+    assert.equal(pane.textContent.split(instruction).length - 1, 1, 'One uniform instruction');
+    assert.equal(pane.textContent.split('Shift-click').length - 1, 1, 'No duplicate selection instructions');
+    assert.notEqual(w.getComputedStyle(hint).display, 'none');
+    assert.doesNotMatch(pane.textContent, /Compare with|graph shades/);
+  }
+  checkHint();
+  w.select({type: 'principle', id: 'a'}); checkHint();
+  w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))"); checkHint();
+  d.querySelector('.detail-close').click(); checkHint();
   w.select({type: 'principle', id: 'a'});
   const pop = d.getElementById('pop'), definition = pop.innerHTML;
   assert.equal(handle.getAttribute('role'), 'separator');

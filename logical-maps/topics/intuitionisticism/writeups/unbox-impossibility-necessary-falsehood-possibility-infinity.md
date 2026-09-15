@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** □(∀p:t. ¬$\Diamond_\infty$(p) → □¬p)
+- **□Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** $\Box (\forall p:t. \neg$$\Diamond_\infty$$(p) \to \Box \neg p$)
 
 ## Conclusion
 
-- **Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** ∀p:t. ¬$\Diamond_\infty$(p) → □¬p
+- **Impossibility ⇒ necessary falsehood ($\Diamond_\infty$).** $\forall p:t. \neg$$\Diamond_\infty$$(p) \to \Box \neg p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

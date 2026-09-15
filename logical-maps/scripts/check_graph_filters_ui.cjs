@@ -4,6 +4,10 @@ const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..');
 const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
 const data=JSON.parse(fs.readFileSync(path.join(root,'build/unbounded-utility/data.json'),'utf8'));
+// The real implication questions are now resolved. Add an open fixture question
+// to continue exercising filters and automatic DTU premises alongside them.
+data.principles.push({id:'ui-open-target',name:'Open fixture target',statement:'Fixture'});
+data.results.push({id:'ui-open-query',premises:['simple-eu','shift-invariance'],conclusion:'ui-open-target',status:'conjectured',certificate:{source_id:'misc',lean:'none'},sources:['Fixture']});
 const template=fs.readFileSync(path.join(root,'viewer/template.html'),'utf8');
 const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{
  url:'https://maps.example/',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc,
@@ -49,7 +53,7 @@ try{
  assert.equal(conjectures().length,0,'Conjectures initially hidden');
  doc.getElementById('show-conj').click();
  const ids=new Set(conjectures().map(p=>p.closest('[data-edge]').dataset.edge));
- for(const result of data.results.filter(r=>r.status==='conjectured'))assert.ok(ids.has(result.id)||w.eval(`consistencyStatus(${JSON.stringify(result.premises)}).status==='inconsistent'`),result.id+' has no conjecture arrow');
+ for(const result of data.results.filter(r=>r.status==='conjectured'))assert.equal(ids.has(result.id),w.eval(`allEvidenceE.resolveConjecture(byRid.get('${result.id}')).status==='open'`),result.id+' visibility respects its resolution');
  for(const edge of conjectures()){
   assert.match(edge.closest('[data-edge]').querySelector('title').textContent,/^Conjecture:/);
   assert.equal(w.getComputedStyle(edge).getPropertyValue('vector-effect'),'non-scaling-stroke');
@@ -69,7 +73,7 @@ try{
  assert.equal(doc.querySelectorAll('#graph .node').length,0);
  doc.getElementById('show-conj').click();
  const restored=new Set(conjectures().map(p=>p.closest('[data-edge]').dataset.edge));
- for(const result of data.results.filter(r=>r.status==='conjectured'))assert.ok(restored.has(result.id)||w.eval(`consistencyStatus(${JSON.stringify(result.premises)}).status==='inconsistent'`),result.id+' not restored after clearing principles');
+ for(const result of data.results.filter(r=>r.status==='conjectured'))assert.equal(restored.has(result.id),w.eval(`allEvidenceE.resolveConjecture(byRid.get('${result.id}')).status==='open'`),result.id+' visibility remains correct after clearing principles');
  assert.ok(doc.querySelector('#pr-filters [data-show-positive][aria-pressed="true"]'),'Principle controls reflect restored endpoints');
  assert.equal(pop.hidden,true);
  // DTU still implies Simple EU when only conjectures are drawn. Its proved
@@ -78,7 +82,8 @@ try{
  assert.equal(w.eval("literalFollows('simple-eu')"),true);
  const graph=JSON.parse(w.eval('JSON.stringify(buildGraph())'));
  assert.ok(!graph.edges.some(e=>e.key==='conjectured-dtu-cancellation-implies-preservation'),'The proved cancellation theorem is absent from conjecture-only arrows');
- for(const [id,premise] of [['conjectured-dtu-shift-implies-transfer','shift-invariance']]){
+ assert.ok(!graph.edges.some(e=>e.key==='conjectured-dtu-shift-implies-transfer'),'Hiding the refuting source does not restore a resolved conjecture arrow');
+ for(const [id,premise] of [['ui-open-query','shift-invariance']]){
   const arrow=graph.edges.find(e=>e.key===id);
   assert.ok(arrow,id+' remains visible under DTU');
   assert.deepEqual(arrow.premises,[premise],id+' has only its additional premise');

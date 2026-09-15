@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Independent Sum Invariance ∧ Stochastic Equivalence ⇒ Existential Copula Sum Invariance</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Independent Sum Invariance ∧ Stochastic Equivalence ⇒ Existential Copula Sum Invariance</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,25 +252,24 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Independent Sum Invariance ∧ Stochastic Equivalence ⇒ Existential Copula Sum Invariance</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Independent Sum Invariance ∧ Stochastic Equivalence ⇒ Existential Copula Sum Invariance</h1></header><p class="cert">
 Result — Source: Misc.; produced by GPT-6 (Codex); recorded by GPT-6 (Codex), 2026-09-09.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Independent Sum Invariance.</strong> Whenever Z is independent of the pair (X,Y), X ≽ Y iff X+Z ≽ Y+Z.</li>
-<li><strong>Stochastic Equivalence.</strong> If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.</li>
+<li><strong>Independent Sum Invariance.</strong> Whenever Z is independent of the pair <span class="math inline">(X,Y), X \succeq Y</span> iff <span class="math inline">X+Z \succeq Y+Z</span>.</li>
+<li><strong>Stochastic Equivalence.</strong> If X and Y have the same probability law over outcomes, then <span class="math inline">X \sim Y</span>. The variables remain distinct objects; indifference is an additional axiom.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Existential Copula Sum Invariance.</strong> There exists one copula C such that SC(C) holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on [0,1]² with both marginals uniform. Write H_C(u,v)=C([0,u]×[0,v]). A real-utility pair (A,B) admits C when P(A≤a,B≤b)=H_C(F_A(a),F_B(b)) for every real a,b. Define SC(C): for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same C, X ≽ Y iff X+Z ≽ Y+Z.</li>
+<li><strong>Existential Copula Sum Invariance.</strong> There exists one copula C such that <span class="math inline">\operatorname{SC}(C)</span> holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on <span class="math inline">[0,1]^{2}</span> with both marginals uniform. Write <span class="math inline">H_C(u,v)=C([0,u]\times [0,v])</span>. A real-utility pair (A,B) admits C when <span class="math inline">P(A\le a,B\le b)=H_C(F_A(a),F_B(b))</span> for every real a,b. Define <span class="math inline">\operatorname{SC}(C)</span>: for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same <span class="math inline">C, X \succeq Y</span> iff <span class="math inline">X+Z \succeq Y+Z</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Choose the product copula once. For an eligible triple admitting that copula in both pairs, Z is separately independent of X and Y, but need not be independent of (X,Y). On the standing atomless space realize independent uniforms U,V, and utility coordinates X′=Q_X(U), Y′=Q_Y(U), Z′=Q_Z(V). Now Z′ is independent of (X′,Y′). The marginal laws and both pair laws agree with those of the original triple; consequently so do the two sum laws. Independent Sum Invariance gives the biconditional for the new triple. Stochastic Equivalence and transitivity transfer it to the original comparisons. This establishes SC(C) for the product copula.</p>
+<p>Choose the product copula once. For an eligible triple admitting that copula in both pairs, Z is separately independent of X and Y, but need not be independent of (X,Y). On the standing atomless space realize independent uniforms U,V, and utility coordinates X′<span class="math inline">=Q_X(U), Y</span>′<span class="math inline">=Q_Y(U), Z</span>′<span class="math inline">=Q_Z(V)</span>. Now Z′ is independent of (X′,Y′). The marginal laws and both pair laws agree with those of the original triple; consequently so do the two sum laws. Independent Sum Invariance gives the biconditional for the new triple. Stochastic Equivalence and transitivity transfer it to the original comparisons. This establishes <span class="math inline">\operatorname{SC}(C)</span> for the product copula.</p>
 <h2 id="notes">Notes</h2>
 <p>The Stochastic Equivalence premise licenses copying the variables; pairwise independence alone does not license applying the existing jointly-independent sum principle to the original triple.</p>
 <h2 id="sources">Sources</h2>
@@ -301,5 +284,4 @@ Record: <code>topics/unbounded-utility/results/independent-sum-and-equivalence-i
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12530">Flummoxing expectations</a>.</strong> Hayden Wilkinson (2025). Flummoxing expectations. Noûs, 59(3), 700–728. First published online in 2024. — §6.1. Source of Independent Sum Consistency; see the principle reference for the changed independence condition. The proof or conjecture recorded here retains its separate attribution.</li>
 </ul>
-</body>
-</html>
+</body></html>

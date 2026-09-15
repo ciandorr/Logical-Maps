@@ -4,11 +4,11 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **$\Diamond_\infty$ entails $\Diamond_\vee$.** ∀p:t. $\Diamond_\infty$p → $\Diamond_\vee$p
+- **$\Diamond_\infty$ entails $\Diamond_\vee$.** $\forall p:t$. $\Diamond_\infty$$p \to$ $\Diamond_\vee$p
 
 ## Notes
 

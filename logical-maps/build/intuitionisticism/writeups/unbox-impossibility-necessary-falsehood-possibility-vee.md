@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** □(∀p:t. ¬$\Diamond_\vee$(p) → □¬p)
+- **□Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** $\Box (\forall p:t. \neg$$\Diamond_\vee$$(p) \to \Box \neg p$)
 
 ## Conclusion
 
-- **Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** ∀p:t. ¬$\Diamond_\vee$(p) → □¬p
+- **Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** $\forall p:t. \neg$$\Diamond_\vee$$(p) \to \Box \neg p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

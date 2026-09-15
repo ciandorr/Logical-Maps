@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□($\Diamond_\infty$ = Truth).** □($\Diamond_\infty$ = (λp:t. p))
+- **□($\Diamond_\infty$ = Truth).** $\Box$($\Diamond_\infty$ $= (\lambda p:t. p)$)
 
 ## Conclusion
 
-- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ = (λp:t. p)
+- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ $= (\lambda p:t. p)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

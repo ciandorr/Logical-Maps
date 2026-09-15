@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Relative Expectation and Dominance recover CDF-area comparisons</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relative Expectation and Dominance recover CDF-area comparisons</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,30 +252,41 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Relative Expectation and Dominance recover CDF-area comparisons</h1>
-</header>
-<p><strong>Proved implication:</strong> Rich Outcomes + Archimedean Outcomes + Stochastic Dominance + Relative Expectation imply CDF-Area Extension.</p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Relative Expectation and Dominance recover CDF-area comparisons</h1></header><p><strong>Proved implication:</strong> Rich Outcomes + Archimedean Outcomes + Stochastic Dominance + Relative Expectation imply CDF-Area Extension.</p>
 <p><strong>Original work: connecting argument and proof adaptation.</strong> GPT-6 (Codex), 9 September 2026, combines the existing quantile-area identity with a one-sided truncation of the utility difference. Goodsell’s unpublished <em>Unbounded Utility and Background Risk</em>, §3, supplies the area rule; this converse is a project connecting proof, not attributed as a theorem from that manuscript. No independent checker, Lean verification or literature-novelty claim is made.</p>
 <h2 id="framework-and-the-quantile-identity">Framework and the quantile identity</h2>
-<p>Archimedean Outcomes makes the utility chart total; its measurability is a standing chart convention. Rich Outcomes supplies every finite real level used below. Write numerical utility variables as (X,Y), and put</p>
-<p>[ d(t)=S_X(t)-S_Y(t),A_=<em>{R}d</em>(t),dt. ]</p>
-<p>Dominance implies Stochastic Equivalence, so preferences can be transferred to new realizations once their marginal laws have been checked. Let (U) be uniform on the standing sample space and set (A=Q_X(U), B=Q_Y(U)) using increasing quantiles. These have the original marginal laws. Assign finite valid outcomes at the null quantile endpoints.</p>
-<p>For each threshold, the upper-level events of these two nondecreasing functions of (U) are nested. Thus</p>
-<p>[ P(A&gt;t,Bt)=(S_X(t)-S_Y(t))_+. ]</p>
-<p>Integrating the elementary identity ((a-b)_+=1_{{bt&lt;a}},dt) and applying Tonelli gives</p>
-<p>[ E[(A-B)_+]=A_+,E[(A-B)_-]=A_-.  ]</p>
+<p>Archimedean Outcomes makes the utility chart total; its measurability is a standing chart convention. Rich Outcomes supplies every finite real level used below. Write numerical utility variables as <span class="math inline">X,Y</span>, and put</p>
+<p><span class="math display">
+d(t)=S_X(t)-S_Y(t),\qquad A_\pm=\int_{\mathbb R}d_\pm(t)\,dt.
+</span></p>
+<p>Dominance implies Stochastic Equivalence, so preferences can be transferred to new realizations once their marginal laws have been checked. Let <span class="math inline">U</span> be uniform on the standing sample space and set <span class="math inline">A=Q_X(U), B=Q_Y(U)</span> using increasing quantiles. These have the original marginal laws. Assign finite valid outcomes at the null quantile endpoints.</p>
+<p>For each threshold, the upper-level events of these two nondecreasing functions of <span class="math inline">U</span> are nested. Thus</p>
+<p><span class="math display">
+P(A&gt;t,B\le t)=(S_X(t)-S_Y(t))_+.
+</span></p>
+<p>Integrating the elementary identity <span class="math inline">(a-b)_+=\int\mathbf1_{\{b\le t&lt;a\}}\,dt</span> and applying Tonelli gives</p>
+<p><span class="math display">
+E[(A-B)_+]=A_+,\qquad E[(A-B)_-]=A_-.
+\tag{1}
+</span></p>
 <p>These equalities allow infinite values and do not subtract two infinities.</p>
 <h2 id="both-areas-finite">Both areas finite</h2>
-<p>If (A_+,A_-&lt;), equation (1) shows that the actual difference (A-B) is integrable, with mean (A_+-A_-). Relative Expectation gives (ABA_+A_-). Stochastic Equivalence transfers both directions to (X,Y), including indifference when the areas are equal.</p>
+<p>If <span class="math inline">A_+,A_-&lt;\infty</span>, equation (1) shows that the actual difference <span class="math inline">A-B</span> is integrable, with mean <span class="math inline">A_+-A_-</span>. Relative Expectation gives <span class="math inline">A\succeq B\iff A_+\ge A_-</span>. Stochastic Equivalence transfers both directions to <span class="math inline">X,Y</span>, including indifference when the areas are equal.</p>
 <h2 id="exactly-one-infinite-area">Exactly one infinite area</h2>
-<p>Suppose (A_+=) and (A_-&lt;). Put (D=A-B), and for a positive integer (N) define</p>
-<p>[ Z_N=B+(D_+,N)-D_-. ]</p>
-<p>This is a measurable finite-valued-at-each-state utility variable, so the full real chart realizes it as a gamble. It need not be a <em>simple</em> gamble. Pointwise, (Z_NA), and</p>
-<p>[ E|Z_N-B|N+A_-&lt;, E[Z_N-B]=E[(D_+,N)]-A_-+. ]</p>
-<p>Choose (N) with positive mean. Relative Expectation gives (Z_NB), while pointwise domination gives stochastic domination, hence (AZ_N). In a preorder, a weak comparison followed by a strict comparison is strict, so (AB). Transfer to (X,Y) by Stochastic Equivalence. The case (A_+&lt;,A_-=) follows by exchanging the variables and gives (YX).</p>
+<p>Suppose <span class="math inline">A_+=\infty</span> and <span class="math inline">A_-&lt;\infty</span>. Put <span class="math inline">D=A-B</span>, and for a positive integer <span class="math inline">N</span> define</p>
+<p><span class="math display">
+Z_N=B+\min(D_+,N)-D_-.
+</span></p>
+<p>This is a measurable finite-valued-at-each-state utility variable, so the full real chart realizes it as a gamble. It need not be a <em>simple</em> gamble. Pointwise, <span class="math inline">Z_N\le A</span>, and</p>
+<p><span class="math display">
+E|Z_N-B|\le N+A_-&lt;\infty,\qquad
+E[Z_N-B]=E[\min(D_+,N)]-A_-\longrightarrow+\infty.
+</span></p>
+<p>Choose <span class="math inline">N</span> with positive mean. Relative Expectation gives <span class="math inline">Z_N\succ B</span>, while pointwise domination gives stochastic domination, hence <span class="math inline">A\succeq Z_N</span>. In a preorder, a weak comparison followed by a strict comparison is strict, so <span class="math inline">A\succ B</span>. Transfer to <span class="math inline">X,Y</span> by Stochastic Equivalence. The case <span class="math inline">A_+&lt;\infty,A_-=\infty</span> follows by exchanging the variables and gives <span class="math inline">Y\succ X</span>.</p>
 <p>These are all cases constrained by CDF-Area Extension. When both areas are infinite, neither that principle nor this proof demands a comparison.</p>
 <h2 id="consequence-under-du">Consequence under DU</h2>
 <p>DU supplies the outcome and dominance premises. Combined with the already recorded implication from CDF-Area Extension to Relative Expectation, this establishes their equivalence under DU. No continuity, mixture independence, totality or affine symmetry is used in this proof.</p>
@@ -299,5 +294,4 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <ul>
 <li><strong>Background: Unbounded Utility and Background Risk.</strong> Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. — §3, pp. 7–8: source of the CDF-area comparison. The existing project writeups/cdf-area-preorder.md and results/cdf-area-implies-relative.yaml contain related quantile-area and integrable-difference calculations</li>
 </ul>
-</body>
-</html>
+</body></html>

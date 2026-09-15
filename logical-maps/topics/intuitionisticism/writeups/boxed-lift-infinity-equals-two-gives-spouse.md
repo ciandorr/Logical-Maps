@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□($\Diamond_\infty$ = ◇₂).** □($\Diamond_\infty$ = ◇₂)
+- **□($\Diamond_\infty$ = ◇₂).** $\Box$($\Diamond_\infty$ $= \Diamond _{2}$)
 
 ## Conclusion
 
-- **□Spouse ($\Diamond_\infty$).** □(∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\infty$))
+- **□Spouse ($\Diamond_\infty$).** $\Box (\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\infty$))
 
 ## Proof
 

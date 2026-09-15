@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Non-convex cone</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Non-convex cone</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,29 +252,27 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Non-convex cone</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Non-convex cone</h1></header><p class="cert">
 Model — Source: Misc.; produced by Claude Fable 5.1 (Cowork session).
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>Completeness.</strong> For all p, q ∈ Δ(X): p ≽ q or q ≽ p.</li>
-<li><strong>Independence.</strong> For all p, q, r ∈ Δ(X) and λ ∈ (0,1]: p ≽ q if and only if λp + (1−λ)r ≽ λq + (1−λ)r.</li>
-<li><strong>Closed-graph continuity.</strong> The set {(p, q) ∈ Δ(X) × Δ(X) : p ≽ q} is closed in the product topology.</li>
-<li><strong>¬ Transitivity.</strong> For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.</li>
+<li><strong>Completeness.</strong> For all <span class="math inline">p, q \in \Delta (X): p \succeq q</span> or <span class="math inline">q \succeq p</span>.</li>
+<li><strong>Independence.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span> and <span class="math inline">\lambda \in (0,1]: p \succeq q</span> if and only if <span class="math inline">\lambda p + (1- \lambda )r \succeq \lambda q + (1- \lambda )r</span>.</li>
+<li><strong>Closed-graph continuity.</strong> The set <span class="math inline">\{(p, q) \in \Delta (X) \times \Delta (X) : p \succeq q\}</span> is closed in the product topology.</li>
+<li><strong>¬ Transitivity.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span>: if <span class="math inline">p \succeq q</span> and <span class="math inline">q \succeq r</span> then <span class="math inline">p \succeq r</span>.</li>
 </ul>
 <h2 id="construction">Construction</h2>
-<p>Let X = {a, b, c} and identify a difference q − p of lotteries with the point (q(a) − p(a), q(b) − p(b)) ∈ ℝ². Let C ⊆ ℝ² be the closed upper half-plane together with the closed sector of directions [225°, 270°], and define q ≽ p iff q − p ∈ C.</p>
-<p>Completeness: C ∪ (−C) = ℝ² since −C contains the closed lower half-plane. Independence: mixing both sides with r multiplies the difference by λ &gt; 0, and C is a cone. Closed graph: (p, q) ↦ q − p is continuous and C is closed. Reflexivity: 0 ∈ C.</p>
-<p>Transitivity fails: take x at direction 240° and y at direction 170°, both in C and small enough that p, q = p + x… are lotteries; x + y has direction ≈ 205°, which is not in C. So with q − p = x and r − q = y we have q ≽ p and r ≽ q but not r ≽ p.</p>
+<p>Let <span class="math inline">X = \{a, b, c\}</span> and identify a difference q − p of lotteries with the point <span class="math inline">(q(a) - p(a), q(b) - p(b)) \in \mathbb{R} ^{2}</span>. Let <span class="math inline">C \subseteq \mathbb{R} ^{2}</span> be the closed upper half-plane together with the closed sector of directions [225°, 270°], and define <span class="math inline">q \succeq p</span> iff <span class="math inline">q - p \in C</span>.</p>
+<p><span class="math inline">\operatorname{Completeness}: C \cup (- C) = \mathbb{R} ^{2}</span> since −C contains the closed lower half-plane. Independence: mixing both sides with r multiplies the difference by <span class="math inline">\lambda &gt; 0</span>, and C is a cone. Closed graph: (p, q) ↦ q − p is continuous and C is closed. Reflexivity: <span class="math inline">0 \in C</span>.</p>
+<p>Transitivity fails: take x at direction 240° and y at direction 170°, both in C and small enough that <span class="math inline">p, q = p + x\ldots</span> are lotteries; <span class="math inline">x + y</span> has direction <span class="math inline">\approx 205</span>°, which is not in C. So with <span class="math inline">q - p = x</span> and <span class="math inline">r - q = y</span> we have <span class="math inline">q \succeq p</span> and <span class="math inline">r \succeq q</span> but not <span class="math inline">r \succeq p</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Sanity-checked numerically in checks/countermodels.py (completeness and independence hold, transitivity fails on random samples). Not yet checked by a human. Any non-convex closed cone C with C ∪ −C = ℝ² works.</p>
+<p>Sanity-checked numerically in checks/countermodels.py (completeness and independence hold, transitivity fails on random samples). Not yet checked by a human. Any non-convex closed cone C with <span class="math inline">C \cup - C = \mathbb{R} ^{2}</span> works.</p>
 <p class="cert">
 Record: <code>topics/decision-theory/models/non-convex-cone.yaml</code>
 </p>
-</body>
-</html>
+</body></html>

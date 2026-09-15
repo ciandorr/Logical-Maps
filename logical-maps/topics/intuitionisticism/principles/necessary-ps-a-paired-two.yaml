@@ -1,8 +1,10 @@
 id: necessary-ps-a-paired-two
 name: □PSa (□₂, ◇₂)
 category: possibility-two
-statement: □(∀p,q:t. □₂(p → q) → (◇₂p → ◇₂q))
-formal: □(∀p,q:t. □₂(p → q) → (◇₂p → ◇₂q))
+statement: |-
+  $\Box (\forall p,q:t. \Box _{2}(p \to q) \to (\Diamond _{2}p \to \Diamond _{2}q))$
+formal: |-
+  $\Box (\forall p,q:t. \Box _{2}(p \to q) \to (\Diamond _{2}p \to \Diamond _{2}q))$
 sources:
 - Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.5, Theorem 14,
   Eq. (57), pp. 25–26.
@@ -14,7 +16,8 @@ references:
   locator: §4.5, Theorem 14, Eq. (57), pp. 25–26
 date: '2026-09-13'
 lean: null
-notes: The outer □ is identity with ⊤, as required by Married; the inner necessity is □₂.
+notes: |-
+  The outer $\Box$ is identity with $\top$, as required by Married; the inner necessity is $\Box _{2}$.
 aliases:
 - Necessary PSa (□₂, ◇₂)
 - '[]PSa (□₂, ◇₂)'

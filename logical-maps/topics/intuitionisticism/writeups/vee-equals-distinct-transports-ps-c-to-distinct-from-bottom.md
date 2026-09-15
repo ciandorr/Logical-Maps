@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ = (λp:t. p ≠ ⊥)
-- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$(p ∨ q) implies $\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q).
+- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$
+- **PSc ($\Diamond_\vee$).** For every p and q, $\Diamond_\vee$$(p \lor q)$ implies $\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q).
 
 ## Conclusion
 
-- **PSc (≠⊥).** For every p and q, (p ∨ q) ≠ ⊥ implies p ≠ ⊥ or q ≠ ⊥.
+- **PSc (≠⊥).** For every p and $q, (p \lor q) \ne \bot$ implies $p \ne \bot$ or $q \ne \bot$.
 
 ## Proof
 
-Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving □=(=⊤) unchanged.
+Use the selected identity of the two defined operators in Leibniz’s Law with the whole quantified PS condition as the predicate of that operator. This directly replaces the operator under every connective and quantifier, leaving $\Box =(=\top )$ unchanged.
 
 ## Notes
 

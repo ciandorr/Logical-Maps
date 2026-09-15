@@ -4,13 +4,13 @@
 
 ## Premises
 
-- **□PSa (≠⊥).** □(∀p, q : t. (□(p → q) → ((p ≠ ⊥) → (q ≠ ⊥))))
-- **□PSb (≠⊥).** □(¬(⊥ ≠ ⊥))
-- **□Impossibility ⇒ necessary falsehood (≠⊥).** □(∀p:t. ¬(p ≠ ⊥) → □¬p)
+- **□PSa (≠⊥).** $\Box (\forall p, q : t. (\Box (p \to q) \to ((p \ne \bot ) \to (q \ne \bot ))))$
+- **□PSb (≠⊥).** $\Box (\neg (\bot \ne \bot ))$
+- **□Impossibility ⇒ necessary falsehood (≠⊥).** $\Box (\forall p:t. \neg (p \ne \bot ) \to \Box \neg p)$
 
 ## Conclusion
 
-- **□Stability of □¬.** □(∀p:t. ¬¬□¬p → □¬p)
+- **□Stability of □¬.** $\Box (\forall p:t. \neg \neg \Box \neg p \to \Box \neg p)$
 
 ## Proof
 

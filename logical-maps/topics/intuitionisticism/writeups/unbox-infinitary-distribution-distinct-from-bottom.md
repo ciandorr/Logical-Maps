@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Infinitary distribution (≠⊥).** □(∀F:tt. Inex^t(F) → (((∃x:t. F x) ≠ ⊥) → ∃x:t. (F x ≠ ⊥)))
+- **□Infinitary distribution (≠⊥).** $\Box (\forall F:tt. \operatorname{Inex}^t(F) \to (((\exists x:t. F x) \ne \bot ) \to \exists x:t. (F x \ne \bot )))$
 
 ## Conclusion
 
-- **Infinitary distribution (≠⊥).** ∀F:tt. Inex^t(F) → (((∃x:t. F x) ≠ ⊥) → ∃x:t. (F x ≠ ⊥))
+- **Infinitary distribution (≠⊥).** $\forall F:tt. \operatorname{Inex}^t(F) \to (((\exists x:t. F x) \ne \bot ) \to \exists x:t. (F x \ne \bot ))$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

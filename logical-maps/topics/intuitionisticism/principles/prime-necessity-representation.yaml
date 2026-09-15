@@ -1,8 +1,10 @@
 id: prime-necessity-representation
 name: Prime representation of □
 category: necessity
-statement: (λp:t. □p) = (λp:t. ∀w:t. Prime(w) → □(w → p))
-formal: (λp:t. □p) = (λp:t. ∀w:t. Prime(w) → □(w → p))
+statement: |-
+  $(\lambda p:t. \Box p) = (\lambda p:t. \forall w:t. \operatorname{Prime}(w) \to \Box (w \to p))$
+formal: |-
+  $(\lambda p:t. \Box p) = (\lambda p:t. \forall w:t. \operatorname{Prime}(w) \to \Box (w \to p))$
 sources:
 - Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.3, Eq. (40),
   p. 21.

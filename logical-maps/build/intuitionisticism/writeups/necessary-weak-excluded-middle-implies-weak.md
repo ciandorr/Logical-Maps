@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□WLEM.** □(∀p:t. ¬p ∨ ¬¬p)
+- **□WLEM.** $\Box (\forall p:t. \neg p \lor \neg \neg p)$
 
 ## Conclusion
 
-- **WLEM.** ∀p:t. ¬p ∨ ¬¬p
+- **WLEM.** $\forall p:t. \neg p \lor \neg \neg p$
 
 ## Proof
 
-Apply □A → A to the entire quantified weak law.
+Apply $\Box A \to A$ to the entire quantified weak law.
 
 ## Notes
 

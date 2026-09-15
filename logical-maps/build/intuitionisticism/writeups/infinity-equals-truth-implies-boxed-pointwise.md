@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ = (λp:t. p)
+- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ $= (\lambda p:t. p)$
 
 ## Conclusion
 
-- **□$\Diamond_\infty$ entails Truth.** □(∀p:t. $\Diamond_\infty$p → p)
+- **□$\Diamond_\infty$ entails Truth.** $\Box (\forall p:t$. $\Diamond_\infty$$p \to p$)
 
 ## Proof
 
-The reflexive sentence ∀p.($\Diamond_\infty$p→$\Diamond_\infty$p) is an assumption-free theorem and may be necessitated. Substitute the selected operator identity into the appropriate occurrences inside that boxed sentence, using Leibniz’s Law. This yields the entire boxed pointwise implication in the conclusion.
+The reflexive sentence $\forall p$.($\Diamond_\infty$$p\to$$\Diamond_\infty$p) is an assumption-free theorem and may be necessitated. Substitute the selected operator identity into the appropriate occurrences inside that boxed sentence, using Leibniz’s Law. This yields the entire boxed pointwise implication in the conclusion.
 
 ## Notes
 

@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if E|u(X)−u(Y)|<∞, then X ≽ Y iff E[u(X)−u(Y)] ≥ 0. Their individual expectations may both be undefined.
-- **Continuity under Vanishing Shifts.** For real-utility variables X,Y, if X+ε ≽ Y for every ε>0, then X ≽ Y. The shifts act on utility levels, and all the displayed variables must be available. Only this upper-section closure condition is imposed.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if $E|u(X)- u(Y)|<\infty$, then $X \succeq Y$ iff $E[u(X)- u(Y)] \ge 0$. Their individual expectations may both be undefined.
+- **Continuity under Vanishing Shifts.** For real-utility variables X,Y, if $X+\epsilon \succeq Y$ for every $\epsilon >0$, then $X \succeq Y$. The shifts act on utility levels, and all the displayed variables must be available. Only this upper-section closure condition is imposed.
 
 ## Conclusion
 
-- **L¹ Continuity (random variables).** On variables with real utility levels, if E|u(X_n)−u(X)| → 0 and X_n ≽ Y for every n, then X ≽ Y. Only the upper-section clause is imposed, matching the paper. Distance can be infinite between other pairs.
+- **L¹ Continuity (random variables).** On variables with real utility levels, if $E|u(X_n)- u(X)| \to 0$ and $X_n \succeq Y$ for every n, then $X \succeq Y$. Only the upper-section clause is imposed, matching the paper. Distance can be infinite between other pairs.
 
 ## Proof
 
-Suppose E|u(X_n)−u(X)| tends to zero and X_n ≽ Y for every n. Fix ε>0. Rich Outcomes supplies X+ε in the real utility chart. For a sufficiently large n, the actual difference (X+ε)−X_n is integrable and has expectation at least ε−E|u(X_n)−u(X)|>0. Relative Expectation applied in both directions gives X+ε ≻ X_n, so transitivity gives X+ε ≽ Y. This holds for every ε>0. Continuity under Vanishing Shifts yields X ≽ Y, exactly the recorded upper-section L1 Continuity clause. Neither transporting a preference by a shift nor closing a lower section is required.
+Suppose $E|u(X_n)- u(X)|$ tends to zero and $X_n \succeq Y$ for every n. Fix $\epsilon >0$. Rich Outcomes supplies $X+\epsilon$ in the real utility chart. For a sufficiently large n, the actual difference $(X+\epsilon )- X_n$ is integrable and has expectation at least $\epsilon - E|u(X_n)- u(X)|>0$. Relative Expectation applied in both directions gives $X+\epsilon \succ X_n$, so transitivity gives $X+\epsilon \succeq Y$. This holds for every $\epsilon >0$. Continuity under Vanishing Shifts yields $X \succeq Y$, exactly the recorded upper-section L1 Continuity clause. Neither transporting a preference by a shift nor closing a lower section is required.
 
 ## Notes
 

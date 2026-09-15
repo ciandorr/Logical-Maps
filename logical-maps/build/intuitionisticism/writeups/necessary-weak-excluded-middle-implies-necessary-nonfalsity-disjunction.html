@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>□WLEM ⇒ □Nonfalsity distributes over ∨</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>□WLEM ⇒ □Nonfalsity distributes over ∨</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -319,21 +303,20 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">□WLEM ⇒ □Nonfalsity distributes over ∨</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□WLEM ⇒ □Nonfalsity distributes over ∨</h1></header><p class="cert">
 Result — Source: Possibility in Intuitionistic Higher-Order Logic; produced by Zachary Goodsell; proof transcribed and expanded from the manuscript; recorded by Codex (GPT-6), manuscript transcription.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□WLEM.</strong> □(∀p:t. ¬p ∨ ¬¬p)</li>
+<li><strong>□WLEM.</strong> <span class="math inline">\Box (\forall p:t. \neg p \lor \neg \neg p)</span></li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□Nonfalsity distributes over ∨.</strong> □(∀p,q:t. ¬¬(p ∨ q) → (¬¬p ∨ ¬¬q))</li>
+<li><strong>□Nonfalsity distributes over ∨.</strong> <span class="math inline">\Box (\forall p,q:t. \neg \neg (p \lor q) \to (\neg \neg p \lor \neg \neg q))</span></li>
 </ul>
 <h2 id="proof">Proof</h2>
 <p>The unboxed implication is an assumption-free theorem by the case argument for weak excluded middle and nonfalsity distribution recorded separately. Necessitate that implication as a closed theorem, then apply K to the selected boxed antecedent. This does not necessitate an assumption.</p>
@@ -350,5 +333,4 @@ Record: <code>topics/intuitionisticism/results/necessary-weak-excluded-middle-im
 <ul>
 <li><strong>Proof: Possibility in Intuitionistic Higher-Order Logic.</strong> Zachary Goodsell (21 August 2026). Possibility in Intuitionistic Higher-Order Logic. Manuscript. — §4.2, Theorem 8, Eq. (34), p. 19</li>
 </ul>
-</body>
-</html>
+</body></html>

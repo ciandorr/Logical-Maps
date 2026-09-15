@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>A smaller sufficient package for Negative Self-Similarity</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>A smaller sufficient package for Negative Self-Similarity</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,19 +252,18 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">A smaller sufficient package for Negative Self-Similarity</h1>
-</header>
-<p><strong>Claim.</strong> Totality + Mixture Independence + Negative Affine Anti-Invariance imply Uniqueness of Negative Self-Similarity.</p>
-<p>Fix an eligible instance of the principle, with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>p</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0&lt;p&lt;1</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a&gt;0</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>∈</mo><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle></mrow><annotation encoding="application/x-tex">b\in\mathbb R</annotation></semantics></math> and common gamble <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>. Define, for the variables under consideration,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo>−</mo><mi>a</mi><mi>V</mi><mo>+</mo><mi>b</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>M</mi><mi>p</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mi>Z</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">T(V)=-aV+b,\qquad F(V)=M_p(T(V),Z).</annotation></semantics></math></p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>A smaller sufficient package for Negative Self-Similarity</h1></header><p><strong>Claim.</strong> Totality + Mixture Independence + Negative Affine Anti-Invariance imply Uniqueness of Negative Self-Similarity.</p>
+<p>Fix an eligible instance of the principle, with <span class="math inline">0&lt;p&lt;1</span>, <span class="math inline">a&gt;0</span>, <span class="math inline">b\in\mathbb R</span> and common gamble <span class="math inline">Z</span>. Define, for the variables under consideration,</p>
+<p><span class="math display">T(V)=-aV+b,\qquad F(V)=M_p(T(V),Z).</span></p>
 <p>Negative Affine Anti-Invariance supplies</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>≻</mo><mi>W</mi><mspace width="0.222em"></mspace><mo>⇒</mo><mspace width="0.222em"></mspace><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>W</mi><mo stretchy="false" form="postfix">)</mo><mo>≻</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">V\succ W\ \Longrightarrow\ T(W)\succ T(V).</annotation></semantics></math></p>
-<p>Indeed, it supplies the weak comparison in this direction, while the opposite weak comparison would imply <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>W</mi><mo>≽</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">W\succeq V</annotation></semantics></math>, contradicting strictness. Mixture Independence likewise preserves strictness between first arguments with the same second argument: apply its biconditional to both weak comparison directions. Thus</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mo>≻</mo><mi>W</mi><mspace width="0.222em"></mspace><mo>⇒</mo><mspace width="0.222em"></mspace><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>W</mi><mo stretchy="false" form="postfix">)</mo><mo>≻</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>V</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">V\succ W\ \Longrightarrow\ F(W)\succ F(V).</annotation></semantics></math></p>
-<p>Suppose now that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X\sim F(X)</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>∼</mo><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y\sim F(Y)</annotation></semantics></math>. If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>≻</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\succ Y</annotation></semantics></math>, the last implication and the fixed-point indifferences give <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≻</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succ X</annotation></semantics></math>, contradicting the strict part of a preorder. The case <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>≻</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y\succ X</annotation></semantics></math> is identical. Under Totality, two variables which are not indifferent must be strictly ranked in one of these two directions. Therefore <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X\sim Y</annotation></semantics></math>.</p>
+<p><span class="math display">V\succ W\ \Longrightarrow\ T(W)\succ T(V).</span></p>
+<p>Indeed, it supplies the weak comparison in this direction, while the opposite weak comparison would imply <span class="math inline">W\succeq V</span>, contradicting strictness. Mixture Independence likewise preserves strictness between first arguments with the same second argument: apply its biconditional to both weak comparison directions. Thus</p>
+<p><span class="math display">V\succ W\ \Longrightarrow\ F(W)\succ F(V).</span></p>
+<p>Suppose now that <span class="math inline">X\sim F(X)</span> and <span class="math inline">Y\sim F(Y)</span>. If <span class="math inline">X\succ Y</span>, the last implication and the fixed-point indifferences give <span class="math inline">Y\succ X</span>, contradicting the strict part of a preorder. The case <span class="math inline">Y\succ X</span> is identical. Under Totality, two variables which are not indifferent must be strictly ranked in one of these two directions. Therefore <span class="math inline">X\sim Y</span>.</p>
 <p>Only the affine transformations already required by the two fixed-point hypotheses are used. There is no replacement by a same-law variable, no need to construct any additional utility level, and no invocation of expected utility or dominance.</p>
 <p><strong>Original work: proof adaptation.</strong> The mathematical argument is Goodsell’s Theorem 10 argument. The new database work is its premise audit: four assumptions from the full source package are unnecessary here. This is not a claim that the uniqueness argument is original to the AI or new in the literature.</p>
 <p><strong>Attribution.</strong> Original uniqueness argument: Zachary Goodsell, <em>Symmetries of value</em>, Theorem 10, pp. 30–31. Reduced-premise statement and audit: GPT-6 (Codex), 9 September 2026. No independent checker or Lean proof is claimed.</p>
@@ -288,5 +271,4 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 10, pp. 30–31. The cited argument is adapted with the explicitly listed sufficient premises; the reduced-premise claim is the present project contribution</li>
 </ul>
-</body>
-</html>
+</body></html>

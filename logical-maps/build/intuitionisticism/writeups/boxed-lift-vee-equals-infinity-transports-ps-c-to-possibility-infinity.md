@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = $\Diamond_\infty$).** □($\Diamond_\vee$ = $\Diamond_\infty$)
-- **□PSc ($\Diamond_\vee$).** □(∀p, q : t. ($\Diamond_\vee$(p ∨ q) → ($\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q))))
+- **□($\Diamond_\vee$ = $\Diamond_\infty$).** $\Box$($\Diamond_\vee$ = $\Diamond_\infty$)
+- **□PSc ($\Diamond_\vee$).** $\Box (\forall p, q : t$. ($\Diamond_\vee$$(p \lor q) \to$ ($\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q))))
 
 ## Conclusion
 
-- **□PSc ($\Diamond_\infty$).** □(∀p, q : t. ($\Diamond_\infty$(p ∨ q) → ($\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q))))
+- **□PSc ($\Diamond_\infty$).** $\Box (\forall p, q : t$. ($\Diamond_\infty$$(p \lor q) \to$ ($\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q))))
 
 ## Proof
 

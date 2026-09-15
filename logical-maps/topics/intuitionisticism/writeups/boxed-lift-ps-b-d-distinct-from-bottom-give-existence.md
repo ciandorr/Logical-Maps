@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□PSb (≠⊥).** □(¬(⊥ ≠ ⊥))
-- **□PSd (≠⊥).** □(∀p, q : t. (((p ≠ ⊥) → □q) → □(p → q)))
+- **□PSb (≠⊥).** $\Box (\neg (\bot \ne \bot ))$
+- **□PSd (≠⊥).** $\Box (\forall p, q : t. (((p \ne \bot ) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **□A PSb–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSd(f))
+- **□A PSb–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f))$
 
 ## Proof
 

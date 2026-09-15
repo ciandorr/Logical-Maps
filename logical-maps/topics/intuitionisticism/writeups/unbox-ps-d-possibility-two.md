@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSd (◇₂).** □(∀p, q : t. ((◇₂(p) → □q) → □(p → q)))
+- **□PSd (◇₂).** $\Box (\forall p, q : t. ((\Diamond _{2}(p) \to \Box q) \to \Box (p \to q)))$
 
 ## Conclusion
 
-- **PSd (◇₂).** For every p and q, if ◇₂(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd (◇₂).** For every p and q, if $\Diamond _{2}(p)$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

@@ -1,17 +1,17 @@
 id: lexicographic-eu
 name: Lexicographic EU
-description: |
-  Lexicographic expected utility. With X = {a, b, c} let p ≽ q iff
-  p(a) > q(a), or p(a) = q(a) and p(b) ≥ q(b). This is complete and
-  transitive (a lexicographic order on ℝ²), and satisfies independence
-  because mixing with r multiplies the vector of differences by λ, which
-  preserves lexicographic sign. But {λ : λδ_a + (1−λ)δ_c ≽ δ_b} = (0, 1],
+description: |-
+  Lexicographic expected utility. With $X = \{a, b, c\}$ let $p \succeq q$ iff
+  $p(a) > q(a)$, or $p(a) = q(a)$ and $p(b) \ge q(b)$. This is complete and
+  transitive (a lexicographic order on $\mathbb{R} ^{2}$), and satisfies independence
+  because mixing with r multiplies the vector of differences by $\lambda$, which
+  preserves lexicographic sign. But $\{\lambda : \lambda \delta _a + (1- \lambda )\delta _c \succeq \delta _b\} = (0, 1]$,
   which is not closed.
 
-  The same lexicographic order (p ≽ q iff p(a) > q(a), or p(a) = q(a) and
-  p(b) ≥ q(b)). Here δ_a ≻ δ_b ≻ δ_c, but every mixture βδ_a + (1−β)δ_c
-  with β > 0 puts positive weight on a and so is strictly preferred to
-  δ_b; no β with δ_b ≻ βδ_a + (1−β)δ_c exists.
+  The same lexicographic order $(p \succeq q$ iff $p(a) > q(a)$, or $p(a) = q(a)$ and
+  $p(b) \ge q(b)$). Here $\delta _a \succ \delta _b \succ \delta _c$, but every mixture $\beta \delta _a + (1- \beta )\delta _c$
+  with $\beta > 0$ puts positive weight on a and so is strictly preferred to
+  $\delta _b$; no $\beta$ with $\delta _b \succ \beta \delta _a + (1- \beta )\delta _c$ exists.
 satisfies:
 - completeness
 - transitivity

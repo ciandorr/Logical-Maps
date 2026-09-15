@@ -1,6 +1,6 @@
 # Negative Self-Similarity evaluates Alternating St Petersburg
 
-**Claim.** Rich Outcomes + Stochastic Equivalence + Simple EU + Uniqueness of Negative Self-Similarity imply Alternating St Petersburg $=-1/2$.
+**Claim.** Rich Outcomes + Stochastic Equivalence + Simple $\operatorname{EU} +$ Uniqueness of Negative Self-Similarity imply Alternating St Petersburg $=-1/2$.
 
 Let $A$ be any gamble with
 

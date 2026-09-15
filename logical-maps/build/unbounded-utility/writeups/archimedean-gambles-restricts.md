@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Archimedean Gambles.** For any gambles X ≻ Y ≻ Z, there is p ∈ (0,1) with Y ~ M_p(X,Z). Unlike Archimedean Outcomes, X,Y,Z may themselves be unbounded gambles.
+- **Archimedean Gambles.** For any gambles $X \succ Y \succ Z$, there is $p \in (0,1)$ with $Y \sim M_p(X,Z)$. Unlike Archimedean Outcomes, X,Y,Z may themselves be unbounded gambles.
 
 ## Conclusion
 
-- **Archimedean Outcomes.** For any three sure outcomes a ≻ b ≻ c, some nontrivial mixture of the outer two is equally good as the intermediate one: b ~ M_p(a,c) for some p ∈ (0,1). Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
+- **Archimedean Outcomes.** For any three sure outcomes $a \succ b \succ c$, some nontrivial mixture of the outer two is equally good as the intermediate one: $b \sim M_p(a,c)$ for some $p \in (0,1)$. Only the three inputs are sure outcomes. This is the no-infinite-ratios condition, not continuity of preferences over arbitrary gambles.
 
 ## Proof
 

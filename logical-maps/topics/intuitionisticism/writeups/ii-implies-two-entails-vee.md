@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **◇₂ entails $\Diamond_\vee$.** ∀p:t. ◇₂p → $\Diamond_\vee$p
+- **◇₂ entails $\Diamond_\vee$.** $\forall p:t. \Diamond _{2}p \to$ $\Diamond_\vee$p
 
 ## Proof
 
-Given ◇₂p, choose a defining witness P with Possibility₂(P) and Pp. The proved inclusion of candidate classes gives $\mathrm{Possibility}_\vee$(P), so the same P witnesses $\Diamond_\vee$p. Discharge and universally generalize p.
+Given $\Diamond _{2}p$, choose a defining witness P with $\operatorname{Possibility}_{2}(P)$ and Pp. The proved inclusion of candidate classes gives $\mathrm{Possibility}_\vee$(P), so the same P witnesses $\Diamond_\vee$p. Discharge and universally generalize p.
 
 ## Notes
 

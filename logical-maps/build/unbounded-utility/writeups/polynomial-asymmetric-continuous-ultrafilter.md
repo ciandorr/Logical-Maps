@@ -3,7 +3,7 @@
 **Source and work accounting.** This uses Zachary Goodsell's asymmetric
 continuous clipping construction from *Decision theory unbound*, Appendix B,
 Definition 3, Lemma 6, Remark 3 and Corollary 3, pp. 691–693. Its compatibility
-with DTU, Relative Expectation and L¹ Continuity while failing reflection is
+with DTU, Relative Expectation and $L^{1}$ Continuity while failing reflection is
 already recorded in *Symmetries of value*, Theorem 1, p. 24. The work supplied
 by GPT-6 (Codex), 9 September 2026, is the cutoff choice and the explicit
 Pasadena/Arroyo evaluations below, with verification of inherited properties.
@@ -212,7 +212,7 @@ construction; only these chosen cutoff rates and calculations are additions here
 
 ## Scope and diagnostics
 
-The model satisfies DTU, Relative Expectation, L¹ Continuity, CDF-Area Extension,
+The model satisfies DTU, Relative Expectation, $L^{1}$ Continuity, CDF-Area Extension,
 and the shift properties, yet fails both named game evaluations. Its failure
 of Negative Self-Similarity follows from the new Pasadena implication; further
 exclusions are left to the map's inference engine rather than separately

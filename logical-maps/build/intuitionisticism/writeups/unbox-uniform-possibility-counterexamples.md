@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Uniform impossibility counterexamples.** □(∀f:tt. (PSb(f) ∧ PSc(f)) → ∃p:t. (¬f p ∧ p ≠ ⊥))
+- **□Uniform impossibility counterexamples.** $\Box (\forall f:tt. (\operatorname{PSb}(f) \land \operatorname{PSc}(f)) \to \exists p:t. (\neg f p \land p \ne \bot ))$
 
 ## Conclusion
 
-- **Uniform impossibility counterexamples.** ∀f:tt. (PSb(f) ∧ PSc(f)) → ∃p:t. (¬f p ∧ p ≠ ⊥)
+- **Uniform impossibility counterexamples.** $\forall f:tt. (\operatorname{PSb}(f) \land \operatorname{PSc}(f)) \to \exists p:t. (\neg f p \land p \ne \bot )$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

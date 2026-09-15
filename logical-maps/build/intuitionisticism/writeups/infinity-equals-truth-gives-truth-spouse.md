@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ = (λp:t. p)
+- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ $= (\lambda p:t. p)$
 
 ## Conclusion
 
-- **Spouse ($\Diamond_\infty$).** ∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\infty$)
+- **Spouse ($\Diamond_\infty$).** $\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\infty$)
 
 ## Proof
 
-Truth is Necessity₂ and is married to itself by Theorem 16. Substitute the selected operator identity into this marriage and use Truth as the qualified spouse witness.
+Truth is $\operatorname{Necessity}_{2}$ and is married to itself by Theorem 16. Substitute the selected operator identity into this marriage and use Truth as the qualified spouse witness.
 
 ## Notes
 

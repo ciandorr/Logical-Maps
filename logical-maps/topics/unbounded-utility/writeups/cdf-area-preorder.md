@@ -119,7 +119,7 @@ invariant maximal-cone argument supplies totality.
 ## L¹ Continuity
 
 **Additional proof: GPT-6 (Codex), 9 September 2026.** The exact area preorder
-satisfies the recorded upper-section L¹ Continuity axiom. This is an elementary
+satisfies the recorded upper-section $L^{1}$ Continuity axiom. This is an elementary
 closure argument for Goodsell's construction, not a claim that the manuscript
 states or proves this additional property.
 
@@ -152,9 +152,9 @@ Taking $n\to\infty$ gives $\int d\ge0$, again proving $X\succeq_RY$.
 No subtraction of infinite areas occurs: the case of infinite positive area
 was settled separately after negative-area integrability was established.
 
-The same argument applies when $Y_n\to Y$ in L¹ with $X$ fixed, and even
-when both arguments converge in L¹, since the change in survival difference
-has L¹ norm at most $E|X_n-X|+E|Y_n-Y|$. Only the upper-section property is
+The same argument applies when $Y_n\to Y$ in $L^{1}$ with $X$ fixed, and even
+when both arguments converge in $L^{1}$, since the change in survival difference
+has $L^{1}$ norm at most $E|X_n-X|+E|Y_n-Y|$. Only the upper-section property is
 recorded as a principle in this model. No Totality or symmetry assumption is
 used in this closure proof. Original work consists of this short verification;
 the CDF-area construction remains attributed to Goodsell.

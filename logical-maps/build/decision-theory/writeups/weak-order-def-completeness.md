@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **Weak order.** ≽ is complete and transitive.
+- **Weak order.** $\succeq$ is complete and transitive.
 
 ## Conclusion
 
-- **Completeness.** For all p, q ∈ Δ(X): p ≽ q or q ≽ p.
+- **Completeness.** For all $p, q \in \Delta (X): p \succeq q$ or $q \succeq p$.
 
 ## Proof
 

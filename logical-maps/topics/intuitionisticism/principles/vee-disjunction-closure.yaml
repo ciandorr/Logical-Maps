@@ -1,8 +1,10 @@
 id: vee-disjunction-closure
 name: Possibility_∨ disjunction closure
 category: candidate-laws
-statement: ∀P,Q:tt. (Possibility_∨(P) ∧ Possibility_∨(Q)) → Possibility_∨(λp:t. P p ∨ Q p)
-formal: ∀P,Q:tt. (Possibility_∨(P) ∧ Possibility_∨(Q)) → Possibility_∨(λp:t. P p ∨ Q p)
+statement: |-
+  $\forall P,Q:tt. (\operatorname{Possibility}_\lor (P) \land \operatorname{Possibility}_\lor (Q)) \to \operatorname{Possibility}_\lor (\lambda p:t. P p \lor Q p)$
+formal: |-
+  $\forall P,Q:tt. (\operatorname{Possibility}_\lor (P) \land \operatorname{Possibility}_\lor (Q)) \to \operatorname{Possibility}_\lor (\lambda p:t. P p \lor Q p)$
 sources:
 - Zachary Goodsell, Possibility in Intuitionistic Higher-Order Logic (21 August 2026), §4.2, Theorem 9,
   Eq. (36), pp. 19–20.

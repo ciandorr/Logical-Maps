@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Mixture continuity ∧ Completeness ⇒ Archimedean</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Mixture continuity ∧ Completeness ⇒ Archimedean</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,29 +252,27 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Mixture continuity ∧ Completeness ⇒ Archimedean</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Mixture continuity ∧ Completeness ⇒ Archimedean</h1></header><p class="cert">
 Result — Source: Misc.; produced by Claude Fable 5.1 (Cowork session).
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Mixture continuity.</strong> For all p, q, r ∈ Δ(X) the sets {λ ∈ [0,1] : λp + (1−λ)q ≽ r} and {λ ∈ [0,1] : r ≽ λp + (1−λ)q} are closed.</li>
-<li><strong>Completeness.</strong> For all p, q ∈ Δ(X): p ≽ q or q ≽ p.</li>
+<li><strong>Mixture continuity.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span> the sets <span class="math inline">\{\lambda \in [0,1] : \lambda p + (1- \lambda )q \succeq r\}</span> and <span class="math inline">\{\lambda \in [0,1] : r \succeq \lambda p + (1- \lambda )q\}</span> are closed.</li>
+<li><strong>Completeness.</strong> For all <span class="math inline">p, q \in \Delta (X): p \succeq q</span> or <span class="math inline">q \succeq p</span>.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Archimedean.</strong> For all p, q, r ∈ Δ(X): if p ≻ q ≻ r then there are α, β ∈ (0,1) with αp + (1−α)r ≻ q and q ≻ βp + (1−β)r.</li>
+<li><strong>Archimedean.</strong> For all <span class="math inline">p, q, r \in \Delta (X)</span>: if <span class="math inline">p \succ q \succ r</span> then there are <span class="math inline">\alpha , \beta \in (0,1)</span> with <span class="math inline">\alpha p + (1- \alpha )r \succ q</span> and <span class="math inline">q \succ \beta p + (1- \beta )r</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let p ≻ q ≻ r and set A = {λ : λp+(1−λ)r ≽ q}, B = {λ : q ≽ λp+(1−λ)r}. Both are closed by continuity and A ∪ B = [0,1] by completeness. Since 1 ∉ B (as p ≻ q) and [0,1]∖B is open, some interval (1−ε, 1] lies in [0,1]∖B ⊆ A; any α in it with α &lt; 1 gives αp+(1−α)r ≻ q. Symmetrically, 0 ∉ A (as q ≻ r) yields [0, ε) ⊆ B∖A and any β in it with β &gt; 0 gives q ≻ βp+(1−β)r.</p>
+<p>Let <span class="math inline">p \succ q \succ r</span> and set <span class="math inline">A = \{\lambda : \lambda p+(1- \lambda )r \succeq q\}, B = \{\lambda : q \succeq \lambda p+(1- \lambda )r\}</span>. Both are closed by continuity and <span class="math inline">A \cup B = [0,1]</span> by completeness. Since <span class="math inline">1 \notin B</span> (as <span class="math inline">p \succ q</span>) and <span class="math inline">[0,1]\setminus B</span> is open, some interval <span class="math inline">(1- \epsilon , 1]</span> lies in <span class="math inline">[0,1]\setminus B \subseteq A</span>; any <span class="math inline">\alpha</span> in it with <span class="math inline">\alpha &lt; 1</span> gives <span class="math inline">\alpha p+(1- \alpha )r \succ q</span>. Symmetrically, <span class="math inline">0 \notin A</span> (as <span class="math inline">q \succ r</span>) yields <span class="math inline">[0, \epsilon ) \subseteq B\setminus A</span> and any <span class="math inline">\beta</span> in it with <span class="math inline">\beta &gt; 0</span> gives <span class="math inline">q \succ \beta p+(1- \beta )r</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Completeness is used to conclude λ ∈ A from λ ∉ B; whether continuity alone suffices is left open here.</p>
+<p>Completeness is used to conclude <span class="math inline">\lambda \in A</span> from <span class="math inline">\lambda \notin B</span>; whether continuity alone suffices is left open here.</p>
 <p class="cert">
 Record: <code>topics/decision-theory/results/continuity-completeness-imply-archimedean.yaml</code>
 </p>
-</body>
-</html>
+</body></html>

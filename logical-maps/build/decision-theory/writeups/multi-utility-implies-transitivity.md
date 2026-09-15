@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Expected multi-utility representation.** There is a set U of functions u : X → ℝ such that for all p, q ∈ Δ(X): p ≽ q if and only if EU_u(p) ≥ EU_u(q) for every u ∈ U.
+- **Expected multi-utility representation.** There is a set U of functions $u : X \to \mathbb{R}$ such that for all $p, q \in \Delta (X): p \succeq q$ if and only if $\operatorname{EU}_u(p) \ge \operatorname{EU}_u(q)$ for every $u \in U$.
 
 ## Conclusion
 
-- **Transitivity.** For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.
+- **Transitivity.** For all $p, q, r \in \Delta (X)$: if $p \succeq q$ and $q \succeq r$ then $p \succeq r$.
 
 ## Proof
 
-If EU_u(p) ≥ EU_u(q) and EU_u(q) ≥ EU_u(r) for every u ∈ U then
-EU_u(p) ≥ EU_u(r) for every u ∈ U.
+If $\operatorname{EU}_u(p) \ge \operatorname{EU}_u(q)$ and $\operatorname{EU}_u(q) \ge \operatorname{EU}_u(r)$ for every $u \in U$ then
+$\operatorname{EU}_u(p) \ge \operatorname{EU}_u(r)$ for every $u \in U$.
 
 <p class='cert'>Record: <code>topics/decision-theory/results/multi-utility-implies-transitivity.yaml</code></p>

@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□(◇₂ = Truth).** □(◇₂ = (λp:t. p))
-- **□($\Diamond_\vee$ = ◇₂).** □($\Diamond_\vee$ = ◇₂)
+- **□(◇₂ = Truth).** $\Box (\Diamond _{2} = (\lambda p:t. p))$
+- **□($\Diamond_\vee$ = ◇₂).** $\Box$($\Diamond_\vee$ $= \Diamond _{2}$)
 
 ## Conclusion
 
-- **□($\Diamond_\vee$ = Truth).** □($\Diamond_\vee$ = (λp:t. p))
+- **□($\Diamond_\vee$ = Truth).** $\Box$($\Diamond_\vee$ $= (\lambda p:t. p)$)
 
 ## Proof
 

@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□A PSb–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSd(f))
+- **□A PSb–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f))$
 
 ## Conclusion
 
-- **□Stability of =⊥.** □(∀p:t. ¬¬(p = ⊥) → (p = ⊥))
+- **□Stability of =⊥.** $\Box (\forall p:t. \neg \neg (p = \bot ) \to (p = \bot ))$
 
 ## Proof
 

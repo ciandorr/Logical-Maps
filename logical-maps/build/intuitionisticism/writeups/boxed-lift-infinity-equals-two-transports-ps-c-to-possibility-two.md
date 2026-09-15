@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\infty$ = ◇₂).** □($\Diamond_\infty$ = ◇₂)
-- **□PSc ($\Diamond_\infty$).** □(∀p, q : t. ($\Diamond_\infty$(p ∨ q) → ($\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q))))
+- **□($\Diamond_\infty$ = ◇₂).** $\Box$($\Diamond_\infty$ $= \Diamond _{2}$)
+- **□PSc ($\Diamond_\infty$).** $\Box (\forall p, q : t$. ($\Diamond_\infty$$(p \lor q) \to$ ($\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q))))
 
 ## Conclusion
 
-- **□PSc (◇₂).** □(∀p, q : t. (◇₂(p ∨ q) → (◇₂(p) ∨ ◇₂(q))))
+- **□PSc (◇₂).** $\Box (\forall p, q : t. (\Diamond _{2}(p \lor q) \to (\Diamond _{2}(p) \lor \Diamond _{2}(q))))$
 
 ## Proof
 

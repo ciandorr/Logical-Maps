@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Infinitary distribution (◇₂).** □(∀F:tt. Inex^t(F) → (◇₂(∃x:t. F x) → ∃x:t. ◇₂(F x)))
+- **□Infinitary distribution (◇₂).** $\Box (\forall F:tt. \operatorname{Inex}^t(F) \to (\Diamond _{2}(\exists x:t. F x) \to \exists x:t. \Diamond _{2}(F x)))$
 
 ## Conclusion
 
-- **Infinitary distribution (◇₂).** ∀F:tt. Inex^t(F) → (◇₂(∃x:t. F x) → ∃x:t. ◇₂(F x))
+- **Infinitary distribution (◇₂).** $\forall F:tt. \operatorname{Inex}^t(F) \to (\Diamond _{2}(\exists x:t. F x) \to \exists x:t. \Diamond _{2}(F x))$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

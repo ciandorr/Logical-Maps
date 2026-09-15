@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = ≠⊥).** □($\Diamond_\vee$ = (λp:t. p ≠ ⊥))
-- **□PSd ($\Diamond_\vee$).** □(∀p,q:t. (($\Diamond_\vee$(p) → □q) → □(p → q)))
+- **□($\Diamond_\vee$ = ≠⊥).** $\Box$($\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$)
+- **□PSd ($\Diamond_\vee$).** $\Box (\forall p,q:t$. (($\Diamond_\vee$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **□PSd (≠⊥).** □(∀p, q : t. (((p ≠ ⊥) → □q) → □(p → q)))
+- **□PSd (≠⊥).** $\Box (\forall p, q : t. (((p \ne \bot ) \to \Box q) \to \Box (p \to q)))$
 
 ## Proof
 

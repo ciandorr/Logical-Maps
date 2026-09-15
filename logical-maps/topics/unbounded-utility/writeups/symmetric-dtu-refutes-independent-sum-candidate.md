@@ -27,8 +27,8 @@ argument is not reinstated.
 
 
 **Conjectured implication:** Rich Outcomes + Totality + Stochastic Equivalence
-+ Simple EU + Stochastic Dominance + Mixture Independence + Symmetric
-Neutrality + Independent Sum Invariance ⇒ False. There is no completed
++ Simple $\operatorname{EU} +$ Stochastic Dominance + Mixture Independence + Symmetric
+Neutrality + Independent Sum Invariance $\Rightarrow$ False. There is no completed
 proof recorded for this implication. The audit below separates it from the
 verified portions of the manuscript.
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSb ($\Diamond_\infty$).** □(¬$\Diamond_\infty$(⊥))
+- **□PSb ($\Diamond_\infty$).** $\Box (\neg$$\Diamond_\infty$$(\bot )$)
 
 ## Proof
 
-If $\Diamond_\infty$⊥, its defining witness P has $\mathrm{Possibility}_\infty$(P) and P⊥. The candidate condition includes □¬P⊥, hence ¬P⊥, a contradiction. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for □.
+If $\Diamond_\infty$$\bot$, its defining witness P has $\mathrm{Possibility}_\infty$(P) and $P\bot$. The candidate condition includes $\Box \neg P\bot$, hence $\neg P\bot , a$ contradiction. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for $\Box$.
 
 ## Notes
 

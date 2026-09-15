@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **□PSc ($\Diamond_\infty$).** □(∀p, q : t. ($\Diamond_\infty$(p ∨ q) → ($\Diamond_\infty$(p) ∨ $\Diamond_\infty$(q))))
-- **□PSd ($\Diamond_\infty$).** □(∀p, q : t. (($\Diamond_\infty$(p) → □q) → □(p → q)))
+- **□PSc ($\Diamond_\infty$).** $\Box (\forall p, q : t$. ($\Diamond_\infty$$(p \lor q) \to$ ($\Diamond_\infty$$(p) \lor$ $\Diamond_\infty$(q))))
+- **□PSd ($\Diamond_\infty$).** $\Box (\forall p, q : t$. (($\Diamond_\infty$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Proof
 
-With the two selected necessary binary clauses, the II theorems □PSa($\Diamond_\infty$) and □PSb($\Diamond_\infty$), and necessary normality of □, the operator $\Diamond_\infty$ witnesses Necessity₂(□). This gives □₂p→□p; the reverse is an II theorem. Both selected premises imply their own boxes, so the discharged comparison argument lifts to necessary universal equivalence, which implies operator identity. No infinitary-to-binary implication is assumed.
+With the two selected necessary binary clauses, the II theorems $\Box \operatorname{PSa}$($\Diamond_\infty$) and $\Box \operatorname{PSb}$($\Diamond_\infty$), and necessary normality of $\Box$, the operator $\Diamond_\infty$ witnesses $\operatorname{Necessity}_{2}(\Box )$. This gives $\Box _{2}p\to \Box p$; the reverse is an II theorem. Both selected premises imply their own boxes, so the discharged comparison argument lifts to necessary universal equivalence, which implies operator identity. No infinitary-to-binary implication is assumed.
 
 ## Notes
 

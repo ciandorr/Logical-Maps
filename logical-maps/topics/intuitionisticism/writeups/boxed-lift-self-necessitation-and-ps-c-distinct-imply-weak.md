@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□Universal self-necessitation.** □(∀p:t. p → □p)
-- **□PSc (≠⊥).** □(∀p, q : t. (((p ∨ q) ≠ ⊥) → ((p ≠ ⊥) ∨ (q ≠ ⊥))))
+- **□Universal self-necessitation.** $\Box (\forall p:t. p \to \Box p)$
+- **□PSc (≠⊥).** $\Box (\forall p, q : t. (((p \lor q) \ne \bot ) \to ((p \ne \bot ) \lor (q \ne \bot ))))$
 
 ## Conclusion
 
-- **□WLEM.** □(∀p:t. ¬p ∨ ¬¬p)
+- **□WLEM.** $\Box (\forall p:t. \neg p \lor \neg \neg p)$
 
 ## Proof
 

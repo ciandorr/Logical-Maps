@@ -4,7 +4,7 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = $\Diamond_\infty$).** □($\Diamond_\vee$ = $\Diamond_\infty$)
+- **□($\Diamond_\vee$ = $\Diamond_\infty$).** $\Box$($\Diamond_\vee$ = $\Diamond_\infty$)
 
 ## Conclusion
 
@@ -12,7 +12,7 @@
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

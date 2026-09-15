@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **Necessitation (□₂).** For every formula A: from ⊢ A infer ⊢ □₂A; the assumption context must be empty.
+- **Necessitation (□₂).** For every formula A: from $\vdash A$ infer $\vdash \Box _{2}A$; the assumption context must be empty.
 
 ## Proof
 
-Given an assumption-free proof of any formula A, standing intensionality gives A=⊤. For arbitrary qualified N, the candidate definition gives N⊤, so substitution yields NA. Generalize over N to derive □₂A. This argument covers every empty-context instance of the rule.
+Given an assumption-free proof of any formula A, standing intensionality gives $A=\top$. For arbitrary qualified N, the candidate definition gives $N\top$, so substitution yields NA. Generalize over N to derive $\Box _{2}A$. This argument covers every empty-context instance of the rule.
 
 ## Notes
 

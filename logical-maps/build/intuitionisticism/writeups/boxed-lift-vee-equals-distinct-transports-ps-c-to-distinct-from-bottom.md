@@ -4,12 +4,12 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = ≠⊥).** □($\Diamond_\vee$ = (λp:t. p ≠ ⊥))
-- **□PSc ($\Diamond_\vee$).** □(∀p, q : t. ($\Diamond_\vee$(p ∨ q) → ($\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q))))
+- **□($\Diamond_\vee$ = ≠⊥).** $\Box$($\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$)
+- **□PSc ($\Diamond_\vee$).** $\Box (\forall p, q : t$. ($\Diamond_\vee$$(p \lor q) \to$ ($\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q))))
 
 ## Conclusion
 
-- **□PSc (≠⊥).** □(∀p, q : t. (((p ∨ q) ≠ ⊥) → ((p ≠ ⊥) ∨ (q ≠ ⊥))))
+- **□PSc (≠⊥).** $\Box (\forall p, q : t. (((p \lor q) \ne \bot ) \to ((p \ne \bot ) \lor (q \ne \bot ))))$
 
 ## Proof
 

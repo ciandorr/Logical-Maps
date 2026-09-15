@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Universal self-necessitation.** ∀p:t. p → □p
+- **Universal self-necessitation.** $\forall p:t. p \to \Box p$
 
 ## Conclusion
 
-- **Propositional extensionality.** ∀p,q:t. (p ↔ q) → (p = q)
+- **Propositional extensionality.** $\forall p,q:t. (p \leftrightarrow q) \to (p = q)$
 
 ## Proof
 
-Given p↔q, instantiate self-necessitation at the proposition p↔q to obtain □(p↔q). The zero-argument form of the proved intensionality lemma gives p=q: it follows by necessitation-free substitution into the closed identity ((p↔q)∧p)=((p↔q)∧q). Discharge and generalize p,q.
+Given $p\leftrightarrow q$, instantiate self-necessitation at the proposition $p\leftrightarrow q$ to obtain $\Box (p\leftrightarrow q)$. The zero-argument form of the proved intensionality lemma gives $p=q$: it follows by necessitation-free substitution into the closed identity $((p\leftrightarrow q)\land p)=((p\leftrightarrow q)\land q)$. Discharge and generalize p,q.
 
 ## Notes
 

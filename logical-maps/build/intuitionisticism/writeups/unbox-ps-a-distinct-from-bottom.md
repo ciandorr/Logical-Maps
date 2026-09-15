@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSa (≠⊥).** □(∀p, q : t. (□(p → q) → ((p ≠ ⊥) → (q ≠ ⊥))))
+- **□PSa (≠⊥).** $\Box (\forall p, q : t. (\Box (p \to q) \to ((p \ne \bot ) \to (q \ne \bot ))))$
 
 ## Conclusion
 
-- **PSa (≠⊥).** For every p and q, □(p → q) implies that p ≠ ⊥ implies q ≠ ⊥, with □p defined as p = ⊤.
+- **PSa (≠⊥).** For every p and $q, \Box (p \to q)$ implies that $p \ne \bot$ implies $q \ne \bot$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

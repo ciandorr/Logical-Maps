@@ -4,11 +4,11 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSa (≠⊥).** □(∀p, q : t. (□(p → q) → ((p ≠ ⊥) → (q ≠ ⊥))))
+- **□PSa (≠⊥).** $\Box (\forall p, q : t. (\Box (p \to q) \to ((p \ne \bot ) \to (q \ne \bot ))))$
 
 ## Proof
 

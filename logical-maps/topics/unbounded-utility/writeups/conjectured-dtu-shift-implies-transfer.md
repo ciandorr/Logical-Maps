@@ -52,15 +52,15 @@ Two additional hypotheses settle it:
   Relative Expectation already under DU, without Totality or a prior
   shift-symmetry assumption. This implies Simple Relative Expectation and
   Shift Transfer. Under DU, this continuity condition is equivalent to
-  L¹ Continuity; a separate
+  $L^{1}$ Continuity; a separate
   [conditional-approximation proof](du-l1-implies-relative.html) also
-  establishes the L¹ route.
+  establishes the $L^{1}$ route.
 
-A countermodel must therefore fail **both** Symmetric Neutrality and L¹
+A countermodel must therefore fail **both** Symmetric Neutrality and $L^{1}$
 Continuity. The symmetric and asymmetric continuous clipping models already
 satisfy Relative Expectation and so cannot separate the question. The
 [Folded-tail cone: lexicographic extension](lexicographic-folded-extension.md) does fail
-L¹ Continuity, but retains neutrality and Relative Expectation, so it also
+$L^{1}$ Continuity, but retains neutrality and Relative Expectation, so it also
 satisfies transfer. The exact clipping records do not establish the required
 Shift Invariance and cannot simply be claimed as counterexamples.
 

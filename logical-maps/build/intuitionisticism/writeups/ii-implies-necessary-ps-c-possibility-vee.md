@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSc ($\Diamond_\vee$).** □(∀p, q : t. ($\Diamond_\vee$(p ∨ q) → ($\Diamond_\vee$(p) ∨ $\Diamond_\vee$(q))))
+- **□PSc ($\Diamond_\vee$).** $\Box (\forall p, q : t$. ($\Diamond_\vee$$(p \lor q) \to$ ($\Diamond_\vee$$(p) \lor$ $\Diamond_\vee$(q))))
 
 ## Proof
 
-Given $\Diamond_\vee$(p ∨ q), choose a defining candidate P with P(p ∨ q). Its necessary PSc condition implies Pp ∨ Pq. Each disjunct supplies a witness to $\Diamond_\vee$p or $\Diamond_\vee$q respectively. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for □.
+Given $\Diamond_\vee$$(p \lor q)$, choose a defining candidate P with $P(p \lor q)$. Its necessary PSc condition implies $Pp \lor Pq$. Each disjunct supplies a witness to $\Diamond_\vee$p or $\Diamond_\vee$q respectively. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for $\Box$.
 
 ## Notes
 

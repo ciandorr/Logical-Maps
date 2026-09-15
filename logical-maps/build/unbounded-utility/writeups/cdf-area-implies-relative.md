@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **CDF-Area Extension.** The normalized utility chart is total and measurable. Write S_X(t)=P(u(X)>t), d=S_X−S_Y, A₊=∫max(d,0)dt and A₋=∫max(−d,0)dt over ℝ. Whenever at least one of A₊,A₋ is finite, X ≽ Y iff A₊≥A₋. If both are infinite, this axiom imposes no comparison.
+- **CDF-Area Extension.** The normalized utility chart is total and measurable. Write $S_X(t)=P(u(X)>t), d=S_X- S_Y, A_{+}=\int \max (d,0)dt$ and $A_{-}=\int \max (- d,0)dt$ over $\mathbb{R}$. Whenever at least one of $A_{+},A_{-}$ is finite, $X \succeq Y$ iff $A_{+}\ge A_{-}$. If both are infinite, this axiom imposes no comparison.
 
 ## Conclusion
 
-- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if E|u(X)−u(Y)|<∞, then X ≽ Y iff E[u(X)−u(Y)] ≥ 0. Their individual expectations may both be undefined.
+- **Relative Expectation.** For real-utility variables X,Y on the same probability space, if $E|u(X)- u(Y)|<\infty$, then $X \succeq Y$ iff $E[u(X)- u(Y)] \ge 0$. Their individual expectations may both be undefined.
 
 ## Proof
 
-For the actual coupling, ∫|S_X−S_Y|dt ≤ E|u(X)−u(Y)|. If the latter is finite, Fubini applied to 1_{u(X)>t}−1_{u(Y)>t} gives ∫(S_X−S_Y)dt=E[u(X)−u(Y)]. Both areas are finite, so the CDF-area comparison is exactly the comparison of this expectation with zero.
+For the actual coupling, $\int |S_X- S_Y|dt \le E|u(X)- u(Y)|$. If the latter is finite, Fubini applied to $1_{u(X)>t}- 1_{u(Y)>t}$ gives $\int (S_X- S_Y)dt=E[u(X)- u(Y)]$. Both areas are finite, so the CDF-area comparison is exactly the comparison of this expectation with zero.
 
 ## Sources
 

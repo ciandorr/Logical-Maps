@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□A PSb–PSc–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f))
+- **□A PSb–PSc–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f))$
 
 ## Conclusion
 
-- **□A PSb–PSd operator exists.** □(∃f:tt. PSb(f) ∧ PSd(f))
+- **□A PSb–PSd operator exists.** $\Box (\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSd}(f))$
 
 ## Proof
 

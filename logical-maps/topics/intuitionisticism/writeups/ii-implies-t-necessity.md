@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **T (□).** ∀p:t. □p → p
+- **T (□).** $\forall p:t. \Box p \to p$
 
 ## Proof
 
-Given p = ⊤, substitute equals in the theorem ⊤ to obtain p. Discharge and universally generalize p.
+Given $p = \top$, substitute equals in the theorem $\top$ to obtain p. Discharge and universally generalize p.
 
 ## Notes
 

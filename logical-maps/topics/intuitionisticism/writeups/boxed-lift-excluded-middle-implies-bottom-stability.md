@@ -8,7 +8,7 @@
 
 ## Conclusion
 
-- **□Stability of =⊥.** □(∀p:t. ¬¬(p = ⊥) → (p = ⊥))
+- **□Stability of =⊥.** $\Box (\forall p:t. \neg \neg (p = \bot ) \to (p = \bot ))$
 
 ## Proof
 

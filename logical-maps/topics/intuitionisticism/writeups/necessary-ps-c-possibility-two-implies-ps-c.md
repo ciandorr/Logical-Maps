@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSc (◇₂).** □(∀p, q : t. (◇₂(p ∨ q) → (◇₂(p) ∨ ◇₂(q))))
+- **□PSc (◇₂).** $\Box (\forall p, q : t. (\Diamond _{2}(p \lor q) \to (\Diamond _{2}(p) \lor \Diamond _{2}(q))))$
 
 ## Conclusion
 
-- **PSc (◇₂).** For every p and q, ◇₂(p ∨ q) implies ◇₂(p) ∨ ◇₂(q).
+- **PSc (◇₂).** For every p and $q, \Diamond _{2}(p \lor q)$ implies $\Diamond _{2}(p) \lor \Diamond _{2}(q)$.
 
 ## Proof
 
-Apply the standing theorem □A → A to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
+Apply the standing theorem $\Box A \to A$ to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
 
 ## Notes
 

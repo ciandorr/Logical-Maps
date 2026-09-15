@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Stability of =⊥.** □(∀p:t. ¬¬(p = ⊥) → (p = ⊥))
+- **□Stability of =⊥.** $\Box (\forall p:t. \neg \neg (p = \bot ) \to (p = \bot ))$
 
 ## Conclusion
 
-- **Stability of =⊥.** ∀p:t. ¬¬(p = ⊥) → (p = ⊥)
+- **Stability of =⊥.** $\forall p:t. \neg \neg (p = \bot ) \to (p = \bot )$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

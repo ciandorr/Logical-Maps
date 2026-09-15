@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□PSd ($\Diamond_\vee$).** □(∀p,q:t. (($\Diamond_\vee$(p) → □q) → □(p → q)))
+- **□PSd ($\Diamond_\vee$).** $\Box (\forall p,q:t$. (($\Diamond_\vee$$(p) \to \Box q) \to \Box (p \to q$)))
 
 ## Conclusion
 
-- **□Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** □(∀p:t. ¬$\Diamond_\vee$(p) → □¬p)
+- **□Impossibility ⇒ necessary falsehood ($\Diamond_\vee$).** $\Box (\forall p:t. \neg$$\Diamond_\vee$$(p) \to \Box \neg p$)
 
 ## Proof
 

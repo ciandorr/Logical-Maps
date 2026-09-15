@@ -4,7 +4,7 @@
 
 ## Premises
 
-- **Totality.** For all gambles X,Y, either X ≽ Y or Y ≽ X.
+- **Totality.** For all gambles X,Y, either $X \succeq Y$ or $Y \succeq X$.
 
 ## Conclusion
 

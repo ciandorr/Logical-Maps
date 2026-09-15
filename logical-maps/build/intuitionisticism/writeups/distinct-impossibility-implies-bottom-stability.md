@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Impossibility ⇒ necessary falsehood (≠⊥).** ∀p:t. ¬(p ≠ ⊥) → □¬p
+- **Impossibility ⇒ necessary falsehood (≠⊥).** $\forall p:t. \neg (p \ne \bot ) \to \Box \neg p$
 
 ## Conclusion
 
-- **Stability of =⊥.** ∀p:t. ¬¬(p = ⊥) → (p = ⊥)
+- **Stability of =⊥.** $\forall p:t. \neg \neg (p = \bot ) \to (p = \bot )$
 
 ## Proof
 
-Rewrite ¬(p≠⊥) as ¬¬(p=⊥), and □¬p as p=⊥, using the II identity in footnote 5. Generalize p.
+Rewrite $\neg (p\ne \bot )$ as $\neg \neg (p=\bot )$, and $\Box \neg p$ as $p=\bot$, using the II identity in footnote 5. Generalize p.
 
 ## Notes
 

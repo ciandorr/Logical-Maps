@@ -4,11 +4,11 @@
 
 ## Premises
 
-- **□Universal self-necessitation.** □(∀p:t. p → □p)
+- **□Universal self-necessitation.** $\Box (\forall p:t. p \to \Box p)$
 
 ## Conclusion
 
-- **□Propositional extensionality.** □(∀p,q:t. (p ↔ q) → (p = q))
+- **□Propositional extensionality.** $\Box (\forall p,q:t. (p \leftrightarrow q) \to (p = q))$
 
 ## Proof
 

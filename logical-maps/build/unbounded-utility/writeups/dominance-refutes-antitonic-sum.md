@@ -4,9 +4,9 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Stochastic Dominance.** If P(X>o) ≥ P(Y>o) for every outcome threshold o, then X ≽ Y; if one threshold inequality is strict, X ≻ Y. Thresholds use the sure-outcome order.
-- **Antitonic Sum Invariance.** If X and Z are antitonic, and Y and Z are antitonic, then X ≽ Y iff X+Z ≽ Y+Z. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Stochastic Dominance.** If $P(X>o) \ge P(Y>o)$ for every outcome threshold o, then $X \succeq Y$; if one threshold inequality is strict, $X \succ Y$. Thresholds use the sure-outcome order.
+- **Antitonic Sum Invariance.** If X and Z are antitonic, and Y and Z are antitonic, then $X \succeq Y$ iff $X+Z \succeq Y+Z$. A pair is antitonic when one member is nondecreasing and the other nonincreasing in a common uniform random variable.
 
 ## Conclusion
 
@@ -14,7 +14,7 @@
 
 ## Proof
 
-Let P have St Petersburg law and S have the symmetric mixture ½P+½(−P). Write ⊕Anti for the law of the antitonic sum. Since P has law ½δ₂+½(2P), pairing opposite quantiles gives S⊕Anti P = ½(P+2)+½P, which strictly stochastically dominates P=0⊕Anti P. Antitonic Sum Invariance would therefore give S ≻ 0 (both weak directions allow strict cancellation). Applying it again with common summand of law S gives S⊕Anti S ≻ 0⊕Anti S. Symmetry of the quantiles makes the left law δ₀ and the right law S, so 0 ≻ S, a contradiction. Dominance supplies Stochastic Equivalence for every law identity used. This does not assume Symmetric Neutrality or Totality.
+Let P have St Petersburg law and S have the symmetric mixture $\frac{1}{2} P+\frac{1}{2} (- P)$. Write ⊕Anti for the law of the antitonic sum. Since P has $\operatorname{law} \frac{1}{2} \delta _{2}+\frac{1}{2} (2P)$, pairing opposite quantiles gives S⊕Anti $P = \frac{1}{2} (P+2)+\frac{1}{2} P$, which strictly stochastically dominates $P=0$⊕Anti P. Antitonic Sum Invariance would therefore give $S \succ 0$ (both weak directions allow strict cancellation). Applying it again with common summand of law S gives S⊕Anti $S \succ 0$⊕Anti S. Symmetry of the quantiles makes the left $\operatorname{law} \delta _{0}$ and the right law S, so $0 \succ S, a$ contradiction. Dominance supplies Stochastic Equivalence for every law identity used. This does not assume Symmetric Neutrality or Totality.
 
 ## Notes
 

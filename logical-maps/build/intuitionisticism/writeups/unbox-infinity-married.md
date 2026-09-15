@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Spouse ($\Diamond_\infty$).** □(∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\infty$))
+- **□Spouse ($\Diamond_\infty$).** $\Box (\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\infty$))
 
 ## Conclusion
 
-- **Spouse ($\Diamond_\infty$).** ∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\infty$)
+- **Spouse ($\Diamond_\infty$).** $\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\infty$)
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Universal self-necessitation.** ∀p:t. p → □p
-- **Nonfalsity gives distinct disjunct.** ∀p,q:t. ¬¬(p ∨ q) → ((p ≠ ⊥) ∨ (q ≠ ⊥))
+- **Universal self-necessitation.** $\forall p:t. p \to \Box p$
+- **Nonfalsity gives distinct disjunct.** $\forall p,q:t. \neg \neg (p \lor q) \to ((p \ne \bot ) \lor (q \ne \bot ))$
 
 ## Conclusion
 
-- **WLEM.** ∀p:t. ¬p ∨ ¬¬p
+- **WLEM.** $\forall p:t. \neg p \lor \neg \neg p$
 
 ## Proof
 
-Instantiate self-necessitation at ¬p to obtain ¬p→□¬p, equivalently ¬p→p=⊥. Contraposition gives p≠⊥→¬¬p. At ¬¬p the same reasoning gives ¬p≠⊥→¬¬¬p→¬p. Intuitionistic logic proves ¬¬(p∨¬p); Eq. (77), instantiated at p and ¬p, therefore yields p≠⊥∨¬p≠⊥. The two implications just obtained give ¬¬p∨¬p. Generalize p.
+Instantiate self-necessitation at $\neg p$ to obtain $\neg p\to \Box \neg p$, equivalently $\neg p\to p=\bot$. Contraposition gives $p\ne \bot \to \neg \neg p$. At $\neg \neg p$ the same reasoning gives $\neg p\ne \bot \to \neg \neg \neg p\to \neg p$. Intuitionistic logic proves $\neg \neg (p\lor \neg p)$; Eq. (77), instantiated at p and $\neg p$, therefore yields $p\ne \bot \lor \neg p\ne \bot$. The two implications just obtained give $\neg \neg p\lor \neg p$. Generalize p.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSb ($\Diamond_\vee$).** □(¬$\Diamond_\vee$(⊥))
+- **□PSb ($\Diamond_\vee$).** $\Box (\neg$$\Diamond_\vee$$(\bot )$)
 
 ## Conclusion
 
-- **PSb ($\Diamond_\vee$).** $\Diamond_\vee$ does not hold of the contradiction ⊥.
+- **PSb ($\Diamond_\vee$).** $\Diamond_\vee$ does not hold of the contradiction $\bot$.
 
 ## Proof
 
-Apply the standing theorem □A → A to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
+Apply the standing theorem $\Box A \to A$ to the entire quantified PS condition. This is modal elimination, with no necessitation of assumptions.
 
 ## Notes
 

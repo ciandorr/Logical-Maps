@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□$\Diamond_\infty$ entails Truth.** □(∀p:t. $\Diamond_\infty$p → p)
+- **□$\Diamond_\infty$ entails Truth.** $\Box (\forall p:t$. $\Diamond_\infty$$p \to p$)
 
 ## Conclusion
 
-- **$\Diamond_\infty$ entails Truth.** ∀p:t. $\Diamond_\infty$p → p
+- **$\Diamond_\infty$ entails Truth.** $\forall p:t$. $\Diamond_\infty$$p \to p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

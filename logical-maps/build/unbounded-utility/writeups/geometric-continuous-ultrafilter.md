@@ -7,7 +7,7 @@ verification is asserted.
 **Original work: model adaptation and direct verification.** We reuse the continuous
 ultrafilter construction from *Decision theory unbound*, Appendix B, Definition 3,
 Lemma 6 and Theorem 3. Choosing geometric cutoffs supplies an explicit alternating-game
-evaluation and scaling reversal. The CDF-area, L¹ and folded-expectation verifications
+evaluation and scaling reversal. The CDF-area, $L^{1}$ and folded-expectation verifications
 below establish extra properties of this construction. This is an account of work
 done for the map, not a claim that these observations are new in the literature.
 
@@ -121,7 +121,7 @@ Negative Self-Similarity**.
 
 ## Scope and validation
 
-The model satisfies DTU together with CDF-Area Extension, L¹ Continuity, Folded
+The model satisfies DTU together with CDF-Area Extension, $L^{1}$ Continuity, Folded
 Expectation, reflection and shift, yet fails scale and the two calculation/evaluation
 principles just exhibited. Further exclusions are derived by the map's implication
 records, not asserted without evidence. The free ultrafilter remains nonconstructive.

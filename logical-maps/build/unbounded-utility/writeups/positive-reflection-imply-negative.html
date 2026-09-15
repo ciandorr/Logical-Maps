@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Rich Outcomes ∧ Positive Affine Invariance ∧ Reflection Anti-Invariance ⇒ Negative Affine Anti-Invariance</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Rich Outcomes ∧ Positive Affine Invariance ∧ Reflection Anti-Invariance ⇒ Negative Affine Anti-Invariance</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,26 +252,25 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Rich Outcomes ∧ Positive Affine Invariance ∧ Reflection Anti-Invariance ⇒ Negative Affine Anti-Invariance</h1>
-</header>
-<p class="cert">
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Rich Outcomes ∧ Positive Affine Invariance ∧ Reflection Anti-Invariance ⇒ Negative Affine Anti-Invariance</h1></header><p class="cert">
 Result — Source: Symmetries of Value; produced by Zachary Goodsell (cited paper); recorded by GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Rich Outcomes.</strong> Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.</li>
-<li><strong>Positive Affine Invariance.</strong> For all real a&gt;0 and b, X ≽ Y iff aX+b ≽ aY+b.</li>
-<li><strong>Reflection Anti-Invariance.</strong> X ≽ Y iff −Y ≽ −X, using the one fixed normalized origin 0.</li>
+<li><strong>Rich Outcomes.</strong> Every real number r occurs as a utility level of a sure outcome: for each <span class="math inline">r \in \mathbb{R}</span> there is an outcome <span class="math inline">o_r</span> with <span class="math inline">u(o_r)=r</span>, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.</li>
+<li><strong>Positive Affine Invariance.</strong> For all real <span class="math inline">a&gt;0</span> and <span class="math inline">b, X \succeq Y</span> iff <span class="math inline">aX+b \succeq aY+b</span>.</li>
+<li><strong>Reflection Anti-Invariance.</strong> <span class="math inline">X \succeq Y</span> iff <span class="math inline">- Y \succeq - X</span>, using the one fixed normalized origin 0.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Negative Affine Anti-Invariance.</strong> For all real a&gt;0 and b, X ≽ Y iff −aY+b ≽ −aX+b.</li>
+<li><strong>Negative Affine Anti-Invariance.</strong> For all real <span class="math inline">a&gt;0</span> and <span class="math inline">b, X \succeq Y</span> iff <span class="math inline">- aY+b \succeq - aX+b</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Apply reflection to reverse the comparison, then the positive transformation x↦ax+b to preserve that reversed comparison.</p>
+<p>Apply reflection to reverse the comparison, then the positive transformation x↦ax<span class="math inline">+b</span> to preserve that reversed comparison.</p>
 <h2 id="notes">Notes</h2>
 <p>Source-based result or immediate restriction/composition. Premises are sufficient; minimality is not claimed. The direct source is recorded separately from the transcription; no translation checker is asserted.</p>
 <h2 id="sources">Sources</h2>
@@ -301,5 +284,4 @@ Record: <code>topics/unbounded-utility/results/positive-reflection-imply-negativ
 <ul>
 <li><strong>Proof: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — §3, p. 24</li>
 </ul>
-</body>
-</html>
+</body></html>

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□PSa (◇₂).** □(∀p, q : t. (□(p → q) → (◇₂(p) → ◇₂(q))))
+- **□PSa (◇₂).** $\Box (\forall p, q : t. (\Box (p \to q) \to (\Diamond _{2}(p) \to \Diamond _{2}(q))))$
 
 ## Conclusion
 
-- **PSa (◇₂).** For every p and q, □(p → q) implies that ◇₂(p) implies ◇₂(q), with □p defined as p = ⊤.
+- **PSa (◇₂).** For every p and $q, \Box (p \to q)$ implies that $\Diamond _{2}(p)$ implies $\Diamond _{2}(q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-Apply □A→A to the full quantified PSa condition.
+Apply $\Box A\to A$ to the full quantified PSa condition.
 
 ## Notes
 

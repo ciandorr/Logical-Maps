@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **□PSc (≠⊥).** □(∀p, q : t. (((p ∨ q) ≠ ⊥) → ((p ≠ ⊥) ∨ (q ≠ ⊥))))
+- **□PSc (≠⊥).** $\Box (\forall p, q : t. (((p \lor q) \ne \bot ) \to ((p \ne \bot ) \lor (q \ne \bot ))))$
 
 ## Conclusion
 
-- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ = (λp:t. p ≠ ⊥)
+- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$
 
 ## Proof
 
-The necessary PSa and PSb conditions for ≠⊥ follow by necessitating their assumption-free II proofs. With the selected □PSc(≠⊥), this makes ≠⊥ a $\mathrm{Possibility}_\vee$ candidate. It follows that p≠⊥→$\Diamond_\vee$p. Conversely, the II bound for every PSb candidate gives $\Diamond_\vee$p→p≠⊥.
+The necessary PSa and PSb conditions for $\ne \bot$ follow by necessitating their assumption-free II proofs. With the selected $\Box \operatorname{PSc}(\ne \bot )$, this makes $\ne \bot a$ $\mathrm{Possibility}_\vee$ candidate. It follows that $p\ne \bot \to$$\Diamond_\vee$p. Conversely, the II bound for every PSb candidate gives $\Diamond_\vee$$p\to p\ne \bot$.
 
-The selected premise is boxed and implies its own box. Thus necessitating the discharged argument and using K yields □∀p.($\Diamond_\vee$p↔p≠⊥). Apply the predicate intensionality lemma to obtain the identity of the two operators.
+The selected premise is boxed and implies its own box. Thus necessitating the discharged argument and using K yields $\Box \forall p$.($\Diamond_\vee$$p\leftrightarrow p\ne \bot$). Apply the predicate intensionality lemma to obtain the identity of the two operators.
 
 ## Notes
 

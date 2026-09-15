@@ -8,11 +8,11 @@
 
 ## Conclusion
 
-- **WLEM.** ∀p:t. ¬p ∨ ¬¬p
+- **WLEM.** $\forall p:t. \neg p \lor \neg \neg p$
 
 ## Proof
 
-Fix p and use the selected excluded-middle sentence at p. Its ¬p case gives the left disjunct; its p case gives ¬¬p and the right disjunct. Generalize p.
+Fix p and use the selected excluded-middle sentence at p. Its $\neg p$ case gives the left disjunct; its p case gives $\neg \neg p$ and the right disjunct. Generalize p.
 
 ## Notes
 

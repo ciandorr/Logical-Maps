@@ -4,9 +4,9 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Stochastic Dominance.** If P(X>o) ≥ P(Y>o) for every outcome threshold o, then X ≽ Y; if one threshold inequality is strict, X ≻ Y. Thresholds use the sure-outcome order.
-- **Full Sum Invariance.** For all X,Y,Z, with arbitrary dependence, X ≽ Y iff X+Z ≽ Y+Z.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Stochastic Dominance.** If $P(X>o) \ge P(Y>o)$ for every outcome threshold o, then $X \succeq Y$; if one threshold inequality is strict, $X \succ Y$. Thresholds use the sure-outcome order.
+- **Full Sum Invariance.** For all X,Y,Z, with arbitrary dependence, $X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
@@ -14,11 +14,11 @@
 
 ## Proof
 
-Let P,Q each have St Petersburg law P(P=2ⁿ)=2⁻ⁿ, n≥1, coupled antitonically so exactly one equals 2. Dominance supplies Stochastic Equivalence, hence P~Q. Full Sum Invariance with common summand P would give 2P~P+Q. But P+Q has the law of 2P+2: for n≥2 it takes 2ⁿ+2 with probability 2^(1−n). This strictly stochastically dominates the law of 2P, contradicting the asserted indifference. Rich Outcomes and standing prospect richness supply the variables and sums.
+Let P,Q each have St Petersburg $\operatorname{law} P(P=2^{n})=2^{-n}, n\ge 1$, coupled antitonically so exactly one equals 2. Dominance supplies Stochastic Equivalence, hence $P\sim Q$. Full Sum Invariance with common summand P would give $2P\sim P+Q$. But $P+Q$ has the law of $2P+2$: for $n\ge 2$ it takes $2^{n}+2$ with probability $2^{1- n}$. This strictly stochastically dominates the law of 2P, contradicting the asserted indifference. Rich Outcomes and standing prospect richness supply the variables and sums.
 
 ## Notes
 
-The impossibility is due to Seidenfeld, Schervish and Kadane. In their Example 3.1, X1, X2 and W have the St Petersburg law and X1+X2=2W+2. The recorded proof uses this construction in common-addend form. Goodsell’s manuscript is a later presentation, not the origin of the result. The premises, proof and verification status are unchanged.
+The impossibility is due to Seidenfeld, Schervish and Kadane. In their Example 3.1, X1, X2 and W have the St Petersburg law and $X1+X2=2W+2$. The recorded proof uses this construction in common-addend form. Goodsell’s manuscript is a later presentation, not the origin of the result. The premises, proof and verification status are unchanged.
 
 ## Sources
 

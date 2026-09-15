@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Propositional intensionalism (□₂).** □(∀p,q:t. □₂(p ↔ q) → (p = q))
+- **□Propositional intensionalism (□₂).** $\Box (\forall p,q:t. \Box _{2}(p \leftrightarrow q) \to (p = q))$
 
 ## Conclusion
 
-- **Propositional intensionalism (□₂).** ∀p,q:t. □₂(p ↔ q) → (p = q)
+- **Propositional intensionalism (□₂).** $\forall p,q:t. \Box _{2}(p \leftrightarrow q) \to (p = q)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

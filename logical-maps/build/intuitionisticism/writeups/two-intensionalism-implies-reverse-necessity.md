@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Propositional intensionalism (□₂).** ∀p,q:t. □₂(p ↔ q) → (p = q)
+- **Propositional intensionalism (□₂).** $\forall p,q:t. \Box _{2}(p \leftrightarrow q) \to (p = q)$
 
 ## Conclusion
 
-- **□₂ entails □.** ∀p:t. □₂p → □p
+- **□₂ entails □.** $\forall p:t. \Box _{2}p \to \Box p$
 
 ## Proof
 
-Fix p and assume □₂p. Necessitate the closed intuitionistic theorem p→(p↔⊤) using the proved empty-context □₂ rule, and use K for □₂ to obtain □₂(p↔⊤). Instantiate the selected □₂-intensionalism sentence at p,⊤ to infer p=⊤, namely □p. Discharge and generalize p.
+Fix p and assume $\Box _{2}p$. Necessitate the closed intuitionistic theorem $p\to (p\leftrightarrow \top )$ using the proved empty-context $\Box _{2}$ rule, and use K for $\Box _{2}$ to obtain $\Box _{2}(p\leftrightarrow \top )$. Instantiate the selected $\Box _{2}$-intensionalism sentence at $p,\top$ to infer $p=\top$, namely $\Box p$. Discharge and generalize p.
 
 ## Notes
 

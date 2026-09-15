@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **PSb (◇₂).** ◇₂ does not hold of the contradiction ⊥.
-- **PSc (◇₂).** For every p and q, ◇₂(p ∨ q) implies ◇₂(p) ∨ ◇₂(q).
-- **PSd (◇₂).** For every p and q, if ◇₂(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSb (◇₂).** $\Diamond _{2}$ does not hold of the contradiction $\bot$.
+- **PSc (◇₂).** For every p and $q, \Diamond _{2}(p \lor q)$ implies $\Diamond _{2}(p) \lor \Diamond _{2}(q)$.
+- **PSd (◇₂).** For every p and q, if $\Diamond _{2}(p)$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Conclusion
 
-- **A PSb–PSc–PSd operator exists.** ∃f:tt. PSb(f) ∧ PSc(f) ∧ PSd(f)
+- **A PSb–PSc–PSd operator exists.** $\exists f:tt. \operatorname{PSb}(f) \land \operatorname{PSc}(f) \land \operatorname{PSd}(f)$
 
 ## Proof
 
-Use the defined operator ◇₂ as the witness f, preserving all three selected conjuncts.
+Use the defined operator $\Diamond _{2}$ as the witness f, preserving all three selected conjuncts.
 
 ## Notes
 

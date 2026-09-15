@@ -19,7 +19,7 @@ function geometry(dom){
     const markers=new Map([...document.querySelectorAll('#graph .edge-g')].map(g=>[g.dataset.segment,g.querySelector('.edge').getAttribute('marker-end')||'']));
     const node=id=>({id,kind:L.byId.get(id).kind,members:L.byId.get(id).members||[],meet:!!L.byId.get(id).meet,parent:L.byId.get(id).parent||null,x:L.x.get(id),y:L.y.get(id),h:L.size.get(id).h,
       fromBackground:!!(L.byId.get(id).members||[]).length&&L.byId.get(id).members.every(literalFollows)});
-    return {nodes:L.visible.map(n=>node(n.id)),edges:L.edges.map(e=>({id:e.id,from:e.from,to:e.to,toJunction:!!e.toJunction,fromJunction:!!e.fromJunction,conjectural:!!(e.conjectured||e.r?.status==='conjectured'),converse:e.converse||null,marker:e.toJunction?null:markers.get(e.id)})),
+    return {nodes:L.visible.map(n=>node(n.id)),edges:L.edges.map(e=>({id:e.id,from:e.from,to:e.to,toJunction:!!e.toJunction,fromJunction:!!e.fromJunction,conjectural:!!(e.conjectured||e.r?.status==='conjectured'),marker:e.toJunction?null:markers.get(e.id)})),
       back:[...L.back],bands:L.bands.map(b=>b.label),labels:[...document.querySelectorAll('#graph .layer-label')].map(t=>t.textContent)};})())`));
 }
 const byId=g=>new Map(g.nodes.map(n=>[n.id,n]));
@@ -139,12 +139,12 @@ try{
   dom5.window.document.getElementById('reduce-arrows').click();
   assert.deepEqual(geometry(dom5).edges.map(e=>e.id).sort(),before.edges.map(e=>e.id).sort(),'Turning reduction off restores every arrow');
 
-  // Hollow arrowheads mark open converses; a model-refuted converse is filled.
+  // Arrowheads stay filled for both open and model-refuted converses.
   const heads={topic,principles:principles(['m','n','o']),models:[{id:'w',name:'Witness',status:'proved',satisfies:['n'],violates:['m'],certificate:cert('paper'),sources:['Fixture'],source_names:['Fixture']}],results:[rule('mn',['m'],'n'),rule('on',['o'],'n')]};
   const g7=geometry(page(heads));
   const mn=arrow(g7,'m','n'),on=arrow(g7,'o','n');
-  assert.equal(mn.converse,'refuted');assert.match(mn.marker,/url\(#arr-[^)]+\)$/);assert.ok(!mn.marker.includes('-open'));
-  assert.equal(on.converse,'open');assert.ok(on.marker.includes('-open'),'Converse open draws a hollow head');
+  assert.match(mn.marker,/url\(#arr-[^)]+\)$/);assert.ok(!mn.marker.includes('-open'));
+  assert.equal(on.marker,mn.marker,'Open converses use the same filled head');
 
   // Real topics, every graph mode.
   for(const t of ['unbounded-utility','intuitionisticism']){

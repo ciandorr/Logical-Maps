@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = ≠⊥).** □($\Diamond_\vee$ = (λp:t. p ≠ ⊥))
+- **□($\Diamond_\vee$ = ≠⊥).** $\Box$($\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$)
 
 ## Conclusion
 
-- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ = (λp:t. p ≠ ⊥)
+- **$\Diamond_\vee$ = ≠⊥.** $\Diamond_\vee$ $= (\lambda p:t. p \ne \bot )$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

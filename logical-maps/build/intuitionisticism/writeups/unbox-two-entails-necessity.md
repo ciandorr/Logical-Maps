@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□□₂ entails □.** □(∀p:t. □₂p → □p)
+- **□□₂ entails □.** $\Box (\forall p:t. \Box _{2}p \to \Box p)$
 
 ## Conclusion
 
-- **□₂ entails □.** ∀p:t. □₂p → □p
+- **□₂ entails □.** $\forall p:t. \Box _{2}p \to \Box p$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

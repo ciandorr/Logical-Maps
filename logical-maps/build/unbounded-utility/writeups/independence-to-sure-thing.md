@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then X ~ Y. The variables remain distinct objects; indifference is an additional axiom.
-- **Mixture Independence.** For all X,Y,Z and 0<p<1, X ≽ Y iff M_p(X,Z) ≽ M_p(Y,Z), where M is the fixed randomized-selection construction described in the background.
+- **Stochastic Equivalence.** If X and Y have the same probability law over outcomes, then $X \sim Y$. The variables remain distinct objects; indifference is an additional axiom.
+- **Mixture Independence.** For all X,Y,Z and $0<p<1, X \succeq Y$ iff $M_p(X,Z) \succeq M_p(Y,Z)$, where M is the fixed randomized-selection construction described in the background.
 
 ## Conclusion
 
-- **Sure-Thing.** For an event E with 0<P(E)<1, if X|E ~ Y|E, then X ≽ Y iff X|Eᶜ ≽ Y|Eᶜ. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.
+- **Sure-Thing.** For an event E with $0<P(E)<1$, if $X|E \sim Y|E$, then $X \succeq Y$ iff $X|E^{c} \succeq Y|E^{c}$. Here X|E equals X on E and sure 0 elsewhere; it is not a conditional expectation.
 
 ## Proof
 
-Let p=P(E). Realize the conditional laws on E and Eᶜ as A,B for X and C,D for Y. Law invariance gives X~M_p(A,B), Y~M_p(C,D), X|E~M_p(A,0), Y|E~M_p(C,0). Independence cancels 0 to yield A~C from the hypothesis. Replace indifferent mixture components and cancel the common E component: X≽Y iff B≽D. The latter is equivalent to X|Eᶜ≽Y|Eᶜ by independence and law invariance.
+Let $p=P(E)$. Realize the conditional laws on E and $E^{c}$ as A,B for X and C,D for Y. Law invariance gives $X\sim M_p(A,B), Y\sim M_p(C,D), X|E\sim M_p(A,0), Y|E\sim M_p(C,0)$. Independence cancels 0 to yield $A\sim C$ from the hypothesis. Replace indifferent mixture components and cancel the common E component: $X\succeq Y$ iff $B\succeq D$. The latter is equivalent to $X|E^{c}\succeq Y|E^{c}$ by independence and law invariance.
 
 ## Notes
 

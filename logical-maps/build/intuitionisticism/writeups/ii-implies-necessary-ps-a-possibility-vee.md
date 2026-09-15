@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSa ($\Diamond_\vee$).** □(∀p, q : t. (□(p → q) → ($\Diamond_\vee$(p) → $\Diamond_\vee$(q))))
+- **□PSa ($\Diamond_\vee$).** $\Box (\forall p, q : t. (\Box (p \to q) \to$ ($\Diamond_\vee$$(p) \to$ $\Diamond_\vee$(q))))
 
 ## Proof
 
-Given □(p → q) and $\Diamond_\vee$p, choose its defining witness P with $\mathrm{Possibility}_\vee$(P) and Pp. Extract PSa(P) using □A → A, and infer Pq, hence $\Diamond_\vee$q. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for □.
+Given $\Box (p \to q)$ and $\Diamond_\vee$p, choose its defining witness P with $\mathrm{Possibility}_\vee$(P) and Pp. Extract $\operatorname{PSa}(P)$ using $\Box A \to A$, and infer Pq, hence $\Diamond_\vee$q. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for $\Box$.
 
 ## Notes
 

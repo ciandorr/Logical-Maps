@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□ entails □₂.** ∀p:t. □p → □₂p
+- **□ entails □₂.** $\forall p:t. \Box p \to \Box _{2}p$
 
 ## Proof
 
-If p=⊤ and N is any qualified Necessity₂, its necessary normality implies N⊤. Substitution gives Np. Quantify N and then discharge and generalize p.
+If $p=\top$ and N is any qualified $\operatorname{Necessity}_{2}$, its necessary normality implies $N\top$. Substitution gives Np. Quantify N and then discharge and generalize p.
 
 ## Notes
 

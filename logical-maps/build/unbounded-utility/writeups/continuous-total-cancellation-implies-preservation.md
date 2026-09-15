@@ -1,7 +1,7 @@
 # L¹ continuity turns independent-sum cancellation into preservation
 
 **Proved implication:** Rich Outcomes + Totality + Stochastic Dominance +
-L¹ Continuity + Independent Sum Cancellation implies Independent Sum
+$L^{1}$ Continuity + Independent Sum Cancellation implies Independent Sum
 Preservation.
 
 The proof concerns numerical gambles in the finite real chart. Rich Outcomes
@@ -53,7 +53,7 @@ Take $\delta_n=1/n$. The actual, pointwise-coupled variables satisfy
 
 $$E\bigl|((X+Z)+\delta_n)-(X+Z)\bigr|=\delta_n\longrightarrow0.$$
 
-The upper-section clause in the project's L¹ Continuity principle applies
+The upper-section clause in the project$'s L^{1}$ Continuity principle applies
 to $(X+Z)+\delta_n\succeq Y+Z$ and gives
 $X+Z\succeq Y+Z$. It does not require $X$, $Y$, $Z$, or their sums to
 have finite expectations. Along with step 1, this proves both clauses of
@@ -67,11 +67,11 @@ continuity has been used.
 Together with the already recorded decomposition, the result makes
 **Cancellation, Preservation, and full Independent Sum Invariance
 equivalent under DTU + L¹ Continuity**. Thus the existing Lévy obstruction
-also rules out Cancellation under DTU + L¹ Continuity + Symmetric Neutrality.
+also rules out Cancellation under DTU $+ L^{1}$ Continuity + Symmetric Neutrality.
 These consequences are left to the inference engine, rather than stored as
 duplicate arrows.
 
-Without L¹ Continuity, the argument stops at strict preservation. The map
+Without $L^{1}$ Continuity, the argument stops at strict preservation. The map
 separately records the conjecture that DTU alone might close that gap.
 
 **Original work: connecting proof using a shift approximation.**

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **PSc (≠⊥).** For every p and q, (p ∨ q) ≠ ⊥ implies p ≠ ⊥ or q ≠ ⊥.
+- **PSc (≠⊥).** For every p and $q, (p \lor q) \ne \bot$ implies $p \ne \bot$ or $q \ne \bot$.
 
 ## Conclusion
 
-- **Nonfalsity gives distinct disjunct.** ∀p,q:t. ¬¬(p ∨ q) → ((p ≠ ⊥) ∨ (q ≠ ⊥))
+- **Nonfalsity gives distinct disjunct.** $\forall p,q:t. \neg \neg (p \lor q) \to ((p \ne \bot ) \lor (q \ne \bot ))$
 
 ## Proof
 
-If ¬¬(p∨q), then (p∨q)≠⊥: an identity with ⊥ would give ¬(p∨q), contradicting its double negation. Instantiate PSc for ≠⊥ at p,q to obtain p≠⊥∨q≠⊥. Discharge and generalize p,q.
+If $\neg \neg (p\lor q)$, then $(p\lor q)\ne \bot$: an identity with $\bot$ would give $\neg (p\lor q)$, contradicting its double negation. Instantiate PSc for $\ne \bot$ at p,q to obtain $p\ne \bot \lor q\ne \bot$. Discharge and generalize p,q.
 
 ## Notes
 

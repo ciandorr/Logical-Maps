@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Positive Affine Invariance.** For all real a>0 and b, X ≽ Y iff aX+b ≽ aY+b.
-- **Reflection Anti-Invariance.** X ≽ Y iff −Y ≽ −X, using the one fixed normalized origin 0.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Positive Affine Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $aX+b \succeq aY+b$.
+- **Reflection Anti-Invariance.** $X \succeq Y$ iff $- Y \succeq - X$, using the one fixed normalized origin 0.
 
 ## Conclusion
 
-- **Negative Affine Anti-Invariance.** For all real a>0 and b, X ≽ Y iff −aY+b ≽ −aX+b.
+- **Negative Affine Anti-Invariance.** For all real $a>0$ and $b, X \succeq Y$ iff $- aY+b \succeq - aX+b$.
 
 ## Proof
 
-Apply reflection to reverse the comparison, then the positive transformation x↦ax+b to preserve that reversed comparison.
+Apply reflection to reverse the comparison, then the positive transformation x↦ax$+b$ to preserve that reversed comparison.
 
 ## Notes
 

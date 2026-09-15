@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Folded Expectation and Mixture Independence imply Relative Expectation</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Folded Expectation and Mixture Independence imply Relative Expectation</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,34 +252,32 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Folded Expectation and Mixture Independence imply Relative Expectation</h1>
-</header>
-<p><strong>Claim.</strong> Rich Outcomes + Mixture Independence + Folded Expectation imply Relative Expectation.</p>
-<p>Write the finite utility coordinates of the given variables as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X,Y</annotation></semantics></math>, and suppose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle mathvariant="double-struck"><mi>𝔼</mi></mstyle><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>−</mo><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">\mathbb E|X-Y|&lt;\infty</annotation></semantics></math> in their actual coupling. Put</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo>Pr</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>&gt;</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>S</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><msub><mi>S</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">S_X(t)=\Pr(X&gt;t),\qquad d(t)=S_X(t)-S_Y(t).</annotation></semantics></math></p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Folded Expectation and Mixture Independence imply Relative Expectation</h1></header><p><strong>Claim.</strong> Rich Outcomes + Mixture Independence + Folded Expectation imply Relative Expectation.</p>
+<p>Write the finite utility coordinates of the given variables as <span class="math inline">X,Y</span>, and suppose <span class="math inline">\mathbb E|X-Y|&lt;\infty</span> in their actual coupling. Put</p>
+<p><span class="math display">S_X(t)=\Pr(X&gt;t),\qquad d(t)=S_X(t)-S_Y(t).</span></p>
 <p>The indicator identity for the interval between two real numbers, followed by Tonelli and Fubini, gives</p>
-<p><span class="math display">$$\int_{\mathbb R}|d(t)|\,dt\le\mathbb E|X-Y|&lt;\infty,
-\qquad \int_{\mathbb R}d(t)\,dt=\mathbb E(X-Y). \tag{1}$$</span></p>
-<p>Rich Outcomes supplies the reflected variable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">-Y</annotation></semantics></math>. Form the actual fixed-lift mixtures</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>=</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>,</mo><mo>−</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>B</mi><mo>=</mo><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo>,</mo><mo>−</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">A=M_{1/2}(X,-Y),\qquad B=M_{1/2}(Y,-Y).</annotation></semantics></math></p>
-<p>The second mixture has a symmetric law. For positive <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>, put <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>Z</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo>Pr</mo><mo stretchy="false" form="prefix">(</mo><mi>Z</mi><mo>&gt;</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mo>Pr</mo><mo stretchy="false" form="prefix">(</mo><mi>Z</mi><mo>&lt;</mo><mo>−</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h_Z(t)=\Pr(Z&gt;t)-\Pr(Z&lt;-t)</annotation></semantics></math>. Probability-mixture linearity gives</p>
-<p><span class="math display">$$h_B(t)=0,\qquad h_A(t)=\tfrac12(h_X(t)-h_Y(t))
-=\tfrac12(d(t)+d(-t))\quad\text{a.e.} \tag{2}$$</span></p>
-<p>The last equality can fail only when <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">-t</annotation></semantics></math> is an atom threshold of one of the laws, a countable and hence Lebesgue-null set. Equations (1) and (2) show that both mixtures are foldable, with</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><mo stretchy="false" form="prefix">|</mo><msub><mi>h</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">|</mo><mspace width="0.167em"></mspace><mi>d</mi><mi>t</mi><mo>≤</mo><mstyle displaystyle="false"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><msub><mo>∫</mo><mstyle mathvariant="double-struck"><mi>ℝ</mi></mstyle></msub><mo stretchy="false" form="prefix">|</mo><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">|</mo><mspace width="0.167em"></mspace><mi>d</mi><mi>t</mi><mo>&lt;</mo><mi>∞</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mstyle displaystyle="false"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mstyle mathvariant="double-struck"><mi>𝔼</mi></mstyle><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>F</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">\int_0^\infty|h_A(t)|\,dt\le\tfrac12\int_{\mathbb R}|d(t)|\,dt&lt;\infty,
-\qquad F(A)=\tfrac12\mathbb E(X-Y),\qquad F(B)=0.</annotation></semantics></math></p>
+<p><span class="math display">\int_{\mathbb R}|d(t)|\,dt\le\mathbb E|X-Y|&lt;\infty,
+\qquad \int_{\mathbb R}d(t)\,dt=\mathbb E(X-Y). \tag{1}</span></p>
+<p>Rich Outcomes supplies the reflected variable <span class="math inline">-Y</span>. Form the actual fixed-lift mixtures</p>
+<p><span class="math display">A=M_{1/2}(X,-Y),\qquad B=M_{1/2}(Y,-Y).</span></p>
+<p>The second mixture has a symmetric law. For positive <span class="math inline">t</span>, put <span class="math inline">h_Z(t)=\Pr(Z&gt;t)-\Pr(Z&lt;-t)</span>. Probability-mixture linearity gives</p>
+<p><span class="math display">h_B(t)=0,\qquad h_A(t)=\tfrac12(h_X(t)-h_Y(t))
+=\tfrac12(d(t)+d(-t))\quad\text{a.e.} \tag{2}</span></p>
+<p>The last equality can fail only when <span class="math inline">t</span> or <span class="math inline">-t</span> is an atom threshold of one of the laws, a countable and hence Lebesgue-null set. Equations (1) and (2) show that both mixtures are foldable, with</p>
+<p><span class="math display">\int_0^\infty|h_A(t)|\,dt\le\tfrac12\int_{\mathbb R}|d(t)|\,dt&lt;\infty,
+\qquad F(A)=\tfrac12\mathbb E(X-Y),\qquad F(B)=0.</span></p>
 <p>Folded Expectation therefore gives</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>≽</mo><mi>B</mi><mo>⇔</mo><mstyle mathvariant="double-struck"><mi>𝔼</mi></mstyle><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mn>0</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">A\succeq B\iff\mathbb E(X-Y)\ge0.</annotation></semantics></math></p>
-<p>Mixture Independence, applied to the common <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>−</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">-Y</annotation></semantics></math> branch, gives <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>≽</mo><mi>B</mi><mo>⇔</mo><mi>X</mi><mo>≽</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">A\succeq B\iff X\succeq Y</annotation></semantics></math>. This is exactly Relative Expectation, including indifference at zero and the failure of the weak comparison for negative mean.</p>
-<p>The proof uses identities of mixture laws to compute folded tails, but it does not replace one random variable with an equal-law variable in a preference. Folded Expectation itself licenses the two comparisons being used. Thus neither Stochastic Equivalence nor Totality is an omitted premise. No L¹ Continuity, reflection axiom or full affine symmetry is needed.</p>
+<p><span class="math display">A\succeq B\iff\mathbb E(X-Y)\ge0.</span></p>
+<p>Mixture Independence, applied to the common <span class="math inline">-Y</span> branch, gives <span class="math inline">A\succeq B\iff X\succeq Y</span>. This is exactly Relative Expectation, including indifference at zero and the failure of the weak comparison for negative mean.</p>
+<p>The proof uses identities of mixture laws to compute folded tails, but it does not replace one random variable with an equal-law variable in a preference. Folded Expectation itself licenses the two comparisons being used. Thus neither Stochastic Equivalence nor Totality is an omitted premise. No <span class="math inline">L^{1}</span> Continuity, reflection axiom or full affine symmetry is needed.</p>
 <p><strong>Original work: small connecting proof.</strong> The two expectation principles and the source’s forward implication are Zachary Goodsell’s. The common-reflected- mixture proof supplies a converse useful to the map, rather than importing a claim that the paper already proves that converse. The integrability bound is essential: conditional improper convergence is insufficient. This accounting is not a claim of literature novelty.</p>
 <p><strong>Sources.</strong> Zachary Goodsell, <em>Symmetries of value</em>, pp. 26–29, especially the definitions and Theorem 6. Connecting proof and premise audit: GPT-6 (Codex), 9 September 2026. No independent checker or Lean proof is claimed.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 6, pp. 26–29</li>
 </ul>
-</body>
-</html>
+</body></html>

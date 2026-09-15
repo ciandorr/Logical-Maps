@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Spouse ($\Diamond_\vee$).** ∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\vee$)
+- **Spouse ($\Diamond_\vee$).** $\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\vee$)
 
 ## Conclusion
 
-- **$\Diamond_\vee$ entails ◇₂.** ∀p:t. $\Diamond_\vee$p → ◇₂p
+- **$\Diamond_\vee$ entails ◇₂.** $\forall p:t$. $\Diamond_\vee$$p \to \Diamond _{2}p$
 
 ## Proof
 
-A spouse for $\Diamond_\vee$, together with its II-theorem necessary PSb/PSc clauses, makes $\Diamond_\vee$ a Possibility₂ candidate. Given $\Diamond_\vee$p, choose this candidate as the witness in ◇₂p. Discharge and generalize p.
+A spouse for $\Diamond_\vee$, together with its II-theorem necessary PSb/PSc clauses, makes $\Diamond_\vee$ $a \operatorname{Possibility}_{2}$ candidate. Given $\Diamond_\vee$p, choose this candidate as the witness in $\Diamond _{2}p$. Discharge and generalize p.
 
 ## Notes
 

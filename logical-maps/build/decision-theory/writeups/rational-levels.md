@@ -4,30 +4,30 @@
 
 ## Package
 
-- **Completeness.** For all p, q ∈ Δ(X): p ≽ q or q ≽ p.
-- **Transitivity.** For all p, q, r ∈ Δ(X): if p ≽ q and q ≽ r then p ≽ r.
-- **Archimedean.** For all p, q, r ∈ Δ(X): if p ≻ q ≻ r then there are α, β ∈ (0,1) with αp + (1−α)r ≻ q and q ≻ βp + (1−β)r.
-- **¬ Mixture continuity.** For all p, q, r ∈ Δ(X) the sets {λ ∈ [0,1] : λp + (1−λ)q ≽ r} and {λ ∈ [0,1] : r ≽ λp + (1−λ)q} are closed.
+- **Completeness.** For all $p, q \in \Delta (X): p \succeq q$ or $q \succeq p$.
+- **Transitivity.** For all $p, q, r \in \Delta (X)$: if $p \succeq q$ and $q \succeq r$ then $p \succeq r$.
+- **Archimedean.** For all $p, q, r \in \Delta (X)$: if $p \succ q \succ r$ then there are $\alpha , \beta \in (0,1)$ with $\alpha p + (1- \alpha )r \succ q$ and $q \succ \beta p + (1- \beta )r$.
+- **¬ Mixture continuity.** For all $p, q, r \in \Delta (X)$ the sets $\{\lambda \in [0,1] : \lambda p + (1- \lambda )q \succeq r\}$ and $\{\lambda \in [0,1] : r \succeq \lambda p + (1- \lambda )q\}$ are closed.
 
 ## Construction
 
-Let X = {a, b, c} and define a three-valued function V on Δ(X):
-V(p) = 2 if p(a) ∈ ℚ; V(p) = 1 if p(a) ∉ ℚ and p(b) ∈ ℚ; V(p) = 0
-otherwise. Let p ≽ q iff V(p) ≥ V(q). This is a weak order.
+Let $X = \{a, b, c\}$ and define a three-valued function V on $\Delta (X)$:
+$V(p) = 2$ if $p(a) \in \mathbb{Q} ; V(p) = 1$ if $p(a) \notin \mathbb{Q}$ and $p(b) \in \mathbb{Q} ; V(p) = 0$
+otherwise. Let $p \succeq q$ iff $V(p) \ge V(q)$. This is a weak order.
 
-Mixture continuity fails: along the line from δ_a to δ_b the mixture
-λδ_a + (1−λ)δ_b has V = 2 exactly when λ ∈ ℚ, so
-{λ : λδ_a + (1−λ)δ_b ≽ δ_c} = ℚ ∩ [0,1] is not closed.
+Mixture continuity fails: along the line from $\delta _a$ to $\delta _b$ the mixture
+$\lambda \delta _a + (1- \lambda )\delta _b$ has $V = 2$ exactly when $\lambda \in \mathbb{Q}$, so
+$\{\lambda : \lambda \delta _a + (1- \lambda )\delta _b \succeq \delta _c\} = \mathbb{Q} \cap [0,1]$ is not closed.
 
-Archimedean holds: a chain p ≻ q ≻ r forces V(p) = 2, V(q) = 1, V(r) = 0,
-so p(a) ∈ ℚ and r(a) ∉ ℚ, in particular p(a) ≠ r(a). Along
-m(α) = αp + (1−α)r the coordinate m(α)(a) = r(a) + α(p(a) − r(a)) is
-rational for a dense set of α, so some α ∈ (0,1) close to 1 has
-V(m(α)) = 2 > V(q). For the other half, m(β)(a) is irrational for all but
-countably many β; and m(β)(b) = r(b) + β(p(b) − r(b)) is irrational for
-all but countably many β when p(b) ≠ r(b), and equals r(b) ∉ ℚ when
-p(b) = r(b) (because V(r) = 0). So some β ∈ (0,1) close to 0 has
-V(m(β)) = 0 < V(q).
+Archimedean holds: a chain $p \succ q \succ r$ forces $V(p) = 2, V(q) = 1, V(r) = 0$,
+so $p(a) \in \mathbb{Q}$ and $r(a) \notin \mathbb{Q}$, in particular $p(a) \ne r(a)$. Along
+$m(\alpha ) = \alpha p + (1- \alpha )r$ the coordinate $m(\alpha )(a) = r(a) + \alpha (p(a) - r(a))$ is
+rational for a dense set of $\alpha$, so some $\alpha \in (0,1)$ close to 1 has
+$V(m(\alpha )) = 2 > V(q)$. For the other half, $m(\beta )(a)$ is irrational for all but
+countably many $\beta$; and $m(\beta )(b) = r(b) + \beta (p(b) - r(b))$ is irrational for
+all but countably many $\beta$ when $p(b) \ne r(b)$, and equals $r(b) \notin \mathbb{Q}$ when
+$p(b) = r(b)$ (because $V(r) = 0$). So some $\beta \in (0,1)$ close to 0 has
+$V(m(\beta )) = 0 < V(q)$.
 
 ## Notes
 

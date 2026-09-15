@@ -4,17 +4,17 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **$\mathrm{Possibility}_\vee$ composition closure.** ∀P,Q:tt. ($\mathrm{Possibility}_\vee$(P) ∧ $\mathrm{Possibility}_\vee$(Q)) → $\mathrm{Possibility}_\vee$(P ∘ Q)
+- **$\mathrm{Possibility}_\vee$ composition closure.** $\forall P,Q:tt$. ($\mathrm{Possibility}_\vee$$(P) \land$ $\mathrm{Possibility}_\vee$$(Q)) \to$ $\mathrm{Possibility}_\vee$$(P \circ Q)$
 
 ## Proof
 
-Assume $\mathrm{Possibility}_\vee$(P) and $\mathrm{Possibility}_\vee$(Q). Both premises are identities with ⊤, so they imply their own □-necessitations by 4. This permits modal reasoning with these necessary conditions; it does not permit unrestricted necessitation under assumptions.
+Assume $\mathrm{Possibility}_\vee$(P) and $\mathrm{Possibility}_\vee$(Q). Both premises are identities with $\top$, so they imply their own $\Box$-necessitations by 4. This permits modal reasoning with these necessary conditions; it does not permit unrestricted necessitation under assumptions.
 
-For PSa, □(p→q) and the necessary PSa condition for Q give □(Qp→Qq), by the necessitated universal-instantiation theorem and K. PSa(P) then takes P(Qp) to P(Qq). For PSb, □¬Q⊥ gives Q⊥=⊥, using □¬r↔r=⊥; substituting this into □¬P⊥ yields the required necessary bottom clause. For PSc, the necessary disjunction clause for Q gives □(Q(p∨q)→(Qp∨Qq)); use PSa(P) and then PSc(P). These same derivations can be performed inside □, since the candidate premises imply their own □ forms. The closed logical deductions and K therefore give the necessary conjunction of PSa, PSb and PSc for P∘Q. Discharge the two candidate assumptions and generalize P,Q.
+For $\operatorname{PSa}, \Box (p\to q)$ and the necessary PSa condition for Q give $\Box (Qp\to Qq)$, by the necessitated universal-instantiation theorem and $K. \operatorname{PSa}(P)$ then takes $P(Qp)$ to $P(Qq)$. For $\operatorname{PSb}, \Box \neg Q\bot$ gives $Q\bot =\bot$, using $\Box \neg r\leftrightarrow r=\bot$; substituting this into $\Box \neg P\bot$ yields the required necessary bottom clause. For PSc, the necessary disjunction clause for Q gives $\Box (Q(p\lor q)\to (Qp\lor Qq))$; use $\operatorname{PSa}(P)$ and then $\operatorname{PSc}(P)$. These same derivations can be performed inside $\Box$, since the candidate premises imply their own $\Box$ forms. The closed logical deductions and K therefore give the necessary conjunction of PSa, PSb and PSc for $P\circ Q$. Discharge the two candidate assumptions and generalize P,Q.
 
 ## Notes
 

@@ -326,10 +326,10 @@ All 31 numbered results and 11 numbered definitions are accounted for. “Pendin
 | Theorem 7 | [Truth is a $\mathrm{Possibility}_\vee$; T for $\Diamond_\vee$](writeups/ii-implies-t-possibility-vee.html) | proof recorded |
 | Theorem 8 | [Nonfalsity qualifies exactly under necessary weak excluded middle](writeups/ii-implies-nonfalsity-candidate-characterization.html) | proof recorded |
 | Theorem 9 | [Composition and disjunction closure; 4 for $\Diamond_\vee$](writeups/ii-implies-vee-composition-closure.html) | proof recorded |
-| Theorem 10 | Exact IS4− logic for □ and $\Diamond_\vee$ | partial |
+| Theorem 10 | Exact IS4− logic for $\Box$ and $\Diamond_\vee$ | partial |
 | Theorem 11 | [Prime propositions are $\Diamond_\vee$-possible](writeups/ii-implies-prime-possibility.html) | pending |
 | Theorem 12 | [$\Diamond_\infty$ qualifies and obeys T and 4](writeups/ii-implies-necessary-ps-a-possibility-infinity.html) | partial |
-| Theorem 13 | Exact IS4− logic for □ and $\Diamond_\infty$ | pending |
+| Theorem 13 | Exact IS4− logic for $\Box$ and $\Diamond_\infty$ | pending |
 | Theorem 14 | [□₂ and ◇₂ are married](writeups/ii-implies-necessary-ps-a-paired-two.html) | proof recorded |
 | Theorem 15 | [□₂ and ◇₂ belong to their paired candidate classes](writeups/ii-implies-k-necessity-two.html) | proof recorded |
 | Theorem 16 | [Truth is a necessity and possibility, married to itself](writeups/ii-implies-t-necessity-two.html) | proof recorded |
@@ -344,40 +344,40 @@ All 31 numbered results and 11 numbered definitions are accounted for. “Pendin
 | Lemma 25 | Propositional local classes embed in truth sets on the modal cone | semantic proof sketch |
 | Lemma 26 | The term structure is rich | semantic proof sketch |
 | Lemma 27 | The term structure is quasifunctional | semantic proof sketch |
-| Theorem 28 | Term models exist and their root theory is exactly w₀ | semantic proof sketch |
+| Theorem 28 | Term models exist and their root theory is exactly $w_{0} |$ semantic proof sketch |
 | Theorem 29 | Strong completeness for II | semantic proof |
 | Theorem 30 | [Comb semantics and failure of relational representation for $\Diamond_\vee$](writeups/full-infinite-comb.html) | partial |
 | Theorem 31 | [Marriage in the comb and collapse to Truth in the tree](writeups/full-binary-tree-canopy.html) | partial |
 
 ### Semantic results outside the graph
 
-**Theorem 2** (§3.4, pp. 14–15). For necessity of FC1, a missing completion of aRb and a≤ᵢc is witnessed by the upward closure of b: the relational existential operator holds at a but not c. Conversely, transport an existential witness b across a≤ᵢc using FC1 to obtain d≥ᵢb with cRd; upward closure preserves truth. This is a theorem about arbitrary birelation frames, not a new II axiom.
+**Theorem 2** (§3.4, pp. 14–15). For necessity of FC1, a missing completion of aRb and $a\le _{i}c$ is witnessed by the upward closure of b: the relational existential operator holds at a but not c. Conversely, transport an existential witness b across $a\le _{i}c$ using FC1 to obtain $d\ge _{i}b$ with cRd; upward closure preserves truth. This is a theorem about arbitrary birelation frames, not a new II axiom.
 
-**Theorem 3** (§3.4, p. 15). Attributed to Plotkin and Stirling (1986); proof referred to Simpson (1994), Chapter 3. IK uses FC1 and FC2; IS4 additionally requires R reflexive and transitive. The cited external proof has not been independently transcribed. R is not identified with ≤ₘ in this theorem.
+**Theorem 3** (§3.4, p. 15). Attributed to Plotkin and Stirling (1986); proof referred to Simpson (1994), Chapter 3. IK uses FC1 and FC2; IS4 additionally requires R reflexive and transitive. The cited external proof has not been independently transcribed. R is not identified with $\le _{m}$ in this theorem.
 
-**Theorem 4** (§3.4, p. 15). Attributed to Wijesekera (1990). The existential condition is ∀w′≥ᵢw ∃v.(w′Rv ∧ v∈p). WK retains K for its necessity, necessitation, PSa and PSb, but drops PSc and PSd. This is a separate relational interpretation, not a new designated possibility in II.
+**Theorem 4** (§3.4, p. 15). Attributed to Wijesekera (1990). The existential condition is $\forall w$′$\ge _{i}w \exists v.(w$′Rv $\land v\in p$). WK retains K for its necessity, necessitation, PSa and PSb, but drops PSc and PSd. This is a separate relational interpretation, not a new designated possibility in II.
 
 **Lemma 19** (§5.2, p. 31). Convert a term to applicative combinator form. Its free variables are in the local domain by hypothesis; the required constants and combinators are locally available. Closure of application under the logical relations inductively keeps every subterm, hence the whole interpretation, in the domain.
 
-**Lemma 20** (§5.2, p. 31). If w≥ₘw₀, the local domains contain the original root’s distinguished elements by monotonicity of the logical relations. Changing only the distinguished root to w preserves richness and all interpretation clauses. This licenses testing assumption-free theorems at metaphysically accessible worlds.
+**Lemma 20** (§5.2, p. 31). If $w\ge _{m} w_{0}$, the local domains contain the original root’s distinguished elements by monotonicity of the logical relations. Changing only the distinguished root to w preserves richness and all interpretation clauses. This licenses testing assumption-free theorems at metaphysically accessible worlds.
 
-**Theorem 21** (§5.2, pp. 31–32). The interpretation clauses validate IH. Quasifunctionality gives Eq. (70): truth of □∀x.fx=gx means equality on every metaphysically accessible local domain, so f∼g at the root. For intensionality, apply validity of an assumption-free premise at each rerooted model, then use propositional congruence or quasifunctionality. Completeness is Theorem 29. This is a retained metatheoretic proof outline, not an additional assumption in the graph.
+**Theorem 21** (§5.2, pp. 31–32). The interpretation clauses validate IH. Quasifunctionality gives Eq. (70): truth of $\Box \forall x.fx=gx$ means equality on every metaphysically accessible local domain, so $f\sim g$ at the root. For intensionality, apply validity of an assumption-free premise at each rerooted model, then use propositional congruence or quasifunctionality. Completeness is Theorem 29. This is a retained metatheoretic proof outline, not an additional assumption in the graph.
 
-**Theorem 22** (§5.3, p. 33). Take all informational upsets at type t and all set functions at function types, with recursively defined local congruence. Quasifunctionality follows from that definition. For Univ, f∼g at w entails agreement on every local input at each informational successor of every metaphysical successor; hence their universal truth sets agree on the metaphysical cone. The manuscript treats the logical functions and combinators similarly. The explicit countermodels invoke this construction at every type, not only their finite propositional projection.
+**Theorem 22** (§5.3, p. 33). Take all informational upsets at type t and all set functions at function types, with recursively defined local congruence. Quasifunctionality follows from that definition. For Univ, $f\sim g$ at w entails agreement on every local input at each informational successor of every metaphysical successor; hence their universal truth sets agree on the metaphysical cone. The manuscript treats the logical functions and combinators similarly. The explicit countermodels invoke this construction at every type, not only their finite propositional projection.
 
-**Theorem 23** (§5.5, Eq. (77), pp. 37–38). If ¬¬(p∨q) holds at w, choose an informational successor u in one disjunct, say p. Since ≤ᵢ⊆≤ₘ, w≤ₘu. For every v≥ᵢw, FC1 gives d≥ᵢu with v≤ₘd; persistence makes p true at d. Thus p=⊥ fails at every v≥ᵢw, so p≠⊥ holds at w. The q case is symmetric. The graph contains the object-language conclusion as an optional principle; FC1 remains a condition on representations, not an II axiom. The prose proof’s occurrence of ⊤ where ⊥ is needed is not used.
+**Theorem 23** (§5.5, Eq. (77), pp. 37–38). If $\neg \neg (p\lor q)$ holds at w, choose an informational successor u in one disjunct, say p. Since $\le _{i}\subseteq \le _{m} , w\le _{m} u$. For every $v\ge _{i}w$, FC1 gives $d\ge _{i}u$ with $v\le _{m} d$; persistence makes p true at d. Thus $p=\bot$ fails at every $v\ge _{i}w$, so $p\ne \bot$ holds at w. The q case is symmetric. The graph contains the object-language conclusion as an optional principle; FC1 remains a condition on representations, not an II axiom. The prose proof’s occurrence of $\top$ where $\bot$ is needed is not used.
 
 **Lemma 24** (§6.1, p. 39). The Henkin-style construction extends a small closed theory while avoiding p, successively choosing disjuncts and fresh existential witnesses; compactness preserves avoidance at unions. The manuscript cites Henkin (1950), p. 86 for the construction. The constant-reserve and enumeration details have not been independently completed here.
 
-**Lemma 25** (§6.1, p. 40). If p=q is absent from w, the manuscript uses the equations of w and prime extension to obtain a metaphysical successor distinguishing p and q. This separates the corresponding truth sets. The passage from equations to provable material equivalence is retained as part of the source proof outline, not separately formalized.
+**Lemma 25** (§6.1, p. 40). If $p=q$ is absent from w, the manuscript uses the equations of w and prime extension to obtain a metaphysical successor distinguishing p and q. This separates the corresponding truth sets. The passage from equations to provable material equivalence is retained as part of the source proof outline, not separately formalized.
 
 **Lemma 26** (§6.1, pp. 40–41). Use classes of the logical constants and combinators. For implication, a missing implication permits an extension containing its antecedent without its consequent. Existential truth follows from witness completeness. For the reverse universal clause use a fresh constant and prime extension. The source supplies these cases; the other applicative checks are schematic.
 
-**Lemma 27** (§6.1, p. 41). Agreement on every local input at every metaphysical successor yields ∀x.fx=gx there by the fresh-constant argument. Lemma 25 gives its identity with ⊤ at w, and modalized functionality gives f=g. This retains the dependencies on Lemma 25 and Eq. (70).
+**Lemma 27** (§6.1, p. 41). Agreement on every local input at every metaphysical successor yields $\forall x.fx=gx$ there by the fresh-constant argument. Lemma 25 gives its identity with $\top$ at w, and modalized functionality gives $f=g$. This retains the dependencies on Lemma 25 and Eq. (70).
 
-**Theorem 28** (§6.1, p. 41). Interpret each term by its relative equivalence class. Lemmas 25–27 provide the required model structure; truth at the root is membership in w₀ by construction. The source’s immediate proof is recorded with these dependencies.
+**Theorem 28** (§6.1, p. 41). Interpret each term by its relative equivalence class. Lemmas 25–27 provide the required model structure; truth at the root is membership in $w_{0}$ by construction. The source’s immediate proof is recorded with these dependencies.
 
-**Theorem 29** (§6.1, pp. 41–42). If Γ does not prove p, Lemma 24 gives a prime theory extending Γ and omitting p. Root its term model there. By Theorem 28 all of Γ is true and p is false in that model, contradicting semantic entailment. The argument is conditional on the prime extension and term-model lemmas, as in the manuscript.
+**Theorem 29** (§6.1, pp. 41–42). If $\Gamma$ does not prove p, Lemma 24 gives a prime theory extending $\Gamma$ and omitting p. Root its term model there. By Theorem 28 all of $\Gamma$ is true and p is false in that model, contradicting semantic entailment. The argument is conditional on the prime extension and term-model lemmas, as in the manuscript.
 
 ### Definition register
 
@@ -397,11 +397,11 @@ All 31 numbered results and 11 numbered definitions are accounted for. “Pendin
 
 ### Open questions and deferred steps
 
-**Question 1.** Exact propositional modal logic of □ and $\Diamond_\vee$. Conflicts with the asserted exactness of Theorem 10; retained as unresolved while §6.3 is incomplete.
+**Question 1.** Exact propositional modal logic of $\Box$ and $\Diamond_\vee$. Conflicts with the asserted exactness of Theorem 10; retained as unresolved while §6.3 is incomplete.
 
-**Question 2.** Exact propositional modal logic of □₂ and ◇₂. Theorem 17 states the IS4 lower bound and conjectures exactness. The two 4 proofs still need expansion in this map.
+**Question 2.** Exact propositional modal logic of $\Box _{2}$ and $\Diamond _{2}$. Theorem 17 states the IS4 lower bound and conjectures exactness. The two 4 proofs still need expansion in this map.
 
-**Question 3.** Spouse uniqueness for □ and general monogamy. Both qualified uniqueness statements are principle nodes. §4.5 contains contrary draft remarks about polygamy, but no completed countermodel is supplied.
+**Question 3.** Spouse uniqueness for $\Box$ and general monogamy. Both qualified uniqueness statements are principle nodes. §4.5 contains contrary draft remarks about polygamy, but no completed countermodel is supplied.
 
 **Question 4.** Consequences of Descriptions over II. The type-ambiguous necessary description principle is recorded. No S5 conclusion is imported from the discussion of Classicism.
 

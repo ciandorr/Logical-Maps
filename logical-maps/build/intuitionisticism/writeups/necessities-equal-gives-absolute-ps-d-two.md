@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□ = □₂.** (λp:t. □p) = □₂
+- **□ = □₂.** $(\lambda p:t. \Box p) = \Box _{2}$
 
 ## Conclusion
 
-- **PSd (◇₂).** For every p and q, if ◇₂(p) implies □q, then □(p → q), with □p defined as p = ⊤.
+- **PSd (◇₂).** For every p and q, if $\Diamond _{2}(p)$ implies $\Box q$, then $\Box (p \to q)$, with $\Box p$ defined as $p = \top$.
 
 ## Proof
 
-The paired PSd theorem for □₂,◇₂ is proved in II. Substitute the selected operator identity □₂=□ into this entire quantified sentence using Leibniz’s Law. Both occurrences of the paired necessity become □, giving the original absolute-necessity PSd condition for ◇₂.
+The paired PSd theorem for $\Box _{2},\Diamond _{2}$ is proved in II. Substitute the selected operator identity $\Box _{2}=\Box$ into this entire quantified sentence using Leibniz’s Law. Both occurrences of the paired necessity become $\Box$, giving the original absolute-necessity PSd condition for $\Diamond _{2}$.
 
 ## Notes
 

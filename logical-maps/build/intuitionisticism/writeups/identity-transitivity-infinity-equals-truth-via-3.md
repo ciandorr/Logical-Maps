@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **$\Diamond_\vee$ = Truth.** $\Diamond_\vee$ = (λp:t. p)
+- **$\Diamond_\vee$ = Truth.** $\Diamond_\vee$ $= (\lambda p:t. p)$
 - **$\Diamond_\vee$ = $\Diamond_\infty$.** $\Diamond_\vee$ = $\Diamond_\infty$
 
 ## Conclusion
 
-- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ = (λp:t. p)
+- **$\Diamond_\infty$ = Truth.** $\Diamond_\infty$ $= (\lambda p:t. p)$
 
 ## Proof
 
-Apply symmetry and transitivity of identity to the two selected function identities, using their shared operator as the middle term. This is identity reasoning at type t→t and does not infer function identity from material pointwise equivalence.
+Apply symmetry and transitivity of identity to the two selected function identities, using their shared operator as the middle term. This is identity reasoning at type $t\to t$ and does not infer function identity from material pointwise equivalence.
 
 ## Notes
 

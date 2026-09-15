@@ -4,16 +4,16 @@
 
 ## Premises
 
-- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each r ∈ ℝ there is an outcome o_r with u(o_r)=r, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
-- **Folded Expectation.** Put h_X(t)=P(u(X)>t)−P(u(X)<−t) for t≥0. If ∫₀∞|h_X(t)|dt and ∫₀∞|h_Y(t)|dt are finite, compare X,Y exactly by F(X)=∫₀∞h_X(t)dt and F(Y). Boundary atoms do not change these integrals.
+- **Rich Outcomes.** Every real number r occurs as a utility level of a sure outcome: for each $r \in \mathbb{R}$ there is an outcome $o_r$ with $u(o_r)=r$, with u defined by the normalized binary-mixture comparisons in the background. This does not assert that every outcome has a finite real level.
+- **Folded Expectation.** Put $h_X(t)=P(u(X)>t)- P(u(X)<- t)$ for $t\ge 0$. If $\int _0^{\infty }|h_X(t)|dt$ and $\int _0^{\infty }|h_Y(t)|dt$ are finite, compare X,Y exactly by $F(X)=\int _0^{\infty }h_X(t)dt$ and $F(Y)$. Boundary atoms do not change these integrals.
 
 ## Conclusion
 
-- **Symmetric Gambles Are Neutral.** If u(X) and −u(X) have the same law, then X ~ 0.
+- **Symmetric Gambles Are Neutral.** If $u(X)$ and $- u(X)$ have the same law, then $X \sim 0$.
 
 ## Proof
 
-For a symmetric real law, h_X(t)=0 almost everywhere, so F(X)=0. The zero constant also has folded value zero; apply Folded Expectation.
+For a symmetric real $\operatorname{law}, h_X(t)=0$ almost everywhere, so $F(X)=0$. The zero constant also has folded value zero; apply Folded Expectation.
 
 ## Notes
 

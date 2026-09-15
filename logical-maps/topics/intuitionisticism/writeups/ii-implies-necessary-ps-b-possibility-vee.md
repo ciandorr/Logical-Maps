@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSb ($\Diamond_\vee$).** □(¬$\Diamond_\vee$(⊥))
+- **□PSb ($\Diamond_\vee$).** $\Box (\neg$$\Diamond_\vee$$(\bot )$)
 
 ## Proof
 
-If $\Diamond_\vee$⊥, its defining witness P has $\mathrm{Possibility}_\vee$(P) and P⊥. The candidate condition includes □¬P⊥, hence ¬P⊥, a contradiction. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for □.
+If $\Diamond_\vee$$\bot$, its defining witness P has $\mathrm{Possibility}_\vee$(P) and $P\bot$. The candidate condition includes $\Box \neg P\bot$, hence $\neg P\bot , a$ contradiction. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for $\Box$.
 
 ## Notes
 

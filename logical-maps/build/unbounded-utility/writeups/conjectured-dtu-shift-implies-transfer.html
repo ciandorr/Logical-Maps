@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Does DTU plus Shift Invariance imply Shift Transfer?</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Does DTU plus Shift Invariance imply Shift Transfer?</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,30 +252,34 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Does DTU plus Shift Invariance imply Shift Transfer?</h1>
-</header>
-<p><strong>Recorded countermodel, 13 September 2026.</strong> <a href="finite-shift-total-extension.html">Stochastic dominance: finite-shift total extension</a> satisfies every premise below and strictly orders a pair that Shift Transfer requires to be indifferent. It therefore refutes the implication under its stated premises. The original conjecture ID, statement, and conjectured status are retained; the Conjectures tab computes its answer from the separate model. Source filters can remove that evidence, and stronger backgrounds can prove the conditional implication.</p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Does DTU plus Shift Invariance imply Shift Transfer?</h1></header><p><strong>Recorded countermodel, 13 September 2026.</strong> <a href="finite-shift-total-extension.html">Stochastic dominance: finite-shift total extension</a> satisfies every premise below and strictly orders a pair that Shift Transfer requires to be indifferent. It therefore refutes the implication under its stated premises. The original conjecture ID, statement, and conjectured status are retained; the Conjectures tab computes its answer from the separate model. Source filters can remove that evidence, and stronger backgrounds can prove the conditional implication.</p>
 <p>Zachary Goodsell proposed the finite-shift conclosure and separating total extension. GPT-6 (Codex) supplied the witness and the proof that saturation and maximal extension preserve its strict comparison. The model’s write-up records the construction, attribution, and checks; no independent checker or Lean verification is claimed.</p>
 <p>The question was formulated by GPT-6 (Codex), 9 September 2026. The principles and the stronger affine-symmetry derivations are Zachary Goodsell’s <em>Symmetries of value</em>, Theorems 3–4, pp. 25–27; the paper is not attributed this reduced-premise conjecture. The original analysis identified the remaining gap and checked the model families then available.</p>
 <p>With all six DTU axioms assumed, does</p>
-<p>[ XYX+bY+b b ]</p>
+<p><span class="math display">
+X\succeq Y\quad\Longleftrightarrow\quad X+b\succeq Y+b
+\quad\text{for every real }b
+</span></p>
 <p>already force</p>
-<p>[ M_p(X+b/p,Y)M_p(X,Y+b/(1-p)) (0&lt;p&lt;1)? ]</p>
+<p><span class="math display">
+M_p(X+b/p,Y)\sim M_p(X,Y+b/(1-p))
+\quad(0&lt;p&lt;1)?
+</span></p>
 <p>Under DTU, the recorded implications make the latter equivalent to Simple Relative Expectation, so the question can equally be read as whether a common-shift symmetry determines comparisons under every simple pointwise perturbation.</p>
 <p>Two additional hypotheses settle it:</p>
 <ul>
 <li><strong>Symmetric Neutrality:</strong> the new <a href="neutrality-shift-imply-shift-transfer.md">neutrality-and-shift proof</a> centers paired laws, then cancels a common mixture branch. Scale Invariance is unnecessary, but the neutral value of the centered laws is essential to that proof.</li>
-<li><strong>Continuity under Vanishing Shifts:</strong> the <a href="du-vanishing-shifts-imply-relative.html">common-mixture proof</a> gives Relative Expectation already under DU, without Totality or a prior shift-symmetry assumption. This implies Simple Relative Expectation and Shift Transfer. Under DU, this continuity condition is equivalent to L¹ Continuity; a separate <a href="du-l1-implies-relative.html">conditional-approximation proof</a> also establishes the L¹ route.</li>
+<li><strong>Continuity under Vanishing Shifts:</strong> the <a href="du-vanishing-shifts-imply-relative.html">common-mixture proof</a> gives Relative Expectation already under DU, without Totality or a prior shift-symmetry assumption. This implies Simple Relative Expectation and Shift Transfer. Under DU, this continuity condition is equivalent to <span class="math inline">L^{1}</span> Continuity; a separate <a href="du-l1-implies-relative.html">conditional-approximation proof</a> also establishes the <span class="math inline">L^{1}</span> route.</li>
 </ul>
-<p>A countermodel must therefore fail <strong>both</strong> Symmetric Neutrality and L¹ Continuity. The symmetric and asymmetric continuous clipping models already satisfy Relative Expectation and so cannot separate the question. The <a href="lexicographic-folded-extension.md">Folded-tail cone: lexicographic extension</a> does fail L¹ Continuity, but retains neutrality and Relative Expectation, so it also satisfies transfer. The exact clipping records do not establish the required Shift Invariance and cannot simply be claimed as counterexamples.</p>
-<p>The earlier <a href="finite-support-compensated-dominance.html">Stochastic dominance: finite-support compensation</a> model does satisfy DU and Shift Invariance while violating Shift Transfer, with the explicit pair <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>U</mi><mo>+</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_{1/2}(U+1,0)</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>U</mi><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_{1/2}(U,1)</annotation></semantics></math> for uniform <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math> on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math>. It also violates Totality, so it settles the version with DU but does not itself supply a total countermodel. Its failure of continuity under vanishing shifts is witnessed by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi><mo>+</mo><mi>ε</mi><mo>≽</mo><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">U+\varepsilon\succeq1/2</annotation></semantics></math> for every <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ε</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\varepsilon&gt;0</annotation></semantics></math> while <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math> is incomparable with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">1/2</annotation></semantics></math>.</p>
+<p>A countermodel must therefore fail <strong>both</strong> Symmetric Neutrality and <span class="math inline">L^{1}</span> Continuity. The symmetric and asymmetric continuous clipping models already satisfy Relative Expectation and so cannot separate the question. The <a href="lexicographic-folded-extension.md">Folded-tail cone: lexicographic extension</a> does fail <span class="math inline">L^{1}</span> Continuity, but retains neutrality and Relative Expectation, so it also satisfies transfer. The exact clipping records do not establish the required Shift Invariance and cannot simply be claimed as counterexamples.</p>
+<p>The earlier <a href="finite-support-compensated-dominance.html">Stochastic dominance: finite-support compensation</a> model does satisfy DU and Shift Invariance while violating Shift Transfer, with the explicit pair <span class="math inline">M_{1/2}(U+1,0)</span> and <span class="math inline">M_{1/2}(U,1)</span> for uniform <span class="math inline">U</span> on <span class="math inline">[0,1]</span>. It also violates Totality, so it settles the version with DU but does not itself supply a total countermodel. Its failure of continuity under vanishing shifts is witnessed by <span class="math inline">U+\varepsilon\succeq1/2</span> for every <span class="math inline">\varepsilon&gt;0</span> while <span class="math inline">U</span> is incomparable with <span class="math inline">1/2</span>.</p>
 <p>The <a href="finite-shift-total-extension.html">finite-shift total extension</a> supplies the missing Totality while preserving a strict ranking of that same pair. Finite-kernel saturation leaves the pair incomparable initially; adjoining one orientation and saturating again preserves the indifferent subspace exactly. A maximal saturated cone with that fixed subspace is total, retains every common shift, and keeps the chosen comparison strict. Thus the refutation is supplied by an actual existence model and an explicit failed transfer instance.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorems 3–4, pp. 25–27: source for Shift Transfer and its derivation with full affine symmetry, not this conjecture</li>
 </ul>
-</body>
-</html>
+</body></html>

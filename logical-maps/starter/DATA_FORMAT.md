@@ -194,8 +194,14 @@ This describes the database, not the state of all mathematical knowledge.
 
 `background.md` and `contribute.md` populate their tabs. Markdown supports links,
 lists, and tables. Put longer result/model accounts in `writeups/<record-id>.md`.
-Pandoc, when available, adds MathML rendering; without it the Python Markdown
-fallback renders ordinary Markdown. Lean requires a separate optional topic-local
+KaTeX 0.18.7 renders maths in definitions, formal formulations, proofs, notes,
+model descriptions and Markdown, with or without Pandoc. Write `$x^{n+1}$` or
+`\(x^{n+1}\)` inline, and `$$\frac{1}{2}$$` or `\[\frac{1}{2}\]` for a displayed
+equation. Use YAML block scalars (`|-`) or single-quoted strings to preserve
+backslashes. Code stays literal; graph labels keep their plain-text notation.
+The locally bundled fonts and scripts work offline and follow both theme toggles.
+Copy the complete built topic directory, including `math/`, when sharing it.
+Lean requires a separate optional topic-local
 formalisation. The starter has no Lean project and needs none to build.
 
 `sources/` holds documents intended for public distribution. The build copies

@@ -1,0 +1,9 @@
+/* Let mathematical text follow the surrounding theme and relation colours. */
+.katex { font-size: 1.08em; color: inherit; text-align: initial; }
+.katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .2em 0; }
+.katex-display > .katex { white-space: nowrap; }
+.formal:has(.katex) { font-family: var(--serif); font-size: inherit; }
+.katex-error { color: inherit; white-space: pre-wrap; overflow-wrap: anywhere; }
+@media print {
+  .katex-display { overflow: visible; }
+}

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **T (◇₂).** For every p, p implies ◇₂(p).
+- **T (◇₂).** For every p, p implies $\Diamond _{2}(p)$.
 
 ## Proof
 
-Let Truth = λp.p. Truth satisfies N and K, PSb and PSc; both marriage clauses for Truth paired with itself reduce to intuitionistic tautologies. Each necessary candidate condition can be necessitated after its assumption-free derivation, so Truth is a qualified candidate. Given p, choose Truth in the existential definition of ◇₂p. Discharge and generalize p.
+Let $\operatorname{Truth} = \lambda p.p. \operatorname{Truth}$ satisfies N and K, PSb and PSc; both marriage clauses for Truth paired with itself reduce to intuitionistic tautologies. Each necessary candidate condition can be necessitated after its assumption-free derivation, so Truth is a qualified candidate. Given p, choose Truth in the existential definition of $\Diamond _{2}p$. Discharge and generalize p.
 
 ## Notes
 

@@ -5,7 +5,7 @@
 ## Premises
 
 - **□LEM.** The universally quantified law of excluded middle is identical to the tautology.
-- **Necessary nonfalsity without necessity.** ∃p:t. (□¬¬p ∧ p ≠ ⊤)
+- **Necessary nonfalsity without necessity.** $\exists p:t. (\Box \neg \neg p \land p \ne \top )$
 
 ## Conclusion
 
@@ -13,7 +13,7 @@
 
 ## Proof
 
-The closed intuitionistic implication from quantified excluded middle to ∀p.(¬¬p→p) can be necessitated. With necessary excluded middle, K and necessitated universal instantiation give □(¬¬p→p) for each p. Choose the existential witness with □¬¬p and p≠⊤; K yields □p, which is p=⊤, contradicting p≠⊤.
+The closed intuitionistic implication from quantified excluded middle to $\forall p.(\neg \neg p\to p)$ can be necessitated. With necessary excluded middle, K and necessitated universal instantiation give $\Box (\neg \neg p\to p)$ for each p. Choose the existential witness with $\Box \neg \neg p$ and $p\ne \top ; K$ yields $\Box p$, which is $p=\top$, contradicting $p\ne \top$.
 
 ## Notes
 

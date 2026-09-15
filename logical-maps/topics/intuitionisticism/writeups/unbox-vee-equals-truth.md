@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□($\Diamond_\vee$ = Truth).** □($\Diamond_\vee$ = (λp:t. p))
+- **□($\Diamond_\vee$ = Truth).** $\Box$($\Diamond_\vee$ $= (\lambda p:t. p)$)
 
 ## Conclusion
 
-- **$\Diamond_\vee$ = Truth.** $\Diamond_\vee$ = (λp:t. p)
+- **$\Diamond_\vee$ = Truth.** $\Diamond_\vee$ $= (\lambda p:t. p)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

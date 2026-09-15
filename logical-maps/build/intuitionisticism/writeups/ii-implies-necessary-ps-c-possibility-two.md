@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□PSc (◇₂).** □(∀p, q : t. (◇₂(p ∨ q) → (◇₂(p) ∨ ◇₂(q))))
+- **□PSc (◇₂).** $\Box (\forall p, q : t. (\Diamond _{2}(p \lor q) \to (\Diamond _{2}(p) \lor \Diamond _{2}(q))))$
 
 ## Proof
 
-Given ◇₂(p ∨ q), choose a defining candidate P with P(p ∨ q). Its necessary PSc condition implies Pp ∨ Pq. Each disjunct supplies a witness to ◇₂p or ◇₂q respectively. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for □.
+Given $\Diamond _{2}(p \lor q)$, choose a defining candidate P with $P(p \lor q)$. Its necessary PSc condition implies $Pp \lor Pq$. Each disjunct supplies a witness to $\Diamond _{2}p$ or $\Diamond _{2}q$ respectively. Discharge all temporary assumptions and universally generalize the displayed free proposition variables. Necessitate this closed theorem using the admissible empty-context rule for $\Box$.
 
 ## Notes
 

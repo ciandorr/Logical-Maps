@@ -4,17 +4,17 @@
 
 ## Premises
 
-- **PSa (◇₂).** For every p and q, □(p → q) implies that ◇₂(p) implies ◇₂(q), with □p defined as p = ⊤.
-- **PSb (◇₂).** ◇₂ does not hold of the contradiction ⊥.
-- **Impossibility ⇒ necessary falsehood (◇₂).** ∀p:t. ¬◇₂(p) → □¬p
+- **PSa (◇₂).** For every p and $q, \Box (p \to q)$ implies that $\Diamond _{2}(p)$ implies $\Diamond _{2}(q)$, with $\Box p$ defined as $p = \top$.
+- **PSb (◇₂).** $\Diamond _{2}$ does not hold of the contradiction $\bot$.
+- **Impossibility ⇒ necessary falsehood (◇₂).** $\forall p:t. \neg \Diamond _{2}(p) \to \Box \neg p$
 
 ## Conclusion
 
-- **Stability of □¬.** ∀p:t. ¬¬□¬p → □¬p
+- **Stability of □¬.** $\forall p:t. \neg \neg \Box \neg p \to \Box \neg p$
 
 ## Proof
 
-PSa at (p,⊥), together with PSb, gives □¬p→¬◇₂(p). Under ¬¬□¬p this gives ¬¬¬◇₂(p), hence ¬◇₂(p) by triple-negation reduction. The selected necessary-falsehood condition gives □¬p. Discharge and generalize p.
+PSa at $(p,\bot )$, together with PSb, gives $\Box \neg p\to \neg \Diamond _{2}(p)$. Under $\neg \neg \Box \neg p$ this gives $\neg \neg \neg \Diamond _{2}(p)$, hence $\neg \Diamond _{2}(p)$ by triple-negation reduction. The selected necessary-falsehood condition gives $\Box \neg p$. Discharge and generalize p.
 
 ## Notes
 

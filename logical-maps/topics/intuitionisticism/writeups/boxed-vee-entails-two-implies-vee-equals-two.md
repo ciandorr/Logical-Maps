@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□$\Diamond_\vee$ entails ◇₂.** □(∀p:t. $\Diamond_\vee$p → ◇₂p)
+- **□$\Diamond_\vee$ entails ◇₂.** $\Box (\forall p:t$. $\Diamond_\vee$$p \to \Diamond _{2}p$)
 
 ## Conclusion
 
-- **$\Diamond_\vee$ = ◇₂.** $\Diamond_\vee$ = ◇₂
+- **$\Diamond_\vee$ = ◇₂.** $\Diamond_\vee$ $= \Diamond _{2}$
 
 ## Proof
 
-The reverse implication, ◇₂p→$\Diamond_\vee$p by candidate inclusion, is an assumption-free II theorem; universally close and necessitate it. Combine this with the selected boxed pointwise implication using K and the necessitated propositional combination theorem to obtain □∀p.($\Diamond_\vee$p↔◇₂p). The predicate form of modalized functionality proved in ii-implies-modalized-functionality gives identity of these functions (and symmetry gives the recorded orientation if needed).
+The reverse implication, $\Diamond _{2}p\to$$\Diamond_\vee$p by candidate inclusion, is an assumption-free II theorem; universally close and necessitate it. Combine this with the selected boxed pointwise implication using K and the necessitated propositional combination theorem to obtain $\Box \forall p$.($\Diamond_\vee$$p\leftrightarrow \Diamond _{2}p$). The predicate form of modalized functionality proved in ii-implies-modalized-functionality gives identity of these functions (and symmetry gives the recorded orientation if needed).
 
 ## Notes
 

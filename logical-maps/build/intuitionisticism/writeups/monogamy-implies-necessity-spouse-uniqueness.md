@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Marriage is monogamous.** ∀N,P,Q:tt. (Necessity₂(N) ∧ Possibility₂(P) ∧ Possibility₂(Q) ∧ Married(N,P) ∧ Married(N,Q)) → (P = Q)
+- **Marriage is monogamous.** $\forall N,P,Q:tt. (\operatorname{Necessity}_{2}(N) \land \operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}(N,P) \land \operatorname{Married}(N,Q)) \to (P = Q)$
 
 ## Conclusion
 
-- **Spouse uniqueness for □.** ∀P,Q:tt. (Possibility₂(P) ∧ Possibility₂(Q) ∧ Married((λp:t. □p), P) ∧ Married((λp:t. □p), Q)) → (P = Q)
+- **Spouse uniqueness for □.** $\forall P,Q:tt. (\operatorname{Possibility}_{2}(P) \land \operatorname{Possibility}_{2}(Q) \land \operatorname{Married}((\lambda p:t. \Box p), P) \land \operatorname{Married}((\lambda p:t. \Box p), Q)) \to (P = Q)$
 
 ## Proof
 
-Given two qualified spouses P,Q of □, the standing normality theorems for □ give □Normal(□). Possibility₂(P) supplies the necessary PSb/PSc clauses for P, so P together with Married(□,P) witnesses Necessity₂(□). Instantiate the selected monogamy sentence with N=□, P and Q to get P=Q; discharge and generalize.
+Given two qualified spouses P,Q of $\Box$, the standing normality theorems for $\Box$ give $\Box \operatorname{Normal}(\Box ). \operatorname{Possibility}_{2}(P)$ supplies the necessary PSb/PSc clauses for P, so P together with $\operatorname{Married}(\Box ,P)$ witnesses $\operatorname{Necessity}_{2}(\Box )$. Instantiate the selected monogamy sentence with $N=\Box , P$ and Q to get $P=Q$; discharge and generalize.
 
 ## Notes
 

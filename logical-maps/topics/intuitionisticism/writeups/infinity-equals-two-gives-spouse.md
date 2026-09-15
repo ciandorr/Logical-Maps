@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **$\Diamond_\infty$ = ◇₂.** $\Diamond_\infty$ = ◇₂
+- **$\Diamond_\infty$ = ◇₂.** $\Diamond_\infty$ $= \Diamond _{2}$
 
 ## Conclusion
 
-- **Spouse ($\Diamond_\infty$).** ∃N:tt. Necessity₂(N) ∧ Married(N, $\Diamond_\infty$)
+- **Spouse ($\Diamond_\infty$).** $\exists N:tt. \operatorname{Necessity}_{2}(N) \land \operatorname{Married}(N$, $\Diamond_\infty$)
 
 ## Proof
 
-Theorems 14 and 15 give Necessity₂(□₂) and Married(□₂,◇₂). Substitute the selected possibility-operator identity in the marriage formula and choose □₂ as the existential witness. The qualification of this witness is retained.
+Theorems 14 and 15 give $\operatorname{Necessity}_{2}(\Box _{2})$ and $\operatorname{Married}(\Box _{2},\Diamond _{2})$. Substitute the selected possibility-operator identity in the marriage formula and choose $\Box _{2}$ as the existential witness. The qualification of this witness is retained.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **□Nonfalsity distributes over ∨.** □(∀p,q:t. ¬¬(p ∨ q) → (¬¬p ∨ ¬¬q))
+- **□Nonfalsity distributes over ∨.** $\Box (\forall p,q:t. \neg \neg (p \lor q) \to (\neg \neg p \lor \neg \neg q))$
 
 ## Conclusion
 
-- **Nonfalsity distributes over ∨.** ∀p,q:t. ¬¬(p ∨ q) → (¬¬p ∨ ¬¬q)
+- **Nonfalsity distributes over ∨.** $\forall p,q:t. \neg \neg (p \lor q) \to (\neg \neg p \lor \neg \neg q)$
 
 ## Proof
 
-Apply the standing theorem □A→A to the entire displayed sentence, with all of its quantifiers inside A.
+Apply the standing theorem $\Box A\to A$ to the entire displayed sentence, with all of its quantifiers inside A.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- **Existential Copula Sum Invariance.** There exists one copula C such that SC(C) holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on [0,1]² with both marginals uniform. Write H_C(u,v)=C([0,u]×[0,v]). A real-utility pair (A,B) admits C when P(A≤a,B≤b)=H_C(F_A(a),F_B(b)) for every real a,b. Define SC(C): for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same C, X ≽ Y iff X+Z ≽ Y+Z.
+- **Existential Copula Sum Invariance.** There exists one copula C such that $\operatorname{SC}(C)$ holds for all eligible X,Y,Z. The copula is chosen once for the preference relation, independently of the triple and its marginal laws. A copula C is a Borel probability measure on $[0,1]^{2}$ with both marginals uniform. Write $H_C(u,v)=C([0,u]\times [0,v])$. A real-utility pair (A,B) admits C when $P(A\le a,B\le b)=H_C(F_A(a),F_B(b))$ for every real a,b. Define $\operatorname{SC}(C)$: for every eligible triple X,Y,Z for which both (X,Z) and (Y,Z) admit this same $C, X \succeq Y$ iff $X+Z \succeq Y+Z$.
 
 ## Conclusion
 
-- **Shift Invariance.** For every real b, X ≽ Y iff X+b ≽ Y+b.
+- **Shift Invariance.** For every real $b, X \succeq Y$ iff $X+b \succeq Y+b$.
 
 ## Proof
 
-Choose the single copula C supplied by the existential principle. For Z equal to a constant b, F_Z(z) is either 0 or 1. Every copula satisfies H_C(u,0)=0 and H_C(u,1)=u, so (X,b) and (Y,b) admit C for every X,Y. SC(C) therefore gives X ≽ Y iff X+b ≽ Y+b whenever the shifted gambles exist. This uses the actual constant summand and needs no Stochastic Equivalence.
+Choose the single copula C supplied by the existential principle. For Z equal to a constant $b, F_Z(z)$ is either 0 or 1. Every copula satisfies $H_C(u,0)=0$ and $H_C(u,1)=u$, so (X,b) and (Y,b) admit C for every $X,Y. \operatorname{SC}(C)$ therefore gives $X \succeq Y$ iff $X+b \succeq Y+b$ whenever the shifted gambles exist. This uses the actual constant summand and needs no Stochastic Equivalence.
 
 ## Sources
 

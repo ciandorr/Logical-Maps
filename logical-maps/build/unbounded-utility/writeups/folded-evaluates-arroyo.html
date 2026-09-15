@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Folded Expectation directly evaluates Arroyo</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
-<style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Folded Expectation directly evaluates Arroyo</title><style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -268,14 +252,41 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
     }
   });
 })();
-</script></head>
-<body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav>
-<header id="title-block-header">
-<h1 class="title">Folded Expectation directly evaluates Arroyo</h1>
-</header>
-<p><strong>Source and work accounting.</strong> Zachary Goodsell’s <em>Symmetries of value</em>, pp. 29–30, explicitly states that Arroyo has folded expectation (2), and Theorem 8 gives its evaluation. The unshifted tail calculation below was supplied by GPT-6 (Codex), 9 September 2026, to expose the smaller sufficient package. It is a source extraction with a small calculation and premise audit, not a new discovery of Arroyo’s value. No independent checker or Lean certification is asserted.</p>
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Folded Expectation directly evaluates Arroyo</h1></header><p><strong>Source and work accounting.</strong> Zachary Goodsell’s <em>Symmetries of value</em>, pp. 29–30, explicitly states that Arroyo has folded expectation <span class="math inline">\ln2</span>, and Theorem 8 gives its evaluation. The unshifted tail calculation below was supplied by GPT-6 (Codex), 9 September 2026, to expose the smaller sufficient package. It is a source extraction with a small calculation and premise audit, not a new discovery of Arroyo’s value. No independent checker or Lean certification is asserted.</p>
 <p>Assume Rich Outcomes and Folded Expectation. Let</p>
-<p>[ (A=(-1)^{n+1}(n+1))=1{n(n+1)},n1, ]</p>
-<p>and write (h(t)=(A&gt;t)-(A&lt;-t)) for (t0). For (t(https://doi.org/10.1111/nous.12549).** Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 8 and Theorem 8, pp. 29–30: Arroyo has folded expectation ln 2</p>
-</body>
-</html>
+<p><span class="math display">
+\Pr(A=(-1)^{n+1}(n+1))=\frac1{n(n+1)},\qquad n\ge1,
+</span></p>
+<p>and write <span class="math inline">h(t)=\Pr(A&gt;t)-\Pr(A&lt;-t)</span> for <span class="math inline">t\ge0</span>. For <span class="math inline">t\in[m+1,m+2)</span>, <span class="math inline">m\ge1</span>, apart from immaterial endpoints,</p>
+<p><span class="math display">
+h(t)=\sum_{n=m+1}^{\infty}\frac{(-1)^{n+1}}{n(n+1)}.
+</span></p>
+<p>The alternating-series estimate gives</p>
+<p><span class="math display">
+|h(t)|\le\frac1{(m+1)(m+2)}.
+</span></p>
+<p>On <span class="math inline">[0,2)</span> the tail difference is bounded by one. Thus</p>
+<p><span class="math display">
+\int_0^\infty |h(t)|\,dt
+\le2+\sum_{m=1}^{\infty}\frac1{(m+1)(m+2)}&lt;\infty.
+</span></p>
+<p>For a symmetric cutoff <span class="math inline">T=N+1</span>, bounded tail integration gives</p>
+<p><span class="math display">
+\int_0^{N+1}h(t)\,dt
+=\sum_{n=1}^{N}\frac{(-1)^{n+1}}n
+ +(N+1)\sum_{n=N+1}^{\infty}\frac{(-1)^{n+1}}{n(n+1)}.
+</span></p>
+<p>The final term has absolute value at most <span class="math inline">1/(N+2)</span>, while the finite alternating harmonic sum tends to <span class="math inline">\ln2</span>. Therefore Arroyo’s absolutely defined folded expectation is <span class="math inline">\ln2</span>. Sure <span class="math inline">\ln2</span>, available by Rich Outcomes, has the same folded expectation. The axiom gives</p>
+<p><span class="math display">
+A\sim\ln2.
+</span></p>
+<p>This holds for every random variable with the indicated utility law because the folded-tail condition itself depends only on that law. No separate Stochastic Equivalence, shift symmetry, continuity or DU package is needed. The use of the limit above computes an already absolutely integrable folded tail; it does not silently interpret a conditionally convergent expected utility as an ordinary Lebesgue expectation.</p>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Proof: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 8 and Theorem 8, pp. 29–30: Arroyo has folded expectation ln 2</li>
+</ul>
+</body></html>

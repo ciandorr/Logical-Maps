@@ -564,7 +564,41 @@ def enriched_payload(topic_id: str, downloads: dict) -> dict:
 # Write-ups
 # ----------------------------------------------------------------------------
 
-def theme_head(topic_id: str | None = None) -> str:
+def math_assets() -> dict[str, bytes]:
+    """Local, pinned browser assets, shared by pages in each portable export."""
+    import re
+    vendor = ROOT / "viewer" / "vendor" / "katex"
+    files = {str(p.relative_to(vendor)): p.read_bytes() for p in vendor.rglob("*") if p.is_file()}
+    # Modern supported browsers use WOFF2; don't leave dangling WOFF/TTF URLs.
+    css = re.sub(r'src:[^;}]+', lambda m: 'src:' + re.search(r'url\([^)]*\.woff2\)\s*format\("woff2"\)', m[0])[0], files['katex.min.css'].decode())
+    files['katex.min.css'] = (css + '\n' + (ROOT / 'viewer' / 'math.css').read_text()).encode()
+    files['math.js'] = (ROOT / 'viewer' / 'math.js').read_bytes()
+    return files
+
+
+def write_math_assets(outdir: Path) -> None:
+    for name, content in math_assets().items():
+        path = outdir / 'math' / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content)
+
+
+def math_head(path: str | None = 'math') -> str:
+    """Relative assets normally; inline fonts/scripts for single-file --out exports."""
+    from html import escape
+    scripts = ['katex.min.js', 'contrib/auto-render.min.js', 'math.js']
+    if path is not None:
+        path = escape(path, quote=True)
+        return f'<link rel="stylesheet" href="{path}/katex.min.css">\n' + '\n'.join(
+            f'<script defer src="{path}/{name}"></script>' for name in scripts)
+    import base64, re
+    files = math_assets()
+    css = re.sub(r'url\((fonts/[^)]+)\)', lambda m: 'url(data:font/woff2;base64,' + base64.b64encode(files[m[1]]).decode() + ')', files['katex.min.css'].decode())
+    licence = '<!-- KaTeX ' + files['VERSION'].decode().strip() + '\n' + files['LICENSE'].decode() + '\n-->\n'
+    return licence + f'<style>{css}</style>\n' + '\n'.join('<script>' + files[name].decode().replace('</', '<\\/') + '</script>' for name in scripts)
+
+
+def theme_head(topic_id: str | None = None, *, math_path: str | None = 'math') -> str:
     """Embed shared assets and optional topic styling in self-contained HTML."""
     viewer = ROOT / "viewer"
     css = (viewer / "theme.css").read_text(encoding="utf-8")
@@ -574,7 +608,7 @@ def theme_head(topic_id: str | None = None) -> str:
             css += "\n" + topic_css.read_text(encoding="utf-8")
     css += "\n" + (viewer / "colourblind.css").read_text(encoding="utf-8")
     js = (viewer / "theme.js").read_text(encoding="utf-8")
-    return f"<style>{css}</style>\n<script>{js}</script>"
+    return f"<style>{css}</style>\n<script>{js}</script>\n{math_head(math_path)}"
 
 
 def site_config() -> dict:
@@ -615,6 +649,7 @@ def build_landing() -> Path | None:
     for placeholder, value in replacements.items():
         html = html.replace(placeholder, value)
     BUILD.mkdir(parents=True, exist_ok=True)
+    write_math_assets(BUILD)
     output = BUILD / "index.html"
     output.write_text(html, encoding="utf-8")
     return output
@@ -688,9 +723,36 @@ def _md_to_html(md: str) -> str:
     import shutil, subprocess
     pandoc = shutil.which("pandoc")
     if pandoc:
-        return subprocess.run([pandoc, "--mathml", "-f", "markdown", "-t", "html"], input=md, capture_output=True, text=True, check=True).stdout
+        return subprocess.run([pandoc, "--katex", "-f", "markdown+tex_math_single_backslash", "-t", "html"], input=md, capture_output=True, text=True, check=True).stdout
+    return _markdown_fallback(md)
+
+
+def _markdown_fallback(md: str) -> str:
+    """Protect TeX before Markdown consumes its backslashes and underscores."""
+    import re
     import markdown
-    return markdown.markdown(md, extensions=["extra"])
+    from html import escape
+    saved = []
+    marker = 'PMAPMATHTOKEN'
+    while marker in md:
+        marker += 'X'
+    # Code alternatives come first: examples of TeX remain literal code.
+    tokens = re.compile(
+        r'(?P<fence>^ {0,3}(?P<ticks>`{3,}|~{3,})[^\n]*\n.*?^ {0,3}(?P=ticks)[ \t]*$)'
+        r'|(?P<indent>^(?: {4}|\t)[^\n]*(?:\n(?: {4}|\t)[^\n]*)*)'
+        r'|(?P<code>(?P<tick>`+)[^`]*?(?P=tick))'
+        r'|(?P<math>(?<!\\)(?:\$\$[\s\S]*?(?<!\\)\$\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)|\$(?!\s)(?:\\.|[^$\n])+?(?<![\\\s])\$(?!\d)))',
+        re.M | re.S)
+    def protect(match):
+        if not match.group('math'):
+            return match[0]
+        raw = match[0]
+        display = raw.startswith(('$$', r'\['))
+        size = 2 if raw.startswith(('$$', r'\[', r'\(')) else 1
+        saved.append(f'<span class="math {"display" if display else "inline"}">{escape(raw[size:-size])}</span>')
+        return f'{marker}{len(saved)-1}ENDTOKEN'
+    html = markdown.markdown(tokens.sub(protect, md), extensions=['extra', 'sane_lists'])
+    return re.sub(marker + r'(\d+)ENDTOKEN', lambda m: saved[int(m[1])], html)
 
 
 def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True) -> dict:
@@ -715,21 +777,14 @@ def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True
         body_md.write_text(md.split("\n", 1)[1] if md.startswith("#") else md, encoding="utf-8")
         entry = {"md": f"writeups/{iid}.md", "handwritten": hand.exists()}
         html_path = wdir / f"{iid}.html"
-        if pandoc:
-            subprocess.run([pandoc, str(body_md), "-s", "--mathml", "--metadata", f"title={title}",
-                            "-o", str(html_path)], check=True, capture_output=True)
-            html = html_path.read_text(encoding="utf-8").replace("</head>", f"{theme_head(topic_id)}</head>", 1)
-            html = html.replace("<body>", '<body class="writeup-page">' + WRITEUP_NAV, 1)
-            html_path.write_text(html, encoding="utf-8")
-        else:
-            import markdown
-            body = markdown.markdown(md, extensions=["extra"])
-            from html import escape
-            html_path.write_text(
-                f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
-                f'<meta name="viewport" content="width=device-width, initial-scale=1">'
-                f'<title>{escape(title)}</title>{theme_head(topic_id)}</head>'
-                f'<body class="writeup-page">{WRITEUP_NAV}{body}</body></html>', encoding="utf-8")
+        from html import escape
+        body = _md_to_html(body_md.read_text(encoding='utf-8'))
+        html_path.write_text(
+            f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
+            f'<meta name="viewport" content="width=device-width, initial-scale=1">'
+            f'<title>{escape(title)}</title>{theme_head(topic_id, math_path="../math")}</head>'
+            f'<body class="writeup-page">{WRITEUP_NAV}'
+            f'<header id="title-block-header"><h1>{escape(title)}</h1></header>{body}</body></html>', encoding="utf-8")
         entry["html"] = f"writeups/{iid}.html"
         if pdf and pandoc and xelatex:
             r = subprocess.run([pandoc, str(body_md), "-o", str(wdir / f"{iid}.pdf"), "--pdf-engine=xelatex",
@@ -757,7 +812,7 @@ def render_lean_index(data: dict, source: Path, destination: Path) -> None:
     title = escape(data["topic"]["title"] + ' — Lean files')
     html = (f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width, initial-scale=1">'
-            f'<title>{title}</title>{theme_head(data["topic"]["id"])}</head>'
+            f'<title>{title}</title>{theme_head(data["topic"]["id"], math_path="../math")}</head>'
             f'<body class="writeup-page">{WRITEUP_NAV}<h1>Lean formalisation</h1>'
             f'<p>{definitions}/{len(data["principles"])} principles defined; '
             f'{results}/{len(data["results"])} result proofs verified; '
@@ -779,6 +834,7 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
     data = load_topic(topic_id)
     outdir = BUILD / topic_id
     outdir.mkdir(parents=True, exist_ok=True)
+    write_math_assets(outdir)
     generate_lean_statements(topic_id)
     files = render_writeups(topic_id, data, outdir, pdf=pdf and out is None)
     # database + source + lean + AI bundle
@@ -808,7 +864,7 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
         item["files"] = files.get(item["id"], {})
     (outdir / "data.json").write_text(json.dumps(payload, indent=1, ensure_ascii=False), encoding="utf-8")
     bundle_topic(topic_id)
-    html = TEMPLATE.read_text(encoding="utf-8").replace("<!--__PMAP_THEME__-->", theme_head(topic_id))
+    html = TEMPLATE.read_text(encoding="utf-8").replace("<!--__PMAP_THEME__-->", theme_head(topic_id, math_path=None if out else 'math'))
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     html = html.replace("/*__PMAP_DATA__*/null", blob)
     html = html.replace("__PMAP_TITLE__", payload["topic"]["title"])
@@ -1710,10 +1766,7 @@ def bundle_topic(topic_id: str) -> Path:
         if topic_id == "unbounded-utility" and audit_check.exists():
             shutil.copy2(audit_check, root / "scripts" / audit_check.name)
         shutil.copytree(SCHEMA, root / "schema")
-        (root / "viewer").mkdir()
-        for f in (ROOT / "viewer").glob("*"):
-            if f.is_file():
-                shutil.copy2(f, root / "viewer" / f.name)
+        shutil.copytree(ROOT / "viewer", root / "viewer", ignore=shutil.ignore_patterns(*IGNORE))
         shutil.copy2(ROOT / "requirements.txt", root / "requirements.txt")
         (root / "README.md").write_text(bundle_readme_md(topic_id, data, an), encoding="utf-8")
         (root / "AGENTS.md").write_text(bundle_agents_md(topic_id, data), encoding="utf-8")

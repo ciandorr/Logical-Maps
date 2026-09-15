@@ -312,22 +312,22 @@ therefore supplies the proposed area and transfer consequences without
 assuming Shift Invariance first.
 
 Combined with [Relative Expectation plus vanishing-shift continuity](relative-vanishing-shifts-imply-l1.html),
-the theorem also gives L¹ Continuity under DU. Conversely, L¹ Continuity
+the theorem also gives $L^{1}$ Continuity under DU. Conversely, $L^{1}$ Continuity
 immediately implies (VSC). Thus these two continuity principles are
 equivalent under DU, even though (VSC) mentions only constant positive
 perturbations of one variable.
 
 There is a precise minimality conclusion. The
 [exact CDF-area preorder](cdf-area-preorder.html) itself satisfies DU and
-L¹ Continuity, as established in its continuity section. Every DU + (VSC)
+$L^{1}$ Continuity, as established in its continuity section. Every DU + (VSC)
 model extends that preorder and preserves its strict comparisons, by the
 CDF-Area Extension consequence above. On the common real-utility domain,
 the exact CDF-area preorder is therefore the **least** such model under
 inclusion of weak preference comparisons; it is also the least DU +
-L¹ Continuity model. This does not assert that all these models coincide:
+$L^{1}$ Continuity model. This does not assert that all these models coincide:
 an extension can supply further comparisons when both CDF areas are infinite.
 
-The proof applies directly to Rich Outcomes + Simple EU + Stochastic
+The proof applies directly to Rich Outcomes + Simple $\operatorname{EU} +$ Stochastic
 Dominance + Mixture Independence + (VSC); Stochastic Equivalence follows
 from Dominance. The recorded statement uses the more basic DU premises
 and its separately proved finite-lottery representation.

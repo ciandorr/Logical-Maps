@@ -1,7 +1,9 @@
 id: unnecessitated-descriptions
 name: Descriptions
-statement: 'For every σ,τ: ∀R:στt. ((∀x:σ. ∃!y:τ. R x y) → ∃f:στ. ∀x:σ. R x (f x))'
-formal: 'For every σ,τ: ∀R:στt. ((∀x:σ. ∃!y:τ. R x y) → ∃f:στ. ∀x:σ. R x (f x))'
+statement: |-
+  For every $\sigma ,\tau : \forall R:\sigma \tau t. ((\forall x:\sigma . \exists !y:\tau . R x y) \to \exists f:\sigma \tau . \forall x:\sigma . R x (f x))$
+formal: |-
+  For every $\sigma ,\tau : \forall R:\sigma \tau t. ((\forall x:\sigma . \exists !y:\tau . R x y) \to \exists f:\sigma \tau . \forall x:\sigma . R x (f x))$
 category: higher-order
 sources:
 - Codex (GPT-6), connecting-principle formulation, 2026-09-13.
@@ -16,5 +18,5 @@ references:
   locator: §7.1, Eq. (86), p. 46
 date: '2026-09-13'
 lean: null
-notes: Unboxed counterpart of the paper’s necessary Descriptions schema. Every pair of types is required.
-  The original record descriptions retains Eq. (86) and is displayed as □Descriptions.
+notes: |-
+  Unboxed counterpart of the paper’s necessary Descriptions schema. Every pair of types is required. The original record descriptions retains Eq. (86) and is displayed as $\Box$Descriptions.

@@ -4,11 +4,11 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **4 (◇₂).** For every p, ◇₂ applied twice to p implies ◇₂ applied once to p.
+- **4 (◇₂).** For every $p, \Diamond _{2}$ applied twice to p implies $\Diamond _{2}$ applied once to p.
 
 ## Notes
 

@@ -4,15 +4,15 @@
 
 ## Premises
 
-- ⊤
+- $\top$
 
 ## Conclusion
 
-- **□Infinitary distribution ($\Diamond_\infty$).** □(∀F:tt. Inex^t(F) → ($\Diamond_\infty$(∃x:t. F x) → ∃x:t. $\Diamond_\infty$(F x)))
+- **□Infinitary distribution ($\Diamond_\infty$).** $\Box (\forall F:tt. \operatorname{Inex}^t(F) \to$ ($\Diamond_\infty$$(\exists x:t. F x) \to \exists x:t$. $\Diamond_\infty$(F x)))
 
 ## Proof
 
-Fix F:t→t and assume Inex(F) and $\Diamond_\infty$(∃x.Fx). Choose a witness P with $\mathrm{Possibility}_\infty$(P) and P(∃x.Fx). Its $\mathrm{PSc}^{t}_{\infty}$ condition yields ∃x.P(Fx). Each such x, with the same candidate P, witnesses $\Diamond_\infty$(Fx), so ∃x.$\Diamond_\infty$(Fx). Discharge the assumptions and quantify F. This is an assumption-free theorem, so necessitate the whole sentence.
+Fix $F:t\to t$ and assume $\operatorname{Inex}(F)$ and $\Diamond_\infty$$(\exists x.Fx)$. Choose a witness P with $\mathrm{Possibility}_\infty$(P) and $P(\exists x.Fx)$. Its $\mathrm{PSc}^{t}_{\infty}$ condition yields $\exists x.P(Fx)$. Each such x, with the same candidate P, witnesses $\Diamond_\infty$(Fx), so $\exists x$.$\Diamond_\infty$(Fx). Discharge the assumptions and quantify F. This is an assumption-free theorem, so necessitate the whole sentence.
 
 ## Notes
 

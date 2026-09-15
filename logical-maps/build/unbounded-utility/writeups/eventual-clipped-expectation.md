@@ -79,6 +79,28 @@ but no such mixture is indifferent to 1.
 The universal statements above are analytic proofs, not conclusions from
 finite sampling.
 
+## Failure of Shift Invariance
+
+**Addition: Claude (Fable 5.1), 15 September 2026.** This is a property of
+the recorded model, not a claim made in the source paper.
+
+Let X have a symmetric Laplace law, or any symmetric integrable law with
+unbounded support. Oddness of c_t gives v_X(t)=0=v_0(t), so X~0. For b>0,
+
+$$v_{X+b}(t)-v_b(t)
+ =\mathbb E\bigl[\max(-t-b,\min(X,t-b))\bigr]
+ =-\mathbb E[(X-(t-b))_+]+\mathbb E[(-X-(t+b))_+]
+ =-\bigl(\mathbb E[(X-(t-b))_+]-\mathbb E[(X-(t+b))_+]\bigr),$$
+
+using the symmetry of X for the last step. Unbounded support makes
+E[(X-s)_+] strictly decreasing in s, so the bracket is positive for every t
+and X+b≺b for all sufficiently large t, indeed for all t. Since X~0 but
+X+b≺0+b, Shift Invariance fails; consequently Positive Affine Invariance
+fails, and by the recorded implications so do Transfer of a Shift Across a
+Mixture and Simple Relative Expectation. Expected Utility already fails in
+this model; the same pair, being integrable with equal means, is a second
+witness.
+
 ## Paper references
 
 - **Proof: [Decision theory unbound](https://doi.org/10.1111/nous.12473).** Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Theorem 2, pp. 683–685; Theorems 7 and 9, p. 693

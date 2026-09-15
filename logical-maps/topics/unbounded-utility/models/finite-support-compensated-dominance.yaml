@@ -20,11 +20,19 @@ violates:
 - symmetric-neutrality
 - l1-continuity
 - vanishing-shift-continuity
+- alternating-st-petersburg-value
+- arroyo-value
+- pasadena-value
+- negative-self-similarity
+- comonotonic-sum-consistency
+- independent-sum-preservation
+- existential-copula-sum-consistency
 status: proved
 certificate:
   source_id: misc
   lean: stated
-  produced_by: GPT-6 (Codex)
+  produced_by: GPT-6 (Codex) (construction and original axiom audit); Claude (Fable 5.1) (seven further verified
+    failures, 15 September 2026)
   recorded_by: GPT-6 (Codex), 2026-09-09
   checked_by: []
   date: '2026-09-09'
@@ -54,9 +62,11 @@ description: >-
 sources:
 - 'GPT-6 (Codex), Logical Maps, 9 September 2026: original finite-support compensation cone construction and exact analytic witnesses in writeups/finite-support-compensated-dominance.md.'
 - 'Zachary Goodsell, project conversation, 9 September 2026: prompt to investigate the role of CDF-area dominance, DU, Shift Invariance and continuity in deriving Shift Transfer.'
+- 'Claude (Fable 5.1), Logical Maps, 15 September 2026: seven further explicit failures (the three named prospect evaluations, uniqueness of negative self-similarity, comonotonic, independent and every-copula sum invariance) in the section “Further verified failures” of writeups/finite-support-compensated-dominance.md, in response to Zachary Goodsell''s request for a complete package picture.'
 source_names:
 - GPT-6 cone construction 9 Sep
 - Goodsell research prompt 9 Sep
+- Claude further failures 15 Sep
 notes: >-
   Original work: substantive elementary cone construction with direct axiom
   checks, a least-DU characterization, and explicit separating examples,
@@ -75,3 +85,16 @@ notes: >-
   asserted; no numerical computation is used as a proof of a universal axiom.
 checks:
 - topics/unbounded-utility/checks/shift_continuity.py
+changes:
+- date: '2026-09-15'
+  by: Claude (Fable 5.1)
+  summary: Seven further failures verified for the recorded construction, in the write-up section
+    “Further verified failures”; the model, its construction and its earlier flags are unchanged.
+  violates:
+  - alternating-st-petersburg-value
+  - arroyo-value
+  - pasadena-value
+  - negative-self-similarity
+  - comonotonic-sum-consistency
+  - independent-sum-preservation
+  - existential-copula-sum-consistency

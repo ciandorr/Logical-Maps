@@ -450,6 +450,13 @@ def validate_topic(topic_id: str, *, quiet=False) -> bool:
                 errors.append(f"{r['_file']}: unknown principle '{pid}'")
         if is_model and set(r.get("satisfies", [])) & set(r.get("violates", [])):
             errors.append(f"{r['_file']}: a principle is both satisfied and violated")
+        for i, ch in enumerate(r.get("changes") or []):
+            for key in ("satisfies", "violates"):
+                for pid in ch.get(key, []):
+                    if pid not in ids:
+                        errors.append(f"{r['_file']}: changes[{i}] names unknown principle '{pid}'")
+                    elif pid not in r.get(key, []):
+                        errors.append(f"{r['_file']}: changes[{i}] lists '{pid}' under {key} but the record does not")
         cert = r.get("certificate", {})
         if cert.get('source_id', 'misc') not in source_ids + ['misc']:
             errors.append(f"{r['_file']}: unknown direct source '{cert['source_id']}'")
@@ -565,6 +572,7 @@ def theme_head(topic_id: str | None = None) -> str:
         topic_css = TOPICS / topic_id / "theme.css"
         if topic_css.is_file():
             css += "\n" + topic_css.read_text(encoding="utf-8")
+    css += "\n" + (viewer / "colourblind.css").read_text(encoding="utf-8")
     js = (viewer / "theme.js").read_text(encoding="utf-8")
     return f"<style>{css}</style>\n<script>{js}</script>"
 
@@ -614,7 +622,11 @@ def build_landing() -> Path | None:
 
 WRITEUP_NAV = ('<nav class="writeup-nav" aria-label="Write-up navigation">'
                '<a href="../index.html">← Back to map</a>'
-               '<button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button></nav>')
+               '<div class="display-toggles">'
+               '<button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>'
+               '<button type="button" class="theme-toggle" data-colourblind-toggle '
+               'aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button>'
+               '</div></nav>')
 
 
 def _stmt_line(pid: str, names: dict, stmts: dict) -> str:
@@ -663,6 +675,8 @@ def generate_writeup(item: dict, data: dict) -> str:
             out += ["", "## Proof", "", item["proof"].strip()]
     if item.get("notes", "").strip():
         out += ["", "## Notes", "", item["notes"].strip()]
+    if item.get("changes"):
+        out += ["", "## Revisions", ""] + _change_lines(item, names)
     if item.get("sources"):
         labels = item.get("source_names", [])
         out += ["", "## Sources", ""] + [f"- **{labels[i]}** — {x}" if i < len(labels) else f"- {x}" for i, x in enumerate(item["sources"])]
@@ -1060,6 +1074,20 @@ def _demote(md: str, levels: int) -> str:
     return "\n".join(out)
 
 
+def _change_lines(item: dict, names: dict, indent: str = "") -> list[str]:
+    """Markdown bullet per logged revision, newest first."""
+    out = []
+    for ch in sorted(item.get("changes") or [], key=lambda c: str(c.get("date", "")), reverse=True):
+        bits = [" ".join(str(ch.get("summary", "")).split())]
+        if ch.get("satisfies"):
+            bits.append("Now satisfies: " + ", ".join(names.get(x, x) for x in ch["satisfies"]) + ".")
+        if ch.get("violates"):
+            bits.append("Now violates: " + ", ".join(names.get(x, x) for x in ch["violates"]) + ".")
+        who = f" ({ch['by']})" if ch.get("by") else ""
+        out.append(f"{indent}- **{ch.get('date', '')}**{who} — " + " ".join(bits))
+    return out
+
+
 def _source_lines(item: dict, indent: str = "") -> list[str]:
     labels = item.get("source_names") or []
     out = []
@@ -1190,6 +1218,8 @@ def bundle_map_md(topic_id: str, data: dict, an: dict) -> str:
             out += ["No proof is recorded. This is a conjecture only.", ""]
         if (r.get("notes") or "").strip():
             out += [f"Notes. {r['notes'].strip()}", ""]
+        if r.get("changes"):
+            out += ["Revisions:", ""] + _change_lines(r, names) + [""]
         out += ["Sources:", ""] + _source_lines(r) + [""]
         out += [paper_references_md(r, data), ""]
         out += [f"Record: `{r['_file']}`.", ""]
@@ -1226,6 +1256,8 @@ def bundle_map_md(topic_id: str, data: dict, an: dict) -> str:
             o += ["Executable checks: " + ", ".join(f"`{c}`" for c in m["checks"]) + ".", ""]
         if (m.get("notes") or "").strip():
             o += [f"Notes. {m['notes'].strip()}", ""]
+        if m.get("changes"):
+            o += ["Revisions:", ""] + _change_lines(m, names) + [""]
         o += ["Sources:", ""] + _source_lines(m) + [""]
         o += [paper_references_md(m, data), ""]
         o += [f"Record: `{m['_file']}`.", ""]
@@ -1528,6 +1560,11 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          "- Do not change the mathematical content of an existing published or human-authored "
          "proof. Add a note, or a new record, instead.",
          "- File name equals `id`, kebab-case. Never rename an id that other files reference.",
+         "- When an existing record gains content after its certificate date (a newly verified "
+         "property of a model, an added proof, a corrected statement), append an entry to its "
+         "`changes` list: `{date, by, summary}` plus, for models, the newly verified `satisfies`/"
+         "`violates` ids. The Changes tab lists each entry under its own date; leave "
+         "`certificate.date` as the record's original date.",
          "- Keep the framework fixed. A principle needing a different setting belongs to a "
          "different topic.", "",
          "## Lean", "",
@@ -1589,6 +1626,8 @@ def bundle_agents_md(topic_id: str, data: dict) -> str:
         "do not invent an unknown construction. Keep existing record IDs unchanged.",
         "- List in a model's `satisfies` and `violates` only what you actually verified. The engine "
         "derives the rest and reports what stays unknown.",
+        "- Log every later addition to an existing record in its `changes` list (date, by, summary, "
+        "and for models the newly verified `satisfies`/`violates` ids). Never move `certificate.date`.",
         "- Write the real proof in `proof`, at referee detail. Put anything longer than a paragraph "
         f"in `topics/{topic_id}/writeups/<id>.md` instead.",
         "- Prefer `status: conjectured` with an empty proof and a note saying what would settle it, "

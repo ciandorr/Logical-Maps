@@ -145,6 +145,25 @@ does not. List only checked properties before promoting a model to proved;
 everything else stays unknown unless the engine derives it. For concrete
 constructions, add executable checks under `checks/`.
 
+## Revisions of existing records
+
+A record that gains content after its certificate date keeps that date and
+logs the addition in an optional `changes` list:
+
+```yaml
+changes:
+  - date: '2026-09-15'
+    by: Name of the person or agent
+    summary: What was added or corrected, and where the proof is.
+    violates: [principle-c]          # models only: the newly verified ids
+```
+
+Principles and results take `date`, `by` and `summary`; models may also list
+newly verified `satisfies` and `violates` ids, which must also appear in the
+record's own lists. The Changes tab lists each entry under its own date as a
+revision of the record, and write-ups and the bundle print a Revisions
+section. Never move `certificate.date` to make an edit look recent.
+
 ## What the viewer derives
 
 Only proved records support deductions. Implications use Horn closure over

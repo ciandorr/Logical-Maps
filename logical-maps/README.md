@@ -142,8 +142,9 @@ negation as separate nodes without adding either to the source records.
 - **P ⇏ c** requires an actual model satisfying P and failing c. It is
   distinct from P ⇒ ¬c, which alone need not establish any model of P.
 - Everything else is unknown. Failing to find a model proves no inconsistency.
-- Mutually derivable principles collapse to one graph node. Inconsistent
-  antecedents are reported separately, rather than collapsing all principles.
+- Mutually derivable principles collapse to one graph node. Principles
+  inconsistent with the background share the False box; background consequences
+  share the True box. These display classes do not change evidence readouts.
 - Deriving False or an explicitly violated property from a proved model is
   a validation error. Conjectures never supply proved evidence.
 
@@ -207,28 +208,38 @@ topic's map, HTML write-ups, and Lean index. Define light and dark CSS variables
 inside `@media screen` to preserve the shared print styling. The stylesheet is
 embedded in generated pages and included in the topic downloads.
 
-Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date; "go to" opens the write-up, with links to its html/pdf/md and to the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
+**Dark mode** and **Colourblind mode** are independent header toggles, remembered
+across maps and HTML write-ups. Colourblind mode overrides topic palettes with
+one shared light/dark scheme based on [Okabe–Ito](https://jfly.uni-koeln.de/color/#pallet):
+sky blue replaces green, orange replaces red, and independence combines both
+coloured halves. Open nodes keep their normal fill; glyphs repeat the distinctions.
+
+Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with a pdf link when one was built and the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 
 ### Graph layout
 
-Vertical position is logical strength. ⊥ is the floor, stronger principles sit
-lower, weaker ones higher, and every implication arrow points upward. An ∧ is
-the meet of its premises: it hangs beneath them, their strokes descend into it
-(dotted, without arrowheads), and its arrow ascends to the conclusion. When the
-conclusion implies every premise, the ∧ sits directly above that conclusion
-instead, as its equivalent, and its short arrow drops into it. Otherwise only
-arrows into ⊥ descend; principles inconsistent with the background stay in
-the row beside ⊥ (a chain of them stacks upward from it), and a conjectured
-refutation does not move a principle there. Principles
-are ranked by the longest chain of stronger principles beneath them, then
-lifted to just below their lowest consequence when that shortens more arrows
-than it lengthens; the order within a row comes from barycenter sweeps and
-adjacent swaps that remove crossings. ⊥ weighs more than other neighbours in
-that ordering, so collapsing principles gather around it. Principles without
-displayed arrows are packed in labelled bands above the diagram: background
-consequences (weakest of all) nearest the diagram, then principles with no
-displayed arrows at all. Nothing sits beneath ⊥. Separate connected clusters
-are packed side by side, with the cluster containing ⊥ beneath the rest.
+Vertical position is logical strength: stronger principles sit lower and
+implication arrows ascend. Principles inconsistent with the background share
+an **equivalent** box with False (⊥), at the bottom. Principles that follow
+from the background share a box with True (⊤). **Trivial arrows**, off by
+default, shows False ⇒ every displayed node and every displayed node ⇒ True.
+These logical arrows have their own explanation and do not change source
+filters, proof evidence, or the treatment of inconsistent assumptions.
+
+An ∧ collects its premises below them, with dotted strokes descending into
+it. When a proved conjunction is equivalent to a principle, the ∧ sits inside
+that principle's equivalence box, with the strokes landing directly on its
+circle. There is no arrow inside the box. Other consequences retain their
+arrows, and clicking the ∧ provides the equivalence proofs and all its
+consequences. Mutually implying conjunctions also share an equivalence box,
+even when no individual principle represents it; each retains its own ∧ and
+premise strokes. An inconsistent conjunction similarly belongs inside False.
+A conjectured reverse implication does not establish equivalence.
+
+Principles are ranked by their implication order. Barycenter sweeps and
+adjacent swaps reduce crossings; separate connected clusters are packed side
+by side. Isolated principles occupy compact labelled bands above the diagram.
+False and True remain visible when their trivial arrows are hidden.
 
 A hollow arrowhead means the converse implication is an open question, so the
 two sides may be equivalent; a filled head means a recorded model or proof
@@ -240,20 +251,38 @@ diagram; a proved arrow is never hidden through a conjectural chain, nothing
 is hidden inside a cycle, and node positions do not change, since the layout
 always uses the full arrow set.
 
-Clicking a principle (on the graph or in the sidebar) shades every other
-principle by its relation to it: entailed, excluded (the two are jointly
-inconsistent), separated by a model (the principle does not entail it), open,
-or conjectured when conjecture arrows are shown; principles inconsistent with
-the background are counted apart, since everything excludes them. A corner
-glyph (⇒, ¬, ⇏, ?) repeats the reading without colour, and a legend beneath
-the graph shows the counts. Proofs come from the arrow engine (displayed
+Clicking a principle (on the graph or in the sidebar), or an ∧, shades every other
+principle by its relation to it. Entailed principles use solid green and
+excluded principles solid red. A green upper-left triangle means a recorded model
+satisfies both the selection and the principle; a red lower-right triangle means
+a recorded model satisfies the selection and the principle's negation. An
+uncoloured half retains the normal node fill. Both coloured halves mean
+**independent of selection**: both kinds of model exist. A single
+countermodel establishes non-implication, not independence. Proved entailment
+or exclusion takes priority over consistency shading. Open questions retain
+their normal fill; conjectures use a separate pattern when no proved relation
+or consistency witness is available. False and the principles equivalent to it
+are excluded by every consistent selection. The legend always shows four keys:
+**entailed**, **excluded**, **consistent**, and **negation is consistent**, including
+zero counts. A node with both coloured halves contributes to both consistency
+counts. Corner glyphs repeat the distinctions without relying on colour.
+Proofs come from the arrow engine (displayed
 sources plus background proofs), models from the selected evidence, exactly as
 in the theory explorer; a witness available only outside the selected sources
-is reported as such. Shift-click a second principle, or use **Compare with…**,
-for a readout of both directions and their joint consistency with the proofs
-and witness models linked. A background-inconsistent principle shades nothing:
+is reported as such. **Shift-click** adds or removes principles from a joint
+selection; there is no two-principle limit. Clicking a conjunction selects its
+members. Related, redundant and equivalent principles remain individually
+selected, and shading is relative to the whole selected conjunction. Use
+**Compare with…** to compare that selection with another principle or conjunction,
+with both directions, joint consistency, proofs and witness models shown.
+A background-inconsistent principle or conjunction shades nothing:
 its consequences by explosion are never shown. The shading survives reading an
-arrow's pop-up and clears with Escape or a click on empty space.
+arrow's details and clears with Escape or a click on empty space.
+
+Graph descriptions occupy a reserved, scrollable panel beside the graph on wide
+screens and below it on narrower screens. Opening or closing details does not
+cover or resize the graph. The panel lists selected principles with expandable
+definitions and individual remove buttons.
 
 The Conjectures tab shares the background controls. **Show resolved** is off
 by default, hiding questions currently proved or refuted. Verdicts are computed

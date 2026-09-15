@@ -15,7 +15,7 @@ const has=(dom,premises,conclusion)=>arrows(dom).some(e=>(e.conclusion||e.b)===c
 function noOrphans(dom){
  const g=graph(dom);
  for(const j of g.nodes.filter(n=>n.kind==='junction')){
-  assert.ok(g.edges.some(e=>e.from===j.id&&!e.toJunction));
+  assert.ok(j.parent||g.edges.some(e=>e.from===j.id&&!e.toJunction));
   assert.ok(g.edges.filter(e=>e.to===j.id).length>=2);
  }
  for(const e of g.edges)assert.ok(g.nodes.some(n=>n.id===e.from)&&g.nodes.some(n=>n.id===e.to));
@@ -40,7 +40,8 @@ try{
  assert.ok(has(retained,['a','b'],'z'));noOrphans(retained);
  const g=graph(retained),junction=g.nodes.find(n=>n.id==='j:wide');assert.ok(junction);
  retained.window.handleGraphClick(retained.window.document.querySelector('[data-graph-node="j:wide"]'));
- assert.equal(retained.window.document.querySelector('#pop .pop-t').textContent,'A ∧ B ⇒ Z','Inspect the surviving conclusion, not the suppressed original arrow');
+ assert.equal(retained.window.document.querySelector('#pop .pop-t').textContent,'A ∧ B','Inspect the whole conjunction');
+ assert.ok(retained.window.document.querySelector('#pop [data-graph-connection]'),'The surviving consequence has a proof link');
  // Multi-premise subsets count too; unrelated premise sets must remain.
  const subsets=page([rule('small',['a','b'],'z'),rule('large',['a','b','x'],'z'),rule('other',['c','x'],'z')]);
  assert.ok(has(subsets,['a','b'],'z'));assert.ok(!has(subsets,['a','b','x'],'z'));assert.ok(has(subsets,['c','x'],'z'));noOrphans(subsets);
@@ -55,7 +56,7 @@ try{
  const negative=page([rule('ac-false',['a','c'],false),rule('abc-false',['a','b','c'],false)]);
  negative.window.eval("state.negativeShown.add('c');renderAll(true)");
  assert.ok(has(negative,['a'],'!c'));assert.ok(!has(negative,['a','b'],'!c'));
- assert.ok(has(negative,['a','c'],'false'));assert.ok(!has(negative,['a','b','c'],'false'));noOrphans(negative);
+ assert.ok(graph(negative).nodes.some(n=>n.kind==='junction'&&n.parent==='falsity'&&JSON.stringify([...n.premises].sort())===JSON.stringify(['a','c'])));assert.ok(!has(negative,['a','b','c'],'false'));noOrphans(negative);
  assert.deepEqual(errors.map(String),[]);
  console.log('PASS: context-sensitive premise subsumption, restored filtered arrows, surviving junctions, conjecture discipline, signed conclusions, and retained singleton transitivity.');
 }finally{pages.forEach(p=>p.window.close());}

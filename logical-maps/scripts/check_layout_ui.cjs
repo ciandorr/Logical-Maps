@@ -23,11 +23,12 @@ function geometry(dom) {
     return {
       nodes:L.visible.map(n => {
         const size=L.size.get(n.id), x=L.x.get(n.id), y=L.y.get(n.id);
-        return {id:n.id, kind:n.kind, members:n.members || [], x,y,
+        return {id:n.id, kind:n.kind, parent:n.parent||null, members:n.members || [], x,y,
           left:x-size.w/2, right:x+size.w/2, top:y-size.h/2, bottom:y+size.h/2,
-          connected:edges.some(e => e.from===n.id || e.to===n.id)};
+          connected:!!n.parent||n.kind==='falsity'||n.kind==='truth'||!!n.junctions?.length||edges.some(e => e.from===n.id || e.to===n.id)};
       }), edges,
-      rawNodes:g.nodes.map(n => ({id:n.id,kind:n.kind})),
+      rawNodes:g.nodes.map(n => ({id:n.id,kind:n.kind,parent:n.parent||null,junctions:n.junctions?.length||0})),
+      layoutEdges:(g.layoutEdges||[]).map(e=>({from:e.from,to:e.to})),
       rawEdges:g.edges.map(e => ({id:e.id,from:e.from,to:e.to})),
       showIso:state.showIso, order:principleOrder(), ids:[...ids],
     };
@@ -47,7 +48,7 @@ function distance(a,b) {
 }
 function verifyMembership(g) {
   assert.ok(g, 'The fixture background must remain consistent.');
-  const expected = g.rawNodes.filter(n => g.showIso || n.kind==='junction' ||
+  const expected = g.rawNodes.filter(n => g.showIso || n.kind==='junction' || n.kind==='falsity' || n.kind==='truth' || n.junctions ||
     g.rawEdges.some(e=>e.from===n.id||e.to===n.id)).map(n=>n.id).sort();
   assert.deepEqual(g.nodes.map(n=>n.id).sort(), expected, 'Layout must retain every eligible graph node.');
   const visible = new Set(expected);
@@ -72,8 +73,8 @@ function verifyIsolation(g, requireIsolates=true) {
   return {isolated,core};
 }
 function toggleIsolated(dom) { dom.window.document.getElementById('show-iso').click(); }
-function verifyStableCore(dom) {
-  const before=geometry(dom), {core}=verifyIsolation(before);
+function verifyStableCore(dom, requireIsolates=true) {
+  const before=geometry(dom), {core}=verifyIsolation(before,requireIsolates);
   toggleIsolated(dom);
   const hidden=geometry(dom);
   verifyMembership(hidden);
@@ -87,7 +88,7 @@ function verifyStableCore(dom) {
   }
   toggleIsolated(dom);
   const restored=geometry(dom);
-  verifyIsolation(restored);
+  verifyIsolation(restored,requireIsolates);
   assert.deepEqual(restored.nodes,before.nodes, 'Restoring isolated nodes must restore deterministic geometry.');
 }
 
@@ -112,7 +113,7 @@ function components(g) {
   const remaining=new Set(g.nodes.filter(n=>n.connected).map(n=>n.id)), groups=[];
   while(remaining.size) {
     const ids=[remaining.values().next().value]; remaining.delete(ids[0]);
-    for(let i=0;i<ids.length;i++)for(const e of g.edges) {
+    for(let i=0;i<ids.length;i++)for(const e of [...g.edges,...g.layoutEdges,...g.nodes.filter(n=>n.parent).map(n=>({from:n.id,to:n.parent}))]) {
       const next=e.from===ids[i]?e.to:e.to===ids[i]?e.from:null;
       if(remaining.delete(next))ids.push(next);
     }
@@ -156,7 +157,7 @@ try {
   const du=data.topic.background_presets.find(p=>p.id==='du').principles;
   for(const assumptions of [null,[...du,'totality'],[...du,'l1-continuity','symmetric-neutrality']]) {
     const url=assumptions===null?'http://localhost/':`http://localhost/?assume=${assumptions.join(',')}`;
-    verifyStableCore(page(data,url));
+    verifyStableCore(page(data,url),false);
   }
 
   // A connected DTU graph can also drift apart: repeated one-way overlap
@@ -174,7 +175,7 @@ try {
   const widestPackedRow=Math.max(...rows.map(row=>row.reduce((sum,n)=>sum+n.right-n.left,0)+28*(row.length-1)));
   assert.ok(selectedBounds.right-selectedBounds.left<=1.5*widestPackedRow,
     'Straightening must not stretch this connected graph far beyond the width its rows need.');
-  for(const row of rows) for(let i=1;i<row.length;i++)
+  for(const row of rows.map(row=>row.filter(n=>!n.parent))) for(let i=1;i<row.length;i++)
     assert.ok(row[i].left-row[i-1].right>=28-EPS, 'Compaction must preserve space between boxes.');
   dtu.window.eval('renderAll(true)');
   assert.deepEqual(geometry(dtu).nodes,selected.nodes, 'Repeated rendering must not drift.');

@@ -269,3 +269,59 @@ added on 13 September 2026, preserves a strict ranking of the transfer pair
 and supplies the separation with **DTU** as antecedent. The original seed
 and its properties remain unchanged. Its examples also identify the
 continuity condition that it lacks.
+
+## Further verified failures
+
+**Addition: Claude (Fable 5.1), 15 September 2026**, at Zachary Goodsell's
+request for a complete picture of the DU + Sym package. The construction and
+everything above are unchanged. Criterion (3) is used throughout: an
+integrable zero-integral profile is comparable with zero only when it is a
+finite-step function, and any element of $C$ is nonnegative outside a
+compact set.
+
+**The three prospect evaluations fail.** The alternating St Petersburg,
+Pasadena and Arroyo prospects each take arbitrarily large positive and
+negative utility values with positive probability. Let $X$ be one of them
+and $c$ its prescribed sure value. For $t\ge c$ the profile $S_X-S_c$
+equals $S_X(t)\ge0$, and for $t<c$ it equals $S_X(t)-1=-\Pr(X\le t)<0$
+on an unbounded set of $t$. So neither $S_X-S_c$ nor its negative is
+nonnegative outside a compact set, and neither lies in $C$: $X$ and $c$
+are incomparable. Alternating St Petersburg $=-1/2$, Pasadena $=\ln2$ and
+Arroyo $=\ln2$ all demand indifference, so all three fail.
+
+**Uniqueness of Negative Self-Similarity fails.** Let $A$ be the
+alternating St Petersburg gamble. Its law satisfies
+$A\overset d=M_{1/2}(-2A,-2)$, so the two profiles coincide and
+$A\sim_C M_{1/2}(-2A,-2)$. The sure outcome $-1/2$ satisfies
+$-1/2\sim_C M_{1/2}(1,-2)=M_{1/2}(-2\cdot(-1/2),-2)$ by Simple EU. Both
+solve the same self-similarity indifference with $p=1/2$, $a=2$, $b=0$,
+$Z=-2$, but $A$ and $-1/2$ are incomparable by the previous paragraph.
+
+**Comonotonic Sum Invariance fails.** Let $X=2\cdot\mathbf1\{U>1/2\}$,
+$Y=1$ and $Z=U$. All three are nondecreasing functions of $U$, so both
+pairs are comonotonic. $X\sim_CY$ by Simple EU. The sum $X+Z$ is uniform
+on $[0,1/2)\cup(5/2,3]$ and $Y+Z$ is uniform on $[1,2]$; both have mean
+$3/2$. Their survival difference is $-t$ on $(0,1/2)$, $-1/2$ on
+$(1/2,1)$, $t-3/2$ on $(1,2)$, $1/2$ on $(2,5/2)$ and $3-t$ on $(5/2,3)$:
+integrable, integral zero, not finite-step. By (3), $X+Z$ and $Y+Z$ are
+incomparable, so the biconditional fails.
+
+**Independent Sum Preservation fails.** Take the same $X,Y$ and an
+independent uniform $Z$. Then $X+Z$ has the law of $M_{1/2}(U,U+2)$ and
+$Y+Z$ that of $1+U$. The survival difference is again piecewise linear with
+sloped pieces and integral zero, so the sums are incomparable although
+$X\sim_CY$. Weak preservation of indifference fails, hence Independent Sum
+Invariance fails as well.
+
+**Existential Copula Sum Invariance fails.** Fix any copula $\mathcal C$
+and realize $(U,W)$ with law $\mathcal C$. Put $X=2\cdot\mathbf1\{U>1/2\}$,
+$Z=W$ and $Y=1$. Since $X$ is a nondecreasing function of $U$, the pair
+$(X,Z)$ admits $\mathcal C$; a constant $Y$ admits every copula. For
+$t\in[1,2)$ we have $S_{X+Z}(t)=\Pr(U>1/2)=1/2$ while $S_{1+W}(t)=2-t$, so
+the survival difference is sloped on that interval, has integral zero and is
+not finite-step. Thus $X+Z$ and $Y+Z$ are incomparable while $X\sim_CY$, and
+$\mathrm{SC}(\mathcal C)$ fails. As $\mathcal C$ was arbitrary, no copula
+satisfies sum invariance in this model.
+
+These are direct calculations in the recorded model; no independent checker
+or Lean verification is claimed.

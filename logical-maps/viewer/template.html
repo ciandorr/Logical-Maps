@@ -100,9 +100,17 @@
   .pane-divider:hover::after, .pane-divider:focus-visible::after, .pane-divider.dragging::after { background: var(--accent); }
   body.resizing-panes, body.resizing-panes * { cursor: var(--resize-cursor) !important; user-select: none !important; }
   .graph-area { position: relative; overflow: hidden; min-width: 0; }
-  #graph { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+  .graph-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 300px; min-width: 0; min-height: 0; overflow: hidden; }
+  .graph-details { min-width: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--line); background: var(--panel); }
+  #graph-details-empty { margin: 0; padding: 16px; color: var(--ink-3); font-size: 13px; }
+  .graph-details:has(.pop:not([hidden])) #graph-details-empty { display: none; }
+  @media (max-width: 1100px) {
+    .graph-workspace { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 2fr) minmax(0, 1fr); }
+    .graph-details { border-left: 0; border-top: 1px solid var(--line); }
+  }
+  #graph { grid-row: 2; width: 100%; height: 100%; min-height: 0; display: block; cursor: grab; touch-action: none; }
   #graph:active { cursor: grabbing; }
-  .graph-tools { position: absolute; left: 12px; right: 12px; top: 12px; display: flex; align-items: flex-start; gap: 6px; pointer-events: none; }
+  .graph-tools { grid-row: 1; display: flex; align-items: flex-start; gap: 6px; padding: 12px; pointer-events: none; }
   .graph-tools > * { pointer-events: auto; }
   .graph-tools #fit { margin-left: auto; }
   .graph-search { width: 280px; max-width: calc(100% - 48px); min-width: 0; }
@@ -148,7 +156,12 @@
   .node.selected rect { fill: var(--hl); }
   .node.from-background rect { fill: var(--hl); stroke: var(--accent); }
   .node text { font: 500 12.5px var(--sans); fill: var(--ink); pointer-events: none; }
+  .edge.trivial { stroke: var(--ink-3); opacity: .55; }
+  .junction.selected circle { stroke: var(--accent); stroke-width: 2.4; fill: var(--hl); }
+  .node text[data-constant] { pointer-events: auto; cursor: pointer; }
   .node text[data-principle] { pointer-events: auto; cursor: pointer; }
+  .node text.selection-member { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .principle-name[aria-pressed="true"] { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
   .node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
   .node.iso rect { stroke-dasharray: 4 3; }
   .junction { cursor: pointer; }
@@ -188,6 +201,9 @@
   table.results tr { cursor: pointer; }
   table.results tr:hover td { background: var(--panel-2); }
   table.results tr.filtered td { opacity: .4; }
+  table.changes tr.revision td.stmt { padding-left: 20px; }
+  .badge.revised { font-style: italic; }
+  .revision-list { color: var(--ink-2); }
   .stmt { font-family: var(--serif); font-size: 14px; }
   .open-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
   .open-item { padding: 8px 10px; border: 1px solid var(--line); border-radius: 3px; background: var(--panel); cursor: pointer; font-family: var(--serif); }
@@ -290,6 +306,10 @@
   .page h1 { font: 600 24px/1.25 var(--serif); margin: 12px 0 8px; text-wrap: balance; }
   .page h2 { font: 500 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 22px 0 8px; }
   .page .prose { font: 16px/1.65 var(--sans); }
+  .page .writeup { max-width: 92ch; }
+  .page .writeup h3 { font: 600 15px/1.4 var(--sans); margin: 18px 0 6px; }
+  .page .writeup table { border-collapse: collapse; font-size: 14px; } .page .writeup td, .page .writeup th { border: 1px solid var(--line); padding: 4px 8px; }
+  .page .writeup-note { margin: 8px 0 4px; }
   .page .prose.statement { font-size: 16px; }
   .page .plist { list-style: none; padding: 0; margin: 0; font: 16px/1.65 var(--sans); display: flex; flex-direction: column; gap: 6px; }
   .page .badges { display: flex; gap: 6px; margin: 0 0 10px; }
@@ -308,6 +328,13 @@
   .dl { display: flex; gap: 10px; margin-left: auto; font-size: 12.5px; align-self: center; } .dl a { color: var(--ink-3); }
 
   .pop { position: fixed; z-index: 20; max-width: min(380px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: auto; background: var(--panel); border: 1px solid var(--line-strong); border-radius: 4px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 13px; }
+  .graph-details .pop { position: static; z-index: auto; max-width: none; max-height: none; overflow: visible; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
+  .detail-close { float: right; margin: 0 0 8px 10px; font-size: 18px; line-height: 1; }
+  .selection-list { list-style: none; padding: 0; margin: 12px 0; }
+  .selection-list li { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line); }
+  .selection-list details { flex: 1; min-width: 0; }
+  .selection-list summary { cursor: pointer; font-weight: 600; }
+  .selection-list .lnk { flex: none; font-size: 12px; }
   .pop .pop-t { font: 600 15px/1.3 var(--serif); margin-bottom: 4px; }
   .pop .pop-t + .pop-t { margin-top: 10px; }
   .pop .pop-s { font: 13.5px/1.45 var(--serif); }
@@ -371,29 +398,34 @@
   .inspection-note { font-size: 12px; color: var(--ink-2); margin-bottom: 8px; }
   .inspection-note > .lnk { display: inline-block; margin-left: 10px; font-size: 11px; }
   .node.negative rect { stroke-dasharray: 6 3; }
-  /* Relation shading against the focused principle. Tints derive from the
-     theme palette; a corner glyph carries the same reading without colour.
-     The usual, well-charted state (separated by a model) stays quiet, and
-     the open questions are the ones that show. */
-  :root { --rel-entailed: color-mix(in srgb, var(--human) 24%, var(--node-fill)); --rel-excluded: color-mix(in srgb, var(--indep) 26%, var(--node-fill)); }
+  /* Solid fills mean proofs; diagonal halves mean consistency witnesses.
+     Open questions retain the normal fill. Glyphs repeat each distinction. */
+  :root {
+    --rel-positive: var(--human);
+    --rel-negative: var(--indep);
+    --rel-entailed: color-mix(in srgb, var(--rel-positive) 36%, var(--node-fill));
+    --rel-excluded: color-mix(in srgb, var(--rel-negative) 30%, var(--node-fill));
+  }
   .node .rel-mark { font: 700 11px var(--sans); fill: var(--ink-3); text-anchor: end; pointer-events: none; }
   .node.rel-entailed rect { fill: var(--rel-entailed); } .node.rel-entailed .rel-mark { fill: var(--human); }
   .node.rel-excluded rect { fill: var(--rel-excluded); stroke: var(--indep); } .node.rel-excluded .rel-mark { fill: var(--indep); }
-  .node.rel-open rect { fill: var(--open); } .node.rel-open .rel-mark { fill: var(--open-ink); }
+  .node.rel-consistent rect { fill: url(#split-consistent); } .node.rel-consistent .rel-mark { fill: var(--human); }
+  .node.rel-separated rect { fill: url(#split-separated); } .node.rel-separated .rel-mark { fill: var(--indep); }
+  .node.rel-independent rect { fill: url(#split-independent); }
   .node.rel-conjectured rect { fill: url(#hatch-conjectured); } .node.rel-conjectured .rel-mark { fill: var(--conj); }
-  .node.rel-base rect, .node.rel-other rect { fill: var(--hl); stroke: var(--accent); stroke-width: 2.4; }
+  .node.rel-base rect { fill: var(--hl); }
+  .node.rel-base rect, .node.rel-other rect { stroke: var(--accent); stroke-width: 2.4; }
   #graph.shaded .node.dim { opacity: .7; }
-  .graph-area { display: grid; grid-template-rows: minmax(0, 1fr) auto; }
-  .relation-legend { grid-row: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 5px 12px; border-top: 1px solid var(--line); background: var(--panel); font-size: 12px; color: var(--ink-2); }
+  .graph-area { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; }
+  .relation-legend { grid-row: 3; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 5px 12px; border-top: 1px solid var(--line); background: var(--panel); font-size: 12px; color: var(--ink-2); }
   .relation-legend[hidden] { display: none; }
   .relation-legend b { color: var(--ink); }
-  .relation-legend .key { display: inline-flex; align-items: center; gap: 5px; }
+  .relation-legend .key { display: inline-flex; flex: none; align-items: center; gap: 5px; }
   .relation-legend .key i { width: 14px; height: 12px; border: 1px solid var(--node-stroke); border-radius: 2px; display: inline-block; background: var(--node-fill); font: 700 9px/11px var(--sans); text-align: center; font-style: normal; color: var(--ink-3); }
   .relation-legend .key.entailed i { background: var(--rel-entailed); color: var(--human); }
   .relation-legend .key.excluded i { background: var(--rel-excluded); border-color: var(--indep); color: var(--indep); }
-  .relation-legend .key.open i { background: var(--open); color: var(--open-ink); }
-  .relation-legend .key.conjectured i { background: repeating-linear-gradient(135deg, var(--node-fill) 0 3px, color-mix(in srgb, var(--conj) 70%, transparent) 3px 4.5px); color: var(--conj); }
-  .relation-legend .key.inconsistent i { border-color: var(--indep); border-width: 2px; color: var(--indep); }
+  .relation-legend .key.consistent i { background: linear-gradient(to bottom right, var(--rel-entailed) 50%, var(--node-fill) 50%); color: var(--human); }
+  .relation-legend .key.separated i { background: linear-gradient(to bottom right, var(--node-fill) 50%, var(--rel-excluded) 50%); color: var(--indep); }
   .relation-legend .legend-hint { color: var(--ink-3); }
   .relation-legend .lnk { font-size: 12px; }
   .rel-status { font-weight: 600; }
@@ -450,7 +482,10 @@
       <div class="sub" id="subtitle"></div>
     </div>
     <div class="dl" id="downloads"></div>
-    <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
+    <div class="display-toggles">
+      <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
+      <button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false" title="Okabe–Ito palette: sky blue and orange">[Colourblind mode: off]</button>
+    </div>
   </header>
   <div class="body">
     <main>
@@ -486,6 +521,7 @@
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
           <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
           <label title="Hide an arrow when a chain of other displayed arrows already gives it, as in a Hasse diagram. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows">Transitive reduction</label>
+          <label title="Show the logical arrows from False to every node and from every node to True."><input type="checkbox" id="trivial-arrows">Trivial arrows</label>
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
         </div>
       </div>
@@ -504,12 +540,15 @@
       </section>
     </aside>
         <div class="pane-divider" id="sidebar-divider" role="separator" tabindex="0" aria-orientation="vertical" aria-label="Resize left sidebar" aria-controls="graph-sidebar" title="Drag to resize sidebar · Arrow keys to adjust · Double-click to reset"></div>
+        <div class="graph-workspace">
         <div class="graph-area">
           <svg id="graph" role="img" aria-label="Implication graph"></svg>
           <div id="graph-warning" class="graph-warning" role="alert" hidden></div>
           <div id="graph-empty" class="graph-empty" role="status" hidden></div>
           <div id="relation-legend" class="relation-legend" role="status" aria-live="polite" hidden></div>
           <div class="graph-tools"><div class="graph-search"><input class="search" id="graph-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the graph" aria-describedby="graph-search-status" autocomplete="off"><span id="graph-search-status" role="status" aria-live="polite"></span></div><button class="btn small" id="fit">Fit</button></div>
+        </div>
+        <aside id="graph-details" class="graph-details" aria-label="Selection details"><p id="graph-details-empty">Select a principle, conjunction or arrow to see its details here. Shift-click to add or remove principles.</p></aside>
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
@@ -521,11 +560,12 @@
     </main>
   </div>
 </div>
-<div id="pop" class="pop" hidden></div>
+<div id="floating-details"><div id="pop" class="pop" hidden></div></div>
 
 <script>
 const DATA = /*__PMAP_DATA__*/null;
 const FALSE = "false";
+const TRUE = "⊤"; // Display-only ID, outside the record ID alphabet.
 const papers = DATA.papers || [];
 const byPaperId = new Map(papers.map(p => [p.id, p]));
 
@@ -666,7 +706,7 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: false, focus: null, compareArmed: false, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: false, trivial: false, focus: null, compareArmed: false, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
 const graphSearch = { matches: new Set(), index: 0 };
 let graphRelations = new Map();
 let E = null, EC = null, baseE = null, baseEC = null, A = null, layout = null, backgroundConflicts = [], backgroundExcluded = new Map();
@@ -720,7 +760,7 @@ function pairStatus(a, b) {
   if (base.status !== 'open' || !state.showConj) return base;
   const c = EC.pair(a, b); return c.status !== 'open' ? { ...c, status: c.status + '?' } : base;
 }
-function name(id) { if (isNegative(id)) return '¬' + name(baseId(id)); return id === FALSE ? "False (⊥)" : byPid.get(id)?.name || id; }
+function name(id) { if (isNegative(id)) return '¬' + name(baseId(id)); return id === TRUE ? "True (⊤)" : id === FALSE ? "False (⊥)" : byPid.get(id)?.name || id; }
 function esc(s) { return String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 function renderSubscripts(root) {
   // Typeset plain-text operator indices without changing records or attributes.
@@ -823,17 +863,21 @@ function implicationStatus(premises, conclusion) {
     if (known.status !== 'open') return {via: [], models: [], ...known};
   }
   if (conclusion === FALSE) return {status: 'open', via: [], models: []};
-  const found = witnesses([...premises, negate(conclusion)]);
-  if (found.models.length) return {status: 'independent', via: [], ...found};
   const excluded = consistencyStatus([...premises, conclusion]);
   if (excluded.status === 'inconsistent') return {status: 'excludes', via: excluded.via, models: []};
+  const found = witnesses([...premises, negate(conclusion)]);
+  if (found.models.length) return {status: 'independent', via: [], ...found};
+  if (state.showConj && premises.length > 1 && premises.every(p => !isNegative(p)) && !isNegative(conclusion)) {
+    const via = EC.entails(premises, conclusion);
+    if (via && via.some(id => byRid.get(id)?.status === 'conjectured')) return {status: 'implies?', via, models: []};
+  }
   return {status: 'open', via: [], models: []};
 }
 // Hollow arrowheads mark arrows whose converse is an open question: the two
 // sides may be equivalent. A filled head means a model refutes the converse
 // (or the arrow leads to ⊥). Conjectural evidence never fills a head.
 function converseStatus(edge, byId) {
-  if (edge.toJunction || edge.to === 'falsity') return null;
+  if (edge.toJunction || edge.to === 'falsity' || edge.trivial) return null;
   const target = byId.get(edge.to).members[0];
   const statuses = edge.premises.map(p => implicationStatus([target], p).status);
   if (statuses.some(s => s === 'independent')) return 'refuted';
@@ -989,7 +1033,7 @@ function buildGraph() {
       Object.assign(incoming, anchor, {id, from, to, r: anchor.r, contraposed: anchor.contraposed, toJunction: true, fromJunction: false});
     }
   }
-  return {nodes: keptNodes, edges: keptEdges, classOf};
+  return groupGraph({nodes: keptNodes, edges: keptEdges, classOf});
 }
 
 // Transitive reduction of the displayed arrows: u ⇒ v is implied when u ⇒ w
@@ -1019,7 +1063,130 @@ function impliedArrows(edges) {
   return implied;
 }
 
+// Quotient the display by proved equivalence, including the logical constants.
+// The evidence engines deliberately continue to report inconsistent antecedents.
+function graphNodeExpression(n) { return n.members?.[0] ?? n.premises; }
+function graphNodeFollows(n) { return expressionLiterals(graphNodeExpression(n)).every(literalFollows); }
+function conjunctionProof(premises, conclusions) {
+  const proofs = conclusions.map(p => literalImplication(premises, p));
+  return proofs.every(p => p.status === 'implies')
+    ? {status: 'implies', via: [...new Set(proofs.flatMap(p => p.via))]} : null;
+}
+function groupGraph(g) {
+  const redirect = new Map(), constants = new Map();
+  const constant = id => {
+    if (!constants.has(id)) constants.set(id, {id: id === FALSE ? 'falsity' : 'truth', kind: id === FALSE ? 'falsity' : 'truth', members: [id]});
+    return constants.get(id);
+  };
+  const nodes = [];
+  for (const n of g.nodes) {
+    if (n.kind === 'falsity') { redirect.set(n.id, constant(FALSE).id); continue; }
+    if (n.kind !== 'class') { if (!n.premises?.some(p => literalFollows(negate(p)))) nodes.push(n); continue; }
+    const value = n.members.every(literalFollows) ? TRUE : n.members.every(p => literalFollows(negate(p))) ? FALSE : null;
+    if (value) { const box = constant(value); box.members.push(...n.members); redirect.set(n.id, box.id); }
+    else nodes.push(n);
+  }
+  for (const j of nodes.filter(n => n.kind === 'junction')) {
+    j.consequences = g.edges.filter(e => e.from === j.id);
+    const conflict = consistencyStatus(j.premises);
+    let parent;
+    if (conflict.status === 'inconsistent') {
+      parent = constant(FALSE);
+      j.equivalence = [{label: 'Conjunction ⇒ False', status: {status: 'implies', via: conflict.via}}];
+    } else {
+      parent = nodes.find(n => n.kind === 'class'
+        && literalImplication(j.premises, n.members[0]).status === 'implies'
+        && j.premises.every(p => literalPair(n.members[0], p).status === 'implies'));
+      if (parent) j.equivalence = [
+        {label: j.premises.map(name).join(' ∧ ') + ' ⇒ ' + name(parent.members[0]), status: literalImplication(j.premises, parent.members[0])},
+        ...j.premises.map(p => ({label: name(parent.members[0]) + ' ⇒ ' + name(p), status: literalPair(parent.members[0], p)}))
+      ];
+    }
+    if (parent) { j.parent = parent.id; j.meet = true; (parent.junctions ||= []).push(j); }
+  }
+  // Some equivalence classes contain only conjunctions. Compare their full
+  // premise sets in both directions; sharing a consequence is insufficient.
+  const ungrouped = nodes.filter(n => n.kind === 'junction' && !n.parent);
+  for (const j of ungrouped) {
+    if (j.parent) continue;
+    const peers = ungrouped.filter(k => k !== j && !k.parent
+      && conjunctionProof(j.premises, k.premises) && conjunctionProof(k.premises, j.premises));
+    if (!peers.length) continue;
+    const box = {id: 'equiv:' + j.id, kind: 'equivalence', members: [], premises: j.premises, junctions: [j, ...peers]};
+    nodes.push(box);
+    for (const k of box.junctions) {
+      k.parent = box.id; k.meet = true;
+      k.equivalence = (k === j ? peers : [j]).flatMap(other => [[k, other], [other, k]].map(([a, b]) => ({
+        label: expressionName(a.premises) + ' ⇒ ' + expressionName(b.premises),
+        status: conjunctionProof(a.premises, b.premises)
+      })));
+    }
+  }
+  if (state.trivial) { constant(FALSE); constant(TRUE); }
+  nodes.push(...constants.values());
+  const byId = new Map(nodes.map(n => [n.id, n]));
+  const resolve = id => redirect.get(id) || id;
+  const boxOf = id => byId.get(id)?.parent || id;
+  const edges = g.edges.filter(e => byId.has(resolve(e.from)) && byId.has(resolve(e.to))).map(e => ({...e, from: resolve(e.from), to: resolve(e.to)})).filter(e => {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from === to) return false;
+    // These are represented by the optional logical arrows, without attributing
+    // explosion or truth introduction to an individual recorded theorem.
+    return e.toJunction || from !== 'falsity' && to !== 'truth';
+  });
+  // Keep constant boxes at the ends of the diagram even with their arrows off.
+  // Hidden isolated principles stay hidden when trivial arrows are enabled.
+  const incident = new Set(edges.flatMap(e => [boxOf(e.from), boxOf(e.to)]));
+  const ordinary = nodes.filter(n => !n.parent && n.kind !== 'falsity' && n.kind !== 'truth'
+    && (incident.has(n.id) || state.showIso && !state.conjectureOnly && !state.unpublishedOnly || n.members?.some(p => graphSearch.matches.has(baseId(p)))));
+  const layoutEdges = [];
+  const add = (from, to, display) => (state.trivial ? edges : layoutEdges).push({id: 'trivial:' + from + '>' + to, key: 'trivial:' + from + '>' + to, from, to, type: 'trivial', display, premises: [], trivial: true, layoutOnly: !state.trivial});
+  const label = n => expressionName(graphNodeExpression(n));
+  for (const n of ordinary.filter(n => state.trivial || incident.has(n.id))) {
+    if (constants.has(FALSE)) add('falsity', n.id, 'False (⊥) ⇒ ' + label(n));
+    if (constants.has(TRUE)) add(n.id, 'truth', label(n) + ' ⇒ True (⊤)');
+  }
+  if (constants.has(FALSE) && constants.has(TRUE)) add('falsity', 'truth', 'False (⊥) ⇒ True (⊤)');
+  return {...g, nodes, edges, layoutEdges};
+}
+
+// Lay out equivalence boxes as single objects, then place their ∧ controls
+// inside them. Premise strokes retain the actual conjunction as their endpoint.
 function computeLayout(g) {
+  const byId = new Map(g.nodes.map(n => [n.id, n]));
+  const parent = id => byId.get(id).parent || id;
+  const roots = g.nodes.filter(n => !n.parent);
+  const contracted = [...g.edges, ...(g.layoutEdges || [])].map(e => ({...e, from: parent(e.from), to: parent(e.to), fromJunction: !byId.get(e.from).parent && e.fromJunction}));
+  const looseConstants = roots.filter(n => (n.kind === 'falsity' || n.kind === 'truth') && !contracted.some(e => e.from === n.id || e.to === n.id));
+  const L = computeLayoutCore({nodes: roots.filter(n => !looseConstants.includes(n)), edges: contracted});
+  for (const n of looseConstants) {
+    const size = measureGraphNode(n);
+    const bounds = L.visible.map(n => ({top: L.y.get(n.id) - L.size.get(n.id).h / 2, bottom: L.y.get(n.id) + L.size.get(n.id).h / 2}));
+    L.x.set(n.id, 0);
+    L.y.set(n.id, n.kind === 'falsity' ? Math.max(0, ...bounds.map(b => b.bottom)) + 63 + size.h / 2 : Math.min(0, ...bounds.map(b => b.top)) - 63 - size.h / 2);
+    L.size.set(n.id, size); L.visible.push(n); L.vis.add(n.id); L.layers.push([n]);
+  }
+  for (const j of g.nodes.filter(n => n.parent && L.vis.has(n.parent))) {
+    const box = byId.get(j.parent), index = box.junctions.indexOf(j);
+    L.visible.push(j); L.vis.add(j.id); L.size.set(j.id, {w: 22, h: 22});
+    L.x.set(j.id, L.x.get(j.parent) + (index - (box.junctions.length - 1) / 2) * 34);
+    L.y.set(j.id, L.y.get(j.parent) - L.size.get(j.parent).h / 2 + 31);
+  }
+  L.byId = byId;
+  L.edges = g.edges.filter(e => !e.layoutOnly && L.vis.has(e.from) && L.vis.has(e.to));
+  L.back = new Set([...L.back].filter(id => L.edges.some(e => e.id === id)));
+  return L;
+}
+
+function measureGraphNode(n) {
+  if (n.kind === 'junction') return {w: 22, h: 22};
+  const longest = Math.max(0, ...n.members.map(m => name(m).length));
+  const junctions = n.junctions?.length || 0;
+  return {w: Math.max(80, longest * 7.2 + 26, junctions * 34 + 24),
+    h: 16 + 17 * n.members.length + (n.members.length > 1 || junctions ? 12 : 0) + (junctions ? 34 : 0)};
+}
+
+function computeLayoutCore(g) {
   const nodes = g.nodes, edges = g.edges;
   const byId = new Map(nodes.map(n => [n.id, n]));
   const out = new Map(nodes.map(n => [n.id, []])), inn = new Map(nodes.map(n => [n.id, []]));
@@ -1032,37 +1199,30 @@ function computeLayout(g) {
   // Keep them out of the tree layout and pack them against its final bounds.
   const isolated = visible.filter(n => degree(n) === 0);
   const connected = visible.filter(n => degree(n) > 0);
-  const classes = connected.filter(n => n.kind === 'class');
-  const rep = n => n.members[0];
-  const implies = (a, b) => a.kind === 'class' && b.kind === 'class' && literalPair(rep(a), rep(b)).status === 'implies';
+  const isClass = n => n.kind === 'class' || n.kind === 'equivalence';
+  const classes = connected.filter(isClass);
+  const premises = n => expressionLiterals(graphNodeExpression(n));
+  const implies = (a, b) => isClass(a) && isClass(b) && conjunctionProof(premises(a), premises(b));
   // Vertical position is logical strength. ⊥ is the floor, stronger principles
   // sit lower, and every implication arrow points upward. An ∧ is the meet of
   // its premises: it sits strictly below each of them and below its
   // conclusion, so premise strokes descend into it and its arrow ascends.
   // Nothing needs to be below an ∧, so these constraints cannot cycle with
-  // the implication order. Only arrows into ⊥ (and a meet's short arrow,
-  // below) descend; sources of arrows into ⊥ stay pinned beside the floor
-  // rather than drifting upward.
+  // the implication order. Proved equivalences have already been contracted.
+  // Only conjectural arrows into ⊥ may descend.
   const constraints = [];  // [lower, upper, priority]: lower is strictly below upper
   // Pinned nodes stay beside the floor: principles inconsistent with the
   // background (whether or not a source filter hides their collapse arrow)
   // and junctions whose conclusion is ⊥.
-  const pinned = new Set(classes.filter(n => literalPair(rep(n), FALSE).status === 'inconsistent').map(n => n.id));
+  const pinned = new Set(classes.filter(n => literalImplication(premises(n), FALSE).status === 'inconsistent').map(n => n.id));
   const conjectural = e => e.conjectured || e.r?.status === 'conjectured';
-  // A junction whose conclusion implies every premise is their meet: the
-  // conclusion is the conjunction. It sits just above the conclusion, so the
-  // premise strokes need not pass through the conclusion's box, and its
-  // short arrow drops into the conclusion.
-  for (const j of connected.filter(n => n.kind === 'junction')) {
-    const premises = edges.filter(e => e.to === j.id).map(e => byId.get(e.from));
-    const conclusions = edges.filter(e => e.from === j.id).map(e => byId.get(e.to));
-    j.meet = conclusions.length > 0 && conclusions.every(c => premises.every(p => implies(c, p)));
-  }
+  for (const j of connected.filter(n => n.kind === 'junction')) j.meet = false;
   for (const e of edges) {
     if (!vis.has(e.from) || !vis.has(e.to)) continue;
     if (e.to === 'falsity') { if (!conjectural(e)) pinned.add(e.from); continue; }
+    if (e.trivial) { constraints.push([e.from, e.to, 0]); continue; }
     if (e.toJunction) constraints.push([e.to, e.from, 1]);
-    else if (e.fromJunction) constraints.push(byId.get(e.from).meet ? [e.to, e.from, 1] : [e.from, e.to, 1]);
+    else if (e.fromJunction) constraints.push([e.from, e.to, 1]);
     // Recorded rules take precedence over derived arrows when a cycle must break.
     else constraints.push([e.from, e.to, implies(byId.get(e.from), byId.get(e.to)) ? (e.r ? 0 : 0.5) : 2]);
   }
@@ -1100,7 +1260,7 @@ function computeLayout(g) {
   const lift = () => {
     let moved = false;
     for (const n of connected) {
-      if (n.kind !== 'class' || pinned.has(n.id) || !anchored.has(n.id)) continue;
+      if (!isClass(n) || pinned.has(n.id) || !anchored.has(n.id)) continue;
       const L = lower.get(n.id).filter(id => !isJunction(id)), U = upper.get(n.id).filter(id => !isJunction(id));
       if (U.length <= L.length) continue;
       const target = Math.min(...U.map(id => rank.get(id))) - 2;
@@ -1110,13 +1270,10 @@ function computeLayout(g) {
   };
   for (let it = 0; it < 200 && lift(); it++);
   for (const j of connected.filter(n => n.kind === 'junction')) {
-    if (j.meet) { rank.set(j.id, Math.max(...lower.get(j.id).map(id => rank.get(id))) + 1); continue; }
     const around = upper.get(j.id).filter(id => anchored.has(id)).map(id => rank.get(id));
     rank.set(j.id, around.length ? Math.min(...around) - 1 : 1);
   }
-  for (const n of connected) if (n.kind === 'class' && !anchored.has(n.id)) rank.set(n.id, Math.max(1, ...lower.get(n.id).map(id => rank.get(id))) + 1);
-  // A meet above an unanchored conclusion was placed before that conclusion.
-  for (const j of connected.filter(n => n.kind === 'junction' && n.meet)) rank.set(j.id, Math.max(...lower.get(j.id).map(id => rank.get(id))) + 1);
+  for (const n of connected) if (isClass(n) && !anchored.has(n.id)) rank.set(n.id, Math.max(1, ...lower.get(n.id).map(id => rank.get(id))) + 1);
   // Rows count from the top for the rest of the layout; compress empty ranks.
   const used = [...new Set(rank.values())].sort((a, b) => b - a);
   const compact = new Map(used.map((r, i) => [r, i]));
@@ -1125,15 +1282,10 @@ function computeLayout(g) {
   const layerOf = new Map(connected.map(n => [n.id, compact.get(rank.get(n.id))]));
   // Segments running against the convention: arrows that fail to ascend, or
   // premise strokes and arrows into ⊥ that fail to descend.
-  const descends = e => e.toJunction || e.to === 'falsity' || (e.fromJunction && byId.get(e.from).meet);
+  const descends = e => e.toJunction || e.to === 'falsity';
   const back = new Set(edges.filter(e => vis.has(e.from) && vis.has(e.to) && (descends(e) ? layerOf.get(e.from) >= layerOf.get(e.to) : layerOf.get(e.from) <= layerOf.get(e.to))).map(e => e.id));
   // node sizes
-  const measure = n => {
-    if (n.kind === 'junction') return { w: 22, h: 22 };
-    const longest = Math.max(...n.members.map(m => name(m).length));
-    return { w: Math.max(80, longest * 7.2 + 26), h: 16 + 17 * n.members.length + (n.members.length > 1 ? 12 : 0) };
-  };
-  const size = new Map(visible.map(n => [n.id, measure(n)]));
+  const size = new Map(visible.map(n => [n.id, measureGraphNode(n)]));
   // ordering by barycenter sweeps. Arrows ascend while premise strokes and
   // arrows into ⊥ descend, so neighbours are taken by row rather than by
   // edge direction. Principles that collapse into ⊥ weight it heavily, so
@@ -1231,7 +1383,7 @@ function computeLayout(g) {
   if (components.length > 1) {
     const gap = 40;
     const pieces = components.map(members => {
-      const part = computeLayout({nodes: connected.filter(n => members.has(n.id)), edges: edges.filter(e => members.has(e.from) && members.has(e.to))});
+      const part = computeLayoutCore({nodes: connected.filter(n => members.has(n.id)), edges: edges.filter(e => members.has(e.from) && members.has(e.to))});
       const xs = [], ys = [];
       for (const n of part.visible) {
         const s = part.size.get(n.id);
@@ -1319,8 +1471,8 @@ function computeLayout(g) {
       return rows;
     };
     const groups = [
-      {label: 'No displayed arrows', members: isolated.filter(n => !n.members.every(literalFollows))},
-      {label: 'Follows from the background', members: isolated.filter(n => n.members.every(literalFollows))},
+      {label: 'No displayed arrows', members: isolated.filter(n => !graphNodeFollows(n))},
+      {label: 'Follows from the background', members: isolated.filter(graphNodeFollows)},
     ].filter(g => g.members.length);
     const packed = groups.map(g => ({...g, rows: pack(g.members)}));
     const bandHeight = rows => rows.reduce((sum, row) => sum + Math.max(...row.map(n => size.get(n.id).h)), 0) + gapY * (rows.length - 1);
@@ -1395,7 +1547,7 @@ function animateFlow() {
   // At most 48 chevrons, only while highlighted. Native SVG motion requires
   // no animation library, layout reads or per-frame JavaScript work.
   let html = '', count = 0;
-  for (const element of svg.querySelectorAll('.edge-g.hot')) {
+  for (const element of svg.querySelectorAll('.edge-g.hot:not(.interior-edge)')) {
     const edge = layout.edges.find(e => e.id === element.dataset.segment);
     if (count >= 48) break;
     if (!edge || edge.toJunction) continue;
@@ -1433,38 +1585,55 @@ function renderGraph() {
     ? 'No arrows match these filters. Turn off Lean-verified only to show conjectures.'
     : 'No arrows match these filters.';
   const markers = [...sourceCatalog.map(s => [sourceMarker(s), sourceColor(s)]), ['derived', 'var(--derived)']];
-  const defs = `<defs>${markers.map(([id, color]) => `<marker id="arr-${id}" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="${color}"/></marker><marker id="arr-${id}-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto" overflow="visible"><path d="M0.8,0.8 L9.2,5 L0.8,9.2 z" fill="var(--panel)" stroke="${color}" stroke-width="1.4" stroke-linejoin="round"/></marker>`).join('')}<pattern id="hatch-conjectured" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)"><rect width="6" height="6" fill="var(--node-fill)"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--conj)" stroke-width="1.2" opacity=".7"/></pattern></defs>`;
+  // Bounding-box coordinates keep the split corner-to-corner at any node size.
+  // The first colour fills the upper left; the second fills the lower right.
+  const halves = [
+    ['consistent', 'var(--rel-entailed)', 'var(--node-fill)'],
+    ['separated', 'var(--node-fill)', 'var(--rel-excluded)'],
+    ['independent', 'var(--rel-entailed)', 'var(--rel-excluded)']
+  ].map(([id, upper, lower]) => `<linearGradient id="split-${id}" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="50%" stop-color="${upper}"/><stop offset="50%" stop-color="${lower}"/></linearGradient>`).join('');
+  const defs = `<defs>${halves}${markers.map(([id, color]) => `<marker id="arr-${id}" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="${color}"/></marker><marker id="arr-${id}-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto" overflow="visible"><path d="M0.8,0.8 L9.2,5 L0.8,9.2 z" fill="var(--panel)" stroke="${color}" stroke-width="1.4" stroke-linejoin="round"/></marker>`).join('')}<pattern id="hatch-conjectured" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)"><rect width="6" height="6" fill="var(--node-fill)"/><line x1="0" y1="0" x2="0" y2="6" stroke="var(--conj)" stroke-width="1.2" opacity=".7"/></pattern></defs>`;
   let edgesHtml = '';
+  const edgeMarkup = new Map();
   for (const e of L.edges) {
-    const source = e.toJunction || e.type === 'derived' ? null : sourceOf(e.r);
-    const cls = e.toJunction ? 'premise' : source ? 'source' : 'derived';
+    const source = e.toJunction || !e.r ? null : sourceOf(e.r);
+    const cls = e.toJunction ? 'premise' : e.trivial ? 'trivial' : source ? 'source' : 'derived';
     const conj = !e.toJunction && (e.conjectured || e.r?.status === 'conjectured');
-    const lean = !e.toJunction && e.type !== 'derived' && e.r.certificate.lean === 'verified';
+    const lean = !e.toJunction && e.r?.certificate.lean === 'verified';
     e.converse = converseStatus(e, L.byId);
     const open = e.converse === 'open';
     const marker = e.toJunction ? '' : `marker-end="url(#arr-${source ? sourceMarker(source) : 'derived'}${open ? '-open' : ''})"`;
     const key = e.key; graphEdgesByKey.set(key, e);
     e.geometry = edgeGeometry(e, L);
     const geometry = e.geometry;
-    const junction = e.toJunction && L.byId.get(e.to).shared ? e.to : null;
+    const junction = e.toJunction && (L.byId.get(e.to).shared || L.byId.get(e.to).parent) ? e.to : null;
     const label = e.toJunction ? 'Joint premises: ' + e.premises.map(name).join(' ∧ ')
-      : `${conj ? 'Conjecture' : e.type === 'derived' ? 'Derived proof' : 'Recorded proof'}: ${e.display}${e.contraposed ? ' (contrapositive)' : ''}. ${source ? source.name + '. ' : ''}${converseNote[e.converse] || ''}Click for ${conj ? 'supporting statements' : 'proof steps and sources'}.`;
-    edgesHtml += `<g class="edge-g${open ? ' converse-open' : ''}" data-edge="${esc(key)}" data-segment="${esc(e.id)}" data-from="${e.from}" data-to="${e.to}"${junction ? ` data-junction="${esc(junction)}"` : ''}${source ? ` data-source="${esc(source.id)}" style="--source-color:${sourceColor(source)}"` : ''}><title>${esc(label)}</title><path class="edge-hit" d="${geometry.d}"/><path class="edge ${cls}${conj ? ' conjectured' : ''}${lean ? ' lean' : ''}" d="${geometry.d}" ${marker}/>${e.toJunction ? '' : `<path class="direction-chevron" style="stroke:${source ? sourceColor(source) : 'var(--derived)'}" d="M-4,-3 L0,0 L-4,3" transform="translate(${geometry.mid.x},${geometry.mid.y}) rotate(${geometry.angle})"/>`}</g>`;
+      : e.trivial ? `Logical implication: ${e.display}. Click for details.` : `${conj ? 'Conjecture' : e.type === 'derived' ? 'Derived proof' : 'Recorded proof'}: ${e.display}${e.contraposed ? ' (contrapositive)' : ''}. ${source ? source.name + '. ' : ''}${converseNote[e.converse] || ''}Click for ${conj ? 'supporting statements' : 'proof steps and sources'}.`;
+    const markup = `<g class="edge-g${open ? ' converse-open' : ''}" data-edge="${esc(key)}" data-segment="${esc(e.id)}" data-from="${e.from}" data-to="${e.to}"${junction ? ` data-junction="${esc(junction)}"` : ''}${source ? ` data-source="${esc(source.id)}" style="--source-color:${sourceColor(source)}"` : ''}><title>${esc(label)}</title><path class="edge-hit" d="${geometry.d}"/><path class="edge ${cls}${conj ? ' conjectured' : ''}${lean ? ' lean' : ''}" d="${geometry.d}" ${marker}/>${e.toJunction ? '' : `<path class="direction-chevron" style="stroke:${source ? sourceColor(source) : 'var(--derived)'}" d="M-4,-3 L0,0 L-4,3" transform="translate(${geometry.mid.x},${geometry.mid.y}) rotate(${geometry.angle})"/>`}</g>`;
+    edgeMarkup.set(e.id, markup); edgesHtml += markup;
   }
   let nodesHtml = '';
-  for (const n of L.visible) {
+  for (const n of [...L.visible.filter(n => n.kind !== 'junction'), ...L.visible.filter(n => n.kind === 'junction')]) {
     const s = L.size.get(n.id), x = L.x.get(n.id), y = L.y.get(n.id);
     if (n.kind === 'junction') {
-      nodesHtml += `<g class="junction" ${n.shared ? `data-junction="${esc(n.id)}"` : `data-connection="${esc(n.key)}"`} data-graph-node="${esc(n.id)}" transform="translate(${x},${y})"><title>${esc(n.premises.map(name).join(' ∧ '))}: all premises together. Click for consequences.</title><circle r="11"/><text>∧</text></g>`;
-    } else if (n.kind === 'falsity') {
-      nodesHtml += `<g class="node falsity" data-falsity="true" transform="translate(${x},${y})"><title>False: the incoming premises are incompatible</title><rect x="${-s.w/2}" y="${-s.h/2}" width="${s.w}" height="${s.h}" rx="5"/><text text-anchor="middle" y="5">False (⊥)</text></g>`;
+      nodesHtml += `<g class="junction" data-junction="${esc(n.id)}" data-graph-node="${esc(n.id)}"${n.parent ? ` data-parent="${n.parent}"` : ''} transform="translate(${x},${y})"><title>${esc(n.premises.map(name).join(' ∧ '))}: all premises together. Click to shade relations and inspect proofs.</title><circle r="11"/><text>∧</text></g>`;
     } else {
-      const iso = layout.edges.every(e => e.from !== n.id && e.to !== n.id);
-      const lines = n.members.map((m, i) => `<text data-principle="${esc(m)}" x="0" y="${-s.h / 2 + 8 + 17 * (i + 1) - 4 + (n.members.length > 1 ? 10 : 0)}" text-anchor="middle">${esc(name(m))}</text>`).join('');
-      const eq = n.members.length > 1 ? `<text class="equiv" x="0" y="${-s.h / 2 + 12}" text-anchor="middle">equivalent</text>` : '';
-      const fromBackground = n.members.every(literalFollows);
-      const title = fromBackground ? 'Follows from the background assumptions' : n.members.map(name).join(' ≡ ') + '. Click to shade the other principles by their relation to this one.';
-      nodesHtml += `<g class="node${iso ? ' iso' : ''}${fromBackground ? ' from-background' : ''}${n.members.some(p => literalFollows(negate(p))) ? ' ruled-out' : ''}${isNegative(n.members[0]) ? ' negative' : ''}" data-class="${n.id}" data-members="${n.members.join(',')}" data-title="${esc(title)}" transform="translate(${x},${y})"><title>${esc(title)}</title><rect x="${-s.w / 2}" y="${-s.h / 2}" width="${s.w}" height="${s.h}" rx="5"/>${eq}${lines}<text class="rel-mark" x="${s.w / 2 - 4}" y="${-s.h / 2 + 12}"></text></g>`;
+      const endpoints = new Set([n.id, ...(n.junctions || []).map(j => j.id)]);
+      const iso = layout.edges.every(e => !endpoints.has(e.from) && !endpoints.has(e.to));
+      const equivalent = n.members.length > 1 || n.junctions?.length;
+      const lines = n.members.map((m, i) => `<text ${m === FALSE ? 'data-constant="falsity"' : m === TRUE ? 'data-constant="truth"' : `data-principle="${esc(m)}"`} x="0" y="${-s.h / 2 + 8 + 17 * (i + 1) - 4 + (equivalent ? 10 : 0) + (n.junctions?.length ? 34 : 0)}" text-anchor="middle">${esc(name(m))}</text>`).join('');
+      const eq = equivalent ? `<text class="equiv" x="0" y="${-s.h / 2 + 12}" text-anchor="middle">equivalent</text>` : '';
+      const fromBackground = n.kind === 'truth' || graphNodeFollows(n);
+      const expressions = [...n.members.map(name), ...(n.junctions || []).map(j => expressionName(j.premises))];
+      const title = fromBackground ? 'Equivalent to True under the background assumptions' : expressions.join(' ≡ ') + '. Click to shade relations and inspect proofs.';
+      const attrs = `data-class="${n.id}" data-members="${n.members.join(',')}" data-title="${esc(title)}"${n.kind === 'equivalence' ? ` data-equivalence="${esc(n.junctions[0].id)}"` : ''}${n.kind === 'falsity' ? ' data-falsity="true"' : n.kind === 'truth' ? ' data-truth="true"' : ''} transform="translate(${x},${y})"`;
+      const classes = `node${iso ? ' iso' : ''}${fromBackground ? ' from-background' : ''}${n.kind === 'falsity' ? ' falsity ruled-out' : n.members.some(p => literalFollows(negate(p))) ? ' ruled-out' : ''}${n.members[0] && isNegative(n.members[0]) ? ' negative' : ''}`;
+      const rect = `<rect x="${-s.w / 2}" y="${-s.h / 2}" width="${s.w}" height="${s.h}" rx="5"/>`;
+      // Repaint only this box's conjunction strokes over its fill, clipped to
+      // the interior. Unrelated arrows stay behind boxes and their labels.
+      const children = new Set((n.junctions || []).map(j => j.id));
+      const inset = children.size ? `<defs><clipPath id="inside-${n.id}">${rect}</clipPath></defs><g clip-path="url(#inside-${n.id})"><g transform="translate(${-x},${-y})">${L.edges.filter(e => children.has(e.from) || children.has(e.to)).map(e => edgeMarkup.get(e.id).replace('class="edge-g', 'class="edge-g interior-edge')).join('')}</g></g>` : '';
+      nodesHtml += `<g class="${classes}" ${attrs}><title>${esc(title)}</title>${rect}${inset}${eq}${lines}<text class="rel-mark" x="${s.w / 2 - 4}" y="${-s.h / 2 + 12}"></text></g>`;
     }
   }
   const band = L.bands.map(b => `<g class="band" aria-hidden="true"><text class="layer-label" x="${b.left}" y="${b.labelY}">${esc(b.label)}</text><line class="band-rule" x1="${b.left}" x2="${b.right}" y1="${b.y}" y2="${b.y}"/></g>`).join('');
@@ -1521,14 +1690,31 @@ function fit() {
   svg.addEventListener('pointermove', ev => { const t = ev.target.closest('.node,.junction,.edge-g'); hover(t ? (t.dataset.falsity ? { node: 'falsity' } : t.dataset.junction ? { node: t.dataset.junction } : t.dataset.class ? { node: t.dataset.class } : { result: t.dataset.connection || t.dataset.edge }) : null); });
   svg.addEventListener('pointerleave', () => hover(null));
 })();
-// The principle whose relations are currently shaded on the graph. It
-// outlives the popup, so reading an arrow's proof does not drop the shading.
+// The principle or conjunction whose relations are currently shaded. It
+// outlives the detail panel, so reading a proof does not drop the selection.
 function shadingBase() { return state.focus; }
+const expressionLiterals = value => Array.isArray(value) ? value : value === TRUE ? [] : [value];
+const expressionName = value => Array.isArray(value) ? value.map(name).join(' ∧ ') : name(value);
+const sameExpression = (a, b) => a != null && b != null && JSON.stringify([...new Set(expressionLiterals(a))].sort()) === JSON.stringify([...new Set(expressionLiterals(b))].sort());
+function expressionStatus(a, b) {
+  const premises = expressionLiterals(a), conclusions = expressionLiterals(b);
+  const conflict = consistencyStatus(premises);
+  if (conflict.status === 'inconsistent') return {...conflict, status: 'inconsistent'};
+  const results = conclusions.map(c => implicationStatus(premises, c));
+  const failed = results.find(r => r.status === 'independent') || results.find(r => r.status === 'excludes') || results.find(r => r.status !== 'implies');
+  return failed || {status: 'implies', via: [...new Set(results.flatMap(r => r.via || []))], models: []};
+}
 function handleGraphClick(target, extend = false) {
-  const t = target.closest('.node,.junction,.edge-g');
+  // A modifier click inside a principle box selects the principle even when
+  // an incident proof stroke crosses that box. Conjunction circles stay distinct.
+  const t = target.closest('.junction') || ((extend || state.compareArmed) && target.closest('.node')) || target.closest('.node,.edge-g');
   if (!t) { select(null); return; }
-  if (t.dataset.falsity) select({type: 'falsity'});
-  else if (t.dataset.junction) select({type: 'junction', id: t.dataset.junction});
+  const literal = target.closest('[data-principle]')?.dataset.principle;
+  if (literal) select({type: 'principle', id: literal}, extend);
+  else if (t.dataset.junction) select({type: 'junction', id: t.dataset.junction}, extend);
+  else if (t.dataset.falsity) select({type: 'falsity'});
+  else if (t.dataset.truth) select({type: 'truth'});
+  else if (t.dataset.equivalence) select({type: 'junction', id: t.dataset.equivalence}, extend);
   else if (t.dataset.class) select({ type: 'principle', id: target.closest('[data-principle]')?.dataset.principle || t.dataset.members.split(',')[0] }, extend);
   else {
     const edge = graphEdgesByKey.get(t.dataset.connection || t.dataset.edge);
@@ -1536,7 +1722,8 @@ function handleGraphClick(target, extend = false) {
   }
 }
 function selectGraphEdge(edge) {
-  if (edge?.r) select({type: 'result', id: edge.r.id, display: edge.display, contraposed: edge.contraposed, premises: edge.premises, conclusion: edge.conclusion, converse: edge.converse});
+  if (edge?.trivial) select({type: 'trivial', from: edge.from, to: edge.to, display: edge.display});
+  else if (edge?.r) select({type: 'result', id: edge.r.id, display: edge.display, contraposed: edge.contraposed, premises: edge.premises, conclusion: edge.conclusion, converse: edge.converse});
   else if (edge) select({type: 'pair', a: edge.a, b: edge.b, premises: edge.premises, via: edge.via, conjectured: edge.conjectured, converse: edge.converse});
 }
 function hover(h) {
@@ -1547,8 +1734,9 @@ function hover(h) {
   if (!h) { nodes.forEach(n => n.classList.remove('dim', 'hot')); edges.forEach(e => e.classList.remove('dim', 'hot')); return; }
   const hotNodes = new Set(), hotEdges = new Set();
   if (h.node) {
-    hotNodes.add(h.node);
-    edges.forEach(e => { if (e.dataset.from === h.node || e.dataset.to === h.node) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
+    const focused = new Set([h.node, ...(layout?.byId.get(h.node)?.junctions || []).map(j => j.id)]);
+    focused.forEach(id => hotNodes.add(id));
+    edges.forEach(e => { if (focused.has(e.dataset.from) || focused.has(e.dataset.to)) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
     // junction: include its other endpoints
     edges.forEach(e => { if (hotNodes.has(e.dataset.from) && e.dataset.from.startsWith('j:') || hotNodes.has(e.dataset.to) && e.dataset.to.startsWith('j:')) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); hotNodes.add(e.dataset.to); } });
   } else if (h.result) {
@@ -1556,57 +1744,86 @@ function hover(h) {
     hotNodes.add('j:' + h.result);
     edges.forEach(e => { if (e.dataset.to.startsWith('j:') && hotNodes.has(e.dataset.to)) { hotEdges.add(e.dataset.segment); hotNodes.add(e.dataset.from); } });
   }
+  for (const id of [...hotNodes]) { const parent = layout?.byId.get(id)?.parent; if (parent) hotNodes.add(parent); }
   nodes.forEach(n => { const id = n.dataset.falsity ? 'falsity' : n.dataset.class || n.dataset.graphNode; n.classList.toggle('hot', hotNodes.has(id)); n.classList.toggle('dim', !hotNodes.has(id)); });
   edges.forEach(e => { e.classList.toggle('hot', hotEdges.has(e.dataset.segment)); e.classList.toggle('dim', !hotEdges.has(e.dataset.segment)); });
   animateFlow();
 }
-const relationClasses = ['rel-base', 'rel-other', 'rel-entailed', 'rel-excluded', 'rel-separated', 'rel-open', 'rel-conjectured', 'rel-inconsistent'];
-const relationGlyph = {entailed: '⇒', excluded: '¬', separated: '⇏', open: '?', conjectured: '?', inconsistent: '⊥'};
-const relationPhrase = {entailed: 'entailed by', excluded: 'excluded by', separated: 'not entailed by (a model separates them)', open: 'an open question relative to', conjectured: 'conditionally related to (conjecture)', inconsistent: 'inconsistent with the background, so not compared with'};
+const relationClasses = ['rel-base', 'rel-other', 'rel-entailed', 'rel-excluded', 'rel-consistent', 'rel-separated', 'rel-independent', 'rel-open', 'rel-conjectured', 'rel-inconsistent'];
+const relationGlyph = {entailed: '⇒', excluded: '¬', consistent: '✓', separated: '⇏', independent: '±', open: '?', conjectured: '?', inconsistent: '⊥'};
+const relationPhrase = {entailed: 'entailed by', excluded: 'excluded by', consistent: 'consistent with', separated: 'negation consistent with (not entailed by)', independent: 'independent of', open: 'an open question relative to', conjectured: 'conditionally related to (conjecture)', inconsistent: 'inconsistent with the background, so not compared with'};
+function selectionRelation(base, target) {
+  const status = expressionStatus(base, target).status;
+  if (status === 'implies') return {kind: 'entailed'};
+  if (status === 'inconsistent') return {kind: 'inconsistent'};
+  const premises = expressionLiterals(base), conclusions = expressionLiterals(target);
+  if (status === 'excludes' || consistencyStatus([...premises, ...conclusions]).status === 'inconsistent') return {kind: 'excluded'};
+  // A countermodel proves only that the target can fail. Independence also
+  // needs a model where it holds. Absence of a conflict is never a witness.
+  const positive = witnesses([...premises, ...conclusions]);
+  // Negating a conjunction requires at least one failed conjunct. Positive
+  // witnesses must satisfy every conjunct together in the same model.
+  const failures = conclusions.map(p => witnesses([...premises, negate(p)]));
+  const selectedFailures = failures.filter(w => w.models.length && !w.limited);
+  const negative = {models: [...new Set((selectedFailures.length ? selectedFailures : failures).flatMap(w => w.models))], limited: !selectedFailures.length && failures.some(w => w.limited)};
+  const kind = positive.models.length && negative.models.length ? 'independent'
+    : positive.models.length ? 'consistent' : negative.models.length ? 'separated'
+    : status.endsWith('?') ? 'conjectured' : 'open';
+  return {kind, positive, negative, limited: positive.limited || negative.limited};
+}
 function applySelection() {
   const sel = state.selected;
   const base = shadingBase(), other = sel?.type === 'compare' ? sel.b : null;
+  const baseMembers = new Set(base == null ? [] : base === TRUE ? [TRUE] : expressionLiterals(base));
+  const otherMembers = new Set(other == null ? [] : other === TRUE ? [TRUE] : expressionLiterals(other));
   const legend = document.getElementById('relation-legend');
   const wasHidden = legend.hidden;
-  const counts = {entailed: 0, excluded: 0, separated: 0, open: 0, conjectured: 0, inconsistent: 0};
+  const counts = {entailed: 0, excluded: 0, consistent: 0, separated: 0};
   // A principle inconsistent with the background compares to nothing: its
   // consequences by explosion are never shown.
-  const baseInconsistent = !!base && !!layout && consistencyStatus([base]).status === 'inconsistent';
+  const baseInconsistent = !!base && !!layout && consistencyStatus(expressionLiterals(base)).status === 'inconsistent';
   const shading = !!base && !!layout && !baseInconsistent;
   svg.classList.toggle('shaded', shading);
-  svg.querySelectorAll('.node').forEach(n => {
-    const members = (n.dataset.members || '').split(',');
+  svg.querySelectorAll('#nodes .node').forEach(n => {
+    const members = (n.dataset.members || '').split(',').filter(Boolean), box = layout.byId.get(n.dataset.class);
     n.classList.remove(...relationClasses);
-    n.classList.toggle('selected', !!base && members.includes(base) || !!other && members.includes(other));
+    const contains = (expression, selected) => members.some(p => selected.has(p)) || !members.length && box.junctions.some(j => sameExpression(expression, j.premises));
+    const inBase = contains(base, baseMembers), inOther = contains(other, otherMembers);
+    n.classList.toggle('selected', inBase || inOther);
+    n.querySelectorAll('text[data-principle]').forEach(label => label.classList.toggle('selection-member', baseMembers.has(label.dataset.principle) || otherMembers.has(label.dataset.principle)));
     let title = n.dataset.title || '', glyph = '';
-    if (shading && !n.dataset.falsity) {
-      if (members.includes(base)) { n.classList.add('rel-base'); title = `${name(base)}: the focused principle.`; }
+    if (shading) {
+      if (inBase) { n.classList.add('rel-base'); title = `${expressionName(base)}: the selected ${baseMembers.size > 1 ? 'conjunction' : 'principle'}. Shift-click to add or remove principles.`; }
       else if (!n.classList.contains('from-background')) {
-        const target = members[0];
-        const status = implicationStatus([base], target).status;
-        const kind = status.endsWith('?') ? 'conjectured' : status === 'implies' ? 'entailed' : status === 'excludes' ? 'excluded' : status === 'independent' ? 'separated' : 'open';
-        // Background-inconsistent principles are excluded by everything; that
-        // says nothing about the focused principle, so count them apart.
-        const inconsistent = kind === 'excluded' && consistencyStatus([target]).status === 'inconsistent';
-        const shown = inconsistent ? 'inconsistent' : kind;
-        counts[shown]++;
-        n.classList.add('rel-' + shown);
-        if (members.includes(other)) n.classList.add('rel-other');
-        glyph = relationGlyph[shown];
-        title = `${name(target)}: ${relationPhrase[shown]} ${name(base)}. Shift-click to compare.`;
+        const target = graphNodeExpression(box);
+        // False, including everything equivalent to it under the background,
+        // is excluded by any consistent selection.
+        const relation = n.dataset.falsity ? {kind: 'excluded'} : selectionRelation(base, target), {kind} = relation;
+        if (kind === 'independent') { counts.consistent++; counts.separated++; }
+        else if (Object.hasOwn(counts, kind)) counts[kind]++;
+        n.classList.add('rel-' + kind);
+        if (inOther) n.classList.add('rel-other');
+        glyph = relationGlyph[kind];
+        title = `${expressionName(target)}: ${relationPhrase[kind]} ${expressionName(base)}.${kind === 'independent' ? ' Models witness both the principle and its negation with the selection.' : ''}${relation.limited ? ' A witness is outside the selected sources.' : ''} Shift-click to add or remove ${members.length ? 'this principle' : 'these premises'}.`;
       }
     }
     const t = n.querySelector('title'); if (t) t.textContent = title;
     const mark = n.querySelector('.rel-mark'); if (mark) mark.textContent = glyph;
   });
+  svg.querySelectorAll('.junction').forEach(n => { const j = layout?.byId.get(n.dataset.junction); n.classList.toggle('selected', !!j && (sameExpression(base, j.premises) || sameExpression(other, j.premises))); });
+  document.querySelectorAll('#pr-filters .principle-name').forEach(button => button.setAttribute('aria-pressed', baseMembers.has(button.dataset.principle) || otherMembers.has(button.dataset.principle)));
+
   if (!base || state.tab !== 'graph' || !layout) { legend.hidden = true; return; }
   legend.hidden = false;
-  const key = (kind, label) => counts[kind] || kind === 'open' ? `<span class="key ${kind}"><i>${relationGlyph[kind]}</i>${label} <span class="n">${counts[kind]}</span></span>` : '';
-  const hint = state.compareArmed ? `Click a principle to compare it with ${esc(name(base))}` : `${other ? '' : '<button class="lnk" data-compare-arm="1">Compare with…</button> or Shift-click a principle · '}Esc clears`;
+  const fullLabel = expressionName(base);
+  const label = Array.isArray(base) && fullLabel.length > 100 ? `${base.length} selected principles` : fullLabel;
+  const key = (kind, label) => `<span class="key ${kind}"><i>${relationGlyph[kind]}</i>${label} <span class="n">${counts[kind]}</span></span>`;
+  const keys = key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
+  const hint = state.compareArmed ? 'Click a principle or conjunction to compare with the selection' : '<button class="lnk" data-compare-arm="1">Compare with…</button> · Shift-click to add or remove principles · Esc clears';
   const modes = state.conjectureOnly || state.unpublishedOnly ? '<span class="legend-hint">Shading uses all selected proved evidence, not only the arrows shown.</span>' : '';
   legend.innerHTML = shading
-    ? `<b>Relative to ${esc(name(base))}:</b>${key('entailed', 'entailed')}${key('excluded', 'excluded')}${key('separated', 'separated by a model')}${key('open', 'open')}${key('conjectured', 'conjectured')}${key('inconsistent', 'inconsistent')}${modes}<span class="legend-hint">${hint}</span>`
-    : `<b>${esc(name(base))}</b> <span class="rel-status inconsistent">is inconsistent with the background (⇒ ⊥); no consequences are shaded.</span><span class="legend-hint">Esc clears</span>`;
+    ? `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${keys}${modes}<span class="legend-hint">${hint}</span>`
+    : `<b title="${esc(fullLabel)}">${esc(label)}</b> <span class="rel-status inconsistent">is inconsistent with the background (⇒ ⊥); no consequences are shaded.</span>${keys}<span class="legend-hint">Esc clears</span>`;
   legend.querySelectorAll('button[data-compare-arm]').forEach(b => b.addEventListener('click', armCompare));
   // The legend takes a strip from the graph area; keep the bottom row in view.
   if (wasHidden && layout.visible.length) {
@@ -1767,18 +1984,26 @@ function renderResults() {
   const q = state.search.trim().toLowerCase();
   const items = [...P, ...R, ...MODELS].filter(x => !q || [JSON.stringify(x), x.premises ? resultStmt(x, false) : x.satisfies ? modelStmt(x, false) : ''].join(' ').toLowerCase().includes(q))
     .sort((a, b) => dateOf(b).localeCompare(dateOf(a)));
+  // One row per record at its certificate date, plus one row per logged revision at
+  // the revision's own date: later additions to a record are changes too.
+  const rows = items.flatMap(x => [{ date: dateOf(x), x }, ...(x.changes || []).map(change => ({ date: String(change.date || ''), x, change }))])
+    .sort((a, b) => b.date.localeCompare(a.date));
   let h = `<table class="results changes"><tbody>`;
-  for (const x of items) {
+  for (const { date, x, change } of rows) {
     const k = kindOf(x);
-    const stmt = k === 'principle' ? `<b>${esc(x.name)}</b> &nbsp; ${esc(x.statement)}` : k === 'result' ? resultStmt(x) : `<b>${esc(x.name)}</b> &nbsp; ${modelStmt(x)}`;
-    const by = k === 'principle' ? '' : esc(x.certificate.produced_by || '');
-    h += `<tr data-kind="${k}" data-id="${x.id}" class="${k !== 'principle' && !passes(x) ? 'filtered' : ''}"><td class="mono nowrap">${esc(dateOf(x))}</td><td><span class="badge ${k === 'model' ? 'indep' : 'kind'}">${x.status === 'conjectured' ? 'conjecture' : k}</span></td><td class="stmt">${stmt}</td><td>${k === 'principle' ? '' : certBadges(x)}</td><td class="mono">${by}</td></tr>`;
+    const title = k === 'principle' ? `<b>${esc(x.name)}</b>` : k === 'result' ? resultStmt(x) : `<b>${esc(x.name)}</b>`;
+    const stmt = change
+      ? `${title} &nbsp; ${esc(change.summary || '')}${(change.satisfies || []).length ? ` <span class="revision-list">Now satisfies: ${change.satisfies.map(name).map(esc).join(', ')}.</span>` : ''}${(change.violates || []).length ? ` <span class="revision-list">Now violates: ${change.violates.map(name).map(esc).join(', ')}.</span>` : ''}`
+      : k === 'principle' ? `${title} &nbsp; ${esc(x.statement)}` : k === 'result' ? title : `${title} &nbsp; ${modelStmt(x)}`;
+    const by = change ? esc(change.by || '') : k === 'principle' ? '' : esc(x.certificate.produced_by || '');
+    const badge = change ? `<span class="badge ${k === 'model' ? 'indep' : 'kind'} revised">revised ${k}</span>` : `<span class="badge ${k === 'model' ? 'indep' : 'kind'}">${x.status === 'conjectured' ? 'conjecture' : k}</span>`;
+    h += `<tr data-kind="${k}" data-id="${x.id}" class="${[k !== 'principle' && !passes(x) ? 'filtered' : '', change ? 'revision' : ''].join(' ').trim()}"><td class="mono nowrap">${esc(date)}</td><td>${badge}</td><td class="stmt">${stmt}</td><td>${k === 'principle' ? '' : certBadges(x)}</td><td class="mono">${by}</td></tr>`;
   }
   h += '</tbody></table>';
   const el = document.getElementById('results'); el.innerHTML = h;
   renderSubscripts(el);
   el.querySelectorAll('tr[data-id]').forEach(tr => tr.addEventListener('click', () => select({ type: tr.dataset.kind, id: tr.dataset.id })));
-  document.getElementById('n-results').textContent = items.length;
+  document.getElementById('n-results').textContent = rows.length;
 }
 function conjectureEvidence(answer, evidenceBase = baseE, summary = 'Evidence') {
   // The rule chains returned for a witness certify the first matching model.
@@ -1794,7 +2019,7 @@ function conjectureEvidence(answer, evidenceBase = baseE, summary = 'Evidence') 
   for (const id of answer.via) via.add(id);
   const items = [...(witness ? [witness] : []), ...[...via].map(id => byRid.get(id))];
   if (!items.length) return '<p class="note">This follows directly from the selected assumptions and the question’s requirements.</p>';
-  return `<details class="conjecture-evidence"><summary>${esc(summary)} ${evidenceBadges({items})}</summary><ol>${items.map(x => `<li><button class="lnk" data-open-${kindOf(x)}="${esc(x.id)}">${x.satisfies ? esc(x.name) : resultStmt(x)} — write-up</button> ${certBadges(x)}</li>`).join('')}</ol>${sourceSummary(items)}</details>`;
+  return `<details class="conjecture-evidence"><summary>${esc(summary)} ${evidenceBadges({items})}</summary><ol>${items.map(x => `<li><button class="lnk" data-open-${kindOf(x)}="${esc(x.id)}">${x.satisfies ? esc(x.name) : resultStmt(x)} — details</button> ${certBadges(x)}</li>`).join('')}</ol>${sourceSummary(items)}</details>`;
 }
 function renderOpen() {
   const questions = [...R, ...MODELS].filter(x => x.status === 'conjectured' || x.was_conjectured)
@@ -1925,11 +2150,33 @@ function openPaper(id) {
 }
 function fileLinks(x) {
   const f = x.files || {}; const parts = [];
-  if (f.html) parts.push(`<a href="${f.html}" target="_blank">html</a>`);
   if (f.pdf) parts.push(`<a href="${f.pdf}" target="_blank">pdf</a>`);
-  if (f.md) parts.push(`<a href="${f.md}" target="_blank">md</a>`);
   if (x.certificate.lean_ref && (DATA.downloads || {}).lean) parts.push(`<a href="${DATA.downloads.lean}" target="_blank">lean</a>`);
-  return parts.length ? `<div class="links">${parts.join(' · ')}${f.handwritten ? ' <span class="dim">(hand-written)</span>' : ''}</div>` : '';
+  return parts.length ? `<div class="links">${parts.join(' · ')}</div>` : '';
+}
+// A record with a hand-written write-up shows that write-up in full on its page.
+// The record's own description is rendered first so the page is complete without
+// network access; the write-up replaces it once fetched.
+function writeupNote(x) {
+  const f = x.files || {};
+  return f.handwritten && f.html ? `<p class="note writeup-note">The record’s own summary follows; the full details are at <a href="${esc(f.html)}" target="_blank">${esc(f.html)}</a>.</p>` : '';
+}
+function loadWriteup(el, x) {
+  const f = x.files || {}, box = el.querySelector('.record-summary');
+  if (!box || !f.handwritten || !f.html || typeof fetch !== 'function') return;
+  fetch(f.html).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(html => {
+    if (!box.isConnected) return;
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    doc.querySelectorAll('nav.writeup-nav, header#title-block-header, script, style').forEach(n => n.remove());
+    doc.body.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href'), m = /^([a-z0-9-]+)\.html$/.exec(href);
+      if (m && (byRid.has(m[1]) || byMid.has(m[1]))) { a.setAttribute('href', 'writeups/' + href); a.dataset.openWriteup = m[1]; }
+      else if (/^[a-z0-9.-]+\.(html|md|pdf)$/.test(href)) a.setAttribute('href', 'writeups/' + href);
+      else if (/^https?:/.test(href)) a.target = '_blank';
+    });
+    box.className = 'prose writeup'; box.innerHTML = doc.body.innerHTML;
+    box.querySelectorAll('a[data-open-writeup]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); const id = a.dataset.openWriteup; openPage({ type: byRid.has(id) ? 'result' : 'model', id }); }));
+  }).catch(() => {});
 }
 function pstmt(id) { if (id === FALSE) return "<li><b>False (⊥).</b> These premises cannot all hold together.</li>"; const p = byPid.get(id); return `<li><button class="lnk" data-principle="${id}"><b>${esc(p.name)}</b></button> ${esc(p.statement)}</li>`; }
 function renderPage(sel) {
@@ -1942,14 +2189,14 @@ function renderPage(sel) {
     const r = byRid.get(sel.id);
     h += `<h1>${resultStmt(r)}</h1>${fullConjunctionDetails(r)}<div class="badges">${certBadges(r)}</div>${fileLinks(r)}${certDl(r.certificate)}`;
     h += `<h2>Premises</h2><ul class="plist">${r.premises.map(pstmt).join('') || '<li>⊤</li>'}</ul><h2>Conclusion</h2><ul class="plist">${pstmt(r.conclusion)}</ul>`;
-    if (r.proof) h += `<h2>Proof</h2><div class="prose">${fmt(r.proof)}</div>`;
+    h += `<div class="record-summary">${writeupNote(r)}${r.proof ? `<h2>Proof</h2><div class="prose">${fmt(r.proof)}</div>` : ''}</div>`;
     if (r.notes) h += `<h2>Notes</h2><div class="prose">${fmt(r.notes)}</div>`;
     h += sourceList([r]);
     h += `<div class="file">${esc(r.file)}</div>`;
   } else if (sel.type === 'model') {
     const m = byMid.get(sel.id);
     h += `<h1>${esc(m.name)}</h1><div class="badges">${certBadges(m)}</div>${fileLinks(m)}${certDl(m.certificate)}`;
-    if (m.description) h += `<h2>Construction</h2><div class="prose">${fmt(m.description)}</div>`;
+    h += `<div class="record-summary">${writeupNote(m)}${m.description ? `<h2>Construction</h2><div class="prose">${fmt(m.description)}</div>` : ''}</div>`;
     const st = c => verdictButton(m, c, modelEvidence(m, c));
     h += `<h2>Principles</h2><table class="results"><tbody>${principleOrder().map(c => `<tr><td class="mono nowrap">${st(c)}</td><td><button class="lnk" data-principle="${c}">${esc(name(c))}</button></td></tr>`).join('')}</tbody></table>`;
     if (m.notes) h += `<h2>Notes</h2><div class="prose">${fmt(m.notes)}</div>`;
@@ -1962,9 +2209,9 @@ function renderPage(sel) {
     if (!e) h += '<p>No evidence is available under the current filters.</p>';
     else {
       h += `<div class="badges">${e.value ? '✓ satisfied' : '✗ violated'} ${evidenceBadges(e)}</div>`;
-      h += `<p>${e.direct ? 'This assertion is recorded in the model write-up.' : e.value ? 'This follows from the model’s recorded properties using the results below.' : `Assuming ${esc(name(sel.principle))} in this model would imply ${esc(name(e.contradiction))}, ${e.contradiction === FALSE ? 'a contradiction' : 'which the model violates'}.`}</p>`;
-      h += `<h2>Model evidence</h2><p><button class="lnk" data-open-model="${m.id}">${esc(m.name)} — write-up</button> ${certBadges(m)}</p>`;
-      if (e.rules.length) h += `<h2>Derivation</h2><ol>${e.rules.map(id => `<li><button class="lnk" data-open-result="${id}">${resultStmt(byRid.get(id))} — write-up</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
+      h += `<p>${e.direct ? 'This assertion is recorded directly for the model.' : e.value ? 'This follows from the model’s recorded properties using the results below.' : `Assuming ${esc(name(sel.principle))} in this model would imply ${esc(name(e.contradiction))}, ${e.contradiction === FALSE ? 'a contradiction' : 'which the model violates'}.`}</p>`;
+      h += `<h2>Model evidence</h2><p><button class="lnk" data-open-model="${m.id}">${esc(m.name)} — details</button> ${certBadges(m)}</p>`;
+      if (e.rules.length) h += `<h2>Derivation</h2><ol>${e.rules.map(id => `<li><button class="lnk" data-open-result="${id}">${resultStmt(byRid.get(id))} — details</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
       if (!e.direct && topicBackground.length) h += `<p>Standing background: ${topicBackground.map(name).map(esc).join(', ')}.</p>`;
       h += sourceList(e.items);
     }
@@ -1983,8 +2230,9 @@ function renderPage(sel) {
   el.querySelectorAll('tr[data-model]').forEach(tr => tr.addEventListener('click', () => select({ type: 'model', id: tr.dataset.model })));
   el.querySelector('#page-back').addEventListener('click', () => showTab(state.tab));
   wire(el);
+  if (sel.type === 'result' || sel.type === 'model') loadWriteup(el, sel.type === 'result' ? byRid.get(sel.id) : byMid.get(sel.id));
 }
-function openPage(sel) { hover(null); stopFlow(); renderPage(sel); document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', 'false')); document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-page')); }
+function openPage(sel) { hover(null); stopFlow(); renderPage(sel); document.getElementById('pop').hidden = true; document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', 'false')); document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-page')); }
 function showTab(tab) {
   hover(null); stopFlow();
   state.tab = tab;
@@ -1998,17 +2246,21 @@ function showTab(tab) {
   }
   document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x.dataset.tab === tab));
   document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-' + tab));
+  document.getElementById('pop').hidden = true;
+  placeDetail();
   if (tab === 'graph') fit();
 }
 
 // ---------------------------------------------------------------- detail
 function wire(el) {
+  el.querySelectorAll('[data-junction-proof]').forEach(b => b.addEventListener('click', () => selectGraphEdge(layout.byId.get(b.dataset.junctionProof)?.consequences[Number(b.dataset.proofIndex)])));
   renderSubscripts(el);
   el.querySelectorAll('button[data-paper]').forEach(b => b.addEventListener('click', () => openPaper(b.dataset.paper)));
   el.querySelectorAll('button[data-open-principle]').forEach(b => b.addEventListener('click', () => openPage({ type: 'principle', id: b.dataset.openPrinciple })));
   el.querySelectorAll('button[data-graph-connection]').forEach(b => b.addEventListener('click', () => selectGraphEdge(graphEdgesByKey.get(b.dataset.graphConnection))));
   el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', ev => select({ type: 'principle', id: b.dataset.principle }, ev.shiftKey || ev.metaKey || ev.ctrlKey)));
   el.querySelectorAll('button[data-compare-arm]').forEach(b => b.addEventListener('click', armCompare));
+  el.querySelectorAll('button[data-remove-selection]').forEach(b => b.addEventListener('click', () => select({type: 'principle', id: b.dataset.removeSelection}, true)));
   el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
   el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
   el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
@@ -2046,28 +2298,43 @@ function edgeContext(premises, conclusion) {
 }
 function renderDetail() {
   const el = document.getElementById('pop'); const sel = state.selected;
+  placeDetail();
   if (!sel || sel.type === 'cell') { el.hidden = true; return; }
   let h = '';
   if (sel.type === 'compare') {
     const {a, b} = sel;
-    h += `<div class="pop-t">${esc(name(a))} · ${esc(name(b))}</div><p class="note">Under the current background and selected evidence.</p>`;
-    h += statusLine(`${esc(name(a))} ⇒ ${esc(name(b))}`, implicationStatus([a], b));
-    h += statusLine(`${esc(name(b))} ⇒ ${esc(name(a))}`, implicationStatus([b], a));
-    const joint = consistencyStatus([a, b]);
-    const alone = [a, b].find(l => consistencyStatus([l]).status === 'inconsistent');
-    h += statusLine(`${esc(name(a))} ∧ ${esc(name(b))}`, joint, true) + (alone && joint.status === 'inconsistent' ? `<p class="note">${esc(name(alone))} is already inconsistent with the background.</p>` : '');
-    h += `<p class="note">Shift-click another principle to compare it with ${esc(name(a))}.</p>`;
+    h += `<div class="pop-t">${esc(expressionName(a))} · ${esc(expressionName(b))}</div><p class="note">Under the current background and selected evidence.</p>`;
+    h += statusLine(`${esc(expressionName(a))} ⇒ ${esc(expressionName(b))}`, expressionStatus(a, b));
+    h += statusLine(`${esc(expressionName(b))} ⇒ ${esc(expressionName(a))}`, expressionStatus(b, a));
+    const joint = consistencyStatus([...expressionLiterals(a), ...expressionLiterals(b)]);
+    const alone = [a, b].find(l => consistencyStatus(expressionLiterals(l)).status === 'inconsistent');
+    h += statusLine(`${esc(expressionName(a))} ∧ ${esc(expressionName(b))}`, joint, true) + (alone && joint.status === 'inconsistent' ? `<p class="note">${esc(expressionName(alone))} is already inconsistent with the background.</p>` : '');
+    if (!Array.isArray(b) && b !== FALSE && b !== TRUE && selectionRelation(a, b).kind === 'independent') h += `<p class="note"><b>${esc(name(b))} is independent of ${esc(expressionName(a))}:</b> recorded models satisfy the selection with ${esc(name(b))}, and with ${esc(name(negate(b)))}.</p>`;
+    h += `<p class="note"><button class="lnk" data-compare-arm="1">Compare with…</button> another principle or conjunction.</p>`;
+  } else if (sel.type === 'selection') {
+    h += `<div class="pop-t">${esc(expressionName(sel.premises))}</div><p class="note">${sel.premises.length} selected principles. The graph shades each principle by its relation to their conjunction. Shift-click to add or remove principles.</p>`;
+    h += `<ul class="selection-list">${sel.premises.map(literal => {
+      const principle = byPid.get(baseId(literal));
+      return `<li><details><summary>${esc(name(literal))}</summary>${isNegative(literal) ? '<p>Negation of:</p>' : ''}<p>${esc(principle?.statement || name(literal))}</p></details><button class="lnk" data-remove-selection="${esc(literal)}" aria-label="Remove ${esc(name(literal))} from selection">remove</button></li>`;
+    }).join('')}</ul>`;
+    h += statusLine('Joint consistency', consistencyStatus(sel.premises), true);
+    h += '<p><button class="lnk" data-compare-arm="1">Compare with…</button></p>';
   } else if (sel.type === 'junction') {
     const junction = layout?.byId.get(sel.id);
     if (!junction) { el.hidden = true; return; }
-    const consequences = layout.edges.filter(e => e.from === junction.id);
-    h += `<div class="pop-t">${esc(junction.premises.map(name).join(' ∧ '))}</div><p class="note">All these premises together. Select a consequence for its evidence.</p><ul>${consequences.map(e => `<li><button class="lnk" data-graph-connection="${esc(e.key)}">${esc(name(e.conclusion || e.b))}</button> ${e.r ? certBadges(e.r) : `<span class="badge ${e.conjectured ? 'conj' : 'kind'}">${e.conjectured ? 'conjecture' : 'derived proof'}</span>`}</li>`).join('')}</ul>`;
+    const consequences = junction.consequences || layout.edges.filter(e => e.from === junction.id);
+    h += `<div class="pop-t">${esc(junction.premises.map(name).join(' ∧ '))}</div><p class="note">The graph shades each principle by its relation to this conjunction. Shift-click to add or remove principles. <button class="lnk" data-compare-arm="1">Compare with…</button></p><ul>${consequences.map(e => `<li><button class="lnk" data-graph-connection="${esc(e.key)}" data-junction-proof="${esc(junction.id)}" data-proof-index="${consequences.indexOf(e)}">${esc(name(e.conclusion || e.b))}</button> ${e.r ? certBadges(e.r) : `<span class="badge ${e.conjectured ? 'conj' : 'kind'}">${e.conjectured ? 'conjecture' : 'derived proof'}</span>`}</li>`).join('')}</ul>`;
+    if (junction.equivalence) h += '<h3>Equivalence</h3>' + junction.equivalence.map(e => statusLine(esc(e.label), e.status)).join('');
+  } else if (sel.type === 'trivial') {
+    h += `<div class="pop-t">${esc(sel.display)}</div><p>${sel.from === 'falsity' ? 'False implies every proposition (explosion).' : 'Every proposition implies True.'}</p>`;
+  } else if (sel.type === 'truth') {
+    h += '<div class="pop-t">True (⊤)</div><p>This box contains principles that follow from the background. Every proposition implies True.</p>';
   } else if (sel.type === 'pair') {
     const via = sel.via || pairStatus(sel.a, sel.b).via || [];
     h += `<div class="pop-t">${esc((sel.premises || [sel.a]).map(name).join(' ∧ '))} ⇒ ${esc(name(sel.b))}</div><p class="note">${sel.conjectured ? 'Conditional on the conjectures below, under the current background.' : 'Derived proof using the results below and the current background. Intermediate principles may be hidden or used together.'}</p><ol>${via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol>`;
     h += edgeContext(sel.premises || [sel.a], sel.b);
   } else if (sel.type === 'falsity') {
-    h += '<div class="pop-t">False (⊥)</div><div class="pop-s">The incoming premises cannot all hold together. This is not an optional principle.</div><div class="links"><button class="lnk" data-goto="1">write-up</button></div>';
+    h += '<div class="pop-t">False (⊥)</div><div class="pop-s">The incoming premises cannot all hold together. This is not an optional principle.</div><div class="links"><button class="lnk" data-goto="1">details</button></div>';
   } else if (sel.type === 'principle') {
     for (const mid of [sel.id]) {
       const m = byPid.get(mid);
@@ -2075,12 +2342,12 @@ function renderDetail() {
       const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
       if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
     }
-    if (state.tab === 'graph' && layout) h += '<p class="note">The graph shades each principle by its relation to this one. <button class="lnk" data-compare-arm="1">Compare with…</button> or Shift-click another principle.</p>';
-    h += '<div class="links"><button class="lnk" data-goto="1">write-up</button></div>';
+    if (state.tab === 'graph' && layout) h += '<p class="note">The graph shades each principle by its relation to this one. Shift-click to add or remove principles. <button class="lnk" data-compare-arm="1">Compare with…</button></p>';
+    h += '<div class="links"><button class="lnk" data-goto="1">details</button></div>';
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
-    if (e) h += `<div class="badges">${evidenceBadges(e)}</div><div class="pop-l">${e.direct ? 'Recorded in the model write-up.' : 'Derived from the model and the recorded implications.'}</div>${sourceSummary(e.items)}<div class="links"><button class="lnk" data-goto="1">write-up</button></div>`;
+    if (e) h += `<div class="badges">${evidenceBadges(e)}</div><div class="pop-l">${e.direct ? 'Recorded directly for the model.' : 'Derived from the model and the recorded implications.'}</div>${sourceSummary(e.items)}<div class="links"><button class="lnk" data-goto="1">details</button></div>`;
   } else {
     const x = sel.type === 'result' ? byRid.get(sel.id) : byMid.get(sel.id);
     if (sel.type === 'model') {
@@ -2090,13 +2357,16 @@ function renderDetail() {
       if (gaps.length) h += `<p class="pop-l">Unknown assumptions: ${gaps.map(name).map(esc).join(', ')}</p>`;
     }
     if (sel.display) h += `<div class="pop-t">${esc(sel.display)}</div><p class="note">${sel.contraposed ? 'Contrapositive, under the current assumptions.' : 'Shown under the current assumptions.'} Original result:</p>`;
-    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="badges">${certBadges(x)}</div>${sourceSummary([x])}${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">write-up</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
+    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="badges">${certBadges(x)}</div>${sourceSummary([x])}${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">details</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
     if (sel.type === 'result' && sel.premises) h += edgeContext(sel.premises, sel.conclusion);
   }
-  el.innerHTML = h; el.hidden = false; wire(el);
+  el.innerHTML = '<button class="lnk detail-close" aria-label="Close details">×</button>' + h; el.hidden = false; el.scrollTop = 0; wire(el);
+  el.querySelector('.detail-close').addEventListener('click', () => { el.hidden = true; });
+  if (el.parentElement.id === 'graph-details') el.parentElement.scrollTop = 0;
   el.querySelector('button[data-goto]')?.addEventListener('click', () => { const e = sel.type === 'model-verdict' && modelEvidence(byMid.get(sel.id), sel.principle); openPage(e && e.direct ? { type: 'model', id: sel.id } : sel); el.hidden = true; });
   const anchor = popAt ? { ...popAt } : null;
   const position = () => {
+    if (el.parentElement.id === 'graph-details') return;
     const W = window.innerWidth, H = window.innerHeight, r = el.getBoundingClientRect();
     let x = (anchor ? anchor.x + 12 : W - r.width - 24), y = (anchor ? anchor.y + 12 : 80);
     if (x + r.width > W - 8) x = Math.max(8, (anchor ? anchor.x : W) - r.width - 12);
@@ -2106,22 +2376,42 @@ function renderDetail() {
   el.querySelectorAll('details.full-conjunction').forEach(details => details.addEventListener('toggle', position));
   position();
 }
-document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !el.contains(ev.target)) el.hidden = true; });
+function placeDetail() {
+  const el = document.getElementById('pop');
+  const docked = document.getElementById('pane-graph').dataset.active === 'true';
+  document.getElementById(docked ? 'graph-details' : 'floating-details').appendChild(el);
+  if (docked) { el.style.removeProperty('left'); el.style.removeProperty('top'); }
+}
+document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && el.parentElement.id !== 'graph-details' && !el.contains(ev.target)) el.hidden = true; });
 document.addEventListener('keydown', ev => {
   if (ev.key !== 'Escape' || ev.target.id === 'graph-search') return;
   if (state.focus || state.compareArmed || state.selected?.type === 'principle' || state.selected?.type === 'compare') select(null);
   else document.getElementById('pop').hidden = true;
 });
 function select(sel, extend = false) {
-  if (sel?.type === 'principle') {
-    const literal = sel.id;
-    // Shift-click, or an armed compare, reads a second principle against the focused one.
-    if ((extend || state.compareArmed) && state.focus && state.focus !== literal) sel = {type: 'compare', a: state.focus, b: literal};
-    else if (isNegative(sel.id)) sel = {...sel, id: baseId(sel.id), negative: true};
+  const incoming = sel?.type === 'principle' ? (sel.negative ? '!' : '') + sel.id : sel?.type === 'junction' ? layout?.byId.get(sel.id)?.premises : null;
+  if (sel?.type === 'junction' && !incoming) return;
+  if (incoming != null) {
+    if (extend) {
+      // Keep the user's actual choices, including redundant or equivalent
+      // principles. Logical closure is used for shading, never for selection.
+      const current = new Set(state.focus == null ? [] : expressionLiterals(state.focus));
+      const added = expressionLiterals(incoming), remove = added.every(p => current.has(p));
+      for (const p of added) remove ? current.delete(p) : current.add(p);
+      const premises = [...current];
+      sel = !premises.length ? null : premises.length === 1 ? {type: premises[0] === FALSE ? 'falsity' : 'principle', id: premises[0]} : {type: 'selection', premises};
+    } else if (state.compareArmed && state.focus != null && !sameExpression(state.focus, incoming)) {
+      sel = {type: 'compare', a: state.focus, b: incoming};
+    }
   }
+  if (sel?.type === 'principle' && isNegative(sel.id)) sel = {...sel, id: baseId(sel.id), negative: true};
   state.compareArmed = false;
   if (!sel) state.focus = null;
   else if (sel.type === 'principle') state.focus = (sel.negative ? '!' : '') + sel.id;
+  else if (sel.type === 'falsity') state.focus = FALSE;
+  else if (sel.type === 'truth') state.focus = TRUE;
+  else if (sel.type === 'junction') state.focus = [...layout.byId.get(sel.id).premises];
+  else if (sel.type === 'selection') state.focus = [...sel.premises];
   else if (sel.type === 'compare') state.focus = sel.a;
   if (sel?.type === 'model') { state.modelId = sel.id; renderModels(); }
   state.selected = sel; renderDetail(); applySelection();
@@ -2200,7 +2490,7 @@ function renderBackground() {
     if (!row) {
       row = document.createElement('div'); row.className = 'background-row'; row.dataset.backgroundId = id;
       row.innerHTML = `${assumptionButtons(id)}<span class="sidebar-principle-line"><button class="lnk" data-background-principle="${id}">${esc(name(id))}</button>${topicBackground.includes(id) ? '<span class="background-fixed">fixed</span>' : `<button class="lnk" data-remove-background="${id}" aria-label="Return ${esc(name(id))} to graph">return</button>`}</span>`;
-      row.querySelector('[data-background-principle]').addEventListener('click', () => select({type: 'principle', id}));
+      row.querySelector('[data-background-principle]').addEventListener('click', ev => select({type: 'principle', id}, ev.shiftKey || ev.metaKey || ev.ctrlKey));
       row.querySelector('[data-remove-background]')?.addEventListener('click', () => changeBackground(id, false));
       wireAssumptions(row); list.appendChild(row);
     }
@@ -2314,6 +2604,7 @@ document.getElementById('show-resolved').addEventListener('change', e => {
   } catch { /* Local-file viewers may not allow history updates. */ }
   renderOpen();
 });
+document.getElementById('trivial-arrows').addEventListener('change', e => { state.trivial = e.target.checked; renderAll(true); });
 document.getElementById('show-iso').addEventListener('change', e => { state.showIso = e.target.checked; renderAll(true); });
 document.getElementById('reduce-arrows').addEventListener('change', e => { state.reduced = e.target.checked; renderAll(true); });
 document.getElementById('fit').addEventListener('click', fit);
@@ -2440,7 +2731,8 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
       handle.classList.add('dragging');
       document.body.style.setProperty('--resize-cursor', key === 'sidebar' ? 'col-resize' : 'row-resize');
       document.body.classList.add('resizing-panes');
-      document.getElementById('pop').hidden = true;
+      const details = document.getElementById('pop');
+      if (details.parentElement.id !== 'graph-details') details.hidden = true;
     });
     handle.addEventListener('lostpointercapture', () => finish());
     handle.addEventListener('dblclick', () => { finish(); delete saved[key]; apply(); persist(); });

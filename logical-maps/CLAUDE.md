@@ -110,6 +110,11 @@ When you (an AI) add or edit a result or model:
   currently proved/refuted questions unless **Show resolved** is checked.
 - Do not edit an existing paper/submission proof or a legacy human-authored
   proof to change its mathematical content — add a note or a new result instead.
+- When you add content to an existing record after its certificate date (a
+  newly verified property of a model, an added proof, a corrected statement),
+  append an entry to its `changes` list: `date`, `by`, `summary`, and for models
+  the newly verified `satisfies`/`violates` ids. The Changes tab lists each entry
+  under its own date. Never move `certificate.date`; it is the record's origin.
 - Independences are recorded as models (`models/<id>.yaml`), never as results.
   For a model, list every principle you have actually verified in `satisfies`
   and `violates` — the engine derives the rest and lists what is unknown. Add a

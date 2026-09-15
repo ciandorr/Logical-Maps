@@ -17,7 +17,7 @@ for(const candidate of 'abcd'){
   d.getElementById('background-reset').click();
   for(const p of 'abcd')if(p!==candidate)w.eval(`changeBackground('${p}',true)`);
   assert.equal(d.getElementById('graph-warning').hidden,true);
-  assert.ok(d.querySelector(`#graph .ruled-out[data-members="${candidate}"]`));
+  assert.ok([...d.querySelectorAll('#graph .node.ruled-out')].some(n=>n.dataset.members.split(',').includes(candidate)));
   w.eval(`select({type:'principle',id:'${candidate}'})`);
   assert.match(d.querySelector('#pop').textContent,/Ruled out by the background/);
   d.querySelector('#pop [data-result="conflict"]').click();
@@ -81,7 +81,8 @@ for(const id of ['archimedean-gambles','countable-sure-thing']){
  assert.equal(row.querySelector('[data-assume-negative]').getAttribute('aria-pressed'),'false');
  assert.doesNotMatch(row.textContent,/⇐ (?:in|out)/);
 }
-assert.ok(rd.querySelector('#graph [data-edge="rich-simple-dominance-refutes-archimedean-gambles"]'));
+real.window.select({type:'principle',id:'archimedean-gambles'});
+assert.ok(rd.querySelector('#pop [data-result="rich-simple-dominance-refutes-archimedean-gambles"]'));
 
 for(const id of ['total-exact-ultrafilter','total-continuous-ultrafilter','affine-symmetric-extension']){
  assert.ok(rd.querySelector(`#models .ex-m [data-model="${id}"]`));
@@ -109,7 +110,8 @@ rd.getElementById('background-reset').click();
 // The stronger recorded constraint also works without the rest of DU.
 for(const p of ['rich-outcomes','simple-eu','stochastic-dominance'])real.window.eval(`changeBackground('${p}',true)`);
 assert.ok(real.window.eval("backgroundExcluded.has('archimedean-gambles')"));
-assert.ok(rd.querySelector('#graph [data-edge="rich-simple-dominance-refutes-archimedean-gambles"]'));
+real.window.select({type:'principle',id:'archimedean-gambles'});
+assert.ok(rd.querySelector('#pop [data-result="rich-simple-dominance-refutes-archimedean-gambles"]'));
 real.window.eval("changeBackground('archimedean-gambles',true)");
 assert.equal(rd.getElementById('graph-warning').hidden,false);
 rd.getElementById('background-reset').click();

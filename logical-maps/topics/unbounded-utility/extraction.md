@@ -340,3 +340,36 @@ explicit witness, even with Totality and Stochastic Equivalence. Both new
 records identify the connecting work as GPT-6 (Codex), 9 September 2026;
 the source finite-lottery argument remains credited to Goodsell. Existing
 source-attributed theorem premises and proofs are unchanged.
+
+### Package picture: further model failures — 15 September 2026
+
+Zachary Goodsell asked for a complete picture of what is consistent with
+DU + Sym, DTU, DTU + Sym and DU + Sym + Symmetric Neutrality. Claude
+(Fable 5.1) computed the picture from the recorded evidence and supplied
+explicit witnesses for the cheap gaps; no principle definitions, theorem
+premises or existing proofs were changed.
+
+The least DU model (`finite-support-compensated-dominance`) now records
+seven further verified failures: the three named prospect evaluations and
+uniqueness of negative self-similarity (the prospects are incomparable with
+their prescribed values), Comonotonic Sum Invariance, Independent Sum
+Preservation and Existential Copula Sum Invariance (one simple equal-mean
+pair whose sums with a uniform summand acquire a sloped survival
+difference, for every copula). With these, every principle is entailed,
+excluded or separated in both directions under DU + Sym.
+
+The exact eventual-dominance model (`eventual-clipped-expectation`) now
+records failure of Shift Invariance and Positive Affine Invariance: a
+symmetric Laplace gamble X is indifferent to sure 0, yet X + b is strictly
+worse than sure b for every b > 0.
+
+Remaining gaps in the requested packages: whether Comonotonic Sum
+Invariance is consistent with DTU (the conjectured total comonotonic
+extension stays conjectured) or with DTU + Sym and DU + Sym + Neutrality;
+whether Existential Copula Sum Invariance is consistent with the two
+symmetric packages; whether DTU + Sym implies L¹ Continuity or Expected
+Utility; separating models for DU + Sym + Neutrality; whether Independent
+Sum Cancellation is consistent with DU + Sym + Neutrality; and a DTU model
+violating Shift Invariance (a cone-extension construction orienting a
+transfer pair against its own shift is sketched privately and not yet
+recorded).

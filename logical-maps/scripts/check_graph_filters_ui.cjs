@@ -32,11 +32,11 @@ try{
  assert.deepEqual(otherSelections(),originalOthers,'Published master leaves other source groups alone');
  master.click();assert.ok(published.every(x=>x.checked));assert.ok(master.checked);
  assert.equal(pop.hidden,true,'Source changes do not open details');
- // Pointer dismissal and keyboard toggles must both stay dismissed after a refresh.
+ // Docked details survive pointerdown; applying a filter clears stale details.
  for(const selector of ['[data-source-filter]','#lean-only','#show-conj','#conjecture-only','#unpublished-only','#show-iso']){
   inspect();
   doc.querySelector(selector).dispatchEvent(new w.MouseEvent('pointerdown',{bubbles:true}));
-  assert.equal(pop.hidden,true,'Outside pointer dismisses popup');
+  assert.equal(pop.hidden,false,'Outside pointer does not dismiss docked details');
   doc.querySelector(selector).click();
   assert.equal(pop.hidden,true,selector+' reopened the dismissed popup');
   inspect();doc.querySelector(selector).click();
@@ -49,7 +49,7 @@ try{
  assert.equal(conjectures().length,0,'Conjectures initially hidden');
  doc.getElementById('show-conj').click();
  const ids=new Set(conjectures().map(p=>p.closest('[data-edge]').dataset.edge));
- for(const result of data.results.filter(r=>r.status==='conjectured'))assert.ok(ids.has(result.id),result.id+' has no conjecture arrow');
+ for(const result of data.results.filter(r=>r.status==='conjectured'))assert.ok(ids.has(result.id)||w.eval(`consistencyStatus(${JSON.stringify(result.premises)}).status==='inconsistent'`),result.id+' has no conjecture arrow');
  for(const edge of conjectures()){
   assert.match(edge.closest('[data-edge]').querySelector('title').textContent,/^Conjecture:/);
   assert.equal(w.getComputedStyle(edge).getPropertyValue('vector-effect'),'non-scaling-stroke');
@@ -69,7 +69,7 @@ try{
  assert.equal(doc.querySelectorAll('#graph .node').length,0);
  doc.getElementById('show-conj').click();
  const restored=new Set(conjectures().map(p=>p.closest('[data-edge]').dataset.edge));
- for(const result of data.results.filter(r=>r.status==='conjectured'))assert.ok(restored.has(result.id),result.id+' not restored after clearing principles');
+ for(const result of data.results.filter(r=>r.status==='conjectured'))assert.ok(restored.has(result.id)||w.eval(`consistencyStatus(${JSON.stringify(result.premises)}).status==='inconsistent'`),result.id+' not restored after clearing principles');
  assert.ok(doc.querySelector('#pr-filters [data-show-positive][aria-pressed="true"]'),'Principle controls reflect restored endpoints');
  assert.equal(pop.hidden,true);
  // DTU still implies Simple EU when only conjectures are drawn. Its proved

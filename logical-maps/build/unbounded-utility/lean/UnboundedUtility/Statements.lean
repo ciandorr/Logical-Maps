@@ -1190,7 +1190,7 @@ def conjectured_total_independent_sum_extension : Prop :=
 /-- `eventual-clipped-expectation`
 
 Clipped expectation: eventual dominance: a witness satisfying 10 principles
-and violating 6. -/
+and violating 8. -/
 def eventual_clipped_expectation : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1208,7 +1208,9 @@ def eventual_clipped_expectation : Prop :=
     ¬ UnboundedUtility.L1Continuity W.pref ∧
     ¬ UnboundedUtility.CountableSureThing W.pref ∧
     ¬ UnboundedUtility.ArchimedeanGambles W.pref ∧
-    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref
+    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
+    ¬ UnboundedUtility.ShiftInvariance W.pref ∧
+    ¬ UnboundedUtility.PositiveAffineInvariance W.pref
 
 /-- `finite-shift-total-extension`
 
@@ -1237,7 +1239,7 @@ def finite_shift_total_extension : Prop :=
 /-- `finite-support-compensated-dominance`
 
 Stochastic dominance: finite-support compensation: a witness satisfying 9 principles
-and violating 9. -/
+and violating 16. -/
 def finite_support_compensated_dominance : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1257,7 +1259,14 @@ def finite_support_compensated_dominance : Prop :=
     ¬ UnboundedUtility.ShiftTransfer W.pref ∧
     ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
     ¬ UnboundedUtility.L1Continuity W.pref ∧
-    ¬ UnboundedUtility.VanishingShiftContinuity W.pref
+    ¬ UnboundedUtility.VanishingShiftContinuity W.pref ∧
+    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
+    ¬ UnboundedUtility.ArroyoValue W.pref ∧
+    ¬ UnboundedUtility.PasadenaValue W.pref ∧
+    ¬ UnboundedUtility.NegativeSelfSimilarity W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref ∧
+    ¬ UnboundedUtility.IndependentSumPreservation W.pref ∧
+    ¬ UnboundedUtility.ExistentialCopulaSumConsistency W.pref
 
 /-- `finite-two-sample-minimum`
 

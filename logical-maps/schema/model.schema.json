@@ -115,6 +115,49 @@
      }
     }
    }
+  },
+  "changes": {
+   "type": "array",
+   "description": "Dated revision log. Append an entry whenever a record gains content after its certificate date (new verified properties, an added proof, a corrected statement). The Changes tab lists each entry under its own date; certificate.date stays the record's original date.",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "date",
+     "summary"
+    ],
+    "properties": {
+     "date": {
+      "type": "string",
+      "description": "ISO date of the revision."
+     },
+     "by": {
+      "type": "string",
+      "description": "Who supplied the revision's content (author or agent, with date if useful)."
+     },
+     "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What changed and why, in one or two sentences."
+     },
+     "satisfies": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Principles newly verified to hold in this revision; must also appear in the record's satisfies."
+     },
+     "violates": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Principles newly verified to fail in this revision; must also appear in the record's violates."
+     }
+    }
+   }
   }
  },
  "if": {

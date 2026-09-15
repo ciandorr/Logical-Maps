@@ -42,8 +42,8 @@ try {
   assert.equal(w.eval('JSON.stringify(buildGraph())'), graph, 'Catalogue does not affect logical evidence');
   assert.deepEqual([...d.querySelectorAll('[data-source-filter]')].map(x => [x.dataset.sourceFilter, x.checked]), filters);
   for (const [id, author] of [
-    ['dominance-refutes-full-sum', 'Seidenfeld'],
-    ['rich-simple-sure-thing-refutes-countable', 'Russell & Isaacs'],
+    ['dominance-refutes-full-sum', 'Preference for Equivalent RVs'],
+    ['rich-simple-sure-thing-refutes-countable', 'Infinite Prospects'],
     ['symmetric-dtu-refutes-independent-sum-candidate', 'Misc.']
   ]) {
     w.select({type: 'result', id});

@@ -1,0 +1,26 @@
+id: rigid-comprehension-r-implies-boolean-completeness-r
+premises:
+- rigid-comprehension-r
+conclusion: boolean-completeness-r
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.8, p. 29 and n. 39.
+source_names:
+- Classicism
+proof: For a property X of relations, choose a rigid coextension $X^*$. Define $U=\lambda\bar z\, .\,\forall
+  Y\, .\,X^*Y\to Y[\bar z]$. For any V, being a lower bound of X is equivalent to being one of $X^*$;
+  rigidity turns the pointwise necessary consequences for members of $X^*$ into their necessary universal
+  generalization. This says exactly $V\le U$. Thus the lower bounds of X are precisely the entities below
+  U, which is the GLB condition. This works at each relational type.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Proposition 2.8, p. 29 and n. 39
+notes: ''

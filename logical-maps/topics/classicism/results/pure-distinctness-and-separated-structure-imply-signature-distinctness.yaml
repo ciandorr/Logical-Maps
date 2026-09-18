@@ -1,0 +1,26 @@
+id: pure-distinctness-and-separated-structure-imply-signature-distinctness
+premises:
+- distinctness-schema-r
+- separated-structure-r
+conclusion: distinctness-signature-r
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.5, p. 39.
+source_names:
+- Classicism
+proof: Iterating Separated Structure gives the corresponding conditional for a finite tuple of distinct
+  constants. Abstract the constants occurring in a closed A,B to write them as iterated applications of
+  pure closed F,G. If A=B is not a theorem, F=G cannot be a theorem either. Pure Distinctness gives F≠G;
+  contraposition of the iterated Separated Structure conditional gives A≠B.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §2.5, p. 39
+notes: ''

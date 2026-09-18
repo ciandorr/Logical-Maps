@@ -1,0 +1,24 @@
+id: atomicity-t-incompatible-with-atomlessness
+premises:
+- atomicity-t
+- atomlessness
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  produced_by: OpenAI Codex (GPT-6), 17 September 2026
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, p. 24; Appendix D, p. 76.
+source_names:
+- Classicism
+proof: Atomicity applied to $\top$ supplies a non-bottom atom. Atomlessness supplies a strictly smaller
+  non-bottom proposition below that atom, contradicting its defining minimality.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §2.2, p. 24; Appendix D, p. 76
+notes: ''

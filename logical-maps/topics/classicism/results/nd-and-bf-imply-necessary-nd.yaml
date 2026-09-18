@@ -1,0 +1,26 @@
+id: nd-and-bf-imply-necessary-nd
+premises:
+- distinctness-necessary-r
+- barcan-r
+conclusion: necessary-distinctness-necessary-r
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.4, p. 23.
+source_names:
+- Classicism
+proof: For arbitrary x,y, classical identity cases, NI and ND give $\Box(x=y)\lor\Box(x\ne y)$. Using
+  4, strengthen the second disjunct to $\Box\Box(x\ne y)$. Normal modal reasoning yields $\Box(x=y\lor\Box(x\ne
+  y))$, equivalently $\Box(x\ne y\to\Box(x\ne y))$. Generalize over x,y and apply BF twice to box the
+  entire universal closure. Repeat at each type.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Proposition 2.4, p. 23
+notes: ''

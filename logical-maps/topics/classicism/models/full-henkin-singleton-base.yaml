@@ -1,0 +1,55 @@
+id: full-henkin-singleton-base
+name: 'Full Henkin model: singleton individual domain'
+satisfies:
+- fregean-axiom
+- functionality-r
+- modalized-functionality-r
+- plenitude-r
+- functional-choice-r
+- relational-choice-r
+- no-pure-contingency-r
+- distinctness-preserving-collapse
+violates:
+- infinity-e
+- infinity-t
+- atomlessness
+- possibility-schema-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: OpenAI Codex (GPT-6), 17 September 2026
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7,
+  pp. 47–48; §1.4, n. 18, p. 16.
+source_names:
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48; §1.4, n. 18, p. 16
+description: 'Use the ordinary full Henkin interpretation: D_e is a singleton, D_t={0,1}, and every admitted
+  function type contains all functions between its domains. Domains are finite by induction on types,
+  so every serial relation has a functional subrelation and, when the output type is relational, a selecting
+  operation. Equality is genuine equality and Box is the identity on truth values. These facts verify
+  the listed positive assertions. The two finite base domains refute the infinity assertions, top is an
+  atom, and the possible existence of two individuals is false although its pure sentence is C-consistent.'
+notes: Explicit specialization of the source’s standard Henkin construction to a singleton individual
+  domain. No independent checking or formal verification is claimed.
+changes:
+- date: '2026-09-17'
+  by: OpenAI Codex (GPT-6)
+  summary: Restricted the example and its recorded choice properties to the map’s relational type system
+    at the user’s request.
+  satisfies:
+  - fregean-axiom
+  - functionality-r
+  - modalized-functionality-r
+  - plenitude-r
+  - functional-choice-r
+  - relational-choice-r
+  - no-pure-contingency-r
+  - distinctness-preserving-collapse

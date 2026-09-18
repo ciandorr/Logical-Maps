@@ -1,0 +1,27 @@
+id: modal-b-implies-distinctness-necessary-r
+premises:
+- modal-b
+conclusion: distinctness-necessary-r
+status: proved
+certificate:
+  source_id: prior-1963
+  produced_by: A. N. Prior
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.2, p. 22 (Prior argument).
+source_names:
+- Classicism
+proof: Assume $x\ne y$. B gives $\Box\neg\Box(x=y)$. The necessitation of NI gives $\Box(x=y\to\Box(x=y))$.
+  Within the box, contraposition yields $\neg(x=y)$, and K therefore yields $\Box(x\ne y)$. The argument
+  is uniform at each type.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Proposition 2.2, p. 22 (Prior argument)
+- paper: prior-1963
+  role: origin
+  locator: pp. 206–207, as credited in Classicism Proposition 2.2
+notes: ''

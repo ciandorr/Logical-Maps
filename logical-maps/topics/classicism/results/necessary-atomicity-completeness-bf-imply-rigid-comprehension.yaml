@@ -1,0 +1,33 @@
+id: necessary-atomicity-completeness-bf-imply-rigid-comprehension
+premises:
+- necessary-atomicity-r
+- boolean-completeness-r
+- barcan-r
+conclusion: rigid-comprehension-r
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.11, p. 30 and n. 42.
+source_names:
+- Classicism
+proof: For a relation X, form the property F of haecceities of its instances and take their least upper
+  bound $X^*$. It contains each X-instance. Actuality follows from Atomicity and BF by Proposition 2.7;
+  let w be the actual atom. The relation $w\to X$ is an upper bound of F, so $X^*$ is also contained in
+  X. Each haecceity entails its own necessitation by NI, so $\Box X^*$ is another upper bound; hence $X^*$
+  is persistent. For inextensibility, note 42 assumes a possible failure, uses boxed Atomicity and BF
+  to obtain atoms w and w′ witnessing the two stages, and replaces w′ by the GLB of its w-possible aliases.
+  Then $w^{\prime}\to Y$ is an upper bound of F but is contradicted by the proposed failure of inextensibility.
+  This contradiction establishes rigidity.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Proposition 2.11, p. 30 and n. 42
+notes: This is a summary of note 42; see the accompanying write-up for the alias-GLB step. The source’s
+  first cross-reference to Proposition 2.6 is replaced in this transcription by the sufficient Proposition
+  2.7; the statement and premises are unchanged.

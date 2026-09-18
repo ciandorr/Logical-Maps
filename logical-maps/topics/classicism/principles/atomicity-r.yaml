@@ -1,0 +1,16 @@
+id: atomicity-r
+name: Atomicity
+category: lattice
+statement: Every non-bottom entity of each relational type has an atom below it.
+formal: $\forall^{\mathrm{Ty}}\tau\ne e\, .\,\forall x^\tau\, .\,x\le_\tau\neg_\tau x\lor\exists y^\tau\,
+  .\,\operatorname{Atom}_\tau(y)\land y\le_\tau x$
+date: '2026-09-17'
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, p. 24.
+source_names:
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: formulation
+  locator: §2.2, p. 24
+notes: ''

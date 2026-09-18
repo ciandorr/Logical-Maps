@@ -1,0 +1,26 @@
+id: necessary-rigid-comprehension-r-implies-necessary-actuality
+premises:
+- necessary-rigid-comprehension-r
+conclusion: necessary-actuality
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.9; §2.3, p. 33.
+source_names:
+- Classicism
+proof: Use the source’s uniform proof of the unboxed connection at an arbitrary target type. Discharge
+  its finitely many closed premise instances to obtain a theorem of C, necessitate that theorem, then
+  apply K with the corresponding boxed premise instances. This proves the boxed target instance. Generalization
+  over the admitted target types is metalinguistic; no type quantifier is placed inside Box.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Proposition 2.9; §2.3, p. 33
+notes: Instancewise boxed connection stated or used in the cited discussion. The premise is the boxed
+  schema, not an unboxed optional assumption.

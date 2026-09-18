@@ -1,0 +1,29 @@
+id: necessary-nd-implies-bf
+premises:
+- necessary-distinctness-necessary-r
+conclusion: barcan-r
+status: proved
+certificate:
+  source_id: prior-lemmon
+  produced_by: A. N. Prior; E. J. Lemmon (simplified proof)
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.3, p. 22.
+source_names:
+- Classicism
+proof: From $\forall x\, .\,\Box Fx$, B gives $\Box\Diamond(\forall x\, .\,\Box Fx)$. CBF gives the implication
+  from the possible universal statement to $\forall x\, .\,\Diamond\Box Fx$; necessitate that logical
+  implication to use it inside the leading box. The necessitated B dual gives $\Diamond\Box Fx\to Fx$
+  there. The result is $\Box(\forall x\, .\,Fx)$. The required B and boxed-B instances follow from boxed
+  ND as explained with Proposition 2.2.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Proposition 2.3, p. 22
+- paper: prior-lemmon
+  role: origin
+  locator: Prior 1956; Prior 1967, p. 146; attribution in Classicism Proposition 2.3
+notes: ''

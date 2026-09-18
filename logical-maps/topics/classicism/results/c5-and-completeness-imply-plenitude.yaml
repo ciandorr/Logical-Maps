@@ -1,0 +1,28 @@
+id: c5-and-completeness-imply-plenitude
+premises:
+- necessary-distinctness-necessary-r
+- boolean-completeness-r
+conclusion: plenitude-r
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.14, pp. 32–33 and n. 48.
+source_names:
+- Classicism
+proof: 'For functional U with propositional output, take the least upper bound G of all operations X such
+  that Xy entails the unique U-output at y. Fix a and its output p. The operation $\lambda x\, .\,x=a\land
+  p$ lies below G, by ND, so p entails Ga. The operation $\lambda x\, .\,x\ne a\lor p$ is an upper bound
+  of the same family: ND gives the pointwise comparison and BF promotes it to entailment. Therefore Ga
+  entails p. Antisymmetry gives Ga=p. For relational outputs the argument is applied to their finite argument
+  tuples as in the source; all output types are relational.'
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Proposition 2.14, pp. 32–33 and n. 48
+notes: ''

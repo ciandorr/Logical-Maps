@@ -1,0 +1,25 @@
+id: extensionality-r-implies-boolean-completeness-r
+premises:
+- extensionality-r
+conclusion: boolean-completeness-r
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  checked_by: []
+  date: '2026-09-17'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, p. 24 and n. 29.
+source_names:
+- Classicism
+proof: For a property X of relations, put $U=\lambda\bar z\, .\,\forall Z\, .\,XZ\to Z[\bar z]$. When
+  XV holds, the Fregean Axiom makes XV necessary and the displayed universal sentence entails $V[\bar
+  z]$; Extensionality gives $U\le V$. Conversely, any lower bound Y pointwise entails the displayed defining
+  condition for U, so Extensionality gives $Y\le U$. Thus U is a GLB.
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §2.2, p. 24 and n. 29
+notes: ''

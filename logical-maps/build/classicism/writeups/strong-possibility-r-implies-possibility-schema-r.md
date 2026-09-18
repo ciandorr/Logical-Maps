@@ -1,0 +1,25 @@
+# Strong Possibility (pure) ⇒ Possibility (pure)
+
+<p class='cert'>Result — Source: Classicism (2023 draft); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
+
+## Premises
+
+- **Strong Possibility (pure).** Each closed pure sentence consistent with Maximalist Classicism is possible under the distinctness-preserving modality.
+
+## Conclusion
+
+- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+
+## Proof
+
+If P is C-consistent, then $\Diamond P$ is a theorem of Max(C). The source’s consistency theorem for Max(C) therefore makes $\Diamond P$ consistent with that theory. Strong Possibility gives $\Diamond_{\ne}\Diamond P$, which implies $\Diamond\Diamond P$ and hence $\Diamond P$ by 4.
+
+## Sources
+
+- **Classicism** — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 42.
+
+<p class='cert'>Record: <code>topics/classicism/results/strong-possibility-r-implies-possibility-schema-r.yaml</code></p>
+
+## Paper references
+
+- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr. Classicism. Draft dated 16 May 2023, 87 pages. All page, proposition and footnote locators in this map refer to this draft. — §2.6, p. 42

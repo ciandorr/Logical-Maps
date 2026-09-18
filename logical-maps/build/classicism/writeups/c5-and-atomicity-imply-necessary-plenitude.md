@@ -1,0 +1,26 @@
+# □ND ∧ Atomicity ⇒ □Plenitude
+
+<p class='cert'>Result — Source: Classicism (2023 draft); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
+
+## Premises
+
+- **□ND.** Every closed instance of ND is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
+- **Atomicity.** Every non-bottom entity of each relational type has an atom below it.
+
+## Conclusion
+
+- **□Plenitude.** Every closed instance of Plenitude is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
+
+## Proof
+
+Proposition 2.6 gives boxed Boolean Completeness. C5 is itself necessary by 4, so the necessitated instance proofs of Proposition 2.14 yield boxed Plenitude.
+
+## Sources
+
+- **Classicism** — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, concluding equivalences, p. 33.
+
+<p class='cert'>Record: <code>topics/classicism/results/c5-and-atomicity-imply-necessary-plenitude.yaml</code></p>
+
+## Paper references
+
+- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr. Classicism. Draft dated 16 May 2023, 87 pages. All page, proposition and footnote locators in this map refer to this draft. — §2.3, concluding equivalences, p. 33

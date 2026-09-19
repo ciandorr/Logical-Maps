@@ -122,6 +122,8 @@ try{
   const chain={topic,principles:principles(['d','e','f','g']),models:[],results:[rule('de',['d'],'e'),rule('ef',['e'],'f'),rule('dg',['d'],'g'),rule('gf',['g'],'f','conjectured','draft')]};
   const dom5=page(chain);
   dom5.window.document.getElementById('show-conj').click();
+  // Reduction is on by default, so turn it off to capture the full arrow set.
+  dom5.window.document.getElementById('reduce-arrows').click();
   const before=geometry(dom5);
   verifyDirections(before,'chain');
   const positions=g=>Object.fromEntries(g.nodes.map(n=>[n.id,[n.x,n.y]]));
@@ -134,7 +136,7 @@ try{
   assert.ok(!arrow(reduced,'g','f')||arrow(reduced,'g','f').conjectural,'The conjecture G ⇒ F stays only as itself');
   const proved={topic,principles:principles(['d','e','f']),models:[],results:[rule('de',['d'],'e','conjectured','draft'),rule('ef',['e'],'f'),rule('df',['d'],'f')]};
   const dom6=page(proved);
-  dom6.window.document.getElementById('show-conj').click();dom6.window.document.getElementById('reduce-arrows').click();
+  dom6.window.document.getElementById('show-conj').click();
   assert.ok(arrow(geometry(dom6),'d','f'),'A proved arrow is never hidden through a conjectural chain');
   dom5.window.document.getElementById('reduce-arrows').click();
   assert.deepEqual(geometry(dom5).edges.map(e=>e.id).sort(),before.edges.map(e=>e.id).sort(),'Turning reduction off restores every arrow');
@@ -152,7 +154,7 @@ try{
     if(!fs.existsSync(file)) continue;
     const data=JSON.parse(fs.readFileSync(file,'utf8'));
     const modes=[['default',''],['no background','?assume='],['DTU',"addBackgroundPreset('dtu')"],['conjectures',"document.getElementById('show-conj').click()"],
-      ['conjectures only',"document.getElementById('conjecture-only').click()"],['negatives',"state.negativeShown=new Set(ids);refreshPrincipleControls();renderAll(true)"],['reduced',"document.getElementById('reduce-arrows').click()"],['trivial',"document.getElementById('trivial-arrows').click()"]];
+      ['conjectures only',"document.getElementById('conjecture-only').click()"],['negatives',"state.negativeShown=new Set(ids);refreshPrincipleControls();renderAll(true)"],['reduction off',"document.getElementById('reduce-arrows').click()"],['trivial',"document.getElementById('trivial-arrows').click()"]];
     for(const [label,setup] of modes){
       if(label==='DTU'&&t!=='unbounded-utility') continue;
       const dom=page(data,'https://maps.example/'+(setup.startsWith('?')?setup:''));

@@ -13,6 +13,8 @@ function page(data, url = 'http://localhost/?assume=') {
     url, runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole: console,
   });
   pages.push(dom);
+  // These fixtures assert over the full arrow set, so turn off the default transitive reduction.
+  dom.window.document.getElementById('reduce-arrows').click();
   return dom;
 }
 function geometry(dom) {

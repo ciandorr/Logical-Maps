@@ -268,7 +268,7 @@ by side. Isolated principles occupy compact labelled bands above the diagram.
 False and True remain visible when their trivial arrows are hidden.
 
 Arrowheads are filled. Each arrow's details panel reports the converse, and for multi-premise arrows whether the remaining
-premises still suffice without each one. **Transitive reduction** hides an
+premises still suffice without each one. **Transitive reduction**, on by default, hides an
 arrow when a chain of other displayed arrows already gives it, as in a Hasse
 diagram; a proved arrow is never hidden through a conjectural chain, nothing
 is hidden inside a cycle, and node positions do not change, since the layout

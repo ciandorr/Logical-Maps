@@ -4,7 +4,10 @@ const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..'),template=fs.readFileSync(path.join(root,'viewer/template.html'),'utf8');
 const pages=[],errors=[];
 const rule=(id,premises,conclusion,status='proved',source_id='paper')=>({id,premises,conclusion,status,certificate:{source_id,lean:'none'},sources:['Fixture'],source_names:['Fixture']});
-function page(data){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url:'https://maps.example/?assume=',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});pages.push(dom);return dom;}
+function page(data){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url:'https://maps.example/?assume=',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});pages.push(dom);
+  // These fixtures assert over the full arrow set, so turn off the default transitive reduction.
+ dom.window.document.getElementById('reduce-arrows').click();
+ return dom;}
 const fixture={topic:{id:'shared',title:'Shared premises',background:[],source_catalog:[{id:'paper',name:'Paper',kind:'published-paper'},{id:'draft',name:'Draft',kind:'misc'}]},principles:['a','b','c','d','e','f','g','x'].map(id=>({id,name:id.toUpperCase(),statement:id})),results:[rule('abc',['a','b'],'c'),rule('bad',['b','a'],'d','proved','draft'),rule('ce',['c'],'e'),rule('abxf',['a','b','x'],'f'),rule('abg',['a','b'],'g','conjectured','draft')],models:[]};
 const graph=dom=>JSON.parse(dom.window.eval('JSON.stringify(buildGraph())'));
 function uniqueJunctions(g){const seen=new Set();for(const j of g.nodes.filter(n=>n.kind==='junction')){const inputs=g.edges.filter(e=>e.to===j.id).map(e=>e.from).sort();const key=JSON.stringify(inputs);assert.ok(!seen.has(key),'One junction per displayed signed premise set');seen.add(key);assert.ok(inputs.length>=2);assert.equal(inputs.length,new Set(inputs).size);assert.ok(j.parent||g.edges.some(e=>e.from===j.id));}}

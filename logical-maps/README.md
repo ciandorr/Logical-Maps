@@ -275,7 +275,9 @@ is hidden inside a cycle, and node positions do not change, since the layout
 always uses the full arrow set. It also hides an arrow that repeats a premise
 stroke: when C is equivalent to A ∧ B, the strokes from A and B into the ∧
 inside C's box already say what C ⇒ A and C ⇒ B say, so only the strokes are
-drawn.
+drawn. A box and the ∧ circles it holds are all equivalent, so when several of
+them carry the same consequence only one arrow to it is drawn; two arrows that
+both leave the box itself record separate theorems and are both kept.
 
 Clicking a principle (on the graph or in the sidebar), or an ∧, shades other
 principles and conjunction circles by their relation to it. Each circle uses its

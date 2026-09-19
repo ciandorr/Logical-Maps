@@ -159,6 +159,28 @@ try{
   assert.ok(arrow(echoWhole,'r','p')&&arrow(echoWhole,'r','q'),'Turning reduction off restores the repeated arrows');
   assert.deepEqual(positions(echoKept),positions(echoWhole),'Hiding a repeated arrow does not move nodes');
 
+  // A box holding several ∧ circles used to fan out: the principle and each
+  // circle carried the same consequence, so one connection was drawn three
+  // times. The reduction keeps the principle's own arrow.
+  const boxOfNode=(g,id)=>g.nodes.find(n=>n.id===id)?.parent||id;
+  const between=(g,a,b)=>g.edges.filter(e=>!e.toJunction&&boxOfNode(g,e.from)===a&&boxOfNode(g,e.to)===b);
+  const fanFixture={topic,principles:principles(['g','a','b','c','x']),models:[],
+    results:[rule('abg',['a','b'],'g'),rule('acg',['a','c'],'g'),
+      rule('ga',['g'],'a'),rule('gb',['g'],'b'),rule('gc',['g'],'c'),
+      rule('abx',['a','b'],'x'),rule('acx',['a','c'],'x'),rule('gx',['g'],'x')]};
+  const fanDom=page(fanFixture);
+  const fanKept=geometry(fanDom);
+  verifyDirections(fanKept,'box duplicates');
+  const gBox=classNode(fanKept,'g').id, xBox=classNode(fanKept,'x').id;
+  assert.equal(fanKept.nodes.filter(n=>n.parent===gBox).length,2,'The box holds both ∧ circles');
+  const keptFan=between(fanKept,gBox,xBox);
+  assert.equal(keptFan.length,1,'One arrow leaves the box for a target its circles share');
+  assert.equal(keptFan[0].from,gBox,"The principle's own arrow is the one kept");
+  fanDom.window.document.getElementById('reduce-arrows').click();
+  const fanWhole=geometry(fanDom);
+  assert.equal(between(fanWhole,gBox,xBox).length,3,'Turning reduction off restores all three');
+  assert.deepEqual(positions(fanKept),positions(fanWhole),'Collapsing duplicates does not move nodes');
+
   // Arrowheads stay filled for both open and model-refuted converses.
   const heads={topic,principles:principles(['m','n','o']),models:[{id:'w',name:'Witness',status:'proved',satisfies:['n'],violates:['m'],certificate:cert('paper'),sources:['Fixture'],source_names:['Fixture']}],results:[rule('mn',['m'],'n'),rule('on',['o'],'n')]};
   const g7=geometry(page(heads));

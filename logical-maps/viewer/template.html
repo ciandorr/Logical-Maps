@@ -511,7 +511,7 @@
           <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
           <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
-          <label title="Hide an arrow that the displayed diagram already gives: one that a chain of other displayed arrows yields, as in a Hasse diagram, and one that repeats a premise stroke, as when C is equivalent to A ∧ B and C ⇒ A restates the stroke from A into the ∧. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows" checked>Transitive reduction</label>
+          <label title="Hide an arrow that the displayed diagram already gives: one that a chain of other displayed arrows yields, as in a Hasse diagram, and one that repeats a premise stroke, as when C is equivalent to A ∧ B and C ⇒ A restates the stroke from A into the ∧, and one of several arrows that leave the same box for the same target because its ∧ circles each carry the consequence. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows" checked>Transitive reduction</label>
           <label title="Show the logical arrows from False to every node and from every node to True."><input type="checkbox" id="trivial-arrows">Trivial arrows</label>
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
         </div>
@@ -1075,6 +1075,37 @@ function premiseEchoes(edges, byId) {
   return echoed;
 }
 
+// A box and the ∧ circles inside it are all equivalent, so an arrow leaving the
+// box and an arrow leaving one of its circles, both landing in the same box,
+// are one connection drawn twice. That is what makes a box holding several
+// circles fan out: each circle carries its own consequences, and the principle
+// usually carries them too. Keep one arrow for each ordered pair of boxes,
+// preferring a proved one, and the principle's own arrow over a circle's. Only
+// a group that one of the circles contributes to is collapsed. Two arrows that
+// both leave the box itself record separate theorems between the same pair of
+// classes, and those are left alone.
+function boxDuplicates(arrows, byId) {
+  const boxOf = id => byId.get(id)?.parent || id;
+  const conjectural = e => e.conjectured || e.r?.status === 'conjectured';
+  const fromCircle = e => e.from !== boxOf(e.from);
+  const groups = new Map();
+  for (const e of arrows) {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from === to) continue;
+    const key = from + '>' + to;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  }
+  const hidden = new Set();
+  for (const group of groups.values()) {
+    if (group.length < 2 || !group.some(fromCircle)) continue;
+    const rank = e => (conjectural(e) ? 2 : 0) + (fromCircle(e) ? 1 : 0);
+    const keep = group.reduce((a, b) => rank(b) < rank(a) || rank(b) === rank(a) && b.id < a.id ? b : a);
+    for (const e of group) if (e !== keep) hidden.add(e.id);
+  }
+  return hidden;
+}
+
 // Quotient the display by proved equivalence, including the logical constants.
 // The evidence engines deliberately continue to report inconsistent antecedents.
 function graphNodeExpression(n) { return n.members?.[0] ?? n.premises; }
@@ -1591,11 +1622,14 @@ function renderGraph() {
   const L = layout;
   // Positions always come from the full arrow set, so the reduction only
   // hides arrows and never moves a node.
-  // Both rules read the full arrow set, so hiding one arrow never changes
-  // what the other hides.
+  // The first two rules read the full arrow set, so hiding one arrow never
+  // changes what the other hides. The third then picks a survivor among the
+  // arrows the first two leave standing, so the arrow it keeps is drawn.
   if (state.reduced) {
     const implied = impliedArrows(L.edges), echoed = premiseEchoes(L.edges, L.byId);
-    L.edges = L.edges.filter(e => !implied.has(e.id) && !echoed.has(e.id));
+    const standing = L.edges.filter(e => !e.toJunction && !implied.has(e.id) && !echoed.has(e.id));
+    const duplicated = boxDuplicates(standing, L.byId);
+    L.edges = L.edges.filter(e => !implied.has(e.id) && !echoed.has(e.id) && !duplicated.has(e.id));
   }
   empty.hidden = !(state.conjectureOnly || state.unpublishedOnly) || L.edges.length > 0 || graphSearch.matches.size > 0;
   empty.textContent = state.conjectureOnly && state.leanOnly

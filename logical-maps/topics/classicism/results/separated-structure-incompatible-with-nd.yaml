@@ -1,0 +1,45 @@
+id: separated-structure-incompatible-with-nd
+premises:
+- separated-structure-r
+- distinctness-necessary-r
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 19 September 2026, at the suggestion of Cian Dorr
+  recorded_by: Claude Fable 5.1 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.5, pp. 38–39; §2.6, p. 41.
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §4, pp. 560–563.
+source_names:
+- Classicism
+- Logical Combinatorialism
+proof: Let $c$ be a nonlogical constant of $\Sigma$ of some relational type $\tau$; the signature assumption
+  in Background supplies one. Write $\top_\tau$ and $\bot_\tau$ for the top and bottom elements of type
+  $\tau$. The pure closed terms $F:=\lambda x^\tau\, .\,x$ and $G:=\lambda x^\tau\, .\,\top_\tau$ of type
+  $\tau\tau$ do not contain $c$, and $F\ne G$ in C (apply both to $\bot_\tau$), so Separated Structure gives
+  $Fc\ne Gc$, i.e. $c\ne\top_\tau$. ND at type $\tau$ then gives $\Box(c\ne\top_\tau)$, which by the definition
+  of $\Box$ is the identity $(c\ne\top_\tau)=\top$. Now take $F':=\lambda x^\tau\, .\,(x\ne\top_\tau)$ and
+  $G':=\lambda x^\tau\, .\,\top$ of type $\tau t$, again pure, closed and free of $c$. By $\beta$,
+  $F'c=(c\ne\top_\tau)=\top=G'c$, so Separated Structure gives $F'=G'$. Applying both sides to $\top_\tau$
+  yields $(\top_\tau\ne\top_\tau)=\top$; since $(\top_\tau\ne\top_\tau)=\bot$ in C, this is $\bot=\top$,
+  a contradiction. The types $\tau\tau$ and $\tau t$ are admitted because $\tau\ne e$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.5, pp. 38–39; §2.6, p. 41
+  note: The draft shows that Maximalist Classicism in a signature is equivalent to Pure Maximalist Classicism
+    plus Separated Structure (p. 39) and that Maximalist Classicism is inconsistent with ND (p. 41). This
+    record localises that inconsistency to Separated Structure alone, by a different argument.
+- paper: bacon-2020
+  role: origin
+  locator: §4, pp. 560–563
+  note: Origin of Separated Structure, where it is derived from Logical Necessity; pp. 554–555 with nn.
+    29–30 note that Logical Necessity makes distinctness contingent.
+notes: The argument uses one nonlogical constant of some type $\tau\ne e$, pure terms of types $\tau\tau$
+  and $\tau t$, and ND only at type $\tau$. It needs exactly the signature assumption recorded in Background;
+  a signature containing only individual constants would supply no closed pure term of type $e$ to play
+  the role of $\top_\tau$.

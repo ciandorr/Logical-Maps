@@ -115,15 +115,31 @@ model `violates` entries record schema failure.
 
 **Pure and signature schemata.** In Distinctness and Possibility,
 $C$ denotes the fixed background logic. Its theoremhood and consistency
-side conditions are retained literally.
-Fix a signature $\Sigma$ containing the displayed nonlogical constants and
-fundamentality predicates $\operatorname{Fun}_\sigma$, all of admitted types,
-with arbitrarily many distinct constants of each type. No nonlogical
-axioms about them are standing assumptions. “Pure” excludes these symbols.
-For Fundamental Possibility, $\operatorname{Fun}(\bar x)$ conjoins each
+side conditions are retained literally. “Pure” means free of nonlogical
+constants. The principles in the Signature schemata group give a special
+role to nonlogical constants: they concern an arbitrary fixed signature
+$\Sigma$ of nonlogical constants of admitted types, with
+$\mathcal L(\Sigma)$ and $C(\Sigma)$ the language and background theory
+over $\Sigma$. Each of these schemata holds trivially when $\Sigma$ is
+empty, so $\Sigma$ is assumed to contain at least one constant of some
+type $\tau\ne e$. Nothing further is assumed: no nonlogical axioms about
+the constants are standing assumptions, and “distinct constants” means
+distinct symbols, not an assumed inequality between their denotations.
+Where a schema mentions a tuple of distinct constants, its instances are
+those the signature supplies.
+
+**Fundamentality signature.** The principles in the Fundamentality group
+are about a different, special signature rather than the arbitrary
+$\Sigma$. It contains a fundamentality predicate
+$\operatorname{Fun}_\sigma$ of type $\sigma t$ for every type $\sigma$,
+following *Classicism*, §2.5, p. 39, and *Logical Combinatorialism*, §2.
+That paper also uses a purity predicate $\operatorname{Pure}_\sigma$ of
+type $\sigma t$; the map does not yet include any principle involving it.
+These predicates receive no standing axioms. For Fundamental Possibility,
+$\operatorname{Fun}(\bar x)$ conjoins each
 $\operatorname{Fun}_{\sigma_i}(x_i)$ and the distinctness of each pair of
-same-typed entries. “Distinct constants” means distinct symbols, not an
-assumed inequality between their denotations.
+same-typed entries; the formula $P$ there is pure, so it contains neither
+$\operatorname{Fun}$ nor any constant of $\Sigma$.
 
 **Evidence.** References use the 87-page draft of *Classicism* dated
 16 May 2023. Models cite the construction and evaluation point directly.

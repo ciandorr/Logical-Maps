@@ -4,6 +4,7 @@ satisfies:
 - barcan-r
 violates:
 - necessary-barcan-r
+- atomlessness
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -21,8 +22,12 @@ references:
 - paper: bacon-dorr-classicism
   role: proof
   locator: Appendix D, p. 79, paragraph beginning “One particularly interesting result”
-description: Use N and {0} with all maps between them, evaluated at N. BF holds there and fails at the
-  accessible singleton; the paragraph gives the type-e failure.
+description: >-
+  Use N and {0} with all maps between them, evaluated at N. BF holds there and fails at the
+  accessible singleton; the paragraph gives the type-e failure. Atomlessness fails at N: the closed sentence
+  $\exists x\, .\,\forall y\, .\,x=y$ denotes the set of arrows out of N whose target has a singleton individual
+  domain, which is the singleton of the unique map to {0}. It is a nonempty proposition, hence possible,
+  with no nonempty proper subproposition, so it is an atom below which Atomlessness finds no witness.
 notes: The cited construction is a model of the map’s relational-type framework. The description identifies
   its evaluation point; construction and verification are given at the PDF locations in References.
 was_conjectured: true
@@ -35,3 +40,7 @@ changes:
   - barcan-r
   violates:
   - necessary-barcan-r
+- date: '2026-09-19'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Atomlessness at N, witnessed by the proposition that there is exactly one
+    individual, which is the singleton of the arrow to {0}. Original observation; not in the source.

@@ -1,0 +1,31 @@
+id: actuality-incompatible-with-atomlessness
+premises:
+- actuality
+- atomlessness
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 19 September 2026, at the suggestion of Cian Dorr
+  recorded_by: Claude Fable 5.1 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, p. 25; Appendix D, p. 78 (Part 4).
+source_names:
+- Classicism
+proof: Let $a$ be a strongest truth, as Actuality supplies. Since $a$ is true, $a\ne\bot$, so $\Diamond a$.
+  Atomlessness then gives $q$ with $\Diamond q$, $q\le a$ and $q\ne a$. If $q$ were true, Actuality would
+  give $a\le q$, and with $q\le a$ antisymmetry gives $q=a$, contrary to $q\ne a$. So $q$ is false, and
+  $a\land\neg q$ is true, whence $a\le a\land\neg q\le\neg q$. Combined with $q\le a$ this gives $q\le\neg
+  q$, so $q=q\land\neg q=\bot$, contradicting $\Diamond q$. In short, a strongest truth is an atom.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, p. 25; Appendix D, p. 78
+  note: The draft does not state the incompatibility, but its discussion of the Part 4 model observes that
+    only the restriction of Atomlessness to false propositions can hold once the strongest truth is available.
+notes: This explains why Atomlessness holds only in Parts 1–3 of Proposition D.5, since Parts 4, 5, 7 and
+  8 satisfy Actuality and Parts 6–8 satisfy Atomicity. The restriction of Atomlessness to false propositions,
+  which the draft notes holds in Part 4, is not a principle of the map.

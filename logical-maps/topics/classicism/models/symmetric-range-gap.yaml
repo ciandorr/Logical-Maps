@@ -1,0 +1,54 @@
+id: symmetric-range-gap
+name: 'Symmetric ideally-full model: arrows omitting a fixed individual'
+satisfies:
+- boolean-completeness-r
+- necessary-boolean-completeness-r
+- actuality
+- necessary-actuality
+- no-pure-contingency-r
+violates:
+- barcan-r
+- distinctness-necessary-r
+status: proved
+certificate:
+  source_id: dorr-bc-not-rc
+  produced_by: Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §7.1, p.
+  21; Proposition 43 and Proposition 44, p. 22; Lemma 21, p. 10; Remark 38, p. 19.
+source_names:
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: proof
+  locator: §7.1, p. 21; Proposition 43 and Proposition 44, p. 22; Lemma 21, p. 10; Remark 38, p. 19
+description: >-
+  A symmetric ideally-full intensional action model over one object, the set of natural numbers. Its symmetry
+  group is the permutations fixing a distinguished individual, and its arrows are those permutations together
+  with all the functions that omit the distinguished individual from their range. The two classes are
+  told apart by an arrow's value at that individual, so the symmetry group is a finitely pinned proposition
+  and Actuality holds. The evaluation point is the identity arrow.
+
+
+  Boolean Completeness holds by the draft's main theorem with the distinguished individual as the distinguished
+  set. Moving points off a finite set can be done by a permutation fixing that individual, and two arrows
+  agreeing there are either both permutations or both range-deficient, so a prescription taken from the
+  two of them extends by nonzero values to an arrow of the same kind. One object gives No Pure Contingency
+  and the boxed forms.
+
+
+  BF fails at type e. Take the property of being positive unless things are as they actually are, which
+  is pinned down by the distinguished individual and is symmetric. Every individual necessarily has it,
+  since an arrow either fixes the distinguished individual or omits it from its range and so sends everything
+  to something positive; but it is not necessary that everything has it, since any arrow moving the distinguished
+  individual leaves it out.
+notes: >-
+  The first of the draft's two variants in which BF is made to fail. Actuality and the range deficiency
+  come from the same finite test here, which is what the next variant prises apart. Atomicity and Rigid
+  Comprehension are not settled in the draft and are left unknown. ND fails at type e because the range-deficient
+  arrows include non-injective ones; the draft does not draw that consequence separately. The source is
+  a work in progress.

@@ -1,0 +1,26 @@
+id: weak-rigid-comprehension-r-implies-very-weak-rigid-comprehension-r
+premises:
+- weak-rigid-comprehension-r
+conclusion: very-weak-rigid-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 19 September 2026
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 19 September 2026.
+source_names:
+- Dorr 19 Sep
+proof: >-
+  $\operatorname{Persistent}(Y)$ is $Y\le\lambda\bar x\, .\,\Box Y[\bar x]$, which unpacks as
+  $\Box\forall\bar x\, .\,Y[\bar x]\to\Box Y[\bar x]$; T gives $\operatorname{WeaklyPersistent}(Y)$. The
+  inextensibility conjunct is the same in both conditions. So every weakly rigid relation is very weakly
+  rigid, and a weakly rigid coextension is already a very weakly rigid one.
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: pp. 2 and 12
+notes: ''

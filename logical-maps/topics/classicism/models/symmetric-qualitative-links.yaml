@@ -1,0 +1,64 @@
+id: symmetric-qualitative-links
+name: 'Symmetric ideally-full model: qualitative link structure (Base 3)'
+satisfies:
+- boolean-completeness-r
+- necessary-boolean-completeness-r
+- actuality
+- necessary-actuality
+- no-pure-contingency-r
+violates:
+- rigid-comprehension-r
+- distinctness-necessary-r
+status: proved
+certificate:
+  source_id: dorr-bc-not-rc
+  produced_by: Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §8, pp. 23–26;
+  Definition 47 and Lemma 48, p. 24; Proposition 49, p. 25; Proposition 50, p. 26.
+source_names:
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: proof
+  locator: §8, pp. 23–26; Definition 47 and Lemma 48, p. 24; Proposition 49, p. 25; Proposition 50, p.
+    26
+description: >-
+  A symmetric ideally-full intensional action model over one object whose individuals carry qualitative
+  structure. The domain is the disjoint union of points, of two companions for each point, and of infinitely
+  many links for each ordered pair of distinct points. A ternary relation holds of two points and a third
+  individual when that individual is a link over the two if they differ, and a companion of them if they
+  coincide, so the relation's fibres are infinite over distinct points and of size two over a repeated
+  point. The arrows are required to preserve that relation. The symmetry group is the relation-preserving
+  permutations that fix a distinguished pair of points setwise, and the remaining arrows are the surjective
+  relation-preserving maps that collapse that pair. The evaluation point is the identity arrow.
+
+
+  Actuality holds, and necessarily, since membership in the symmetry group is again the condition that
+  the distinguished pair is not collapsed, so the group is pinned down by that pair. The type-e instance
+  of BF holds, and necessarily, since every arrow is surjective, so a property necessarily had by everything
+  is the top property. Boolean Completeness holds, and necessarily, by the draft's main theorem in its
+  closure-operation form: the constant closure operations do not work here, and the operation used instead
+  adds to a finite set the point coordinates of its members and then both companions of each of its points.
+
+
+  Rigid Comprehension fails at type e. The property of being related to the distinguished pair is persistent
+  and finitely pinned, and it is shown to be the only candidate coextensive with itself. But at a world
+  collapsing the pair, its extension shrinks to a two-element fibre, and the union of the two haecceities
+  of that fibre is persistent with the same extension there while being strictly stronger, because some
+  arrow merges the two companions. So the rigidity criterion fails at that world.
+notes: >-
+  This is the draft's answer to the question its two-object model leaves open. Boxed Boolean Completeness,
+  boxed Actuality and the boxed type-e instance of BF all hold, and Rigid Comprehension still fails, so
+  the obstruction need not live at a world where BF fails; it can live inside a qualitative fibre that
+  BF at type e cannot see. The map has no separate principle for the type-e instance of BF, and the draft
+  leaves the higher-type instances unchecked, so the BF schema is recorded as unknown here. The draft
+  also asserts that Atomicity fails, as in the collapse-pair model, but does not write the argument out,
+  so that too is left unknown; note that the recorded implication from boxed Atomicity, Boolean Completeness
+  and BF to Rigid Comprehension means one of those two unknowns has to come out negative. ND fails at
+  type e because the collapsing arrows are arrows. The source is a work in progress, and its own status
+  note describes this section as exploratory though complete for the claims recorded here.

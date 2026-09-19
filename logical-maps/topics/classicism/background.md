@@ -44,6 +44,10 @@ $$
 
 Thus an atom is non-bottom and has no non-bottom strict lower bound.
 These are the definitions of *Classicism*, §2.2, pp. 23–24.
+Boolean Completeness is stated with $\operatorname{GLB}$. The dual form,
+with $\operatorname{LUB}_\tau(y,X):=\forall z^\tau\, .\,
+(\forall w^\tau\, .\,Xw\to w\le_\tau z)\leftrightarrow y\le_\tau z$,
+is equivalent to it in C, and some proofs in the map use that form.
 
 For a relation $Y$ with a finite argument tuple, including the empty tuple,
 the comprehension predicates are:
@@ -59,7 +63,34 @@ $$
 $$
 
 This is the rigidity convention of §2.3, p. 28. Gallin's alternative
-convention has its own principle. For $U^{\sigma\tau t}$, set
+convention has its own principle.
+
+Since $Y\le Z$ is itself the necessary universal closure of the pointwise
+implication, $\operatorname{Persistent}(Y)$ unpacks as
+$\Box\forall\bar x\, .\,Y[\bar x]\to\Box Y[\bar x]$, and both
+conjuncts of $\operatorname{Rigid}$ carry a leading $\Box$. Dropping it
+gives the weak variants:
+
+$$
+\begin{aligned}
+\operatorname{WeaklyPersistent}(Y)&:=\forall\bar x\, .\,
+  Y[\bar x]\to\Box Y[\bar x],\\
+\operatorname{WeaklyInextensible}(Y)&:=\forall X\, .\,
+  (\forall\bar x\, .\,Y[\bar x]\to\Box X[\bar x])\to Y\le X,\\
+\operatorname{WeaklyRigid}(Y)&:=\operatorname{Persistent}(Y)\land
+  \operatorname{WeaklyInextensible}(Y),\\
+\operatorname{VeryWeaklyRigid}(Y)&:=\operatorname{WeaklyPersistent}(Y)\land
+  \operatorname{WeaklyInextensible}(Y).
+\end{aligned}
+$$
+
+$\operatorname{Rigid}$ is thus necessary very weak rigidity. These are the
+conventions of Dorr, *Boolean Completeness does not imply Rigid
+Comprehension*, pp. 2 and 12; that draft's unqualified “weakly rigid” is
+$\operatorname{VeryWeaklyRigid}$ here, and the map reserves “weakly rigid”
+for the stronger combination used in its Proposition 1.
+
+For $U^{\sigma\tau t}$, set
 
 $$
 \begin{aligned}
@@ -142,7 +173,11 @@ same-typed entries; the formula $P$ there is pure, so it contains neither
 $\operatorname{Fun}$ nor any constant of $\Sigma$.
 
 **Evidence.** References use the 87-page draft of *Classicism* dated
-16 May 2023. Models cite the construction and evaluation point directly.
+16 May 2023, and, for the symmetric ideally-full models and the weak
+rigidity principles, the 27-page draft of Dorr, *Boolean Completeness does
+not imply Rigid Comprehension*, dated 30 July 2026. That second source is
+a work in progress and is not distributed with the map; its records say so.
+Models cite the construction and evaluation point directly.
 The source models now use exactly the map's type system. Their listed
 properties provide countermodel evidence at the stated evaluation point.
 The singleton-root coalesced model still awaits an expansion to the fixed

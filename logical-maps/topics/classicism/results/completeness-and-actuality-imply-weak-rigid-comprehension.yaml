@@ -1,0 +1,55 @@
+id: completeness-and-actuality-imply-weak-rigid-comprehension
+premises:
+- boolean-completeness-r
+- actuality
+conclusion: weak-rigid-comprehension-r
+status: proved
+certificate:
+  source_id: dorr-bc-not-rc
+  produced_by: Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Proposition
+  1, p. 2.
+source_names:
+- BC does not imply RC
+proof: >-
+  Fix a relational type $\tau=\bar\sigma t$ and $X^\tau$. Write
+  $\operatorname{Haec}_{\bar u}:=\lambda\bar z\, .\,\bigwedge_i z_i=u_i$ and put
+  $H:=\lambda Z^\tau\, .\,\exists\bar y\, .\,X[\bar y]\land Z=\operatorname{Haec}_{\bar y}$, the property
+  of being the haecceity of some $X$ things. By Boolean Completeness in its least-upper-bound form, let
+  $Y$ be a least upper bound of $H$. Two observations do the work. (i) If $X[\bar u]$ then
+  $\operatorname{Haec}_{\bar u}\le_\tau Y$, and instantiating at $\bar u$ with $\bar u=\bar u$ gives
+  $\Box Y[\bar u]$. (ii) If $\Box Z[\bar u]$ whenever $X[\bar u]$, then $\operatorname{Haec}_{\bar u}\le_\tau
+  Z$ for each such $\bar u$, so $Z$ is an upper bound of $H$ and $Y\le_\tau Z$.
+
+
+  Coextensiveness. $X[\bar u]\to Y[\bar u]$ by (i). Conversely, let $w$ witness Actuality and put
+  $P:=\lambda\bar z\, .\,(w\le X[\bar z])$. If $X[\bar u]$ then $X[\bar u]$ is true, so $w\le X[\bar u]$;
+  a true entailment is necessary, so $\Box P[\bar u]$. By (ii), $Y\le_\tau P$, so $Y[\bar u]\to w\le X[\bar
+  u]$; and $w$ is true, so $Y[\bar u]\to X[\bar u]$.
+
+
+  Persistence. Take $Z:=\lambda\bar z\, .\,\Box Y[\bar z]$ in (ii). If $X[\bar u]$ then $\Box Y[\bar u]$
+  by (i), hence $\Box Z[\bar u]$ by 4. So $Y\le_\tau\lambda\bar z\, .\,\Box Y[\bar z]$, which is
+  $\operatorname{Persistent}(Y)$.
+
+
+  Weak inextensibility. Suppose $\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar z]$. If $X[\bar u]$ then
+  $Y[\bar u]$ by coextensiveness, so $\Box Z[\bar u]$; hence $Y\le_\tau Z$ by (ii).
+references:
+- paper: dorr-bc-not-rc
+  role: proof
+  locator: Proposition 1, p. 2
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, pp. 23–25
+  note: Boolean Completeness and Actuality; the least-upper-bound form of Boolean Completeness is equivalent
+    to the stated greatest-lower-bound form in C.
+notes: >-
+  The argument stops short of Rigid Comprehension exactly at the leading box of Inextensible. It delivers
+  a $Y$ that is inextensible at the actual world, while Rigid demands the biconditional at every world.
+  The models recorded from the same draft show that the gap is real.

@@ -1,0 +1,31 @@
+id: atomlessness-implies-infinity-t
+premises:
+- atomlessness
+conclusion: infinity-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 19 September 2026
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, p. 76 (Atomlessness); §2.3,
+  n. 47, p. 32 (Infinity).
+source_names:
+- Classicism
+proof: In C the top and bottom propositions differ, so $\Diamond\top$. Atomlessness applied to $\top$ gives
+  a possible $q_1$ with $q_1\le\top$ and $q_1\ne\top$; applied to $q_1$ it gives a possible $q_2$ strictly
+  below $q_1$, and so on. After $n$ steps the chain $\top,q_1,\ldots,q_n$ descends strictly in the algebraic
+  order, and a strictly descending chain in a partial order has pairwise distinct members. For if $q_i=q_j$
+  with $i<j$ then $q_i\le q_{i+1}$, since $q_j\le q_{i+1}$, while $q_{i+1}\le q_i$, so antisymmetry gives
+  $q_{i+1}=q_i$, against the choice of $q_{i+1}$. Each instance of the Infinity schema therefore needs
+  only finitely many applications of the single Atomlessness sentence.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, p. 76; §2.3, n. 47, p. 32
+  note: Formulations of the two principles. The draft does not draw the connection between them.
+notes: Only the type-$t$ Infinity follows. Atomlessness constrains propositions, so it says nothing about
+  how many individuals there are.

@@ -272,7 +272,10 @@ premises still suffice without each one. **Transitive reduction**, on by default
 arrow when a chain of other displayed arrows already gives it, as in a Hasse
 diagram; a proved arrow is never hidden through a conjectural chain, nothing
 is hidden inside a cycle, and node positions do not change, since the layout
-always uses the full arrow set.
+always uses the full arrow set. It also hides an arrow that repeats a premise
+stroke: when C is equivalent to A ∧ B, the strokes from A and B into the ∧
+inside C's box already say what C ⇒ A and C ⇒ B say, so only the strokes are
+drawn.
 
 Clicking a principle (on the graph or in the sidebar), or an ∧, shades other
 principles and conjunction circles by their relation to it. Each circle uses its

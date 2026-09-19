@@ -141,6 +141,24 @@ try{
   dom5.window.document.getElementById('reduce-arrows').click();
   assert.deepEqual(geometry(dom5).edges.map(e=>e.id).sort(),before.edges.map(e=>e.id).sort(),'Turning reduction off restores every arrow');
 
+  // The reduction also drops an arrow that repeats a premise stroke: with R
+  // equivalent to P ∧ Q, the strokes into the ∧ inside R's box already carry
+  // R ⇒ P and R ⇒ Q.
+  const echoFixture={topic,principles:principles(['p','q','r','s']),models:[],
+    results:[rule('pqr',['p','q'],'r'),rule('rp',['r'],'p'),rule('rq',['r'],'q'),rule('rs',['r'],'s')]};
+  const echoDom=page(echoFixture);
+  const echoKept=geometry(echoDom);
+  verifyDirections(echoKept,'premise echo');
+  const echoMeet=echoKept.nodes.find(n=>n.kind==='junction');
+  assert.equal(echoMeet?.parent,classNode(echoKept,'r').id,'The ∧ joins the box of the principle it is equivalent to');
+  assert.equal(echoKept.edges.filter(e=>e.toJunction&&e.to===echoMeet.id).length,2,'Both premise strokes survive the reduction');
+  assert.ok(!arrow(echoKept,'r','p')&&!arrow(echoKept,'r','q'),'An arrow repeating a premise stroke is hidden');
+  assert.ok(arrow(echoKept,'r','s'),'An arrow to a non-conjunct is left alone');
+  echoDom.window.document.getElementById('reduce-arrows').click();
+  const echoWhole=geometry(echoDom);
+  assert.ok(arrow(echoWhole,'r','p')&&arrow(echoWhole,'r','q'),'Turning reduction off restores the repeated arrows');
+  assert.deepEqual(positions(echoKept),positions(echoWhole),'Hiding a repeated arrow does not move nodes');
+
   // Arrowheads stay filled for both open and model-refuted converses.
   const heads={topic,principles:principles(['m','n','o']),models:[{id:'w',name:'Witness',status:'proved',satisfies:['n'],violates:['m'],certificate:cert('paper'),sources:['Fixture'],source_names:['Fixture']}],results:[rule('mn',['m'],'n'),rule('on',['o'],'n')]};
   const g7=geometry(page(heads));

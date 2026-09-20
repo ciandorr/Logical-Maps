@@ -3,6 +3,8 @@ name: 'Symmetric ideally-full model: two objects, the second unpinned'
 satisfies:
 - necessary-boolean-completeness-r
 - necessary-actuality
+- axiom-of-infinity-e
+- axiom-of-infinity-t
 violates:
 - rigid-comprehension-r
 - necessary-barcan-r
@@ -63,3 +65,16 @@ notes: >-
   comments report that higher-type instances fail there, which would make the schema fail, but its text
   does not. ND fails at type e because some arrow to the second object collapses two individuals. The
   source is a work in progress.
+changes:
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
+    identity at the identity arrow is literal, so no numeral counts them. The propositions that a given
+    individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned
+    by that individual, so there are infinitely many propositions. The set of numerals at each type is
+    invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is
+    standard and no finite cardinality holds of the universal property at either type.
+  satisfies:
+  - axiom-of-infinity-e
+  - axiom-of-infinity-t

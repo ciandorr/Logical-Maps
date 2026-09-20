@@ -4,9 +4,12 @@ satisfies:
 - necessary-rigid-comprehension-r
 - necessary-atomicity-r
 - necessary-actuality
+- relational-choice-r
 violates:
 - fregean-axiom
 - no-pure-contingency-r
+- axiom-of-infinity-t
+- infinity-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -40,3 +43,18 @@ changes:
   violates:
   - fregean-axiom
   - no-pure-contingency-r
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Added Relational Choice at Cian Dorr's direction. With choice in the metatheory a serial relation
+    has a functional subrelation, and a full model contains every intension, so that subrelation is in the
+    domain; see Classicism, p. 61, on the principles common to full models.
+    The propositions at the evaluation object are the subsets of the two arrows out of it, four in all,
+    and every intension of a full model is present, so the numerals are the finite cardinalities and the
+    fourth holds of the universal property of propositions: the Axiom of Infinity at type t fails, as does
+    the fifth instance of the schema.
+  satisfies:
+  - relational-choice-r
+  violates:
+  - axiom-of-infinity-t
+  - infinity-t

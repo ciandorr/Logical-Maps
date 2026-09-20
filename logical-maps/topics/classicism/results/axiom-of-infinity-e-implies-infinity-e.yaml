@@ -15,14 +15,13 @@ sources:
 source_names:
 - Dorr 19 Sep
 proof: >-
-  Fix $n\ge1$. The closed term $\operatorname{Suc}_e^{\,n}(\mathbf{0}_e)$ denotes a finite cardinality,
-  since any $W$ holding of $\mathbf{0}_e$ and closed under $\operatorname{Suc}_e$ holds of it after
-  $n$ steps. The axiom therefore supplies an $X$ falling under it. Unfold $\operatorname{Suc}_e$ $n$
-  times, writing $X_n:=X$ and, at each stage, taking the witness $y_k$ with $X_k y_k$ and
-  $X_{k-1}:=\lambda u\, .\,X_k u\land u\ne y_k$. Each $y_{k-1}$ falls under $X_{k-1}$, which excludes
-  $y_k$ and everything dropped before it, so $y_1,\ldots,y_n$ are pairwise distinct. They are the $n$
-  witnesses the schema's $n$-th instance asks for. The remaining $X_0$ falls under $\mathbf{0}_e$ and
-  is empty, which is what closes the unfolding.
+  By contraposition. A routine induction shows that
+  $\operatorname{Suc}_e^{\,k}(\mathbf{0}_e)$ holds of a property exactly when that property has $k$
+  instances, and that $\operatorname{Finite}_e$ holds of it, since any $W$ holding of $\mathbf{0}_e$
+  and closed under $\operatorname{Suc}_e$ reaches it in $k$ steps. Now suppose the schema's $n$-th
+  instance fails, so there are at most $n-1$ individuals. Then for some $k<n$ there are exactly $k$ of them,
+  and $\operatorname{Suc}_e^{\,k}(\mathbf{0}_e)$ is a finite cardinality holding of
+  $\lambda u\, .\,\top$, which the axiom denies.
 references:
 - paper: bacon-dorr-classicism
   role: background

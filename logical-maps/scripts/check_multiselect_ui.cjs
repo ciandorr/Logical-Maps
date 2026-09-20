@@ -128,6 +128,31 @@ try {
   assert.equal(d.getElementById('pane-page').dataset.active, 'true'); assert.equal(pop.hidden, true);
   d.getElementById('page-back').click(); pointer(label('a'));
   assert.equal(pop.parentElement.id, 'graph-details');
+  // The sidebar's moves offered from the details pane: hide, add negations,
+  // move to background. Each is exactly the sidebar's own action.
+  const action = kind => pop.querySelector(`[data-selection-action="${kind}"]`);
+  pointer(label('e'));
+  assert.ok(action('hide') && action('negate') && action('background'), 'A selected principle offers the three moves');
+  assert.equal(action('negate').textContent, 'Add negation');
+  action('negate').click();
+  assert.ok(w.eval('state.negativeShown.has("e")'), 'Adding the negation checks ✗ in the sidebar');
+  assert.ok(d.querySelector('#nodes [data-principle="!e"]'), 'And ¬E joins the graph');
+  assert.deepEqual(focus(), ['e'], 'The selection stays');
+  assert.ok(!action('negate'), 'The offer is withdrawn once the negation is shown');
+  action('hide').click();
+  assert.ok(w.eval('state.excluded.has("e")'), 'Hiding unchecks ✓ in the sidebar');
+  assert.ok(!label('e') || !label('e').closest('.node'), 'E leaves the graph');
+  assert.ok(d.querySelector('#nodes [data-principle="!e"]'), 'While ¬E, shown separately, stays');
+  assert.equal(w.eval('state.focus'), null, 'And nothing is selected any more');
+  w.eval('state.excluded.delete("e"); state.negativeShown.delete("e"); repaintGraph();');
+  pointer(label('a')); shift('e');
+  assert.equal(action('negate').textContent, 'Add negations', 'A joint selection speaks in the plural');
+  action('background').click();
+  assert.ok(w.eval('background.has("a") && background.has("e")'), 'Moving to background assumes both');
+  assert.ok(d.querySelector('#pr-filters [data-pr-row="a"]').classList.contains('in-background'), 'As the sidebar shows');
+  assert.equal(w.eval('state.focus'), null);
+  w.eval('resetBackground()');
+  pointer(label('a'));
   assert.deepEqual(errors, []);
-  console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, red inconsistency highlighting, and bottom graph details.');
+  console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, red inconsistency highlighting, bottom graph details, and hide / add negation / move to background offered on the selection.');
 } finally { w.close(); }

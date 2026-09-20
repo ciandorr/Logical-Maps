@@ -342,7 +342,11 @@ selected, and shading is relative to the whole selected conjunction.
 A background-inconsistent principle or conjunction highlights every box in the
 excluded colour, with an inconsistency notice. Proof readouts continue to report
 the inconsistent antecedent. The shading survives reading an
-arrow's details and clears with Escape or a click on empty space.
+arrow's details and clears with Escape or a click on empty space. The details
+of a selected principle or joint selection also offer the sidebar's own moves
+on it: **Hide** unchecks it, **Add negation** checks its negation, and **Move
+to background** assumes it, each with the sign the selection carries. The same
+three are offered on the lattice, where they act on the lattice's own choices.
 
 Graph descriptions occupy a reserved bottom panel, with the fixed relation legend
 above the scrolling details. Drag its divider or use the arrow keys to resize it;

@@ -389,6 +389,7 @@
   .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
   .pop .pop-l { font-size: 12px; color: var(--ink-2); margin-top: 6px; } .pop code { font: 12px var(--mono); }
   .pop .badges { display: flex; gap: 6px; margin: 6px 0; } .pop .links { margin: 4px 0 0; }
+  .pop .links .lnk + .lnk::before { content: '·'; color: var(--ink-3); margin: 0 8px 0 4px; }
 
   .ex-p.bad { background: color-mix(in srgb, var(--indep) 32%, transparent); outline: 1.5px solid var(--indep); }
   .ex-bad { border: 1px solid var(--indep); color: var(--indep); border-radius: 3px; padding: 8px 10px; margin: 0 0 10px; font-size: 13px; }
@@ -2424,6 +2425,7 @@ function wire(el) {
   el.querySelectorAll('button[data-graph-connection]').forEach(b => b.addEventListener('click', () => selectGraphEdge(graphEdgesByKey.get(b.dataset.graphConnection))));
   el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', ev => select({ type: 'principle', id: b.dataset.principle }, ev.shiftKey || ev.metaKey || ev.ctrlKey)));
   el.querySelectorAll('button[data-remove-selection]').forEach(b => b.addEventListener('click', () => select({type: 'principle', id: b.dataset.removeSelection}, true)));
+  el.querySelectorAll('button[data-selection-action]').forEach(b => b.addEventListener('click', () => applySelectionAction(b.dataset.selectionAction)));
   el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
   el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
   el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
@@ -2471,6 +2473,8 @@ function renderDetail() {
       return `<li><details><summary>${esc(name(literal))}</summary>${isNegative(literal) ? '<p>Negation of:</p>' : ''}<p>${esc(principle?.statement || name(literal))}</p></details><button class="lnk" data-remove-selection="${esc(literal)}" aria-label="Remove ${esc(name(literal))} from selection">remove</button></li>`;
     }).join('')}</ul>`;
     h += statusLine('Joint consistency', consistencyStatus(sel.premises), true);
+    const actions = selectionActions(sel.premises);
+    if (actions) h += `<div class="links">${actions}</div>`;
   } else if (sel.type === 'junction') {
     const junction = layout?.byId.get(sel.id);
     if (!junction) { el.hidden = true; return; }
@@ -2517,7 +2521,7 @@ function renderDetail() {
       const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
       if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
     }
-    h += '<div class="links"><button class="lnk" data-goto="1">details</button></div>';
+    h += `<div class="links"><button class="lnk" data-goto="1">details</button>${selectionActions([(sel.negative ? '!' : '') + sel.id])}</div>`;
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
@@ -2615,6 +2619,60 @@ function setAssumption(id, sign) {
   if (sign === 'negative') negativeBackground.add(id);
   state.modelId = null; state.selected = null;
   saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+// The sidebar's own moves, offered on the selected principles from the
+// details pane: hide them, hand them to the background, or add their
+// negations. Each does exactly what the sidebar control would, in whichever
+// view is open, and nothing else.
+function literalShown(l) {
+  const id = baseId(l);
+  if (state.tab === 'lattice') return lattice.shown.includes(l);
+  return isNegative(l) ? state.negativeShown.has(id) : !state.excluded.has(id);
+}
+function selectionActions(literals) {
+  if (state.tab !== 'graph' && state.tab !== 'lattice') return '';
+  const active = literals.filter(l => byPid.has(baseId(l)) && !inBackground(baseId(l)));
+  if (!active.length) return '';
+  const plural = active.length > 1;
+  const button = (kind, label, title) => `<button class="lnk" data-selection-action="${kind}" title="${esc(title)}">${label}</button>`;
+  let h = '';
+  if (active.some(literalShown)) h += button('hide', 'Hide', `Take the selected ${plural ? 'principles' : 'principle'} off the diagram, as unchecking ${plural ? 'them' : 'it'} in the sidebar would.`);
+  if (active.some(l => !literalShown(negate(l)))) h += button('negate', plural ? 'Add negations' : 'Add negation', `Show the ${plural ? 'negations' : 'negation'} too, as checking ✗ in the sidebar would.`);
+  if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'Move to background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  return h;
+}
+function repaintGraph() { refreshPrincipleControls(); renderGraph(); fitInitial(); }
+function applySelectionAction(kind) {
+  const sel = state.selected;
+  const literals = sel?.type === 'principle' ? [(sel.negative ? '!' : '') + sel.id] : sel?.type === 'selection' ? sel.premises : [];
+  const active = literals.filter(l => byPid.has(baseId(l)) && !inBackground(baseId(l)));
+  if (!active.length) return;
+  const onLattice = state.tab === 'lattice';
+  if (kind === 'background') {
+    for (const l of active) {
+      const id = baseId(l);
+      if (topicBackground.includes(id)) continue;
+      (isNegative(l) ? negativeBackground : background).add(id);
+    }
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !active.some(a => baseId(a) === baseId(l))); lattice.selected = null; }
+    // What is now assumed is no longer something to shade relative to.
+    state.modelId = null; state.selected = null; state.focus = null;
+    saveBackground(); refreshPrincipleControls(); renderAll(true);
+    return;
+  }
+  if (kind === 'hide') {
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !active.includes(l)); lattice.selected = null; }
+    else for (const l of active) isNegative(l) ? state.negativeShown.delete(baseId(l)) : state.excluded.add(baseId(l));
+    select(null);
+    if (!onLattice) repaintGraph();
+    return;
+  }
+  if (kind === 'negate') {
+    if (onLattice) { for (const l of active) if (!lattice.shown.includes(negate(l))) lattice.shown.push(negate(l)); }
+    else for (const l of active) isNegative(l) ? state.excluded.delete(baseId(l)) : state.negativeShown.add(baseId(l));
+    if (onLattice) { renderLatticeFilters(); renderLattice(); } else repaintGraph();
+    renderDetail();
+  }
 }
 function changeBackground(id, assumed) {
   if (!assumed) {
@@ -2782,7 +2840,7 @@ document.getElementById('fit').addEventListener('click', fit);
   const el = document.getElementById('pr-filters');
   const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-clear-graph="${p.id}">clear</button><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
   el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
-  const repaint = () => { refreshPrincipleControls(); renderGraph(); fitInitial(); };
+  const repaint = repaintGraph;
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
   el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
   el.querySelectorAll('[data-clear-graph]').forEach(b => b.addEventListener('click', () => { state.excluded.add(b.dataset.clearGraph); state.negativeShown.delete(b.dataset.clearGraph); repaint(); }));

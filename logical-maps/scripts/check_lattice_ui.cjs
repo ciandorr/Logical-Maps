@@ -297,6 +297,28 @@ try{
   assert.ok(!visible('lat-controls')&&!visible('lat-principles'),'Which are hidden again on the graph');
   assert.ok(visible('graph-options')&&visible('graph-principles'));
 
+  // The same three moves from the lattice's details pane, acting on the
+  // lattice's own choices.
+  d2.querySelector('.tab[data-tab="lattice"]').click();
+  w2.eval('lattice.shown=["a","b"];renderLattice();');
+  const act=kind=>d2.querySelector(`#pop [data-selection-action="${kind}"]`);
+  d2.querySelector('#lat-graph text[data-principle="a"]').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
+  assert.ok(act('hide')&&act('negate')&&act('background'),'A lattice principle offers the three moves');
+  act('negate').click();
+  assert.deepEqual(JSON.parse(w2.eval('JSON.stringify(lattice.shown)')),['a','b','!a'],'Adding the negation adds it as a generator');
+  assert.equal(d2.querySelector('#pane-lattice [data-lat-negative="a"]').getAttribute('aria-pressed'),'true','As the sidebar shows');
+  assert.ok(!act('negate'),'And the offer is withdrawn');
+  act('hide').click();
+  assert.deepEqual(JSON.parse(w2.eval('JSON.stringify(lattice.shown)')),['b','!a'],'Hiding drops the literal, and only that literal');
+  assert.equal(w2.eval('state.focus'),null,'Nothing is selected any more');
+  d2.querySelector('#lat-graph .lat-meet').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
+  assert.equal(act('negate').textContent,'Add negations','An ∧ offers them for its conjuncts together');
+  act('background').click();
+  assert.ok(w2.eval('background.has("b") && negativeBackground.has("a")'),'Moving to background assumes each conjunct with its sign');
+  assert.deepEqual(JSON.parse(w2.eval('JSON.stringify(lattice.shown)')),[],'And they stop being generators');
+  assert.ok(d2.querySelector('#pane-lattice [data-lat-row="a"]').classList.contains('in-background'),'As the sidebar shows');
+  w2.eval('resetBackground()');
+
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, equivalent names selecting one node, and a source selector shared with the graph that redraws the lattice from the selected sources alone.');
+  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, equivalent names selecting one node, and a source selector shared with the graph that redraws the lattice from the selected sources alone, and hide / add negation / move to background offered on the selection.');
 }finally{pages.forEach(p=>p.window.close());}

@@ -1,0 +1,45 @@
+id: gallin-comprehension-and-bf-imply-weak-rigid-comprehension
+premises:
+- gallin-extensional-comprehension-r
+- barcan-r
+conclusion: weak-rigid-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 20 September 2026; proof by Claude Fable 5.1 (Anthropic), 20 September
+    2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 20 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, n. 37, p. 28.
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, pp. 2 and 12
+  (weak rigidity).
+source_names:
+- Dorr 20 Sep
+- Classicism
+- BC does not imply RC (draft)
+proof: >-
+  Let $X$ be given and let $Y$ be the coextension that Gallin Extensional Comprehension supplies, with $Y$
+  and $\neg Y$ persistent. Persistence of $Y$ is the first conjunct of weak rigidity. For weak
+  inextensibility, let $Z$ satisfy $\forall\bar x\, .\,Y[\bar x]\to\Box Z[\bar x]$. For any $\bar x$,
+  either $Y[\bar x]$, and then $\Box Z[\bar x]$, or $\neg Y[\bar x]$, and then $\Box\neg Y[\bar x]$ by
+  persistence of $\neg Y$ (with T); in both cases $\Box(Y[\bar x]\to Z[\bar x])$ by K. So
+  $\forall\bar x\, .\,\Box(Y[\bar x]\to Z[\bar x])$, and BF, applied to the abstract
+  $\lambda\bar x\, .\,Y[\bar x]\to Z[\bar x]$ one argument at a time, gives
+  $\Box\forall\bar x\, .\,Y[\bar x]\to Z[\bar x]$, which is $Y\le Z$. Hence $Y$ is weakly rigid and
+  coextensive with $X$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, n. 37, p. 28
+  note: The source's note states that under BF a relation persistent together with its negation is
+    inextensible; this record is the part of that argument that uses BF at the world of evaluation only.
+notes: >-
+  The direct argument, using BF once and at the world of evaluation. The claim strengthens: the same
+  witness is fully rigid, since Gallin Extensional Comprehension gives ND, ND with BF gives □ND, □ND gives
+  □BF, and with BF at every world the same argument runs inside the box of inextensibility; that is the
+  recorded gallin-comprehension-and-bf-imply-rigid-comprehension, of which this record is therefore a
+  consequence. It is kept because it isolates what BF at the evaluation world alone buys.

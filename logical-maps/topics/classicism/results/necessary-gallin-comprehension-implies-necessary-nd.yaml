@@ -1,0 +1,31 @@
+id: necessary-gallin-comprehension-implies-necessary-nd
+premises:
+- necessary-gallin-extensional-comprehension-r
+conclusion: necessary-distinctness-necessary-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 20 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 20 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, n. 37, p. 28.
+source_names:
+- Dorr 20 Sep
+- Classicism
+proof: >-
+  The recorded proof of gallin-comprehension-implies-nd derives each closed instance of ND at a type
+  $\sigma$ from the closed instance of Gallin Extensional Comprehension at $\lambda x^\sigma\, .\,x=a$,
+  using only theorems of C, so the conditional from that instance to the ND instance is a theorem of C.
+  C is closed under necessitation, and K carries the box across the conditional; the boxed premise supplies
+  the box of the antecedent. Hence every closed instance of ND is necessary.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, n. 37, p. 28
+  note: Formulation of the Gallin convention. The draft does not draw this consequence.
+notes: The boxed premise is what makes the argument available at every world; the unboxed principle gives
+  ND itself.

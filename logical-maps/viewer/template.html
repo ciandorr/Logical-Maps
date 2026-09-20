@@ -75,7 +75,7 @@
   #pane-graph[data-active="true"], #pane-open[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
   #conjecture-options, .conjecture-hint { display: none; }
   #pane-open #conjecture-options, #pane-open .conjecture-hint { display: block; }
-  #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open [data-clear-graph], #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
+  #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
   .open-content { overflow: auto; min-width: 0; min-height: 0; }
   #open-warning { position: static; margin: 16px 20px 0; }
   .conjecture-row { padding: 16px 0; border-top: 1px solid var(--line); }
@@ -551,7 +551,7 @@
       <div class="controls-scroll" id="principle-controls">
       <div id="lat-controls">
         <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
-        <p class="background-hint">A Hasse diagram of the conjunctions the chosen principles generate. Every meet is its own node; nothing nests. Use ✓ for a principle and ✗ for its negation, or move it to the background.</p>
+        <p class="background-hint">A Hasse diagram showing all the conjunctions of the selected principles. Solid arrows denote implications shown to be non-reversible by models in the selected sources; dashed arrows denote implications which might be reversible (as far as the selected sources are concerned).</p>
         <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
       </div>
       <div id="conjecture-options">
@@ -2838,12 +2838,11 @@ document.getElementById('reduce-arrows').addEventListener('change', e => { state
 document.getElementById('fit').addEventListener('click', fit);
 (function () {
   const el = document.getElementById('pr-filters');
-  const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-clear-graph="${p.id}">clear</button><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
+  const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
   el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
   const repaint = repaintGraph;
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
   el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
-  el.querySelectorAll('[data-clear-graph]').forEach(b => b.addEventListener('click', () => { state.excluded.add(b.dataset.clearGraph); state.negativeShown.delete(b.dataset.clearGraph); repaint(); }));
   const setSelection = (rows, selected) => {
     rows.forEach(row => { const id = row.dataset.prRow; if (inBackground(id)) return; selected ? state.excluded.delete(id) : state.excluded.add(id); if (!selected) state.negativeShown.delete(id); }); repaint();
   };
@@ -3317,6 +3316,10 @@ function refreshLatticeControls() {
     row.classList.toggle('in-background', inBackground(id));
     row.classList.toggle('is-collapsed', inBackground(id));
   });
+  document.querySelectorAll('#lat-filters .pr-category').forEach(group => {
+    const ordinary = [...group.querySelectorAll('.lat-row')].filter(row => !inBackground(row.dataset.latRow));
+    group.querySelector('.pr-category-count').textContent = `${ordinary.filter(row => row.classList.contains('on')).length}/${ordinary.length}`;
+  });
 }
 function latticeToggle(id) {
   const at = lattice.shown.indexOf(id);
@@ -3329,7 +3332,7 @@ function renderLatticeFilters() {
   const el = document.getElementById('lat-filters');
   if (!el) return;
   const row = p => `<div class="pr-row lat-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-lat-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-lat-positive="${p.id}" aria-label="Add ${esc(p.name)}" aria-pressed="false">✓</button><button data-lat-negative="${p.id}" aria-label="Add not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><span class="lat-name">${esc(p.name)}</span><span class="pr-actions"><button class="lnk" data-lat-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`;
-  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="ctl">${g.principles.map(row).join('')}</div></section>`).join('');
+  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${g.principles.map(row).join('')}</div></section>`).join('');
   renderSubscripts(el);
   refreshLatticeControls();
 }
@@ -3339,8 +3342,18 @@ function renderLatticeFilters() {
   renderLatticeFilters();
   el.addEventListener('click', ev => {
     const pos = ev.target.closest('[data-lat-positive]'), neg = ev.target.closest('[data-lat-negative]');
-    const bg = ev.target.closest('[data-lat-background]');
-    if (pos) latticeToggle(pos.dataset.latPositive);
+    const bg = ev.target.closest('[data-lat-background]'), bulk = ev.target.closest('[data-lat-select]');
+    if (bulk) {
+      // A whole group at once, as on the graph. The node cap still applies, so
+      // a group too large for the diagram stops with the warning rather than
+      // outrunning it.
+      const members = [...bulk.closest('.pr-category').querySelectorAll('.lat-row')].map(row => row.dataset.latRow).filter(id => !inBackground(id));
+      if (bulk.dataset.latSelect === 'all') { for (const id of members) if (!lattice.shown.includes(id)) lattice.shown.push(id); }
+      else lattice.shown = lattice.shown.filter(l => !members.includes(baseId(l)));
+      lattice.selected = null;
+      renderLattice(); latticeFitInitial();
+    }
+    else if (pos) latticeToggle(pos.dataset.latPositive);
     else if (neg) latticeToggle(negate(neg.dataset.latNegative));
     else if (bg) {
       // An assumption is entailed by everything, so it has no work to do as a

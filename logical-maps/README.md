@@ -244,7 +244,8 @@ Lattice: a separate Hasse diagram of the conjunctions a chosen handful of
 principles generate. It opens with False and True alone; the sidebar offers the same
 choices per principle as the graph, ✓ for the principle, ✗ for its negation and
 a move to the background, and each adds its literal together with its meets
-against everything already shown. The sidebar is the graph's own, moved
+against everything already shown. Each group has the graph's **show positive**
+and **clear** as well, under the same node cap. The sidebar is the graph's own, moved
 across with the tab as it is for the theory explorer, so the background, the
 scrolling and the resizable panes are the same by construction, and so is the
 arrow-source selector: the lattice is drawn from the selected sources alone, proofs and models both, so
@@ -428,7 +429,7 @@ arrow shows its supporting results. Links collecting premises into ∧ have no
 arrowheads or flow chevrons, since an individual conjunct does not imply the whole.
 
 Graph controls use **✓** to show a principle and **✗** to show its negation;
-both can be displayed together. **Clear** hides both forms. **Background** moves
+both can be displayed together; unchecking each hides it. **Background** moves
 the principle into the shared assumptions, assuming it positively unless only
 ✗ was selected. In the background, ✓ and ✗ are exclusive. **Return** displays
 the assumed sign on the graph again. Standing topic axioms remain fixed.

@@ -40,7 +40,8 @@ try {
   const reload = page(w.location.href);
   assert.equal(reload.window.eval("negativeBackground.has('b')"), true);
   click('#background-reset');
-  click('[data-clear-graph="c"]'); click('[data-add-background="c"]');
+  for (const form of ['positive', 'negative']) if (doc.querySelector(`[data-show-${form}="c"]`).getAttribute('aria-pressed') === 'true') click(`[data-show-${form}="c"]`);
+  click('[data-add-background="c"]');
   assert.equal(w.eval("background.has('c')"), true, 'Neither form selected defaults to positive');
   click('#background-reset');
 

@@ -117,10 +117,18 @@ try{
   d.getElementById('lat-clear').click();
   assert.deepEqual(snap().labels.slice().sort(),['⊤','⊥'],'Clearing returns to the two constants');
 
-  // The sidebar has no control for adding many at once, but does offer the
-  // same per-principle choices as the graph: positive, negative, background.
-  assert.equal(d.querySelectorAll('#lat-filters [data-category-select]').length,0,'No bulk controls');
+  // The sidebar offers the same per-principle choices as the graph: positive,
+  // negative, background; and the same moves on a whole group.
   assert.equal(d.querySelectorAll('#lat-filters .lat-row').length,fixture.principles.length,'It lists every principle');
+  const groups=[...d.querySelectorAll('#lat-filters .pr-category')];
+  assert.ok(groups.length&&groups.every(g=>g.querySelector('[data-lat-select="all"]')&&g.querySelector('[data-lat-select="none"]')),'Every group offers show positive and clear');
+  groups[0].querySelector('[data-lat-select="all"]').click();
+  const members=[...groups[0].querySelectorAll('.lat-row')].map(r=>r.dataset.latRow);
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(lattice.shown)')),members,'Show positive adds every principle of the group');
+  assert.equal(groups[0].querySelector('.pr-category-count').textContent,`${members.length}/${members.length}`,'And the count says so');
+  groups[0].querySelector('[data-lat-select="none"]').click();
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(lattice.shown)')),[],'Clear removes them again');
+  assert.equal(groups[0].querySelector('.pr-category-count').textContent,`0/${members.length}`);
   const row=id=>d.querySelector(`#lat-filters [data-lat-row="${id}"]`);
   const snapshot=()=>JSON.parse(w.eval('JSON.stringify({shown:lattice.shown,labels:lattice.nodes.map(x=>x.label)})'));
 

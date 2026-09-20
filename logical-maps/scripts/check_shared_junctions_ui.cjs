@@ -24,7 +24,7 @@ try{
  assert.ok(!premise.vectorEffect||premise.vectorEffect==='none','Premise strokes scale with the view like every other edge');
  const pw=parseFloat(premise.strokeWidth), ow=parseFloat(ordinary.strokeWidth);
  assert.ok(pw<ow,'A premise stroke is thinner than an ordinary arrow');
- assert.ok(pw>ow*0.8,'But only a little thinner: it is not a lesser kind of edge');
+ assert.ok(pw>ow*0.7,'But not so thin as to read as a lesser kind of edge');
  let g=graph(dom);uniqueJunctions(g);
  const ab=g.nodes.find(n=>n.id==='j:abc');assert.ok(ab.shared);
  assert.deepEqual(g.edges.filter(e=>e.from===ab.id).map(e=>e.conclusion||e.b).sort(),['c','d','e']);

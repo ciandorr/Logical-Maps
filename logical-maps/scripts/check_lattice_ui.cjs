@@ -144,7 +144,7 @@ try{
   assert.equal(g.labels.length,4,'And add nothing else');
 
   // The background is shared with the graph, and the dock follows the view.
-  assert.equal(d.getElementById('background-dock').closest('aside').id,'lat-sidebar','The dock moves to the open sidebar');
+  assert.equal(d.getElementById('background-dock').closest('.pane').id,'pane-lattice','The dock comes across with the sidebar');
   w.eval('lattice.shown=[];renderLattice();');
   row('a').querySelector('[data-lat-positive]').click();
   row('a').querySelector('[data-lat-background]').click();
@@ -152,7 +152,7 @@ try{
   assert.ok(row('a').classList.contains('in-background'),'Its row says so');
   assert.ok(w.eval('[...background].includes("a")'),'And it reaches the shared background');
   d.querySelector('.tab[data-tab="graph"]').click();
-  assert.equal(d.getElementById('background-dock').closest('aside').id,'graph-sidebar','The dock goes back with the graph');
+  assert.equal(d.getElementById('background-dock').closest('.pane').id,'pane-graph','The dock goes back with the graph');
   assert.ok(d.querySelector('#pr-filters [data-pr-row="a"]').classList.contains('in-background'),'The graph sidebar agrees');
   d.querySelector('.tab[data-tab="lattice"]').click();
   w.eval('changeBackground("a",false);');
@@ -257,17 +257,17 @@ try{
     models:[...fixture.models,{...model('m4',['b'],['h']),certificate:cert('notes')}]};
   const dom2=page(withNotes),w2=dom2.window,d2=w2.document;
   const sources=d2.getElementById('source-controls');
-  assert.equal(sources.closest('aside').id,'graph-sidebar','The selector starts in the graph sidebar');
+  assert.equal(sources.closest('.pane').id,'pane-graph','The selector starts in the graph pane');
   d2.querySelector('.tab[data-tab="lattice"]').click();
-  assert.equal(sources.closest('aside').id,'lat-sidebar','And moves to the lattice sidebar with that tab');
-  assert.ok([...d2.querySelectorAll('#lat-sidebar [data-source-filter]')].every(cb=>cb.checked),'Every source starts selected');
-  assert.ok(d2.querySelector('#lat-sidebar [data-source-filter="notes"]'),'The new source is offered');
+  assert.equal(sources.closest('.pane').id,'pane-lattice','And comes across to the lattice with that tab');
+  assert.ok([...d2.querySelectorAll('#pane-lattice [data-source-filter]')].every(cb=>cb.checked),'Every source starts selected');
+  assert.ok(d2.querySelector('#pane-lattice [data-source-filter="notes"]'),'The new source is offered');
   // G ⇒ A comes only from the notes; so does the model with B but not H,
   // and H is otherwise untouched, so nothing else can settle B ⇒ H.
   const shape=shown=>JSON.parse(w2.eval(`lattice.shown=${JSON.stringify(shown)};renderLattice();JSON.stringify({meets:lattice.nodes.filter(n=>n.meet).length,edges:Object.fromEntries(lattice.edges.map(x=>[x.id,x.reverses]))})`));
   assert.equal(shape(['a','g']).meets,0,'With every source, G sits below A and there is no meet to draw');
   assert.equal(shape(['b','h']).edges['lat:b|h>lat:b'],'ruled out','And a model settles the converse of B ∧ H ⇒ B');
-  const notes=d2.querySelector('#lat-sidebar [data-source-filter="notes"]');
+  const notes=d2.querySelector('#pane-lattice [data-source-filter="notes"]');
   notes.checked=false; notes.dispatchEvent(new w2.Event('change',{bubbles:true}));
   assert.equal(shape(['a','g']).meets,1,'Without the notes, A ∧ G is a meet of its own');
   assert.equal(shape(['b','h']).edges['lat:b|h>lat:b'],'open','And the converse of B ∧ H ⇒ B is open again');
@@ -276,8 +276,26 @@ try{
   beEdge.closest('[data-lat-edge]').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
   assert.match(d2.getElementById('pop').textContent,/outside the selected sources/,'The readout still names the hidden model, marked as outside the selection');
   d2.querySelector('.tab[data-tab="graph"]').click();
-  assert.equal(sources.closest('aside').id,'graph-sidebar','The selector goes back with the graph');
+  assert.equal(sources.closest('.pane').id,'pane-graph','The selector goes back with the graph');
   assert.equal(sources.nextElementSibling.id,'graph-options','In its old place');
+
+  // The sidebar itself is the graph's, so the lattice pane is laid out as the
+  // graph pane is: sidebar, divider, workspace, one column each; and each
+  // view shows its own blocks in the one scrolling list.
+  const columns=el=>w2.getComputedStyle(el).gridTemplateColumns.split(/\s+(?![^(]*\))/).filter(Boolean).length;
+  const visible=id=>w2.getComputedStyle(d2.getElementById(id)).display!=='none';
+  const graphColumns=columns(d2.getElementById('pane-graph'));
+  d2.querySelector('.tab[data-tab="lattice"]').click();
+  const latPane=d2.getElementById('pane-lattice');
+  assert.equal(latPane.children.length,3,'Sidebar, divider and workspace');
+  assert.equal(columns(latPane),3,'With a column declared for each');
+  assert.equal(columns(latPane),graphColumns,'As on the graph pane');
+  assert.equal(d2.getElementById('graph-sidebar').closest('.pane'),latPane,'The scrolling list is the graph\'s own element');
+  assert.ok(visible('lat-controls')&&visible('lat-principles'),'The lattice shows its own blocks');
+  assert.ok(!visible('graph-options')&&!visible('graph-principles'),'And not the graph\'s');
+  d2.querySelector('.tab[data-tab="graph"]').click();
+  assert.ok(!visible('lat-controls')&&!visible('lat-principles'),'Which are hidden again on the graph');
+  assert.ok(visible('graph-options')&&visible('graph-principles'));
 
   assert.deepEqual(errors.map(String),[]);
   console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, equivalent names selecting one node, and a source selector shared with the graph that redraws the lattice from the selected sources alone.');

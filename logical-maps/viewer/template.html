@@ -167,7 +167,13 @@
   /* Scoped to the active state and to the same shape as the graph pane. An
      unscoped id rule here outranks the one that hides an inactive pane, which
      leaves the view permanently on screen. */
-  #pane-lattice[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
+  #pane-lattice[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
+  /* One sidebar serves the graph, the theory explorer and the lattice, so its
+     scrolling, dividers and sizes are the same by construction. Each view shows
+     its own blocks in it. */
+  #lat-controls, #lat-principles { display: none; }
+  #pane-lattice #lat-controls, #pane-lattice #lat-principles { display: block; }
+  #pane-lattice #conjecture-options, #pane-lattice #graph-options, #pane-lattice #graph-principles { display: none; }
   #pane-lattice .graph-workspace { grid-template-rows: minmax(0, 1fr) var(--details-height, 230px); }
   #lat-graph { grid-row: 2; width: 100%; height: 100%; touch-action: none; cursor: grab; }
   .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
@@ -542,6 +548,11 @@
       <section class="pane" id="pane-graph" data-active="true">
     <aside class="controls" id="graph-sidebar">
       <div class="controls-scroll" id="principle-controls">
+      <div id="lat-controls">
+        <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
+        <p class="background-hint">A Hasse diagram of the conjunctions the chosen principles generate. Every meet is its own node; nothing nests. Use ✓ for a principle and ✗ for its negation, or move it to the background.</p>
+        <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
+      </div>
       <div id="conjecture-options">
         <h2>Conjectures</h2>
         <div class="ctl"><label><input type="checkbox" id="show-resolved">Show resolved</label></div>
@@ -565,10 +576,14 @@
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
         </div>
       </div>
-      <div>
+      <div id="graph-principles">
         <h2>Principles <button class="lnk dim" id="pr-all">show positive</button> <button class="lnk dim" id="pr-none">clear</button></h2>
         <p class="background-hint conjecture-hint">Choose a principle’s positive or negative form, then move it to background.</p>
         <div class="ctl" id="pr-filters"></div>
+      </div>
+      <div id="lat-principles">
+        <h2>Principles</h2>
+        <div class="ctl" id="lat-filters"></div>
       </div>
       </div>
       <div class="pane-divider" id="background-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize background pane" aria-controls="background-dock principle-controls" title="Drag to resize background · Arrow keys to adjust · Double-click to reset"></div>
@@ -595,19 +610,6 @@
         </div>
       </section>
       <section class="pane" id="pane-lattice">
-        <aside class="controls" id="lat-sidebar">
-          <div class="controls-scroll">
-            <div>
-              <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
-              <p class="background-hint">A Hasse diagram of the conjunctions the chosen principles generate. Every meet is its own node; nothing nests. Use ✓ for a principle and ✗ for its negation, or move it to the background.</p>
-              <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
-            </div>
-            <div id="lat-principles">
-              <h2>Principles</h2>
-              <div class="ctl" id="lat-filters"></div>
-            </div>
-          </div>
-        </aside>
         <div class="graph-workspace">
           <div class="graph-area">
             <svg id="lat-graph" role="img" aria-label="Lattice of conjunctions"></svg>
@@ -2394,27 +2396,16 @@ function openPage(sel) { hover(null); stopFlow(); renderPage(sel); document.getE
 function showTab(tab) {
   hover(null); stopFlow();
   state.tab = tab;
-  // One background, shared by every view that can use it. The dock itself moves
-  // to whichever sidebar is on screen rather than being duplicated.
-  const dock = document.getElementById('background-dock');
-  if (dock) (tab === 'lattice' ? document.getElementById('lat-sidebar') : document.getElementById('graph-sidebar')).append(dock);
-  // The source selector too: one set of checkboxes, shared with the graph, so
-  // the lattice can be read as what the selected sources alone establish.
-  const sources = document.getElementById('source-controls');
-  if (tab === 'lattice') document.getElementById('lat-principles').before(sources);
-  else document.getElementById('graph-options').before(sources);
-  if (tab === 'lattice') {
-    const heading = document.getElementById('source-filter-heading');
-    heading.textContent = 'Arrow sources';
-    heading.title = 'Draw the lattice from the selected sources alone. Background consequences always use all recorded proofs.';
-  }
-  if (tab === 'graph' || tab === 'open') {
-    // Reuse the controls so background, source selections and click slots are shared.
+  if (tab === 'graph' || tab === 'open' || tab === 'lattice') {
+    // One sidebar for the three views, so background, source selections,
+    // click slots, scrolling and pane sizes are shared rather than duplicated.
     const pane = document.getElementById('pane-' + tab);
     pane.prepend(document.getElementById('graph-sidebar'), document.getElementById('sidebar-divider'));
     const heading = document.getElementById('source-filter-heading');
     heading.textContent = tab === 'open' ? 'Evidence sources' : 'Arrow sources';
-    heading.title = tab === 'open' ? 'Filter the evidence used to assess conjectures.' : 'Filter displayed arrows. Background consequences always use all recorded proofs.';
+    heading.title = tab === 'open' ? 'Filter the evidence used to assess conjectures.'
+      : tab === 'lattice' ? 'Draw the lattice from the selected sources alone. Background consequences always use all recorded proofs.'
+      : 'Filter displayed arrows. Background consequences always use all recorded proofs.';
   }
   document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x.dataset.tab === tab));
   document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-' + tab));
@@ -2854,7 +2845,7 @@ document.getElementById('graph-search').addEventListener('keydown', e => {
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 // Resize without rebuilding either list, so selections, scroll positions and click slots survive.
 (function setupPaneDividers() {
-  const panes = ['graph', 'open'].map(tab => document.getElementById('pane-' + tab));
+  const panes = ['graph', 'open', 'lattice'].map(tab => document.getElementById('pane-' + tab));
   const sidebar = document.getElementById('graph-sidebar');
   const workspace = document.querySelector('.graph-workspace');
   const properties = {sidebar: '--sidebar-width', background: '--background-height', details: '--details-height'};

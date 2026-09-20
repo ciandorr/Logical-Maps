@@ -546,7 +546,7 @@
         <h2>Conjectures</h2>
         <div class="ctl"><label><input type="checkbox" id="show-resolved">Show resolved</label></div>
       </div>
-      <div>
+      <div id="source-controls">
         <h2 id="source-filter-heading" title="Filter displayed arrows. Background consequences always use all recorded proofs.">Arrow sources</h2>
         <div class="ctl" id="source-filters"></div>
         <div class="ctl">
@@ -602,7 +602,7 @@
               <p class="background-hint">A Hasse diagram of the conjunctions the chosen principles generate. Every meet is its own node; nothing nests. Use ✓ for a principle and ✗ for its negation, or move it to the background.</p>
               <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
             </div>
-            <div>
+            <div id="lat-principles">
               <h2>Principles</h2>
               <div class="ctl" id="lat-filters"></div>
             </div>
@@ -2398,6 +2398,16 @@ function showTab(tab) {
   // to whichever sidebar is on screen rather than being duplicated.
   const dock = document.getElementById('background-dock');
   if (dock) (tab === 'lattice' ? document.getElementById('lat-sidebar') : document.getElementById('graph-sidebar')).append(dock);
+  // The source selector too: one set of checkboxes, shared with the graph, so
+  // the lattice can be read as what the selected sources alone establish.
+  const sources = document.getElementById('source-controls');
+  if (tab === 'lattice') document.getElementById('lat-principles').before(sources);
+  else document.getElementById('graph-options').before(sources);
+  if (tab === 'lattice') {
+    const heading = document.getElementById('source-filter-heading');
+    heading.textContent = 'Arrow sources';
+    heading.title = 'Draw the lattice from the selected sources alone. Background consequences always use all recorded proofs.';
+  }
   if (tab === 'graph' || tab === 'open') {
     // Reuse the controls so background, source selections and click slots are shared.
     const pane = document.getElementById('pane-' + tab);
@@ -3070,14 +3080,17 @@ function buildLattice() {
 // one after all. This is what the diagram has to show clearly: a solid arrow is
 // a settled strict implication, a dashed one is a pair that could still
 // collapse into a single node.
+// Only the selected sources count here, for models as well as proofs. A model
+// the source filter hides still appears in the readout, marked as outside the
+// selection, but it does not settle an arrow the diagram draws.
 function latticeReverses(lower, upper) {
   if (lower.bottom) {
     // ⊥ ⇒ X reverses unless X is shown consistent with the background.
-    return upper.consistency.status === 'consistent' ? 'ruled out' : 'open';
+    return upper.consistency.status === 'consistent' && !upper.consistency.limited ? 'ruled out' : 'open';
   }
   const missing = lower.gens.filter(p => !upper.set.has(p));
-  const seen = missing.map(p => implicationStatus(upper.gens, p).status);
-  if (seen.some(s => s === 'independent' || s === 'excludes')) return 'ruled out';
+  const seen = missing.map(p => implicationStatus(upper.gens, p));
+  if (seen.some(s => s.status === 'excludes' || s.status === 'independent' && !s.limited)) return 'ruled out';
   return 'open';
 }
 

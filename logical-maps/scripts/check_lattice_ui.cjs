@@ -20,8 +20,8 @@ const fixture={topic:{id:'lat',title:'Lattice fixture',background:[],source_cata
   results:[rule('abc',['a','b'],'c'),rule('ca',['c'],'a'),rule('cb',['c'],'b'),rule('adf',['a','d'],false),rule('ea',['e'],'a'),rule('ef',['e'],'f'),rule('fe',['f'],'e')],
   models:[model('m1',['a'],['b','c','e']),model('m2',['b'],['a','c']),model('m3',['d'],['a','c'])]};
 const pages=[],errors=[];
-function page(){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
-  const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(fixture)),{url:'https://maps.example/?assume=',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});
+function page(data=fixture){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
+  const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url:'https://maps.example/?assume=',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});
   pages.push(dom);return dom;}
 try{
   const dom=page(),w=dom.window,d=w.document;
@@ -246,6 +246,39 @@ try{
   assert.equal(d.querySelectorAll('#lat-graph .lat-edge-g.sel').length,1,'A selected arrow is marked on the diagram');
   w.eval('select(null)');
 
+  // The arrow-source selector is the graph's own, moved into the lattice
+  // sidebar, and the lattice is drawn from the selected sources alone: a
+  // proof from a deselected source no longer orders two nodes, and a model
+  // from one no longer settles a converse.
+  const withNotes={...fixture,
+    topic:{...fixture.topic,source_catalog:[...fixture.topic.source_catalog,{id:'notes',name:'Notes',kind:'misc'}]},
+    principles:[...fixture.principles,{id:'g',name:'G',statement:'Statement of G'},{id:'h',name:'H',statement:'Statement of H'}],
+    results:[...fixture.results,{...rule('ga',['g'],'a'),certificate:cert('notes')}],
+    models:[...fixture.models,{...model('m4',['b'],['h']),certificate:cert('notes')}]};
+  const dom2=page(withNotes),w2=dom2.window,d2=w2.document;
+  const sources=d2.getElementById('source-controls');
+  assert.equal(sources.closest('aside').id,'graph-sidebar','The selector starts in the graph sidebar');
+  d2.querySelector('.tab[data-tab="lattice"]').click();
+  assert.equal(sources.closest('aside').id,'lat-sidebar','And moves to the lattice sidebar with that tab');
+  assert.ok([...d2.querySelectorAll('#lat-sidebar [data-source-filter]')].every(cb=>cb.checked),'Every source starts selected');
+  assert.ok(d2.querySelector('#lat-sidebar [data-source-filter="notes"]'),'The new source is offered');
+  // G ⇒ A comes only from the notes; so does the model with B but not H,
+  // and H is otherwise untouched, so nothing else can settle B ⇒ H.
+  const shape=shown=>JSON.parse(w2.eval(`lattice.shown=${JSON.stringify(shown)};renderLattice();JSON.stringify({meets:lattice.nodes.filter(n=>n.meet).length,edges:Object.fromEntries(lattice.edges.map(x=>[x.id,x.reverses]))})`));
+  assert.equal(shape(['a','g']).meets,0,'With every source, G sits below A and there is no meet to draw');
+  assert.equal(shape(['b','h']).edges['lat:b|h>lat:b'],'ruled out','And a model settles the converse of B ∧ H ⇒ B');
+  const notes=d2.querySelector('#lat-sidebar [data-source-filter="notes"]');
+  notes.checked=false; notes.dispatchEvent(new w2.Event('change',{bubbles:true}));
+  assert.equal(shape(['a','g']).meets,1,'Without the notes, A ∧ G is a meet of its own');
+  assert.equal(shape(['b','h']).edges['lat:b|h>lat:b'],'open','And the converse of B ∧ H ⇒ B is open again');
+  const beEdge=d2.querySelector('#lat-graph [data-lat-edge="lat:b|h>lat:b"] .lat-edge');
+  assert.ok(beEdge.classList.contains('may-reverse'),'The arrow is drawn as such');
+  beEdge.closest('[data-lat-edge]').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
+  assert.match(d2.getElementById('pop').textContent,/outside the selected sources/,'The readout still names the hidden model, marked as outside the selection');
+  d2.querySelector('.tab[data-tab="graph"]').click();
+  assert.equal(sources.closest('aside').id,'graph-sidebar','The selector goes back with the graph');
+  assert.equal(sources.nextElementSibling.id,'graph-options','In its old place');
+
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, and equivalent names selecting one node.');
+  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, equivalent names selecting one node, and a source selector shared with the graph that redraws the lattice from the selected sources alone.');
 }finally{pages.forEach(p=>p.window.close());}

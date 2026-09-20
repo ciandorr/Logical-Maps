@@ -245,7 +245,11 @@ principles generate. It opens with False and True alone; the sidebar offers the 
 choices per principle as the graph, ✓ for the principle, ✗ for its negation and
 a move to the background, and each adds its literal together with its meets
 against everything already shown. The background is the one the graph uses, and
-its dock follows whichever view is open. A meet is drawn under a name only when the reader has chosen a
+its dock follows whichever view is open, as does the arrow-source selector: the
+lattice is drawn from the selected sources alone, proofs and models both, so
+deselecting a source shows the diagram as it stood without that knowledge. A
+model outside the selection still appears in the readout, marked as such, but it
+does not make an arrow solid. A meet is drawn under a name only when the reader has chosen a
 principle equivalent to it, and then under every such name at once, with the
 word equivalent above them as on the graph. False and True always name their
 own nodes. A meet nobody has named is an ∧ in a circle, since where it sits

@@ -245,9 +245,12 @@ principles generate. It opens with False and True alone; the sidebar offers the 
 choices per principle as the graph, ✓ for the principle, ✗ for its negation and
 a move to the background, and each adds its literal together with its meets
 against everything already shown. The background is the one the graph uses, and
-its dock follows whichever view is open. A meet known equivalent to something already on the diagram, or to any
-named principle, is drawn once under that name, and an inconsistent meet is the
-floor. Nothing nests, since on a Hasse diagram the greatest lower bound of two
+its dock follows whichever view is open. A meet is drawn under a name only when the reader has chosen a
+principle equivalent to it, and then under every such name at once, with the
+word equivalent above them as on the graph. False and True always name their
+own nodes. A meet nobody has named is an ∧ in a circle, since where it sits
+already says it is the conjunction of the nodes above it; the map's own name
+for it, if it has one, waits in the readout. An inconsistent meet is the floor. Nothing nests, since on a Hasse diagram the greatest lower bound of two
 nodes is their conjunction. A cover whose converse is ruled out by a model is a
 solid arrow with a filled head; one whose converse is still open is dashed with
 a hollow head, because whether those two nodes are really distinct is the

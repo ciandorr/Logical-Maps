@@ -174,7 +174,11 @@
   .lat-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
   .lat-node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
   .lat-node text { font: 500 12px var(--sans); fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
-  .lat-node.lat-named rect { stroke: var(--accent); stroke-width: 1.8; }
+  .lat-node.lat-equivalent rect { stroke: var(--accent); stroke-width: 1.8; }
+  .lat-node.lat-meet circle { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
+  .lat-node.lat-meet.sel circle { stroke: var(--accent); stroke-width: 2.6; }
+  .lat-node.lat-meet text { font: 600 12px var(--sans); fill: var(--ink-2); }
+  .lat-node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
   .lat-node.lat-bottom rect, .lat-node.lat-top rect { fill: var(--hl); }
   .lat-node.sel rect { stroke: var(--accent); stroke-width: 2.6; }
   .lat-count { font-size: 12px; color: var(--ink-3); margin: 4px 0; }
@@ -2938,13 +2942,23 @@ function latticeGenerators(gens) {
   return kept;
 }
 
-// A named principle anywhere in the map that this meet is known equivalent to.
-// Only the positive forms are searched: a negation is not itself a principle
-// the map names, and a negation among the chosen literals already shares a
-// closure with any meet equivalent to it.
-function latticeNamed(gens) {
-  if (gens.length === 1) return gens[0];
-  return ids.find(p => latticeEntails(gens, [p]) && latticeEntails([p], gens)) || null;
+// Every named principle the map records as equivalent to this meet. Only the
+// positive forms are searched: a negation is not itself a principle the map
+// names, and it reaches the node through the generators instead.
+function latticeEquivalents(gens) {
+  return ids.filter(p => latticeEntails(gens, [p]) && latticeEntails([p], gens));
+}
+// The names a node answers to: the constants, then every chosen literal that
+// is the node rather than merely above it. Known equivalents share one node, as
+// they share one box on the implication graph, so nothing is drawn twice under
+// two names. Nothing the reader did not choose puts its name on the diagram,
+// which is why ⊤ does not drag in every background consequence the map records.
+function latticeNames(n) {
+  const out = [];
+  if (n.inconsistent) out.push('⊥');
+  if (n.top) out.push('⊤');
+  for (const l of n.self) if (!out.includes(name(l))) out.push(name(l));
+  return out;
 }
 
 function buildLattice() {
@@ -2975,17 +2989,28 @@ function buildLattice() {
   }
   const all = [...nodes.values()];
   for (const n of all) {
-    n.inconsistent = consistencyStatus(n.gens).status === 'inconsistent';
     n.consistency = consistencyStatus(n.gens);
-    n.top = n.gens.length === 0;
+    n.inconsistent = n.consistency.status === 'inconsistent';
+    // ⊤ is not only the empty meet. A chosen principle that follows from the
+    // background is equivalent to it and belongs in the same node.
+    n.top = !n.inconsistent && latticeEntails([], n.gens);
     n.generators = latticeGenerators(n.gens);
-    n.named = n.inconsistent ? null : latticeNamed(n.gens);
-    n.label = n.inconsistent ? '⊥' : n.top ? '⊤'
-      : n.named ? name(n.named) : n.generators.map(name).join(' ∧ ');
+    // A chosen literal that entails the whole meet is that meet, not just
+    // something above it.
+    n.self = n.gens.filter(l => latticeEntails([l], n.gens));
+    n.names = latticeNames(n);
+    n.equivalent = n.names.length > 1;
+    // A meet no chosen principle answers to needs no label: where it sits
+    // already says it is the conjunction of the nodes above it. It is drawn as
+    // an ∧, as such a node is on the implication graph. The map's own name for
+    // it, if it has one, goes in the readouts rather than onto the diagram.
+    n.meet = !n.names.length;
+    n.mapName = n.meet ? (latticeEquivalents(n.gens)[0] || null) : null;
+    n.label = n.names[0] || n.generators.map(name).join(' ∧ ');
   }
   // False and True always anchor the diagram, even before anything is chosen.
   let bottom = all.find(n => n.inconsistent);
-  if (!bottom) { bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), generators: [], named: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}}; all.push(bottom); }
+  if (!bottom) { bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), generators: [], self: [], names: ['⊥'], equivalent: false, meet: false, mapName: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}}; all.push(bottom); }
   bottom.bottom = true;
   const top = all.find(n => n.top) || null;
 
@@ -3035,7 +3060,11 @@ function latticeLayout() {
   const maxRank = Math.max(...nodes.map(n => rank.get(n.id)));
   const rows = [];
   for (const n of nodes) (rows[maxRank - rank.get(n.id)] ||= []).push(n);
-  for (const n of nodes) { n.w = Math.max(64, 9 + n.label.length * 6.6); n.h = 26; }
+  for (const n of nodes) {
+    if (n.meet) { n.w = n.h = 24; continue; }
+    n.w = Math.max(64, 18 + Math.max(...n.names.map(t => t.length * 6.6), n.equivalent ? 58 : 0));
+    n.h = Math.max(26, 17 * n.names.length + 12 + (n.equivalent ? 10 : 0));
+  }
   // A few barycentre sweeps, as on the implication graph.
   for (let pass = 0; pass < 6; pass++) {
     const dir = pass % 2 ? 1 : -1;
@@ -3085,9 +3114,14 @@ function renderLattice() {
     return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
   };
   const node = n => {
-    const cls = 'lat-node' + (n.bottom ? ' lat-bottom' : n.top ? ' lat-top' : '')
-      + (n.named && !n.bottom && !n.top ? ' lat-named' : '') + (lattice.selected === n.id ? ' sel' : '');
-    return `<g class="${cls}" data-lat-node="${esc(n.id)}"><rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/><text x="${n.x}" y="${n.y}">${esc(n.label)}</text><title>${esc(latticeTitle(n))}</title></g>`;
+    const cls = 'lat-node' + (n.inconsistent ? ' lat-bottom' : n.top ? ' lat-top' : '')
+      + (n.meet ? ' lat-meet' : '') + (n.equivalent ? ' lat-equivalent' : '') + (lattice.selected === n.id ? ' sel' : '');
+    const body = n.meet
+      ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
+      : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
+        + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 12}">equivalent</text>` : '')
+        + n.names.map((t, i) => `<text x="${n.x}" y="${n.y - n.h / 2 + 4 + 17 * (i + 1) + (n.equivalent ? 10 : 0)}">${esc(t)}</text>`).join('');
+    return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}<title>${esc(latticeTitle(n))}</title></g>`;
   };
   svg.innerHTML = `<defs>
       <marker id="lat-solid" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
@@ -3104,11 +3138,10 @@ function renderLattice() {
   renderLatticeDetail();
 }
 function latticeTitle(n) {
-  if (n.bottom) return 'False (⊥)';
-  if (n.top) return 'True (⊤): everything the background already gives';
-  const parts = [n.generators.map(name).join(' ∧ ')];
-  if (n.named && n.generators.length > 1) parts.push('equivalent to ' + name(n.named));
-  parts.push(n.consistency.status === 'consistent' ? 'consistent with the background' : 'not shown consistent with the background');
+  const parts = [n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ ')];
+  if (n.mapName) parts.push('the map records this as ' + name(n.mapName));
+  if (n.top) parts.push('everything the background already gives');
+  if (!n.inconsistent && !n.top) parts.push(n.consistency.status === 'consistent' ? 'consistent with the background' : 'not shown consistent with the background');
   return parts.join('\n');
 }
 function renderLatticeDetail() {
@@ -3117,10 +3150,12 @@ function renderLatticeDetail() {
   const n = lattice.nodes.find(x => x.id === sel), e = lattice.edges.find(x => x.id === sel);
   if (!n && !e) { el.innerHTML = '<p class="dim">Click a node or an arrow for its reading. Dashed arrows with a hollow head are the pairs that might still collapse.</p>'; return; }
   if (n) {
-    el.innerHTML = `<h3>${esc(n.label)}</h3>` + (n.bottom ? '<p>The contradiction. Everything follows from it.</p>'
-      : n.top ? '<p>Everything the background already gives.</p>'
-      : `<p>${esc(n.generators.map(name).join(' ∧ '))}${n.named && n.generators.length > 1 ? ', which the map records as ' + esc(name(n.named)) : ''}.</p>
-         <p class="rel-status ${n.consistency.status === 'consistent' ? 'implies' : 'open'}">${n.consistency.status === 'consistent' ? 'Consistent with the background.' : 'Not shown consistent with the background.'}</p>`);
+    el.innerHTML = `<h3>${esc(n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ '))}</h3>`
+      + (n.equivalent ? '<p class="dim">These are known equivalent, so they share one node.</p>' : '')
+      + (n.mapName ? `<p>The map records this conjunction as <b>${esc(name(n.mapName))}</b>. Choose it in the sidebar to put the name on the diagram.</p>` : '')
+      + (n.inconsistent ? '<p>The contradiction. Everything follows from it.</p>'
+        : n.top ? '<p>Everything the background already gives.</p>'
+        : `<p class="rel-status ${n.consistency.status === 'consistent' ? 'implies' : 'open'}">${n.consistency.status === 'consistent' ? 'Consistent with the background.' : 'Not shown consistent with the background.'}</p>`);
     return;
   }
   el.innerHTML = `<h3>${esc(e.from.label)} ⇒ ${esc(e.to.label)}</h3>

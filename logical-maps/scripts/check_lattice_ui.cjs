@@ -47,23 +47,46 @@ try{
   let s=snap();
   assert.deepEqual(s.labels.slice().sort(),['⊤','⊥'],'The empty lattice is just the two constants');
 
-  // Each principle joins as its own node; their meet is named after C.
+  // Each principle joins as its own node. Their meet is nobody's choice yet, so
+  // it is an ∧ rather than a label, and the map's own name for it stays in the
+  // readout. Only what the reader chose puts a name on the diagram.
+  const names=()=>JSON.parse(w.eval('JSON.stringify(lattice.nodes.map(n=>n.names))'));
+  const meets=()=>JSON.parse(w.eval('JSON.stringify(lattice.nodes.filter(n=>n.meet).map(n=>({gen:n.generators,mapName:n.mapName})))'));
   add('a'); s=add('b');
-  assert.ok(s.labels.includes('A')&&s.labels.includes('B'),'Both chosen principles appear');
-  assert.ok(s.labels.includes('C'),'A meet equivalent to a named principle is shown under that name');
-  assert.ok(!s.labels.some(l=>l.includes('∧')),'So it is not also drawn as a conjunction');
+  assert.ok(names().some(v=>v.join()==='A')&&names().some(v=>v.join()==='B'),'Both chosen principles appear under their names');
+  assert.ok(!names().flat().includes('C'),'A principle nobody chose does not put its name on the diagram');
   assert.equal(s.n,5,'Two principles, their meet and the two constants');
+  const meet=meets();
+  assert.equal(meet.length,1,'The meet is drawn as an ∧');
+  assert.deepEqual(meet[0].gen.slice().sort(),['a','b'],'It is the meet of the two chosen principles');
+  assert.equal(meet[0].mapName,'c','And the readout keeps the map\'s name for it');
+  assert.equal(d.querySelectorAll('#lat-graph .lat-meet circle').length,1,'An ∧ is a circle');
+  assert.equal([...d.querySelectorAll('#lat-graph .lat-meet text')].map(t=>t.textContent).join(''),'∧','With the glyph inside');
+
+  // Choosing that principle turns the ∧ into an ordinary box under its name.
+  add('c');
+  assert.equal(d.querySelectorAll('#lat-graph .lat-meet circle').length,0,'No ∧ is left');
+  assert.ok(names().some(v=>v.join()==='C'),'The meet is now a box named C');
+  assert.equal(snap().n,5,'And it is the same node, not a new one');
+  w.eval("latticeToggle('c')");
 
   // Nothing nests: every node is its own box in the diagram.
+  s=snap();
   assert.equal(d.querySelectorAll('#lat-graph [data-lat-node]').length,s.n,'Every node is drawn separately');
   assert.equal(d.querySelectorAll('#lat-graph [data-lat-node] [data-lat-node]').length,0,'No node is nested inside another');
+
+  // The constants keep their own names, and take in anything equivalent to
+  // them that the reader chose.
+  assert.ok(names().some(v=>v.join()==='⊤'),'True names its own node');
+  assert.ok(names().some(v=>v.join()==='⊥'),'And so does False');
+  assert.ok(!names().flat().some(t=>t!=='⊤'&&t!=='⊥'&&!['A','B'].includes(t)),'Nothing unchosen is named anywhere');
 
   // An incompatible partner folds into the floor rather than adding a node.
   const before=snap().n;
   s=add('d');
   assert.equal(s.labels.filter(l=>l==='⊥').length,1,'The floor stays a single node');
   assert.ok(s.n>before,'D itself is added');
-  assert.ok(!s.labels.some(l=>l.includes('A ∧ D')),'Its inconsistent meet with A is the floor, not a node of its own');
+  assert.ok(!meets().some(m=>m.gen.includes('a')&&m.gen.includes('d')),'Its inconsistent meet with A is the floor, not a node of its own');
   w.eval("latticeToggle('d')");
 
   // Covers are marked by whether the converse is settled.
@@ -98,8 +121,8 @@ try{
   row('b').querySelector('[data-lat-negative]').click();
   let g=snapshot();
   assert.deepEqual(g.shown,['a','!b'],'A negation is a generator like any other');
-  assert.ok(g.labels.includes('¬B'),'And is drawn under its negated name');
-  assert.ok(g.labels.includes('A ∧ ¬B'),'Its meets appear too');
+  assert.ok(names().some(v=>v.join()==='¬B'),'And is drawn under its negated name');
+  assert.ok(meets().some(m=>m.gen.slice().sort().join()==='!b,a'),'Its meet with A is an ∧');
   assert.equal(row('a').querySelector('[data-lat-positive]').getAttribute('aria-pressed'),'true');
   assert.equal(row('b').querySelector('[data-lat-negative]').getAttribute('aria-pressed'),'true');
 
@@ -126,5 +149,5 @@ try{
   w.eval('changeBackground("a",false);');
 
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: constants at the start, one principle at a time, meets named after equivalent principles, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, and a shared background whose dock follows the view.');
+  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, and a shared background whose dock follows the view.');
 }finally{pages.forEach(p=>p.window.close());}

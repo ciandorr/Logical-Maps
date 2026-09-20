@@ -1,7 +1,8 @@
 # Coalesced sum: root over all finite individual domains
 
-A model of C at whose distinguished world Any Number Possible (type $e$)
-and both Axioms of Infinity are true. It is a coalesced sum, in the manner
+A model of C at whose distinguished world both Axioms of Infinity are true,
+together with the sentence $\Pi$ of pure-possibility-implies-axiom-of-infinity-t,
+that there could be any positive number of individuals. It is a coalesced sum, in the manner
 of *Classicism* Appendix E, of the full Henkin models with $1,2,3,\ldots$
 individuals; the construction is spelled out so that the verification
 stands on its own.
@@ -70,7 +71,7 @@ closed under $\operatorname{Suc}_\sigma$ at the root. So
 $\operatorname{FiniteCardinality}_\sigma(Z)$ is true at the root only for
 $Z\in R_\sigma$, and conversely for every such $Z$ by induction.
 
-*Any Number Possible (type $e$).* For $Z$ the value of the $k$-th numeral
+*Any positive number of individuals.* For $Z$ the value of the $k$-th numeral
 at type $e$, $(\operatorname{Suc}_eZ)(\lambda x\, .\,\top)$ is the
 proposition that there are exactly $k+1$ individuals, true at world $k+1$
 since $M_{k+1}$ has exactly $k+1$ individuals. So its diamond holds at the

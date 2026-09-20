@@ -1,24 +1,41 @@
-# Any Number Possible (type e) ⇒ Axiom of Infinity (type t)
+# Possibility (pure) ⇒ Axiom of Infinity (type t)
 
-Assume Any Number Possible (type $e$),
+Assume Possibility (pure): every closed pure sentence consistent with C is
+possible. The conclusion is the Axiom of Infinity at type $t$,
 
 $$
-\Pi\;:=\;\forall Z^{(et)t}\, .\,\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z),
-\qquad g(Z):=(\operatorname{Suc}_e Z)(\lambda x^e\, .\,\top).
+\neg\exists Z^{(tt)t}\, .\,\operatorname{FiniteCardinality}_t(Z)\land Z(\lambda p^t\, .\,\top).
 $$
 
-The conclusion is the Axiom of Infinity at type $t$,
-$\neg\exists Z^{(tt)t}\, .\,\operatorname{FiniteCardinality}_t(Z)\land Z(\lambda p^t\, .\,\top)$.
-This is a theorem of C about $\Pi$; no consistency side condition is
-involved. The argument is Cian Dorr's (20 September 2026); the lemmas, the
-boxed form of exclusivity and the Dedekind step are supplied here.
+Since Possibility (pure) and Distinctness (pure) are equivalent, Pure
+Maximalist Classicism implies the Axiom of Infinity at type $t$. The argument
+is Cian Dorr's (20 September 2026); the lemmas, the boxed form of
+exclusivity, the Dedekind step and the consistency model are supplied here.
 
 See Background for $\mathbf{0}_\sigma$, $\operatorname{Suc}_\sigma$ and
 $\operatorname{FiniteCardinality}_\sigma$. Throughout, $X-y$ abbreviates
 $\lambda u\, .\,Xu\land u\ne y$, so that $(\operatorname{Suc}_\sigma Z)X$
-unfolds to $\exists y\, .\,Xy\land Z(X-y)$. "Finite" means "falls under
-$\operatorname{FiniteCardinality}$", and a *finite cardinality* of type
-$(\sigma t)t$ is one that does.
+unfolds to $\exists y\, .\,Xy\land Z(X-y)$, and $g(Z)$ abbreviates
+$(\operatorname{Suc}_e Z)(\lambda x^e\, .\,\top)$, the proposition that
+there are exactly one more individuals than $Z$ counts. "Finite" means
+"falls under $\operatorname{FiniteCardinality}$", and a *finite cardinality*
+of type $(\sigma t)t$ is one that does. The sentence at the centre of the
+argument is
+
+$$
+\Pi\;:=\;\forall Z^{(et)t}\, .\,\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z),
+$$
+
+read: there could be any positive number of individuals.
+
+**Why zero is left out.** The version with $\Diamond Z(\lambda x\, .\,\top)$
+in place of $\Diamond g(Z)$ is refutable in C. Its instance at
+$\mathbf{0}_e$ is $\Diamond\forall u^e\, .\,\neg\top$, and since C proves
+$\exists u^e\, .\,u=u$ (Existence), the formula $\forall u\, .\,\neg\top$ is
+H-equivalent to $\bot$, so Logical Equivalence makes
+$\mathbf{0}_e(\lambda x\, .\,\top)=\bot$ and the instance says
+$\bot\ne\bot$. Shifting by one successor keeps every finite cardinality in
+play while asking only for positive numbers of individuals.
 
 **Modal bookkeeping.** C proves K, T and 4 for the defined necessity,
 recorded as results of the background, and C is closed under
@@ -160,10 +177,32 @@ $x'=p\ne x$. For (iii), $q_0$ is an instance of $Q-q$, and $R'xq_0$ would
 require $Rxq_0$ for an instance $x$ of $Q$, or $Rqq_0$, both excluded by
 (iii) for $R$. $\square$
 
-## 2. Injectivity under $\Pi$
+## 2. $\Pi$ is consistent with C
 
-**Lemma 6.** Assume $\Pi$. If $Y,Y'$ are finite and $g(Y)=g(Y')$ then
-$Y=Y'$. Consequently, if $Y,Y'$ are finite and
+$\Pi$ is closed and pure. It is true at the root of the model *Coalesced
+sum: root over all finite individual domains*, which satisfies C at every
+world; the construction and verification are in that model's write-up.
+Briefly: the summands are the full Henkin models with $1,2,3,\ldots$
+individuals, the root's individuals are threads through the summands,
+propositions are sets of worlds, and higher-type entities have an
+unconstrained root component; at the root the finite cardinalities are
+exactly the numerals, and the $k$-th numeral's successor holds of the
+universal property at the summand with $k+1$ individuals.
+
+## 3. From Possibility to $\Pi$
+
+By §2, Possibility (pure) gives $\Diamond\Pi$. Let $Z$ be finite. By Lemma
+1, $\Box\operatorname{FiniteCardinality}_e(Z)$. Since
+$\Pi\to(\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z))$ is a
+theorem, K turns $\Diamond\Pi$ into
+$\Diamond(\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z))$, and with
+the boxed premise into $\Diamond\Diamond g(Z)$. Axiom 4 for the defined
+necessity gives $\Diamond g(Z)$. So $\Pi$ holds. $\square$
+
+## 4. $\Pi$ implies the Axiom of Infinity at type $t$
+
+**Lemma 6 (Injectivity under $\Pi$).** If $Y,Y'$ are finite and
+$g(Y)=g(Y')$ then $Y=Y'$. Consequently, if $Y,Y'$ are finite and
 $\operatorname{Suc}_eY=\operatorname{Suc}_eY'$ then $Y=Y'$.
 
 *Proof.* By Lemma 4, $Y=Y'$ or $\Box\forall X\, .\,\neg(YX\land Y'X)$.
@@ -186,9 +225,7 @@ boxed premises and the possible conjunction give $\Diamond\bot$, which is
 $\bot\ne\bot$, refutable. So $Y=Y'$. The consequence follows since
 $\operatorname{Suc}_eY=\operatorname{Suc}_eY'$ gives $g(Y)=g(Y')$. $\square$
 
-## 3. The theorem
-
-Assume $\Pi$. Let $S:=\lambda p^t\, .\,\exists Z\, .\,
+**The theorem.** Assume $\Pi$. Let $S:=\lambda p^t\, .\,\exists Z\, .\,
 \operatorname{FiniteCardinality}_e(Z)\land p=g(Z)$, the propositions that
 say exactly how many individuals there are, for a positive finite number,
 and define
@@ -223,18 +260,46 @@ $(\operatorname{Suc}_eZ)(\lambda x\, .\,\bot)=\bot$ by Logical Equivalence,
 and $\top\ne\bot$.
 
 By Lemma 5 at $\sigma=t$, no finite cardinality of type $(tt)t$ holds of
-$\lambda p\, .\,\top$. $\blacksquare$
+$\lambda p\, .\,\top$. With §3, this is the Axiom of Infinity at type $t$
+from Possibility (pure). $\blacksquare$
 
 ## Notes
+
+The earlier record for the Infinity schema applied Distinctness to one
+identity between numerals at a time, and its note explains why that reaches
+only the schema. Here the consistency side condition is applied once, to the
+single sentence $\Pi$, which quantifies over every finite cardinality; that
+is what reaches the domain over which $\operatorname{FiniteCardinality}_t$
+quantifies, including cardinalities that no closed term names.
 
 ND is never used. The natural first thought, that the incompatible possible
 propositions $g(Z)$ and $g(Z')$ must be distinct, yields without ND only
 $\Diamond(Z=Z')$ from a shared possible instance. Lemma 4 supplies the
 boxed alternative that makes the contradiction outright.
 
-The argument does not transfer to a type-$t$ premise of the same shape.
-"There could be any positive number of propositions" is refuted by C:
-$\top\ne\bot$ excludes exactly one, and the Boolean structure of
-propositions under Logical Equivalence excludes exactly three, since a third
-proposition $s$ would have $\neg s$ equal to $\top$, to $\bot$ or to $s$,
-each of which forces $s$ to be $\bot$ or $\top$.
+$\Pi$ is not a consequence of the Axiom of Infinity at type $e$: the full
+Henkin model with infinitely many individuals satisfies that axiom but has
+no possible world with exactly one individual, so §3 genuinely needs the
+Possibility schema.
+
+**A variant at type $t$ (sketch only).** The same strategy can be run with
+propositions in place of individuals, but the sentence must change, since
+not every positive number of propositions is consistent with C: $\top\ne\bot$
+excludes one, and the Boolean structure of propositions under Logical
+Equivalence excludes every number that is not a power of two. Every power
+of two $2^k$ with $k\ge1$ is consistent, as the root of a coalesced sum with
+$k-1$ leaves shows, so the closed pure sentence $\Pi_t$, that for every
+finite cardinality $Z$ of type $(tt)t$ some finite cardinality reachable
+from $Z$ by $\operatorname{Suc}_t$ possibly holds of $\lambda p\, .\,\top$,
+is consistent (a coalesced sum of those roots) and, by persistence and 4,
+follows from its diamond. Under $\Pi_t$, the finite cardinalities that
+possibly hold of $\lambda p\, .\,\top$ are cofinal in the reachability
+order; their values under $Z\mapsto Z(\lambda p\, .\,\top)$ are pairwise
+distinct by Lemma 4; and the relation sending each such value to the value
+of the next one, with everything else fixed, is total, injective and misses
+the least one, so Lemma 5 applies. Carrying this out needs the reachability
+order to be linear on finite cardinalities and antisymmetric on the possibly
+universal ones, and least elements to exist, each a further induction. The
+variant yields no new arrow on the map, since the type-$e$ route already
+gives the Axiom at type $t$; it is noted because it stays within the
+language of type $t$.

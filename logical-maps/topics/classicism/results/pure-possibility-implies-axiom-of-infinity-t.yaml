@@ -1,0 +1,52 @@
+id: pure-possibility-implies-axiom-of-infinity-t
+premises:
+- possibility-schema-r
+conclusion: axiom-of-infinity-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, argument of 20 September 2026; supporting lemmas and consistency model by Claude
+    Fable 5.1 (Anthropic), 20 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Cian Dorr, argument sketch of 20 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.4, pp. 35–36 (Possibility); §2.3, n. 47,
+  p. 32 (Infinity); §1.5, p. 17 (S4 for the defined necessity); §3.2, Definition 3.6 and Proposition 3.7,
+  pp. 47–48 (full Henkin models); Appendix E, pp. 80–83 (coalesced sums).
+source_names:
+- Dorr 20 Sep
+- Classicism
+proof: >-
+  Write $g(Z)$ for $(\operatorname{Suc}_e Z)(\lambda x^e\, .\,\top)$ and let $\Pi$ be the closed pure
+  sentence $\forall Z^{(et)t}\, .\,\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z)$: there could be
+  any positive number of individuals. Zero must be left out, since Existence makes
+  $\mathbf{0}_e(\lambda x\, .\,\top)$ identical to $\bot$. $\Pi$ is true at the root of the model
+  coalesced-all-finite-individual-domains, so it is consistent with C and Possibility gives $\Diamond\Pi$.
+  Being a finite cardinality is persistent, and the defined necessity satisfies 4, so $\Diamond\Pi$ yields
+  $\Pi$ itself. Under $\Pi$ the map $g$ is injective on finite cardinalities: two finite cardinalities are
+  either identical or necessarily share no instance, by an induction that stays inside the presentation
+  $\operatorname{Suc}_e$ supplies, and the second disjunct is excluded when the two values of $g$ coincide
+  and are possible. Hence the propositions $g(Z)$, $Z$ finite, carry a copy of the successor structure:
+  the relation taking $g(Z)$ to $g(\operatorname{Suc}_e Z)$, and every other proposition to itself, is
+  total and injective on $\lambda p\, .\,\top$ and misses $g(\mathbf{0}_e)$. A property with such a
+  relation has no finite cardinality, by induction on the cardinality. So no finite cardinality of type
+  $(tt)t$ holds of $\lambda p\, .\,\top$. The full proof, with the six lemmas, is in the write-up.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.4, pp. 35–36; §2.3, n. 47, p. 32; §1.5, p. 17; §3.2, pp. 47–48; Appendix E, pp. 80–83
+  note: Formulations of Possibility and Infinity, the S4 laws of the defined necessity, the full Henkin
+    models, and the coalesced-sum construction that the consistency model follows. The draft does not draw
+    the connection between Possibility and the Axiom of Infinity.
+notes: >-
+  Recorded from Possibility because the proof applies its consistency side condition to one sentence,
+  $\Pi$, which quantifies over every finite cardinality at once. That is what reaches the domain over
+  which $\operatorname{FiniteCardinality}$ quantifies, where the numeral-by-numeral argument recorded for
+  the Infinity schema could not. The equivalent Distinctness form gives the same result through the
+  recorded equivalence, so Pure Maximalist Classicism implies the Axiom of Infinity at type $t$. ND is
+  never used. The sentence $\Pi$ is not implied by the Axiom of Infinity at type $e$, by the model
+  full-henkin-infinite-base. The argument can also be run entirely at type $t$, using the powers of two as
+  the possible numbers of propositions; the write-up sketches this variant without carrying it out.

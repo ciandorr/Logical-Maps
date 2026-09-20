@@ -8,8 +8,6 @@ violates:
 - axiom-of-infinity-t
 - infinity-t
 - possible-infinity-t
-- potential-infinity-t
-- any-number-possible-e
 - possibility-schema-r
 status: proved
 certificate:
@@ -37,14 +35,13 @@ description: >-
   domain and is inductive. At type $e$ the $k$-th numeral says that there are exactly $k$ individuals,
   which is false for every $k$, so the Axiom of Infinity at type $e$ holds, and with it the schema. At type
   $t$ the second numeral holds of $\lambda p\, .\,\top$, so the Axiom of Infinity at type $t$ fails, as
-  does the third instance of the schema; the third numeral at type $t$ is the empty cardinality, so the
-  second numeral is instantiated while its successor is not, refuting Potential Infinity at type $t$,
-  and Possible Infinity at type $t$ fails because $\Diamond$ is truth. Any Number Possible (type $e$)
-  fails at $\mathbf{0}_e$, since there is not exactly one individual. Possibility (pure) fails since the
-  C-consistent pure sentence that there is exactly one individual is false. The Fregean axiom holds in
-  any two-valued model.
+  does the third instance of the schema, and Possible Infinity at type $t$ fails because $\Diamond$ is
+  truth. Possibility (pure) fails since the C-consistent pure sentence that there is exactly one individual
+  is false. The Fregean axiom holds in any two-valued model.
 notes: >-
   Explicit specialization of the source's standard Henkin construction to an infinite individual domain,
   recorded to separate the type-$e$ infinity principles from the type-$t$ ones: it satisfies the Axiom of
-  Infinity at type $e$, hence Possible and Potential Infinity at type $e$, while violating the Axiom of
-  Infinity at type $t$.
+  Infinity at type $e$, hence Possible Infinity at type $e$, while violating the Axiom of Infinity at
+  type $t$. It also shows that the sentence used in pure-possibility-implies-axiom-of-infinity-t, that there
+  could be any positive number of individuals, does not follow from the Axiom of Infinity at type $e$:
+  here there is not possibly exactly one individual.

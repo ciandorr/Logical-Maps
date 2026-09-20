@@ -254,8 +254,12 @@ for it, if it has one, waits in the readout. An inconsistent meet is the floor. 
 nodes is their conjunction. A cover whose converse is ruled out by a model is a
 solid arrow with a filled head; one whose converse is still open is dashed with
 a hollow head, because whether those two nodes are really distinct is the
-question the diagram exists to answer. The node count grows with the subsets,
-so the view stops at a few hundred and says so.
+question the diagram exists to answer. Clicking works as it does on the graph, through the same selection and the
+same detail panel: a principle name gives its name, statement and details link,
+an ∧ gives its conjuncts, and an arrow gives the proofs behind it and, where
+the converse is settled, the model that settles it. The relation shading and
+its legend are the graph's too. The node count grows with the subsets, so the
+view stops at a few hundred and says so.
 
 Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with a pdf link when one was built and the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 

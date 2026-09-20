@@ -15,7 +15,7 @@ const model=(id,satisfies,violates)=>({id,name:'Model '+id.toUpperCase(),status:
 // A ∧ B is exactly C. D is incompatible with A. E is unrelated, and no model
 // separates it from A, so that cover's converse stays open.
 const fixture={topic:{id:'lat',title:'Lattice fixture',background:[],source_catalog:[{id:'paper',name:'Paper',kind:'published-paper'}]},
-  principles:['a','b','c','d','e'].map(id=>({id,name:id.toUpperCase(),statement:id})),
+  principles:['a','b','c','d','e'].map(id=>({id,name:id.toUpperCase(),statement:'Statement of '+id.toUpperCase()})),
   results:[rule('abc',['a','b'],'c'),rule('ca',['c'],'a'),rule('cb',['c'],'b'),rule('adf',['a','d'],false),rule('ea',['e'],'a')],
   models:[model('m1',['a'],['b','c','e']),model('m2',['b'],['a','c']),model('m3',['d'],['a','c'])]};
 const pages=[],errors=[];
@@ -156,6 +156,49 @@ try{
   d.querySelector('.tab[data-tab="lattice"]').click();
   w.eval('changeBackground("a",false);');
 
+  // Clicking reuses the graph's own selection, so a principle, an ∧ and an
+  // arrow read the same way here as they do there.
+  w.eval('lattice.shown=[];renderLattice();');
+  add('a'); add('b');
+  const pop=d.getElementById('pop'), click=el=>el.dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+  assert.equal(pop.parentElement.id,'lat-detail','The shared popup docks in the lattice');
+
+  // A principle name: its own name, its statement, and the graph's shading.
+  click(d.querySelector('#lat-graph text[data-principle="a"]'));
+  assert.equal(pop.hidden,false);
+  assert.equal(d.querySelector('#pop .pop-t').textContent,'A','The popup names the principle');
+  assert.match(pop.textContent,/Statement of A/,'And gives its statement');
+  const shaded=[...d.querySelectorAll('#lat-graph .lat-node')].map(g=>[...g.classList].find(c=>c.startsWith('rel-'))).filter(Boolean);
+  assert.equal(shaded.length,snap().n,'Every node takes a relation class');
+  assert.ok(shaded.includes('rel-base'),'The selection marks itself');
+  assert.ok(shaded.some(c=>c==='rel-entailed'||c==='rel-excluded'||c==='rel-consistent'||c==='rel-separated'||c==='rel-independent'),
+    'And the others take the graph\'s own kinds');
+  assert.equal(d.getElementById('lat-legend').hidden,false,'A legend explains them');
+  assert.match(d.getElementById('lat-legend').textContent,/Relative to A:/);
+
+  // An ∧: the conjunction, with each conjunct and its statement.
+  click(d.querySelector('#lat-graph .lat-meet'));
+  assert.equal(d.querySelector('#pop .pop-t').textContent,'A ∧ B','The ∧ names its conjunction');
+  assert.match(pop.textContent,/Statement of A/);
+  assert.match(pop.textContent,/Statement of B/);
+
+  // An arrow: where it comes from, and what rules the converse out.
+  const settled=[...d.querySelectorAll('#lat-graph .lat-edge:not(.may-reverse)')][0];
+  click(settled.closest('[data-lat-edge]'));
+  assert.match(pop.textContent,/⇒/,'The arrow states its implication');
+  assert.match(pop.textContent,/Why/,'It says where it comes from');
+  assert.match(pop.textContent,/Converse/,'And reports the converse');
+  assert.ok(pop.querySelectorAll('[data-model]').length||/contradiction|background already gives/.test(pop.textContent),
+    'A settled arrow names the model that rules its converse out, unless it is one of the constants');
+  assert.doesNotMatch(pop.textContent,/might yet/,'A settled arrow does not hedge');
+  const openArrow=[...d.querySelectorAll('#lat-graph .lat-edge.may-reverse')][0];
+  assert.ok(openArrow,'The fixture has an arrow whose converse is open');
+  click(openArrow.closest('[data-lat-edge]'));
+  // Two wordings, since an open arrow out of the floor is asking whether the
+  // node above it is the contradiction rather than whether two nodes merge.
+  assert.match(pop.textContent,/might yet (collapse into one node|be the contradiction)/,'An open arrow says the two might still be one');
+  w.eval('select(null)');
+
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, and a shared background whose dock follows the view.');
+  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows.');
 }finally{pages.forEach(p=>p.window.close());}

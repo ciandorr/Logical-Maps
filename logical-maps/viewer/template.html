@@ -179,6 +179,14 @@
   .lat-node.lat-meet.sel circle { stroke: var(--accent); stroke-width: 2.6; }
   .lat-node.lat-meet text { font: 600 12px var(--sans); fill: var(--ink-2); }
   .lat-node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
+  .lat-node.rel-entailed rect, .lat-node.rel-entailed circle { fill: var(--rel-entailed); }
+  .lat-node.rel-excluded rect, .lat-node.rel-excluded circle { fill: var(--rel-excluded); stroke: var(--indep); }
+  .lat-node.rel-consistent rect, .lat-node.rel-consistent circle { fill: url(#lat-split-consistent); }
+  .lat-node.rel-separated rect, .lat-node.rel-separated circle { fill: url(#lat-split-separated); }
+  .lat-node.rel-independent rect, .lat-node.rel-independent circle { fill: url(#lat-split-independent); }
+  .lat-node.rel-base rect, .lat-node.rel-base circle { fill: var(--hl); stroke: var(--accent); stroke-width: 2.4; }
+  .lat-node text[data-principle], .lat-node text[data-falsity], .lat-node text[data-truth] { cursor: pointer; pointer-events: auto; }
+  #lat-detail .relation-legend { margin-bottom: 6px; }
   .lat-node.lat-bottom rect, .lat-node.lat-top rect { fill: var(--hl); }
   .lat-node.sel rect { stroke: var(--accent); stroke-width: 2.6; }
   .lat-count { font-size: 12px; color: var(--ink-3); margin: 4px 0; }
@@ -601,7 +609,7 @@
             <div id="lat-warning" class="graph-warning" role="alert" hidden></div>
             <div class="graph-tools"><button class="btn small" id="lat-fit">Fit</button></div>
           </div>
-          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"></aside>
+          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p></aside>
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
@@ -2463,6 +2471,29 @@ function renderDetail() {
     const consequences = junction.consequences || layout.edges.filter(e => e.from === junction.id);
     h += `<div class="pop-t">${esc(junction.premises.map(name).join(' ∧ '))}</div><ul>${consequences.map(e => `<li><button class="lnk" data-graph-connection="${esc(e.key)}" data-junction-proof="${esc(junction.id)}" data-proof-index="${consequences.indexOf(e)}">${esc(name(e.conclusion || e.b))}</button> ${e.r ? certBadges(e.r) : `<span class="badge ${e.conjectured ? 'conj' : 'kind'}">${e.conjectured ? 'conjecture' : 'derived proof'}</span>`}</li>`).join('')}</ul>`;
     if (junction.equivalence) h += '<h3>Equivalence</h3>' + junction.equivalence.map(e => statusLine(esc(e.label), e.status)).join('');
+  } else if (sel.type === 'lattice-edge') {
+    // Where the arrow comes from, and what rules out its converse. The floor
+    // and the ceiling carry their implications for free, so for those the only
+    // question worth asking is the one about the converse.
+    h += `<div class="pop-t">${esc(sel.fromLabel)} ⇒ ${esc(sel.toLabel)}</div>`;
+    h += '<div class="rel-head">Why</div>';
+    if (!sel.from) h += '<p class="dim">Everything follows from a contradiction.</p>';
+    else if (!sel.to.length) h += '<p class="dim">Everything entails what the background already gives.</p>';
+    else h += sel.to.map(q => statusLine(`${esc(sel.fromLabel)} ⇒ ${esc(name(q))}`, implicationStatus(sel.from, q))).join('');
+    h += '<div class="rel-head">Converse</div>';
+    if (!sel.from) {
+      h += statusLine(`${esc(sel.toLabel)} ⇒ False (⊥)`, consistencyStatus(sel.to));
+      h += `<p class="dim">${sel.reverses === 'ruled out'
+        ? 'A model satisfies it alongside the background, so it is not the contradiction.'
+        : 'Nothing recorded shows it can hold with the background, so it might yet be the contradiction.'}</p>`;
+    } else {
+      h += sel.missing.map(p =>
+        statusLine(`${esc(sel.toLabel)} ⇒ ${esc(name(p))}`, implicationStatus(sel.to, p))).join('')
+        || '<p class="dim">Nothing separates the two.</p>';
+      h += `<p class="dim">${sel.reverses === 'ruled out'
+        ? 'A model settles the converse, so these are genuinely different nodes.'
+        : 'The converse is open, so these two might yet collapse into one node.'}</p>`;
+    }
   } else if (sel.type === 'trivial') {
     h += `<div class="pop-t">${esc(sel.display)}</div><p>${sel.from === 'falsity' ? 'False implies every proposition (explosion).' : 'Every proposition implies True.'}</p>`;
   } else if (sel.type === 'truth') {
@@ -2514,8 +2545,11 @@ function renderDetail() {
 }
 function placeDetail() {
   const el = document.getElementById('pop');
-  const docked = document.getElementById('pane-graph').dataset.active === 'true';
-  document.getElementById(docked ? 'graph-details' : 'floating-details').appendChild(el);
+  // One popup, docked in whichever view is open, so a principle reads the same
+  // way on the lattice as it does on the graph.
+  const lattice = document.getElementById('pane-lattice')?.dataset.active === 'true';
+  const docked = lattice || document.getElementById('pane-graph').dataset.active === 'true';
+  document.getElementById(lattice ? 'lat-detail' : docked ? 'graph-details' : 'floating-details').appendChild(el);
   if (docked) { el.style.removeProperty('left'); el.style.removeProperty('top'); }
 }
 document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && el.parentElement.id !== 'graph-details' && !el.contains(ev.target)) el.hidden = true; });
@@ -2545,6 +2579,7 @@ function select(sel, extend = false) {
   else if (sel.type === 'selection') state.focus = [...sel.premises];
   if (sel?.type === 'model') { state.modelId = sel.id; renderModels(); }
   state.selected = sel; renderDetail(); applySelection();
+  if (state.tab === 'lattice' && typeof renderLattice === 'function') renderLattice();
 }
 
 // ---------------------------------------------------------------- header
@@ -3092,6 +3127,12 @@ function latticeLayout() {
   };
 }
 
+// What a node is, as an expression the relation engine understands.
+function latticeExpression(n) {
+  if (n.inconsistent) return FALSE;
+  if (n.top) return TRUE;
+  return n.generators.length === 1 ? n.generators[0] : n.generators;
+}
 function latticeApplyView() {
   const vp = document.getElementById('lat-vp');
   if (vp) vp.setAttribute('transform', `translate(${lattice.view.tx},${lattice.view.ty}) scale(${lattice.view.k})`);
@@ -3117,17 +3158,45 @@ function renderLattice() {
     const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
     return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
   };
+  // The same shading as the graph, read off the same selection. Here it repeats
+  // what the diagram already shows in places, which does no harm and keeps one
+  // reading of the colours across the two views.
+  const base = shadingBase();
+  const baseInconsistent = base != null && consistencyStatus(expressionLiterals(base)).status === 'inconsistent';
+  const counts = {entailed: 0, excluded: 0, consistent: 0, separated: 0};
   const node = n => {
+    const expression = latticeExpression(n);
+    let relation = '';
+    if (base != null) {
+      if (sameExpression(base, expression)) relation = 'rel-base';
+      else if (baseInconsistent) { relation = 'rel-excluded'; counts.excluded++; }
+      else {
+        const found = selectionRelation(base, expression);
+        relation = 'rel-' + found.kind;
+        if (found.kind === 'independent') { counts.consistent++; counts.separated++; }
+        else if (Object.hasOwn(counts, found.kind)) counts[found.kind]++;
+      }
+    }
     const cls = 'lat-node' + (n.inconsistent ? ' lat-bottom' : n.top ? ' lat-top' : '')
-      + (n.meet ? ' lat-meet' : '') + (n.equivalent ? ' lat-equivalent' : '') + (lattice.selected === n.id ? ' sel' : '');
+      + (n.meet ? ' lat-meet' : '') + (n.equivalent ? ' lat-equivalent' : '')
+      + (relation ? ' ' + relation : '') + (lattice.selected === n.id ? ' sel' : '');
     const body = n.meet
       ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
       : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
         + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 14}">equivalent</text>` : '')
-        + n.names.map((t, i) => `<text x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`).join('');
+        + n.names.map((t, i) => {
+            const literal = n.self[n.names.indexOf(t) - (n.inconsistent || n.top ? 1 : 0)];
+            const tag = literal ? ` data-principle="${esc(literal)}"` : t === '⊥' ? ' data-falsity="1"' : t === '⊤' ? ' data-truth="1"' : '';
+            return `<text${tag} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`;
+          }).join('');
     return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}<title>${esc(latticeTitle(n))}</title></g>`;
   };
-  svg.innerHTML = `<defs>
+  const halves = [
+    ['consistent', 'var(--rel-entailed)', 'var(--node-fill)'],
+    ['separated', 'var(--node-fill)', 'var(--rel-excluded)'],
+    ['independent', 'var(--rel-entailed)', 'var(--rel-excluded)']
+  ].map(([id, upper, lower]) => `<linearGradient id="lat-split-${id}" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="50%" stop-color="${upper}"/><stop offset="50%" stop-color="${lower}"/></linearGradient>`).join('');
+  svg.innerHTML = `<defs>${halves}
       <marker id="lat-solid" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
       <marker id="lat-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0.5,0.5 L9.5,5 L0.5,9.5 z" fill="var(--bg)" stroke="var(--conj)" stroke-width="1.4"/></marker>
     </defs><g id="lat-vp">${lattice.edges.map(edge).join('')}${lattice.nodes.map(node).join('')}</g>`;
@@ -3139,7 +3208,19 @@ function renderLattice() {
   warn.hidden = !lattice.capped;
   if (lattice.capped) warn.textContent = `Stopped at ${LATTICE_CAP} nodes. The meets of these principles outrun the diagram; remove one to see the rest.`;
   refreshLatticeControls();
-  renderLatticeDetail();
+  renderLatticeLegend(base, baseInconsistent, counts);
+  document.getElementById('lat-hint').hidden = !!state.selected;
+  document.getElementById('lat-hint').textContent = 'Click a principle name, an ∧ or an arrow for its details. Shift-click a name to add or remove it from the selection.';
+}
+function renderLatticeLegend(base, baseInconsistent, counts) {
+  const legend = document.getElementById('lat-legend');
+  if (base == null) { legend.hidden = true; return; }
+  legend.hidden = false;
+  const line = selectionConsistencyLine(consistencyStatus(expressionLiterals(base)));
+  const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
+  legend.innerHTML = `<b>Relative to ${esc(expressionName(base))}:</b>`
+    + `<span class="rel-status ${line.kind}">${esc(line.text)}</span>`
+    + key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
 }
 function latticeTitle(n) {
   const parts = [n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ ')];
@@ -3147,25 +3228,6 @@ function latticeTitle(n) {
   if (n.top) parts.push('everything the background already gives');
   if (!n.inconsistent && !n.top) parts.push(n.consistency.status === 'consistent' ? 'consistent with the background' : 'not shown consistent with the background');
   return parts.join('\n');
-}
-function renderLatticeDetail() {
-  const el = document.getElementById('lat-detail');
-  const sel = lattice.selected;
-  const n = lattice.nodes.find(x => x.id === sel), e = lattice.edges.find(x => x.id === sel);
-  if (!n && !e) { el.innerHTML = '<p class="dim">Click a node or an arrow for its reading. Dashed arrows with a hollow head are the pairs that might still collapse.</p>'; return; }
-  if (n) {
-    el.innerHTML = `<h3>${esc(n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ '))}</h3>`
-      + (n.equivalent ? '<p class="dim">These are known equivalent, so they share one node.</p>' : '')
-      + (n.mapName ? `<p>The map records this conjunction as <b>${esc(name(n.mapName))}</b>. Choose it in the sidebar to put the name on the diagram.</p>` : '')
-      + (n.inconsistent ? '<p>The contradiction. Everything follows from it.</p>'
-        : n.top ? '<p>Everything the background already gives.</p>'
-        : `<p class="rel-status ${n.consistency.status === 'consistent' ? 'implies' : 'open'}">${n.consistency.status === 'consistent' ? 'Consistent with the background.' : 'Not shown consistent with the background.'}</p>`);
-    return;
-  }
-  el.innerHTML = `<h3>${esc(e.from.label)} ⇒ ${esc(e.to.label)}</h3>
-    <p class="rel-status ${e.reverses === 'open' ? 'open' : 'implies'}">${e.reverses === 'open'
-      ? 'The converse is open, so these two might yet be the same node.'
-      : 'The converse is ruled out by a recorded model, so the two are genuinely different.'}</p>`;
 }
 function refreshLatticeControls() {
   document.querySelectorAll('#lat-filters .lat-row').forEach(row => {
@@ -3217,9 +3279,26 @@ function renderLatticeFilters() {
   document.getElementById('lat-fit').addEventListener('click', latticeFit);
   const svg = document.getElementById('lat-graph');
   svg.addEventListener('click', ev => {
-    const n = ev.target.closest('[data-lat-node]'), e = ev.target.closest('[data-lat-edge]');
-    lattice.selected = n ? n.dataset.latNode : e ? e.dataset.latEdge : null;
-    renderLattice();
+    const group = ev.target.closest('[data-lat-node]'), wire = ev.target.closest('[data-lat-edge]');
+    if (!group && !wire) { lattice.selected = null; select(null); return; }
+    lattice.selected = group ? group.dataset.latNode : wire.dataset.latEdge;
+    if (group) {
+      const n = lattice.nodes.find(x => x.id === group.dataset.latNode);
+      const literal = ev.target.closest('[data-principle]')?.dataset.principle;
+      if (literal) select({type: 'principle', id: literal}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      else if (ev.target.closest('[data-falsity]') || (n.inconsistent && !n.self.length)) select({type: 'falsity'});
+      else if (ev.target.closest('[data-truth]') || (n.top && !n.self.length)) select({type: 'truth'});
+      else if (n.self.length) select({type: 'principle', id: n.self[0]}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      else select({type: 'selection', premises: n.generators});
+      return;
+    }
+    const e = lattice.edges.find(x => x.id === wire.dataset.latEdge);
+    const lower = e.from.bottom ? null : e.from.generators;
+    select({type: 'lattice-edge', from: lower, to: e.to.generators.length ? e.to.generators : [],
+      missing: lower ? lower.filter(p => !e.to.set.has(p)) : [],
+      fromLabel: e.from.meet ? e.from.generators.map(name).join(' ∧ ') : e.from.names.join(' ≡ '),
+      toLabel: e.to.meet ? e.to.generators.map(name).join(' ∧ ') : e.to.names.join(' ≡ '),
+      reverses: e.reverses});
   });
   let drag = null;
   svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty}; });

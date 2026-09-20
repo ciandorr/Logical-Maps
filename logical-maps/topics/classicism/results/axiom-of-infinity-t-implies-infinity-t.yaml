@@ -1,0 +1,32 @@
+id: axiom-of-infinity-t-implies-infinity-t
+premises:
+- axiom-of-infinity-t
+conclusion: infinity-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5 (Anthropic), 19 September 2026, from the formulation suggested by Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 19 September 2026.
+source_names:
+- Dorr 19 Sep
+proof: >-
+  Fix $n\ge1$. The closed term $\operatorname{Suc}_t^{\,n}(\mathbf{0}_t)$ denotes a finite cardinality,
+  since any $W$ holding of $\mathbf{0}_t$ and closed under $\operatorname{Suc}_t$ holds of it after
+  $n$ steps. The axiom therefore supplies an $X$ falling under it. Unfold $\operatorname{Suc}_t$ $n$
+  times, writing $X_n:=X$ and, at each stage, taking the witness $y_k$ with $X_k y_k$ and
+  $X_{k-1}:=\lambda u\, .\,X_k u\land u\ne y_k$. Each $y_{k-1}$ falls under $X_{k-1}$, which excludes
+  $y_k$ and everything dropped before it, so $y_1,\ldots,y_n$ are pairwise distinct. They are the $n$
+  witnesses the schema's $n$-th instance asks for. The remaining $X_0$ falls under $\mathbf{0}_t$ and
+  is empty, which is what closes the unfolding.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, n. 47, p. 32
+notes: >-
+  The converse fails, by a compactness argument that a nonstandard model would witness. The map does not
+  yet record such a model, so the schema-to-axiom direction stays open rather than refuted.

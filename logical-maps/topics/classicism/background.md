@@ -44,6 +44,31 @@ $$
 
 Thus an atom is non-bottom and has no non-bottom strict lower bound.
 These are the definitions of *Classicism*, §2.2, pp. 23–24.
+The Axiom of Infinity is stated with Frege's cardinality apparatus. At a type
+$\sigma$, a *cardinality* is an entity of type $(\sigma t)t$, and:
+
+$$
+\begin{aligned}
+\mathbf{0}_\sigma&:=\lambda X^{\sigma t}\, .\,\forall u^\sigma\, .\,\neg Xu,\\
+\operatorname{Suc}_\sigma(Z)&:=\lambda X^{\sigma t}\, .\,\exists y^\sigma\, .\,
+  Xy\land Z(\lambda u^\sigma\, .\,Xu\land u\ne y),\\
+\operatorname{Finite}_\sigma(Z)&:=\forall W^{((\sigma t)t)t}\, .\,
+  \bigl(W\mathbf{0}_\sigma\land\forall Y\, .\,WY\to W(\operatorname{Suc}_\sigma Y)\bigr)\to WZ.
+\end{aligned}
+$$
+
+So $\mathbf{0}_\sigma$ is the cardinality of the empty property,
+$\operatorname{Suc}_\sigma$ adds one to a cardinality, and
+$\operatorname{Finite}_\sigma$ collects the cardinalities reached from
+$\mathbf{0}_\sigma$ by finitely many successors, in the impredicative sense
+that they fall under every property of cardinalities that holds of
+$\mathbf{0}_\sigma$ and of a successor whenever it holds of the cardinality
+succeeded. Write $Z\equiv Z'$ for
+$\forall X^{\sigma t}\, .\,ZX\leftrightarrow Z'X$. Every type used here ends
+in $t$, so all of them are admitted, and no type $\sigma\sigma$ is needed;
+that is why the axiom is not put in the Dedekind form, which would ask for an
+injective non-surjective operation from $\sigma$ to $\sigma$.
+
 Boolean Completeness is stated with $\operatorname{GLB}$. The dual form,
 with $\operatorname{LUB}_\tau(y,X):=\forall z^\tau\, .\,
 (\forall w^\tau\, .\,Xw\to w\le_\tau z)\leftrightarrow y\le_\tau z$,

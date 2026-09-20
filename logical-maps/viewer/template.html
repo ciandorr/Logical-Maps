@@ -181,6 +181,10 @@
   .lat-node.lat-meet.sel circle { stroke: var(--accent); stroke-width: 2.6; }
   .lat-node.lat-meet text { font: 600 12px var(--sans); fill: var(--ink-2); }
   .lat-node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
+  /* The floor reads as the graph's False box does. These come before the
+     relation rules, which must win once something is selected. */
+  .lat-node.lat-bottom rect { stroke: var(--indep); stroke-width: 2; }
+  .lat-node.lat-bottom text[data-falsity] { fill: var(--indep); font-weight: 700; }
   .lat-node.rel-entailed rect, .lat-node.rel-entailed circle { fill: var(--rel-entailed); }
   .lat-node.rel-excluded rect, .lat-node.rel-excluded circle { fill: var(--rel-excluded); stroke: var(--indep); }
   .lat-node.rel-consistent rect, .lat-node.rel-consistent circle { fill: url(#lat-split-consistent); }
@@ -189,7 +193,6 @@
   .lat-node.rel-base rect, .lat-node.rel-base circle { fill: var(--hl); stroke: var(--accent); stroke-width: 2.4; }
   .lat-node text[data-principle], .lat-node text[data-falsity], .lat-node text[data-truth] { cursor: pointer; pointer-events: auto; }
   #lat-detail .relation-legend { margin-bottom: 6px; }
-  .lat-node.lat-bottom rect, .lat-node.lat-top rect { fill: var(--hl); }
   .lat-node.sel rect { stroke: var(--accent); stroke-width: 2.6; }
   .lat-count { font-size: 12px; color: var(--ink-3); margin: 4px 0; }
   .lat-row { display: flex; }
@@ -199,7 +202,7 @@
   .junction.selected circle { stroke: var(--accent); stroke-width: 2.4; fill: var(--hl); }
   .node text[data-constant] { pointer-events: auto; cursor: pointer; }
   .node text[data-principle] { pointer-events: auto; cursor: pointer; }
-  .node text.selection-member { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .node text.selection-member, .lat-node text.selection-member { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
   .principle-name[aria-pressed="true"] { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
   .node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
   .node.iso rect { stroke-dasharray: 4 3; }
@@ -3164,14 +3167,24 @@ function renderLattice() {
   // what the diagram already shows in places, which does no harm and keeps one
   // reading of the colours across the two views.
   const base = shadingBase();
-  const baseInconsistent = base != null && consistencyStatus(expressionLiterals(base)).status === 'inconsistent';
+  const baseLiterals = base == null ? [] : expressionLiterals(base);
+  const baseMembers = new Set(base === TRUE ? [TRUE] : baseLiterals);
+  const baseInconsistent = base != null && consistencyStatus(baseLiterals).status === 'inconsistent';
+  // The selected node is the one whose closure the selection generates, so a
+  // click on any of the names an equivalence box carries selects that box,
+  // as on the graph. A selection made elsewhere from principles this diagram
+  // does not show has no closure here, and then only its literal node counts.
+  const baseKey = base != null && baseLiterals.every(l => lattice.shown.includes(l)) ? latticeKey(latticeClosure(baseLiterals)) : null;
   const counts = {entailed: 0, excluded: 0, consistent: 0, separated: 0};
   const node = n => {
     const expression = latticeExpression(n);
     let relation = '';
     if (base != null) {
-      if (sameExpression(base, expression)) relation = 'rel-base';
+      if (sameExpression(base, expression) || baseKey != null && baseKey === n.key) relation = 'rel-base';
       else if (baseInconsistent) { relation = 'rel-excluded'; counts.excluded++; }
+      // The floor is excluded by any consistent selection, as on the graph;
+      // asking the proof engine about it would count it as entailed instead.
+      else if (n.inconsistent) { relation = 'rel-excluded'; counts.excluded++; }
       else {
         const found = selectionRelation(base, expression);
         relation = 'rel-' + found.kind;
@@ -3189,7 +3202,8 @@ function renderLattice() {
         + n.names.map((t, i) => {
             const literal = n.self[n.names.indexOf(t) - (n.inconsistent || n.top ? 1 : 0)];
             const tag = literal ? ` data-principle="${esc(literal)}"` : t === '⊥' ? ' data-falsity="1"' : t === '⊤' ? ' data-truth="1"' : '';
-            return `<text${tag} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`;
+            const member = literal ? baseMembers.has(literal) : t === '⊥' ? base === FALSE : t === '⊤' && base === TRUE;
+            return `<text${tag}${member ? ' class="selection-member"' : ''} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`;
           }).join('');
     return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}<title>${esc(latticeTitle(n))}</title></g>`;
   };

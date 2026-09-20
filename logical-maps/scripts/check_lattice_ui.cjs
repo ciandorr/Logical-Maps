@@ -13,10 +13,11 @@ const cert=source_id=>({source_id,lean:'none',produced_by:'Fixture',checked_by:[
 const rule=(id,premises,conclusion)=>({id,premises,conclusion,status:'proved',certificate:cert('paper'),sources:['Fixture'],source_names:['Fixture']});
 const model=(id,satisfies,violates)=>({id,name:'Model '+id.toUpperCase(),status:'proved',satisfies,violates,certificate:cert('paper'),sources:['Fixture'],source_names:['Fixture']});
 // A ∧ B is exactly C. D is incompatible with A. E is unrelated, and no model
-// separates it from A, so that cover's converse stays open.
+// separates it from A, so that cover's converse stays open. F is equivalent to
+// E, so the two share a node.
 const fixture={topic:{id:'lat',title:'Lattice fixture',background:[],source_catalog:[{id:'paper',name:'Paper',kind:'published-paper'}]},
-  principles:['a','b','c','d','e'].map(id=>({id,name:id.toUpperCase(),statement:'Statement of '+id.toUpperCase()})),
-  results:[rule('abc',['a','b'],'c'),rule('ca',['c'],'a'),rule('cb',['c'],'b'),rule('adf',['a','d'],false),rule('ea',['e'],'a')],
+  principles:['a','b','c','d','e','f'].map(id=>({id,name:id.toUpperCase(),statement:'Statement of '+id.toUpperCase()})),
+  results:[rule('abc',['a','b'],'c'),rule('ca',['c'],'a'),rule('cb',['c'],'b'),rule('adf',['a','d'],false),rule('ea',['e'],'a'),rule('ef',['e'],'f'),rule('fe',['f'],'e')],
   models:[model('m1',['a'],['b','c','e']),model('m2',['b'],['a','c']),model('m3',['d'],['a','c'])]};
 const pages=[],errors=[];
 function page(){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
@@ -184,6 +185,42 @@ try{
     'And the others take the graph\'s own kinds');
   assert.equal(d.getElementById('lat-legend').hidden,false,'A legend explains them');
   assert.match(d.getElementById('lat-legend').textContent,/Relative to A:/);
+  // The constants take the graph's reading: the ceiling follows from anything,
+  // the floor is ruled out by any consistent selection.
+  const rel=sel=>[...d.querySelector(sel).classList].find(c=>c.startsWith('rel-'));
+  assert.equal(rel('#lat-graph .lat-top'),'rel-entailed','True is entailed by the selection');
+  assert.equal(rel('#lat-graph .lat-bottom'),'rel-excluded','False is excluded by it');
+  // The class is not enough: a later rule that paints the constants in the
+  // selection colour would still show the floor as if it followed.
+  add('d');
+  const fill=sel=>w.getComputedStyle(d.querySelector(sel+' rect')).fill;
+  assert.equal(rel('#lat-graph .lat-node[data-lat-node="lat:d"]'),'rel-excluded','D is excluded by A');
+  assert.equal(fill('#lat-graph .lat-bottom'),fill('#lat-graph .lat-node[data-lat-node="lat:d"]'),'And the floor is painted as D is');
+  assert.notEqual(fill('#lat-graph .lat-bottom'),fill('#lat-graph .lat-top'),'Not as the ceiling is');
+  assert.notEqual(fill('#lat-graph .lat-bottom'),fill('#lat-graph .rel-base'),'Nor as the selection is');
+  w.eval('latticeToggle("d")');
+  // The selected name is marked as it is on the graph, and only that name.
+  const marked=()=>[...d.querySelectorAll('#lat-graph text.selection-member')].map(t=>t.textContent);
+  assert.deepEqual(marked(),['A'],'The selected name is marked on the diagram');
+  const markedStyle=w.getComputedStyle(d.querySelector('#lat-graph text.selection-member'));
+  assert.equal(markedStyle.fontWeight,'700','In bold');
+  assert.match(markedStyle.textDecoration,/underline/,'And underlined');
+
+  // Two names on one node select the same node whichever is clicked; only
+  // the mark moves.
+  add('e'); add('f');
+  const shared=[...d.querySelectorAll('#lat-graph .lat-node')].find(g=>g.querySelector('text[data-principle="e"]'));
+  assert.ok(shared.querySelector('text[data-principle="f"]'),'E and F share a node');
+  click(shared.querySelector('text[data-principle="e"]'));
+  const sharedNow=()=>[...d.querySelectorAll('#lat-graph .lat-node')].find(g=>g.querySelector('text[data-principle="e"]'));
+  assert.ok(sharedNow().classList.contains('rel-base'),'Clicking E selects the node');
+  assert.deepEqual(marked(),['E']);
+  click(sharedNow().querySelector('text[data-principle="f"]'));
+  assert.ok(sharedNow().classList.contains('rel-base'),'Clicking F selects the same node, not a node entailed by F');
+  assert.deepEqual(marked(),['F'],'And the mark moves to F');
+  assert.equal(d.querySelector('#pop .pop-t').textContent,'F','While the popup follows the click');
+  w.eval('lattice.shown=["a","b"];renderLattice();');
+  click(d.querySelector('#lat-graph text[data-principle="a"]'));
 
   // An ∧: the conjunction, with each conjunct and its statement.
   click(d.querySelector('#lat-graph .lat-meet'));
@@ -210,5 +247,5 @@ try{
   w.eval('select(null)');
 
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows.');
+  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, and equivalent names selecting one node.');
 }finally{pages.forEach(p=>p.window.close());}

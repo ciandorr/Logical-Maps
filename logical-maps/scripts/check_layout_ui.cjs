@@ -236,7 +236,7 @@ try {
   dom.window.eval("changeBackground('b',true)");
   const assumed=geometry(dom);
   verifyIsolation(assumed);
-  assert.ok(!assumed.nodes.some(n=>n.members.includes('b')), 'The assumed principle should leave the graph.');
+  assert.equal(assumed.nodes.find(n=>n.members.includes('b'))?.id,'truth', 'The assumed principle stays, in the True box.');
   assert.equal(assumed.edges.length,0);
   dom.window.eval("changeBackground('b',false)");
   assert.deepEqual(geometry(dom).nodes,initial.nodes);

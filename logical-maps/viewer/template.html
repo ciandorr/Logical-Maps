@@ -777,6 +777,14 @@ const sourceColor = s => {
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
 const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
 const graphSearch = { matches: new Set(), index: 0 };
+// A principle the topic's own background already settles, one way or the
+// other, can only sit in the True or False box. It starts hidden; the sidebar
+// still offers it. The reader's own assumptions are not consulted here.
+(function hideSettledByDefault() {
+  const minimal = new Engine(ids, R.filter(r => r.status === 'proved'), [], topicBackground);
+  const facts = minimal.cl([]).facts;
+  for (const id of ids) if (facts.has(id) || minimal.excludes([], id)) state.excluded.add(id);
+})();
 let graphRelations = new Map();
 let E = null, EC = null, baseE = null, baseEC = null, A = null, layout = null, backgroundConflicts = [], backgroundExcluded = new Map();
 let graphBackgroundE = null, graphInferenceE = null, graphBackgroundConflict = null, graphBackgroundExcluded = new Map();
@@ -953,7 +961,13 @@ function buildGraph() {
   const classOf = new Map(); cls.forEach((c, i) => c.forEach(x => classOf.set(x, i)));
   // Search reveals matching positive nodes temporarily, preserving the user's
   // graph selections and background when the query is cleared.
-  const hidden = literal => inBackground(baseId(literal)) || (isNegative(literal) ? !state.negativeShown.has(baseId(literal)) : state.excluded.has(literal) && !graphSearch.matches.has(literal));
+  // An assumption the reader made stays on the diagram, where the folding
+  // puts it in the True box, or the False box when its negation is assumed,
+  // so the decision is visible where its consequences are. The topic's own
+  // fixed background is not a decision and stays off the diagram.
+  const assumed = literal => inBackground(baseId(literal)) && !topicBackground.includes(baseId(literal));
+  const hidden = literal => isNegative(literal) ? !state.negativeShown.has(baseId(literal)) || (inBackground(baseId(literal)) && !assumed(literal))
+    : assumed(literal) ? false : inBackground(literal) || state.excluded.has(literal) && !graphSearch.matches.has(literal);
   const nodeFor = literal => literal === FALSE ? 'falsity' : (isNegative(literal) ? 'n' : 'c') + classOf.get(baseId(literal));
   const nodes = [];
   cls.forEach((c, i) => {
@@ -3051,13 +3065,21 @@ function latticeEquivalents(gens) {
 // they share one box on the implication graph, so nothing is drawn twice under
 // two names. Nothing the reader did not choose puts its name on the diagram,
 // which is why ⊤ does not drag in every background consequence the map records.
-function latticeNames(n) {
+// The reader's own assumptions name the ceiling, or the floor when their
+// negation is assumed, so a decision to background a principle stays visible.
+const latticeAssumptions = () => ({
+  top: [...background].filter(id => !topicBackground.includes(id)),
+  bottom: [...negativeBackground].filter(id => !topicBackground.includes(id))
+});
+function latticeLabels(n) {
   const out = [];
-  if (n.inconsistent) out.push('⊥');
-  if (n.top) out.push('⊤');
-  for (const l of n.self) if (!out.includes(name(l))) out.push(name(l));
+  const push = (text, literal) => { if (!out.some(l => l.text === text)) out.push({text, literal}); };
+  if (n.inconsistent) { push('⊥', null); for (const id of latticeAssumptions().bottom) push(name(id), id); }
+  if (n.top) { push('⊤', null); for (const id of latticeAssumptions().top) push(name(id), id); }
+  for (const l of n.self) push(name(l), l);
   return out;
 }
+function latticeNames(n) { return latticeLabels(n).map(l => l.text); }
 
 function buildLattice() {
   const nodes = new Map();
@@ -3096,7 +3118,8 @@ function buildLattice() {
     // A chosen literal that entails the whole meet is that meet, not just
     // something above it.
     n.self = n.gens.filter(l => latticeEntails([l], n.gens));
-    n.names = latticeNames(n);
+    n.labels = latticeLabels(n);
+    n.names = n.labels.map(l => l.text);
     n.equivalent = n.names.length > 1;
     // A meet no chosen principle answers to needs no label: where it sits
     // already says it is the conjunction of the nodes above it. It is drawn as
@@ -3108,7 +3131,11 @@ function buildLattice() {
   }
   // False and True always anchor the diagram, even before anything is chosen.
   let bottom = all.find(n => n.inconsistent);
-  if (!bottom) { bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), generators: [], self: [], names: ['⊥'], equivalent: false, meet: false, mapName: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}}; all.push(bottom); }
+  if (!bottom) {
+    bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), generators: [], self: [], meet: false, mapName: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}};
+    bottom.labels = latticeLabels(bottom); bottom.names = bottom.labels.map(l => l.text); bottom.equivalent = bottom.names.length > 1;
+    all.push(bottom);
+  }
   bottom.bottom = true;
   const top = all.find(n => n.top) || null;
 
@@ -3241,7 +3268,7 @@ function renderLattice() {
     const expression = latticeExpression(n);
     let relation = '';
     if (base != null) {
-      if (sameExpression(base, expression) || baseKey != null && baseKey === n.key) relation = 'rel-base';
+      if (sameExpression(base, expression) || baseKey != null && baseKey === n.key || n.labels.some(l => l.literal && baseMembers.has(l.literal))) relation = 'rel-base';
       else if (baseInconsistent) { relation = 'rel-excluded'; counts.excluded++; }
       // The floor is excluded by any consistent selection, as on the graph;
       // asking the proof engine about it would count it as entailed instead.
@@ -3260,8 +3287,7 @@ function renderLattice() {
       ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
       : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
         + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 14}">equivalent</text>` : '')
-        + n.names.map((t, i) => {
-            const literal = n.self[n.names.indexOf(t) - (n.inconsistent || n.top ? 1 : 0)];
+        + n.labels.map(({text: t, literal}, i) => {
             const tag = literal ? ` data-principle="${esc(literal)}"` : t === '⊥' ? ' data-falsity="1"' : t === '⊤' ? ' data-truth="1"' : '';
             const member = literal ? baseMembers.has(literal) : t === '⊥' ? base === FALSE : t === '⊤' && base === TRUE;
             return `<text${tag}${member ? ' class="selection-member"' : ''} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`;

@@ -170,7 +170,13 @@ negation as separate nodes without adding either to the source records.
 - Everything else is unknown. Failing to find a model proves no inconsistency.
 - Mutually derivable principles collapse to one graph node. Principles
   inconsistent with the background share the False box; background consequences
-  share the True box. These display classes do not change evidence readouts.
+  share the True box, and so do the reader's own assumptions, so a decision to
+  background a principle stays visible where its consequences are. A negative
+  assumption puts its principle in the False box. The topic's fixed background
+  stays off the graph. These display classes do not change evidence readouts.
+- A principle the topic's own background already settles, one that follows from
+  it or is excluded by it with no further assumption, starts hidden, since it can
+  only ever sit beside True or False. The sidebar still offers it.
 - Deriving False or an explicitly violated property from a proved model is
   a validation error. Conjectures never supply proved evidence.
 
@@ -254,7 +260,8 @@ model outside the selection still appears in the readout, marked as such, but it
 does not make an arrow solid. A meet is drawn under a name only when the reader has chosen a
 principle equivalent to it, and then under every such name at once, with the
 word equivalent above them as on the graph. False and True always name their
-own nodes. A meet nobody has named is an ∧ in a circle, since where it sits
+own nodes, and the reader's assumptions name them too: a backgrounded principle
+joins the ceiling, or the floor when its negation is assumed. A meet nobody has named is an ∧ in a circle, since where it sits
 already says it is the conjunction of the nodes above it; the map's own name
 for it, if it has one, waits in the readout. An inconsistent meet is the floor. Nothing nests, since on a Hasse diagram the greatest lower bound of two
 nodes is their conjunction. A cover whose converse is ruled out by a model is a
@@ -431,7 +438,8 @@ arrowheads or flow chevrons, since an individual conjunct does not imply the who
 Graph controls use **✓** to show a principle and **✗** to show its negation;
 both can be displayed together; unchecking each hides it. **Background** moves
 the principle into the shared assumptions, assuming it positively unless only
-✗ was selected. In the background, ✓ and ✗ are exclusive. **Return** displays
+✗ was selected, and shows it in the True box, or the False box for a negative
+assumption. In the background, ✓ and ✗ are exclusive. **Return** displays
 the assumed sign on the graph again. Standing topic axioms remain fixed.
 
 Theory explorer edits those same assumptions directly in one principle list.

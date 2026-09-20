@@ -159,6 +159,17 @@ try{
   assert.deepEqual(snapshot().shown,[],'An assumption stops being a generator');
   assert.ok(row('a').classList.contains('in-background'),'Its row says so');
   assert.ok(w.eval('[...background].includes("a")'),'And it reaches the shared background');
+  // The decision stays visible: the assumption names the ceiling, and its
+  // name there selects that node.
+  const ceiling=()=>JSON.parse(w.eval('JSON.stringify(lattice.nodes.find(n=>n.top).names)'));
+  assert.deepEqual(ceiling(),['⊤','A'],'The assumption joins the ceiling');
+  assert.ok(d.querySelector('#lat-graph .lat-top text[data-principle="a"]'),'Under its own clickable name');
+  d.querySelector('#lat-graph .lat-top text[data-principle="a"]').dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+  assert.ok(d.querySelector('#lat-graph .lat-top').classList.contains('rel-base'),'Clicking it selects the ceiling');
+  w.eval('select(null)');
+  w.eval('setAssumption("b","negative")');
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(lattice.nodes.find(n=>n.bottom).names)')),['⊥','B'],'A negative assumption names the floor');
+  w.eval('setAssumption("b",null)');
   d.querySelector('.tab[data-tab="graph"]').click();
   assert.equal(d.getElementById('background-dock').closest('.pane').id,'pane-graph','The dock goes back with the graph');
   assert.ok(d.querySelector('#pr-filters [data-pr-row="a"]').classList.contains('in-background'),'The graph sidebar agrees');

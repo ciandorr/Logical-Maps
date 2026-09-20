@@ -53,6 +53,25 @@ try{
  assert.ok(!graph(real).edges.some(e=>e.premises.includes('simple-eu')));
  real.window.document.getElementById('unpublished-only').click();
  assert.equal(graph(real).edges.length,0);assert.equal(real.window.document.getElementById('graph-empty').hidden,false,'Resolved questions leave a valid empty conjecture-only graph');
+ // Redrawing after a change of content leaves the reader's pan and zoom alone.
+ // Only the first fit, the fit button, and a change in pane size move it.
+ const vp=page(fixture,'https://maps.example/?assume=background'),vw=vp.window,vd=vw.document;
+ const at=()=>JSON.parse(vw.eval('JSON.stringify(view)'));
+ assert.ok(at().k>0,'The graph is fitted when it is first drawn');
+ vw.eval('view.k=2.5; view.tx=-120; view.ty=-80; applyView();');
+ const chosen=at();
+ const steady=label=>assert.deepEqual(at(),chosen,label+' must not move the view');
+ vd.getElementById('show-conj').click(); steady('Showing conjectures');
+ vd.querySelector('[data-show-positive]').click(); steady('Showing a principle');
+ vd.querySelector('[data-source-filter]').click(); steady('A source filter');
+ vd.getElementById('trivial-arrows').click(); steady('Trivial arrows');
+ vd.getElementById('reduce-arrows').click(); steady('Transitive reduction');
+ vw.select({type:'principle',id:'a'}); steady('Selecting a principle');
+ vw.eval("changeBackground('a',true)"); steady('A background change');
+ vd.querySelector('.tab[data-tab="models"]').click(); vd.querySelector('.tab[data-tab="graph"]').click();
+ steady('Leaving the graph and returning');
+ vw.eval('fit()');
+ assert.notDeepEqual(at(),chosen,'The fit button still restores the whole diagram');
  assert.deepEqual(errors.map(String),[]);
  console.log('PASS: graph-only conjecture/unpublished modes, intersection, published background consequences, restored controls, cleared principles, Lean empty state, and DTU.');
 }finally{pages.forEach(p=>p.window.close());}

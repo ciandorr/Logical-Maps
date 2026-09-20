@@ -1727,6 +1727,13 @@ function applyGraphSearch(focus = false) {
   }
 }
 function applyView() { const vp = document.getElementById('vp'); if (vp) vp.setAttribute('transform', `translate(${view.tx},${view.ty}) scale(${view.k})`); }
+// The view belongs to the reader. Only the first successful fit, a change in
+// the size of the graph pane, and the fit button itself move it. Redrawing
+// after a change of content leaves it alone, so showing a premise or changing
+// a filter no longer throws away a chosen zoom. If the new content lands
+// outside the current view, the fit button brings the whole diagram back.
+let viewFitted = false;
+function fitInitial() { if (!viewFitted) fit(); }
 function fit() {
   const L = layout; if (!L || !L.visible.length) return;
   const xs = L.visible.map(n => L.x.get(n.id) - L.size.get(n.id).w / 2), xe = L.visible.map(n => L.x.get(n.id) + L.size.get(n.id).w / 2);
@@ -1737,6 +1744,7 @@ function fit() {
   view.k = Math.min(W / (maxX - minX), H / (maxY - minY), 1.4);
   view.tx = (W - (maxX + minX) * view.k) / 2; view.ty = (H - (maxY + minY) * view.k) / 2;
   applyView();
+  viewFitted = true;
 }
 // pan / zoom
 (function () {
@@ -2335,7 +2343,7 @@ function showTab(tab) {
   document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-' + tab));
   document.getElementById('pop').hidden = true;
   placeDetail();
-  if (tab === 'graph') fit();
+  if (tab === 'graph') fitInitial();
 }
 
 // ---------------------------------------------------------------- detail
@@ -2585,7 +2593,7 @@ function renderAll(refit) {
     renderSubscripts(backgroundPage);
     mountPaperCatalogue(); backgroundPage.dataset.ready = 'true';
   }
-  renderGraph(); if (refit) fit(); renderModels(); renderResults(); renderOpen();
+  renderGraph(); if (refit) fitInitial(); renderModels(); renderResults(); renderOpen();
 }
 function resetBackground() {
   for (const id of [...background]) if (!topicBackground.includes(id)) background.delete(id);
@@ -2677,7 +2685,7 @@ document.getElementById('fit').addEventListener('click', fit);
   const el = document.getElementById('pr-filters');
   const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-clear-graph="${p.id}">clear</button><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
   el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
-  const repaint = () => { refreshPrincipleControls(); renderGraph(); fit(); };
+  const repaint = () => { refreshPrincipleControls(); renderGraph(); fitInitial(); };
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
   el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
   el.querySelectorAll('[data-clear-graph]').forEach(b => b.addEventListener('click', () => { state.excluded.add(b.dataset.clearGraph); state.negativeShown.delete(b.dataset.clearGraph); repaint(); }));

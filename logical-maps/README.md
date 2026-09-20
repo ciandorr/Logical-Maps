@@ -263,6 +263,10 @@ even when no individual principle represents it; each retains its own ∧ and
 premise strokes. An inconsistent conjunction similarly belongs inside False.
 A conjectured reverse implication does not establish equivalence.
 
+Panning and zooming persist. Redrawing after a change of content leaves the
+view where the reader put it; only the first draw, a resized graph pane and the
+fit button restore the whole diagram.
+
 Principles are ranked by their implication order. Barycenter sweeps and
 adjacent swaps reduce crossings; separate connected clusters are packed side
 by side. Isolated principles occupy compact labelled bands above the diagram.

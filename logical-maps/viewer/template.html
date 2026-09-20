@@ -139,11 +139,14 @@
   .edge.human { stroke: var(--human); } .edge.assisted { stroke: var(--assisted); } .edge.ai { stroke: var(--ai); }
   .edge.derived { stroke: var(--derived); stroke-width: 1.3; }
   /* Premise strokes carry the ∧ structure and are the commonest edge on a
-     conjunction-heavy map, so they are solid ink rather than dotted. They are
-     a little thinner than an ordinary arrow to stay distinguishable, not to
-     read as lesser, and they scale with the view like every other edge so that
-     the difference holds at any zoom. */
-  .edge.premise { stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; }
+     conjunction-heavy map, so they are solid rather than dotted, and lighter
+     than the ink used for labels so that so many of them do not crowd the
+     diagram. They share the tone of the ∧ glyph they run into, and they keep
+     clear of the derived colour and of the fainter ink that trivial arrows
+     use. The slight thinness against an ordinary arrow tells the two apart
+     without reading as lesser, and they scale with the view like every other
+     edge so that the difference holds at any zoom. */
+  .edge.premise { stroke: var(--ink-2); stroke-width: 1.4; stroke-linecap: round; }
   .edge.conjectured { stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; }
   .edge.lean { stroke-width: 3; }
   .edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }

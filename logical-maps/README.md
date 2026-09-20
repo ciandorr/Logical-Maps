@@ -252,8 +252,9 @@ default, shows False ⇒ every displayed node and every displayed node ⇒ True.
 These logical arrows have their own explanation and do not change source
 filters, proof evidence, or the treatment of inconsistent assumptions.
 
-An ∧ collects its premises below them, with solid ink strokes descending into
-it, drawn a little thinner than an implication arrow. When a proved conjunction is equivalent to a principle, the ∧ sits inside
+An ∧ collects its premises below them, with solid strokes descending into it,
+drawn a little thinner and lighter than an implication arrow, in the tone of
+the ∧ glyph itself. When a proved conjunction is equivalent to a principle, the ∧ sits inside
 that principle's equivalence box, with the strokes landing directly on its
 circle. There is no arrow inside the box. Other consequences retain their
 arrows, and clicking the ∧ provides the equivalence proofs and all its

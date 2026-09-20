@@ -19,7 +19,8 @@ try{
  const plain=sel=>w.getComputedStyle(d.querySelector('.edge-g:not(.hot) '+sel));
  const premise=plain('.edge.premise'), ordinary=plain('.edge.source');
  assert.equal(premise.strokeDasharray,'none','Premise strokes are not dashed');
- assert.equal(premise.stroke,'var(--ink)','Premise strokes use ink, not a source colour');
+ assert.equal(premise.stroke,'var(--ink-2)','Premise strokes are lighter than label ink');
+ assert.ok(!['var(--derived)','var(--ink-3)'].includes(premise.stroke),'And stay clear of the derived and trivial-arrow colours');
  assert.ok(!premise.vectorEffect||premise.vectorEffect==='none','Premise strokes scale with the view like every other edge');
  const pw=parseFloat(premise.strokeWidth), ow=parseFloat(ordinary.strokeWidth);
  assert.ok(pw<ow,'A premise stroke is thinner than an ordinary arrow');

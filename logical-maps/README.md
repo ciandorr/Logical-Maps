@@ -241,9 +241,11 @@ sky blue replaces green, orange replaces red, and independence combines both
 coloured halves. Open nodes keep their normal fill.
 
 Lattice: a separate Hasse diagram of the conjunctions a chosen handful of
-principles generate. It opens with False and True alone; clicking a principle
-in the sidebar adds it together with its meets against everything already
-shown. A meet known equivalent to something already on the diagram, or to any
+principles generate. It opens with False and True alone; the sidebar offers the same
+choices per principle as the graph, ✓ for the principle, ✗ for its negation and
+a move to the background, and each adds its literal together with its meets
+against everything already shown. The background is the one the graph uses, and
+its dock follows whichever view is open. A meet known equivalent to something already on the diagram, or to any
 named principle, is drawn once under that name, and an inconsistent meet is the
 floor. Nothing nests, since on a Hasse diagram the greatest lower bound of two
 nodes is their conjunction. A cover whose converse is ruled out by a model is a

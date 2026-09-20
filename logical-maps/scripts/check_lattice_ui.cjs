@@ -71,11 +71,46 @@ try{
   d.getElementById('lat-clear').click();
   assert.deepEqual(snap().labels.slice().sort(),['⊤','⊥'],'Clearing returns to the two constants');
 
-  // The sidebar has no control for adding many at once.
-  assert.equal(d.querySelectorAll('#lat-filters [data-category-select], #lat-filters [data-show-negative]').length,0,
-    'The lattice sidebar offers no bulk or negative controls');
-  assert.ok(d.querySelectorAll('#lat-filters [data-lat-principle]').length===fixture.principles.length,'It lists every principle');
+  // The sidebar has no control for adding many at once, but does offer the
+  // same per-principle choices as the graph: positive, negative, background.
+  assert.equal(d.querySelectorAll('#lat-filters [data-category-select]').length,0,'No bulk controls');
+  assert.equal(d.querySelectorAll('#lat-filters .lat-row').length,fixture.principles.length,'It lists every principle');
+  const row=id=>d.querySelector(`#lat-filters [data-lat-row="${id}"]`);
+  const snapshot=()=>JSON.parse(w.eval('JSON.stringify({shown:lattice.shown,labels:lattice.nodes.map(x=>x.label)})'));
+
+  // A negation joins as a generator in its own right and is labelled as one.
+  w.eval('lattice.shown=[];renderLattice();');
+  row('a').querySelector('[data-lat-positive]').click();
+  row('b').querySelector('[data-lat-negative]').click();
+  let g=snapshot();
+  assert.deepEqual(g.shown,['a','!b'],'A negation is a generator like any other');
+  assert.ok(g.labels.includes('¬B'),'And is drawn under its negated name');
+  assert.ok(g.labels.includes('A ∧ ¬B'),'Its meets appear too');
+  assert.equal(row('a').querySelector('[data-lat-positive]').getAttribute('aria-pressed'),'true');
+  assert.equal(row('b').querySelector('[data-lat-negative]').getAttribute('aria-pressed'),'true');
+
+  // A principle together with its own negation is the floor.
+  w.eval('lattice.shown=[];renderLattice();');
+  row('a').querySelector('[data-lat-positive]').click();
+  row('a').querySelector('[data-lat-negative]').click();
+  g=snapshot();
+  assert.equal(g.labels.filter(l=>l==='⊥').length,1,'A principle and its negation meet at the floor');
+  assert.equal(g.labels.length,4,'And add nothing else');
+
+  // The background is shared with the graph, and the dock follows the view.
+  assert.equal(d.getElementById('background-dock').closest('aside').id,'lat-sidebar','The dock moves to the open sidebar');
+  w.eval('lattice.shown=[];renderLattice();');
+  row('a').querySelector('[data-lat-positive]').click();
+  row('a').querySelector('[data-lat-background]').click();
+  assert.deepEqual(snapshot().shown,[],'An assumption stops being a generator');
+  assert.ok(row('a').classList.contains('in-background'),'Its row says so');
+  assert.ok(w.eval('[...background].includes("a")'),'And it reaches the shared background');
+  d.querySelector('.tab[data-tab="graph"]').click();
+  assert.equal(d.getElementById('background-dock').closest('aside').id,'graph-sidebar','The dock goes back with the graph');
+  assert.ok(d.querySelector('#pr-filters [data-pr-row="a"]').classList.contains('in-background'),'The graph sidebar agrees');
+  d.querySelector('.tab[data-tab="lattice"]').click();
+  w.eval('changeBackground("a",false);');
 
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: constants at the start, one principle at a time, meets named after equivalent principles, no nesting, inconsistent meets folded into the floor, open covers marked, and a sidebar without bulk controls.');
+  console.log('PASS: constants at the start, one principle at a time, meets named after equivalent principles, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, and a shared background whose dock follows the view.');
 }finally{pages.forEach(p=>p.window.close());}

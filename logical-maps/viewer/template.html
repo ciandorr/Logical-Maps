@@ -579,7 +579,7 @@
           <div class="controls-scroll">
             <div>
               <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
-              <p class="background-hint">A Hasse diagram of the conjunctions the chosen principles generate. Every meet is its own node; nothing nests. Click a principle to add or remove it.</p>
+              <p class="background-hint">A Hasse diagram of the conjunctions the chosen principles generate. Every meet is its own node; nothing nests. Use ✓ for a principle and ✗ for its negation, or move it to the background.</p>
               <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
             </div>
             <div>
@@ -2374,6 +2374,10 @@ function openPage(sel) { hover(null); stopFlow(); renderPage(sel); document.getE
 function showTab(tab) {
   hover(null); stopFlow();
   state.tab = tab;
+  // One background, shared by every view that can use it. The dock itself moves
+  // to whichever sidebar is on screen rather than being duplicated.
+  const dock = document.getElementById('background-dock');
+  if (dock) (tab === 'lattice' ? document.getElementById('lat-sidebar') : document.getElementById('graph-sidebar')).append(dock);
   if (tab === 'graph' || tab === 'open') {
     // Reuse the controls so background, source selections and click slots are shared.
     const pane = document.getElementById('pane-' + tab);
@@ -2638,7 +2642,7 @@ function renderAll(refit) {
     mountPaperCatalogue(); backgroundPage.dataset.ready = 'true';
   }
   renderGraph(); if (refit) fitInitial(); renderModels(); renderResults(); renderOpen();
-  if (state.tab === 'lattice' && typeof renderLattice === 'function') renderLattice();
+  if (state.tab === 'lattice' && typeof renderLattice === 'function') { renderLatticeFilters(); renderLattice(); }
 }
 function resetBackground() {
   for (const id of [...background]) if (!topicBackground.includes(id)) background.delete(id);
@@ -2932,6 +2936,9 @@ function latticeGenerators(gens) {
 }
 
 // A named principle anywhere in the map that this meet is known equivalent to.
+// Only the positive forms are searched: a negation is not itself a principle
+// the map names, and a negation among the chosen literals already shares a
+// closure with any meet equivalent to it.
 function latticeNamed(gens) {
   if (gens.length === 1) return gens[0];
   return ids.find(p => latticeEntails(gens, [p]) && latticeEntails([p], gens)) || null;
@@ -3119,10 +3126,14 @@ function renderLatticeDetail() {
       : 'The converse is ruled out by a recorded model, so the two are genuinely different.'}</p>`;
 }
 function refreshLatticeControls() {
-  document.querySelectorAll('#lat-filters [data-lat-principle]').forEach(b => {
-    const on = lattice.shown.includes(b.dataset.latPrinciple);
-    b.setAttribute('aria-pressed', on ? 'true' : 'false');
-    b.closest('.lat-row').classList.toggle('on', on);
+  document.querySelectorAll('#lat-filters .lat-row').forEach(row => {
+    const id = row.dataset.latRow;
+    const pos = lattice.shown.includes(id), neg = lattice.shown.includes(negate(id));
+    row.querySelector('[data-lat-positive]').setAttribute('aria-pressed', pos ? 'true' : 'false');
+    row.querySelector('[data-lat-negative]').setAttribute('aria-pressed', neg ? 'true' : 'false');
+    row.classList.toggle('on', pos || neg);
+    row.classList.toggle('in-background', inBackground(id));
+    row.classList.toggle('is-collapsed', inBackground(id));
   });
 }
 function latticeToggle(id) {
@@ -3132,15 +3143,33 @@ function latticeToggle(id) {
   renderLattice();
   latticeFitInitial();
 }
+function renderLatticeFilters() {
+  const el = document.getElementById('lat-filters');
+  if (!el) return;
+  const row = p => `<div class="pr-row lat-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-lat-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-lat-positive="${p.id}" aria-label="Add ${esc(p.name)}" aria-pressed="false">✓</button><button data-lat-negative="${p.id}" aria-label="Add not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><span class="lat-name">${esc(p.name)}</span><span class="pr-actions"><button class="lnk" data-lat-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`;
+  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="ctl">${g.principles.map(row).join('')}</div></section>`).join('');
+  renderSubscripts(el);
+  refreshLatticeControls();
+}
 (function () {
   const el = document.getElementById('lat-filters');
   if (!el) return;
-  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="ctl">${
-    g.principles.map(p => `<div class="lat-row" data-lat-row="${p.id}"><button class="lnk" data-lat-principle="${p.id}" aria-pressed="false">${esc(p.name)}</button></div>`).join('')
-  }</div></section>`).join('');
+  renderLatticeFilters();
   el.addEventListener('click', ev => {
-    const b = ev.target.closest('[data-lat-principle]');
-    if (b) latticeToggle(b.dataset.latPrinciple);
+    const pos = ev.target.closest('[data-lat-positive]'), neg = ev.target.closest('[data-lat-negative]');
+    const bg = ev.target.closest('[data-lat-background]');
+    if (pos) latticeToggle(pos.dataset.latPositive);
+    else if (neg) latticeToggle(negate(neg.dataset.latNegative));
+    else if (bg) {
+      // An assumption is entailed by everything, so it has no work to do as a
+      // generator. Drop both of its forms and hand the principle to the shared
+      // background, which redraws every view that is open.
+      const id = bg.dataset.latBackground;
+      lattice.shown = lattice.shown.filter(l => baseId(l) !== id);
+      lattice.selected = null;
+      changeBackground(id, true);
+      renderLatticeFilters();
+    }
   });
   document.getElementById('lat-clear').addEventListener('click', () => { lattice.shown = []; lattice.selected = null; renderLattice(); latticeFit(); });
   document.getElementById('lat-fit').addEventListener('click', latticeFit);

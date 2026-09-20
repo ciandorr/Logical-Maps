@@ -4,6 +4,28 @@ satisfies:
 - axiom-of-infinity-e
 - infinity-e
 - fregean-axiom
+- necessary-fregean-axiom
+- modalized-fregean
+- extensionality-r
+- necessary-extensionality-r
+- intensionality-r
+- functionality-r
+- modalized-functionality-r
+- necessary-functionality-r
+- plenitude-r
+- necessary-plenitude-r
+- functional-choice-r
+- relational-choice-r
+- tractarianism-r
+- necessary-tractarianism-r
+- necessary-distinctness-necessary-r
+- necessary-actuality
+- necessary-atomicity-r
+- necessary-boolean-completeness-r
+- necessary-rigid-comprehension-r
+- necessary-gallin-extensional-comprehension-r
+- no-pure-contingency-r
+- distinctness-preserving-collapse
 violates:
 - axiom-of-infinity-t
 - infinity-t
@@ -37,7 +59,14 @@ description: >-
   $t$ the second numeral holds of $\lambda p\, .\,\top$, so the Axiom of Infinity at type $t$ fails, as
   does the third instance of the schema, and Possible Infinity at type $t$ fails because $\Diamond$ is
   truth. Possibility (pure) fails since the C-consistent pure sentence that there is exactly one individual
-  is false. The Fregean axiom holds in any two-valued model.
+  is false. The remaining positive assertions hold as in every two-valued full model: each boxed principle
+  reduces to its unboxed form; coextensive relations are identical, so Extensionality, the Fregean axiom
+  and its modalized form hold; every relation is persistent, inextensible and Gallin-extensional, giving
+  the comprehension principles; Actuality holds with top as the actual world; each relational type is the
+  complete atomic Boolean algebra of subsets of a domain, giving Atomicity and Boolean Completeness;
+  Tractarianism is a tautology; ND holds outright, giving C5; every closed sentence is non-contingent; and
+  the choice principles hold because every function between domains is present, using choice in the
+  metatheory to select from a serial relation on an infinite domain.
 notes: >-
   Explicit specialization of the source's standard Henkin construction to an infinite individual domain,
   recorded to separate the type-$e$ infinity principles from the type-$t$ ones: it satisfies the Axiom of
@@ -47,3 +76,6 @@ notes: >-
   here there is not possibly exactly one individual. It also witnesses the consistency of C with Goodsell's $I$,
   assumed in n. 14 of Arithmetic is Necessary: with infinitely many individuals the numerals are pairwise
   distinct, so $\operatorname{Suc}_e$ is injective on finite cardinalities and $I^*$, hence $I$, is true.
+  Signature and fundamentality principles are not listed, since they depend on how the nonlogical
+  constants are interpreted. With Boolean Completeness listed, the model also shows Countable Boolean
+  Completeness consistent with C.

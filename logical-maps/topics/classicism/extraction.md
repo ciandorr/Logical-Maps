@@ -1,7 +1,10 @@
 # Classicism: import coverage
 
-Source: Andrew Bacon and Cian Dorr, *Classicism*, draft dated 16 May 2023,
-87 pages. Locators refer to that draft, including its footnotes.
+Source: Andrew Bacon and Cian Dorr, *Classicism*, in Fritz and Jones (eds),
+*Higher-Order Metaphysics*, Oxford University Press, 2024, pp. 109–190. The
+import was made from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; locators refer to that draft,
+including its footnotes.
 
 The import includes the positive extension principles in §§1.4–2.6,
 distinguished type instances used by the paper, boxed variants used in its

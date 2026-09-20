@@ -229,8 +229,11 @@ $\operatorname{Fun}_{\sigma_i}(x_i)$ and the distinctness of each pair of
 same-typed entries; the formula $P$ there is pure, so it contains neither
 $\operatorname{Fun}$ nor any constant of $\Sigma$.
 
-**Evidence.** References use the 87-page draft of *Classicism* dated
-16 May 2023, and, for the symmetric ideally-full models and the weak
+**Evidence.** *Classicism* is Bacon and Dorr (2024), in Fritz and Jones
+(eds), *Higher-Order Metaphysics*, Oxford University Press, pp. 109–190.
+References use the numbering of the 87-page draft dated 16 May 2023, from
+which the map was built and which does not differ materially from the
+published version, and, for the symmetric ideally-full models and the weak
 rigidity principles, the 27-page draft of Dorr, *Boolean Completeness does
 not imply Rigid Comprehension*, dated 30 July 2026. That second source is
 a work in progress and is not distributed with the map; its records say so.

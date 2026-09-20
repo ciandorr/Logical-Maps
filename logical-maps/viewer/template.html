@@ -409,6 +409,7 @@
   .node.rel-conjectured rect, .junction.rel-conjectured circle { fill: url(#hatch-conjectured); }
   .node.rel-base rect, .junction.rel-base circle { fill: var(--hl); }
   .node.rel-base rect, .junction.rel-base circle { stroke: var(--accent); stroke-width: 2.4; }
+  #graph.unwitnessed-selection .node.rel-base rect, #graph.unwitnessed-selection .junction.rel-base circle { stroke-dasharray: 5 3; }
   #graph.inconsistent-selection .junction circle { fill: var(--rel-excluded); stroke: var(--indep); }
   #graph.shaded .node.dim, #graph.shaded .junction.dim { opacity: .7; }
   .graph-area { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
@@ -1801,6 +1802,22 @@ function hover(h) {
 const relationClasses = ['rel-base', 'rel-entailed', 'rel-excluded', 'rel-consistent', 'rel-separated', 'rel-independent', 'rel-open', 'rel-conjectured', 'rel-inconsistent'];
 const relationPhrase = {entailed: 'Entailed by selection', excluded: 'Excluded by selection', consistent: 'Consistent with selection', separated: 'Negation is consistent with selection', independent: 'Independent of selection', open: 'Open relative to selection', conjectured: 'Conjectured relation to selection'};
 function relationTooltip(relation) { return relationPhrase[relation.kind] + (relation.limited ? ' (outside selected sources)' : ''); }
+// Whether the selection can hold alongside the background is one fact about the
+// whole shading, so it is reported once rather than spread over every box it
+// colours. Reporting it matters because every triangle in the diagram needs a
+// model of the selection: an unwitnessed selection shows none anywhere, and
+// without this line that absence is the only clue that it has none.
+function selectionConsistencyLine(consistency) {
+  if (!consistency) return null;
+  if (consistency.status === 'inconsistent') return {kind: 'inconsistent', text: 'Selection is inconsistent with the background (⇒ ⊥); every box is excluded.'};
+  if (consistency.status === 'consistent') {
+    const model = byMid.get(consistency.models[0]), who = model ? ` (${model.name})` : '';
+    return {kind: 'implies', text: consistency.limited
+      ? `Consistent with the background outside selected sources${who}.`
+      : `Consistent with the background${who}.`};
+  }
+  return {kind: 'open', text: 'Not shown consistent with the background.'};
+}
 function selectionRelation(base, target) {
   const status = expressionStatus(base, target).status;
   if (status === 'implies') return {kind: 'entailed'};
@@ -1831,10 +1848,16 @@ function applySelection() {
   };
   // An inconsistent selection cannot hold with any node. Highlight every box
   // as excluded while proof readouts retain their inconsistent-antecedent status.
-  const baseInconsistent = !!base && !!layout && consistencyStatus(expressionLiterals(base)).status === 'inconsistent';
+  const baseConsistency = !!base && !!layout ? consistencyStatus(expressionLiterals(base)) : null;
+  const baseInconsistent = baseConsistency?.status === 'inconsistent';
+  const consistencyLine = selectionConsistencyLine(baseConsistency);
   const shading = !!base && !!layout;
   svg.classList.toggle('shaded', shading);
   svg.classList.toggle('inconsistent-selection', baseInconsistent);
+  // Only the wholly unsettled case dashes the selected box. A selection shown
+  // consistent by evidence the source filters hide is still shown consistent,
+  // and the legend says where the witness came from.
+  svg.classList.toggle('unwitnessed-selection', baseConsistency?.status === 'open');
   svg.querySelectorAll('#nodes .node').forEach(n => {
     const members = (n.dataset.members || '').split(',').filter(Boolean), box = layout.byId.get(n.dataset.class);
     n.classList.remove(...relationClasses);
@@ -1848,7 +1871,7 @@ function applySelection() {
         n.classList.add('rel-excluded'); counts.excluded++;
         title = 'Excluded: selection is inconsistent';
       }
-      else if (inBase) { n.classList.add('rel-base'); title = 'Selected'; }
+      else if (inBase) { n.classList.add('rel-base'); title = 'Selected. ' + consistencyLine.text; }
       else if (!n.classList.contains('from-background')) {
         const target = graphNodeExpression(box);
         // False, including everything equivalent to it under the background,
@@ -1872,7 +1895,7 @@ function applySelection() {
       n.classList.add('rel-' + relation.kind);
       // A boxed conjunction is already counted through its equivalence box.
       if (!j.parent) countRelation(relation.kind);
-      title += '\n' + (baseInconsistent ? 'Excluded: selection is inconsistent' : inBase ? 'Selected conjunction' : relationTooltip(relation));
+      title += '\n' + (baseInconsistent ? 'Excluded: selection is inconsistent' : inBase ? 'Selected conjunction. ' + consistencyLine.text : relationTooltip(relation));
     }
     n.querySelector('title').textContent = title;
   });
@@ -1884,8 +1907,8 @@ function applySelection() {
   const label = Array.isArray(base) && fullLabel.length > 100 ? `${base.length} selected principles` : fullLabel;
   const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
   const keys = key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
-  const conflict = baseInconsistent ? '<span class="rel-status inconsistent">Selection is inconsistent with the background (⇒ ⊥); every box is excluded.</span>' : '';
-  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${conflict}${keys}`;
+  const status = `<span class="rel-status ${consistencyLine.kind}">${esc(consistencyLine.text)}</span>`;
+  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${status}${keys}`;
 }
 
 

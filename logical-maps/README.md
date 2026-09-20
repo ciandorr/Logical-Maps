@@ -280,7 +280,12 @@ them carry the same consequence only one arrow to it is drawn; two arrows that
 both leave the box itself record separate theorems and are both kept.
 
 Clicking a principle (on the graph or in the sidebar), or an ∧, shades other
-principles and conjunction circles by their relation to it. Each circle uses its
+principles and conjunction circles by their relation to it. The legend first
+reports the selection's own standing: consistent with the background and the
+model that witnesses it, consistent on evidence outside the selected sources,
+not shown consistent, or inconsistent. A selection that nothing settles is
+drawn with a dashed border, since every triangle below needs a model of the
+selection and such a selection has none. Each circle uses its
 full premise set, whether standalone or inside an equivalence box. Entailed principles use solid green and
 excluded principles solid red. A green upper-left triangle means a recorded model
 satisfies both the selection and the principle; a red lower-right triangle means

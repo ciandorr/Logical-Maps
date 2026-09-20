@@ -1,0 +1,38 @@
+id: pure-distinctness-implies-infinity-t
+premises:
+- distinctness-schema-r
+conclusion: infinity-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 19 September 2026
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.4, pp. 35–37 (Distinctness); §3.2,
+  Definition 3.6 and Proposition 3.7, pp. 47–48 (full Henkin models); §2.3, n. 47, p. 32 (Infinity).
+source_names:
+- Classicism
+proof: >-
+  For $k\ge1$ let $E_k$ be the closed pure sentence saying that there are exactly $k$ individuals,
+  $\exists x_1^e\cdots x_k^e\, .\,(\bigwedge_{i<j}x_i\ne x_j)\land\forall y^e\, .\,\bigvee_i y=x_i$.
+  Fix $n$ and take $E_1,\ldots,E_n$. For $i\ne j$ the identity $E_i=E_j$ is closed and pure, and C does
+  not prove it. A full Henkin model whose individual domain has exactly $i$ members is a model of C in
+  which $E_i$ is true and $E_j$ is false, and at type $t$ that model's propositions are its two truth
+  values, so the two sentences denote different things there. Distinctness therefore gives $E_i\ne E_j$.
+  So $E_1,\ldots,E_n$ are $n$ pairwise distinct propositions, which is the $n$-th instance of Infinity
+  at type $t$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.4, pp. 35–37; §3.2, pp. 47–48; §2.3, n. 47, p. 32
+  note: Formulations of Distinctness and Infinity, and the full Henkin models that supply the non-theoremhood
+    side condition. The draft does not draw the connection between them.
+notes: >-
+  Recorded from Distinctness because the proof uses its non-theoremhood side condition directly. The
+  equivalent Possibility form gives the same result through the recorded equivalence. The witnesses need
+  not be possible propositions, and at most one of them is true. What Distinctness supplies is that C
+  proves no identity among them. Only the type-$t$ instance follows, since the witnesses are propositions
+  about how many individuals there are, not individuals.

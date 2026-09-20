@@ -160,6 +160,25 @@
   .node.from-background rect { fill: var(--hl); stroke: var(--accent); }
   .node text { font: 500 12.5px var(--sans); fill: var(--ink); pointer-events: none; }
   .edge.trivial { stroke: var(--ink-3); opacity: .55; }
+  /* Lattice view. A strict cover is a solid line with a filled head; a cover
+     whose converse is still open is dashed with a hollow head, because whether
+     those two nodes are really distinct is the question the diagram exists to
+     show. */
+  #pane-lattice { display: flex; }
+  #lat-graph { width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
+  .lat-edge.may-reverse { stroke: var(--conj); stroke-width: 1.6; stroke-dasharray: 6 4; }
+  .lat-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+  .lat-node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
+  .lat-node text { font: 500 12px var(--sans); fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .lat-node.lat-named rect { stroke: var(--accent); stroke-width: 1.8; }
+  .lat-node.lat-bottom rect, .lat-node.lat-top rect { fill: var(--hl); }
+  .lat-node.sel rect { stroke: var(--accent); stroke-width: 2.6; }
+  .lat-count { font-size: 12px; color: var(--ink-3); margin: 4px 0; }
+  .lat-row { display: flex; }
+  .lat-row.on button { font-weight: 700; color: var(--accent); }
+  #lat-detail h3 { margin: 4px 0; font-size: 13px; }
+  #lat-detail p { margin: 3px 0; font-size: 12.5px; }
   .junction.selected circle { stroke: var(--accent); stroke-width: 2.4; fill: var(--hl); }
   .node text[data-constant] { pointer-events: auto; cursor: pointer; }
   .node text[data-principle] { pointer-events: auto; cursor: pointer; }
@@ -494,6 +513,7 @@
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" data-tab="background" aria-selected="false">Background</button>
         <button class="tab" role="tab" data-tab="graph" aria-selected="true">Graph</button>
+        <button class="tab" role="tab" data-tab="lattice" aria-selected="false">Lattice</button>
         <button class="tab" role="tab" data-tab="models" aria-selected="false">Theory explorer</button>
         <button class="tab" role="tab" data-tab="open" aria-selected="false">Conjectures <span class="n" id="n-open"></span></button>
         <button class="tab" role="tab" data-tab="results" aria-selected="false">Changes <span class="n" id="n-results"></span></button>
@@ -552,6 +572,29 @@
           <div id="relation-legend" class="relation-legend" role="status" aria-live="polite" hidden></div>
           <p id="graph-details-hint">Select a principle, conjunction or arrow to see its details and logical relations here. Shift-click to add or remove principles.</p>
         </aside>
+        </div>
+      </section>
+      <section class="pane" id="pane-lattice">
+        <aside class="controls" id="lat-sidebar">
+          <div class="controls-scroll">
+            <div>
+              <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
+              <p class="background-hint">A Hasse diagram of the conjunctions the chosen principles generate. Every meet is its own node; nothing nests. Click a principle to add or remove it.</p>
+              <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
+            </div>
+            <div>
+              <h2>Principles</h2>
+              <div class="ctl" id="lat-filters"></div>
+            </div>
+          </div>
+        </aside>
+        <div class="graph-workspace">
+          <div class="graph-area">
+            <svg id="lat-graph" role="img" aria-label="Lattice of conjunctions"></svg>
+            <div id="lat-warning" class="graph-warning" role="alert" hidden></div>
+            <div class="graph-tools"><button class="btn small" id="lat-fit">Fit</button></div>
+          </div>
+          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"></aside>
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
@@ -2344,6 +2387,7 @@ function showTab(tab) {
   document.getElementById('pop').hidden = true;
   placeDetail();
   if (tab === 'graph') fitInitial();
+  if (tab === 'lattice') { renderLattice(); latticeFitInitial(); }
 }
 
 // ---------------------------------------------------------------- detail
@@ -2594,6 +2638,7 @@ function renderAll(refit) {
     mountPaperCatalogue(); backgroundPage.dataset.ready = 'true';
   }
   renderGraph(); if (refit) fitInitial(); renderModels(); renderResults(); renderOpen();
+  if (state.tab === 'lattice' && typeof renderLattice === 'function') renderLattice();
 }
 function resetBackground() {
   for (const id of [...background]) if (!topicBackground.includes(id)) background.delete(id);
@@ -2846,6 +2891,279 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
   apply();
 })();
 window.addEventListener('resize', () => { if (state.tab === 'graph') fit(); });
+// ---------------------------------------------------------------- lattice view
+// A Hasse diagram of the meet-semilattice that the chosen principles generate,
+// as a separate view rather than an option on the implication graph. The two
+// answer different questions. There, every node is a principle somebody
+// recorded and the reader filters the whole map. Here, every meet of the chosen
+// principles is a node in its own right, so the node count grows with the
+// subsets rather than with the choices, and the reader has to choose a few
+// principles deliberately.
+//
+// A node is identified with the set of chosen principles its conjunction is
+// known to entail, its closure. That is exact rather than a heuristic: a meet
+// entails precisely the chosen principles in its closure, so two meets are
+// known equivalent exactly when their closures match, and the whole order is
+// then set inclusion. Everything below reads off that.
+//
+// Conjunctions are never nested inside another node here. On a Hasse diagram
+// the greatest lower bound of two nodes is their conjunction, so a meet that
+// turns out to be equivalent to a named principle is drawn once, under that
+// principle's name.
+const LATTICE_CAP = 220;
+const lattice = {shown: [], nodes: [], edges: [], selected: null, capped: 0, view: {k: 1, tx: 0, ty: 0}, fitted: false};
+
+function latticeEntails(premises, conclusions) {
+  return conclusions.every(c => !!conjunctionProof(premises, [c]));
+}
+// The chosen principles that this conjunction is known to entail.
+function latticeClosure(premises) { return lattice.shown.filter(p => latticeEntails(premises, [p])); }
+const latticeKey = gens => gens.slice().sort().join('|');
+
+// An irredundant generating set, so a node is labelled by what actually makes
+// it rather than by everything it happens to entail.
+function latticeGenerators(gens) {
+  let kept = gens.slice();
+  for (const p of gens) {
+    const without = kept.filter(q => q !== p);
+    if (without.length && latticeEntails(without, [p])) kept = without;
+  }
+  return kept;
+}
+
+// A named principle anywhere in the map that this meet is known equivalent to.
+function latticeNamed(gens) {
+  if (gens.length === 1) return gens[0];
+  return ids.find(p => latticeEntails(gens, [p]) && latticeEntails([p], gens)) || null;
+}
+
+function buildLattice() {
+  const nodes = new Map();
+  lattice.capped = 0;
+  const add = premises => {
+    const gens = latticeClosure(premises);
+    const key = latticeKey(gens);
+    if (nodes.has(key)) return nodes.get(key);
+    if (nodes.size >= LATTICE_CAP) { lattice.capped++; return null; }
+    const node = {id: 'lat:' + (key || 'top'), key, gens, set: new Set(gens)};
+    nodes.set(key, node);
+    return node;
+  };
+  add([]);                                   // the empty meet: everything the background already gives
+  for (const p of lattice.shown) add([p]);
+  // Closing under pairwise meet suffices, since the set is meet closed at every
+  // step and a meet of two meets is a meet of their generators.
+  for (let grew = true; grew && !lattice.capped; ) {
+    grew = false;
+    const list = [...nodes.values()];
+    for (let i = 0; i < list.length && !lattice.capped; i++)
+      for (let j = i + 1; j < list.length && !lattice.capped; j++) {
+        const before = nodes.size;
+        add([...new Set([...list[i].gens, ...list[j].gens])]);
+        if (nodes.size !== before) grew = true;
+      }
+  }
+  const all = [...nodes.values()];
+  for (const n of all) {
+    n.inconsistent = consistencyStatus(n.gens).status === 'inconsistent';
+    n.consistency = consistencyStatus(n.gens);
+    n.top = n.gens.length === 0;
+    n.generators = latticeGenerators(n.gens);
+    n.named = n.inconsistent ? null : latticeNamed(n.gens);
+    n.label = n.inconsistent ? '⊥' : n.top ? '⊤'
+      : n.named ? name(n.named) : n.generators.map(name).join(' ∧ ');
+  }
+  // False and True always anchor the diagram, even before anything is chosen.
+  let bottom = all.find(n => n.inconsistent);
+  if (!bottom) { bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), generators: [], named: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}}; all.push(bottom); }
+  bottom.bottom = true;
+  const top = all.find(n => n.top) || null;
+
+  // The order is inclusion of closures: a larger closure is a stronger meet.
+  // Below is strictly stronger, so arrows from it ascend, as on the graph.
+  const below = (a, b) => a !== b && (a.bottom || (!b.bottom && b.set.size < a.set.size && [...b.set].every(p => a.set.has(p))));
+  const edges = [];
+  for (const a of all) for (const b of all) {
+    if (!below(a, b)) continue;
+    if (all.some(c => c !== a && c !== b && below(a, c) && below(c, b))) continue;   // keep only covers
+    edges.push({id: a.id + '>' + b.id, from: a, to: b, reverses: latticeReverses(a, b)});
+  }
+  lattice.nodes = all; lattice.edges = edges; lattice.top = top; lattice.bottomNode = bottom;
+}
+
+// Whether the weaker end might, for all the map records, entail the stronger
+// one after all. This is what the diagram has to show clearly: a solid arrow is
+// a settled strict implication, a dashed one is a pair that could still
+// collapse into a single node.
+function latticeReverses(lower, upper) {
+  if (lower.bottom) {
+    // ⊥ ⇒ X reverses unless X is shown consistent with the background.
+    return upper.consistency.status === 'consistent' ? 'ruled out' : 'open';
+  }
+  const missing = lower.gens.filter(p => !upper.set.has(p));
+  const seen = missing.map(p => implicationStatus(upper.gens, p).status);
+  if (seen.some(s => s === 'independent' || s === 'excludes')) return 'ruled out';
+  return 'open';
+}
+
+function latticeLayout() {
+  const {nodes, edges} = lattice;
+  if (!nodes.length) return;
+  const out = new Map(nodes.map(n => [n.id, []])), inn = new Map(nodes.map(n => [n.id, []]));
+  for (const e of edges) { out.get(e.from.id).push(e); inn.get(e.to.id).push(e); }
+  // Rank by the longest ascending chain from the floor, so covers always rise
+  // exactly one row and the diagram reads as a Hasse diagram should.
+  const rank = new Map();
+  const order = [];
+  const visit = n => {
+    if (rank.has(n.id)) return rank.get(n.id);
+    rank.set(n.id, 0);
+    const r = inn.get(n.id).length ? Math.max(...inn.get(n.id).map(e => visit(e.from) + 1)) : 0;
+    rank.set(n.id, r); order.push(n); return r;
+  };
+  for (const n of nodes) visit(n);
+  const maxRank = Math.max(...nodes.map(n => rank.get(n.id)));
+  const rows = [];
+  for (const n of nodes) (rows[maxRank - rank.get(n.id)] ||= []).push(n);
+  for (const n of nodes) { n.w = Math.max(64, 9 + n.label.length * 6.6); n.h = 26; }
+  // A few barycentre sweeps, as on the implication graph.
+  for (let pass = 0; pass < 6; pass++) {
+    const dir = pass % 2 ? 1 : -1;
+    for (const row of rows) {
+      if (!row) continue;
+      for (const n of row) {
+        const nbrs = (dir < 0 ? inn.get(n.id).map(e => e.from) : out.get(n.id).map(e => e.to)).filter(m => m.x != null);
+        n.bary = nbrs.length ? nbrs.reduce((s, m) => s + m.x, 0) / nbrs.length : (n.x ?? 0);
+      }
+      row.sort((a, b) => a.bary - b.bary);
+      let x = 0;
+      for (const n of row) { n.x = x + n.w / 2; x += n.w + 26; }
+      const width = x - 26;
+      for (const n of row) n.x -= width / 2;
+    }
+  }
+  rows.forEach((row, i) => { if (row) for (const n of row) n.y = i * 74; });
+  lattice.bounds = {
+    minX: Math.min(...nodes.map(n => n.x - n.w / 2)) - 30, maxX: Math.max(...nodes.map(n => n.x + n.w / 2)) + 30,
+    minY: Math.min(...nodes.map(n => n.y - n.h / 2)) - 24, maxY: Math.max(...nodes.map(n => n.y + n.h / 2)) + 24,
+  };
+}
+
+function latticeApplyView() {
+  const vp = document.getElementById('lat-vp');
+  if (vp) vp.setAttribute('transform', `translate(${lattice.view.tx},${lattice.view.ty}) scale(${lattice.view.k})`);
+}
+function latticeFit() {
+  const svg = document.getElementById('lat-graph'), b = lattice.bounds;
+  if (!svg || !b) return;
+  const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
+  lattice.view.k = Math.min(W / (b.maxX - b.minX), H / (b.maxY - b.minY), 1.4);
+  lattice.view.tx = (W - (b.maxX + b.minX) * lattice.view.k) / 2;
+  lattice.view.ty = (H - (b.maxY + b.minY) * lattice.view.k) / 2;
+  latticeApplyView(); lattice.fitted = true;
+}
+function latticeFitInitial() { if (!lattice.fitted) latticeFit(); }
+
+function renderLattice() {
+  buildLattice(); latticeLayout();
+  const svg = document.getElementById('lat-graph');
+  if (!svg) return;
+  const edge = e => {
+    const x1 = e.from.x, y1 = e.from.y - e.from.h / 2, x2 = e.to.x, y2 = e.to.y + e.to.h / 2;
+    const cls = 'lat-edge ' + (e.reverses === 'open' ? 'may-reverse' : 'strict');
+    const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
+    return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
+  };
+  const node = n => {
+    const cls = 'lat-node' + (n.bottom ? ' lat-bottom' : n.top ? ' lat-top' : '')
+      + (n.named && !n.bottom && !n.top ? ' lat-named' : '') + (lattice.selected === n.id ? ' sel' : '');
+    return `<g class="${cls}" data-lat-node="${esc(n.id)}"><rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/><text x="${n.x}" y="${n.y}">${esc(n.label)}</text><title>${esc(latticeTitle(n))}</title></g>`;
+  };
+  svg.innerHTML = `<defs>
+      <marker id="lat-solid" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
+      <marker id="lat-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0.5,0.5 L9.5,5 L0.5,9.5 z" fill="var(--bg)" stroke="var(--conj)" stroke-width="1.4"/></marker>
+    </defs><g id="lat-vp">${lattice.edges.map(edge).join('')}${lattice.nodes.map(node).join('')}</g>`;
+  latticeApplyView();
+  document.getElementById('lat-count').textContent = lattice.shown.length
+    ? `${lattice.nodes.length} nodes, ${lattice.edges.length} arrows, from ${lattice.shown.length} chosen`
+    : 'Choose a principle to begin.';
+  const warn = document.getElementById('lat-warning');
+  warn.hidden = !lattice.capped;
+  if (lattice.capped) warn.textContent = `Stopped at ${LATTICE_CAP} nodes. The meets of these principles outrun the diagram; remove one to see the rest.`;
+  refreshLatticeControls();
+  renderLatticeDetail();
+}
+function latticeTitle(n) {
+  if (n.bottom) return 'False (⊥)';
+  if (n.top) return 'True (⊤): everything the background already gives';
+  const parts = [n.generators.map(name).join(' ∧ ')];
+  if (n.named && n.generators.length > 1) parts.push('equivalent to ' + name(n.named));
+  parts.push(n.consistency.status === 'consistent' ? 'consistent with the background' : 'not shown consistent with the background');
+  return parts.join('\n');
+}
+function renderLatticeDetail() {
+  const el = document.getElementById('lat-detail');
+  const sel = lattice.selected;
+  const n = lattice.nodes.find(x => x.id === sel), e = lattice.edges.find(x => x.id === sel);
+  if (!n && !e) { el.innerHTML = '<p class="dim">Click a node or an arrow for its reading. Dashed arrows with a hollow head are the pairs that might still collapse.</p>'; return; }
+  if (n) {
+    el.innerHTML = `<h3>${esc(n.label)}</h3>` + (n.bottom ? '<p>The contradiction. Everything follows from it.</p>'
+      : n.top ? '<p>Everything the background already gives.</p>'
+      : `<p>${esc(n.generators.map(name).join(' ∧ '))}${n.named && n.generators.length > 1 ? ', which the map records as ' + esc(name(n.named)) : ''}.</p>
+         <p class="rel-status ${n.consistency.status === 'consistent' ? 'implies' : 'open'}">${n.consistency.status === 'consistent' ? 'Consistent with the background.' : 'Not shown consistent with the background.'}</p>`);
+    return;
+  }
+  el.innerHTML = `<h3>${esc(e.from.label)} ⇒ ${esc(e.to.label)}</h3>
+    <p class="rel-status ${e.reverses === 'open' ? 'open' : 'implies'}">${e.reverses === 'open'
+      ? 'The converse is open, so these two might yet be the same node.'
+      : 'The converse is ruled out by a recorded model, so the two are genuinely different.'}</p>`;
+}
+function refreshLatticeControls() {
+  document.querySelectorAll('#lat-filters [data-lat-principle]').forEach(b => {
+    const on = lattice.shown.includes(b.dataset.latPrinciple);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.closest('.lat-row').classList.toggle('on', on);
+  });
+}
+function latticeToggle(id) {
+  const at = lattice.shown.indexOf(id);
+  if (at >= 0) lattice.shown.splice(at, 1); else lattice.shown.push(id);
+  lattice.selected = null;
+  renderLattice();
+  latticeFitInitial();
+}
+(function () {
+  const el = document.getElementById('lat-filters');
+  if (!el) return;
+  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="ctl">${
+    g.principles.map(p => `<div class="lat-row" data-lat-row="${p.id}"><button class="lnk" data-lat-principle="${p.id}" aria-pressed="false">${esc(p.name)}</button></div>`).join('')
+  }</div></section>`).join('');
+  el.addEventListener('click', ev => {
+    const b = ev.target.closest('[data-lat-principle]');
+    if (b) latticeToggle(b.dataset.latPrinciple);
+  });
+  document.getElementById('lat-clear').addEventListener('click', () => { lattice.shown = []; lattice.selected = null; renderLattice(); latticeFit(); });
+  document.getElementById('lat-fit').addEventListener('click', latticeFit);
+  const svg = document.getElementById('lat-graph');
+  svg.addEventListener('click', ev => {
+    const n = ev.target.closest('[data-lat-node]'), e = ev.target.closest('[data-lat-edge]');
+    lattice.selected = n ? n.dataset.latNode : e ? e.dataset.latEdge : null;
+    renderLattice();
+  });
+  let drag = null;
+  svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty}; });
+  svg.addEventListener('pointermove', ev => { if (!drag) return; lattice.view.tx = drag.tx + ev.clientX - drag.x; lattice.view.ty = drag.ty + ev.clientY - drag.y; latticeApplyView(); });
+  for (const type of ['pointerup', 'pointerleave']) svg.addEventListener(type, () => { drag = null; });
+  svg.addEventListener('wheel', ev => {
+    ev.preventDefault();
+    const f = Math.exp(-ev.deltaY * 0.0015), r = svg.getBoundingClientRect();
+    const mx = ev.clientX - r.left, my = ev.clientY - r.top;
+    lattice.view.tx = mx - (mx - lattice.view.tx) * f; lattice.view.ty = my - (my - lattice.view.ty) * f;
+    lattice.view.k *= f; latticeApplyView();
+  }, {passive: false});
+})();
+
 renderAll(true);
+renderLattice();
 requestAnimationFrame(fit);
 </script>

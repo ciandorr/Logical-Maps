@@ -240,6 +240,18 @@ one shared light/dark scheme based on [Okabe–Ito](https://jfly.uni-koeln.de/co
 sky blue replaces green, orange replaces red, and independence combines both
 coloured halves. Open nodes keep their normal fill.
 
+Lattice: a separate Hasse diagram of the conjunctions a chosen handful of
+principles generate. It opens with False and True alone; clicking a principle
+in the sidebar adds it together with its meets against everything already
+shown. A meet known equivalent to something already on the diagram, or to any
+named principle, is drawn once under that name, and an inconsistent meet is the
+floor. Nothing nests, since on a Hasse diagram the greatest lower bound of two
+nodes is their conjunction. A cover whose converse is ruled out by a model is a
+solid arrow with a filled head; one whose converse is still open is dashed with
+a hollow head, because whether those two nodes are really distinct is the
+question the diagram exists to answer. The node count grows with the subsets,
+so the view stops at a few hundred and says so.
+
 Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with a pdf link when one was built and the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 
 ### Graph layout

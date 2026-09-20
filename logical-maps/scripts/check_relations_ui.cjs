@@ -121,7 +121,12 @@ try{
   const marker=key=>d.querySelector(`[data-edge="${key}"] .edge`).getAttribute('marker-end');
   assert.equal(marker('ga'),marker('ha'));
   assert.ok(!marker('ha').includes('-open'));
-  assert.equal(d.querySelector('marker[id$="-open"]'),null);
+  // The guard is about the implication graph, which uses one filled head for
+  // every arrow. The lattice view is a different diagram with a convention of
+  // its own, so the query is scoped rather than document wide, and paired with
+  // a direct check that no arrow on the graph reaches for a hollow head.
+  assert.equal(d.querySelector('#graph marker[id$="-open"]'),null);
+  assert.ok([...d.querySelectorAll('#graph .edge')].every(e=>!(e.getAttribute('marker-end')||'').includes('-open')),'No graph arrow uses a hollow head');
   assert.doesNotMatch(d.querySelector('[data-edge="ha"] title').textContent,/Converse/);
   assert.doesNotMatch(d.querySelector('[data-edge="ga"] title').textContent,/Converse/);
   assert.ok(node('z').classList.contains('falsity'),'Z belongs to the False equivalence box');

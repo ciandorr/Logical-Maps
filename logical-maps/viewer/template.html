@@ -164,7 +164,10 @@
      whose converse is still open is dashed with a hollow head, because whether
      those two nodes are really distinct is the question the diagram exists to
      show. */
-  #pane-lattice { display: flex; }
+  /* Scoped to the active state and to the same shape as the graph pane. An
+     unscoped id rule here outranks the one that hides an inactive pane, which
+     leaves the view permanently on screen. */
+  #pane-lattice[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
   #lat-graph { width: 100%; height: 100%; touch-action: none; cursor: grab; }
   .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
   .lat-edge.may-reverse { stroke: var(--conj); stroke-width: 1.6; stroke-dasharray: 6 4; }

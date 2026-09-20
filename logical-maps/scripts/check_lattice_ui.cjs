@@ -25,7 +25,21 @@ function page(){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(
 try{
   const dom=page(),w=dom.window,d=w.document;
   d.querySelector('.tab[data-tab="lattice"]').click();
-  assert.equal(d.getElementById('pane-lattice').dataset.active,'true','The lattice has its own pane');
+  const pane=d.getElementById('pane-lattice'), graphPane=d.getElementById('pane-graph');
+  const shown=el=>w.getComputedStyle(el).display!=='none';
+  assert.equal(pane.dataset.active,'true','The lattice has its own pane');
+  // Visibility, not just the flag: a pane rule that outranks the one hiding an
+  // inactive pane leaves this view on screen over every other tab.
+  assert.ok(shown(pane),'The lattice pane is visible when its tab is chosen');
+  assert.ok(!shown(graphPane),'And the graph pane is not');
+  d.querySelector('.tab[data-tab="graph"]').click();
+  assert.ok(!shown(pane),'Leaving the tab hides the lattice pane');
+  assert.ok(shown(graphPane),'And brings the graph back');
+  for (const t of ['models','results','background','open']) {
+    d.querySelector(`.tab[data-tab="${t}"]`).click();
+    assert.ok(!shown(pane),`The lattice pane stays hidden on the ${t} tab`);
+  }
+  d.querySelector('.tab[data-tab="lattice"]').click();
   const snap=()=>JSON.parse(w.eval('JSON.stringify({n:lattice.nodes.length,e:lattice.edges.length,labels:lattice.nodes.map(x=>x.label),open:lattice.edges.filter(x=>x.reverses==="open").length})'));
   const add=id=>{w.eval(`latticeToggle(${JSON.stringify(id)})`);return snap();};
 

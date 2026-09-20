@@ -1,0 +1,39 @@
+id: possibility-and-countable-boolean-completeness-incompatible
+premises:
+- possibility-schema-r
+- countable-boolean-completeness-r
+conclusion: false
+status: proved
+certificate:
+  source_id: goodsell-arithmetic-necessary
+  produced_by: Zachary Goodsell
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §6, Theorem 11 and the discussion of
+  Bacon and Dorr's question, pp. 24–26; Theorem 9, pp. 19–21.
+source_names:
+- Arithmetic is Necessary
+proof: >-
+  Countable Boolean Completeness gives the Necessity of Arithmetic in C, by Theorem 9 of the source, and
+  the Necessity of Arithmetic is incompatible with Possibility (pure), by Theorem 11: Gödel's first
+  incompleteness theorem supplies an arithmetical sentence $A$ with $I\land A$ and $I\land\neg A$ both
+  consistent with C, Possibility makes both possible, and the necessity schema forbids that. So no
+  extension of Classicism containing Countable Boolean Completeness has a consistent maximalization.
+references:
+- paper: goodsell-arithmetic-necessary
+  role: proof
+  locator: §6, Theorem 11, pp. 24–26; Theorem 9, pp. 19–21
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.6, p. 41
+  note: The question whether Boolean Completeness is consistent with Maximalist Classicism, which the
+    source answers in the negative.
+notes: >-
+  The source's answer to the question of Classicism, §2.6. It is derivable from the two records it
+  combines and is kept as the stated theorem. Since Boolean Completeness restricts to Countable Boolean
+  Completeness and Rigid Comprehension implies Boolean Completeness, the unboxed forms of both are
+  incompatible with Maximalist Classicism; the map had recorded only the boxed Boolean Completeness case
+  from Classicism and the Rigid Comprehension case as a report awaiting proof.

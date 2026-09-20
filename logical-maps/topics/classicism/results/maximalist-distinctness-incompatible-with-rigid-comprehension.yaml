@@ -3,27 +3,46 @@ premises:
 - distinctness-schema-r
 - rigid-comprehension-r
 conclusion: false
-status: conjectured
+status: proved
+was_conjectured: true
 certificate:
-  source_id: goodsell-pc
+  source_id: goodsell-arithmetic-necessary
   produced_by: Zachary Goodsell
-  recorded_by: OpenAI Codex (GPT-6), 17 September 2026
+  recorded_by: OpenAI Codex (GPT-6), 17 September 2026; proof supplied by Claude Fable 5.1 (Anthropic), 20 September
+    2026, from Goodsell's draft
   checked_by: []
   date: '2026-09-17'
   lean: none
 sources:
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §6, Theorem 11 and the remark following
+  it, p. 25.
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 41.
 source_names:
+- Arithmetic is Necessary
 - Classicism
-proof: ''
+proof: >-
+  Distinctness (pure) is equivalent to Possibility (pure). Rigid Comprehension implies Boolean Completeness,
+  which restricts to Countable Boolean Completeness, which gives the Necessity of Arithmetic (the source's
+  Theorem 9). Possibility (pure) is incompatible with the Necessity of Arithmetic (the source's Theorem 11):
+  Gödel's first incompleteness theorem supplies an arithmetical sentence $A$ with $I\land A$ and
+  $I\land\neg A$ both consistent with C, both are then possible, and the necessity schema forbids that. The
+  source draws exactly this consequence for Rigid Comprehension in the remark after Theorem 11.
 references:
-- paper: bacon-dorr-classicism
+- paper: goodsell-arithmetic-necessary
   role: proof
+  locator: §6, Theorem 11 and the following remark, p. 25
+- paper: bacon-dorr-classicism
+  role: background
   locator: §2.6, p. 41
-notes: 'A reported theorem awaiting a supplied proof in this map; not presented as a conjecture by the
-  source.
-
-
-  Source report / verification needed: The paper credits Zach Goodsell (personal communication) with this
-  incompatibility, but supplies no proof. A checked proof of the stated source-scope incompatibility is
-  still needed.'
+  note: The report of the incompatibility, credited to Goodsell in personal communication, without proof.
+notes: >-
+  Recorded on 17 September 2026 as a reported theorem awaiting a supplied proof. The proof is now Goodsell's
+  own, imported from Arithmetic is Necessary, and the record is derivable from the recorded chain through
+  Boolean Completeness, Countable Boolean Completeness and the Necessity of Arithmetic.
+changes:
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Promoted from conjectured to proved with the proof from Goodsell, Arithmetic is Necessary, Theorem 11
+    and the remark following it; source changed from the personal communication to that draft. Statement
+    unchanged.

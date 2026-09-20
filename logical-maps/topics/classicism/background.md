@@ -68,6 +68,39 @@ in $t$, so all of them are admitted, and no type $\sigma\sigma$ is needed;
 that is why the axiom is not put in the Dedekind form, which would ask for an
 injective non-surjective operation from $\sigma$ to $\sigma$.
 
+Countable Boolean Completeness and the Necessity of Arithmetic follow
+Goodsell, *Arithmetic is Necessary*, with the type $\nu$ of numbers taken to be
+$(et)t$, zero to be $\mathbf{0}_e$ and successor to be $\operatorname{Suc}_e$,
+the identification that paper displays in its eqs. (24)–(25) without assuming
+it; Goodsell leaves $\nu$, $0$ and successor as parameters. Natural numberhood
+$\mathbb N$ is then $\operatorname{FiniteCardinality}_e$. Write
+$\forall n\in\mathbb N\, .\,A$ for $\forall n^\nu\, .\,\mathbb N n\to A$, and
+likewise for $\exists$. With these, for a relational type $\tau$:
+
+$$
+\begin{aligned}
+\operatorname{Ctbl}_\tau(X)&:=\exists R^{\tau\nu t}\, .\,\forall y^\tau z^\tau\, .\,
+  Xy\land Xz\to\bigl((\exists n\in\mathbb N\, .\,Ryn\land Rzn)\leftrightarrow y=z\bigr),\\
+I^*&:=\forall m\,n\in\mathbb N\, .\,\mathbf{0}_e\ne\operatorname{Suc}_e m\land
+  (\operatorname{Suc}_e m=\operatorname{Suc}_e n\to m=n),\qquad I:=\Diamond I^*,\\
+\operatorname{Sum}(m,n,o)&:=\forall R^{\nu\nu t}\, .\,R\mathbf{0}_e m\to
+  (\forall i\,j\in\mathbb N\, .\,Rij\to R(\operatorname{Suc}_e i)(\operatorname{Suc}_e j))\to Rno,\\
+\operatorname{Prod}(m,n,o)&:=\forall R^{\nu\nu t}\, .\,R\mathbf{0}_e\mathbf{0}_e\to
+  (\forall i\,j\,k\in\mathbb N\, .\,Rij\to\operatorname{Sum}(m,j,k)\to R(\operatorname{Suc}_e i)k)\to Rno.
+\end{aligned}
+$$
+
+So $X$ is countable when it injects into the natural numbers, and $I$ says
+that possibly zero is not a successor and successor is injective on numbers.
+In C the first conjunct of $I^*$ is a theorem, since $\mathbf{0}_e$ and a
+successor differ at $\lambda x\, .\,\bot$. An *arithmetical sentence* is a
+closed formula built from atomic formulas $\mathbb N\mathbf n$,
+$\operatorname{Sum}(\mathbf m,\mathbf n,\mathbf o)$,
+$\operatorname{Prod}(\mathbf m,\mathbf n,\mathbf o)$ and $\mathbf m=\mathbf n$,
+whose terms are variables of type $\nu$, $\mathbf{0}_e$ and successors of
+terms, by $\neg$, $\lor$, $\land$ and quantifiers $\forall v\in\mathbb N$.
+These are Definitions 3–8 of Goodsell's draft.
+
 Boolean Completeness is stated with $\operatorname{GLB}$. The dual form,
 with $\operatorname{LUB}_\tau(y,X):=\forall z^\tau\, .\,
 (\forall w^\tau\, .\,Xw\to w\le_\tau z)\leftrightarrow y\le_\tau z$,

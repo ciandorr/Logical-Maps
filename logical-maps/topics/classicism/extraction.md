@@ -58,3 +58,22 @@ particular type parameters remain explicit.
 The inference engine treats each schema as a proposition; it does not
 perform type substitution automatically. The useful recorded instances
 and their connecting results make those steps explicit.
+
+## Arithmetic is Necessary (Goodsell, 2024 draft)
+
+Source: Zachary Goodsell, *Arithmetic is Necessary*, draft dated 5 June 2024,
+28 pages. Its logic HKC is H plus K plus Countable Boolean Completeness,
+which C extends, so its theorems transfer to the map with the type $\nu$
+instantiated as $(et)t$ (see Background).
+
+| Source | Connections recorded |
+| --- | --- |
+| §3, Definitions 1 and 6, pp. 7–8, 13 | Countable Boolean Completeness; Boolean Completeness restricts to it |
+| §4, Definitions 3–5 and 8, pp. 11–13, 19 | The arithmetical vocabulary, $I$, arithmetical sentences |
+| §5, Lemmas 2–8 and Theorem 9, pp. 14–21 | Countable Boolean Completeness implies the Necessity of Arithmetic |
+| §6, Theorem 11, pp. 24–26 | Possibility (pure) is incompatible with the Necessity of Arithmetic, hence with Countable and full Boolean Completeness and with Rigid Comprehension |
+
+Theorems 10 (arithmetical signatures) and the truth-predicate extension of
+§5.3 are not imported. The consistency of C with $I$, assumed in the
+source's n. 14, is witnessed on the map by the full Henkin model with a
+countably infinite individual domain.

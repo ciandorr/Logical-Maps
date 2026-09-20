@@ -1,0 +1,39 @@
+id: possibility-and-necessity-of-arithmetic-incompatible
+premises:
+- possibility-schema-r
+- necessity-of-arithmetic
+conclusion: false
+status: proved
+certificate:
+  source_id: goodsell-arithmetic-necessary
+  produced_by: Zachary Goodsell
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §6, Theorem 11 and n. 14, pp. 24–26.
+- Claude Fable 5.1 (Anthropic), 20 September 2026, for the consistency of C with $I$ (full-henkin-infinite-base).
+source_names:
+- Arithmetic is Necessary
+- Fable 20 Sep
+proof: >-
+  Theorem 11 of the source, applied to C. The theorems of C are recursively enumerable, and C is consistent
+  with $I$, since $I^*$ and hence $I$ hold in the full Henkin model with a countably infinite individual
+  domain. So the arithmetical sentences $A$ with $C\vdash I\to A$ form a consistent, recursively
+  enumerable extension of Peano arithmetic (the source's Lemma 1 supplies the axioms). By Gödel's first
+  incompleteness theorem there is an arithmetical sentence $A$ for which neither $I\to A$ nor $I\to\neg A$
+  is a theorem of C, so $I\land A$ and $I\land\neg A$ are both consistent with C. Both are closed pure
+  sentences, so Possibility (pure) gives $\Diamond(I\land A)$ and $\Diamond(I\land\neg A)$. But the
+  instance of the Necessity of Arithmetic at $A$ says $\Box(I\to A)$ or $\Box(I\to\neg A)$, and by K each
+  disjunct contradicts one of the two possibilities.
+references:
+- paper: goodsell-arithmetic-necessary
+  role: proof
+  locator: §6, Theorem 11 and n. 14, pp. 24–26
+notes: >-
+  The source's theorem is general: the maximalization of any recursively enumerable extension of HK
+  consistent with $I$ refutes some instance of the necessity schema. The record uses Possibility (pure)
+  directly; the equivalent Distinctness form gives the same through the recorded equivalence. The
+  argument is metatheoretic in two places, the recursive enumerability of C and Gödel's theorem, like the
+  consistency side condition of Possibility itself.

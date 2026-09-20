@@ -1,0 +1,35 @@
+id: countable-boolean-completeness-implies-necessity-of-arithmetic
+premises:
+- countable-boolean-completeness-r
+conclusion: necessity-of-arithmetic
+status: proved
+certificate:
+  source_id: goodsell-arithmetic-necessary
+  produced_by: Zachary Goodsell
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §5, Lemmas 2–8 and Theorem 9, pp. 14–21.
+source_names:
+- Arithmetic is Necessary
+proof: >-
+  Theorem 9 of the source, proved in HKC, which C extends. Natural numberhood is necessary (Lemma 3, an
+  induction using the converse Barcan formula), distinct numbers are necessarily distinct given $I^*$
+  (Lemma 4, a double induction), $I$ implies $I^*$ (Lemma 5), so distinctness and, by tedious inductions,
+  Sum and Prod are necessary or necessarily false given $I$ (Lemmas 6–7). Countable Boolean Completeness is
+  used once, in Lemma 8: the property of being a singleton of a number is countable, so it has a least upper
+  bound $B$; $B$ necessarily holds of every number, so the property of being the successor of a $B$ is also an
+  upper bound, hence $B$ necessitates it, and induction gives that necessarily every number is a $B$; thus
+  any property necessarily had by each number is necessarily had by every number. Theorem 9 then proceeds by
+  induction on arithmetical formulas, Lemma 8 handling the restricted universal quantifier. See the write-up.
+references:
+- paper: goodsell-arithmetic-necessary
+  role: proof
+  locator: §5, Lemmas 2–8 and Theorem 9, pp. 14–21
+notes: >-
+  Lemma 3 of the source is the persistence of being a finite cardinality, Lemma 1 of the write-up for
+  pure-possibility-implies-axiom-of-infinity-t. Lemma 8 says that natural numberhood is a rigid property in
+  the source's sense, the Barcan direction; the converse Barcan direction is Lemma 3. The source's logic
+  lacks T, 4 and Logical Equivalence, so the proof transfers to C unchanged.

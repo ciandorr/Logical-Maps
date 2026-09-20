@@ -13,6 +13,17 @@ const graph=dom=>JSON.parse(dom.window.eval('JSON.stringify(buildGraph())'));
 function uniqueJunctions(g){const seen=new Set();for(const j of g.nodes.filter(n=>n.kind==='junction')){const inputs=g.edges.filter(e=>e.to===j.id).map(e=>e.from).sort();const key=JSON.stringify(inputs);assert.ok(!seen.has(key),'One junction per displayed signed premise set');seen.add(key);assert.ok(inputs.length>=2);assert.equal(inputs.length,new Set(inputs).size);assert.ok(j.parent||g.edges.some(e=>e.from===j.id));}}
 try{
  const dom=page(fixture),w=dom.window,d=w.document;
+ // Premise strokes are solid ink, a little thinner than an ordinary arrow and
+ // scaling with the view so the difference holds at any zoom. Measured before
+ // anything is hovered, since hovering widens whichever edge is under it.
+ const plain=sel=>w.getComputedStyle(d.querySelector('.edge-g:not(.hot) '+sel));
+ const premise=plain('.edge.premise'), ordinary=plain('.edge.source');
+ assert.equal(premise.strokeDasharray,'none','Premise strokes are not dashed');
+ assert.equal(premise.stroke,'var(--ink)','Premise strokes use ink, not a source colour');
+ assert.ok(!premise.vectorEffect||premise.vectorEffect==='none','Premise strokes scale with the view like every other edge');
+ const pw=parseFloat(premise.strokeWidth), ow=parseFloat(ordinary.strokeWidth);
+ assert.ok(pw<ow,'A premise stroke is thinner than an ordinary arrow');
+ assert.ok(pw>ow*0.8,'But only a little thinner: it is not a lesser kind of edge');
  let g=graph(dom);uniqueJunctions(g);
  const ab=g.nodes.find(n=>n.id==='j:abc');assert.ok(ab.shared);
  assert.deepEqual(g.edges.filter(e=>e.from===ab.id).map(e=>e.conclusion||e.b).sort(),['c','d','e']);

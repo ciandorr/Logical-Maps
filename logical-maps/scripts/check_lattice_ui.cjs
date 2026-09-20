@@ -70,6 +70,14 @@ try{
   assert.equal(snap().n,5,'And it is the same node, not a new one');
   w.eval("latticeToggle('c')");
 
+  // A box with one name centres it, rather than reserving room for a header
+  // it does not have, and an ∧ is the size of the graph's own.
+  const box=label=>[...d.querySelectorAll('#lat-graph .lat-node')].find(g=>[...g.querySelectorAll('text')].map(t=>t.textContent).join()===label);
+  const single=box('A'), rect=single.querySelector('rect'), text=single.querySelector('text');
+  assert.ok(Math.abs(+text.getAttribute('y')-(+rect.getAttribute('y')+ +rect.getAttribute('height')/2))<0.01,
+    'A single name sits at the centre of its box');
+  assert.equal(+rect.getAttribute('height'),33,"And the box uses the graph's own padding");
+
   // Nothing nests: every node is its own box in the diagram.
   s=snap();
   assert.equal(d.querySelectorAll('#lat-graph [data-lat-node]').length,s.n,'Every node is drawn separately');

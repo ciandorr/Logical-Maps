@@ -3060,10 +3060,14 @@ function latticeLayout() {
   const maxRank = Math.max(...nodes.map(n => rank.get(n.id)));
   const rows = [];
   for (const n of nodes) (rows[maxRank - rank.get(n.id)] ||= []).push(n);
+  // The same padding as a box on the implication graph: eight above and below,
+  // seventeen a line, twelve more for the equivalent header, and an ∧ the size
+  // of the graph's own. This text is centred on its y rather than sitting on a
+  // baseline, so the offsets below are centres, but the box comes out the same.
   for (const n of nodes) {
-    if (n.meet) { n.w = n.h = 24; continue; }
-    n.w = Math.max(64, 18 + Math.max(...n.names.map(t => t.length * 6.6), n.equivalent ? 58 : 0));
-    n.h = Math.max(26, 17 * n.names.length + 12 + (n.equivalent ? 10 : 0));
+    if (n.meet) { n.w = n.h = 22; continue; }
+    n.w = Math.max(80, Math.max(...n.names.map(t => t.length)) * 7.2 + 26);
+    n.h = 16 + 17 * n.names.length + (n.equivalent ? 12 : 0);
   }
   // A few barycentre sweeps, as on the implication graph.
   for (let pass = 0; pass < 6; pass++) {
@@ -3119,8 +3123,8 @@ function renderLattice() {
     const body = n.meet
       ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
       : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
-        + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 12}">equivalent</text>` : '')
-        + n.names.map((t, i) => `<text x="${n.x}" y="${n.y - n.h / 2 + 4 + 17 * (i + 1) + (n.equivalent ? 10 : 0)}">${esc(t)}</text>`).join('');
+        + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 14}">equivalent</text>` : '')
+        + n.names.map((t, i) => `<text x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`).join('');
     return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}<title>${esc(latticeTitle(n))}</title></g>`;
   };
   svg.innerHTML = `<defs>

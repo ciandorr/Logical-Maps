@@ -156,6 +156,15 @@ try{
   d.querySelector('.tab[data-tab="lattice"]').click();
   w.eval('changeBackground("a",false);');
 
+  // The workspace is a grid, so its rows have to match its children. Getting
+  // that wrong once put the detail pane in the divider's nine pixels, where
+  // nothing it held could be seen.
+  const workspace=d.querySelector('#pane-lattice .graph-workspace');
+  const declared=w.getComputedStyle(workspace).gridTemplateRows.split(/\s+(?![^(]*\))/).filter(Boolean);
+  assert.equal(declared.length,workspace.children.length,'The workspace declares one row per child');
+  assert.equal(w.getComputedStyle(d.getElementById('lat-graph')).gridRow,
+    w.getComputedStyle(d.getElementById('graph')).gridRow,'The diagram sits in the same row as the graph does');
+
   // Clicking reuses the graph's own selection, so a principle, an ∧ and an
   // arrow read the same way here as they do there.
   w.eval('lattice.shown=[];renderLattice();');
@@ -197,6 +206,7 @@ try{
   // Two wordings, since an open arrow out of the floor is asking whether the
   // node above it is the contradiction rather than whether two nodes merge.
   assert.match(pop.textContent,/might yet (collapse into one node|be the contradiction)/,'An open arrow says the two might still be one');
+  assert.equal(d.querySelectorAll('#lat-graph .lat-edge-g.sel').length,1,'A selected arrow is marked on the diagram');
   w.eval('select(null)');
 
   assert.deepEqual(errors.map(String),[]);

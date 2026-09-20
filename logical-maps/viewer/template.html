@@ -168,9 +168,11 @@
      unscoped id rule here outranks the one that hides an inactive pane, which
      leaves the view permanently on screen. */
   #pane-lattice[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
-  #lat-graph { width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  #pane-lattice .graph-workspace { grid-template-rows: minmax(0, 1fr) var(--details-height, 230px); }
+  #lat-graph { grid-row: 2; width: 100%; height: 100%; touch-action: none; cursor: grab; }
   .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
   .lat-edge.may-reverse { stroke: var(--conj); stroke-width: 1.6; stroke-dasharray: 6 4; }
+  .lat-edge-g.sel .lat-edge { stroke-width: 3.2; }
   .lat-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
   .lat-node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
   .lat-node text { font: 500 12px var(--sans); fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
@@ -2552,7 +2554,7 @@ function placeDetail() {
   document.getElementById(lattice ? 'lat-detail' : docked ? 'graph-details' : 'floating-details').appendChild(el);
   if (docked) { el.style.removeProperty('left'); el.style.removeProperty('top'); }
 }
-document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && el.parentElement.id !== 'graph-details' && !el.contains(ev.target)) el.hidden = true; });
+document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !['graph-details', 'lat-detail'].includes(el.parentElement.id) && !el.contains(ev.target)) el.hidden = true; });
 document.addEventListener('keydown', ev => {
   if (ev.key !== 'Escape' || ev.target.id === 'graph-search' || document.body.classList.contains('resizing-panes')) return;
   if (state.focus || state.selected?.type === 'principle') select(null);
@@ -3156,7 +3158,7 @@ function renderLattice() {
     const x1 = e.from.x, y1 = e.from.y - e.from.h / 2, x2 = e.to.x, y2 = e.to.y + e.to.h / 2;
     const cls = 'lat-edge ' + (e.reverses === 'open' ? 'may-reverse' : 'strict');
     const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
-    return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
+    return `<g class="lat-edge-g${lattice.selected === e.id ? ' sel' : ''}" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
   };
   // The same shading as the graph, read off the same selection. Here it repeats
   // what the diagram already shows in places, which does no harm and keeps one
@@ -3301,8 +3303,14 @@ function renderLatticeFilters() {
       reverses: e.reverses});
   });
   let drag = null;
-  svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty}; });
-  svg.addEventListener('pointermove', ev => { if (!drag) return; lattice.view.tx = drag.tx + ev.clientX - drag.x; lattice.view.ty = drag.ty + ev.clientY - drag.y; latticeApplyView(); });
+  svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty, moved: false}; });
+  svg.addEventListener('pointermove', ev => {
+    if (!drag) return;
+    const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) <= 3) return;   // a click is not a drag
+    drag.moved = true;
+    lattice.view.tx = drag.tx + dx; lattice.view.ty = drag.ty + dy; latticeApplyView();
+  });
   for (const type of ['pointerup', 'pointerleave']) svg.addEventListener(type, () => { drag = null; });
   svg.addEventListener('wheel', ev => {
     ev.preventDefault();

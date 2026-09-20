@@ -1,0 +1,35 @@
+id: possibility-schema-r-implies-any-number-possible-e
+premises:
+- possibility-schema-r
+conclusion: any-number-possible-e
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, argument of 20 September 2026; consistency model and successor shift by Claude
+    Fable 5.1 (Anthropic), 20 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Cian Dorr, argument sketch of 20 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.4, pp. 35–36 (Possibility); §1.5, p. 17
+  (S4 for the defined necessity).
+source_names:
+- Dorr 20 Sep
+- Classicism
+proof: >-
+  Any Number Possible (type $e$) is a closed pure sentence, and it is true at the root of the coalesced sum
+  of the full Henkin models with $1,2,3,\ldots$ individuals, so it is consistent with C and Possibility
+  (pure) gives its diamond. Being a finite cardinality is persistent, so for a finite $Z$ the diamond gives
+  $\Diamond\Diamond(\operatorname{Suc}_e Z)(\lambda x\, .\,\top)$, and axiom 4 removes one diamond.
+  See the write-up.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.4, pp. 35–36; §1.5, p. 17
+  note: Formulation of Possibility and the S4 laws used to discharge the diamond.
+notes: >-
+  Recorded from Possibility because the proof applies its consistency side condition to one sentence that
+  quantifies over every finite cardinality at once. The equivalent Distinctness form gives the same result
+  through the recorded equivalence.

@@ -1,0 +1,20 @@
+id: potential-infinity-e
+name: Potential Infinity (type e)
+category: instances
+statement: >-
+  Every possibly instantiated finite cardinality of individuals has a possibly instantiated successor: if a
+  finite cardinality could hold of some property, the next one could hold of some property.
+formal: >-
+  $\forall Z^{(e t)t}\, .\,\bigl(\operatorname{FiniteCardinality}_e(Z)\land\Diamond\exists X^{e t}\, .\,ZX\bigr)\to\Diamond\exists X^{e t}\, .\,(\operatorname{Suc}_e Z)X$
+date: '2026-09-20'
+sources:
+- Cian Dorr, suggestion of 20 September 2026.
+source_names:
+- Dorr 20 Sep
+notes: >-
+  Formalises “for every possibly instantiated finite cardinality there is a greater possibly instantiated
+  one”, taking the successor as the greater cardinality; any larger one is reached by iterating.
+  “Instantiated” means holding of some property. The variant that asks the successor to hold of the
+  universal property is Any Number Possible (type $e$), which is strictly stronger: the full Henkin
+  model with infinitely many individuals satisfies this principle and the Axiom of Infinity at type $e$,
+  but has only two propositions, so this principle does not imply the Axiom of Infinity at type $t$.

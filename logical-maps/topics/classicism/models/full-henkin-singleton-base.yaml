@@ -14,6 +14,11 @@ violates:
 - infinity-t
 - atomlessness
 - possibility-schema-r
+- possible-infinity-e
+- potential-infinity-e
+- possible-infinity-t
+- potential-infinity-t
+- any-number-possible-e
 status: proved
 certificate:
   source_id: misc
@@ -53,3 +58,17 @@ changes:
   - relational-choice-r
   - no-pure-contingency-r
   - distinctness-preserving-collapse
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Verified the infinity principles added on this date. Box is the identity on truth values, so the two
+    Possible Infinity principles fail with the Axioms. At type e the first numeral holds of the universal
+    property and the second numeral is the empty cardinality, refuting Potential Infinity (type e) and Any
+    Number Possible (type e); at type t the second numeral holds of the universal property and the third
+    is the empty cardinality, refuting Potential Infinity (type t).
+  violates:
+  - possible-infinity-e
+  - potential-infinity-e
+  - possible-infinity-t
+  - potential-infinity-t
+  - any-number-possible-e

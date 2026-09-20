@@ -52,14 +52,14 @@ $$
 \mathbf{0}_\sigma&:=\lambda X^{\sigma t}\, .\,\forall u^\sigma\, .\,\neg Xu,\\
 \operatorname{Suc}_\sigma(Z)&:=\lambda X^{\sigma t}\, .\,\exists y^\sigma\, .\,
   Xy\land Z(\lambda u^\sigma\, .\,Xu\land u\ne y),\\
-\operatorname{Finite}_\sigma(Z)&:=\forall W^{((\sigma t)t)t}\, .\,
+\operatorname{FiniteCardinality}_\sigma(Z)&:=\forall W^{((\sigma t)t)t}\, .\,
   \bigl(W\mathbf{0}_\sigma\land\forall Y\, .\,WY\to W(\operatorname{Suc}_\sigma Y)\bigr)\to WZ.
 \end{aligned}
 $$
 
 So $\mathbf{0}_\sigma$ is the cardinality of the empty property,
 $\operatorname{Suc}_\sigma$ adds one to a cardinality, and
-$\operatorname{Finite}_\sigma$ collects the cardinalities reached from
+$\operatorname{FiniteCardinality}_\sigma$ collects the cardinalities reached from
 $\mathbf{0}_\sigma$ by finitely many successors, in the impredicative sense
 that they fall under every property of cardinalities that holds of
 $\mathbf{0}_\sigma$ and of a successor whenever it holds of the cardinality

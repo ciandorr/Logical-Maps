@@ -1,0 +1,50 @@
+id: full-henkin-infinite-base
+name: 'Full Henkin model: countably infinite individual domain'
+satisfies:
+- axiom-of-infinity-e
+- infinity-e
+- fregean-axiom
+violates:
+- axiom-of-infinity-t
+- infinity-t
+- possible-infinity-t
+- potential-infinity-t
+- any-number-possible-e
+- possibility-schema-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7,
+  pp. 47–48.
+source_names:
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48
+description: >-
+  Use the ordinary full Henkin interpretation with $D_e$ countably infinite, $D_t=\{0,1\}$, and every
+  admitted function type containing all functions between its domains; by Proposition 3.7 it is a model of
+  C. Identity is genuine identity and $\Box$ is the identity on truth values, so $\Diamond$ is truth.
+  Because every domain is full, $\operatorname{FiniteCardinality}_\sigma$ holds exactly of the values of the
+  numerals $\operatorname{Suc}_\sigma^k\mathbf{0}_\sigma$: the characteristic function of that set is in the
+  domain and is inductive. At type $e$ the $k$-th numeral says that there are exactly $k$ individuals,
+  which is false for every $k$, so the Axiom of Infinity at type $e$ holds, and with it the schema. At type
+  $t$ the second numeral holds of $\lambda p\, .\,\top$, so the Axiom of Infinity at type $t$ fails, as
+  does the third instance of the schema; the third numeral at type $t$ is the empty cardinality, so the
+  second numeral is instantiated while its successor is not, refuting Potential Infinity at type $t$,
+  and Possible Infinity at type $t$ fails because $\Diamond$ is truth. Any Number Possible (type $e$)
+  fails at $\mathbf{0}_e$, since there is not exactly one individual. Possibility (pure) fails since the
+  C-consistent pure sentence that there is exactly one individual is false. The Fregean axiom holds in
+  any two-valued model.
+notes: >-
+  Explicit specialization of the source's standard Henkin construction to an infinite individual domain,
+  recorded to separate the type-$e$ infinity principles from the type-$t$ ones: it satisfies the Axiom of
+  Infinity at type $e$, hence Possible and Potential Infinity at type $e$, while violating the Axiom of
+  Infinity at type $t$.

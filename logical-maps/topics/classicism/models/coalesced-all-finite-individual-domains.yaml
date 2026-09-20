@@ -1,0 +1,45 @@
+id: coalesced-all-finite-individual-domains
+name: 'Coalesced sum: root over all finite individual domains'
+satisfies:
+- any-number-possible-e
+- axiom-of-infinity-e
+- axiom-of-infinity-t
+violates:
+- distinctness-necessary-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Claude Fable 5.1 (Anthropic), construction and verification of 20 September 2026 (see the write-up).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7,
+  pp. 47–48 (the summands); Appendix E, pp. 80–83 (coalesced sums).
+source_names:
+- Fable 20 Sep
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: related
+  locator: §3.2, pp. 47–48; Appendix E, pp. 80–83
+  note: The summands are the source's full Henkin models. The root construction is in the manner of the
+    source's coalesced sums, but is spelled out and verified in the write-up rather than taken from
+    Definition E.2.
+description: >-
+  Take the full Henkin models $M_n$ with individual domain $\{1,\ldots,n\}$ for every $n\ge1$, and add a
+  root world. Individuals are threads $(a_n)_n$ with $a_n\in\{1,\ldots,n\}$; propositions are sets of
+  worlds; an entity of a function type is a family of $M_n$-entities together with an arbitrary root
+  component defined on whole threads. Application is componentwise, identity at world $n$ is the identity
+  of $M_n$ and at the root is identity of elements. Every theorem of C holds at every world. At the root the
+  finite cardinalities are the numerals, the $k$-th numeral's successor holds of the universal property at
+  world $k+1$, and $\Diamond$ at the root is truth at some world, so Any Number Possible (type $e$) holds
+  there. The root has uncountably many individuals and infinitely many propositions, so both Axioms of
+  Infinity hold there. Two threads that agree at some world are distinct but possibly identical, so ND fails
+  at type $e$. Evaluation point: the root.
+notes: >-
+  Recorded to witness the consistency with C of Any Number Possible (type $e$) and of the Axiom of
+  Infinity at type $t$. The construction and its verification are in the write-up; no independent check
+  is claimed.

@@ -1,0 +1,42 @@
+id: any-number-possible-e-implies-axiom-of-infinity-t
+premises:
+- any-number-possible-e
+conclusion: axiom-of-infinity-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, argument of 20 September 2026; supporting lemmas by Claude Fable 5.1 (Anthropic),
+    20 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Cian Dorr, argument sketch of 20 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, n. 47, p. 32 (Infinity); §1.5, p. 17
+  (S4 for the defined necessity).
+source_names:
+- Dorr 20 Sep
+- Classicism
+proof: >-
+  Write $g(Z)$ for $(\operatorname{Suc}_e Z)(\lambda x^e\, .\,\top)$. Two finite cardinalities are either
+  identical or necessarily share no instance, by an induction that stays inside the presentation
+  $\operatorname{Suc}_e$ supplies; under the premise the second alternative is excluded when $g(Z)=g(Z')$,
+  since that proposition is possible, so $g$ is injective on finite cardinalities and so is
+  $\operatorname{Suc}_e$. The propositions $g(Z)$ then carry a copy of the successor structure: the relation
+  taking $g(Z)$ to $g(\operatorname{Suc}_e Z)$ and every other proposition to itself is total and injective
+  on $\lambda p\, .\,\top$ and misses $g(\mathbf{0}_e)$. A property with such a relation has no finite
+  cardinality, by induction on the cardinality. Hence no finite cardinality of type $(tt)t$ holds of
+  $\lambda p\, .\,\top$. Full proof in the write-up.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, n. 47, p. 32; §1.5, p. 17
+  note: Formulation of the Axiom of Infinity and the S4 laws of the defined necessity. The draft does not
+    draw the connection.
+notes: >-
+  A theorem of C about the premise; no consistency side condition is involved. ND is never used:
+  distinctness of the propositions $g(Z)$ comes from a boxed exclusivity lemma rather than from a possible
+  identity, which without ND would give only $\Diamond(Z=Z')$. Together with
+  possibility-schema-r-implies-any-number-possible-e this gives the Axiom of Infinity at type $t$ from
+  Pure Maximalist Classicism.

@@ -1,0 +1,31 @@
+id: possible-infinity-t-and-bf-t-imply-axiom-of-infinity-t
+premises:
+- possible-infinity-t
+- barcan-t
+conclusion: axiom-of-infinity-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 20 September 2026; proof by Claude Fable 5.1 (Anthropic), 20 September
+    2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 20 September 2026; proof by Claude Fable 5.1 (Anthropic), 20 September 2026.
+source_names:
+- Dorr 20 Sep
+proof: >-
+  BF at type $t$ makes a finite count of propositions necessary whenever it is true, by induction on the
+  finite cardinality: if a finite cardinality holds of a property whose non-instances are necessarily
+  non-instances, then necessarily some finite cardinality holds of a property including it. The base case
+  is BF applied to the empty property; the step adds the removed instance back inside the box, using that
+  finite cardinalities respect coextension. Applied to $\lambda p\, .\,\top$, a finite count of
+  propositions would be necessary, against Possible Infinity at type $t$. Only BF itself is used, not its
+  box. See the write-up.
+references: []
+notes: >-
+  The proof is schematic in the type $\sigma$ and needs BF at $\sigma$ alone; the type-$e$ record reads
+  it with $\sigma=e$. It shows that the open question possible-infinity-t-implies-axiom-of-infinity-t is
+  settled positively under BF (type $t$).

@@ -3,6 +3,8 @@ name: 'Finite-support action model: monotone maps of N'
 satisfies:
 - no-pure-contingency-r
 - atomlessness
+- axiom-of-infinity-e
+- axiom-of-infinity-t
 violates:
 - distinctness-necessary-r
 - atomicity-r
@@ -50,3 +52,15 @@ changes:
   - barcan-r
   - boolean-completeness-r
   - rigid-comprehension-r
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
+    identity at the evaluation arrow is literal, so no numeral counts them. The propositions that a given
+    individual is fixed by the arrow, one for each individual, are pairwise distinct and each has that
+    individual as finite support, so there are infinitely many propositions. The set of numerals at each
+    type is invariant under every arrow, hence has empty support and lies in the domain, so finite
+    cardinality is standard and no finite cardinality holds of the universal property at either type.
+  satisfies:
+  - axiom-of-infinity-e
+  - axiom-of-infinity-t

@@ -1,0 +1,34 @@
+id: c5-and-necessary-rigid-comprehension-imply-necessary-gallin-comprehension
+premises:
+- necessary-distinctness-necessary-r
+- necessary-rigid-comprehension-r
+conclusion: necessary-gallin-extensional-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 20 September 2026, from Cian Dorr's suggestion of the same day
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 20 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.1, p. 22 (B); §2.3, n. 37, p. 28; §1.5,
+  p. 17 (4).
+source_names:
+- Dorr 20 Sep
+- Classicism
+proof: >-
+  By c5-and-persistent-comprehension-imply-gallin and rigid-comprehension-r-implies-persistent-comprehension-r,
+  each closed instance of Gallin Extensional Comprehension follows in C from the corresponding closed
+  instances of □ND and of Rigid Comprehension, so the conditional is a theorem of C and necessitates. K
+  then needs the boxes of the antecedents: the boxed Rigid Comprehension premise supplies one, and □ND
+  supplies the other by 4. Hence every closed instance of Gallin Extensional Comprehension is necessary.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.1, p. 22; §2.3, n. 37, p. 28; §1.5, p. 17
+  note: The equivalence of ND with B, the Gallin convention, and the 4 axiom. The draft does not draw this
+    consequence.
+notes: The necessitation of the recorded unboxed arrow from C5 and Persistent Comprehension, taken with the
+  boxed form of Rigid Comprehension since the map has no boxed Persistent Comprehension.

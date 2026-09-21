@@ -44,6 +44,67 @@ $$
 
 Thus an atom is non-bottom and has no non-bottom strict lower bound.
 These are the definitions of *Classicism*, §2.2, pp. 23–24.
+The Axiom of Infinity is stated with Frege's cardinality apparatus. At a type
+$\sigma$, a *cardinality* is an entity of type $(\sigma t)t$, and:
+
+$$
+\begin{aligned}
+\mathbf{0}_\sigma&:=\lambda X^{\sigma t}\, .\,\forall u^\sigma\, .\,\neg Xu,\\
+\operatorname{Suc}_\sigma(Z)&:=\lambda X^{\sigma t}\, .\,\exists y^\sigma\, .\,
+  Xy\land Z(\lambda u^\sigma\, .\,Xu\land u\ne y),\\
+\operatorname{FiniteCardinality}_\sigma(Z)&:=\forall W^{((\sigma t)t)t}\, .\,
+  \bigl(W\mathbf{0}_\sigma\land\forall Y\, .\,WY\to W(\operatorname{Suc}_\sigma Y)\bigr)\to WZ.
+\end{aligned}
+$$
+
+So $\mathbf{0}_\sigma$ is the cardinality of the empty property,
+$\operatorname{Suc}_\sigma$ adds one to a cardinality, and
+$\operatorname{FiniteCardinality}_\sigma$ collects the cardinalities reached from
+$\mathbf{0}_\sigma$ by finitely many successors, in the impredicative sense
+that they fall under every property of cardinalities that holds of
+$\mathbf{0}_\sigma$ and of a successor whenever it holds of the cardinality
+succeeded. Every type used here ends
+in $t$, so all of them are admitted, and no type $\sigma\sigma$ is needed;
+that is why the axiom is not put in the Dedekind form, which would ask for an
+injective non-surjective operation from $\sigma$ to $\sigma$.
+
+Countable Boolean Completeness and the Necessity of Arithmetic follow
+Goodsell, *Arithmetic is Necessary*, with the type $\nu$ of numbers taken to be
+$(et)t$, zero to be $\mathbf{0}_e$ and successor to be $\operatorname{Suc}_e$,
+the identification that paper displays in its eqs. (24)–(25) without assuming
+it; Goodsell leaves $\nu$, $0$ and successor as parameters. Natural numberhood
+$\mathbb N$ is then $\operatorname{FiniteCardinality}_e$. Write
+$\forall n\in\mathbb N\, .\,A$ for $\forall n^\nu\, .\,\mathbb N n\to A$, and
+likewise for $\exists$. With these, for a relational type $\tau$:
+
+$$
+\begin{aligned}
+\operatorname{Ctbl}_\tau(X)&:=\exists R^{\tau\nu t}\, .\,\forall y^\tau z^\tau\, .\,
+  Xy\land Xz\to\bigl((\exists n\in\mathbb N\, .\,Ryn\land Rzn)\leftrightarrow y=z\bigr),\\
+I^*&:=\forall m\,n\in\mathbb N\, .\,\mathbf{0}_e\ne\operatorname{Suc}_e m\land
+  (\operatorname{Suc}_e m=\operatorname{Suc}_e n\to m=n),\qquad I:=\Diamond I^*,\\
+\operatorname{Sum}(m,n,o)&:=\forall R^{\nu\nu t}\, .\,R\mathbf{0}_e m\to
+  (\forall i\,j\in\mathbb N\, .\,Rij\to R(\operatorname{Suc}_e i)(\operatorname{Suc}_e j))\to Rno,\\
+\operatorname{Prod}(m,n,o)&:=\forall R^{\nu\nu t}\, .\,R\mathbf{0}_e\mathbf{0}_e\to
+  (\forall i\,j\,k\in\mathbb N\, .\,Rij\to\operatorname{Sum}(m,j,k)\to R(\operatorname{Suc}_e i)k)\to Rno.
+\end{aligned}
+$$
+
+So $X$ is countable when it injects into the natural numbers, and $I$ says
+that possibly zero is not a successor and successor is injective on numbers.
+In C the first conjunct of $I^*$ is a theorem, since $\mathbf{0}_e$ and a
+successor differ at $\lambda x\, .\,\bot$. An *arithmetical sentence* is a
+closed formula built from atomic formulas $\mathbb N\mathbf n$,
+$\operatorname{Sum}(\mathbf m,\mathbf n,\mathbf o)$,
+$\operatorname{Prod}(\mathbf m,\mathbf n,\mathbf o)$ and $\mathbf m=\mathbf n$,
+whose terms are variables of type $\nu$, $\mathbf{0}_e$ and successors of
+terms, by $\neg$, $\lor$, $\land$ and quantifiers $\forall v\in\mathbb N$.
+These are Definitions 3–8 of Goodsell's draft.
+
+Boolean Completeness is stated with $\operatorname{GLB}$. The dual form,
+with $\operatorname{LUB}_\tau(y,X):=\forall z^\tau\, .\,
+(\forall w^\tau\, .\,Xw\to w\le_\tau z)\leftrightarrow y\le_\tau z$,
+is equivalent to it in C, and some proofs in the map use that form.
 
 For a relation $Y$ with a finite argument tuple, including the empty tuple,
 the comprehension predicates are:
@@ -59,7 +120,34 @@ $$
 $$
 
 This is the rigidity convention of §2.3, p. 28. Gallin's alternative
-convention has its own principle. For $U^{\sigma\tau t}$, set
+convention has its own principle.
+
+Since $Y\le Z$ is itself the necessary universal closure of the pointwise
+implication, $\operatorname{Persistent}(Y)$ unpacks as
+$\Box\forall\bar x\, .\,Y[\bar x]\to\Box Y[\bar x]$, and both
+conjuncts of $\operatorname{Rigid}$ carry a leading $\Box$. Dropping it
+gives the weak variants:
+
+$$
+\begin{aligned}
+\operatorname{WeaklyPersistent}(Y)&:=\forall\bar x\, .\,
+  Y[\bar x]\to\Box Y[\bar x],\\
+\operatorname{WeaklyInextensible}(Y)&:=\forall X\, .\,
+  (\forall\bar x\, .\,Y[\bar x]\to\Box X[\bar x])\to Y\le X,\\
+\operatorname{WeaklyRigid}(Y)&:=\operatorname{Persistent}(Y)\land
+  \operatorname{WeaklyInextensible}(Y),\\
+\operatorname{VeryWeaklyRigid}(Y)&:=\operatorname{WeaklyPersistent}(Y)\land
+  \operatorname{WeaklyInextensible}(Y).
+\end{aligned}
+$$
+
+$\operatorname{Rigid}$ is thus necessary very weak rigidity. These are the
+conventions of Dorr, *Boolean Completeness does not imply Rigid
+Comprehension*, pp. 2 and 12; that draft's unqualified “weakly rigid” is
+$\operatorname{VeryWeaklyRigid}$ here, and the map reserves “weakly rigid”
+for the stronger combination used in its Proposition 1.
+
+For $U^{\sigma\tau t}$, set
 
 $$
 \begin{aligned}
@@ -115,18 +203,41 @@ model `violates` entries record schema failure.
 
 **Pure and signature schemata.** In Distinctness and Possibility,
 $C$ denotes the fixed background logic. Its theoremhood and consistency
-side conditions are retained literally.
-Fix a signature $\Sigma$ containing the displayed nonlogical constants and
-fundamentality predicates $\operatorname{Fun}_\sigma$, all of admitted types,
-with arbitrarily many distinct constants of each type. No nonlogical
-axioms about them are standing assumptions. “Pure” excludes these symbols.
-For Fundamental Possibility, $\operatorname{Fun}(\bar x)$ conjoins each
-$\operatorname{Fun}_{\sigma_i}(x_i)$ and the distinctness of each pair of
-same-typed entries. “Distinct constants” means distinct symbols, not an
-assumed inequality between their denotations.
+side conditions are retained literally. “Pure” means free of nonlogical
+constants. The principles in the Signature schemata group give a special
+role to nonlogical constants: they concern an arbitrary fixed signature
+$\Sigma$ of nonlogical constants of admitted types, with
+$\mathcal L(\Sigma)$ and $C(\Sigma)$ the language and background theory
+over $\Sigma$. Each of these schemata holds trivially when $\Sigma$ is
+empty, so $\Sigma$ is assumed to contain at least one constant of some
+type $\tau\ne e$. Nothing further is assumed: no nonlogical axioms about
+the constants are standing assumptions, and “distinct constants” means
+distinct symbols, not an assumed inequality between their denotations.
+Where a schema mentions a tuple of distinct constants, its instances are
+those the signature supplies.
 
-**Evidence.** References use the 87-page draft of *Classicism* dated
-16 May 2023. Models cite the construction and evaluation point directly.
+**Fundamentality signature.** The principles in the Fundamentality group
+are about a different, special signature rather than the arbitrary
+$\Sigma$. It contains a fundamentality predicate
+$\operatorname{Fun}_\sigma$ of type $\sigma t$ for every type $\sigma$,
+following *Classicism*, §2.5, p. 39, and *Logical Combinatorialism*, §2.
+That paper also uses a purity predicate $\operatorname{Pure}_\sigma$ of
+type $\sigma t$; the map does not yet include any principle involving it.
+These predicates receive no standing axioms. For Fundamental Possibility,
+$\operatorname{Fun}(\bar x)$ conjoins each
+$\operatorname{Fun}_{\sigma_i}(x_i)$ and the distinctness of each pair of
+same-typed entries; the formula $P$ there is pure, so it contains neither
+$\operatorname{Fun}$ nor any constant of $\Sigma$.
+
+**Evidence.** *Classicism* is Bacon and Dorr (2024), in Fritz and Jones
+(eds), *Higher-Order Metaphysics*, Oxford University Press, pp. 109–190.
+References use the numbering of the 87-page draft dated 16 May 2023, from
+which the map was built and which does not differ materially from the
+published version, and, for the symmetric ideally-full models and the weak
+rigidity principles, the 27-page draft of Dorr, *Boolean Completeness does
+not imply Rigid Comprehension*, dated 30 July 2026. That second source is
+a work in progress and is not distributed with the map; its records say so.
+Models cite the construction and evaluation point directly.
 The source models now use exactly the map's type system. Their listed
 properties provide countermodel evidence at the stated evaluation point.
 The singleton-root coalesced model still awaits an expansion to the fixed

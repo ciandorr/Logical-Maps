@@ -1,6 +1,6 @@
 id: infinity-t
-name: Infinity (type t)
-category: instances
+name: Infinity Schema (type t)
+category: infinity
 statement: There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for
   each positive integer n.
 formal: $\exists x_1^t\cdots x_n^t\, .\,\bigwedge_{i<j}x_i\ne x_j\quad(n\ge1)$
@@ -13,5 +13,14 @@ references:
 - paper: bacon-dorr-classicism
   role: formulation
   locator: §2.3, n. 47, p. 32
-notes: Schema-level reading of the source’s informal infinity claim; no choice-dependent equivalence with
-  Dedekind infinity is assumed.
+notes: >-
+  Schema-level reading of the source’s informal infinity claim; no choice-dependent equivalence with
+  Dedekind infinity is assumed. One sentence for each n, so it is weaker than the quantified Axiom
+  of Infinity (type t), which implies it. The converse fails by a compactness argument, which the map
+  does not yet witness with a model.
+changes:
+- date: '2026-09-19'
+  by: Claude Opus 5 (Anthropic)
+  summary: >-
+    Renamed from “Infinity (type t)” to mark it as the schema, now that the quantified Axiom of Infinity
+    (type t) is recorded separately. The id, the statement and every connection are unchanged.

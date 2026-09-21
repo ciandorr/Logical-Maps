@@ -1,0 +1,71 @@
+id: symmetric-range-gap-without-actuality
+name: 'Symmetric ideally-full model: arrows omitting or reserving a fixed individual'
+satisfies:
+- boolean-completeness-r
+- necessary-boolean-completeness-r
+- no-pure-contingency-r
+- atomlessness
+- axiom-of-infinity-e
+- axiom-of-infinity-t
+violates:
+- barcan-r
+- actuality
+- atomicity-t
+- distinctness-necessary-r
+status: proved
+certificate:
+  source_id: dorr-bc-not-rc
+  produced_by: Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §7.2, p.
+  22; Proposition 45, p. 22; Remark 38, p. 19.
+source_names:
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: proof
+  locator: §7.2, p. 22; Proposition 45, p. 22; Remark 38, p. 19
+description: >-
+  A symmetric ideally-full intensional action model over one object, the set of natural numbers. Its arrows
+  are of two disjoint kinds: the surjections for which the distinguished individual is its own only preimage,
+  and the functions that omit the distinguished individual from their range. Its symmetry group is the
+  permutations fixing that individual, which is now a proper subset of the first kind. An arrow's value
+  at the distinguished individual still tells the two kinds apart, but no finite set separates any arrow.
+  The evaluation point is the identity arrow.
+
+
+  Boolean Completeness holds by the draft's main theorem with the distinguished individual as the distinguished
+  set. Two arrows agreeing there lie in the same one of the two classes, and a prescription taken from
+  the two of them extends within that class, by nonzero values in the second case and by surjective nonzero
+  values in the first. One object gives No Pure Contingency and the boxed form.
+
+
+  BF fails at type e by the argument of the previous variant, which goes through verbatim. Actuality and
+  Atomicity fail because the first class of arrows contains non-injective ones, which restores the arguments
+  used for the all-surjections model: given a true proposition pinned down by a finite set containing
+  the distinguished individual and one other, the proposition that a fresh individual is not collapsed
+  with that set is a strictly stronger truth; and the same splitting applied to an arbitrary nonzero proposition
+  rather than a true one gives Atomlessness.
+notes: >-
+  The second of the draft's two variants in which BF fails, arranged so that the range deficiency no longer
+  brings Actuality with it. Since Actuality fails, Weak Rigid Comprehension and Rigid Comprehension fail
+  too, which are recorded as derived verdicts. Atomlessness is the Proposition 45 argument for Atomicity
+  read for an arbitrary nonzero proposition, and the failure of ND at type e follows from the non-injective
+  arrows; neither is displayed separately in the draft. The source is a work in progress.
+changes:
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
+    identity at the identity arrow is literal, so no numeral counts them. The propositions that a given
+    individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned
+    by that individual, so there are infinitely many propositions. The set of numerals at each type is
+    invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is
+    standard and no finite cardinality holds of the universal property at either type.
+  satisfies:
+  - axiom-of-infinity-e
+  - axiom-of-infinity-t

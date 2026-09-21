@@ -1,0 +1,44 @@
+id: witnessed-possibility-incompatible-with-nd
+premises:
+- witnessed-possibility-r
+- distinctness-necessary-r
+conclusion: false
+status: proved
+certificate:
+  source_id: bacon-2020
+  produced_by: Andrew Bacon; adapted to Witnessed Possibility and the map's signature by Claude Fable 5.1
+    (Anthropic), 19 September 2026, at the suggestion of Cian Dorr
+  recorded_by: Claude Fable 5.1 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), pp. 554–555, nn. 29–30.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.5, n. 57, p. 38; §2.6, p. 41.
+source_names:
+- Logical Combinatorialism
+- Classicism
+proof: Let $c$ be a nonlogical constant of $\Sigma$ of some relational type $\tau$; the signature assumption
+  in Background supplies one. The pure formulas $x=\top_\tau$ and $x\ne\top_\tau$, with only $x^\tau$ free,
+  have C-provable existential closures, witnessed by $\top_\tau$ and $\bot_\tau$ respectively. Witnessed
+  Possibility therefore gives $\Diamond(c=\top_\tau)$ and $\Diamond(c\ne\top_\tau)$. If $c=\top_\tau$,
+  then by Leibniz's law $(c\ne\top_\tau)=(\top_\tau\ne\top_\tau)=\bot$, contradicting $\Diamond(c\ne\top_\tau)$.
+  If $c\ne\top_\tau$, then ND at type $\tau$ gives $\Box(c\ne\top_\tau)$, i.e. $(c\ne\top_\tau)=\top$,
+  so $(c=\top_\tau)=\bot$, contradicting $\Diamond(c=\top_\tau)$.
+references:
+- paper: bacon-2020
+  role: proof
+  locator: pp. 554–555, nn. 29–30
+  note: Bacon derives from Logical Necessity that distinct fundamental entities are possibly identical (his
+    (4)), so that distinctness is contingent and the Brouwerian axiom, and with it ND (Prior), fail.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.5, n. 57, p. 38; §2.6, p. 41
+  note: Note 57 identifies Witnessed Possibility with one direction of Logical Necessity and observes that
+    it follows from Maximalist Classicism, which p. 41 shows to be inconsistent with ND.
+notes: The argument follows Bacon's, with two changes. Witnessed Possibility replaces the biconditional
+  Logical Necessity, since only the possibility direction is used. The top element $\top_\tau$ replaces
+  Bacon's second fundamental constant, because the map's signature assumes only one constant of some type
+  $\tau\ne e$ and does not assume that distinct constants denote distinct entities (compare Bacon's n. 29,
+  which uses $\lambda x\, .\,\top$ and $\lambda x\, .\,\bot$). ND is used only at the type $\tau$ of the
+  chosen constant.

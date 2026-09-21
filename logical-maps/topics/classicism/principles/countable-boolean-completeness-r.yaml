@@ -1,0 +1,25 @@
+id: countable-boolean-completeness-r
+name: Countable Boolean Completeness
+category: lattice
+statement: Every countable property of entities of a relational type has a least upper bound in that type,
+  where a property is countable when it injects into the natural numbers.
+formal: $\forall^{\mathrm{Ty}}\tau\ne e\, .\,\forall X^{\tau t}\, .\,\operatorname{Ctbl}_\tau(X)\to\exists y^\tau\, .\,\operatorname{LUB}_\tau(y,X)$
+date: '2026-09-20'
+sources:
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §3.1, eq. (10), p. 8; Definition 6, p. 13.
+source_names:
+- Arithmetic is Necessary
+references:
+- paper: goodsell-arithmetic-necessary
+  role: formulation
+  locator: §3.1, eq. (10), p. 8; Definition 6, p. 13
+  note: The source states the principle for property types $\sigma t$ with least upper bounds; the map
+    ranges over every relational type, as its Boolean Completeness does, and takes the source's
+    parameters $\nu$, $0$ and successor to be $(et)t$, $\mathbf{0}_e$ and $\operatorname{Suc}_e$.
+notes: >-
+  See Background for $\operatorname{Ctbl}$ and $\operatorname{LUB}$. The restriction of Boolean Completeness
+  to countable properties; the least-upper-bound form is used to match the source, and is equivalent in C
+  to a greatest-lower-bound form, since the pointwise negation of a countable property is countable. The
+  source's hypothesis that the properties form a countably complete Boolean algebra modulo necessary
+  equivalence. It suffices for the Necessity of Arithmetic and is therefore incompatible with Maximalist
+  Classicism.

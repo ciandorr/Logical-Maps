@@ -1,0 +1,80 @@
+id: symmetric-two-object-unpinned
+name: 'Symmetric ideally-full model: two objects, the second unpinned'
+satisfies:
+- necessary-boolean-completeness-r
+- necessary-actuality
+- axiom-of-infinity-e
+- axiom-of-infinity-t
+violates:
+- rigid-comprehension-r
+- necessary-barcan-r
+- no-pure-contingency-r
+- distinctness-necessary-r
+status: proved
+certificate:
+  source_id: dorr-bc-not-rc
+  produced_by: Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Definition
+  39, p. 19; Proposition 40 and Proposition 41, p. 20; Remark 42, p. 21.
+source_names:
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: proof
+  locator: Definition 39, p. 19; Proposition 40 and Proposition 41, p. 20; Remark 42, p. 21
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, pp. 73–79
+  note: The per-object ideals that this construction uses, and the two-object models built on them.
+description: >-
+  A symmetric ideally-full intensional action model over two objects, each a copy of the natural numbers.
+  The arrows from the first object to itself are the permutations; the arrows from the first to the second
+  and from the second to itself are all the functions; there are none back. Both symmetry groups are all
+  the permutations. The first object carries the ideal of finite sets, the second the improper ideal,
+  so at the second object every symmetric intension belongs to the domain. The evaluation point is the
+  identity arrow on the first object.
+
+
+  Actuality holds at both objects, and hence necessarily: at each, the orbit of the identity under the
+  symmetry group is the smallest symmetric set of arrows containing it, and it is in the domain, at the
+  first object because it is pinned down by the empty set and at the second because nothing is required
+  there. Boolean Completeness holds at both, and hence necessarily: at the first by the draft's main theorem
+  with the empty distinguished set, since an arrow to the first object is automatically a permutation
+  and so separated, while for arrows to the second splicing is unconstrained; at the second trivially,
+  since its domains are closed under arbitrary unions.
+
+
+  Rigid Comprehension fails: no rigid property of individuals is coextensive with the universal one. Weak
+  persistence together with finite pinning forces any candidate to contain every pair whose arrow targets
+  the second object, so its transport there is the top property. But the property of being in the range
+  of one's arrow is symmetric and persistent, its extension at that world is everything, and the top property
+  does not entail it, because the arrows out of the second object include non-surjections. So the rigidity
+  criterion fails at that world.
+notes: >-
+  The point of the model is that boxed Boolean Completeness and boxed Actuality, and so Weak Rigid Comprehension,
+  do not yield Rigid Comprehension. The gap is exactly the leading box of the inextensibility conjunct.
+  The draft records that the type-e instance of BF is true at the base world and false at the second object,
+  so BF is true while boxed BF is false; that is what the violation of boxed BF records, and it also refutes
+  No Pure Contingency, since that instance is a closed pure sentence true at the base and false at an accessible
+  world. The status of the unboxed BF schema at the base world is left unknown here: the draft's working
+  comments report that higher-type instances fail there, which would make the schema fail, but its text
+  does not. ND fails at type e because some arrow to the second object collapses two individuals. The
+  source is a work in progress.
+changes:
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
+    identity at the identity arrow is literal, so no numeral counts them. The propositions that a given
+    individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned
+    by that individual, so there are infinitely many propositions. The set of numerals at each type is
+    invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is
+    standard and no finite cardinality holds of the universal property at either type.
+  satisfies:
+  - axiom-of-infinity-e
+  - axiom-of-infinity-t

@@ -18,10 +18,21 @@ source_names:
 proof: The source states that, under BF, persistence of a relation and of its negation implies its inextensibility.
   Given pointwise necessary consequences on its instances, the persistent complement makes all non-instance
   cases necessary too; BF assembles the resulting pointwise necessary conditional into entailment. Use
-  the Gallin-rigid coextension, which is then rigid in the source’s sense.
+  the Gallin-rigid coextension, which is then rigid in the source’s sense. Inextensibility is a boxed
+  condition, so the assembly has to be available at every world. The plain premise supplies that, because
+  Gallin Extensional Comprehension gives ND, ND with BF gives □ND, and □ND gives □BF, each a recorded
+  result; both persistence conditions of the witness are boxed already.
 references:
 - paper: bacon-dorr-classicism
   role: proof
   locator: §2.3, n. 37, p. 28
 notes: The source’s note states the predicate implication. This record applies it to the same comprehension
-  witness; no converse is inferred.
+  witness; no converse is inferred. The part of the argument that uses BF only at the world of evaluation
+  yields weak rigidity and is recorded separately as gallin-comprehension-and-bf-imply-weak-rigid-comprehension.
+changes:
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic), at Cian Dorr's direction
+  summary: >-
+    Spelled out why the plain BF premise suffices although inextensibility carries a leading box: the
+    argument needs BF at every world, and the premises deliver □BF through ND, □ND and the recorded
+    C5 ⇒ □BF. Premises and conclusion unchanged.

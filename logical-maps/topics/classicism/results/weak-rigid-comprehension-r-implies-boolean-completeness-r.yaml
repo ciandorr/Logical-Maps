@@ -1,0 +1,37 @@
+id: weak-rigid-comprehension-r-implies-boolean-completeness-r
+premises:
+- weak-rigid-comprehension-r
+conclusion: boolean-completeness-r
+status: proved
+certificate:
+  source_id: dorr-bc-not-rc
+  produced_by: Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, footnote
+  on p. 12.
+source_names:
+- BC does not imply RC
+proof: >-
+  Take the propositional case first. Given $F^{tt}$, let $C^{tt}$ be weakly rigid and coextensive with
+  $F$, and put $q:=\exists p\, .\,Cp\land p$. Every $F$ proposition $p$ is $C$, hence necessarily $C$ by
+  persistence, so $p$ entails $Cp\land p$ and thereby $q$; so $q$ is an upper bound of the $F$ propositions.
+  Now suppose every $F$ proposition entails $r$. The $C$ propositions are the $F$ propositions, so every
+  $C$ proposition entails $r$; entailments are necessary if true, so $\forall p\, .\,Cp\to\Box(p\le r)$.
+  Weak inextensibility with $X:=\lambda p\, .\,(p\le r)$ gives $C\le X$, so at every world $Cp$ implies
+  $p\le r$; hence $Cp\land p$ entails $r$ whatever $p$ may be, and $q\le r$. So $q$ is a least upper bound
+  of the $F$ propositions. The same reasoning with extra parameters gives the least-upper-bound form at
+  every relational type, and that form is equivalent in C to the greatest-lower-bound form in which the
+  principle is stated.
+references:
+- paper: dorr-bc-not-rc
+  role: proof
+  locator: footnote on p. 12
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, pp. 23–24
+  note: Boolean Completeness and the equivalence of its two forms.
+notes: ''

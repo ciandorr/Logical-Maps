@@ -1,0 +1,86 @@
+id: symmetric-all-surjections
+name: 'Symmetric ideally-full model: all surjections of N (Base 1)'
+satisfies:
+- boolean-completeness-r
+- necessary-boolean-completeness-r
+- barcan-r
+- necessary-barcan-r
+- no-pure-contingency-r
+- atomlessness
+- axiom-of-infinity-e
+- axiom-of-infinity-t
+violates:
+- actuality
+- atomicity-t
+- rigid-comprehension-r
+- distinctness-necessary-r
+status: proved
+certificate:
+  source_id: dorr-bc-not-rc
+  produced_by: Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §3.1, p.
+  9 (base); Proposition 22, p. 11; Proposition 23, p. 12; Theorem 36, p. 18; Corollary 37 and Remark 38,
+  p. 19.
+source_names:
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: proof
+  locator: §3.1, p. 9; Proposition 22, p. 11; Proposition 23, p. 12; Theorem 36, p. 18; Corollary 37 and
+    Remark 38, p. 19
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, pp. 73–79
+  note: The ideally-full action models of which this is the symmetric variant, and the failures of Boolean
+    Completeness that symmetry blocks.
+description: >-
+  A symmetric ideally-full intensional action model over one object, the set of natural numbers. Its arrows
+  are all the surjections of that set, and its symmetry group is all the permutations. A relational domain
+  holds exactly the intensions that are symmetric, meaning indifferent to relabelling the individuals of
+  a world, and pinned down by some finite set. The evaluation point is the identity arrow.
+
+
+  Boolean Completeness holds by the draft's main theorem, whose two hypotheses are verified here with
+  the empty distinguished set: every finite set is amalgamable, since an arrow is prescribed only on a
+  finite set and extends freely, and points can always be moved off a given finite set by a permutation.
+  The least upper bound of a property of type-tau entities is the union of the hulls of its instances.
+  The model has one object, so a closed sentence of pure logic denotes the same thing relative to every
+  arrow and is true only if necessarily true. That gives No Pure Contingency directly, and it promotes
+  every pure principle true here to its boxed form, which is how boxed Boolean Completeness and boxed
+  BF are obtained.
+
+
+  BF holds at every type because every arrow is surjective and a finitely pinned symmetric intension can
+  be pulled back along an arrow. Actuality fails: given a true proposition pinned down by a finite set,
+  the proposition that a fresh individual is not collapsed with that set is a strictly stronger truth.
+  The same construction, applied to an arbitrary nonzero proposition rather than a true one, splits every
+  possible proposition, which is Atomlessness and hence the failure of Atomicity at type t. Rigid Comprehension
+  fails already at type e, and concretely rather than only through Actuality: a persistent property with
+  a cofinite extension must be closed under everything an arrow can send an instance to, and no finite
+  pinning set can sustain that short of the top property, so nothing rigid is coextensive with being distinct
+  from a fixed individual.
+notes: >-
+  This is the draft's headline separation. Boolean Completeness holds while Rigid Comprehension fails,
+  and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded as a derived
+  verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition rather
+  than for a true one, and the failure of ND at type e follows from the presence of a non-injective surjection,
+  since the proposition that two fixed individuals are identical is then a nonzero proposition; neither
+  is displayed separately in the draft. The source is a work in progress.
+changes:
+- date: '2026-09-20'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: >-
+    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
+    identity at the identity arrow is literal, so no numeral counts them. The propositions that a given
+    individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned
+    by that individual, so there are infinitely many propositions. The set of numerals at each type is
+    invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is
+    standard and no finite cardinality holds of the universal property at either type.
+  satisfies:
+  - axiom-of-infinity-e
+  - axiom-of-infinity-t

@@ -1,0 +1,33 @@
+id: boolean-completeness-r-implies-countable-boolean-completeness-r
+premises:
+- boolean-completeness-r
+conclusion: countable-boolean-completeness-r
+status: proved
+certificate:
+  source_id: goodsell-arithmetic-necessary
+  produced_by: Zachary Goodsell
+  recorded_by: Claude Fable 5.1 (Anthropic), 20 September 2026
+  checked_by: []
+  date: '2026-09-20'
+  lean: none
+sources:
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §3.1, p. 8.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, pp. 23–24.
+source_names:
+- Arithmetic is Necessary
+- Classicism
+proof: >-
+  Countable Boolean Completeness is the restriction of Boolean Completeness to countable properties. The
+  map's Boolean Completeness supplies greatest lower bounds; the least upper bound of $X$ is the pointwise
+  negation of the greatest lower bound of $\lambda y\, .\,X(\neg y)$, by the Boolean laws that Logical
+  Equivalence makes identities, so every property, countable or not, has a least upper bound.
+references:
+- paper: goodsell-arithmetic-necessary
+  role: formulation
+  locator: §3.1, p. 8
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, pp. 23–24
+  note: The greatest-lower-bound formulation and its dual.
+notes: The source presents the restriction as immediate. The converse is not expected; the source uses only
+  the countable case.

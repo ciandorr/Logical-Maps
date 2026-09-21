@@ -1,0 +1,31 @@
+id: axiom-of-infinity-e-implies-infinity-e
+premises:
+- axiom-of-infinity-e
+conclusion: infinity-e
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5 (Anthropic), 19 September 2026, from the formulation suggested by Cian Dorr
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 19 September 2026.
+source_names:
+- Dorr 19 Sep
+proof: >-
+  By contraposition. A routine induction shows that
+  $\operatorname{Suc}_e^{\,k}(\mathbf{0}_e)$ holds of a property exactly when that property has $k$
+  instances, and that $\operatorname{FiniteCardinality}_e$ holds of it, since any $W$ holding of $\mathbf{0}_e$
+  and closed under $\operatorname{Suc}_e$ reaches it in $k$ steps. Now suppose the schema's $n$-th
+  instance fails, so there are at most $n-1$ individuals. Then for some $k<n$ there are exactly $k$ of them,
+  and $\operatorname{Suc}_e^{\,k}(\mathbf{0}_e)$ is a finite cardinality holding of
+  $\lambda u\, .\,\top$, which the axiom denies.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, n. 47, p. 32
+notes: >-
+  The converse fails, by a compactness argument that a nonstandard model would witness. The map does not
+  yet record such a model, so the schema-to-axiom direction stays open rather than refuted.

@@ -1,0 +1,45 @@
+id: very-weak-rigid-comprehension-r-implies-weak-rigid-comprehension-r
+premises:
+- very-weak-rigid-comprehension-r
+conclusion: weak-rigid-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 19 September 2026
+  recorded_by: Claude Opus 5 (Anthropic), 19 September 2026
+  checked_by: []
+  date: '2026-09-19'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 19 September 2026.
+source_names:
+- Dorr 19 Sep
+proof: >-
+  Let $Y$ be very weakly rigid and coextensive with $X$, and put $Y':=\lambda\bar z\, .\,\Box Y[\bar z]$.
+
+
+  Coextensiveness. $\Box Y[\bar u]\to Y[\bar u]$ by T, and $Y[\bar u]\to\Box Y[\bar u]$ is
+  $\operatorname{WeaklyPersistent}(Y)$. So $Y'$ is coextensive with $Y$, hence with $X$.
+
+
+  Persistence. $Y'\le\lambda\bar z\, .\,\Box Y'[\bar z]$ is
+  $\Box\forall\bar z\, .\,\Box Y[\bar z]\to\Box\Box Y[\bar z]$, the necessitation of the 4 axiom, which
+  is a theorem of C.
+
+
+  Weak inextensibility. Suppose $\forall\bar z\, .\,Y'[\bar z]\to\Box Z[\bar z]$. Weak persistence gives
+  $\forall\bar z\, .\,Y[\bar z]\to Y'[\bar z]$, so $\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar z]$, and
+  $\operatorname{WeaklyInextensible}(Y)$ gives $Y\le Z$. Also $Y'\le Y$, since that is the necessitation
+  of T. So $Y'\le Z$ by transitivity.
+
+
+  Hence $Y'$ is weakly rigid and coextensive with $X$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §1.5, pp. 16–19
+  note: T and 4 for the fixed background modality; both are recorded as background consequences.
+notes: >-
+  With the converse this makes the two principles equivalent, although very weak rigidity is strictly
+  weaker than weak rigidity as a condition on a given relation, since nothing stops a very weakly rigid
+  relation from being only contingently so.

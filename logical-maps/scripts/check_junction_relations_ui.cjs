@@ -53,7 +53,10 @@ try {
   w.handleGraphClick(junction());
   assert.ok(junction().classList.contains('rel-base')); assert.equal(fill(), 'var(--hl)');
   assert.deepEqual(JSON.parse(w.eval('JSON.stringify(state.focus)')), ['p','q']);
-  assert.equal(title(), 'P ∧ Q\nSelected conjunction');
+  // A selected conjunction names itself and then reports whether it can hold
+  // with the background, as an ordinary selected box does.
+  assert.match(title(), /^P ∧ Q\nSelected conjunction\. /);
+  assert.match(title(), /Consistent with the background/, 'This conjunction has a witness, so the line says so');
   select('z'); assert.equal(fill(), 'url(#split-independent)');
   w.handleGraphClick(junction(), true);
   assert.deepEqual(JSON.parse(w.eval('JSON.stringify(state.focus)')), ['z','p','q']);

@@ -9,7 +9,7 @@ const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..');
 const template=fs.readFileSync(path.join(root,'viewer/template.html'),'utf8');
 const pages=[],errors=[];
-function page(data,url='https://maps.example/'){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url,runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});pages.push(dom);return dom;}
+function page(data,url='https://maps.example/'){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url,runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});pages.push(dom);dom.window.eval('state.excluded.clear(); repaintGraph();');return dom;}
 const cert=source_id=>({source_id,lean:'none',produced_by:'Fixture',checked_by:[]});
 const rule=(id,premises,conclusion,status='proved',source='paper')=>({id,premises,conclusion,status,certificate:cert(source),sources:['Fixture'],source_names:['Fixture']});
 const model=(id,satisfies,violates,source='submission',status='proved')=>({id,name:'Model '+id.toUpperCase(),status,satisfies,violates,certificate:cert(source),sources:['Fixture'],source_names:['Fixture']});
@@ -121,7 +121,12 @@ try{
   const marker=key=>d.querySelector(`[data-edge="${key}"] .edge`).getAttribute('marker-end');
   assert.equal(marker('ga'),marker('ha'));
   assert.ok(!marker('ha').includes('-open'));
-  assert.equal(d.querySelector('marker[id$="-open"]'),null);
+  // The guard is about the implication graph, which uses one filled head for
+  // every arrow. The lattice view is a different diagram with a convention of
+  // its own, so the query is scoped rather than document wide, and paired with
+  // a direct check that no arrow on the graph reaches for a hollow head.
+  assert.equal(d.querySelector('#graph marker[id$="-open"]'),null);
+  assert.ok([...d.querySelectorAll('#graph .edge')].every(e=>!(e.getAttribute('marker-end')||'').includes('-open')),'No graph arrow uses a hollow head');
   assert.doesNotMatch(d.querySelector('[data-edge="ha"] title').textContent,/Converse/);
   assert.doesNotMatch(d.querySelector('[data-edge="ga"] title').textContent,/Converse/);
   assert.ok(node('z').classList.contains('falsity'),'Z belongs to the False equivalence box');
@@ -175,6 +180,36 @@ try{
   fixedKeys(empty.document);
   assert.ok(empty.document.querySelector('#nodes [data-falsity]').classList.contains('rel-excluded'),'A standalone False constant is excluded too');
   assert.equal(empty.document.querySelector('#relation-legend .excluded .n').textContent,'1');
+  // The legend reports whether the selection itself can hold with the
+  // background, and the selected box is dashed only when nothing settles it.
+  const cons=page(fixture).window, cd=cons.document;
+  const status=()=>{const st=cd.querySelector('#relation-legend .rel-status');
+    return {kind:st&&[...st.classList].filter(c=>c!=='rel-status')[0], text:st&&st.textContent,
+      dashed:cd.getElementById('graph').classList.contains('unwitnessed-selection')};};
+  cons.select({type:'principle',id:'a'});
+  let st=status();
+  assert.equal(st.kind,'implies','A witnessed selection is reported as consistent');
+  assert.match(st.text,/Consistent with the background \(Model M/);
+  assert.equal(st.dashed,false);
+  cons.select({type:'principle',id:'e'});
+  st=status();
+  assert.equal(st.kind,'open','An unwitnessed selection says so');
+  assert.match(st.text,/Not shown consistent/);
+  assert.equal(st.dashed,true,'Only an unsettled selection dashes its box');
+  assert.match([...cd.querySelectorAll('#nodes .node.rel-base title')][0].textContent,/Not shown consistent/,'The selected box repeats it on hover');
+  cons.select({type:'principle',id:'z'});
+  st=status();
+  assert.equal(st.kind,'inconsistent','A refuted selection keeps its own message');
+  assert.equal(st.dashed,false,'An inconsistent selection is not merely unsettled');
+  // Hiding the only witness downgrades the verdict without losing it.
+  cons.select({type:'principle',id:'a'});
+  cd.querySelector('[data-source-filter="submission"]').click();
+  st=status();
+  assert.equal(st.kind,'implies');
+  assert.match(st.text,/outside selected sources/,'A witness behind a source filter is named as such');
+  assert.equal(st.dashed,false);
+  fixedKeys(cd);
+
   // The reported real-map selection keeps the same legend and False shading.
   const real=page(JSON.parse(fs.readFileSync(path.join(root,'build/unbounded-utility/data.json'),'utf8'))).window;
   real.addBackgroundPreset('dtu');

@@ -9,7 +9,7 @@ const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..');
 const template=fs.readFileSync(path.join(root,'viewer/template.html'),'utf8');
 const pages=[],errors=[];
-function page(data,url='https://maps.example/'){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url,runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});pages.push(dom);return dom;}
+function page(data,url='https://maps.example/'){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url,runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});pages.push(dom);dom.window.eval('state.excluded.clear(); repaintGraph();');return dom;}
 const cert=source_id=>({source_id,lean:'none',produced_by:'Fixture',checked_by:[]});
 const rule=(id,premises,conclusion,status='proved',source='paper')=>({id,premises,conclusion,status,certificate:cert(source),sources:['Fixture'],source_names:['Fixture']});
 const topic={id:'hasse',title:'Hasse fixture',background:[],source_catalog:[{id:'paper',name:'Paper',kind:'published-paper'},{id:'draft',name:'Draft',kind:'misc'}]};
@@ -122,6 +122,8 @@ try{
   const chain={topic,principles:principles(['d','e','f','g']),models:[],results:[rule('de',['d'],'e'),rule('ef',['e'],'f'),rule('dg',['d'],'g'),rule('gf',['g'],'f','conjectured','draft')]};
   const dom5=page(chain);
   dom5.window.document.getElementById('show-conj').click();
+  // Reduction is on by default, so turn it off to capture the full arrow set.
+  dom5.window.document.getElementById('reduce-arrows').click();
   const before=geometry(dom5);
   verifyDirections(before,'chain');
   const positions=g=>Object.fromEntries(g.nodes.map(n=>[n.id,[n.x,n.y]]));
@@ -134,10 +136,50 @@ try{
   assert.ok(!arrow(reduced,'g','f')||arrow(reduced,'g','f').conjectural,'The conjecture G ⇒ F stays only as itself');
   const proved={topic,principles:principles(['d','e','f']),models:[],results:[rule('de',['d'],'e','conjectured','draft'),rule('ef',['e'],'f'),rule('df',['d'],'f')]};
   const dom6=page(proved);
-  dom6.window.document.getElementById('show-conj').click();dom6.window.document.getElementById('reduce-arrows').click();
+  dom6.window.document.getElementById('show-conj').click();
   assert.ok(arrow(geometry(dom6),'d','f'),'A proved arrow is never hidden through a conjectural chain');
   dom5.window.document.getElementById('reduce-arrows').click();
   assert.deepEqual(geometry(dom5).edges.map(e=>e.id).sort(),before.edges.map(e=>e.id).sort(),'Turning reduction off restores every arrow');
+
+  // The reduction also drops an arrow that repeats a premise stroke: with R
+  // equivalent to P ∧ Q, the strokes into the ∧ inside R's box already carry
+  // R ⇒ P and R ⇒ Q.
+  const echoFixture={topic,principles:principles(['p','q','r','s']),models:[],
+    results:[rule('pqr',['p','q'],'r'),rule('rp',['r'],'p'),rule('rq',['r'],'q'),rule('rs',['r'],'s')]};
+  const echoDom=page(echoFixture);
+  const echoKept=geometry(echoDom);
+  verifyDirections(echoKept,'premise echo');
+  const echoMeet=echoKept.nodes.find(n=>n.kind==='junction');
+  assert.equal(echoMeet?.parent,classNode(echoKept,'r').id,'The ∧ joins the box of the principle it is equivalent to');
+  assert.equal(echoKept.edges.filter(e=>e.toJunction&&e.to===echoMeet.id).length,2,'Both premise strokes survive the reduction');
+  assert.ok(!arrow(echoKept,'r','p')&&!arrow(echoKept,'r','q'),'An arrow repeating a premise stroke is hidden');
+  assert.ok(arrow(echoKept,'r','s'),'An arrow to a non-conjunct is left alone');
+  echoDom.window.document.getElementById('reduce-arrows').click();
+  const echoWhole=geometry(echoDom);
+  assert.ok(arrow(echoWhole,'r','p')&&arrow(echoWhole,'r','q'),'Turning reduction off restores the repeated arrows');
+  assert.deepEqual(positions(echoKept),positions(echoWhole),'Hiding a repeated arrow does not move nodes');
+
+  // A box holding several ∧ circles used to fan out: the principle and each
+  // circle carried the same consequence, so one connection was drawn three
+  // times. The reduction keeps the principle's own arrow.
+  const boxOfNode=(g,id)=>g.nodes.find(n=>n.id===id)?.parent||id;
+  const between=(g,a,b)=>g.edges.filter(e=>!e.toJunction&&boxOfNode(g,e.from)===a&&boxOfNode(g,e.to)===b);
+  const fanFixture={topic,principles:principles(['g','a','b','c','x']),models:[],
+    results:[rule('abg',['a','b'],'g'),rule('acg',['a','c'],'g'),
+      rule('ga',['g'],'a'),rule('gb',['g'],'b'),rule('gc',['g'],'c'),
+      rule('abx',['a','b'],'x'),rule('acx',['a','c'],'x'),rule('gx',['g'],'x')]};
+  const fanDom=page(fanFixture);
+  const fanKept=geometry(fanDom);
+  verifyDirections(fanKept,'box duplicates');
+  const gBox=classNode(fanKept,'g').id, xBox=classNode(fanKept,'x').id;
+  assert.equal(fanKept.nodes.filter(n=>n.parent===gBox).length,2,'The box holds both ∧ circles');
+  const keptFan=between(fanKept,gBox,xBox);
+  assert.equal(keptFan.length,1,'One arrow leaves the box for a target its circles share');
+  assert.equal(keptFan[0].from,gBox,"The principle's own arrow is the one kept");
+  fanDom.window.document.getElementById('reduce-arrows').click();
+  const fanWhole=geometry(fanDom);
+  assert.equal(between(fanWhole,gBox,xBox).length,3,'Turning reduction off restores all three');
+  assert.deepEqual(positions(fanKept),positions(fanWhole),'Collapsing duplicates does not move nodes');
 
   // Arrowheads stay filled for both open and model-refuted converses.
   const heads={topic,principles:principles(['m','n','o']),models:[{id:'w',name:'Witness',status:'proved',satisfies:['n'],violates:['m'],certificate:cert('paper'),sources:['Fixture'],source_names:['Fixture']}],results:[rule('mn',['m'],'n'),rule('on',['o'],'n')]};
@@ -152,7 +194,7 @@ try{
     if(!fs.existsSync(file)) continue;
     const data=JSON.parse(fs.readFileSync(file,'utf8'));
     const modes=[['default',''],['no background','?assume='],['DTU',"addBackgroundPreset('dtu')"],['conjectures',"document.getElementById('show-conj').click()"],
-      ['conjectures only',"document.getElementById('conjecture-only').click()"],['negatives',"state.negativeShown=new Set(ids);refreshPrincipleControls();renderAll(true)"],['reduced',"document.getElementById('reduce-arrows').click()"],['trivial',"document.getElementById('trivial-arrows').click()"]];
+      ['conjectures only',"document.getElementById('conjecture-only').click()"],['negatives',"state.negativeShown=new Set(ids);refreshPrincipleControls();renderAll(true)"],['reduction off',"document.getElementById('reduce-arrows').click()"],['trivial',"document.getElementById('trivial-arrows').click()"]];
     for(const [label,setup] of modes){
       if(label==='DTU'&&t!=='unbounded-utility') continue;
       const dom=page(data,'https://maps.example/'+(setup.startsWith('?')?setup:''));

@@ -18,6 +18,8 @@ const dom = new JSDOM(template.replace('/*__PMAP_DATA__*/null', JSON.stringify(d
   url: 'https://maps.example/?assume=', runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole: vc,
 });
 const w = dom.window, doc = w.document;
+// This fixture asserts over the full arrow set, so turn off the default transitive reduction.
+doc.getElementById('reduce-arrows').click();
 const graph = () => JSON.parse(w.eval('JSON.stringify(buildGraph())'));
 const node = (g, p) => g.nodes.find(n => n.members?.includes(p)).id;
 const connection = (g, a, b) => g.edges.find(e => e.from === a && e.to === b);

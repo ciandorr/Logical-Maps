@@ -51,6 +51,7 @@ the topic subject in each map's email link.
   implementations must stay in sync.
 - `NODE_PATH=<node_modules with jsdom> node scripts/check_<name>_ui.cjs` — DOM
   checks of the viewer. Run them all after touching `viewer/template.html`;
+  `check_lattice_ui.cjs` guards the separate lattice view.
   `check_hasse_layout_ui.cjs` and `check_relations_ui.cjs` guard the graph
   layout convention (⊥ is the floor, arrows ascend, ∧ below its premises) and
   the relation shading and comparison readouts. Keep those invariants.

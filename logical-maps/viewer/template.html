@@ -75,7 +75,7 @@
   #pane-graph[data-active="true"], #pane-open[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
   #conjecture-options, .conjecture-hint { display: none; }
   #pane-open #conjecture-options, #pane-open .conjecture-hint { display: block; }
-  #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open [data-clear-graph], #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
+  #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
   .open-content { overflow: auto; min-width: 0; min-height: 0; }
   #open-warning { position: static; margin: 16px 20px 0; }
   .conjecture-row { padding: 16px 0; border-top: 1px solid var(--line); }
@@ -137,8 +137,16 @@
   .model-category { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
   .model-category h3 { font-size: 13px; margin: 0 0 8px; }
   .edge.human { stroke: var(--human); } .edge.assisted { stroke: var(--assisted); } .edge.ai { stroke: var(--ai); }
-  .edge.derived, .edge.premise { stroke: var(--derived); stroke-width: 1.3; }
-  .edge.premise { stroke-dasharray: 1.5 3.5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .edge.derived { stroke: var(--derived); stroke-width: 1.3; }
+  /* Premise strokes carry the ∧ structure and are the commonest edge on a
+     conjunction-heavy map, so they are solid rather than dotted, and lighter
+     than the ink used for labels so that so many of them do not crowd the
+     diagram. They share the tone of the ∧ glyph they run into, and they keep
+     clear of the derived colour and of the fainter ink that trivial arrows
+     use. The slight thinness against an ordinary arrow tells the two apart
+     without reading as lesser, and they scale with the view like every other
+     edge so that the difference holds at any zoom. */
+  .edge.premise { stroke: var(--ink-2); stroke-width: 1.2; stroke-linecap: round; }
   .edge.conjectured { stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; }
   .edge.lean { stroke-width: 3; }
   .edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
@@ -152,10 +160,55 @@
   .node.from-background rect { fill: var(--hl); stroke: var(--accent); }
   .node text { font: 500 12.5px var(--sans); fill: var(--ink); pointer-events: none; }
   .edge.trivial { stroke: var(--ink-3); opacity: .55; }
+  /* Lattice view. A strict cover is a solid line with a filled head; a cover
+     whose converse is still open is dashed with a hollow head, because whether
+     those two nodes are really distinct is the question the diagram exists to
+     show. */
+  /* Scoped to the active state and to the same shape as the graph pane. An
+     unscoped id rule here outranks the one that hides an inactive pane, which
+     leaves the view permanently on screen. */
+  #pane-lattice[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
+  /* One sidebar serves the graph, the theory explorer and the lattice, so its
+     scrolling, dividers and sizes are the same by construction. Each view shows
+     its own blocks in it. */
+  #lat-controls, #lat-principles { display: none; }
+  #pane-lattice #lat-controls, #pane-lattice #lat-principles { display: block; }
+  #pane-lattice #conjecture-options, #pane-lattice #graph-options, #pane-lattice #graph-principles { display: none; }
+  #pane-lattice .graph-workspace { grid-template-rows: minmax(0, 1fr) var(--details-height, 230px); }
+  #lat-graph { grid-row: 2; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
+  .lat-edge.may-reverse { stroke: var(--conj); stroke-width: 1.6; stroke-dasharray: 6 4; }
+  .lat-edge-g.sel .lat-edge { stroke-width: 3.2; }
+  .lat-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+  .lat-node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
+  .lat-node text { font: 500 12px var(--sans); fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .lat-node.lat-equivalent rect { stroke: var(--accent); stroke-width: 1.8; }
+  .lat-node.lat-meet circle { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
+  .lat-node.lat-meet.sel circle { stroke: var(--accent); stroke-width: 2.6; }
+  .lat-node.lat-meet text { font: 600 12px var(--sans); fill: var(--ink-2); }
+  .lat-node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
+  /* The floor reads as the graph's False box does. These come before the
+     relation rules, which must win once something is selected. */
+  .lat-node.lat-bottom rect { stroke: var(--indep); stroke-width: 2; }
+  .lat-node.lat-bottom text[data-falsity] { fill: var(--indep); font-weight: 700; }
+  .lat-node.rel-entailed rect, .lat-node.rel-entailed circle { fill: var(--rel-entailed); }
+  .lat-node.rel-excluded rect, .lat-node.rel-excluded circle { fill: var(--rel-excluded); stroke: var(--indep); }
+  .lat-node.rel-consistent rect, .lat-node.rel-consistent circle { fill: url(#lat-split-consistent); }
+  .lat-node.rel-separated rect, .lat-node.rel-separated circle { fill: url(#lat-split-separated); }
+  .lat-node.rel-independent rect, .lat-node.rel-independent circle { fill: url(#lat-split-independent); }
+  .lat-node.rel-base rect, .lat-node.rel-base circle { fill: var(--hl); stroke: var(--accent); stroke-width: 2.4; }
+  .lat-node text[data-principle], .lat-node text[data-falsity], .lat-node text[data-truth] { cursor: pointer; pointer-events: auto; }
+  #lat-detail .relation-legend { margin-bottom: 6px; }
+  .lat-node.sel rect { stroke: var(--accent); stroke-width: 2.6; }
+  .lat-count { font-size: 12px; color: var(--ink-3); margin: 4px 0; }
+  .lat-row { display: flex; }
+  .lat-row.on button { font-weight: 700; color: var(--accent); }
+  #lat-detail h3 { margin: 4px 0; font-size: 13px; }
+  #lat-detail p { margin: 3px 0; font-size: 12.5px; }
   .junction.selected circle { stroke: var(--accent); stroke-width: 2.4; fill: var(--hl); }
   .node text[data-constant] { pointer-events: auto; cursor: pointer; }
   .node text[data-principle] { pointer-events: auto; cursor: pointer; }
-  .node text.selection-member { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .node text.selection-member, .lat-node text.selection-member { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
   .principle-name[aria-pressed="true"] { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
   .node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
   .node.iso rect { stroke-dasharray: 4 3; }
@@ -336,6 +389,7 @@
   .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
   .pop .pop-l { font-size: 12px; color: var(--ink-2); margin-top: 6px; } .pop code { font: 12px var(--mono); }
   .pop .badges { display: flex; gap: 6px; margin: 6px 0; } .pop .links { margin: 4px 0 0; }
+  .pop .links .lnk + .lnk::before { content: '·'; color: var(--ink-3); margin: 0 8px 0 4px; }
 
   .ex-p.bad { background: color-mix(in srgb, var(--indep) 32%, transparent); outline: 1.5px solid var(--indep); }
   .ex-bad { border: 1px solid var(--indep); color: var(--indep); border-radius: 3px; padding: 8px 10px; margin: 0 0 10px; font-size: 13px; }
@@ -409,6 +463,7 @@
   .node.rel-conjectured rect, .junction.rel-conjectured circle { fill: url(#hatch-conjectured); }
   .node.rel-base rect, .junction.rel-base circle { fill: var(--hl); }
   .node.rel-base rect, .junction.rel-base circle { stroke: var(--accent); stroke-width: 2.4; }
+  #graph.unwitnessed-selection .node.rel-base rect, #graph.unwitnessed-selection .junction.rel-base circle { stroke-dasharray: 5 3; }
   #graph.inconsistent-selection .junction circle { fill: var(--rel-excluded); stroke: var(--indep); }
   #graph.shaded .node.dim, #graph.shaded .junction.dim { opacity: .7; }
   .graph-area { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
@@ -485,6 +540,7 @@
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" data-tab="background" aria-selected="false">Background</button>
         <button class="tab" role="tab" data-tab="graph" aria-selected="true">Graph</button>
+        <button class="tab" role="tab" data-tab="lattice" aria-selected="false">Lattice</button>
         <button class="tab" role="tab" data-tab="models" aria-selected="false">Theory explorer</button>
         <button class="tab" role="tab" data-tab="open" aria-selected="false">Conjectures <span class="n" id="n-open"></span></button>
         <button class="tab" role="tab" data-tab="results" aria-selected="false">Changes <span class="n" id="n-results"></span></button>
@@ -493,11 +549,16 @@
       <section class="pane" id="pane-graph" data-active="true">
     <aside class="controls" id="graph-sidebar">
       <div class="controls-scroll" id="principle-controls">
+      <div id="lat-controls">
+        <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
+        <p class="background-hint">A Hasse diagram showing all the conjunctions of the selected principles. Solid arrows denote implications shown to be non-reversible by models in the selected sources; dashed arrows denote implications which might be reversible (as far as the selected sources are concerned).</p>
+        <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
+      </div>
       <div id="conjecture-options">
         <h2>Conjectures</h2>
         <div class="ctl"><label><input type="checkbox" id="show-resolved">Show resolved</label></div>
       </div>
-      <div>
+      <div id="source-controls">
         <h2 id="source-filter-heading" title="Filter displayed arrows. Background consequences always use all recorded proofs.">Arrow sources</h2>
         <div class="ctl" id="source-filters"></div>
         <div class="ctl">
@@ -511,15 +572,19 @@
           <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
           <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
-          <label title="Hide an arrow when a chain of other displayed arrows already gives it, as in a Hasse diagram. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows">Transitive reduction</label>
+          <label title="Hide an arrow that the displayed diagram already gives: one that a chain of other displayed arrows yields, as in a Hasse diagram, and one that repeats a premise stroke, as when C is equivalent to A ∧ B and C ⇒ A restates the stroke from A into the ∧, and one of several arrows that leave the same box for the same target because its ∧ circles each carry the consequence. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows" checked>Transitive reduction</label>
           <label title="Show the logical arrows from False to every node and from every node to True."><input type="checkbox" id="trivial-arrows">Trivial arrows</label>
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
         </div>
       </div>
-      <div>
+      <div id="graph-principles">
         <h2>Principles <button class="lnk dim" id="pr-all">show positive</button> <button class="lnk dim" id="pr-none">clear</button></h2>
         <p class="background-hint conjecture-hint">Choose a principle’s positive or negative form, then move it to background.</p>
         <div class="ctl" id="pr-filters"></div>
+      </div>
+      <div id="lat-principles">
+        <h2>Principles</h2>
+        <div class="ctl" id="lat-filters"></div>
       </div>
       </div>
       <div class="pane-divider" id="background-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize background pane" aria-controls="background-dock principle-controls" title="Drag to resize background · Arrow keys to adjust · Double-click to reset"></div>
@@ -543,6 +608,16 @@
           <div id="relation-legend" class="relation-legend" role="status" aria-live="polite" hidden></div>
           <p id="graph-details-hint">Select a principle, conjunction or arrow to see its details and logical relations here. Shift-click to add or remove principles.</p>
         </aside>
+        </div>
+      </section>
+      <section class="pane" id="pane-lattice">
+        <div class="graph-workspace">
+          <div class="graph-area">
+            <svg id="lat-graph" role="img" aria-label="Lattice of conjunctions"></svg>
+            <div id="lat-warning" class="graph-warning" role="alert" hidden></div>
+            <div class="graph-tools"><button class="btn small" id="lat-fit">Fit</button></div>
+          </div>
+          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p></aside>
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
@@ -700,8 +775,16 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: false, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
 const graphSearch = { matches: new Set(), index: 0 };
+// A principle the topic's own background already settles, one way or the
+// other, can only sit in the True or False box. It starts hidden; the sidebar
+// still offers it. The reader's own assumptions are not consulted here.
+(function hideSettledByDefault() {
+  const minimal = new Engine(ids, R.filter(r => r.status === 'proved'), [], topicBackground);
+  const facts = minimal.cl([]).facts;
+  for (const id of ids) if (facts.has(id) || minimal.excludes([], id)) state.excluded.add(id);
+})();
 let graphRelations = new Map();
 let E = null, EC = null, baseE = null, baseEC = null, A = null, layout = null, backgroundConflicts = [], backgroundExcluded = new Map();
 let graphBackgroundE = null, graphInferenceE = null, graphBackgroundConflict = null, graphBackgroundExcluded = new Map();
@@ -878,7 +961,13 @@ function buildGraph() {
   const classOf = new Map(); cls.forEach((c, i) => c.forEach(x => classOf.set(x, i)));
   // Search reveals matching positive nodes temporarily, preserving the user's
   // graph selections and background when the query is cleared.
-  const hidden = literal => inBackground(baseId(literal)) || (isNegative(literal) ? !state.negativeShown.has(baseId(literal)) : state.excluded.has(literal) && !graphSearch.matches.has(literal));
+  // An assumption the reader made stays on the diagram, where the folding
+  // puts it in the True box, or the False box when its negation is assumed,
+  // so the decision is visible where its consequences are. The topic's own
+  // fixed background is not a decision and stays off the diagram.
+  const assumed = literal => inBackground(baseId(literal)) && !topicBackground.includes(baseId(literal));
+  const hidden = literal => isNegative(literal) ? !state.negativeShown.has(baseId(literal)) || (inBackground(baseId(literal)) && !assumed(literal))
+    : assumed(literal) ? false : inBackground(literal) || state.excluded.has(literal) && !graphSearch.matches.has(literal);
   const nodeFor = literal => literal === FALSE ? 'falsity' : (isNegative(literal) ? 'n' : 'c') + classOf.get(baseId(literal));
   const nodes = [];
   cls.forEach((c, i) => {
@@ -1048,6 +1137,62 @@ function impliedArrows(edges) {
     }
   }
   return implied;
+}
+
+// A premise stroke already joins a conjunct to the box that holds the ∧, so an
+// arrow between those same two boxes only repeats it: when C is equivalent to
+// A ∧ B, the strokes from A and B into the ∧ say what the arrows C ⇒ A and
+// C ⇒ B say. Hidden with the transitive reduction, since this is again an
+// arrow the displayed diagram already gives. No conjecture guard is needed. A
+// conjunction entails each of its conjuncts as a matter of logic, and an ∧
+// joins a principle's box only when that principle's implication to every
+// conjunct is already proved.
+function premiseEchoes(edges, byId) {
+  const boxOf = id => byId.get(id)?.parent || id;
+  const pairKey = (a, b) => a < b ? a + '>' + b : b + '>' + a;
+  const strokes = new Set();
+  for (const e of edges) if (e.toJunction) {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from !== to) strokes.add(pairKey(from, to));
+  }
+  const echoed = new Set();
+  if (!strokes.size) return echoed;
+  for (const e of edges) if (!e.toJunction) {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from !== to && strokes.has(pairKey(from, to))) echoed.add(e.id);
+  }
+  return echoed;
+}
+
+// A box and the ∧ circles inside it are all equivalent, so an arrow leaving the
+// box and an arrow leaving one of its circles, both landing in the same box,
+// are one connection drawn twice. That is what makes a box holding several
+// circles fan out: each circle carries its own consequences, and the principle
+// usually carries them too. Keep one arrow for each ordered pair of boxes,
+// preferring a proved one, and the principle's own arrow over a circle's. Only
+// a group that one of the circles contributes to is collapsed. Two arrows that
+// both leave the box itself record separate theorems between the same pair of
+// classes, and those are left alone.
+function boxDuplicates(arrows, byId) {
+  const boxOf = id => byId.get(id)?.parent || id;
+  const conjectural = e => e.conjectured || e.r?.status === 'conjectured';
+  const fromCircle = e => e.from !== boxOf(e.from);
+  const groups = new Map();
+  for (const e of arrows) {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from === to) continue;
+    const key = from + '>' + to;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  }
+  const hidden = new Set();
+  for (const group of groups.values()) {
+    if (group.length < 2 || !group.some(fromCircle)) continue;
+    const rank = e => (conjectural(e) ? 2 : 0) + (fromCircle(e) ? 1 : 0);
+    const keep = group.reduce((a, b) => rank(b) < rank(a) || rank(b) === rank(a) && b.id < a.id ? b : a);
+    for (const e of group) if (e !== keep) hidden.add(e.id);
+  }
+  return hidden;
 }
 
 // Quotient the display by proved equivalence, including the logical constants.
@@ -1566,7 +1711,15 @@ function renderGraph() {
   const L = layout;
   // Positions always come from the full arrow set, so the reduction only
   // hides arrows and never moves a node.
-  if (state.reduced) { const implied = impliedArrows(L.edges); L.edges = L.edges.filter(e => !implied.has(e.id)); }
+  // The first two rules read the full arrow set, so hiding one arrow never
+  // changes what the other hides. The third then picks a survivor among the
+  // arrows the first two leave standing, so the arrow it keeps is drawn.
+  if (state.reduced) {
+    const implied = impliedArrows(L.edges), echoed = premiseEchoes(L.edges, L.byId);
+    const standing = L.edges.filter(e => !e.toJunction && !implied.has(e.id) && !echoed.has(e.id));
+    const duplicated = boxDuplicates(standing, L.byId);
+    L.edges = L.edges.filter(e => !implied.has(e.id) && !echoed.has(e.id) && !duplicated.has(e.id));
+  }
   empty.hidden = !(state.conjectureOnly || state.unpublishedOnly) || L.edges.length > 0 || graphSearch.matches.size > 0;
   empty.textContent = state.conjectureOnly && state.leanOnly
     ? 'No arrows match these filters. Turn off Lean-verified only to show conjectures.'
@@ -1654,6 +1807,13 @@ function applyGraphSearch(focus = false) {
   }
 }
 function applyView() { const vp = document.getElementById('vp'); if (vp) vp.setAttribute('transform', `translate(${view.tx},${view.ty}) scale(${view.k})`); }
+// The view belongs to the reader. Only the first successful fit, a change in
+// the size of the graph pane, and the fit button itself move it. Redrawing
+// after a change of content leaves it alone, so showing a premise or changing
+// a filter no longer throws away a chosen zoom. If the new content lands
+// outside the current view, the fit button brings the whole diagram back.
+let viewFitted = false;
+function fitInitial() { if (!viewFitted) fit(); }
 function fit() {
   const L = layout; if (!L || !L.visible.length) return;
   const xs = L.visible.map(n => L.x.get(n.id) - L.size.get(n.id).w / 2), xe = L.visible.map(n => L.x.get(n.id) + L.size.get(n.id).w / 2);
@@ -1664,6 +1824,7 @@ function fit() {
   view.k = Math.min(W / (maxX - minX), H / (maxY - minY), 1.4);
   view.tx = (W - (maxX + minX) * view.k) / 2; view.ty = (H - (maxY + minY) * view.k) / 2;
   applyView();
+  viewFitted = true;
 }
 // pan / zoom
 (function () {
@@ -1737,6 +1898,22 @@ function hover(h) {
 const relationClasses = ['rel-base', 'rel-entailed', 'rel-excluded', 'rel-consistent', 'rel-separated', 'rel-independent', 'rel-open', 'rel-conjectured', 'rel-inconsistent'];
 const relationPhrase = {entailed: 'Entailed by selection', excluded: 'Excluded by selection', consistent: 'Consistent with selection', separated: 'Negation is consistent with selection', independent: 'Independent of selection', open: 'Open relative to selection', conjectured: 'Conjectured relation to selection'};
 function relationTooltip(relation) { return relationPhrase[relation.kind] + (relation.limited ? ' (outside selected sources)' : ''); }
+// Whether the selection can hold alongside the background is one fact about the
+// whole shading, so it is reported once rather than spread over every box it
+// colours. Reporting it matters because every triangle in the diagram needs a
+// model of the selection: an unwitnessed selection shows none anywhere, and
+// without this line that absence is the only clue that it has none.
+function selectionConsistencyLine(consistency) {
+  if (!consistency) return null;
+  if (consistency.status === 'inconsistent') return {kind: 'inconsistent', text: 'Selection is inconsistent with the background (⇒ ⊥); every box is excluded.'};
+  if (consistency.status === 'consistent') {
+    const model = byMid.get(consistency.models[0]), who = model ? ` (${model.name})` : '';
+    return {kind: 'implies', text: consistency.limited
+      ? `Consistent with the background outside selected sources${who}.`
+      : `Consistent with the background${who}.`};
+  }
+  return {kind: 'open', text: 'Not shown consistent with the background.'};
+}
 function selectionRelation(base, target) {
   const status = expressionStatus(base, target).status;
   if (status === 'implies') return {kind: 'entailed'};
@@ -1767,10 +1944,16 @@ function applySelection() {
   };
   // An inconsistent selection cannot hold with any node. Highlight every box
   // as excluded while proof readouts retain their inconsistent-antecedent status.
-  const baseInconsistent = !!base && !!layout && consistencyStatus(expressionLiterals(base)).status === 'inconsistent';
+  const baseConsistency = !!base && !!layout ? consistencyStatus(expressionLiterals(base)) : null;
+  const baseInconsistent = baseConsistency?.status === 'inconsistent';
+  const consistencyLine = selectionConsistencyLine(baseConsistency);
   const shading = !!base && !!layout;
   svg.classList.toggle('shaded', shading);
   svg.classList.toggle('inconsistent-selection', baseInconsistent);
+  // Only the wholly unsettled case dashes the selected box. A selection shown
+  // consistent by evidence the source filters hide is still shown consistent,
+  // and the legend says where the witness came from.
+  svg.classList.toggle('unwitnessed-selection', baseConsistency?.status === 'open');
   svg.querySelectorAll('#nodes .node').forEach(n => {
     const members = (n.dataset.members || '').split(',').filter(Boolean), box = layout.byId.get(n.dataset.class);
     n.classList.remove(...relationClasses);
@@ -1784,7 +1967,7 @@ function applySelection() {
         n.classList.add('rel-excluded'); counts.excluded++;
         title = 'Excluded: selection is inconsistent';
       }
-      else if (inBase) { n.classList.add('rel-base'); title = 'Selected'; }
+      else if (inBase) { n.classList.add('rel-base'); title = 'Selected. ' + consistencyLine.text; }
       else if (!n.classList.contains('from-background')) {
         const target = graphNodeExpression(box);
         // False, including everything equivalent to it under the background,
@@ -1808,7 +1991,7 @@ function applySelection() {
       n.classList.add('rel-' + relation.kind);
       // A boxed conjunction is already counted through its equivalence box.
       if (!j.parent) countRelation(relation.kind);
-      title += '\n' + (baseInconsistent ? 'Excluded: selection is inconsistent' : inBase ? 'Selected conjunction' : relationTooltip(relation));
+      title += '\n' + (baseInconsistent ? 'Excluded: selection is inconsistent' : inBase ? 'Selected conjunction. ' + consistencyLine.text : relationTooltip(relation));
     }
     n.querySelector('title').textContent = title;
   });
@@ -1820,8 +2003,8 @@ function applySelection() {
   const label = Array.isArray(base) && fullLabel.length > 100 ? `${base.length} selected principles` : fullLabel;
   const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
   const keys = key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
-  const conflict = baseInconsistent ? '<span class="rel-status inconsistent">Selection is inconsistent with the background (⇒ ⊥); every box is excluded.</span>' : '';
-  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${conflict}${keys}`;
+  const status = `<span class="rel-status ${consistencyLine.kind}">${esc(consistencyLine.text)}</span>`;
+  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${status}${keys}`;
 }
 
 
@@ -2228,19 +2411,23 @@ function openPage(sel) { hover(null); stopFlow(); renderPage(sel); document.getE
 function showTab(tab) {
   hover(null); stopFlow();
   state.tab = tab;
-  if (tab === 'graph' || tab === 'open') {
-    // Reuse the controls so background, source selections and click slots are shared.
+  if (tab === 'graph' || tab === 'open' || tab === 'lattice') {
+    // One sidebar for the three views, so background, source selections,
+    // click slots, scrolling and pane sizes are shared rather than duplicated.
     const pane = document.getElementById('pane-' + tab);
     pane.prepend(document.getElementById('graph-sidebar'), document.getElementById('sidebar-divider'));
     const heading = document.getElementById('source-filter-heading');
     heading.textContent = tab === 'open' ? 'Evidence sources' : 'Arrow sources';
-    heading.title = tab === 'open' ? 'Filter the evidence used to assess conjectures.' : 'Filter displayed arrows. Background consequences always use all recorded proofs.';
+    heading.title = tab === 'open' ? 'Filter the evidence used to assess conjectures.'
+      : tab === 'lattice' ? 'Draw the lattice from the selected sources alone. Background consequences always use all recorded proofs.'
+      : 'Filter displayed arrows. Background consequences always use all recorded proofs.';
   }
   document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x.dataset.tab === tab));
   document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-' + tab));
   document.getElementById('pop').hidden = true;
   placeDetail();
-  if (tab === 'graph') fit();
+  if (tab === 'graph') fitInitial();
+  if (tab === 'lattice') { renderLattice(); latticeFitInitial(); }
 }
 
 // ---------------------------------------------------------------- detail
@@ -2252,6 +2439,7 @@ function wire(el) {
   el.querySelectorAll('button[data-graph-connection]').forEach(b => b.addEventListener('click', () => selectGraphEdge(graphEdgesByKey.get(b.dataset.graphConnection))));
   el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', ev => select({ type: 'principle', id: b.dataset.principle }, ev.shiftKey || ev.metaKey || ev.ctrlKey)));
   el.querySelectorAll('button[data-remove-selection]').forEach(b => b.addEventListener('click', () => select({type: 'principle', id: b.dataset.removeSelection}, true)));
+  el.querySelectorAll('button[data-selection-action]').forEach(b => b.addEventListener('click', () => applySelectionAction(b.dataset.selectionAction)));
   el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
   el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
   el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
@@ -2299,12 +2487,37 @@ function renderDetail() {
       return `<li><details><summary>${esc(name(literal))}</summary>${isNegative(literal) ? '<p>Negation of:</p>' : ''}<p>${esc(principle?.statement || name(literal))}</p></details><button class="lnk" data-remove-selection="${esc(literal)}" aria-label="Remove ${esc(name(literal))} from selection">remove</button></li>`;
     }).join('')}</ul>`;
     h += statusLine('Joint consistency', consistencyStatus(sel.premises), true);
+    const actions = selectionActions(sel.premises);
+    if (actions) h += `<div class="links">${actions}</div>`;
   } else if (sel.type === 'junction') {
     const junction = layout?.byId.get(sel.id);
     if (!junction) { el.hidden = true; return; }
     const consequences = junction.consequences || layout.edges.filter(e => e.from === junction.id);
     h += `<div class="pop-t">${esc(junction.premises.map(name).join(' ∧ '))}</div><ul>${consequences.map(e => `<li><button class="lnk" data-graph-connection="${esc(e.key)}" data-junction-proof="${esc(junction.id)}" data-proof-index="${consequences.indexOf(e)}">${esc(name(e.conclusion || e.b))}</button> ${e.r ? certBadges(e.r) : `<span class="badge ${e.conjectured ? 'conj' : 'kind'}">${e.conjectured ? 'conjecture' : 'derived proof'}</span>`}</li>`).join('')}</ul>`;
     if (junction.equivalence) h += '<h3>Equivalence</h3>' + junction.equivalence.map(e => statusLine(esc(e.label), e.status)).join('');
+  } else if (sel.type === 'lattice-edge') {
+    // Where the arrow comes from, and what rules out its converse. The floor
+    // and the ceiling carry their implications for free, so for those the only
+    // question worth asking is the one about the converse.
+    h += `<div class="pop-t">${esc(sel.fromLabel)} ⇒ ${esc(sel.toLabel)}</div>`;
+    h += '<div class="rel-head">Why</div>';
+    if (!sel.from) h += '<p class="dim">Everything follows from a contradiction.</p>';
+    else if (!sel.to.length) h += '<p class="dim">Everything entails what the background already gives.</p>';
+    else h += sel.to.map(q => statusLine(`${esc(sel.fromLabel)} ⇒ ${esc(name(q))}`, implicationStatus(sel.from, q))).join('');
+    h += '<div class="rel-head">Converse</div>';
+    if (!sel.from) {
+      h += statusLine(`${esc(sel.toLabel)} ⇒ False (⊥)`, consistencyStatus(sel.to));
+      h += `<p class="dim">${sel.reverses === 'ruled out'
+        ? 'A model satisfies it alongside the background, so it is not the contradiction.'
+        : 'Nothing recorded shows it can hold with the background, so it might yet be the contradiction.'}</p>`;
+    } else {
+      h += sel.missing.map(p =>
+        statusLine(`${esc(sel.toLabel)} ⇒ ${esc(name(p))}`, implicationStatus(sel.to, p))).join('')
+        || '<p class="dim">Nothing separates the two.</p>';
+      h += `<p class="dim">${sel.reverses === 'ruled out'
+        ? 'A model settles the converse, so these are genuinely different nodes.'
+        : 'The converse is open, so these two might yet collapse into one node.'}</p>`;
+    }
   } else if (sel.type === 'trivial') {
     h += `<div class="pop-t">${esc(sel.display)}</div><p>${sel.from === 'falsity' ? 'False implies every proposition (explosion).' : 'Every proposition implies True.'}</p>`;
   } else if (sel.type === 'truth') {
@@ -2322,7 +2535,7 @@ function renderDetail() {
       const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
       if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
     }
-    h += '<div class="links"><button class="lnk" data-goto="1">details</button></div>';
+    h += `<div class="links"><button class="lnk" data-goto="1">details</button>${selectionActions([(sel.negative ? '!' : '') + sel.id])}</div>`;
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
@@ -2356,11 +2569,14 @@ function renderDetail() {
 }
 function placeDetail() {
   const el = document.getElementById('pop');
-  const docked = document.getElementById('pane-graph').dataset.active === 'true';
-  document.getElementById(docked ? 'graph-details' : 'floating-details').appendChild(el);
+  // One popup, docked in whichever view is open, so a principle reads the same
+  // way on the lattice as it does on the graph.
+  const lattice = document.getElementById('pane-lattice')?.dataset.active === 'true';
+  const docked = lattice || document.getElementById('pane-graph').dataset.active === 'true';
+  document.getElementById(lattice ? 'lat-detail' : docked ? 'graph-details' : 'floating-details').appendChild(el);
   if (docked) { el.style.removeProperty('left'); el.style.removeProperty('top'); }
 }
-document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && el.parentElement.id !== 'graph-details' && !el.contains(ev.target)) el.hidden = true; });
+document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !['graph-details', 'lat-detail'].includes(el.parentElement.id) && !el.contains(ev.target)) el.hidden = true; });
 document.addEventListener('keydown', ev => {
   if (ev.key !== 'Escape' || ev.target.id === 'graph-search' || document.body.classList.contains('resizing-panes')) return;
   if (state.focus || state.selected?.type === 'principle') select(null);
@@ -2387,6 +2603,7 @@ function select(sel, extend = false) {
   else if (sel.type === 'selection') state.focus = [...sel.premises];
   if (sel?.type === 'model') { state.modelId = sel.id; renderModels(); }
   state.selected = sel; renderDetail(); applySelection();
+  if (state.tab === 'lattice' && typeof renderLattice === 'function') renderLattice();
 }
 
 // ---------------------------------------------------------------- header
@@ -2416,6 +2633,60 @@ function setAssumption(id, sign) {
   if (sign === 'negative') negativeBackground.add(id);
   state.modelId = null; state.selected = null;
   saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+// The sidebar's own moves, offered on the selected principles from the
+// details pane: hide them, hand them to the background, or add their
+// negations. Each does exactly what the sidebar control would, in whichever
+// view is open, and nothing else.
+function literalShown(l) {
+  const id = baseId(l);
+  if (state.tab === 'lattice') return lattice.shown.includes(l);
+  return isNegative(l) ? state.negativeShown.has(id) : !state.excluded.has(id);
+}
+function selectionActions(literals) {
+  if (state.tab !== 'graph' && state.tab !== 'lattice') return '';
+  const active = literals.filter(l => byPid.has(baseId(l)) && !inBackground(baseId(l)));
+  if (!active.length) return '';
+  const plural = active.length > 1;
+  const button = (kind, label, title) => `<button class="lnk" data-selection-action="${kind}" title="${esc(title)}">${label}</button>`;
+  let h = '';
+  if (active.some(literalShown)) h += button('hide', 'Hide', `Take the selected ${plural ? 'principles' : 'principle'} off the diagram, as unchecking ${plural ? 'them' : 'it'} in the sidebar would.`);
+  if (active.some(l => !literalShown(negate(l)))) h += button('negate', plural ? 'Add negations' : 'Add negation', `Show the ${plural ? 'negations' : 'negation'} too, as checking ✗ in the sidebar would.`);
+  if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'Move to background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  return h;
+}
+function repaintGraph() { refreshPrincipleControls(); renderGraph(); fitInitial(); }
+function applySelectionAction(kind) {
+  const sel = state.selected;
+  const literals = sel?.type === 'principle' ? [(sel.negative ? '!' : '') + sel.id] : sel?.type === 'selection' ? sel.premises : [];
+  const active = literals.filter(l => byPid.has(baseId(l)) && !inBackground(baseId(l)));
+  if (!active.length) return;
+  const onLattice = state.tab === 'lattice';
+  if (kind === 'background') {
+    for (const l of active) {
+      const id = baseId(l);
+      if (topicBackground.includes(id)) continue;
+      (isNegative(l) ? negativeBackground : background).add(id);
+    }
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !active.some(a => baseId(a) === baseId(l))); lattice.selected = null; }
+    // What is now assumed is no longer something to shade relative to.
+    state.modelId = null; state.selected = null; state.focus = null;
+    saveBackground(); refreshPrincipleControls(); renderAll(true);
+    return;
+  }
+  if (kind === 'hide') {
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !active.includes(l)); lattice.selected = null; }
+    else for (const l of active) isNegative(l) ? state.negativeShown.delete(baseId(l)) : state.excluded.add(baseId(l));
+    select(null);
+    if (!onLattice) repaintGraph();
+    return;
+  }
+  if (kind === 'negate') {
+    if (onLattice) { for (const l of active) if (!lattice.shown.includes(negate(l))) lattice.shown.push(negate(l)); }
+    else for (const l of active) isNegative(l) ? state.excluded.delete(baseId(l)) : state.negativeShown.add(baseId(l));
+    if (onLattice) { renderLatticeFilters(); renderLattice(); } else repaintGraph();
+    renderDetail();
+  }
 }
 function changeBackground(id, assumed) {
   if (!assumed) {
@@ -2490,7 +2761,8 @@ function renderAll(refit) {
     renderSubscripts(backgroundPage);
     mountPaperCatalogue(); backgroundPage.dataset.ready = 'true';
   }
-  renderGraph(); if (refit) fit(); renderModels(); renderResults(); renderOpen();
+  renderGraph(); if (refit) fitInitial(); renderModels(); renderResults(); renderOpen();
+  if (state.tab === 'lattice' && typeof renderLattice === 'function') { renderLatticeFilters(); renderLattice(); }
 }
 function resetBackground() {
   for (const id of [...background]) if (!topicBackground.includes(id)) background.delete(id);
@@ -2580,12 +2852,11 @@ document.getElementById('reduce-arrows').addEventListener('change', e => { state
 document.getElementById('fit').addEventListener('click', fit);
 (function () {
   const el = document.getElementById('pr-filters');
-  const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-clear-graph="${p.id}">clear</button><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
+  const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
   el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
-  const repaint = () => { refreshPrincipleControls(); renderGraph(); fit(); };
+  const repaint = repaintGraph;
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
   el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
-  el.querySelectorAll('[data-clear-graph]').forEach(b => b.addEventListener('click', () => { state.excluded.add(b.dataset.clearGraph); state.negativeShown.delete(b.dataset.clearGraph); repaint(); }));
   const setSelection = (rows, selected) => {
     rows.forEach(row => { const id = row.dataset.prRow; if (inBackground(id)) return; selected ? state.excluded.delete(id) : state.excluded.add(id); if (!selected) state.negativeShown.delete(id); }); repaint();
   };
@@ -2645,7 +2916,7 @@ document.getElementById('graph-search').addEventListener('keydown', e => {
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 // Resize without rebuilding either list, so selections, scroll positions and click slots survive.
 (function setupPaneDividers() {
-  const panes = ['graph', 'open'].map(tab => document.getElementById('pane-' + tab));
+  const panes = ['graph', 'open', 'lattice'].map(tab => document.getElementById('pane-' + tab));
   const sidebar = document.getElementById('graph-sidebar');
   const workspace = document.querySelector('.graph-workspace');
   const properties = {sidebar: '--sidebar-width', background: '--background-height', details: '--details-height'};
@@ -2743,6 +3014,429 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
   apply();
 })();
 window.addEventListener('resize', () => { if (state.tab === 'graph') fit(); });
+// ---------------------------------------------------------------- lattice view
+// A Hasse diagram of the meet-semilattice that the chosen principles generate,
+// as a separate view rather than an option on the implication graph. The two
+// answer different questions. There, every node is a principle somebody
+// recorded and the reader filters the whole map. Here, every meet of the chosen
+// principles is a node in its own right, so the node count grows with the
+// subsets rather than with the choices, and the reader has to choose a few
+// principles deliberately.
+//
+// A node is identified with the set of chosen principles its conjunction is
+// known to entail, its closure. That is exact rather than a heuristic: a meet
+// entails precisely the chosen principles in its closure, so two meets are
+// known equivalent exactly when their closures match, and the whole order is
+// then set inclusion. Everything below reads off that.
+//
+// Conjunctions are never nested inside another node here. On a Hasse diagram
+// the greatest lower bound of two nodes is their conjunction, so a meet that
+// turns out to be equivalent to a named principle is drawn once, under that
+// principle's name.
+const LATTICE_CAP = 220;
+const lattice = {shown: [], nodes: [], edges: [], selected: null, capped: 0, view: {k: 1, tx: 0, ty: 0}, fitted: false};
+
+function latticeEntails(premises, conclusions) {
+  return conclusions.every(c => !!conjunctionProof(premises, [c]));
+}
+// The chosen principles that this conjunction is known to entail.
+function latticeClosure(premises) { return lattice.shown.filter(p => latticeEntails(premises, [p])); }
+const latticeKey = gens => gens.slice().sort().join('|');
+
+// An irredundant generating set, so a node is labelled by what actually makes
+// it rather than by everything it happens to entail.
+function latticeGenerators(gens) {
+  let kept = gens.slice();
+  for (const p of gens) {
+    const without = kept.filter(q => q !== p);
+    if (without.length && latticeEntails(without, [p])) kept = without;
+  }
+  return kept;
+}
+
+// Every named principle the map records as equivalent to this meet. Only the
+// positive forms are searched: a negation is not itself a principle the map
+// names, and it reaches the node through the generators instead.
+function latticeEquivalents(gens) {
+  return ids.filter(p => latticeEntails(gens, [p]) && latticeEntails([p], gens));
+}
+// The names a node answers to: the constants, then every chosen literal that
+// is the node rather than merely above it. Known equivalents share one node, as
+// they share one box on the implication graph, so nothing is drawn twice under
+// two names. Nothing the reader did not choose puts its name on the diagram,
+// which is why ⊤ does not drag in every background consequence the map records.
+// The reader's own assumptions name the ceiling, or the floor when their
+// negation is assumed, so a decision to background a principle stays visible.
+const latticeAssumptions = () => ({
+  top: [...background].filter(id => !topicBackground.includes(id)),
+  bottom: [...negativeBackground].filter(id => !topicBackground.includes(id))
+});
+function latticeLabels(n) {
+  const out = [];
+  const push = (text, literal) => { if (!out.some(l => l.text === text)) out.push({text, literal}); };
+  if (n.inconsistent) { push('⊥', null); for (const id of latticeAssumptions().bottom) push(name(id), id); }
+  if (n.top) { push('⊤', null); for (const id of latticeAssumptions().top) push(name(id), id); }
+  for (const l of n.self) push(name(l), l);
+  return out;
+}
+function latticeNames(n) { return latticeLabels(n).map(l => l.text); }
+
+function buildLattice() {
+  const nodes = new Map();
+  lattice.capped = 0;
+  const add = premises => {
+    const gens = latticeClosure(premises);
+    const key = latticeKey(gens);
+    if (nodes.has(key)) return nodes.get(key);
+    if (nodes.size >= LATTICE_CAP) { lattice.capped++; return null; }
+    const node = {id: 'lat:' + (key || 'top'), key, gens, set: new Set(gens)};
+    nodes.set(key, node);
+    return node;
+  };
+  add([]);                                   // the empty meet: everything the background already gives
+  for (const p of lattice.shown) add([p]);
+  // Closing under pairwise meet suffices, since the set is meet closed at every
+  // step and a meet of two meets is a meet of their generators.
+  for (let grew = true; grew && !lattice.capped; ) {
+    grew = false;
+    const list = [...nodes.values()];
+    for (let i = 0; i < list.length && !lattice.capped; i++)
+      for (let j = i + 1; j < list.length && !lattice.capped; j++) {
+        const before = nodes.size;
+        add([...new Set([...list[i].gens, ...list[j].gens])]);
+        if (nodes.size !== before) grew = true;
+      }
+  }
+  const all = [...nodes.values()];
+  for (const n of all) {
+    n.consistency = consistencyStatus(n.gens);
+    n.inconsistent = n.consistency.status === 'inconsistent';
+    // ⊤ is not only the empty meet. A chosen principle that follows from the
+    // background is equivalent to it and belongs in the same node.
+    n.top = !n.inconsistent && latticeEntails([], n.gens);
+    n.generators = latticeGenerators(n.gens);
+    // A chosen literal that entails the whole meet is that meet, not just
+    // something above it.
+    n.self = n.gens.filter(l => latticeEntails([l], n.gens));
+    n.labels = latticeLabels(n);
+    n.names = n.labels.map(l => l.text);
+    n.equivalent = n.names.length > 1;
+    // A meet no chosen principle answers to needs no label: where it sits
+    // already says it is the conjunction of the nodes above it. It is drawn as
+    // an ∧, as such a node is on the implication graph. The map's own name for
+    // it, if it has one, goes in the readouts rather than onto the diagram.
+    n.meet = !n.names.length;
+    n.mapName = n.meet ? (latticeEquivalents(n.gens)[0] || null) : null;
+    n.label = n.names[0] || n.generators.map(name).join(' ∧ ');
+  }
+  // False and True always anchor the diagram, even before anything is chosen.
+  let bottom = all.find(n => n.inconsistent);
+  if (!bottom) {
+    bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), generators: [], self: [], meet: false, mapName: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}};
+    bottom.labels = latticeLabels(bottom); bottom.names = bottom.labels.map(l => l.text); bottom.equivalent = bottom.names.length > 1;
+    all.push(bottom);
+  }
+  bottom.bottom = true;
+  const top = all.find(n => n.top) || null;
+
+  // The order is inclusion of closures: a larger closure is a stronger meet.
+  // Below is strictly stronger, so arrows from it ascend, as on the graph.
+  const below = (a, b) => a !== b && (a.bottom || (!b.bottom && b.set.size < a.set.size && [...b.set].every(p => a.set.has(p))));
+  const edges = [];
+  for (const a of all) for (const b of all) {
+    if (!below(a, b)) continue;
+    if (all.some(c => c !== a && c !== b && below(a, c) && below(c, b))) continue;   // keep only covers
+    edges.push({id: a.id + '>' + b.id, from: a, to: b, reverses: latticeReverses(a, b)});
+  }
+  lattice.nodes = all; lattice.edges = edges; lattice.top = top; lattice.bottomNode = bottom;
+}
+
+// Whether the weaker end might, for all the map records, entail the stronger
+// one after all. This is what the diagram has to show clearly: a solid arrow is
+// a settled strict implication, a dashed one is a pair that could still
+// collapse into a single node.
+// Only the selected sources count here, for models as well as proofs. A model
+// the source filter hides still appears in the readout, marked as outside the
+// selection, but it does not settle an arrow the diagram draws.
+function latticeReverses(lower, upper) {
+  if (lower.bottom) {
+    // ⊥ ⇒ X reverses unless X is shown consistent with the background.
+    return upper.consistency.status === 'consistent' && !upper.consistency.limited ? 'ruled out' : 'open';
+  }
+  const missing = lower.gens.filter(p => !upper.set.has(p));
+  const seen = missing.map(p => implicationStatus(upper.gens, p));
+  if (seen.some(s => s.status === 'excludes' || s.status === 'independent' && !s.limited)) return 'ruled out';
+  return 'open';
+}
+
+function latticeLayout() {
+  const {nodes, edges} = lattice;
+  if (!nodes.length) return;
+  const out = new Map(nodes.map(n => [n.id, []])), inn = new Map(nodes.map(n => [n.id, []]));
+  for (const e of edges) { out.get(e.from.id).push(e); inn.get(e.to.id).push(e); }
+  // Rank by the longest ascending chain from the floor, so covers always rise
+  // exactly one row and the diagram reads as a Hasse diagram should.
+  const rank = new Map();
+  const order = [];
+  const visit = n => {
+    if (rank.has(n.id)) return rank.get(n.id);
+    rank.set(n.id, 0);
+    const r = inn.get(n.id).length ? Math.max(...inn.get(n.id).map(e => visit(e.from) + 1)) : 0;
+    rank.set(n.id, r); order.push(n); return r;
+  };
+  for (const n of nodes) visit(n);
+  const maxRank = Math.max(...nodes.map(n => rank.get(n.id)));
+  const rows = [];
+  for (const n of nodes) (rows[maxRank - rank.get(n.id)] ||= []).push(n);
+  // The same padding as a box on the implication graph: eight above and below,
+  // seventeen a line, twelve more for the equivalent header, and an ∧ the size
+  // of the graph's own. This text is centred on its y rather than sitting on a
+  // baseline, so the offsets below are centres, but the box comes out the same.
+  for (const n of nodes) {
+    if (n.meet) { n.w = n.h = 22; continue; }
+    n.w = Math.max(80, Math.max(...n.names.map(t => t.length)) * 7.2 + 26);
+    n.h = 16 + 17 * n.names.length + (n.equivalent ? 12 : 0);
+  }
+  // A few barycentre sweeps, as on the implication graph.
+  for (let pass = 0; pass < 6; pass++) {
+    const dir = pass % 2 ? 1 : -1;
+    for (const row of rows) {
+      if (!row) continue;
+      for (const n of row) {
+        const nbrs = (dir < 0 ? inn.get(n.id).map(e => e.from) : out.get(n.id).map(e => e.to)).filter(m => m.x != null);
+        n.bary = nbrs.length ? nbrs.reduce((s, m) => s + m.x, 0) / nbrs.length : (n.x ?? 0);
+      }
+      row.sort((a, b) => a.bary - b.bary);
+      let x = 0;
+      for (const n of row) { n.x = x + n.w / 2; x += n.w + 26; }
+      const width = x - 26;
+      for (const n of row) n.x -= width / 2;
+    }
+  }
+  rows.forEach((row, i) => { if (row) for (const n of row) n.y = i * 74; });
+  lattice.bounds = {
+    minX: Math.min(...nodes.map(n => n.x - n.w / 2)) - 30, maxX: Math.max(...nodes.map(n => n.x + n.w / 2)) + 30,
+    minY: Math.min(...nodes.map(n => n.y - n.h / 2)) - 24, maxY: Math.max(...nodes.map(n => n.y + n.h / 2)) + 24,
+  };
+}
+
+// What a node is, as an expression the relation engine understands.
+function latticeExpression(n) {
+  if (n.inconsistent) return FALSE;
+  if (n.top) return TRUE;
+  return n.generators.length === 1 ? n.generators[0] : n.generators;
+}
+function latticeApplyView() {
+  const vp = document.getElementById('lat-vp');
+  if (vp) vp.setAttribute('transform', `translate(${lattice.view.tx},${lattice.view.ty}) scale(${lattice.view.k})`);
+}
+function latticeFit() {
+  const svg = document.getElementById('lat-graph'), b = lattice.bounds;
+  if (!svg || !b) return;
+  const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
+  lattice.view.k = Math.min(W / (b.maxX - b.minX), H / (b.maxY - b.minY), 1.4);
+  lattice.view.tx = (W - (b.maxX + b.minX) * lattice.view.k) / 2;
+  lattice.view.ty = (H - (b.maxY + b.minY) * lattice.view.k) / 2;
+  latticeApplyView(); lattice.fitted = true;
+}
+function latticeFitInitial() { if (!lattice.fitted) latticeFit(); }
+
+function renderLattice() {
+  buildLattice(); latticeLayout();
+  const svg = document.getElementById('lat-graph');
+  if (!svg) return;
+  const edge = e => {
+    const x1 = e.from.x, y1 = e.from.y - e.from.h / 2, x2 = e.to.x, y2 = e.to.y + e.to.h / 2;
+    const cls = 'lat-edge ' + (e.reverses === 'open' ? 'may-reverse' : 'strict');
+    const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
+    return `<g class="lat-edge-g${lattice.selected === e.id ? ' sel' : ''}" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
+  };
+  // The same shading as the graph, read off the same selection. Here it repeats
+  // what the diagram already shows in places, which does no harm and keeps one
+  // reading of the colours across the two views.
+  const base = shadingBase();
+  const baseLiterals = base == null ? [] : expressionLiterals(base);
+  const baseMembers = new Set(base === TRUE ? [TRUE] : baseLiterals);
+  const baseInconsistent = base != null && consistencyStatus(baseLiterals).status === 'inconsistent';
+  // The selected node is the one whose closure the selection generates, so a
+  // click on any of the names an equivalence box carries selects that box,
+  // as on the graph. A selection made elsewhere from principles this diagram
+  // does not show has no closure here, and then only its literal node counts.
+  const baseKey = base != null && baseLiterals.every(l => lattice.shown.includes(l)) ? latticeKey(latticeClosure(baseLiterals)) : null;
+  const counts = {entailed: 0, excluded: 0, consistent: 0, separated: 0};
+  const node = n => {
+    const expression = latticeExpression(n);
+    let relation = '';
+    if (base != null) {
+      if (sameExpression(base, expression) || baseKey != null && baseKey === n.key || n.labels.some(l => l.literal && baseMembers.has(l.literal))) relation = 'rel-base';
+      else if (baseInconsistent) { relation = 'rel-excluded'; counts.excluded++; }
+      // The floor is excluded by any consistent selection, as on the graph;
+      // asking the proof engine about it would count it as entailed instead.
+      else if (n.inconsistent) { relation = 'rel-excluded'; counts.excluded++; }
+      else {
+        const found = selectionRelation(base, expression);
+        relation = 'rel-' + found.kind;
+        if (found.kind === 'independent') { counts.consistent++; counts.separated++; }
+        else if (Object.hasOwn(counts, found.kind)) counts[found.kind]++;
+      }
+    }
+    const cls = 'lat-node' + (n.inconsistent ? ' lat-bottom' : n.top ? ' lat-top' : '')
+      + (n.meet ? ' lat-meet' : '') + (n.equivalent ? ' lat-equivalent' : '')
+      + (relation ? ' ' + relation : '') + (lattice.selected === n.id ? ' sel' : '');
+    const body = n.meet
+      ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
+      : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
+        + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 14}">equivalent</text>` : '')
+        + n.labels.map(({text: t, literal}, i) => {
+            const tag = literal ? ` data-principle="${esc(literal)}"` : t === '⊥' ? ' data-falsity="1"' : t === '⊤' ? ' data-truth="1"' : '';
+            const member = literal ? baseMembers.has(literal) : t === '⊥' ? base === FALSE : t === '⊤' && base === TRUE;
+            return `<text${tag}${member ? ' class="selection-member"' : ''} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`;
+          }).join('');
+    return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}<title>${esc(latticeTitle(n))}</title></g>`;
+  };
+  const halves = [
+    ['consistent', 'var(--rel-entailed)', 'var(--node-fill)'],
+    ['separated', 'var(--node-fill)', 'var(--rel-excluded)'],
+    ['independent', 'var(--rel-entailed)', 'var(--rel-excluded)']
+  ].map(([id, upper, lower]) => `<linearGradient id="lat-split-${id}" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="50%" stop-color="${upper}"/><stop offset="50%" stop-color="${lower}"/></linearGradient>`).join('');
+  svg.innerHTML = `<defs>${halves}
+      <marker id="lat-solid" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
+      <marker id="lat-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0.5,0.5 L9.5,5 L0.5,9.5 z" fill="var(--bg)" stroke="var(--conj)" stroke-width="1.4"/></marker>
+    </defs><g id="lat-vp">${lattice.edges.map(edge).join('')}${lattice.nodes.map(node).join('')}</g>`;
+  latticeApplyView();
+  document.getElementById('lat-count').textContent = lattice.shown.length
+    ? `${lattice.nodes.length} nodes, ${lattice.edges.length} arrows, from ${lattice.shown.length} chosen`
+    : 'Choose a principle to begin.';
+  const warn = document.getElementById('lat-warning');
+  warn.hidden = !lattice.capped;
+  if (lattice.capped) warn.textContent = `Stopped at ${LATTICE_CAP} nodes. The meets of these principles outrun the diagram; remove one to see the rest.`;
+  refreshLatticeControls();
+  renderLatticeLegend(base, baseInconsistent, counts);
+  document.getElementById('lat-hint').hidden = !!state.selected;
+  document.getElementById('lat-hint').textContent = 'Click a principle name, an ∧ or an arrow for its details. Shift-click a name to add or remove it from the selection.';
+}
+function renderLatticeLegend(base, baseInconsistent, counts) {
+  const legend = document.getElementById('lat-legend');
+  if (base == null) { legend.hidden = true; return; }
+  legend.hidden = false;
+  const line = selectionConsistencyLine(consistencyStatus(expressionLiterals(base)));
+  const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
+  legend.innerHTML = `<b>Relative to ${esc(expressionName(base))}:</b>`
+    + `<span class="rel-status ${line.kind}">${esc(line.text)}</span>`
+    + key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
+}
+function latticeTitle(n) {
+  const parts = [n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ ')];
+  if (n.mapName) parts.push('the map records this as ' + name(n.mapName));
+  if (n.top) parts.push('everything the background already gives');
+  if (!n.inconsistent && !n.top) parts.push(n.consistency.status === 'consistent' ? 'consistent with the background' : 'not shown consistent with the background');
+  return parts.join('\n');
+}
+function refreshLatticeControls() {
+  document.querySelectorAll('#lat-filters .lat-row').forEach(row => {
+    const id = row.dataset.latRow;
+    const pos = lattice.shown.includes(id), neg = lattice.shown.includes(negate(id));
+    row.querySelector('[data-lat-positive]').setAttribute('aria-pressed', pos ? 'true' : 'false');
+    row.querySelector('[data-lat-negative]').setAttribute('aria-pressed', neg ? 'true' : 'false');
+    row.classList.toggle('on', pos || neg);
+    row.classList.toggle('in-background', inBackground(id));
+    row.classList.toggle('is-collapsed', inBackground(id));
+  });
+  document.querySelectorAll('#lat-filters .pr-category').forEach(group => {
+    const ordinary = [...group.querySelectorAll('.lat-row')].filter(row => !inBackground(row.dataset.latRow));
+    group.querySelector('.pr-category-count').textContent = `${ordinary.filter(row => row.classList.contains('on')).length}/${ordinary.length}`;
+  });
+}
+function latticeToggle(id) {
+  const at = lattice.shown.indexOf(id);
+  if (at >= 0) lattice.shown.splice(at, 1); else lattice.shown.push(id);
+  lattice.selected = null;
+  renderLattice();
+  latticeFitInitial();
+}
+function renderLatticeFilters() {
+  const el = document.getElementById('lat-filters');
+  if (!el) return;
+  const row = p => `<div class="pr-row lat-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-lat-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-lat-positive="${p.id}" aria-label="Add ${esc(p.name)}" aria-pressed="false">✓</button><button data-lat-negative="${p.id}" aria-label="Add not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><span class="lat-name">${esc(p.name)}</span><span class="pr-actions"><button class="lnk" data-lat-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`;
+  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${g.principles.map(row).join('')}</div></section>`).join('');
+  renderSubscripts(el);
+  refreshLatticeControls();
+}
+(function () {
+  const el = document.getElementById('lat-filters');
+  if (!el) return;
+  renderLatticeFilters();
+  el.addEventListener('click', ev => {
+    const pos = ev.target.closest('[data-lat-positive]'), neg = ev.target.closest('[data-lat-negative]');
+    const bg = ev.target.closest('[data-lat-background]'), bulk = ev.target.closest('[data-lat-select]');
+    if (bulk) {
+      // A whole group at once, as on the graph. The node cap still applies, so
+      // a group too large for the diagram stops with the warning rather than
+      // outrunning it.
+      const members = [...bulk.closest('.pr-category').querySelectorAll('.lat-row')].map(row => row.dataset.latRow).filter(id => !inBackground(id));
+      if (bulk.dataset.latSelect === 'all') { for (const id of members) if (!lattice.shown.includes(id)) lattice.shown.push(id); }
+      else lattice.shown = lattice.shown.filter(l => !members.includes(baseId(l)));
+      lattice.selected = null;
+      renderLattice(); latticeFitInitial();
+    }
+    else if (pos) latticeToggle(pos.dataset.latPositive);
+    else if (neg) latticeToggle(negate(neg.dataset.latNegative));
+    else if (bg) {
+      // An assumption is entailed by everything, so it has no work to do as a
+      // generator. Drop both of its forms and hand the principle to the shared
+      // background, which redraws every view that is open.
+      const id = bg.dataset.latBackground;
+      lattice.shown = lattice.shown.filter(l => baseId(l) !== id);
+      lattice.selected = null;
+      changeBackground(id, true);
+      renderLatticeFilters();
+    }
+  });
+  document.getElementById('lat-clear').addEventListener('click', () => { lattice.shown = []; lattice.selected = null; renderLattice(); latticeFit(); });
+  document.getElementById('lat-fit').addEventListener('click', latticeFit);
+  const svg = document.getElementById('lat-graph');
+  svg.addEventListener('click', ev => {
+    const group = ev.target.closest('[data-lat-node]'), wire = ev.target.closest('[data-lat-edge]');
+    if (!group && !wire) { lattice.selected = null; select(null); return; }
+    lattice.selected = group ? group.dataset.latNode : wire.dataset.latEdge;
+    if (group) {
+      const n = lattice.nodes.find(x => x.id === group.dataset.latNode);
+      const literal = ev.target.closest('[data-principle]')?.dataset.principle;
+      if (literal) select({type: 'principle', id: literal}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      else if (ev.target.closest('[data-falsity]') || (n.inconsistent && !n.self.length)) select({type: 'falsity'});
+      else if (ev.target.closest('[data-truth]') || (n.top && !n.self.length)) select({type: 'truth'});
+      else if (n.self.length) select({type: 'principle', id: n.self[0]}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      else select({type: 'selection', premises: n.generators});
+      return;
+    }
+    const e = lattice.edges.find(x => x.id === wire.dataset.latEdge);
+    const lower = e.from.bottom ? null : e.from.generators;
+    select({type: 'lattice-edge', from: lower, to: e.to.generators.length ? e.to.generators : [],
+      missing: lower ? lower.filter(p => !e.to.set.has(p)) : [],
+      fromLabel: e.from.meet ? e.from.generators.map(name).join(' ∧ ') : e.from.names.join(' ≡ '),
+      toLabel: e.to.meet ? e.to.generators.map(name).join(' ∧ ') : e.to.names.join(' ≡ '),
+      reverses: e.reverses});
+  });
+  let drag = null;
+  svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty, moved: false}; });
+  svg.addEventListener('pointermove', ev => {
+    if (!drag) return;
+    const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) <= 3) return;   // a click is not a drag
+    drag.moved = true;
+    lattice.view.tx = drag.tx + dx; lattice.view.ty = drag.ty + dy; latticeApplyView();
+  });
+  for (const type of ['pointerup', 'pointerleave']) svg.addEventListener(type, () => { drag = null; });
+  svg.addEventListener('wheel', ev => {
+    ev.preventDefault();
+    const f = Math.exp(-ev.deltaY * 0.0015), r = svg.getBoundingClientRect();
+    const mx = ev.clientX - r.left, my = ev.clientY - r.top;
+    lattice.view.tx = mx - (mx - lattice.view.tx) * f; lattice.view.ty = my - (my - lattice.view.ty) * f;
+    lattice.view.k *= f; latticeApplyView();
+  }, {passive: false});
+})();
+
 renderAll(true);
+renderLattice();
 requestAnimationFrame(fit);
 </script>

@@ -41,11 +41,13 @@ try {
   assert.equal(w.eval(`state.excluded.has('${target}')`), true);
   input.dispatchEvent(new w.KeyboardEvent('keydown', {key: 'Escape', bubbles: true}));
   assert.equal(input.value, ''); assert.equal(status(), '');
-  assert.equal(doc.querySelectorAll('#graph .node').length, 0, 'Clearing search restores hidden nodes');
+  // Only the True box remains, carrying the topic's default assumptions.
+  assert.ok([...doc.querySelectorAll('#graph .node')].every(n => n.dataset.members.split(',').includes('⊤')), 'Clearing search restores hidden nodes');
   w.changeBackground(target, true); search('reflection');
   assert.match(status(), /In background/);
   assert.ok(doc.querySelector(`[data-background-id="${target}"].search-current`));
-  assert.equal(graphMatch(), null, 'Searching never removes an assumption from background');
+  assert.ok(w.eval(`inBackground('${target}')`), 'Searching never removes an assumption from background');
+  assert.ok(!graphMatch() || graphMatch().dataset.members.split(',').includes('⊤'), 'It is found where it now sits, in the True box');
   w.changeBackground(target, false); assert.ok(graphMatch(), 'Highlights survive background and graph redraws');
   assert.deepEqual(errors.map(String), []);
   console.log('PASS: graph search finds names, IDs and aliases, highlights both lists and graph, centers/cycles matches, and preserves filters and background.');

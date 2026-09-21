@@ -18,7 +18,13 @@ const fixture = {
 function page(data = fixture, query = '') {
   const vc = new VirtualConsole(); vc.on('jsdomError', e => errors.push(e));
   const dom = new JSDOM(template.replace('/*__PMAP_DATA__*/null', JSON.stringify(data)), {url: 'https://maps.example/' + query, runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole: vc});
-  pages.push(dom); return dom;
+  pages.push(dom);
+  // These fixtures assert over the full arrow set, so turn off the default transitive reduction.
+  dom.window.document.getElementById('reduce-arrows').click();
+  // These fixtures assert over principles the fixture's own background settles,
+  // which start hidden; show everything.
+  dom.window.eval('state.excluded.clear(); repaintGraph();');
+  return dom;
 }
 const json = (w, code) => JSON.parse(w.eval(`JSON.stringify(${code})`));
 try {

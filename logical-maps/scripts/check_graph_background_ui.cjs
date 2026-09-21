@@ -4,13 +4,22 @@ const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..');
 const rule=(id,premises,conclusion,source_id,status='proved')=>({id,premises,conclusion,status,certificate:{source_id,lean:'none'},sources:['Fixture'],source_names:['Fixture']});
 const data={topic:{id:'background-fixture',title:'Background fixture',background:[],source_catalog:[{id:'hidden',name:'Background proof',kind:'published-paper'},{id:'shown',name:'Displayed proof',kind:'misc'}]},
- principles:['a','b','c','d','e','f','z'].map(id=>({id,name:id.toUpperCase(),statement:id})),models:[],results:[
- rule('ab',['a'],'b','hidden'),rule('bcd',['b','c'],'d','shown'),rule('de',['d'],'e','shown'),
+ principles:['a','b','c','d','e','f','z','k'].map(id=>({id,name:id.toUpperCase(),statement:id})),models:[],results:[
+ rule('k',[],'k','hidden'),rule('ab',['a'],'b','hidden'),rule('bcd',['b','c'],'d','shown'),rule('de',['d'],'e','shown'),
  rule('az',['a','z'],false,'hidden'),rule('bf',['b'],'f','hidden','conjectured'),rule('cfe',['c','f'],'e','hidden','conjectured')]};
 const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
 const dom=new JSDOM(fs.readFileSync(path.join(root,'viewer/template.html'),'utf8').replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url:'https://maps.example/?assume=a',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});
 const w=dom.window,d=w.document;
 try{
+ // The reader's assumption A sits in the True box, where its consequences
+ // go; K, which the topic's own background proves outright, starts hidden.
+ const box=id=>[...d.querySelectorAll('#nodes .node')].find(n=>(n.dataset.members||'').split(',').includes(id));
+ assert.ok(box('a')&&box('a').dataset.members.split(',').includes('⊤'),'An assumption shares the True box');
+ assert.ok(!box('k'),'A theorem of the fixed background starts hidden');
+ assert.equal(d.querySelector('[data-show-positive="k"]').getAttribute('aria-pressed'),'false','And its sidebar box is unchecked');
+ d.querySelector('[data-show-positive="k"]').click();
+ assert.ok(box('k')&&box('k').dataset.members.split(',').includes('⊤'),'Checked, it joins the True box');
+ d.querySelector('[data-show-positive="k"]').click();
  d.querySelector('[data-source-filter="hidden"]').click();
  assert.equal(w.eval("literalFollows('b')"),true,'Background proof survives its hidden arrow');
  assert.equal(w.eval("literalFollows('!z')"),true,'Automatic exclusions also survive');
@@ -35,5 +44,5 @@ try{
  const conjecture=JSON.parse(w.eval("JSON.stringify(buildGraph().edges.find(e=>e.key==='cfe'))"));
  assert.deepEqual(conjecture.premises,['c','f'],'Removing the resolving background restores the now-open conjecture');
  assert.deepEqual(errors.map(String),[]);
- console.log('PASS: hidden background proofs remain automatic and traceable, preserve exclusions and consistency, and never use conjectures as facts.');
+ console.log('PASS: assumptions shown in the True box, settled principles hidden by default, hidden background proofs remain automatic and traceable, preserve exclusions and consistency, and never use conjectures as facts.');
 }finally{w.close();}

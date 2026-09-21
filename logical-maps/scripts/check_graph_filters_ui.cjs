@@ -70,7 +70,7 @@ try{
  assert.ok(doc.querySelector('#graph .node'),'Conjectures keep their endpoint boxes with isolated principles off');
  assert.equal(doc.querySelectorAll('#graph .edge:not(.conjectured):not(.premise)').length,0,'Only conjectural arrows remain');
  doc.getElementById('show-conj').click();doc.getElementById('pr-none').click();
- assert.equal(doc.querySelectorAll('#graph .node').length,0);
+ assert.ok([...doc.querySelectorAll('#graph .node')].every(n=>n.dataset.members.split(',').includes('⊤')),'Only the True box, with the default assumptions, remains');
  doc.getElementById('show-conj').click();
  const restored=new Set(conjectures().map(p=>p.closest('[data-edge]').dataset.edge));
  for(const result of data.results.filter(r=>r.status==='conjectured'))assert.equal(restored.has(result.id),w.eval(`allEvidenceE.resolveConjecture(byRid.get('${result.id}')).status==='open'`),result.id+' visibility remains correct after clearing principles');

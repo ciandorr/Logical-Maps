@@ -170,7 +170,13 @@ negation as separate nodes without adding either to the source records.
 - Everything else is unknown. Failing to find a model proves no inconsistency.
 - Mutually derivable principles collapse to one graph node. Principles
   inconsistent with the background share the False box; background consequences
-  share the True box. These display classes do not change evidence readouts.
+  share the True box, and so do the reader's own assumptions, so a decision to
+  background a principle stays visible where its consequences are. A negative
+  assumption puts its principle in the False box. The topic's fixed background
+  stays off the graph. These display classes do not change evidence readouts.
+- A principle the topic's own background already settles, one that follows from
+  it or is excluded by it with no further assumption, starts hidden, since it can
+  only ever sit beside True or False. The sidebar still offers it.
 - Deriving False or an explicitly violated property from a proved model is
   a validation error. Conjectures never supply proved evidence.
 
@@ -240,6 +246,34 @@ one shared light/dark scheme based on [Okabe–Ito](https://jfly.uni-koeln.de/co
 sky blue replaces green, orange replaces red, and independence combines both
 coloured halves. Open nodes keep their normal fill.
 
+Lattice: a separate Hasse diagram of the conjunctions a chosen handful of
+principles generate. It opens with False and True alone; the sidebar offers the same
+choices per principle as the graph, ✓ for the principle, ✗ for its negation and
+a move to the background, and each adds its literal together with its meets
+against everything already shown. Each group has the graph's **show positive**
+and **clear** as well, under the same node cap. The sidebar is the graph's own, moved
+across with the tab as it is for the theory explorer, so the background, the
+scrolling and the resizable panes are the same by construction, and so is the
+arrow-source selector: the lattice is drawn from the selected sources alone, proofs and models both, so
+deselecting a source shows the diagram as it stood without that knowledge. A
+model outside the selection still appears in the readout, marked as such, but it
+does not make an arrow solid. A meet is drawn under a name only when the reader has chosen a
+principle equivalent to it, and then under every such name at once, with the
+word equivalent above them as on the graph. False and True always name their
+own nodes, and the reader's assumptions name them too: a backgrounded principle
+joins the ceiling, or the floor when its negation is assumed. A meet nobody has named is an ∧ in a circle, since where it sits
+already says it is the conjunction of the nodes above it; the map's own name
+for it, if it has one, waits in the readout. An inconsistent meet is the floor. Nothing nests, since on a Hasse diagram the greatest lower bound of two
+nodes is their conjunction. A cover whose converse is ruled out by a model is a
+solid arrow with a filled head; one whose converse is still open is dashed with
+a hollow head, because whether those two nodes are really distinct is the
+question the diagram exists to answer. Clicking works as it does on the graph, through the same selection and the
+same detail panel: a principle name gives its name, statement and details link,
+an ∧ gives its conjuncts, and an arrow gives the proofs behind it and, where
+the converse is settled, the model that settles it. The relation shading and
+its legend are the graph's too. The node count grows with the subsets, so the
+view stops at a few hundred and says so.
+
 Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with a pdf link when one was built and the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 
 ### Graph layout
@@ -252,8 +286,9 @@ default, shows False ⇒ every displayed node and every displayed node ⇒ True.
 These logical arrows have their own explanation and do not change source
 filters, proof evidence, or the treatment of inconsistent assumptions.
 
-An ∧ collects its premises below them, with dotted strokes descending into
-it. When a proved conjunction is equivalent to a principle, the ∧ sits inside
+An ∧ collects its premises below them, with solid strokes descending into it,
+drawn a little thinner and lighter than an implication arrow, in the tone of
+the ∧ glyph itself. When a proved conjunction is equivalent to a principle, the ∧ sits inside
 that principle's equivalence box, with the strokes landing directly on its
 circle. There is no arrow inside the box. Other consequences retain their
 arrows, and clicking the ∧ provides the equivalence proofs and all its
@@ -262,20 +297,34 @@ even when no individual principle represents it; each retains its own ∧ and
 premise strokes. An inconsistent conjunction similarly belongs inside False.
 A conjectured reverse implication does not establish equivalence.
 
+Panning and zooming persist. Redrawing after a change of content leaves the
+view where the reader put it; only the first draw, a resized graph pane and the
+fit button restore the whole diagram.
+
 Principles are ranked by their implication order. Barycenter sweeps and
 adjacent swaps reduce crossings; separate connected clusters are packed side
 by side. Isolated principles occupy compact labelled bands above the diagram.
 False and True remain visible when their trivial arrows are hidden.
 
 Arrowheads are filled. Each arrow's details panel reports the converse, and for multi-premise arrows whether the remaining
-premises still suffice without each one. **Transitive reduction** hides an
+premises still suffice without each one. **Transitive reduction**, on by default, hides an
 arrow when a chain of other displayed arrows already gives it, as in a Hasse
 diagram; a proved arrow is never hidden through a conjectural chain, nothing
 is hidden inside a cycle, and node positions do not change, since the layout
-always uses the full arrow set.
+always uses the full arrow set. It also hides an arrow that repeats a premise
+stroke: when C is equivalent to A ∧ B, the strokes from A and B into the ∧
+inside C's box already say what C ⇒ A and C ⇒ B say, so only the strokes are
+drawn. A box and the ∧ circles it holds are all equivalent, so when several of
+them carry the same consequence only one arrow to it is drawn; two arrows that
+both leave the box itself record separate theorems and are both kept.
 
 Clicking a principle (on the graph or in the sidebar), or an ∧, shades other
-principles and conjunction circles by their relation to it. Each circle uses its
+principles and conjunction circles by their relation to it. The legend first
+reports the selection's own standing: consistent with the background and the
+model that witnesses it, consistent on evidence outside the selected sources,
+not shown consistent, or inconsistent. A selection that nothing settles is
+drawn with a dashed border, since every triangle below needs a model of the
+selection and such a selection has none. Each circle uses its
 full premise set, whether standalone or inside an equivalence box. Entailed principles use solid green and
 excluded principles solid red. A green upper-left triangle means a recorded model
 satisfies both the selection and the principle; a red lower-right triangle means
@@ -301,7 +350,11 @@ selected, and shading is relative to the whole selected conjunction.
 A background-inconsistent principle or conjunction highlights every box in the
 excluded colour, with an inconsistency notice. Proof readouts continue to report
 the inconsistent antecedent. The shading survives reading an
-arrow's details and clears with Escape or a click on empty space.
+arrow's details and clears with Escape or a click on empty space. The details
+of a selected principle or joint selection also offer the sidebar's own moves
+on it: **Hide** unchecks it, **Add negation** checks its negation, and **Move
+to background** assumes it, each with the sign the selection carries. The same
+three are offered on the lattice, where they act on the lattice's own choices.
 
 Graph descriptions occupy a reserved bottom panel, with the fixed relation legend
 above the scrolling details. Drag its divider or use the arrow keys to resize it;
@@ -383,9 +436,10 @@ arrow shows its supporting results. Links collecting premises into ∧ have no
 arrowheads or flow chevrons, since an individual conjunct does not imply the whole.
 
 Graph controls use **✓** to show a principle and **✗** to show its negation;
-both can be displayed together. **Clear** hides both forms. **Background** moves
+both can be displayed together; unchecking each hides it. **Background** moves
 the principle into the shared assumptions, assuming it positively unless only
-✗ was selected. In the background, ✓ and ✗ are exclusive. **Return** displays
+✗ was selected, and shows it in the True box, or the False box for a negative
+assumption. In the background, ✓ and ✗ are exclusive. **Return** displays
 the assumed sign on the graph again. Standing topic axioms remain fixed.
 
 Theory explorer edits those same assumptions directly in one principle list.

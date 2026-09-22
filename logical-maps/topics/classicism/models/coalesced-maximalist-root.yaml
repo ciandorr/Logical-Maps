@@ -7,6 +7,8 @@ satisfies:
 violates:
 - strong-possibility-r
 - distinctness-necessary-r
+- barcan-r
+- barcan-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -28,8 +30,17 @@ description: Take a coalesced sum of a set of source action models complete for 
   evaluated at the new root. See Definition E.2 for the construction; the singleton root proposition witnesses
   Actuality. The p. 83 discussion supplies the distinctness-preserving collapse and the obstruction to
   Strong Possibility.
-notes: The cited construction is a model of the map’s relational-type framework. The description identifies
-  its evaluation point; construction and verification are given at the PDF locations in References.
+notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
+  its evaluation point; construction and verification are given at the PDF locations in References. BF
+  fails at the root. C is complete for the component set, so some component $M$ refutes BF at its root
+  $M_0$, at type $t$ say: some $F$ in $M_0$’s domain has $\forall y\, .\,\Box Fy$ true and $\Diamond\exists
+  y\, .\,\neg Fy$ true at $M_0$. Because the root’s domains are as full as possible, the thread $F^{\prime}$
+  that is universal at the root and in every other component and is carried onto $F$ by the distinguished
+  arrow to $M_0$ is in the root domain. Every arrow from the root into $M$ factors through that distinguished
+  arrow, so $\forall y\, .\,\Box F^{\prime}y$ at the root reduces to $\forall y\, .\,\Box Fy$ at $M_0$
+  together with trivial checks elsewhere, and $\Diamond\exists y\, .\,\neg F^{\prime}y$ at the root follows
+  from $\Diamond\exists y\, .\,\neg Fy$ at $M_0$ through the same factorization. Observation of Cian Dorr,
+  22 September 2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -43,3 +54,10 @@ changes:
   violates:
   - strong-possibility-r
   - distinctness-necessary-r
+- date: '2026-09-22'
+  by: Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of BF and of BF (type t) at the root, by transporting a component’s counterexample
+    to BF along the distinguished arrow; see the notes.
+  violates:
+  - barcan-r
+  - barcan-t

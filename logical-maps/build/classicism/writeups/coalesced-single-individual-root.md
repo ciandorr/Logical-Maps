@@ -1,13 +1,13 @@
 # Coalesced sum: singleton individual root
 
-<p class='cert'>Model (conjectured) — Source: Classicism (2023 draft); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
+<p class='cert'>Model (conjectured) — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Package
 
 - **Possibility+.** The strengthened Possibility schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
 - **Actuality.** There is a true proposition that entails every true proposition.
 - **Distinctness-preserving collapse.** Every truth is necessary under the distinctness-preserving modality.
-- **¬ Infinity (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
+- **¬ Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Strong Possibility (pure).** Each closed pure sentence consistent with Maximalist Classicism is possible under the distinctness-preserving modality.
 
 ## Construction
@@ -26,4 +26,4 @@ The source establishes the displayed package in the pure language. The topic als
 
 ## Paper references
 
-- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr. Classicism. Draft dated 16 May 2023, 87 pages. All page, proposition and footnote locators in this map refer to this draft. — §2.6, pp. 41–42 and n. 61; Appendix E, p. 83
+- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — §2.6, pp. 41–42 and n. 61; Appendix E, p. 83

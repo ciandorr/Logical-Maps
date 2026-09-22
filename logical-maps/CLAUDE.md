@@ -30,6 +30,14 @@ the topic subject in each map's email link.
 - `python3 scripts/pmap.py build` — regenerates `build/<topic>/index.html`,
   `data.json`, write-ups, and downloadable topic files.
 - `python3 scripts/pmap.py status` — counts, open pairs, redundancies.
+- `python3 scripts/pmap.py lynchpins` — open questions ranked by how many other open
+  questions each answer would settle, under no extra assumptions and under each
+  background preset (`--background du`, `--top 20`, `--json`). The bundle's
+  OPEN-QUESTIONS.md §2 and `derived.json` carry the same rankings, except for a
+  sparse map (over three quarters of implication questions open), which they skip.
+  The viewer's Conjectures tab computes the same ranking live for the selected
+  background: `Lynchpins` in `viewer/template.html` mirrors the Python class and
+  `scripts/check_falsity.py` compares the two; `check_lynchpins_ui.cjs` guards the tab.
 - `python3 scripts/pmap.py starter` — build the reusable starter ZIP. Normal
   builds also regenerate it and add a relative Contribute download. Keep its
   allowlist limited to shared tooling and `starter/` assets. Run

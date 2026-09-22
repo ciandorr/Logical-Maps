@@ -216,19 +216,6 @@ distinct symbols, not an assumed inequality between their denotations.
 Where a schema mentions a tuple of distinct constants, its instances are
 those the signature supplies.
 
-**Fundamentality signature.** The principles in the Fundamentality group
-are about a different, special signature rather than the arbitrary
-$\Sigma$. It contains a fundamentality predicate
-$\operatorname{Fun}_\sigma$ of type $\sigma t$ for every type $\sigma$,
-following *Classicism*, §2.5, p. 39, and *Logical Combinatorialism*, §2.
-That paper also uses a purity predicate $\operatorname{Pure}_\sigma$ of
-type $\sigma t$; the map does not yet include any principle involving it.
-These predicates receive no standing axioms. For Fundamental Possibility,
-$\operatorname{Fun}(\bar x)$ conjoins each
-$\operatorname{Fun}_{\sigma_i}(x_i)$ and the distinctness of each pair of
-same-typed entries; the formula $P$ there is pure, so it contains neither
-$\operatorname{Fun}$ nor any constant of $\Sigma$.
-
 **Evidence.** *Classicism* is Bacon and Dorr (2024), in Fritz and Jones
 (eds), *Higher-Order Metaphysics*, Oxford University Press, pp. 109–190.
 References use the numbering of the 87-page draft dated 16 May 2023, from

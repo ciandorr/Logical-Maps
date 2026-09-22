@@ -39,6 +39,7 @@ try{
  w.changeBackground('z',true);
  assert.equal(d.getElementById('graph-warning').hidden,false,'All-hidden sources cannot conceal an inconsistent background');
  assert.match(d.getElementById('graph-warning').textContent,/Background proof/);
+ assert.equal(w.getComputedStyle(d.querySelector('#pane-graph .graph-tools')).visibility,'hidden','The search box and Fit button do not show around the warning panel');
  w.changeBackground('z',false);w.changeBackground('a',false);
  assert.equal(w.eval("literalFollows('b')"),false);assert.equal(w.eval("literalFollows('!z')"),false);
  const conjecture=JSON.parse(w.eval("JSON.stringify(buildGraph().edges.find(e=>e.key==='cfe'))"));

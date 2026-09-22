@@ -338,7 +338,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
   #pane-graph[data-active="true"], #pane-open[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
   #conjecture-options, .conjecture-hint { display: none; }
   #pane-open #conjecture-options, #pane-open .conjecture-hint { display: block; }
-  #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open [data-clear-graph], #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
+  #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
   .open-content { overflow: auto; min-width: 0; min-height: 0; }
   #open-warning { position: static; margin: 16px 20px 0; }
   .conjecture-row { padding: 16px 0; border-top: 1px solid var(--line); }
@@ -351,6 +351,10 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
   .conjecture-row .note, .conjecture-evidence { margin-top: 8px; }
   .conjecture-evidence summary, #open-incompatible > summary { cursor: pointer; }
   .conjecture-evidence li { margin: 8px 0; }
+  #lynchpins { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+  #lynchpins > summary { cursor: pointer; font-weight: 600; }
+  #lynchpins table.results { margin: 8px 0 16px; border-collapse: collapse; }
+  #lynchpins td.num, #lynchpins th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
   #open-incompatible { margin-top: 20px; }
   .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
   .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
@@ -370,6 +374,8 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
   #graph:active { cursor: grabbing; }
   .graph-tools { grid-row: 1; display: flex; align-items: flex-start; gap: 6px; padding: 12px; pointer-events: none; }
   .graph-tools > * { pointer-events: auto; }
+  /* A warning panel is inset from the edges; the tools would show around it. */
+  .graph-area.warned .graph-tools { visibility: hidden; }
   .graph-tools #fit { margin-left: auto; }
   .graph-search { width: 280px; max-width: calc(100% - 48px); min-width: 0; }
   .graph-search .search { width: 100%; margin: 0; }
@@ -400,8 +406,16 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
   .model-category { min-width: 0; border-top: 1px solid var(--line); padding-top: 12px; }
   .model-category h3 { font-size: 13px; margin: 0 0 8px; }
   .edge.human { stroke: var(--human); } .edge.assisted { stroke: var(--assisted); } .edge.ai { stroke: var(--ai); }
-  .edge.derived, .edge.premise { stroke: var(--derived); stroke-width: 1.3; }
-  .edge.premise { stroke-dasharray: 1.5 3.5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .edge.derived { stroke: var(--derived); stroke-width: 1.3; }
+  /* Premise strokes carry the ∧ structure and are the commonest edge on a
+     conjunction-heavy map, so they are solid rather than dotted, and lighter
+     than the ink used for labels so that so many of them do not crowd the
+     diagram. They share the tone of the ∧ glyph they run into, and they keep
+     clear of the derived colour and of the fainter ink that trivial arrows
+     use. The slight thinness against an ordinary arrow tells the two apart
+     without reading as lesser, and they scale with the view like every other
+     edge so that the difference holds at any zoom. */
+  .edge.premise { stroke: var(--ink-2); stroke-width: 1.2; stroke-linecap: round; }
   .edge.conjectured { stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; }
   .edge.lean { stroke-width: 3; }
   .edge-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
@@ -415,10 +429,60 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
   .node.from-background rect { fill: var(--hl); stroke: var(--accent); }
   .node text { font: 500 12.5px var(--sans); fill: var(--ink); pointer-events: none; }
   .edge.trivial { stroke: var(--ink-3); opacity: .55; }
+  /* Lattice view. A strict cover is a solid line with a filled head; a cover
+     whose converse is still open is dashed with a hollow head, because whether
+     those two nodes are really distinct is the question the diagram exists to
+     show. */
+  /* Scoped to the active state and to the same shape as the graph pane. An
+     unscoped id rule here outranks the one that hides an inactive pane, which
+     leaves the view permanently on screen. */
+  #pane-lattice[data-active="true"] { display: grid; grid-template-columns: var(--sidebar-width, 250px) 9px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; }
+  /* One sidebar serves the graph, the theory explorer and the lattice, so its
+     scrolling, dividers and sizes are the same by construction. Each view shows
+     its own blocks in it. */
+  #lat-controls, #lat-principles { display: none; }
+  #pane-lattice #lat-controls, #pane-lattice #lat-principles { display: block; }
+  #pane-lattice #conjecture-options, #pane-lattice #graph-options, #pane-lattice #graph-principles { display: none; }
+  #pane-lattice .graph-workspace { grid-template-rows: minmax(0, 1fr) var(--details-height, 230px); }
+  #lat-graph { grid-row: 2; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
+  .lat-edge.may-reverse { stroke: var(--conj); stroke-width: 1.6; stroke-dasharray: 6 4; }
+  .lat-edge-g.sel .lat-edge { stroke-width: 3.2; }
+  /* With a node selected, the arrows into and out of it come forward and the
+     rest step back; with an arrow selected, everything but that arrow does. */
+  .lat-edge-g.near .lat-edge { stroke-width: 2.4; }
+  .lat-edge-g.near .lat-edge.may-reverse { stroke-width: 2.6; }
+  .lat-edge-g.far { opacity: 0.22; }
+  .lat-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
+  .lat-node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
+  .lat-node text { font: 500 12px var(--sans); fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .lat-node.lat-equivalent rect { stroke: var(--accent); stroke-width: 1.8; }
+  .lat-node.lat-meet circle { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
+  .lat-node.lat-meet.sel circle { stroke: var(--accent); stroke-width: 2.6; }
+  .lat-node.lat-meet text { font: 600 12px var(--sans); fill: var(--ink-2); }
+  .lat-node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
+  /* The floor reads as the graph's False box does. These come before the
+     relation rules, which must win once something is selected. */
+  .lat-node.lat-bottom rect { stroke: var(--indep); stroke-width: 2; }
+  .lat-node.lat-bottom text[data-falsity] { fill: var(--indep); font-weight: 700; }
+  .lat-node.rel-entailed rect, .lat-node.rel-entailed circle { fill: var(--rel-entailed); }
+  .lat-node.rel-excluded rect, .lat-node.rel-excluded circle { fill: var(--rel-excluded); stroke: var(--indep); }
+  .lat-node.rel-consistent rect, .lat-node.rel-consistent circle { fill: url(#lat-split-consistent); }
+  .lat-node.rel-separated rect, .lat-node.rel-separated circle { fill: url(#lat-split-separated); }
+  .lat-node.rel-independent rect, .lat-node.rel-independent circle { fill: url(#lat-split-independent); }
+  .lat-node.rel-base rect, .lat-node.rel-base circle { fill: var(--hl); stroke: var(--accent); stroke-width: 2.4; }
+  .lat-node text[data-principle], .lat-node text[data-falsity], .lat-node text[data-truth] { cursor: pointer; pointer-events: auto; }
+  #lat-detail .relation-legend { margin-bottom: 6px; }
+  .lat-node.sel rect { stroke: var(--accent); stroke-width: 2.6; }
+  .lat-count { font-size: 12px; color: var(--ink-3); margin: 4px 0; }
+  .lat-row { display: flex; }
+  .lat-row.on button { font-weight: 700; color: var(--accent); }
+  #lat-detail h3 { margin: 4px 0; font-size: 13px; }
+  #lat-detail p { margin: 3px 0; font-size: 12.5px; }
   .junction.selected circle { stroke: var(--accent); stroke-width: 2.4; fill: var(--hl); }
   .node text[data-constant] { pointer-events: auto; cursor: pointer; }
   .node text[data-principle] { pointer-events: auto; cursor: pointer; }
-  .node text.selection-member { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .node text.selection-member, .lat-node text.selection-member { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
   .principle-name[aria-pressed="true"] { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
   .node text.equiv { font-size: 10.5px; fill: var(--ink-3); }
   .node.iso rect { stroke-dasharray: 4 3; }
@@ -599,6 +663,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
   .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
   .pop .pop-l { font-size: 12px; color: var(--ink-2); margin-top: 6px; } .pop code { font: 12px var(--mono); }
   .pop .badges { display: flex; gap: 6px; margin: 6px 0; } .pop .links { margin: 4px 0 0; }
+  .pop .links .lnk + .lnk::before { content: '·'; color: var(--ink-3); margin: 0 8px 0 4px; }
 
   .ex-p.bad { background: color-mix(in srgb, var(--indep) 32%, transparent); outline: 1.5px solid var(--indep); }
   .ex-bad { border: 1px solid var(--indep); color: var(--indep); border-radius: 3px; padding: 8px 10px; margin: 0 0 10px; font-size: 13px; }
@@ -672,6 +737,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
   .node.rel-conjectured rect, .junction.rel-conjectured circle { fill: url(#hatch-conjectured); }
   .node.rel-base rect, .junction.rel-base circle { fill: var(--hl); }
   .node.rel-base rect, .junction.rel-base circle { stroke: var(--accent); stroke-width: 2.4; }
+  #graph.unwitnessed-selection .node.rel-base rect, #graph.unwitnessed-selection .junction.rel-base circle { stroke-dasharray: 5 3; }
   #graph.inconsistent-selection .junction circle { fill: var(--rel-excluded); stroke: var(--indep); }
   #graph.shaded .node.dim, #graph.shaded .junction.dim { opacity: .7; }
   .graph-area { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
@@ -750,6 +816,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
       <div class="tabs" role="tablist">
         <button class="tab" role="tab" data-tab="background" aria-selected="false">Background</button>
         <button class="tab" role="tab" data-tab="graph" aria-selected="true">Graph</button>
+        <button class="tab" role="tab" data-tab="lattice" aria-selected="false">Lattice</button>
         <button class="tab" role="tab" data-tab="models" aria-selected="false">Theory explorer</button>
         <button class="tab" role="tab" data-tab="open" aria-selected="false">Conjectures <span class="n" id="n-open"></span></button>
         <button class="tab" role="tab" data-tab="results" aria-selected="false">Changes <span class="n" id="n-results"></span></button>
@@ -758,11 +825,16 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
       <section class="pane" id="pane-graph" data-active="true">
     <aside class="controls" id="graph-sidebar">
       <div class="controls-scroll" id="principle-controls">
+      <div id="lat-controls">
+        <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
+        <p class="background-hint">A Hasse diagram showing all the conjunctions of the selected principles. Solid arrows denote implications shown to be non-reversible by models in the selected sources; dashed arrows denote implications which might be reversible (as far as the selected sources are concerned).</p>
+        <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
+      </div>
       <div id="conjecture-options">
         <h2>Conjectures</h2>
         <div class="ctl"><label><input type="checkbox" id="show-resolved">Show resolved</label></div>
       </div>
-      <div>
+      <div id="source-controls">
         <h2 id="source-filter-heading" title="Filter displayed arrows. Background consequences always use all recorded proofs.">Arrow sources</h2>
         <div class="ctl" id="source-filters"></div>
         <div class="ctl">
@@ -776,15 +848,19 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
           <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
           <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
-          <label title="Hide an arrow when a chain of other displayed arrows already gives it, as in a Hasse diagram. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows">Transitive reduction</label>
+          <label title="Hide an arrow that the displayed diagram already gives: one that a chain of other displayed arrows yields, as in a Hasse diagram, and one that repeats a premise stroke, as when C is equivalent to A ∧ B and C ⇒ A restates the stroke from A into the ∧, and one of several arrows that leave the same box for the same target because its ∧ circles each carry the consequence. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows" checked>Transitive reduction</label>
           <label title="Show the logical arrows from False to every node and from every node to True."><input type="checkbox" id="trivial-arrows">Trivial arrows</label>
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
         </div>
       </div>
-      <div>
+      <div id="graph-principles">
         <h2>Principles <button class="lnk dim" id="pr-all">show positive</button> <button class="lnk dim" id="pr-none">clear</button></h2>
         <p class="background-hint conjecture-hint">Choose a principle’s positive or negative form, then move it to background.</p>
         <div class="ctl" id="pr-filters"></div>
+      </div>
+      <div id="lat-principles">
+        <h2>Principles</h2>
+        <div class="ctl" id="lat-filters"></div>
       </div>
       </div>
       <div class="pane-divider" id="background-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize background pane" aria-controls="background-dock principle-controls" title="Drag to resize background · Arrow keys to adjust · Double-click to reset"></div>
@@ -810,6 +886,16 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
         </aside>
         </div>
       </section>
+      <section class="pane" id="pane-lattice">
+        <div class="graph-workspace">
+          <div class="graph-area">
+            <svg id="lat-graph" role="img" aria-label="Lattice of conjunctions"></svg>
+            <div id="lat-warning" class="graph-warning" role="alert" hidden></div>
+            <div class="graph-tools"><button class="btn small" id="lat-fit">Fit</button></div>
+          </div>
+          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p></aside>
+        </div>
+      </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
       <section class="pane" id="pane-results"><div class="list"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><div id="results"></div></div></section>
       <section class="pane" id="pane-open"><div class="open-content"><div id="open-warning" class="graph-warning" role="alert" hidden></div><div class="list" id="open"></div></div></section>
@@ -822,7 +908,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <div id="floating-details"><div id="pop" class="pop" hidden></div></div>
 
 <script>
-const DATA = {"topic": {"id": "decision-theory", "title": "Preference axioms over lotteries", "description": "", "framework": "≽ a reflexive binary relation on Δ(X), X finite with |X| ≥ 3; ≻, ~ its asymmetric and symmetric parts.\n", "background": [], "notation": ""}, "papers": [], "principles": [{"id": "acyclicity", "name": "Acyclicity", "statement": "There is no finite cycle of strict preferences $p_{1} \\succ p_{2} \\succ \\ldots \\succ p_{n} \\succ p_{1}$.", "formal": "$\\forall n \\forall p_{1}\\ldots p_{n}. \\neg (p_{1} \\succ p_{2} \\land \\ldots \\land p_{n} \\succ p_{1})$", "aliases": [], "tags": ["ordering"], "sources": ["Sen (1970), Collective Choice and Social Welfare, ch. 1*"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/acyclicity.yaml"}, {"id": "archimedean", "name": "Archimedean", "statement": "For all $p, q, r \\in \\Delta (X)$: if $p \\succ q \\succ r$ then there are $\\alpha , \\beta \\in (0,1)$ with $\\alpha p + (1- \\alpha )r \\succ q$ and $q \\succ \\beta p + (1- \\beta )r$.", "formal": "$\\forall p q r. p \\succ q \\succ r \\to \\exists \\alpha \\beta \\in (0,1). \\alpha p+(1- \\alpha )r \\succ q \\land q \\succ \\beta p+(1- \\beta )r$", "aliases": ["Jensen continuity", "Weak continuity"], "tags": ["axiom", "topological"], "sources": ["Jensen (1967), An introduction to Bernoullian utility theory I, Swedish Journal of Economics 69"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/archimedean.yaml"}, {"id": "betweenness", "name": "Betweenness", "statement": "For all $p, q \\in \\Delta (X)$ and $\\lambda \\in (0,1)$: if $p \\succ q$ then $p \\succ \\lambda p + (1- \\lambda )q \\succ q$, and if $p \\sim q$ then $p \\sim \\lambda p + (1- \\lambda )q$.", "formal": "$\\forall p q, \\forall \\lambda \\in (0,1). (p \\succ q \\to p \\succ \\lambda p+(1- \\lambda )q \\succ q) \\land (p \\sim q \\to p \\sim \\lambda p+(1- \\lambda )q)$", "aliases": ["Mixture betweenness"], "tags": ["axiom", "mixture"], "sources": ["Chew (1983), A generalization of the quasilinear mean…, Econometrica 51", "Dekel (1986), An axiomatic characterization of preferences under uncertainty, JET 40"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/betweenness.yaml"}, {"id": "closed-graph-continuity", "name": "Closed-graph continuity", "statement": "The set $\\{(p, q) \\in \\Delta (X) \\times \\Delta (X) : p \\succeq q\\}$ is closed in the product topology.", "formal": "$\\operatorname{IsClosed} \\{(p,q) | p \\succeq q\\}$", "aliases": ["Continuity (DMO)", "Topological continuity"], "tags": ["axiom", "topological"], "sources": ["Dubra, Maccheroni & Ok (2004), JET 115, Axiom C"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/closed-graph-continuity.yaml"}, {"id": "completeness", "name": "Completeness", "statement": "For all $p, q \\in \\Delta (X): p \\succeq q$ or $q \\succeq p$.", "formal": "$\\forall p q. p \\succeq q \\lor q \\succeq p$", "aliases": ["Connectedness", "Totality"], "tags": ["ordering"], "sources": ["von Neumann & Morgenstern (1944), Theory of Games and Economic Behavior, §3.5"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/completeness.yaml"}, {"id": "continuity", "name": "Mixture continuity", "statement": "For all $p, q, r \\in \\Delta (X)$ the sets $\\{\\lambda \\in [0,1] : \\lambda p + (1- \\lambda )q \\succeq r\\}$ and $\\{\\lambda \\in [0,1] : r \\succeq \\lambda p + (1- \\lambda )q\\}$ are closed.", "formal": "$\\forall p q r$. closed $\\{\\lambda | \\lambda p+(1- \\lambda )q \\succeq r\\} \\land$ closed $\\{\\lambda | r \\succeq \\lambda p+(1- \\lambda )q\\}$", "aliases": ["Herstein–Milnor continuity", "Closedness"], "tags": ["axiom", "topological"], "sources": ["Herstein & Milnor (1953), Econometrica 21, Axiom 2"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/continuity.yaml"}, {"id": "eu-representation", "name": "Expected-utility representation", "statement": "There is a function $u : X \\to \\mathbb{R}$ such that for all $p, q \\in \\Delta (X): p \\succeq q$ if and only if $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$.", "formal": "$\\exists u:X\\to \\mathbb{R} . \\forall p q. p \\succeq q \\leftrightarrow \\sum _x p(x)u(x) \\ge \\sum _x q(x)u(x)$", "aliases": ["vNM representation", "Linear utility representation"], "tags": ["representation"], "sources": ["von Neumann & Morgenstern (1944)"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/eu-representation.yaml"}, {"id": "independence", "name": "Independence", "statement": "For all $p, q, r \\in \\Delta (X)$ and $\\lambda \\in (0,1]: p \\succeq q$ if and only if $\\lambda p + (1- \\lambda )r \\succeq \\lambda q + (1- \\lambda )r$.", "formal": "$\\forall p q r, \\forall \\lambda \\in (0,1]. p \\succeq q \\leftrightarrow \\lambda p+(1- \\lambda )r \\succeq \\lambda q+(1- \\lambda )r$", "aliases": ["Substitution axiom", "vNM independence", "Linearity"], "tags": ["axiom", "mixture"], "sources": ["Marschak (1950), Rational behavior, uncertain prospects, and measurable utility, Econometrica 18", "Herstein & Milnor (1953), An axiomatic approach to measurable utility, Econometrica 21"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/independence.yaml"}, {"id": "multi-utility", "name": "Expected multi-utility representation", "statement": "There is a set U of functions $u : X \\to \\mathbb{R}$ such that for all $p, q \\in \\Delta (X): p \\succeq q$ if and only if $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$ for every $u \\in U$.", "formal": "$\\exists U \\subseteq (X\\to \\mathbb{R} ). \\forall p q. p \\succeq q \\leftrightarrow \\forall u\\in U. \\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$", "aliases": ["Incomplete expected utility", "Unanimity representation"], "tags": ["representation"], "sources": ["Aumann (1962), Utility theory without the completeness axiom, Econometrica 30", "Dubra, Maccheroni & Ok (2004), Expected utility theory without the completeness axiom, JET 115"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/multi-utility.yaml"}, {"id": "quasi-transitivity", "name": "Quasi-transitivity", "statement": "Strict preference is transitive: if $p \\succ q$ and $q \\succ r$ then $p \\succ r$.", "formal": "$\\forall p q r. p \\succ q \\to q \\succ r \\to p \\succ r$", "aliases": ["PP-transitivity"], "tags": ["ordering"], "sources": ["Sen (1969), Quasi-transitivity, rational choice and collective decisions, Review of Economic Studies 36"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/quasi-transitivity.yaml"}, {"id": "transitivity", "name": "Transitivity", "statement": "For all $p, q, r \\in \\Delta (X)$: if $p \\succeq q$ and $q \\succeq r$ then $p \\succeq r$.", "formal": "$\\forall p q r. p \\succeq q \\to q \\succeq r \\to p \\succeq r$", "aliases": [], "tags": ["ordering"], "sources": ["von Neumann & Morgenstern (1944), §3.5"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/transitivity.yaml"}, {"id": "weak-order", "name": "Weak order", "statement": "$\\succeq$ is complete and transitive.", "formal": "$\\operatorname{Completeness} \\land \\operatorname{Transitivity}$", "aliases": ["Total preorder", "Ordering axiom"], "tags": ["ordering", "bundle"], "sources": [], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/weak-order.yaml"}], "results": [{"id": "archimedean-independence-imply-continuity", "premises": ["transitivity", "independence", "archimedean"], "conclusion": "continuity", "status": "conjectured", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "", "sources": [], "notes": "Known with completeness added (Jensen 1967). Without it the cone $K = \\{q - p : q \\succeq p\\}$ is convex; the question is whether the Archimedean axiom forces it to be closed.", "file": "topics/decision-theory/results/archimedean-independence-imply-continuity.yaml", "files": {"md": "writeups/archimedean-independence-imply-continuity.md", "handwritten": false, "html": "writeups/archimedean-independence-imply-continuity.html"}}, {"id": "betweenness-continuity-imply-transitivity", "premises": ["completeness", "closed-graph-continuity", "betweenness"], "conclusion": "transitivity", "status": "conjectured", "certificate": {"provenance": "human", "lean": "none", "produced_by": "ZG", "checked_by": [], "date": "2026-09-08"}, "proof": "", "sources": [], "notes": "Sample conjecture.", "file": "topics/decision-theory/results/betweenness-continuity-imply-transitivity.yaml", "files": {"md": "writeups/betweenness-continuity-imply-transitivity.md", "handwritten": false, "html": "writeups/betweenness-continuity-imply-transitivity.html"}}, {"id": "closed-graph-implies-mixture-continuity", "premises": ["closed-graph-continuity"], "conclusion": "continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "$\\lambda$ ↦ $(\\lambda p+(1- \\lambda )q, r)$ and $\\lambda$ ↦ $(r, \\lambda p+(1- \\lambda )q)$ are continuous maps\n$[0,1] \\to \\Delta (X)\\times \\Delta (X)$; the two sections are their preimages of the closed\ngraph of $\\succeq$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/closed-graph-implies-mixture-continuity.yaml", "files": {"md": "writeups/closed-graph-implies-mixture-continuity.md", "handwritten": false, "html": "writeups/closed-graph-implies-mixture-continuity.html"}}, {"id": "continuity-completeness-imply-archimedean", "premises": ["continuity", "completeness"], "conclusion": "archimedean", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let $p \\succ q \\succ r$ and set $A = \\{\\lambda : \\lambda p+(1- \\lambda )r \\succeq q\\}, B = \\{\\lambda : q \\succeq \\lambda p+(1- \\lambda )r\\}$.\nBoth are closed by continuity and $A \\cup B = [0,1]$ by completeness. Since\n$1 \\notin B$ (as $p \\succ q$) and $[0,1]\\setminus B$ is open, some interval $(1- \\epsilon , 1]$ lies in\n$[0,1]\\setminus B \\subseteq A$; any $\\alpha$ in it with $\\alpha < 1$ gives $\\alpha p+(1- \\alpha )r \\succ q$. Symmetrically,\n$0 \\notin A$ (as $q \\succ r$) yields $[0, \\epsilon ) \\subseteq B\\setminus A$ and any $\\beta$ in it with $\\beta > 0$ gives\n$q \\succ \\beta p+(1- \\beta )r$.", "sources": [], "notes": "Completeness is used to conclude $\\lambda \\in A$ from $\\lambda \\notin B$; whether continuity alone suffices is left open here.", "file": "topics/decision-theory/results/continuity-completeness-imply-archimedean.yaml", "files": {"md": "writeups/continuity-completeness-imply-archimedean.md", "handwritten": false, "html": "writeups/continuity-completeness-imply-archimedean.html"}}, {"id": "dmo-theorem", "premises": ["transitivity", "independence", "closed-graph-continuity"], "conclusion": "multi-utility", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "proof": "Dubra–Maccheroni–Ok, Theorem 1, for compact metric X (finite X is a\nspecial case): a reflexive transitive relation on $\\Delta (X)$ satisfying\nindependence and closed-graph continuity has an expected multi-utility\nrepresentation. The proof identifies $\\succeq$ with a closed convex cone of\nsigned measures and takes U to be the dual cone.", "sources": ["Dubra, Maccheroni & Ok (2004), Expected utility theory without the completeness axiom, JET 115, Theorem 1"], "notes": "Reflexivity is a standing assumption of the framework.\n", "file": "topics/decision-theory/results/dmo-theorem.yaml", "files": {"md": "writeups/dmo-theorem.md", "handwritten": false, "html": "writeups/dmo-theorem.html"}}, {"id": "eu-implies-completeness", "premises": ["eu-representation"], "conclusion": "completeness", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Real numbers are totally ordered: $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$ or $\\operatorname{EU}_u(q) \\ge \\operatorname{EU}_u(p)$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/eu-implies-completeness.yaml", "files": {"md": "writeups/eu-implies-completeness.md", "handwritten": false, "html": "writeups/eu-implies-completeness.html"}}, {"id": "eu-implies-multi-utility", "premises": ["eu-representation"], "conclusion": "multi-utility", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Take $U = \\{u\\}$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/eu-implies-multi-utility.yaml", "files": {"md": "writeups/eu-implies-multi-utility.md", "handwritten": false, "html": "writeups/eu-implies-multi-utility.html"}}, {"id": "independence-implies-betweenness", "premises": ["independence"], "conclusion": "betweenness", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Fix $\\lambda \\in (0,1)$ and write $m = \\lambda p + (1- \\lambda )q$. Independence with $r = p$ and\nmixing weight $1- \\lambda$ gives $p \\succeq q \\Longleftrightarrow (1- \\lambda )p+\\lambda p \\succeq (1- \\lambda )q+\\lambda p, i.e. p \\succeq q \\Longleftrightarrow p \\succeq m$,\nand likewise $q \\succeq p \\Longleftrightarrow m \\succeq p$. Hence $p \\succ q \\Longleftrightarrow p \\succ m$ and $p \\sim q \\Longleftrightarrow p \\sim m$.\nIndependence with $r = q$ and weight $\\lambda$ gives $p \\succeq q \\Longleftrightarrow m \\succeq q$ and\n$q \\succeq p \\Longleftrightarrow q \\succeq m$, so $p \\succ q \\Longleftrightarrow m \\succ q$. Together: $p \\succ q \\Longrightarrow p \\succ m \\succ q$ and\n$p \\sim q \\Longrightarrow p \\sim m$.", "sources": [], "notes": "No ordering assumptions are needed because independence is taken in the biconditional form.\n", "file": "topics/decision-theory/results/independence-implies-betweenness.yaml", "files": {"md": "writeups/independence-implies-betweenness.md", "handwritten": false, "html": "writeups/independence-implies-betweenness.html"}}, {"id": "mixture-continuity-implies-closed-graph", "premises": ["transitivity", "independence", "continuity"], "conclusion": "closed-graph-continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let $V = \\{x \\in \\mathbb{R} ^X : \\sum x = 0\\}$ and $D = \\Delta (X) - \\Delta (X) \\subseteq V$ (compact, convex,\ncontains 0). Put $K = \\{q - p : q \\succeq p\\}$.\n\n(i) Membership in K depends only on the difference: if $q - p = q' - p'$\nthen $\\frac{1}{2} q + \\frac{1}{2} p' = \\frac{1}{2} q' + \\frac{1}{2} p$, and by independence $(\\lambda = \\frac{1}{2}$, mixing with p'\nresp. $p) q \\succeq p \\Longleftrightarrow \\frac{1}{2} q+\\frac{1}{2} p' \\succeq \\frac{1}{2} p+\\frac{1}{2} p'$ and $q' \\succeq p' \\Longleftrightarrow \\frac{1}{2} q'+\\frac{1}{2} p \\succeq \\frac{1}{2} p'+\\frac{1}{2} p$; the two\nright-hand sides are the same pair. So \"$x \\in K$\" is well defined for $x \\in D$.\n\n(ii) K is a cone in D: if $x \\in K$ and $tx \\in D (t > 0)$ then $tx \\in K$. For\n$t < 1$ use independence with $r = p: q \\succeq p \\Longrightarrow tq+(1- t)p \\succeq p$, whose\ndifference is $t(q- p)$. For $t > 1$ apply the $t < 1$ case to tx.\n\n(iii) K is convex: with $x = q- p, y = q'- p'$ in K, independence gives\n$\\frac{1}{2} q+\\frac{1}{2} q' \\succeq \\frac{1}{2} p+\\frac{1}{2} q'$ and $\\frac{1}{2} q'+\\frac{1}{2} p \\succeq \\frac{1}{2} p'+\\frac{1}{2} p$, and transitivity gives\n$\\frac{1}{2} q+\\frac{1}{2} q' \\succeq \\frac{1}{2} p+\\frac{1}{2} p'$, whose difference is $\\frac{1}{2} x+\\frac{1}{2} y$.\n\n(iv) K is closed along every line. Let $[x_{0}, x_{1}] = \\ell \\cap D$ for a line $\\ell$ and\n$x(\\lambda ) = \\lambda x_{1} + (1- \\lambda )x_{0}$. Pick $\\epsilon > 0$ and the uniform lottery c so that\n$c + \\epsilon x(\\lambda ) \\in \\Delta (X)$ for all $\\lambda \\in [0,1]$. By (ii)$, x(\\lambda ) \\in K \\Longleftrightarrow \\epsilon x(\\lambda ) \\in K \\Longleftrightarrow$\n$c + \\epsilon x(\\lambda ) \\succeq c$. Since $c + \\epsilon x(\\lambda ) = \\lambda (c+\\epsilon x_{1}) + (1- \\lambda )(c+\\epsilon x_{0})$, the set\n$\\{\\lambda : x(\\lambda ) \\in K\\}$ is a section of the form $\\{\\lambda : \\lambda a+(1- \\lambda )b \\succeq c\\}$, closed by\nmixture continuity.\n\n(v) A convex subset of a finite-dimensional space that meets every line\nin a closed set is closed (if $x \\in$ cl $K \\setminus K$ and y is in the relative\ninterior of K then $[y, x) \\subseteq K$ by the accessibility lemma, so $K \\cap$ line(y,x)\nis not closed). Hence K is closed, and if $(p_{n}, q_{n}) \\to (p, q)$ with $q_{n} \\succeq p_{n}$\nthen $q_{n} - p_{n} \\in K \\to q - p \\in K, i.e. q \\succeq p$.", "sources": [], "notes": "This is the bridge between the mixture-continuity axiom used in the vNM literature and the closed-graph axiom used by Dubra–Maccheroni–Ok. It has not been checked by a human; if it fails, the map still reaches multi-utility from closed-graph continuity via dmo-theorem.\n", "file": "topics/decision-theory/results/mixture-continuity-implies-closed-graph.yaml", "files": {"md": "writeups/mixture-continuity-implies-closed-graph.md", "handwritten": true, "html": "writeups/mixture-continuity-implies-closed-graph.html"}}, {"id": "multi-utility-implies-closed-graph", "premises": ["multi-utility"], "conclusion": "closed-graph-continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "$\\{(p,q) : p \\succeq q\\} =$ ⋂$_{u\\in U} \\{(p,q) : \\operatorname{EU}_u(p) - \\operatorname{EU}_u(q) \\ge 0\\}$, an intersection\nof preimages of $[0,\\infty )$ under continuous (indeed linear) maps on $\\Delta (X)\\times \\Delta (X)$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-closed-graph.yaml", "files": {"md": "writeups/multi-utility-implies-closed-graph.md", "handwritten": false, "html": "writeups/multi-utility-implies-closed-graph.html"}}, {"id": "multi-utility-implies-independence", "premises": ["multi-utility"], "conclusion": "independence", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "$\\operatorname{EU}_u$ is affine in mixtures, so for $\\lambda \\in (0,1]$:\n$\\operatorname{EU}_u(\\lambda p+(1- \\lambda )r) - \\operatorname{EU}_u(\\lambda q+(1- \\lambda )r) = \\lambda (\\operatorname{EU}_u(p) - \\operatorname{EU}_u(q))$,\nwhich is $\\ge 0$ iff $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$. Quantify over $u \\in U$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-independence.yaml", "files": {"md": "writeups/multi-utility-implies-independence.md", "handwritten": false, "html": "writeups/multi-utility-implies-independence.html"}}, {"id": "multi-utility-implies-transitivity", "premises": ["multi-utility"], "conclusion": "transitivity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "If $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$ and $\\operatorname{EU}_u(q) \\ge \\operatorname{EU}_u(r)$ for every $u \\in U$ then\n$\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(r)$ for every $u \\in U$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-transitivity.yaml", "files": {"md": "writeups/multi-utility-implies-transitivity.md", "handwritten": false, "html": "writeups/multi-utility-implies-transitivity.html"}}, {"id": "quasi-transitivity-implies-acyclicity", "premises": ["quasi-transitivity"], "conclusion": "acyclicity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "If $p_{1} \\succ p_{2} \\succ \\ldots \\succ p_{n} \\succ p_{1}$ then by induction on n, transitivity of $\\succ$ gives\n$p_{1} \\succ p_{n}$, and with $p_{n} \\succ p_{1}$ this contradicts asymmetry of $\\succ$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/quasi-transitivity-implies-acyclicity.yaml", "files": {"md": "writeups/quasi-transitivity-implies-acyclicity.md", "handwritten": false, "html": "writeups/quasi-transitivity-implies-acyclicity.html"}}, {"id": "transitivity-implies-quasi-transitivity", "premises": ["transitivity"], "conclusion": "quasi-transitivity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let $p \\succ q \\succ r$. Then $p \\succeq q \\succeq r$, so $p \\succeq r$. If also $r \\succeq p$ then $r \\succeq p \\succeq q$\ngives $r \\succeq q$, contradicting $q \\succ r$. So $p \\succ r$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/transitivity-implies-quasi-transitivity.yaml", "files": {"md": "writeups/transitivity-implies-quasi-transitivity.md", "handwritten": false, "html": "writeups/transitivity-implies-quasi-transitivity.html"}}, {"id": "vnm-theorem", "premises": ["completeness", "transitivity", "independence", "continuity"], "conclusion": "eu-representation", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "proof": "The von Neumann–Morgenstern theorem in the Herstein–Milnor mixture-set form.\nContinuity plus weak order give, for any $p \\succeq q \\succeq r$ with $p \\succ r, a$ unique\n$\\lambda$ with $q \\sim \\lambda p + (1- \\lambda )r$ (connectedness of [0,1] and closedness of both\nsections). Fix a best and a worst lottery (exist since X is finite and $\\succeq$\nis a weak order respecting mixtures), define $U(q)$ as that $\\lambda$, and use\nindependence to show U is affine in mixtures; then $u(x) = U(\\delta _x)$\nrepresents $\\succeq$ by expected utility.", "sources": ["von Neumann & Morgenstern (1944), Theory of Games and Economic Behavior, appendix", "Herstein & Milnor (1953), An axiomatic approach to measurable utility, Econometrica 21, Theorem 8", "Kreps (1988), Notes on the Theory of Choice, Theorem 5.15"], "notes": "", "file": "topics/decision-theory/results/vnm-theorem.yaml", "files": {"md": "writeups/vnm-theorem.md", "handwritten": false, "html": "writeups/vnm-theorem.html"}}, {"id": "weak-order-def-completeness", "premises": ["weak-order"], "conclusion": "completeness", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-completeness.yaml", "files": {"md": "writeups/weak-order-def-completeness.md", "handwritten": false, "html": "writeups/weak-order-def-completeness.html"}}, {"id": "weak-order-def-forward", "premises": ["completeness", "transitivity"], "conclusion": "weak-order", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-forward.yaml", "files": {"md": "writeups/weak-order-def-forward.md", "handwritten": false, "html": "writeups/weak-order-def-forward.html"}}, {"id": "weak-order-def-transitivity", "premises": ["weak-order"], "conclusion": "transitivity", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-transitivity.yaml", "files": {"md": "writeups/weak-order-def-transitivity.md", "handwritten": false, "html": "writeups/weak-order-def-transitivity.html"}}], "models": [{"id": "band-relation", "name": "Band relation", "description": "Fix $u : X \\to \\mathbb{R}$ non-constant and $\\epsilon > 0$. Define an asymmetric relation P by\np P q iff $\\operatorname{EU}_u(p) - \\operatorname{EU}_u(q) \\in (\\epsilon , 2\\epsilon ]$, and let $p \\succeq q$ iff not q P p. Then\n$\\succeq$ is complete (P is asymmetric) and $\\succ = P$. P is acyclic because $\\operatorname{EU}_u$\nstrictly increases along any P-chain. But P is not transitive: with\n$\\operatorname{EU}_u(p), \\operatorname{EU}_u(q), \\operatorname{EU}_u(r) = 3\\epsilon , 1.5\\epsilon , 0$ we have p P q and q P r while\n$\\operatorname{EU}_u(p) - \\operatorname{EU}_u(r) = 3\\epsilon \\notin (\\epsilon , 2\\epsilon ]$.", "satisfies": ["completeness", "acyclicity"], "violates": ["quasi-transitivity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Sanity-checked numerically in checks/countermodels.py. Not yet checked by a human.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/band-relation.yaml", "files": {"md": "writeups/band-relation.md", "handwritten": false, "html": "writeups/band-relation.html"}}, {"id": "incomplete-continuous-non-archimedean", "name": "Incomplete, continuous, non-Archimedean", "description": "", "satisfies": ["transitivity", "continuity"], "violates": ["archimedean"], "status": "conjectured", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Completeness is used essentially in continuity-completeness-imply-archimedean; no countermodel yet.", "file": "topics/decision-theory/models/incomplete-continuous-non-archimedean.yaml", "files": {"md": "writeups/incomplete-continuous-non-archimedean.md", "handwritten": false, "html": "writeups/incomplete-continuous-non-archimedean.html"}}, {"id": "lexicographic-eu", "name": "Lexicographic EU", "description": "Lexicographic expected utility. With $X = \\{a, b, c\\}$ let $p \\succeq q$ iff\n$p(a) > q(a)$, or $p(a) = q(a)$ and $p(b) \\ge q(b)$. This is complete and\ntransitive (a lexicographic order on $\\mathbb{R} ^{2}$), and satisfies independence\nbecause mixing with r multiplies the vector of differences by $\\lambda$, which\npreserves lexicographic sign. But $\\{\\lambda : \\lambda \\delta _a + (1- \\lambda )\\delta _c \\succeq \\delta _b\\} = (0, 1]$,\nwhich is not closed.\n\nThe same lexicographic order $(p \\succeq q$ iff $p(a) > q(a)$, or $p(a) = q(a)$ and\n$p(b) \\ge q(b)$). Here $\\delta _a \\succ \\delta _b \\succ \\delta _c$, but every mixture $\\beta \\delta _a + (1- \\beta )\\delta _c$\nwith $\\beta > 0$ puts positive weight on a and so is strictly preferred to\n$\\delta _b$; no $\\beta$ with $\\delta _b \\succ \\beta \\delta _a + (1- \\beta )\\delta _c$ exists.", "satisfies": ["completeness", "transitivity", "independence"], "violates": ["continuity", "archimedean"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Hausner (1954), Multidimensional utilities, in Decision Processes (Thrall, Coombs & Davis eds.)", "Fishburn (1971), A study of lexicographic expected utility, Management Science 17", "Hausner (1954), Multidimensional utilities", "Fishburn (1971), A study of lexicographic expected utility, Management Science 17"], "notes": "Derivable from lexicographic-not-archimedean together with continuity-completeness-imply-archimedean (the validator reports it as redundant); kept because it is the form the literature states.", "file": "topics/decision-theory/models/lexicographic-eu.yaml", "files": {"md": "writeups/lexicographic-eu.md", "handwritten": false, "html": "writeups/lexicographic-eu.html"}}, {"id": "non-convex-cone", "name": "Non-convex cone", "description": "Let $X = \\{a, b, c\\}$ and identify a difference q − p of lotteries with the\npoint $(q(a) - p(a), q(b) - p(b)) \\in \\mathbb{R} ^{2}$. Let $C \\subseteq \\mathbb{R} ^{2}$ be the closed upper\nhalf-plane together with the closed sector of directions [225°, 270°],\nand define $q \\succeq p$ iff $q - p \\in C$.\n\n$\\operatorname{Completeness}: C \\cup (- C) = \\mathbb{R} ^{2}$ since −C contains the closed lower\nhalf-plane. Independence: mixing both sides with r multiplies the\ndifference by $\\lambda > 0$, and C is a cone. Closed graph: (p, q) ↦ q − p is\ncontinuous and C is closed. Reflexivity: $0 \\in C$.\n\nTransitivity fails: take x at direction 240° and y at direction 170°,\nboth in C and small enough that $p, q = p + x\\ldots$ are lotteries; $x + y$ has\ndirection $\\approx 205$°, which is not in C. So with $q - p = x$ and $r - q = y$ we\nhave $q \\succeq p$ and $r \\succeq q$ but not $r \\succeq p$.", "satisfies": ["completeness", "independence", "closed-graph-continuity"], "violates": ["transitivity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Sanity-checked numerically in checks/countermodels.py (completeness and independence hold, transitivity fails on random samples). Not yet checked by a human. Any non-convex closed cone C with $C \\cup - C = \\mathbb{R} ^{2}$ works.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/non-convex-cone.yaml", "files": {"md": "writeups/non-convex-cone.md", "handwritten": false, "html": "writeups/non-convex-cone.html"}}, {"id": "rational-levels", "name": "Rational levels", "description": "Let $X = \\{a, b, c\\}$ and define a three-valued function V on $\\Delta (X)$:\n$V(p) = 2$ if $p(a) \\in \\mathbb{Q} ; V(p) = 1$ if $p(a) \\notin \\mathbb{Q}$ and $p(b) \\in \\mathbb{Q} ; V(p) = 0$\notherwise. Let $p \\succeq q$ iff $V(p) \\ge V(q)$. This is a weak order.\n\nMixture continuity fails: along the line from $\\delta _a$ to $\\delta _b$ the mixture\n$\\lambda \\delta _a + (1- \\lambda )\\delta _b$ has $V = 2$ exactly when $\\lambda \\in \\mathbb{Q}$, so\n$\\{\\lambda : \\lambda \\delta _a + (1- \\lambda )\\delta _b \\succeq \\delta _c\\} = \\mathbb{Q} \\cap [0,1]$ is not closed.\n\nArchimedean holds: a chain $p \\succ q \\succ r$ forces $V(p) = 2, V(q) = 1, V(r) = 0$,\nso $p(a) \\in \\mathbb{Q}$ and $r(a) \\notin \\mathbb{Q}$, in particular $p(a) \\ne r(a)$. Along\n$m(\\alpha ) = \\alpha p + (1- \\alpha )r$ the coordinate $m(\\alpha )(a) = r(a) + \\alpha (p(a) - r(a))$ is\nrational for a dense set of $\\alpha$, so some $\\alpha \\in (0,1)$ close to 1 has\n$V(m(\\alpha )) = 2 > V(q)$. For the other half, $m(\\beta )(a)$ is irrational for all but\ncountably many $\\beta$; and $m(\\beta )(b) = r(b) + \\beta (p(b) - r(b))$ is irrational for\nall but countably many $\\beta$ when $p(b) \\ne r(b)$, and equals $r(b) \\notin \\mathbb{Q}$ when\n$p(b) = r(b)$ (because $V(r) = 0$). So some $\\beta \\in (0,1)$ close to 0 has\n$V(m(\\beta )) = 0 < V(q)$.", "satisfies": ["completeness", "transitivity", "archimedean"], "violates": ["continuity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "The construction is deliberately artificial: it shows that the Archimedean axiom cannot replace mixture continuity even for weak orders, unless something like independence is added. Not yet checked by a human.", "file": "topics/decision-theory/models/rational-levels.yaml", "files": {"md": "writeups/rational-levels.md", "handwritten": false, "html": "writeups/rational-levels.html"}}, {"id": "semiorder", "name": "Semiorder", "description": "A semiorder with a just-noticeable difference. Fix $u : X \\to \\mathbb{R}$ non-constant\nand $\\epsilon > 0$, and let $p \\succeq q$ iff $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q) - \\epsilon . \\operatorname{Completeness}$: one of\nthe two differences is $\\ge 0 > - \\epsilon$. Quasi-transitivity: $p \\succ q$ iff\n$\\operatorname{EU}_u(p) > \\operatorname{EU}_u(q) + \\epsilon$, and this is transitive. Closed graph: the graph is\nthe preimage of $[- \\epsilon , \\infty )$ under a continuous map. Transitivity fails: pick\np, q, r with $\\operatorname{EU}_u$ equal to $0, - 0.8\\epsilon , - 1.6\\epsilon$; then $p \\succeq q \\succeq r$ but not $p \\succeq r$.", "satisfies": ["completeness", "quasi-transitivity", "closed-graph-continuity"], "violates": ["transitivity", "independence"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": ["Luce (1956), Semiorders and a theory of utility discrimination, Econometrica 24"], "notes": "Sanity-checked numerically in checks/countermodels.py. The relation is Luce's semiorder; the verification that it fits this framework is AI-produced and unchecked.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/semiorder.yaml", "files": {"md": "writeups/semiorder.md", "handwritten": false, "html": "writeups/semiorder.html"}}, {"id": "ssb", "name": "SSB utility", "description": "", "satisfies": ["completeness", "closed-graph-continuity", "archimedean"], "violates": ["transitivity", "independence"], "status": "conjectured", "certificate": {"provenance": "human", "lean": "none", "produced_by": "ZG", "checked_by": [], "date": "2026-09-08"}, "sources": ["Fishburn (1982), Nontransitive measurable utility, Journal of Mathematical Psychology 26"], "notes": "Sample conjecture; which of betweenness and quasi-transitivity hold is to be checked.", "file": "topics/decision-theory/models/ssb.yaml", "files": {"md": "writeups/ssb.md", "handwritten": false, "html": "writeups/ssb.html"}}, {"id": "unanimity-two-utilities", "name": "Unanimity over two utilities", "description": "Unanimity over two utilities. With $X = \\{a, b, c\\}$ let $p \\succeq q$ iff\n$p(a) \\ge q(a)$ and $p(b) \\ge q(b) (U = \\{u_{1}, u_{2}\\}$ with $u_{1} = 1_a, u_{2} = 1_b$).\nThis is an expected multi-utility representation, hence transitive,\nindependent and closed-graph continuous; but $\\delta _a$ and $\\delta _b$ are\nincomparable.", "satisfies": ["transitivity", "independence", "closed-graph-continuity", "multi-utility"], "violates": ["completeness"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Aumann (1962), Utility theory without the completeness axiom, Econometrica 30", "Dubra, Maccheroni & Ok (2004), JET 115"], "notes": "", "file": "topics/decision-theory/models/unanimity-two-utilities.yaml", "files": {"md": "writeups/unanimity-two-utilities.md", "handwritten": false, "html": "writeups/unanimity-two-utilities.html"}}, {"id": "weighted-utility", "name": "Weighted utility", "description": "Weighted utility. Fix $u : X \\to \\mathbb{R}$ and a weight $w : X \\to (0,\\infty )$ that is not\nconstant, and let $V(p) = \\sum p(x)w(x)u(x) / \\sum p(x)w(x)$; put $p \\succeq q$ iff\n$V(p) \\ge V(q)$. V is continuous on $\\Delta (X)$, so $\\succeq$ is a weak order with closed\ngraph. Its indifference sets are the intersections of $\\Delta (X)$ with\nhyperplanes $\\{p : \\sum p(x)w(x)(u(x) - v) = 0\\}$, which are straight, so\nbetweenness holds. Since w is not constant these hyperplanes are not\nparallel, so $\\succeq$ is not an expected-utility order and (being a continuous\nweak order) must violate independence.", "satisfies": ["completeness", "transitivity", "closed-graph-continuity", "betweenness"], "violates": ["independence"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Chew (1983), A generalization of the quasilinear mean with applications to the measurement of income inequality and decision theory resolving the Allais paradox, Econometrica 51", "Dekel (1986), An axiomatic characterization of preferences under uncertainty: weakening the independence axiom, JET 40"], "notes": "", "file": "topics/decision-theory/models/weighted-utility.yaml", "files": {"md": "writeups/weighted-utility.md", "handwritten": false, "html": "writeups/weighted-utility.html"}}], "generated": "2026-09-15T16:04:39+00:00", "server_analysis": {"classes": [["acyclicity"], ["archimedean"], ["betweenness"], ["closed-graph-continuity"], ["completeness"], ["continuity"], ["eu-representation"], ["independence"], ["multi-utility"], ["quasi-transitivity"], ["transitivity"], ["weak-order"]], "open_pairs": [["acyclicity", "betweenness"], ["archimedean", "acyclicity"], ["archimedean", "betweenness"], ["archimedean", "completeness"], ["archimedean", "quasi-transitivity"], ["betweenness", "acyclicity"], ["betweenness", "quasi-transitivity"], ["closed-graph-continuity", "acyclicity"], ["closed-graph-continuity", "archimedean"], ["closed-graph-continuity", "betweenness"], ["closed-graph-continuity", "quasi-transitivity"], ["completeness", "acyclicity"], ["completeness", "betweenness"], ["continuity", "acyclicity"], ["continuity", "archimedean"], ["continuity", "betweenness"], ["continuity", "closed-graph-continuity"], ["continuity", "quasi-transitivity"], ["independence", "acyclicity"], ["independence", "quasi-transitivity"], ["multi-utility", "archimedean"], ["quasi-transitivity", "betweenness"], ["transitivity", "betweenness"], ["weak-order", "betweenness"]], "unknown": {"band-relation": ["archimedean", "betweenness", "closed-graph-continuity", "continuity", "independence"], "lexicographic-eu": [], "non-convex-cone": ["acyclicity", "quasi-transitivity"], "rational-levels": ["betweenness", "independence"], "semiorder": ["betweenness"], "unanimity-two-utilities": ["archimedean"], "weighted-utility": []}, "problems": [], "infos": [], "conjectures": {"archimedean-independence-imply-continuity": {"status": "open", "via": [], "models": []}, "betweenness-continuity-imply-transitivity": {"status": "refuted", "via": ["independence-implies-betweenness"], "models": ["non-convex-cone"]}, "incomplete-continuous-non-archimedean": {"status": "open", "via": [], "models": []}, "ssb": {"status": "proved", "via": ["closed-graph-implies-mixture-continuity", "continuity-completeness-imply-archimedean"], "models": ["semiorder"]}}}, "downloads": {"bundle": "decision-theory-map.zip", "json": "data.json", "zip": "source.zip", "starter": "logical-maps-starter.zip"}, "background_md": "## Framework\n\n$\\succeq a$ reflexive binary relation on $\\Delta (X), X$ finite with $|X| \\ge 3; \\succ , \\sim$ its asymmetric and symmetric parts. *(placeholder)*\n\n## Notation\n\n*(placeholder)*\n\n## Conventions\n\n*(placeholder — e.g. which form of independence is meant, what \"continuity\" means by default)*\n\n## Certificates\n\n*(placeholder — what human / human-assisted / AI / Lean mean here)*\n\n## Literature\n\n*(placeholder)*\n", "background_html": "<h2 id=\"framework\">Framework<\/h2>\n<p><span class=\"math inline\">\\succeq a<\/span> reflexive binary relation on <span class=\"math inline\">\\Delta (X), X<\/span> finite with <span class=\"math inline\">|X| \\ge 3; \\succ , \\sim<\/span> its asymmetric and symmetric parts. <em>(placeholder)<\/em><\/p>\n<h2 id=\"notation\">Notation<\/h2>\n<p><em>(placeholder)<\/em><\/p>\n<h2 id=\"conventions\">Conventions<\/h2>\n<p><em>(placeholder — e.g. which form of independence is meant, what “continuity” means by default)<\/em><\/p>\n<h2 id=\"certificates\">Certificates<\/h2>\n<p><em>(placeholder — what human / human-assisted / AI / Lean mean here)<\/em><\/p>\n<h2 id=\"literature\">Literature<\/h2>\n<p><em>(placeholder)<\/em><\/p>\n", "contribute_md": "# Contribute\n\n\n## Create your own logical map\n\n[Download the starter project (ZIP)](logical-maps-starter.zip)\n", "contribute_html": "<h1 id=\"contribute\">Contribute<\/h1>\n<h2 id=\"create-your-own-logical-map\">Create your own logical map<\/h2>\n<p><a href=\"logical-maps-starter.zip\">Download the starter project (ZIP)<\/a><\/p>\n"};
+const DATA = {"topic": {"id": "decision-theory", "title": "Preference axioms over lotteries", "description": "", "framework": "≽ a reflexive binary relation on Δ(X), X finite with |X| ≥ 3; ≻, ~ its asymmetric and symmetric parts.\n", "background": [], "notation": ""}, "papers": [], "principles": [{"id": "acyclicity", "name": "Acyclicity", "statement": "There is no finite cycle of strict preferences $p_{1} \\succ p_{2} \\succ \\ldots \\succ p_{n} \\succ p_{1}$.", "formal": "$\\forall n \\forall p_{1}\\ldots p_{n}. \\neg (p_{1} \\succ p_{2} \\land \\ldots \\land p_{n} \\succ p_{1})$", "aliases": [], "tags": ["ordering"], "sources": ["Sen (1970), Collective Choice and Social Welfare, ch. 1*"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/acyclicity.yaml"}, {"id": "archimedean", "name": "Archimedean", "statement": "For all $p, q, r \\in \\Delta (X)$: if $p \\succ q \\succ r$ then there are $\\alpha , \\beta \\in (0,1)$ with $\\alpha p + (1- \\alpha )r \\succ q$ and $q \\succ \\beta p + (1- \\beta )r$.", "formal": "$\\forall p q r. p \\succ q \\succ r \\to \\exists \\alpha \\beta \\in (0,1). \\alpha p+(1- \\alpha )r \\succ q \\land q \\succ \\beta p+(1- \\beta )r$", "aliases": ["Jensen continuity", "Weak continuity"], "tags": ["axiom", "topological"], "sources": ["Jensen (1967), An introduction to Bernoullian utility theory I, Swedish Journal of Economics 69"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/archimedean.yaml"}, {"id": "betweenness", "name": "Betweenness", "statement": "For all $p, q \\in \\Delta (X)$ and $\\lambda \\in (0,1)$: if $p \\succ q$ then $p \\succ \\lambda p + (1- \\lambda )q \\succ q$, and if $p \\sim q$ then $p \\sim \\lambda p + (1- \\lambda )q$.", "formal": "$\\forall p q, \\forall \\lambda \\in (0,1). (p \\succ q \\to p \\succ \\lambda p+(1- \\lambda )q \\succ q) \\land (p \\sim q \\to p \\sim \\lambda p+(1- \\lambda )q)$", "aliases": ["Mixture betweenness"], "tags": ["axiom", "mixture"], "sources": ["Chew (1983), A generalization of the quasilinear mean…, Econometrica 51", "Dekel (1986), An axiomatic characterization of preferences under uncertainty, JET 40"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/betweenness.yaml"}, {"id": "closed-graph-continuity", "name": "Closed-graph continuity", "statement": "The set $\\{(p, q) \\in \\Delta (X) \\times \\Delta (X) : p \\succeq q\\}$ is closed in the product topology.", "formal": "$\\operatorname{IsClosed} \\{(p,q) | p \\succeq q\\}$", "aliases": ["Continuity (DMO)", "Topological continuity"], "tags": ["axiom", "topological"], "sources": ["Dubra, Maccheroni & Ok (2004), JET 115, Axiom C"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/closed-graph-continuity.yaml"}, {"id": "completeness", "name": "Completeness", "statement": "For all $p, q \\in \\Delta (X): p \\succeq q$ or $q \\succeq p$.", "formal": "$\\forall p q. p \\succeq q \\lor q \\succeq p$", "aliases": ["Connectedness", "Totality"], "tags": ["ordering"], "sources": ["von Neumann & Morgenstern (1944), Theory of Games and Economic Behavior, §3.5"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/completeness.yaml"}, {"id": "continuity", "name": "Mixture continuity", "statement": "For all $p, q, r \\in \\Delta (X)$ the sets $\\{\\lambda \\in [0,1] : \\lambda p + (1- \\lambda )q \\succeq r\\}$ and $\\{\\lambda \\in [0,1] : r \\succeq \\lambda p + (1- \\lambda )q\\}$ are closed.", "formal": "$\\forall p q r$. closed $\\{\\lambda | \\lambda p+(1- \\lambda )q \\succeq r\\} \\land$ closed $\\{\\lambda | r \\succeq \\lambda p+(1- \\lambda )q\\}$", "aliases": ["Herstein–Milnor continuity", "Closedness"], "tags": ["axiom", "topological"], "sources": ["Herstein & Milnor (1953), Econometrica 21, Axiom 2"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/continuity.yaml"}, {"id": "eu-representation", "name": "Expected-utility representation", "statement": "There is a function $u : X \\to \\mathbb{R}$ such that for all $p, q \\in \\Delta (X): p \\succeq q$ if and only if $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$.", "formal": "$\\exists u:X\\to \\mathbb{R} . \\forall p q. p \\succeq q \\leftrightarrow \\sum _x p(x)u(x) \\ge \\sum _x q(x)u(x)$", "aliases": ["vNM representation", "Linear utility representation"], "tags": ["representation"], "sources": ["von Neumann & Morgenstern (1944)"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/eu-representation.yaml"}, {"id": "independence", "name": "Independence", "statement": "For all $p, q, r \\in \\Delta (X)$ and $\\lambda \\in (0,1]: p \\succeq q$ if and only if $\\lambda p + (1- \\lambda )r \\succeq \\lambda q + (1- \\lambda )r$.", "formal": "$\\forall p q r, \\forall \\lambda \\in (0,1]. p \\succeq q \\leftrightarrow \\lambda p+(1- \\lambda )r \\succeq \\lambda q+(1- \\lambda )r$", "aliases": ["Substitution axiom", "vNM independence", "Linearity"], "tags": ["axiom", "mixture"], "sources": ["Marschak (1950), Rational behavior, uncertain prospects, and measurable utility, Econometrica 18", "Herstein & Milnor (1953), An axiomatic approach to measurable utility, Econometrica 21"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/independence.yaml"}, {"id": "multi-utility", "name": "Expected multi-utility representation", "statement": "There is a set U of functions $u : X \\to \\mathbb{R}$ such that for all $p, q \\in \\Delta (X): p \\succeq q$ if and only if $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$ for every $u \\in U$.", "formal": "$\\exists U \\subseteq (X\\to \\mathbb{R} ). \\forall p q. p \\succeq q \\leftrightarrow \\forall u\\in U. \\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$", "aliases": ["Incomplete expected utility", "Unanimity representation"], "tags": ["representation"], "sources": ["Aumann (1962), Utility theory without the completeness axiom, Econometrica 30", "Dubra, Maccheroni & Ok (2004), Expected utility theory without the completeness axiom, JET 115"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/multi-utility.yaml"}, {"id": "quasi-transitivity", "name": "Quasi-transitivity", "statement": "Strict preference is transitive: if $p \\succ q$ and $q \\succ r$ then $p \\succ r$.", "formal": "$\\forall p q r. p \\succ q \\to q \\succ r \\to p \\succ r$", "aliases": ["PP-transitivity"], "tags": ["ordering"], "sources": ["Sen (1969), Quasi-transitivity, rational choice and collective decisions, Review of Economic Studies 36"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/quasi-transitivity.yaml"}, {"id": "transitivity", "name": "Transitivity", "statement": "For all $p, q, r \\in \\Delta (X)$: if $p \\succeq q$ and $q \\succeq r$ then $p \\succeq r$.", "formal": "$\\forall p q r. p \\succeq q \\to q \\succeq r \\to p \\succeq r$", "aliases": [], "tags": ["ordering"], "sources": ["von Neumann & Morgenstern (1944), §3.5"], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/transitivity.yaml"}, {"id": "weak-order", "name": "Weak order", "statement": "$\\succeq$ is complete and transitive.", "formal": "$\\operatorname{Completeness} \\land \\operatorname{Transitivity}$", "aliases": ["Total preorder", "Ordering axiom"], "tags": ["ordering", "bundle"], "sources": [], "notes": "", "date": "2026-09-08", "lean": null, "file": "topics/decision-theory/principles/weak-order.yaml"}], "results": [{"id": "archimedean-independence-imply-continuity", "premises": ["transitivity", "independence", "archimedean"], "conclusion": "continuity", "status": "conjectured", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "", "sources": [], "notes": "Known with completeness added (Jensen 1967). Without it the cone $K = \\{q - p : q \\succeq p\\}$ is convex; the question is whether the Archimedean axiom forces it to be closed.", "file": "topics/decision-theory/results/archimedean-independence-imply-continuity.yaml", "files": {"md": "writeups/archimedean-independence-imply-continuity.md", "handwritten": false, "html": "writeups/archimedean-independence-imply-continuity.html"}}, {"id": "betweenness-continuity-imply-transitivity", "premises": ["completeness", "closed-graph-continuity", "betweenness"], "conclusion": "transitivity", "status": "conjectured", "certificate": {"provenance": "human", "lean": "none", "produced_by": "ZG", "checked_by": [], "date": "2026-09-08"}, "proof": "", "sources": [], "notes": "Sample conjecture.", "file": "topics/decision-theory/results/betweenness-continuity-imply-transitivity.yaml", "files": {"md": "writeups/betweenness-continuity-imply-transitivity.md", "handwritten": false, "html": "writeups/betweenness-continuity-imply-transitivity.html"}}, {"id": "closed-graph-implies-mixture-continuity", "premises": ["closed-graph-continuity"], "conclusion": "continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "$\\lambda$ ↦ $(\\lambda p+(1- \\lambda )q, r)$ and $\\lambda$ ↦ $(r, \\lambda p+(1- \\lambda )q)$ are continuous maps\n$[0,1] \\to \\Delta (X)\\times \\Delta (X)$; the two sections are their preimages of the closed\ngraph of $\\succeq$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/closed-graph-implies-mixture-continuity.yaml", "files": {"md": "writeups/closed-graph-implies-mixture-continuity.md", "handwritten": false, "html": "writeups/closed-graph-implies-mixture-continuity.html"}}, {"id": "continuity-completeness-imply-archimedean", "premises": ["continuity", "completeness"], "conclusion": "archimedean", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let $p \\succ q \\succ r$ and set $A = \\{\\lambda : \\lambda p+(1- \\lambda )r \\succeq q\\}, B = \\{\\lambda : q \\succeq \\lambda p+(1- \\lambda )r\\}$.\nBoth are closed by continuity and $A \\cup B = [0,1]$ by completeness. Since\n$1 \\notin B$ (as $p \\succ q$) and $[0,1]\\setminus B$ is open, some interval $(1- \\epsilon , 1]$ lies in\n$[0,1]\\setminus B \\subseteq A$; any $\\alpha$ in it with $\\alpha < 1$ gives $\\alpha p+(1- \\alpha )r \\succ q$. Symmetrically,\n$0 \\notin A$ (as $q \\succ r$) yields $[0, \\epsilon ) \\subseteq B\\setminus A$ and any $\\beta$ in it with $\\beta > 0$ gives\n$q \\succ \\beta p+(1- \\beta )r$.", "sources": [], "notes": "Completeness is used to conclude $\\lambda \\in A$ from $\\lambda \\notin B$; whether continuity alone suffices is left open here.", "file": "topics/decision-theory/results/continuity-completeness-imply-archimedean.yaml", "files": {"md": "writeups/continuity-completeness-imply-archimedean.md", "handwritten": false, "html": "writeups/continuity-completeness-imply-archimedean.html"}}, {"id": "dmo-theorem", "premises": ["transitivity", "independence", "closed-graph-continuity"], "conclusion": "multi-utility", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "proof": "Dubra–Maccheroni–Ok, Theorem 1, for compact metric X (finite X is a\nspecial case): a reflexive transitive relation on $\\Delta (X)$ satisfying\nindependence and closed-graph continuity has an expected multi-utility\nrepresentation. The proof identifies $\\succeq$ with a closed convex cone of\nsigned measures and takes U to be the dual cone.", "sources": ["Dubra, Maccheroni & Ok (2004), Expected utility theory without the completeness axiom, JET 115, Theorem 1"], "notes": "Reflexivity is a standing assumption of the framework.\n", "file": "topics/decision-theory/results/dmo-theorem.yaml", "files": {"md": "writeups/dmo-theorem.md", "handwritten": false, "html": "writeups/dmo-theorem.html"}}, {"id": "eu-implies-completeness", "premises": ["eu-representation"], "conclusion": "completeness", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Real numbers are totally ordered: $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$ or $\\operatorname{EU}_u(q) \\ge \\operatorname{EU}_u(p)$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/eu-implies-completeness.yaml", "files": {"md": "writeups/eu-implies-completeness.md", "handwritten": false, "html": "writeups/eu-implies-completeness.html"}}, {"id": "eu-implies-multi-utility", "premises": ["eu-representation"], "conclusion": "multi-utility", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Take $U = \\{u\\}$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/eu-implies-multi-utility.yaml", "files": {"md": "writeups/eu-implies-multi-utility.md", "handwritten": false, "html": "writeups/eu-implies-multi-utility.html"}}, {"id": "independence-implies-betweenness", "premises": ["independence"], "conclusion": "betweenness", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Fix $\\lambda \\in (0,1)$ and write $m = \\lambda p + (1- \\lambda )q$. Independence with $r = p$ and\nmixing weight $1- \\lambda$ gives $p \\succeq q \\Longleftrightarrow (1- \\lambda )p+\\lambda p \\succeq (1- \\lambda )q+\\lambda p, i.e. p \\succeq q \\Longleftrightarrow p \\succeq m$,\nand likewise $q \\succeq p \\Longleftrightarrow m \\succeq p$. Hence $p \\succ q \\Longleftrightarrow p \\succ m$ and $p \\sim q \\Longleftrightarrow p \\sim m$.\nIndependence with $r = q$ and weight $\\lambda$ gives $p \\succeq q \\Longleftrightarrow m \\succeq q$ and\n$q \\succeq p \\Longleftrightarrow q \\succeq m$, so $p \\succ q \\Longleftrightarrow m \\succ q$. Together: $p \\succ q \\Longrightarrow p \\succ m \\succ q$ and\n$p \\sim q \\Longrightarrow p \\sim m$.", "sources": [], "notes": "No ordering assumptions are needed because independence is taken in the biconditional form.\n", "file": "topics/decision-theory/results/independence-implies-betweenness.yaml", "files": {"md": "writeups/independence-implies-betweenness.md", "handwritten": false, "html": "writeups/independence-implies-betweenness.html"}}, {"id": "mixture-continuity-implies-closed-graph", "premises": ["transitivity", "independence", "continuity"], "conclusion": "closed-graph-continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let $V = \\{x \\in \\mathbb{R} ^X : \\sum x = 0\\}$ and $D = \\Delta (X) - \\Delta (X) \\subseteq V$ (compact, convex,\ncontains 0). Put $K = \\{q - p : q \\succeq p\\}$.\n\n(i) Membership in K depends only on the difference: if $q - p = q' - p'$\nthen $\\frac{1}{2} q + \\frac{1}{2} p' = \\frac{1}{2} q' + \\frac{1}{2} p$, and by independence $(\\lambda = \\frac{1}{2}$, mixing with p'\nresp. $p) q \\succeq p \\Longleftrightarrow \\frac{1}{2} q+\\frac{1}{2} p' \\succeq \\frac{1}{2} p+\\frac{1}{2} p'$ and $q' \\succeq p' \\Longleftrightarrow \\frac{1}{2} q'+\\frac{1}{2} p \\succeq \\frac{1}{2} p'+\\frac{1}{2} p$; the two\nright-hand sides are the same pair. So \"$x \\in K$\" is well defined for $x \\in D$.\n\n(ii) K is a cone in D: if $x \\in K$ and $tx \\in D (t > 0)$ then $tx \\in K$. For\n$t < 1$ use independence with $r = p: q \\succeq p \\Longrightarrow tq+(1- t)p \\succeq p$, whose\ndifference is $t(q- p)$. For $t > 1$ apply the $t < 1$ case to tx.\n\n(iii) K is convex: with $x = q- p, y = q'- p'$ in K, independence gives\n$\\frac{1}{2} q+\\frac{1}{2} q' \\succeq \\frac{1}{2} p+\\frac{1}{2} q'$ and $\\frac{1}{2} q'+\\frac{1}{2} p \\succeq \\frac{1}{2} p'+\\frac{1}{2} p$, and transitivity gives\n$\\frac{1}{2} q+\\frac{1}{2} q' \\succeq \\frac{1}{2} p+\\frac{1}{2} p'$, whose difference is $\\frac{1}{2} x+\\frac{1}{2} y$.\n\n(iv) K is closed along every line. Let $[x_{0}, x_{1}] = \\ell \\cap D$ for a line $\\ell$ and\n$x(\\lambda ) = \\lambda x_{1} + (1- \\lambda )x_{0}$. Pick $\\epsilon > 0$ and the uniform lottery c so that\n$c + \\epsilon x(\\lambda ) \\in \\Delta (X)$ for all $\\lambda \\in [0,1]$. By (ii)$, x(\\lambda ) \\in K \\Longleftrightarrow \\epsilon x(\\lambda ) \\in K \\Longleftrightarrow$\n$c + \\epsilon x(\\lambda ) \\succeq c$. Since $c + \\epsilon x(\\lambda ) = \\lambda (c+\\epsilon x_{1}) + (1- \\lambda )(c+\\epsilon x_{0})$, the set\n$\\{\\lambda : x(\\lambda ) \\in K\\}$ is a section of the form $\\{\\lambda : \\lambda a+(1- \\lambda )b \\succeq c\\}$, closed by\nmixture continuity.\n\n(v) A convex subset of a finite-dimensional space that meets every line\nin a closed set is closed (if $x \\in$ cl $K \\setminus K$ and y is in the relative\ninterior of K then $[y, x) \\subseteq K$ by the accessibility lemma, so $K \\cap$ line(y,x)\nis not closed). Hence K is closed, and if $(p_{n}, q_{n}) \\to (p, q)$ with $q_{n} \\succeq p_{n}$\nthen $q_{n} - p_{n} \\in K \\to q - p \\in K, i.e. q \\succeq p$.", "sources": [], "notes": "This is the bridge between the mixture-continuity axiom used in the vNM literature and the closed-graph axiom used by Dubra–Maccheroni–Ok. It has not been checked by a human; if it fails, the map still reaches multi-utility from closed-graph continuity via dmo-theorem.\n", "file": "topics/decision-theory/results/mixture-continuity-implies-closed-graph.yaml", "files": {"md": "writeups/mixture-continuity-implies-closed-graph.md", "handwritten": true, "html": "writeups/mixture-continuity-implies-closed-graph.html"}}, {"id": "multi-utility-implies-closed-graph", "premises": ["multi-utility"], "conclusion": "closed-graph-continuity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "$\\{(p,q) : p \\succeq q\\} =$ ⋂$_{u\\in U} \\{(p,q) : \\operatorname{EU}_u(p) - \\operatorname{EU}_u(q) \\ge 0\\}$, an intersection\nof preimages of $[0,\\infty )$ under continuous (indeed linear) maps on $\\Delta (X)\\times \\Delta (X)$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-closed-graph.yaml", "files": {"md": "writeups/multi-utility-implies-closed-graph.md", "handwritten": false, "html": "writeups/multi-utility-implies-closed-graph.html"}}, {"id": "multi-utility-implies-independence", "premises": ["multi-utility"], "conclusion": "independence", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "$\\operatorname{EU}_u$ is affine in mixtures, so for $\\lambda \\in (0,1]$:\n$\\operatorname{EU}_u(\\lambda p+(1- \\lambda )r) - \\operatorname{EU}_u(\\lambda q+(1- \\lambda )r) = \\lambda (\\operatorname{EU}_u(p) - \\operatorname{EU}_u(q))$,\nwhich is $\\ge 0$ iff $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$. Quantify over $u \\in U$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-independence.yaml", "files": {"md": "writeups/multi-utility-implies-independence.md", "handwritten": false, "html": "writeups/multi-utility-implies-independence.html"}}, {"id": "multi-utility-implies-transitivity", "premises": ["multi-utility"], "conclusion": "transitivity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "If $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q)$ and $\\operatorname{EU}_u(q) \\ge \\operatorname{EU}_u(r)$ for every $u \\in U$ then\n$\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(r)$ for every $u \\in U$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/multi-utility-implies-transitivity.yaml", "files": {"md": "writeups/multi-utility-implies-transitivity.md", "handwritten": false, "html": "writeups/multi-utility-implies-transitivity.html"}}, {"id": "quasi-transitivity-implies-acyclicity", "premises": ["quasi-transitivity"], "conclusion": "acyclicity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "If $p_{1} \\succ p_{2} \\succ \\ldots \\succ p_{n} \\succ p_{1}$ then by induction on n, transitivity of $\\succ$ gives\n$p_{1} \\succ p_{n}$, and with $p_{n} \\succ p_{1}$ this contradicts asymmetry of $\\succ$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/quasi-transitivity-implies-acyclicity.yaml", "files": {"md": "writeups/quasi-transitivity-implies-acyclicity.md", "handwritten": false, "html": "writeups/quasi-transitivity-implies-acyclicity.html"}}, {"id": "transitivity-implies-quasi-transitivity", "premises": ["transitivity"], "conclusion": "quasi-transitivity", "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "proof": "Let $p \\succ q \\succ r$. Then $p \\succeq q \\succeq r$, so $p \\succeq r$. If also $r \\succeq p$ then $r \\succeq p \\succeq q$\ngives $r \\succeq q$, contradicting $q \\succ r$. So $p \\succ r$.", "sources": [], "notes": "", "file": "topics/decision-theory/results/transitivity-implies-quasi-transitivity.yaml", "files": {"md": "writeups/transitivity-implies-quasi-transitivity.md", "handwritten": false, "html": "writeups/transitivity-implies-quasi-transitivity.html"}}, {"id": "vnm-theorem", "premises": ["completeness", "transitivity", "independence", "continuity"], "conclusion": "eu-representation", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "proof": "The von Neumann–Morgenstern theorem in the Herstein–Milnor mixture-set form.\nContinuity plus weak order give, for any $p \\succeq q \\succeq r$ with $p \\succ r, a$ unique\n$\\lambda$ with $q \\sim \\lambda p + (1- \\lambda )r$ (connectedness of [0,1] and closedness of both\nsections). Fix a best and a worst lottery (exist since X is finite and $\\succeq$\nis a weak order respecting mixtures), define $U(q)$ as that $\\lambda$, and use\nindependence to show U is affine in mixtures; then $u(x) = U(\\delta _x)$\nrepresents $\\succeq$ by expected utility.", "sources": ["von Neumann & Morgenstern (1944), Theory of Games and Economic Behavior, appendix", "Herstein & Milnor (1953), An axiomatic approach to measurable utility, Econometrica 21, Theorem 8", "Kreps (1988), Notes on the Theory of Choice, Theorem 5.15"], "notes": "", "file": "topics/decision-theory/results/vnm-theorem.yaml", "files": {"md": "writeups/vnm-theorem.md", "handwritten": false, "html": "writeups/vnm-theorem.html"}}, {"id": "weak-order-def-completeness", "premises": ["weak-order"], "conclusion": "completeness", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-completeness.yaml", "files": {"md": "writeups/weak-order-def-completeness.md", "handwritten": false, "html": "writeups/weak-order-def-completeness.html"}}, {"id": "weak-order-def-forward", "premises": ["completeness", "transitivity"], "conclusion": "weak-order", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-forward.yaml", "files": {"md": "writeups/weak-order-def-forward.md", "handwritten": false, "html": "writeups/weak-order-def-forward.html"}}, {"id": "weak-order-def-transitivity", "premises": ["weak-order"], "conclusion": "transitivity", "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "definition", "checked_by": [], "date": "2026-09-08"}, "proof": "By definition of weak order.\n", "sources": [], "notes": "", "file": "topics/decision-theory/results/weak-order-def-transitivity.yaml", "files": {"md": "writeups/weak-order-def-transitivity.md", "handwritten": false, "html": "writeups/weak-order-def-transitivity.html"}}], "models": [{"id": "band-relation", "name": "Band relation", "description": "Fix $u : X \\to \\mathbb{R}$ non-constant and $\\epsilon > 0$. Define an asymmetric relation P by\np P q iff $\\operatorname{EU}_u(p) - \\operatorname{EU}_u(q) \\in (\\epsilon , 2\\epsilon ]$, and let $p \\succeq q$ iff not q P p. Then\n$\\succeq$ is complete (P is asymmetric) and $\\succ = P$. P is acyclic because $\\operatorname{EU}_u$\nstrictly increases along any P-chain. But P is not transitive: with\n$\\operatorname{EU}_u(p), \\operatorname{EU}_u(q), \\operatorname{EU}_u(r) = 3\\epsilon , 1.5\\epsilon , 0$ we have p P q and q P r while\n$\\operatorname{EU}_u(p) - \\operatorname{EU}_u(r) = 3\\epsilon \\notin (\\epsilon , 2\\epsilon ]$.", "satisfies": ["completeness", "acyclicity"], "violates": ["quasi-transitivity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Sanity-checked numerically in checks/countermodels.py. Not yet checked by a human.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/band-relation.yaml", "files": {"md": "writeups/band-relation.md", "handwritten": false, "html": "writeups/band-relation.html"}}, {"id": "incomplete-continuous-non-archimedean", "name": "Incomplete, continuous, non-Archimedean", "description": "", "satisfies": ["transitivity", "continuity"], "violates": ["archimedean"], "status": "conjectured", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Completeness is used essentially in continuity-completeness-imply-archimedean; no countermodel yet.", "file": "topics/decision-theory/models/incomplete-continuous-non-archimedean.yaml", "files": {"md": "writeups/incomplete-continuous-non-archimedean.md", "handwritten": false, "html": "writeups/incomplete-continuous-non-archimedean.html"}}, {"id": "lexicographic-eu", "name": "Lexicographic EU", "description": "Lexicographic expected utility. With $X = \\{a, b, c\\}$ let $p \\succeq q$ iff\n$p(a) > q(a)$, or $p(a) = q(a)$ and $p(b) \\ge q(b)$. This is complete and\ntransitive (a lexicographic order on $\\mathbb{R} ^{2}$), and satisfies independence\nbecause mixing with r multiplies the vector of differences by $\\lambda$, which\npreserves lexicographic sign. But $\\{\\lambda : \\lambda \\delta _a + (1- \\lambda )\\delta _c \\succeq \\delta _b\\} = (0, 1]$,\nwhich is not closed.\n\nThe same lexicographic order $(p \\succeq q$ iff $p(a) > q(a)$, or $p(a) = q(a)$ and\n$p(b) \\ge q(b)$). Here $\\delta _a \\succ \\delta _b \\succ \\delta _c$, but every mixture $\\beta \\delta _a + (1- \\beta )\\delta _c$\nwith $\\beta > 0$ puts positive weight on a and so is strictly preferred to\n$\\delta _b$; no $\\beta$ with $\\delta _b \\succ \\beta \\delta _a + (1- \\beta )\\delta _c$ exists.", "satisfies": ["completeness", "transitivity", "independence"], "violates": ["continuity", "archimedean"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Hausner (1954), Multidimensional utilities, in Decision Processes (Thrall, Coombs & Davis eds.)", "Fishburn (1971), A study of lexicographic expected utility, Management Science 17", "Hausner (1954), Multidimensional utilities", "Fishburn (1971), A study of lexicographic expected utility, Management Science 17"], "notes": "Derivable from lexicographic-not-archimedean together with continuity-completeness-imply-archimedean (the validator reports it as redundant); kept because it is the form the literature states.", "file": "topics/decision-theory/models/lexicographic-eu.yaml", "files": {"md": "writeups/lexicographic-eu.md", "handwritten": false, "html": "writeups/lexicographic-eu.html"}}, {"id": "non-convex-cone", "name": "Non-convex cone", "description": "Let $X = \\{a, b, c\\}$ and identify a difference q − p of lotteries with the\npoint $(q(a) - p(a), q(b) - p(b)) \\in \\mathbb{R} ^{2}$. Let $C \\subseteq \\mathbb{R} ^{2}$ be the closed upper\nhalf-plane together with the closed sector of directions [225°, 270°],\nand define $q \\succeq p$ iff $q - p \\in C$.\n\n$\\operatorname{Completeness}: C \\cup (- C) = \\mathbb{R} ^{2}$ since −C contains the closed lower\nhalf-plane. Independence: mixing both sides with r multiplies the\ndifference by $\\lambda > 0$, and C is a cone. Closed graph: (p, q) ↦ q − p is\ncontinuous and C is closed. Reflexivity: $0 \\in C$.\n\nTransitivity fails: take x at direction 240° and y at direction 170°,\nboth in C and small enough that $p, q = p + x\\ldots$ are lotteries; $x + y$ has\ndirection $\\approx 205$°, which is not in C. So with $q - p = x$ and $r - q = y$ we\nhave $q \\succeq p$ and $r \\succeq q$ but not $r \\succeq p$.", "satisfies": ["completeness", "independence", "closed-graph-continuity"], "violates": ["transitivity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "Sanity-checked numerically in checks/countermodels.py (completeness and independence hold, transitivity fails on random samples). Not yet checked by a human. Any non-convex closed cone C with $C \\cup - C = \\mathbb{R} ^{2}$ works.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/non-convex-cone.yaml", "files": {"md": "writeups/non-convex-cone.md", "handwritten": false, "html": "writeups/non-convex-cone.html"}}, {"id": "rational-levels", "name": "Rational levels", "description": "Let $X = \\{a, b, c\\}$ and define a three-valued function V on $\\Delta (X)$:\n$V(p) = 2$ if $p(a) \\in \\mathbb{Q} ; V(p) = 1$ if $p(a) \\notin \\mathbb{Q}$ and $p(b) \\in \\mathbb{Q} ; V(p) = 0$\notherwise. Let $p \\succeq q$ iff $V(p) \\ge V(q)$. This is a weak order.\n\nMixture continuity fails: along the line from $\\delta _a$ to $\\delta _b$ the mixture\n$\\lambda \\delta _a + (1- \\lambda )\\delta _b$ has $V = 2$ exactly when $\\lambda \\in \\mathbb{Q}$, so\n$\\{\\lambda : \\lambda \\delta _a + (1- \\lambda )\\delta _b \\succeq \\delta _c\\} = \\mathbb{Q} \\cap [0,1]$ is not closed.\n\nArchimedean holds: a chain $p \\succ q \\succ r$ forces $V(p) = 2, V(q) = 1, V(r) = 0$,\nso $p(a) \\in \\mathbb{Q}$ and $r(a) \\notin \\mathbb{Q}$, in particular $p(a) \\ne r(a)$. Along\n$m(\\alpha ) = \\alpha p + (1- \\alpha )r$ the coordinate $m(\\alpha )(a) = r(a) + \\alpha (p(a) - r(a))$ is\nrational for a dense set of $\\alpha$, so some $\\alpha \\in (0,1)$ close to 1 has\n$V(m(\\alpha )) = 2 > V(q)$. For the other half, $m(\\beta )(a)$ is irrational for all but\ncountably many $\\beta$; and $m(\\beta )(b) = r(b) + \\beta (p(b) - r(b))$ is irrational for\nall but countably many $\\beta$ when $p(b) \\ne r(b)$, and equals $r(b) \\notin \\mathbb{Q}$ when\n$p(b) = r(b)$ (because $V(r) = 0$). So some $\\beta \\in (0,1)$ close to 0 has\n$V(m(\\beta )) = 0 < V(q)$.", "satisfies": ["completeness", "transitivity", "archimedean"], "violates": ["continuity"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": [], "notes": "The construction is deliberately artificial: it shows that the Archimedean axiom cannot replace mixture continuity even for weak orders, unless something like independence is added. Not yet checked by a human.", "file": "topics/decision-theory/models/rational-levels.yaml", "files": {"md": "writeups/rational-levels.md", "handwritten": false, "html": "writeups/rational-levels.html"}}, {"id": "semiorder", "name": "Semiorder", "description": "A semiorder with a just-noticeable difference. Fix $u : X \\to \\mathbb{R}$ non-constant\nand $\\epsilon > 0$, and let $p \\succeq q$ iff $\\operatorname{EU}_u(p) \\ge \\operatorname{EU}_u(q) - \\epsilon . \\operatorname{Completeness}$: one of\nthe two differences is $\\ge 0 > - \\epsilon$. Quasi-transitivity: $p \\succ q$ iff\n$\\operatorname{EU}_u(p) > \\operatorname{EU}_u(q) + \\epsilon$, and this is transitive. Closed graph: the graph is\nthe preimage of $[- \\epsilon , \\infty )$ under a continuous map. Transitivity fails: pick\np, q, r with $\\operatorname{EU}_u$ equal to $0, - 0.8\\epsilon , - 1.6\\epsilon$; then $p \\succeq q \\succeq r$ but not $p \\succeq r$.", "satisfies": ["completeness", "quasi-transitivity", "closed-graph-continuity"], "violates": ["transitivity", "independence"], "status": "proved", "certificate": {"provenance": "ai", "lean": "none", "produced_by": "Claude Fable 5.1 (Cowork session)", "checked_by": [], "date": "2026-09-08"}, "sources": ["Luce (1956), Semiorders and a theory of utility discrimination, Econometrica 24"], "notes": "Sanity-checked numerically in checks/countermodels.py. The relation is Luce's semiorder; the verification that it fits this framework is AI-produced and unchecked.", "checks": ["topics/decision-theory/checks/countermodels.py"], "file": "topics/decision-theory/models/semiorder.yaml", "files": {"md": "writeups/semiorder.md", "handwritten": false, "html": "writeups/semiorder.html"}}, {"id": "ssb", "name": "SSB utility", "description": "", "satisfies": ["completeness", "closed-graph-continuity", "archimedean"], "violates": ["transitivity", "independence"], "status": "conjectured", "certificate": {"provenance": "human", "lean": "none", "produced_by": "ZG", "checked_by": [], "date": "2026-09-08"}, "sources": ["Fishburn (1982), Nontransitive measurable utility, Journal of Mathematical Psychology 26"], "notes": "Sample conjecture; which of betweenness and quasi-transitivity hold is to be checked.", "file": "topics/decision-theory/models/ssb.yaml", "files": {"md": "writeups/ssb.md", "handwritten": false, "html": "writeups/ssb.html"}}, {"id": "unanimity-two-utilities", "name": "Unanimity over two utilities", "description": "Unanimity over two utilities. With $X = \\{a, b, c\\}$ let $p \\succeq q$ iff\n$p(a) \\ge q(a)$ and $p(b) \\ge q(b) (U = \\{u_{1}, u_{2}\\}$ with $u_{1} = 1_a, u_{2} = 1_b$).\nThis is an expected multi-utility representation, hence transitive,\nindependent and closed-graph continuous; but $\\delta _a$ and $\\delta _b$ are\nincomparable.", "satisfies": ["transitivity", "independence", "closed-graph-continuity", "multi-utility"], "violates": ["completeness"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Aumann (1962), Utility theory without the completeness axiom, Econometrica 30", "Dubra, Maccheroni & Ok (2004), JET 115"], "notes": "", "file": "topics/decision-theory/models/unanimity-two-utilities.yaml", "files": {"md": "writeups/unanimity-two-utilities.md", "handwritten": false, "html": "writeups/unanimity-two-utilities.html"}}, {"id": "weighted-utility", "name": "Weighted utility", "description": "Weighted utility. Fix $u : X \\to \\mathbb{R}$ and a weight $w : X \\to (0,\\infty )$ that is not\nconstant, and let $V(p) = \\sum p(x)w(x)u(x) / \\sum p(x)w(x)$; put $p \\succeq q$ iff\n$V(p) \\ge V(q)$. V is continuous on $\\Delta (X)$, so $\\succeq$ is a weak order with closed\ngraph. Its indifference sets are the intersections of $\\Delta (X)$ with\nhyperplanes $\\{p : \\sum p(x)w(x)(u(x) - v) = 0\\}$, which are straight, so\nbetweenness holds. Since w is not constant these hyperplanes are not\nparallel, so $\\succeq$ is not an expected-utility order and (being a continuous\nweak order) must violate independence.", "satisfies": ["completeness", "transitivity", "closed-graph-continuity", "betweenness"], "violates": ["independence"], "status": "proved", "certificate": {"provenance": "human", "lean": "none", "produced_by": "literature", "checked_by": [], "date": "2026-09-08"}, "sources": ["Chew (1983), A generalization of the quasilinear mean with applications to the measurement of income inequality and decision theory resolving the Allais paradox, Econometrica 51", "Dekel (1986), An axiomatic characterization of preferences under uncertainty: weakening the independence axiom, JET 40"], "notes": "", "file": "topics/decision-theory/models/weighted-utility.yaml", "files": {"md": "writeups/weighted-utility.md", "handwritten": false, "html": "writeups/weighted-utility.html"}}], "generated": "2026-09-22T02:20:53+00:00", "server_analysis": {"classes": [["acyclicity"], ["archimedean"], ["betweenness"], ["closed-graph-continuity"], ["completeness"], ["continuity"], ["eu-representation"], ["independence"], ["multi-utility"], ["quasi-transitivity"], ["transitivity"], ["weak-order"]], "open_pairs": [["acyclicity", "betweenness"], ["archimedean", "acyclicity"], ["archimedean", "betweenness"], ["archimedean", "completeness"], ["archimedean", "quasi-transitivity"], ["betweenness", "acyclicity"], ["betweenness", "quasi-transitivity"], ["closed-graph-continuity", "acyclicity"], ["closed-graph-continuity", "archimedean"], ["closed-graph-continuity", "betweenness"], ["closed-graph-continuity", "quasi-transitivity"], ["completeness", "acyclicity"], ["completeness", "betweenness"], ["continuity", "acyclicity"], ["continuity", "archimedean"], ["continuity", "betweenness"], ["continuity", "closed-graph-continuity"], ["continuity", "quasi-transitivity"], ["independence", "acyclicity"], ["independence", "quasi-transitivity"], ["multi-utility", "archimedean"], ["quasi-transitivity", "betweenness"], ["transitivity", "betweenness"], ["weak-order", "betweenness"]], "unknown": {"band-relation": ["archimedean", "betweenness", "closed-graph-continuity", "continuity", "independence"], "lexicographic-eu": [], "non-convex-cone": ["acyclicity", "quasi-transitivity"], "rational-levels": ["betweenness", "independence"], "semiorder": ["betweenness"], "unanimity-two-utilities": ["archimedean"], "weighted-utility": []}, "problems": [], "infos": [], "conjectures": {"archimedean-independence-imply-continuity": {"status": "open", "via": [], "models": []}, "betweenness-continuity-imply-transitivity": {"status": "refuted", "via": ["independence-implies-betweenness"], "models": ["non-convex-cone"]}, "incomplete-continuous-non-archimedean": {"status": "open", "via": [], "models": []}, "ssb": {"status": "proved", "via": ["closed-graph-implies-mixture-continuity", "continuity-completeness-imply-archimedean"], "models": ["semiorder"]}}}, "downloads": {"bundle": "decision-theory-map.zip", "json": "data.json", "zip": "source.zip", "starter": "logical-maps-starter.zip"}, "background_md": "## Framework\n\n$\\succeq a$ reflexive binary relation on $\\Delta (X), X$ finite with $|X| \\ge 3; \\succ , \\sim$ its asymmetric and symmetric parts. *(placeholder)*\n\n## Notation\n\n*(placeholder)*\n\n## Conventions\n\n*(placeholder — e.g. which form of independence is meant, what \"continuity\" means by default)*\n\n## Certificates\n\n*(placeholder — what human / human-assisted / AI / Lean mean here)*\n\n## Literature\n\n*(placeholder)*\n", "background_html": "<h2 id=\"framework\">Framework<\/h2>\n<p><span class=\"math inline\">\\succeq a<\/span> reflexive binary relation on <span class=\"math inline\">\\Delta (X), X<\/span> finite with <span class=\"math inline\">|X| \\ge 3; \\succ , \\sim<\/span> its asymmetric and symmetric parts. <em>(placeholder)<\/em><\/p>\n<h2 id=\"notation\">Notation<\/h2>\n<p><em>(placeholder)<\/em><\/p>\n<h2 id=\"conventions\">Conventions<\/h2>\n<p><em>(placeholder — e.g. which form of independence is meant, what “continuity” means by default)<\/em><\/p>\n<h2 id=\"certificates\">Certificates<\/h2>\n<p><em>(placeholder — what human / human-assisted / AI / Lean mean here)<\/em><\/p>\n<h2 id=\"literature\">Literature<\/h2>\n<p><em>(placeholder)<\/em><\/p>\n", "contribute_md": "# Contribute\n\n\n## Create your own logical map\n\n[Download the starter project (ZIP)](logical-maps-starter.zip)\n", "contribute_html": "<h1 id=\"contribute\">Contribute<\/h1>\n<h2 id=\"create-your-own-logical-map\">Create your own logical map<\/h2>\n<p><a href=\"logical-maps-starter.zip\">Download the starter project (ZIP)<\/a><\/p>\n"};
 const FALSE = "false";
 const TRUE = "⊤"; // Display-only ID, outside the record ID alphabet.
 const papers = DATA.papers || [];
@@ -938,6 +1024,120 @@ class Engine {
   }
 }
 
+// ---------------------------------------------------------------- lynchpin conjectures (mirrors Lynchpins in scripts/pmap.py)
+// Scores each open question of an engine by the number of *other* open
+// questions either answer would settle. The engine already carries the
+// background and only the models that fit it. Questions are keyed
+// 'imp|a|b' (a ⇒ b ?), 'con|a' and 'con|a|b' (consistent ?), over one
+// representative per equivalence class. Adding a rule P ⇒ c changes cl(S)
+// to cl(S ∪ {c}) exactly when P ⊆ cl(S), so no engine is rebuilt.
+const LYNCHPIN_MAX_OPEN = 0.75;
+class Lynchpins {
+  constructor(E) {
+    this.E = E; this.ids = E.ids; this.negative = E.negativeBackground;
+    this.inconsistent = E.conflict([]) !== null;
+    this.witnesses = E.models.filter(m => !E.modelConflicts.has(m.id));
+    this.extCache = new Map(); this.keys = new WeakMap();
+    this.trivial = this.inconsistent ? [] : this.ids.filter(a => E.cl([]).facts.has(a));
+    this.classes = []; const seen = new Set();
+    for (const a of this.ids) {
+      if (seen.has(a)) continue;
+      const cls = [a, ...this.ids.filter(b => b !== a && E.entails([a], b) !== null && E.entails([b], a) !== null)];
+      cls.forEach(x => seen.add(x)); this.classes.push(cls);
+    }
+    this.reps = this.classes.map(c => c[0]);
+    // trig[model][a] = trials d with a ∈ cl(sat ∪ {d}): the only trials a rule with premise a can change.
+    this.trig = new Map();
+    for (const m of this.witnesses) {
+      const tr = new Map();
+      for (const d of this.ids) for (const a of this.cl([...m.satisfies, d])) { if (!tr.has(a)) tr.set(a, new Set()); tr.get(a).add(d); }
+      this.trig.set(m.id, tr);
+    }
+    const trivial = new Set(this.trivial), proper = this.reps.filter(a => !trivial.has(a));
+    this.questions = [];
+    for (const a of this.reps) for (const b of this.reps) if (a !== b) this.questions.push({kind: 'imp', P: [a, b]});
+    for (const a of this.reps) this.questions.push({kind: 'con', P: [a]});
+    proper.forEach((a, i) => proper.slice(i + 1).forEach(b => this.questions.push({kind: 'con', P: [a, b]})));
+    for (const q of this.questions) {
+      q.key = q.kind + '|' + q.P.join('|'); q.status = this.status(q);
+      q.F = this.cl(q.P); if (q.kind === 'imp') q.Fa = this.cl([q.P[0]]);
+    }
+    this.open = this.questions.filter(q => q.status === 'open');
+    this.unknown = new Map(this.witnesses.map(m => [m.id, this.ids.filter(c => !E.holds.get(m.id).has(c) && !E.fails.get(m.id).has(c))]));
+  }
+  cl(S) { return this.E.cl(S).facts; }
+  ext(F, c) {
+    // Closure of the closed set F together with c.
+    if (!this.keys.has(F)) this.keys.set(F, [...F].sort().join('\u0001'));
+    const key = this.keys.get(F) + '\u0002' + c;
+    if (!this.extCache.has(key)) this.extCache.set(key, closure([...F, c], this.E.rules, this.E.background).facts);
+    return this.extCache.get(key);
+  }
+  bad(F, violates = []) { return F.has(FALSE) || this.negative.some(v => F.has(v)) || violates.some(v => F.has(v)); }
+  status(q) {
+    if (q.kind === 'imp') return this.E.pair(q.P[0], q.P[1]).status;
+    if (this.E.conflict(q.P)) return 'inconsistent';
+    return this.witnesses.some(m => q.P.every(x => this.E.holds.get(m.id).has(x))) ? 'consistent' : 'open';
+  }
+  withRule(premises, conclusion, skip = null) {
+    // Other open questions settled by adding the Horn rule premises ⇒ conclusion.
+    const P = [...new Set(premises)], c = conclusion, E = this.E;
+    const sub = F => P.every(x => F.has(x));
+    const cl2 = F => (F.has(c) || !sub(F)) ? F : this.ext(F, c);
+    const holds2 = new Map(), fails2 = new Map(), changed = [];
+    for (const m of this.witnesses) {
+      let H = E.holds.get(m.id); const Fl = E.fails.get(m.id);
+      const grew = sub(H);
+      if (grew) { const H2 = cl2(this.cl(m.satisfies)); if (this.bad(H2, m.violates)) continue; H = new Set([...H2].filter(x => x !== FALSE)); }
+      const tr = this.trig.get(m.id);
+      let trials = P.length ? [...(tr.get(P[0]) || [])] : [...this.ids];
+      for (const a of P) { const t = tr.get(a) || new Set(); trials = trials.filter(d => t.has(d)); }
+      const fresh = trials.filter(d => !Fl.has(d) && this.bad(cl2(this.cl([...m.satisfies, d])), m.violates));
+      if (grew || fresh.length) { changed.push(m.id); holds2.set(m.id, H); fails2.set(m.id, fresh.length ? new Set([...Fl, ...fresh]) : Fl); }
+    }
+    let n = 0;
+    for (const q of this.open) {
+      if (q.key === skip) continue;
+      if (q.kind === 'imp') {
+        const [a, b] = q.P, Fa = cl2(q.Fa);
+        if (Fa.has(b) || this.bad(Fa) || this.bad(cl2(q.F))) n++;
+        else if (changed.some(mid => holds2.get(mid).has(a) && fails2.get(mid).has(b))) n++;
+      } else if (this.bad(cl2(q.F)) || changed.some(mid => q.P.every(x => holds2.get(mid).has(x)))) n++;
+    }
+    return n;
+  }
+  withModel(satisfies, violates, skip = null) {
+    // Other open questions settled by a model satisfying `satisfies` and violating `violates`.
+    const F = this.cl(satisfies);
+    if (this.bad(F, violates)) return 0;
+    const memo = new Map();
+    const fails = d => { if (!memo.has(d)) memo.set(d, this.bad(this.ext(F, d), violates)); return memo.get(d); };
+    let n = 0;
+    for (const q of this.open) {
+      if (q.key === skip) continue;
+      if (q.kind === 'imp') { if (F.has(q.P[0]) && fails(q.P[1])) n++; }
+      else if (q.P.every(x => F.has(x))) n++;
+    }
+    return n;
+  }
+  rank() {
+    const implications = [], consistency = [], checks = [];
+    for (const q of this.open) {
+      if (q.kind === 'imp') implications.push({premise: q.P[0], conclusion: q.P[1], if_proved: this.withRule([q.P[0]], q.P[1], q.key), if_refuted: this.withModel([q.P[0]], [q.P[1]], q.key)});
+      else consistency.push({principles: q.P, if_model: this.withModel(q.P, [], q.key), if_excluded: this.withRule(q.P, FALSE, q.key)});
+    }
+    for (const m of this.witnesses) for (const c of this.unknown.get(m.id))
+      checks.push({model: m.id, principle: c, if_satisfies: this.withModel([...m.satisfies, c], m.violates), if_violates: this.withModel(m.satisfies, [...m.violates, c])});
+    const order = (k1, k2) => (x, y) => Math.max(y[k1], y[k2]) - Math.max(x[k1], x[k2]) || Math.min(y[k1], y[k2]) - Math.min(x[k1], x[k2]);
+    implications.sort(order('if_proved', 'if_refuted')); consistency.sort(order('if_model', 'if_excluded')); checks.sort(order('if_satisfies', 'if_violates'));
+    const count = f => this.open.filter(f).length;
+    return {inconsistent_background: this.inconsistent, classes: this.classes, trivial: this.trivial, fitting_models: this.witnesses.map(m => m.id),
+      implication_questions: this.reps.length * (this.reps.length - 1),
+      open: {implications: count(q => q.kind === 'imp'), consistency: count(q => q.kind === 'con' && q.P.length === 1), joint_consistency: count(q => q.kind === 'con' && q.P.length === 2)},
+      implications, consistency, model_checks: checks};
+  }
+}
+
 // ---------------------------------------------------------------- state
 const P = DATA.principles, R = DATA.results.map(r => ({...r, conclusion: r.conclusion === false ? FALSE : r.conclusion})), MODELS = DATA.models, T = DATA.topic;
 const byPid = new Map(P.map(p => [p.id, p])), byRid = new Map(R.map(r => [r.id, r])), byMid = new Map(MODELS.map(m => [m.id, m]));
@@ -965,8 +1165,16 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: false, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
 const graphSearch = { matches: new Set(), index: 0 };
+// A principle the topic's own background already settles, one way or the
+// other, can only sit in the True or False box. It starts hidden; the sidebar
+// still offers it. The reader's own assumptions are not consulted here.
+(function hideSettledByDefault() {
+  const minimal = new Engine(ids, R.filter(r => r.status === 'proved'), [], topicBackground);
+  const facts = minimal.cl([]).facts;
+  for (const id of ids) if (facts.has(id) || minimal.excludes([], id)) state.excluded.add(id);
+})();
 let graphRelations = new Map();
 let E = null, EC = null, baseE = null, baseEC = null, A = null, layout = null, backgroundConflicts = [], backgroundExcluded = new Map();
 let graphBackgroundE = null, graphInferenceE = null, graphBackgroundConflict = null, graphBackgroundExcluded = new Map();
@@ -978,7 +1186,9 @@ function graphRuleVisible(r) {
   if (r.status === 'proved') return !state.conjectureOnly && passes(r);
   return (state.showConj || state.conjectureOnly) && openGraphConjectures.has(r.id) && (!state.leanOnly || r.certificate.lean === 'verified');
 }
+let latticeEvidenceVersion = 0;   // bumped whenever the engines are rebuilt, so cached lattice work knows to start over
 function recompute() {
+  latticeEvidenceVersion++;
   graphRelations.clear();
   // Hiding an arrow does not withdraw a proved consequence of the selected
   // background. Keep this graph context separate from source-filtered evidence
@@ -1143,7 +1353,13 @@ function buildGraph() {
   const classOf = new Map(); cls.forEach((c, i) => c.forEach(x => classOf.set(x, i)));
   // Search reveals matching positive nodes temporarily, preserving the user's
   // graph selections and background when the query is cleared.
-  const hidden = literal => inBackground(baseId(literal)) || (isNegative(literal) ? !state.negativeShown.has(baseId(literal)) : state.excluded.has(literal) && !graphSearch.matches.has(literal));
+  // An assumption the reader made stays on the diagram, where the folding
+  // puts it in the True box, or the False box when its negation is assumed,
+  // so the decision is visible where its consequences are. The topic's own
+  // fixed background is not a decision and stays off the diagram.
+  const assumed = literal => inBackground(baseId(literal)) && !topicBackground.includes(baseId(literal));
+  const hidden = literal => isNegative(literal) ? !state.negativeShown.has(baseId(literal)) || (inBackground(baseId(literal)) && !assumed(literal))
+    : assumed(literal) ? false : inBackground(literal) || state.excluded.has(literal) && !graphSearch.matches.has(literal);
   const nodeFor = literal => literal === FALSE ? 'falsity' : (isNegative(literal) ? 'n' : 'c') + classOf.get(baseId(literal));
   const nodes = [];
   cls.forEach((c, i) => {
@@ -1313,6 +1529,62 @@ function impliedArrows(edges) {
     }
   }
   return implied;
+}
+
+// A premise stroke already joins a conjunct to the box that holds the ∧, so an
+// arrow between those same two boxes only repeats it: when C is equivalent to
+// A ∧ B, the strokes from A and B into the ∧ say what the arrows C ⇒ A and
+// C ⇒ B say. Hidden with the transitive reduction, since this is again an
+// arrow the displayed diagram already gives. No conjecture guard is needed. A
+// conjunction entails each of its conjuncts as a matter of logic, and an ∧
+// joins a principle's box only when that principle's implication to every
+// conjunct is already proved.
+function premiseEchoes(edges, byId) {
+  const boxOf = id => byId.get(id)?.parent || id;
+  const pairKey = (a, b) => a < b ? a + '>' + b : b + '>' + a;
+  const strokes = new Set();
+  for (const e of edges) if (e.toJunction) {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from !== to) strokes.add(pairKey(from, to));
+  }
+  const echoed = new Set();
+  if (!strokes.size) return echoed;
+  for (const e of edges) if (!e.toJunction) {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from !== to && strokes.has(pairKey(from, to))) echoed.add(e.id);
+  }
+  return echoed;
+}
+
+// A box and the ∧ circles inside it are all equivalent, so an arrow leaving the
+// box and an arrow leaving one of its circles, both landing in the same box,
+// are one connection drawn twice. That is what makes a box holding several
+// circles fan out: each circle carries its own consequences, and the principle
+// usually carries them too. Keep one arrow for each ordered pair of boxes,
+// preferring a proved one, and the principle's own arrow over a circle's. Only
+// a group that one of the circles contributes to is collapsed. Two arrows that
+// both leave the box itself record separate theorems between the same pair of
+// classes, and those are left alone.
+function boxDuplicates(arrows, byId) {
+  const boxOf = id => byId.get(id)?.parent || id;
+  const conjectural = e => e.conjectured || e.r?.status === 'conjectured';
+  const fromCircle = e => e.from !== boxOf(e.from);
+  const groups = new Map();
+  for (const e of arrows) {
+    const from = boxOf(e.from), to = boxOf(e.to);
+    if (from === to) continue;
+    const key = from + '>' + to;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  }
+  const hidden = new Set();
+  for (const group of groups.values()) {
+    if (group.length < 2 || !group.some(fromCircle)) continue;
+    const rank = e => (conjectural(e) ? 2 : 0) + (fromCircle(e) ? 1 : 0);
+    const keep = group.reduce((a, b) => rank(b) < rank(a) || rank(b) === rank(a) && b.id < a.id ? b : a);
+    for (const e of group) if (e !== keep) hidden.add(e.id);
+  }
+  return hidden;
 }
 
 // Quotient the display by proved equivalence, including the logical constants.
@@ -1818,6 +2090,7 @@ function renderGraph() {
   empty.hidden = true;
   const warning = document.getElementById('graph-warning');
   warning.hidden = !graphBackgroundConflict;
+  warning.closest('.graph-area').classList.toggle('warned', !!graphBackgroundConflict);
   document.getElementById('fit').disabled = !!graphBackgroundConflict;
   if (graphBackgroundConflict) {
     warning.innerHTML = `<h2>Background is inconsistent</h2><p>The background assumptions imply False: they cannot all hold together. All graph arrows are hidden.</p><ol>${graphBackgroundConflict.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol><p>Return a conflicting assumption to the principles list, or clear the added background assumptions. This check uses all recorded proofs, including hidden arrows.</p>`;
@@ -1831,7 +2104,15 @@ function renderGraph() {
   const L = layout;
   // Positions always come from the full arrow set, so the reduction only
   // hides arrows and never moves a node.
-  if (state.reduced) { const implied = impliedArrows(L.edges); L.edges = L.edges.filter(e => !implied.has(e.id)); }
+  // The first two rules read the full arrow set, so hiding one arrow never
+  // changes what the other hides. The third then picks a survivor among the
+  // arrows the first two leave standing, so the arrow it keeps is drawn.
+  if (state.reduced) {
+    const implied = impliedArrows(L.edges), echoed = premiseEchoes(L.edges, L.byId);
+    const standing = L.edges.filter(e => !e.toJunction && !implied.has(e.id) && !echoed.has(e.id));
+    const duplicated = boxDuplicates(standing, L.byId);
+    L.edges = L.edges.filter(e => !implied.has(e.id) && !echoed.has(e.id) && !duplicated.has(e.id));
+  }
   empty.hidden = !(state.conjectureOnly || state.unpublishedOnly) || L.edges.length > 0 || graphSearch.matches.size > 0;
   empty.textContent = state.conjectureOnly && state.leanOnly
     ? 'No arrows match these filters. Turn off Lean-verified only to show conjectures.'
@@ -1919,6 +2200,13 @@ function applyGraphSearch(focus = false) {
   }
 }
 function applyView() { const vp = document.getElementById('vp'); if (vp) vp.setAttribute('transform', `translate(${view.tx},${view.ty}) scale(${view.k})`); }
+// The view belongs to the reader. Only the first successful fit, a change in
+// the size of the graph pane, and the fit button itself move it. Redrawing
+// after a change of content leaves it alone, so showing a premise or changing
+// a filter no longer throws away a chosen zoom. If the new content lands
+// outside the current view, the fit button brings the whole diagram back.
+let viewFitted = false;
+function fitInitial() { if (!viewFitted) fit(); }
 function fit() {
   const L = layout; if (!L || !L.visible.length) return;
   const xs = L.visible.map(n => L.x.get(n.id) - L.size.get(n.id).w / 2), xe = L.visible.map(n => L.x.get(n.id) + L.size.get(n.id).w / 2);
@@ -1929,6 +2217,7 @@ function fit() {
   view.k = Math.min(W / (maxX - minX), H / (maxY - minY), 1.4);
   view.tx = (W - (maxX + minX) * view.k) / 2; view.ty = (H - (maxY + minY) * view.k) / 2;
   applyView();
+  viewFitted = true;
 }
 // pan / zoom
 (function () {
@@ -2002,6 +2291,22 @@ function hover(h) {
 const relationClasses = ['rel-base', 'rel-entailed', 'rel-excluded', 'rel-consistent', 'rel-separated', 'rel-independent', 'rel-open', 'rel-conjectured', 'rel-inconsistent'];
 const relationPhrase = {entailed: 'Entailed by selection', excluded: 'Excluded by selection', consistent: 'Consistent with selection', separated: 'Negation is consistent with selection', independent: 'Independent of selection', open: 'Open relative to selection', conjectured: 'Conjectured relation to selection'};
 function relationTooltip(relation) { return relationPhrase[relation.kind] + (relation.limited ? ' (outside selected sources)' : ''); }
+// Whether the selection can hold alongside the background is one fact about the
+// whole shading, so it is reported once rather than spread over every box it
+// colours. Reporting it matters because every triangle in the diagram needs a
+// model of the selection: an unwitnessed selection shows none anywhere, and
+// without this line that absence is the only clue that it has none.
+function selectionConsistencyLine(consistency) {
+  if (!consistency) return null;
+  if (consistency.status === 'inconsistent') return {kind: 'inconsistent', text: 'Selection is inconsistent with the background (⇒ ⊥); every box is excluded.'};
+  if (consistency.status === 'consistent') {
+    const model = byMid.get(consistency.models[0]), who = model ? ` (${model.name})` : '';
+    return {kind: 'implies', text: consistency.limited
+      ? `Consistent with the background outside selected sources${who}.`
+      : `Consistent with the background${who}.`};
+  }
+  return {kind: 'open', text: 'Not shown consistent with the background.'};
+}
 function selectionRelation(base, target) {
   const status = expressionStatus(base, target).status;
   if (status === 'implies') return {kind: 'entailed'};
@@ -2032,10 +2337,16 @@ function applySelection() {
   };
   // An inconsistent selection cannot hold with any node. Highlight every box
   // as excluded while proof readouts retain their inconsistent-antecedent status.
-  const baseInconsistent = !!base && !!layout && consistencyStatus(expressionLiterals(base)).status === 'inconsistent';
+  const baseConsistency = !!base && !!layout ? consistencyStatus(expressionLiterals(base)) : null;
+  const baseInconsistent = baseConsistency?.status === 'inconsistent';
+  const consistencyLine = selectionConsistencyLine(baseConsistency);
   const shading = !!base && !!layout;
   svg.classList.toggle('shaded', shading);
   svg.classList.toggle('inconsistent-selection', baseInconsistent);
+  // Only the wholly unsettled case dashes the selected box. A selection shown
+  // consistent by evidence the source filters hide is still shown consistent,
+  // and the legend says where the witness came from.
+  svg.classList.toggle('unwitnessed-selection', baseConsistency?.status === 'open');
   svg.querySelectorAll('#nodes .node').forEach(n => {
     const members = (n.dataset.members || '').split(',').filter(Boolean), box = layout.byId.get(n.dataset.class);
     n.classList.remove(...relationClasses);
@@ -2049,7 +2360,7 @@ function applySelection() {
         n.classList.add('rel-excluded'); counts.excluded++;
         title = 'Excluded: selection is inconsistent';
       }
-      else if (inBase) { n.classList.add('rel-base'); title = 'Selected'; }
+      else if (inBase) { n.classList.add('rel-base'); title = 'Selected. ' + consistencyLine.text; }
       else if (!n.classList.contains('from-background')) {
         const target = graphNodeExpression(box);
         // False, including everything equivalent to it under the background,
@@ -2073,7 +2384,7 @@ function applySelection() {
       n.classList.add('rel-' + relation.kind);
       // A boxed conjunction is already counted through its equivalence box.
       if (!j.parent) countRelation(relation.kind);
-      title += '\n' + (baseInconsistent ? 'Excluded: selection is inconsistent' : inBase ? 'Selected conjunction' : relationTooltip(relation));
+      title += '\n' + (baseInconsistent ? 'Excluded: selection is inconsistent' : inBase ? 'Selected conjunction. ' + consistencyLine.text : relationTooltip(relation));
     }
     n.querySelector('title').textContent = title;
   });
@@ -2085,8 +2396,8 @@ function applySelection() {
   const label = Array.isArray(base) && fullLabel.length > 100 ? `${base.length} selected principles` : fullLabel;
   const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
   const keys = key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
-  const conflict = baseInconsistent ? '<span class="rel-status inconsistent">Selection is inconsistent with the background (⇒ ⊥); every box is excluded.</span>' : '';
-  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${conflict}${keys}`;
+  const status = `<span class="rel-status ${consistencyLine.kind}">${esc(consistencyLine.text)}</span>`;
+  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${status}${keys}`;
 }
 
 
@@ -2319,12 +2630,57 @@ function renderOpen() {
   const incompatible = questions.filter(q => q.answer.status === 'incompatible');
   let h = '<h3>Conjectures</h3><p class="hint">“Open” means unresolved by all recorded proved evidence under this background. “Unresolved by selected evidence” means the filters omit evidence available below. Background assumptions are omitted from statements; click a question for its full statement.</p>';
   h += visible.map(row).join('') || `<p class="empty">${questions.length ? 'No open questions apply to this background. Use “Show resolved” to include resolved questions.' : 'No conjectures have been recorded.'}</p>`;
+  h += `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Lynchpin conjectures</summary><p class="hint">Open questions ranked by how many other open questions each answer would settle, using all recorded proved evidence under this background. Both answers are scored: a proof of a strong conjecture settles everything below it, a countermodel to a weak one everything above it, so a question with two high scores is worth answering either way. A refutation is scored by its least informative countermodel. Model checks score deciding an unknown verdict inside a recorded model.</p><div class="lynchpin-body"></div></details>`;
   if (incompatible.length) h += `<details id="open-incompatible"><summary>Incompatible with this background (${incompatible.length})</summary>${incompatible.map(row).join('')}</details>`;
   const el = document.getElementById('open'); el.innerHTML = h;
   wire(el);
+  const lynchpins = document.getElementById('lynchpins');
+  lynchpins.addEventListener('toggle', () => { state.lynchpins = lynchpins.open; renderLynchpins(); });
+  renderLynchpins();
   const count = document.getElementById('n-open');
   count.textContent = inconsistent || allConflict ? '—' : questions.filter(q => q.status === 'open').length;
   count.title = 'Open with all recorded evidence; questions unresolved only by the selected evidence are not counted.';
+}
+
+// ---------------------------------------------------------------- lynchpin conjectures (view)
+// Computed from all recorded proved evidence under the current background, so
+// source filters do not change it; memoised per background, and never computed
+// while the section is closed or the tab hidden.
+let lynchpinCache = {key: null, report: null};
+function lynchpinReport() {
+  const key = [...background].sort().join(',') + '|' + [...negativeBackground].sort().join(',');
+  if (lynchpinCache.key !== key) {
+    const L = new Lynchpins(allEvidenceE);
+    const n = L.reps.length * (L.reps.length - 1), share = n ? L.open.filter(q => q.kind === 'imp').length / n : 0;
+    lynchpinCache = {key, report: share > LYNCHPIN_MAX_OPEN ? {sparse: share} : L.rank()};
+  }
+  return lynchpinCache.report;
+}
+function renderLynchpins() {
+  const el = document.getElementById('lynchpins'); if (!el) return;
+  const body = el.querySelector('.lynchpin-body');
+  if (!el.open || state.tab !== 'open') { body.innerHTML = ''; return; }
+  if (backgroundConflicts.length) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; return; }
+  const rep = lynchpinReport();
+  if (rep.sparse !== undefined) { body.innerHTML = `<p class="note">${Math.round(rep.sparse * 100)}% of the implication questions are open under this background, so the map is too sparse for lynchpins to mean anything.</p>`; return; }
+  // The class of theorems is shown as True, as elsewhere in the viewer.
+  const trivial = new Set(rep.trivial);
+  const pb = id => trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
+  const top = 8, op = rep.open;
+  const table = (head, rows) => rows.length ? `<table class="results lynchpin"><thead><tr><th>${esc(head[0])}</th><th class="num">${esc(head[1])}</th><th class="num">${esc(head[2])}</th></tr></thead><tbody>${rows.join('')}</tbody></table>` : '';
+  const cells = (stmt, x, y) => `<td class="stmt">${stmt}</td><td class="num">${x}</td><td class="num">${y}</td>`;
+  const byProved = [...rep.implications].sort((x, y) => y.if_proved - x.if_proved || y.if_refuted - x.if_refuted).slice(0, top);
+  const byMin = [...rep.implications].sort((x, y) => Math.min(y.if_proved, y.if_refuted) - Math.min(x.if_proved, x.if_refuted) || (y.if_proved + y.if_refuted) - (x.if_proved + x.if_refuted)).slice(0, top);
+  const implications = [...byProved, ...byMin.filter(r => !byProved.includes(r))];
+  let h = `<p class="note">${rep.classes.length} classes and ${rep.fitting_models.length} fitting models. Open: ${op.implications} implications, ${op.joint_consistency} joint-consistency questions, ${op.consistency} consistency questions.</p>`;
+  h += table(['Implication (top by a proof, then by the smaller score)', 'if proved', 'if refuted'],
+    implications.map(r => `<tr data-lynchpin="imp|${esc(r.premise)}|${esc(r.conclusion)}">${cells(`${pb(r.premise)} ⇒ ${pb(r.conclusion)}`, r.if_proved, r.if_refuted)}</tr>`));
+  h += table(['Consistency', 'if a model', 'if excluded'],
+    rep.consistency.slice(0, top).map(r => `<tr data-lynchpin="con|${esc(r.principles.join('|'))}">${cells(r.principles.map(pb).join(' ∧ '), r.if_model, r.if_excluded)}</tr>`));
+  h += table(['Model check', 'if satisfies', 'if violates'],
+    rep.model_checks.slice(0, top).map(r => `<tr data-lynchpin="check|${esc(r.model)}|${esc(r.principle)}">${cells(`<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: <button class="lnk" data-verdict="${esc(r.principle)}" data-verdict-model="${esc(r.model)}">${esc(name(r.principle))}</button>`, r.if_satisfies, r.if_violates)}</tr>`));
+  body.innerHTML = h;
+  wire(body);
 }
 
 // ---------------------------------------------------------------- write-up page
@@ -2493,19 +2849,24 @@ function openPage(sel) { hover(null); stopFlow(); renderPage(sel); document.getE
 function showTab(tab) {
   hover(null); stopFlow();
   state.tab = tab;
-  if (tab === 'graph' || tab === 'open') {
-    // Reuse the controls so background, source selections and click slots are shared.
+  if (tab === 'graph' || tab === 'open' || tab === 'lattice') {
+    // One sidebar for the three views, so background, source selections,
+    // click slots, scrolling and pane sizes are shared rather than duplicated.
     const pane = document.getElementById('pane-' + tab);
     pane.prepend(document.getElementById('graph-sidebar'), document.getElementById('sidebar-divider'));
     const heading = document.getElementById('source-filter-heading');
     heading.textContent = tab === 'open' ? 'Evidence sources' : 'Arrow sources';
-    heading.title = tab === 'open' ? 'Filter the evidence used to assess conjectures.' : 'Filter displayed arrows. Background consequences always use all recorded proofs.';
+    heading.title = tab === 'open' ? 'Filter the evidence used to assess conjectures.'
+      : tab === 'lattice' ? 'Draw the lattice from the selected sources alone. Background consequences always use all recorded proofs.'
+      : 'Filter displayed arrows. Background consequences always use all recorded proofs.';
   }
   document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', x.dataset.tab === tab));
   document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-' + tab));
   document.getElementById('pop').hidden = true;
   placeDetail();
-  if (tab === 'graph') fit();
+  if (tab === 'graph') fitInitial();
+  if (tab === 'lattice') { renderLattice(); latticeFitInitial(); }
+  if (tab === 'open') renderLynchpins();
 }
 
 // ---------------------------------------------------------------- detail
@@ -2517,6 +2878,7 @@ function wire(el) {
   el.querySelectorAll('button[data-graph-connection]').forEach(b => b.addEventListener('click', () => selectGraphEdge(graphEdgesByKey.get(b.dataset.graphConnection))));
   el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', ev => select({ type: 'principle', id: b.dataset.principle }, ev.shiftKey || ev.metaKey || ev.ctrlKey)));
   el.querySelectorAll('button[data-remove-selection]').forEach(b => b.addEventListener('click', () => select({type: 'principle', id: b.dataset.removeSelection}, true)));
+  el.querySelectorAll('button[data-selection-action]').forEach(b => b.addEventListener('click', () => applySelectionAction(b.dataset.selectionAction)));
   el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
   el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
   el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
@@ -2564,12 +2926,37 @@ function renderDetail() {
       return `<li><details><summary>${esc(name(literal))}</summary>${isNegative(literal) ? '<p>Negation of:</p>' : ''}<p>${esc(principle?.statement || name(literal))}</p></details><button class="lnk" data-remove-selection="${esc(literal)}" aria-label="Remove ${esc(name(literal))} from selection">remove</button></li>`;
     }).join('')}</ul>`;
     h += statusLine('Joint consistency', consistencyStatus(sel.premises), true);
+    const actions = selectionActions(sel.premises);
+    if (actions) h += `<div class="links">${actions}</div>`;
   } else if (sel.type === 'junction') {
     const junction = layout?.byId.get(sel.id);
     if (!junction) { el.hidden = true; return; }
     const consequences = junction.consequences || layout.edges.filter(e => e.from === junction.id);
     h += `<div class="pop-t">${esc(junction.premises.map(name).join(' ∧ '))}</div><ul>${consequences.map(e => `<li><button class="lnk" data-graph-connection="${esc(e.key)}" data-junction-proof="${esc(junction.id)}" data-proof-index="${consequences.indexOf(e)}">${esc(name(e.conclusion || e.b))}</button> ${e.r ? certBadges(e.r) : `<span class="badge ${e.conjectured ? 'conj' : 'kind'}">${e.conjectured ? 'conjecture' : 'derived proof'}</span>`}</li>`).join('')}</ul>`;
     if (junction.equivalence) h += '<h3>Equivalence</h3>' + junction.equivalence.map(e => statusLine(esc(e.label), e.status)).join('');
+  } else if (sel.type === 'lattice-edge') {
+    // Where the arrow comes from, and what rules out its converse. The floor
+    // and the ceiling carry their implications for free, so for those the only
+    // question worth asking is the one about the converse.
+    h += `<div class="pop-t">${esc(sel.fromLabel)} ⇒ ${esc(sel.toLabel)}</div>`;
+    h += '<div class="rel-head">Why</div>';
+    if (!sel.from) h += '<p class="dim">Everything follows from a contradiction.</p>';
+    else if (!sel.to.length) h += '<p class="dim">Everything entails what the background already gives.</p>';
+    else h += sel.to.map(q => statusLine(`${esc(sel.fromLabel)} ⇒ ${esc(name(q))}`, implicationStatus(sel.from, q))).join('');
+    h += '<div class="rel-head">Converse</div>';
+    if (!sel.from) {
+      h += statusLine(`${esc(sel.toLabel)} ⇒ False (⊥)`, consistencyStatus(sel.to));
+      h += `<p class="dim">${sel.reverses === 'ruled out'
+        ? 'A model satisfies it alongside the background, so it is not the contradiction.'
+        : 'Nothing recorded shows it can hold with the background, so it might yet be the contradiction.'}</p>`;
+    } else {
+      h += sel.missing.map(p =>
+        statusLine(`${esc(sel.toLabel)} ⇒ ${esc(name(p))}`, implicationStatus(sel.to, p))).join('')
+        || '<p class="dim">Nothing separates the two.</p>';
+      h += `<p class="dim">${sel.reverses === 'ruled out'
+        ? 'A model settles the converse, so these are genuinely different nodes.'
+        : 'The converse is open, so these two might yet collapse into one node.'}</p>`;
+    }
   } else if (sel.type === 'trivial') {
     h += `<div class="pop-t">${esc(sel.display)}</div><p>${sel.from === 'falsity' ? 'False implies every proposition (explosion).' : 'Every proposition implies True.'}</p>`;
   } else if (sel.type === 'truth') {
@@ -2587,7 +2974,7 @@ function renderDetail() {
       const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
       if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
     }
-    h += '<div class="links"><button class="lnk" data-goto="1">details</button></div>';
+    h += `<div class="links"><button class="lnk" data-goto="1">details</button>${selectionActions([(sel.negative ? '!' : '') + sel.id])}</div>`;
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
@@ -2621,11 +3008,14 @@ function renderDetail() {
 }
 function placeDetail() {
   const el = document.getElementById('pop');
-  const docked = document.getElementById('pane-graph').dataset.active === 'true';
-  document.getElementById(docked ? 'graph-details' : 'floating-details').appendChild(el);
+  // One popup, docked in whichever view is open, so a principle reads the same
+  // way on the lattice as it does on the graph.
+  const lattice = document.getElementById('pane-lattice')?.dataset.active === 'true';
+  const docked = lattice || document.getElementById('pane-graph').dataset.active === 'true';
+  document.getElementById(lattice ? 'lat-detail' : docked ? 'graph-details' : 'floating-details').appendChild(el);
   if (docked) { el.style.removeProperty('left'); el.style.removeProperty('top'); }
 }
-document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && el.parentElement.id !== 'graph-details' && !el.contains(ev.target)) el.hidden = true; });
+document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !['graph-details', 'lat-detail'].includes(el.parentElement.id) && !el.contains(ev.target)) el.hidden = true; });
 document.addEventListener('keydown', ev => {
   if (ev.key !== 'Escape' || ev.target.id === 'graph-search' || document.body.classList.contains('resizing-panes')) return;
   if (state.focus || state.selected?.type === 'principle') select(null);
@@ -2652,6 +3042,7 @@ function select(sel, extend = false) {
   else if (sel.type === 'selection') state.focus = [...sel.premises];
   if (sel?.type === 'model') { state.modelId = sel.id; renderModels(); }
   state.selected = sel; renderDetail(); applySelection();
+  if (state.tab === 'lattice' && typeof renderLattice === 'function') renderLattice();
 }
 
 // ---------------------------------------------------------------- header
@@ -2681,6 +3072,60 @@ function setAssumption(id, sign) {
   if (sign === 'negative') negativeBackground.add(id);
   state.modelId = null; state.selected = null;
   saveBackground(); refreshPrincipleControls(); renderAll(true);
+}
+// The sidebar's own moves, offered on the selected principles from the
+// details pane: hide them, hand them to the background, or add their
+// negations. Each does exactly what the sidebar control would, in whichever
+// view is open, and nothing else.
+function literalShown(l) {
+  const id = baseId(l);
+  if (state.tab === 'lattice') return lattice.shown.includes(l);
+  return isNegative(l) ? state.negativeShown.has(id) : !state.excluded.has(id);
+}
+function selectionActions(literals) {
+  if (state.tab !== 'graph' && state.tab !== 'lattice') return '';
+  const active = literals.filter(l => byPid.has(baseId(l)) && !inBackground(baseId(l)));
+  if (!active.length) return '';
+  const plural = active.length > 1;
+  const button = (kind, label, title) => `<button class="lnk" data-selection-action="${kind}" title="${esc(title)}">${label}</button>`;
+  let h = '';
+  if (active.some(literalShown)) h += button('hide', 'Hide', `Take the selected ${plural ? 'principles' : 'principle'} off the diagram, as unchecking ${plural ? 'them' : 'it'} in the sidebar would.`);
+  if (active.some(l => !literalShown(negate(l)))) h += button('negate', plural ? 'Add negations' : 'Add negation', `Show the ${plural ? 'negations' : 'negation'} too, as checking ✗ in the sidebar would.`);
+  if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'Move to background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  return h;
+}
+function repaintGraph() { refreshPrincipleControls(); renderGraph(); fitInitial(); }
+function applySelectionAction(kind) {
+  const sel = state.selected;
+  const literals = sel?.type === 'principle' ? [(sel.negative ? '!' : '') + sel.id] : sel?.type === 'selection' ? sel.premises : [];
+  const active = literals.filter(l => byPid.has(baseId(l)) && !inBackground(baseId(l)));
+  if (!active.length) return;
+  const onLattice = state.tab === 'lattice';
+  if (kind === 'background') {
+    for (const l of active) {
+      const id = baseId(l);
+      if (topicBackground.includes(id)) continue;
+      (isNegative(l) ? negativeBackground : background).add(id);
+    }
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !active.some(a => baseId(a) === baseId(l))); lattice.selected = null; }
+    // What is now assumed is no longer something to shade relative to.
+    state.modelId = null; state.selected = null; state.focus = null;
+    saveBackground(); refreshPrincipleControls(); renderAll(true);
+    return;
+  }
+  if (kind === 'hide') {
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !active.includes(l)); lattice.selected = null; }
+    else for (const l of active) isNegative(l) ? state.negativeShown.delete(baseId(l)) : state.excluded.add(baseId(l));
+    select(null);
+    if (!onLattice) repaintGraph();
+    return;
+  }
+  if (kind === 'negate') {
+    if (onLattice) { for (const l of active) if (!lattice.shown.includes(negate(l))) lattice.shown.push(negate(l)); }
+    else for (const l of active) isNegative(l) ? state.excluded.delete(baseId(l)) : state.negativeShown.add(baseId(l));
+    if (onLattice) { renderLatticeFilters(); renderLattice(); } else repaintGraph();
+    renderDetail();
+  }
 }
 function changeBackground(id, assumed) {
   if (!assumed) {
@@ -2755,7 +3200,8 @@ function renderAll(refit) {
     renderSubscripts(backgroundPage);
     mountPaperCatalogue(); backgroundPage.dataset.ready = 'true';
   }
-  renderGraph(); if (refit) fit(); renderModels(); renderResults(); renderOpen();
+  renderGraph(); if (refit) fitInitial(); renderModels(); renderResults(); renderOpen();
+  if (state.tab === 'lattice' && typeof renderLattice === 'function') { renderLatticeFilters(); renderLattice(); }
 }
 function resetBackground() {
   for (const id of [...background]) if (!topicBackground.includes(id)) background.delete(id);
@@ -2845,12 +3291,11 @@ document.getElementById('reduce-arrows').addEventListener('change', e => { state
 document.getElementById('fit').addEventListener('click', fit);
 (function () {
   const el = document.getElementById('pr-filters');
-  const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-clear-graph="${p.id}">clear</button><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
+  const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
   el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
-  const repaint = () => { refreshPrincipleControls(); renderGraph(); fit(); };
+  const repaint = repaintGraph;
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
   el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
-  el.querySelectorAll('[data-clear-graph]').forEach(b => b.addEventListener('click', () => { state.excluded.add(b.dataset.clearGraph); state.negativeShown.delete(b.dataset.clearGraph); repaint(); }));
   const setSelection = (rows, selected) => {
     rows.forEach(row => { const id = row.dataset.prRow; if (inBackground(id)) return; selected ? state.excluded.delete(id) : state.excluded.add(id); if (!selected) state.negativeShown.delete(id); }); repaint();
   };
@@ -2910,7 +3355,7 @@ document.getElementById('graph-search').addEventListener('keydown', e => {
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 // Resize without rebuilding either list, so selections, scroll positions and click slots survive.
 (function setupPaneDividers() {
-  const panes = ['graph', 'open'].map(tab => document.getElementById('pane-' + tab));
+  const panes = ['graph', 'open', 'lattice'].map(tab => document.getElementById('pane-' + tab));
   const sidebar = document.getElementById('graph-sidebar');
   const workspace = document.querySelector('.graph-workspace');
   const properties = {sidebar: '--sidebar-width', background: '--background-height', details: '--details-height'};
@@ -3008,7 +3453,645 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
   apply();
 })();
 window.addEventListener('resize', () => { if (state.tab === 'graph') fit(); });
+// ---------------------------------------------------------------- lattice view
+// A Hasse diagram of the meet-semilattice that the chosen principles generate,
+// as a separate view rather than an option on the implication graph. The two
+// answer different questions. There, every node is a principle somebody
+// recorded and the reader filters the whole map. Here, every meet of the chosen
+// principles is a node in its own right, so the node count grows with the
+// subsets rather than with the choices, and the reader has to choose a few
+// principles deliberately.
+//
+// A node is identified with the set of chosen principles its conjunction is
+// known to entail, its closure. That is exact rather than a heuristic: a meet
+// entails precisely the chosen principles in its closure, so two meets are
+// known equivalent exactly when their closures match, and the whole order is
+// then set inclusion. Everything below reads off that.
+//
+// Conjunctions are never nested inside another node here. On a Hasse diagram
+// the greatest lower bound of two nodes is their conjunction, so a meet that
+// turns out to be equivalent to a named principle is drawn once, under that
+// principle's name.
+const LATTICE_CAP = 220;
+const lattice = {shown: [], nodes: [], edges: [], selected: null, capped: 0, view: {k: 1, tx: 0, ty: 0}, fitted: false};
+
+// Entailment answers are memoised per evidence version and background. The
+// build asks the same questions many times over: every candidate meet is
+// closed against every chosen literal, and the readouts ask again.
+function latticeMemo() {
+  const key = latticeEvidenceVersion + '|' + [...background].sort().join(',') + '|' + [...negativeBackground].sort().join(',');
+  if (lattice.memoKey !== key) { lattice.memoKey = key; lattice.memo = new Map(); }
+  return lattice.memo;
+}
+// Whether a conjunction of literals entails a literal, read as the graph's
+// literalImplication reads it, but without assembling the proof chain, which
+// nothing here looks at. The engine caches each closure it is asked for.
+function latticeHolds(premises, c) {
+  const positive = premises.filter(p => !isNegative(p)), negative = premises.filter(isNegative).map(baseId);
+  if (graphInferenceE.conflict(positive, negative)) return false;
+  if (isNegative(c)) return !!graphInferenceE.conflict([...positive, baseId(c)], negative);
+  return graphInferenceE.cl(positive).facts.has(c);
+}
+function latticeEntails(premises, conclusions) {
+  const memo = latticeMemo(), pk = latticeKey(premises);
+  return conclusions.every(c => {
+    const k = pk + '→' + c;
+    let v = memo.get(k);
+    if (v === undefined) { v = latticeHolds(premises, c); memo.set(k, v); }
+    return v;
+  });
+}
+// The chosen principles that this conjunction is known to entail: one
+// closure from the engine, read once per chosen literal.
+function latticeClosure(premises) {
+  const positive = premises.filter(p => !isNegative(p)), negative = premises.filter(isNegative).map(baseId);
+  if (graphInferenceE.conflict(positive, negative)) return [];
+  const facts = graphInferenceE.cl(positive).facts;
+  return lattice.shown.filter(p => isNegative(p) ? !!graphInferenceE.conflict([...positive, baseId(p)], negative) : facts.has(p));
+}
+const latticeKey = gens => gens.slice().sort().join('|');
+
+// An irredundant generating set, so a node is labelled by what actually makes
+// it rather than by everything it happens to entail.
+function latticeGenerators(gens) {
+  let kept = gens.slice();
+  for (const p of gens) {
+    const without = kept.filter(q => q !== p);
+    if (without.length && latticeEntails(without, [p])) kept = without;
+  }
+  return kept;
+}
+
+// Every named principle the map records as equivalent to this meet. Only the
+// positive forms are searched: a negation is not itself a principle the map
+// names, and it reaches the node through the generators instead.
+function latticeEquivalents(gens) {
+  return ids.filter(p => latticeEntails(gens, [p]) && latticeEntails([p], gens));
+}
+// The names a node answers to: the constants, then every chosen literal that
+// is the node rather than merely above it. Known equivalents share one node, as
+// they share one box on the implication graph, so nothing is drawn twice under
+// two names. Nothing the reader did not choose puts its name on the diagram,
+// which is why ⊤ does not drag in every background consequence the map records.
+// The reader's own assumptions name the ceiling, or the floor when their
+// negation is assumed, so a decision to background a principle stays visible.
+const latticeAssumptions = () => ({
+  top: [...background].filter(id => !topicBackground.includes(id)),
+  bottom: [...negativeBackground].filter(id => !topicBackground.includes(id))
+});
+function latticeLabels(n) {
+  const out = [];
+  const push = (text, literal) => { if (!out.some(l => l.text === text)) out.push({text, literal}); };
+  if (n.inconsistent) { push('⊥', null); for (const id of latticeAssumptions().bottom) push(name(id), id); }
+  if (n.top) { push('⊤', null); for (const id of latticeAssumptions().top) push(name(id), id); }
+  for (const l of n.self) push(name(l), l);
+  return out;
+}
+function latticeNames(n) { return latticeLabels(n).map(l => l.text); }
+
+function buildLattice() {
+  const shown = lattice.shown;
+  // A node's closure as a bitmask over the chosen literals, so that "is a
+  // subset of" is one AND and "add a literal" is one OR.
+  const bit = new Map(shown.map((l, i) => [l, 1n << BigInt(i)]));
+  const maskOf = gens => gens.reduce((m, l) => m | bit.get(l), 0n);
+  const nodes = new Map(), seen = new Map();   // closure key → node; premise mask → node
+  lattice.capped = 0;
+  const add = (premises, pmask) => {
+    // The same generating set comes up again and again; its closure is
+    // computed once.
+    if (seen.has(pmask)) return seen.get(pmask);
+    const gens = latticeClosure(premises);
+    const key = latticeKey(gens);
+    let node = nodes.get(key) || null;
+    if (!node) {
+      if (nodes.size >= LATTICE_CAP) { lattice.capped++; seen.set(pmask, null); return null; }
+      node = {id: 'lat:' + (key || 'top'), key, gens, set: new Set(gens), mask: maskOf(gens), down: [], fresh: true};
+      nodes.set(key, node);
+    }
+    seen.set(pmask, node);
+    return node;
+  };
+  // Every node is the closure of some chosen literals, and the meet of two
+  // closures is the closure of their union, which is reached one literal at a
+  // time. So closing each node under one more literal reaches every meet of
+  // every pair, at n·k closures rather than n². The empty meet comes first:
+  // everything the background already gives.
+  const top = add([], 0n);
+  top.fresh = false;
+  const queue = [top];
+  while (queue.length && !lattice.capped) {
+    const n = queue.shift();
+    for (const l of shown) {
+      if (n.mask & bit.get(l)) continue;
+      const m = add([...n.gens, l], n.mask | bit.get(l));
+      if (!m) break;
+      if (m.fresh) { m.fresh = false; queue.push(m); }
+      if (m !== n && !n.down.includes(m)) n.down.push(m);
+    }
+  }
+  const all = [...nodes.values()];
+  for (const n of all) {
+    n.consistency = consistencyStatus(n.gens);
+    n.inconsistent = n.consistency.status === 'inconsistent';
+    // ⊤ is not only the empty meet. A chosen principle that follows from the
+    // background is equivalent to it and belongs in the same node.
+    n.top = !n.inconsistent && latticeEntails([], n.gens);
+    n.generators = latticeGenerators(n.gens);
+    // A chosen literal that entails the whole meet is that meet, not just
+    // something above it.
+    n.self = n.gens.filter(l => latticeEntails([l], n.gens));
+    n.labels = latticeLabels(n);
+    n.names = n.labels.map(l => l.text);
+    n.equivalent = n.names.length > 1;
+    // A meet no chosen principle answers to needs no label: where it sits
+    // already says it is the conjunction of the nodes above it. It is drawn as
+    // an ∧, as such a node is on the implication graph. The map's own name for
+    // it, if it has one, goes in the readouts rather than onto the diagram,
+    // and is looked up only when a readout asks: it is the one search here
+    // that runs over every principle in the map.
+    n.meet = !n.names.length;
+    Object.defineProperty(n, 'mapName', {enumerable: true, configurable: true, get() {
+      const value = n.meet ? (latticeEquivalents(n.gens)[0] || null) : null;
+      Object.defineProperty(n, 'mapName', {value, enumerable: true, writable: true, configurable: true});
+      return value;
+    }});
+    n.label = n.names[0] || n.generators.map(name).join(' ∧ ');
+  }
+  // False and True always anchor the diagram, even before anything is chosen.
+  let bottom = all.find(n => n.inconsistent);
+  if (!bottom) {
+    bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), mask: maskOf(lattice.shown), down: [], generators: [], self: [], meet: false, mapName: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}};
+    bottom.labels = latticeLabels(bottom); bottom.names = bottom.labels.map(l => l.text); bottom.equivalent = bottom.names.length > 1;
+    all.push(bottom);
+  }
+  bottom.bottom = true;
+
+  // The order is inclusion of closures: a larger closure is a stronger meet.
+  // Below is strictly stronger, so arrows from it ascend, as on the graph.
+  // The nodes that cover a node from below are the minimal closures strictly
+  // containing it, and each of those is the node closed under one more
+  // literal: if a covers b, any literal of a that b lacks already takes b's
+  // closure up to a. So the candidates are the extensions computed above, at
+  // most k of them, and a cover is one that no other candidate lies inside.
+  const inside = (small, big) => small !== big && (small.mask & big.mask) === small.mask && small.mask !== big.mask;
+  const edges = [];
+  for (const b of all) {
+    if (b.bottom) continue;
+    const below = b.down.filter(a => !a.bottom && inside(b, a));
+    for (const a of below) {
+      if (below.some(c => inside(c, a))) continue;
+      edges.push({id: a.id + '>' + b.id, from: a, to: b, reverses: latticeReverses(a, b)});
+    }
+  }
+  // The floor covers exactly the minimal nodes: those nothing else rises to.
+  const covered = new Set(edges.map(e => e.to.id));
+  for (const b of all) if (!b.bottom && !covered.has(b.id)) edges.push({id: bottom.id + '>' + b.id, from: bottom, to: b, reverses: latticeReverses(bottom, b)});
+  lattice.nodes = all; lattice.edges = edges; lattice.top = all.find(n => n.top) || null; lattice.bottomNode = bottom;
+  lattice.byId = new Map(all.map(n => [n.id, n]));
+}
+
+// Whether the weaker end might, for all the map records, entail the stronger
+// one after all. This is what the diagram has to show clearly: a solid arrow is
+// a settled strict implication, a dashed one is a pair that could still
+// collapse into a single node.
+// Only the selected sources count here, for models as well as proofs. A model
+// the source filter hides still appears in the readout, marked as outside the
+// selection, but it does not settle an arrow the diagram draws.
+function latticeReverses(lower, upper) {
+  if (lower.bottom) {
+    // ⊥ ⇒ X reverses unless X is shown consistent with the background.
+    return upper.consistency.status === 'consistent' && !upper.consistency.limited ? 'ruled out' : 'open';
+  }
+  const missing = lower.gens.filter(p => !upper.set.has(p));
+  const seen = missing.map(p => implicationStatus(upper.gens, p));
+  if (seen.some(s => s.status === 'excludes' || s.status === 'independent' && !s.limited)) return 'ruled out';
+  return 'open';
+}
+
+function latticeLayout() {
+  const {nodes, edges} = lattice;
+  if (!nodes.length) return;
+  const out = new Map(nodes.map(n => [n.id, []])), inn = new Map(nodes.map(n => [n.id, []]));
+  for (const e of edges) { out.get(e.from.id).push(e); inn.get(e.to.id).push(e); }
+  // Rank by the longest ascending chain from the floor, so covers always rise
+  // exactly one row and the diagram reads as a Hasse diagram should.
+  const rank = new Map();
+  const order = [];
+  const visit = n => {
+    if (rank.has(n.id)) return rank.get(n.id);
+    rank.set(n.id, 0);
+    const r = inn.get(n.id).length ? Math.max(...inn.get(n.id).map(e => visit(e.from) + 1)) : 0;
+    rank.set(n.id, r); order.push(n); return r;
+  };
+  for (const n of nodes) visit(n);
+  const maxRank = Math.max(...nodes.map(n => rank.get(n.id)));
+  const rows = [];
+  for (const n of nodes) (rows[maxRank - rank.get(n.id)] ||= []).push(n);
+  // The same padding as a box on the implication graph: eight above and below,
+  // seventeen a line, twelve more for the equivalent header, and an ∧ the size
+  // of the graph's own. This text is centred on its y rather than sitting on a
+  // baseline, so the offsets below are centres, but the box comes out the same.
+  // Names are measured rather than estimated, and a long one wraps onto a
+  // second line, so a box is as wide as its longest line and no wider.
+  const measure = latticeTextWidth();
+  for (const n of nodes) {
+    if (n.meet) { n.w = n.h = 22; continue; }
+    n.lines = n.labels.map(l => latticeWrap(l.text, measure));
+    // A continuation line sits closer than the next name does, so a wrapped
+    // name still reads as one name.
+    n.extraLines = n.lines.reduce((s, ls) => s + ls.length - 1, 0);
+    n.w = Math.max(80, Math.max(...n.lines.flat().map(measure)) + 26);
+    n.h = 16 + 17 * n.labels.length + LATTICE_CONT * n.extraLines + (n.equivalent ? 12 : 0);
+  }
+  const GAP = 24;
+  // A few barycentre sweeps fix the order within each row, as on the
+  // implication graph.
+  for (let pass = 0; pass < 6; pass++) {
+    const dir = pass % 2 ? 1 : -1;
+    for (const row of rows) {
+      if (!row) continue;
+      for (const n of row) {
+        const nbrs = (dir < 0 ? inn.get(n.id).map(e => e.from) : out.get(n.id).map(e => e.to)).filter(m => m.x != null);
+        n.bary = nbrs.length ? nbrs.reduce((s, m) => s + m.x, 0) / nbrs.length : (n.x ?? 0);
+      }
+      row.sort((a, b) => a.bary - b.bary);
+      let x = 0;
+      for (const n of row) { n.x = x + n.w / 2; x += n.w + GAP; }
+      const width = x - GAP;
+      for (const n of row) n.x -= width / 2;
+    }
+  }
+  // Then each node moves as close as it can to the mean of its neighbours
+  // without touching the nodes beside it, so covers run nearly vertical and
+  // a row is no wider than its own boxes need. Pushing right and pushing left
+  // each give a feasible placement; their mean is feasible too and sits
+  // nearer the wanted positions than either.
+  const settle = row => {
+    const want = row.map(n => {
+      const nbrs = [...inn.get(n.id).map(e => e.from), ...out.get(n.id).map(e => e.to)];
+      return nbrs.length ? nbrs.reduce((s, m) => s + m.x, 0) / nbrs.length : n.x;
+    });
+    const sep = i => (row[i - 1].w + row[i].w) / 2 + GAP;
+    const left = want.slice(), right = want.slice();
+    for (let i = 1; i < row.length; i++) left[i] = Math.max(left[i], left[i - 1] + sep(i));
+    for (let i = row.length - 2; i >= 0; i--) right[i] = Math.min(right[i], right[i + 1] - sep(i + 1));
+    row.forEach((n, i) => { n.x = (left[i] + right[i]) / 2; });
+  };
+  for (let pass = 0; pass < 4; pass++) {
+    const order = pass % 2 ? rows.slice().reverse() : rows;
+    for (const row of order) if (row) settle(row);
+  }
+  // Rows are spaced by the boxes they hold, so a tall equivalence box never
+  // runs into the row above or below it. The gap is the one a single-line
+  // box had before.
+  const rowHeight = rows.map(row => row ? Math.max(...row.map(n => n.h)) : 0);
+  let y = 0;
+  rows.forEach((row, i) => {
+    if (!row) return;
+    if (i) y += rowHeight[i - 1] / 2 + 41 + rowHeight[i] / 2;
+    for (const n of row) n.y = y;
+  });
+  lattice.bounds = {
+    minX: Math.min(...nodes.map(n => n.x - n.w / 2)) - 30, maxX: Math.max(...nodes.map(n => n.x + n.w / 2)) + 30,
+    minY: Math.min(...nodes.map(n => n.y - n.h / 2)) - 24, maxY: Math.max(...nodes.map(n => n.y + n.h / 2)) + 24,
+  };
+}
+
+// Text width in the node font, from an offscreen canvas where the browser
+// has one. Without it, the same estimate the implication graph uses.
+function latticeTextWidth() {
+  try {
+    if (typeof OffscreenCanvas === 'function') {
+      const ctx = new OffscreenCanvas(1, 1).getContext('2d');
+      // The font a node label really gets, read off a throwaway label so the
+      // measurement follows the stylesheet rather than a copy of it.
+      const svg = document.getElementById('lat-graph');
+      const probe = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      probe.setAttribute('class', 'lat-node');
+      probe.innerHTML = '<text>Rigid Comprehension</text>';
+      svg.appendChild(probe);
+      const cs = getComputedStyle(probe.firstChild);
+      const font = cs.font || `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      svg.removeChild(probe);
+      ctx.font = font;
+      if (ctx.measureText('Rigid Comprehension').width > 0) return t => ctx.measureText(t).width;
+    }
+  } catch {}
+  return t => t.length * 7.2;
+}
+// A name wider than a comfortable box breaks at spaces into as few lines as
+// fit; a single long word stays whole.
+const LATTICE_LINE = 170, LATTICE_CONT = 14;
+function latticeWrap(text, measure) {
+  if (measure(text) <= LATTICE_LINE) return [text];
+  const lines = [];
+  let line = '';
+  for (const word of text.split(' ')) {
+    const next = line ? line + ' ' + word : word;
+    if (line && measure(next) > LATTICE_LINE) { lines.push(line); line = word; } else line = next;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+// What a node is, as an expression the relation engine understands.
+function latticeExpression(n) {
+  if (n.inconsistent) return FALSE;
+  if (n.top) return TRUE;
+  return n.generators.length === 1 ? n.generators[0] : n.generators;
+}
+function latticeApplyView() {
+  const vp = document.getElementById('lat-vp');
+  if (vp) vp.setAttribute('transform', `translate(${lattice.view.tx},${lattice.view.ty}) scale(${lattice.view.k})`);
+}
+function latticeFit() {
+  const svg = document.getElementById('lat-graph'), b = lattice.bounds;
+  if (!svg || !b) return;
+  const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
+  lattice.view.k = Math.min(W / (b.maxX - b.minX), H / (b.maxY - b.minY), 1.4);
+  lattice.view.tx = (W - (b.maxX + b.minX) * lattice.view.k) / 2;
+  lattice.view.ty = (H - (b.maxY + b.minY) * lattice.view.k) / 2;
+  latticeApplyView(); lattice.fitted = true;
+}
+function latticeFitInitial() { if (!lattice.fitted) latticeFit(); }
+
+// The diagram is rebuilt only when what it is drawn from changes: the chosen
+// literals, the background, or the evidence the engines were built from. A
+// click that only moves the selection keeps the nodes, arrows and layout, and
+// the drawn elements too: only their classes change.
+function latticeBuildKey() {
+  return JSON.stringify([lattice.shown, latticeEvidenceVersion, [...background].sort(), [...negativeBackground].sort(), !!state.showConj]);
+}
+function renderLattice() {
+  const svg = document.getElementById('lat-graph');
+  if (!svg) return;
+  const key = latticeBuildKey();
+  if (key !== lattice.builtKey) { buildLattice(); latticeLayout(); latticeDraw(svg); lattice.builtKey = key; }
+  latticeShade(svg);
+}
+// The structure: every node and arrow, without the shading a selection adds.
+function latticeDraw(svg) {
+  const edge = e => {
+    const x1 = e.from.x, y1 = e.from.y - e.from.h / 2, x2 = e.to.x, y2 = e.to.y + e.to.h / 2;
+    const cls = 'lat-edge ' + (e.reverses === 'open' ? 'may-reverse' : 'strict');
+    const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
+    return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
+  };
+  const node = n => {
+    const cls = 'lat-node' + (n.inconsistent ? ' lat-bottom' : n.top ? ' lat-top' : '')
+      + (n.meet ? ' lat-meet' : '') + (n.equivalent ? ' lat-equivalent' : '');
+    const body = n.meet
+      ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
+      : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
+        + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 14}">equivalent</text>` : '')
+        + n.labels.map(({text: t, literal}, i) => {
+            const tag = literal ? ` data-principle="${esc(literal)}"` : t === '⊥' ? ' data-falsity="1"' : t === '⊤' ? ' data-truth="1"' : '';
+            const lines = n.lines[i], above = n.lines.slice(0, i).reduce((s, ls) => s + ls.length - 1, 0);
+            // A wrapped name is one text element, so it still reads and selects
+            // as one name; the break keeps its space so the text stays the name.
+            const body = lines.length === 1 ? esc(t)
+              : lines.map((l, j) => `<tspan x="${n.x}"${j ? ` dy="${LATTICE_CONT}"` : ''}>${esc(l + (j < lines.length - 1 ? ' ' : ''))}</tspan>`).join('');
+            return `<text${tag} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i + LATTICE_CONT * above}">${body}</text>`;
+          }).join('');
+    // The tooltip is filled in on hover: see the pointerover handler below.
+    return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}</g>`;
+  };
+  const halves = [
+    ['consistent', 'var(--rel-entailed)', 'var(--node-fill)'],
+    ['separated', 'var(--node-fill)', 'var(--rel-excluded)'],
+    ['independent', 'var(--rel-entailed)', 'var(--rel-excluded)']
+  ].map(([id, upper, lower]) => `<linearGradient id="lat-split-${id}" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="50%" stop-color="${upper}"/><stop offset="50%" stop-color="${lower}"/></linearGradient>`).join('');
+  // A capped build is whatever the search reached before it stopped, not a
+  // lattice, so nothing of it is drawn behind the warning.
+  svg.innerHTML = `<defs>${halves}
+      <marker id="lat-solid" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
+      <marker id="lat-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0.5,0.5 L9.5,5 L0.5,9.5 z" fill="var(--bg)" stroke="var(--conj)" stroke-width="1.4"/></marker>
+    </defs><g id="lat-vp">${lattice.capped ? '' : lattice.edges.map(edge).join('') + lattice.nodes.map(node).join('')}</g>`;
+  latticeApplyView();
+  document.getElementById('lat-count').textContent = lattice.capped
+    ? `Stopped at ${LATTICE_CAP} nodes, from ${lattice.shown.length} chosen; nothing drawn.`
+    : lattice.shown.length
+    ? `${lattice.nodes.length} nodes, ${lattice.edges.length} arrows, from ${lattice.shown.length} chosen`
+    : 'Choose a principle to begin.';
+  const warn = document.getElementById('lat-warning');
+  warn.hidden = !lattice.capped;
+  warn.closest('.graph-area').classList.toggle('warned', !!lattice.capped);
+  if (lattice.capped) warn.textContent = `Stopped at ${LATTICE_CAP} nodes. The meets of these principles outrun the diagram; remove one to see the rest.`;
+  refreshLatticeControls();
+}
+// How a node stands to the selection, memoised with the entailments: a
+// re-render with the same selection asks the same questions.
+function latticeRelation(base, n) {
+  const memo = latticeMemo(), k = 'rel:' + JSON.stringify(base) + '|' + n.key;
+  let v = memo.get(k);
+  if (v === undefined) { v = selectionRelation(base, latticeExpression(n)).kind; memo.set(k, v); }
+  return v;
+}
+const latticeRelationClasses = ['rel-base', 'rel-entailed', 'rel-excluded', 'rel-consistent', 'rel-separated', 'rel-independent', 'rel-inconsistent', 'rel-conjectured', 'rel-open'];
+// The shading: the same as the graph's, read off the same selection, applied
+// to the elements already drawn. Here it repeats what the diagram already
+// shows in places, which does no harm and keeps one reading of the colours
+// across the two views.
+function latticeShade(svg) {
+  const base = shadingBase();
+  const baseLiterals = base == null ? [] : expressionLiterals(base);
+  const baseMembers = new Set(base === TRUE ? [TRUE] : baseLiterals);
+  const baseInconsistent = base != null && consistencyStatus(baseLiterals).status === 'inconsistent';
+  // The selected node is the one whose closure the selection generates, so a
+  // click on any of the names an equivalence box carries selects that box,
+  // as on the graph. A selection made elsewhere from principles this diagram
+  // does not show has no closure here, and then only its literal node counts.
+  const baseKey = base != null && baseLiterals.every(l => lattice.shown.includes(l)) ? latticeKey(latticeClosure(baseLiterals)) : null;
+  const isBase = n => base != null && (sameExpression(base, latticeExpression(n)) || baseKey != null && baseKey === n.key || n.labels.some(l => l.literal && baseMembers.has(l.literal)));
+  const selectedEdge = lattice.edges.some(e => e.id === lattice.selected) ? lattice.selected : null;
+  const focusNode = selectedEdge ? null : lattice.byId.get(lattice.selected) || lattice.nodes.find(isBase) || null;
+  // The nodes the selected one rises to, itself included.
+  const above = new Set();
+  if (focusNode) {
+    const out = new Map();
+    for (const e of lattice.edges) (out.get(e.from.id) || out.set(e.from.id, []).get(e.from.id)).push(e.to);
+    for (const stack = [focusNode]; stack.length;) {
+      const n = stack.pop();
+      if (above.has(n.id)) continue;
+      above.add(n.id);
+      for (const m of out.get(n.id) || []) stack.push(m);
+    }
+  }
+  const counts = {entailed: 0, excluded: 0, consistent: 0, separated: 0};
+  for (const el of svg.querySelectorAll('[data-lat-node]')) {
+    const n = lattice.byId.get(el.dataset.latNode);
+    if (!n) continue;
+    let relation = '';
+    if (base != null) {
+      if (isBase(n)) relation = 'rel-base';
+      else if (baseInconsistent) { relation = 'rel-excluded'; counts.excluded++; }
+      // The floor is excluded by any consistent selection, as on the graph;
+      // asking the proof engine about it would count it as entailed instead.
+      else if (n.inconsistent) { relation = 'rel-excluded'; counts.excluded++; }
+      else {
+        const kind = latticeRelation(base, n);
+        relation = 'rel-' + kind;
+        if (kind === 'independent') { counts.consistent++; counts.separated++; }
+        else if (Object.hasOwn(counts, kind)) counts[kind]++;
+      }
+    }
+    el.classList.remove(...latticeRelationClasses, 'sel');
+    if (relation) el.classList.add(relation);
+    if (lattice.selected === n.id) el.classList.add('sel');
+    for (const t of el.querySelectorAll('text[data-principle], text[data-falsity], text[data-truth]')) {
+      const literal = t.dataset.principle;
+      const member = literal ? baseMembers.has(literal) : t.dataset.falsity ? base === FALSE : base === TRUE;
+      t.classList.toggle('selection-member', member);
+    }
+  }
+  // Everything the selected node entails comes forward: every arrow on a
+  // path rising from it. The rest step back. With an arrow selected,
+  // everything but that arrow steps back.
+  for (const el of svg.querySelectorAll('[data-lat-edge]')) {
+    const id = el.dataset.latEdge;
+    const emphasis = selectedEdge ? (selectedEdge === id ? 'sel' : 'far')
+      : focusNode ? (above.has(id.slice(0, id.indexOf('>'))) ? 'near' : 'far') : '';
+    el.classList.remove('sel', 'near', 'far');
+    if (emphasis) el.classList.add(emphasis);
+  }
+  renderLatticeLegend(lattice.capped ? null : base, baseInconsistent, counts);
+  document.getElementById('lat-hint').hidden = !!state.selected;
+  document.getElementById('lat-hint').textContent = 'Click a principle name, an ∧ or an arrow for its details. Shift-click a name to add or remove it from the selection.';
+}
+function renderLatticeLegend(base, baseInconsistent, counts) {
+  const legend = document.getElementById('lat-legend');
+  if (base == null) { legend.hidden = true; return; }
+  legend.hidden = false;
+  const line = selectionConsistencyLine(consistencyStatus(expressionLiterals(base)));
+  const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
+  legend.innerHTML = `<b>Relative to ${esc(expressionName(base))}:</b>`
+    + `<span class="rel-status ${line.kind}">${esc(line.text)}</span>`
+    + key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
+}
+function latticeTitle(n) {
+  const parts = [n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ ')];
+  if (n.mapName) parts.push('the map records this as ' + name(n.mapName));
+  if (n.top) parts.push('everything the background already gives');
+  if (!n.inconsistent && !n.top) parts.push(n.consistency.status === 'consistent' ? 'consistent with the background' : 'not shown consistent with the background');
+  return parts.join('\n');
+}
+function refreshLatticeControls() {
+  document.querySelectorAll('#lat-filters .lat-row').forEach(row => {
+    const id = row.dataset.latRow;
+    const pos = lattice.shown.includes(id), neg = lattice.shown.includes(negate(id));
+    row.querySelector('[data-lat-positive]').setAttribute('aria-pressed', pos ? 'true' : 'false');
+    row.querySelector('[data-lat-negative]').setAttribute('aria-pressed', neg ? 'true' : 'false');
+    row.classList.toggle('on', pos || neg);
+    row.classList.toggle('in-background', inBackground(id));
+    row.classList.toggle('is-collapsed', inBackground(id));
+  });
+  document.querySelectorAll('#lat-filters .pr-category').forEach(group => {
+    const ordinary = [...group.querySelectorAll('.lat-row')].filter(row => !inBackground(row.dataset.latRow));
+    group.querySelector('.pr-category-count').textContent = `${ordinary.filter(row => row.classList.contains('on')).length}/${ordinary.length}`;
+  });
+}
+function latticeToggle(id) {
+  const at = lattice.shown.indexOf(id);
+  if (at >= 0) lattice.shown.splice(at, 1); else lattice.shown.push(id);
+  lattice.selected = null;
+  renderLattice();
+  latticeFitInitial();
+}
+function renderLatticeFilters() {
+  const el = document.getElementById('lat-filters');
+  if (!el) return;
+  const row = p => `<div class="pr-row lat-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-lat-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-lat-positive="${p.id}" aria-label="Add ${esc(p.name)}" aria-pressed="false">✓</button><button data-lat-negative="${p.id}" aria-label="Add not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><span class="lat-name">${esc(p.name)}</span><span class="pr-actions"><button class="lnk" data-lat-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`;
+  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${g.principles.map(row).join('')}</div></section>`).join('');
+  renderSubscripts(el);
+  refreshLatticeControls();
+}
+(function () {
+  const el = document.getElementById('lat-filters');
+  if (!el) return;
+  renderLatticeFilters();
+  el.addEventListener('click', ev => {
+    const pos = ev.target.closest('[data-lat-positive]'), neg = ev.target.closest('[data-lat-negative]');
+    const bg = ev.target.closest('[data-lat-background]'), bulk = ev.target.closest('[data-lat-select]');
+    if (bulk) {
+      // A whole group at once, as on the graph. The node cap still applies, so
+      // a group too large for the diagram stops with the warning rather than
+      // outrunning it.
+      const members = [...bulk.closest('.pr-category').querySelectorAll('.lat-row')].map(row => row.dataset.latRow).filter(id => !inBackground(id));
+      if (bulk.dataset.latSelect === 'all') { for (const id of members) if (!lattice.shown.includes(id)) lattice.shown.push(id); }
+      else lattice.shown = lattice.shown.filter(l => !members.includes(baseId(l)));
+      lattice.selected = null;
+      renderLattice(); latticeFitInitial();
+    }
+    else if (pos) latticeToggle(pos.dataset.latPositive);
+    else if (neg) latticeToggle(negate(neg.dataset.latNegative));
+    else if (bg) {
+      // An assumption is entailed by everything, so it has no work to do as a
+      // generator. Drop both of its forms and hand the principle to the shared
+      // background, which redraws every view that is open.
+      const id = bg.dataset.latBackground;
+      lattice.shown = lattice.shown.filter(l => baseId(l) !== id);
+      lattice.selected = null;
+      changeBackground(id, true);
+      renderLatticeFilters();
+    }
+  });
+  document.getElementById('lat-clear').addEventListener('click', () => { lattice.shown = []; lattice.selected = null; renderLattice(); latticeFit(); });
+  document.getElementById('lat-fit').addEventListener('click', latticeFit);
+  const svg = document.getElementById('lat-graph');
+  // A node's tooltip is composed on first hover rather than at draw time,
+  // since naming an ∧ after a recorded principle searches the whole map.
+  svg.addEventListener('pointerover', ev => {
+    const group = ev.target.closest('[data-lat-node]');
+    if (!group || group.querySelector('title')) return;
+    const n = lattice.byId?.get(group.dataset.latNode);
+    if (!n) return;
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = latticeTitle(n);
+    group.appendChild(title);
+  });
+  svg.addEventListener('click', ev => {
+    const group = ev.target.closest('[data-lat-node]'), wire = ev.target.closest('[data-lat-edge]');
+    if (!group && !wire) { lattice.selected = null; select(null); return; }
+    lattice.selected = group ? group.dataset.latNode : wire.dataset.latEdge;
+    if (group) {
+      const n = lattice.nodes.find(x => x.id === group.dataset.latNode);
+      const literal = ev.target.closest('[data-principle]')?.dataset.principle;
+      if (literal) select({type: 'principle', id: literal}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      else if (ev.target.closest('[data-falsity]') || (n.inconsistent && !n.self.length)) select({type: 'falsity'});
+      else if (ev.target.closest('[data-truth]') || (n.top && !n.self.length)) select({type: 'truth'});
+      else if (n.self.length) select({type: 'principle', id: n.self[0]}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      else select({type: 'selection', premises: n.generators});
+      return;
+    }
+    const e = lattice.edges.find(x => x.id === wire.dataset.latEdge);
+    const lower = e.from.bottom ? null : e.from.generators;
+    select({type: 'lattice-edge', from: lower, to: e.to.generators.length ? e.to.generators : [],
+      missing: lower ? lower.filter(p => !e.to.set.has(p)) : [],
+      fromLabel: e.from.meet ? e.from.generators.map(name).join(' ∧ ') : e.from.names.join(' ≡ '),
+      toLabel: e.to.meet ? e.to.generators.map(name).join(' ∧ ') : e.to.names.join(' ≡ '),
+      reverses: e.reverses});
+  });
+  let drag = null;
+  svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty, moved: false}; });
+  svg.addEventListener('pointermove', ev => {
+    if (!drag) return;
+    const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) <= 3) return;   // a click is not a drag
+    drag.moved = true;
+    lattice.view.tx = drag.tx + dx; lattice.view.ty = drag.ty + dy; latticeApplyView();
+  });
+  for (const type of ['pointerup', 'pointerleave']) svg.addEventListener(type, () => { drag = null; });
+  svg.addEventListener('wheel', ev => {
+    ev.preventDefault();
+    const f = Math.exp(-ev.deltaY * 0.0015), r = svg.getBoundingClientRect();
+    const mx = ev.clientX - r.left, my = ev.clientY - r.top;
+    lattice.view.tx = mx - (mx - lattice.view.tx) * f; lattice.view.ty = my - (my - lattice.view.ty) * f;
+    lattice.view.k *= f; latticeApplyView();
+  }, {passive: false});
+})();
+
 renderAll(true);
+renderLattice();
 requestAnimationFrame(fit);
 </script>
 

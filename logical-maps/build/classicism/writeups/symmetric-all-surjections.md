@@ -1,0 +1,45 @@
+# Symmetric ideally-full model: all surjections of N (Base 1)
+
+<p class='cert'>Model — Source: BC does not imply RC (draft); produced by Cian Dorr; recorded by Claude Opus 5 (Anthropic), 19 September 2026.</p>
+
+## Package
+
+- **Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
+- **□Boolean Completeness.** Every closed instance of Boolean Completeness is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
+- **BF.** The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.
+- **□BF.** Every closed instance of BF is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
+- **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
+- **Atomlessness.** Atomlessness in the displayed closed propositional formulation.
+- **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
+- **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
+- **¬ Actuality.** There is a true proposition that entails every true proposition.
+- **¬ Atomicity (type t).** Atomicity (type t) in the displayed closed propositional formulation.
+- **¬ Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
+- **¬ ND.** Distinct things of any type are necessarily distinct.
+
+## Construction
+
+A symmetric ideally-full intensional action model over one object, the set of natural numbers. Its arrows are all the surjections of that set, and its symmetry group is all the permutations. A relational domain holds exactly the intensions that are symmetric, meaning indifferent to relabelling the individuals of a world, and pinned down by some finite set. The evaluation point is the identity arrow.
+
+Boolean Completeness holds by the draft's main theorem, whose two hypotheses are verified here with the empty distinguished set: every finite set is amalgamable, since an arrow is prescribed only on a finite set and extends freely, and points can always be moved off a given finite set by a permutation. The least upper bound of a property of type-tau entities is the union of the hulls of its instances. The model has one object, so a closed sentence of pure logic denotes the same thing relative to every arrow and is true only if necessarily true. That gives No Pure Contingency directly, and it promotes every pure principle true here to its boxed form, which is how boxed Boolean Completeness and boxed BF are obtained.
+
+BF holds at every type because every arrow is surjective and a finitely pinned symmetric intension can be pulled back along an arrow. Actuality fails: given a true proposition pinned down by a finite set, the proposition that a fresh individual is not collapsed with that set is a strictly stronger truth. The same construction, applied to an arbitrary nonzero proposition rather than a true one, splits every possible proposition, which is Atomlessness and hence the failure of Atomicity at type t. Rigid Comprehension fails already at type e, and concretely rather than only through Actuality: a persistent property with a cofinite extension must be closed under everything an arrow can send an instance to, and no finite pinning set can sustain that short of the top property, so nothing rigid is coextensive with being distinct from a fixed individual.
+
+## Notes
+
+This is the draft's headline separation. Boolean Completeness holds while Rigid Comprehension fails, and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded as a derived verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition rather than for a true one, and the failure of ND at type e follows from the presence of a non-injective surjection, since the proposition that two fixed individuals are identical is then a nonzero proposition; neither is displayed separately in the draft. The source is a work in progress.
+
+## Revisions
+
+- **2026-09-20** (Claude Fable 5.1 (Anthropic)) — Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and identity at the identity arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned by that individual, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).
+
+## Sources
+
+- **BC does not imply RC** — Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §3.1, p. 9 (base); Proposition 22, p. 11; Proposition 23, p. 12; Theorem 36, p. 18; Corollary 37 and Remark 38, p. 19.
+
+<p class='cert'>Record: <code>topics/classicism/models/symmetric-all-surjections.yaml</code></p>
+
+## Paper references
+
+- **Proof: Boolean Completeness does not imply Rigid Comprehension.** Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — §3.1, p. 9; Proposition 22, p. 11; Proposition 23, p. 12; Theorem 36, p. 18; Corollary 37 and Remark 38, p. 19
+- **Background: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Appendix D, pp. 73–79. The ideally-full action models of which this is the symmetric variant, and the failures of Boolean Completeness that symmetry blocks.

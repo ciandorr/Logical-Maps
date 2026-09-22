@@ -1,0 +1,386 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Possibility (pure) ⇒ Axiom of Infinity (type t)</title><style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Silver sage and muted rust. Screen-only overrides preserve print styling. */
+@media screen {
+  :root {
+    --bg: #eef1eb;
+    --panel: #e4eae1;
+    --panel-2: #d5dfd0;
+    --line: #c5cec0;
+    --line-strong: #8b9984;
+    --ink: #303b34;
+    --ink-2: #4a5a50;
+    --ink-3: #526156;
+    --accent: #884932;
+    --link-hover: #6f3827;
+    --derived: #76816f;
+    --open: #dbe2d6;
+    --open-ink: #526156;
+    --node-fill: #f5f6f1;
+    --node-stroke: #86937f;
+    --junction: #596b5b;
+    --hl: #d7e1d0;
+    --focus: #884932;
+    --shadow: 0 4px 24px rgb(48 59 52 / 10%);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #171e1a;
+    --panel: #202a23;
+    --panel-2: #2b372d;
+    --line: #3d4b3e;
+    --line-strong: #72816b;
+    --ink: #e2e8db;
+    --ink-2: #c0cbb9;
+    --ink-3: #b0bda6;
+    --accent: #e2ad92;
+    --link-hover: #f0c3aa;
+    --derived: #91a087;
+    --open: #303d31;
+    --open-ink: #b9c6ae;
+    --node-fill: #263128;
+    --node-stroke: #7c8d73;
+    --junction: #bdcbb3;
+    --hl: #3a4b35;
+    --focus: #e2ad92;
+    --badge-ink: #171e1a;
+    --shadow: 0 4px 24px rgb(0 0 0 / 24%);
+  }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Possibility (pure) ⇒ Axiom of Infinity (type t)</h1></header><p>Assume Possibility (pure): every closed pure sentence consistent with C is possible. The conclusion is the Axiom of Infinity at type <span class="math inline">t</span>,</p>
+<p><span class="math display">
+\neg\exists Z^{(tt)t}\, .\,\operatorname{FiniteCardinality}_t(Z)\land Z(\lambda p^t\, .\,\top).
+</span></p>
+<p>Since Possibility (pure) and Distinctness (pure) are equivalent, Pure Maximalist Classicism implies the Axiom of Infinity at type <span class="math inline">t</span>. The argument is Cian Dorr’s (20 September 2026); the lemmas, the boxed form of exclusivity, the Dedekind step and the consistency model are supplied here.</p>
+<p>See Background for <span class="math inline">\mathbf{0}_\sigma</span>, <span class="math inline">\operatorname{Suc}_\sigma</span> and <span class="math inline">\operatorname{FiniteCardinality}_\sigma</span>. Throughout, <span class="math inline">X-y</span> abbreviates <span class="math inline">\lambda u\, .\,Xu\land u\ne y</span>, so that <span class="math inline">(\operatorname{Suc}_\sigma Z)X</span> unfolds to <span class="math inline">\exists y\, .\,Xy\land Z(X-y)</span>, and <span class="math inline">g(Z)</span> abbreviates <span class="math inline">(\operatorname{Suc}_e Z)(\lambda x^e\, .\,\top)</span>, the proposition that there are exactly one more individuals than <span class="math inline">Z</span> counts. “Finite” means “falls under <span class="math inline">\operatorname{FiniteCardinality}</span>”, and a <em>finite cardinality</em> of type <span class="math inline">(\sigma t)t</span> is one that does. The sentence at the centre of the argument is</p>
+<p><span class="math display">
+\Pi\;:=\;\forall Z^{(et)t}\, .\,\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z),
+</span></p>
+<p>read: there could be any positive number of individuals.</p>
+<p><strong>Why zero is left out.</strong> The version with <span class="math inline">\Diamond Z(\lambda x\, .\,\top)</span> in place of <span class="math inline">\Diamond g(Z)</span> is refutable in C. Its instance at <span class="math inline">\mathbf{0}_e</span> is <span class="math inline">\Diamond\forall u^e\, .\,\neg\top</span>, and since C proves <span class="math inline">\exists u^e\, .\,u=u</span> (Existence), the formula <span class="math inline">\forall u\, .\,\neg\top</span> is H-equivalent to <span class="math inline">\bot</span>, so Logical Equivalence makes <span class="math inline">\mathbf{0}_e(\lambda x\, .\,\top)=\bot</span> and the instance says <span class="math inline">\bot\ne\bot</span>. Shifting by one successor keeps every finite cardinality in play while asking only for positive numbers of individuals.</p>
+<p><strong>Modal bookkeeping.</strong> C proves K, T and 4 for the defined necessity, recorded as results of the background, and C is closed under necessitation: a theorem of H is H-equivalent to <span class="math inline">\top</span>, so Logical Equivalence identifies it with <span class="math inline">\top</span>, which is its box; an instance of Logical Equivalence is an identity, whose box follows by NI; K carries boxes through modus ponens; and for generalisation, <span class="math inline">A=\top</span> with <span class="math inline">x</span> free gives <span class="math inline">\lambda x\, .\,A=\lambda x\, .\,\top</span> by the <span class="math inline">\xi</span> rule, whence <span class="math inline">\forall x\, .\,A=\forall x\, .\,\top=\top</span>. Combined with K this gives: whenever <span class="math inline">A_1\land\cdots\land A_k\to B</span> is a theorem of C, <span class="math inline">\Box A_1\land\cdots\land\Box A_k\to\Box B</span> and <span class="math inline">\Box A_1\land\cdots\land\Box A_{k-1}\land\Diamond A_k\to\Diamond B</span>.</p>
+<h2 id="lemmas-about-finite-cardinalities-provable-in-c">1. Lemmas about finite cardinalities, provable in C</h2>
+<p>The lemmas are schematic in <span class="math inline">\sigma</span>; cardinalities have type <span class="math inline">(\sigma t)t</span> and their arguments type <span class="math inline">\sigma t</span>. Each is proved by instantiating the <span class="math inline">\forall W</span> of <span class="math inline">\operatorname{FiniteCardinality}_\sigma</span> with a displayed abstract, and the induction hypothesis is always applied to the abstract <span class="math inline">X-y</span> exactly as <span class="math inline">\operatorname{Suc}_\sigma</span> presents it, never to a merely coextensive property. The one identification of properties used is between abstracts of H-equivalent formulas, which Logical Equivalence licenses.</p>
+<p><strong>Lemma 1 (Persistence).</strong> <span class="math inline">\operatorname{FiniteCardinality}(Z)\to\Box\operatorname{FiniteCardinality}(Z)</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">W:=\lambda Z\, .\,\Box\operatorname{FiniteCardinality}(Z)</span>. <span class="math inline">\operatorname{FiniteCardinality}(\mathbf{0})</span> is a theorem, so its box holds. Also <span class="math inline">\operatorname{FiniteCardinality}(Y)\to\operatorname{FiniteCardinality}(\operatorname{Suc}Y)</span> is a theorem, since a property holding of <span class="math inline">\mathbf{0}</span> and closed under <span class="math inline">\operatorname{Suc}</span> that holds of <span class="math inline">Y</span> holds of <span class="math inline">\operatorname{Suc}Y</span>; necessitation and K give <span class="math inline">WY\to W(\operatorname{Suc}Y)</span>. So <span class="math inline">\operatorname{FiniteCardinality}(Z)</span> gives <span class="math inline">WZ</span>. <span class="math inline">\square</span></p>
+<p><strong>Lemma 2 (Cases).</strong> If <span class="math inline">Z</span> is finite then <span class="math inline">Z=\mathbf{0}</span> or <span class="math inline">Z=\operatorname{Suc}Y</span> for some finite <span class="math inline">Y</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">W:=\lambda Z\, .\,Z=\mathbf{0}\lor\exists Y\, .\, \operatorname{FiniteCardinality}(Y)\land Z=\operatorname{Suc}Y</span>. It holds of <span class="math inline">\mathbf{0}</span>. If <span class="math inline">WY</span> then <span class="math inline">Y</span> is finite, being <span class="math inline">\mathbf{0}</span> or the successor of a finite cardinality, so <span class="math inline">W(\operatorname{Suc}Y)</span> with witness <span class="math inline">Y</span>. <span class="math inline">\square</span></p>
+<p><strong>Lemma 3 (Swap).</strong> If <span class="math inline">Y</span> is finite, <span class="math inline">Y(X-y&#39;)</span>, <span class="math inline">Xy</span>, <span class="math inline">Xy&#39;</span> and <span class="math inline">y\ne y&#39;</span>, then <span class="math inline">Y(X-y)</span>.</p>
+<p><em>Proof.</em> By induction on <span class="math inline">Y</span> with <span class="math inline">W:=\lambda Y\, .\,\forall X\,y\,y&#39;\, .\,(Y(X-y&#39;)\land Xy\land Xy&#39;\land y\ne y&#39;)\to Y(X-y)</span>. For <span class="math inline">Y=\mathbf{0}</span> the antecedent is contradictory: <span class="math inline">\mathbf{0}(X-y&#39;)</span> says that nothing other than <span class="math inline">y&#39;</span> is an instance of <span class="math inline">X</span>, but <span class="math inline">y</span> is. For the step, assume <span class="math inline">WY_0</span>, and suppose <span class="math inline">(\operatorname{Suc}Y_0)(X-y&#39;)</span>, <span class="math inline">Xy</span>, <span class="math inline">Xy&#39;</span>, <span class="math inline">y\ne y&#39;</span>. Unfolding, there is <span class="math inline">z</span> with <span class="math inline">Xz</span>, <span class="math inline">z\ne y&#39;</span> and <span class="math inline">Y_0((X-y&#39;)-z)</span>. We show <span class="math inline">(\operatorname{Suc}Y_0)(X-y)</span> with witness <span class="math inline">y&#39;</span>: <span class="math inline">(X-y)y&#39;</span> holds since <span class="math inline">Xy&#39;</span> and <span class="math inline">y&#39;\ne y</span>, so it remains to show <span class="math inline">Y_0((X-y)-y&#39;)</span>. If <span class="math inline">z=y</span> we have <span class="math inline">Y_0((X-y&#39;)-y)</span>, and <span class="math inline">(X-y&#39;)-y=(X-y)-y&#39;</span> by Logical Equivalence, the two abstracts binding H-equivalent formulas. If <span class="math inline">z\ne y</span>, apply <span class="math inline">WY_0</span> to the property <span class="math inline">X&#39;:=X-y&#39;</span> and the pair <span class="math inline">y,z</span>: we have <span class="math inline">Y_0(X&#39;-z)</span>, <span class="math inline">X&#39;y</span> (as <span class="math inline">Xy</span> and <span class="math inline">y\ne y&#39;</span>), <span class="math inline">X&#39;z</span> (as <span class="math inline">Xz</span> and <span class="math inline">z\ne y&#39;</span>) and <span class="math inline">y\ne z</span>, so <span class="math inline">Y_0(X&#39;-y)</span>, that is <span class="math inline">Y_0((X-y&#39;)-y)</span>, which is <span class="math inline">Y_0((X-y)-y&#39;)</span> as before. <span class="math inline">\square</span></p>
+<p><strong>Lemma 4 (Exclusivity).</strong> If <span class="math inline">Z</span> and <span class="math inline">Z&#39;</span> are finite then <span class="math inline">Z=Z&#39;\lor\Box\forall X\, .\,\neg(ZX\land Z&#39;X)</span>.</p>
+<p>The point of the boxed disjunct is that, without ND, a merely possible common instance of two finite cardinalities would give only <span class="math inline">\Diamond(Z=Z&#39;)</span>. Two preliminary theorems of H: for any <span class="math inline">Y&#39;</span>, <span class="math inline">\forall X\, .\,\neg(\mathbf{0}X\land(\operatorname{Suc}Y&#39;)X)</span>, since <span class="math inline">\mathbf{0}X</span> denies the instance that <span class="math inline">(\operatorname{Suc}Y&#39;)X</span> supplies; and likewise with the conjuncts exchanged. Their boxes therefore hold.</p>
+<p><em>Proof.</em> By induction on <span class="math inline">Z</span> with <span class="math inline">W:=\lambda Z\, .\,\operatorname{FiniteCardinality}(Z)\land\forall Z&#39;\, .\, \operatorname{FiniteCardinality}(Z&#39;)\to(Z=Z&#39;\lor\Box\forall X\, .\,\neg(ZX\land Z&#39;X))</span>.</p>
+<p>Base, <span class="math inline">Z=\mathbf{0}</span>: given finite <span class="math inline">Z&#39;</span>, Lemma 2 makes <span class="math inline">Z&#39;=\mathbf{0}</span>, giving the first disjunct, or <span class="math inline">Z&#39;=\operatorname{Suc}Y&#39;</span>, where the boxed preliminary theorem gives the second.</p>
+<p>Step: assume <span class="math inline">WY</span>; we show <span class="math inline">W(\operatorname{Suc}Y)</span>. Finiteness is immediate. Given finite <span class="math inline">Z&#39;</span>, by Lemma 2 either <span class="math inline">Z&#39;=\mathbf{0}</span>, and the boxed preliminary theorem applies, or <span class="math inline">Z&#39;=\operatorname{Suc}Y&#39;</span> with <span class="math inline">Y&#39;</span> finite. Apply <span class="math inline">WY</span> to <span class="math inline">Y&#39;</span>. If <span class="math inline">Y=Y&#39;</span> then <span class="math inline">\operatorname{Suc}Y=\operatorname{Suc}Y&#39;=Z&#39;</span>. Otherwise <span class="math inline">\Box\forall X\, .\,\neg(YX\land Y&#39;X)</span>, and by Lemma 1 <span class="math inline">\Box\operatorname{FiniteCardinality}(Y&#39;)</span>. The following is a theorem of C, so by necessitation and K its boxed conclusion follows from the two boxed premises:</p>
+<p><span class="math display">
+\operatorname{FiniteCardinality}(Y&#39;)\land\forall X\, .\,\neg(YX\land Y&#39;X)
+\;\to\;\forall X\, .\,\neg\bigl((\operatorname{Suc}Y)X\land(\operatorname{Suc}Y&#39;)X\bigr).
+</span></p>
+<p>To prove it, suppose <span class="math inline">(\operatorname{Suc}Y)X</span> with witness <span class="math inline">y</span>, so <span class="math inline">Xy</span> and <span class="math inline">Y(X-y)</span>, and <span class="math inline">(\operatorname{Suc}Y&#39;)X</span> with witness <span class="math inline">y&#39;</span>, so <span class="math inline">Xy&#39;</span> and <span class="math inline">Y&#39;(X-y&#39;)</span>. If <span class="math inline">y=y&#39;</span> then <span class="math inline">X-y</span> is a common instance of <span class="math inline">Y</span> and <span class="math inline">Y&#39;</span>. If <span class="math inline">y\ne y&#39;</span>, Lemma 3 turns <span class="math inline">Y&#39;(X-y&#39;)</span>, <span class="math inline">Xy</span>, <span class="math inline">Xy&#39;</span> into <span class="math inline">Y&#39;(X-y)</span>, and again <span class="math inline">X-y</span> is a common instance. Either way <span class="math inline">\forall X\, .\,\neg(YX\land Y&#39;X)</span> is contradicted. <span class="math inline">\square</span></p>
+<p><strong>Lemma 5 (Dedekind).</strong> Call <span class="math inline">Q^{\sigma t}</span> <em>Dedekind-infinite</em> when there are <span class="math inline">R^{\sigma\sigma t}</span> and <span class="math inline">q_0</span> such that</p>
+<ul>
+<li><ol type="i">
+<li><span class="math inline">\forall x\, .\,Qx\to\exists z\, .\,Qz\land Rxz</span>;</li>
+</ol></li>
+<li><ol start="2" type="i">
+<li><span class="math inline">\forall x\,x&#39;\,z\, .\,Qx\land Qx&#39;\land Rxz\land Rx&#39;z\to x=x&#39;</span>;</li>
+</ol></li>
+<li><ol start="3" type="i">
+<li><span class="math inline">Qq_0\land\forall x\, .\,Qx\to\neg Rxq_0</span>.</li>
+</ol></li>
+</ul>
+<p>Then no finite cardinality holds of a Dedekind-infinite property.</p>
+<p><em>Proof.</em> By induction on the cardinality with <span class="math inline">W:=\lambda Z\, .\,\forall Q\, .\,ZQ\to Q\text{ is not Dedekind-infinite}</span>. For <span class="math inline">\mathbf{0}</span>: <span class="math inline">q_0</span> is an instance of <span class="math inline">Q</span>, against <span class="math inline">\mathbf{0}Q</span>.</p>
+<p>Step: assume <span class="math inline">WY</span>, and suppose <span class="math inline">(\operatorname{Suc}Y)Q</span> with witness <span class="math inline">q</span>, so <span class="math inline">Qq</span> and <span class="math inline">Y(Q-q)</span>, while <span class="math inline">Q</span> is Dedekind-infinite through <span class="math inline">R</span> and <span class="math inline">q_0</span>. We show that <span class="math inline">Q-q</span> is Dedekind-infinite, which contradicts <span class="math inline">WY</span> applied to <span class="math inline">Q-q</span>.</p>
+<p><em>Case A: no instance of <span class="math inline">Q</span> bears <span class="math inline">R</span> to <span class="math inline">q</span>.</em> Then <span class="math inline">R</span> itself serves for <span class="math inline">Q-q</span>. For (i), an instance <span class="math inline">x</span> of <span class="math inline">Q-q</span> has some <span class="math inline">z</span> with <span class="math inline">Qz</span> and <span class="math inline">Rxz</span>, and <span class="math inline">z\ne q</span> by the case hypothesis. (ii) is inherited. For (iii), if <span class="math inline">q_0\ne q</span> then <span class="math inline">q_0</span> serves. If <span class="math inline">q_0=q</span>, take <span class="math inline">z_0</span> with <span class="math inline">Qz_0</span> and <span class="math inline">Rq_0z_0</span>; then <span class="math inline">z_0\ne q_0</span>, since otherwise <span class="math inline">q_0</span> would bear <span class="math inline">R</span> to <span class="math inline">q_0</span>, so <span class="math inline">z_0</span> is an instance of <span class="math inline">Q-q</span>, and an instance <span class="math inline">x</span> of <span class="math inline">Q-q</span> with <span class="math inline">Rxz_0</span> would equal <span class="math inline">q_0=q</span> by (ii), which it does not.</p>
+<p><em>Case B: some <span class="math inline">p</span> has <span class="math inline">Qp</span> and <span class="math inline">Rpq</span>.</em> Then <span class="math inline">q\ne q_0</span>. Let <span class="math inline">R&#39;:=\lambda x\,z\, .\,(x\ne p\land Rxz)\lor(x=p\land Rqz)</span>. For (i), let <span class="math inline">x</span> be an instance of <span class="math inline">Q-q</span>. If <span class="math inline">x\ne p</span>, take <span class="math inline">z</span> with <span class="math inline">Qz</span> and <span class="math inline">Rxz</span>; then <span class="math inline">z\ne q</span>, since otherwise (ii) would make <span class="math inline">x=p</span>. If <span class="math inline">x=p</span>, take <span class="math inline">z</span> with <span class="math inline">Qz</span> and <span class="math inline">Rqz</span>; then <span class="math inline">z\ne q</span>, since <span class="math inline">Rqq</span> and <span class="math inline">Rpq</span> would make <span class="math inline">q=p</span> by (ii), while <span class="math inline">p=x\ne q</span>. In both cases <span class="math inline">z</span> is an instance of <span class="math inline">Q-q</span> with <span class="math inline">R&#39;xz</span>. For (ii), let <span class="math inline">x,x&#39;</span> be instances of <span class="math inline">Q-q</span> with <span class="math inline">R&#39;xz</span> and <span class="math inline">R&#39;x&#39;z</span>. If neither is <span class="math inline">p</span>, then <span class="math inline">Rxz</span> and <span class="math inline">Rx&#39;z</span> give <span class="math inline">x=x&#39;</span>. If <span class="math inline">x=p\ne x&#39;</span>, then <span class="math inline">Rqz</span> and <span class="math inline">Rx&#39;z</span> give <span class="math inline">x&#39;=q</span>, which is impossible; symmetrically for <span class="math inline">x&#39;=p\ne x</span>. For (iii), <span class="math inline">q_0</span> is an instance of <span class="math inline">Q-q</span>, and <span class="math inline">R&#39;xq_0</span> would require <span class="math inline">Rxq_0</span> for an instance <span class="math inline">x</span> of <span class="math inline">Q</span>, or <span class="math inline">Rqq_0</span>, both excluded by (iii) for <span class="math inline">R</span>. <span class="math inline">\square</span></p>
+<h2 id="pi-is-consistent-with-c">2. <span class="math inline">\Pi</span> is consistent with C</h2>
+<p><span class="math inline">\Pi</span> is closed and pure. It is true at the root of the model <em>Coalesced sum: root over all finite individual domains</em>, which satisfies C at every world; the construction and verification are in that model’s write-up. Briefly: the summands are the full Henkin models with <span class="math inline">1,2,3,\ldots</span> individuals, the root’s individuals are threads through the summands, propositions are sets of worlds, and higher-type entities have an unconstrained root component; at the root the finite cardinalities are exactly the numerals, and the <span class="math inline">k</span>-th numeral’s successor holds of the universal property at the summand with <span class="math inline">k+1</span> individuals.</p>
+<h2 id="from-possibility-to-pi">3. From Possibility to <span class="math inline">\Pi</span></h2>
+<p>By §2, Possibility (pure) gives <span class="math inline">\Diamond\Pi</span>. Let <span class="math inline">Z</span> be finite. By Lemma 1, <span class="math inline">\Box\operatorname{FiniteCardinality}_e(Z)</span>. Since <span class="math inline">\Pi\to(\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z))</span> is a theorem, K turns <span class="math inline">\Diamond\Pi</span> into <span class="math inline">\Diamond(\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z))</span>, and with the boxed premise into <span class="math inline">\Diamond\Diamond g(Z)</span>. Axiom 4 for the defined necessity gives <span class="math inline">\Diamond g(Z)</span>. So <span class="math inline">\Pi</span> holds. <span class="math inline">\square</span></p>
+<h2 id="pi-implies-the-axiom-of-infinity-at-type-t">4. <span class="math inline">\Pi</span> implies the Axiom of Infinity at type <span class="math inline">t</span></h2>
+<p><strong>Lemma 6 (Injectivity under <span class="math inline">\Pi</span>).</strong> If <span class="math inline">Y,Y&#39;</span> are finite and <span class="math inline">g(Y)=g(Y&#39;)</span> then <span class="math inline">Y=Y&#39;</span>. Consequently, if <span class="math inline">Y,Y&#39;</span> are finite and <span class="math inline">\operatorname{Suc}_eY=\operatorname{Suc}_eY&#39;</span> then <span class="math inline">Y=Y&#39;</span>.</p>
+<p><em>Proof.</em> By Lemma 4, <span class="math inline">Y=Y&#39;</span> or <span class="math inline">\Box\forall X\, .\,\neg(YX\land Y&#39;X)</span>. Suppose the latter. By <span class="math inline">\Pi</span>, <span class="math inline">\Diamond g(Y)</span>; since <span class="math inline">g(Y)=g(Y&#39;)</span> and <span class="math inline">g(Y)\land g(Y)=g(Y)</span> by Logical Equivalence, <span class="math inline">\Diamond(g(Y)\land g(Y&#39;))</span>. By Lemma 1, <span class="math inline">\Box\operatorname{FiniteCardinality}_e(Y&#39;)</span>. The following is a theorem of C:</p>
+<p><span class="math display">
+\operatorname{FiniteCardinality}_e(Y&#39;)\land\forall X\, .\,\neg(YX\land Y&#39;X)\land g(Y)\land g(Y&#39;)\to\bot.
+</span></p>
+<p>For <span class="math inline">g(Y)</span> unfolds to a <span class="math inline">y</span> with <span class="math inline">Y((\lambda x\, .\,\top)-y)</span> and <span class="math inline">g(Y&#39;)</span> to a <span class="math inline">y&#39;</span> with <span class="math inline">Y&#39;((\lambda x\, .\,\top)-y&#39;)</span>; both <span class="math inline">y</span> and <span class="math inline">y&#39;</span> are instances of <span class="math inline">\lambda x\, .\,\top</span>, so if <span class="math inline">y\ne y&#39;</span> Lemma 3 gives <span class="math inline">Y&#39;((\lambda x\, .\,\top)-y)</span>, and in either case <span class="math inline">Y</span> and <span class="math inline">Y&#39;</span> share an instance, against the second conjunct. By necessitation and K, the two boxed premises and the possible conjunction give <span class="math inline">\Diamond\bot</span>, which is <span class="math inline">\bot\ne\bot</span>, refutable. So <span class="math inline">Y=Y&#39;</span>. The consequence follows since <span class="math inline">\operatorname{Suc}_eY=\operatorname{Suc}_eY&#39;</span> gives <span class="math inline">g(Y)=g(Y&#39;)</span>. <span class="math inline">\square</span></p>
+<p><strong>The theorem.</strong> Assume <span class="math inline">\Pi</span>. Let <span class="math inline">S:=\lambda p^t\, .\,\exists Z\, .\, \operatorname{FiniteCardinality}_e(Z)\land p=g(Z)</span>, the propositions that say exactly how many individuals there are, for a positive finite number, and define</p>
+<p><span class="math display">
+R:=\lambda p\,q\, .\,\bigl(\exists Z\, .\,\operatorname{FiniteCardinality}_e(Z)\land p=g(Z)\land q=g(\operatorname{Suc}_eZ)\bigr)
+\lor(\neg Sp\land q=p),\qquad q_0:=g(\mathbf{0}_e).
+</span></p>
+<p>We check that <span class="math inline">\lambda p\, .\,\top</span> is Dedekind-infinite through <span class="math inline">R</span> and <span class="math inline">q_0</span>.</p>
+<ol type="i">
+<li><p>Every <span class="math inline">p</span> has an <span class="math inline">R</span>-successor: if <span class="math inline">Sp</span>, pick a finite <span class="math inline">Z</span> with <span class="math inline">p=g(Z)</span> and take <span class="math inline">q:=g(\operatorname{Suc}_eZ)</span>; otherwise take <span class="math inline">q:=p</span>.</p></li>
+<li><p>Suppose <span class="math inline">Rpq</span> and <span class="math inline">Rp&#39;q</span>. If both hold through the first disjunct, with finite <span class="math inline">Z,Z&#39;</span>, <span class="math inline">p=g(Z)</span>, <span class="math inline">p&#39;=g(Z&#39;)</span> and <span class="math inline">q=g(\operatorname{Suc}_eZ)=g(\operatorname{Suc}_eZ&#39;)</span>, then Lemma 6 applied to the finite cardinalities <span class="math inline">\operatorname{Suc}_eZ</span> and <span class="math inline">\operatorname{Suc}_eZ&#39;</span> gives <span class="math inline">\operatorname{Suc}_eZ=\operatorname{Suc}_eZ&#39;</span>, its consequence gives <span class="math inline">Z=Z&#39;</span>, and so <span class="math inline">p=p&#39;</span>. If both hold through the second disjunct then <span class="math inline">p=q=p&#39;</span>. If <span class="math inline">Rpq</span> holds through the first and <span class="math inline">Rp&#39;q</span> through the second, then <span class="math inline">q=g(\operatorname{Suc}_eZ)</span> satisfies <span class="math inline">Sq</span> while <span class="math inline">q=p&#39;</span> does not, which is impossible.</p></li>
+<li><p><span class="math inline">Sq_0</span> holds with witness <span class="math inline">\mathbf{0}_e</span>. If <span class="math inline">Rpq_0</span> held through the second disjunct then <span class="math inline">q_0=p</span> would fail <span class="math inline">S</span>. If it held through the first, <span class="math inline">g(\mathbf{0}_e)=g(\operatorname{Suc}_eZ)</span> for a finite <span class="math inline">Z</span>, so <span class="math inline">\mathbf{0}_e=\operatorname{Suc}_eZ</span> by Lemma 6. But <span class="math inline">\mathbf{0}_e(\lambda x\, .\,\bot)=\top</span> and <span class="math inline">(\operatorname{Suc}_eZ)(\lambda x\, .\,\bot)=\bot</span> by Logical Equivalence, and <span class="math inline">\top\ne\bot</span>.</p></li>
+</ol>
+<p>By Lemma 5 at <span class="math inline">\sigma=t</span>, no finite cardinality of type <span class="math inline">(tt)t</span> holds of <span class="math inline">\lambda p\, .\,\top</span>. With §3, this is the Axiom of Infinity at type <span class="math inline">t</span> from Possibility (pure). <span class="math inline">\blacksquare</span></p>
+<h2 id="notes">Notes</h2>
+<p>The earlier record for the Infinity schema applied Distinctness to one identity between numerals at a time, and its note explains why that reaches only the schema. Here the consistency side condition is applied once, to the single sentence <span class="math inline">\Pi</span>, which quantifies over every finite cardinality; that is what reaches the domain over which <span class="math inline">\operatorname{FiniteCardinality}_t</span> quantifies, including cardinalities that no closed term names.</p>
+<p>ND is never used. The natural first thought, that the incompatible possible propositions <span class="math inline">g(Z)</span> and <span class="math inline">g(Z&#39;)</span> must be distinct, yields without ND only <span class="math inline">\Diamond(Z=Z&#39;)</span> from a shared possible instance. Lemma 4 supplies the boxed alternative that makes the contradiction outright.</p>
+<p><span class="math inline">\Pi</span> is not a consequence of the Axiom of Infinity at type <span class="math inline">e</span>: the full Henkin model with infinitely many individuals satisfies that axiom but has no possible world with exactly one individual, so §3 genuinely needs the Possibility schema.</p>
+<p><strong>A variant at type <span class="math inline">t</span> (sketch only).</strong> The same strategy can be run with propositions in place of individuals, but the sentence must change, since not every positive number of propositions is consistent with C: <span class="math inline">\top\ne\bot</span> excludes one, and the Boolean structure of propositions under Logical Equivalence excludes every number that is not a power of two. Every power of two <span class="math inline">2^k</span> with <span class="math inline">k\ge1</span> is consistent, as the root of a coalesced sum with <span class="math inline">k-1</span> leaves shows, so the closed pure sentence <span class="math inline">\Pi_t</span>, that for every finite cardinality <span class="math inline">Z</span> of type <span class="math inline">(tt)t</span> some finite cardinality reachable from <span class="math inline">Z</span> by <span class="math inline">\operatorname{Suc}_t</span> possibly holds of <span class="math inline">\lambda p\, .\,\top</span>, is consistent (a coalesced sum of those roots) and, by persistence and 4, follows from its diamond. Under <span class="math inline">\Pi_t</span>, the finite cardinalities that possibly hold of <span class="math inline">\lambda p\, .\,\top</span> are cofinal in the reachability order; their values under <span class="math inline">Z\mapsto Z(\lambda p\, .\,\top)</span> are pairwise distinct by Lemma 4; and the relation sending each such value to the value of the next one, with everything else fixed, is total, injective and misses the least one, so Lemma 5 applies. Carrying this out needs the reachability order to be linear on finite cardinalities and antisymmetric on the possibly universal ones, and least elements to exist, each a further induction. The variant yields no new arrow on the map, since the type-<span class="math inline">e</span> route already gives the Axiom at type <span class="math inline">t</span>; it is noted because it stays within the language of type <span class="math inline">t</span>.</p>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.4, pp. 35–36; §2.3, n. 47, p. 32; §1.5, p. 17; §3.2, pp. 47–48; Appendix E, pp. 80–83. Formulations of Possibility and Infinity, the S4 laws of the defined necessity, the full Henkin models, and the coalesced-sum construction that the consistency model follows. The draft does not draw the connection between Possibility and the Axiom of Infinity.</li>
+</ul>
+</body></html>

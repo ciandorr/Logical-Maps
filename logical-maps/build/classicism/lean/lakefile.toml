@@ -1,0 +1,9 @@
+name = "Classicism"
+defaultTargets = ["Classicism"]
+
+# No Mathlib: the shallow layer lives in base Lean so that nothing classical
+# (propext, Quot.sound, Classical.choice) is available except where the
+# Classicism prelude admits it. See README.md.
+
+[[lean_lib]]
+name = "Classicism"

@@ -1,6 +1,6 @@
 # Coalesced sum: maximalist root
 
-<p class='cert'>Model — Source: Classicism (2023 draft); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
+<p class='cert'>Model — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Package
 
@@ -30,4 +30,4 @@ The cited construction is a model of the map’s relational-type framework. The 
 
 ## Paper references
 
-- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr. Classicism. Draft dated 16 May 2023, 87 pages. All page, proposition and footnote locators in this map refer to this draft. — Theorem 3.26, §§3.6, pp. 62–64; Appendix E, pp. 80–83; §2.6, p. 41
+- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Theorem 3.26, §§3.6, pp. 62–64; Appendix E, pp. 80–83; §2.6, p. 41

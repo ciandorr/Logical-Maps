@@ -88,6 +88,10 @@
   .conjecture-row .note, .conjecture-evidence { margin-top: 8px; }
   .conjecture-evidence summary, #open-incompatible > summary { cursor: pointer; }
   .conjecture-evidence li { margin: 8px 0; }
+  #lynchpins { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+  #lynchpins > summary { cursor: pointer; font-weight: 600; }
+  #lynchpins table.results { margin: 8px 0 16px; border-collapse: collapse; }
+  #lynchpins td.num, #lynchpins th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
   #open-incompatible { margin-top: 20px; }
   .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
   .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
@@ -107,6 +111,8 @@
   #graph:active { cursor: grabbing; }
   .graph-tools { grid-row: 1; display: flex; align-items: flex-start; gap: 6px; padding: 12px; pointer-events: none; }
   .graph-tools > * { pointer-events: auto; }
+  /* A warning panel is inset from the edges; the tools would show around it. */
+  .graph-area.warned .graph-tools { visibility: hidden; }
   .graph-tools #fit { margin-left: auto; }
   .graph-search { width: 280px; max-width: calc(100% - 48px); min-width: 0; }
   .graph-search .search { width: 100%; margin: 0; }
@@ -179,6 +185,11 @@
   .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
   .lat-edge.may-reverse { stroke: var(--conj); stroke-width: 1.6; stroke-dasharray: 6 4; }
   .lat-edge-g.sel .lat-edge { stroke-width: 3.2; }
+  /* With a node selected, the arrows into and out of it come forward and the
+     rest step back; with an arrow selected, everything but that arrow does. */
+  .lat-edge-g.near .lat-edge { stroke-width: 2.4; }
+  .lat-edge-g.near .lat-edge.may-reverse { stroke-width: 2.6; }
+  .lat-edge-g.far { opacity: 0.22; }
   .lat-hit { fill: none; stroke: transparent; stroke-width: 12; cursor: pointer; }
   .lat-node rect { fill: var(--node-fill); stroke: var(--node-stroke); stroke-width: 1.2; cursor: pointer; }
   .lat-node text { font: 500 12px var(--sans); fill: var(--ink); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
@@ -748,6 +759,120 @@ class Engine {
   }
 }
 
+// ---------------------------------------------------------------- lynchpin conjectures (mirrors Lynchpins in scripts/pmap.py)
+// Scores each open question of an engine by the number of *other* open
+// questions either answer would settle. The engine already carries the
+// background and only the models that fit it. Questions are keyed
+// 'imp|a|b' (a ⇒ b ?), 'con|a' and 'con|a|b' (consistent ?), over one
+// representative per equivalence class. Adding a rule P ⇒ c changes cl(S)
+// to cl(S ∪ {c}) exactly when P ⊆ cl(S), so no engine is rebuilt.
+const LYNCHPIN_MAX_OPEN = 0.75;
+class Lynchpins {
+  constructor(E) {
+    this.E = E; this.ids = E.ids; this.negative = E.negativeBackground;
+    this.inconsistent = E.conflict([]) !== null;
+    this.witnesses = E.models.filter(m => !E.modelConflicts.has(m.id));
+    this.extCache = new Map(); this.keys = new WeakMap();
+    this.trivial = this.inconsistent ? [] : this.ids.filter(a => E.cl([]).facts.has(a));
+    this.classes = []; const seen = new Set();
+    for (const a of this.ids) {
+      if (seen.has(a)) continue;
+      const cls = [a, ...this.ids.filter(b => b !== a && E.entails([a], b) !== null && E.entails([b], a) !== null)];
+      cls.forEach(x => seen.add(x)); this.classes.push(cls);
+    }
+    this.reps = this.classes.map(c => c[0]);
+    // trig[model][a] = trials d with a ∈ cl(sat ∪ {d}): the only trials a rule with premise a can change.
+    this.trig = new Map();
+    for (const m of this.witnesses) {
+      const tr = new Map();
+      for (const d of this.ids) for (const a of this.cl([...m.satisfies, d])) { if (!tr.has(a)) tr.set(a, new Set()); tr.get(a).add(d); }
+      this.trig.set(m.id, tr);
+    }
+    const trivial = new Set(this.trivial), proper = this.reps.filter(a => !trivial.has(a));
+    this.questions = [];
+    for (const a of this.reps) for (const b of this.reps) if (a !== b) this.questions.push({kind: 'imp', P: [a, b]});
+    for (const a of this.reps) this.questions.push({kind: 'con', P: [a]});
+    proper.forEach((a, i) => proper.slice(i + 1).forEach(b => this.questions.push({kind: 'con', P: [a, b]})));
+    for (const q of this.questions) {
+      q.key = q.kind + '|' + q.P.join('|'); q.status = this.status(q);
+      q.F = this.cl(q.P); if (q.kind === 'imp') q.Fa = this.cl([q.P[0]]);
+    }
+    this.open = this.questions.filter(q => q.status === 'open');
+    this.unknown = new Map(this.witnesses.map(m => [m.id, this.ids.filter(c => !E.holds.get(m.id).has(c) && !E.fails.get(m.id).has(c))]));
+  }
+  cl(S) { return this.E.cl(S).facts; }
+  ext(F, c) {
+    // Closure of the closed set F together with c.
+    if (!this.keys.has(F)) this.keys.set(F, [...F].sort().join('\u0001'));
+    const key = this.keys.get(F) + '\u0002' + c;
+    if (!this.extCache.has(key)) this.extCache.set(key, closure([...F, c], this.E.rules, this.E.background).facts);
+    return this.extCache.get(key);
+  }
+  bad(F, violates = []) { return F.has(FALSE) || this.negative.some(v => F.has(v)) || violates.some(v => F.has(v)); }
+  status(q) {
+    if (q.kind === 'imp') return this.E.pair(q.P[0], q.P[1]).status;
+    if (this.E.conflict(q.P)) return 'inconsistent';
+    return this.witnesses.some(m => q.P.every(x => this.E.holds.get(m.id).has(x))) ? 'consistent' : 'open';
+  }
+  withRule(premises, conclusion, skip = null) {
+    // Other open questions settled by adding the Horn rule premises ⇒ conclusion.
+    const P = [...new Set(premises)], c = conclusion, E = this.E;
+    const sub = F => P.every(x => F.has(x));
+    const cl2 = F => (F.has(c) || !sub(F)) ? F : this.ext(F, c);
+    const holds2 = new Map(), fails2 = new Map(), changed = [];
+    for (const m of this.witnesses) {
+      let H = E.holds.get(m.id); const Fl = E.fails.get(m.id);
+      const grew = sub(H);
+      if (grew) { const H2 = cl2(this.cl(m.satisfies)); if (this.bad(H2, m.violates)) continue; H = new Set([...H2].filter(x => x !== FALSE)); }
+      const tr = this.trig.get(m.id);
+      let trials = P.length ? [...(tr.get(P[0]) || [])] : [...this.ids];
+      for (const a of P) { const t = tr.get(a) || new Set(); trials = trials.filter(d => t.has(d)); }
+      const fresh = trials.filter(d => !Fl.has(d) && this.bad(cl2(this.cl([...m.satisfies, d])), m.violates));
+      if (grew || fresh.length) { changed.push(m.id); holds2.set(m.id, H); fails2.set(m.id, fresh.length ? new Set([...Fl, ...fresh]) : Fl); }
+    }
+    let n = 0;
+    for (const q of this.open) {
+      if (q.key === skip) continue;
+      if (q.kind === 'imp') {
+        const [a, b] = q.P, Fa = cl2(q.Fa);
+        if (Fa.has(b) || this.bad(Fa) || this.bad(cl2(q.F))) n++;
+        else if (changed.some(mid => holds2.get(mid).has(a) && fails2.get(mid).has(b))) n++;
+      } else if (this.bad(cl2(q.F)) || changed.some(mid => q.P.every(x => holds2.get(mid).has(x)))) n++;
+    }
+    return n;
+  }
+  withModel(satisfies, violates, skip = null) {
+    // Other open questions settled by a model satisfying `satisfies` and violating `violates`.
+    const F = this.cl(satisfies);
+    if (this.bad(F, violates)) return 0;
+    const memo = new Map();
+    const fails = d => { if (!memo.has(d)) memo.set(d, this.bad(this.ext(F, d), violates)); return memo.get(d); };
+    let n = 0;
+    for (const q of this.open) {
+      if (q.key === skip) continue;
+      if (q.kind === 'imp') { if (F.has(q.P[0]) && fails(q.P[1])) n++; }
+      else if (q.P.every(x => F.has(x))) n++;
+    }
+    return n;
+  }
+  rank() {
+    const implications = [], consistency = [], checks = [];
+    for (const q of this.open) {
+      if (q.kind === 'imp') implications.push({premise: q.P[0], conclusion: q.P[1], if_proved: this.withRule([q.P[0]], q.P[1], q.key), if_refuted: this.withModel([q.P[0]], [q.P[1]], q.key)});
+      else consistency.push({principles: q.P, if_model: this.withModel(q.P, [], q.key), if_excluded: this.withRule(q.P, FALSE, q.key)});
+    }
+    for (const m of this.witnesses) for (const c of this.unknown.get(m.id))
+      checks.push({model: m.id, principle: c, if_satisfies: this.withModel([...m.satisfies, c], m.violates), if_violates: this.withModel(m.satisfies, [...m.violates, c])});
+    const order = (k1, k2) => (x, y) => Math.max(y[k1], y[k2]) - Math.max(x[k1], x[k2]) || Math.min(y[k1], y[k2]) - Math.min(x[k1], x[k2]);
+    implications.sort(order('if_proved', 'if_refuted')); consistency.sort(order('if_model', 'if_excluded')); checks.sort(order('if_satisfies', 'if_violates'));
+    const count = f => this.open.filter(f).length;
+    return {inconsistent_background: this.inconsistent, classes: this.classes, trivial: this.trivial, fitting_models: this.witnesses.map(m => m.id),
+      implication_questions: this.reps.length * (this.reps.length - 1),
+      open: {implications: count(q => q.kind === 'imp'), consistency: count(q => q.kind === 'con' && q.P.length === 1), joint_consistency: count(q => q.kind === 'con' && q.P.length === 2)},
+      implications, consistency, model_checks: checks};
+  }
+}
+
 // ---------------------------------------------------------------- state
 const P = DATA.principles, R = DATA.results.map(r => ({...r, conclusion: r.conclusion === false ? FALSE : r.conclusion})), MODELS = DATA.models, T = DATA.topic;
 const byPid = new Map(P.map(p => [p.id, p])), byRid = new Map(R.map(r => [r.id, r])), byMid = new Map(MODELS.map(m => [m.id, m]));
@@ -775,7 +900,7 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
 const graphSearch = { matches: new Set(), index: 0 };
 // A principle the topic's own background already settles, one way or the
 // other, can only sit in the True or False box. It starts hidden; the sidebar
@@ -796,7 +921,9 @@ function graphRuleVisible(r) {
   if (r.status === 'proved') return !state.conjectureOnly && passes(r);
   return (state.showConj || state.conjectureOnly) && openGraphConjectures.has(r.id) && (!state.leanOnly || r.certificate.lean === 'verified');
 }
+let latticeEvidenceVersion = 0;   // bumped whenever the engines are rebuilt, so cached lattice work knows to start over
 function recompute() {
+  latticeEvidenceVersion++;
   graphRelations.clear();
   // Hiding an arrow does not withdraw a proved consequence of the selected
   // background. Keep this graph context separate from source-filtered evidence
@@ -1698,6 +1825,7 @@ function renderGraph() {
   empty.hidden = true;
   const warning = document.getElementById('graph-warning');
   warning.hidden = !graphBackgroundConflict;
+  warning.closest('.graph-area').classList.toggle('warned', !!graphBackgroundConflict);
   document.getElementById('fit').disabled = !!graphBackgroundConflict;
   if (graphBackgroundConflict) {
     warning.innerHTML = `<h2>Background is inconsistent</h2><p>The background assumptions imply False: they cannot all hold together. All graph arrows are hidden.</p><ol>${graphBackgroundConflict.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ol><p>Return a conflicting assumption to the principles list, or clear the added background assumptions. This check uses all recorded proofs, including hidden arrows.</p>`;
@@ -2237,12 +2365,57 @@ function renderOpen() {
   const incompatible = questions.filter(q => q.answer.status === 'incompatible');
   let h = '<h3>Conjectures</h3><p class="hint">“Open” means unresolved by all recorded proved evidence under this background. “Unresolved by selected evidence” means the filters omit evidence available below. Background assumptions are omitted from statements; click a question for its full statement.</p>';
   h += visible.map(row).join('') || `<p class="empty">${questions.length ? 'No open questions apply to this background. Use “Show resolved” to include resolved questions.' : 'No conjectures have been recorded.'}</p>`;
+  h += `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Lynchpin conjectures</summary><p class="hint">Open questions ranked by how many other open questions each answer would settle, using all recorded proved evidence under this background. Both answers are scored: a proof of a strong conjecture settles everything below it, a countermodel to a weak one everything above it, so a question with two high scores is worth answering either way. A refutation is scored by its least informative countermodel. Model checks score deciding an unknown verdict inside a recorded model.</p><div class="lynchpin-body"></div></details>`;
   if (incompatible.length) h += `<details id="open-incompatible"><summary>Incompatible with this background (${incompatible.length})</summary>${incompatible.map(row).join('')}</details>`;
   const el = document.getElementById('open'); el.innerHTML = h;
   wire(el);
+  const lynchpins = document.getElementById('lynchpins');
+  lynchpins.addEventListener('toggle', () => { state.lynchpins = lynchpins.open; renderLynchpins(); });
+  renderLynchpins();
   const count = document.getElementById('n-open');
   count.textContent = inconsistent || allConflict ? '—' : questions.filter(q => q.status === 'open').length;
   count.title = 'Open with all recorded evidence; questions unresolved only by the selected evidence are not counted.';
+}
+
+// ---------------------------------------------------------------- lynchpin conjectures (view)
+// Computed from all recorded proved evidence under the current background, so
+// source filters do not change it; memoised per background, and never computed
+// while the section is closed or the tab hidden.
+let lynchpinCache = {key: null, report: null};
+function lynchpinReport() {
+  const key = [...background].sort().join(',') + '|' + [...negativeBackground].sort().join(',');
+  if (lynchpinCache.key !== key) {
+    const L = new Lynchpins(allEvidenceE);
+    const n = L.reps.length * (L.reps.length - 1), share = n ? L.open.filter(q => q.kind === 'imp').length / n : 0;
+    lynchpinCache = {key, report: share > LYNCHPIN_MAX_OPEN ? {sparse: share} : L.rank()};
+  }
+  return lynchpinCache.report;
+}
+function renderLynchpins() {
+  const el = document.getElementById('lynchpins'); if (!el) return;
+  const body = el.querySelector('.lynchpin-body');
+  if (!el.open || state.tab !== 'open') { body.innerHTML = ''; return; }
+  if (backgroundConflicts.length) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; return; }
+  const rep = lynchpinReport();
+  if (rep.sparse !== undefined) { body.innerHTML = `<p class="note">${Math.round(rep.sparse * 100)}% of the implication questions are open under this background, so the map is too sparse for lynchpins to mean anything.</p>`; return; }
+  // The class of theorems is shown as True, as elsewhere in the viewer.
+  const trivial = new Set(rep.trivial);
+  const pb = id => trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
+  const top = 8, op = rep.open;
+  const table = (head, rows) => rows.length ? `<table class="results lynchpin"><thead><tr><th>${esc(head[0])}</th><th class="num">${esc(head[1])}</th><th class="num">${esc(head[2])}</th></tr></thead><tbody>${rows.join('')}</tbody></table>` : '';
+  const cells = (stmt, x, y) => `<td class="stmt">${stmt}</td><td class="num">${x}</td><td class="num">${y}</td>`;
+  const byProved = [...rep.implications].sort((x, y) => y.if_proved - x.if_proved || y.if_refuted - x.if_refuted).slice(0, top);
+  const byMin = [...rep.implications].sort((x, y) => Math.min(y.if_proved, y.if_refuted) - Math.min(x.if_proved, x.if_refuted) || (y.if_proved + y.if_refuted) - (x.if_proved + x.if_refuted)).slice(0, top);
+  const implications = [...byProved, ...byMin.filter(r => !byProved.includes(r))];
+  let h = `<p class="note">${rep.classes.length} classes and ${rep.fitting_models.length} fitting models. Open: ${op.implications} implications, ${op.joint_consistency} joint-consistency questions, ${op.consistency} consistency questions.</p>`;
+  h += table(['Implication (top by a proof, then by the smaller score)', 'if proved', 'if refuted'],
+    implications.map(r => `<tr data-lynchpin="imp|${esc(r.premise)}|${esc(r.conclusion)}">${cells(`${pb(r.premise)} ⇒ ${pb(r.conclusion)}`, r.if_proved, r.if_refuted)}</tr>`));
+  h += table(['Consistency', 'if a model', 'if excluded'],
+    rep.consistency.slice(0, top).map(r => `<tr data-lynchpin="con|${esc(r.principles.join('|'))}">${cells(r.principles.map(pb).join(' ∧ '), r.if_model, r.if_excluded)}</tr>`));
+  h += table(['Model check', 'if satisfies', 'if violates'],
+    rep.model_checks.slice(0, top).map(r => `<tr data-lynchpin="check|${esc(r.model)}|${esc(r.principle)}">${cells(`<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: <button class="lnk" data-verdict="${esc(r.principle)}" data-verdict-model="${esc(r.model)}">${esc(name(r.principle))}</button>`, r.if_satisfies, r.if_violates)}</tr>`));
+  body.innerHTML = h;
+  wire(body);
 }
 
 // ---------------------------------------------------------------- write-up page
@@ -2428,6 +2601,7 @@ function showTab(tab) {
   placeDetail();
   if (tab === 'graph') fitInitial();
   if (tab === 'lattice') { renderLattice(); latticeFitInitial(); }
+  if (tab === 'open') renderLynchpins();
 }
 
 // ---------------------------------------------------------------- detail
@@ -3036,11 +3210,40 @@ window.addEventListener('resize', () => { if (state.tab === 'graph') fit(); });
 const LATTICE_CAP = 220;
 const lattice = {shown: [], nodes: [], edges: [], selected: null, capped: 0, view: {k: 1, tx: 0, ty: 0}, fitted: false};
 
-function latticeEntails(premises, conclusions) {
-  return conclusions.every(c => !!conjunctionProof(premises, [c]));
+// Entailment answers are memoised per evidence version and background. The
+// build asks the same questions many times over: every candidate meet is
+// closed against every chosen literal, and the readouts ask again.
+function latticeMemo() {
+  const key = latticeEvidenceVersion + '|' + [...background].sort().join(',') + '|' + [...negativeBackground].sort().join(',');
+  if (lattice.memoKey !== key) { lattice.memoKey = key; lattice.memo = new Map(); }
+  return lattice.memo;
 }
-// The chosen principles that this conjunction is known to entail.
-function latticeClosure(premises) { return lattice.shown.filter(p => latticeEntails(premises, [p])); }
+// Whether a conjunction of literals entails a literal, read as the graph's
+// literalImplication reads it, but without assembling the proof chain, which
+// nothing here looks at. The engine caches each closure it is asked for.
+function latticeHolds(premises, c) {
+  const positive = premises.filter(p => !isNegative(p)), negative = premises.filter(isNegative).map(baseId);
+  if (graphInferenceE.conflict(positive, negative)) return false;
+  if (isNegative(c)) return !!graphInferenceE.conflict([...positive, baseId(c)], negative);
+  return graphInferenceE.cl(positive).facts.has(c);
+}
+function latticeEntails(premises, conclusions) {
+  const memo = latticeMemo(), pk = latticeKey(premises);
+  return conclusions.every(c => {
+    const k = pk + '→' + c;
+    let v = memo.get(k);
+    if (v === undefined) { v = latticeHolds(premises, c); memo.set(k, v); }
+    return v;
+  });
+}
+// The chosen principles that this conjunction is known to entail: one
+// closure from the engine, read once per chosen literal.
+function latticeClosure(premises) {
+  const positive = premises.filter(p => !isNegative(p)), negative = premises.filter(isNegative).map(baseId);
+  if (graphInferenceE.conflict(positive, negative)) return [];
+  const facts = graphInferenceE.cl(positive).facts;
+  return lattice.shown.filter(p => isNegative(p) ? !!graphInferenceE.conflict([...positive, baseId(p)], negative) : facts.has(p));
+}
 const latticeKey = gens => gens.slice().sort().join('|');
 
 // An irredundant generating set, so a node is labelled by what actually makes
@@ -3082,30 +3285,45 @@ function latticeLabels(n) {
 function latticeNames(n) { return latticeLabels(n).map(l => l.text); }
 
 function buildLattice() {
-  const nodes = new Map();
+  const shown = lattice.shown;
+  // A node's closure as a bitmask over the chosen literals, so that "is a
+  // subset of" is one AND and "add a literal" is one OR.
+  const bit = new Map(shown.map((l, i) => [l, 1n << BigInt(i)]));
+  const maskOf = gens => gens.reduce((m, l) => m | bit.get(l), 0n);
+  const nodes = new Map(), seen = new Map();   // closure key → node; premise mask → node
   lattice.capped = 0;
-  const add = premises => {
+  const add = (premises, pmask) => {
+    // The same generating set comes up again and again; its closure is
+    // computed once.
+    if (seen.has(pmask)) return seen.get(pmask);
     const gens = latticeClosure(premises);
     const key = latticeKey(gens);
-    if (nodes.has(key)) return nodes.get(key);
-    if (nodes.size >= LATTICE_CAP) { lattice.capped++; return null; }
-    const node = {id: 'lat:' + (key || 'top'), key, gens, set: new Set(gens)};
-    nodes.set(key, node);
+    let node = nodes.get(key) || null;
+    if (!node) {
+      if (nodes.size >= LATTICE_CAP) { lattice.capped++; seen.set(pmask, null); return null; }
+      node = {id: 'lat:' + (key || 'top'), key, gens, set: new Set(gens), mask: maskOf(gens), down: [], fresh: true};
+      nodes.set(key, node);
+    }
+    seen.set(pmask, node);
     return node;
   };
-  add([]);                                   // the empty meet: everything the background already gives
-  for (const p of lattice.shown) add([p]);
-  // Closing under pairwise meet suffices, since the set is meet closed at every
-  // step and a meet of two meets is a meet of their generators.
-  for (let grew = true; grew && !lattice.capped; ) {
-    grew = false;
-    const list = [...nodes.values()];
-    for (let i = 0; i < list.length && !lattice.capped; i++)
-      for (let j = i + 1; j < list.length && !lattice.capped; j++) {
-        const before = nodes.size;
-        add([...new Set([...list[i].gens, ...list[j].gens])]);
-        if (nodes.size !== before) grew = true;
-      }
+  // Every node is the closure of some chosen literals, and the meet of two
+  // closures is the closure of their union, which is reached one literal at a
+  // time. So closing each node under one more literal reaches every meet of
+  // every pair, at n·k closures rather than n². The empty meet comes first:
+  // everything the background already gives.
+  const top = add([], 0n);
+  top.fresh = false;
+  const queue = [top];
+  while (queue.length && !lattice.capped) {
+    const n = queue.shift();
+    for (const l of shown) {
+      if (n.mask & bit.get(l)) continue;
+      const m = add([...n.gens, l], n.mask | bit.get(l));
+      if (!m) break;
+      if (m.fresh) { m.fresh = false; queue.push(m); }
+      if (m !== n && !n.down.includes(m)) n.down.push(m);
+    }
   }
   const all = [...nodes.values()];
   for (const n of all) {
@@ -3124,31 +3342,48 @@ function buildLattice() {
     // A meet no chosen principle answers to needs no label: where it sits
     // already says it is the conjunction of the nodes above it. It is drawn as
     // an ∧, as such a node is on the implication graph. The map's own name for
-    // it, if it has one, goes in the readouts rather than onto the diagram.
+    // it, if it has one, goes in the readouts rather than onto the diagram,
+    // and is looked up only when a readout asks: it is the one search here
+    // that runs over every principle in the map.
     n.meet = !n.names.length;
-    n.mapName = n.meet ? (latticeEquivalents(n.gens)[0] || null) : null;
+    Object.defineProperty(n, 'mapName', {enumerable: true, configurable: true, get() {
+      const value = n.meet ? (latticeEquivalents(n.gens)[0] || null) : null;
+      Object.defineProperty(n, 'mapName', {value, enumerable: true, writable: true, configurable: true});
+      return value;
+    }});
     n.label = n.names[0] || n.generators.map(name).join(' ∧ ');
   }
   // False and True always anchor the diagram, even before anything is chosen.
   let bottom = all.find(n => n.inconsistent);
   if (!bottom) {
-    bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), generators: [], self: [], meet: false, mapName: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}};
+    bottom = {id: 'lat:bottom', key: '\u0000bottom', gens: lattice.shown.slice(), set: new Set(lattice.shown), mask: maskOf(lattice.shown), down: [], generators: [], self: [], meet: false, mapName: null, label: '⊥', inconsistent: true, top: false, synthetic: true, consistency: {status: 'inconsistent', models: []}};
     bottom.labels = latticeLabels(bottom); bottom.names = bottom.labels.map(l => l.text); bottom.equivalent = bottom.names.length > 1;
     all.push(bottom);
   }
   bottom.bottom = true;
-  const top = all.find(n => n.top) || null;
 
   // The order is inclusion of closures: a larger closure is a stronger meet.
   // Below is strictly stronger, so arrows from it ascend, as on the graph.
-  const below = (a, b) => a !== b && (a.bottom || (!b.bottom && b.set.size < a.set.size && [...b.set].every(p => a.set.has(p))));
+  // The nodes that cover a node from below are the minimal closures strictly
+  // containing it, and each of those is the node closed under one more
+  // literal: if a covers b, any literal of a that b lacks already takes b's
+  // closure up to a. So the candidates are the extensions computed above, at
+  // most k of them, and a cover is one that no other candidate lies inside.
+  const inside = (small, big) => small !== big && (small.mask & big.mask) === small.mask && small.mask !== big.mask;
   const edges = [];
-  for (const a of all) for (const b of all) {
-    if (!below(a, b)) continue;
-    if (all.some(c => c !== a && c !== b && below(a, c) && below(c, b))) continue;   // keep only covers
-    edges.push({id: a.id + '>' + b.id, from: a, to: b, reverses: latticeReverses(a, b)});
+  for (const b of all) {
+    if (b.bottom) continue;
+    const below = b.down.filter(a => !a.bottom && inside(b, a));
+    for (const a of below) {
+      if (below.some(c => inside(c, a))) continue;
+      edges.push({id: a.id + '>' + b.id, from: a, to: b, reverses: latticeReverses(a, b)});
+    }
   }
-  lattice.nodes = all; lattice.edges = edges; lattice.top = top; lattice.bottomNode = bottom;
+  // The floor covers exactly the minimal nodes: those nothing else rises to.
+  const covered = new Set(edges.map(e => e.to.id));
+  for (const b of all) if (!b.bottom && !covered.has(b.id)) edges.push({id: bottom.id + '>' + b.id, from: bottom, to: b, reverses: latticeReverses(bottom, b)});
+  lattice.nodes = all; lattice.edges = edges; lattice.top = all.find(n => n.top) || null; lattice.bottomNode = bottom;
+  lattice.byId = new Map(all.map(n => [n.id, n]));
 }
 
 // Whether the weaker end might, for all the map records, entail the stronger
@@ -3192,12 +3427,21 @@ function latticeLayout() {
   // seventeen a line, twelve more for the equivalent header, and an ∧ the size
   // of the graph's own. This text is centred on its y rather than sitting on a
   // baseline, so the offsets below are centres, but the box comes out the same.
+  // Names are measured rather than estimated, and a long one wraps onto a
+  // second line, so a box is as wide as its longest line and no wider.
+  const measure = latticeTextWidth();
   for (const n of nodes) {
     if (n.meet) { n.w = n.h = 22; continue; }
-    n.w = Math.max(80, Math.max(...n.names.map(t => t.length)) * 7.2 + 26);
-    n.h = 16 + 17 * n.names.length + (n.equivalent ? 12 : 0);
+    n.lines = n.labels.map(l => latticeWrap(l.text, measure));
+    // A continuation line sits closer than the next name does, so a wrapped
+    // name still reads as one name.
+    n.extraLines = n.lines.reduce((s, ls) => s + ls.length - 1, 0);
+    n.w = Math.max(80, Math.max(...n.lines.flat().map(measure)) + 26);
+    n.h = 16 + 17 * n.labels.length + LATTICE_CONT * n.extraLines + (n.equivalent ? 12 : 0);
   }
-  // A few barycentre sweeps, as on the implication graph.
+  const GAP = 24;
+  // A few barycentre sweeps fix the order within each row, as on the
+  // implication graph.
   for (let pass = 0; pass < 6; pass++) {
     const dir = pass % 2 ? 1 : -1;
     for (const row of rows) {
@@ -3208,18 +3452,83 @@ function latticeLayout() {
       }
       row.sort((a, b) => a.bary - b.bary);
       let x = 0;
-      for (const n of row) { n.x = x + n.w / 2; x += n.w + 26; }
-      const width = x - 26;
+      for (const n of row) { n.x = x + n.w / 2; x += n.w + GAP; }
+      const width = x - GAP;
       for (const n of row) n.x -= width / 2;
     }
   }
-  rows.forEach((row, i) => { if (row) for (const n of row) n.y = i * 74; });
+  // Then each node moves as close as it can to the mean of its neighbours
+  // without touching the nodes beside it, so covers run nearly vertical and
+  // a row is no wider than its own boxes need. Pushing right and pushing left
+  // each give a feasible placement; their mean is feasible too and sits
+  // nearer the wanted positions than either.
+  const settle = row => {
+    const want = row.map(n => {
+      const nbrs = [...inn.get(n.id).map(e => e.from), ...out.get(n.id).map(e => e.to)];
+      return nbrs.length ? nbrs.reduce((s, m) => s + m.x, 0) / nbrs.length : n.x;
+    });
+    const sep = i => (row[i - 1].w + row[i].w) / 2 + GAP;
+    const left = want.slice(), right = want.slice();
+    for (let i = 1; i < row.length; i++) left[i] = Math.max(left[i], left[i - 1] + sep(i));
+    for (let i = row.length - 2; i >= 0; i--) right[i] = Math.min(right[i], right[i + 1] - sep(i + 1));
+    row.forEach((n, i) => { n.x = (left[i] + right[i]) / 2; });
+  };
+  for (let pass = 0; pass < 4; pass++) {
+    const order = pass % 2 ? rows.slice().reverse() : rows;
+    for (const row of order) if (row) settle(row);
+  }
+  // Rows are spaced by the boxes they hold, so a tall equivalence box never
+  // runs into the row above or below it. The gap is the one a single-line
+  // box had before.
+  const rowHeight = rows.map(row => row ? Math.max(...row.map(n => n.h)) : 0);
+  let y = 0;
+  rows.forEach((row, i) => {
+    if (!row) return;
+    if (i) y += rowHeight[i - 1] / 2 + 41 + rowHeight[i] / 2;
+    for (const n of row) n.y = y;
+  });
   lattice.bounds = {
     minX: Math.min(...nodes.map(n => n.x - n.w / 2)) - 30, maxX: Math.max(...nodes.map(n => n.x + n.w / 2)) + 30,
     minY: Math.min(...nodes.map(n => n.y - n.h / 2)) - 24, maxY: Math.max(...nodes.map(n => n.y + n.h / 2)) + 24,
   };
 }
 
+// Text width in the node font, from an offscreen canvas where the browser
+// has one. Without it, the same estimate the implication graph uses.
+function latticeTextWidth() {
+  try {
+    if (typeof OffscreenCanvas === 'function') {
+      const ctx = new OffscreenCanvas(1, 1).getContext('2d');
+      // The font a node label really gets, read off a throwaway label so the
+      // measurement follows the stylesheet rather than a copy of it.
+      const svg = document.getElementById('lat-graph');
+      const probe = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      probe.setAttribute('class', 'lat-node');
+      probe.innerHTML = '<text>Rigid Comprehension</text>';
+      svg.appendChild(probe);
+      const cs = getComputedStyle(probe.firstChild);
+      const font = cs.font || `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      svg.removeChild(probe);
+      ctx.font = font;
+      if (ctx.measureText('Rigid Comprehension').width > 0) return t => ctx.measureText(t).width;
+    }
+  } catch {}
+  return t => t.length * 7.2;
+}
+// A name wider than a comfortable box breaks at spaces into as few lines as
+// fit; a single long word stays whole.
+const LATTICE_LINE = 170, LATTICE_CONT = 14;
+function latticeWrap(text, measure) {
+  if (measure(text) <= LATTICE_LINE) return [text];
+  const lines = [];
+  let line = '';
+  for (const word of text.split(' ')) {
+    const next = line ? line + ' ' + word : word;
+    if (line && measure(next) > LATTICE_LINE) { lines.push(line); line = word; } else line = next;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
 // What a node is, as an expression the relation engine understands.
 function latticeExpression(n) {
   if (n.inconsistent) return FALSE;
@@ -3241,19 +3550,84 @@ function latticeFit() {
 }
 function latticeFitInitial() { if (!lattice.fitted) latticeFit(); }
 
+// The diagram is rebuilt only when what it is drawn from changes: the chosen
+// literals, the background, or the evidence the engines were built from. A
+// click that only moves the selection keeps the nodes, arrows and layout, and
+// the drawn elements too: only their classes change.
+function latticeBuildKey() {
+  return JSON.stringify([lattice.shown, latticeEvidenceVersion, [...background].sort(), [...negativeBackground].sort(), !!state.showConj]);
+}
 function renderLattice() {
-  buildLattice(); latticeLayout();
   const svg = document.getElementById('lat-graph');
   if (!svg) return;
+  const key = latticeBuildKey();
+  if (key !== lattice.builtKey) { buildLattice(); latticeLayout(); latticeDraw(svg); lattice.builtKey = key; }
+  latticeShade(svg);
+}
+// The structure: every node and arrow, without the shading a selection adds.
+function latticeDraw(svg) {
   const edge = e => {
     const x1 = e.from.x, y1 = e.from.y - e.from.h / 2, x2 = e.to.x, y2 = e.to.y + e.to.h / 2;
     const cls = 'lat-edge ' + (e.reverses === 'open' ? 'may-reverse' : 'strict');
     const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
-    return `<g class="lat-edge-g${lattice.selected === e.id ? ' sel' : ''}" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
+    return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
   };
-  // The same shading as the graph, read off the same selection. Here it repeats
-  // what the diagram already shows in places, which does no harm and keeps one
-  // reading of the colours across the two views.
+  const node = n => {
+    const cls = 'lat-node' + (n.inconsistent ? ' lat-bottom' : n.top ? ' lat-top' : '')
+      + (n.meet ? ' lat-meet' : '') + (n.equivalent ? ' lat-equivalent' : '');
+    const body = n.meet
+      ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
+      : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
+        + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 14}">equivalent</text>` : '')
+        + n.labels.map(({text: t, literal}, i) => {
+            const tag = literal ? ` data-principle="${esc(literal)}"` : t === '⊥' ? ' data-falsity="1"' : t === '⊤' ? ' data-truth="1"' : '';
+            const lines = n.lines[i], above = n.lines.slice(0, i).reduce((s, ls) => s + ls.length - 1, 0);
+            // A wrapped name is one text element, so it still reads and selects
+            // as one name; the break keeps its space so the text stays the name.
+            const body = lines.length === 1 ? esc(t)
+              : lines.map((l, j) => `<tspan x="${n.x}"${j ? ` dy="${LATTICE_CONT}"` : ''}>${esc(l + (j < lines.length - 1 ? ' ' : ''))}</tspan>`).join('');
+            return `<text${tag} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i + LATTICE_CONT * above}">${body}</text>`;
+          }).join('');
+    // The tooltip is filled in on hover: see the pointerover handler below.
+    return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}</g>`;
+  };
+  const halves = [
+    ['consistent', 'var(--rel-entailed)', 'var(--node-fill)'],
+    ['separated', 'var(--node-fill)', 'var(--rel-excluded)'],
+    ['independent', 'var(--rel-entailed)', 'var(--rel-excluded)']
+  ].map(([id, upper, lower]) => `<linearGradient id="lat-split-${id}" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="50%" stop-color="${upper}"/><stop offset="50%" stop-color="${lower}"/></linearGradient>`).join('');
+  // A capped build is whatever the search reached before it stopped, not a
+  // lattice, so nothing of it is drawn behind the warning.
+  svg.innerHTML = `<defs>${halves}
+      <marker id="lat-solid" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
+      <marker id="lat-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0.5,0.5 L9.5,5 L0.5,9.5 z" fill="var(--bg)" stroke="var(--conj)" stroke-width="1.4"/></marker>
+    </defs><g id="lat-vp">${lattice.capped ? '' : lattice.edges.map(edge).join('') + lattice.nodes.map(node).join('')}</g>`;
+  latticeApplyView();
+  document.getElementById('lat-count').textContent = lattice.capped
+    ? `Stopped at ${LATTICE_CAP} nodes, from ${lattice.shown.length} chosen; nothing drawn.`
+    : lattice.shown.length
+    ? `${lattice.nodes.length} nodes, ${lattice.edges.length} arrows, from ${lattice.shown.length} chosen`
+    : 'Choose a principle to begin.';
+  const warn = document.getElementById('lat-warning');
+  warn.hidden = !lattice.capped;
+  warn.closest('.graph-area').classList.toggle('warned', !!lattice.capped);
+  if (lattice.capped) warn.textContent = `Stopped at ${LATTICE_CAP} nodes. The meets of these principles outrun the diagram; remove one to see the rest.`;
+  refreshLatticeControls();
+}
+// How a node stands to the selection, memoised with the entailments: a
+// re-render with the same selection asks the same questions.
+function latticeRelation(base, n) {
+  const memo = latticeMemo(), k = 'rel:' + JSON.stringify(base) + '|' + n.key;
+  let v = memo.get(k);
+  if (v === undefined) { v = selectionRelation(base, latticeExpression(n)).kind; memo.set(k, v); }
+  return v;
+}
+const latticeRelationClasses = ['rel-base', 'rel-entailed', 'rel-excluded', 'rel-consistent', 'rel-separated', 'rel-independent', 'rel-inconsistent', 'rel-conjectured', 'rel-open'];
+// The shading: the same as the graph's, read off the same selection, applied
+// to the elements already drawn. Here it repeats what the diagram already
+// shows in places, which does no harm and keeps one reading of the colours
+// across the two views.
+function latticeShade(svg) {
   const base = shadingBase();
   const baseLiterals = base == null ? [] : expressionLiterals(base);
   const baseMembers = new Set(base === TRUE ? [TRUE] : baseLiterals);
@@ -3263,55 +3637,59 @@ function renderLattice() {
   // as on the graph. A selection made elsewhere from principles this diagram
   // does not show has no closure here, and then only its literal node counts.
   const baseKey = base != null && baseLiterals.every(l => lattice.shown.includes(l)) ? latticeKey(latticeClosure(baseLiterals)) : null;
+  const isBase = n => base != null && (sameExpression(base, latticeExpression(n)) || baseKey != null && baseKey === n.key || n.labels.some(l => l.literal && baseMembers.has(l.literal)));
+  const selectedEdge = lattice.edges.some(e => e.id === lattice.selected) ? lattice.selected : null;
+  const focusNode = selectedEdge ? null : lattice.byId.get(lattice.selected) || lattice.nodes.find(isBase) || null;
+  // The nodes the selected one rises to, itself included.
+  const above = new Set();
+  if (focusNode) {
+    const out = new Map();
+    for (const e of lattice.edges) (out.get(e.from.id) || out.set(e.from.id, []).get(e.from.id)).push(e.to);
+    for (const stack = [focusNode]; stack.length;) {
+      const n = stack.pop();
+      if (above.has(n.id)) continue;
+      above.add(n.id);
+      for (const m of out.get(n.id) || []) stack.push(m);
+    }
+  }
   const counts = {entailed: 0, excluded: 0, consistent: 0, separated: 0};
-  const node = n => {
-    const expression = latticeExpression(n);
+  for (const el of svg.querySelectorAll('[data-lat-node]')) {
+    const n = lattice.byId.get(el.dataset.latNode);
+    if (!n) continue;
     let relation = '';
     if (base != null) {
-      if (sameExpression(base, expression) || baseKey != null && baseKey === n.key || n.labels.some(l => l.literal && baseMembers.has(l.literal))) relation = 'rel-base';
+      if (isBase(n)) relation = 'rel-base';
       else if (baseInconsistent) { relation = 'rel-excluded'; counts.excluded++; }
       // The floor is excluded by any consistent selection, as on the graph;
       // asking the proof engine about it would count it as entailed instead.
       else if (n.inconsistent) { relation = 'rel-excluded'; counts.excluded++; }
       else {
-        const found = selectionRelation(base, expression);
-        relation = 'rel-' + found.kind;
-        if (found.kind === 'independent') { counts.consistent++; counts.separated++; }
-        else if (Object.hasOwn(counts, found.kind)) counts[found.kind]++;
+        const kind = latticeRelation(base, n);
+        relation = 'rel-' + kind;
+        if (kind === 'independent') { counts.consistent++; counts.separated++; }
+        else if (Object.hasOwn(counts, kind)) counts[kind]++;
       }
     }
-    const cls = 'lat-node' + (n.inconsistent ? ' lat-bottom' : n.top ? ' lat-top' : '')
-      + (n.meet ? ' lat-meet' : '') + (n.equivalent ? ' lat-equivalent' : '')
-      + (relation ? ' ' + relation : '') + (lattice.selected === n.id ? ' sel' : '');
-    const body = n.meet
-      ? `<circle cx="${n.x}" cy="${n.y}" r="${n.w / 2}"/><text x="${n.x}" y="${n.y}">∧</text>`
-      : `<rect x="${n.x - n.w / 2}" y="${n.y - n.h / 2}" width="${n.w}" height="${n.h}" rx="6"/>`
-        + (n.equivalent ? `<text class="equiv" x="${n.x}" y="${n.y - n.h / 2 + 14}">equivalent</text>` : '')
-        + n.labels.map(({text: t, literal}, i) => {
-            const tag = literal ? ` data-principle="${esc(literal)}"` : t === '⊥' ? ' data-falsity="1"' : t === '⊤' ? ' data-truth="1"' : '';
-            const member = literal ? baseMembers.has(literal) : t === '⊥' ? base === FALSE : t === '⊤' && base === TRUE;
-            return `<text${tag}${member ? ' class="selection-member"' : ''} x="${n.x}" y="${n.y - n.h / 2 + 16.5 + (n.equivalent ? 12 : 0) + 17 * i}">${esc(t)}</text>`;
-          }).join('');
-    return `<g class="${cls}" data-lat-node="${esc(n.id)}">${body}<title>${esc(latticeTitle(n))}</title></g>`;
-  };
-  const halves = [
-    ['consistent', 'var(--rel-entailed)', 'var(--node-fill)'],
-    ['separated', 'var(--node-fill)', 'var(--rel-excluded)'],
-    ['independent', 'var(--rel-entailed)', 'var(--rel-excluded)']
-  ].map(([id, upper, lower]) => `<linearGradient id="lat-split-${id}" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="1"><stop offset="50%" stop-color="${upper}"/><stop offset="50%" stop-color="${lower}"/></linearGradient>`).join('');
-  svg.innerHTML = `<defs>${halves}
-      <marker id="lat-solid" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-2)"/></marker>
-      <marker id="lat-open" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0.5,0.5 L9.5,5 L0.5,9.5 z" fill="var(--bg)" stroke="var(--conj)" stroke-width="1.4"/></marker>
-    </defs><g id="lat-vp">${lattice.edges.map(edge).join('')}${lattice.nodes.map(node).join('')}</g>`;
-  latticeApplyView();
-  document.getElementById('lat-count').textContent = lattice.shown.length
-    ? `${lattice.nodes.length} nodes, ${lattice.edges.length} arrows, from ${lattice.shown.length} chosen`
-    : 'Choose a principle to begin.';
-  const warn = document.getElementById('lat-warning');
-  warn.hidden = !lattice.capped;
-  if (lattice.capped) warn.textContent = `Stopped at ${LATTICE_CAP} nodes. The meets of these principles outrun the diagram; remove one to see the rest.`;
-  refreshLatticeControls();
-  renderLatticeLegend(base, baseInconsistent, counts);
+    el.classList.remove(...latticeRelationClasses, 'sel');
+    if (relation) el.classList.add(relation);
+    if (lattice.selected === n.id) el.classList.add('sel');
+    for (const t of el.querySelectorAll('text[data-principle], text[data-falsity], text[data-truth]')) {
+      const literal = t.dataset.principle;
+      const member = literal ? baseMembers.has(literal) : t.dataset.falsity ? base === FALSE : base === TRUE;
+      t.classList.toggle('selection-member', member);
+    }
+  }
+  // Everything the selected node entails comes forward: every arrow on a
+  // path rising from it. The rest step back. With an arrow selected,
+  // everything but that arrow steps back.
+  for (const el of svg.querySelectorAll('[data-lat-edge]')) {
+    const id = el.dataset.latEdge;
+    const emphasis = selectedEdge ? (selectedEdge === id ? 'sel' : 'far')
+      : focusNode ? (above.has(id.slice(0, id.indexOf('>'))) ? 'near' : 'far') : '';
+    el.classList.remove('sel', 'near', 'far');
+    if (emphasis) el.classList.add(emphasis);
+  }
+  renderLatticeLegend(lattice.capped ? null : base, baseInconsistent, counts);
   document.getElementById('lat-hint').hidden = !!state.selected;
   document.getElementById('lat-hint').textContent = 'Click a principle name, an ∧ or an arrow for its details. Shift-click a name to add or remove it from the selection.';
 }
@@ -3395,6 +3773,17 @@ function renderLatticeFilters() {
   document.getElementById('lat-clear').addEventListener('click', () => { lattice.shown = []; lattice.selected = null; renderLattice(); latticeFit(); });
   document.getElementById('lat-fit').addEventListener('click', latticeFit);
   const svg = document.getElementById('lat-graph');
+  // A node's tooltip is composed on first hover rather than at draw time,
+  // since naming an ∧ after a recorded principle searches the whole map.
+  svg.addEventListener('pointerover', ev => {
+    const group = ev.target.closest('[data-lat-node]');
+    if (!group || group.querySelector('title')) return;
+    const n = lattice.byId?.get(group.dataset.latNode);
+    if (!n) return;
+    const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    title.textContent = latticeTitle(n);
+    group.appendChild(title);
+  });
   svg.addEventListener('click', ev => {
     const group = ev.target.closest('[data-lat-node]'), wire = ev.target.closest('[data-lat-edge]');
     if (!group && !wire) { lattice.selected = null; select(null); return; }

@@ -50,7 +50,7 @@ topics/<topic>/models/<id>.yaml       model: satisfies [...], violates [...]
 topics/<topic>/papers.yaml           source-paper catalogue and external links
 topics/<topic>/sources/              documents authorised for redistribution
 schema/                               JSON schemas
-scripts/pmap.py                       validate · build · bundle · status · new-topic · new-principle · new-result · new-model · selftest
+scripts/pmap.py                       validate · build · bundle · status · lynchpins · new-topic · new-principle · new-result · new-model · selftest
 viewer/template.html                  the map; data embedded at build
 topics/<topic>/writeups/<id>.md       optional hand-written write-up (LaTeX math ok); otherwise generated from the record
 topics/<topic>/lean/                  Lean sources, copied into the build when present

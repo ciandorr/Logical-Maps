@@ -310,24 +310,43 @@ Model — Source: Misc.; produced by OpenAI Codex (GPT-6), 17 September 2026; re
 <h2 id="package">Package</h2>
 <ul>
 <li><strong>Fregean Axiom.</strong> Materially equivalent propositions are identical.</li>
+<li><strong>□Fregean Axiom.</strong> Every closed instance of Fregean Axiom is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>Modalized Fregean Axiom.</strong> Necessarily equivalent propositions are identical.</li>
+<li><strong>Extensionality.</strong> At each relational type, coextensive relations are identical; include the nullary propositional case.</li>
+<li><strong>□Extensionality.</strong> Every closed instance of Extensionality is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>Intensionality.</strong> Necessarily coextensive relations are identical.</li>
 <li><strong>Functionality.</strong> Operations with the same value on every argument are identical. The output type is relational.</li>
 <li><strong>Modalized Functionality.</strong> Necessarily co-functional operations of function types are identical.</li>
+<li><strong>□Functionality.</strong> Every closed instance of Functionality is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
 <li><strong>Plenitude.</strong> Every total single-valued binary relation is represented by an operation. Its output type is relational, as required by the type system.</li>
+<li><strong>□Plenitude.</strong> Every closed instance of Plenitude is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
 <li><strong>Functional Choice.</strong> Every serial binary relation admits a selecting operation. Its output type is relational, as required by the type system.</li>
 <li><strong>Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
+<li><strong>Tractarianism.</strong> A proposition entailing every instance of a property entails its universal generalization.</li>
+<li><strong>□Tractarianism.</strong> Every closed instance of Tractarianism is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>□ND.</strong> Every closed instance of ND is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>□Actuality.</strong> Every closed instance of Actuality is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>□Atomicity.</strong> Every closed instance of Atomicity is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>□Boolean Completeness.</strong> Every closed instance of Boolean Completeness is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>□Rigid Comprehension.</strong> Every closed instance of Rigid Comprehension is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
+<li><strong>□Gallin Extensional Comprehension.</strong> Every closed instance of Gallin Extensional Comprehension is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
 <li><strong>No Pure Contingency.</strong> Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.</li>
 <li><strong>Distinctness-preserving collapse.</strong> Every truth is necessary under the distinctness-preserving modality.</li>
-<li><strong>¬ Infinity (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>¬ Infinity (type t).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
+<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
+<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
 <li><strong>¬ Atomlessness.</strong> Atomlessness in the displayed closed propositional formulation.</li>
 <li><strong>¬ Possibility (pure).</strong> Every closed pure sentence consistent with C is possible.</li>
+<li><strong>¬ Possible Infinity (type e).</strong> Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.</li>
+<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are not finitely many propositions: the Axiom of Infinity at this type, under a diamond.</li>
 </ul>
 <h2 id="construction">Construction</h2>
 <p>Use the ordinary full Henkin interpretation: D_e is a singleton, D_t={0,1}, and every admitted function type contains all functions between its domains. Domains are finite by induction on types, so every serial relation has a functional subrelation and, when the output type is relational, a selecting operation. Equality is genuine equality and Box is the identity on truth values. These facts verify the listed positive assertions. The two finite base domains refute the infinity assertions, top is an atom, and the possible existence of two individuals is false although its pure sentence is C-consistent.</p>
 <h2 id="notes">Notes</h2>
-<p>Explicit specialization of the source’s standard Henkin construction to a singleton individual domain. No independent checking or formal verification is claimed.</p>
+<p>Explicit specialization of the source’s standard Henkin construction to a singleton individual domain. No independent checking or formal verification is claimed. The model is a standard model of extensional classical type theory in which the defined necessity is truth: a boxed principle holds exactly when its unboxed form does, coextensive relations are identical, every relation is rigid in every recorded sense, the Boolean algebra at each relational type is the complete atomic algebra of subsets of the domain, and every closed sentence is non-contingent. The pure schemata fail because C-consistent sentences about how many individuals there are can be false. Signature principles are not listed, since they depend on how the nonlogical constants are interpreted.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
+<li><strong>2026-09-20</strong> (Claude Fable 5.1 (Anthropic)) — Verified the Possible Infinity principles added on this date. Box is the identity on truth values, so each fails with the corresponding Axiom of Infinity. Now violates: Possible Infinity (type e), Possible Infinity (type t).</li>
+<li><strong>2026-09-20</strong> (Claude Fable 5.1 (Anthropic)) — Listed the strongest principles the model obviously satisfies, at Cian Dorr’s request. Since Box is truth and identity is genuine, each boxed principle reduces to its unboxed form; coextensive relations are identical because every function type is full; every relation is persistent, inextensible and Gallin-extensional trivially; Actuality holds with top as the actual world; each relational type is a complete atomic Boolean algebra, giving Atomicity and Boolean Completeness; Tractarianism is the tautology that a proposition entailing each instance entails the universal claim; and ND holds outright, giving C5. Now satisfies: □Fregean Axiom, Modalized Fregean Axiom, Extensionality, □Extensionality, Intensionality, □Functionality, □Plenitude, Tractarianism, □Tractarianism, □ND, □Actuality, □Atomicity, □Boolean Completeness, □Rigid Comprehension, □Gallin Extensional Comprehension.</li>
 <li><strong>2026-09-17</strong> (OpenAI Codex (GPT-6)) — Restricted the example and its recorded choice properties to the map’s relational type system at the user’s request. Now satisfies: Fregean Axiom, Functionality, Modalized Functionality, Plenitude, Functional Choice, Relational Choice, No Pure Contingency, Distinctness-preserving collapse.</li>
 </ul>
 <h2 id="sources">Sources</h2>
@@ -339,6 +358,6 @@ Record: <code>topics/classicism/models/full-henkin-singleton-base.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr. Classicism. Draft dated 16 May 2023, 87 pages. All page, proposition and footnote locators in this map refer to this draft. — §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48; §1.4, n. 18, p. 16</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48; §1.4, n. 18, p. 16</li>
 </ul>
 </body></html>

@@ -28,7 +28,7 @@ part of the framework rather than separate extension nodes.
 | §2.3, pp. 31–32 | Functional Choice = Plenitude + Relational Choice |
 | Propositions 2.13–2.16, pp. 32–33 | Plenitude, ND, Actuality, completeness and Rigid Comprehension |
 | §2.3, p. 33 | Boxed equivalences and C5 + Atomicity package |
-| §§2.4–2.5, pp. 35–40 | Distinctness, Possibility, Separated Structure, witnessed/fundamental Possibility, Logical Necessity |
+| §§2.4–2.5, pp. 35–40 | Distinctness, Possibility, Separated Structure, Witnessed Possibility, Logical Necessity |
 | §2.6, pp. 41–42 | Maximalist incompatibilities, Possibility+, Strong Possibility |
 | §3.5, pp. 59–61 | Full action-model examples and pure-sentence B |
 | Appendix D, Proposition D.5, pp. 74–79 | Eight finite-support packages and two multiple-object examples |
@@ -54,6 +54,12 @@ printed variable typo. In Proposition 2.11's proof, Actuality is obtained
 from Proposition 2.7; note 42's reference to Proposition 2.6 would require
 an extra C5 premise. The question in note 93 about BF + Atomicity without
 Actuality is not imported as open: Proposition 2.7 already rules it out.
+
+Fundamental Possibility (§2.5, pp. 39–40) and the principle that every
+individual is fundamental (§2.6, n. 60, p. 41) are not imported. Both use
+the fundamentality predicate $\operatorname{Fun}$, a nonlogical constant,
+so they lie outside the map's logical vocabulary; the connection recorded
+from n. 60 went with them.
 
 Type-system comparison variants and their specialization arrows are omitted.
 All schemata use the fixed relational type system; restrictions on

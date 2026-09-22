@@ -225,6 +225,33 @@ try{
   assert.equal(markedStyle.fontWeight,'700','In bold');
   assert.match(markedStyle.textDecoration,/underline/,'And underlined');
 
+  // Selecting a node brings forward every arrow on a path rising from it,
+  // everything it entails, and fades the rest; selecting an arrow fades every
+  // other arrow. Clearing restores them all.
+  {
+    // The ∧ of A and B rises through A and through B to ⊤, so its up-set has
+    // arrows more than a step away.
+    click(d.querySelector('#lat-graph .lat-meet'));
+    const id=d.querySelector('#lat-graph .lat-meet').dataset.latNode;
+    const groups=[...d.querySelectorAll('#lat-graph [data-lat-edge]')];
+    const ends=g=>g.dataset.latEdge.split('>');
+    const up=new Set([id]);
+    for(let grew=true;grew;){grew=false;for(const g of groups){const [from,to]=ends(g);if(up.has(from)&&!up.has(to)){up.add(to);grew=true;}}}
+    const rising=g=>up.has(ends(g)[0]);
+    assert.ok(groups.some(rising)&&groups.some(g=>!rising(g)),'The fixture has arrows rising from A and arrows elsewhere');
+    assert.ok(groups.some(g=>rising(g)&&ends(g)[0]!==id),'Including one more than a step above it');
+    assert.ok(groups.filter(rising).every(g=>g.classList.contains('near')),'Every arrow on a path up from the selected node is marked near');
+    assert.ok(groups.filter(g=>!rising(g)).every(g=>g.classList.contains('far')),'And every other arrow is marked far');
+    assert.ok(+w.getComputedStyle(groups.find(g=>!rising(g))).opacity<+w.getComputedStyle(groups.find(rising)).opacity,'Far arrows are fainter');
+    click(groups.find(rising).querySelector('.lat-hit'));
+    const after=[...d.querySelectorAll('#lat-graph [data-lat-edge]')];
+    assert.equal(after.filter(g=>g.classList.contains('sel')).length,1,'The clicked arrow is selected');
+    assert.ok(after.filter(g=>!g.classList.contains('sel')).every(g=>g.classList.contains('far')),'And every other arrow steps back');
+    w.eval('lattice.selected=null;select(null)');
+    assert.ok([...d.querySelectorAll('#lat-graph [data-lat-edge]')].every(g=>!g.classList.contains('far')&&!g.classList.contains('near')),'Clearing the selection restores every arrow');
+    click(d.querySelector('#lat-graph text[data-principle="a"]'));
+  }
+
   // Two names on one node select the same node whichever is clicked; only
   // the mark moves.
   add('e'); add('f');

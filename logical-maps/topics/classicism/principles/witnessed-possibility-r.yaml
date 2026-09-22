@@ -3,7 +3,8 @@ name: Witnessed Possibility
 category: signature
 statement: For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical
   constants c, a witness to P entails that P at those constants is possible.
-formal: $(\exists\bar x\, .\,P)\to\Diamond P[\bar c/\bar x]$
+formal: $(\exists\bar x\, .\,P)\to\Diamond P[\bar c/\bar x]\quad(P\text{ pure, free variables among }\bar
+  x;\ \bar c\text{ distinct constants of }\Sigma)$
 date: '2026-09-17'
 sources:
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.5, n. 57, p. 38.
@@ -16,4 +17,20 @@ references:
 - paper: bacon-2020
   role: origin
   locator: Logical Necessity discussion, as cited in Classicism n. 57
+- paper: bacon-2020
+  role: related
+  locator: §3, pp. 550–557
+  note: Bacon’s No Brute Necessities, Pattern and the recombination examples of §3 are this direction
+    of Logical Necessity, with the Tarskian notion of consistency as an actual witness.
 notes: ''
+aliases:
+- No Brute Necessities (Bacon 2020)
+changes:
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the alias No Brute Necessities and a direct locator in Logical Combinatorialism; the
+    statement is unchanged.
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Displayed the schema’s side conditions inside the math block, at Cian Dorr’s request; the statement
+    is unchanged.

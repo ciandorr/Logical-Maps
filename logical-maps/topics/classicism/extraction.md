@@ -86,3 +86,54 @@ Theorems 10 (arithmetical signatures) and the truth-predicate extension of
 §5.3 are not imported. The consistency of C with $I$, assumed in the
 source's n. 14, is witnessed on the map by the full Henkin model with a
 countably infinite individual domain.
+
+## Logical Combinatorialism (Bacon, 2020)
+
+Source: Andrew Bacon, *Logical Combinatorialism*, *Philosophical Review*
+129(4), 2020, pp. 537–589, read directly on 22 September 2026. Its
+background system HFE is contained in C, and its schemata are taken in the
+map's relational type system (see Background).
+
+| Source | Connections recorded |
+| --- | --- |
+| §2, pp. 544–547 | Logical Necessity (already recorded), with direct locators |
+| §3, pp. 550–557 | Modal Freedom (signature Σ) from Logical Necessity; No Brute Necessities as an alias of Witnessed Possibility; nn. 29–30 on the failure of ND and B |
+| §4, pp. 560–565 | Logical Necessity ⇒ Separated Structure; General Separated Structure and its equivalence with Separated Structure; Possibly Witnessed Possibility as a further equivalent |
+| §4, p. 568 and n. 53 | Independence (signature Σ) from Separated Structure |
+| Appendix A.2–A.3, pp. 580–587 | The glued full action model over the free monoid, in a thread-individual and a singleton-individual variant, proved on 22 September 2026 with a write-up that supplies the unproved Theorem A.8 from the 2024 book's coalesced sums |
+
+Not imported, following Zachary Goodsell's decision of 21 September 2026
+that the map's vocabulary is the logical constants together with the
+constants of $\Sigma$: everything stated with Bacon's predicates
+$\operatorname{Fun}_\sigma$ and $\operatorname{Pure}_\sigma$, namely
+Quantified Logical Necessity and its necessitation, Quantified Separated
+Structure, Fundamental Independence and Completeness, Purity, Pure
+Application, the purity of purity and of fundamentality, the
+fundamentality-quantified forms of Logical Necessity, Witnessed Possibility
+and Modal Freedom, the §3 consequences for fundamental entities, and the
+propositional liar of n. 60; likewise Classicism's Fundamental Possibility
+and its n. 58 consequence about converses. Also not imported: the
+fine-grained converse-uniqueness principle (nn. 45–46), Russell and
+Hawthorne's set-theoretic Pattern and the inaccessible-order-type example
+(§3, pp. 551–553), Structure, which is inconsistent (§4, p. 558), and
+Melianism (§4, p. 571). The glued models' interpretation of
+$\operatorname{Pure}$ and $\operatorname{Fun}$ (Appendix A.3) is not
+recorded either; the models are recorded for the pure and signature
+principles only.
+
+## A Philosophical Introduction to Higher-Order Logics (Bacon, 2024)
+
+Source: Andrew Bacon, *A Philosophical Introduction to Higher-Order Logics*,
+Routledge, 2024, chapters 8 and 18, read directly on 22 September 2026.
+Locators are the book's page numbers.
+
+| Source | Connections recorded |
+| --- | --- |
+| §8.2, pp. 164–171 | Strong Leibniz Biconditionals and their necessitation; Weak Leibniz Biconditionals as an alias of Atomicity; SL ⇒ Atomicity, Atomicity + BF ⇒ SL, their boxed forms, and □SL + Rigid Comprehension ⇒ □BF (type t) (Theorem 8.2) |
+| §18.1, §18.3, §18.6 | Modal models, standard models and coalesced sums, used to prove the glued free-monoid models of Logical Necessity |
+
+The rest of chapter 8 restates material already imported from Classicism.
+Chapter 18's coherence results (Corollary 18.2, Proposition 18.8,
+Corollaries 18.3–18.4, Propositions 18.9–18.11) concern maximalizations of
+extensions of C other than C itself; whether to record them as relativized
+Possibility principles awaits a decision.

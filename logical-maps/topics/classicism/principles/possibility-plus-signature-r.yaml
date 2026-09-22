@@ -1,0 +1,24 @@
+id: possibility-plus-signature-r
+name: Possibility+ (signature Σ)
+category: signature
+statement: 'The Possibility+ schema for the fixed nonlogical signature Sigma: for a formula P of L(Sigma)
+  consistent with C(Sigma) whose free variables are the displayed individual variables, if those individuals
+  are pairwise distinct and distinct from every individual denoted by a constant occurring in P, then
+  P is possible. Include the empty tuple.'
+formal: $\forall x_1^e\cdots x_n^e\, .\,\bigl(\bigwedge_{i<j}x_i\ne x_j\land\bigwedge_{i,\,c}x_i\ne c\bigr)\to\Diamond
+  P\quad(P\in\mathcal L(\Sigma),\text{ free variables among }x_1\ldots x_n;\ c\text{ over the individual
+  constants in }P;\ C(\Sigma)+P\text{ consistent};\ n\ge0)$
+date: '2026-09-22'
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 41 and n. 60, read with the signature
+  convention of §2.5, pp. 37–39.
+source_names:
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: formulation
+  locator: §2.6, p. 41 and n. 60; §2.5, pp. 37–39
+  note: The draft states Possibility+ in the pure language; this is its analogue for L(Σ), added at Cian
+    Dorr’s request to parallel Possibility (signature Σ).
+notes: 'The clause requiring the individuals to differ from the constants named in P is forced: without
+  it the C(Σ)-consistent formula x ≠ c would yield ◇(c ≠ c).'

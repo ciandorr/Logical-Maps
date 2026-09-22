@@ -1,0 +1,31 @@
+id: atomicity-and-bf-imply-strong-leibniz
+premises:
+- atomicity-r
+- barcan-r
+conclusion: strong-leibniz-r
+status: proved
+certificate:
+  source_id: bacon-2024-book
+  produced_by: Andrew Bacon; set as Exercise 8.12, solution written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Exercise 8.12,
+  p. 166.
+source_names:
+- Philosophical Introduction to HOL
+proof: 'Let $W$ be a weak world of relational type $\sigma$: $W\ne\bot$ and $\forall Y\, .\,W\le Y\lor
+  W\le\neg Y$. We show $\Box\forall Y\, .\,W\le Y\lor W\le\neg Y$. Each instance is necessary once true,
+  since $W\le Y$ is $\Box$ of a closed formula and 4 holds; so $\forall Y\, .\,\Box(W\le Y\lor W\le\neg
+  Y)$. BF at type $\sigma$ (the instance for the property $\lambda Y\, .\,W\le Y\lor W\le\neg Y$) turns
+  this into $\Box\forall Y\, .\,W\le Y\lor W\le\neg Y$. Thus every weak world is a strong world, and Atomicity
+  supplies a weak world below each possible $X$.'
+references:
+- paper: bacon-2024-book
+  role: proof
+  locator: §8.2, Exercise 8.12, p. 166
+notes: Bacon states this for relational types other than e, which is the map’s type range for both worlds
+  principles; BF is used only at those types.

@@ -1,0 +1,66 @@
+id: full-free-monoid-glued-constants-singleton
+name: 'Full action model: free monoid on countably many generators, glued constants, singleton individuals'
+satisfies:
+- logical-necessity-r
+- no-pure-contingency-r
+- necessary-barcan-r
+- necessary-actuality
+- necessary-atomicity-r
+- necessary-rigid-comprehension-r
+- relational-choice-r
+- axiom-of-infinity-t
+- strong-leibniz-r
+- necessary-strong-leibniz-r
+violates:
+- distinctness-necessary-r
+- distinctness-necessary-t
+- modal-b
+- possibility-schema-r
+- infinity-e
+- axiom-of-infinity-e
+- possible-infinity-e
+status: proved
+certificate:
+  source_id: bacon-2020
+  produced_by: Andrew Bacon; the variant and its verification by Claude Fable 5.1 (Anthropic), 22 September
+    2026 (see the write-up)
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), Appendix A.2–A.3, pp. 580–587;
+  §2, n. 15, p. 547; §4, n. 48, p. 566.
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §18.1, Definition
+  18.1, pp. 391–392; §18.3, Definition 18.6, p. 395; §18.6, Definitions 18.14–18.15, Proposition 18.7,
+  Theorem 18.5 and Exercise 18.23, pp. 405–410.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.4–3.5, pp. 55–61 (full action models
+  and the principles they validate); Appendix E, pp. 80–83 (truncations).
+- Claude Fable 5.1 (Anthropic), verification of 22 September 2026 (see the write-up).
+source_names:
+- Logical Combinatorialism
+- Philosophical Introduction to HOL
+- Classicism
+- Fable 22 Sep
+references:
+- paper: bacon-2020
+  role: origin
+  locator: Appendix A.2–A.3, pp. 580–587; n. 15, p. 547; n. 48, p. 566
+  note: The construction and its claimed validation of Logical Necessity; its Theorem A.8 is stated without
+    proof and its type-e case deferred.
+- paper: bacon-2024-book
+  role: proof
+  locator: §18.6, Definitions 18.14–18.15, Proposition 18.7, Exercise 18.23, pp. 405–410
+  note: Coalesced sums of modal models, from which the gluing theorem follows once the frame is shown
+    to be a coalesced sum of copies of itself.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 59–61; Appendix E, pp. 80–83
+  note: Facts about full one-object action models used for the pure part, and truncations.
+description: 'The model of full-free-monoid-glued-constants with the type-e modalized set replaced by
+  a singleton at every world, with identity counterparts; equivalently the full action model over the
+  free monoid on countably many generators with the trivial M-set at type e, with the constants glued
+  as there. Evaluation point: the root. The companion write-up records what changes.'
+notes: Shows that Logical Necessity is consistent with there being exactly one individual, necessarily.
+  Two individual constants of Σ co-denote at every world, which Logical Necessity tolerates. The Infinity
+  principles at type e fail at every world; those at type t hold as in the thread variant.

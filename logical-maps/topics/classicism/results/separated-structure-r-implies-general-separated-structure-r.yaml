@@ -1,0 +1,36 @@
+id: separated-structure-r-implies-general-separated-structure-r
+premises:
+- separated-structure-r
+conclusion: general-separated-structure-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §4, p. 565.
+source_names:
+- Logical Combinatorialism
+proof: Let $c_1,\ldots,c_k$ be the distinct constants among $a_1\ldots a_n,b_1\ldots b_m$, none occurring
+  in $F$ or $G$, with $\pi x_j=c_j$. Put $F^{\prime}:=\lambda x_1\ldots x_k\, .\,F(\pi a_1)\cdots(\pi
+  a_n)$ and $G^{\prime}:=\lambda x_1\ldots x_k\, .\,G(\pi b_1)\cdots(\pi b_m)$. Neither contains any $c_j$,
+  and by $\beta$, $F^{\prime}c_1\cdots c_k=Fa_1\cdots a_n$ and $G^{\prime}c_1\cdots c_k=Gb_1\cdots b_m$.
+  Assume the antecedent. Then $(F^{\prime}c_1\cdots c_{k-1})c_k=(G^{\prime}c_1\cdots c_{k-1})c_k$ and
+  $c_k$ does not occur in the two applied terms, so Separated Structure gives $F^{\prime}c_1\cdots c_{k-1}=G^{\prime}c_1\cdots
+  c_{k-1}$. After $k$ such steps, $F^{\prime}=G^{\prime}$, which is the consequent. If $k=0$ the schema
+  is trivial.
+references:
+- paper: bacon-2020
+  role: origin
+  locator: §4, p. 565
+  note: General Separated Structure, derived there from Logical Necessity.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.5, p. 39
+  note: The iterated form of Separated Structure for a tuple of distinct constants, said to follow by
+    an obvious induction.
+notes: Bacon derives General Separated Structure from Logical Necessity; this record shows that Separated
+  Structure alone suffices, so the two structure schemata are equivalent in C.

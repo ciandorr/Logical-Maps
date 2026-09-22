@@ -1,0 +1,112 @@
+id: full-free-monoid-glued-constants
+name: 'Full action model: free monoid on countably many generators, glued constants, thread individuals'
+satisfies:
+- logical-necessity-r
+- no-pure-contingency-r
+- necessary-barcan-r
+- necessary-actuality
+- necessary-atomicity-r
+- necessary-rigid-comprehension-r
+- relational-choice-r
+- axiom-of-infinity-t
+- strong-leibniz-r
+- necessary-strong-leibniz-r
+- axiom-of-infinity-e
+violates:
+- distinctness-necessary-r
+- distinctness-necessary-t
+- modal-b
+- possibility-schema-r
+status: proved
+certificate:
+  source_id: bacon-2020
+  produced_by: Andrew Bacon; gluing theorem and type-e domain supplied, and all listed properties verified,
+    by Claude Fable 5.1 (Anthropic), 22 September 2026 (see the write-up)
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), Appendix A.2–A.3, pp. 580–587;
+  §2, n. 15, p. 547; §4, n. 48, p. 566.
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §18.1, Definition
+  18.1, pp. 391–392; §18.3, Definition 18.6, p. 395; §18.6, Definitions 18.14–18.15, Proposition 18.7,
+  Theorem 18.5 and Exercise 18.23, pp. 405–410.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.4–3.5, pp. 55–61 (full action models
+  and the principles they validate); Appendix E, pp. 80–83 (truncations).
+- Claude Fable 5.1 (Anthropic), verification of 22 September 2026 (see the write-up).
+source_names:
+- Logical Combinatorialism
+- Philosophical Introduction to HOL
+- Classicism
+- Fable 22 Sep
+references:
+- paper: bacon-2020
+  role: origin
+  locator: Appendix A.2–A.3, pp. 580–587; n. 15, p. 547; n. 48, p. 566
+  note: The construction and its claimed validation of Logical Necessity; its Theorem A.8 is stated without
+    proof and its type-e case deferred.
+- paper: bacon-2024-book
+  role: proof
+  locator: §18.6, Definitions 18.14–18.15, Proposition 18.7, Exercise 18.23, pp. 405–410
+  note: Coalesced sums of modal models, from which the gluing theorem follows once the frame is shown
+    to be a coalesced sum of copies of itself.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 59–61; Appendix E, pp. 80–83
+  note: Facts about full one-object action models used for the pure part, and truncations.
+description: 'Let M be the free monoid of finite sequences of natural numbers under concatenation; its
+  induced Kripke frame is the infinitely branching tree with the initial-segment relation and the empty
+  sequence as root. Take the standard model over this frame (propositions all sets of accessible worlds,
+  function types all homomorphisms) whose individuals at a world are the functions from the infinite branches
+  through that world to the natural numbers, with restriction as counterpart; equivalently, the full action
+  model over M with this surjective M-set at type e. This higher-order frame is isomorphic to the coalesced
+  sum of countably many copies of itself, so coalesced sums of Σ-models over it are again Σ-models over
+  it. Enumerate the Σ-sentences satisfiable in some Σ-model over the frame, choose a model of each, and
+  glue them by the book’s Definition 18.15. Evaluation point: the root. The write-up carries the full
+  verification.'
+notes: Promoted from conjectured on 22 September 2026. The gap in the source was its Theorem A.8, stated
+  without proof, and the deferred type-e case; the write-up closes both by choosing a self-similar individual
+  domain and applying the book’s coalesced sums. The signature is assumed countable; for a larger signature
+  use a tree with as many branches. Distinct constants of one type denote distinct entities at the root,
+  since every domain, including the individuals, has more than one element; they are also possibly identical.
+  ND and B fail at type t already. Possibility (pure) fails because Actuality is necessary while its negation
+  is consistent with C. Everything else follows from the listed principles by the map’s results. Bacon’s
+  interpretation of his predicates Pure and Fun in this model, and the principles stated with them, are
+  not recorded, following Zachary Goodsell’s decision to keep the map to the logical vocabulary and the
+  constants of Σ.
+changes:
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Replaced the type-e domain. A copy of the powerset of M is not isomorphic to the product of
+    its children’s domains under truncation, so the coalesced sum of copies of the frame would not return
+    the frame; the thread domain is. The record remains conjectured.
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Promoted to proved with a full write-up: the gluing theorem is derived from the book’s coalesced
+    sums and the frame’s self-similarity, with a branch-indexed type-e domain. Verified the listed principles;
+    added the Strong Leibniz Biconditionals, their necessitation and the Axiom of Infinity at type e.
+    Renamed to distinguish it from the singleton-individual variant.'
+  satisfies:
+  - logical-necessity-r
+  - no-pure-contingency-r
+  - necessary-barcan-r
+  - necessary-actuality
+  - necessary-atomicity-r
+  - necessary-rigid-comprehension-r
+  - relational-choice-r
+  - axiom-of-infinity-t
+  - strong-leibniz-r
+  - necessary-strong-leibniz-r
+  - axiom-of-infinity-e
+  violates:
+  - distinctness-necessary-r
+  - distinctness-necessary-t
+  - modal-b
+  - possibility-schema-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Removed the interpretation of Bacon’s Pure and Fun predicates and every principle stated with
+    them, following Zachary Goodsell’s decision of 21 September 2026 that such predicates lie outside
+    the map’s vocabulary. The pure and signature assertions are unchanged.
+was_conjectured: true

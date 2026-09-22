@@ -3,7 +3,8 @@ name: Ordinary Comprehension
 category: base
 statement: Every well-typed formula P with distinguished variables y defines a coextensive relation; X
   is fresh, and any other free object variables are universally closed.
-formal: $\exists X\, .\,\forall\bar y\, .\,X[\bar y]\leftrightarrow P$
+formal: $\exists X\, .\,\forall\bar y\, .\,X[\bar y]\leftrightarrow P\quad(P\text{ a formula in which
+  }X\text{ is not free})$
 date: '2026-09-17'
 sources:
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, p. 27.
@@ -14,3 +15,8 @@ references:
   role: formulation
   locator: §2.3, p. 27
 notes: ''
+changes:
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Displayed the schema’s side conditions inside the math block, at Cian Dorr’s request; the statement
+    is unchanged.

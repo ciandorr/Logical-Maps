@@ -1,0 +1,35 @@
+id: possibly-witnessed-possibility-r-implies-separated-structure-r
+premises:
+- possibly-witnessed-possibility-r
+conclusion: separated-structure-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 22 September 2026; proof as recorded.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.5, pp. 38–39 and n. 57.
+source_names:
+- Dorr 22 Sep
+- Classicism
+proof: It suffices to prove $F\bar c=G\bar c\to F=G$ for closed pure $F,G$ of a type $\bar\sigma\tau$
+  and distinct constants $\bar c$; Separated Structure follows by abstracting the other constants, as
+  in the recorded proof from Quantified Separated Structure. Let $H:=\lambda\bar x\, .\,(F\bar x=G\bar
+  x)$, closed and pure. If $F\bar c=G\bar c$ then NI gives $\Box(F\bar c=G\bar c)$, i.e. $\Box H\bar c$
+  by $\beta$. The contrapositive form of Possibly Witnessed Possibility, $\Box P[\bar c/\bar x]\to\Box\forall\bar
+  x\, .\,P$ with $P:=(F\bar x=G\bar x)$, gives $\Box\forall\bar x\, .\,F\bar x=G\bar x$, and Modalized
+  Functionality at the relevant arity, a theorem of C, gives $F=G$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.5, pp. 38–39 and n. 57
+- paper: bacon-2020
+  role: background
+  locator: §4, pp. 561–562
+notes: With the converse record this makes Separated Structure equivalent to a principle stated purely
+  in terms of possibility at the constants.

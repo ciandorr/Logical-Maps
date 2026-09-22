@@ -1,0 +1,34 @@
+id: logical-necessity-r-implies-separated-structure-r
+premises:
+- logical-necessity-r
+conclusion: separated-structure-r
+status: proved
+certificate:
+  source_id: bacon-2020
+  produced_by: Andrew Bacon; the schematic derivation was written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §4, pp. 561–562.
+source_names:
+- Logical Combinatorialism
+proof: 'Let $c$ be a constant of type $\sigma$ and $F,G$ closed terms of type $\sigma\tau$ not containing
+  $c$, with $Fc=Gc$. Enumerate the constants occurring in $F$ or $G$ as $\bar d$, all distinct from $c$,
+  and abstract them: $F=F^\circ\bar d$, $G=G^\circ\bar d$ with $F^\circ,G^\circ$ closed and pure, by $\beta$.
+  Let $P:=F^\circ\bar y\,x=G^\circ\bar y\,x$, pure with free variables $\bar y,x$. NI gives $\Box P[\bar
+  d,c/\bar y,x]$, so Logical Necessity, left to right, gives $\forall\bar y x\, .\,P$. This closed pure
+  truth is necessary by the empty-tuple instance of Logical Necessity, so $\Box\forall\bar y x\, .\,F^\circ\bar
+  y x=G^\circ\bar y x$. CBF gives $\forall\bar y\, .\,\Box\forall x\, .\,F^\circ\bar yx=G^\circ\bar yx$
+  and Modalized Functionality, a theorem of C, gives $\forall\bar y\, .\,F^\circ\bar y=G^\circ\bar y$.
+  Instantiating $\bar y:=\bar d$ yields $F=G$.'
+references:
+- paper: bacon-2020
+  role: proof
+  locator: §4, pp. 561–562
+notes: 'Bacon derives the quantified form from Quantified Logical Necessity and Modalized Functionality
+  and says the schematic form follows in the same way. Both directions of Logical Necessity are used:
+  the witnessed direction to pass from the necessary identity at the constants to the universal claim,
+  and No Pure Contingency to necessitate that claim before applying Modalized Functionality.'

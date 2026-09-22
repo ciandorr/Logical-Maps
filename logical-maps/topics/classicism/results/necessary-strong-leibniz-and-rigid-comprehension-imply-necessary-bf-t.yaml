@@ -1,0 +1,35 @@
+id: necessary-strong-leibniz-and-rigid-comprehension-imply-necessary-bf-t
+premises:
+- necessary-strong-leibniz-r
+- rigid-comprehension-r
+conclusion: necessary-barcan-t
+status: proved
+certificate:
+  source_id: bacon-2024-book
+  produced_by: Andrew Bacon
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Theorem 8.2,
+  pp. 169–171.
+source_names:
+- Philosophical Introduction to HOL
+proof: 'Theorem 8.2 of the book: given Rigid Comprehension, $\Box\mathrm{SL}_\sigma$ at all relational
+  types implies $\Box\mathrm{BF}_\sigma$ for every relational $\sigma\ne e$. Its proof for $\sigma=t$
+  (pp. 170–171): from $\Diamond\exists p\, .\,Xp$, $X$ is a possible property, so by $\mathrm{SL}_{tt}$
+  it is entailed by a strong world property $W$; let $H$ be the rigid collection, supplied by Rigid Comprehension,
+  of world properties accessible to $W$, and let $r:=\exists V\, .\,\exists p\, .\,HV\land Vp\land p$.
+  Bacon shows $\Box\forall p\, .\,Wp\to p=r$, using $\Box\mathrm{SL}_t$ for the step that every world
+  proposition entails $\exists V\, .\,HV\land Vp$ and the rigidity of $H$ for the converse; since $W$
+  entails $X$, $\Diamond Xr$, which gives $\exists p\, .\,\Diamond Xp$, the contrapositive of $\mathrm{BF}_t$.
+  The argument is carried out under necessary assumptions, so it yields $\Box\mathrm{BF}_t$. The map records
+  the type-$t$ instance; the book proves the same for every relational type other than $e$.'
+references:
+- paper: bacon-2024-book
+  role: proof
+  locator: §8.2, Theorem 8.2, pp. 169–171
+notes: The map has no node for BF restricted to relational types, so the conclusion is recorded at type
+  t, the case the book proves in full. The right-to-left half of Theorem 8.2 is the recorded implication
+  from □Atomicity and □BF to □SL, which needs no Rigid Comprehension.

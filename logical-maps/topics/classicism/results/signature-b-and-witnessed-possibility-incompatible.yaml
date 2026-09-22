@@ -1,0 +1,39 @@
+id: signature-b-and-witnessed-possibility-incompatible
+premises:
+- signature-b-r
+- witnessed-possibility-r
+conclusion: 'false'
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 22 September 2026; proof as recorded.
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §3, n. 32, p. 556.
+source_names:
+- Dorr 22 Sep
+- Logical Combinatorialism
+proof: Let $c$ be a constant of $\Sigma$ of relational type $\tau$. Witnessed Possibility gives $\Diamond(c=\top_\tau)$
+  and $\Diamond(c\ne\top_\tau)$. If $c=\top_\tau$, NI gives $\Box(c=\top_\tau)$, contradicting $\Diamond(c\ne\top_\tau)$.
+  If $c\ne\top_\tau$, B for the closed $\Sigma$-sentence $c\ne\top_\tau$ gives $\Box\Diamond(c\ne\top_\tau)$;
+  but $\Diamond(c=\top_\tau)$ supplies a possibility at which $c=\top_\tau$, hence by NI $\Box(c=\top_\tau)$
+  there, so $\neg\Diamond(c\ne\top_\tau)$ there, contradicting $\Box\Diamond(c\ne\top_\tau)$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, p. 27; §2.5, n. 57, p. 38
+- paper: bacon-2020
+  role: origin
+  locator: §3, n. 32, p. 556
+  note: 'Bacon: B is undermined by the analogy with logical truth independently of contingent distinctness,
+    since for a nonlogical predicate F neither ◇∃xFx nor ◇¬∃xFx is a logical truth, while B would make
+    one of them necessary.'
+notes: Formalizes Bacon’s n. 32 with the top element in place of his interpretations of F, so that only
+  one constant of relational type is needed. Compare the recorded incompatibility of Witnessed Possibility
+  with ND, which uses B at the level of propositions through Prior’s argument; here only the sentence
+  instances for Σ are used.

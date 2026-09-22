@@ -28,6 +28,8 @@ satisfies:
 - distinctness-preserving-collapse
 - strong-leibniz-r
 - necessary-strong-leibniz-r
+- no-contingency-signature-r
+- signature-b-r
 violates:
 - axiom-of-infinity-t
 - infinity-t
@@ -77,8 +79,9 @@ notes: 'Explicit specialization of the source''s standard Henkin construction to
   Goodsell''s $I$, assumed in n. 14 of Arithmetic is Necessary: with infinitely many individuals the numerals
   are pairwise distinct, so $\operatorname{Suc}_e$ is injective on finite cardinalities and $I^*$, hence
   $I$, is true. Signature principles are not listed, since they depend on how the nonlogical constants
-  are interpreted. With Boolean Completeness listed, the model also shows Countable Boolean Completeness
-  consistent with C.'
+  are interpreted, except No Contingency (signature Σ) and B for sentences of Σ, which hold in a one-world
+  model however they are interpreted. With Boolean Completeness listed, the model also shows Countable
+  Boolean Completeness consistent with C.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -88,3 +91,11 @@ changes:
   satisfies:
   - strong-leibniz-r
   - necessary-strong-leibniz-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Added No Contingency (signature Σ) and B for sentences of Σ: Box is truth in this model, so
+    every closed sentence, whatever the constants denote, is necessary if true and necessarily possible
+    if true.'
+  satisfies:
+  - no-contingency-signature-r
+  - signature-b-r

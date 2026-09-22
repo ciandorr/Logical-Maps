@@ -26,6 +26,8 @@ satisfies:
 - distinctness-preserving-collapse
 - strong-leibniz-r
 - necessary-strong-leibniz-r
+- no-contingency-signature-r
+- signature-b-r
 violates:
 - infinity-e
 - infinity-t
@@ -63,7 +65,8 @@ notes: 'Explicit specialization of the source’s standard Henkin construction t
   sense, the Boolean algebra at each relational type is the complete atomic algebra of subsets of the
   domain, and every closed sentence is non-contingent. The pure schemata fail because C-consistent sentences
   about how many individuals there are can be false. Signature principles are not listed, since they depend
-  on how the nonlogical constants are interpreted.'
+  on how the nonlogical constants are interpreted, except No Contingency (signature Σ) and B for sentences
+  of Σ, which hold in a one-world model however they are interpreted.'
 changes:
 - date: '2026-09-17'
   by: OpenAI Codex (GPT-6)
@@ -118,3 +121,11 @@ changes:
   satisfies:
   - strong-leibniz-r
   - necessary-strong-leibniz-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Added No Contingency (signature Σ) and B for sentences of Σ: Box is truth in this model, so
+    every closed sentence, whatever the constants denote, is necessary if true and necessarily possible
+    if true.'
+  satisfies:
+  - no-contingency-signature-r
+  - signature-b-r

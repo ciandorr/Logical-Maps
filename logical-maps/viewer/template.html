@@ -49,6 +49,16 @@
   .pr-category-actions .lnk:disabled { opacity: .45; cursor: default; }
   .pr-category-count { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-left: auto; }
   .pr-category .principle-name { font-size: 13px; }
+  /* Category disclosure. The summary carries the name and the count, so a
+     closed category still says how much of it is in play. */
+  .pr-category > summary, .model-category > summary { display: flex; align-items: baseline; gap: 6px; cursor: pointer; list-style: none; }
+  .pr-category > summary::-webkit-details-marker, .model-category > summary::-webkit-details-marker { display: none; }
+  .pr-category > summary::before, .model-category > summary::before { content: '\25b8'; font-size: 9px; color: var(--ink-3); }
+  .pr-category[open] > summary::before, .model-category[open] > summary::before { content: '\25be'; }
+  .pr-category > summary:hover h3, .model-category > summary:hover h3 { color: var(--accent); }
+  .pr-category > summary h3 { margin: 0; }
+  .pr-category[open] > summary, .model-category[open] > summary { margin-bottom: 5px; }
+  #pane-open .pr-category-count { display: none; }
   .pr-category input { flex: none; margin-top: 3px; }
   .sw { width: 22px; height: 0; border-top: 3px solid; border-radius: 2px; flex: none; }
   .sw.dotted { border-top-style: dotted; }
@@ -447,6 +457,7 @@
   .seg button.auto-negative { color: var(--indep); background: color-mix(in srgb, var(--indep) 18%, var(--panel)); }
   #model-principles .model-category { padding-top: 8px; }
   #model-principles .model-category h3 { margin-bottom: 5px; }
+  #model-principles .model-category > summary h3 { margin: 0; }
   #model-principles .ex-list { margin-bottom: 10px; }
   .evidence-link { color: var(--accent); font-size: 11px; }
   .ex-p .model-flag { color: var(--ink-2); font-weight: 500; }
@@ -900,7 +911,13 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set() };
+// A handful of categories reads better open; a long list is easier to navigate
+// closed. The threshold counts the topic's own principles, not the ones a
+// reader happens to be showing.
+const CATEGORY_COLLAPSE_MIN = 16;
+if (principleGroups().length > 1 && P.length > CATEGORY_COLLAPSE_MIN)
+  for (const g of principleGroups()) state.collapsed.add(g.id);
 const graphSearch = { matches: new Set(), index: 0 };
 // A principle the topic's own background already settles, one way or the
 // other, can only sit in the True or False box. It starts hidden; the sidebar
@@ -1924,6 +1941,7 @@ function applyGraphSearch(focus = false) {
     `${graphSearch.index + 1} of ${matches.length}${inBackground(current) ? ' · In background' : state.excluded.has(current) ? ' · Temporarily shown' : ''}${matches.length > 1 ? ' · Enter for next' : ''}`;
   if (!focus || !current) return;
   const row = document.querySelector(inBackground(current) ? `[data-background-id="${current}"]` : `[data-pr-row="${current}"]`);
+  openCategoryOf(row);
   row?.scrollIntoView?.({block: 'nearest', inline: 'nearest'});
   const node = layout?.visible.find(n => n.members?.includes(current));
   if (node) {
@@ -2172,6 +2190,40 @@ function principleGroups() {
   if (ungrouped.length) groups.push({ id: 'uncategorized', name: 'Other principles', principles: ungrouped });
   return groups.filter(g => g.principles.length);
 }
+// Category disclosure for the graph sidebar, the lattice sidebar and the
+// theory explorer. One collapsed set serves all three, so a category the
+// reader opens is open wherever it appears. These lists are rebuilt wholesale
+// on most changes, so the markup is driven from that set rather than the other
+// way round, and a rebuilt list opens exactly as the reader left it.
+const CATEGORY_LISTS = ['pr-filters', 'lat-filters', 'model-principles'];
+function categoryHeader(group, count = '') {
+  return `<summary><h3>${esc(group.name)}</h3><span class="pr-category-count">${esc(count)}</span></summary>`;
+}
+function applyCategories(el) {
+  el?.querySelectorAll('[data-category]').forEach(g => { g.open = !state.collapsed.has(g.dataset.category); });
+}
+function applyAllCategories() { for (const id of CATEGORY_LISTS) applyCategories(document.getElementById(id)); }
+function wireCategories(el) {
+  applyCategories(el);
+  if (!el || el.dataset.categoriesWired) return;
+  el.dataset.categoriesWired = '1';
+  el.addEventListener('click', ev => {
+    const group = ev.target.closest('summary')?.closest('[data-category]');
+    if (!group) return;
+    // The browser would toggle this one disclosure. Cancel that and go through
+    // the shared set instead, so the other lists agree.
+    ev.preventDefault();
+    const id = group.dataset.category;
+    state.collapsed.has(id) ? state.collapsed.delete(id) : state.collapsed.add(id);
+    applyAllCategories();
+  });
+}
+// Reaching a row inside a closed category opens it, as find-in-page does.
+function openCategoryOf(row) {
+  const id = row?.closest('[data-category]')?.dataset.category;
+  if (id == null || !state.collapsed.has(id)) return;
+  state.collapsed.delete(id); applyAllCategories();
+}
 function assumptionButtons(id, follows = false, ruledOut = false) {
   const fixed = topicBackground.includes(id);
   return `<span class="seg assumption-choice" role="group" aria-label="Assume ${esc(name(id))}"><button data-assume-positive="${id}" class="${follows && !background.has(id) ? 'auto-positive' : ''}" title="${follows && !background.has(id) ? 'Follows from background; click to assume explicitly' : background.has(id) ? 'Click again to remove this assumption' : 'Assume this principle'}" aria-label="Assume ${esc(name(id))}" aria-pressed="${background.has(id)}"${fixed ? ' disabled' : ''}>✓</button><button data-assume-negative="${id}" class="${ruledOut && !negativeBackground.has(id) ? 'auto-negative' : ''}" title="${ruledOut && !negativeBackground.has(id) ? 'Ruled out by background; click to assume explicitly' : negativeBackground.has(id) ? 'Click again to remove this assumption' : 'Assume this negation'}" aria-label="Assume not ${esc(name(id))}" aria-pressed="${negativeBackground.has(id)}"${fixed ? ' disabled' : ''}>✗</button></span>`;
@@ -2195,7 +2247,10 @@ function renderModels() {
   if (inspected) h += `<div class="inspection-note">Inspecting <b>${esc(inspected.name)}</b> <button class="lnk" id="ex-deselect">clear selection</button></div>`;
   h += '<div id="model-principles">';
   for (const group of principleGroups()) {
-    h += `<section class="model-category" data-model-category="${esc(group.id)}"><h3>${esc(group.name)}</h3><ul class="ex-list">`;
+    // A closed category must still report the assumptions it holds, or
+    // collapsing one would hide a choice the reader made.
+    const assumed = group.principles.filter(p => inBackground(p.id)).length;
+    h += `<details class="model-category" data-category="${esc(group.id)}">${categoryHeader(group, assumed ? `${assumed} assumed` : '')}<ul class="ex-list">`;
     for (const p of group.principles) {
       const id = p.id, positive = background.has(id), negative = negativeBackground.has(id);
       const follows = !conflict && implied.has(id), ruledOut = !conflict && backgroundExcluded.has(id);
@@ -2204,7 +2259,7 @@ function renderModels() {
       h += `<li class="ex-p ${tint}" data-assumption-row="${id}">${assumptionButtons(id, follows, ruledOut)}<div class="principle-line"><button class="lnk" data-principle="${id}">${esc(name(id))}</button>${inspected ? ' ' + verdictButton(inspected, id, evidence, true) : ''}</div></li>`;
 
     }
-    h += '</ul></section>';
+    h += '</ul></details>';
   }
   h += '</div></div><div class="ex-col explorer-models">';
   const ms = MODELS.filter(m => passes(m) && (m.status === 'proved' || state.showConj));
@@ -2229,6 +2284,7 @@ function renderModels() {
   el.innerHTML = h;
   wireAssumptions(el);
   el.querySelectorAll('[data-background-preset]').forEach(button => { button.disabled = backgroundPresets.find(p => p.id === button.dataset.backgroundPreset).principles.every(id => background.has(id)); button.addEventListener('click', () => addBackgroundPreset(button.dataset.backgroundPreset)); });
+  wireCategories(el.querySelector('#model-principles'));
   el.querySelector('#ex-clear').addEventListener('click', resetBackground);
   el.querySelector('#ex-deselect')?.addEventListener('click', () => { state.modelId = null; select(null); renderModels(); });
   wire(el);
@@ -3027,7 +3083,8 @@ document.getElementById('fit').addEventListener('click', fit);
 (function () {
   const el = document.getElementById('pr-filters');
   const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
-  el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
+  el.innerHTML = principleGroups().map((g, i) => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g)}<div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button></div><div class="ctl">${labels(g.principles)}</div></details>`).join('');
+  wireCategories(el);
   const repaint = repaintGraph;
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
   el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
@@ -3736,8 +3793,9 @@ function renderLatticeFilters() {
   const el = document.getElementById('lat-filters');
   if (!el) return;
   const row = p => `<div class="pr-row lat-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-lat-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-lat-positive="${p.id}" aria-label="Add ${esc(p.name)}" aria-pressed="false">✓</button><button data-lat-negative="${p.id}" aria-label="Add not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><span class="lat-name">${esc(p.name)}</span><span class="pr-actions"><button class="lnk" data-lat-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`;
-  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${g.principles.map(row).join('')}</div></section>`).join('');
+  el.innerHTML = principleGroups().map(g => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g)}<div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button></div><div class="ctl">${g.principles.map(row).join('')}</div></details>`).join('');
   renderSubscripts(el);
+  wireCategories(el);
   refreshLatticeControls();
 }
 (function () {

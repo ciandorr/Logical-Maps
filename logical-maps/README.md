@@ -229,6 +229,8 @@ are displayed under Misc. until attributed. Lean fields remain optional.
 
 Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with select-all/unselect-all controls per category; these only control visibility. Topics without categories retain the flat list.
 
+Each category is collapsible in the three lists that show them: the graph sidebar, the lattice sidebar and the theory explorer. One set of open categories serves all three, so a category opened in one is open in the others. A category's summary carries its name and its count, so a closed one still reports how much of it is in play: how many of its principles are shown on the graph, how many are chosen on the lattice, and how many are assumed in the explorer. Categories start closed when a topic declares more than one and has more than `CATEGORY_COLLAPSE_MIN` (16) principles, and open otherwise; searching for a principle opens the category it is in.
+
 `require_sources: true` makes validation reject empty result/model sources. It is enabled for the unbounded-utility topic and new topics; the legacy example retains its existing records until its sources are audited.
 
 Add `source_names` alongside `sources`, with one short label per reference in the same order (for example, `Symmetries of Value`). Pop-ups show these labels; write-ups retain the full references. Original AI work should use its actual author/model and date, never an invented attribution.

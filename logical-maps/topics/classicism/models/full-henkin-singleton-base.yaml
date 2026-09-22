@@ -35,6 +35,10 @@ violates:
 - possibility-schema-r
 - possible-infinity-e
 - possible-infinity-t
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
 status: proved
 certificate:
   source_id: misc
@@ -64,9 +68,15 @@ notes: 'Explicit specialization of the source’s standard Henkin construction t
   when its unboxed form does, coextensive relations are identical, every relation is rigid in every recorded
   sense, the Boolean algebra at each relational type is the complete atomic algebra of subsets of the
   domain, and every closed sentence is non-contingent. The pure schemata fail because C-consistent sentences
-  about how many individuals there are can be false. Signature principles are not listed, since they depend
-  on how the nonlogical constants are interpreted, except No Contingency (signature Σ) and B for sentences
-  of Σ, which hold in a one-world model however they are interpreted.'
+  about how many individuals there are can be false. No Contingency (signature Σ) and B for sentences
+  of Σ hold in a one-world model however the constants are interpreted. Interpretation of Σ, fixed for
+  this record: each relational constant denotes the top element of its type and each individual constant
+  denotes one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational
+  type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
+  witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
+  $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
+  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.'
 changes:
 - date: '2026-09-17'
   by: OpenAI Codex (GPT-6)
@@ -129,3 +139,12 @@ changes:
   satisfies:
   - no-contingency-signature-r
   - signature-b-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r

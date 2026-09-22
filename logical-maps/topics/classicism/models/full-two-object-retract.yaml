@@ -10,6 +10,10 @@ satisfies:
 violates:
 - necessary-distinctness-necessary-t
 - no-pure-contingency-r
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -29,8 +33,15 @@ references:
   locator: §3.5, p. 59, fifth paragraph and n. 81; p. 61
 description: Use the source’s category with h:W0→W1, j:W1→W0 and k:W1→W1, evaluated at W0. ND at t holds
   there and fails at W1. Only the type-t ND assertion is recorded.
-notes: The cited construction is a model of the map’s relational-type framework. The description identifies
-  its evaluation point; construction and verification are given at the PDF locations in References.
+notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
+  its evaluation point; construction and verification are given at the PDF locations in References. Interpretation
+  of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual
+  constant denotes one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational
+  type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
+  witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
+  $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
+  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -48,9 +59,17 @@ changes:
   - no-pure-contingency-r
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
-  summary: >-
-    Added Relational Choice at Cian Dorr's direction. With choice in the metatheory a serial relation
-    has a functional subrelation, and a full model contains every intension, so that subrelation is in the
-    domain; see Classicism, p. 61, on the principles common to full models.
+  summary: Added Relational Choice at Cian Dorr's direction. With choice in the metatheory a serial relation
+    has a functional subrelation, and a full model contains every intension, so that subrelation is in
+    the domain; see Classicism, p. 61, on the principles common to full models.
   satisfies:
   - relational-choice-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r

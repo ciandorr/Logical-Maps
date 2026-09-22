@@ -1,0 +1,30 @@
+id: modal-freedom-signature-r-implies-no-pure-contingency-r
+premises:
+- modal-freedom-signature-r
+conclusion: no-pure-contingency-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, observation of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Cian Dorr, observation of 22 September 2026; proof as recorded.
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §3, pp. 556–557.
+source_names:
+- Dorr 22 Sep
+- Logical Combinatorialism
+proof: 'Take both constant tuples empty and $Q:=\neg P$ for a closed pure $P$: the instance reads $\Diamond
+  P\land\Diamond\neg P\to\Diamond(P\land\neg P)$, whose consequent is $\Diamond\bot$, false. So $\neg(\Diamond
+  P\land\Diamond\neg P)$, i.e. $\Box P\lor\Box\neg P$, and with T, $P\to\Box P$.'
+references:
+- paper: bacon-2020
+  role: background
+  locator: §3, pp. 556–557
+notes: Records the observation, previously only in the principle’s notes, that the constant-free instance
+  of Modal Freedom (signature Σ) is No Pure Contingency. With the recorded converse-direction facts, Modal
+  Freedom (signature Σ) sits between No Contingency (signature Σ) and No Pure Contingency, and every model
+  refuting No Pure Contingency refutes it.

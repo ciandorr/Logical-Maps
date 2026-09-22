@@ -35,6 +35,10 @@ violates:
 - infinity-t
 - possible-infinity-t
 - possibility-schema-r
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
 status: proved
 certificate:
   source_id: misc
@@ -78,10 +82,16 @@ notes: 'Explicit specialization of the source''s standard Henkin construction to
   $e$: here there is not possibly exactly one individual. It also witnesses the consistency of C with
   Goodsell''s $I$, assumed in n. 14 of Arithmetic is Necessary: with infinitely many individuals the numerals
   are pairwise distinct, so $\operatorname{Suc}_e$ is injective on finite cardinalities and $I^*$, hence
-  $I$, is true. Signature principles are not listed, since they depend on how the nonlogical constants
-  are interpreted, except No Contingency (signature Σ) and B for sentences of Σ, which hold in a one-world
-  model however they are interpreted. With Boolean Completeness listed, the model also shows Countable
-  Boolean Completeness consistent with C.'
+  $I$, is true. No Contingency (signature Σ) and B for sentences of Σ hold in a one-world model however
+  the constants are interpreted. With Boolean Completeness listed, the model also shows Countable Boolean
+  Completeness consistent with C. Interpretation of Σ, fixed for this record: each relational constant
+  denotes the top element of its type and each individual constant denotes one fixed individual. Under
+  it the signature schemata fail. Let $c\in\Sigma$ have relational type $\tau$, so $c=\top_\tau$ necessarily.
+  Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$ but impossible
+  of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$
+  and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\top_\tau$
+  denotes; Distinctness (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ) does not
+  prove. Everything that implies these fails with them.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -99,3 +109,12 @@ changes:
   satisfies:
   - no-contingency-signature-r
   - signature-b-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r

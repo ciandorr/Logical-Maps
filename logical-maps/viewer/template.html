@@ -51,7 +51,8 @@
   .pr-category .principle-name { font-size: 13px; }
   /* Category disclosure. The summary carries the name and the count, so a
      closed category still says how much of it is in play. */
-  .pr-category > summary, .model-category > summary { display: flex; align-items: baseline; gap: 6px; cursor: pointer; list-style: none; }
+  .pr-category > summary, .model-category > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; cursor: pointer; list-style: none; }
+  .pr-category > summary .pr-category-actions { flex-basis: 100%; margin-bottom: 0; }
   .pr-category > summary::-webkit-details-marker, .model-category > summary::-webkit-details-marker { display: none; }
   .pr-category > summary::before, .model-category > summary::before { content: '\25b8'; font-size: 9px; color: var(--ink-3); }
   .pr-category[open] > summary::before, .model-category[open] > summary::before { content: '\25be'; }
@@ -2196,8 +2197,10 @@ function principleGroups() {
 // on most changes, so the markup is driven from that set rather than the other
 // way round, and a rebuilt list opens exactly as the reader left it.
 const CATEGORY_LISTS = ['pr-filters', 'lat-filters', 'model-principles'];
-function categoryHeader(group, count = '') {
-  return `<summary><h3>${esc(group.name)}</h3><span class="pr-category-count">${esc(count)}</span></summary>`;
+// Whatever acts on the category as a whole belongs in the summary, where it
+// stays reachable with the category closed.
+function categoryHeader(group, count = '', actions = '') {
+  return `<summary><h3>${esc(group.name)}</h3><span class="pr-category-count">${esc(count)}</span>${actions}</summary>`;
 }
 function applyCategories(el) {
   el?.querySelectorAll('[data-category]').forEach(g => { g.open = !state.collapsed.has(g.dataset.category); });
@@ -2213,6 +2216,9 @@ function wireCategories(el) {
     // The browser would toggle this one disclosure. Cancel that and go through
     // the shared set instead, so the other lists agree.
     ev.preventDefault();
+    // A control in the summary acts on the category where it stands. Its own
+    // handler still runs; cancelling the default only stopped the disclosure.
+    if (ev.target.closest('button, a, input, select, textarea')) return;
     const id = group.dataset.category;
     state.collapsed.has(id) ? state.collapsed.delete(id) : state.collapsed.add(id);
     applyAllCategories();
@@ -3083,7 +3089,7 @@ document.getElementById('fit').addEventListener('click', fit);
 (function () {
   const el = document.getElementById('pr-filters');
   const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
-  el.innerHTML = principleGroups().map((g, i) => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g)}<div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button></div><div class="ctl">${labels(g.principles)}</div></details>`).join('');
+  el.innerHTML = principleGroups().map((g, i) => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g, '', `<div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button></div>`)}<div class="ctl">${labels(g.principles)}</div></details>`).join('');
   wireCategories(el);
   const repaint = repaintGraph;
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
@@ -3793,7 +3799,7 @@ function renderLatticeFilters() {
   const el = document.getElementById('lat-filters');
   if (!el) return;
   const row = p => `<div class="pr-row lat-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-lat-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-lat-positive="${p.id}" aria-label="Add ${esc(p.name)}" aria-pressed="false">✓</button><button data-lat-negative="${p.id}" aria-label="Add not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><span class="lat-name">${esc(p.name)}</span><span class="pr-actions"><button class="lnk" data-lat-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`;
-  el.innerHTML = principleGroups().map(g => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g)}<div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button></div><div class="ctl">${g.principles.map(row).join('')}</div></details>`).join('');
+  el.innerHTML = principleGroups().map(g => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g, '', `<div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button></div>`)}<div class="ctl">${g.principles.map(row).join('')}</div></details>`).join('');
   renderSubscripts(el);
   wireCategories(el);
   refreshLatticeControls();

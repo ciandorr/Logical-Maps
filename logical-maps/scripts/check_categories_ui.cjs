@@ -56,11 +56,32 @@ try{
   assert.equal(group.tagName,'DETAILS');
   assert.equal(group.firstElementChild.tagName,'SUMMARY','The summary comes first, so everything else is the hidden part');
   assert.equal(group.querySelectorAll('.pr-row').length,10,'Every row of the category is inside it');
-  assert.ok(group.querySelector('[data-category-select="all"]'),'So are its show positive and clear');
+  // What acts on the whole category stays in the summary, so a closed
+  // category can still be shown or cleared without opening it first.
+  assert.ok(group.querySelector('summary [data-category-select="all"]'),'Show positive is in the summary');
+  assert.ok(group.querySelector('summary [data-category-select="none"]'),'And so is clear');
+
+  const click=el=>el.dispatchEvent(new w.MouseEvent('click',{bubbles:true,cancelable:true}));
+
+  // A control in the summary acts on the category without opening it.
+  const shown=stem=>[...d.querySelectorAll(`#pr-filters [data-show-positive^="${stem}"]`)].filter(b=>b.getAttribute('aria-pressed')==='true').length;
+  assert.equal(shown('alpha'),10,'Every principle starts on the graph');
+  click(group.querySelector('summary [data-category-select="none"]'));
+  assert.equal(shown('alpha'),0,'Clear empties the category');
+  assert.equal(shown('beta'),10,'And leaves the other alone');
+  assert.deepEqual(state('graph'),['one:closed','two:closed'],'Without opening anything');
+  click(group.querySelector('summary [data-category-select="all"]'));
+  assert.equal(shown('alpha'),10,'Show positive puts them back');
+  assert.deepEqual(state('graph'),['one:closed','two:closed'],'Still closed');
+  const latGroup=d.querySelector('#lat-filters details[data-category="one"]');
+  click(latGroup.querySelector('summary [data-lat-select="all"]'));
+  assert.equal(w.eval('lattice.shown.length'),10,'The lattice chooses a closed category the same way');
+  assert.deepEqual(state('lattice'),['one:closed','two:closed'],'Also without opening it');
+  click(latGroup.querySelector('summary [data-lat-select="none"]'));
+  assert.equal(w.eval('lattice.shown.length'),0);
 
   // Opening one category opens it everywhere, since the three lists share one
   // collapsed set, and leaves the others alone.
-  const click=el=>el.dispatchEvent(new w.MouseEvent('click',{bubbles:true,cancelable:true}));
   click(summary('graph','one'));
   assert.deepEqual(state('graph'),['one:open','two:closed'],'Clicking a summary opens that category');
   assert.deepEqual(state('lattice'),['one:open','two:closed'],'The lattice agrees');
@@ -95,5 +116,5 @@ try{
   assert.deepEqual(state('graph'),['one:closed','two:open'],'And opens the category it is in, leaving the other closed');
 
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: categories collapse in the graph sidebar, the lattice sidebar and the theory explorer, from one shared set; a long list starts closed and a short one open; rows and group controls sit inside the disclosure; a rebuild keeps the reader\'s choice; a closed category reports its count and its assumptions; and a search opens the category it lands in.');
+  console.log('PASS: categories collapse in the graph sidebar, the lattice sidebar and the theory explorer, from one shared set; a long list starts closed and a short one open; rows sit inside the disclosure while the group\'s controls stay in the summary and work closed; a rebuild keeps the reader\'s choice; a closed category reports its count and its assumptions; and a search opens the category it lands in.');
 }finally{pages.forEach(p=>p.window.close());}

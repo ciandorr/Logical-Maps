@@ -61,7 +61,8 @@ the topic subject in each map's email link.
   checks of the viewer. Run them all after touching `viewer/template.html`;
   `check_lattice_ui.cjs` guards the separate lattice view, and
   `check_categories_ui.cjs` the collapsible principle categories shared by the
-  graph sidebar, the lattice sidebar and the theory explorer.
+  graph sidebar, the lattice sidebar and the theory explorer, and
+  `check_model_verdicts_ui.cjs` the verdict grouping on a model's page.
   `check_hasse_layout_ui.cjs` and `check_relations_ui.cjs` guard the graph
   layout convention (⊥ is the floor, arrows ascend, ∧ below its premises) and
   the relation shading and comparison readouts. Keep those invariants.

@@ -387,6 +387,10 @@
   .page dt { color: var(--ink-3); } .page dd { margin: 0; }
   .page .src { font-size: 13px; color: var(--ink-2); padding-left: 18px; }
   .page .file { margin-top: 24px; font: 11px var(--mono); color: var(--ink-3); }
+  .page h3.verdict-group { font: 600 14px/1.4 var(--sans); margin: 18px 0 4px; display: flex; align-items: baseline; gap: 8px; }
+  .page h3.verdict-group .n { font: 400 12px var(--mono); color: var(--ink-3); }
+  .page .verdict-table td.verdict-cell { width: 1%; white-space: nowrap; text-align: right; }
+  .page .derived-verdicts > summary { cursor: pointer; font-size: 13px; color: var(--ink-2); padding: 3px 0; }
   .page .formal { font: 12.5px var(--mono); background: var(--panel-2); padding: 6px 8px; border-radius: 4px; margin-top: 8px; overflow-x: auto; }
   .page .id { font: 12px var(--mono); color: var(--ink-3); margin-bottom: 8px; }
   .page table.results tr { cursor: default; } .page table.results tr[data-result], .page table.results tr[data-model] { cursor: pointer; }
@@ -573,7 +577,7 @@
     <aside class="controls" id="graph-sidebar">
       <div class="controls-scroll" id="principle-controls">
       <div id="lat-controls">
-        <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
+        <h2>Lattice <button class="lnk dim" id="lat-clear">clear all</button></h2>
         <p class="background-hint">A Hasse diagram showing all the conjunctions of the selected principles. Solid arrows denote implications shown to be non-reversible by models in the selected sources; dashed arrows denote implications which might be reversible (as far as the selected sources are concerned).</p>
         <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
       </div>
@@ -601,7 +605,7 @@
         </div>
       </div>
       <div id="graph-principles">
-        <h2>Principles <button class="lnk dim" id="pr-all">show positive</button> <button class="lnk dim" id="pr-none">clear</button></h2>
+        <h2>Principles <button class="lnk dim" id="pr-all">show positive</button> <button class="lnk dim" id="pr-none">clear all</button></h2>
         <p class="background-hint conjecture-hint">Choose a principle’s positive or negative form, then move it to background.</p>
         <div class="ctl" id="pr-filters"></div>
       </div>
@@ -2179,8 +2183,12 @@ function evidenceBadges(e) {
   return [...new Set(e.items.map(sourceOf))].map(sourceBadge).join('') + (e.items.some(x => x.status === 'conjectured') ? '<span class="badge conj">conjecture</span>' : '');
 }
 function sourceBadge(s) { return `<span class="badge source" data-source="${esc(s.id)}" style="--source-color:${sourceColor(s)}">${esc(s.name)}</span>`; }
-function verdictButton(m, c, e, compact = false) {
-  return e ? `<button class="verdict" data-verdict="${c}" data-verdict-model="${m.id}" title="View evidence for ${esc(name(c))}" aria-label="${esc(name(c))}: ${e.value ? 'satisfied' : 'violated'}${e.direct ? '' : ', derived'}; view evidence"><span class="model-flag">${e.value ? '✓' : '✗'}${e.direct ? '' : ' derived'}</span> ${compact ? '<span class="evidence-link">evidence ↗</span>' : evidenceBadges(e)}</button>` : '<span class="via">? unknown</span>';
+function verdictButton(m, c, e, compact = false, showValue = true) {
+  if (!e) return '<span class="via">? unknown</span>';
+  // A list already sorted by verdict says it once in its heading, so there the
+  // mark is dropped and only the derivation and the sources are left to report.
+  const flag = [showValue ? (e.value ? '✓' : '✗') : '', e.direct ? '' : 'derived'].filter(Boolean).join(' ');
+  return `<button class="verdict" data-verdict="${c}" data-verdict-model="${m.id}" title="View evidence for ${esc(name(c))}" aria-label="${esc(name(c))}: ${e.value ? 'satisfied' : 'violated'}${e.direct ? '' : ', derived'}; view evidence"><span class="model-flag">${flag}</span> ${compact ? '<span class="evidence-link">evidence ↗</span>' : evidenceBadges(e)}</button>`;
 }
 function principleGroups() {
   const sorted = [...P].sort((a, b) => a.name.localeCompare(b.name));
@@ -2607,8 +2615,23 @@ function renderPage(sel) {
     const m = byMid.get(sel.id);
     h += `<h1>${esc(m.name)}</h1><div class="badges">${certBadges(m)}</div>${fileLinks(m)}${certDl(m.certificate)}`;
     h += `<div class="record-summary">${writeupNote(m)}${m.description ? `<h2>Construction</h2><div class="prose">${fmt(m.description)}</div>` : ''}</div>`;
-    const st = c => verdictButton(m, c, modelEvidence(m, c));
-    h += `<h2>Principles</h2><table class="results"><tbody>${principleOrder().map(c => `<tr><td class="mono nowrap">${st(c)}</td><td><button class="lnk" data-principle="${c}">${esc(name(c))}</button></td></tr>`).join('')}</tbody></table>`;
+    // Sorted by what the model says, since that is what a reader comes here to
+    // find. A model records a handful of properties and the rest follow from
+    // them, so the derived verdicts outnumber the recorded ones several times
+    // over and wait behind a disclosure rather than burying them.
+    const verdicts = principleOrder().map(c => ({c, e: modelEvidence(m, c)}));
+    const verdictTable = list => `<table class="results verdict-table"><tbody>${list.map(({c, e}) =>
+      `<tr><td><button class="lnk" data-principle="${c}">${esc(name(c))}</button></td><td class="verdict-cell">${e ? verdictButton(m, c, e, false, false) : ''}</td></tr>`).join('')}</tbody></table>`;
+    const verdictGroup = (title, list) => {
+      const recorded = list.filter(v => !v.e || v.e.direct), derived = list.filter(v => v.e && !v.e.direct);
+      return `<h3 class="verdict-group">${title} <span class="n">${list.length}</span></h3>`
+        + (recorded.length ? verdictTable(recorded) : derived.length ? '' : '<p class="dim">—</p>')
+        + (derived.length ? `<details class="derived-verdicts"><summary>${derived.length} more, derived from the recorded properties</summary>${verdictTable(derived)}</details>` : '');
+    };
+    h += '<h2>Principles</h2>'
+      + verdictGroup('Satisfied', verdicts.filter(v => v.e?.value === true))
+      + verdictGroup('Violated', verdicts.filter(v => v.e?.value === false))
+      + verdictGroup('Unknown', verdicts.filter(v => !v.e));
     if (m.notes) h += `<h2>Notes</h2><div class="prose">${fmt(m.notes)}</div>`;
     if ((m.checks || []).length) h += `<h2>Checks</h2><ul class="src">${m.checks.map(x => `<li class="mono">${esc(x)}</li>`).join('')}</ul>`;
     h += sourceList([m]);

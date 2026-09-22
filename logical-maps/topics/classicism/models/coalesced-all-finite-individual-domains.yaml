@@ -6,6 +6,7 @@ satisfies:
 - actuality
 - barcan-r
 - necessary-barcan-r
+- necessary-strong-leibniz-t
 violates:
 - distinctness-necessary-r
 - witnessed-possibility-r
@@ -64,7 +65,10 @@ notes: 'Recorded to witness the consistency with C of the sentence through which
   BF holds at the one-world components trivially, so $\Box$BF holds. No Pure Contingency fails, since
   the pure sentence that there are at least two individuals is true at the root and false at the first
   component. Possibility (pure) fails, since Atomlessness is consistent with C but false at every world:
-  each component is a one-world model and the root proposition is an atom.'
+  each component is a one-world model and the root proposition is an atom. The type-t Strong Leibniz Biconditionals
+  hold necessarily: at the root, the singleton of the arrow to component $n$ becomes that component’s
+  identity under it and empty under every other arrow, and the root proposition becomes empty under every
+  non-identity arrow, so every singleton is a strong world; the components are one-world models.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -86,3 +90,8 @@ changes:
   violates:
   - no-pure-contingency-r
   - possibility-schema-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added □Strong Leibniz Biconditionals (type t); see the notes.
+  satisfies:
+  - necessary-strong-leibniz-t

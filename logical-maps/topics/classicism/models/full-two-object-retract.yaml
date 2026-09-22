@@ -14,6 +14,7 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- strong-leibniz-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -41,7 +42,13 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
   $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
   what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
-  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.'
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. The type-t
+  Strong Leibniz Biconditionals fail at $W_0$: the possible proposition $\{h\}$ has only itself as a candidate
+  strong world below it, but under $h$ it becomes $\{x : x\circ h=h\}=\{\mathrm{id}_{W_1},k\}$, which
+  the proposition $\{\mathrm{id}_{W_1}\}$ of $W_1$’s full domain separates, so $\{h\}$ does not necessarily
+  settle every proposition. Since Atomicity holds in this full model, this shows that Atomicity (type
+  t) alone does not yield the type-t Strong Leibniz Biconditionals; BF (type t) fails here, $h$ acting
+  non-surjectively from a four-element to an eight-element domain.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -73,3 +80,8 @@ changes:
   - separated-structure-r
   - independence-signature-r
   - distinctness-signature-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Strong Leibniz Biconditionals (type t) at W0; see the notes.
+  violates:
+  - strong-leibniz-t

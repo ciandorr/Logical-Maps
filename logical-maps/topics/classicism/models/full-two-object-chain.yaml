@@ -5,6 +5,7 @@ satisfies:
 - necessary-atomicity-r
 - necessary-actuality
 - relational-choice-r
+- necessary-strong-leibniz-t
 violates:
 - fregean-axiom
 - no-pure-contingency-r
@@ -40,7 +41,10 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
   $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
   what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
-  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.'
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. The type-t
+  Strong Leibniz Biconditionals hold necessarily: at $W_0$ the singleton $\{k\}$ becomes $\{\mathrm{id}_{W_1}\}$
+  under $k$ and $\{\mathrm{id}_{W_0}\}$ becomes empty, so both singletons are strong worlds; at $W_1$
+  there is one arrow and one non-bottom proposition.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -77,3 +81,8 @@ changes:
   - separated-structure-r
   - independence-signature-r
   - distinctness-signature-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added □Strong Leibniz Biconditionals (type t); see the notes.
+  satisfies:
+  - necessary-strong-leibniz-t

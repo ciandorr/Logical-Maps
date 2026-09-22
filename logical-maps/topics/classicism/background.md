@@ -180,7 +180,8 @@ every entity of its type, including ones that do not actually exist. The
 Weak Leibniz Biconditionals, $\forall X\, .\,\Diamond_\sigma X\to\exists W\, .\,
 \operatorname{WWorld}_\sigma(W)\land W\le X$, are the map's Atomicity; the
 Strong Leibniz Biconditionals replace $\operatorname{WWorld}$ by
-$\operatorname{SWorld}$. In both, the right-to-left direction is a theorem of C.
+$\operatorname{SWorld}$. In both, the right-to-left direction is a theorem of C. The type-$t$ instance
+of the strong form is recorded separately, as is done for Atomicity.
 
 Strong Possibility uses the distinctness-preserving modality of §2.6, p. 42:
 

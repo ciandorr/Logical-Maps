@@ -1,0 +1,28 @@
+id: atomicity-t-and-bf-t-imply-strong-leibniz-t
+premises:
+- atomicity-t
+- barcan-t
+conclusion: strong-leibniz-t
+status: proved
+certificate:
+  source_id: bacon-2024-book
+  produced_by: Andrew Bacon; set as Exercise 8.12, type-t instance written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Exercise 8.12,
+  p. 166.
+source_names:
+- Philosophical Introduction to HOL
+proof: Let $w$ be an atom below the possible $p$. For each $q$, $w\le q\lor w\le\neg q$ is true and, being
+  a disjunction of two necessities, necessary by 4; so $\forall q\, .\,\Box(w\le q\lor w\le\neg q)$. BF
+  (type t), for the property $\lambda q\, .\,w\le q\lor w\le\neg q$, gives $\Box\forall q\, .\,w\le q\lor
+  w\le\neg q$. With $\Diamond w$, which is $w\ne\bot$, $w$ is a strong world.
+references:
+- paper: bacon-2024-book
+  role: proof
+  locator: §8.2, Exercise 8.12, p. 166
+notes: ''

@@ -62,6 +62,17 @@ try{
   assert.equal(evidence('c').dataset.verdict,'c','And so does a derived one');
   assert.equal(row('e').querySelector('[data-verdict]'),null,'An unsettled principle has no evidence to link to');
 
+  // One line per principle: the names column shrinks to its widest name so the
+  // evidence starts just past it rather than at the far edge, and the evidence
+  // is text rather than a bordered button. jsdom lays nothing out, so this
+  // pins the rules to the markup rather than measuring the result.
+  const style=el=>w.getComputedStyle(el);
+  assert.equal(style(row('a').firstElementChild).width,'1%','The names column takes only what it needs');
+  assert.equal(style(row('a').firstElementChild).whiteSpace,'nowrap','Keeping each name on one line');
+  assert.equal(style(row('a').firstElementChild).borderBottomWidth,'0px','No rule between rows to space them apart');
+  assert.equal(style(evidence('a')).padding,'0px','And the evidence carries no button chrome');
+  assert.equal(style(evidence('a').querySelector('.badge.source')).whiteSpace,'nowrap','A source badge stays on one line');
+
   // The group heading carries the verdict, so the rows under it do not repeat
   // the mark; what is left to report is the derivation and the sources.
   assert.equal(evidence('a').querySelector('.model-flag').textContent,'','A recorded row adds no mark of its own');
@@ -76,5 +87,5 @@ try{
   assert.equal(explorer.querySelector('.model-flag').textContent,'✓','The explorer still shows the verdict itself');
 
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: a model page sorts every principle into satisfied, violated and unsettled, counts each group, leads each row with the principle, keeps the route to the evidence, and holds the derived verdicts in a closed disclosure while the ungrouped explorer list keeps its marks.');
+  console.log('PASS: a model page sorts every principle into satisfied, violated and unsettled, counts each group, leads each row with the principle, keeps the route to the evidence, holds the derived verdicts in a closed disclosure, keeps each row to a single line while the ungrouped explorer list keeps its marks.');
 }finally{w.close();}

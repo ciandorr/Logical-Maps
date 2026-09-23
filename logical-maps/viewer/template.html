@@ -2479,7 +2479,11 @@ function renderLynchpins() {
   const stored = DATA.lynchpins || {};
   if (stored.skipped) { body.innerHTML = '<p class="note">Too few questions are settled to rank the open ones.</p>'; return; }
   const rep = storedReport(stored.reports);
-  if (!rep) { body.innerHTML = '<p class="note">Ranked at build time for the topic background and each preset only.</p>'; return; }
+  if (!rep) {
+    body.innerHTML = '<p class="note">No ranking is stored for this background: rankings exist for the topic background and each preset. <button class="lnk" data-lynchpin-reset>Clear the background</button> to see one.</p>';
+    body.querySelector('[data-lynchpin-reset]').addEventListener('click', resetBackground);
+    return;
+  }
   if (rep.inconsistent_background) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; return; }
   if (!rep.rows.length) { body.innerHTML = '<p class="note">Nothing is open.</p>'; return; }
   // The class of theorems is shown as True, as elsewhere in the viewer.

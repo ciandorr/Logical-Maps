@@ -139,9 +139,12 @@ try {
   dom.window.eval("background.add('r'); renderAll(false)");
   assert.equal(body().innerHTML,'','nothing is rendered while another tab is shown');
   show(dom,'open');
-  assert.match(body().textContent,/Ranked at build time/);
+  assert.match(body().textContent,/No ranking is stored for this background/);
   assert.equal(det().querySelector('table'),null);
   assert.equal(progress().hidden,true,'no stored share for an ad-hoc background');
+  det().querySelector('[data-lynchpin-reset]').click();
+  assert.equal(keys().length,rowsNone.length,'clearing the background from the note restores the stored ranking');
+  assert.equal(progress().hidden,false);
 
   // Under a stored preset background the entailed class collapses into True.
   const dom2=page(fixture,'http://localhost/?assume=p'),doc2=dom2.window.document;

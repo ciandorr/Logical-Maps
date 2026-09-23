@@ -11,6 +11,8 @@ satisfies:
 - axiom-of-infinity-e
 - axiom-of-infinity-t
 - distinctness-preserving-collapse
+- relational-choice-r
+- necessary-relational-choice-r
 violates:
 - distinctness-necessary-r
 - boolean-completeness-r
@@ -76,7 +78,17 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse
   holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
   proposition $\{k_0\}$: under $k_n$ with $n>0$, $\Diamond q$ would need $k\circ k_n$ to be the identity,
-  impossible since $k_n$ is not injective.'
+  impossible since $k_n$ is not injective. Relational Choice holds, necessarily. The model is ideally
+  full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any
+  set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of
+  $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down
+  by $\emptyset$, so it is the intension of an element of $V^{\bar\sigma\to t}$ with extension $R$ at
+  $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the
+  metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at
+  $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\colon
+  W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model,
+  so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September
+  2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -136,3 +148,11 @@ changes:
     (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed
     by every arrow; the failures come from the other relational constants, which denote top. No verdict
     changes.'
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Added Relational Choice and its necessitation at Cian Dorr’s direction: ideally full models
+    are extensionally full at every object, and choice in the metatheory supplies the functional subrelation;
+    see the notes.'
+  satisfies:
+  - relational-choice-r
+  - necessary-relational-choice-r

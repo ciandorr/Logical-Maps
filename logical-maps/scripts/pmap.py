@@ -1146,11 +1146,25 @@ def math_assets() -> dict[str, bytes]:
     return files
 
 
+FAVICON = ROOT / "viewer" / "favicon.png"
+
+
 def write_math_assets(outdir: Path) -> None:
+    """The KaTeX assets under math/, and the favicon beside them."""
     for name, content in math_assets().items():
         path = outdir / 'math' / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(content)
+    (outdir / "favicon.png").write_bytes(FAVICON.read_bytes())
+
+
+def icon_head(math_path: str | None = 'math') -> str:
+    """The favicon: next to the math assets normally, inline for a single-file --out export."""
+    if math_path is None:
+        import base64
+        return f'<link rel="icon" type="image/png" href="data:image/png;base64,{base64.b64encode(FAVICON.read_bytes()).decode()}">'
+    prefix = math_path[:-len("math")] if math_path.endswith("math") else math_path + "/"
+    return f'<link rel="icon" type="image/png" href="{prefix}favicon.png">'
 
 
 def math_head(path: str | None = 'math') -> str:
@@ -1178,7 +1192,7 @@ def theme_head(topic_id: str | None = None, *, math_path: str | None = 'math') -
             css += "\n" + topic_css.read_text(encoding="utf-8")
     css += "\n" + (viewer / "colourblind.css").read_text(encoding="utf-8")
     js = (viewer / "theme.js").read_text(encoding="utf-8")
-    return f"<style>{css}</style>\n<script>{js}</script>\n{math_head(math_path)}"
+    return f"{icon_head(math_path)}\n<style>{css}</style>\n<script>{js}</script>\n{math_head(math_path)}"
 
 
 def site_config() -> dict:

@@ -54,7 +54,7 @@ scripts/pmap.py                       validate · build · bundle · status · l
 viewer/template.html                  the map; data embedded at build
 topics/<topic>/writeups/<id>.md       optional hand-written write-up (LaTeX math ok); otherwise generated from the record
 topics/<topic>/lean/                  Lean sources, copied into the build when present
-build/<topic>/                        index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/<id>.{md,html}, sources/, lean/
+build/<topic>/                        index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/<id>.{md,html}, sources/, lean/, math/, favicon.png
 ```
 
 ```

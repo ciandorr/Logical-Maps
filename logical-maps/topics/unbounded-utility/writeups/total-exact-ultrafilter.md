@@ -40,3 +40,38 @@ The printed analytic witness has the notation/endpoint issues documented in
 flag; it does not claim an independently checked correction of that entire
 witness. The explicit EU counterexample and elementary satisfied-axiom
 calculations above do not depend on those issues.
+
+## Failure of Comonotonic Sum Invariance
+
+**Addition: Claude (Fable 5.1), 23 September 2026.** This is a property of
+the recorded model, not a claim made in the source paper.
+
+Realize a standard Cauchy variable as $C=Q_C(U)=\tan(\pi(U-\tfrac12))$ and
+put $X=0$, $Y=C$, $Z=C_+=\max(C,0)$. All three are nondecreasing functions of
+$U$, so $(X,Z)$ and $(Y,Z)$ are comonotonic pairs. Oddness of $c_t$ and the
+symmetry of $C$ give $v_C(t)=0=v_0(t)$ for every $t$, hence $X\sim Y$.
+
+**Doubling-defect identity.** For any nonnegative random variable $V$ and
+any $F>0$,
+
+$$2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V>x)\,dx,$$
+
+since $\mathbb E[\min(V,F)]=\int_0^F P(V>x)\,dx$ and
+$\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V>x)\,dx$. For $V=C_+=\max(C,0)$ with
+$C$ standard Cauchy the right-hand side is
+$\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx$, which is positive for every $F$
+and increases to $\frac{2\ln2}{\pi}$ as $F\to\infty$.
+
+Now $X+Z=C_+$ and $Y+Z=2C_+ + C_-$ with $C_-=\min(C,0)$. Since
+$c_t(2C_++C_-)=\min(2C_+,t)$ on $\{C\ge0\}$ and $=\max(C_-,-t)$ on
+$\{C<0\}$, and $\mathbb E[\max(C_-,-t)]=-\mathbb E[\min(C_+,t)]$ by symmetry,
+
+$$v_{X+Z}(t)-v_{Y+Z}(t)
+ =2\,\mathbb E[\min(C_+,t)]-\mathbb E[\min(2C_+,t)]
+ =2\int_{t/2}^{t}P(C>x)\,dx>0\qquad\text{for every }t>0.$$
+
+So $\{t:v_{X+Z}(t)\ge v_{Y+Z}(t)\}$ is the whole domain and its reverse is
+empty: $X+Z\succ Y+Z$ while $X\sim Y$. Comonotonic Sum Invariance fails.
+The gap tends to $(2\ln2)/\pi$. `checks/comonotonic_witnesses.py` verifies
+the closed forms, the identity on an exact finite law, and the limit.

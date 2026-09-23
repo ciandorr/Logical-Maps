@@ -13,11 +13,12 @@ violates:
 - scale-invariance
 - countable-sure-thing
 - archimedean-gambles
+- comonotonic-sum-consistency
 status: proved
 certificate:
   source_id: decision-theory-unbound
   lean: stated
-  produced_by: Zachary Goodsell (cited paper)
+  produced_by: Zachary Goodsell (cited paper); Claude (Fable 5.1) (failure of Comonotonic Sum Invariance, 23 September 2026)
   checked_by: []
   date: '2026-09-08'
   recorded_by: GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation
@@ -26,11 +27,22 @@ description: |-
 sources:
 - Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix
   B, Theorem 1, pp. 690–691; Theorems 3 and 10, pp. 691, 693–695
+- 'Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/total-exact-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py.'
 notes: The scale failure is recorded from the source theorem; its printed analytic witness has apparent
   typographical issues itemized in extraction.md. This record is a literature extraction, not a separately
   audited reconstruction of that witness.
 source_names:
 - Decision Theory Unbound
+- Claude comonotonic failure 23 Sep
+checks:
+- topics/unbounded-utility/checks/comonotonic_witnesses.py
+changes:
+- date: '2026-09-23'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). A standard Cauchy C has v_C(t) = 0 = v_0(t) for every t, but with the common comonotonic summand Z = max(C,0) the clipped gap v_{0+Z}(t) − v_{C+Z}(t) = 2∫_{t/2}^{t} P(C>x)dx is positive for every t, so 0 + Z ≻ C + Z on the whole domain of truncation levels.
+  violates:
+  - comonotonic-sum-consistency
 references:
 - paper: decision-theory-unbound
   role: proof

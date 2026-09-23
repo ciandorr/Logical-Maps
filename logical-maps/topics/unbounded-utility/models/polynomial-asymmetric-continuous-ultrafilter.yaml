@@ -16,6 +16,7 @@ violates:
 - pasadena-value
 - arroyo-value
 - symmetric-neutrality
+- comonotonic-sum-consistency
 status: proved
 certificate:
   source_id: misc
@@ -30,10 +31,12 @@ sources:
 - 'GPT-6 (Codex), 9 September 2026, writeups/polynomial-asymmetric-continuous-ultrafilter.md: cutoff specialization, Pasadena/Arroyo evaluations, and explicit verification of the inherited axioms.'
 - 'Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473, Appendix B, Definition 3, Lemma 6, Remark 3 and Corollary 3, pp. 691–693: continuous clipped-expectation quotient and separate cutoff functions.'
 - 'Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549, Theorem 1, p. 24: asymmetric source model and failure of reflection even with DTU, L1 Continuity and Relative Expectation; pp. 28–33 for the named prospects.'
+- 'Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/polynomial-asymmetric-continuous-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py.'
 source_names:
 - GPT-6 cutoff calculations 9 Sep
 - Decision Theory Unbound
 - Symmetries of Value
+- Claude comonotonic failure 23 Sep
 notes: >-
   Original work: model specialization with moderate evaluation calculations.
   The asymmetric clipping method and its strong expectation/continuity
@@ -46,6 +49,14 @@ notes: >-
   formulas and convergence estimates rather than ultrafilter existence.
 checks:
 - topics/unbounded-utility/checks/calculation_factorizations.py
+- topics/unbounded-utility/checks/comonotonic_witnesses.py
+changes:
+- date: '2026-09-23'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). Y = max(C,0) + 2 min(C,0) − (2 ln 2 − 1)/π is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the clipped gap between 0 + Z and Y + Z tends to (2 ln 2)/π, so 0 + Z ≻ Y + Z.
+  violates:
+  - comonotonic-sum-consistency
 references:
 - paper: decision-theory-unbound
   role: background

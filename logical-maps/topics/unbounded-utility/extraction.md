@@ -1,4 +1,4 @@
-# Source extraction: updated 13 September 2026
+# Source extraction: updated 23 September 2026
 
 ## Cancellation and Countable Sure-Thing questions (13 September)
 
@@ -373,3 +373,53 @@ Sum Cancellation is consistent with DU + Sym + Neutrality; and a DTU model
 violating Shift Invariance (a cone-extension construction orienting a
 transfer pair against its own shift is sketched privately and not yet
 recorded).
+
+### Copula principles: comonotonic failures, a killing lemma, silver tier — 23 September 2026
+
+Zachary Goodsell asked for work on the copula sum principles, starting from
+the law-level reading of them: realize X† = Q_X(U) on the standing uniform
+and Z* = Q_Z(W) with (U, W) distributed as the copula C; then SC(C) says,
+under Stochastic Equivalence, that X ≽ Y iff X† + Z* ≽ Y† + Z* for all
+laws. Claude (Fable 5.1) verified this reading (Z* is canonical only in law,
+which is why the recorded bridges from the comonotonic, antitonic and
+independent principles need Stochastic Equivalence; for the comonotonic
+copula W = U) and recorded it in the notes of the three copula principles,
+together with the quantile-difference reduction of Comonotonic Sum
+Invariance. The Fubini remark that E[X† − Y†] with the separate Tonelli
+identities is the CDF-area preorder is the recorded `cdf-area-preorder`
+model, so DU is consistent with comonotonic invariance; no new record.
+
+Six models now record failure of Comonotonic Sum Invariance: the exact,
+continuous, geometric, asymmetric and polynomial clipped-expectation
+orderings and the eventual-dominance model (where the flag was previously
+derived from the shift failure). One witness family serves all windows:
+Z = max(C, 0) for a standard Cauchy C, X = 0, and a window-adapted neutral
+Y = C₊ + aC₋ − v; the clipped gap is 2∫_{F/2}^{F} P(C > x) dx, positive for
+every cutoff F and tending to (2 ln 2)/π. The mechanism is the identity
+2E[min(V,F)] − E[min(2V,F)] = 2∫_{F/2}^{F} P(V > x) dx.
+`checks/comonotonic_witnesses.py` verifies the closed forms, the identity
+on an exact finite law, the neutral constants and the limit. Under DU and
+DTU this settles that Expected Utility, Totality, Shift Invariance,
+Reflection Anti-Invariance, L¹ Continuity, CDF-Area Extension, Folded
+Expectation, Transfer of a Shift and Arroyo = ln 2 do not imply Comonotonic
+Sum Invariance, and that DTU alone does not.
+
+For the conjectured total comonotonic extension, the write-up gains a
+necessary condition: a killing lemma (from Stochastic Equivalence,
+dominance, mixture independence and the preservation half of comonotonic
+invariance, a pair whose survival difference and comonotonic shears combine
+into a nonpositive nonzero profile cannot satisfy X ≽ Y), an explicit killed
+pair with both areas infinite, three certificates that a pair is not killed,
+worked block regions, an accounting heuristic suggesting that no pair is
+killed in both orientations, and candidate constructions. Zachary Goodsell
+raised the conjecture's tier to silver. The conjecture's status is unchanged.
+Lean statements were regenerated and audited; every `lean: stated` claim
+still elaborates.
+
+Open after this batch: DTU + Comonotonic Sum Invariance itself (decide
+killability of regions with no lowest block; formalize the surplus
+functional; attempt the Zorn construction with the lemma as pointedness
+test); whether the region of the alternating St Petersburg gamble against
+−1/2 is killed under the comonotonic copula, which bears on the top DU
+lynchpin about Existential Copula Sum Invariance; and Independent Sum
+Cancellation for the exact CDF-area preorder.

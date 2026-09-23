@@ -369,11 +369,14 @@ three are offered on the lattice, where they act on the lattice's own choices.
 Graph descriptions occupy a reserved bottom panel, with the fixed relation legend
 above the scrolling details and a one-line foot below them. The legend leads with
 the selection itself, then the four colour keys, then the controls that act on it:
-**details**, **Hide**, **Add negation** and **Move to background**, so they cost no
-line of their own. Whether the selection can hold with the background, and which
+**details**, **Hide**, **Add negation**, **background**, and **hide equivalents**
+when the diagram is showing something the background makes equivalent to the
+selection without being part of it. They cost no line of their own. Whether the selection can hold with the background, and which
 model witnesses it, goes to the foot, out of the way of both. The standing
 instruction shows only while nothing is selected. A relation heading such as
-Converse rides on the first line it labels rather than taking one. Drag its divider or use the arrow keys to resize it;
+Converse rides on the first line it labels rather than taking one. An arrow
+states itself once; its drawn form appears separately only when the background
+let the graph drop a premise or contrapose it. Drag its divider or use the arrow keys to resize it;
 double-click or press Enter to reset. The height is remembered. Opening or closing
 details does not cover or resize the graph. The panel lists selected principles with expandable
 definitions and individual remove buttons.

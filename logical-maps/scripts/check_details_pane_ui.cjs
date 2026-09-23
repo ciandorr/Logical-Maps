@@ -50,6 +50,17 @@ try {
   w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))"); checkHint(false);
   d.querySelector('.detail-close').click(); checkHint(false);
   w.select(null); checkHint(true);
+
+  // An arrow states itself once. The drawn form is shown separately only when
+  // the background let the graph drop a premise or contrapose it, and the
+  // provenance is one thought: the badge beside the references it belongs to.
+  w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))");
+  assert.equal(d.querySelectorAll('#pop .pop-t').length, 1, 'The statement appears once, not twice over');
+  assert.equal(d.querySelector('#pop .note'), null, 'With nothing between it and itself');
+  const meta = d.querySelector('#pop .pop-meta');
+  assert.ok(meta?.querySelector('.badges .badge'), 'The source badge is on the provenance line');
+  assert.match(meta.textContent, /References:/, 'Which is the line the references are on');
+  w.select(null);
   w.select({type: 'principle', id: 'a'});
   const pop = d.getElementById('pop'), definition = pop.innerHTML;
   assert.equal(handle.getAttribute('role'), 'separator');

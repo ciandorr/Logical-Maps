@@ -152,6 +152,19 @@ try {
   assert.ok(d.querySelector('#pr-filters [data-pr-row="a"]').classList.contains('in-background'), 'As the sidebar shows');
   assert.equal(w.eval('state.focus'), null);
   w.eval('resetBackground()');
+
+  // Equivalent principles share a box, so one of them says everything the
+  // others do. Selecting one offers to clear the rest out of it.
+  pointer(label('b'));
+  assert.ok(action('equivalents'), 'A principle with a shown equivalent offers to hide it');
+  assert.equal(action('equivalents').textContent, 'hide equivalents');
+  action('equivalents').click();
+  assert.ok(w.eval('state.excluded.has("h")'), 'Which unchecks the equivalent in the sidebar');
+  assert.ok(!w.eval('state.excluded.has("b")'), 'And leaves the selection itself on the graph');
+  assert.equal(action('equivalents'), null, 'The offer is withdrawn once nothing is left to hide');
+  w.eval('state.excluded.delete("h"); repaintGraph();');
+  pointer(label('a'));
+  assert.equal(action('equivalents'), null, 'A principle with no equivalent is offered nothing');
   pointer(label('a'));
   assert.deepEqual(errors, []);
   console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, red inconsistency highlighting, bottom graph details, and hide / add negation / move to background offered on the selection.');

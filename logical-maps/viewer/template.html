@@ -430,6 +430,10 @@
   .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
   .pop .pop-l { font-size: 12px; color: var(--ink-2); margin-top: 6px; } .pop code { font: 12px var(--mono); }
   .pop .badges { display: flex; gap: 6px; margin: 6px 0; } .pop .links { margin: 4px 0 0; }
+  /* Provenance is one thought: the badges and the references it belongs to. */
+  .pop .pop-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 10px; margin: 5px 0; }
+  .pop .pop-meta .badges { display: inline-flex; margin: 0; }
+  .pop .pop-meta .pop-sources { margin: 0; }
   .pop .links .lnk + .lnk::before { content: '·'; color: var(--ink-3); margin: 0 8px 0 4px; }
 
   .ex-p.bad { background: color-mix(in srgb, var(--indep) 32%, transparent); outline: 1.5px solid var(--indep); }
@@ -2880,8 +2884,12 @@ function renderDetail() {
       const gaps = [...background].filter(p => !holds.has(p)).concat([...negativeBackground].filter(p => !fails.has(p)).map(p => '!' + p));
       if (gaps.length) h += `<p class="pop-l">Unknown assumptions: ${gaps.map(name).map(esc).join(', ')}</p>`;
     }
-    if (sel.display) h += `<div class="pop-t">${esc(sel.display)}</div><p class="note">${sel.contraposed ? 'Contrapositive, under the current assumptions.' : 'Shown under the current assumptions.'} Original result:</p>`;
-    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="badges">${certBadges(x)}</div>${sourceSummary([x])}${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">details</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
+    // The drawn form and the recorded one differ only when the background let
+    // the graph drop a premise or contrapose the arrow. Where they agree,
+    // saying it twice says nothing.
+    const recorded = sel.type === 'result' ? resultStmt(x).replace(/<[^>]*>/g, '') : '';
+    if (sel.display && sel.display !== recorded) h += `<div class="pop-t">${esc(sel.display)}</div><p class="note">${sel.contraposed ? 'Contrapositive, under the current assumptions.' : 'Shown under the current assumptions.'} Original result:</p>`;
+    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="pop-meta"><span class="badges">${certBadges(x)}</span>${sourceSummary([x])}</div>${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">details</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
     if (sel.type === 'result' && sel.premises) h += edgeContext(sel.premises, sel.conclusion);
   }
   el.innerHTML = '<button class="lnk detail-close" aria-label="Close details">×</button>' + h; el.hidden = false; el.scrollTop = 0; wire(el);
@@ -2984,8 +2992,24 @@ function selectionActions(literals) {
   let h = '';
   if (active.some(literalShown)) h += button('hide', 'Hide', `Take the selected ${plural ? 'principles' : 'principle'} off the diagram, as unchecking ${plural ? 'them' : 'it'} in the sidebar would.`);
   if (active.some(l => !literalShown(negate(l)))) h += button('negate', plural ? 'Add negations' : 'Add negation', `Show the ${plural ? 'negations' : 'negation'} too, as checking ✗ in the sidebar would.`);
-  if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'Move to background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  const peers = equivalentPeers(active);
+  if (peers.length) h += button('equivalents', 'hide equivalents', `Take ${peers.map(name).join(', ')} off the diagram: the background makes ${peers.length > 1 ? 'them' : 'it'} equivalent to what is selected, so ${peers.length > 1 ? 'they add' : 'it adds'} nothing beside it.`);
   return h;
+}
+// What the diagram is showing that the background makes equivalent to the
+// selection without being part of it. On the graph that is the rest of the
+// selection's own box, which is drawn from exactly this relation; on the
+// lattice it is the chosen literals that entail the selection and back.
+function equivalentPeers(literals) {
+  const chosen = new Set(literals);
+  const keep = q => !chosen.has(q) && byPid.has(baseId(q)) && !inBackground(baseId(q));
+  if (state.tab === 'lattice') {
+    return lattice.shown.filter(q => keep(q) && literals.some(p => latticeEntails([p], [q]) && latticeEntails([q], [p])));
+  }
+  if (!layout) return [];
+  const boxes = layout.visible.filter(n => (n.members || []).some(m => chosen.has(m)));
+  return [...new Set(boxes.flatMap(n => n.members || []))].filter(keep);
 }
 // The controls that act on the selection ride on the legend, where the reader
 // is already looking, instead of costing a line of their own in the readout.
@@ -3032,6 +3056,14 @@ function applySelectionAction(kind) {
     // What is now assumed is no longer something to shade relative to.
     state.modelId = null; state.selected = null; state.focus = null;
     saveBackground(); refreshPrincipleControls(); renderAll(true);
+    return;
+  }
+  if (kind === 'equivalents') {
+    const peers = equivalentPeers(active);
+    if (!peers.length) return;
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !peers.includes(l)); lattice.selected = null; renderLatticeFilters(); renderLattice(); }
+    else { for (const q of peers) isNegative(q) ? state.negativeShown.delete(baseId(q)) : state.excluded.add(baseId(q)); repaintGraph(); }
+    renderDetail();
     return;
   }
   if (kind === 'hide') {
@@ -3995,17 +4027,19 @@ function renderLatticeFilters() {
     title.textContent = latticeTitle(n);
     group.appendChild(title);
   });
-  svg.addEventListener('click', ev => {
-    const group = ev.target.closest('[data-lat-node]'), wire = ev.target.closest('[data-lat-edge]');
+  // Selection happens on release and only when the pointer stayed put, as on
+  // the graph. A pan that ends over empty space is not a click on nothing.
+  function handleLatticeClick(target, extend) {
+    const group = target.closest?.('[data-lat-node]'), wire = target.closest?.('[data-lat-edge]');
     if (!group && !wire) { lattice.selected = null; select(null); return; }
     lattice.selected = group ? group.dataset.latNode : wire.dataset.latEdge;
     if (group) {
       const n = lattice.nodes.find(x => x.id === group.dataset.latNode);
-      const literal = ev.target.closest('[data-principle]')?.dataset.principle;
-      if (literal) select({type: 'principle', id: literal}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
-      else if (ev.target.closest('[data-falsity]') || (n.inconsistent && !n.self.length)) select({type: 'falsity'});
-      else if (ev.target.closest('[data-truth]') || (n.top && !n.self.length)) select({type: 'truth'});
-      else if (n.self.length) select({type: 'principle', id: n.self[0]}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      const literal = target.closest('[data-principle]')?.dataset.principle;
+      if (literal) select({type: 'principle', id: literal}, extend);
+      else if (target.closest('[data-falsity]') || (n.inconsistent && !n.self.length)) select({type: 'falsity'});
+      else if (target.closest('[data-truth]') || (n.top && !n.self.length)) select({type: 'truth'});
+      else if (n.self.length) select({type: 'principle', id: n.self[0]}, extend);
       else select({type: 'selection', premises: n.generators});
       return;
     }
@@ -4016,9 +4050,13 @@ function renderLatticeFilters() {
       fromLabel: e.from.meet ? e.from.generators.map(name).join(' ∧ ') : e.from.names.join(' ≡ '),
       toLabel: e.to.meet ? e.to.generators.map(name).join(' ∧ ') : e.to.names.join(' ≡ '),
       reverses: e.reverses});
-  });
+  }
   let drag = null;
-  svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty, moved: false}; });
+  svg.addEventListener('pointerdown', ev => {
+    if (ev.button !== 0) return;
+    drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty, moved: false,
+      target: ev.target, extend: ev.shiftKey || ev.metaKey || ev.ctrlKey};
+  });
   svg.addEventListener('pointermove', ev => {
     if (!drag) return;
     const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
@@ -4026,7 +4064,8 @@ function renderLatticeFilters() {
     drag.moved = true;
     lattice.view.tx = drag.tx + dx; lattice.view.ty = drag.ty + dy; latticeApplyView();
   });
-  for (const type of ['pointerup', 'pointerleave']) svg.addEventListener(type, () => { drag = null; });
+  svg.addEventListener('pointerup', () => { if (drag && !drag.moved) handleLatticeClick(drag.target, drag.extend); drag = null; });
+  svg.addEventListener('pointerleave', () => { drag = null; });
   svg.addEventListener('wheel', ev => {
     ev.preventDefault();
     const f = Math.exp(-ev.deltaY * 0.0015), r = svg.getBoundingClientRect();

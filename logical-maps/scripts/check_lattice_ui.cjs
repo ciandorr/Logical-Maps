@@ -20,6 +20,18 @@ const fixture={topic:{id:'lat',title:'Lattice fixture',background:[],source_cata
   results:[rule('abc',['a','b'],'c'),rule('ca',['c'],'a'),rule('cb',['c'],'b'),rule('adf',['a','d'],false),rule('ea',['e'],'a'),rule('ef',['e'],'f'),rule('fe',['f'],'e')],
   models:[model('m1',['a'],['b','c','e']),model('m2',['b'],['a','c']),model('m3',['d'],['a','c'])]};
 const pages=[],errors=[];
+// The diagram selects on release, and only when the pointer stayed put, so a
+// pan is not a click. Drive it the way a pointer does.
+function tap(win,target,extend=false){
+  target.dispatchEvent(new win.MouseEvent('pointerdown',{bubbles:true,button:0,shiftKey:extend,clientX:20,clientY:20}));
+  win.document.getElementById('lat-graph').dispatchEvent(new win.MouseEvent('pointerup',{bubbles:true,button:0,shiftKey:extend}));
+}
+function drag(win,target){
+  target.dispatchEvent(new win.MouseEvent('pointerdown',{bubbles:true,button:0,clientX:20,clientY:20}));
+  const svg=win.document.getElementById('lat-graph');
+  svg.dispatchEvent(new win.MouseEvent('pointermove',{bubbles:true,clientX:120,clientY:70}));
+  svg.dispatchEvent(new win.MouseEvent('pointerup',{bubbles:true,button:0}));
+}
 function page(data=fixture){const vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
   const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),{url:'https://maps.example/?assume=',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});
   pages.push(dom);return dom;}
@@ -110,9 +122,9 @@ try{
   assert.notEqual(w.getComputedStyle(dashed[0]).strokeDasharray,w.getComputedStyle(solid[0]).strokeDasharray,'The two read differently at a glance');
 
   // Clicking reports the reading; clearing returns to the constants.
-  dashed[0].closest('[data-lat-edge]').dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+  tap(w,dashed[0].closest('[data-lat-edge]'));
   assert.match(d.getElementById('lat-detail').textContent,/converse is open/,'An open cover explains itself');
-  d.querySelector('#lat-graph [data-lat-node]').dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+  tap(w,d.querySelector('#lat-graph [data-lat-node]'));
   assert.ok(d.getElementById('lat-detail').textContent.trim().length,'A node reports something too');
   d.getElementById('lat-clear').click();
   assert.deepEqual(snap().labels.slice().sort(),['⊤','⊥'],'Clearing returns to the two constants');
@@ -164,7 +176,7 @@ try{
   const ceiling=()=>JSON.parse(w.eval('JSON.stringify(lattice.nodes.find(n=>n.top).names)'));
   assert.deepEqual(ceiling(),['⊤','A'],'The assumption joins the ceiling');
   assert.ok(d.querySelector('#lat-graph .lat-top text[data-principle="a"]'),'Under its own clickable name');
-  d.querySelector('#lat-graph .lat-top text[data-principle="a"]').dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+  tap(w,d.querySelector('#lat-graph .lat-top text[data-principle="a"]'));
   assert.ok(d.querySelector('#lat-graph .lat-top').classList.contains('rel-base'),'Clicking it selects the ceiling');
   w.eval('select(null)');
   w.eval('setAssumption("b","negative")');
@@ -189,11 +201,11 @@ try{
   // arrow read the same way here as they do there.
   w.eval('lattice.shown=[];renderLattice();');
   add('a'); add('b');
-  const pop=d.getElementById('pop'), click=el=>el.dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+  const pop=d.getElementById('pop');
   assert.equal(pop.parentElement.id,'lat-detail','The shared popup docks in the lattice');
 
   // A principle name: its own name, its statement, and the graph's shading.
-  click(d.querySelector('#lat-graph text[data-principle="a"]'));
+  tap(w,d.querySelector('#lat-graph text[data-principle="a"]'));
   assert.equal(pop.hidden,false);
   assert.equal(d.querySelector('#pop .pop-t').textContent,'A','The popup names the principle');
   assert.match(pop.textContent,/Statement of A/,'And gives its statement');
@@ -233,7 +245,7 @@ try{
   {
     // The ∧ of A and B rises through A and through B to ⊤, so its up-set has
     // arrows more than a step away.
-    click(d.querySelector('#lat-graph .lat-meet'));
+    tap(w,d.querySelector('#lat-graph .lat-meet'));
     const id=d.querySelector('#lat-graph .lat-meet').dataset.latNode;
     const groups=[...d.querySelectorAll('#lat-graph [data-lat-edge]')];
     const ends=g=>g.dataset.latEdge.split('>');
@@ -245,13 +257,13 @@ try{
     assert.ok(groups.filter(rising).every(g=>g.classList.contains('near')),'Every arrow on a path up from the selected node is marked near');
     assert.ok(groups.filter(g=>!rising(g)).every(g=>g.classList.contains('far')),'And every other arrow is marked far');
     assert.ok(+w.getComputedStyle(groups.find(g=>!rising(g))).opacity<+w.getComputedStyle(groups.find(rising)).opacity,'Far arrows are fainter');
-    click(groups.find(rising).querySelector('.lat-hit'));
+    tap(w,groups.find(rising).querySelector('.lat-hit'));
     const after=[...d.querySelectorAll('#lat-graph [data-lat-edge]')];
     assert.equal(after.filter(g=>g.classList.contains('sel')).length,1,'The clicked arrow is selected');
     assert.ok(after.filter(g=>!g.classList.contains('sel')).every(g=>g.classList.contains('far')),'And every other arrow steps back');
     w.eval('lattice.selected=null;select(null)');
     assert.ok([...d.querySelectorAll('#lat-graph [data-lat-edge]')].every(g=>!g.classList.contains('far')&&!g.classList.contains('near')),'Clearing the selection restores every arrow');
-    click(d.querySelector('#lat-graph text[data-principle="a"]'));
+    tap(w,d.querySelector('#lat-graph text[data-principle="a"]'));
   }
 
   // Two names on one node select the same node whichever is clicked; only
@@ -259,26 +271,26 @@ try{
   add('e'); add('f');
   const shared=[...d.querySelectorAll('#lat-graph .lat-node')].find(g=>g.querySelector('text[data-principle="e"]'));
   assert.ok(shared.querySelector('text[data-principle="f"]'),'E and F share a node');
-  click(shared.querySelector('text[data-principle="e"]'));
+  tap(w,shared.querySelector('text[data-principle="e"]'));
   const sharedNow=()=>[...d.querySelectorAll('#lat-graph .lat-node')].find(g=>g.querySelector('text[data-principle="e"]'));
   assert.ok(sharedNow().classList.contains('rel-base'),'Clicking E selects the node');
   assert.deepEqual(marked(),['E']);
-  click(sharedNow().querySelector('text[data-principle="f"]'));
+  tap(w,sharedNow().querySelector('text[data-principle="f"]'));
   assert.ok(sharedNow().classList.contains('rel-base'),'Clicking F selects the same node, not a node entailed by F');
   assert.deepEqual(marked(),['F'],'And the mark moves to F');
   assert.equal(d.querySelector('#pop .pop-t').textContent,'F','While the popup follows the click');
   w.eval('lattice.shown=["a","b"];renderLattice();');
-  click(d.querySelector('#lat-graph text[data-principle="a"]'));
+  tap(w,d.querySelector('#lat-graph text[data-principle="a"]'));
 
   // An ∧: the conjunction, with each conjunct and its statement.
-  click(d.querySelector('#lat-graph .lat-meet'));
+  tap(w,d.querySelector('#lat-graph .lat-meet'));
   assert.equal(d.querySelector('#pop .pop-t').textContent,'A ∧ B','The ∧ names its conjunction');
   assert.match(pop.textContent,/Statement of A/);
   assert.match(pop.textContent,/Statement of B/);
 
   // An arrow: where it comes from, and what rules the converse out.
   const settled=[...d.querySelectorAll('#lat-graph .lat-edge:not(.may-reverse)')][0];
-  click(settled.closest('[data-lat-edge]'));
+  tap(w,settled.closest('[data-lat-edge]'));
   assert.match(pop.textContent,/⇒/,'The arrow states its implication');
   assert.match(pop.textContent,/Why/,'It says where it comes from');
   assert.match(pop.textContent,/Converse/,'And reports the converse');
@@ -287,7 +299,7 @@ try{
   assert.doesNotMatch(pop.textContent,/might yet/,'A settled arrow does not hedge');
   const openArrow=[...d.querySelectorAll('#lat-graph .lat-edge.may-reverse')][0];
   assert.ok(openArrow,'The fixture has an arrow whose converse is open');
-  click(openArrow.closest('[data-lat-edge]'));
+  tap(w,openArrow.closest('[data-lat-edge]'));
   // Two wordings, since an open arrow out of the floor is asking whether the
   // node above it is the contradiction rather than whether two nodes merge.
   assert.match(pop.textContent,/might yet (collapse into one node|be the contradiction)/,'An open arrow says the two might still be one');
@@ -321,7 +333,7 @@ try{
   assert.equal(shape(['b','h']).edges['lat:b|h>lat:b'],'open','And the converse of B ∧ H ⇒ B is open again');
   const beEdge=d2.querySelector('#lat-graph [data-lat-edge="lat:b|h>lat:b"] .lat-edge');
   assert.ok(beEdge.classList.contains('may-reverse'),'The arrow is drawn as such');
-  beEdge.closest('[data-lat-edge]').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
+  tap(w2,beEdge.closest('[data-lat-edge]'));
   assert.match(d2.getElementById('pop').textContent,/outside the selected sources/,'The readout still names the hidden model, marked as outside the selection');
   d2.querySelector('.tab[data-tab="graph"]').click();
   assert.equal(sources.closest('.pane').id,'pane-graph','The selector goes back with the graph');
@@ -350,7 +362,7 @@ try{
   d2.querySelector('.tab[data-tab="lattice"]').click();
   w2.eval('lattice.shown=["a","b"];renderLattice();');
   const act=kind=>d2.querySelector(`#lat-legend [data-selection-action="${kind}"]`);
-  d2.querySelector('#lat-graph text[data-principle="a"]').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
+  tap(w2,d2.querySelector('#lat-graph text[data-principle="a"]'));
   assert.ok(act('hide')&&act('negate')&&act('background'),'A lattice principle offers the three moves');
   act('negate').click();
   assert.deepEqual(JSON.parse(w2.eval('JSON.stringify(lattice.shown)')),['a','b','!a'],'Adding the negation adds it as a generator');
@@ -359,13 +371,35 @@ try{
   act('hide').click();
   assert.deepEqual(JSON.parse(w2.eval('JSON.stringify(lattice.shown)')),['b','!a'],'Hiding drops the literal, and only that literal');
   assert.equal(w2.eval('state.focus'),null,'Nothing is selected any more');
-  d2.querySelector('#lat-graph .lat-meet').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
+  tap(w2,d2.querySelector('#lat-graph .lat-meet'));
   assert.equal(act('negate').textContent,'Add negations','An ∧ offers them for its conjuncts together');
   act('background').click();
   assert.ok(w2.eval('background.has("b") && negativeBackground.has("a")'),'Moving to background assumes each conjunct with its sign');
   assert.deepEqual(JSON.parse(w2.eval('JSON.stringify(lattice.shown)')),[],'And they stop being generators');
   assert.ok(d2.querySelector('#pane-lattice [data-lat-row="a"]').classList.contains('in-background'),'As the sidebar shows');
   w2.eval('resetBackground()');
+
+  // A pan is not a click on empty space: the diagram moves and the selection
+  // stays, as on the graph.
+  w.eval('lattice.shown=["a","b"];lattice.builtKey=null;renderLattice();');
+  tap(w,d.querySelector('#lat-graph text[data-principle="a"]'));
+  assert.equal(w.eval('state.focus'),'a','A tap selects');
+  const panned=+w.eval('lattice.view.tx');
+  drag(w,d.getElementById('lat-graph'));
+  assert.notEqual(+w.eval('lattice.view.tx'),panned,'A drag pans the diagram');
+  assert.equal(w.eval('state.focus'),'a','And leaves the selection alone');
+  assert.ok(d.querySelector('#lat-graph .lat-node.rel-base'),'The node is still marked');
+
+  // E and F are equivalent, so choosing both and selecting one offers to drop
+  // the other: it adds a name to the node and nothing else.
+  w.eval('lattice.shown=["e","f"];lattice.builtKey=null;renderLattice();');
+  tap(w,d.querySelector('#lat-graph text[data-principle="e"]'));
+  const equiv=()=>d.querySelector('#lat-legend [data-selection-action="equivalents"]');
+  assert.ok(equiv(),'The offer is made');
+  equiv().click();
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(lattice.shown)')),['e'],'And drops the equivalent, not the selection');
+  assert.equal(equiv(),null,'Then withdraws');
+  w.eval('lattice.shown=[];lattice.builtKey=null;select(null);renderLattice();');
 
   // The toolbar matches the graph's: a box to find a principle on the left,
   // Flip and Fit together on the right.

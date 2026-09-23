@@ -382,7 +382,18 @@ def analyse(data: dict, *, include_conjectures=False) -> dict:
 
 
 class Lynchpins:
-    """Score the open questions of a topic, relative to a background, by what each answer would settle."""
+    """The open questions of a topic, relative to a background, scored by what either answer settles.
+
+    A question is S ⇒ c for S a set of at most PROGRESS_PREMISES class representatives (none
+    implying another, none inconsistent) and c a representative or False outside S. It exists
+    only when no proper subset of S already proves or excludes c, so a pair question is asked
+    exactly where single premises leave it open; with no premises it asks whether c is a theorem
+    of the background, and with c = False whether S is consistent. It is settled by a proof, by an
+    exclusion (S ∧ c ⇒ False) or by a fitting model that holds S and fails c, alike. Each open
+    question is scored by the other open questions that a proof of it, or its weakest
+    countermodel, would settle. Deciding an unknown principle in a recorded model is scored the
+    same way, since a model fact settles questions exactly as a proof does.
+    """
 
     def __init__(self, data: dict, background=(), negative_background=()):
         self.names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
@@ -402,7 +413,6 @@ class Lynchpins:
         self.E = E = Engine(ids, results, models, self.background, negative)
         self.inconsistent = E.conflict([]) is not None
         self.witnesses = [m for m in models if m["id"] not in E.model_conflicts]
-        self._ext_cache = {}
         self.trivial = [] if self.inconsistent else [a for a in ids if a in E.cl([])[0]]
         self.classes, seen = [], set()
         for a in ids:
@@ -412,175 +422,353 @@ class Lynchpins:
             seen.update(cls)
             self.classes.append(cls)
         self.reps = [c[0] for c in self.classes]
-        # trig[model][a] = trials d with a ∈ cl(sat ∪ {d}): the only trials a rule with premise a can change.
-        self.trig = {}
-        for m in self.witnesses:
-            sat, tr = frozenset(m["satisfies"]), {}
-            for d in ids:
-                for a in self._cl(sat | {d}):
-                    tr.setdefault(a, []).append(d)
-            self.trig[m["id"]] = tr
-        proper = [a for a in self.reps if a not in self.trivial]
-        self.questions = ([("imp", a, b) for a in self.reps for b in self.reps if a != b]
-                          + [("con", a) for a in self.reps]
-                          + [("con", a, b) for i, a in enumerate(proper) for b in proper[i + 1:]])
-        self.status = {q: self._status(q) for q in self.questions}
-        self.open = [q for q in self.questions if self.status[q] == "open"]
+        self.proper = [a for a in self.reps if a not in self.trivial]
         self.unknown = {m["id"]: [c for c in ids if c not in E.holds[m["id"]] and c not in E.fails[m["id"]]]
                         for m in self.witnesses}
+        self._ranked = None
+        self._universe()
 
-    # -- closures ---------------------------------------------------------
+    # -- closures as bitmasks over ids ∪ {False} ----------------------------
+    def _mask(self, F):
+        bit = self.bit
+        return sum(bit[x] for x in F if x in bit)
+
     def _cl(self, S):
-        return self.E.cl(S)[0]
+        return self._mask(self.E.cl(S)[0])
 
     def _ext(self, F, c):
-        """Closure of the closed set F together with c."""
-        key = (frozenset(F), c)
+        """Closure of the closed set F together with c: only a rule that c completes can add more."""
+        bit = self.bit
+        if c == FALSE:
+            return F | bit[FALSE]
+        if F & bit[c]:
+            return F
+        key = (F, c)
         if key not in self._ext_cache:
-            self._ext_cache[key] = closure({*F, c}, self.E.rules, self.E.background)[0]
+            if any(pm & ~(F | bit[c]) == 0 for pm in self.by_prem.get(c, ())):
+                seed = [self.id_of[b] for b in self._bits(F)] + [c]
+                self._ext_cache[key] = self._mask(closure(seed, self.E.rules, self.E.background)[0])
+            else:
+                self._ext_cache[key] = F | bit[c]
         return self._ext_cache[key]
 
-    def _bad(self, F, violates=()):
-        """Engine.conflict's test: False, a negated assumption, or a violated principle."""
-        return FALSE in F or any(v in F for v in self.negative) or any(v in F for v in violates)
+    @staticmethod
+    def _bits(m):
+        while m:
+            low = m & -m
+            m ^= low
+            yield low
 
-    def _status(self, q):
-        if q[0] == "imp":
-            return self.E.pair(q[1], q[2])["status"]
-        P = q[1:]
-        if self.E.conflict(P) is not None:
-            return "inconsistent"
-        if any(all(x in self.E.holds[m["id"]] for x in P) for m in self.witnesses):
-            return "consistent"
-        return "open"
+    @staticmethod
+    def _count(m):
+        return bin(m).count("1")
 
-    # -- answers ----------------------------------------------------------
+    def _universe(self):
+        """Enumerate the questions, their status, and the closures the scores need."""
+        from itertools import combinations
+        E, atoms = self.E, self.proper
+        self.bit = bit = {x: 1 << i for i, x in enumerate([*self.ids, FALSE])}
+        self.id_of = {b: x for x, b in bit.items()}
+        self.BAD = BAD = bit[FALSE] | sum(bit[v] for v in self.negative if v in bit)
+        self.ALL = ALL = sum(bit[a] for a in atoms)
+        self._ext_cache = {}
+        self.by_prem = {}
+        for _, prem, _c in E.rules:
+            pm = self._mask(prem)
+            for x in prem:
+                self.by_prem.setdefault(x, []).append(pm)
+        # Premises from which False or a denied principle can be reached: only a rule
+        # concluding one of these can turn a question into an exclusion.
+        toward, grow = {x for x in self.ids if bit[x] & BAD}, True
+        while grow:
+            grow = False
+            for _, prem, concl in E.rules:
+                if (concl == FALSE or concl in toward) and not prem <= toward:
+                    toward |= prem
+                    grow = True
+        self.toward_bad = toward
+        # sets[j] = (premise ids, premise mask, closure mask); qmask/settled/openmask are conclusion
+        # masks per set; qfalse is the status of the consistency question (None: not asked).
+        self.sets, self.qmask, self.settled, self.qfalse = [], [], [], []
+        self.wit = [(self._mask(E.holds[m["id"]]), self._mask(E.fails[m["id"]])) for m in self.witnesses]
+        if self.inconsistent:
+            self.openmask, self.openq, self.T = [], [], {}
+            return
+        single = {a: self._cl((a,)) for a in atoms}
+        inconsistent = sum(bit[a] for a in atoms if single[a] & BAD)
+        conclusions = ALL & ~inconsistent  # ∅ already excludes an inconsistent principle
+        fails0 = 0
+        for _, Fm in self.wit:
+            fails0 |= Fm
+        self.sets.append(((), 0, self._cl(())))
+        self.qmask.append(ALL)
+        self.settled.append(ALL & (fails0 | inconsistent))
+        self.qfalse.append(None)
+        cons = [a for a in atoms if not single[a] & BAD]
+        pairs = {}
+        for a, b in combinations(cons, 2):
+            if not (single[a] & bit[b] or single[b] & bit[a]):
+                pairs[a, b] = self._cl((a, b))
+        excl1 = {a: 0 for a in atoms}
+        for (a, b), F in pairs.items():
+            if F & BAD:
+                excl1[a] |= bit[b]
+                excl1[b] |= bit[a]
+        for a in atoms:
+            F, held = single[a], [Fm for H, Fm in self.wit if H & bit[a]]
+            self.sets.append(((a,), bit[a], F))
+            if F & BAD:
+                self.qmask.append(0)
+                self.settled.append(0)
+                self.qfalse.append("proved")
+                continue
+            refuted = 0
+            for Fm in held:
+                refuted |= Fm
+            g = conclusions & ~bit[a]
+            self.qmask.append(g)
+            self.settled.append(g & (F | excl1[a] | refuted))
+            self.qfalse.append("refuted" if held else "open")
+        self.T = {}
+        for (a, b), F in pairs.items():
+            pm = bit[a] | bit[b]
+            j = len(self.sets)
+            held = [Fm for H, Fm in self.wit if H & pm == pm]
+            self.sets.append(((a, b), pm, F))
+            if F & BAD:
+                self.qmask.append(0)
+                self.settled.append(0)
+                self.qfalse.append("proved")
+                continue
+            refuted = 0
+            for Fm in held:
+                refuted |= Fm
+            g = conclusions & ~(pm | single[a] | single[b] | excl1[a] | excl1[b])
+            s = g & (F | refuted)
+            for low in self._bits(g & ~s):
+                X = self._ext(F, self.id_of[low])
+                if X & BAD:
+                    s |= low
+                else:
+                    self.T[j, low] = X
+            self.qmask.append(g)
+            self.settled.append(s)
+            self.qfalse.append("refuted" if held else "open")
+        self.openmask = [g & ~s for g, s in zip(self.qmask, self.settled)]
+        for j, (S, pm, F) in enumerate(self.sets):
+            if len(S) < 2:
+                for low in self._bits(self.openmask[j]):
+                    self.T[j, low] = self._ext(F, self.id_of[low])
+        # Open questions with a principle conclusion, indexed for the scores.
+        self.openq = [(j, low) for j in range(len(self.sets)) for low in self._bits(self.openmask[j])]
+        self.sets_with = {a: 0 for a in atoms}   # sets whose closure contains a
+        self.tidx = {a: 0 for a in atoms}        # open questions whose closure with the conclusion contains a
+        for j, (S, pm, F) in enumerate(self.sets):
+            for low in self._bits(F & ALL):
+                self.sets_with[self.id_of[low]] |= 1 << j
+        for k, (j, low) in enumerate(self.openq):
+            for x in self._bits(self.T[j, low] & ALL):
+                self.tidx[self.id_of[x]] |= 1 << k
+        self.set_index = {S: j for j, (S, _, _) in enumerate(self.sets)}
+        # Per witness: unknown conclusions d, cl(sat ∪ {d}), which premise atoms each d would
+        # bring in (the only trials a new rule can change), and the sets it already holds.
+        self.trig, self.base, self.vmask = [], [], []
+        for (H, Fm), m in zip(self.wit, self.witnesses):
+            tr = {a: 0 for a in atoms}
+            for low in self._bits(ALL & ~H & ~Fm):
+                for x in self._bits(self._ext(H, self.id_of[low]) & ALL):
+                    tr[self.id_of[x]] |= low
+            self.trig.append(tr)
+            self.base.append([j for j, (S, pm, F) in enumerate(self.sets) if pm & ~H == 0])
+            self.vmask.append(BAD | self._mask(m["violates"]))
+
+    # -- status -------------------------------------------------------------
+    def open_questions(self):
+        """Every open question as (premise ids, conclusion id)."""
+        out = [(self.sets[j][0], self.id_of[low]) for j, low in self.openq]
+        out += [(S, FALSE) for (S, _, _), st in zip(self.sets, self.qfalse) if st == "open"]
+        return out
+
+    def progress(self) -> dict:
+        """Share of the questions settled; see the class docstring."""
+        by = [[0, 0], [0, 0], [0, 0]]
+        for (S, _, _), g, s, st in zip(self.sets, self.qmask, self.settled, self.qfalse):
+            by[len(S)][0] += self._count(g) + (st is not None)
+            by[len(S)][1] += self._count(s) + (st in ("proved", "refuted"))
+        questions, settled = sum(q for q, _ in by), sum(x for _, x in by)
+        out = {"premises": PROGRESS_PREMISES, "questions": questions, "settled": settled, "open": questions - settled, "by_premises": by}
+        if self.inconsistent:
+            out["inconsistent_background"] = True
+        return out
+
+    # -- answers ------------------------------------------------------------
+    def _subsets_of(self, H):
+        """Indices of the premise sets a model holding H holds."""
+        from itertools import combinations
+        atoms = [self.id_of[low] for low in self._bits(H & self.ALL)]
+        out = [0]
+        out += [self.set_index[(a,)] for a in atoms if (a,) in self.set_index]
+        out += [self.set_index[a, b] for a, b in combinations(atoms, 2) if (a, b) in self.set_index]
+        out += [self.set_index[b, a] for a, b in combinations(atoms, 2) if (b, a) in self.set_index]
+        return out
+
+    def _total(self, newly, newfalse, skip):
+        if skip is not None:
+            j, c = skip
+            if c == FALSE:
+                newfalse.discard(j)
+            elif j in newly:
+                newly[j] &= ~self.bit[c]
+        return sum(self._count(m & self.openmask[j]) for j, m in newly.items()) + sum(1 for j in newfalse if self.qfalse[j] == "open")
+
     def with_rule(self, premises, conclusion, skip=None) -> int:
         """Other open questions settled by adding the Horn rule premises ⇒ conclusion."""
-        P, c, E = frozenset(premises), conclusion, self.E
-
-        def cl2(S):
-            F = self._cl(S)
-            return F if (c in F or not P <= F) else self._ext(F, c)
-
-        holds2, fails2, changed = {}, {}, []
-        for m in self.witnesses:
-            mid, sat, viol = m["id"], frozenset(m["satisfies"]), m["violates"]
-            H, Fl = E.holds[mid], E.fails[mid]
-            grew = P <= H
-            if grew:
-                H2 = cl2(sat)
-                if self._bad(H2, viol):
-                    continue  # no longer a model under the rule; impossible for an open question
-                H = H2 - {FALSE}
-            tr = self.trig[mid]
-            trials = set(self.ids) if not P else set(tr.get(next(iter(P)), ()))
-            for a in P:
-                trials &= set(tr.get(a, ()))
-            new = {d for d in trials if d not in Fl and self._bad(cl2(sat | {d}), viol)}
-            if grew or new:
-                changed.append(mid)
-                holds2[mid], fails2[mid] = H, (Fl | new) if new else Fl
-
-        n = 0
-        for q in self.open:
-            if q == skip:
-                continue
-            if q[0] == "imp":
-                a, b = q[1], q[2]
-                Fa = cl2(frozenset((a,)))
-                if b in Fa or self._bad(Fa) or self._bad(cl2(frozenset((a, b)))):
-                    n += 1
-                elif any(a in holds2[mid] and b in fails2[mid] for mid in changed):
-                    n += 1
+        bit, BAD, c = self.bit, self.BAD, conclusion
+        S = tuple(premises)
+        newly, newfalse = {}, set()
+        js = -1
+        for x in S:
+            js &= self.sets_with[x]
+        js &= (1 << len(self.sets)) - 1
+        for low in self._bits(js):
+            j = low.bit_length() - 1
+            X = self._ext(self.sets[j][2], c)
+            if X & BAD:
+                newly[j] = self.openmask[j]
+                newfalse.add(j)
             else:
-                Pq = frozenset(q[1:])
-                if self._bad(cl2(Pq)) or any(Pq <= holds2[mid] for mid in changed):
-                    n += 1
-        return n
+                newly[j] = self.openmask[j] & X
+        if c == FALSE or c in self.toward_bad:
+            ks = -1
+            for x in S:
+                ks &= self.tidx[x]
+            ks &= (1 << len(self.openq)) - 1
+            for low in self._bits(ks):
+                j, cb = self.openq[low.bit_length() - 1]
+                if newly.get(j, 0) & cb:
+                    continue
+                if self._ext(self.T[j, cb], c) & BAD:
+                    newly[j] = newly.get(j, 0) | cb
+        pmS = sum(bit[x] for x in S)
+        for i, (H, Fm) in enumerate(self.wit):
+            grew = pmS & ~H == 0
+            H2 = self._ext(H, c) if grew else H
+            if H2 & self.vmask[i]:
+                continue  # no longer a model under the rule; impossible for an open question
+            D = self.ALL & ~H & ~Fm
+            for x in S:
+                D &= self.trig[i][x]
+            NF = 0
+            for low in self._bits(D):
+                if self._ext(self._ext(H, self.id_of[low]), c) & self.vmask[i]:
+                    NF |= low
+            if H2 != H:
+                F2 = Fm | NF
+                for j in self._subsets_of(H2):
+                    newly[j] = newly.get(j, 0) | (self.openmask[j] & F2)
+                    newfalse.add(j)
+            elif NF:
+                for j in self.base[i]:
+                    newly[j] = newly.get(j, 0) | (self.openmask[j] & NF)
+        return self._total(newly, newfalse, skip)
 
     def with_model(self, satisfies, violates, skip=None) -> int:
         """Other open questions settled by a model satisfying `satisfies` and violating `violates`."""
-        sat = frozenset(satisfies)
-        F = self._cl(sat)
-        if self._bad(F, violates):
+        V = self.BAD | self._mask(violates)
+        H = self._cl(satisfies)
+        if H & V:
             return 0  # not a model
-        memo = {}
+        Fm = 0
+        for low in self._bits(self.ALL & ~H):
+            if self._ext(H, self.id_of[low]) & V:
+                Fm |= low
+        newly, newfalse = {}, set()
+        for j in self._subsets_of(H):
+            newly[j] = self.openmask[j] & Fm
+            newfalse.add(j)
+        return self._total(newly, newfalse, skip)
 
-        def fails(d):
-            if d not in memo:
-                memo[d] = self._bad(self._ext(F, d), violates)
-            return memo[d]
-
-        n = 0
-        for q in self.open:
-            if q == skip:
-                continue
-            if q[0] == "imp":
-                n += q[1] in F and fails(q[2])
-            else:
-                n += all(x in F for x in q[1:])
-        return n
-
-    # -- ranking ----------------------------------------------------------
-    def rank(self) -> dict:
-        implications, consistency, checks = [], [], []
-        for q in self.open:
-            if q[0] == "imp":
-                a, b = q[1], q[2]
-                implications.append({"premise": a, "conclusion": b,
-                                     "if_proved": self.with_rule([a], b, q),
-                                     "if_refuted": self.with_model([a], [b], q)})
-            else:
-                P = list(q[1:])
-                consistency.append({"principles": P, "if_model": self.with_model(P, [], q),
-                                    "if_excluded": self.with_rule(P, FALSE, q)})
-        for m in self.witnesses:
-            for c in self.unknown[m["id"]]:
-                checks.append({"model": m["id"], "principle": c,
-                               "if_satisfies": self.with_model([*m["satisfies"], c], m["violates"]),
-                               "if_violates": self.with_model(m["satisfies"], [*m["violates"], c])})
-        implications.sort(key=lambda r: (-max(r["if_proved"], r["if_refuted"]), -min(r["if_proved"], r["if_refuted"])))
-        consistency.sort(key=lambda r: (-max(r["if_model"], r["if_excluded"]), -min(r["if_model"], r["if_excluded"])))
-        checks.sort(key=lambda r: (-max(r["if_satisfies"], r["if_violates"]), -min(r["if_satisfies"], r["if_violates"])))
-        return {
-            "inconsistent_background": self.inconsistent,
-            "classes": self.classes, "trivial": self.trivial,
-            "fitting_models": [m["id"] for m in self.witnesses],
-            "implication_questions": len(self.reps) * (len(self.reps) - 1),
-            "open": {"implications": sum(1 for q in self.open if q[0] == "imp"),
-                     "consistency": sum(1 for q in self.open if q[0] == "con" and len(q) == 2),
-                     "joint_consistency": sum(1 for q in self.open if q[0] == "con" and len(q) == 3)},
-            "implications": implications, "consistency": consistency, "model_checks": checks,
-        }
-
+    # -- ranking ------------------------------------------------------------
+    def rank(self, top: int = 50) -> dict:
+        """Open questions and model checks, best first, each scored for both answers."""
+        if self._ranked is None:
+            rows = []
+            for j, low in self.openq:
+                S, c = self.sets[j][0], self.id_of[low]
+                rows.append({"kind": "question", "premises": list(S), "conclusion": c,
+                             "yes": self.with_rule(S, c, (j, c)), "no": self.with_model(S, [c], (j, c))})
+            for j, st in enumerate(self.qfalse):
+                if st == "open":
+                    S = self.sets[j][0]
+                    rows.append({"kind": "question", "premises": list(S), "conclusion": FALSE,
+                                 "yes": self.with_rule(S, FALSE, (j, FALSE)), "no": self.with_model(S, [], (j, FALSE))})
+            for i, m in enumerate(self.witnesses):
+                H, Fm = self.wit[i]
+                for low in self._bits(self.ALL & ~H & ~Fm):
+                    p = self.id_of[low]
+                    rows.append({"kind": "check", "model": m["id"], "principle": p,
+                                 "yes": self.with_model([*m["satisfies"], p], m["violates"]),
+                                 "no": self.with_model(m["satisfies"], [*m["violates"], p])})
+            rows.sort(key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), r["kind"], str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle")))))
+            self._ranked = rows
+        p = self.progress()
+        return {"inconsistent_background": self.inconsistent, "classes": self.classes, "trivial": self.trivial,
+                "fitting_models": [m["id"] for m in self.witnesses], "progress": p,
+                "open": p["open"], "rows": self._ranked[:top]}
 
 LYNCHPIN_MAX_OPEN = 0.75  # bundles skip a map in which more of its implication questions than this are open
+PROGRESS_PREMISES = 2  # the settled share counts implication questions with up to this many premises
+_PROGRESS_CACHE: dict = {}
 
 
-def _open_share(report: dict) -> float:
-    n = report["implication_questions"]
-    return report["open"]["implications"] / n if n else 0.0
+def _engines(data: dict) -> list:
+    """(background id, name, Lynchpins) under the topic background and each preset, cached on the records."""
+    key = json.dumps([data["topic"].get("id"), data["topic"].get("background", []), data["topic"].get("background_presets", []),
+                      [p["id"] for p in data["principles"]],
+                      [(r["id"], sorted(r["premises"]), r["conclusion"], r["status"]) for r in data["results"]],
+                      [(m["id"], sorted(m["satisfies"]), sorted(m["violates"]), m["status"]) for m in data["models"]]],
+                     sort_keys=True, default=str)
+    if key not in _PROGRESS_CACHE:
+        engines = [(None, None, Lynchpins(data))]
+        engines += [(p["id"], p["name"], Lynchpins(data, p["principles"])) for p in data["topic"].get("background_presets", [])]
+        _PROGRESS_CACHE.clear()
+        _PROGRESS_CACHE[key] = engines
+    return _PROGRESS_CACHE[key]
 
 
-def lynchpin_report(data: dict, *, sparse_ok: bool = True) -> dict:
+def _open_share(p: dict) -> float:
+    return p["open"] / p["questions"] if p["questions"] else 0.0
+
+
+def progress_report(data: dict) -> list[dict]:
+    """The settled share under the topic background and under each preset; see Lynchpins.progress."""
+    return [{"background": bid, "name": name, "principles": L.background, "negative": [], **L.progress()}
+            for bid, name, L in _engines(data)]
+
+
+def lynchpin_report(data: dict, *, sparse_ok: bool = True, top: int = 50) -> dict:
     """Rankings under the topic background alone and under each background preset.
 
-    With sparse_ok false, a map in which most implication questions are still open
-    is not ranked: there every answer settles many others only because almost
-    nothing is recorded, and ranking it costs minutes for nothing.
+    With sparse_ok false, a map in which most questions are still open is not ranked: there
+    every answer settles many others only because almost nothing is recorded, and ranking it
+    costs minutes for nothing.
     """
-    L = Lynchpins(data)
-    n = len(L.reps) * (len(L.reps) - 1)
-    share = sum(1 for q in L.open if q[0] == "imp") / n if n else 0.0
+    engines = _engines(data)
+    share = _open_share(engines[0][2].progress())
     if not sparse_ok and share > LYNCHPIN_MAX_OPEN:
-        return {"skipped": f"{share:.0%} of the implication questions are open, so the map is too sparse for lynchpins to mean anything",
+        return {"skipped": f"{share:.0%} of the questions are open, so the map is too sparse for lynchpins to mean anything",
                 "reports": []}
-    reports = [{"background": None, "name": None, "principles": L.background, **L.rank()}]
-    for p in data["topic"].get("background_presets", []):
-        Lp = Lynchpins(data, p["principles"])
-        reports.append({"background": p["id"], "name": p["name"], "principles": Lp.background, **Lp.rank()})
-    return {"skipped": None, "reports": reports}
+    return {"skipped": None, "reports": [{"background": bid, "name": name, "principles": L.background, "negative": [], **L.rank(top)}
+                                         for bid, name, L in engines]}
+
+
+def progress_text(p: dict) -> str:
+    """One line for reports: the share as the viewer shows it, then the counts."""
+    if p.get("inconsistent_background") or not p["questions"]:
+        return "no settled share: the background is inconsistent" if p.get("inconsistent_background") else "no questions"
+    pct = 100 if not p["open"] else min(99, 100 * p["settled"] // p["questions"])
+    k = "two" if p["premises"] == 2 else p["premises"]
+    return f"{pct}% of questions with up to {k} premises settled ({p['settled']} of {p['questions']})"
 
 
 def _lynchpin_label(report: dict, names: dict):
@@ -590,8 +778,11 @@ def _lynchpin_label(report: dict, names: dict):
     return lambda x: title if x in trivial else names.get(x, x)
 
 
-def _by_min(rows, k1, k2):
-    return sorted(rows, key=lambda r: (-min(r[k1], r[k2]), -(r[k1] + r[k2])))
+def lynchpin_row_text(r: dict, nm) -> str:
+    """S ⇒ c for a question, model: principle for a model check."""
+    if r["kind"] == "check":
+        return f"{r['model']}: {nm(r['principle'])}"
+    return f"{' ∧ '.join(nm(x) for x in r['premises']) or 'True (⊤)'} ⇒ {nm(r['conclusion'])}"
 
 
 def _lynchpin_heading(report: dict) -> str:
@@ -605,24 +796,13 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     o = [f"-- {_lynchpin_heading(report)} --"]
     if report["inconsistent_background"]:
         return o + ["background is inconsistent; nothing is open"]
-    op = report["open"]
-    o.append(f"{len(report['classes'])} classes, {len(report['fitting_models'])} fitting models; open: "
-             f"{op['implications']} implications, {op['joint_consistency']} joint consistency, {op['consistency']} consistency")
-    if _open_share(report) > LYNCHPIN_MAX_OPEN:
-        o.append(f"note: {_open_share(report):.0%} of the implication questions are open; these scores mostly reflect how little is recorded")
-    imp = report["implications"]
-    o += ["implications, ranked by what a proof settles (if proved / if refuted):"]
-    o += [f"{r['if_proved']:5d} /{r['if_refuted']:4d}   {nm(r['premise'])} ⇒ {nm(r['conclusion'])}"
-          for r in sorted(imp, key=lambda r: (-r["if_proved"], -r["if_refuted"]))[:top]]
-    o += ["implications, ranked by the smaller of the two:"]
-    o += [f"{r['if_proved']:5d} /{r['if_refuted']:4d}   {nm(r['premise'])} ⇒ {nm(r['conclusion'])}"
-          for r in _by_min(imp, "if_proved", "if_refuted")[:top]]
-    o += ["consistency (if a model / if excluded):"]
-    o += [f"{r['if_model']:5d} /{r['if_excluded']:4d}   {' ∧ '.join(nm(x) for x in r['principles'])}"
-          for r in report["consistency"][:top]]
-    o += ["model checks (if satisfies / if violates):"]
-    o += [f"{r['if_satisfies']:5d} /{r['if_violates']:4d}   {r['model']}: {nm(r['principle'])}"
-          for r in report["model_checks"][:top]]
+    o.append(f"{len(report['classes'])} classes, {len(report['fitting_models'])} fitting models; "
+             f"{report['open']} open questions with up to {PROGRESS_PREMISES} premises")
+    o.append(progress_text(report["progress"]))
+    if _open_share(report["progress"]) > LYNCHPIN_MAX_OPEN:
+        o.append(f"note: {_open_share(report['progress']):.0%} of the questions are open; these scores mostly reflect how little is recorded")
+    o += ["ranked by what either answer settles (if yes / if no):"]
+    o += [f"{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}" for r in report["rows"][:top]]
     return o
 
 
@@ -632,45 +812,34 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
     names[FALSE] = "False (⊥)"
     if lynch["skipped"]:
         return [f"Not ranked: {lynch['skipped']}. Bundles rank a map once at most {LYNCHPIN_MAX_OPEN:.0%} of its "
-                f"implication questions are open; `python3 scripts/pmap.py lynchpins {topic_id}` ranks it regardless.", ""]
-    o = ["Answering a lynchpin conjecture settles many other open questions. Each row scores an open "
-         "question by the number of *other* open questions, between equivalence classes, that stop being "
-         "open once the answer joins the proved records: implications, joint consistency of two principles, "
-         "and consistency of one. Both answers are scored, because proving a strong conjecture settles "
-         "everything below it while refuting a weak one settles everything above it; a question with two "
-         "high scores is worth answering either way. A refutation is scored by its least informative "
-         "countermodel, so an actual model settles at least as much. Model checks score deciding an "
-         "unknown verdict inside a recorded model. Under a background, only models of that background "
-         "count and the class of its theorems is named after it (True, with no preset). Recompute with "
-         f"`python3 scripts/pmap.py lynchpins {topic_id}`.", ""]
+                f"questions are open; `python3 scripts/pmap.py lynchpins {topic_id}` ranks it regardless.", ""]
+    o = ["Answering a lynchpin conjecture settles many other open questions. A question is S ⇒ c for S "
+         "at most two principle classes (True, with none) and c a class or False, asked only where no "
+         "smaller premise set already proves or excludes c; S ⇒ False asks whether S is consistent. A "
+         "question is settled alike by a proof, by an exclusion (S ∧ c ⇒ False) or by a recorded model "
+         "that holds S and fails c. Each row scores an open question by the number of *other* open "
+         "questions that stop being open once the answer joins the proved records. Both answers are "
+         "scored, because proving a strong conjecture settles everything below it while refuting a weak "
+         "one settles everything above it; a question with two high scores is worth answering either "
+         "way. A refutation is scored by its least informative countermodel, so an actual model settles "
+         "at least as much. A model check (model: principle) scores deciding an unknown verdict inside "
+         "a recorded model, which settles questions exactly as a proof does. Under a background, only "
+         "models of that background count and the class of its theorems is named after it (True, with "
+         f"no preset). Recompute with `python3 scripts/pmap.py lynchpins {topic_id}`.", ""]
     for rep in lynch["reports"]:
         nm = _lynchpin_label(rep, names)
         o += [f"### {_lynchpin_heading(rep)}", ""]
         if rep["inconsistent_background"]:
             o += ["The background is inconsistent; nothing is open under it.", ""]
             continue
-        op = rep["open"]
-        o += [f"{len(rep['classes'])} classes and {len(rep['fitting_models'])} fitting models. Open: "
-              f"{op['implications']} implications, {op['joint_consistency']} joint-consistency questions, "
-              f"{op['consistency']} consistency questions.", ""]
-        imp = rep["implications"]
-        rows = sorted(imp, key=lambda r: (-r["if_proved"], -r["if_refuted"]))[:top]
-        rows += [r for r in _by_min(imp, "if_proved", "if_refuted")[:top] if r not in rows]
+        o += [f"{len(rep['classes'])} classes and {len(rep['fitting_models'])} fitting models; "
+              f"{rep['open']} open questions. {progress_text(rep['progress']).capitalize()}.", ""]
+        rows = rep["rows"][:top]
         if rows:
-            o += ["| Implication | if proved | if refuted |", "|---|---:|---:|"]
-            o += [f"| {nm(r['premise'])} ⇒ {nm(r['conclusion'])} | {r['if_proved']} | {r['if_refuted']} |" for r in rows]
+            o += ["| Question | if yes | if no |", "|---|---:|---:|"]
+            o += [f"| {lynchpin_row_text(r, nm)} | {r['yes']} | {r['no']} |" for r in rows]
             o += [""]
-        if rep["consistency"]:
-            o += ["| Consistency | if a model | if excluded |", "|---|---:|---:|"]
-            o += [f"| {' ∧ '.join(nm(x) for x in r['principles'])} | {r['if_model']} | {r['if_excluded']} |"
-                  for r in rep["consistency"][:top]]
-            o += [""]
-        if rep["model_checks"]:
-            o += ["| Model check | if satisfies | if violates |", "|---|---:|---:|"]
-            o += [f"| `{r['model']}`: {nm(r['principle'])} | {r['if_satisfies']} | {r['if_violates']} |"
-                  for r in rep["model_checks"][:top]]
-            o += [""]
-        if not (rows or rep["consistency"] or rep["model_checks"]):
+        else:
             o += ["Nothing is open.", ""]
     return o
 
@@ -680,15 +849,12 @@ def lynchpins(topic_id: str, backgrounds=None, top: int = 10, as_json: bool = Fa
     names = {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
     presets = {p["id"]: p for p in data["topic"].get("background_presets", [])}
     wanted = backgrounds or ["none", *presets]
-    reports = []
     for key in wanted:
-        if key == "none":
-            L, name = Lynchpins(data), None
-        elif key in presets:
-            L, name = Lynchpins(data, presets[key]["principles"]), presets[key]["name"]
-        else:
+        if key != "none" and key not in presets:
             sys.exit(f"{topic_id}: no background preset '{key}' (have: {', '.join(presets) or 'none'})")
-        reports.append({"background": None if key == "none" else key, "name": name, "principles": L.background, **L.rank()})
+    engines = {bid or "none": (name, L) for bid, name, L in _engines(data)}
+    reports = [{"background": None if key == "none" else key, "name": engines[key][0], "principles": engines[key][1].background,
+                "negative": [], **engines[key][1].rank(top)} for key in wanted]
     if as_json:
         print(json.dumps(reports, indent=1, ensure_ascii=False))
         return
@@ -838,6 +1004,8 @@ def export_json(topic_id: str) -> dict:
         "results": [clean(r) | {"file": r["_file"]} for r in data["results"]],
         "models": [clean(m) | {"file": m["_file"]} for m in data["models"]],
         "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+        "progress": progress_report(data),
+        "lynchpins": lynchpin_report(data, sparse_ok=False, top=30),
         "server_analysis": {
             "classes": an["classes"],
             "open_pairs": an["open_pairs"],
@@ -1097,14 +1265,12 @@ def _markdown_fallback(md: str) -> str:
     return re.sub(marker + r'(\d+)ENDTOKEN', lambda m: saved[int(m[1])], html)
 
 
-def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True) -> dict:
-    """Write build/<topic>/writeups/<id>.{md,html,pdf}; return {id: {md, html, pdf}}."""
-    import shutil, subprocess
+def render_writeups(topic_id: str, data: dict, outdir: Path) -> dict:
+    """Write build/<topic>/writeups/<id>.{md,html}; return {id: {md, html, handwritten}}."""
+    from html import escape
     wdir = outdir / "writeups"
     wdir.mkdir(parents=True, exist_ok=True)
     src = TOPICS / topic_id / "writeups"
-    pandoc = shutil.which("pandoc")
-    xelatex = shutil.which("xelatex")
     files = {}
     for item in data["results"] + data["models"]:
         iid = item["id"]
@@ -1115,29 +1281,14 @@ def render_writeups(topic_id: str, data: dict, outdir: Path, *, pdf: bool = True
             md = md.rstrip() + "\n\n## Paper references\n\n" + refs + "\n"
         title = md.splitlines()[0].lstrip("# ").strip() if md.startswith("#") else iid
         (wdir / f"{iid}.md").write_text(md, encoding="utf-8")
-        body_md = wdir / f".{iid}.body.md"   # heading stripped; pandoc gets the title as metadata
-        body_md.write_text(md.split("\n", 1)[1] if md.startswith("#") else md, encoding="utf-8")
-        entry = {"md": f"writeups/{iid}.md", "handwritten": hand.exists()}
-        html_path = wdir / f"{iid}.html"
-        from html import escape
-        body = _md_to_html(body_md.read_text(encoding='utf-8'))
-        html_path.write_text(
+        body = _md_to_html(md.split("\n", 1)[1] if md.startswith("#") else md)   # heading stripped; the page header carries the title
+        (wdir / f"{iid}.html").write_text(
             f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width, initial-scale=1">'
             f'<title>{escape(title)}</title>{theme_head(topic_id, math_path="../math")}</head>'
             f'<body class="writeup-page">{WRITEUP_NAV}'
             f'<header id="title-block-header"><h1>{escape(title)}</h1></header>{body}</body></html>', encoding="utf-8")
-        entry["html"] = f"writeups/{iid}.html"
-        if pdf and pandoc and xelatex:
-            r = subprocess.run([pandoc, str(body_md), "-o", str(wdir / f"{iid}.pdf"), "--pdf-engine=xelatex",
-                                f"--template={ROOT / 'viewer' / 'writeup.tex'}", "--metadata", f"title={title}",
-                                "-V", "mainfont=DejaVu Sans"], capture_output=True, text=True)
-            if r.returncode == 0:
-                entry["pdf"] = f"writeups/{iid}.pdf"
-            else:
-                print(f"  pdf failed for {iid}: {r.stderr.strip().splitlines()[-1] if r.stderr.strip() else '?'}")
-        body_md.unlink()
-        files[iid] = entry
+        files[iid] = {"md": f"writeups/{iid}.md", "html": f"writeups/{iid}.html", "handwritten": hand.exists()}
     return files
 
 
@@ -1166,7 +1317,7 @@ def render_lean_index(data: dict, source: Path, destination: Path) -> None:
     (destination / "index.html").write_text(html, encoding="utf-8")
 
 
-def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = False, pdf: bool = True, starter_archive: Path | None = None) -> Path:
+def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = False, starter_archive: Path | None = None) -> Path:
     """Build build/<topic>/ : index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/, sources/, lean/.
     With --out, write only the viewer HTML to that path (fragment=True omits the page skeleton)."""
     import shutil
@@ -1178,7 +1329,7 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
     outdir.mkdir(parents=True, exist_ok=True)
     write_math_assets(outdir)
     generate_lean_statements(topic_id)
-    files = render_writeups(topic_id, data, outdir, pdf=pdf and out is None)
+    files = render_writeups(topic_id, data, outdir)
     # database + source + lean + AI bundle
     zip_tree(TOPICS / topic_id, topic_id, outdir / "source.zip")
     sources_dir = TOPICS / topic_id / "sources"
@@ -1983,7 +2134,7 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
          "python3 scripts/pmap.py status              # counts, open pairs, redundancies",
          "python3 scripts/pmap.py lynchpins           # open questions ranked by what each answer settles",
          *[f"python3 {p.relative_to(ROOT)}   # topic checks" for p in sorted((TOPICS / topic_id / "checks").glob("*.py"))],
-         "python3 scripts/pmap.py build --no-pdf      # regenerate build/<topic>/index.html, the map viewer",
+         "python3 scripts/pmap.py build               # regenerate build/<topic>/index.html, the map viewer",
          "python3 scripts/pmap.py selftest            # the derivation engine's own tests",
          "python3 scripts/check_falsity.py            # Python/browser semantics and False; needs Node",
          "python3 scripts/pmap.py lean                # regenerate the Lean statements",
@@ -2076,7 +2227,11 @@ def bundle_derived_json(data: dict, an: dict, lynch=None) -> dict:
                 "status excludes means implication to a negation; independent means a countermodel to the positive implication; "
                 "inconsistent means the antecedent implies False. No explosion is used. "
                 "status open means not recorded, not false. lynchpins scores each open question by the other open questions "
-                "either answer would settle, under each background preset, and is skipped for a sparse map. "
+                "either answer would settle, under each background preset, and is skipped for a sparse map; a question is S ⇒ c "
+                "for S at most two principle classes and c a class or False, a model check is deciding a principle in a recorded model. "
+                "progress is the share of implication questions with up to two premises settled under each background: "
+                "S ⇒ c for S at most two principle classes and c a class or False, counted only when no smaller premise set "
+                "already proves or excludes c, and settled alike by a proof, an exclusion or a fitting model. "
                 "Regenerate with pmap.py; do not hand-edit.",
         "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
         "principle_names": {k: v for k, v in names.items() if k != FALSE},
@@ -2086,6 +2241,7 @@ def bundle_derived_json(data: dict, an: dict, lynch=None) -> dict:
         "unknown_in_model": an["unknown"],
         "packages": packages,
         "lynchpins": lynch if lynch is not None else lynchpin_report(data, sparse_ok=False),
+        "progress": progress_report(data),
         "problems": an["problems"],
         "infos": an["infos"],
     }
@@ -2133,7 +2289,7 @@ def bundle_topic(topic_id: str) -> Path:
             "PY ?= python3\n.PHONY: validate status build checks lean\n"
             "validate: ; $(PY) scripts/pmap.py validate\n"
             "status: ; $(PY) scripts/pmap.py status\n"
-            "build: ; $(PY) scripts/pmap.py build --no-pdf\n"
+            "build: ; $(PY) scripts/pmap.py build\n"
             "checks: ; $(PY) scripts/pmap.py selftest\n"
             + "".join(f"\t$(PY) {p.relative_to(ROOT)}\n" for p in sorted((TOPICS / topic_id / "checks").glob("*.py"))) +
             f"lean: ; $(PY) scripts/pmap.py lean-check {topic_id}\n", encoding="utf-8")
@@ -2355,47 +2511,80 @@ def selftest():
     ly = {"topic": {"id": "t", "title": "t", "framework": "", "background": []},
           "principles": [P(x) for x in "pqrs"], "results": [R("pq", ["p"], "q")], "models": [M("m1", ["p"], ["s"])]}
     L = Lynchpins(ly)
-    op = L.rank()["open"]
-    assert (op["implications"], op["joint_consistency"], op["consistency"]) == (9, 5, 2), op
-    assert L.with_rule(["r"], "p", ("imp", "r", "p")) == 1, "r ⇒ p also gives r ⇒ q"
-    assert L.with_model(["r"], ["p"], ("imp", "r", "p")) == 1, "a countermodel to r ⇒ p shows r consistent"
-    assert L.with_model(["r"], [], ("con", "r")) == 0
-    assert L.with_rule(["p", "s"], FALSE, ("con", "p", "s")) == 1, "p ∧ s ⇒ ⊥ gives s ⇒ ¬p"
-    assert L.with_model(["p", "s"], [], ("con", "p", "s")) == 2, "a model of p ∧ s also settles q ∧ s and s"
-    assert L.with_model(["p", "r"], ["s"]) == 4, "m1 satisfying r: r, p ∧ r, q ∧ r consistent and r ⇏ s"
-    assert L.with_model(["p"], ["s", "r"]) == 2, "m1 violating r: p ⇏ r and q ⇏ r"
-    assert L.with_rule(["q"], "p", ("imp", "q", "p")) == 0 and L.with_rule(["s"], "p", ("imp", "s", "p")) == 1
+    assert L.progress()["open"] == 27 and len(L.open_questions()) == 27
+    r = L.set_index[("r",)]
+    assert L.with_rule(("r",), "p", (r, "p")) == 4, "r ⇒ p also gives r ⇒ q, q ∧ r ⇒ p, r ∧ s ⇒ p and r ∧ s ⇒ q"
+    assert L.with_model(("r",), ["p"], (r, "p")) == 2, "a countermodel to r ⇒ p shows r consistent and refutes ⊤ ⇒ p"
+    ps = L.set_index[("p", "s")]
+    assert L.with_rule(("p", "s"), FALSE, (ps, FALSE)) == 5, "p ∧ s ⇒ ⊥ makes p ∧ s ⇒ r moot and excludes s ⇒ p, q ∧ s ⇒ p, r ∧ s ⇒ p and p ∧ r ⇒ s"
+    assert L.with_model(("p", "s"), [], (ps, FALSE)) == 2, "a model of p ∧ s also shows s and q ∧ s consistent"
 
     def brute(L, rule=None, models=None, skip=None):
-        results = L.results + ([{"id": "h", "premises": rule[0], "conclusion": rule[1]}] if rule else [])
+        results = L.results + ([{"id": "h", "premises": list(rule[0]), "conclusion": rule[1]}] if rule else [])
         E = Engine(L.ids, results, L.models if models is None else models, L.background, L.negative)
-        wit = [m for m in E.models if m["id"] not in E.model_conflicts]
-
-        def st(q):
-            if q[0] == "imp":
-                return E.pair(q[1], q[2])["status"]
-            if E.conflict(q[1:]) is not None:
-                return "inconsistent"
-            return "consistent" if any(all(x in E.holds[m["id"]] for x in q[1:]) for m in wit) else "open"
-        return sum(1 for q in L.open if q != skip and st(q) != "open")
+        wit = [(E.holds[m["id"]], E.fails[m["id"]]) for m in E.models if m["id"] not in E.model_conflicts]
+        bad = lambda S: E.conflict(S) is not None
+        cl = lambda S: E.cl(S)[0]
+        refuted = lambda S, c: any(set(S) <= H and (c == FALSE or c in F) for H, F in wit)
+        settled = lambda S, c: (bad(S) if c == FALSE else (c in cl(S) or bad([*S, c]))) or refuted(S, c)
+        return sum(1 for q in L.open_questions() if q != skip and settled(*q))
 
     def agree(L):
-        for q in L.open:
-            P, c = ([q[1]], q[2]) if q[0] == "imp" else (list(q[1:]), FALSE)
-            V = [q[2]] if q[0] == "imp" else []
-            assert L.with_rule(P, c, q) == brute(L, rule=(P, c), skip=q), (q, "rule")
-            assert L.with_model(P, V, q) == brute(L, models=[*L.models, M("x", P, V)], skip=q), (q, "model")
+        for S, c in L.open_questions():
+            j, V = L.set_index[S], [c] if c != FALSE else []
+            assert L.with_rule(S, c, (j, c)) == brute(L, rule=(S, c), skip=(S, c)), (S, c, "rule")
+            assert L.with_model(S, V, (j, c)) == brute(L, models=[*L.models, M("x", list(S), V)], skip=(S, c)), (S, c, "model")
         for m in L.witnesses:
             others = [x for x in L.models if x is not m]
-            for c in L.unknown[m["id"]]:
+            for c in L.proper:
+                if c in L.E.holds[m["id"]] or c in L.E.fails[m["id"]]:
+                    continue
                 assert L.with_model([*m["satisfies"], c], m["violates"]) == brute(L, models=[*others, M(m["id"], [*m["satisfies"], c], m["violates"])]), (m["id"], c)
                 assert L.with_model(m["satisfies"], [*m["violates"], c]) == brute(L, models=[*others, M(m["id"], m["satisfies"], [*m["violates"], c])]), (m["id"], c)
     agree(L)
+    top = L.rank(top=3)["rows"]
+    assert all(set(r) >= {"kind", "yes", "no"} for r in top) and top == sorted(top, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]))), top
+
+    def brute_progress(L):
+        import itertools
+        E, A = L.E, [a for a in L.reps if a not in L.trivial]
+        bad = lambda S: E.conflict(S) is not None
+        cl = lambda S: E.cl(S)[0]
+        wit = [(E.holds[m["id"]], E.fails[m["id"]]) for m in L.witnesses]
+        refuted = lambda S, c: any(set(S) <= H and (c == FALSE or c in F) for H, F in wit)
+        settled = lambda S, c: (bad(S) if c == FALSE else (c in cl(S) or bad([*S, c]))) or refuted(S, c)
+        qs = [((), c) for c in A]
+        for a in A:
+            qs.append(((a,), FALSE))
+            if not bad([a]):
+                qs += [((a,), c) for c in A if c != a and not bad([c])]
+        for a, b in itertools.combinations([a for a in A if not bad([a])], 2):
+            if b in cl([a]) or a in cl([b]):
+                continue
+            qs.append(((a, b), FALSE))
+            if not bad([a, b]):
+                qs += [((a, b), c) for c in A if c not in (a, b) and not bad([c]) and c not in cl([a]) and c not in cl([b])
+                       and not bad([a, c]) and not bad([b, c])]
+        return len(qs), sum(settled(S, c) for S, c in qs)
+
+    def same_share(L):
+        p = L.progress()
+        assert brute_progress(L) == (p["questions"], p["settled"]), (p, brute_progress(L))
+        return p
+    # Settled share: 4 theorem questions, 16 with one premise, 13 with two (p ∧ q is redundant);
+    # settled: (∅ ⇒ s) refuted by m1; p ⇒ q proved; p ⇒ s, q ⇒ s refuted; p and q consistent.
+    pr = same_share(L)
+    assert (pr["questions"], pr["settled"], pr["by_premises"]) == (33, 6, [[4, 1], [16, 5], [13, 0]]), pr
+    assert same_share(Lynchpins(ly, background=["p"]))["questions"] == 7, "under p only r, s and r ∧ s remain"
+    assert same_share(Lynchpins({**ly, "results": [], "models": []})) == {"premises": PROGRESS_PREMISES, "questions": 38, "settled": 0, "open": 38, "by_premises": [[4, 0], [16, 0], [18, 0]]}
     rich = {"topic": {"id": "t", "title": "t", "framework": "", "background": ["bg"]},
             "principles": [P(x) for x in "bg a b c d e f g".split()],
             "results": [R("r1", ["a"], "b"), R("r2", ["b"], "a"), R("r3", ["a", "c"], "d"), R("r6", ["e"], "c"), R("x", ["d", "e"], FALSE), R("g", ["g"], "e")],
             "models": [M("m1", ["a"], ["d"]), M("m2", ["b", "c"], ["e"]), M("m3", ["g"], [])]}
     Lr = Lynchpins(rich)
+    for Lx in (Lr, Lynchpins(rich, background=["c"]), Lynchpins(rich, negative_background=["d"])):
+        same_share(Lx)
+    assert Lynchpins(rich, background=["d", "e"]).progress()["inconsistent_background"], "d ∧ e ⇒ ⊥"
     assert Lr.trivial == ["bg"] and Lr.reps[:2] == ["bg", "a"], (Lr.trivial, Lr.reps)
     agree(Lr)
     agree(Lynchpins(rich, background=["c"]))
@@ -2403,8 +2592,7 @@ def selftest():
     ly["models"].append(M("m2", ["r"], []))
     Lb = Lynchpins(ly, background=["p"])
     assert Lb.trivial == ["p", "q"] and Lb.reps == ["p", "r", "s"] and Lb.witnesses == [ly["models"][0]], (Lb.trivial, Lb.reps)
-    opb = Lb.rank()["open"]
-    assert (opb["implications"], opb["joint_consistency"], opb["consistency"]) == (3, 1, 2), opb
+    assert sorted(Lb.open_questions()) == [((), "r"), (("r",), FALSE), (("r",), "s"), (("r", "s"), FALSE), (("s",), FALSE), (("s",), "r")], Lb.open_questions()
     agree(Lb)
     print("selftest OK")
 
@@ -2426,7 +2614,6 @@ def main(argv=None):
         if name == "build":
             s.add_argument("--out", help="output HTML path (single topic only)")
             s.add_argument("--fragment", action="store_true", help="omit the <html>/<head>/<body> wrapper")
-            s.add_argument("--no-pdf", action="store_true", help="skip PDF write-ups")
             s.add_argument("--no-starter", action="store_true", help="skip the reusable starter download")
     s = sub.add_parser("starter")
     s.add_argument("--out", help="output ZIP path (default: build/logical-maps-starter.zip)")
@@ -2475,7 +2662,7 @@ def main(argv=None):
             z = bundle_topic(t)
             print(f"wrote {z.relative_to(ROOT)}")
         elif a.cmd == "build":
-            out = build_topic(t, Path(a.out) if getattr(a, "out", None) else None, fragment=getattr(a, "fragment", False), pdf=not getattr(a, "no_pdf", False), starter_archive=starter_archive)
+            out = build_topic(t, Path(a.out) if getattr(a, "out", None) else None, fragment=getattr(a, "fragment", False), starter_archive=starter_archive)
             print(f"built {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}")
     if not ok:
         sys.exit(1)

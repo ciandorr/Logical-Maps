@@ -70,7 +70,7 @@ def main():
         run('topics/example/checks/relations.py', cwd=root)
         check_links(root / 'build')
         # Rebuild from extracted content, including the generic Contribute link.
-        run('scripts/pmap.py', 'build', '--no-pdf', cwd=root)
+        run('scripts/pmap.py', 'build', cwd=root)
         check_links(root / 'build')
         for topic in ['my-map', 'example']:
             payload = json.loads((root / 'build' / topic / 'data.json').read_text())
@@ -82,7 +82,7 @@ def main():
                 z.extractall(temp / 'bundles')
             bundle = temp / 'bundles' / f'{topic}-map'
             run('scripts/pmap.py', 'validate', cwd=bundle)
-            run('scripts/pmap.py', 'build', '--no-pdf', '--no-starter', cwd=bundle)
+            run('scripts/pmap.py', 'build', '--no-starter', cwd=bundle)
             check_links(bundle / 'build')
             assert 'checks/countermodels.py' not in (bundle / 'README.md').read_text()
         # Exercise public scaffolding, including the omitted-status fallback.
@@ -106,7 +106,7 @@ def main():
             del record['status']
             file.write_text(yaml.safe_dump(record, sort_keys=False))
         run('scripts/pmap.py', 'validate', 'scratch', cwd=root)
-        run('scripts/pmap.py', 'build', 'scratch', '--no-pdf', '--no-starter', cwd=root)
+        run('scripts/pmap.py', 'build', 'scratch', '--no-starter', cwd=root)
         payload = json.loads((root / 'build/scratch/data.json').read_text())
         assert all(r['status'] == 'conjectured' for r in payload['results'] + payload['models'])
         # Existing records must never be overwritten by repeated scaffolding.

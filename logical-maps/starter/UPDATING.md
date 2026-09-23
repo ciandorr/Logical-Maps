@@ -19,7 +19,7 @@ When a newer starter is available:
 python -m pip install -r requirements.txt
 python scripts/pmap.py validate
 python scripts/pmap.py selftest
-python scripts/pmap.py build --no-pdf
+python scripts/pmap.py build
 ```
 
 Inspect the local website and downloads before uploading the rebuilt topic
@@ -30,4 +30,4 @@ do not discard records simply to make a new validator pass.
 from the curated `starter/` templates and current tooling. Normal builds also
 copy this ZIP beside each map and link it from Contribute. This relative download
 can also be linked from a future home page without changing the starter format.
-Use `build --no-starter --no-pdf` when only the map itself needs rebuilding.
+Use `build --no-starter` when only the map itself needs rebuilding.

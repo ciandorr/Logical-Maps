@@ -48,7 +48,7 @@ def main():
              patch.object(pmap, 'render_writeups', return_value={}), \
              patch.object(pmap, 'enriched_payload', return_value=payload), \
              patch.object(pmap, 'bundle_topic'):
-            pmap.build_topic('sample', pdf=False)
+            pmap.build_topic('sample')
             build = root / 'build/sample'
             assert (build / 'sources/paper.txt').exists()
             assert (build / 'lean/Proof.lean').exists()
@@ -61,7 +61,7 @@ def main():
             (topic / 'sources/paper.txt').unlink()
             (build / 'sources/stale-private.txt').write_text('removed draft')
             (build / 'lean/stale.lean').write_text('-- removed proof')
-            pmap.build_topic('sample', pdf=False)
+            pmap.build_topic('sample')
             assert not (build / 'sources/paper.txt').exists()
             assert not (build / 'sources/stale-private.txt').exists()
             assert not (build / 'lean/stale.lean').exists()

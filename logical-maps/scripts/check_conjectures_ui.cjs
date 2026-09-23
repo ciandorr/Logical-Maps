@@ -62,6 +62,8 @@ const fixture={
     model('proved-model',['a'],['d']),
     model('refuted-model',['a','d'],[]),
   ],
+  // The settled share is stored by pmap.py at build time; hand-checked for the proved records above.
+  progress:[{background:null,name:null,principles:[],negative:[],premises:2,questions:56,settled:8,open:48}],
 };
 
 try {
@@ -97,13 +99,19 @@ try {
   assert.equal(doc.getElementById('show-resolved').checked,false);
   assert.equal(resolution(dom,'open-query'),'open');
   assert.equal(resolution(dom,'open-model'),'open');
+  assert.ok(doc.querySelector('#open-recorded [data-conjecture-id="open-query"]'),'recorded questions sit in their own dropdown');
+  assert.equal(doc.getElementById('open-recorded').open,false,'the dropdown starts collapsed');
+  assert.equal(doc.querySelector('#open-recorded > summary').textContent.trim(),'Recorded conjectures');
   for(const id of ['history-result','history-model','proved-query','refuted-query','proved-model','refuted-model'])
     assert.equal(row(dom,id),null,id);
   assert.equal(resolution(dom,'incompatible-query'),'incompatible');
 
   // Open means no answer in the full recorded evidence. Removing a proof or
   // witness only limits the selected evidence; it must not inflate the count.
-  const openCount=doc.getElementById('n-open').textContent;
+  assert.equal(doc.querySelector('[data-tab="open"]').textContent.trim(),'Conjectures','the tab carries no count');
+  const progress=()=>doc.getElementById('open-progress');
+  const settled=progress().textContent;
+  assert.equal(settled,'14% of questions with up to two premises settled.');
   sourceCheckbox.click();
   assert.equal(resolution(dom,'open-query'),'open');
   assert.equal(resolution(dom,'open-model'),'open');
@@ -116,7 +124,7 @@ try {
     assert.match(question.querySelector('.conjecture-evidence summary').textContent,/with all recorded evidence/);
     assert.ok(question.querySelector('[data-open-result],[data-open-model]'),'Omitted evidence stays inspectable');
   }
-  assert.equal(doc.getElementById('n-open').textContent,openCount,'Source filters do not inflate the open count');
+  assert.equal(progress().textContent,settled,'Source filters do not change the settled share');
   assert.ok(row(dom,'refuted-query').querySelector('[data-open-model="history-model"]'),'Refutation still cites an actual countermodel');
   assert.match(row(dom,'incompatible-query').textContent,/does not settle the implication/);
   assert.equal(doc.getElementById('show-resolved').checked,false,'Limited-evidence questions stay visible with Show resolved off');
@@ -125,7 +133,7 @@ try {
   doc.getElementById('lean-only').click();
   assert.equal(resolution(dom,'proved-query'),'evidence-limited','Lean filters are distinguished from globally open questions too');
   assert.equal(resolution(dom,'open-query'),'open');
-  assert.equal(doc.getElementById('n-open').textContent,openCount);
+  assert.equal(progress().textContent,settled);
   doc.getElementById('lean-only').click();
   assert.ok(doc.querySelector('#open-incompatible [data-conjecture-id="incompatible-query"]'));
   setResolved(dom,true);
@@ -271,9 +279,10 @@ try {
   assert.equal(doc.getElementById('open-warning').hidden,false);
   assert.match(doc.getElementById('open-warning').textContent,/Additional evidence/);
   assert.equal(resolution(dom,'open-query'),'inconsistent-background');
-  assert.equal(doc.getElementById('n-open').textContent,'—');
+  assert.equal(progress().hidden,true,'no settled share while the full evidence is inconsistent');
   dom.window.resetBackground();sourceCheckbox.click();
   assert.equal(resolution(dom,'open-query'),'open');
+  assert.equal(progress().textContent,settled);
   assert.deepEqual(errors,[]);
   console.log('PASS: open versus evidence-limited conjectures, full-evidence proofs and witnesses, stable open counts, Lean filters, incompatible backgrounds, and shared controls.');
 } finally { pages.forEach(dom=>dom.window.close()); }

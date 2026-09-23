@@ -21,13 +21,13 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 python3 scripts/pmap.py validate
 python3 scripts/pmap.py selftest
-python3 scripts/pmap.py build --no-pdf
+python3 scripts/pmap.py build
 python3 scripts/check_public.py
 python3 -m http.server 8000 --directory build
 ```
 
-Open <http://localhost:8000/> to preview. Pandoc and a TeX installation are
-optional; see the project documentation for PDF generation and Lean checks.
+Open <http://localhost:8000/> to preview. Pandoc is optional; see the project
+documentation for Lean checks.
 Formalization is incomplete; individual certificates record verification status.
 
 ## Contributing

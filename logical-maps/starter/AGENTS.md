@@ -45,7 +45,7 @@ a new topic when the user requests one. `topics/example/` is a tutorial;
 
 - Run `python scripts/pmap.py validate <topic>` after every completed batch.
   Resolve validation failures before building. Validation does not verify prose proofs.
-- Build with `python scripts/pmap.py build <topic> --no-pdf` and inspect the result.
+- Build with `python scripts/pmap.py build <topic>` and inspect the result.
 - Run `python scripts/pmap.py selftest` after changing the tools or viewer.
   For logical-engine changes, also run `python scripts/check_falsity.py` with
   Node installed to check Python/browser agreement against truth tables.

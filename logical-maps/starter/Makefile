@@ -3,7 +3,7 @@ PY ?= python3
 validate:
 	$(PY) scripts/pmap.py validate
 build:
-	$(PY) scripts/pmap.py build --no-pdf
+	$(PY) scripts/pmap.py build
 checks:
 	$(PY) scripts/pmap.py selftest
 	$(PY) topics/example/checks/relations.py

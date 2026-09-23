@@ -32,12 +32,15 @@ the topic subject in each map's email link.
 - `python3 scripts/pmap.py status` — counts, open pairs, redundancies.
 - `python3 scripts/pmap.py lynchpins` — open questions ranked by how many other open
   questions each answer would settle, under no extra assumptions and under each
-  background preset (`--background du`, `--top 20`, `--json`). The bundle's
-  OPEN-QUESTIONS.md §2 and `derived.json` carry the same rankings, except for a
-  sparse map (over three quarters of implication questions open), which they skip.
-  The viewer's Conjectures tab computes the same ranking live for the selected
-  background: `Lynchpins` in `viewer/template.html` mirrors the Python class and
-  `scripts/check_falsity.py` compares the two; `check_lynchpins_ui.cjs` guards the tab.
+  background preset (`--background du`, `--top 20`, `--json`). A question is S ⇒ c
+  for S at most two principle classes and c a class or False, asked only where no
+  smaller premise set already proves or excludes c, and settled alike by a proof,
+  an exclusion or a fitting model; a model check is scored the same way. `Lynchpins`
+  in `scripts/pmap.py` is the only implementation: `build` stores its rankings and
+  settled share per background preset in `data.json` (also `derived.json` and the
+  bundle's OPEN-QUESTIONS.md §2, which skip a sparse map with over three quarters of
+  its questions open), and the viewer's Conjectures tab only looks them up, so an
+  ad-hoc background shows none. `check_lynchpins_ui.cjs` guards the tab.
 - `python3 scripts/pmap.py starter` — build the reusable starter ZIP. Normal
   builds also regenerate it and add a relative Contribute download. Keep its
   allowlist limited to shared tooling and `starter/` assets. Run

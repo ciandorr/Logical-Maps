@@ -54,7 +54,7 @@ scripts/pmap.py                       validate · build · bundle · status · l
 viewer/template.html                  the map; data embedded at build
 topics/<topic>/writeups/<id>.md       optional hand-written write-up (LaTeX math ok); otherwise generated from the record
 topics/<topic>/lean/                  Lean sources, copied into the build when present
-build/<topic>/                        index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/<id>.{md,html,pdf}, sources/, lean/
+build/<topic>/                        index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/<id>.{md,html}, sources/, lean/
 ```
 
 ```
@@ -62,7 +62,7 @@ pip install -r requirements.txt
 python3 scripts/pmap.py validate && python3 scripts/pmap.py build    # or: make
 ```
 
-`build/<topic>/` is a static site: open `index.html` locally or serve the directory. HTML maths uses locally bundled KaTeX, including when Pandoc is absent. Pandoc renders Markdown when available; otherwise the builder uses Python Markdown. PDFs use xelatex when available (`--no-pdf` to skip).
+`build/<topic>/` is a static site: open `index.html` locally or serve the directory. HTML maths uses locally bundled KaTeX, including when Pandoc is absent. Pandoc renders Markdown when available; otherwise the builder uses Python Markdown.
 
 ### Mathematical notation
 
@@ -274,7 +274,7 @@ the converse is settled, the model that settles it. The relation shading and
 its legend are the graph's too. The node count grows with the subsets, so the
 view stops at a few hundred and says so.
 
-Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with a pdf link when one was built and the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
+Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 
 ### Graph layout
 
@@ -362,16 +362,29 @@ double-click or press Enter to reset. The height is remembered. Opening or closi
 details does not cover or resize the graph. The panel lists selected principles with expandable
 definitions and individual remove buttons.
 
-The Conjectures tab shares the background controls. **Show resolved** is off
-by default, hiding questions currently proved or refuted. Verdicts are computed
+The Conjectures tab shares the background controls. Its sections collapse:
+**Lynchpin conjectures** ranks open questions by how many other open questions
+each answer would settle. A question is S ⇒ c for S at most two principle
+classes (True, with none) and c a class or False, asked only where no smaller
+premise set already proves or excludes c, and settled alike by a proof, an
+exclusion or a fitting model; a model check (model: principle) is scored the
+same way. The ranking is computed at build time for the topic background and
+each preset, so an ad-hoc background shows none. **Recorded conjectures** lists
+the questions on record. **Show resolved** is off by default, hiding questions currently proved
+or refuted. Verdicts are computed
 from proved evidence under the selected background and sources; they are not
 stored record statuses. Source filters change which proofs and witnesses can
 answer a question, not which questions exist. **Open** means no resolution in
 all recorded proved evidence under that background. **Unresolved by selected
 evidence** distinguishes a missing selected proof or witness from a genuinely
 open question; its evidence disclosure shows the verdict and supporting records
-available with all evidence. The tab count includes only open questions, so
-hiding a source or enabling Lean-only does not inflate it. These comparisons
+available with all evidence. A line above the sections gives the share of
+implication questions with up to two premises settled: S ⇒ c for S at most two
+principle classes and c a class or False, counted only when no smaller premise
+set already proves or excludes c, and settled alike by a proof, an exclusion or
+a fitting model. It is computed at build time for the topic background and each
+preset; other backgrounds show no share, and hiding a source or enabling
+Lean-only does not change it. These comparisons
 use the same background and never use conjectures as proofs. For a non-False conclusion,
 incompatible premises are shown separately; an inconsistent background
 suppresses verdicts. An implication is refuted only by an actual countermodel.

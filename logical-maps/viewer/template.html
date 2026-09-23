@@ -86,13 +86,13 @@
   .resolution.refuted, .resolution.incompatible { color: var(--indep); }
   .resolution.evidence-limited { color: var(--conj); }
   .conjecture-row .note, .conjecture-evidence { margin-top: 8px; }
-  .conjecture-evidence summary, #open-incompatible > summary { cursor: pointer; }
+  .conjecture-evidence summary { cursor: pointer; }
   .conjecture-evidence li { margin: 8px 0; }
-  #lynchpins { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
-  #lynchpins > summary { cursor: pointer; font-weight: 600; }
+  #open-progress { margin: 0 0 12px; }
+  #open > details + details { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+  #open > details > summary { cursor: pointer; font: 600 16px var(--serif); margin-bottom: 8px; }
   #lynchpins table.results { margin: 8px 0 16px; border-collapse: collapse; }
   #lynchpins td.num, #lynchpins th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
-  #open-incompatible { margin-top: 20px; }
   .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
   .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
   .pane-divider[aria-orientation="vertical"] { cursor: col-resize; }
@@ -553,7 +553,7 @@
         <button class="tab" role="tab" data-tab="graph" aria-selected="true">Graph</button>
         <button class="tab" role="tab" data-tab="lattice" aria-selected="false">Lattice</button>
         <button class="tab" role="tab" data-tab="models" aria-selected="false">Theory explorer</button>
-        <button class="tab" role="tab" data-tab="open" aria-selected="false">Conjectures <span class="n" id="n-open"></span></button>
+        <button class="tab" role="tab" data-tab="open" aria-selected="false">Conjectures</button>
         <button class="tab" role="tab" data-tab="results" aria-selected="false">Changes <span class="n" id="n-results"></span></button>
         <button class="tab" role="tab" data-tab="contribute" aria-selected="false" hidden>Contribute</button>
       </div>
@@ -759,120 +759,6 @@ class Engine {
   }
 }
 
-// ---------------------------------------------------------------- lynchpin conjectures (mirrors Lynchpins in scripts/pmap.py)
-// Scores each open question of an engine by the number of *other* open
-// questions either answer would settle. The engine already carries the
-// background and only the models that fit it. Questions are keyed
-// 'imp|a|b' (a ⇒ b ?), 'con|a' and 'con|a|b' (consistent ?), over one
-// representative per equivalence class. Adding a rule P ⇒ c changes cl(S)
-// to cl(S ∪ {c}) exactly when P ⊆ cl(S), so no engine is rebuilt.
-const LYNCHPIN_MAX_OPEN = 0.75;
-class Lynchpins {
-  constructor(E) {
-    this.E = E; this.ids = E.ids; this.negative = E.negativeBackground;
-    this.inconsistent = E.conflict([]) !== null;
-    this.witnesses = E.models.filter(m => !E.modelConflicts.has(m.id));
-    this.extCache = new Map(); this.keys = new WeakMap();
-    this.trivial = this.inconsistent ? [] : this.ids.filter(a => E.cl([]).facts.has(a));
-    this.classes = []; const seen = new Set();
-    for (const a of this.ids) {
-      if (seen.has(a)) continue;
-      const cls = [a, ...this.ids.filter(b => b !== a && E.entails([a], b) !== null && E.entails([b], a) !== null)];
-      cls.forEach(x => seen.add(x)); this.classes.push(cls);
-    }
-    this.reps = this.classes.map(c => c[0]);
-    // trig[model][a] = trials d with a ∈ cl(sat ∪ {d}): the only trials a rule with premise a can change.
-    this.trig = new Map();
-    for (const m of this.witnesses) {
-      const tr = new Map();
-      for (const d of this.ids) for (const a of this.cl([...m.satisfies, d])) { if (!tr.has(a)) tr.set(a, new Set()); tr.get(a).add(d); }
-      this.trig.set(m.id, tr);
-    }
-    const trivial = new Set(this.trivial), proper = this.reps.filter(a => !trivial.has(a));
-    this.questions = [];
-    for (const a of this.reps) for (const b of this.reps) if (a !== b) this.questions.push({kind: 'imp', P: [a, b]});
-    for (const a of this.reps) this.questions.push({kind: 'con', P: [a]});
-    proper.forEach((a, i) => proper.slice(i + 1).forEach(b => this.questions.push({kind: 'con', P: [a, b]})));
-    for (const q of this.questions) {
-      q.key = q.kind + '|' + q.P.join('|'); q.status = this.status(q);
-      q.F = this.cl(q.P); if (q.kind === 'imp') q.Fa = this.cl([q.P[0]]);
-    }
-    this.open = this.questions.filter(q => q.status === 'open');
-    this.unknown = new Map(this.witnesses.map(m => [m.id, this.ids.filter(c => !E.holds.get(m.id).has(c) && !E.fails.get(m.id).has(c))]));
-  }
-  cl(S) { return this.E.cl(S).facts; }
-  ext(F, c) {
-    // Closure of the closed set F together with c.
-    if (!this.keys.has(F)) this.keys.set(F, [...F].sort().join('\u0001'));
-    const key = this.keys.get(F) + '\u0002' + c;
-    if (!this.extCache.has(key)) this.extCache.set(key, closure([...F, c], this.E.rules, this.E.background).facts);
-    return this.extCache.get(key);
-  }
-  bad(F, violates = []) { return F.has(FALSE) || this.negative.some(v => F.has(v)) || violates.some(v => F.has(v)); }
-  status(q) {
-    if (q.kind === 'imp') return this.E.pair(q.P[0], q.P[1]).status;
-    if (this.E.conflict(q.P)) return 'inconsistent';
-    return this.witnesses.some(m => q.P.every(x => this.E.holds.get(m.id).has(x))) ? 'consistent' : 'open';
-  }
-  withRule(premises, conclusion, skip = null) {
-    // Other open questions settled by adding the Horn rule premises ⇒ conclusion.
-    const P = [...new Set(premises)], c = conclusion, E = this.E;
-    const sub = F => P.every(x => F.has(x));
-    const cl2 = F => (F.has(c) || !sub(F)) ? F : this.ext(F, c);
-    const holds2 = new Map(), fails2 = new Map(), changed = [];
-    for (const m of this.witnesses) {
-      let H = E.holds.get(m.id); const Fl = E.fails.get(m.id);
-      const grew = sub(H);
-      if (grew) { const H2 = cl2(this.cl(m.satisfies)); if (this.bad(H2, m.violates)) continue; H = new Set([...H2].filter(x => x !== FALSE)); }
-      const tr = this.trig.get(m.id);
-      let trials = P.length ? [...(tr.get(P[0]) || [])] : [...this.ids];
-      for (const a of P) { const t = tr.get(a) || new Set(); trials = trials.filter(d => t.has(d)); }
-      const fresh = trials.filter(d => !Fl.has(d) && this.bad(cl2(this.cl([...m.satisfies, d])), m.violates));
-      if (grew || fresh.length) { changed.push(m.id); holds2.set(m.id, H); fails2.set(m.id, fresh.length ? new Set([...Fl, ...fresh]) : Fl); }
-    }
-    let n = 0;
-    for (const q of this.open) {
-      if (q.key === skip) continue;
-      if (q.kind === 'imp') {
-        const [a, b] = q.P, Fa = cl2(q.Fa);
-        if (Fa.has(b) || this.bad(Fa) || this.bad(cl2(q.F))) n++;
-        else if (changed.some(mid => holds2.get(mid).has(a) && fails2.get(mid).has(b))) n++;
-      } else if (this.bad(cl2(q.F)) || changed.some(mid => q.P.every(x => holds2.get(mid).has(x)))) n++;
-    }
-    return n;
-  }
-  withModel(satisfies, violates, skip = null) {
-    // Other open questions settled by a model satisfying `satisfies` and violating `violates`.
-    const F = this.cl(satisfies);
-    if (this.bad(F, violates)) return 0;
-    const memo = new Map();
-    const fails = d => { if (!memo.has(d)) memo.set(d, this.bad(this.ext(F, d), violates)); return memo.get(d); };
-    let n = 0;
-    for (const q of this.open) {
-      if (q.key === skip) continue;
-      if (q.kind === 'imp') { if (F.has(q.P[0]) && fails(q.P[1])) n++; }
-      else if (q.P.every(x => F.has(x))) n++;
-    }
-    return n;
-  }
-  rank() {
-    const implications = [], consistency = [], checks = [];
-    for (const q of this.open) {
-      if (q.kind === 'imp') implications.push({premise: q.P[0], conclusion: q.P[1], if_proved: this.withRule([q.P[0]], q.P[1], q.key), if_refuted: this.withModel([q.P[0]], [q.P[1]], q.key)});
-      else consistency.push({principles: q.P, if_model: this.withModel(q.P, [], q.key), if_excluded: this.withRule(q.P, FALSE, q.key)});
-    }
-    for (const m of this.witnesses) for (const c of this.unknown.get(m.id))
-      checks.push({model: m.id, principle: c, if_satisfies: this.withModel([...m.satisfies, c], m.violates), if_violates: this.withModel(m.satisfies, [...m.violates, c])});
-    const order = (k1, k2) => (x, y) => Math.max(y[k1], y[k2]) - Math.max(x[k1], x[k2]) || Math.min(y[k1], y[k2]) - Math.min(x[k1], x[k2]);
-    implications.sort(order('if_proved', 'if_refuted')); consistency.sort(order('if_model', 'if_excluded')); checks.sort(order('if_satisfies', 'if_violates'));
-    const count = f => this.open.filter(f).length;
-    return {inconsistent_background: this.inconsistent, classes: this.classes, trivial: this.trivial, fitting_models: this.witnesses.map(m => m.id),
-      implication_questions: this.reps.length * (this.reps.length - 1),
-      open: {implications: count(q => q.kind === 'imp'), consistency: count(q => q.kind === 'con' && q.P.length === 1), joint_consistency: count(q => q.kind === 'con' && q.P.length === 2)},
-      implications, consistency, model_checks: checks};
-  }
-}
-
 // ---------------------------------------------------------------- state
 const P = DATA.principles, R = DATA.results.map(r => ({...r, conclusion: r.conclusion === false ? FALSE : r.conclusion})), MODELS = DATA.models, T = DATA.topic;
 const byPid = new Map(P.map(p => [p.id, p])), byRid = new Map(R.map(r => [r.id, r])), byMid = new Map(MODELS.map(m => [m.id, m]));
@@ -900,7 +786,7 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, recorded: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
 const graphSearch = { matches: new Set(), index: 0 };
 // A principle the topic's own background already settles, one way or the
 // other, can only sit in the True or False box. It starts hidden; the sidebar
@@ -2363,58 +2249,70 @@ function renderOpen() {
   wire(warning);
   const visible = questions.filter(q => q.answer.status !== 'incompatible' && (state.showResolved || !['proved', 'refuted'].includes(q.answer.status)));
   const incompatible = questions.filter(q => q.answer.status === 'incompatible');
-  let h = '<h3>Conjectures</h3><p class="hint">“Open” means unresolved by all recorded proved evidence under this background. “Unresolved by selected evidence” means the filters omit evidence available below. Background assumptions are omitted from statements; click a question for its full statement.</p>';
+  let h = '<p class="note" id="open-progress" hidden></p>';
+  h += `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Lynchpin conjectures</summary><p class="hint">Open questions ranked by how many other open questions each answer would settle.</p><div class="lynchpin-body"></div></details>`;
+  h += `<details id="open-recorded"${state.recorded ? ' open' : ''}><summary>Recorded conjectures</summary><p class="hint">Background assumptions are omitted from statements; click a question for its full statement.</p>`;
   h += visible.map(row).join('') || `<p class="empty">${questions.length ? 'No open questions apply to this background. Use “Show resolved” to include resolved questions.' : 'No conjectures have been recorded.'}</p>`;
-  h += `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Lynchpin conjectures</summary><p class="hint">Open questions ranked by how many other open questions each answer would settle, using all recorded proved evidence under this background. Both answers are scored: a proof of a strong conjecture settles everything below it, a countermodel to a weak one everything above it, so a question with two high scores is worth answering either way. A refutation is scored by its least informative countermodel. Model checks score deciding an unknown verdict inside a recorded model.</p><div class="lynchpin-body"></div></details>`;
+  h += '</details>';
   if (incompatible.length) h += `<details id="open-incompatible"><summary>Incompatible with this background (${incompatible.length})</summary>${incompatible.map(row).join('')}</details>`;
   const el = document.getElementById('open'); el.innerHTML = h;
   wire(el);
-  const lynchpins = document.getElementById('lynchpins');
+  const lynchpins = document.getElementById('lynchpins'), recorded = document.getElementById('open-recorded');
   lynchpins.addEventListener('toggle', () => { state.lynchpins = lynchpins.open; renderLynchpins(); });
+  recorded.addEventListener('toggle', () => { state.recorded = recorded.open; });
   renderLynchpins();
-  const count = document.getElementById('n-open');
-  count.textContent = inconsistent || allConflict ? '—' : questions.filter(q => q.status === 'open').length;
-  count.title = 'Open with all recorded evidence; questions unresolved only by the selected evidence are not counted.';
 }
 
 // ---------------------------------------------------------------- lynchpin conjectures (view)
 // Computed from all recorded proved evidence under the current background, so
 // source filters do not change it; memoised per background, and never computed
 // while the section is closed or the tab hidden.
-let lynchpinCache = {key: null, report: null};
-function lynchpinReport() {
-  const key = [...background].sort().join(',') + '|' + [...negativeBackground].sort().join(',');
-  if (lynchpinCache.key !== key) {
-    const L = new Lynchpins(allEvidenceE);
-    const n = L.reps.length * (L.reps.length - 1), share = n ? L.open.filter(q => q.kind === 'imp').length / n : 0;
-    lynchpinCache = {key, report: share > LYNCHPIN_MAX_OPEN ? {sparse: share} : L.rank()};
-  }
-  return lynchpinCache.report;
+function storedReport(list) {
+  // scripts/pmap.py ranks the open questions at build time for the topic
+  // background and each preset (Lynchpins.rank); nothing is computed here.
+  const same = (xs, ys) => xs.length === ys.length && [...xs].sort().every((x, i) => x === [...ys].sort()[i]);
+  return (list || []).find(p => same(p.principles || [], [...background]) && same(p.negative || [], [...negativeBackground])) || null;
+}
+function storedProgress() {
+  // scripts/pmap.py computes the settled share at build time for the topic
+  // background and each preset (Lynchpins.progress); nothing is computed here.
+  const same = (xs, ys) => xs.length === ys.length && [...xs].sort().every((x, i) => x === [...ys].sort()[i]);
+  return (DATA.progress || []).find(p => !p.inconsistent_background && same(p.principles || [], [...background]) && same(p.negative || [], [...negativeBackground])) || null;
+}
+function renderProgress() {
+  // Share of implication questions with up to two premises settled under this
+  // background: S ⇒ c for S at most two principle classes and c a class or ⊥,
+  // counted only when no smaller premise set already proves or excludes c, and
+  // settled alike by a proof, an exclusion or a fitting model.
+  const el = document.getElementById('open-progress'); if (!el) return;
+  const p = state.tab === 'open' && !backgroundConflicts.length ? storedProgress() : null;
+  el.hidden = !p || !p.questions;
+  if (el.hidden) { el.textContent = ''; return; }
+  const pct = p.open ? Math.min(99, Math.floor(100 * p.settled / p.questions)) : 100;
+  el.textContent = `${pct}% of questions with up to ${p.premises === 2 ? 'two' : p.premises} premises settled.`;
+  el.title = `${p.settled} of ${p.questions} questions S ⇒ c, with S at most ${p.premises} principle classes and c a class or ⊥, are proved, excluded or refuted by a model under this background, using all recorded proved evidence. Computed at build time for the topic background and each preset.`;
 }
 function renderLynchpins() {
   const el = document.getElementById('lynchpins'); if (!el) return;
+  renderProgress();
   const body = el.querySelector('.lynchpin-body');
   if (!el.open || state.tab !== 'open') { body.innerHTML = ''; return; }
   if (backgroundConflicts.length) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; return; }
-  const rep = lynchpinReport();
-  if (rep.sparse !== undefined) { body.innerHTML = `<p class="note">${Math.round(rep.sparse * 100)}% of the implication questions are open under this background, so the map is too sparse for lynchpins to mean anything.</p>`; return; }
+  const stored = DATA.lynchpins || {};
+  if (stored.skipped) { body.innerHTML = '<p class="note">Too few questions are settled to rank the open ones.</p>'; return; }
+  const rep = storedReport(stored.reports);
+  if (!rep) { body.innerHTML = '<p class="note">Ranked at build time for the topic background and each preset only.</p>'; return; }
+  if (rep.inconsistent_background) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; return; }
+  if (!rep.rows.length) { body.innerHTML = '<p class="note">Nothing is open.</p>'; return; }
   // The class of theorems is shown as True, as elsewhere in the viewer.
   const trivial = new Set(rep.trivial);
-  const pb = id => trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
-  const top = 8, op = rep.open;
-  const table = (head, rows) => rows.length ? `<table class="results lynchpin"><thead><tr><th>${esc(head[0])}</th><th class="num">${esc(head[1])}</th><th class="num">${esc(head[2])}</th></tr></thead><tbody>${rows.join('')}</tbody></table>` : '';
-  const cells = (stmt, x, y) => `<td class="stmt">${stmt}</td><td class="num">${x}</td><td class="num">${y}</td>`;
-  const byProved = [...rep.implications].sort((x, y) => y.if_proved - x.if_proved || y.if_refuted - x.if_refuted).slice(0, top);
-  const byMin = [...rep.implications].sort((x, y) => Math.min(y.if_proved, y.if_refuted) - Math.min(x.if_proved, x.if_refuted) || (y.if_proved + y.if_refuted) - (x.if_proved + x.if_refuted)).slice(0, top);
-  const implications = [...byProved, ...byMin.filter(r => !byProved.includes(r))];
-  let h = `<p class="note">${rep.classes.length} classes and ${rep.fitting_models.length} fitting models. Open: ${op.implications} implications, ${op.joint_consistency} joint-consistency questions, ${op.consistency} consistency questions.</p>`;
-  h += table(['Implication (top by a proof, then by the smaller score)', 'if proved', 'if refuted'],
-    implications.map(r => `<tr data-lynchpin="imp|${esc(r.premise)}|${esc(r.conclusion)}">${cells(`${pb(r.premise)} ⇒ ${pb(r.conclusion)}`, r.if_proved, r.if_refuted)}</tr>`));
-  h += table(['Consistency', 'if a model', 'if excluded'],
-    rep.consistency.slice(0, top).map(r => `<tr data-lynchpin="con|${esc(r.principles.join('|'))}">${cells(r.principles.map(pb).join(' ∧ '), r.if_model, r.if_excluded)}</tr>`));
-  h += table(['Model check', 'if satisfies', 'if violates'],
-    rep.model_checks.slice(0, top).map(r => `<tr data-lynchpin="check|${esc(r.model)}|${esc(r.principle)}">${cells(`<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: <button class="lnk" data-verdict="${esc(r.principle)}" data-verdict-model="${esc(r.model)}">${esc(name(r.principle))}</button>`, r.if_satisfies, r.if_violates)}</tr>`));
-  body.innerHTML = h;
+  const pb = id => id === FALSE ? esc(name(FALSE)) : trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
+  const stmt = r => r.kind === 'check'
+    ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: <button class="lnk" data-verdict="${esc(r.principle)}" data-verdict-model="${esc(r.model)}">${esc(name(r.principle))}</button>`
+    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ⇒ ${pb(r.conclusion)}`;
+  const key = r => r.kind === 'check' ? `check|${r.model}|${r.principle}` : `q|${r.premises.join('+')}|${r.conclusion}`;
+  body.innerHTML = `<table class="results lynchpin"><thead><tr><th>Question</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
+    rep.rows.map(r => `<tr data-lynchpin="${esc(key(r))}"><td class="stmt">${stmt(r)}</td><td class="num">${r.yes}</td><td class="num">${r.no}</td></tr>`).join('')}</tbody></table>`;
   wire(body);
 }
 
@@ -2497,7 +2395,6 @@ function openPaper(id) {
 }
 function fileLinks(x) {
   const f = x.files || {}; const parts = [];
-  if (f.pdf) parts.push(`<a href="${f.pdf}" target="_blank">pdf</a>`);
   if (x.certificate.lean_ref && (DATA.downloads || {}).lean) parts.push(`<a href="${DATA.downloads.lean}" target="_blank">lean</a>`);
   return parts.length ? `<div class="links">${parts.join(' · ')}</div>` : '';
 }
@@ -2518,7 +2415,7 @@ function loadWriteup(el, x) {
     doc.body.querySelectorAll('a[href]').forEach(a => {
       const href = a.getAttribute('href'), m = /^([a-z0-9-]+)\.html$/.exec(href);
       if (m && (byRid.has(m[1]) || byMid.has(m[1]))) { a.setAttribute('href', 'writeups/' + href); a.dataset.openWriteup = m[1]; }
-      else if (/^[a-z0-9.-]+\.(html|md|pdf)$/.test(href)) a.setAttribute('href', 'writeups/' + href);
+      else if (/^[a-z0-9.-]+\.(html|md)$/.test(href)) a.setAttribute('href', 'writeups/' + href);
       else if (/^https?:/.test(href)) a.target = '_blank';
     });
     box.className = 'prose writeup'; box.innerHTML = doc.body.innerHTML;

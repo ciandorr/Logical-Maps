@@ -31,8 +31,7 @@ py -3 -m venv .venv
 
 The commands below use `python` in the activated environment. In PowerShell,
 use `.\.venv\Scripts\python.exe` instead. Lean, Node, Pandoc, and a database
-server are not needed to edit or publish a map. Pandoc and XeLaTeX can optionally
-produce PDF write-ups; use `--no-pdf` for the standard workflow.
+server are not needed to edit or publish a map.
 
 ## Make your first map
 
@@ -59,7 +58,7 @@ Validation checks structure and recorded consistency, not the truth of prose pro
 
 ```sh
 python scripts/pmap.py validate my-map
-python scripts/pmap.py build my-map --no-pdf
+python scripts/pmap.py build my-map
 python -m http.server 8000 --directory build
 ```
 
@@ -86,7 +85,7 @@ conjectures, incompatibilities, and countermodels.
 python scripts/pmap.py validate
 python scripts/pmap.py selftest
 python topics/example/checks/relations.py
-python scripts/pmap.py build my-map --no-pdf
+python scripts/pmap.py build my-map
 ```
 
 Upload **the whole `build/my-map/` folder** to a directory on your static website.

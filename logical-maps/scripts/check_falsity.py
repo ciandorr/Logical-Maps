@@ -94,40 +94,6 @@ process.stdout.write(JSON.stringify(output));
     actual = json.loads(subprocess.run(['node','-e',harness],input=json.dumps({'code':js,'fixtures':fixtures}),capture_output=True,text=True,check=True).stdout)
     expected = [summary(pmap.Engine(f['ids'], f['rules'], f['models'], f['background'], f.get('negative_background', [])), f['probes']) for f in fixtures]
     assert actual == expected, 'Python and browser engines disagree'
-    # Lynchpin scores: the browser class mirrors pmap.Lynchpins on the selftest
-    # fixtures and on every developed topic under each of its presets. The
-    # browser is handed the models Python found to fit the background.
-    P = lambda i: {'id': i, 'name': i}
-    R = lambda i, prem, c: {'id': i, 'premises': prem, 'conclusion': c, 'status': 'proved'}
-    M = lambda i, sat, viol: {'id': i, 'satisfies': sat, 'violates': viol, 'status': 'proved'}
-    small = {'topic': {'background': []}, 'principles': [P(x) for x in 'pqrs'],
-             'results': [R('pq', ['p'], 'q')], 'models': [M('m1', ['p'], ['s']), M('m2', ['r'], [])]}
-    rich = {'topic': {'background': ['bg']}, 'principles': [P(x) for x in 'bg a b c d e f g'.split()],
-            'results': [R('r1', ['a'], 'b'), R('r2', ['b'], 'a'), R('r3', ['a', 'c'], 'd'), R('r6', ['e'], 'c'), R('x', ['d', 'e'], pmap.FALSE), R('g', ['g'], 'e')],
-            'models': [M('m1', ['a'], ['d']), M('m2', ['b', 'c'], ['e']), M('m3', ['g'], [])]}
-    cases = [(small, []), (small, ['p']), (rich, []), (rich, ['c'])]
-    for topic in pmap.list_topics():
-        data = pmap.load_topic(topic)
-        L = pmap.Lynchpins(data)
-        n = len(L.reps) * (len(L.reps) - 1)
-        if n and sum(1 for q in L.open if q[0] == 'imp') / n > pmap.LYNCHPIN_MAX_OPEN:
-            continue
-        cases += [(data, [])] + [(data, pre['principles']) for pre in data['topic'].get('background_presets', [])]
-    lynch = [pmap.Lynchpins(data, bg) for data, bg in cases]
-    fixtures = [dict(ids=L.ids, rules=[{k: r[k] for k in ('id', 'premises', 'conclusion')} for r in L.results],
-                     models=[{k: m[k] for k in ('id', 'satisfies', 'violates')} for m in L.models],
-                     background=L.background, negative_background=L.negative) for L in lynch]
-    harness = '''
-const vm=require('node:vm'),fs=require('node:fs');
-const input=JSON.parse(fs.readFileSync(0,'utf8'));
-const context=vm.createContext({});
-vm.runInContext('const FALSE="false";'+input.code+';globalThis.Engine=Engine;globalThis.Lynchpins=Lynchpins;',context);
-process.stdout.write(JSON.stringify(input.fixtures.map(f=>new context.Lynchpins(new context.Engine(f.ids,f.rules,f.models,f.background,f.negative_background)).rank())));
-'''
-    actual = json.loads(subprocess.run(['node','-e',harness],input=json.dumps({'code':js,'fixtures':fixtures}),capture_output=True,text=True,check=True).stdout)
-    for L, (data, bg), got in zip(lynch, cases, actual):
-        assert got == L.rank(), f"Python and browser lynchpin scores disagree for {data['topic'].get('id', 'fixture')} under {bg}"
-    lynch_cases = len(cases)
     # Test actual generated Lean text, not merely the coverage count.
     with tempfile.TemporaryDirectory() as d:
         root = Path(d); (root/'Test').mkdir()
@@ -138,7 +104,7 @@ process.stdout.write(JSON.stringify(input.fixtures.map(f=>new context.Lynchpins(
         generated = path.read_text()
         assert 'Test.A P →\n    False' in generated
         assert 'False P' not in generated
-    print(f'PASS: 40 exhaustive Horn theories with positive/negative backgrounds, topic Python/JavaScript parity, model conflicts, lynchpin scores in {lynch_cases} cases, and native Lean False generation.')
+    print(f'PASS: 40 exhaustive Horn theories with positive/negative backgrounds, topic Python/JavaScript parity, model conflicts, and native Lean False generation.')
 
 
 if __name__ == '__main__':

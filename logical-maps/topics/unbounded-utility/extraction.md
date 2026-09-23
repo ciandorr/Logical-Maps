@@ -255,7 +255,7 @@ From `logical-maps/`, with its Python requirements installed:
 ```sh
 python3 scripts/pmap.py validate unbounded-utility
 python3 topics/unbounded-utility/checks/countermodels.py
-python3 scripts/pmap.py build unbounded-utility --no-pdf
+python3 scripts/pmap.py build unbounded-utility
 ```
 
 Open `build/unbounded-utility/index.html`. Source YAML, the framework, and

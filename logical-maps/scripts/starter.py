@@ -29,7 +29,7 @@ def build_starter(destination: Path | None = None) -> Path:
         # Ship working previews. The internal build must not recursively package
         # another starter; recipients can regenerate their own starter later.
         subprocess.run([sys.executable, str(root / "scripts" / "pmap.py"),
-                        "build", "--no-pdf", "--no-starter"], cwd=root, check=True,
+                        "build", "--no-starter"], cwd=root, check=True,
                        stdout=subprocess.PIPE, text=True)
         subprocess.run([sys.executable, str(root / "topics" / "example" / "checks" / "relations.py")],
                        cwd=root, check=True, stdout=subprocess.PIPE, text=True)

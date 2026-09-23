@@ -31,6 +31,6 @@ jobs:
       - name: Rebuild and check downloads
         working-directory: logical-maps
         run: |
-          python scripts/pmap.py build --no-pdf
+          python scripts/pmap.py build
           python scripts/check_public.py
           python scripts/check_starter.py

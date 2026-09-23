@@ -8,4 +8,3 @@ status: ; $(PY) scripts/pmap.py status
 selftest: ; $(PY) scripts/pmap.py selftest
 checks: ; $(PY) topics/decision-theory/checks/countermodels.py
 clean: ; rm -rf build
-build-fast: ; $(PY) scripts/pmap.py build --no-pdf

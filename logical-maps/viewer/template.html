@@ -110,9 +110,7 @@
   #open .star { margin-right: 4px; }
   #open td.rank { color: var(--ink-3); }
   #open .status { font-size: 12px; color: var(--ink-3); margin-left: 4px; }
-  #open details.lynchpin-note { font-size: 12px; color: var(--ink-2); margin: 2px 0 0 18px; }
-  #open details.lynchpin-note > summary { cursor: pointer; color: var(--ink-3); }
-  #open details.lynchpin-note .prose { margin: 3px 0; }
+  #open td.stmt .links { font-size: 12px; margin-left: 6px; }
   .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
   .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
   .pane-divider[aria-orientation="vertical"] { cursor: col-resize; }
@@ -2389,8 +2387,8 @@ function renderOpen() {
   warning.innerHTML = inconsistent ? `<h2>Background is inconsistent</h2><p>These assumptions cannot all hold together. Conjecture resolutions are unavailable until the conflicting assumptions are removed.</p>${conjectureEvidence({via: backgroundConflicts[0].via, models: []})}<p>This check uses proved results under the current evidence filters.</p>` : allConflict ? `<h2>Additional evidence shows the background is inconsistent</h2><p>Verdicts from the selected evidence cannot establish which questions remain open with all recorded evidence.</p>${conjectureEvidence({via: allConflict.via, models: []}, allEvidenceBaseE, 'Background conflict with all recorded evidence')}` : '';
   wire(warning);
   let h = '<p class="note" id="open-progress" hidden></p>';
-  h += `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Lynchpin conjectures</summary><p class="hint">Open questions ranked by how many other open questions each answer would settle.</p><div class="lynchpin-body"></div></details>`;
-  h += `<details id="open-recorded"${state.recorded ? ' open' : ''}><summary>Recorded conjectures</summary><p class="hint">The questions the recorded conjectures ask, in the same format; a settled question or one with more than two premises has no rank or scores.</p><div class="lynchpin-body"></div></details>`;
+  h += `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Central Questions</summary><p class="hint">Open questions ranked by how many other open questions each answer would settle.</p><div class="lynchpin-body"></div></details>`;
+  h += `<details id="open-recorded"${state.recorded ? ' open' : ''}><summary>Conjectures</summary><p class="hint">Each recorded conjecture as the question it asks: ⊢ claims the entailment, ⊬ denies it; if yes and if no are what confirming or refuting it would settle. A settled conjecture shows its verdict and no rank or scores; one with more than two premises is marked.</p><div class="lynchpin-body"></div></details>`;
   const el = document.getElementById('open'); el.innerHTML = h;
   wire(el);
   const lynchpins = document.getElementById('lynchpins'), recorded = document.getElementById('open-recorded');
@@ -2429,24 +2427,27 @@ function renderProgress() {
   el.title = `${p.settled} of ${p.questions} questions S ⊢ c, with S at most ${p.premises} principle classes and c a class or ⊥, are proved, excluded or refuted by a model under this background, using all recorded proved evidence. Computed at build time for the topic background and each preset.`;
 }
 const SETTLED = new Set(['proved', 'refuted', 'excluded', 'consistent', 'inconsistent']);
-function rankedTable(rep, rows) {
+function rankedTable(rep, rows, conjectures = false) {
   // The class of theorems is shown as True, as elsewhere in the viewer.
   const trivial = new Set(rep.trivial);
   const pb = id => id === FALSE ? esc(name(FALSE)) : trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
+  // As a conjecture, a row reads in the record's direction: ⊢ for a result, ⊬ for a
+  // model, with the scores turned to what confirming or refuting it would settle.
+  const denies = r => conjectures && r.claim === 'not';
   const stmt = r => r.kind === 'check'
     ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: ${pb(r.principle)}`
-    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ⊢ ${pb(r.conclusion)}`;
+    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ${denies(r) ? '⊬' : '⊢'} ${pb(r.conclusion)}`;
   const key = r => r.kind === 'check' ? `check|${r.model}|${r.principle}` : `q|${r.premises.join('+')}|${r.conclusion}`;
-  // A recorded conjecture that asks the row's question travels with it: a star
-  // says someone has already worked on it, and its notes open beneath. Python
-  // sets the tier: bronze for notes, silver or gold when a record ranks it by hand.
-  const noted = r => (r.conjectures || []).filter(c => c.notes);
-  const notes = r => noted(r).map(c => `<details class="lynchpin-note"><summary>${esc(c.id)}</summary><div class="prose">${fmt(c.notes)}</div><p><button class="lnk" data-open-${c.kind === 'model' ? 'model' : 'result'}="${esc(c.id)}">details</button></p></details>`).join('');
+  // A recorded conjecture that asks the row's question travels with it: a star says
+  // someone has already worked on it, and a link opens the record. Python sets the
+  // tier: bronze for notes, silver or gold when a record ranks it by hand.
+  const links = r => (r.conjectures || []).map(c => `<button class="lnk" data-open-${c.kind === 'model' ? 'model' : 'result'}="${esc(c.id)}" title="${esc(c.id)}">details</button>`).join(' ');
   const star = r => r.tier ? `<span class="star iridescent ${esc(r.tier)}" title="${esc(r.tier)}: a recorded conjecture asks this question${r.tier === 'bronze' ? '' : ', ranked by importance and difficulty'}">★</span>` : '';
-  const status = r => r.status && r.status !== 'open' ? ` <span class="status">${r.status === 'outside' ? 'more than two premises' : esc(r.status)}</span>` : '';
+  const status = r => r.status && r.status !== 'open' ? ` <span class="status">${r.status === 'outside' ? 'more than two premises' : esc(r.verdict || r.status)}</span>` : '';
   const num = x => x === null || x === undefined ? '—' : x;
-  return `<table class="results lynchpin"><thead><tr><th class="num">#</th><th>Question</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
-    rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${r.tier ? ` data-starred="${esc(r.tier)}"` : ''}${r.status && r.status !== 'open' ? ` data-status="${esc(r.status)}"` : ''}><td class="num rank">${num(r.rank)}</td><td class="stmt">${star(r)}${stmt(r)}${status(r)}${notes(r)}</td><td class="num">${num(r.yes)}</td><td class="num">${num(r.no)}</td></tr>`).join('')}</tbody></table>`;
+  const scores = r => denies(r) ? [r.no, r.yes] : [r.yes, r.no];
+  return `<table class="results lynchpin"><thead><tr><th class="num">#</th><th>${conjectures ? 'Conjecture' : 'Question'}</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
+    rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${r.tier ? ` data-starred="${esc(r.tier)}"` : ''}${r.status && r.status !== 'open' ? ` data-status="${esc(r.status)}"` : ''}${denies(r) ? ' data-claim="not"' : ''}><td class="num rank">${num(r.rank)}</td><td class="stmt">${star(r)}${stmt(r)}${status(r)}${links(r) ? ` <span class="links">${links(r)}</span>` : ''}</td><td class="num">${num(scores(r)[0])}</td><td class="num">${num(scores(r)[1])}</td></tr>`).join('')}</tbody></table>`;
 }
 function renderLynchpins() {
   renderProgress();
@@ -2472,7 +2473,7 @@ function renderLynchpins() {
       body.innerHTML = `<p class="note">${key === 'rows' ? 'Nothing is open.' : (rep.recorded || []).length ? 'Every recorded conjecture is settled; Show resolved lists them.' : 'No conjectures have been recorded.'}</p>`;
       continue;
     }
-    body.innerHTML = rankedTable(rep, rows);
+    body.innerHTML = rankedTable(rep, rows, key === 'recorded');
     wire(body);
   }
 }
@@ -2882,7 +2883,7 @@ function renderHeader() {
   navigation.replaceChildren(...(DATA.navigation || []).map(item => {
     const link = document.createElement('a'); link.href = item.url; link.textContent = item.label; return link;
   }));
-  document.getElementById('subtitle').textContent = (T.description || '').trim();
+  const subtitle = document.getElementById('subtitle'); subtitle.textContent = (T.description || '').trim(); subtitle.hidden = !subtitle.textContent;
   const dl = DATA.downloads || {};
   const downloadLinks = [
     [DATA.repository_url, 'GitHub', 'Browse the Logical Maps repository.'],

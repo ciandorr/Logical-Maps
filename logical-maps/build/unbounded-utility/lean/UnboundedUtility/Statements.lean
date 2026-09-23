@@ -1153,12 +1153,11 @@ def cdf_conclosure_preorder : Prop :=
 
 /-- `conjectured-total-comonotonic-area-extension`  (conjectured)
 
-CDF-area: total comonotonic extension: a witness satisfying 8 principles
+CDF-area: total comonotonic extension: a witness satisfying 7 principles
 and violating 0. -/
 def conjectured_total_comonotonic_area_extension : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.Totality W.pref ∧
     UnboundedUtility.StochasticEquivalence W.pref ∧
     UnboundedUtility.SimpleEU W.pref ∧
     UnboundedUtility.StochasticDominance W.pref ∧

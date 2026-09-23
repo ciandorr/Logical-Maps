@@ -394,25 +394,25 @@ details does not cover or resize the graph. The panel lists selected principles 
 definitions and individual remove buttons.
 
 The Conjectures tab shares the background controls. Its sections collapse:
-**Lynchpin conjectures** ranks open questions by how many other open questions
+**Central Questions** ranks open questions by how many other open questions
 each answer would settle. A question is S ⊢ c, whether S entails c, for S at
 most two principle classes (True, with none) and c a class or False, asked only
 where no smaller premise set already proves or excludes c, and settled alike by
 a proof, an exclusion or a fitting model; "no" denies the entailment; a model check (model: principle) is scored the
-same way. A row that a recorded conjecture asks about carries a star, the notes open
-beneath it, and the row is listed at its rank even when it falls below the
-stored top. The star is bronze when the record has notes, and silver or gold
+same way. A row that a recorded conjecture asks about carries a star and a details link
+to the record. The star is bronze when the record has notes, and silver or gold
 when the record says `tier: silver` or `tier: gold`, a human ranking of the
 question by importance and difficulty. The ranking is computed at build time for the topic background and
 each preset, so an ad-hoc background shows none, and a topic marked `draft: true`
-in its `topic.yaml` gets none at all. **Recorded conjectures** lists
-the questions the recorded conjectures ask, in the same format: a question that
-is open sits at its rank with its scores, whether or not it made the ranking's
-stored top; a question already settled shows its status (proved, refuted,
-excluded, consistent or inconsistent) and no rank or scores; a question with
-more than two premises is listed the same way, marked as such. **Show resolved**
-is off by default, hiding the settled ones. A sparse map, too open to rank,
-still lists and scores its recorded conjectures. Verdicts come from proved
+in its `topic.yaml` gets none at all. **Conjectures** lists each
+recorded conjecture as the question it asks, in the same format: ⊢ when a result
+claims the entailment, ⊬ when a model denies it, with "if yes" and "if no" what
+confirming or refuting the conjecture would settle. An open conjecture sits at
+its rank with its scores, whether or not it made the ranking's stored top; a
+settled one shows its verdict, proved or refuted, and no rank or scores; one
+with more than two premises is listed the same way, marked as such. **Show
+resolved** is off by default, hiding the settled ones. A sparse map, too open to
+rank, still lists and scores its conjectures. Verdicts come from proved
 evidence under the background and never from conjectures; a model witnesses a
 conjecture's flags, not its proposed construction. A line above the sections gives the share of
 implication questions with up to two premises settled: S ⊢ c for S at most two

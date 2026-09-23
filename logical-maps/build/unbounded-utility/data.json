@@ -35,7 +35,6 @@
    }
   ],
   "title": "Unbounded Utility",
-  "description": "Logical map of decision-theoretic principles when utility is unbounded.",
   "framework": "Gambles are measurable outcome-valued random variables on an atomless standard probability space. All such variables are available (Prospect Richness is standing). ≽ is reflexive and transitive, not assumed total or law-invariant. Outcomes are linearly ordered, with distinct reference outcomes 0 and 1, and sure-indifferent outcomes identified. A possibly partial real utility chart is defined by binary certainty comparisons; see background.md. Rich Outcomes supplies all real levels; Archimedean Outcomes rules out outcomes beyond the finite chart. M_p(X,Y) is randomized selection, never the pointwise sum pX+(1-p)Y.",
   "background": [],
   "background_presets": [
@@ -5233,7 +5232,6 @@
    "name": "CDF-area: total comonotonic extension",
    "satisfies": [
     "rich-outcomes",
-    "totality",
     "stochastic-equivalence",
     "simple-eu",
     "stochastic-dominance",
@@ -6061,7 +6059,7 @@
    }
   }
  ],
- "generated": "2026-09-23T21:12:30+00:00",
+ "generated": "2026-09-23T21:27:35+00:00",
  "progress": [
   {
    "background": null,
@@ -6637,8 +6635,7 @@
        "cdf-area-extension",
        "comonotonic-sum-consistency",
        "independence",
-       "rich-outcomes",
-       "totality"
+       "rich-outcomes"
       ],
       "conclusion": "false",
       "rank": null,
@@ -6653,6 +6650,7 @@
         "tier": "silver"
        }
       ],
+      "claim": "not",
       "tier": "silver"
      },
      {
@@ -6678,6 +6676,7 @@
         "tier": null
        }
       ],
+      "claim": "entails",
       "tier": "bronze"
      },
      {
@@ -6699,7 +6698,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      },
      {
       "kind": "question",
@@ -6720,7 +6721,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      }
     ]
    },
@@ -7205,14 +7208,13 @@
       "kind": "question",
       "premises": [
        "cdf-area-extension",
-       "comonotonic-sum-consistency",
-       "totality"
+       "comonotonic-sum-consistency"
       ],
       "conclusion": "false",
       "rank": null,
       "yes": null,
       "no": null,
-      "status": "outside",
+      "status": "consistent",
       "conjectures": [
        {
         "id": "conjectured-total-comonotonic-area-extension",
@@ -7221,7 +7223,9 @@
         "tier": "silver"
        }
       ],
-      "tier": "silver"
+      "claim": "not",
+      "tier": "silver",
+      "verdict": "proved"
      },
      {
       "kind": "question",
@@ -7241,7 +7245,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      },
      {
       "kind": "question",
@@ -7261,7 +7267,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      },
      {
       "kind": "question",
@@ -7282,7 +7290,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      }
     ]
    },
@@ -7771,6 +7781,7 @@
         "tier": "silver"
        }
       ],
+      "claim": "not",
       "tier": "silver"
      },
      {
@@ -7791,7 +7802,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      },
      {
       "kind": "question",
@@ -7811,7 +7824,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      },
      {
       "kind": "question",
@@ -7831,7 +7846,9 @@
         "tier": null
        }
       ],
-      "tier": "bronze"
+      "claim": "entails",
+      "tier": "bronze",
+      "verdict": "refuted"
      }
     ]
    }
@@ -10548,9 +10565,13 @@
     "models": []
    },
    "conjectured-total-comonotonic-area-extension": {
-    "status": "open",
-    "via": [],
-    "models": []
+    "status": "proved",
+    "via": [
+     "expected-utility-implies-simple"
+    ],
+    "models": [
+     "cdf-area-preorder"
+    ]
    },
    "conjectured-total-independent-sum-extension": {
     "status": "proved",

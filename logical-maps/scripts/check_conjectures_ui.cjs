@@ -49,13 +49,13 @@ const q=(premises,conclusion,yes,no,rank,extra)=>({kind:'question',premises,conc
 const rec=(id,kind,notes)=>({id,kind,notes,tier:null});
 // What pmap.py stores for this fixture: its settled share and, under the topic background, the
 // questions its recorded conjectures ask (the ranking's own top rows are not needed here).
-const recorded=[q(['b'],'false',26,0,2,{conjectures:[rec('open-model','model','')]}),q(['b'],'a',13,2,7,{conjectures:[rec('open-model','model','')]}),
-  q(['a'],'b',6,2,34,{tier:'bronze',conjectures:[rec('open-query','result','Open still.')]}),
-  q(['a'],'false',null,null,null,{status:'consistent',conjectures:[rec('proved-model','model','')]}),
-  q(['a'],'d',null,null,null,{status:'excluded',conjectures:[rec('refuted-query','result',''),rec('proved-model','model','')]}),
-  q(['a','d'],'b',null,null,null,{status:'excluded',conjectures:[rec('incompatible-query','result','')]}),
-  q(['a','d'],'false',null,null,null,{status:'inconsistent',conjectures:[rec('refuted-model','model','')]}),
-  q(['a'],'c',null,null,null,{status:'proved',conjectures:[rec('proved-query','result','')]})];
+const recorded=[q(['b'],'false',26,0,2,{claim:'not',conjectures:[rec('open-model','model','')]}),q(['b'],'a',13,2,7,{claim:'not',conjectures:[rec('open-model','model','')]}),
+  q(['a'],'b',6,2,34,{claim:'entails',tier:'bronze',conjectures:[rec('open-query','result','Open still.')]}),
+  q(['a'],'false',null,null,null,{status:'consistent',claim:'not',verdict:'proved',conjectures:[rec('proved-model','model','')]}),
+  q(['a'],'d',null,null,null,{status:'excluded',claim:'entails',verdict:'refuted',conjectures:[rec('refuted-query','result',''),rec('proved-model','model','')]}),
+  q(['a','d'],'b',null,null,null,{status:'excluded',claim:'entails',verdict:'refuted',conjectures:[rec('incompatible-query','result','')]}),
+  q(['a','d'],'false',null,null,null,{status:'inconsistent',claim:'not',verdict:'refuted',conjectures:[rec('refuted-model','model','')]}),
+  q(['a'],'c',null,null,null,{status:'proved',claim:'entails',verdict:'proved',conjectures:[rec('proved-query','result','')]})];
 const progress={background:null,name:null,principles:[],negative:[],premises:2,questions:56,settled:8,open:48};
 const fixture={
   topic:{id:'conjectures-fixture',title:'Conjectures fixture',background:[],
@@ -113,21 +113,28 @@ try {
   assert.equal(doc.getElementById('show-resolved').checked,false);
   assert.equal(doc.querySelector('[data-tab="open"]').textContent.trim(),'Conjectures','the tab carries no count');
   assert.equal(doc.getElementById('open-recorded').open,false,'the dropdown starts collapsed');
-  assert.equal(doc.querySelector('#open-recorded > summary').textContent.trim(),'Recorded conjectures');
+  assert.equal(doc.querySelector('#open-recorded > summary').textContent.trim(),'Conjectures');
+  assert.equal(doc.querySelector('#lynchpins > summary').textContent.trim(),'Central Questions');
   openSection(dom,'open-recorded');
   assert.deepEqual(keys(dom),['q|b|false','q|b|a','q|a|b'],'open questions only, in rank order');
   assert.deepEqual([...doc.querySelectorAll('#open-recorded td.rank')].map(td=>td.textContent),['2','7','34']);
   assert.ok(rowOf(dom,'q|a|b').querySelector('.star.iridescent.bronze'),'a conjecture with notes is starred');
   assert.equal(rowOf(dom,'q|b|a').querySelector('.star'),null,'one without notes is not');
-  assert.ok(rowOf(dom,'q|a|b').querySelector('details.lynchpin-note button[data-open-result="open-query"]'));
+  assert.equal(rowOf(dom,'q|a|b').querySelector('.links button[data-open-result="open-query"]').textContent,'details','a link to the record, no dropdown');
+  assert.equal(rowOf(dom,'q|a|b').querySelector('details'),null);
+  assert.equal(rowOf(dom,'q|b|a').dataset.claim,'not','a model conjectures against the entailment');
+  assert.match(rowOf(dom,'q|b|a').textContent,/B ⊬ A/);
+  assert.deepEqual([...rowOf(dom,'q|b|a').querySelectorAll('td.num:not(.rank)')].map(td=>td.textContent),['2','13'],'its scores are what confirming or refuting it would settle');
+  assert.match(rowOf(dom,'q|a|b').textContent,/A ⊢ B/);
   setResolved(dom,true);
   assert.deepEqual(keys(dom),['q|b|false','q|b|a','q|a|b','q|a|false','q|a|d','q|a+d|b','q|a+d|false','q|a|c'],'Show resolved adds the settled ones');
-  for(const [key,status] of [['q|a|false','consistent'],['q|a|d','excluded'],['q|a+d|b','excluded'],['q|a+d|false','inconsistent'],['q|a|c','proved']]) {
+  // A settled conjecture shows its verdict relative to what it claimed.
+  for(const [key,status,verdict] of [['q|a|false','consistent','proved'],['q|a|d','excluded','refuted'],['q|a+d|b','excluded','refuted'],['q|a+d|false','inconsistent','refuted'],['q|a|c','proved','proved']]) {
     assert.equal(rowOf(dom,key).dataset.status,status,key);
-    assert.equal(rowOf(dom,key).querySelector('.status').textContent,status);
+    assert.equal(rowOf(dom,key).querySelector('.status').textContent,verdict,key);
     assert.equal(rowOf(dom,key).querySelector('td.rank').textContent,'—');
   }
-  assert.equal(rowOf(dom,'q|a|d').querySelectorAll('details.lynchpin-note').length,0,'records without notes attach silently');
+  assert.equal(rowOf(dom,'q|a|d').querySelectorAll('.links button').length,2,'each record that asks the question gets its link');
   setResolved(dom,false);
   assert.deepEqual(keys(dom),['q|b|false','q|b|a','q|a|b']);
 
@@ -184,15 +191,22 @@ try {
   const du=assumptions(real);
   show(real,'open'); openSection(real,'open-recorded');
   const silver=()=>rd.querySelector('#open-recorded [data-starred="silver"]');
-  assert.ok(silver(),'the silver-ranked conjecture is listed under DU');
-  assert.equal(silver().dataset.status,'outside','where it has more than two premises');
+  // Without Totality the silver conjecture's claim is already witnessed under DU, so it is
+  // settled there and waits for Show resolved; under DTU it is the open question CDF-Area
+  // Extension ∧ Comonotonic Sum Invariance ⊬ False, at its rank.
+  assert.equal(silver(),null,'settled under DU, hidden until Show resolved');
   assert.ok(keys(real).every(k=>!rowOf(real,k).dataset.status||rowOf(real,k).dataset.status==='outside'),'settled ones wait for Show resolved');
+  setResolved(real,true);
+  assert.ok(silver()); assert.equal(silver().dataset.status,'consistent'); assert.equal(silver().querySelector('.status').textContent,'proved','a witnessed non-entailment is proved');
+  assert.equal(silver().dataset.claim,'not','a model conjectures against the entailment');
+  setResolved(real,false);
   real.window.addBackgroundPreset('dtu');
   assert.deepEqual(assumptions(real),[...du,'totality'].sort());
-  assert.ok(silver(),'under DTU it is a two-premise open question');
+  assert.ok(silver(),'open under DTU as a two-premise question');
   assert.equal(silver().dataset.status,undefined);
   assert.match(silver().querySelector('td.rank').textContent,/^\d+$/,'at its rank');
-  assert.ok(silver().querySelector('details.lynchpin-note'),'with its notes');
+  assert.match(silver().textContent,/⊬ False/);
+  assert.ok(silver().querySelector('.links button[data-open-model]'),'with a link to the record');
   assert.ok(visible(real,rd.querySelector('#background-dock [data-background-preset="du"]')));
   assert.ok(visible(real,rd.querySelector('#background-dock [data-background-preset="dtu"]')));
   const shown=keys(real).length;
@@ -219,5 +233,5 @@ try {
   assert.deepEqual(keys(dom),['q|b|false','q|b|a','q|a|b']);
   assert.equal(progressEl().textContent,settled);
   assert.deepEqual(errors,[]);
-  console.log('PASS: recorded conjectures in the lynchpin format at their rank or with their status, tiered stars, stable shares under source filters, shared sidebar controls, ad-hoc and incompatible backgrounds, and the DTU conjecture on the real map.');
+  console.log('PASS: conjectures in the central-questions format, in their records\' direction with verdicts once settled, tiered stars with a details link, stable shares under source filters, shared sidebar controls, ad-hoc and incompatible backgrounds, and the silver conjecture on the real map.');
 } finally { pages.forEach(dom=>dom.window.close()); }

@@ -2,7 +2,6 @@ id: conjectured-total-comonotonic-area-extension
 name: "CDF-area: total comonotonic extension"
 satisfies:
 - rich-outcomes
-- totality
 - stochastic-equivalence
 - simple-eu
 - stochastic-dominance
@@ -11,6 +10,7 @@ satisfies:
 - comonotonic-sum-consistency
 violates: []
 status: conjectured
+tier: silver
 certificate:
   source_id: misc
   lean: stated
@@ -36,9 +36,11 @@ description: >-
 sources:
 - 'Zachary Goodsell, Unbounded Utility and Background Risk, unpublished manuscript, 5 June 2026, §3, pp. 7–8, and discussion before Theorem 7 and Theorem 7, pp. 19–20: CDF-area construction, its comonotonic invariance, and the broader unresolved consistency question.'
 - 'GPT-6 (Codex), 9 September 2026, proposed total-extension package and obstacle analysis in writeups/conjectured-total-comonotonic-area-extension.md.'
+- 'Claude (Fable 5.1), Logical Maps, 23 September 2026: killing lemma and an explicit forced comparison, section “A necessary condition: forced comparisons of both-infinite pairs” of the write-up; diagnostic checks/comonotonic_witnesses.py.'
 source_names:
 - Unbounded Utility and Background Risk (unpublished)
 - GPT-6 conjecture 9 Sep
+- Claude killing lemma 23 Sep
 notes: >-
   Original work: precise candidate formulation and comparison of two
   extension problems. The base area construction, its comonotonic
@@ -53,6 +55,19 @@ notes: >-
   A generic order extension is insufficient, and the total convolution
   model is not evidence that comonotonic invariance survives. No claim
   is made that the question is open in the literature.
+
+  Progress (Claude, Fable 5.1, 23 September 2026; write-up section “A necessary condition: forced comparisons of both-infinite pairs”): a killing lemma shows that under Stochastic Equivalence, Stochastic Dominance, Mixture Independence and comonotonic preservation alone, X ≽ Y fails whenever comonotonic shears of the survival difference combine with positive weights into a nonpositive nonzero profile; an explicit both-infinite pair is killed, so the extension must rank it Y ≻ X where the area is silent. Prefix positivity, a positive lowest block, or divergent prefix sums certify that a pair is not killed; for prefix-oscillating block regions the sign of the lowest block is forced. An accounting heuristic suggests that no pair is killed in both orientations, so the lemma alone will not refute the package. Every clipped-expectation model in this topic violates Comonotonic Sum Invariance (half-Cauchy common summand), so the extension cannot come from clipped areas, and probability-trimmed quantile means are comonotonic invariant but not mixture-linear. Candidate: the area when defined, else a functional of the level-ordered block surplus, completed by Zorn's lemma over cones closed under both additive structures with the killing lemma as the pointedness test; regions with no lowest block are where a refutation would have to be sought. Tier set to silver by Zachary Goodsell, 23 September 2026.
+checks:
+- topics/unbounded-utility/checks/comonotonic_witnesses.py
+changes:
+- date: '2026-09-23'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Necessary condition added (write-up section “A necessary condition: forced comparisons of both-infinite pairs”): under Stochastic Equivalence, Stochastic Dominance, Mixture Independence and the preservation half of Comonotonic Sum Invariance, a pair whose survival difference d admits comonotonic shears d^{Z_i} and weights with d + Σ q_i d^{Z_i} ≤ 0, ≠ 0, cannot satisfy X ≽ Y. An explicit both-infinite pair with two step-function shears is exhibited, so the sought total extension must rank it Y ≻ X although CDF-Area Extension is silent on it. The conjecture itself is unchanged.
+- date: '2026-09-23'
+  by: Zachary Goodsell (tier); Claude (Fable 5.1) (notes and write-up)
+  summary: >-
+    Tier raised to silver by Zachary Goodsell. The write-up section on forced comparisons was expanded with the coordinate reduction, three certificates that a pair is not killed, worked block regions (a prefix-oscillating region that is killed, one that is not, and doubly infinite variants), an accounting heuristic suggesting that no pair is killed in both orientations, a duality caveat, and candidate constructions; the notes summarize them. No status change.
 references:
 - paper: unpublished-background-risk
   role: background

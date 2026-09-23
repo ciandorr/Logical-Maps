@@ -63,3 +63,15 @@ principle_categories:
 - id: prospect-evaluations
   name: Prospect evaluations
 lean_lib: UnboundedUtility
+lean:
+  imports: [UnboundedUtility.Principles]
+  namespace: UnboundedUtility
+  definition_check: |-
+    example {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) : Prop :=
+      {def} P
+  result:
+    binder: "∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) [P.Regular],"
+    principle: "{def} P"
+  model:
+    binder: "∃ W : Witness,"
+    principle: "{def} W.pref"

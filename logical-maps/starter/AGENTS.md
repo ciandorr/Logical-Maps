@@ -62,7 +62,9 @@ a new topic when the user requests one. `topics/example/` is a tutorial;
 
 Do not introduce Lean as a prerequisite for using this starter. If the user
 chooses formalisation, add a topic-local Lean project and `lean_lib` setting.
-Use `lean_def` to connect principles to definitions. Generated Statements.lean
+Use `lean_def` to connect principles to definitions, and declare the shape of a
+statement under `lean:` in `topic.yaml` (binder and how a principle applies; see
+the project README); the tooling assumes no framework. Generated Statements.lean
 is rebuilt by `pmap lean`; do not edit it by hand. Never set `lean: verified`
 manually: `pmap lean-check --update` must verify the exact generated statement
 and reject `sorryAx` or unapproved axioms first.

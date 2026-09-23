@@ -1426,7 +1426,8 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
 #
 # The YAML is the single source of truth for *statements*. Each principle names one
 # hand-written Lean definition in `lean_def`; every result and model statement is then
-# generated from its premises and conclusion. A proof cannot silently drift from the
+# generated from its premises and conclusion, in the shape the topic declares under
+# `lean:` (see lean_config). A proof cannot silently drift from the
 # recorded claim, because the statement it must inhabit is machine-written from the
 # record. `lean-check` builds the library and refuses to call anything verified while it
 # still depends on `sorryAx`.
@@ -1454,18 +1455,42 @@ def lean_coverage(data: dict) -> dict:
     return {"defs": defs, "ready": ready, "blocked": blocked}
 
 
+LEAN_DEFAULTS = {"definition_check": "example : Prop := {def}",
+                 "result": {"binder": "", "principle": "{def}"},
+                 "model": {"binder": "", "principle": "{def}"}}
+
+
+def lean_config(data: dict) -> dict:
+    """How this topic writes a generated Lean statement.
+
+    Declared under `lean:` in topic.yaml: `imports`, `namespace`, a `definition_check`
+    template, and for results and models a `binder` and how a `principle` applies, with
+    `{def}` standing for the principle's `lean_def`. Without a declaration, principles are
+    plain propositions and a result reads A → B → C. Nothing here knows any framework.
+    """
+    lib = data["topic"].get("lean_lib")
+    cfg = data["topic"].get("lean") or {}
+    defs = [p["lean_def"] for p in data["principles"] if p.get("lean_def")]
+    namespace = cfg.get("namespace") or (defs[0].rsplit(".", 1)[0] if defs else lib)
+    return {"imports": list(cfg.get("imports") or [f"{lib}.Principles"]), "namespace": namespace,
+            "definition_check": cfg.get("definition_check", LEAN_DEFAULTS["definition_check"]),
+            "result": {**LEAN_DEFAULTS["result"], **cfg.get("result", {})},
+            "model": {**LEAN_DEFAULTS["model"], **cfg.get("model", {})}}
+
+
 def generate_lean_statements(topic_id: str) -> Path | None:
-    """Write <lib>/Statements.lean: one generated Prop per statable record."""
+    """Write <lib>/Statements.lean: one generated Prop per statable record, in the topic's own shape."""
     data = load_topic(topic_id)
     loc = lean_lib_dir(topic_id, data)
     if loc is None:
         return None
     root, lib = loc
-    cov = lean_coverage(data)
+    cov, cfg = lean_coverage(data), lean_config(data)
     defs, names = cov["defs"], {FALSE: "False (⊥)", **{p["id"]: p["name"] for p in data["principles"]}}
-    ns = defs[next(iter(defs))].rsplit(".", 1)[0] if defs else lib
+    ns = cfg["namespace"]
+    fill = lambda template, pid: template.replace("{def}", defs[pid])
 
-    out = [f"import {lib}.Principles", "",
+    out = [*(f"import {m}" for m in cfg["imports"]), "",
            "/-!", "# Generated statements", "",
            "Written by `pmap lean " + topic_id + "` from the YAML records. **Do not edit.**",
            "",
@@ -1476,31 +1501,32 @@ def generate_lean_statements(topic_id: str) -> Path | None:
            f"namespace {ns}.Statements", f"open {ns}", ""]
 
     # Check definitions even when a principle is not yet used by an edge or model.
-    for pid, definition in sorted(defs.items()):
-        out += [f"/-- Principle definition check: `{pid}`. -/",
-                "example {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) : Prop :=",
-                f"  {definition} P", ""]
+    for pid in sorted(defs):
+        out += [f"/-- Principle definition check: `{pid}`. -/", *fill(cfg["definition_check"], pid).split("\n"), ""]
 
     for item in cov["ready"]:
         nm = _lean_name(item["id"])
         conj = item.get("status") == "conjectured"
+        shape = cfg["result" if "premises" in item else "model"]
         if "premises" in item:
             head = " ∧ ".join(names[x] for x in item["premises"]) or "⊤"
             out += [f"/-- `{item['id']}`" + ("  (conjectured)" if conj else ""), "",
-                    f"{head} ⇒ {names[item['conclusion']]} -/",
-                    f"def {nm} : Prop :=",
-                    "  ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) [P.Regular],"]
-            for x in item["premises"]:
-                out.append(f"    {defs[x]} P →")
-            conclusion = "False" if item["conclusion"] == FALSE else f"{defs[item['conclusion']]} P"
-            out += [f"    {conclusion}", ""]
+                    f"{head} ⇒ {names[item['conclusion']]} -/"]
         else:
             out += [f"/-- `{item['id']}`" + ("  (conjectured)" if conj else ""), "",
                     f"{item['name']}: a witness satisfying {len(item['satisfies'])} principles",
-                    f"and violating {len(item['violates'])}. -/",
-                    f"def {nm} : Prop :=", "  ∃ W : Witness,"]
-            lines = [f"    {defs[x]} W.pref" for x in item["satisfies"]] + \
-                    [f"    ¬ {defs[x]} W.pref" for x in item["violates"]]
+                    f"and violating {len(item['violates'])}. -/"]
+        out.append(f"def {nm} : Prop :=")
+        pad = "  "
+        if shape["binder"]:
+            out.append("  " + shape["binder"])
+            pad = "    "
+        if "premises" in item:
+            out += [f"{pad}{fill(shape['principle'], x)} →" for x in item["premises"]]
+            out += [pad + ("False" if item["conclusion"] == FALSE else fill(shape["principle"], item["conclusion"])), ""]
+        else:
+            lines = [f"{pad}{fill(shape['principle'], x)}" for x in item["satisfies"]] + \
+                    [f"{pad}¬ {fill(shape['principle'], x)}" for x in item["violates"]]
             out += [" ∧\n".join(lines), ""]
 
     out += [f"end {ns}.Statements", ""]
@@ -1556,7 +1582,7 @@ def lean_check(topic_id: str, update: bool = False) -> bool:
         return False
     records = data["results"] + data["models"]
     ready = {i["id"] for i in cov["ready"]}
-    ns = cov["defs"][next(iter(cov["defs"]))].rsplit(".", 1)[0] if cov["defs"] else lib
+    ns = lean_config(data)["namespace"]
     references = [i for i in records if i["certificate"].get("lean_ref")]
     probe = ["import " + lib, "namespace PmapAudit"]
     wrappers = {}

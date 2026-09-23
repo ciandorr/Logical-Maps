@@ -131,6 +131,14 @@ model statement from its premises and conclusion into a generated `Statements.le
 proof is supplied by inhabiting the generated `Prop`, so it cannot drift from the recorded
 claim.
 
+The shape of a statement is the topic's own, declared under `lean:` in `topic.yaml`:
+`imports`, `namespace`, a `definition_check` template, and for results and models a
+`binder` and how a `principle` applies, with `{def}` standing for the principle's
+`lean_def`. Unbounded utility quantifies over a preference order and a witness; another
+topic may use plain propositions, a semantics, or whatever its library provides. Without a
+declaration, principles are plain propositions and a result reads `A → B → C`. Nothing in
+the tooling knows any particular framework, so topics formalise independently.
+
 `pmap lean-check` builds the library and audits wrapper proofs at the generated
 statement types. Failed elaboration, `sorryAx`, and nonstandard axioms are rejected. The `lean` certificate field is `none`,
 `stated` (statement elaborates, proof missing), or `verified` (machine-checked, sorry-free);

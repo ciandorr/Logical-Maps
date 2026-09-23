@@ -89,7 +89,22 @@
     "name": "Prospect evaluations"
    }
   ],
-  "lean_lib": "UnboundedUtility"
+  "lean_lib": "UnboundedUtility",
+  "lean": {
+   "imports": [
+    "UnboundedUtility.Principles"
+   ],
+   "namespace": "UnboundedUtility",
+   "definition_check": "example {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) : Prop :=\n  {def} P",
+   "result": {
+    "binder": "∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) [P.Regular],",
+    "principle": "{def} P"
+   },
+   "model": {
+    "binder": "∃ W : Witness,",
+    "principle": "{def} W.pref"
+   }
+  }
  },
  "papers": [
   {
@@ -5942,7 +5957,7 @@
    }
   }
  ],
- "generated": "2026-09-23T14:57:40+00:00",
+ "generated": "2026-09-23T15:07:38+00:00",
  "progress": [
   {
    "background": null,

@@ -571,6 +571,9 @@
   .iridescent { font-weight: 600; color: transparent; background: linear-gradient(90deg, #d946ef, #f59e0b, #22c55e, #06b6d4, #6366f1, #d946ef); background-size: 400% 100%; -webkit-background-clip: text; background-clip: text; animation: iridescence 6s linear infinite; }
   #contribute a.iridescent { color: transparent; text-decoration: none; }
   #contribute a.iridescent:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+  .iridescent.bronze { background-image: linear-gradient(90deg, #b45309, #f59e0b, #fde68a, #92400e, #d97706, #b45309); }
+  .iridescent.silver { background-image: linear-gradient(90deg, #6b7280, #e5e7eb, #ffffff, #9ca3af, #d1d5db, #6b7280); }
+  .iridescent.gold { background-image: linear-gradient(90deg, #b8860b, #ffd700, #fff8dc, #daa520, #ffe066, #b8860b); }
   @keyframes iridescence { to { background-position: 400% 50%; } }
   @media (prefers-reduced-motion: reduce) { .iridescent { animation: none; } }
   @media (max-width: 1000px) { .ex { gap: 24px; } }
@@ -2490,10 +2493,11 @@ function renderLynchpins() {
   // says someone has already worked on it, and its notes open beneath.
   const noted = r => (r.conjectures || []).filter(c => c.notes);
   const notes = r => noted(r).map(c => `<details class="lynchpin-note"><summary>${esc(c.id)}</summary><div class="prose">${fmt(c.notes)}</div><p><button class="lnk" data-open-${c.kind === 'model' ? 'model' : 'result'}="${esc(c.id)}">details</button></p></details>`).join('');
-  const star = r => noted(r).length ? '<span class="star iridescent" title="A recorded conjecture with notes asks this question">★</span>' : '';
+  // Python sets the tier: bronze when a recorded conjecture has notes, silver or gold when a record ranks it by hand.
+  const star = r => r.tier ? `<span class="star iridescent ${esc(r.tier)}" title="${esc(r.tier)}: a recorded conjecture asks this question${r.tier === 'bronze' ? '' : ', ranked by importance and difficulty'}">★</span>` : '';
   // Rows carry their rank, since a row a recorded conjecture asks about is listed even below the stored top.
   body.innerHTML = `<table class="results lynchpin"><thead><tr><th class="num">#</th><th>Question</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
-    rep.rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${noted(r).length ? ' data-starred="true"' : ''}><td class="num rank">${r.rank ?? ''}</td><td class="stmt">${star(r)}${stmt(r)}${notes(r)}</td><td class="num">${r.yes}</td><td class="num">${r.no}</td></tr>`).join('')}</tbody></table>`;
+    rep.rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${r.tier ? ` data-starred="${esc(r.tier)}"` : ''}><td class="num rank">${r.rank ?? ''}</td><td class="stmt">${star(r)}${stmt(r)}${notes(r)}</td><td class="num">${r.yes}</td><td class="num">${r.no}</td></tr>`).join('')}</tbody></table>`;
   wire(body);
 }
 

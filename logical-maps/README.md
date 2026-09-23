@@ -399,9 +399,11 @@ each answer would settle. A question is S ⊢ c, whether S entails c, for S at
 most two principle classes (True, with none) and c a class or False, asked only
 where no smaller premise set already proves or excludes c, and settled alike by
 a proof, an exclusion or a fitting model; "no" denies the entailment; a model check (model: principle) is scored the
-same way. A row that a recorded conjecture asks about carries a star when the
-record has notes, the notes open beneath it, and the row is listed at its rank
-even when it falls below the stored top. The ranking is computed at build time for the topic background and
+same way. A row that a recorded conjecture asks about carries a star, the notes open
+beneath it, and the row is listed at its rank even when it falls below the
+stored top. The star is bronze when the record has notes, and silver or gold
+when the record says `tier: silver` or `tier: gold`, a human ranking of the
+question by importance and difficulty. The ranking is computed at build time for the topic background and
 each preset, so an ad-hoc background shows none. **Recorded conjectures** lists
 the questions on record. **Show resolved** is off by default, hiding questions currently proved
 or refuted. Verdicts are computed

@@ -42,11 +42,11 @@ const check=(model,principle,yes,no)=>({kind:'check',model,principle,yes,no});
 const report=(principles,classes,trivial,progress,rows)=>({background:null,name:null,principles,negative:[],inconsistent_background:false,classes,trivial,fitting_models:['m1'],open:progress.open,progress,rows});
 // pmap.py attaches a conjectured record to the row asking its question; the viewer stars the row when the record has notes.
 const conjecture=(id,premises,conclusion,notes)=>({id,premises,conclusion,status:'conjectured',certificate:cert('paper'),proof:'',notes,sources:['Fixture source'],source_names:['Fixture source']});
-const rowsNone=[q(['r'],'false',17,0),q(['s'],'false',14,0),q(['q','r'],'false',13,1),q([],'r',11,0),q(['q','s'],'false',10,1),q(['r','s'],'q',0,10),q([],'p',10,0),{...q(['q'],'r',9,1),conjectures:[{id:'qr',kind:'result',notes:'Try a two-point frame; see the *Notes* field.'}]},q(['p','r'],'false',8,2),q(['r','s'],'false',8,2),q(['p','s'],'r',0,8),q(['p'],'r',7,2),check('m1','r',6,3),q(['r','s'],'p',1,6)];
+const rowsNone=[q(['r'],'false',17,0),q(['s'],'false',14,0),q(['q','r'],'false',13,1),q([],'r',11,0),q(['q','s'],'false',10,1),q(['r','s'],'q',0,10),q([],'p',10,0),{...q(['q'],'r',9,1),tier:'bronze',conjectures:[{id:'qr',kind:'result',notes:'Try a two-point frame; see the *Notes* field.',tier:null}]},q(['p','r'],'false',8,2),q(['r','s'],'false',8,2),q(['p','s'],'r',0,8),q(['p'],'r',7,2),check('m1','r',6,3),q(['r','s'],'p',1,6)];
 const rowsP=[q(['r'],'false',4,0),q(['s'],'false',3,0),q([],'r',3,0),q(['r','s'],'false',2,2),check('m1','r',2,1),q(['s'],'r',0,2),q(['r'],'s',1,1)];
 rowsNone.forEach((r,i)=>{r.rank=i+1;}); rowsP.forEach((r,i)=>{r.rank=i+1;});
 // A row a recorded conjecture asks about is carried even from below the stored top, at its rank.
-rowsNone.push({...q(['r'],'p',4,2),rank:22,conjectures:[{id:'rp',kind:'result',notes:'A permutation model might do.'}]});
+rowsNone.push({...q(['r'],'p',4,2),rank:22,tier:'gold',conjectures:[{id:'rp',kind:'result',notes:'A permutation model might do.',tier:'gold'}]});
 const fixture={topic,principles,results:[rule('pq',['p'],'q'),conjecture('qr',['q'],'r','Try a two-point frame; see the *Notes* field.')],models:[model('m1',['p'],['s'])],
   progress:[share([],33,6),share(['p'],7,1)],
   lynchpins:{skipped:null,reports:[
@@ -91,11 +91,13 @@ try {
   assert.ok(det().querySelector('[data-lynchpin="q|r+s|q"] button[data-principle="r"]'),'principles are clickable');
   // A row that a recorded conjecture asks about is starred and carries the record's notes.
   const starred=det().querySelector('[data-lynchpin="q|q|r"]');
-  assert.equal(starred.dataset.starred,'true'); assert.ok(starred.querySelector('.star'),'a star marks effort already given');
+  assert.equal(starred.dataset.starred,'bronze'); assert.ok(starred.querySelector('.star.iridescent.bronze'),'notes alone earn a bronze star');
   assert.equal(starred.querySelector('details.lynchpin-note > summary').textContent,'qr');
   assert.match(starred.querySelector('details.lynchpin-note .prose').textContent,/Try a two-point frame/);
   assert.ok(starred.querySelector('details.lynchpin-note button[data-open-result="qr"]'),'and opens the record');
   assert.equal(det().querySelectorAll('[data-starred]').length,2,'rows without a noted conjecture carry no star');
+  assert.ok(det().querySelector('[data-lynchpin="q|r|p"] .star.iridescent.gold'),'a record ranked gold by hand shows a gold star');
+  assert.match(det().querySelector('[data-lynchpin="q|r|p"] .star').title,/^gold: /);
   assert.equal(det().querySelector('[data-lynchpin="q|r|p"] td.rank').textContent,'22','a starred row from below the top shows its true rank');
   assert.deepEqual([...det().querySelectorAll('tbody tr td.rank')].map(td=>td.textContent).slice(0,3),['1','2','3']);
   assert.equal(det().querySelector('[data-lynchpin="q|r|false"] .star'),null);

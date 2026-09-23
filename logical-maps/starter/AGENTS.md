@@ -38,6 +38,8 @@ a new topic when the user requests one. `topics/example/` is a tutorial;
   premise, model flag, or selectable background assumption.
 - Preserve resolved conjecture history with `was_conjectured: true`. Computed
   verdicts depend on background/evidence; do not save them as global resolutions.
+- A conjecture with notes earns a bronze lynchpin star by itself. Never set
+  `tier: silver` or `tier: gold` yourself; that is a human judgement.
 - Named background presets are display packages. Preserve all theorem premises
   in YAML even when the viewer abbreviates them or supplies them from background.
 

@@ -717,7 +717,14 @@ class Lynchpins:
             for q in asked:
                 row = by_question.get(q)
                 if row is not None:
-                    row.setdefault("conjectures", []).append({"id": rec["id"], "kind": kind, "notes": (rec.get("notes") or "").strip()})
+                    row.setdefault("conjectures", []).append({"id": rec["id"], "kind": kind, "notes": (rec.get("notes") or "").strip(),
+                                                               "tier": rec.get("tier")})
+        # A question unresolved despite work is bronze by itself; a record may raise it to
+        # silver or gold, a human judgement of importance and difficulty.
+        for row in rows:
+            tiers = [c["tier"] or "bronze" for c in row.get("conjectures", []) if c["notes"] or c["tier"]]
+            if tiers:
+                row["tier"] = max(tiers, key=LYNCHPIN_TIERS.index)
 
     # -- ranking ------------------------------------------------------------
     def rank(self, top: int = 50) -> dict:
@@ -813,11 +820,14 @@ def _lynchpin_label(report: dict, names: dict):
     return lambda x: title if x in trivial else names.get(x, x)
 
 
+LYNCHPIN_TIERS = ["bronze", "silver", "gold"]
+
+
 def lynchpin_row_text(r: dict, nm) -> str:
-    """S ⊢ c for a question, model: principle for a model check; a star marks a recorded conjecture with notes."""
+    """S ⊢ c for a question, model: principle for a model check; a starred tier marks a recorded conjecture."""
     if r["kind"] == "check":
         return f"{r['model']}: {nm(r['principle'])}"
-    star = " ★" if lynchpin_notes(r) else ""
+    star = f" ★ {r['tier']}" if r.get("tier") else ""
     return f"{' ∧ '.join(nm(x) for x in r['premises']) or 'True (⊤)'} ⊢ {nm(r['conclusion'])}{star}"
 
 
@@ -842,7 +852,7 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     o.append(progress_text(report["progress"]))
     if _open_share(report["progress"]) > LYNCHPIN_MAX_OPEN:
         o.append(f"note: {_open_share(report['progress']):.0%} of the questions are open; these scores mostly reflect how little is recorded")
-    o += ["rank, then what either answer settles (if yes / if no; ★ a recorded conjecture with notes, listed at its rank even below the top):"]
+    o += ["rank, then what either answer settles (if yes / if no; ★ a recorded conjecture: bronze for notes, silver or gold by hand; listed at its rank even below the top):"]
     for r in [x for x in report["rows"] if x["rank"] <= top or x.get("conjectures")]:
         o.append(f"#{r['rank']:<6d}{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}")
         o += [f"                    {rid}: {note}" for rid, note in lynchpin_notes(r)]
@@ -885,7 +895,8 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
             o += [""]
             notes = [(r, rid, note) for r in rows for rid, note in lynchpin_notes(r)]
             if notes:
-                o += ["★ A recorded conjecture asks this question, listed at its rank even below the top; its notes:", ""]
+                o += ["★ A recorded conjecture asks this question, listed at its rank even below the top: bronze for notes, "
+                      "silver or gold where a record ranks it by importance and difficulty. Its notes:", ""]
                 o += [f"- {lynchpin_row_text(r, nm)} (`{rid}`): {note}" for r, rid, note in notes]
                 o += [""]
         else:
@@ -2075,6 +2086,9 @@ def bundle_open_md(topic_id: str, data: dict, an: dict, lynch=None) -> str:
           "substantially, retain the original and add a separate record. Refuted proposals stay "
           "`status: conjectured`, with proved refuting evidence recorded separately. Answers under "
           "extra exploration assumptions are contextual, not global record statuses.",
+          "- Worked on a question without settling it? Put what you tried and what would settle it in "
+          "the conjecture's `notes`; that alone earns it a bronze lynchpin star. Never set `tier: silver` "
+          "or `tier: gold` yourself: that is a human ranking by importance and difficulty.",
           "- Not sure? Add it with `status: conjectured`, an empty proof, and say in `notes` what would settle it.",
           "- Then run `python3 scripts/pmap.py validate` and `status`. Never hand-edit the derived counts.", "",
           "`README.md` has the exact record shapes and the sourcing rules. Follow them; an unsourced "
@@ -2621,15 +2635,17 @@ def selftest():
     assert all(set(r) >= {"kind", "yes", "no"} for r in top) and top == sorted(top, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]))), top
     # A conjectured record attaches to the row asking its question, premises reduced to the
     # class representatives the question uses; a model attaches to each violation and to consistency.
-    noted = {**ly, "results": [*ly["results"], dict(R("rp", ["r"], "p"), status="conjectured", notes="Try a two-point frame."),
-                                dict(R("pqr", ["p", "q"], "r"), status="conjectured", notes="")],
+    noted = {**ly, "results": [*ly["results"], dict(R("rp", ["r"], "p"), status="conjectured", notes="Try a two-point frame.", tier="gold"),
+                                dict(R("pqr", ["p", "q"], "r"), status="conjectured", notes="", tier="silver")],
              "models": [*ly["models"], dict(M("m3", ["r", "s"], ["p"]), status="conjectured", notes="Sketched only.")]}
     Ln = Lynchpins(noted)
     assert Ln.progress() == L.progress(), "conjectures are no evidence"
     rows = {(tuple(r["premises"]), r["conclusion"]): r for r in Ln.rank(top=100)["rows"] if r["kind"] == "question"}
     assert [c["id"] for c in rows[("r",), "p"]["conjectures"]] == ["rp"] and lynchpin_notes(rows[("r",), "p"]) == [("rp", "Try a two-point frame.")]
     assert [c["id"] for c in rows[("p",), "r"]["conjectures"]] == ["pqr"], "p ∧ q ⇒ r asks p ⇒ r, since p ⇒ q"
-    assert not lynchpin_notes(rows[("p",), "r"]), "no notes, no star"
+    assert not lynchpin_notes(rows[("p",), "r"]) and rows[("p",), "r"]["tier"] == "silver", "no notes, but a tier given by hand still stars"
+    assert rows[("r",), "p"]["tier"] == "gold" and rows[("r", "s"), "p"]["tier"] == "bronze", "notes alone are bronze; a record may raise its question"
+    assert "tier" not in rows[("r",), "s"]
     assert [c["id"] for c in rows[("r", "s"), "p"]["conjectures"]] == ["m3"] and [c["id"] for c in rows[("r", "s"), FALSE]["conjectures"]] == ["m3"]
     assert "conjectures" not in rows[("r",), "s"]
     assert [r["rank"] for r in Ln.rank(top=100)["rows"]] == list(range(1, 29)), "every row carries its rank"

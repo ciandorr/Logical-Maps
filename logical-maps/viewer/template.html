@@ -3,7 +3,7 @@
 <style>
   html, body { height: 100%; }
   body { display: flow-root; }
-  .app { display: grid; grid-template-rows: auto 1fr; height: calc(100vh - 64px); height: calc(100dvh - 64px); min-height: 420px; margin: 32px 0; border-bottom: 1px solid var(--line); }
+  .app { display: grid; grid-template-rows: auto 1fr; height: calc(100vh - 32px); height: calc(100dvh - 32px); min-height: 420px; margin: 12px 0 20px; border-bottom: 1px solid var(--line); }
   /* One line: the title, the description it belongs to, and the site links,
      with every control on the right sharing their baseline. The body gets the
      rest of the window, so what this row does not take, the diagram keeps. */
@@ -82,7 +82,7 @@
 
   main { display: grid; grid-template-rows: auto 1fr; min-height: 0; min-width: 0; }
   .tabs { display: flex; gap: 2px; padding: 0 24px; gap: 22px; flex-wrap: wrap; border-bottom: 1px solid var(--line); background: var(--panel); }
-  .tab { padding: 12px 0; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; cursor: pointer; color: var(--ink-2); }
+  .tab { padding: 7px 0; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; cursor: pointer; color: var(--ink-2); }
   .tab[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--accent); font-weight: 600; }
   .tab:hover { color: var(--link-hover); }
   .tab .n { color: var(--ink-3); font-size: 12px; margin-left: 4px; font-variant-numeric: tabular-nums; }

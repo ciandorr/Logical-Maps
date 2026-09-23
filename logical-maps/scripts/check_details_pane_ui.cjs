@@ -35,17 +35,21 @@ try {
   const handle = d.getElementById('details-divider'), pane = d.getElementById('graph-details'), legend = d.getElementById('relation-legend');
   const hint = d.getElementById('graph-details-hint');
   const instruction = 'Select a principle, conjunction or arrow to see its details and logical relations here. Shift-click to add or remove principles.';
-  function checkHint() {
+  // The instruction is for a reader who has not chosen anything yet. Once
+  // something is selected it has nothing left to say and steps aside.
+  function checkHint(waiting) {
     assert.equal(hint.textContent, instruction);
     assert.equal(pane.textContent.split(instruction).length - 1, 1, 'One uniform instruction');
     assert.equal(pane.textContent.split('Shift-click').length - 1, 1, 'No duplicate selection instructions');
-    assert.notEqual(w.getComputedStyle(hint).display, 'none');
+    assert.equal(hint.hidden, !waiting, waiting ? 'The instruction waits for a selection' : 'And stands aside once there is one');
+    assert.equal(w.getComputedStyle(hint).display === 'none', !waiting);
     assert.doesNotMatch(pane.textContent, /Compare with|graph shades/);
   }
-  checkHint();
-  w.select({type: 'principle', id: 'a'}); checkHint();
-  w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))"); checkHint();
-  d.querySelector('.detail-close').click(); checkHint();
+  checkHint(true);
+  w.select({type: 'principle', id: 'a'}); checkHint(false);
+  w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))"); checkHint(false);
+  d.querySelector('.detail-close').click(); checkHint(false);
+  w.select(null); checkHint(true);
   w.select({type: 'principle', id: 'a'});
   const pop = d.getElementById('pop'), definition = pop.innerHTML;
   assert.equal(handle.getAttribute('role'), 'separator');

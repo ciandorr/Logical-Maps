@@ -97,7 +97,7 @@ try {
   shift('g');
   assert.ok(graph.classList.contains('inconsistent-selection'));
   for (const n of graph.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'), 'An inconsistent joint selection highlights every box red');
-  assert.match(d.getElementById('relation-legend').textContent, /inconsistent/);
+  assert.match(d.getElementById('graph-details-foot').textContent, /inconsistent/);
   assert.ok(label('g').classList.contains('selection-member'));
   shift('g');
   assert.ok(graph.classList.contains('shaded'));
@@ -124,13 +124,13 @@ try {
   assert.equal(pop.parentElement.id, 'floating-details');
   d.querySelector('[data-tab="graph"]').click();
   assert.equal(pop.parentElement.id, 'graph-details'); assert.equal(pop.hidden, true);
-  pointer(label('a')); pop.querySelector('[data-goto]').click();
+  pointer(label('a')); d.querySelector('#relation-legend [data-goto]').click();
   assert.equal(d.getElementById('pane-page').dataset.active, 'true'); assert.equal(pop.hidden, true);
   d.getElementById('page-back').click(); pointer(label('a'));
   assert.equal(pop.parentElement.id, 'graph-details');
   // The sidebar's moves offered from the details pane: hide, add negations,
   // move to background. Each is exactly the sidebar's own action.
-  const action = kind => pop.querySelector(`[data-selection-action="${kind}"]`);
+  const action = kind => d.querySelector(`#relation-legend [data-selection-action="${kind}"]`);
   pointer(label('e'));
   assert.ok(action('hide') && action('negate') && action('background'), 'A selected principle offers the three moves');
   assert.equal(action('negate').textContent, 'Add negation');

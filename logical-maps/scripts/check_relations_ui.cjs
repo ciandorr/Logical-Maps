@@ -55,7 +55,12 @@ try{
   assert.equal(node('z').querySelector('title').textContent,'Excluded by selection');
   assert.equal(node('d').querySelector('title').textContent,'Independent of selection');
   assert.equal(legend().hidden,false);
-  assert.match(legend().textContent,/Relative to A:/);
+  assert.equal(legend().querySelector('b').textContent,'A','The legend leads with the selection itself');
+  assert.doesNotMatch(legend().textContent,/Relative to/,'Without a preamble');
+  assert.equal(legend().querySelector('.rel-status'),null,'The consistency report is not on this line');
+  assert.match(d.getElementById('graph-details-foot').textContent,/Consistent with the background/,'It is at the foot of the pane');
+  assert.ok([...d.querySelectorAll('#relation-legend .legend-actions .lnk')].map(b=>b.textContent).includes('details'),
+    'And the controls that act on the selection are on this line');
   fixedKeys(d);
   for(const key of ['entailed 1','excluded 2','consistent 2','negation is consistent 4']) assert.ok(legend().textContent.includes(key),`legend shows ${key}: ${legend().textContent}`);
   assert.equal(d.querySelector('[data-compare-arm]'),null);
@@ -104,7 +109,7 @@ try{
   for(const n of d.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'));
   assert.equal(legend().querySelector('.excluded .n').textContent,String(d.querySelectorAll('#nodes .node, #nodes .junction:not([data-parent])').length));
   assert.equal(w.eval("expressionStatus('z','a').status"),'inconsistent','The red display does not fabricate implication proofs');
-  assert.match(legend().textContent,/inconsistent with the background/);
+  assert.match(d.getElementById('graph-details-foot').textContent,/inconsistent with the background/);
   fixedKeys(d);
 
   // Escape clears the focus and the legend; Escape in the search box does not.
@@ -183,7 +188,7 @@ try{
   // The legend reports whether the selection itself can hold with the
   // background, and the selected box is dashed only when nothing settles it.
   const cons=page(fixture).window, cd=cons.document;
-  const status=()=>{const st=cd.querySelector('#relation-legend .rel-status');
+  const status=()=>{const st=cd.querySelector('#graph-details-foot .rel-status');
     return {kind:st&&[...st.classList].filter(c=>c!=='rel-status')[0], text:st&&st.textContent,
       dashed:cd.getElementById('graph').classList.contains('unwitnessed-selection')};};
   cons.select({type:'principle',id:'a'});
@@ -215,7 +220,7 @@ try{
   real.addBackgroundPreset('dtu');
   real.select({type:'principle',id:'folded-expectation'});
   fixedKeys(real.document);
-  assert.match(real.document.getElementById('relation-legend').textContent,/Relative to Folded Expectation:/);
+  assert.equal(real.document.querySelector('#relation-legend b').textContent,'Folded Expectation');
   assert.ok(real.document.querySelector('#nodes [data-falsity]').classList.contains('rel-excluded'));
   assert.deepEqual(errors.map(String),[]);
   console.log('PASS: fixed four-key legend, False excluded, inconsistent selections exclude every box, unchanged proof status, consistency counts, multiselection, filled arrowheads, filtered witnesses, and Folded Expectation.');

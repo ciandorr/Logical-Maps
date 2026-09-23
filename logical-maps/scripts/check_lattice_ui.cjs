@@ -203,7 +203,9 @@ try{
   assert.ok(shaded.some(c=>c==='rel-entailed'||c==='rel-excluded'||c==='rel-consistent'||c==='rel-separated'||c==='rel-independent'),
     'And the others take the graph\'s own kinds');
   assert.equal(d.getElementById('lat-legend').hidden,false,'A legend explains them');
-  assert.match(d.getElementById('lat-legend').textContent,/Relative to A:/);
+  assert.equal(d.querySelector('#lat-legend b').textContent,'A');
+  assert.equal(d.querySelector('#lat-legend .rel-status'),null,'The consistency report leaves the top line');
+  assert.match(d.getElementById('lat-detail-foot').textContent,/background/,'And reports from the foot instead');
   // The constants take the graph's reading: the ceiling follows from anything,
   // the floor is ruled out by any consistent selection.
   const rel=sel=>[...d.querySelector(sel).classList].find(c=>c.startsWith('rel-'));
@@ -347,7 +349,7 @@ try{
   // lattice's own choices.
   d2.querySelector('.tab[data-tab="lattice"]').click();
   w2.eval('lattice.shown=["a","b"];renderLattice();');
-  const act=kind=>d2.querySelector(`#pop [data-selection-action="${kind}"]`);
+  const act=kind=>d2.querySelector(`#lat-legend [data-selection-action="${kind}"]`);
   d2.querySelector('#lat-graph text[data-principle="a"]').dispatchEvent(new w2.MouseEvent('click',{bubbles:true}));
   assert.ok(act('hide')&&act('negate')&&act('background'),'A lattice principle offers the three moves');
   act('negate').click();

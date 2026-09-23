@@ -417,14 +417,14 @@
   .dl { display: flex; gap: 10px; font-size: 12.5px; } .dl a { color: var(--ink-3); }
 
   .pop { position: fixed; z-index: 20; max-width: min(380px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: auto; background: var(--panel); border: 1px solid var(--line-strong); border-radius: 4px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 13px; }
-  .graph-details .pop { position: static; flex: 1; min-height: 0; z-index: auto; max-width: none; max-height: none; overflow: auto; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
+  .graph-details .pop { padding: 8px 12px; position: static; flex: 1; min-height: 0; z-index: auto; max-width: none; max-height: none; overflow: auto; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
   .detail-close { float: right; margin: 0 0 8px 10px; font-size: 18px; line-height: 1; }
   .selection-list { list-style: none; padding: 0; margin: 12px 0; }
   .selection-list li { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line); }
   .selection-list details { flex: 1; min-width: 0; }
   .selection-list summary { cursor: pointer; font-weight: 600; }
   .selection-list .lnk { flex: none; font-size: 12px; }
-  .pop .pop-t { font: 600 15px/1.3 var(--serif); margin-bottom: 4px; }
+  .pop .pop-t { font: 600 15px/1.3 var(--serif); margin-bottom: 2px; }
   .pop .pop-t + .pop-t { margin-top: 10px; }
   .pop .pop-s { font: 13.5px/1.45 var(--serif); }
   .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
@@ -512,6 +512,15 @@
   .relation-legend { flex: none; min-width: 0; max-height: 60%; overflow: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--panel); font-size: 12px; color: var(--ink-2); }
   .relation-legend[hidden] { display: none; }
   .relation-legend b { color: var(--ink); }
+  /* What acts on the selection joins the keys on the top line. What merely
+     reports on it goes to the foot of the pane, out of the way of both. */
+  .relation-legend .legend-actions { display: inline-flex; flex-wrap: wrap; align-items: baseline; margin-left: auto; }
+  .relation-legend .legend-actions .lnk + .lnk::before { content: '·'; color: var(--ink-3); margin: 0 7px 0 4px; }
+  .relation-foot { flex: none; min-width: 0; padding: 5px 12px; border-top: 1px solid var(--line); background: var(--panel); font-size: 12px; }
+  .relation-foot[hidden] { display: none; }
+  .graph-details > .relation-legend { order: 0; }
+  .graph-details > .pop, .graph-details > p { order: 1; }
+  .graph-details > .relation-foot { order: 2; }
   .relation-legend .key { display: inline-flex; flex: none; align-items: center; gap: 5px; }
   .relation-legend .key i { width: 14px; height: 12px; border: 1px solid var(--node-stroke); border-radius: 2px; display: inline-block; background: var(--node-fill); }
   .relation-legend .key.entailed i { background: var(--rel-entailed); color: var(--human); }
@@ -521,12 +530,16 @@
   .rel-status { font-weight: 600; }
   .rel-status.implies { color: var(--human); } .rel-status.excludes, .rel-status.independent, .rel-status.inconsistent { color: var(--indep); }
   .rel-status.open { color: var(--ink-3); font-weight: 500; } .rel-status.conjectured { color: var(--conj); }
-  .pop ul.rel { list-style: none; padding: 0; margin: 4px 0 8px; display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
+  .pop ul.rel { list-style: none; padding: 0; margin: 2px 0 5px; display: flex; flex-direction: column; gap: 2px; font-size: 12px; }
   .pop ul.rel li { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
-  .pop .rel-line { margin: 4px 0; font-size: 13px; }
+  .pop .rel-line { margin: 2px 0; font-size: 13px; }
   .pop .rel-line .stmt { font-size: 13px; }
-  .pop details.rel-evidence { margin: 2px 0 6px 14px; font-size: 12px; } .pop details.rel-evidence summary { cursor: pointer; color: var(--ink-3); }
-  .pop .rel-head { margin-top: 10px; }
+  .pop p { margin: 3px 0; }
+  .pop details.rel-evidence { margin: 1px 0 4px 14px; font-size: 12px; } .pop details.rel-evidence summary { cursor: pointer; color: var(--ink-3); }
+  .pop .rel-head { margin: 7px 0 2px; }
+  /* A section label rides on the first line it labels rather than taking one. */
+  .pop .rel-line .rel-head, .pop p > .rel-head { display: inline; margin: 0 8px 0 0; }
+  .pop .rel-line + .rel-line .rel-head { display: none; }
   .graph-hint svg { flex: none; overflow: visible; }
   .direction-chevron, .flow-chevron { fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
   #flow { pointer-events: none; }
@@ -652,6 +665,7 @@
         <aside id="graph-details" class="graph-details" aria-label="Selection details">
           <div id="relation-legend" class="relation-legend" role="status" aria-live="polite" hidden></div>
           <p id="graph-details-hint">Select a principle, conjunction or arrow to see its details and logical relations here. Shift-click to add or remove principles.</p>
+          <div id="graph-details-foot" class="relation-foot" role="status" aria-live="polite" hidden></div>
         </aside>
         </div>
       </section>
@@ -662,7 +676,7 @@
             <div id="lat-warning" class="graph-warning" role="alert" hidden></div>
             <div class="graph-tools"><div class="graph-search"><input class="search" id="lat-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the lattice" aria-describedby="lat-search-status" autocomplete="off"><span id="lat-search-status" role="status" aria-live="polite"></span></div><div class="graph-tool-buttons"><button class="btn small" id="lat-flip" aria-pressed="false" title="Turn the diagram over, so the stronger conjunctions sit at the top">Flip</button><button class="btn small" id="lat-fit">Fit</button></div></div>
           </div>
-          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p></aside>
+          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p><div id="lat-detail-foot" class="relation-foot" role="status" aria-live="polite" hidden></div></aside>
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
@@ -2207,14 +2221,15 @@ function applySelection() {
   });
   document.querySelectorAll('#pr-filters .principle-name').forEach(button => button.setAttribute('aria-pressed', baseMembers.has(button.dataset.principle)));
 
-  if (!base || state.tab !== 'graph' || !layout) { legend.hidden = true; return; }
+  if (!base || state.tab !== 'graph' || !layout) { legend.hidden = true; setDetailFoot('graph-details-foot', null); return; }
   legend.hidden = false;
   const fullLabel = expressionName(base);
   const label = Array.isArray(base) && fullLabel.length > 100 ? `${base.length} selected principles` : fullLabel;
   const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
   const keys = key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
-  const status = `<span class="rel-status ${consistencyLine.kind}">${esc(consistencyLine.text)}</span>`;
-  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${status}${keys}`;
+  legend.innerHTML = `<b title="${esc(fullLabel)}">${esc(label)}</b>${keys}${selectionToolbar()}`;
+  wireLegendActions(legend);
+  setDetailFoot('graph-details-foot', consistencyLine);
 }
 
 
@@ -2768,7 +2783,8 @@ function relList(items) { return items.length ? `<ul class="rel">${items.map(([i
 function certDl(c) { return `<dl>${c.produced_by ? `<dt>by</dt><dd>${esc(c.produced_by)}</dd>` : ''}${c.recorded_by ? `<dt>recorded by</dt><dd>${esc(c.recorded_by)}</dd>` : ''}${(c.checked_by || []).length ? `<dt>checked</dt><dd>${esc(c.checked_by.join(', '))}</dd>` : ''}${c.lean_ref ? `<dt>Lean</dt><dd class="mono">${esc(c.lean_ref)}</dd>` : ''}${c.date ? `<dt>date</dt><dd>${esc(c.date)}</dd>` : ''}</dl>`; }
 let popAt = null;
 // One relation verdict with its evidence: proof steps or witness models.
-function statusLine(label, st, joint = false) {
+function relHead(text) { return `<span class="rel-head">${esc(text)}</span>`; }
+function statusLine(label, st, joint = false, head = '') {
   const kind = st.status.endsWith('?') ? 'conjectured' : st.status;
   const text = {implies: '✓ proved', 'implies?': '✓ conjectured', excludes: '✗ excluded', 'excludes?': '✗ excluded by a conjecture', independent: '⇏ refuted by a model', 'independent?': '⇏ refuted given a conjecture', inconsistent: joint ? '✗ inconsistent' : 'premise inconsistent with the background', consistent: '✓ consistent', open: '? open'}[st.status] || st.status;
   const models = (st.models || []).map(id => byMid.get(id)).filter(Boolean);
@@ -2776,26 +2792,27 @@ function statusLine(label, st, joint = false) {
   const shown = models.slice(0, 3), more = models.length - shown.length;
   const evidence = models.length ? `<ul class="rel">${shown.map(m => `<li><button class="lnk" data-model="${esc(m.id)}">${esc(m.name)}</button> ${certBadges(m)}</li>`).join('')}${more ? `<li class="dim">and ${more} more in the theory explorer</li>` : ''}</ul>`
     : via.length ? `<details class="rel-evidence"><summary>${via.length} proof step${via.length > 1 ? 's' : ''}</summary><ol>${via.map(r => `<li><button class="lnk" data-result="${esc(r.id)}">${resultStmt(r)}</button> ${certBadges(r)}</li>`).join('')}</ol></details>` : '';
-  return `<div class="rel-line"><span class="stmt">${label}</span> <span class="rel-status ${kind}">${text}</span>${st.limited ? ' <span class="dim">(model outside the selected sources)</span>' : ''}</div>${evidence}`;
+  return `<div class="rel-line">${head ? relHead(head) : ''}<span class="stmt">${label}</span> <span class="rel-status ${kind}">${text}</span>${st.limited ? ' <span class="dim">(model outside the selected sources)</span>' : ''}</div>${evidence}`;
 }
 // Converse and premise-necessity facts for a displayed arrow.
 function edgeContext(premises, conclusion) {
   if (!premises?.length) return '';
   const stmt = (ps, c) => `${ps.map(name).map(esc).join(' ∧ ')} ⇒ ${esc(name(c))}`;
   let h = '';
-  if (conclusion !== FALSE) h += `<div class="rel-head">Converse</div>${premises.map(p => statusLine(stmt([conclusion], p), implicationStatus([conclusion], p))).join('')}`;
+  if (conclusion !== FALSE) h += premises.map((p, i) =>
+    statusLine(stmt([conclusion], p), implicationStatus([conclusion], p), false, i ? '' : 'Converse')).join('');
   if (premises.length > 1) {
-    h += '<div class="rel-head">Without each premise</div>';
-    for (const p of premises) {
-      const rest = premises.filter(q => q !== p);
-      h += conclusion === FALSE ? statusLine(rest.map(name).map(esc).join(' ∧ '), consistencyStatus(rest), true) : statusLine(stmt(rest, conclusion), implicationStatus(rest, conclusion));
-    }
+    premises.forEach((p, i) => {
+      const rest = premises.filter(q => q !== p), head = i ? '' : 'Without each premise';
+      h += conclusion === FALSE ? statusLine(rest.map(name).map(esc).join(' ∧ '), consistencyStatus(rest), true, head)
+        : statusLine(stmt(rest, conclusion), implicationStatus(rest, conclusion), false, head);
+    });
   }
   return h;
 }
 function renderDetail() {
   const el = document.getElementById('pop'); const sel = state.selected;
-  placeDetail();
+  placeDetail(); syncDetailHint();
   if (!sel || sel.type === 'cell') { el.hidden = true; return; }
   let h = '';
   if (sel.type === 'selection') {
@@ -2805,8 +2822,7 @@ function renderDetail() {
       return `<li><details><summary>${esc(name(literal))}</summary>${isNegative(literal) ? '<p>Negation of:</p>' : ''}<p>${esc(principle?.statement || name(literal))}</p></details><button class="lnk" data-remove-selection="${esc(literal)}" aria-label="Remove ${esc(name(literal))} from selection">remove</button></li>`;
     }).join('')}</ul>`;
     h += statusLine('Joint consistency', consistencyStatus(sel.premises), true);
-    const actions = selectionActions(sel.premises);
-    if (actions) h += `<div class="links">${actions}</div>`;
+
   } else if (sel.type === 'junction') {
     const junction = layout?.byId.get(sel.id);
     if (!junction) { el.hidden = true; return; }
@@ -2818,20 +2834,18 @@ function renderDetail() {
     // and the ceiling carry their implications for free, so for those the only
     // question worth asking is the one about the converse.
     h += `<div class="pop-t">${esc(sel.fromLabel)} ⇒ ${esc(sel.toLabel)}</div>`;
-    h += '<div class="rel-head">Why</div>';
-    if (!sel.from) h += '<p class="dim">Everything follows from a contradiction.</p>';
-    else if (!sel.to.length) h += '<p class="dim">Everything entails what the background already gives.</p>';
-    else h += sel.to.map(q => statusLine(`${esc(sel.fromLabel)} ⇒ ${esc(name(q))}`, implicationStatus(sel.from, q))).join('');
-    h += '<div class="rel-head">Converse</div>';
+    if (!sel.from) h += `<p class="dim">${relHead('Why')}Everything follows from a contradiction.</p>`;
+    else if (!sel.to.length) h += `<p class="dim">${relHead('Why')}Everything entails what the background already gives.</p>`;
+    else h += sel.to.map((q, i) => statusLine(`${esc(sel.fromLabel)} ⇒ ${esc(name(q))}`, implicationStatus(sel.from, q), false, i ? '' : 'Why')).join('');
     if (!sel.from) {
-      h += statusLine(`${esc(sel.toLabel)} ⇒ False (⊥)`, consistencyStatus(sel.to));
+      h += statusLine(`${esc(sel.toLabel)} ⇒ False (⊥)`, consistencyStatus(sel.to), false, 'Converse');
       h += `<p class="dim">${sel.reverses === 'ruled out'
         ? 'A model satisfies it alongside the background, so it is not the contradiction.'
         : 'Nothing recorded shows it can hold with the background, so it might yet be the contradiction.'}</p>`;
     } else {
-      h += sel.missing.map(p =>
-        statusLine(`${esc(sel.toLabel)} ⇒ ${esc(name(p))}`, implicationStatus(sel.to, p))).join('')
-        || '<p class="dim">Nothing separates the two.</p>';
+      h += sel.missing.map((p, i) =>
+        statusLine(`${esc(sel.toLabel)} ⇒ ${esc(name(p))}`, implicationStatus(sel.to, p), false, i ? '' : 'Converse')).join('')
+        || `<p class="dim">${relHead('Converse')}Nothing separates the two.</p>`;
       h += `<p class="dim">${sel.reverses === 'ruled out'
         ? 'A model settles the converse, so these are genuinely different nodes.'
         : 'The converse is open, so these two might yet collapse into one node.'}</p>`;
@@ -2853,7 +2867,7 @@ function renderDetail() {
       const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
       if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
     }
-    h += `<div class="links"><button class="lnk" data-goto="1">details</button>${selectionActions([(sel.negative ? '!' : '') + sel.id])}</div>`;
+    if (!selectionInLegend()) h += '<div class="links"><button class="lnk" data-goto="1">details</button></div>';
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
@@ -2973,6 +2987,34 @@ function selectionActions(literals) {
   if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'Move to background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
   return h;
 }
+// The controls that act on the selection ride on the legend, where the reader
+// is already looking, instead of costing a line of their own in the readout.
+// Off the two diagrams there is no legend, so the popup keeps them.
+const selectionInLegend = () => state.tab === 'graph' || state.tab === 'lattice';
+function selectionToolbar() {
+  const sel = state.selected;
+  const literals = sel?.type === 'principle' ? [(sel.negative ? '!' : '') + sel.id] : sel?.type === 'selection' ? sel.premises : null;
+  if (!literals) return '';
+  const inner = (sel.type === 'principle' ? '<button class="lnk" data-goto="1">details</button>' : '') + selectionActions(literals);
+  return inner ? `<span class="legend-actions">${inner}</span>` : '';
+}
+function wireLegendActions(el) {
+  el.querySelectorAll('[data-selection-action]').forEach(b =>
+    b.addEventListener('click', () => applySelectionAction(b.dataset.selectionAction)));
+  el.querySelector('[data-goto]')?.addEventListener('click', () => {
+    openPage(state.selected); document.getElementById('pop').hidden = true;
+  });
+}
+function setDetailFoot(id, line) {
+  const foot = document.getElementById(id);
+  if (!foot) return;
+  foot.hidden = !line;
+  foot.innerHTML = line ? `<span class="rel-status ${line.kind}">${esc(line.text)}</span>` : '';
+}
+function syncDetailHint() {
+  const hint = document.getElementById('graph-details-hint');
+  if (hint) hint.hidden = !!state.selected;
+}
 function repaintGraph() { refreshPrincipleControls(); renderGraph(); fitInitial(); }
 function applySelectionAction(kind) {
   const sel = state.selected;
@@ -3068,7 +3110,7 @@ function renderBackground() {
 function renderAll(refit) {
   // Filter/background changes must not reopen the last inspected item's popup.
   // Only an explicit select() opens details.
-  state.selected = null; document.getElementById('pop').hidden = true;
+  state.selected = null; document.getElementById('pop').hidden = true; syncDetailHint();
   recompute(); renderHeader(); renderBackground();
   document.querySelector('[data-tab="contribute"]').hidden = !DATA.contribute_html;
   document.getElementById('contribute').innerHTML = DATA.contribute_html || '';
@@ -3862,13 +3904,14 @@ function latticeShade(svg) {
 }
 function renderLatticeLegend(base, baseInconsistent, counts) {
   const legend = document.getElementById('lat-legend');
-  if (base == null) { legend.hidden = true; return; }
+  if (base == null) { legend.hidden = true; setDetailFoot('lat-detail-foot', null); return; }
   legend.hidden = false;
-  const line = selectionConsistencyLine(consistencyStatus(expressionLiterals(base)));
   const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
-  legend.innerHTML = `<b>Relative to ${esc(expressionName(base))}:</b>`
-    + `<span class="rel-status ${line.kind}">${esc(line.text)}</span>`
-    + key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
+  legend.innerHTML = `<b>${esc(expressionName(base))}</b>`
+    + key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent')
+    + selectionToolbar();
+  wireLegendActions(legend);
+  setDetailFoot('lat-detail-foot', selectionConsistencyLine(consistencyStatus(expressionLiterals(base))));
 }
 function latticeTitle(n) {
   const parts = [n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ ')];

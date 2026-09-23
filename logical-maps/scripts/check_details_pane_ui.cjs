@@ -6,8 +6,9 @@ const template = fs.readFileSync(path.resolve(__dirname, '../viewer/template.htm
 const certificate = {source_id: 'paper', lean: 'none'};
 const data = {
   topic: {id: 'pane', title: 'Pane', background: [], source_catalog: [{id: 'paper', name: 'Paper', kind: 'published-paper'}]},
-  principles: ['a','b','x'].map(id => ({id, name: id.toUpperCase(), statement: id})),
+  principles: ['a','b','x','y','z'].map(id => ({id, name: id.toUpperCase(), statement: id})),
   results: [{id: 'ab', premises: ['a'], conclusion: 'b', status: 'proved', certificate},
+    {id: 'yz', premises: ['a','y'], conclusion: 'z', status: 'proved', certificate},
     {id: 'xf', premises: ['x'], conclusion: 'false', status: 'proved', certificate}], models: []
 };
 const pages = [], errors = [], storageKey = 'principle-map:pane-sizes:v1';
@@ -35,17 +36,46 @@ try {
   const handle = d.getElementById('details-divider'), pane = d.getElementById('graph-details'), legend = d.getElementById('relation-legend');
   const hint = d.getElementById('graph-details-hint');
   const instruction = 'Select a principle, conjunction or arrow to see its details and logical relations here. Shift-click to add or remove principles.';
-  function checkHint() {
+  // The instruction is for a reader who has not chosen anything yet. Once
+  // something is selected it has nothing left to say and steps aside.
+  function checkHint(waiting) {
     assert.equal(hint.textContent, instruction);
     assert.equal(pane.textContent.split(instruction).length - 1, 1, 'One uniform instruction');
     assert.equal(pane.textContent.split('Shift-click').length - 1, 1, 'No duplicate selection instructions');
-    assert.notEqual(w.getComputedStyle(hint).display, 'none');
+    assert.equal(hint.hidden, !waiting, waiting ? 'The instruction waits for a selection' : 'And stands aside once there is one');
+    assert.equal(w.getComputedStyle(hint).display === 'none', !waiting);
     assert.doesNotMatch(pane.textContent, /Compare with|graph shades/);
   }
-  checkHint();
-  w.select({type: 'principle', id: 'a'}); checkHint();
-  w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))"); checkHint();
-  d.querySelector('.detail-close').click(); checkHint();
+  checkHint(true);
+  w.select({type: 'principle', id: 'a'}); checkHint(false);
+  w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))"); checkHint(false);
+  d.querySelector('.detail-close').click(); checkHint(false);
+  w.select(null); checkHint(true);
+
+  // An arrow states itself once. The drawn form is shown separately only when
+  // the background let the graph drop a premise or contrapose it, and the
+  // provenance is one thought: the badge beside the references it belongs to.
+  w.eval("selectGraphEdge(graphEdgesByKey.get('ab'))");
+  assert.equal(d.querySelectorAll('#pop .pop-t').length, 1, 'The statement appears once, not twice over');
+  assert.equal(d.querySelector('#pop .note'), null, 'With nothing between it and itself');
+  const meta = d.querySelector('#pop .pop-meta');
+  assert.ok(meta?.querySelector('.badges .badge'), 'The source badge is on the provenance line');
+  assert.match(meta.textContent, /References:/, 'Which is the line the references are on');
+
+  // Whether the arrow reverses, said plainly, under the lines that carry the
+  // evidence for it.
+  const label = () => d.querySelector('#pop .rel-line .rel-head');
+  assert.equal(label().textContent, 'Converse', 'The section says what it is');
+  assert.notEqual(w.getComputedStyle(label()).display, 'none', 'Where the reader can see it');
+  assert.match(d.getElementById('pop').textContent, /might yet reverse/, 'And the arrow says whether it reverses');
+
+  // A second section's label survives a first section whose lines carry no
+  // evidence to separate them.
+  w.eval("selectGraphEdge(graphEdgesByKey.get('yz'))");
+  const labels = [...d.querySelectorAll('#pop .rel-line .rel-head')];
+  assert.deepEqual(labels.map(l => l.textContent), ['Converse', 'Without each premise'], 'Both sections are labelled');
+  assert.ok(labels.every(l => w.getComputedStyle(l).display !== 'none'), 'And both labels are visible');
+  w.select(null);
   w.select({type: 'principle', id: 'a'});
   const pop = d.getElementById('pop'), definition = pop.innerHTML;
   assert.equal(handle.getAttribute('role'), 'separator');

@@ -3,13 +3,18 @@
 <style>
   html, body { height: 100%; }
   body { display: flow-root; }
-  .app { display: grid; grid-template-rows: auto 1fr; height: calc(100vh - 64px); height: calc(100dvh - 64px); min-height: 420px; margin: 32px 0; border-bottom: 1px solid var(--line); }
-  header.top { display: flex; align-items: baseline; gap: 18px; padding: 0 24px 18px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
-  header.top h1 { font: 700 22px/1.4 var(--sans); margin: 0; text-wrap: balance; }
-  .title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 20px; }
+  .app { display: grid; grid-template-rows: auto 1fr; height: calc(100vh - 32px); height: calc(100dvh - 32px); min-height: 420px; margin: 12px 0 20px; border-bottom: 1px solid var(--line); }
+  /* One line: the title, the description it belongs to, and the site links,
+     with every control on the right sharing their baseline. The body gets the
+     rest of the window, so what this row does not take, the diagram keeps. */
+  header.top { display: flex; align-items: baseline; gap: 2px 18px; padding: 0 24px 9px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
+  header.top h1 { font: 700 19px/1.3 var(--sans); margin: 0; text-wrap: balance; }
+  .title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 16px; min-width: 0; }
+  .top-controls { margin-left: auto; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 18px; }
+  header.top .theme-toggle { padding: 0; font-size: 12.5px; }
   .site-links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; }
   .site-links[hidden] { display: none; }
-  header.top .sub { color: var(--ink-3); font-size: 12.5px; max-width: 80ch; margin-top: 4px; }
+  header.top .sub { color: var(--ink-3); font-size: 12.5px; max-width: 80ch; }
   .math-operator { white-space: nowrap; }
   .math-operator sub { font-size: 75%; line-height: 0; vertical-align: sub; }
 
@@ -49,12 +54,28 @@
   .pr-category-actions .lnk:disabled { opacity: .45; cursor: default; }
   .pr-category-count { color: var(--ink-3); font-variant-numeric: tabular-nums; margin-left: auto; }
   .pr-category .principle-name { font-size: 13px; }
+  /* Category disclosure. The summary carries the name and the count, so a
+     closed category still says how much of it is in play. */
+  .pr-category > summary, .model-category > summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; cursor: pointer; list-style: none; }
+  .pr-category > summary .pr-category-actions { flex: none; margin-bottom: 0; }
+  .pr-category > summary::-webkit-details-marker, .model-category > summary::-webkit-details-marker { display: none; }
+  .pr-category > summary::before, .model-category > summary::before { content: '\25b8'; font-size: 9px; color: var(--ink-3); }
+  .pr-category[open] > summary::before, .model-category[open] > summary::before { content: '\25be'; }
+  .pr-category > summary:hover h3, .model-category > summary:hover h3 { color: var(--accent); }
+  .pr-category > summary h3 { margin: 0; }
+  .pr-category[open] > summary, .model-category[open] > summary { margin-bottom: 5px; }
+  #pane-open .pr-category-count { display: none; }
   .pr-category input { flex: none; margin-top: 3px; }
   .sw { width: 22px; height: 0; border-top: 3px solid; border-radius: 2px; flex: none; }
   .sw.dotted { border-top-style: dotted; }
   .sw.dashed { border-top-style: dashed; }
   .sw.human { border-color: var(--human); } .sw.assisted { border-color: var(--assisted); } .sw.ai { border-color: var(--ai); }
   .sw.derived { border-color: var(--derived); } .sw.conj { border-color: var(--conj); }
+  /* A Lean-verified arrow is drawn thicker, so its swatch is too. */
+  .sw.lean { border-color: var(--ink); border-top-width: 5px; }
+  /* A legend line with no control of its own still lines up with the labels
+     that have one, by standing an invisible control in the same place. */
+  .ctl-spacer { visibility: hidden; pointer-events: none; }
   .graph-hint { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-3); margin: 4px 0 8px; }
   .search { width: min(100%, 320px); margin: 0 0 12px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--panel); }
   .legend-note { color: var(--ink-3); font-size: 12px; }
@@ -66,7 +87,7 @@
 
   main { display: grid; grid-template-rows: auto 1fr; min-height: 0; min-width: 0; }
   .tabs { display: flex; gap: 2px; padding: 0 24px; gap: 22px; flex-wrap: wrap; border-bottom: 1px solid var(--line); background: var(--panel); }
-  .tab { padding: 12px 0; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; cursor: pointer; color: var(--ink-2); }
+  .tab { padding: 7px 0; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; cursor: pointer; color: var(--ink-2); }
   .tab[aria-selected="true"] { border-bottom-color: var(--accent); color: var(--accent); font-weight: 600; }
   .tab:hover { color: var(--link-hover); }
   .tab .n { color: var(--ink-3); font-size: 12px; margin-left: 4px; font-variant-numeric: tabular-nums; }
@@ -113,16 +134,19 @@
   .graph-tools > * { pointer-events: auto; }
   /* A warning panel is inset from the edges; the tools would show around it. */
   .graph-area.warned .graph-tools { visibility: hidden; }
-  .graph-tools #fit { margin-left: auto; }
+  .graph-tools .graph-tool-buttons { margin-left: auto; display: flex; gap: 6px; }
+  .graph-tools .btn[aria-pressed="true"] { background: var(--hl); border-color: var(--accent); }
   .graph-search { width: 280px; max-width: calc(100% - 48px); min-width: 0; }
   .graph-search .search { width: 100%; margin: 0; }
-  #graph-search-status { display: block; width: fit-content; max-width: 100%; background: var(--panel); color: var(--ink-2); font-size: 12px; }
-  #graph-search-status:not(:empty) { padding: 2px 6px; }
-  .pr-row.search-match, .background-row.search-match { background: var(--hl); box-shadow: inset 3px 0 var(--focus); border-radius: 3px; }
-  .pr-row.search-current, .background-row.search-current { outline: 2px solid var(--focus); outline-offset: 1px; }
+  #graph-search-status, #lat-search-status { display: block; width: fit-content; max-width: 100%; background: var(--panel); color: var(--ink-2); font-size: 12px; }
+  #graph-search-status:not(:empty), #lat-search-status:not(:empty) { padding: 2px 6px; }
+  .pr-row.search-match, .lat-row.search-match, .background-row.search-match { background: var(--hl); box-shadow: inset 3px 0 var(--focus); border-radius: 3px; }
+  .pr-row.search-current, .lat-row.search-current, .background-row.search-current { outline: 2px solid var(--focus); outline-offset: 1px; }
   #graph .node.search-match { opacity: 1; }
   #graph .node.search-match rect { stroke: var(--focus); stroke-width: 3; vector-effect: non-scaling-stroke; }
   #graph .node.search-current rect { stroke-width: 4; }
+  #lat-graph .lat-node.search-match rect, #lat-graph .lat-node.search-match circle { stroke: var(--focus); stroke-width: 3; }
+  #lat-graph .lat-node.search-current rect, #lat-graph .lat-node.search-current circle { stroke-width: 4; }
   .graph-warning { position: absolute; inset: 24px; overflow: auto; padding: 24px; border: 1px solid var(--indep); border-radius: 4px; background: var(--warning-bg); color: var(--indep); }
   .graph-warning h2 { margin: 0 0 12px; font-size: 21px; }
   .graph-warning .lnk { color: var(--indep); text-decoration: underline; }
@@ -376,6 +400,17 @@
   .page dt { color: var(--ink-3); } .page dd { margin: 0; }
   .page .src { font-size: 13px; color: var(--ink-2); padding-left: 18px; }
   .page .file { margin-top: 24px; font: 11px var(--mono); color: var(--ink-3); }
+  .page h3.verdict-group { font: 600 14px/1.4 var(--sans); margin: 18px 0 4px; display: flex; align-items: baseline; gap: 8px; }
+  .page h3.verdict-group .n { font: 400 12px var(--mono); color: var(--ink-3); }
+  /* The names column shrinks to its widest name and the evidence starts just
+     past it, rather than being pushed to the far edge of the page. The group
+     heading already gives the verdict, so the evidence loses its button chrome
+     and the row comes down to a line of text. */
+  .page .verdict-table td { padding: 2px 8px 2px 0; border-bottom: 0; vertical-align: baseline; }
+  .page .verdict-table td:first-child { width: 1%; white-space: nowrap; }
+  .page .verdict-table .verdict { border: 0; padding: 0; }
+  .page .verdict-table .badge.source { white-space: nowrap; }
+  .page .derived-verdicts > summary { cursor: pointer; font-size: 13px; color: var(--ink-2); padding: 3px 0; }
   .page .formal { font: 12.5px var(--mono); background: var(--panel-2); padding: 6px 8px; border-radius: 4px; margin-top: 8px; overflow-x: auto; }
   .page .id { font: 12px var(--mono); color: var(--ink-3); margin-bottom: 8px; }
   .page table.results tr { cursor: default; } .page table.results tr[data-result], .page table.results tr[data-model] { cursor: pointer; }
@@ -384,22 +419,26 @@
 
   .links { font-size: 12.5px; margin: 0 0 10px; } .links a { color: var(--accent); }
   .goto-row { display: flex; gap: 12px; align-items: center; margin: 0 0 12px; } .goto-row .goto, .goto-row .links { margin: 0; }
-  .dl { display: flex; gap: 10px; margin-left: auto; font-size: 12.5px; align-self: center; } .dl a { color: var(--ink-3); }
+  .dl { display: flex; gap: 10px; font-size: 12.5px; } .dl a { color: var(--ink-3); }
 
   .pop { position: fixed; z-index: 20; max-width: min(380px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: auto; background: var(--panel); border: 1px solid var(--line-strong); border-radius: 4px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 13px; }
-  .graph-details .pop { position: static; flex: 1; min-height: 0; z-index: auto; max-width: none; max-height: none; overflow: auto; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
+  .graph-details .pop { padding: 8px 12px; position: static; flex: 1; min-height: 0; z-index: auto; max-width: none; max-height: none; overflow: auto; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
   .detail-close { float: right; margin: 0 0 8px 10px; font-size: 18px; line-height: 1; }
   .selection-list { list-style: none; padding: 0; margin: 12px 0; }
   .selection-list li { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-top: 1px solid var(--line); }
   .selection-list details { flex: 1; min-width: 0; }
   .selection-list summary { cursor: pointer; font-weight: 600; }
   .selection-list .lnk { flex: none; font-size: 12px; }
-  .pop .pop-t { font: 600 15px/1.3 var(--serif); margin-bottom: 4px; }
+  .pop .pop-t { font: 600 15px/1.3 var(--serif); margin-bottom: 2px; }
   .pop .pop-t + .pop-t { margin-top: 10px; }
   .pop .pop-s { font: 13.5px/1.45 var(--serif); }
   .pop .formal { font: 12px var(--mono); background: var(--panel-2); padding: 5px 7px; border-radius: 4px; margin-top: 6px; overflow-x: auto; }
   .pop .pop-l { font-size: 12px; color: var(--ink-2); margin-top: 6px; } .pop code { font: 12px var(--mono); }
   .pop .badges { display: flex; gap: 6px; margin: 6px 0; } .pop .links { margin: 4px 0 0; }
+  /* Provenance is one thought: the badges and the references it belongs to. */
+  .pop .pop-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 10px; margin: 5px 0; }
+  .pop .pop-meta .badges { display: inline-flex; margin: 0; }
+  .pop .pop-meta .pop-sources { margin: 0; }
   .pop .links .lnk + .lnk::before { content: '·'; color: var(--ink-3); margin: 0 8px 0 4px; }
 
   .ex-p.bad { background: color-mix(in srgb, var(--indep) 32%, transparent); outline: 1.5px solid var(--indep); }
@@ -447,6 +486,7 @@
   .seg button.auto-negative { color: var(--indep); background: color-mix(in srgb, var(--indep) 18%, var(--panel)); }
   #model-principles .model-category { padding-top: 8px; }
   #model-principles .model-category h3 { margin-bottom: 5px; }
+  #model-principles .model-category > summary h3 { margin: 0; }
   #model-principles .ex-list { margin-bottom: 10px; }
   .evidence-link { color: var(--accent); font-size: 11px; }
   .ex-p .model-flag { color: var(--ink-2); font-weight: 500; }
@@ -481,6 +521,15 @@
   .relation-legend { flex: none; min-width: 0; max-height: 60%; overflow: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--panel); font-size: 12px; color: var(--ink-2); }
   .relation-legend[hidden] { display: none; }
   .relation-legend b { color: var(--ink); }
+  /* What acts on the selection joins the keys on the top line. What merely
+     reports on it goes to the foot of the pane, out of the way of both. */
+  .relation-legend .legend-actions { display: inline-flex; flex-wrap: wrap; align-items: baseline; margin-left: auto; }
+  .relation-legend .legend-actions .lnk + .lnk::before { content: '·'; color: var(--ink-3); margin: 0 7px 0 4px; }
+  .relation-foot { flex: none; min-width: 0; padding: 5px 12px; border-top: 1px solid var(--line); background: var(--panel); font-size: 12px; }
+  .relation-foot[hidden] { display: none; }
+  .graph-details > .relation-legend { order: 0; }
+  .graph-details > .pop, .graph-details > p { order: 1; }
+  .graph-details > .relation-foot { order: 2; }
   .relation-legend .key { display: inline-flex; flex: none; align-items: center; gap: 5px; }
   .relation-legend .key i { width: 14px; height: 12px; border: 1px solid var(--node-stroke); border-radius: 2px; display: inline-block; background: var(--node-fill); }
   .relation-legend .key.entailed i { background: var(--rel-entailed); color: var(--human); }
@@ -490,12 +539,19 @@
   .rel-status { font-weight: 600; }
   .rel-status.implies { color: var(--human); } .rel-status.excludes, .rel-status.independent, .rel-status.inconsistent { color: var(--indep); }
   .rel-status.open { color: var(--ink-3); font-weight: 500; } .rel-status.conjectured { color: var(--conj); }
-  .pop ul.rel { list-style: none; padding: 0; margin: 4px 0 8px; display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
+  .pop ul.equivalent-names { list-style: none; padding: 0; margin: 2px 0 0; display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; }
+  .pop ul.equivalent-names li { display: flex; align-items: baseline; gap: 12px; }
+  .pop .equivalent-actions { margin-left: auto; flex: none; display: flex; gap: 10px; font-size: 12px; }
+  .pop ul.rel { list-style: none; padding: 0; margin: 2px 0 5px; display: flex; flex-direction: column; gap: 2px; font-size: 12px; }
   .pop ul.rel li { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
-  .pop .rel-line { margin: 4px 0; font-size: 13px; }
+  .pop .rel-line { margin: 2px 0; font-size: 13px; }
   .pop .rel-line .stmt { font-size: 13px; }
-  .pop details.rel-evidence { margin: 2px 0 6px 14px; font-size: 12px; } .pop details.rel-evidence summary { cursor: pointer; color: var(--ink-3); }
-  .pop .rel-head { margin-top: 10px; }
+  .pop p { margin: 3px 0; }
+  .pop details.rel-evidence { margin: 1px 0 4px 14px; font-size: 12px; } .pop details.rel-evidence summary { cursor: pointer; color: var(--ink-3); }
+  .pop .rel-head { margin: 7px 0 2px; }
+  /* A section label rides on the first line it labels rather than taking one. */
+  .pop .rel-line .rel-head, .pop p > .rel-head { display: inline; margin: 0 9px 0 0; color: var(--ink-2); }
+  .pop .rel-line:has(> .rel-head) { margin-top: 7px; }
   .graph-hint svg { flex: none; overflow: visible; }
   .direction-chevron, .flow-chevron { fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
   #flow { pointer-events: none; }
@@ -508,7 +564,7 @@
     .app { margin: 16px 0 0; height: calc(100vh - 16px); height: calc(100dvh - 16px); }
     header.top { gap: 8px 16px; padding: 0 16px 14px; }
     header.top > div:first-child { flex: 1 1 100%; }
-    .dl { margin-left: 0; flex: 1; }
+    .top-controls { margin-left: 0; flex: 1; }
     .tabs { padding: 0 16px; gap: 0 18px; }
     .tab { padding: 10px 0; font-size: 13px; }
     .ex { grid-template-columns: minmax(0, 1fr); gap: 24px; }
@@ -536,14 +592,17 @@
 </style>
 <div class="app">
   <header class="top">
-    <div>
-      <div class="title-row"><h1 id="title"></h1><nav id="site-links" class="site-links" aria-label="Site navigation" hidden></nav></div>
+    <div class="title-row">
+      <h1 id="title"></h1>
       <div class="sub" id="subtitle"></div>
+      <nav id="site-links" class="site-links" aria-label="Site navigation" hidden></nav>
     </div>
-    <div class="dl" id="downloads"></div>
-    <div class="display-toggles">
-      <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
-      <button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false" title="Okabe–Ito palette: sky blue and orange">[Colourblind mode: off]</button>
+    <div class="top-controls">
+      <div class="dl" id="downloads"></div>
+      <div class="display-toggles">
+        <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
+        <button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false" title="Okabe–Ito palette: sky blue and orange">[Colourblind mode: off]</button>
+      </div>
     </div>
   </header>
   <div class="body">
@@ -561,7 +620,7 @@
     <aside class="controls" id="graph-sidebar">
       <div class="controls-scroll" id="principle-controls">
       <div id="lat-controls">
-        <h2>Lattice <button class="lnk dim" id="lat-clear">clear</button></h2>
+        <h2>Lattice <button class="lnk dim" id="lat-clear">hide all</button></h2>
         <p class="background-hint">A Hasse diagram showing all the conjunctions of the selected principles. Solid arrows denote implications shown to be non-reversible by models in the selected sources; dashed arrows denote implications which might be reversible (as far as the selected sources are concerned).</p>
         <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
       </div>
@@ -572,24 +631,21 @@
       <div id="source-controls">
         <h2 id="source-filter-heading" title="Filter displayed arrows. Background consequences always use all recorded proofs.">Arrow sources</h2>
         <div class="ctl" id="source-filters"></div>
-        <div class="ctl">
-          <label><input type="checkbox" id="lean-only"><span class="sw" style="border-color:var(--ink)"></span>Lean-verified only</label>
-        </div>
       </div>
       <div id="graph-options">
-        <h2>Graph</h2>
-        <p class="graph-hint" title="Solid neutral arrows are derived proofs. Click an arrow for its proof steps and sources; intermediate principles may be hidden or combined."><span class="sw derived"></span>Derived proofs</p>
+        <p class="graph-hint" title="Solid neutral arrows are derived proofs. Click an arrow for its proof steps and sources; intermediate principles may be hidden or combined."><input type="checkbox" class="ctl-spacer" tabindex="-1" aria-hidden="true"><span class="sw derived"></span>Derived proofs</p>
         <div class="ctl">
           <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
           <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
+          <label title="Show only arrows with a Lean proof. A Lean-verified arrow is drawn thicker than the rest whether or not this is checked."><input type="checkbox" id="lean-only"><span class="sw lean"></span>Lean-verified only</label>
           <label title="Hide an arrow that the displayed diagram already gives: one that a chain of other displayed arrows yields, as in a Hasse diagram, and one that repeats a premise stroke, as when C is equivalent to A ∧ B and C ⇒ A restates the stroke from A into the ∧, and one of several arrows that leave the same box for the same target because its ∧ circles each carry the consequence. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows" checked>Transitive reduction</label>
           <label title="Show the logical arrows from False to every node and from every node to True."><input type="checkbox" id="trivial-arrows">Trivial arrows</label>
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
         </div>
       </div>
       <div id="graph-principles">
-        <h2>Principles <button class="lnk dim" id="pr-all">show positive</button> <button class="lnk dim" id="pr-none">clear</button></h2>
+        <h2>Principles <button class="lnk dim" id="pr-all">show all positive</button> <button class="lnk dim" id="pr-none">hide all</button></h2>
         <p class="background-hint conjecture-hint">Choose a principle’s positive or negative form, then move it to background.</p>
         <div class="ctl" id="pr-filters"></div>
       </div>
@@ -612,12 +668,13 @@
           <svg id="graph" role="img" aria-label="Implication graph"></svg>
           <div id="graph-warning" class="graph-warning" role="alert" hidden></div>
           <div id="graph-empty" class="graph-empty" role="status" hidden></div>
-          <div class="graph-tools"><div class="graph-search"><input class="search" id="graph-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the graph" aria-describedby="graph-search-status" autocomplete="off"><span id="graph-search-status" role="status" aria-live="polite"></span></div><button class="btn small" id="fit">Fit</button></div>
+          <div class="graph-tools"><div class="graph-search"><input class="search" id="graph-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the graph" aria-describedby="graph-search-status" autocomplete="off"><span id="graph-search-status" role="status" aria-live="polite"></span></div><div class="graph-tool-buttons"><button class="btn small" id="graph-flip" aria-pressed="false" title="Turn the diagram over, so the stronger principles sit at the top">Flip</button><button class="btn small" id="fit">Fit</button></div></div>
         </div>
         <div class="pane-divider" id="details-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize selection details" aria-controls="graph-details" title="Drag to resize details · Arrow keys to adjust · Double-click to reset"></div>
         <aside id="graph-details" class="graph-details" aria-label="Selection details">
           <div id="relation-legend" class="relation-legend" role="status" aria-live="polite" hidden></div>
           <p id="graph-details-hint">Select a principle, conjunction or arrow to see its details and logical relations here. Shift-click to add or remove principles.</p>
+          <div id="graph-details-foot" class="relation-foot" role="status" aria-live="polite" hidden></div>
         </aside>
         </div>
       </section>
@@ -626,9 +683,9 @@
           <div class="graph-area">
             <svg id="lat-graph" role="img" aria-label="Lattice of conjunctions"></svg>
             <div id="lat-warning" class="graph-warning" role="alert" hidden></div>
-            <div class="graph-tools"><button class="btn small" id="lat-fit">Fit</button></div>
+            <div class="graph-tools"><div class="graph-search"><input class="search" id="lat-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the lattice" aria-describedby="lat-search-status" autocomplete="off"><span id="lat-search-status" role="status" aria-live="polite"></span></div><div class="graph-tool-buttons"><button class="btn small" id="lat-flip" aria-pressed="false" title="Turn the diagram over, so the stronger conjunctions sit at the top">Flip</button><button class="btn small" id="lat-fit">Fit</button></div></div>
           </div>
-          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p></aside>
+          <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p><div id="lat-detail-foot" class="relation-foot" role="status" aria-live="polite" hidden></div></aside>
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
@@ -786,7 +843,13 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, recorded: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, recorded: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set(), flipped: false };
+// A handful of categories reads better open; a long list is easier to navigate
+// closed. The threshold counts the topic's own principles, not the ones a
+// reader happens to be showing.
+const CATEGORY_COLLAPSE_MIN = 16;
+if (principleGroups().length > 1 && P.length > CATEGORY_COLLAPSE_MIN)
+  for (const g of principleGroups()) state.collapsed.add(g.id);
 const graphSearch = { matches: new Set(), index: 0 };
 // A principle the topic's own background already settles, one way or the
 // other, can only sit in the True or False box. It starts hidden; the sidebar
@@ -1311,6 +1374,14 @@ function computeLayout(g) {
     L.y.set(n.id, n.kind === 'falsity' ? Math.max(0, ...bounds.map(b => b.bottom)) + 63 + size.h / 2 : Math.min(0, ...bounds.map(b => b.top)) - 63 - size.h / 2);
     L.size.set(n.id, size); L.visible.push(n); L.vis.add(n.id); L.layers.push([n]);
   }
+  // Turning the diagram over is one reflection of the finished layout. Edge
+  // geometry reads the positions, so nothing downstream needs to know; False
+  // and True have already taken the ends they belong at and travel with it,
+  // and the junctions below are placed against their box after the flip.
+  if (state.flipped) {
+    const ys = L.visible.map(n => L.y.get(n.id)), span = Math.min(...ys) + Math.max(...ys);
+    for (const n of L.visible) L.y.set(n.id, span - L.y.get(n.id));
+  }
   for (const j of g.nodes.filter(n => n.parent && L.vis.has(n.parent))) {
     const box = byId.get(j.parent), index = box.junctions.indexOf(j);
     L.visible.push(j); L.vis.add(j.id); L.size.set(j.id, {w: 22, h: 22});
@@ -1793,10 +1864,16 @@ function renderGraph() {
   renderSubscripts(svg);
   applyView(); applySelection(); applyGraphSearch();
 }
+// One search, read by whichever view is open. The two diagrams draw the same
+// principles, so a query typed in one belongs to both; what differs is only
+// what each can do with a match.
+const searchBoxes = () => ['graph-search', 'lat-search'].map(id => document.getElementById(id)).filter(Boolean);
+const onLattice = () => state.tab === 'lattice';
+const latticeNodeFor = literal => lattice.nodes.find(n => (n.labels || []).some(l => l.literal && baseId(l.literal) === literal));
 function applyGraphSearch(focus = false) {
   const matches = [...graphSearch.matches], current = matches[graphSearch.index];
-  document.querySelectorAll('#pr-filters .pr-row, #background-list .background-row').forEach(row => {
-    const id = row.dataset.prRow || row.dataset.backgroundId;
+  document.querySelectorAll('#pr-filters .pr-row, #lat-filters .lat-row, #background-list .background-row').forEach(row => {
+    const id = row.dataset.prRow || row.dataset.latRow || row.dataset.backgroundId;
     row.classList.toggle('search-match', graphSearch.matches.has(id));
     row.classList.toggle('search-current', id === current);
   });
@@ -1805,12 +1882,40 @@ function applyGraphSearch(focus = false) {
     node.classList.toggle('search-match', members.some(p => graphSearch.matches.has(p)));
     node.classList.toggle('search-current', members.includes(current));
   });
-  const status = document.getElementById('graph-search-status');
-  status.textContent = !document.getElementById('graph-search').value.trim() ? '' : !matches.length ? 'No matching principles' :
-    `${graphSearch.index + 1} of ${matches.length}${inBackground(current) ? ' · In background' : state.excluded.has(current) ? ' · Temporarily shown' : ''}${matches.length > 1 ? ' · Enter for next' : ''}`;
+  document.querySelectorAll('#lat-graph .lat-node').forEach(node => {
+    const members = (lattice.nodes.find(n => n.id === node.dataset.latNode)?.labels || [])
+      .map(l => l.literal).filter(Boolean).map(baseId);
+    node.classList.toggle('search-match', members.some(p => graphSearch.matches.has(p)));
+    node.classList.toggle('search-current', members.includes(current));
+  });
+  // The graph can show a match it was hiding. The lattice cannot: a principle
+  // nobody has chosen to build with has no node, which is a different thing
+  // to say and worth saying.
+  const typed = searchBoxes().some(box => box.value.trim());
+  const tail = matches.length > 1 ? ' · Enter for next' : '';
+  const aside = view => inBackground(current) ? ' · In background'
+    : view === 'lattice' ? (latticeNodeFor(current) ? '' : ' · Not on the diagram')
+    : state.excluded.has(current) ? ' · Temporarily shown' : '';
+  for (const [id, view] of [['graph-search-status', 'graph'], ['lat-search-status', 'lattice']]) {
+    const status = document.getElementById(id);
+    if (status) status.textContent = !typed ? '' : !matches.length ? 'No matching principles'
+      : `${graphSearch.index + 1} of ${matches.length}${aside(view)}${tail}`;
+  }
   if (!focus || !current) return;
-  const row = document.querySelector(inBackground(current) ? `[data-background-id="${current}"]` : `[data-pr-row="${current}"]`);
+  const row = document.querySelector(inBackground(current) ? `[data-background-id="${current}"]`
+    : onLattice() ? `[data-lat-row="${current}"]` : `[data-pr-row="${current}"]`);
+  openCategoryOf(row);
   row?.scrollIntoView?.({block: 'nearest', inline: 'nearest'});
+  if (onLattice()) {
+    const node = latticeNodeFor(current), diagram = document.getElementById('lat-graph');
+    if (!node || !diagram) return;
+    const W = diagram.clientWidth || 800, H = diagram.clientHeight || 600;
+    lattice.view.k = Math.min(1.4, (W - 32) / node.w);
+    lattice.view.tx = W / 2 - node.x * lattice.view.k;
+    lattice.view.ty = H / 2 - node.y * lattice.view.k;
+    latticeApplyView();
+    return;
+  }
   const node = layout?.visible.find(n => n.members?.includes(current));
   if (node) {
     const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
@@ -2011,14 +2116,15 @@ function applySelection() {
   });
   document.querySelectorAll('#pr-filters .principle-name').forEach(button => button.setAttribute('aria-pressed', baseMembers.has(button.dataset.principle)));
 
-  if (!base || state.tab !== 'graph' || !layout) { legend.hidden = true; return; }
+  if (!base || state.tab !== 'graph' || !layout) { legend.hidden = true; setDetailFoot('graph-details-foot', null); return; }
   legend.hidden = false;
   const fullLabel = expressionName(base);
   const label = Array.isArray(base) && fullLabel.length > 100 ? `${base.length} selected principles` : fullLabel;
   const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
   const keys = key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
-  const status = `<span class="rel-status ${consistencyLine.kind}">${esc(consistencyLine.text)}</span>`;
-  legend.innerHTML = `<b title="${esc(fullLabel)}">Relative to ${esc(label)}:</b>${status}${keys}`;
+  legend.innerHTML = `<b title="${esc(fullLabel)}">${esc(label)}</b>${keys}${selectionToolbar()}`;
+  wireLegendActions(legend);
+  setDetailFoot('graph-details-foot', consistencyLine);
 }
 
 
@@ -2046,8 +2152,12 @@ function evidenceBadges(e) {
   return [...new Set(e.items.map(sourceOf))].map(sourceBadge).join('') + (e.items.some(x => x.status === 'conjectured') ? '<span class="badge conj">conjecture</span>' : '');
 }
 function sourceBadge(s) { return `<span class="badge source" data-source="${esc(s.id)}" style="--source-color:${sourceColor(s)}">${esc(s.name)}</span>`; }
-function verdictButton(m, c, e, compact = false) {
-  return e ? `<button class="verdict" data-verdict="${c}" data-verdict-model="${m.id}" title="View evidence for ${esc(name(c))}" aria-label="${esc(name(c))}: ${e.value ? 'satisfied' : 'violated'}${e.direct ? '' : ', derived'}; view evidence"><span class="model-flag">${e.value ? '✓' : '✗'}${e.direct ? '' : ' derived'}</span> ${compact ? '<span class="evidence-link">evidence ↗</span>' : evidenceBadges(e)}</button>` : '<span class="via">? unknown</span>';
+function verdictButton(m, c, e, compact = false, showValue = true) {
+  if (!e) return '<span class="via">? unknown</span>';
+  // A list already sorted by verdict says it once in its heading, so there the
+  // mark is dropped and only the derivation and the sources are left to report.
+  const flag = [showValue ? (e.value ? '✓' : '✗') : '', e.direct ? '' : 'derived'].filter(Boolean).join(' ');
+  return `<button class="verdict" data-verdict="${c}" data-verdict-model="${m.id}" title="View evidence for ${esc(name(c))}" aria-label="${esc(name(c))}: ${e.value ? 'satisfied' : 'violated'}${e.direct ? '' : ', derived'}; view evidence"><span class="model-flag">${flag}</span> ${compact ? '<span class="evidence-link">evidence ↗</span>' : evidenceBadges(e)}</button>`;
 }
 function principleGroups() {
   const sorted = [...P].sort((a, b) => a.name.localeCompare(b.name));
@@ -2057,6 +2167,52 @@ function principleGroups() {
   const ungrouped = sorted.filter(p => !categories.some(c => c.id === p.category));
   if (ungrouped.length) groups.push({ id: 'uncategorized', name: 'Other principles', principles: ungrouped });
   return groups.filter(g => g.principles.length);
+}
+// Category disclosure for the graph sidebar, the lattice sidebar and the
+// theory explorer. One collapsed set serves all three, so a category the
+// reader opens is open wherever it appears. These lists are rebuilt wholesale
+// on most changes, so the markup is driven from that set rather than the other
+// way round, and a rebuilt list opens exactly as the reader left it.
+const CATEGORY_LISTS = ['pr-filters', 'lat-filters', 'model-principles'];
+// Whatever acts on the category as a whole belongs in the summary, where it
+// stays reachable with the category closed.
+function categoryHeader(group, count = '', actions = '') {
+  return `<summary><h3>${esc(group.name)}</h3><span class="pr-category-count">${esc(count)}</span>${actions}</summary>`;
+}
+// A category offers one move, never both: hide what it is showing, or show it
+// when it is showing nothing. The label is set wherever the counts are.
+function setCategoryToggle(button, shown) {
+  if (!button) return;
+  button.setAttribute(button.hasAttribute('data-lat-select') ? 'data-lat-select' : 'data-category-select', shown ? 'none' : 'all');
+  button.textContent = shown ? 'hide' : 'show positive';
+}
+function applyCategories(el) {
+  el?.querySelectorAll('[data-category]').forEach(g => { g.open = !state.collapsed.has(g.dataset.category); });
+}
+function applyAllCategories() { for (const id of CATEGORY_LISTS) applyCategories(document.getElementById(id)); }
+function wireCategories(el) {
+  applyCategories(el);
+  if (!el || el.dataset.categoriesWired) return;
+  el.dataset.categoriesWired = '1';
+  el.addEventListener('click', ev => {
+    const group = ev.target.closest('summary')?.closest('[data-category]');
+    if (!group) return;
+    // The browser would toggle this one disclosure. Cancel that and go through
+    // the shared set instead, so the other lists agree.
+    ev.preventDefault();
+    // A control in the summary acts on the category where it stands. Its own
+    // handler still runs; cancelling the default only stopped the disclosure.
+    if (ev.target.closest('button, a, input, select, textarea')) return;
+    const id = group.dataset.category;
+    state.collapsed.has(id) ? state.collapsed.delete(id) : state.collapsed.add(id);
+    applyAllCategories();
+  });
+}
+// Reaching a row inside a closed category opens it, as find-in-page does.
+function openCategoryOf(row) {
+  const id = row?.closest('[data-category]')?.dataset.category;
+  if (id == null || !state.collapsed.has(id)) return;
+  state.collapsed.delete(id); applyAllCategories();
 }
 function assumptionButtons(id, follows = false, ruledOut = false) {
   const fixed = topicBackground.includes(id);
@@ -2081,7 +2237,10 @@ function renderModels() {
   if (inspected) h += `<div class="inspection-note">Inspecting <b>${esc(inspected.name)}</b> <button class="lnk" id="ex-deselect">clear selection</button></div>`;
   h += '<div id="model-principles">';
   for (const group of principleGroups()) {
-    h += `<section class="model-category" data-model-category="${esc(group.id)}"><h3>${esc(group.name)}</h3><ul class="ex-list">`;
+    // A closed category must still report the assumptions it holds, or
+    // collapsing one would hide a choice the reader made.
+    const assumed = group.principles.filter(p => inBackground(p.id)).length;
+    h += `<details class="model-category" data-category="${esc(group.id)}">${categoryHeader(group, assumed ? `${assumed} assumed` : '')}<ul class="ex-list">`;
     for (const p of group.principles) {
       const id = p.id, positive = background.has(id), negative = negativeBackground.has(id);
       const follows = !conflict && implied.has(id), ruledOut = !conflict && backgroundExcluded.has(id);
@@ -2090,7 +2249,7 @@ function renderModels() {
       h += `<li class="ex-p ${tint}" data-assumption-row="${id}">${assumptionButtons(id, follows, ruledOut)}<div class="principle-line"><button class="lnk" data-principle="${id}">${esc(name(id))}</button>${inspected ? ' ' + verdictButton(inspected, id, evidence, true) : ''}</div></li>`;
 
     }
-    h += '</ul></section>';
+    h += '</ul></details>';
   }
   h += '</div></div><div class="ex-col explorer-models">';
   const ms = MODELS.filter(m => passes(m) && (m.status === 'proved' || state.showConj));
@@ -2115,6 +2274,7 @@ function renderModels() {
   el.innerHTML = h;
   wireAssumptions(el);
   el.querySelectorAll('[data-background-preset]').forEach(button => { button.disabled = backgroundPresets.find(p => p.id === button.dataset.backgroundPreset).principles.every(id => background.has(id)); button.addEventListener('click', () => addBackgroundPreset(button.dataset.backgroundPreset)); });
+  wireCategories(el.querySelector('#model-principles'));
   el.querySelector('#ex-clear').addEventListener('click', resetBackground);
   el.querySelector('#ex-deselect')?.addEventListener('click', () => { state.modelId = null; select(null); renderModels(); });
   wire(el);
@@ -2308,7 +2468,7 @@ function renderLynchpins() {
   const trivial = new Set(rep.trivial);
   const pb = id => id === FALSE ? esc(name(FALSE)) : trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
   const stmt = r => r.kind === 'check'
-    ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: <button class="lnk" data-verdict="${esc(r.principle)}" data-verdict-model="${esc(r.model)}">${esc(name(r.principle))}</button>`
+    ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: ${pb(r.principle)}`
     : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ⇒ ${pb(r.conclusion)}`;
   const key = r => r.kind === 'check' ? `check|${r.model}|${r.principle}` : `q|${r.premises.join('+')}|${r.conclusion}`;
   body.innerHTML = `<table class="results lynchpin"><thead><tr><th>Question</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
@@ -2442,8 +2602,23 @@ function renderPage(sel) {
     const m = byMid.get(sel.id);
     h += `<h1>${esc(m.name)}</h1><div class="badges">${certBadges(m)}</div>${fileLinks(m)}${certDl(m.certificate)}`;
     h += `<div class="record-summary">${writeupNote(m)}${m.description ? `<h2>Construction</h2><div class="prose">${fmt(m.description)}</div>` : ''}</div>`;
-    const st = c => verdictButton(m, c, modelEvidence(m, c));
-    h += `<h2>Principles</h2><table class="results"><tbody>${principleOrder().map(c => `<tr><td class="mono nowrap">${st(c)}</td><td><button class="lnk" data-principle="${c}">${esc(name(c))}</button></td></tr>`).join('')}</tbody></table>`;
+    // Sorted by what the model says, since that is what a reader comes here to
+    // find. A model records a handful of properties and the rest follow from
+    // them, so the derived verdicts outnumber the recorded ones several times
+    // over and wait behind a disclosure rather than burying them.
+    const verdicts = principleOrder().map(c => ({c, e: modelEvidence(m, c)}));
+    const verdictTable = list => `<table class="results verdict-table"><tbody>${list.map(({c, e}) =>
+      `<tr><td><button class="lnk" data-principle="${c}">${esc(name(c))}</button></td><td class="verdict-cell">${e ? verdictButton(m, c, e, false, false) : ''}</td></tr>`).join('')}</tbody></table>`;
+    const verdictGroup = (title, list) => {
+      const recorded = list.filter(v => !v.e || v.e.direct), derived = list.filter(v => v.e && !v.e.direct);
+      return `<h3 class="verdict-group">${title} <span class="n">${list.length}</span></h3>`
+        + (recorded.length ? verdictTable(recorded) : derived.length ? '' : '<p class="dim">—</p>')
+        + (derived.length ? `<details class="derived-verdicts"><summary>${derived.length} more, derived from the recorded properties</summary>${verdictTable(derived)}</details>` : '');
+    };
+    h += '<h2>Principles</h2>'
+      + verdictGroup('Satisfied', verdicts.filter(v => v.e?.value === true))
+      + verdictGroup('Violated', verdicts.filter(v => v.e?.value === false))
+      + verdictGroup('Unknown', verdicts.filter(v => !v.e));
     if (m.notes) h += `<h2>Notes</h2><div class="prose">${fmt(m.notes)}</div>`;
     if ((m.checks || []).length) h += `<h2>Checks</h2><ul class="src">${m.checks.map(x => `<li class="mono">${esc(x)}</li>`).join('')}</ul>`;
     h += sourceList([m]);
@@ -2511,6 +2686,8 @@ function wire(el) {
   el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', ev => select({ type: 'principle', id: b.dataset.principle }, ev.shiftKey || ev.metaKey || ev.ctrlKey)));
   el.querySelectorAll('button[data-remove-selection]').forEach(b => b.addEventListener('click', () => select({type: 'principle', id: b.dataset.removeSelection}, true)));
   el.querySelectorAll('button[data-selection-action]').forEach(b => b.addEventListener('click', () => applySelectionAction(b.dataset.selectionAction)));
+  el.querySelectorAll('button[data-equivalent-show]').forEach(b => b.addEventListener('click', () => toggleEquivalent(b.dataset.equivalentShow)));
+  el.querySelectorAll('button[data-equivalent-replace]').forEach(b => b.addEventListener('click', () => replaceWithEquivalent(b.dataset.equivalentReplace)));
   el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
   el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
   el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
@@ -2521,7 +2698,8 @@ function relList(items) { return items.length ? `<ul class="rel">${items.map(([i
 function certDl(c) { return `<dl>${c.produced_by ? `<dt>by</dt><dd>${esc(c.produced_by)}</dd>` : ''}${c.recorded_by ? `<dt>recorded by</dt><dd>${esc(c.recorded_by)}</dd>` : ''}${(c.checked_by || []).length ? `<dt>checked</dt><dd>${esc(c.checked_by.join(', '))}</dd>` : ''}${c.lean_ref ? `<dt>Lean</dt><dd class="mono">${esc(c.lean_ref)}</dd>` : ''}${c.date ? `<dt>date</dt><dd>${esc(c.date)}</dd>` : ''}</dl>`; }
 let popAt = null;
 // One relation verdict with its evidence: proof steps or witness models.
-function statusLine(label, st, joint = false) {
+function relHead(text) { return `<span class="rel-head">${esc(text)}</span>`; }
+function statusLine(label, st, joint = false, head = '') {
   const kind = st.status.endsWith('?') ? 'conjectured' : st.status;
   const text = {implies: '✓ proved', 'implies?': '✓ conjectured', excludes: '✗ excluded', 'excludes?': '✗ excluded by a conjecture', independent: '⇏ refuted by a model', 'independent?': '⇏ refuted given a conjecture', inconsistent: joint ? '✗ inconsistent' : 'premise inconsistent with the background', consistent: '✓ consistent', open: '? open'}[st.status] || st.status;
   const models = (st.models || []).map(id => byMid.get(id)).filter(Boolean);
@@ -2529,26 +2707,37 @@ function statusLine(label, st, joint = false) {
   const shown = models.slice(0, 3), more = models.length - shown.length;
   const evidence = models.length ? `<ul class="rel">${shown.map(m => `<li><button class="lnk" data-model="${esc(m.id)}">${esc(m.name)}</button> ${certBadges(m)}</li>`).join('')}${more ? `<li class="dim">and ${more} more in the theory explorer</li>` : ''}</ul>`
     : via.length ? `<details class="rel-evidence"><summary>${via.length} proof step${via.length > 1 ? 's' : ''}</summary><ol>${via.map(r => `<li><button class="lnk" data-result="${esc(r.id)}">${resultStmt(r)}</button> ${certBadges(r)}</li>`).join('')}</ol></details>` : '';
-  return `<div class="rel-line"><span class="stmt">${label}</span> <span class="rel-status ${kind}">${text}</span>${st.limited ? ' <span class="dim">(model outside the selected sources)</span>' : ''}</div>${evidence}`;
+  return `<div class="rel-line">${head ? relHead(head) : ''}<span class="stmt">${label}</span> <span class="rel-status ${kind}">${text}</span>${st.limited ? ' <span class="dim">(model outside the selected sources)</span>' : ''}</div>${evidence}`;
 }
 // Converse and premise-necessity facts for a displayed arrow.
+// Whether the arrow reverses, in a sentence. The lines above it carry the
+// evidence premise by premise; this says what they come to. The converse of a
+// conjunction fails as soon as one conjunct does, and holds only if all do.
+function converseNote(premises, conclusion) {
+  const settled = premises.map(p => implicationStatus([conclusion], p).status);
+  if (settled.every(s => s === 'implies')) return 'The converse holds too, so the two are equivalent under the background.';
+  if (settled.some(s => s === 'independent' || s === 'excludes')) return 'A model rules the converse out, so this arrow does not reverse.';
+  return 'Nothing recorded settles the converse, so this arrow might yet reverse.';
+}
 function edgeContext(premises, conclusion) {
   if (!premises?.length) return '';
   const stmt = (ps, c) => `${ps.map(name).map(esc).join(' ∧ ')} ⇒ ${esc(name(c))}`;
   let h = '';
-  if (conclusion !== FALSE) h += `<div class="rel-head">Converse</div>${premises.map(p => statusLine(stmt([conclusion], p), implicationStatus([conclusion], p))).join('')}`;
+  if (conclusion !== FALSE) h += premises.map((p, i) =>
+    statusLine(stmt([conclusion], p), implicationStatus([conclusion], p), false, i ? '' : 'Converse')).join('')
+    + `<p class="dim">${esc(converseNote(premises, conclusion))}</p>`;
   if (premises.length > 1) {
-    h += '<div class="rel-head">Without each premise</div>';
-    for (const p of premises) {
-      const rest = premises.filter(q => q !== p);
-      h += conclusion === FALSE ? statusLine(rest.map(name).map(esc).join(' ∧ '), consistencyStatus(rest), true) : statusLine(stmt(rest, conclusion), implicationStatus(rest, conclusion));
-    }
+    premises.forEach((p, i) => {
+      const rest = premises.filter(q => q !== p), head = i ? '' : 'Without each premise';
+      h += conclusion === FALSE ? statusLine(rest.map(name).map(esc).join(' ∧ '), consistencyStatus(rest), true, head)
+        : statusLine(stmt(rest, conclusion), implicationStatus(rest, conclusion), false, head);
+    });
   }
   return h;
 }
 function renderDetail() {
   const el = document.getElementById('pop'); const sel = state.selected;
-  placeDetail();
+  placeDetail(); syncDetailHint();
   if (!sel || sel.type === 'cell') { el.hidden = true; return; }
   let h = '';
   if (sel.type === 'selection') {
@@ -2558,8 +2747,8 @@ function renderDetail() {
       return `<li><details><summary>${esc(name(literal))}</summary>${isNegative(literal) ? '<p>Negation of:</p>' : ''}<p>${esc(principle?.statement || name(literal))}</p></details><button class="lnk" data-remove-selection="${esc(literal)}" aria-label="Remove ${esc(name(literal))} from selection">remove</button></li>`;
     }).join('')}</ul>`;
     h += statusLine('Joint consistency', consistencyStatus(sel.premises), true);
-    const actions = selectionActions(sel.premises);
-    if (actions) h += `<div class="links">${actions}</div>`;
+    h += equivalentList(sel.premises);
+
   } else if (sel.type === 'junction') {
     const junction = layout?.byId.get(sel.id);
     if (!junction) { el.hidden = true; return; }
@@ -2571,20 +2760,18 @@ function renderDetail() {
     // and the ceiling carry their implications for free, so for those the only
     // question worth asking is the one about the converse.
     h += `<div class="pop-t">${esc(sel.fromLabel)} ⇒ ${esc(sel.toLabel)}</div>`;
-    h += '<div class="rel-head">Why</div>';
-    if (!sel.from) h += '<p class="dim">Everything follows from a contradiction.</p>';
-    else if (!sel.to.length) h += '<p class="dim">Everything entails what the background already gives.</p>';
-    else h += sel.to.map(q => statusLine(`${esc(sel.fromLabel)} ⇒ ${esc(name(q))}`, implicationStatus(sel.from, q))).join('');
-    h += '<div class="rel-head">Converse</div>';
+    if (!sel.from) h += `<p class="dim">${relHead('Why')}Everything follows from a contradiction.</p>`;
+    else if (!sel.to.length) h += `<p class="dim">${relHead('Why')}Everything entails what the background already gives.</p>`;
+    else h += sel.to.map((q, i) => statusLine(`${esc(sel.fromLabel)} ⇒ ${esc(name(q))}`, implicationStatus(sel.from, q), false, i ? '' : 'Why')).join('');
     if (!sel.from) {
-      h += statusLine(`${esc(sel.toLabel)} ⇒ False (⊥)`, consistencyStatus(sel.to));
+      h += statusLine(`${esc(sel.toLabel)} ⇒ False (⊥)`, consistencyStatus(sel.to), false, 'Converse');
       h += `<p class="dim">${sel.reverses === 'ruled out'
         ? 'A model satisfies it alongside the background, so it is not the contradiction.'
         : 'Nothing recorded shows it can hold with the background, so it might yet be the contradiction.'}</p>`;
     } else {
-      h += sel.missing.map(p =>
-        statusLine(`${esc(sel.toLabel)} ⇒ ${esc(name(p))}`, implicationStatus(sel.to, p))).join('')
-        || '<p class="dim">Nothing separates the two.</p>';
+      h += sel.missing.map((p, i) =>
+        statusLine(`${esc(sel.toLabel)} ⇒ ${esc(name(p))}`, implicationStatus(sel.to, p), false, i ? '' : 'Converse')).join('')
+        || `<p class="dim">${relHead('Converse')}Nothing separates the two.</p>`;
       h += `<p class="dim">${sel.reverses === 'ruled out'
         ? 'A model settles the converse, so these are genuinely different nodes.'
         : 'The converse is open, so these two might yet collapse into one node.'}</p>`;
@@ -2606,7 +2793,12 @@ function renderDetail() {
       const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
       if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
     }
-    h += `<div class="links"><button class="lnk" data-goto="1">details</button>${selectionActions([(sel.negative ? '!' : '') + sel.id])}</div>`;
+    if (!selectionInLegend()) {
+      const assumable = !sel.negative && byPid.has(sel.id) && !inBackground(sel.id);
+      h += `<div class="links"><button class="lnk" data-goto="1">details</button>${assumable
+        ? `<button class="lnk" data-selection-action="background" title="Assume ${esc(name(sel.id))} throughout, as the sidebar's background control would.">background</button>` : ''}</div>`;
+    }
+    h += equivalentList([(sel.negative ? '!' : '') + sel.id]);
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
@@ -2619,8 +2811,12 @@ function renderDetail() {
       const gaps = [...background].filter(p => !holds.has(p)).concat([...negativeBackground].filter(p => !fails.has(p)).map(p => '!' + p));
       if (gaps.length) h += `<p class="pop-l">Unknown assumptions: ${gaps.map(name).map(esc).join(', ')}</p>`;
     }
-    if (sel.display) h += `<div class="pop-t">${esc(sel.display)}</div><p class="note">${sel.contraposed ? 'Contrapositive, under the current assumptions.' : 'Shown under the current assumptions.'} Original result:</p>`;
-    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="badges">${certBadges(x)}</div>${sourceSummary([x])}${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">details</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
+    // The drawn form and the recorded one differ only when the background let
+    // the graph drop a premise or contrapose the arrow. Where they agree,
+    // saying it twice says nothing.
+    const recorded = sel.type === 'result' ? resultStmt(x).replace(/<[^>]*>/g, '') : '';
+    if (sel.display && sel.display !== recorded) h += `<div class="pop-t">${esc(sel.display)}</div><p class="note">${sel.contraposed ? 'Contrapositive, under the current assumptions.' : 'Shown under the current assumptions.'} Original result:</p>`;
+    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="pop-meta"><span class="badges">${certBadges(x)}</span>${sourceSummary([x])}</div>${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">details</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
     if (sel.type === 'result' && sel.premises) h += edgeContext(sel.premises, sel.conclusion);
   }
   el.innerHTML = '<button class="lnk detail-close" aria-label="Close details">×</button>' + h; el.hidden = false; el.scrollTop = 0; wire(el);
@@ -2649,7 +2845,7 @@ function placeDetail() {
 }
 document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !['graph-details', 'lat-detail'].includes(el.parentElement.id) && !el.contains(ev.target)) el.hidden = true; });
 document.addEventListener('keydown', ev => {
-  if (ev.key !== 'Escape' || ev.target.id === 'graph-search' || document.body.classList.contains('resizing-panes')) return;
+  if (ev.key !== 'Escape' || ev.target.closest?.('.graph-search') || document.body.classList.contains('resizing-panes')) return;
   if (state.focus || state.selected?.type === 'principle') select(null);
   else document.getElementById('pop').hidden = true;
 });
@@ -2714,6 +2910,57 @@ function literalShown(l) {
   if (state.tab === 'lattice') return lattice.shown.includes(l);
   return isNegative(l) ? state.negativeShown.has(id) : !state.excluded.has(id);
 }
+// Every principle the map knows to be equivalent to the selection under the
+// current background, shown or not. These are the map's other names for what
+// is selected, so the readout should say what they are and let the reader
+// trade one for another. Equivalence is the relation the graph draws its own
+// boxes from, so the list and the picture cannot disagree.
+function equivalentNames(literals) {
+  if (!A || !literals.length) return [];
+  const negative = isNegative(literals[0]);
+  if (literals.some(l => isNegative(l) !== negative || !byPid.has(baseId(l)))) return [];
+  const bases = literals.map(baseId);
+  const cls = A.classes.find(c => c.includes(bases[0]));
+  if (!cls || !bases.every(b => cls.includes(b))) return [];
+  return cls.filter(b => !bases.includes(b) && byPid.has(b) && !inBackground(b))
+    .map(b => (negative ? '!' : '') + b)
+    .sort((x, y) => name(x).localeCompare(name(y)));
+}
+function equivalentList(literals) {
+  const others = selectionInLegend() ? equivalentNames(literals) : [];
+  if (!others.length) return '';
+  const row = l => `<li><button class="lnk" data-principle="${esc(l)}">${esc(name(l))}</button><span class="equivalent-actions">`
+    + `<button class="lnk" data-equivalent-show="${esc(l)}">${literalShown(l) ? 'hide' : 'show'}</button>`
+    + `<button class="lnk" data-equivalent-replace="${esc(l)}" title="Hide what is selected, show ${esc(name(l))} in its place, and select it">replace</button></span></li>`;
+  return `<div class="rel-head">Equivalent under the background</div><ul class="equivalent-names">${others.map(row).join('')}</ul>`;
+}
+// Whether a literal is on the diagram is a different switch in each view.
+function setLiteralShown(l, shown) {
+  const id = baseId(l);
+  if (state.tab === 'lattice') {
+    const at = lattice.shown.indexOf(l);
+    if (shown && at < 0) lattice.shown.push(l);
+    if (!shown && at >= 0) lattice.shown.splice(at, 1);
+    return;
+  }
+  if (isNegative(l)) shown ? state.negativeShown.add(id) : state.negativeShown.delete(id);
+  else shown ? state.excluded.delete(id) : state.excluded.add(id);
+}
+function redrawAfterShowing() {
+  if (state.tab === 'lattice') { lattice.selected = null; renderLatticeFilters(); renderLattice(); }
+  else repaintGraph();
+}
+function toggleEquivalent(l) { setLiteralShown(l, !literalShown(l)); redrawAfterShowing(); renderDetail(); }
+// A replacement is a rename: what was selected goes, its equivalent takes the
+// place it had on the diagram, and the selection follows it there.
+function replaceWithEquivalent(l) {
+  const sel = state.selected;
+  const literals = sel?.type === 'principle' ? [(sel.negative ? '!' : '') + sel.id] : sel?.type === 'selection' ? sel.premises : [];
+  for (const old of literals) setLiteralShown(old, false);
+  setLiteralShown(l, true);
+  redrawAfterShowing();
+  select({type: 'principle', id: l});
+}
 function selectionActions(literals) {
   if (state.tab !== 'graph' && state.tab !== 'lattice') return '';
   const active = literals.filter(l => byPid.has(baseId(l)) && !inBackground(baseId(l)));
@@ -2723,8 +2970,52 @@ function selectionActions(literals) {
   let h = '';
   if (active.some(literalShown)) h += button('hide', 'Hide', `Take the selected ${plural ? 'principles' : 'principle'} off the diagram, as unchecking ${plural ? 'them' : 'it'} in the sidebar would.`);
   if (active.some(l => !literalShown(negate(l)))) h += button('negate', plural ? 'Add negations' : 'Add negation', `Show the ${plural ? 'negations' : 'negation'} too, as checking ✗ in the sidebar would.`);
-  if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'Move to background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  const peers = equivalentPeers(active);
+  if (peers.length) h += button('equivalents', 'hide equivalents', `Take ${peers.map(name).join(', ')} off the diagram: the background makes ${peers.length > 1 ? 'them' : 'it'} equivalent to what is selected, so ${peers.length > 1 ? 'they add' : 'it adds'} nothing beside it.`);
   return h;
+}
+// What the diagram is showing that the background makes equivalent to the
+// selection without being part of it. On the graph that is the rest of the
+// selection's own box, which is drawn from exactly this relation; on the
+// lattice it is the chosen literals that entail the selection and back.
+function equivalentPeers(literals) {
+  const chosen = new Set(literals);
+  const keep = q => !chosen.has(q) && byPid.has(baseId(q)) && !inBackground(baseId(q));
+  if (state.tab === 'lattice') {
+    return lattice.shown.filter(q => keep(q) && literals.some(p => latticeEntails([p], [q]) && latticeEntails([q], [p])));
+  }
+  if (!layout) return [];
+  const boxes = layout.visible.filter(n => (n.members || []).some(m => chosen.has(m)));
+  return [...new Set(boxes.flatMap(n => n.members || []))].filter(keep);
+}
+// The controls that act on the selection ride on the legend, where the reader
+// is already looking, instead of costing a line of their own in the readout.
+// Off the two diagrams there is no legend, so the popup keeps them.
+const selectionInLegend = () => state.tab === 'graph' || state.tab === 'lattice';
+function selectionToolbar() {
+  const sel = state.selected;
+  const literals = sel?.type === 'principle' ? [(sel.negative ? '!' : '') + sel.id] : sel?.type === 'selection' ? sel.premises : null;
+  if (!literals) return '';
+  const inner = (sel.type === 'principle' ? '<button class="lnk" data-goto="1">details</button>' : '') + selectionActions(literals);
+  return inner ? `<span class="legend-actions">${inner}</span>` : '';
+}
+function wireLegendActions(el) {
+  el.querySelectorAll('[data-selection-action]').forEach(b =>
+    b.addEventListener('click', () => applySelectionAction(b.dataset.selectionAction)));
+  el.querySelector('[data-goto]')?.addEventListener('click', () => {
+    openPage(state.selected); document.getElementById('pop').hidden = true;
+  });
+}
+function setDetailFoot(id, line) {
+  const foot = document.getElementById(id);
+  if (!foot) return;
+  foot.hidden = !line;
+  foot.innerHTML = line ? `<span class="rel-status ${line.kind}">${esc(line.text)}</span>` : '';
+}
+function syncDetailHint() {
+  const hint = document.getElementById('graph-details-hint');
+  if (hint) hint.hidden = !!state.selected;
 }
 function repaintGraph() { refreshPrincipleControls(); renderGraph(); fitInitial(); }
 function applySelectionAction(kind) {
@@ -2743,6 +3034,14 @@ function applySelectionAction(kind) {
     // What is now assumed is no longer something to shade relative to.
     state.modelId = null; state.selected = null; state.focus = null;
     saveBackground(); refreshPrincipleControls(); renderAll(true);
+    return;
+  }
+  if (kind === 'equivalents') {
+    const peers = equivalentPeers(active);
+    if (!peers.length) return;
+    if (onLattice) { lattice.shown = lattice.shown.filter(l => !peers.includes(l)); lattice.selected = null; renderLatticeFilters(); renderLattice(); }
+    else { for (const q of peers) isNegative(q) ? state.negativeShown.delete(baseId(q)) : state.excluded.add(baseId(q)); repaintGraph(); }
+    renderDetail();
     return;
   }
   if (kind === 'hide') {
@@ -2821,7 +3120,7 @@ function renderBackground() {
 function renderAll(refit) {
   // Filter/background changes must not reopen the last inspected item's popup.
   // Only an explicit select() opens details.
-  state.selected = null; document.getElementById('pop').hidden = true;
+  state.selected = null; document.getElementById('pop').hidden = true; syncDetailHint();
   recompute(); renderHeader(); renderBackground();
   document.querySelector('[data-tab="contribute"]').hidden = !DATA.contribute_html;
   document.getElementById('contribute').innerHTML = DATA.contribute_html || '';
@@ -2849,35 +3148,48 @@ function wireBackgroundCompaction(list) {
 wireBackgroundCompaction(document.getElementById('background-list'));
 (function renderSourceFilters() {
   const el = document.getElementById('source-filters');
-  const published = sourceCatalog.filter(s => s.kind === 'published-paper');
   const sourceCheckboxes = sources => sources.map(s => `<label><input type="checkbox" data-source-filter="${esc(s.id)}" checked><span class="sw" style="border-color:${sourceColor(s)}"></span>${esc(s.name)}</label>`).join('');
-  el.innerHTML = (published.length ? `<div class="source-group"><div class="source-group-head"><label title="Papers credited with the results or models, including original results presented here in an adapted form."><input type="checkbox" id="all-published-sources" checked>Published papers</label><button type="button" class="lnk" id="expand-published-sources" aria-expanded="false" aria-controls="published-source-list">Show papers</button></div><fieldset class="source-group" id="published-source-list" aria-label="Individual published papers" hidden>${sourceCheckboxes(published)}</fieldset></div>` : '')
-    + [['online-submission', 'Online submissions'], ['misc', 'Miscellaneous']].map(([kind, label]) => {
-      const sources = sourceCatalog.filter(s => s.kind === kind);
-      return sources.length ? `<fieldset class="source-group"><legend>${label}</legend>${sourceCheckboxes(sources)}</fieldset>` : '';
-    }).join('');
-  const master = document.getElementById('all-published-sources');
-  function syncMaster() {
-    if (!master) return;
-    const count = published.filter(s => state.allowed.has(s.id)).length;
-    master.checked = count === published.length;
-    master.indeterminate = count > 0 && count < published.length;
+  // Two collapsed groups, published and not. 'Misc.' is the catch-all for
+  // records with no source of their own, so it stays in plain view rather
+  // than hiding inside a group it does not describe.
+  const groups = [
+    {key: 'published', label: 'Published papers', show: 'Show papers',
+     title: 'Papers credited with the results or models, including original results presented here in an adapted form.',
+     members: sourceCatalog.filter(x => x.kind === 'published-paper')},
+    {key: 'unpublished', label: 'Unpublished', show: 'Show sources',
+     title: 'Drafts, online submissions, personal communications and anything else not yet published.',
+     members: sourceCatalog.filter(x => x.kind !== 'published-paper' && x.id !== 'misc')},
+  ].filter(g => g.members.length);
+  const grouped = new Set(groups.flatMap(g => g.members));
+  const loose = sourceCatalog.filter(x => !grouped.has(x));
+  el.innerHTML = groups.map(g => `<div class="source-group"><div class="source-group-head"><label title="${esc(g.title)}"><input type="checkbox" data-source-master="${g.key}" checked>${esc(g.label)}</label><button type="button" class="lnk" data-source-expand="${g.key}" aria-expanded="false" aria-controls="source-list-${g.key}">${esc(g.show)}</button></div><fieldset class="source-group" id="source-list-${g.key}" aria-label="Individual ${esc(g.label.toLowerCase())} sources" hidden>${sourceCheckboxes(g.members)}</fieldset></div>`).join('')
+    + (loose.length ? `<fieldset class="source-group">${sourceCheckboxes(loose)}</fieldset>` : '');
+  const list = g => document.getElementById('source-list-' + g.key);
+  function syncMasters() {
+    for (const g of groups) {
+      const master = el.querySelector(`[data-source-master="${g.key}"]`);
+      const count = g.members.filter(x => state.allowed.has(x.id)).length;
+      master.checked = count === g.members.length;
+      master.indeterminate = count > 0 && count < g.members.length;
+    }
   }
   el.querySelectorAll('[data-source-filter]').forEach(cb => cb.addEventListener('change', () => {
     cb.checked ? state.allowed.add(cb.dataset.sourceFilter) : state.allowed.delete(cb.dataset.sourceFilter);
-    syncMaster(); renderAll(true);
+    syncMasters(); renderAll(true);
   }));
-  master?.addEventListener('change', () => {
-    for (const s of published) master.checked ? state.allowed.add(s.id) : state.allowed.delete(s.id);
-    el.querySelectorAll('#published-source-list [data-source-filter]').forEach(cb => { cb.checked = state.allowed.has(cb.dataset.sourceFilter); });
-    syncMaster(); renderAll(true);
-  });
-  document.getElementById('expand-published-sources')?.addEventListener('click', e => {
-    const list = document.getElementById('published-source-list');
-    list.hidden = !list.hidden;
-    e.currentTarget.setAttribute('aria-expanded', String(!list.hidden));
-    e.currentTarget.textContent = list.hidden ? 'Show papers' : 'Hide papers';
-  });
+  el.querySelectorAll('[data-source-master]').forEach(master => master.addEventListener('change', () => {
+    const g = groups.find(x => x.key === master.dataset.sourceMaster);
+    for (const x of g.members) master.checked ? state.allowed.add(x.id) : state.allowed.delete(x.id);
+    list(g).querySelectorAll('[data-source-filter]').forEach(cb => { cb.checked = state.allowed.has(cb.dataset.sourceFilter); });
+    syncMasters(); renderAll(true);
+  }));
+  el.querySelectorAll('[data-source-expand]').forEach(button => button.addEventListener('click', () => {
+    const g = groups.find(x => x.key === button.dataset.sourceExpand), body = list(g);
+    body.hidden = !body.hidden;
+    button.setAttribute('aria-expanded', String(!body.hidden));
+    button.textContent = (body.hidden ? 'Show' : 'Hide') + g.show.slice(4);
+  }));
+  syncMasters();
 })();
 document.getElementById('lean-only').addEventListener('change', e => { state.leanOnly = e.target.checked; renderAll(true); });
 document.getElementById('show-conj').addEventListener('change', e => {
@@ -2924,7 +3236,8 @@ document.getElementById('fit').addEventListener('click', fit);
 (function () {
   const el = document.getElementById('pr-filters');
   const labels = principles => principles.map(p => `<div class="pr-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-pr-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-show-positive="${p.id}" aria-label="Show ${esc(p.name)}" aria-pressed="true">✓</button><button data-show-negative="${p.id}" aria-label="Show not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><button class="lnk principle-name" data-principle="${p.id}">${esc(p.name)}</button><span class="pr-actions"><button class="lnk" data-add-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`).join('');
-  el.innerHTML = principleGroups().map((g, i) => `<section class="pr-category" data-category="${g.id}"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-category-select="all">show positive</button><button class="lnk" data-category-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${labels(g.principles)}</div></section>`).join('');
+  el.innerHTML = principleGroups().map((g, i) => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g, '', `<div class="pr-category-actions"><button class="lnk" data-category-select="none">hide</button></div>`)}<div class="ctl">${labels(g.principles)}</div></details>`).join('');
+  wireCategories(el);
   const repaint = repaintGraph;
   el.querySelectorAll('[data-show-positive]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showPositive; state.excluded.has(id) ? state.excluded.delete(id) : state.excluded.add(id); repaint(); }));
   el.querySelectorAll('[data-show-negative]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.showNegative; state.negativeShown.has(id) ? state.negativeShown.delete(id) : state.negativeShown.add(id); repaint(); }));
@@ -2953,7 +3266,9 @@ document.getElementById('fit').addEventListener('click', fit);
     });
     el.querySelectorAll('.pr-category').forEach(group => {
       const ordinary = [...group.querySelectorAll('.pr-row')].filter(row => !inBackground(row.dataset.prRow));
-      group.querySelector('.pr-category-count').textContent = `${ordinary.filter(row => !state.excluded.has(row.dataset.prRow) || state.negativeShown.has(row.dataset.prRow)).length}/${ordinary.length}`;
+      const shown = ordinary.filter(row => !state.excluded.has(row.dataset.prRow) || state.negativeShown.has(row.dataset.prRow)).length;
+      group.querySelector('.pr-category-count').textContent = `${shown}/${ordinary.length}`;
+      setCategoryToggle(group.querySelector('[data-category-select]'), shown > 0);
     });
   };
   refreshPrincipleControls();
@@ -2961,29 +3276,43 @@ document.getElementById('fit').addEventListener('click', fit);
 document.getElementById('search').addEventListener('input', e => {
   state.search = e.target.value; renderResults();
 });
-document.getElementById('graph-search').addEventListener('input', e => {
-  const normalize = value => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
-  const query = normalize(e.target.value);
+function runGraphSearch(value) {
+  const normalize = text => text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const query = normalize(value);
   const terms = query.split(/\s+/);
   graphSearch.matches = new Set(query ? P.filter(p => {
     const text = normalize([p.name, p.id, ...(p.aliases || [])].join(' '));
     return terms.every(term => text.includes(term));
   }).map(p => p.id) : []);
   graphSearch.index = 0;
+  for (const box of searchBoxes()) if (box.value !== value) box.value = value;
   // Searching closes the popup but keeps the focused principle's shading.
-  state.selected = null; document.getElementById('pop').hidden = true; renderGraph();
-  if (!query) fit();
+  state.selected = null; document.getElementById('pop').hidden = true;
+  if (onLattice()) { renderLattice(); if (!query) latticeFit(); }
+  else { renderGraph(); if (!query) fit(); }
   applyGraphSearch(true);
-});
-document.getElementById('graph-search').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && graphSearch.matches.size) {
-    e.preventDefault();
-    graphSearch.index = (graphSearch.index + (e.shiftKey ? -1 : 1) + graphSearch.matches.size) % graphSearch.matches.size;
-    applyGraphSearch(true);
-  } else if (e.key === 'Escape') {
-    e.preventDefault(); e.target.value = ''; e.target.dispatchEvent(new Event('input', {bubbles: true}));
-  }
-});
+}
+for (const box of searchBoxes()) {
+  box.addEventListener('input', e => runGraphSearch(e.target.value));
+  box.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && graphSearch.matches.size) {
+      e.preventDefault();
+      graphSearch.index = (graphSearch.index + (e.shiftKey ? -1 : 1) + graphSearch.matches.size) % graphSearch.matches.size;
+      applyGraphSearch(true);
+    } else if (e.key === 'Escape') {
+      e.preventDefault(); e.target.value = ''; runGraphSearch('');
+    }
+  });
+}
+// One orientation for both diagrams: which way a Hasse diagram reads is a
+// habit of the reader's, not a fact about either one.
+function toggleFlip() {
+  state.flipped = !state.flipped;
+  for (const id of ['graph-flip', 'lat-flip']) document.getElementById(id)?.setAttribute('aria-pressed', String(state.flipped));
+  renderGraph(); renderLattice();
+  if (onLattice()) latticeFit(); else fit();
+}
+for (const id of ['graph-flip', 'lat-flip']) document.getElementById(id)?.addEventListener('click', toggleFlip);
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 // Resize without rebuilding either list, so selections, scroll positions and click slots survive.
 (function setupPaneDividers() {
@@ -3384,6 +3713,10 @@ function latticeLayout() {
     if (i) y += rowHeight[i - 1] / 2 + 41 + rowHeight[i] / 2;
     for (const n of row) n.y = y;
   });
+  if (state.flipped) {
+    const span = Math.min(...nodes.map(n => n.y)) + Math.max(...nodes.map(n => n.y));
+    for (const n of nodes) n.y = span - n.y;
+  }
   lattice.bounds = {
     minX: Math.min(...nodes.map(n => n.x - n.w / 2)) - 30, maxX: Math.max(...nodes.map(n => n.x + n.w / 2)) + 30,
     minY: Math.min(...nodes.map(n => n.y - n.h / 2)) - 24, maxY: Math.max(...nodes.map(n => n.y + n.h / 2)) + 24,
@@ -3452,7 +3785,7 @@ function latticeFitInitial() { if (!lattice.fitted) latticeFit(); }
 // click that only moves the selection keeps the nodes, arrows and layout, and
 // the drawn elements too: only their classes change.
 function latticeBuildKey() {
-  return JSON.stringify([lattice.shown, latticeEvidenceVersion, [...background].sort(), [...negativeBackground].sort(), !!state.showConj]);
+  return JSON.stringify([lattice.shown, latticeEvidenceVersion, [...background].sort(), [...negativeBackground].sort(), !!state.showConj, !!state.flipped]);
 }
 function renderLattice() {
   const svg = document.getElementById('lat-graph');
@@ -3464,7 +3797,10 @@ function renderLattice() {
 // The structure: every node and arrow, without the shading a selection adds.
 function latticeDraw(svg) {
   const edge = e => {
-    const x1 = e.from.x, y1 = e.from.y - e.from.h / 2, x2 = e.to.x, y2 = e.to.y + e.to.h / 2;
+    // An arrow leaves the side of its box that faces the other end, so the
+    // two read the same way up or down.
+    const rise = Math.sign(e.to.y - e.from.y) || -1;
+    const x1 = e.from.x, y1 = e.from.y + rise * e.from.h / 2, x2 = e.to.x, y2 = e.to.y - rise * e.to.h / 2;
     const cls = 'lat-edge ' + (e.reverses === 'open' ? 'may-reverse' : 'strict');
     const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
     return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
@@ -3586,19 +3922,21 @@ function latticeShade(svg) {
     el.classList.remove('sel', 'near', 'far');
     if (emphasis) el.classList.add(emphasis);
   }
+  applyGraphSearch();
   renderLatticeLegend(lattice.capped ? null : base, baseInconsistent, counts);
   document.getElementById('lat-hint').hidden = !!state.selected;
   document.getElementById('lat-hint').textContent = 'Click a principle name, an ∧ or an arrow for its details. Shift-click a name to add or remove it from the selection.';
 }
 function renderLatticeLegend(base, baseInconsistent, counts) {
   const legend = document.getElementById('lat-legend');
-  if (base == null) { legend.hidden = true; return; }
+  if (base == null) { legend.hidden = true; setDetailFoot('lat-detail-foot', null); return; }
   legend.hidden = false;
-  const line = selectionConsistencyLine(consistencyStatus(expressionLiterals(base)));
   const key = (kind, label) => `<span class="key ${kind}"><i aria-hidden="true"></i>${label} <span class="n">${counts[kind]}</span></span>`;
-  legend.innerHTML = `<b>Relative to ${esc(expressionName(base))}:</b>`
-    + `<span class="rel-status ${line.kind}">${esc(line.text)}</span>`
-    + key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent');
+  legend.innerHTML = `<b>${esc(expressionName(base))}</b>`
+    + key('entailed', 'entailed') + key('excluded', 'excluded') + key('consistent', 'consistent') + key('separated', 'negation is consistent')
+    + selectionToolbar();
+  wireLegendActions(legend);
+  setDetailFoot('lat-detail-foot', selectionConsistencyLine(consistencyStatus(expressionLiterals(base))));
 }
 function latticeTitle(n) {
   const parts = [n.meet ? n.generators.map(name).join(' ∧ ') : n.names.join(' ≡ ')];
@@ -3619,7 +3957,9 @@ function refreshLatticeControls() {
   });
   document.querySelectorAll('#lat-filters .pr-category').forEach(group => {
     const ordinary = [...group.querySelectorAll('.lat-row')].filter(row => !inBackground(row.dataset.latRow));
-    group.querySelector('.pr-category-count').textContent = `${ordinary.filter(row => row.classList.contains('on')).length}/${ordinary.length}`;
+    const shown = ordinary.filter(row => row.classList.contains('on')).length;
+    group.querySelector('.pr-category-count').textContent = `${shown}/${ordinary.length}`;
+    setCategoryToggle(group.querySelector('[data-lat-select]'), shown > 0);
   });
 }
 function latticeToggle(id) {
@@ -3633,8 +3973,9 @@ function renderLatticeFilters() {
   const el = document.getElementById('lat-filters');
   if (!el) return;
   const row = p => `<div class="pr-row lat-row${inBackground(p.id) ? ' in-background is-collapsed' : ''}" data-lat-row="${p.id}"><span class="seg graph-choice" role="group" aria-label="Show forms of ${esc(p.name)}"><button data-lat-positive="${p.id}" aria-label="Add ${esc(p.name)}" aria-pressed="false">✓</button><button data-lat-negative="${p.id}" aria-label="Add not ${esc(p.name)}" aria-pressed="false">✗</button></span><span class="sidebar-principle-line"><span class="lat-name">${esc(p.name)}</span><span class="pr-actions"><button class="lnk" data-lat-background="${p.id}" aria-label="Move ${esc(p.name)} to background">background</button></span></span></div>`;
-  el.innerHTML = principleGroups().map(g => `<section class="pr-category"><h3>${esc(g.name)}</h3><div class="pr-category-actions"><button class="lnk" data-lat-select="all">show positive</button><button class="lnk" data-lat-select="none">clear</button><span class="pr-category-count"></span></div><div class="ctl">${g.principles.map(row).join('')}</div></section>`).join('');
+  el.innerHTML = principleGroups().map(g => `<details class="pr-category" data-category="${g.id}">${categoryHeader(g, '', `<div class="pr-category-actions"><button class="lnk" data-lat-select="none">hide</button></div>`)}<div class="ctl">${g.principles.map(row).join('')}</div></details>`).join('');
   renderSubscripts(el);
+  wireCategories(el);
   refreshLatticeControls();
 }
 (function () {
@@ -3681,17 +4022,19 @@ function renderLatticeFilters() {
     title.textContent = latticeTitle(n);
     group.appendChild(title);
   });
-  svg.addEventListener('click', ev => {
-    const group = ev.target.closest('[data-lat-node]'), wire = ev.target.closest('[data-lat-edge]');
+  // Selection happens on release and only when the pointer stayed put, as on
+  // the graph. A pan that ends over empty space is not a click on nothing.
+  function handleLatticeClick(target, extend) {
+    const group = target.closest?.('[data-lat-node]'), wire = target.closest?.('[data-lat-edge]');
     if (!group && !wire) { lattice.selected = null; select(null); return; }
     lattice.selected = group ? group.dataset.latNode : wire.dataset.latEdge;
     if (group) {
       const n = lattice.nodes.find(x => x.id === group.dataset.latNode);
-      const literal = ev.target.closest('[data-principle]')?.dataset.principle;
-      if (literal) select({type: 'principle', id: literal}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
-      else if (ev.target.closest('[data-falsity]') || (n.inconsistent && !n.self.length)) select({type: 'falsity'});
-      else if (ev.target.closest('[data-truth]') || (n.top && !n.self.length)) select({type: 'truth'});
-      else if (n.self.length) select({type: 'principle', id: n.self[0]}, ev.shiftKey || ev.metaKey || ev.ctrlKey);
+      const literal = target.closest('[data-principle]')?.dataset.principle;
+      if (literal) select({type: 'principle', id: literal}, extend);
+      else if (target.closest('[data-falsity]') || (n.inconsistent && !n.self.length)) select({type: 'falsity'});
+      else if (target.closest('[data-truth]') || (n.top && !n.self.length)) select({type: 'truth'});
+      else if (n.self.length) select({type: 'principle', id: n.self[0]}, extend);
       else select({type: 'selection', premises: n.generators});
       return;
     }
@@ -3702,9 +4045,13 @@ function renderLatticeFilters() {
       fromLabel: e.from.meet ? e.from.generators.map(name).join(' ∧ ') : e.from.names.join(' ≡ '),
       toLabel: e.to.meet ? e.to.generators.map(name).join(' ∧ ') : e.to.names.join(' ≡ '),
       reverses: e.reverses});
-  });
+  }
   let drag = null;
-  svg.addEventListener('pointerdown', ev => { drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty, moved: false}; });
+  svg.addEventListener('pointerdown', ev => {
+    if (ev.button !== 0) return;
+    drag = {x: ev.clientX, y: ev.clientY, tx: lattice.view.tx, ty: lattice.view.ty, moved: false,
+      target: ev.target, extend: ev.shiftKey || ev.metaKey || ev.ctrlKey};
+  });
   svg.addEventListener('pointermove', ev => {
     if (!drag) return;
     const dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
@@ -3712,7 +4059,8 @@ function renderLatticeFilters() {
     drag.moved = true;
     lattice.view.tx = drag.tx + dx; lattice.view.ty = drag.ty + dy; latticeApplyView();
   });
-  for (const type of ['pointerup', 'pointerleave']) svg.addEventListener(type, () => { drag = null; });
+  svg.addEventListener('pointerup', () => { if (drag && !drag.moved) handleLatticeClick(drag.target, drag.extend); drag = null; });
+  svg.addEventListener('pointerleave', () => { drag = null; });
   svg.addEventListener('wheel', ev => {
     ev.preventDefault();
     const f = Math.exp(-ev.deltaY * 0.0015), r = svg.getBoundingClientRect();

@@ -46,7 +46,7 @@ try {
   assert.deepEqual(json(w, 'state.focus'), ['a', 'b']);
   assert.ok(node('c').classList.contains('rel-entailed')); assert.ok(node('d').classList.contains('rel-entailed'));
   assert.ok(node('e').classList.contains('rel-excluded')); assert.ok(node('v').classList.contains('rel-separated'));
-  assert.match(d.getElementById('relation-legend').textContent, /Relative to A ∧ B/);
+  assert.equal(d.querySelector('#relation-legend b').textContent, 'A ∧ B');
   assert.match(d.getElementById('pop').textContent, /Equivalence/);
   assert.ok(d.querySelector('#pop [data-result="abc"]')); assert.ok(d.querySelector('#pop [data-result="ca"]'));
   d.querySelector('#pop [data-graph-connection="abc"]').click();
@@ -60,7 +60,7 @@ try {
   assert.ok(d.getElementById('graph').classList.contains('inconsistent-selection'));
   for (const n of d.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'), 'Impossible conjunctions mark every box, including True and False, as excluded');
   assert.equal(w.eval("expressionStatus(['a','b','e'],'d').status"), 'inconsistent', 'The proof engine still identifies the inconsistent antecedent');
-  assert.match(d.getElementById('relation-legend').textContent, /inconsistent/);
+  assert.match(d.getElementById('graph-details-foot').textContent, /inconsistent/);
   // Labels inside constant boxes still inspect the individual principle.
   w.handleGraphClick(node('y').querySelector('[data-principle="y"]'));
   assert.equal(w.eval('state.selected.id'), 'y'); assert.ok(d.querySelector('#pop [data-result="yf"]'));

@@ -84,7 +84,24 @@ try {
   assert.equal(stmt(dom,'q|r+s|q'),'R ∧ S ⇒ Q');
   assert.equal(stmt(dom,'check|m1|r'),'M1: R');
   assert.ok(det().querySelector('[data-lynchpin="q|r+s|q"] button[data-principle="r"]'),'principles are clickable');
-  assert.ok(det().querySelector('[data-lynchpin="check|m1|r"] button[data-verdict="r"][data-verdict-model="m1"]'),'model checks open the verdict');
+  // The verdict is what the question is about, so there is nothing for a
+  // verdict readout to say. The principle reads as it does in the tables above.
+  assert.equal(det().querySelector('[data-lynchpin="check|m1|r"] button[data-verdict]'),null,'model checks do not offer an empty verdict');
+  const check=det().querySelector('[data-lynchpin="check|m1|r"] button[data-principle="r"]');
+  assert.ok(check,'They name the principle the way the other tables do');
+  assert.ok(det().querySelector('[data-lynchpin="check|m1|r"] button[data-model="m1"]'),'Beside the model, which still opens');
+  check.dispatchEvent(new dom.window.MouseEvent('click',{bubbles:true}));
+  const pop=doc.getElementById('pop');
+  assert.equal(pop.querySelector('.pop-t').textContent,'R','Clicking it opens the principle itself');
+  assert.match(pop.textContent,/Principle r/,'With its statement');
+  // With no legend on this tab, the popup carries the one move that still
+  // means something here.
+  const background=pop.querySelector('[data-selection-action="background"]');
+  assert.ok(background,'And offers to assume it');
+  assert.ok(pop.querySelector('[data-goto]'),'Alongside its details');
+  background.click();
+  assert.ok(dom.window.eval('background.has("r")'),'Which puts it in the shared background');
+  dom.window.eval('resetBackground()');
   // Each dropdown remembers its state across a re-render.
   recorded().open=true; recorded().dispatchEvent(new dom.window.Event('toggle'));
   dom.window.eval('renderAll(false)');

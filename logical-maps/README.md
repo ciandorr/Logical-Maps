@@ -227,7 +227,9 @@ arrow visibility does not withdraw those automatic facts. Legacy author-type
 `provenance` is still accepted in old datasets; records without a direct source
 are displayed under Misc. until attributed. Lean fields remain optional.
 
-Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with select-all/unselect-all controls per category; these only control visibility. Topics without categories retain the flat list.
+Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with one show-or-hide control per category; these only control visibility. Topics without categories retain the flat list.
+
+Each category is collapsible in the three lists that show them: the graph sidebar, the lattice sidebar and the theory explorer. One set of open categories serves all three, so a category opened in one is open in the others. A category's summary carries its name, its count and, on the graph and the lattice, one control that acts on the whole category: **hide** while any of it is showing, **show positive** while none of it is. A closed category can therefore still be shown or hidden without opening it, and still reports how much of it is in play: how many of its principles are shown on the graph, how many are chosen on the lattice, and how many are assumed in the explorer. Categories start closed when a topic declares more than one and has more than `CATEGORY_COLLAPSE_MIN` (16) principles, and open otherwise; searching for a principle opens the category it is in.
 
 `require_sources: true` makes validation reject empty result/model sources. It is enabled for the unbounded-utility topic and new topics; the legacy example retains its existing records until its sources are audited.
 
@@ -250,8 +252,16 @@ Lattice: a separate Hasse diagram of the conjunctions a chosen handful of
 principles generate. It opens with False and True alone; the sidebar offers the same
 choices per principle as the graph, ✓ for the principle, ✗ for its negation and
 a move to the background, and each adds its literal together with its meets
-against everything already shown. Each group has the graph's **show positive**
-and **clear** as well, under the same node cap. The sidebar is the graph's own, moved
+against everything already shown. Each group has the graph's own
+show-or-hide control as well, under the same node cap. The toolbar is the graph's too:
+a box to find a principle, then **Flip** and **Fit**. One query serves both
+diagrams; on the lattice a match nobody has chosen to build with has no node,
+and the readout says so rather than pretending otherwise.
+
+**Flip** turns a diagram over, so the stronger principles sit at the top and the
+arrows descend. It is one reflection of the finished layout, so nothing else
+moves, and the graph and the lattice share the setting: which way a Hasse
+diagram reads is a habit of the reader's rather than a fact about either one. The sidebar is the graph's own, moved
 across with the tab as it is for the theory explorer, so the background, the
 scrolling and the resizable panes are the same by construction, and so is the
 arrow-source selector: the lattice is drawn from the selected sources alone, proofs and models both, so
@@ -274,7 +284,7 @@ the converse is settled, the model that settles it. The relation shading and
 its legend are the graph's too. The node count grows with the subsets, so the
 view stops at a few hundred and says so.
 
-Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
+Graph: implications, ∧ nodes for multi-premise results, stronger principles lower and False (⊥) at the bottom; see [Graph layout](#graph-layout). Theory explorer: principles use the same categories and ordering as Graph; mark them positive/negative to edit the shared background; models known to fit are listed, those whose status is unknown below. Clicking a model highlights its row and shows its verdicts beside each principle while preserving the model list and shared assumptions. Click a verdict’s evidence link for its sources and write-up. Click a model for its sources, write-up links, and any unknown assumptions. A model's own page sorts every principle by what the model says about it, satisfied, violated or unknown, each group counted; the principle leads the row and its evidence follows. A model records a few properties and the rest follow from them, so the derived verdicts of a group wait behind a closed disclosure rather than burying the recorded ones. Derived verdicts list the supporting implications and show every direct source used. Unknown verdicts remain unknown. Conjectures: current and previously conjectured results and models, with answers computed from the selected evidence and background. Changes: every principle, result and model by date, and every logged revision of a record (its `changes` entries) under the revision's own date; the details button opens the record page, which shows a hand-written write-up in full when one exists (the record's own summary otherwise, or until the write-up loads), with the Lean source when present. Header downloads: **Content bundle (ZIP)** is a complete working copy with topic sources, summaries, viewer, and build tools; **Lean files**, when present, opens the formalisation files. Hover over a link for its contents.
 
 ### Graph layout
 
@@ -357,7 +367,20 @@ to background** assumes it, each with the sign the selection carries. The same
 three are offered on the lattice, where they act on the lattice's own choices.
 
 Graph descriptions occupy a reserved bottom panel, with the fixed relation legend
-above the scrolling details. Drag its divider or use the arrow keys to resize it;
+above the scrolling details and a one-line foot below them. The legend leads with
+the selection itself, then the four colour keys, then the controls that act on it:
+**details**, **Hide**, **Add negation**, **background**, and **hide equivalents**
+when the diagram is showing something the background makes equivalent to the
+selection without being part of it. They cost no line of their own. Whether the selection can hold with the background, and which
+model witnesses it, goes to the foot, out of the way of both. The standing
+instruction shows only while nothing is selected. A relation heading such as
+Converse rides on the first line it labels rather than taking one. Below the
+readout, a selected principle, or several that are all equivalent, lists every
+other principle the background makes equivalent to it, shown or not, with
+**show** or **hide** for that principle and **replace**, which hides what is
+selected, shows the equivalent in its place and selects it. An arrow
+states itself once; its drawn form appears separately only when the background
+let the graph drop a premise or contrapose it. Drag its divider or use the arrow keys to resize it;
 double-click or press Enter to reset. The height is remembered. Opening or closing
 details does not cover or resize the graph. The panel lists selected principles with expandable
 definitions and individual remove buttons.
@@ -411,8 +434,12 @@ graph. Showing or hiding them leaves the connected layout intact. If no
 arrows are visible, the principles form a compact grid instead of one long row.
 
 Graph **Arrow sources** and **Lean-verified only** control displayed proofs.
-**Published papers** toggles the published sources together; **Show papers**
-expands individual choices. Partial selection is shown on the group checkbox.
+Sources come in two collapsed groups, **Published papers** and **Unpublished**,
+each toggling its members together, with **Show papers** or **Show sources** to
+expand individual choices. Partial selection is shown on the group checkbox. The
+catch-all `misc` source stands on its own, since neither group describes it.
+**Lean-verified only** sits with the other filters; a Lean-verified arrow is
+drawn thicker than the rest whether or not it is checked.
 Background consequences always use all recorded proved results, including
 hidden arrows. For example, DTU still supplies Simple Expected Utility in a
 conjectures-only view, so conjecture arrows retain only their additional

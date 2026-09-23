@@ -97,7 +97,7 @@ try {
   shift('g');
   assert.ok(graph.classList.contains('inconsistent-selection'));
   for (const n of graph.querySelectorAll('#nodes .node')) assert.ok(n.classList.contains('rel-excluded'), 'An inconsistent joint selection highlights every box red');
-  assert.match(d.getElementById('relation-legend').textContent, /inconsistent/);
+  assert.match(d.getElementById('graph-details-foot').textContent, /inconsistent/);
   assert.ok(label('g').classList.contains('selection-member'));
   shift('g');
   assert.ok(graph.classList.contains('shaded'));
@@ -124,13 +124,13 @@ try {
   assert.equal(pop.parentElement.id, 'floating-details');
   d.querySelector('[data-tab="graph"]').click();
   assert.equal(pop.parentElement.id, 'graph-details'); assert.equal(pop.hidden, true);
-  pointer(label('a')); pop.querySelector('[data-goto]').click();
+  pointer(label('a')); d.querySelector('#relation-legend [data-goto]').click();
   assert.equal(d.getElementById('pane-page').dataset.active, 'true'); assert.equal(pop.hidden, true);
   d.getElementById('page-back').click(); pointer(label('a'));
   assert.equal(pop.parentElement.id, 'graph-details');
   // The sidebar's moves offered from the details pane: hide, add negations,
   // move to background. Each is exactly the sidebar's own action.
-  const action = kind => pop.querySelector(`[data-selection-action="${kind}"]`);
+  const action = kind => d.querySelector(`#relation-legend [data-selection-action="${kind}"]`);
   pointer(label('e'));
   assert.ok(action('hide') && action('negate') && action('background'), 'A selected principle offers the three moves');
   assert.equal(action('negate').textContent, 'Add negation');
@@ -152,6 +152,41 @@ try {
   assert.ok(d.querySelector('#pr-filters [data-pr-row="a"]').classList.contains('in-background'), 'As the sidebar shows');
   assert.equal(w.eval('state.focus'), null);
   w.eval('resetBackground()');
+
+  // Equivalent principles share a box, so one of them says everything the
+  // others do. Selecting one offers to clear the rest out of it.
+  pointer(label('b'));
+  assert.ok(action('equivalents'), 'A principle with a shown equivalent offers to hide it');
+  assert.equal(action('equivalents').textContent, 'hide equivalents');
+  action('equivalents').click();
+  assert.ok(w.eval('state.excluded.has("h")'), 'Which unchecks the equivalent in the sidebar');
+  assert.ok(!w.eval('state.excluded.has("b")'), 'And leaves the selection itself on the graph');
+  assert.equal(action('equivalents'), null, 'The offer is withdrawn once nothing is left to hide');
+  w.eval('state.excluded.delete("h"); repaintGraph();');
+  pointer(label('a'));
+  assert.equal(action('equivalents'), null, 'A principle with no equivalent is offered nothing');
+
+  // The map's other names for what is selected, with the moves that trade one
+  // for another. B and H entail each other, so each is the other's other name.
+  pointer(label('b'));
+  const names = () => [...pop.querySelectorAll('.equivalent-names li [data-principle]')].map(b => b.dataset.principle);
+  const control = (kind, id) => pop.querySelector(`[data-equivalent-${kind}="${id}"]`);
+  assert.deepEqual(names(), ['h'], 'The equivalent principle is listed');
+  assert.equal(control('show', 'h').textContent, 'hide', 'One the graph is showing offers to hide');
+  control('show', 'h').click();
+  assert.ok(w.eval('state.excluded.has("h")'), 'Which takes it off the graph');
+  assert.equal(control('show', 'h').textContent, 'show', 'And then offers to bring it back');
+  control('show', 'h').click();
+  assert.ok(!w.eval('state.excluded.has("h")'));
+  control('replace', 'h').click();
+  assert.equal(w.eval('state.focus'), 'h', 'Replace selects the equivalent');
+  assert.ok(w.eval('state.excluded.has("b")'), 'Hides what was selected');
+  assert.ok(!w.eval('state.excluded.has("h")'), 'And leaves it showing in its place');
+  assert.deepEqual(names(), ['b'], 'So the list offers the trade back');
+  assert.equal(names().length, [...pop.querySelectorAll('.equivalent-names li')].length);
+  w.eval('state.excluded.delete("b"); repaintGraph();');
+  pointer(label('a'));
+  assert.equal(pop.querySelector('.equivalent-names'), null, 'A principle with no equivalent gets no list');
   pointer(label('a'));
   assert.deepEqual(errors, []);
   console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, red inconsistency highlighting, bottom graph details, and hide / add negation / move to background offered on the selection.');

@@ -17,9 +17,9 @@ const w=dom.window,doc=w.document,pop=doc.getElementById('pop');
 const inspect=()=>{doc.querySelector('#pr-filters [data-principle]').click();assert.equal(pop.hidden,false);};
 const conjectures=()=>[...doc.querySelectorAll('#graph .edge.conjectured')];
 try{
- const master=doc.getElementById('all-published-sources');
- const expand=doc.getElementById('expand-published-sources');
- const publishedList=doc.getElementById('published-source-list');
+ const master=doc.querySelector('[data-source-master="published"]');
+ const expand=doc.querySelector('[data-source-expand="published"]');
+ const publishedList=doc.getElementById('source-list-published');
  const published=[...publishedList.querySelectorAll('[data-source-filter]')];
  const otherSelections=()=>[...doc.querySelectorAll('[data-source-filter]')].filter(x=>!published.includes(x)).map(x=>[x.dataset.sourceFilter,x.checked]);
  const originalOthers=otherSelections();
@@ -35,6 +35,19 @@ try{
  assert.ok(JSON.parse(w.eval('JSON.stringify(buildGraph())')).edges.every(e=>!e.r || !published.some(x=>x.dataset.sourceFilter===e.r.certificate.source_id)),'Disabled published sources do not produce direct arrows');
  assert.deepEqual(otherSelections(),originalOthers,'Published master leaves other source groups alone');
  master.click();assert.ok(published.every(x=>x.checked));assert.ok(master.checked);
+ // Everything not published groups the same way, and the catch-all source
+ // stays in plain view rather than inside a group that does not describe it.
+ const other=doc.querySelector('[data-source-master="unpublished"]');
+ assert.equal(other.closest('label').textContent.trim(),'Unpublished');
+ const otherList=doc.getElementById('source-list-unpublished');
+ assert.equal(otherList.hidden,true,'Its sources start collapsed too');
+ assert.ok([...otherList.querySelectorAll('[data-source-filter]')].every(x=>x.dataset.sourceFilter!=='misc'),'The catch-all is not in it');
+ assert.ok(doc.querySelector('#source-filters fieldset:not([id]) [data-source-filter="misc"]'),'It stands on its own');
+ other.click();
+ assert.ok([...otherList.querySelectorAll('[data-source-filter]')].every(x=>!x.checked),'The group turns its own sources off');
+ assert.ok(published.every(x=>x.checked),'And leaves the published ones alone');
+ assert.ok(w.eval('state.allowed').has('misc'),'And the catch-all too');
+ other.click();assert.ok(other.checked);
  assert.equal(pop.hidden,true,'Source changes do not open details');
  // Docked details survive pointerdown; applying a filter clears stale details.
  for(const selector of ['[data-source-filter]','#lean-only','#show-conj','#conjecture-only','#unpublished-only','#show-iso']){

@@ -1025,7 +1025,7 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
         if rep["auto"]:
             o += ["Automatically generated conjectures, by the larger side, each stated as the answer to expect: "
                   "⊢ when a refutation would settle more, ⊬ when a proof would.", "",
-                  "| Rank | Conjecture | if yes | if no |", "|---:|---|---:|---:|"]
+                  "| Plausibility rank | Conjecture | if yes | if no |", "|---:|---|---:|---:|"]
             o += [f"| {r['auto_rank']} | {lynchpin_row_text(r, nm, auto=True)} | {lynchpin_auto_scores(r)[0]} | {lynchpin_auto_scores(r)[1]} |" for r in rep["auto"][:top]]
             o += [""]
     return o

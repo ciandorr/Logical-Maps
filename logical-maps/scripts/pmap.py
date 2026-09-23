@@ -426,7 +426,7 @@ class Lynchpins:
         self.proper = [a for a in self.reps if a not in self.trivial]
         self.unknown = {m["id"]: [c for c in ids if c not in E.holds[m["id"]] and c not in E.fails[m["id"]]]
                         for m in self.witnesses}
-        self._ranked = None
+        self._rows = self._ranked = None
         self._universe()
 
     # -- closures as bitmasks over ids ∪ {False} ----------------------------
@@ -691,72 +691,117 @@ class Lynchpins:
 
     # -- recorded conjectures ------------------------------------------------
     def question_of(self, ids, conclusion):
-        """The question a record's premises and conclusion ask, or None if it is not one of ours."""
+        """The question a record's premises and conclusion ask, (S, c) over class representatives
+        with any premise the others already give dropped; None when c is no conclusion here."""
         rep_of = {x: cls[0] for cls in self.classes for x in cls}
         S = {rep_of[x] for x in ids if x in rep_of and rep_of[x] in self.proper}
-        for x in sorted(S, key=self.proper.index):  # drop a premise the others already give
+        for x in sorted(S, key=self.proper.index):
             if x in S and len(S) > 1 and x in self.E.cl(S - {x})[0]:
                 S.discard(x)
-        if len(S) > 2:
-            return None
         c = FALSE if conclusion == FALSE else rep_of.get(conclusion)
         if c is None or c in S or (c != FALSE and c not in self.proper):
             return None
         return tuple(sorted(S, key=self.proper.index)), c
 
-    def _attach_conjectures(self, rows):
-        """A row whose question a conjectured record asks carries that record and its notes."""
+    def question_status(self, S, c):
+        """open, proved, excluded, refuted, inconsistent or consistent; None for a question not asked here."""
+        j = self.set_index.get(tuple(S))
+        if j is None:
+            return None
+        F = self.sets[j][2]
+        if c == FALSE:
+            return {"proved": "inconsistent", "refuted": "consistent", "open": "open"}.get(self.qfalse[j])
+        b = self.bit[c]
+        if self.openmask[j] & b:
+            return "open"
+        if F & b:
+            return "proved"
+        if self._ext(F, c) & self.BAD:
+            return "excluded"
+        pm = self.sets[j][1]
+        return "refuted" if any(H & pm == pm and Fm & b for H, Fm in self.wit) else "open"
+
+    def _recorded(self, rows):
+        """One row per question a conjectured record asks, in the lynchpin format: the ranked row
+        itself when the question is open, else an unranked row carrying the question's status
+        ("outside": more than two premises). The record and its notes travel with the row, and a
+        question unresolved despite work is bronze unless a record ranks it silver or gold."""
         by_question = {(tuple(r["premises"]), r["conclusion"]): r for r in rows if r["kind"] == "question"}
+        extra, seen = [], {}
         for rec in self.conjectures:
             if "premises" in rec:
-                asked = [self.question_of(rec["premises"], rec["conclusion"])]
-                kind = "result"
+                asked, kind = [(rec["premises"], rec["conclusion"])], "result"
             else:
-                asked = [self.question_of(rec["satisfies"], v) for v in [*rec["violates"], FALSE]]
-                kind = "model"
-            for q in asked:
-                row = by_question.get(q)
-                if row is not None:
-                    row.setdefault("conjectures", []).append({"id": rec["id"], "kind": kind, "notes": (rec.get("notes") or "").strip(),
-                                                               "tier": rec.get("tier")})
-        # A question unresolved despite work is bronze by itself; a record may raise it to
-        # silver or gold, a human judgement of importance and difficulty.
-        for row in rows:
-            tiers = [c["tier"] or "bronze" for c in row.get("conjectures", []) if c["notes"] or c["tier"]]
+                asked, kind = [(rec["satisfies"], v) for v in [*rec["violates"], FALSE]], "model"
+            entry = {"id": rec["id"], "kind": kind, "notes": (rec.get("notes") or "").strip(), "tier": rec.get("tier")}
+            for ids, concl in asked:
+                q = self.question_of(ids, concl)
+                if q is None:
+                    continue
+                S, c = q
+                row = by_question.get((S, c)) if len(S) <= 2 else None
+                if row is None:
+                    row = seen.get((S, c))
+                    if row is None:
+                        status = (self.question_status(S, c) or "outside") if len(S) <= 2 else "outside"
+                        row = seen[S, c] = {"kind": "question", "premises": list(S), "conclusion": c,
+                                            "rank": None, "yes": None, "no": None, "status": status}
+                        extra.append(row)
+                row.setdefault("conjectures", []).append(entry)
+        ranked = [r for r in rows if r.get("conjectures")]
+        for row in ranked + extra:
+            tiers = [c["tier"] or "bronze" for c in row["conjectures"] if c["notes"] or c["tier"]]
             if tiers:
                 row["tier"] = max(tiers, key=LYNCHPIN_TIERS.index)
+        ranked.sort(key=lambda r: r.get("rank") or 0)
+        extra.sort(key=lambda r: (-LYNCHPIN_TIERS.index(r.get("tier", "bronze")), r["status"], r["premises"], r["conclusion"]))
+        return ranked + extra
 
     # -- ranking ------------------------------------------------------------
-    def rank(self, top: int = 50) -> dict:
-        """Open questions and model checks, best first, each scored for both answers."""
-        if self._ranked is None:
-            rows = []
-            for j, low in self.openq:
-                S, c = self.sets[j][0], self.id_of[low]
-                rows.append({"kind": "question", "premises": list(S), "conclusion": c,
-                             "yes": self.with_rule(S, c, (j, c)), "no": self.with_model(S, [c], (j, c))})
-            for j, st in enumerate(self.qfalse):
-                if st == "open":
-                    S = self.sets[j][0]
-                    rows.append({"kind": "question", "premises": list(S), "conclusion": FALSE,
-                                 "yes": self.with_rule(S, FALSE, (j, FALSE)), "no": self.with_model(S, [], (j, FALSE))})
-            for i, m in enumerate(self.witnesses):
-                H, Fm = self.wit[i]
-                for low in self._bits(self.ALL & ~H & ~Fm):
-                    p = self.id_of[low]
-                    rows.append({"kind": "check", "model": m["id"], "principle": p,
-                                 "yes": self.with_model([*m["satisfies"], p], m["violates"]),
-                                 "no": self.with_model(m["satisfies"], [*m["violates"], p])})
-            rows.sort(key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), r["kind"], str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle")))))
-            self._attach_conjectures(rows)
+    def _question_rows(self):
+        rows = [{"kind": "question", "premises": list(self.sets[j][0]), "conclusion": self.id_of[low]} for j, low in self.openq]
+        rows += [{"kind": "question", "premises": list(S), "conclusion": FALSE}
+                 for (S, _, _), st in zip(self.sets, self.qfalse) if st == "open"]
+        for i, m in enumerate(self.witnesses):
+            H, Fm = self.wit[i]
+            rows += [{"kind": "check", "model": m["id"], "principle": self.id_of[low]} for low in self._bits(self.ALL & ~H & ~Fm)]
+        return rows
+
+    def _score(self, r):
+        if r["kind"] == "check":
+            m = next(m for m in self.witnesses if m["id"] == r["model"])
+            r["yes"] = self.with_model([*m["satisfies"], r["principle"]], m["violates"])
+            r["no"] = self.with_model(m["satisfies"], [*m["violates"], r["principle"]])
+        else:
+            S, c = tuple(r["premises"]), r["conclusion"]
+            j = self.set_index[S]
+            r["yes"] = self.with_rule(S, c, (j, c))
+            r["no"] = self.with_model(S, [c] if c != FALSE else [], (j, c))
+
+    def rank(self, top: int = 50, score_all: bool = True) -> dict:
+        """The open questions and model checks, best first, each scored for both answers, and the
+        questions recorded conjectures ask. With score_all false, only the recorded ones are scored
+        and nothing is ranked: what a sparse map still gets."""
+        if self._rows is None:
+            self._rows = self._question_rows()
+        rows = self._rows
+        if score_all and self._ranked is None:
+            for r in rows:
+                self._score(r)
+            rows.sort(key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), r["kind"],
+                                     str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle")))))
             for i, r in enumerate(rows):
                 r["rank"] = i + 1
             self._ranked = rows
+        recorded = self._recorded(rows)
+        for r in recorded:
+            r.setdefault("rank", None)
+            if r.get("status", "open") == "open" and "yes" not in r:
+                self._score(r)
         p = self.progress()
-        rows = self._ranked[:top] + [r for r in self._ranked[top:] if r.get("conjectures")]
         return {"inconsistent_background": self.inconsistent, "classes": self.classes, "trivial": self.trivial,
                 "fitting_models": [m["id"] for m in self.witnesses], "progress": p,
-                "open": p["open"], "rows": rows}
+                "open": p["open"], "rows": self._ranked[:top] if self._ranked is not None else [], "recorded": recorded}
 
 LYNCHPIN_MAX_OPEN = 0.75  # bundles skip a map in which more of its implication questions than this are open
 PROGRESS_PREMISES = 2  # the settled share counts implication questions with up to this many premises
@@ -771,6 +816,10 @@ def _engines(data: dict) -> list:
                       [(m["id"], sorted(m["satisfies"]), sorted(m["violates"]), m["status"]) for m in data["models"]]],
                      sort_keys=True, default=str)
     if key not in _PROGRESS_CACHE:
+        if data["topic"].get("draft"):
+            _PROGRESS_CACHE.clear()
+            _PROGRESS_CACHE[key] = []  # a draft topic: nothing is ranked, shared or listed
+            return []
         engines = [(None, None, Lynchpins(data))]
         engines += [(p["id"], p["name"], Lynchpins(data, p["principles"])) for p in data["topic"].get("background_presets", [])]
         _PROGRESS_CACHE.clear()
@@ -796,12 +845,14 @@ def lynchpin_report(data: dict, *, sparse_ok: bool = True, top: int = 50) -> dic
     costs minutes for nothing.
     """
     engines = _engines(data)
+    if not engines:
+        return {"skipped": "a draft topic: nothing is ranked, shared or listed", "reports": []}
     share = _open_share(engines[0][2].progress())
-    if not sparse_ok and share > LYNCHPIN_MAX_OPEN:
-        return {"skipped": f"{share:.0%} of the questions are open, so the map is too sparse for lynchpins to mean anything",
-                "reports": []}
-    return {"skipped": None, "reports": [{"background": bid, "name": name, "principles": L.background, "negative": [], **L.rank(top)}
-                                         for bid, name, L in engines]}
+    skipped = (f"{share:.0%} of the questions are open, so the map is too sparse for lynchpins to mean anything"
+               if not sparse_ok and share > LYNCHPIN_MAX_OPEN else None)
+    return {"skipped": skipped,
+            "reports": [{"background": bid, "name": name, "principles": L.background, "negative": [], **L.rank(top, score_all=skipped is None)}
+                        for bid, name, L in engines]}
 
 
 def progress_text(p: dict) -> str:
@@ -852,11 +903,26 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     o.append(progress_text(report["progress"]))
     if _open_share(report["progress"]) > LYNCHPIN_MAX_OPEN:
         o.append(f"note: {_open_share(report['progress']):.0%} of the questions are open; these scores mostly reflect how little is recorded")
-    o += ["rank, then what either answer settles (if yes / if no; ★ a recorded conjecture: bronze for notes, silver or gold by hand; listed at its rank even below the top):"]
-    for r in [x for x in report["rows"] if x["rank"] <= top or x.get("conjectures")]:
-        o.append(f"#{r['rank']:<6d}{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}")
+    if report["rows"]:
+        o += ["rank, then what either answer settles (if yes / if no; ★ a recorded conjecture: bronze for notes, silver or gold by hand):"]
+        o += [f"#{r['rank']:<6d}{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}" for r in report["rows"][:top]]
+    o += ["recorded conjectures, the questions they ask, in the same format (— where a question is settled or has more than two premises):"]
+    for r in report["recorded"]:
+        o.append(f"{'#' + str(r['rank']) if r['rank'] else '—':<7}{_score_text(r['yes']):>5} /{_score_text(r['no']):>4}   {lynchpin_row_text(r, nm)}{_status_text(r)}")
         o += [f"                    {rid}: {note}" for rid, note in lynchpin_notes(r)]
+    if not report["recorded"]:
+        o.append("        none")
     return o
+
+
+def _score_text(x) -> str:
+    return "—" if x is None else str(x)
+
+
+def _status_text(r: dict) -> str:
+    """A settled question's status, or that it has more than two premises."""
+    status = r.get("status", "open")
+    return "" if status == "open" else f"  [{'more than two premises' if status == 'outside' else status}]"
 
 
 def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[str]:
@@ -864,8 +930,18 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
     names = {p["id"]: p["name"] for p in data["principles"]}
     names[FALSE] = "False (⊥)"
     if lynch["skipped"]:
-        return [f"Not ranked: {lynch['skipped']}. Bundles rank a map once at most {LYNCHPIN_MAX_OPEN:.0%} of its "
-                f"questions are open; `python3 scripts/pmap.py lynchpins {topic_id}` ranks it regardless.", ""]
+        o = [f"Not ranked: {lynch['skipped']}. A map is ranked once at most {LYNCHPIN_MAX_OPEN:.0%} of its "
+             "questions are open. Its recorded conjectures are still listed and scored below.", ""]
+        for rep in lynch["reports"]:
+            nm = _lynchpin_label(rep, names)
+            o += [f"### {_lynchpin_heading(rep)}", ""]
+            if rep["recorded"]:
+                o += ["| # | Question | if yes | if no |", "|---:|---|---:|---:|"]
+                o += [f"| — | {lynchpin_row_text(r, nm)}{_status_text(r)} | {_score_text(r['yes'])} | {_score_text(r['no'])} |" for r in rep["recorded"]]
+                o += [""]
+            else:
+                o += ["No recorded conjectures.", ""]
+        return o
     o = ["Answering a lynchpin conjecture settles many other open questions. A question is S ⊢ c, whether S "
          "entails c, for S at most two principle classes (True, with none) and c a class or False, asked only "
          "where no smaller premise set already proves or excludes c; S ⊢ False asks whether S is inconsistent. "
@@ -888,19 +964,25 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
             continue
         o += [f"{len(rep['classes'])} classes and {len(rep['fitting_models'])} fitting models; "
               f"{rep['open']} open questions. {progress_text(rep['progress']).capitalize()}.", ""]
-        rows = [r for r in rep["rows"] if r["rank"] <= top or r.get("conjectures")]
+        rows = rep["rows"][:top]
         if rows:
             o += ["| # | Question | if yes | if no |", "|---:|---|---:|---:|"]
             o += [f"| {r['rank']} | {lynchpin_row_text(r, nm)} | {r['yes']} | {r['no']} |" for r in rows]
             o += [""]
-            notes = [(r, rid, note) for r in rows for rid, note in lynchpin_notes(r)]
+        elif not lynch["skipped"]:
+            o += ["Nothing is open.", ""]
+        if rep["recorded"]:
+            o += ["Recorded conjectures, the questions they ask, in the same format; a settled question or one with "
+                  "more than two premises has no rank or scores. ★ bronze for notes, silver or gold where a record "
+                  "ranks it by importance and difficulty.", "",
+                  "| # | Question | if yes | if no |", "|---:|---|---:|---:|"]
+            o += [f"| {r['rank'] or '—'} | {lynchpin_row_text(r, nm)}{_status_text(r)} | {_score_text(r['yes'])} | {_score_text(r['no'])} |" for r in rep["recorded"]]
+            o += [""]
+            notes = [(r, rid, note) for r in rep["recorded"] for rid, note in lynchpin_notes(r)]
             if notes:
-                o += ["★ A recorded conjecture asks this question, listed at its rank even below the top: bronze for notes, "
-                      "silver or gold where a record ranks it by importance and difficulty. Its notes:", ""]
+                o += ["Their notes:", ""]
                 o += [f"- {lynchpin_row_text(r, nm)} (`{rid}`): {note}" for r, rid, note in notes]
                 o += [""]
-        else:
-            o += ["Nothing is open.", ""]
     return o
 
 
@@ -913,8 +995,14 @@ def lynchpins(topic_id: str, backgrounds=None, top: int = 10, as_json: bool = Fa
         if key != "none" and key not in presets:
             sys.exit(f"{topic_id}: no background preset '{key}' (have: {', '.join(presets) or 'none'})")
     engines = {bid or "none": (name, L) for bid, name, L in _engines(data)}
+    if not engines:
+        print(f"{topic_id}: a draft topic; nothing is ranked")
+        return
+    sparse = _open_share(engines["none"][1].progress()) > LYNCHPIN_MAX_OPEN
+    if sparse:
+        print(f"{topic_id}: over {LYNCHPIN_MAX_OPEN:.0%} of the questions are open; too sparse to rank, recorded conjectures only")
     reports = [{"background": None if key == "none" else key, "name": engines[key][0], "principles": engines[key][1].background,
-                "negative": [], **engines[key][1].rank(top)} for key in wanted]
+                "negative": [], **engines[key][1].rank(top, score_all=not sparse)} for key in wanted]
     if as_json:
         print(json.dumps(reports, indent=1, ensure_ascii=False))
         return
@@ -2664,10 +2752,23 @@ def selftest():
     assert [c["id"] for c in rows[("r", "s"), "p"]["conjectures"]] == ["m3"] and [c["id"] for c in rows[("r", "s"), FALSE]["conjectures"]] == ["m3"]
     assert "conjectures" not in rows[("r",), "s"]
     assert [r["rank"] for r in Ln.rank(top=100)["rows"]] == list(range(1, 29)), "every row carries its rank"
-    short = Ln.rank(top=2)["rows"]
-    assert [r["rank"] for r in short[:2]] == [1, 2] and all(r.get("conjectures") for r in short[2:]) and len(short) == 2 + 4, "rows a conjecture asks about are carried below the top, at their rank"
+    short = Ln.rank(top=2)
+    assert [r["rank"] for r in short["rows"]] == [1, 2], "the ranking keeps only its top"
+    assert sorted(r["rank"] for r in short["recorded"]) == sorted(rows[q]["rank"] for q in [(("r",), "p"), (("p",), "r"), (("r", "s"), "p"), (("r", "s"), FALSE)]), "recorded conjectures are the questions the records ask, at their rank"
+    # A settled question and one with more than two premises are listed without rank or scores.
+    more = {**noted, "results": [*noted["results"], dict(R("pq2", ["p"], "q"), status="conjectured", notes="Long proved."),
+                                  dict(R("prs", ["p", "r", "s"], "q"), status="conjectured", notes="Three premises.")]}
+    rec = {(tuple(r["premises"]), r["conclusion"]): r for r in Lynchpins(more).rank(top=2)["recorded"]}
+    assert rec[("p",), "q"]["status"] == "proved" and rec[("p",), "q"]["rank"] is None and rec[("p",), "q"]["yes"] is None
+    assert rec[("p", "r", "s"), "q"]["status"] == "outside" and rec[("p", "r", "s"), "q"]["tier"] == "bronze"
+    assert rec[("r",), "p"]["status" if "status" in rec[("r",), "p"] else "kind"] in ("open", "question") and rec[("r",), "p"]["yes"] == 4
+    Lm = Lynchpins(more)
+    assert Lm.question_status(("p",), "s") == "refuted" and Lm.question_status(("p",), "q") == "proved" and Lm.question_status(("r",), "s") == "open"
+    # A sparse map is not ranked, but its recorded conjectures are still scored.
+    sparse = Lynchpins(more).rank(top=5, score_all=False)
+    assert sparse["rows"] == [] and all(r["rank"] is None for r in sparse["recorded"]) and rec_yes == 4 if (rec_yes := next(r["yes"] for r in sparse["recorded"] if r["premises"] == ["r"] and r["conclusion"] == "p")) else True
     assert Ln.question_of(["p", "q", "s"], "r") == (("p", "s"), "r"), "q is dropped as p gives it; the pair remains"
-    assert Ln.question_of(["p", "r", "s"], "q") is None, "three premises that give nothing of each other ask no question here"
+    assert Ln.question_of(["p", "r", "s"], "q") == (("p", "r", "s"), "q"), "three premises that give nothing of each other stay three"
 
     def brute_progress(L):
         import itertools

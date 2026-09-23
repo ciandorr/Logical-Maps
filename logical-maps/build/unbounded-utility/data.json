@@ -423,7 +423,7 @@
    "source_names": [
     "Unbounded Utility and Background Risk (unpublished)"
    ],
-   "notes": "Numerical scope: real-utility variables for which the indicated sums exist in the outcome chart. These are pointwise utility sums, not randomized mixtures. Stochastic Equivalence remains a separate principle. On laws the sums are represented by $Q_X(U)+Q_Z(U)$ and $Q_Y(U)+Q_Z(U)$, using increasing quantiles. No law-invariance of preferences is built into this node.",
+   "notes": "Numerical scope: real-utility variables for which the indicated sums exist in the outcome chart. These are pointwise utility sums, not randomized mixtures. Stochastic Equivalence remains a separate principle. On laws the sums are represented by $Q_X(U)+Q_Z(U)$ and $Q_Y(U)+Q_Z(U)$, using increasing quantiles. No law-invariance of preferences is built into this node.\nReduction (Claude, Fable 5.1, 23 September 2026): with Stochastic Equivalence this principle says the order on laws is invariant under quantile addition, and then X ≽ Y depends only on Q_X − Q_Y (add Q_{X′} to one pair and Q_X to the other), so the order is an additive cone in the space of differences of nondecreasing functions on (0,1); Mixture Independence is linear in the survival difference instead, and the area is the only functional invariant in both coordinates. A killing lemma and forced comparisons of both-infinite pairs are in the write-up of the conjectured total comonotonic extension.",
    "date": "2026-09-09",
    "aliases": [
     "Comonotonic Sum Consistency"
@@ -492,7 +492,7 @@
     "Zach Goodsell proposal 9 Sep",
     "Copula Measures and Sklar’s Theorem (definitions)"
    ],
-   "notes": "Numerical scope: variables in the finite real utility chart for which both pointwise sums exist as gambles. The copula fixes dependence, not the marginal utility distributions. With atoms a pair may admit several copulas; require the displayed compatibility condition, not a uniquely assigned copula. Preferences compare the actual random variables, not their laws or equivalence classes; no indifference of same-law variables is assumed. The dependence condition concerns each pair separately and places no extra condition on the joint law of (X,Y,Z). Proposal: Zachary Goodsell; precise recording: GPT-6 (Codex), 9 September 2026.",
+   "notes": "Numerical scope: variables in the finite real utility chart for which both pointwise sums exist as gambles. The copula fixes dependence, not the marginal utility distributions. With atoms a pair may admit several copulas; require the displayed compatibility condition, not a uniquely assigned copula. Preferences compare the actual random variables, not their laws or equivalence classes; no indifference of same-law variables is assumed. The dependence condition concerns each pair separately and places no extra condition on the joint law of (X,Y,Z). Proposal: Zachary Goodsell; precise recording: GPT-6 (Codex), 9 September 2026.\nLaw-level form (Claude, Fable 5.1, 23 September 2026): realize X† = Q_X(U) on the standing uniform U and Z* = Q_Z(W) with (U, W) distributed as C; the pair (X†, Z*) admits C, and X† + Z* has the law of X + Z for every pair (X, Z) admitting C, so under Stochastic Equivalence SC(C) says X ≽ Y iff X† + Z* ≽ Y† + Z* for all laws. Z* is canonical only in law (for the product copula W is independent of U), which is why the recorded bridges from the comonotonic, antitonic and independent principles need Stochastic Equivalence; for the comonotonic copula W = U. The comonotonic and product C-convolutions are associative, giving cone reductions; for a general C the C-convolution need not be, and SC(C) still yields Shift Invariance through a constant summand.",
    "date": "2026-09-09",
    "aliases": [
     "Existential Copula Sum Consistency"
@@ -1329,7 +1329,7 @@
     "Zach Goodsell proposal 9 Sep",
     "Copula Measures and Sklar’s Theorem (definitions)"
    ],
-   "notes": "Numerical scope: variables in the finite real utility chart for which both pointwise sums exist as gambles. The copula fixes dependence, not the marginal utility distributions. With atoms a pair may admit several copulas; require the displayed compatibility condition, not a uniquely assigned copula. Preferences compare the actual random variables, not their laws or equivalence classes; no indifference of same-law variables is assumed. The dependence condition concerns each pair separately and places no extra condition on the joint law of (X,Y,Z). Proposal: Zachary Goodsell; precise recording: GPT-6 (Codex), 9 September 2026.",
+   "notes": "Numerical scope: variables in the finite real utility chart for which both pointwise sums exist as gambles. The copula fixes dependence, not the marginal utility distributions. With atoms a pair may admit several copulas; require the displayed compatibility condition, not a uniquely assigned copula. Preferences compare the actual random variables, not their laws or equivalence classes; no indifference of same-law variables is assumed. The dependence condition concerns each pair separately and places no extra condition on the joint law of (X,Y,Z). Proposal: Zachary Goodsell; precise recording: GPT-6 (Codex), 9 September 2026.\nLaw-level form (Claude, Fable 5.1, 23 September 2026): realize X† = Q_X(U) on the standing uniform U and Z* = Q_Z(W) with (U, W) distributed as C; the pair (X†, Z*) admits C, and X† + Z* has the law of X + Z for every pair (X, Z) admitting C, so under Stochastic Equivalence SC(C) says X ≽ Y iff X† + Z* ≽ Y† + Z* for all laws. Z* is canonical only in law (for the product copula W is independent of U), which is why the recorded bridges from the comonotonic, antitonic and independent principles need Stochastic Equivalence; for the comonotonic copula W = U. The comonotonic and product C-convolutions are associative, giving cone reductions; for a general C the C-convolution need not be, and SC(C) still yields Shift Invariance through a constant summand.",
    "date": "2026-09-09",
    "aliases": [
     "Universal Copula Sum Consistency"
@@ -5049,7 +5049,8 @@
     "negative-affine-anti-invariance",
     "folded-expectation",
     "negative-self-similarity",
-    "alternating-st-petersburg-value"
+    "alternating-st-petersburg-value",
+    "comonotonic-sum-consistency"
    ],
    "status": "proved",
    "certificate": {
@@ -5064,16 +5065,29 @@
    "sources": [
     "Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 1, p. 24. Already states the failure of affine-symmetry implications under DTU, including with L¹ Continuity and Relative Expectation, and cites Decision theory unbound, Remark 3, for the reflection countermodel.",
     "GPT-6 (Codex), explicit source-model specialization and additional calculations, 9 September 2026; writeups/asymmetric-continuous-ultrafilter.md, in response to Zachary Goodsell's request to investigate consequences and countermodels from DU.",
-    "Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Remark 3 and Corollary 3, pp. 692–693. Source of the clipped-expectation ultrafilter, continuous quotient, and asymmetric-cutoff strategy, including the possibility of assigning nonzero values to symmetric gambles."
+    "Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Remark 3 and Corollary 3, pp. 692–693. Source of the clipped-expectation ultrafilter, continuous quotient, and asymmetric-cutoff strategy, including the possibility of assigning nonzero values to symmetric gambles.",
+    "Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/asymmetric-continuous-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py."
    ],
    "source_names": [
     "Symmetries of Value",
     "GPT-6 generated 9 Sep",
-    "Decision Theory Unbound"
+    "Decision Theory Unbound",
+    "Claude comonotonic failure 23 Sep"
    ],
    "notes": "Original work: source-model specialization and additional verification. The asymmetric construction and the non-implication of reflection even under DTU $+ L^{1}$ Continuity + Relative Expectation are already Goodsell’s: Symmetries of value, Theorem 1 (p. 24), citing Decision theory unbound, Remark 3. They are not new AI results. The 2024 paper supplies the continuous quotient and separate increasing cutoffs; Corollary 3 already permits nonzero values for symmetric gambles. Work recorded here chooses $f(t)=2t$ and $g(t)=t$ and spells out the CDF-area/shift-transfer verification and exact Cauchy, alternating-game and negative-self-similarity witnesses. These added calculations are not a claim of literature novelty. No scale or sum-invariance verdict is asserted without proof. Diagnostic checks do not certify the general axioms or ultrafilter existence.",
    "checks": [
-    "topics/unbounded-utility/checks/asymmetric_continuous_ultrafilter.py"
+    "topics/unbounded-utility/checks/asymmetric_continuous_ultrafilter.py",
+    "topics/unbounded-utility/checks/comonotonic_witnesses.py"
+   ],
+   "changes": [
+    {
+     "date": "2026-09-23",
+     "by": "Claude (Fable 5.1)",
+     "summary": "Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). Y = C − ln(2)/π is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the clipped gap between 0 + Z and Y + Z tends to (2 ln 2)/π, so 0 + Z ≻ Y + Z.",
+     "violates": [
+      "comonotonic-sum-consistency"
+     ]
+    }
    ],
    "references": [
     {
@@ -5229,6 +5243,7 @@
    ],
    "violates": [],
    "status": "conjectured",
+   "tier": "silver",
    "certificate": {
     "source_id": "misc",
     "lean": "stated",
@@ -5240,13 +5255,30 @@
    "description": "Proposed existence claim, not a completed construction: a total preorder on all real-valued random variables that strictly extends Goodsell's CDF-area preorder and satisfies both Mixture Independence and Comonotonic Sum Invariance. Real outcomes and the inherited area comparisons supply Rich Outcomes, Simple Expected Utility and Stochastic Dominance; require Stochastic Equivalence explicitly. The incomplete exact CDF-area preorder already satisfies all these properties except Totality. Seek a total extension preserving both the mixture comparisons and the comonotonic-sum biconditionals. The existing total independent-sum extension does not establish this: convolution is linear on survival differences, whereas comonotonic addition is translation of increasing quantiles, and its compatibility with the extension step remains unproved. No symmetry, independent-sum, continuity or negative verdict is asserted for this candidate.",
    "sources": [
     "Zachary Goodsell, Unbounded Utility and Background Risk, unpublished manuscript, 5 June 2026, §3, pp. 7–8, and discussion before Theorem 7 and Theorem 7, pp. 19–20: CDF-area construction, its comonotonic invariance, and the broader unresolved consistency question.",
-    "GPT-6 (Codex), 9 September 2026, proposed total-extension package and obstacle analysis in writeups/conjectured-total-comonotonic-area-extension.md."
+    "GPT-6 (Codex), 9 September 2026, proposed total-extension package and obstacle analysis in writeups/conjectured-total-comonotonic-area-extension.md.",
+    "Claude (Fable 5.1), Logical Maps, 23 September 2026: killing lemma and an explicit forced comparison, section “A necessary condition: forced comparisons of both-infinite pairs” of the write-up; diagnostic checks/comonotonic_witnesses.py."
    ],
    "source_names": [
     "Unbounded Utility and Background Risk (unpublished)",
-    "GPT-6 conjecture 9 Sep"
+    "GPT-6 conjecture 9 Sep",
+    "Claude killing lemma 23 Sep"
    ],
-   "notes": "Original work: precise candidate formulation and comparison of two extension problems. The base area construction, its comonotonic property, and the broader unresolved consistency question are credited to Goodsell. The manuscript's Theorem 7 supplies only the incomplete area model, not this proposed total CDF-area extension. No new completed model is claimed. To settle positively, give a total extension and verify that adjoining comparisons preserves every old strict area comparison, full Mixture Independence, and comonotonic preservation and cancellation. To settle negatively, derive an incompatibility from the displayed package. A generic order extension is insufficient, and the total convolution model is not evidence that comonotonic invariance survives. No claim is made that the question is open in the literature.",
+   "notes": "Original work: precise candidate formulation and comparison of two extension problems. The base area construction, its comonotonic property, and the broader unresolved consistency question are credited to Goodsell. The manuscript's Theorem 7 supplies only the incomplete area model, not this proposed total CDF-area extension. No new completed model is claimed. To settle positively, give a total extension and verify that adjoining comparisons preserves every old strict area comparison, full Mixture Independence, and comonotonic preservation and cancellation. To settle negatively, derive an incompatibility from the displayed package. A generic order extension is insufficient, and the total convolution model is not evidence that comonotonic invariance survives. No claim is made that the question is open in the literature.\nProgress (Claude, Fable 5.1, 23 September 2026; write-up section “A necessary condition: forced comparisons of both-infinite pairs”): a killing lemma shows that under Stochastic Equivalence, Stochastic Dominance, Mixture Independence and comonotonic preservation alone, X ≽ Y fails whenever comonotonic shears of the survival difference combine with positive weights into a nonpositive nonzero profile; an explicit both-infinite pair is killed, so the extension must rank it Y ≻ X where the area is silent. Prefix positivity, a positive lowest block, or divergent prefix sums certify that a pair is not killed; for prefix-oscillating block regions the sign of the lowest block is forced. An accounting heuristic suggests that no pair is killed in both orientations, so the lemma alone will not refute the package. Every clipped-expectation model in this topic violates Comonotonic Sum Invariance (half-Cauchy common summand), so the extension cannot come from clipped areas, and probability-trimmed quantile means are comonotonic invariant but not mixture-linear. Candidate: the area when defined, else a functional of the level-ordered block surplus, completed by Zorn's lemma over cones closed under both additive structures with the killing lemma as the pointedness test; regions with no lowest block are where a refutation would have to be sought. Tier set to silver by Zachary Goodsell, 23 September 2026.",
+   "checks": [
+    "topics/unbounded-utility/checks/comonotonic_witnesses.py"
+   ],
+   "changes": [
+    {
+     "date": "2026-09-23",
+     "by": "Claude (Fable 5.1)",
+     "summary": "Necessary condition added (write-up section “A necessary condition: forced comparisons of both-infinite pairs”): under Stochastic Equivalence, Stochastic Dominance, Mixture Independence and the preservation half of Comonotonic Sum Invariance, a pair whose survival difference d admits comonotonic shears d^{Z_i} and weights with d + Σ q_i d^{Z_i} ≤ 0, ≠ 0, cannot satisfy X ≽ Y. An explicit both-infinite pair with two step-function shears is exhibited, so the sought total extension must rank it Y ≻ X although CDF-Area Extension is silent on it. The conjecture itself is unchanged."
+    },
+    {
+     "date": "2026-09-23",
+     "by": "Zachary Goodsell (tier); Claude (Fable 5.1) (notes and write-up)",
+     "summary": "Tier raised to silver by Zachary Goodsell. The write-up section on forced comparisons was expanded with the coordinate reduction, three certificates that a pair is not killed, worked block regions (a prefix-oscillating region that is killed, one that is not, and doubly infinite variants), an accounting heuristic suggesting that no pair is killed in both orientations, a duality caveat, and candidate constructions; the notes summarize them. No status change."
+    }
+   ],
    "references": [
     {
      "paper": "unpublished-background-risk",
@@ -5342,11 +5374,13 @@
     "archimedean-gambles",
     "alternating-st-petersburg-value",
     "shift-invariance",
-    "positive-affine-invariance"
+    "positive-affine-invariance",
+    "comonotonic-sum-consistency"
    ],
    "status": "proved",
    "checks": [
-    "topics/unbounded-utility/checks/countermodels.py"
+    "topics/unbounded-utility/checks/countermodels.py",
+    "topics/unbounded-utility/checks/comonotonic_witnesses.py"
    ],
    "changes": [
     {
@@ -5357,12 +5391,20 @@
       "shift-invariance",
       "positive-affine-invariance"
      ]
+    },
+    {
+     "date": "2026-09-23",
+     "by": "Claude (Fable 5.1)",
+     "summary": "Explicit Comonotonic Sum Invariance failure added (write-up section “Failure of Comonotonic Sum Invariance”); the flag was previously derived from the shift failure. A standard Cauchy C is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the gap v_{0+Z}(t) − v_{C+Z}(t) = 2∫_{t/2}^{t} P(C>x)dx is positive for every t, so 0 + Z ≻ C + Z.",
+     "violates": [
+      "comonotonic-sum-consistency"
+     ]
     }
    ],
    "certificate": {
     "source_id": "decision-theory-unbound",
     "lean": "stated",
-    "produced_by": "Zachary Goodsell (cited paper); Claude (Fable 5.1) (failure of Shift Invariance, 15 September 2026)",
+    "produced_by": "Zachary Goodsell (cited paper); Claude (Fable 5.1) (failure of Shift Invariance, 15 September 2026; explicit failure of Comonotonic Sum Invariance, 23 September 2026)",
     "checked_by": [],
     "date": "2026-09-08",
     "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
@@ -5370,12 +5412,14 @@
    "description": "Take all real-valued random variables and let $c_t(x)=\\max (- t,\\min (x,t))$. Define $X\\succeq Y$ iff $\\exists s\\forall t>s E[c_t(X)]\\ge E[c_t(Y)]$. The full construction, verification, and explicit witnesses are in the accompanying write-up. This is the incomplete DU model from Decision theory unbound, Theorem 2; it fails the additional Totality axiom of DTU. It witnesses consistency of the unbounded framework and failure of full EU despite finite EU.",
    "sources": [
     "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Theorem 2, pp. 683–685; Theorems 7 and 9, p. 693",
-    "Claude (Fable 5.1), Logical Maps, 15 September 2026: explicit failure of Shift Invariance (symmetric Laplace witness) in writeups/eventual-clipped-expectation.md."
+    "Claude (Fable 5.1), Logical Maps, 15 September 2026: explicit failure of Shift Invariance (symmetric Laplace witness) in writeups/eventual-clipped-expectation.md.",
+    "Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/eventual-clipped-expectation.md; diagnostic checks/comonotonic_witnesses.py."
    ],
    "notes": "Clipping sends tails to ±t; it is not deletion of tail mass. Shift Invariance fails by the Laplace witness in the write-up (Claude, Fable 5.1, 15 September 2026); this failure is an addition to the source model, not a claim of the paper. Positive Affine Invariance fails with it.",
    "source_names": [
     "Decision Theory Unbound",
-    "Claude shift failure 15 Sep"
+    "Claude shift failure 15 Sep",
+    "Claude comonotonic failure 23 Sep"
    ],
    "references": [
     {
@@ -5603,7 +5647,8 @@
    "violates": [
     "scale-invariance",
     "alternating-st-petersburg-value",
-    "negative-self-similarity"
+    "negative-self-similarity",
+    "comonotonic-sum-consistency"
    ],
    "status": "proved",
    "certificate": {
@@ -5617,15 +5662,28 @@
    "description": "Use real outcomes with identity utility, choose a free ultrafilter U on positive integers, and put $v_X(n)=E[\\max (- 4^n,\\min (X,4^n))]$. Define $X \\succeq Y$ iff for every $\\epsilon >0, \\{n:v_X(n)\\ge v_Y(n)- \\epsilon \\}$ belongs to U. This specializes Goodsell’s continuous clipped-expectation construction to geometric cutoffs. The write-up proves DTU, CDF-Area Extension, $L^{1}$ Continuity and Folded Expectation directly, with reflection and shift. For alternating St Petersburg $A, v_A(n)=- 1/3$ and $v_{2A}(n)=- 4/3$ for every $n\\ge 1$, so $A \\succ - 1/2$ while $2A \\prec - 1$. This verifies failure of Scale Invariance and the recorded alternating evaluation without relying on the printed scale witness. A and sure −1/2 both satisfy the same negative self-similarity equation, but have different values, so that uniqueness principle also fails.",
    "sources": [
     "Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Theorems 7–10, pp. 693–695: underlying continuous clipping construction and original scale-failure strategy.",
-    "GPT-6 (Codex), 9 September 2026, writeups/geometric-continuous-ultrafilter.md: geometric-cutoff specialization, explicit alternating-St-Petersburg witness, and additional CDF-area/L¹/folded-expectation verifications."
+    "GPT-6 (Codex), 9 September 2026, writeups/geometric-continuous-ultrafilter.md: geometric-cutoff specialization, explicit alternating-St-Petersburg witness, and additional CDF-area/L¹/folded-expectation verifications.",
+    "Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/geometric-continuous-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py."
    ],
    "source_names": [
     "Decision Theory Unbound",
-    "GPT-6 model adaptation 9 Sep"
+    "GPT-6 model adaptation 9 Sep",
+    "Claude comonotonic failure 23 Sep"
    ],
    "notes": "Original work: model adaptation and direct verification. Reuses Goodsell’s continuous ultrafilter ordering; the preference construction is not claimed as original. New work here chooses cutoffs $4^n$ to fix an exact alternating-game value, gives an explicit scaling reversal and nonunique self-similarity witness, and proves additional area/continuity/folded flags. This describes work performed in this project, not a claim of novelty in the literature. A free ultrafilter is nonconstructive; the numerical check verifies the finite formulas and estimates, not ultrafilter existence or all quantified axioms.",
    "checks": [
-    "topics/unbounded-utility/checks/geometric_clipping.py"
+    "topics/unbounded-utility/checks/geometric_clipping.py",
+    "topics/unbounded-utility/checks/comonotonic_witnesses.py"
+   ],
+   "changes": [
+    {
+     "date": "2026-09-23",
+     "by": "Claude (Fable 5.1)",
+     "summary": "Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). A standard Cauchy C is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the clipped gap at cutoff 4ⁿ is 2∫_{4ⁿ/2}^{4ⁿ} P(C>x)dx → (2 ln 2)/π, so 0 + Z ≻ C + Z.",
+     "violates": [
+      "comonotonic-sum-consistency"
+     ]
+    }
    ],
    "references": [
     {
@@ -5812,7 +5870,8 @@
    "violates": [
     "pasadena-value",
     "arroyo-value",
-    "symmetric-neutrality"
+    "symmetric-neutrality",
+    "comonotonic-sum-consistency"
    ],
    "status": "proved",
    "certificate": {
@@ -5827,16 +5886,29 @@
    "sources": [
     "GPT-6 (Codex), 9 September 2026, writeups/polynomial-asymmetric-continuous-ultrafilter.md: cutoff specialization, Pasadena/Arroyo evaluations, and explicit verification of the inherited axioms.",
     "Zachary Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473, Appendix B, Definition 3, Lemma 6, Remark 3 and Corollary 3, pp. 691–693: continuous clipped-expectation quotient and separate cutoff functions.",
-    "Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549, Theorem 1, p. 24: asymmetric source model and failure of reflection even with DTU, L1 Continuity and Relative Expectation; pp. 28–33 for the named prospects."
+    "Zachary Goodsell, Symmetries of value, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549, Theorem 1, p. 24: asymmetric source model and failure of reflection even with DTU, L1 Continuity and Relative Expectation; pp. 28–33 for the named prospects.",
+    "Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/polynomial-asymmetric-continuous-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py."
    ],
    "source_names": [
     "GPT-6 cutoff calculations 9 Sep",
     "Decision Theory Unbound",
-    "Symmetries of Value"
+    "Symmetries of Value",
+    "Claude comonotonic failure 23 Sep"
    ],
    "notes": "Original work: model specialization with moderate evaluation calculations. The asymmetric clipping method and its strong expectation/continuity compatibility with failure of reflection are already Goodsell's. This entry selects upper cutoff equal to the square of the lower cutoff and computes its different Pasadena value and unbounded Arroyo value. The general construction is not a new AI invention. No independent checker or Lean certification is asserted. The free ultrafilter remains nonconstructive; the diagnostic checks finite formulas and convergence estimates rather than ultrafilter existence.",
    "checks": [
-    "topics/unbounded-utility/checks/calculation_factorizations.py"
+    "topics/unbounded-utility/checks/calculation_factorizations.py",
+    "topics/unbounded-utility/checks/comonotonic_witnesses.py"
+   ],
+   "changes": [
+    {
+     "date": "2026-09-23",
+     "by": "Claude (Fable 5.1)",
+     "summary": "Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). Y = max(C,0) + 2 min(C,0) − (2 ln 2 − 1)/π is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the clipped gap between 0 + Z and Y + Z tends to (2 ln 2)/π, so 0 + Z ≻ Y + Z.",
+     "violates": [
+      "comonotonic-sum-consistency"
+     ]
+    }
    ],
    "references": [
     {
@@ -5874,24 +5946,40 @@
    "violates": [
     "scale-invariance",
     "countable-sure-thing",
-    "archimedean-gambles"
+    "archimedean-gambles",
+    "comonotonic-sum-consistency"
    ],
    "status": "proved",
    "certificate": {
     "source_id": "decision-theory-unbound",
     "lean": "stated",
-    "produced_by": "Zachary Goodsell (cited paper)",
+    "produced_by": "Zachary Goodsell (cited paper); Claude (Fable 5.1) (failure of Comonotonic Sum Invariance, 23 September 2026)",
     "checked_by": [],
     "date": "2026-09-08",
     "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
    },
    "description": "Take all real-valued random variables and a cobounded ultrafilter U. Define $X\\succeq Y$ iff for every $\\epsilon >0, \\{t:E[c_t(X)]\\ge E[c_t(Y)]- \\epsilon \\}\\in U$. This is the continuous-hyperreal quotient ordering in the proof of Theorem 3. Its EU, shift, reflection, and failed scale claims are given in Appendix B; see the accompanying write-up. Consequently Expected Utility does not imply Positive Affine Invariance, even with DTU.",
    "sources": [
-    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Lemma 6 and proof of Theorem 3, p. 691; Theorems 7, 8 and 10, pp. 693–695"
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Lemma 6 and proof of Theorem 3, p. 691; Theorems 7, 8 and 10, pp. 693–695",
+    "Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/total-continuous-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py."
    ],
    "notes": "No $L^{1}$ Continuity or Relative Expectation flag is inferred merely from the word continuous; these are distinct claims. Scale failure is source-attributed as above.",
    "source_names": [
-    "Decision Theory Unbound"
+    "Decision Theory Unbound",
+    "Claude comonotonic failure 23 Sep"
+   ],
+   "checks": [
+    "topics/unbounded-utility/checks/comonotonic_witnesses.py"
+   ],
+   "changes": [
+    {
+     "date": "2026-09-23",
+     "by": "Claude (Fable 5.1)",
+     "summary": "Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). A standard Cauchy C is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0), C_+ = 0 + Z is strictly better than C + Z: the clipped gap is 2∫_{t/2}^{t} P(C>x)dx, positive for every t and tending to (2 ln 2)/π.",
+     "violates": [
+      "comonotonic-sum-consistency"
+     ]
+    }
    ],
    "references": [
     {
@@ -5923,24 +6011,40 @@
     "expected-utility",
     "scale-invariance",
     "countable-sure-thing",
-    "archimedean-gambles"
+    "archimedean-gambles",
+    "comonotonic-sum-consistency"
    ],
    "status": "proved",
    "certificate": {
     "source_id": "decision-theory-unbound",
     "lean": "stated",
-    "produced_by": "Zachary Goodsell (cited paper)",
+    "produced_by": "Zachary Goodsell (cited paper); Claude (Fable 5.1) (failure of Comonotonic Sum Invariance, 23 September 2026)",
     "checked_by": [],
     "date": "2026-09-08",
     "recorded_by": "GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation"
    },
    "description": "Take all real-valued random variables. Choose a cobounded ultrafilter U on positive truncation levels; define $X\\succeq Y$ iff $\\{t:E[c_t(X)]\\ge E[c_t(Y)]\\}\\in U$. This is the exact hyperreal ordering of Theorem 1, not its continuous quotient. The accompanying write-up explains the satisfied axioms and EU counterexample; failure of Scale Invariance is the source’s Theorem 10.",
    "sources": [
-    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Theorem 1, pp. 690–691; Theorems 3 and 10, pp. 691, 693–695"
+    "Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix B, Theorem 1, pp. 690–691; Theorems 3 and 10, pp. 691, 693–695",
+    "Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/total-exact-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py."
    ],
    "notes": "The scale failure is recorded from the source theorem; its printed analytic witness has apparent typographical issues itemized in extraction.md. This record is a literature extraction, not a separately audited reconstruction of that witness.",
    "source_names": [
-    "Decision Theory Unbound"
+    "Decision Theory Unbound",
+    "Claude comonotonic failure 23 Sep"
+   ],
+   "checks": [
+    "topics/unbounded-utility/checks/comonotonic_witnesses.py"
+   ],
+   "changes": [
+    {
+     "date": "2026-09-23",
+     "by": "Claude (Fable 5.1)",
+     "summary": "Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). A standard Cauchy C has v_C(t) = 0 = v_0(t) for every t, but with the common comonotonic summand Z = max(C,0) the clipped gap v_{0+Z}(t) − v_{C+Z}(t) = 2∫_{t/2}^{t} P(C>x)dx is positive for every t, so 0 + Z ≻ C + Z on the whole domain of truncation levels.",
+     "violates": [
+      "comonotonic-sum-consistency"
+     ]
+    }
    ],
    "references": [
     {
@@ -5957,7 +6061,7 @@
    }
   }
  ],
- "generated": "2026-09-23T19:11:26+00:00",
+ "generated": "2026-09-23T21:12:30+00:00",
  "progress": [
   {
    "background": null,
@@ -5966,8 +6070,8 @@
    "negative": [],
    "premises": 2,
    "questions": 26190,
-   "settled": 10882,
-   "open": 15308,
+   "settled": 10974,
+   "open": 15216,
    "by_premises": [
     [
      39,
@@ -5975,11 +6079,11 @@
     ],
     [
      1521,
-     913
+     918
     ],
     [
      24630,
-     9935
+     10022
     ]
    ]
   },
@@ -5996,8 +6100,8 @@
    "negative": [],
    "premises": 2,
    "questions": 3524,
-   "settled": 1245,
-   "open": 2279,
+   "settled": 1281,
+   "open": 2243,
    "by_premises": [
     [
      26,
@@ -6005,11 +6109,11 @@
     ],
     [
      446,
-     288
+     295
     ],
     [
      3052,
-     931
+     960
     ]
    ]
   },
@@ -6027,20 +6131,20 @@
    "negative": [],
    "premises": 2,
    "questions": 1649,
-   "settled": 421,
-   "open": 1228,
+   "settled": 444,
+   "open": 1205,
    "by_premises": [
     [
      22,
-     19
+     20
     ],
     [
      294,
-     143
+     151
     ],
     [
      1333,
-     259
+     273
     ]
    ]
   }
@@ -6194,8 +6298,8 @@
     "progress": {
      "premises": 2,
      "questions": 26190,
-     "settled": 10882,
-     "open": 15308,
+     "settled": 10974,
+     "open": 15216,
      "by_premises": [
       [
        39,
@@ -6203,15 +6307,15 @@
       ],
       [
        1521,
-       913
+       918
       ],
       [
        24630,
-       9935
+       10022
       ]
      ]
     },
-    "open": 15308,
+    "open": 15216,
     "rows": [
      {
       "kind": "question",
@@ -6230,7 +6334,7 @@
        "independent-sum-cancellation"
       ],
       "conclusion": "false",
-      "yes": 2455,
+      "yes": 2418,
       "no": 0,
       "rank": 2
      },
@@ -6241,7 +6345,7 @@
        "independent-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 2401,
+      "yes": 2364,
       "no": 1,
       "rank": 3
      },
@@ -6386,7 +6490,7 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "cdf-area-extension",
-      "yes": 1224,
+      "yes": 1223,
       "no": 0,
       "rank": 17
      },
@@ -6396,7 +6500,7 @@
        "comonotonic-sum-consistency"
       ],
       "conclusion": "cdf-area-extension",
-      "yes": 1196,
+      "yes": 1195,
       "no": 0,
       "rank": 18
      },
@@ -6448,7 +6552,7 @@
        "shift-invariance"
       ],
       "conclusion": "stochastic-dominance",
-      "yes": 1032,
+      "yes": 1031,
       "no": 0,
       "rank": 23
      },
@@ -6469,20 +6573,9 @@
        "shift-invariance"
       ],
       "conclusion": "simple-eu",
-      "yes": 946,
+      "yes": 945,
       "no": 0,
       "rank": 25
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "rich-outcomes",
-       "totality"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 929,
-      "no": 0,
-      "rank": 26
      },
      {
       "kind": "question",
@@ -6493,7 +6586,7 @@
       "conclusion": "false",
       "yes": 894,
       "no": 1,
-      "rank": 27
+      "rank": 26
      },
      {
       "kind": "question",
@@ -6501,27 +6594,133 @@
       "conclusion": "archimedean-outcomes",
       "yes": 844,
       "no": 0,
+      "rank": 27
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "independent-sum-cancellation"
+      ],
+      "conclusion": "cdf-area-extension",
+      "yes": 807,
+      "no": 3,
       "rank": 28
      },
      {
       "kind": "question",
       "premises": [
-       "expected-utility"
+       "existential-copula-sum-consistency",
+       "independent-sum-preservation"
       ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 821,
-      "no": 0,
+      "conclusion": "cdf-area-extension",
+      "yes": 807,
+      "no": 3,
       "rank": 29
      },
      {
       "kind": "question",
       "premises": [
-       "relative-expectation"
+       "antitonic-sum-consistency",
+       "existential-copula-sum-consistency"
       ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 812,
-      "no": 0,
+      "conclusion": "cdf-area-extension",
+      "yes": 799,
+      "no": 4,
       "rank": 30
+     }
+    ],
+    "recorded": [
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "comonotonic-sum-consistency",
+       "independence",
+       "rich-outcomes",
+       "totality"
+      ],
+      "conclusion": "false",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "outside",
+      "conjectures": [
+       {
+        "id": "conjectured-total-comonotonic-area-extension",
+        "kind": "model",
+        "notes": "Original work: precise candidate formulation and comparison of two extension problems. The base area construction, its comonotonic property, and the broader unresolved consistency question are credited to Goodsell. The manuscript's Theorem 7 supplies only the incomplete area model, not this proposed total CDF-area extension. No new completed model is claimed. To settle positively, give a total extension and verify that adjoining comparisons preserves every old strict area comparison, full Mixture Independence, and comonotonic preservation and cancellation. To settle negatively, derive an incompatibility from the displayed package. A generic order extension is insufficient, and the total convolution model is not evidence that comonotonic invariance survives. No claim is made that the question is open in the literature.\nProgress (Claude, Fable 5.1, 23 September 2026; write-up section “A necessary condition: forced comparisons of both-infinite pairs”): a killing lemma shows that under Stochastic Equivalence, Stochastic Dominance, Mixture Independence and comonotonic preservation alone, X ≽ Y fails whenever comonotonic shears of the survival difference combine with positive weights into a nonpositive nonzero profile; an explicit both-infinite pair is killed, so the extension must rank it Y ≻ X where the area is silent. Prefix positivity, a positive lowest block, or divergent prefix sums certify that a pair is not killed; for prefix-oscillating block regions the sign of the lowest block is forced. An accounting heuristic suggests that no pair is killed in both orientations, so the lemma alone will not refute the package. Every clipped-expectation model in this topic violates Comonotonic Sum Invariance (half-Cauchy common summand), so the extension cannot come from clipped areas, and probability-trimmed quantile means are comonotonic invariant but not mixture-linear. Candidate: the area when defined, else a functional of the level-ordered block surplus, completed by Zorn's lemma over cones closed under both additive structures with the killing lemma as the pointedness test; regions with no lowest block are where a refutation would have to be sought. Tier set to silver by Zachary Goodsell, 23 September 2026.",
+        "tier": "silver"
+       }
+      ],
+      "tier": "silver"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independence",
+       "rich-outcomes",
+       "shift-invariance",
+       "simple-eu",
+       "stochastic-dominance",
+       "totality"
+      ],
+      "conclusion": "shift-transfer",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "outside",
+      "conjectures": [
+       {
+        "id": "conjectured-dtu-shift-implies-transfer",
+        "kind": "result",
+        "notes": "Original work: conjecture formulation and partial analysis, with a separately recorded countermodel added on 13 September 2026. The candidate asks whether DTU plus Shift Invariance alone implies Shift Transfer, equivalently under DTU Simple Relative Expectation. The recorded neutrality-shift-imply-shift-transfer proof settles the question after adding Symmetric Neutrality. The du-vanishing-shifts-imply-relative proof settles it after adding Continuity under Vanishing Shifts; under DU this is equivalent to L1 Continuity. The independent du-l1-implies-relative proof also supplies the continuity route, without Totality or Shift Invariance. Consequently a separating model would have to fail both neutrality and L1 Continuity. The continuous clipping models already satisfy Relative Expectation; the new lexicographic folded-tail model fails continuity but still satisfies Relative Expectation and neutrality. Neither family supplies the required separation. The new finite-support-compensated-dominance model does separate DU plus Shift Invariance from Shift Transfer, but it violates Totality and therefore does not settle this DTU conjecture. Its explicit transfer and vanishing-shift continuity failures are proved in its write-up. Its finite-shift-total-extension now supplies Totality while strictly ordering the same transfer pair. The new proof checks finite-kernel saturation and preserves the indifferent subspace through the orientation and maximal-extension steps. The original implication, ID, empty proof and conjectured status remain unchanged: the viewer computes refutation from this separate proved model. Stronger backgrounds can still prove the conditional implication, and source filters can remove its refuting evidence. Conjectured records question history, not a claim that the current full evidence leaves it open.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean-outcomes",
+       "countable-sure-thing"
+      ],
+      "conclusion": "archimedean-gambles",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "refuted",
+      "conjectures": [
+       {
+        "id": "countable-sure-thing-outcomes-to-gambles",
+        "kind": "result",
+        "notes": "Refuted on the standing full measurable domain by the proved lexicographic-nonatomic-mass model, supplied by GPT-6 (Codex) on 13 September 2026. It satisfies both proposed premises, as well as Totality, Stochastic Equivalence, Stochastic Dominance, Mixture Independence and Sure-Thing, while violating both Expected Utility and Archimedean Gambles. Its outcome chart is [0,1], so Rich Outcomes fails; that principle is not a premise of this question. The Russell–Isaacs theorem concerns countably supported lotteries: its domain excludes the nonatomic witness used here. The original ID, premises, authorship and conjectured status are preserved. Refutation is computed from the separate proved model and selected background; under DU or DTU the premises instead conflict with the background. See the handwritten write-up for the witness and source comparison. No independent checking or Lean proof is claimed.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "countable-sure-thing",
+       "simple-eu"
+      ],
+      "conclusion": "expected-utility",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "refuted",
+      "conjectures": [
+       {
+        "id": "countable-sure-thing-simple-to-full-eu",
+        "kind": "result",
+        "notes": "Refuted on the standing full measurable domain by the proved lexicographic-nonatomic-mass model, supplied by GPT-6 (Codex) on 13 September 2026. It satisfies both proposed premises, as well as Totality, Stochastic Equivalence, Stochastic Dominance, Mixture Independence and Sure-Thing, while violating both Expected Utility and Archimedean Gambles. Its outcome chart is [0,1], so Rich Outcomes fails; that principle is not a premise of this question. The Russell–Isaacs theorem concerns countably supported lotteries: its domain excludes the nonatomic witness used here. The original ID, premises, authorship and conjectured status are preserved. Refutation is computed from the separate proved model and selected background; under DU or DTU the premises instead conflict with the background. See the handwritten write-up for the witness and source comparison. No independent checking or Lean proof is claimed.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
      }
     ]
    },
@@ -6662,8 +6861,8 @@
     "progress": {
      "premises": 2,
      "questions": 3524,
-     "settled": 1245,
-     "open": 2279,
+     "settled": 1281,
+     "open": 2243,
      "by_premises": [
       [
        26,
@@ -6671,15 +6870,15 @@
       ],
       [
        446,
-       288
+       295
       ],
       [
        3052,
-       931
+       960
       ]
      ]
     },
-    "open": 2279,
+    "open": 2243,
     "rows": [
      {
       "kind": "question",
@@ -6688,7 +6887,7 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 483,
+      "yes": 447,
       "no": 0,
       "rank": 1
      },
@@ -6709,7 +6908,7 @@
        "pasadena-value"
       ],
       "conclusion": "false",
-      "yes": 428,
+      "yes": 392,
       "no": 0,
       "rank": 3
      },
@@ -6719,7 +6918,7 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "negative-self-similarity",
-      "yes": 392,
+      "yes": 356,
       "no": 0,
       "rank": 4
      },
@@ -6730,7 +6929,7 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 389,
+      "yes": 353,
       "no": 0,
       "rank": 5
      },
@@ -6740,40 +6939,9 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "independent-sum-consistency",
-      "yes": 387,
+      "yes": 351,
       "no": 0,
       "rank": 6
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "expected-utility"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 382,
-      "no": 0,
-      "rank": 7
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "shift-transfer"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 376,
-      "no": 0,
-      "rank": 8
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "expected-utility",
-       "shift-invariance"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 347,
-      "no": 1,
-      "rank": 9
      },
      {
       "kind": "question",
@@ -6782,94 +6950,9 @@
        "negative-self-similarity"
       ],
       "conclusion": "false",
-      "yes": 346,
+      "yes": 310,
       "no": 1,
-      "rank": 10
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "totality"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 342,
-      "no": 0,
-      "rank": 11
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "expected-utility",
-       "shift-transfer"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 339,
-      "no": 3,
-      "rank": 12
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "cdf-area-extension"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 337,
-      "no": 4,
-      "rank": 13
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency"
-      ],
-      "conclusion": "independent-sum-preservation",
-      "yes": 321,
-      "no": 1,
-      "rank": 14
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "shift-transfer"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 319,
-      "no": 1,
-      "rank": 15
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "expected-utility"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 315,
-      "no": 1,
-      "rank": 16
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "shift-transfer"
-      ],
-      "conclusion": "independent-sum-consistency",
-      "yes": 313,
-      "no": 1,
-      "rank": 17
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "cdf-area-extension",
-       "existential-copula-sum-consistency"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 309,
-      "no": 3,
-      "rank": 18
+      "rank": 7
      },
      {
       "kind": "question",
@@ -6879,7 +6962,7 @@
       "conclusion": "folded-expectation",
       "yes": 306,
       "no": 0,
-      "rank": 19
+      "rank": 8
      },
      {
       "kind": "question",
@@ -6890,17 +6973,17 @@
       "conclusion": "folded-expectation",
       "yes": 294,
       "no": 1,
-      "rank": 20
+      "rank": 9
      },
      {
       "kind": "question",
       "premises": [
-       "arroyo-value"
+       "existential-copula-sum-consistency"
       ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 292,
-      "no": 0,
-      "rank": 21
+      "conclusion": "independent-sum-preservation",
+      "yes": 285,
+      "no": 1,
+      "rank": 10
      },
      {
       "kind": "question",
@@ -6908,32 +6991,21 @@
        "existential-copula-sum-consistency",
        "shift-transfer"
       ],
-      "conclusion": "independent-sum-preservation",
-      "yes": 291,
-      "no": 3,
-      "rank": 22
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "shift-invariance",
-       "totality"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 286,
+      "conclusion": "negative-self-similarity",
+      "yes": 283,
       "no": 1,
-      "rank": 23
+      "rank": 11
      },
      {
       "kind": "question",
       "premises": [
        "existential-copula-sum-consistency",
-       "symmetric-neutrality"
+       "expected-utility"
       ],
-      "conclusion": "false",
-      "yes": 285,
-      "no": 4,
-      "rank": 24
+      "conclusion": "negative-self-similarity",
+      "yes": 279,
+      "no": 1,
+      "rank": 12
      },
      {
       "kind": "question",
@@ -6943,18 +7015,18 @@
       "conclusion": "negative-self-similarity",
       "yes": 279,
       "no": 0,
-      "rank": 25
+      "rank": 13
      },
      {
       "kind": "question",
       "premises": [
        "existential-copula-sum-consistency",
-       "expected-utility"
+       "shift-transfer"
       ],
       "conclusion": "independent-sum-consistency",
       "yes": 277,
       "no": 1,
-      "rank": 26
+      "rank": 14
      },
      {
       "kind": "question",
@@ -6962,10 +7034,10 @@
        "cdf-area-extension",
        "existential-copula-sum-consistency"
       ],
-      "conclusion": "independent-sum-consistency",
-      "yes": 269,
+      "conclusion": "negative-self-similarity",
+      "yes": 273,
       "no": 3,
-      "rank": 27
+      "rank": 15
      },
      {
       "kind": "question",
@@ -6975,18 +7047,7 @@
       "conclusion": "symmetric-neutrality",
       "yes": 269,
       "no": 1,
-      "rank": 28
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "shift-transfer",
-       "totality"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 266,
-      "no": 3,
-      "rank": 29
+      "rank": 16
      },
      {
       "kind": "question",
@@ -6997,7 +7058,231 @@
       "conclusion": "negative-self-similarity",
       "yes": 266,
       "no": 1,
+      "rank": 17
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-cancellation"
+      ],
+      "conclusion": "negative-self-similarity",
+      "yes": 263,
+      "no": 0,
+      "rank": 18
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "shift-transfer"
+      ],
+      "conclusion": "independent-sum-preservation",
+      "yes": 255,
+      "no": 3,
+      "rank": 19
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "independent-sum-preservation"
+      ],
+      "conclusion": "negative-self-similarity",
+      "yes": 252,
+      "no": 3,
+      "rank": 20
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "symmetric-neutrality"
+      ],
+      "conclusion": "false",
+      "yes": 249,
+      "no": 4,
+      "rank": 21
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-cancellation",
+       "shift-invariance"
+      ],
+      "conclusion": "negative-self-similarity",
+      "yes": 248,
+      "no": 1,
+      "rank": 22
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "expected-utility"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 241,
+      "no": 1,
+      "rank": 23
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "alternating-st-petersburg-value",
+       "shift-invariance"
+      ],
+      "conclusion": "symmetric-neutrality",
+      "yes": 234,
+      "no": 3,
+      "rank": 24
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "existential-copula-sum-consistency"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 233,
+      "no": 3,
+      "rank": 25
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "negative-self-similarity"
+      ],
+      "conclusion": "folded-expectation",
+      "yes": 232,
+      "no": 1,
+      "rank": 26
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "independent-sum-cancellation"
+      ],
+      "conclusion": "negative-self-similarity",
+      "yes": 231,
+      "no": 3,
+      "rank": 27
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency"
+      ],
+      "conclusion": "l1-continuity",
+      "yes": 231,
+      "no": 0,
+      "rank": 28
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-preservation",
+       "shift-transfer"
+      ],
+      "conclusion": "negative-self-similarity",
+      "yes": 229,
+      "no": 2,
+      "rank": 29
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 229,
+      "no": 1,
       "rank": 30
+     }
+    ],
+    "recorded": [
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "comonotonic-sum-consistency",
+       "totality"
+      ],
+      "conclusion": "false",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "outside",
+      "conjectures": [
+       {
+        "id": "conjectured-total-comonotonic-area-extension",
+        "kind": "model",
+        "notes": "Original work: precise candidate formulation and comparison of two extension problems. The base area construction, its comonotonic property, and the broader unresolved consistency question are credited to Goodsell. The manuscript's Theorem 7 supplies only the incomplete area model, not this proposed total CDF-area extension. No new completed model is claimed. To settle positively, give a total extension and verify that adjoining comparisons preserves every old strict area comparison, full Mixture Independence, and comonotonic preservation and cancellation. To settle negatively, derive an incompatibility from the displayed package. A generic order extension is insufficient, and the total convolution model is not evidence that comonotonic invariance survives. No claim is made that the question is open in the literature.\nProgress (Claude, Fable 5.1, 23 September 2026; write-up section “A necessary condition: forced comparisons of both-infinite pairs”): a killing lemma shows that under Stochastic Equivalence, Stochastic Dominance, Mixture Independence and comonotonic preservation alone, X ≽ Y fails whenever comonotonic shears of the survival difference combine with positive weights into a nonpositive nonzero profile; an explicit both-infinite pair is killed, so the extension must rank it Y ≻ X where the area is silent. Prefix positivity, a positive lowest block, or divergent prefix sums certify that a pair is not killed; for prefix-oscillating block regions the sign of the lowest block is forced. An accounting heuristic suggests that no pair is killed in both orientations, so the lemma alone will not refute the package. Every clipped-expectation model in this topic violates Comonotonic Sum Invariance (half-Cauchy common summand), so the extension cannot come from clipped areas, and probability-trimmed quantile means are comonotonic invariant but not mixture-linear. Candidate: the area when defined, else a functional of the level-ordered block surplus, completed by Zorn's lemma over cones closed under both additive structures with the killing lemma as the pointedness test; regions with no lowest block are where a refutation would have to be sought. Tier set to silver by Zachary Goodsell, 23 September 2026.",
+        "tier": "silver"
+       }
+      ],
+      "tier": "silver"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "countable-sure-thing"
+      ],
+      "conclusion": "archimedean-gambles",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "excluded",
+      "conjectures": [
+       {
+        "id": "countable-sure-thing-outcomes-to-gambles",
+        "kind": "result",
+        "notes": "Refuted on the standing full measurable domain by the proved lexicographic-nonatomic-mass model, supplied by GPT-6 (Codex) on 13 September 2026. It satisfies both proposed premises, as well as Totality, Stochastic Equivalence, Stochastic Dominance, Mixture Independence and Sure-Thing, while violating both Expected Utility and Archimedean Gambles. Its outcome chart is [0,1], so Rich Outcomes fails; that principle is not a premise of this question. The Russell–Isaacs theorem concerns countably supported lotteries: its domain excludes the nonatomic witness used here. The original ID, premises, authorship and conjectured status are preserved. Refutation is computed from the separate proved model and selected background; under DU or DTU the premises instead conflict with the background. See the handwritten write-up for the witness and source comparison. No independent checking or Lean proof is claimed.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "countable-sure-thing"
+      ],
+      "conclusion": "expected-utility",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "excluded",
+      "conjectures": [
+       {
+        "id": "countable-sure-thing-simple-to-full-eu",
+        "kind": "result",
+        "notes": "Refuted on the standing full measurable domain by the proved lexicographic-nonatomic-mass model, supplied by GPT-6 (Codex) on 13 September 2026. It satisfies both proposed premises, as well as Totality, Stochastic Equivalence, Stochastic Dominance, Mixture Independence and Sure-Thing, while violating both Expected Utility and Archimedean Gambles. Its outcome chart is [0,1], so Rich Outcomes fails; that principle is not a premise of this question. The Russell–Isaacs theorem concerns countably supported lotteries: its domain excludes the nonatomic witness used here. The original ID, premises, authorship and conjectured status are preserved. Refutation is computed from the separate proved model and selected background; under DU or DTU the premises instead conflict with the background. See the handwritten write-up for the witness and source comparison. No independent checking or Lean proof is claimed.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "shift-invariance",
+       "totality"
+      ],
+      "conclusion": "shift-transfer",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "refuted",
+      "conjectures": [
+       {
+        "id": "conjectured-dtu-shift-implies-transfer",
+        "kind": "result",
+        "notes": "Original work: conjecture formulation and partial analysis, with a separately recorded countermodel added on 13 September 2026. The candidate asks whether DTU plus Shift Invariance alone implies Shift Transfer, equivalently under DTU Simple Relative Expectation. The recorded neutrality-shift-imply-shift-transfer proof settles the question after adding Symmetric Neutrality. The du-vanishing-shifts-imply-relative proof settles it after adding Continuity under Vanishing Shifts; under DU this is equivalent to L1 Continuity. The independent du-l1-implies-relative proof also supplies the continuity route, without Totality or Shift Invariance. Consequently a separating model would have to fail both neutrality and L1 Continuity. The continuous clipping models already satisfy Relative Expectation; the new lexicographic folded-tail model fails continuity but still satisfies Relative Expectation and neutrality. Neither family supplies the required separation. The new finite-support-compensated-dominance model does separate DU plus Shift Invariance from Shift Transfer, but it violates Totality and therefore does not settle this DTU conjecture. Its explicit transfer and vanishing-shift continuity failures are proved in its write-up. Its finite-shift-total-extension now supplies Totality while strictly ordering the same transfer pair. The new proof checks finite-kernel saturation and preserves the indifferent subspace through the orientation and maximal-extension steps. The original implication, ID, empty proof and conjectured status remain unchanged: the viewer computes refutation from this separate proved model. Stronger backgrounds can still prove the conditional implication, and source filters can remove its refuting evidence. Conjectured records question history, not a claim that the current full evidence leaves it open.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
      }
     ]
    },
@@ -7128,30 +7413,32 @@
     "progress": {
      "premises": 2,
      "questions": 1649,
-     "settled": 421,
-     "open": 1228,
+     "settled": 444,
+     "open": 1205,
      "by_premises": [
       [
        22,
-       19
+       20
       ],
       [
        294,
-       143
+       151
       ],
       [
        1333,
-       259
+       273
       ]
      ]
     },
-    "open": 1228,
+    "open": 1205,
     "rows": [
      {
       "kind": "question",
-      "premises": [],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 426,
+      "premises": [
+       "scale-invariance"
+      ],
+      "conclusion": "folded-expectation",
+      "yes": 339,
       "no": 0,
       "rank": 1
      },
@@ -7162,19 +7449,9 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 353,
+      "yes": 330,
       "no": 0,
       "rank": 2
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "scale-invariance"
-      ],
-      "conclusion": "folded-expectation",
-      "yes": 339,
-      "no": 0,
-      "rank": 3
      },
      {
       "kind": "question",
@@ -7183,9 +7460,9 @@
        "positive-affine-invariance"
       ],
       "conclusion": "false",
-      "yes": 334,
+      "yes": 311,
       "no": 1,
-      "rank": 4
+      "rank": 3
      },
      {
       "kind": "question",
@@ -7194,19 +7471,9 @@
        "scale-invariance"
       ],
       "conclusion": "false",
-      "yes": 334,
+      "yes": 311,
       "no": 1,
-      "rank": 5
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "shift-invariance"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 307,
-      "no": 1,
-      "rank": 6
+      "rank": 4
      },
      {
       "kind": "question",
@@ -7214,9 +7481,9 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 296,
+      "yes": 273,
       "no": 0,
-      "rank": 7
+      "rank": 5
      },
      {
       "kind": "question",
@@ -7224,9 +7491,9 @@
        "comonotonic-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 291,
+      "yes": 268,
       "no": 0,
-      "rank": 8
+      "rank": 6
      },
      {
       "kind": "question",
@@ -7235,9 +7502,9 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 289,
+      "yes": 266,
       "no": 0,
-      "rank": 9
+      "rank": 7
      },
      {
       "kind": "question",
@@ -7246,42 +7513,9 @@
        "negative-self-similarity"
       ],
       "conclusion": "false",
-      "yes": 286,
+      "yes": 263,
       "no": 1,
-      "rank": 10
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "pasadena-value"
-      ],
-      "conclusion": "false",
-      "yes": 281,
-      "no": 0,
-      "rank": 11
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "shift-transfer"
-      ],
-      "conclusion": "independent-sum-cancellation",
-      "yes": 280,
-      "no": 1,
-      "rank": 12
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "reflection-anti-invariance"
-      ],
-      "conclusion": "false",
-      "yes": 274,
-      "no": 2,
-      "rank": 13
+      "rank": 8
      },
      {
       "kind": "question",
@@ -7291,27 +7525,29 @@
       "conclusion": "folded-expectation",
       "yes": 263,
       "no": 0,
-      "rank": 14
+      "rank": 9
      },
      {
       "kind": "question",
       "premises": [
+       "existential-copula-sum-consistency",
+       "pasadena-value"
+      ],
+      "conclusion": "false",
+      "yes": 258,
+      "no": 0,
+      "rank": 10
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
        "shift-transfer"
       ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 259,
-      "no": 2,
-      "rank": 15
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "expected-utility"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 258,
+      "conclusion": "independent-sum-cancellation",
+      "yes": 257,
       "no": 1,
-      "rank": 16
+      "rank": 11
      },
      {
       "kind": "question",
@@ -7321,7 +7557,7 @@
       "conclusion": "folded-expectation",
       "yes": 255,
       "no": 2,
-      "rank": 17
+      "rank": 12
      },
      {
       "kind": "question",
@@ -7332,7 +7568,26 @@
       "conclusion": "folded-expectation",
       "yes": 255,
       "no": 2,
-      "rank": 18
+      "rank": 13
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "reflection-anti-invariance"
+      ],
+      "conclusion": "false",
+      "yes": 251,
+      "no": 2,
+      "rank": 14
+     },
+     {
+      "kind": "question",
+      "premises": [],
+      "conclusion": "existential-copula-sum-consistency",
+      "yes": 226,
+      "no": 0,
+      "rank": 15
      },
      {
       "kind": "question",
@@ -7341,9 +7596,19 @@
        "l1-continuity"
       ],
       "conclusion": "false",
-      "yes": 246,
+      "yes": 223,
       "no": 0,
-      "rank": 19
+      "rank": 16
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "alternating-st-petersburg-value"
+      ],
+      "conclusion": "negative-affine-anti-invariance",
+      "yes": 215,
+      "no": 0,
+      "rank": 17
      },
      {
       "kind": "question",
@@ -7352,41 +7617,9 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 236,
+      "yes": 213,
       "no": 2,
-      "rank": 20
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "expected-utility",
-       "shift-invariance"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 235,
-      "no": 3,
-      "rank": 21
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "reflection-anti-invariance"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 232,
-      "no": 1,
-      "rank": 22
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "expected-utility",
-       "shift-transfer"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 229,
-      "no": 5,
-      "rank": 23
+      "rank": 18
      },
      {
       "kind": "question",
@@ -7395,9 +7628,9 @@
        "expected-utility"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 228,
+      "yes": 205,
       "no": 1,
-      "rank": 24
+      "rank": 19
      },
      {
       "kind": "question",
@@ -7406,9 +7639,9 @@
        "negative-self-similarity"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 226,
+      "yes": 203,
       "no": 4,
-      "rank": 25
+      "rank": 20
      },
      {
       "kind": "question",
@@ -7417,19 +7650,9 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 226,
+      "yes": 203,
       "no": 2,
-      "rank": 26
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "cdf-area-extension"
-      ],
-      "conclusion": "comonotonic-sum-consistency",
-      "yes": 225,
-      "no": 6,
-      "rank": 27
+      "rank": 21
      },
      {
       "kind": "question",
@@ -7438,9 +7661,9 @@
        "positive-affine-invariance"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 220,
+      "yes": 197,
       "no": 4,
-      "rank": 28
+      "rank": 22
      },
      {
       "kind": "question",
@@ -7449,9 +7672,9 @@
        "scale-invariance"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 220,
+      "yes": 197,
       "no": 4,
-      "rank": 29
+      "rank": 23
      },
      {
       "kind": "question",
@@ -7460,10 +7683,76 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "independent-sum-cancellation",
-      "yes": 220,
+      "yes": 197,
       "no": 3,
-      "rank": 30
+      "rank": 24
      },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "negative-affine-anti-invariance"
+      ],
+      "conclusion": "false",
+      "yes": 193,
+      "no": 11,
+      "rank": 25
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "folded-expectation"
+      ],
+      "conclusion": "false",
+      "yes": 193,
+      "no": 7,
+      "rank": 26
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "comonotonic-sum-consistency",
+       "shift-transfer"
+      ],
+      "conclusion": "false",
+      "yes": 186,
+      "no": 1,
+      "rank": 27
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "scale-invariance"
+      ],
+      "conclusion": "negative-affine-anti-invariance",
+      "yes": 186,
+      "no": 1,
+      "rank": 28
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "pasadena-value"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 177,
+      "no": 2,
+      "rank": 29
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "pasadena-value"
+      ],
+      "conclusion": "negative-affine-anti-invariance",
+      "yes": 176,
+      "no": 0,
+      "rank": 30
+     }
+    ],
+    "recorded": [
      {
       "kind": "question",
       "premises": [
@@ -7471,18 +7760,78 @@
        "comonotonic-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 158,
+      "yes": 135,
       "no": 3,
+      "rank": 62,
       "conjectures": [
        {
         "id": "conjectured-total-comonotonic-area-extension",
         "kind": "model",
-        "notes": "Original work: precise candidate formulation and comparison of two extension problems. The base area construction, its comonotonic property, and the broader unresolved consistency question are credited to Goodsell. The manuscript's Theorem 7 supplies only the incomplete area model, not this proposed total CDF-area extension. No new completed model is claimed. To settle positively, give a total extension and verify that adjoining comparisons preserves every old strict area comparison, full Mixture Independence, and comonotonic preservation and cancellation. To settle negatively, derive an incompatibility from the displayed package. A generic order extension is insufficient, and the total convolution model is not evidence that comonotonic invariance survives. No claim is made that the question is open in the literature.",
+        "notes": "Original work: precise candidate formulation and comparison of two extension problems. The base area construction, its comonotonic property, and the broader unresolved consistency question are credited to Goodsell. The manuscript's Theorem 7 supplies only the incomplete area model, not this proposed total CDF-area extension. No new completed model is claimed. To settle positively, give a total extension and verify that adjoining comparisons preserves every old strict area comparison, full Mixture Independence, and comonotonic preservation and cancellation. To settle negatively, derive an incompatibility from the displayed package. A generic order extension is insufficient, and the total convolution model is not evidence that comonotonic invariance survives. No claim is made that the question is open in the literature.\nProgress (Claude, Fable 5.1, 23 September 2026; write-up section “A necessary condition: forced comparisons of both-infinite pairs”): a killing lemma shows that under Stochastic Equivalence, Stochastic Dominance, Mixture Independence and comonotonic preservation alone, X ≽ Y fails whenever comonotonic shears of the survival difference combine with positive weights into a nonpositive nonzero profile; an explicit both-infinite pair is killed, so the extension must rank it Y ≻ X where the area is silent. Prefix positivity, a positive lowest block, or divergent prefix sums certify that a pair is not killed; for prefix-oscillating block regions the sign of the lowest block is forced. An accounting heuristic suggests that no pair is killed in both orientations, so the lemma alone will not refute the package. Every clipped-expectation model in this topic violates Comonotonic Sum Invariance (half-Cauchy common summand), so the extension cannot come from clipped areas, and probability-trimmed quantile means are comonotonic invariant but not mixture-linear. Candidate: the area when defined, else a functional of the level-ordered block surplus, completed by Zorn's lemma over cones closed under both additive structures with the killing lemma as the pointedness test; regions with no lowest block are where a refutation would have to be sought. Tier set to silver by Zachary Goodsell, 23 September 2026.",
+        "tier": "silver"
+       }
+      ],
+      "tier": "silver"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "countable-sure-thing"
+      ],
+      "conclusion": "archimedean-gambles",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "excluded",
+      "conjectures": [
+       {
+        "id": "countable-sure-thing-outcomes-to-gambles",
+        "kind": "result",
+        "notes": "Refuted on the standing full measurable domain by the proved lexicographic-nonatomic-mass model, supplied by GPT-6 (Codex) on 13 September 2026. It satisfies both proposed premises, as well as Totality, Stochastic Equivalence, Stochastic Dominance, Mixture Independence and Sure-Thing, while violating both Expected Utility and Archimedean Gambles. Its outcome chart is [0,1], so Rich Outcomes fails; that principle is not a premise of this question. The Russell–Isaacs theorem concerns countably supported lotteries: its domain excludes the nonatomic witness used here. The original ID, premises, authorship and conjectured status are preserved. Refutation is computed from the separate proved model and selected background; under DU or DTU the premises instead conflict with the background. See the handwritten write-up for the witness and source comparison. No independent checking or Lean proof is claimed.",
         "tier": null
        }
       ],
-      "tier": "bronze",
-      "rank": 69
+      "tier": "bronze"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "countable-sure-thing"
+      ],
+      "conclusion": "expected-utility",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "excluded",
+      "conjectures": [
+       {
+        "id": "countable-sure-thing-simple-to-full-eu",
+        "kind": "result",
+        "notes": "Refuted on the standing full measurable domain by the proved lexicographic-nonatomic-mass model, supplied by GPT-6 (Codex) on 13 September 2026. It satisfies both proposed premises, as well as Totality, Stochastic Equivalence, Stochastic Dominance, Mixture Independence and Sure-Thing, while violating both Expected Utility and Archimedean Gambles. Its outcome chart is [0,1], so Rich Outcomes fails; that principle is not a premise of this question. The Russell–Isaacs theorem concerns countably supported lotteries: its domain excludes the nonatomic witness used here. The original ID, premises, authorship and conjectured status are preserved. Refutation is computed from the separate proved model and selected background; under DU or DTU the premises instead conflict with the background. See the handwritten write-up for the witness and source comparison. No independent checking or Lean proof is claimed.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "shift-invariance"
+      ],
+      "conclusion": "shift-transfer",
+      "rank": null,
+      "yes": null,
+      "no": null,
+      "status": "refuted",
+      "conjectures": [
+       {
+        "id": "conjectured-dtu-shift-implies-transfer",
+        "kind": "result",
+        "notes": "Original work: conjecture formulation and partial analysis, with a separately recorded countermodel added on 13 September 2026. The candidate asks whether DTU plus Shift Invariance alone implies Shift Transfer, equivalently under DTU Simple Relative Expectation. The recorded neutrality-shift-imply-shift-transfer proof settles the question after adding Symmetric Neutrality. The du-vanishing-shifts-imply-relative proof settles it after adding Continuity under Vanishing Shifts; under DU this is equivalent to L1 Continuity. The independent du-l1-implies-relative proof also supplies the continuity route, without Totality or Shift Invariance. Consequently a separating model would have to fail both neutrality and L1 Continuity. The continuous clipping models already satisfy Relative Expectation; the new lexicographic folded-tail model fails continuity but still satisfies Relative Expectation and neutrality. Neither family supplies the required separation. The new finite-support-compensated-dominance model does separate DU plus Shift Invariance from Shift Transfer, but it violates Totality and therefore does not settle this DTU conjecture. Its explicit transfer and vanishing-shift continuity failures are proved in its write-up. Its finite-shift-total-extension now supplies Totality while strictly ordering the same transfer pair. The new proof checks finite-kernel saturation and preserves the indifferent subspace through the orientation and maximal-extension steps. The original implication, ID, empty proof and conjectured status remain unchanged: the viewer computes refutation from this separate proved model. Stronger backgrounds can still prove the conditional implication, and source filters can remove its refuting evidence. Conjectured records question history, not a claim that the current full evidence leaves it open.",
+        "tier": null
+       }
+      ],
+      "tier": "bronze"
      }
     ]
    }
@@ -8071,10 +8420,6 @@
    ],
    [
     "cdf-area-extension",
-    "comonotonic-sum-consistency"
-   ],
-   [
-    "cdf-area-extension",
     "existential-copula-sum-consistency"
    ],
    [
@@ -8411,10 +8756,6 @@
    ],
    [
     "expected-utility",
-    "comonotonic-sum-consistency"
-   ],
-   [
-    "expected-utility",
     "existential-copula-sum-consistency"
    ],
    [
@@ -8468,10 +8809,6 @@
    [
     "folded-expectation",
     "cdf-area-extension"
-   ],
-   [
-    "folded-expectation",
-    "comonotonic-sum-consistency"
    ],
    [
     "folded-expectation",
@@ -9035,10 +9372,6 @@
    ],
    [
     "l1-continuity",
-    "comonotonic-sum-consistency"
-   ],
-   [
-    "l1-continuity",
     "existential-copula-sum-consistency"
    ],
    [
@@ -9400,10 +9733,6 @@
    [
     "relative-expectation",
     "cdf-area-extension"
-   ],
-   [
-    "relative-expectation",
-    "comonotonic-sum-consistency"
    ],
    [
     "relative-expectation",
@@ -10033,7 +10362,6 @@
    ],
    "asymmetric-continuous-ultrafilter": [
     "arroyo-value",
-    "comonotonic-sum-consistency",
     "existential-copula-sum-consistency",
     "independent-sum-cancellation",
     "independent-sum-consistency",
@@ -10119,7 +10447,6 @@
     "vanishing-shift-continuity"
    ],
    "geometric-continuous-ultrafilter": [
-    "comonotonic-sum-consistency",
     "existential-copula-sum-consistency",
     "pasadena-value"
    ],
@@ -10131,7 +10458,6 @@
    "lexicographic-nonatomic-mass": [],
    "polynomial-asymmetric-continuous-ultrafilter": [
     "alternating-st-petersburg-value",
-    "comonotonic-sum-consistency",
     "existential-copula-sum-consistency",
     "independent-sum-cancellation",
     "independent-sum-consistency",
@@ -10143,7 +10469,6 @@
     "alternating-st-petersburg-value",
     "arroyo-value",
     "cdf-area-extension",
-    "comonotonic-sum-consistency",
     "existential-copula-sum-consistency",
     "folded-expectation",
     "l1-continuity",
@@ -10155,7 +10480,6 @@
    "total-exact-ultrafilter": [
     "alternating-st-petersburg-value",
     "arroyo-value",
-    "comonotonic-sum-consistency",
     "existential-copula-sum-consistency",
     "negative-self-similarity",
     "pasadena-value",
@@ -10265,5 +10589,5 @@
  "background_html": "<h1 id=\"unbounded-utility\">Unbounded Utility</h1>\n<p>This map records logical connections between principles analysed in my <strong>Decision theory unbound</strong> (2024) and <strong>Symmetries of value</strong> (2026), as well as an unpublished work-in-progress called <strong>Unbounded Utility and Background Risk</strong>.</p>\n<h2 id=\"setup\">Setup</h2>\n<p>A gamble is a measurable outcome-valued random variable X on a fixed atomless standard probability space, which can be represented by [0,1] with Lebesgue measure or by countably many independent fair coin tosses. All such variables are available.</p>\n<p>The primitive preference relation <span class=\"math inline\">\\succeq</span> on gambles is always assumed reflexive and transitive. Outcomes are ordered by preference over certain gambles. Indifferent outcomes are identified. The optional Outcome Richness axiom says there are outcomes of every real utility value, and the optional Archimedean axiom says that there are no infinitesimal or infinite difference in utility levels.</p>\n<p>The theory <strong>DU</strong> is the weakest background considered in my papers. In addition to Outcome Richness and Archimedean axioms, it has: (a) The Sure-Thing principle/Independence. (b) Stochastic Equivalence (equally distributed gambles are equally good). (c) Statewise Dominance.</p>\n<h2 id=\"literature\">Literature</h2>\n<section id=\"paper-catalogue\"><h3 id=\"source-literature\">Source literature</h3>\n<ul>\n<li>Colyvan, M. (2008). Relative expectation theory. Journal of Philosophy, 105(1), 37–44. <a href=\"https://doi.org/10.5840/jphil200810519\">Paper</a></li>\n<li>Nover, H., &amp; Hájek, A. (2004). Vexing expectations. Mind, 113(450), 237–249. <a href=\"https://doi.org/10.1093/mind/113.450.237\">Paper</a></li>\n<li>Russell, J. S., &amp; Isaacs, Y. (2021). Infinite prospects. Philosophy and Phenomenological Research, 103(1), 178–198. <a href=\"https://doi.org/10.1111/phpr.12704\">Paper</a></li>\n<li>Seidenfeld, T., Schervish, M., &amp; Kadane, J. (2009). Preference for equivalent random variables: A price for unbounded utilities. Journal of Mathematical Economics, 45, 329–340. <a href=\"https://doi.org/10.1016/j.jmateco.2008.12.002\">Paper</a></li>\n<li>Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. <a href=\"https://doi.org/10.1111/nous.12473\">Paper</a></li>\n<li>Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. <a href=\"https://doi.org/10.1111/nous.12549\">Paper</a></li>\n<li>Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. Full text is not included. The record-specific references retain warnings about gaps and withdrawn arguments.</li>\n<li>Hayden Wilkinson (2025). Flummoxing expectations. Noûs, 59(3), 700–728. First published online in 2024. <a href=\"https://doi.org/10.1111/nous.12530\">Paper</a></li>\n<li>Fred Espen Benth, Giulia Di Nunno and Dennis Schroers (2022). Copula measures and Sklar’s theorem in arbitrary dimensions. Scandinavian Journal of Statistics. <a href=\"https://doi.org/10.1111/sjos.12559\">Paper</a></li>\n</ul>\n<h3 id=\"other-relevant-literature\">Other relevant literature</h3>\n<ul>\n<li>Arntzenius, F., Elga, A., &amp; Hawthorne, J. (2004). Bayesianism, infinite decisions, and binding. Mind, 113(450), 251–283.</li>\n<li>Bartha, P. (2016). Making do without expectations. Mind, 125(499), 799–827.</li>\n<li>Dietrich, F., &amp; List, C. (2005). The two-envelope paradox: An axiomatic approach. Mind, 114(454), 239–248.</li>\n<li>Easwaran, K. (2008). Strong and weak expectations. Mind, 117(467), 633–641.</li>\n<li>Easwaran, K. (2014a). Decision theory without representation theorems. Philosophers’ Imprint, 14.</li>\n<li>Easwaran, K. (2014b). Principal values and weak expectations. Mind, 123(490), 517–531.</li>\n<li>Fine, T. (2008). Evaluating the Pasadena, Altadena, and St Petersburg gambles. Mind, 117(467), 613–632.</li>\n<li>Hájek, A. (2014). Unexpected expectations. Mind, 123(490), 533–567.</li>\n<li>Lauwers, L. (2016). Why decision theory remains constructively incomplete. Mind, 125(500), 1033–1043.</li>\n<li>Lauwers, L., &amp; Vallentyne, P. (2016). Decision theory without finite standard expected value. Economics and Philosophy, 32(3), 383–407.</li>\n<li>Lauwers, L., &amp; Vallentyne, P. (2017). A tree can make a difference. Journal of Philosophy, 114(1), 33–42.</li>\n<li>McGee, V. (1999). An airtight Dutch book. Analysis, 59(4), 257–265.</li>\n<li>Meacham, C. J. G. (2019). Difference minimizing theory. Ergo, 6. <a href=\"https://quod.lib.umich.edu/e/ergo/12405314.0006.035/--difference-minimizing-theory?rgn=main;view=fulltext\">Paper</a></li>\n<li>Russell, J. S. (2020). Non-Archimedean preferences over countable lotteries. Journal of Mathematical Economics, 88, 180–186.</li>\n<li>Russell, J. S. (forthcoming). Fixing stochastic dominance. British Journal for the Philosophy of Science.</li>\n<li>Smith, N. J. J. (2014). Is evaluative compositionality a requirement of rationality? Mind, 123(490), 457–502.</li>\n</ul>\n</section>\n",
  "contribute_md": "# Contribute\n\nEmail me (Zach) at [zacharyw.goodsell@gmail.com](mailto:zacharyw.goodsell@gmail.com?subject=%5BLogical%20Maps%5D%20Unbounded%20Utility) with further suggestions.\n\nTo contribute to Unbounded Utility, please include **[Logical Maps] Unbounded Utility** in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!\n\nWorked on an open question without settling it? Feel free to send what you tried and I will put your work into the question’s notes and credit your contribution. This gives it a <span class=\"iridescent bronze\">bronze</span> star in the Conjectures tab. Please also say whether you think the question is important or difficult enough to deserve a <span class=\"iridescent silver\">silver</span> or <span class=\"iridescent gold\">gold</span> star.\n\nTo contribute to the Logical Maps project in general, please include **[Logical Maps]** in the subject line.\n\n\n## Create your own logical map\n\n[Download the starter project (ZIP)](logical-maps-starter.zip)\n",
  "contribute_html": "<h1 id=\"contribute\">Contribute</h1>\n<p>Email me (Zach) at <a href=\"mailto:zacharyw.goodsell@gmail.com?subject=%5BLogical%20Maps%5D%20Unbounded%20Utility\">zacharyw.goodsell@gmail.com</a> with further suggestions.</p>\n<p>To contribute to Unbounded Utility, please include <strong>[Logical Maps] Unbounded Utility</strong> in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!</p>\n<p>Worked on an open question without settling it? Feel free to send what you tried and I will put your work into the question’s notes and credit your contribution. This gives it a <span class=\"iridescent bronze\">bronze</span> star in the Conjectures tab. Please also say whether you think the question is important or difficult enough to deserve a <span class=\"iridescent silver\">silver</span> or <span class=\"iridescent gold\">gold</span> star.</p>\n<p>To contribute to the Logical Maps project in general, please include <strong>[Logical Maps]</strong> in the subject line.</p>\n<h2 id=\"create-your-own-logical-map\">Create your own logical map</h2>\n<p><a href=\"logical-maps-starter.zip\">Download the starter project (ZIP)</a></p>\n",
- "extraction_md": "# Source extraction: updated 13 September 2026\n\n## Cancellation and Countable Sure-Thing questions (13 September)\n\nThe original `conjectured-dtu-cancellation-implies-preservation` statement\nis now proved, with its conjecture history retained. Goodsell supplied\nthe strict-comparison argument; GPT-6 (Codex) supplied the geometric-noise\nand finite-mixture argument preserving ties. No continuity premise is\nneeded. The separated sum principles retain their manuscript attribution;\nthe connecting proof is recorded under Misc.\n\nThe two Countable Sure-Thing proposals are refuted on the standing full\nmeasurable domain by `lexicographic-nonatomic-mass`. On outcomes [0,1],\nit orders by mean and then nonatomic mass. Countable additivity proves\nCountable Sure-Thing, while a uniform gamble supplies failures of both\nExpected Utility and Archimedean Gambles. The two questions retain their\noriginal statements, authorship and conjectured statuses; their verdicts\nare computed from the separate proved model. Under DU or DTU their\npremises instead conflict with the background.\n\nThe Russell–Isaacs source check distinguishes their countably supported\nlotteries from the larger domain here. The new coordinate vanishes on\nevery countably supported law. The countermodel and source comparison\nare credited to GPT-6 (Codex), following Goodsell's proof request.\nWritten proofs and exact diagnostic checks are supplied; no independent\nchecker or new Lean-verified proof is claimed.\n\nThe subsequent audit of `lexicographic-nonatomic-mass` classifies all 39\nprinciples: 23 satisfied and 16 violated. Affine invariance, shift transfer,\nfinite coupled differences and uniqueness of negative self-similarity\nfollow from its two coordinates. One fixed choice of scaled uniforms and\na constant refutes sum invariance for every copula. The write-up identifies\nthe bounded-chart cases with trivial or empty scope, including the current\nall-positive-shifts continuity antecedent. No principle definition or\nexisting theorem premise was changed. GPT-6 (Codex) supplied these further\nproofs in response to Goodsell's request on 13 September 2026.\n\n## Addition: unpublished background-risk manuscript (9 September)\n\nThe new supplied source is Goodsell, *Unbounded Utility and Background Risk*,\n5 June 2026. The draft itself is not included in the public downloads.\nIt is **unpublished, marked “do not cite”, and erroneous**. Its own provenance\nname is **Unbounded Utility and Background Risk (unpublished)**.\n\nThe [detailed inventory and audit](writeups/symmetric-dtu-refutes-independent-sum-candidate.md)\nrecords all extracted concepts and separates surviving arguments from the\nwithdrawn symmetry/total-extension claims. New entries add Full, Independent,\nComonotonic, and Antitonic Sum Invariance, separate independent-sum forward\npreservation and cancellation, and CDF-Area Extension. The sum\nincompatibilities are expressed as implications to False. Existing reflection and mixture nodes receive terminology\naliases rather than duplicates.\n\nThe [CDF-area dominance](writeups/cdf-area-preorder.md) is an explicit proved\nincomplete model; the [CDF-area conclosure: total extension](writeups/conjectured-total-independent-sum-extension.md)\nnow has a proved existence construction, including Independent Sum\nConsistency. Goodsell’s conclosure and total-extension construction\npreserves the original strict comparisons and supplies totality. The model’s\ndirect source is his unpublished manuscript; GPT-6 is credited for the\ncone-language exposition and additional proof details, not for originating\nthe construction. Neither reflection requirement is assumed or recorded as\nviolated. The user's recalled stable-law obstruction remains a conjectured\nimplication pending an exact witness.\n\nAfter the falsity migration, this addition contributes **seven principles,\n16 relations (15 proved, one conjectured), and two proved models**.\nThe full topic now has **36 principles, 55 relations, and six models**.\nFive former failure nodes were removed: their claims are constraints\nconcluding False, with the existing result IDs, sources, and proof text\npreserved. Their old descriptions are archived in `writeups/falsity-migration.md`. New concrete checks\nare in `checks/background_risk.py`. No Lean formalization was added.\n\nA subsequent premise audit records **Rich Outcomes + Simple EU + Stochastic\nDominance + Archimedean Gambles ⇒ False** using the same Goodsell\nSt Petersburg argument. This strengthens the available connection beyond\nthe original full-DTU package; its proof and attribution are in\n`results/rich-simple-dominance-refutes-archimedean-gambles.yaml`.\n\nThe counts and descriptions below document the original two-paper extraction\nof 8 September; they are not current totals.\n\n## Original sources\n\n| Key | Supplied file | Published reference |\n| --- | --- | --- |\n| U | `sources/Nous - 2023 - Goodsell - Decision theory unbound (1).pdf` | Goodsell, *Decision theory unbound*, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473; online 2023 |\n| S | `sources/Goodsell - 2026 - Symmetries of value.pdf` | Goodsell, *Symmetries of value*, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549 |\n\nPage references in the YAML are **printed journal pages**. For U, PDF page 1\nis printed p. 669; for S, PDF page 1 is printed p. 16. Local PDFs were read\ndirectly; no other papers were used as substitute evidence.\n\n## Main extracted relations\n\nAll rows are relative to the framework in `background.md`; DTU and Sym are\nexpanded there and in each YAML record.\n\n| Relation | Source |\n| --- | --- |\n| Simple EU ⇒ Archimedean Outcomes, Restricted Totality, Restricted Stochastic Equivalence | S p. 22 n. 3; U §§2.3, 3.2 |\n| Stochastic Dominance ⇒ Stochastic Equivalence; with Archimedean Outcomes ⇒ Statewise Dominance | U pp. 678–679 |\n| Rich + Archimedean Outcomes + Stochastic Equivalence + Statewise Dominance ⇒ Stochastic Dominance | U p. 678 n. 19; real quantile translation |\n| Stochastic Equivalence + Mixture Independence ⇒ Sure-Thing | U p. 679 and p. 682 n. 28 |\n| Original DTU axiom package ⇒ Simple EU and Mixture Independence | U pp. 679–681 |\n| Rich Outcomes + Simple EU + Sure-Thing ⇒ failure of Countable Sure-Thing | U §2.3, pp. 675–676 |\n| DTU ⇒ failure of Archimedean Gambles | S p. 22 |\n| Under Rich Outcomes: shift + scale ⇔ positive affine invariance | U §4.2; S §5 |\n| Under Rich Outcomes: negative affine anti-invariance ⇔ positive affine invariance + reflection anti-invariance | S p. 24 |\n| DTU + L¹ Continuity ⇒ Expected Utility | S p. 23 |\n| DTU + Sym ⇒ shift transfer and Simple Relative Expectation | S Theorems 3–4 |\n| Under DTU + Sym: Relative Expectation ⇔ L¹ Continuity | S Corollary 5 |\n| DTU + Sym + L¹ Continuity ⇒ Folded Expectation | S Theorem 6 |\n| DTU + Sym ⇒ alternating St Petersburg ~ −1/2 and uniqueness of negative self-similarity | S Theorems 9–10 |\n| DTU + Sym + L¹ Continuity ⇒ Arroyo ~ ln 2 and Pasadena ~ ln 2 | S Theorems 8, 11 |\n| DTU + Sym + L¹ Continuity is consistent | S Theorem 2, with construction in §5 |\n| DTU does not imply Expected Utility, and is consistent with it | U Theorems 1–3, Appendix B |\n| DTU + EU + shift + reflection does not imply scale invariance | U Theorems 7, 8, 10 |\n\nThese are implications with **joint premises**, not separate arrows from each\npremise. Straightforward restrictions (for example EU ⇒ Simple EU) and the\nreflection/symmetric-neutrality observation are also recorded.\n\n## Models\n\n1. **Clipped expectation: eventual dominance** (U Theorem 2): incomplete, satisfies\n   finite EU and dominance; violates EU. Its lack of Totality has an explicit\n   alternating-St-Petersburg witness. The checks also exhibit failure of L¹\n   Continuity.\n2. **Clipped expectation: exact ultrafilter dominance** (U Theorem 1): total, satisfies DTU, violates\n   EU. Source Theorem 10 supplies failure of scale invariance.\n3. **Clipped expectation: continuous ultrafilter dominance** (U Theorem 3): satisfies DTU and EU,\n   shift and reflection. Source Theorem 10 supplies failure of scale invariance.\n4. **Signed-measure cone: affine-symmetric extension** (S Theorem 2): a source-attributed\n   nonconstructive existence model for DTU + Sym + L¹ Continuity. Its\n   Countable Sure-Thing and Archimedean Gambles failures follow from the same\n   St Petersburg arguments as for other DTU models.\n\nEach satisfies/violates entry is either explained in its write-up, inherited\nfrom a recorded implication, or explicitly attributed to a source theorem.\nSource-attributed is weaker evidence than an independent proof audit. The direct\nsource is identified by `certificate.source_id`; `produced_by`, `recorded_by`,\nand the empty checker list describe authorship and the separate transcription.\n\nThe later DU, shift, and continuity investigation\nrecords the precise canonical role of the standalone\n[CDF-area dominance](writeups/cdf-area-preorder.md) model and adds\n[Stochastic dominance: finite-support compensation](writeups/finite-support-compensated-dominance.md).\nThe latter satisfies DU and Shift Invariance but refutes Shift Transfer;\ncontinuity under vanishing shifts suffices to force CDF-area comparisons.\nThe [finite-shift total extension](writeups/finite-shift-total-extension.md)\nadded on 13 September 2026 supplies a model of DTU and Shift Invariance\nwith an explicit strict violation of Shift Transfer. Goodsell proposed\nthe extension; GPT-6 supplied the separating construction and proof details.\n\n## Provenance and display categories\n\nDirect source filters distinguish **Decision Theory Unbound** (11 records),\n**Symmetries of Value** (19 records), and **Misc.** (12 records: ten connecting\nproofs and two user-suggested conjectures). Every arrow and model retains its\nauthor, date, and precise source references.\nThe ten AI arrows are restrictions/compositions added to connect definitions:\n`totality-restricts`, `stochastic-equivalence-restricts`,\n`expected-utility-implies-simple`, `archimedean-gambles-restricts`,\n`positive-affine-implies-shift`, `positive-affine-implies-scale`,\n`shift-scale-imply-positive-affine`, `relative-implies-simple-relative`,\n`relative-implies-eu`, and `folded-implies-eu`. Their sources explicitly\nidentify the AI proof as well as the paper definitions it uses.\n\nThe graph filter groups all 31 principles into Basic decision theory (15),\nInvariance principles (7), Extensions of EUT (5), and Prospect evaluations (4).\nEach group has independent select-all/unselect-all controls. Category and\ncheckbox changes only affect display, not the underlying implication rules.\n\n## Transcription decisions and issues needing care\n\n- S p. 24 prints a same-direction sign in the displayed **Reflection\n  Anti-Invariance** definition. Read it as X≽Y iff −X≼−Y. This is forced by\n  the negative-affine definition directly above, the introduction, and the\n  subsequent proofs. It was checked visually in the PDF.\n- The intended reflection axiom uses **one fixed utility origin**, as the\n  explanatory prose on p. 24 says. Requiring reflection around every possible\n  origin would also imply shifts. The literal phrase \"for any utility\n  representation\" in that display should not silently strengthen this node.\n- U p. 673 n. 9 prints an impossible interval in the middle branch of the\n  utility definition. The normalized branch is 0≤r≤1, as required for the\n  described probabilities. The negative and greater-than-one branches are\n  kept separate.\n- U pp. 683–684 defines **clipping**: mass beyond ±t moves to the endpoints.\n  Its shorthand integral with bounds ±t must not be implemented as deleting\n  the tails. We use E[max(−t,min(X,t))]. The prose and figure were checked\n  visually. The cone discussion in S §5 inherits a related notational issue.\n- S p. 28's Pasadena prose omits `/n`; Table 2 and Theorem 11 include it.\n  This extraction uses −(−2)^n/n, probability 2^(−n).\n- S Theorem 9 repeats one strict-comparison sign in the concluding sentence;\n  the second case is the opposite strict comparison.\n- S Theorem 10's expanded formula appears to print `−a^n` where the\n  geometric recursion requires `(−a)^n`. The extracted principle records its\n  clear **uniqueness in value** conclusion. No questionable expansion is used\n  as a formula in the map.\n- S p. 27's informal comparison with a reflection needs attention to a\n  factor of two if it is used numerically. We do not import that sentence as\n  a separate theorem or algorithm.\n- U Theorem 10's displayed scale identity should be interpreted using\n  E[c_t(aX)] = a E[c_(t/a)(X)]. The printed oscillating-function witness also\n  has endpoint and normalization issues. Scale non-implication is recorded\n  as the **source theorem's claim**, not as a numerically reconstructed proof.\n\n## Deferred rather than silently asserted\n\n- S Theorem 1 states stronger non-implications even after adding L¹, Relative\n  Expectation, Weak Expectation, and Principal Value principles. The present\n  models record the weaker, clearly identified U witnesses; they are **not**\n  given these extra satisfies flags without a further proof audit.\n- Weak Expectation and Principal Value theories are discussed and distinguished\n  in S §4, but their full source definitions would need another careful pass.\n  Their relative strength is not guessed from the words \"principal value\".\n- The conjecture at the end of S §4 that DTU + Sym + L¹ entails either of those\n  theories remains a conjecture. Pasadena's evaluation does not prove it.\n- U's Coherent Extensibility concerns a class of alternative orderings and\n  extension relations, beyond this topic's single primitive preorder. Its\n  role in the consistency discussion is noted but it is not forced into an\n  axiom about an individual random variable.\n- No Rich Outcomes ⇒ Archimedean Outcomes implication has been inferred from\n  the papers' convenient identification of outcomes with ℝ.\n- No blanket EU ⇒ affine symmetry, EU ⇒ full Stochastic Equivalence, or\n  Countable Sure-Thing equivalence is asserted. EU only governs integrable\n  variables; full symmetry and law invariance cover more variables.\n- The original failure nodes have now been migrated to implications to\n  False. Deriving False triggers a red graph warning and suppresses arrows.\n  The Horn rules do not use explosion; model violations can also follow\n  from these incompatibility constraints.\n\n## Reproduce\n\n### Candidate additions from the user\n\nTwo further **human-proposed conjectures** were recorded on 8 September 2026:\n\n- Countable Sure-Thing + Archimedean Outcomes ⇒ Archimedean Gambles.\n- Countable Sure-Thing + Simple EU ⇒ Expected Utility.\n\nThese supplement the 36 proved records above. They appear in Conjectures and\nas dashed arrows when the graph's Conjectures option is enabled; they do not\nparticipate in proved deductions. Each record identifies the user's proposal\nas its source and lists the remaining verification work. The Russell–Isaacs\nreference attached to the first is related literature, not a verified\nattribution of the exact two-premise claim.\n\nThe map is deliberately selective and can grow through later additions.\nAn unrecorded implication need not be an open problem in the literature.\n\n### Commands\n\nFrom `logical-maps/`, with its Python requirements installed:\n\n```sh\npython3 scripts/pmap.py validate unbounded-utility\npython3 topics/unbounded-utility/checks/countermodels.py\npython3 scripts/pmap.py build unbounded-utility\n```\n\nOpen `build/unbounded-utility/index.html`. Source YAML, the framework, and\nwrite-ups remain under `topics/unbounded-utility/`; the original example topic\nand shared renderer are unchanged.\n\n\n### Copula sum invariance additions — 9 September 2026\n\nZach Goodsell proposed the common-copula generalization in `TODO.md` and requested\nuniversal and existential versions. GPT-6 (Codex) recorded the precise definitions\nand supplied the connecting proofs, attributed to Misc. rather than to the\nunpublished paper. The general copula terminology follows Benth, Di Nunno and\nSchroers, [Definition 2.1 and Theorem 2.3](https://arxiv.org/html/2012.11530v2);\nthat reference is not the source of the new preference principles.\n\nFor a fixed copula C, SC(C) compares actual X,Y before and after adding the same\nactual Z whenever both pair laws (X,Z) and (Y,Z) admit C. The universal principle\nis ∀C SC(C); the existential principle is ∃C SC(C), with C chosen once for all\ntriples and marginal laws. Atomic marginals are included, with no uniqueness of\na pair's compatible copula assumed. Numerical operations retain the existing\nfinite-chart scope.\n\nRecorded connections: Full Sum ⇒ Universal Copula Sum; Universal Copula Sum ⇒\nExistential Copula Sum and each of the three existing dependence-restricted sum\nprinciples; Existential Copula Sum ⇒ Shift Invariance. Each existing restricted\nsum principle, together with Stochastic Equivalence, also implies Existential\nCopula Sum. The latter proofs explicitly transfer comparisons from quantile\nrealizations. In particular, product copula compatibility is only pairwise\nindependence from Z, whereas the existing Independent Sum principle requires\nindependence of Z from the pair (X,Y).\n\nThe existing Rich Outcomes + Stochastic Dominance + Antitonic Sum incompatibility\nalready rules out Universal Copula Sum under those background assumptions; no\nduplicate incompatibility record is needed. No model flags or Lean definitions\nwere added, and the separate background/Lean tasks remain pending.\n\n\n### Further DU and DTU connections and resistant questions — 9 September 2026\n\nThe public result and model records include the new implication proofs,\nsource-model specializations and an infinitesimal folded-tail countermodel. In particular, under DTU, L¹ Continuity implies\nRelative Expectation, which is equivalent to CDF-Area Extension; even Folded\nExpectation does not imply L¹ Continuity. Three precise outstanding questions\nare recorded as conjectures and do not contribute proved deductions. Each\naddition describes reused source material and newly supplied work.\n\n\n### DU and DTU terminology correction — 9 September 2026\n\nDU does not assume Totality over arbitrary gambles; DTU is DU plus Totality.\nThe DU/DTU distinction follows *Decision theory unbound*, §3.3, pp. 681–682.\nThe preset initially used the equivalent formulation with Simple EU; the\nsubsequent finite-lottery proof below permits treating Simple EU as derived.\nDTU has a separate optional preset. Both presets explicitly include Archimedean\nOutcomes. Named conjunctions abbreviate these packages while retaining each\nrecord's full, original premises.\n\nThe two research reports previously called the six-axiom package DU. Their\npackage-level summaries, complete-model labels and totality-dependent conjectures\nnow say DTU. Exact result premises and model flags are unchanged. Incomplete\nDU models are eligible under the default background. Claims whose listed\npremises do not need Totality remain valid DU consequences.\n\n### Simple EU as a derived DU consequence — 9 September 2026\n\nThe new record `rich-archimedean-dominance-independence-imply-simple-eu`\nproves Simple EU from Rich Outcomes, Archimedean Outcomes, Stochastic\nDominance and Mixture Independence. It uses common binary endpoints for\nfinite lotteries, checks all three normalized-chart calibrations and\nmeasurability, and never assumes Totality or Restricted Totality.\n\nThe DU preset therefore assumes Rich Outcomes, Archimedean Outcomes,\nStochastic Equivalence, Stochastic Dominance and Mixture Independence;\nSimple EU is displayed as a consequence. DTU adds Totality. Together with\nthe existing Simple EU ⇒ Archimedean Outcomes record, the new proof makes\nthis equivalent to the previous Simple-EU-based package.\n\nThe literal two-premise implication Rich Outcomes + Archimedean Outcomes\n⇒ Simple EU is false. The `finite-two-sample-minimum` model supplies an\nexplicit witness, even with Totality and Stochastic Equivalence. Both new\nrecords identify the connecting work as GPT-6 (Codex), 9 September 2026;\nthe source finite-lottery argument remains credited to Goodsell. Existing\nsource-attributed theorem premises and proofs are unchanged.\n\n### Package picture: further model failures — 15 September 2026\n\nZachary Goodsell asked for a complete picture of what is consistent with\nDU + Sym, DTU, DTU + Sym and DU + Sym + Symmetric Neutrality. Claude\n(Fable 5.1) computed the picture from the recorded evidence and supplied\nexplicit witnesses for the cheap gaps; no principle definitions, theorem\npremises or existing proofs were changed.\n\nThe least DU model (`finite-support-compensated-dominance`) now records\nseven further verified failures: the three named prospect evaluations and\nuniqueness of negative self-similarity (the prospects are incomparable with\ntheir prescribed values), Comonotonic Sum Invariance, Independent Sum\nPreservation and Existential Copula Sum Invariance (one simple equal-mean\npair whose sums with a uniform summand acquire a sloped survival\ndifference, for every copula). With these, every principle is entailed,\nexcluded or separated in both directions under DU + Sym.\n\nThe exact eventual-dominance model (`eventual-clipped-expectation`) now\nrecords failure of Shift Invariance and Positive Affine Invariance: a\nsymmetric Laplace gamble X is indifferent to sure 0, yet X + b is strictly\nworse than sure b for every b > 0.\n\nRemaining gaps in the requested packages: whether Comonotonic Sum\nInvariance is consistent with DTU (the conjectured total comonotonic\nextension stays conjectured) or with DTU + Sym and DU + Sym + Neutrality;\nwhether Existential Copula Sum Invariance is consistent with the two\nsymmetric packages; whether DTU + Sym implies L¹ Continuity or Expected\nUtility; separating models for DU + Sym + Neutrality; whether Independent\nSum Cancellation is consistent with DU + Sym + Neutrality; and a DTU model\nviolating Shift Invariance (a cone-extension construction orienting a\ntransfer pair against its own shift is sketched privately and not yet\nrecorded).\n"
+ "extraction_md": "# Source extraction: updated 23 September 2026\n\n## Cancellation and Countable Sure-Thing questions (13 September)\n\nThe original `conjectured-dtu-cancellation-implies-preservation` statement\nis now proved, with its conjecture history retained. Goodsell supplied\nthe strict-comparison argument; GPT-6 (Codex) supplied the geometric-noise\nand finite-mixture argument preserving ties. No continuity premise is\nneeded. The separated sum principles retain their manuscript attribution;\nthe connecting proof is recorded under Misc.\n\nThe two Countable Sure-Thing proposals are refuted on the standing full\nmeasurable domain by `lexicographic-nonatomic-mass`. On outcomes [0,1],\nit orders by mean and then nonatomic mass. Countable additivity proves\nCountable Sure-Thing, while a uniform gamble supplies failures of both\nExpected Utility and Archimedean Gambles. The two questions retain their\noriginal statements, authorship and conjectured statuses; their verdicts\nare computed from the separate proved model. Under DU or DTU their\npremises instead conflict with the background.\n\nThe Russell–Isaacs source check distinguishes their countably supported\nlotteries from the larger domain here. The new coordinate vanishes on\nevery countably supported law. The countermodel and source comparison\nare credited to GPT-6 (Codex), following Goodsell's proof request.\nWritten proofs and exact diagnostic checks are supplied; no independent\nchecker or new Lean-verified proof is claimed.\n\nThe subsequent audit of `lexicographic-nonatomic-mass` classifies all 39\nprinciples: 23 satisfied and 16 violated. Affine invariance, shift transfer,\nfinite coupled differences and uniqueness of negative self-similarity\nfollow from its two coordinates. One fixed choice of scaled uniforms and\na constant refutes sum invariance for every copula. The write-up identifies\nthe bounded-chart cases with trivial or empty scope, including the current\nall-positive-shifts continuity antecedent. No principle definition or\nexisting theorem premise was changed. GPT-6 (Codex) supplied these further\nproofs in response to Goodsell's request on 13 September 2026.\n\n## Addition: unpublished background-risk manuscript (9 September)\n\nThe new supplied source is Goodsell, *Unbounded Utility and Background Risk*,\n5 June 2026. The draft itself is not included in the public downloads.\nIt is **unpublished, marked “do not cite”, and erroneous**. Its own provenance\nname is **Unbounded Utility and Background Risk (unpublished)**.\n\nThe [detailed inventory and audit](writeups/symmetric-dtu-refutes-independent-sum-candidate.md)\nrecords all extracted concepts and separates surviving arguments from the\nwithdrawn symmetry/total-extension claims. New entries add Full, Independent,\nComonotonic, and Antitonic Sum Invariance, separate independent-sum forward\npreservation and cancellation, and CDF-Area Extension. The sum\nincompatibilities are expressed as implications to False. Existing reflection and mixture nodes receive terminology\naliases rather than duplicates.\n\nThe [CDF-area dominance](writeups/cdf-area-preorder.md) is an explicit proved\nincomplete model; the [CDF-area conclosure: total extension](writeups/conjectured-total-independent-sum-extension.md)\nnow has a proved existence construction, including Independent Sum\nConsistency. Goodsell’s conclosure and total-extension construction\npreserves the original strict comparisons and supplies totality. The model’s\ndirect source is his unpublished manuscript; GPT-6 is credited for the\ncone-language exposition and additional proof details, not for originating\nthe construction. Neither reflection requirement is assumed or recorded as\nviolated. The user's recalled stable-law obstruction remains a conjectured\nimplication pending an exact witness.\n\nAfter the falsity migration, this addition contributes **seven principles,\n16 relations (15 proved, one conjectured), and two proved models**.\nThe full topic now has **36 principles, 55 relations, and six models**.\nFive former failure nodes were removed: their claims are constraints\nconcluding False, with the existing result IDs, sources, and proof text\npreserved. Their old descriptions are archived in `writeups/falsity-migration.md`. New concrete checks\nare in `checks/background_risk.py`. No Lean formalization was added.\n\nA subsequent premise audit records **Rich Outcomes + Simple EU + Stochastic\nDominance + Archimedean Gambles ⇒ False** using the same Goodsell\nSt Petersburg argument. This strengthens the available connection beyond\nthe original full-DTU package; its proof and attribution are in\n`results/rich-simple-dominance-refutes-archimedean-gambles.yaml`.\n\nThe counts and descriptions below document the original two-paper extraction\nof 8 September; they are not current totals.\n\n## Original sources\n\n| Key | Supplied file | Published reference |\n| --- | --- | --- |\n| U | `sources/Nous - 2023 - Goodsell - Decision theory unbound (1).pdf` | Goodsell, *Decision theory unbound*, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473; online 2023 |\n| S | `sources/Goodsell - 2026 - Symmetries of value.pdf` | Goodsell, *Symmetries of value*, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549 |\n\nPage references in the YAML are **printed journal pages**. For U, PDF page 1\nis printed p. 669; for S, PDF page 1 is printed p. 16. Local PDFs were read\ndirectly; no other papers were used as substitute evidence.\n\n## Main extracted relations\n\nAll rows are relative to the framework in `background.md`; DTU and Sym are\nexpanded there and in each YAML record.\n\n| Relation | Source |\n| --- | --- |\n| Simple EU ⇒ Archimedean Outcomes, Restricted Totality, Restricted Stochastic Equivalence | S p. 22 n. 3; U §§2.3, 3.2 |\n| Stochastic Dominance ⇒ Stochastic Equivalence; with Archimedean Outcomes ⇒ Statewise Dominance | U pp. 678–679 |\n| Rich + Archimedean Outcomes + Stochastic Equivalence + Statewise Dominance ⇒ Stochastic Dominance | U p. 678 n. 19; real quantile translation |\n| Stochastic Equivalence + Mixture Independence ⇒ Sure-Thing | U p. 679 and p. 682 n. 28 |\n| Original DTU axiom package ⇒ Simple EU and Mixture Independence | U pp. 679–681 |\n| Rich Outcomes + Simple EU + Sure-Thing ⇒ failure of Countable Sure-Thing | U §2.3, pp. 675–676 |\n| DTU ⇒ failure of Archimedean Gambles | S p. 22 |\n| Under Rich Outcomes: shift + scale ⇔ positive affine invariance | U §4.2; S §5 |\n| Under Rich Outcomes: negative affine anti-invariance ⇔ positive affine invariance + reflection anti-invariance | S p. 24 |\n| DTU + L¹ Continuity ⇒ Expected Utility | S p. 23 |\n| DTU + Sym ⇒ shift transfer and Simple Relative Expectation | S Theorems 3–4 |\n| Under DTU + Sym: Relative Expectation ⇔ L¹ Continuity | S Corollary 5 |\n| DTU + Sym + L¹ Continuity ⇒ Folded Expectation | S Theorem 6 |\n| DTU + Sym ⇒ alternating St Petersburg ~ −1/2 and uniqueness of negative self-similarity | S Theorems 9–10 |\n| DTU + Sym + L¹ Continuity ⇒ Arroyo ~ ln 2 and Pasadena ~ ln 2 | S Theorems 8, 11 |\n| DTU + Sym + L¹ Continuity is consistent | S Theorem 2, with construction in §5 |\n| DTU does not imply Expected Utility, and is consistent with it | U Theorems 1–3, Appendix B |\n| DTU + EU + shift + reflection does not imply scale invariance | U Theorems 7, 8, 10 |\n\nThese are implications with **joint premises**, not separate arrows from each\npremise. Straightforward restrictions (for example EU ⇒ Simple EU) and the\nreflection/symmetric-neutrality observation are also recorded.\n\n## Models\n\n1. **Clipped expectation: eventual dominance** (U Theorem 2): incomplete, satisfies\n   finite EU and dominance; violates EU. Its lack of Totality has an explicit\n   alternating-St-Petersburg witness. The checks also exhibit failure of L¹\n   Continuity.\n2. **Clipped expectation: exact ultrafilter dominance** (U Theorem 1): total, satisfies DTU, violates\n   EU. Source Theorem 10 supplies failure of scale invariance.\n3. **Clipped expectation: continuous ultrafilter dominance** (U Theorem 3): satisfies DTU and EU,\n   shift and reflection. Source Theorem 10 supplies failure of scale invariance.\n4. **Signed-measure cone: affine-symmetric extension** (S Theorem 2): a source-attributed\n   nonconstructive existence model for DTU + Sym + L¹ Continuity. Its\n   Countable Sure-Thing and Archimedean Gambles failures follow from the same\n   St Petersburg arguments as for other DTU models.\n\nEach satisfies/violates entry is either explained in its write-up, inherited\nfrom a recorded implication, or explicitly attributed to a source theorem.\nSource-attributed is weaker evidence than an independent proof audit. The direct\nsource is identified by `certificate.source_id`; `produced_by`, `recorded_by`,\nand the empty checker list describe authorship and the separate transcription.\n\nThe later DU, shift, and continuity investigation\nrecords the precise canonical role of the standalone\n[CDF-area dominance](writeups/cdf-area-preorder.md) model and adds\n[Stochastic dominance: finite-support compensation](writeups/finite-support-compensated-dominance.md).\nThe latter satisfies DU and Shift Invariance but refutes Shift Transfer;\ncontinuity under vanishing shifts suffices to force CDF-area comparisons.\nThe [finite-shift total extension](writeups/finite-shift-total-extension.md)\nadded on 13 September 2026 supplies a model of DTU and Shift Invariance\nwith an explicit strict violation of Shift Transfer. Goodsell proposed\nthe extension; GPT-6 supplied the separating construction and proof details.\n\n## Provenance and display categories\n\nDirect source filters distinguish **Decision Theory Unbound** (11 records),\n**Symmetries of Value** (19 records), and **Misc.** (12 records: ten connecting\nproofs and two user-suggested conjectures). Every arrow and model retains its\nauthor, date, and precise source references.\nThe ten AI arrows are restrictions/compositions added to connect definitions:\n`totality-restricts`, `stochastic-equivalence-restricts`,\n`expected-utility-implies-simple`, `archimedean-gambles-restricts`,\n`positive-affine-implies-shift`, `positive-affine-implies-scale`,\n`shift-scale-imply-positive-affine`, `relative-implies-simple-relative`,\n`relative-implies-eu`, and `folded-implies-eu`. Their sources explicitly\nidentify the AI proof as well as the paper definitions it uses.\n\nThe graph filter groups all 31 principles into Basic decision theory (15),\nInvariance principles (7), Extensions of EUT (5), and Prospect evaluations (4).\nEach group has independent select-all/unselect-all controls. Category and\ncheckbox changes only affect display, not the underlying implication rules.\n\n## Transcription decisions and issues needing care\n\n- S p. 24 prints a same-direction sign in the displayed **Reflection\n  Anti-Invariance** definition. Read it as X≽Y iff −X≼−Y. This is forced by\n  the negative-affine definition directly above, the introduction, and the\n  subsequent proofs. It was checked visually in the PDF.\n- The intended reflection axiom uses **one fixed utility origin**, as the\n  explanatory prose on p. 24 says. Requiring reflection around every possible\n  origin would also imply shifts. The literal phrase \"for any utility\n  representation\" in that display should not silently strengthen this node.\n- U p. 673 n. 9 prints an impossible interval in the middle branch of the\n  utility definition. The normalized branch is 0≤r≤1, as required for the\n  described probabilities. The negative and greater-than-one branches are\n  kept separate.\n- U pp. 683–684 defines **clipping**: mass beyond ±t moves to the endpoints.\n  Its shorthand integral with bounds ±t must not be implemented as deleting\n  the tails. We use E[max(−t,min(X,t))]. The prose and figure were checked\n  visually. The cone discussion in S §5 inherits a related notational issue.\n- S p. 28's Pasadena prose omits `/n`; Table 2 and Theorem 11 include it.\n  This extraction uses −(−2)^n/n, probability 2^(−n).\n- S Theorem 9 repeats one strict-comparison sign in the concluding sentence;\n  the second case is the opposite strict comparison.\n- S Theorem 10's expanded formula appears to print `−a^n` where the\n  geometric recursion requires `(−a)^n`. The extracted principle records its\n  clear **uniqueness in value** conclusion. No questionable expansion is used\n  as a formula in the map.\n- S p. 27's informal comparison with a reflection needs attention to a\n  factor of two if it is used numerically. We do not import that sentence as\n  a separate theorem or algorithm.\n- U Theorem 10's displayed scale identity should be interpreted using\n  E[c_t(aX)] = a E[c_(t/a)(X)]. The printed oscillating-function witness also\n  has endpoint and normalization issues. Scale non-implication is recorded\n  as the **source theorem's claim**, not as a numerically reconstructed proof.\n\n## Deferred rather than silently asserted\n\n- S Theorem 1 states stronger non-implications even after adding L¹, Relative\n  Expectation, Weak Expectation, and Principal Value principles. The present\n  models record the weaker, clearly identified U witnesses; they are **not**\n  given these extra satisfies flags without a further proof audit.\n- Weak Expectation and Principal Value theories are discussed and distinguished\n  in S §4, but their full source definitions would need another careful pass.\n  Their relative strength is not guessed from the words \"principal value\".\n- The conjecture at the end of S §4 that DTU + Sym + L¹ entails either of those\n  theories remains a conjecture. Pasadena's evaluation does not prove it.\n- U's Coherent Extensibility concerns a class of alternative orderings and\n  extension relations, beyond this topic's single primitive preorder. Its\n  role in the consistency discussion is noted but it is not forced into an\n  axiom about an individual random variable.\n- No Rich Outcomes ⇒ Archimedean Outcomes implication has been inferred from\n  the papers' convenient identification of outcomes with ℝ.\n- No blanket EU ⇒ affine symmetry, EU ⇒ full Stochastic Equivalence, or\n  Countable Sure-Thing equivalence is asserted. EU only governs integrable\n  variables; full symmetry and law invariance cover more variables.\n- The original failure nodes have now been migrated to implications to\n  False. Deriving False triggers a red graph warning and suppresses arrows.\n  The Horn rules do not use explosion; model violations can also follow\n  from these incompatibility constraints.\n\n## Reproduce\n\n### Candidate additions from the user\n\nTwo further **human-proposed conjectures** were recorded on 8 September 2026:\n\n- Countable Sure-Thing + Archimedean Outcomes ⇒ Archimedean Gambles.\n- Countable Sure-Thing + Simple EU ⇒ Expected Utility.\n\nThese supplement the 36 proved records above. They appear in Conjectures and\nas dashed arrows when the graph's Conjectures option is enabled; they do not\nparticipate in proved deductions. Each record identifies the user's proposal\nas its source and lists the remaining verification work. The Russell–Isaacs\nreference attached to the first is related literature, not a verified\nattribution of the exact two-premise claim.\n\nThe map is deliberately selective and can grow through later additions.\nAn unrecorded implication need not be an open problem in the literature.\n\n### Commands\n\nFrom `logical-maps/`, with its Python requirements installed:\n\n```sh\npython3 scripts/pmap.py validate unbounded-utility\npython3 topics/unbounded-utility/checks/countermodels.py\npython3 scripts/pmap.py build unbounded-utility\n```\n\nOpen `build/unbounded-utility/index.html`. Source YAML, the framework, and\nwrite-ups remain under `topics/unbounded-utility/`; the original example topic\nand shared renderer are unchanged.\n\n\n### Copula sum invariance additions — 9 September 2026\n\nZach Goodsell proposed the common-copula generalization in `TODO.md` and requested\nuniversal and existential versions. GPT-6 (Codex) recorded the precise definitions\nand supplied the connecting proofs, attributed to Misc. rather than to the\nunpublished paper. The general copula terminology follows Benth, Di Nunno and\nSchroers, [Definition 2.1 and Theorem 2.3](https://arxiv.org/html/2012.11530v2);\nthat reference is not the source of the new preference principles.\n\nFor a fixed copula C, SC(C) compares actual X,Y before and after adding the same\nactual Z whenever both pair laws (X,Z) and (Y,Z) admit C. The universal principle\nis ∀C SC(C); the existential principle is ∃C SC(C), with C chosen once for all\ntriples and marginal laws. Atomic marginals are included, with no uniqueness of\na pair's compatible copula assumed. Numerical operations retain the existing\nfinite-chart scope.\n\nRecorded connections: Full Sum ⇒ Universal Copula Sum; Universal Copula Sum ⇒\nExistential Copula Sum and each of the three existing dependence-restricted sum\nprinciples; Existential Copula Sum ⇒ Shift Invariance. Each existing restricted\nsum principle, together with Stochastic Equivalence, also implies Existential\nCopula Sum. The latter proofs explicitly transfer comparisons from quantile\nrealizations. In particular, product copula compatibility is only pairwise\nindependence from Z, whereas the existing Independent Sum principle requires\nindependence of Z from the pair (X,Y).\n\nThe existing Rich Outcomes + Stochastic Dominance + Antitonic Sum incompatibility\nalready rules out Universal Copula Sum under those background assumptions; no\nduplicate incompatibility record is needed. No model flags or Lean definitions\nwere added, and the separate background/Lean tasks remain pending.\n\n\n### Further DU and DTU connections and resistant questions — 9 September 2026\n\nThe public result and model records include the new implication proofs,\nsource-model specializations and an infinitesimal folded-tail countermodel. In particular, under DTU, L¹ Continuity implies\nRelative Expectation, which is equivalent to CDF-Area Extension; even Folded\nExpectation does not imply L¹ Continuity. Three precise outstanding questions\nare recorded as conjectures and do not contribute proved deductions. Each\naddition describes reused source material and newly supplied work.\n\n\n### DU and DTU terminology correction — 9 September 2026\n\nDU does not assume Totality over arbitrary gambles; DTU is DU plus Totality.\nThe DU/DTU distinction follows *Decision theory unbound*, §3.3, pp. 681–682.\nThe preset initially used the equivalent formulation with Simple EU; the\nsubsequent finite-lottery proof below permits treating Simple EU as derived.\nDTU has a separate optional preset. Both presets explicitly include Archimedean\nOutcomes. Named conjunctions abbreviate these packages while retaining each\nrecord's full, original premises.\n\nThe two research reports previously called the six-axiom package DU. Their\npackage-level summaries, complete-model labels and totality-dependent conjectures\nnow say DTU. Exact result premises and model flags are unchanged. Incomplete\nDU models are eligible under the default background. Claims whose listed\npremises do not need Totality remain valid DU consequences.\n\n### Simple EU as a derived DU consequence — 9 September 2026\n\nThe new record `rich-archimedean-dominance-independence-imply-simple-eu`\nproves Simple EU from Rich Outcomes, Archimedean Outcomes, Stochastic\nDominance and Mixture Independence. It uses common binary endpoints for\nfinite lotteries, checks all three normalized-chart calibrations and\nmeasurability, and never assumes Totality or Restricted Totality.\n\nThe DU preset therefore assumes Rich Outcomes, Archimedean Outcomes,\nStochastic Equivalence, Stochastic Dominance and Mixture Independence;\nSimple EU is displayed as a consequence. DTU adds Totality. Together with\nthe existing Simple EU ⇒ Archimedean Outcomes record, the new proof makes\nthis equivalent to the previous Simple-EU-based package.\n\nThe literal two-premise implication Rich Outcomes + Archimedean Outcomes\n⇒ Simple EU is false. The `finite-two-sample-minimum` model supplies an\nexplicit witness, even with Totality and Stochastic Equivalence. Both new\nrecords identify the connecting work as GPT-6 (Codex), 9 September 2026;\nthe source finite-lottery argument remains credited to Goodsell. Existing\nsource-attributed theorem premises and proofs are unchanged.\n\n### Package picture: further model failures — 15 September 2026\n\nZachary Goodsell asked for a complete picture of what is consistent with\nDU + Sym, DTU, DTU + Sym and DU + Sym + Symmetric Neutrality. Claude\n(Fable 5.1) computed the picture from the recorded evidence and supplied\nexplicit witnesses for the cheap gaps; no principle definitions, theorem\npremises or existing proofs were changed.\n\nThe least DU model (`finite-support-compensated-dominance`) now records\nseven further verified failures: the three named prospect evaluations and\nuniqueness of negative self-similarity (the prospects are incomparable with\ntheir prescribed values), Comonotonic Sum Invariance, Independent Sum\nPreservation and Existential Copula Sum Invariance (one simple equal-mean\npair whose sums with a uniform summand acquire a sloped survival\ndifference, for every copula). With these, every principle is entailed,\nexcluded or separated in both directions under DU + Sym.\n\nThe exact eventual-dominance model (`eventual-clipped-expectation`) now\nrecords failure of Shift Invariance and Positive Affine Invariance: a\nsymmetric Laplace gamble X is indifferent to sure 0, yet X + b is strictly\nworse than sure b for every b > 0.\n\nRemaining gaps in the requested packages: whether Comonotonic Sum\nInvariance is consistent with DTU (the conjectured total comonotonic\nextension stays conjectured) or with DTU + Sym and DU + Sym + Neutrality;\nwhether Existential Copula Sum Invariance is consistent with the two\nsymmetric packages; whether DTU + Sym implies L¹ Continuity or Expected\nUtility; separating models for DU + Sym + Neutrality; whether Independent\nSum Cancellation is consistent with DU + Sym + Neutrality; and a DTU model\nviolating Shift Invariance (a cone-extension construction orienting a\ntransfer pair against its own shift is sketched privately and not yet\nrecorded).\n\n### Copula principles: comonotonic failures, a killing lemma, silver tier — 23 September 2026\n\nZachary Goodsell asked for work on the copula sum principles, starting from\nthe law-level reading of them: realize X† = Q_X(U) on the standing uniform\nand Z* = Q_Z(W) with (U, W) distributed as the copula C; then SC(C) says,\nunder Stochastic Equivalence, that X ≽ Y iff X† + Z* ≽ Y† + Z* for all\nlaws. Claude (Fable 5.1) verified this reading (Z* is canonical only in law,\nwhich is why the recorded bridges from the comonotonic, antitonic and\nindependent principles need Stochastic Equivalence; for the comonotonic\ncopula W = U) and recorded it in the notes of the three copula principles,\ntogether with the quantile-difference reduction of Comonotonic Sum\nInvariance. The Fubini remark that E[X† − Y†] with the separate Tonelli\nidentities is the CDF-area preorder is the recorded `cdf-area-preorder`\nmodel, so DU is consistent with comonotonic invariance; no new record.\n\nSix models now record failure of Comonotonic Sum Invariance: the exact,\ncontinuous, geometric, asymmetric and polynomial clipped-expectation\norderings and the eventual-dominance model (where the flag was previously\nderived from the shift failure). One witness family serves all windows:\nZ = max(C, 0) for a standard Cauchy C, X = 0, and a window-adapted neutral\nY = C₊ + aC₋ − v; the clipped gap is 2∫_{F/2}^{F} P(C > x) dx, positive for\nevery cutoff F and tending to (2 ln 2)/π. The mechanism is the identity\n2E[min(V,F)] − E[min(2V,F)] = 2∫_{F/2}^{F} P(V > x) dx.\n`checks/comonotonic_witnesses.py` verifies the closed forms, the identity\non an exact finite law, the neutral constants and the limit. Under DU and\nDTU this settles that Expected Utility, Totality, Shift Invariance,\nReflection Anti-Invariance, L¹ Continuity, CDF-Area Extension, Folded\nExpectation, Transfer of a Shift and Arroyo = ln 2 do not imply Comonotonic\nSum Invariance, and that DTU alone does not.\n\nFor the conjectured total comonotonic extension, the write-up gains a\nnecessary condition: a killing lemma (from Stochastic Equivalence,\ndominance, mixture independence and the preservation half of comonotonic\ninvariance, a pair whose survival difference and comonotonic shears combine\ninto a nonpositive nonzero profile cannot satisfy X ≽ Y), an explicit killed\npair with both areas infinite, three certificates that a pair is not killed,\nworked block regions, an accounting heuristic suggesting that no pair is\nkilled in both orientations, and candidate constructions. Zachary Goodsell\nraised the conjecture's tier to silver. The conjecture's status is unchanged.\nLean statements were regenerated and audited; every `lean: stated` claim\nstill elaborates.\n\nOpen after this batch: DTU + Comonotonic Sum Invariance itself (decide\nkillability of regions with no lowest block; formalize the surplus\nfunctional; attempt the Zorn construction with the lemma as pointedness\ntest); whether the region of the alternating St Petersburg gamble against\n−1/2 is killed under the comonotonic copula, which bears on the top DU\nlynchpin about Existential Copula Sum Invariance; and Independent Sum\nCancellation for the exact CDF-area preorder.\n"
 }

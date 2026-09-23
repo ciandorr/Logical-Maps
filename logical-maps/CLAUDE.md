@@ -24,6 +24,13 @@ crediting contributors. Use `[Logical Maps] <topic title>` for topic-specific
 email subjects and `[Logical Maps]` for general project suggestions; prefill
 the topic subject in each map's email link.
 
+## Draft topics
+
+A topic with `draft: true` in its `topic.yaml` (intuitionisticism) is built and
+validated but nothing derived is computed for it: no rankings, settled share or
+recorded-conjecture list, and `lynchpins` skips it. Leave it out of feature work
+and reports unless it is asked for by name.
+
 ## Commands
 
 - `python3 scripts/pmap.py validate` — must pass before any commit.
@@ -122,13 +129,14 @@ When you (an AI) add or edit a result or model:
   changed statement, keep the original question and add a separate proved record.
   A refuted proposal stays `status: conjectured`; record its proved refuting
   evidence separately. Do not add a `refuted` proof status.
-- Conjecture verdicts are computed from the selected background and proved
-  sources, not persisted as global resolutions. Source filters restrict answer
-  evidence, not the question inventory. For non-False conclusions, incompatible
-  premises are reported separately; an inconsistent background suppresses verdicts.
-  Refuting an implication requires an actual countermodel; matching a model's required flags
-  proves existence, not necessarily its proposed construction. The viewer hides
-  currently proved/refuted questions unless **Show resolved** is checked.
+- Conjecture verdicts are computed at build time from proved evidence under the
+  topic background and each preset, never persisted as record statuses. The
+  Conjectures tab lists each recorded conjecture as the question it asks, in the
+  lynchpin format: at its rank with scores while open, with its status and no
+  scores once settled, marked when it has more than two premises. Refuting an
+  implication requires an actual countermodel; a model witnesses a conjecture's
+  required flags, not its proposed construction. The viewer hides settled
+  questions unless **Show resolved** is checked.
 - Do not edit an existing paper/submission proof or a legacy human-authored
   proof to change its mathematical content — add a note or a new result instead.
 - When you add content to an existing record after its certificate date (a

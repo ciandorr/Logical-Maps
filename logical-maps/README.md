@@ -404,30 +404,24 @@ beneath it, and the row is listed at its rank even when it falls below the
 stored top. The star is bronze when the record has notes, and silver or gold
 when the record says `tier: silver` or `tier: gold`, a human ranking of the
 question by importance and difficulty. The ranking is computed at build time for the topic background and
-each preset, so an ad-hoc background shows none. **Recorded conjectures** lists
-the questions on record. **Show resolved** is off by default, hiding questions currently proved
-or refuted. Verdicts are computed
-from proved evidence under the selected background and sources; they are not
-stored record statuses. Source filters change which proofs and witnesses can
-answer a question, not which questions exist. **Open** means no resolution in
-all recorded proved evidence under that background. **Unresolved by selected
-evidence** distinguishes a missing selected proof or witness from a genuinely
-open question; its evidence disclosure shows the verdict and supporting records
-available with all evidence. A line above the sections gives the share of
+each preset, so an ad-hoc background shows none, and a topic marked `draft: true`
+in its `topic.yaml` gets none at all. **Recorded conjectures** lists
+the questions the recorded conjectures ask, in the same format: a question that
+is open sits at its rank with its scores, whether or not it made the ranking's
+stored top; a question already settled shows its status (proved, refuted,
+excluded, consistent or inconsistent) and no rank or scores; a question with
+more than two premises is listed the same way, marked as such. **Show resolved**
+is off by default, hiding the settled ones. A sparse map, too open to rank,
+still lists and scores its recorded conjectures. Verdicts come from proved
+evidence under the background and never from conjectures; a model witnesses a
+conjecture's flags, not its proposed construction. A line above the sections gives the share of
 implication questions with up to two premises settled: S ⊢ c for S at most two
 principle classes and c a class or False, counted only when no smaller premise
 set already proves or excludes c, and settled alike by a proof, an exclusion or
 a fitting model. It is computed at build time for the topic background and each
 preset; other backgrounds show no share, and hiding a source or enabling
-Lean-only does not change it. These comparisons
-use the same background and never use conjectures as proofs. For a non-False conclusion,
-incompatible premises are shown separately; an inconsistent background
-suppresses verdicts. An implication is refuted only by an actual countermodel.
-If omitted evidence shows the background is inconsistent, a warning prevents
-the remaining questions from being presented as open with all evidence.
-A matching model witnesses the background and the conjecture's required
-`satisfies`/`violates` flags; it need not verify the particular construction
-proposed in its description.
+Lean-only does not change it. An inconsistent background shows a warning in
+place of both sections.
 
 Optional `was_conjectured: true` on a result or model retains its question
 history, whether its status is `conjectured` or `proved`. When changing a

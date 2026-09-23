@@ -47,6 +47,42 @@ No $L^{1}$ Continuity or Relative Expectation flag is inferred from the name
 "continuous": the quotient construction and the topic's closure axiom are
 different mathematical claims.
 
+## Failure of Comonotonic Sum Invariance
+
+**Addition: Claude (Fable 5.1), 23 September 2026.** This is a property of
+the recorded model, not a claim made in the source paper.
+
+Realize a standard Cauchy variable as $C=Q_C(U)=\tan(\pi(U-\tfrac12))$ and
+put $X=0$, $Y=C$, $Z=C_+=\max(C,0)$; all are nondecreasing in $U$, so both
+pairs $(X,Z)$ and $(Y,Z)$ are comonotonic. Oddness of $c_t$ gives
+$v_C(t)=0=v_0(t)$ for every $t$, so $X\sim Y$.
+
+**Doubling-defect identity.** For any nonnegative random variable $V$ and
+any $F>0$,
+
+$$2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V>x)\,dx,$$
+
+since $\mathbb E[\min(V,F)]=\int_0^F P(V>x)\,dx$ and
+$\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V>x)\,dx$. For $V=C_+=\max(C,0)$ with
+$C$ standard Cauchy the right-hand side is
+$\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx$, which is positive for every $F$
+and increases to $\frac{2\ln2}{\pi}$ as $F\to\infty$.
+
+With $X+Z=C_+$ and $Y+Z=2C_++C_-$, $C_-=\min(C,0)$, symmetry gives
+$\mathbb E[\max(C_-,-t)]=-\mathbb E[\min(C_+,t)]$ and therefore
+
+$$v_{X+Z}(t)-v_{Y+Z}(t)=2\int_{t/2}^{t}P(C>x)\,dx
+ \longrightarrow\frac{2\ln2}{\pi}>0.$$
+
+Take $\varepsilon=(\ln2)/\pi$. The set $\{t:v_{Y+Z}(t)\ge v_{X+Z}(t)-\varepsilon\}$
+is bounded, hence not in the cobounded ultrafilter, while
+$v_{X+Z}\ge v_{Y+Z}$ everywhere. Thus $X+Z\succ Y+Z$ although $X\sim Y$:
+Comonotonic Sum Invariance fails. Shift Invariance holds in this model, so
+this is a genuinely new failure and not a consequence of the recorded
+implication from comonotonic invariance to shifts.
+`checks/comonotonic_witnesses.py` verifies the closed forms and the limit.
+
 ## Paper references
 
 - **Proof: [Decision theory unbound](https://doi.org/10.1111/nous.12473).** Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Appendix B, Lemma 6 and proof of Theorem 3, p. 691; Theorems 7, 8 and 10, pp. 693–695

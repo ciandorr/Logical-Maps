@@ -1082,7 +1082,7 @@ def affine_symmetric_extension : Prop :=
 /-- `asymmetric-continuous-ultrafilter`
 
 Clipped expectation: continuous ultrafilter dominance [−t, 2t]: a witness satisfying 12 principles
-and violating 6. -/
+and violating 7. -/
 def asymmetric_continuous_ultrafilter : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1102,7 +1102,8 @@ def asymmetric_continuous_ultrafilter : Prop :=
     ¬ UnboundedUtility.NegativeAffineAntiInvariance W.pref ∧
     ¬ UnboundedUtility.FoldedExpectation W.pref ∧
     ¬ UnboundedUtility.NegativeSelfSimilarity W.pref ∧
-    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref
+    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 /-- `cdf-area-preorder`
 
@@ -1190,7 +1191,7 @@ def conjectured_total_independent_sum_extension : Prop :=
 /-- `eventual-clipped-expectation`
 
 Clipped expectation: eventual dominance: a witness satisfying 10 principles
-and violating 8. -/
+and violating 9. -/
 def eventual_clipped_expectation : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1210,7 +1211,8 @@ def eventual_clipped_expectation : Prop :=
     ¬ UnboundedUtility.ArchimedeanGambles W.pref ∧
     ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
     ¬ UnboundedUtility.ShiftInvariance W.pref ∧
-    ¬ UnboundedUtility.PositiveAffineInvariance W.pref
+    ¬ UnboundedUtility.PositiveAffineInvariance W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 /-- `finite-shift-total-extension`
 
@@ -1288,7 +1290,7 @@ def finite_two_sample_minimum : Prop :=
 /-- `geometric-continuous-ultrafilter`
 
 Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]: a witness satisfying 11 principles
-and violating 3. -/
+and violating 4. -/
 def geometric_continuous_ultrafilter : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1304,7 +1306,8 @@ def geometric_continuous_ultrafilter : Prop :=
     UnboundedUtility.ShiftInvariance W.pref ∧
     ¬ UnboundedUtility.ScaleInvariance W.pref ∧
     ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
-    ¬ UnboundedUtility.NegativeSelfSimilarity W.pref
+    ¬ UnboundedUtility.NegativeSelfSimilarity W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 /-- `lexicographic-folded-extension`
 
@@ -1377,7 +1380,7 @@ def lexicographic_nonatomic_mass : Prop :=
 /-- `polynomial-asymmetric-continuous-ultrafilter`
 
 Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4²ⁿ]: a witness satisfying 11 principles
-and violating 3. -/
+and violating 4. -/
 def polynomial_asymmetric_continuous_ultrafilter : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1393,12 +1396,13 @@ def polynomial_asymmetric_continuous_ultrafilter : Prop :=
     UnboundedUtility.ShiftTransfer W.pref ∧
     ¬ UnboundedUtility.PasadenaValue W.pref ∧
     ¬ UnboundedUtility.ArroyoValue W.pref ∧
-    ¬ UnboundedUtility.SymmetricNeutrality W.pref
+    ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 /-- `total-continuous-ultrafilter`
 
 Clipped expectation: continuous ultrafilter dominance: a witness satisfying 9 principles
-and violating 3. -/
+and violating 4. -/
 def total_continuous_ultrafilter : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1412,12 +1416,13 @@ def total_continuous_ultrafilter : Prop :=
     UnboundedUtility.ReflectionAntiInvariance W.pref ∧
     ¬ UnboundedUtility.ScaleInvariance W.pref ∧
     ¬ UnboundedUtility.CountableSureThing W.pref ∧
-    ¬ UnboundedUtility.ArchimedeanGambles W.pref
+    ¬ UnboundedUtility.ArchimedeanGambles W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 /-- `total-exact-ultrafilter`
 
 Clipped expectation: exact ultrafilter dominance: a witness satisfying 7 principles
-and violating 4. -/
+and violating 5. -/
 def total_exact_ultrafilter : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1430,6 +1435,7 @@ def total_exact_ultrafilter : Prop :=
     ¬ UnboundedUtility.ExpectedUtility W.pref ∧
     ¬ UnboundedUtility.ScaleInvariance W.pref ∧
     ¬ UnboundedUtility.CountableSureThing W.pref ∧
-    ¬ UnboundedUtility.ArchimedeanGambles W.pref
+    ¬ UnboundedUtility.ArchimedeanGambles W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 end UnboundedUtility.Statements

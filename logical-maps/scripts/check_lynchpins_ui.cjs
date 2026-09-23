@@ -166,7 +166,7 @@ try {
   assert.equal(auto().querySelectorAll('table.lynchpin').length,1);
   assert.deepEqual(keys(dom,'open-auto').slice(0,4),['q|r|false','q|s|false','q|q+r|false','q||r'],'by the larger side');
   assert.deepEqual([...auto().querySelectorAll('tbody tr td.rank')].map(td=>td.textContent).slice(0,3),['1','2','3'],'with its own rank');
-  assert.equal(auto().querySelector('th.num').textContent,'No Rank','a different ranking, labelled as one');
+  assert.equal(auto().querySelector('th.num').textContent,'“If no” rank','a different ranking, labelled as one');
   assert.equal(stmt(dom,'q|r|false','open-auto'),'R ⊬ False (⊥)','a proof of r ⊢ ⊥ would settle 17, a refutation none: expect the refutation');
   assert.deepEqual(scores(dom,'q|r|false','open-auto'),[0,17],'if yes: confirming r ⊬ ⊥; if no: the surprise');
   assert.equal(auto().querySelector('[data-lynchpin="q|r|false"]').dataset.claim,'not');

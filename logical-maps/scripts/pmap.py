@@ -951,7 +951,7 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     if not report["recorded"]:
         o.append("        none")
     if report["auto"]:
-        o += ["automatically generated conjectures: questions ranked by how many questions would be settled by a negative result (No Rank, if yes / if no):"]
+        o += ["automatically generated conjectures: questions ranked by how many questions would be settled by a negative result (“if no” rank, if yes / if no):"]
         o += [f"#{r['auto_rank']:<6d}{lynchpin_auto_scores(r)[0]:5d} /{lynchpin_auto_scores(r)[1]:4d}   {lynchpin_row_text(r, nm, auto=True)}" for r in report["auto"][:top]]
     return o
 
@@ -1024,7 +1024,7 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
             o += [""]
         if rep["auto"]:
             o += ["Automatically generated conjectures: questions ranked by how many questions would be settled by a negative result.", "",
-                  "| No Rank | Conjecture | if yes | if no |", "|---:|---|---:|---:|"]
+                  "| “If no” rank | Conjecture | if yes | if no |", "|---:|---|---:|---:|"]
             o += [f"| {r['auto_rank']} | {lynchpin_row_text(r, nm, auto=True)} | {lynchpin_auto_scores(r)[0]} | {lynchpin_auto_scores(r)[1]} |" for r in rep["auto"][:top]]
             o += [""]
     return o

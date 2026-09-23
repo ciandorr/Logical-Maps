@@ -694,12 +694,9 @@ class Lynchpins:
         """The question a record's premises and conclusion ask, or None if it is not one of ours."""
         rep_of = {x: cls[0] for cls in self.classes for x in cls}
         S = {rep_of[x] for x in ids if x in rep_of and rep_of[x] in self.proper}
-        if len(S) == 2:
-            a, b = S
-            if self.E.entails({a}, b)[0]:
-                S.discard(b)
-            elif self.E.entails({b}, a)[0]:
-                S.discard(a)
+        for x in sorted(S, key=self.proper.index):  # drop a premise the others already give
+            if x in S and len(S) > 1 and x in self.E.cl(S - {x})[0]:
+                S.discard(x)
         if len(S) > 2:
             return None
         c = FALSE if conclusion == FALSE else rep_of.get(conclusion)
@@ -745,11 +742,14 @@ class Lynchpins:
                                  "no": self.with_model(m["satisfies"], [*m["violates"], p])})
             rows.sort(key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), r["kind"], str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle")))))
             self._attach_conjectures(rows)
+            for i, r in enumerate(rows):
+                r["rank"] = i + 1
             self._ranked = rows
         p = self.progress()
+        rows = self._ranked[:top] + [r for r in self._ranked[top:] if r.get("conjectures")]
         return {"inconsistent_background": self.inconsistent, "classes": self.classes, "trivial": self.trivial,
                 "fitting_models": [m["id"] for m in self.witnesses], "progress": p,
-                "open": p["open"], "rows": self._ranked[:top]}
+                "open": p["open"], "rows": rows}
 
 LYNCHPIN_MAX_OPEN = 0.75  # bundles skip a map in which more of its implication questions than this are open
 PROGRESS_PREMISES = 2  # the settled share counts implication questions with up to this many premises
@@ -814,11 +814,11 @@ def _lynchpin_label(report: dict, names: dict):
 
 
 def lynchpin_row_text(r: dict, nm) -> str:
-    """S ⇒ c for a question, model: principle for a model check; a star marks a recorded conjecture with notes."""
+    """S ⊢ c for a question, model: principle for a model check; a star marks a recorded conjecture with notes."""
     if r["kind"] == "check":
         return f"{r['model']}: {nm(r['principle'])}"
     star = " ★" if lynchpin_notes(r) else ""
-    return f"{' ∧ '.join(nm(x) for x in r['premises']) or 'True (⊤)'} ⇒ {nm(r['conclusion'])}{star}"
+    return f"{' ∧ '.join(nm(x) for x in r['premises']) or 'True (⊤)'} ⊢ {nm(r['conclusion'])}{star}"
 
 
 def lynchpin_notes(r: dict) -> list:
@@ -842,10 +842,10 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     o.append(progress_text(report["progress"]))
     if _open_share(report["progress"]) > LYNCHPIN_MAX_OPEN:
         o.append(f"note: {_open_share(report['progress']):.0%} of the questions are open; these scores mostly reflect how little is recorded")
-    o += ["ranked by what either answer settles (if yes / if no; ★ a recorded conjecture with notes):"]
-    for r in report["rows"][:top]:
-        o.append(f"{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}")
-        o += [f"             {rid}: {note}" for rid, note in lynchpin_notes(r)]
+    o += ["rank, then what either answer settles (if yes / if no; ★ a recorded conjecture with notes, listed at its rank even below the top):"]
+    for r in [x for x in report["rows"] if x["rank"] <= top or x.get("conjectures")]:
+        o.append(f"#{r['rank']:<6d}{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}")
+        o += [f"                    {rid}: {note}" for rid, note in lynchpin_notes(r)]
     return o
 
 
@@ -856,9 +856,10 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
     if lynch["skipped"]:
         return [f"Not ranked: {lynch['skipped']}. Bundles rank a map once at most {LYNCHPIN_MAX_OPEN:.0%} of its "
                 f"questions are open; `python3 scripts/pmap.py lynchpins {topic_id}` ranks it regardless.", ""]
-    o = ["Answering a lynchpin conjecture settles many other open questions. A question is S ⇒ c for S "
-         "at most two principle classes (True, with none) and c a class or False, asked only where no "
-         "smaller premise set already proves or excludes c; S ⇒ False asks whether S is consistent. A "
+    o = ["Answering a lynchpin conjecture settles many other open questions. A question is S ⊢ c, whether S "
+         "entails c, for S at most two principle classes (True, with none) and c a class or False, asked only "
+         "where no smaller premise set already proves or excludes c; S ⊢ False asks whether S is inconsistent. "
+         "\"No\" denies the entailment, not the conditional. A "
          "question is settled alike by a proof, by an exclusion (S ∧ c ⇒ False) or by a recorded model "
          "that holds S and fails c. Each row scores an open question by the number of *other* open "
          "questions that stop being open once the answer joins the proved records. Both answers are "
@@ -877,14 +878,14 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
             continue
         o += [f"{len(rep['classes'])} classes and {len(rep['fitting_models'])} fitting models; "
               f"{rep['open']} open questions. {progress_text(rep['progress']).capitalize()}.", ""]
-        rows = rep["rows"][:top]
+        rows = [r for r in rep["rows"] if r["rank"] <= top or r.get("conjectures")]
         if rows:
-            o += ["| Question | if yes | if no |", "|---|---:|---:|"]
-            o += [f"| {lynchpin_row_text(r, nm)} | {r['yes']} | {r['no']} |" for r in rows]
+            o += ["| # | Question | if yes | if no |", "|---:|---|---:|---:|"]
+            o += [f"| {r['rank']} | {lynchpin_row_text(r, nm)} | {r['yes']} | {r['no']} |" for r in rows]
             o += [""]
             notes = [(r, rid, note) for r in rows for rid, note in lynchpin_notes(r)]
             if notes:
-                o += ["★ A recorded conjecture asks this question; its notes:", ""]
+                o += ["★ A recorded conjecture asks this question, listed at its rank even below the top; its notes:", ""]
                 o += [f"- {lynchpin_row_text(r, nm)} (`{rid}`): {note}" for r, rid, note in notes]
                 o += [""]
         else:
@@ -2275,7 +2276,7 @@ def bundle_derived_json(data: dict, an: dict, lynch=None) -> dict:
                 "status excludes means implication to a negation; independent means a countermodel to the positive implication; "
                 "inconsistent means the antecedent implies False. No explosion is used. "
                 "status open means not recorded, not false. lynchpins scores each open question by the other open questions "
-                "either answer would settle, under each background preset, and is skipped for a sparse map; a question is S ⇒ c "
+                "either answer would settle, under each background preset, and is skipped for a sparse map; a question is S ⊢ c "
                 "for S at most two principle classes and c a class or False, a model check is deciding a principle in a recorded model. "
                 "progress is the share of implication questions with up to two premises settled under each background: "
                 "S ⇒ c for S at most two principle classes and c a class or False, counted only when no smaller premise set "
@@ -2605,6 +2606,11 @@ def selftest():
     assert not lynchpin_notes(rows[("p",), "r"]), "no notes, no star"
     assert [c["id"] for c in rows[("r", "s"), "p"]["conjectures"]] == ["m3"] and [c["id"] for c in rows[("r", "s"), FALSE]["conjectures"]] == ["m3"]
     assert "conjectures" not in rows[("r",), "s"]
+    assert [r["rank"] for r in Ln.rank(top=100)["rows"]] == list(range(1, 29)), "every row carries its rank"
+    short = Ln.rank(top=2)["rows"]
+    assert [r["rank"] for r in short[:2]] == [1, 2] and all(r.get("conjectures") for r in short[2:]) and len(short) == 2 + 4, "rows a conjecture asks about are carried below the top, at their rank"
+    assert Ln.question_of(["p", "q", "s"], "r") == (("p", "s"), "r"), "q is dropped as p gives it; the pair remains"
+    assert Ln.question_of(["p", "r", "s"], "q") is None, "three premises that give nothing of each other ask no question here"
 
     def brute_progress(L):
         import itertools

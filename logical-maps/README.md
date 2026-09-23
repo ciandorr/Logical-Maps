@@ -387,12 +387,13 @@ definitions and individual remove buttons.
 
 The Conjectures tab shares the background controls. Its sections collapse:
 **Lynchpin conjectures** ranks open questions by how many other open questions
-each answer would settle. A question is S ⇒ c for S at most two principle
-classes (True, with none) and c a class or False, asked only where no smaller
-premise set already proves or excludes c, and settled alike by a proof, an
-exclusion or a fitting model; a model check (model: principle) is scored the
+each answer would settle. A question is S ⊢ c, whether S entails c, for S at
+most two principle classes (True, with none) and c a class or False, asked only
+where no smaller premise set already proves or excludes c, and settled alike by
+a proof, an exclusion or a fitting model; "no" denies the entailment; a model check (model: principle) is scored the
 same way. A row that a recorded conjecture asks about carries a star when the
-record has notes, and the notes open beneath it. The ranking is computed at build time for the topic background and
+record has notes, the notes open beneath it, and the row is listed at its rank
+even when it falls below the stored top. The ranking is computed at build time for the topic background and
 each preset, so an ad-hoc background shows none. **Recorded conjectures** lists
 the questions on record. **Show resolved** is off by default, hiding questions currently proved
 or refuted. Verdicts are computed
@@ -403,7 +404,7 @@ all recorded proved evidence under that background. **Unresolved by selected
 evidence** distinguishes a missing selected proof or witness from a genuinely
 open question; its evidence disclosure shows the verdict and supporting records
 available with all evidence. A line above the sections gives the share of
-implication questions with up to two premises settled: S ⇒ c for S at most two
+implication questions with up to two premises settled: S ⊢ c for S at most two
 principle classes and c a class or False, counted only when no smaller premise
 set already proves or excludes c, and settled alike by a proof, an exclusion or
 a fitting model. It is computed at build time for the topic background and each

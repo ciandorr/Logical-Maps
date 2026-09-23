@@ -24,7 +24,7 @@ function open(dom,value) {
 }
 function scores(dom,key) {
   const row=dom.window.document.querySelector(`#lynchpins [data-lynchpin="${key}"]`);
-  return row && [...row.querySelectorAll('td.num')].map(td=>Number(td.textContent));
+  return row && [...row.querySelectorAll('td.num:not(.rank)')].map(td=>Number(td.textContent));
 }
 function stmt(dom,key) { return dom.window.document.querySelector(`#lynchpins [data-lynchpin="${key}"] td.stmt`).textContent.trim(); }
 const cert=source_id=>({source_id,lean:'none',produced_by:'Fixture author',checked_by:[]});
@@ -44,6 +44,9 @@ const report=(principles,classes,trivial,progress,rows)=>({background:null,name:
 const conjecture=(id,premises,conclusion,notes)=>({id,premises,conclusion,status:'conjectured',certificate:cert('paper'),proof:'',notes,sources:['Fixture source'],source_names:['Fixture source']});
 const rowsNone=[q(['r'],'false',17,0),q(['s'],'false',14,0),q(['q','r'],'false',13,1),q([],'r',11,0),q(['q','s'],'false',10,1),q(['r','s'],'q',0,10),q([],'p',10,0),{...q(['q'],'r',9,1),conjectures:[{id:'qr',kind:'result',notes:'Try a two-point frame; see the *Notes* field.'}]},q(['p','r'],'false',8,2),q(['r','s'],'false',8,2),q(['p','s'],'r',0,8),q(['p'],'r',7,2),check('m1','r',6,3),q(['r','s'],'p',1,6)];
 const rowsP=[q(['r'],'false',4,0),q(['s'],'false',3,0),q([],'r',3,0),q(['r','s'],'false',2,2),check('m1','r',2,1),q(['s'],'r',0,2),q(['r'],'s',1,1)];
+rowsNone.forEach((r,i)=>{r.rank=i+1;}); rowsP.forEach((r,i)=>{r.rank=i+1;});
+// A row a recorded conjecture asks about is carried even from below the stored top, at its rank.
+rowsNone.push({...q(['r'],'p',4,2),rank:22,conjectures:[{id:'rp',kind:'result',notes:'A permutation model might do.'}]});
 const fixture={topic,principles,results:[rule('pq',['p'],'q'),conjecture('qr',['q'],'r','Try a two-point frame; see the *Notes* field.')],models:[model('m1',['p'],['s'])],
   progress:[share([],33,6),share(['p'],7,1)],
   lynchpins:{skipped:null,reports:[
@@ -75,15 +78,15 @@ try {
   assert.equal(det().querySelector('.note'),null,'no count summary above the table');
   assert.equal(det().querySelectorAll('table.lynchpin').length,1,'one list: implications, consistency and model checks are not split');
   const keys=()=>[...det().querySelectorAll('table.lynchpin tbody tr')].map(tr=>tr.dataset.lynchpin);
-  assert.equal(keys().length,rowsNone.length,'every stored row is shown');
+  assert.equal(keys().length,rowsNone.length,'every stored row is shown, the carried one included');
   assert.deepEqual(keys().slice(0,4),['q|r|false','q|s|false','q|q+r|false','q||r'],'in stored order: consistency, theorem and implication questions together');
   assert.deepEqual(scores(dom,'q|r|false'),[17,0],'r ⇒ ⊥: excluding r settles every question about it');
   assert.deepEqual(scores(dom,'q||r'),[11,0],'⊤ ⇒ r: a theorem question has no premises');
   assert.deepEqual(scores(dom,'q|r+s|q'),[0,10],'r ∧ s ⇒ q: a two-premise question');
   assert.deepEqual(scores(dom,'check|m1|r'),[6,3],'a model check sits in the same list');
-  assert.equal(stmt(dom,'q|r|false'),'R ⇒ False (⊥)');
-  assert.equal(stmt(dom,'q||r'),'True (⊤) ⇒ R');
-  assert.equal(stmt(dom,'q|r+s|q'),'R ∧ S ⇒ Q');
+  assert.equal(stmt(dom,'q|r|false'),'R ⊢ False (⊥)','a turnstile: no denies the entailment, not the conditional');
+  assert.equal(stmt(dom,'q||r'),'True (⊤) ⊢ R');
+  assert.equal(stmt(dom,'q|r+s|q'),'R ∧ S ⊢ Q');
   assert.equal(stmt(dom,'check|m1|r'),'M1: R');
   assert.ok(det().querySelector('[data-lynchpin="q|r+s|q"] button[data-principle="r"]'),'principles are clickable');
   // A row that a recorded conjecture asks about is starred and carries the record's notes.
@@ -92,7 +95,9 @@ try {
   assert.equal(starred.querySelector('details.lynchpin-note > summary').textContent,'qr');
   assert.match(starred.querySelector('details.lynchpin-note .prose').textContent,/Try a two-point frame/);
   assert.ok(starred.querySelector('details.lynchpin-note button[data-open-result="qr"]'),'and opens the record');
-  assert.equal(det().querySelectorAll('[data-starred]').length,1,'rows without a noted conjecture carry no star');
+  assert.equal(det().querySelectorAll('[data-starred]').length,2,'rows without a noted conjecture carry no star');
+  assert.equal(det().querySelector('[data-lynchpin="q|r|p"] td.rank').textContent,'22','a starred row from below the top shows its true rank');
+  assert.deepEqual([...det().querySelectorAll('tbody tr td.rank')].map(td=>td.textContent).slice(0,3),['1','2','3']);
   assert.equal(det().querySelector('[data-lynchpin="q|r|false"] .star'),null);
   // The verdict is what the question is about, so there is nothing for a
   // verdict readout to say. The principle reads as it does in the tables above.
@@ -142,7 +147,7 @@ try {
   const det2=doc2.getElementById('lynchpins');
   assert.equal(doc2.getElementById('open-progress').textContent,'14% of questions with up to two premises settled.','the stored share for the p background');
   assert.equal(det2.querySelectorAll('tbody tr').length,rowsP.length);
-  assert.equal(stmt(dom2,'q||r'),'True (⊤) ⇒ R');
+  assert.equal(stmt(dom2,'q||r'),'True (⊤) ⊢ R');
   assert.equal(det2.querySelector('[data-lynchpin="q|q|r"]'),null,'q is in the True class and asks nothing');
   assert.deepEqual(scores(dom2,'q|r+s|false'),[2,2]);
 

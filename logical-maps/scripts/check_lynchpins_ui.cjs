@@ -49,7 +49,24 @@ try {
   assert.deepEqual(scores(dom,'con|p|s'),[2,1],'a model of p ∧ s settles q ∧ s and s; excluding it gives s ⇒ ¬p');
   assert.deepEqual(scores(dom,'check|m1|r'),[4,2],'m1 satisfying r settles four questions, violating r two');
   assert.ok(det().querySelector('[data-lynchpin="imp|r|p"] button[data-principle="r"]'),'principles are clickable');
-  assert.ok(det().querySelector('[data-lynchpin="check|m1|r"] button[data-verdict="r"][data-verdict-model="m1"]'),'model checks open the verdict');
+  // The verdict is what the question is about, so there is nothing for a
+  // verdict readout to say. The principle reads as it does in the tables above.
+  assert.equal(det().querySelector('[data-lynchpin="check|m1|r"] button[data-verdict]'),null,'model checks do not offer an empty verdict');
+  const check=det().querySelector('[data-lynchpin="check|m1|r"] button[data-principle="r"]');
+  assert.ok(check,'They name the principle the way the other tables do');
+  assert.ok(det().querySelector('[data-lynchpin="check|m1|r"] button[data-model="m1"]'),'Beside the model, which still opens');
+  check.dispatchEvent(new dom.window.MouseEvent('click',{bubbles:true}));
+  const pop=doc.getElementById('pop');
+  assert.equal(pop.querySelector('.pop-t').textContent,'R','Clicking it opens the principle itself');
+  assert.match(pop.textContent,/Principle r/,'With its statement');
+  // With no legend on this tab, the popup carries the one move that still
+  // means something here.
+  const background=pop.querySelector('[data-selection-action="background"]');
+  assert.ok(background,'And offers to assume it');
+  assert.ok(pop.querySelector('[data-goto]'),'Alongside its details');
+  background.click();
+  assert.ok(dom.window.eval('background.has("r")'),'Which puts it in the shared background');
+  dom.window.eval('resetBackground()');
   // Memoised per background: the same report object serves again until the background changes.
   const before=dom.window.eval('lynchpinCache.report');
   dom.window.eval('renderAll(false)');

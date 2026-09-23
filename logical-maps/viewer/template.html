@@ -2561,7 +2561,7 @@ function renderLynchpins() {
   h += table(['Consistency', 'if a model', 'if excluded'],
     rep.consistency.slice(0, top).map(r => `<tr data-lynchpin="con|${esc(r.principles.join('|'))}">${cells(r.principles.map(pb).join(' ∧ '), r.if_model, r.if_excluded)}</tr>`));
   h += table(['Model check', 'if satisfies', 'if violates'],
-    rep.model_checks.slice(0, top).map(r => `<tr data-lynchpin="check|${esc(r.model)}|${esc(r.principle)}">${cells(`<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: <button class="lnk" data-verdict="${esc(r.principle)}" data-verdict-model="${esc(r.model)}">${esc(name(r.principle))}</button>`, r.if_satisfies, r.if_violates)}</tr>`));
+    rep.model_checks.slice(0, top).map(r => `<tr data-lynchpin="check|${esc(r.model)}|${esc(r.principle)}">${cells(`<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: ${pb(r.principle)}`, r.if_satisfies, r.if_violates)}</tr>`));
   body.innerHTML = h;
   wire(body);
 }
@@ -2881,7 +2881,11 @@ function renderDetail() {
       const exclusion = (state.tab === 'graph' ? graphBackgroundExcluded : backgroundExcluded).get(mid);
       if (exclusion) h += `<div class="${sel.negative ? 'note' : 'ex-bad'}">${sel.negative ? 'This negation follows from the background' : 'Ruled out by the background'} (⇒ ¬${esc(m.name)}).</div><ul>${exclusion.via.map(id => `<li><button class="lnk" data-result="${id}">${resultStmt(byRid.get(id))}</button> ${certBadges(byRid.get(id))}</li>`).join('')}</ul>`;
     }
-    if (!selectionInLegend()) h += '<div class="links"><button class="lnk" data-goto="1">details</button></div>';
+    if (!selectionInLegend()) {
+      const assumable = !sel.negative && byPid.has(sel.id) && !inBackground(sel.id);
+      h += `<div class="links"><button class="lnk" data-goto="1">details</button>${assumable
+        ? `<button class="lnk" data-selection-action="background" title="Assume ${esc(name(sel.id))} throughout, as the sidebar's background control would.">background</button>` : ''}</div>`;
+    }
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;

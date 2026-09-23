@@ -111,7 +111,8 @@ When you (an AI) add or edit a result or model:
 - If you are not sure, record it as `status: conjectured` with an empty proof
   and say in `notes` what would settle it. A conjecture with notes earns a bronze
   lynchpin star by itself; only a human sets `tier: silver` or `tier: gold`, by
-  importance and difficulty. Never set a tier yourself.
+  importance and difficulty. Never set a tier yourself; keep a contributor's
+  proposed tier and reasons in `notes` for a human to act on.
 - New scaffolds and omitted statuses default to conjectured. Do not restore a
   proved default. Explicitly promote a record only after its proof or model
   verification is supplied.

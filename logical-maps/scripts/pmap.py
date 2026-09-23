@@ -2087,8 +2087,9 @@ def bundle_open_md(topic_id: str, data: dict, an: dict, lynch=None) -> str:
           "`status: conjectured`, with proved refuting evidence recorded separately. Answers under "
           "extra exploration assumptions are contextual, not global record statuses.",
           "- Worked on a question without settling it? Put what you tried and what would settle it in "
-          "the conjecture's `notes`; that alone earns it a bronze lynchpin star. Never set `tier: silver` "
-          "or `tier: gold` yourself: that is a human ranking by importance and difficulty.",
+          "the conjecture's `notes`; that alone earns it a bronze lynchpin star. Say in the notes whether "
+          "you think it deserves silver or gold, by importance and difficulty, and why. Only a human sets "
+          "`tier: silver` or `tier: gold`; an agent never does.",
           "- Not sure? Add it with `status: conjectured`, an empty proof, and say in `notes` what would settle it.",
           "- Then run `python3 scripts/pmap.py validate` and `status`. Never hand-edit the derived counts.", "",
           "`README.md` has the exact record shapes and the sourcing rules. Follow them; an unsourced "

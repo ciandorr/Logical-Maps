@@ -15,6 +15,7 @@ violates:
 - necessary-relational-choice-r
 - boolean-completeness-r
 - countable-boolean-completeness-r
+- boolean-completeness-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -83,7 +84,13 @@ notes: 'The root satisfies Maximalist Classicism for Σ, since every C(Σ)-consi
   (Classicism, n. 92, conjectures failures at type $t$ but has none), so the transfer argument refutes
   the type schema of Boolean Completeness at the root, not its type-$t$ instance, which is left unknown;
   the same transfer, applied to the countable family of haecceities that witnesses the component failure,
-  refutes Countable Boolean Completeness.'
+  refutes Countable Boolean Completeness.  Boolean Completeness fails at type $t$ (restoring the claim
+  corrected earlier in the day): the truncation model of Appendix D, part 6, refutes it at type $t$, as
+  its record now shows, and the components are complete for C, so one of them does; the root propositions
+  false at every arrow except those into that component form a copy of its propositional domain under
+  the root’s entailment order, and a root property of propositions holding exactly of the copies of the
+  members of that component’s counterexample family has no least upper bound at the root. Cian Dorr’s
+  argument, 23 September 2026.'
 changes:
 - date: '2026-09-22'
   by: Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)
@@ -106,3 +113,9 @@ changes:
   violates:
   - boolean-completeness-r
   - countable-boolean-completeness-r
+- date: '2026-09-23'
+  by: Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)
+  summary: Restored the failure of Boolean Completeness (type t), now that a component refuting it at
+    type t is on the map; see the notes.
+  violates:
+  - boolean-completeness-t

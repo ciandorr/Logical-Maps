@@ -18,6 +18,7 @@ violates:
 - independence-signature-r
 - distinctness-signature-r
 - countable-boolean-completeness-r
+- boolean-completeness-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -68,7 +69,17 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   true proposition pinned down by $\{0,\ldots,N\}$ for $N$ beyond the pinning set of $p$, namely $\{1_{\mathbb
   N}\}\cup\{g_m:m\ge N\}$. Under $g_n$ the only arrows reachable are $g_m$ with $m\le n$, so $\Diamond
   q$ holds at $g_n$ only if $n\ge N$, and then $g_n$ agrees with the identity on the pinning set of $p$
-  and is in $p$.'
+  and is in $p$. Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures
+  but does not show. Let $X$ be the family of singletons $\{g_n\}$ for even $n$. An upper bound of $X$
+  pinned down by $\{0,\ldots,N\}$ contains, with any $g_m$ for $m\ge N$, every arrow agreeing with it
+  on $\{0,\ldots,N\}$, so the least upper bound pinned down by that set is $X\cup\{1_{\mathbb N}\}\cup\{g_m
+  : m\ge N\}$, which strictly shrinks as $N$ grows; hence $X$ has no least upper bound. $X$ is the extension
+  of an element of the domain at type $t\to t$: the profile $\Phi\langle h,p\rangle:=\{i : i^tp\in X\}$
+  satisfies the coherence condition $i^t\Phi\langle h,p\rangle=\Phi\langle i\circ h,i^tp\rangle$, and
+  each of its values is pinned down by a finite set, the value at $\{g_n\}$ being $\{1_{\mathbb N}\}\cup\{g_m
+  : m>n\}$, pinned down by $\{0,\ldots,n+1\}$, and the value at other propositions being computed likewise
+  from the truncation order. Observation of Claude Fable 5.1 (Anthropic), 23 September 2026, prompted
+  by Cian Dorr; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -113,3 +124,9 @@ changes:
   - distinctness-preserving-collapse
   violates:
   - countable-boolean-completeness-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Boolean Completeness at type t, by the family of even truncation singletons;
+    see the notes.
+  violates:
+  - boolean-completeness-t

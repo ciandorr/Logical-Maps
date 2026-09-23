@@ -114,6 +114,10 @@
   #open > details > summary { cursor: pointer; font: 600 16px var(--serif); margin-bottom: 8px; }
   #lynchpins table.results { margin: 8px 0 16px; border-collapse: collapse; }
   #lynchpins td.num, #lynchpins th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
+  #lynchpins .star { color: var(--accent); margin-right: 4px; }
+  #lynchpins details.lynchpin-note { font-size: 12px; color: var(--ink-2); margin: 2px 0 0 18px; }
+  #lynchpins details.lynchpin-note > summary { cursor: pointer; color: var(--ink-3); }
+  #lynchpins details.lynchpin-note .prose { margin: 3px 0; }
   .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
   .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
   .pane-divider[aria-orientation="vertical"] { cursor: col-resize; }
@@ -204,6 +208,9 @@
   #lat-controls, #lat-principles { display: none; }
   #pane-lattice #lat-controls, #pane-lattice #lat-principles { display: block; }
   #pane-lattice #conjecture-options, #pane-lattice #graph-options, #pane-lattice #graph-principles { display: none; }
+  /* The arrow options (conjecture arrows, conjectures only, unpublished only, ...) are
+     set aside for now; their defaults still apply and the sidebar starts with the principles. */
+  #graph-options { display: none; }
   #pane-lattice .graph-workspace { grid-template-rows: minmax(0, 1fr) var(--details-height, 230px); }
   #lat-graph { grid-row: 2; width: 100%; height: 100%; touch-action: none; cursor: grab; }
   .lat-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
@@ -558,6 +565,11 @@
   .edge-g.dim .direction-chevron { opacity: .18; }
   .edge-g.hot .direction-chevron { stroke-width: 2.4; }
   @media (prefers-reduced-motion: reduce) { .flow-chevron { display: none; } }
+  /* Credit line on a contribute page: the name cycles through the spectrum. */
+  #contribute .thanks { font-size: 17px; margin: 0 0 18px; }
+  .iridescent { font-weight: 600; color: transparent; background: linear-gradient(90deg, #d946ef, #f59e0b, #22c55e, #06b6d4, #6366f1, #d946ef); background-size: 400% 100%; -webkit-background-clip: text; background-clip: text; animation: iridescence 6s linear infinite; }
+  @keyframes iridescence { to { background-position: 400% 50%; } }
+  @media (prefers-reduced-motion: reduce) { .iridescent { animation: none; } }
   @media (max-width: 1000px) { .ex { gap: 24px; } }
   @media (max-width: 760px) {
     .principle-line { font-size: 13px; line-height: 1.5; }
@@ -2471,8 +2483,13 @@ function renderLynchpins() {
     ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: ${pb(r.principle)}`
     : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ⇒ ${pb(r.conclusion)}`;
   const key = r => r.kind === 'check' ? `check|${r.model}|${r.principle}` : `q|${r.premises.join('+')}|${r.conclusion}`;
+  // A recorded conjecture that asks the row's question travels with it: a star
+  // says someone has already worked on it, and its notes open beneath.
+  const noted = r => (r.conjectures || []).filter(c => c.notes);
+  const notes = r => noted(r).map(c => `<details class="lynchpin-note"><summary>${esc(c.id)}</summary><div class="prose">${fmt(c.notes)}</div><p><button class="lnk" data-open-${c.kind === 'model' ? 'model' : 'result'}="${esc(c.id)}">details</button></p></details>`).join('');
+  const star = r => noted(r).length ? '<span class="star" title="A recorded conjecture with notes asks this question">★</span>' : '';
   body.innerHTML = `<table class="results lynchpin"><thead><tr><th>Question</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
-    rep.rows.map(r => `<tr data-lynchpin="${esc(key(r))}"><td class="stmt">${stmt(r)}</td><td class="num">${r.yes}</td><td class="num">${r.no}</td></tr>`).join('')}</tbody></table>`;
+    rep.rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${noted(r).length ? ' data-starred="true"' : ''}><td class="stmt">${star(r)}${stmt(r)}${notes(r)}</td><td class="num">${r.yes}</td><td class="num">${r.no}</td></tr>`).join('')}</tbody></table>`;
   wire(body);
 }
 

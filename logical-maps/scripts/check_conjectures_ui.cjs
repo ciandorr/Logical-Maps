@@ -158,7 +158,7 @@ try {
   assert.ok(doc.getElementById('pane-graph').contains(sidebar));
   assert.ok(doc.getElementById('pane-graph').contains(divider));
   assert.equal(Number(divider.getAttribute('aria-valuenow')),newWidth);
-  assert.ok(visible(dom,doc.getElementById('graph-options')));
+  assert.ok(!visible(dom,doc.getElementById('graph-options')),'the arrow options are set aside for now');
   assert.ok(!visible(dom,doc.getElementById('conjecture-options')));
   assert.ok(visible(dom,graphCheckbox));
   assert.equal(graphCheckbox.getAttribute('aria-pressed'),'false');

@@ -35,7 +35,8 @@ the topic subject in each map's email link.
   background preset (`--background du`, `--top 20`, `--json`). A question is S ⇒ c
   for S at most two principle classes and c a class or False, asked only where no
   smaller premise set already proves or excludes c, and settled alike by a proof,
-  an exclusion or a fitting model; a model check is scored the same way. `Lynchpins`
+  an exclusion or a fitting model; a model check is scored the same way. A row that a
+  recorded conjecture asks about carries that record and its notes (starred). `Lynchpins`
   in `scripts/pmap.py` is the only implementation: `build` stores its rankings and
   settled share per background preset in `data.json` (also `derived.json` and the
   bundle's OPEN-QUESTIONS.md §2, which skip a sparse map with over three quarters of

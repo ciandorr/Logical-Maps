@@ -400,6 +400,7 @@ class Lynchpins:
         self.ids = ids = [p["id"] for p in data["principles"]]
         results = [r for r in data["results"] if r["status"] == "proved"]
         models = [m for m in data["models"] if m["status"] == "proved"]
+        self.conjectures = [r for r in data["results"] + data["models"] if r["status"] == "conjectured"]
         fixed = list(data["topic"].get("background", []))
         extra = [x for x in background if x not in fixed]
         negative = list(negative_background)
@@ -688,6 +689,39 @@ class Lynchpins:
             newfalse.add(j)
         return self._total(newly, newfalse, skip)
 
+    # -- recorded conjectures ------------------------------------------------
+    def question_of(self, ids, conclusion):
+        """The question a record's premises and conclusion ask, or None if it is not one of ours."""
+        rep_of = {x: cls[0] for cls in self.classes for x in cls}
+        S = {rep_of[x] for x in ids if x in rep_of and rep_of[x] in self.proper}
+        if len(S) == 2:
+            a, b = S
+            if self.E.entails({a}, b)[0]:
+                S.discard(b)
+            elif self.E.entails({b}, a)[0]:
+                S.discard(a)
+        if len(S) > 2:
+            return None
+        c = FALSE if conclusion == FALSE else rep_of.get(conclusion)
+        if c is None or c in S or (c != FALSE and c not in self.proper):
+            return None
+        return tuple(sorted(S, key=self.proper.index)), c
+
+    def _attach_conjectures(self, rows):
+        """A row whose question a conjectured record asks carries that record and its notes."""
+        by_question = {(tuple(r["premises"]), r["conclusion"]): r for r in rows if r["kind"] == "question"}
+        for rec in self.conjectures:
+            if "premises" in rec:
+                asked = [self.question_of(rec["premises"], rec["conclusion"])]
+                kind = "result"
+            else:
+                asked = [self.question_of(rec["satisfies"], v) for v in [*rec["violates"], FALSE]]
+                kind = "model"
+            for q in asked:
+                row = by_question.get(q)
+                if row is not None:
+                    row.setdefault("conjectures", []).append({"id": rec["id"], "kind": kind, "notes": (rec.get("notes") or "").strip()})
+
     # -- ranking ------------------------------------------------------------
     def rank(self, top: int = 50) -> dict:
         """Open questions and model checks, best first, each scored for both answers."""
@@ -710,6 +744,7 @@ class Lynchpins:
                                  "yes": self.with_model([*m["satisfies"], p], m["violates"]),
                                  "no": self.with_model(m["satisfies"], [*m["violates"], p])})
             rows.sort(key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), r["kind"], str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle")))))
+            self._attach_conjectures(rows)
             self._ranked = rows
         p = self.progress()
         return {"inconsistent_background": self.inconsistent, "classes": self.classes, "trivial": self.trivial,
@@ -779,10 +814,16 @@ def _lynchpin_label(report: dict, names: dict):
 
 
 def lynchpin_row_text(r: dict, nm) -> str:
-    """S ⇒ c for a question, model: principle for a model check."""
+    """S ⇒ c for a question, model: principle for a model check; a star marks a recorded conjecture with notes."""
     if r["kind"] == "check":
         return f"{r['model']}: {nm(r['principle'])}"
-    return f"{' ∧ '.join(nm(x) for x in r['premises']) or 'True (⊤)'} ⇒ {nm(r['conclusion'])}"
+    star = " ★" if lynchpin_notes(r) else ""
+    return f"{' ∧ '.join(nm(x) for x in r['premises']) or 'True (⊤)'} ⇒ {nm(r['conclusion'])}{star}"
+
+
+def lynchpin_notes(r: dict) -> list:
+    """(record id, notes) for each conjectured record with notes that asks this row's question."""
+    return [(c["id"], c["notes"]) for c in r.get("conjectures", []) if c["notes"]]
 
 
 def _lynchpin_heading(report: dict) -> str:
@@ -801,8 +842,10 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     o.append(progress_text(report["progress"]))
     if _open_share(report["progress"]) > LYNCHPIN_MAX_OPEN:
         o.append(f"note: {_open_share(report['progress']):.0%} of the questions are open; these scores mostly reflect how little is recorded")
-    o += ["ranked by what either answer settles (if yes / if no):"]
-    o += [f"{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}" for r in report["rows"][:top]]
+    o += ["ranked by what either answer settles (if yes / if no; ★ a recorded conjecture with notes):"]
+    for r in report["rows"][:top]:
+        o.append(f"{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}")
+        o += [f"             {rid}: {note}" for rid, note in lynchpin_notes(r)]
     return o
 
 
@@ -839,6 +882,11 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
             o += ["| Question | if yes | if no |", "|---|---:|---:|"]
             o += [f"| {lynchpin_row_text(r, nm)} | {r['yes']} | {r['no']} |" for r in rows]
             o += [""]
+            notes = [(r, rid, note) for r in rows for rid, note in lynchpin_notes(r)]
+            if notes:
+                o += ["★ A recorded conjecture asks this question; its notes:", ""]
+                o += [f"- {lynchpin_row_text(r, nm)} (`{rid}`): {note}" for r, rid, note in notes]
+                o += [""]
         else:
             o += ["Nothing is open.", ""]
     return o
@@ -2544,6 +2592,19 @@ def selftest():
     agree(L)
     top = L.rank(top=3)["rows"]
     assert all(set(r) >= {"kind", "yes", "no"} for r in top) and top == sorted(top, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]))), top
+    # A conjectured record attaches to the row asking its question, premises reduced to the
+    # class representatives the question uses; a model attaches to each violation and to consistency.
+    noted = {**ly, "results": [*ly["results"], dict(R("rp", ["r"], "p"), status="conjectured", notes="Try a two-point frame."),
+                                dict(R("pqr", ["p", "q"], "r"), status="conjectured", notes="")],
+             "models": [*ly["models"], dict(M("m3", ["r", "s"], ["p"]), status="conjectured", notes="Sketched only.")]}
+    Ln = Lynchpins(noted)
+    assert Ln.progress() == L.progress(), "conjectures are no evidence"
+    rows = {(tuple(r["premises"]), r["conclusion"]): r for r in Ln.rank(top=100)["rows"] if r["kind"] == "question"}
+    assert [c["id"] for c in rows[("r",), "p"]["conjectures"]] == ["rp"] and lynchpin_notes(rows[("r",), "p"]) == [("rp", "Try a two-point frame.")]
+    assert [c["id"] for c in rows[("p",), "r"]["conjectures"]] == ["pqr"], "p ∧ q ⇒ r asks p ⇒ r, since p ⇒ q"
+    assert not lynchpin_notes(rows[("p",), "r"]), "no notes, no star"
+    assert [c["id"] for c in rows[("r", "s"), "p"]["conjectures"]] == ["m3"] and [c["id"] for c in rows[("r", "s"), FALSE]["conjectures"]] == ["m3"]
+    assert "conjectures" not in rows[("r",), "s"]
 
     def brute_progress(L):
         import itertools

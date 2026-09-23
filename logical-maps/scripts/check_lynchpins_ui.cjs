@@ -40,9 +40,11 @@ const share=(principles,questions,settled)=>({background:null,name:null,principl
 const q=(premises,conclusion,yes,no)=>({kind:'question',premises,conclusion,yes,no});
 const check=(model,principle,yes,no)=>({kind:'check',model,principle,yes,no});
 const report=(principles,classes,trivial,progress,rows)=>({background:null,name:null,principles,negative:[],inconsistent_background:false,classes,trivial,fitting_models:['m1'],open:progress.open,progress,rows});
-const rowsNone=[q(['r'],'false',17,0),q(['s'],'false',14,0),q(['q','r'],'false',13,1),q([],'r',11,0),q(['q','s'],'false',10,1),q(['r','s'],'q',0,10),q([],'p',10,0),q(['q'],'r',9,1),q(['p','r'],'false',8,2),q(['r','s'],'false',8,2),q(['p','s'],'r',0,8),q(['p'],'r',7,2),check('m1','r',6,3),q(['r','s'],'p',1,6)];
+// pmap.py attaches a conjectured record to the row asking its question; the viewer stars the row when the record has notes.
+const conjecture=(id,premises,conclusion,notes)=>({id,premises,conclusion,status:'conjectured',certificate:cert('paper'),proof:'',notes,sources:['Fixture source'],source_names:['Fixture source']});
+const rowsNone=[q(['r'],'false',17,0),q(['s'],'false',14,0),q(['q','r'],'false',13,1),q([],'r',11,0),q(['q','s'],'false',10,1),q(['r','s'],'q',0,10),q([],'p',10,0),{...q(['q'],'r',9,1),conjectures:[{id:'qr',kind:'result',notes:'Try a two-point frame; see the *Notes* field.'}]},q(['p','r'],'false',8,2),q(['r','s'],'false',8,2),q(['p','s'],'r',0,8),q(['p'],'r',7,2),check('m1','r',6,3),q(['r','s'],'p',1,6)];
 const rowsP=[q(['r'],'false',4,0),q(['s'],'false',3,0),q([],'r',3,0),q(['r','s'],'false',2,2),check('m1','r',2,1),q(['s'],'r',0,2),q(['r'],'s',1,1)];
-const fixture={topic,principles,results:[rule('pq',['p'],'q')],models:[model('m1',['p'],['s'])],
+const fixture={topic,principles,results:[rule('pq',['p'],'q'),conjecture('qr',['q'],'r','Try a two-point frame; see the *Notes* field.')],models:[model('m1',['p'],['s'])],
   progress:[share([],33,6),share(['p'],7,1)],
   lynchpins:{skipped:null,reports:[
     report([],[['p'],['q'],['r'],['s']],[],share([],33,6),rowsNone),
@@ -63,7 +65,7 @@ try {
   assert.ok(det().compareDocumentPosition(recorded())&dom.window.Node.DOCUMENT_POSITION_FOLLOWING,'lynchpins precede the recorded questions');
   assert.equal(recorded().open,false);
   assert.equal(recorded().querySelector('summary').textContent.trim(),'Recorded conjectures','no count on the dropdown');
-  assert.match(recorded().querySelector('.empty').textContent,/No conjectures have been recorded/);
+  assert.ok(recorded().querySelector('[data-conjecture-id="qr"]'),'the recorded conjecture is listed there too');
   show(dom,'open');
   assert.equal(body().innerHTML,'','still nothing while the section is closed');
   assert.equal(progress().hidden,false);
@@ -84,6 +86,14 @@ try {
   assert.equal(stmt(dom,'q|r+s|q'),'R ∧ S ⇒ Q');
   assert.equal(stmt(dom,'check|m1|r'),'M1: R');
   assert.ok(det().querySelector('[data-lynchpin="q|r+s|q"] button[data-principle="r"]'),'principles are clickable');
+  // A row that a recorded conjecture asks about is starred and carries the record's notes.
+  const starred=det().querySelector('[data-lynchpin="q|q|r"]');
+  assert.equal(starred.dataset.starred,'true'); assert.ok(starred.querySelector('.star'),'a star marks effort already given');
+  assert.equal(starred.querySelector('details.lynchpin-note > summary').textContent,'qr');
+  assert.match(starred.querySelector('details.lynchpin-note .prose').textContent,/Try a two-point frame/);
+  assert.ok(starred.querySelector('details.lynchpin-note button[data-open-result="qr"]'),'and opens the record');
+  assert.equal(det().querySelectorAll('[data-starred]').length,1,'rows without a noted conjecture carry no star');
+  assert.equal(det().querySelector('[data-lynchpin="q|r|false"] .star'),null);
   // The verdict is what the question is about, so there is nothing for a
   // verdict readout to say. The principle reads as it does in the tables above.
   assert.equal(det().querySelector('[data-lynchpin="check|m1|r"] button[data-verdict]'),null,'model checks do not offer an empty verdict');

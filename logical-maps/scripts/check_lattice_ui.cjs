@@ -358,7 +358,7 @@ try{
   assert.ok(!visible('graph-options')&&!visible('graph-principles'),'And not the graph\'s');
   d2.querySelector('.tab[data-tab="graph"]').click();
   assert.ok(!visible('lat-controls')&&!visible('lat-principles'),'Which are hidden again on the graph');
-  assert.ok(visible('graph-options')&&visible('graph-principles'));
+  assert.ok(!visible('graph-options')&&visible('graph-principles'),'The arrow options are set aside; the principles show');
 
   // The same three moves from the lattice's details pane, acting on the
   // lattice's own choices.

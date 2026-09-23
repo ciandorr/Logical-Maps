@@ -9,6 +9,8 @@ satisfies:
 - atomlessness
 - axiom-of-infinity-e
 - axiom-of-infinity-t
+- no-contingency-signature-r
+- signature-b-r
 violates:
 - atomicity-r
 - actuality
@@ -50,24 +52,29 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   its evaluation point; construction and verification are given at the PDF locations in References. Boxed
   positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately
   to each closed instance. Interpretation of Σ, fixed for this record: each relational constant denotes
-  the top element of its type and each individual constant denotes one fixed individual. Under it the
-  signature schemata fail. Let $c\in\Sigma$ have relational type $\tau$, so $c=\top_\tau$ necessarily.
-  Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$ but impossible
-  of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$
-  and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\top_\tau$
-  denotes; Distinctness (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ) does not
-  prove. Everything that implies these fails with them. Boolean Completeness fails here through C5 and
-  the failure of Actuality (Propositions 2.5–2.6), which gives nothing about countable families; but the
-  part 2 argument transfers: the strongest persistent property pinned down by a finite $X$ whose extension
-  contains the even numbers has, at an arrow $h$, the extension $h(X\cap\text{evens})\cup(\mathbb N\setminus
-  hX)$, which strictly shrinks as $X$ grows, so the haecceities of the even numbers have no least upper
-  bound. Countable Boolean Completeness fails as well, at type $e\to t$: the property $E$ that the source
-  shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional
-  fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity
-  of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation
-  of 23 September 2026. Distinctness-preserving collapse fails: every arrow $h$ has an inverse, so for
-  any true $q$ the arrow $q$-member$\circ h^{-1}$ carries $h$ into $q$, making $\Diamond q$ true everywhere;
-  so $\Box(\Diamond q\to p)$ would need $p=\top$, and the true proposition that $0$ is fixed is not $\top$.'
+  the top element of its type and each individual constant denotes one fixed individual $d$. Under it
+  the signature schemata that give the constants a special role fail: with $c\in\Sigma$ of relational
+  type $\tau$, $c=\top_\tau$ necessarily, so Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
+  Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$, Independence
+  (signature Σ) fails since $c$ denotes what a closed pure term denotes, and Distinctness (signature Σ)
+  fails since $c=\top_\tau$ is true and unprovable. But No Contingency (signature Σ), and with it B for
+  sentences of Σ, hold. The relational constants denote pure entities, so a closed Σ-sentence denotes
+  what some $P(d,\ldots,d)$ denotes for a pure formula $P$; the model’s automorphisms carry every individual
+  to every other, so $P(d,\ldots,d)$ is materially equivalent to the pure sentence $\forall x\, .\,P(x,\ldots,x)$
+  and its negation to $\forall x\, .\,\neg P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency,
+  and instantiation under the box gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$. Boolean Completeness
+  fails here through C5 and the failure of Actuality (Propositions 2.5–2.6), which gives nothing about
+  countable families; but the part 2 argument transfers: the strongest persistent property pinned down
+  by a finite $X$ whose extension contains the even numbers has, at an arrow $h$, the extension $h(X\cap\text{evens})\cup(\mathbb
+  N\setminus hX)$, which strictly shrinks as $X$ grows, so the haecceities of the even numbers have no
+  least upper bound. Countable Boolean Completeness fails as well, at type $e\to t$: the property $E$
+  that the source shows to lack a least upper bound has as its extension a countable family of haecceities,
+  and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing
+  the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals.
+  Observation of 23 September 2026. Distinctness-preserving collapse fails: every arrow $h$ has an inverse,
+  so for any true $q$ the arrow $q$-member$\circ h^{-1}$ carries $h$ into $q$, making $\Diamond q$ true
+  everywhere; so $\Box(\Diamond q\to p)$ would need $p=\top$, and the true proposition that $0$ is fixed
+  is not $\top$.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -113,3 +120,10 @@ changes:
   violates:
   - countable-boolean-completeness-r
   - distinctness-preserving-collapse
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences
+    of Σ, at Cian Dorr’s request; see the notes.
+  satisfies:
+  - no-contingency-signature-r
+  - signature-b-r

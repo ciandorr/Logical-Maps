@@ -11,6 +11,8 @@ satisfies:
 - axiom-of-infinity-t
 - necessary-strong-leibniz-t
 - necessary-relational-choice-r
+- no-contingency-signature-r
+- signature-b-r
 violates:
 - distinctness-necessary-t
 - witnessed-possibility-r
@@ -43,18 +45,23 @@ description: Use the monoid of surjections of an infinite set and a surjective i
 notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
   its evaluation point; construction and verification are given at the PDF locations in References. Interpretation
   of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual
-  constant denotes one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational
-  type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
-  witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
-  $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
-  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
-  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. In a one-object
-  action model whose propositions are all the sets of arrows, every singleton $\{h\}$ is a strong world
-  proposition: seen from an arrow $i$ it becomes $\{j : j\circ i=h\}$, and every proposition at that world
-  is the shift $\{j : j\circ i\in Y\}$ of a root proposition $Y$, whose membership for such $j$ depends
-  only on whether $h\in Y$; so it entails every proposition or its negation, at every world. Any possible
-  proposition contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational
-  Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains
+  constant denotes one fixed individual $d$. Under it the signature schemata that give the constants a
+  special role fail: with $c\in\Sigma$ of relational type $\tau$, $c=\top_\tau$ necessarily, so Witnessed
+  Possibility fails for the pure formula $x\ne\top_\tau$, Separated Structure fails since $\lambda x\,
+  .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$, Independence (signature Σ) fails since $c$ denotes
+  what a closed pure term denotes, and Distinctness (signature Σ) fails since $c=\top_\tau$ is true and
+  unprovable. But No Contingency (signature Σ), and with it B for sentences of Σ, hold. The relational
+  constants denote pure entities, so a closed Σ-sentence denotes what some $P(d,\ldots,d)$ denotes for
+  a pure formula $P$; the model’s automorphisms carry every individual to every other, so $P(d,\ldots,d)$
+  is materially equivalent to the pure sentence $\forall x\, .\,P(x,\ldots,x)$ and its negation to $\forall
+  x\, .\,\neg P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency, and instantiation
+  under the box gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$. In a one-object action model whose
+  propositions are all the sets of arrows, every singleton $\{h\}$ is a strong world proposition: seen
+  from an arrow $i$ it becomes $\{j : j\circ i=h\}$, and every proposition at that world is the shift
+  $\{j : j\circ i\in Y\}$ of a root proposition $Y$, whose membership for such $j$ depends only on whether
+  $h\in Y$; so it entails every proposition or its negation, at every world. Any possible proposition
+  contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational Choice
+  holds: the truncation of a full action model at any arrow is again a full action model, its domains
   at the reachable objects being unchanged, and Relational Choice holds in every full model given choice
   in the metatheory (Classicism, p. 61). Distinctness-preserving collapse fails: let $p:=\{\mathrm{id}\}$,
   true. Any witness $q$ for $\Box_{\ne}p$ is true, so contains the identity, and for a non-identity bijection
@@ -111,3 +118,10 @@ changes:
   summary: Recorded the Distinctness-preserving collapse; see the notes.
   violates:
   - distinctness-preserving-collapse
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences
+    of Σ, at Cian Dorr’s request; see the notes.
+  satisfies:
+  - no-contingency-signature-r
+  - signature-b-r

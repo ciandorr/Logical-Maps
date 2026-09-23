@@ -19,6 +19,8 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- no-contingency-signature-r
+- signature-b-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -40,19 +42,24 @@ description: The full model on {1,k} with k²=k, evaluated at its sole object. R
   for the four propositions and the failure witnesses.
 notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
   its evaluation point; construction and verification are given at the PDF locations in References. Interpretation
-  of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual
-  constant denotes one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational
-  type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
-  witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
-  $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
-  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
-  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. In a one-object
-  action model whose propositions are all the sets of arrows, every singleton $\{h\}$ is a strong world
-  proposition: seen from an arrow $i$ it becomes $\{j : j\circ i=h\}$, and every proposition at that world
-  is the shift $\{j : j\circ i\in Y\}$ of a root proposition $Y$, whose membership for such $j$ depends
-  only on whether $h\in Y$; so it entails every proposition or its negation, at every world. Any possible
-  proposition contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational
-  Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains
+  of Σ, fixed for this record: one designated relational constant $c$ of type $\tau=\bar\sigma t$ denotes
+  $\lambda\bar x\, .\,a$, where $a$ is the unique true atom of the model, the actual-world proposition
+  described above; every other relational constant denotes the top element of its type and every individual
+  constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\forall\bar
+  x\, .\,c\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow
+  that no arrow composes back into $a$, $\Diamond a$ is false, so $\Box\Diamond a$ fails; Witnessed Possibility
+  fails for the pure formula $x=\top_\tau$, witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is
+  $\Diamond\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent
+  to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness (signature Σ) fail because
+  $c$ is the denotation of the closed pure term describing the true atom, $\lambda\bar x\, .\,\exists
+  p\, .\,p\land\operatorname{Atom}_t(p)\land\forall q\, .\,(q\land\operatorname{Atom}_t(q))\to q=p$, an
+  unprovable true identity. Everything that implies these fails with them. In a one-object action model
+  whose propositions are all the sets of arrows, every singleton $\{h\}$ is a strong world proposition:
+  seen from an arrow $i$ it becomes $\{j : j\circ i=h\}$, and every proposition at that world is the shift
+  $\{j : j\circ i\in Y\}$ of a root proposition $Y$, whose membership for such $j$ depends only on whether
+  $h\in Y$; so it entails every proposition or its negation, at every world. Any possible proposition
+  contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational Choice
+  holds: the truncation of a full action model at any arrow is again a full action model, its domains
   at the reachable objects being unchanged, and Relational Choice holds in every full model given choice
   in the metatheory (Classicism, p. 61). Distinctness-preserving collapse holds: for a true $p$ take $q:=\{1\}$;
   under $k$, $\Diamond\{1\}$ would need $x\circ k=1$, but $x\circ k=k$ for both arrows, so it fails there,
@@ -111,3 +118,10 @@ changes:
   summary: Recorded the Distinctness-preserving collapse; see the notes.
   satisfies:
   - distinctness-preserving-collapse
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences
+    of Σ, at Cian Dorr’s request; see the notes.
+  violates:
+  - no-contingency-signature-r
+  - signature-b-r

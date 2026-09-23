@@ -542,8 +542,8 @@
   .pop details.rel-evidence { margin: 1px 0 4px 14px; font-size: 12px; } .pop details.rel-evidence summary { cursor: pointer; color: var(--ink-3); }
   .pop .rel-head { margin: 7px 0 2px; }
   /* A section label rides on the first line it labels rather than taking one. */
-  .pop .rel-line .rel-head, .pop p > .rel-head { display: inline; margin: 0 8px 0 0; }
-  .pop .rel-line + .rel-line .rel-head { display: none; }
+  .pop .rel-line .rel-head, .pop p > .rel-head { display: inline; margin: 0 9px 0 0; color: var(--ink-2); }
+  .pop .rel-line:has(> .rel-head) { margin-top: 7px; }
   .graph-hint svg { flex: none; overflow: visible; }
   .direction-chevron, .flow-chevron { fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
   #flow { pointer-events: none; }
@@ -2799,12 +2799,22 @@ function statusLine(label, st, joint = false, head = '') {
   return `<div class="rel-line">${head ? relHead(head) : ''}<span class="stmt">${label}</span> <span class="rel-status ${kind}">${text}</span>${st.limited ? ' <span class="dim">(model outside the selected sources)</span>' : ''}</div>${evidence}`;
 }
 // Converse and premise-necessity facts for a displayed arrow.
+// Whether the arrow reverses, in a sentence. The lines above it carry the
+// evidence premise by premise; this says what they come to. The converse of a
+// conjunction fails as soon as one conjunct does, and holds only if all do.
+function converseNote(premises, conclusion) {
+  const settled = premises.map(p => implicationStatus([conclusion], p).status);
+  if (settled.every(s => s === 'implies')) return 'The converse holds too, so the two are equivalent under the background.';
+  if (settled.some(s => s === 'independent' || s === 'excludes')) return 'A model rules the converse out, so this arrow does not reverse.';
+  return 'Nothing recorded settles the converse, so this arrow might yet reverse.';
+}
 function edgeContext(premises, conclusion) {
   if (!premises?.length) return '';
   const stmt = (ps, c) => `${ps.map(name).map(esc).join(' ∧ ')} ⇒ ${esc(name(c))}`;
   let h = '';
   if (conclusion !== FALSE) h += premises.map((p, i) =>
-    statusLine(stmt([conclusion], p), implicationStatus([conclusion], p), false, i ? '' : 'Converse')).join('');
+    statusLine(stmt([conclusion], p), implicationStatus([conclusion], p), false, i ? '' : 'Converse')).join('')
+    + `<p class="dim">${esc(converseNote(premises, conclusion))}</p>`;
   if (premises.length > 1) {
     premises.forEach((p, i) => {
       const rest = premises.filter(q => q !== p), head = i ? '' : 'Without each premise';

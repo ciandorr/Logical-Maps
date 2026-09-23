@@ -6,8 +6,9 @@ const template = fs.readFileSync(path.resolve(__dirname, '../viewer/template.htm
 const certificate = {source_id: 'paper', lean: 'none'};
 const data = {
   topic: {id: 'pane', title: 'Pane', background: [], source_catalog: [{id: 'paper', name: 'Paper', kind: 'published-paper'}]},
-  principles: ['a','b','x'].map(id => ({id, name: id.toUpperCase(), statement: id})),
+  principles: ['a','b','x','y','z'].map(id => ({id, name: id.toUpperCase(), statement: id})),
   results: [{id: 'ab', premises: ['a'], conclusion: 'b', status: 'proved', certificate},
+    {id: 'yz', premises: ['a','y'], conclusion: 'z', status: 'proved', certificate},
     {id: 'xf', premises: ['x'], conclusion: 'false', status: 'proved', certificate}], models: []
 };
 const pages = [], errors = [], storageKey = 'principle-map:pane-sizes:v1';
@@ -60,6 +61,20 @@ try {
   const meta = d.querySelector('#pop .pop-meta');
   assert.ok(meta?.querySelector('.badges .badge'), 'The source badge is on the provenance line');
   assert.match(meta.textContent, /References:/, 'Which is the line the references are on');
+
+  // Whether the arrow reverses, said plainly, under the lines that carry the
+  // evidence for it.
+  const label = () => d.querySelector('#pop .rel-line .rel-head');
+  assert.equal(label().textContent, 'Converse', 'The section says what it is');
+  assert.notEqual(w.getComputedStyle(label()).display, 'none', 'Where the reader can see it');
+  assert.match(d.getElementById('pop').textContent, /might yet reverse/, 'And the arrow says whether it reverses');
+
+  // A second section's label survives a first section whose lines carry no
+  // evidence to separate them.
+  w.eval("selectGraphEdge(graphEdgesByKey.get('yz'))");
+  const labels = [...d.querySelectorAll('#pop .rel-line .rel-head')];
+  assert.deepEqual(labels.map(l => l.textContent), ['Converse', 'Without each premise'], 'Both sections are labelled');
+  assert.ok(labels.every(l => w.getComputedStyle(l).display !== 'none'), 'And both labels are visible');
   w.select(null);
   w.select({type: 'principle', id: 'a'});
   const pop = d.getElementById('pop'), definition = pop.innerHTML;

@@ -2387,7 +2387,7 @@ function renderOpen() {
   wire(warning);
   let h = `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Central Questions</summary><p class="hint">Open questions ranked by how much both answers would settle, the harmonic mean of if yes and if no. <span id="open-progress" hidden></span></p><div class="lynchpin-body"></div></details>`;
   h += `<details id="open-recorded"${state.recorded ? ' open' : ''}><summary>Conjectures</summary><div class="lynchpin-body"></div></details>`;
-  h += `<details id="open-auto"${state.auto ? ' open' : ''}><summary>Automatically Generated Conjectures</summary><p class="hint">The same questions by their larger side, each stated as the answer to expect: ⊢ when a refutation would settle more, ⊬ when a proof would.</p><div class="lynchpin-body"></div></details>`;
+  h += `<details id="open-auto"${state.auto ? ' open' : ''}><summary>Automatically Generated Conjectures</summary><p class="hint">Questions ranked by how many questions would be settled by a negative result.</p><div class="lynchpin-body"></div></details>`;
   const el = document.getElementById('open'); el.innerHTML = h;
   wire(el);
   for (const [id, key] of [['lynchpins', 'lynchpins'], ['open-auto', 'auto'], ['open-recorded', 'recorded']]) {

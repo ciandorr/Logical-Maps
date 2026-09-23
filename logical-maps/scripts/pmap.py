@@ -951,7 +951,7 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     if not report["recorded"]:
         o.append("        none")
     if report["auto"]:
-        o += ["automatically generated conjectures, by the larger side, each stated as the answer to expect (⊢ when a refutation would settle more, ⊬ when a proof would):"]
+        o += ["automatically generated conjectures: questions ranked by how many questions would be settled by a negative result (plausibility rank, if yes / if no):"]
         o += [f"#{r['auto_rank']:<6d}{lynchpin_auto_scores(r)[0]:5d} /{lynchpin_auto_scores(r)[1]:4d}   {lynchpin_row_text(r, nm, auto=True)}" for r in report["auto"][:top]]
     return o
 
@@ -1023,8 +1023,7 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
             o += [f"| {r['rank'] or '—'} | {lynchpin_row_text(r, nm, True)}{_status_text(r)} | {_score_text(lynchpin_scores(r)[0])} | {_score_text(lynchpin_scores(r)[1])} | {', '.join('`' + c['id'] + '`' for c in r['conjectures'])} |" for r in rep["recorded"]]
             o += [""]
         if rep["auto"]:
-            o += ["Automatically generated conjectures, by the larger side, each stated as the answer to expect: "
-                  "⊢ when a refutation would settle more, ⊬ when a proof would.", "",
+            o += ["Automatically generated conjectures: questions ranked by how many questions would be settled by a negative result.", "",
                   "| Plausibility rank | Conjecture | if yes | if no |", "|---:|---|---:|---:|"]
             o += [f"| {r['auto_rank']} | {lynchpin_row_text(r, nm, auto=True)} | {lynchpin_auto_scores(r)[0]} | {lynchpin_auto_scores(r)[1]} |" for r in rep["auto"][:top]]
             o += [""]

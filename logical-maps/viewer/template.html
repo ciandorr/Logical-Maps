@@ -4,12 +4,17 @@
   html, body { height: 100%; }
   body { display: flow-root; }
   .app { display: grid; grid-template-rows: auto 1fr; height: calc(100vh - 64px); height: calc(100dvh - 64px); min-height: 420px; margin: 32px 0; border-bottom: 1px solid var(--line); }
-  header.top { display: flex; align-items: baseline; gap: 18px; padding: 0 24px 18px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
-  header.top h1 { font: 700 22px/1.4 var(--sans); margin: 0; text-wrap: balance; }
-  .title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 20px; }
+  /* One line: the title, the description it belongs to, and the site links,
+     with every control on the right sharing their baseline. The body gets the
+     rest of the window, so what this row does not take, the diagram keeps. */
+  header.top { display: flex; align-items: baseline; gap: 2px 18px; padding: 0 24px 9px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
+  header.top h1 { font: 700 19px/1.3 var(--sans); margin: 0; text-wrap: balance; }
+  .title-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 16px; min-width: 0; }
+  .top-controls { margin-left: auto; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 18px; }
+  header.top .theme-toggle { padding: 0; font-size: 12.5px; }
   .site-links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; }
   .site-links[hidden] { display: none; }
-  header.top .sub { color: var(--ink-3); font-size: 12.5px; max-width: 80ch; margin-top: 4px; }
+  header.top .sub { color: var(--ink-3); font-size: 12.5px; max-width: 80ch; }
   .math-operator { white-space: nowrap; }
   .math-operator sub { font-size: 75%; line-height: 0; vertical-align: sub; }
 
@@ -409,7 +414,7 @@
 
   .links { font-size: 12.5px; margin: 0 0 10px; } .links a { color: var(--accent); }
   .goto-row { display: flex; gap: 12px; align-items: center; margin: 0 0 12px; } .goto-row .goto, .goto-row .links { margin: 0; }
-  .dl { display: flex; gap: 10px; margin-left: auto; font-size: 12.5px; align-self: center; } .dl a { color: var(--ink-3); }
+  .dl { display: flex; gap: 10px; font-size: 12.5px; } .dl a { color: var(--ink-3); }
 
   .pop { position: fixed; z-index: 20; max-width: min(380px, calc(100vw - 16px)); max-height: calc(100vh - 16px); overflow: auto; background: var(--panel); border: 1px solid var(--line-strong); border-radius: 4px; box-shadow: var(--shadow); padding: 12px 14px; font-size: 13px; }
   .graph-details .pop { position: static; flex: 1; min-height: 0; z-index: auto; max-width: none; max-height: none; overflow: auto; border: 0; border-radius: 0; box-shadow: none; overflow-wrap: anywhere; }
@@ -534,7 +539,7 @@
     .app { margin: 16px 0 0; height: calc(100vh - 16px); height: calc(100dvh - 16px); }
     header.top { gap: 8px 16px; padding: 0 16px 14px; }
     header.top > div:first-child { flex: 1 1 100%; }
-    .dl { margin-left: 0; flex: 1; }
+    .top-controls { margin-left: 0; flex: 1; }
     .tabs { padding: 0 16px; gap: 0 18px; }
     .tab { padding: 10px 0; font-size: 13px; }
     .ex { grid-template-columns: minmax(0, 1fr); gap: 24px; }
@@ -562,14 +567,17 @@
 </style>
 <div class="app">
   <header class="top">
-    <div>
-      <div class="title-row"><h1 id="title"></h1><nav id="site-links" class="site-links" aria-label="Site navigation" hidden></nav></div>
+    <div class="title-row">
+      <h1 id="title"></h1>
       <div class="sub" id="subtitle"></div>
+      <nav id="site-links" class="site-links" aria-label="Site navigation" hidden></nav>
     </div>
-    <div class="dl" id="downloads"></div>
-    <div class="display-toggles">
-      <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
-      <button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false" title="Okabe–Ito palette: sky blue and orange">[Colourblind mode: off]</button>
+    <div class="top-controls">
+      <div class="dl" id="downloads"></div>
+      <div class="display-toggles">
+        <button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button>
+        <button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false" title="Okabe–Ito palette: sky blue and orange">[Colourblind mode: off]</button>
+      </div>
     </div>
   </header>
   <div class="body">

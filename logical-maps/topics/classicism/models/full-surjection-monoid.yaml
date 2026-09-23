@@ -17,6 +17,7 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- distinctness-preserving-collapse
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -55,7 +56,10 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   proposition contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational
   Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains
   at the reachable objects being unchanged, and Relational Choice holds in every full model given choice
-  in the metatheory (Classicism, p. 61).'
+  in the metatheory (Classicism, p. 61). Distinctness-preserving collapse fails: let $p:=\{\mathrm{id}\}$,
+  true. Any witness $q$ for $\Box_{\ne}p$ is true, so contains the identity, and for a non-identity bijection
+  $i$ the arrow $i^{-1}$ gives $i^{-1}\circ i\in q$, so $\Diamond q$ holds under $i$ while $p$ does not.
+  So no true $q$ has $\Box(\Diamond q\to p)$.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -102,3 +106,8 @@ changes:
   summary: Boxed the Relational Choice claim; see the notes.
   satisfies:
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the Distinctness-preserving collapse; see the notes.
+  violates:
+  - distinctness-preserving-collapse

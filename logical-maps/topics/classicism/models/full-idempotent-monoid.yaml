@@ -8,6 +8,7 @@ satisfies:
 - relational-choice-r
 - necessary-strong-leibniz-t
 - necessary-relational-choice-r
+- distinctness-preserving-collapse
 violates:
 - distinctness-necessary-t
 - barcan-t
@@ -53,7 +54,9 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   proposition contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational
   Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains
   at the reachable objects being unchanged, and Relational Choice holds in every full model given choice
-  in the metatheory (Classicism, p. 61).'
+  in the metatheory (Classicism, p. 61). Distinctness-preserving collapse holds: for a true $p$ take $q:=\{1\}$;
+  under $k$, $\Diamond\{1\}$ would need $x\circ k=1$, but $x\circ k=k$ for both arrows, so it fails there,
+  and under $1$, $p$ holds.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -103,3 +106,8 @@ changes:
   summary: Boxed the Relational Choice claim; see the notes.
   satisfies:
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the Distinctness-preserving collapse; see the notes.
+  satisfies:
+  - distinctness-preserving-collapse

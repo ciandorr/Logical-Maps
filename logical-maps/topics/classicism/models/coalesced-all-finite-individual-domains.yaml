@@ -11,6 +11,7 @@ satisfies:
 - boolean-completeness-t
 - relational-choice-r
 - necessary-relational-choice-r
+- distinctness-preserving-collapse
 violates:
 - distinctness-necessary-r
 - witnessed-possibility-r
@@ -82,7 +83,11 @@ notes: 'Recorded to witness the consistency with C of the sentence through which
   two individuals is consistent, but at the root there are infinitely many individuals, under every arrow
   into another component the two collapse, and under the arrow into that component there are three. □Relational
   Choice holds: Relational Choice holds at the root by the free root component and at every component,
-  each being a full Henkin model.'
+  each being a full Henkin model. Distinctness-preserving collapse holds: let $a$ be the proposition true
+  at the actual world alone (the identity arrow). For any true $p$, take $q:=a$ in the definition of $\Box_{\ne}p$:
+  under a non-identity arrow $i$, $\Diamond a$ would need an arrow $k$ with $k\circ i$ the identity, and
+  none exists, since the components have no arrows to the root; under the identity, $p$ holds. So every
+  truth is $\Box_{\ne}$-necessary, although ND fails.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -124,3 +129,8 @@ changes:
   summary: Boxed the Relational Choice claim.
   satisfies:
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the Distinctness-preserving collapse; see the notes.
+  satisfies:
+  - distinctness-preserving-collapse

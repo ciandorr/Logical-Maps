@@ -11,8 +11,9 @@ violates:
 - barcan-r
 - barcan-t
 - atomicity-t
-- boolean-completeness-t
 - necessary-relational-choice-r
+- boolean-completeness-r
+- countable-boolean-completeness-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -59,17 +60,21 @@ notes: 'Promoted on 22 September 2026 for the pure package, which the source est
   for the components, so some component $M$ refutes Atomicity at its root, by a proposition $p_M$ with
   no atom below it in $M$’s domain; the root proposition that is $p_M$ on $M$, empty on every other component
   and false at the root has as its root lower bounds exactly the root propositions that are lower bounds
-  of $p_M$ on $M$ and empty elsewhere, so it has no atom below it either. Boolean Completeness fails at
-  type t for the same reason: a component $M$ refutes it by a property $X_M$ of propositions without a
-  greatest lower bound in $M$’s domain, and the root property holding of a root proposition iff $X_M$
-  holds of its $M$-component has no greatest lower bound at the root, since such a bound’s $M$-component
+  of $p_M$ on $M$ and empty elsewhere, so it has no atom below it either. Boolean Completeness fails,
+  at type $e\to t$, for the same reason: a component $M$ refutes it by a property $X_M$ of propositions
+  without a greatest lower bound in $M$’s domain, and the root property holding of a root proposition
+  iff $X_M$ holds of its $M$-component has no greatest lower bound at the root, since such a bound’s $M$-component
   would be one for $X_M$. Relational Choice holds at the root, contrary to a first guess: the functionality
   of a subrelation is evaluated at the root’s identity arrow only, while the subrelation condition is
   boxed; so for a serial root relation take the subrelation whose root component is a functional choice
   from the root component, by choice in the metatheory, and whose component parts are empty. Its necessitation
   fails, since some component refutes Relational Choice at its root. □Relational Choice fails, as the
   notes on Relational Choice explain: some component refutes Relational Choice at its root, which is accessible
-  from the root.'
+  from the root.  Correction of 23 September 2026: the components are only known to refute Boolean Completeness
+  at type $e\to t$ (Classicism, n. 92, conjectures failures at type $t$ but has none), so the transfer
+  argument refutes the type schema of Boolean Completeness at the root, not its type-$t$ instance, which
+  is left unknown; the same transfer, applied to the countable family of haecceities that witnesses the
+  component failure, refutes Countable Boolean Completeness.'
 was_conjectured: true
 changes:
 - date: '2026-09-22'
@@ -88,9 +93,16 @@ changes:
   - relational-choice-r
   violates:
   - atomicity-t
-  - boolean-completeness-t
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
   summary: Recorded the failure of □Relational Choice, already argued in the notes.
   violates:
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Corrected the Boolean Completeness claim from the type-t instance to the type schema, since
+    no component is known to refute it at type t; added the failure of Countable Boolean Completeness
+    by the same transfer.
+  violates:
+  - boolean-completeness-r
+  - countable-boolean-completeness-r

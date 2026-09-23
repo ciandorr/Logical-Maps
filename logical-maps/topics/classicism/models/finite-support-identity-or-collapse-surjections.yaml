@@ -8,6 +8,7 @@ satisfies:
 - necessary-barcan-r
 - axiom-of-infinity-e
 - axiom-of-infinity-t
+- distinctness-preserving-collapse
 violates:
 - distinctness-necessary-r
 - atomicity-r
@@ -17,6 +18,7 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- countable-boolean-completeness-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -26,17 +28,23 @@ certificate:
   date: '2026-09-17'
   lean: none
 sources:
-- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5(5), pp. 74–75;
-  construction p. 78, Part 5; p. 79 (No Pure Contingency).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 5, pp.
+  74, 78; p. 79 (No Pure Contingency).
 source_names:
 - Classicism
 references:
 - paper: bacon-dorr-classicism
   role: proof
   locator: Appendix D, Proposition D.5(5), pp. 74–75; construction p. 78, Part 5; p. 79 (No Pure Contingency)
-description: 'The finite-support model in Part 5, evaluated at its sole object N. See the indicated construction.
-  Negations in the source mean failure at some type: note 92 locates atomicity failures at t, ND/BF failures
-  at e, and the displayed completeness failures at et.'
+description: 'Proposition D.5, part 5 (p. 78): the arrows are the monotone surjections $h$ of $\mathbb
+  N$ with $h0=h1$, together with the identity. Restricting part 4 to surjections restores BF by Proposition
+  D.6; Actuality holds as in part 4, and ND, Atomicity and Boolean Completeness fail as there. In every
+  part, $W_0^\ddagger$ is the set of finite subsets of $\mathbb N$ and the model is ideally full: a proposition
+  is a set of arrows whose membership depends only on the arrows’ values on some finite set of individuals
+  (it is pinned down by that set), an entity of a higher type is an applicative behaviour profile pinned
+  down by a finite set in the same sense, and the individuals are the natural numbers acted on by the
+  arrows themselves. Propositions and properties are thus about finitely many individuals and indifferent
+  to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.'
 notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
   its evaluation point; construction and verification are given at the PDF locations in References. Boxed
   positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately
@@ -47,7 +55,14 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$
   and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\top_\tau$
   denotes; Distinctness (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ) does not
-  prove. Everything that implies these fails with them.'
+  prove. Everything that implies these fails with them.  Countable Boolean Completeness fails as well,
+  at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension
+  a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the
+  domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the
+  numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
+  collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
+  proposition $\{1_{\mathbb N}\}$: under any other arrow $h$, $\Diamond q$ would need $k\circ h=1_{\mathbb
+  N}$, impossible since $h$ is not injective.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -85,3 +100,11 @@ changes:
   - separated-structure-r
   - independence-signature-r
   - distinctness-signature-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Expanded the description from Appendix D, naming Proposition D.5 and its part; added the failure
+    of Countable Boolean Completeness at type e→t; settled the Distinctness-preserving collapse.
+  satisfies:
+  - distinctness-preserving-collapse
+  violates:
+  - countable-boolean-completeness-r

@@ -11,6 +11,7 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- distinctness-preserving-collapse
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -28,12 +29,14 @@ references:
 - paper: bacon-dorr-classicism
   role: proof
   locator: Appendix D, p. 79, paragraph beginning “One particularly interesting result”
-description: 'Use N and {0} with all maps between them, evaluated at N. BF holds there and fails at the
-  accessible singleton; the paragraph gives the type-e failure. Atomlessness fails at N: the closed sentence
-  $\exists x\, .\,\forall y\, .\,x=y$ denotes the set of arrows out of N whose target has a singleton
-  individual domain, which is the singleton of the unique map to {0}. It is a nonempty proposition, hence
-  possible, with no nonempty proper subproposition, so it is an atom below which Atomlessness finds no
-  witness.'
+description: 'Appendix D, p. 79, the paragraph beginning “One particularly interesting result”: two objects,
+  $W_0=\mathbb N$ and $W_1=\{0\}$, with all functions between them as arrows, $W_i^\ddagger$ the finite
+  subsets of $W_i$, and the model ideally full as in Proposition D.5. BF holds at $W_0$, since every map
+  agrees on any finite set with a surjection, and fails at $W_1$, where $\forall y\,\Box\,x=y$ holds of
+  the one individual but $\Box\forall y\,x=y$ does not; so BF holds without $\Box$BF. Atomlessness fails
+  at $W_0$: the closed sentence that there is exactly one individual denotes the singleton of the unique
+  map to $W_1$, a nonempty proposition with no nonempty proper subproposition. Evaluation point: $W_0$,
+  at its identity arrow.'
 notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
   its evaluation point; construction and verification are given at the PDF locations in References. Interpretation
   of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual
@@ -42,7 +45,10 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
   $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
   what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
-  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.'
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.  Distinctness-preserving
+  collapse fails at $W_0$: the transposition of $5$ and $6$ is an arrow with an inverse, so for any true
+  $q$ the composite of a member of $q$ with the inverse carries the transposition into $q$, making $\Diamond
+  q$ true there, while the true proposition that $5$ is fixed is false there.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -77,3 +83,8 @@ changes:
   - separated-structure-r
   - independence-signature-r
   - distinctness-signature-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Expanded the description from Appendix D; settled the Distinctness-preserving collapse.
+  violates:
+  - distinctness-preserving-collapse

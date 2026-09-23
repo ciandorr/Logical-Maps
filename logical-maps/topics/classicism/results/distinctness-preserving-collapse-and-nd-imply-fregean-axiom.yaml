@@ -1,0 +1,33 @@
+id: distinctness-preserving-collapse-and-nd-imply-fregean-axiom
+premises:
+- distinctness-preserving-collapse
+- distinctness-necessary-r
+conclusion: fregean-axiom
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 23 September 2026; proof written out by Claude Fable 5.1 (Anthropic),
+    23 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  checked_by: []
+  date: '2026-09-23'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 23 September 2026; proof as recorded.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 42 (the distinctness-preserving
+  modality); §1.4, pp. 15–16 (the Fregean Axiom).
+source_names:
+- Dorr 23 Sep
+- Classicism
+proof: 'Under ND the two necessities coincide. If $\Box_{\ne}p$, there is a true $q$ with $\Box(\Diamond
+  q\to p)$; $q$ true gives $q\ne\bot$, and ND at type $t$ gives $\Box(q\ne\bot)$, that is $\Box\Diamond
+  q$; K then gives $\Box p$. So the collapse yields $\forall p\, .\,p\to\Box p$: every truth is $\top$.
+  Then materially equivalent propositions are identical: if both are true both are $\top$; if both are
+  false their negations are $\top$, so both are $\bot$. That is the Fregean Axiom.'
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.6, p. 42; §1.4, pp. 15–16
+notes: "The converse of the first step holds without ND: $\\Box p$ gives $\\Box_{\ne}p$ with $q:=\top$.\
+  \ So ND makes $\\Diamond$ and $\\Diamond_{\ne}$ coextensive, and with it the collapse is Extensionalism.\
+  \ This settles the collapse as false in every model with ND and more than two propositions."

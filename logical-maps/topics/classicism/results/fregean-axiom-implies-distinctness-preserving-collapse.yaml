@@ -1,0 +1,29 @@
+id: fregean-axiom-implies-distinctness-preserving-collapse
+premises:
+- fregean-axiom
+conclusion: distinctness-preserving-collapse
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 23 September 2026; proof written out by Claude Fable 5.1 (Anthropic),
+    23 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  checked_by: []
+  date: '2026-09-23'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 23 September 2026; proof as recorded.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 42 (the distinctness-preserving
+  modality); §1.4, pp. 15–16 (the Fregean Axiom).
+source_names:
+- Dorr 23 Sep
+- Classicism
+proof: 'Under the Fregean Axiom a true $p$ is materially equivalent to $\top$, hence identical to it,
+  so $\Box p$. And $\Box p$ gives $\Box_{\ne}p$: take $q:=\top$, which is true, and $\Box(\Diamond\top\to
+  p)$ is $\Box p$.'
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.6, p. 42; §1.4, pp. 15–16
+notes: 'With the converse record, the collapse is equivalent to the Fregean Axiom in the presence of ND,
+  while without ND it is weaker: the coalesced-sum roots satisfy it with infinitely many propositions.'

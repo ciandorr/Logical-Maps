@@ -374,7 +374,11 @@ when the diagram is showing something the background makes equivalent to the
 selection without being part of it. They cost no line of their own. Whether the selection can hold with the background, and which
 model witnesses it, goes to the foot, out of the way of both. The standing
 instruction shows only while nothing is selected. A relation heading such as
-Converse rides on the first line it labels rather than taking one. An arrow
+Converse rides on the first line it labels rather than taking one. Below the
+readout, a selected principle, or several that are all equivalent, lists every
+other principle the background makes equivalent to it, shown or not, with
+**show** or **hide** for that principle and **replace**, which hides what is
+selected, shows the equivalent in its place and selects it. An arrow
 states itself once; its drawn form appears separately only when the background
 let the graph drop a premise or contrapose it. Drag its divider or use the arrow keys to resize it;
 double-click or press Enter to reset. The height is remembered. Opening or closing

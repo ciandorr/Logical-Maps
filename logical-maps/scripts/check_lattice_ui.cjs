@@ -401,6 +401,22 @@ try{
   assert.equal(equiv(),null,'Then withdraws');
   w.eval('lattice.shown=[];lattice.builtKey=null;select(null);renderLattice();');
 
+  // The map's other names for the selection. E and F entail each other, and
+  // only E is chosen, so F is offered to be shown or swapped in.
+  w.eval('lattice.shown=["e"];lattice.builtKey=null;renderLattice();');
+  tap(w,d.querySelector('#lat-graph text[data-principle="e"]'));
+  const others=()=>[...d.querySelectorAll('#pop .equivalent-names li [data-principle]')].map(b=>b.dataset.principle);
+  assert.deepEqual(others(),['f'],'The equivalent principle is listed');
+  assert.equal(d.querySelector('#pop [data-equivalent-show="f"]').textContent,'show','One the lattice is not showing offers to show');
+  d.querySelector('#pop [data-equivalent-show="f"]').click();
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(lattice.shown)')).sort(),['e','f'],'Which adds it as a generator');
+  assert.equal(d.querySelector('#pop [data-equivalent-show="f"]').textContent,'hide');
+  d.querySelector('#pop [data-equivalent-show="f"]').click();
+  d.querySelector('#pop [data-equivalent-replace="f"]').click();
+  assert.deepEqual(JSON.parse(w.eval('JSON.stringify(lattice.shown)')),['f'],'Replace swaps it into the diagram');
+  assert.equal(w.eval('state.focus'),'f','And the selection follows it there');
+  w.eval('lattice.shown=[];lattice.builtKey=null;select(null);renderLattice();');
+
   // The toolbar matches the graph's: a box to find a principle on the left,
   // Flip and Fit together on the right.
   const tools=d.querySelector('#pane-lattice .graph-tools');

@@ -165,6 +165,28 @@ try {
   w.eval('state.excluded.delete("h"); repaintGraph();');
   pointer(label('a'));
   assert.equal(action('equivalents'), null, 'A principle with no equivalent is offered nothing');
+
+  // The map's other names for what is selected, with the moves that trade one
+  // for another. B and H entail each other, so each is the other's other name.
+  pointer(label('b'));
+  const names = () => [...pop.querySelectorAll('.equivalent-names li [data-principle]')].map(b => b.dataset.principle);
+  const control = (kind, id) => pop.querySelector(`[data-equivalent-${kind}="${id}"]`);
+  assert.deepEqual(names(), ['h'], 'The equivalent principle is listed');
+  assert.equal(control('show', 'h').textContent, 'hide', 'One the graph is showing offers to hide');
+  control('show', 'h').click();
+  assert.ok(w.eval('state.excluded.has("h")'), 'Which takes it off the graph');
+  assert.equal(control('show', 'h').textContent, 'show', 'And then offers to bring it back');
+  control('show', 'h').click();
+  assert.ok(!w.eval('state.excluded.has("h")'));
+  control('replace', 'h').click();
+  assert.equal(w.eval('state.focus'), 'h', 'Replace selects the equivalent');
+  assert.ok(w.eval('state.excluded.has("b")'), 'Hides what was selected');
+  assert.ok(!w.eval('state.excluded.has("h")'), 'And leaves it showing in its place');
+  assert.deepEqual(names(), ['b'], 'So the list offers the trade back');
+  assert.equal(names().length, [...pop.querySelectorAll('.equivalent-names li')].length);
+  w.eval('state.excluded.delete("b"); repaintGraph();');
+  pointer(label('a'));
+  assert.equal(pop.querySelector('.equivalent-names'), null, 'A principle with no equivalent gets no list');
   pointer(label('a'));
   assert.deepEqual(errors, []);
   console.log('PASS: unlimited joint selection, related/equivalent principles, conjunctions, proof-stroke hit targets, sidebar/negative selections, red inconsistency highlighting, bottom graph details, and hide / add negation / move to background offered on the selection.');

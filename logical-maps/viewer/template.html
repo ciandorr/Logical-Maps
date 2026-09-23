@@ -534,6 +534,9 @@
   .rel-status { font-weight: 600; }
   .rel-status.implies { color: var(--human); } .rel-status.excludes, .rel-status.independent, .rel-status.inconsistent { color: var(--indep); }
   .rel-status.open { color: var(--ink-3); font-weight: 500; } .rel-status.conjectured { color: var(--conj); }
+  .pop ul.equivalent-names { list-style: none; padding: 0; margin: 2px 0 0; display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; }
+  .pop ul.equivalent-names li { display: flex; align-items: baseline; gap: 12px; }
+  .pop .equivalent-actions { margin-left: auto; flex: none; display: flex; gap: 10px; font-size: 12px; }
   .pop ul.rel { list-style: none; padding: 0; margin: 2px 0 5px; display: flex; flex-direction: column; gap: 2px; font-size: 12px; }
   .pop ul.rel li { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
   .pop .rel-line { margin: 2px 0; font-size: 13px; }
@@ -2777,6 +2780,8 @@ function wire(el) {
   el.querySelectorAll('button[data-principle]').forEach(b => b.addEventListener('click', ev => select({ type: 'principle', id: b.dataset.principle }, ev.shiftKey || ev.metaKey || ev.ctrlKey)));
   el.querySelectorAll('button[data-remove-selection]').forEach(b => b.addEventListener('click', () => select({type: 'principle', id: b.dataset.removeSelection}, true)));
   el.querySelectorAll('button[data-selection-action]').forEach(b => b.addEventListener('click', () => applySelectionAction(b.dataset.selectionAction)));
+  el.querySelectorAll('button[data-equivalent-show]').forEach(b => b.addEventListener('click', () => toggleEquivalent(b.dataset.equivalentShow)));
+  el.querySelectorAll('button[data-equivalent-replace]').forEach(b => b.addEventListener('click', () => replaceWithEquivalent(b.dataset.equivalentReplace)));
   el.querySelectorAll('button[data-result]').forEach(b => b.addEventListener('click', () => select({ type: 'result', id: b.dataset.result })));
   el.querySelectorAll('button[data-model]').forEach(b => b.addEventListener('click', () => select({ type: 'model', id: b.dataset.model })));
   el.querySelectorAll('button[data-verdict]').forEach(b => b.addEventListener('click', () => select({ type: 'model-verdict', id: b.dataset.verdictModel, principle: b.dataset.verdict })));
@@ -2836,6 +2841,7 @@ function renderDetail() {
       return `<li><details><summary>${esc(name(literal))}</summary>${isNegative(literal) ? '<p>Negation of:</p>' : ''}<p>${esc(principle?.statement || name(literal))}</p></details><button class="lnk" data-remove-selection="${esc(literal)}" aria-label="Remove ${esc(name(literal))} from selection">remove</button></li>`;
     }).join('')}</ul>`;
     h += statusLine('Joint consistency', consistencyStatus(sel.premises), true);
+    h += equivalentList(sel.premises);
 
   } else if (sel.type === 'junction') {
     const junction = layout?.byId.get(sel.id);
@@ -2886,6 +2892,7 @@ function renderDetail() {
       h += `<div class="links"><button class="lnk" data-goto="1">details</button>${assumable
         ? `<button class="lnk" data-selection-action="background" title="Assume ${esc(name(sel.id))} throughout, as the sidebar's background control would.">background</button>` : ''}</div>`;
     }
+    h += equivalentList([(sel.negative ? '!' : '') + sel.id]);
   } else if (sel.type === 'model-verdict') {
     const m = byMid.get(sel.id), e = modelEvidence(m, sel.principle);
     h += `<div class="pop-t">${esc(m.name)}</div><div class="pop-s">${esc(name(sel.principle))}: ${e ? e.value ? '✓ satisfied' : '✗ violated' : '? unknown'}</div>`;
@@ -2996,6 +3003,57 @@ function literalShown(l) {
   const id = baseId(l);
   if (state.tab === 'lattice') return lattice.shown.includes(l);
   return isNegative(l) ? state.negativeShown.has(id) : !state.excluded.has(id);
+}
+// Every principle the map knows to be equivalent to the selection under the
+// current background, shown or not. These are the map's other names for what
+// is selected, so the readout should say what they are and let the reader
+// trade one for another. Equivalence is the relation the graph draws its own
+// boxes from, so the list and the picture cannot disagree.
+function equivalentNames(literals) {
+  if (!A || !literals.length) return [];
+  const negative = isNegative(literals[0]);
+  if (literals.some(l => isNegative(l) !== negative || !byPid.has(baseId(l)))) return [];
+  const bases = literals.map(baseId);
+  const cls = A.classes.find(c => c.includes(bases[0]));
+  if (!cls || !bases.every(b => cls.includes(b))) return [];
+  return cls.filter(b => !bases.includes(b) && byPid.has(b) && !inBackground(b))
+    .map(b => (negative ? '!' : '') + b)
+    .sort((x, y) => name(x).localeCompare(name(y)));
+}
+function equivalentList(literals) {
+  const others = selectionInLegend() ? equivalentNames(literals) : [];
+  if (!others.length) return '';
+  const row = l => `<li><button class="lnk" data-principle="${esc(l)}">${esc(name(l))}</button><span class="equivalent-actions">`
+    + `<button class="lnk" data-equivalent-show="${esc(l)}">${literalShown(l) ? 'hide' : 'show'}</button>`
+    + `<button class="lnk" data-equivalent-replace="${esc(l)}" title="Hide what is selected, show ${esc(name(l))} in its place, and select it">replace</button></span></li>`;
+  return `<div class="rel-head">Equivalent under the background</div><ul class="equivalent-names">${others.map(row).join('')}</ul>`;
+}
+// Whether a literal is on the diagram is a different switch in each view.
+function setLiteralShown(l, shown) {
+  const id = baseId(l);
+  if (state.tab === 'lattice') {
+    const at = lattice.shown.indexOf(l);
+    if (shown && at < 0) lattice.shown.push(l);
+    if (!shown && at >= 0) lattice.shown.splice(at, 1);
+    return;
+  }
+  if (isNegative(l)) shown ? state.negativeShown.add(id) : state.negativeShown.delete(id);
+  else shown ? state.excluded.delete(id) : state.excluded.add(id);
+}
+function redrawAfterShowing() {
+  if (state.tab === 'lattice') { lattice.selected = null; renderLatticeFilters(); renderLattice(); }
+  else repaintGraph();
+}
+function toggleEquivalent(l) { setLiteralShown(l, !literalShown(l)); redrawAfterShowing(); renderDetail(); }
+// A replacement is a rename: what was selected goes, its equivalent takes the
+// place it had on the diagram, and the selection follows it there.
+function replaceWithEquivalent(l) {
+  const sel = state.selected;
+  const literals = sel?.type === 'principle' ? [(sel.negative ? '!' : '') + sel.id] : sel?.type === 'selection' ? sel.premises : [];
+  for (const old of literals) setLiteralShown(old, false);
+  setLiteralShown(l, true);
+  redrawAfterShowing();
+  select({type: 'principle', id: l});
 }
 function selectionActions(literals) {
   if (state.tab !== 'graph' && state.tab !== 'lattice') return '';

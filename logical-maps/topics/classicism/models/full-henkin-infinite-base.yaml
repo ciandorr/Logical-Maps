@@ -30,6 +30,8 @@ satisfies:
 - necessary-strong-leibniz-r
 - no-contingency-signature-r
 - signature-b-r
+- necessary-relational-choice-r
+- necessary-functional-choice-r
 violates:
 - axiom-of-infinity-t
 - infinity-t
@@ -91,7 +93,8 @@ notes: 'Explicit specialization of the source''s standard Henkin construction to
   of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$
   and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\top_\tau$
   denotes; Distinctness (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ) does not
-  prove. Everything that implies these fails with them.'
+  prove. Everything that implies these fails with them. Box is truth in this one-world model, so □Relational
+  Choice and □Functional Choice hold with their unboxed forms.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -118,3 +121,9 @@ changes:
   - separated-structure-r
   - independence-signature-r
   - distinctness-signature-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Boxed the two Choice claims.
+  satisfies:
+  - necessary-relational-choice-r
+  - necessary-functional-choice-r

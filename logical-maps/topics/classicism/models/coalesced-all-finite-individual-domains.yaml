@@ -10,6 +10,7 @@ satisfies:
 - atomicity-t
 - boolean-completeness-t
 - relational-choice-r
+- necessary-relational-choice-r
 violates:
 - distinctness-necessary-r
 - witnessed-possibility-r
@@ -79,7 +80,9 @@ notes: 'Recorded to witness the consistency with C of the sentence through which
   the component with three individuals has three at its only world; take two root individuals that differ
   at that component and agree everywhere else; the pure formula saying that $x\ne y$ and there are exactly
   two individuals is consistent, but at the root there are infinitely many individuals, under every arrow
-  into another component the two collapse, and under the arrow into that component there are three. '
+  into another component the two collapse, and under the arrow into that component there are three. □Relational
+  Choice holds: Relational Choice holds at the root by the free root component and at every component,
+  each being a full Henkin model.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -116,3 +119,8 @@ changes:
   - relational-choice-r
   violates:
   - possibility-plus-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Boxed the Relational Choice claim.
+  satisfies:
+  - necessary-relational-choice-r

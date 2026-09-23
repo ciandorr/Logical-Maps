@@ -12,6 +12,7 @@ violates:
 - barcan-t
 - atomicity-t
 - boolean-completeness-t
+- necessary-relational-choice-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -66,7 +67,9 @@ notes: 'Promoted on 22 September 2026 for the pure package, which the source est
   of a subrelation is evaluated at the root’s identity arrow only, while the subrelation condition is
   boxed; so for a serial root relation take the subrelation whose root component is a functional choice
   from the root component, by choice in the metatheory, and whose component parts are empty. Its necessitation
-  fails, since some component refutes Relational Choice at its root. '
+  fails, since some component refutes Relational Choice at its root. □Relational Choice fails, as the
+  notes on Relational Choice explain: some component refutes Relational Choice at its root, which is accessible
+  from the root.'
 was_conjectured: true
 changes:
 - date: '2026-09-22'
@@ -86,3 +89,8 @@ changes:
   violates:
   - atomicity-t
   - boolean-completeness-t
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of □Relational Choice, already argued in the notes.
+  violates:
+  - necessary-relational-choice-r

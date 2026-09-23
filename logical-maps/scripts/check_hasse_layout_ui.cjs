@@ -205,6 +205,31 @@ try{
       dom.window.close();
     }
   }
+  // Flip turns the diagram over: the same layout reflected, so every vertical
+  // relation reverses and flipping twice is the identity. A junction is
+  // re-placed against its box afterwards, so it keeps its seat rather than
+  // being mirrored out of it.
+  const flipDom=page(falsity), flipDoc=flipDom.window.document;
+  const upright=geometry(flipDom);
+  const free=g=>g.nodes.filter(n=>n.kind!=='junction');
+  flipDoc.getElementById('graph-flip').click();
+  const over=geometry(flipDom);
+  const span=Math.min(...free(upright).map(n=>n.y))+Math.max(...free(upright).map(n=>n.y));
+  for (const n of free(over)) assert.equal(n.y, span-upright.nodes.find(m=>m.id===n.id).y, `flip: ${n.id} is reflected`);
+  for (const n of over.nodes.filter(n=>n.parent)) {
+    const box=over.nodes.find(m=>m.id===n.parent);
+    assert.ok(Math.abs(n.y-box.y)<=box.h/2, `flip: ${n.id} stays inside its box`);
+  }
+  const N=byId(over);
+  for (const e of over.edges) {
+    const wasUp=byId(upright).get(e.from).y>byId(upright).get(e.to).y;
+    assert.equal(N.get(e.from).y<N.get(e.to).y, wasUp, `flip: ${e.id} turns over with the diagram`);
+  }
+  const ceiling=over.nodes.find(n=>n.kind==='falsity');
+  assert.ok(over.nodes.filter(n=>n!==ceiling&&n.kind!=='junction').every(n=>n.y>ceiling.y),'flip: ⊥ rises to the top');
+  flipDoc.getElementById('graph-flip').click();
+  assert.deepEqual(geometry(flipDom).nodes,upright.nodes,'Flipping twice restores the layout exactly');
+
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: floor at the bottom, ascending arrows, conjunctions inside equivalence boxes, grouped collapses, labelled bands, hollow heads, and an immobile transitive reduction on fixtures and real topics.');
+  console.log('PASS: floor at the bottom, ascending arrows, conjunctions inside equivalence boxes, grouped collapses, labelled bands, hollow heads, an immobile transitive reduction on fixtures and real topics, and a flip that reflects the whole layout and undoes itself.');
 }finally{pages.forEach(p=>p.window.close());}

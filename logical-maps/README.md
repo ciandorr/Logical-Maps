@@ -253,7 +253,15 @@ principles generate. It opens with False and True alone; the sidebar offers the 
 choices per principle as the graph, ✓ for the principle, ✗ for its negation and
 a move to the background, and each adds its literal together with its meets
 against everything already shown. Each group has the graph's **show positive**
-and **clear** as well, under the same node cap. The sidebar is the graph's own, moved
+and **clear** as well, under the same node cap. The toolbar is the graph's too:
+a box to find a principle, then **Flip** and **Fit**. One query serves both
+diagrams; on the lattice a match nobody has chosen to build with has no node,
+and the readout says so rather than pretending otherwise.
+
+**Flip** turns a diagram over, so the stronger principles sit at the top and the
+arrows descend. It is one reflection of the finished layout, so nothing else
+moves, and the graph and the lattice share the setting: which way a Hasse
+diagram reads is a habit of the reader's rather than a fact about either one. The sidebar is the graph's own, moved
 across with the tab as it is for the theory explorer, so the background, the
 scrolling and the resizable panes are the same by construction, and so is the
 arrow-source selector: the lattice is drawn from the selected sources alone, proofs and models both, so

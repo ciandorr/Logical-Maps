@@ -365,6 +365,47 @@ try{
   assert.ok(d2.querySelector('#pane-lattice [data-lat-row="a"]').classList.contains('in-background'),'As the sidebar shows');
   w2.eval('resetBackground()');
 
+  // The toolbar matches the graph's: a box to find a principle on the left,
+  // Flip and Fit together on the right.
+  const tools=d.querySelector('#pane-lattice .graph-tools');
+  assert.ok(tools.querySelector('#lat-search'),'The lattice has a search box');
+  assert.equal(w.getComputedStyle(tools.querySelector('.graph-tool-buttons')).marginLeft,'auto','Its buttons sit to the right, as the graph\'s Fit does');
+  assert.deepEqual([...tools.querySelectorAll('.graph-tool-buttons .btn')].map(b=>b.id),['lat-flip','lat-fit'],'Flip beside Fit');
+
+  // The search reads the same as the graph's, over the same principles.
+  w.eval('lattice.shown=["a"];lattice.builtKey=null;renderLattice();');
+  const finder=d.getElementById('lat-search'), status=()=>d.getElementById('lat-search-status').textContent;
+  const type=value=>{finder.value=value;finder.dispatchEvent(new w.Event('input',{bubbles:true}));};
+  type('c');
+  assert.equal(d.querySelector('#lat-filters .lat-row.search-current')?.dataset.latRow,'c','It finds the row in the sidebar');
+  assert.match(status(),/1 of 1/,'And says where it is');
+  assert.match(status(),/Not on the diagram/,'A principle nobody chose has no node, and the readout says so');
+  assert.equal(d.querySelector('#lat-graph .lat-node.search-current'),null);
+  type('a');
+  assert.doesNotMatch(status(),/Not on the diagram/,'A chosen one is on the diagram');
+  assert.ok(d.querySelector('#lat-graph .lat-node.search-current'),'And its node is marked');
+  assert.equal(d.getElementById('graph-search').value,'a','One query, shown in both boxes');
+  finder.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+  assert.equal(finder.value,''); assert.equal(status(),'');
+  assert.equal(d.getElementById('graph-search').value,'','Clearing clears both');
+
+  // Flip turns the lattice over: the floor rises, and an arrow still leaves
+  // the side of its box that faces the other end.
+  w.eval('lattice.shown=["a","b"];lattice.builtKey=null;renderLattice();');
+  const geom=()=>JSON.parse(w.eval('JSON.stringify({top:lattice.nodes.find(n=>n.top).y,bottom:lattice.nodes.find(n=>n.bottom).y,ends:lattice.edges.map(e=>[e.from.y+Math.sign(e.to.y-e.from.y)*e.from.h/2,e.to.y-Math.sign(e.to.y-e.from.y)*e.to.h/2])})'));
+  const upright=geom();
+  assert.ok(upright.bottom>upright.top,'⊥ starts at the foot');
+  const drawn=()=>[...d.querySelectorAll('#lat-graph .lat-edge')].map(p=>p.getAttribute('d'));
+  const uprightPaths=drawn();
+  d.getElementById('lat-flip').click();
+  const over=geom();
+  assert.ok(over.bottom<over.top,'Flipped, it rises to the top');
+  assert.equal(over.top+over.bottom,upright.top+upright.bottom,'The diagram is reflected, not moved');
+  for (const [i,[y1,y2]] of over.ends.entries())
+    assert.ok(drawn()[i].includes(`,${y1} L`)&&drawn()[i].endsWith(`,${y2}`),'Each arrow attaches to the facing sides');
+  d.getElementById('lat-flip').click();
+  assert.deepEqual(drawn(),uprightPaths,'Flipping twice restores the diagram exactly');
+
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, equivalent names selecting one node, and a source selector shared with the graph that redraws the lattice from the selected sources alone, and hide / add negation / move to background offered on the selection.');
+  console.log('PASS: pane visibility, constants naming their own nodes, only chosen principles named, unchosen meets drawn as ∧ circles that become boxes once chosen, no nesting, inconsistent meets folded into the floor, open covers marked, negations as generators, a shared background whose dock follows the view, and clicks that reuse the graph\'s own selection for principles, conjunctions and arrows, with the floor excluded, the chosen name marked, equivalent names selecting one node, and a source selector shared with the graph that redraws the lattice from the selected sources alone, hide / add negation / move to background offered on the selection, a search box and Flip beside Fit in a toolbar laid out as the graph\'s.');
 }finally{pages.forEach(p=>p.window.close());}

@@ -124,16 +124,19 @@
   .graph-tools > * { pointer-events: auto; }
   /* A warning panel is inset from the edges; the tools would show around it. */
   .graph-area.warned .graph-tools { visibility: hidden; }
-  .graph-tools #fit { margin-left: auto; }
+  .graph-tools .graph-tool-buttons { margin-left: auto; display: flex; gap: 6px; }
+  .graph-tools .btn[aria-pressed="true"] { background: var(--hl); border-color: var(--accent); }
   .graph-search { width: 280px; max-width: calc(100% - 48px); min-width: 0; }
   .graph-search .search { width: 100%; margin: 0; }
-  #graph-search-status { display: block; width: fit-content; max-width: 100%; background: var(--panel); color: var(--ink-2); font-size: 12px; }
-  #graph-search-status:not(:empty) { padding: 2px 6px; }
-  .pr-row.search-match, .background-row.search-match { background: var(--hl); box-shadow: inset 3px 0 var(--focus); border-radius: 3px; }
-  .pr-row.search-current, .background-row.search-current { outline: 2px solid var(--focus); outline-offset: 1px; }
+  #graph-search-status, #lat-search-status { display: block; width: fit-content; max-width: 100%; background: var(--panel); color: var(--ink-2); font-size: 12px; }
+  #graph-search-status:not(:empty), #lat-search-status:not(:empty) { padding: 2px 6px; }
+  .pr-row.search-match, .lat-row.search-match, .background-row.search-match { background: var(--hl); box-shadow: inset 3px 0 var(--focus); border-radius: 3px; }
+  .pr-row.search-current, .lat-row.search-current, .background-row.search-current { outline: 2px solid var(--focus); outline-offset: 1px; }
   #graph .node.search-match { opacity: 1; }
   #graph .node.search-match rect { stroke: var(--focus); stroke-width: 3; vector-effect: non-scaling-stroke; }
   #graph .node.search-current rect { stroke-width: 4; }
+  #lat-graph .lat-node.search-match rect, #lat-graph .lat-node.search-match circle { stroke: var(--focus); stroke-width: 3; }
+  #lat-graph .lat-node.search-current rect, #lat-graph .lat-node.search-current circle { stroke-width: 4; }
   .graph-warning { position: absolute; inset: 24px; overflow: auto; padding: 24px; border: 1px solid var(--indep); border-radius: 4px; background: var(--warning-bg); color: var(--indep); }
   .graph-warning h2 { margin: 0 0 12px; font-size: 21px; }
   .graph-warning .lnk { color: var(--indep); text-decoration: underline; }
@@ -635,7 +638,7 @@
           <svg id="graph" role="img" aria-label="Implication graph"></svg>
           <div id="graph-warning" class="graph-warning" role="alert" hidden></div>
           <div id="graph-empty" class="graph-empty" role="status" hidden></div>
-          <div class="graph-tools"><div class="graph-search"><input class="search" id="graph-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the graph" aria-describedby="graph-search-status" autocomplete="off"><span id="graph-search-status" role="status" aria-live="polite"></span></div><button class="btn small" id="fit">Fit</button></div>
+          <div class="graph-tools"><div class="graph-search"><input class="search" id="graph-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the graph" aria-describedby="graph-search-status" autocomplete="off"><span id="graph-search-status" role="status" aria-live="polite"></span></div><div class="graph-tool-buttons"><button class="btn small" id="graph-flip" aria-pressed="false" title="Turn the diagram over, so the stronger principles sit at the top">Flip</button><button class="btn small" id="fit">Fit</button></div></div>
         </div>
         <div class="pane-divider" id="details-divider" role="separator" tabindex="0" aria-orientation="horizontal" aria-label="Resize selection details" aria-controls="graph-details" title="Drag to resize details · Arrow keys to adjust · Double-click to reset"></div>
         <aside id="graph-details" class="graph-details" aria-label="Selection details">
@@ -649,7 +652,7 @@
           <div class="graph-area">
             <svg id="lat-graph" role="img" aria-label="Lattice of conjunctions"></svg>
             <div id="lat-warning" class="graph-warning" role="alert" hidden></div>
-            <div class="graph-tools"><button class="btn small" id="lat-fit">Fit</button></div>
+            <div class="graph-tools"><div class="graph-search"><input class="search" id="lat-search" type="search" placeholder="Find a principle…" aria-label="Find a principle on the lattice" aria-describedby="lat-search-status" autocomplete="off"><span id="lat-search-status" role="status" aria-live="polite"></span></div><div class="graph-tool-buttons"><button class="btn small" id="lat-flip" aria-pressed="false" title="Turn the diagram over, so the stronger conjunctions sit at the top">Flip</button><button class="btn small" id="lat-fit">Fit</button></div></div>
           </div>
           <aside id="lat-detail" class="graph-details" aria-label="Lattice selection details"><div id="lat-legend" class="relation-legend" role="status" aria-live="polite" hidden></div><p id="lat-hint"></p></aside>
         </div>
@@ -923,7 +926,7 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set() };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set(), flipped: false };
 // A handful of categories reads better open; a long list is easier to navigate
 // closed. The threshold counts the topic's own principles, not the ones a
 // reader happens to be showing.
@@ -1454,6 +1457,14 @@ function computeLayout(g) {
     L.y.set(n.id, n.kind === 'falsity' ? Math.max(0, ...bounds.map(b => b.bottom)) + 63 + size.h / 2 : Math.min(0, ...bounds.map(b => b.top)) - 63 - size.h / 2);
     L.size.set(n.id, size); L.visible.push(n); L.vis.add(n.id); L.layers.push([n]);
   }
+  // Turning the diagram over is one reflection of the finished layout. Edge
+  // geometry reads the positions, so nothing downstream needs to know; False
+  // and True have already taken the ends they belong at and travel with it,
+  // and the junctions below are placed against their box after the flip.
+  if (state.flipped) {
+    const ys = L.visible.map(n => L.y.get(n.id)), span = Math.min(...ys) + Math.max(...ys);
+    for (const n of L.visible) L.y.set(n.id, span - L.y.get(n.id));
+  }
   for (const j of g.nodes.filter(n => n.parent && L.vis.has(n.parent))) {
     const box = byId.get(j.parent), index = box.junctions.indexOf(j);
     L.visible.push(j); L.vis.add(j.id); L.size.set(j.id, {w: 22, h: 22});
@@ -1936,10 +1947,16 @@ function renderGraph() {
   renderSubscripts(svg);
   applyView(); applySelection(); applyGraphSearch();
 }
+// One search, read by whichever view is open. The two diagrams draw the same
+// principles, so a query typed in one belongs to both; what differs is only
+// what each can do with a match.
+const searchBoxes = () => ['graph-search', 'lat-search'].map(id => document.getElementById(id)).filter(Boolean);
+const onLattice = () => state.tab === 'lattice';
+const latticeNodeFor = literal => lattice.nodes.find(n => (n.labels || []).some(l => l.literal && baseId(l.literal) === literal));
 function applyGraphSearch(focus = false) {
   const matches = [...graphSearch.matches], current = matches[graphSearch.index];
-  document.querySelectorAll('#pr-filters .pr-row, #background-list .background-row').forEach(row => {
-    const id = row.dataset.prRow || row.dataset.backgroundId;
+  document.querySelectorAll('#pr-filters .pr-row, #lat-filters .lat-row, #background-list .background-row').forEach(row => {
+    const id = row.dataset.prRow || row.dataset.latRow || row.dataset.backgroundId;
     row.classList.toggle('search-match', graphSearch.matches.has(id));
     row.classList.toggle('search-current', id === current);
   });
@@ -1948,13 +1965,40 @@ function applyGraphSearch(focus = false) {
     node.classList.toggle('search-match', members.some(p => graphSearch.matches.has(p)));
     node.classList.toggle('search-current', members.includes(current));
   });
-  const status = document.getElementById('graph-search-status');
-  status.textContent = !document.getElementById('graph-search').value.trim() ? '' : !matches.length ? 'No matching principles' :
-    `${graphSearch.index + 1} of ${matches.length}${inBackground(current) ? ' · In background' : state.excluded.has(current) ? ' · Temporarily shown' : ''}${matches.length > 1 ? ' · Enter for next' : ''}`;
+  document.querySelectorAll('#lat-graph .lat-node').forEach(node => {
+    const members = (lattice.nodes.find(n => n.id === node.dataset.latNode)?.labels || [])
+      .map(l => l.literal).filter(Boolean).map(baseId);
+    node.classList.toggle('search-match', members.some(p => graphSearch.matches.has(p)));
+    node.classList.toggle('search-current', members.includes(current));
+  });
+  // The graph can show a match it was hiding. The lattice cannot: a principle
+  // nobody has chosen to build with has no node, which is a different thing
+  // to say and worth saying.
+  const typed = searchBoxes().some(box => box.value.trim());
+  const tail = matches.length > 1 ? ' · Enter for next' : '';
+  const aside = view => inBackground(current) ? ' · In background'
+    : view === 'lattice' ? (latticeNodeFor(current) ? '' : ' · Not on the diagram')
+    : state.excluded.has(current) ? ' · Temporarily shown' : '';
+  for (const [id, view] of [['graph-search-status', 'graph'], ['lat-search-status', 'lattice']]) {
+    const status = document.getElementById(id);
+    if (status) status.textContent = !typed ? '' : !matches.length ? 'No matching principles'
+      : `${graphSearch.index + 1} of ${matches.length}${aside(view)}${tail}`;
+  }
   if (!focus || !current) return;
-  const row = document.querySelector(inBackground(current) ? `[data-background-id="${current}"]` : `[data-pr-row="${current}"]`);
+  const row = document.querySelector(inBackground(current) ? `[data-background-id="${current}"]`
+    : onLattice() ? `[data-lat-row="${current}"]` : `[data-pr-row="${current}"]`);
   openCategoryOf(row);
   row?.scrollIntoView?.({block: 'nearest', inline: 'nearest'});
+  if (onLattice()) {
+    const node = latticeNodeFor(current), diagram = document.getElementById('lat-graph');
+    if (!node || !diagram) return;
+    const W = diagram.clientWidth || 800, H = diagram.clientHeight || 600;
+    lattice.view.k = Math.min(1.4, (W - 32) / node.w);
+    lattice.view.tx = W / 2 - node.x * lattice.view.k;
+    lattice.view.ty = H / 2 - node.y * lattice.view.k;
+    latticeApplyView();
+    return;
+  }
   const node = layout?.visible.find(n => n.members?.includes(current));
   if (node) {
     const W = svg.clientWidth || 800, H = svg.clientHeight || 600;
@@ -2844,7 +2888,7 @@ function placeDetail() {
 }
 document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !['graph-details', 'lat-detail'].includes(el.parentElement.id) && !el.contains(ev.target)) el.hidden = true; });
 document.addEventListener('keydown', ev => {
-  if (ev.key !== 'Escape' || ev.target.id === 'graph-search' || document.body.classList.contains('resizing-panes')) return;
+  if (ev.key !== 'Escape' || ev.target.closest?.('.graph-search') || document.body.classList.contains('resizing-panes')) return;
   if (state.focus || state.selected?.type === 'principle') select(null);
   else document.getElementById('pop').hidden = true;
 });
@@ -3157,29 +3201,43 @@ document.getElementById('fit').addEventListener('click', fit);
 document.getElementById('search').addEventListener('input', e => {
   state.search = e.target.value; renderResults();
 });
-document.getElementById('graph-search').addEventListener('input', e => {
-  const normalize = value => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
-  const query = normalize(e.target.value);
+function runGraphSearch(value) {
+  const normalize = text => text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+  const query = normalize(value);
   const terms = query.split(/\s+/);
   graphSearch.matches = new Set(query ? P.filter(p => {
     const text = normalize([p.name, p.id, ...(p.aliases || [])].join(' '));
     return terms.every(term => text.includes(term));
   }).map(p => p.id) : []);
   graphSearch.index = 0;
+  for (const box of searchBoxes()) if (box.value !== value) box.value = value;
   // Searching closes the popup but keeps the focused principle's shading.
-  state.selected = null; document.getElementById('pop').hidden = true; renderGraph();
-  if (!query) fit();
+  state.selected = null; document.getElementById('pop').hidden = true;
+  if (onLattice()) { renderLattice(); if (!query) latticeFit(); }
+  else { renderGraph(); if (!query) fit(); }
   applyGraphSearch(true);
-});
-document.getElementById('graph-search').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && graphSearch.matches.size) {
-    e.preventDefault();
-    graphSearch.index = (graphSearch.index + (e.shiftKey ? -1 : 1) + graphSearch.matches.size) % graphSearch.matches.size;
-    applyGraphSearch(true);
-  } else if (e.key === 'Escape') {
-    e.preventDefault(); e.target.value = ''; e.target.dispatchEvent(new Event('input', {bubbles: true}));
-  }
-});
+}
+for (const box of searchBoxes()) {
+  box.addEventListener('input', e => runGraphSearch(e.target.value));
+  box.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && graphSearch.matches.size) {
+      e.preventDefault();
+      graphSearch.index = (graphSearch.index + (e.shiftKey ? -1 : 1) + graphSearch.matches.size) % graphSearch.matches.size;
+      applyGraphSearch(true);
+    } else if (e.key === 'Escape') {
+      e.preventDefault(); e.target.value = ''; runGraphSearch('');
+    }
+  });
+}
+// One orientation for both diagrams: which way a Hasse diagram reads is a
+// habit of the reader's, not a fact about either one.
+function toggleFlip() {
+  state.flipped = !state.flipped;
+  for (const id of ['graph-flip', 'lat-flip']) document.getElementById(id)?.setAttribute('aria-pressed', String(state.flipped));
+  renderGraph(); renderLattice();
+  if (onLattice()) latticeFit(); else fit();
+}
+for (const id of ['graph-flip', 'lat-flip']) document.getElementById(id)?.addEventListener('click', toggleFlip);
 document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showTab(t.dataset.tab)));
 // Resize without rebuilding either list, so selections, scroll positions and click slots survive.
 (function setupPaneDividers() {
@@ -3580,6 +3638,10 @@ function latticeLayout() {
     if (i) y += rowHeight[i - 1] / 2 + 41 + rowHeight[i] / 2;
     for (const n of row) n.y = y;
   });
+  if (state.flipped) {
+    const span = Math.min(...nodes.map(n => n.y)) + Math.max(...nodes.map(n => n.y));
+    for (const n of nodes) n.y = span - n.y;
+  }
   lattice.bounds = {
     minX: Math.min(...nodes.map(n => n.x - n.w / 2)) - 30, maxX: Math.max(...nodes.map(n => n.x + n.w / 2)) + 30,
     minY: Math.min(...nodes.map(n => n.y - n.h / 2)) - 24, maxY: Math.max(...nodes.map(n => n.y + n.h / 2)) + 24,
@@ -3648,7 +3710,7 @@ function latticeFitInitial() { if (!lattice.fitted) latticeFit(); }
 // click that only moves the selection keeps the nodes, arrows and layout, and
 // the drawn elements too: only their classes change.
 function latticeBuildKey() {
-  return JSON.stringify([lattice.shown, latticeEvidenceVersion, [...background].sort(), [...negativeBackground].sort(), !!state.showConj]);
+  return JSON.stringify([lattice.shown, latticeEvidenceVersion, [...background].sort(), [...negativeBackground].sort(), !!state.showConj, !!state.flipped]);
 }
 function renderLattice() {
   const svg = document.getElementById('lat-graph');
@@ -3660,7 +3722,10 @@ function renderLattice() {
 // The structure: every node and arrow, without the shading a selection adds.
 function latticeDraw(svg) {
   const edge = e => {
-    const x1 = e.from.x, y1 = e.from.y - e.from.h / 2, x2 = e.to.x, y2 = e.to.y + e.to.h / 2;
+    // An arrow leaves the side of its box that faces the other end, so the
+    // two read the same way up or down.
+    const rise = Math.sign(e.to.y - e.from.y) || -1;
+    const x1 = e.from.x, y1 = e.from.y + rise * e.from.h / 2, x2 = e.to.x, y2 = e.to.y - rise * e.to.h / 2;
     const cls = 'lat-edge ' + (e.reverses === 'open' ? 'may-reverse' : 'strict');
     const head = e.reverses === 'open' ? 'lat-open' : 'lat-solid';
     return `<g class="lat-edge-g" data-lat-edge="${esc(e.id)}"><path class="lat-hit" d="M${x1},${y1} L${x2},${y2}"/><path class="${cls}" d="M${x1},${y1} L${x2},${y2}" marker-end="url(#${head})"/></g>`;
@@ -3782,6 +3847,7 @@ function latticeShade(svg) {
     el.classList.remove('sel', 'near', 'far');
     if (emphasis) el.classList.add(emphasis);
   }
+  applyGraphSearch();
   renderLatticeLegend(lattice.capped ? null : base, baseInconsistent, counts);
   document.getElementById('lat-hint').hidden = !!state.selected;
   document.getElementById('lat-hint').textContent = 'Click a principle name, an ∧ or an arrow for its details. Shift-click a name to add or remove it from the selection.';

@@ -22,6 +22,8 @@ violates:
 - countable-boolean-completeness-r
 - no-contingency-signature-r
 - signature-b-r
+- barcan-t
+- atomicity-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -84,7 +86,22 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\colon
   W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model,
   so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September
-  2026.'
+  2026. BF fails at type $t$ as well. In a one-object finitely pinned model, BF (type t) fails as soon
+  as there are a finite $N$, an arrow $i$ and a proposition $q$ in the domain that is the transport $i^{\prime}\cdot
+  p=\{k : k\circ i^{\prime}\in p\}$ of no proposition $p$ along any arrow $i^{\prime}$ agreeing with $i$
+  on $N$: the intension $X:=\{\langle r,j\rangle : r\ne q\text{ or }j\text{ disagrees with }i\text{ on
+  }N\}$ is pinned down by $N$, contains $\langle i^{\prime}\cdot p,i^{\prime}\rangle$ for every $p$ and
+  $i^{\prime}$, so $\forall p\, .\,\Box Xp$ holds at the identity, and omits $\langle q,i\rangle$, so
+  $\Box\forall p\, .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot p$ depends only on
+  $k$ restricted to the range of $i^{\prime}$, it suffices that $q$ separate two arrows agreeing on every
+  such range. Here take $N=\{0\}$, $i$ any arrow with $i0=2$ (hence $i1=2$ and range within $[2,\infty)$),
+  and $q:=\{k : k1=1\}$, pinned down by $\{1\}$: the arrows $k$ with $k0=k1=1\le k2$ and $k^{\prime}$
+  with $k^{\prime}0=k^{\prime}1=0$, agreeing beyond $1$, are separated by $q$. Observation of 23 September
+  2026, answering Cian Dorr’s question whether the failure of BF sharpens to type $t$. Atomicity fails
+  already at type $t$, as the source says in other words: the only finitely pinned singleton is $\{1_{\mathbb
+  N}\}$, since a collapsing monotone map is not determined by its values on a finite set, so the nonempty
+  proposition of all collapsing arrows, pinned down by $\{0,1\}$, has no atom below it; the source’s remark
+  that Atomlessness restricted to false propositions holds says the same.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -150,3 +167,14 @@ changes:
   satisfies:
   - relational-choice-r
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of BF at type t, sharpening the failure of BF; argument in the notes.
+  violates:
+  - barcan-t
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of Atomicity (type t), and with it of the Strong Leibniz Biconditionals;
+    see the notes.
+  violates:
+  - atomicity-t

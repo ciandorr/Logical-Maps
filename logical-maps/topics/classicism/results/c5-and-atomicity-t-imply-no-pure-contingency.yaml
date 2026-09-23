@@ -1,0 +1,35 @@
+id: c5-and-atomicity-t-imply-no-pure-contingency
+premises:
+- necessary-distinctness-necessary-r
+- atomicity-t
+conclusion: no-pure-contingency-r
+status: proved
+certificate:
+  source_id: goodsell-yli-vakkuri-unpublished
+  produced_by: Zachary Goodsell and Juhani Yli-Vakkuri (theorem); proof by Cian Dorr, 23 September 2026,
+    with permission from Zachary Goodsell, written out by Claude Fable 5.1 (Anthropic)
+  recorded_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  checked_by: []
+  date: '2026-09-23'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, p. 27.
+- Cian Dorr, proof sketch of 23 September 2026, with permission from Zachary Goodsell; written out in
+  the write-up.
+source_names:
+- Classicism
+- Dorr 23 Sep
+proof: The proof written up for c5-and-atomicity-imply-no-pure-contingency uses Atomicity only at type
+  $t$, to find an atom below $P$ and one below $\neg P$ for a true closed pure $P\ne\top$; every other
+  step uses $\Box$ND, through ND and BF at the types occurring in $P$. So the same write-up proves this
+  sharper statement.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, p. 27; Proposition 2.3, p. 22; Proposition 2.4, p. 23
+  note: The report of the theorem, and the derivation of BF from □ND used for the quantifier step.
+- paper: goodsell-yli-vakkuri-unpublished
+  role: origin
+  locator: Logical Foundations of Philosophy, as cited in Classicism p. 27
+notes: The sharpening of the reported theorem to the type-t instance of Atomicity, which is all the argument
+  needs. Recorded separately so that the reported statement keeps its own record.

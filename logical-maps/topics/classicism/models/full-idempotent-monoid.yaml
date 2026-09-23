@@ -6,7 +6,6 @@ satisfies:
 - necessary-actuality
 - no-pure-contingency-r
 - relational-choice-r
-- necessary-strong-leibniz-t
 - necessary-relational-choice-r
 - distinctness-preserving-collapse
 violates:
@@ -21,6 +20,7 @@ violates:
 - distinctness-signature-r
 - no-contingency-signature-r
 - signature-b-r
+- strong-leibniz-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -56,16 +56,15 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote
   entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity,
   so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything that implies these fails with them.
-  In a one-object action model whose propositions are all the sets of arrows, every singleton $\{h\}$
-  is a strong world proposition: seen from an arrow $i$ it becomes $\{j : j\circ i=h\}$, and every proposition
-  at that world is the shift $\{j : j\circ i\in Y\}$ of a root proposition $Y$, whose membership for such
-  $j$ depends only on whether $h\in Y$; so it entails every proposition or its negation, at every world.
-  Any possible proposition contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every
-  world. □Relational Choice holds: the truncation of a full action model at any arrow is again a full
-  action model, its domains at the reachable objects being unchanged, and Relational Choice holds in every
-  full model given choice in the metatheory (Classicism, p. 61). Distinctness-preserving collapse holds:
-  for a true $p$ take $q:=\{1\}$; under $k$, $\Diamond\{1\}$ would need $x\circ k=1$, but $x\circ k=k$
-  for both arrows, so it fails there, and under $1$, $p$ holds.'
+  The type-t Strong Leibniz Biconditionals fail. The atoms are $\{1\}$ and $\{k\}$; transported along
+  $k$, $\{k\}$ becomes $\{j : j\circ k=k\}=\{1,k\}$, which the proposition $\{1\}$ of the full domain
+  splits, so $\{k\}$ is not a strong world, while the possible proposition $\{k\}$ has no other candidate
+  below it. ($\{1\}$ is a strong world, its transport along $k$ being empty.) □Relational Choice holds:
+  the truncation of a full action model at any arrow is again a full action model, its domains at the
+  reachable objects being unchanged, and Relational Choice holds in every full model given choice in the
+  metatheory (Classicism, p. 61). Distinctness-preserving collapse holds: for a true $p$ take $q:=\{1\}$;
+  under $k$, $\Diamond\{1\}$ would need $x\circ k=1$, but $x\circ k=k$ for both arrows, so it fails there,
+  and under $1$, $p$ holds.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -107,9 +106,8 @@ changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
   summary: 'Added □Strong Leibniz Biconditionals (type t): every singleton of an arrow is a strong world
-    in a propositionally full one-object model; see the notes.'
-  satisfies:
-  - necessary-strong-leibniz-t
+    in a propositionally full one-object model; see the notes. Withdrawn on 23 September 2026: the claim
+    was mistaken; see the later entry.'
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
   summary: Boxed the Relational Choice claim; see the notes.
@@ -133,3 +131,10 @@ changes:
     (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed
     by every arrow; the failures come from the other relational constants, which denote top. No verdict
     changes.'
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Corrected the claim of 22 September 2026 that □Strong Leibniz Biconditionals (type t) hold:
+    the argument that every singleton is a strong world needs the monoid to be right-cancellative, and
+    here the transport of {k} along k is {1, k}. The type-t principle fails; see the notes.'
+  violates:
+  - strong-leibniz-t

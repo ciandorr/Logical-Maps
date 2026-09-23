@@ -1,0 +1,33 @@
+id: atomicity-t-and-bf-imply-atomicity
+premises:
+- atomicity-t
+- barcan-r
+conclusion: atomicity-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 23 September 2026; atomhood verification written out by Claude Fable 5.1 (Anthropic)
+  recorded_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  checked_by: []
+  date: '2026-09-23'
+  lean: none
+sources:
+- Cian Dorr, observation of 23 September 2026; proof in the write-up.
+source_names:
+- Dorr 23 Sep
+proof: 'Let $X^{\bar\sigma t}\ne\bot$. Intensionality’s contrapositive gives $\Diamond\exists\bar y\,
+  .\,X\bar y$, and BF at the argument types gives $\bar x$ with $\Diamond X\bar x$. Atomicity at type
+  $t$ gives an atom $w\le X\bar x$. Then $A:=\lambda\bar y\, .\,w\land\bar y=\bar x$ is below $X$, since
+  $\Box(w\to X\bar x)$ and Leibniz’s law give $\Box\forall\bar y\, .\,A\bar y\to X\bar y$; and $A$ is
+  an atom: $A\bar x=w\ne\bot$, and for $Z\le A$ the proposition $Z\bar x\le w$ is $w$ or $\bot$, giving
+  $Z=A$ or $Z=\bot$ by Intensionality. Details in the write-up.'
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, pp. 23–24
+  note: Definitions of Atom and the order; the source records Atomicity as a single principle across types
+    and does not separate the type-t instance.
+notes: Closes the gap between the type-t instance of Atomicity and the full principle under BF. With the
+  recorded results, Atomicity (type t) and BF now give □Actuality, the Strong Leibniz Biconditionals,
+  and under □ND the full C5 + Atomicity package from its type-t instance. Without BF the passage from
+  a possible relation to a possible instance can fail, so the premise is not idle.

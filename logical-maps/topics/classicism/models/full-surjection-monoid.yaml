@@ -55,13 +55,13 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   a pure formula $P$; the model’s automorphisms carry every individual to every other, so $P(d,\ldots,d)$
   is materially equivalent to the pure sentence $\forall x\, .\,P(x,\ldots,x)$ and its negation to $\forall
   x\, .\,\neg P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency, and instantiation
-  under the box gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$. In a one-object action model whose
-  propositions are all the sets of arrows, every singleton $\{h\}$ is a strong world proposition: seen
-  from an arrow $i$ it becomes $\{j : j\circ i=h\}$, and every proposition at that world is the shift
-  $\{j : j\circ i\in Y\}$ of a root proposition $Y$, whose membership for such $j$ depends only on whether
-  $h\in Y$; so it entails every proposition or its negation, at every world. Any possible proposition
-  contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational Choice
-  holds: the truncation of a full action model at any arrow is again a full action model, its domains
+  under the box gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$. In a one-object model whose propositions
+  are all the sets of arrows, a singleton $\{h\}$ is a strong world exactly when its transport $\{j :
+  j\circ i=h\}$ along every arrow $i$ has at most one member, since the propositions at that world are
+  again all sets of arrows and a two-element set is split by a singleton. Here every arrow is a surjection,
+  so $j\circ i=j^{\prime}\circ i$ forces $j=j^{\prime}$. So every singleton is a strong world, every possible
+  proposition contains an arrow, and the type-t Strong Leibniz Biconditionals hold at every world. □Relational
+  Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains
   at the reachable objects being unchanged, and Relational Choice holds in every full model given choice
   in the metatheory (Classicism, p. 61). Distinctness-preserving collapse fails: let $p:=\{\mathrm{id}\}$,
   true. Any witness $q$ for $\Box_{\ne}p$ is true, so contains the identity, and for a non-identity bijection
@@ -125,3 +125,7 @@ changes:
   satisfies:
   - no-contingency-signature-r
   - signature-b-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Corrected the justification of □Strong Leibniz Biconditionals (type t): the 22 September argument
+    tacitly used that the monoid is right-cancellative, which holds here; no verdict changes.'

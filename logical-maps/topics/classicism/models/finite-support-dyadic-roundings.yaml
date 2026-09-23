@@ -23,6 +23,8 @@ violates:
 - countable-boolean-completeness-r
 - no-contingency-signature-r
 - signature-b-r
+- barcan-t
+- strong-leibniz-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -86,7 +88,26 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\colon
   W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model,
   so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September
-  2026.'
+  2026. BF fails at type $t$ as well. In a one-object finitely pinned model, BF (type t) fails as soon
+  as there are a finite $N$, an arrow $i$ and a proposition $q$ in the domain that is the transport $i^{\prime}\cdot
+  p=\{k : k\circ i^{\prime}\in p\}$ of no proposition $p$ along any arrow $i^{\prime}$ agreeing with $i$
+  on $N$: the intension $X:=\{\langle r,j\rangle : r\ne q\text{ or }j\text{ disagrees with }i\text{ on
+  }N\}$ is pinned down by $N$, contains $\langle i^{\prime}\cdot p,i^{\prime}\rangle$ for every $p$ and
+  $i^{\prime}$, so $\forall p\, .\,\Box Xp$ holds at the identity, and omits $\langle q,i\rangle$, so
+  $\Box\forall p\, .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot p$ depends only on
+  $k$ restricted to the range of $i^{\prime}$, it suffices that $q$ separate two arrows agreeing on every
+  such range. Here take $N=\{1\}$, $i=f_2$, so that the arrows agreeing with it on $N$ are the $f_n$ with
+  $n\ge2$, whose ranges consist of even numbers, and $q:=\{f_1\}$, the actual world, pinned down by $\{0,1\}$:
+  $f_1$ and $f_2$ agree on the even numbers and $q$ separates them. So at the world $f_2$ the actual world
+  is the counterpart of no proposition. Observation of 23 September 2026, answering Cian Dorr’s question
+  whether the failure of BF sharpens to type $t$. The type-t Strong Leibniz Biconditionals fail although
+  Atomicity holds, so the two come apart here. A strong world is an atom, and the atoms are the singletons
+  $\{f_n\}$. Transported along the arrow $f_n$ for $n\ge2$, it becomes $\{k : k\circ f_n=f_n\}=\{f_m :
+  m\le n\}$, since $f_m\circ f_n=f_{\max\{m,n\}}$, and the proposition $\{f_1\}$, which lies in the domain,
+  splits that set; so it is not a strong world. The only strong world is $\{f_1\}$, whose transport along
+  every other arrow is empty; so the possible proposition $\{f_2\}$ has no strong world below it. Observation
+  of 23 September 2026, answering Cian Dorr’s question whether failures of Atomicity’s strengthening can
+  be found where Atomicity holds.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -153,3 +174,14 @@ changes:
   satisfies:
   - relational-choice-r
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of BF at type t, sharpening the failure of BF; argument in the notes.
+  violates:
+  - barcan-t
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of the type-t Strong Leibniz Biconditionals, which come apart from Atomicity
+    here; see the notes.
+  violates:
+  - strong-leibniz-t

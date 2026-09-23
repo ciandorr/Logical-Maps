@@ -8,6 +8,8 @@ satisfies:
 - necessary-strong-leibniz-t
 - necessary-relational-choice-r
 - distinctness-preserving-collapse
+- strong-leibniz-r
+- necessary-strong-leibniz-r
 violates:
 - fregean-axiom
 - no-pure-contingency-r
@@ -53,7 +55,12 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   identity arrow). For any true $p$, take $q:=a$ in the definition of $\Box_{\ne}p$: under a arrow $k$
   to $W_1$, $\Diamond a$ would need an arrow back to $W_0$, and none exists, since no arrow leads back
   to the actual world; under the identity, $p$ holds. So every truth is $\Box_{\ne}$-necessary, although
-  ND fails.'
+  ND fails. The Strong Leibniz Biconditionals hold at every relational type, necessarily. An atom of type
+  $\bar\sigma t$ at $W_0$ is a single pair $\{\langle\bar a,h\rangle\}$, and its transport along $k$ is
+  $\{\langle\bar a,j\rangle : j\circ k=h\}$ with $j$ ranging over the arrows out of $W_1$, of which there
+  is one; so the transport is empty or a single pair, and decides every relation of $W_1$’s full domain.
+  Every possible relation contains a pair, so every possible relation has a strong world below it, at
+  $W_0$ and trivially at the one-world $W_1$.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -105,3 +112,10 @@ changes:
   summary: Recorded the Distinctness-preserving collapse; see the notes.
   satisfies:
   - distinctness-preserving-collapse
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Extended the Strong Leibniz Biconditionals from type t to every relational type, with the
+    necessitation: transports of atoms along the unique arrow out of W1 are atoms or empty.'
+  satisfies:
+  - strong-leibniz-r
+  - necessary-strong-leibniz-r

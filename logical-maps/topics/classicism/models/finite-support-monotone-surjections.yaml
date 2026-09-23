@@ -21,6 +21,7 @@ violates:
 - independence-signature-r
 - distinctness-signature-r
 - countable-boolean-completeness-r
+- inextensible-comprehension-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -80,7 +81,23 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow
   $h\colon W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those
   of the model, so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation
-  of 23 September 2026.'
+  of 23 September 2026. Inextensible Comprehension fails, at type $e\to t$, for the property of being
+  even, which is in the domain as the constant intension $\{\langle b,h\rangle : b\text{ even}\}$, pinned
+  down by $\emptyset$. Unpacking $\operatorname{Inextensible}$ as in the left-to-right half of Dorr’s
+  rigidity criterion (draft, Lemma 14, p. 7, with Lemma 13): even the unboxed matrix, evaluated at the
+  identity, says that $Y$ is contained in every persistent (transport-closed) $B$ in the domain whose
+  extension includes $Y$’s. For a finite $N^{\prime}$, the smallest such $B$ pinned down by $N^{\prime}$
+  is $B_{N^{\prime}}:=\{\langle b^{\prime\prime},i^{\prime}\rangle : i^{\prime\prime}(b)=b^{\prime\prime}\text{
+  for some even }b\text{ and some arrow }i^{\prime\prime}\text{ agreeing with }i^{\prime}\text{ on }N^{\prime}\}$,
+  which is transport-closed and pinned down by $N^{\prime}$. Now let $Y$ be coextensive with evenness
+  and pinned down by a finite $N_0\subseteq[0,M_0]$; then $\langle b,i\rangle\in Y$ for every even $b$
+  and every arrow $i$ fixing $N_0$ pointwise. Take $i$ the monotone surjection that is the identity on
+  $[0,M_0+1]$, sends $M_0+2$ to $M_0+1$ and $x$ to $x-1$ for $x\ge M_0+2$; an even $b\ge M_0+2$, whose
+  only preimage under $i$ is the odd $b+1$; and $N^{\prime}:=[0,b+2]$: a monotone map agreeing with $i$
+  there has the same preimages of $b$ within $[0,b+2]$ and takes values at least $i(b+2)=b+1$ beyond it.
+  So $\langle b,i\rangle\in Y\setminus B_{N^{\prime}}$, and $Y$ is not even weakly inextensible. Observation
+  of 23 September 2026, answering Cian Dorr’s question whether the failure of Actuality can be sharpened
+  to a failure of Inextensible Comprehension.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -134,3 +151,9 @@ changes:
   satisfies:
   - relational-choice-r
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of Inextensible Comprehension at type e→t for the property of being even,
+    sharpening the failure of Actuality; argument in the notes.
+  violates:
+  - inextensible-comprehension-r

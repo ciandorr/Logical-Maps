@@ -18,6 +18,9 @@ violates:
 - distinctness-signature-r
 - no-contingency-signature-r
 - signature-b-r
+- relational-choice-r
+- barcan-t
+- atomicity-t
 status: proved
 certificate:
   source_id: dorr-bc-not-rc
@@ -77,7 +80,40 @@ notes: 'The first of the draft''s two variants in which BF is made to fail. Actu
   entailed by no other truth. For a true $p$, $a\le p$. Take $q:=a$: under a permutation $i$, $p$ holds
   since $i\in a\subseteq p$; under a non-permutation $i$, $\Diamond a$ would need $k\circ i$ to be a permutation,
   which no composite with an arrow omitting the distinguished individual from its range is, since the
-  other arrows fix that individual and so cannot restore it to the range. So every truth is $\Box_{\ne}$-necessary.'
+  other arrows fix that individual and so cannot restore it to the range. So every truth is $\Box_{\ne}$-necessary.
+  Relational Choice fails, at the types $(e\to t)$ and $e$. Let $U:=\lambda Xy\, .\,Xy\lor\neg\exists
+  z\, .\,Xz$, a closed term, hence in the domain, and serial. A functional subrelation $S$ of $U$ would
+  lie in the domain at the evaluation object, so it is symmetric and pinned down by a finite set $N$.
+  Two facts about such an $S$ (Dorr, draft, Lemma 21): every $g\in G$ fixing $N$ pointwise satisfies $g^{[\sigma]}S=S$,
+  and symmetry gives $\langle gA,gy,g\rangle\in S$ whenever $\langle A,y,1\rangle\in S$; together, $\langle
+  gA,gy,1\rangle\in S$. Now let $A$ be the property of not belonging to $N\cup\{0\}$. It is in the domain,
+  being pinned down by that finite set and symmetric, and its extension is nonempty, so $S$ relates $A$
+  at the identity to some $y$ in its extension. The transposition of $y$ with another individual outside
+  $N\cup\{0\}$ fixes $0$, so lies in $G$, fixes $A$ and moves $y$ to some $gy\ne y$, so $S$ relates $A$
+  to $gy$ as well, and $S$ is not functional at the identity arrow. Argument of 23 September 2026, after
+  Cian Dorr’s observation that a choice over the individuals cannot be finitely pinned down; the well-ordering
+  of the individuals that he had in mind is refuted by the same two facts, but the direct route needs
+  no derivation of a well-ordering from Relational Choice in C. BF fails at type $t$ as well. In a one-object
+  finitely pinned model, BF (type t) fails as soon as there are a finite $N$, an arrow $i$ and a proposition
+  $q$ in the domain that is the transport $i^{\prime}\cdot p=\{k : k\circ i^{\prime}\in p\}$ of no proposition
+  $p$ along any arrow $i^{\prime}$ agreeing with $i$ on $N$: the intension $X:=\{\langle r,j\rangle :
+  r\ne q\text{ or }j\text{ disagrees with }i\text{ on }N\}$ is pinned down by $N$, contains $\langle i^{\prime}\cdot
+  p,i^{\prime}\rangle$ for every $p$ and $i^{\prime}$, so $\forall p\, .\,\Box Xp$ holds at the identity,
+  and omits $\langle q,i\rangle$, so $\Box\forall p\, .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot
+  p$ depends only on $k$ restricted to the range of $i^{\prime}$, it suffices that $q$ separate two arrows
+  agreeing on every such range. Here take $N=\{0\}$, $i$ any arrow with $i0\ne0$, so that every arrow
+  agreeing with it on $N$ omits $0$ from its range, and $q:=\{k : k0=0\}$, the symmetry group, pinned
+  down by $\{0\}$ and symmetric: a permutation $k$ fixing $0$ and the arrow $k^{\prime}$ agreeing with
+  it off $0$ but sending $0$ elsewhere, which omits $0$ from its range, are separated by $q$. The intension
+  $X$ is symmetric, since $g\cdot q=q$ for $g$ fixing $0$ and $(g\circ j)0=0$ iff $j0=0$, so it lies in
+  the domain. Observation of 23 September 2026, answering Cian Dorr’s question whether the failure of
+  BF sharpens to type $t$. Atomicity fails already at type $t$, although Actuality holds. The symmetry
+  group is an atom, but no atom lies inside the nonempty proposition $T$ of arrows omitting $0$ from their
+  range, which is symmetric and pinned down by $\{0\}$: a nonempty symmetric $p\subseteq T$ pinned down
+  by $N\ni0$ and containing $h$ contains every arrow in $T$ whose restriction to $N$ has the same fibres
+  as $h$’s, and those whose restriction to $N\cup\{m\}$ has the same fibres as $h$’s form a smaller nonempty
+  symmetric proposition pinned down by $N\cup\{m\}$, since $h$’s value at a fresh $m$ can be made to coincide
+  with, or to differ from, a value on $N$.'
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
@@ -117,3 +153,23 @@ changes:
     (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed
     by every arrow; the failures come from the other relational constants, which denote top. No verdict
     changes.'
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Recorded the failure of Relational Choice, at types (e→t) and e: a functional subrelation
+    of the serial relation pairing each property with its members would be symmetric and finitely pinned,
+    and a symmetry fixing its pinning set would carry its choice for the property of lying outside that
+    set to a second choice. Cian Dorr’s observation that a choice cannot be finitely pinned; argument
+    in the notes.'
+  violates:
+  - relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of BF at type t, sharpening the failure of BF; argument in the notes.
+  violates:
+  - barcan-t
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of Atomicity (type t), and with it of the Strong Leibniz Biconditionals;
+    see the notes.
+  violates:
+  - atomicity-t

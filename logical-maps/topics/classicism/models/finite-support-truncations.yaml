@@ -21,6 +21,9 @@ violates:
 - distinctness-signature-r
 - countable-boolean-completeness-r
 - boolean-completeness-t
+- inextensible-comprehension-r
+- barcan-t
+- strong-leibniz-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -90,7 +93,40 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being
   unboxed. The closed Relational Choice instance is true at an arrow $h\colon W_0\to V$ iff it is true
   at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every
-  arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.'
+  arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026. Inextensible
+  Comprehension fails, at type $e\to t$, for the property of being even, which is in the domain as the
+  constant intension $\{\langle b,h\rangle : b\text{ even}\}$, pinned down by $\emptyset$. Unpacking $\operatorname{Inextensible}$
+  as in the left-to-right half of Dorr’s rigidity criterion (draft, Lemma 14, p. 7, with Lemma 13): even
+  the unboxed matrix, evaluated at the identity, says that $Y$ is contained in every persistent (transport-closed)
+  $B$ in the domain whose extension includes $Y$’s. For a finite $N^{\prime}$, the smallest such $B$ pinned
+  down by $N^{\prime}$ is $B_{N^{\prime}}:=\{\langle b^{\prime\prime},i^{\prime}\rangle : i^{\prime\prime}(b)=b^{\prime\prime}\text{
+  for some even }b\text{ and some arrow }i^{\prime\prime}\text{ agreeing with }i^{\prime}\text{ on }N^{\prime}\}$,
+  which is transport-closed and pinned down by $N^{\prime}$. Now let $Y$ be coextensive with evenness
+  and pinned down by a finite $N_0\subseteq[0,M_0]$; then $\langle b,i\rangle\in Y$ for every even $b$
+  and every arrow $i$ fixing $N_0$ pointwise. Take $i:=g_n$ with $n\ge M_0$, an even $b>n$, and $N^{\prime}:=[0,n+1]$:
+  the only arrow agreeing with $g_n$ on $[0,n+1]$ is $g_n$ itself, whose range $[0,n]$ omits $b$. Here
+  even the universal property has no inextensible coextension, since $\operatorname{Inextensible}(\top_{et})$
+  unfolds to $\Box$BF at type $e$. So $\langle b,i\rangle\in Y\setminus B_{N^{\prime}}$, and $Y$ is not
+  even weakly inextensible. Observation of 23 September 2026, answering Cian Dorr’s question whether the
+  failure of Actuality can be sharpened to a failure of Inextensible Comprehension. BF fails at type $t$
+  as well. In a one-object finitely pinned model, BF (type t) fails as soon as there are a finite $N$,
+  an arrow $i$ and a proposition $q$ in the domain that is the transport $i^{\prime}\cdot p=\{k : k\circ
+  i^{\prime}\in p\}$ of no proposition $p$ along any arrow $i^{\prime}$ agreeing with $i$ on $N$: the
+  intension $X:=\{\langle r,j\rangle : r\ne q\text{ or }j\text{ disagrees with }i\text{ on }N\}$ is pinned
+  down by $N$, contains $\langle i^{\prime}\cdot p,i^{\prime}\rangle$ for every $p$ and $i^{\prime}$,
+  so $\forall p\, .\,\Box Xp$ holds at the identity, and omits $\langle q,i\rangle$, so $\Box\forall p\,
+  .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot p$ depends only on $k$ restricted to
+  the range of $i^{\prime}$, it suffices that $q$ separate two arrows agreeing on every such range. Here
+  take $N=[0,2]$, $i=g_1$, the only arrow agreeing with $g_1$ on $[0,2]$, whose range is $\{0,1\}$, and
+  $q:=\{g_1\}$, pinned down by $\{0,1,2\}$: $g_1$ and $g_2$ agree on $\{0,1\}$ and $q$ separates them.
+  Observation of 23 September 2026, answering Cian Dorr’s question whether the failure of BF sharpens
+  to type $t$. The type-t Strong Leibniz Biconditionals fail although Atomicity holds, so the two come
+  apart here. A strong world is an atom, and the atoms are the singletons $\{g_n\}$, since $\{1_{\mathbb
+  N}\}$ is not pinned down by a finite set. Transported along the arrow $g_n$, it becomes $\{k : k\circ
+  g_n=g_n\}=\{1_{\mathbb N}\}\cup\{g_m : m\ge n\}$, and the proposition $\{g_n\}$ itself, which lies in
+  the domain, splits that set; so it is not a strong world. Hence there is no strong world at all, and
+  no possible proposition has one below it. Observation of 23 September 2026, answering Cian Dorr’s question
+  whether failures of Atomicity’s strengthening can be found where Atomicity holds.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -149,3 +185,20 @@ changes:
   satisfies:
   - relational-choice-r
   - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of Inextensible Comprehension at type e→t for the property of being even,
+    sharpening the failure of Actuality; argument in the notes.
+  violates:
+  - inextensible-comprehension-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of BF at type t, sharpening the failure of BF; argument in the notes.
+  violates:
+  - barcan-t
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of the type-t Strong Leibniz Biconditionals, which come apart from Atomicity
+    here; see the notes.
+  violates:
+  - strong-leibniz-t

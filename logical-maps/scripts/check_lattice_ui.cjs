@@ -420,6 +420,28 @@ try{
   assert.equal(w.eval('state.focus'),'f','And the selection follows it there');
   w.eval('lattice.shown=[];lattice.builtKey=null;select(null);renderLattice();');
 
+  // The Lean filter is one control, in the block the sources live in, so every
+  // view that has sources can reach it: the lattice is drawn from the same
+  // arrows the graph is, and this narrows both.
+  const reachable=el=>{for(let n=el;n&&n.nodeType===1;n=n.parentElement) if(w.getComputedStyle(n).display==='none') return false; return true;};
+  const lean=d.getElementById('lean-only');
+  assert.ok(lean,'There is one Lean filter, not one per view');
+  assert.equal(lean.closest('label').textContent.trim(),'Lean-verified only');
+  assert.ok(lean.closest('label').querySelector('.sw.lean'),'With the graph\'s own swatch');
+  for (const tab of ['graph','lattice','open']) {
+    d.querySelector(`.tab[data-tab="${tab}"]`).click();
+    assert.ok(reachable(lean),`It is reachable on the ${tab} tab`);
+  }
+  d.querySelector('.tab[data-tab="lattice"]').click();
+  w.eval('lattice.shown=["a","b"];lattice.builtKey=null;renderLattice();');
+  const ruledOut=()=>JSON.parse(w.eval('JSON.stringify(lattice.edges.filter(e=>e.reverses!=="open").length)'));
+  assert.ok(ruledOut()>0,'Some cover is settled by a model');
+  lean.checked=true; lean.dispatchEvent(new w.Event('change',{bubbles:true}));
+  w.eval('lattice.builtKey=null;renderLattice();');
+  assert.equal(ruledOut(),0,'With Lean only, no unverified model settles anything');
+  lean.checked=false; lean.dispatchEvent(new w.Event('change',{bubbles:true}));
+  w.eval('lattice.shown=[];lattice.builtKey=null;renderLattice();');
+
   // The toolbar matches the graph's: a box to find a principle on the left,
   // Flip and Fit together on the right.
   const tools=d.querySelector('#pane-lattice .graph-tools');

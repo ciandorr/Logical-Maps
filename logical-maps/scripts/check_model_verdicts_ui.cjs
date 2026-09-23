@@ -7,13 +7,15 @@ const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..');
 const template=fs.readFileSync(path.join(root,'viewer/template.html'),'utf8');
 const cert={source_id:'paper',lean:'none',produced_by:'Fixture',checked_by:[]};
+// The model itself is Lean-checked; the results that derive from it are not.
+const leanCert={...cert,lean:'verified',lean_ref:'Fixture.model'};
 const rule=(id,premises,conclusion)=>({id,premises,conclusion,status:'proved',certificate:cert,sources:['Fixture'],source_names:['Fixture']});
 // A holds and B fails by record. C follows from A, so it holds; D would force
 // B, so it fails. Nothing touches E.
 const data={topic:{id:'verdicts',title:'Verdict fixture',background:[],source_catalog:[{id:'paper',name:'Paper',kind:'published-paper'}]},
   principles:['a','b','c','d','e'].map(id=>({id,name:id.toUpperCase(),statement:'Statement of '+id.toUpperCase()})),
   results:[rule('ac',['a'],'c'),rule('db',['d'],'b')],
-  models:[{id:'m',name:'Fixture model',status:'proved',satisfies:['a'],violates:['b'],certificate:cert,sources:['Fixture'],source_names:['Fixture']}]};
+  models:[{id:'m',name:'Fixture model',status:'proved',satisfies:['a'],violates:['b'],certificate:leanCert,sources:['Fixture'],source_names:['Fixture']}]};
 const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
 const dom=new JSDOM(template.replace('/*__PMAP_DATA__*/null',JSON.stringify(data)),
   {url:'https://maps.example/',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc});
@@ -79,6 +81,24 @@ try{
   assert.equal(evidence('c').querySelector('.model-flag').textContent,'derived','A derived row says only that');
   assert.ok(evidence('a').querySelector('.badge.source'),'Both still carry their sources');
   assert.ok(evidence('c').querySelector('.badge.source'));
+
+  // A verdict is Lean-checked only when everything under it is. The model is,
+  // so its recorded verdicts are; the results deriving the rest are not, so
+  // those are not.
+  assert.ok(evidence('a').querySelector('.badge.lean.verified'),'A recorded verdict of a Lean-checked model says so');
+  assert.ok(evidence('b').querySelector('.badge.lean.verified'),'Either way round');
+  assert.equal(evidence('c').querySelector('.badge.lean.verified'),null,'A verdict derived through an unverified result does not');
+
+  // And the one-line answer at the foot of the graph's details pane carries it
+  // beside the witness it names.
+  d.querySelector('.tab[data-tab="graph"]').click();
+  w.eval('select({type:"principle", id:"a"})');
+  const foot=d.getElementById('graph-details-foot');
+  assert.match(foot.textContent,/Consistent with the background \(Fixture model\)/,'The foot names the witness');
+  assert.ok(foot.querySelector('.badge.lean.verified'),'And says it is Lean-checked');
+  w.eval('select(null)');
+  assert.equal(foot.hidden,true);
+  w.eval('openPage({type:"model", id:"m"})');
 
   // The mark stays where no heading gives it: the theory explorer's own list.
   d.querySelector('.tab[data-tab="models"]').click();

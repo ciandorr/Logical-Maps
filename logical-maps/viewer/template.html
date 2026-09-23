@@ -644,6 +644,9 @@
       <div id="source-controls">
         <h2 id="source-filter-heading" title="Filter displayed arrows. Background consequences always use all recorded proofs.">Arrow sources</h2>
         <div class="ctl" id="source-filters"></div>
+        <div class="ctl">
+          <label title="Use only what a Lean proof settles. A Lean-verified arrow is drawn thicker than the rest whether or not this is checked."><input type="checkbox" id="lean-only"><span class="sw lean"></span>Lean-verified only</label>
+        </div>
       </div>
       <div id="graph-options">
         <p class="graph-hint" title="Solid neutral arrows are derived proofs. Click an arrow for its proof steps and sources; intermediate principles may be hidden or combined."><input type="checkbox" class="ctl-spacer" tabindex="-1" aria-hidden="true"><span class="sw derived"></span>Derived proofs</p>
@@ -651,7 +654,6 @@
           <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
           <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
-          <label title="Show only arrows with a Lean proof. A Lean-verified arrow is drawn thicker than the rest whether or not this is checked."><input type="checkbox" id="lean-only"><span class="sw lean"></span>Lean-verified only</label>
           <label title="Hide an arrow that the displayed diagram already gives: one that a chain of other displayed arrows yields, as in a Hasse diagram, and one that repeats a premise stroke, as when C is equivalent to A ∧ B and C ⇒ A restates the stroke from A into the ∧, and one of several arrows that leave the same box for the same target because its ∧ circles each carry the consequence. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows" checked>Transitive reduction</label>
           <label title="Show the logical arrows from False to every node and from every node to True."><input type="checkbox" id="trivial-arrows">Trivial arrows</label>
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
@@ -2040,7 +2042,7 @@ function selectionConsistencyLine(consistency) {
   if (consistency.status === 'inconsistent') return {kind: 'inconsistent', text: 'Selection is inconsistent with the background (⇒ ⊥); every box is excluded.'};
   if (consistency.status === 'consistent') {
     const model = byMid.get(consistency.models[0]), who = model ? ` (${model.name})` : '';
-    return {kind: 'implies', text: consistency.limited
+    return {kind: 'implies', lean: !!model && leanChecked([model]), text: consistency.limited
       ? `Consistent with the background outside selected sources${who}.`
       : `Consistent with the background${who}.`};
   }
@@ -2161,8 +2163,13 @@ function modelEvidence(m, c) {
   } else return null;
   return { value, rules, contradiction, direct: false, items: [m, ...rules.map(id => byRid.get(id))] };
 }
+// A verdict is Lean-checked only when everything it rests on is: the model
+// and, for a derived verdict, every result in the chain.
+const leanChecked = items => items.length && items.every(x => x.certificate?.lean === 'verified');
 function evidenceBadges(e) {
-  return [...new Set(e.items.map(sourceOf))].map(sourceBadge).join('') + (e.items.some(x => x.status === 'conjectured') ? '<span class="badge conj">conjecture</span>' : '');
+  return [...new Set(e.items.map(sourceOf))].map(sourceBadge).join('')
+    + (leanChecked(e.items) ? '<span class="badge lean verified">Lean ✓</span>' : '')
+    + (e.items.some(x => x.status === 'conjectured') ? '<span class="badge conj">conjecture</span>' : '');
 }
 function sourceBadge(s) { return `<span class="badge source" data-source="${esc(s.id)}" style="--source-color:${sourceColor(s)}">${esc(s.name)}</span>`; }
 function verdictButton(m, c, e, compact = false, showValue = true) {
@@ -3030,7 +3037,8 @@ function setDetailFoot(id, line) {
   const foot = document.getElementById(id);
   if (!foot) return;
   foot.hidden = !line;
-  foot.innerHTML = line ? `<span class="rel-status ${line.kind}">${esc(line.text)}</span>` : '';
+  foot.innerHTML = line ? `<span class="rel-status ${line.kind}">${esc(line.text)}</span>`
+    + (line.lean ? ' <span class="badge lean verified">Lean ✓</span>' : '') : '';
 }
 function syncDetailHint() {
   const hint = document.getElementById('graph-details-hint');

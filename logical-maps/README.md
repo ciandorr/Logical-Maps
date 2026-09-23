@@ -440,8 +440,12 @@ Sources come in two collapsed groups, **Published papers** and **Unpublished**,
 each toggling its members together, with **Show papers** or **Show sources** to
 expand individual choices. Partial selection is shown on the group checkbox. The
 catch-all `misc` source stands on its own, since neither group describes it.
-**Lean-verified only** sits with the other filters; a Lean-verified arrow is
-drawn thicker than the rest whether or not it is checked.
+**Lean-verified only** sits with the sources, so the graph, the lattice and the
+conjectures view all reach the one control; a Lean-verified arrow is drawn
+thicker than the rest whether or not it is checked. A verdict carries a
+**Lean ✓** badge when everything under it is verified, the model and, for a
+derived verdict, every result in the chain; the consistency line at the foot of
+the details pane carries it beside the witness it names.
 Background consequences always use all recorded proved results, including
 hidden arrows. For example, DTU still supplies Simple Expected Utility in a
 conjectures-only view, so conjecture arrows retain only their additional

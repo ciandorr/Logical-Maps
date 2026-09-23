@@ -2450,7 +2450,7 @@ function rankedTable(rep, rows, mode = 'questions') {
   const status = r => r.status && r.status !== 'open' ? ` <span class="status">${r.status === 'outside' ? 'more than two premises' : esc(r.verdict || r.status)}</span>` : '';
   const num = x => x === null || x === undefined ? '—' : x;
   const scores = r => denies(r) ? [r.no, r.yes] : [r.yes, r.no];
-  return `<table class="results lynchpin"><thead><tr><th class="num">${mode === 'auto' ? 'Plausibility rank' : 'Rank'}</th><th>${conjectures ? 'Conjecture' : 'Question'}</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
+  return `<table class="results lynchpin"><thead><tr><th class="num">${mode === 'auto' ? 'No Rank' : 'Rank'}</th><th>${conjectures ? 'Conjecture' : 'Question'}</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
     rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${r.tier ? ` data-starred="${esc(r.tier)}"` : ''}${r.status && r.status !== 'open' ? ` data-status="${esc(r.status)}"` : ''}${denies(r) ? ' data-claim="not"' : ''}><td class="num rank">${num(rankOf(r))}</td><td class="stmt">${star(r)}${stmt(r)}${status(r)}${links(r) ? ` <span class="links">${links(r)}</span>` : ''}</td><td class="num">${num(scores(r)[0])}</td><td class="num">${num(scores(r)[1])}</td></tr>`).join('')}</tbody></table>`;
 }
 function renderLynchpins() {

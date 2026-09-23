@@ -227,9 +227,9 @@ arrow visibility does not withdraw those automatic facts. Legacy author-type
 `provenance` is still accepted in old datasets; records without a direct source
 are displayed under Misc. until attributed. Lean fields remain optional.
 
-Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with select-all/unselect-all controls per category; these only control visibility. Topics without categories retain the flat list.
+Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with one show-or-hide control per category; these only control visibility. Topics without categories retain the flat list.
 
-Each category is collapsible in the three lists that show them: the graph sidebar, the lattice sidebar and the theory explorer. One set of open categories serves all three, so a category opened in one is open in the others. A category's summary carries its name, its count and, on the graph and the lattice, its select-all and clear controls, so a closed category can still be shown or cleared and still reports how much of it is in play: how many of its principles are shown on the graph, how many are chosen on the lattice, and how many are assumed in the explorer. Categories start closed when a topic declares more than one and has more than `CATEGORY_COLLAPSE_MIN` (16) principles, and open otherwise; searching for a principle opens the category it is in.
+Each category is collapsible in the three lists that show them: the graph sidebar, the lattice sidebar and the theory explorer. One set of open categories serves all three, so a category opened in one is open in the others. A category's summary carries its name, its count and, on the graph and the lattice, one control that acts on the whole category: **hide** while any of it is showing, **show positive** while none of it is. A closed category can therefore still be shown or hidden without opening it, and still reports how much of it is in play: how many of its principles are shown on the graph, how many are chosen on the lattice, and how many are assumed in the explorer. Categories start closed when a topic declares more than one and has more than `CATEGORY_COLLAPSE_MIN` (16) principles, and open otherwise; searching for a principle opens the category it is in.
 
 `require_sources: true` makes validation reject empty result/model sources. It is enabled for the unbounded-utility topic and new topics; the legacy example retains its existing records until its sources are audited.
 
@@ -252,8 +252,8 @@ Lattice: a separate Hasse diagram of the conjunctions a chosen handful of
 principles generate. It opens with False and True alone; the sidebar offers the same
 choices per principle as the graph, ✓ for the principle, ✗ for its negation and
 a move to the background, and each adds its literal together with its meets
-against everything already shown. Each group has the graph's **show positive**
-and **clear** as well, under the same node cap. The toolbar is the graph's too:
+against everything already shown. Each group has the graph's own
+show-or-hide control as well, under the same node cap. The toolbar is the graph's too:
 a box to find a principle, then **Flip** and **Fit**. One query serves both
 diagrams; on the lattice a match nobody has chosen to build with has no node,
 and the readout says so rather than pretending otherwise.

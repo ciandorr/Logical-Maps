@@ -57,27 +57,32 @@ try{
   assert.equal(group.firstElementChild.tagName,'SUMMARY','The summary comes first, so everything else is the hidden part');
   assert.equal(group.querySelectorAll('.pr-row').length,10,'Every row of the category is inside it');
   // What acts on the whole category stays in the summary, so a closed
-  // category can still be shown or cleared without opening it first.
-  assert.ok(group.querySelector('summary [data-category-select="all"]'),'Show positive is in the summary');
-  assert.ok(group.querySelector('summary [data-category-select="none"]'),'And so is clear');
+  // category can still be shown or hidden without opening it first. It offers
+  // one move, never both, since the other would change nothing.
+  const toggle=view=>summary(view,'one').querySelector('[data-category-select],[data-lat-select]');
+  assert.ok(toggle('graph'),'The category\'s own control is in the summary');
+  assert.equal(summary('graph','one').querySelectorAll('[data-category-select]').length,1,'And is a single control');
+  assert.equal(toggle('graph').textContent,'hide','It offers to hide a category that is showing');
 
   const click=el=>el.dispatchEvent(new w.MouseEvent('click',{bubbles:true,cancelable:true}));
 
   // A control in the summary acts on the category without opening it.
   const shown=stem=>[...d.querySelectorAll(`#pr-filters [data-show-positive^="${stem}"]`)].filter(b=>b.getAttribute('aria-pressed')==='true').length;
   assert.equal(shown('alpha'),10,'Every principle starts on the graph');
-  click(group.querySelector('summary [data-category-select="none"]'));
-  assert.equal(shown('alpha'),0,'Clear empties the category');
+  click(toggle('graph'));
+  assert.equal(shown('alpha'),0,'Hiding empties the category');
   assert.equal(shown('beta'),10,'And leaves the other alone');
   assert.deepEqual(state('graph'),['one:closed','two:closed'],'Without opening anything');
-  click(group.querySelector('summary [data-category-select="all"]'));
-  assert.equal(shown('alpha'),10,'Show positive puts them back');
+  assert.equal(toggle('graph').textContent,'show positive','The control now offers the other move');
+  click(toggle('graph'));
+  assert.equal(shown('alpha'),10,'Which puts them back');
+  assert.equal(toggle('graph').textContent,'hide');
   assert.deepEqual(state('graph'),['one:closed','two:closed'],'Still closed');
-  const latGroup=d.querySelector('#lat-filters details[data-category="one"]');
-  click(latGroup.querySelector('summary [data-lat-select="all"]'));
+  assert.equal(toggle('lattice').textContent,'show positive','The lattice starts with nothing chosen');
+  click(toggle('lattice'));
   assert.equal(w.eval('lattice.shown.length'),10,'The lattice chooses a closed category the same way');
   assert.deepEqual(state('lattice'),['one:closed','two:closed'],'Also without opening it');
-  click(latGroup.querySelector('summary [data-lat-select="none"]'));
+  click(toggle('lattice'));
   assert.equal(w.eval('lattice.shown.length'),0);
 
   // Opening one category opens it everywhere, since the three lists share one

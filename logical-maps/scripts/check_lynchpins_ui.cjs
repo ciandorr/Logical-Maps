@@ -78,7 +78,8 @@ try {
   assert.ok(det(),'the Conjectures tab carries a lynchpin section');
   assert.equal(det().open,false,'the section starts collapsed');
   assert.equal(body().innerHTML,'','nothing is rendered while the section is closed');
-  assert.equal(det().querySelector('.hint').textContent,'Open questions ranked by how many other open questions each answer would settle.');
+  assert.ok(det().querySelector('.hint').textContent.startsWith('Open questions ranked by how many other open questions each answer would settle.'));
+  assert.ok(det().querySelector('.hint').contains(progress()),'the settled share sits in the description');
   // Two peer dropdowns in one format: lynchpins first, then the recorded conjectures, both collapsed at first.
   assert.ok(det().compareDocumentPosition(recorded())&dom.window.Node.DOCUMENT_POSITION_FOLLOWING,'lynchpins precede the recorded questions');
   assert.equal(recorded().open,false);
@@ -88,7 +89,7 @@ try {
   show(dom,'open');
   assert.equal(body().innerHTML,'','still nothing while the section is closed');
   assert.equal(progress().hidden,false);
-  assert.equal(progress().textContent,'18% of questions with up to two premises settled.');
+  assert.equal(progress().textContent,'18% of 33 questions with up to two premises are settled.');
   assert.match(progress().title,/^6 of 33 questions/);
   open(dom,true);
   assert.equal(det().querySelector('.note'),null,'no count summary above the table');
@@ -198,7 +199,7 @@ try {
   const dom2=page(fixture,'http://localhost/?assume=p'),doc2=dom2.window.document;
   show(dom2,'open'); open(dom2,true); open(dom2,true,'open-recorded');
   const det2=doc2.getElementById('lynchpins');
-  assert.equal(doc2.getElementById('open-progress').textContent,'14% of questions with up to two premises settled.','the stored share for the p background');
+  assert.equal(doc2.getElementById('open-progress').textContent,'14% of 7 questions with up to two premises are settled.','the stored share for the p background');
   assert.equal(det2.querySelectorAll('tbody tr').length,rowsP.length);
   assert.ok(stmt(dom2,'q||r').replace(/^★/,'').startsWith('True (⊤) ⊢ R'),'q ⊢ r reads as ⊤ ⊢ r under p, starred');
   assert.equal(det2.querySelector('[data-lynchpin="q|q|r"]'),null,'q is in the True class and asks nothing');
@@ -216,7 +217,7 @@ try {
   assert.deepEqual(keys(dom3,'open-recorded'),['q|q|r']);
   assert.deepEqual(scores(dom3,'q|q|r','open-recorded'),[2,2]);
   assert.equal(doc3.querySelector('#open-recorded [data-lynchpin="q|q|r"] td.rank').textContent,'—','unranked on a sparse map');
-  assert.equal(doc3.getElementById('open-progress').textContent,'0% of questions with up to two premises settled.');
+  assert.equal(doc3.getElementById('open-progress').textContent,'0% of 38 questions with up to two premises are settled.');
 
   // An inconsistent background reports that instead of scores.
   const dom4=page({topic,principles,results:[rule('pq',['p'],'q'),rule('ps',['p','s'],false)],models:[]},'http://localhost/?assume=p,s'),doc4=dom4.window.document;

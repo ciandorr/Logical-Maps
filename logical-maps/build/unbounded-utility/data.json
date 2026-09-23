@@ -5232,6 +5232,7 @@
    "name": "CDF-area: total comonotonic extension",
    "satisfies": [
     "rich-outcomes",
+    "totality",
     "stochastic-equivalence",
     "simple-eu",
     "stochastic-dominance",
@@ -6059,7 +6060,7 @@
    }
   }
  ],
- "generated": "2026-09-23T21:27:35+00:00",
+ "generated": "2026-09-23T21:38:26+00:00",
  "progress": [
   {
    "background": null,
@@ -6635,7 +6636,8 @@
        "cdf-area-extension",
        "comonotonic-sum-consistency",
        "independence",
-       "rich-outcomes"
+       "rich-outcomes",
+       "totality"
       ],
       "conclusion": "false",
       "rank": null,
@@ -7208,13 +7210,14 @@
       "kind": "question",
       "premises": [
        "cdf-area-extension",
-       "comonotonic-sum-consistency"
+       "comonotonic-sum-consistency",
+       "totality"
       ],
       "conclusion": "false",
       "rank": null,
       "yes": null,
       "no": null,
-      "status": "consistent",
+      "status": "outside",
       "conjectures": [
        {
         "id": "conjectured-total-comonotonic-area-extension",
@@ -7224,8 +7227,7 @@
        }
       ],
       "claim": "not",
-      "tier": "silver",
-      "verdict": "proved"
+      "tier": "silver"
      },
      {
       "kind": "question",
@@ -10565,13 +10567,9 @@
     "models": []
    },
    "conjectured-total-comonotonic-area-extension": {
-    "status": "proved",
-    "via": [
-     "expected-utility-implies-simple"
-    ],
-    "models": [
-     "cdf-area-preorder"
-    ]
+    "status": "open",
+    "via": [],
+    "models": []
    },
    "conjectured-total-independent-sum-extension": {
     "status": "proved",

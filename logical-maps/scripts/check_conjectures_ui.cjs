@@ -141,7 +141,7 @@ try {
   // The share and the list come from the stored evidence, so selecting sources changes neither.
   const progressEl=()=>doc.getElementById('open-progress');
   const settled=progressEl().textContent;
-  assert.equal(settled,'14% of questions with up to two premises settled.');
+  assert.equal(settled,'14% of 56 questions with up to two premises are settled.');
   sourceCheckbox.click();
   assert.equal(progressEl().textContent,settled,'Source filters do not change the settled share');
   assert.deepEqual(keys(dom),['q|b|false','q|b|a','q|a|b'],'nor the recorded list');
@@ -191,15 +191,12 @@ try {
   const du=assumptions(real);
   show(real,'open'); openSection(real,'open-recorded');
   const silver=()=>rd.querySelector('#open-recorded [data-starred="silver"]');
-  // Without Totality the silver conjecture's claim is already witnessed under DU, so it is
-  // settled there and waits for Show resolved; under DTU it is the open question CDF-Area
-  // Extension ∧ Comonotonic Sum Invariance ⊬ False, at its rank.
-  assert.equal(silver(),null,'settled under DU, hidden until Show resolved');
-  assert.ok(keys(real).every(k=>!rowOf(real,k).dataset.status||rowOf(real,k).dataset.status==='outside'),'settled ones wait for Show resolved');
-  setResolved(real,true);
-  assert.ok(silver()); assert.equal(silver().dataset.status,'consistent'); assert.equal(silver().querySelector('.status').textContent,'proved','a witnessed non-entailment is proved');
+  // Under DU the silver conjecture keeps Totality among its premises, three in all, so it
+  // is listed unranked; under DTU it is the open two-premise question CDF-Area Extension ∧
+  // Comonotonic Sum Invariance ⊬ False, at its rank.
+  assert.ok(silver(),'listed under DU'); assert.equal(silver().dataset.status,'outside','with more than two premises there');
   assert.equal(silver().dataset.claim,'not','a model conjectures against the entailment');
-  setResolved(real,false);
+  assert.ok(keys(real).every(k=>!rowOf(real,k).dataset.status||rowOf(real,k).dataset.status==='outside'),'settled ones wait for Show resolved');
   real.window.addBackgroundPreset('dtu');
   assert.deepEqual(assumptions(real),[...du,'totality'].sort());
   assert.ok(silver(),'open under DTU as a two-premise question');

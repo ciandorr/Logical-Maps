@@ -426,7 +426,7 @@ class Lynchpins:
         self.proper = [a for a in self.reps if a not in self.trivial]
         self.unknown = {m["id"]: [c for c in ids if c not in E.holds[m["id"]] and c not in E.fails[m["id"]]]
                         for m in self.witnesses}
-        self._rows = self._ranked = None
+        self._rows = self._ranked = self._recorded_rows = None
         self._universe()
 
     # -- closures as bitmasks over ids ∪ {False} ----------------------------
@@ -797,7 +797,9 @@ class Lynchpins:
             for i, r in enumerate(rows):
                 r["rank"] = i + 1
             self._ranked = rows
-        recorded = self._recorded(rows)
+        if self._recorded_rows is None:  # attach once: the rows are shared, and rank() is asked more than once per build
+            self._recorded_rows = self._recorded(rows)
+        recorded = self._recorded_rows
         for r in recorded:
             r.setdefault("rank", None)
             if r.get("status", "open") == "open" and "yes" not in r:
@@ -951,7 +953,7 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
             nm = _lynchpin_label(rep, names)
             o += [f"### {_lynchpin_heading(rep)}", ""]
             if rep["recorded"]:
-                o += ["| # | Conjecture | if yes | if no | record |", "|---:|---|---:|---:|---|"]
+                o += ["| Rank | Conjecture | if yes | if no | record |", "|---:|---|---:|---:|---|"]
                 o += [f"| — | {lynchpin_row_text(r, nm, True)}{_status_text(r)} | {_score_text(lynchpin_scores(r)[0])} | {_score_text(lynchpin_scores(r)[1])} | {', '.join('`' + c['id'] + '`' for c in r['conjectures'])} |" for r in rep["recorded"]]
                 o += [""]
             else:
@@ -981,7 +983,7 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
               f"{rep['open']} open questions. {progress_text(rep['progress']).capitalize()}.", ""]
         rows = rep["rows"][:top]
         if rows:
-            o += ["| # | Question | if yes | if no |", "|---:|---|---:|---:|"]
+            o += ["| Rank | Question | if yes | if no |", "|---:|---|---:|---:|"]
             o += [f"| {r['rank']} | {lynchpin_row_text(r, nm)} | {r['yes']} | {r['no']} |" for r in rows]
             o += [""]
         elif not lynch["skipped"]:
@@ -991,7 +993,7 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
                   "denies it, and if yes / if no are what confirming or refuting the conjecture would settle. A "
                   "settled conjecture shows its verdict and no rank or scores; one with more than two premises is "
                   "marked. ★ bronze for notes, silver or gold where a record ranks it by importance and difficulty.", "",
-                  "| # | Conjecture | if yes | if no | record |", "|---:|---|---:|---:|---|"]
+                  "| Rank | Conjecture | if yes | if no | record |", "|---:|---|---:|---:|---|"]
             o += [f"| {r['rank'] or '—'} | {lynchpin_row_text(r, nm, True)}{_status_text(r)} | {_score_text(lynchpin_scores(r)[0])} | {_score_text(lynchpin_scores(r)[1])} | {', '.join('`' + c['id'] + '`' for c in r['conjectures'])} |" for r in rep["recorded"]]
             o += [""]
     return o
@@ -2770,16 +2772,18 @@ def selftest():
     more = {**noted, "results": [*noted["results"], dict(R("pq2", ["p"], "q"), status="conjectured", notes="Long proved."),
                                   dict(R("prs", ["p", "r", "s"], "q"), status="conjectured", notes="Three premises.")],
             "models": [*noted["models"], dict(M("m5", ["q"], ["s"]), status="conjectured", notes="Two points.")]}
-    rec = {(tuple(r["premises"]), r["conclusion"]): r for r in Lynchpins(more).rank(top=2)["recorded"]}
+    Lm = Lynchpins(more)
+    rec = {(tuple(r["premises"]), r["conclusion"]): r for r in Lm.rank(top=2)["recorded"]}
     assert rec[("p",), "q"]["status"] == "proved" and rec[("p",), "q"]["rank"] is None and rec[("p",), "q"]["yes"] is None
     # A result claims the entailment, a model denies it; the verdict reads relative to the claim.
     assert rec[("p",), "q"]["claim"] == "entails" and rec[("p",), "q"]["verdict"] == "proved"
     assert rec[("q",), "s"]["claim"] == "not" and rec[("q",), "s"]["status"] == "refuted" and rec[("q",), "s"]["verdict"] == "proved", "m1 refutes q ⊢ s, so the conjecture q ⊬ s holds"
     assert rec[("r", "s"), "p"]["claim"] == "not" and lynchpin_scores(rec[("r", "s"), "p"]) == (rec[("r", "s"), "p"]["no"], rec[("r", "s"), "p"]["yes"])
     assert rec[("r",), "p"]["claim"] == "entails" and lynchpin_scores(rec[("r",), "p"]) == (4, 2)
+    again = {(tuple(r["premises"]), r["conclusion"]): r for r in Lm.rank(top=2)["recorded"]}
+    assert [c["id"] for c in again[("r",), "p"]["conjectures"]] == ["rp"], "a second ranking attaches nothing twice"
     assert rec[("p", "r", "s"), "q"]["status"] == "outside" and rec[("p", "r", "s"), "q"]["tier"] == "bronze"
     assert rec[("r",), "p"]["status" if "status" in rec[("r",), "p"] else "kind"] in ("open", "question") and rec[("r",), "p"]["yes"] == 4
-    Lm = Lynchpins(more)
     assert Lm.question_status(("p",), "s") == "refuted" and Lm.question_status(("p",), "q") == "proved" and Lm.question_status(("r",), "s") == "open"
     # A sparse map is not ranked, but its recorded conjectures are still scored.
     sparse = Lynchpins(more).rank(top=5, score_all=False)

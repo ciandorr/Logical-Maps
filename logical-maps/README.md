@@ -414,7 +414,7 @@ with more than two premises is listed the same way, marked as such. **Show
 resolved** is off by default, hiding the settled ones. A sparse map, too open to
 rank, still lists and scores its conjectures. Verdicts come from proved
 evidence under the background and never from conjectures; a model witnesses a
-conjecture's flags, not its proposed construction. A line above the sections gives the share of
+conjecture's flags, not its proposed construction. The Central Questions description gives the share of
 implication questions with up to two premises settled: S ⊢ c for S at most two
 principle classes and c a class or False, counted only when no smaller premise
 set already proves or excludes c, and settled alike by a proof, an exclusion or

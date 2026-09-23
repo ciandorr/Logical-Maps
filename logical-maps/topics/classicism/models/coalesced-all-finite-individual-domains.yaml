@@ -7,6 +7,9 @@ satisfies:
 - barcan-r
 - necessary-barcan-r
 - necessary-strong-leibniz-t
+- atomicity-t
+- boolean-completeness-t
+- relational-choice-r
 violates:
 - distinctness-necessary-r
 - witnessed-possibility-r
@@ -15,6 +18,7 @@ violates:
 - distinctness-signature-r
 - no-pure-contingency-r
 - possibility-schema-r
+- possibility-plus-r
 status: proved
 certificate:
   source_id: misc
@@ -68,7 +72,14 @@ notes: 'Recorded to witness the consistency with C of the sentence through which
   each component is a one-world model and the root proposition is an atom. The type-t Strong Leibniz Biconditionals
   hold necessarily: at the root, the singleton of the arrow to component $n$ becomes that component’s
   identity under it and empty under every other arrow, and the root proposition becomes empty under every
-  non-identity arrow, so every singleton is a strong world; the components are one-world models.'
+  non-identity arrow, so every singleton is a strong world; the components are one-world models. Here
+  the components are full Henkin models, so every set of arrows is a root proposition: the root propositions
+  form a complete atomic algebra, giving Atomicity and Boolean Completeness at type t, and Relational
+  Choice holds at the root by a functional choice in the free root component. Possibility+ (pure) fails:
+  the component with three individuals has three at its only world; take two root individuals that differ
+  at that component and agree everywhere else; the pure formula saying that $x\ne y$ and there are exactly
+  two individuals is consistent, but at the root there are infinitely many individuals, under every arrow
+  into another component the two collapse, and under the arrow into that component there are three. '
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -95,3 +106,13 @@ changes:
   summary: Added □Strong Leibniz Biconditionals (type t); see the notes.
   satisfies:
   - necessary-strong-leibniz-t
+- date: '2026-09-22'
+  by: Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)
+  summary: Added Atomicity (type t), Boolean Completeness (type t) and Relational Choice, and the failure
+    of Possibility+ (pure), with the arguments in the notes.
+  satisfies:
+  - atomicity-t
+  - boolean-completeness-t
+  - relational-choice-r
+  violates:
+  - possibility-plus-r

@@ -1,0 +1,32 @@
+id: strong-possibility-and-distinctness-preserving-collapse-incompatible
+premises:
+- strong-possibility-r
+- distinctness-preserving-collapse
+conclusion: 'false'
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr; stated as a result at Cian Dorr’s suggestion, 22 September
+    2026, with the proof written out by Claude Fable 5.1 (Anthropic)
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 42; Appendix E, p. 83.
+source_names:
+- Classicism
+proof: 'Let $E_1$ be the closed pure sentence that there is exactly one individual. Both $E_1$ and $\neg
+  E_1$ are consistent with Maximalist Classicism: the coalesced sum with a singleton individual root satisfies
+  Possibility (pure) and $E_1$, the maximalist root satisfies Possibility (pure) and $\neg E_1$. Let $P$
+  be whichever of $E_1$, $\neg E_1$ is false. Strong Possibility (pure) gives $\Diamond_{\ne}P$. Distinctness-preserving
+  collapse applied to the truth $\neg P$ gives $\Box_{\ne}\neg P$, which is $\neg\Diamond_{\ne}P$.'
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §2.6, p. 42; Appendix E, p. 83
+  note: Page 83 observes that the coalesced-sum roots validate the collapse and therefore refute Strong
+    Possibility; the record states the general incompatibility.
+notes: The side condition of Strong Possibility (pure) is consistency with Max(C), so the proof needs
+  a sentence that is false yet Max(C)-consistent; the two recorded coalesced roots certify both $E_1$
+  and its negation as Max(C)-consistent, and one of them is false.

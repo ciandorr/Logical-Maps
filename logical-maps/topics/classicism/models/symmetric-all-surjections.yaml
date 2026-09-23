@@ -9,11 +9,17 @@ satisfies:
 - atomlessness
 - axiom-of-infinity-e
 - axiom-of-infinity-t
+- no-contingency-signature-r
+- signature-b-r
 violates:
 - actuality
 - atomicity-t
 - rigid-comprehension-r
 - distinctness-necessary-r
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
 status: proved
 certificate:
   source_id: dorr-bc-not-rc
@@ -38,14 +44,13 @@ references:
   locator: Appendix D, pp. 73–79
   note: The ideally-full action models of which this is the symmetric variant, and the failures of Boolean
     Completeness that symmetry blocks.
-description: >-
-  A symmetric ideally-full intensional action model over one object, the set of natural numbers. Its arrows
-  are all the surjections of that set, and its symmetry group is all the permutations. A relational domain
-  holds exactly the intensions that are symmetric, meaning indifferent to relabelling the individuals of
-  a world, and pinned down by some finite set. The evaluation point is the identity arrow.
+description: 'A symmetric ideally-full intensional action model over one object, the set of natural numbers.
+  Its arrows are all the surjections of that set, and its symmetry group is all the permutations. A relational
+  domain holds exactly the intensions that are symmetric, meaning indifferent to relabelling the individuals
+  of a world, and pinned down by some finite set. The evaluation point is the identity arrow.
 
 
-  Boolean Completeness holds by the draft's main theorem, whose two hypotheses are verified here with
+  Boolean Completeness holds by the draft''s main theorem, whose two hypotheses are verified here with
   the empty distinguished set: every finite set is amalgamable, since an arrow is prescribed only on a
   finite set and extends freely, and points can always be moved off a given finite set by a permutation.
   The least upper bound of a property of type-tau entities is the union of the hulls of its instances.
@@ -63,24 +68,50 @@ description: >-
   fails already at type e, and concretely rather than only through Actuality: a persistent property with
   a cofinite extension must be closed under everything an arrow can send an instance to, and no finite
   pinning set can sustain that short of the top property, so nothing rigid is coextensive with being distinct
-  from a fixed individual.
-notes: >-
-  This is the draft's headline separation. Boolean Completeness holds while Rigid Comprehension fails,
-  and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded as a derived
-  verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition rather
-  than for a true one, and the failure of ND at type e follows from the presence of a non-injective surjection,
-  since the proposition that two fixed individuals are identical is then a nonzero proposition; neither
-  is displayed separately in the draft. The source is a work in progress.
+  from a fixed individual.'
+notes: 'This is the draft''s headline separation. Boolean Completeness holds while Rigid Comprehension
+  fails, and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded
+  as a derived verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition
+  rather than for a true one, and the failure of ND at type e follows from the presence of a non-injective
+  surjection, since the proposition that two fixed individuals are identical is then a nonzero proposition;
+  neither is displayed separately in the draft. The source is a work in progress. Interpretation of Σ,
+  fixed for this record: each relational constant denotes the top element of its type and each individual
+  constant denotes one fixed individual $d$. Under it the signature schemata that give the constants a
+  special role fail: with $c\in\Sigma$ of relational type $\tau$, $c=\top_\tau$ necessarily, so Witnessed
+  Possibility fails for the pure formula $x\ne\top_\tau$, Separated Structure fails since $\lambda x\,
+  .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$, Independence (signature Σ) fails since $c$ denotes
+  what a closed pure term denotes, and Distinctness (signature Σ) fails since $c=\top_\tau$ is true and
+  unprovable. But No Contingency (signature Σ), and with it B for sentences of Σ, hold. The relational
+  constants denote pure entities, so a closed Σ-sentence denotes what some $P(d,\ldots,d)$ denotes for
+  a pure formula $P$; the model’s automorphisms carry every individual to every other, so $P(d,\ldots,d)$
+  is materially equivalent to the pure sentence $\forall x\, .\,P(x,\ldots,x)$ and its negation to $\forall
+  x\, .\,\neg P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency, and instantiation
+  under the box gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$.'
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
-  summary: >-
-    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
-    identity at the identity arrow is literal, so no numeral counts them. The propositions that a given
-    individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned
-    by that individual, so there are infinitely many propositions. The set of numerals at each type is
-    invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is
-    standard and no finite cardinality holds of the universal property at either type.
+  summary: Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers
+    and identity at the identity arrow is literal, so no numeral counts them. The propositions that a
+    given individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric
+    and pinned by that individual, so there are infinitely many propositions. The set of numerals at each
+    type is invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality
+    is standard and no finite cardinality holds of the universal property at either type.
   satisfies:
   - axiom-of-infinity-e
   - axiom-of-infinity-t
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences
+    of Σ, at Cian Dorr’s request; see the notes.
+  satisfies:
+  - no-contingency-signature-r
+  - signature-b-r

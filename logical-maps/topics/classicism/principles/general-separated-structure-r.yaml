@@ -1,0 +1,27 @@
+id: general-separated-structure-r
+name: General Separated Structure
+category: signature
+statement: Let a_1…a_n and b_1…b_m be constants of Sigma, possibly with repetitions, none occurring in
+  the closed terms F and G, and let pi be a bijection from variables x_1…x_k to the distinct constants
+  among them. If F applied to the a’s equals G applied to the b’s, then abstracting the constants yields
+  identical pure-position operations.
+formal: $F a_1\cdots a_n=G b_1\cdots b_m\to\lambda\bar x\, .\,F(\pi a_1)\cdots(\pi a_n)=\lambda\bar x\,
+  .\,G(\pi b_1)\cdots(\pi b_m)\quad(a_i,b_j\text{ constants of }\Sigma,\text{ none in the closed }F,G;\
+  \pi\text{ a bijection from }\bar x\text{ to the distinct ones})$
+date: '2026-09-22'
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §4, p. 565.
+source_names:
+- Logical Combinatorialism
+references:
+- paper: bacon-2020
+  role: formulation
+  locator: §4, p. 565
+notes: 'Bacon’s instances: Rab = Sba implies R and S are converses; Rab = Fb implies R forgets its first
+  argument; Raa = Fa implies F is the reflexivization of R. Equivalent in C to Separated Structure by
+  the recorded results.'
+changes:
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Displayed the schema’s side conditions inside the math block, at Cian Dorr’s request; the statement
+    is unchanged.

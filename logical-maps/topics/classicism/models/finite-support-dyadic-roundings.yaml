@@ -8,11 +8,21 @@ satisfies:
 - necessary-actuality
 - axiom-of-infinity-e
 - axiom-of-infinity-t
+- distinctness-preserving-collapse
+- relational-choice-r
+- necessary-relational-choice-r
 violates:
 - distinctness-necessary-r
 - barcan-r
 - boolean-completeness-r
 - rigid-comprehension-r
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
+- countable-boolean-completeness-r
+- no-contingency-signature-r
+- signature-b-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -22,21 +32,61 @@ certificate:
   date: '2026-09-17'
   lean: none
 sources:
-- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5(7), pp. 74–75;
-  construction p. 78, Part 7; p. 79 (No Pure Contingency).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 7, pp.
+  74, 78; p. 79 (No Pure Contingency).
 source_names:
 - Classicism
 references:
 - paper: bacon-dorr-classicism
   role: proof
   locator: Appendix D, Proposition D.5(7), pp. 74–75; construction p. 78, Part 7; p. 79 (No Pure Contingency)
-description: 'The finite-support model in Part 7, evaluated at its sole object N. See the indicated construction.
-  Negations in the source mean failure at some type: note 92 locates atomicity failures at t, ND/BF failures
-  at e, and the displayed completeness failures at et.'
-notes: The cited construction is a model of the map’s relational-type framework. The description identifies
+description: 'Proposition D.5, part 7 (p. 78): the arrows are the maps $f_n$, for $n$ a power of $2$,
+  sending $m$ to the greatest multiple of $n$ not exceeding $m$; $f_1$ is the identity. Actuality and
+  Atomicity hold because each $\{f_n\}$ is pinned down by a finite set ($\{n-2,n-1,n\}$ for $n>1$, $\{0,1\}$
+  for the identity); BF fails since an arrow sending $1$ to $0$ sends everything to even numbers; Boolean
+  Completeness fails because the strongest persistent property with extension $\mathbb N$ pinned down
+  by $\{0,\ldots,n\}$ has, at $f_m$, the multiples of $\min\{m,n\}$ as extension and so becomes ever stronger.
+  In every part, $W_0^\ddagger$ is the set of finite subsets of $\mathbb N$ and the model is ideally full:
+  a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite
+  set of individuals (it is pinned down by that set), an entity of a higher type is an applicative behaviour
+  profile pinned down by a finite set in the same sense, and the individuals are the natural numbers acted
+  on by the arrows themselves. Propositions and properties are thus about finitely many individuals and
+  indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.'
+notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
   its evaluation point; construction and verification are given at the PDF locations in References. Boxed
   positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately
-  to each closed instance.
+  to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant
+  $c$ of type $\tau=\bar\sigma t$ denotes $\lambda\bar x\, .\,a$, where $a$ is the unique true atom of
+  the model, the actual-world proposition described above; every other relational constant denotes the
+  top element of its type and every individual constant one fixed individual. Under it: No Contingency
+  (signature Σ) fails, since the Σ-sentence $\forall\bar x\, .\,c\bar x$ denotes $a$, true and contingent;
+  B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\Diamond a$
+  is false, so $\Box\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\top_\tau$,
+  witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is $\Diamond\Box a$ and $a$ is necessary at
+  no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence
+  (signature Σ) and Distinctness (signature Σ) fail through the other relational constants, Σ being assumed
+  to contain at least one: such a constant $c''$ of type $\tau''$ denotes what the closed pure term $\top_{\tau''}$
+  denotes, and $c''=\top_{\tau''}$ is a true identity that C(Σ) does not prove. The designated constant
+  refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas
+  $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything
+  that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\to t$:
+  the property $E$ that the source shows to lack a least upper bound has as its extension a countable
+  family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also
+  puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$,
+  which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse
+  holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
+  proposition $\{f_1\}$: under $f_n$ with $n>1$, $\Diamond q$ would need $k\circ f_n$ to be the identity,
+  impossible since $f_n$ is not injective. Relational Choice holds, necessarily. The model is ideally
+  full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any
+  set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of
+  $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down
+  by $\emptyset$, so it is the intension of an element of $V^{\bar\sigma\to t}$ with extension $R$ at
+  $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the
+  metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at
+  $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\colon
+  W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model,
+  so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September
+  2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -56,13 +106,50 @@ changes:
   - rigid-comprehension-r
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
-  summary: >-
-    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
-    identity at the evaluation arrow is literal, so no numeral counts them. The propositions that a given
-    individual is fixed by the arrow, one for each individual, are pairwise distinct and each has that
-    individual as finite support, so there are infinitely many propositions. The set of numerals at each
-    type is invariant under every arrow, hence has empty support and lies in the domain, so finite
+  summary: Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers
+    and identity at the evaluation arrow is literal, so no numeral counts them. The propositions that
+    a given individual is fixed by the arrow, one for each individual, are pairwise distinct and each
+    has that individual as finite support, so there are infinitely many propositions. The set of numerals
+    at each type is invariant under every arrow, hence has empty support and lies in the domain, so finite
     cardinality is standard and no finite cardinality holds of the universal property at either type.
   satisfies:
   - axiom-of-infinity-e
   - axiom-of-infinity-t
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Expanded the description from Appendix D, naming Proposition D.5 and its part; added the failure
+    of Countable Boolean Completeness at type e→t; settled the Distinctness-preserving collapse.
+  satisfies:
+  - distinctness-preserving-collapse
+  violates:
+  - countable-boolean-completeness-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences
+    of Σ, at Cian Dorr’s request; see the notes.
+  violates:
+  - no-contingency-signature-r
+  - signature-b-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Corrected the reason given for the failures of Independence (signature Σ) and Distinctness
+    (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed
+    by every arrow; the failures come from the other relational constants, which denote top. No verdict
+    changes.'
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Added Relational Choice and its necessitation at Cian Dorr’s direction: ideally full models
+    are extensionally full at every object, and choice in the metatheory supplies the functional subrelation;
+    see the notes.'
+  satisfies:
+  - relational-choice-r
+  - necessary-relational-choice-r

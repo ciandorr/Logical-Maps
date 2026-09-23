@@ -7,9 +7,16 @@ satisfies:
 - distinctness-necessary-t
 - pure-b-r
 - relational-choice-r
+- necessary-relational-choice-r
 violates:
 - necessary-distinctness-necessary-t
 - no-pure-contingency-r
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
+- strong-leibniz-t
+- distinctness-preserving-collapse
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -29,8 +36,26 @@ references:
   locator: §3.5, p. 59, fifth paragraph and n. 81; p. 61
 description: Use the source’s category with h:W0→W1, j:W1→W0 and k:W1→W1, evaluated at W0. ND at t holds
   there and fails at W1. Only the type-t ND assertion is recorded.
-notes: The cited construction is a model of the map’s relational-type framework. The description identifies
-  its evaluation point; construction and verification are given at the PDF locations in References.
+notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
+  its evaluation point; construction and verification are given at the PDF locations in References. Interpretation
+  of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual
+  constant denotes one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational
+  type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
+  witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
+  $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
+  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. The type-t
+  Strong Leibniz Biconditionals fail at $W_0$: the possible proposition $\{h\}$ has only itself as a candidate
+  strong world below it, but under $h$ it becomes $\{x : x\circ h=h\}=\{\mathrm{id}_{W_1},k\}$, which
+  the proposition $\{\mathrm{id}_{W_1}\}$ of $W_1$’s full domain separates, so $\{h\}$ does not necessarily
+  settle every proposition. Since Atomicity holds in this full model, this shows that Atomicity (type
+  t) alone does not yield the type-t Strong Leibniz Biconditionals; BF (type t) fails here, $h$ acting
+  non-surjectively from a four-element to an eight-element domain. □Relational Choice holds: the truncation
+  of a full action model at any arrow is again a full action model, its domains at the reachable objects
+  being unchanged, and Relational Choice holds in every full model given choice in the metatheory (Classicism,
+  p. 61). Distinctness-preserving collapse fails at $W_0$: let $p:=\{\mathrm{id}_{W_0}\}$, true. A witness
+  $q$ contains $\mathrm{id}_{W_0}$, and $j\circ h=\mathrm{id}_{W_0}$, so $\Diamond q$ holds under $h$
+  while $p$ does not.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -48,9 +73,32 @@ changes:
   - no-pure-contingency-r
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
-  summary: >-
-    Added Relational Choice at Cian Dorr's direction. With choice in the metatheory a serial relation
-    has a functional subrelation, and a full model contains every intension, so that subrelation is in the
-    domain; see Classicism, p. 61, on the principles common to full models.
+  summary: Added Relational Choice at Cian Dorr's direction. With choice in the metatheory a serial relation
+    has a functional subrelation, and a full model contains every intension, so that subrelation is in
+    the domain; see Classicism, p. 61, on the principles common to full models.
   satisfies:
   - relational-choice-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Strong Leibniz Biconditionals (type t) at W0; see the notes.
+  violates:
+  - strong-leibniz-t
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Boxed the Relational Choice claim; see the notes.
+  satisfies:
+  - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the Distinctness-preserving collapse; see the notes.
+  violates:
+  - distinctness-preserving-collapse

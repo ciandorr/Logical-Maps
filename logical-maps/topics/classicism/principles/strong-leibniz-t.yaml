@@ -1,0 +1,24 @@
+id: strong-leibniz-t
+name: Strong Leibniz Biconditionals (type t)
+category: instances
+statement: 'The type-t instance of the Strong Leibniz Biconditionals: every possible proposition is entailed
+  by a strong world proposition, one that is possible and necessarily entails every proposition or its
+  negation.'
+formal: $\forall p\, .\,\Diamond p\to\exists w\, .\,\operatorname{SWorld}_t(w)\land w\le p$
+date: '2026-09-22'
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, pp. 164–165.
+source_names:
+- Philosophical Introduction to HOL
+references:
+- paper: bacon-2024-book
+  role: formulation
+  locator: §8.2, pp. 164–165
+notes: 'Broken out as its own principle, like Atomicity (type t), at Cian Dorr’s request, because the
+  type-t case can be settled in many models where the higher types have not been checked. In a one-object
+  action model whose propositions are all the sets of arrows, every singleton is a strong world: seen
+  from an arrow i, the singleton of h becomes the set of j with j∘i = h, and every proposition at that
+  world is the shift of a root proposition, which cannot separate two such j. Multi-object models differ;
+  see the two-object retract.'
+aliases:
+- SL (type t)

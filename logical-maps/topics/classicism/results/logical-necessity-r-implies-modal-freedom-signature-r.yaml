@@ -1,0 +1,26 @@
+id: logical-necessity-r-implies-modal-freedom-signature-r
+premises:
+- logical-necessity-r
+conclusion: modal-freedom-signature-r
+status: proved
+certificate:
+  source_id: bacon-2020
+  produced_by: Andrew Bacon
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §3, p. 556.
+source_names:
+- Logical Combinatorialism
+proof: Assume $\Diamond P[\bar c/\bar x]$ and $\Diamond Q[\bar d/\bar y]$ for distinct constants $\bar
+  c\bar d$. Logical Necessity for $\neg P$ at $\bar c$, contraposed, gives $\exists\bar x\, .\,P$, and
+  likewise $\exists\bar y\, .\,Q$; so $\exists\bar x\bar y\, .\,P\land Q$. Logical Necessity for $\neg(P\land
+  Q)$ at the constants $\bar c\bar d$, contraposed, gives $\Diamond(P[\bar c/\bar x]\land Q[\bar d/\bar
+  y])$.
+references:
+- paper: bacon-2020
+  role: proof
+  locator: §3, p. 556
+notes: ''

@@ -1,0 +1,31 @@
+id: separated-structure-r-implies-independence-signature-r
+premises:
+- separated-structure-r
+conclusion: independence-signature-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §4, p. 568 and n. 53.
+source_names:
+- Logical Combinatorialism
+proof: Let $c$ be a constant of relational type $\tau$, $\bar d$ distinct constants other than $c$, and
+  $A$ closed and pure, and suppose $c=A\bar d$. By $\beta$, $(\lambda\bar y x\, .\,x)\bar d c=(\lambda\bar
+  y x\, .\,A\bar y)\bar d c$. The two abstracts are closed and pure, so they contain neither $c$ nor $\bar
+  d$. Peeling off $c$ and then each $d_i$ with Separated Structure, as in the proof of General Separated
+  Structure, gives $\lambda\bar yx\, .\,x=\lambda\bar yx\, .\,A\bar y$. Applying both sides to $\bar d$
+  and then to $\top_\tau$ and to $\bot_\tau$ gives $\top_\tau=A\bar d=\bot_\tau$, contradicting $\top_\tau\ne\bot_\tau$
+  in C.
+references:
+- paper: bacon-2020
+  role: origin
+  locator: §4, p. 568 and n. 53
+  note: Fundamental Independence and its derivation from Logical Necessity; this record derives the constant-indexed
+    form from Separated Structure instead.
+notes: The n = 0 case, that no constant denotes a pure entity, is the first step of the recorded incompatibility
+  of Separated Structure with ND.

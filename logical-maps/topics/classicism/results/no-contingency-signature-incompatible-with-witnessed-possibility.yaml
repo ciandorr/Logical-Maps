@@ -1,0 +1,29 @@
+id: no-contingency-signature-incompatible-with-witnessed-possibility
+premises:
+- no-contingency-signature-r
+- witnessed-possibility-r
+conclusion: 'false'
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 22 September 2026; proof as recorded.
+source_names:
+- Dorr 22 Sep
+proof: Let $c$ be a constant of $\Sigma$ of some relational type $\tau$. The pure formulas $x=\top_\tau$
+  and $x\ne\top_\tau$ have witnesses, so Witnessed Possibility gives $\Diamond(c=\top_\tau)$ and $\Diamond(c\ne\top_\tau)$.
+  By excluded middle one of the closed $\Sigma$-sentences $c=\top_\tau$, $c\ne\top_\tau$ is true, and
+  No Contingency (signature Σ) makes it necessary, contradicting the possibility of the other.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, p. 27; §2.5, n. 57, p. 38
+notes: Hence No Contingency (signature Σ) excludes Logical Necessity, Separated Structure, Possibly Witnessed
+  Possibility and Maximalist Classicism for Σ, while it is consistent with No Pure Contingency and holds
+  in every one-world model.

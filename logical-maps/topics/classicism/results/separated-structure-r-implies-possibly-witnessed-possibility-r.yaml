@@ -1,0 +1,34 @@
+id: separated-structure-r-implies-possibly-witnessed-possibility-r
+premises:
+- separated-structure-r
+conclusion: possibly-witnessed-possibility-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, suggestion of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic),
+    22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 22 September 2026; proof as recorded.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.5, pp. 38–39 and n. 57.
+source_names:
+- Dorr 22 Sep
+- Classicism
+proof: Iterating Separated Structure, as in the recorded proof of General Separated Structure, gives $F\bar
+  c=G\bar c\to F=G$ for closed pure $F,G$ and distinct constants $\bar c$. Let $P$ be pure with free variables
+  among $\bar x$ and put $F:=\lambda\bar x\, .\,\neg P$, $G:=\lambda\bar x\, .\,\top$, both closed and
+  pure. Suppose $\Box\neg P[\bar c/\bar x]$, that is $\neg P[\bar c/\bar x]=\top$. By $\beta$, $F\bar
+  c=\top=G\bar c$, so $F=G$. By NI, $\Box(F=\lambda\bar x\, .\,\top)$, and $F=\lambda\bar x\, .\,\top\to\forall\bar
+  x\, .\,F\bar x$ is a theorem, so K gives $\Box\forall\bar x\, .\,\neg P$. Contraposing, $\Diamond\exists\bar
+  x\, .\,P\to\Diamond P[\bar c/\bar x]$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.5, pp. 38–39 and n. 57
+- paper: bacon-2020
+  role: background
+  locator: §4, pp. 561–562
+notes: ''

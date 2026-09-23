@@ -1,0 +1,24 @@
+id: strong-leibniz-t-implies-atomicity-t
+premises:
+- strong-leibniz-t
+conclusion: atomicity-t
+status: proved
+certificate:
+  source_id: bacon-2024-book
+  produced_by: Andrew Bacon; type-t instance recorded by Claude Fable 5.1 (Anthropic), 22 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, p. 170.
+source_names:
+- Philosophical Introduction to HOL
+proof: 'A strong world proposition is an atom: from $\Box\forall q\, .\,w\le q\lor w\le\neg q$, T gives
+  $\forall q\, .\,w\le q\lor w\le\neg q$, and with $w\ne\bot$ this is $\operatorname{Atom}_t(w)$. A possible
+  $p$ is a non-bottom $p$. So the strong world below $p$ is an atom below it.'
+references:
+- paper: bacon-2024-book
+  role: proof
+  locator: §8.2, p. 170
+notes: ''

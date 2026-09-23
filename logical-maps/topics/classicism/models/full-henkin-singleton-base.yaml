@@ -24,6 +24,12 @@ satisfies:
 - necessary-gallin-extensional-comprehension-r
 - no-pure-contingency-r
 - distinctness-preserving-collapse
+- strong-leibniz-r
+- necessary-strong-leibniz-r
+- no-contingency-signature-r
+- signature-b-r
+- necessary-relational-choice-r
+- necessary-functional-choice-r
 violates:
 - infinity-e
 - infinity-t
@@ -31,6 +37,10 @@ violates:
 - possibility-schema-r
 - possible-infinity-e
 - possible-infinity-t
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
 status: proved
 certificate:
   source_id: misc
@@ -54,15 +64,22 @@ description: 'Use the ordinary full Henkin interpretation: D_e is a singleton, D
   operation. Equality is genuine equality and Box is the identity on truth values. These facts verify
   the listed positive assertions. The two finite base domains refute the infinity assertions, top is an
   atom, and the possible existence of two individuals is false although its pure sentence is C-consistent.'
-notes: >-
-  Explicit specialization of the source’s standard Henkin construction to a singleton individual
+notes: 'Explicit specialization of the source’s standard Henkin construction to a singleton individual
   domain. No independent checking or formal verification is claimed. The model is a standard model of
-  extensional classical type theory in which the defined necessity is truth: a boxed principle holds
-  exactly when its unboxed form does, coextensive relations are identical, every relation is rigid in
-  every recorded sense, the Boolean algebra at each relational type is the complete atomic algebra of
-  subsets of the domain, and every closed sentence is non-contingent. The pure schemata fail because
-  C-consistent sentences about how many individuals there are can be false. Signature principles are not
-  listed, since they depend on how the nonlogical constants are interpreted.
+  extensional classical type theory in which the defined necessity is truth: a boxed principle holds exactly
+  when its unboxed form does, coextensive relations are identical, every relation is rigid in every recorded
+  sense, the Boolean algebra at each relational type is the complete atomic algebra of subsets of the
+  domain, and every closed sentence is non-contingent. The pure schemata fail because C-consistent sentences
+  about how many individuals there are can be false. No Contingency (signature Σ) and B for sentences
+  of Σ hold in a one-world model however the constants are interpreted. Interpretation of Σ, fixed for
+  this record: each relational constant denotes the top element of its type and each individual constant
+  denotes one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational
+  type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
+  witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
+  $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
+  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Box is truth
+  in this one-world model, so □Relational Choice and □Functional Choice hold with their unboxed forms.'
 changes:
 - date: '2026-09-17'
   by: OpenAI Codex (GPT-6)
@@ -79,21 +96,19 @@ changes:
   - distinctness-preserving-collapse
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
-  summary: >-
-    Verified the Possible Infinity principles added on this date. Box is the identity on truth values, so
-    each fails with the corresponding Axiom of Infinity.
+  summary: Verified the Possible Infinity principles added on this date. Box is the identity on truth
+    values, so each fails with the corresponding Axiom of Infinity.
   violates:
   - possible-infinity-e
   - possible-infinity-t
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
-  summary: >-
-    Listed the strongest principles the model obviously satisfies, at Cian Dorr's request. Since Box is
-    truth and identity is genuine, each boxed principle reduces to its unboxed form; coextensive relations
-    are identical because every function type is full; every relation is persistent, inextensible and
-    Gallin-extensional trivially; Actuality holds with top as the actual world; each relational type is a
-    complete atomic Boolean algebra, giving Atomicity and Boolean Completeness; Tractarianism is the
-    tautology that a proposition entailing each instance entails the universal claim; and ND holds
+  summary: Listed the strongest principles the model obviously satisfies, at Cian Dorr's request. Since
+    Box is truth and identity is genuine, each boxed principle reduces to its unboxed form; coextensive
+    relations are identical because every function type is full; every relation is persistent, inextensible
+    and Gallin-extensional trivially; Actuality holds with top as the actual world; each relational type
+    is a complete atomic Boolean algebra, giving Atomicity and Boolean Completeness; Tractarianism is
+    the tautology that a proposition entailing each instance entails the universal claim; and ND holds
     outright, giving C5.
   satisfies:
   - necessary-fregean-axiom
@@ -111,3 +126,34 @@ changes:
   - necessary-boolean-completeness-r
   - necessary-rigid-comprehension-r
   - necessary-gallin-extensional-comprehension-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the Strong Leibniz Biconditionals and their necessitation. Box is truth in this model,
+    so a strong world is an atom and the principle reduces to Atomicity, which holds; boxed principles
+    reduce to their unboxed forms.
+  satisfies:
+  - strong-leibniz-r
+  - necessary-strong-leibniz-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Added No Contingency (signature Σ) and B for sentences of Σ: Box is truth in this model, so
+    every closed sentence, whatever the constants denote, is necessary if true and necessarily possible
+    if true.'
+  satisfies:
+  - no-contingency-signature-r
+  - signature-b-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Boxed the two Choice claims.
+  satisfies:
+  - necessary-relational-choice-r
+  - necessary-functional-choice-r

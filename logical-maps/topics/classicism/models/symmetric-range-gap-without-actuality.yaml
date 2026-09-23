@@ -12,6 +12,10 @@ violates:
 - actuality
 - atomicity-t
 - distinctness-necessary-r
+- witnessed-possibility-r
+- separated-structure-r
+- independence-signature-r
+- distinctness-signature-r
 status: proved
 certificate:
   source_id: dorr-bc-not-rc
@@ -29,16 +33,15 @@ references:
 - paper: dorr-bc-not-rc
   role: proof
   locator: §7.2, p. 22; Proposition 45, p. 22; Remark 38, p. 19
-description: >-
-  A symmetric ideally-full intensional action model over one object, the set of natural numbers. Its arrows
-  are of two disjoint kinds: the surjections for which the distinguished individual is its own only preimage,
-  and the functions that omit the distinguished individual from their range. Its symmetry group is the
-  permutations fixing that individual, which is now a proper subset of the first kind. An arrow's value
-  at the distinguished individual still tells the two kinds apart, but no finite set separates any arrow.
-  The evaluation point is the identity arrow.
+description: 'A symmetric ideally-full intensional action model over one object, the set of natural numbers.
+  Its arrows are of two disjoint kinds: the surjections for which the distinguished individual is its
+  own only preimage, and the functions that omit the distinguished individual from their range. Its symmetry
+  group is the permutations fixing that individual, which is now a proper subset of the first kind. An
+  arrow''s value at the distinguished individual still tells the two kinds apart, but no finite set separates
+  any arrow. The evaluation point is the identity arrow.
 
 
-  Boolean Completeness holds by the draft's main theorem with the distinguished individual as the distinguished
+  Boolean Completeness holds by the draft''s main theorem with the distinguished individual as the distinguished
   set. Two arrows agreeing there lie in the same one of the two classes, and a prescription taken from
   the two of them extends within that class, by nonzero values in the second case and by surjective nonzero
   values in the first. One object gives No Pure Contingency and the boxed form.
@@ -49,23 +52,37 @@ description: >-
   used for the all-surjections model: given a true proposition pinned down by a finite set containing
   the distinguished individual and one other, the proposition that a fresh individual is not collapsed
   with that set is a strictly stronger truth; and the same splitting applied to an arbitrary nonzero proposition
-  rather than a true one gives Atomlessness.
-notes: >-
-  The second of the draft's two variants in which BF fails, arranged so that the range deficiency no longer
-  brings Actuality with it. Since Actuality fails, Weak Rigid Comprehension and Rigid Comprehension fail
-  too, which are recorded as derived verdicts. Atomlessness is the Proposition 45 argument for Atomicity
+  rather than a true one gives Atomlessness.'
+notes: 'The second of the draft''s two variants in which BF fails, arranged so that the range deficiency
+  no longer brings Actuality with it. Since Actuality fails, Weak Rigid Comprehension and Rigid Comprehension
+  fail too, which are recorded as derived verdicts. Atomlessness is the Proposition 45 argument for Atomicity
   read for an arbitrary nonzero proposition, and the failure of ND at type e follows from the non-injective
-  arrows; neither is displayed separately in the draft. The source is a work in progress.
+  arrows; neither is displayed separately in the draft. The source is a work in progress. Interpretation
+  of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual
+  constant denotes one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational
+  type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
+  witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
+  $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
+  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.'
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
-  summary: >-
-    Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and
-    identity at the identity arrow is literal, so no numeral counts them. The propositions that a given
-    individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned
-    by that individual, so there are infinitely many propositions. The set of numerals at each type is
-    invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is
-    standard and no finite cardinality holds of the universal property at either type.
+  summary: Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers
+    and identity at the identity arrow is literal, so no numeral counts them. The propositions that a
+    given individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric
+    and pinned by that individual, so there are infinitely many propositions. The set of numerals at each
+    type is invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality
+    is standard and no finite cardinality holds of the universal property at either type.
   satisfies:
   - axiom-of-infinity-e
   - axiom-of-infinity-t
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed
+    individual) and recorded the signature schemata it refutes, at Cian Dorr’s request.
+  violates:
+  - witnessed-possibility-r
+  - separated-structure-r
+  - independence-signature-r
+  - distinctness-signature-r

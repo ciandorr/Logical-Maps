@@ -1,0 +1,121 @@
+id: coalesced-constant-indexed-root
+name: 'Coalesced sum: root individuals indexed by infinitely many individual constants'
+satisfies:
+- possibility-plus-signature-r
+- actuality
+- distinctness-preserving-collapse
+- infinity-e
+- axiom-of-infinity-e
+- relational-choice-r
+violates:
+- barcan-r
+- barcan-t
+- strong-possibility-r
+- atomicity-t
+- necessary-relational-choice-r
+- boolean-completeness-r
+- countable-boolean-completeness-r
+- boolean-completeness-t
+status: proved
+certificate:
+  source_id: bacon-dorr-classicism
+  produced_by: Andrew Bacon and Cian Dorr; the signature reading and the BF failure by Cian Dorr, 22 September
+    2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 22 September 2026
+  checked_by: []
+  date: '2026-09-22'
+  lean: none
+sources:
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, pp. 41–42 and n. 61; Appendix E,
+  p. 83 (the root indexed by individual constants); Theorem 3.26 and Appendix E, pp. 80–83.
+- Cian Dorr, observations of 22 September 2026, as recorded in the notes.
+source_names:
+- Classicism
+- Dorr 22 Sep
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §2.6, pp. 41–42 and n. 61; Appendix E, pp. 80–83
+  note: Page 83 describes the alternative root whose individuals are indexed by the individual constants;
+    the construction is the coalesced sum of Definition E.2.
+description: 'For a signature Σ with countably infinitely many individual constants and at least one relational
+  constant, take a set of action models for L(Σ) complete for C(Σ), and coalesce them at a new root whose
+  individual domain is the set of individual constants, each constant denoting itself there and being
+  carried by the distinguished arrow to each component onto its interpretation in that component; relational
+  constants are glued as in Definition E.2, with free root extensions. Evaluation point: the root.'
+notes: 'The root satisfies Maximalist Classicism for Σ, since every C(Σ)-consistent sentence holds at
+  some component root. It satisfies Possibility+ (signature Σ): for P with free individual variables x̄,
+  instantiate x̄ by pairwise distinct root individuals, that is, distinct constants c̄′ not occurring
+  in P; P[c̄′/x̄] is C(Σ)-consistent because the c̄′ are fresh, so it is possible at the root. The instances
+  of the pure form follow. Distinct constants denote distinct root individuals, so there are infinitely
+  many individuals at the root, giving the Infinity Schema at type e and, the root domains being as full
+  as possible so that the numeral intensions exist, the Axiom of Infinity at type e. Actuality holds by
+  the singleton root proposition, and the p. 83 discussion of the distinctness-preserving collapse and
+  the obstruction to Strong Possibility applies to this root as to the maximalist one. BF fails at the
+  root. C is complete for the component set, so some component $M$ refutes BF at its root $M_0$, at type
+  $t$ say: some $F$ in $M_0$’s domain has $\forall y\, .\,\Box Fy$ true and $\Diamond\exists y\, .\,\neg
+  Fy$ true at $M_0$. Because the root’s domains are as full as possible, the thread $F^{\prime}$ that
+  is universal at the root and in every other component and is carried onto $F$ by the distinguished arrow
+  to $M_0$ is in the root domain. Every arrow from the root into $M$ factors through that distinguished
+  arrow, so $\forall y\, .\,\Box F^{\prime}y$ at the root reduces to $\forall y\, .\,\Box Fy$ at $M_0$
+  together with trivial checks elsewhere, and $\Diamond\exists y\, .\,\neg F^{\prime}y$ at the root follows
+  from $\Diamond\exists y\, .\,\neg Fy$ at $M_0$ through the same factorization. Observation of Cian Dorr,
+  22 September 2026. Root domains are as full as compatibility allows: a root proposition is a choice,
+  for each component, of a proposition of that component’s root domain, together with a truth value at
+  the root’s identity arrow, and a root entity of a relational type is likewise a family of component
+  entities with a root component that is an arbitrary function of the root arguments. Atomicity fails
+  at type t: C is complete for the components, so some component $M$ refutes Atomicity at its root, by
+  a proposition $p_M$ with no atom below it in $M$’s domain; the root proposition that is $p_M$ on $M$,
+  empty on every other component and false at the root has as its root lower bounds exactly the root propositions
+  that are lower bounds of $p_M$ on $M$ and empty elsewhere, so it has no atom below it either. Boolean
+  Completeness fails, at type $e\to t$, for the same reason: a component $M$ refutes it by a property
+  $X_M$ of propositions without a greatest lower bound in $M$’s domain, and the root property holding
+  of a root proposition iff $X_M$ holds of its $M$-component has no greatest lower bound at the root,
+  since such a bound’s $M$-component would be one for $X_M$. Relational Choice holds at the root, contrary
+  to a first guess: the functionality of a subrelation is evaluated at the root’s identity arrow only,
+  while the subrelation condition is boxed; so for a serial root relation take the subrelation whose root
+  component is a functional choice from the root component, by choice in the metatheory, and whose component
+  parts are empty. Its necessitation fails, since some component refutes Relational Choice at its root.
+  Possibility+ holds here, unlike at the maximalist root, because the root individuals are the constants,
+  and two distinct constants stay distinct in every component where the sentence of their distinctness
+  is realized, not in one component only. □Relational Choice fails, as the notes on Relational Choice
+  explain: some component refutes Relational Choice at its root, which is accessible from the root.  Correction
+  of 23 September 2026: the components are only known to refute Boolean Completeness at type $e\to t$
+  (Classicism, n. 92, conjectures failures at type $t$ but has none), so the transfer argument refutes
+  the type schema of Boolean Completeness at the root, not its type-$t$ instance, which is left unknown;
+  the same transfer, applied to the countable family of haecceities that witnesses the component failure,
+  refutes Countable Boolean Completeness.  Boolean Completeness fails at type $t$ (restoring the claim
+  corrected earlier in the day): the truncation model of Appendix D, part 6, refutes it at type $t$, as
+  its record now shows, and the components are complete for C, so one of them does; the root propositions
+  false at every arrow except those into that component form a copy of its propositional domain under
+  the root’s entailment order, and a root property of propositions holding exactly of the copies of the
+  members of that component’s counterexample family has no least upper bound at the root. Cian Dorr’s
+  argument, 23 September 2026.'
+changes:
+- date: '2026-09-22'
+  by: Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)
+  summary: Settled Atomicity (type t) and Boolean Completeness (type t) as failing and Relational Choice
+    as holding, as at the maximalist root.
+  satisfies:
+  - relational-choice-r
+  violates:
+  - atomicity-t
+- date: '2026-09-22'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of □Relational Choice, already argued in the notes.
+  violates:
+  - necessary-relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Corrected the Boolean Completeness claim from the type-t instance to the type schema, since
+    no component is known to refute it at type t; added the failure of Countable Boolean Completeness
+    by the same transfer.
+  violates:
+  - boolean-completeness-r
+  - countable-boolean-completeness-r
+- date: '2026-09-23'
+  by: Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)
+  summary: Restored the failure of Boolean Completeness (type t), now that a component refuting it at
+    type t is on the map; see the notes.
+  violates:
+  - boolean-completeness-t

@@ -421,8 +421,12 @@ graph. Showing or hiding them leaves the connected layout intact. If no
 arrows are visible, the principles form a compact grid instead of one long row.
 
 Graph **Arrow sources** and **Lean-verified only** control displayed proofs.
-**Published papers** toggles the published sources together; **Show papers**
-expands individual choices. Partial selection is shown on the group checkbox.
+Sources come in two collapsed groups, **Published papers** and **Unpublished**,
+each toggling its members together, with **Show papers** or **Show sources** to
+expand individual choices. Partial selection is shown on the group checkbox. The
+catch-all `misc` source stands on its own, since neither group describes it.
+**Lean-verified only** sits with the other filters; a Lean-verified arrow is
+drawn thicker than the rest whether or not it is checked.
 Background consequences always use all recorded proved results, including
 hidden arrows. For example, DTU still supplies Simple Expected Utility in a
 conjectures-only view, so conjecture arrows retain only their additional

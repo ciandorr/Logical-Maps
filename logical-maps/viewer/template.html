@@ -71,6 +71,11 @@
   .sw.dashed { border-top-style: dashed; }
   .sw.human { border-color: var(--human); } .sw.assisted { border-color: var(--assisted); } .sw.ai { border-color: var(--ai); }
   .sw.derived { border-color: var(--derived); } .sw.conj { border-color: var(--conj); }
+  /* A Lean-verified arrow is drawn thicker, so its swatch is too. */
+  .sw.lean { border-color: var(--ink); border-top-width: 5px; }
+  /* A legend line with no control of its own still lines up with the labels
+     that have one, by standing an invisible control in the same place. */
+  .ctl-spacer { visibility: hidden; pointer-events: none; }
   .graph-hint { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-3); margin: 4px 0 8px; }
   .search { width: min(100%, 320px); margin: 0 0 12px; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 3px; background: var(--panel); }
   .legend-note { color: var(--ink-3); font-size: 12px; }
@@ -626,17 +631,14 @@
       <div id="source-controls">
         <h2 id="source-filter-heading" title="Filter displayed arrows. Background consequences always use all recorded proofs.">Arrow sources</h2>
         <div class="ctl" id="source-filters"></div>
-        <div class="ctl">
-          <label><input type="checkbox" id="lean-only"><span class="sw" style="border-color:var(--ink)"></span>Lean-verified only</label>
-        </div>
       </div>
       <div id="graph-options">
-        <h2>Graph</h2>
-        <p class="graph-hint" title="Solid neutral arrows are derived proofs. Click an arrow for its proof steps and sources; intermediate principles may be hidden or combined."><span class="sw derived"></span>Derived proofs</p>
+        <p class="graph-hint" title="Solid neutral arrows are derived proofs. Click an arrow for its proof steps and sources; intermediate principles may be hidden or combined."><input type="checkbox" class="ctl-spacer" tabindex="-1" aria-hidden="true"><span class="sw derived"></span>Derived proofs</p>
         <div class="ctl">
           <label title="Show conjectures independently of source selection, simplifying their premises using all proved background consequences. Lean-verified only still excludes unverified arrows."><input type="checkbox" id="show-conj"><span class="sw conj dashed"></span>Conjecture arrows</label>
           <label title="Show only conjecture arrows and their connected principles. Proved background consequences still apply."><input type="checkbox" id="conjecture-only">Conjectures only</label>
           <label title="Show arrows from online submissions and miscellaneous sources, including unpublished manuscripts. Combine with Conjectures only for unpublished conjectures."><input type="checkbox" id="unpublished-only">Unpublished only</label>
+          <label title="Show only arrows with a Lean proof. A Lean-verified arrow is drawn thicker than the rest whether or not this is checked."><input type="checkbox" id="lean-only"><span class="sw lean"></span>Lean-verified only</label>
           <label title="Hide an arrow that the displayed diagram already gives: one that a chain of other displayed arrows yields, as in a Hasse diagram, and one that repeats a premise stroke, as when C is equivalent to A ∧ B and C ⇒ A restates the stroke from A into the ∧, and one of several arrows that leave the same box for the same target because its ∧ circles each carry the consequence. Recorded theorems may then be hidden; a proved arrow is never hidden on the strength of a conjecture."><input type="checkbox" id="reduce-arrows" checked>Transitive reduction</label>
           <label title="Show the logical arrows from False to every node and from every node to True."><input type="checkbox" id="trivial-arrows">Trivial arrows</label>
           <label><input type="checkbox" id="show-iso" checked><span class="sw" style="border-style:dashed;border-color:var(--node-stroke)"></span>Isolated principles</label>
@@ -3249,35 +3251,48 @@ function wireBackgroundCompaction(list) {
 wireBackgroundCompaction(document.getElementById('background-list'));
 (function renderSourceFilters() {
   const el = document.getElementById('source-filters');
-  const published = sourceCatalog.filter(s => s.kind === 'published-paper');
   const sourceCheckboxes = sources => sources.map(s => `<label><input type="checkbox" data-source-filter="${esc(s.id)}" checked><span class="sw" style="border-color:${sourceColor(s)}"></span>${esc(s.name)}</label>`).join('');
-  el.innerHTML = (published.length ? `<div class="source-group"><div class="source-group-head"><label title="Papers credited with the results or models, including original results presented here in an adapted form."><input type="checkbox" id="all-published-sources" checked>Published papers</label><button type="button" class="lnk" id="expand-published-sources" aria-expanded="false" aria-controls="published-source-list">Show papers</button></div><fieldset class="source-group" id="published-source-list" aria-label="Individual published papers" hidden>${sourceCheckboxes(published)}</fieldset></div>` : '')
-    + [['online-submission', 'Online submissions'], ['misc', 'Miscellaneous']].map(([kind, label]) => {
-      const sources = sourceCatalog.filter(s => s.kind === kind);
-      return sources.length ? `<fieldset class="source-group"><legend>${label}</legend>${sourceCheckboxes(sources)}</fieldset>` : '';
-    }).join('');
-  const master = document.getElementById('all-published-sources');
-  function syncMaster() {
-    if (!master) return;
-    const count = published.filter(s => state.allowed.has(s.id)).length;
-    master.checked = count === published.length;
-    master.indeterminate = count > 0 && count < published.length;
+  // Two collapsed groups, published and not. 'Misc.' is the catch-all for
+  // records with no source of their own, so it stays in plain view rather
+  // than hiding inside a group it does not describe.
+  const groups = [
+    {key: 'published', label: 'Published papers', show: 'Show papers',
+     title: 'Papers credited with the results or models, including original results presented here in an adapted form.',
+     members: sourceCatalog.filter(x => x.kind === 'published-paper')},
+    {key: 'unpublished', label: 'Unpublished', show: 'Show sources',
+     title: 'Drafts, online submissions, personal communications and anything else not yet published.',
+     members: sourceCatalog.filter(x => x.kind !== 'published-paper' && x.id !== 'misc')},
+  ].filter(g => g.members.length);
+  const grouped = new Set(groups.flatMap(g => g.members));
+  const loose = sourceCatalog.filter(x => !grouped.has(x));
+  el.innerHTML = groups.map(g => `<div class="source-group"><div class="source-group-head"><label title="${esc(g.title)}"><input type="checkbox" data-source-master="${g.key}" checked>${esc(g.label)}</label><button type="button" class="lnk" data-source-expand="${g.key}" aria-expanded="false" aria-controls="source-list-${g.key}">${esc(g.show)}</button></div><fieldset class="source-group" id="source-list-${g.key}" aria-label="Individual ${esc(g.label.toLowerCase())} sources" hidden>${sourceCheckboxes(g.members)}</fieldset></div>`).join('')
+    + (loose.length ? `<fieldset class="source-group">${sourceCheckboxes(loose)}</fieldset>` : '');
+  const list = g => document.getElementById('source-list-' + g.key);
+  function syncMasters() {
+    for (const g of groups) {
+      const master = el.querySelector(`[data-source-master="${g.key}"]`);
+      const count = g.members.filter(x => state.allowed.has(x.id)).length;
+      master.checked = count === g.members.length;
+      master.indeterminate = count > 0 && count < g.members.length;
+    }
   }
   el.querySelectorAll('[data-source-filter]').forEach(cb => cb.addEventListener('change', () => {
     cb.checked ? state.allowed.add(cb.dataset.sourceFilter) : state.allowed.delete(cb.dataset.sourceFilter);
-    syncMaster(); renderAll(true);
+    syncMasters(); renderAll(true);
   }));
-  master?.addEventListener('change', () => {
-    for (const s of published) master.checked ? state.allowed.add(s.id) : state.allowed.delete(s.id);
-    el.querySelectorAll('#published-source-list [data-source-filter]').forEach(cb => { cb.checked = state.allowed.has(cb.dataset.sourceFilter); });
-    syncMaster(); renderAll(true);
-  });
-  document.getElementById('expand-published-sources')?.addEventListener('click', e => {
-    const list = document.getElementById('published-source-list');
-    list.hidden = !list.hidden;
-    e.currentTarget.setAttribute('aria-expanded', String(!list.hidden));
-    e.currentTarget.textContent = list.hidden ? 'Show papers' : 'Hide papers';
-  });
+  el.querySelectorAll('[data-source-master]').forEach(master => master.addEventListener('change', () => {
+    const g = groups.find(x => x.key === master.dataset.sourceMaster);
+    for (const x of g.members) master.checked ? state.allowed.add(x.id) : state.allowed.delete(x.id);
+    list(g).querySelectorAll('[data-source-filter]').forEach(cb => { cb.checked = state.allowed.has(cb.dataset.sourceFilter); });
+    syncMasters(); renderAll(true);
+  }));
+  el.querySelectorAll('[data-source-expand]').forEach(button => button.addEventListener('click', () => {
+    const g = groups.find(x => x.key === button.dataset.sourceExpand), body = list(g);
+    body.hidden = !body.hidden;
+    button.setAttribute('aria-expanded', String(!body.hidden));
+    button.textContent = (body.hidden ? 'Show' : 'Hide') + g.show.slice(4);
+  }));
+  syncMasters();
 })();
 document.getElementById('lean-only').addEventListener('change', e => { state.leanOnly = e.target.checked; renderAll(true); });
 document.getElementById('show-conj').addEventListener('change', e => {

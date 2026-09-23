@@ -1,0 +1,364 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Full action model: free monoid on countably many generators, glued constants, thread individuals</title><style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Silver sage and muted rust. Screen-only overrides preserve print styling. */
+@media screen {
+  :root {
+    --bg: #eef1eb;
+    --panel: #e4eae1;
+    --panel-2: #d5dfd0;
+    --line: #c5cec0;
+    --line-strong: #8b9984;
+    --ink: #303b34;
+    --ink-2: #4a5a50;
+    --ink-3: #526156;
+    --accent: #884932;
+    --link-hover: #6f3827;
+    --derived: #76816f;
+    --open: #dbe2d6;
+    --open-ink: #526156;
+    --node-fill: #f5f6f1;
+    --node-stroke: #86937f;
+    --junction: #596b5b;
+    --hl: #d7e1d0;
+    --focus: #884932;
+    --shadow: 0 4px 24px rgb(48 59 52 / 10%);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #171e1a;
+    --panel: #202a23;
+    --panel-2: #2b372d;
+    --line: #3d4b3e;
+    --line-strong: #72816b;
+    --ink: #e2e8db;
+    --ink-2: #c0cbb9;
+    --ink-3: #b0bda6;
+    --accent: #e2ad92;
+    --link-hover: #f0c3aa;
+    --derived: #91a087;
+    --open: #303d31;
+    --open-ink: #b9c6ae;
+    --node-fill: #263128;
+    --node-stroke: #7c8d73;
+    --junction: #bdcbb3;
+    --hl: #3a4b35;
+    --focus: #e2ad92;
+    --badge-ink: #171e1a;
+    --shadow: 0 4px 24px rgb(0 0 0 / 24%);
+  }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full action model: free monoid on countably many generators, glued constants, thread individuals</h1></header><p>This write-up establishes that Bacon’s Logical Necessity schema holds at the root of a full action model of C, and records which other principles hold or fail there. The construction is Bacon’s (<em>Logical Combinatorialism</em>, Appendix A.3), with its unproved gluing theorem (Theorem A.8 there) obtained from the coalesced sums of Bacon, <em>A Philosophical Introduction to Higher-Order Logics</em>, §18.6, and its deferred type-<span class="math inline">e</span> case handled by a self-similar choice of individual domain. The companion write-up for the singleton-individual variant reuses everything here except §2.</p>
+<p>Throughout, <span class="math inline">\Sigma</span> is the map’s fixed countable signature of nonlogical constants; for an uncountable signature, replace <span class="math inline">\mathbb N</span> by a set of the signature’s cardinality wherever it indexes branches. The type system is the map’s relational one; the models below are standard models of the full simple type hierarchy in Bacon’s sense, and their restriction to the relational types is a model of C (book, Theorems 18.1 and 18.4, together with the remark on p. 160 that Classicism in the full hierarchy includes Modalized Functionality at all types).</p>
+<h2 id="the-frame">1. The frame</h2>
+<p>Let <span class="math inline">M=\mathbb N^{&lt;\omega}</span> be the free monoid of finite sequences of natural numbers under concatenation, written <span class="math inline">i\circ j</span>, with unit the empty sequence <span class="math inline">\langle\rangle</span>. Its induced Kripke frame <span class="math inline">T</span> (Bacon 2020, Definition A.7) has the sequences as worlds, <span class="math inline">i\le j</span> iff <span class="math inline">j=k\circ i</span> for some <span class="math inline">k</span>, and root <span class="math inline">\langle\rangle</span>: the infinitely branching tree, with accessibility the initial-segment relation. <span class="math inline">M</span> is cancellative: <span class="math inline">k\circ i=k&#39;\circ i</span> implies <span class="math inline">k=k&#39;</span>, and <span class="math inline">k\circ i=i</span> implies <span class="math inline">k=\langle\rangle</span>.</p>
+<p>Two facts about <span class="math inline">T</span> are used repeatedly.</p>
+<p><strong>Self-similarity.</strong> For every world <span class="math inline">i</span>, the subtree <span class="math inline">T{\uparrow}i</span> of worlds above <span class="math inline">i</span> is isomorphic to <span class="math inline">T</span> by <span class="math inline">k\circ i\mapsto k</span>. And <span class="math inline">T</span> is the coalesced sum (book, Definition 18.14) of countably many copies of itself: the copies sit above the children <span class="math inline">\langle n\rangle</span> of the root, and the root is the new designated world.</p>
+<p><strong>No pure contingency.</strong> A closed pure sentence is true at every world or at none. This holds in every one-object action model (Classicism, §3.5, p. 59), and in the modal-model presentation below it is the fact that pure sentences are interpreted by the frame, whose subtrees are all isomorphic.</p>
+<h2 id="the-individuals">2. The individuals</h2>
+<p>A <em>modalized set</em> over <span class="math inline">T</span> (book, §17.1) assigns to each world <span class="math inline">w</span> a set <span class="math inline">D_w</span> and to each <span class="math inline">w\le v</span> a counterpart map <span class="math inline">i_{wv}:D_w\to D_v</span>, functorially. Let <span class="math inline">B(w)</span> be the set of infinite branches through <span class="math inline">w</span>: the infinite sequences of worlds <span class="math inline">w&lt;w_1&lt;w_2&lt;\cdots</span> in which each world is a child of the one before. Put</p>
+<p><span class="math display">
+D^e_w:=\mathbb N^{B(w)},\qquad i_{wv}(a):=a{\restriction}B(v)\quad(w\le v),
+</span></p>
+<p>noting that <span class="math inline">B(v)\subseteq B(w)</span> when <span class="math inline">w\le v</span>, a branch through <span class="math inline">v</span> being a branch through <span class="math inline">w</span> from <span class="math inline">w</span> on. Each <span class="math inline">i_{wv}</span> is a restriction, hence surjective, and the maps compose. In the <span class="math inline">M</span>-set presentation this is the set <span class="math inline">\mathbb N^{\mathbb N^\omega}</span> of functions from infinite sequences of numbers to numbers, an arrow <span class="math inline">i</span> acting by <span class="math inline">(i\cdot a)(s):=a(i{}^\frown s)</span>. Call it the <em>thread domain</em>. Two properties matter:</p>
+<ul>
+<li><strong>(E1)</strong> For every world <span class="math inline">w</span>, <span class="math inline">D^e{\restriction}T{\uparrow}w\cong D^e</span> along the tree isomorphism <span class="math inline">T{\uparrow}w\cong T</span>, since that isomorphism carries <span class="math inline">B(k\circ w)</span> onto <span class="math inline">B(k)</span>.</li>
+<li><strong>(E2)</strong> At every world <span class="math inline">w</span> with children <span class="math inline">(w_n)_n</span>, the branches through <span class="math inline">w</span> are partitioned by the child they pass through, <span class="math inline">B(w)=\bigsqcup_nB(w_n)</span>, so <span class="math inline">a\mapsto(i_{ww_n}a)_n</span> is a bijection <span class="math inline">D^e_w\cong\prod_nD^e_{w_n}</span> whose components are the counterpart maps.</li>
+</ul>
+<p>Every <span class="math inline">D^e_w</span> is uncountable, so it has at least two elements. The singleton domain, <span class="math inline">D^e_w:=\{\ast\}</span> with identity counterparts, also satisfies (E1) and (E2); the companion write-up uses it.</p>
+<h2 id="the-frame-as-a-coalesced-sum-of-itself">3. The frame as a coalesced sum of itself</h2>
+<p>A <em>standard model</em> over a pointed Kripke frame (book, Definition 18.6) is a modal model whose propositional domain at each world <span class="math inline">w</span> is the full powerset of the worlds above <span class="math inline">w</span>, with truncation as counterpart, and whose domain at a function type <span class="math inline">\sigma\to\tau</span> at <span class="math inline">w</span> is the set of all homomorphisms from <span class="math inline">D^\sigma{\restriction}T{\uparrow}w</span> to <span class="math inline">D^\tau{\restriction}T{\uparrow}w</span>, with restriction as counterpart. A standard model is determined by its Kripke frame and its type-<span class="math inline">e</span> modalized set (book, p. 396). Write <span class="math inline">\mathcal F</span> for the standard higher-order frame over <span class="math inline">T</span> with the thread domain. By (E1), <span class="math inline">\mathcal F{\restriction}T{\uparrow}w\cong\mathcal F</span> for every world <span class="math inline">w</span>.</p>
+<p>For the map’s purposes, <span class="math inline">\mathcal F</span> is the full action model of Classicism §3.4 over the monoid <span class="math inline">M</span> with the thread <span class="math inline">M</span>-set at type <span class="math inline">e</span>. The correspondence between the two presentations is the unravelling of Classicism §3.5, p. 61: propositions are the same sets of arrows, and an element of Bacon’s function-space <span class="math inline">M</span>-set <span class="math inline">A\Rightarrow B</span>, a map <span class="math inline">f</span> with <span class="math inline">ia=ia&#39;\Rightarrow i(fa)=i(fa&#39;)</span>, is the root component of a unique homomorphism family, the other components being <span class="math inline">b\mapsto i(fa)</span> for any <span class="math inline">a</span> with <span class="math inline">ia=b</span>, which exists because the counterpart maps are surjective. In particular, every world’s truncation of a model over <span class="math inline">\mathcal F</span> is again a model over a frame isomorphic to <span class="math inline">\mathcal F</span> (book, §18.6, truncation; Classicism, Appendix E, truncation by an arrow).</p>
+<p><strong>Lemma 1.</strong> Let <span class="math inline">(\mathcal A_n)_{n\in\mathbb N}</span> be <span class="math inline">\Sigma</span>-models over <span class="math inline">\mathcal F</span>. Their coalesced sum <span class="math inline">\bigoplus_n\mathcal A_n</span> (book, Definition 18.15) is a <span class="math inline">\Sigma</span>-model over a higher-order frame isomorphic to <span class="math inline">\mathcal F</span>, and under the isomorphism the interpretation of each constant <span class="math inline">c</span> satisfies <span class="math inline">i_{\langle\rangle\langle n\rangle}\llbracket c\rrbracket=\llbracket c\rrbracket_{\mathcal A_n}</span> for every <span class="math inline">n</span>.</p>
+<p><em>Proof.</em> The sum is a modal model by the book’s Proposition 18.7. Its Kripke frame is the coalesced sum of countably many copies of <span class="math inline">T</span>, which is <span class="math inline">T</span> by self-similarity. It is propositionally full, because its propositional domain at the new root is by definition the set of subsets of the world set whose truncations lie in the components’ domains, and those are full; and functionally full, because its function domains at the root are all homomorphisms whose truncations lie in the components’ domains, which again are full; at the other worlds the domains are the components’ (book, Exercise 18.23). Its type-<span class="math inline">e</span> modalized set has, at the root, the product of the components’ root domains with the projections as counterparts, which is the thread domain by (E2), and at every other world a thread domain by (E1). A standard model is determined by its Kripke frame and type-<span class="math inline">e</span> set, so the sum is a standard model over a frame isomorphic to <span class="math inline">\mathcal F</span>. The clause for constants in Definition 18.15 interprets <span class="math inline">c</span> at the worlds of the <span class="math inline">n</span>-th component as <span class="math inline">\mathcal A_n</span> does, which is the displayed truncation property. <span class="math inline">\square</span></p>
+<p>This is Bacon’s Theorem A.8 for the frame <span class="math inline">\mathcal F</span>.</p>
+<h2 id="the-glued-model">4. The glued model</h2>
+<p>Say a <span class="math inline">\Sigma</span>-sentence is <em>satisfiable over <span class="math inline">\mathcal F</span></em> when it is true at the root of some <span class="math inline">\Sigma</span>-model over <span class="math inline">\mathcal F</span>. Since <span class="math inline">\Sigma</span> is countable, enumerate the satisfiable sentences as <span class="math inline">\varphi_0,\varphi_1,\ldots</span> and choose a model <span class="math inline">\mathcal A_n</span> over <span class="math inline">\mathcal F</span> with <span class="math inline">\varphi_n</span> true at its root. Let <span class="math inline">\mathcal A:=\bigoplus_n\mathcal A_n</span>, transported to <span class="math inline">\mathcal F</span> by Lemma 1. This is the model of the record; its evaluation point is the root.</p>
+<p><strong>Lemma 2.</strong> For every <span class="math inline">\Sigma</span>-sentence <span class="math inline">\varphi</span>: <span class="math inline">\Diamond\varphi</span> is true at the root of <span class="math inline">\mathcal A</span> iff <span class="math inline">\varphi</span> is satisfiable over <span class="math inline">\mathcal F</span>.</p>
+<p><em>Proof.</em> If <span class="math inline">\varphi=\varphi_n</span> is satisfiable, then by the truncation property the truncation of <span class="math inline">\mathcal A</span> at <span class="math inline">\langle n\rangle</span> is <span class="math inline">\mathcal A_n</span>, so <span class="math inline">\varphi</span> is true at <span class="math inline">\langle n\rangle</span> and <span class="math inline">\Diamond\varphi</span> at the root (book, Theorem 18.5, proof). Conversely, if <span class="math inline">\Diamond\varphi</span> is true at the root then <span class="math inline">\varphi</span> is true at some world <span class="math inline">i</span>, hence at the root of the truncation of <span class="math inline">\mathcal A</span> at <span class="math inline">i</span>, which by §3 is a <span class="math inline">\Sigma</span>-model over a frame isomorphic to <span class="math inline">\mathcal F</span>; transporting gives a model over <span class="math inline">\mathcal F</span> with <span class="math inline">\varphi</span> true at the root. <span class="math inline">\square</span></p>
+<p><strong>Lemma 3.</strong> For a pure formula <span class="math inline">P</span> with free variables among <span class="math inline">\bar x</span> and constants <span class="math inline">\bar c</span> of matching types: <span class="math inline">\exists\bar x\, .\,P</span> is true in <span class="math inline">\mathcal F</span> iff <span class="math inline">P[\bar c/\bar x]</span> is satisfiable over <span class="math inline">\mathcal F</span>.</p>
+<p><em>Proof.</em> A pure formula’s satisfaction by an assignment at the root depends only on the frame. If <span class="math inline">\bar a</span> in the root domains satisfies <span class="math inline">P</span>, interpreting <span class="math inline">c_k</span> as <span class="math inline">a_k</span> gives a <span class="math inline">\Sigma</span>-model over <span class="math inline">\mathcal F</span> in which <span class="math inline">P[\bar c/\bar x]</span> is true; distinct constants may receive the same value, which Definition 18.1 permits. Conversely, in a model where <span class="math inline">P[\bar c/\bar x]</span> is true the denotations of <span class="math inline">\bar c</span> satisfy <span class="math inline">P</span>. <span class="math inline">\square</span></p>
+<p><strong>Theorem 1 (Logical Necessity).</strong> For every pure <span class="math inline">P</span> with free variables among <span class="math inline">\bar x</span> and distinct constants <span class="math inline">\bar c</span> of matching types, <span class="math inline">\Box P[\bar c/\bar x]\leftrightarrow\forall\bar x\, .\,P</span> is true at the root of <span class="math inline">\mathcal A</span>.</p>
+<p><em>Proof.</em> <span class="math inline">\neg\Box P[\bar c/\bar x]</span> is <span class="math inline">\Diamond\neg P[\bar c/\bar x]</span>, true at the root iff <span class="math inline">\neg P[\bar c/\bar x]</span> is satisfiable over <span class="math inline">\mathcal F</span> (Lemma 2) iff <span class="math inline">\exists\bar x\, .\,\neg P</span> is true in <span class="math inline">\mathcal F</span> (Lemma 3) iff <span class="math inline">\exists\bar x\, .\,\neg P</span> is true at the root of <span class="math inline">\mathcal A</span>, because <span class="math inline">\mathcal A</span> is a model over <span class="math inline">\mathcal F</span> and the sentence is pure. That is <span class="math inline">\neg\forall\bar x\, .\,P</span>. <span class="math inline">\square</span></p>
+<p>Distinctness of the constants is not used in the proof; it is the side condition of the schema.</p>
+<p><strong>Corollary 1.</strong> Distinct constants of the same type denote distinct entities at the root, and <span class="math inline">\Diamond(c=c&#39;)</span> holds for any two constants of one type. For <span class="math inline">c\ne c&#39;</span> is satisfiable over <span class="math inline">\mathcal F</span>, every domain having at least two elements, so some child interprets them differently, so their denotations at the root differ; and <span class="math inline">c=c&#39;</span> is satisfiable too, giving <span class="math inline">\Diamond(c=c&#39;)</span> by Lemma 2.</p>
+<h2 id="the-pure-part">5. The pure part</h2>
+<p>The following hold at every world, hence with their necessitations, because <span class="math inline">\mathcal F</span> is a full one-object action model (Classicism, §3.5, p. 61) whose arrows act surjectively in every type.</p>
+<ul>
+<li><strong>No Pure Contingency:</strong> §1.</li>
+<li><strong>Atomicity and Actuality:</strong> for a world <span class="math inline">i</span> and a proposition <span class="math inline">p\ni i</span>, the singleton <span class="math inline">\{i\}</span> is a proposition; <span class="math inline">\Box(\{i\}\to q)</span> holds at <span class="math inline">i</span> iff for all <span class="math inline">k</span>, <span class="math inline">k\circ i\in\{i\}</span> implies <span class="math inline">k\circ i\in q</span>, and by cancellativity <span class="math inline">k\circ i=i</span> forces <span class="math inline">k=\langle\rangle</span>, so this is <span class="math inline">i\in q</span>. Hence <span class="math inline">\{i\}</span> is an atom below every proposition true at <span class="math inline">i</span>, giving Actuality at <span class="math inline">i</span>, and for <span class="math inline">p\ne\bot</span> any <span class="math inline">i\in p</span> gives an atom below <span class="math inline">p</span>. Higher types follow as in Classicism, p. 61.</li>
+<li><strong>Strong Leibniz Biconditionals:</strong> for <span class="math inline">p\ne\bot</span> pick <span class="math inline">i\in p</span>; then <span class="math inline">\{i\}</span> is a strong world: at any world <span class="math inline">j</span>, <span class="math inline">j\cdot\{i\}=\{k:k\circ j=i\}</span> has at most one element by cancellativity, so it entails every proposition or its negation, necessarily. At higher relational types take singletons in the same way, using the equivariant characteristic functions.</li>
+<li><strong>Rigid Comprehension:</strong> the frame is intensionally full (Classicism, p. 61).</li>
+<li><strong>Relational Choice:</strong> with choice in the metatheory, every serial relation has a functional subrelation, which is an intension of a full model (Classicism, p. 61).</li>
+<li><strong>BF:</strong> the action of every arrow is surjective on the powerset, since <span class="math inline">i\cdot(\{k\circ i:k\in q\})=q</span> by cancellativity, and on the thread domain, since counterparts are restrictions; by Bacon 2020, Proposition A.3, it is surjective at every type, and Classicism, p. 61, gives <span class="math inline">\mathrm{BF}_\sigma</span> at every world.</li>
+<li><strong>Axiom of Infinity at types <span class="math inline">e</span> and <span class="math inline">t</span>:</strong> the root domains are uncountable, identity is genuine, and the numerals are intensions of a full model, so no finite cardinality holds of the universal property; see the surjection-monoid model’s record for the same argument.</li>
+</ul>
+<p>And the following fail at the root.</p>
+<ul>
+<li><strong>ND and B:</strong> <span class="math inline">\{\langle\rangle\}\ne\emptyset</span>, but <span class="math inline">\langle0\rangle\cdot\{\langle\rangle\}=\emptyset</span>, so the two are possibly identical; B fails since it implies ND (Prior).</li>
+<li><strong>Possibility (pure):</strong> Actuality holds at every world, so <span class="math inline">\Diamond\neg\text{Actuality}</span> fails, although <span class="math inline">\neg\text{Actuality}</span> is consistent with C, being true in the map’s finite-support models with Atomlessness.</li>
+</ul>
+<p>Everything else recorded for the model follows from these by the map’s results: Separated Structure, General Separated Structure, Possibly Witnessed Possibility, Witnessed Possibility, Independence (signature Σ) and Modal Freedom (signature Σ) from Logical Necessity. Bacon’s interpretation of his predicates <span class="math inline">\operatorname{Pure}</span> and <span class="math inline">\operatorname{Fun}</span> in this model (Appendix A.3) is not recorded on the map.</p>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Origin: Logical Combinatorialism.</strong> Bacon, Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the import of 22 September 2026; section, footnote and page locators refer to the published pagination. — Appendix A.2–A.3, pp. 580–587; n. 15, p. 547; n. 48, p. 566. The construction and its claimed validation of Logical Necessity; its Theorem A.8 is stated without proof and its type-e case deferred.</li>
+<li><strong>Proof: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — §18.6, Definitions 18.14–18.15, Proposition 18.7, Exercise 18.23, pp. 405–410. Coalesced sums of modal models, from which the gluing theorem follows once the frame is shown to be a coalesced sum of copies of itself.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.5, pp. 59–61; Appendix E, pp. 80–83. Facts about full one-object action models used for the pure part, and truncations.</li>
+</ul>
+</body></html>

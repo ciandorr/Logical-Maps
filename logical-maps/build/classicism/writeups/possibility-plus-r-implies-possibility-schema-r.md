@@ -1,10 +1,10 @@
-# Possibility+ ⇒ Possibility (pure)
+# Possibility+ (pure) ⇒ Possibility (pure)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Possibility+.** The strengthened Possibility schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
+- **Possibility+ (pure).** The strengthened Possibility schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
 
 ## Conclusion
 

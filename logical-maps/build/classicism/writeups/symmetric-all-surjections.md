@@ -12,10 +12,16 @@
 - **Atomlessness.** Atomlessness in the displayed closed propositional formulation.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
+- **No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility (signature Σ) stands to Possibility (pure).
+- **B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
 - **¬ Actuality.** There is a true proposition that entails every true proposition.
 - **¬ Atomicity (type t).** Atomicity (type t) in the displayed closed propositional formulation.
 - **¬ Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **¬ ND.** Distinct things of any type are necessarily distinct.
+- **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
+- **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
+- **¬ Independence (signature Σ).** No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.
+- **¬ Distinctness (signature Σ).** The Distinctness schema for the fixed nonlogical signature Sigma.
 
 ## Construction
 
@@ -27,10 +33,12 @@ BF holds at every type because every arrow is surjective and a finitely pinned s
 
 ## Notes
 
-This is the draft's headline separation. Boolean Completeness holds while Rigid Comprehension fails, and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded as a derived verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition rather than for a true one, and the failure of ND at type e follows from the presence of a non-injective surjection, since the proposition that two fixed individuals are identical is then a nonzero proposition; neither is displayed separately in the draft. The source is a work in progress.
+This is the draft's headline separation. Boolean Completeness holds while Rigid Comprehension fails, and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded as a derived verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition rather than for a true one, and the failure of ND at type e follows from the presence of a non-injective surjection, since the proposition that two fixed individuals are identical is then a nonzero proposition; neither is displayed separately in the draft. The source is a work in progress. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual $d$. Under it the signature schemata that give the constants a special role fail: with $c\in\Sigma$ of relational type $\tau$, $c=\top_\tau$ necessarily, so Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$, Independence (signature Σ) fails since $c$ denotes what a closed pure term denotes, and Distinctness (signature Σ) fails since $c=\top_\tau$ is true and unprovable. But No Contingency (signature Σ), and with it B for sentences of Σ, hold. The relational constants denote pure entities, so a closed Σ-sentence denotes what some $P(d,\ldots,d)$ denotes for a pure formula $P$; the model’s automorphisms carry every individual to every other, so $P(d,\ldots,d)$ is materially equivalent to the pure sentence $\forall x\, .\,P(x,\ldots,x)$ and its negation to $\forall x\, .\,\neg P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency, and instantiation under the box gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$.
 
 ## Revisions
 
+- **2026-09-23** (Claude Fable 5.1 (Anthropic)) — Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences of Σ, at Cian Dorr’s request; see the notes. Now satisfies: No Contingency (signature Σ), B for sentences of Σ.
+- **2026-09-22** (Claude Fable 5.1 (Anthropic)) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Distinctness (signature Σ).
 - **2026-09-20** (Claude Fable 5.1 (Anthropic)) — Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and identity at the identity arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned by that individual, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).
 
 ## Sources

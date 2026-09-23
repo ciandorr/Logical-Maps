@@ -1,0 +1,358 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Full action model: permutations of an infinite set</title><style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Silver sage and muted rust. Screen-only overrides preserve print styling. */
+@media screen {
+  :root {
+    --bg: #eef1eb;
+    --panel: #e4eae1;
+    --panel-2: #d5dfd0;
+    --line: #c5cec0;
+    --line-strong: #8b9984;
+    --ink: #303b34;
+    --ink-2: #4a5a50;
+    --ink-3: #526156;
+    --accent: #884932;
+    --link-hover: #6f3827;
+    --derived: #76816f;
+    --open: #dbe2d6;
+    --open-ink: #526156;
+    --node-fill: #f5f6f1;
+    --node-stroke: #86937f;
+    --junction: #596b5b;
+    --hl: #d7e1d0;
+    --focus: #884932;
+    --shadow: 0 4px 24px rgb(48 59 52 / 10%);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #171e1a;
+    --panel: #202a23;
+    --panel-2: #2b372d;
+    --line: #3d4b3e;
+    --line-strong: #72816b;
+    --ink: #e2e8db;
+    --ink-2: #c0cbb9;
+    --ink-3: #b0bda6;
+    --accent: #e2ad92;
+    --link-hover: #f0c3aa;
+    --derived: #91a087;
+    --open: #303d31;
+    --open-ink: #b9c6ae;
+    --node-fill: #263128;
+    --node-stroke: #7c8d73;
+    --junction: #bdcbb3;
+    --hl: #3a4b35;
+    --focus: #e2ad92;
+    --badge-ink: #171e1a;
+    --shadow: 0 4px 24px rgb(0 0 0 / 24%);
+  }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full action model: permutations of an infinite set</h1></header><p>This note verifies the record <code>full-permutation-group-infinite-set</code>. The construction is the source’s full <span class="math inline">M</span>-set model (Classicism, §3.5, pp. 58–59; Bacon 2020, Appendix A.2), specialised to a group.</p>
+<h2 id="the-model">1. The model</h2>
+<p>Let <span class="math inline">X</span> be a countably infinite set and <span class="math inline">G=\operatorname{Sym}(X)</span> the group of all permutations of <span class="math inline">X</span>, regarded as a one-object category whose arrows are the elements of <span class="math inline">G</span>, composed as functions; write <span class="math inline">ji</span> for <span class="math inline">j\circ i</span> and <span class="math inline">1</span> for the identity. The domains are:</p>
+<ul>
+<li><span class="math inline">W^e=X</span>, with <span class="math inline">i\cdot a=i(a)</span>;</li>
+<li><span class="math inline">W^t=\mathcal P(G)</span>, with the division action <span class="math inline">i\cdot p=\{j : ji\in p\}</span>;</li>
+<li><span class="math inline">W^{\sigma\to\tau}=W^\sigma\Rightarrow W^\tau</span>, the function-space <span class="math inline">M</span>-set: the functions <span class="math inline">f:W^\sigma\to W^\tau</span> such that <span class="math inline">i\cdot a=i\cdot a&#39;</span> implies <span class="math inline">i\cdot fa=i\cdot fa&#39;</span>, with <span class="math inline">(i\cdot f)(i\cdot a)=i\cdot(fa)</span>.</li>
+</ul>
+<p>Application is function application, and the logical constants have their standard denotations: the Boolean operations act pointwise on sets of arrows, <span class="math inline">\forall_\sigma(f)=\bigcap_{a\in W^\sigma}f(a)</span>, <span class="math inline">[a=_\sigma b]=\{i : i\cdot a=i\cdot b\}</span>, and <span class="math inline">[\Box p]=\{i : ji\in p\text{ for all }j\}</span>. A sentence is true at the arrow <span class="math inline">i</span> when <span class="math inline">i</span> belongs to the proposition it denotes; the evaluation point is <span class="math inline">1</span>. By Classicism, Theorem 3.23 (soundness), every theorem of C is true at every arrow.</p>
+<p>Constants of Σ, for the record: each relational constant denotes <span class="math inline">\top_\tau=\lambda\bar x\, .\,G</span>, and each individual constant denotes one fixed <span class="math inline">d\in X</span>.</p>
+<p><strong>Lemma 1 (group facts).</strong> For every arrow <span class="math inline">i</span> and type <span class="math inline">\sigma</span>:</p>
+<ol type="1">
+<li><span class="math inline">i^\sigma:W^\sigma\to W^\sigma</span>, <span class="math inline">x\mapsto i\cdot x</span>, is a bijection with inverse <span class="math inline">(i^{-1})^\sigma</span>.</li>
+<li><span class="math inline">W^\sigma\Rightarrow W^\tau</span> is the set of all functions <span class="math inline">W^\sigma\to W^\tau</span>, and <span class="math inline">i\cdot f=i^\tau\circ f\circ(i^{-1})^\sigma</span>.</li>
+<li><span class="math inline">[\Box p]=G</span> if <span class="math inline">p=G</span> and <span class="math inline">\emptyset</span> otherwise; <span class="math inline">[\Diamond p]=G</span> if <span class="math inline">p\ne\emptyset</span> and <span class="math inline">\emptyset</span> otherwise.</li>
+<li><span class="math inline">[a=b]=G</span> if <span class="math inline">a=b</span> and <span class="math inline">\emptyset</span> otherwise.</li>
+<li><span class="math inline">X\le_\tau Y</span>, that is <span class="math inline">\Box\forall\bar x\, .\,X\bar x\to Y\bar x</span>, denotes <span class="math inline">G</span> if <span class="math inline">X(\bar a)\subseteq Y(\bar a)</span> for all <span class="math inline">\bar a</span> and <span class="math inline">\emptyset</span> otherwise; and a relational entity is <span class="math inline">\bot_\tau</span> exactly when it takes the value <span class="math inline">\emptyset</span> everywhere.</li>
+</ol>
+<p><em>Proof.</em> (1) <span class="math inline">i\cdot(i^{-1}\cdot x)=(ii^{-1})\cdot x=x</span>. (2) The defining condition of the function-space <span class="math inline">M</span>-set is vacuous, since <span class="math inline">i\cdot a=i\cdot a&#39;</span> forces <span class="math inline">a=a&#39;</span> by (1); the formula for <span class="math inline">i\cdot f</span> restates its definition. (3) As <span class="math inline">j</span> ranges over <span class="math inline">G</span> so does <span class="math inline">ji</span>, so <span class="math inline">ji\in p</span> for all <span class="math inline">j</span> iff <span class="math inline">p=G</span>; dually for <span class="math inline">\Diamond</span>. (4) By injectivity of <span class="math inline">i^\sigma</span>. (5) From (3) and the pointwise Boolean operations, since <span class="math inline">\forall</span> is intersection. <span class="math inline">\square</span></p>
+<p>So the propositional modal logic is S5 with the arrows as worlds, and necessity, possibility, identity and entailment are all uniform: their truth values do not depend on the arrow.</p>
+<p><strong>Lemma 2 (No Pure Contingency).</strong> Every closed pure sentence true at <span class="math inline">1</span> is true at every arrow; more generally the denotation of a closed pure term is fixed by every arrow, and for a pure term <span class="math inline">A</span> with free variables and an assignment <span class="math inline">g</span>, <span class="math inline">i\cdot[A]^g=[A]^{i\cdot g}</span>.</p>
+<p><em>Proof.</em> This is the source’s one-object observation (Classicism, §3.5, p. 58): the logical constants are fixed by every arrow (Bacon 2020, Proposition A.5, and the same computation for identity and the box), and the action commutes with application and abstraction, so the claim follows by induction on terms. <span class="math inline">\square</span></p>
+<p>Consequently every boxed principle below follows from its unboxed form: the closed instances are pure sentences, true at <span class="math inline">1</span>, hence true at every arrow, and <span class="math inline">\Box P</span> is true at <span class="math inline">1</span> iff <span class="math inline">P</span> is true at every arrow.</p>
+<h2 id="principles-that-hold">2. Principles that hold</h2>
+<p><strong>ND and <span class="math inline">\Box</span>ND.</strong> By Lemma 1(1) every <span class="math inline">h^\sigma</span> is injective, so ND<span class="math inline">_\sigma</span> holds by Classicism, Proposition 3.24(i); the necessitation follows by Lemma 2.</p>
+<p><strong>BF and <span class="math inline">\Box</span>BF.</strong> Every <span class="math inline">h^\sigma</span> is surjective, so BF<span class="math inline">_\sigma</span> holds by Proposition 3.24(ii); <span class="math inline">\Box</span>BF by Lemma 2 or by n. 84.</p>
+<p><strong>5, B and their necessitations.</strong> By Lemma 1(3), <span class="math inline">[\Diamond p]\in\{\emptyset,G\}</span>, so <span class="math inline">\Diamond p\to\Box\Diamond p</span> denotes <span class="math inline">G</span>; B follows from 5 and T.</p>
+<p><strong>Atomicity and Actuality, necessitated.</strong> Classicism, p. 61: the model is propositionally full. Explicitly, for <span class="math inline">\tau=\bar\sigma\to t</span> and <span class="math inline">Y\ne\bot_\tau</span> pick <span class="math inline">\bar a</span> and <span class="math inline">h</span> with <span class="math inline">h\in Y(\bar a)</span>; the function taking <span class="math inline">\bar a</span> to <span class="math inline">\{h\}</span> and every other tuple to <span class="math inline">\emptyset</span> lies in <span class="math inline">W^\tau</span> by Lemma 1(2), is an atom under the pointwise order of Lemma 1(5), and lies below <span class="math inline">Y</span>. At the arrow <span class="math inline">i</span> the proposition <span class="math inline">\{i\}</span> is true and entails every truth.</p>
+<p><strong>Boolean Completeness, necessitated.</strong> For <span class="math inline">Z:\tau\to t</span> the set <span class="math inline">\{Y : i\in Z(Y)\}</span> has a pointwise intersection, which lies in <span class="math inline">W^\tau</span> and is its greatest lower bound under <span class="math inline">\le_\tau</span> by Lemma 1(5), at every arrow <span class="math inline">i</span>.</p>
+<p><strong>Rigid Comprehension and Gallin Extensional Comprehension, necessitated.</strong> Classicism, p. 61: the model is intensionally full. Explicitly, given <span class="math inline">Y</span> of type <span class="math inline">\bar\sigma\to t</span> let <span class="math inline">Y&#39;(\bar a)=G</span> if <span class="math inline">1\in Y(\bar a)</span> and <span class="math inline">\emptyset</span> otherwise. Then <span class="math inline">Y&#39;</span> is coextensive with <span class="math inline">Y</span> at <span class="math inline">1</span>, and both <span class="math inline">Y&#39;</span> and <span class="math inline">\neg Y&#39;</span> take only the values <span class="math inline">\emptyset</span> and <span class="math inline">G</span>, so both are persistent and <span class="math inline">Y&#39;</span> is rigid. The same at every arrow.</p>
+<p><strong>Functionality, necessitated; Tractarianism.</strong> If <span class="math inline">Xz=Yz</span> is true at <span class="math inline">i</span> for every <span class="math inline">z</span> then <span class="math inline">X(a)=Y(a)</span> for all <span class="math inline">a</span> by Lemma 1(4), so <span class="math inline">X=Y</span> and <span class="math inline">[X=Y]=G</span>. Tractarianism follows by the recorded result, or directly: if <span class="math inline">p\subseteq X(a)</span> for all <span class="math inline">a</span> then <span class="math inline">p\subseteq\bigcap_aX(a)</span>.</p>
+<p><strong>Plenitude, Functional Choice and Relational Choice, necessitated.</strong> Let <span class="math inline">U</span> of type <span class="math inline">\sigma\to\tau\to t</span> be serial at the arrow <span class="math inline">i</span>: for every <span class="math inline">y</span> some <span class="math inline">z</span> has <span class="math inline">i\in U(y)(z)</span>. Choose such a <span class="math inline">z</span> for each <span class="math inline">y</span> (choice in the metatheory; when <span class="math inline">U</span> is functional the choice is forced); the resulting function <span class="math inline">F</span> lies in <span class="math inline">W^{\sigma\to\tau}</span> by Lemma 1(2) and <span class="math inline">\forall y\, .\,(Uy)(Fy)</span> is true at <span class="math inline">i</span>. For Relational Choice take <span class="math inline">S(y)(z)=[z=Fy]</span>, which is <span class="math inline">G</span> or <span class="math inline">\emptyset</span> by Lemma 1(4), so <span class="math inline">S</span> is functional at every arrow and <span class="math inline">(Sy)z\to(Uy)z</span> is true at <span class="math inline">i</span>.</p>
+<p><strong>Infinity.</strong> Identity at <span class="math inline">1</span> is literal by Lemma 1(4), and since the model is full the set of numerals at each type is the extension of an element of the domain and is inductive, so <span class="math inline">\operatorname{FiniteCardinality}_\sigma</span> holds exactly of the numerals, and the <span class="math inline">k</span>-th numeral holds of a property exactly when its extension has <span class="math inline">k</span> members. The extension of <span class="math inline">\lambda u\, .\,\top</span> is <span class="math inline">X</span> at type <span class="math inline">e</span> and <span class="math inline">\mathcal P(G)</span> at type <span class="math inline">t</span>, both infinite, so the Axiom of Infinity holds at both types, and with it the Infinity Schema at type <span class="math inline">e</span>: the individuals are pairwise distinct at <span class="math inline">1</span>.</p>
+<p><strong>No Pure Contingency</strong> is Lemma 2; Necessity of Arithmetic follows by the recorded result.</p>
+<p><strong>Converse Witnessed Possibility</strong>, under any interpretation of Σ. Let <span class="math inline">P</span> be pure with free variables <span class="math inline">\bar x</span> and suppose <span class="math inline">\Diamond P[\bar c]</span> is true, so some arrow <span class="math inline">i</span> lies in <span class="math inline">[P](\bar c)</span>. Then <span class="math inline">1\in i\cdot[P](\bar c)=[P](i\cdot\bar c)</span> by Lemma 2, so <span class="math inline">P</span> holds at <span class="math inline">1</span> of the entities <span class="math inline">i\cdot\bar c</span> and <span class="math inline">\exists\bar x\, .\,P</span> is true.</p>
+<p><strong>No Contingency (signature Σ)</strong>, under the record’s interpretation.</p>
+<p><strong>Lemma 3 (symmetries).</strong> For a bijection <span class="math inline">\beta</span> of <span class="math inline">X</span> let <span class="math inline">\Phi_e=\beta</span>, <span class="math inline">\Phi_t=\mathrm{id}</span>, and <span class="math inline">\Phi_{\sigma\to\tau}(f)=\Phi_\tau\circ f\circ\Phi_\sigma^{-1}</span>. Then <span class="math inline">\Phi</span> is a bijection of each domain, commutes with application, and fixes the denotation of every logical constant; hence <span class="math inline">[A]^{\Phi\circ g}=\Phi[A]^g</span> for every pure term <span class="math inline">A</span> and assignment <span class="math inline">g</span>.</p>
+<p><em>Proof.</em> <span class="math inline">\Phi_{\sigma\to\tau}</span> is well defined and bijective by Lemma 1(2), and <span class="math inline">\Phi(fa)=\Phi(f)(\Phi a)</span> by construction. The Boolean operations and <span class="math inline">\Box</span> act on <span class="math inline">W^t</span>, where <span class="math inline">\Phi</span> is the identity. <span class="math inline">\Phi(\forall_\sigma)(f)=\forall_\sigma(\Phi^{-1}f)=\bigcap_a f(\Phi_\sigma a)=\bigcap_b f(b)=\forall_\sigma(f)</span>. <span class="math inline">\Phi(=_\sigma)(a)(b)=[\Phi^{-1}a=\Phi^{-1}b]=[a=b]</span> by Lemma 1(4). The last claim is by induction on terms. <span class="math inline">\square</span></p>
+<p>Now let <span class="math inline">S</span> be a closed sentence of <span class="math inline">\mathcal L(\Sigma)</span>. Replacing each relational constant by the closed pure term <span class="math inline">\top_\tau</span> that it denotes and each individual constant by a fresh variable gives a pure formula <span class="math inline">P(x_1,\ldots,x_n)</span> with <span class="math inline">[S]=[P](d,\ldots,d)</span>. For any <span class="math inline">a\in X</span> choose a bijection <span class="math inline">\beta</span> with <span class="math inline">\beta(d)=a</span>; by Lemma 3, <span class="math inline">[P](a,\ldots,a)=\Phi[P](d,\ldots,d)=[P](d,\ldots,d)</span>. So <span class="math inline">[S]=\bigcap_a[P](a,\ldots,a)=[\forall x\, .\,P(x,\ldots,x)]</span>, a pure sentence, and if <span class="math inline">S</span> is true it is necessary by Lemma 2. B for sentences of Σ and Modal Freedom (signature Σ) follow by the recorded results.</p>
+<h2 id="principles-that-fail">3. Principles that fail</h2>
+<p><strong>Fregean Axiom, Extensionality.</strong> <span class="math inline">\{1\}</span> and <span class="math inline">G</span> are both true at <span class="math inline">1</span>, so <span class="math inline">\{1\}\leftrightarrow G</span> is true, but <span class="math inline">[\{1\}=G]=\emptyset</span> by Lemma 1(4). Extensionality includes this nullary case.</p>
+<p><strong>Possibility (pure)</strong>, and with it Possibility+, Strong Possibility and Possibility (signature Σ). The sentence <span class="math inline">\exists x\forall y\, .\,x=y</span> is consistent with C, but <span class="math inline">X</span> has more than one element and identity is literal at every arrow, so it is false everywhere.</p>
+<p><strong>Witnessed Possibility</strong>, and with it Separated Structure, Distinctness (signature Σ) and Logical Necessity. Let <span class="math inline">c</span> be a relational constant of type <span class="math inline">\tau</span> and <span class="math inline">P(x)</span> the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span>. Since <span class="math inline">c</span> denotes <span class="math inline">\top_\tau</span>, <span class="math inline">[P](c)=\emptyset</span>, so <span class="math inline">\Diamond P[c]</span> is false.</p>
+<p><strong>Independence (signature Σ).</strong> <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes.</p>
+<p><strong>Distinctness (pure).</strong> <span class="math inline">(\exists xy\, .\,x\ne y)=\top</span> is true at <span class="math inline">1</span>, since both sides denote <span class="math inline">G</span>, and C does not prove it, having models with one individual.</p>
+<p><strong>Distinctness-preserving collapse.</strong> Let <span class="math inline">p=\{1\}</span>, true at <span class="math inline">1</span>. For any true <span class="math inline">q</span>, <span class="math inline">q\ne\emptyset</span>, so <span class="math inline">[\Diamond q]=G</span> by Lemma 1(3) and <span class="math inline">[\Box(\Diamond q\to p)]=[\Box p]=\emptyset</span>. So no true <span class="math inline">q</span> witnesses <span class="math inline">\Box_{\ne}p</span>.</p>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.5, pp. 58–59; p. 61 and n. 84. The source describes full M-set models and proves the facts used: Proposition 3.24 on ND and BF, the one-object No Pure Contingency observation, and the principles common to full models. The specific group and the verification are in the write-up.</li>
+<li><strong>Background: Logical Combinatorialism.</strong> Bacon, Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the import of 22 September 2026; section, footnote and page locators refer to the published pagination. — Appendix A.2, Definitions A.1–A.4 and Proposition A.5, pp. 581–583. The M-set presentation of one-object action models: the division action on propositions and the function-space M-set.</li>
+</ul>
+</body></html>

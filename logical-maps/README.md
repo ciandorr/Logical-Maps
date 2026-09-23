@@ -394,8 +394,14 @@ details does not cover or resize the graph. The panel lists selected principles 
 definitions and individual remove buttons.
 
 The Conjectures tab shares the background controls. Its sections collapse:
-**Central Questions** ranks open questions by how many other open questions
-each answer would settle. A question is S ⊢ c, whether S entails c, for S at
+**Central Questions** ranks open questions by the harmonic mean of what the
+two answers would settle. If each answer is as likely as the map leaves room
+for it, inversely to how much it would settle, that is the number of other
+questions an answer is expected to settle, so a question that only matters if
+it comes out the implausible way sinks. **Automatically Generated Conjectures**
+lists the same questions by their larger side, each stated as the answer to
+expect: ⊢ when a refutation would settle more, ⊬ when a proof would, with "if
+yes" and "if no" what confirming or refuting that conjecture would settle. A question is S ⊢ c, whether S entails c, for S at
 most two principle classes (True, with none) and c a class or False, asked only
 where no smaller premise set already proves or excludes c, and settled alike by
 a proof, an exclusion or a fitting model; "no" denies the entailment; a model check (model: principle) is scored the

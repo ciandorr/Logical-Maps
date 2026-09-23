@@ -993,7 +993,7 @@
    }
   }
  ],
- "generated": "2026-09-23T21:37:54+00:00",
+ "generated": "2026-09-23T22:07:31+00:00",
  "progress": [
   {
    "background": null,
@@ -1102,181 +1102,16 @@
      {
       "kind": "question",
       "premises": [
-       "acyclicity",
-       "betweenness"
+       "archimedean",
+       "multi-utility"
       ],
-      "conclusion": "transitivity",
-      "yes": 63,
-      "no": 0,
+      "conclusion": "completeness",
+      "yes": 15,
+      "no": 12,
+      "score": 13.3,
+      "auto_rank": 38,
+      "auto_claim": "not",
       "rank": 1
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "acyclicity",
-       "independence"
-      ],
-      "conclusion": "transitivity",
-      "yes": 40,
-      "no": 1,
-      "rank": 2
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "betweenness",
-       "quasi-transitivity"
-      ],
-      "conclusion": "transitivity",
-      "yes": 39,
-      "no": 1,
-      "rank": 3
-     },
-     {
-      "kind": "check",
-      "model": "non-convex-cone",
-      "principle": "acyclicity",
-      "yes": 2,
-      "no": 38,
-      "rank": 4
-     },
-     {
-      "kind": "question",
-      "premises": [],
-      "conclusion": "betweenness",
-      "yes": 35,
-      "no": 0,
-      "rank": 5
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "betweenness"
-      ],
-      "conclusion": "quasi-transitivity",
-      "yes": 29,
-      "no": 0,
-      "rank": 6
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "closed-graph-continuity",
-       "weak-order"
-      ],
-      "conclusion": "betweenness",
-      "yes": 0,
-      "no": 28,
-      "rank": 7
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "acyclicity"
-      ],
-      "conclusion": "betweenness",
-      "yes": 25,
-      "no": 1,
-      "rank": 8
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "continuity"
-      ],
-      "conclusion": "archimedean",
-      "yes": 25,
-      "no": 0,
-      "rank": 9
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "continuity"
-      ],
-      "conclusion": "quasi-transitivity",
-      "yes": 25,
-      "no": 0,
-      "rank": 10
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "archimedean"
-      ],
-      "conclusion": "completeness",
-      "yes": 24,
-      "no": 0,
-      "rank": 11
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "continuity",
-       "weak-order"
-      ],
-      "conclusion": "betweenness",
-      "yes": 1,
-      "no": 21,
-      "rank": 12
-     },
-     {
-      "kind": "question",
-      "premises": [],
-      "conclusion": "acyclicity",
-      "yes": 21,
-      "no": 0,
-      "rank": 13
-     },
-     {
-      "kind": "check",
-      "model": "semiorder",
-      "principle": "betweenness",
-      "yes": 2,
-      "no": 20,
-      "rank": 14
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "archimedean"
-      ],
-      "conclusion": "quasi-transitivity",
-      "yes": 20,
-      "no": 0,
-      "rank": 15
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "acyclicity",
-       "archimedean"
-      ],
-      "conclusion": "completeness",
-      "yes": 19,
-      "no": 1,
-      "rank": 16
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "acyclicity",
-       "continuity"
-      ],
-      "conclusion": "archimedean",
-      "yes": 19,
-      "no": 1,
-      "rank": 17
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "closed-graph-continuity"
-      ],
-      "conclusion": "archimedean",
-      "yes": 19,
-      "no": 1,
-      "rank": 18
      },
      {
       "kind": "question",
@@ -1284,10 +1119,120 @@
        "archimedean",
        "multi-utility"
       ],
-      "conclusion": "false",
-      "yes": 19,
-      "no": 0,
-      "rank": 19
+      "conclusion": "eu-representation",
+      "yes": 15,
+      "no": 12,
+      "score": 13.3,
+      "auto_rank": 39,
+      "auto_claim": "not",
+      "rank": 2
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "multi-utility"
+      ],
+      "conclusion": "weak-order",
+      "yes": 15,
+      "no": 12,
+      "score": 13.3,
+      "auto_rank": 40,
+      "auto_claim": "not",
+      "rank": 3
+     },
+     {
+      "kind": "check",
+      "model": "unanimity-two-utilities",
+      "principle": "archimedean",
+      "yes": 13,
+      "no": 13,
+      "score": 13.0,
+      "auto_rank": 53,
+      "auto_claim": "entails",
+      "rank": 4
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "multi-utility"
+      ],
+      "conclusion": "archimedean",
+      "yes": 13,
+      "no": 12,
+      "score": 12.5,
+      "auto_rank": 54,
+      "auto_claim": "not",
+      "rank": 5
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity",
+       "transitivity"
+      ],
+      "conclusion": "archimedean",
+      "yes": 14,
+      "no": 7,
+      "score": 9.3,
+      "auto_rank": 48,
+      "auto_claim": "not",
+      "rank": 6
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity",
+       "quasi-transitivity"
+      ],
+      "conclusion": "archimedean",
+      "yes": 15,
+      "no": 5,
+      "score": 7.5,
+      "auto_rank": 41,
+      "auto_claim": "not",
+      "rank": 7
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity",
+       "independence"
+      ],
+      "conclusion": "archimedean",
+      "yes": 14,
+      "no": 5,
+      "score": 7.4,
+      "auto_rank": 49,
+      "auto_claim": "not",
+      "rank": 8
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "completeness",
+       "transitivity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 6,
+      "no": 8,
+      "score": 6.9,
+      "auto_rank": 77,
+      "auto_claim": "entails",
+      "rank": 9
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "weak-order"
+      ],
+      "conclusion": "betweenness",
+      "yes": 6,
+      "no": 8,
+      "score": 6.9,
+      "auto_rank": 78,
+      "auto_claim": "entails",
+      "rank": 10
      },
      {
       "kind": "check",
@@ -1295,40 +1240,10 @@
       "principle": "quasi-transitivity",
       "yes": 4,
       "no": 18,
-      "rank": 20
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "independence",
-       "quasi-transitivity"
-      ],
-      "conclusion": "transitivity",
-      "yes": 18,
-      "no": 3,
-      "rank": 21
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "archimedean",
-       "quasi-transitivity"
-      ],
-      "conclusion": "completeness",
-      "yes": 18,
-      "no": 2,
-      "rank": 22
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "archimedean",
-       "betweenness"
-      ],
-      "conclusion": "closed-graph-continuity",
-      "yes": 18,
-      "no": 0,
-      "rank": 23
+      "score": 6.5,
+      "auto_rank": 20,
+      "auto_claim": "entails",
+      "rank": 11
      },
      {
       "kind": "question",
@@ -1339,7 +1254,10 @@
       "conclusion": "completeness",
       "yes": 17,
       "no": 4,
-      "rank": 24
+      "score": 6.5,
+      "auto_rank": 24,
+      "auto_claim": "not",
+      "rank": 12
      },
      {
       "kind": "question",
@@ -1350,7 +1268,578 @@
       "conclusion": "weak-order",
       "yes": 17,
       "no": 4,
+      "score": 6.5,
+      "auto_rank": 25,
+      "auto_claim": "not",
+      "rank": 13
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "completeness",
+       "quasi-transitivity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 9,
+      "no": 5,
+      "score": 6.4,
+      "auto_rank": 69,
+      "auto_claim": "not",
+      "rank": 14
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "quasi-transitivity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 8,
+      "no": 5,
+      "score": 6.2,
+      "auto_rank": 79,
+      "auto_claim": "not",
+      "rank": 15
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "weak-order"
+      ],
+      "conclusion": "betweenness",
+      "yes": 4,
+      "no": 14,
+      "score": 6.2,
+      "auto_rank": 50,
+      "auto_claim": "entails",
+      "rank": 16
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "transitivity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 5,
+      "no": 7,
+      "score": 5.8,
+      "auto_rank": 84,
+      "auto_claim": "entails",
+      "rank": 17
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity",
+       "completeness"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 5,
+      "no": 7,
+      "score": 5.8,
+      "auto_rank": 85,
+      "auto_claim": "entails",
+      "rank": 18
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity",
+       "independence"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 5,
+      "no": 7,
+      "score": 5.8,
+      "auto_rank": 86,
+      "auto_claim": "entails",
+      "rank": 19
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "continuity",
+       "quasi-transitivity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 7,
+      "no": 5,
+      "score": 5.8,
+      "auto_rank": 87,
+      "auto_claim": "not",
+      "rank": 20
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "continuity"
+      ],
+      "conclusion": "acyclicity",
+      "yes": 5,
+      "no": 6,
+      "score": 5.5,
+      "auto_rank": 97,
+      "auto_claim": "entails",
+      "rank": 21
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "betweenness",
+       "continuity"
+      ],
+      "conclusion": "acyclicity",
+      "yes": 5,
+      "no": 6,
+      "score": 5.5,
+      "auto_rank": 98,
+      "auto_claim": "entails",
+      "rank": 22
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "completeness",
+       "continuity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 5,
+      "no": 6,
+      "score": 5.5,
+      "auto_rank": 99,
+      "auto_claim": "entails",
+      "rank": 23
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity",
+       "quasi-transitivity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 4,
+      "no": 8,
+      "score": 5.3,
+      "auto_rank": 80,
+      "auto_claim": "entails",
+      "rank": 24
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "closed-graph-continuity"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 7,
+      "no": 4,
+      "score": 5.1,
+      "auto_rank": 88,
+      "auto_claim": "not",
       "rank": 25
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "betweenness",
+       "closed-graph-continuity"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 7,
+      "no": 4,
+      "score": 5.1,
+      "auto_rank": 89,
+      "auto_claim": "not",
+      "rank": 26
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "completeness",
+       "continuity"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 7,
+      "no": 4,
+      "score": 5.1,
+      "auto_rank": 90,
+      "auto_claim": "not",
+      "rank": 27
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "continuity",
+       "independence"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 7,
+      "no": 4,
+      "score": 5.1,
+      "auto_rank": 91,
+      "auto_claim": "not",
+      "rank": 28
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independence",
+       "quasi-transitivity"
+      ],
+      "conclusion": "transitivity",
+      "yes": 18,
+      "no": 3,
+      "score": 5.1,
+      "auto_rank": 21,
+      "auto_claim": "not",
+      "rank": 29
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "acyclicity",
+       "closed-graph-continuity"
+      ],
+      "conclusion": "archimedean",
+      "yes": 16,
+      "no": 3,
+      "score": 5.1,
+      "auto_rank": 33,
+      "auto_claim": "not",
+      "rank": 30
+     }
+    ],
+    "auto": [
+     {
+      "kind": "question",
+      "premises": [
+       "acyclicity",
+       "betweenness"
+      ],
+      "conclusion": "transitivity",
+      "yes": 63,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 1,
+      "auto_claim": "not",
+      "rank": 107
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "acyclicity",
+       "independence"
+      ],
+      "conclusion": "transitivity",
+      "yes": 40,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 2,
+      "auto_claim": "not",
+      "rank": 80
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "betweenness",
+       "quasi-transitivity"
+      ],
+      "conclusion": "transitivity",
+      "yes": 39,
+      "no": 1,
+      "score": 1.9,
+      "auto_rank": 3,
+      "auto_claim": "not",
+      "rank": 81
+     },
+     {
+      "kind": "check",
+      "model": "non-convex-cone",
+      "principle": "acyclicity",
+      "yes": 2,
+      "no": 38,
+      "score": 3.8,
+      "auto_rank": 4,
+      "auto_claim": "entails",
+      "rank": 58
+     },
+     {
+      "kind": "question",
+      "premises": [],
+      "conclusion": "betweenness",
+      "yes": 35,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 5,
+      "auto_claim": "not",
+      "rank": 108
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "betweenness"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 29,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 6,
+      "auto_claim": "not",
+      "rank": 109
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity",
+       "weak-order"
+      ],
+      "conclusion": "betweenness",
+      "yes": 0,
+      "no": 28,
+      "score": 0.0,
+      "auto_rank": 7,
+      "auto_claim": "entails",
+      "rank": 110
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "acyclicity"
+      ],
+      "conclusion": "betweenness",
+      "yes": 25,
+      "no": 1,
+      "score": 1.9,
+      "auto_rank": 8,
+      "auto_claim": "not",
+      "rank": 82
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "continuity"
+      ],
+      "conclusion": "archimedean",
+      "yes": 25,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 9,
+      "auto_claim": "not",
+      "rank": 111
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "continuity"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 25,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 10,
+      "auto_claim": "not",
+      "rank": 112
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean"
+      ],
+      "conclusion": "completeness",
+      "yes": 24,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 11,
+      "auto_claim": "not",
+      "rank": 113
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "continuity",
+       "weak-order"
+      ],
+      "conclusion": "betweenness",
+      "yes": 1,
+      "no": 21,
+      "score": 1.9,
+      "auto_rank": 12,
+      "auto_claim": "entails",
+      "rank": 83
+     },
+     {
+      "kind": "question",
+      "premises": [],
+      "conclusion": "acyclicity",
+      "yes": 21,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 13,
+      "auto_claim": "not",
+      "rank": 114
+     },
+     {
+      "kind": "check",
+      "model": "semiorder",
+      "principle": "betweenness",
+      "yes": 2,
+      "no": 20,
+      "score": 3.6,
+      "auto_rank": 14,
+      "auto_claim": "entails",
+      "rank": 59
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean"
+      ],
+      "conclusion": "quasi-transitivity",
+      "yes": 20,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 15,
+      "auto_claim": "not",
+      "rank": 115
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "acyclicity",
+       "archimedean"
+      ],
+      "conclusion": "completeness",
+      "yes": 19,
+      "no": 1,
+      "score": 1.9,
+      "auto_rank": 16,
+      "auto_claim": "not",
+      "rank": 84
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "acyclicity",
+       "continuity"
+      ],
+      "conclusion": "archimedean",
+      "yes": 19,
+      "no": 1,
+      "score": 1.9,
+      "auto_rank": 17,
+      "auto_claim": "not",
+      "rank": 85
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "closed-graph-continuity"
+      ],
+      "conclusion": "archimedean",
+      "yes": 19,
+      "no": 1,
+      "score": 1.9,
+      "auto_rank": 18,
+      "auto_claim": "not",
+      "rank": 86
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "multi-utility"
+      ],
+      "conclusion": "false",
+      "yes": 19,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 19,
+      "auto_claim": "not",
+      "rank": 116
+     },
+     {
+      "kind": "check",
+      "model": "non-convex-cone",
+      "principle": "quasi-transitivity",
+      "yes": 4,
+      "no": 18,
+      "score": 6.5,
+      "auto_rank": 20,
+      "auto_claim": "entails",
+      "rank": 11
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independence",
+       "quasi-transitivity"
+      ],
+      "conclusion": "transitivity",
+      "yes": 18,
+      "no": 3,
+      "score": 5.1,
+      "auto_rank": 21,
+      "auto_claim": "not",
+      "rank": 29
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "quasi-transitivity"
+      ],
+      "conclusion": "completeness",
+      "yes": 18,
+      "no": 2,
+      "score": 3.6,
+      "auto_rank": 22,
+      "auto_claim": "not",
+      "rank": 60
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "betweenness"
+      ],
+      "conclusion": "closed-graph-continuity",
+      "yes": 18,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 23,
+      "auto_claim": "not",
+      "rank": 117
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "transitivity"
+      ],
+      "conclusion": "completeness",
+      "yes": 17,
+      "no": 4,
+      "score": 6.5,
+      "auto_rank": 24,
+      "auto_claim": "not",
+      "rank": 12
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "archimedean",
+       "transitivity"
+      ],
+      "conclusion": "weak-order",
+      "yes": 17,
+      "no": 4,
+      "score": 6.5,
+      "auto_rank": 25,
+      "auto_claim": "not",
+      "rank": 13
      },
      {
       "kind": "question",
@@ -1361,7 +1850,10 @@
       "conclusion": "acyclicity",
       "yes": 2,
       "no": 17,
-      "rank": 26
+      "score": 3.6,
+      "auto_rank": 26,
+      "auto_claim": "entails",
+      "rank": 61
      },
      {
       "kind": "question",
@@ -1372,7 +1864,10 @@
       "conclusion": "archimedean",
       "yes": 17,
       "no": 2,
-      "rank": 27
+      "score": 3.6,
+      "auto_rank": 27,
+      "auto_claim": "not",
+      "rank": 62
      },
      {
       "kind": "question",
@@ -1382,7 +1877,10 @@
       "conclusion": "betweenness",
       "yes": 17,
       "no": 2,
-      "rank": 28
+      "score": 3.6,
+      "auto_rank": 28,
+      "auto_claim": "not",
+      "rank": 63
      },
      {
       "kind": "question",
@@ -1393,7 +1891,10 @@
       "conclusion": "completeness",
       "yes": 17,
       "no": 1,
-      "rank": 29
+      "score": 1.9,
+      "auto_rank": 29,
+      "auto_claim": "not",
+      "rank": 87
      },
      {
       "kind": "question",
@@ -1404,7 +1905,10 @@
       "conclusion": "completeness",
       "yes": 17,
       "no": 1,
-      "rank": 30
+      "score": 1.9,
+      "auto_rank": 30,
+      "auto_claim": "not",
+      "rank": 88
      }
     ],
     "recorded": [
@@ -1417,7 +1921,10 @@
       "conclusion": "archimedean",
       "yes": 15,
       "no": 3,
-      "rank": 43,
+      "score": 5.0,
+      "auto_rank": 43,
+      "auto_claim": "not",
+      "rank": 33,
       "conjectures": [
        {
         "id": "incomplete-continuous-non-archimedean",

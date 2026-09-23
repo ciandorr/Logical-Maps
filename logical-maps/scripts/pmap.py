@@ -426,7 +426,7 @@ class Lynchpins:
         self.proper = [a for a in self.reps if a not in self.trivial]
         self.unknown = {m["id"]: [c for c in ids if c not in E.holds[m["id"]] and c not in E.fails[m["id"]]]
                         for m in self.witnesses}
-        self._rows = self._ranked = self._recorded_rows = None
+        self._rows = self._ranked = self._auto = self._recorded_rows = None
         self._universe()
 
     # -- closures as bitmasks over ids ∪ {False} ----------------------------
@@ -781,22 +781,35 @@ class Lynchpins:
             j = self.set_index[S]
             r["yes"] = self.with_rule(S, c, (j, c))
             r["no"] = self.with_model(S, [c] if c != FALSE else [], (j, c))
+        r["score"] = round(2 * r["yes"] * r["no"] / (r["yes"] + r["no"]), 1) if r["yes"] + r["no"] else 0.0
 
     def rank(self, top: int = 50, score_all: bool = True) -> dict:
-        """The open questions and model checks, best first, each scored for both answers, and the
-        questions recorded conjectures ask. With score_all false, only the recorded ones are scored
-        and nothing is ranked: what a sparse map still gets."""
+        """The open questions and model checks scored for both answers, in two orders, and the
+        questions recorded conjectures ask.
+
+        The central questions are ranked by the harmonic mean of the two scores: if each answer is
+        as likely as the map leaves room for it, inversely to how much it would settle, that is the
+        number of other questions an answer is expected to settle, so a question that only matters
+        if it comes out the implausible way sinks. The automatically generated conjectures are the
+        same questions by their larger score, each stated as the answer to expect: ⊢ when a
+        refutation would settle more, ⊬ when a proof would. With score_all false, only the recorded
+        conjectures are scored and nothing is ranked: what a sparse map still gets.
+        """
         if self._rows is None:
             self._rows = self._question_rows()
         rows = self._rows
         if score_all and self._ranked is None:
             for r in rows:
                 self._score(r)
-            rows.sort(key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), r["kind"],
-                                     str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle")))))
-            for i, r in enumerate(rows):
+            name = lambda r: (r["kind"], str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle"))))
+            auto = sorted(rows, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), *name(r)))
+            for i, r in enumerate(auto):
+                r["auto_rank"] = i + 1
+                r["auto_claim"] = "entails" if r["no"] >= r["yes"] else "not"
+            central = sorted(rows, key=lambda r: (-r["score"], -min(r["yes"], r["no"]), -max(r["yes"], r["no"]), *name(r)))
+            for i, r in enumerate(central):
                 r["rank"] = i + 1
-            self._ranked = rows
+            self._ranked, self._auto = central, auto
         if self._recorded_rows is None:  # attach once: the rows are shared, and rank() is asked more than once per build
             self._recorded_rows = self._recorded(rows)
         recorded = self._recorded_rows
@@ -806,8 +819,9 @@ class Lynchpins:
                 self._score(r)
         p = self.progress()
         return {"inconsistent_background": self.inconsistent, "classes": self.classes, "trivial": self.trivial,
-                "fitting_models": [m["id"] for m in self.witnesses], "progress": p,
-                "open": p["open"], "rows": self._ranked[:top] if self._ranked is not None else [], "recorded": recorded}
+                "fitting_models": [m["id"] for m in self.witnesses], "progress": p, "open": p["open"],
+                "rows": self._ranked[:top] if self._ranked is not None else [],
+                "auto": self._auto[:top] if self._auto is not None else [], "recorded": recorded}
 
 LYNCHPIN_MAX_OPEN = 0.75  # bundles skip a map in which more of its implication questions than this are open
 PROGRESS_PREMISES = 2  # the settled share counts implication questions with up to this many premises
@@ -884,19 +898,26 @@ LYNCHPIN_VERDICTS = {"proved": {"entails": "proved", "not": "refuted"}, "refuted
                      "consistent": {"entails": "refuted", "not": "proved"}}
 
 
-def lynchpin_row_text(r: dict, nm, conjecture: bool = False) -> str:
+def lynchpin_row_text(r: dict, nm, conjecture: bool = False, auto: bool = False) -> str:
     """S ⊢ c for a question, model: principle for a model check; a starred tier marks a recorded
-    conjecture. As a conjecture, ⊬ when the record claims the entailment fails."""
+    conjecture. As a recorded conjecture, ⊬ when the record denies the entailment; as an automatically
+    generated one, ⊬ when a proof would be the bigger surprise."""
     if r["kind"] == "check":
         return f"{r['model']}: {nm(r['principle'])}"
     star = f" ★ {r['tier']}" if r.get("tier") else ""
-    turnstile = "⊬" if conjecture and r.get("claim") == "not" else "⊢"
+    claim = r.get("auto_claim") if auto else r.get("claim") if conjecture else None
+    turnstile = "⊬" if claim == "not" else "⊢"
     return f"{' ∧ '.join(nm(x) for x in r['premises']) or 'True (⊤)'} {turnstile} {nm(r['conclusion'])}{star}"
 
 
 def lynchpin_scores(r: dict) -> tuple:
-    """(if yes, if no) for a conjecture: what confirming or refuting it would settle."""
+    """(if yes, if no) for a recorded conjecture: what confirming or refuting it would settle."""
     return (r["no"], r["yes"]) if r.get("claim") == "not" else (r["yes"], r["no"])
+
+
+def lynchpin_auto_scores(r: dict) -> tuple:
+    """(if yes, if no) for an automatically generated conjecture, relative to the answer it expects."""
+    return (r["no"], r["yes"]) if r.get("auto_claim") == "not" else (r["yes"], r["no"])
 
 
 def lynchpin_notes(r: dict) -> list:
@@ -921,7 +942,7 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
     if _open_share(report["progress"]) > LYNCHPIN_MAX_OPEN:
         o.append(f"note: {_open_share(report['progress']):.0%} of the questions are open; these scores mostly reflect how little is recorded")
     if report["rows"]:
-        o += ["rank, then what either answer settles (if yes / if no; ★ a recorded conjecture: bronze for notes, silver or gold by hand):"]
+        o += ["central questions, by the harmonic mean of what either answer settles (rank, if yes / if no; ★ a recorded conjecture: bronze for notes, silver or gold by hand):"]
         o += [f"#{r['rank']:<6d}{r['yes']:5d} /{r['no']:4d}   {lynchpin_row_text(r, nm)}" for r in report["rows"][:top]]
     o += ["conjectures, each as the question it asks (⊢ claims the entailment, ⊬ denies it; if yes / if no are what confirming or refuting it settles; — where it is settled or has more than two premises):"]
     for r in report["recorded"]:
@@ -929,6 +950,9 @@ def lynchpin_text(report: dict, names: dict, top: int = 10) -> list[str]:
         o.append(f"{'#' + str(r['rank']) if r['rank'] else '—':<7}{_score_text(yes):>5} /{_score_text(no):>4}   {lynchpin_row_text(r, nm, True)}{_status_text(r)}   ({', '.join(c['id'] for c in r['conjectures'])})")
     if not report["recorded"]:
         o.append("        none")
+    if report["auto"]:
+        o += ["automatically generated conjectures, by the larger side, each stated as the answer to expect (⊢ when a refutation would settle more, ⊬ when a proof would):"]
+        o += [f"#{r['auto_rank']:<6d}{lynchpin_auto_scores(r)[0]:5d} /{lynchpin_auto_scores(r)[1]:4d}   {lynchpin_row_text(r, nm, auto=True)}" for r in report["auto"][:top]]
     return o
 
 
@@ -983,7 +1007,9 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
               f"{rep['open']} open questions. {progress_text(rep['progress']).capitalize()}.", ""]
         rows = rep["rows"][:top]
         if rows:
-            o += ["| Rank | Question | if yes | if no |", "|---:|---|---:|---:|"]
+            o += ["Central questions, by the harmonic mean of what either answer would settle: the questions worth "
+                  "working on, since one that only matters if it comes out the implausible way sinks.", "",
+                  "| Rank | Question | if yes | if no |", "|---:|---|---:|---:|"]
             o += [f"| {r['rank']} | {lynchpin_row_text(r, nm)} | {r['yes']} | {r['no']} |" for r in rows]
             o += [""]
         elif not lynch["skipped"]:
@@ -995,6 +1021,12 @@ def lynchpin_md(lynch: dict, data: dict, topic_id: str, top: int = 5) -> list[st
                   "marked. ★ bronze for notes, silver or gold where a record ranks it by importance and difficulty.", "",
                   "| Rank | Conjecture | if yes | if no | record |", "|---:|---|---:|---:|---|"]
             o += [f"| {r['rank'] or '—'} | {lynchpin_row_text(r, nm, True)}{_status_text(r)} | {_score_text(lynchpin_scores(r)[0])} | {_score_text(lynchpin_scores(r)[1])} | {', '.join('`' + c['id'] + '`' for c in r['conjectures'])} |" for r in rep["recorded"]]
+            o += [""]
+        if rep["auto"]:
+            o += ["Automatically generated conjectures, by the larger side, each stated as the answer to expect: "
+                  "⊢ when a refutation would settle more, ⊬ when a proof would.", "",
+                  "| Rank | Conjecture | if yes | if no |", "|---:|---|---:|---:|"]
+            o += [f"| {r['auto_rank']} | {lynchpin_row_text(r, nm, auto=True)} | {lynchpin_auto_scores(r)[0]} | {lynchpin_auto_scores(r)[1]} |" for r in rep["auto"][:top]]
             o += [""]
     return o
 
@@ -2747,8 +2779,15 @@ def selftest():
                 assert L.with_model([*m["satisfies"], c], m["violates"]) == brute(L, models=[*others, M(m["id"], [*m["satisfies"], c], m["violates"])]), (m["id"], c)
                 assert L.with_model(m["satisfies"], [*m["violates"], c]) == brute(L, models=[*others, M(m["id"], m["satisfies"], [*m["violates"], c])]), (m["id"], c)
     agree(L)
-    top = L.rank(top=3)["rows"]
-    assert all(set(r) >= {"kind", "yes", "no"} for r in top) and top == sorted(top, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]))), top
+    ranked = L.rank(top=3)
+    top, auto = ranked["rows"], ranked["auto"]
+    hm = lambda r: 2 * r["yes"] * r["no"] / (r["yes"] + r["no"]) if r["yes"] + r["no"] else 0
+    assert all(set(r) >= {"kind", "yes", "no", "score", "rank", "auto_rank", "auto_claim"} for r in top) and [r["rank"] for r in top] == [1, 2, 3]
+    assert top == sorted(top, key=lambda r: (-hm(r), -min(r["yes"], r["no"]))), "central questions: by the harmonic mean, then the smaller side"
+    assert auto == sorted(auto, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]))) and [r["auto_rank"] for r in auto] == [1, 2, 3]
+    assert all(r["auto_claim"] == ("entails" if r["no"] >= r["yes"] else "not") for r in auto), "the answer to expect is the less surprising one"
+    assert auto[0]["premises"] == ["r"] and auto[0]["conclusion"] == FALSE and auto[0]["auto_claim"] == "not", "r ⊢ ⊥ at 17/0 is expected to fail: r ⊬ ⊥"
+    assert top[0]["kind"] == "check" and top[0]["yes"] == 6 and top[0]["no"] == 3, "m1: r at 6/3 has the best balance"
     # A conjectured record attaches to the row asking its question, premises reduced to the
     # class representatives the question uses; a model attaches to each violation and to consistency.
     noted = {**ly, "results": [*ly["results"], dict(R("rp", ["r"], "p"), status="conjectured", notes="Try a two-point frame.", tier="gold"),

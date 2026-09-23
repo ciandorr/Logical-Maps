@@ -37,9 +37,12 @@ and reports unless it is asked for by name.
 - `python3 scripts/pmap.py build` — regenerates `build/<topic>/index.html`,
   `data.json`, write-ups, and downloadable topic files.
 - `python3 scripts/pmap.py status` — counts, open pairs, redundancies.
-- `python3 scripts/pmap.py lynchpins` — open questions ranked by how many other open
-  questions each answer would settle, under no extra assumptions and under each
-  background preset (`--background du`, `--top 20`, `--json`). A question is S ⊢ c
+- `python3 scripts/pmap.py lynchpins` — the central questions, open questions ranked by
+  the harmonic mean of what either answer would settle (the expected settlement when an
+  answer is as likely as the map leaves room for it), then the same questions by their
+  larger side as automatically generated conjectures stated as the answer to expect,
+  under no extra assumptions and under each background preset (`--background du`,
+  `--top 20`, `--json`). A question is S ⊢ c
   for S at most two principle classes and c a class or False, asked only where no
   smaller premise set already proves or excludes c, and settled alike by a proof,
   an exclusion or a fitting model; a model check is scored the same way. A row that a

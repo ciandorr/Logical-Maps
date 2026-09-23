@@ -86,15 +86,17 @@ notes: 'This model is not a second witness to the draft''s main result but a cou
   no arrow composes back into $a$, $\Diamond a$ is false, so $\Box\Diamond a$ fails; Witnessed Possibility
   fails for the pure formula $x=\top_\tau$, witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is
   $\Diamond\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent
-  to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness (signature Σ) fail because
-  $c$ is the denotation of the closed pure term describing the true atom, $\lambda\bar x\, .\,\exists
-  p\, .\,p\land\operatorname{Atom}_t(p)\land\forall q\, .\,(q\land\operatorname{Atom}_t(q))\to q=p$, an
-  unprovable true identity. Everything that implies these fails with them. Distinctness-preserving collapse
-  holds: let $a$ be the set of arrows that are permutations, a symmetric proposition true at the identity
-  and, as the record’s Actuality witness, entailed by no other truth. For a true $p$, $a\le p$. Take $q:=a$:
-  under a permutation $i$, $p$ holds since $i\in a\subseteq p$; under a non-permutation $i$, $\Diamond
-  a$ would need $k\circ i$ to be a permutation, which no composite with a non-bijective arrow is. So every
-  truth is $\Box_{\ne}$-necessary.'
+  to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness (signature Σ) fail through
+  the other relational constants, Σ being assumed to contain at least one: such a constant $c''$ of type
+  $\tau''$ denotes what the closed pure term $\top_{\tau''}$ denotes, and $c''=\top_{\tau''}$ is a true
+  identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote
+  entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity,
+  so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything that implies these fails with them.
+  Distinctness-preserving collapse holds: let $a$ be the set of arrows that are permutations, a symmetric
+  proposition true at the identity and, as the record’s Actuality witness, entailed by no other truth.
+  For a true $p$, $a\le p$. Take $q:=a$: under a permutation $i$, $p$ holds since $i\in a\subseteq p$;
+  under a non-permutation $i$, $\Diamond a$ would need $k\circ i$ to be a permutation, which no composite
+  with a non-bijective arrow is. So every truth is $\Box_{\ne}$-necessary.'
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
@@ -128,3 +130,9 @@ changes:
   violates:
   - no-contingency-signature-r
   - signature-b-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Corrected the reason given for the failures of Independence (signature Σ) and Distinctness
+    (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed
+    by every arrow; the failures come from the other relational constants, which denote top. No verdict
+    changes.'

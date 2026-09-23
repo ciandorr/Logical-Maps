@@ -38,7 +38,11 @@ Model descriptions give the source construction and the point at which
 the properties hold. The map uses the paper's relational type system, so
 the source constructions apply directly. One explicitly described full
 Henkin model over a singleton individual domain is credited as an original
-specialization of the standard construction. The singleton-root coalesced
+specialization of the standard construction. So are the two full one-object
+action models over the group of all permutations of an infinite set (§3.5), with
+the natural action on the individuals and with one individual; they witness
+the joint consistency of □ND, the Axiom of Infinity at type t and □Relational
+Choice. The singleton-root coalesced
 model retains a separate pending obligation to interpret the map's fixed
 nonlogical signature; its pure-language source construction is proved.
 

@@ -1,0 +1,95 @@
+id: full-permutation-group-one-individual
+name: 'Full action model: permutations of an infinite set, one individual'
+satisfies:
+- distinctness-necessary-r
+- necessary-distinctness-necessary-r
+- barcan-r
+- necessary-barcan-r
+- modal-five
+- necessary-modal-five
+- no-pure-contingency-r
+- necessary-atomicity-r
+- necessary-actuality
+- necessary-boolean-completeness-r
+- necessary-rigid-comprehension-r
+- necessary-gallin-extensional-comprehension-r
+- necessary-functionality-r
+- necessary-plenitude-r
+- necessary-relational-choice-r
+- necessary-functional-choice-r
+- axiom-of-infinity-t
+- converse-witnessed-possibility-r
+- modal-freedom-signature-r
+violates:
+- fregean-axiom
+- extensionality-r
+- possibility-schema-r
+- witnessed-possibility-r
+- independence-signature-r
+- distinctness-preserving-collapse
+- distinctness-schema-r
+- axiom-of-infinity-e
+- infinity-e
+- possible-infinity-e
+- no-contingency-signature-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  checked_by: []
+  date: '2026-09-23'
+  lean: none
+sources:
+- Claude Fable 5.1 (Anthropic), construction and verification of 23 September 2026, at Cian Dorr’s suggestion
+  (see the write-up).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.5, pp. 58–59 (full M-set models, Proposition
+  3.24, No Pure Contingency); p. 61 and n. 84 (principles of full models).
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), Appendix A.2, Definitions A.1–A.4
+  and Proposition A.5, pp. 581–583 (M-set models).
+source_names:
+- Fable 23 Sep
+- Classicism
+- Logical Combinatorialism
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §3.5, pp. 58–59; p. 61 and n. 84
+  note: 'The source describes full M-set models and proves the facts used: Proposition 3.24 on ND and
+    BF, the one-object No Pure Contingency observation, and the principles common to full models. The
+    specific group and the verification are in the write-up.'
+- paper: bacon-2020
+  role: background
+  locator: Appendix A.2, Definitions A.1–A.4 and Proposition A.5, pp. 581–583
+  note: 'The M-set presentation of one-object action models: the division action on propositions and the
+    function-space M-set.'
+description: The full one-object action model whose arrows are all the permutations of a countably infinite
+  set, as in the record for the natural action, but with a single individual, fixed by every arrow. Propositions
+  are all sets of arrows with the division action and every function type carries all functions. Evaluate
+  at the identity arrow. The modal logic of propositions is S5 with the arrows as worlds, every arrow
+  acts bijectively at every type, and fullness gives the necessitated lattice, comprehension and choice
+  principles as in the natural-action record; the propositions are infinite while there is exactly one
+  individual at every arrow. The model witnesses the joint consistency of $\Box$ND, the Axiom of Infinity
+  at type $t$ and $\Box$Relational Choice with there being one individual.
+notes: 'Full proofs are in the write-up, which records the differences from the natural-action model.
+  Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\tau=\bar\sigma
+  t$ denotes $\lambda\bar x\, .\,a$, where $a$ is the singleton of the identity arrow, the unique true
+  atom; every other relational constant denotes the top element of its type, Σ being assumed to contain
+  at least one; and every individual constant denotes the sole individual. Under it No Contingency (signature
+  Σ) fails, since the Σ-sentence $\forall\bar x\, .\,c\bar x$ denotes $a$, true and not the set of all
+  arrows; B for sentences of Σ holds by B. Witnessed Possibility fails for the pure formula $x=\top_\tau$,
+  witnessed by $\top_\tau$, since $c=\top_\tau$ is false at every arrow, $\lambda\bar x\, .\,a$ differing
+  from $\lambda\bar x\, .\,\top$ and identity being uniform; Separated Structure, Distinctness (signature
+  Σ), Possibility (signature Σ) and Logical Necessity fail with it. Independence (signature Σ) fails through
+  the other relational constants, which denote closed pure terms; $\lambda\bar x\, .\,a$ itself is denoted
+  by no closed pure term, since such terms denote entities fixed by every arrow and $a$ is fixed only
+  by the identity. Modal Freedom (signature Σ) holds: the two tuples of constants are disjoint, so one
+  of the two sentences contains no designated constant and denotes a fixed point, hence the empty set
+  or the set of all arrows; if it is possible it is the latter, and the conjunction is as possible as
+  the other conjunct. Converse Witnessed Possibility holds as in the natural-action record. The Fregean
+  Axiom, Extensionality and the Distinctness-preserving collapse fail as there. There is exactly one individual
+  at every arrow, so the first numeral holds of the universal property of individuals, the second instance
+  of the Infinity Schema at type $e$ is false, Possible Infinity at type $e$ fails, and Possibility (pure)
+  fails for the C-consistent sentence that there are two individuals. Distinctness (pure) fails: $(\forall
+  xy\, .\,x=y)=\top$ is a true closed pure identity that C does not prove. Suggested by Cian Dorr on 23
+  September 2026.'

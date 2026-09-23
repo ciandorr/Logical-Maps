@@ -1,0 +1,94 @@
+id: full-permutation-group-infinite-set
+name: 'Full action model: permutations of an infinite set'
+satisfies:
+- distinctness-necessary-r
+- necessary-distinctness-necessary-r
+- barcan-r
+- necessary-barcan-r
+- modal-five
+- necessary-modal-five
+- no-pure-contingency-r
+- necessary-atomicity-r
+- necessary-actuality
+- necessary-boolean-completeness-r
+- necessary-rigid-comprehension-r
+- necessary-gallin-extensional-comprehension-r
+- necessary-functionality-r
+- necessary-plenitude-r
+- necessary-relational-choice-r
+- necessary-functional-choice-r
+- axiom-of-infinity-t
+- converse-witnessed-possibility-r
+- axiom-of-infinity-e
+- infinity-e
+- no-contingency-signature-r
+violates:
+- fregean-axiom
+- extensionality-r
+- possibility-schema-r
+- witnessed-possibility-r
+- independence-signature-r
+- distinctness-preserving-collapse
+- distinctness-schema-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 23 September 2026
+  checked_by: []
+  date: '2026-09-23'
+  lean: none
+sources:
+- Claude Fable 5.1 (Anthropic), construction and verification of 23 September 2026, at Cian Dorr’s suggestion
+  (see the write-up).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.5, pp. 58–59 (full M-set models, Proposition
+  3.24, No Pure Contingency); p. 61 and n. 84 (principles of full models).
+- Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), Appendix A.2, Definitions A.1–A.4
+  and Proposition A.5, pp. 581–583 (M-set models).
+source_names:
+- Fable 23 Sep
+- Classicism
+- Logical Combinatorialism
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §3.5, pp. 58–59; p. 61 and n. 84
+  note: 'The source describes full M-set models and proves the facts used: Proposition 3.24 on ND and
+    BF, the one-object No Pure Contingency observation, and the principles common to full models. The
+    specific group and the verification are in the write-up.'
+- paper: bacon-2020
+  role: background
+  locator: Appendix A.2, Definitions A.1–A.4 and Proposition A.5, pp. 581–583
+  note: 'The M-set presentation of one-object action models: the division action on propositions and the
+    function-space M-set.'
+description: 'The full one-object action model whose arrows are all the permutations of a countably infinite
+  set $X$, composed as functions, acting on the individuals $W^e=X$ by evaluation. Propositions are all
+  sets of arrows with the division action $i\cdot p=\{j : j\circ i\in p\}$, and every function type carries
+  the full function-space M-set, which here is the set of all functions since every arrow acts bijectively.
+  Evaluate at the identity arrow. Because the arrows form a group, $\Box p$ holds at an arrow exactly
+  when $p$ is the set of all arrows and $\Diamond p$ exactly when $p$ is nonempty, so the propositional
+  modal logic is S5 with the arrows as worlds; every arrow acts injectively and surjectively at every
+  type, giving $\Box$ND and $\Box$BF; fullness gives the necessitations of Atomicity, Actuality, Boolean
+  Completeness, Rigid Comprehension, Functionality, Plenitude and the choice principles; and the individuals
+  and the propositions are both infinite. The model witnesses the joint consistency of $\Box$ND, the Axiom
+  of Infinity at type $t$ and $\Box$Relational Choice.'
+notes: 'Full proofs are in the write-up. Interpretation of Σ, fixed for this record: each relational constant
+  denotes the top element of its type and each individual constant denotes one fixed individual $d$. Under
+  it Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$ but impossible
+  of a relational constant $c$; Independence (signature Σ) fails since $c$ denotes what the closed pure
+  term $\top_\tau$ denotes; Separated Structure, Distinctness (signature Σ), Possibility (signature Σ)
+  and Logical Necessity fail with them by the recorded results. No Contingency (signature Σ) holds: for
+  every bijection $\beta$ of $X$ the map that is $\beta$ at type $e$, the identity on propositions and
+  conjugation at the function types is an automorphism of the pure part of the model, so a pure formula
+  $P$ denotes the same proposition at $(d,\ldots,d)$ as at $(a,\ldots,a)$ for every individual $a$; hence
+  every closed Σ-sentence denotes what the pure sentence $\forall x\, .\,P(x,\ldots,x)$ denotes, and No
+  Pure Contingency finishes. Converse Witnessed Possibility holds under every interpretation of Σ, since
+  $i\in P(\bar c)$ gives $1\in P(i\cdot\bar c)$ for pure $P$. The Fregean Axiom fails since the singleton
+  of the identity arrow and the set of all arrows are both true and distinct, and Extensionality fails
+  with it in its nullary case. Possibility (pure) fails since the C-consistent sentence that there is
+  exactly one individual is false at every arrow, so Possibility+, Strong Possibility and Possibility
+  (signature Σ) fail too. Distinctness-preserving collapse fails since every true $q$ is possible at every
+  arrow, so $\Box(\Diamond q\to p)$ forces $p=\top$, which the true singleton of the identity is not.
+  Distinctness (pure) fails: $(\exists xy\, .\,x\ne y)=\top$ is a true closed pure identity that C does
+  not prove. Suggested by Cian Dorr on 23 September 2026 to fill a gap: no earlier record settled $\Box$ND,
+  the Axiom of Infinity at type $t$ and $\Box$Relational Choice together.'

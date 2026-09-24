@@ -1,0 +1,28 @@
+id: rational-scale-shift-imply-rational-affine-preservation
+premises:
+- rich-outcomes
+- rational-scale-invariance
+- shift-invariance
+conclusion: rational-affine-preservation
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Claude (Fable 5.1), 2026-09-24
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+proof: |-
+  For rational $a>0$ and real b, Rational Scale Invariance gives $X \succeq Y$ iff $aX \succeq aY$, and Shift Invariance gives $aX \succeq aY$ iff $aX+b \succeq aY+b$; Rich Outcomes supplies the intermediate gambles $aX, aY$. Applying both biconditionals to $X \succeq Y$ and to $Y \succeq X$ preserves the weak comparison and, by reversing the second, the strict one.
+sources:
+- 'Claude (Fable 5.1), 2026-09-24: elementary composition recorded in topics/unbounded-utility/results/rational-scale-shift-imply-rational-affine-preservation.yaml
+  (proof field), following the pattern of shift-scale-imply-positive-affine.'
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24
+source_names:
+- Claude generated 24 Sep
+- Symmetries of Value
+notes: Immediate composition. Premises are sufficient; minimality is not claimed. No translation checker is asserted.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: §3, p. 24

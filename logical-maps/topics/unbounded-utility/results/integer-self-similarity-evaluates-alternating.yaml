@@ -1,0 +1,30 @@
+id: integer-self-similarity-evaluates-alternating
+premises:
+- rich-outcomes
+- stochastic-equivalence
+- simple-eu
+- integer-negative-self-similarity
+conclusion: alternating-st-petersburg-value
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (source argument); GPT-6 (Codex) (adaptation through the uniqueness principle); Claude (Fable 5.1) (integer-ratio premise audit), 2026-09-24
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+proof: |-
+  The recorded proof of negative-self-similarity-evaluates-alternating (writeups/negative-self-similarity-evaluates-alternating.md) applies uniqueness once, at $p=1/2, a=2, b=0$ and Z sure −2: splitting off the first atom gives $A\sim M_{1/2}(- 2A,- 2)$ by Stochastic Equivalence, and Simple EU gives $c\sim M_{1/2}(- 2c,- 2)$ for the sure value $c=- 1/2$, since $M_{1/2}(1,- 2)$ has expectation −1/2. The ratio is the integer 2, so the integer-ratio principle gives $A\sim c$. Rich Outcomes supplies the outcomes used.
+sources:
+- 'GPT-6 (Codex), 9 September 2026: the factorization through the uniqueness principle, in writeups/negative-self-similarity-evaluates-alternating.md;
+  Claude (Fable 5.1), 24 September 2026: the observation that only the ratio 2 is used.'
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorems 9–10, pp. 30–31
+source_names:
+- GPT-6 adaptation 9 Sep, Claude audit 24 Sep
+- Symmetries of Value
+notes: |-
+  Premise audit of negative-self-similarity-evaluates-alternating, which stays recorded with the real-ratio principle. With totality-independence-integer-affine-reflection-imply-integer-self-similarity and comonotonic-sum-implies-integer-affine-preservation, the alternating evaluation follows from Rich Outcomes, Totality, Stochastic Equivalence, Simple EU, Mixture Independence, Reflection Anti-Invariance and either Integer Affine Preservation or Comonotonic Sum Invariance; no scale invariance for real or rational factors is needed. No independent checker or Lean verification is claimed.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: Theorems 9–10, pp. 30–31

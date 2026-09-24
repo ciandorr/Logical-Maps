@@ -1,4 +1,4 @@
-# Possibility+ (signature Σ) ⇒ Possibility (signature Σ)
+# Possibility+ (signature Σ) ⇒ Possibility Maximalism (signature Σ)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by Claude Fable 5.1 (Anthropic), 22 September 2026.</p>
 
@@ -8,11 +8,11 @@
 
 ## Conclusion
 
-- **Possibility (signature Σ).** The Possibility schema for the fixed nonlogical signature Sigma.
+- **Possibility Maximalism (signature Σ).** The Possibility Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Proof
 
-Take $n=0$. The antecedent is vacuous and the instances are exactly those of Possibility (signature Σ).
+Take $n=0$. The antecedent is vacuous and the instances are exactly those of Possibility Maximalism (signature Σ).
 
 ## Sources
 

@@ -19,6 +19,7 @@ violates:
 - negative-affine-anti-invariance
 - folded-expectation
 - negative-self-similarity
+- integer-negative-self-similarity
 - alternating-st-petersburg-value
 - comonotonic-sum-consistency
 status: proved
@@ -60,6 +61,12 @@ changes:
     Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). Y = C − ln(2)/π is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the clipped gap between 0 + Z and Y + Z tends to (2 ln 2)/π, so 0 + Z ≻ Y + Z.
   violates:
   - comonotonic-sum-consistency
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Uniqueness of Negative Self-Similarity (integer ratios) shown to fail: the recorded uniqueness witness uses p = 1/2, a = 2, b = 0 and Z = 0, with C₁ ≻ 0 both fixed values.
+  violates:
+  - integer-negative-self-similarity
 references:
 - paper: symmetries-of-value
   role: proof

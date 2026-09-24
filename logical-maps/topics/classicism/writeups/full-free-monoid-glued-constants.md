@@ -76,6 +76,6 @@ The following hold at every world, hence with their necessitations, because $\ma
 And the following fail at the root.
 
 - **ND and B:** $\{\langle\rangle\}\ne\emptyset$, but $\langle0\rangle\cdot\{\langle\rangle\}=\emptyset$, so the two are possibly identical; B fails since it implies ND (Prior).
-- **Possibility (pure):** Actuality holds at every world, so $\Diamond\neg\text{Actuality}$ fails, although $\neg\text{Actuality}$ is consistent with C, being true in the map's finite-support models with Atomlessness.
+- **Possibility Maximalism (pure):** Actuality holds at every world, so $\Diamond\neg\text{Actuality}$ fails, although $\neg\text{Actuality}$ is consistent with C, being true in the map's finite-support models with Atomlessness.
 
 Everything else recorded for the model follows from these by the map's results: Separated Structure, General Separated Structure, Possibly Witnessed Possibility, Witnessed Possibility, Independence (signature Σ) and Modal Freedom (signature Σ) from Logical Necessity. Bacon's interpretation of his predicates $\operatorname{Pure}$ and $\operatorname{Fun}$ in this model (Appendix A.3) is not recorded on the map.

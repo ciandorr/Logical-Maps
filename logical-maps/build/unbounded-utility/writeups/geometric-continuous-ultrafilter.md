@@ -175,6 +175,23 @@ Invariance fails, even though Shift Invariance, CDF-Area Extension, \(L^1\)
 Continuity and Folded Expectation hold. `checks/comonotonic_witnesses.py`
 verifies the calculation.
 
+## Rational factors
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The scaling reversal
+above is a doubling: \(A\sim-1/3\succ-1/2\) while \(2A\sim-4/3\prec-1\), so
+the pair \((A,-1/2)\) fails invariance at the factor \(2\). The model therefore
+also fails Rational Scale Invariance, the restriction of Scale Invariance to
+rational factors.
+The same doubling refutes Integer Affine Preservation: \(A\succ-1/2\) is
+not carried to \(2A\succeq-1\).
+
+## Integer-ratio self-similarity
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The uniqueness witness
+above has ratio $a=2$, so the model also fails Uniqueness of Negative
+Self-Similarity (integer ratios), the restriction of the principle to integer
+ratios.
+
 ## Paper references
 
 - **Background: [Decision theory unbound](https://doi.org/10.1111/nous.12473).** Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Theorems 7–10, pp. 693–695: underlying continuous clipping construction and original scale-failure strategy

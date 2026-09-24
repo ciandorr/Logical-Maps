@@ -1,0 +1,44 @@
+version: 1
+source:
+  repository: https://github.com/zwlgzwlg/Logical-Maps.git
+  ref: main
+# Draft topics are always skipped. Add further active topics explicitly.
+topics: [classicism, unbounded-utility]
+backgrounds: [all]  # or [base, c5, du, dtu]
+live_api: false
+limits:
+  requests_per_run: 5  # API-turn budget; saved workspaces resume on later runs
+  max_output_tokens: 4096
+  max_prompt_chars: 120000
+  attempts_per_question: 1  # fresh workspaces; resuming does not consume this limit
+  related_records: 12
+  central_questions: 20  # initial prompt size, or all; the full list is always available as a file/tool
+  timeout_seconds: 120
+
+discovery:
+  protocol: offline
+  provider: offline
+  model: smoke-test
+review:
+  protocol: offline
+  provider: offline
+  model: smoke-test
+
+# To use a compatible endpoint, replace a profile above with:
+# discovery:
+#   protocol: chat-completions
+#   provider: your-provider-name
+#   endpoint: https://your-provider.example/v1/chat/completions
+#   api_key_env: TRAWL_API_KEY
+#   model: exact-api-model-id
+#   token_parameter: max_completion_tokens  # or max_tokens for compatible servers
+#   parameters: {}  # e.g. reasoning_effort; only when supported by this model
+#
+# Or use the native Messages protocol:
+# review:
+#   protocol: anthropic-messages
+#   provider: anthropic
+#   endpoint: https://api.anthropic.com/v1/messages
+#   api_key_env: ANTHROPIC_API_KEY
+#   model: exact-api-model-id
+#   parameters: {}

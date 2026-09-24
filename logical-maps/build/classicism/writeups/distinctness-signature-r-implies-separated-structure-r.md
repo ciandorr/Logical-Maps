@@ -1,10 +1,10 @@
-# Distinctness (signature Σ) ⇒ Separated Structure
+# Distinctness Maximalism (signature Σ) ⇒ Separated Structure
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Distinctness (signature Σ).** The Distinctness schema for the fixed nonlogical signature Sigma.
+- **Distinctness Maximalism (signature Σ).** The Distinctness Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Conclusion
 
@@ -12,7 +12,7 @@
 
 ## Proof
 
-Fix the allowed c,F,G. If Fc=Gc is a theorem of the reference C theory, uniform substitution for the fresh c followed by its zeta rule yields F=G. Otherwise the signature Distinctness schema makes Fc=Gc false, so the conditional holds. The freshness condition on c is essential.
+Fix the allowed c,F,G. If Fc=Gc is a theorem of the reference C theory, uniform substitution for the fresh c followed by its zeta rule yields F=G. Otherwise the signature Distinctness Maximalism schema makes Fc=Gc false, so the conditional holds. The freshness condition on c is essential.
 
 ## Sources
 

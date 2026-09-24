@@ -222,7 +222,7 @@ different from failure of the boxed schema. Negated principle nodes are
 not added by this positive import. Incompatibilities conclude False;
 model `violates` entries record schema failure.
 
-**Pure and signature schemata.** In Distinctness and Possibility,
+**Pure and signature schemata.** In Distinctness Maximalism and Possibility Maximalism,
 $C$ denotes the fixed background logic. Its theoremhood and consistency
 side conditions are retained literally. “Pure” means free of nonlogical
 constants. The principles in the Signature schemata group give a special

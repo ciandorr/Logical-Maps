@@ -8,7 +8,7 @@
 
 ## Conclusion
 
-- **Possibility+ (pure).** The strengthened Possibility schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
+- **Possibility+ (pure).** The strengthened Possibility Maximalism schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
 
 ## Proof
 

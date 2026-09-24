@@ -247,3 +247,10 @@ With $\varepsilon=(\ln2)/\pi$ the set $\{t:v_{Y+Z}(t)\ge v_{X+Z}(t)-\varepsilon\
 is bounded, so $X+Z\succ Y+Z$ although $X\sim Y$: Comonotonic Sum Invariance
 fails, while both shift principles hold. `checks/comonotonic_witnesses.py`
 verifies the closed forms, the neutral constant and the limit.
+
+## Integer-ratio self-similarity
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The uniqueness witness
+above has ratio $a=2$, so the model also fails Uniqueness of Negative
+Self-Similarity (integer ratios), the restriction of the principle to integer
+ratios.

@@ -1,10 +1,10 @@
-# Possibility (pure) ∧ No Pure Contingency ⇒ False (⊥)
+# Possibility Maximalism (pure) ∧ No Pure Contingency ⇒ False (⊥)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+- **Possibility Maximalism (pure).** Every closed pure sentence consistent with C is possible.
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 
 ## Conclusion
@@ -13,7 +13,7 @@
 
 ## Proof
 
-The Fregean Axiom A is a closed pure sentence. Both A and its negation are C-consistent: an ordinary two-valued Henkin model satisfies A, whereas the source’s full two-element-group model has four propositions and falsifies A. Possibility gives $\Diamond A$ and $\Diamond\neg A$. By excluded middle either A or its negation is true. No Pure Contingency applied to the true one makes it necessary, contradicting the possibility of the other.
+The Fregean Axiom A is a closed pure sentence. Both A and its negation are C-consistent: an ordinary two-valued Henkin model satisfies A, whereas the source’s full two-element-group model has four propositions and falsifies A. Possibility Maximalism gives $\Diamond A$ and $\Diamond\neg A$. By excluded middle either A or its negation is true. No Pure Contingency applied to the true one makes it necessary, contradicting the possibility of the other.
 
 ## Sources
 

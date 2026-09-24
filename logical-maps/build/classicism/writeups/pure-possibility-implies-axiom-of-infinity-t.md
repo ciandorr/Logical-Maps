@@ -1,13 +1,13 @@
-# Possibility (pure) ⇒ Axiom of Infinity (type t)
+# Possibility Maximalism (pure) ⇒ Axiom of Infinity (type t)
 
-Assume Possibility (pure): every closed pure sentence consistent with C is
+Assume Possibility Maximalism (pure): every closed pure sentence consistent with C is
 possible. The conclusion is the Axiom of Infinity at type $t$,
 
 $$
 \neg\exists Z^{(tt)t}\, .\,\operatorname{FiniteCardinality}_t(Z)\land Z(\lambda p^t\, .\,\top).
 $$
 
-Since Possibility (pure) and Distinctness (pure) are equivalent, Pure
+Since Possibility Maximalism (pure) and Distinctness Maximalism (pure) are equivalent, Pure
 Maximalist Classicism implies the Axiom of Infinity at type $t$. The argument
 is Cian Dorr's (20 September 2026); the lemmas, the boxed form of
 exclusivity, the Dedekind step and the consistency model are supplied here.
@@ -189,9 +189,9 @@ unconstrained root component; at the root the finite cardinalities are
 exactly the numerals, and the $k$-th numeral's successor holds of the
 universal property at the summand with $k+1$ individuals.
 
-## 3. From Possibility to $\Pi$
+## 3. From Possibility Maximalism to $\Pi$
 
-By §2, Possibility (pure) gives $\Diamond\Pi$. Let $Z$ be finite. By Lemma
+By §2, Possibility Maximalism (pure) gives $\Diamond\Pi$. Let $Z$ be finite. By Lemma
 1, $\Box\operatorname{FiniteCardinality}_e(Z)$. Since
 $\Pi\to(\operatorname{FiniteCardinality}_e(Z)\to\Diamond g(Z))$ is a
 theorem, K turns $\Diamond\Pi$ into
@@ -261,11 +261,11 @@ and $\top\ne\bot$.
 
 By Lemma 5 at $\sigma=t$, no finite cardinality of type $(tt)t$ holds of
 $\lambda p\, .\,\top$. With §3, this is the Axiom of Infinity at type $t$
-from Possibility (pure). $\blacksquare$
+from Possibility Maximalism (pure). $\blacksquare$
 
 ## Notes
 
-The earlier record for the Infinity schema applied Distinctness to one
+The earlier record for the Infinity schema applied Distinctness Maximalism to one
 identity between numerals at a time, and its note explains why that reaches
 only the schema. Here the consistency side condition is applied once, to the
 single sentence $\Pi$, which quantifies over every finite cardinality; that
@@ -280,7 +280,7 @@ boxed alternative that makes the contradiction outright.
 $\Pi$ is not a consequence of the Axiom of Infinity at type $e$: the full
 Henkin model with infinitely many individuals satisfies that axiom but has
 no possible world with exactly one individual, so §3 genuinely needs the
-Possibility schema.
+Possibility Maximalism schema.
 
 **A variant at type $t$ (sketch only).** The same strategy can be run with
 propositions in place of individuals, but the sentence must change, since

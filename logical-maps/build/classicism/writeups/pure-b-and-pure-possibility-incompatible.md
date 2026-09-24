@@ -1,11 +1,11 @@
-# B for pure sentences ∧ Possibility (pure) ⇒ False (⊥)
+# B for pure sentences ∧ Possibility Maximalism (pure) ⇒ False (⊥)
 
 <p class='cert'>Result — Source: Philosophical Introduction to HOL (2024); produced by Andrew Bacon; set as Exercise 8.19, solution written out by Claude Fable 5.1 (Anthropic), 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), 22 September 2026.</p>
 
 ## Premises
 
 - **B for pure sentences.** The B instance for every closed sentence in the pure language.
-- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+- **Possibility Maximalism (pure).** Every closed pure sentence consistent with C is possible.
 
 ## Conclusion
 
@@ -13,11 +13,11 @@
 
 ## Proof
 
-Let $F$ be the Fregean Axiom, a closed pure sentence. Both $F$ and $\neg F$ are consistent with C (a two-valued Henkin model and the two-element-group model), so Possibility (pure) gives $\Diamond F$ and $\Diamond\neg F$. In C, $\Box(F\to\Box F)$: the Fregean Axiom, if true, makes every truth identical to $\top$, and this reasoning is a theorem, so it holds necessarily. If $F$ then $\Box F$, contradicting $\Diamond\neg F$. If $\neg F$, B for the pure sentence $\neg F$ gives $\Box\Diamond\neg F$; but at the possibility where $F$ holds, $\Box F$ holds, so $\neg\Diamond\neg F$ holds there, a contradiction.
+Let $F$ be the Fregean Axiom, a closed pure sentence. Both $F$ and $\neg F$ are consistent with C (a two-valued Henkin model and the two-element-group model), so Possibility Maximalism (pure) gives $\Diamond F$ and $\Diamond\neg F$. In C, $\Box(F\to\Box F)$: the Fregean Axiom, if true, makes every truth identical to $\top$, and this reasoning is a theorem, so it holds necessarily. If $F$ then $\Box F$, contradicting $\Diamond\neg F$. If $\neg F$, B for the pure sentence $\neg F$ gives $\Box\Diamond\neg F$; but at the possibility where $F$ holds, $\Box F$ holds, so $\neg\Diamond\neg F$ holds there, a contradiction.
 
 ## Notes
 
-Sharpens the recorded incompatibility of Possibility (pure) with No Pure Contingency and with ND: even B restricted to pure sentences is excluded.
+Sharpens the recorded incompatibility of Possibility Maximalism (pure) with No Pure Contingency and with ND: even B restricted to pure sentences is excluded.
 
 ## Sources
 

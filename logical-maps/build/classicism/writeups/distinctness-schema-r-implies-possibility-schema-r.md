@@ -1,18 +1,18 @@
-# Distinctness (pure) ⇒ Possibility (pure)
+# Distinctness Maximalism (pure) ⇒ Possibility Maximalism (pure)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Distinctness (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
+- **Distinctness Maximalism (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
 
 ## Conclusion
 
-- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+- **Possibility Maximalism (pure).** Every closed pure sentence consistent with C is possible.
 
 ## Proof
 
-If P is consistent with the reference C theory, the closed identity $\neg P=\top$ is not one of its theorems. Distinctness therefore gives $\neg P\ne\top$, equivalently $\Diamond P$. Preserve the chosen pure or Sigma-expanded signature.
+If P is consistent with the reference C theory, the closed identity $\neg P=\top$ is not one of its theorems. Distinctness Maximalism therefore gives $\neg P\ne\top$, equivalently $\Diamond P$. Preserve the chosen pure or Sigma-expanded signature.
 
 ## Sources
 

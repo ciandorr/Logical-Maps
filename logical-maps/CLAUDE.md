@@ -1,8 +1,26 @@
 # Working in this repo
 
+For mathematical questions, start with [AGENTS.md](AGENTS.md) and the relevant
+topic guide: [Classicism](topics/classicism/AGENTS.md) or
+[Unbounded Utility](topics/unbounded-utility/AGENTS.md). They give direct record
+lookups and focused queries; follow them before exploring the repository.
+
 This is a database of principles and the logical connections between them, with
 a build step that derives consequences and renders an interactive map. Read
 README.md first.
+
+## Mathematical brainstorming is the default
+
+Keep mathematical exploration separate from Lean formalization. Requests to
+prove a theorem, check an argument, find a countermodel, or think through a
+conjecture call for ordinary mathematical reasoning unless the user explicitly
+asks for Lean or has already included it in the task. Use the database and
+write-ups; do not detour into Lean sources, `.lean` edits, toolchain setup,
+`lake`, or `lean-check`. A sound mathematical proof need not be formalized to
+answer the question or be recorded as proved; preserve its actual Lean status.
+Do not routinely propose Lean as the next step. The Lean commands below apply
+to requested formalization work. Normal export builds can still regenerate
+statements mechanically, without starting a proof or audit project.
 
 ## Private work
 

@@ -248,6 +248,13 @@ is bounded, so $X+Z\succ Y+Z$ although $X\sim Y$: Comonotonic Sum Invariance
 fails, while both shift principles hold. `checks/comonotonic_witnesses.py`
 verifies the closed forms, the neutral constant and the limit.
 
+## Integer-ratio self-similarity
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The uniqueness witness
+above has ratio $a=2$, so the model also fails Uniqueness of Negative
+Self-Similarity (integer ratios), the restriction of the principle to integer
+ratios.
+
 ## Paper references
 
 - **Proof: [Symmetries of value](https://doi.org/10.1111/nous.12549).** Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 1, p. 24. Already states the failure of affine-symmetry implications under DTU, including with L¹ Continuity and Relative Expectation, and cites Decision theory unbound, Remark 3, for the reflection countermodel

@@ -14,8 +14,11 @@ satisfies:
 - shift-invariance
 violates:
 - scale-invariance
+- rational-scale-invariance
+- integer-affine-preservation
 - alternating-st-petersburg-value
 - negative-self-similarity
+- integer-negative-self-similarity
 - comonotonic-sum-consistency
 status: proved
 certificate:
@@ -51,6 +54,19 @@ changes:
     Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). A standard Cauchy C is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the clipped gap at cutoff 4ⁿ is 2∫_{4ⁿ/2}^{4ⁿ} P(C>x)dx → (2 ln 2)/π, so 0 + Z ≻ C + Z.
   violates:
   - comonotonic-sum-consistency
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Rational Scale Invariance shown to fail: the explicit scaling reversal (write-up section “Explicit failures of scale, alternating evaluation and uniqueness”) is a doubling, A ∼ −1/3 ≻ −1/2 while 2A ∼ −4/3 ≺ −1, so the pair (A, −1/2) fails invariance at the rational factor 2. The same doubling refutes Integer Affine Preservation: A ≻ −1/2 is not carried to 2A ≽ −1.
+  violates:
+  - rational-scale-invariance
+  - integer-affine-preservation
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Uniqueness of Negative Self-Similarity (integer ratios) shown to fail: the recorded uniqueness witness uses p = 1/2, a = 2, b = 0 and Z = −2, with A ∼ −1/3 and −1/2 both fixed values.
+  violates:
+  - integer-negative-self-similarity
 references:
 - paper: decision-theory-unbound
   role: background

@@ -1,4 +1,4 @@
-# Source extraction: updated 23 September 2026
+# Source extraction: updated 24 September 2026
 
 ## Cancellation and Countable Sure-Thing questions (13 September)
 
@@ -423,3 +423,55 @@ test); whether the region of the alternating St Petersburg gamble against
 −1/2 is killed under the comonotonic copula, which bears on the top DU
 lynchpin about Existential Copula Sum Invariance; and Independent Sum
 Cancellation for the exact CDF-area preorder.
+
+### Rational and integer factors from comonotonic addition; the exact ordering fails shifts — 24 September 2026
+
+Zachary Goodsell claimed that Comonotonic Sum Invariance implies Positive
+Affine Invariance by iterated addition (2A = A + A ≽ B + A ≽ B + B = 2B) and
+proposed a rational-factor principle for the remaining step. Claude
+(Fable 5.1) recorded what the argument proves and where it stops. New
+principles: Rational Scale Invariance, Integer Affine Preservation, Rational
+Affine Preservation and Uniqueness of Negative Self-Similarity (integer
+ratios). Proved: Rich Outcomes + Stochastic Equivalence + Comonotonic Sum
+Invariance give Integer Affine Preservation (adding A to both sides needs B
+comonotonic with A, hence Stochastic Equivalence, and the mixed sums
+jX + (k − j)Y, hence Rich Outcomes); adding Totality gives Rational Scale
+Invariance, the cancellation kX ≽ kY ⇒ X ≽ Y being the only place Totality
+enters; Totality + Mixture Independence + Integer Affine Preservation +
+Reflection Anti-Invariance give integer-ratio uniqueness, which carries the
+alternating St Petersburg and Pasadena evaluations, since both use only the
+ratio 2. Two models: `cdf-area-unit-threshold` (Rich Outcomes, Archimedean
+Outcomes, Stochastic Equivalence, Stochastic Dominance, Simple EU,
+Comonotonic Sum Invariance and Integer Affine Preservation; cancellation
+fails at 2, so Rational Scale Invariance, Rational Affine Preservation,
+Totality and Mixture Independence fail) and `lexicographic-hamel-tie-break`
+(a total law-based order ranking integrable widths by area with a ℚ-linear
+Hamel tie-break and a Zorn completion of the infinite-area pairs; invariant
+under every rational factor, not under √2; Mixture Independence fails).
+Conjectures: DTU + Comonotonic Sum Invariance ⇒ Scale Invariance, and
+DU + Comonotonic Sum Invariance ⇒ Rational Affine Preservation. Verdict
+updates: the four recorded scale countermodels fail at the factor 2
+(U Theorem 10 compares μ with the law of 2X), so they fail Rational Scale
+Invariance and Integer Affine Preservation; the four models refuting the
+real-ratio uniqueness principle do so at ratio 2 and fail the integer-ratio
+principle; the folded-tail cone now derivably fails Comonotonic Sum
+Invariance. `checks/rational_scale_witnesses.py` verifies the witnesses.
+
+Goodsell also observed that the exact ultrafilter ordering fails Shift
+Invariance: a balanced prospect shifted by 1 stays strictly behind sure 1 at
+every truncation level, because clipping C + 1 to [−t, t] clips C to
+[−t − 1, t − 1] and loses its upper tail between t − 1 and t + 1, so
+v_{C+1}(t) = 1 − ∫_{t−1}^{t+1} P(C > x) dx < 1 while v_C = v_0 = 0. The
+deficit vanishes as t → ∞, which is why the continuous quotients keep Shift
+Invariance (U Theorem 8). Recorded on `total-exact-ultrafilter` with
+`checks/exact_shift_witness.py`. This is the DTU model violating Shift
+Invariance listed as open above, so the private cone-extension sketch is no
+longer needed for that question; the engine also derives that the exact
+ordering fails Transfer of a Shift and Simple Relative Expectation.
+
+Open after this batch: real factors under DTU + Comonotonic Sum Invariance
+(no model of that package is known, so a refutation would also settle the
+total comonotonic extension); fractional factors under DU + Comonotonic Sum
+Invariance, that is integer cancellation without Totality; and whether the
+integer-ratio uniqueness principle separates from the real-ratio one under
+DTU.

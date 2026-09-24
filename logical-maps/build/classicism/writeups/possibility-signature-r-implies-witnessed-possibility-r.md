@@ -1,10 +1,10 @@
-# Possibility (signature Σ) ⇒ Witnessed Possibility
+# Possibility Maximalism (signature Σ) ⇒ Witnessed Possibility
 
 <p class='cert'>Result — Source: Logical Combinatorialism; produced by Andrew Bacon; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Possibility (signature Σ).** The Possibility schema for the fixed nonlogical signature Sigma.
+- **Possibility Maximalism (signature Σ).** The Possibility Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Conclusion
 
@@ -12,7 +12,7 @@
 
 ## Proof
 
-For a fixed pure formula P, either P has a witness consistently with the reference C theory or it does not. In the first case interpreting the fresh constants as witnesses makes P[c/x] consistent, and signature Possibility supplies its possibility. In the second case the reference theory proves there is no witness, so the required conditional has a false antecedent.
+For a fixed pure formula P, either P has a witness consistently with the reference C theory or it does not. In the first case interpreting the fresh constants as witnesses makes P[c/x] consistent, and signature Possibility Maximalism supplies its possibility. In the second case the reference theory proves there is no witness, so the required conditional has a false antecedent.
 
 ## Sources
 

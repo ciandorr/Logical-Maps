@@ -82,3 +82,15 @@ Comonotonic Sum Invariance fails. Shift Invariance holds in this model, so
 this is a genuinely new failure and not a consequence of the recorded
 implication from comonotonic invariance to shifts.
 `checks/comonotonic_witnesses.py` verifies the closed forms and the limit.
+
+## Rational factors
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The scale failure
+recorded above applies the source's Theorem 10 (pp. 693–695), whose witness
+compares $\mu$ with $\mu_2$, the law of $2X$, through $E_t\mu_2=E_{2t}\mu$.
+The failure is at the rational factor $2$, so the model also fails Rational
+Scale Invariance, with the same source attribution and audit caveats as the
+Scale Invariance flag.
+The same doubling refutes Integer Affine Preservation: $\mu\succ\nu$ is not
+carried to $2\mu\succeq2\nu$, since the second set in the theorem's proof
+ranks $2\nu$ strictly above $2\mu$.

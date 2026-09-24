@@ -1,10 +1,10 @@
-# Distinctness (pure) ∧ □Functionality ⇒ False (⊥)
+# Distinctness Maximalism (pure) ∧ □Functionality ⇒ False (⊥)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Distinctness (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
+- **Distinctness Maximalism (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
 - **□Functionality.** Every closed instance of Functionality is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
 
 ## Conclusion
@@ -13,7 +13,7 @@
 
 ## Proof
 
-The cited source construction makes a closed instance of Functionality false, so its negation is C-consistent. Pure Possibility, equivalent to pure Distinctness, says that negation is possible. The corresponding boxed instance of the second premise says it is impossible.
+The cited source construction makes a closed instance of Functionality false, so its negation is C-consistent. Pure Possibility Maximalism, equivalent to pure Distinctness Maximalism, says that negation is possible. The corresponding boxed instance of the second premise says it is impossible.
 
 ## Sources
 

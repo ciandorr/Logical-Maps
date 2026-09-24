@@ -11,6 +11,9 @@ satisfies:
 violates:
 - expected-utility
 - scale-invariance
+- rational-scale-invariance
+- integer-affine-preservation
+- shift-invariance
 - countable-sure-thing
 - archimedean-gambles
 - comonotonic-sum-consistency
@@ -18,7 +21,7 @@ status: proved
 certificate:
   source_id: decision-theory-unbound
   lean: stated
-  produced_by: Zachary Goodsell (cited paper); Claude (Fable 5.1) (failure of Comonotonic Sum Invariance, 23 September 2026)
+  produced_by: Zachary Goodsell (cited paper; failure of Shift Invariance, 24 September 2026); Claude (Fable 5.1) (failure of Comonotonic Sum Invariance, 23 September 2026; verification of the shift failure, 24 September 2026)
   checked_by: []
   date: '2026-09-08'
   recorded_by: GPT-6 (Codex), 2026-09-08; transcription and random-variable formulation
@@ -28,14 +31,19 @@ sources:
 - Goodsell, Decision theory unbound, Noûs 58 (2024), 669–695; online 2023; DOI 10.1111/nous.12473, Appendix
   B, Theorem 1, pp. 690–691; Theorems 3 and 10, pp. 691, 693–695
 - 'Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/total-exact-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py.'
+- 'Zachary Goodsell, Logical Maps session, 24 September 2026: observation that Shift Invariance fails in the exact ordering,
+  since a symmetric prospect shifted by 1 stays strictly behind sure 1 at every truncation level; verification in
+  writeups/total-exact-ultrafilter.md and checks/exact_shift_witness.py.'
 notes: The scale failure is recorded from the source theorem; its printed analytic witness has apparent
   typographical issues itemized in extraction.md. This record is a literature extraction, not a separately
   audited reconstruction of that witness.
 source_names:
 - Decision Theory Unbound
 - Claude comonotonic failure 23 Sep
+- Goodsell shift failure 24 Sep
 checks:
 - topics/unbounded-utility/checks/comonotonic_witnesses.py
+- topics/unbounded-utility/checks/exact_shift_witness.py
 changes:
 - date: '2026-09-23'
   by: Claude (Fable 5.1)
@@ -43,6 +51,19 @@ changes:
     Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). A standard Cauchy C has v_C(t) = 0 = v_0(t) for every t, but with the common comonotonic summand Z = max(C,0) the clipped gap v_{0+Z}(t) − v_{C+Z}(t) = 2∫_{t/2}^{t} P(C>x)dx is positive for every t, so 0 + Z ≻ C + Z on the whole domain of truncation levels.
   violates:
   - comonotonic-sum-consistency
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Rational Scale Invariance shown to fail with the same evidence as Scale Invariance: the source’s Theorem 10 (Decision theory unbound, pp. 693–695) compares μ with μ₂, the law of 2X, so the recorded scale failure is at the rational factor 2. Source-attributed, with the audit caveats of the scale flag; the factor was confirmed by the author in the Logical Maps session of 24 September 2026. The same doubling refutes Integer Affine Preservation: μ ≻ ν is not carried to 2μ ≽ 2ν.
+  violates:
+  - rational-scale-invariance
+  - integer-affine-preservation
+- date: '2026-09-24'
+  by: Zachary Goodsell (argument); Claude (Fable 5.1) (verification and write-up)
+  summary: >-
+    Shift Invariance shown to fail (write-up section “Failure of Shift Invariance”). A standard Cauchy C has v_C(t) = 0 = v_0(t), so C ∼ 0, but clipping C + 1 to [−t, t] clips C to [−t−1, t−1] and loses the upper tail between t−1 and t+1: v_{C+1}(t) = 1 − ∫_{t−1}^{t+1} P(C>x)dx < 1 = v_1(t) for t ≥ 1, and v_{C+1}(t) < t = v_1(t) below, so 1 ≻ C + 1 for every ultrafilter. The deficit vanishes as t → ∞, which is why the continuous quotient keeps Shift Invariance. Since the model satisfies DTU, DTU does not imply Shift Invariance.
+  violates:
+  - shift-invariance
 references:
 - paper: decision-theory-unbound
   role: proof

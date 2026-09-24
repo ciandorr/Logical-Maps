@@ -68,12 +68,12 @@ Now let $S$ be a closed sentence of $\mathcal L(\Sigma)$. Replacing each relatio
 
 **Fregean Axiom, Extensionality.** $\{1\}$ and $G$ are both true at $1$, so $\{1\}\leftrightarrow G$ is true, but $[\{1\}=G]=\emptyset$ by Lemma 1(4). Extensionality includes this nullary case.
 
-**Possibility (pure)**, and with it Possibility+, Strong Possibility and Possibility (signature Σ). The sentence $\exists x\forall y\, .\,x=y$ is consistent with C, but $X$ has more than one element and identity is literal at every arrow, so it is false everywhere.
+**Possibility Maximalism (pure)**, and with it Possibility+, Strong Possibility and Possibility Maximalism (signature Σ). The sentence $\exists x\forall y\, .\,x=y$ is consistent with C, but $X$ has more than one element and identity is literal at every arrow, so it is false everywhere.
 
-**Witnessed Possibility**, and with it Separated Structure, Distinctness (signature Σ) and Logical Necessity. Let $c$ be a relational constant of type $\tau$ and $P(x)$ the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$. Since $c$ denotes $\top_\tau$, $[P](c)=\emptyset$, so $\Diamond P[c]$ is false.
+**Witnessed Possibility**, and with it Separated Structure, Distinctness Maximalism (signature Σ) and Logical Necessity. Let $c$ be a relational constant of type $\tau$ and $P(x)$ the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$. Since $c$ denotes $\top_\tau$, $[P](c)=\emptyset$, so $\Diamond P[c]$ is false.
 
 **Independence (signature Σ).** $c$ denotes what the closed pure term $\top_\tau$ denotes.
 
-**Distinctness (pure).** $(\exists xy\, .\,x\ne y)=\top$ is true at $1$, since both sides denote $G$, and C does not prove it, having models with one individual.
+**Distinctness Maximalism (pure).** $(\exists xy\, .\,x\ne y)=\top$ is true at $1$, since both sides denote $G$, and C does not prove it, having models with one individual.
 
 **Distinctness-preserving collapse.** Let $p=\{1\}$, true at $1$. For any true $q$, $q\ne\emptyset$, so $[\Diamond q]=G$ by Lemma 1(3) and $[\Box(\Diamond q\to p)]=[\Box p]=\emptyset$. So no true $q$ witnesses $\Box_{\ne}p$.

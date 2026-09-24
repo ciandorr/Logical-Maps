@@ -204,6 +204,15 @@ not necessarily unresolved in the literature. Tentative user suggestions may
 be recorded as human-proposed conjectures, separately from verified literature
 results, without attributing an unverified theorem to a cited paper.
 
+## Theorem trawl
+
+The [theorem-trawl worker](trawl/README.md) fetches a Git snapshot, visits open
+questions in centrality order, and gives discovery an editable copy of the YAML
+database in a separate quarantine repository. It saves edits and notes throughout
+the search, resumes after budget stops, and freezes file diffs for independent
+review. Discovery, review and admission have separate evidence records. API providers and models are configurable; live calls
+are disabled by default. Run `python3 scripts/check_trawl.py` for offline tests.
+
 ## Certificates
 
 Model names describe the construction or ordering rule, using a consistent
@@ -234,6 +243,11 @@ graph, hidden sources still supply proved consequences of the background;
 arrow visibility does not withdraw those automatic facts. Legacy author-type
 `provenance` is still accepted in old datasets; records without a direct source
 are displayed under Misc. until attributed. Lean fields remain optional.
+
+An optional `certificate.trawl` preserves structured discovery, evidence, reviewer,
+and admission history for accepted trawl contributions. It does not change the
+meaning of `source_id`, proof status, or Lean verification. See the
+[trawl provenance workflow](trawl/README.md#evidence-storage).
 
 Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with one show-or-hide control per category; these only control visibility. Topics without categories retain the flat list.
 

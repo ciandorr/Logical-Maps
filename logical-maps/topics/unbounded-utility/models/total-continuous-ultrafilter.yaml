@@ -12,6 +12,8 @@ satisfies:
 - reflection-anti-invariance
 violates:
 - scale-invariance
+- rational-scale-invariance
+- integer-affine-preservation
 - countable-sure-thing
 - archimedean-gambles
 - comonotonic-sum-consistency
@@ -43,6 +45,13 @@ changes:
     Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). A standard Cauchy C is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0), C_+ = 0 + Z is strictly better than C + Z: the clipped gap is 2∫_{t/2}^{t} P(C>x)dx, positive for every t and tending to (2 ln 2)/π.
   violates:
   - comonotonic-sum-consistency
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Rational Scale Invariance shown to fail with the same evidence as Scale Invariance: the source’s Theorem 10 (Decision theory unbound, pp. 693–695) compares μ with μ₂, the law of 2X, so the recorded scale failure is at the rational factor 2. Source-attributed, with the audit caveats of the scale flag; the factor was confirmed by the author in the Logical Maps session of 24 September 2026. The same doubling refutes Integer Affine Preservation: μ ≻ ν is not carried to 2μ ≽ 2ν.
+  violates:
+  - rational-scale-invariance
+  - integer-affine-preservation
 references:
 - paper: decision-theory-unbound
   role: proof

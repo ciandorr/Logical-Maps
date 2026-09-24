@@ -2396,11 +2396,42 @@ def bundle_readme_md(topic_id: str, data: dict, an: dict) -> str:
 
 def bundle_agents_md(topic_id: str, data: dict) -> str:
     cat = data["topic"].get("source_catalog", [])
-    return "\n".join([
-        "# Instructions for AI agents working in this bundle", "",
+    reading = (
         "Read `MAP.md` before answering anything about this subject. It is the whole database. "
         "`OPEN-QUESTIONS.md` lists what is unsettled. `README.md` has the semantics and the record "
-        "formats. This file is the short version of the rules.", "",
+        "formats. This file is the short version of the rules."
+    )
+    if topic_id in {"classicism", "unbounded-utility"}:
+        reading = (
+            f"Start with [the topic guide](topics/{topic_id}/AGENTS.md) for terminology, record IDs, "
+            "and construction-specific entry points. Run commands from this bundle's root. "
+            "Read `topic.yaml`, the relevant section of `background.md`, and the matching principle "
+            f"records under `topics/{topic_id}/`; then follow their IDs into `results/`, `models/`, "
+            "and `writeups/`. Search narrowly before reading whole files.\n\n"
+            "Translate the user's question into exact premises and a target, preserving the fixed "
+            "framework and distinguishing optional presets. Inspect definitions, proofs, model "
+            "constructions, status, and source caveats. For derived evidence, use "
+            "`scripts.pmap.load_topic` and `Engine` with proved-only records: `entails`, `excludes`, "
+            "and `separates` answer different questions. Keep optional assumptions in the queried "
+            "premise set, not the engine background, so a countermodel must actually satisfy them.\n\n"
+            "`MAP.md`, `derived.json`, and `OPEN-QUESTIONS.md` are searchable references; do not "
+            "read the entire database or compute all rankings for one question. Unknown in the "
+            "records does not mean false or open in the literature. Once the local evidence is "
+            "identified, work on the mathematics; distinguish a new argument from recorded evidence. "
+            "A mathematical question alone does not request record edits or a rebuild. "
+            "`README.md` supplies the full semantics and record formats.\n\n"
+            "Mathematical brainstorming and Lean formalization are separate tasks. Default to "
+            "ordinary mathematical arguments. Requests to prove or check a claim do not by "
+            "themselves request Lean. Unless Lean work is explicitly requested or already agreed, "
+            "do not explore Lean sources, edit `.lean` files, install toolchains, run `lake`, or "
+            "run `lean-check`. A sound mathematical proof need not be formalized to answer or "
+            "record it; preserve the actual Lean status. Routine export builds may mechanically "
+            "regenerate statements without starting a proof or audit task. Do not routinely "
+            "offer formalization as the next step in brainstorming."
+        )
+    return "\n".join([
+        "# Instructions for AI agents working in this bundle", "",
+        reading, "",
         "## Always", "",
         "- Run `python3 scripts/pmap.py validate` after every batch of edits. It must pass.",
         "- After changing the engine or viewer, run `python3 scripts/pmap.py selftest` and "

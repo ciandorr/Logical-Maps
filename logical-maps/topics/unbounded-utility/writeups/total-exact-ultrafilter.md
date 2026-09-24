@@ -75,3 +75,47 @@ So $\{t:v_{X+Z}(t)\ge v_{Y+Z}(t)\}$ is the whole domain and its reverse is
 empty: $X+Z\succ Y+Z$ while $X\sim Y$. Comonotonic Sum Invariance fails.
 The gap tends to $(2\ln2)/\pi$. `checks/comonotonic_witnesses.py` verifies
 the closed forms, the identity on an exact finite law, and the limit.
+
+## Rational factors
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The source's Theorem 10
+(pp. 693–695) refutes Scale Invariance by comparing $\mu$ with $\mu_2$, the
+law of $2X$: the truncated expectations satisfy $E_t\mu_2=E_{2t}\mu$, and the
+witness laws are chosen so that the two comparisons reverse under this
+doubling. The recorded scale failure is therefore at the rational factor $2$,
+and the model also fails Rational Scale Invariance, with the same source
+attribution and audit caveats as the Scale Invariance flag.
+The same doubling refutes Integer Affine Preservation: $\mu\succ\nu$ is not
+carried to $2\mu\succeq2\nu$, since the second set in the theorem's proof
+ranks $2\nu$ strictly above $2\mu$.
+
+## Failure of Shift Invariance
+
+**Addition: Zachary Goodsell (argument) and Claude (Fable 5.1)
+(verification), 24 September 2026.** A property of the recorded exact
+ordering; the source's Theorem 8 claims Shift Invariance only for the
+continuous quotients.
+
+Let $C$ be the standard Cauchy variable above, so $v_C(t)=0=v_0(t)$ for
+every $t$ and $C\sim0$. Compare $C+1$ with sure $1$. For $t\ge1$,
+$c_t(C+1)=1+\operatorname{clip}(C,[-t-1,t-1])$, and removing the upper part
+of the symmetric window gives
+
+$$v_{C+1}(t)=1+\mathbb E\bigl[\operatorname{clip}(C,[-t-1,t+1])\bigr]
+ -\int_{t-1}^{t+1}P(C>x)\,dx
+ =1-\int_{t-1}^{t+1}P(C>x)\,dx<1=v_1(t),$$
+
+the middle expectation vanishing by symmetry. For $0<t<1$, $v_1(t)=t$ while
+$v_{C+1}(t)\le t$ with equality only if $C+1\ge t$ almost surely, which is
+false. So $\{t:v_{C+1}(t)\ge v_1(t)\}$ is empty and its complement is the
+whole domain: $1\succ C+1$ for every choice of the ultrafilter, although
+$C\sim0$. Shift Invariance fails at $X=C$, $Y=0$, $b=1$.
+
+The deficit $\int_{t-1}^{t+1}P(C>x)\,dx=\frac1\pi\int_{t-1}^{t+1}\arctan(1/x)\,dx$
+tends to $0$, so in the continuous quotient, which allows an $\varepsilon$
+of slack at every level, $C+1\sim1$ and Shift Invariance survives, as the
+source's Theorem 8 states. The exact ordering has no slack: any balanced
+prospect with an unbounded upper tail, shifted by $b>0$, stays strictly
+behind sure $b$ at every truncation level. Since this model satisfies DTU,
+DTU does not imply Shift Invariance. `checks/exact_shift_witness.py`
+verifies the closed forms.

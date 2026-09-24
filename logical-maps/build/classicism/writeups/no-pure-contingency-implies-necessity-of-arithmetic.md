@@ -16,7 +16,7 @@ For an arithmetical sentence $A$, both $I\to A$ and $I\to\neg A$ are closed sent
 
 ## Notes
 
-Immediate, and consistent with the recorded incompatibility of No Pure Contingency with Possibility (pure), which the Necessity of Arithmetic is also incompatible with.
+Immediate, and consistent with the recorded incompatibility of No Pure Contingency with Possibility Maximalism (pure), which the Necessity of Arithmetic is also incompatible with.
 
 ## Sources
 

@@ -633,7 +633,7 @@
     <aside class="controls" id="graph-sidebar">
       <div class="controls-scroll" id="principle-controls">
       <div id="lat-controls">
-        <h2>Lattice <button class="lnk dim" id="lat-clear">hide all</button></h2>
+        <h2>Lattice <button class="lnk dim" id="lat-from-graph" title="Draw the lattice of whatever the graph is showing.">from the graph</button> <button class="lnk dim" id="lat-clear">hide all</button></h2>
         <p class="background-hint">A Hasse diagram showing all the conjunctions of the selected principles. Solid arrows denote implications shown to be non-reversible by models in the selected sources; dashed arrows denote implications which might be reversible (as far as the selected sources are concerned).</p>
         <p id="lat-count" class="lat-count" role="status" aria-live="polite"></p>
       </div>
@@ -2997,6 +2997,8 @@ function selectionActions(literals) {
   if (active.some(literalShown)) h += button('hide', 'Hide', `Take the selected ${plural ? 'principles' : 'principle'} off the diagram, as unchecking ${plural ? 'them' : 'it'} in the sidebar would.`);
   if (active.some(l => !literalShown(negate(l)))) h += button('negate', plural ? 'Add negations' : 'Add negation', `Show the ${plural ? 'negations' : 'negation'} too, as checking ✗ in the sidebar would.`);
   if (active.some(l => !topicBackground.includes(baseId(l)))) h += button('background', 'background', `Assume the selected ${plural ? 'principles' : 'principle'} throughout, as the sidebar's background control would.`);
+  // The lattice wants a handful, and a joint selection is already a handful.
+  if (state.tab === 'graph') h += button('lattice', 'lattice', `Draw the lattice of the conjunctions ${plural ? 'these principles generate' : 'this principle generates'}.`);
   const peers = equivalentPeers(active);
   if (peers.length) h += button('equivalents', 'hide equivalents', `Take ${peers.map(name).join(', ')} off the diagram: the background makes ${peers.length > 1 ? 'them' : 'it'} equivalent to what is selected, so ${peers.length > 1 ? 'they add' : 'it adds'} nothing beside it.`);
   return h;
@@ -3061,6 +3063,13 @@ function applySelectionAction(kind) {
     // What is now assumed is no longer something to shade relative to.
     state.modelId = null; state.selected = null; state.focus = null;
     saveBackground(); refreshPrincipleControls(); renderAll(true);
+    return;
+  }
+  if (kind === 'lattice') {
+    lattice.shown = active.slice();
+    lattice.selected = null; lattice.builtKey = null;
+    showTab('lattice');
+    renderLatticeFilters(); latticeFit();
     return;
   }
   if (kind === 'equivalents') {
@@ -3461,6 +3470,9 @@ window.addEventListener('resize', () => { if (state.tab === 'graph') fit(); });
 // turns out to be equivalent to a named principle is drawn once, under that
 // principle's name.
 const LATTICE_CAP = 220;
+// Where the diagram stops being worth reading, which is well below the cap:
+// ten principles already give four hundred arrows.
+const LATTICE_COMFORTABLE = 8;
 const lattice = {shown: [], nodes: [], edges: [], selected: null, capped: 0, view: {k: 1, tx: 0, ty: 0}, fitted: false};
 
 // Entailment answers are memoised per evidence version and background. The
@@ -3870,14 +3882,14 @@ function latticeDraw(svg) {
     </defs><g id="lat-vp">${lattice.capped ? '' : lattice.edges.map(edge).join('') + lattice.nodes.map(node).join('')}</g>`;
   latticeApplyView();
   document.getElementById('lat-count').textContent = lattice.capped
-    ? `Stopped at ${LATTICE_CAP} nodes, from ${lattice.shown.length} chosen; nothing drawn.`
+    ? `${lattice.shown.length} chosen: more than ${LATTICE_CAP} conjunctions, so nothing is drawn.`
     : lattice.shown.length
     ? `${lattice.nodes.length} nodes, ${lattice.edges.length} arrows, from ${lattice.shown.length} chosen`
     : 'Choose a principle to begin.';
   const warn = document.getElementById('lat-warning');
   warn.hidden = !lattice.capped;
   warn.closest('.graph-area').classList.toggle('warned', !!lattice.capped);
-  if (lattice.capped) warn.textContent = `Stopped at ${LATTICE_CAP} nodes. The meets of these principles outrun the diagram; remove one to see the rest.`;
+  if (lattice.capped) warn.textContent = `These ${lattice.shown.length} choices generate more than ${LATTICE_CAP} conjunctions, past what the diagram can show or anyone can read. Choose about ${LATTICE_COMFORTABLE}.`;
   refreshLatticeControls();
 }
 // How a node stands to the selection, memoised with the entailments: a
@@ -4040,6 +4052,14 @@ function renderLatticeFilters() {
       changeBackground(id, true);
       renderLatticeFilters();
     }
+  });
+  // Everything the graph is showing, in the form it shows it: a principle, its
+  // negation, or both. Assumptions are not generators, so they stay out.
+  document.getElementById('lat-from-graph').addEventListener('click', () => {
+    lattice.shown = ids.flatMap(id => inBackground(id) ? []
+      : [...(state.excluded.has(id) ? [] : [id]), ...(state.negativeShown.has(id) ? ['!' + id] : [])]);
+    lattice.selected = null; lattice.builtKey = null;
+    renderLatticeFilters(); renderLattice(); latticeFit();
   });
   document.getElementById('lat-clear').addEventListener('click', () => { lattice.shown = []; lattice.selected = null; renderLattice(); latticeFit(); });
   document.getElementById('lat-fit').addEventListener('click', latticeFit);

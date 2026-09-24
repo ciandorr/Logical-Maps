@@ -249,7 +249,14 @@ sky blue replaces green, orange replaces red, and independence combines both
 coloured halves. Open nodes keep their normal fill.
 
 Lattice: a separate Hasse diagram of the conjunctions a chosen handful of
-principles generate. It opens with False and True alone; the sidebar offers the same
+principles generate. It opens with False and True alone. Two routes carry a choice of principles in:
+**lattice**, on a selection's own controls in the graph's details pane, draws
+the lattice of what is selected and opens this view; **from the graph**, beside
+the Lattice heading, takes whatever the graph is showing, negations included and
+assumptions left out. The graph reads well at seventy principles and the lattice
+at about eight, which is why the two keep separate lists rather than one. Past
+the node cap nothing is drawn and the readout says how many would be workable.
+The sidebar offers the same
 choices per principle as the graph, ✓ for the principle, ✗ for its negation and
 a move to the background, and each adds its literal together with its meets
 against everything already shown. Each group has the graph's own

@@ -166,6 +166,21 @@ try{
   assert.equal(g.labels.filter(l=>l==='⊥').length,1,'A principle and its negation meet at the floor');
   assert.equal(g.labels.length,4,'And add nothing else');
 
+  // A choice the background already settles, together with its negation. The
+  // negation cannot hold, so it is the contradiction and belongs at the floor.
+  // Premises that cannot hold together entail everything, and reading them as
+  // entailing nothing instead put them at the ceiling, under ⊤'s own name, so
+  // two boxes claimed to be ⊤ at opposite ends of the diagram.
+  w.eval('resetBackground(); setAssumption("c","positive"); lattice.shown=["a","!a"]; lattice.builtKey=null; renderLattice();');
+  const settledPair=JSON.parse(w.eval('JSON.stringify(lattice.nodes.map(n=>({names:n.names,top:!!n.top,floor:!!n.inconsistent})))'));
+  assert.equal(settledPair.filter(n=>n.top).length,1,'Exactly one node is the ceiling');
+  assert.ok(settledPair.find(n=>n.top).names.includes('A'),'What the background settles sits there');
+  const floorNode=settledPair.find(n=>n.floor);
+  assert.ok(floorNode,'And the pair reaches a floor');
+  assert.ok(!floorNode.top,'Which is not also the ceiling');
+  assert.ok(floorNode.names.includes('¬A'),'Named by the choice that is the contradiction');
+  w.eval('resetBackground(); lattice.shown=[]; lattice.builtKey=null; renderLattice();');
+
   // The background is shared with the graph, and the dock follows the view.
   assert.equal(d.getElementById('background-dock').closest('.pane').id,'pane-lattice','The dock comes across with the sidebar');
   w.eval('lattice.shown=[];renderLattice();');

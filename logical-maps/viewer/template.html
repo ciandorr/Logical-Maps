@@ -3476,7 +3476,10 @@ function latticeMemo() {
 // nothing here looks at. The engine caches each closure it is asked for.
 function latticeHolds(premises, c) {
   const positive = premises.filter(p => !isNegative(p)), negative = premises.filter(isNegative).map(baseId);
-  if (graphInferenceE.conflict(positive, negative)) return false;
+  // Premises that cannot hold together entail everything. Reading them as
+  // entailing nothing would send a contradiction to the ceiling instead of
+  // the floor, and leave it there under the same name as ⊤.
+  if (graphInferenceE.conflict(positive, negative)) return true;
   if (isNegative(c)) return !!graphInferenceE.conflict([...positive, baseId(c)], negative);
   return graphInferenceE.cl(positive).facts.has(c);
 }
@@ -3493,7 +3496,10 @@ function latticeEntails(premises, conclusions) {
 // closure from the engine, read once per chosen literal.
 function latticeClosure(premises) {
   const positive = premises.filter(p => !isNegative(p)), negative = premises.filter(isNegative).map(baseId);
-  if (graphInferenceE.conflict(positive, negative)) return [];
+  // The same reading as latticeHolds, short-circuited: an inconsistent meet
+  // entails everything, so it closes to the whole of what is shown, which is
+  // the floor.
+  if (graphInferenceE.conflict(positive, negative)) return lattice.shown.slice();
   const facts = graphInferenceE.cl(positive).facts;
   return lattice.shown.filter(p => isNegative(p) ? !!graphInferenceE.conflict([...positive, baseId(p)], negative) : facts.has(p));
 }

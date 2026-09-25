@@ -50,6 +50,10 @@ corrected proof above on the same date. The immutable drafts and exact API
 edit provenance are identified in the model record's `certificate.trawl`.
 This is an informal mathematical review; no Lean verification is claimed.
 
+## Additional arguments from Cian's branch, 25 September 2026
+
+Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures but does not show. Any set $F$ of propositions is the extension at the identity of an element of the domain at type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}$: it is natural, independent of $h$ and so pinned down by the empty set, and each of its values is pinned down by the pinning set of $p$, since $i\cdot p$ depends only on the values of $i$ there. A least upper bound of $F$ under entailment is a least finitely pinned superset of $\bigcup F$, and it exists only if the least $S$-pinned superset of $\bigcup F$ stops shrinking as the finite set $S$ grows. Here an arrow $k_n$ is determined by its value at any $m\ge n$ and all $k_n$ with $n\ge N$ agree on $\{0,\ldots,N\}$, so the finitely pinned propositions are exactly the finite and cofinite sets of arrows. Let $F$ be the family of singletons $\{k_{2j}\}$: an upper bound is a cofinite set containing them, and removing an odd-indexed member of it gives a strictly smaller upper bound. So $F$ has no least upper bound, and, taking pointwise negations, the family of complements has no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.
+
 ## Paper references
 
 - **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Appendix D, Proposition D.5(8), pp. 74–75; construction pp. 78–79, Part 8; p. 79 (No Pure Contingency)

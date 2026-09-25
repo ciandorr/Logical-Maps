@@ -2,6 +2,7 @@ id: henkin-without-relational-choice
 name: 'Henkin model: base without a choice function'
 satisfies:
 - extensionality-r
+- axiom-of-infinity-e
 violates:
 - relational-choice-r
 - witnessed-possibility-r
@@ -35,7 +36,12 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
   $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
   what the closed pure term $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$
-  is a true identity that C(Σ) does not prove. Everything that implies these fails with them.'
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. The Axiom
+  of Infinity at type $e$ holds, and with it the Infinity Schema and Possible Infinity at that type: a
+  serial relation on a finite set has a functional subrelation in ZF, so the individual domain is infinite,
+  and in the full extensional construction the finite cardinalities are the standard numerals, none of
+  which holds of an infinite universal property. Observation of Claude Fable 5.1 (Anthropic), 25 September
+  2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -55,3 +61,8 @@ changes:
   - separated-structure-r
   - independence-signature-r
   - distinctness-signature-r
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the Axiom of Infinity (type e); see the notes.
+  satisfies:
+  - axiom-of-infinity-e

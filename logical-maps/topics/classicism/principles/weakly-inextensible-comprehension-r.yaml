@@ -1,0 +1,36 @@
+id: weakly-inextensible-comprehension-r
+name: Weakly Inextensible Comprehension
+category: comprehension
+statement: Every relation, including a proposition, is coextensive with a weakly inextensible one.
+formal: $\forall^{\mathrm{Ty}}\bar\sigma\, .\,\forall X\, .\,\exists Y\, .\,\operatorname{WeaklyInextensible}(Y)\land(\forall\bar
+  z\, .\,X[\bar z]\leftrightarrow Y[\bar z])$
+date: '2026-09-25'
+sources:
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Proposition
+  1, p. 2; p. 12.
+- Cian Dorr, suggestion of 25 September 2026.
+source_names:
+- BC does not imply RC
+- Dorr 25 Sep
+references:
+- paper: dorr-bc-not-rc
+  role: formulation
+  locator: Proposition 1, p. 2; p. 12
+  note: Source of weak inextensibility, the inextensibility conjunct of Rigid shorn of its leading box.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, p. 28; n. 38, p. 29
+  note: Source of Inextensible Comprehension, of which this is the un-necessitated weakening.
+notes: >-
+  Weak inextensibility drops the leading box from Inextensible; see Background for the definitions. A
+  relation $Y$ is weakly inextensible exactly when $Y\le Z$ for every $Z$ that necessarily holds of each
+  actual $Y$-instance, that is, when $Y$ lies below every upper bound of the haecceities
+  $\lambda\bar z\, .\,\bigwedge_i z_i=y_i$ of its instances: $Y$ may lose instances at other worlds, but
+  it cannot gain any beyond those its actual instances necessitate. Adding weak persistence, which says
+  that $Y$ is itself such an upper bound, turns this into $Y$ being the least upper bound of those
+  haecceities, which is very weak rigidity. The type-$t$ instances are trivial, since $\top$ and $\bot$
+  witness them; haecceities and their finite joins are rigid; and the instance at $X=\top$ is a
+  relativised Barcan Formula, $\top$ itself being weakly inextensible exactly when BF holds at the
+  argument types. The principle follows from Actuality and separately from Boolean Completeness, which
+  the recorded models show to be independent of one another, so it is strictly weaker than each. Whether
+  it implies the boxed principle, Inextensible Comprehension, is open.

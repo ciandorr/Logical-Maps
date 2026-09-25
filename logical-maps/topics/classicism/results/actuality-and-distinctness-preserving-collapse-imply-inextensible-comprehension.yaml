@@ -1,0 +1,47 @@
+id: actuality-and-distinctness-preserving-collapse-imply-inextensible-comprehension
+premises:
+- actuality
+- distinctness-preserving-collapse
+conclusion: inextensible-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 25 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 25 September 2026
+  checked_by: []
+  date: '2026-09-25'
+  lean: none
+sources:
+- Claude Fable 5.1 (Anthropic), original connecting proof at Cian Dorr's direction, 25 September 2026;
+  see the write-up.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, n. 38, p. 29; §2.6, p. 42; Appendix
+  E, p. 83.
+source_names:
+- Fable 5.1, 25 Sep
+- Classicism
+proof: >-
+  Let $a$ witness Actuality and write $L(a)$ for $a\land\forall q\, .\,q\to a\le q$. Applying
+  Distinctness-preserving collapse to the truth $L(a)$ gives a true $q^*$ with $\Box(\Diamond q^*\to
+  L(a))$; since $a\le q^*$, 4 and K give $\Box(\Diamond a\to\Diamond q^*)$, hence $\Box(\Diamond a\to
+  L(a))$. Now fix $X$ and put $Y:=\lambda\bar z\, .\,a\land X[\bar z]$, coextensive with $X$. Two
+  theorems of C: (i) $L(a)$ implies that $Y$ is weakly inextensible, by the recorded argument from
+  Actuality; (ii) $\Box\neg a$ implies that $Y$ is weakly inextensible, since then $Y\le\bot\le Z$. So
+  $(\Diamond a\to L(a))\to\operatorname{WeaklyInextensible}(Y)$ is a theorem; necessitating it and using
+  $\Box(\Diamond a\to L(a))$ gives $\Box\operatorname{WeaklyInextensible}(Y)$, which is
+  $\operatorname{Inextensible}(Y)$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, n. 38, p. 29; §2.6, p. 42; Appendix E, p. 83
+  note: The witness is the one note 38 uses for Actuality; the distinctness-preserving modality is that
+    of §2.6, and the collapse principle is from Appendix E.
+notes: >-
+  The collapse principle is used only to obtain that the Actuality witness is, necessarily, the least
+  truth wherever it is so much as possible. That is exactly what the recorded action models with
+  Actuality have: their witness is a set of arrows, typically a symmetry group or the identity alone, that no arrow
+  outside it composes back into. So Inextensible Comprehension holds in every recorded model with
+  Actuality and Distinctness-preserving collapse, including the symmetric models and the finite-support
+  models in which Rigid Comprehension, Boolean Completeness or Weak Rigid Comprehension fail. A
+  countermodel to Actuality alone implying Inextensible Comprehension would have to make the witness
+  possible at some world where it is false, which the collapse principle forbids and C5 renders harmless;
+  none is recorded, and the question is open.

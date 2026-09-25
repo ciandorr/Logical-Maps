@@ -159,11 +159,15 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms
   denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but
   the identity, so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything that implies these fails
-  with them. □Relational Choice holds: the truncation of a full action model at any arrow is again a full
-  action model, its domains at the reachable objects being unchanged, and Relational Choice holds in every
-  full model given choice in the metatheory (Classicism, p. 61). Distinctness-preserving collapse holds:
-  for a true $p$ take $q:=\{1\}$; under $k$, $\Diamond\{1\}$ would need $x\circ k=1$, but $x\circ k=k$
-  for both arrows, so it fails there, and under $1$, $p$ holds.
+  with them. The type-t Strong Leibniz Biconditionals fail. The atoms are $\{1\}$ and $\{k\}$; transported
+  along $k$, $\{k\}$ becomes $\{j : j\circ k=k\}=\{1,k\}$, which the proposition $\{1\}$ of the full domain
+  splits, so $\{k\}$ is not a strong world, while the possible proposition $\{k\}$ has no other candidate
+  below it. ($\{1\}$ is a strong world, its transport along $k$ being empty.) □Relational Choice holds:
+  the truncation of a full action model at any arrow is again a full action model, its domains at the
+  reachable objects being unchanged, and Relational Choice holds in every full model given choice in the
+  metatheory (Classicism, p. 61). Distinctness-preserving collapse holds: for a true $p$ take $q:=\{1\}$;
+  under $k$, $\Diamond\{1\}$ would need $x\circ k=1$, but $x\circ k=k$ for both arrows, so it fails there,
+  and under $1$, $p$ holds.
 
 
   Review of 25 September 2026. Strong Leibniz-t fails by the nonidentity-idempotent singleton witness
@@ -214,7 +218,7 @@ changes:
   summary: 'Added □Strong Leibniz Biconditionals (type t): every singleton of an arrow is a strong world
     in a propositionally full one-object model; see the notes. Superseded on 25 September 2026: the transported-image
     quantifier argument was false; the removed positive flag is preserved here as history, not a current
-    verdict.'
+    verdict. Withdrawn on 23 September 2026: the claim was mistaken; see the later entry.'
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
   summary: Boxed the Relational Choice claim; see the notes.
@@ -253,5 +257,12 @@ changes:
     Strong Leibniz-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing
     both the identity and the idempotent, which a target-domain proposition separates. Quantifiers inside
     the box range over the entire target domain. The boxed failure follows by T.'
+  violates:
+  - strong-leibniz-t
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Corrected the claim of 22 September 2026 that □Strong Leibniz Biconditionals (type t) hold:
+    the argument that every singleton is a strong world needs the monoid to be right-cancellative, and
+    here the transport of {k} along k is {1, k}. The type-t principle fails; see the notes.'
   violates:
   - strong-leibniz-t

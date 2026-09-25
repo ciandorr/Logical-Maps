@@ -15,6 +15,9 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- relational-choice-r
+- atomicity-t
+- pure-b-r
 status: proved
 certificate:
   source_id: dorr-bc-not-rc
@@ -73,13 +76,35 @@ notes: 'The point of the model is that boxed Boolean Completeness and boxed Actu
   necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$
   but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$
   agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term
-  $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ)
-  does not prove. Everything that implies these fails with them. Distinctness-preserving collapse holds:
-  let $a$ be the set of arrows from the first object to itself, all permutations, a symmetric proposition
+  $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity
+  that C(Σ) does not prove. Everything that implies these fails with them. Distinctness-preserving collapse
+  holds: let $a$ be the set of arrows from the first object to itself, all permutations, a symmetric proposition
   true at the identity and, as the record’s Actuality witness, entailed by no other truth. For a true
   $p$, $a\le p$. Take $q:=a$: under a permutation $i$, $p$ holds since $i\in a\subseteq p$; under a non-permutation
   $i$, $\Diamond a$ would need $k\circ i$ to be a permutation, and no arrow from the second object returns
-  to the first. So every truth is $\Box_{\ne}$-necessary.'
+  to the first. So every truth is $\Box_{\ne}$-necessary. Relational Choice fails, at the types $(e\to
+  t)$ and $e$. Let $U:=\lambda Xy\, .\,Xy\lor\neg\exists z\, .\,Xz$, a closed term, hence in the domain,
+  and serial. A functional subrelation $S$ of $U$ would lie in the domain at the evaluation object, so
+  it is symmetric and pinned down by a finite set $N$. Two facts about such an $S$ (Dorr, draft, Lemma
+  21): every $g\in G$ fixing $N$ pointwise satisfies $g^{[\sigma]}S=S$, and symmetry gives $\langle gA,gy,g\rangle\in
+  S$ whenever $\langle A,y,1\rangle\in S$; together, $\langle gA,gy,1\rangle\in S$. Now let $A$ be the
+  property of not belonging to $N$, evaluated at the first object, where the domain is symmetric and finitely
+  pinned. It is in the domain, being pinned down by that finite set and symmetric, and its extension is
+  nonempty, so $S$ relates $A$ at the identity to some $y$ in its extension. The transposition of $y$
+  with another individual of the first object outside $N$ lies in $G_{W_0}$, fixes $A$ and moves $y$ to
+  some $gy\ne y$, so $S$ relates $A$ to $gy$ as well, and $S$ is not functional at the identity arrow.
+  Argument of 23 September 2026, after Cian Dorr’s observation that a choice over the individuals cannot
+  be finitely pinned down; the well-ordering of the individuals that he had in mind is refuted by the
+  same two facts, but the direct route needs no derivation of a well-ordering from Relational Choice in
+  C. Atomicity fails at $W_0$ already at type $t$, although Actuality holds. The symmetry group of $W_0$
+  is an atom, but no atom lies inside the nonempty proposition of the arrows into $W_1$, which is pinned
+  down by the empty set since targets are: a nonempty symmetric $p$ of such arrows pinned down by $N$
+  and containing $h$ contains every arrow into $W_1$ whose restriction to $N$ has the same fibres as $h$’s,
+  the symmetry group of $W_1$ being all permutations, and those agreeing in that sense on $N\cup\{m\}$
+  form a smaller nonempty symmetric proposition. B for pure sentences fails, and B for sentences of $\Sigma$
+  with it: the type-$e$ instance of BF is a closed pure sentence true at the base world and false at the
+  second object, and no arrow leads back from the second object, so at that world the sentence is not
+  even possible. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026.'
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
@@ -106,3 +131,23 @@ changes:
   summary: Recorded the Distinctness-preserving collapse; see the notes.
   satisfies:
   - distinctness-preserving-collapse
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Recorded the failure of Relational Choice, at types (e→t) and e: a functional subrelation
+    of the serial relation pairing each property with its members would be symmetric and finitely pinned,
+    and a symmetry fixing its pinning set would carry its choice for the property of lying outside that
+    set to a second choice. Cian Dorr’s observation that a choice cannot be finitely pinned; argument
+    in the notes.'
+  violates:
+  - relational-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Recorded the failure of Atomicity (type t), and with it of the Strong Leibniz Biconditionals;
+    see the notes.
+  violates:
+  - atomicity-t
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of B for pure sentences; see the notes.
+  violates:
+  - pure-b-r

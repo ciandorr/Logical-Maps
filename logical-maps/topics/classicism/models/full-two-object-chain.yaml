@@ -9,6 +9,10 @@ satisfies:
 - necessary-relational-choice-r
 - distinctness-preserving-collapse
 - transversal-choice-r
+- strong-leibniz-r
+- necessary-strong-leibniz-r
+- barcan-t
+- necessary-barcan-t
 violates:
 - fregean-axiom
 - no-pure-contingency-r
@@ -18,6 +22,8 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- possible-infinity-t
+- pure-b-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -54,7 +60,20 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   identity arrow). For any true $p$, take $q:=a$ in the definition of $\Box_{\ne}p$: under a arrow $k$
   to $W_1$, $\Diamond a$ would need an arrow back to $W_0$, and none exists, since no arrow leads back
   to the actual world; under the identity, $p$ holds. So every truth is $\Box_{\ne}$-necessary, although
-  ND fails.'
+  ND fails. The Strong Leibniz Biconditionals hold at every relational type, necessarily. An atom of type
+  $\bar\sigma t$ at $W_0$ is a single pair $\{\langle\bar a,h\rangle\}$, and its transport along $k$ is
+  $\{\langle\bar a,j\rangle : j\circ k=h\}$ with $j$ ranging over the arrows out of $W_1$, of which there
+  is one; so the transport is empty or a single pair, and decides every relation of $W_1$’s full domain.
+  Every possible relation contains a pair, so every possible relation has a strong world below it, at
+  $W_0$ and trivially at the one-world $W_1$. BF holds at type $t$, and necessarily. The arrow $k$ sends
+  a proposition $p\subseteq\{1_{W_0},k\}$ to $\{1_{W_1}\}$ if $k\in p$ and to $\emptyset$ otherwise, so
+  it acts surjectively on the two propositions of $W_1$, which gives the type-$t$ instance at $W_0$; $W_1$
+  is a one-world model, where BF is trivial. Whether BF holds at type $e$ depends on the individual domains,
+  which the record does not fix, so the schema is left open. Possible Infinity (type $t$) fails: $W_0$
+  has four propositions and $W_1$ two, the models being full, so the Axiom of Infinity at type $t$ is
+  false at both worlds. B for pure sentences fails, and B for sentences of $\Sigma$ with it: the pure
+  sentence that there are three pairwise distinct propositions is true at $W_0$ and false at $W_1$, from
+  which no arrow returns. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -109,8 +128,26 @@ changes:
 - date: '2026-09-25'
   by: Claude Fable 5.1 (Anthropic)
   summary: 'Added Transversal Choice, by the argument recorded for Relational Choice: a full model contains
-    every intension, in particular one whose extension at the evaluation point is a transversal, chosen in the
-    metatheory, of the extension there of an equivalence relation; the equivalence and transversal conditions
-    are unboxed. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun.'
+    every intension, in particular one whose extension at the evaluation point is a transversal, chosen
+    in the metatheory, of the extension there of an equivalence relation; the equivalence and transversal
+    conditions are unboxed. Recorded on a question of Zachary Goodsell, after an observation of Christopher
+    Sun.'
   satisfies:
   - transversal-choice-r
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Extended the Strong Leibniz Biconditionals from type t to every relational type, with the
+    necessitation: transports of atoms along the unique arrow out of W1 are atoms or empty.'
+  satisfies:
+  - strong-leibniz-r
+  - necessary-strong-leibniz-r
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added BF (type t) and □BF (type t), and the failure of Possible Infinity (type t) and of B
+    for pure sentences; see the notes.
+  satisfies:
+  - barcan-t
+  - necessary-barcan-t
+  violates:
+  - possible-infinity-t
+  - pure-b-r

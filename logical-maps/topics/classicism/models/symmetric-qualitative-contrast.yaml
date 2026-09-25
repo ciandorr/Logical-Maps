@@ -1,5 +1,5 @@
-id: finite-support-qualitative-contrast
-name: 'Finite-support action model: qualitative contrast'
+id: symmetric-qualitative-contrast
+name: 'Symmetric ideally-full model: qualitative contrast (Appendix D precursor)'
 satisfies:
 - necessary-distinctness-necessary-r
 - actuality
@@ -36,15 +36,23 @@ references:
 - paper: bacon-dorr-classicism
   role: proof
   locator: Appendix D, p. 79, final construction (two copies of N)
-description: 'Appendix D, p. 79, the final construction: two objects $W_0$ and $W_1$, both copies of $\mathbb
-  N$, with the permutations of $\mathbb N$ as the arrows between any pair of objects, finite subsets as
-  $W_i^\ddagger$, and one constraint beyond ideal fullness: a set of arrows belongs to $W_i^t$ only if,
-  whenever it contains an arrow $h$ into $W_0$, it contains $g\circ h$ for every permutation $g$ of $W_0$.
-  Intuitively $W_0$ is a state in which all individuals are qualitatively indiscernible and $W_1$ one
-  in which each plays a unique role. The smallest proposition of $W_0^t$ containing the identity is the
-  set of all arrows $W_0\to W_0$, which witnesses Actuality at $W_0$; Actuality fails at $W_1$ as in part
-  1, so $\Box$Actuality and hence Atomicity fail at $W_0$ although C5 holds. Evaluation point: $W_0$,
-  at its identity arrow.'
+- paper: dorr-bc-not-rc
+  role: related
+  locator: Definitions 15–18, p. 8; Definition 39, p. 19
+  note: The draft’s symmetric ideally-full models generalise this construction; its two-object model of
+    Definition 39 is the closest relative.
+description: 'Appendix D, p. 79, the final construction, the paper’s precursor of the symmetric ideally-full
+  models of Dorr’s draft (Definitions 15–18, p. 8): the base has two objects $W_0$ and $W_1$, both copies
+  of $\mathbb N$, all permutations of $\mathbb N$ as the arrows between any pair of objects, the ideal
+  of finite sets at each, and the symmetry groups $G_{W_0}$ = all permutations and $G_{W_1}$ trivial.
+  The paper states the symmetry condition on propositions only, as the constraint that a set of arrows
+  in $W_i^t$ containing an arrow $h$ into $W_0$ contains $g\circ h$ for every permutation $g$ of $W_0$,
+  and takes the finitely pinned entities at higher types; since every arrow is invertible, that is the
+  draft’s symmetry condition at every type, applied to the entities’ values. Intuitively $W_0$ is a state
+  in which all individuals are qualitatively indiscernible and $W_1$ one in which each plays a unique
+  role. The smallest proposition of $W_0^t$ containing the identity is the set of all arrows $W_0\to W_0$,
+  which witnesses Actuality at $W_0$; Actuality fails at $W_1$ as in part 1, so $\Box$Actuality and hence
+  Atomicity fail at $W_0$ although C5 holds. Evaluation point: $W_0$, at its identity arrow.'
 notes: 'The cited construction is a model of the map’s relational-type framework. The description identifies
   its evaluation point; construction and verification are given at the PDF locations in References. Interpretation
   of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual
@@ -57,17 +65,25 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   collapse fails at $W_0$: every arrow has an inverse, so $\Diamond q$ holds at every arrow for every
   true $q$, and $\Box(\Diamond q\to p)$ would force every true $p$ to contain every arrow; but the true
   proposition consisting of all arrows $W_0\to W_0$ together with the arrows into $W_1$ fixing $0$ is
-  pinned down by $\{0\}$, meets the closure constraint, and omits arrows. Relational Choice was left unknown
-  on 23 September: the construction constrains $W_i^t$ beyond ideal fullness, so the paper’s remark that
-  ideally full models are extensionally full does not apply to it as stated. The 24 September proof in
-  the accompanying write-up resolves this negatively. A functional subrelation choosing a member of
-  every unordered pair would have finite support. A transposition of two individuals outside that support
-  fixes the subrelation and their pair-property; the extra constraint on propositions makes truth at
-  $W_0$ invariant under this transposition, so both members would be selected. Functional Choice also
-  fails, including with relational outputs: replace a selected individual by its haecceity. Plenitude
-  still holds by C5 plus Actuality and Propositions 2.5 and 2.14, so this model separates it from Functional
-  Choice even under C5, Rigid Comprehension and Boolean Completeness. This does not settle whether
-  C5 plus Functional Choice implies Atomicity: the model fails the proposed premise.'
+  pinned down by $\{0\}$, meets the closure constraint, and omits arrows. Relational Choice fails, at
+  the types $(e\to t)$ and $e$. Let $U:=\lambda Xy\, .\,Xy\lor\neg\exists z\, .\,Xz$, a closed term, hence
+  in the domain, and serial. A functional subrelation $S$ of $U$ would lie in the domain at the evaluation
+  object, so it is symmetric and pinned down by a finite set $N$. Two facts about such an $S$ (Dorr, draft,
+  Lemma 21): every $g\in G$ fixing $N$ pointwise satisfies $g^{[\sigma]}S=S$, and symmetry gives $\langle
+  gA,gy,g\rangle\in S$ whenever $\langle A,y,1\rangle\in S$; together, $\langle gA,gy,1\rangle\in S$.
+  Now let $A$ be the property of not belonging to $N$, at $W_0$. It is in the domain, being pinned down
+  by that finite set and symmetric, and its extension is nonempty, so $S$ relates $A$ at the identity
+  to some $y$ in its extension. The transposition of $y$ with another individual outside $N$ is a permutation
+  of $W_0$, so lies in $G_{W_0}$, fixes $A$ and moves $y$ to some $gy\ne y$, so $S$ relates $A$ to $gy$
+  as well, and $S$ is not functional at the identity arrow. Argument of 23 September 2026, after Cian
+  Dorr’s observation that a choice over the individuals cannot be finitely pinned down; the well-ordering
+  of the individuals that he had in mind is refuted by the same two facts, but the direct route needs
+  no derivation of a well-ordering from Relational Choice in C. Functional Choice also fails, including
+  with relational outputs: replace a selected individual by its haecceity (the accompanying write-up gives
+  an independent transposition proof of both failures). Plenitude still holds by C5 plus Actuality and
+  Propositions 2.5 and 2.14, so this model separates it from Functional Choice even under C5, Rigid Comprehension
+  and Boolean Completeness. This does not settle whether C5 plus Functional Choice implies Atomicity:
+  the model fails the proposed premise.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -109,6 +125,19 @@ changes:
   by: Claude Fable 5.1 (Anthropic)
   summary: 'Noted why Relational Choice is left unknown: the construction goes beyond ideal fullness,
     so the extensional-fullness argument used for the other Appendix D models does not apply as stated.'
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Relabelled as a symmetric ideally-full model, the precursor of the draft’s construction, at
+    Cian Dorr’s direction; the id changed from finite-support-qualitative-contrast, which nothing referenced.
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Recorded the failure of Relational Choice, at types (e→t) and e: a functional subrelation
+    of the serial relation pairing each property with its members would be symmetric and finitely pinned,
+    and a symmetry fixing its pinning set would carry its choice for the property of lying outside that
+    set to a second choice. Cian Dorr’s observation that a choice cannot be finitely pinned; argument
+    in the notes.'
+  violates:
+  - relational-choice-r
 - date: '2026-09-24'
   by: OpenAI Codex (GPT-6)
   summary: 'Resolved the choice questions by the finite-support transposition argument in the accompanying

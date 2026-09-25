@@ -3,30 +3,52 @@ premises:
 - necessary-distinctness-necessary-r
 - atomicity-r
 conclusion: no-pure-contingency-r
-status: conjectured
+status: proved
 certificate:
   source_id: goodsell-yli-vakkuri-unpublished
-  produced_by: Zachary Goodsell and Juhani Yli-Vakkuri
+  produced_by: Zachary Goodsell and Juhani Yli-Vakkuri (theorem); proof by Cian Dorr, 23 September 2026,
+    with permission from Zachary Goodsell, written out by Claude Fable 5.1 (Anthropic)
   recorded_by: OpenAI Codex (GPT-6), 17 September 2026
   checked_by: []
   date: '2026-09-17'
   lean: none
 sources:
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, p. 27.
+- Cian Dorr, proof sketch of 23 September 2026, with permission from Zachary Goodsell; written out in
+  the write-up.
 source_names:
 - Classicism
-proof: ''
+- Dorr 23 Sep
+proof: 'Fix two distinct atoms $w,w^{\prime}$ of type $t$ and let $F:=\lambda p\, .\,(\neg(w\lor w^{\prime})\land
+  p)\lor(w\land(w^{\prime}\le p))\lor(w^{\prime}\land(w\le p))$, which exchanges the two atoms: $w\le
+  Fp$ iff $w^{\prime}\le p$. Under $\Box$ND identity propositions are rigid, so $F$ is an involution commuting
+  with the connectives, with $\forall$ (by BF) and with identity, as identities, not just materially:
+  the hypothesis that $w,w^{\prime}$ are distinct atoms is rigid, so material equivalences proved under
+  it lift to identities by the Modalized Fregean Axiom and pass under $\lambda$ by Modalized Functionality.
+  Extend $F$ by conjugation to every type, $F^*_{\sigma\tau}X:=\lambda y\, .\,F^*_\tau(X(F^*_\sigma y))$;
+  $F^*$ is an involution fixing every logical constant, so by induction on terms $F^*A=A[F^*\bar x/\bar
+  x]$ for pure $A$, and $FP=P$ for closed pure $P$. Hence $w\le P$ iff $w^{\prime}\le P$. If $P$ is true
+  and not $\top$, Atomicity at type $t$ gives atoms $w\le P$ and $w^{\prime}\le\neg P$, necessarily distinct,
+  and the agreement puts $w^{\prime}$ below $\bot$. Full proof in the write-up.'
 references:
 - paper: bacon-dorr-classicism
-  role: proof
-  locator: §2.2, p. 27
+  role: background
+  locator: §2.2, p. 27; Proposition 2.3, p. 22; Proposition 2.4, p. 23
+  note: The report of the theorem, and the derivation of BF from □ND used for the quantifier step.
 - paper: goodsell-yli-vakkuri-unpublished
   role: origin
   locator: Logical Foundations of Philosophy, as cited in Classicism p. 27
-notes: 'Reported by the source as a theorem; conjectured is the map’s pending-verification status, not
-  the source authors’ classification.
-
-
-  Source report / verification needed: The source attributes this theorem to Goodsell and Yli-Vakkuri
-  (unpublished) but does not reproduce a proof. Obtain and check that proof for the source schema before
-  promoting this record.'
+notes: Reported by the source as a theorem of Goodsell and Yli-Vakkuri, without a proof; recorded as conjectured
+  on 17 September 2026 pending verification, and promoted on 23 September 2026 with an independent proof,
+  sketched by Cian Dorr with permission from Zachary Goodsell. Only the type-t instance of Atomicity is
+  used; the record c5-and-atomicity-t-imply-no-pure-contingency states that sharper form and this record
+  is derivable from it. □ND is used through ND (rigidity of identity propositions at each type) and BF
+  (commutation of the atom-exchanging automorphism with the quantifiers, and rigidity of the hypothesis
+  that the two atoms are distinct).
+was_conjectured: true
+changes:
+- date: '2026-09-23'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Promoted from conjectured to proved with a hand-written write-up of Cian Dorr’s proof (with
+    permission from Zachary Goodsell): two distinct atoms are exchanged by a Boolean automorphism, extended
+    by conjugation to all types, which fixes every closed pure term.'

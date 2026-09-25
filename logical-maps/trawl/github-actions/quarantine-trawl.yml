@@ -1,0 +1,110 @@
+# Install this file in the QUARANTINE repo as .github/workflows/trawl.yml.
+name: Theorem trawl
+
+on:
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "Discovery minutes before graceful stop (1–300)"
+        required: true
+        default: 300
+        type: number
+      runner_ref:
+        description: "Published Logical-Maps runner branch, tag, or commit"
+        required: true
+        default: main
+        type: string
+
+permissions:
+  contents: write
+
+# One cloud invocation owns this quarantine at a time, across every branch.
+concurrency:
+  group: theorem-trawl-quarantine
+  cancel-in-progress: false
+
+jobs:
+  trawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      TRAWL_OUTPUT_BRANCH: ${{ github.ref_name }}
+    steps:
+      - name: Check out quarantine
+        id: checkout
+        timeout-minutes: 5
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 1
+
+      - name: Set up Python
+        timeout-minutes: 5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.11'
+
+      - name: Fetch trusted runner outside quarantine
+        id: runner
+        timeout-minutes: 10
+        env:
+          TRAWL_RUNNER_REF: ${{ inputs.runner_ref }}
+        shell: bash
+        run: |
+          test -f quarantine.json
+          git check-ref-format --branch "$TRAWL_OUTPUT_BRANCH" >/dev/null
+          TRAWL_RUNNER_DIR="$RUNNER_TEMP/logical-maps-runner"
+          echo "TRAWL_RUNNER_DIR=$TRAWL_RUNNER_DIR" >> "$GITHUB_ENV"
+          git init "$TRAWL_RUNNER_DIR"
+          git -C "$TRAWL_RUNNER_DIR" sparse-checkout set --no-cone \
+            '/logical-maps/trawl/' '/logical-maps/scripts/' \
+            '/logical-maps/schema/' '/logical-maps/requirements.txt'
+          git -C "$TRAWL_RUNNER_DIR" fetch --depth=1 -- \
+            https://github.com/zwlgzwlg/Logical-Maps.git "$TRAWL_RUNNER_REF"
+          git -C "$TRAWL_RUNNER_DIR" checkout --detach FETCH_HEAD
+          test -f "$TRAWL_RUNNER_DIR/logical-maps/trawl/github-actions/run_bounded.py"
+          python -m pip install -r "$TRAWL_RUNNER_DIR/logical-maps/requirements.txt"
+
+      - name: Run discovery and drain outstanding replies at the deadline
+        id: discovery
+        timeout-minutes: 317
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          TRAWL_MINUTES: ${{ inputs.minutes }}
+        shell: bash
+        run: |
+          python "$TRAWL_RUNNER_DIR/logical-maps/trawl/github-actions/run_bounded.py" \
+            --quarantine "$GITHUB_WORKSPACE" \
+            --runner "$TRAWL_RUNNER_DIR/logical-maps" \
+            --config "$GITHUB_WORKSPACE/trawl/deepseek.yaml" \
+            --minutes "$TRAWL_MINUTES"
+
+      - name: Prepare recovery archive even if discovery failed
+        id: backup
+        if: always() && steps.runner.outcome == 'success'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          python "$TRAWL_RUNNER_DIR/logical-maps/trawl/github-actions/backup.py" \
+            --quarantine "$GITHUB_WORKSPACE" \
+            --archive "$RUNNER_TEMP/trawl-backup.tar.gz"
+
+      - name: Upload recovery archive
+        if: always() && steps.backup.outcome == 'success'
+        timeout-minutes: 10
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: theorem-trawl-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/trawl-backup.tar.gz
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+
+      - name: Commit and push saved quarantine work even if discovery failed
+        if: always() && steps.runner.outcome == 'success'
+        timeout-minutes: 5
+        shell: bash
+        run: |
+          python "$TRAWL_RUNNER_DIR/logical-maps/trawl/github-actions/backup.py" \
+            --quarantine "$GITHUB_WORKSPACE" \
+            --push-branch "$TRAWL_OUTPUT_BRANCH"

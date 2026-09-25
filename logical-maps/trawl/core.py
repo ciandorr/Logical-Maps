@@ -151,6 +151,9 @@ def config(path):
     for name in ("discovery", "review"):
         providers.validate_profile(data[name])
     limits = data["limits"]
+    concurrency = limits.get("max_concurrent_agents", 32)
+    if type(concurrency) is not int or not 1 <= concurrency <= 256:
+        raise ValueError("limits.max_concurrent_agents must be an integer from 1 to 256")
     # Read old configuration without rewriting any historical artifact.
     if "attempts_per_question" in limits:
         old = limits.pop("attempts_per_question")
@@ -825,8 +828,12 @@ def main(argv=None):
                 queue = plan(snapshot, settings)
                 result = {"source": source, "questions": len(queue), "top": queue[:args.top]}
             elif args.command in ("run", "prepare-workspace"):
-                result = run(quarantine, settings, snapshot, source, workspace=args.workspace,
-                             prepare_only=args.command == "prepare-workspace")
+                try:
+                    result = run(quarantine, settings, snapshot, source, workspace=args.workspace,
+                                 prepare_only=args.command == "prepare-workspace")
+                except KeyboardInterrupt:
+                    print("Stopped. Active replies and workspace checkpoints were saved; run again to resume.", file=sys.stderr)
+                    raise SystemExit(130) from None
             else:
                 candidate = load_candidate(quarantine, args.candidate)
                 if args.command == "review-packet":

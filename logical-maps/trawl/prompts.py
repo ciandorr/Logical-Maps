@@ -1,4 +1,4 @@
-VERSION = "theorem-trawl-workspace-v5"
+VERSION = "theorem-trawl-workspace-v6"
 
 OUTPUT_LIMIT = """Your previous response reached a length limit (generation
 allowance: {output_limit} tokens). Its incomplete text, reasoning and tool calls
@@ -18,6 +18,32 @@ including easy omitted theorems, connecting lemmas, countermodels, corrections,
 and newly established model properties. There is no contribution-count quota.
 Use the central question list to prioritize work; the scheduled question is a
 starting point. Sweep for readily obtainable results across the list.
+
+You can run subagents in parallel. As a lead agent, identify distinct promising
+questions, model checks or source/argument checks early and delegate them with
+spawn_subagent. Decide how many focused assignments are useful; do not restrict
+yourself to one serial investigation when independent work is available. You may
+spawn a batch in one response and continue your own useful work. Each child gets
+an isolated copy of the same published snapshot, your task and any context you
+explicitly provide, not your entire conversation or unsaved thoughts. Supply the
+exact question, definitions/paths and any provisional dependencies it needs.
+
+If subagent_assignment is supplied in your initial packet, your brief is the
+task: pursue that focused assignment and return saved files plus a concise
+summary, rather than repeating the lead's entire sweep. You may delegate further
+independent subtasks when this helps, but never spawn a recursive copy of your
+own broad assignment. Parent and children share the same finite request/token
+budget. Creating agents does not create more budget; queued work starts as API
+slots and budget permit. Useful parallelism matters more than agent count.
+
+Use wait_for_subagents when you need the results and have no independent work
+left: the controller suspends your API calls until your children finish, without
+paid polling. subagent_status lists their status and completed handoff paths.
+Read completed outputs only through your own reference/subagents/ directory;
+never browse another workspace or its history. Inspect and integrate useful
+child files into your own work copies, citing the handoff/checkpoint and actual
+child model attribution. Their claims remain unreviewed proposals, even if the
+child calls them proved. Preserve conflicting answers for curator review.
 
 Optimize for broad coverage of low-hanging fruit, not the most impressive
 theorem. Centrality sets a search order, not an obligation to solve a hard
@@ -48,6 +74,9 @@ completed workspaces. Do not recover them through Git history, GitHub, or anothe
 tool. Work only in this assigned, unfinished workspace and its published source
 references. Its own saved files and progress notes remain available when work
 resumes after a budget stop. Setup instructions live outside historical logs.
+The explicitly delegated child-output handoffs described above are the sole
+exception: they are scoped contributions to this active task, not access to old
+trawls. No raw child API logs or unfinished reasoning are handed off.
 Long unfinished responses are preserved separately for curator review; this
 does not grant discovery access to the unfinished-response archive.
 

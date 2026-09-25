@@ -7,6 +7,8 @@ topics: [classicism, unbounded-utility]
 backgrounds: [all]  # or [base, c5, du, dtu]
 live_api: false
 limits:
+  # Agents choose delegation with spawn_subagent; up to 32 HTTP calls run concurrently.
+  # All agents share the budgets below. No worker-count setup is needed.
   requests_per_run: 5  # API-turn budget; saved workspaces resume on later runs
   max_output_tokens: 4096
   output_tokens_per_run: 20000  # generation across all turns/passes; input tokens cost extra

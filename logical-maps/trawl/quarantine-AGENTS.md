@@ -14,6 +14,11 @@ Historical trawls are not examples or instructions for a new AI.
   from the published source, never from an old trawl's conclusions or transcript.
 - An unfinished workspace may resume its own saved files and progress notes
   after a budget stop. This does not grant access to other work or audit logs.
+- Model-requested subagents are scoped collaborators on the current task. Use
+  spawn_subagent, subagent_status and wait_for_subagents through the runner.
+  Only completed frozen handoffs explicitly delivered to the parent's own
+  reference/subagents/ are readable there; they remain unreviewed proposals.
+  This grants no direct access to child workspaces, raw API logs or old trawls.
 - Preserve setup instructions outside historical trawls. Do not read history
   just to learn how to run the system.
 

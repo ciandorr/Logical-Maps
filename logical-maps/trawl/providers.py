@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from http.client import HTTPException, IncompleteRead
 import json
 import os
 from urllib.error import HTTPError, URLError
@@ -17,11 +18,20 @@ class ContextLengthError(ProviderError):
     """An explicit pre-generation context rejection, safe to compact around."""
 
 
+class TransportError(ProviderError):
+    """A failed connection with unknown usage; the caller owns any retry budget."""
+
+    def __init__(self, reason, *, partial=b""):
+        super().__init__(f"API transport failed ({reason}); response not applied")
+        self.reason = reason
+        self.partial = partial
+
+
 def context_rejection(error):
     """Classify a bounded error body without exposing its potentially secret text.
 
     Only HTTP 400 context-size errors qualify. Authentication, balance, rate,
-    transport and ambiguous server errors must still pause without a retry.
+    and ambiguous server errors do not qualify for context compaction.
     """
     if error.code != 400:
         return False
@@ -38,7 +48,7 @@ def context_rejection(error):
         message = message.lower()
         return ("maximum context length" in message or "prompt is too long" in message
                 or "input token count exceeds" in message and "maximum" in message)
-    except (ValueError, OSError):
+    except (ValueError, OSError, HTTPException):
         return False
 
 
@@ -131,6 +141,11 @@ def complete(profile, body, *, enabled=False, timeout=120):
     try:
         with build_opener(NoRedirect()).open(request, timeout=timeout) as response:
             raw = response.read(8_000_001)
+            # read(amt) can silently return a short Content-Length body. Do not
+            # accept even valid-looking JSON from an incomplete HTTP response.
+            remaining = getattr(response, "length", None)
+            if len(raw) <= 8_000_000 and type(remaining) is int and remaining > 0:
+                raise IncompleteRead(raw, remaining)
         if len(raw) > 8_000_000:
             raise ProviderError("API response exceeds 8 MB")
         return json.loads(raw)
@@ -139,8 +154,13 @@ def complete(profile, body, *, enabled=False, timeout=120):
         if context_rejection(error):
             raise ContextLengthError("API rejected the request because its context is too long") from None
         raise ProviderError(f"API HTTP {error.code}; request was not retried") from None
-    except (URLError, TimeoutError, OSError):
-        raise ProviderError("API transport failed; request was not retried") from None
+    except IncompleteRead as error:
+        if len(error.partial) > 8_000_000:
+            raise ProviderError("API response exceeds 8 MB") from None
+        raise TransportError("IncompleteRead", partial=error.partial) from None
+    except (URLError, TimeoutError, OSError, HTTPException) as error:
+        # Never expose raw exception text, headers, credentials or error bodies.
+        raise TransportError(type(error).__name__) from None
     except json.JSONDecodeError:
         raise ProviderError("API returned invalid JSON") from None
 

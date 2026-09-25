@@ -1,0 +1,32 @@
+version: 1
+source:
+  repository: https://github.com/zwlgzwlg/Logical-Maps.git
+  ref: main
+topics: [classicism]
+backgrounds: [all]
+live_api: true
+limits:
+  requests_per_run: 1000
+  max_output_tokens: 65536
+  output_tokens_per_run: 8000000
+  passes_per_workspace: budget
+  max_prompt_chars: model
+  trawls_per_question: 1
+  related_records: 12
+  central_questions: 20
+  timeout_seconds: 600
+discovery:
+  protocol: chat-completions
+  provider: deepseek
+  endpoint: https://api.deepseek.com/chat/completions
+  api_key_env: DEEPSEEK_API_KEY
+  model: deepseek-flash
+  token_parameter: max_tokens
+  parameters:
+    thinking:
+      type: enabled
+    reasoning_effort: high
+review:
+  protocol: offline
+  provider: offline
+  model: smoke-test

@@ -1,5 +1,8 @@
 """Offline integration tests for theorem-trawl trust and repository boundaries."""
 from copy import deepcopy
+import base64
+import hashlib
+from http.client import IncompleteRead
 import io
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -689,7 +692,11 @@ class TrawlTest(unittest.TestCase):
     def test_context_compaction_retains_files_and_original_transcript(self):
         self.live_workspace(budget=3)
         self.settings["limits"]["central_questions"] = 1
-        self.settings["limits"]["max_prompt_chars"] = 18000
+        # Leave space for the current system/tool definitions, then force the
+        # 36K write payload out of the retained conversation.
+        cap = len(json.dumps(providers.prepare_agent(self.settings["discovery"],
+            t.prompts.DISCOVER, [], 4096, w.FUNCTIONS), ensure_ascii=False)) + 10000
+        self.settings["limits"]["max_prompt_chars"] = cap
         responses = [self.tool_response([("write_file", {"path": "work/notes/progress.md", "content": "Resume from lemma B."})]),
                      self.tool_response([("write_file", {"path": "work/notes/long.md", "content": "argument " * 4000})]),
                      self.tool_response()]
@@ -698,7 +705,7 @@ class TrawlTest(unittest.TestCase):
         self.assertFalse(result["errors"])
         self.assertEqual(result["checkpoints"][0]["changed_files"], 2)
         body = api.call_args.args[1]
-        self.assertLess(len(json.dumps(body)), 18000)
+        self.assertLess(len(json.dumps(body)), cap)
         self.assertIn("compacted", json.dumps(body["messages"]))
         raw = [t.read(p) for p in (self.q / "trawls").glob("*/response.json")]
         self.assertTrue(any("argument " * 1000 in json.dumps(r) for r in raw))
@@ -797,7 +804,7 @@ class TrawlTest(unittest.TestCase):
         self.assertIn("three rejections", result["errors"][0]["error"])
         self.assertEqual(result["output_tokens_charged"], 0)
 
-    def test_model_context_does_not_retry_transport_errors(self):
+    def test_model_context_does_not_retry_unclassified_provider_errors(self):
         self.live_workspace(budget=10)
         self.settings["limits"].update(max_prompt_chars="model", max_output_tokens=100)
         folder, manifest = self.workspace()
@@ -828,7 +835,98 @@ class TrawlTest(unittest.TestCase):
                     with self.assertRaises(providers.ProviderError) as raised:
                         providers.complete(profile, {}, enabled=True)
                 self.assertEqual(isinstance(raised.exception, providers.ContextLengthError), recognized)
+                self.assertNotIsInstance(raised.exception, providers.TransportError)
                 self.assertNotIn("SYNTHETIC-SECRET", str(raised.exception))
+
+    def test_transport_retries_preserve_context_partial_bytes_and_budget(self):
+        for protocol in ("chat-completions", "anthropic-messages"):
+            with self.subTest(protocol=protocol):
+                self.live_workspace(protocol, budget=3)
+                self.settings["limits"].update(max_output_tokens=64, output_tokens_per_run=200)
+                folder, manifest = self.workspace()
+                read = self.tool_response([("read_file", {"path": "work/logical-maps/topics/example/background.md"})], protocol=protocol)
+                saved = self.tool_response([("write_file", {"path": "work/notes/progress.md", "content": "Saved after connection recovery."})], protocol=protocol)
+                if protocol == "anthropic-messages":
+                    for raw in (read, saved): raw["usage"]["output_tokens"] = 5
+                partial = json.dumps(self.tool_response([("write_file", {"path": "work/notes/do-not-apply.md", "content": "Partial tool call"})], protocol=protocol)).encode()+b'\n\xce'
+                with patch.object(providers, "complete", side_effect=[read, providers.TransportError("IncompleteRead", partial=partial), saved]) as api, patch.object(w.time, "sleep") as delay:
+                    result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+                self.assertFalse(result["errors"])
+                self.assertEqual(api.call_count, 3)
+                self.assertEqual(result["output_tokens_charged"], 74)
+                self.assertEqual(api.call_args_list[1].args[1], api.call_args_list[2].args[1])
+                self.assertIn("toy propositional framework", json.dumps(api.call_args_list[2].args[1]))
+                delay.assert_called_once_with(1)
+                self.assertFalse((folder/"files/notes/do-not-apply.md").exists())
+                self.assertEqual((folder/"files/notes/progress.md").read_text(), "Saved after connection recovery.")
+                failure = result["transport_failures"][0]
+                trawl = self.q/"trawls"/failure["trawl"]
+                self.assertEqual(t.read(trawl/"budget.json")["charged"], 64)
+                self.assertTrue((trawl/"SEALED.json").exists())
+                archive = failure["unfinished_response"]
+                path = self.q/archive["path"]
+                evidence = t.read(path)
+                self.assertEqual(base64.b64decode(evidence["body"]), partial)
+                self.assertEqual(evidence["body_sha256"], hashlib.sha256(partial).hexdigest())
+                self.assertEqual(archive["sha256"], hashlib.sha256(path.read_bytes()).hexdigest())
+                checkpoint = t.load_candidate(self.q, result["checkpoints"][-1]["checkpoint"])
+                self.assertIn(archive, checkpoint["content"]["unfinished_responses"])
+                denied = w.execute_tool(folder, manifest, {"name": "read_file", "arguments": {"path": archive["path"]}}, self.metadata, 0)
+                self.assertIn("error", denied)
+
+    def test_transport_failures_stop_at_consecutive_request_and_output_limits(self):
+        for requests, budget, expected_caps in ((10, 1000, [64,64,64]), (10,100,[64,36]), (1,1000,[64])):
+            with self.subTest(requests=requests, budget=budget):
+                self.live_workspace(budget=requests)
+                self.settings["limits"].update(max_output_tokens=64, output_tokens_per_run=budget)
+                folder, manifest = self.workspace()
+                with patch.object(providers, "complete", side_effect=providers.TransportError("TimeoutError")) as api, patch.object(w.time, "sleep"):
+                    result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+                self.assertEqual([call.args[1]["max_completion_tokens"] for call in api.call_args_list], expected_caps)
+                self.assertEqual(result["output_tokens_charged"], sum(expected_caps))
+                self.assertEqual(len(result["errors"]), 1)
+                state = t.read(folder/"state.json")
+                self.assertEqual(state["status"], "paused")
+                self.assertIsNone(state["pending"])
+                self.assertTrue(state["messages"])
+                self.assertFalse(result["transport_failures"][-1]["retry"])
+
+    def test_success_resets_consecutive_transport_failures(self):
+        self.live_workspace(budget=6)
+        self.settings["limits"].update(max_output_tokens=64, output_tokens_per_run=800)
+        folder, manifest = self.workspace()
+        failure = providers.TransportError("IncompleteRead", partial=b'partial')
+        read = self.tool_response([("read_file", {"path": "work/logical-maps/topics/example/background.md"})])
+        save = self.tool_response([("write_file", {"path": "work/notes/progress.md", "content": "Survived two separate outages."})])
+        with patch.object(providers, "complete", side_effect=[failure,failure,read,failure,failure,save]), patch.object(w.time,"sleep") as delay:
+            result = t.run(self.q,self.settings,self.snapshot,self.origin,workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        self.assertEqual([f["consecutive_failures"] for f in result["transport_failures"]], [1,2,1,2])
+        self.assertEqual([call.args[0] for call in delay.call_args_list], [1,2,1,2])
+        self.assertEqual(result["output_tokens_charged"], 266)
+
+    def test_transport_archive_recovery_after_seal_does_not_rebill_or_duplicate(self):
+        self.live_workspace(budget=2)
+        folder, manifest = self.workspace()
+        save_state = w.state_save
+        def interrupt_after_seal(path, state):
+            if state.get("unfinished_responses") and state.get("pending") is None:
+                raise KeyboardInterrupt
+            return save_state(path,state)
+        with patch.object(providers,"complete",side_effect=providers.TransportError("IncompleteRead",partial=b'kept')), patch.object(w,"state_save",side_effect=interrupt_after_seal):
+            with self.assertRaises(KeyboardInterrupt):
+                t.run(self.q,self.settings,self.snapshot,self.origin,workspace=manifest["id"])
+        tid = t.read(folder/"state.json")["pending"]
+        audit = self.q/"trawls"/tid
+        before = {p.name:p.read_bytes() for p in audit.iterdir() if p.is_file()}
+        self.settings["limits"]["requests_per_run"] = 1
+        with patch.object(providers,"complete",return_value=self.tool_response()) as api:
+            result = t.run(self.q,self.settings,self.snapshot,self.origin,workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        self.assertEqual(api.call_count,1)
+        self.assertEqual(result["output_tokens_charged"],5)
+        self.assertEqual(len(t.read(folder/"state.json")["unfinished_responses"]),1)
+        self.assertEqual(before,{p.name:p.read_bytes() for p in audit.iterdir() if p.is_file()})
 
     def test_start_paths_and_shallow_listing_avoid_full_repository_discovery(self):
         folder, manifest = self.workspace()
@@ -923,6 +1021,8 @@ class TrawlTest(unittest.TestCase):
             with self.assertRaises(KeyboardInterrupt):
                 t.run(self.q, self.settings, self.snapshot, self.origin)
         old = t.trawls(self.q)[0]
+        self.assertEqual(t.read(self.q/"workspaces"/old["workspace"]/"state.json")["status"], "paused")
+        self.assertEqual(t.read(self.q/"trawls"/old["id"]/"outcome.json")["error_type"], "KeyboardInterrupt")
         with patch.object(providers, "complete", return_value=self.tool_response()) as api:
             result = t.run(self.q, self.settings, self.snapshot, self.origin)
         self.assertFalse(result["errors"])
@@ -1194,6 +1294,65 @@ class TrawlTest(unittest.TestCase):
             server.shutdown()
             server.server_close()
             worker.join()
+
+    def test_real_short_http_responses_are_preserved_and_retried(self):
+        self.live_workspace(budget=2)
+        self.settings["limits"].update(max_output_tokens=64, output_tokens_per_run=100)
+        received = []
+        partial = json.dumps(self.tool_response([("write_file", {"path":"work/notes/should-not-exist.md", "content":"Do not execute"})])).encode()
+        final = json.dumps(self.tool_response()).encode()
+        class Handler(BaseHTTPRequestHandler):
+            def log_message(self,*args): pass
+            def do_POST(self):
+                received.append(json.loads(self.rfile.read(int(self.headers["Content-Length"]))))
+                self.send_response(200)
+                if len(received)==1:
+                    self.send_header("Transfer-Encoding","chunked")
+                    self.end_headers()
+                    self.wfile.write(f'{len(partial):x}\r\n'.encode()+partial+b'\r\n')
+                    # Deliberately omit the terminating chunk, as in the real crash.
+                else:
+                    self.send_header("Content-Length",str(len(final)))
+                    self.end_headers()
+                    self.wfile.write(final)
+                self.wfile.flush()
+                self.close_connection=True
+        server=HTTPServer(("127.0.0.1",0),Handler)
+        worker=threading.Thread(target=server.serve_forever,daemon=True); worker.start()
+        try:
+            self.settings["discovery"]["endpoint"]=f'http://127.0.0.1:{server.server_port}/api'
+            folder,manifest=self.workspace()
+            with patch.object(w.time,"sleep"):
+                result=t.run(self.q,self.settings,self.snapshot,self.origin,workspace=manifest["id"])
+            self.assertFalse(result["errors"])
+            self.assertEqual(len(received),2)
+            self.assertEqual([r["max_completion_tokens"] for r in received],[64,36])
+            self.assertEqual(result["output_tokens_charged"],69)
+            archive=result["transport_failures"][0]["unfinished_response"]
+            self.assertEqual(base64.b64decode(t.read(self.q/archive["path"])["body"]),partial)
+            self.assertFalse((folder/"files/notes/should-not-exist.md").exists())
+        finally:
+            server.shutdown();server.server_close();worker.join()
+
+    def test_incomplete_content_length_and_error_body_are_not_accepted(self):
+        profile={"protocol":"chat-completions","provider":"test","model":"model","endpoint":"https://example.invalid/api"}
+        with patch.object(providers,"build_opener") as opener:
+            response=opener.return_value.open.return_value.__enter__.return_value
+            response.read.return_value=b'{"choices": []}'
+            response.length=100
+            with self.assertRaises(providers.TransportError) as raised:
+                providers.complete(profile,{},enabled=True)
+            self.assertEqual(raised.exception.partial,b'{"choices": []}')
+        class BrokenBody(io.BytesIO):
+            def read(self,*args): raise IncompleteRead(b'SYNTHETIC-SECRET')
+        error=HTTPError(profile["endpoint"],400,"Bad request",{},BrokenBody())
+        with patch.object(providers,"build_opener") as opener:
+            opener.return_value.open.side_effect=error
+            with self.assertRaises(providers.ProviderError) as raised:
+                providers.complete(profile,{},enabled=True)
+        self.assertNotIsInstance(raised.exception,providers.TransportError)
+        self.assertIn('HTTP 400',str(raised.exception))
+        self.assertNotIn('SYNTHETIC-SECRET',str(raised.exception))
 
     def test_publication_receipt_checks_actual_committed_bytes(self):
         candidate = self.candidate()

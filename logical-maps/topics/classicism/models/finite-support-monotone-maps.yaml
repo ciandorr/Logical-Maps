@@ -23,6 +23,7 @@ violates:
 - inextensible-comprehension-r
 - barcan-t
 - boolean-completeness-t
+- weakly-inextensible-comprehension-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -98,57 +99,33 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   and adds one beyond it; an even $b>M_0+1$, whose only preimage under $i$ is the odd $b-1$; and $N^{\prime}:=[0,b]$:
   a monotone map agreeing with $i$ there has the same preimages of $b$ within $[0,b]$ and takes values
   at least $i(b)=b+1$ beyond it. So $\langle b,i\rangle\in Y\setminus B_{N^{\prime}}$, and $Y$ is not
-  even weakly inextensible. Observation of 23 September 2026, answering Cian Dorr’s question whether the
-  failure of Actuality can be sharpened to a failure of Inextensible Comprehension. BF fails at type $t$
-  as well. In a one-object finitely pinned model, BF (type t) fails as soon as there are a finite $N$,
-  an arrow $i$ and a proposition $q$ in the domain that is the transport $i^{\prime}\cdot p=\{k : k\circ
-  i^{\prime}\in p\}$ of no proposition $p$ along any arrow $i^{\prime}$ agreeing with $i$ on $N$: the
-  intension $X:=\{\langle r,j\rangle : r\ne q\text{ or }j\text{ disagrees with }i\text{ on }N\}$ is pinned
-  down by $N$, contains $\langle i^{\prime}\cdot p,i^{\prime}\rangle$ for every $p$ and $i^{\prime}$,
-  so $\forall p\, .\,\Box Xp$ holds at the identity, and omits $\langle q,i\rangle$, so $\Box\forall p\,
-  .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot p$ depends only on $k$ restricted to
-  the range of $i^{\prime}$, it suffices that $q$ separate two arrows agreeing on every such range. Here
-  take $N=\{0\}$, $i$ any monotone map with $i0=2$, so that every $i^{\prime}$ agreeing with it on $N$
-  has range within $[2,\infty)$, and $q:=\{k : k1=1\}$, pinned down by $\{1\}$: two monotone maps agreeing
-  on $[2,\infty)$ with $k2\ge1$ may take the values $1$ and $0$ at $1$. Observation of 23 September 2026,
-  answering Cian Dorr’s question whether the failure of BF sharpens to type $t$. The following arguments,
-  found independently on 25 September 2026, overlap with those above. BF fails at type $t$ as well. Let
-  $p_0:=\{i : i(0)=0\}$ be the proposition that $0$ is fixed, and let $I$ be the operation of type $t\to
-  t$ sending a proposition $d$ to the proposition that $d$ is indifferent to the role of $0$: $I(d):=\{i
-  : j\circ i\in d\leftrightarrow j''\circ i\in d\text{ whenever }j,j''\text{ agree off }0\}$, which commutes
-  with every arrow and has values pinned down by the pinning set of $d$. Put $X:=\lambda p\, .\,(p_0\lor
-  Ip)$. Then $\forall p\,\Box Xp$ holds: an arrow $i$ with $i(0)\ne0$ omits $0$ from its range by monotonicity,
-  so $i\cdot d$ is indifferent to the role of $0$ for every $d$. But at the world $h_0\colon m\mapsto
-  m+1$, $X$ has become $\lambda p\, .\,(\{i : i(1)=0\}\lor Ip)$, which fails of $p_0$ at the identity,
-  since $p_0$ contains the identity but not the arrow agreeing with it off $0$ that sends $0$ to $1$.
-  So BF (type $t$) and $\Box$BF (type $t$) fail. Boolean Completeness fails at type $t$ as well, which
-  the source (n. 92) conjectures but does not show. Any set $F$ of propositions is the extension at the
-  identity of an element of the domain at type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i
-  : i\cdot p\in F\}$: it is natural, independent of $h$ and so pinned down by the empty set, and each
-  of its values is pinned down by the pinning set of $p$, since $i\cdot p$ depends only on the values
-  of $i$ there. A least upper bound of $F$ under entailment is a least finitely pinned superset of $\bigcup
-  F$, and it exists only if the least $S$-pinned superset of $\bigcup F$ stops shrinking as the finite
-  set $S$ grows. Here let $A_m$ ($m\ge1$) be the proposition, pinned down by $\{0,2m-1,2m\}$, that the
-  arrow is constant on $\{0,\ldots,2m-1\}$ and first changes value at $2m$. The least superset of $\bigcup_mA_m$
-  pinned down by $\{0,\ldots,N\}$ consists of the arrows whose first change of value is at an even position
-  or beyond $N$, and it strictly shrinks as $N$ grows. So $F$ has no least upper bound, and, taking pointwise
-  negations, the family of complements has no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic),
-  25 September 2026; not in the source. Inextensible Comprehension fails at type $e$, for the property
-  of being even, whose extension is the evens at every world (the intension $\langle h,b\rangle\mapsto\{i
-  : i(b)\text{ even}\}$, pinned down by the empty set). Suppose $Y$ were inextensible with extension the
-  evens and pinned down by $\{0,\ldots,N\}$. Any arrow $g''$ agreeing with the identity on that set has
-  $g''\cdot Y=Y$, so $Y$ has extension the evens at the world $g''$ too. Unpacking inextensibility at
-  the identity: for every relation $X$ in the domain that is necessary of each even number, $Y\le X$,
-  so the extension of $Y$ at $g''$ is contained in that of $X$ at $g''$. Take $X$ pinned down by $S_X:=\{0,\ldots,K\}$
-  to hold, at an arrow $h$, of exactly the individuals $h''(a)$ with $a$ even and $h''$ agreeing with
-  $h$ on $S_X$ (the intension $\langle h,b\rangle\mapsto\{i : \exists h''\equiv_{S_X}i\circ h,\,\exists
-  a\text{ even},\ i(b)=h''(a)\}$, which is natural, pinned down by $S_X$, and necessary of every even
-  number). Let $g''$ fix $0,\ldots,N$, send $N+1$ to $N+3$ and $m\ge N+2$ to $m+2$; it is a monotone map
-  agreeing with the identity on the pinning set of $Y$. With $K:=N+2$, every $h''$ agreeing with $g''$
-  on $S_X$ sends even $a\le K$ to $g''(a)\in(\text{evens}\le N)\cup\{N+4\}$ and even $a>K$ to a value
-  at least $g''(K)=N+4$, so the extension of $X$ at $g''$ omits the even number $N+2$, which is in the
-  extension of $Y$ at $g''$. Contradiction. Observation of Claude Fable 5.1 (Anthropic), 25 September
-  2026; not in the source.'
+  even weakly inextensible, so Weakly Inextensible Comprehension fails too. Observation of 23 September
+  2026, answering Cian Dorr’s question whether the failure of Actuality can be sharpened to a failure
+  of Inextensible Comprehension. BF fails at type $t$ as well. In a one-object finitely pinned model,
+  BF (type t) fails as soon as there are a finite $N$, an arrow $i$ and a proposition $q$ in the domain
+  that is the transport $i^{\prime}\cdot p=\{k : k\circ i^{\prime}\in p\}$ of no proposition $p$ along
+  any arrow $i^{\prime}$ agreeing with $i$ on $N$: the intension $X:=\{\langle r,j\rangle : r\ne q\text{
+  or }j\text{ disagrees with }i\text{ on }N\}$ is pinned down by $N$, contains $\langle i^{\prime}\cdot
+  p,i^{\prime}\rangle$ for every $p$ and $i^{\prime}$, so $\forall p\, .\,\Box Xp$ holds at the identity,
+  and omits $\langle q,i\rangle$, so $\Box\forall p\, .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot
+  p$ depends only on $k$ restricted to the range of $i^{\prime}$, it suffices that $q$ separate two arrows
+  agreeing on every such range. Here take $N=\{0\}$, $i$ any monotone map with $i0=2$, so that every $i^{\prime}$
+  agreeing with it on $N$ has range within $[2,\infty)$, and $q:=\{k : k1=1\}$, pinned down by $\{1\}$:
+  two monotone maps agreeing on $[2,\infty)$ with $k2\ge1$ may take the values $1$ and $0$ at $1$. Observation
+  of 23 September 2026, answering Cian Dorr’s question whether the failure of BF sharpens to type $t$.
+  Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures but does not show.
+  Any set $F$ of propositions is the extension at the identity of an element of the domain at type $t\to
+  t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}$: it is natural, independent
+  of $h$ and so pinned down by the empty set, and each of its values is pinned down by the pinning set
+  of $p$, since $i\cdot p$ depends only on the values of $i$ there. A least upper bound of $F$ under entailment
+  is a least finitely pinned superset of $\bigcup F$, and it exists only if the least $S$-pinned superset
+  of $\bigcup F$ stops shrinking as the finite set $S$ grows. Here let $A_m$ ($m\ge1$) be the proposition,
+  pinned down by $\{0,2m-1,2m\}$, that the arrow is constant on $\{0,\ldots,2m-1\}$ and first changes
+  value at $2m$. The least superset of $\bigcup_mA_m$ pinned down by $\{0,\ldots,N\}$ consists of the
+  arrows whose first change of value is at an even position or beyond $N$, and it strictly shrinks as
+  $N$ grows. So $F$ has no least upper bound, and, taking pointwise negations, the family of complements
+  has no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in
+  the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -225,3 +202,9 @@ changes:
   - barcan-t
   - boolean-completeness-t
   - inextensible-comprehension-r
+- date: '2026-09-25'
+  by: Claude Opus 5.5 (Anthropic)
+  summary: Merged the two sets of arguments recorded on 23 and 25 September into one, keeping the 23 September
+    arguments for Inextensible Comprehension and BF (type t); the former already refutes the weak form.
+  violates:
+  - weakly-inextensible-comprehension-r

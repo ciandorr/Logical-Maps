@@ -24,6 +24,7 @@ violates:
 - inextensible-comprehension-r
 - barcan-t
 - strong-leibniz-t
+- weakly-inextensible-comprehension-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -107,55 +108,20 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   the only arrow agreeing with $g_n$ on $[0,n+1]$ is $g_n$ itself, whose range $[0,n]$ omits $b$. Here
   even the universal property has no inextensible coextension, since $\operatorname{Inextensible}(\top_{et})$
   unfolds to $\Box$BF at type $e$. So $\langle b,i\rangle\in Y\setminus B_{N^{\prime}}$, and $Y$ is not
-  even weakly inextensible. Observation of 23 September 2026, answering Cian Dorr’s question whether the
-  failure of Actuality can be sharpened to a failure of Inextensible Comprehension. BF fails at type $t$
-  as well. In a one-object finitely pinned model, BF (type t) fails as soon as there are a finite $N$,
-  an arrow $i$ and a proposition $q$ in the domain that is the transport $i^{\prime}\cdot p=\{k : k\circ
-  i^{\prime}\in p\}$ of no proposition $p$ along any arrow $i^{\prime}$ agreeing with $i$ on $N$: the
-  intension $X:=\{\langle r,j\rangle : r\ne q\text{ or }j\text{ disagrees with }i\text{ on }N\}$ is pinned
-  down by $N$, contains $\langle i^{\prime}\cdot p,i^{\prime}\rangle$ for every $p$ and $i^{\prime}$,
-  so $\forall p\, .\,\Box Xp$ holds at the identity, and omits $\langle q,i\rangle$, so $\Box\forall p\,
-  .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot p$ depends only on $k$ restricted to
-  the range of $i^{\prime}$, it suffices that $q$ separate two arrows agreeing on every such range. Here
-  take $N=[0,2]$, $i=g_1$, the only arrow agreeing with $g_1$ on $[0,2]$, whose range is $\{0,1\}$, and
-  $q:=\{g_1\}$, pinned down by $\{0,1,2\}$: $g_1$ and $g_2$ agree on $\{0,1\}$ and $q$ separates them.
-  Observation of 23 September 2026, answering Cian Dorr’s question whether the failure of BF sharpens
-  to type $t$. The type-t Strong Leibniz Biconditionals fail although Atomicity holds, so the two come
-  apart here. A strong world is an atom, and the atoms are the singletons $\{g_n\}$, since $\{1_{\mathbb
-  N}\}$ is not pinned down by a finite set. Transported along the arrow $g_n$, it becomes $\{k : k\circ
-  g_n=g_n\}=\{1_{\mathbb N}\}\cup\{g_m : m\ge n\}$, and the proposition $\{g_n\}$ itself, which lies in
-  the domain, splits that set; so it is not a strong world. Hence there is no strong world at all, and
-  no possible proposition has one below it. Observation of 23 September 2026, answering Cian Dorr’s question
-  whether failures of Atomicity’s strengthening can be found where Atomicity holds. The following arguments,
-  found independently on 25 September 2026, overlap with those above. The type-$t$ Strong Leibniz Biconditionals
-  fail. A strong world is an atom, and the atoms are the singletons $\{g_n\}$ ($\{1_{\mathbb N}\}$ is
-  not pinned down by any finite set). Seen from the arrow $g_n$ the singleton $\{g_n\}$ becomes $\{i :
-  i\circ g_n=g_n\}=\{g_m : m\ge n\}\cup\{1_{\mathbb N}\}$, which neither entails nor excludes the proposition
-  $\{g_{n+1}\}$; so no atom is a strong world, and the possible proposition $\{g_0\}$ has none below it.
-  Hence Strong Leibniz Biconditionals fail at type $t$ and at all types, boxed or not. Observations of
-  Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source. BF fails at type $t$ as well. Let
-  $a:=1$ and $b:=0$ be individuals, so that $[a\ne b]=\{i : i(1)\ne 0\}$ is the proposition that the arrow
-  is not $g_0$, and let $X:=\lambda p\, .\,(a\ne b\lor\Box p\lor\Box\neg p)$. Then $\forall p\,\Box Xp$
-  holds: at any arrow other than $g_0$ the first disjunct is true, and at $g_0$, whose only successor
-  is $g_0$ itself, every proposition is necessary or impossible. But $\Box\forall p\,Xp$ fails at $g_0$:
-  there $X$ has become $\lambda p\, .\,(\Box p\lor\Box\neg p)$, and the domain still contains the contingent
-  proposition $\{g_1\}$, since the quantifier at a world ranges over the whole domain, not over the shifts
-  of actual propositions. So BF (type $t$) and $\Box$BF (type $t$) fail; equivalently, $g_0$ does not
-  act surjectively on the propositions, sending every one to $\top$ or $\bot$. Inextensible Comprehension
-  fails at type $e$, for the property of being even, whose extension is the evens at every world (the
-  intension $\langle h,b\rangle\mapsto\{i : i(b)\text{ even}\}$, pinned down by the empty set). Suppose
-  $Y$ were inextensible with extension the evens and pinned down by $\{0,\ldots,N\}$. Any arrow $g''$
-  agreeing with the identity on that set has $g''\cdot Y=Y$, so $Y$ has extension the evens at the world
-  $g''$ too. Unpacking inextensibility at the identity: for every relation $X$ in the domain that is necessary
-  of each even number, $Y\le X$, so the extension of $Y$ at $g''$ is contained in that of $X$ at $g''$.
-  Take $X$ pinned down by $S_X:=\{0,\ldots,K\}$ to hold, at an arrow $h$, of exactly the individuals $h''(a)$
-  with $a$ even and $h''$ agreeing with $h$ on $S_X$ (the intension $\langle h,b\rangle\mapsto\{i : \exists
-  h''\equiv_{S_X}i\circ h,\,\exists a\text{ even},\ i(b)=h''(a)\}$, which is natural, pinned down by $S_X$,
-  and necessary of every even number). Let $g'':=g_m$ with $m\ge N+1$, which agrees with the identity
-  on the pinning set of $Y$, and take $K>m+1$; the only arrow agreeing with $g_m$ on $S_X$ is $g_m$ itself,
-  so the extension of $X$ at $g_m$ is $g_m(\text{evens})=(\text{evens}\le m)\cup\{m\}$, which omits every
-  even number above $m$, although those are in the extension of $Y$ at $g_m$. Contradiction. Observation
-  of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
+  even weakly inextensible, so Weakly Inextensible Comprehension fails too. Observation of 23 September
+  2026, answering Cian Dorr’s question whether the failure of Actuality can be sharpened to a failure
+  of Inextensible Comprehension. The type-$t$ Strong Leibniz Biconditionals fail although Atomicity holds,
+  so the two come apart here. A strong world is an atom, and the atoms are the singletons $\{g_n\}$, since
+  $\{1_{\mathbb N}\}$ is not pinned down by a finite set. Transported along $g_n$, $\{g_n\}$ becomes $\{k
+  : k\circ g_n=g_n\}=\{1_{\mathbb N}\}\cup\{g_m : m\ge n\}$, which $\{g_n\}$ itself splits; so there is
+  no strong world at all. BF fails at type $t$ as a consequence, by the recorded result that Atomicity
+  (type $t$) and BF (type $t$) imply the type-$t$ Strong Leibniz Biconditionals. Directly: with $1$ and
+  $0$ as individuals, $X:=\lambda p\, .\,(1\ne0\lor\Box p\lor\Box\neg p)$ is necessarily true of every
+  proposition, since $g_0$ is the only arrow sending $1$ to $0$ and it transports every proposition to
+  $\top$ or $\bot$; but at $g_0$ it fails of the contingent proposition $\{g_1\}$, which the domain there
+  still contains. Observations of 23 September 2026, answering Cian Dorr’s questions whether the failure
+  of BF sharpens to type $t$ and whether failures of Atomicity’s strengthening can be found where Atomicity
+  holds; the derivation of BF’s failure from them and the direct counterexample, 25 September 2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -239,3 +205,10 @@ changes:
   - strong-leibniz-t
   - barcan-t
   - inextensible-comprehension-r
+- date: '2026-09-25'
+  by: Claude Opus 5.5 (Anthropic)
+  summary: 'Merged the two sets of arguments recorded on 23 and 25 September into one: BF (type t) now
+    follows from Atomicity and the failure of the type-t Strong Leibniz Biconditionals, with the direct
+    counterexample of 25 September; the Inextensible Comprehension argument already refutes the weak form.'
+  violates:
+  - weakly-inextensible-comprehension-r

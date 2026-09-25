@@ -89,50 +89,32 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\colon
   W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model,
   so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September
-  2026. BF fails at type $t$ as well. In a one-object finitely pinned model, BF (type t) fails as soon
-  as there are a finite $N$, an arrow $i$ and a proposition $q$ in the domain that is the transport $i^{\prime}\cdot
-  p=\{k : k\circ i^{\prime}\in p\}$ of no proposition $p$ along any arrow $i^{\prime}$ agreeing with $i$
-  on $N$: the intension $X:=\{\langle r,j\rangle : r\ne q\text{ or }j\text{ disagrees with }i\text{ on
-  }N\}$ is pinned down by $N$, contains $\langle i^{\prime}\cdot p,i^{\prime}\rangle$ for every $p$ and
-  $i^{\prime}$, so $\forall p\, .\,\Box Xp$ holds at the identity, and omits $\langle q,i\rangle$, so
-  $\Box\forall p\, .\,Xp$ fails there. Since membership of $k$ in $i^{\prime}\cdot p$ depends only on
-  $k$ restricted to the range of $i^{\prime}$, it suffices that $q$ separate two arrows agreeing on every
-  such range. Here take $N=\{1\}$, $i=f_2$, so that the arrows agreeing with it on $N$ are the $f_n$ with
-  $n\ge2$, whose ranges consist of even numbers, and $q:=\{f_1\}$, the actual world, pinned down by $\{0,1\}$:
-  $f_1$ and $f_2$ agree on the even numbers and $q$ separates them. So at the world $f_2$ the actual world
-  is the counterpart of no proposition. Observation of 23 September 2026, answering Cian Dorr’s question
-  whether the failure of BF sharpens to type $t$. The type-t Strong Leibniz Biconditionals fail although
-  Atomicity holds, so the two come apart here. A strong world is an atom, and the atoms are the singletons
-  $\{f_n\}$. Transported along the arrow $f_n$ for $n\ge2$, it becomes $\{k : k\circ f_n=f_n\}=\{f_m :
-  m\le n\}$, since $f_m\circ f_n=f_{\max\{m,n\}}$, and the proposition $\{f_1\}$, which lies in the domain,
-  splits that set; so it is not a strong world. The only strong world is $\{f_1\}$, whose transport along
-  every other arrow is empty; so the possible proposition $\{f_2\}$ has no strong world below it. Observation
-  of 23 September 2026, answering Cian Dorr’s question whether failures of Atomicity’s strengthening can
-  be found where Atomicity holds. The following arguments, found independently on 25 September 2026, overlap
-  with those above. The type-$t$ Strong Leibniz Biconditionals fail. A strong world is an atom; the atoms
-  are the singletons $\{f_n\}$, and seen from the arrow $f_n$ with $n>1$ the singleton $\{f_n\}$ becomes
-  $\{i : i\circ f_n=f_n\}=\{f_m : m\le n\}$, which neither entails nor excludes $\{f_1\}$; so the only
-  strong world is the actual atom $\{f_1\}$, and the possible proposition $\{f_2\}$ has no strong world
-  below it. Hence Strong Leibniz Biconditionals fail at type $t$ and at all types, boxed or not, and since
-  Atomicity (type $t$) holds, BF (type $t$) fails by the recorded result, and $\Box$BF (type $t$) with
-  it. Directly: let $\circ$ be the operation $p\mapsto\{i : f_2\circ i\in p\}$ on propositions, which
-  commutes with every arrow because the monoid is commutative and so lies in the domain pinned down by
-  the empty set, and let $X:=\lambda p\, .\,(a\lor(p\leftrightarrow\circ p))$ with $a=\{f_1\}$; $\forall
-  p\,\Box Xp$ holds since $f_2\circ i=i$ for $i\ne f_1$, but at the world $f_2$ the proposition $a$ itself
-  fails $p\leftrightarrow\circ p$. Boolean Completeness fails at type $t$ as well, which the source (n.
-  92) conjectures but does not show. Any set $F$ of propositions is the extension at the identity of an
-  element of the domain at type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in
-  F\}$: it is natural, independent of $h$ and so pinned down by the empty set, and each of its values
-  is pinned down by the pinning set of $p$, since $i\cdot p$ depends only on the values of $i$ there.
-  A least upper bound of $F$ under entailment is a least finitely pinned superset of $\bigcup F$, and
-  it exists only if the least $S$-pinned superset of $\bigcup F$ stops shrinking as the finite set $S$
-  grows. Here an arrow $f_n$ is determined by its value at any $m\ge n$ and all $f_n$ with $n>N$ agree
-  on $\{0,\ldots,N\}$, so the finitely pinned propositions are exactly the finite and cofinite sets of
-  arrows. Let $F$ be the family of singletons $\{f_n\}$ for $n$ an even power of $2$: an upper bound is
-  a cofinite set containing them, and removing an odd-power member of it gives a strictly smaller upper
-  bound. So $F$ has no least upper bound, and, taking pointwise negations, the family of complements has
-  no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the
-  source. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
+  2026. The type-$t$ Strong Leibniz Biconditionals fail although Atomicity holds, so the two come apart
+  here. A strong world is an atom, and the atoms are the singletons $\{f_n\}$. Seen from $f_n$ with $n\ge2$,
+  $\{f_n\}$ becomes $\{k : k\circ f_n=f_n\}=\{f_m : m\le n\}$, since $f_m\circ f_n=f_{\max\{m,n\}}$, and
+  the proposition $\{f_1\}$ splits that set. So the only strong world is $\{f_1\}$, whose transport along
+  every other arrow is empty, and the possible proposition $\{f_2\}$ has no strong world below it. BF
+  fails at type $t$ as a consequence, by the recorded result that Atomicity (type $t$) and BF (type $t$)
+  imply the type-$t$ Strong Leibniz Biconditionals. Directly: transports along $f_n$ depend only on an
+  arrow’s values on the multiples of $n$, where $f_1$ and $f_2$ agree, so for $n\ge2$ the actual world
+  $\{f_1\}$ is the transport along $f_n$ of no proposition; so for the relation $X$ holding of every proposition
+  except $\{f_1\}$ at the arrows sending $1$ to $0$, pinned down by $\{1\}$, $\forall p\, .\,\Box Xp$
+  holds at the identity but $\Box\forall p\, .\,Xp$ fails at $f_2$. Observations of 23 September 2026,
+  answering Cian Dorr’s questions whether the failure of BF sharpens to type $t$ and whether failures
+  of Atomicity’s strengthening can be found where Atomicity holds; the derivation of BF’s failure from
+  them, 25 September 2026. Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures
+  but does not show. Any set $F$ of propositions is the extension at the identity of an element of the
+  domain at type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}$: it is
+  natural, independent of $h$ and so pinned down by the empty set, and each of its values is pinned down
+  by the pinning set of $p$, since $i\cdot p$ depends only on the values of $i$ there. A least upper bound
+  of $F$ under entailment is a least finitely pinned superset of $\bigcup F$, and it exists only if the
+  least $S$-pinned superset of $\bigcup F$ stops shrinking as the finite set $S$ grows. Here an arrow
+  $f_n$ is determined by its value at any $m\ge n$ and all $f_n$ with $n>N$ agree on $\{0,\ldots,N\}$,
+  so the finitely pinned propositions are exactly the finite and cofinite sets of arrows. Let $F$ be the
+  family of singletons $\{f_n\}$ for $n$ an even power of $2$: an upper bound is a cofinite set containing
+  them, and removing an odd-power member of it gives a strictly smaller upper bound. So $F$ has no least
+  upper bound, and, taking pointwise negations, the family of complements has no greatest lower bound.
+  Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -218,3 +200,8 @@ changes:
   - strong-leibniz-t
   - barcan-t
   - boolean-completeness-t
+- date: '2026-09-25'
+  by: Claude Opus 5.5 (Anthropic)
+  summary: 'Merged the two sets of arguments recorded on 23 and 25 September into one: BF (type t) now
+    follows from Atomicity and the failure of the type-t Strong Leibniz Biconditionals, with a one-line
+    direct witness.'

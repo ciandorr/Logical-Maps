@@ -22,6 +22,7 @@ violates:
 - distinctness-signature-r
 - countable-boolean-completeness-r
 - inextensible-comprehension-r
+- boolean-completeness-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -61,12 +62,12 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$ but impossible
   of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$
   and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\top_\tau$
-  denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ) does not
-  prove. Everything that implies these fails with them. Countable Boolean Completeness fails as well,
-  at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension
-  a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the
-  domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the
-  numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
+  denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ)
+  does not prove. Everything that implies these fails with them. Countable Boolean Completeness fails
+  as well, at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as
+  its extension a countable family of haecceities, and the extensional fullness the source invokes to
+  put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family
+  with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
   collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the proposition
   that the arrow fixes $0,\ldots,N$ for $N$ beyond the pinning set. An arrow fixing $0,\ldots,N$ agrees
   with the identity on that set and so is in $p$. An arrow $h$ that does not, with least moved point $m\le
@@ -97,7 +98,34 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   there has the same preimages of $b$ within $[0,b+2]$ and takes values at least $i(b+2)=b+1$ beyond it.
   So $\langle b,i\rangle\in Y\setminus B_{N^{\prime}}$, and $Y$ is not even weakly inextensible. Observation
   of 23 September 2026, answering Cian Dorr’s question whether the failure of Actuality can be sharpened
-  to a failure of Inextensible Comprehension.'
+  to a failure of Inextensible Comprehension. The following arguments, found independently on 25 September
+  2026, overlap with those above. Boolean Completeness fails at type $t$ as well, which the source (n.
+  92) conjectures but does not show. Any set $F$ of propositions is the extension at the identity of an
+  element of the domain at type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in
+  F\}$: it is natural, independent of $h$ and so pinned down by the empty set, and each of its values
+  is pinned down by the pinning set of $p$, since $i\cdot p$ depends only on the values of $i$ there.
+  A least upper bound of $F$ under entailment is a least finitely pinned superset of $\bigcup F$, and
+  it exists only if the least $S$-pinned superset of $\bigcup F$ stops shrinking as the finite set $S$
+  grows. Here let $A_m$ ($m\ge1$) be the proposition, pinned down by $\{2m-1,2m\}$, that the arrow sends
+  $2m-1$ to $0$ and $2m$ to $1$, so that its first step is at the even position $2m$. The least superset
+  of $\bigcup_mA_m$ pinned down by $\{0,\ldots,N\}$ consists of the arrows whose first step is at an even
+  position or beyond $N$, and it strictly shrinks as $N$ grows. So $F$ has no least upper bound, and,
+  taking pointwise negations, the family of complements has no greatest lower bound. Observation of Claude
+  Fable 5.1 (Anthropic), 25 September 2026; not in the source. Inextensible Comprehension fails at type
+  $e$, for the property of being even, whose extension is the evens at every world (the intension $\langle
+  h,b\rangle\mapsto\{i : i(b)\text{ even}\}$, pinned down by the empty set). Suppose $Y$ were inextensible
+  with extension the evens and pinned down by $\{0,\ldots,N\}$. Any arrow $g''$ agreeing with the identity
+  on that set has $g''\cdot Y=Y$, so $Y$ has extension the evens at the world $g''$ too. Unpacking inextensibility
+  at the identity: for every relation $X$ in the domain that is necessary of each even number, $Y\le X$,
+  so the extension of $Y$ at $g''$ is contained in that of $X$ at $g''$. Take $X$ pinned down by $S_X:=\{0,\ldots,K\}$
+  to hold, at an arrow $h$, of exactly the individuals $h''(a)$ with $a$ even and $h''$ agreeing with
+  $h$ on $S_X$ (the intension $\langle h,b\rangle\mapsto\{i : \exists h''\equiv_{S_X}i\circ h,\,\exists
+  a\text{ even},\ i(b)=h''(a)\}$, which is natural, pinned down by $S_X$, and necessary of every even
+  number). Let $g''$ fix $0,\ldots,N$, send $N+1$ and $N+2$ to $N+1$, and send $m\ge N+3$ to $m-1$; it
+  is a monotone surjection agreeing with the identity on the pinning set of $Y$. With $K:=N+4$, the extension
+  of $X$ at $g''$ is $g''(\text{evens}\cap[0,K])\cup[g''(K),\infty)=(\text{evens}\le N)\cup(\text{odds}\cap[N+1,K-1])\cup[K-1,\infty)$,
+  which omits the even number $N+2$, although $N+2$ is in the extension of $Y$ at $g''$. Contradiction.
+  Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -156,4 +184,11 @@ changes:
   summary: Recorded the failure of Inextensible Comprehension at type e→t for the property of being even,
     sharpening the failure of Actuality; argument in the notes.
   violates:
+  - inextensible-comprehension-r
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Boolean Completeness (type t) and of Inextensible Comprehension, with
+    the arguments in the notes.
+  violates:
+  - boolean-completeness-t
   - inextensible-comprehension-r

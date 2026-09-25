@@ -25,6 +25,7 @@ violates:
 - signature-b-r
 - barcan-t
 - strong-leibniz-t
+- boolean-completeness-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -66,17 +67,17 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   is false, so $\Box\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\top_\tau$,
   witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is $\Diamond\Box a$ and $a$ is necessary at
   no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence
-  (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed
-  to contain at least one: such a constant $c''$ of type $\tau''$ denotes what the closed pure term $\top_{\tau''}$
-  denotes, and $c''=\top_{\tau''}$ is a true identity that C(Σ) does not prove. The designated constant
-  refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas
-  $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything
-  that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\to t$:
-  the property $E$ that the source shows to lack a least upper bound has as its extension a countable
-  family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also
-  puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$,
-  which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse
-  holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
+  (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants,
+  Σ being assumed to contain at least one: such a constant $c''$ of type $\tau''$ denotes what the closed
+  pure term $\top_{\tau''}$ denotes, and $c''=\top_{\tau''}$ is a true identity that C(Σ) does not prove.
+  The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism,
+  §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar
+  x\, .\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well,
+  at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension
+  a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the
+  domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the
+  numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
+  collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
   proposition $\{f_1\}$: under $f_n$ with $n>1$, $\Diamond q$ would need $k\circ f_n$ to be the identity,
   impossible since $f_n$ is not injective. Relational Choice holds, necessarily. The model is ideally
   full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any
@@ -107,7 +108,31 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   splits that set; so it is not a strong world. The only strong world is $\{f_1\}$, whose transport along
   every other arrow is empty; so the possible proposition $\{f_2\}$ has no strong world below it. Observation
   of 23 September 2026, answering Cian Dorr’s question whether failures of Atomicity’s strengthening can
-  be found where Atomicity holds.'
+  be found where Atomicity holds. The following arguments, found independently on 25 September 2026, overlap
+  with those above. The type-$t$ Strong Leibniz Biconditionals fail. A strong world is an atom; the atoms
+  are the singletons $\{f_n\}$, and seen from the arrow $f_n$ with $n>1$ the singleton $\{f_n\}$ becomes
+  $\{i : i\circ f_n=f_n\}=\{f_m : m\le n\}$, which neither entails nor excludes $\{f_1\}$; so the only
+  strong world is the actual atom $\{f_1\}$, and the possible proposition $\{f_2\}$ has no strong world
+  below it. Hence Strong Leibniz Biconditionals fail at type $t$ and at all types, boxed or not, and since
+  Atomicity (type $t$) holds, BF (type $t$) fails by the recorded result, and $\Box$BF (type $t$) with
+  it. Directly: let $\circ$ be the operation $p\mapsto\{i : f_2\circ i\in p\}$ on propositions, which
+  commutes with every arrow because the monoid is commutative and so lies in the domain pinned down by
+  the empty set, and let $X:=\lambda p\, .\,(a\lor(p\leftrightarrow\circ p))$ with $a=\{f_1\}$; $\forall
+  p\,\Box Xp$ holds since $f_2\circ i=i$ for $i\ne f_1$, but at the world $f_2$ the proposition $a$ itself
+  fails $p\leftrightarrow\circ p$. Boolean Completeness fails at type $t$ as well, which the source (n.
+  92) conjectures but does not show. Any set $F$ of propositions is the extension at the identity of an
+  element of the domain at type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in
+  F\}$: it is natural, independent of $h$ and so pinned down by the empty set, and each of its values
+  is pinned down by the pinning set of $p$, since $i\cdot p$ depends only on the values of $i$ there.
+  A least upper bound of $F$ under entailment is a least finitely pinned superset of $\bigcup F$, and
+  it exists only if the least $S$-pinned superset of $\bigcup F$ stops shrinking as the finite set $S$
+  grows. Here an arrow $f_n$ is determined by its value at any $m\ge n$ and all $f_n$ with $n>N$ agree
+  on $\{0,\ldots,N\}$, so the finitely pinned propositions are exactly the finite and cofinite sets of
+  arrows. Let $F$ be the family of singletons $\{f_n\}$ for $n$ an even power of $2$: an upper bound is
+  a cofinite set containing them, and removing an odd-power member of it gives a strictly smaller upper
+  bound. So $F$ has no least upper bound, and, taking pointwise negations, the family of complements has
+  no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the
+  source. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -185,3 +210,11 @@ changes:
     here; see the notes.
   violates:
   - strong-leibniz-t
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Strong Leibniz Biconditionals (type t), of BF (type t) and of Boolean
+    Completeness (type t), with the arguments in the notes.
+  violates:
+  - strong-leibniz-t
+  - barcan-t
+  - boolean-completeness-t

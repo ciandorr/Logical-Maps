@@ -12,6 +12,10 @@ satisfies:
 - relational-choice-r
 - necessary-relational-choice-r
 - distinctness-preserving-collapse
+- necessary-atomicity-r
+- necessary-boolean-completeness-r
+- necessary-rigid-comprehension-r
+- necessary-strong-leibniz-r
 violates:
 - distinctness-necessary-r
 - witnessed-possibility-r
@@ -21,6 +25,7 @@ violates:
 - no-pure-contingency-r
 - possibility-schema-r
 - possibility-plus-r
+- pure-b-r
 status: proved
 certificate:
   source_id: misc
@@ -54,40 +59,59 @@ description: 'Take the full Henkin models $M_n$ with individual domain $\{1,\ldo
   holds there. The root has uncountably many individuals and infinitely many propositions, so both Axioms
   of Infinity hold there. Two threads that agree at some world are distinct but possibly identical, so
   ND fails at type $e$. Evaluation point: the root.'
-notes: 'Recorded to witness the consistency with C of the sentence through which Possibility Maximalism (pure) reaches
-  the Axiom of Infinity at type $t$, and of that Axiom itself. The construction and its verification are
-  in the write-up; no independent check is claimed. Interpretation of Σ, fixed for this record: each relational
-  constant denotes the top element of its type and each individual constant denotes one fixed individual.
-  Under it the signature schemata fail. Let $c\in\Sigma$ have relational type $\tau$, so $c=\top_\tau$
-  necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$
-  but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$
-  agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term
-  $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ)
-  does not prove. Everything that implies these fails with them. Further facts: the root proposition,
-  true at the root alone, is an atom entailing every root truth, so Actuality holds. BF holds at the root:
-  an entity of a relational type there is a family of component entities with a free root component, every
-  component entity is the component of some root entity, so if $\forall y\, .\,\Box Xy$ holds at the root
-  then every component of $X$ is universal and so is its root component, whence $\Box\forall y\, .\,Xy$;
-  BF holds at the one-world components trivially, so $\Box$BF holds. No Pure Contingency fails, since
-  the pure sentence that there are at least two individuals is true at the root and false at the first
-  component. Possibility Maximalism (pure) fails, since Atomlessness is consistent with C but false at every world:
-  each component is a one-world model and the root proposition is an atom. The type-t Strong Leibniz Biconditionals
-  hold necessarily: at the root, the singleton of the arrow to component $n$ becomes that component’s
-  identity under it and empty under every other arrow, and the root proposition becomes empty under every
-  non-identity arrow, so every singleton is a strong world; the components are one-world models. Here
-  the components are full Henkin models, so every set of arrows is a root proposition: the root propositions
-  form a complete atomic algebra, giving Atomicity and Boolean Completeness at type t, and Relational
-  Choice holds at the root by a functional choice in the free root component. Possibility+ (pure) fails:
-  the component with three individuals has three at its only world; take two root individuals that differ
-  at that component and agree everywhere else; the pure formula saying that $x\ne y$ and there are exactly
-  two individuals is consistent, but at the root there are infinitely many individuals, under every arrow
-  into another component the two collapse, and under the arrow into that component there are three. □Relational
-  Choice holds: Relational Choice holds at the root by the free root component and at every component,
-  each being a full Henkin model. Distinctness-preserving collapse holds: let $a$ be the proposition true
-  at the actual world alone (the identity arrow). For any true $p$, take $q:=a$ in the definition of $\Box_{\ne}p$:
-  under a non-identity arrow $i$, $\Diamond a$ would need an arrow $k$ with $k\circ i$ the identity, and
-  none exists, since the components have no arrows to the root; under the identity, $p$ holds. So every
-  truth is $\Box_{\ne}$-necessary, although ND fails.'
+notes: 'Recorded to witness the consistency with C of the sentence through which Possibility Maximalism
+  (pure) reaches the Axiom of Infinity at type $t$, and of that Axiom itself. The construction and its
+  verification are in the write-up; no independent check is claimed. Interpretation of Σ, fixed for this
+  record: each relational constant denotes the top element of its type and each individual constant denotes
+  one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational type $\tau$,
+  so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed
+  by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda
+  x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the
+  closed pure term $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Further
+  facts: the root proposition, true at the root alone, is an atom entailing every root truth, so Actuality
+  holds. BF holds at the root: an entity of a relational type there is a family of component entities
+  with a free root component, every component entity is the component of some root entity, so if $\forall
+  y\, .\,\Box Xy$ holds at the root then every component of $X$ is universal and so is its root component,
+  whence $\Box\forall y\, .\,Xy$; BF holds at the one-world components trivially, so $\Box$BF holds. No
+  Pure Contingency fails, since the pure sentence that there are at least two individuals is true at the
+  root and false at the first component. Possibility Maximalism (pure) fails, since Atomlessness is consistent
+  with C but false at every world: each component is a one-world model and the root proposition is an
+  atom. The type-t Strong Leibniz Biconditionals hold necessarily: at the root, the singleton of the arrow
+  to component $n$ becomes that component’s identity under it and empty under every other arrow, and the
+  root proposition becomes empty under every non-identity arrow, so every singleton is a strong world;
+  the components are one-world models. Here the components are full Henkin models, so every set of arrows
+  is a root proposition: the root propositions form a complete atomic algebra, giving Atomicity and Boolean
+  Completeness at type t, and Relational Choice holds at the root by a functional choice in the free root
+  component. Possibility+ (pure) fails: the component with three individuals has three at its only world;
+  take two root individuals that differ at that component and agree everywhere else; the pure formula
+  saying that $x\ne y$ and there are exactly two individuals is consistent, but at the root there are
+  infinitely many individuals, under every arrow into another component the two collapse, and under the
+  arrow into that component there are three. □Relational Choice holds: Relational Choice holds at the
+  root by the free root component and at every component, each being a full Henkin model. Distinctness-preserving
+  collapse holds: let $a$ be the proposition true at the actual world alone (the identity arrow). For
+  any true $p$, take $q:=a$ in the definition of $\Box_{\ne}p$: under a non-identity arrow $i$, $\Diamond
+  a$ would need an arrow $k$ with $k\circ i$ the identity, and none exists, since the components have
+  no arrows to the root; under the identity, $p$ holds. So every truth is $\Box_{\ne}$-necessary, although
+  ND fails. The lattice principles hold at the root at every relational type, and necessarily. At a type
+  $\sigma\to t$ a root entity is a pair $(G_0,(G_n)_n)$ with $G_0$ any function on the root domain and
+  $G_n$ in the full domain of $M_n$; entailment is componentwise. Atomicity: below a nonzero $G$ lies
+  the atom that is true at the root of one argument $a$ with $G_0(a)=1$ and bottom in every component,
+  or, if $G_0=0$, the atom that is bottom at the root and in all but one component $M_n$, where it is
+  an atom of that full model below $G_n$. Both kinds of atom are strong worlds: at the root they entail
+  every entity or its negation, being singletons in one coordinate and bottom elsewhere, and their shifts
+  to the components are bottom or atoms of a one-world full model. So the Strong Leibniz Biconditionals
+  hold at every type. Boolean Completeness: the componentwise meet of any set of root entities is a root
+  entity and is the greatest lower bound. Rigid Comprehension: given $X$ with root extension $E$, let
+  $Y$ have root component $X_0$ and, in $M_n$, the projection of $E$ to the $n$-th coordinates; $Y$ is
+  persistent, since a root instance has its projection in every component, and inextensible, since a relation
+  necessary of every root instance contains those projections, while in the one-world components persistence
+  and inextensibility are automatic. Each component is a full Henkin model, in which all of these hold,
+  so the boxed forms hold at the root; Countable Boolean Completeness, the weak rigid comprehension principles
+  and Necessity of Arithmetic follow by the recorded results. B for pure sentences fails, and B for sentences
+  of $\Sigma$ with it: the pure sentence that there are two individuals is true at the root and false
+  at the first component, from which no arrow returns. Observations of Claude Fable 5.1 (Anthropic), 25
+  September 2026.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -134,3 +158,14 @@ changes:
   summary: Recorded the Distinctness-preserving collapse; see the notes.
   satisfies:
   - distinctness-preserving-collapse
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added □Atomicity, □Boolean Completeness, □Rigid Comprehension and □Strong Leibniz Biconditionals
+    at the root, and the failure of B for pure sentences, with the arguments in the notes.
+  satisfies:
+  - necessary-atomicity-r
+  - necessary-boolean-completeness-r
+  - necessary-rigid-comprehension-r
+  - necessary-strong-leibniz-r
+  violates:
+  - pure-b-r

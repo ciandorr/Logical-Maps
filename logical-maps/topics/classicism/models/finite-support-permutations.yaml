@@ -25,6 +25,7 @@ violates:
 - countable-boolean-completeness-r
 - distinctness-preserving-collapse
 - inextensible-comprehension-r
+- boolean-completeness-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -59,9 +60,9 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   the signature schemata that give the constants a special role fail: with $c\in\Sigma$ of relational
   type $\tau$, $c=\top_\tau$ necessarily, so Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
   Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$, Independence
-  (signature Σ) fails since $c$ denotes what a closed pure term denotes, and Distinctness Maximalism (signature Σ)
-  fails since $c=\top_\tau$ is true and unprovable. But No Contingency (signature Σ), and with it B for
-  sentences of Σ, hold. The relational constants denote pure entities, so a closed Σ-sentence denotes
+  (signature Σ) fails since $c$ denotes what a closed pure term denotes, and Distinctness Maximalism (signature
+  Σ) fails since $c=\top_\tau$ is true and unprovable. But No Contingency (signature Σ), and with it B
+  for sentences of Σ, hold. The relational constants denote pure entities, so a closed Σ-sentence denotes
   what some $P(d,\ldots,d)$ denotes for a pure formula $P$; the model’s automorphisms carry every individual
   to every other, so $P(d,\ldots,d)$ is materially equivalent to the pure sentence $\forall x\, .\,P(x,\ldots,x)$
   and its negation to $\forall x\, .\,\neg P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency,
@@ -101,7 +102,34 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   sends $m^{\prime}$, and nothing else, to $m$, and $m^{\prime}$ is odd. So $\langle b,i\rangle\in Y\setminus
   B_{N^{\prime}}$, and $Y$ is not even weakly inextensible. Observation of 23 September 2026, answering
   Cian Dorr’s question whether the failure of Actuality can be sharpened to a failure of Inextensible
-  Comprehension.'
+  Comprehension. The following arguments, found independently on 25 September 2026, overlap with those
+  above. Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures but does
+  not show. Any set $F$ of propositions is the extension at the identity of an element of the domain at
+  type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}$: it is natural, independent
+  of $h$ and so pinned down by the empty set, and each of its values is pinned down by the pinning set
+  of $p$, since $i\cdot p$ depends only on the values of $i$ there. A least upper bound of $F$ under entailment
+  is a least finitely pinned superset of $\bigcup F$, and it exists only if the least $S$-pinned superset
+  of $\bigcup F$ stops shrinking as the finite set $S$ grows. Here let $A_m$ ($m\ge1$) be the proposition,
+  pinned down by $\{0,m\}$, that the permutation swaps $0$ and $m$. A permutation $\pi$ belongs to the
+  least superset of $\bigcup_mA_m$ pinned down by $S=\{0,\ldots,N\}$ iff either $\pi(0)\in S\setminus\{0\}$
+  and $\pi(\pi(0))=0$, or $\pi(0)\notin S$ and $0\notin\pi(S)$; the $3$-cycle $(0\ N{+}1\ N{+}2)$ satisfies
+  the second clause for $S$ but neither clause for $\{0,\ldots,N+1\}$, so these supersets strictly shrink.
+  So $F$ has no least upper bound, and, taking pointwise negations, the family of complements has no greatest
+  lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source. Inextensible
+  Comprehension fails at type $e$, for the property of being even, whose extension is the evens at every
+  world (the intension $\langle h,b\rangle\mapsto\{i : i(b)\text{ even}\}$, pinned down by the empty set).
+  Suppose $Y$ were inextensible with extension the evens and pinned down by the finite set $S$. Inextensibility
+  at the identity gives $Y\le X$ for every $X$ in the domain that is necessary of each even number; for
+  an odd number $o$ the property of being distinct from $o$ is such an $X$, as permutations never collapse
+  two individuals, so the extension of $Y$ at every arrow $h$ is contained in $h(\text{evens})$. But a
+  permutation $h$ fixing $S$ pointwise has $h\cdot Y=Y$, so the extension of $Y$ at $h$ is the evens,
+  and $h$ may swap an even and an odd number outside $S$. Contradiction. It also fails at type $t\to t$,
+  for the family $E$ of propositions $p_n$ that $n$ is fixed: for $Y$ inextensible with extension $E$
+  pinned down by $S$, pick $k\notin S$ and let $X$, pinned down by $S_X:=S\cup\{k\}$, hold at an arrow
+  $h$ exactly of the propositions $\{i : i(m)=n\}$ with $n\notin S_X$ and of the propositions $\{i : i(h(n))=n\}$
+  with $n\in S_X$; $X$ is necessary of every $p_n$, but at a permutation $h$ fixing $S$ pointwise and
+  moving $k$ its extension omits $p_k$, which the extension of $Y$ at $h$ contains. Observations of Claude
+  Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -167,4 +195,11 @@ changes:
   summary: Recorded the failure of Inextensible Comprehension at type e→t for the property of being even,
     sharpening the failure of Actuality; argument in the notes.
   violates:
+  - inextensible-comprehension-r
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Boolean Completeness (type t) and of Inextensible Comprehension, with
+    the arguments in the notes.
+  violates:
+  - boolean-completeness-t
   - inextensible-comprehension-r

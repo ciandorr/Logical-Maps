@@ -84,7 +84,3 @@ conjectures the additional type-$t$ Boolean Completeness failures. DeepSeek
 corrected proof above on the same date. The immutable drafts and exact API
 edit provenance are identified in the model record's `certificate.trawl`.
 This is an informal mathematical review; no Lean verification is claimed.
-
-## Paper references
-
-- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Appendix D, Proposition D.5(5), pp. 74–75; construction p. 78, Part 5; p. 79 (No Pure Contingency)

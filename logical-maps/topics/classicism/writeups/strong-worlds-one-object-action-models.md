@@ -1,56 +1,4 @@
-# Finite-support action model: dyadic roundings of N
-
-## Failure of Boolean Completeness at type $t$
-
-At the identity arrow of this one-object action model, propositions are
-sets of arrows pinned down by a finite set of individuals. Algebraic
-entailment is set inclusion, and Boolean operations are the set operations.
-
-The higher-type domain obligation is essential. By *Classicism*, Definition
-D.3 and the following paragraph (16 May 2023 draft, pp. 73–74), an ideally
-full model is extensionally full. Consequently every set $R\subseteq D_t$
-is the extension, at the identity, of a property of propositions. Concretely,
-the intension $I_R=\{(h,p):p\in R\}$ is independent of its arrow argument
-and is pinned down by the empty set. Its applicative behaviour is
-$X_R\langle h,p\rangle=\{j:j^t p\in R\}$, not a constant truth-value
-function. This distinction supplies domain membership without the false
-rigidification argument in some trawl notes.
-
-Thus a family of domain propositions with no least upper bound refutes
-Boolean Completeness at type $t$: the family of their complements is also
-the extension of a domain property, and a greatest lower bound for those
-complements would, by complementation, give the missing least upper bound.
-The bounds are taken **inside** $D_t$. A set-theoretic intersection absent
-from $D_t$ need not by itself establish a missing greatest lower bound.
-
-### The domain and missing bound
-
-Index the arrows by $j\ge0$, writing
-$f_{2^j}(m)=2^j\lfloor m/2^j\rfloor$. Composition takes the maximum of
-the indices. For any finite support $F$, every sufficiently large $2^j$
-exceeds all members of $F$, so all the corresponding arrows vanish on $F$.
-Conversely, for a finite collection of indices, an initial segment including
-the relevant powers of two distinguishes their arrows and the remaining
-tail. Hence $D_t$ is precisely the finite/cofinite algebra on these indices.
-
-Every singleton with an even index belongs to $D_t$. Let $R$ be the family
-of those singletons. An upper bound in $D_t$ must contain all even indices,
-so it is cofinite. It therefore contains an odd index $j$. Removing that
-singleton yields a strictly smaller cofinite upper bound. There is no least
-upper bound, so the preceding domain argument refutes Boolean Completeness
-at type $t$.
-
-## Attribution and review
-
-The model construction is Bacon and Dorr's. Their footnote 92 (p. 74)
-conjectures the additional type-$t$ Boolean Completeness failures. DeepSeek
-(`deepseek-flash`) proposed this model verdict in the trawl of 25 September
-2026. OpenAI Codex (GPT-6) checked the source definitions and supplied the
-corrected proof above on the same date. The immutable drafts and exact API
-edit provenance are identified in the model record's `certificate.trawl`.
-This is an informal mathematical review; no Lean verification is claimed.
-
-## Strong worlds and Barcan
+# Strong worlds and Barcan in the collapsing action models
 
 The finite-support truncation model, the finite-support dyadic-rounding model,
 and the full two-arrow idempotent model all fail the type-t Strong Leibniz
@@ -197,7 +145,3 @@ assumed for an arbitrary non-full model.
   by restricting successor quantifiers to transported propositions. This
   finite calculation supplements the proofs; it does not replace the
   infinite-model argument above.
-
-## Paper references
-
-- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Appendix D, Proposition D.5(7), pp. 74–75; construction p. 78, Part 7; p. 79 (No Pure Contingency)

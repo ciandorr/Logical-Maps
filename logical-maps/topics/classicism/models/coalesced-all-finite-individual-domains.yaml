@@ -13,6 +13,9 @@ satisfies:
 - necessary-relational-choice-r
 - distinctness-preserving-collapse
 - transversal-choice-r
+- necessary-atomicity-r
+- necessary-boolean-completeness-r
+- necessary-rigid-comprehension-r
 violates:
 - distinctness-necessary-r
 - witnessed-possibility-r
@@ -30,13 +33,133 @@ certificate:
   checked_by: []
   date: '2026-09-20'
   lean: none
+  trawl:
+    quarantine_id: quarantine-0113be29928e4d2fbf33c5d150b87c73
+    candidate_id: checkpoint-0cd1f2d674504d27a1758698cd564383
+    candidate_sha256: 9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a
+    source:
+      repository: https://github.com/zwlgzwlg/Logical-Maps.git
+      ref: main
+      commit: a7bbaecf6f282ac27ea1ee52e3e75721bead6318
+    discovery:
+      trawl_id: trawl-0d3832380ce44159b1120e739b2f3e9b
+      at: '2026-09-25T15:59:22.350971+00:00'
+      actor:
+        kind: model
+        provider: deepseek
+        model: deepseek-flash
+        protocol: chat-completions
+        endpoint: https://api.deepseek.com/chat/completions
+        reported_model: deepseek-flash
+      prompt_sha256: 5bd23ef743df9958b519b8e1ed49f56ff5ae47b6ca620950956b5b72375b8d96
+      response_sha256: fbf982a58fb74b7e574aa14e8f5d0a410c887923b3a921c6031f23943832e52a
+      response_id: 054a9cf1-2991-4b43-98bd-e764ffd36eb8
+      usage:
+        prompt_tokens: 351472
+        completion_tokens: 514
+        total_tokens: 351986
+        prompt_tokens_details:
+          cached_tokens: 350592
+        completion_tokens_details:
+          reasoning_tokens: 362
+        prompt_cache_hit_tokens: 350592
+        prompt_cache_miss_tokens: 880
+      offline: false
+    evidence:
+    - kind: original-argument
+      citation: DeepSeek (deepseek-flash), saved 2026-09-25T15:59:22.381877+00:00; checkpoint-4db270c36221475a939da602cffa8ce8
+        (SHA-256 5e423dd7f661ef9636f90f90b4f70a8d2736503d9158bca4579a430eb88e4332). Frozen in quarantine
+        commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated
+        checkpoint.
+      locator: 'logical-maps/topics/classicism/models/coalesced-all-finite-individual-domains.yaml: satisfies
+        necessary-atomicity-r; workspaces/workspace-ec38d3636a6b4ebb836465131dc22d43/turns/trawl-0d3832380ce44159b1120e739b2f3e9b/000000-edit.json'
+      role: origin
+      verification: argument-in-writeup
+    - kind: original-argument
+      citation: DeepSeek (deepseek-flash), saved 2026-09-25T16:00:26.442175+00:00; checkpoint-4db270c36221475a939da602cffa8ce8
+        (SHA-256 5e423dd7f661ef9636f90f90b4f70a8d2736503d9158bca4579a430eb88e4332). Frozen in quarantine
+        commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated
+        checkpoint.
+      locator: 'logical-maps/topics/classicism/models/coalesced-all-finite-individual-domains.yaml: satisfies
+        necessary-boolean-completeness-r; workspaces/workspace-ec38d3636a6b4ebb836465131dc22d43/turns/trawl-c2a962823e0c4e39a0e9e96440084c09/000000-edit.json'
+      role: origin
+      verification: argument-in-writeup
+    - kind: original-argument
+      citation: DeepSeek (deepseek-flash), saved 2026-09-25T16:30:36.317902+00:00; checkpoint-9e9862de00384d66a2aa09f02b6edd22
+        (SHA-256 23530bd35e46625e127ec3a6a1de5812d3be6332a9d616f95b5ece3a7bde1f26). Frozen in quarantine
+        commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated
+        checkpoint.
+      locator: 'logical-maps/topics/classicism/models/coalesced-all-finite-individual-domains.yaml: satisfies
+        necessary-rigid-comprehension-r; workspaces/workspace-63a7fbc03dda47429345b1e88c727923/turns/trawl-d1a4f1fb111f4de19599526a1b376064/000000-edit.json'
+      role: origin
+      verification: argument-in-writeup
+    - kind: literature
+      citation: Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf;
+        exact relevant sections inspected during review.
+      locator: Sections and proof dependencies are identified in the accompanying handwritten write-ups
+        and review report.
+      role: background
+      verification: argument-in-writeup
+    reviews:
+    - version: 1
+      id: review-b1d4be27f1d9472d8b87f930303b0a51
+      candidate_id: checkpoint-0cd1f2d674504d27a1758698cd564383
+      candidate_sha256: 9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a
+      at: '2026-09-25T19:01:48.374392+00:00'
+      recorded_at: '2026-09-25T19:01:48.375706+00:00'
+      actor:
+        kind: model
+        provider: openai
+        model: gpt-6
+      source:
+        repository: https://github.com/zwlgzwlg/Logical-Maps.git
+        ref: HEAD
+        commit: a7bbaecf6f282ac27ea1ee52e3e75721bead6318
+      report:
+        verdict: accept
+        summary: 'Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t
+          localizations, three SL-t failures (including correction of the full idempotent model), three
+          boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary
+          SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived
+          proposals add no duplicate verdicts.'
+        argument_check: Independently checked the finite/cofinite missing-bound argument, repaired three
+          descending-family errors using alternating agreement shells, checked arbitrary-family predicate
+          admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all
+          target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness
+          for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension
+          rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance.
+          Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes
+          check shell indexing. Topic schema/reference/consistency validation passed before recording this
+          review. Finite calculations supplement, and do not replace, the infinite proofs.
+        source_check: 'Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions
+          3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions
+          D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions
+          and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response
+          hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions
+          are discarded. No source PDF or private reading extract is admitted. Original construction authorship
+          and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean
+          verification is claimed.'
+        issues: []
+      method: informal-mathematical-review
+    admission:
+      id: admission-c0a37bbe6b6c45cc985428b174812564
+      at: '2026-09-25T19:01:48.376481+00:00'
+      by: OpenAI Codex (GPT-6)
+      base_commit: a7bbaecf6f282ac27ea1ee52e3e75721bead6318
+      candidate_sha256: 9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a
+      review_id: review-b1d4be27f1d9472d8b87f930303b0a51
 sources:
 - Claude Fable 5.1 (Anthropic), construction and verification of 20 September 2026 (see the write-up).
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7,
   pp. 47–48 (the summands); Appendix E, pp. 80–83 (coalesced sums).
+- DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and
+  corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction
+  attribution is unchanged. writeups/coalesced-all-finite-individual-domains.md, final section; Classicism,
+  Definition E.2, pp. 80–83.
 source_names:
 - Fable 20 Sep
 - Classicism
+- DeepSeek trawl; GPT-6 review 25 Sep
 references:
 - paper: bacon-dorr-classicism
   role: related
@@ -55,40 +178,47 @@ description: 'Take the full Henkin models $M_n$ with individual domain $\{1,\ldo
   holds there. The root has uncountably many individuals and infinitely many propositions, so both Axioms
   of Infinity hold there. Two threads that agree at some world are distinct but possibly identical, so
   ND fails at type $e$. Evaluation point: the root.'
-notes: 'Recorded to witness the consistency with C of the sentence through which Possibility Maximalism (pure) reaches
-  the Axiom of Infinity at type $t$, and of that Axiom itself. The construction and its verification are
-  in the write-up; no independent check is claimed. Interpretation of Σ, fixed for this record: each relational
-  constant denotes the top element of its type and each individual constant denotes one fixed individual.
-  Under it the signature schemata fail. Let $c\in\Sigma$ have relational type $\tau$, so $c=\top_\tau$
-  necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$
-  but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$
-  agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term
-  $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ)
-  does not prove. Everything that implies these fails with them. Further facts: the root proposition,
-  true at the root alone, is an atom entailing every root truth, so Actuality holds. BF holds at the root:
-  an entity of a relational type there is a family of component entities with a free root component, every
-  component entity is the component of some root entity, so if $\forall y\, .\,\Box Xy$ holds at the root
-  then every component of $X$ is universal and so is its root component, whence $\Box\forall y\, .\,Xy$;
-  BF holds at the one-world components trivially, so $\Box$BF holds. No Pure Contingency fails, since
-  the pure sentence that there are at least two individuals is true at the root and false at the first
-  component. Possibility Maximalism (pure) fails, since Atomlessness is consistent with C but false at every world:
-  each component is a one-world model and the root proposition is an atom. The type-t Strong Leibniz Biconditionals
-  hold necessarily: at the root, the singleton of the arrow to component $n$ becomes that component’s
-  identity under it and empty under every other arrow, and the root proposition becomes empty under every
-  non-identity arrow, so every singleton is a strong world; the components are one-world models. Here
-  the components are full Henkin models, so every set of arrows is a root proposition: the root propositions
-  form a complete atomic algebra, giving Atomicity and Boolean Completeness at type t, and Relational
-  Choice holds at the root by a functional choice in the free root component. Possibility+ (pure) fails:
-  the component with three individuals has three at its only world; take two root individuals that differ
-  at that component and agree everywhere else; the pure formula saying that $x\ne y$ and there are exactly
-  two individuals is consistent, but at the root there are infinitely many individuals, under every arrow
-  into another component the two collapse, and under the arrow into that component there are three. □Relational
-  Choice holds: Relational Choice holds at the root by the free root component and at every component,
-  each being a full Henkin model. Distinctness-preserving collapse holds: let $a$ be the proposition true
-  at the actual world alone (the identity arrow). For any true $p$, take $q:=a$ in the definition of $\Box_{\ne}p$:
-  under a non-identity arrow $i$, $\Diamond a$ would need an arrow $k$ with $k\circ i$ the identity, and
-  none exists, since the components have no arrows to the root; under the identity, $p$ holds. So every
-  truth is $\Box_{\ne}$-necessary, although ND fails.'
+notes: 'Recorded to witness the consistency with C of the sentence through which Possibility Maximalism
+  (pure) reaches the Axiom of Infinity at type $t$, and of that Axiom itself. The construction and its
+  verification are in the write-up; no independent check is claimed. Interpretation of Σ, fixed for this
+  record: each relational constant denotes the top element of its type and each individual constant denotes
+  one fixed individual. Under it the signature schemata fail. Let $c\in\Sigma$ have relational type $\tau$,
+  so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed
+  by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda
+  x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the
+  closed pure term $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$
+  is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Further
+  facts: the root proposition, true at the root alone, is an atom entailing every root truth, so Actuality
+  holds. BF holds at the root: an entity of a relational type there is a family of component entities
+  with a free root component, every component entity is the component of some root entity, so if $\forall
+  y\, .\,\Box Xy$ holds at the root then every component of $X$ is universal and so is its root component,
+  whence $\Box\forall y\, .\,Xy$; BF holds at the one-world components trivially, so $\Box$BF holds. No
+  Pure Contingency fails, since the pure sentence that there are at least two individuals is true at the
+  root and false at the first component. Possibility Maximalism (pure) fails, since Atomlessness is consistent
+  with C but false at every world: each component is a one-world model and the root proposition is an
+  atom. The type-t Strong Leibniz Biconditionals hold necessarily: at the root, the singleton of the arrow
+  to component $n$ becomes that component’s identity under it and empty under every other arrow, and the
+  root proposition becomes empty under every non-identity arrow, so every singleton is a strong world;
+  the components are one-world models. Here the components are full Henkin models, so every set of arrows
+  is a root proposition: the root propositions form a complete atomic algebra, giving Atomicity and Boolean
+  Completeness at type t, and Relational Choice holds at the root by a functional choice in the free root
+  component. Possibility+ (pure) fails: the component with three individuals has three at its only world;
+  take two root individuals that differ at that component and agree everywhere else; the pure formula
+  saying that $x\ne y$ and there are exactly two individuals is consistent, but at the root there are
+  infinitely many individuals, under every arrow into another component the two collapse, and under the
+  arrow into that component there are three. □Relational Choice holds: Relational Choice holds at the
+  root by the free root component and at every component, each being a full Henkin model. Distinctness-preserving
+  collapse holds: let $a$ be the proposition true at the actual world alone (the identity arrow). For
+  any true $p$, take $q:=a$ in the definition of $\Box_{\ne}p$: under a non-identity arrow $i$, $\Diamond
+  a$ would need an arrow $k$ with $k\circ i$ the identity, and none exists, since the components have
+  no arrows to the root; under the identity, $p$ holds. So every truth is $\Box_{\ne}$-necessary, although
+  ND fails.
+
+
+  Review of 25 September 2026. The appended handwritten verification establishes necessary Atomicity,
+  necessary Boolean Completeness and necessary Rigid Comprehension at every relational type. The existing
+  rules derive the unboxed and Strong Leibniz consequences. These are additions for this particular full-Henkin-component
+  construction; they do not apply to arbitrary coalesced sums.'
 changes:
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic)
@@ -138,9 +268,20 @@ changes:
 - date: '2026-09-25'
   by: Claude Fable 5.1 (Anthropic)
   summary: 'Added Transversal Choice at the root, by the argument recorded for Relational Choice: a root
-    entity has an arbitrary root component, so take the property whose root component is a transversal, chosen
-    in the metatheory, of the root component of an equivalence relation at the root, with empty component
-    parts; the equivalence and transversal conditions are all evaluated at the root''s identity arrow.
-    Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun.'
+    entity has an arbitrary root component, so take the property whose root component is a transversal,
+    chosen in the metatheory, of the root component of an equivalence relation at the root, with empty
+    component parts; the equivalence and transversal conditions are all evaluated at the root''s identity
+    arrow. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun.'
   satisfies:
   - transversal-choice-r
+- date: '2026-09-25'
+  by: OpenAI Codex (GPT-6)
+  summary: 'Accepted all-type product-algebra additions from the DeepSeek trawl after correcting the proof:
+    Atomicity, Boolean Completeness and Rigid Comprehension hold at every world. Root atoms remain atoms
+    or bottom in the components, so the Strong Leibniz schemata hold too. The projected-extension RC proof
+    is supplied by this review; boxed claims are checked at every world, not obtained by necessitating
+    a hypothesis.'
+  satisfies:
+  - necessary-atomicity-r
+  - necessary-boolean-completeness-r
+  - necessary-rigid-comprehension-r

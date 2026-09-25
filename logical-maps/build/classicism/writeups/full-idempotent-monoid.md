@@ -1,55 +1,152 @@
 # Full action model: idempotent two-arrow monoid
 
-<p class='cert'>Model — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
+## Strong worlds and Barcan
 
-## Package
+The finite-support truncation model, the finite-support dyadic-rounding model,
+and the full two-arrow idempotent model all fail the type-t Strong Leibniz
+Biconditionals. The truncation model also fails BF at type t. These statements
+concern the existing constructions; no modification of their domains is needed.
 
-- **□Rigid Comprehension.** Every closed instance of Rigid Comprehension is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
-- **□Atomicity.** Every closed instance of Atomicity is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
-- **□Actuality.** Every closed instance of Actuality is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
-- **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
-- **Relational Choice.** Every serial binary relation has a functional subrelation.
-- **□Strong Leibniz Biconditionals (type t).** Every closed instance of Strong Leibniz Biconditionals (type t) is necessary.
-- **□Relational Choice.** Every closed instance of Relational Choice is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.
-- **Distinctness-preserving collapse.** Every truth is necessary under the distinctness-preserving modality.
-- **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
-- **¬ ND (type t).** ND (type t) in the displayed closed propositional formulation.
-- **¬ BF (type t).** BF (type t) in the displayed closed propositional formulation.
-- **¬ Fregean Axiom.** Materially equivalent propositions are identical.
-- **¬ Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
-- **¬ Infinity Schema (type t).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
-- **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
-- **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
-- **¬ Independence (signature Σ).** No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.
-- **¬ Distinctness Maximalism (signature Σ).** The Distinctness Maximalism schema for the fixed nonlogical signature Sigma.
-- **¬ No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
-- **¬ B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
+The Strong Leibniz failures were proposed in the DeepSeek `deepseek-flash`
+trawl of 25 September 2026. OpenAI Codex (GPT-6) checked them against the source
+semantics and supplied the unified proof below on the same date. The direct
+BF witness below was supplied during that review to repair the trawl's
+unsupported use of a converse to Proposition 3.24(ii). These are informal
+mathematical checks, without Lean verification. The model constructions remain
+attributed to Bacon and Dorr.
 
-## Construction
+## Quantification at a successor
 
-The full model on {1,k} with k²=k, evaluated at its sole object. Refer to the cited paragraph for the four propositions and the failure witnesses.
+We use Bacon and Dorr, *Classicism*, draft of 16 May 2023, Definition 3.19,
+pp.55–56, and the satisfaction clauses on p.57. At an arrow from an object W
+to an object V, assigned entities are transported to V, while newly bound
+variables range over V's entire domain. They do not range merely over the
+image of W's domain under that arrow.
 
-## Notes
+For a one-object model let A be its monoid and P its type-t domain. Its
+proposition action is
 
-The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\tau=\bar\sigma t$ denotes $\lambda\bar x\, .\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\forall\bar x\, .\,c\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\Diamond a$ is false, so $\Box\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\top_\tau$, witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is $\Diamond\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\tau'$ denotes what the closed pure term $\top_{\tau'}$ denotes, and $c'=\top_{\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything that implies these fails with them. In a one-object action model whose propositions are all the sets of arrows, every singleton $\{h\}$ is a strong world proposition: seen from an arrow $i$ it becomes $\{j : j\circ i=h\}$, and every proposition at that world is the shift $\{j : j\circ i\in Y\}$ of a root proposition $Y$, whose membership for such $j$ depends only on whether $h\in Y$; so it entails every proposition or its negation, at every world. Any possible proposition contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains at the reachable objects being unchanged, and Relational Choice holds in every full model given choice in the metatheory (Classicism, p. 61). Distinctness-preserving collapse holds: for a true $p$ take $q:=\{1\}$; under $k$, $\Diamond\{1\}$ would need $x\circ k=1$, but $x\circ k=k$ for both arrows, so it fails there, and under $1$, $p$ holds.
+\[
+h^t p=\{u\in A:u\circ h\in p\}.
+\]
 
-## Revisions
+At the basepoint, possibility means nonemptiness and entailment means set
+inclusion. Consequently an admitted proposition w is a strong world exactly
+when it is nonempty and, for every arrow h and every **target-domain**
+proposition Y in P,
 
-- **2026-09-25** (Claude Fable 5.1 (Anthropic)) — Added Transversal Choice, by the argument recorded for Relational Choice: a full model contains every intension, in particular one whose extension at the evaluation point is a transversal, chosen in the metatheory, of the extension there of an equivalence relation; the equivalence and transversal conditions are unboxed. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun. Now satisfies: Transversal Choice.
-- **2026-09-23** (Claude Fable 5.1 (Anthropic)) — Recorded the Distinctness-preserving collapse; see the notes. Now satisfies: Distinctness-preserving collapse.
-- **2026-09-23** (Claude Fable 5.1 (Anthropic)) — Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences of Σ, at Cian Dorr’s request; see the notes. Now violates: No Contingency (signature Σ), B for sentences of Σ.
-- **2026-09-23** (Claude Fable 5.1 (Anthropic)) — Corrected the reason given for the failures of Independence (signature Σ) and Distinctness (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed by every arrow; the failures come from the other relational constants, which denote top. No verdict changes.
-- **2026-09-22** (Claude Fable 5.1 (Anthropic)) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Distinctness Maximalism (signature Σ).
-- **2026-09-22** (Claude Fable 5.1 (Anthropic)) — Added □Strong Leibniz Biconditionals (type t): every singleton of an arrow is a strong world in a propositionally full one-object model; see the notes. Now satisfies: □Strong Leibniz Biconditionals (type t).
-- **2026-09-22** (Claude Fable 5.1 (Anthropic)) — Boxed the Relational Choice claim; see the notes. Now satisfies: □Relational Choice.
-- **2026-09-20** (Claude Fable 5.1 (Anthropic)) — Added Relational Choice at Cian Dorr's direction. With choice in the metatheory a serial relation has a functional subrelation, and a full model contains every intension, so that subrelation is in the domain; see Classicism, p. 61, on the principles common to full models. The propositions at the evaluation object are the subsets of the two arrows out of it, four in all, and every intension of a full model is present, so the numerals are the finite cardinalities and the fourth holds of the universal property of propositions: the Axiom of Infinity at type t fails, as does the fifth instance of the schema. Now satisfies: Relational Choice. Now violates: Axiom of Infinity (type t), Infinity Schema (type t).
-- **2026-09-17** (OpenAI Codex (GPT-6)) — Adopted the source’s relational type system at the user’s request. The cited construction now directly supplies the recorded model; the former type-extension obligation is removed. Now satisfies: □Rigid Comprehension, □Atomicity, □Actuality, No Pure Contingency. Now violates: ND (type t), BF (type t), Fregean Axiom.
+\[
+h^t w\subseteq Y\quad\text{or}\quad h^t w\subseteq A\setminus Y.
+\]
 
-## Sources
+The quantifier over Y here is inside the box in the definition of a strong
+world. Restricting it to propositions of the form h^t p changes the definition
+and gives the wrong answer in the examples below.
 
-- **Classicism** — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.5, p. 59, first paragraph; p. 61 (full-model principles).
+## A nonidentity idempotent refutes Strong Leibniz
 
-<p class='cert'>Record: <code>topics/classicism/models/full-idempotent-monoid.yaml</code></p>
+Suppose h is a nonidentity idempotent arrow and the singleton p={h} is an
+admitted proposition. Then p is possible, and the only possible proposition
+w entailing p is p itself. But
+
+\[
+1,h\in h^t\{h\},
+\]
+
+because both 1∘h and h∘h equal h. At the successor h, take the independently
+quantified proposition Y={h}. The shift h^t{h} meets Y at h and meets its
+complement at 1. It therefore entails neither Y nor its negation. Thus p is
+not a strong world, and the possible p has no strong world below it.
+
+This proves failure of Strong Leibniz at type t in each of the following
+existing models:
+
+- **Full idempotent monoid:** A={1,k}, with k²=k and k≠1. Every subset of A
+  is a proposition, so take h=k. The construction is *Classicism*, §3.5,
+  p.59. In this model the only strong world at the basepoint is {1}; the
+  possible proposition {k} has none below it.
+- **Finite-support truncations:** arrows are the identity and g_n(m)=min(m,n).
+  Take h=g_0. Its singleton is pinned down by the finite individual set
+  {0,1}: g_0 is the unique arrow sending 1 to 0. Also g_0²=g_0≠1. See
+  Proposition D.5(6), construction on p.78.
+- **Finite-support dyadic roundings:** f_n rounds down to a multiple of n,
+  for n a power of two. Take h=f_2. The singleton {f_2} is pinned by
+  {0,1,2}, since f_2(1)=0 and f_2(2)=2 distinguish it from the identity
+  and all coarser dyadic roundings. Also f_2²=f_2≠1. See Proposition
+  D.5(7), construction on p.78.
+
+In all three cases, the necessary type-t Strong Leibniz Biconditionals fail
+as well: by T, their truth would imply the unboxed sentence. This corrects
+the earlier positive flag for the full idempotent model. Its source
+construction and other independently established properties are unchanged.
+
+For comparison, in a group h^t{g}={g∘h^{-1}} is a singleton, and in the
+truncated-shift monoid k_n∘k_m=k_{n+m}, each such precomposition fibre is
+empty or a singleton. Their singleton worlds therefore do decide every
+target proposition. Those positive Strong Leibniz verdicts already follow
+from the map's Atomicity and Barcan rules.
+
+## A finitely pinned BF(t) witness in the truncation model
+
+Let A and P now be the truncation monoid and its proposition domain. Define
+an intension for a property X of propositions by assigning the following
+extensions to arrows:
+
+\[
+I_h=
+\begin{cases}
+\{\varnothing,A\},&h=g_0,\\
+P,&h\ne g_0.
+\end{cases}
+\]
+
+This is an admissible type-tt entity. Indeed h=g_0 exactly when h(1)=0,
+so the intension is pinned down by the finite individual set {1}.
+Definition D.3's equivalent intension characterization on p.74 places every
+such finitely pinned intension in this ideally full model's domain.
+
+For every proposition p assigned at the base and every arrow h, h^t p
+belongs to I_h. For h≠g_0 this is immediate. For h=g_0, the identity
+u∘g_0=g_0 for every arrow u gives
+
+\[
+g_0^t p=
+\begin{cases}
+A,&g_0\in p,\\
+\varnothing,&g_0\notin p,
+\end{cases}
+\]
+
+and both values belong to I_{g_0}. Thus forall p Box Xp holds at the base.
+
+At the successor g_0 the quantifier ranges over all of P. In particular,
+the admitted proposition {g_0} is neither A nor empty and does not belong
+to I_{g_0}. Hence forall p Xp is false there, and Box forall p Xp is false
+at the base. This X refutes
+
+\[
+\forall X^{tt}\bigl((\forall p\,\Box Xp)\to\Box\forall p\,Xp\bigr).
+\]
+
+The boxed BF(t) sentence fails by T. Appendix D, footnote 92 on p.74 also
+explicitly covers BF failure at every type in this example. The direct
+witness above makes clear why no converse to Proposition 3.24(ii) is being
+assumed for an arbitrary non-full model.
+
+## Sources and verification
+
+- Bacon, Andrew, and Cian Dorr, *Classicism*, draft of 16 May 2023,
+  [public reference](https://philpapers.org/archive/BACC-8.pdf): pp.55–58
+  for action semantics and Proposition 3.24; p.59 for the idempotent model;
+  Definitions D.1–D.3, pp.73–74, for ideals, pinning and ideally full domains;
+  Proposition D.5(6–7), p.78, for truncations and dyadic roundings.
+- The exact finite calculation in `checks/action_strong_worlds.py`
+  enumerates all four propositions of the two-arrow monoid and the
+  successor-domain quantifier in the strong-world condition. It also checks
+  the analogous BF witness and demonstrates the erroneous answer obtained
+  by restricting successor quantifiers to transported propositions. This
+  finite calculation supplements the proofs; it does not replace the
+  infinite-model argument above.
 
 ## Paper references
 

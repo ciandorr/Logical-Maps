@@ -197,7 +197,3 @@ assumed for an arbitrary non-full model.
   by restricting successor quantifiers to transported propositions. This
   finite calculation supplements the proofs; it does not replace the
   infinite-model argument above.
-
-## Paper references
-
-- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Appendix D, Proposition D.5(7), pp. 74–75; construction p. 78, Part 7; p. 79 (No Pure Contingency)

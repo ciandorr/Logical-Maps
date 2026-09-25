@@ -1,4 +1,4 @@
-# Finite-support action model: identity-or-collapse monotone surjections
+# Finite-support action model: identity-or-collapse monotone maps
 
 ## Failure of Boolean Completeness at type $t$
 
@@ -25,11 +25,9 @@ from $D_t$ need not by itself establish a missing greatest lower bound.
 
 ### A strictly decreasing sequence of agreement classes
 
-Take $h_0(m)=\max(m-1,0)$. For $n\ge1$, define $g_n(m)=h_0(m)$
-when $m\le n$, and $g_n(m)=h_0(m-1)$ when $m>n$. This inserts one
-extra plateau into a monotone surjection and preserves both surjectivity
-and the collapse of $0$ and $1$. It agrees with $h_0$ through $n$ and
-disagrees at $n+1$.
+Take $h_0(m)=0$. For $n\ge1$, the map equal to zero through $n$
+and to one thereafter is monotone and collapses $0$ and $1$. It is an
+arrow agreeing with $h_0$ through $n$ and disagreeing at $n+1$.
 
 Put $C_n=\{h:h|_{\{0,\ldots,n\}}=h_0|_{\{0,\ldots,n\}}\}$
 and $A_n=C_n\setminus C_{n+1}$, for $n\ge1$. These are finitely
@@ -84,7 +82,3 @@ conjectures the additional type-$t$ Boolean Completeness failures. DeepSeek
 corrected proof above on the same date. The immutable drafts and exact API
 edit provenance are identified in the model record's `certificate.trawl`.
 This is an informal mathematical review; no Lean verification is claimed.
-
-## Paper references
-
-- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Appendix D, Proposition D.5(5), pp. 74–75; construction p. 78, Part 5; p. 79 (No Pure Contingency)

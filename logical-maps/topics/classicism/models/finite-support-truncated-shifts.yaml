@@ -25,6 +25,7 @@ violates:
 - countable-boolean-completeness-r
 - no-contingency-signature-r
 - signature-b-r
+- boolean-completeness-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -33,11 +34,113 @@ certificate:
   checked_by: []
   date: '2026-09-17'
   lean: none
+  trawl:
+    quarantine_id: quarantine-0113be29928e4d2fbf33c5d150b87c73
+    candidate_id: checkpoint-0cd1f2d674504d27a1758698cd564383
+    candidate_sha256: 9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a
+    source:
+      repository: https://github.com/zwlgzwlg/Logical-Maps.git
+      ref: main
+      commit: a7bbaecf6f282ac27ea1ee52e3e75721bead6318
+    discovery:
+      trawl_id: trawl-764428bfd00a49bb85d7fcbff3472c7e
+      at: '2026-09-25T17:43:16.475674+00:00'
+      actor:
+        kind: model
+        provider: deepseek
+        model: deepseek-flash
+        protocol: chat-completions
+        endpoint: https://api.deepseek.com/chat/completions
+        reported_model: deepseek-flash
+      prompt_sha256: 4adc8e853c5fc25e7326c236c89e07dbc4cdbc9813ea1ad07c32b9f73cf1110f
+      response_sha256: c88db49fd05ad7c6f1444a1664638fb5b10d56c62a072a4b3d9d6fd72999879d
+      response_id: 6cb706f3-1152-4455-bc66-3e69adf2fda9
+      usage:
+        prompt_tokens: 256068
+        completion_tokens: 315
+        total_tokens: 256383
+        prompt_tokens_details:
+          cached_tokens: 255872
+        completion_tokens_details:
+          reasoning_tokens: 192
+        prompt_cache_hit_tokens: 255872
+        prompt_cache_miss_tokens: 196
+      offline: false
+    evidence:
+    - kind: original-argument
+      citation: DeepSeek (deepseek-flash), saved 2026-09-25T17:43:16.503076+00:00; checkpoint-d596a7c456ef49429616e29886456956
+        (SHA-256 1bdc2f43b51baa7a6d55e616f28a83b4f3b84e467de222983d56a746f7f286f8). Frozen in quarantine
+        commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated
+        checkpoint.
+      locator: 'logical-maps/topics/classicism/models/finite-support-truncated-shifts.yaml: violates boolean-completeness-t;
+        workspaces/workspace-e8b5f36e66834eea9e82aa4463a380ff/turns/trawl-764428bfd00a49bb85d7fcbff3472c7e/000000-edit.json'
+      role: origin
+      verification: argument-in-writeup
+    - kind: literature
+      citation: Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf;
+        exact relevant sections inspected during review.
+      locator: Sections and proof dependencies are identified in the accompanying handwritten write-ups
+        and review report.
+      role: background
+      verification: argument-in-writeup
+    reviews:
+    - version: 1
+      id: review-b1d4be27f1d9472d8b87f930303b0a51
+      candidate_id: checkpoint-0cd1f2d674504d27a1758698cd564383
+      candidate_sha256: 9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a
+      at: '2026-09-25T19:01:48.374392+00:00'
+      recorded_at: '2026-09-25T19:01:48.375706+00:00'
+      actor:
+        kind: model
+        provider: openai
+        model: gpt-6
+      source:
+        repository: https://github.com/zwlgzwlg/Logical-Maps.git
+        ref: HEAD
+        commit: a7bbaecf6f282ac27ea1ee52e3e75721bead6318
+      report:
+        verdict: accept
+        summary: 'Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t
+          localizations, three SL-t failures (including correction of the full idempotent model), three
+          boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary
+          SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived
+          proposals add no duplicate verdicts.'
+        argument_check: Independently checked the finite/cofinite missing-bound argument, repaired three
+          descending-family errors using alternating agreement shells, checked arbitrary-family predicate
+          admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all
+          target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness
+          for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension
+          rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance.
+          Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes
+          check shell indexing. Topic schema/reference/consistency validation passed before recording this
+          review. Finite calculations supplement, and do not replace, the infinite proofs.
+        source_check: 'Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions
+          3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions
+          D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions
+          and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response
+          hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions
+          are discarded. No source PDF or private reading extract is admitted. Original construction authorship
+          and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean
+          verification is claimed.'
+        issues: []
+      method: informal-mathematical-review
+    admission:
+      id: admission-c0a37bbe6b6c45cc985428b174812564
+      at: '2026-09-25T19:01:48.376481+00:00'
+      by: OpenAI Codex (GPT-6)
+      base_commit: a7bbaecf6f282ac27ea1ee52e3e75721bead6318
+      candidate_sha256: 9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a
+      review_id: review-b1d4be27f1d9472d8b87f930303b0a51
 sources:
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 8, pp.
   74, 78–79; p. 79 (No Pure Contingency).
+- DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and
+  corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction
+  attribution is unchanged. writeups/finite-support-truncated-shifts.md; Classicism, Definition D.3 and
+  Proposition D.5, pp. 73–79.
 source_names:
 - Classicism
+- DeepSeek trawl; GPT-6 review 25 Sep
 references:
 - paper: bacon-dorr-classicism
   role: proof
@@ -67,17 +170,17 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   is false, so $\Box\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\top_\tau$,
   witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is $\Diamond\Box a$ and $a$ is necessary at
   no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence
-  (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed
-  to contain at least one: such a constant $c''$ of type $\tau''$ denotes what the closed pure term $\top_{\tau''}$
-  denotes, and $c''=\top_{\tau''}$ is a true identity that C(Σ) does not prove. The designated constant
-  refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas
-  $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything
-  that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\to t$:
-  the property $E$ that the source shows to lack a least upper bound has as its extension a countable
-  family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also
-  puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$,
-  which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse
-  holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
+  (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants,
+  Σ being assumed to contain at least one: such a constant $c''$ of type $\tau''$ denotes what the closed
+  pure term $\top_{\tau''}$ denotes, and $c''=\top_{\tau''}$ is a true identity that C(Σ) does not prove.
+  The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism,
+  §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar
+  x\, .\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well,
+  at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension
+  a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the
+  domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the
+  numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
+  collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
   proposition $\{k_0\}$: under $k_n$ with $n>0$, $\Diamond q$ would need $k\circ k_n$ to be the identity,
   impossible since $k_n$ is not injective. Relational Choice holds, necessarily. The model is ideally
   full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any
@@ -89,7 +192,13 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\colon
   W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model,
   so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September
-  2026.'
+  2026.
+
+
+  Review of 25 September 2026. Boolean Completeness already fails at type t: the finite/cofinite algebra
+  of arrow indices has no least upper bound for the even-index singleton family. The family is represented
+  by a domain property because this ideally full model is extensionally full (Definition D.3, p. 74).
+  See the dated handwritten write-up.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -159,10 +268,17 @@ changes:
   - necessary-relational-choice-r
 - date: '2026-09-25'
   by: Claude Fable 5.1 (Anthropic)
-  summary: 'Added Transversal Choice, by the argument recorded for Relational Choice: the model is
-    extensionally full at every object, so for an equivalence relation at the evaluation point a transversal
-    of its extension there, chosen in the metatheory, is the extension of an element pinned down by the empty
+  summary: 'Added Transversal Choice, by the argument recorded for Relational Choice: the model is extensionally
+    full at every object, so for an equivalence relation at the evaluation point a transversal of its
+    extension there, chosen in the metatheory, is the extension of an element pinned down by the empty
     set; the equivalence and transversal conditions are unboxed. Recorded on a question of Zachary Goodsell,
     after an observation of Christopher Sun.'
   satisfies:
   - transversal-choice-r
+- date: '2026-09-25'
+  by: OpenAI Codex (GPT-6)
+  summary: Accepted the trawl's type-t Boolean Completeness failure after checking the finite/cofinite
+    domain and replacing the conditional higher-type argument by the source's extensional-fullness lemma.
+    Informal review; no Lean verification.
+  violates:
+  - boolean-completeness-t

@@ -1,4 +1,4 @@
-# Finite-support action model: identity-or-collapse monotone surjections
+# Finite-support action model: monotone surjections of N
 
 ## Failure of Boolean Completeness at type $t$
 
@@ -25,11 +25,9 @@ from $D_t$ need not by itself establish a missing greatest lower bound.
 
 ### A strictly decreasing sequence of agreement classes
 
-Take $h_0(m)=\max(m-1,0)$. For $n\ge1$, define $g_n(m)=h_0(m)$
-when $m\le n$, and $g_n(m)=h_0(m-1)$ when $m>n$. This inserts one
-extra plateau into a monotone surjection and preserves both surjectivity
-and the collapse of $0$ and $1$. It agrees with $h_0$ through $n$ and
-disagrees at $n+1$.
+Take $h_0(m)=m$, the identity. For $n\ge1$, the map equal to $m$
+on $m\le n$ and to $m-1$ on $m>n$ is a monotone surjection. It agrees
+with $h_0$ through $n$ and disagrees at $n+1$.
 
 Put $C_n=\{h:h|_{\{0,\ldots,n\}}=h_0|_{\{0,\ldots,n\}}\}$
 and $A_n=C_n\setminus C_{n+1}$, for $n\ge1$. These are finitely
@@ -57,24 +55,6 @@ intersection is $\{h_0\}$, but if this singleton is not admitted, the
 bottom proposition is a greatest lower bound of that descending family.
 The alternating differences above are the replacement witness.
 
-## Failure of Atomicity at type $t$
-
-This localization is already asserted in *Classicism*, footnote 92,
-p. 74, applied to Proposition D.5(4)/(5). Here is a direct check.
-The nonempty proposition $p=\{h:h(0)=h(1)=0\}$ is pinned by
-$\{0,1\}$ and excludes the identity. Let a nonempty domain proposition
-$y\subseteq p$ be pinned through $N\ge1$, and choose $h\in y$.
-There is another arrow $h'\ne h$ with the same prefix through $N$:
-in the unrestricted monotone model choose a constant tail $v\ge h(N)$
-with $v\ne h(N+1)$; in the surjective model insert one extra plateau
-after $N$. The latter differs somewhere because a monotone surjection
-is unbounded. Both arrows remain in $y$ and collapse $0$ and $1$.
-At a coordinate where they differ, restricting $y$ to the value of $h$
-gives a nonempty proper finitely pinned subproposition. Hence no
-nonempty subproposition of $p$ is an atom, and Atomicity-t fails.
-The trawl's particular unrestricted-tail choice need not differ from
-$h$; the explicit choice of $v\ne h(N+1)$ repairs that step.
-
 ## Attribution and review
 
 The model construction is Bacon and Dorr's. Their footnote 92 (p. 74)
@@ -84,7 +64,3 @@ conjectures the additional type-$t$ Boolean Completeness failures. DeepSeek
 corrected proof above on the same date. The immutable drafts and exact API
 edit provenance are identified in the model record's `certificate.trawl`.
 This is an informal mathematical review; no Lean verification is claimed.
-
-## Paper references
-
-- **Proof: Classicism.** Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft's numbering. — Appendix D, Proposition D.5(5), pp. 74–75; construction p. 78, Part 5; p. 79 (No Pure Contingency)

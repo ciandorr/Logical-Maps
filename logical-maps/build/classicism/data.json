@@ -2291,9 +2291,15 @@
      "paper": "bacon-2024-book",
      "role": "formulation",
      "locator": "§8.2, pp. 164–165"
+    },
+    {
+     "paper": "bacon-dorr-classicism",
+     "role": "background",
+     "locator": "Definition 3.19 and satisfaction clauses, pp. 55–57; idempotent model, p. 59",
+     "note": "Semantics used to correct the supplementary singleton claim on 25 September 2026; the defining SL formula is unchanged."
     }
    ],
-   "notes": "Broken out as its own principle, like Atomicity (type t), at Cian Dorr’s request, because the type-t case can be settled in many models where the higher types have not been checked. In a one-object action model whose propositions are all the sets of arrows, every singleton is a strong world: seen from an arrow i, the singleton of h becomes the set of j with j∘i = h, and every proposition at that world is the shift of a root proposition, which cannot separate two such j. Multi-object models differ; see the two-object retract.",
+   "notes": "Broken out as its own principle, like Atomicity (type t), at Cian Dorr’s request, because the type-t case can be settled in many models where the higher types have not been checked. A singleton need not be a strong world in a one-object action model.\nAt an arrow h its shift is the precomposition fibre, but a proposition newly quantified\ninside the box ranges over the entire target domain, not just shifted root propositions.\nFor the full monoid {1,k} with k²=k≠1, the singleton {k} shifts under k to {1,k},\nwhich the target proposition {k} splits. Group actions do send singletons to singletons.\nCorrection found by the DeepSeek deepseek-flash trawl and informally checked against\nClassicism pp. 55–57 by OpenAI Codex (GPT-6), 25 September 2026; see the handwritten\nstrong-worlds-one-object-action-models proof and the full-idempotent-monoid change history.",
    "aliases": [
     "SL (type t)"
    ],
@@ -7795,6 +7801,136 @@
    }
   },
   {
+   "id": "necessary-strong-leibniz-r-implies-strong-leibniz-r",
+   "premises": [
+    "necessary-strong-leibniz-r"
+   ],
+   "conclusion": "strong-leibniz-r",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "produced_by": "DeepSeek (deepseek-flash), theorem trawl, 25 September 2026",
+    "recorded_by": "OpenAI Codex (GPT-6), curation and informal mathematical review, 25 September 2026",
+    "checked_by": [],
+    "date": "2026-09-25",
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-0585762c4cff49a99a9fcdc7d52543e5",
+      "at": "2026-09-25T16:08:57.097266+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "d9f040880d4e8772f2189dcbe9554d09181ee7c958e8d02d4b001991ddf0bc8a",
+      "response_sha256": "982452dbb642fb35314905c3c6c100115c4bbefd173bbf2490bd2f372ee31e33",
+      "response_id": "29c1580f-600e-4bd7-8927-099510625e0b",
+      "usage": {
+       "prompt_tokens": 84091,
+       "completion_tokens": 1148,
+       "total_tokens": 85239,
+       "prompt_tokens_details": {
+        "cached_tokens": 79232
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 273
+       },
+       "prompt_cache_hit_tokens": 79232,
+       "prompt_cache_miss_tokens": 4859
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T16:08:57.113014+00:00; checkpoint-9e9862de00384d66a2aa09f02b6edd22 (SHA-256 23530bd35e46625e127ec3a6a1de5812d3be6332a9d616f95b5ece3a7bde1f26). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/results/necessary-strong-leibniz-r-implies-strong-leibniz-r.yaml: conclusion strong-leibniz-r; workspaces/workspace-63a7fbc03dda47429345b1e88c727923/turns/trawl-0585762c4cff49a99a9fcdc7d52543e5/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
+   },
+   "proof": "Fix an arbitrary admitted relational type $\\tau$, and let $\\varphi_\\tau$\nbe the fully closed instance of the Strong Leibniz Biconditionals at that type.\nThe premise supplies $\\Box\\varphi_\\tau$. The axiom T of C gives\n$\\Box\\varphi_\\tau\\to\\varphi_\\tau$, so modus ponens yields\n$\\varphi_\\tau$. Applying this argument separately at every relational type\ngives the conclusion schema. No metalinguistic type quantifier moves inside\nthe box, and no necessitation of an optional premise is used.",
+   "sources": [
+    "DeepSeek (deepseek-flash), 25 September 2026, workspace-63a7fbc03dda47429345b1e88c727923; immediate connecting proof, independently reviewed and rewritten by OpenAI Codex (GPT-6) on the same date.",
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §1.5, p. 16 (T); Logical Maps records necessary-strong-leibniz-r and strong-leibniz-r."
+   ],
+   "source_names": [
+    "DeepSeek trawl; GPT-6 review 25 Sep",
+    "Classicism; recorded SL definitions"
+   ],
+   "references": [
+    {
+     "paper": "bacon-dorr-classicism",
+     "role": "background",
+     "locator": "§1.5, p. 16, axiom T"
+    }
+   ],
+   "notes": "This omitted instancewise T bridge was rediscovered in several quarantined workspaces. It is recorded once. Discovery, source checkpoint, informal review and admission are separate in certificate.trawl; copied draft claims of Claude authorship are superseded by the actual DeepSeek API receipts.",
+   "file": "topics/classicism/results/necessary-strong-leibniz-r-implies-strong-leibniz-r.yaml",
+   "files": {
+    "md": "writeups/necessary-strong-leibniz-r-implies-strong-leibniz-r.md",
+    "html": "writeups/necessary-strong-leibniz-r-implies-strong-leibniz-r.html",
+    "handwritten": true
+   }
+  },
+  {
    "id": "necessary-strong-leibniz-t-implies-strong-leibniz-t",
    "premises": [
     "necessary-strong-leibniz-t"
@@ -11488,7 +11624,10 @@
     "relational-choice-r",
     "necessary-relational-choice-r",
     "distinctness-preserving-collapse",
-    "transversal-choice-r"
+    "transversal-choice-r",
+    "necessary-atomicity-r",
+    "necessary-boolean-completeness-r",
+    "necessary-rigid-comprehension-r"
    ],
    "violates": [
     "distinctness-necessary-r",
@@ -11507,15 +11646,122 @@
     "recorded_by": "Claude Fable 5.1 (Anthropic), 20 September 2026",
     "checked_by": [],
     "date": "2026-09-20",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-0d3832380ce44159b1120e739b2f3e9b",
+      "at": "2026-09-25T15:59:22.350971+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "5bd23ef743df9958b519b8e1ed49f56ff5ae47b6ca620950956b5b72375b8d96",
+      "response_sha256": "fbf982a58fb74b7e574aa14e8f5d0a410c887923b3a921c6031f23943832e52a",
+      "response_id": "054a9cf1-2991-4b43-98bd-e764ffd36eb8",
+      "usage": {
+       "prompt_tokens": 351472,
+       "completion_tokens": 514,
+       "total_tokens": 351986,
+       "prompt_tokens_details": {
+        "cached_tokens": 350592
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 362
+       },
+       "prompt_cache_hit_tokens": 350592,
+       "prompt_cache_miss_tokens": 880
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T15:59:22.381877+00:00; checkpoint-4db270c36221475a939da602cffa8ce8 (SHA-256 5e423dd7f661ef9636f90f90b4f70a8d2736503d9158bca4579a430eb88e4332). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/coalesced-all-finite-individual-domains.yaml: satisfies necessary-atomicity-r; workspaces/workspace-ec38d3636a6b4ebb836465131dc22d43/turns/trawl-0d3832380ce44159b1120e739b2f3e9b/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T16:00:26.442175+00:00; checkpoint-4db270c36221475a939da602cffa8ce8 (SHA-256 5e423dd7f661ef9636f90f90b4f70a8d2736503d9158bca4579a430eb88e4332). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/coalesced-all-finite-individual-domains.yaml: satisfies necessary-boolean-completeness-r; workspaces/workspace-ec38d3636a6b4ebb836465131dc22d43/turns/trawl-c2a962823e0c4e39a0e9e96440084c09/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T16:30:36.317902+00:00; checkpoint-9e9862de00384d66a2aa09f02b6edd22 (SHA-256 23530bd35e46625e127ec3a6a1de5812d3be6332a9d616f95b5ece3a7bde1f26). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/coalesced-all-finite-individual-domains.yaml: satisfies necessary-rigid-comprehension-r; workspaces/workspace-63a7fbc03dda47429345b1e88c727923/turns/trawl-d1a4f1fb111f4de19599526a1b376064/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
     "Claude Fable 5.1 (Anthropic), construction and verification of 20 September 2026 (see the write-up).",
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48 (the summands); Appendix E, pp. 80–83 (coalesced sums)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48 (the summands); Appendix E, pp. 80–83 (coalesced sums).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/coalesced-all-finite-individual-domains.md, final section; Classicism, Definition E.2, pp. 80–83."
    ],
    "source_names": [
     "Fable 20 Sep",
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -11526,7 +11772,7 @@
     }
    ],
    "description": "Take the full Henkin models $M_n$ with individual domain $\\{1,\\ldots,n\\}$ for every $n\\ge1$, and add a root world. Individuals are threads $(a_n)_n$ with $a_n\\in\\{1,\\ldots,n\\}$; propositions are sets of worlds; an entity of a function type is a family of $M_n$-entities together with an arbitrary root component defined on whole threads. Application is componentwise, identity at world $n$ is the identity of $M_n$ and at the root is identity of elements. Every theorem of C holds at every world. At the root the finite cardinalities are the numerals, the $k$-th numeral's successor holds of the universal property at world $k+1$, and $\\Diamond$ at the root is truth at some world, so the sentence that there could be any positive number of individuals, used in pure-possibility-implies-axiom-of-infinity-t, holds there. The root has uncountably many individuals and infinitely many propositions, so both Axioms of Infinity hold there. Two threads that agree at some world are distinct but possibly identical, so ND fails at type $e$. Evaluation point: the root.",
-   "notes": "Recorded to witness the consistency with C of the sentence through which Possibility Maximalism (pure) reaches the Axiom of Infinity at type $t$, and of that Axiom itself. The construction and its verification are in the write-up; no independent check is claimed. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual. Under it the signature schemata fail. Let $c\\in\\Sigma$ have relational type $\\tau$, so $c=\\top_\\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\\ne\\top_\\tau$, witnessed by $\\bot_\\tau$ but impossible of $c$; Separated Structure fails since $\\lambda x\\, .\\,x$ and $\\lambda x\\, .\\,\\top_\\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\\top_\\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\\top_\\tau$ is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Further facts: the root proposition, true at the root alone, is an atom entailing every root truth, so Actuality holds. BF holds at the root: an entity of a relational type there is a family of component entities with a free root component, every component entity is the component of some root entity, so if $\\forall y\\, .\\,\\Box Xy$ holds at the root then every component of $X$ is universal and so is its root component, whence $\\Box\\forall y\\, .\\,Xy$; BF holds at the one-world components trivially, so $\\Box$BF holds. No Pure Contingency fails, since the pure sentence that there are at least two individuals is true at the root and false at the first component. Possibility Maximalism (pure) fails, since Atomlessness is consistent with C but false at every world: each component is a one-world model and the root proposition is an atom. The type-t Strong Leibniz Biconditionals hold necessarily: at the root, the singleton of the arrow to component $n$ becomes that component’s identity under it and empty under every other arrow, and the root proposition becomes empty under every non-identity arrow, so every singleton is a strong world; the components are one-world models. Here the components are full Henkin models, so every set of arrows is a root proposition: the root propositions form a complete atomic algebra, giving Atomicity and Boolean Completeness at type t, and Relational Choice holds at the root by a functional choice in the free root component. Possibility+ (pure) fails: the component with three individuals has three at its only world; take two root individuals that differ at that component and agree everywhere else; the pure formula saying that $x\\ne y$ and there are exactly two individuals is consistent, but at the root there are infinitely many individuals, under every arrow into another component the two collapse, and under the arrow into that component there are three. □Relational Choice holds: Relational Choice holds at the root by the free root component and at every component, each being a full Henkin model. Distinctness-preserving collapse holds: let $a$ be the proposition true at the actual world alone (the identity arrow). For any true $p$, take $q:=a$ in the definition of $\\Box_{\\ne}p$: under a non-identity arrow $i$, $\\Diamond a$ would need an arrow $k$ with $k\\circ i$ the identity, and none exists, since the components have no arrows to the root; under the identity, $p$ holds. So every truth is $\\Box_{\\ne}$-necessary, although ND fails.",
+   "notes": "Recorded to witness the consistency with C of the sentence through which Possibility Maximalism (pure) reaches the Axiom of Infinity at type $t$, and of that Axiom itself. The construction and its verification are in the write-up; no independent check is claimed. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual. Under it the signature schemata fail. Let $c\\in\\Sigma$ have relational type $\\tau$, so $c=\\top_\\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\\ne\\top_\\tau$, witnessed by $\\bot_\\tau$ but impossible of $c$; Separated Structure fails since $\\lambda x\\, .\\,x$ and $\\lambda x\\, .\\,\\top_\\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\\top_\\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\\top_\\tau$ is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Further facts: the root proposition, true at the root alone, is an atom entailing every root truth, so Actuality holds. BF holds at the root: an entity of a relational type there is a family of component entities with a free root component, every component entity is the component of some root entity, so if $\\forall y\\, .\\,\\Box Xy$ holds at the root then every component of $X$ is universal and so is its root component, whence $\\Box\\forall y\\, .\\,Xy$; BF holds at the one-world components trivially, so $\\Box$BF holds. No Pure Contingency fails, since the pure sentence that there are at least two individuals is true at the root and false at the first component. Possibility Maximalism (pure) fails, since Atomlessness is consistent with C but false at every world: each component is a one-world model and the root proposition is an atom. The type-t Strong Leibniz Biconditionals hold necessarily: at the root, the singleton of the arrow to component $n$ becomes that component’s identity under it and empty under every other arrow, and the root proposition becomes empty under every non-identity arrow, so every singleton is a strong world; the components are one-world models. Here the components are full Henkin models, so every set of arrows is a root proposition: the root propositions form a complete atomic algebra, giving Atomicity and Boolean Completeness at type t, and Relational Choice holds at the root by a functional choice in the free root component. Possibility+ (pure) fails: the component with three individuals has three at its only world; take two root individuals that differ at that component and agree everywhere else; the pure formula saying that $x\\ne y$ and there are exactly two individuals is consistent, but at the root there are infinitely many individuals, under every arrow into another component the two collapse, and under the arrow into that component there are three. □Relational Choice holds: Relational Choice holds at the root by the free root component and at every component, each being a full Henkin model. Distinctness-preserving collapse holds: let $a$ be the proposition true at the actual world alone (the identity arrow). For any true $p$, take $q:=a$ in the definition of $\\Box_{\\ne}p$: under a non-identity arrow $i$, $\\Diamond a$ would need an arrow $k$ with $k\\circ i$ the identity, and none exists, since the components have no arrows to the root; under the identity, $p$ holds. So every truth is $\\Box_{\\ne}$-necessary, although ND fails.\n\nReview of 25 September 2026. The appended handwritten verification establishes necessary Atomicity, necessary Boolean Completeness and necessary Rigid Comprehension at every relational type. The existing rules derive the unboxed and Strong Leibniz consequences. These are additions for this particular full-Henkin-component construction; they do not apply to arbitrary coalesced sums.",
    "changes": [
     {
      "date": "2026-09-22",
@@ -11596,6 +11842,16 @@
      "summary": "Added Transversal Choice at the root, by the argument recorded for Relational Choice: a root entity has an arbitrary root component, so take the property whose root component is a transversal, chosen in the metatheory, of the root component of an equivalence relation at the root, with empty component parts; the equivalence and transversal conditions are all evaluated at the root's identity arrow. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun.",
      "satisfies": [
       "transversal-choice-r"
+     ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Accepted all-type product-algebra additions from the DeepSeek trawl after correcting the proof: Atomicity, Boolean Completeness and Rigid Comprehension hold at every world. Root atoms remain atoms or bottom in the components, so the Strong Leibniz schemata hold too. The projected-extension RC proof is supplied by this review; boxed claims are checked at every world, not obtained by necessitating a hypothesis.",
+     "satisfies": [
+      "necessary-atomicity-r",
+      "necessary-boolean-completeness-r",
+      "necessary-rigid-comprehension-r"
      ]
     }
    ],
@@ -11969,7 +12225,9 @@
     "distinctness-signature-r",
     "countable-boolean-completeness-r",
     "no-contingency-signature-r",
-    "signature-b-r"
+    "signature-b-r",
+    "boolean-completeness-t",
+    "strong-leibniz-t"
    ],
    "status": "proved",
    "certificate": {
@@ -11978,13 +12236,115 @@
     "recorded_by": "OpenAI Codex (GPT-6), 17 September 2026",
     "checked_by": [],
     "date": "2026-09-17",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-933d401a68154a50ada420d226900ed5",
+      "at": "2026-09-25T16:51:45.933276+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "45430b2d4665936bdf4b8f725007ff237b841b26089b178f24ad22fa8bc9d8e9",
+      "response_sha256": "0535d62b08a378a551dde931db82aa8bcd9ffcedf793e452d076c3d6efb064b2",
+      "response_id": "455333ff-ffaf-4ce0-a5a2-6e4a466f0bb7",
+      "usage": {
+       "prompt_tokens": 252994,
+       "completion_tokens": 674,
+       "total_tokens": 253668,
+       "prompt_tokens_details": {
+        "cached_tokens": 252032
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 516
+       },
+       "prompt_cache_hit_tokens": 252032,
+       "prompt_cache_miss_tokens": 962
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T18:16:17.830037+00:00; checkpoint-e9619c72835247d2a7894bc7609946f0 (SHA-256 7499eb53bb2feffc07f979c18c1575e26593ed9804b9218f1e08690f3d972a67). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-dyadic-roundings.yaml: violates boolean-completeness-t; workspaces/workspace-9eba13df3bbc4691863a12ab8163ac6b/turns/trawl-494afdbf774c4a188d1c5beb0f74f8b6/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T16:51:45.955361+00:00; checkpoint-8016c2f10cff41c7940e3b327c9336f6 (SHA-256 61cd14d2136950fa473f80230d47b338fea7859fae52597b91d705d1cba47140). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-dyadic-roundings.yaml: violates strong-leibniz-t; workspaces/workspace-4d3603770c1d4f5e8e55ad548a6a4971/turns/trawl-933d401a68154a50ada420d226900ed5/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 7, pp. 74, 78; p. 79 (No Pure Contingency)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 7, pp. 74, 78; p. 79 (No Pure Contingency).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/finite-support-dyadic-roundings.md; Classicism, Definition D.3 and Proposition D.5, pp. 73–79.",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/strong-worlds-one-object-action-models.md; Classicism, pp. 55–59, 74 and 78; checks/action_strong_worlds.py."
    ],
    "source_names": [
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -11994,7 +12354,7 @@
     }
    ],
    "description": "Proposition D.5, part 7 (p. 78): the arrows are the maps $f_n$, for $n$ a power of $2$, sending $m$ to the greatest multiple of $n$ not exceeding $m$; $f_1$ is the identity. Actuality and Atomicity hold because each $\\{f_n\\}$ is pinned down by a finite set ($\\{n-2,n-1,n\\}$ for $n>1$, $\\{0,1\\}$ for the identity); BF fails since an arrow sending $1$ to $0$ sends everything to even numbers; Boolean Completeness fails because the strongest persistent property with extension $\\mathbb N$ pinned down by $\\{0,\\ldots,n\\}$ has, at $f_m$, the multiples of $\\min\\{m,n\\}$ as extension and so becomes ever stronger. In every part, $W_0^\\ddagger$ is the set of finite subsets of $\\mathbb N$ and the model is ideally full: a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite set of individuals (it is pinned down by that set), an entity of a higher type is an applicative behaviour profile pinned down by a finite set in the same sense, and the individuals are the natural numbers acted on by the arrows themselves. Propositions and properties are thus about finitely many individuals and indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.",
-   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{f_1\\}$: under $f_n$ with $n>1$, $\\Diamond q$ would need $k\\circ f_n$ to be the identity, impossible since $f_n$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.",
+   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{f_1\\}$: under $f_n$ with $n>1$, $\\Diamond q$ would need $k\\circ f_n$ to be the identity, impossible since $f_n$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.\n\nReview of 25 September 2026. Boolean Completeness already fails at type t: the finite/cofinite algebra of arrow indices has no least upper bound for the even-index singleton family. The family is represented by a domain property because this ideally full model is extensionally full (Definition D.3, p. 74). See the dated handwritten write-up.\n\nReview of 25 September 2026. Strong Leibniz-t fails by the nonidentity-idempotent singleton witness in writeups/strong-worlds-one-object-action-models.md. The successor quantifier ranges over all propositions at the target object, including ones outside the transported image. Its necessary form therefore also fails. ",
    "was_conjectured": true,
    "changes": [
     {
@@ -12076,13 +12436,29 @@
      "satisfies": [
       "transversal-choice-r"
      ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Accepted the trawl's type-t Boolean Completeness failure after checking the finite/cofinite domain and replacing the conditional higher-type argument by the source's extensional-fullness lemma. Informal review; no Lean verification.",
+     "violates": [
+      "boolean-completeness-t"
+     ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Confirmed the trawl's Strong Leibniz-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing both the identity and the idempotent, which a target-domain proposition separates. Quantifiers inside the box range over the entire target domain. The boxed failure follows by T.",
+     "violates": [
+      "strong-leibniz-t"
+     ]
     }
    ],
    "file": "topics/classicism/models/finite-support-dyadic-roundings.yaml",
    "files": {
     "md": "writeups/finite-support-dyadic-roundings.md",
     "html": "writeups/finite-support-dyadic-roundings.html",
-    "handwritten": false
+    "handwritten": true
    }
   },
   {
@@ -12112,7 +12488,9 @@
     "distinctness-signature-r",
     "countable-boolean-completeness-r",
     "no-contingency-signature-r",
-    "signature-b-r"
+    "signature-b-r",
+    "boolean-completeness-t",
+    "atomicity-t"
    ],
    "status": "proved",
    "certificate": {
@@ -12121,13 +12499,113 @@
     "recorded_by": "OpenAI Codex (GPT-6), 17 September 2026",
     "checked_by": [],
     "date": "2026-09-17",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-ca9f2eded90f4866a8868f68f809e41b",
+      "at": "2026-09-25T15:49:00.281843+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "30d06962c6bef648b2de9edbb0f1bcc07adc1ac998230d75ff6a4e6aec2bfc7c",
+      "response_sha256": "5537d0ad8c1334f706f4979d7fab8ca2c280665eea0da957435f79dc1a2a1aa7",
+      "response_id": "60dfd285-8617-491f-bd1f-d39ca7ced6df",
+      "usage": {
+       "prompt_tokens": 209450,
+       "completion_tokens": 120,
+       "total_tokens": 209570,
+       "prompt_tokens_details": {
+        "cached_tokens": 209280
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0
+       },
+       "prompt_cache_hit_tokens": 209280,
+       "prompt_cache_miss_tokens": 170
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T18:17:39.728909+00:00; checkpoint-e9619c72835247d2a7894bc7609946f0 (SHA-256 7499eb53bb2feffc07f979c18c1575e26593ed9804b9218f1e08690f3d972a67). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-identity-or-collapse-surjections.yaml: violates boolean-completeness-t; workspaces/workspace-9eba13df3bbc4691863a12ab8163ac6b/turns/trawl-baa2491aa40c4be3a195e8d19e2704dd/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T15:49:00.304327+00:00; checkpoint-4db270c36221475a939da602cffa8ce8 (SHA-256 5e423dd7f661ef9636f90f90b4f70a8d2736503d9158bca4579a430eb88e4332). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-identity-or-collapse-surjections.yaml: violates atomicity-t; workspaces/workspace-ec38d3636a6b4ebb836465131dc22d43/turns/trawl-ca9f2eded90f4866a8868f68f809e41b/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 5, pp. 74, 78; p. 79 (No Pure Contingency)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 5, pp. 74, 78; p. 79 (No Pure Contingency).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/finite-support-identity-or-collapse-surjections.md; Classicism, Definition D.3, footnote 92 and Proposition D.5, pp. 73–79."
    ],
    "source_names": [
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -12137,7 +12615,7 @@
     }
    ],
    "description": "Proposition D.5, part 5 (p. 78): the arrows are the monotone surjections $h$ of $\\mathbb N$ with $h0=h1$, together with the identity. Restricting part 4 to surjections restores BF by Proposition D.6; Actuality holds as in part 4, and ND, Atomicity and Boolean Completeness fail as there. In every part, $W_0^\\ddagger$ is the set of finite subsets of $\\mathbb N$ and the model is ideally full: a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite set of individuals (it is pinned down by that set), an entity of a higher type is an applicative behaviour profile pinned down by a finite set in the same sense, and the individuals are the natural numbers acted on by the arrows themselves. Propositions and properties are thus about finitely many individuals and indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.",
-   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{1_{\\mathbb N}\\}$: under any other arrow $h$, $\\Diamond q$ would need $k\\circ h=1_{\\mathbb N}$, impossible since $h$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.",
+   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{1_{\\mathbb N}\\}$: under any other arrow $h$, $\\Diamond q$ would need $k\\circ h=1_{\\mathbb N}$, impossible since $h$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.\n\nReview of 25 September 2026. The dated write-up supplies the accepted BC-t witness using alternating differences of agreement classes and Definition D.3's extensional-fullness lemma. It replaces the trawl's invalid inference from an unavailable intersection to an unavailable greatest lower bound. Atomicity-t also fails, as already specified by the source's footnote 92 and checked by splitting any nonempty finitely pinned subproposition of the false proposition h(0)=h(1)=0.",
    "was_conjectured": true,
    "changes": [
     {
@@ -12219,13 +12697,22 @@
      "satisfies": [
       "transversal-choice-r"
      ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Confirmed the trawl's BC-t conclusion with a replacement proof: alternating differences of finite agreement classes have no least upper bound. The original missing-intersection argument is invalid. Used source extensional fullness for domain membership. Also localized the source-reported Atomicity failure to t (footnote 92), with a corrected direct splitting proof.",
+     "violates": [
+      "boolean-completeness-t",
+      "atomicity-t"
+     ]
     }
    ],
    "file": "topics/classicism/models/finite-support-identity-or-collapse-surjections.yaml",
    "files": {
     "md": "writeups/finite-support-identity-or-collapse-surjections.md",
     "html": "writeups/finite-support-identity-or-collapse-surjections.html",
-    "handwritten": false
+    "handwritten": true
    }
   },
   {
@@ -12254,7 +12741,9 @@
     "distinctness-signature-r",
     "countable-boolean-completeness-r",
     "no-contingency-signature-r",
-    "signature-b-r"
+    "signature-b-r",
+    "boolean-completeness-t",
+    "atomicity-t"
    ],
    "status": "proved",
    "certificate": {
@@ -12263,13 +12752,113 @@
     "recorded_by": "OpenAI Codex (GPT-6), 17 September 2026",
     "checked_by": [],
     "date": "2026-09-17",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-bd4847c8b57e415a858fa2334871108c",
+      "at": "2026-09-25T15:48:57.404459+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "a93a5b66b2ac9c6f9e6fed2b103328a637b46c056ff9bc009038fb4e1ef84b24",
+      "response_sha256": "a5921373e0da2905f9f29dbfb75ff429a6019e9c70ff8a33f7f13fc094a3fd9c",
+      "response_id": "0e653ea3-fe23-4082-8a6f-596a3e750e4d",
+      "usage": {
+       "prompt_tokens": 209123,
+       "completion_tokens": 242,
+       "total_tokens": 209365,
+       "prompt_tokens_details": {
+        "cached_tokens": 206464
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 127
+       },
+       "prompt_cache_hit_tokens": 206464,
+       "prompt_cache_miss_tokens": 2659
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T18:17:21.854256+00:00; checkpoint-e9619c72835247d2a7894bc7609946f0 (SHA-256 7499eb53bb2feffc07f979c18c1575e26593ed9804b9218f1e08690f3d972a67). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-identity-or-collapse.yaml: violates boolean-completeness-t; workspaces/workspace-9eba13df3bbc4691863a12ab8163ac6b/turns/trawl-6ec02a6114d44514ab89e5a48132de4d/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T15:48:57.425181+00:00; checkpoint-4db270c36221475a939da602cffa8ce8 (SHA-256 5e423dd7f661ef9636f90f90b4f70a8d2736503d9158bca4579a430eb88e4332). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-identity-or-collapse.yaml: violates atomicity-t; workspaces/workspace-ec38d3636a6b4ebb836465131dc22d43/turns/trawl-bd4847c8b57e415a858fa2334871108c/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 4, pp. 74, 78 and n. 97; p. 79 (No Pure Contingency)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 4, pp. 74, 78 and n. 97; p. 79 (No Pure Contingency).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/finite-support-identity-or-collapse.md; Classicism, Definition D.3, footnote 92 and Proposition D.5, pp. 73–79."
    ],
    "source_names": [
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -12279,7 +12868,7 @@
     }
    ],
    "description": "Proposition D.5, part 4 (p. 78): the arrows are the monotone maps $h$ of $\\mathbb N$ with $h0=h1$, together with the identity. Actuality holds because the identity is the only arrow that does not collapse $0$ and $1$, so $\\{1_{\\mathbb N}\\}$ is pinned down by $\\{0,1\\}$; the actual world is the only world, Atomlessness restricted to false propositions holds, and Atomicity fails; BF, ND and Boolean Completeness fail as in part 3. In every part, $W_0^\\ddagger$ is the set of finite subsets of $\\mathbb N$ and the model is ideally full: a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite set of individuals (it is pinned down by that set), an entity of a higher type is an applicative behaviour profile pinned down by a finite set in the same sense, and the individuals are the natural numbers acted on by the arrows themselves. Propositions and properties are thus about finitely many individuals and indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.",
-   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{1_{\\mathbb N}\\}$: under any other arrow $h$, $\\Diamond q$ would need $k\\circ h=1_{\\mathbb N}$, impossible since $h$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.",
+   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{1_{\\mathbb N}\\}$: under any other arrow $h$, $\\Diamond q$ would need $k\\circ h=1_{\\mathbb N}$, impossible since $h$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.\n\nReview of 25 September 2026. The dated write-up supplies the accepted BC-t witness using alternating differences of agreement classes and Definition D.3's extensional-fullness lemma. It replaces the trawl's invalid inference from an unavailable intersection to an unavailable greatest lower bound. Atomicity-t also fails, as already specified by the source's footnote 92 and checked by splitting any nonempty finitely pinned subproposition of the false proposition h(0)=h(1)=0.",
    "was_conjectured": true,
    "changes": [
     {
@@ -12360,13 +12949,22 @@
      "satisfies": [
       "transversal-choice-r"
      ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Confirmed the trawl's BC-t conclusion with a replacement proof: alternating differences of finite agreement classes have no least upper bound. The original missing-intersection argument is invalid. Used source extensional fullness for domain membership. Also localized the source-reported Atomicity failure to t (footnote 92), with a corrected direct splitting proof.",
+     "violates": [
+      "boolean-completeness-t",
+      "atomicity-t"
+     ]
     }
    ],
    "file": "topics/classicism/models/finite-support-identity-or-collapse.yaml",
    "files": {
     "md": "writeups/finite-support-identity-or-collapse.md",
     "html": "writeups/finite-support-identity-or-collapse.html",
-    "handwritten": false
+    "handwritten": true
    }
   },
   {
@@ -12524,7 +13122,8 @@
     "separated-structure-r",
     "independence-signature-r",
     "distinctness-signature-r",
-    "countable-boolean-completeness-r"
+    "countable-boolean-completeness-r",
+    "boolean-completeness-t"
    ],
    "status": "proved",
    "certificate": {
@@ -12533,13 +13132,106 @@
     "recorded_by": "OpenAI Codex (GPT-6), 17 September 2026",
     "checked_by": [],
     "date": "2026-09-17",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-866f006f86b7444abbb28bed15e20bb3",
+      "at": "2026-09-25T18:16:54.590289+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "1916016c15d6cbabff3c25cfbe613ff2902d5ab6759555f4ff98ea0bb44b5f16",
+      "response_sha256": "2a38308c6516c6379d48dd4e2e03146bfb5d348266b937e77884735fc9562cfa",
+      "response_id": "7be289de-8a1b-4ac7-8eca-573a3131ad30",
+      "usage": {
+       "prompt_tokens": 363540,
+       "completion_tokens": 234,
+       "total_tokens": 363774,
+       "prompt_tokens_details": {
+        "cached_tokens": 363136
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0
+       },
+       "prompt_cache_hit_tokens": 363136,
+       "prompt_cache_miss_tokens": 404
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T18:16:54.607301+00:00; checkpoint-e9619c72835247d2a7894bc7609946f0 (SHA-256 7499eb53bb2feffc07f979c18c1575e26593ed9804b9218f1e08690f3d972a67). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-monotone-surjections.yaml: violates boolean-completeness-t; workspaces/workspace-9eba13df3bbc4691863a12ab8163ac6b/turns/trawl-866f006f86b7444abbb28bed15e20bb3/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 2, pp. 74, 76–77; p. 79 (No Pure Contingency)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 2, pp. 74, 76–77; p. 79 (No Pure Contingency).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/finite-support-monotone-surjections.md; Classicism, Definition D.3, footnote 92 and Proposition D.5, pp. 73–79."
    ],
    "source_names": [
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -12549,7 +13241,7 @@
     }
    ],
    "description": "Proposition D.5, part 2 (pp. 76–77): the one-object category whose arrows are the monotone surjections of $\\mathbb N$ (the source first considers all surjections, which gives the same package, and restricts to the monotone ones to make the failure of Boolean Completeness easier to exhibit). ND fails at the non-injective arrows; BF holds by Proposition D.6 since every arrow is a surjection; Atomlessness holds as in part 1; Boolean Completeness fails at type $e\\to t$ because the haecceities of the even numbers have no least upper bound, the strongest persistent property containing them and pinned down by $\\{0,\\ldots,n\\}$ becoming strictly stronger as $n$ grows. In every part, $W_0^\\ddagger$ is the set of finite subsets of $\\mathbb N$ and the model is ideally full: a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite set of individuals (it is pinned down by that set), an entity of a higher type is an applicative behaviour profile pinned down by a finite set in the same sense, and the individuals are the natural numbers acted on by the arrows themselves. Propositions and properties are thus about finitely many individuals and indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.",
-   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual. Under it the signature schemata fail. Let $c\\in\\Sigma$ have relational type $\\tau$, so $c=\\top_\\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\\ne\\top_\\tau$, witnessed by $\\bot_\\tau$ but impossible of $c$; Separated Structure fails since $\\lambda x\\, .\\,x$ and $\\lambda x\\, .\\,\\top_\\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\\top_\\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\\top_\\tau$ is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the proposition that the arrow fixes $0,\\ldots,N$ for $N$ beyond the pinning set. An arrow fixing $0,\\ldots,N$ agrees with the identity on that set and so is in $p$. An arrow $h$ that does not, with least moved point $m\\le N$, has $hm<m$ by monotone surjectivity and so collapses $m-1$ and $m$; then no $k\\circ h$ can fix both, so $\\Diamond q$ fails at $h$. Hence $\\Box(\\Diamond q\\to p)$. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.",
+   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual. Under it the signature schemata fail. Let $c\\in\\Sigma$ have relational type $\\tau$, so $c=\\top_\\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\\ne\\top_\\tau$, witnessed by $\\bot_\\tau$ but impossible of $c$; Separated Structure fails since $\\lambda x\\, .\\,x$ and $\\lambda x\\, .\\,\\top_\\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\\top_\\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\\top_\\tau$ is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the proposition that the arrow fixes $0,\\ldots,N$ for $N$ beyond the pinning set. An arrow fixing $0,\\ldots,N$ agrees with the identity on that set and so is in $p$. An arrow $h$ that does not, with least moved point $m\\le N$, has $hm<m$ by monotone surjectivity and so collapses $m-1$ and $m$; then no $k\\circ h$ can fix both, so $\\Diamond q$ fails at $h$. Hence $\\Box(\\Diamond q\\to p)$. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.\n\nReview of 25 September 2026. The dated write-up supplies the accepted BC-t witness using alternating differences of agreement classes and Definition D.3's extensional-fullness lemma. It replaces the trawl's invalid inference from an unavailable intersection to an unavailable greatest lower bound.",
    "was_conjectured": true,
    "changes": [
     {
@@ -12617,13 +13309,21 @@
      "satisfies": [
       "transversal-choice-r"
      ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Confirmed the trawl's BC-t conclusion with a replacement proof: alternating differences of finite agreement classes have no least upper bound. The original missing-intersection argument is invalid. Used source extensional fullness for domain membership.",
+     "violates": [
+      "boolean-completeness-t"
+     ]
     }
    ],
    "file": "topics/classicism/models/finite-support-monotone-surjections.yaml",
    "files": {
     "md": "writeups/finite-support-monotone-surjections.md",
     "html": "writeups/finite-support-monotone-surjections.html",
-    "handwritten": false
+    "handwritten": true
    }
   },
   {
@@ -12903,7 +13603,8 @@
     "distinctness-signature-r",
     "countable-boolean-completeness-r",
     "no-contingency-signature-r",
-    "signature-b-r"
+    "signature-b-r",
+    "boolean-completeness-t"
    ],
    "status": "proved",
    "certificate": {
@@ -12912,13 +13613,106 @@
     "recorded_by": "OpenAI Codex (GPT-6), 17 September 2026",
     "checked_by": [],
     "date": "2026-09-17",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-764428bfd00a49bb85d7fcbff3472c7e",
+      "at": "2026-09-25T17:43:16.475674+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "4adc8e853c5fc25e7326c236c89e07dbc4cdbc9813ea1ad07c32b9f73cf1110f",
+      "response_sha256": "c88db49fd05ad7c6f1444a1664638fb5b10d56c62a072a4b3d9d6fd72999879d",
+      "response_id": "6cb706f3-1152-4455-bc66-3e69adf2fda9",
+      "usage": {
+       "prompt_tokens": 256068,
+       "completion_tokens": 315,
+       "total_tokens": 256383,
+       "prompt_tokens_details": {
+        "cached_tokens": 255872
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 192
+       },
+       "prompt_cache_hit_tokens": 255872,
+       "prompt_cache_miss_tokens": 196
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T17:43:16.503076+00:00; checkpoint-d596a7c456ef49429616e29886456956 (SHA-256 1bdc2f43b51baa7a6d55e616f28a83b4f3b84e467de222983d56a746f7f286f8). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-truncated-shifts.yaml: violates boolean-completeness-t; workspaces/workspace-e8b5f36e66834eea9e82aa4463a380ff/turns/trawl-764428bfd00a49bb85d7fcbff3472c7e/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 8, pp. 74, 78–79; p. 79 (No Pure Contingency)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 8, pp. 74, 78–79; p. 79 (No Pure Contingency).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/finite-support-truncated-shifts.md; Classicism, Definition D.3 and Proposition D.5, pp. 73–79."
    ],
    "source_names": [
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -12928,7 +13722,7 @@
     }
    ],
    "description": "Proposition D.5, part 8 (pp. 78–79): the arrows are the maps $k_n$ with $k_nm=0$ for $m\\le n$ and $k_nm=m-n$ otherwise, which compose as $k_n\\circ k_m=k_{n+m}$; $k_0$ is the identity. All arrows are surjective, so BF holds; $\\{k_0\\}$ and each $\\{k_n\\}$ are pinned down by finite sets, so Actuality and Atomicity hold; ND fails; Boolean Completeness fails because the strongest persistent property pinned down by $\\{0,\\ldots,n\\}$ whose extension contains the even numbers has, at $k_m$, the evens, the odds with $0$, or all of $\\mathbb N$ according as $m<n$ is even, $m<n$ is odd, or $m\\ge n$, and so becomes ever stronger. In every part, $W_0^\\ddagger$ is the set of finite subsets of $\\mathbb N$ and the model is ideally full: a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite set of individuals (it is pinned down by that set), an entity of a higher type is an applicative behaviour profile pinned down by a finite set in the same sense, and the individuals are the natural numbers acted on by the arrows themselves. Propositions and properties are thus about finitely many individuals and indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.",
-   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{k_0\\}$: under $k_n$ with $n>0$, $\\Diamond q$ would need $k\\circ k_n$ to be the identity, impossible since $k_n$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.",
+   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world proposition $\\{k_0\\}$: under $k_n$ with $n>0$, $\\Diamond q$ would need $k\\circ k_n$ to be the identity, impossible since $k_n$ is not injective. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.\n\nReview of 25 September 2026. Boolean Completeness already fails at type t: the finite/cofinite algebra of arrow indices has no least upper bound for the even-index singleton family. The family is represented by a domain property because this ideally full model is extensionally full (Definition D.3, p. 74). See the dated handwritten write-up.",
    "was_conjectured": true,
    "changes": [
     {
@@ -13011,13 +13805,21 @@
      "satisfies": [
       "transversal-choice-r"
      ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Accepted the trawl's type-t Boolean Completeness failure after checking the finite/cofinite domain and replacing the conditional higher-type argument by the source's extensional-fullness lemma. Informal review; no Lean verification.",
+     "violates": [
+      "boolean-completeness-t"
+     ]
     }
    ],
    "file": "topics/classicism/models/finite-support-truncated-shifts.yaml",
    "files": {
     "md": "writeups/finite-support-truncated-shifts.md",
     "html": "writeups/finite-support-truncated-shifts.html",
-    "handwritten": false
+    "handwritten": true
    }
   },
   {
@@ -13045,7 +13847,8 @@
     "independence-signature-r",
     "distinctness-signature-r",
     "countable-boolean-completeness-r",
-    "boolean-completeness-t"
+    "boolean-completeness-t",
+    "strong-leibniz-t"
    ],
    "status": "proved",
    "certificate": {
@@ -13054,13 +13857,106 @@
     "recorded_by": "OpenAI Codex (GPT-6), 17 September 2026",
     "checked_by": [],
     "date": "2026-09-17",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-0329824a975f4e67bb50fc3e7a3e20b9",
+      "at": "2026-09-25T16:45:21.423924+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "56a8dd72e7236af19cb9f6b197d8cf5d19c78d16f910ee5a6c4ba905265119d8",
+      "response_sha256": "de302ae503a18237219d4c265b9b9de384a3fdd9df1640338380f23fa16ca48b",
+      "response_id": "5be55937-25ed-47b8-82bc-2f3c5272c5e9",
+      "usage": {
+       "prompt_tokens": 169620,
+       "completion_tokens": 1451,
+       "total_tokens": 171071,
+       "prompt_tokens_details": {
+        "cached_tokens": 169472
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 1293
+       },
+       "prompt_cache_hit_tokens": 169472,
+       "prompt_cache_miss_tokens": 148
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T16:45:21.442846+00:00; checkpoint-8016c2f10cff41c7940e3b327c9336f6 (SHA-256 61cd14d2136950fa473f80230d47b338fea7859fae52597b91d705d1cba47140). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/finite-support-truncations.yaml: violates strong-leibniz-t; workspaces/workspace-4d3603770c1d4f5e8e55ad548a6a4971/turns/trawl-0329824a975f4e67bb50fc3e7a3e20b9/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 6, pp. 74, 78; p. 79 (No Pure Contingency)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 6, pp. 74, 78; p. 79 (No Pure Contingency).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/strong-worlds-one-object-action-models.md; Classicism, pp. 55–59, 74 and 78; checks/action_strong_worlds.py."
    ],
    "source_names": [
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -13070,7 +13966,7 @@
     }
    ],
    "description": "Proposition D.5, part 6 (p. 78): the arrows are the identity and the truncations $g_n$, $g_nm=\\min\\{m,n\\}$, which compose as $g_n\\circ g_m=g_{\\min\\{n,m\\}}$. BF fails since an arrow sending $1$ to $0$ sends everything to $0$; Actuality fails because the strongest true proposition pinned down by $\\{0,\\ldots,n\\}$ is $\\{1_{\\mathbb N}\\}\\cup\\{g_m:m\\ge n\\}$, ever stronger as $n$ grows; Atomicity holds because every nonempty proposition contains some $g_n$ and each $\\{g_n\\}$ is pinned down by a finite set ($\\{n-1,n,n+1\\}$ for $n>0$, $\\{0,1\\}$ for $n=0$); Boolean Completeness fails because the strongest persistent property with extension $\\mathbb N$ pinned down by $\\{0,\\ldots,n\\}$ becomes ever stronger. In every part, $W_0^\\ddagger$ is the set of finite subsets of $\\mathbb N$ and the model is ideally full: a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite set of individuals (it is pinned down by that set), an entity of a higher type is an applicative behaviour profile pinned down by a finite set in the same sense, and the individuals are the natural numbers acted on by the arrows themselves. Propositions and properties are thus about finitely many individuals and indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.",
-   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual. Under it the signature schemata fail. Let $c\\in\\Sigma$ have relational type $\\tau$, so $c=\\top_\\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\\ne\\top_\\tau$, witnessed by $\\bot_\\tau$ but impossible of $c$; Separated Structure fails since $\\lambda x\\, .\\,x$ and $\\lambda x\\, .\\,\\top_\\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\\top_\\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\\top_\\tau$ is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the strongest true proposition pinned down by $\\{0,\\ldots,N\\}$ for $N$ beyond the pinning set of $p$, namely $\\{1_{\\mathbb N}\\}\\cup\\{g_m:m\\ge N\\}$. Under $g_n$ the only arrows reachable are $g_m$ with $m\\le n$, so $\\Diamond q$ holds at $g_n$ only if $n\\ge N$, and then $g_n$ agrees with the identity on the pinning set of $p$ and is in $p$. Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures but does not show. Let $X$ be the family of singletons $\\{g_n\\}$ for even $n$. An upper bound of $X$ pinned down by $\\{0,\\ldots,N\\}$ contains, with any $g_m$ for $m\\ge N$, every arrow agreeing with it on $\\{0,\\ldots,N\\}$, so the least upper bound pinned down by that set is $X\\cup\\{1_{\\mathbb N}\\}\\cup\\{g_m : m\\ge N\\}$, which strictly shrinks as $N$ grows; hence $X$ has no least upper bound. $X$ is the extension of an element of the domain at type $t\\to t$: the profile $\\Phi\\langle h,p\\rangle:=\\{i : i^tp\\in X\\}$ satisfies the coherence condition $i^t\\Phi\\langle h,p\\rangle=\\Phi\\langle i\\circ h,i^tp\\rangle$, and each of its values is pinned down by a finite set, the value at $\\{g_n\\}$ being $\\{1_{\\mathbb N}\\}\\cup\\{g_m : m>n\\}$, pinned down by $\\{0,\\ldots,n+1\\}$, and the value at other propositions being computed likewise from the truncation order. Observation of Claude Fable 5.1 (Anthropic), 23 September 2026, prompted by Cian Dorr; not in the source. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.",
+   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual. Under it the signature schemata fail. Let $c\\in\\Sigma$ have relational type $\\tau$, so $c=\\top_\\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\\ne\\top_\\tau$, witnessed by $\\bot_\\tau$ but impossible of $c$; Separated Structure fails since $\\lambda x\\, .\\,x$ and $\\lambda x\\, .\\,\\top_\\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\\top_\\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\\top_\\tau$ is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the strongest true proposition pinned down by $\\{0,\\ldots,N\\}$ for $N$ beyond the pinning set of $p$, namely $\\{1_{\\mathbb N}\\}\\cup\\{g_m:m\\ge N\\}$. Under $g_n$ the only arrows reachable are $g_m$ with $m\\le n$, so $\\Diamond q$ holds at $g_n$ only if $n\\ge N$, and then $g_n$ agrees with the identity on the pinning set of $p$ and is in $p$. Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures but does not show. Let $X$ be the family of singletons $\\{g_n\\}$ for even $n$. An upper bound of $X$ pinned down by $\\{0,\\ldots,N\\}$ contains, with any $g_m$ for $m\\ge N$, every arrow agreeing with it on $\\{0,\\ldots,N\\}$, so the least upper bound pinned down by that set is $X\\cup\\{1_{\\mathbb N}\\}\\cup\\{g_m : m\\ge N\\}$, which strictly shrinks as $N$ grows; hence $X$ has no least upper bound. $X$ is the extension of an element of the domain at type $t\\to t$: the profile $\\Phi\\langle h,p\\rangle:=\\{i : i^tp\\in X\\}$ satisfies the coherence condition $i^t\\Phi\\langle h,p\\rangle=\\Phi\\langle i\\circ h,i^tp\\rangle$, and each of its values is pinned down by a finite set, the value at $\\{g_n\\}$ being $\\{1_{\\mathbb N}\\}\\cup\\{g_m : m>n\\}$, pinned down by $\\{0,\\ldots,n+1\\}$, and the value at other propositions being computed likewise from the truncation order. Observation of Claude Fable 5.1 (Anthropic), 23 September 2026, prompted by Cian Dorr; not in the source. Relational Choice holds, necessarily. The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\\emptyset$, so it is the intension of an element of $V^{\\bar\\sigma\\to t}$ with extension $R$ at $1_V$. Given a relation $U$ serial at $V$, choose for each $x$ a $y$ with $(Ux)y$, by choice in the metatheory; the graph is such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\\colon W_0\\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every arrow and $\\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.\n\nReview of 25 September 2026. Strong Leibniz-t fails by the nonidentity-idempotent singleton witness in writeups/strong-worlds-one-object-action-models.md. The successor quantifier ranges over all propositions at the target object, including ones outside the transported image. Its necessary form therefore also fails.  The same write-up gives an explicit finitely pinned BF-t counterexample, also covered by source footnote 92; BF-t and its boxed form now fail under the engine's closure as well.",
    "was_conjectured": true,
    "changes": [
     {
@@ -13145,13 +14041,21 @@
      "satisfies": [
       "transversal-choice-r"
      ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Confirmed the trawl's Strong Leibniz-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing both the identity and the idempotent, which a target-domain proposition separates. Quantifiers inside the box range over the entire target domain. The boxed failure follows by T.",
+     "violates": [
+      "strong-leibniz-t"
+     ]
     }
    ],
    "file": "topics/classicism/models/finite-support-truncations.yaml",
    "files": {
     "md": "writeups/finite-support-truncations.md",
     "html": "writeups/finite-support-truncations.html",
-    "handwritten": false
+    "handwritten": true
    }
   },
   {
@@ -13797,7 +14701,6 @@
     "necessary-actuality",
     "no-pure-contingency-r",
     "relational-choice-r",
-    "necessary-strong-leibniz-t",
     "necessary-relational-choice-r",
     "distinctness-preserving-collapse",
     "transversal-choice-r"
@@ -13813,7 +14716,8 @@
     "independence-signature-r",
     "distinctness-signature-r",
     "no-contingency-signature-r",
-    "signature-b-r"
+    "signature-b-r",
+    "strong-leibniz-t"
    ],
    "status": "proved",
    "certificate": {
@@ -13822,13 +14726,106 @@
     "recorded_by": "OpenAI Codex (GPT-6), 17 September 2026",
     "checked_by": [],
     "date": "2026-09-17",
-    "lean": "none"
+    "lean": "none",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+     "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+     },
+     "discovery": {
+      "trawl_id": "trawl-22455d8a01ce49dbaddffeab06b806d6",
+      "at": "2026-09-25T16:50:45.878114+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "7467d0dbf27e2f2df7b757fe87bc7f09001bdacac65f5e2ec96b98fb7e331b4b",
+      "response_sha256": "0aed3cf487eed4e0606de72b8f284740cdae29af0a78eb5438b1b9349e5874f9",
+      "response_id": "b9a7c28d-d638-4f89-a3e2-9e61ce6acd36",
+      "usage": {
+       "prompt_tokens": 242946,
+       "completion_tokens": 1256,
+       "total_tokens": 244202,
+       "prompt_tokens_details": {
+        "cached_tokens": 242432
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 875
+       },
+       "prompt_cache_hit_tokens": 242432,
+       "prompt_cache_miss_tokens": 514
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek (deepseek-flash), saved 2026-09-25T16:50:45.900092+00:00; checkpoint-8016c2f10cff41c7940e3b327c9336f6 (SHA-256 61cd14d2136950fa473f80230d47b338fea7859fae52597b91d705d1cba47140). Frozen in quarantine commit 8b0b53a1d081d9a416f1593a19724e027a747651. Corrected proof and accepted scope are in the curated checkpoint.",
+       "locator": "logical-maps/topics/classicism/models/full-idempotent-monoid.yaml: violates strong-leibniz-t; workspaces/workspace-4d3603770c1d4f5e8e55ad548a6a4971/turns/trawl-22455d8a01ce49dbaddffeab06b806d6/000000-edit.json",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "literature",
+       "citation": "Bacon and Dorr, Classicism, 16 May 2023 draft, https://philpapers.org/archive/BACC-8.pdf; exact relevant sections inspected during review.",
+       "locator": "Sections and proof dependencies are identified in the accompanying handwritten write-ups and review report.",
+       "role": "background",
+       "verification": "argument-in-writeup"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-b1d4be27f1d9472d8b87f930303b0a51",
+       "candidate_id": "checkpoint-0cd1f2d674504d27a1758698cd564383",
+       "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+       "at": "2026-09-25T19:01:48.374392+00:00",
+       "recorded_at": "2026-09-25T19:01:48.375706+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept only the corrected curated changes: five BC-t failures, two source-reported Atomicity-t localizations, three SL-t failures (including correction of the full idempotent model), three boxed all-type coalesced-model flags, and the instancewise T bridge. Correct the supplementary SL-t principle note; preserve original model authorship and historical dates. Repeated or already-derived proposals add no duplicate verdicts.",
+        "argument_check": "Independently checked the finite/cofinite missing-bound argument, repaired three descending-family errors using alternating agreement shells, checked arbitrary-family predicate admissibility from extensional fullness, and repaired the two atomicity refinements. Checked all target-domain quantifiers in the idempotent singleton obstruction and a properly pinned BF-t witness for truncations. Checked product powerset atoms/meets, component behavior, and the projected-extension rigid witness at every world of the coalesced finite-domain model. Checked T instance by instance. Exact two-arrow checks exhaust four propositions and 256 property intensions; 237 finite prefixes check shell indexing. Topic schema/reference/consistency validation passed before recording this review. Finite calculations supplement, and do not replace, the infinite proofs.",
+        "source_check": "Inspected the exact 16 May 2023, 87-page Classicism draft: §1.5 p.16; Definitions 3.19 and satisfaction clauses pp.55–57; Proposition 3.24 p.58; idempotent construction p.59; Definitions D.1–D.3 and footnote92 pp.73–74; D.5 pp.75–79; E.2 pp.80–83. Checked current main definitions and before-file hashes, all eight frozen checkpoints, 256 hashed edit events and 248 editing response hashes. Actual requested/reported actor is DeepSeek deepseek-flash; draft Claude self-attributions are discarded. No source PDF or private reading extract is admitted. Original construction authorship and certificate dates remain; new deductions and proof repairs are separately attributed. No Lean verification is claimed.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-c0a37bbe6b6c45cc985428b174812564",
+      "at": "2026-09-25T19:01:48.376481+00:00",
+      "by": "OpenAI Codex (GPT-6)",
+      "base_commit": "a7bbaecf6f282ac27ea1ee52e3e75721bead6318",
+      "candidate_sha256": "9606da02aacb03dd1288524d8db1acc60c184a60afede465c2759d333382e52a",
+      "review_id": "review-b1d4be27f1d9472d8b87f930303b0a51"
+     }
+    }
    },
    "sources": [
-    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.5, p. 59, first paragraph; p. 61 (full-model principles)."
+    "Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.5, p. 59, first paragraph; p. 61 (full-model principles).",
+    "DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/strong-worlds-one-object-action-models.md; Classicism, pp. 55–59, 74 and 78; checks/action_strong_worlds.py."
    ],
    "source_names": [
-    "Classicism"
+    "Classicism",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "references": [
     {
@@ -13838,7 +14835,7 @@
     }
    ],
    "description": "The full model on {1,k} with k²=k, evaluated at its sole object. Refer to the cited paragraph for the four propositions and the failure witnesses.",
-   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. In a one-object action model whose propositions are all the sets of arrows, every singleton $\\{h\\}$ is a strong world proposition: seen from an arrow $i$ it becomes $\\{j : j\\circ i=h\\}$, and every proposition at that world is the shift $\\{j : j\\circ i\\in Y\\}$ of a root proposition $Y$, whose membership for such $j$ depends only on whether $h\\in Y$; so it entails every proposition or its negation, at every world. Any possible proposition contains some arrow, so the type-t Strong Leibniz Biconditionals hold at every world. □Relational Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains at the reachable objects being unchanged, and Relational Choice holds in every full model given choice in the metatheory (Classicism, p. 61). Distinctness-preserving collapse holds: for a true $p$ take $q:=\\{1\\}$; under $k$, $\\Diamond\\{1\\}$ would need $x\\circ k=1$, but $x\\circ k=k$ for both arrows, so it fails there, and under $1$, $p$ holds.",
+   "notes": "The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type $\\tau=\\bar\\sigma t$ denotes $\\lambda\\bar x\\, .\\,a$, where $a$ is the unique true atom of the model, the actual-world proposition described above; every other relational constant denotes the top element of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\\forall\\bar x\\, .\\,c\\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\\Diamond a$ is false, so $\\Box\\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\\top_\\tau$, witnessed by $\\top_\\tau$, since $\\Diamond(c=\\top_\\tau)$ is $\\Diamond\\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\\tau'$ denotes what the closed pure term $\\top_{\\tau'}$ denotes, and $c'=\\top_{\\tau'}$ is a true identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\\lambda\\bar x\\, .\\,a$. Everything that implies these fails with them. □Relational Choice holds: the truncation of a full action model at any arrow is again a full action model, its domains at the reachable objects being unchanged, and Relational Choice holds in every full model given choice in the metatheory (Classicism, p. 61). Distinctness-preserving collapse holds: for a true $p$ take $q:=\\{1\\}$; under $k$, $\\Diamond\\{1\\}$ would need $x\\circ k=1$, but $x\\circ k=k$ for both arrows, so it fails there, and under $1$, $p$ holds.\n\nReview of 25 September 2026. Strong Leibniz-t fails by the nonidentity-idempotent singleton witness in writeups/strong-worlds-one-object-action-models.md. The successor quantifier ranges over all propositions at the target object, including ones outside the transported image. Its necessary form therefore also fails. The earlier positive flag and supporting paragraph were erroneous; their original dated change remains as superseded history.",
    "was_conjectured": true,
    "changes": [
     {
@@ -13883,10 +14880,7 @@
     {
      "date": "2026-09-22",
      "by": "Claude Fable 5.1 (Anthropic)",
-     "summary": "Added □Strong Leibniz Biconditionals (type t): every singleton of an arrow is a strong world in a propositionally full one-object model; see the notes.",
-     "satisfies": [
-      "necessary-strong-leibniz-t"
-     ]
+     "summary": "Added □Strong Leibniz Biconditionals (type t): every singleton of an arrow is a strong world in a propositionally full one-object model; see the notes. Superseded on 25 September 2026: the transported-image quantifier argument was false; the removed positive flag is preserved here as history, not a current verdict."
     },
     {
      "date": "2026-09-22",
@@ -13925,13 +14919,21 @@
      "satisfies": [
       "transversal-choice-r"
      ]
+    },
+    {
+     "date": "2026-09-25",
+     "by": "OpenAI Codex (GPT-6)",
+     "summary": "Corrected the previously recorded necessary Strong Leibniz-t flag. Confirmed the trawl's Strong Leibniz-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing both the identity and the idempotent, which a target-domain proposition separates. Quantifiers inside the box range over the entire target domain. The boxed failure follows by T.",
+     "violates": [
+      "strong-leibniz-t"
+     ]
     }
    ],
    "file": "topics/classicism/models/full-idempotent-monoid.yaml",
    "files": {
     "md": "writeups/full-idempotent-monoid.md",
     "html": "writeups/full-idempotent-monoid.html",
-    "handwritten": false
+    "handwritten": true
    }
   },
   {
@@ -15234,7 +16236,7 @@
    }
   }
  ],
- "generated": "2026-09-25T12:30:24+00:00",
+ "generated": "2026-09-25T19:02:42+00:00",
  "progress": [
   {
    "background": null,
@@ -15242,9 +16244,9 @@
    "principles": [],
    "negative": [],
    "premises": 2,
-   "questions": 46280,
-   "settled": 33765,
-   "open": 12515,
+   "questions": 46198,
+   "settled": 34070,
+   "open": 12128,
    "by_premises": [
     [
      56,
@@ -15252,11 +16254,11 @@
     ],
     [
      3136,
-     2807
+     2810
     ],
     [
-     43088,
-     30903
+     43006,
+     31205
     ]
    ]
   },
@@ -15629,9 +16631,9 @@
     ],
     "progress": {
      "premises": 2,
-     "questions": 46280,
-     "settled": 33765,
-     "open": 12515,
+     "questions": 46198,
+     "settled": 34070,
+     "open": 12128,
      "by_premises": [
       [
        56,
@@ -15639,15 +16641,15 @@
       ],
       [
        3136,
-       2807
+       2810
       ],
       [
-       43088,
-       30903
+       43006,
+       31205
       ]
      ]
     },
-    "open": 12515,
+    "open": 12128,
     "rows": [
      {
       "kind": "question",
@@ -15657,9 +16659,9 @@
       ],
       "conclusion": "false",
       "yes": 167,
-      "no": 193,
-      "score": 179.1,
-      "auto_rank": 1569,
+      "no": 185,
+      "score": 175.5,
+      "auto_rank": 1169,
       "auto_claim": "entails",
       "rank": 1
      },
@@ -15671,9 +16673,9 @@
       ],
       "conclusion": "false",
       "yes": 155,
-      "no": 187,
-      "score": 169.5,
-      "auto_rank": 1644,
+      "no": 155,
+      "score": 155.0,
+      "auto_rank": 1581,
       "auto_claim": "entails",
       "rank": 2
      },
@@ -15685,72 +16687,11 @@
       ],
       "conclusion": "false",
       "yes": 141,
-      "no": 182,
-      "score": 158.9,
-      "auto_rank": 1724,
+      "no": 148,
+      "score": 144.4,
+      "auto_rank": 1716,
       "auto_claim": "entails",
       "rank": 3
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-truncations",
-      "principle": "necessary-strong-leibniz-t",
-      "yes": 120,
-      "no": 168,
-      "score": 140.0,
-      "auto_rank": 1953,
-      "auto_claim": "entails",
-      "rank": 4
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-truncations",
-      "principle": "strong-leibniz-t",
-      "yes": 120,
-      "no": 168,
-      "score": 140.0,
-      "auto_rank": 1954,
-      "auto_claim": "entails",
-      "rank": 5
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "distinctness-signature-r"
-      ],
-      "conclusion": "false",
-      "yes": 296,
-      "no": 89,
-      "score": 136.9,
-      "auto_rank": 644,
-      "auto_claim": "not",
-      "rank": 6
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-truncated-shifts",
-      "principle": "boolean-completeness-t",
-      "yes": 103,
-      "no": 203,
-      "score": 136.7,
-      "auto_rank": 1434,
-      "auto_claim": "entails",
-      "rank": 7
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "distinctness-signature-r"
-      ],
-      "conclusion": "distinctness-preserving-collapse",
-      "yes": 162,
-      "no": 115,
-      "score": 134.5,
-      "auto_rank": 2045,
-      "auto_claim": "not",
-      "rank": 8
      },
      {
       "kind": "question",
@@ -15760,11 +16701,25 @@
       ],
       "conclusion": "false",
       "yes": 77,
-      "no": 414,
-      "score": 129.8,
-      "auto_rank": 228,
+      "no": 380,
+      "score": 128.1,
+      "auto_rank": 192,
       "auto_claim": "entails",
-      "rank": 9
+      "rank": 4
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "atomicity-t",
+       "distinctness-signature-r"
+      ],
+      "conclusion": "distinctness-preserving-collapse",
+      "yes": 162,
+      "no": 103,
+      "score": 125.9,
+      "auto_rank": 1475,
+      "auto_claim": "not",
+      "rank": 5
      },
      {
       "kind": "question",
@@ -15774,72 +16729,36 @@
       ],
       "conclusion": "distinctness-preserving-collapse",
       "yes": 87,
-      "no": 224,
-      "score": 125.3,
-      "auto_rank": 1191,
+      "no": 216,
+      "score": 124.0,
+      "auto_rank": 893,
       "auto_claim": "entails",
-      "rank": 10
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-truncations",
-      "principle": "barcan-t",
-      "yes": 244,
-      "no": 84,
-      "score": 125.0,
-      "auto_rank": 978,
-      "auto_claim": "not",
-      "rank": 11
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-truncations",
-      "principle": "necessary-barcan-t",
-      "yes": 244,
-      "no": 84,
-      "score": 125.0,
-      "auto_rank": 979,
-      "auto_claim": "not",
-      "rank": 12
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "distinctness-schema-r",
-       "strong-leibniz-t"
-      ],
-      "conclusion": "false",
-      "yes": 307,
-      "no": 77,
-      "score": 123.1,
-      "auto_rank": 579,
-      "auto_claim": "not",
-      "rank": 13
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-permutations",
-      "principle": "inextensible-comprehension-r",
-      "yes": 85,
-      "no": 220,
-      "score": 122.6,
-      "auto_rank": 1231,
-      "auto_claim": "entails",
-      "rank": 14
+      "rank": 6
      },
      {
       "kind": "question",
       "premises": [
        "atomicity-t",
-       "strong-possibility-signature-r"
+       "distinctness-signature-r"
       ],
       "conclusion": "false",
-      "yes": 122,
-      "no": 119,
-      "score": 120.5,
-      "auto_rank": 3015,
+      "yes": 296,
+      "no": 77,
+      "score": 122.2,
+      "auto_rank": 470,
       "auto_claim": "not",
-      "rank": 15
+      "rank": 7
+     },
+     {
+      "kind": "check",
+      "model": "finite-support-permutations",
+      "principle": "inextensible-comprehension-r",
+      "yes": 84,
+      "no": 220,
+      "score": 121.6,
+      "auto_rank": 867,
+      "auto_claim": "entails",
+      "rank": 8
      },
      {
       "kind": "question",
@@ -15849,36 +16768,25 @@
       ],
       "conclusion": "distinctness-preserving-collapse",
       "yes": 83,
-      "no": 218,
-      "score": 120.2,
-      "auto_rank": 1256,
+      "no": 186,
+      "score": 114.8,
+      "auto_rank": 1159,
       "auto_claim": "entails",
-      "rank": 16
+      "rank": 9
      },
      {
       "kind": "question",
       "premises": [
-       "atomicity-r",
-       "distinctness-schema-r"
+       "atomicity-t",
+       "strong-possibility-signature-r"
       ],
       "conclusion": "false",
-      "yes": 283,
-      "no": 71,
-      "score": 113.5,
-      "auto_rank": 723,
+      "yes": 122,
+      "no": 107,
+      "score": 114.0,
+      "auto_rank": 2324,
       "auto_claim": "not",
-      "rank": 17
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-permutations",
-      "principle": "boolean-completeness-t",
-      "yes": 88,
-      "no": 149,
-      "score": 110.6,
-      "auto_rank": 2256,
-      "auto_claim": "entails",
-      "rank": 18
+      "rank": 10
      },
      {
       "kind": "question",
@@ -15886,27 +16794,13 @@
        "distinctness-schema-r",
        "strong-leibniz-t"
       ],
-      "conclusion": "distinctness-preserving-collapse",
-      "yes": 153,
-      "no": 80,
-      "score": 105.1,
-      "auto_rank": 2185,
+      "conclusion": "false",
+      "yes": 307,
+      "no": 69,
+      "score": 112.7,
+      "auto_rank": 427,
       "auto_claim": "not",
-      "rank": 19
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "distinctness-schema-r",
-       "strong-leibniz-r"
-      ],
-      "conclusion": "distinctness-preserving-collapse",
-      "yes": 72,
-      "no": 187,
-      "score": 104.0,
-      "auto_rank": 1645,
-      "auto_claim": "entails",
-      "rank": 20
+      "rank": 11
      },
      {
       "kind": "question",
@@ -15916,55 +16810,11 @@
       ],
       "conclusion": "false",
       "yes": 67,
-      "no": 229,
-      "score": 103.7,
-      "auto_rank": 1139,
+      "no": 221,
+      "score": 102.8,
+      "auto_rank": 863,
       "auto_claim": "entails",
-      "rank": 21
-     },
-     {
-      "kind": "check",
-      "model": "coalesced-all-finite-individual-domains",
-      "principle": "necessary-atomicity-r",
-      "yes": 122,
-      "no": 90,
-      "score": 103.6,
-      "auto_rank": 3016,
-      "auto_claim": "not",
-      "rank": 22
-     },
-     {
-      "kind": "check",
-      "model": "coalesced-all-finite-individual-domains",
-      "principle": "necessary-strong-leibniz-r",
-      "yes": 122,
-      "no": 90,
-      "score": 103.6,
-      "auto_rank": 3017,
-      "auto_claim": "not",
-      "rank": 23
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-dyadic-roundings",
-      "principle": "barcan-t",
-      "yes": 102,
-      "no": 96,
-      "score": 98.9,
-      "auto_rank": 3734,
-      "auto_claim": "not",
-      "rank": 24
-     },
-     {
-      "kind": "check",
-      "model": "finite-support-dyadic-roundings",
-      "principle": "necessary-barcan-t",
-      "yes": 102,
-      "no": 96,
-      "score": 98.9,
-      "auto_rank": 3735,
-      "auto_claim": "not",
-      "rank": 25
+      "rank": 12
      },
      {
       "kind": "check",
@@ -15973,37 +16823,37 @@
       "yes": 65,
       "no": 201,
       "score": 98.2,
-      "auto_rank": 1459,
+      "auto_rank": 1012,
       "auto_claim": "entails",
-      "rank": 26
+      "rank": 13
      },
      {
       "kind": "question",
       "premises": [
-       "atomicity-r",
-       "strong-possibility-signature-r"
-      ],
-      "conclusion": "false",
-      "yes": 63,
-      "no": 223,
-      "score": 98.2,
-      "auto_rank": 1201,
-      "auto_claim": "entails",
-      "rank": 27
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-r",
-       "distinctness-schema-r"
+       "distinctness-schema-r",
+       "strong-leibniz-r"
       ],
       "conclusion": "distinctness-preserving-collapse",
-      "yes": 145,
-      "no": 74,
-      "score": 98.0,
-      "auto_rank": 2358,
+      "yes": 72,
+      "no": 153,
+      "score": 97.9,
+      "auto_rank": 1621,
+      "auto_claim": "entails",
+      "rank": 14
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "distinctness-schema-r",
+       "strong-leibniz-t"
+      ],
+      "conclusion": "distinctness-preserving-collapse",
+      "yes": 153,
+      "no": 72,
+      "score": 97.9,
+      "auto_rank": 1622,
       "auto_claim": "not",
-      "rank": 28
+      "rank": 15
      },
      {
       "kind": "question",
@@ -16015,9 +16865,9 @@
       "yes": 158,
       "no": 70,
       "score": 97.0,
-      "auto_rank": 2115,
+      "auto_rank": 1551,
       "auto_claim": "not",
-      "rank": 29
+      "rank": 16
      },
      {
       "kind": "question",
@@ -16026,11 +16876,192 @@
        "strong-leibniz-r"
       ],
       "conclusion": "necessity-of-arithmetic",
-      "yes": 78,
-      "no": 126,
-      "score": 96.4,
-      "auto_rank": 2888,
+      "yes": 79,
+      "no": 124,
+      "score": 96.5,
+      "auto_rank": 2284,
       "auto_claim": "entails",
+      "rank": 17
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "barcan-r",
+       "distinctness-signature-r"
+      ],
+      "conclusion": "false",
+      "yes": 65,
+      "no": 185,
+      "score": 96.2,
+      "auto_rank": 1170,
+      "auto_claim": "entails",
+      "rank": 18
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "atomicity-r",
+       "strong-possibility-signature-r"
+      ],
+      "conclusion": "false",
+      "yes": 63,
+      "no": 191,
+      "score": 94.7,
+      "auto_rank": 1110,
+      "auto_claim": "entails",
+      "rank": 19
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "general-separated-structure-r",
+       "strong-leibniz-t"
+      ],
+      "conclusion": "necessity-of-arithmetic",
+      "yes": 171,
+      "no": 61,
+      "score": 89.9,
+      "auto_rank": 1352,
+      "auto_claim": "not",
+      "rank": 20
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "barcan-t",
+       "distinctness-signature-r"
+      ],
+      "conclusion": "distinctness-preserving-collapse",
+      "yes": 84,
+      "no": 96,
+      "score": 89.6,
+      "auto_rank": 3207,
+      "auto_claim": "entails",
+      "rank": 21
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "atomicity-r",
+       "general-separated-structure-r"
+      ],
+      "conclusion": "necessity-of-arithmetic",
+      "yes": 159,
+      "no": 61,
+      "score": 88.2,
+      "auto_rank": 1531,
+      "auto_claim": "not",
+      "rank": 22
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "boolean-completeness-t",
+       "distinctness-signature-r"
+      ],
+      "conclusion": "false",
+      "yes": 98,
+      "no": 79,
+      "score": 87.5,
+      "auto_rank": 3121,
+      "auto_claim": "not",
+      "rank": 23
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "converse-witnessed-possibility-r",
+       "general-separated-structure-r"
+      ],
+      "conclusion": "actual-profile-r",
+      "yes": 118,
+      "no": 68,
+      "score": 86.3,
+      "auto_rank": 2410,
+      "auto_claim": "not",
+      "rank": 24
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "converse-witnessed-possibility-r",
+       "general-separated-structure-r"
+      ],
+      "conclusion": "necessary-actuality",
+      "yes": 118,
+      "no": 68,
+      "score": 86.3,
+      "auto_rank": 2411,
+      "auto_claim": "not",
+      "rank": 25
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "converse-witnessed-possibility-r",
+       "witnessed-possibility-r"
+      ],
+      "conclusion": "actual-profile-r",
+      "yes": 118,
+      "no": 68,
+      "score": 86.3,
+      "auto_rank": 2412,
+      "auto_claim": "not",
+      "rank": 26
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "converse-witnessed-possibility-r",
+       "witnessed-possibility-r"
+      ],
+      "conclusion": "necessary-actuality",
+      "yes": 118,
+      "no": 68,
+      "score": 86.3,
+      "auto_rank": 2413,
+      "auto_claim": "not",
+      "rank": 27
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "general-separated-structure-r",
+       "modal-freedom-signature-r"
+      ],
+      "conclusion": "actual-profile-r",
+      "yes": 118,
+      "no": 68,
+      "score": 86.3,
+      "auto_rank": 2414,
+      "auto_claim": "not",
+      "rank": 28
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "general-separated-structure-r",
+       "modal-freedom-signature-r"
+      ],
+      "conclusion": "necessary-actuality",
+      "yes": 118,
+      "no": 68,
+      "score": 86.3,
+      "auto_rank": 2415,
+      "auto_claim": "not",
+      "rank": 29
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "logical-necessity-r"
+      ],
+      "conclusion": "actual-profile-r",
+      "yes": 118,
+      "no": 68,
+      "score": 86.3,
+      "auto_rank": 2416,
+      "auto_claim": "not",
       "rank": 30
      }
     ],
@@ -16038,15 +17069,28 @@
      {
       "kind": "question",
       "premises": [
-       "atomicity-t"
+       "strong-leibniz-t"
       ],
-      "conclusion": "necessary-atomicity-r",
-      "yes": 990,
+      "conclusion": "necessary-barcan-r",
+      "yes": 1625,
       "no": 0,
       "score": 0.0,
       "auto_rank": 1,
       "auto_claim": "not",
-      "rank": 11828
+      "rank": 11536
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "strong-leibniz-t"
+      ],
+      "conclusion": "barcan-r",
+      "yes": 1374,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 2,
+      "auto_claim": "not",
+      "rank": 10042
      },
      {
       "kind": "question",
@@ -16055,147 +17099,77 @@
        "strong-leibniz-t"
       ],
       "conclusion": "modal-freedom-signature-r",
-      "yes": 912,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 2,
-      "auto_claim": "not",
-      "rank": 11829
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "infinity-t"
-      ],
-      "conclusion": "necessary-strong-leibniz-r",
-      "yes": 904,
+      "yes": 973,
       "no": 0,
       "score": 0.0,
       "auto_rank": 3,
       "auto_claim": "not",
-      "rank": 11830
+      "rank": 11537
      },
      {
       "kind": "question",
       "premises": [
-       "atomicity-t",
-       "possible-infinity-e"
+       "atomicity-t"
       ],
-      "conclusion": "necessary-strong-leibniz-r",
-      "yes": 904,
+      "conclusion": "necessary-atomicity-r",
+      "yes": 863,
       "no": 0,
       "score": 0.0,
       "auto_rank": 4,
       "auto_claim": "not",
-      "rank": 11831
+      "rank": 11538
      },
      {
       "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "possible-infinity-t"
-      ],
-      "conclusion": "necessary-strong-leibniz-r",
-      "yes": 904,
+      "premises": [],
+      "conclusion": "inextensible-comprehension-r",
+      "yes": 863,
       "no": 0,
       "score": 0.0,
       "auto_rank": 5,
       "auto_claim": "not",
-      "rank": 11832
+      "rank": 11539
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "atomicity-r",
+       "strong-leibniz-t"
+      ],
+      "conclusion": "necessary-barcan-r",
+      "yes": 848,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 6,
+      "auto_claim": "not",
+      "rank": 10043
      },
      {
       "kind": "question",
       "premises": [
        "strong-leibniz-t"
       ],
-      "conclusion": "necessary-actuality",
-      "yes": 898,
+      "conclusion": "necessary-strong-leibniz-r",
+      "yes": 828,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 6,
-      "auto_claim": "not",
-      "rank": 11833
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "axiom-of-infinity-t"
-      ],
-      "conclusion": "necessary-strong-leibniz-r",
-      "yes": 882,
-      "no": 2,
-      "score": 4.0,
       "auto_rank": 7,
       "auto_claim": "not",
-      "rank": 9285
+      "rank": 11540
      },
      {
       "kind": "question",
-      "premises": [],
-      "conclusion": "inextensible-comprehension-r",
-      "yes": 871,
-      "no": 0,
-      "score": 0.0,
+      "premises": [
+       "pure-b-r",
+       "strong-leibniz-t"
+      ],
+      "conclusion": "converse-witnessed-possibility-r",
+      "yes": 819,
+      "no": 1,
+      "score": 2.0,
       "auto_rank": 8,
       "auto_claim": "not",
-      "rank": 11834
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "possible-infinity-t"
-      ],
-      "conclusion": "necessary-barcan-t",
-      "yes": 843,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 9,
-      "auto_claim": "not",
-      "rank": 11835
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "strong-leibniz-r"
-      ],
-      "conclusion": "modal-freedom-signature-r",
-      "yes": 837,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 10,
-      "auto_claim": "not",
-      "rank": 11836
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "infinity-t"
-      ],
-      "conclusion": "necessary-barcan-t",
-      "yes": 829,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 11,
-      "auto_claim": "not",
-      "rank": 11837
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "possible-infinity-e"
-      ],
-      "conclusion": "necessary-barcan-t",
-      "yes": 829,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 12,
-      "auto_claim": "not",
-      "rank": 11838
+      "rank": 10044
      },
      {
       "kind": "question",
@@ -16206,9 +17180,9 @@
       "yes": 817,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 13,
+      "auto_rank": 9,
       "auto_claim": "not",
-      "rank": 11839
+      "rank": 11541
      },
      {
       "kind": "question",
@@ -16219,23 +17193,50 @@
       "yes": 816,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 14,
+      "auto_rank": 10,
       "auto_claim": "not",
-      "rank": 11840
+      "rank": 11542
      },
      {
       "kind": "question",
       "premises": [
-       "atomicity-t",
-       "axiom-of-infinity-t"
+       "necessary-strong-leibniz-t",
+       "pure-b-r"
       ],
-      "conclusion": "necessary-barcan-t",
-      "yes": 811,
+      "conclusion": "modal-freedom-signature-r",
+      "yes": 761,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 11,
+      "auto_claim": "not",
+      "rank": 10045
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "pure-b-r",
+       "strong-leibniz-r"
+      ],
+      "conclusion": "modal-freedom-signature-r",
+      "yes": 761,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 12,
+      "auto_claim": "not",
+      "rank": 10046
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "strong-leibniz-r"
+      ],
+      "conclusion": "necessary-barcan-r",
+      "yes": 760,
       "no": 2,
       "score": 4.0,
-      "auto_rank": 15,
+      "auto_rank": 13,
       "auto_claim": "not",
-      "rank": 9286
+      "rank": 9197
      },
      {
       "kind": "question",
@@ -16243,12 +17244,12 @@
        "atomicity-t"
       ],
       "conclusion": "pure-b-r",
-      "yes": 753,
+      "yes": 756,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 16,
+      "auto_rank": 14,
       "auto_claim": "not",
-      "rank": 11841
+      "rank": 11543
      },
      {
       "kind": "question",
@@ -16256,12 +17257,25 @@
        "atomicity-t"
       ],
       "conclusion": "necessity-of-arithmetic",
-      "yes": 740,
+      "yes": 739,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 17,
+      "auto_rank": 15,
       "auto_claim": "not",
-      "rank": 11842
+      "rank": 11544
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "strong-leibniz-t"
+      ],
+      "conclusion": "necessary-actuality",
+      "yes": 727,
+      "no": 2,
+      "score": 4.0,
+      "auto_rank": 16,
+      "auto_claim": "not",
+      "rank": 9198
      },
      {
       "kind": "question",
@@ -16273,9 +17287,131 @@
       "yes": 718,
       "no": 0,
       "score": 0.0,
+      "auto_rank": 17,
+      "auto_claim": "not",
+      "rank": 11545
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "atomicity-r",
+       "strong-leibniz-t"
+      ],
+      "conclusion": "barcan-r",
+      "yes": 712,
+      "no": 3,
+      "score": 6.0,
       "auto_rank": 18,
       "auto_claim": "not",
-      "rank": 11843
+      "rank": 7587
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "necessary-strong-leibniz-t"
+      ],
+      "conclusion": "necessary-barcan-r",
+      "yes": 687,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 19,
+      "auto_claim": "not",
+      "rank": 10047
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "distinctness-preserving-collapse",
+       "pure-b-r"
+      ],
+      "conclusion": "modal-freedom-signature-r",
+      "yes": 671,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 20,
+      "auto_claim": "not",
+      "rank": 11546
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "necessary-strong-leibniz-r",
+       "pure-b-r"
+      ],
+      "conclusion": "modal-freedom-signature-r",
+      "yes": 657,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 21,
+      "auto_claim": "not",
+      "rank": 7588
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "strong-leibniz-r"
+      ],
+      "conclusion": "barcan-r",
+      "yes": 644,
+      "no": 5,
+      "score": 9.9,
+      "auto_rank": 22,
+      "auto_claim": "not",
+      "rank": 5657
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "inextensible-comprehension-r",
+       "signature-b-r"
+      ],
+      "conclusion": "very-weak-rigid-comprehension-r",
+      "yes": 631,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 23,
+      "auto_claim": "not",
+      "rank": 10048
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "witnessed-possibility-r"
+      ],
+      "conclusion": "distinctness-preserving-collapse",
+      "yes": 628,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 24,
+      "auto_claim": "not",
+      "rank": 11547
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "pure-b-r",
+       "strong-leibniz-r"
+      ],
+      "conclusion": "converse-witnessed-possibility-r",
+      "yes": 621,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 25,
+      "auto_claim": "not",
+      "rank": 7589
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "strong-leibniz-t"
+      ],
+      "conclusion": "necessary-barcan-t",
+      "yes": 621,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 26,
+      "auto_claim": "not",
+      "rank": 10049
      },
      {
       "kind": "question",
@@ -16283,165 +17419,55 @@
        "necessary-strong-leibniz-t",
        "pure-b-r"
       ],
-      "conclusion": "modal-freedom-signature-r",
-      "yes": 700,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 19,
-      "auto_claim": "not",
-      "rank": 10229
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "strong-leibniz-r"
-      ],
       "conclusion": "converse-witnessed-possibility-r",
-      "yes": 693,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 20,
-      "auto_claim": "not",
-      "rank": 10230
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "infinity-t"
-      ],
-      "conclusion": "necessary-atomicity-r",
-      "yes": 680,
-      "no": 2,
-      "score": 4.0,
-      "auto_rank": 21,
-      "auto_claim": "not",
-      "rank": 9287
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "possible-infinity-e"
-      ],
-      "conclusion": "necessary-atomicity-r",
-      "yes": 680,
-      "no": 2,
-      "score": 4.0,
-      "auto_rank": 22,
-      "auto_claim": "not",
-      "rank": 9288
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "possible-infinity-t"
-      ],
-      "conclusion": "necessary-atomicity-r",
-      "yes": 680,
-      "no": 2,
-      "score": 4.0,
-      "auto_rank": 23,
-      "auto_claim": "not",
-      "rank": 9289
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "pure-b-r",
-       "strong-leibniz-t"
-      ],
-      "conclusion": "converse-witnessed-possibility-r",
-      "yes": 679,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 24,
-      "auto_claim": "not",
-      "rank": 10231
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "infinity-t"
-      ],
-      "conclusion": "necessary-strong-leibniz-t",
-      "yes": 673,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 25,
-      "auto_claim": "not",
-      "rank": 10232
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "possible-infinity-e"
-      ],
-      "conclusion": "necessary-strong-leibniz-t",
-      "yes": 673,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 26,
-      "auto_claim": "not",
-      "rank": 10233
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "possible-infinity-t"
-      ],
-      "conclusion": "necessary-strong-leibniz-t",
-      "yes": 673,
-      "no": 1,
-      "score": 2.0,
+      "yes": 619,
+      "no": 3,
+      "score": 6.0,
       "auto_rank": 27,
       "auto_claim": "not",
-      "rank": 10234
+      "rank": 7590
      },
      {
       "kind": "question",
       "premises": [
-       "atomicity-t",
-       "axiom-of-infinity-t"
+       "distinctness-necessary-r",
+       "inextensible-comprehension-r"
       ],
-      "conclusion": "necessary-atomicity-r",
-      "yes": 672,
-      "no": 6,
-      "score": 11.9,
-      "auto_rank": 28,
-      "auto_claim": "not",
-      "rank": 4967
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "atomicity-t",
-       "axiom-of-infinity-t"
-      ],
-      "conclusion": "necessary-strong-leibniz-t",
-      "yes": 665,
-      "no": 5,
-      "score": 9.9,
-      "auto_rank": 29,
-      "auto_claim": "not",
-      "rank": 5583
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "strong-leibniz-t"
-      ],
-      "conclusion": "necessary-atomicity-r",
-      "yes": 659,
+      "conclusion": "rigid-comprehension-r",
+      "yes": 601,
       "no": 1,
       "score": 2.0,
+      "auto_rank": 28,
+      "auto_claim": "not",
+      "rank": 10050
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "atomicity-t",
+       "possible-infinity-e"
+      ],
+      "conclusion": "necessary-relational-choice-r",
+      "yes": 585,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 29,
+      "auto_claim": "not",
+      "rank": 11548
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "atomicity-t",
+       "infinity-t"
+      ],
+      "conclusion": "necessary-relational-choice-r",
+      "yes": 580,
+      "no": 0,
+      "score": 0.0,
       "auto_rank": 30,
       "auto_claim": "not",
-      "rank": 10235
+      "rank": 11549
      }
     ],
     "recorded": [
@@ -16453,11 +17479,11 @@
       ],
       "conclusion": "converse-witnessed-possibility-r",
       "yes": 35,
-      "no": 175,
-      "score": 58.3,
-      "auto_rank": 1824,
+      "no": 73,
+      "score": 47.3,
+      "auto_rank": 4475,
       "auto_claim": "entails",
-      "rank": 197,
+      "rank": 350,
       "conjectures": [
        {
         "id": "c5-and-atomicity-imply-no-pure-contingency",
@@ -16478,9 +17504,9 @@
       "yes": 16,
       "no": 22,
       "score": 18.5,
-      "auto_rank": 9993,
+      "auto_rank": 9487,
       "auto_claim": "entails",
-      "rank": 2907,
+      "rank": 2892,
       "conjectures": [
        {
         "id": "strong-possibility-signature-r-implies-strong-possibility-r",
@@ -16501,9 +17527,9 @@
       "yes": 110,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 3436,
+      "auto_rank": 2698,
       "auto_claim": "not",
-      "rank": 12184,
+      "rank": 11805,
       "conjectures": [
        {
         "id": "relational-choice-r-implies-transversal-choice-r",
@@ -16524,9 +17550,9 @@
       "yes": 70,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 5462,
+      "auto_rank": 4740,
       "auto_claim": "not",
-      "rank": 12297,
+      "rank": 11914,
       "conjectures": [
        {
         "id": "possible-infinity-t-implies-axiom-of-infinity-t",
@@ -20984,10 +22010,6 @@
    ],
    [
     "atomlessness",
-    "boolean-completeness-t"
-   ],
-   [
-    "atomlessness",
     "converse-witnessed-possibility-r"
    ],
    [
@@ -21048,10 +22070,6 @@
    ],
    [
     "barcan-r",
-    "boolean-completeness-t"
-   ],
-   [
-    "barcan-r",
     "inextensible-comprehension-r"
    ],
    [
@@ -21069,10 +22087,6 @@
    [
     "barcan-t",
     "barcan-r"
-   ],
-   [
-    "barcan-t",
-    "boolean-completeness-t"
    ],
    [
     "barcan-t",
@@ -21345,10 +22359,6 @@
    [
     "functional-choice-r",
     "weak-rigid-comprehension-r"
-   ],
-   [
-    "functionality-r",
-    "boolean-completeness-t"
    ],
    [
     "functionality-r",
@@ -21828,10 +22838,6 @@
    ],
    [
     "necessary-actuality",
-    "boolean-completeness-t"
-   ],
-   [
-    "necessary-actuality",
     "necessity-of-arithmetic"
    ],
    [
@@ -21849,10 +22855,6 @@
    [
     "necessary-atomicity-r",
     "pure-b-r"
-   ],
-   [
-    "necessary-barcan-r",
-    "boolean-completeness-t"
    ],
    [
     "necessary-barcan-r",
@@ -21869,10 +22871,6 @@
    [
     "necessary-barcan-t",
     "barcan-r"
-   ],
-   [
-    "necessary-barcan-t",
-    "boolean-completeness-t"
    ],
    [
     "necessary-barcan-t",
@@ -21949,10 +22947,6 @@
    [
     "necessary-functional-choice-r",
     "no-pure-contingency-r"
-   ],
-   [
-    "necessary-functionality-r",
-    "boolean-completeness-t"
    ],
    [
     "necessary-functionality-r",
@@ -22052,23 +23046,11 @@
    ],
    [
     "necessary-strong-leibniz-r",
-    "boolean-completeness-t"
-   ],
-   [
-    "necessary-strong-leibniz-r",
-    "converse-witnessed-possibility-r"
-   ],
-   [
-    "necessary-strong-leibniz-r",
     "functionality-r"
    ],
    [
     "necessary-strong-leibniz-r",
     "inextensible-comprehension-r"
-   ],
-   [
-    "necessary-strong-leibniz-r",
-    "modal-freedom-signature-r"
    ],
    [
     "necessary-strong-leibniz-r",
@@ -22096,19 +23078,11 @@
    ],
    [
     "necessary-strong-leibniz-r",
-    "no-pure-contingency-r"
-   ],
-   [
-    "necessary-strong-leibniz-r",
     "persistent-comprehension-r"
    ],
    [
     "necessary-strong-leibniz-r",
     "pure-b-r"
-   ],
-   [
-    "necessary-strong-leibniz-r",
-    "strong-leibniz-r"
    ],
    [
     "necessary-strong-leibniz-r",
@@ -22128,7 +23102,15 @@
    ],
    [
     "necessary-strong-leibniz-t",
-    "boolean-completeness-t"
+    "barcan-r"
+   ],
+   [
+    "necessary-strong-leibniz-t",
+    "barcan-t"
+   ],
+   [
+    "necessary-strong-leibniz-t",
+    "functionality-r"
    ],
    [
     "necessary-strong-leibniz-t",
@@ -22144,6 +23126,26 @@
    ],
    [
     "necessary-strong-leibniz-t",
+    "necessary-barcan-r"
+   ],
+   [
+    "necessary-strong-leibniz-t",
+    "necessary-barcan-t"
+   ],
+   [
+    "necessary-strong-leibniz-t",
+    "necessary-functionality-r"
+   ],
+   [
+    "necessary-strong-leibniz-t",
+    "necessary-strong-leibniz-r"
+   ],
+   [
+    "necessary-strong-leibniz-t",
+    "necessary-tractarianism-r"
+   ],
+   [
+    "necessary-strong-leibniz-t",
     "necessity-of-arithmetic"
    ],
    [
@@ -22155,8 +23157,12 @@
     "pure-b-r"
    ],
    [
-    "necessary-tractarianism-r",
-    "boolean-completeness-t"
+    "necessary-strong-leibniz-t",
+    "strong-leibniz-r"
+   ],
+   [
+    "necessary-strong-leibniz-t",
+    "tractarianism-r"
    ],
    [
     "necessary-tractarianism-r",
@@ -22596,23 +23602,11 @@
    ],
    [
     "strong-leibniz-r",
-    "boolean-completeness-t"
-   ],
-   [
-    "strong-leibniz-r",
-    "converse-witnessed-possibility-r"
-   ],
-   [
-    "strong-leibniz-r",
     "functionality-r"
    ],
    [
     "strong-leibniz-r",
     "inextensible-comprehension-r"
-   ],
-   [
-    "strong-leibniz-r",
-    "modal-freedom-signature-r"
    ],
    [
     "strong-leibniz-r",
@@ -22652,10 +23646,6 @@
    ],
    [
     "strong-leibniz-r",
-    "no-pure-contingency-r"
-   ],
-   [
-    "strong-leibniz-r",
     "persistent-comprehension-r"
    ],
    [
@@ -22680,7 +23670,15 @@
    ],
    [
     "strong-leibniz-t",
-    "boolean-completeness-t"
+    "barcan-r"
+   ],
+   [
+    "strong-leibniz-t",
+    "barcan-t"
+   ],
+   [
+    "strong-leibniz-t",
+    "functionality-r"
    ],
    [
     "strong-leibniz-t",
@@ -22696,7 +23694,27 @@
    ],
    [
     "strong-leibniz-t",
+    "necessary-barcan-r"
+   ],
+   [
+    "strong-leibniz-t",
+    "necessary-barcan-t"
+   ],
+   [
+    "strong-leibniz-t",
+    "necessary-functionality-r"
+   ],
+   [
+    "strong-leibniz-t",
+    "necessary-strong-leibniz-r"
+   ],
+   [
+    "strong-leibniz-t",
     "necessary-strong-leibniz-t"
+   ],
+   [
+    "strong-leibniz-t",
+    "necessary-tractarianism-r"
    ],
    [
     "strong-leibniz-t",
@@ -22709,6 +23727,14 @@
    [
     "strong-leibniz-t",
     "pure-b-r"
+   ],
+   [
+    "strong-leibniz-t",
+    "strong-leibniz-r"
+   ],
+   [
+    "strong-leibniz-t",
+    "tractarianism-r"
    ],
    [
     "strong-possibility-r",
@@ -22908,10 +23934,6 @@
    ],
    [
     "tractarianism-r",
-    "boolean-completeness-t"
-   ],
-   [
-    "tractarianism-r",
     "inextensible-comprehension-r"
    ],
    [
@@ -22997,20 +24019,8 @@
   ],
   "unknown": {
    "coalesced-all-finite-individual-domains": [
-    "atomicity-r",
-    "boolean-completeness-r",
-    "countable-boolean-completeness-r",
-    "necessary-atomicity-r",
-    "necessary-boolean-completeness-r",
-    "necessary-rigid-comprehension-r",
-    "necessary-strong-leibniz-r",
-    "necessity-of-arithmetic",
     "pure-b-r",
-    "rigid-comprehension-r",
-    "signature-b-r",
-    "strong-leibniz-r",
-    "very-weak-rigid-comprehension-r",
-    "weak-rigid-comprehension-r"
+    "signature-b-r"
    ],
    "coalesced-constant-indexed-root": [],
    "coalesced-maximalist-root": [],
@@ -23025,30 +24035,15 @@
     "witnessed-possibility-r"
    ],
    "finite-support-dyadic-roundings": [
-    "barcan-t",
-    "boolean-completeness-t",
-    "modal-freedom-signature-r",
-    "necessary-barcan-t",
-    "necessary-strong-leibniz-r",
-    "necessary-strong-leibniz-t",
-    "strong-leibniz-r",
-    "strong-leibniz-t"
+    "modal-freedom-signature-r"
    ],
    "finite-support-identity-or-collapse-surjections": [
-    "atomicity-t",
-    "boolean-completeness-t",
-    "modal-freedom-signature-r",
-    "necessary-strong-leibniz-t",
-    "strong-leibniz-t"
+    "modal-freedom-signature-r"
    ],
    "finite-support-identity-or-collapse": [
-    "atomicity-t",
     "barcan-t",
-    "boolean-completeness-t",
     "modal-freedom-signature-r",
-    "necessary-barcan-t",
-    "necessary-strong-leibniz-t",
-    "strong-leibniz-t"
+    "necessary-barcan-t"
    ],
    "finite-support-monotone-maps": [
     "barcan-t",
@@ -23060,7 +24055,6 @@
     "signature-b-r"
    ],
    "finite-support-monotone-surjections": [
-    "boolean-completeness-t",
     "inextensible-comprehension-r",
     "modal-freedom-signature-r",
     "no-contingency-signature-r",
@@ -23072,20 +24066,13 @@
    ],
    "finite-support-qualitative-contrast": [],
    "finite-support-truncated-shifts": [
-    "boolean-completeness-t",
     "modal-freedom-signature-r"
    ],
    "finite-support-truncations": [
-    "barcan-t",
     "inextensible-comprehension-r",
     "modal-freedom-signature-r",
-    "necessary-barcan-t",
-    "necessary-strong-leibniz-r",
-    "necessary-strong-leibniz-t",
     "no-contingency-signature-r",
-    "signature-b-r",
-    "strong-leibniz-r",
-    "strong-leibniz-t"
+    "signature-b-r"
    ],
    "finite-support-two-object-all-maps": [
     "actual-profile-r",

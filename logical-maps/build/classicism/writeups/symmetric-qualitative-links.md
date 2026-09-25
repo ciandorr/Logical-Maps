@@ -11,6 +11,7 @@
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
+- **Distinctness-preserving collapse.** Every truth is necessary under the distinctness-preserving modality.
 - **¬ Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **¬ ND.** Distinct things of any type are necessarily distinct.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
@@ -34,6 +35,7 @@ This is the draft's answer to the question its two-object model leaves open. Box
 
 ## Revisions
 
+- **2026-09-25** (Claude Fable 5.1 (Anthropic)) — Recorded the Distinctness-preserving collapse by the argument used for the other symmetric models. Let $a$ be the symmetry group, the model’s Actuality witness, so $a\le p$ for every true $p$. Take $q:=a$: under an arrow $i$ in the group, $p$ holds since $i\in a\subseteq p$; under a collapsing arrow $i$, $\Diamond a$ would need $k\circ i$ to be a permutation, and no composite with a map that collapses the distinguished pair is injective. So every truth is $\Box_{\ne}$-necessary. Now satisfies: Distinctness-preserving collapse.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic)) — Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences of Σ, at Cian Dorr’s request; see the notes. Now violates: No Contingency (signature Σ), B for sentences of Σ.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic)) — Corrected the reason given for the failures of Independence (signature Σ) and Distinctness (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed by every arrow; the failures come from the other relational constants, which denote top. No verdict changes.
 - **2026-09-22** (Claude Fable 5.1 (Anthropic)) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Distinctness Maximalism (signature Σ).

@@ -1,0 +1,49 @@
+id: boolean-completeness-r-implies-weakly-inextensible-comprehension-r
+premises:
+- boolean-completeness-r
+conclusion: weakly-inextensible-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), 25 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 25 September 2026
+  checked_by: []
+  date: '2026-09-25'
+  lean: none
+sources:
+- Claude Fable 5.1 (Anthropic), original connecting proof at Cian Dorr's direction, 25 September 2026;
+  see the write-up.
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Proposition
+  1, p. 2.
+source_names:
+- Fable 5.1, 25 Sep
+- BC does not imply RC
+proof: >-
+  Fix $X^\tau$ with $\tau=\bar\sigma t$ and let $H$ be the property of being the haecceity
+  $\operatorname{Haec}_{\bar y}:=\lambda\bar z\, .\,\bigwedge_i z_i=y_i$ of some $\bar y$ with $X[\bar y]$.
+  By Boolean Completeness in its least-upper-bound form, let $S$ be a least upper bound of $H$ and put
+  $Y:=\lambda\bar z\, .\,S[\bar z]\land X[\bar z]$. If $X[\bar y]$ then $\operatorname{Haec}_{\bar y}\le
+  S$, so $S[\bar y]$ by T at $\bar y=\bar y$; hence $Y$ is coextensive with $X$. For weak inextensibility
+  suppose $\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar z]$. For $\bar y$ with $X[\bar y]$ we get
+  $\Box Z[\bar y]$, and $\forall\bar z\, .\,\bigwedge_i z_i=y_i\to Z[\bar z]$ is H-equivalent to $Z[\bar
+  y]$, so $\operatorname{Haec}_{\bar y}\le Z$. Thus $Z$ is an upper bound of $H$, so $S\le Z$, and
+  $Y\le S\le Z$.
+references:
+- paper: dorr-bc-not-rc
+  role: related
+  locator: Proposition 1, p. 2
+  note: The same least upper bound of haecceities is the witness there; with Actuality added it is also
+    persistent and coextensive with X by itself. Here Actuality is not assumed and the join is cut down
+    to X.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.2, pp. 23–25
+  note: Boolean Completeness; its least-upper-bound form is equivalent to the stated greatest-lower-bound
+    form in C.
+notes: >-
+  Only the least upper bound of the haecceities of the $X$-instances is used. Together with the recorded
+  implication from Actuality this places Weakly Inextensible Comprehension below two principles that
+  the recorded models separate in both directions, so it is strictly weaker than each: the symmetric
+  all-surjections and range-gap-without-Actuality models have Boolean Completeness without Actuality,
+  and the finite-support models with Actuality lack Boolean Completeness. In particular Weakly
+  Inextensible Comprehension does not imply Actuality.

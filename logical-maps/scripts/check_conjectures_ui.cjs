@@ -1,5 +1,6 @@
 // Run with Node and jsdom available (e.g. NODE_PATH=/path/to/node_modules).
 // Rebuild unbounded-utility first; the final checks use its current data.json.
+// The Conjectures tab renders the rankings pmap.py stores at build time; the fixture carries them.
 const fs=require('node:fs'), path=require('node:path'), assert=require('node:assert/strict');
 const {JSDOM,VirtualConsole}=require('jsdom');
 const root=path.resolve(__dirname,'..');
@@ -15,8 +16,9 @@ function page(data,url='http://localhost/?assume=') {
   return dom;
 }
 function show(dom,tab) { dom.window.document.querySelector(`[data-tab="${tab}"]`).click(); }
-function row(dom,id) { return dom.window.document.querySelector(`#open [data-conjecture-id="${id}"]`); }
-function resolution(dom,id) { return row(dom,id)?.dataset.resolution; }
+function openSection(dom,id) { const det=dom.window.document.getElementById(id); det.open=true; det.dispatchEvent(new dom.window.Event('toggle')); return det; }
+function keys(dom) { return [...dom.window.document.querySelectorAll('#open-recorded table.lynchpin tbody tr')].map(tr=>tr.dataset.lynchpin); }
+function rowOf(dom,key) { return dom.window.document.querySelector(`#open-recorded [data-lynchpin="${key}"]`); }
 function setResolved(dom,value) {
   const checkbox=dom.window.document.getElementById('show-resolved');
   if(checkbox.checked!==value) checkbox.click();
@@ -43,6 +45,18 @@ const model=(id,satisfies,violates,status='conjectured',source='submission',was_
   description:status==='proved'?'Fixture construction.':'Proposed construction.',
   sources:['Fixture source'],source_names:['Fixture source'],
 });
+const q=(premises,conclusion,yes,no,rank,extra)=>({kind:'question',premises,conclusion,yes,no,rank,...extra});
+const rec=(id,kind,notes)=>({id,kind,notes,tier:null});
+// What pmap.py stores for this fixture: its settled share and, under the topic background, the
+// questions its recorded conjectures ask (the ranking's own top rows are not needed here).
+const recorded=[q(['b'],'a',13,2,14,{auto_rank:7,claim:'not',conjectures:[rec('open-model','model','')]}),q(['a'],'b',6,2,17,{auto_rank:34,claim:'entails',tier:'bronze',conjectures:[rec('open-query','result','Open still.')]}),
+  q(['b'],'false',26,0,38,{auto_rank:2,claim:'not',conjectures:[rec('open-model','model','')]}),
+  q(['a'],'false',null,null,null,{status:'consistent',claim:'not',verdict:'proved',conjectures:[rec('proved-model','model','')]}),
+  q(['a'],'d',null,null,null,{status:'excluded',claim:'entails',verdict:'refuted',conjectures:[rec('refuted-query','result',''),rec('proved-model','model','')]}),
+  q(['a','d'],'b',null,null,null,{status:'excluded',claim:'entails',verdict:'refuted',conjectures:[rec('incompatible-query','result','')]}),
+  q(['a','d'],'false',null,null,null,{status:'inconsistent',claim:'not',verdict:'refuted',conjectures:[rec('refuted-model','model','')]}),
+  q(['a'],'c',null,null,null,{status:'proved',claim:'entails',verdict:'proved',conjectures:[rec('proved-query','result','')]})];
+const progress={background:null,name:null,principles:[],negative:[],premises:2,questions:56,settled:8,open:48};
 const fixture={
   topic:{id:'conjectures-fixture',title:'Conjectures fixture',background:[],
     principle_categories:[{id:'basic',name:'Basic principles'}],
@@ -51,7 +65,7 @@ const fixture={
   results:[
     rule('history-result',['a'],'c','proved','paper',true),
     rule('conflict',['a','d'],false,'proved','paper'),
-    rule('open-query',['a'],'b'),
+    {...rule('open-query',['a'],'b'),notes:'Open still.'},
     rule('proved-query',['a'],'c'),
     rule('refuted-query',['a'],'d'),
     rule('incompatible-query',['a','d'],'b'),
@@ -62,8 +76,8 @@ const fixture={
     model('proved-model',['a'],['d']),
     model('refuted-model',['a','d'],[]),
   ],
-  // The settled share is stored by pmap.py at build time; hand-checked for the proved records above.
-  progress:[{background:null,name:null,principles:[],negative:[],premises:2,questions:56,settled:8,open:48}],
+  progress:[progress],
+  lynchpins:{skipped:null,reports:[{background:null,name:null,principles:[],negative:[],inconsistent_background:false,classes:[['a'],['b'],['c'],['d'],['e']],trivial:[],fitting_models:['history-model'],open:48,progress,rows:[],auto:[],recorded}]},
 };
 
 try {
@@ -94,61 +108,48 @@ try {
   assert.ok(visible(dom,doc.querySelector('#pr-filters [data-add-background="a"]')));
   assert.equal(doc.getElementById('open-warning').hidden,true);
 
-  // History is explicit metadata. It and current proved/refuted questions are
-  // hidden by default, while impossible antecedents have a separate section.
+  // Recorded conjectures are the questions the records ask, in the lynchpin format: open ones
+  // at their rank with scores, settled ones with a status and hidden until Show resolved.
   assert.equal(doc.getElementById('show-resolved').checked,false);
-  assert.equal(resolution(dom,'open-query'),'open');
-  assert.equal(resolution(dom,'open-model'),'open');
-  assert.ok(doc.querySelector('#open-recorded [data-conjecture-id="open-query"]'),'recorded questions sit in their own dropdown');
-  assert.equal(doc.getElementById('open-recorded').open,false,'the dropdown starts collapsed');
-  assert.equal(doc.querySelector('#open-recorded > summary').textContent.trim(),'Recorded conjectures');
-  for(const id of ['history-result','history-model','proved-query','refuted-query','proved-model','refuted-model'])
-    assert.equal(row(dom,id),null,id);
-  assert.equal(resolution(dom,'incompatible-query'),'incompatible');
-
-  // Open means no answer in the full recorded evidence. Removing a proof or
-  // witness only limits the selected evidence; it must not inflate the count.
   assert.equal(doc.querySelector('[data-tab="open"]').textContent.trim(),'Conjectures','the tab carries no count');
-  const progress=()=>doc.getElementById('open-progress');
-  const settled=progress().textContent;
-  assert.equal(settled,'14% of questions with up to two premises settled.');
-  sourceCheckbox.click();
-  assert.equal(resolution(dom,'open-query'),'open');
-  assert.equal(resolution(dom,'open-model'),'open');
-  for(const [id,status] of [['proved-query','proved'],['refuted-query','refuted'],['proved-model','proved'],['refuted-model','refuted'],['incompatible-query','incompatible'],['history-result','proved'],['history-model','proved']]){
-    const question=row(dom,id);
-    assert.equal(question.dataset.resolution,'evidence-limited',id);
-    assert.equal(question.dataset.selectedResolution,'open',id);
-    assert.equal(question.dataset.fullResolution,status,id);
-    assert.match(question.querySelector('.resolution').textContent,/Unresolved by selected evidence/);
-    assert.match(question.querySelector('.conjecture-evidence summary').textContent,/with all recorded evidence/);
-    assert.ok(question.querySelector('[data-open-result],[data-open-model]'),'Omitted evidence stays inspectable');
-  }
-  assert.equal(progress().textContent,settled,'Source filters do not change the settled share');
-  assert.ok(row(dom,'refuted-query').querySelector('[data-open-model="history-model"]'),'Refutation still cites an actual countermodel');
-  assert.match(row(dom,'incompatible-query').textContent,/does not settle the implication/);
-  assert.equal(doc.getElementById('show-resolved').checked,false,'Limited-evidence questions stay visible with Show resolved off');
-  sourceCheckbox.click();
-  assert.equal(row(dom,'proved-query'),null,'Restoring its evidence hides the resolved question again');
-  doc.getElementById('lean-only').click();
-  assert.equal(resolution(dom,'proved-query'),'evidence-limited','Lean filters are distinguished from globally open questions too');
-  assert.equal(resolution(dom,'open-query'),'open');
-  assert.equal(progress().textContent,settled);
-  doc.getElementById('lean-only').click();
-  assert.ok(doc.querySelector('#open-incompatible [data-conjecture-id="incompatible-query"]'));
+  assert.equal(doc.getElementById('open-recorded').open,false,'the dropdown starts collapsed');
+  assert.equal(doc.querySelector('#open-recorded > summary').textContent.trim(),'Conjectures');
+  assert.equal(doc.querySelector('#lynchpins > summary').textContent.trim(),'Central Questions');
+  assert.equal(doc.querySelector('#open-auto > summary').textContent.trim(),'Automatically Generated Conjectures');
+  openSection(dom,'open-recorded');
+  assert.deepEqual(keys(dom),['q|b|a','q|a|b','q|b|false'],'open conjectures only, by central rank');
+  assert.deepEqual([...doc.querySelectorAll('#open-recorded td.rank')].map(td=>td.textContent),['14','17','38'],'the central rank, so b ⊬ ⊥ at 26 / 0 sinks');
+  assert.ok(rowOf(dom,'q|a|b').querySelector('.star.iridescent.bronze'),'a conjecture with notes is starred');
+  assert.equal(rowOf(dom,'q|b|a').querySelector('.star'),null,'one without notes is not');
+  assert.equal(rowOf(dom,'q|a|b').querySelector('.links button[data-open-result="open-query"]').textContent,'details','a link to the record, no dropdown');
+  assert.equal(rowOf(dom,'q|a|b').querySelector('details'),null);
+  assert.equal(rowOf(dom,'q|b|a').dataset.claim,'not','a model conjectures against the entailment');
+  assert.match(rowOf(dom,'q|b|a').textContent,/B ⊬ A/);
+  assert.deepEqual([...rowOf(dom,'q|b|a').querySelectorAll('td.num:not(.rank)')].map(td=>td.textContent),['2','13'],'its scores are what confirming or refuting it would settle');
+  assert.match(rowOf(dom,'q|a|b').textContent,/A ⊢ B/);
   setResolved(dom,true);
-  for(const id of ['history-result','history-model','proved-query','proved-model'])
-    assert.equal(resolution(dom,id),'proved',id);
-  for(const id of ['refuted-query','refuted-model']) assert.equal(resolution(dom,id),'refuted',id);
+  assert.deepEqual(keys(dom),['q|b|a','q|a|b','q|b|false','q|a|false','q|a|d','q|a+d|b','q|a+d|false','q|a|c'],'Show resolved adds the settled ones');
+  // A settled conjecture shows its verdict relative to what it claimed.
+  for(const [key,status,verdict] of [['q|a|false','consistent','proved'],['q|a|d','excluded','refuted'],['q|a+d|b','excluded','refuted'],['q|a+d|false','inconsistent','refuted'],['q|a|c','proved','proved']]) {
+    assert.equal(rowOf(dom,key).dataset.status,status,key);
+    assert.equal(rowOf(dom,key).querySelector('.status').textContent,verdict,key);
+    assert.equal(rowOf(dom,key).querySelector('td.rank').textContent,'—');
+  }
+  assert.equal(rowOf(dom,'q|a|d').querySelectorAll('.links button').length,2,'each record that asks the question gets its link');
   setResolved(dom,false);
-  assert.equal(row(dom,'history-result'),null);
-  assert.equal(resolution(dom,'incompatible-query'),'incompatible');
+  assert.deepEqual(keys(dom),['q|b|a','q|a|b','q|b|false']);
 
-  // Turning off the source of a question does not remove that question. Source
-  // switches select its evidence, not the existence of the recorded question.
-  doc.querySelector('[data-source-filter="submission"]').click();
-  assert.equal(resolution(dom,'open-query'),'open');
-  doc.querySelector('[data-source-filter="submission"]').click();
+  // The share and the list come from the stored evidence, so selecting sources changes neither.
+  const progressEl=()=>doc.getElementById('open-progress');
+  const settled=progressEl().textContent;
+  assert.equal(settled,'14% of 56 questions with up to two premises are settled.');
+  sourceCheckbox.click();
+  assert.equal(progressEl().textContent,settled,'Source filters do not change the settled share');
+  assert.deepEqual(keys(dom),['q|b|a','q|a|b','q|b|false'],'nor the conjectures');
+  sourceCheckbox.click();
+  doc.getElementById('lean-only').click();
+  assert.equal(progressEl().textContent,settled);
+  doc.getElementById('lean-only').click();
 
   const oldWidth=Number(divider.getAttribute('aria-valuenow'));
   divider.dispatchEvent(new dom.window.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));
@@ -164,36 +165,22 @@ try {
   assert.equal(graphCheckbox.getAttribute('aria-pressed'),'false');
   assert.deepEqual(graphMembership(dom),originalGraph);
 
-  // Background changes update model-existence questions and remain shared.
+  // Background changes are shared between the tabs; an ad-hoc background has no stored list.
   show(dom,'open');
-  setResolved(dom,true);
   doc.querySelector('#pr-filters [data-add-background="a"]').click();
   assert.deepEqual(assumptions(dom),['a']);
-  assert.equal(resolution(dom,'open-model'),'refuted');
+  assert.match(doc.querySelector('#open-recorded .note').textContent,/No list is stored for this background/);
+  assert.equal(progressEl().hidden,true);
   show(dom,'graph');
   assert.deepEqual(assumptions(dom),['a']);
   assert.ok(doc.querySelector('#background-list [data-remove-background="a"]'));
   doc.querySelector('#background-list [data-remove-background="a"]').click();
   show(dom,'open');
-  assert.equal(resolution(dom,'open-model'),'open');
   assert.deepEqual(assumptions(dom),[]);
+  assert.deepEqual(keys(dom),['q|b|a','q|a|b','q|b|false']);
 
-  // A countermodel's evidence includes the proof that it fits the selected
-  // background, even when the contextual engine takes that background as given.
-  doc.querySelector('#pr-filters [data-add-background="c"]').click();
-  assert.equal(resolution(dom,'refuted-query'),'refuted');
-  assert.ok(row(dom,'refuted-query').querySelector('[data-open-result="history-result"]'),
-    'The witness satisfies background C through the recorded A ⇒ C proof.');
-  sourceCheckbox.click();
-  assert.equal(resolution(dom,'refuted-query'),'evidence-limited');
-  assert.ok(row(dom,'refuted-query').querySelector('[data-open-result="history-result"]'),'Full-evidence witness includes its hidden background derivation');
-  assert.ok(row(dom,'refuted-query').querySelector('[data-open-model="history-model"]'));
-  sourceCheckbox.click();
-  doc.querySelector('#background-list [data-remove-background="c"]').click();
-  assert.deepEqual(assumptions(dom),[]);
-
-  // Actual topic: a new model refutes the preserved DTU conjecture. Stronger
-  // backgrounds can prove it, while source filters can remove either answer.
+  // Actual topic: the preserved DTU conjecture keeps its history, and the recorded list
+  // under DTU carries the silver-ranked open question at its rank.
   const data=JSON.parse(fs.readFileSync(path.join(root,'build/unbounded-utility/data.json'),'utf8'));
   const historical=['symmetric-dtu-refutes-independent-sum-candidate','conjectured-total-independent-sum-extension','conjectured-dtu-cancellation-implies-preservation'];
   for(const id of historical) {
@@ -202,87 +189,47 @@ try {
     assert.equal(entry.was_conjectured,true);
   }
   const real=page(data,'http://localhost/'),rd=real.window.document;
-  const du=assumptions(real),shift='conjectured-dtu-shift-implies-transfer';
-  const countableQuestions=['countable-sure-thing-outcomes-to-gambles','countable-sure-thing-simple-to-full-eu'];
-  const empty=page(data),ed=empty.window.document;
-  show(empty,'open');
-  for(const id of countableQuestions) assert.equal(row(empty,id),null,'Refuted questions are hidden by default');
-  setResolved(empty,true);
-  for(const id of countableQuestions) {
-    assert.equal(resolution(empty,id),'refuted');
-    assert.ok(row(empty,id).querySelector('[data-open-model="lexicographic-nonatomic-mass"]'));
-    assert.equal(data.results.find(r=>r.id===id).status,'conjectured');
-  }
-  ed.querySelector('[data-source-filter="misc"]').click();
-  for(const id of countableQuestions) {
-    assert.equal(resolution(empty,id),'evidence-limited');
-    assert.equal(row(empty,id).dataset.fullResolution,'refuted');
-  }
-  ed.querySelector('[data-source-filter="misc"]').click();
-  empty.window.addBackgroundPreset('dtu');
-  for(const id of countableQuestions) assert.equal(resolution(empty,id),'incompatible');
-  show(real,'open');
-  assert.equal(row(real,shift),null,'The refuted question is hidden until Show resolved is checked.');
-  for(const id of historical) assert.equal(row(real,id),null);
-  setResolved(real,true);
-  for(const id of historical) assert.equal(resolution(real,id),'proved');
-  assert.equal(resolution(real,shift),'refuted');
-  assert.ok(row(real,shift).querySelector('[data-open-model="finite-shift-total-extension"]'));
-  assert.equal(data.results.find(r=>r.id===shift).status,'conjectured','Refutation does not rewrite the question status.');
-  rd.querySelector('[data-source-filter="misc"]').click();
-  assert.equal(resolution(real,shift),'evidence-limited');
-  assert.equal(row(real,shift).dataset.fullResolution,'refuted');
-  assert.ok(row(real,shift).querySelector('[data-open-model="finite-shift-total-extension"]'));
-  rd.querySelector('[data-source-filter="misc"]').click();
-  assert.equal(resolution(real,shift),'refuted');
-  setResolved(real,false);
+  const du=assumptions(real);
+  show(real,'open'); openSection(real,'open-recorded');
+  const silver=()=>rd.querySelector('#open-recorded [data-starred="silver"]');
+  // Under DU the silver conjecture keeps Totality among its premises, three in all, so it
+  // is listed unranked; under DTU it is the open two-premise question CDF-Area Extension ∧
+  // Comonotonic Sum Invariance ⊬ False, at its rank.
+  assert.ok(silver(),'listed under DU'); assert.equal(silver().dataset.status,'outside','with more than two premises there');
+  assert.equal(silver().dataset.claim,'not','a model conjectures against the entailment');
+  assert.ok(keys(real).every(k=>!rowOf(real,k).dataset.status||rowOf(real,k).dataset.status==='outside'),'settled ones wait for Show resolved');
+  real.window.addBackgroundPreset('dtu');
+  assert.deepEqual(assumptions(real),[...du,'totality'].sort());
+  assert.ok(silver(),'open under DTU as a two-premise question');
+  assert.equal(silver().dataset.status,undefined);
+  assert.match(silver().querySelector('td.rank').textContent,/^\d+$/,'at its rank');
+  assert.match(silver().textContent,/⊬ False/);
+  assert.ok(silver().querySelector('.links button[data-open-model]'),'with a link to the record');
   assert.ok(visible(real,rd.querySelector('#background-dock [data-background-preset="du"]')));
   assert.ok(visible(real,rd.querySelector('#background-dock [data-background-preset="dtu"]')));
-
-  rd.querySelector('#pr-filters [data-add-background="l1-continuity"]').click();
-  assert.equal(row(real,shift),null,'The now-proved conditional question is hidden until Show resolved is checked.');
+  const shown=keys(real).length;
   setResolved(real,true);
-  assert.equal(resolution(real,shift),'proved');
-  assert.deepEqual(assumptions(real),[...du,'l1-continuity'].sort());
-  assert.deepEqual(assumptions(page(data,real.window.location.href)),assumptions(real));
-  show(real,'graph');
-  assert.ok(rd.getElementById('pane-graph').contains(rd.getElementById('graph-sidebar')));
-  assert.ok(rd.querySelector('#background-list [data-remove-background="l1-continuity"]'));
-  show(real,'open');
-
-  // Hiding the Misc. proof leaves a known resolution outside the selection;
-  // it does not turn this question into an open one.
-  rd.querySelector('[data-source-filter="misc"]').click();
-  assert.equal(resolution(real,shift),'evidence-limited');
-  assert.equal(row(real,shift).dataset.fullResolution,'proved');
-  rd.querySelector('[data-source-filter="misc"]').click();
-  assert.equal(resolution(real,shift),'proved');
-  rd.querySelector('#background-list [data-remove-background="l1-continuity"]').click();
-  assert.equal(resolution(real,shift),'refuted');
-  assert.deepEqual(assumptions(real),du);
+  assert.ok(keys(real).length>shown,'Show resolved adds the settled recorded conjectures');
+  setResolved(real,false);
 
   // Inconsistent backgrounds have their own warning; no explosion is used to
-  // silently settle the remaining questions, and removing the cause restores
-  // the original background-sensitive refutation.
+  // silently settle the remaining questions, and removing the cause restores the list.
   rd.querySelector('#pr-filters [data-add-background="archimedean-gambles"]').click();
   assert.equal(rd.getElementById('open-warning').hidden,false);
-  assert.match(rd.getElementById('open-warning').textContent,/inconsistent/i);
-  assert.equal(rd.getElementById('graph-warning').hidden,false);
   rd.querySelector('#background-list [data-remove-background="archimedean-gambles"]').click();
   assert.equal(rd.getElementById('open-warning').hidden,true);
-  assert.equal(resolution(real,shift),'refuted');
-  assert.deepEqual(assumptions(real),du);
+  assert.ok(silver());
   // Hidden inconsistent evidence cannot turn a question into a genuine open
   // question, nor may inconsistency manufacture a proof by explosion.
   sourceCheckbox.click();
   dom.window.changeBackground('a',true);dom.window.changeBackground('d',true);
   assert.equal(doc.getElementById('open-warning').hidden,false);
   assert.match(doc.getElementById('open-warning').textContent,/Additional evidence/);
-  assert.equal(resolution(dom,'open-query'),'inconsistent-background');
-  assert.equal(progress().hidden,true,'no settled share while the full evidence is inconsistent');
+  assert.match(doc.querySelector('#open-recorded .note').textContent,/inconsistent/);
+  assert.equal(progressEl().hidden,true,'no settled share while the full evidence is inconsistent');
   dom.window.resetBackground();sourceCheckbox.click();
-  assert.equal(resolution(dom,'open-query'),'open');
-  assert.equal(progress().textContent,settled);
+  assert.deepEqual(keys(dom),['q|b|a','q|a|b','q|b|false']);
+  assert.equal(progressEl().textContent,settled);
   assert.deepEqual(errors,[]);
-  console.log('PASS: open versus evidence-limited conjectures, full-evidence proofs and witnesses, stable open counts, Lean filters, incompatible backgrounds, and shared controls.');
+  console.log('PASS: conjectures in the central-questions format, in their records\' direction with verdicts once settled, tiered stars with a details link, stable shares under source filters, shared sidebar controls, ad-hoc and incompatible backgrounds, and the silver conjecture on the real map.');
 } finally { pages.forEach(dom=>dom.window.close()); }

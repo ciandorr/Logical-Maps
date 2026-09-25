@@ -1,14 +1,14 @@
-# Distinctness (signature Σ) ⇒ Distinctness (pure)
+# Distinctness Maximalism (signature Σ) ⇒ Distinctness Maximalism (pure)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Distinctness (signature Σ).** The Distinctness schema for the fixed nonlogical signature Sigma.
+- **Distinctness Maximalism (signature Σ).** The Distinctness Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Conclusion
 
-- **Distinctness (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
+- **Distinctness Maximalism (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
 
 ## Proof
 

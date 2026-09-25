@@ -1,4 +1,4 @@
-# Strong Possibility (signature Σ) ⇒ Possibility (signature Σ)
+# Strong Possibility (signature Σ) ⇒ Possibility Maximalism (signature Σ)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
@@ -8,7 +8,7 @@
 
 ## Conclusion
 
-- **Possibility (signature Σ).** The Possibility schema for the fixed nonlogical signature Sigma.
+- **Possibility Maximalism (signature Σ).** The Possibility Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Proof
 

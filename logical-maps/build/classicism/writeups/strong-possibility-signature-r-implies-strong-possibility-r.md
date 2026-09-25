@@ -12,7 +12,7 @@
 
 ## Notes
 
-The restriction of the signature schema to pure P gives ◇≠P for every pure P consistent with Max(C(Σ)); the pure schema asks for every pure P consistent with Max(C). So the arrow holds iff Max(C(Σ)), equivalently Max(C) plus Separated Structure, is conservative over Max(C) for pure sentences: every pure sentence consistent with Pure Maximalist Classicism must remain consistent when Separated Structure is added. Adjoining constants is conservative for C, which is why Possibility (signature Σ) implies Possibility (pure), but for the maximalization a model of Max(C) + P would need its constants interpreted so that each realizes every consistent role at some truncation, which is not automatic. A proof of that conservativity, or a pure sentence consistent with Max(C) but not with Max(C) + Separated Structure, would settle it.
+The restriction of the signature schema to pure P gives ◇≠P for every pure P consistent with Max(C(Σ)); the pure schema asks for every pure P consistent with Max(C). So the arrow holds iff Max(C(Σ)), equivalently Max(C) plus Separated Structure, is conservative over Max(C) for pure sentences: every pure sentence consistent with Pure Maximalist Classicism must remain consistent when Separated Structure is added. Adjoining constants is conservative for C, which is why Possibility Maximalism (signature Σ) implies Possibility Maximalism (pure), but for the maximalization a model of Max(C) + P would need its constants interpreted so that each realizes every consistent role at some truncation, which is not automatic. A proof of that conservativity, or a pure sentence consistent with Max(C) but not with Max(C) + Separated Structure, would settle it.
 
 ## Sources
 

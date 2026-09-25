@@ -1,8 +1,26 @@
 # Working in this repo
 
+For mathematical questions, start with [AGENTS.md](AGENTS.md) and the relevant
+topic guide: [Classicism](topics/classicism/AGENTS.md) or
+[Unbounded Utility](topics/unbounded-utility/AGENTS.md). They give direct record
+lookups and focused queries; follow them before exploring the repository.
+
 This is a database of principles and the logical connections between them, with
 a build step that derives consequences and renders an interactive map. Read
 README.md first.
+
+## Mathematical brainstorming is the default
+
+Keep mathematical exploration separate from Lean formalization. Requests to
+prove a theorem, check an argument, find a countermodel, or think through a
+conjecture call for ordinary mathematical reasoning unless the user explicitly
+asks for Lean or has already included it in the task. Use the database and
+write-ups; do not detour into Lean sources, `.lean` edits, toolchain setup,
+`lake`, or `lean-check`. A sound mathematical proof need not be formalized to
+answer the question or be recorded as proved; preserve its actual Lean status.
+Do not routinely propose Lean as the next step. The Lean commands below apply
+to requested formalization work. Normal export builds can still regenerate
+statements mechanically, without starting a proof or audit project.
 
 ## Private work
 
@@ -24,20 +42,31 @@ crediting contributors. Use `[Logical Maps] <topic title>` for topic-specific
 email subjects and `[Logical Maps]` for general project suggestions; prefill
 the topic subject in each map's email link.
 
+## Draft topics
+
+A topic with `draft: true` in its `topic.yaml` (intuitionisticism) is built and
+validated but nothing derived is computed for it: no rankings, settled share or
+recorded-conjecture list, and `lynchpins` skips it. Leave it out of feature work
+and reports unless it is asked for by name.
+
 ## Commands
 
 - `python3 scripts/pmap.py validate` — must pass before any commit.
 - `python3 scripts/pmap.py build` — regenerates `build/<topic>/index.html`,
   `data.json`, write-ups, and downloadable topic files.
 - `python3 scripts/pmap.py status` — counts, open pairs, redundancies.
-- `python3 scripts/pmap.py lynchpins` — open questions ranked by how many other open
-  questions each answer would settle, under no extra assumptions and under each
-  background preset (`--background du`, `--top 20`, `--json`). A question is S ⊢ c
+- `python3 scripts/pmap.py lynchpins` — the central questions, open questions ranked by
+  the harmonic mean of what either answer would settle (the expected settlement when an
+  answer is as likely as the map leaves room for it), then the same questions by their
+  larger side as automatically generated conjectures stated as the answer to expect,
+  under no extra assumptions and under each background preset (`--background du`,
+  `--top 20`, `--json`). A question is S ⊢ c
   for S at most two principle classes and c a class or False, asked only where no
   smaller premise set already proves or excludes c, and settled alike by a proof,
   an exclusion or a fitting model; a model check is scored the same way. A row that a
-  recorded conjecture asks about carries that record and its notes (starred) and is
-  kept at its rank even below the stored top. `Lynchpins`
+  recorded conjecture asks about carries that record (a bronze star and a details
+  link; silver or gold when the record sets `tier`). The viewer's sections are
+  "Central Questions" and "Conjectures". `Lynchpins`
   in `scripts/pmap.py` is the only implementation: `build` stores its rankings and
   settled share per background preset in `data.json` (also `derived.json` and the
   bundle's OPEN-QUESTIONS.md §2, which skip a sparse map with over three quarters of
@@ -108,7 +137,10 @@ When you (an AI) add or edit a result or model:
   hand-written write-up in `topics/<topic>/writeups/<id>.md` (LaTeX math allowed);
   it replaces the generated one in the build.
 - If you are not sure, record it as `status: conjectured` with an empty proof
-  and say in `notes` what would settle it.
+  and say in `notes` what would settle it. A conjecture with notes earns a bronze
+  lynchpin star by itself; only a human sets `tier: silver` or `tier: gold`, by
+  importance and difficulty. Never set a tier yourself; keep a contributor's
+  proposed tier and reasons in `notes` for a human to act on.
 - New scaffolds and omitted statuses default to conjectured. Do not restore a
   proved default. Explicitly promote a record only after its proof or model
   verification is supplied.
@@ -118,13 +150,14 @@ When you (an AI) add or edit a result or model:
   changed statement, keep the original question and add a separate proved record.
   A refuted proposal stays `status: conjectured`; record its proved refuting
   evidence separately. Do not add a `refuted` proof status.
-- Conjecture verdicts are computed from the selected background and proved
-  sources, not persisted as global resolutions. Source filters restrict answer
-  evidence, not the question inventory. For non-False conclusions, incompatible
-  premises are reported separately; an inconsistent background suppresses verdicts.
-  Refuting an implication requires an actual countermodel; matching a model's required flags
-  proves existence, not necessarily its proposed construction. The viewer hides
-  currently proved/refuted questions unless **Show resolved** is checked.
+- Conjecture verdicts are computed at build time from proved evidence under the
+  topic background and each preset, never persisted as record statuses. The
+  Conjectures tab lists each recorded conjecture as the question it asks, in the
+  lynchpin format: at its rank with scores while open, with its status and no
+  scores once settled, marked when it has more than two premises. Refuting an
+  implication requires an actual countermodel; a model witnesses a conjecture's
+  required flags, not its proposed construction. The viewer hides settled
+  questions unless **Show resolved** is checked.
 - Do not edit an existing paper/submission proof or a legacy human-authored
   proof to change its mathematical content — add a note or a new result instead.
 - When you add content to an existing record after its certificate date (a

@@ -28,6 +28,7 @@ jobs:
           python scripts/pmap.py validate
           python scripts/pmap.py selftest
           python scripts/check_public_test.py
+          python scripts/check_trawl.py
       - name: Rebuild and check downloads
         working-directory: logical-maps
         run: |

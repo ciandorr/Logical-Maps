@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Finite-support action model: qualitative contrast</title><style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Finite-support action model: qualitative contrast</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -304,42 +305,70 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: qualitative contrast</h1></header><p class="cert">
-Model — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.
-</p>
-<h2 id="package">Package</h2>
-<ul>
-<li><strong>□ND.</strong> Every closed instance of ND is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
-<li><strong>Axiom of Infinity (type e).</strong> There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
-<li><strong>Axiom of Infinity (type t).</strong> There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
-<li><strong>¬ □Actuality.</strong> Every closed instance of Actuality is necessary. Box the entire object-variable closure; retain the same type range and other schema side conditions.</li>
-<li><strong>¬ Atomicity.</strong> Every non-bottom entity of each relational type has an atom below it.</li>
-<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.</li>
-<li><strong>¬ Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
-<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
-<li><strong>¬ Distinctness (signature Σ).</strong> The Distinctness schema for the fixed nonlogical signature Sigma.</li>
-<li><strong>¬ Distinctness-preserving collapse.</strong> Every truth is necessary under the distinctness-preserving modality.</li>
-</ul>
-<h2 id="construction">Construction</h2>
-<p>Appendix D, p. 79, the final construction: two objects <span class="math inline">W_0</span> and <span class="math inline">W_1</span>, both copies of <span class="math inline">\mathbb N</span>, with the permutations of <span class="math inline">\mathbb N</span> as the arrows between any pair of objects, finite subsets as <span class="math inline">W_i^\ddagger</span>, and one constraint beyond ideal fullness: a set of arrows belongs to <span class="math inline">W_i^t</span> only if, whenever it contains an arrow <span class="math inline">h</span> into <span class="math inline">W_0</span>, it contains <span class="math inline">g\circ h</span> for every permutation <span class="math inline">g</span> of <span class="math inline">W_0</span>. Intuitively <span class="math inline">W_0</span> is a state in which all individuals are qualitatively indiscernible and <span class="math inline">W_1</span> one in which each plays a unique role. The smallest proposition of <span class="math inline">W_0^t</span> containing the identity is the set of all arrows <span class="math inline">W_0\to W_0</span>, which witnesses Actuality at <span class="math inline">W_0</span>; Actuality fails at <span class="math inline">W_1</span> as in part 1, so <span class="math inline">\Box</span>Actuality and hence Atomicity fail at <span class="math inline">W_0</span> although C5 holds. Evaluation point: <span class="math inline">W_0</span>, at its identity arrow.</p>
-<h2 id="notes">Notes</h2>
-<p>The cited construction is a model of the map’s relational-type framework. The description identifies its evaluation point; construction and verification are given at the PDF locations in References. Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its type and each individual constant denotes one fixed individual. Under it the signature schemata fail. Let <span class="math inline">c\in\Sigma</span> have relational type <span class="math inline">\tau</span>, so <span class="math inline">c=\top_\tau</span> necessarily. Witnessed Possibility fails for the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span> but impossible of <span class="math inline">c</span>; Separated Structure fails since <span class="math inline">\lambda x\, .\,x</span> and <span class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span class="math inline">c</span> and differ; Independence (signature Σ) fails since <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes; Distinctness (signature Σ) fails since <span class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Distinctness-preserving collapse fails at <span class="math inline">W_0</span>: every arrow has an inverse, so <span class="math inline">\Diamond q</span> holds at every arrow for every true <span class="math inline">q</span>, and <span class="math inline">\Box(\Diamond q\to p)</span> would force every true <span class="math inline">p</span> to contain every arrow; but the true proposition consisting of all arrows <span class="math inline">W_0\to W_0</span> together with the arrows into <span class="math inline">W_1</span> fixing <span class="math inline">0</span> is pinned down by <span class="math inline">\{0\}</span>, meets the closure constraint, and omits arrows. Relational Choice is left unknown here: the construction constrains <span class="math inline">W_i^t</span> beyond ideal fullness, so the paper’s remark that ideally full models are extensionally full does not apply to it as stated, and no other argument has been checked.</p>
-<h2 id="revisions">Revisions</h2>
-<ul>
-<li><strong>2026-09-23</strong> (Claude Fable 5.1 (Anthropic)) — Expanded the description from Appendix D; settled the Distinctness-preserving collapse. Now violates: Distinctness-preserving collapse.</li>
-<li><strong>2026-09-23</strong> (Claude Fable 5.1 (Anthropic)) — Noted why Relational Choice is left unknown: the construction goes beyond ideal fullness, so the extensional-fullness argument used for the other Appendix D models does not apply as stated.</li>
-<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic)) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Distinctness (signature Σ).</li>
-<li><strong>2026-09-20</strong> (Claude Fable 5.1 (Anthropic)) — Added both Axioms of Infinity at Cian Dorr’s direction. The individuals are the natural numbers and identity at the evaluation arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct and each has that individual as finite support, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence has empty support and lies in the domain, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).</li>
-<li><strong>2026-09-17</strong> (OpenAI Codex (GPT-6)) — Adopted the source’s relational type system at the user’s request. The cited construction now directly supplies the recorded model; the former type-extension obligation is removed. Now satisfies: □ND, Actuality. Now violates: □Actuality, Atomicity.</li>
-</ul>
-<h2 id="sources">Sources</h2>
-<ul>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, p. 79, final construction (two copies of N).</li>
-</ul>
-<p class="cert">
-Record: <code>topics/classicism/models/finite-support-qualitative-contrast.yaml</code>
-</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: qualitative contrast</h1></header><p>The Bacon–Dorr model at <span class="math inline">W_0</span> satisfies C5 and Plenitude but fails both Relational Choice and Functional Choice. The choice failures below are a new verification by OpenAI Codex (GPT-6), 24 September 2026, prompted by the user’s proposal to transfer Plenitude countermodels to Functional Choice. The model itself is Bacon and Dorr’s final construction in Appendix D of <em>Classicism</em>, draft of 16 May 2023, p. 79.</p>
+<h2 id="construction-and-the-relevant-semantic-facts">Construction and the relevant semantic facts</h2>
+<p>There are two objects <span class="math inline">W_0,W_1</span>, each with individual domain <span class="math inline">\mathbb N</span>. The arrows between any pair of objects are all bijections between these copies, composed as functions. The individual action is the natural one. Propositions at <span class="math inline">W_i</span> are the finitely supported sets of arrows out of <span class="math inline">W_i</span> subject to the additional condition</p>
+<p><span class="math display">
+h\in p,\quad h:W_i\longrightarrow W_0
+\quad\Longrightarrow\quad
+g\circ h\in p\quad\text{for every }g:W_0\longrightarrow W_0.
+</span></p>
+<p>Function types contain all finitely supported members of the corresponding exponential action on these restricted domains. Here support has the sense of Definitions D.1–D.3: if arrows with a common target agree on a finite set <span class="math inline">F</span> of individuals, they have the same action on an entity supported by <span class="math inline">F</span>. In particular, any permutation fixing <span class="math inline">F</span> pointwise fixes that entity. Application commutes with the actions, as in §3.4.</p>
+<p>Two facts must be kept separate:</p>
+<ol type="1">
+<li>Every relation or operation has a finite support, although different entities may have different supports.</li>
+<li>Every proposition <span class="math inline">p\in W_0^t</span> has constant truth value on the arrows <span class="math inline">W_0\to W_0</span>: either it contains all those arrows or none. Thus, if a formula is true at <span class="math inline">1_{W_0}</span> with some parameters, it is true there again when all its parameters are transported by any such permutation. The parameters themselves need not be fixed by that permutation.</li>
+</ol>
+<p>The second fact follows directly from the extra constraint, using inverses for the converse. It is the reason this model differs from the ideally full permutation model, where Relational Choice holds. An arbitrary extension cannot be inserted at <span class="math inline">W_0</span> without respecting this constraint.</p>
+<h2 id="a-serial-relation-with-no-functional-subrelation">A serial relation with no functional subrelation</h2>
+<p>For <span class="math inline">P^{et}</span>, let <span class="math inline">\operatorname{Two}(P)</span> abbreviate</p>
+<p><span class="math display">
+\exists a^e b^e\, .\,a\ne b\land
+\forall z^e\, .\,Pz\leftrightarrow(z=a\lor z=b).
+</span></p>
+<p>Fix an individual <span class="math inline">d</span>. Ordinary comprehension gives the relation <span class="math inline">U^{(et)et}</span> defined by</p>
+<p><span class="math display">
+(UP)x\quad\leftrightarrow\quad
+\bigl(\operatorname{Two}(P)\land Px\bigr)
+\lor\bigl(\neg\operatorname{Two}(P)\land x=d\bigr).
+</span></p>
+<p>It is serial at <span class="math inline">W_0</span>: use a member of <span class="math inline">P</span> when it has exactly two members, and <span class="math inline">d</span> otherwise. This is an admitted Relational Choice instance; a relation may have individual outputs even though an operation may not.</p>
+<p>Suppose <span class="math inline">S^{(et)et}</span> were a functional subrelation of <span class="math inline">U</span> at <span class="math inline">W_0</span>. Choose a finite support <span class="math inline">F</span> for <span class="math inline">S</span> and distinct <span class="math inline">a,b</span> outside <span class="math inline">F\cup\{d\}</span>. Put</p>
+<p><span class="math display">
+P_{a,b}:=\lambda z^e\, .\,z=a\lor z=b,
+</span></p>
+<p>and let <span class="math inline">g</span> transpose <span class="math inline">a,b</span>, fixing every other individual. Then <span class="math inline">gS=S</span>. Also <span class="math inline">gP_{a,b}=P_{a,b}</span>: transporting its parameters interchanges the two disjuncts, which defines the same property by Logical Equivalence applied to the H-theorem expressing commutativity of disjunction. This use of Equivalence has no optional hypotheses.</p>
+<p>Because <span class="math inline">S</span> is total and contained in <span class="math inline">U</span>, its unique output at <span class="math inline">P_{a,b}</span> is one of <span class="math inline">a,b</span>; call it <span class="math inline">x</span>. Let <span class="math inline">y</span> be the other. The proposition <span class="math inline">(SP_{a,b})x</span> is true at <span class="math inline">1_{W_0}</span>. By the truth-invariance fact above,</p>
+<p><span class="math display">
+\bigl((gS)(gP_{a,b})\bigr)(gx)
+=(SP_{a,b})y
+</span></p>
+<p>is true at <span class="math inline">1_{W_0}</span> as well. Both distinct individuals are therefore <span class="math inline">S</span>-outputs at the same input, contradicting functionality. Relational Choice fails.</p>
+<h2 id="functional-choice-with-an-admitted-output-type">Functional Choice with an admitted output type</h2>
+<p>The recorded theorem Functional Choice <span class="math inline">\Rightarrow</span> Relational Choice already transfers this failure. Here is a direct relational-output counterinstance, to make the type restriction explicit.</p>
+<p>Write <span class="math inline">H_x:=\lambda z^e\, .\,z=x</span> for an individual’s haecceity and define <span class="math inline">V^{(et)(et)t}</span> by</p>
+<p><span class="math display">
+(VP)Q\quad\leftrightarrow\quad
+\exists x^e\, .\,(UP)x\land Q=H_x.
+</span></p>
+<p>This relation is serial. If an operation <span class="math inline">X^{(et)(et)}</span> selected from it, choose a finite support for <span class="math inline">X</span> and <span class="math inline">a,b</span> outside that support and <span class="math inline">\{d\}</span>. Again <span class="math inline">gX=X</span> and <span class="math inline">gP_{a,b}=P_{a,b}</span>. Since the selected value is either <span class="math inline">H_a</span> or <span class="math inline">H_b</span>, equivariance of application would give</p>
+<p><span class="math display">
+XP_{a,b}=g(XP_{a,b})=H_y\ne H_x=XP_{a,b},
+</span></p>
+<p>where <span class="math inline">x</span> is the selected member and <span class="math inline">y</span> the other. The inequality is literal inequality of domain elements: <span class="math inline">H_a</span> and <span class="math inline">H_b</span> differ on <span class="math inline">a</span> at the identity arrow. This is a contradiction. The output type <span class="math inline">et</span> is relational, so the counterinstance respects the map’s type system.</p>
+<p>Consequently the boxed forms of both choice principles fail too, by T. No necessitation of an optional assumption is used.</p>
+<h2 id="what-transfers-and-what-remains-open">What transfers, and what remains open</h2>
+<p>Every arrow is invertible, giving C5 and the boxed Barcan schemata at all types. The proposition consisting of all arrows <span class="math inline">W_0\to W_0</span> is the least true proposition at <span class="math inline">W_0</span>, giving Actuality. The source proves that Actuality fails at <span class="math inline">W_1</span>, so <span class="math inline">\Box</span>Actuality and Atomicity fail at <span class="math inline">W_0</span>. The recorded implications from C5 plus Actuality give Boolean Completeness and Rigid Comprehension, and hence Plenitude.</p>
+<p>Thus even <strong>C5 + Plenitude + Boolean Completeness + Rigid Comprehension</strong> does not imply Relational Choice or Functional Choice. The two Axioms of Infinity already verified in the model can also be retained as premises. These are countermodel claims, not incompatibility claims: other recorded models satisfy those premises together with Functional Choice.</p>
+<p>The general equivalence remains</p>
+<p><span class="math display">
+\text{Functional Choice}\quad\Longleftrightarrow\quad
+\text{Relational Choice}\land\text{Plenitude}.
+</span></p>
+<p>It allows transfers when Relational Choice is verified. It does not allow this model’s failures of Atomicity and <span class="math inline">\Box</span>Actuality to be transferred to a model of Functional Choice. The corresponding implications with Functional Choice as a premise remain unsettled by this verification.</p>
+<h2 id="check-and-attribution">Check and attribution</h2>
+<p><code>topics/classicism/checks/qualitative_contrast_choice.py</code> exhaustively checks pair selectors on sets of two through five individuals. Every selector requires a support containing all but at most one individual. Finite sets still admit selectors; the contradiction in the countably infinite construction is that every permitted support leaves two individuals outside it. The finite check is a sanity check of the symmetry obstruction, not a verification of the entire infinite higher-order model.</p>
+<p>Construction and original positive and negative properties: Andrew Bacon and Cian Dorr, <em>Classicism</em>, draft of 16 May 2023, §3.4 and Appendix D, especially p. 79. The Relational Choice and Functional Choice failures proved here are the new contribution; they have no independent checker or Lean verification recorded.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, p. 79, final construction (two copies of N)</li>

@@ -27,7 +27,9 @@ try {
     } else {
       assert.ok(d.querySelector('#graph .node.search-current'));
       d.querySelector('[data-tab="open"]').click();
-      assert.equal(d.querySelector('[data-conjecture-id="connected-symmetric-implies-transitive"]').dataset.resolution, 'open');
+      const recorded = d.getElementById('open-recorded'); recorded.open = true; recorded.dispatchEvent(new dom.window.Event('toggle'));
+      assert.ok(recorded.querySelector('button[data-open-result="connected-symmetric-implies-transitive"]'), 'the tutorial conjecture is listed with its notes');
+      assert.ok(recorded.querySelector('[data-starred="bronze"]'), 'and starred bronze for them');
       d.querySelector('[data-tab="models"]').click();
       assert.ok(d.querySelector('[data-model="identity-on-two"]'));
     }

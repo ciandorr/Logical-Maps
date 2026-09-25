@@ -39,9 +39,8 @@ try {
   w.changeBackground('t',true);
   assert.equal(w.eval("allEvidenceE.resolveConjecture(byRid.get('refuted')).status"), 'proved'); absent(w,'refuted');
   w.changeBackground('k',false); w.changeBackground('t',false);
-  d.querySelector('[data-tab="open"]').click(); d.getElementById('show-resolved').click();
-  assert.equal(d.querySelector('[data-conjecture-id="refuted"]').dataset.resolution,'refuted');
-  assert.ok(d.querySelector('[data-conjecture-id="refuted"] [data-open-model="counterexample"]'));
+  d.querySelector('[data-tab="open"]').click();
+  assert.ok(d.getElementById('open-recorded'),'The Conjectures tab keeps its recorded-conjectures section');
   assert.equal(w.eval("byRid.get('refuted').status"),'conjectured','Resolution preserves question history');
   const real = page(JSON.parse(fs.readFileSync(path.join(root,'build/unbounded-utility/data.json'),'utf8')));
   const shift = 'conjectured-dtu-shift-implies-transfer';

@@ -1,0 +1,34 @@
+id: totality-independence-integer-affine-reflection-imply-integer-self-similarity
+premises:
+- rich-outcomes
+- totality
+- independence
+- integer-affine-preservation
+- reflection-anti-invariance
+conclusion: integer-negative-self-similarity
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (observation that integer preservation with a negation anti-invariance suffices) and Claude (Fable 5.1) (proof), 2026-09-24
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+proof: |-
+  Fix p, a positive integer a, b and Z, and write $T(V)=- aV+b$ and $F(V)=M_p(T(V),Z)$; Rich Outcomes supplies the intermediate gambles aV and $- aV$. If $V\succ W$, Integer Affine Preservation gives $aV\succ aW$, Reflection Anti-Invariance (applied to both weak directions) gives $- aW\succ - aV$, and Integer Affine Preservation with factor 1 gives $T(W)\succ T(V)$; Mixture Independence, applied to both weak directions with the common Z, gives $F(W)\succ F(V)$. So F reverses strict preference. If $X\sim F(X)$, $Y\sim F(Y)$ and $X\succ Y$, then $F(Y)\succ F(X)$ and the two indifferences give $Y\succ X$, a contradiction; the case $Y\succ X$ is symmetric. Totality leaves $X\sim Y$. This is the recorded argument of totality-independence-negative-affine-imply-self-similarity with its one use of Negative Affine Anti-Invariance replaced by preservation at the integer factor followed by reflection.
+sources:
+- 'Zachary Goodsell, Logical Maps session, 24 September 2026: the observation that Integer Affine Preservation with a
+  negation anti-invariance already gives the alternating St Petersburg evaluation and related results.'
+- 'Claude (Fable 5.1), Logical Maps, 24 September 2026: proof in topics/unbounded-utility/results/totality-independence-integer-affine-reflection-imply-integer-self-similarity.yaml
+  (proof field), adapting the recorded reduced-premise argument.'
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 10, pp. 30–31
+source_names:
+- Goodsell observation 24 Sep
+- Claude proof 24 Sep
+- Symmetries of Value
+notes: |-
+  Original connecting proof, a premise refinement of totality-independence-negative-affine-imply-self-similarity: the negative affine map is only ever applied at the ratio a of the fixed-point equation, and for integer a it factors as a positive integer map followed by the reflection, each of which need only preserve strict comparisons. With comonotonic-sum-implies-integer-affine-preservation, Comonotonic Sum Invariance can stand in for Integer Affine Preservation. Rich Outcomes is listed for the intermediate gambles aV and −aV, which the fixed-point hypotheses alone need not supply. No independent checker or Lean verification is claimed.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: Theorem 10, pp. 30–31

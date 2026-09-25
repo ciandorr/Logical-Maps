@@ -1,0 +1,29 @@
+id: conjectured-du-comonotonic-imply-rational-affine-preservation
+premises:
+- rich-outcomes
+- archimedean-outcomes
+- stochastic-equivalence
+- stochastic-dominance
+- independence
+- comonotonic-sum-consistency
+conclusion: rational-affine-preservation
+status: conjectured
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (claim) and Claude (Fable 5.1) (reduction to cancellation and obstruction analysis), 2026-09-24
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+proof: ''
+sources:
+- 'Zachary Goodsell, Logical Maps session, 24 September 2026: claim that under DU Comonotonic Sum Invariance preserves
+  weak and strict order under positive rational affine maps.'
+- 'Claude (Fable 5.1), Logical Maps, 24 September 2026: the integer case comonotonic-sum-implies-integer-affine-preservation
+  and the reduction of the remainder to integer cancellation; the unit-threshold model shows Mixture Independence
+  is needed.'
+source_names:
+- Goodsell claim 24 Sep
+- Claude reduction 24 Sep
+notes: |-
+  Does DU with Comonotonic Sum Invariance preserve weak and strict comparisons under every map aX + b with rational a > 0? The integer factors are proved from Rich Outcomes, Stochastic Equivalence and Comonotonic Sum Invariance alone (comonotonic-sum-implies-integer-affine-preservation), so what is open is the factor 1/n, and X ≽ Y ⇒ X/n ≽ Y/n is the cancellation nX′ ≽ nY′ ⇒ X′ ≽ Y′. Cancellation holds with Totality (comonotonic-sum-totality-imply-rational-scale) and fails without Mixture Independence: cdf-area-unit-threshold satisfies Rich Outcomes, Archimedean Outcomes, Stochastic Equivalence, Stochastic Dominance, Simple EU and Comonotonic Sum Invariance, has X* ≽ 0 with X*/2 ⋡ 0, and satisfies Integer Affine Preservation. What would settle it: a proof, which must use Mixture Independence; or a DU model with Comonotonic Sum Invariance in which some nX ≽ nY holds with X ⋡ Y. Under DU with Stochastic Equivalence the order is determined by the width h = Q_X − Q_Y, every pair whose width is bounded below with positive integral is strictly ranked (a step function below the width with positive integral is the width of a simple comonotonic pair, and the shear is comonotonic), and every pair with a step-function width is ranked by its integral; a refuting pair must therefore have equal finite areas, a width unbounded below, or both areas infinite, and its closure under mixtures and comonotonic shears must stay consistent with strict dominance. Proposed tier: none; a human may set one.

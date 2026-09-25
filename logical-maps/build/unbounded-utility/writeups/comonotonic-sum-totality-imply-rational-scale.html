@@ -1,0 +1,298 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Comonotonic Sum Invariance with Totality implies Rational Scale Invariance</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Comonotonic Sum Invariance with Totality implies Rational Scale Invariance</h1></header><p><strong>Proved implication:</strong> Rich Outcomes + Totality + Stochastic Equivalence + Comonotonic Sum Invariance imply Rational Scale Invariance: for every rational <span class="math inline">a&gt;0</span>, <span class="math inline">X\succeq Y</span> iff <span class="math inline">aX\succeq aY</span>.</p>
+<p>With the recorded <a href="comonotonic-sum-implies-shift.html">Shift Invariance</a> consequence, the same package gives <span class="math inline">X\succeq Y</span> iff <span class="math inline">aX+b\succeq aY+b</span> for rational <span class="math inline">a&gt;0</span> and real <span class="math inline">b</span>. Real factors are not reached; see §6.</p>
+<p><strong>Source and work accounting.</strong> Zachary Goodsell, Logical Maps session, 24 September 2026, claimed that Comonotonic Sum Invariance implies Positive Affine Invariance and gave the doubling argument <span class="math inline">2A=A+A\succeq B+A\succeq B+B=2B</span> for the scale step. Claude (Fable 5.1), 24 September 2026, supplied the comonotonic-copy reduction, the strict chain, the cancellation step through Totality, the rational assembly, and the two models in §6 showing which premises are used. Recorded under Misc. No independent checker or Lean verification is claimed.</p>
+<h2 id="setting">1. Setting</h2>
+<p>Work in the real utility chart and write <span class="math inline">X</span> for the utility variable of a finite-level gamble. Rich Outcomes supplies a gamble at every real level, so pointwise sums and rational multiples of finite-level variables are gambles under the standing realization conventions; the principles are applied wherever the displayed variables exist. <span class="math inline">Q_X</span> is the quantile function of <span class="math inline">X</span>, nondecreasing on <span class="math inline">(0,1)</span>, and <span class="math inline">U</span> denotes a uniform variable on the standing atomless standard space.</p>
+<p>Two standard facts are used.</p>
+<ul>
+<li>(F1) For every <span class="math inline">X</span> there is a uniform <span class="math inline">U</span> with <span class="math inline">X=Q_X(U)</span> almost surely. On the complement of the atoms of the law of <span class="math inline">X</span> take <span class="math inline">U=F_X(X)</span>; on each atom <span class="math inline">\{X=x\}</span>, an event of positive probability on an atomless space, take a variable uniform on <span class="math inline">(F_X(x^-),F_X(x)]</span>.</li>
+<li>(F2) If <span class="math inline">f,g</span> are nondecreasing on <span class="math inline">(0,1)</span> then <span class="math inline">(f(U),g(U))</span> is a comonotonic pair in the sense of the principle, <span class="math inline">Q_{f(U)}=f</span> almost everywhere, and <span class="math inline">f(U)+g(U)=(f+g)(U)</span> with <span class="math inline">f+g</span> nondecreasing.</li>
+</ul>
+<h2 id="comonotonic-copies">2. Comonotonic copies</h2>
+<p>Given <span class="math inline">X,Y</span>, choose <span class="math inline">U</span> with <span class="math inline">X=Q_X(U)</span> by (F1) and put <span class="math inline">Y^\dagger=Q_Y(U)</span>. Then <span class="math inline">Y^\dagger</span> has the law of <span class="math inline">Y</span>, so Stochastic Equivalence gives <span class="math inline">Y\sim Y^\dagger</span>, and by transitivity <span class="math inline">X\succeq Y</span> iff <span class="math inline">X\succeq Y^\dagger</span>. For rational <span class="math inline">a&gt;0</span>, <span class="math inline">aY^\dagger=Q_{aY}(U)</span> has the law of <span class="math inline">aY</span>, so likewise <span class="math inline">aX\succeq aY</span> iff <span class="math inline">aX\succeq aY^\dagger</span>. It therefore suffices to prove the theorem for pairs <span class="math inline">X=f(U)</span>, <span class="math inline">Y=g(U)</span> with <span class="math inline">f,g</span> nondecreasing, and <span class="math inline">(aX,aY)=(af(U),ag(U))</span> is again such a pair.</p>
+<h2 id="integer-factors-preservation">3. Integer factors: preservation</h2>
+<p><strong>Lemma 1.</strong> Let <span class="math inline">X=f(U)</span>, <span class="math inline">Y=g(U)</span> with <span class="math inline">f,g</span> nondecreasing, and let <span class="math inline">k\ge1</span> be an integer. If <span class="math inline">X\succeq Y</span> then <span class="math inline">kX\succeq kY</span>; if <span class="math inline">X\succ Y</span> then <span class="math inline">kX\succ kY</span>. Only Rich Outcomes and Comonotonic Sum Invariance are used.</p>
+<p><em>Proof.</em> For <span class="math inline">0\le j\le k</span> put <span class="math inline">W_j=jX+(k-j)Y=(jf+(k-j)g)(U)</span>, a gamble by Rich Outcomes. For <span class="math inline">0\le j&lt;k</span> put <span class="math inline">Z_j=jX+(k-j-1)Y=(jf+(k-j-1)g)(U)</span>; it is a nondecreasing function of <span class="math inline">U</span>, so by (F2) both <span class="math inline">(X,Z_j)</span> and <span class="math inline">(Y,Z_j)</span> are comonotonic, and <span class="math inline">X+Z_j=W_{j+1}</span>, <span class="math inline">Y+Z_j=W_j</span>. Comonotonic Sum Invariance, applied to the pair <span class="math inline">(X,Y)</span> and to the pair <span class="math inline">(Y,X)</span>, gives</p>
+<p><span class="math display">W_{j+1}\succeq W_j\iff X\succeq Y,\qquad W_j\succeq W_{j+1}\iff Y\succeq X.
+\tag{$*$}</span></p>
+<p>If <span class="math inline">X\succeq Y</span>, then <span class="math inline">W_k\succeq W_{k-1}\succeq\cdots\succeq W_0</span> and transitivity gives <span class="math inline">kX=W_k\succeq W_0=kY</span>.</p>
+<p>If <span class="math inline">X\succ Y</span>, then also <span class="math inline">Y\not\succeq X</span>. Suppose <span class="math inline">kY\succeq kX</span>, that is <span class="math inline">W_0\succeq W_k</span>. For <span class="math inline">k=1</span> this is <span class="math inline">Y\succeq X</span>, excluded. For <span class="math inline">k\ge2</span> the chain <span class="math inline">W_k\succeq W_{k-1}\succeq\cdots\succeq W_1</span> gives <span class="math inline">W_k\succeq W_1</span>, hence <span class="math inline">W_0\succeq W_1</span> by transitivity, which by <span class="math inline">(*)</span> with <span class="math inline">j=0</span> is <span class="math inline">Y\succeq X</span>, excluded. So <span class="math inline">kX\succ kY</span>. <span class="math inline">\square</span></p>
+<p>Lemma 1, together with the shift step <span class="math inline">X\succeq Y</span> iff <span class="math inline">X+b\succeq Y+b</span> from the constant summand, is the recorded result <a href="comonotonic-sum-implies-integer-affine-preservation.html">comonotonic-sum-implies-integer-affine-preservation</a>.</p>
+<h2 id="integer-factors-cancellation">4. Integer factors: cancellation</h2>
+<p><strong>Lemma 2.</strong> Under Totality, for <span class="math inline">X,Y</span> as in Lemma 1: if <span class="math inline">kX\succeq kY</span> then <span class="math inline">X\succeq Y</span>.</p>
+<p><em>Proof.</em> Suppose <span class="math inline">X\not\succeq Y</span>. Totality gives <span class="math inline">Y\succeq X</span>, so <span class="math inline">Y\succ X</span>, and Lemma 1 gives <span class="math inline">kY\succ kX</span>, contradicting <span class="math inline">kX\succeq kY</span>. <span class="math inline">\square</span></p>
+<p>Totality enters only here. Without it the cancellation direction fails; see §6.</p>
+<h2 id="rational-factors">5. Rational factors</h2>
+<p><strong>Theorem.</strong> Under the four premises, for every rational <span class="math inline">a&gt;0</span> and all finite-level <span class="math inline">X,Y</span> for which <span class="math inline">aX,aY</span> exist: <span class="math inline">X\succeq Y</span> iff <span class="math inline">aX\succeq aY</span>.</p>
+<p><em>Proof.</em> By §2 assume <span class="math inline">X=f(U)</span>, <span class="math inline">Y=g(U)</span> with <span class="math inline">f,g</span> nondecreasing. Write <span class="math inline">a=m/n</span> with positive integers <span class="math inline">m,n</span>. Lemmas 1 and 2 with <span class="math inline">k=m</span> give <span class="math inline">X\succeq Y</span> iff <span class="math inline">mX\succeq mY</span>. The variables <span class="math inline">mX</span> and <span class="math inline">n(aX)</span> have the same utility function <span class="math inline">m\,u(X)</span>, so they are the same numeric variable, or indifferent by Stochastic Equivalence if realized by different gambles; likewise for <span class="math inline">Y</span>. Lemmas 1 and 2 with <span class="math inline">k=n</span>, applied to the comonotonic pair <span class="math inline">(aX,aY)</span>, give <span class="math inline">n(aX)\succeq n(aY)</span> iff <span class="math inline">aX\succeq aY</span>. Chaining the three equivalences proves the claim. <span class="math inline">\square</span></p>
+<h2 id="the-premises-are-used">6. The premises are used</h2>
+<ul>
+<li><em>Rich Outcomes</em> supplies the mixed sums <span class="math inline">jX+(k-j)Y</span>; on a sparse chart they need not exist.</li>
+<li><em>Stochastic Equivalence</em> is needed for non-comonotonic pairs. For <span class="math inline">X=U</span> and <span class="math inline">Y=1-U</span>, no nonconstant <span class="math inline">Z</span> is comonotonic with both: a common uniform <span class="math inline">U&#39;</span> with <span class="math inline">X=f(U&#39;)</span> and <span class="math inline">1-X=g(U&#39;)</span>, both nondecreasing, forces <span class="math inline">X</span> to be almost surely constant. Comonotonic Sum Invariance alone says nothing about <span class="math inline">(2X,2Y)</span>, and the copies of §2 are what the doubling argument adds to <span class="math inline">A</span> on both sides.</li>
+<li><em>Totality</em> is used only in Lemma 2. The model <a href="cdf-area-unit-threshold.html">CDF-area dominance: simple floors or unit threshold</a> satisfies Rich Outcomes, Stochastic Equivalence and Comonotonic Sum Invariance, together with Simple EU and Stochastic Dominance, and has a pair with <span class="math inline">2X\succeq 2Y</span> and <span class="math inline">X\not\succeq Y</span>.</li>
+<li><em>Real factors</em> are not reached. The model <a href="lexicographic-hamel-tie-break.html">Lexicographic expectation: Hamel tie-break</a> satisfies all four premises, Archimedean Outcomes, Stochastic Dominance and Simple EU, is invariant under every rational factor, and has <span class="math inline">X\succ 0</span> with <span class="math inline">\sqrt2X\not\succeq0</span>. Iterated addition sees only rational multiples. Whether Mixture Independence closes the gap is <a href="conjectured-dtu-comonotonic-imply-scale.html">conjectured-dtu-comonotonic-imply-scale</a>.</li>
+</ul>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Background: Unbounded Utility and Background Risk.</strong> Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. — §6.2, p. 18; definitions on pp. 3–4</li>
+</ul>
+</body></html>

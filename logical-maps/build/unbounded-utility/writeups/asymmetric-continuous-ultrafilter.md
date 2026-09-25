@@ -208,6 +208,53 @@ mixture identities, the Lipschitz bound, and the explicit Cauchy limits.
 Those checks are sanity checks of concrete calculations; the universal
 properties and ultrafilter comparisons are proved analytically above.
 
+## Failure of Comonotonic Sum Invariance
+
+**Addition: Claude (Fable 5.1), 23 September 2026.** A property of the
+recorded model; not a claim of the source papers.
+
+Realize a standard Cauchy variable as $C=Q_C(U)=\tan(\pi(U-\tfrac12))$ and
+put $X=0$, $Y=C-\ln(2)/\pi$, $Z=C_+=\max(C,0)$; all are nondecreasing in
+$U$, so both pairs $(X,Z)$, $(Y,Z)$ are comonotonic. By the Cauchy
+calculation above, $\mathbb E[q_t(C)]\to\ln(2)/\pi$, and
+$q_t(C-v)-q_t(C)\to-v$ boundedly, so $\mathbb E[q_t(Y)]\to0$ and $X\sim Y$.
+
+**Doubling-defect identity.** For any nonnegative random variable $V$ and
+any $F>0$,
+
+$$2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V>x)\,dx,$$
+
+since $\mathbb E[\min(V,F)]=\int_0^F P(V>x)\,dx$ and
+$\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V>x)\,dx$. For $V=C_+=\max(C,0)$ with
+$C$ standard Cauchy the right-hand side is
+$\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx$, which is positive for every $F$
+and increases to $\frac{2\ln2}{\pi}$ as $F\to\infty$.
+
+Write $m(F)=\mathbb E[\min(C_+,F)]$ and $C_-=\min(C,0)$. Then
+$X+Z=C_+$ and $Y+Z=2C_++C_--\ln(2)/\pi$, and with the window $[-t,2t]$,
+
+$$\mathbb E[q_t(C_+)]=m(2t),\qquad
+\mathbb E[q_t(2C_++C_-)]=2m(t)-m(t)=m(t),\qquad
+\mathbb E[q_t(C)]=m(2t)-m(t).$$
+
+Hence, using the bounded shift once more,
+
+$$v_{X+Z}(t)-v_{Y+Z}(t)=m(2t)-m(t)+\frac{\ln2}{\pi}+o(1)
+ =2\bigl(m(2t)-m(t)\bigr)+o(1)\longrightarrow\frac{2\ln2}{\pi}.$$
+
+With $\varepsilon=(\ln2)/\pi$ the set $\{t:v_{Y+Z}(t)\ge v_{X+Z}(t)-\varepsilon\}$
+is bounded, so $X+Z\succ Y+Z$ although $X\sim Y$: Comonotonic Sum Invariance
+fails, while both shift principles hold. `checks/comonotonic_witnesses.py`
+verifies the closed forms, the neutral constant and the limit.
+
+## Integer-ratio self-similarity
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The uniqueness witness
+above has ratio $a=2$, so the model also fails Uniqueness of Negative
+Self-Similarity (integer ratios), the restriction of the principle to integer
+ratios.
+
 ## Paper references
 
 - **Proof: [Symmetries of value](https://doi.org/10.1111/nous.12549).** Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 1, p. 24. Already states the failure of affine-symmetry implications under DTU, including with L¹ Continuity and Relative Expectation, and cites Decision theory unbound, Remark 3, for the reflection countermodel

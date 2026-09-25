@@ -10,7 +10,7 @@ $\forall u\, .\,Xu\leftrightarrow X'u$, $X\subseteq X'$ for
 $\forall u\, .\,Xu\to X'u$, and $X-y$ for $\lambda u\, .\,Xu\land u\ne y$.
 "Finite" means "falls under $\operatorname{FiniteCardinality}_\sigma$".
 Persistence of being a finite cardinality is Lemma 1 of the write-up for
-Possibility (pure) ⇒ Axiom of Infinity (type t), and the modal bookkeeping
+Possibility Maximalism (pure) ⇒ Axiom of Infinity (type t), and the modal bookkeeping
 there (K, necessitation of theorems of C) is used throughout.
 
 **Lemma A (finite cardinalities respect coextension).** If $Z$ is finite,

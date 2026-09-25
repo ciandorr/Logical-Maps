@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clipped expectation: continuous ultrafilter dominance [−t, 2t]</title><style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clipped expectation: continuous ultrafilter dominance [−t, 2t]</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -324,6 +325,23 @@ v_X(t)=E[q_t(X)],\qquad t&gt;0.</span></p>
 <h2 id="scope-of-the-verification">Scope of the verification</h2>
 <p>This model establishes, among other separations, that DTU together with CDF-Area Extension, Relative Expectation, <span class="math inline">L^{1}</span> Continuity, and both shift principles still does not force symmetric neutrality or reflection. No scale or sum-invariance verdict has been inferred from this construction. The map can derive further failures from its separately proved incompatibility records.</p>
 <p><code>checks/asymmetric_continuous_ultrafilter.py</code> checks the paired-atom cancellations with exact rational arithmetic, finite-law clipped-tail and mixture identities, the Lipschitz bound, and the explicit Cauchy limits. Those checks are sanity checks of concrete calculations; the universal properties and ultrafilter comparisons are proved analytically above.</p>
+<h2 id="failure-of-comonotonic-sum-invariance">Failure of Comonotonic Sum Invariance</h2>
+<p><strong>Addition: Claude (Fable 5.1), 23 September 2026.</strong> A property of the recorded model; not a claim of the source papers.</p>
+<p>Realize a standard Cauchy variable as <span class="math inline">C=Q_C(U)=\tan(\pi(U-\tfrac12))</span> and put <span class="math inline">X=0</span>, <span class="math inline">Y=C-\ln(2)/\pi</span>, <span class="math inline">Z=C_+=\max(C,0)</span>; all are nondecreasing in <span class="math inline">U</span>, so both pairs <span class="math inline">(X,Z)</span>, <span class="math inline">(Y,Z)</span> are comonotonic. By the Cauchy calculation above, <span class="math inline">\mathbb E[q_t(C)]\to\ln(2)/\pi</span>, and <span class="math inline">q_t(C-v)-q_t(C)\to-v</span> boundedly, so <span class="math inline">\mathbb E[q_t(Y)]\to0</span> and <span class="math inline">X\sim Y</span>.</p>
+<p><strong>Doubling-defect identity.</strong> For any nonnegative random variable <span class="math inline">V</span> and any <span class="math inline">F&gt;0</span>,</p>
+<p><span class="math display">2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V&gt;x)\,dx,</span></p>
+<p>since <span class="math inline">\mathbb E[\min(V,F)]=\int_0^F P(V&gt;x)\,dx</span> and <span class="math inline">\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V&gt;x)\,dx</span>. For <span class="math inline">V=C_+=\max(C,0)</span> with <span class="math inline">C</span> standard Cauchy the right-hand side is <span class="math inline">\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx</span>, which is positive for every <span class="math inline">F</span> and increases to <span class="math inline">\frac{2\ln2}{\pi}</span> as <span class="math inline">F\to\infty</span>.</p>
+<p>Write <span class="math inline">m(F)=\mathbb E[\min(C_+,F)]</span> and <span class="math inline">C_-=\min(C,0)</span>. Then <span class="math inline">X+Z=C_+</span> and <span class="math inline">Y+Z=2C_++C_--\ln(2)/\pi</span>, and with the window <span class="math inline">[-t,2t]</span>,</p>
+<p><span class="math display">\mathbb E[q_t(C_+)]=m(2t),\qquad
+\mathbb E[q_t(2C_++C_-)]=2m(t)-m(t)=m(t),\qquad
+\mathbb E[q_t(C)]=m(2t)-m(t).</span></p>
+<p>Hence, using the bounded shift once more,</p>
+<p><span class="math display">v_{X+Z}(t)-v_{Y+Z}(t)=m(2t)-m(t)+\frac{\ln2}{\pi}+o(1)
+ =2\bigl(m(2t)-m(t)\bigr)+o(1)\longrightarrow\frac{2\ln2}{\pi}.</span></p>
+<p>With <span class="math inline">\varepsilon=(\ln2)/\pi</span> the set <span class="math inline">\{t:v_{Y+Z}(t)\ge v_{X+Z}(t)-\varepsilon\}</span> is bounded, so <span class="math inline">X+Z\succ Y+Z</span> although <span class="math inline">X\sim Y</span>: Comonotonic Sum Invariance fails, while both shift principles hold. <code>checks/comonotonic_witnesses.py</code> verifies the closed forms, the neutral constant and the limit.</p>
+<h2 id="integer-ratio-self-similarity">Integer-ratio self-similarity</h2>
+<p><strong>Addition: Claude (Fable 5.1), 24 September 2026.</strong> The uniqueness witness above has ratio <span class="math inline">a=2</span>, so the model also fails Uniqueness of Negative Self-Similarity (integer ratios), the restriction of the principle to integer ratios.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Proof: <a href="https://doi.org/10.1111/nous.12549">Symmetries of value</a>.</strong> Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — Theorem 1, p. 24. Already states the failure of affine-symmetry implications under DTU, including with L¹ Continuity and Relative Expectation, and cites Decision theory unbound, Remark 3, for the reflection countermodel</li>

@@ -1,0 +1,31 @@
+id: integer-self-similarity-relative-evaluates-pasadena
+premises:
+- rich-outcomes
+- stochastic-equivalence
+- independence
+- relative-expectation
+- integer-negative-self-similarity
+conclusion: pasadena-value
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (Highland Park and Q constructions); GPT-6 (Codex) (negative-self-similarity factorization and explicit couplings); Claude (Fable 5.1) (integer-ratio premise audit), 2026-09-24
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+proof: |-
+  The recorded proof of relative-self-similarity-evaluates-pasadena (writeups/relative-self-similarity-evaluates-pasadena.md) applies uniqueness once, to Highland Park H and the sure value 0 as fixed values of $X \mapsto M_{1/2}(- 2X,0)$, that is at $p=1/2, a=2, b=0$ and Z sure 0. The ratio is the integer 2, so the integer-ratio principle gives $H\sim 0$; the remaining steps (the integrable difference P − H of mean ln 2, the auxiliary identity $Q\sim M_{1/4}(4Q,0)$ from Relative Expectation, and the shift transfer through a half-mixture) are unchanged and use only Rich Outcomes, Stochastic Equivalence, Mixture Independence and Relative Expectation.
+sources:
+- 'GPT-6 (Codex), 9 September 2026: the factorization through the uniqueness principle and the explicit couplings, in writeups/relative-self-similarity-evaluates-pasadena.md;
+  Claude (Fable 5.1), 24 September 2026: the observation that only the ratio 2 is used.'
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, Theorem 11, pp. 32–33
+source_names:
+- GPT-6 adaptation 9 Sep, Claude audit 24 Sep
+- Symmetries of Value
+notes: |-
+  Premise audit of relative-self-similarity-evaluates-pasadena, which stays recorded with the real-ratio principle. Under DTU with L¹ Continuity, Relative Expectation is recorded (dtu-l1-implies-eu, eu-independence-l1-imply-relative), so Pasadena = ln 2 then follows from Reflection Anti-Invariance with either Integer Affine Preservation or Comonotonic Sum Invariance in place of the full symmetry package. No independent checker or Lean verification is claimed.
+references:
+- paper: symmetries-of-value
+  role: background
+  locator: Theorem 11, pp. 32–33

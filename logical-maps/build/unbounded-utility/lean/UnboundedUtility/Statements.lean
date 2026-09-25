@@ -250,6 +250,20 @@ def conjectured_dtu_cancellation_implies_preservation : Prop :=
     UnboundedUtility.IndependentSumCancellation P →
     UnboundedUtility.IndependentSumPreservation P
 
+/-- `conjectured-dtu-comonotonic-imply-scale`  (conjectured)
+
+Rich Outcomes ∧ Archimedean Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Stochastic Dominance ∧ Mixture Independence ∧ Comonotonic Sum Invariance ⇒ Scale Invariance -/
+def conjectured_dtu_comonotonic_imply_scale : Prop :=
+  ∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) [P.Regular],
+    UnboundedUtility.RichOutcomes P →
+    UnboundedUtility.ArchimedeanOutcomes P →
+    UnboundedUtility.Totality P →
+    UnboundedUtility.StochasticEquivalence P →
+    UnboundedUtility.StochasticDominance P →
+    UnboundedUtility.MixtureIndependence P →
+    UnboundedUtility.ComonotonicSumConsistency P →
+    UnboundedUtility.ScaleInvariance P
+
 /-- `conjectured-dtu-shift-implies-transfer`  (conjectured)
 
 Rich Outcomes ∧ Totality ∧ Stochastic Equivalence ∧ Simple Expected Utility ∧ Stochastic Dominance ∧ Mixture Independence ∧ Shift Invariance ⇒ Transfer of a Shift Across a Mixture -/
@@ -1079,31 +1093,6 @@ def affine_symmetric_extension : Prop :=
     ¬ UnboundedUtility.CountableSureThing W.pref ∧
     ¬ UnboundedUtility.ArchimedeanGambles W.pref
 
-/-- `asymmetric-continuous-ultrafilter`
-
-Clipped expectation: continuous ultrafilter dominance [−t, 2t]: a witness satisfying 12 principles
-and violating 6. -/
-def asymmetric_continuous_ultrafilter : Prop :=
-  ∃ W : Witness,
-    UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.Totality W.pref ∧
-    UnboundedUtility.StochasticEquivalence W.pref ∧
-    UnboundedUtility.SimpleEU W.pref ∧
-    UnboundedUtility.StochasticDominance W.pref ∧
-    UnboundedUtility.MixtureIndependence W.pref ∧
-    UnboundedUtility.ExpectedUtility W.pref ∧
-    UnboundedUtility.L1Continuity W.pref ∧
-    UnboundedUtility.RelativeExpectation W.pref ∧
-    UnboundedUtility.CDFAreaExtension W.pref ∧
-    UnboundedUtility.ShiftInvariance W.pref ∧
-    UnboundedUtility.ShiftTransfer W.pref ∧
-    ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
-    ¬ UnboundedUtility.ReflectionAntiInvariance W.pref ∧
-    ¬ UnboundedUtility.NegativeAffineAntiInvariance W.pref ∧
-    ¬ UnboundedUtility.FoldedExpectation W.pref ∧
-    ¬ UnboundedUtility.NegativeSelfSimilarity W.pref ∧
-    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref
-
 /-- `cdf-area-preorder`
 
 CDF-area dominance: a witness satisfying 13 principles
@@ -1190,7 +1179,7 @@ def conjectured_total_independent_sum_extension : Prop :=
 /-- `eventual-clipped-expectation`
 
 Clipped expectation: eventual dominance: a witness satisfying 10 principles
-and violating 8. -/
+and violating 9. -/
 def eventual_clipped_expectation : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1210,7 +1199,8 @@ def eventual_clipped_expectation : Prop :=
     ¬ UnboundedUtility.ArchimedeanGambles W.pref ∧
     ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
     ¬ UnboundedUtility.ShiftInvariance W.pref ∧
-    ¬ UnboundedUtility.PositiveAffineInvariance W.pref
+    ¬ UnboundedUtility.PositiveAffineInvariance W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 /-- `finite-shift-total-extension`
 
@@ -1236,38 +1226,6 @@ def finite_shift_total_extension : Prop :=
     ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
     ¬ UnboundedUtility.ReflectionAntiInvariance W.pref
 
-/-- `finite-support-compensated-dominance`
-
-Stochastic dominance: finite-support compensation: a witness satisfying 9 principles
-and violating 16. -/
-def finite_support_compensated_dominance : Prop :=
-  ∃ W : Witness,
-    UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.ArchimedeanOutcomes W.pref ∧
-    UnboundedUtility.StochasticEquivalence W.pref ∧
-    UnboundedUtility.SimpleEU W.pref ∧
-    UnboundedUtility.StochasticDominance W.pref ∧
-    UnboundedUtility.MixtureIndependence W.pref ∧
-    UnboundedUtility.ShiftInvariance W.pref ∧
-    UnboundedUtility.PositiveAffineInvariance W.pref ∧
-    UnboundedUtility.ReflectionAntiInvariance W.pref ∧
-    ¬ UnboundedUtility.Totality W.pref ∧
-    ¬ UnboundedUtility.ExpectedUtility W.pref ∧
-    ¬ UnboundedUtility.SimpleRelativeExpectation W.pref ∧
-    ¬ UnboundedUtility.RelativeExpectation W.pref ∧
-    ¬ UnboundedUtility.CDFAreaExtension W.pref ∧
-    ¬ UnboundedUtility.ShiftTransfer W.pref ∧
-    ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
-    ¬ UnboundedUtility.L1Continuity W.pref ∧
-    ¬ UnboundedUtility.VanishingShiftContinuity W.pref ∧
-    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
-    ¬ UnboundedUtility.ArroyoValue W.pref ∧
-    ¬ UnboundedUtility.PasadenaValue W.pref ∧
-    ¬ UnboundedUtility.NegativeSelfSimilarity W.pref ∧
-    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref ∧
-    ¬ UnboundedUtility.IndependentSumPreservation W.pref ∧
-    ¬ UnboundedUtility.ExistentialCopulaSumConsistency W.pref
-
 /-- `finite-two-sample-minimum`
 
 Two-sample minimum: zero extension: a witness satisfying 6 principles
@@ -1284,49 +1242,6 @@ def finite_two_sample_minimum : Prop :=
     ¬ UnboundedUtility.MixtureIndependence W.pref ∧
     ¬ UnboundedUtility.StochasticDominance W.pref ∧
     ¬ UnboundedUtility.StatewiseDominance W.pref
-
-/-- `geometric-continuous-ultrafilter`
-
-Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]: a witness satisfying 11 principles
-and violating 3. -/
-def geometric_continuous_ultrafilter : Prop :=
-  ∃ W : Witness,
-    UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.Totality W.pref ∧
-    UnboundedUtility.StochasticEquivalence W.pref ∧
-    UnboundedUtility.SimpleEU W.pref ∧
-    UnboundedUtility.StochasticDominance W.pref ∧
-    UnboundedUtility.MixtureIndependence W.pref ∧
-    UnboundedUtility.CDFAreaExtension W.pref ∧
-    UnboundedUtility.L1Continuity W.pref ∧
-    UnboundedUtility.FoldedExpectation W.pref ∧
-    UnboundedUtility.ReflectionAntiInvariance W.pref ∧
-    UnboundedUtility.ShiftInvariance W.pref ∧
-    ¬ UnboundedUtility.ScaleInvariance W.pref ∧
-    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref ∧
-    ¬ UnboundedUtility.NegativeSelfSimilarity W.pref
-
-/-- `lexicographic-folded-extension`
-
-Folded-tail cone: lexicographic extension: a witness satisfying 11 principles
-and violating 4. -/
-def lexicographic_folded_extension : Prop :=
-  ∃ W : Witness,
-    UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.Totality W.pref ∧
-    UnboundedUtility.StochasticEquivalence W.pref ∧
-    UnboundedUtility.SimpleEU W.pref ∧
-    UnboundedUtility.StochasticDominance W.pref ∧
-    UnboundedUtility.MixtureIndependence W.pref ∧
-    UnboundedUtility.CDFAreaExtension W.pref ∧
-    UnboundedUtility.RelativeExpectation W.pref ∧
-    UnboundedUtility.FoldedExpectation W.pref ∧
-    UnboundedUtility.ReflectionAntiInvariance W.pref ∧
-    UnboundedUtility.ShiftInvariance W.pref ∧
-    ¬ UnboundedUtility.L1Continuity W.pref ∧
-    ¬ UnboundedUtility.ScaleInvariance W.pref ∧
-    ¬ UnboundedUtility.NegativeSelfSimilarity W.pref ∧
-    ¬ UnboundedUtility.AlternatingStPetersburgValue W.pref
 
 /-- `lexicographic-nonatomic-mass`
 
@@ -1377,7 +1292,7 @@ def lexicographic_nonatomic_mass : Prop :=
 /-- `polynomial-asymmetric-continuous-ultrafilter`
 
 Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4²ⁿ]: a witness satisfying 11 principles
-and violating 3. -/
+and violating 4. -/
 def polynomial_asymmetric_continuous_ultrafilter : Prop :=
   ∃ W : Witness,
     UnboundedUtility.RichOutcomes W.pref ∧
@@ -1393,43 +1308,7 @@ def polynomial_asymmetric_continuous_ultrafilter : Prop :=
     UnboundedUtility.ShiftTransfer W.pref ∧
     ¬ UnboundedUtility.PasadenaValue W.pref ∧
     ¬ UnboundedUtility.ArroyoValue W.pref ∧
-    ¬ UnboundedUtility.SymmetricNeutrality W.pref
-
-/-- `total-continuous-ultrafilter`
-
-Clipped expectation: continuous ultrafilter dominance: a witness satisfying 9 principles
-and violating 3. -/
-def total_continuous_ultrafilter : Prop :=
-  ∃ W : Witness,
-    UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.Totality W.pref ∧
-    UnboundedUtility.StochasticEquivalence W.pref ∧
-    UnboundedUtility.SimpleEU W.pref ∧
-    UnboundedUtility.StochasticDominance W.pref ∧
-    UnboundedUtility.MixtureIndependence W.pref ∧
-    UnboundedUtility.ExpectedUtility W.pref ∧
-    UnboundedUtility.ShiftInvariance W.pref ∧
-    UnboundedUtility.ReflectionAntiInvariance W.pref ∧
-    ¬ UnboundedUtility.ScaleInvariance W.pref ∧
-    ¬ UnboundedUtility.CountableSureThing W.pref ∧
-    ¬ UnboundedUtility.ArchimedeanGambles W.pref
-
-/-- `total-exact-ultrafilter`
-
-Clipped expectation: exact ultrafilter dominance: a witness satisfying 7 principles
-and violating 4. -/
-def total_exact_ultrafilter : Prop :=
-  ∃ W : Witness,
-    UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.Totality W.pref ∧
-    UnboundedUtility.StochasticEquivalence W.pref ∧
-    UnboundedUtility.SimpleEU W.pref ∧
-    UnboundedUtility.StochasticDominance W.pref ∧
-    UnboundedUtility.MixtureIndependence W.pref ∧
-    UnboundedUtility.ReflectionAntiInvariance W.pref ∧
-    ¬ UnboundedUtility.ExpectedUtility W.pref ∧
-    ¬ UnboundedUtility.ScaleInvariance W.pref ∧
-    ¬ UnboundedUtility.CountableSureThing W.pref ∧
-    ¬ UnboundedUtility.ArchimedeanGambles W.pref
+    ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
+    ¬ UnboundedUtility.ComonotonicSumConsistency W.pref
 
 end UnboundedUtility.Statements

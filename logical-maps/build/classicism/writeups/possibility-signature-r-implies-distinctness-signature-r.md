@@ -1,18 +1,18 @@
-# Possibility (signature Σ) ⇒ Distinctness (signature Σ)
+# Possibility Maximalism (signature Σ) ⇒ Distinctness Maximalism (signature Σ)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Possibility (signature Σ).** The Possibility schema for the fixed nonlogical signature Sigma.
+- **Possibility Maximalism (signature Σ).** The Possibility Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Conclusion
 
-- **Distinctness (signature Σ).** The Distinctness schema for the fixed nonlogical signature Sigma.
+- **Distinctness Maximalism (signature Σ).** The Distinctness Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Proof
 
-If a closed identity A=B is not a theorem of the reference theory, its negation is consistent. Possibility gives $\Diamond(A\ne B)$. NI implies that A=B would make this impossible, so A and B are distinct.
+If a closed identity A=B is not a theorem of the reference theory, its negation is consistent. Possibility Maximalism gives $\Diamond(A\ne B)$. NI implies that A=B would make this impossible, so A and B are distinct.
 
 ## Sources
 

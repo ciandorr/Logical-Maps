@@ -1,18 +1,18 @@
-# Distinctness (signature Σ) ⇒ Possibility (signature Σ)
+# Distinctness Maximalism (signature Σ) ⇒ Possibility Maximalism (signature Σ)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Distinctness (signature Σ).** The Distinctness schema for the fixed nonlogical signature Sigma.
+- **Distinctness Maximalism (signature Σ).** The Distinctness Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Conclusion
 
-- **Possibility (signature Σ).** The Possibility schema for the fixed nonlogical signature Sigma.
+- **Possibility Maximalism (signature Σ).** The Possibility Maximalism schema for the fixed nonlogical signature Sigma.
 
 ## Proof
 
-If P is consistent with the reference C theory, the closed identity $\neg P=\top$ is not one of its theorems. Distinctness therefore gives $\neg P\ne\top$, equivalently $\Diamond P$. Preserve the chosen pure or Sigma-expanded signature.
+If P is consistent with the reference C theory, the closed identity $\neg P=\top$ is not one of its theorems. Distinctness Maximalism therefore gives $\neg P\ne\top$, equivalently $\Diamond P$. Preserve the chosen pure or Sigma-expanded signature.
 
 ## Sources
 

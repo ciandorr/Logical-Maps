@@ -15,7 +15,10 @@ satisfies:
 violates:
 - l1-continuity
 - scale-invariance
+- rational-scale-invariance
+- integer-affine-preservation
 - negative-self-similarity
+- integer-negative-self-similarity
 - alternating-st-petersburg-value
 status: proved
 certificate:
@@ -52,6 +55,20 @@ notes: 'Original work: substantial model adaptation and separation. Goodsell sup
   the nonconstructive extension or certify the quantified axioms.'
 checks:
 - topics/unbounded-utility/checks/lexicographic_folded_extension.py
+changes:
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Rational Scale Invariance shown to fail: the write-up’s scaling reversal is a doubling, A ≻ −1/2 while 2A ≺ −1, so the pair (A, −1/2) fails invariance at the rational factor 2. The same doubling refutes Integer Affine Preservation: A ≻ −1/2 is not carried to 2A ≽ −1. With Rich Outcomes and Stochastic Equivalence, comonotonic-sum-implies-integer-affine-preservation then shows that Comonotonic Sum Invariance fails in this model; the failure is derived, and no explicit comonotonic witness is recorded.
+  violates:
+  - rational-scale-invariance
+  - integer-affine-preservation
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Uniqueness of Negative Self-Similarity (integer ratios) shown to fail: the recorded uniqueness witness uses p = 1/2, a = 2, b = 0 and Z = −2, with A ≻ −1/2 both fixed values.
+  violates:
+  - integer-negative-self-similarity
 references:
 - paper: symmetries-of-value
   role: background

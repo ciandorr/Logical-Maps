@@ -41,6 +41,85 @@ flag; it does not claim an independently checked correction of that entire
 witness. The explicit EU counterexample and elementary satisfied-axiom
 calculations above do not depend on those issues.
 
+## Failure of Comonotonic Sum Invariance
+
+**Addition: Claude (Fable 5.1), 23 September 2026.** This is a property of
+the recorded model, not a claim made in the source paper.
+
+Realize a standard Cauchy variable as $C=Q_C(U)=\tan(\pi(U-\tfrac12))$ and
+put $X=0$, $Y=C$, $Z=C_+=\max(C,0)$. All three are nondecreasing functions of
+$U$, so $(X,Z)$ and $(Y,Z)$ are comonotonic pairs. Oddness of $c_t$ and the
+symmetry of $C$ give $v_C(t)=0=v_0(t)$ for every $t$, hence $X\sim Y$.
+
+**Doubling-defect identity.** For any nonnegative random variable $V$ and
+any $F>0$,
+
+$$2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V>x)\,dx,$$
+
+since $\mathbb E[\min(V,F)]=\int_0^F P(V>x)\,dx$ and
+$\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V>x)\,dx$. For $V=C_+=\max(C,0)$ with
+$C$ standard Cauchy the right-hand side is
+$\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx$, which is positive for every $F$
+and increases to $\frac{2\ln2}{\pi}$ as $F\to\infty$.
+
+Now $X+Z=C_+$ and $Y+Z=2C_+ + C_-$ with $C_-=\min(C,0)$. Since
+$c_t(2C_++C_-)=\min(2C_+,t)$ on $\{C\ge0\}$ and $=\max(C_-,-t)$ on
+$\{C<0\}$, and $\mathbb E[\max(C_-,-t)]=-\mathbb E[\min(C_+,t)]$ by symmetry,
+
+$$v_{X+Z}(t)-v_{Y+Z}(t)
+ =2\,\mathbb E[\min(C_+,t)]-\mathbb E[\min(2C_+,t)]
+ =2\int_{t/2}^{t}P(C>x)\,dx>0\qquad\text{for every }t>0.$$
+
+So $\{t:v_{X+Z}(t)\ge v_{Y+Z}(t)\}$ is the whole domain and its reverse is
+empty: $X+Z\succ Y+Z$ while $X\sim Y$. Comonotonic Sum Invariance fails.
+The gap tends to $(2\ln2)/\pi$. `checks/comonotonic_witnesses.py` verifies
+the closed forms, the identity on an exact finite law, and the limit.
+
+## Rational factors
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The source's Theorem 10
+(pp. 693–695) refutes Scale Invariance by comparing $\mu$ with $\mu_2$, the
+law of $2X$: the truncated expectations satisfy $E_t\mu_2=E_{2t}\mu$, and the
+witness laws are chosen so that the two comparisons reverse under this
+doubling. The recorded scale failure is therefore at the rational factor $2$,
+and the model also fails Rational Scale Invariance, with the same source
+attribution and audit caveats as the Scale Invariance flag.
+The same doubling refutes Integer Affine Preservation: $\mu\succ\nu$ is not
+carried to $2\mu\succeq2\nu$, since the second set in the theorem's proof
+ranks $2\nu$ strictly above $2\mu$.
+
+## Failure of Shift Invariance
+
+**Addition: Zachary Goodsell (argument) and Claude (Fable 5.1)
+(verification), 24 September 2026.** A property of the recorded exact
+ordering; the source's Theorem 8 claims Shift Invariance only for the
+continuous quotients.
+
+Let $C$ be the standard Cauchy variable above, so $v_C(t)=0=v_0(t)$ for
+every $t$ and $C\sim0$. Compare $C+1$ with sure $1$. For $t\ge1$,
+$c_t(C+1)=1+\operatorname{clip}(C,[-t-1,t-1])$, and removing the upper part
+of the symmetric window gives
+
+$$v_{C+1}(t)=1+\mathbb E\bigl[\operatorname{clip}(C,[-t-1,t+1])\bigr]
+ -\int_{t-1}^{t+1}P(C>x)\,dx
+ =1-\int_{t-1}^{t+1}P(C>x)\,dx<1=v_1(t),$$
+
+the middle expectation vanishing by symmetry. For $0<t<1$, $v_1(t)=t$ while
+$v_{C+1}(t)\le t$ with equality only if $C+1\ge t$ almost surely, which is
+false. So $\{t:v_{C+1}(t)\ge v_1(t)\}$ is empty and its complement is the
+whole domain: $1\succ C+1$ for every choice of the ultrafilter, although
+$C\sim0$. Shift Invariance fails at $X=C$, $Y=0$, $b=1$.
+
+The deficit $\int_{t-1}^{t+1}P(C>x)\,dx=\frac1\pi\int_{t-1}^{t+1}\arctan(1/x)\,dx$
+tends to $0$, so in the continuous quotient, which allows an $\varepsilon$
+of slack at every level, $C+1\sim1$ and Shift Invariance survives, as the
+source's Theorem 8 states. The exact ordering has no slack: any balanced
+prospect with an unbounded upper tail, shifted by $b>0$, stays strictly
+behind sure $b$ at every truncation level. Since this model satisfies DTU,
+DTU does not imply Shift Invariance. `checks/exact_shift_witness.py`
+verifies the closed forms.
+
 ## Paper references
 
 - **Proof: [Decision theory unbound](https://doi.org/10.1111/nous.12473).** Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Appendix B, Theorem 1, pp. 690–691; Theorems 3 and 10, pp. 691, 693–695

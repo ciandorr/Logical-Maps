@@ -24,6 +24,7 @@ violates:
 - arroyo-value
 - pasadena-value
 - negative-self-similarity
+- integer-negative-self-similarity
 - comonotonic-sum-consistency
 - independent-sum-preservation
 - existential-copula-sum-consistency
@@ -77,3 +78,9 @@ changes:
   - comonotonic-sum-consistency
   - independent-sum-preservation
   - existential-copula-sum-consistency
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Uniqueness of Negative Self-Similarity (integer ratios) shown to fail: the recorded uniqueness witness uses p = 1/2, a = 2, b = 0 and Z = −2, with A and −1/2 incomparable fixed values.
+  violates:
+  - integer-negative-self-similarity

@@ -1,0 +1,29 @@
+id: conjectured-dtu-comonotonic-imply-scale
+premises:
+- rich-outcomes
+- archimedean-outcomes
+- totality
+- stochastic-equivalence
+- stochastic-dominance
+- independence
+- comonotonic-sum-consistency
+conclusion: scale-invariance
+status: conjectured
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (question) and Claude (Fable 5.1) (formulation and obstruction analysis), 2026-09-24
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+proof: ''
+sources:
+- 'Zachary Goodsell, Logical Maps session, 24 September 2026: claim that Comonotonic Sum Invariance implies
+  Positive Affine Invariance, with the passage from rational to real factors left open.'
+- 'Claude (Fable 5.1), Logical Maps, 24 September 2026: precise DTU formulation, and the two models showing
+  which premises the rational-factor proof cannot spare; see writeups/lexicographic-hamel-tie-break.md.'
+source_names:
+- Goodsell question 24 Sep
+- Claude formulation 24 Sep
+notes: |-
+  Does DTU with Comonotonic Sum Invariance give Scale Invariance for every real factor? Under these premises Shift Invariance (comonotonic-sum-implies-shift) and Rational Scale Invariance (comonotonic-sum-totality-imply-rational-scale) are proved, so the conclusion is equivalent to Positive Affine Invariance (shift-scale-imply-positive-affine) and only irrational factors are at issue. In quantile coordinates the order is a ℚ-cone of width functions Q_X − Q_Y and dilation by a is multiplication by a; in survival coordinates Mixture Independence makes it a convex ℝ-cone and dilation is the substitution t ↦ t/a. Rational dilations preserve the cone; an irrational one is a limit of rational ones, and the question is whether the cone is closed enough for the limit to pass. What would settle it: a proof, which must use Mixture Independence, because lexicographic-hamel-tie-break satisfies every other premise, Simple EU included, and violates the conclusion; or a model of DTU with Comonotonic Sum Invariance that fails Scale Invariance, which would also show that package consistent, something no recorded model does (conjectured-total-comonotonic-area-extension). A continuity assumption closes the gap on bounded gambles only: for |X|, |Y| ≤ M and rational q within ε/M of a, Stochastic Dominance gives aX ≽ qX − ε and qY ≽ aY − ε, so aX + 2ε ≽ aY whenever X ≽ Y, and Continuity under Vanishing Shifts removes the shift; unbounded gambles do not admit this sandwich. Proposed tier: none; a human may set one.

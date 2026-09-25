@@ -1,4 +1,4 @@
-# Source extraction: updated 13 September 2026
+# Source extraction: updated 24 September 2026
 
 ## Cancellation and Countable Sure-Thing questions (13 September)
 
@@ -373,3 +373,105 @@ Sum Cancellation is consistent with DU + Sym + Neutrality; and a DTU model
 violating Shift Invariance (a cone-extension construction orienting a
 transfer pair against its own shift is sketched privately and not yet
 recorded).
+
+### Copula principles: comonotonic failures, a killing lemma, silver tier — 23 September 2026
+
+Zachary Goodsell asked for work on the copula sum principles, starting from
+the law-level reading of them: realize X† = Q_X(U) on the standing uniform
+and Z* = Q_Z(W) with (U, W) distributed as the copula C; then SC(C) says,
+under Stochastic Equivalence, that X ≽ Y iff X† + Z* ≽ Y† + Z* for all
+laws. Claude (Fable 5.1) verified this reading (Z* is canonical only in law,
+which is why the recorded bridges from the comonotonic, antitonic and
+independent principles need Stochastic Equivalence; for the comonotonic
+copula W = U) and recorded it in the notes of the three copula principles,
+together with the quantile-difference reduction of Comonotonic Sum
+Invariance. The Fubini remark that E[X† − Y†] with the separate Tonelli
+identities is the CDF-area preorder is the recorded `cdf-area-preorder`
+model, so DU is consistent with comonotonic invariance; no new record.
+
+Six models now record failure of Comonotonic Sum Invariance: the exact,
+continuous, geometric, asymmetric and polynomial clipped-expectation
+orderings and the eventual-dominance model (where the flag was previously
+derived from the shift failure). One witness family serves all windows:
+Z = max(C, 0) for a standard Cauchy C, X = 0, and a window-adapted neutral
+Y = C₊ + aC₋ − v; the clipped gap is 2∫_{F/2}^{F} P(C > x) dx, positive for
+every cutoff F and tending to (2 ln 2)/π. The mechanism is the identity
+2E[min(V,F)] − E[min(2V,F)] = 2∫_{F/2}^{F} P(V > x) dx.
+`checks/comonotonic_witnesses.py` verifies the closed forms, the identity
+on an exact finite law, the neutral constants and the limit. Under DU and
+DTU this settles that Expected Utility, Totality, Shift Invariance,
+Reflection Anti-Invariance, L¹ Continuity, CDF-Area Extension, Folded
+Expectation, Transfer of a Shift and Arroyo = ln 2 do not imply Comonotonic
+Sum Invariance, and that DTU alone does not.
+
+For the conjectured total comonotonic extension, the write-up gains a
+necessary condition: a killing lemma (from Stochastic Equivalence,
+dominance, mixture independence and the preservation half of comonotonic
+invariance, a pair whose survival difference and comonotonic shears combine
+into a nonpositive nonzero profile cannot satisfy X ≽ Y), an explicit killed
+pair with both areas infinite, three certificates that a pair is not killed,
+worked block regions, an accounting heuristic suggesting that no pair is
+killed in both orientations, and candidate constructions. Zachary Goodsell
+raised the conjecture's tier to silver. The conjecture's status is unchanged.
+Lean statements were regenerated and audited; every `lean: stated` claim
+still elaborates.
+
+Open after this batch: DTU + Comonotonic Sum Invariance itself (decide
+killability of regions with no lowest block; formalize the surplus
+functional; attempt the Zorn construction with the lemma as pointedness
+test); whether the region of the alternating St Petersburg gamble against
+−1/2 is killed under the comonotonic copula, which bears on the top DU
+lynchpin about Existential Copula Sum Invariance; and Independent Sum
+Cancellation for the exact CDF-area preorder.
+
+### Rational and integer factors from comonotonic addition; the exact ordering fails shifts — 24 September 2026
+
+Zachary Goodsell claimed that Comonotonic Sum Invariance implies Positive
+Affine Invariance by iterated addition (2A = A + A ≽ B + A ≽ B + B = 2B) and
+proposed a rational-factor principle for the remaining step. Claude
+(Fable 5.1) recorded what the argument proves and where it stops. New
+principles: Rational Scale Invariance, Integer Affine Preservation, Rational
+Affine Preservation and Uniqueness of Negative Self-Similarity (integer
+ratios). Proved: Rich Outcomes + Stochastic Equivalence + Comonotonic Sum
+Invariance give Integer Affine Preservation (adding A to both sides needs B
+comonotonic with A, hence Stochastic Equivalence, and the mixed sums
+jX + (k − j)Y, hence Rich Outcomes); adding Totality gives Rational Scale
+Invariance, the cancellation kX ≽ kY ⇒ X ≽ Y being the only place Totality
+enters; Totality + Mixture Independence + Integer Affine Preservation +
+Reflection Anti-Invariance give integer-ratio uniqueness, which carries the
+alternating St Petersburg and Pasadena evaluations, since both use only the
+ratio 2. Two models: `cdf-area-unit-threshold` (Rich Outcomes, Archimedean
+Outcomes, Stochastic Equivalence, Stochastic Dominance, Simple EU,
+Comonotonic Sum Invariance and Integer Affine Preservation; cancellation
+fails at 2, so Rational Scale Invariance, Rational Affine Preservation,
+Totality and Mixture Independence fail) and `lexicographic-hamel-tie-break`
+(a total law-based order ranking integrable widths by area with a ℚ-linear
+Hamel tie-break and a Zorn completion of the infinite-area pairs; invariant
+under every rational factor, not under √2; Mixture Independence fails).
+Conjectures: DTU + Comonotonic Sum Invariance ⇒ Scale Invariance, and
+DU + Comonotonic Sum Invariance ⇒ Rational Affine Preservation. Verdict
+updates: the four recorded scale countermodels fail at the factor 2
+(U Theorem 10 compares μ with the law of 2X), so they fail Rational Scale
+Invariance and Integer Affine Preservation; the four models refuting the
+real-ratio uniqueness principle do so at ratio 2 and fail the integer-ratio
+principle; the folded-tail cone now derivably fails Comonotonic Sum
+Invariance. `checks/rational_scale_witnesses.py` verifies the witnesses.
+
+Goodsell also observed that the exact ultrafilter ordering fails Shift
+Invariance: a balanced prospect shifted by 1 stays strictly behind sure 1 at
+every truncation level, because clipping C + 1 to [−t, t] clips C to
+[−t − 1, t − 1] and loses its upper tail between t − 1 and t + 1, so
+v_{C+1}(t) = 1 − ∫_{t−1}^{t+1} P(C > x) dx < 1 while v_C = v_0 = 0. The
+deficit vanishes as t → ∞, which is why the continuous quotients keep Shift
+Invariance (U Theorem 8). Recorded on `total-exact-ultrafilter` with
+`checks/exact_shift_witness.py`. This is the DTU model violating Shift
+Invariance listed as open above, so the private cone-extension sketch is no
+longer needed for that question; the engine also derives that the exact
+ordering fails Transfer of a Shift and Simple Relative Expectation.
+
+Open after this batch: real factors under DTU + Comonotonic Sum Invariance
+(no model of that package is known, so a refutation would also settle the
+total comonotonic extension); fractional factors under DU + Comonotonic Sum
+Invariance, that is integer cancellation without Totality; and whether the
+integer-ratio uniqueness principle separates from the real-ratio one under
+DTU.

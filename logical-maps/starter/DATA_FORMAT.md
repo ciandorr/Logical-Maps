@@ -115,7 +115,9 @@ with real attribution. For a proved result, supply the actual proof and use
 `status: proved`. For a longer proof, write `writeups/proposed-implication.md`.
 An existing question that becomes proved should retain its ID and gain
 `was_conjectured: true`. Keep refuted proposals conjectured and record the
-refuting model separately.
+refuting model separately. A conjecture's `notes` say what was tried and what
+would settle it; that alone gives its question a bronze lynchpin star. `tier:
+silver` or `tier: gold` is a human ranking by importance and difficulty.
 
 To record A ∧ B ⇒ ¬C, use `premises: [principle-a, principle-b, principle-c]`
 and `conclusion: false`. Do not create a principle called false or a duplicate

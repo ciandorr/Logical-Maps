@@ -1,0 +1,27 @@
+id: integer-affine-preservation
+name: Integer Affine Preservation
+statement: |-
+  For every positive integer $k$ and real $b$: if $X \succeq Y$ then $kX+b \succeq kY+b$, and if $X \succ Y$ then $kX+b \succ kY+b$.
+formal: ''
+tags:
+- symmetry
+sources:
+- 'Zachary Goodsell, Logical Maps session, 24 September 2026: request to record that Comonotonic Sum Invariance
+  preserves weak and strict order under positive rational affine maps; the integer case is what iterated addition
+  proves without Totality.'
+- Goodsell, Symmetries of value, Noûs 60 (2026), 16–37; DOI 10.1111/nous.12549, §3, p. 24
+source_names:
+- Goodsell request 24 Sep
+- Symmetries of Value
+notes: |-
+  The preservation halves of Positive Affine Invariance, restricted to integer factors; no cancellation ($kX+b \succeq kY+b$ back to $X \succeq Y$) is asserted. Arithmetic uses the utility chart, on finite-level variables with the required transformed outcomes available. This is exactly what iterated comonotonic addition gives (comonotonic-sum-implies-integer-affine-preservation): the chain $kX \succeq (k-1)X+Y \succeq \dots \succeq kY$ needs Rich Outcomes and Stochastic Equivalence but neither Totality nor Mixture Independence. Fractional factors are Rational Affine Preservation. Recorded by Claude (Fable 5.1), 24 September 2026.
+  With Reflection Anti-Invariance, Totality and Mixture Independence it gives Uniqueness of Negative Self-Similarity for integer ratios (totality-independence-integer-affine-reflection-imply-integer-self-similarity), hence Alternating St Petersburg = −1/2 and, with Relative Expectation, Pasadena = ln 2, without any real or rational scale invariance.
+date: '2026-09-24'
+category: invariance-principles
+aliases:
+- Integer Scale Preservation
+references:
+- paper: symmetries-of-value
+  role: formulation
+  locator: §3, p. 24
+  note: Defines the affine invariance principles; this preservation-only restriction is a project formulation.

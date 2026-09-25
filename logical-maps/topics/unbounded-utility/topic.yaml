@@ -20,7 +20,6 @@ source_catalog:
   name: Misc.
   kind: misc
 title: 'Unbounded Utility'
-description: Logical map of decision-theoretic principles when utility is unbounded.
 framework: Gambles are measurable outcome-valued random variables on an atomless standard probability space.
   All such variables are available (Prospect Richness is standing). ≽ is reflexive and transitive, not assumed
   total or law-invariant. Outcomes are linearly ordered, with distinct reference outcomes 0 and 1, and sure-indifferent
@@ -63,3 +62,15 @@ principle_categories:
 - id: prospect-evaluations
   name: Prospect evaluations
 lean_lib: UnboundedUtility
+lean:
+  imports: [UnboundedUtility.Principles]
+  namespace: UnboundedUtility
+  definition_check: |-
+    example {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) : Prop :=
+      {def} P
+  result:
+    binder: "∀ {O : Type*} [MeasurableSpace O] [LinearOrder O] (P : Pref O) [P.Regular],"
+    principle: "{def} P"
+  model:
+    binder: "∃ W : Witness,"
+    principle: "{def} W.pref"

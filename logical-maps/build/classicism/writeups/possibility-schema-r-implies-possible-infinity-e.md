@@ -1,10 +1,10 @@
-# Possibility (pure) ⇒ Possible Infinity (type e)
+# Possibility Maximalism (pure) ⇒ Possible Infinity (type e)
 
 <p class='cert'>Result — Source: Misc.; produced by Cian Dorr, suggestion of 20 September 2026; recorded by Claude Fable 5.1 (Anthropic), 20 September 2026.</p>
 
 ## Premises
 
-- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+- **Possibility Maximalism (pure).** Every closed pure sentence consistent with C is possible.
 
 ## Conclusion
 
@@ -12,7 +12,7 @@
 
 ## Proof
 
-The Axiom of Infinity at type $e$ is a closed pure sentence. It is consistent with C, since it holds in the full Henkin model with a countably infinite individual domain (see the model record). Possibility (pure) therefore gives its diamond, which is Possible Infinity at type $e$.
+The Axiom of Infinity at type $e$ is a closed pure sentence. It is consistent with C, since it holds in the full Henkin model with a countably infinite individual domain (see the model record). Possibility Maximalism (pure) therefore gives its diamond, which is Possible Infinity at type $e$.
 
 ## Sources
 

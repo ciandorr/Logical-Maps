@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]</title><style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4ⁿ]</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -305,6 +306,22 @@ A\sim-1/3\succ-1/2,
 <li>Zachary Goodsell, <em>Decision theory unbound</em>, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473, Appendix B, pp. 691–695. Original construction and scale-failure strategy; the explicit witness above is a separate verification.</li>
 <li>GPT-6 (Codex), project research on 9 September 2026: this specialization, additional property proofs and explicit witnesses.</li>
 </ul>
+<h2 id="failure-of-comonotonic-sum-invariance">Failure of Comonotonic Sum Invariance</h2>
+<p><strong>Addition: Claude (Fable 5.1), 23 September 2026.</strong> A property of the recorded model; not a claim of the source paper.</p>
+<p>Realize a standard Cauchy variable as <span class="math inline">C=Q_C(U)=\tan(\pi(U-\tfrac12))</span> and put <span class="math inline">X=0</span>, <span class="math inline">Y=C</span>, <span class="math inline">Z=C_+=\max(C,0)</span>, all nondecreasing in <span class="math inline">U</span>, so both pairs are comonotonic. The clipping <span class="math inline">\max(-4^n,\min(x,4^n))</span> is odd and <span class="math inline">C</span> is symmetric, so <span class="math inline">v_C(n)=0=v_0(n)</span> and <span class="math inline">X\sim Y</span>.</p>
+<p><strong>Doubling-defect identity.</strong> For any nonnegative random variable <span class="math inline">V</span> and any <span class="math inline">F&gt;0</span>,</p>
+<p><span class="math display">2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V&gt;x)\,dx,</span></p>
+<p>since <span class="math inline">\mathbb E[\min(V,F)]=\int_0^F P(V&gt;x)\,dx</span> and <span class="math inline">\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V&gt;x)\,dx</span>. For <span class="math inline">V=C_+=\max(C,0)</span> with <span class="math inline">C</span> standard Cauchy the right-hand side is <span class="math inline">\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx</span>, which is positive for every <span class="math inline">F</span> and increases to <span class="math inline">\frac{2\ln2}{\pi}</span> as <span class="math inline">F\to\infty</span>.</p>
+<p>With <span class="math inline">X+Z=C_+</span>, <span class="math inline">Y+Z=2C_++C_-</span>, <span class="math inline">C_-=\min(C,0)</span>, and <span class="math inline">\mathbb E[\max(C_-,-4^n)]=-\mathbb E[\min(C_+,4^n)]</span>,</p>
+<p><span class="math display">
+v_{X+Z}(n)-v_{Y+Z}(n)=2\int_{4^n/2}^{4^n}P(C&gt;x)\,dx\longrightarrow\frac{2\ln2}{\pi}&gt;0.
+</span></p>
+<p>With <span class="math inline">\varepsilon=(\ln2)/\pi</span>, the set <span class="math inline">\{n:v_{Y+Z}(n)\ge v_{X+Z}(n)-\varepsilon\}</span> is finite, hence outside the free ultrafilter, while <span class="math inline">v_{X+Z}\ge v_{Y+Z}</span> for every <span class="math inline">n</span>. So <span class="math inline">X+Z\succ Y+Z</span> although <span class="math inline">X\sim Y</span>: Comonotonic Sum Invariance fails, even though Shift Invariance, CDF-Area Extension, <span class="math inline">L^1</span> Continuity and Folded Expectation hold. <code>checks/comonotonic_witnesses.py</code> verifies the calculation.</p>
+<h2 id="rational-factors">Rational factors</h2>
+<p><strong>Addition: Claude (Fable 5.1), 24 September 2026.</strong> The scaling reversal above is a doubling: <span class="math inline">A\sim-1/3\succ-1/2</span> while <span class="math inline">2A\sim-4/3\prec-1</span>, so the pair <span class="math inline">(A,-1/2)</span> fails invariance at the factor <span class="math inline">2</span>. The model therefore also fails Rational Scale Invariance, the restriction of Scale Invariance to rational factors. The same doubling refutes Integer Affine Preservation: <span class="math inline">A\succ-1/2</span> is not carried to <span class="math inline">2A\succeq-1</span>.</p>
+<h2 id="integer-ratio-self-similarity">Integer-ratio self-similarity</h2>
+<p><strong>Addition: Claude (Fable 5.1), 24 September 2026.</strong> The uniqueness witness above has ratio <span class="math inline">a=2</span>, so the model also fails Uniqueness of Negative Self-Similarity (integer ratios), the restriction of the principle to integer ratios.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12473">Decision theory unbound</a>.</strong> Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Theorems 7–10, pp. 693–695: underlying continuous clipping construction and original scale-failure strategy</li>

@@ -19,7 +19,9 @@ violates:
 - negative-affine-anti-invariance
 - folded-expectation
 - negative-self-similarity
+- integer-negative-self-similarity
 - alternating-st-petersburg-value
+- comonotonic-sum-consistency
 status: proved
 certificate:
   source_id: symmetries-of-value
@@ -41,14 +43,30 @@ sources:
   Appendix B, Definition 3, Lemma 6 and proof of Theorem 3, pp. 691–692; Remark 3 and Corollary 3, pp.
   692–693. Source of the clipped-expectation ultrafilter, continuous quotient, and asymmetric-cutoff strategy,
   including the possibility of assigning nonzero values to symmetric gambles.
+- 'Claude (Fable 5.1), Logical Maps, 23 September 2026: failure of Comonotonic Sum Invariance (half-Cauchy common summand) in writeups/asymmetric-continuous-ultrafilter.md; diagnostic checks/comonotonic_witnesses.py.'
 source_names:
 - Symmetries of Value
 - GPT-6 generated 9 Sep
 - Decision Theory Unbound
+- Claude comonotonic failure 23 Sep
 notes: |-
   Original work: source-model specialization and additional verification. The asymmetric construction and the non-implication of reflection even under DTU $+ L^{1}$ Continuity + Relative Expectation are already Goodsell’s: Symmetries of value, Theorem 1 (p. 24), citing Decision theory unbound, Remark 3. They are not new AI results. The 2024 paper supplies the continuous quotient and separate increasing cutoffs; Corollary 3 already permits nonzero values for symmetric gambles. Work recorded here chooses $f(t)=2t$ and $g(t)=t$ and spells out the CDF-area/shift-transfer verification and exact Cauchy, alternating-game and negative-self-similarity witnesses. These added calculations are not a claim of literature novelty. No scale or sum-invariance verdict is asserted without proof. Diagnostic checks do not certify the general axioms or ultrafilter existence.
 checks:
 - topics/unbounded-utility/checks/asymmetric_continuous_ultrafilter.py
+- topics/unbounded-utility/checks/comonotonic_witnesses.py
+changes:
+- date: '2026-09-23'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Comonotonic Sum Invariance shown to fail (write-up section “Failure of Comonotonic Sum Invariance”). Y = C − ln(2)/π is indifferent to sure 0, but with the common comonotonic summand Z = max(C,0) the clipped gap between 0 + Z and Y + Z tends to (2 ln 2)/π, so 0 + Z ≻ Y + Z.
+  violates:
+  - comonotonic-sum-consistency
+- date: '2026-09-24'
+  by: Claude (Fable 5.1)
+  summary: >-
+    Uniqueness of Negative Self-Similarity (integer ratios) shown to fail: the recorded uniqueness witness uses p = 1/2, a = 2, b = 0 and Z = 0, with C₁ ≻ 0 both fixed values.
+  violates:
+  - integer-negative-self-similarity
 references:
 - paper: symmetries-of-value
   role: proof

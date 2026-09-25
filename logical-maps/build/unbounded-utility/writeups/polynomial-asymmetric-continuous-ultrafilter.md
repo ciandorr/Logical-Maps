@@ -226,6 +226,53 @@ the exact coupling identities in the accompanying Pasadena proof. These are
 diagnostics supporting quantified arguments, not simulations of a free
 ultrafilter or proofs of all universal axioms.
 
+## 6. Failure of Comonotonic Sum Invariance
+
+**Addition: Claude (Fable 5.1), 23 September 2026.** A property of the
+recorded model; not a claim of the source paper.
+
+Realize a standard Cauchy variable as \(C=Q_C(U)=\tan(\pi(U-\tfrac12))\), let
+\(C_+=\max(C,0)\), \(C_-=\min(C,0)\), and put
+\(X=0\), \(Y=C_++2C_--v\) with \(v=(2\ln2-1)/\pi\), and \(Z=C_+\). All are
+nondecreasing in \(U\), so both pairs are comonotonic. With
+\(m(F)=\mathbb E[\min(C_+,F)]=\frac1{2\pi}\ln(1+F^2)+\frac F\pi\arctan(1/F)
+=\frac1\pi\ln F+\frac1\pi+o(1)\) and the window \([-4^n,4^{2n}]\),
+
+\[
+\mathbb E[q_n(C_++2C_-)]=m(4^{2n})-2m(4^n/2)\longrightarrow
+\frac{2\ln2-1}{\pi}=v,
+\]
+
+and \(q_n(Y)-q_n(C_++2C_-)\to-v\) boundedly, so \(\mathbb E[q_n(Y)]\to0\) and
+\(X\sim Y\).
+
+**Doubling-defect identity.** For any nonnegative random variable $V$ and
+any $F>0$,
+
+\[2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V>x)\,dx,\]
+
+since $\mathbb E[\min(V,F)]=\int_0^F P(V>x)\,dx$ and
+$\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V>x)\,dx$. For $V=C_+=\max(C,0)$ with
+$C$ standard Cauchy the right-hand side is
+$\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx$, which is positive for every $F$
+and increases to $\frac{2\ln2}{\pi}$ as $F\to\infty$.
+
+Now \(X+Z=C_+\) and \(Y+Z=2C_++2C_--v\), so
+
+\[
+v_{X+Z}(n)-v_{Y+Z}(n)
+ =m(4^{2n})-2m(4^{2n}/2)+2m(4^n/2)+v+o(1)
+ =2\bigl(m(4^{2n})-m(4^{2n}/2)\bigr)+o(1)\longrightarrow\frac{2\ln2}{\pi},
+\]
+
+the lower-cutoff terms cancelling against \(v\). With
+\(\varepsilon=(\ln2)/\pi\) the set \(\{n:v_{Y+Z}(n)\ge v_{X+Z}(n)-\varepsilon\}\)
+is finite, so \(X+Z\succ Y+Z\) although \(X\sim Y\): Comonotonic Sum
+Invariance fails, while Shift Invariance and Transfer of a Shift hold.
+`checks/comonotonic_witnesses.py` verifies the closed forms, the neutral
+constant and the limit.
+
 ## Paper references
 
 - **Background: [Decision theory unbound](https://doi.org/10.1111/nous.12473).** Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Appendix B, Definition 3, Lemma 6, Remark 3 and Corollary 3, pp. 691–693: continuous clipped-expectation quotient and separate cutoff functions

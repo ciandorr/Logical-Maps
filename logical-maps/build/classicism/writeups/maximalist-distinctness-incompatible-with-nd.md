@@ -1,10 +1,10 @@
-# Distinctness (pure) ∧ ND ⇒ False (⊥)
+# Distinctness Maximalism (pure) ∧ ND ⇒ False (⊥)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Distinctness (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
+- **Distinctness Maximalism (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
 - **ND.** Distinct things of any type are necessarily distinct.
 
 ## Conclusion
@@ -13,7 +13,7 @@
 
 ## Proof
 
-Choose a closed pure identity A=B such that both it and its negation are C-consistent, as the paper explains. Distinctness gives $A\ne B$ while its equivalent Possibility schema gives $\Diamond(A=B)$. ND applied at the common type gives $\Box(A\ne B)$, a contradiction.
+Choose a closed pure identity A=B such that both it and its negation are C-consistent, as the paper explains. Distinctness Maximalism gives $A\ne B$ while its equivalent Possibility Maximalism schema gives $\Diamond(A=B)$. ND applied at the common type gives $\Box(A\ne B)$, a contradiction.
 
 ## Sources
 

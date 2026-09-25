@@ -1,0 +1,56 @@
+id: lexicographic-hamel-tie-break
+name: 'Lexicographic expectation: Hamel tie-break'
+satisfies:
+- rich-outcomes
+- archimedean-outcomes
+- totality
+- restricted-totality
+- stochastic-equivalence
+- restricted-stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- statewise-dominance
+- comonotonic-sum-consistency
+- shift-invariance
+- rational-scale-invariance
+- rational-affine-preservation
+- integer-affine-preservation
+violates:
+- scale-invariance
+- positive-affine-invariance
+- negative-affine-anti-invariance
+- reflection-anti-invariance
+- independence
+- expected-utility
+- relative-expectation
+- cdf-area-extension
+- symmetric-neutrality
+- vanishing-shift-continuity
+- l1-continuity
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Claude (Fable 5.1), 2026-09-24, countermodel in response to Zachary Goodsell's question whether the rational-factor invariance from comonotonic addition extends to real factors
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+description: |-
+  Real outcomes with identity utility. Widths $h=Q_X- Q_Y$ form the real vector space H of differences of nondecreasing functions on (0,1); let $H_{\mathrm{fin}}$ be the integrable ones and $H_{0}$ those of integral 0. Fix a $\mathbb{Q}$-linear $\psi :H_{0}\to \mathbb{R}$ (Hamel basis) vanishing on step functions with $\psi (h_{1})=1, \psi (\sqrt{2}h_{1})=- 1$ and $\psi (h_{2})=- 1$, where $h_{1}=u- 1/2$ is the width of the uniform $X_{1}$ on [−1/2, 1/2] against 0 and $h_{2}$ the width of its half-mixture with sure 0 against 0; these are $\mathbb{Q}$-independent modulo step functions by a slope count. On $H/H_{\mathrm{fin}}$ take, by Zorn's lemma, a maximal pointed $\mathbb{Q}$-cone K containing the classes of nonnegative widths; maximality makes it total. Rank $X \succeq Y$ iff the width has nonzero class in K, or is integrable with positive integral, or has integral 0 and $\psi \ge 0$. This is a total preorder: classes add in K, integrals add, ψ adds. Simple widths are step functions, so simple gambles are ranked by expectation; nonnegative widths are positive in every clause, strictly when nonzero; the width is unchanged by comonotonic sums and shifts, and every clause is invariant under rational scaling, since K is a $\mathbb{Q}$-cone and ψ is $\mathbb{Q}$-linear. But $X_{1}\succ 0$ while $\sqrt{2}X_{1}\not\succeq 0$, refuting Scale Invariance; the half-mixture refutes Mixture Independence; $X_{1}$ is symmetric with equal means and areas against 0, refuting the expectation rules, CDF-Area Extension, neutrality and reflection; $\sqrt{2}X_{1}+\epsilon \succeq 0$ for every $\epsilon >0$ refutes both continuity principles. Non-constructive, like the continuous-ultrafilter models. Rational Scale Invariance with Shift Invariance gives Rational and Integer Affine Preservation.
+sources:
+- 'Claude (Fable 5.1), Logical Maps, 24 September 2026: construction and verification in writeups/lexicographic-hamel-tie-break.md,
+  in response to Zachary Goodsell''s session of 24 September 2026 on whether Comonotonic Sum Invariance gives Positive Affine Invariance.'
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §3, pp. 7–8 (the area rule on integrable widths, not this model)
+source_names:
+- Claude countermodel 24 Sep
+- Unbounded Utility and Background Risk (unpublished)
+notes: |-
+  Original countermodel. It shows that the premises of comonotonic-sum-totality-imply-rational-scale, even with Archimedean Outcomes, Stochastic Dominance and Simple EU, do not give Scale Invariance for real factors: iterated addition sees only rational multiples. Mixture Independence is the one DTU principle it fails, so it does not settle conjectured-dtu-comonotonic-imply-scale; the pair of models cdf-area-unit-threshold and this one locate Totality and Mixture Independence as the premises that the two halves of the affine claim need. The infinite-width part of the order is a Zorn completion and is not otherwise specified; only the listed principles are verified. No independent checker or Lean verification is claimed.
+checks:
+- topics/unbounded-utility/checks/rational_scale_witnesses.py
+references:
+- paper: unpublished-background-risk
+  role: background
+  locator: §3, pp. 7–8
+  note: Source of the area rule on integrable widths; the tie-break and cone completion are new.

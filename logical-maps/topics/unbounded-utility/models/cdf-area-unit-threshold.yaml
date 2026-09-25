@@ -1,0 +1,56 @@
+id: cdf-area-unit-threshold
+name: 'CDF-area dominance: simple floors or unit threshold'
+satisfies:
+- rich-outcomes
+- archimedean-outcomes
+- restricted-totality
+- stochastic-equivalence
+- restricted-stochastic-equivalence
+- simple-eu
+- stochastic-dominance
+- statewise-dominance
+- comonotonic-sum-consistency
+- shift-invariance
+- integer-affine-preservation
+- reflection-anti-invariance
+violates:
+- totality
+- independence
+- rational-scale-invariance
+- rational-affine-preservation
+- scale-invariance
+- positive-affine-invariance
+- negative-affine-anti-invariance
+- expected-utility
+- relative-expectation
+- cdf-area-extension
+- symmetric-neutrality
+- vanishing-shift-continuity
+- l1-continuity
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Claude (Fable 5.1), 2026-09-24, countermodel in response to Zachary Goodsell's claim that Comonotonic Sum Invariance implies Positive Affine Invariance
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+description: |-
+  Real outcomes with identity utility. For the width $h=Q_X- Q_Y$ on (0,1), let $X \succeq Y$ iff either some step function $s\le h$ (finitely many values on finitely many intervals) has $\int s\ge 0$, or $\int h_{-}<\infty$ and $\int h\ge 1$. In survival coordinates the second clause is $A_{-}<\infty$ and $A_{+}- A_{-}\ge 1$. Sums of floors are floors and the threshold clause absorbs the floor clause, giving transitivity. Widths of simple pairs are step functions, so simple gambles are ranked by expectation (Simple EU, hence Archimedean Outcomes and Restricted Totality); a nonnegative width is its own floor and a nonzero one admits no floor in reverse (Stochastic Dominance). The width is unchanged by comonotonic sums, shifts and reflection. Witness $X^{*}=3- U^{- 1/2}$: mean 1 and quantile unbounded below, so $X^{*}\succeq 0$ by the threshold but $\tfrac12 X^{*}\not\succeq 0$, refuting cancellation ($2X \succeq 2Y$ does not give $X \succeq Y$), Rational Scale Invariance and the affine principles; its half-mixture with sure 0 has mean 1/2 and no floor, refuting Mixture Independence. U against 1/2 has continuous width $u- 1/2$ of integral 0, so the two are incomparable although $U+\epsilon \succeq 1/2$ for every $\epsilon >0$: Totality, the expectation rules, CDF-Area Extension, neutrality and both continuity principles fail. The write-up verifies every listed property; the check script verifies the witnesses. Integer Affine Preservation holds, since floors and the threshold scale with k and every ranked width has nonnegative integral; Rational Affine Preservation fails at a = 1/2 by the same witness.
+sources:
+- 'Claude (Fable 5.1), Logical Maps, 24 September 2026: construction and verification in writeups/cdf-area-unit-threshold.md,
+  in response to Zachary Goodsell''s claim of 24 September 2026 that Comonotonic Sum Invariance implies Positive Affine Invariance.'
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §3, pp. 7–8; Theorem 7, pp. 19–20 (the area rule that the threshold clause modifies, not this model)
+source_names:
+- Claude countermodel 24 Sep
+- Unbounded Utility and Background Risk (unpublished)
+notes: |-
+  Original countermodel. It shows that Totality cannot be dropped from comonotonic-sum-totality-imply-rational-scale: iterated comonotonic addition preserves comparisons here, but the cancellation direction fails. It is not a DU model, since Mixture Independence fails, so it leaves open whether DU with Comonotonic Sum Invariance gives Rational Scale Invariance. Only the listed principles are verified. No independent checker or Lean verification is claimed.
+checks:
+- topics/unbounded-utility/checks/rational_scale_witnesses.py
+references:
+- paper: unpublished-background-risk
+  role: background
+  locator: §3, pp. 7–8; Theorem 7, pp. 19–20
+  note: Source of the CDF-area rule; the floor and threshold clauses are new.

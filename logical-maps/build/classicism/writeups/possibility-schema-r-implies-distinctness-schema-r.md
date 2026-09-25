@@ -1,18 +1,18 @@
-# Possibility (pure) ⇒ Distinctness (pure)
+# Possibility Maximalism (pure) ⇒ Distinctness Maximalism (pure)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+- **Possibility Maximalism (pure).** Every closed pure sentence consistent with C is possible.
 
 ## Conclusion
 
-- **Distinctness (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
+- **Distinctness Maximalism (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
 
 ## Proof
 
-If a closed identity A=B is not a theorem of the reference theory, its negation is consistent. Possibility gives $\Diamond(A\ne B)$. NI implies that A=B would make this impossible, so A and B are distinct.
+If a closed identity A=B is not a theorem of the reference theory, its negation is consistent. Possibility Maximalism gives $\Diamond(A\ne B)$. NI implies that A=B would make this impossible, so A and B are distinct.
 
 ## Sources
 

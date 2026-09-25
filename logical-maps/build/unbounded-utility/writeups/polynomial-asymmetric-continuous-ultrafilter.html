@@ -1,4 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4²ⁿ]</title><style>/* Fixed forest palette, adapted from the supplied style example.
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Clipped expectation: continuous ultrafilter dominance [−4ⁿ, 4²ⁿ]</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
   --bg: #f3f1e8;
@@ -358,6 +359,25 @@ v_C(n)=\int_{L_n}^{U_n}\left(\frac12-\frac{\arctan t}{\pi}\right)dt
 <h2 id="scope-and-diagnostics">Scope and diagnostics</h2>
 <p>The model satisfies DTU, Relative Expectation, <span class="math inline">L^{1}</span> Continuity, CDF-Area Extension, and the shift properties, yet fails both named game evaluations. Its failure of Negative Self-Similarity follows from the new Pasadena implication; further exclusions are left to the map’s inference engine rather than separately asserted without evidence. No Scale Invariance or sum-invariance verdict is claimed here.</p>
 <p><code>checks/calculation_factorizations.py</code> verifies the exact Pasadena clipping formula against direct finite atom sums with bounded remainders, tests the displayed cutoff asymptotic, and checks finite Arroyo sums. It also verifies the exact coupling identities in the accompanying Pasadena proof. These are diagnostics supporting quantified arguments, not simulations of a free ultrafilter or proofs of all universal axioms.</p>
+<h2 id="failure-of-comonotonic-sum-invariance">6. Failure of Comonotonic Sum Invariance</h2>
+<p><strong>Addition: Claude (Fable 5.1), 23 September 2026.</strong> A property of the recorded model; not a claim of the source paper.</p>
+<p>Realize a standard Cauchy variable as <span class="math inline">C=Q_C(U)=\tan(\pi(U-\tfrac12))</span>, let <span class="math inline">C_+=\max(C,0)</span>, <span class="math inline">C_-=\min(C,0)</span>, and put <span class="math inline">X=0</span>, <span class="math inline">Y=C_++2C_--v</span> with <span class="math inline">v=(2\ln2-1)/\pi</span>, and <span class="math inline">Z=C_+</span>. All are nondecreasing in <span class="math inline">U</span>, so both pairs are comonotonic. With <span class="math inline">m(F)=\mathbb E[\min(C_+,F)]=\frac1{2\pi}\ln(1+F^2)+\frac F\pi\arctan(1/F) =\frac1\pi\ln F+\frac1\pi+o(1)</span> and the window <span class="math inline">[-4^n,4^{2n}]</span>,</p>
+<p><span class="math display">
+\mathbb E[q_n(C_++2C_-)]=m(4^{2n})-2m(4^n/2)\longrightarrow
+\frac{2\ln2-1}{\pi}=v,
+</span></p>
+<p>and <span class="math inline">q_n(Y)-q_n(C_++2C_-)\to-v</span> boundedly, so <span class="math inline">\mathbb E[q_n(Y)]\to0</span> and <span class="math inline">X\sim Y</span>.</p>
+<p><strong>Doubling-defect identity.</strong> For any nonnegative random variable <span class="math inline">V</span> and any <span class="math inline">F&gt;0</span>,</p>
+<p><span class="math display">2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V&gt;x)\,dx,</span></p>
+<p>since <span class="math inline">\mathbb E[\min(V,F)]=\int_0^F P(V&gt;x)\,dx</span> and <span class="math inline">\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V&gt;x)\,dx</span>. For <span class="math inline">V=C_+=\max(C,0)</span> with <span class="math inline">C</span> standard Cauchy the right-hand side is <span class="math inline">\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx</span>, which is positive for every <span class="math inline">F</span> and increases to <span class="math inline">\frac{2\ln2}{\pi}</span> as <span class="math inline">F\to\infty</span>.</p>
+<p>Now <span class="math inline">X+Z=C_+</span> and <span class="math inline">Y+Z=2C_++2C_--v</span>, so</p>
+<p><span class="math display">
+v_{X+Z}(n)-v_{Y+Z}(n)
+ =m(4^{2n})-2m(4^{2n}/2)+2m(4^n/2)+v+o(1)
+ =2\bigl(m(4^{2n})-m(4^{2n}/2)\bigr)+o(1)\longrightarrow\frac{2\ln2}{\pi},
+</span></p>
+<p>the lower-cutoff terms cancelling against <span class="math inline">v</span>. With <span class="math inline">\varepsilon=(\ln2)/\pi</span> the set <span class="math inline">\{n:v_{Y+Z}(n)\ge v_{X+Z}(n)-\varepsilon\}</span> is finite, so <span class="math inline">X+Z\succ Y+Z</span> although <span class="math inline">X\sim Y</span>: Comonotonic Sum Invariance fails, while Shift Invariance and Transfer of a Shift hold. <code>checks/comonotonic_witnesses.py</code> verifies the closed forms, the neutral constant and the limit.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Background: <a href="https://doi.org/10.1111/nous.12473">Decision theory unbound</a>.</strong> Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Appendix B, Definition 3, Lemma 6, Remark 3 and Corollary 3, pp. 691–693: continuous clipped-expectation quotient and separate cutoff functions</li>

@@ -1,140 +1,194 @@
 {
- "$schema": "https://json-schema.org/draft/2020-12/schema",
- "$id": "topic.schema.json",
- "title": "Topic",
- "description": "A topic is a self-contained map: a framework, a set of principles, and results relating them.",
- "type": "object",
- "additionalProperties": false,
- "required": [
-  "id",
-  "title",
-  "framework"
- ],
- "properties": {
-  "id": {
-   "type": "string",
-   "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-   "description": "Must equal the directory name."
-  },
-  "title": {
-   "type": "string"
-  },
-  "description": {
-   "type": "string"
-  },
-  "require_sources": {
-   "type": "boolean",
-   "description": "Reject result/model records without a nonempty source. Opt in for existing datasets; enabled for new topics."
-  },
-  "source_catalog": {
-   "type": "array",
-   "description": "Direct sources used to classify and filter results and models. Miscellaneous records use the reserved id misc.",
-   "items": {
-    "type": "object",
-    "additionalProperties": false,
-    "required": [
-     "id",
-     "name",
-     "kind"
-    ],
-    "properties": {
-     "id": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "topic.schema.json",
+  "title": "Topic",
+  "description": "A topic is a self-contained map: a framework, a set of principles, and results relating them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "framework"
+  ],
+  "properties": {
+    "id": {
       "type": "string",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
-     },
-     "name": {
-      "type": "string",
-      "minLength": 1
-     },
-     "kind": {
-      "enum": [
-       "published-paper",
-       "online-submission",
-       "misc"
-      ]
-     }
-    }
-   }
-  },
-  "principle_categories": {
-   "type": "array",
-   "description": "Ordered display categories for the principle filter. Principles refer to these ids via category.",
-   "items": {
-    "type": "object",
-    "additionalProperties": false,
-    "required": [
-     "id",
-     "name"
-    ],
-    "properties": {
-     "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
-     },
-     "name": {
-      "type": "string",
-      "minLength": 1
-     }
-    }
-   }
-  },
-  "framework": {
-   "type": "string",
-   "description": "The setting all principles are stated in: the objects, the primitive relation(s), standing conventions. Every result is a claim about this framework."
-  },
-  "background": {
-   "type": "array",
-   "items": {
-    "type": "string"
-   },
-   "uniqueItems": true,
-   "description": "Principle ids assumed throughout. Every implication and independence is read relative to these."
-  },
-  "background_presets": {
-   "type": "array",
-   "description": "Named, removable viewer assumption packages and abbreviations for equivalent conjunctions. Defaults apply only when the URL has no explicit assume parameter. Abbreviations do not change stored premises or model assertions.",
-   "items": {
-    "type": "object",
-    "additionalProperties": false,
-    "required": [
-     "id",
-     "name",
-     "category",
-     "principles"
-    ],
-    "properties": {
-     "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
-     },
-     "name": {
-      "type": "string",
-      "minLength": 1
-     },
-     "category": {
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Must equal the directory name."
+    },
+    "title": {
       "type": "string"
-     },
-     "principles": {
+    },
+    "description": {
+      "type": "string"
+    },
+    "require_sources": {
+      "type": "boolean",
+      "description": "Reject result/model records without a nonempty source. Opt in for existing datasets; enabled for new topics."
+    },
+    "source_catalog": {
       "type": "array",
-      "minItems": 1,
-      "uniqueItems": true,
+      "description": "Direct sources used to classify and filter results and models. Miscellaneous records use the reserved id misc.",
       "items": {
-       "type": "string"
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "published-paper",
+              "online-submission",
+              "misc"
+            ]
+          }
+        }
       }
-     },
-     "default": {
-      "type": "boolean"
-     }
+    },
+    "principle_categories": {
+      "type": "array",
+      "description": "Ordered display categories for the principle filter. Principles refer to these ids via category.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "framework": {
+      "type": "string",
+      "description": "The setting all principles are stated in: the objects, the primitive relation(s), standing conventions. Every result is a claim about this framework."
+    },
+    "background": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Principle ids assumed throughout. Every implication and independence is read relative to these."
+    },
+    "background_presets": {
+      "type": "array",
+      "description": "Named, removable viewer assumption packages and abbreviations for equivalent conjunctions. Defaults apply only when the URL has no explicit assume parameter. Abbreviations do not change stored premises or model assertions.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "category",
+          "principles"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "type": "string"
+          },
+          "principles": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "notation": {
+      "type": "string",
+      "description": "Optional notation guide shown in the viewer."
+    },
+    "lean_lib": {
+      "type": "string",
+      "description": "Lake library name under topics/<topic>/lean/, e.g. UnboundedUtility."
+    },
+    "lean": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "How this topic writes a generated Lean statement; {def} stands for a principle's lean_def. Without it, principles are plain propositions and a result reads A → B → C.",
+      "properties": {
+        "imports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Modules Statements.lean imports. Default: <lean_lib>.Principles."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace the definitions live in. Default: the prefix of the first lean_def."
+        },
+        "definition_check": {
+          "type": "string",
+          "description": "Template checking that a lean_def elaborates, may span lines. Default: example : Prop := {def}"
+        },
+        "result": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "binder": {
+              "type": "string",
+              "description": "Line after `def name : Prop :=`, e.g. a ∀ or ∃ with its variables; empty for none."
+            },
+            "principle": {
+              "type": "string",
+              "description": "How a principle applies inside the statement; {def} is its lean_def. Default {def}."
+            }
+          }
+        },
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "binder": {
+              "type": "string",
+              "description": "Line after `def name : Prop :=`, e.g. a ∀ or ∃ with its variables; empty for none."
+            },
+            "principle": {
+              "type": "string",
+              "description": "How a principle applies inside the statement; {def} is its lean_def. Default {def}."
+            }
+          }
+        }
+      }
+    },
+    "draft": {
+      "type": "boolean",
+      "description": "A draft topic: built and validated, but its rankings, settled share and recorded-conjecture list are not computed, and commands skip it unless it is named."
     }
-   }
-  },
-  "notation": {
-   "type": "string",
-   "description": "Optional notation guide shown in the viewer."
-  },
-  "lean_lib": {
-   "type": "string",
-   "description": "Lake library name under topics/<topic>/lean/, e.g. UnboundedUtility."
   }
- }
 }

@@ -1,10 +1,10 @@
-# Distinctness (pure) ∧ Rigid Comprehension ⇒ False (⊥)
+# Distinctness Maximalism (pure) ∧ Rigid Comprehension ⇒ False (⊥)
 
 <p class='cert'>Result — Source: Arithmetic is Necessary (2024 draft); produced by Zachary Goodsell; recorded by OpenAI Codex (GPT-6), 17 September 2026; proof supplied by Claude Fable 5.1 (Anthropic), 20 September 2026, from Goodsell's draft.</p>
 
 ## Premises
 
-- **Distinctness (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
+- **Distinctness Maximalism (pure).** Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.
 - **Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 
 ## Conclusion
@@ -13,7 +13,7 @@
 
 ## Proof
 
-Distinctness (pure) is equivalent to Possibility (pure). Rigid Comprehension implies Boolean Completeness, which restricts to Countable Boolean Completeness, which gives the Necessity of Arithmetic (the source's Theorem 9). Possibility (pure) is incompatible with the Necessity of Arithmetic (the source's Theorem 11): Gödel's first incompleteness theorem supplies an arithmetical sentence $A$ with $I\land A$ and $I\land\neg A$ both consistent with C, both are then possible, and the necessity schema forbids that. The source draws exactly this consequence for Rigid Comprehension in the remark after Theorem 11.
+Distinctness Maximalism (pure) is equivalent to Possibility Maximalism (pure). Rigid Comprehension implies Boolean Completeness, which restricts to Countable Boolean Completeness, which gives the Necessity of Arithmetic (the source's Theorem 9). Possibility Maximalism (pure) is incompatible with the Necessity of Arithmetic (the source's Theorem 11): Gödel's first incompleteness theorem supplies an arithmetical sentence $A$ with $I\land A$ and $I\land\neg A$ both consistent with C, both are then possible, and the necessity schema forbids that. The source draws exactly this consequence for Rigid Comprehension in the remark after Theorem 11.
 
 ## Notes
 

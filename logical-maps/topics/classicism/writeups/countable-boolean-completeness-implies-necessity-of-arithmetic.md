@@ -20,7 +20,7 @@ $\lambda n\, .\,\Box\mathbb N n$: $\Box\mathbb N\mathbf{0}_e$ by
 necessitation, and necessitating
 $\forall n\, .\,\mathbb N n\to\mathbb N n^+$ then applying the converse
 Barcan formula and K gives $\forall n\, .\,\Box\mathbb N n\to\Box\mathbb N n^+$.
-This is Lemma 1 of the write-up for Possibility (pure) ⇒ Axiom of Infinity
+This is Lemma 1 of the write-up for Possibility Maximalism (pure) ⇒ Axiom of Infinity
 (type t).
 
 **Lemma 4.** $\forall m\,n\in\mathbb N\, .\,m\ne n\to\Box(I^*\to m\ne n)$.

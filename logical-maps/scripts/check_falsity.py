@@ -98,12 +98,22 @@ process.stdout.write(JSON.stringify(output));
     with tempfile.TemporaryDirectory() as d:
         root = Path(d); (root/'Test').mkdir()
         data = dict(topic={'lean_lib':'Test'}, principles=[dict(id='a',name='A',lean_def='Test.A')],
-                    results=[dict(id='incompatible',premises=['a'],conclusion=pmap.FALSE,status='proved')],models=[])
+                    results=[dict(id='incompatible',premises=['a'],conclusion=pmap.FALSE,status='proved')],
+                    models=[dict(id='w',name='W',satisfies=['a'],violates=[],status='proved')])
         with patch.object(pmap,'load_topic',return_value=data), patch.object(pmap,'lean_lib_dir',return_value=(root,'Test')):
-            path = pmap.generate_lean_statements('fixture')
-        generated = path.read_text()
-        assert 'Test.A P →\n    False' in generated
+            generated = pmap.generate_lean_statements('fixture').read_text()
+        # Without a declared shape, principles are plain propositions.
+        assert 'import Test.Principles\n' in generated and 'example : Prop := Test.A' in generated
+        assert 'def incompatible : Prop :=\n  Test.A →\n  False' in generated and 'def w : Prop :=\n  Test.A' in generated
         assert 'False P' not in generated
+        # A topic declares its own shape; the tooling knows no framework.
+        data['topic']['lean'] = {'imports': ['Test.Core'], 'namespace': 'Test', 'definition_check': 'example (P : Pref) : Prop :=\n  {def} P',
+                                 'result': {'binder': '∀ (P : Pref),', 'principle': '{def} P'}, 'model': {'binder': '∃ W : Witness,', 'principle': '{def} W.pref'}}
+        with patch.object(pmap,'load_topic',return_value=data), patch.object(pmap,'lean_lib_dir',return_value=(root,'Test')):
+            generated = pmap.generate_lean_statements('fixture').read_text()
+        assert 'import Test.Core\n' in generated and 'example (P : Pref) : Prop :=\n  Test.A P' in generated
+        assert 'def incompatible : Prop :=\n  ∀ (P : Pref),\n    Test.A P →\n    False' in generated
+        assert 'def w : Prop :=\n  ∃ W : Witness,\n    Test.A W.pref' in generated
     print(f'PASS: 40 exhaustive Horn theories with positive/negative backgrounds, topic Python/JavaScript parity, model conflicts, and native Lean False generation.')
 
 

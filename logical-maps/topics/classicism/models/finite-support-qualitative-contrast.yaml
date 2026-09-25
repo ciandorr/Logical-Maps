@@ -6,6 +6,8 @@ satisfies:
 - axiom-of-infinity-e
 - axiom-of-infinity-t
 violates:
+- relational-choice-r
+- functional-choice-r
 - necessary-actuality
 - atomicity-r
 - witnessed-possibility-r
@@ -24,8 +26,12 @@ certificate:
 sources:
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, p. 79, final construction
   (two copies of N).
+- OpenAI Codex (GPT-6), 24 September 2026. Finite-support transposition proof that Relational Choice
+  and Functional Choice fail at W0, following the user’s suggestion to transfer Plenitude countermodels
+  to Functional Choice; see the accompanying write-up.
 source_names:
 - Classicism
+- GPT-6 proof 24 Sep
 references:
 - paper: bacon-dorr-classicism
   role: proof
@@ -46,14 +52,22 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   type $\tau$, so $c=\top_\tau$ necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
   witnessed by $\bot_\tau$ but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and
   $\lambda x\, .\,\top_\tau$ agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes
-  what the closed pure term $\top_\tau$ denotes; Distinctness (signature Σ) fails since $c=\top_\tau$
+  what the closed pure term $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$
   is a true identity that C(Σ) does not prove. Everything that implies these fails with them. Distinctness-preserving
   collapse fails at $W_0$: every arrow has an inverse, so $\Diamond q$ holds at every arrow for every
   true $q$, and $\Box(\Diamond q\to p)$ would force every true $p$ to contain every arrow; but the true
   proposition consisting of all arrows $W_0\to W_0$ together with the arrows into $W_1$ fixing $0$ is
-  pinned down by $\{0\}$, meets the closure constraint, and omits arrows. Relational Choice is left unknown
-  here: the construction constrains $W_i^t$ beyond ideal fullness, so the paper’s remark that ideally
-  full models are extensionally full does not apply to it as stated, and no other argument has been checked.'
+  pinned down by $\{0\}$, meets the closure constraint, and omits arrows. Relational Choice was left unknown
+  on 23 September: the construction constrains $W_i^t$ beyond ideal fullness, so the paper’s remark that
+  ideally full models are extensionally full does not apply to it as stated. The 24 September proof in
+  the accompanying write-up resolves this negatively. A functional subrelation choosing a member of
+  every unordered pair would have finite support. A transposition of two individuals outside that support
+  fixes the subrelation and their pair-property; the extra constraint on propositions makes truth at
+  $W_0$ invariant under this transposition, so both members would be selected. Functional Choice also
+  fails, including with relational outputs: replace a selected individual by its haecceity. Plenitude
+  still holds by C5 plus Actuality and Propositions 2.5 and 2.14, so this model separates it from Functional
+  Choice even under C5, Rigid Comprehension and Boolean Completeness. This does not settle whether
+  C5 plus Functional Choice implies Atomicity: the model fails the proposed premise.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -95,3 +109,12 @@ changes:
   by: Claude Fable 5.1 (Anthropic)
   summary: 'Noted why Relational Choice is left unknown: the construction goes beyond ideal fullness,
     so the extensional-fullness argument used for the other Appendix D models does not apply as stated.'
+- date: '2026-09-24'
+  by: OpenAI Codex (GPT-6)
+  summary: 'Resolved the choice questions by the finite-support transposition argument in the accompanying
+    write-up. Relational Choice fails already for selection from two-element properties of individuals;
+    haecceity coding gives an admitted relational-output counterinstance to Functional Choice. The original
+    construction and its source attribution are unchanged; these choice verifications are new.'
+  violates:
+  - relational-choice-r
+  - functional-choice-r

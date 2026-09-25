@@ -4,7 +4,7 @@
 
 ## Package
 
-- **Possibility+ (pure).** The strengthened Possibility schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
+- **Possibility+ (pure).** The strengthened Possibility Maximalism schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
 - **Actuality.** There is a true proposition that entails every true proposition.
 - **Distinctness-preserving collapse.** Every truth is necessary under the distinctness-preserving modality.
 - **Relational Choice.** Every serial binary relation has a functional subrelation.
@@ -20,7 +20,7 @@
 
 ## Construction
 
-Take the alternative coalesced-sum root of Appendix E, p. 83: a set of source action models complete for C, coalesced at a new root whose individual domain is a singleton, the unique root individual being carried by each distinguished arrow to a chosen individual of that component. Choosing the components so that every C-consistent formula with one free individual variable is true of the chosen individual in some component gives the n = 1 instances of Possibility+; the instances with two or more variables have false antecedents at the root, and the empty-tuple instances are Possibility. Evaluation point: the root.
+Take the alternative coalesced-sum root of Appendix E, p. 83: a set of source action models complete for C, coalesced at a new root whose individual domain is a singleton, the unique root individual being carried by each distinguished arrow to a chosen individual of that component. Choosing the components so that every C-consistent formula with one free individual variable is true of the chosen individual in some component gives the n = 1 instances of Possibility+; the instances with two or more variables have false antecedents at the root, and the empty-tuple instances are Possibility Maximalism. Evaluation point: the root.
 
 ## Notes
 

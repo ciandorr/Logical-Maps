@@ -1,18 +1,18 @@
-# Possibility+ (pure) ⇒ Possibility (pure)
+# Possibility+ (pure) ⇒ Possibility Maximalism (pure)
 
 <p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), 17 September 2026.</p>
 
 ## Premises
 
-- **Possibility+ (pure).** The strengthened Possibility schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
+- **Possibility+ (pure).** The strengthened Possibility Maximalism schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.
 
 ## Conclusion
 
-- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+- **Possibility Maximalism (pure).** Every closed pure sentence consistent with C is possible.
 
 ## Proof
 
-Take the empty tuple of individual variables. Its distinctness condition is vacuous; the instances are pure Possibility.
+Take the empty tuple of individual variables. Its distinctness condition is vacuous; the instances are pure Possibility Maximalism.
 
 ## Sources
 

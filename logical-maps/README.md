@@ -54,7 +54,7 @@ scripts/pmap.py                       validate · build · bundle · status · l
 viewer/template.html                  the map; data embedded at build
 topics/<topic>/writeups/<id>.md       optional hand-written write-up (LaTeX math ok); otherwise generated from the record
 topics/<topic>/lean/                  Lean sources, copied into the build when present
-build/<topic>/                        index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/<id>.{md,html}, sources/, lean/
+build/<topic>/                        index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/<id>.{md,html}, sources/, lean/, math/, favicon.png
 ```
 
 ```
@@ -131,6 +131,14 @@ model statement from its premises and conclusion into a generated `Statements.le
 proof is supplied by inhabiting the generated `Prop`, so it cannot drift from the recorded
 claim.
 
+The shape of a statement is the topic's own, declared under `lean:` in `topic.yaml`:
+`imports`, `namespace`, a `definition_check` template, and for results and models a
+`binder` and how a `principle` applies, with `{def}` standing for the principle's
+`lean_def`. Unbounded utility quantifies over a preference order and a witness; another
+topic may use plain propositions, a semantics, or whatever its library provides. Without a
+declaration, principles are plain propositions and a result reads `A → B → C`. Nothing in
+the tooling knows any particular framework, so topics formalise independently.
+
 `pmap lean-check` builds the library and audits wrapper proofs at the generated
 statement types. Failed elaboration, `sorryAx`, and nonstandard axioms are rejected. The `lean` certificate field is `none`,
 `stated` (statement elaborates, proof missing), or `verified` (machine-checked, sorry-free);
@@ -196,6 +204,15 @@ not necessarily unresolved in the literature. Tentative user suggestions may
 be recorded as human-proposed conjectures, separately from verified literature
 results, without attributing an unverified theorem to a cited paper.
 
+## Theorem trawl
+
+The [theorem-trawl worker](trawl/README.md) fetches a Git snapshot, visits open
+questions in centrality order, and gives discovery an editable copy of the YAML
+database in a separate quarantine repository. It saves edits and notes throughout
+the search, resumes after budget stops, and freezes file diffs for independent
+review. Discovery, review and admission have separate evidence records. API providers and models are configurable; live calls
+are disabled by default. Run `python3 scripts/check_trawl.py` for offline tests.
+
 ## Certificates
 
 Model names describe the construction or ordering rule, using a consistent
@@ -226,6 +243,11 @@ graph, hidden sources still supply proved consequences of the background;
 arrow visibility does not withdraw those automatic facts. Legacy author-type
 `provenance` is still accepted in old datasets; records without a direct source
 are displayed under Misc. until attributed. Lean fields remain optional.
+
+An optional `certificate.trawl` preserves structured discovery, evidence, reviewer,
+and admission history for accepted trawl contributions. It does not change the
+meaning of `source_id`, proof status, or Lean verification. See the
+[trawl provenance workflow](trawl/README.md#evidence-storage).
 
 Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with one show-or-hide control per category; these only control visibility. Topics without categories retain the flat list.
 
@@ -393,38 +415,40 @@ details does not cover or resize the graph. The panel lists selected principles 
 definitions and individual remove buttons.
 
 The Conjectures tab shares the background controls. Its sections collapse:
-**Lynchpin conjectures** ranks open questions by how many other open questions
-each answer would settle. A question is S ⊢ c, whether S entails c, for S at
+**Central Questions** ranks open questions by the harmonic mean of what the
+two answers would settle. If each answer is as likely as the map leaves room
+for it, inversely to how much it would settle, that is the number of other
+questions an answer is expected to settle, so a question that only matters if
+it comes out the implausible way sinks. **Automatically Generated Conjectures**
+lists the same questions by their larger side, each stated as the answer to
+expect: ⊢ when a refutation would settle more, ⊬ when a proof would, with "if
+yes" and "if no" what confirming or refuting that conjecture would settle. A question is S ⊢ c, whether S entails c, for S at
 most two principle classes (True, with none) and c a class or False, asked only
 where no smaller premise set already proves or excludes c, and settled alike by
 a proof, an exclusion or a fitting model; "no" denies the entailment; a model check (model: principle) is scored the
-same way. A row that a recorded conjecture asks about carries a star when the
-record has notes, the notes open beneath it, and the row is listed at its rank
-even when it falls below the stored top. The ranking is computed at build time for the topic background and
-each preset, so an ad-hoc background shows none. **Recorded conjectures** lists
-the questions on record. **Show resolved** is off by default, hiding questions currently proved
-or refuted. Verdicts are computed
-from proved evidence under the selected background and sources; they are not
-stored record statuses. Source filters change which proofs and witnesses can
-answer a question, not which questions exist. **Open** means no resolution in
-all recorded proved evidence under that background. **Unresolved by selected
-evidence** distinguishes a missing selected proof or witness from a genuinely
-open question; its evidence disclosure shows the verdict and supporting records
-available with all evidence. A line above the sections gives the share of
+same way. A row that a recorded conjecture asks about carries a star and a details link
+to the record. The star is bronze when the record has notes, and silver or gold
+when the record says `tier: silver` or `tier: gold`, a human ranking of the
+question by importance and difficulty. The ranking is computed at build time for the topic background and
+each preset, so an ad-hoc background shows none, and a topic marked `draft: true`
+in its `topic.yaml` gets none at all. **Conjectures** lists each
+recorded conjecture as the question it asks, in the same format: ⊢ when a result
+claims the entailment, ⊬ when a model denies it, with "if yes" and "if no" what
+confirming or refuting the conjecture would settle. An open conjecture sits at
+its rank with its scores, whether or not it made the ranking's stored top; a
+settled one shows its verdict, proved or refuted, and no rank or scores; one
+with more than two premises is listed the same way, marked as such. **Show
+resolved** is off by default, hiding the settled ones. A sparse map, too open to
+rank, still lists and scores its conjectures. Verdicts come from proved
+evidence under the background and never from conjectures; a model witnesses a
+conjecture's flags, not its proposed construction. The Central Questions description gives the share of
 implication questions with up to two premises settled: S ⊢ c for S at most two
 principle classes and c a class or False, counted only when no smaller premise
 set already proves or excludes c, and settled alike by a proof, an exclusion or
 a fitting model. It is computed at build time for the topic background and each
 preset; other backgrounds show no share, and hiding a source or enabling
-Lean-only does not change it. These comparisons
-use the same background and never use conjectures as proofs. For a non-False conclusion,
-incompatible premises are shown separately; an inconsistent background
-suppresses verdicts. An implication is refuted only by an actual countermodel.
-If omitted evidence shows the background is inconsistent, a warning prevents
-the remaining questions from being presented as open with all evidence.
-A matching model witnesses the background and the conjecture's required
-`satisfies`/`violates` flags; it need not verify the particular construction
-proposed in its description.
+Lean-only does not change it. An inconsistent background shows a warning in
+place of both sections.
 
 Optional `was_conjectured: true` on a result or model retains its question
 history, whether its status is `conjectured` or `proved`. When changing a

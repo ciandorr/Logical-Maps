@@ -1,10 +1,10 @@
-# Possibility (pure) ∧ Countable Boolean Completeness ⇒ False (⊥)
+# Possibility Maximalism (pure) ∧ Countable Boolean Completeness ⇒ False (⊥)
 
 <p class='cert'>Result — Source: Arithmetic is Necessary (2024 draft); produced by Zachary Goodsell; recorded by Claude Fable 5.1 (Anthropic), 20 September 2026.</p>
 
 ## Premises
 
-- **Possibility (pure).** Every closed pure sentence consistent with C is possible.
+- **Possibility Maximalism (pure).** Every closed pure sentence consistent with C is possible.
 - **Countable Boolean Completeness.** Every countable property of entities of a relational type has a least upper bound in that type, where a property is countable when it injects into the natural numbers.
 
 ## Conclusion
@@ -13,7 +13,7 @@
 
 ## Proof
 
-Countable Boolean Completeness gives the Necessity of Arithmetic in C, by Theorem 9 of the source, and the Necessity of Arithmetic is incompatible with Possibility (pure), by Theorem 11: Gödel's first incompleteness theorem supplies an arithmetical sentence $A$ with $I\land A$ and $I\land\neg A$ both consistent with C, Possibility makes both possible, and the necessity schema forbids that. So no extension of Classicism containing Countable Boolean Completeness has a consistent maximalization.
+Countable Boolean Completeness gives the Necessity of Arithmetic in C, by Theorem 9 of the source, and the Necessity of Arithmetic is incompatible with Possibility Maximalism (pure), by Theorem 11: Gödel's first incompleteness theorem supplies an arithmetical sentence $A$ with $I\land A$ and $I\land\neg A$ both consistent with C, Possibility Maximalism makes both possible, and the necessity schema forbids that. So no extension of Classicism containing Countable Boolean Completeness has a consistent maximalization.
 
 ## Notes
 

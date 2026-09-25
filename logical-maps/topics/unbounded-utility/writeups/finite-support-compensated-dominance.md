@@ -325,3 +325,10 @@ satisfies sum invariance in this model.
 
 These are direct calculations in the recorded model; no independent checker
 or Lean verification is claimed.
+
+## Integer-ratio self-similarity
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The uniqueness witness
+above has ratio $a=2$, so the model also fails Uniqueness of Negative
+Self-Similarity (integer ratios), the restriction of the principle to integer
+ratios.

@@ -99,26 +99,17 @@
   #pane-open #graph-options, #pane-open .graph-hint, #pane-open .graph-choice, #pane-open .pr-category-actions, #pane-open #pr-all, #pane-open #pr-none { display: none; }
   .open-content { overflow: auto; min-width: 0; min-height: 0; }
   #open-warning { position: static; margin: 16px 20px 0; }
-  .conjecture-row { padding: 16px 0; border-top: 1px solid var(--line); }
-  .conjecture-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 8px; }
-  .conjecture-heading .stmt { flex: 1; min-width: min(240px, 100%); text-align: left; }
-  .resolution { font-size: 12px; color: var(--ink-2); }
-  .resolution.proved { color: var(--human); }
-  .resolution.refuted, .resolution.incompatible { color: var(--indep); }
-  .resolution.evidence-limited { color: var(--conj); }
-  .conjecture-row .note, .conjecture-evidence { margin-top: 8px; }
+  .conjecture-evidence { margin-top: 8px; }
   .conjecture-evidence summary { cursor: pointer; }
   .conjecture-evidence li { margin: 8px 0; }
-  #open-progress { margin: 0 0 12px; }
   #open > details + details { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
   #open > details > summary { cursor: pointer; font: 600 16px var(--serif); margin-bottom: 8px; }
-  #lynchpins table.results { margin: 8px 0 16px; border-collapse: collapse; }
-  #lynchpins td.num, #lynchpins th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
-  #lynchpins .star { margin-right: 4px; }
-  #lynchpins td.rank { color: var(--ink-3); }
-  #lynchpins details.lynchpin-note { font-size: 12px; color: var(--ink-2); margin: 2px 0 0 18px; }
-  #lynchpins details.lynchpin-note > summary { cursor: pointer; color: var(--ink-3); }
-  #lynchpins details.lynchpin-note .prose { margin: 3px 0; }
+  #open table.results { margin: 8px 0 16px; border-collapse: collapse; }
+  #open td.num, #open th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
+  #open .star { margin-right: 4px; }
+  #open td.rank { color: var(--ink-3); }
+  #open .status { font-size: 12px; color: var(--ink-3); margin-left: 4px; }
+  #open td.stmt .links { font-size: 12px; margin-left: 6px; }
   .pane-divider { position: relative; background: var(--panel-2); touch-action: none; user-select: none; z-index: 2; }
   .pane-divider::after { content: ''; position: absolute; border-radius: 3px; background: var(--line-strong); }
   .pane-divider[aria-orientation="vertical"] { cursor: col-resize; }
@@ -569,6 +560,11 @@
   /* Credit line on a contribute page: the name cycles through the spectrum. */
   #contribute .thanks { font-size: 17px; margin: 0 0 18px; }
   .iridescent { font-weight: 600; color: transparent; background: linear-gradient(90deg, #d946ef, #f59e0b, #22c55e, #06b6d4, #6366f1, #d946ef); background-size: 400% 100%; -webkit-background-clip: text; background-clip: text; animation: iridescence 6s linear infinite; }
+  #contribute a.iridescent { color: transparent; text-decoration: none; }
+  #contribute a.iridescent:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+  .iridescent.bronze { background-image: linear-gradient(90deg, #8a4b1f, #b87333, #d9955a, #7a3e14, #a0522d, #8a4b1f); }
+  .iridescent.silver { background-image: linear-gradient(90deg, #6b7280, #e5e7eb, #ffffff, #9ca3af, #d1d5db, #6b7280); }
+  .iridescent.gold { background-image: linear-gradient(90deg, #b8860b, #ffd700, #f0c419, #d4a017, #ffcc33, #b8860b); }
   @keyframes iridescence { to { background-position: 400% 50%; } }
   @media (prefers-reduced-motion: reduce) { .iridescent { animation: none; } }
   @media (max-width: 1000px) { .ex { gap: 24px; } }
@@ -858,7 +854,7 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, recorded: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set(), flipped: false };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, recorded: false, auto: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set(), flipped: false };
 // A handful of categories reads better open; a long list is easier to navigate
 // closed. The threshold counts the topic's own principles, not the ones a
 // reader happens to be showing.
@@ -2390,56 +2386,21 @@ function conjectureEvidence(answer, evidenceBase = baseE, summary = 'Evidence') 
   return `<details class="conjecture-evidence"><summary>${esc(summary)} ${evidenceBadges({items})}</summary><ol>${items.map(x => `<li><button class="lnk" data-open-${kindOf(x)}="${esc(x.id)}">${x.satisfies ? esc(x.name) : resultStmt(x)} — details</button> ${certBadges(x)}</li>`).join('')}</ol>${sourceSummary(items)}</details>`;
 }
 function renderOpen() {
-  const questions = [...R, ...MODELS].filter(x => x.status === 'conjectured' || x.was_conjectured)
-    .map(item => {
-      const answer = E.resolveConjecture(item), allAnswer = allEvidenceE.resolveConjecture(item);
-      const status = answer.status === 'open' && allAnswer.status !== 'open'
-        ? allAnswer.status === 'inconsistent-background' ? 'inconsistent-background' : 'evidence-limited'
-        : answer.status;
-      return {item, answer, allAnswer, status};
-    });
   const inconsistent = backgroundConflicts.length > 0;
   const allConflict = allEvidenceE.conflict([]);
-  const assumedFacts = inconsistent ? new Set() : E.cl([]).facts;
-  const labels = {open: 'Open', 'evidence-limited': 'Unresolved by selected evidence', proved: '✓ Proved', refuted: '✗ Refuted', incompatible: 'Incompatible premises', 'inconsistent-background': 'Resolution unavailable'};
-  const verdictLabel = (x, status) => Array.isArray(x.satisfies) && status === 'proved' ? '✓ Existence witnessed' : Array.isArray(x.satisfies) && status === 'refuted' ? '✗ Existence refuted' : labels[status];
-  const row = ({item: x, answer, allAnswer, status}) => {
-    const isM = Array.isArray(x.satisfies);
-    const shown = isM ? {...x, satisfies: x.satisfies.filter(p => !assumedFacts.has(p)), violates: x.violates.filter(p => !backgroundExcluded.has(p))}
-      : {...x, premises: x.premises.filter(p => !assumedFacts.has(p))};
-    const statement = isM ? esc(x.name) : resultStmt(shown);
-    const requirements = isM ? `<div class="stmt">${shown.satisfies.length || shown.violates.length ? `Exists: ${modelStmt(shown)}` : 'Exists: a model of the current background.'}</div>` : '';
-    let evidence = '';
-    if (status === 'open') evidence = '<p class="note">No resolution in all recorded proved evidence under this background.</p>';
-    else if (status === 'evidence-limited') {
-      evidence = conjectureEvidence(allAnswer, allEvidenceBaseE, `${verdictLabel(x, allAnswer.status)} with all recorded evidence`);
-      if (allAnswer.status === 'incompatible') evidence += '<p class="note">The full evidence makes the premises incompatible with this background; this does not settle the implication.</p>';
-      if (isM && allAnswer.status === 'proved') evidence += '<p class="note">A proved model meets the requirements; this need not establish the proposed construction.</p>';
-    }
-    else if (!inconsistent) {
-      if (isM && answer.status === 'proved') evidence += '<p class="note">A proved model meets these requirements. This settles their consistency; it need not establish the proposed construction.</p>';
-      if (answer.status === 'incompatible') evidence += '<p class="note">The premises conflict with this background. This is not counted as a resolution of the implication.</p>';
-      if (status !== 'inconsistent-background') evidence += conjectureEvidence(answer);
-    }
-    return `<article class="conjecture-row" data-conjecture-id="${esc(x.id)}" data-resolution="${status}" data-selected-resolution="${answer.status}" data-full-resolution="${allAnswer.status}"><div class="conjecture-heading"><button class="lnk stmt" data-${isM ? 'model' : 'result'}="${esc(x.id)}">${statement}</button><span class="resolution ${status}">${verdictLabel(x, status)}</span></div>${requirements}<div class="note">Recorded question: ${sourceBadge(sourceOf(x))} ${esc(x.certificate.date || '')}</div>${evidence}${x.notes ? `<details class="note"><summary>Notes on the recorded question</summary><p>${fmt(x.notes)}</p></details>` : ''}</article>`;
-  };
   const warning = document.getElementById('open-warning');
   warning.hidden = !inconsistent && !allConflict;
   warning.innerHTML = inconsistent ? `<h2>Background is inconsistent</h2><p>These assumptions cannot all hold together. Conjecture resolutions are unavailable until the conflicting assumptions are removed.</p>${conjectureEvidence({via: backgroundConflicts[0].via, models: []})}<p>This check uses proved results under the current evidence filters.</p>` : allConflict ? `<h2>Additional evidence shows the background is inconsistent</h2><p>Verdicts from the selected evidence cannot establish which questions remain open with all recorded evidence.</p>${conjectureEvidence({via: allConflict.via, models: []}, allEvidenceBaseE, 'Background conflict with all recorded evidence')}` : '';
   wire(warning);
-  const visible = questions.filter(q => q.answer.status !== 'incompatible' && (state.showResolved || !['proved', 'refuted'].includes(q.answer.status)));
-  const incompatible = questions.filter(q => q.answer.status === 'incompatible');
-  let h = '<p class="note" id="open-progress" hidden></p>';
-  h += `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Lynchpin conjectures</summary><p class="hint">Open questions ranked by how many other open questions each answer would settle.</p><div class="lynchpin-body"></div></details>`;
-  h += `<details id="open-recorded"${state.recorded ? ' open' : ''}><summary>Recorded conjectures</summary><p class="hint">Background assumptions are omitted from statements; click a question for its full statement.</p>`;
-  h += visible.map(row).join('') || `<p class="empty">${questions.length ? 'No open questions apply to this background. Use “Show resolved” to include resolved questions.' : 'No conjectures have been recorded.'}</p>`;
-  h += '</details>';
-  if (incompatible.length) h += `<details id="open-incompatible"><summary>Incompatible with this background (${incompatible.length})</summary>${incompatible.map(row).join('')}</details>`;
+  let h = `<details id="lynchpins"${state.lynchpins ? ' open' : ''}><summary>Central Questions</summary><p class="hint">Open questions ranked by how much both answers would settle, the harmonic mean of if yes and if no. <span id="open-progress" hidden></span></p><div class="lynchpin-body"></div></details>`;
+  h += `<details id="open-recorded"${state.recorded ? ' open' : ''}><summary>Conjectures</summary><div class="lynchpin-body"></div></details>`;
+  h += `<details id="open-auto"${state.auto ? ' open' : ''}><summary>Automatically Generated Conjectures</summary><p class="hint">Questions ranked by how many questions would be settled by a negative result.</p><div class="lynchpin-body"></div></details>`;
   const el = document.getElementById('open'); el.innerHTML = h;
   wire(el);
-  const lynchpins = document.getElementById('lynchpins'), recorded = document.getElementById('open-recorded');
-  lynchpins.addEventListener('toggle', () => { state.lynchpins = lynchpins.open; renderLynchpins(); });
-  recorded.addEventListener('toggle', () => { state.recorded = recorded.open; });
+  for (const [id, key] of [['lynchpins', 'lynchpins'], ['open-auto', 'auto'], ['open-recorded', 'recorded']]) {
+    const det = document.getElementById(id);
+    det.addEventListener('toggle', () => { state[key] = det.open; renderLynchpins(); });
+  }
   renderLynchpins();
 }
 
@@ -2465,41 +2426,67 @@ function renderProgress() {
   // counted only when no smaller premise set already proves or excludes c, and
   // settled alike by a proof, an exclusion or a fitting model.
   const el = document.getElementById('open-progress'); if (!el) return;
-  const p = state.tab === 'open' && !backgroundConflicts.length ? storedProgress() : null;
+  const p = state.tab === 'open' && !backgroundConflicts.length && allEvidenceE.conflict([]) === null ? storedProgress() : null;
   el.hidden = !p || !p.questions;
   if (el.hidden) { el.textContent = ''; return; }
   const pct = p.open ? Math.min(99, Math.floor(100 * p.settled / p.questions)) : 100;
-  el.textContent = `${pct}% of questions with up to ${p.premises === 2 ? 'two' : p.premises} premises settled.`;
+  el.textContent = `${pct}% of ${p.questions.toLocaleString('en-US')} questions with up to ${p.premises === 2 ? 'two' : p.premises} premises are settled.`;
   el.title = `${p.settled} of ${p.questions} questions S ⊢ c, with S at most ${p.premises} principle classes and c a class or ⊥, are proved, excluded or refuted by a model under this background, using all recorded proved evidence. Computed at build time for the topic background and each preset.`;
 }
-function renderLynchpins() {
-  const el = document.getElementById('lynchpins'); if (!el) return;
-  renderProgress();
-  const body = el.querySelector('.lynchpin-body');
-  if (!el.open || state.tab !== 'open') { body.innerHTML = ''; return; }
-  if (backgroundConflicts.length) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; return; }
-  const stored = DATA.lynchpins || {};
-  if (stored.skipped) { body.innerHTML = '<p class="note">Too few questions are settled to rank the open ones.</p>'; return; }
-  const rep = storedReport(stored.reports);
-  if (!rep) { body.innerHTML = '<p class="note">Ranked at build time for the topic background and each preset only.</p>'; return; }
-  if (rep.inconsistent_background) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; return; }
-  if (!rep.rows.length) { body.innerHTML = '<p class="note">Nothing is open.</p>'; return; }
+const SETTLED = new Set(['proved', 'refuted', 'excluded', 'consistent', 'inconsistent']);
+function rankedTable(rep, rows, mode = 'questions') {
   // The class of theorems is shown as True, as elsewhere in the viewer.
   const trivial = new Set(rep.trivial);
   const pb = id => id === FALSE ? esc(name(FALSE)) : trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
+  // As a recorded conjecture, a row reads in the record's direction: ⊢ for a result, ⊬ for a
+  // model. As an automatically generated one, it reads as the answer to expect: ⊬ when a
+  // proof would be the bigger surprise. Either way the scores are turned to what confirming
+  // or refuting the conjecture would settle.
+  const conjectures = mode !== 'questions';
+  const denies = r => mode === 'recorded' ? r.claim === 'not' : mode === 'auto' ? r.auto_claim === 'not' : false;
+  const rankOf = r => mode === 'auto' ? r.auto_rank : r.rank;
   const stmt = r => r.kind === 'check'
     ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: ${pb(r.principle)}`
-    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ⊢ ${pb(r.conclusion)}`;
+    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ${denies(r) ? '⊬' : '⊢'} ${pb(r.conclusion)}`;
   const key = r => r.kind === 'check' ? `check|${r.model}|${r.principle}` : `q|${r.premises.join('+')}|${r.conclusion}`;
-  // A recorded conjecture that asks the row's question travels with it: a star
-  // says someone has already worked on it, and its notes open beneath.
-  const noted = r => (r.conjectures || []).filter(c => c.notes);
-  const notes = r => noted(r).map(c => `<details class="lynchpin-note"><summary>${esc(c.id)}</summary><div class="prose">${fmt(c.notes)}</div><p><button class="lnk" data-open-${c.kind === 'model' ? 'model' : 'result'}="${esc(c.id)}">details</button></p></details>`).join('');
-  const star = r => noted(r).length ? '<span class="star iridescent" title="A recorded conjecture with notes asks this question">★</span>' : '';
-  // Rows carry their rank, since a row a recorded conjecture asks about is listed even below the stored top.
-  body.innerHTML = `<table class="results lynchpin"><thead><tr><th class="num">#</th><th>Question</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
-    rep.rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${noted(r).length ? ' data-starred="true"' : ''}><td class="num rank">${r.rank ?? ''}</td><td class="stmt">${star(r)}${stmt(r)}${notes(r)}</td><td class="num">${r.yes}</td><td class="num">${r.no}</td></tr>`).join('')}</tbody></table>`;
-  wire(body);
+  // A recorded conjecture that asks the row's question travels with it: a star says
+  // someone has already worked on it, and a link opens the record. Python sets the
+  // tier: bronze for notes, silver or gold when a record ranks it by hand.
+  const links = r => (r.conjectures || []).map(c => `<button class="lnk" data-open-${c.kind === 'model' ? 'model' : 'result'}="${esc(c.id)}" title="${esc(c.id)}">details</button>`).join(' ');
+  const star = r => r.tier ? `<span class="star iridescent ${esc(r.tier)}" title="${esc(r.tier)}: a recorded conjecture asks this question${r.tier === 'bronze' ? '' : ', ranked by importance and difficulty'}">★</span>` : '';
+  const status = r => r.status && r.status !== 'open' ? ` <span class="status">${r.status === 'outside' ? 'more than two premises' : esc(r.verdict || r.status)}</span>` : '';
+  const num = x => x === null || x === undefined ? '—' : x;
+  const scores = r => denies(r) ? [r.no, r.yes] : [r.yes, r.no];
+  return `<table class="results lynchpin"><thead><tr><th class="num">${mode === 'auto' ? '“If no” rank' : 'Rank'}</th><th>${conjectures ? 'Conjecture' : 'Question'}</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
+    rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${r.tier ? ` data-starred="${esc(r.tier)}"` : ''}${r.status && r.status !== 'open' ? ` data-status="${esc(r.status)}"` : ''}${denies(r) ? ' data-claim="not"' : ''}><td class="num rank">${num(rankOf(r))}</td><td class="stmt">${star(r)}${stmt(r)}${status(r)}${links(r) ? ` <span class="links">${links(r)}</span>` : ''}</td><td class="num">${num(scores(r)[0])}</td><td class="num">${num(scores(r)[1])}</td></tr>`).join('')}</tbody></table>`;
+}
+function renderLynchpins() {
+  renderProgress();
+  const stored = DATA.lynchpins || {};
+  // Inconsistent under the selected evidence or under all of it: neither section applies.
+  const inconsistent = backgroundConflicts.length > 0 || allEvidenceE.conflict([]) !== null;
+  const rep = state.tab === 'open' && !inconsistent ? storedReport(stored.reports) : null;
+  for (const [id, key] of [['lynchpins', 'rows'], ['open-auto', 'auto'], ['open-recorded', 'recorded']]) {
+    const el = document.getElementById(id); if (!el) continue;
+    const body = el.querySelector('.lynchpin-body');
+    if (!el.open || state.tab !== 'open') { body.innerHTML = ''; continue; }
+    if (inconsistent) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; continue; }
+    if (T.draft) { body.innerHTML = '<p class="note">A draft topic: nothing is ranked or listed yet.</p>'; continue; }
+    if (key !== 'recorded' && stored.skipped) { body.innerHTML = '<p class="note">Too few questions are settled to rank the open ones.</p>'; continue; }
+    if (!rep) {
+      body.innerHTML = `<p class="note">No ${key === 'recorded' ? 'list' : 'ranking'} is stored for this background: they exist for the topic background and each preset. <button class="lnk" data-lynchpin-reset>Clear the background</button> to see one.</p>`;
+      body.querySelector('[data-lynchpin-reset]').addEventListener('click', resetBackground);
+      continue;
+    }
+    if (rep.inconsistent_background) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; continue; }
+    const rows = key === 'recorded' ? (rep.recorded || []).filter(r => state.showResolved || !SETTLED.has(r.status)) : (rep[key] || []);
+    if (!rows.length) {
+      body.innerHTML = `<p class="note">${key !== 'recorded' ? 'Nothing is open.' : (rep.recorded || []).length ? 'Every recorded conjecture is settled; Show resolved lists them.' : 'No conjectures have been recorded.'}</p>`;
+      continue;
+    }
+    body.innerHTML = rankedTable(rep, rows, key === 'rows' ? 'questions' : key);
+    wire(body);
+  }
 }
 
 // ---------------------------------------------------------------- write-up page
@@ -2907,7 +2894,7 @@ function renderHeader() {
   navigation.replaceChildren(...(DATA.navigation || []).map(item => {
     const link = document.createElement('a'); link.href = item.url; link.textContent = item.label; return link;
   }));
-  document.getElementById('subtitle').textContent = (T.description || '').trim();
+  const subtitle = document.getElementById('subtitle'); subtitle.textContent = (T.description || '').trim(); subtitle.hidden = !subtitle.textContent;
   const dl = DATA.downloads || {};
   const downloadLinks = [
     [DATA.repository_url, 'GitHub', 'Browse the Logical Maps repository.'],

@@ -28,7 +28,7 @@ part of the framework rather than separate extension nodes.
 | §2.3, pp. 31–32 | Functional Choice = Plenitude + Relational Choice |
 | Propositions 2.13–2.16, pp. 32–33 | Plenitude, ND, Actuality, completeness and Rigid Comprehension |
 | §2.3, p. 33 | Boxed equivalences and C5 + Atomicity package |
-| §§2.4–2.5, pp. 35–40 | Distinctness, Possibility, Separated Structure, Witnessed Possibility, Logical Necessity |
+| §§2.4–2.5, pp. 35–40 | Distinctness Maximalism, Possibility Maximalism, Separated Structure, Witnessed Possibility, Logical Necessity |
 | §2.6, pp. 41–42 | Maximalist incompatibilities, Possibility+, Strong Possibility |
 | §3.5, pp. 59–61 | Full action-model examples and pure-sentence B |
 | Appendix D, Proposition D.5, pp. 74–79 | Eight finite-support packages and two multiple-object examples |
@@ -84,7 +84,7 @@ instantiated as $(et)t$ (see Background).
 | §3, Definitions 1 and 6, pp. 7–8, 13 | Countable Boolean Completeness; Boolean Completeness restricts to it |
 | §4, Definitions 3–5 and 8, pp. 11–13, 19 | The arithmetical vocabulary, $I$, arithmetical sentences |
 | §5, Lemmas 2–8 and Theorem 9, pp. 14–21 | Countable Boolean Completeness implies the Necessity of Arithmetic |
-| §6, Theorem 11, pp. 24–26 | Possibility (pure) is incompatible with the Necessity of Arithmetic, hence with Countable and full Boolean Completeness and with Rigid Comprehension |
+| §6, Theorem 11, pp. 24–26 | Possibility Maximalism (pure) is incompatible with the Necessity of Arithmetic, hence with Countable and full Boolean Completeness and with Rigid Comprehension |
 
 Theorems 10 (arithmetical signatures) and the truth-predicate extension of
 §5.3 are not imported. The consistency of C with $I$, assumed in the
@@ -140,4 +140,4 @@ The rest of chapter 8 restates material already imported from Classicism.
 Chapter 18's coherence results (Corollary 18.2, Proposition 18.8,
 Corollaries 18.3–18.4, Propositions 18.9–18.11) concern maximalizations of
 extensions of C other than C itself; whether to record them as relativized
-Possibility principles awaits a decision.
+Possibility Maximalism principles awaits a decision.

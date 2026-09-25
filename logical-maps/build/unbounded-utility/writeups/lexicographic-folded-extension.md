@@ -246,6 +246,26 @@ pp. 33–37; *Unbounded Utility and Background Risk*, unpublished manuscript,
 §3, pp. 7–8 (the base area preorder only). Model adaptation and proofs:
 GPT-6 (Codex), 9 September 2026.
 
+## Rational factors
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The scaling reversal in
+§5 is a doubling: $A\succ-1/2$ while $2A\prec-1$, so the pair $(A,-1/2)$
+fails invariance at the factor $2$. The model therefore also fails Rational
+Scale Invariance, the restriction of Scale Invariance to rational factors.
+The same doubling refutes Integer Affine Preservation: $A\succ-1/2$ is not
+carried to $2A\succeq-1$. Since the model satisfies Rich Outcomes and
+Stochastic Equivalence, the recorded implication
+[comonotonic-sum-implies-integer-affine-preservation](comonotonic-sum-implies-integer-affine-preservation.html)
+shows that Comonotonic Sum Invariance fails here. The failure is derived; no
+explicit comonotonic witness is recorded.
+
+## Integer-ratio self-similarity
+
+**Addition: Claude (Fable 5.1), 24 September 2026.** The uniqueness witness
+above has ratio $a=2$, so the model also fails Uniqueness of Negative
+Self-Similarity (integer ratios), the restriction of the principle to integer
+ratios.
+
 ## Paper references
 
 - **Background: [Symmetries of value](https://doi.org/10.1111/nous.12549).** Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. — pp. 27–29; alternating St Petersburg and negative self-similarity, pp. 29–31; cone-extension framework, §5, pp. 33–37

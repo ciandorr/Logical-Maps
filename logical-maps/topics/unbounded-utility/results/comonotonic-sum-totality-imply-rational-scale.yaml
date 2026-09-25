@@ -1,0 +1,34 @@
+id: comonotonic-sum-totality-imply-rational-scale
+premises:
+- rich-outcomes
+- totality
+- stochastic-equivalence
+- comonotonic-sum-consistency
+conclusion: rational-scale-invariance
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: Zachary Goodsell (iterated-addition argument) and Claude (Fable 5.1) (comonotonic copies, cancellation step and write-up), 2026-09-24
+  checked_by: []
+  date: '2026-09-24'
+  recorded_by: Claude (Fable 5.1), 2026-09-24
+proof: |-
+  By Stochastic Equivalence replace Y by its comonotonic copy $Y^\dagger=Q_Y(U)$ on a uniform U with $X=Q_X(U)$; all comparisons below are unchanged. For an integer $k\ge 1$ put $W_j=jX+(k-j)Y^\dagger$ for $0\le j\le k$ (Rich Outcomes supplies these gambles). Then $W_{j+1}=X+Z_j$ and $W_j=Y^\dagger+Z_j$ with $Z_j=jX+(k-j-1)Y^\dagger$ comonotonic with both, so by Comonotonic Sum Invariance $W_{j+1}\succeq W_j$ iff $X\succeq Y$. Chaining, $X\succeq Y$ gives $kX\succeq kY$, and $X\succ Y$ gives $kX\succ kY$ (if $kY\succeq kX$, transitivity along the chain would give $W_0\succeq W_1$, contradicting $Y\not\succeq X$). Cancellation: if $kX\succeq kY$ but $X\not\succeq Y$, Totality gives $Y\succ X$, hence $kY\succ kX$, a contradiction. So $X\succeq Y$ iff $kX\succeq kY$ for every positive integer k. For $a=m/n$ apply this twice: $X\succeq Y$ iff $mX\succeq mY$ iff $n(aX)\succeq n(aY)$ iff $aX\succeq aY$. The write-up gives the details and shows that each premise is used.
+sources:
+- 'Zachary Goodsell, Logical Maps session, 24 September 2026: claim that Comonotonic Sum Invariance implies
+  Positive Affine Invariance, with the doubling argument 2A = A + A ≽ B + A ≽ B + B = 2B for the scale step.'
+- 'Claude (Fable 5.1), Logical Maps, 24 September 2026: comonotonic-copy reduction, strict chain, Totality
+  cancellation step and the rational-factor assembly, in writeups/comonotonic-sum-totality-imply-rational-scale.md.'
+- Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not
+  cite” and erroneous; §6.2, p. 18; definitions on pp. 3–4
+source_names:
+- Goodsell argument 24 Sep
+- Claude proof 24 Sep
+- Unbounded Utility and Background Risk (unpublished)
+notes: |-
+  Original connecting proof. Stochastic Equivalence is needed because the doubling step adds A to both sides of A ≽ B, which requires B to be comonotonic with A; Rich Outcomes supplies the mixed sums jX + (k − j)Y; Totality is used only for cancellation (kX ≽ kY ⇒ X ≽ Y). Without Totality cancellation fails: the model cdf-area-unit-threshold satisfies the other three premises together with Simple EU and Stochastic Dominance and violates the conclusion. With the recorded comonotonic-sum-implies-shift and Rich Outcomes, the same package gives invariance under every map aX + b with rational a > 0. It does not give real factors: lexicographic-hamel-tie-break satisfies these premises, Archimedean Outcomes, Stochastic Dominance and Simple EU and violates Scale Invariance; the real-factor question under DTU is conjectured-dtu-comonotonic-imply-scale. No independent checker or Lean verification is claimed.
+references:
+- paper: unpublished-background-risk
+  role: background
+  locator: §6.2, p. 18; definitions on pp. 3–4

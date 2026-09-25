@@ -101,6 +101,38 @@ Mixture and Simple Relative Expectation. Expected Utility already fails in
 this model; the same pair, being integrable with equal means, is a second
 witness.
 
+## Failure of Comonotonic Sum Invariance
+
+**Addition: Claude (Fable 5.1), 23 September 2026.** The flag was already
+derived from the shift failure above; this is an explicit witness, not a
+claim made in the source paper.
+
+Realize a standard Cauchy variable as $C=Q_C(U)=\tan(\pi(U-\tfrac12))$ and
+put $X=0$, $Y=C$, $Z=C_+=\max(C,0)$, all nondecreasing in $U$, so both pairs
+$(X,Z)$, $(Y,Z)$ are comonotonic. Oddness of $c_t$ gives $v_C(t)=0=v_0(t)$
+for every $t$, hence $X\sim Y$.
+
+**Doubling-defect identity.** For any nonnegative random variable $V$ and
+any $F>0$,
+
+$$2\,\mathbb E[\min(V,F)]-\mathbb E[\min(2V,F)]
+ =2\int_{F/2}^{F}P(V>x)\,dx,$$
+
+since $\mathbb E[\min(V,F)]=\int_0^F P(V>x)\,dx$ and
+$\mathbb E[\min(2V,F)]=2\int_0^{F/2}P(V>x)\,dx$. For $V=C_+=\max(C,0)$ with
+$C$ standard Cauchy the right-hand side is
+$\frac2\pi\int_{F/2}^{F}\arctan(1/x)\,dx$, which is positive for every $F$
+and increases to $\frac{2\ln2}{\pi}$ as $F\to\infty$.
+
+With $X+Z=C_+$, $Y+Z=2C_++C_-$ ($C_-=\min(C,0)$) and
+$\mathbb E[\max(C_-,-t)]=-\mathbb E[\min(C_+,t)]$,
+
+$$v_{X+Z}(t)-v_{Y+Z}(t)=2\int_{t/2}^{t}P(C>x)\,dx>0\qquad(t>0),$$
+
+so $X+Z\succeq Y+Z$ holds for all $t$ and $Y+Z\succeq X+Z$ fails for all $t$:
+$X+Z\succ Y+Z$ while $X\sim Y$. `checks/comonotonic_witnesses.py` verifies
+the calculation.
+
 ## Paper references
 
 - **Proof: [Decision theory unbound](https://doi.org/10.1111/nous.12473).** Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. — Theorem 2, pp. 683–685; Theorems 7 and 9, p. 693

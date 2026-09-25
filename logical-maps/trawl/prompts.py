@@ -1,4 +1,16 @@
-VERSION = "theorem-trawl-workspace-v3"
+VERSION = "theorem-trawl-workspace-v5"
+
+OUTPUT_LIMIT = """Your previous response reached a length limit (generation
+allowance: {output_limit} tokens). Its incomplete text, reasoning and tool calls
+were not applied. The full response and its exposed reasoning have been archived
+for separate curator review. Previously saved files and completed tool results remain.
+Defer that line of investigation for this trawl: do not resume the same long
+argument or reconstruct its archived reasoning. Briefly record the blocker
+and any already-supported partial progress in work/notes/progress.md, then pick
+a different tractable question from the central list. This is a trawl for easy
+contributions, not a sustained attack on the hardest theorem. Save useful pieces
+early. If no tractable work remains in this workspace, finish the pass honestly.
+"""
 
 DISCOVER = """Investigate this mathematical database in a persistent quarantine
 workspace. Systematically collect all useful contributions you can substantiate,
@@ -6,6 +18,18 @@ including easy omitted theorems, connecting lemmas, countermodels, corrections,
 and newly established model properties. There is no contribution-count quota.
 Use the central question list to prioritize work; the scheduled question is a
 starting point. Sweep for readily obtainable results across the list.
+
+Optimize for broad coverage of low-hanging fruit, not the most impressive
+theorem. Centrality sets a search order, not an obligation to solve a hard
+question. If a line of thought would take anything like 64K tokens to reason
+through, it is too expensive for this trawl. Defer it much earlier: save the
+precise question, supported partial results and blocker, then move on to another
+tractable question. Do not repeatedly return to a deferred hard problem in later
+passes without materially new evidence that makes it easy. Use the Python tools
+for consequences already in the map; do not spend a pass manually copying flags
+or adding redundant rules that the engine already derives. There is no quota on
+useful findings. Work in short stages that end with saved files or a clear move
+to another question, rather than a long uninterrupted internal proof attempt.
 
 Your deliverable is the files you save as you work. Create or edit the copied
 YAML records under work/logical-maps/topics/, add Markdown proofs in writeups/,
@@ -24,8 +48,18 @@ completed workspaces. Do not recover them through Git history, GitHub, or anothe
 tool. Work only in this assigned, unfinished workspace and its published source
 references. Its own saved files and progress notes remain available when work
 resumes after a budget stop. Setup instructions live outside historical logs.
+Long unfinished responses are preserved separately for curator review; this
+does not grant discovery access to the unfinished-response archive.
 
 Read the relevant topic guide, framework and definitions before proving claims.
+The initial packet supplies exact start_here paths and the topic_directory.
+Use those paths directly; do not repeatedly list the repository root. list_files
+shows immediate children unless recursive=true is explicitly needed for a
+specific subtree. No progress note exists in a fresh workspace: create
+work/notes/progress.md as you learn definitions, inspect evidence and choose next
+steps. Do not keep trying to read a nonexistent note. After context compaction,
+use retained tool results and activity metadata to continue the investigation;
+save a substantive progress note before more broad exploration.
 The original full ranked question list is available through central_questions
 and reference/central-questions.json. Run recompute_central_questions after
 editing mathematical records to rank the remaining questions with pmap.Lynchpins.

@@ -129,3 +129,76 @@ diagnostics for the analytic witness used to establish these failures.
 Comonotonic Sum Invariance and other unproved properties are left open;
 they are not inherited automatically merely because they hold in the
 unsaturated area preorder.
+
+## Partial self-similarity analysis
+
+**Added 25 September 2026; the self-similarity verdict remains open.**
+DeepSeek (`deepseek-flash`) proposed this line of analysis in the theorem
+trawl. GPT-6 (Codex) checked the following restricted claims, supplied the
+explicit lower-tail bound, and removed the draft's unsupported universal
+conclusion. This review concerns the addition, not a new audit of the
+original construction, and supplies no Lean verification.
+
+Let $A$ be alternating St Petersburg and $c=-1/2$. As verified for the
+[exact area model](cdf-area-preorder.html), both satisfy
+$V\sim F(V)$ with $F(V)=M_{1/2}(-2V,-2)$; those comparisons also hold in
+this conclosure. Negative Affine Anti-Invariance (from the two inherited
+symmetries) and Mixture Independence imply
+
+$$X\succ Y\quad\Longrightarrow\quad F(Y)\succ F(X).$$
+
+If two fixed points were strictly ordered, substituting their indifferences
+would give the opposite strict order, contradicting transitivity. Thus two
+fixed points are either indifferent or incomparable. In particular, with
+$E=S_A-S_c$,
+
+$$A\sim_Dc\quad\Longleftrightarrow\quad
+ E\in D\cap(-D)\quad\Longleftrightarrow\quad E\in D.$$
+
+The last equivalence uses the impossibility of a strict comparison for
+this pair. By the definition of conclosure, deciding it amounts to deciding
+whether some probability law $\xi$ satisfies $T_\xi E\in C$. If $Z$ has
+law $\xi$ and is independent of $A$, then
+
+$$T_\xi E=S_{A+Z}-S_{Z-1/2}.$$
+
+Both requirements of the cone remain necessary: the negative part must
+have finite integral, and its integral must not exceed the positive area.
+
+### Kernels with a light lower tail cannot work
+
+Suppose $\Pr(Z\le-t)=o(1/t)$ as $t\to\infty$. Choose $M\ge0$ with
+$q=\Pr(Z\le M)>0$. For $t\ge2$, choose the smallest negative-atom
+magnitude $b=2^{2k+1}\ge t$. It satisfies $b<4t$, so
+
+$$\Pr(A\le-t)\ge\Pr(A=-b)=1/b\ge1/(4t).$$
+
+Independence therefore gives, for sufficiently large $u\ge M$,
+
+$$\Pr(A+Z\le-u)\ge q\Pr(A\le-u-M)
+  \ge\frac{q}{4(u+M)}\ge\frac{q}{8u}.$$
+
+Writing $h=T_\xi E$, we have
+
+$$-h(-u)=\Pr(A+Z\le-u)-\Pr(Z\le-u+1/2)
+  \ge\frac{q}{16u}$$
+
+for all sufficiently large $u$, because the second probability is
+$o(1/u)$. Hence $\int h_-=\infty$ and this kernel cannot witness
+$E\in D$. This includes constants, kernels bounded below, and kernels
+with finite expected negative part. It does not exhaust arbitrary
+probability laws or impose a power-law form on the remaining kernels.
+
+Finding a successful kernel would settle **this pair's** indifference
+and, by Stochastic Equivalence, the alternating St Petersburg evaluation
+in this model. It would not prove either universal self-similarity axiom
+or the Pasadena evaluation. Conversely, excluding every kernel would make
+this pair a counterexample to both self-similarity axioms. Neither of those
+global conclusions has been established; no model-property flag is added.
+
+The original proposal and its unfinished long response remain in quarantine,
+under `checkpoint-4efdb29afea94da583b8df9975e053e4` and
+`unfinished/trawl-8b97ab5120b042c4811b0d9f70fe0695.md`. They are not proofs
+of the remaining question. The YAML certificate retains the actual
+DeepSeek discovery metadata and the separately dated, scoped GPT-6 review
+and local admission record.

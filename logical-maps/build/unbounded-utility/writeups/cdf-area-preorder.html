@@ -309,6 +309,36 @@ A_-=\int_0^1(Q_Y(u)-Q_X(u))_+\,du.</span></p>
 <p>Full and Antitonic Sum Invariance fail by the recorded St Petersburg arguments, which require only Rich Outcomes and Stochastic Dominance. See <a href="dominance-refutes-full-sum.html">the full-sum witness</a> and <a href="dominance-refutes-antitonic-sum.html">the antitonic witness</a>.</p>
 <p>The executable check <code>checks/background_risk.py</code> tests finite-law area and quantile identities, mixture behavior, the convolution-overlap example, and exact St Petersburg tail identities. It is a sanity check, not a numerical proof about all distributions or any transfinite extension.</p>
 <p>See also the <a href="symmetric-dtu-refutes-independent-sum-candidate.html">source inventory and failed-claim audit</a>.</p>
+<h2 id="further-failures-found-by-the-theorem-trawl">Further failures found by the theorem trawl</h2>
+<p><strong>Added 25 September 2026.</strong> DeepSeek (<code>deepseek-flash</code>) proposed the five failures below. GPT-6 (Codex) independently checked the arguments, corrected the shifted-moment calculations for Pasadena and Arroyo, and recorded the claims as properties of this model. The construction remains Goodsell’s. This addition has informal model review, not Lean verification; the earlier verification statements describe the original record. The earlier model statement was marked <code>stated</code>, not <code>verified</code>. Its expanded statement now includes the integer-ratio principle without a Lean definition, so the amended record is marked <code>lean: none</code>.</p>
+<p>For any real-valued <span class="math inline">V</span> and sure constant <span class="math inline">c</span>, Tonelli’s tail identities give</p>
+<p><span class="math display">\int(S_V-S_c)_+=E[(V-c)^+],\qquad
+  \int(S_V-S_c)_-=E[(c-V)^+].\tag{2}</span></p>
+<p>If both quantities are infinite, this exact preorder leaves <span class="math inline">V</span> and <span class="math inline">c</span> incomparable. The following calculations use the individual nonnegative moments, never their undefined difference.</p>
+<h3 id="alternating-st-petersburg-and-negative-self-similarity">Alternating St Petersburg and negative self-similarity</h3>
+<p>Let <span class="math inline">\Pr(A=(-2)^n)=2^{-n}</span> for <span class="math inline">n\ge1</span>, and let <span class="math inline">c=-1/2</span>. Then</p>
+<p><span class="math display">E[(A+\tfrac12)^+]
+  =\sum_{k\ge1}\left(1+2^{-(2k+1)}\right)=\infty,</span></p>
+<p><span class="math display">E[(-\tfrac12-A)^+]
+  =\sum_{k\ge0}\left(1-2^{-(2k+2)}\right)=\infty.</span></p>
+<p>Consequently <span class="math inline">A</span> and <span class="math inline">c</span> are incomparable, so the model fails Alternating St Petersburg <span class="math inline">=-1/2</span>.</p>
+<p>They are also two fixed points in value of the same map <span class="math inline">F(V)=M_{1/2}(-2V,-2)</span>. For <span class="math inline">A</span>, the mixture puts probability <span class="math inline">1/2</span> on <span class="math inline">-2</span> and probability <span class="math inline">2^{-m}</span> on <span class="math inline">(-2)^m</span> for every <span class="math inline">m\ge2</span>. This is exactly the law of <span class="math inline">A</span>, so Stochastic Equivalence gives <span class="math inline">A\sim F(A)</span>. For <span class="math inline">c</span>, the simple mixture <span class="math inline">F(c)=M_{1/2}(1,-2)</span> has expectation <span class="math inline">-1/2</span>, so Expected Utility gives <span class="math inline">c\sim F(c)</span>. Nevertheless <span class="math inline">A\not\sim c</span>. Thus the instance <span class="math inline">p=1/2</span>, <span class="math inline">a=2</span>, <span class="math inline">b=0</span>, <span class="math inline">Z=-2</span> refutes both the integer-ratio and real-ratio Uniqueness of Negative Self-Similarity axioms <strong>in this model</strong>.</p>
+<h3 id="pasadena-and-arroyo">Pasadena and Arroyo</h3>
+<p>Put <span class="math inline">c=\ln2\in(0,1)</span>. For Pasadena, with <span class="math inline">\Pr(P=-(-2)^n/n)=2^{-n}</span>, the positive atoms have odd indices and the negative atoms have even indices. Equation (2) becomes</p>
+<p><span class="math display">E[(P-c)^+]=\sum_{k\ge1}
+  \left(\frac{1}{2k-1}-c\,2^{-(2k-1)}\right)=\infty,</span></p>
+<p><span class="math display">E[(c-P)^+]=\sum_{k\ge1}
+  \left(\frac{1}{2k}+c\,2^{-2k}\right)=\infty.</span></p>
+<p>The odd and even harmonic subseries diverge; the terms involving <span class="math inline">c</span> have finite sums. This also corrects the missing denominator <span class="math inline">2k-1</span> in the trawl’s displayed positive-area calculation.</p>
+<p>For Arroyo, with <span class="math inline">\Pr(R=(-1)^{n+1}(n+1))=1/(n(n+1))</span>, the corresponding expressions are</p>
+<p><span class="math display">E[(R-c)^+]=\sum_{\substack{n\ge1\\ n\text{ odd}}}
+  \left(\frac1n-\frac{c}{n(n+1)}\right)=\infty,</span></p>
+<p><span class="math display">E[(c-R)^+]=\sum_{\substack{n\ge1\\ n\text{ even}}}
+  \left(\frac1n+\frac{c}{n(n+1)}\right)=\infty.</span></p>
+<p>Here the corrections are summable because <span class="math inline">\sum_{n\ge1}1/(n(n+1))=1</span>. They were omitted from the trawl’s equalities; retaining them leaves the divergence conclusion intact. Both gambles are incomparable with <span class="math inline">\ln2</span> in this preorder, establishing failure of the Pasadena and Arroyo evaluation principles.</p>
+<p>These are counterexamples to implications, not universal incompatibilities between the model’s positive properties and the failed axioms. In particular, CDF-Area Extension leaves both-infinite pairs unconstrained; extensions of this exact preorder can add comparisons. The four proposed contradiction records were therefore not imported. No conclusion about conclosure or Independent Sum Cancellation follows from these calculations.</p>
+<p>The added cases in <code>checks/background_risk.py</code> check the law recursion and exact finite-prefix area identities, including the shifted harmonic terms. They are arithmetic diagnostics; the divergent-series arguments above establish the infinite-law failures.</p>
+<p>The original quarantine evidence is <code>checkpoint-4efdb29afea94da583b8df9975e053e4</code>, discovered on source revision <code>3d673577f8d071e7230a61ce36d028d4d5a14c38</code>. The runner identifies the actual discoverer as <code>deepseek-flash</code>, correcting the draft’s Claude attribution. The model’s <code>certificate.trawl</code> records the corrected checkpoint, scoped review, admission time, original response identity and evidence references.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
 <li><strong>Proof: Unbounded Utility and Background Risk.</strong> Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. — §3, pp. 7–8; Theorems 6–7, pp. 19–20</li>

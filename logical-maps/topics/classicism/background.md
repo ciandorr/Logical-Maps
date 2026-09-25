@@ -162,6 +162,20 @@ subrelation; Functional Choice selects an operation. An operation's output
 type must differ from $e$. Relational Choice also covers relations with
 individual outputs, since such a relation still ends in $t$.
 
+For $R^{\sigma\sigma t}$, at any type $\sigma$ including $e$,
+
+$$
+\operatorname{Equiv}(R):=\forall x^\sigma\, .\,(Rx)x\;\land\;
+\forall x^\sigma y^\sigma\, .\,(Rx)y\to(Ry)x\;\land\;
+\forall x^\sigma y^\sigma z^\sigma\, .\,(Rx)y\land(Ry)z\to(Rx)z.
+$$
+
+The cell of $x$ is the property $\lambda z\, .\,(Rx)z$. Transversal Choice
+asks for a property with exactly one instance in each cell. The equivalence
+conditions and the transversal condition are unboxed, so they concern the
+evaluation point only. Two members of one cell have coextensive cells, but
+in C properties are identical only when necessarily coextensive.
+
 Strong and weak worlds follow Bacon, *A Philosophical Introduction to
 Higher-Order Logics*, §8.2, pp. 165–166. At a relational type $\sigma$, with
 $\Diamond_\sigma X:=X\ne\bot_\sigma$,

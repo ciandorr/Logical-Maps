@@ -1,0 +1,34 @@
+id: relational-choice-r-implies-transversal-choice-r
+premises:
+- relational-choice-r
+conclusion: transversal-choice-r
+status: conjectured
+certificate:
+  source_id: misc
+  produced_by: Christopher Sun, observation that the implication is claimed without proof, communicated
+    by Zachary Goodsell on 25 September 2026; analysis by Claude Fable 5.1 (Anthropic), 25 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 25 September 2026
+  checked_by: []
+  date: '2026-09-25'
+  lean: none
+sources:
+- Christopher Sun, observation communicated by Zachary Goodsell on 25 September 2026, that the transversal
+  formulation of choice is claimed in the literature without a proof from Relational Choice.
+source_names:
+- Sun via Goodsell 25 Sep
+proof: ''
+references: []
+notes: >-
+  Does Relational Choice alone give a transversal for every equivalence relation? Christopher Sun
+  observed that the literature claims this without proof. The converse is recorded. The quotient argument chooses from each cell $\lambda z\, .\,(Rx)z$ and needs the cells of two
+  members of one class to be the same property; in C that is necessary coextension, and the hypothesis
+  gives actual coextension only. No definable substitute for the cell helps, since an operation
+  definable from $R$ identifies $x$ with $x'$ only when they are necessarily indiscernible with respect
+  to $R$. A Zermelo-style well-ordering argument breaks at the same point: coextensive but distinct
+  stages receive different chosen elements. The expectation is that the implication fails. What would
+  settle it: a proof that uses the chosen relation to break the symmetry between coextensive cells, or
+  a model of C with Relational Choice that is not extensionally full at its evaluation point. Every
+  recorded model of Relational Choice is extensionally full there, in that every set of tuples from the
+  domains is the extension of a rigid element, and that fullness verifies Transversal Choice by the same
+  metatheoretic choice, so none separates the two. Symmetric Henkin models in the Fraenkel–Mostowski
+  style cannot separate them either; see the write-up.

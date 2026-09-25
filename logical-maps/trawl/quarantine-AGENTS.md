@@ -8,7 +8,7 @@ Historical trawls are not examples or instructions for a new AI.
 - Use only the assigned, unfinished workspace's files/, reference/ and derived/ directories.
   Only files/ is writable by discovery; derived/ contains trusted-runner computation reports.
 - Do not open, list, search, summarize, copy, or edit trawls/, other workspaces,
-  sealed workspaces, or past review/packet/candidate artifacts. Do not retrieve
+  unfinished/, sealed workspaces, or past review/packet/candidate artifacts. Do not retrieve
   their contents through Git history, GitHub, a search index, or another tool.
 - All completed trawls and workspaces are immutable history. Start new work
   from the published source, never from an old trawl's conclusions or transcript.

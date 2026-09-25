@@ -128,6 +128,7 @@ def create(quarantine, settings, snapshot, source, task, ranked):
         "If SEALED.json exists, this entire workspace is closed to discovery.\n")
     state_save(folder, {"status": "active", "messages": [], "pending": None,
                        "profile": c.actor(settings["discovery"]), "last_note": "",
+                       "prompt_version": prompts.VERSION,
                        "pass_number": 1, "pass_start_sha256": pass_digest(folder)})
     return folder, manifest
 
@@ -143,8 +144,19 @@ def initial_prompt(folder, manifest, settings):
             rows.append(selected)
         listing = {**listing, "rows": rows, "included": len(rows),
                    "omitted": listing["total_open"] - len(rows)}
+    topic = "work/logical-maps/topics/" + manifest["task"]["topic"]
+    question = manifest["task"]["question"]
+    start = ["work/logical-maps/AGENTS.md", topic + "/AGENTS.md", topic + "/topic.yaml", topic + "/background.md"]
+    if question.get("model"):
+        start.append(topic + "/models/" + c.slug(question["model"]) + ".yaml")
+    principles = set(manifest["task"]["assumptions"] + question.get("premises", []))
+    principles.update({question.get("principle"), question.get("conclusion")} - {None, False, c.pmap.FALSE})
+    start.extend(topic + "/principles/" + c.slug(pid) + ".yaml" for pid in sorted(principles))
+    start = [path for path in start if resolve_tool_path(folder, path).is_file()]
     return json.dumps({"workspace": manifest["id"], "source": manifest["source"],
         "question": manifest["task"], "central_questions": listing,
+        "topic_directory": topic, "start_here": start,
+        "progress_note_exists": resolve_tool_path(folder, "work/notes/progress.md").is_file(),
         "paths": {"work/": "editable copies, new YAML files, writeups, evidence and notes",
                   "reference/source/": "read-only published files at the pinned source commit",
                   "reference/schema/": "read-only database schemas",
@@ -163,8 +175,8 @@ PAGE = {"offset": {"type": "integer", "minimum": 0}, "limit": {"type": "integer"
 COMPUTE = {"topic": STRING, "scope": {"enum": ["work", "reference"]}, "background": STRING}
 IDS = {"type": "array", "items": STRING, "uniqueItems": True}
 FUNCTIONS = [
-    {"name": "list_files", "description": "List files under work/, reference/ or derived/. Paginated; no total-file quota.",
-     "parameters": schema({"path": STRING, **PAGE}, ("path",))},
+    {"name": "list_files", "description": "List immediate files/directories under work/, reference/ or derived/. Directory paths end in /. Use recursive=true only for a needed subtree. Paginated; no total-file quota.",
+     "parameters": schema({"path": STRING, "recursive": {"type": "boolean"}, **PAGE}, ("path",))},
     {"name": "read_file", "description": "Read UTF-8 text at work/, reference/ or derived/; offset and limit are characters.",
      "parameters": schema({"path": STRING, "offset": {"type": "integer", "minimum": 0},
                            "limit": {"type": "integer", "minimum": 1, "maximum": 48000}}, ("path",))},
@@ -244,11 +256,13 @@ def execute_tool(folder, manifest, call, metadata, index):
             elif name == "list_files":
                 root = resolve_tool_path(folder, args["path"], directory=True)
                 paths = []
-                for path in sorted(root.rglob("*")):
+                recursive = args.get("recursive", False)
+                for path in sorted(root.rglob("*") if recursive else root.iterdir()):
                     if path.is_symlink():
                         raise ValueError("workspace contains a symlink")
-                    if path.is_file():
-                        paths.append(args["path"].rstrip("/") + "/" + path.relative_to(root).as_posix())
+                    if path.is_file() or not recursive:
+                        paths.append(args["path"].rstrip("/") + "/" + path.relative_to(root).as_posix()
+                                     + ("/" if path.is_dir() else ""))
                 start, limit = args.get("offset", 0), args.get("limit", 200)
                 result = {"paths": paths[start:start + limit], "total": len(paths), "offset": start}
             elif name == "read_file":
@@ -274,6 +288,145 @@ def execute_tool(folder, manifest, call, metadata, index):
     except (ValueError, OSError, KeyError, TypeError, c.yaml.YAMLError, jsonschema.ValidationError) as error:
         result = {"error": str(error)[:1000]}
     c.save(receipt, {"at": c.now(), "call": call, "result": result})
+    return result
+
+
+def activity(messages):
+    """Summarize the current conversation, never reread audit archives."""
+    calls, result = {}, []
+    for message in messages:
+        for call in message.get("tool_calls") or []:
+            function = call["function"]
+            try:
+                arguments = json.loads(function["arguments"])
+            except (ValueError, TypeError):
+                arguments = {}
+            calls[call["id"]] = (function["name"], arguments)
+        content = message.get("content")
+        if isinstance(content, list):
+            for block in content:
+                if block.get("type") == "tool_use":
+                    calls[block["id"]] = (block["name"], block["input"])
+            outputs = [(block["tool_use_id"], block["content"]) for block in content if block.get("type") == "tool_result"]
+        elif message.get("role") == "tool":
+            outputs = [(message["tool_call_id"], content)]
+        else:
+            outputs = []
+        for call_id, raw in outputs:
+            if call_id not in calls:
+                continue
+            name, args = calls[call_id]
+            if not isinstance(args, dict):
+                args = {}
+            try:
+                value = json.loads(raw)
+            except (ValueError, TypeError):
+                continue
+            if not isinstance(value, dict):
+                continue
+            # File contents already live in the workspace. Keep read results
+            # below, but never duplicate a large write payload in the summary.
+            result.append({"tool": name, "arguments": {k: v for k, v in args.items()
+                           if k not in ("content", "old_text", "new_text")}, "result": value})
+    return result
+
+
+def resume_note(folder):
+    if resolve_tool_path(folder, "work/notes/progress.md").is_file():
+        return "Continue from saved files and work/notes/progress.md. "
+    return ("No progress note exists yet. Use the exact start_here paths; do not search for notes "
+            "or rediscover the repository. Create work/notes/progress.md as you learn useful facts. ")
+
+
+def compact_messages(folder, state, profile, initial, output_limit, max_chars):
+    """Keep the latest complete tool exchanges; summarize only what must be dropped.
+
+    In particular, never discard a just-read file and replace it with a request
+    to read a missing progress note. Retained assistant reasoning/tool blocks
+    stay intact for providers that require them during a tool continuation.
+    """
+    messages = state["messages"]
+    recent = activity(messages)
+    memory = state.get("context_memory", [])
+    for item in recent:
+        summary = {"tool": item["tool"], "arguments": item["arguments"],
+                   "result": {k: v for k, v in item["result"].items()
+                              if k in ("error", "saved", "sha256", "offset", "total", "total_chars", "report", "valid")}}
+        memory = [old for old in memory if (old["tool"], old["arguments"]) != (summary["tool"], summary["arguments"])]
+        memory.append(summary)
+    while len(json.dumps(memory, ensure_ascii=False)) > 2500:
+        memory.pop(0)
+    state["context_memory"] = memory
+    notice = {"role": "user", "content": "Earlier conversation compacted. " + resume_note(folder)
+              + "Use the retained tool results below; do not restart directory discovery. Save a progress note "
+              "with relevant definitions, evidence and next steps before doing more broad exploration. "
+              + "Recent activity (metadata, not mathematical verification): " + json.dumps(memory, ensure_ascii=False)}
+    if state.get("output_limit_notice"):
+        notice["content"] += "\n" + state["output_limit_notice"]
+    prefix = [initial, notice]
+
+    def fits(value):
+        body = providers.prepare_agent(profile, prompts.DISCOVER, value, output_limit, FUNCTIONS)
+        return len(json.dumps(body, ensure_ascii=False)) <= max_chars
+
+    # Preserve a contiguous suffix beginning with an assistant message, so
+    # neither protocol receives orphan tool results or missing call IDs.
+    retained = []
+    for index in reversed(range(len(messages))):
+        if messages[index].get("role") != "assistant":
+            continue
+        candidate = messages[index:]
+        if not fits(prefix + candidate):
+            break
+        retained = candidate
+    if retained:
+        result = prefix + retained
+    else:
+        # One enormous exchange (e.g. a batch of reads or a large write) may
+        # exceed the entire context allowance. Carry a bounded, explicit recap
+        # as user context, not fabricated provider tool-call messages.
+        recap = {"role": "user", "content": ""}
+        selected = []
+        for item in reversed(recent):
+            value = json.loads(json.dumps(item))
+            added = False
+            while True:
+                recap["content"] = "Recent tool results retained after compaction: " + json.dumps([value, *selected], ensure_ascii=False)
+                if fits(prefix + [recap]):
+                    selected.insert(0, value)
+                    added = True
+                    break
+                payload = value["result"]
+                if isinstance(payload.get("content"), str) and len(payload["content"]) > 512:
+                    payload["content"] = payload["content"][:len(payload["content"]) // 2]
+                    payload["context_excerpt"] = True
+                    payload["next_offset"] = payload.get("offset", 0) + len(payload["content"])
+                elif any(isinstance(payload.get(key), list) and len(payload[key]) > 1 for key in ("paths", "rows")):
+                    key = next(key for key in ("paths", "rows") if isinstance(payload.get(key), list) and len(payload[key]) > 1)
+                    payload[key] = payload[key][:len(payload[key]) // 2]
+                    payload["context_excerpt"] = True
+                    payload["next_offset"] = payload.get("offset", 0) + len(payload[key])
+                else:
+                    break
+            if not added:
+                break
+        if selected:
+            recap["content"] = "Recent tool results retained after compaction: " + json.dumps(selected, ensure_ascii=False)
+            result = prefix + [recap]
+        else:
+            if recent:
+                raise ValueError("latest tool result cannot fit the available prompt space")
+            result = prefix
+    if not fits(result):
+        raise ValueError("workspace context cannot fit the available prompt space")
+    # Detect repeated compaction of exactly the same evidence, not a cap on
+    # exploration, tool use or contributions. Pause rather than bill a loop.
+    fingerprint = c.digest([memory, recent[-1:] if recent else []])
+    repeat = state.get("repeated_compactions", 0) + 1 if state.get("last_compaction") == fingerprint else 0
+    state.update(last_compaction=fingerprint, repeated_compactions=repeat,
+                 context_compactions=state.get("context_compactions", 0) + 1)
+    if repeat >= 2:
+        raise ValueError("repeated context compaction with identical tool results; paused to prevent a discovery loop")
     return result
 
 
@@ -312,6 +465,7 @@ def checkpoint(quarantine, wid, *, reason="manual", paths=None):
     events.sort(key=lambda event: (event["at"], event["event_path"]))
     content = {"kind": "workspace", "workspace_id": wid, "changes": edits,
                "edit_history": events,
+               "unfinished_responses": c.read(folder / "state.json").get("unfinished_responses", []),
                "computations": [{"path": path.relative_to(quarantine).as_posix(),
                                  "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
                                 for path in sorted((folder / "derived").glob("*.json"))],
@@ -362,28 +516,82 @@ def end_pass(folder, manifest, state, settings):
     state["next_pass_report"] = ranking["report"]
 
 
+def archive_unfinished(quarantine, request, raw, metadata):
+    """Preserve long unfinished thinking outside discovery's file boundary.
+
+    This also permits explicitly requested exports of an already sealed response
+    without adding to or changing that trawl's historical files.
+    """
+    aid = c.slug(request["id"])
+    profile = request["profile"]
+    if not providers.output_limited(profile, raw):
+        raise ValueError("response did not end at a length limit")
+    reasoning, partial, calls = providers.unfinished_parts(profile, raw)
+    provenance = {"trawl_id": aid, "workspace": request["workspace"], "pass": request.get("pass"),
+                  "actor": metadata["actor"], "started_at": request["started_at"],
+                  "received_at": metadata["at"], "source": request["source"],
+                  "response_sha256": metadata["response_sha256"], "usage": raw.get("usage", {})}
+    pieces = ["# Unfinished trawl response\n\n"
+              "**Incomplete and unverified.** Preserved for curator review, not an accepted proof. "
+              "No tool calls from this response were executed. "
+              "This archive is outside discovery access; future trawls must not read it.\n\n"
+              f"Raw API response: [response.json](../trawls/{aid}/response.json).\n\n"
+              "## Provenance\n\n```json\n" + json.dumps(provenance, ensure_ascii=False, indent=2) + "\n```\n"]
+    for title, value in (("Unfinished reasoning", reasoning), ("Partial answer", partial)):
+        if value:
+            pieces.append("\n## " + title + "\n\n" + (value if isinstance(value, str) else json.dumps(value, ensure_ascii=False, indent=2)) + "\n")
+    if not reasoning:
+        pieces.append("\nNo readable reasoning text was exposed in this response; any opaque fields remain in the raw archive.\n")
+    if calls:
+        pieces.append("\n## Unexecuted tool calls\n\n```json\n" + json.dumps(calls, ensure_ascii=False, indent=2) + "\n```\n")
+    text = "".join(pieces)
+    path = quarantine / "unfinished" / (aid + ".md")
+    if path.exists():
+        if file_text(path) != text:
+            raise ValueError("unfinished response archive differs; immutable evidence cannot be overwritten")
+    else:
+        c.save_text(path, text)
+    return {"trawl_id": aid, "path": path.relative_to(quarantine).as_posix(), "sha256": file_hash(text),
+            "status": "incomplete-unverified", "at": metadata["at"], "actor": metadata["actor"]}
+
+
 def finish_turn(quarantine, folder, manifest, state, settings, aid):
     trawl = c.trawl_folder(quarantine, aid)
     request = c.read(trawl / "request.json")
     profile = request["profile"]
     raw = c.read(trawl / "response.json")
-    assistant, calls = providers.agent_turn(profile, raw)
     metadata = {"trawl_id": aid, "at": c.read(trawl / "received.json")["at"],
                 "actor": c.actor(profile, raw), "prompt_sha256": request["prompt_sha256"],
                 "response_sha256": c.digest(raw), "response_id": raw.get("id"),
                 "usage": raw.get("usage", {}), "offline": profile["protocol"] == "offline"}
-    results = [(call["id"], execute_tool(folder, manifest, call, metadata, i)) for i, call in enumerate(calls)]
-    # The persisted state still precedes this turn until all tool receipts exist.
-    state["messages"].append(assistant)
-    if calls:
-        state["messages"].extend(providers.tool_messages(profile, results))
-        state["status"] = "active"
+    if providers.output_limited(profile, raw):
+        # Keep the raw response and readable reasoning in immutable audit history. A truncated
+        # tool batch may include incomplete JSON or a partially planned edit;
+        # neither it nor its unfinished reasoning belongs in the next prompt.
+        archived = archive_unfinished(quarantine, request, raw, metadata)
+        state.setdefault("unfinished_responses", []).append(archived)
+        notice = prompts.OUTPUT_LIMIT.format(output_limit=request.get("output_tokens_reserved", settings["limits"]["max_output_tokens"]))
+        state["messages"].append({"role": "user", "content": notice})
+        state.update(status="active", last_note=notice, output_limit_notice=notice,
+                     output_limit_hits=state.get("output_limit_hits", 0) + 1)
+        results, outcome = [], "output-limit"
     else:
-        end_pass(folder, manifest, state, settings)
-    state["last_note"] = assistant.get("content")
+        assistant, calls = providers.agent_turn(profile, raw)
+        state.pop("output_limit_notice", None)
+        results = [(call["id"], execute_tool(folder, manifest, call, metadata, i)) for i, call in enumerate(calls)]
+        # The persisted state still precedes this turn until all tool receipts exist.
+        state["messages"].append(assistant)
+        if calls:
+            state["messages"].extend(providers.tool_messages(profile, results))
+            state["status"] = "active"
+        else:
+            end_pass(folder, manifest, state, settings)
+        state["last_note"] = assistant.get("content")
+        outcome = state["status"]
     if not (trawl / "outcome.json").exists():
-        c.save(trawl / "outcome.json", {"outcome": state["status"], "workspace": manifest["id"],
-               "metadata": metadata, "tool_errors": [v for _, v in results if "error" in v]})
+        c.save(trawl / "outcome.json", {"outcome": outcome, "workspace": manifest["id"],
+               "metadata": metadata, "tool_errors": [v for _, v in results if "error" in v],
+               **({"unfinished_response": archived} if outcome == "output-limit" else {})})
     c.seal_trawl(trawl)
     state["pending"] = None
     state_save(folder, state)
@@ -401,6 +609,12 @@ def recover(quarantine, folder, manifest, state, settings):
         if not (trawl / "received.json").exists():
             c.save(trawl / "received.json", {"at": c.now(), "recovered": True})
         finish_turn(quarantine, folder, manifest, state, settings, aid)
+    elif (trawl / "outcome.json").exists() and c.read(trawl / "outcome.json").get("outcome") == "context-rejected":
+        # A crash between sealing a rejected request and saving workspace state
+        # must not turn a known rejection into lost, unknown-outcome context.
+        c.seal_trawl(trawl)
+        state["pending"] = None
+        state_save(folder, state)
     else:
         if not (trawl / "outcome.json").exists():
             c.save(trawl / "outcome.json", {"outcome": "interrupted", "at": c.now(),
@@ -460,18 +674,25 @@ def run(quarantine, settings, snapshot, source, *, workspace=None, prepare_only=
             if state.get("profile") != c.actor(profile):
                 state.update(messages=[], profile=c.actor(profile))
             state["status"] = "active"
+            prompt_cap = c.prompt_char_limit(settings["limits"])
+            context_rejections = 0
             while budget_left():
                 initial = {"role": "user", "content": initial_prompt(folder, manifest, settings)}
                 if state.get("next_pass_report"):
                     initial["content"] += "\nCurrent pass " + str(state["pass_number"]) + "; read " + state["next_pass_report"]
-                if not state["messages"]:
-                    state["messages"] = [initial, {"role": "user", "content": "Continue from saved files and work/notes/progress.md. " + str(state.get("last_note", ""))[:2000]}]
                 output_limit = min(settings["limits"]["max_output_tokens"], output_budget - result["output_tokens_charged"])
+                if state["messages"] and state.get("prompt_version") != prompts.VERSION:
+                    # Upgrade unfinished work without replaying its obsolete
+                    # bootstrap instructions or throwing away recent evidence.
+                    state["messages"] = compact_messages(folder, state, profile, initial, output_limit,
+                                                         prompt_cap)
+                state["prompt_version"] = prompts.VERSION
+                if not state["messages"]:
+                    state["messages"] = [initial, {"role": "user", "content": resume_note(folder) + str(state.get("last_note", ""))[:2000]}]
                 body = providers.prepare_agent(profile, prompts.DISCOVER, state["messages"], output_limit, FUNCTIONS)
-                if len(json.dumps(body, ensure_ascii=False)) > settings["limits"]["max_prompt_chars"]:
-                    # Files and the immutable transcript carry long-term memory.
-                    state["messages"] = [initial, {"role": "user", "content":
-                        "Conversation compacted; your saved files are intact. Read work/notes/progress.md and resume. Last response: " + str(state.get("last_note", ""))[:2000]}]
+                if len(json.dumps(body, ensure_ascii=False)) > prompt_cap:
+                    state["messages"] = compact_messages(folder, state, profile, initial, output_limit,
+                                                         prompt_cap)
                     body = providers.prepare_agent(profile, prompts.DISCOVER, state["messages"], output_limit, FUNCTIONS)
                 aid = c.uid("trawl")
                 trawl = quarantine / "trawls" / aid
@@ -484,12 +705,36 @@ def run(quarantine, settings, snapshot, source, *, workspace=None, prepare_only=
                 state["pending"] = aid
                 state_save(folder, state)
                 result["requests"] += 1
-                if len(json.dumps(body, ensure_ascii=False)) > settings["limits"]["max_prompt_chars"]:
+                if len(json.dumps(body, ensure_ascii=False)) > prompt_cap:
                     raise ValueError("initial workspace prompt exceeds max_prompt_chars")
                 # Charge before transport: missing usage or a lost response cannot
                 # silently replenish this invocation's budget.
                 result["output_tokens_charged"] += output_limit
-                raw = providers.complete(profile, body, enabled=settings.get("live_api", False), timeout=settings["limits"]["timeout_seconds"])
+                try:
+                    raw = providers.complete(profile, body, enabled=settings.get("live_api", False), timeout=settings["limits"]["timeout_seconds"])
+                except providers.ContextLengthError:
+                    # No generation occurred. Keep the rejected request immutable,
+                    # then send a smaller conversation as a new, budgeted turn.
+                    result["output_tokens_charged"] -= output_limit
+                    c.save(trawl / "budget.json", {"reserved": output_limit, "charged": 0,
+                           "reason": "context-rejected-before-generation", "output_tokens_per_run": output_budget,
+                           "invocation_output_tokens_charged": result["output_tokens_charged"]})
+                    c.save(trawl / "outcome.json", {"outcome": "context-rejected", "at": c.now()})
+                    c.seal_trawl(trawl)
+                    state["pending"] = None
+                    state_save(folder, state)
+                    if settings["limits"]["max_prompt_chars"] != "model":
+                        raise
+                    context_rejections += 1
+                    if context_rejections >= 3:
+                        raise ValueError("API repeatedly rejected the compacted context; paused after three rejections")
+                    # Leave room for more tool results, without guessing the
+                    # provider's tokenizer or permanently imposing a smaller cap.
+                    smaller = len(json.dumps(body, ensure_ascii=False)) * 3 // 4
+                    state["messages"] = compact_messages(folder, state, profile, initial, output_limit, smaller)
+                    state_save(folder, state)
+                    continue
+                context_rejections = 0
                 c.save(trawl / "response.json", raw)
                 c.save(trawl / "received.json", {"at": c.now()})
                 charged = providers.output_tokens(profile, raw, reserved=output_limit)

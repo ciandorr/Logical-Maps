@@ -22,18 +22,120 @@ certificate:
   lean: stated
   produced_by: Zachary Goodsell (CDF-area construction and conclosure); GPT-6 (Codex) (construction-stage extraction and property audit)
   recorded_by: GPT-6 (Codex)
-  checked_by: []
+  checked_by:
+  - GPT-6 (Codex), informal review, 2026-09-25; only the partial self-similarity analysis added in the dated change below
   date: '2026-09-09'
+
+  trawl:
+    quarantine_id: quarantine-0113be29928e4d2fbf33c5d150b87c73
+    candidate_id: checkpoint-8a343fc0b96a488f884cb6196783f928
+    candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+    source:
+      repository: https://github.com/zwlgzwlg/Logical-Maps.git
+      ref: main
+      commit: 3d673577f8d071e7230a61ce36d028d4d5a14c38
+    discovery:
+      trawl_id: trawl-8e3bdbd3a88f435c9595391332e05000
+      at: '2026-09-25T04:27:54.249081+00:00'
+      actor:
+        kind: model
+        provider: deepseek
+        model: deepseek-flash
+        protocol: chat-completions
+        endpoint: https://api.deepseek.com/chat/completions
+        reported_model: deepseek-flash
+      prompt_sha256: c03156873cf08abce257d98e7584d1f7949bda5d4be90a1b9e2efaf0c183925a
+      response_sha256: 19e13a8e412e8fcfcc157bdbdfc6c0a3bc6bd1e31e61f1735c9f17d6463ba13f
+      response_id: bc12d808-0f2a-4828-b0b1-257d1eebaea0
+      usage:
+        prompt_tokens: 201152
+        completion_tokens: 5411
+        total_tokens: 206563
+        prompt_tokens_details:
+          cached_tokens: 200960
+        completion_tokens_details:
+          reasoning_tokens: 2883
+        prompt_cache_hit_tokens: 200960
+        prompt_cache_miss_tokens: 192
+      offline: false
+    evidence:
+    - kind: original-argument
+      citation: DeepSeek deepseek-flash, 25 September 2026; original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4
+        (SHA-256 4b5e25f2a34645fbe11b27a6f4608425043abd641f9f3f2d73b989059085e5d9). Corrected and scoped
+        by GPT-6 (Codex).
+      locator: 'logical-maps/topics/unbounded-utility/writeups/conclosure-integer-self-similarity.md; accepted
+        scope: Only the added partial-analysis note: no strict fixed-point comparison, an exact criterion
+        for the alternating pair, and impossibility of kernels with lower tail o(1/t). No satisfaction/failure
+        flags and no universal verdict.'
+      role: origin
+      verification: argument-in-writeup
+    - kind: database-record
+      citation: Logical Maps current source definitions and model construction; file hashes and pre-edit
+        text bound in the curated checkpoint.
+      locator: logical-maps/topics/unbounded-utility/models/cdf-conclosure-preorder.yaml; accompanying principles
+        and writeups/cdf-conclosure-preorder.md
+      role: background
+      verification: supplied-context
+    reviews:
+    - version: 1
+      id: review-efb0a17ef88845e0be4e03df2f93c5bb
+      candidate_id: checkpoint-8a343fc0b96a488f884cb6196783f928
+      candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+      at: '2026-09-25T12:59:35.163452+00:00'
+      recorded_at: '2026-09-25T12:59:35.164071+00:00'
+      actor:
+        kind: model
+        provider: openai
+        model: gpt-6
+      source:
+        repository: https://github.com/zwlgzwlg/Logical-Maps.git
+        ref: HEAD
+        commit: 7c928c4eb396a15e2b0b0226e4e753898870e7ca
+      report:
+        verdict: accept
+        summary: Accept the corrected affine-preservation bridge, five failures of the exact CDF-area model,
+          and the explicitly partial conclosure analysis. Acceptance covers only the seven curated files
+          and the scoped additions, not rejected drafts or a new audit of existing constructions.
+        argument_check: 'Checked the two directions of weak preference to obtain strict affine preservation;
+          Tonelli tail identities and all three gamble laws; the alternating fixed-point law recursion and
+          simple sure-value fixed point; both divergent moment sums, including harmonic denominators and
+          finite shifts; strict-order reversal for fixed points; and the q/(16u) lower-tail bound excluding
+          kernels with lower tail o(1/u). Ran the exact finite-law background_risk.py diagnostics and topic
+          schema/reference/consistency validation. Queried the engine before and after: the bridge is new,
+          five model failures are new, and conclosure self-similarity remains open. Export build also confirmed
+          that the amended model is not currently statable in Lean; corrected its label to none. The original
+          narrower statement remains preserved in the baseline.'
+        source_check: Inspected the frozen original checkpoint and current local principle/model/write-up
+          records; all changed existing records match their pinned before versions. Verified the canonical
+          checkpoint digest and all 71 edit-event hashes, plus editing-turn API response hashes and reported
+          deepseek-flash identities. The accepted arguments are self-contained checks against the recorded
+          definitions; no new inspection or verification of the unpublished manuscript or external literature
+          is claimed. The earlier construction authorship is retained. The prior stated Lean status is preserved
+          historically; the expanded CDF-area record is correctly marked none. Full current-topic file hashes
+          accompany the curated checkpoint because the checkout contains unrelated uncommitted Classicism
+          work.
+        issues: []
+      method: informal-mathematical-review
+    admission:
+      id: admission-89ba44a12e494abd93251f7c762eb26b
+      at: '2026-09-25T12:59:35.164588+00:00'
+      by: GPT-6 (Codex)
+      base_commit: 7c928c4eb396a15e2b0b0226e4e753898870e7ca
+      candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+      review_id: review-efb0a17ef88845e0be4e03df2f93c5bb
+
 description: |-
   Use all real outcomes with identity utility. In the vector space of survival differences, let $C=\{v$: integral$(v_-)$ is finite and integral$(v_+)$ is at least integral$(v_-)\}$ be Goodsell's CDF-area cone. Define $\operatorname{Sat}(C)=\{v: T_\xi v$ belongs to C for some probability law xi}, where $T_\xi$ is convolution by xi, and set $X \ge  Y$ iff $S_X-S_Y$ belongs to $\operatorname{Sat}(C)$. This is Goodsell's conclosure, stopped before the total-extension step. The previously recorded commutation and strict-preservation argument makes it a cone extending the area comparisons strictly and invariant in both directions under every independent convolution. Reflection of the survival difference conjugates xi to its reflected law; positive affine changes conjugate xi to its positively scaled law. The area cone is invariant under these changes, so the conclosure inherits reflection anti-invariance and positive affine invariance. It fails Symmetric Neutrality by the completed Levy obstruction. Since a comparable symmetric gamble in any law-invariant reflection-anti-invariant preorder must be indifferent to zero, this model must also fail Totality. It is consequently a model of DU, but not DTU: Totality is the additional DTU axiom.
 sources:
 - 'Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026 (unpublished), sections 3-4, pages 7-14: CDF-area construction and conclosure. Supplied manuscript marked do not cite and erroneous in its symmetric total-extension claim.'
 - 'GPT-6 (Codex), 9 September 2026, writeups/conjectured-total-independent-sum-extension.md, sections 1-3: previously recorded cone-language description and strictness-preservation proof for Goodsell conclosure.'
 - 'GPT-6 (Codex), 9 September 2026, writeups/cdf-conclosure-preorder.md: extraction of the intermediate model, conjugation proofs for its inherited symmetries, and incompleteness from the completed Goodsell Levy obstruction.'
+- 'DeepSeek (deepseek-flash), theorem trawl, 25 September 2026: partial fixed-point analysis, corrected and informally reviewed by GPT-6 (Codex), same date; writeups/cdf-conclosure-preorder.md, Partial self-similarity analysis. Original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4.'
 source_names:
 - Unbounded Utility and Background Risk (unpublished)
 - GPT-6 conclosure proof details 9 Sep
 - GPT-6 model property audit 9 Sep
+- DeepSeek trawl; GPT-6 partial-analysis review 25 Sep
 notes: >-
   Original work: construction-stage extraction and model adaptation/property
   audit. The CDF-area seed and conclosure construction are Goodsell's, and
@@ -46,6 +148,11 @@ notes: >-
   a computable comparison algorithm. No comonotonic sum property is asserted:
   conclosure does not automatically inherit the exact area's comonotonic
   invariance. No independent checker or Lean verification is claimed.
+  The 25 September 2026 addition in the write-up proves that the alternating
+  St Petersburg fixed point and sure -1/2 are either indifferent or
+  incomparable, and rules out convolution witnesses with lower tail o(1/t).
+  It leaves this pair and both self-similarity principles undecided; success
+  for one pair would not establish a universally quantified principle.
 checks:
 - topics/unbounded-utility/checks/levy_obstruction.py
 references:
@@ -53,3 +160,13 @@ references:
   role: proof
   locator: 'sections 3-4, pages 7-14: CDF-area construction and conclosure. Supplied manuscript marked do not
     cite and erroneous in its symmetric total-extension claim'
+changes:
+- date: '2026-09-25'
+  by: DeepSeek (deepseek-flash), partial analysis; GPT-6 (Codex), correction and informal review
+  summary: >-
+    Added a scoped partial analysis of alternating St Petersburg versus -1/2:
+    no strict comparison is possible, and convolution kernels with lower tail
+    o(1/t) cannot witness a comparison. Corrected the draft's overstatement
+    that resolving this one pair would settle universal self-similarity;
+    no satisfies or violates flags are added. Evidence and review provenance
+    are in the write-up and certificate.trawl.

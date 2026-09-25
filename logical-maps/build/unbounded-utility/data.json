@@ -3746,6 +3746,131 @@
    }
   },
   {
+   "id": "positive-affine-implies-rational-affine-preservation",
+   "premises": [
+    "positive-affine-invariance"
+   ],
+   "conclusion": "rational-affine-preservation",
+   "status": "proved",
+   "certificate": {
+    "source_id": "misc",
+    "lean": "none",
+    "produced_by": "DeepSeek (deepseek-flash), theorem trawl, 2026-09-25; immediate restriction of the recorded definitions",
+    "checked_by": [
+     "GPT-6 (Codex), informal mathematical review, 2026-09-25; weak and strict preservation and common chart scope"
+    ],
+    "date": "2026-09-25",
+    "recorded_by": "DeepSeek (deepseek-flash), 2026-09-25; curated and attribution corrected by GPT-6 (Codex), 2026-09-25",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-8a343fc0b96a488f884cb6196783f928",
+     "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "3d673577f8d071e7230a61ce36d028d4d5a14c38"
+     },
+     "discovery": {
+      "trawl_id": "trawl-e3ee9c7641b24c85828ca79696519e50",
+      "at": "2026-09-25T04:26:58.086411+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "56d485438fcffc429d34b1659aa46ba2f0dfd88804b20f504c06009bc58de7d9",
+      "response_sha256": "a29fb9e29caa36767a5478c36447b5858d946cb5ec4565d4b56dc849c1a851b8",
+      "response_id": "8784abc9-e398-4b47-8c7c-51c38b780043",
+      "usage": {
+       "prompt_tokens": 193986,
+       "completion_tokens": 824,
+       "total_tokens": 194810,
+       "prompt_tokens_details": {
+        "cached_tokens": 187392
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 92
+       },
+       "prompt_cache_hit_tokens": 187392,
+       "prompt_cache_miss_tokens": 6594
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek deepseek-flash, 25 September 2026; original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4 (SHA-256 4b5e25f2a34645fbe11b27a6f4608425043abd641f9f3f2d73b989059085e5d9). Corrected and scoped by GPT-6 (Codex).",
+       "locator": "logical-maps/topics/unbounded-utility/results/positive-affine-implies-rational-affine-preservation.yaml; accepted scope: An immediate weak-and-strict preservation bridge from the recorded biconditional; no additional chart assumptions.",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "database-record",
+       "citation": "Logical Maps current source definitions and model construction; file hashes and pre-edit text bound in the curated checkpoint.",
+       "locator": "logical-maps/topics/unbounded-utility/results/positive-affine-implies-rational-affine-preservation.yaml; accompanying principles and writeups/positive-affine-implies-rational-affine-preservation.md",
+       "role": "background",
+       "verification": "supplied-context"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-efb0a17ef88845e0be4e03df2f93c5bb",
+       "candidate_id": "checkpoint-8a343fc0b96a488f884cb6196783f928",
+       "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+       "at": "2026-09-25T12:59:35.163452+00:00",
+       "recorded_at": "2026-09-25T12:59:35.164071+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "7c928c4eb396a15e2b0b0226e4e753898870e7ca"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept the corrected affine-preservation bridge, five failures of the exact CDF-area model, and the explicitly partial conclosure analysis. Acceptance covers only the seven curated files and the scoped additions, not rejected drafts or a new audit of existing constructions.",
+        "argument_check": "Checked the two directions of weak preference to obtain strict affine preservation; Tonelli tail identities and all three gamble laws; the alternating fixed-point law recursion and simple sure-value fixed point; both divergent moment sums, including harmonic denominators and finite shifts; strict-order reversal for fixed points; and the q/(16u) lower-tail bound excluding kernels with lower tail o(1/u). Ran the exact finite-law background_risk.py diagnostics and topic schema/reference/consistency validation. Queried the engine before and after: the bridge is new, five model failures are new, and conclosure self-similarity remains open. Export build also confirmed that the amended model is not currently statable in Lean; corrected its label to none. The original narrower statement remains preserved in the baseline.",
+        "source_check": "Inspected the frozen original checkpoint and current local principle/model/write-up records; all changed existing records match their pinned before versions. Verified the canonical checkpoint digest and all 71 edit-event hashes, plus editing-turn API response hashes and reported deepseek-flash identities. The accepted arguments are self-contained checks against the recorded definitions; no new inspection or verification of the unpublished manuscript or external literature is claimed. The earlier construction authorship is retained. The prior stated Lean status is preserved historically; the expanded CDF-area record is correctly marked none. Full current-topic file hashes accompany the curated checkpoint because the checkout contains unrelated uncommitted Classicism work.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-89ba44a12e494abd93251f7c762eb26b",
+      "at": "2026-09-25T12:59:35.164588+00:00",
+      "by": "GPT-6 (Codex)",
+      "base_commit": "7c928c4eb396a15e2b0b0226e4e753898870e7ca",
+      "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+      "review_id": "review-efb0a17ef88845e0be4e03df2f93c5bb"
+     }
+    }
+   },
+   "proof": "Fix rational $a>0$ and real $b$, with the transformed outcomes available in\nthe common utility-chart scope of the two principles. Positive Affine\nInvariance gives $X\\succeq Y$ iff $aX+b\\succeq aY+b$, so it gives weak\npreservation. If $X\\succ Y$, then $X\\succeq Y$ and not $Y\\succeq X$.\nApplying the same biconditional also to the reversed pair gives\n$aX+b\\succeq aY+b$ and not $aY+b\\succeq aX+b$, hence\n$aX+b\\succ aY+b$. Every positive rational factor is among the real factors\nquantified over by Positive Affine Invariance. No additional assumption is\nrequired.",
+   "sources": [
+    "DeepSeek (deepseek-flash), theorem trawl, 25 September 2026: omitted definitional bridge proposed in checkpoint-4efdb29afea94da583b8df9975e053e4; actual model and edit time established by the runner audit. Informally reviewed and curated by GPT-6 (Codex), 25 September 2026.",
+    "Logical Maps principle records positive-affine-invariance and rational-affine-preservation, statements and utility-chart scope; direct definitions used in this proof."
+   ],
+   "source_names": [
+    "DeepSeek trawl; GPT-6 review 25 Sep",
+    "Recorded affine principles"
+   ],
+   "notes": "This is an immediate connecting argument, not a claim of a new literature\ntheorem. The engine treats the principles as atoms and previously lacked\nthis bridge. Together with rational-affine-preservation-implies-integer it\nalso supplies Integer Affine Preservation. Discovery and independent\ninformal review are recorded separately in certificate.trawl; no Lean\nverification is claimed. The quarantined draft incorrectly named Claude\nas its author; the API audit identifies deepseek-flash.",
+   "file": "topics/unbounded-utility/results/positive-affine-implies-rational-affine-preservation.yaml",
+   "files": {
+    "md": "writeups/positive-affine-implies-rational-affine-preservation.md",
+    "html": "writeups/positive-affine-implies-rational-affine-preservation.html",
+    "handwritten": true
+   }
+  },
+  {
    "id": "positive-affine-implies-scale",
    "premises": [
     "positive-affine-invariance"
@@ -5707,25 +5832,125 @@
     "symmetric-neutrality",
     "folded-expectation",
     "full-sum-consistency",
-    "antitonic-sum-consistency"
+    "antitonic-sum-consistency",
+    "negative-self-similarity",
+    "integer-negative-self-similarity",
+    "alternating-st-petersburg-value",
+    "pasadena-value",
+    "arroyo-value"
    ],
    "status": "proved",
    "certificate": {
     "source_id": "unpublished-background-risk",
-    "lean": "stated",
+    "lean": "none",
     "produced_by": "Zachary Goodsell (unpublished manuscript)",
-    "checked_by": [],
+    "checked_by": [
+     "GPT-6 (Codex), informal review, 2026-09-25; only the five failures added in the dated change below"
+    ],
     "date": "2026-09-09",
-    "recorded_by": "GPT-6 (Codex), 2026-09-09; extraction and random-variable translation"
+    "recorded_by": "GPT-6 (Codex), 2026-09-09; extraction and random-variable translation",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-8a343fc0b96a488f884cb6196783f928",
+     "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "3d673577f8d071e7230a61ce36d028d4d5a14c38"
+     },
+     "discovery": {
+      "trawl_id": "trawl-a9c2c6dc24c94a15b67787950e8659a2",
+      "at": "2026-09-25T04:27:19.676088+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "d94363aa6ca66782b06c1703bd88b5ad56657e53759cec914212d125d2afb1f3",
+      "response_sha256": "191dad2b43f23756f434cd0068db6836607e1421059d60927d64c7d781f97969",
+      "response_id": "708d45cf-700f-438e-9443-eab60851bfb9",
+      "usage": {
+       "prompt_tokens": 197398,
+       "completion_tokens": 1952,
+       "total_tokens": 199350,
+       "prompt_tokens_details": {
+        "cached_tokens": 197248
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 33
+       },
+       "prompt_cache_hit_tokens": 197248,
+       "prompt_cache_miss_tokens": 150
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek deepseek-flash, 25 September 2026; original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4 (SHA-256 4b5e25f2a34645fbe11b27a6f4608425043abd641f9f3f2d73b989059085e5d9). Corrected and scoped by GPT-6 (Codex).",
+       "locator": "logical-maps/topics/unbounded-utility/writeups/cdf-area-refutes-integer-self-similarity.md; accepted scope: Only five new failure flags and their corrected explicit counterexamples. Preserve the original model author, source and date; reset the expanded record to lean: none and retain the earlier stated status in the baseline and change history.",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "database-record",
+       "citation": "Logical Maps current source definitions and model construction; file hashes and pre-edit text bound in the curated checkpoint.",
+       "locator": "logical-maps/topics/unbounded-utility/models/cdf-area-preorder.yaml; accompanying principles and writeups/cdf-area-preorder.md",
+       "role": "background",
+       "verification": "supplied-context"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-efb0a17ef88845e0be4e03df2f93c5bb",
+       "candidate_id": "checkpoint-8a343fc0b96a488f884cb6196783f928",
+       "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+       "at": "2026-09-25T12:59:35.163452+00:00",
+       "recorded_at": "2026-09-25T12:59:35.164071+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "7c928c4eb396a15e2b0b0226e4e753898870e7ca"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept the corrected affine-preservation bridge, five failures of the exact CDF-area model, and the explicitly partial conclosure analysis. Acceptance covers only the seven curated files and the scoped additions, not rejected drafts or a new audit of existing constructions.",
+        "argument_check": "Checked the two directions of weak preference to obtain strict affine preservation; Tonelli tail identities and all three gamble laws; the alternating fixed-point law recursion and simple sure-value fixed point; both divergent moment sums, including harmonic denominators and finite shifts; strict-order reversal for fixed points; and the q/(16u) lower-tail bound excluding kernels with lower tail o(1/u). Ran the exact finite-law background_risk.py diagnostics and topic schema/reference/consistency validation. Queried the engine before and after: the bridge is new, five model failures are new, and conclosure self-similarity remains open. Export build also confirmed that the amended model is not currently statable in Lean; corrected its label to none. The original narrower statement remains preserved in the baseline.",
+        "source_check": "Inspected the frozen original checkpoint and current local principle/model/write-up records; all changed existing records match their pinned before versions. Verified the canonical checkpoint digest and all 71 edit-event hashes, plus editing-turn API response hashes and reported deepseek-flash identities. The accepted arguments are self-contained checks against the recorded definitions; no new inspection or verification of the unpublished manuscript or external literature is claimed. The earlier construction authorship is retained. The prior stated Lean status is preserved historically; the expanded CDF-area record is correctly marked none. Full current-topic file hashes accompany the curated checkpoint because the checkout contains unrelated uncommitted Classicism work.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-89ba44a12e494abd93251f7c762eb26b",
+      "at": "2026-09-25T12:59:35.164588+00:00",
+      "by": "GPT-6 (Codex)",
+      "base_commit": "7c928c4eb396a15e2b0b0226e4e753898870e7ca",
+      "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+      "review_id": "review-efb0a17ef88845e0be4e03df2f93c5bb"
+     }
+    }
    },
    "description": "Use real outcomes with their identity utility. For $d=S_X- S_Y$, define $X \\succeq R Y$ iff $\\int d_{-}<\\infty$ and $\\int d_{+}\\ge \\int d_{-}$. This is the manuscript’s explicit base preorder, satisfying DU but not DTU because Totality fails. Its elementary properties, comonotonic sum consistency, and forward independent-sum preservation are established in the accompanying write-up, with the quantile-area argument made valid for infinite areas. The draft’s proof does not establish reverse independent-sum cancellation, so full Independent Sum Invariance is not asserted. Symmetric Cauchy versus zero has both areas infinite, witnessing incompleteness and failure of Symmetric Neutrality and Folded Expectation. The St Petersburg arguments supply the two sum-consistency violations.",
    "sources": [
     "Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026, unpublished manuscript marked “do not cite” and erroneous; §3, pp. 7–8; Theorems 6–7, pp. 19–20",
-    "GPT-6 (Codex), original connecting proofs recorded 9 September 2026 in this project; explicit quantile-area/Tonelli details, Cauchy witnesses, and the L1 closure proof in writeups/cdf-area-preorder.md"
+    "GPT-6 (Codex), original connecting proofs recorded 9 September 2026 in this project; explicit quantile-area/Tonelli details, Cauchy witnesses, and the L1 closure proof in writeups/cdf-area-preorder.md",
+    "DeepSeek (deepseek-flash), theorem trawl, 25 September 2026: five further failures of this exact model; proofs corrected and informally reviewed by GPT-6 (Codex), same date, in writeups/cdf-area-preorder.md, Further failures found by the theorem trawl. Checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4."
    ],
    "source_names": [
     "Unbounded Utility and Background Risk (unpublished)",
-    "GPT-6 generated 9 Sep"
+    "GPT-6 generated 9 Sep",
+    "DeepSeek trawl; GPT-6 review 25 Sep"
    ],
    "notes": "This is the concrete base construction, not the draft’s withdrawn total symmetric extension. Strict comparisons are part of the construction. No claim that convolution cancellation is false is inferred from a gap in its proof. The L1 Continuity flag is established by the separately attributed elementary closure proof in the write-up; it is not attributed to a theorem stated in the manuscript.",
    "checks": [
@@ -5736,6 +5961,20 @@
      "paper": "unpublished-background-risk",
      "role": "proof",
      "locator": "§3, pp. 7–8; Theorems 6–7, pp. 19–20"
+    }
+   ],
+   "changes": [
+    {
+     "date": "2026-09-25",
+     "by": "DeepSeek (deepseek-flash), discovery; GPT-6 (Codex), corrected proof and informal review",
+     "summary": "Added five failures witnessed by alternating St Petersburg versus -1/2, and by Pasadena and Arroyo versus ln 2: both signed areas diverge. The alternating pair also supplies two nonindifferent fixed points of the same negative self-similarity instance. These are properties of this model, not universal incompatibilities; full arguments and provenance are in the write-up and certificate.trawl. The original construction and certificate date are unchanged; the expanded statement is marked Lean none because integer-negative-self-similarity has no Lean definition. The preceding record was stated, not verified.",
+     "violates": [
+      "negative-self-similarity",
+      "integer-negative-self-similarity",
+      "alternating-st-petersburg-value",
+      "pasadena-value",
+      "arroyo-value"
+     ]
     }
    ],
    "file": "topics/unbounded-utility/models/cdf-area-preorder.yaml",
@@ -5841,21 +6080,116 @@
     "lean": "stated",
     "produced_by": "Zachary Goodsell (CDF-area construction and conclosure); GPT-6 (Codex) (construction-stage extraction and property audit)",
     "recorded_by": "GPT-6 (Codex)",
-    "checked_by": [],
-    "date": "2026-09-09"
+    "checked_by": [
+     "GPT-6 (Codex), informal review, 2026-09-25; only the partial self-similarity analysis added in the dated change below"
+    ],
+    "date": "2026-09-09",
+    "trawl": {
+     "quarantine_id": "quarantine-0113be29928e4d2fbf33c5d150b87c73",
+     "candidate_id": "checkpoint-8a343fc0b96a488f884cb6196783f928",
+     "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+     "source": {
+      "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+      "ref": "main",
+      "commit": "3d673577f8d071e7230a61ce36d028d4d5a14c38"
+     },
+     "discovery": {
+      "trawl_id": "trawl-8e3bdbd3a88f435c9595391332e05000",
+      "at": "2026-09-25T04:27:54.249081+00:00",
+      "actor": {
+       "kind": "model",
+       "provider": "deepseek",
+       "model": "deepseek-flash",
+       "protocol": "chat-completions",
+       "endpoint": "https://api.deepseek.com/chat/completions",
+       "reported_model": "deepseek-flash"
+      },
+      "prompt_sha256": "c03156873cf08abce257d98e7584d1f7949bda5d4be90a1b9e2efaf0c183925a",
+      "response_sha256": "19e13a8e412e8fcfcc157bdbdfc6c0a3bc6bd1e31e61f1735c9f17d6463ba13f",
+      "response_id": "bc12d808-0f2a-4828-b0b1-257d1eebaea0",
+      "usage": {
+       "prompt_tokens": 201152,
+       "completion_tokens": 5411,
+       "total_tokens": 206563,
+       "prompt_tokens_details": {
+        "cached_tokens": 200960
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 2883
+       },
+       "prompt_cache_hit_tokens": 200960,
+       "prompt_cache_miss_tokens": 192
+      },
+      "offline": false
+     },
+     "evidence": [
+      {
+       "kind": "original-argument",
+       "citation": "DeepSeek deepseek-flash, 25 September 2026; original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4 (SHA-256 4b5e25f2a34645fbe11b27a6f4608425043abd641f9f3f2d73b989059085e5d9). Corrected and scoped by GPT-6 (Codex).",
+       "locator": "logical-maps/topics/unbounded-utility/writeups/conclosure-integer-self-similarity.md; accepted scope: Only the added partial-analysis note: no strict fixed-point comparison, an exact criterion for the alternating pair, and impossibility of kernels with lower tail o(1/t). No satisfaction/failure flags and no universal verdict.",
+       "role": "origin",
+       "verification": "argument-in-writeup"
+      },
+      {
+       "kind": "database-record",
+       "citation": "Logical Maps current source definitions and model construction; file hashes and pre-edit text bound in the curated checkpoint.",
+       "locator": "logical-maps/topics/unbounded-utility/models/cdf-conclosure-preorder.yaml; accompanying principles and writeups/cdf-conclosure-preorder.md",
+       "role": "background",
+       "verification": "supplied-context"
+      }
+     ],
+     "reviews": [
+      {
+       "version": 1,
+       "id": "review-efb0a17ef88845e0be4e03df2f93c5bb",
+       "candidate_id": "checkpoint-8a343fc0b96a488f884cb6196783f928",
+       "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+       "at": "2026-09-25T12:59:35.163452+00:00",
+       "recorded_at": "2026-09-25T12:59:35.164071+00:00",
+       "actor": {
+        "kind": "model",
+        "provider": "openai",
+        "model": "gpt-6"
+       },
+       "source": {
+        "repository": "https://github.com/zwlgzwlg/Logical-Maps.git",
+        "ref": "HEAD",
+        "commit": "7c928c4eb396a15e2b0b0226e4e753898870e7ca"
+       },
+       "report": {
+        "verdict": "accept",
+        "summary": "Accept the corrected affine-preservation bridge, five failures of the exact CDF-area model, and the explicitly partial conclosure analysis. Acceptance covers only the seven curated files and the scoped additions, not rejected drafts or a new audit of existing constructions.",
+        "argument_check": "Checked the two directions of weak preference to obtain strict affine preservation; Tonelli tail identities and all three gamble laws; the alternating fixed-point law recursion and simple sure-value fixed point; both divergent moment sums, including harmonic denominators and finite shifts; strict-order reversal for fixed points; and the q/(16u) lower-tail bound excluding kernels with lower tail o(1/u). Ran the exact finite-law background_risk.py diagnostics and topic schema/reference/consistency validation. Queried the engine before and after: the bridge is new, five model failures are new, and conclosure self-similarity remains open. Export build also confirmed that the amended model is not currently statable in Lean; corrected its label to none. The original narrower statement remains preserved in the baseline.",
+        "source_check": "Inspected the frozen original checkpoint and current local principle/model/write-up records; all changed existing records match their pinned before versions. Verified the canonical checkpoint digest and all 71 edit-event hashes, plus editing-turn API response hashes and reported deepseek-flash identities. The accepted arguments are self-contained checks against the recorded definitions; no new inspection or verification of the unpublished manuscript or external literature is claimed. The earlier construction authorship is retained. The prior stated Lean status is preserved historically; the expanded CDF-area record is correctly marked none. Full current-topic file hashes accompany the curated checkpoint because the checkout contains unrelated uncommitted Classicism work.",
+        "issues": []
+       },
+       "method": "informal-mathematical-review"
+      }
+     ],
+     "admission": {
+      "id": "admission-89ba44a12e494abd93251f7c762eb26b",
+      "at": "2026-09-25T12:59:35.164588+00:00",
+      "by": "GPT-6 (Codex)",
+      "base_commit": "7c928c4eb396a15e2b0b0226e4e753898870e7ca",
+      "candidate_sha256": "73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805",
+      "review_id": "review-efb0a17ef88845e0be4e03df2f93c5bb"
+     }
+    }
    },
    "description": "Use all real outcomes with identity utility. In the vector space of survival differences, let $C=\\{v$: integral$(v_-)$ is finite and integral$(v_+)$ is at least integral$(v_-)\\}$ be Goodsell's CDF-area cone. Define $\\operatorname{Sat}(C)=\\{v: T_\\xi v$ belongs to C for some probability law xi}, where $T_\\xi$ is convolution by xi, and set $X \\ge  Y$ iff $S_X-S_Y$ belongs to $\\operatorname{Sat}(C)$. This is Goodsell's conclosure, stopped before the total-extension step. The previously recorded commutation and strict-preservation argument makes it a cone extending the area comparisons strictly and invariant in both directions under every independent convolution. Reflection of the survival difference conjugates xi to its reflected law; positive affine changes conjugate xi to its positively scaled law. The area cone is invariant under these changes, so the conclosure inherits reflection anti-invariance and positive affine invariance. It fails Symmetric Neutrality by the completed Levy obstruction. Since a comparable symmetric gamble in any law-invariant reflection-anti-invariant preorder must be indifferent to zero, this model must also fail Totality. It is consequently a model of DU, but not DTU: Totality is the additional DTU axiom.",
    "sources": [
     "Zachary Goodsell, Unbounded Utility and Background Risk, 5 June 2026 (unpublished), sections 3-4, pages 7-14: CDF-area construction and conclosure. Supplied manuscript marked do not cite and erroneous in its symmetric total-extension claim.",
     "GPT-6 (Codex), 9 September 2026, writeups/conjectured-total-independent-sum-extension.md, sections 1-3: previously recorded cone-language description and strictness-preservation proof for Goodsell conclosure.",
-    "GPT-6 (Codex), 9 September 2026, writeups/cdf-conclosure-preorder.md: extraction of the intermediate model, conjugation proofs for its inherited symmetries, and incompleteness from the completed Goodsell Levy obstruction."
+    "GPT-6 (Codex), 9 September 2026, writeups/cdf-conclosure-preorder.md: extraction of the intermediate model, conjugation proofs for its inherited symmetries, and incompleteness from the completed Goodsell Levy obstruction.",
+    "DeepSeek (deepseek-flash), theorem trawl, 25 September 2026: partial fixed-point analysis, corrected and informally reviewed by GPT-6 (Codex), same date; writeups/cdf-conclosure-preorder.md, Partial self-similarity analysis. Original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4."
    ],
    "source_names": [
     "Unbounded Utility and Background Risk (unpublished)",
     "GPT-6 conclosure proof details 9 Sep",
-    "GPT-6 model property audit 9 Sep"
+    "GPT-6 model property audit 9 Sep",
+    "DeepSeek trawl; GPT-6 partial-analysis review 25 Sep"
    ],
-   "notes": "Original work: construction-stage extraction and model adaptation/property audit. The CDF-area seed and conclosure construction are Goodsell's, and the stage already appears in the recorded total-extension proof. GPT-6 now records this intermediate model separately, proves the inherited affine/reflection symmetries by kernel conjugation, and establishes its incompleteness using the completed Goodsell stable-law proposal. No new independent invention of conclosure or claim of literature novelty is made. The construction quantifies over all probability kernels; it is not a computable comparison algorithm. No comonotonic sum property is asserted: conclosure does not automatically inherit the exact area's comonotonic invariance. No independent checker or Lean verification is claimed.",
+   "notes": "Original work: construction-stage extraction and model adaptation/property audit. The CDF-area seed and conclosure construction are Goodsell's, and the stage already appears in the recorded total-extension proof. GPT-6 now records this intermediate model separately, proves the inherited affine/reflection symmetries by kernel conjugation, and establishes its incompleteness using the completed Goodsell stable-law proposal. No new independent invention of conclosure or claim of literature novelty is made. The construction quantifies over all probability kernels; it is not a computable comparison algorithm. No comonotonic sum property is asserted: conclosure does not automatically inherit the exact area's comonotonic invariance. No independent checker or Lean verification is claimed. The 25 September 2026 addition in the write-up proves that the alternating St Petersburg fixed point and sure -1/2 are either indifferent or incomparable, and rules out convolution witnesses with lower tail o(1/t). It leaves this pair and both self-similarity principles undecided; success for one pair would not establish a universally quantified principle.",
    "checks": [
     "topics/unbounded-utility/checks/levy_obstruction.py"
    ],
@@ -5864,6 +6198,13 @@
      "paper": "unpublished-background-risk",
      "role": "proof",
      "locator": "sections 3-4, pages 7-14: CDF-area construction and conclosure. Supplied manuscript marked do not cite and erroneous in its symmetric total-extension claim"
+    }
+   ],
+   "changes": [
+    {
+     "date": "2026-09-25",
+     "by": "DeepSeek (deepseek-flash), partial analysis; GPT-6 (Codex), correction and informal review",
+     "summary": "Added a scoped partial analysis of alternating St Petersburg versus -1/2: no strict comparison is possible, and convolution kernels with lower tail o(1/t) cannot witness a comparison. Corrected the draft's overstatement that resolving this one pair would settle universal self-similarity; no satisfies or violates flags are added. Evidence and review provenance are in the write-up and certificate.trawl."
     }
    ],
    "file": "topics/unbounded-utility/models/cdf-conclosure-preorder.yaml",
@@ -6860,7 +7201,7 @@
    }
   }
  ],
- "generated": "2026-09-24T19:34:06+00:00",
+ "generated": "2026-09-25T13:00:11+00:00",
  "progress": [
   {
    "background": null,
@@ -6868,9 +7209,9 @@
    "principles": [],
    "negative": [],
    "premises": 2,
-   "questions": 35555,
-   "settled": 15201,
-   "open": 20354,
+   "questions": 35404,
+   "settled": 15999,
+   "open": 19405,
    "by_premises": [
     [
      43,
@@ -6878,11 +7219,11 @@
     ],
     [
      1849,
-     1175
+     1194
     ],
     [
-     33663,
-     13987
+     33512,
+     14766
     ]
    ]
   },
@@ -6899,8 +7240,8 @@
    "negative": [],
    "premises": 2,
    "questions": 5988,
-   "settled": 2033,
-   "open": 3955,
+   "settled": 2351,
+   "open": 3637,
    "by_premises": [
     [
      30,
@@ -6908,11 +7249,11 @@
     ],
     [
      630,
-     412
+     427
     ],
     [
      5328,
-     1591
+     1894
     ]
    ]
   },
@@ -7110,9 +7451,9 @@
     ],
     "progress": {
      "premises": 2,
-     "questions": 35555,
-     "settled": 15201,
-     "open": 20354,
+     "questions": 35404,
+     "settled": 15999,
+     "open": 19405,
      "by_premises": [
       [
        43,
@@ -7120,172 +7461,59 @@
       ],
       [
        1849,
-       1175
+       1194
       ],
       [
-       33663,
-       13987
+       33512,
+       14766
       ]
      ]
     },
-    "open": 20354,
+    "open": 19405,
     "rows": [
      {
       "kind": "check",
-      "model": "cdf-conclosure-preorder",
-      "principle": "integer-negative-self-similarity",
-      "yes": 279,
-      "no": 256,
-      "score": 267.0,
-      "auto_rank": 1602,
+      "model": "cdf-area-preorder",
+      "principle": "independent-sum-cancellation",
+      "yes": 334,
+      "no": 158,
+      "score": 214.5,
+      "auto_rank": 653,
       "auto_claim": "not",
       "rank": 1
      },
      {
       "kind": "check",
       "model": "cdf-area-preorder",
-      "principle": "integer-negative-self-similarity",
-      "yes": 267,
-      "no": 242,
-      "score": 253.9,
-      "auto_rank": 1694,
+      "principle": "independent-sum-consistency",
+      "yes": 334,
+      "no": 158,
+      "score": 214.5,
+      "auto_rank": 654,
       "auto_claim": "not",
       "rank": 2
-     },
-     {
-      "kind": "check",
-      "model": "lexicographic-nonatomic-mass",
-      "principle": "rational-affine-preservation",
-      "yes": 235,
-      "no": 167,
-      "score": 195.2,
-      "auto_rank": 2030,
-      "auto_claim": "not",
-      "rank": 3
-     },
-     {
-      "kind": "check",
-      "model": "cdf-conclosure-preorder",
-      "principle": "negative-self-similarity",
-      "yes": 374,
-      "no": 128,
-      "score": 190.7,
-      "auto_rank": 892,
-      "auto_claim": "not",
-      "rank": 4
-     },
-     {
-      "kind": "check",
-      "model": "conjectured-total-independent-sum-extension",
-      "principle": "integer-negative-self-similarity",
-      "yes": 258,
-      "no": 148,
-      "score": 188.1,
-      "auto_rank": 1794,
-      "auto_claim": "not",
-      "rank": 5
      },
      {
       "kind": "check",
       "model": "affine-symmetric-extension",
       "principle": "existential-copula-sum-consistency",
       "yes": 141,
-      "no": 259,
-      "score": 182.6,
-      "auto_rank": 1767,
+      "no": 219,
+      "score": 171.6,
+      "auto_rank": 1401,
       "auto_claim": "entails",
-      "rank": 6
-     },
-     {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "negative-self-similarity",
-      "yes": 358,
-      "no": 121,
-      "score": 180.9,
-      "auto_rank": 1002,
-      "auto_claim": "not",
-      "rank": 7
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "cdf-area-extension",
-       "independent-sum-consistency"
-      ],
-      "conclusion": "integer-negative-self-similarity",
-      "yes": 377,
-      "no": 115,
-      "score": 176.2,
-      "auto_rank": 868,
-      "auto_claim": "not",
-      "rank": 8
-     },
-     {
-      "kind": "check",
-      "model": "lexicographic-nonatomic-mass",
-      "principle": "integer-affine-preservation",
-      "yes": 117,
-      "no": 334,
-      "score": 173.3,
-      "auto_rank": 1193,
-      "auto_claim": "entails",
-      "rank": 9
+      "rank": 3
      },
      {
       "kind": "check",
       "model": "cdf-conclosure-preorder",
-      "principle": "pasadena-value",
-      "yes": 91,
-      "no": 389,
-      "score": 147.5,
-      "auto_rank": 796,
-      "auto_claim": "entails",
-      "rank": 10
-     },
-     {
-      "kind": "check",
-      "model": "cdf-conclosure-preorder",
-      "principle": "alternating-st-petersburg-value",
-      "yes": 91,
-      "no": 384,
-      "score": 147.1,
-      "auto_rank": 826,
-      "auto_claim": "entails",
-      "rank": 11
-     },
-     {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "pasadena-value",
-      "yes": 87,
-      "no": 370,
-      "score": 140.9,
-      "auto_rank": 919,
-      "auto_claim": "entails",
-      "rank": 12
-     },
-     {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "alternating-st-petersburg-value",
-      "yes": 87,
-      "no": 363,
-      "score": 140.4,
-      "auto_rank": 958,
-      "auto_claim": "entails",
-      "rank": 13
-     },
-     {
-      "kind": "check",
-      "model": "geometric-continuous-ultrafilter",
-      "principle": "existential-copula-sum-consistency",
-      "yes": 257,
-      "no": 91,
-      "score": 134.4,
-      "auto_rank": 1805,
+      "principle": "integer-negative-self-similarity",
+      "yes": 273,
+      "no": 100,
+      "score": 146.4,
+      "auto_rank": 1036,
       "auto_claim": "not",
-      "rank": 14
+      "rank": 4
      },
      {
       "kind": "question",
@@ -7297,122 +7525,75 @@
       "yes": 116,
       "no": 153,
       "score": 132.0,
-      "auto_rank": 2976,
+      "auto_rank": 2029,
       "auto_claim": "entails",
-      "rank": 15
+      "rank": 5
      },
      {
       "kind": "check",
-      "model": "affine-symmetric-extension",
-      "principle": "comonotonic-sum-consistency",
-      "yes": 286,
-      "no": 84,
-      "score": 129.9,
-      "auto_rank": 1560,
+      "model": "geometric-continuous-ultrafilter",
+      "principle": "existential-copula-sum-consistency",
+      "yes": 200,
+      "no": 91,
+      "score": 125.1,
+      "auto_rank": 1540,
       "auto_claim": "not",
-      "rank": 16
+      "rank": 6
+     },
+     {
+      "kind": "check",
+      "model": "conjectured-total-independent-sum-extension",
+      "principle": "integer-negative-self-similarity",
+      "yes": 258,
+      "no": 80,
+      "score": 122.1,
+      "auto_rank": 1117,
+      "auto_claim": "not",
+      "rank": 7
      },
      {
       "kind": "check",
       "model": "conjectured-total-independent-sum-extension",
       "principle": "positive-affine-invariance",
-      "yes": 124,
+      "yes": 110,
       "no": 128,
-      "score": 126.0,
-      "auto_rank": 3729,
+      "score": 118.3,
+      "auto_rank": 2652,
       "auto_claim": "entails",
-      "rank": 17
+      "rank": 8
      },
      {
       "kind": "check",
       "model": "conjectured-total-independent-sum-extension",
       "principle": "scale-invariance",
-      "yes": 124,
+      "yes": 110,
       "no": 128,
-      "score": 126.0,
-      "auto_rank": 3730,
+      "score": 118.3,
+      "auto_rank": 2653,
       "auto_claim": "entails",
-      "rank": 18
-     },
-     {
-      "kind": "check",
-      "model": "conjectured-total-independent-sum-extension",
-      "principle": "alternating-st-petersburg-value",
-      "yes": 84,
-      "no": 222,
-      "score": 121.9,
-      "auto_rank": 2194,
-      "auto_claim": "entails",
-      "rank": 19
-     },
-     {
-      "kind": "check",
-      "model": "conjectured-total-independent-sum-extension",
-      "principle": "pasadena-value",
-      "yes": 84,
-      "no": 222,
-      "score": 121.9,
-      "auto_rank": 2195,
-      "auto_claim": "entails",
-      "rank": 20
-     },
-     {
-      "kind": "check",
-      "model": "conjectured-total-independent-sum-extension",
-      "principle": "negative-self-similarity",
-      "yes": 346,
-      "no": 74,
-      "score": 121.9,
-      "auto_rank": 1096,
-      "auto_claim": "not",
-      "rank": 21
-     },
-     {
-      "kind": "check",
-      "model": "lexicographic-hamel-tie-break",
-      "principle": "alternating-st-petersburg-value",
-      "yes": 152,
-      "no": 90,
-      "score": 113.1,
-      "auto_rank": 2989,
-      "auto_claim": "not",
-      "rank": 22
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "cdf-area-extension",
-       "independent-sum-consistency"
-      ],
-      "conclusion": "scale-invariance",
-      "yes": 129,
-      "no": 99,
-      "score": 112.0,
-      "auto_rank": 3678,
-      "auto_claim": "not",
-      "rank": 23
-     },
-     {
-      "kind": "check",
-      "model": "geometric-continuous-ultrafilter",
-      "principle": "pasadena-value",
-      "yes": 204,
-      "no": 74,
-      "score": 108.6,
-      "auto_rank": 2323,
-      "auto_claim": "not",
-      "rank": 24
+      "rank": 9
      },
      {
       "kind": "check",
       "model": "cdf-conclosure-preorder",
-      "principle": "arroyo-value",
-      "yes": 91,
-      "no": 133,
-      "score": 108.1,
-      "auto_rank": 3552,
+      "principle": "alternating-st-petersburg-value",
+      "yes": 89,
+      "no": 150,
+      "score": 111.7,
+      "auto_rank": 2094,
       "auto_claim": "entails",
-      "rank": 25
+      "rank": 10
+     },
+     {
+      "kind": "check",
+      "model": "cdf-conclosure-preorder",
+      "principle": "pasadena-value",
+      "yes": 89,
+      "no": 150,
+      "score": 111.7,
+      "auto_rank": 2095,
+      "auto_claim": "entails",
+      "rank": 11
      },
      {
       "kind": "question",
@@ -7423,9 +7604,9 @@
       "yes": 247,
       "no": 69,
       "score": 107.9,
-      "auto_rank": 1870,
+      "auto_rank": 1215,
       "auto_claim": "not",
-      "rank": 26
+      "rank": 12
      },
      {
       "kind": "check",
@@ -7434,20 +7615,9 @@
       "yes": 159,
       "no": 81,
       "score": 107.3,
-      "auto_rank": 2897,
+      "auto_rank": 1963,
       "auto_claim": "not",
-      "rank": 27
-     },
-     {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "arroyo-value",
-      "yes": 87,
-      "no": 128,
-      "score": 103.6,
-      "auto_rank": 3731,
-      "auto_claim": "entails",
-      "rank": 28
+      "rank": 13
      },
      {
       "kind": "question",
@@ -7455,22 +7625,208 @@
        "cdf-area-extension",
        "independent-sum-consistency"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 508,
-      "no": 57,
-      "score": 102.5,
-      "auto_rank": 443,
+      "conclusion": "scale-invariance",
+      "yes": 115,
+      "no": 99,
+      "score": 106.4,
+      "auto_rank": 2953,
       "auto_claim": "not",
-      "rank": 29
+      "rank": 14
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "independent-sum-consistency"
+      ],
+      "conclusion": "integer-negative-self-similarity",
+      "yes": 529,
+      "no": 59,
+      "score": 106.2,
+      "auto_rank": 272,
+      "auto_claim": "not",
+      "rank": 15
+     },
+     {
+      "kind": "check",
+      "model": "affine-symmetric-extension",
+      "principle": "comonotonic-sum-consistency",
+      "yes": 286,
+      "no": 64,
+      "score": 104.6,
+      "auto_rank": 881,
+      "auto_claim": "not",
+      "rank": 16
+     },
+     {
+      "kind": "check",
+      "model": "geometric-continuous-ultrafilter",
+      "principle": "pasadena-value",
+      "yes": 204,
+      "no": 67,
+      "score": 100.9,
+      "auto_rank": 1517,
+      "auto_claim": "not",
+      "rank": 17
+     },
+     {
+      "kind": "check",
+      "model": "conjectured-total-independent-sum-extension",
+      "principle": "alternating-st-petersburg-value",
+      "yes": 84,
+      "no": 120,
+      "score": 98.8,
+      "auto_rank": 2859,
+      "auto_claim": "entails",
+      "rank": 18
+     },
+     {
+      "kind": "check",
+      "model": "conjectured-total-independent-sum-extension",
+      "principle": "pasadena-value",
+      "yes": 84,
+      "no": 120,
+      "score": 98.8,
+      "auto_rank": 2860,
+      "auto_claim": "entails",
+      "rank": 19
      },
      {
       "kind": "check",
       "model": "lexicographic-folded-extension",
       "principle": "existential-copula-sum-consistency",
-      "yes": 251,
+      "yes": 200,
       "no": 64,
-      "score": 102.0,
-      "auto_rank": 1844,
+      "score": 97.0,
+      "auto_rank": 1541,
+      "auto_claim": "not",
+      "rank": 20
+     },
+     {
+      "kind": "check",
+      "model": "lexicographic-hamel-tie-break",
+      "principle": "independent-sum-consistency",
+      "yes": 470,
+      "no": 54,
+      "score": 96.9,
+      "auto_rank": 309,
+      "auto_claim": "not",
+      "rank": 21
+     },
+     {
+      "kind": "check",
+      "model": "lexicographic-hamel-tie-break",
+      "principle": "independent-sum-preservation",
+      "yes": 470,
+      "no": 54,
+      "score": 96.9,
+      "auto_rank": 310,
+      "auto_claim": "not",
+      "rank": 22
+     },
+     {
+      "kind": "check",
+      "model": "lexicographic-folded-extension",
+      "principle": "pasadena-value",
+      "yes": 213,
+      "no": 61,
+      "score": 94.8,
+      "auto_rank": 1461,
+      "auto_claim": "not",
+      "rank": 23
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "expected-utility",
+       "universal-copula-sum-consistency"
+      ],
+      "conclusion": "rich-outcomes",
+      "yes": 122,
+      "no": 77,
+      "score": 94.4,
+      "auto_rank": 2812,
+      "auto_claim": "not",
+      "rank": 24
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "comonotonic-sum-consistency"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 398,
+      "no": 53,
+      "score": 93.5,
+      "auto_rank": 426,
+      "auto_claim": "not",
+      "rank": 25
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "independent-sum-consistency"
+      ],
+      "conclusion": "rich-outcomes",
+      "yes": 121,
+      "no": 76,
+      "score": 93.4,
+      "auto_rank": 2828,
+      "auto_claim": "not",
+      "rank": 26
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "universal-copula-sum-consistency"
+      ],
+      "conclusion": "stochastic-equivalence",
+      "yes": 125,
+      "no": 74,
+      "score": 93.0,
+      "auto_rank": 2737,
+      "auto_claim": "not",
+      "rank": 27
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "full-sum-consistency"
+      ],
+      "conclusion": "simple-eu",
+      "yes": 123,
+      "no": 73,
+      "score": 91.6,
+      "auto_rank": 2784,
+      "auto_claim": "not",
+      "rank": 28
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "stochastic-dominance",
+       "universal-copula-sum-consistency"
+      ],
+      "conclusion": "false",
+      "yes": 245,
+      "no": 55,
+      "score": 89.8,
+      "auto_rank": 1218,
+      "auto_claim": "not",
+      "rank": 29
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "universal-copula-sum-consistency"
+      ],
+      "conclusion": "simple-relative-expectation",
+      "yes": 125,
+      "no": 68,
+      "score": 88.1,
+      "auto_rank": 2738,
       "auto_claim": "not",
       "rank": 30
      }
@@ -7482,12 +7838,12 @@
        "antitonic-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 4223,
+      "yes": 4211,
       "no": 0,
       "score": 0.0,
       "auto_rank": 1,
       "auto_claim": "not",
-      "rank": 17741
+      "rank": 16976
      },
      {
       "kind": "question",
@@ -7496,12 +7852,12 @@
        "independent-sum-cancellation"
       ],
       "conclusion": "false",
-      "yes": 3045,
+      "yes": 3033,
       "no": 0,
       "score": 0.0,
       "auto_rank": 2,
       "auto_claim": "not",
-      "rank": 17742
+      "rank": 16977
      },
      {
       "kind": "question",
@@ -7510,12 +7866,12 @@
        "independent-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 2984,
+      "yes": 2972,
       "no": 1,
       "score": 2.0,
       "auto_rank": 3,
       "auto_claim": "not",
-      "rank": 12848
+      "rank": 12413
      },
      {
       "kind": "question",
@@ -7524,12 +7880,12 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 2902,
+      "yes": 2894,
       "no": 1,
       "score": 2.0,
       "auto_rank": 4,
       "auto_claim": "not",
-      "rank": 12849
+      "rank": 12414
      },
      {
       "kind": "question",
@@ -7538,12 +7894,12 @@
        "independent-sum-cancellation"
       ],
       "conclusion": "false",
-      "yes": 2788,
+      "yes": 2780,
       "no": 1,
       "score": 2.0,
       "auto_rank": 5,
       "auto_claim": "not",
-      "rank": 12850
+      "rank": 12415
      },
      {
       "kind": "question",
@@ -7552,12 +7908,12 @@
        "independent-sum-preservation"
       ],
       "conclusion": "false",
-      "yes": 2783,
+      "yes": 2775,
       "no": 1,
       "score": 2.0,
       "auto_rank": 6,
       "auto_claim": "not",
-      "rank": 12851
+      "rank": 12416
      },
      {
       "kind": "question",
@@ -7566,12 +7922,12 @@
        "independent-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 2702,
+      "yes": 2694,
       "no": 3,
       "score": 6.0,
       "auto_rank": 7,
       "auto_claim": "not",
-      "rank": 5856
+      "rank": 5726
      },
      {
       "kind": "question",
@@ -7580,12 +7936,12 @@
        "comonotonic-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 2699,
+      "yes": 2691,
       "no": 1,
       "score": 2.0,
       "auto_rank": 8,
       "auto_claim": "not",
-      "rank": 12852
+      "rank": 12417
      },
      {
       "kind": "question",
@@ -7593,12 +7949,12 @@
        "universal-copula-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 2610,
+      "yes": 2602,
       "no": 8,
       "score": 16.0,
       "auto_rank": 9,
       "auto_claim": "not",
-      "rank": 1550
+      "rank": 1466
      },
      {
       "kind": "question",
@@ -7611,7 +7967,7 @@
       "score": 0.0,
       "auto_rank": 10,
       "auto_claim": "not",
-      "rank": 17743
+      "rank": 16978
      },
      {
       "kind": "question",
@@ -7624,7 +7980,7 @@
       "score": 0.0,
       "auto_rank": 11,
       "auto_claim": "not",
-      "rank": 17744
+      "rank": 16979
      },
      {
       "kind": "question",
@@ -7632,23 +7988,23 @@
        "archimedean-gambles"
       ],
       "conclusion": "false",
-      "yes": 1822,
+      "yes": 1818,
       "no": 0,
       "score": 0.0,
       "auto_rank": 12,
       "auto_claim": "not",
-      "rank": 17745
+      "rank": 16980
      },
      {
       "kind": "question",
       "premises": [],
       "conclusion": "stochastic-equivalence",
-      "yes": 1592,
+      "yes": 1588,
       "no": 0,
       "score": 0.0,
       "auto_rank": 13,
       "auto_claim": "not",
-      "rank": 17746
+      "rank": 16981
      },
      {
       "kind": "question",
@@ -7662,7 +8018,7 @@
       "score": 2.0,
       "auto_rank": 14,
       "auto_claim": "not",
-      "rank": 12853
+      "rank": 12418
      },
      {
       "kind": "question",
@@ -7676,7 +8032,7 @@
       "score": 2.0,
       "auto_rank": 15,
       "auto_claim": "not",
-      "rank": 12854
+      "rank": 12419
      },
      {
       "kind": "question",
@@ -7689,7 +8045,7 @@
       "score": 2.0,
       "auto_rank": 16,
       "auto_claim": "not",
-      "rank": 12855
+      "rank": 12420
      },
      {
       "kind": "question",
@@ -7703,7 +8059,7 @@
       "score": 10.0,
       "auto_rank": 17,
       "auto_claim": "not",
-      "rank": 2977
+      "rank": 2852
      },
      {
       "kind": "question",
@@ -7716,7 +8072,7 @@
       "score": 10.0,
       "auto_rank": 18,
       "auto_claim": "not",
-      "rank": 2978
+      "rank": 2853
      },
      {
       "kind": "question",
@@ -7724,25 +8080,25 @@
        "full-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 1322,
+      "yes": 1318,
       "no": 9,
       "score": 17.9,
       "auto_rank": 19,
       "auto_claim": "not",
-      "rank": 1282
+      "rank": 1235
      },
      {
       "kind": "question",
       "premises": [
        "existential-copula-sum-consistency"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1309,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1252,
       "no": 0,
       "score": 0.0,
       "auto_rank": 20,
       "auto_claim": "not",
-      "rank": 17747
+      "rank": 16982
      },
      {
       "kind": "question",
@@ -7756,20 +8112,7 @@
       "score": 2.0,
       "auto_rank": 21,
       "auto_claim": "not",
-      "rank": 12856
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "shift-invariance"
-      ],
-      "conclusion": "stochastic-dominance",
-      "yes": 1155,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 22,
-      "auto_claim": "not",
-      "rank": 17748
+      "rank": 12421
      },
      {
       "kind": "question",
@@ -7777,13 +8120,26 @@
        "existential-copula-sum-consistency",
        "restricted-stochastic-equivalence"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1134,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1155,
       "no": 1,
       "score": 2.0,
+      "auto_rank": 22,
+      "auto_claim": "not",
+      "rank": 12422
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "shift-invariance"
+      ],
+      "conclusion": "stochastic-dominance",
+      "yes": 1149,
+      "no": 0,
+      "score": 0.0,
       "auto_rank": 23,
       "auto_claim": "not",
-      "rank": 12857
+      "rank": 16983
      },
      {
       "kind": "question",
@@ -7791,13 +8147,13 @@
        "existential-copula-sum-consistency",
        "stochastic-equivalence"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1116,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1146,
       "no": 2,
       "score": 4.0,
       "auto_rank": 24,
       "auto_claim": "not",
-      "rank": 9247
+      "rank": 8909
      },
      {
       "kind": "question",
@@ -7805,13 +8161,13 @@
        "archimedean-outcomes",
        "existential-copula-sum-consistency"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1116,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1140,
       "no": 1,
       "score": 2.0,
       "auto_rank": 25,
       "auto_claim": "not",
-      "rank": 12858
+      "rank": 12423
      },
      {
       "kind": "question",
@@ -7819,27 +8175,13 @@
        "existential-copula-sum-consistency",
        "restricted-totality"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1116,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1140,
       "no": 1,
       "score": 2.0,
       "auto_rank": 26,
       "auto_claim": "not",
-      "rank": 12859
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "simple-eu"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1104,
-      "no": 4,
-      "score": 8.0,
-      "auto_rank": 27,
-      "auto_claim": "not",
-      "rank": 4432
+      "rank": 12424
      },
      {
       "kind": "question",
@@ -7847,13 +8189,27 @@
        "existential-copula-sum-consistency",
        "stochastic-dominance"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1104,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1137,
       "no": 3,
       "score": 6.0,
+      "auto_rank": 27,
+      "auto_claim": "not",
+      "rank": 5727
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "simple-eu"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 1134,
+      "no": 4,
+      "score": 8.0,
       "auto_rank": 28,
       "auto_claim": "not",
-      "rank": 5857
+      "rank": 4264
      },
      {
       "kind": "question",
@@ -7861,27 +8217,27 @@
        "existential-copula-sum-consistency",
        "statewise-dominance"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1098,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1131,
       "no": 1,
       "score": 2.0,
       "auto_rank": 29,
       "auto_claim": "not",
-      "rank": 12860
+      "rank": 12425
      },
      {
       "kind": "question",
       "premises": [
        "existential-copula-sum-consistency",
-       "rich-outcomes"
+       "integer-affine-preservation"
       ],
-      "conclusion": "negative-self-similarity",
-      "yes": 1086,
+      "conclusion": "independent-sum-consistency",
+      "yes": 1128,
       "no": 1,
       "score": 2.0,
       "auto_rank": 30,
       "auto_claim": "not",
-      "rank": 12861
+      "rank": 12426
      }
     ],
     "recorded": [
@@ -8184,8 +8540,8 @@
     "progress": {
      "premises": 2,
      "questions": 5988,
-     "settled": 2033,
-     "open": 3955,
+     "settled": 2351,
+     "open": 3637,
      "by_premises": [
       [
        30,
@@ -8193,38 +8549,16 @@
       ],
       [
        630,
-       412
+       427
       ],
       [
        5328,
-       1591
+       1894
       ]
      ]
     },
-    "open": 3955,
+    "open": 3637,
     "rows": [
-     {
-      "kind": "check",
-      "model": "cdf-conclosure-preorder",
-      "principle": "integer-negative-self-similarity",
-      "yes": 150,
-      "no": 134,
-      "score": 141.5,
-      "auto_rank": 656,
-      "auto_claim": "not",
-      "rank": 1
-     },
-     {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "integer-negative-self-similarity",
-      "yes": 153,
-      "no": 124,
-      "score": 137.0,
-      "auto_rank": 645,
-      "auto_claim": "not",
-      "rank": 2
-     },
      {
       "kind": "check",
       "model": "affine-symmetric-extension",
@@ -8232,7 +8566,29 @@
       "yes": 124,
       "no": 117,
       "score": 120.4,
-      "auto_rank": 900,
+      "auto_rank": 708,
+      "auto_claim": "not",
+      "rank": 1
+     },
+     {
+      "kind": "check",
+      "model": "cdf-area-preorder",
+      "principle": "independent-sum-cancellation",
+      "yes": 157,
+      "no": 76,
+      "score": 102.4,
+      "auto_rank": 392,
+      "auto_claim": "not",
+      "rank": 2
+     },
+     {
+      "kind": "check",
+      "model": "cdf-area-preorder",
+      "principle": "independent-sum-consistency",
+      "yes": 157,
+      "no": 76,
+      "score": 102.4,
+      "auto_rank": 393,
       "auto_claim": "not",
       "rank": 3
      },
@@ -8243,101 +8599,9 @@
       "yes": 63,
       "no": 267,
       "score": 101.9,
-      "auto_rank": 230,
+      "auto_rank": 146,
       "auto_claim": "entails",
       "rank": 4
-     },
-     {
-      "kind": "check",
-      "model": "cdf-conclosure-preorder",
-      "principle": "negative-self-similarity",
-      "yes": 201,
-      "no": 67,
-      "score": 100.5,
-      "auto_rank": 401,
-      "auto_claim": "not",
-      "rank": 5
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "independent-sum-consistency",
-       "negative-affine-anti-invariance"
-      ],
-      "conclusion": "integer-negative-self-similarity",
-      "yes": 151,
-      "no": 73,
-      "score": 98.4,
-      "auto_rank": 652,
-      "auto_claim": "not",
-      "rank": 6
-     },
-     {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "negative-self-similarity",
-      "yes": 205,
-      "no": 62,
-      "score": 95.2,
-      "auto_rank": 382,
-      "auto_claim": "not",
-      "rank": 7
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "negative-affine-anti-invariance",
-       "negative-self-similarity"
-      ],
-      "conclusion": "symmetric-neutrality",
-      "yes": 90,
-      "no": 80,
-      "score": 84.7,
-      "auto_rank": 1159,
-      "auto_claim": "not",
-      "rank": 8
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "independent-sum-consistency",
-       "positive-affine-invariance"
-      ],
-      "conclusion": "integer-negative-self-similarity",
-      "yes": 155,
-      "no": 57,
-      "score": 83.3,
-      "auto_rank": 635,
-      "auto_claim": "not",
-      "rank": 9
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "independent-sum-consistency",
-       "scale-invariance"
-      ],
-      "conclusion": "integer-negative-self-similarity",
-      "yes": 155,
-      "no": 57,
-      "score": 83.3,
-      "auto_rank": 636,
-      "auto_claim": "not",
-      "rank": 10
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "integer-negative-self-similarity",
-       "negative-affine-anti-invariance"
-      ],
-      "conclusion": "symmetric-neutrality",
-      "yes": 181,
-      "no": 53,
-      "score": 82.0,
-      "auto_rank": 495,
-      "auto_claim": "not",
-      "rank": 11
      },
      {
       "kind": "check",
@@ -8346,9 +8610,9 @@
       "yes": 69,
       "no": 100,
       "score": 81.7,
-      "auto_rank": 1084,
+      "auto_rank": 874,
       "auto_claim": "entails",
-      "rank": 12
+      "rank": 5
      },
      {
       "kind": "question",
@@ -8360,53 +8624,34 @@
       "yes": 63,
       "no": 109,
       "score": 79.8,
-      "auto_rank": 1011,
+      "auto_rank": 818,
       "auto_claim": "entails",
-      "rank": 13
+      "rank": 6
      },
      {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "pasadena-value",
-      "yes": 49,
-      "no": 190,
-      "score": 77.9,
-      "auto_rank": 438,
-      "auto_claim": "entails",
-      "rank": 14
-     },
-     {
-      "kind": "check",
-      "model": "cdf-conclosure-preorder",
-      "principle": "pasadena-value",
-      "yes": 48,
-      "no": 204,
-      "score": 77.7,
-      "auto_rank": 384,
-      "auto_claim": "entails",
-      "rank": 15
-     },
-     {
-      "kind": "check",
-      "model": "cdf-area-preorder",
-      "principle": "alternating-st-petersburg-value",
-      "yes": 49,
-      "no": 186,
-      "score": 77.6,
-      "auto_rank": 460,
-      "auto_claim": "entails",
-      "rank": 16
+      "kind": "question",
+      "premises": [
+       "independent-sum-consistency",
+       "negative-affine-anti-invariance"
+      ],
+      "conclusion": "alternating-st-petersburg-value",
+      "yes": 124,
+      "no": 56,
+      "score": 77.2,
+      "auto_rank": 709,
+      "auto_claim": "not",
+      "rank": 7
      },
      {
       "kind": "check",
       "model": "cdf-conclosure-preorder",
-      "principle": "alternating-st-petersburg-value",
-      "yes": 48,
-      "no": 201,
-      "score": 77.5,
-      "auto_rank": 402,
-      "auto_claim": "entails",
-      "rank": 17
+      "principle": "integer-negative-self-similarity",
+      "yes": 150,
+      "no": 50,
+      "score": 75.0,
+      "auto_rank": 426,
+      "auto_claim": "not",
+      "rank": 8
      },
      {
       "kind": "question",
@@ -8418,9 +8663,9 @@
       "yes": 63,
       "no": 88,
       "score": 73.4,
-      "auto_rank": 1180,
+      "auto_rank": 946,
       "auto_claim": "entails",
-      "rank": 18
+      "rank": 9
      },
      {
       "kind": "question",
@@ -8432,9 +8677,9 @@
       "yes": 63,
       "no": 85,
       "score": 72.4,
-      "auto_rank": 1209,
+      "auto_rank": 968,
       "auto_claim": "entails",
-      "rank": 19
+      "rank": 10
      },
      {
       "kind": "question",
@@ -8446,34 +8691,9 @@
       "yes": 125,
       "no": 51,
       "score": 72.4,
-      "auto_rank": 888,
+      "auto_rank": 691,
       "auto_claim": "not",
-      "rank": 20
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "l1-continuity",
-       "negative-affine-anti-invariance"
-      ],
-      "conclusion": "integer-negative-self-similarity",
-      "yes": 155,
-      "no": 47,
-      "score": 72.1,
-      "auto_rank": 637,
-      "auto_claim": "not",
-      "rank": 21
-     },
-     {
-      "kind": "check",
-      "model": "conjectured-total-independent-sum-extension",
-      "principle": "integer-negative-self-similarity",
-      "yes": 128,
-      "no": 50,
-      "score": 71.9,
-      "auto_rank": 854,
-      "auto_claim": "not",
-      "rank": 22
+      "rank": 11
      },
      {
       "kind": "check",
@@ -8482,9 +8702,9 @@
       "yes": 114,
       "no": 50,
       "score": 69.5,
-      "auto_rank": 971,
+      "auto_rank": 786,
       "auto_claim": "not",
-      "rank": 23
+      "rank": 12
      },
      {
       "kind": "check",
@@ -8493,23 +8713,9 @@
       "yes": 114,
       "no": 50,
       "score": 69.5,
-      "auto_rank": 972,
+      "auto_rank": 787,
       "auto_claim": "not",
-      "rank": 24
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "cdf-area-extension",
-       "independent-sum-consistency"
-      ],
-      "conclusion": "integer-negative-self-similarity",
-      "yes": 225,
-      "no": 41,
-      "score": 69.4,
-      "auto_rank": 301,
-      "auto_claim": "not",
-      "rank": 25
+      "rank": 13
      },
      {
       "kind": "question",
@@ -8521,9 +8727,9 @@
       "yes": 65,
       "no": 71,
       "score": 67.9,
-      "auto_rank": 1404,
+      "auto_rank": 1155,
       "auto_claim": "entails",
-      "rank": 26
+      "rank": 14
      },
      {
       "kind": "question",
@@ -8535,9 +8741,9 @@
       "yes": 65,
       "no": 71,
       "score": 67.9,
-      "auto_rank": 1405,
+      "auto_rank": 1156,
       "auto_claim": "entails",
-      "rank": 27
+      "rank": 15
      },
      {
       "kind": "question",
@@ -8549,9 +8755,62 @@
       "yes": 74,
       "no": 62,
       "score": 67.5,
-      "auto_rank": 1360,
+      "auto_rank": 1122,
       "auto_claim": "not",
-      "rank": 28
+      "rank": 16
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "folded-expectation",
+       "integer-negative-self-similarity"
+      ],
+      "conclusion": "existential-copula-sum-consistency",
+      "yes": 64,
+      "no": 67,
+      "score": 65.5,
+      "auto_rank": 1216,
+      "auto_claim": "entails",
+      "rank": 17
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-consistency",
+       "positive-affine-invariance"
+      ],
+      "conclusion": "alternating-st-petersburg-value",
+      "yes": 126,
+      "no": 44,
+      "score": 65.2,
+      "auto_rank": 680,
+      "auto_claim": "not",
+      "rank": 18
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-consistency",
+       "scale-invariance"
+      ],
+      "conclusion": "alternating-st-petersburg-value",
+      "yes": 126,
+      "no": 44,
+      "score": 65.2,
+      "auto_rank": 681,
+      "auto_claim": "not",
+      "rank": 19
+     },
+     {
+      "kind": "check",
+      "model": "conjectured-total-independent-sum-extension",
+      "principle": "rational-affine-preservation",
+      "yes": 44,
+      "no": 125,
+      "score": 65.1,
+      "auto_rank": 692,
+      "auto_claim": "entails",
+      "rank": 20
      },
      {
       "kind": "question",
@@ -8559,13 +8818,27 @@
        "independent-sum-consistency",
        "negative-affine-anti-invariance"
       ],
-      "conclusion": "alternating-st-petersburg-value",
-      "yes": 48,
-      "no": 110,
-      "score": 66.8,
-      "auto_rank": 1000,
-      "auto_claim": "entails",
-      "rank": 29
+      "conclusion": "integer-negative-self-similarity",
+      "yes": 227,
+      "no": 37,
+      "score": 63.6,
+      "auto_rank": 184,
+      "auto_claim": "not",
+      "rank": 21
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "comonotonic-sum-consistency",
+       "folded-expectation"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 119,
+      "no": 42,
+      "score": 62.1,
+      "auto_rank": 745,
+      "auto_claim": "not",
+      "rank": 22
      },
      {
       "kind": "question",
@@ -8573,11 +8846,109 @@
        "cdf-area-extension",
        "independent-sum-consistency"
       ],
-      "conclusion": "alternating-st-petersburg-value",
-      "yes": 71,
-      "no": 62,
-      "score": 66.2,
-      "auto_rank": 1406,
+      "conclusion": "positive-affine-invariance",
+      "yes": 123,
+      "no": 41,
+      "score": 61.5,
+      "auto_rank": 721,
+      "auto_claim": "not",
+      "rank": 23
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "independent-sum-consistency"
+      ],
+      "conclusion": "scale-invariance",
+      "yes": 123,
+      "no": 41,
+      "score": 61.5,
+      "auto_rank": 722,
+      "auto_claim": "not",
+      "rank": 24
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-cancellation",
+       "totality"
+      ],
+      "conclusion": "rational-scale-invariance",
+      "yes": 77,
+      "no": 51,
+      "score": 61.4,
+      "auto_rank": 1048,
+      "auto_claim": "not",
+      "rank": 25
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-consistency",
+       "totality"
+      ],
+      "conclusion": "rational-scale-invariance",
+      "yes": 77,
+      "no": 51,
+      "score": 61.4,
+      "auto_rank": 1049,
+      "auto_claim": "not",
+      "rank": 26
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-preservation",
+       "totality"
+      ],
+      "conclusion": "rational-scale-invariance",
+      "yes": 77,
+      "no": 51,
+      "score": 61.4,
+      "auto_rank": 1050,
+      "auto_claim": "not",
+      "rank": 27
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "l1-continuity",
+       "negative-self-similarity"
+      ],
+      "conclusion": "existential-copula-sum-consistency",
+      "yes": 63,
+      "no": 59,
+      "score": 60.9,
+      "auto_rank": 1300,
+      "auto_claim": "not",
+      "rank": 28
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "independent-sum-consistency"
+      ],
+      "conclusion": "rational-affine-preservation",
+      "yes": 47,
+      "no": 83,
+      "score": 60.0,
+      "auto_rank": 990,
+      "auto_claim": "entails",
+      "rank": 29
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "l1-continuity",
+       "negative-affine-anti-invariance"
+      ],
+      "conclusion": "existential-copula-sum-consistency",
+      "yes": 63,
+      "no": 57,
+      "score": 59.9,
+      "auto_rank": 1301,
       "auto_claim": "not",
       "rank": 30
      }
@@ -8589,40 +8960,25 @@
        "alternating-st-petersburg-value"
       ],
       "conclusion": "folded-expectation",
-      "yes": 849,
+      "yes": 663,
       "no": 0,
       "score": 0.0,
       "auto_rank": 1,
       "auto_claim": "not",
-      "rank": 3728
+      "rank": 3426
      },
      {
       "kind": "question",
       "premises": [
-       "alternating-st-petersburg-value",
        "existential-copula-sum-consistency"
       ],
-      "conclusion": "false",
-      "yes": 794,
+      "conclusion": "independent-sum-consistency",
+      "yes": 632,
       "no": 0,
       "score": 0.0,
       "auto_rank": 2,
       "auto_claim": "not",
-      "rank": 3729
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "pasadena-value"
-      ],
-      "conclusion": "false",
-      "yes": 659,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 3,
-      "auto_claim": "not",
-      "rank": 3730
+      "rank": 3427
      },
      {
       "kind": "question",
@@ -8633,9 +8989,64 @@
       "yes": 627,
       "no": 0,
       "score": 0.0,
+      "auto_rank": 3,
+      "auto_claim": "not",
+      "rank": 3428
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "alternating-st-petersburg-value",
+       "existential-copula-sum-consistency"
+      ],
+      "conclusion": "false",
+      "yes": 608,
+      "no": 0,
+      "score": 0.0,
       "auto_rank": 4,
       "auto_claim": "not",
-      "rank": 3731
+      "rank": 3429
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "integer-affine-preservation"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 558,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 5,
+      "auto_claim": "not",
+      "rank": 2883
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "shift-transfer"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 537,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 6,
+      "auto_claim": "not",
+      "rank": 2884
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "alternating-st-petersburg-value"
+      ],
+      "conclusion": "negative-affine-anti-invariance",
+      "yes": 527,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 7,
+      "auto_claim": "not",
+      "rank": 3430
      },
      {
       "kind": "question",
@@ -8644,12 +9055,136 @@
        "integer-negative-self-similarity"
       ],
       "conclusion": "false",
-      "yes": 623,
+      "yes": 499,
       "no": 1,
       "score": 2.0,
-      "auto_rank": 5,
+      "auto_rank": 8,
       "auto_claim": "not",
-      "rank": 3137
+      "rank": 2885
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-cancellation"
+      ],
+      "conclusion": "negative-self-similarity",
+      "yes": 495,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 9,
+      "auto_claim": "not",
+      "rank": 3431
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "expected-utility"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 492,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 10,
+      "auto_claim": "not",
+      "rank": 2886
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "cdf-area-extension",
+       "existential-copula-sum-consistency"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 484,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 11,
+      "auto_claim": "not",
+      "rank": 1929
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "rational-affine-preservation"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 482,
+      "no": 2,
+      "score": 4.0,
+      "auto_rank": 12,
+      "auto_claim": "not",
+      "rank": 2475
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 478,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 13,
+      "auto_claim": "not",
+      "rank": 2887
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "rational-scale-invariance"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 472,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 14,
+      "auto_claim": "not",
+      "rank": 1930
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "pasadena-value"
+      ],
+      "conclusion": "false",
+      "yes": 469,
+      "no": 0,
+      "score": 0.0,
+      "auto_rank": 15,
+      "auto_claim": "not",
+      "rank": 3432
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "independent-sum-cancellation",
+       "shift-invariance"
+      ],
+      "conclusion": "negative-self-similarity",
+      "yes": 462,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 16,
+      "auto_claim": "not",
+      "rank": 2888
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "integer-affine-preservation"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 458,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 17,
+      "auto_claim": "not",
+      "rank": 1931
      },
      {
       "kind": "question",
@@ -8657,78 +9192,166 @@
        "integer-negative-self-similarity"
       ],
       "conclusion": "folded-expectation",
-      "yes": 581,
+      "yes": 457,
       "no": 1,
       "score": 2.0,
-      "auto_rank": 6,
+      "auto_rank": 18,
       "auto_claim": "not",
-      "rank": 3138
+      "rank": 2889
      },
      {
       "kind": "question",
       "premises": [
-       "alternating-st-petersburg-value"
+       "existential-copula-sum-consistency",
+       "positive-affine-invariance"
       ],
-      "conclusion": "negative-affine-anti-invariance",
-      "yes": 557,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 7,
+      "conclusion": "independent-sum-consistency",
+      "yes": 454,
+      "no": 5,
+      "score": 9.9,
+      "auto_rank": 19,
       "auto_claim": "not",
-      "rank": 3732
+      "rank": 1212
      },
      {
       "kind": "question",
       "premises": [
-       "existential-copula-sum-consistency"
+       "existential-copula-sum-consistency",
+       "scale-invariance"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 454,
+      "no": 5,
+      "score": 9.9,
+      "auto_rank": 20,
+      "auto_claim": "not",
+      "rank": 1213
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "reflection-anti-invariance"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 451,
+      "no": 1,
+      "score": 2.0,
+      "auto_rank": 21,
+      "auto_claim": "not",
+      "rank": 2890
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "rational-affine-preservation"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 442,
+      "no": 5,
+      "score": 9.9,
+      "auto_rank": 22,
+      "auto_claim": "not",
+      "rank": 1214
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "shift-transfer"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 441,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 23,
+      "auto_claim": "not",
+      "rank": 1932
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "rational-scale-invariance"
+      ],
+      "conclusion": "independent-sum-cancellation",
+      "yes": 440,
+      "no": 7,
+      "score": 13.8,
+      "auto_rank": 24,
+      "auto_claim": "not",
+      "rank": 827
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "independent-sum-cancellation"
       ],
       "conclusion": "negative-self-similarity",
-      "yes": 540,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 8,
+      "yes": 438,
+      "no": 2,
+      "score": 4.0,
+      "auto_rank": 25,
       "auto_claim": "not",
-      "rank": 3733
+      "rank": 2476
      },
      {
       "kind": "question",
       "premises": [
-       "alternating-st-petersburg-value",
-       "shift-invariance"
+       "existential-copula-sum-consistency",
+       "reflection-anti-invariance"
       ],
-      "conclusion": "folded-expectation",
-      "yes": 530,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 9,
+      "conclusion": "independent-sum-cancellation",
+      "yes": 435,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 26,
       "auto_claim": "not",
-      "rank": 3139
+      "rank": 1933
      },
      {
       "kind": "question",
       "premises": [
-       "alternating-st-petersburg-value"
+       "existential-copula-sum-consistency",
+       "negative-affine-anti-invariance"
       ],
-      "conclusion": "symmetric-neutrality",
-      "yes": 512,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 10,
+      "conclusion": "independent-sum-consistency",
+      "yes": 434,
+      "no": 7,
+      "score": 13.8,
+      "auto_rank": 27,
       "auto_claim": "not",
-      "rank": 3140
+      "rank": 828
      },
      {
       "kind": "question",
       "premises": [
-       "pasadena-value"
+       "existential-copula-sum-consistency",
+       "expected-utility"
       ],
-      "conclusion": "folded-expectation",
-      "yes": 503,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 11,
+      "conclusion": "independent-sum-cancellation",
+      "yes": 434,
+      "no": 3,
+      "score": 6.0,
+      "auto_rank": 28,
       "auto_claim": "not",
-      "rank": 3734
+      "rank": 1934
+     },
+     {
+      "kind": "question",
+      "premises": [
+       "existential-copula-sum-consistency",
+       "l1-continuity"
+      ],
+      "conclusion": "independent-sum-consistency",
+      "yes": 433,
+      "no": 4,
+      "score": 7.9,
+      "auto_rank": 29,
+      "auto_claim": "not",
+      "rank": 1585
      },
      {
       "kind": "question",
@@ -8737,257 +9360,12 @@
        "existential-copula-sum-consistency"
       ],
       "conclusion": "false",
-      "yes": 499,
+      "yes": 433,
       "no": 0,
       "score": 0.0,
-      "auto_rank": 12,
-      "auto_claim": "not",
-      "rank": 3735
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency"
-      ],
-      "conclusion": "independent-sum-consistency",
-      "yes": 487,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 13,
-      "auto_claim": "not",
-      "rank": 3736
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "negative-self-similarity"
-      ],
-      "conclusion": "false",
-      "yes": 444,
-      "no": 2,
-      "score": 4.0,
-      "auto_rank": 14,
-      "auto_claim": "not",
-      "rank": 2712
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "alternating-st-petersburg-value",
-       "shift-invariance"
-      ],
-      "conclusion": "symmetric-neutrality",
-      "yes": 440,
-      "no": 3,
-      "score": 6.0,
-      "auto_rank": 15,
-      "auto_claim": "not",
-      "rank": 2140
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "independent-sum-preservation"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 440,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 16,
-      "auto_claim": "not",
-      "rank": 3737
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "integer-affine-preservation",
-       "shift-invariance"
-      ],
-      "conclusion": "negative-affine-anti-invariance",
-      "yes": 429,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 17,
-      "auto_claim": "not",
-      "rank": 3141
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "alternating-st-petersburg-value",
-       "independent-sum-preservation"
-      ],
-      "conclusion": "false",
-      "yes": 425,
-      "no": 2,
-      "score": 4.0,
-      "auto_rank": 18,
-      "auto_claim": "not",
-      "rank": 2713
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "independent-sum-cancellation"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 419,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 19,
-      "auto_claim": "not",
-      "rank": 3738
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "alternating-st-petersburg-value",
-       "integer-affine-preservation"
-      ],
-      "conclusion": "folded-expectation",
-      "yes": 417,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 20,
-      "auto_claim": "not",
-      "rank": 3142
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "integer-affine-preservation"
-      ],
-      "conclusion": "independent-sum-consistency",
-      "yes": 413,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 21,
-      "auto_claim": "not",
-      "rank": 3143
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "alternating-st-petersburg-value",
-       "existential-copula-sum-consistency"
-      ],
-      "conclusion": "folded-expectation",
-      "yes": 411,
-      "no": 3,
-      "score": 6.0,
-      "auto_rank": 22,
-      "auto_claim": "not",
-      "rank": 2141
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "independent-sum-preservation",
-       "shift-invariance"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 410,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 23,
-      "auto_claim": "not",
-      "rank": 3144
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency"
-      ],
-      "conclusion": "independent-sum-preservation",
-      "yes": 407,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 24,
-      "auto_claim": "not",
-      "rank": 3145
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "alternating-st-petersburg-value"
-      ],
-      "conclusion": "totality",
-      "yes": 404,
-      "no": 0,
-      "score": 0.0,
-      "auto_rank": 25,
-      "auto_claim": "not",
-      "rank": 3739
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "shift-transfer"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 402,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 26,
-      "auto_claim": "not",
-      "rank": 3146
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "alternating-st-petersburg-value",
-       "comonotonic-sum-consistency"
-      ],
-      "conclusion": "false",
-      "yes": 401,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 27,
-      "auto_claim": "not",
-      "rank": 3147
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency",
-       "expected-utility"
-      ],
-      "conclusion": "negative-self-similarity",
-      "yes": 396,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 28,
-      "auto_claim": "not",
-      "rank": 3148
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency"
-      ],
-      "conclusion": "integer-negative-self-similarity",
-      "yes": 396,
-      "no": 1,
-      "score": 2.0,
-      "auto_rank": 29,
-      "auto_claim": "not",
-      "rank": 3149
-     },
-     {
-      "kind": "question",
-      "premises": [
-       "existential-copula-sum-consistency"
-      ],
-      "conclusion": "positive-affine-invariance",
-      "yes": 393,
-      "no": 1,
-      "score": 2.0,
       "auto_rank": 30,
       "auto_claim": "not",
-      "rank": 3150
+      "rank": 3433
      }
     ],
     "recorded": [
@@ -9000,9 +9378,9 @@
       "yes": 15,
       "no": 23,
       "score": 18.2,
-      "auto_rank": 2780,
+      "auto_rank": 2420,
       "auto_claim": "entails",
-      "rank": 699,
+      "rank": 557,
       "conjectures": [
        {
         "id": "conjectured-du-comonotonic-imply-rational-affine-preservation",
@@ -9024,9 +9402,9 @@
       "yes": 1,
       "no": 56,
       "score": 2.0,
-      "auto_rank": 1756,
+      "auto_rank": 1439,
       "auto_claim": "entails",
-      "rank": 3402,
+      "rank": 3105,
       "conjectures": [
        {
         "id": "conjectured-dtu-comonotonic-imply-scale",
@@ -10912,15 +11290,7 @@
    ],
    [
     "comonotonic-sum-consistency",
-    "alternating-st-petersburg-value"
-   ],
-   [
-    "comonotonic-sum-consistency",
     "archimedean-outcomes"
-   ],
-   [
-    "comonotonic-sum-consistency",
-    "arroyo-value"
    ],
    [
     "comonotonic-sum-consistency",
@@ -10941,18 +11311,6 @@
    [
     "comonotonic-sum-consistency",
     "integer-affine-preservation"
-   ],
-   [
-    "comonotonic-sum-consistency",
-    "integer-negative-self-similarity"
-   ],
-   [
-    "comonotonic-sum-consistency",
-    "negative-self-similarity"
-   ],
-   [
-    "comonotonic-sum-consistency",
-    "pasadena-value"
    ],
    [
     "comonotonic-sum-consistency",
@@ -11096,15 +11454,7 @@
    ],
    [
     "existential-copula-sum-consistency",
-    "alternating-st-petersburg-value"
-   ],
-   [
-    "existential-copula-sum-consistency",
     "archimedean-outcomes"
-   ],
-   [
-    "existential-copula-sum-consistency",
-    "arroyo-value"
    ],
    [
     "existential-copula-sum-consistency",
@@ -11125,18 +11475,6 @@
    [
     "existential-copula-sum-consistency",
     "integer-affine-preservation"
-   ],
-   [
-    "existential-copula-sum-consistency",
-    "integer-negative-self-similarity"
-   ],
-   [
-    "existential-copula-sum-consistency",
-    "negative-self-similarity"
-   ],
-   [
-    "existential-copula-sum-consistency",
-    "pasadena-value"
    ],
    [
     "existential-copula-sum-consistency",
@@ -11724,15 +12062,7 @@
    ],
    [
     "independent-sum-preservation",
-    "alternating-st-petersburg-value"
-   ],
-   [
-    "independent-sum-preservation",
     "archimedean-outcomes"
-   ],
-   [
-    "independent-sum-preservation",
-    "arroyo-value"
    ],
    [
     "independent-sum-preservation",
@@ -11768,19 +12098,7 @@
    ],
    [
     "independent-sum-preservation",
-    "integer-negative-self-similarity"
-   ],
-   [
-    "independent-sum-preservation",
     "l1-continuity"
-   ],
-   [
-    "independent-sum-preservation",
-    "negative-self-similarity"
-   ],
-   [
-    "independent-sum-preservation",
-    "pasadena-value"
    ],
    [
     "independent-sum-preservation",
@@ -11861,10 +12179,6 @@
    [
     "integer-affine-preservation",
     "restricted-totality"
-   ],
-   [
-    "integer-affine-preservation",
-    "rich-outcomes"
    ],
    [
     "integer-affine-preservation",
@@ -12324,14 +12638,6 @@
    ],
    [
     "positive-affine-invariance",
-    "integer-affine-preservation"
-   ],
-   [
-    "positive-affine-invariance",
-    "rational-affine-preservation"
-   ],
-   [
-    "positive-affine-invariance",
     "reflection-anti-invariance"
    ],
    [
@@ -12377,10 +12683,6 @@
    [
     "rational-affine-preservation",
     "restricted-totality"
-   ],
-   [
-    "rational-affine-preservation",
-    "rich-outcomes"
    ],
    [
     "rational-affine-preservation",
@@ -13086,13 +13388,8 @@
     "scale-invariance"
    ],
    "cdf-area-preorder": [
-    "alternating-st-petersburg-value",
-    "arroyo-value",
     "independent-sum-cancellation",
-    "independent-sum-consistency",
-    "integer-negative-self-similarity",
-    "negative-self-similarity",
-    "pasadena-value"
+    "independent-sum-consistency"
    ],
    "cdf-area-unit-threshold": [
     "alternating-st-petersburg-value",
@@ -13212,10 +13509,7 @@
     "shift-transfer",
     "simple-relative-expectation"
    ],
-   "lexicographic-nonatomic-mass": [
-    "integer-affine-preservation",
-    "rational-affine-preservation"
-   ],
+   "lexicographic-nonatomic-mass": [],
    "polynomial-asymmetric-continuous-ultrafilter": [
     "alternating-st-petersburg-value",
     "existential-copula-sum-consistency",
@@ -13264,12 +13558,12 @@
    "original-dtu-implies-simple-eu is redundant: derivable from ['sure-thing-to-independence', 'rich-archimedean-dominance-independence-imply-simple-eu']",
    "relative-self-similarity-evaluates-pasadena is redundant: derivable from ['negative-self-similarity-implies-integer', 'integer-self-similarity-relative-evaluates-pasadena']",
    "symmetric-dtu-refutes-independent-sum-candidate is redundant: derivable from ['independent-sum-implies-preservation', 'levy-refutes-neutral-independent-preservation']",
-   "symmetry-evaluates-alternating is redundant: derivable from ['symmetry-implies-negative-self-similarity', 'negative-self-similarity-evaluates-alternating']",
+   "symmetry-evaluates-alternating is redundant: derivable from ['negative-affine-implies-positive-affine', 'positive-affine-implies-rational-affine-preservation', 'rational-affine-preservation-implies-integer', 'negative-affine-implies-reflection', 'totality-independence-integer-affine-reflection-imply-integer-self-similarity', 'integer-self-similarity-evaluates-alternating']",
    "symmetry-implies-negative-self-similarity is redundant: derivable from ['totality-independence-negative-affine-imply-self-similarity']",
    "symmetry-implies-shift-transfer is redundant: derivable from ['negative-affine-implies-positive-affine', 'positive-affine-implies-shift', 'negative-affine-implies-reflection', 'reflection-implies-symmetric-neutrality', 'neutrality-shift-imply-shift-transfer']",
    "symmetry-implies-simple-relative is redundant: derivable from ['symmetry-implies-shift-transfer', 'shift-transfer-implies-simple-relative']",
    "symmetry-l1-evaluates-arroyo is redundant: derivable from ['dtu-l1-implies-eu', 'eu-independence-l1-imply-relative', 'negative-affine-implies-positive-affine', 'positive-affine-implies-shift', 'negative-affine-implies-reflection', 'reflection-implies-symmetric-neutrality', 'relative-neutrality-shift-imply-folded', 'folded-evaluates-arroyo']",
-   "symmetry-l1-evaluates-pasadena is redundant: derivable from ['symmetry-implies-negative-self-similarity', 'dtu-l1-implies-eu', 'eu-independence-l1-imply-relative', 'relative-self-similarity-evaluates-pasadena']",
+   "symmetry-l1-evaluates-pasadena is redundant: derivable from ['negative-affine-implies-positive-affine', 'positive-affine-implies-rational-affine-preservation', 'rational-affine-preservation-implies-integer', 'negative-affine-implies-reflection', 'totality-independence-integer-affine-reflection-imply-integer-self-similarity', 'dtu-l1-implies-eu', 'eu-independence-l1-imply-relative', 'integer-self-similarity-relative-evaluates-pasadena']",
    "symmetry-l1-implies-folded is redundant: derivable from ['dtu-l1-implies-eu', 'eu-independence-l1-imply-relative', 'negative-affine-implies-positive-affine', 'positive-affine-implies-shift', 'negative-affine-implies-reflection', 'reflection-implies-symmetric-neutrality', 'relative-neutrality-shift-imply-folded']",
    "symmetry-l1-implies-relative is redundant: derivable from ['dtu-l1-implies-eu', 'eu-independence-l1-imply-relative']"
   ],
@@ -13355,11 +13649,12 @@
   "bundle": "unbounded-utility-map.zip",
   "json": "data.json",
   "zip": "source.zip",
+  "starter": "logical-maps-starter.zip",
   "lean": "lean/"
  },
  "background_md": "# Unbounded Utility\n\nThis map records logical connections between principles analysed in my **Decision theory unbound** (2024) and **Symmetries of value** (2026), as well as an unpublished work-in-progress called **Unbounded Utility and Background Risk**.\n\n## Setup\n\nA gamble is a measurable outcome-valued random variable X on a fixed\natomless standard probability space, which can be represented by [0,1] with\nLebesgue measure or by countably many independent fair coin tosses. All such\nvariables are available. \n\nThe primitive preference relation $\\succeq$ on gambles is always assumed reflexive and transitive. Outcomes are ordered by preference over certain gambles. Indifferent outcomes are identified. The optional Outcome Richness axiom says there are outcomes of every real utility value, and the optional Archimedean axiom says that there are no infinitesimal or infinite difference in utility levels.\n\nThe theory **DU** is the weakest background considered in my papers. In addition to Outcome Richness and Archimedean axioms, it has:\n(a) The Sure-Thing principle/Independence.\n(b) Stochastic Equivalence (equally distributed gambles are equally good).\n(c) Statewise Dominance.\n\n## Literature\n\n### Source literature\n\n- Colyvan, M. (2008). Relative expectation theory. Journal of Philosophy, 105(1), 37–44. [Paper](https://doi.org/10.5840/jphil200810519)\n- Nover, H., & Hájek, A. (2004). Vexing expectations. Mind, 113(450), 237–249. [Paper](https://doi.org/10.1093/mind/113.450.237)\n- Russell, J. S., & Isaacs, Y. (2021). Infinite prospects. Philosophy and Phenomenological Research, 103(1), 178–198. [Paper](https://doi.org/10.1111/phpr.12704)\n- Seidenfeld, T., Schervish, M., & Kadane, J. (2009). Preference for equivalent random variables: A price for unbounded utilities. Journal of Mathematical Economics, 45, 329–340. [Paper](https://doi.org/10.1016/j.jmateco.2008.12.002)\n- Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. [Paper](https://doi.org/10.1111/nous.12473)\n- Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. [Paper](https://doi.org/10.1111/nous.12549)\n- Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. Full text is not included. The record-specific references retain warnings about gaps and withdrawn arguments.\n- Hayden Wilkinson (2025). Flummoxing expectations. Noûs, 59(3), 700–728. First published online in 2024. [Paper](https://doi.org/10.1111/nous.12530)\n- Fred Espen Benth, Giulia Di Nunno and Dennis Schroers (2022). Copula measures and Sklar’s theorem in arbitrary dimensions. Scandinavian Journal of Statistics. [Paper](https://doi.org/10.1111/sjos.12559)\n\n### Other relevant literature\n\n- Arntzenius, F., Elga, A., & Hawthorne, J. (2004). Bayesianism, infinite decisions, and binding. Mind, 113(450), 251–283.\n- Bartha, P. (2016). Making do without expectations. Mind, 125(499), 799–827.\n- Dietrich, F., & List, C. (2005). The two-envelope paradox: An axiomatic approach. Mind, 114(454), 239–248.\n- Easwaran, K. (2008). Strong and weak expectations. Mind, 117(467), 633–641.\n- Easwaran, K. (2014a). Decision theory without representation theorems. Philosophers' Imprint, 14.\n- Easwaran, K. (2014b). Principal values and weak expectations. Mind, 123(490), 517–531.\n- Fine, T. (2008). Evaluating the Pasadena, Altadena, and St Petersburg gambles. Mind, 117(467), 613–632.\n- Hájek, A. (2014). Unexpected expectations. Mind, 123(490), 533–567.\n- Lauwers, L. (2016). Why decision theory remains constructively incomplete. Mind, 125(500), 1033–1043.\n- Lauwers, L., & Vallentyne, P. (2016). Decision theory without finite standard expected value. Economics and Philosophy, 32(3), 383–407.\n- Lauwers, L., & Vallentyne, P. (2017). A tree can make a difference. Journal of Philosophy, 114(1), 33–42.\n- McGee, V. (1999). An airtight Dutch book. Analysis, 59(4), 257–265.\n- Meacham, C. J. G. (2019). Difference minimizing theory. Ergo, 6. [Paper](https://quod.lib.umich.edu/e/ergo/12405314.0006.035/--difference-minimizing-theory?rgn=main;view=fulltext)\n- Russell, J. S. (2020). Non-Archimedean preferences over countable lotteries. Journal of Mathematical Economics, 88, 180–186.\n- Russell, J. S. (forthcoming). Fixing stochastic dominance. British Journal for the Philosophy of Science.\n- Smith, N. J. J. (2014). Is evaluative compositionality a requirement of rationality? Mind, 123(490), 457–502.\n\n\n",
  "background_html": "<h1 id=\"unbounded-utility\">Unbounded Utility</h1>\n<p>This map records logical connections between principles analysed in my <strong>Decision theory unbound</strong> (2024) and <strong>Symmetries of value</strong> (2026), as well as an unpublished work-in-progress called <strong>Unbounded Utility and Background Risk</strong>.</p>\n<h2 id=\"setup\">Setup</h2>\n<p>A gamble is a measurable outcome-valued random variable X on a fixed atomless standard probability space, which can be represented by [0,1] with Lebesgue measure or by countably many independent fair coin tosses. All such variables are available.</p>\n<p>The primitive preference relation <span class=\"math inline\">\\succeq</span> on gambles is always assumed reflexive and transitive. Outcomes are ordered by preference over certain gambles. Indifferent outcomes are identified. The optional Outcome Richness axiom says there are outcomes of every real utility value, and the optional Archimedean axiom says that there are no infinitesimal or infinite difference in utility levels.</p>\n<p>The theory <strong>DU</strong> is the weakest background considered in my papers. In addition to Outcome Richness and Archimedean axioms, it has: (a) The Sure-Thing principle/Independence. (b) Stochastic Equivalence (equally distributed gambles are equally good). (c) Statewise Dominance.</p>\n<h2 id=\"literature\">Literature</h2>\n<section id=\"paper-catalogue\"><h3 id=\"source-literature\">Source literature</h3>\n<ul>\n<li>Colyvan, M. (2008). Relative expectation theory. Journal of Philosophy, 105(1), 37–44. <a href=\"https://doi.org/10.5840/jphil200810519\">Paper</a></li>\n<li>Nover, H., &amp; Hájek, A. (2004). Vexing expectations. Mind, 113(450), 237–249. <a href=\"https://doi.org/10.1093/mind/113.450.237\">Paper</a></li>\n<li>Russell, J. S., &amp; Isaacs, Y. (2021). Infinite prospects. Philosophy and Phenomenological Research, 103(1), 178–198. <a href=\"https://doi.org/10.1111/phpr.12704\">Paper</a></li>\n<li>Seidenfeld, T., Schervish, M., &amp; Kadane, J. (2009). Preference for equivalent random variables: A price for unbounded utilities. Journal of Mathematical Economics, 45, 329–340. <a href=\"https://doi.org/10.1016/j.jmateco.2008.12.002\">Paper</a></li>\n<li>Zachary Goodsell (2024). Decision theory unbound. Noûs, 58, 669–695. First published online in 2023. <a href=\"https://doi.org/10.1111/nous.12473\">Paper</a></li>\n<li>Zachary Goodsell (2026). Symmetries of value. Noûs, 60, 16–37. <a href=\"https://doi.org/10.1111/nous.12549\">Paper</a></li>\n<li>Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. Full text is not included. The record-specific references retain warnings about gaps and withdrawn arguments.</li>\n<li>Hayden Wilkinson (2025). Flummoxing expectations. Noûs, 59(3), 700–728. First published online in 2024. <a href=\"https://doi.org/10.1111/nous.12530\">Paper</a></li>\n<li>Fred Espen Benth, Giulia Di Nunno and Dennis Schroers (2022). Copula measures and Sklar’s theorem in arbitrary dimensions. Scandinavian Journal of Statistics. <a href=\"https://doi.org/10.1111/sjos.12559\">Paper</a></li>\n</ul>\n<h3 id=\"other-relevant-literature\">Other relevant literature</h3>\n<ul>\n<li>Arntzenius, F., Elga, A., &amp; Hawthorne, J. (2004). Bayesianism, infinite decisions, and binding. Mind, 113(450), 251–283.</li>\n<li>Bartha, P. (2016). Making do without expectations. Mind, 125(499), 799–827.</li>\n<li>Dietrich, F., &amp; List, C. (2005). The two-envelope paradox: An axiomatic approach. Mind, 114(454), 239–248.</li>\n<li>Easwaran, K. (2008). Strong and weak expectations. Mind, 117(467), 633–641.</li>\n<li>Easwaran, K. (2014a). Decision theory without representation theorems. Philosophers’ Imprint, 14.</li>\n<li>Easwaran, K. (2014b). Principal values and weak expectations. Mind, 123(490), 517–531.</li>\n<li>Fine, T. (2008). Evaluating the Pasadena, Altadena, and St Petersburg gambles. Mind, 117(467), 613–632.</li>\n<li>Hájek, A. (2014). Unexpected expectations. Mind, 123(490), 533–567.</li>\n<li>Lauwers, L. (2016). Why decision theory remains constructively incomplete. Mind, 125(500), 1033–1043.</li>\n<li>Lauwers, L., &amp; Vallentyne, P. (2016). Decision theory without finite standard expected value. Economics and Philosophy, 32(3), 383–407.</li>\n<li>Lauwers, L., &amp; Vallentyne, P. (2017). A tree can make a difference. Journal of Philosophy, 114(1), 33–42.</li>\n<li>McGee, V. (1999). An airtight Dutch book. Analysis, 59(4), 257–265.</li>\n<li>Meacham, C. J. G. (2019). Difference minimizing theory. Ergo, 6. <a href=\"https://quod.lib.umich.edu/e/ergo/12405314.0006.035/--difference-minimizing-theory?rgn=main;view=fulltext\">Paper</a></li>\n<li>Russell, J. S. (2020). Non-Archimedean preferences over countable lotteries. Journal of Mathematical Economics, 88, 180–186.</li>\n<li>Russell, J. S. (forthcoming). Fixing stochastic dominance. British Journal for the Philosophy of Science.</li>\n<li>Smith, N. J. J. (2014). Is evaluative compositionality a requirement of rationality? Mind, 123(490), 457–502.</li>\n</ul>\n</section>\n",
- "contribute_md": "# Contribute\n\nEmail me (Zach) at [zacharyw.goodsell@gmail.com](mailto:zacharyw.goodsell@gmail.com?subject=%5BLogical%20Maps%5D%20Unbounded%20Utility) with further suggestions.\n\nTo contribute to Unbounded Utility, please include **[Logical Maps] Unbounded Utility** in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!\n\nWorked on an open question without settling it? Feel free to send what you tried and I will put your work into the question’s notes and credit your contribution. This gives it a <span class=\"iridescent bronze\">bronze</span> star in the Conjectures tab. Please also say whether you think the question is important or difficult enough to deserve a <span class=\"iridescent silver\">silver</span> or <span class=\"iridescent gold\">gold</span> star.\n\nTo contribute to the Logical Maps project in general, please include **[Logical Maps]** in the subject line.\n",
- "contribute_html": "<h1 id=\"contribute\">Contribute</h1>\n<p>Email me (Zach) at <a href=\"mailto:zacharyw.goodsell@gmail.com?subject=%5BLogical%20Maps%5D%20Unbounded%20Utility\">zacharyw.goodsell@gmail.com</a> with further suggestions.</p>\n<p>To contribute to Unbounded Utility, please include <strong>[Logical Maps] Unbounded Utility</strong> in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!</p>\n<p>Worked on an open question without settling it? Feel free to send what you tried and I will put your work into the question’s notes and credit your contribution. This gives it a <span class=\"iridescent bronze\">bronze</span> star in the Conjectures tab. Please also say whether you think the question is important or difficult enough to deserve a <span class=\"iridescent silver\">silver</span> or <span class=\"iridescent gold\">gold</span> star.</p>\n<p>To contribute to the Logical Maps project in general, please include <strong>[Logical Maps]</strong> in the subject line.</p>\n",
+ "contribute_md": "# Contribute\n\nEmail me (Zach) at [zacharyw.goodsell@gmail.com](mailto:zacharyw.goodsell@gmail.com?subject=%5BLogical%20Maps%5D%20Unbounded%20Utility) with further suggestions.\n\nTo contribute to Unbounded Utility, please include **[Logical Maps] Unbounded Utility** in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!\n\nWorked on an open question without settling it? Feel free to send what you tried and I will put your work into the question’s notes and credit your contribution. This gives it a <span class=\"iridescent bronze\">bronze</span> star in the Conjectures tab. Please also say whether you think the question is important or difficult enough to deserve a <span class=\"iridescent silver\">silver</span> or <span class=\"iridescent gold\">gold</span> star.\n\nTo contribute to the Logical Maps project in general, please include **[Logical Maps]** in the subject line.\n\n\n## Create your own logical map\n\n[Download the starter project (ZIP)](logical-maps-starter.zip)\n",
+ "contribute_html": "<h1 id=\"contribute\">Contribute</h1>\n<p>Email me (Zach) at <a href=\"mailto:zacharyw.goodsell@gmail.com?subject=%5BLogical%20Maps%5D%20Unbounded%20Utility\">zacharyw.goodsell@gmail.com</a> with further suggestions.</p>\n<p>To contribute to Unbounded Utility, please include <strong>[Logical Maps] Unbounded Utility</strong> in the subject line of your email. You can suggest a new principle, establish a new result, or define a new model, along with supporting documents if necessary (e.g. a PDF or Markdown file). I will be sure to record your role in the contribution if I add it to this page. Thank you!</p>\n<p>Worked on an open question without settling it? Feel free to send what you tried and I will put your work into the question’s notes and credit your contribution. This gives it a <span class=\"iridescent bronze\">bronze</span> star in the Conjectures tab. Please also say whether you think the question is important or difficult enough to deserve a <span class=\"iridescent silver\">silver</span> or <span class=\"iridescent gold\">gold</span> star.</p>\n<p>To contribute to the Logical Maps project in general, please include <strong>[Logical Maps]</strong> in the subject line.</p>\n<h2 id=\"create-your-own-logical-map\">Create your own logical map</h2>\n<p><a href=\"logical-maps-starter.zip\">Download the starter project (ZIP)</a></p>\n",
  "extraction_md": "# Source extraction: updated 24 September 2026\n\n## Cancellation and Countable Sure-Thing questions (13 September)\n\nThe original `conjectured-dtu-cancellation-implies-preservation` statement\nis now proved, with its conjecture history retained. Goodsell supplied\nthe strict-comparison argument; GPT-6 (Codex) supplied the geometric-noise\nand finite-mixture argument preserving ties. No continuity premise is\nneeded. The separated sum principles retain their manuscript attribution;\nthe connecting proof is recorded under Misc.\n\nThe two Countable Sure-Thing proposals are refuted on the standing full\nmeasurable domain by `lexicographic-nonatomic-mass`. On outcomes [0,1],\nit orders by mean and then nonatomic mass. Countable additivity proves\nCountable Sure-Thing, while a uniform gamble supplies failures of both\nExpected Utility and Archimedean Gambles. The two questions retain their\noriginal statements, authorship and conjectured statuses; their verdicts\nare computed from the separate proved model. Under DU or DTU their\npremises instead conflict with the background.\n\nThe Russell–Isaacs source check distinguishes their countably supported\nlotteries from the larger domain here. The new coordinate vanishes on\nevery countably supported law. The countermodel and source comparison\nare credited to GPT-6 (Codex), following Goodsell's proof request.\nWritten proofs and exact diagnostic checks are supplied; no independent\nchecker or new Lean-verified proof is claimed.\n\nThe subsequent audit of `lexicographic-nonatomic-mass` classifies all 39\nprinciples: 23 satisfied and 16 violated. Affine invariance, shift transfer,\nfinite coupled differences and uniqueness of negative self-similarity\nfollow from its two coordinates. One fixed choice of scaled uniforms and\na constant refutes sum invariance for every copula. The write-up identifies\nthe bounded-chart cases with trivial or empty scope, including the current\nall-positive-shifts continuity antecedent. No principle definition or\nexisting theorem premise was changed. GPT-6 (Codex) supplied these further\nproofs in response to Goodsell's request on 13 September 2026.\n\n## Addition: unpublished background-risk manuscript (9 September)\n\nThe new supplied source is Goodsell, *Unbounded Utility and Background Risk*,\n5 June 2026. The draft itself is not included in the public downloads.\nIt is **unpublished, marked “do not cite”, and erroneous**. Its own provenance\nname is **Unbounded Utility and Background Risk (unpublished)**.\n\nThe [detailed inventory and audit](writeups/symmetric-dtu-refutes-independent-sum-candidate.md)\nrecords all extracted concepts and separates surviving arguments from the\nwithdrawn symmetry/total-extension claims. New entries add Full, Independent,\nComonotonic, and Antitonic Sum Invariance, separate independent-sum forward\npreservation and cancellation, and CDF-Area Extension. The sum\nincompatibilities are expressed as implications to False. Existing reflection and mixture nodes receive terminology\naliases rather than duplicates.\n\nThe [CDF-area dominance](writeups/cdf-area-preorder.md) is an explicit proved\nincomplete model; the [CDF-area conclosure: total extension](writeups/conjectured-total-independent-sum-extension.md)\nnow has a proved existence construction, including Independent Sum\nConsistency. Goodsell’s conclosure and total-extension construction\npreserves the original strict comparisons and supplies totality. The model’s\ndirect source is his unpublished manuscript; GPT-6 is credited for the\ncone-language exposition and additional proof details, not for originating\nthe construction. Neither reflection requirement is assumed or recorded as\nviolated. The user's recalled stable-law obstruction remains a conjectured\nimplication pending an exact witness.\n\nAfter the falsity migration, this addition contributes **seven principles,\n16 relations (15 proved, one conjectured), and two proved models**.\nThe full topic now has **36 principles, 55 relations, and six models**.\nFive former failure nodes were removed: their claims are constraints\nconcluding False, with the existing result IDs, sources, and proof text\npreserved. Their old descriptions are archived in `writeups/falsity-migration.md`. New concrete checks\nare in `checks/background_risk.py`. No Lean formalization was added.\n\nA subsequent premise audit records **Rich Outcomes + Simple EU + Stochastic\nDominance + Archimedean Gambles ⇒ False** using the same Goodsell\nSt Petersburg argument. This strengthens the available connection beyond\nthe original full-DTU package; its proof and attribution are in\n`results/rich-simple-dominance-refutes-archimedean-gambles.yaml`.\n\nThe counts and descriptions below document the original two-paper extraction\nof 8 September; they are not current totals.\n\n## Original sources\n\n| Key | Supplied file | Published reference |\n| --- | --- | --- |\n| U | `sources/Nous - 2023 - Goodsell - Decision theory unbound (1).pdf` | Goodsell, *Decision theory unbound*, Noûs 58 (2024), 669–695, DOI 10.1111/nous.12473; online 2023 |\n| S | `sources/Goodsell - 2026 - Symmetries of value.pdf` | Goodsell, *Symmetries of value*, Noûs 60 (2026), 16–37, DOI 10.1111/nous.12549 |\n\nPage references in the YAML are **printed journal pages**. For U, PDF page 1\nis printed p. 669; for S, PDF page 1 is printed p. 16. Local PDFs were read\ndirectly; no other papers were used as substitute evidence.\n\n## Main extracted relations\n\nAll rows are relative to the framework in `background.md`; DTU and Sym are\nexpanded there and in each YAML record.\n\n| Relation | Source |\n| --- | --- |\n| Simple EU ⇒ Archimedean Outcomes, Restricted Totality, Restricted Stochastic Equivalence | S p. 22 n. 3; U §§2.3, 3.2 |\n| Stochastic Dominance ⇒ Stochastic Equivalence; with Archimedean Outcomes ⇒ Statewise Dominance | U pp. 678–679 |\n| Rich + Archimedean Outcomes + Stochastic Equivalence + Statewise Dominance ⇒ Stochastic Dominance | U p. 678 n. 19; real quantile translation |\n| Stochastic Equivalence + Mixture Independence ⇒ Sure-Thing | U p. 679 and p. 682 n. 28 |\n| Original DTU axiom package ⇒ Simple EU and Mixture Independence | U pp. 679–681 |\n| Rich Outcomes + Simple EU + Sure-Thing ⇒ failure of Countable Sure-Thing | U §2.3, pp. 675–676 |\n| DTU ⇒ failure of Archimedean Gambles | S p. 22 |\n| Under Rich Outcomes: shift + scale ⇔ positive affine invariance | U §4.2; S §5 |\n| Under Rich Outcomes: negative affine anti-invariance ⇔ positive affine invariance + reflection anti-invariance | S p. 24 |\n| DTU + L¹ Continuity ⇒ Expected Utility | S p. 23 |\n| DTU + Sym ⇒ shift transfer and Simple Relative Expectation | S Theorems 3–4 |\n| Under DTU + Sym: Relative Expectation ⇔ L¹ Continuity | S Corollary 5 |\n| DTU + Sym + L¹ Continuity ⇒ Folded Expectation | S Theorem 6 |\n| DTU + Sym ⇒ alternating St Petersburg ~ −1/2 and uniqueness of negative self-similarity | S Theorems 9–10 |\n| DTU + Sym + L¹ Continuity ⇒ Arroyo ~ ln 2 and Pasadena ~ ln 2 | S Theorems 8, 11 |\n| DTU + Sym + L¹ Continuity is consistent | S Theorem 2, with construction in §5 |\n| DTU does not imply Expected Utility, and is consistent with it | U Theorems 1–3, Appendix B |\n| DTU + EU + shift + reflection does not imply scale invariance | U Theorems 7, 8, 10 |\n\nThese are implications with **joint premises**, not separate arrows from each\npremise. Straightforward restrictions (for example EU ⇒ Simple EU) and the\nreflection/symmetric-neutrality observation are also recorded.\n\n## Models\n\n1. **Clipped expectation: eventual dominance** (U Theorem 2): incomplete, satisfies\n   finite EU and dominance; violates EU. Its lack of Totality has an explicit\n   alternating-St-Petersburg witness. The checks also exhibit failure of L¹\n   Continuity.\n2. **Clipped expectation: exact ultrafilter dominance** (U Theorem 1): total, satisfies DTU, violates\n   EU. Source Theorem 10 supplies failure of scale invariance.\n3. **Clipped expectation: continuous ultrafilter dominance** (U Theorem 3): satisfies DTU and EU,\n   shift and reflection. Source Theorem 10 supplies failure of scale invariance.\n4. **Signed-measure cone: affine-symmetric extension** (S Theorem 2): a source-attributed\n   nonconstructive existence model for DTU + Sym + L¹ Continuity. Its\n   Countable Sure-Thing and Archimedean Gambles failures follow from the same\n   St Petersburg arguments as for other DTU models.\n\nEach satisfies/violates entry is either explained in its write-up, inherited\nfrom a recorded implication, or explicitly attributed to a source theorem.\nSource-attributed is weaker evidence than an independent proof audit. The direct\nsource is identified by `certificate.source_id`; `produced_by`, `recorded_by`,\nand the empty checker list describe authorship and the separate transcription.\n\nThe later DU, shift, and continuity investigation\nrecords the precise canonical role of the standalone\n[CDF-area dominance](writeups/cdf-area-preorder.md) model and adds\n[Stochastic dominance: finite-support compensation](writeups/finite-support-compensated-dominance.md).\nThe latter satisfies DU and Shift Invariance but refutes Shift Transfer;\ncontinuity under vanishing shifts suffices to force CDF-area comparisons.\nThe [finite-shift total extension](writeups/finite-shift-total-extension.md)\nadded on 13 September 2026 supplies a model of DTU and Shift Invariance\nwith an explicit strict violation of Shift Transfer. Goodsell proposed\nthe extension; GPT-6 supplied the separating construction and proof details.\n\n## Provenance and display categories\n\nDirect source filters distinguish **Decision Theory Unbound** (11 records),\n**Symmetries of Value** (19 records), and **Misc.** (12 records: ten connecting\nproofs and two user-suggested conjectures). Every arrow and model retains its\nauthor, date, and precise source references.\nThe ten AI arrows are restrictions/compositions added to connect definitions:\n`totality-restricts`, `stochastic-equivalence-restricts`,\n`expected-utility-implies-simple`, `archimedean-gambles-restricts`,\n`positive-affine-implies-shift`, `positive-affine-implies-scale`,\n`shift-scale-imply-positive-affine`, `relative-implies-simple-relative`,\n`relative-implies-eu`, and `folded-implies-eu`. Their sources explicitly\nidentify the AI proof as well as the paper definitions it uses.\n\nThe graph filter groups all 31 principles into Basic decision theory (15),\nInvariance principles (7), Extensions of EUT (5), and Prospect evaluations (4).\nEach group has independent select-all/unselect-all controls. Category and\ncheckbox changes only affect display, not the underlying implication rules.\n\n## Transcription decisions and issues needing care\n\n- S p. 24 prints a same-direction sign in the displayed **Reflection\n  Anti-Invariance** definition. Read it as X≽Y iff −X≼−Y. This is forced by\n  the negative-affine definition directly above, the introduction, and the\n  subsequent proofs. It was checked visually in the PDF.\n- The intended reflection axiom uses **one fixed utility origin**, as the\n  explanatory prose on p. 24 says. Requiring reflection around every possible\n  origin would also imply shifts. The literal phrase \"for any utility\n  representation\" in that display should not silently strengthen this node.\n- U p. 673 n. 9 prints an impossible interval in the middle branch of the\n  utility definition. The normalized branch is 0≤r≤1, as required for the\n  described probabilities. The negative and greater-than-one branches are\n  kept separate.\n- U pp. 683–684 defines **clipping**: mass beyond ±t moves to the endpoints.\n  Its shorthand integral with bounds ±t must not be implemented as deleting\n  the tails. We use E[max(−t,min(X,t))]. The prose and figure were checked\n  visually. The cone discussion in S §5 inherits a related notational issue.\n- S p. 28's Pasadena prose omits `/n`; Table 2 and Theorem 11 include it.\n  This extraction uses −(−2)^n/n, probability 2^(−n).\n- S Theorem 9 repeats one strict-comparison sign in the concluding sentence;\n  the second case is the opposite strict comparison.\n- S Theorem 10's expanded formula appears to print `−a^n` where the\n  geometric recursion requires `(−a)^n`. The extracted principle records its\n  clear **uniqueness in value** conclusion. No questionable expansion is used\n  as a formula in the map.\n- S p. 27's informal comparison with a reflection needs attention to a\n  factor of two if it is used numerically. We do not import that sentence as\n  a separate theorem or algorithm.\n- U Theorem 10's displayed scale identity should be interpreted using\n  E[c_t(aX)] = a E[c_(t/a)(X)]. The printed oscillating-function witness also\n  has endpoint and normalization issues. Scale non-implication is recorded\n  as the **source theorem's claim**, not as a numerically reconstructed proof.\n\n## Deferred rather than silently asserted\n\n- S Theorem 1 states stronger non-implications even after adding L¹, Relative\n  Expectation, Weak Expectation, and Principal Value principles. The present\n  models record the weaker, clearly identified U witnesses; they are **not**\n  given these extra satisfies flags without a further proof audit.\n- Weak Expectation and Principal Value theories are discussed and distinguished\n  in S §4, but their full source definitions would need another careful pass.\n  Their relative strength is not guessed from the words \"principal value\".\n- The conjecture at the end of S §4 that DTU + Sym + L¹ entails either of those\n  theories remains a conjecture. Pasadena's evaluation does not prove it.\n- U's Coherent Extensibility concerns a class of alternative orderings and\n  extension relations, beyond this topic's single primitive preorder. Its\n  role in the consistency discussion is noted but it is not forced into an\n  axiom about an individual random variable.\n- No Rich Outcomes ⇒ Archimedean Outcomes implication has been inferred from\n  the papers' convenient identification of outcomes with ℝ.\n- No blanket EU ⇒ affine symmetry, EU ⇒ full Stochastic Equivalence, or\n  Countable Sure-Thing equivalence is asserted. EU only governs integrable\n  variables; full symmetry and law invariance cover more variables.\n- The original failure nodes have now been migrated to implications to\n  False. Deriving False triggers a red graph warning and suppresses arrows.\n  The Horn rules do not use explosion; model violations can also follow\n  from these incompatibility constraints.\n\n## Reproduce\n\n### Candidate additions from the user\n\nTwo further **human-proposed conjectures** were recorded on 8 September 2026:\n\n- Countable Sure-Thing + Archimedean Outcomes ⇒ Archimedean Gambles.\n- Countable Sure-Thing + Simple EU ⇒ Expected Utility.\n\nThese supplement the 36 proved records above. They appear in Conjectures and\nas dashed arrows when the graph's Conjectures option is enabled; they do not\nparticipate in proved deductions. Each record identifies the user's proposal\nas its source and lists the remaining verification work. The Russell–Isaacs\nreference attached to the first is related literature, not a verified\nattribution of the exact two-premise claim.\n\nThe map is deliberately selective and can grow through later additions.\nAn unrecorded implication need not be an open problem in the literature.\n\n### Commands\n\nFrom `logical-maps/`, with its Python requirements installed:\n\n```sh\npython3 scripts/pmap.py validate unbounded-utility\npython3 topics/unbounded-utility/checks/countermodels.py\npython3 scripts/pmap.py build unbounded-utility\n```\n\nOpen `build/unbounded-utility/index.html`. Source YAML, the framework, and\nwrite-ups remain under `topics/unbounded-utility/`; the original example topic\nand shared renderer are unchanged.\n\n\n### Copula sum invariance additions — 9 September 2026\n\nZach Goodsell proposed the common-copula generalization in `TODO.md` and requested\nuniversal and existential versions. GPT-6 (Codex) recorded the precise definitions\nand supplied the connecting proofs, attributed to Misc. rather than to the\nunpublished paper. The general copula terminology follows Benth, Di Nunno and\nSchroers, [Definition 2.1 and Theorem 2.3](https://arxiv.org/html/2012.11530v2);\nthat reference is not the source of the new preference principles.\n\nFor a fixed copula C, SC(C) compares actual X,Y before and after adding the same\nactual Z whenever both pair laws (X,Z) and (Y,Z) admit C. The universal principle\nis ∀C SC(C); the existential principle is ∃C SC(C), with C chosen once for all\ntriples and marginal laws. Atomic marginals are included, with no uniqueness of\na pair's compatible copula assumed. Numerical operations retain the existing\nfinite-chart scope.\n\nRecorded connections: Full Sum ⇒ Universal Copula Sum; Universal Copula Sum ⇒\nExistential Copula Sum and each of the three existing dependence-restricted sum\nprinciples; Existential Copula Sum ⇒ Shift Invariance. Each existing restricted\nsum principle, together with Stochastic Equivalence, also implies Existential\nCopula Sum. The latter proofs explicitly transfer comparisons from quantile\nrealizations. In particular, product copula compatibility is only pairwise\nindependence from Z, whereas the existing Independent Sum principle requires\nindependence of Z from the pair (X,Y).\n\nThe existing Rich Outcomes + Stochastic Dominance + Antitonic Sum incompatibility\nalready rules out Universal Copula Sum under those background assumptions; no\nduplicate incompatibility record is needed. No model flags or Lean definitions\nwere added, and the separate background/Lean tasks remain pending.\n\n\n### Further DU and DTU connections and resistant questions — 9 September 2026\n\nThe public result and model records include the new implication proofs,\nsource-model specializations and an infinitesimal folded-tail countermodel. In particular, under DTU, L¹ Continuity implies\nRelative Expectation, which is equivalent to CDF-Area Extension; even Folded\nExpectation does not imply L¹ Continuity. Three precise outstanding questions\nare recorded as conjectures and do not contribute proved deductions. Each\naddition describes reused source material and newly supplied work.\n\n\n### DU and DTU terminology correction — 9 September 2026\n\nDU does not assume Totality over arbitrary gambles; DTU is DU plus Totality.\nThe DU/DTU distinction follows *Decision theory unbound*, §3.3, pp. 681–682.\nThe preset initially used the equivalent formulation with Simple EU; the\nsubsequent finite-lottery proof below permits treating Simple EU as derived.\nDTU has a separate optional preset. Both presets explicitly include Archimedean\nOutcomes. Named conjunctions abbreviate these packages while retaining each\nrecord's full, original premises.\n\nThe two research reports previously called the six-axiom package DU. Their\npackage-level summaries, complete-model labels and totality-dependent conjectures\nnow say DTU. Exact result premises and model flags are unchanged. Incomplete\nDU models are eligible under the default background. Claims whose listed\npremises do not need Totality remain valid DU consequences.\n\n### Simple EU as a derived DU consequence — 9 September 2026\n\nThe new record `rich-archimedean-dominance-independence-imply-simple-eu`\nproves Simple EU from Rich Outcomes, Archimedean Outcomes, Stochastic\nDominance and Mixture Independence. It uses common binary endpoints for\nfinite lotteries, checks all three normalized-chart calibrations and\nmeasurability, and never assumes Totality or Restricted Totality.\n\nThe DU preset therefore assumes Rich Outcomes, Archimedean Outcomes,\nStochastic Equivalence, Stochastic Dominance and Mixture Independence;\nSimple EU is displayed as a consequence. DTU adds Totality. Together with\nthe existing Simple EU ⇒ Archimedean Outcomes record, the new proof makes\nthis equivalent to the previous Simple-EU-based package.\n\nThe literal two-premise implication Rich Outcomes + Archimedean Outcomes\n⇒ Simple EU is false. The `finite-two-sample-minimum` model supplies an\nexplicit witness, even with Totality and Stochastic Equivalence. Both new\nrecords identify the connecting work as GPT-6 (Codex), 9 September 2026;\nthe source finite-lottery argument remains credited to Goodsell. Existing\nsource-attributed theorem premises and proofs are unchanged.\n\n### Package picture: further model failures — 15 September 2026\n\nZachary Goodsell asked for a complete picture of what is consistent with\nDU + Sym, DTU, DTU + Sym and DU + Sym + Symmetric Neutrality. Claude\n(Fable 5.1) computed the picture from the recorded evidence and supplied\nexplicit witnesses for the cheap gaps; no principle definitions, theorem\npremises or existing proofs were changed.\n\nThe least DU model (`finite-support-compensated-dominance`) now records\nseven further verified failures: the three named prospect evaluations and\nuniqueness of negative self-similarity (the prospects are incomparable with\ntheir prescribed values), Comonotonic Sum Invariance, Independent Sum\nPreservation and Existential Copula Sum Invariance (one simple equal-mean\npair whose sums with a uniform summand acquire a sloped survival\ndifference, for every copula). With these, every principle is entailed,\nexcluded or separated in both directions under DU + Sym.\n\nThe exact eventual-dominance model (`eventual-clipped-expectation`) now\nrecords failure of Shift Invariance and Positive Affine Invariance: a\nsymmetric Laplace gamble X is indifferent to sure 0, yet X + b is strictly\nworse than sure b for every b > 0.\n\nRemaining gaps in the requested packages: whether Comonotonic Sum\nInvariance is consistent with DTU (the conjectured total comonotonic\nextension stays conjectured) or with DTU + Sym and DU + Sym + Neutrality;\nwhether Existential Copula Sum Invariance is consistent with the two\nsymmetric packages; whether DTU + Sym implies L¹ Continuity or Expected\nUtility; separating models for DU + Sym + Neutrality; whether Independent\nSum Cancellation is consistent with DU + Sym + Neutrality; and a DTU model\nviolating Shift Invariance (a cone-extension construction orienting a\ntransfer pair against its own shift is sketched privately and not yet\nrecorded).\n\n### Copula principles: comonotonic failures, a killing lemma, silver tier — 23 September 2026\n\nZachary Goodsell asked for work on the copula sum principles, starting from\nthe law-level reading of them: realize X† = Q_X(U) on the standing uniform\nand Z* = Q_Z(W) with (U, W) distributed as the copula C; then SC(C) says,\nunder Stochastic Equivalence, that X ≽ Y iff X† + Z* ≽ Y† + Z* for all\nlaws. Claude (Fable 5.1) verified this reading (Z* is canonical only in law,\nwhich is why the recorded bridges from the comonotonic, antitonic and\nindependent principles need Stochastic Equivalence; for the comonotonic\ncopula W = U) and recorded it in the notes of the three copula principles,\ntogether with the quantile-difference reduction of Comonotonic Sum\nInvariance. The Fubini remark that E[X† − Y†] with the separate Tonelli\nidentities is the CDF-area preorder is the recorded `cdf-area-preorder`\nmodel, so DU is consistent with comonotonic invariance; no new record.\n\nSix models now record failure of Comonotonic Sum Invariance: the exact,\ncontinuous, geometric, asymmetric and polynomial clipped-expectation\norderings and the eventual-dominance model (where the flag was previously\nderived from the shift failure). One witness family serves all windows:\nZ = max(C, 0) for a standard Cauchy C, X = 0, and a window-adapted neutral\nY = C₊ + aC₋ − v; the clipped gap is 2∫_{F/2}^{F} P(C > x) dx, positive for\nevery cutoff F and tending to (2 ln 2)/π. The mechanism is the identity\n2E[min(V,F)] − E[min(2V,F)] = 2∫_{F/2}^{F} P(V > x) dx.\n`checks/comonotonic_witnesses.py` verifies the closed forms, the identity\non an exact finite law, the neutral constants and the limit. Under DU and\nDTU this settles that Expected Utility, Totality, Shift Invariance,\nReflection Anti-Invariance, L¹ Continuity, CDF-Area Extension, Folded\nExpectation, Transfer of a Shift and Arroyo = ln 2 do not imply Comonotonic\nSum Invariance, and that DTU alone does not.\n\nFor the conjectured total comonotonic extension, the write-up gains a\nnecessary condition: a killing lemma (from Stochastic Equivalence,\ndominance, mixture independence and the preservation half of comonotonic\ninvariance, a pair whose survival difference and comonotonic shears combine\ninto a nonpositive nonzero profile cannot satisfy X ≽ Y), an explicit killed\npair with both areas infinite, three certificates that a pair is not killed,\nworked block regions, an accounting heuristic suggesting that no pair is\nkilled in both orientations, and candidate constructions. Zachary Goodsell\nraised the conjecture's tier to silver. The conjecture's status is unchanged.\nLean statements were regenerated and audited; every `lean: stated` claim\nstill elaborates.\n\nOpen after this batch: DTU + Comonotonic Sum Invariance itself (decide\nkillability of regions with no lowest block; formalize the surplus\nfunctional; attempt the Zorn construction with the lemma as pointedness\ntest); whether the region of the alternating St Petersburg gamble against\n−1/2 is killed under the comonotonic copula, which bears on the top DU\nlynchpin about Existential Copula Sum Invariance; and Independent Sum\nCancellation for the exact CDF-area preorder.\n\n### Rational and integer factors from comonotonic addition; the exact ordering fails shifts — 24 September 2026\n\nZachary Goodsell claimed that Comonotonic Sum Invariance implies Positive\nAffine Invariance by iterated addition (2A = A + A ≽ B + A ≽ B + B = 2B) and\nproposed a rational-factor principle for the remaining step. Claude\n(Fable 5.1) recorded what the argument proves and where it stops. New\nprinciples: Rational Scale Invariance, Integer Affine Preservation, Rational\nAffine Preservation and Uniqueness of Negative Self-Similarity (integer\nratios). Proved: Rich Outcomes + Stochastic Equivalence + Comonotonic Sum\nInvariance give Integer Affine Preservation (adding A to both sides needs B\ncomonotonic with A, hence Stochastic Equivalence, and the mixed sums\njX + (k − j)Y, hence Rich Outcomes); adding Totality gives Rational Scale\nInvariance, the cancellation kX ≽ kY ⇒ X ≽ Y being the only place Totality\nenters; Totality + Mixture Independence + Integer Affine Preservation +\nReflection Anti-Invariance give integer-ratio uniqueness, which carries the\nalternating St Petersburg and Pasadena evaluations, since both use only the\nratio 2. Two models: `cdf-area-unit-threshold` (Rich Outcomes, Archimedean\nOutcomes, Stochastic Equivalence, Stochastic Dominance, Simple EU,\nComonotonic Sum Invariance and Integer Affine Preservation; cancellation\nfails at 2, so Rational Scale Invariance, Rational Affine Preservation,\nTotality and Mixture Independence fail) and `lexicographic-hamel-tie-break`\n(a total law-based order ranking integrable widths by area with a ℚ-linear\nHamel tie-break and a Zorn completion of the infinite-area pairs; invariant\nunder every rational factor, not under √2; Mixture Independence fails).\nConjectures: DTU + Comonotonic Sum Invariance ⇒ Scale Invariance, and\nDU + Comonotonic Sum Invariance ⇒ Rational Affine Preservation. Verdict\nupdates: the four recorded scale countermodels fail at the factor 2\n(U Theorem 10 compares μ with the law of 2X), so they fail Rational Scale\nInvariance and Integer Affine Preservation; the four models refuting the\nreal-ratio uniqueness principle do so at ratio 2 and fail the integer-ratio\nprinciple; the folded-tail cone now derivably fails Comonotonic Sum\nInvariance. `checks/rational_scale_witnesses.py` verifies the witnesses.\n\nGoodsell also observed that the exact ultrafilter ordering fails Shift\nInvariance: a balanced prospect shifted by 1 stays strictly behind sure 1 at\nevery truncation level, because clipping C + 1 to [−t, t] clips C to\n[−t − 1, t − 1] and loses its upper tail between t − 1 and t + 1, so\nv_{C+1}(t) = 1 − ∫_{t−1}^{t+1} P(C > x) dx < 1 while v_C = v_0 = 0. The\ndeficit vanishes as t → ∞, which is why the continuous quotients keep Shift\nInvariance (U Theorem 8). Recorded on `total-exact-ultrafilter` with\n`checks/exact_shift_witness.py`. This is the DTU model violating Shift\nInvariance listed as open above, so the private cone-extension sketch is no\nlonger needed for that question; the engine also derives that the exact\nordering fails Transfer of a Shift and Simple Relative Expectation.\n\nOpen after this batch: real factors under DTU + Comonotonic Sum Invariance\n(no model of that package is known, so a refutation would also settle the\ntotal comonotonic extension); fractional factors under DU + Comonotonic Sum\nInvariance, that is integer cancellation without Totality; and whether the\ninteger-ratio uniqueness principle separates from the real-ratio one under\nDTU.\n"
 }

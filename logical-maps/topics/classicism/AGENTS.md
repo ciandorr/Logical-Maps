@@ -17,7 +17,7 @@ Read a matching `writeups/<id>.md` when it exists.
 | C5, boxed ND | preset `c5` = `necessary-distinctness-necessary-r`; not unboxed ND |
 | BC, completeness, atomicity, weak/strong worlds, Leibniz | `boolean-completeness-r`, `atomicity-r`, `strong-leibniz-r`; corresponding `-t` and `necessary-` records; lattice/world definitions in `background.md` |
 | RC, rigidity, persistence, inextensibility, weak rigidity, Gallin | `rigid-comprehension-r`, `persistent-comprehension-r`, `inextensible-comprehension-r`, `weak-rigid-comprehension-r`, `very-weak-rigid-comprehension-r`, `gallin-extensional-comprehension-r` |
-| Choice, Plenitude, Actuality | `functional-choice-r`, `relational-choice-r`, `plenitude-r`, `actuality`, `actual-profile-r` |
+| Choice, Plenitude, Actuality, transversals or selectors for equivalence relations | `functional-choice-r`, `relational-choice-r`, `transversal-choice-r`, `plenitude-r`, `actuality`, `actual-profile-r` |
 | Extensionality, Fregean Axiom, Functionality, Tractarianism | `extensionality-r`, `fregean-axiom`, `functionality-r`, `tractarianism-r`; distinguish `modalized-` and `necessary-` variants |
 | Maximalism, pure/signature Distinctness Maximalism or Possibility Maximalism | `distinctness-schema-r`, `possibility-schema-r`; `distinctness-signature-r`, `possibility-signature-r`; `possibility-plus-*`, `strong-possibility-*` |
 | Logical Combinatorialism, No Brute Necessities, separation, freedom, independence | `logical-necessity-r`, `witnessed-possibility-r` (No Brute Necessities), `possibly-witnessed-possibility-r`, `separated-structure-r`, `general-separated-structure-r`, `modal-freedom-signature-r`, `independence-signature-r` |

@@ -180,6 +180,100 @@ proof about all distributions or any transfinite extension.
 
 See also the [source inventory and failed-claim audit](symmetric-dtu-refutes-independent-sum-candidate.html).
 
+## Further failures found by the theorem trawl
+
+**Added 25 September 2026.** DeepSeek (`deepseek-flash`) proposed the five
+failures below. GPT-6 (Codex) independently checked the arguments, corrected
+the shifted-moment calculations for Pasadena and Arroyo, and recorded the
+claims as properties of this model. The construction remains Goodsell's.
+This addition has informal model review, not Lean verification; the earlier
+verification statements describe the original record.
+The earlier model statement was marked `stated`, not `verified`. Its expanded
+statement now includes the integer-ratio principle without a Lean definition,
+so the amended record is marked `lean: none`.
+
+For any real-valued $V$ and sure constant $c$, Tonelli's tail identities give
+
+$$\int(S_V-S_c)_+=E[(V-c)^+],\qquad
+  \int(S_V-S_c)_-=E[(c-V)^+].\tag{2}$$
+
+If both quantities are infinite, this exact preorder leaves $V$ and $c$
+incomparable. The following calculations use the individual nonnegative
+moments, never their undefined difference.
+
+### Alternating St Petersburg and negative self-similarity
+
+Let $\Pr(A=(-2)^n)=2^{-n}$ for $n\ge1$, and let $c=-1/2$. Then
+
+$$E[(A+\tfrac12)^+]
+  =\sum_{k\ge1}\left(1+2^{-(2k+1)}\right)=\infty,$$
+
+$$E[(-\tfrac12-A)^+]
+  =\sum_{k\ge0}\left(1-2^{-(2k+2)}\right)=\infty.$$
+
+Consequently $A$ and $c$ are incomparable, so the model fails
+Alternating St Petersburg $=-1/2$.
+
+They are also two fixed points in value of the same map
+$F(V)=M_{1/2}(-2V,-2)$. For $A$, the mixture puts probability $1/2$ on
+$-2$ and probability $2^{-m}$ on $(-2)^m$ for every $m\ge2$. This is
+exactly the law of $A$, so Stochastic Equivalence gives $A\sim F(A)$.
+For $c$, the simple mixture $F(c)=M_{1/2}(1,-2)$ has expectation $-1/2$,
+so Expected Utility gives $c\sim F(c)$. Nevertheless $A\not\sim c$.
+Thus the instance $p=1/2$, $a=2$, $b=0$, $Z=-2$ refutes both the
+integer-ratio and real-ratio Uniqueness of Negative Self-Similarity axioms
+**in this model**.
+
+### Pasadena and Arroyo
+
+Put $c=\ln2\in(0,1)$. For Pasadena, with
+$\Pr(P=-(-2)^n/n)=2^{-n}$, the positive atoms have odd indices and
+the negative atoms have even indices. Equation (2) becomes
+
+$$E[(P-c)^+]=\sum_{k\ge1}
+  \left(\frac{1}{2k-1}-c\,2^{-(2k-1)}\right)=\infty,$$
+
+$$E[(c-P)^+]=\sum_{k\ge1}
+  \left(\frac{1}{2k}+c\,2^{-2k}\right)=\infty.$$
+
+The odd and even harmonic subseries diverge; the terms involving $c$ have
+finite sums. This also corrects the missing denominator $2k-1$ in the
+trawl's displayed positive-area calculation.
+
+For Arroyo, with $\Pr(R=(-1)^{n+1}(n+1))=1/(n(n+1))$, the corresponding
+expressions are
+
+$$E[(R-c)^+]=\sum_{\substack{n\ge1\\ n\text{ odd}}}
+  \left(\frac1n-\frac{c}{n(n+1)}\right)=\infty,$$
+
+$$E[(c-R)^+]=\sum_{\substack{n\ge1\\ n\text{ even}}}
+  \left(\frac1n+\frac{c}{n(n+1)}\right)=\infty.$$
+
+Here the corrections are summable because
+$\sum_{n\ge1}1/(n(n+1))=1$. They were omitted from the trawl's equalities;
+retaining them leaves the divergence conclusion intact. Both gambles are
+incomparable with $\ln2$ in this preorder, establishing failure of the
+Pasadena and Arroyo evaluation principles.
+
+These are counterexamples to implications, not universal incompatibilities
+between the model's positive properties and the failed axioms. In particular,
+CDF-Area Extension leaves both-infinite pairs unconstrained; extensions of
+this exact preorder can add comparisons. The four proposed contradiction
+records were therefore not imported. No conclusion about conclosure or
+Independent Sum Cancellation follows from these calculations.
+
+The added cases in `checks/background_risk.py` check the law recursion and
+exact finite-prefix area identities, including the shifted harmonic terms.
+They are arithmetic diagnostics; the divergent-series arguments above
+establish the infinite-law failures.
+
+The original quarantine evidence is
+`checkpoint-4efdb29afea94da583b8df9975e053e4`, discovered on source revision
+`3d673577f8d071e7230a61ce36d028d4d5a14c38`. The runner identifies the actual
+discoverer as `deepseek-flash`, correcting the draft's Claude attribution.
+The model's `certificate.trawl` records the corrected checkpoint, scoped
+review, admission time, original response identity and evidence references.
+
 ## Paper references
 
 - **Proof: Unbounded Utility and Background Risk.** Zachary Goodsell (5 June 2026). Unbounded Utility and Background Risk. Unpublished working manuscript. — §3, pp. 7–8; Theorems 6–7, pp. 19–20

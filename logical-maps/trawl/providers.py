@@ -13,6 +13,35 @@ class ProviderError(ValueError):
     pass
 
 
+class ContextLengthError(ProviderError):
+    """An explicit pre-generation context rejection, safe to compact around."""
+
+
+def context_rejection(error):
+    """Classify a bounded error body without exposing its potentially secret text.
+
+    Only HTTP 400 context-size errors qualify. Authentication, balance, rate,
+    transport and ambiguous server errors must still pause without a retry.
+    """
+    if error.code != 400:
+        return False
+    try:
+        data = json.loads(error.read(8192))
+        detail = data.get("error", {}) if isinstance(data, dict) else {}
+        if not isinstance(detail, dict):
+            return False
+        if detail.get("code") == "context_length_exceeded":
+            return True
+        message = detail.get("message", "")
+        if not isinstance(message, str):
+            return False
+        message = message.lower()
+        return ("maximum context length" in message or "prompt is too long" in message
+                or "input token count exceeds" in message and "maximum" in message)
+    except (ValueError, OSError):
+        return False
+
+
 def output_tokens(profile, raw, *, reserved):
     """Use reported generation (including reasoning), or charge the reservation.
 
@@ -107,6 +136,8 @@ def complete(profile, body, *, enabled=False, timeout=120):
         return json.loads(raw)
     except HTTPError as error:
         # Do not log provider error bodies or headers: they may echo secrets.
+        if context_rejection(error):
+            raise ContextLengthError("API rejected the request because its context is too long") from None
         raise ProviderError(f"API HTTP {error.code}; request was not retried") from None
     except (URLError, TimeoutError, OSError):
         raise ProviderError("API transport failed; request was not retried") from None
@@ -151,6 +182,38 @@ def prepare_agent(profile, system, messages, output_limit, functions):
     else:
         body.update(messages=messages, tools=functions)
     return body
+
+
+def output_limited(profile, raw):
+    """Recognize a completed API response cut short by its generation limit.
+
+    This does not make its text or tool calls executable. Refusals and unknown
+    stop reasons still use the ordinary failure path.
+    """
+    if profile["protocol"] == "chat-completions":
+        choices = raw.get("choices")
+        return (isinstance(choices, list) and len(choices) == 1
+                and isinstance(choices[0], dict) and choices[0].get("finish_reason") == "length"
+                and isinstance(choices[0].get("message"), dict)
+                and not choices[0]["message"].get("refusal"))
+    if profile["protocol"] == "anthropic-messages":
+        return raw.get("stop_reason") == "max_tokens"
+    return False
+
+
+def unfinished_parts(profile, raw):
+    """Extract exposed text for a human-readable archive; never execute it.
+
+    Opaque/redacted thinking remains in the verbatim raw response. We cannot
+    recover reasoning a provider did not expose.
+    """
+    if profile["protocol"] == "chat-completions":
+        message = raw["choices"][0]["message"]
+        return message.get("reasoning_content"), message.get("content"), message.get("tool_calls")
+    blocks = raw.get("content", [])
+    reasoning = "\n\n".join(b["thinking"] for b in blocks if b.get("type") == "thinking" and isinstance(b.get("thinking"), str))
+    text = "\n\n".join(b["text"] for b in blocks if b.get("type") == "text" and isinstance(b.get("text"), str))
+    return reasoning, text, [b for b in blocks if b.get("type") == "tool_use"]
 
 
 def agent_turn(profile, raw):

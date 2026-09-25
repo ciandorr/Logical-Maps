@@ -1093,31 +1093,6 @@ def affine_symmetric_extension : Prop :=
     ¬ UnboundedUtility.CountableSureThing W.pref ∧
     ¬ UnboundedUtility.ArchimedeanGambles W.pref
 
-/-- `cdf-area-preorder`
-
-CDF-area dominance: a witness satisfying 13 principles
-and violating 5. -/
-def cdf_area_preorder : Prop :=
-  ∃ W : Witness,
-    UnboundedUtility.RichOutcomes W.pref ∧
-    UnboundedUtility.ArchimedeanOutcomes W.pref ∧
-    UnboundedUtility.CDFAreaExtension W.pref ∧
-    UnboundedUtility.ExpectedUtility W.pref ∧
-    UnboundedUtility.RelativeExpectation W.pref ∧
-    UnboundedUtility.L1Continuity W.pref ∧
-    UnboundedUtility.StochasticEquivalence W.pref ∧
-    UnboundedUtility.StochasticDominance W.pref ∧
-    UnboundedUtility.MixtureIndependence W.pref ∧
-    UnboundedUtility.ReflectionAntiInvariance W.pref ∧
-    UnboundedUtility.PositiveAffineInvariance W.pref ∧
-    UnboundedUtility.ComonotonicSumConsistency W.pref ∧
-    UnboundedUtility.IndependentSumPreservation W.pref ∧
-    ¬ UnboundedUtility.Totality W.pref ∧
-    ¬ UnboundedUtility.SymmetricNeutrality W.pref ∧
-    ¬ UnboundedUtility.FoldedExpectation W.pref ∧
-    ¬ UnboundedUtility.FullSumConsistency W.pref ∧
-    ¬ UnboundedUtility.AntitonicSumConsistency W.pref
-
 /-- `cdf-conclosure-preorder`
 
 CDF-area conclosure: a witness satisfying 12 principles

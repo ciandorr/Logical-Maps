@@ -55,6 +55,44 @@ def stp_survival(t):
     return tail
 
 
+def trawl_prospect_checks():
+    """Check the admitted witnesses' arithmetic, not infinite-law convergence."""
+    # Push forward a finite prefix, then compare every atom away from the
+    # truncation boundary with the exact infinite alternating law.
+    alternating = [(F((-2)**n), F(1, 2**n)) for n in range(1, 61)]
+    transformed = mix([(-2*v, w) for v, w in alternating], [(F(-2), F(1))])
+    for n in range(1, 61):
+        assert sum(w for v, w in transformed if v == (-2)**n) == F(1, 2**n)
+    assert sum(v*w for v, w in mix([(F(1), F(1))], [(F(-2), F(1))])) == F(-1, 2)
+
+    for count in (4, 8, 12):
+        a = [(F((-2)**n), F(1, 2**n)) for n in range(1, count+1)]
+        pasadena = [(F(-(-2)**n, n), F(1, 2**n)) for n in range(1, count+1)]
+        arroyo = [(F((-1)**(n+1)*(n+1)), F(1, n*(n+1))) for n in range(1, count+1)]
+        odds, evens = range(1, count+1, 2), range(2, count+1, 2)
+        for law, remainder in ((a, F(1, 2**count)),
+                               (pasadena, F(1, 2**count)),
+                               (arroyo, F(1, count+1))):
+            assert sum(w for _, w in law)+remainder == 1
+            law.append((F(0), remainder))
+        harmonic_odd = sum((F(1, n) for n in odds), F(0))
+        harmonic_even = sum((F(1, n) for n in evens), F(0))
+        assert areas(pasadena, [(F(0), F(1))]) == (harmonic_odd, harmonic_even)
+        assert areas(arroyo, [(F(0), F(1))]) == (harmonic_odd, harmonic_even)
+        # Rational reference values exercise the shift corrections that were
+        # missing in the original drafts. The proof handles c = log(2).
+        for c in (F(1, 4), F(1, 2), F(3, 4)):
+            for law, weights, remainder in (
+                    (pasadena, {n: F(1, 2**n) for n in range(1, count+1)}, F(1, 2**count)),
+                    (arroyo, {n: F(1, n*(n+1)) for n in range(1, count+1)}, F(1, count+1))):
+                plus = harmonic_odd-c*sum(weights[n] for n in odds)
+                minus = harmonic_even+c*(sum(weights[n] for n in evens)+remainder)
+                assert areas(law, [(c, F(1))]) == (plus, minus)
+        plus = sum((1+F(1, 2**(n+1)) for n in evens), F(0))+F(1, 2**(count+1))
+        minus = sum((1-F(1, 2**(n+1)) for n in odds), F(0))
+        assert areas(a, [(F(-1, 2), F(1))]) == (plus, minus)
+
+
 def main():
     rng = Random(20260909)
     def law():
@@ -91,7 +129,8 @@ def main():
         # Two disjoint antitonic branches each have probability 2^-n.
         assert 2*F(1, 2**n) == F(1, 2**(n-1))
         assert 2**n+2 == 2*(2**(n-1))+2
-    print('PASS: 100 exact area/quantile/mixture/convolution cases, overlap example, and exact St Petersburg tails.')
+    trawl_prospect_checks()
+    print('PASS: 100 exact area/quantile/mixture/convolution cases, overlap example, exact St Petersburg tails, and trawl prospect checks.')
 
 
 if __name__ == '__main__':

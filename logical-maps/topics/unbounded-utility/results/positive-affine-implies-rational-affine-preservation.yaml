@@ -1,0 +1,135 @@
+id: positive-affine-implies-rational-affine-preservation
+premises:
+- positive-affine-invariance
+conclusion: rational-affine-preservation
+status: proved
+certificate:
+  source_id: misc
+  lean: none
+  produced_by: DeepSeek (deepseek-flash), theorem trawl, 2026-09-25; immediate restriction of the recorded definitions
+  checked_by:
+  - GPT-6 (Codex), informal mathematical review, 2026-09-25; weak and strict preservation and common chart scope
+  date: '2026-09-25'
+  recorded_by: DeepSeek (deepseek-flash), 2026-09-25; curated and attribution corrected by GPT-6 (Codex), 2026-09-25
+
+  trawl:
+    quarantine_id: quarantine-0113be29928e4d2fbf33c5d150b87c73
+    candidate_id: checkpoint-8a343fc0b96a488f884cb6196783f928
+    candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+    source:
+      repository: https://github.com/zwlgzwlg/Logical-Maps.git
+      ref: main
+      commit: 3d673577f8d071e7230a61ce36d028d4d5a14c38
+    discovery:
+      trawl_id: trawl-e3ee9c7641b24c85828ca79696519e50
+      at: '2026-09-25T04:26:58.086411+00:00'
+      actor:
+        kind: model
+        provider: deepseek
+        model: deepseek-flash
+        protocol: chat-completions
+        endpoint: https://api.deepseek.com/chat/completions
+        reported_model: deepseek-flash
+      prompt_sha256: 56d485438fcffc429d34b1659aa46ba2f0dfd88804b20f504c06009bc58de7d9
+      response_sha256: a29fb9e29caa36767a5478c36447b5858d946cb5ec4565d4b56dc849c1a851b8
+      response_id: 8784abc9-e398-4b47-8c7c-51c38b780043
+      usage:
+        prompt_tokens: 193986
+        completion_tokens: 824
+        total_tokens: 194810
+        prompt_tokens_details:
+          cached_tokens: 187392
+        completion_tokens_details:
+          reasoning_tokens: 92
+        prompt_cache_hit_tokens: 187392
+        prompt_cache_miss_tokens: 6594
+      offline: false
+    evidence:
+    - kind: original-argument
+      citation: DeepSeek deepseek-flash, 25 September 2026; original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4
+        (SHA-256 4b5e25f2a34645fbe11b27a6f4608425043abd641f9f3f2d73b989059085e5d9). Corrected and scoped
+        by GPT-6 (Codex).
+      locator: 'logical-maps/topics/unbounded-utility/results/positive-affine-implies-rational-affine-preservation.yaml;
+        accepted scope: An immediate weak-and-strict preservation bridge from the recorded biconditional;
+        no additional chart assumptions.'
+      role: origin
+      verification: argument-in-writeup
+    - kind: database-record
+      citation: Logical Maps current source definitions and model construction; file hashes and pre-edit
+        text bound in the curated checkpoint.
+      locator: logical-maps/topics/unbounded-utility/results/positive-affine-implies-rational-affine-preservation.yaml;
+        accompanying principles and writeups/positive-affine-implies-rational-affine-preservation.md
+      role: background
+      verification: supplied-context
+    reviews:
+    - version: 1
+      id: review-efb0a17ef88845e0be4e03df2f93c5bb
+      candidate_id: checkpoint-8a343fc0b96a488f884cb6196783f928
+      candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+      at: '2026-09-25T12:59:35.163452+00:00'
+      recorded_at: '2026-09-25T12:59:35.164071+00:00'
+      actor:
+        kind: model
+        provider: openai
+        model: gpt-6
+      source:
+        repository: https://github.com/zwlgzwlg/Logical-Maps.git
+        ref: HEAD
+        commit: 7c928c4eb396a15e2b0b0226e4e753898870e7ca
+      report:
+        verdict: accept
+        summary: Accept the corrected affine-preservation bridge, five failures of the exact CDF-area model,
+          and the explicitly partial conclosure analysis. Acceptance covers only the seven curated files
+          and the scoped additions, not rejected drafts or a new audit of existing constructions.
+        argument_check: 'Checked the two directions of weak preference to obtain strict affine preservation;
+          Tonelli tail identities and all three gamble laws; the alternating fixed-point law recursion and
+          simple sure-value fixed point; both divergent moment sums, including harmonic denominators and
+          finite shifts; strict-order reversal for fixed points; and the q/(16u) lower-tail bound excluding
+          kernels with lower tail o(1/u). Ran the exact finite-law background_risk.py diagnostics and topic
+          schema/reference/consistency validation. Queried the engine before and after: the bridge is new,
+          five model failures are new, and conclosure self-similarity remains open. Export build also confirmed
+          that the amended model is not currently statable in Lean; corrected its label to none. The original
+          narrower statement remains preserved in the baseline.'
+        source_check: Inspected the frozen original checkpoint and current local principle/model/write-up
+          records; all changed existing records match their pinned before versions. Verified the canonical
+          checkpoint digest and all 71 edit-event hashes, plus editing-turn API response hashes and reported
+          deepseek-flash identities. The accepted arguments are self-contained checks against the recorded
+          definitions; no new inspection or verification of the unpublished manuscript or external literature
+          is claimed. The earlier construction authorship is retained. The prior stated Lean status is preserved
+          historically; the expanded CDF-area record is correctly marked none. Full current-topic file hashes
+          accompany the curated checkpoint because the checkout contains unrelated uncommitted Classicism
+          work.
+        issues: []
+      method: informal-mathematical-review
+    admission:
+      id: admission-89ba44a12e494abd93251f7c762eb26b
+      at: '2026-09-25T12:59:35.164588+00:00'
+      by: GPT-6 (Codex)
+      base_commit: 7c928c4eb396a15e2b0b0226e4e753898870e7ca
+      candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+      review_id: review-efb0a17ef88845e0be4e03df2f93c5bb
+
+proof: |-
+  Fix rational $a>0$ and real $b$, with the transformed outcomes available in
+  the common utility-chart scope of the two principles. Positive Affine
+  Invariance gives $X\succeq Y$ iff $aX+b\succeq aY+b$, so it gives weak
+  preservation. If $X\succ Y$, then $X\succeq Y$ and not $Y\succeq X$.
+  Applying the same biconditional also to the reversed pair gives
+  $aX+b\succeq aY+b$ and not $aY+b\succeq aX+b$, hence
+  $aX+b\succ aY+b$. Every positive rational factor is among the real factors
+  quantified over by Positive Affine Invariance. No additional assumption is
+  required.
+sources:
+- 'DeepSeek (deepseek-flash), theorem trawl, 25 September 2026: omitted definitional bridge proposed in checkpoint-4efdb29afea94da583b8df9975e053e4; actual model and edit time established by the runner audit. Informally reviewed and curated by GPT-6 (Codex), 25 September 2026.'
+- 'Logical Maps principle records positive-affine-invariance and rational-affine-preservation, statements and utility-chart scope; direct definitions used in this proof.'
+source_names:
+- DeepSeek trawl; GPT-6 review 25 Sep
+- Recorded affine principles
+notes: |-
+  This is an immediate connecting argument, not a claim of a new literature
+  theorem. The engine treats the principles as atoms and previously lacked
+  this bridge. Together with rational-affine-preservation-implies-integer it
+  also supplies Integer Affine Preservation. Discovery and independent
+  informal review are recorded separately in certificate.trawl; no Lean
+  verification is claimed. The quarantined draft incorrectly named Claude
+  as its author; the API audit identifies deepseek-flash.

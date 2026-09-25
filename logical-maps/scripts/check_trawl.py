@@ -1,5 +1,6 @@
 """Offline integration tests for theorem-trawl trust and repository boundaries."""
 from copy import deepcopy
+import io
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import threading
@@ -8,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+from urllib.error import HTTPError
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from trawl import core as t, inference, providers, workspaces as w
@@ -449,9 +451,165 @@ class TrawlTest(unittest.TestCase):
             with patch.object(providers, "complete", side_effect=[self.tool_response([
                     ("write_file", {"path": "work/notes/progress.md", "content": "Useful saved partial proof."})]), failure]):
                 result = t.run(self.q, self.settings, self.snapshot, self.origin)
-            self.assertTrue(result["errors"])
+            self.assertEqual(bool(result["errors"]), isinstance(failure, providers.ProviderError))
             self.assertEqual(result["checkpoints"][0]["changed_files"], 1)
             self.assertEqual(result["requests"], 2)
+
+    def test_output_limit_continues_both_protocols_without_executing_partial_tools(self):
+        for protocol in ("chat-completions", "anthropic-messages"):
+            with self.subTest(protocol=protocol):
+                self.live_workspace(protocol, budget=3)
+                self.settings["limits"].update(max_output_tokens=64, output_tokens_per_run=200)
+                folder, manifest = self.workspace()
+                read = self.tool_response([("read_file", {"path": "work/logical-maps/topics/example/background.md"})], protocol=protocol)
+                limited = self.tool_response([
+                    ("write_file", {"path": "work/notes/do-not-apply.md", "content": "Unfinished claim"}),
+                    ("write_file", {"path": "work/notes/partial.md", "content": "Incomplete"})], protocol=protocol)
+                saved = self.tool_response([("write_file", {"path": "work/notes/progress.md",
+                    "content": "Deferred the hard question; saved a different easy observation."})], protocol=protocol)
+                for raw, amount in ((read, 5), (limited, 64), (saved, 5)):
+                    raw["usage"] = {"completion_tokens": amount, "output_tokens": amount}
+                long_reasoning = "UNFINISHED-REASONING-MUST-NOT-BE-REPLAYED — partial lemma.\n" * 2500 + "LAST LINE PRESERVED"
+                if protocol == "chat-completions":
+                    limited["choices"][0]["finish_reason"] = "length"
+                    message = limited["choices"][0]["message"]
+                    message["reasoning_content"] = long_reasoning
+                    message["content"] = "An incomplete candidate answer."
+                    message["tool_calls"][1]["function"]["arguments"] = '{"path": "work/notes/partial.md", "content":'
+                else:
+                    limited["stop_reason"] = "max_tokens"
+                    limited["content"].insert(0, {"type": "thinking", "thinking": long_reasoning})
+                    limited["content"].insert(1, {"type": "text", "text": "An incomplete candidate answer."})
+                    limited["content"][-1]["input"] = {"path": "work/notes/partial.md"}
+                with patch.object(providers, "complete", side_effect=[read, limited, saved]) as api:
+                    result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+                self.assertFalse(result["errors"])
+                self.assertEqual(result["requests"], 3)
+                self.assertEqual(result["output_tokens_charged"], 74)
+                next_body = json.dumps(api.call_args.args[1])
+                self.assertIn("toy propositional framework", next_body)
+                self.assertIn("Defer that line of investigation", next_body)
+                self.assertIn("different tractable question", next_body)
+                self.assertNotIn("UNFINISHED-REASONING-MUST-NOT-BE-REPLAYED", next_body)
+                self.assertNotIn("do-not-apply.md", next_body)
+                self.assertTrue((folder / "files/notes/progress.md").exists())
+                self.assertFalse((folder / "files/notes/do-not-apply.md").exists())
+                self.assertFalse((folder / "files/notes/partial.md").exists())
+                state = t.read(folder / "state.json")
+                self.assertEqual(state["status"], "active")
+                self.assertEqual(state["pass_number"], 1)
+                self.assertEqual(state["output_limit_hits"], 1)
+                outcomes = [t.read(p) for p in (self.q / "trawls").glob("*/outcome.json")]
+                outcome = next(o for o in outcomes if o["outcome"] == "output-limit" and o["workspace"] == manifest["id"])
+                audit = self.q / "trawls" / outcome["metadata"]["trawl_id"]
+                self.assertEqual(t.read(audit / "response.json"), limited)
+                self.assertEqual(t.read(audit / "budget.json")["charged"], 64)
+                self.assertTrue((audit / "SEALED.json").exists())
+                archived = outcome["unfinished_response"]
+                document = self.q / archived["path"]
+                markdown = document.read_text()
+                self.assertIn(long_reasoning, markdown)
+                self.assertIn("An incomplete candidate answer.", markdown)
+                self.assertIn("do-not-apply.md", markdown)
+                self.assertIn("Incomplete and unverified", markdown)
+                self.assertIn(self.origin["commit"], markdown)
+                self.assertIn('"reported_model": "reported-model"', markdown)
+                self.assertEqual(w.file_hash(markdown), archived["sha256"])
+                checkpoint = t.read(self.q / "candidates" / (result["checkpoints"][0]["checkpoint"] + ".json"))
+                self.assertEqual(checkpoint["content"]["unfinished_responses"], [archived])
+                denied = w.execute_tool(folder, manifest, {"name": "read_file", "arguments": {
+                    "path": archived["path"]}}, self.metadata, 100)
+                self.assertIn("error", denied)
+                with self.assertRaises(FileExistsError):
+                    t.save_text(document, "Overwrite should fail")
+                w.seal_workspace(folder)
+
+    def test_thinking_only_limits_consume_finite_budget_and_resume_with_steering(self):
+        self.live_workspace(budget=10)
+        self.settings["limits"].update(max_output_tokens=64, output_tokens_per_run=100)
+        limited = self.tool_response()
+        limited["choices"][0].update(finish_reason="length", message={"role": "assistant", "content": None,
+            "reasoning_content": "A long unfinished internal proof"})
+        limited["usage"] = {}  # charge the full reservation when usage is absent
+        folder, manifest = self.workspace()
+        with patch.object(providers, "complete", return_value=limited) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        self.assertEqual(result["requests"], 2)
+        self.assertEqual(result["output_tokens_charged"], 100)
+        self.assertEqual([call.args[1]["max_completion_tokens"] for call in api.call_args_list], [64, 36])
+        state = t.read(folder / "state.json")
+        self.assertEqual(state["output_limit_hits"], 2)
+        self.assertEqual(state["status"], "active")
+        self.assertIsNone(state["pending"])
+        self.assertIn("different tractable question", state["messages"][-1]["content"])
+        with patch.object(providers, "complete", return_value=self.tool_response()) as api:
+            resumed = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertEqual(resumed["requests"], 1)
+        self.assertIn("different tractable question", json.dumps(api.call_args.args[1]))
+        self.assertTrue((folder / "SEALED.json").exists())
+
+    def test_output_limit_recovery_does_not_rebill_or_duplicate_steering(self):
+        self.live_workspace(budget=1)
+        limited = self.tool_response()
+        limited["choices"][0]["finish_reason"] = "length"
+        folder, manifest = self.workspace()
+        original = w.state_save
+        def interrupt_final_state(path, state):
+            if state.get("output_limit_hits") and state.get("pending") is None:
+                raise KeyboardInterrupt
+            return original(path, state)
+        with patch.object(providers, "complete", return_value=limited), patch.object(w, "state_save", side_effect=interrupt_final_state):
+            with self.assertRaises(KeyboardInterrupt):
+                t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        aid = t.read(folder / "state.json")["pending"]
+        audit = self.q / "trawls" / aid
+        old = {p.name: p.read_bytes() for p in audit.iterdir() if p.is_file()}
+        archive_path = self.q / "unfinished" / (aid + ".md")
+        archive_before = archive_path.read_bytes()
+        with patch.object(providers, "complete", return_value=self.tool_response([("write_file", {
+            "path": "work/notes/progress.md", "content": "Deferred hard work."})])) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        self.assertEqual(api.call_count, 1)
+        self.assertEqual(result["output_tokens_charged"], 5)
+        self.assertEqual(json.dumps(api.call_args.args[1]).count("Your previous response reached a length limit"), 1)
+        self.assertEqual(t.read(folder / "state.json")["output_limit_hits"], 1)
+        self.assertEqual(len(t.read(folder / "state.json")["unfinished_responses"]), 1)
+        self.assertEqual(archive_path.read_bytes(), archive_before)
+        self.assertEqual({p.name: p.read_bytes() for p in audit.iterdir() if p.is_file()}, old)
+
+    def test_output_limit_steering_survives_context_compaction(self):
+        self.live_workspace()
+        self.settings["limits"]["central_questions"] = 1
+        folder, manifest = self.workspace()
+        initial = {"role": "user", "content": w.initial_prompt(folder, manifest, self.settings)}
+        notice = t.prompts.OUTPUT_LIMIT.format(output_limit=65536)
+        state = {"messages": [initial, {"role": "assistant", "content": "Old context " * 10000},
+                              {"role": "user", "content": notice}], "output_limit_notice": notice}
+        compacted = w.compact_messages(folder, state, self.settings["discovery"], initial, 4096, 24000)
+        self.assertIn("Defer that line of investigation", json.dumps(compacted))
+        self.assertNotIn("Old context " * 100, json.dumps(compacted))
+
+    def test_output_limit_does_not_mask_refusals_or_validate_partial_reviews(self):
+        self.live_workspace(budget=10)
+        folder, manifest = self.workspace()
+        for reason, refusal in (("length", "Cannot comply"), ("content_filter", None), ("unknown", None)):
+            response = self.tool_response()
+            response["choices"][0]["finish_reason"] = reason
+            response["choices"][0]["message"]["refusal"] = refusal
+            with patch.object(providers, "complete", return_value=response) as api:
+                result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+            self.assertEqual(api.call_count, 1)
+            self.assertTrue(result["errors"])
+        for protocol in ("chat-completions", "anthropic-messages"):
+            response = self.tool_response(final=json.dumps(self.report), protocol=protocol)
+            if protocol == "chat-completions":
+                response["choices"][0]["finish_reason"] = "length"
+            else:
+                response["stop_reason"] = "max_tokens"
+            with self.assertRaises(providers.ProviderError):
+                providers.unpack({"protocol": protocol}, response)
 
     def test_interruption_between_edits_replays_saved_response_without_api_rebilling(self):
         self.live_workspace()
@@ -541,9 +699,223 @@ class TrawlTest(unittest.TestCase):
         self.assertEqual(result["checkpoints"][0]["changed_files"], 2)
         body = api.call_args.args[1]
         self.assertLess(len(json.dumps(body)), 18000)
-        self.assertIn("compacted", body["messages"][-1]["content"])
+        self.assertIn("compacted", json.dumps(body["messages"]))
         raw = [t.read(p) for p in (self.q / "trawls").glob("*/response.json")]
         self.assertTrue(any("argument " * 1000 in json.dumps(r) for r in raw))
+
+    def test_model_context_mode_validates_and_allows_large_history(self):
+        self.live_workspace()
+        self.settings["limits"].update(max_prompt_chars="model", max_output_tokens=65536)
+        self.settings["discovery"].update(token_parameter="max_tokens",
+            parameters={"thinking": {"type": "enabled"}, "reasoning_effort": "high"})
+        write_yaml(self.q / "config.local.yaml", self.settings)
+        self.settings = t.config(self.q / "config.local.yaml")
+        folder, manifest = self.workspace()
+        state = t.read(folder / "state.json")
+        retained = "Large retained mathematical context. " * 10000
+        state["messages"] = [{"role": "user", "content": retained}]
+        w.state_save(folder, state)
+        with patch.object(providers, "complete", return_value=self.tool_response()) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        body = api.call_args.args[1]
+        self.assertIn(retained, json.dumps(body))
+        self.assertEqual(body["max_tokens"], 20000)  # remaining run allowance still wins
+        self.assertEqual(body["thinking"], {"type": "enabled"})
+        self.assertEqual(body["reasoning_effort"], "high")
+        self.assertEqual(t.read(folder / "state.json").get("context_compactions", 0), 0)
+        # Review packet construction also accepts this limit without truncation.
+        self.assertTrue(t.review_packet(self.q, self.settings, self.snapshot, self.origin, self.candidate()))
+        for invalid in (0, -1, True, "unlimited", None):
+            self.settings["limits"]["max_prompt_chars"] = invalid
+            write_yaml(self.q / "config.local.yaml", self.settings)
+            with self.assertRaisesRegex(ValueError, "max_prompt_chars"):
+                t.config(self.q / "config.local.yaml")
+
+    def test_model_context_rejection_compacts_and_saves_with_budgets_and_audit(self):
+        for protocol in ("chat-completions", "anthropic-messages"):
+            with self.subTest(protocol=protocol):
+                self.live_workspace(protocol, budget=2)
+                self.settings["limits"].update(max_prompt_chars="model", central_questions=1,
+                                                output_tokens_per_run=10, max_output_tokens=10)
+                folder, manifest = self.workspace()
+                state = t.read(folder / "state.json")
+                assistant, calls = providers.agent_turn(self.settings["discovery"], self.tool_response(
+                    [("read_file", {"path": "work/logical-maps/topics/example/background.md"})], protocol=protocol))
+                state["messages"] = [{"role": "user", "content": w.initial_prompt(folder, manifest, self.settings)},
+                    {"role": "assistant", "content": "Old working context. " * 10000}, assistant,
+                    *providers.tool_messages(self.settings["discovery"], [(calls[0]["id"], {"content": "Definition A remains available."})])]
+                w.state_save(folder, state)
+                response = self.tool_response([("write_file", {"path": "work/notes/progress.md",
+                    "content": "Useful argument saved after context compaction."})], protocol=protocol)
+                response["usage"] = {"completion_tokens": 5, "output_tokens": 5}
+                with patch.object(providers, "complete", side_effect=[providers.ContextLengthError("context full"), response]) as api:
+                    result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+                self.assertFalse(result["errors"])
+                self.assertEqual(result["requests"], 2)
+                self.assertEqual(result["output_tokens_charged"], 5)
+                before, after = [json.dumps(call.args[1], ensure_ascii=False) for call in api.call_args_list]
+                self.assertLess(len(after), len(before) * .75)
+                self.assertIn("Definition A remains available.", after)
+                self.assertTrue((folder / "files/notes/progress.md").exists())
+                trawls = [p.parent for p in (self.q / "trawls").glob("*/outcome.json")
+                          if t.read(p).get("outcome") == "context-rejected"
+                          and t.read(p.parent / "request.json")["workspace"] == manifest["id"]]
+                self.assertEqual(len(trawls), 1)
+                self.assertTrue((trawls[0] / "SEALED.json").exists())
+                self.assertEqual(t.read(trawls[0] / "budget.json")["charged"], 0)
+                self.assertIn("Old working context. " * 100, json.dumps(t.read(trawls[0] / "request.json")))
+                w.seal_workspace(folder)  # next protocol gets its own unfinished workspace
+
+    def test_model_context_rejection_cannot_loop_past_request_budget(self):
+        self.live_workspace(budget=1)
+        self.settings["limits"]["max_prompt_chars"] = "model"
+        folder, manifest = self.workspace()
+        state = t.read(folder / "state.json")
+        state["messages"] = [{"role": "user", "content": "Working evidence. " * 10000}]
+        w.state_save(folder, state)
+        with patch.object(providers, "complete", side_effect=providers.ContextLengthError("context full")) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertEqual(api.call_count, 1)
+        self.assertEqual(result["output_tokens_charged"], 0)
+        self.assertFalse(result["errors"])
+        self.assertIsNone(t.read(folder / "state.json")["pending"])
+
+    def test_model_context_repeated_rejection_pauses(self):
+        self.live_workspace(budget=20)
+        self.settings["limits"].update(max_prompt_chars="model", central_questions=1)
+        folder, manifest = self.workspace()
+        state = t.read(folder / "state.json")
+        assistant, calls = providers.agent_turn(self.settings["discovery"], self.tool_response(
+            [("read_file", {"path": "work/notes/long.md"})]))
+        state["messages"] = [{"role": "user", "content": w.initial_prompt(folder, manifest, self.settings)},
+            assistant, *providers.tool_messages(self.settings["discovery"], [(calls[0]["id"], {"content": "Long result. " * 10000})])]
+        w.state_save(folder, state)
+        with patch.object(providers, "complete", side_effect=providers.ContextLengthError("context full")) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertEqual(api.call_count, 3)
+        self.assertIn("three rejections", result["errors"][0]["error"])
+        self.assertEqual(result["output_tokens_charged"], 0)
+
+    def test_model_context_does_not_retry_transport_errors(self):
+        self.live_workspace(budget=10)
+        self.settings["limits"].update(max_prompt_chars="model", max_output_tokens=100)
+        folder, manifest = self.workspace()
+        with patch.object(providers, "complete", side_effect=providers.ProviderError("connection lost")) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertEqual(api.call_count, 1)
+        self.assertEqual(result["output_tokens_charged"], 100)
+
+    def test_context_error_detection_is_narrow_and_does_not_expose_error_body(self):
+        profile = {"protocol": "chat-completions", "provider": "test", "model": "model",
+                   "endpoint": "https://example.invalid/api"}
+        for status, detail, recognized in (
+                (400, {"code": "context_length_exceeded"}, True),
+                (400, {"message": "This model's maximum context length is 100 tokens."}, True),
+                (400, {"message": "prompt is too long: 200 tokens > 100 maximum"}, True),
+                (400, {"message": "Input token count exceeds the maximum allowed token count."}, True),
+                (400, {"message": "invalid max_tokens"}, False),
+                (400, {"message": {"unexpected": "object"}}, False),
+                (401, {"code": "context_length_exceeded"}, False),
+                (402, {"message": "Insufficient balance"}, False),
+                (429, {"message": "Rate limited"}, False),
+                (500, {"code": "context_length_exceeded"}, False)):
+            with self.subTest(status=status, detail=detail):
+                raw = json.dumps({"error": {**detail, "private": "SYNTHETIC-SECRET"}}).encode()
+                error = HTTPError(profile["endpoint"], status, "Rejected", {}, io.BytesIO(raw))
+                with patch.object(providers, "build_opener") as opener:
+                    opener.return_value.open.side_effect = error
+                    with self.assertRaises(providers.ProviderError) as raised:
+                        providers.complete(profile, {}, enabled=True)
+                self.assertEqual(isinstance(raised.exception, providers.ContextLengthError), recognized)
+                self.assertNotIn("SYNTHETIC-SECRET", str(raised.exception))
+
+    def test_start_paths_and_shallow_listing_avoid_full_repository_discovery(self):
+        folder, manifest = self.workspace()
+        initial = json.loads(w.initial_prompt(folder, manifest, self.settings))
+        self.assertEqual(initial["topic_directory"], "work/logical-maps/topics/example")
+        self.assertIn("work/logical-maps/topics/example/topic.yaml", initial["start_here"])
+        self.assertFalse(initial["progress_note_exists"])
+        self.assertNotIn("Read work/notes/progress.md", w.resume_note(folder))
+        result = w.execute_tool(folder, manifest, {"name": "list_files", "arguments": {"path": "work"}}, self.metadata, 0)
+        self.assertIn("work/logical-maps/", result["paths"])
+        self.assertFalse(any("principles/" in path for path in result["paths"]))
+        full = w.execute_tool(folder, manifest, {"name": "list_files", "arguments": {
+            "path": "work/logical-maps/topics/example", "recursive": True}}, self.metadata, 1)
+        self.assertIn("work/logical-maps/topics/example/principles/a.yaml", full["paths"])
+
+    def test_oversized_reads_survive_compaction_and_allow_next_turn_to_write(self):
+        for protocol in ("chat-completions", "anthropic-messages"):
+            self.live_workspace(protocol, budget=2)
+            self.settings["limits"].update(central_questions=1, max_prompt_chars=24000)
+            folder, manifest = self.workspace()
+            path = folder / "files/logical-maps/topics/example/background.md"
+            path.write_text("KEY FACT: the relevant definition is A.\n" + "Supporting detail. " * 2000)
+            responses = [self.tool_response([("read_file", {"path": "work/logical-maps/topics/example/background.md", "limit": 48000})], protocol=protocol)]
+            def reply(profile, body, **kwargs):
+                if responses:
+                    return responses.pop()
+                encoded = json.dumps(body, ensure_ascii=False)
+                self.assertLessEqual(len(encoded), 24000)
+                self.assertIn("KEY FACT: the relevant definition is A.", encoded)
+                self.assertIn("context_excerpt", encoded)
+                self.assertNotIn("Read work/notes/progress.md and resume", encoded)
+                return self.tool_response([("write_file", {"path": "work/notes/progress.md",
+                    "content": "Definition A inspected; next derive the connection to B."})], protocol=protocol)
+            with patch.object(providers, "complete", side_effect=reply):
+                result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+            self.assertFalse(result["errors"])
+            self.assertTrue((folder / "files/notes/progress.md").exists())
+            # Avoid selecting this unfinished workspace for the next protocol fixture.
+            w.seal_workspace(folder)
+
+    def test_compaction_keeps_recent_complete_tool_exchange_and_reasoning(self):
+        folder, manifest = self.workspace()
+        self.live_workspace()
+        self.settings["limits"]["central_questions"] = 1
+        initial = {"role": "user", "content": w.initial_prompt(folder, manifest, self.settings)}
+        raw = self.tool_response([("read_file", {"path": "work/logical-maps/topics/example/principles/a.yaml"})])
+        raw["choices"][0]["message"]["reasoning_content"] = "Continue the pending tool sequence."
+        assistant, calls = providers.agent_turn(self.settings["discovery"], raw)
+        results = providers.tool_messages(self.settings["discovery"], [(calls[0]["id"], {"content": "A is the important definition.", "sha256": "hash"})])
+        state = {"messages": [initial, {"role": "assistant", "content": "old context " * 10000}, assistant, *results]}
+        compacted = w.compact_messages(folder, state, self.settings["discovery"], initial, 4096, 24000)
+        self.assertEqual(compacted[-2:], [assistant, *results])
+        self.assertEqual(compacted[-2]["reasoning_content"], "Continue the pending tool sequence.")
+        self.assertNotIn("old context " * 100, json.dumps(compacted))
+
+    def test_identical_repeated_compaction_pauses_instead_of_billing_a_loop(self):
+        folder, manifest = self.workspace()
+        self.live_workspace()
+        self.settings["limits"]["central_questions"] = 1
+        initial = {"role": "user", "content": w.initial_prompt(folder, manifest, self.settings)}
+        raw = self.tool_response([("read_file", {"path": "work/notes/missing.md"})])
+        assistant, calls = providers.agent_turn(self.settings["discovery"], raw)
+        results = providers.tool_messages(self.settings["discovery"], [(calls[0]["id"], {"error": "Missing file"})])
+        state = {"messages": [initial, assistant, *results]}
+        for _ in range(2):
+            w.compact_messages(folder, state, self.settings["discovery"], initial, 4096, 24000)
+        with self.assertRaisesRegex(ValueError, "identical tool results"):
+            w.compact_messages(folder, state, self.settings["discovery"], initial, 4096, 24000)
+
+    def test_resuming_older_workspace_upgrades_bootstrap_and_keeps_read_evidence(self):
+        self.live_workspace(budget=1)
+        folder, manifest = self.workspace()
+        state = t.read(folder / "state.json")
+        raw = self.tool_response([("read_file", {"path": "work/logical-maps/topics/example/background.md"})])
+        assistant, calls = providers.agent_turn(self.settings["discovery"], raw)
+        state.update(prompt_version="older-version", messages=[
+            {"role": "user", "content": "Obsolete bootstrap: rediscover the whole repository"},
+            assistant, *providers.tool_messages(self.settings["discovery"], [(calls[0]["id"], {"content": "Already inspected: definition A."})])])
+        w.state_save(folder, state)
+        with patch.object(providers, "complete", return_value=self.tool_response([("write_file", {
+            "path": "work/notes/progress.md", "content": "Continue from definition A."})])) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        body = json.dumps(api.call_args.args[1])
+        self.assertIn("start_here", body)
+        self.assertIn("Already inspected: definition A.", body)
+        self.assertNotIn("Obsolete bootstrap", body)
 
     def test_lost_request_is_logged_and_resume_uses_new_turn(self):
         self.live_workspace()
@@ -853,14 +1225,15 @@ class TrawlTest(unittest.TestCase):
         self.assertEqual(t.plan(snapshot, self.settings), [])
         self.assertEqual(t.plan(snapshot, self.settings), [])
 
-    def test_prompt_cap_prevents_network_and_reserves_trawl(self):
+    def test_prompt_cap_prevents_network_and_checkpoints_without_a_request(self):
         settings = deepcopy(self.settings)
         settings["limits"]["max_prompt_chars"] = 10
         with patch.object(providers, "complete") as api:
             result = t.run(self.q, settings, self.snapshot, self.origin)
         api.assert_not_called()
         self.assertEqual(len(result["errors"]), 1)
-        self.assertEqual(len(t.trawls(self.q)), 1)
+        self.assertEqual(len(t.trawls(self.q)), 0)
+        self.assertEqual(len(result["checkpoints"]), 1)
 
     def test_manual_review_packet_and_timestamp(self):
         candidate = self.candidate()

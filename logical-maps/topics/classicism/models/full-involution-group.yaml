@@ -9,6 +9,7 @@ satisfies:
 - relational-choice-r
 - necessary-strong-leibniz-t
 - necessary-relational-choice-r
+- transversal-choice-r
 violates:
 - fregean-axiom
 - axiom-of-infinity-t
@@ -119,3 +120,11 @@ changes:
     (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed
     by every arrow; the failures come from the other relational constants, which denote top. No verdict
     changes.'
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Added Transversal Choice, by the argument recorded for Relational Choice: a full model contains
+    every intension, in particular one whose extension at the evaluation point is a transversal, chosen in the
+    metatheory, of the extension there of an equivalence relation; the equivalence and transversal conditions
+    are unboxed. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun.'
+  satisfies:
+  - transversal-choice-r

@@ -9,6 +9,7 @@
 - **Distinctness-preserving collapse.** Every truth is necessary under the distinctness-preserving modality.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Relational Choice.** Every serial binary relation has a functional subrelation.
+- **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
 - **¬ Strong Possibility (pure).** Each closed pure sentence consistent with Maximalist Classicism is possible under the distinctness-preserving modality.
 - **¬ ND.** Distinct things of any type are necessarily distinct.
 - **¬ BF.** The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.
@@ -30,6 +31,7 @@ The cited construction is a model of the map’s relational-type framework. The 
 
 ## Revisions
 
+- **2026-09-25** (Claude Fable 5.1 (Anthropic)) — Added Transversal Choice at the root, by the argument recorded for Relational Choice: a root entity has an arbitrary root component, so take the property whose root component is a transversal, chosen in the metatheory, of the root component of an equivalence relation at the root, with empty component parts; the equivalence and transversal conditions are all evaluated at the root's identity arrow. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun. Now satisfies: Transversal Choice.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic)) — Corrected the Boolean Completeness claim from the type-t instance to the type schema, since no component is known to refute it at type t; added the failure of Countable Boolean Completeness by the same transfer. Now violates: Boolean Completeness, Countable Boolean Completeness.
 - **2026-09-23** (Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)) — Restored the failure of Boolean Completeness (type t), now that a component refuting it at type t is on the map; see the notes. Now violates: Boolean Completeness (type t).
 - **2026-09-22** (Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)) — Added the failure of BF and of BF (type t) at the root, by transporting a component’s counterexample to BF along the distinguished arrow; see the notes. Now violates: BF, BF (type t).

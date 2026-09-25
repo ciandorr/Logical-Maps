@@ -1,0 +1,28 @@
+id: transversal-choice-r
+name: Transversal Choice
+category: choice
+statement: Every equivalence relation, at any type including e, has a transversal, that is, a property
+  with exactly one instance in each of its cells.
+formal: $\forall^{\mathrm{Ty}}\sigma\, .\,\forall R^{\sigma\sigma t}\, .\,\operatorname{Equiv}(R)\to\exists
+  F^{\sigma t}\, .\,\forall x^\sigma\, .\,\exists y^\sigma\, .\,(Rx)y\land Fy\land\forall z^\sigma\, .\,((Rx)z\land
+  Fz)\to y=z$
+date: '2026-09-25'
+sources:
+- Christopher Sun, observation communicated by Zachary Goodsell on 25 September 2026, that this formulation
+  of choice for equivalence relations is used in the literature without a proof from Relational Choice;
+  stated here in the map's relational type system.
+source_names:
+- Sun via Goodsell 25 Sep
+references:
+- paper: bacon-dorr-classicism
+  role: related
+  locator: §2.3, pp. 31–33
+  note: The source's choice principles are Relational and Functional Choice. Transversal Choice is the
+    selector form. It implies Relational Choice, and follows from it under Extensionality or Very Weak
+    Rigid Comprehension, by the recorded results.
+notes: >-
+  Equiv is defined in Background. The relation is required to be an equivalence relation only actually,
+  and the transversal condition is unboxed, so both concern the evaluation point. The cell of $x$ is
+  $\lambda z\, .\,(Rx)z$. Two members of one cell have coextensive cells, but in C properties are identical
+  only when necessarily coextensive; this is what separates the principle from Relational Choice, which
+  chooses from each property separately.

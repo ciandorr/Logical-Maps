@@ -20,14 +20,119 @@ violates:
 - folded-expectation
 - full-sum-consistency
 - antitonic-sum-consistency
+- negative-self-similarity
+- integer-negative-self-similarity
+- alternating-st-petersburg-value
+- pasadena-value
+- arroyo-value
 status: proved
 certificate:
   source_id: unpublished-background-risk
-  lean: stated
+  lean: none
   produced_by: Zachary Goodsell (unpublished manuscript)
-  checked_by: []
+  checked_by:
+  - GPT-6 (Codex), informal review, 2026-09-25; only the five failures added in the dated change below
   date: '2026-09-09'
   recorded_by: GPT-6 (Codex), 2026-09-09; extraction and random-variable translation
+
+  trawl:
+    quarantine_id: quarantine-0113be29928e4d2fbf33c5d150b87c73
+    candidate_id: checkpoint-8a343fc0b96a488f884cb6196783f928
+    candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+    source:
+      repository: https://github.com/zwlgzwlg/Logical-Maps.git
+      ref: main
+      commit: 3d673577f8d071e7230a61ce36d028d4d5a14c38
+    discovery:
+      trawl_id: trawl-a9c2c6dc24c94a15b67787950e8659a2
+      at: '2026-09-25T04:27:19.676088+00:00'
+      actor:
+        kind: model
+        provider: deepseek
+        model: deepseek-flash
+        protocol: chat-completions
+        endpoint: https://api.deepseek.com/chat/completions
+        reported_model: deepseek-flash
+      prompt_sha256: d94363aa6ca66782b06c1703bd88b5ad56657e53759cec914212d125d2afb1f3
+      response_sha256: 191dad2b43f23756f434cd0068db6836607e1421059d60927d64c7d781f97969
+      response_id: 708d45cf-700f-438e-9443-eab60851bfb9
+      usage:
+        prompt_tokens: 197398
+        completion_tokens: 1952
+        total_tokens: 199350
+        prompt_tokens_details:
+          cached_tokens: 197248
+        completion_tokens_details:
+          reasoning_tokens: 33
+        prompt_cache_hit_tokens: 197248
+        prompt_cache_miss_tokens: 150
+      offline: false
+    evidence:
+    - kind: original-argument
+      citation: DeepSeek deepseek-flash, 25 September 2026; original checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4
+        (SHA-256 4b5e25f2a34645fbe11b27a6f4608425043abd641f9f3f2d73b989059085e5d9). Corrected and scoped
+        by GPT-6 (Codex).
+      locator: 'logical-maps/topics/unbounded-utility/writeups/cdf-area-refutes-integer-self-similarity.md;
+        accepted scope: Only five new failure flags and their corrected explicit counterexamples. Preserve
+        the original model author, source and date; reset the expanded record to lean: none and retain the
+        earlier stated status in the baseline and change history.'
+      role: origin
+      verification: argument-in-writeup
+    - kind: database-record
+      citation: Logical Maps current source definitions and model construction; file hashes and pre-edit
+        text bound in the curated checkpoint.
+      locator: logical-maps/topics/unbounded-utility/models/cdf-area-preorder.yaml; accompanying principles
+        and writeups/cdf-area-preorder.md
+      role: background
+      verification: supplied-context
+    reviews:
+    - version: 1
+      id: review-efb0a17ef88845e0be4e03df2f93c5bb
+      candidate_id: checkpoint-8a343fc0b96a488f884cb6196783f928
+      candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+      at: '2026-09-25T12:59:35.163452+00:00'
+      recorded_at: '2026-09-25T12:59:35.164071+00:00'
+      actor:
+        kind: model
+        provider: openai
+        model: gpt-6
+      source:
+        repository: https://github.com/zwlgzwlg/Logical-Maps.git
+        ref: HEAD
+        commit: 7c928c4eb396a15e2b0b0226e4e753898870e7ca
+      report:
+        verdict: accept
+        summary: Accept the corrected affine-preservation bridge, five failures of the exact CDF-area model,
+          and the explicitly partial conclosure analysis. Acceptance covers only the seven curated files
+          and the scoped additions, not rejected drafts or a new audit of existing constructions.
+        argument_check: 'Checked the two directions of weak preference to obtain strict affine preservation;
+          Tonelli tail identities and all three gamble laws; the alternating fixed-point law recursion and
+          simple sure-value fixed point; both divergent moment sums, including harmonic denominators and
+          finite shifts; strict-order reversal for fixed points; and the q/(16u) lower-tail bound excluding
+          kernels with lower tail o(1/u). Ran the exact finite-law background_risk.py diagnostics and topic
+          schema/reference/consistency validation. Queried the engine before and after: the bridge is new,
+          five model failures are new, and conclosure self-similarity remains open. Export build also confirmed
+          that the amended model is not currently statable in Lean; corrected its label to none. The original
+          narrower statement remains preserved in the baseline.'
+        source_check: Inspected the frozen original checkpoint and current local principle/model/write-up
+          records; all changed existing records match their pinned before versions. Verified the canonical
+          checkpoint digest and all 71 edit-event hashes, plus editing-turn API response hashes and reported
+          deepseek-flash identities. The accepted arguments are self-contained checks against the recorded
+          definitions; no new inspection or verification of the unpublished manuscript or external literature
+          is claimed. The earlier construction authorship is retained. The prior stated Lean status is preserved
+          historically; the expanded CDF-area record is correctly marked none. Full current-topic file hashes
+          accompany the curated checkpoint because the checkout contains unrelated uncommitted Classicism
+          work.
+        issues: []
+      method: informal-mathematical-review
+    admission:
+      id: admission-89ba44a12e494abd93251f7c762eb26b
+      at: '2026-09-25T12:59:35.164588+00:00'
+      by: GPT-6 (Codex)
+      base_commit: 7c928c4eb396a15e2b0b0226e4e753898870e7ca
+      candidate_sha256: 73a897931c276776a05614c06b0aac53ac94adb27374457b0119a653a4441805
+      review_id: review-efb0a17ef88845e0be4e03df2f93c5bb
+
 description: |-
   Use real outcomes with their identity utility. For $d=S_X- S_Y$, define $X \succeq R Y$ iff $\int d_{-}<\infty$ and $\int d_{+}\ge \int d_{-}$. This is the manuscript’s explicit base preorder, satisfying DU but not DTU because Totality fails. Its elementary properties, comonotonic sum consistency, and forward independent-sum preservation are established in the accompanying write-up, with the quantile-area argument made valid for infinite areas. The draft’s proof does not establish reverse independent-sum cancellation, so full Independent Sum Invariance is not asserted. Symmetric Cauchy versus zero has both areas infinite, witnessing incompleteness and failure of Symmetric Neutrality and Folded Expectation. The St Petersburg arguments supply the two sum-consistency violations.
 sources:
@@ -35,9 +140,11 @@ sources:
   cite” and erroneous; §3, pp. 7–8; Theorems 6–7, pp. 19–20
 - GPT-6 (Codex), original connecting proofs recorded 9 September 2026 in this project; explicit quantile-area/Tonelli
   details, Cauchy witnesses, and the L1 closure proof in writeups/cdf-area-preorder.md
+- 'DeepSeek (deepseek-flash), theorem trawl, 25 September 2026: five further failures of this exact model; proofs corrected and informally reviewed by GPT-6 (Codex), same date, in writeups/cdf-area-preorder.md, Further failures found by the theorem trawl. Checkpoint checkpoint-4efdb29afea94da583b8df9975e053e4.'
 source_names:
 - Unbounded Utility and Background Risk (unpublished)
 - GPT-6 generated 9 Sep
+- DeepSeek trawl; GPT-6 review 25 Sep
 notes: This is the concrete base construction, not the draft’s withdrawn total symmetric extension. Strict
   comparisons are part of the construction. No claim that convolution cancellation is false is inferred from
   a gap in its proof. The L1 Continuity flag is established by the separately attributed elementary closure
@@ -48,3 +155,22 @@ references:
 - paper: unpublished-background-risk
   role: proof
   locator: §3, pp. 7–8; Theorems 6–7, pp. 19–20
+changes:
+- date: '2026-09-25'
+  by: DeepSeek (deepseek-flash), discovery; GPT-6 (Codex), corrected proof and informal review
+  summary: >-
+    Added five failures witnessed by alternating St Petersburg versus -1/2,
+    and by Pasadena and Arroyo versus ln 2: both signed areas diverge.
+    The alternating pair also supplies two nonindifferent fixed points of
+    the same negative self-similarity instance. These are properties of this
+    model, not universal incompatibilities; full arguments and provenance
+    are in the write-up and certificate.trawl. The original construction and
+    certificate date are unchanged; the expanded statement is marked Lean
+    none because integer-negative-self-similarity has no Lean definition.
+    The preceding record was stated, not verified.
+  violates:
+  - negative-self-similarity
+  - integer-negative-self-similarity
+  - alternating-st-petersburg-value
+  - pasadena-value
+  - arroyo-value

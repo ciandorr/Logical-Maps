@@ -6,6 +6,7 @@ satisfies:
 - distinctness-preserving-collapse
 - axiom-of-infinity-e
 - relational-choice-r
+- transversal-choice-r
 violates:
 - strong-possibility-r
 - distinctness-necessary-r
@@ -136,3 +137,12 @@ changes:
     type t is on the map; see the notes.
   violates:
   - boolean-completeness-t
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: 'Added Transversal Choice at the root, by the argument recorded for Relational Choice: a root
+    entity has an arbitrary root component, so take the property whose root component is a transversal, chosen
+    in the metatheory, of the root component of an equivalence relation at the root, with empty component
+    parts; the equivalence and transversal conditions are all evaluated at the root''s identity arrow.
+    Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun.'
+  satisfies:
+  - transversal-choice-r

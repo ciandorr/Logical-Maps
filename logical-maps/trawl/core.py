@@ -57,6 +57,11 @@ def read(path):
 
 def save(path, value):
     """Atomic creation only: a trawl/review/candidate is never overwritten."""
+    save_text(path, json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+
+def save_text(path, value):
+    """Create immutable text with the same journal/seal rules as JSON artifacts."""
     path = Path(path)
     if any((parent / "SEALED.json").exists() for parent in path.parents):
         raise ValueError("sealed trawl history cannot be changed")
@@ -65,8 +70,7 @@ def save(path, value):
                                      prefix=".pending-", delete=False) as stream:
         temp = Path(stream.name)
         try:
-            json.dump(value, stream, ensure_ascii=False, indent=2)
-            stream.write("\n")
+            stream.write(value)
             stream.flush()
             os.fsync(stream.fileno())
             os.link(temp, path)  # atomically create; never replace an existing artifact
@@ -87,7 +91,8 @@ def seal_trawl(folder):
 def install_history_policy(quarantine):
     """Install discoverable instructions without exposing historical content."""
     for relative, template in (("AGENTS.md", "quarantine-AGENTS.md"),
-                               ("trawls/AGENTS.md", "history-AGENTS.md")):
+                               ("trawls/AGENTS.md", "history-AGENTS.md"),
+                               ("unfinished/AGENTS.md", "history-AGENTS.md")):
         path = quarantine / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         if not path.exists():
@@ -95,7 +100,7 @@ def install_history_policy(quarantine):
     ignore = quarantine / ".ignore"
     if not ignore.exists():
         ignore.write_text("# Keep audit history out of ordinary recursive searches.\n"
-                          "trawls/\nattempts/\nworkspaces/\ncandidates/\npackets/\nreviews/\n")
+                          "trawls/\nattempts/\nunfinished/\nworkspaces/\ncandidates/\npackets/\nreviews/\n")
 
 
 def trawl_folder(quarantine, tid):
@@ -152,10 +157,13 @@ def config(path):
         if "trawls_per_question" in limits and limits["trawls_per_question"] != old:
             raise ValueError("conflicting trawls_per_question and legacy attempts_per_question")
         limits.setdefault("trawls_per_question", old)
-    for key in ("requests_per_run", "max_output_tokens", "max_prompt_chars",
+    for key in ("requests_per_run", "max_output_tokens",
                 "trawls_per_question", "related_records", "timeout_seconds"):
         if type(limits.get(key)) is not int or limits[key] < 1:
             raise ValueError(f"limits.{key} must be a positive integer")
+    prompt_limit = limits.get("max_prompt_chars")
+    if prompt_limit != "model" and (type(prompt_limit) is not int or prompt_limit < 1):
+        raise ValueError("limits.max_prompt_chars must be a positive integer or model")
     if "output_tokens_per_run" in limits:
         value = limits["output_tokens_per_run"]
         if type(value) is not int or value < 1:
@@ -169,6 +177,12 @@ def config(path):
     if not isinstance(data.get("live_api", False), bool):
         raise ValueError("live_api must be boolean")
     return data
+
+
+def prompt_char_limit(limits):
+    """In model mode the API enforces token capacity, not a character estimate."""
+    value = limits["max_prompt_chars"]
+    return float("inf") if value == "model" else value
 
 
 def init_quarantine(path):
@@ -186,7 +200,7 @@ def init_quarantine(path):
         "Reviews are informal checks; admission to Logical Maps is a separate step.\n\n"
         "The runner is in Logical-Maps/logical-maps/trawl. Configure config.local.yaml; "
         "credentials belong in environment variables. cache/ is disposable. "
-        "Keep workspaces/, trawls/, candidates/, reviews/ and admissions/ when committing this repo. "
+        "Keep workspaces/, trawls/, unfinished/, candidates/, reviews/ and admissions/ when committing this repo. "
         "Model-generated programs are never executed by this runner. No main-repository write or push happens during a run.\n")
     shutil.copy2(ROOT / "trawl" / "example.yaml", path / "config.local.yaml")
     install_history_policy(path)
@@ -401,7 +415,7 @@ def context(snapshot, task, limits, extra_ids=(), *, central_questions=None, con
             include(base / "principles" / f"{slug(pid)}.yaml", addition)
         trial = {**files, **addition}
         if record["id"] == row.get("model") or (len(selected) < limits["related_records"] and
-                len(json.dumps({**result, "files": trial}, ensure_ascii=False)) < limits["max_prompt_chars"] * 0.85):
+                len(json.dumps({**result, "files": trial}, ensure_ascii=False)) < prompt_char_limit(limits) * 0.85):
             files = trial
             selected.append(record["id"])
         else:
@@ -457,7 +471,7 @@ def invoke(quarantine, settings, phase, prompt, source, task=None, candidate_sha
     # Reservation happens before the network call, so interruption cannot silently rebill it.
     save(folder / "request.json", request)
     try:
-        if len(system) + len(prompt) > limits["max_prompt_chars"]:
+        if len(json.dumps(body, ensure_ascii=False)) > prompt_char_limit(limits):
             raise ValueError("prompt exceeds max_prompt_chars; raise the cap or reduce related_records")
         raw = providers.complete(profile, body, enabled=settings.get("live_api", False),
                                  timeout=limits["timeout_seconds"])

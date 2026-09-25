@@ -9,8 +9,10 @@ live_api: false
 limits:
   requests_per_run: 5  # API-turn budget; saved workspaces resume on later runs
   max_output_tokens: 4096
+  output_tokens_per_run: 20000  # generation across all turns/passes; input tokens cost extra
+  passes_per_workspace: budget  # repeat after mathematical edits while budget permits; or a positive integer
   max_prompt_chars: 120000
-  attempts_per_question: 1  # fresh workspaces; resuming does not consume this limit
+  trawls_per_question: 1  # fresh workspaces; resuming does not consume this limit
   related_records: 12
   central_questions: 20  # initial prompt size, or all; the full list is always available as a file/tool
   timeout_seconds: 120

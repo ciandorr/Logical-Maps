@@ -16,7 +16,7 @@ python3 scripts/trawl.py --quarantine /path/to/Logical-Maps-Quarantine status
 
 `init` creates an independent local Git repository with an ignored `config.local.yaml`. Configure the source repository/ref, topics, limits, and provider profiles there. A local Git checkout is also a valid source: only **committed** files at the selected ref are copied. GitHub can be connected later with ordinary Git commands in quarantine. The runner never pushes, schedules jobs, or commits either repository.
 
-`prepare-workspace` creates or returns an unfinished workspace without an API call. It prints the files directory and instructions. `run` automatically resumes unfinished workspaces before scheduling fresh questions. `run --workspace workspace-ID` resumes a specific workspace, including a previously completed search. A workspace keeps its original source revision even when the upstream branch advances; new workspaces use the newly fetched revision. Source changes therefore cannot overwrite unfinished work.
+`prepare-workspace` creates or returns an unfinished workspace without an API call. It prints the files directory and instructions. `run` automatically resumes unfinished workspaces before scheduling fresh questions. `run --workspace workspace-ID` resumes a specific unfinished workspace. Completed workspaces are sealed and cannot be reopened for discovery, even with an explicit workspace ID. A workspace keeps its original source revision even when the upstream branch advances; new workspaces use the newly fetched revision. Source changes therefore cannot overwrite unfinished work.
 
 `plan`, `prepare-workspace`, `run`, `review-packet`, and `review` fetch the source ref by default. `--cached` reuses the last fetched revision. The installed map engine computes questions from a pinned allowlist of YAML and Markdown files. Fetched code is never executed. Private files, generated exports, source PDFs, Lean files and executables are excluded from the initial copy. Use Git's credential helper for private repositories.
 
@@ -35,20 +35,34 @@ workspaces/workspace-ID/
   reference/schema/              database schemas from the installed runner
   reference/central-questions.json  complete ranked list for the chosen background
   reference/queue.json            all scheduled topics/backgrounds
+  derived/<hash>.json             immutable inference/ranking/validation reports
   workspace.json                 source revision, initial model, baseline hashes
   INSTRUCTIONS.md                discovery instructions for an external agent
   state.json                     conversation and resumable request state
-  turns/<attempt>/*-edit.json     dated edit intents, content, before/after hashes
-  turns/<attempt>/*-result.json   individual tool receipts, including failures
+  SEALED.json                    closes completed work to all discovery tools
+  turns/<trawl>/*-edit.json       dated edit intents, content, before/after hashes
+  turns/<trawl>/*-result.json     individual tool receipts, including failures
 ```
 
-The agent can add, edit or delete copied records, proofs, notes, principle definitions and other text files. It can save unfinished or temporarily invalid YAML and repair it later. There is no count quota and no final JSON deliverable. A normal final message ends the current search; the substantive output is already on disk.
+The agent can add, edit or delete copied records, proofs, notes, principle definitions and other text files. It can save unfinished or temporarily invalid YAML and repair it later. There is no count quota and no final JSON deliverable. A normal final message ends a pass; the substantive output is already on disk. If mathematical files changed, the runner can begin another pass in the same workspace.
 
-The built-in API loop supplies `list_files`, `read_file`, `write_file`, `edit_file`, `delete_file`, and `central_questions`. Tool paths use `work/` for `files/` and `reference/` for the original context. Writes are constrained to `work/`; absolute paths, traversal, symlinks and `.git` edits are rejected. Discovery cannot reach the published checkout or overwrite runner-owned provenance through these tools. Each write has a durable journal entry before an atomic replacement, and an individual receipt afterwards. An interrupted write can be recovered without repeating a paid API call. Earlier successful writes survive later malformed tool calls.
+The built-in API loop supplies `list_files`, `read_file`, `write_file`, `edit_file`, `delete_file`, `central_questions`, and the Python tools described below. Tool paths use `work/` for `files/`, `reference/` for the original context, and `derived/` for computation reports. Writes are constrained to `work/`; absolute paths, traversal, symlinks and `.git` edits are rejected. Discovery cannot reach the published checkout or overwrite runner-owned provenance through these tools. Each write has a durable journal entry before an atomic replacement, and an individual receipt afterwards. An interrupted write can be recovered without repeating a paid API call. Earlier successful writes survive later malformed tool calls.
 
-An external tool-enabled agent can also edit `files/` directly and use `INSTRUCTIONS.md`. Give its host write access to that directory and read-only access to `reference/`; enforce these permissions in its sandbox/container. Merely setting its working directory is not an OS sandbox. External edits appear in checkpoint diffs, but do **not** acquire invented per-edit model identity or timestamps; retain that agent's actual session evidence separately. The prompts allow other tools available in the execution environment. The bundled loop currently executes the listed file tools; it does not include shell, browser or Lean tool adapters.
+An external tool-enabled agent can also edit `files/` directly and use `INSTRUCTIONS.md`. Give its host write access to that directory and read-only access to `reference/` and `derived/`; enforce these permissions in its sandbox/container. Merely setting its working directory is not an OS sandbox. External edits appear in checkpoint diffs, but do **not** acquire invented per-edit model identity or timestamps; retain that agent's actual session evidence separately. The prompts allow other tools available in the execution environment. The bundled loop executes file tools and the installed Python map engine; it does not include shell, browser or Lean tool adapters.
 
-Commit `workspaces/`, `attempts/`, `candidates/`, `packets/`, `reviews/`, `admissions/`, and `publications/` when connecting quarantine to GitHub. Working files and their pinned references are not disposable cache. No discovery file is copied into the published database automatically.
+Commit `workspaces/`, `trawls/`, `candidates/`, `packets/`, `reviews/`, `admissions/`, and `publications/` when connecting quarantine to GitHub. Working files and their pinned references are not disposable cache. No discovery file is copied into the published database automatically.
+
+## Historical trawls are off limits to discovery
+
+Raw request/response logs live in `trawls/trawl-ID/`, with `trawl_id` in new provenance and `trawls_per_question` in configuration. Each completed log gets `SEALED.json`: the runner refuses to overwrite its files or append new ones. Older certificate field names and configuration are accepted for compatibility; historical evidence is not rewritten merely to rename a field.
+
+Discovery tools expose **only the assigned unfinished workspace's files, published reference and computation reports**. They cannot list, read, search or edit `trawls/`, sibling workspaces, candidate/review archives, or `.git`. Completed workspaces also reject every discovery tool call, including reads, computation commands and replays of previous tool receipts. New searches start from the published database. Scheduling reads minimal workspace metadata, not old proofs or transcripts into a model prompt.
+
+A budget stop leaves an unfinished workspace resumable with its own files, notes and active conversation. This is continuation of the current search, not permission to inspect another trawl. Completed work remains available to explicitly assigned curator review through frozen checkpoints; approval does not authorize reopening historical work for discovery.
+
+Quarantine `AGENTS.md`, `trawls/AGENTS.md`, workspace instructions and the discovery system prompt all state this rule. `.ignore` keeps historical artifacts out of ordinary recursive searches without excluding them from Git backups. This search exclusion and the seal markers are not OS permissions. The built-in tool boundary enforces discovery access; an external agent must receive only its assigned `files/`, `reference/` and `derived/` mounts, without the quarantine root, Git history, or credentials that could fetch that history. Extra tools must respect the same boundary. Its host can expose the Python tools through a trusted adapter without exposing the quarantine root.
+
+Setup and handoff instructions live outside the historical logs. Old trawls must not be opened as examples for the next AI. Corrections and further mathematical work require new artifacts. Removing unwanted trawls from the working tree does not rewrite earlier Git commits.
 
 ## Questions and resource limits
 
@@ -56,16 +70,45 @@ Scheduling uses the existing `pmap.Lynchpins` engine and includes open implicati
 
 The **full central-question list** for the workspace's topic and expanded background is always available through the paginated `central_questions` tool and `reference/central-questions.json`. `limits.central_questions` controls how much of it appears in the initial prompt (20 by default, or `all`), not how many questions can be explored. A scheduled target below that initial range is included as well. Definitions, existing evidence, instructions and write-ups are available as files, read on demand. `reference/queue.json` retains the complete scheduling queue across selected topics/backgrounds.
 
+### Python inference tools
+
+The following calls execute the **installed** `scripts/pmap.py` functions on the current YAML copies. They do not call a model, execute downloaded or model-written Python, or change records.
+
+| Tool | Computation |
+| --- | --- |
+| `logical_query` | `pmap.Engine`: transitive closure, proof record IDs, exclusions and actual countermodel witnesses. Supply `premises` and optional `conclusions`; omit conclusions to query every principle. |
+| `recompute_central_questions` | `pmap.Lynchpins`: recalculate and rank all remaining questions after saved edits, including transitive consequences. |
+| `validate_workspace` | `pmap.validate_topic`: existing schema, reference and logical-consistency checks, with diagnostics. |
+
+Tools default to `scope: work` and the scheduled topic/background. Set `scope: reference` for the original published data. Choose another copied `topic` or `background` preset explicitly; `background: base` means the topic's standing framework. Optional background assumptions remain explicit and are never granted to models that do not establish them. An exclusion is reported separately from non-implication; only an actual countermodel establishes the latter.
+
+Only records marked `proved` enter the engine, just as in the existing map. **In the working copy these are proposed facts, not verified additions.** Reports flag any difference from the published topic and label the computation conditional on workspace proposals. New conjectures are not rules. Invalid or inconsistent YAML produces diagnostics rather than a misleading ranking; the drafts stay saved and the reference remains queryable. The engine implements the map's propositional rules, not unrecorded mathematical substitutions or new proof steps.
+
+Full reports are saved as immutable `derived/<hash>.json` files, with computation time, source revision, input file hashes, changed file paths and installed engine/adapter hashes. Query results include proof record IDs. Tool responses are paginated (`offset`, `limit`) so the agent need not spend context on a whole report. Unchanged inputs reuse a report; edits invalidate it. Checkpoints bind these report files by hash alongside the file-edit provenance. Cite a report as computation evidence, not as independent mathematical or Lean verification.
+
+An operator can invoke the same tools without credentials, network access or an API request:
+
+```sh
+python3 scripts/trawl.py --quarantine /path/to/quarantine compute workspace-ID logical_query --premise PRINCIPLE --conclusion PRINCIPLE
+python3 scripts/trawl.py --quarantine /path/to/quarantine compute workspace-ID recompute_central_questions --limit 20
+python3 scripts/trawl.py --quarantine /path/to/quarantine compute workspace-ID validate_workspace
+```
+
+### Passes and budgets
+
+`limits.passes_per_workspace: budget` is the default. When the agent ends a pass after changing mathematical files, the runner recomputes priorities for the scheduled topic/background and starts another pass in that same unfinished workspace. A pass with no further mathematical changes completes and seals it. Notes and reports alone do not trigger another sweep. Set a positive integer instead of `budget` to cap passes explicitly. The agent can also query and rerank as often as useful within a pass; there is no finding-count limit.
+
 Each invocation is bounded by:
 
 - `requests_per_run`: total API turns, including failures and resumed work;
 - `max_output_tokens`: generation limit per turn;
+- `output_tokens_per_run`: generation budget across all turns, workspaces and passes in this invocation;
 - `max_prompt_chars`: complete serialized request limit, including tool definitions and conversation;
 - `timeout_seconds`: transport timeout per request.
 
-`attempts_per_question` limits fresh workspaces for a question/profile/context; it does not limit continuation turns. A budget stop leaves the current workspace active for the next run. Conversation history is compacted when necessary; files, progress notes and immutable API transcripts remain available. An oversized initial prompt fails before a network call.
+`trawls_per_question` limits fresh workspaces for a question/profile/context; it does not limit continuation turns or passes. A budget stop leaves the current workspace active for the next run, including a queued next pass. Each explicit `run` supplies a new invocation budget. Conversation history is compacted when necessary; files and progress notes remain available to the active search; immutable API transcripts remain in the audit archive, outside discovery file access. An oversized initial prompt fails before a network call.
 
-These are request/size limits, not a currency budget. Provider-reported usage is retained; pricing is not guessed. Network calls are never automatically retried. Requests are reserved before transport. On resumption, saved responses finish their file edits using receipts; an interrupted request with no saved response is recorded as having an unknown outcome, and the next turn starts from saved files rather than silently replaying it. A single-process lock protects quarantine from concurrent runners.
+The output budget reduces the next request's generation cap to the remaining allowance. Reported generation is charged after each response; missing/invalid usage or a lost response consumes the full reservation. If omitted in an older configuration, the budget defaults to `requests_per_run * max_output_tokens`. This counts provider-reported generation, including reasoning where the provider includes it ([OpenAI token accounting](https://developers.openai.com/api/docs/guides/token-counting), [Messages usage](https://platform.claude.com/docs/en/api/messages/create)). **Input tokens cost extra; this is not a total-token or currency cap.** Provider-reported usage is retained; pricing is not guessed. Network calls are never automatically retried. Requests are reserved before transport. On resumption, saved responses finish their file edits using receipts; an interrupted request with no saved response is recorded as having an unknown outcome, and the next turn starts from saved files rather than silently replaying it. A single-process lock protects quarantine from concurrent runners.
 
 ## Providers
 

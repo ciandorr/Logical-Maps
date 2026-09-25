@@ -209,7 +209,6 @@
      "type": "object",
      "additionalProperties": false,
      "required": [
-      "attempt_id",
       "at",
       "actor",
       "prompt_sha256",
@@ -221,7 +220,8 @@
      "properties": {
       "attempt_id": {
        "type": "string",
-       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+       "description": "Legacy immutable provenance; new records use trawl_id."
       },
       "at": {
        "type": "string",
@@ -249,8 +249,24 @@
       },
       "offline": {
        "const": false
+      },
+      "trawl_id": {
+       "type": "string",
+       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
       }
-     }
+     },
+     "oneOf": [
+      {
+       "required": [
+        "trawl_id"
+       ]
+      },
+      {
+       "required": [
+        "attempt_id"
+       ]
+      }
+     ]
     },
     "trawlReview": {
      "type": "object",
@@ -337,11 +353,15 @@
        "const": "informal-mathematical-review"
       },
       "attempt": {
-       "$ref": "#/properties/certificate/$defs/trawlDiscovery"
+       "$ref": "#/properties/certificate/$defs/trawlDiscovery",
+       "description": "Legacy immutable provenance; new reviews use trawl."
       },
       "recorded_at": {
        "type": "string",
        "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(?:\\.\\d+)?\\+00:00$"
+      },
+      "trawl": {
+       "$ref": "#/properties/certificate/$defs/trawlDiscovery"
       }
      }
     },

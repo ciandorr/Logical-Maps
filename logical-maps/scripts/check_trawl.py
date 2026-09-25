@@ -10,7 +10,7 @@ import unittest
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from trawl import core as t, providers, workspaces as w
+from trawl import core as t, inference, providers, workspaces as w
 
 
 def write_yaml(path, value):
@@ -47,7 +47,7 @@ class TrawlTest(unittest.TestCase):
         self.snapshot, self.origin = t.source_snapshot(self.q, self.settings)
         self.task = t.plan(self.snapshot, self.settings)[0]
         self.data = t.load_data(self.snapshot, "example")
-        self.metadata = {"attempt_id": "attempt-test", "at": t.now(),
+        self.metadata = {"trawl_id": "trawl-test", "at": t.now(),
             "actor": {"kind": "model", "provider": "test", "model": "cheap-model", "protocol": "chat-completions"},
             "prompt_sha256": "1" * 64, "response_sha256": "2" * 64,
             "usage": {"prompt_tokens": 20, "completion_tokens": 30}, "response_id": "test", "offline": False}
@@ -99,7 +99,7 @@ class TrawlTest(unittest.TestCase):
         self.settings["limits"]["requests_per_run"] = 1
         self.settings["limits"]["central_questions"] = 3
         t.run(self.q, self.settings, self.snapshot, self.origin)
-        request = t.attempts(self.q)[0]
+        request = t.trawls(self.q)[0]
         packet = json.loads(request["body"]["messages"][0]["content"])
         listing = packet["central_questions"]
         expected = t.pmap.Lynchpins(self.data).rank(top=3)["rows"]
@@ -116,7 +116,7 @@ class TrawlTest(unittest.TestCase):
         self.assertIn(packet["question"]["id"], [r["id"] for r in listing["rows"] if r["selected"]])
         # A subsequent scheduled question still sees mathematical centrality order.
         t.run(self.q, self.settings, self.snapshot, self.origin)
-        for attempt in t.attempts(self.q):
+        for attempt in t.trawls(self.q):
             central = json.loads(attempt["body"]["messages"][0]["content"])["central_questions"]
             self.assertEqual([r["rank"] for r in central["rows"][:3]], [1, 2, 3])
 
@@ -146,7 +146,7 @@ class TrawlTest(unittest.TestCase):
         self.assertEqual(full["total_open"], len(queue))
         self.assertEqual({r["id"] for r in full["rows"]}, {q["id"] for q in queue})
 
-    def test_question_list_configuration_and_attempt_identity(self):
+    def test_question_list_configuration_and_trawl_identity(self):
         path = self.q / "config.local.yaml"
         original = t.read(path)
         for invalid in (0, -1, True, "twenty"):
@@ -156,8 +156,8 @@ class TrawlTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "central_questions"):
                 t.config(path)
         limits = self.settings["limits"]
-        first = t.attempt_key(self.task, self.settings["discovery"], limits)
-        second = t.attempt_key(self.task, self.settings["discovery"], {**limits, "central_questions": "all"})
+        first = t.trawl_key(self.task, self.settings["discovery"], limits)
+        second = t.trawl_key(self.task, self.settings["discovery"], {**limits, "central_questions": "all"})
         self.assertNotEqual(first, second)
         settings = deepcopy(original)
         del settings["limits"]["central_questions"]
@@ -194,12 +194,194 @@ class TrawlTest(unittest.TestCase):
         result = t.run(self.q, self.settings, self.snapshot, self.origin, prepare_only=True)
         return w.load(self.q, result["workspaces"][0])
 
+    def proposed_rule(self, folder, rid, premises, conclusion, status="proved"):
+        path = folder / f"files/logical-maps/topics/example/results/{rid}.yaml"
+        write_yaml(path, {"id": rid, "premises": premises, "conclusion": conclusion,
+                         "status": status, "proof": "Synthetic argument, awaiting review.",
+                         "certificate": {"source_id": "misc"}, "sources": ["Synthetic test"]})
+        return path
+
+    def test_python_query_transitivity_exclusion_and_evidence_are_conditional(self):
+        folder, manifest = self.workspace()
+        self.proposed_rule(folder, "a-b", ["a"], "b")
+        self.proposed_rule(folder, "b-c", ["b"], "c")
+        self.proposed_rule(folder, "a-not-d", ["a", "d"], "false")
+        args = {"premises": ["a"], "conclusions": ["c", "d"]}
+        result = inference.execute(folder, manifest, "logical_query", args)
+        self.assertTrue(result["valid"])
+        self.assertEqual(result["rows"][0]["status"], "proved")
+        self.assertEqual(set(result["rows"][0]["via"]), {"a-b", "b-c"})
+        self.assertEqual(result["rows"][1]["status"], "refuted")
+        self.assertEqual(result["rows"][1]["models"], ["a-model"])
+        self.assertEqual(result["rows"][1]["exclusion"]["via"], ["a-not-d"])
+        # No model of d exists in this database: exclusion is not a counterexample.
+        reverse = inference.execute(folder, manifest, "logical_query", {"premises": ["d"], "conclusions": ["a"]})
+        self.assertEqual(reverse["rows"][0]["status"], "open")
+        self.assertEqual(reverse["rows"][0]["exclusion"]["via"], ["a-not-d"])
+        self.assertEqual(result["provenance"]["trust"], "conditional-on-workspace-proposals")
+        reference = inference.execute(folder, manifest, "logical_query", {**args, "scope": "reference"})
+        self.assertTrue(all(r["status"] == "open" for r in reference["rows"]))
+        self.assertEqual(reference["provenance"]["trust"], "published-records")
+        full = t.read(folder / result["report"])
+        self.assertIn("results/a-b.yaml", full["provenance"]["input_files"])
+        self.assertEqual(full["provenance"]["source"], self.origin)
+        frozen = w.checkpoint(self.q, manifest["id"])
+        candidate = t.load_candidate(self.q, frozen["checkpoint"])
+        self.assertEqual(len(candidate["content"]["computations"]), 3)
+        self.assertFalse((self.topic / "results/a-b.yaml").exists())
+
+    def test_query_countermodels_do_not_inherit_optional_background(self):
+        folder, manifest = self.workspace()
+        base = folder / "files/logical-maps/topics/example"
+        topic = t.read(base / "topic.yaml")
+        topic.update(principle_categories=[{"id": "test", "name": "Test"}],
+                     background_presets=[{"id": "with-b", "name": "With B", "category": "test", "principles": ["b"]}])
+        write_yaml(base / "topic.yaml", topic)
+        model = t.read(base / "models/a-model.yaml")
+        model["violates"] = ["d"]
+        write_yaml(base / "models/a-model.yaml", model)
+        query = {"premises": ["a"], "conclusions": ["d"]}
+        base_result = inference.execute(folder, manifest, "logical_query", query)
+        self.assertEqual(base_result["rows"][0]["models"], ["a-model"])
+        self.assertEqual(base_result["rows"][0]["status"], "refuted")
+        stronger = inference.execute(folder, manifest, "logical_query", {**query, "background": "with-b"})
+        self.assertEqual(stronger["rows"][0]["status"], "open")
+        self.assertEqual(stronger["rows"][0]["models"], [])
+        self.assertEqual(stronger["premises"], ["a", "b"])
+
+    def test_refresh_uses_existing_ranker_all_rows_and_invalidates_cache(self):
+        folder, manifest = self.workspace()
+        before = inference.execute(folder, manifest, "recompute_central_questions", {"limit": 1})
+        path = self.proposed_rule(folder, "a-b", ["a"], "b", status="conjectured")
+        draft = inference.execute(folder, manifest, "logical_query", {"premises": ["a"], "conclusions": ["b"]})
+        self.assertEqual(draft["rows"][0]["status"], "open")
+        self.proposed_rule(folder, "a-b", ["a"], "b")
+        after = inference.execute(folder, manifest, "recompute_central_questions", {"limit": 1})
+        self.assertNotEqual(before["report"], after["report"])
+        listing = t.read(folder / after["report"])
+        data = t.load_data(folder / "files", "example")
+        expected = t.pmap.Lynchpins(data).rank(top=sys.maxsize)["rows"]
+        self.assertEqual([{k: v for k, v in r.items() if k != "id"} for r in listing["rows"]], expected)
+        self.assertGreater(after["total"], 1)
+        self.assertEqual(after["rows"], listing["rows"][:1])
+        with patch.object(t.pmap.Lynchpins, "rank", side_effect=AssertionError("cache should be reused")):
+            page = inference.execute(folder, manifest, "recompute_central_questions", {"offset": 1, "limit": 2})
+        self.assertEqual(page["report"], after["report"])
+        self.assertEqual(page["rows"], listing["rows"][1:3])
+        self.assertEqual(t.read(path)["status"], "proved")  # engine never rewrites records
+
+    def test_invalid_drafts_are_diagnosed_without_losing_files_or_reference_queries(self):
+        folder, manifest = self.workspace()
+        path = self.proposed_rule(folder, "a-b", ["a"], "b")
+        path.write_text("id: a-b\nproof: [unfinished")
+        for i, name in enumerate(("validate_workspace", "recompute_central_questions", "logical_query")):
+            result = w.execute_tool(folder, manifest, {"name": name, "arguments": {}}, self.metadata, i)
+            self.assertFalse(result["valid"])
+            self.assertIn("Invalid draft", result["diagnostics"])
+        reference = inference.execute(folder, manifest, "logical_query", {"scope": "reference"})
+        self.assertTrue(reference["valid"])
+        self.assertEqual(path.read_text(), "id: a-b\nproof: [unfinished")
+
+    def test_compute_paths_cannot_reach_history_or_execute_proposed_code(self):
+        folder, manifest = self.workspace()
+        injected = folder / "files/logical-maps/scripts/pmap.py"
+        injected.parent.mkdir()
+        injected.write_text("raise AssertionError('must never execute')")
+        result = inference.execute(folder, manifest, "logical_query", {})
+        self.assertTrue(result["valid"])
+        denied = w.execute_tool(folder, manifest, {"name": "write_file", "arguments": {
+            "path": result["report"], "content": "forged"}}, self.metadata, 0)
+        self.assertIn("error", denied)
+        for i, topic in enumerate(("../../trawls", str(self.topic)), 1):
+            denied = w.execute_tool(folder, manifest, {"name": "logical_query", "arguments": {"topic": topic}}, self.metadata, i)
+            self.assertIn("error", denied)
+        link = folder / "files/logical-maps/topics/example/results/escape.yaml"
+        link.parent.mkdir(exist_ok=True)
+        link.symlink_to(self.topic / "topic.yaml")
+        with self.assertRaisesRegex(ValueError, "symlink"):
+            inference.execute(folder, manifest, "logical_query", {})
+        link.unlink()
+        w.seal_workspace(folder)
+        with self.assertRaisesRegex(ValueError, "sealed"):
+            inference.execute(folder, manifest, "logical_query", {})
+
+    def test_multiple_passes_refresh_after_edits_and_finish_when_no_more_change(self):
+        self.live_workspace(budget=3)
+        folder, manifest = self.workspace()
+        record = {"id": "a-b", "premises": ["a"], "conclusion": "b", "status": "proved", "proof": "Toy argument",
+                  "certificate": {"source_id": "misc"}, "sources": ["Synthetic test"]}
+        responses = [self.tool_response([("write_file", {
+            "path": "work/logical-maps/topics/example/results/a-b.yaml", "content": t.yaml.safe_dump(record)})]),
+            self.tool_response(final="First pass saved."), self.tool_response(final="Second sweep found no more.")]
+        with patch.object(providers, "complete", side_effect=responses) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        self.assertEqual(result["requests"], 3)
+        continuation = json.loads(api.call_args.args[1]["messages"][-1]["content"])
+        self.assertEqual(continuation["pass"], 2)
+        self.assertTrue(continuation["current_ranking"]["valid"])
+        self.assertEqual(continuation["current_ranking"]["provenance"]["trust"], "conditional-on-workspace-proposals")
+        self.assertTrue((folder / "SEALED.json").exists())
+        self.assertEqual(t.read(folder / "state.json")["pass_number"], 2)
+
+    def test_output_budget_spans_passes_and_resumes_pending_second_pass(self):
+        self.live_workspace(budget=10)
+        self.settings["limits"].update(output_tokens_per_run=10, max_output_tokens=8)
+        folder, manifest = self.workspace()
+        responses = [self.tool_response([("write_file", {"path": "work/logical-maps/topics/example/background.md",
+                       "content": "An expanded toy framework."})]), self.tool_response()]
+        with patch.object(providers, "complete", side_effect=responses) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertEqual(result["requests"], 2)
+        self.assertEqual(result["output_tokens_charged"], 10)
+        self.assertEqual([call.args[1]["max_completion_tokens"] for call in api.call_args_list], [8, 5])
+        self.assertFalse((folder / "SEALED.json").exists())
+        self.assertEqual(t.read(folder / "state.json")["pass_number"], 2)
+        with patch.object(providers, "complete", return_value=self.tool_response()) as api:
+            resumed = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertEqual(resumed["requests"], 1)
+        self.assertIn('"pass": 2', api.call_args.args[1]["messages"][-1]["content"])
+        self.assertTrue((folder / "SEALED.json").exists())
+
+    def test_output_accounting_handles_unknown_usage_and_both_protocols(self):
+        for protocol, key in (("chat-completions", "completion_tokens"), ("anthropic-messages", "output_tokens")):
+            profile = {"protocol": protocol}
+            self.assertEqual(providers.output_tokens(profile, {"usage": {key: 4}}, reserved=10), 4)
+            for invalid in ({}, {key: None}, {key: -1}, {key: True}, {key: "4"}):
+                self.assertEqual(providers.output_tokens(profile, {"usage": invalid}, reserved=10), 10)
+        self.live_workspace(budget=5)
+        self.settings["limits"].update(output_tokens_per_run=9, max_output_tokens=9)
+        raw = self.tool_response([("write_file", {"path": "work/notes/progress.md", "content": "Saved"})])
+        raw["usage"] = {}
+        with patch.object(providers, "complete", return_value=raw) as api:
+            result = t.run(self.q, self.settings, self.snapshot, self.origin)
+        self.assertEqual(api.call_count, 1)
+        self.assertEqual(result["output_tokens_charged"], 9)
+        self.assertEqual(result["checkpoints"][0]["changed_files"], 1)
+
+    def test_pass_and_token_limits_validate_and_explicit_single_pass_seals(self):
+        for key in ("passes_per_workspace", "output_tokens_per_run"):
+            for invalid in (0, -1, True, "forever"):
+                settings = deepcopy(self.settings)
+                settings["limits"][key] = invalid
+                write_yaml(self.q / "config.local.yaml", settings)
+                with self.assertRaisesRegex(ValueError, key):
+                    t.config(self.q / "config.local.yaml")
+        self.live_workspace(budget=2)
+        self.settings["limits"]["passes_per_workspace"] = 1
+        folder, manifest = self.workspace()
+        with patch.object(providers, "complete", side_effect=[self.tool_response([("write_file", {
+                "path": "work/logical-maps/topics/example/background.md", "content": "Updated framework"})]), self.tool_response()]):
+            result = t.run(self.q, self.settings, self.snapshot, self.origin, workspace=manifest["id"])
+        self.assertFalse(result["errors"])
+        self.assertTrue((folder / "SEALED.json").exists())
+
     def test_offline_runs_are_bounded_and_do_not_touch_main(self):
         before = t.git(self.source, "status", "--porcelain")
         first = t.run(self.q, self.settings, self.snapshot, self.origin)
         second = t.run(self.q, self.settings, self.snapshot, self.origin)
         self.assertEqual((first["requests"], second["requests"]), (2, 2))
-        keys = [t.read(p)["attempt_key"] for p in (self.q / "workspaces").glob("*/workspace.json")]
+        keys = [t.read(p)["trawl_key"] for p in (self.q / "workspaces").glob("*/workspace.json")]
         self.assertEqual(len(keys), len(set(keys)))
         self.assertTrue(all(c["changed_files"] == 0 for c in first["checkpoints"]))
         self.assertEqual(before, t.git(self.source, "status", "--porcelain"))
@@ -331,7 +513,7 @@ class TrawlTest(unittest.TestCase):
         with patch.object(providers, "complete", return_value=self.tool_response()):
             result = t.run(self.q, self.settings, snapshot, source)
         self.assertEqual(result["workspaces"], [manifest["id"]])
-        self.assertEqual(t.attempts(self.q)[0]["source"]["commit"], self.origin["commit"])
+        self.assertEqual(t.trawls(self.q)[0]["source"]["commit"], self.origin["commit"])
         self.assertNotIn("newer", (folder / "files/logical-maps/topics/example/background.md").read_text())
 
     def test_anthropic_tool_loop_preserves_blocks_and_returns_tool_results(self):
@@ -360,7 +542,7 @@ class TrawlTest(unittest.TestCase):
         body = api.call_args.args[1]
         self.assertLess(len(json.dumps(body)), 18000)
         self.assertIn("compacted", body["messages"][-1]["content"])
-        raw = [t.read(p) for p in (self.q / "attempts").glob("*/response.json")]
+        raw = [t.read(p) for p in (self.q / "trawls").glob("*/response.json")]
         self.assertTrue(any("argument " * 1000 in json.dumps(r) for r in raw))
 
     def test_lost_request_is_logged_and_resume_uses_new_turn(self):
@@ -368,15 +550,15 @@ class TrawlTest(unittest.TestCase):
         with patch.object(providers, "complete", side_effect=KeyboardInterrupt):
             with self.assertRaises(KeyboardInterrupt):
                 t.run(self.q, self.settings, self.snapshot, self.origin)
-        old = t.attempts(self.q)[0]
+        old = t.trawls(self.q)[0]
         with patch.object(providers, "complete", return_value=self.tool_response()) as api:
             result = t.run(self.q, self.settings, self.snapshot, self.origin)
         self.assertFalse(result["errors"])
-        outcome = t.read(self.q / "attempts" / old["id"] / "outcome.json")
+        outcome = t.read(self.q / "trawls" / old["id"] / "outcome.json")
         self.assertEqual(outcome["outcome"], "interrupted")
         self.assertIn("interrupted", api.call_args.args[1]["messages"][-1]["content"])
         self.assertEqual(result["workspaces"], [old["workspace"]])
-        self.assertEqual(len(t.attempts(self.q)), 2)
+        self.assertEqual(len(t.trawls(self.q)), 2)
 
     def test_checkpoint_diff_captures_deletions_newlines_and_selection(self):
         folder, manifest = self.workspace()
@@ -409,6 +591,98 @@ class TrawlTest(unittest.TestCase):
         self.assertEqual(first["workspaces"], second["workspaces"])
         self.assertEqual(second["checkpoints"][0]["changed_files"], 1)
         self.assertTrue(all(m["role"] == "user" for m in api.call_args.args[1]["messages"]))
+
+    def test_trawl_logs_are_renamed_and_sealed_against_later_writes(self):
+        result = t.run(self.q, self.settings, self.snapshot, self.origin)
+        records = t.trawls(self.q)
+        self.assertEqual(len(records), 2)
+        self.assertFalse((self.q / "attempts").exists())
+        for record in records:
+            self.assertTrue(record["id"].startswith("trawl-"))
+            folder = self.q / "trawls" / record["id"]
+            self.assertTrue((folder / "SEALED.json").exists())
+            before = {p.name: p.read_bytes() for p in folder.iterdir()}
+            with self.assertRaisesRegex(ValueError, "sealed"):
+                t.save(folder / "response.json", {"changed": True})
+            with self.assertRaisesRegex(ValueError, "sealed"):
+                t.save(folder / "extra.json", {"new": True})
+            with self.assertRaisesRegex(ValueError, "sealed"):
+                t.save(folder / "nested/extra.json", {"new": True})
+            self.assertEqual(before, {p.name: p.read_bytes() for p in folder.iterdir()})
+        self.assertFalse(result["errors"])
+
+    def test_discovery_cannot_read_or_list_old_trawls_or_other_workspaces(self):
+        old = t.run(self.q, self.settings, self.snapshot, self.origin)
+        folder, manifest = self.workspace()
+        history = t.trawls(self.q)[0]["id"]
+        old_workspace = old["workspaces"][0]
+        for index, path in enumerate((
+            "trawls/" + history + "/response.json",
+            "work/../../../trawls/" + history + "/response.json",
+            "reference/../../" + old_workspace + "/state.json",
+            "work/../../" + old_workspace + "/files/notes/progress.md",
+            "work/.git/objects",
+            str(self.q / "trawls" / history / "response.json"),
+        )):
+            for operation in ("read_file", "list_files", "write_file"):
+                arguments = {"path": path}
+                if operation == "write_file":
+                    arguments["content"] = "forbidden"
+                value = w.execute_tool(folder, manifest, {"name": operation, "arguments": arguments},
+                                       self.metadata, index * 3 + ("read_file", "list_files", "write_file").index(operation))
+                self.assertIn("error", value)
+        with self.assertRaisesRegex(ValueError, "sealed"):
+            w.initial_prompt(*w.load(self.q, old_workspace), self.settings)
+
+    def test_completed_workspace_cannot_be_reopened_or_accessed_by_discovery(self):
+        result = t.run(self.q, self.settings, self.snapshot, self.origin)
+        wid = result["workspaces"][0]
+        folder, manifest = w.load(self.q, wid)
+        before = {p.relative_to(folder).as_posix(): p.read_bytes() for p in folder.rglob("*") if p.is_file()}
+        for prepare in (True, False):
+            with patch.object(providers, "complete") as api:
+                with self.assertRaisesRegex(ValueError, "sealed"):
+                    t.run(self.q, self.settings, self.snapshot, self.origin, workspace=wid, prepare_only=prepare)
+            api.assert_not_called()
+        for index, (name, args) in enumerate((
+            ("read_file", {"path": "work/logical-maps/topics/example/background.md"}),
+            ("list_files", {"path": "reference/"}),
+            ("central_questions", {}),
+            ("write_file", {"path": "work/notes/new.md", "content": "forbidden"}),
+        )):
+            value = w.execute_tool(folder, manifest, {"name": name, "arguments": args}, self.metadata, index)
+            self.assertIn("sealed", value["error"])
+        with self.assertRaisesRegex(ValueError, "sealed"):
+            w.state_save(folder, {"status": "active"})
+        after = {p.relative_to(folder).as_posix(): p.read_bytes() for p in folder.rglob("*") if p.is_file()}
+        self.assertEqual(before, after)
+        # Explicit curator review remains possible without reopening discovery.
+        frozen = w.checkpoint(self.q, wid)
+        candidate = t.load_candidate(self.q, frozen["checkpoint"])
+        t.review_packet(self.q, self.settings, self.snapshot, self.origin, candidate)
+
+    def test_legacy_configuration_and_evidence_remain_readable_without_rewriting(self):
+        path = self.q / "config.local.yaml"
+        settings = deepcopy(self.settings)
+        settings["limits"]["attempts_per_question"] = settings["limits"].pop("trawls_per_question")
+        write_yaml(path, settings)
+        before = path.read_bytes()
+        self.assertEqual(t.config(path)["limits"]["trawls_per_question"], 1)
+        self.assertEqual(path.read_bytes(), before)
+        candidate = self.candidate()
+        candidate["discovery"]["attempt_id"] = candidate["discovery"].pop("trawl_id")
+        review = self.review(candidate)
+        result = t.admit(self.q, candidate, self.source, review["id"], "Test curator")
+        record = t.read(self.source / "logical-maps" / result["record"])
+        self.assertIn("attempt_id", record["certificate"]["trawl"]["discovery"])
+
+    def test_history_rules_are_installed_outside_the_historical_logs(self):
+        self.assertIn("Do not open", (self.q / "AGENTS.md").read_text())
+        self.assertIn("no discovery access", (self.q / "trawls/AGENTS.md").read_text())
+        self.assertIn("trawls/", (self.q / ".ignore").read_text())
+        folder, _ = self.workspace()
+        self.assertIn("Historical trawls are sealed", (folder / "INSTRUCTIONS.md").read_text())
+        self.assertIn("SEALED.json", (folder / "AGENTS.md").read_text())
 
     def test_rejects_fabricated_checks_lean_tiers_and_paths(self):
         for key, value in (("tier", "gold"), ("checks", ["evil.py"]), ("id", "../../escape")):
@@ -512,7 +786,7 @@ class TrawlTest(unittest.TestCase):
         self.assertEqual(review["candidate_sha256"], t.digest(candidate))
         self.assertEqual(review["actor"]["model"], "review-alias")
         self.assertEqual(review["actor"]["reported_model"], "resolved-review-model")
-        self.assertEqual(review["attempt"]["usage"]["completion_tokens"], 99)
+        self.assertEqual(review["trawl"]["usage"]["completion_tokens"], 99)
 
     def test_actual_http_transport_for_both_protocols(self):
         received = []
@@ -579,14 +853,14 @@ class TrawlTest(unittest.TestCase):
         self.assertEqual(t.plan(snapshot, self.settings), [])
         self.assertEqual(t.plan(snapshot, self.settings), [])
 
-    def test_prompt_cap_prevents_network_and_reserves_attempt(self):
+    def test_prompt_cap_prevents_network_and_reserves_trawl(self):
         settings = deepcopy(self.settings)
         settings["limits"]["max_prompt_chars"] = 10
         with patch.object(providers, "complete") as api:
             result = t.run(self.q, settings, self.snapshot, self.origin)
         api.assert_not_called()
         self.assertEqual(len(result["errors"]), 1)
-        self.assertEqual(len(t.attempts(self.q)), 1)
+        self.assertEqual(len(t.trawls(self.q)), 1)
 
     def test_manual_review_packet_and_timestamp(self):
         candidate = self.candidate()

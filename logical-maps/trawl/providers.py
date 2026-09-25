@@ -13,6 +13,19 @@ class ProviderError(ValueError):
     pass
 
 
+def output_tokens(profile, raw, *, reserved):
+    """Use reported generation (including reasoning), or charge the reservation.
+
+    This is an output budget, not an estimate of input tokens or currency cost.
+    """
+    if profile["protocol"] == "offline":
+        return 0
+    key = "completion_tokens" if profile["protocol"] == "chat-completions" else "output_tokens"
+    usage = raw.get("usage")
+    value = usage.get(key) if isinstance(usage, dict) else None
+    return value if type(value) is int and value >= 0 else reserved
+
+
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         raise ProviderError("API redirects are disabled; configure the final endpoint")

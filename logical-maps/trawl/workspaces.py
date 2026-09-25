@@ -1,8 +1,8 @@
 """Persistent discovery workspaces inside the quarantine Git repository.
 
-The tool boundary exposes only copies and a read-only reference tree. No tool
-accepts a host path, runs a shell, or writes the published checkout. External
-agent hosts must enforce their own mount/permission boundary.
+The tool boundary exposes only copies, read-only references and local engine
+reports. No tool accepts a host path, runs a shell, or writes the published
+checkout. External agent hosts must enforce their own mount/permission boundary.
 """
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ import tempfile
 
 import jsonschema
 
-from . import core as c, prompts, providers
+from . import core as c, inference, prompts, providers
 
 
 def atomic_text(path, text):
@@ -35,6 +35,8 @@ def atomic_text(path, text):
 
 
 def state_save(folder, state):
+    if (folder / "SEALED.json").exists():
+        raise ValueError("completed workspace is sealed; start a new trawl")
     atomic_text(folder / "state.json", json.dumps(state, ensure_ascii=False, indent=2) + "\n")
 
 
@@ -78,8 +80,23 @@ def tree(root):
     return result
 
 
-def load(quarantine, wid):
+def ensure_active(folder):
+    """Discovery may access only its own unfinished work, never closed history."""
+    if (folder / "SEALED.json").exists() or c.read(folder / "state.json")["status"] == "complete":
+        raise ValueError("completed workspace is sealed; discovery cannot read or edit it")
+
+
+def seal_workspace(folder):
+    marker = folder / "SEALED.json"
+    if not marker.exists():
+        c.save(marker, {"sealed_at": c.now(), "access": "no discovery reads or writes",
+                       "files_sha256": c.digest(tree(folder / "files"))})
+
+
+def load(quarantine, wid, *, discovery=False):
     folder = quarantine / "workspaces" / c.slug(wid)
+    if discovery:
+        ensure_active(folder)
     manifest = c.read(folder / "workspace.json")
     if manifest["id"] != wid:
         raise ValueError("workspace identity mismatch")
@@ -100,17 +117,23 @@ def create(quarantine, settings, snapshot, source, task, ranked):
     shutil.copytree(c.ROOT / "schema", folder / "reference" / "schema")
     manifest = {"version": 1, "id": wid, "created_at": c.now(), "source": source,
                 "task": task, "actor": c.actor(settings["discovery"]),
-                "attempt_key": c.attempt_key(task, settings["discovery"], settings["limits"]),
+                "trawl_key": c.trawl_key(task, settings["discovery"], settings["limits"]),
                 "baseline": baseline, "questions_sha256": c.digest(questions),
                 "prompt_version": prompts.VERSION}
     c.save(folder / "workspace.json", manifest)
     (folder / "INSTRUCTIONS.md").write_text(prompts.DISCOVER, encoding="utf-8")
+    (folder / "AGENTS.md").write_text(
+        "# Discovery workspace\n\nRead INSTRUCTIONS.md. Use only this workspace's files/ "
+        "and reference/ and derived/. Do not read or edit trawl logs, other workspaces, or Git history. "
+        "If SEALED.json exists, this entire workspace is closed to discovery.\n")
     state_save(folder, {"status": "active", "messages": [], "pending": None,
-                       "profile": c.actor(settings["discovery"]), "last_note": ""})
+                       "profile": c.actor(settings["discovery"]), "last_note": "",
+                       "pass_number": 1, "pass_start_sha256": pass_digest(folder)})
     return folder, manifest
 
 
 def initial_prompt(folder, manifest, settings):
+    ensure_active(folder)
     listing = c.read(folder / "reference" / "central-questions.json")
     limit = settings["limits"].get("central_questions", 20)
     if limit != "all":
@@ -125,6 +148,7 @@ def initial_prompt(folder, manifest, settings):
         "paths": {"work/": "editable copies, new YAML files, writeups, evidence and notes",
                   "reference/source/": "read-only published files at the pinned source commit",
                   "reference/schema/": "read-only database schemas",
+                  "derived/": "read-only Python computation reports for this active workspace",
                   "reference/central-questions.json": "complete ordered list for this background",
                   "reference/queue.json": "complete queue across selected topics and backgrounds"},
         "save_policy": "Save work throughout the search. No final JSON response is needed."}, ensure_ascii=False)
@@ -136,10 +160,12 @@ def schema(properties, required=()):
 
 STRING = {"type": "string"}
 PAGE = {"offset": {"type": "integer", "minimum": 0}, "limit": {"type": "integer", "minimum": 1, "maximum": 1000}}
+COMPUTE = {"topic": STRING, "scope": {"enum": ["work", "reference"]}, "background": STRING}
+IDS = {"type": "array", "items": STRING, "uniqueItems": True}
 FUNCTIONS = [
-    {"name": "list_files", "description": "List files under work/ or reference/. Paginated; no total-file quota.",
+    {"name": "list_files", "description": "List files under work/, reference/ or derived/. Paginated; no total-file quota.",
      "parameters": schema({"path": STRING, **PAGE}, ("path",))},
-    {"name": "read_file", "description": "Read UTF-8 text at work/ or reference/; offset and limit are characters.",
+    {"name": "read_file", "description": "Read UTF-8 text at work/, reference/ or derived/; offset and limit are characters.",
      "parameters": schema({"path": STRING, "offset": {"type": "integer", "minimum": 0},
                            "limit": {"type": "integer", "minimum": 1, "maximum": 48000}}, ("path",))},
     {"name": "write_file", "description": "Immediately save or replace a file under work/. Drafts and incomplete YAML are allowed.",
@@ -149,17 +175,24 @@ FUNCTIONS = [
                           ("path", "old_text", "new_text"))},
     {"name": "delete_file", "description": "Delete a copied or proposed work/ file; the deletion is recorded for review.",
      "parameters": schema({"path": STRING}, ("path",))},
-    {"name": "central_questions", "description": "Read the full centrality-ordered question list in pages for the pinned topic/background.",
+    {"name": "central_questions", "description": "Read the original pinned centrality list in pages. Use recompute_central_questions for current edits.",
      "parameters": schema(PAGE)},
+    {"name": "logical_query", "description": "Run pmap.Engine closure, exclusions and countermodel queries locally. Defaults to work/current background; reference queries published data. Omit conclusions to compute all. Returns proof record IDs, paginated; full report saved under derived/. Work results are conditional, not verified proofs.",
+     "parameters": schema({**COMPUTE, "premises": IDS, "conclusions": IDS, **PAGE})},
+    {"name": "recompute_central_questions", "description": "Run pmap.Lynchpins on current YAML, including transitive closure, and rank all remaining questions. Defaults to work/current background. Cached by input hashes, paginated, saved under derived/. Proved workspace records are provisional; conjectures are not rules.",
+     "parameters": schema({**COMPUTE, **PAGE})},
+    {"name": "validate_workspace", "description": "Run pmap.validate_topic on work (default) or reference. Return schema, reference and logical-consistency diagnostics. Does not verify mathematical arguments or change any YAML.",
+     "parameters": schema({k: v for k, v in COMPUTE.items() if k != "background"})},
 ]
 TOOL_SCHEMAS = {f["name"]: f["parameters"] for f in FUNCTIONS}
 
 
 def resolve_tool_path(folder, path, *, write=False, directory=False):
+    ensure_active(folder)
     first, sep, rest = path.partition("/")
-    if first not in ("work", "reference") or (write and first != "work"):
-        raise ValueError("writes require work/; reads require work/ or reference/")
-    return safe_path(folder / ("files" if first == "work" else "reference"), rest or ".", directory=directory)
+    if first not in ("work", "reference", "derived") or (write and first != "work"):
+        raise ValueError("writes require work/; reads require work/, reference/ or derived/")
+    return safe_path(folder / ("files" if first == "work" else first), rest or ".", directory=directory)
 
 
 def apply_edit(folder, event):
@@ -177,9 +210,14 @@ def apply_edit(folder, event):
 
 
 def execute_tool(folder, manifest, call, metadata, index):
+    try:
+        ensure_active(folder)
+    except ValueError as error:
+        # Do not even read a previous receipt or append a failure to sealed work.
+        return {"error": str(error)}
     # Provider call IDs are never used as paths. A request/index is unique even
     # across provider/model changes; receipts make response recovery idempotent.
-    directory = folder / "turns" / c.slug(metadata["attempt_id"])
+    directory = folder / "turns" / c.slug(metadata["trawl_id"])
     receipt = directory / f"{index:06d}-result.json"
     intent = directory / f"{index:06d}-edit.json"
     if receipt.exists():
@@ -197,7 +235,9 @@ def execute_tool(folder, manifest, call, metadata, index):
             if name not in TOOL_SCHEMAS:
                 raise ValueError("unknown workspace tool")
             jsonschema.validate(args, TOOL_SCHEMAS[name])
-            if name == "central_questions":
+            if name in ("logical_query", "recompute_central_questions", "validate_workspace"):
+                result = inference.execute(folder, manifest, name, args)
+            elif name == "central_questions":
                 listing = c.read(folder / "reference" / "central-questions.json")
                 start, limit = args.get("offset", 0), args.get("limit", 20)
                 result = {**listing, "offset": start, "rows": listing["rows"][start:start + limit]}
@@ -231,7 +271,7 @@ def execute_tool(folder, manifest, call, metadata, index):
                 c.save(intent, event)  # durable intent precedes each atomic file change
                 apply_edit(folder, event)
                 result = {"saved": args["path"], "sha256": file_hash(after)}
-    except (ValueError, OSError, KeyError, TypeError, jsonschema.ValidationError) as error:
+    except (ValueError, OSError, KeyError, TypeError, c.yaml.YAMLError, jsonschema.ValidationError) as error:
         result = {"error": str(error)[:1000]}
     c.save(receipt, {"at": c.now(), "call": call, "result": result})
     return result
@@ -272,6 +312,9 @@ def checkpoint(quarantine, wid, *, reason="manual", paths=None):
     events.sort(key=lambda event: (event["at"], event["event_path"]))
     content = {"kind": "workspace", "workspace_id": wid, "changes": edits,
                "edit_history": events,
+               "computations": [{"path": path.relative_to(quarantine).as_posix(),
+                                 "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+                                for path in sorted((folder / "derived").glob("*.json"))],
                "audit_location": "workspaces/" + wid + "/turns/; full edit intents and tool receipts",
                "baseline": manifest["baseline"]}
     candidate = {"version": 1, "id": c.uid("checkpoint"), "created_at": c.now(),
@@ -290,13 +333,42 @@ def checkpoint(quarantine, wid, *, reason="manual", paths=None):
             "files": str(folder / "files"), "candidate_sha256": c.digest(candidate)}
 
 
+def pass_digest(folder):
+    # Notes alone do not trigger another mathematical sweep. Proofs and drafts do.
+    base = safe_path(folder / "files", "logical-maps/topics", directory=True)
+    return c.digest(tree(base))
+
+
+def end_pass(folder, manifest, state, settings):
+    current = pass_digest(folder)
+    number = state.setdefault("pass_number", 1)
+    limit = settings["limits"].get("passes_per_workspace", "budget")
+    again = (current != state.get("pass_start_sha256", current)
+             and (limit == "budget" or number < limit))
+    if not again:
+        state["status"] = "complete"
+        return
+    # Do not seal: another pass belongs to this same unfinished search. If the
+    # request/token budget is exhausted, this message survives for the next run.
+    ranking = inference.execute(folder, manifest, "recompute_central_questions", {"limit": 20})
+    state.update(status="active", pass_number=number + 1, pass_start_sha256=current)
+    state["messages"].append({"role": "user", "content": json.dumps({
+        "pass": number + 1, "instruction": "Saved mathematical files changed. Start another sweep of the current database. "
+        "Use logical_query for transitive consequences and recompute_central_questions for priorities. "
+        "Repair validation errors first if present. Save further findings as you go. "
+        "Proposed facts remain conditional. Finish when a sweep yields no further useful work.",
+        "current_ranking": ranking}, ensure_ascii=False)})
+    # Retain the report pointer even if the conversation is compacted or switched.
+    state["next_pass_report"] = ranking["report"]
+
+
 def finish_turn(quarantine, folder, manifest, state, settings, aid):
-    attempt = quarantine / "attempts" / aid
-    request = c.read(attempt / "request.json")
+    trawl = c.trawl_folder(quarantine, aid)
+    request = c.read(trawl / "request.json")
     profile = request["profile"]
-    raw = c.read(attempt / "response.json")
+    raw = c.read(trawl / "response.json")
     assistant, calls = providers.agent_turn(profile, raw)
-    metadata = {"attempt_id": aid, "at": c.read(attempt / "received.json")["at"],
+    metadata = {"trawl_id": aid, "at": c.read(trawl / "received.json")["at"],
                 "actor": c.actor(profile, raw), "prompt_sha256": request["prompt_sha256"],
                 "response_sha256": c.digest(raw), "response_id": raw.get("id"),
                 "usage": raw.get("usage", {}), "offline": profile["protocol"] == "offline"}
@@ -307,13 +379,16 @@ def finish_turn(quarantine, folder, manifest, state, settings, aid):
         state["messages"].extend(providers.tool_messages(profile, results))
         state["status"] = "active"
     else:
-        state["status"] = "complete"
+        end_pass(folder, manifest, state, settings)
     state["last_note"] = assistant.get("content")
-    if not (attempt / "outcome.json").exists():
-        c.save(attempt / "outcome.json", {"outcome": state["status"], "workspace": manifest["id"],
+    if not (trawl / "outcome.json").exists():
+        c.save(trawl / "outcome.json", {"outcome": state["status"], "workspace": manifest["id"],
                "metadata": metadata, "tool_errors": [v for _, v in results if "error" in v]})
+    c.seal_trawl(trawl)
     state["pending"] = None
     state_save(folder, state)
+    if state["status"] == "complete":
+        seal_workspace(folder)
     return results
 
 
@@ -321,15 +396,16 @@ def recover(quarantine, folder, manifest, state, settings):
     aid = state.get("pending")
     if not aid:
         return
-    attempt = quarantine / "attempts" / aid
-    if (attempt / "response.json").exists():
-        if not (attempt / "received.json").exists():
-            c.save(attempt / "received.json", {"at": c.now(), "recovered": True})
+    trawl = c.trawl_folder(quarantine, aid)
+    if (trawl / "response.json").exists():
+        if not (trawl / "received.json").exists():
+            c.save(trawl / "received.json", {"at": c.now(), "recovered": True})
         finish_turn(quarantine, folder, manifest, state, settings, aid)
     else:
-        if not (attempt / "outcome.json").exists():
-            c.save(attempt / "outcome.json", {"outcome": "interrupted", "at": c.now(),
+        if not (trawl / "outcome.json").exists():
+            c.save(trawl / "outcome.json", {"outcome": "interrupted", "at": c.now(),
                 "note": "Request outcome unknown. Not replayed; previously saved files retained."})
+        c.seal_trawl(trawl)
         state.update(pending=None, messages=[], last_note="An earlier request was interrupted. Inspect saved files and progress notes before continuing.")
         state_save(folder, state)
 
@@ -339,21 +415,28 @@ def run(quarantine, settings, snapshot, source, *, workspace=None, prepare_only=
         raise ValueError("live API calls are disabled in config")
     ranked = c.plan(snapshot, settings)
     existing = [c.read(p) for p in (quarantine / "workspaces").glob("*/workspace.json")]
-    counts = Counter(m["attempt_key"] for m in existing)
+    counts = Counter(m.get("trawl_key", m.get("attempt_key")) for m in existing)
     pending = []
     if workspace:
-        pending = [load(quarantine, workspace)]
+        pending = [load(quarantine, workspace, discovery=True)]
     else:
         for manifest in sorted(existing, key=lambda m: m["created_at"]):
             folder = quarantine / "workspaces" / manifest["id"]
-            if (c.read(folder / "state.json")["status"] != "complete"
+            if (not (folder / "SEALED.json").exists()
+                    and c.read(folder / "state.json")["status"] != "complete"
                     and manifest["source"]["repository"] == source["repository"]
                     and manifest["task"]["topic"] in settings["topics"]):
                 pending.append((folder, manifest))
-    tasks = [task for task in ranked if counts[c.attempt_key(task, settings["discovery"], settings["limits"])]
-             < settings["limits"]["attempts_per_question"]]
-    result = {"requests": 0, "workspaces": [], "checkpoints": [], "errors": []}
-    while result["requests"] < settings["limits"]["requests_per_run"]:
+    tasks = [task for task in ranked if counts[c.trawl_key(task, settings["discovery"], settings["limits"])]
+             < settings["limits"]["trawls_per_question"]]
+    output_budget = settings["limits"].get("output_tokens_per_run",
+                    settings["limits"]["requests_per_run"] * settings["limits"]["max_output_tokens"])
+    result = {"requests": 0, "output_tokens_charged": 0, "output_tokens_budget": output_budget,
+              "workspaces": [], "checkpoints": [], "errors": []}
+    def budget_left():
+        return (result["requests"] < settings["limits"]["requests_per_run"]
+                and result["output_tokens_charged"] < output_budget)
+    while budget_left():
         if pending:
             folder, manifest = pending.pop(0)
         elif tasks and not workspace:
@@ -368,28 +451,34 @@ def run(quarantine, settings, snapshot, source, *, workspace=None, prepare_only=
             break
         state = c.read(folder / "state.json")
         try:
+            state.setdefault("pass_number", 1)
+            state.setdefault("pass_start_sha256", pass_digest(folder))
             recover(quarantine, folder, manifest, state, settings)
-            if state["status"] == "complete" and not workspace:
+            if state["status"] == "complete":
                 continue
             profile = settings["discovery"]
-            if state.get("profile") != c.actor(profile) or (workspace and state["status"] == "complete"):
+            if state.get("profile") != c.actor(profile):
                 state.update(messages=[], profile=c.actor(profile))
             state["status"] = "active"
-            while result["requests"] < settings["limits"]["requests_per_run"]:
+            while budget_left():
                 initial = {"role": "user", "content": initial_prompt(folder, manifest, settings)}
+                if state.get("next_pass_report"):
+                    initial["content"] += "\nCurrent pass " + str(state["pass_number"]) + "; read " + state["next_pass_report"]
                 if not state["messages"]:
                     state["messages"] = [initial, {"role": "user", "content": "Continue from saved files and work/notes/progress.md. " + str(state.get("last_note", ""))[:2000]}]
-                body = providers.prepare_agent(profile, prompts.DISCOVER, state["messages"], settings["limits"]["max_output_tokens"], FUNCTIONS)
+                output_limit = min(settings["limits"]["max_output_tokens"], output_budget - result["output_tokens_charged"])
+                body = providers.prepare_agent(profile, prompts.DISCOVER, state["messages"], output_limit, FUNCTIONS)
                 if len(json.dumps(body, ensure_ascii=False)) > settings["limits"]["max_prompt_chars"]:
                     # Files and the immutable transcript carry long-term memory.
                     state["messages"] = [initial, {"role": "user", "content":
                         "Conversation compacted; your saved files are intact. Read work/notes/progress.md and resume. Last response: " + str(state.get("last_note", ""))[:2000]}]
-                    body = providers.prepare_agent(profile, prompts.DISCOVER, state["messages"], settings["limits"]["max_output_tokens"], FUNCTIONS)
-                aid = c.uid("attempt")
-                attempt = quarantine / "attempts" / aid
-                c.save(attempt / "request.json", {"id": aid, "phase": "workspace-discovery", "started_at": c.now(),
+                    body = providers.prepare_agent(profile, prompts.DISCOVER, state["messages"], output_limit, FUNCTIONS)
+                aid = c.uid("trawl")
+                trawl = quarantine / "trawls" / aid
+                c.save(trawl / "request.json", {"id": aid, "phase": "workspace-discovery", "started_at": c.now(),
                     "workspace": wid, "source": manifest["source"], "task": manifest["task"], "actor": c.actor(profile),
                     "profile": profile, "body": body, "prompt_sha256": c.digest(body), "prompt_version": prompts.VERSION,
+                    "pass": state["pass_number"], "output_tokens_reserved": output_limit,
                     "runner_sha256": c.digest({p.name: p.read_text() for p in Path(__file__).parent.glob("*.py")}),
                     "engine_sha256": hashlib.sha256((c.ROOT / "scripts/pmap.py").read_bytes()).hexdigest()})
                 state["pending"] = aid
@@ -397,17 +486,27 @@ def run(quarantine, settings, snapshot, source, *, workspace=None, prepare_only=
                 result["requests"] += 1
                 if len(json.dumps(body, ensure_ascii=False)) > settings["limits"]["max_prompt_chars"]:
                     raise ValueError("initial workspace prompt exceeds max_prompt_chars")
+                # Charge before transport: missing usage or a lost response cannot
+                # silently replenish this invocation's budget.
+                result["output_tokens_charged"] += output_limit
                 raw = providers.complete(profile, body, enabled=settings.get("live_api", False), timeout=settings["limits"]["timeout_seconds"])
-                c.save(attempt / "response.json", raw)
-                c.save(attempt / "received.json", {"at": c.now()})
+                c.save(trawl / "response.json", raw)
+                c.save(trawl / "received.json", {"at": c.now()})
+                charged = providers.output_tokens(profile, raw, reserved=output_limit)
+                result["output_tokens_charged"] += charged - output_limit
+                c.save(trawl / "budget.json", {"reserved": output_limit, "charged": charged,
+                       "output_tokens_per_run": output_budget,
+                       "invocation_output_tokens_charged": result["output_tokens_charged"]})
                 values = finish_turn(quarantine, folder, manifest, state, settings, aid)
-                result["errors"].extend({"workspace": wid, "attempt": aid, **v} for _, v in values if "error" in v)
+                result["errors"].extend({"workspace": wid, "trawl": aid, **v} for _, v in values if "error" in v)
                 if state["status"] == "complete":
                     break
         except (ValueError, OSError, KeyError, TypeError, IndexError) as error:
             aid = state.get("pending")
-            if aid and not (quarantine / "attempts" / aid / "outcome.json").exists():
-                c.save(quarantine / "attempts" / aid / "outcome.json", {"outcome": "error", "at": c.now(), "error": type(error).__name__})
+            if aid and not (c.trawl_folder(quarantine, aid) / "outcome.json").exists():
+                c.save(c.trawl_folder(quarantine, aid) / "outcome.json", {"outcome": "error", "at": c.now(), "error": type(error).__name__})
+            if aid:
+                c.seal_trawl(c.trawl_folder(quarantine, aid))
             state.update(pending=None, status="paused", messages=[], last_note="Previous turn failed; saved files are intact. Resume by inspecting progress notes.")
             state_save(folder, state)
             result["errors"].append({"workspace": wid, "error": str(error)})

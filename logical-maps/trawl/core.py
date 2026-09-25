@@ -56,8 +56,10 @@ def read(path):
 
 
 def save(path, value):
-    """Atomic creation only: an attempt/review/candidate is never overwritten."""
+    """Atomic creation only: a trawl/review/candidate is never overwritten."""
     path = Path(path)
+    if any((parent / "SEALED.json").exists() for parent in path.parents):
+        raise ValueError("sealed trawl history cannot be changed")
     path.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
                                      prefix=".pending-", delete=False) as stream:
@@ -70,6 +72,37 @@ def save(path, value):
             os.link(temp, path)  # atomically create; never replace an existing artifact
         finally:
             temp.unlink(missing_ok=True)
+
+
+def seal_trawl(folder):
+    """Close an audit record; subsequent runner writes fail, even to new paths."""
+    marker = folder / "SEALED.json"
+    if marker.exists():
+        return
+    save(marker, {"sealed_at": now(), "access": "audit-only; unavailable to discovery",
+                  "files": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                            for p in sorted(folder.iterdir()) if p.is_file()}})
+
+
+def install_history_policy(quarantine):
+    """Install discoverable instructions without exposing historical content."""
+    for relative, template in (("AGENTS.md", "quarantine-AGENTS.md"),
+                               ("trawls/AGENTS.md", "history-AGENTS.md")):
+        path = quarantine / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if not path.exists():
+            path.write_text((ROOT / "trawl" / template).read_text())
+    ignore = quarantine / ".ignore"
+    if not ignore.exists():
+        ignore.write_text("# Keep audit history out of ordinary recursive searches.\n"
+                          "trawls/\nattempts/\nworkspaces/\ncandidates/\npackets/\nreviews/\n")
+
+
+def trawl_folder(quarantine, tid):
+    """Resolve legacy pending records without rewriting immutable provenance."""
+    current = quarantine / "trawls" / slug(tid)
+    legacy = quarantine / "attempts" / tid
+    return legacy if not current.exists() and legacy.exists() else current
 
 
 def git(repo, *args, binary=False):
@@ -113,10 +146,23 @@ def config(path):
     for name in ("discovery", "review"):
         providers.validate_profile(data[name])
     limits = data["limits"]
+    # Read old configuration without rewriting any historical artifact.
+    if "attempts_per_question" in limits:
+        old = limits.pop("attempts_per_question")
+        if "trawls_per_question" in limits and limits["trawls_per_question"] != old:
+            raise ValueError("conflicting trawls_per_question and legacy attempts_per_question")
+        limits.setdefault("trawls_per_question", old)
     for key in ("requests_per_run", "max_output_tokens", "max_prompt_chars",
-                "attempts_per_question", "related_records", "timeout_seconds"):
+                "trawls_per_question", "related_records", "timeout_seconds"):
         if type(limits.get(key)) is not int or limits[key] < 1:
             raise ValueError(f"limits.{key} must be a positive integer")
+    if "output_tokens_per_run" in limits:
+        value = limits["output_tokens_per_run"]
+        if type(value) is not int or value < 1:
+            raise ValueError("limits.output_tokens_per_run must be a positive integer")
+    passes = limits.get("passes_per_workspace", "budget")
+    if passes != "budget" and (type(passes) is not int or passes < 1):
+        raise ValueError("limits.passes_per_workspace must be a positive integer or budget")
     question_limit = limits.get("central_questions", 20)
     if question_limit != "all" and (type(question_limit) is not int or question_limit < 1):
         raise ValueError("limits.central_questions must be a positive integer or all")
@@ -140,9 +186,10 @@ def init_quarantine(path):
         "Reviews are informal checks; admission to Logical Maps is a separate step.\n\n"
         "The runner is in Logical-Maps/logical-maps/trawl. Configure config.local.yaml; "
         "credentials belong in environment variables. cache/ is disposable. "
-        "Keep workspaces/, attempts/, candidates/, reviews/ and admissions/ when committing this repo. "
+        "Keep workspaces/, trawls/, candidates/, reviews/ and admissions/ when committing this repo. "
         "Model-generated programs are never executed by this runner. No main-repository write or push happens during a run.\n")
     shutil.copy2(ROOT / "trawl" / "example.yaml", path / "config.local.yaml")
+    install_history_policy(path)
     return path
 
 
@@ -380,7 +427,7 @@ def actor_label(value):
     return value["provider"] + "/" + value.get("reported_model", value["model"])
 
 
-def attempt_key(task, profile, limits):
+def trawl_key(task, profile, limits):
     context_settings = {"central_questions": limits.get("central_questions", 20),
                         "related_records": limits["related_records"],
                         "max_prompt_chars": limits["max_prompt_chars"],
@@ -389,8 +436,8 @@ def attempt_key(task, profile, limits):
                    prompts.VERSION, context_settings])
 
 
-def attempts(quarantine):
-    return [read(path) for path in sorted((quarantine / "attempts").glob("*/request.json"))]
+def trawls(quarantine):
+    return [read(path) for path in sorted((quarantine / "trawls").glob("*/request.json"))]
 
 
 def invoke(quarantine, settings, phase, prompt, source, task=None, candidate_sha=None, continuation_of=None):
@@ -398,15 +445,15 @@ def invoke(quarantine, settings, phase, prompt, source, task=None, candidate_sha
     limits = settings["limits"]
     system = prompts.DISCOVER if phase == "discovery" else prompts.REVIEW
     body = providers.prepare(profile, system, prompt, limits["max_output_tokens"])
-    aid = uid("attempt")
-    folder = quarantine / "attempts" / aid
+    aid = uid("trawl")
+    folder = quarantine / "trawls" / aid
     request = {"id": aid, "phase": phase, "started_at": now(), "source": source,
                "actor": actor(profile), "prompt_version": prompts.VERSION,
                "runner_sha256": digest({p.name: p.read_text() for p in Path(__file__).parent.glob("*.py")}),
                "engine_sha256": hashlib.sha256((ROOT / "scripts/pmap.py").read_bytes()).hexdigest(),
                "body": body, "prompt_sha256": digest(body), "task": task,
                "candidate_sha256": candidate_sha, "continuation_of": continuation_of,
-               "attempt_key": attempt_key(task, profile, limits) if task and phase == "discovery" else None}
+               "trawl_key": trawl_key(task, profile, limits) if task and phase == "discovery" else None}
     # Reservation happens before the network call, so interruption cannot silently rebill it.
     save(folder / "request.json", request)
     try:
@@ -416,7 +463,7 @@ def invoke(quarantine, settings, phase, prompt, source, task=None, candidate_sha
                                  timeout=limits["timeout_seconds"])
         save(folder / "response.json", raw)
         output = providers.unpack(profile, raw)
-        metadata = {"attempt_id": aid, "at": now(), "actor": actor(profile, raw),
+        metadata = {"trawl_id": aid, "at": now(), "actor": actor(profile, raw),
                     "prompt_sha256": request["prompt_sha256"], "response_sha256": digest(raw),
                     "usage": raw.get("usage", {}), "response_id": raw.get("id"),
                     "offline": profile["protocol"] == "offline"}
@@ -424,6 +471,7 @@ def invoke(quarantine, settings, phase, prompt, source, task=None, candidate_sha
     except Exception as error:
         save(folder / "outcome.json", {"outcome": "error", "at": now(),
              "error": str(error) if isinstance(error, providers.ProviderError) else type(error).__name__})
+        seal_trawl(folder)
         raise
 
 
@@ -537,7 +585,7 @@ def record_review(quarantine, candidate, report, reviewer, source, metadata=None
               "candidate_sha256": digest(candidate), "at": reviewed_at, "recorded_at": now(), "actor": reviewer,
               "source": source, "report": report, "method": "informal-mathematical-review"}
     if metadata:
-        review["attempt"] = metadata
+        review["trawl"] = metadata
     save(quarantine / "reviews" / (review["id"] + ".json"), review)
     return review
 
@@ -552,9 +600,11 @@ def review_api(quarantine, settings, snapshot, source, candidate):
     try:
         review = record_review(quarantine, candidate, output, metadata["actor"], source, metadata)
         save(folder / "outcome.json", {"outcome": "review", "review_id": review["id"]})
+        seal_trawl(folder)
         return review
     except (ValueError, jsonschema.ValidationError, TypeError):
         save(folder / "outcome.json", {"outcome": "invalid-review"})
+        seal_trawl(folder)
         raise
 
 
@@ -578,7 +628,7 @@ def admit(quarantine, candidate, destination, reviewer_id, admitted_by):
         raise ValueError("review belongs to a different source repository")
     if review["source"]["commit"] != head:
         raise ValueError("database changed since review; review against the current commit")
-    if candidate["discovery"].get("offline") or review.get("attempt", {}).get("offline"):
+    if candidate["discovery"].get("offline") or review.get("trawl", review.get("attempt", {})).get("offline"):
         raise ValueError("offline test output cannot be admitted")
     if not admitted_by.strip():
         raise ValueError("admission needs the responsible curator's identity")
@@ -695,7 +745,7 @@ def main(argv=None):
         sub = subs.add_parser(command)
         sub.add_argument("--cached", action="store_true", help="use last fetched source, without network")
         if command in ("run", "prepare-workspace"):
-            sub.add_argument("--workspace", help="resume this workspace, retaining its pinned source and saved files")
+            sub.add_argument("--workspace", help="resume an unfinished workspace; completed workspaces are sealed")
         if command == "plan":
             sub.add_argument("--top", type=int, default=20)
         if command in ("review", "review-packet"):
@@ -718,6 +768,16 @@ def main(argv=None):
     sub = subs.add_parser("checkpoint")
     sub.add_argument("workspace")
     sub.add_argument("--path", action="append", help="checkpoint only this changed file; repeat for related YAML, writeups and evidence")
+    sub = subs.add_parser("compute", help="run the installed map engine on an active workspace without an API call")
+    sub.add_argument("workspace")
+    sub.add_argument("operation", choices=("logical_query", "recompute_central_questions", "validate_workspace"))
+    sub.add_argument("--scope", choices=("work", "reference"), default="work")
+    sub.add_argument("--topic")
+    sub.add_argument("--background")
+    sub.add_argument("--premise", action="append", dest="premises")
+    sub.add_argument("--conclusion", action="append", dest="conclusions")
+    sub.add_argument("--offset", type=int)
+    sub.add_argument("--limit", type=int)
     subs.add_parser("status")
     args = parser.parse_args(argv)
     if args.command == "init":
@@ -726,10 +786,17 @@ def main(argv=None):
     with locked(args.quarantine) as quarantine:
         if args.command == "status":
             print(json.dumps({name: len(list((quarantine / name).glob(pattern))) for name, pattern in
-                  (("attempts", "*/request.json"), ("workspaces", "*/workspace.json"), ("candidates", "*.json"),
+                  (("trawls", "*/request.json"), ("workspaces", "*/workspace.json"), ("candidates", "*.json"),
                    ("reviews", "*.json"), ("admissions", "*.json"), ("publications", "*.json"))}, indent=2))
             return
-        if args.command == "checkpoint":
+        if args.command == "compute":
+            from . import inference, workspaces
+            folder, manifest = workspaces.load(quarantine, args.workspace, discovery=True)
+            params = {key: getattr(args, key) for key in ("scope", "topic", "background", "premises", "conclusions", "offset", "limit")
+                      if getattr(args, key) is not None}
+            jsonschema.validate(params, workspaces.TOOL_SCHEMAS[args.operation])
+            result = inference.execute(folder, manifest, args.operation, params)
+        elif args.command == "checkpoint":
             from . import workspaces
             result = workspaces.checkpoint(quarantine, args.workspace, paths=args.path)
         elif args.command == "record-publication":
@@ -766,4 +833,6 @@ def main(argv=None):
                     result = review_api(quarantine, settings, snapshot, source, candidate)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         if args.command == "run" and result["errors"]:
+            raise SystemExit(1)
+        if args.command == "compute" and (result.get("error") or not result.get("valid", True)):
             raise SystemExit(1)

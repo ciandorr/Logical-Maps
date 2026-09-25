@@ -21,6 +21,9 @@ violates:
 - distinctness-signature-r
 - countable-boolean-completeness-r
 - boolean-completeness-t
+- strong-leibniz-t
+- barcan-t
+- inextensible-comprehension-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -61,12 +64,12 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$ but impossible
   of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$
   and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term $\top_\tau$
-  denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ) does not
-  prove. Everything that implies these fails with them. Countable Boolean Completeness fails as well,
-  at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension
-  a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the
-  domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the
-  numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
+  denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ)
+  does not prove. Everything that implies these fails with them. Countable Boolean Completeness fails
+  as well, at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as
+  its extension a countable family of haecceities, and the extensional fullness the source invokes to
+  put $E$ in the domain also puts in the relation pairing the haecceity of the $k$-th member of that family
+  with the numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
   collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the strongest
   true proposition pinned down by $\{0,\ldots,N\}$ for $N$ beyond the pinning set of $p$, namely $\{1_{\mathbb
   N}\}\cup\{g_m:m\ge N\}$. Under $g_n$ the only arrows reachable are $g_m$ with $m\le n$, so $\Diamond
@@ -90,7 +93,35 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   such an $R$, and its element $S$ is functional and a subrelation of $U$ at $1_V$, both conditions being
   unboxed. The closed Relational Choice instance is true at an arrow $h\colon W_0\to V$ iff it is true
   at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model, so it holds at every
-  arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026.'
+  arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September 2026. The type-$t$
+  Strong Leibniz Biconditionals fail. A strong world is an atom, and the atoms are the singletons $\{g_n\}$
+  ($\{1_{\mathbb N}\}$ is not pinned down by any finite set). Seen from the arrow $g_n$ the singleton
+  $\{g_n\}$ becomes $\{i : i\circ g_n=g_n\}=\{g_m : m\ge n\}\cup\{1_{\mathbb N}\}$, which neither entails
+  nor excludes the proposition $\{g_{n+1}\}$; so no atom is a strong world, and the possible proposition
+  $\{g_0\}$ has none below it. Hence Strong Leibniz Biconditionals fail at type $t$ and at all types,
+  boxed or not. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source. BF
+  fails at type $t$ as well. Let $a:=1$ and $b:=0$ be individuals, so that $[a\ne b]=\{i : i(1)\ne 0\}$
+  is the proposition that the arrow is not $g_0$, and let $X:=\lambda p\, .\,(a\ne b\lor\Box p\lor\Box\neg
+  p)$. Then $\forall p\,\Box Xp$ holds: at any arrow other than $g_0$ the first disjunct is true, and
+  at $g_0$, whose only successor is $g_0$ itself, every proposition is necessary or impossible. But $\Box\forall
+  p\,Xp$ fails at $g_0$: there $X$ has become $\lambda p\, .\,(\Box p\lor\Box\neg p)$, and the domain
+  still contains the contingent proposition $\{g_1\}$, since the quantifier at a world ranges over the
+  whole domain, not over the shifts of actual propositions. So BF (type $t$) and $\Box$BF (type $t$) fail;
+  equivalently, $g_0$ does not act surjectively on the propositions, sending every one to $\top$ or $\bot$.
+  Inextensible Comprehension fails at type $e$, for the property of being even, whose extension is the
+  evens at every world (the intension $\langle h,b\rangle\mapsto\{i : i(b)\text{ even}\}$, pinned down
+  by the empty set). Suppose $Y$ were inextensible with extension the evens and pinned down by $\{0,\ldots,N\}$.
+  Any arrow $g''$ agreeing with the identity on that set has $g''\cdot Y=Y$, so $Y$ has extension the
+  evens at the world $g''$ too. Unpacking inextensibility at the identity: for every relation $X$ in the
+  domain that is necessary of each even number, $Y\le X$, so the extension of $Y$ at $g''$ is contained
+  in that of $X$ at $g''$. Take $X$ pinned down by $S_X:=\{0,\ldots,K\}$ to hold, at an arrow $h$, of
+  exactly the individuals $h''(a)$ with $a$ even and $h''$ agreeing with $h$ on $S_X$ (the intension $\langle
+  h,b\rangle\mapsto\{i : \exists h''\equiv_{S_X}i\circ h,\,\exists a\text{ even},\ i(b)=h''(a)\}$, which
+  is natural, pinned down by $S_X$, and necessary of every even number). Let $g'':=g_m$ with $m\ge N+1$,
+  which agrees with the identity on the pinning set of $Y$, and take $K>m+1$; the only arrow agreeing
+  with $g_m$ on $S_X$ is $g_m$ itself, so the extension of $X$ at $g_m$ is $g_m(\text{evens})=(\text{evens}\le
+  m)\cup\{m\}$, which omits every even number above $m$, although those are in the extension of $Y$ at
+  $g_m$. Contradiction. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -149,3 +180,11 @@ changes:
   satisfies:
   - relational-choice-r
   - necessary-relational-choice-r
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Strong Leibniz Biconditionals (type t), of BF (type t) and of Inextensible
+    Comprehension, with the arguments in the notes.
+  violates:
+  - strong-leibniz-t
+  - barcan-t
+  - inextensible-comprehension-r

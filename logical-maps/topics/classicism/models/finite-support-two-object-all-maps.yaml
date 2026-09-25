@@ -6,6 +6,9 @@ satisfies:
 - axiom-of-infinity-t
 - relational-choice-r
 - necessary-relational-choice-r
+- pure-b-r
+- signature-b-r
+- necessity-of-arithmetic
 violates:
 - necessary-barcan-r
 - atomlessness
@@ -14,6 +17,12 @@ violates:
 - independence-signature-r
 - distinctness-signature-r
 - distinctness-preserving-collapse
+- actuality
+- atomicity-t
+- boolean-completeness-t
+- countable-boolean-completeness-r
+- necessary-barcan-t
+- inextensible-comprehension-r
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -60,7 +69,41 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   a subrelation of $U$ at $1_V$, both conditions being unboxed. The closed Relational Choice instance
   is true at an arrow $h\colon W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains
   at $V$ are those of the model, so it holds at every arrow and $\Box$Relational Choice follows. Cian
-  Dorr’s observation of 23 September 2026.'
+  Dorr’s observation of 23 September 2026. Further verdicts at $W_0$. Actuality fails: the strongest true
+  proposition pinned down by $\{0,\ldots,N\}$ is the set of maps $W_0\to W_0$ agreeing with the identity
+  there, and it strictly shrinks as $N$ grows, so no truth entails every truth; Actual Profile, $\Box$Actuality,
+  Persistent Comprehension and the weak rigid comprehension principles fail with it. Atomicity fails at
+  type $t$: the true proposition that $0$ is fixed is nonempty, and any nonempty proposition of maps $W_0\to
+  W_0$ pinned down by a finite set splits into two nonempty propositions according to the value at a fresh
+  individual, as all maps are arrows; so the Strong Leibniz Biconditionals fail at every type, boxed or
+  not. Boolean Completeness fails at type $t$: any set $F$ of propositions is the extension of the profile
+  $\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}$, and for $F$ the family of propositions $A_m$ that
+  a map $W_0\to W_0$ is constant on $\{0,\ldots,2m-1\}$ and first changes value at $2m$, the least superset
+  of $\bigcup F$ pinned down by $\{0,\ldots,N\}$, the maps whose first change is at an even position or
+  beyond $N$, strictly shrinks as $N$ grows, so $F$ has no least upper bound. The family is countable
+  in the model''s sense, the relation pairing $A_m$ with the numeral $m$ being in the domain by extensional
+  fullness, so Countable Boolean Completeness fails too. Necessity of Arithmetic nevertheless holds: at
+  $W_0$ the finite cardinalities are the standard numerals and $I^*$ is true; at $W_1$ the numerals remain
+  pairwise distinct, because they differ at the arrows back into $W_0$ and identity is necessary, $I^*$
+  is again true, the numerals are the finite cardinalities by extensional fullness, and $\operatorname{Sum}$
+  and $\operatorname{Prod}$ are standard, their graphs being in the domain; so every arithmetical sentence
+  has its standard truth value at every world. $\Box$BF fails already at type $t$: at $W_1$ the arrow
+  $c_n\colon W_1\to W_0$ picking $n$ sends a proposition $q$ to $\{j : c_{j(n)}\in q\}$ (with the arrow
+  to $W_1$ added when $q$ contains $1_{W_1}$), a proposition pinned down by $\{n\}$, so the proposition
+  that $0$ and $1$ are collapsed is in no such image; the profile holding at $\langle h,d\rangle$ iff
+  $h=1_{W_1}$ or $d$ is in the image of $h$, pinned down by $\{0\}$, is necessary of every proposition
+  at $W_1$ but not universal at the world $c_0$. Inextensible Comprehension fails at type $t\to t$, for
+  the family $E$ of propositions $p_n$ that $n$ is fixed: for $Y$ inextensible with extension $E$ pinned
+  down by the finite set $S$, pick $k\notin S$ and let $X$, pinned down by $S_X:=S\cup\{k\}$, hold at
+  an arrow $h$ into $W_0$ exactly of the propositions $\{i : i(m)=n\}$ with $n\notin S_X$ and of the propositions
+  $\{i : i(h(n))=n\}$ with $n\in S_X$; $X$ is necessary of every $p_n$, so $Y\le X$, yet at a map $h$
+  fixing $S$ pointwise and moving $k$, where $h\cdot Y=Y$, the extension of $X$ omits $p_k$. B for pure
+  sentences holds: every world can reach $W_0$ again, by a map $W_0\to W_0$ or by an arrow $c_n$ out of
+  $W_1$, and a closed pure sentence true at $W_0$ is true at every arrow into $W_0$. B for sentences of
+  $\Sigma$ holds under the record''s interpretation: a closed $\Sigma$-sentence denotes what $P(d,\ldots,d)$
+  denotes for a pure $P$ and the individual $d$, and from any world some arrow into $W_0$ carries the
+  current image of $d$ back to $d$, as all maps are arrows. Observations of Claude Fable 5.1 (Anthropic),
+  25 September 2026; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -108,3 +151,19 @@ changes:
   satisfies:
   - relational-choice-r
   - necessary-relational-choice-r
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Settled Actuality, Atomicity (type t), Boolean Completeness (type t), Countable Boolean Completeness,
+    □BF (type t) and Inextensible Comprehension as failing, and Necessity of Arithmetic, B for pure sentences
+    and B for sentences of Σ as holding, with the arguments in the notes.
+  satisfies:
+  - pure-b-r
+  - signature-b-r
+  - necessity-of-arithmetic
+  violates:
+  - actuality
+  - atomicity-t
+  - boolean-completeness-t
+  - countable-boolean-completeness-r
+  - necessary-barcan-t
+  - inextensible-comprehension-r

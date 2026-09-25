@@ -24,6 +24,7 @@ violates:
 - countable-boolean-completeness-r
 - no-contingency-signature-r
 - signature-b-r
+- boolean-completeness-t
 status: proved
 certificate:
   source_id: bacon-dorr-classicism
@@ -66,17 +67,17 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   is false, so $\Box\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\top_\tau$,
   witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is $\Diamond\Box a$ and $a$ is necessary at
   no arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility; Independence
-  (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants, Σ being assumed
-  to contain at least one: such a constant $c''$ of type $\tau''$ denotes what the closed pure term $\top_{\tau''}$
-  denotes, and $c''=\top_{\tau''}$ is a true identity that C(Σ) does not prove. The designated constant
-  refutes neither: closed pure terms denote entities fixed by every arrow (Classicism, §3.5, p. 58), whereas
-  $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything
-  that implies these fails with them. Countable Boolean Completeness fails as well, at type $e\to t$:
-  the property $E$ that the source shows to lack a least upper bound has as its extension a countable
-  family of haecceities, and the extensional fullness the source invokes to put $E$ in the domain also
-  puts in the relation pairing the haecceity of the $k$-th member of that family with the numeral $k$,
-  which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving collapse
-  holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
+  (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational constants,
+  Σ being assumed to contain at least one: such a constant $c''$ of type $\tau''$ denotes what the closed
+  pure term $\top_{\tau''}$ denotes, and $c''=\top_{\tau''}$ is a true identity that C(Σ) does not prove.
+  The designated constant refutes neither: closed pure terms denote entities fixed by every arrow (Classicism,
+  §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure term denotes $\lambda\bar
+  x\, .\,a$. Everything that implies these fails with them. Countable Boolean Completeness fails as well,
+  at type $e\to t$: the property $E$ that the source shows to lack a least upper bound has as its extension
+  a countable family of haecceities, and the extensional fullness the source invokes to put $E$ in the
+  domain also puts in the relation pairing the haecceity of the $k$-th member of that family with the
+  numeral $k$, which injects $E$ into the numerals. Observation of 23 September 2026. Distinctness-preserving
+  collapse holds: for a true proposition $p$ pinned down by a finite set take as the witness $q$ the actual-world
   proposition $\{k_0\}$: under $k_n$ with $n>0$, $\Diamond q$ would need $k\circ k_n$ to be the identity,
   impossible since $k_n$ is not injective. Relational Choice holds, necessarily. The model is ideally
   full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any
@@ -88,7 +89,19 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   $1_V$, both conditions being unboxed. The closed Relational Choice instance is true at an arrow $h\colon
   W_0\to V$ iff it is true at $1_V$ in the truncation by $h$, whose domains at $V$ are those of the model,
   so it holds at every arrow and $\Box$Relational Choice follows. Cian Dorr’s observation of 23 September
-  2026.'
+  2026. Boolean Completeness fails at type $t$ as well, which the source (n. 92) conjectures but does
+  not show. Any set $F$ of propositions is the extension at the identity of an element of the domain at
+  type $t\to t$, namely the profile $\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}$: it is natural, independent
+  of $h$ and so pinned down by the empty set, and each of its values is pinned down by the pinning set
+  of $p$, since $i\cdot p$ depends only on the values of $i$ there. A least upper bound of $F$ under entailment
+  is a least finitely pinned superset of $\bigcup F$, and it exists only if the least $S$-pinned superset
+  of $\bigcup F$ stops shrinking as the finite set $S$ grows. Here an arrow $k_n$ is determined by its
+  value at any $m\ge n$ and all $k_n$ with $n\ge N$ agree on $\{0,\ldots,N\}$, so the finitely pinned
+  propositions are exactly the finite and cofinite sets of arrows. Let $F$ be the family of singletons
+  $\{k_{2j}\}$: an upper bound is a cofinite set containing them, and removing an odd-indexed member of
+  it gives a strictly smaller upper bound. So $F$ has no least upper bound, and, taking pointwise negations,
+  the family of complements has no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic),
+  25 September 2026; not in the source.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -156,3 +169,8 @@ changes:
   satisfies:
   - relational-choice-r
   - necessary-relational-choice-r
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of Boolean Completeness (type t); see the notes.
+  violates:
+  - boolean-completeness-t

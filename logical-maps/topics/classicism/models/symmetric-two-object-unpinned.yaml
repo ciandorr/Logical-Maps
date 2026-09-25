@@ -15,6 +15,7 @@ violates:
 - separated-structure-r
 - independence-signature-r
 - distinctness-signature-r
+- pure-b-r
 status: proved
 certificate:
   source_id: dorr-bc-not-rc
@@ -73,13 +74,16 @@ notes: 'The point of the model is that boxed Boolean Completeness and boxed Actu
   necessarily. Witnessed Possibility fails for the pure formula $x\ne\top_\tau$, witnessed by $\bot_\tau$
   but impossible of $c$; Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$
   agree on $c$ and differ; Independence (signature Σ) fails since $c$ denotes what the closed pure term
-  $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity that C(Σ)
-  does not prove. Everything that implies these fails with them. Distinctness-preserving collapse holds:
-  let $a$ be the set of arrows from the first object to itself, all permutations, a symmetric proposition
+  $\top_\tau$ denotes; Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is a true identity
+  that C(Σ) does not prove. Everything that implies these fails with them. Distinctness-preserving collapse
+  holds: let $a$ be the set of arrows from the first object to itself, all permutations, a symmetric proposition
   true at the identity and, as the record’s Actuality witness, entailed by no other truth. For a true
   $p$, $a\le p$. Take $q:=a$: under a permutation $i$, $p$ holds since $i\in a\subseteq p$; under a non-permutation
   $i$, $\Diamond a$ would need $k\circ i$ to be a permutation, and no arrow from the second object returns
-  to the first. So every truth is $\Box_{\ne}$-necessary.'
+  to the first. So every truth is $\Box_{\ne}$-necessary. B for pure sentences fails, and B for sentences
+  of $\Sigma$ with it: the type-$e$ instance of BF is a closed pure sentence true at the base world and
+  false at the second object, and no arrow leads back from the second object, so at that world the sentence
+  is not even possible. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026.'
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
@@ -106,3 +110,8 @@ changes:
   summary: Recorded the Distinctness-preserving collapse; see the notes.
   satisfies:
   - distinctness-preserving-collapse
+- date: '2026-09-25'
+  by: Claude Fable 5.1 (Anthropic)
+  summary: Added the failure of B for pure sentences; see the notes.
+  violates:
+  - pure-b-r

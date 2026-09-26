@@ -1,0 +1,40 @@
+id: actuality-and-bf-imply-inextensible-comprehension
+premises:
+- actuality
+- barcan-r
+conclusion: inextensible-comprehension-r
+status: conjectured
+certificate:
+  source_id: misc
+  produced_by: Christopher Sun (proposed), reported by Cian Dorr, 26 September 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), 26 September 2026
+  checked_by: []
+  date: '2026-09-26'
+  lean: none
+sources:
+- Christopher Sun, proposed at a conference on 26 September 2026 and reported by Cian Dorr the same day;
+  see the notes for the state of the argument.
+source_names:
+- Sun, 26 Sep (proposed)
+proof: ''
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, pp. 28–30; Proposition 2.1, pp. 20–21
+  note: Inextensibility and BF. The recorded proof of the boxed form uses only the definitions there.
+notes: >-
+  The proposed witness is $C:=\lambda\bar z\, .\,\Diamond(w\land F[\bar z])$ with $w$ the Actuality
+  witness. Actuality alone makes $C$ coextensive with $F$, and 4 alone turns the antecedent of
+  inextensibility, $\forall\bar z\, .\,C[\bar z]\to\Box X[\bar z]$, into $\forall\bar z\, .\,\Box(C[\bar
+  z]\to X[\bar z])$, because $\neg C[\bar z]$ is the box $\Box(w\to\neg F[\bar z])$. The remaining step,
+  from $\forall\bar z\, .\,\Box(C[\bar z]\to X[\bar z])$ to $C\le X$, is an instance of BF; but
+  $\operatorname{Inextensible}(C)$ carries a leading box, so that instance is needed at an arbitrary
+  world, not only at the actual one. With □BF in place of BF the argument is complete and is recorded as
+  the proved result from □BF and Actuality. BF does not imply □BF (the two-object all-maps model has BF
+  without □BF, though it lacks Actuality), and whether Actuality and BF together imply □BF is open on the
+  map; a proof of that would settle this conjecture positively. A refutation needs a model with
+  Actuality and BF in which Inextensible Comprehension fails; every recorded model with Actuality
+  satisfies Inextensible Comprehension, and every recorded model with Actuality and BF satisfies □BF. In
+  an ideally full action model with BF at the evaluation object, BF also holds at every split
+  monomorphism out of it, and those are the arrows at which $\Diamond w$ can hold, so a countermodel
+  would have to be found outside that class or use a witness other than $C$.

@@ -1,0 +1,50 @@
+id: strong-leibniz-t-implies-necessary-actuality
+premises:
+- strong-leibniz-t
+conclusion: necessary-actuality
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 26 September 2026; the omission was noticed by Branden Fitelson
+  recorded_by: Claude Fable 5.1 (Anthropic), 26 September 2026
+  checked_by: []
+  date: '2026-09-26'
+  lean: none
+sources:
+- Cian Dorr, argument given 26 September 2026, after Branden Fitelson pointed out at a conference that
+  day that the map lacked this arrow.
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, pp. 165–170
+  (strong worlds and the Strong Leibniz Biconditionals).
+source_names:
+- Dorr, 26 Sep (Fitelson)
+- Philosophical Introduction to HOL
+proof: >-
+  Write $A$ for Actuality, $\exists p\, .\,p\land\forall q\, .\,q\to p\le q$. Every strong world
+  proposition entails $A$. For any $w$, $(\forall q\, .\,w\le q\lor w\le\neg q)\to(w\to A)$ is a theorem
+  of H: given $w$ and a true $q$, $w\le\neg q$ would give $\neg q$ by T, so $w\le q$; thus $w$ is true and
+  entails every truth, and is itself the witness for $A$. Necessitate the universal closure in $w$,
+  distribute by CBF, and apply K to the second conjunct of $\operatorname{SWorld}_t(w)$, which is
+  $\Box\forall q\, .\,w\le q\lor w\le\neg q$: this gives $\Box(w\to A)$, i.e. $w\le A$. Now suppose
+  $\Diamond\neg A$. The Strong Leibniz Biconditionals at type $t$ supply a strong world $w$ with $w\le\neg
+  A$. Together with $w\le A$ this gives $w\le A\land\neg A=\bot$, so $w=\bot$, contradicting $\Diamond w$.
+  Hence $\neg\Diamond\neg A$, which is $\Box A$. Actuality has no type parameters, so $\Box A$ is its only
+  closed instance.
+references:
+- paper: bacon-2024-book
+  role: background
+  locator: §8.2, pp. 165–170
+  note: Strong worlds and the Strong Leibniz Biconditionals; the argument that a strong world entails
+    Actuality is the observation that a strong world, wherever it holds, is the least truth there.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Proposition 2.7, p. 26
+  note: The recorded derivation of □Actuality from Atomicity and BF goes through the same step, that a
+    world proposition entails Actuality, using Tractarianism to combine the case split; a strong world
+    has the combined form built in.
+notes: >-
+  The map already had □Actuality from Atomicity and BF (Proposition 2.7) and from □Plenitude and □Rigid
+  Comprehension. This record is stronger in one direction: only the type-$t$ instance of the Strong
+  Leibniz Biconditionals is used, so with the recorded derivation of that instance from Atomicity (type
+  $t$) and BF (type $t$), □Actuality now follows from those two type-$t$ principles without BF at other
+  types. Every model in the map that satisfies the Strong Leibniz Biconditionals already satisfied
+  □Actuality, so no recorded verdict changes.

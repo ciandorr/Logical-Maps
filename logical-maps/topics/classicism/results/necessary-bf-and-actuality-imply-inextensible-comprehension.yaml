@@ -1,0 +1,48 @@
+id: necessary-bf-and-actuality-imply-inextensible-comprehension
+premises:
+- necessary-barcan-r
+- actuality
+conclusion: inextensible-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Christopher Sun (the witness and the argument), 26 September 2026; Claude Fable 5.1 (Anthropic)
+    supplied the boxed form of the BF hypothesis
+  recorded_by: Claude Fable 5.1 (Anthropic), 26 September 2026
+  checked_by: []
+  date: '2026-09-26'
+  lean: none
+sources:
+- Christopher Sun, argument reported by Cian Dorr on 26 September 2026; see the write-up.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, pp. 28–30 (inextensibility); Proposition
+  2.1, pp. 20–21 (BF).
+source_names:
+- Sun, 26 Sep
+- Classicism
+proof: >-
+  Let $w$ witness Actuality and fix $F$ of type $\bar\sigma t$. Put $C:=\lambda\bar z\, .\,\Diamond(w\land
+  F[\bar z])$. $C$ is coextensive with $F$: if $F[\bar z]$ then $w\land F[\bar z]$ is true, hence possible;
+  if $\neg F[\bar z]$ then $w\le\neg F[\bar z]$ by Actuality, so $\neg\Diamond(w\land F[\bar z])$. For
+  inextensibility, two theorems of C: (i) $\neg C[\bar z]$ is $\Box(w\to\neg F[\bar z])$, so by 4
+  $\neg C[\bar z]\to\Box\neg C[\bar z]$, and hence $(C[\bar z]\to\Box X[\bar z])\to\Box(C[\bar z]\to
+  X[\bar z])$; (ii) therefore $(\forall\bar z\, .\,C[\bar z]\to\Box X[\bar z])\to\forall\bar z\,
+  .\,\Box(C[\bar z]\to X[\bar z])$. The closed instance of BF for the property $\lambda\bar z\, .\,C[\bar
+  z]\to X[\bar z]$, universally closed in $X$, turns the consequent of (ii) into $\Box\forall\bar z\,
+  .\,C[\bar z]\to X[\bar z]$, which is $C\le X$. So BF (this instance) implies $\forall X\, .\,(\forall\bar
+  z\, .\,C[\bar z]\to\Box X[\bar z])\to C\le X$ in C; necessitating and using the necessity of that
+  instance gives $\Box\forall X\, .\,(\forall\bar z\, .\,C[\bar z]\to\Box X[\bar z])\to C\le X$, which
+  is $\operatorname{Inextensible}(C)$. The box on BF is used exactly once, to discharge the instance
+  under the leading box of inextensibility.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, pp. 28–30; Proposition 2.1, pp. 20–21
+  note: Definitions of inextensibility and the BF principle. The witness is not one the paper uses.
+notes: >-
+  Actuality alone gives the coextensive witness and its weak inextensibility at the actual world;
+  □BF is what makes the same witness inextensible at every world. The map records that BF alone does not
+  give □BF, so the corresponding claim from Actuality and unboxed BF is kept as a separate conjecture.
+  Together with the recorded routes, Inextensible Comprehension now follows from Actuality with any of
+  □BF, Distinctness-preserving collapse, or C5 (through Rigid Comprehension); the □BF route explains the
+  verdict in the full permutation-group, involution-group and surjection-monoid models, which have
+  Actuality and □BF but not Distinctness-preserving collapse.

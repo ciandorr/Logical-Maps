@@ -76,8 +76,8 @@ $\beta$ is needed under the leading box of inextensibility, that is, at an
 arbitrary world, and BF at the actual world does not supply it: BF does not
 imply □BF on the map (the two-object all-maps model has BF without □BF,
 though it lacks Actuality). Whether Actuality and BF together imply □BF is
-open, and a proof of that would establish the unboxed claim, which is kept
-as a separate conjecture. Any other route to the unboxed claim must either
+open, and a proof of that would establish the unboxed claim, which is not
+recorded. Any other route to the unboxed claim must either
 find a different witness or show that the BF instance for
 $\lambda\bar z\, .\,C[\bar z]\to X[\bar z]$ holds at every world for other
 reasons; $\Diamond w$ fails at every world from which no arrow leads back to

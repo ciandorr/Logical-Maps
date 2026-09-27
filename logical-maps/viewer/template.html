@@ -715,42 +715,122 @@ const papers = DATA.papers || [];
 const byPaperId = new Map(papers.map(p => [p.id, p]));
 
 // ---------------------------------------------------------------- engine (mirrors scripts/pmap.py)
+// Linear in the rules its facts touch, yet the same facts and proofs as sweeping the rules in
+// order until nothing changes: a rule fires at the first sweep position after its last premise
+// arrives, and pending firings are taken in (sweep, position) order, as in scripts/pmap.py.
 function closure(seed, rules, background) {
+  const {need, byPrem, unconditional} = ruleIndex(rules), n = rules.length + 1;
   const facts = new Set([...background, ...seed]);
   const why = new Map(); for (const f of facts) why.set(f, null);
-  let changed = true;
-  while (changed) {
-    changed = false;
-    for (const r of rules) if (!facts.has(r.conclusion) && r.premises.every(p => facts.has(p))) { facts.add(r.conclusion); why.set(r.conclusion, r.id); changed = true; }
+  const missing = new Map(), due = unconditional.map(i => n + i); // sweep 1, position i
+  const touch = (i, arrived) => {
+    const k = (missing.has(i) ? missing.get(i) : need[i]) - 1; missing.set(i, k);
+    if (k === 0) arrived === undefined ? due.push(n + i) : heapPush(due, arrived);
+  };
+  for (const f of facts) for (const i of byPrem.get(f) || []) touch(i);
+  due.sort((x, y) => x - y);
+  while (due.length) {
+    const t = heapPop(due), sweep = Math.floor(t / n), i = t - sweep * n, r = rules[i];
+    if (facts.has(r.conclusion)) continue;
+    facts.add(r.conclusion); why.set(r.conclusion, r.id);
+    for (const j of byPrem.get(r.conclusion) || []) touch(j, (j > i ? sweep : sweep + 1) * n + j);
   }
   return { facts, why };
+}
+const RULE_INDEX = new WeakMap();
+function ruleIndex(rules) {
+  let ix = RULE_INDEX.get(rules);
+  if (!ix) {
+    ix = {need: [], byPrem: new Map(), unconditional: []};
+    rules.forEach((r, i) => {
+      const prem = new Set(r.premises);
+      ix.need.push(prem.size); if (!prem.size) ix.unconditional.push(i);
+      for (const x of prem) { if (!ix.byPrem.has(x)) ix.byPrem.set(x, []); ix.byPrem.get(x).push(i); }
+    });
+    RULE_INDEX.set(rules, ix);
+  }
+  return ix;
+}
+function heapPush(h, x) {
+  let i = h.push(x) - 1;
+  while (i > 0) { const p = (i - 1) >> 1; if (h[p] <= x) break; h[i] = h[p]; i = p; }
+  h[i] = x;
+}
+function heapPop(h) {
+  const top = h[0], x = h.pop();
+  if (h.length) {
+    let i = 0;
+    for (;;) {
+      let c = 2 * i + 1; if (c >= h.length) break;
+      if (c + 1 < h.length && h[c + 1] < h[c]) c++;
+      if (h[c] >= x) break;
+      h[i] = h[c]; i = c;
+    }
+    h[i] = x;
+  }
+  return top;
 }
 function chain(target, why, byId) {
   const out = [], seen = new Set();
   (function visit(f) { const rid = why.get(f); if (rid == null || seen.has(rid)) return; seen.add(rid); for (const p of [...byId.get(rid).premises].sort()) visit(p); out.push(rid); })(target);
   return out;
 }
+// failWhy for one model: the proof that c fails, [model id, ...rule ids], made when first asked for.
+class FailChains {
+  constructor(engine, model, fails) { this.engine = engine; this.model = model; this.fails = fails; this.made = new Map(); }
+  get(c) {
+    if (!this.fails.has(c)) return undefined;
+    if (!this.made.has(c)) this.made.set(c, [this.model.id, ...this.engine.conflict([...this.model.satisfies, c], this.model.violates).via]);
+    return this.made.get(c);
+  }
+}
 class Engine {
   constructor(ids, results, models, background = [], negativeBackground = []) {
     this.negativeBackground = negativeBackground;
-    this.ids = ids; this.background = background; this.rules = results; this.byId = new Map(results.map(r => [r.id, r])); this.models = models;
-    this.cache = new Map(); this.holds = new Map(); this.fails = new Map(); this.failWhy = new Map(); this.modelConflicts = new Map();
+    this.ids = ids; this.background = background; this.rules = Object.freeze([...results]); this.byId = new Map(results.map(r => [r.id, r])); this.models = models;
+    this.cache = new Map(); this.across = new Map(); this.holds = new Map(); this.fails = new Map(); this.failWhy = new Map(); this.modelConflicts = new Map();
+    this.failedBy = new Map(); // principle -> the consistent models failing it, in model order
     for (const m of models) {
       this.holds.set(m.id, new Set([...this.cl(m.satisfies).facts].filter(c => c !== FALSE)));
       const conflict = this.conflict(m.satisfies, m.violates);
       if (conflict) this.modelConflicts.set(m.id, conflict);
-      const f = new Set(), fw = new Map();
-      if (!conflict) for (const c of ids) {
-        const hit = this.conflict([...m.satisfies, c], m.violates);
-        if (hit) { f.add(c); fw.set(c, [m.id, ...hit.via]); }
+      const f = new Set();
+      if (!conflict) for (const c of ids) if (this.reaches(m.satisfies, c, m.violates)) {
+        f.add(c);
+        if (!this.failedBy.has(c)) this.failedBy.set(c, []);
+        this.failedBy.get(c).push(m);
       }
-      this.fails.set(m.id, f); this.failWhy.set(m.id, fw);
+      this.fails.set(m.id, f); this.failWhy.set(m.id, new FailChains(this, m, f));
     }
   }
+  key(P) { return JSON.stringify([...new Set(P)].sort()); }
   cl(P) {
-    const key = JSON.stringify([...new Set(P)].sort());
+    const key = this.key(P);
     if (!this.cache.has(key)) this.cache.set(key, closure(P, this.rules, this.background));
     return this.cache.get(key);
+  }
+  // Whether conflict([...P, c], violates) is non-null, without its proof. Usually no rule fires on
+  // cl(P) ∪ cl({c}) that did not fire on either part, so that is the closure; otherwise cl(P) is
+  // extended by cl({c}), touching only rules the new facts complete.
+  reaches(P, c, violates = []) {
+    const F = this.cl(P).facts, G = this.cl([c]).facts;
+    const bad = new Set([FALSE, ...this.negativeBackground, ...violates]);
+    for (const v of bad) if (F.has(v) || G.has(v)) return true;
+    const {byPrem} = ruleIndex(this.rules), key = this.key(P);
+    if (!this.across.has(key)) { // the rules cl(P) leaves unfired, with their missing premises
+      const touched = new Set(); for (const f of F) for (const i of byPrem.get(f) || []) touched.add(i);
+      this.across.set(key, [...touched].map(i => this.rules[i]).filter(r => !F.has(r.conclusion)).map(r => [r.premises.filter(p => !F.has(p)), r.conclusion]));
+    }
+    if (!this.across.get(key).some(([rest, concl]) => !G.has(concl) && rest.every(p => G.has(p)))) return false;
+    const facts = new Set([...F, ...G]), todo = [...G].filter(x => !F.has(x));
+    while (todo.length) for (const i of byPrem.get(todo.pop()) || []) {
+      const r = this.rules[i];
+      if (!facts.has(r.conclusion) && r.premises.every(p => facts.has(p))) {
+        if (bad.has(r.conclusion)) return true;
+        facts.add(r.conclusion); todo.push(r.conclusion);
+      }
+    }
+    return false;
   }
   conflict(P, violates = []) {
     const {facts, why} = this.cl(P);
@@ -764,8 +844,8 @@ class Engine {
     if (facts.has(FALSE) && c !== FALSE) return null;
     return facts.has(c) ? chain(c, why, this.byId) : null;
   }
-  excludes(P, c) { return this.conflict(P) ? null : this.conflict([...P, c]); }
-  separates(P, c) { return this.models.filter(m => !this.modelConflicts.has(m.id) && P.every(p => this.holds.get(m.id).has(p)) && this.fails.get(m.id).has(c)); }
+  excludes(P, c) { return this.conflict(P) || !this.reaches(P, c) ? null : this.conflict([...P, c]); }
+  separates(P, c) { return (this.failedBy.get(c) || []).filter(m => P.every(p => this.holds.get(m.id).has(p))); }
   resolveConjecture(item) {
     const answer = (status, via = [], models = []) => ({status, via, models});
     const backgroundConflict = this.conflict([]);

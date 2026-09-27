@@ -83,3 +83,8 @@ $\lambda\bar z\, .\,C[\bar z]\to X[\bar z]$ holds at every world for other
 reasons; $\Diamond w$ fails at every world from which no arrow leads back to
 the actual world, and there $C$ is empty and trivially inextensible, so
 only the worlds at which $\Diamond w$ holds are in question.
+
+*Update, 27 September 2026.* The unboxed claim holds. Christopher Sun gave
+a different argument with the same witness, which uses BF only at the actual
+world. See *BF and Actuality imply Inextensible Comprehension*
+(actuality-and-bf-imply-inextensible-comprehension).

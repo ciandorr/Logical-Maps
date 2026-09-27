@@ -11,6 +11,7 @@ satisfies:
 - axiom-of-infinity-t
 - no-contingency-signature-r
 - signature-b-r
+- inextensible-comprehension-r
 violates:
 - actuality
 - atomicity-t
@@ -70,46 +71,83 @@ description: 'A symmetric ideally-full intensional action model over one object,
   a cofinite extension must be closed under everything an arrow can send an instance to, and no finite
   pinning set can sustain that short of the top property, so nothing rigid is coextensive with being distinct
   from a fixed individual.'
-notes: 'This is the draft''s headline separation. Boolean Completeness holds while Rigid Comprehension
-  fails, and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded
-  as a derived verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition
-  rather than for a true one, and the failure of ND at type e follows from the presence of a non-injective
-  surjection, since the proposition that two fixed individuals are identical is then a nonzero proposition;
-  neither is displayed separately in the draft. The source is a work in progress. Interpretation of Σ,
-  fixed for this record: each relational constant denotes the top element of its type and each individual
-  constant denotes one fixed individual $d$. Under it the signature schemata that give the constants a
-  special role fail: with $c\in\Sigma$ of relational type $\tau$, $c=\top_\tau$ necessarily, so Witnessed
-  Possibility fails for the pure formula $x\ne\top_\tau$, Separated Structure fails since $\lambda x\,
-  .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$, Independence (signature Σ) fails since $c$ denotes
-  what a closed pure term denotes, and Distinctness Maximalism (signature Σ) fails since $c=\top_\tau$ is true and
-  unprovable. But No Contingency (signature Σ), and with it B for sentences of Σ, hold. The relational
-  constants denote pure entities, so a closed Σ-sentence denotes what some $P(d,\ldots,d)$ denotes for
-  a pure formula $P$; the model’s automorphisms carry every individual to every other, so $P(d,\ldots,d)$
-  is materially equivalent to the pure sentence $\forall x\, .\,P(x,\ldots,x)$ and its negation to $\forall
-  x\, .\,\neg P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency, and instantiation
-  under the box gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$. Relational Choice fails, at the
-  types $(e\to t)$ and $e$. Let $U:=\lambda Xy\, .\,Xy\lor\neg\exists z\, .\,Xz$, a closed term, hence
-  in the domain, and serial. A functional subrelation $S$ of $U$ would lie in the domain at the evaluation
-  object, so it is symmetric and pinned down by a finite set $N$. Two facts about such an $S$ (Dorr, draft,
-  Lemma 21): every $g\in G$ fixing $N$ pointwise satisfies $g^{[\sigma]}S=S$, and symmetry gives $\langle
+notes: >-
+  This is the draft's headline separation. Boolean Completeness holds while Rigid Comprehension fails,
+  and since Actuality fails too, Weak Rigid Comprehension fails here as well, which is recorded as a
+  derived verdict. Atomlessness is the Proposition 22 argument read for an arbitrary nonzero proposition
+  rather than for a true one, and the failure of ND at type e follows from the presence of a
+  non-injective surjection, since the proposition that two fixed individuals are identical is then a
+  nonzero proposition; neither is displayed separately in the draft. The source is a work in progress.
+  Interpretation of Σ, fixed for this record: each relational constant denotes the top element of its
+  type and each individual constant denotes one fixed individual $d$. Under it the signature schemata
+  that give the constants a special role fail: with $c\in\Sigma$ of relational type $\tau$,
+  $c=\top_\tau$ necessarily, so Witnessed Possibility fails for the pure formula $x\ne\top_\tau$,
+  Separated Structure fails since $\lambda x\, .\,x$ and $\lambda x\, .\,\top_\tau$ agree on $c$,
+  Independence (signature Σ) fails since $c$ denotes what a closed pure term denotes, and Distinctness
+  Maximalism (signature Σ) fails since $c=\top_\tau$ is true and unprovable. But No Contingency
+  (signature Σ), and with it B for sentences of Σ, hold. The relational constants denote pure entities,
+  so a closed Σ-sentence denotes what some $P(d,\ldots,d)$ denotes for a pure formula $P$; the model’s
+  automorphisms carry every individual to every other, so $P(d,\ldots,d)$ is materially equivalent to
+  the pure sentence $\forall x\, .\,P(x,\ldots,x)$ and its negation to $\forall x\, .\,\neg
+  P(x,\ldots,x)$; whichever is true is necessary by No Pure Contingency, and instantiation under the box
+  gives $\Box P(d,\ldots,d)$ or $\Box\neg P(d,\ldots,d)$. Relational Choice fails, at the types $(e\to
+  t)$ and $e$. Let $U:=\lambda Xy\, .\,Xy\lor\neg\exists z\, .\,Xz$, a closed term, hence in the domain,
+  and serial. A functional subrelation $S$ of $U$ would lie in the domain at the evaluation object, so
+  it is symmetric and pinned down by a finite set $N$. Two facts about such an $S$ (Dorr, draft, Lemma
+  21): every $g\in G$ fixing $N$ pointwise satisfies $g^{[\sigma]}S=S$, and symmetry gives $\langle
   gA,gy,g\rangle\in S$ whenever $\langle A,y,1\rangle\in S$; together, $\langle gA,gy,1\rangle\in S$.
   Now let $A$ be the property of not belonging to $N$. It is in the domain, being pinned down by that
   finite set and symmetric, and its extension is nonempty, so $S$ relates $A$ at the identity to some
   $y$ in its extension. The transposition of $y$ with another individual outside $N$ is a permutation,
   so lies in $G$, fixes $A$ and moves $y$ to some $gy\ne y$, so $S$ relates $A$ to $gy$ as well, and $S$
   is not functional at the identity arrow. Argument of 23 September 2026, after Cian Dorr’s observation
-  that a choice over the individuals cannot be finitely pinned down; the well-ordering of the individuals
-  that he had in mind is refuted by the same two facts, but the direct route needs no derivation of a
-  well-ordering from Relational Choice in C. Inextensible Comprehension is left unknown, and its failure
-  of Actuality does not sharpen to it at the lowest types. The type-$t$ instance is trivial ($\top$ and
-  $\bot$ are inextensible). At type $e\to t$ it holds: by the rigidity criterion (draft, Lemma 14) a property
-  is inextensible iff at every world it is contained in every persistent property whose extension there
-  includes its own; extensions of domain properties are finite or cofinite at every world, since the pointwise
-  stabiliser of the pinning set is transitive off it; a persistent property pinned down by a finite set
-  whose extension is infinite is $\top$, by the argument of Proposition 23; so a property whose extension
-  is cofinite at every world, such as $\lambda x\, .\,x\notin h[F]$ for the complement of a cofinite extension
-  $\mathbb N\setminus F$, is inextensible, and a finite extension has its rigid haecceity union. A failure,
-  if there is one, lies at a relational or higher type.'
+  that a choice over the individuals cannot be finitely pinned down; the well-ordering of the
+  individuals that he had in mind is refuted by the same two facts, but the direct route needs no
+  derivation of a well-ordering from Relational Choice in C.
+
+  Inextensible Comprehension holds, at every relational type. Argument of Claude Opus 5.5 (Anthropic),
+  27 September 2026, checked by Cian Dorr the same day; it extends the earlier observations at types $t$
+  and $e\to t$ and the case $X=\lambda p\, .\,p$ at type $t\to t$, which are instances. Worlds are the
+  arrows $h$, and $h$ sees $i\circ h$. Write $i\cdot r$ for the transport of an entity along $i$; for
+  propositions $i\cdot p=\{k : k\circ i\in p\}$. Three facts about the model are used. (1) Transport: a
+  formula with parameters $\bar r$ holds at $h$ iff it holds at $1$ with parameters $h\cdot\bar r$; in
+  particular whether $Z$ holds of $\bar r$ at $i$ depends only on $i\cdot\bar r$. (2) Pinning: if $r$ is
+  pinned down by $S$ and $g$ fixes $S$ pointwise, then $g\cdot r=r$. (3) Symmetry: the worlds $h$ and
+  $\sigma\circ h$, for a permutation $\sigma$, agree on every root entity; with (2), the extension at
+  $1$ of an $X$ pinned down by $S_X$ is closed under $\tau\cdot$ for every permutation $\tau$ fixing
+  $S_X$ pointwise.
+
+  The witness. Given $X$ pinned down by the finite set $S_X$, let $\delta_{S_X}$ be the proposition that
+  no two members of $S_X$ are collapsed, and put $Y:=\lambda\bar z\, .\,\delta_{S_X}\land X\bar z$. It
+  is symmetric and pinned down by $S_X$, and since $\delta_{S_X}$ is true at $1$ it is coextensive with
+  $X$.
+
+  Transversal lemma. If $g$ fixes $S_X$ pointwise and $r$ is pinned down by a finite $T$, then
+  $r=g\cdot(\tau\cdot r)$ for a permutation $\tau$ fixing $S_X$ pointwise; so if $r$ is in the extension
+  of $X$ at $1$, then $r=g\cdot r^{\prime}$ for some $r^{\prime}$ also in it. Proof: each $t\in
+  T\setminus S_X$ has a preimage under $g$, as $g$ is surjective, and it lies outside $S_X$, as $g$
+  fixes $S_X$; choose distinct preimages $t^{\prime}$ and let $\tau$ be a permutation of $\mathbb
+  N\setminus S_X$ with $\tau(t)=t^{\prime}$. Then $g\circ\tau$ fixes $T$ pointwise, so $g\cdot(\tau\cdot
+  r)=(g\circ\tau)\cdot r=r$ by (2), and $\tau\cdot r$ is in the extension of $X$ by (3). The same holds
+  for tuples.
+
+  Weak inextensibility at $1$. Let $Z$ hold necessarily of every instance of $Y$, and let $i$ be a
+  world. If $i$ collapses two members of $S_X$, then $\delta_{S_X}$ is false at $i$, so $Y$ is empty
+  there. Otherwise relabel by a permutation, which does not change the world by (3), so that $i$ fixes
+  $S_X$ pointwise. By (1) and (2), $Y$ holds of $\bar r$ at $i$ iff $i\cdot\bar r$ is in the extension
+  of $X$ at $1$; the lemma gives $\bar r^{\prime}$ in that extension with $i\cdot\bar
+  r^{\prime}=i\cdot\bar r$; $Z$ holds of $\bar r^{\prime}$ at $i$, being necessary of it; so by (1) $Z$
+  holds of $\bar r$ at $i$. Hence $Y\le Z$.
+
+  The leading box. At a world $h$ injective on $S_X$, relabel so that $h$ fixes $S_X$; then $h\cdot
+  Y=Y$, and by (1) weak inextensibility at $h$ is weak inextensibility of $Y$ at $1$. At a world
+  collapsing $S_X$, $Y$ is empty there and at every world it sees, since a collapse persists, so it is
+  trivially weakly inextensible. So $Y$ is inextensible. Nothing depends on the argument types. The
+  argument explains the cheapness of inextensibility here: surjectivity and the full permutation group
+  make the necessity of $Z$ cover everything that pinning forces into the extension of $Y$, and the
+  conjunct $\delta_{S_X}$ removes the worlds that collapse the pinning set. The Appendix D models
+  refuting Inextensible Comprehension lack one of these features: an arrow fixing the pinning set may
+  leave points without a preimage outside it, or the relabelling permutations may be missing.
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
@@ -151,3 +189,10 @@ changes:
   by: Claude Fable 5.1 (Anthropic)
   summary: 'Noted why Inextensible Comprehension is left unknown: its type-t and type-(e→t) instances
     hold here, so the failure of Actuality does not sharpen to it at those types.'
+- date: '2026-09-27'
+  by: Claude Opus 5.5 (Anthropic), checked by Cian Dorr
+  summary: 'Recorded Inextensible Comprehension at every relational type: the witness for X pinned down
+    by S is the conjunction of X with the proposition that S is uncollapsed, and a transversal lemma using
+    surjectivity and the full permutation group shows it inextensible. Replaces the note that left it unknown.'
+  satisfies:
+  - inextensible-comprehension-r

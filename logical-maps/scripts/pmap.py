@@ -108,17 +108,63 @@ def load_topic(topic_id: str) -> dict:
 # A model can additionally refute c when that trial reaches one of its explicit
 # violations. Such model witnesses of P ⇏ c are distinct from P ⇒ ¬c.
 
+#
+# closure() runs in time linear in the rules its facts touch, but reproduces the
+# naive loop "sweep the rules in order until nothing changes" exactly, `why`
+# included, so proofs do not depend on the algorithm. A rule fires at the first
+# sweep position after its last premise arrives: later in the same sweep if it
+# comes after the rule that added that premise, else in the next sweep. Pending
+# firings are taken in (sweep, position) order; one whose conclusion is already
+# in has lost to an earlier firing, as it would have in the naive loop.
+
+_INDEX: dict = {}
+
+
+def _rule_index(rules):
+    """(rules, premise counts, rules by premise), kept for a tuple of rules, which cannot change."""
+    keep = isinstance(rules, tuple)
+    if keep and id(rules) in _INDEX:
+        return _INDEX[id(rules)]
+    rules = tuple(rules)
+    need, by_prem = [], {}
+    for i, (_, prem, _c) in enumerate(rules):
+        prem = set(prem)
+        need.append(len(prem))
+        for x in prem:
+            by_prem.setdefault(x, []).append(i)
+    out = (rules, need, by_prem, [i for i, k in enumerate(need) if k == 0])
+    if keep:
+        if len(_INDEX) > 64:
+            _INDEX.clear()
+        _INDEX[id(rules)] = out  # the entry holds the tuple, so its id is not reused
+    return out
+
+
 def closure(seed, rules, background=()):
+    from heapq import heappush, heappop
+    rules, need, by_prem, unconditional = _rule_index(rules)
+    n = len(rules) + 1
     facts = set(background) | set(seed)
     why = {f: None for f in facts}
-    changed = True
-    while changed:
-        changed = False
-        for rid, prem, concl in rules:
-            if concl not in facts and prem <= facts:
-                facts.add(concl)
-                why[concl] = rid
-                changed = True
+    missing, due = {}, [n + i for i in unconditional]  # sweep 1, position i
+    for f in facts:
+        for i in by_prem.get(f, ()):
+            k = missing[i] = missing.get(i, need[i]) - 1
+            if k == 0:
+                due.append(n + i)
+    due.sort()
+    while due:
+        t = heappop(due)
+        sweep, i = divmod(t, n)
+        rid, _, concl = rules[i]
+        if concl in facts:
+            continue
+        facts.add(concl)
+        why[concl] = rid
+        for j in by_prem.get(concl, ()):
+            k = missing[j] = missing.get(j, need[j]) - 1
+            if k == 0:
+                heappush(due, (sweep if j > i else sweep + 1) * n + j)
     return facts, why
 
 
@@ -138,15 +184,31 @@ def proof_chain(target, why, rules_by_id):
     return out
 
 
+class _FailChains(dict):
+    """fail_why for one model: the proof that c fails, [model id, *rule ids], made when first asked for."""
+
+    def __init__(self, engine, model, fails):
+        super().__init__()
+        self.engine, self.model, self.failing = engine, model, fails
+
+    def __missing__(self, c):
+        if c not in self.failing:
+            raise KeyError(c)
+        m = self.model
+        hit = self.engine.conflict([*m["satisfies"], c], m["violates"])
+        self[c] = chain = [m["id"], *hit["via"]]
+        return chain
+
+
 class Engine:
     def __init__(self, ids, results, models, background=(), negative_background=()):
         self.ids = list(ids)
         self.background = tuple(background)
         self.negative_background = tuple(negative_background)
-        self.rules = [(r["id"], frozenset(r["premises"]), r["conclusion"]) for r in results]
+        self.rules = tuple((r["id"], frozenset(r["premises"]), r["conclusion"]) for r in results)
         self.rules_by_id = {r[0]: r for r in self.rules}
         self.models = list(models)
-        self._cache = {}
+        self._cache, self._across = {}, {}
         self.holds, self.fails, self.fail_why, self.model_conflicts = {}, {}, {}, {}
         for m in self.models:
             h, _ = self.cl(m["satisfies"])
@@ -154,20 +216,52 @@ class Engine:
             conflict = self.conflict(m["satisfies"], m["violates"])
             if conflict is not None:
                 self.model_conflicts[m["id"]] = conflict
-            f, fw = set(), {}
+            f = set()
             if conflict is None:
-                for c in self.ids:
-                    hit = self.conflict([*m["satisfies"], c], m["violates"])
-                    if hit is not None:
-                        f.add(c)
-                        fw[c] = [m["id"], *hit["via"]]
-            self.fails[m["id"]], self.fail_why[m["id"]] = f, fw
+                f = {c for c in self.ids if self._reaches(m["satisfies"], c, m["violates"])}
+            self.fails[m["id"]], self.fail_why[m["id"]] = f, _FailChains(self, m, f)
+        # Bit i of held[p] / failed[p]: the i-th consistent model holds / fails p.
+        self._witnesses = [m["id"] for m in self.models if m["id"] not in self.model_conflicts]
+        self._held, self._failed = {}, {}
+        for i, mid in enumerate(self._witnesses):
+            for p in self.holds[mid]:
+                self._held[p] = self._held.get(p, 0) | 1 << i
+            for p in self.fails[mid]:
+                self._failed[p] = self._failed.get(p, 0) | 1 << i
 
     def cl(self, seed):
         key = frozenset(seed)
         if key not in self._cache:
             self._cache[key] = closure(key, self.rules, self.background)
         return self._cache[key]
+
+    def _reaches(self, seed, c, violates=()):
+        """Whether conflict([*seed, c], violates) is not None, without its proof. Usually no rule
+        fires on cl(seed) ∪ cl({c}) that did not fire on either part, so that is the closure;
+        otherwise cl(seed) is extended by cl({c}), touching only rules the new facts complete."""
+        F, G = self.cl(seed)[0], self.cl([c])[0]
+        bad = {FALSE, *self.negative_background, *violates}
+        if not bad.isdisjoint(F) or not bad.isdisjoint(G):
+            return True
+        _, _, by_prem, _ = _rule_index(self.rules)
+        key = frozenset(seed)
+        if key not in self._across:  # the rules cl(seed) leaves unfired, with their missing premises
+            self._across[key] = [(prem - F, concl) for _, prem, concl in
+                                 (self.rules[i] for i in {i for f in F for i in by_prem.get(f, ())})
+                                 if concl not in F]
+        if not any(rest <= G and concl not in G for rest, concl in self._across[key]):
+            return False
+        todo = [x for x in G if x not in F]
+        facts = F | G
+        while todo:
+            for i in by_prem.get(todo.pop(), ()):
+                _, prem, concl = self.rules[i]
+                if concl not in facts and prem <= facts:
+                    if concl in bad:
+                        return True
+                    facts.add(concl)
+                    todo.append(concl)
+        return False
 
     def conflict(self, seed, violates=()):
         """A proof of False, or a fact forbidden by this model/filter; None means unknown."""
@@ -191,13 +285,18 @@ class Engine:
         """P entails not-c iff adjoining c reaches False. P must itself be consistent."""
         if self.conflict(P) is not None:
             return None
-        return self.conflict([*P, c])
+        return self.conflict([*P, c]) if self._reaches(P, c) else None
 
     def separates(self, P, c):
         """Model witnesses P does not imply c; distinct from P implying not-c."""
-        P = set(P)
-        wits = [m["id"] for m in self.models if m["id"] not in self.model_conflicts
-                and P <= self.holds[m["id"]] and c in self.fails[m["id"]]]
+        found = self._failed.get(c, 0)
+        for p in set(P):
+            found &= self._held.get(p, 0)
+        wits = []
+        while found:
+            low = found & -found
+            wits.append(self._witnesses[low.bit_length() - 1])
+            found ^= low
         return wits, (self.fail_why[wits[0]][c] if wits else [])
 
     def resolve_conjecture(self, item):

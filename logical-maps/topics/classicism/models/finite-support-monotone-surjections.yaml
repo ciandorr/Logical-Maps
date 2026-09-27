@@ -12,6 +12,7 @@ satisfies:
 - necessary-relational-choice-r
 - transversal-choice-r
 violates:
+- vicinity
 - distinctness-necessary-r
 - atomicity-r
 - actuality
@@ -220,7 +221,10 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
 
   Review of 25 September 2026. The dated write-up supplies the accepted BC-t witness using alternating
   differences of agreement classes and Definition D.3''s extensional-fullness lemma. It replaces the trawl''s
-  invalid inference from an unavailable intersection to an unavailable greatest lower bound.'
+  invalid inference from an unavailable intersection to an unavailable greatest lower bound.
+
+
+  Vicinity fails. A true $w$ pinned down by a finite set $S$ contains every arrow agreeing with the identity on $S$, among them the monotone surjection equal to the identity up to $M+1$ that sends $M+2$ to $M+1$ and each larger $x$ to $x-1$, for $S\subseteq[0,M]$, one that collapses two individuals $a\ne b$ outside $S$. The proposition that $a$ and $b$ are distinct is true, and it is possible at no arrow that collapses them, since a collapse persists under composition, so $w\not\le\Diamond(a\ne b)$. Observation of Claude Opus 5.5 (Anthropic), 27 September 2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -309,3 +313,8 @@ changes:
     argument for Inextensible Comprehension, which already refutes the weak form.
   violates:
   - weakly-inextensible-comprehension-r
+- date: '2026-09-27'
+  by: Claude Opus 5.5 (Anthropic), at Cian Dorr's request
+  summary: Recorded the failure of Vicinity; argument in the notes.
+  violates:
+  - vicinity

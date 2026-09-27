@@ -1,0 +1,48 @@
+id: actuality-and-bf-imply-inextensible-comprehension
+premises:
+- actuality
+- barcan-r
+conclusion: inextensible-comprehension-r
+status: proved
+was_conjectured: true
+certificate:
+  source_id: misc
+  produced_by: Christopher Sun (the witness and the argument), 26 September 2026; Claude Opus 5.5
+    (Anthropic) wrote out the details
+  recorded_by: Claude Opus 5.5 (Anthropic), 27 September 2026
+  checked_by: []
+  date: '2026-09-27'
+  lean: none
+sources:
+- Christopher Sun, argument communicated to Cian Dorr on 26 September 2026 and reported by him on 27
+  September 2026; see the write-up.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, pp. 28–30 (inextensibility); Proposition
+  2.1, pp. 20–21 (BF).
+source_names:
+- Sun, 26 Sep
+- Classicism
+proof: >-
+  Let $w$ witness Actuality, fix $F$ of type $\bar\sigma t$ and put $C:=\lambda\bar z\, .\,\Diamond(w\land
+  F[\bar z])$, which is coextensive with $F$ by Actuality. Suppose $\neg\operatorname{Inextensible}(C)$:
+  $\Diamond\exists X\, .\,A(X)\land\Diamond\exists\bar z\, .\,C[\bar z]\land\neg X[\bar z]$, with
+  $A(X):=\forall\bar y\, .\,C[\bar y]\to\Box X[\bar y]$. BF at type $\bar\sigma t$ gives an $X$ with
+  $\Diamond(A(X)\land\Diamond\exists\bar z\, .\,C[\bar z]\land\neg X[\bar z])$. So $\Diamond\exists\bar
+  z(\ldots)$ by 4, and BF at the types $\bar\sigma$ gives $\bar z$ with $\Diamond(C[\bar z]\land\neg
+  X[\bar z])$. Then $C[\bar z]$ by 4, so $F[\bar z]$, and $\Diamond\neg X[\bar z]$. By Actuality, $w\le
+  F[\bar z]$ and $w\le\Diamond\neg X[\bar z]$; by 4 and K these give $\Box(\Diamond w\to C[\bar z])$ and
+  $\Box(\Diamond w\to\Diamond\neg X[\bar z])$. At the world where $A(X)$ holds, $\Diamond w$ also holds
+  (it follows from $\Diamond\exists\bar z\, .\,C[\bar z]\land\ldots$ by 4), so $C[\bar z]$, so $\Box
+  X[\bar z]$ by $A(X)$, and also $\Diamond\neg X[\bar z]$: a contradiction. So $C$ is inextensible.
+  Full details are in the write-up.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, pp. 28–30; Proposition 2.1, pp. 20–21
+  note: Definitions of inextensibility and BF.
+notes: >-
+  BF is used only at the actual world, at the type $\bar\sigma t$ of $X$ and at the argument types
+  $\bar\sigma$, to bring the quantifiers in the negated leading box of inextensibility out to the actual
+  world, where Actuality can be applied to the chosen instances. This strengthens the earlier result
+  from □BF and Actuality, which now follows from it. The identifier was first used on 26 September 2026
+  for this claim as a conjecture, which was withdrawn the same day because the recorded argument then
+  needed □BF.

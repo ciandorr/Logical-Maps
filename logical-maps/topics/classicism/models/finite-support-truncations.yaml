@@ -11,6 +11,7 @@ satisfies:
 - necessary-relational-choice-r
 - transversal-choice-r
 violates:
+- vicinity
 - distinctness-necessary-r
 - actuality
 - barcan-r
@@ -231,7 +232,10 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   in writeups/strong-worlds-one-object-action-models.md. The successor quantifier ranges over all propositions
   at the target object, including ones outside the transported image. Its necessary form therefore also
   fails.  The same write-up gives an explicit finitely pinned BF-t counterexample, also covered by source
-  footnote 92; BF-t and its boxed form now fail under the engine''s closure as well.'
+  footnote 92; BF-t and its boxed form now fail under the engine''s closure as well.
+
+
+  Vicinity fails. A true $w$ pinned down by a finite set $S$ contains every arrow agreeing with the identity on $S$, among them the truncation $g_n$ with $n$ above $S$, one that collapses two individuals $a\ne b$ outside $S$. The proposition that $a$ and $b$ are distinct is true, and it is possible at no arrow that collapses them, since a collapse persists under composition, so $w\not\le\Diamond(a\ne b)$. Observation of Claude Opus 5.5 (Anthropic), 27 September 2026.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -339,3 +343,8 @@ changes:
     counterexample of 25 September; the Inextensible Comprehension argument already refutes the weak form.'
   violates:
   - weakly-inextensible-comprehension-r
+- date: '2026-09-27'
+  by: Claude Opus 5.5 (Anthropic), at Cian Dorr's request
+  summary: Recorded the failure of Vicinity; argument in the notes.
+  violates:
+  - vicinity

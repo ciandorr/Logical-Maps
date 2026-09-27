@@ -11,6 +11,8 @@ satisfies:
 - signature-b-r
 - necessity-of-arithmetic
 violates:
+- vicinity
+- weakly-inextensible-comprehension-r
 - necessary-barcan-r
 - atomlessness
 - witnessed-possibility-r
@@ -106,7 +108,7 @@ notes: 'The cited construction is a model of the map’s relational-type framewo
   is true at every arrow into $W_0$. B for sentences of $\Sigma$ holds under the record''s interpretation:
   a closed $\Sigma$-sentence denotes what $P(d,\ldots,d)$ denotes for a pure $P$ and the individual $d$,
   and from any world some arrow into $W_0$ carries the current image of $d$ back to $d$, as all maps are
-  arrows. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.'
+  arrows. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source. Vicinity fails. A true $w$ pinned down by a finite set $S$ contains every arrow agreeing with the identity on $S$, among them a map $W_0\to W_0$ that collapses two individuals $a\ne b$ outside $S$. The proposition that $a$ and $b$ are distinct is true, and it is possible at no arrow that collapses them, since a collapse persists under composition, so $w\not\le\Diamond(a\ne b)$. Observation of Claude Opus 5.5 (Anthropic), 27 September 2026. Weakly Inextensible Comprehension fails as well: the argument above against Inextensible Comprehension at type $t\to t$ uses only the unboxed matrix of inextensibility at the identity arrow of $W_0$, as the corresponding argument in the permutation model does.'
 was_conjectured: true
 changes:
 - date: '2026-09-17'
@@ -189,3 +191,9 @@ changes:
   by: Claude Opus 5.5 (Anthropic)
   summary: Merged the two sets of arguments recorded on 23 and 25 September into one, keeping the 23 September
     argument for Atomicity (type t).
+- date: '2026-09-27'
+  by: Claude Opus 5.5 (Anthropic), at Cian Dorr's request
+  summary: Recorded the failure of Vicinity and of Weakly Inextensible Comprehension; arguments in the notes.
+  violates:
+  - vicinity
+  - weakly-inextensible-comprehension-r

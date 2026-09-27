@@ -890,9 +890,41 @@ class Lynchpins:
             r["no"] = self.with_model(S, [c] if c != FALSE else [], (j, c))
         r["score"] = round(2 * r["yes"] * r["no"] / (r["yes"] + r["no"]), 1) if r["yes"] + r["no"] else 0.0
 
+    def _group_questions(self, rows):
+        """Same premises, and conclusions equivalent under them and the background.
+
+        cl(S + c) = cl(S + d) exactly when each conclusion entails the other given S.
+        Scores alone are not evidence of equivalence. Model checks stay separate.
+        """
+        groups = {}
+        for r in rows:
+            if r["kind"] == "question":
+                S = tuple(r["premises"])
+                F = self.sets[self.set_index[S]][2]
+                key = ("question", S, self._ext(F, r["conclusion"]))
+            else:
+                key = ("check", r["model"], r["principle"])
+            groups.setdefault(key, []).append(r)
+        return list(groups.values())
+
+    @staticmethod
+    def _group_summary(group):
+        if len(group) == 1:
+            return group[0]
+        row = dict(group[0])
+        row["conclusions"] = [r["conclusion"] for r in group]
+        records = {(c["kind"], c["id"]): c for r in group for c in r.get("conjectures", [])}
+        if records:
+            row["conjectures"] = list(records.values())
+        tiers = [r["tier"] for r in group if r.get("tier")]
+        if tiers:
+            row["tier"] = max(tiers, key=LYNCHPIN_TIERS.index)
+        return row
+
     def rank(self, top: int | None = 50, score_all: bool = True) -> dict:
         """The open questions and model checks scored for both answers, in two orders, and the
-        questions recorded conjectures ask. With top=None, retain every ranked row.
+        questions recorded conjectures ask. Equivalent conclusions under the same premises
+        share a ranked row. With top=None, retain every ranked group.
 
         The central questions are ranked by the harmonic mean of the two scores: if each answer is
         as likely as the map leaves room for it, inversely to how much it would settle, that is the
@@ -909,13 +941,15 @@ class Lynchpins:
             for r in rows:
                 self._score(r)
             name = lambda r: (r["kind"], str(r.get("premises", r.get("model"))), str(r.get("conclusion", r.get("principle"))))
-            auto = sorted(rows, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), *name(r)))
-            for i, r in enumerate(auto):
-                r["auto_rank"] = i + 1
-                r["auto_claim"] = "entails" if r["no"] >= r["yes"] else "not"
-            central = sorted(rows, key=lambda r: (-r["score"], -min(r["yes"], r["no"]), -max(r["yes"], r["no"]), *name(r)))
-            for i, r in enumerate(central):
-                r["rank"] = i + 1
+            auto = self._group_questions(sorted(rows, key=lambda r: (-max(r["yes"], r["no"]), -min(r["yes"], r["no"]), *name(r))))
+            for i, group in enumerate(auto):
+                for r in group:
+                    r["auto_rank"] = i + 1
+                    r["auto_claim"] = "entails" if r["no"] >= r["yes"] else "not"
+            central = self._group_questions(sorted(rows, key=lambda r: (-r["score"], -min(r["yes"], r["no"]), -max(r["yes"], r["no"]), *name(r))))
+            for i, group in enumerate(central):
+                for r in group:
+                    r["rank"] = i + 1
             self._ranked, self._auto = central, auto
         if self._recorded_rows is None:  # attach once: the rows are shared, and rank() is asked more than once per build
             self._recorded_rows = self._recorded(rows)
@@ -927,8 +961,8 @@ class Lynchpins:
         p = self.progress()
         return {"inconsistent_background": self.inconsistent, "classes": self.classes, "trivial": self.trivial,
                 "fitting_models": [m["id"] for m in self.witnesses], "progress": p, "open": p["open"],
-                "rows": self._ranked[:top] if self._ranked is not None else [],
-                "auto": self._auto[:top] if self._auto is not None else [], "recorded": recorded}
+                "rows": [self._group_summary(g) for g in self._ranked[:top]] if self._ranked is not None else [],
+                "auto": [self._group_summary(g) for g in self._auto[:top]] if self._auto is not None else [], "recorded": recorded}
 
 LYNCHPIN_MAX_OPEN = 0.75  # bundles skip a map in which more of its implication questions than this are open
 PROGRESS_PREMISES = 2  # the settled share counts implication questions with up to this many premises
@@ -1014,7 +1048,8 @@ def lynchpin_row_text(r: dict, nm, conjecture: bool = False, auto: bool = False)
     star = f" ★ {r['tier']}" if r.get("tier") else ""
     claim = r.get("auto_claim") if auto else r.get("claim") if conjecture else None
     turnstile = "⊬" if claim == "not" else "⊢"
-    return f"{' ∧ '.join(nm(x) for x in r['premises']) or '⊤'} {turnstile} {nm(r['conclusion'])}{star}"
+    conclusions = ' or '.join(nm(c) for c in r.get("conclusions", [r["conclusion"]]))
+    return f"{' ∧ '.join(nm(x) for x in r['premises']) or '⊤'} {turnstile} {conclusions}{star}"
 
 
 def lynchpin_scores(r: dict) -> tuple:
@@ -2949,6 +2984,31 @@ def selftest():
     assert complete["auto"] == Ln.rank(top=100)["auto"], "unlimited export keeps every automatically generated conjecture"
     assert [r["rank"] for r in complete["rows"]] == list(range(1, 29))
     assert sorted(r["rank"] for r in short["recorded"]) == sorted(rows[q]["rank"] for q in [(("r",), "p"), (("p",), "r"), (("r", "s"), "p"), (("r", "s"), FALSE)]), "recorded conjectures are the questions the records ask, at their rank"
+    # Conditional equivalence: c and d are interchangeable only with BOTH p and q.
+    conditional = {"topic": {"background": []}, "principles": [P(x) for x in "pqcde"],
+                   "results": [R("pcd", ["p", "c"], "d"), R("qdc", ["q", "d"], "c"),
+                               dict(R("pqc", ["p", "q"], "c"), status="conjectured", notes="First route."),
+                               dict(R("pqd", ["p", "q"], "d"), status="conjectured", notes="Second route.", tier="gold"),
+                               dict(R("pqe", ["p", "q", "c"], "e"), status="conjectured")], "models": []}
+    Lc = Lynchpins(conditional)
+    grouped = Lc.rank(top=None)
+    for key, rank_key in (("rows", "rank"), ("auto", "auto_rank")):
+        groups = grouped[key]
+        assert [r[rank_key] for r in groups] == list(range(1, len(groups) + 1))
+        matching = [r for r in groups if r["premises"] == ["p", "q"] and "c" in r.get("conclusions", [r["conclusion"]])]
+        assert len(matching) == 1 and set(matching[0]["conclusions"]) == {"c", "d"}
+        assert {c["id"] for c in matching[0]["conjectures"]} == {"pqc", "pqd"} and matching[0]["tier"] == "gold"
+        assert lynchpin_row_text(matching[0], lambda x: x).startswith("p ∧ q ⊢ c or d")
+        assert any(r["premises"] == ["p", "q"] and r["conclusion"] == "e" and "conclusions" not in r for r in groups), "a conjectured link does not establish equivalence"
+        assert all("conclusions" not in r for r in groups if r["premises"] in (["p"], ["q"])), "the exact premise set matters"
+    for group in Lc._ranked:
+        assert len({(r["yes"], r["no"]) for r in group}) == 1, "equivalent questions keep a single pair of scores"
+    rec_cd = [r for r in grouped["recorded"] if r["premises"] == ["p", "q"]]
+    assert {r["conclusion"] for r in rec_cd} == {"c", "d"} and len({r["rank"] for r in rec_cd}) == 1
+    assert all("conclusions" not in r for r in rec_cd), "recorded claims keep their own conclusions"
+    assert Lc.rank(top=2)["rows"] == grouped["rows"][:2], "limit after grouping, including cached calls"
+    one_way = Lynchpins({**conditional, "results": [conditional["results"][0]]}).rank(top=None)
+    assert all("conclusions" not in r for r in one_way["rows"]), "one-way implication is not equivalence"
     # A settled question and one with more than two premises are listed without rank or scores.
     more = {**noted, "results": [*noted["results"], dict(R("pq2", ["p"], "q"), status="conjectured", notes="Long proved."),
                                   dict(R("prs", ["p", "r", "s"], "q"), status="conjectured", notes="Three premises.")],

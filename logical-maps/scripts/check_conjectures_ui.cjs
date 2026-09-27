@@ -247,10 +247,22 @@ try {
   const baseline=Object.fromEntries(sections.map(id=>[id,listed(id)]));
   const baselineProgress=cd.getElementById('open-progress').textContent;
   const report=classicData.lynchpins.reports.find(r=>r.background===null);
+  const premisePair=['distinctness-necessary-r','strong-leibniz-r'];
+  const bfAlternatives=['barcan-r','converse-witnessed-possibility-r','necessary-barcan-r','necessary-distinctness-necessary-r','necessary-gallin-extensional-comprehension-r'];
+  for(const list of [report.rows,report.auto]) {
+    const matches=list.filter(r=>r.kind==='question' && JSON.stringify(r.premises)===JSON.stringify(premisePair)
+      && (r.conclusions||[r.conclusion]).some(c=>bfAlternatives.includes(c)));
+    assert.equal(matches.length,1,'ND + Strong Leibniz has one question for the equivalent BF alternatives');
+    assert.ok(bfAlternatives.every(c=>matches[0].conclusions.includes(c)));
+  }
   const rowKey=r=>r.kind==='check'?`check|${r.model}|${r.principle}`:`q|${r.premises.join('+')}|${r.conclusion}`;
   const expected=id=>{
     const hidden=new Set([...cd.querySelectorAll('#pr-filters [data-show-positive][aria-pressed="false"]')].map(b=>b.dataset.showPositive));
-    return report[id==='lynchpins'?'rows':'auto'].map(rowKey).filter(k=>!k.split(/[|+]/).some(p=>hidden.has(p))).slice(0,30);
+    return report[id==='lynchpins'?'rows':'auto'].flatMap(r=>{
+      if(r.kind==='check') return hidden.has(r.principle)?[]:[rowKey(r)];
+      const conclusion=(r.conclusions||[r.conclusion]).find(c=>!hidden.has(c));
+      return r.premises.some(p=>hidden.has(p))||!conclusion?[]:[rowKey({...r,conclusion})];
+    }).slice(0,30);
   };
   assert.ok(report.rows.length>30 && report.auto.length>30,'the export retains questions beyond the initial top 30');
   const hidden=['distinctness-schema-r','distinctness-signature-r'];

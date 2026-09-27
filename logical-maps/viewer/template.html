@@ -2540,9 +2540,12 @@ function rankedTable(rep, rows, mode = 'questions') {
   const conjectures = mode !== 'questions';
   const denies = r => mode === 'recorded' ? r.claim === 'not' : mode === 'auto' ? r.auto_claim === 'not' : false;
   const rankOf = r => mode === 'auto' ? r.auto_rank : r.rank;
+  const conclusions = r => r.conclusions?.length > 1
+    ? `<span class="equivalent-conclusions" title="Equivalent under these premises and the background">${r.conclusions.map(pb).join(' or ')}</span>`
+    : pb(r.conclusion);
   const stmt = r => r.kind === 'check'
     ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: ${pb(r.principle)}`
-    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ${denies(r) ? '⊬' : '⊢'} ${pb(r.conclusion)}`;
+    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ${denies(r) ? '⊬' : '⊢'} ${conclusions(r)}`;
   const key = r => r.kind === 'check' ? `check|${r.model}|${r.principle}` : `q|${r.premises.join('+')}|${r.conclusion}`;
   // A recorded conjecture that asks the row's question travels with it: a star says
   // someone has already worked on it, and a link opens the record. Python sets the
@@ -2566,7 +2569,12 @@ function renderLynchpins() {
   // Members of the theorem class render as ⊤, independent of their switches.
   const trivial = new Set(rep?.trivial || []);
   const shown = id => id === TRUE || id === FALSE || trivial.has(id) || literalShown(id);
-  const questionShown = r => (r.kind === 'check' ? [r.principle] : [...r.premises, r.conclusion]).every(shown);
+  const shownQuestion = r => {
+    if (r.kind === 'check') return shown(r.principle) ? r : null;
+    if (!r.premises.every(shown)) return null;
+    const conclusions = (r.conclusions || [r.conclusion]).filter(shown);
+    return conclusions.length ? {...r, conclusion: conclusions[0], conclusions} : null;
+  };
   for (const [id, key] of [['lynchpins', 'rows'], ['open-auto', 'auto'], ['open-recorded', 'recorded']]) {
     const el = document.getElementById(id); if (!el) continue;
     const body = el.querySelector('.lynchpin-body');
@@ -2581,7 +2589,7 @@ function renderLynchpins() {
     }
     if (rep.inconsistent_background) { body.innerHTML = '<p class="note">Unavailable while the background is inconsistent.</p>'; continue; }
     const eligible = key === 'recorded' ? (rep.recorded || []).filter(r => state.showResolved || !SETTLED.has(r.status)) : (rep[key] || []);
-    const matching = eligible.filter(questionShown);
+    const matching = eligible.map(shownQuestion).filter(Boolean);
     // Keep the full rankings in the export: hidden principles must not consume
     // any of the 30 places. Recorded conjectures remain an uncapped catalogue.
     const rows = key === 'recorded' ? matching : matching.slice(0, 30);

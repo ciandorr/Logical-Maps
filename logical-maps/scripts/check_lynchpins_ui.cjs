@@ -361,6 +361,42 @@ try {
   fullDoc.getElementById('pr-all').click();
   for(const [id,list] of [['lynchpins',central],['open-auto',automatic]]) assert.deepEqual(keys(full,id),list.slice(0,30).map(rowKey),'show all restores the original top 30');
 
+  // A grouped row lists interchangeable conclusions; hiding the first one must
+  // not hide the whole question, and every alternative remains clickable.
+  const claims=[conjecture('claim-r',['p','q'],'r','First route.'),conjecture('claim-s',['p','q'],'s','Second route.','gold')];
+  const alternatives={...q(['p','q'],'r',6,4),conclusions:['r','s'],rank:1,auto_rank:1,auto_claim:'not',tier:'gold',conjectures:[rec('claim-r','First route.'),rec('claim-s','Second route.','gold')]};
+  const groupedData={topic,principles,results:[rule('prs',['p','r'],'s'),rule('qsr',['q','s'],'r'),...claims],models:[],
+    lynchpins:{reports:[report([],principles.map(p=>[p.id]),[],share([],10,2),[alternatives],[alternatives],
+      claims.map((c,i)=>({...q(c.premises,c.conclusion,6,4),rank:1,claim:'entails',conjectures:[alternatives.conjectures[i]]})))]}};
+  const grouped=page(groupedData),gd=grouped.window.document;
+  show(grouped,'open');sections.forEach(id=>open(grouped,true,id));
+  const groupRow=id=>gd.querySelector(`#${id} [data-lynchpin]`);
+  assert.match(groupRow('lynchpins').textContent,/P ∧ Q ⊢ R or S/);
+  assert.match(groupRow('open-auto').textContent,/P ∧ Q ⊬ R or S/);
+  assert.equal(groupRow('lynchpins').querySelectorAll('.links button').length,2,'both records keep their details links');
+  assert.ok(groupRow('lynchpins').querySelector('.star.gold'));
+  assert.match(groupRow('lynchpins').querySelector('.equivalent-conclusions').title,/Equivalent under these premises/);
+  groupRow('lynchpins').querySelector('[data-principle="s"]').click();
+  assert.equal(gd.querySelector('#pop .pop-t').textContent,'S','the second alternative opens its principle');
+  const toggle=id=>gd.querySelector(`#pr-filters [data-show-positive="${id}"]`).click();
+  toggle('r');
+  assert.deepEqual(keys(grouped,'lynchpins'),['q|p+q|s']);
+  assert.deepEqual(keys(grouped,'open-auto'),['q|p+q|s']);
+  assert.match(groupRow('lynchpins').textContent,/P ∧ Q ⊢ S/);
+  assert.equal(groupRow('lynchpins').querySelector('[data-principle="r"]'),null);
+  assert.deepEqual(scores(grouped,'q|p+q|s'),[6,4]);
+  assert.equal(groupRow('lynchpins').querySelectorAll('.links button').length,2,'equivalent records still support the shown alternative');
+  assert.deepEqual(keys(grouped,'open-recorded'),['q|p+q|s'],'recorded claims keep their own conclusion');
+  toggle('s');
+  sections.forEach(id=>assert.deepEqual(keys(grouped,id),[],'hiding every alternative removes the question'));
+  toggle('r');toggle('s');
+  assert.equal(keys(grouped,'open-recorded').length,2,'recorded claims stay separate');
+  toggle('p');
+  sections.forEach(id=>assert.deepEqual(keys(grouped,id),[],'a hidden premise removes the whole question'));
+  toggle('p');
+  gd.querySelector('[data-source-filter="paper"]').click();
+  assert.match(groupRow('lynchpins').textContent,/P ∧ Q ⊢ R or S/,'grouping uses all proved evidence, as the ranking does');
+
   assert.deepEqual(errors,[]);
   console.log('PASS: settled share, Central Questions by the harmonic mean, Automatically Generated Conjectures stated as the answer to expect, and Conjectures in their records\' direction at their central rank, all in one format with tiered stars and a details link, collapsed and lazy, True class under a stored background, none for an ad-hoc background, sparse maps, and inconsistent backgrounds.');
 } finally {

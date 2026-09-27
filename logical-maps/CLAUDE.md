@@ -73,7 +73,11 @@ and reports unless it is asked for by name.
   its questions open), and the viewer's Conjectures tab only looks them up, so an
   ad-hoc background shows none. The viewer filters by shown principles before
   taking the top 30 central questions and automatic conjectures; recorded
-  conjectures are uncapped. The settled percentage and question count use the
+  conjectures are uncapped. Consequents provably equivalent under the same
+  premises and background share one ranked row, displayed with “or”; hidden
+  alternatives are omitted, and a group remains if any alternative is shown.
+  Grouping preserves the underlying implication scores and progress counts.
+  The settled percentage and question count use the
   same shown principles, counting stored statuses for all eligible questions.
   `check_lynchpins_ui.cjs` guards the tab.
 - `python3 scripts/pmap.py starter` — build the reusable starter ZIP. Normal

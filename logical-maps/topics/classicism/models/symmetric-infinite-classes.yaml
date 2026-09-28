@@ -7,6 +7,7 @@ satisfies:
 - necessary-barcan-r
 - no-pure-contingency-r
 - atomlessness
+- inextensible-comprehension-r
 violates:
 - transversal-r
 - actuality
@@ -51,7 +52,10 @@ description: 'A symmetric ideally-full intensional action model over one object,
   is fixed by every automorphism that fixes the pinning set of F and preserves the class, so its least
   pinning set lies inside the pinning set of F, and then its extension would be preserved by an automorphism
   that swaps the class with another. Boolean Completeness, BF and No Pure Contingency hold as in Base 1,
-  and Actuality, Relational Choice, Atomicity at type t and ND fail as there. Details in the write-up.'
+  and Actuality, Relational Choice, Atomicity at type t and ND fail as there. Inextensible Comprehension
+  holds at every relational type: the witness for X pinned down by S agrees with X at the worlds that
+  preserve the equivalence pattern on S, and is the S-hull of the extension of X elsewhere. Details in
+  the write-up.'
 notes: >-
   The first recorded model refuting Transversal, so Transversal is not a theorem of C. Since the
   coalesced roots make every pure sentence consistent with C possible, □Transversal fails there too.
@@ -59,9 +63,15 @@ notes: >-
   is a canonical representative. The mechanism is a failure of weak elimination of imaginaries: the
   class, as a definable set, has no canonical finite set of parameters. Structures with weak elimination
   of imaginaries, such as a dense linear order or the random graph, give no such failure, and in the
-  binary tree with a parent function the levels are fixed as soon as one node is. Left unknown:
-  Inextensible Comprehension, whose Base 1 argument relabels by arbitrary permutations fixing a finite
-  set, which are no longer all symmetries; the Axiom of Infinity at type e; and every signature
-  schema, since no interpretation of Σ has been fixed. Vicinity fails by derivation: Weakly Inextensible
+  binary tree with a parent function the levels are fixed as soon as one node is. Since Inextensible
+  Comprehension holds, it does not imply Transversal. Left unknown: the Axiom of Infinity at type e,
+  and every signature schema, since no interpretation of Σ has been fixed. Vicinity fails by derivation: Weakly Inextensible
   Comprehension holds, and with Vicinity it would give Actuality.
-changes: []
+changes:
+- date: '2026-09-28'
+  by: Claude Opus 5.5 (Anthropic), at Cian Dorr's request
+  summary: 'Recorded Inextensible Comprehension at every relational type. The witness for X pinned down
+    by S is X at the worlds agreeing on S with a symmetry, and the S-hull of the extension of X at the
+    others; a finitary old-image criterion shows it inextensible. Argument in the write-up; not yet checked.'
+  satisfies:
+  - inextensible-comprehension-r

@@ -240,10 +240,19 @@ try {
   const classicData=JSON.parse(fs.readFileSync(path.join(root,'build/classicism/data.json'),'utf8'));
   const classic=page(classicData);
   const cd=classic.window.document;
+  const signatureButtons=[...cd.querySelectorAll('#pr-filters [data-category="signature"] [data-show-positive]')];
+  assert.ok(signatureButtons.length>0 && signatureButtons.every(b=>b.getAttribute('aria-pressed')==='false'),'signature schemata start hidden');
+  const defaultGraph=graphMembership(classic);
   show(classic,'open');
   const sections=['lynchpins','open-auto'];
   const listed=id=>[...cd.querySelectorAll(`#${id} [data-lynchpin]`)].map(tr=>tr.dataset.lynchpin);
   sections.forEach(id=>openSection(classic,id));
+  const defaultLists=Object.fromEntries(sections.map(id=>[id,listed(id)]));
+  const defaultProgress=cd.getElementById('open-progress').textContent;
+  const signatureToggle=()=>cd.querySelector('#pr-filters [data-category="signature"] [data-category-select]');
+  assert.equal(signatureToggle().textContent,'show positive');
+  signatureToggle().click();
+  assert.ok(signatureButtons.every(b=>b.getAttribute('aria-pressed')==='true'),'the category control restores signature schemata');
   const baseline=Object.fromEntries(sections.map(id=>[id,listed(id)]));
   const baselineProgress=cd.getElementById('open-progress').textContent;
   const report=classicData.lynchpins.reports.find(r=>r.background===null);
@@ -274,16 +283,20 @@ try {
   for(const id of hidden) cd.querySelector(`#pr-filters [data-show-positive="${id}"]`).click();
   for(const id of sections) assert.deepEqual(listed(id),baseline[id],'showing the principles restores the real ranking');
   assert.equal(cd.getElementById('open-progress').textContent,baselineProgress,'showing the principles restores the percentage and count');
-  cd.querySelector('#pr-filters [data-category="signature"] [data-category-select]').click();
+  signatureToggle().click();
   for(const id of sections) {
     assert.equal(listed(id).length,30,'hiding the Σ category still gives 30 questions');
     assert.deepEqual(listed(id),expected(id),'the highest-ranked eligible questions replace hidden Σ questions');
     assert.ok(listed(id).some(k=>!baseline[id].includes(k)),'later entries fill the gaps');
+    assert.deepEqual(listed(id),defaultLists[id],'hiding signature schemata restores the initial filtered top 30');
   }
   const sigmaProgress=cd.getElementById('open-progress').textContent;
+  assert.equal(sigmaProgress,defaultProgress,'the initial percentage and count exclude signature schemata');
   assert.notEqual(sigmaProgress,baselineProgress,'the real map’s progress follows the Σ filter');
   const questionCount=text=>Number(text.match(/of ([\d,]+) questions/)[1].replaceAll(',',''));
   assert.ok(questionCount(sigmaProgress)<questionCount(baselineProgress),'hidden Σ questions are removed from the denominator');
+  show(classic,'graph');
+  assert.deepEqual(graphMembership(classic),defaultGraph,'the graph shares the default and restored signature visibility');
   assert.deepEqual(errors,[]);
   console.log('PASS: conjectures in the central-questions format, in their records\' direction with verdicts once settled, tiered stars with a details link, stable shares under source filters, shared sidebar controls, ad-hoc and incompatible backgrounds, and the silver conjecture on the real map.');
 } finally { pages.forEach(dom=>dom.window.close()); }

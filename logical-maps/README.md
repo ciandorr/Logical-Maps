@@ -251,6 +251,8 @@ meaning of `source_id`, proof status, or Lean verification. See the
 
 Optional principle categories are declared in topic order as `principle_categories: [{id, name}, ...]`. Set each principle's `category` to one of these ids. The graph sidebar groups its checkboxes with one show-or-hide control per category; these only control visibility. Topics without categories retain the flat list.
 
+A category with `hidden_by_default: true` starts hidden in the graph and conjecture lists. The usual show/hide controls can reveal it. Classicism uses this for signature schemata (Σ).
+
 Each category is collapsible in the three lists that show them: the graph sidebar, the lattice sidebar and the theory explorer. One set of open categories serves all three, so a category opened in one is open in the others. A category's summary carries its name, its count and, on the graph and the lattice, one control that acts on the whole category: **hide** while any of it is showing, **show positive** while none of it is. A closed category can therefore still be shown or hidden without opening it, and still reports how much of it is in play: how many of its principles are shown on the graph, how many are chosen on the lattice, and how many are assumed in the explorer. Categories start closed when a topic declares more than one and has more than `CATEGORY_COLLAPSE_MIN` (16) principles, and open otherwise; searching for a principle opens the category it is in.
 
 `require_sources: true` makes validation reject empty result/model sources. It is enabled for the unbounded-utility topic and new topics; the legacy example retains its existing records until its sources are audited.

@@ -932,6 +932,9 @@ const sourceColor = s => {
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
 const state = { allowed: new Set(sourceCatalog.map(s => s.id)), leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, recorded: false, auto: false, showIso: true, selected: null, modelId: null, tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set(), flipped: false };
+// Initial visibility is shared by the graph and conjecture lists.
+for (const g of principleGroups()) if (g.hidden_by_default)
+  for (const p of g.principles) state.excluded.add(p.id);
 // A handful of categories reads better open; a long list is easier to navigate
 // closed. The threshold counts the topic's own principles, not the ones a
 // reader happens to be showing.

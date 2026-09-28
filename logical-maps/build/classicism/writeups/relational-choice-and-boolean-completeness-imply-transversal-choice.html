@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Classicism — Lean files</title><link rel="icon" type="image/png" href="../favicon.png">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Relational Choice ∧ Boolean Completeness ⇒ Transversal Choice</title><link rel="icon" type="image/png" href="../favicon.png">
 <style>/* Fixed forest palette, adapted from the supplied style example.
    Semantic and source hues retain their meaning in both modes. */
 :root {
@@ -305,4 +305,25 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><h1>Lean formalisation</h1><p>0/93 principles defined; 0/257 result proofs verified; 0/32 model witnesses verified.</p><p>Definitions and generated statements describe the claims. Only completed, audited proofs receive a Lean-verified certificate. The verification report records the remaining work and the formalisation assumptions.</p><ul><li><a href="Classicism/Audit.lean">Classicism/Audit.lean</a></li><li><a href="Classicism/Axiomatization.lean">Classicism/Axiomatization.lean</a></li><li><a href="Classicism/Booleanism.lean">Classicism/Booleanism.lean</a></li><li><a href="Classicism/Check.lean">Classicism/Check.lean</a></li><li><a href="Classicism/Comprehension.lean">Classicism/Comprehension.lean</a></li><li><a href="Classicism/Core.lean">Classicism/Core.lean</a></li><li><a href="Classicism/Equivalence.lean">Classicism/Equivalence.lean</a></li><li><a href="Classicism/Identities.lean">Classicism/Identities.lean</a></li><li><a href="Classicism/Modal.lean">Classicism/Modal.lean</a></li><li><a href="Classicism/Order.lean">Classicism/Order.lean</a></li><li><a href="Classicism/Principles.lean">Classicism/Principles.lean</a></li><li><a href="Classicism/Proofs.lean">Classicism/Proofs.lean</a></li><li><a href="Classicism/Quantifier.lean">Classicism/Quantifier.lean</a></li><li><a href="Classicism/Strict.lean">Classicism/Strict.lean</a></li><li><a href="Classicism/Tautology.lean">Classicism/Tautology.lean</a></li><li><a href="Classicism/Tests.lean">Classicism/Tests.lean</a></li><li><a href="Classicism/Transform.lean">Classicism/Transform.lean</a></li><li><a href="Classicism/TypeSystem.lean">Classicism/TypeSystem.lean</a></li><li><a href="Classicism.lean">Classicism.lean</a></li><li><a href="README.md">README.md</a></li><li><a href="VERIFICATION.md">VERIFICATION.md</a></li><li><a href="lake-manifest.json">lake-manifest.json</a></li><li><a href="lakefile.toml">lakefile.toml</a></li><li><a href="lean-toolchain">lean-toolchain</a></li></ul></body></html>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Relational Choice ∧ Boolean Completeness ⇒ Transversal Choice</h1></header><p class="cert">
+Conjecture — Source: Misc.; produced by Zachary Goodsell, conjecture of 27 September 2026; recorded by Codex (OpenAI), 27 September 2026.
+</p>
+<h2 id="premises">Premises</h2>
+<ul>
+<li><strong>Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
+<li><strong>Boolean Completeness.</strong> Every property of entities of a relational type has a greatest lower bound in that type.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<p>Does adding Boolean Completeness to Relational Choice suffice for Transversal Choice in C? The question without Boolean Completeness is recorded separately. No proof was supplied. A proof of this implication, or a model of C satisfying both premises and failing Transversal Choice, would settle this conjecture.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><strong>Goodsell 27 Sep</strong> — Zachary Goodsell, conjecture communicated on 27 September 2026: Relational Choice + Boolean Completeness ⊢ Transversal Choice.</li>
+</ul>
+<p class="cert">
+Record: <code>topics/classicism/results/relational-choice-and-boolean-completeness-imply-transversal-choice.yaml</code>
+</p>
+</body></html>

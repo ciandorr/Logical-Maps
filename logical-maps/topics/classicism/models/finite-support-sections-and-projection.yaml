@@ -1,0 +1,54 @@
+id: finite-support-sections-and-projection
+name: 'Finite-support action model: N and N×2, sections and projection'
+satisfies:
+- actuality
+- necessary-actuality
+violates:
+- inextensible-comprehension-r
+- barcan-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), 27 September 2026, in a session with Cian Dorr
+  recorded_by: Claude Opus 5.5 (Anthropic), 27 September 2026
+  checked_by:
+  - Cian Dorr, informal review, 2026-09-27
+  - Christopher Sun, informal review, 2026-09-27
+  date: '2026-09-27'
+  lean: none
+sources:
+- Original construction and verification by Claude Opus 5.5 (Anthropic), 27 September 2026; see the write-up.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Definitions D.1–D.3, pp. 73–74
+  (ideally full action models); p. 79 (a two-object example of the same kind).
+source_names:
+- Claude Opus 5.5, 27 Sep
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, pp. 73–79
+  note: The ideally full finitely pinned action models over a category of sets; the construction is applied
+    here to a new two-object category.
+description: >-
+  An ideally full finitely pinned action model over a two-object category. $W_0$ has individuals $\mathbb
+  N$ and $W_1$ has individuals $\mathbb N\times\{0,1\}$. The arrows are the identity of $W_0$ (the only
+  arrow $W_0\to W_0$); the sections $f_T(n)=(n,T(n))$ for every $T:\mathbb N\to\{0,1\}$, from $W_0$ to
+  $W_1$; the projection $\pi(n,i)=n$ from $W_1$ to $W_0$; and the identity of $W_1$ with the retractions
+  $e_T:=f_T\circ\pi$ from $W_1$ to itself. They compose by $\pi\circ f_T=1$, $e_T\circ f_U=f_T$, $e_T\circ
+  e_U=e_T$ and $\pi\circ e_T=\pi$. The evaluation point is the identity of $W_0$; every world reachable
+  from it can return to it through $\pi$.
+
+
+  Actuality and □Actuality hold, but Inextensible Comprehension fails at type $e\to t$ for the universal
+  property: an inextensible property coextensive with it would have to hold, at the world $f_T$, of exactly
+  the range of $f_T$, and no finite set of individuals pins that down. See the write-up.
+notes: >-
+  Found on 27 September 2026 in answer to Cian Dorr's question whether Actuality implies Inextensible
+  Comprehension, after the observation that Christopher Sun's witness $\lambda\bar z\, .\,\Diamond(w\land
+  F\bar z)$ can fail only at worlds from which the actual world is reachable, and only through entities
+  there that are not the images of actual ones. The write-up also records a sufficient condition for Inextensible
+  Comprehension in models of this kind, which explains why every earlier model with Actuality satisfies
+  it. BF fails, as it must by BF and Actuality ⇒ Inextensible Comprehension: the property holding at the
+  identity of everything and at $f_T$ of everything except $(0,1-T(0))$ is pinned down by $\{0\}$ and
+  necessary of every individual, but it is not necessarily universal. Checked informally by Cian Dorr and
+  Christopher Sun the same day.

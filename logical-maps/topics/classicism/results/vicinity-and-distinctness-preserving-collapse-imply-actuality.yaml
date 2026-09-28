@@ -1,0 +1,32 @@
+id: vicinity-and-distinctness-preserving-collapse-imply-actuality
+premises:
+- vicinity
+- distinctness-preserving-collapse
+conclusion: actuality
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 27 September 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), 27 September 2026
+  checked_by: []
+  date: '2026-09-27'
+  lean: none
+sources:
+- Cian Dorr, observation of 27 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 42 (the distinctness-preserving
+  modality); Appendix E, p. 83.
+source_names:
+- Dorr 27 Sep
+- Classicism
+proof: >-
+  Let $w$ witness Vicinity; we show that $w$ itself witnesses Actuality. Let $p$ be true. Distinctness-preserving
+  collapse gives $\Box_{\ne}p$, that is, a true $q$ with $\Box(\Diamond q\to p)$, i.e. $\Diamond q\le p$.
+  Since $q$ is true, Vicinity gives $w\le\Diamond q$. So $w\le p$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.6, p. 42; Appendix E, p. 83
+  note: Definition of $\Box_{\ne}$ and formulation of Distinctness-preserving collapse.
+notes: >-
+  The witness is the same proposition. With Actuality ⇒ Vicinity, Actuality is equivalent to Vicinity
+  under Distinctness-preserving collapse, as it is under Weakly Inextensible Comprehension.

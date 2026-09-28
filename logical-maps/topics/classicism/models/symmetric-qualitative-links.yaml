@@ -9,6 +9,7 @@ satisfies:
 - axiom-of-infinity-e
 - axiom-of-infinity-t
 - distinctness-preserving-collapse
+- barcan-r
 violates:
 - rigid-comprehension-r
 - distinctness-necessary-r
@@ -19,6 +20,7 @@ violates:
 - no-contingency-signature-r
 - signature-b-r
 - relational-choice-r
+- atomicity-t
 status: proved
 certificate:
   source_id: dorr-bc-not-rc
@@ -61,45 +63,75 @@ description: 'A symmetric ideally-full intensional action model over one object 
   collapsing the pair, its extension shrinks to a two-element fibre, and the union of the two haecceities
   of that fibre is persistent with the same extension there while being strictly stronger, because some
   arrow merges the two companions. So the rigidity criterion fails at that world.'
-notes: 'This is the draft''s answer to the question its two-object model leaves open. Boxed Boolean Completeness,
-  boxed Actuality and the boxed type-e instance of BF all hold, and Rigid Comprehension still fails, so
-  the obstruction need not live at a world where BF fails; it can live inside a qualitative fibre that
-  BF at type e cannot see. The map has no separate principle for the type-e instance of BF, and the draft
-  leaves the higher-type instances unchecked, so the BF schema is recorded as unknown here. The draft
-  also asserts that Atomicity fails, as in the collapse-pair model, but does not write the argument out,
-  so that too is left unknown; note that the recorded implication from boxed Atomicity, Boolean Completeness
-  and BF to Rigid Comprehension means one of those two unknowns has to come out negative. ND fails at
-  type e because the collapsing arrows are arrows. The source is a work in progress, and its own status
-  note describes this section as exploratory though complete for the claims recorded here. Interpretation
-  of Σ, fixed for this record: one designated relational constant $c$ of type $\tau=\bar\sigma t$ denotes
-  $\lambda\bar x\, .\,a$, where $a$ is the unique true atom of the model, the actual-world proposition
-  described above; every other relational constant denotes the top element of its type and every individual
-  constant one fixed individual. Under it: No Contingency (signature Σ) fails, since the Σ-sentence $\forall\bar
-  x\, .\,c\bar x$ denotes $a$, true and contingent; B for sentences of Σ fails, since under any arrow
-  that no arrow composes back into $a$, $\Diamond a$ is false, so $\Box\Diamond a$ fails; Witnessed Possibility
-  fails for the pure formula $x=\top_\tau$, witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is
-  $\Diamond\Box a$ and $a$ is necessary at no arrow; Separated Structure fails with it, being equivalent
-  to Possibly Witnessed Possibility; Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through
-  the other relational constants, Σ being assumed to contain at least one: such a constant $c''$ of type
-  $\tau''$ denotes what the closed pure term $\top_{\tau''}$ denotes, and $c''=\top_{\tau''}$ is a true
-  identity that C(Σ) does not prove. The designated constant refutes neither: closed pure terms denote
-  entities fixed by every arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity,
-  so no closed pure term denotes $\lambda\bar x\, .\,a$. Everything that implies these fails with them.
-  Relational Choice fails, at the types $(e\to t)$ and $e$. Let $U:=\lambda Xy\, .\,Xy\lor\neg\exists
-  z\, .\,Xz$, a closed term, hence in the domain, and serial. A functional subrelation $S$ of $U$ would
-  lie in the domain at the evaluation object, so it is symmetric and pinned down by a finite set $N$.
-  Two facts about such an $S$ (Dorr, draft, Lemma 21): every $g\in G$ fixing $N$ pointwise satisfies $g^{[\sigma]}S=S$,
-  and symmetry gives $\langle gA,gy,g\rangle\in S$ whenever $\langle A,y,1\rangle\in S$; together, $\langle
-  gA,gy,1\rangle\in S$. Now let $A$ be the property of being a link not in $N$ (links are carried to links
-  by every member of $G$, whose inverse is again $R$-preserving). It is in the domain, being pinned down
-  by that finite set and symmetric, and its extension is nonempty, so $S$ relates $A$ at the identity
-  to some $y$ in its extension. The chosen $y$ is a link $\langle m,n,k\rangle$; the transposition of
-  $y$ with a link $\langle m,n,k^{\prime}\rangle\notin N$, which exists since the fibre is infinite, preserves
-  $R$ and fixes every point, so lies in $G$, fixes $A$ and moves $y$ to some $gy\ne y$, so $S$ relates
-  $A$ to $gy$ as well, and $S$ is not functional at the identity arrow. Argument of 23 September 2026,
-  after Cian Dorr’s observation that a choice over the individuals cannot be finitely pinned down; the
-  well-ordering of the individuals that he had in mind is refuted by the same two facts, but the direct
-  route needs no derivation of a well-ordering from Relational Choice in C.'
+notes: >-
+  This is the draft's answer to the question its two-object model leaves open. Boxed Boolean
+  Completeness, boxed Actuality and the boxed type-e instance of BF all hold, and Rigid Comprehension
+  still fails, so the obstruction need not live at a world where BF fails; it can live inside a
+  qualitative fibre that BF at type e cannot see.
+
+  BF holds at every type, and with it □BF. Only the surjectivity of the arrows is used, by the argument
+  recorded for the all-surjections model (symmetric-all-surjections). Let B be an entity at the target
+  of an arrow $i$, pinned down by the finite set $M$, and choose a finite set $P$ with a map $s:M\to P$
+  such that $i\circ s$ is the identity on $M$, possible because $i$ is surjective. Put $A:=\{\langle\bar
+  x,j\rangle : \langle\bar x,k\rangle\in B$ for some arrow $k$ with $k|_M=j\circ s\}$. This is well
+  defined because $B$ is pinned down by $M$. It is pinned down by $P$ and symmetric, since $B$ is. And
+  $i\cdot A=B$: $\langle\bar x,k\rangle\in i\cdot A$ iff $\langle\bar x,k\circ i\rangle\in A$ iff
+  $\langle\bar x,k'\rangle\in B$ for some $k'$ with $k'|_M=k|_M$, iff $\langle\bar x,k\rangle\in B$. So
+  every entity at every world is the transport of an entity at the evaluation point, and a relation that
+  is necessarily true of every entity is necessarily true of all of them. The necessitation is the
+  one-object observation. This settles the draft's open comment on higher-type BF.
+
+  Atomicity fails at type $t$, confirming the draft's unwritten claim, by the splitting argument it
+  indicates. The proposition $C:=\{h : h0=h1\}$ of the collapsing arrows is nonzero, symmetric and
+  pinned down by $\{0,1\}$. Suppose $q\le C$ is nonzero and pinned down by a finite $N$, and take $h\in
+  q$. Enlarge $N$ to its closure in the draft's sense, which includes $0$ and $1$, and choose a point
+  $m$ outside it. The draft's extension step (proof of its Proposition 50) extends any $R$-coherent
+  prescription on a closed finite set that merges $0$ with $1$ to a collapsing arrow. So there are
+  arrows $k_1,k_2$ agreeing with $h$ on $N$ with $k_1m=k_1 0$ and $k_2m\ne k_2 0$: prescribe $h$ on the
+  closure of $N$, send $m$ to $h0$ or to a fresh point, and send its companions to companions of its
+  image. Both lie in $q$. The proposition $\{k : km=k0\}$ is symmetric and pinned down by $\{0,m\}$, and
+  it contains $k_1$ but not $k_2$, so $q$ is not an atom. So nothing below $C$ is an atom. With No Pure
+  Contingency, □Atomicity fails too, as the recorded implication from □Atomicity, Boolean Completeness
+  and BF to Rigid Comprehension requires, BF being now established. Both verdicts were worked out by
+  Claude Opus 5.5 (Anthropic), 27 September 2026, at Cian Dorr's request.
+
+  With these verdicts the model is the map's witness that Boolean Completeness, □BF and □Actuality,
+  together with Weak Rigid Comprehension, do not imply Rigid Comprehension. That was the draft's aim for
+  this section.
+
+  ND fails at type e because the collapsing arrows are arrows. The source is a work in progress, and its
+  own status note describes this section as exploratory though complete for the claims recorded here.
+  Interpretation of Σ, fixed for this record: one designated relational constant $c$ of type
+  $\tau=\bar\sigma t$ denotes $\lambda\bar x\, .\,a$, where $a$ is the unique true atom of the model,
+  the actual-world proposition described above; every other relational constant denotes the top element
+  of its type and every individual constant one fixed individual. Under it: No Contingency (signature Σ)
+  fails, since the Σ-sentence $\forall\bar x\, .\,c\bar x$ denotes $a$, true and contingent; B for
+  sentences of Σ fails, since under any arrow that no arrow composes back into $a$, $\Diamond a$ is
+  false, so $\Box\Diamond a$ fails; Witnessed Possibility fails for the pure formula $x=\top_\tau$,
+  witnessed by $\top_\tau$, since $\Diamond(c=\top_\tau)$ is $\Diamond\Box a$ and $a$ is necessary at no
+  arrow; Separated Structure fails with it, being equivalent to Possibly Witnessed Possibility;
+  Independence (signature Σ) and Distinctness Maximalism (signature Σ) fail through the other relational
+  constants, Σ being assumed to contain at least one: such a constant $c'$ of type $\tau'$ denotes what
+  the closed pure term $\top_{\tau'}$ denotes, and $c'=\top_{\tau'}$ is a true identity that C(Σ) does
+  not prove. The designated constant refutes neither: closed pure terms denote entities fixed by every
+  arrow (Classicism, §3.5, p. 58), whereas $a$ is fixed by no arrow but the identity, so no closed pure
+  term denotes $\lambda\bar x\, .\,a$. Everything that implies these fails with them. Relational Choice
+  fails, at the types $(e\to t)$ and $e$. Let $U:=\lambda Xy\, .\,Xy\lor\neg\exists z\, .\,Xz$, a closed
+  term, hence in the domain, and serial. A functional subrelation $S$ of $U$ would lie in the domain at
+  the evaluation object, so it is symmetric and pinned down by a finite set $N$. Two facts about such an
+  $S$ (Dorr, draft, Lemma 21): every $g\in G$ fixing $N$ pointwise satisfies $g^{[\sigma]}S=S$, and
+  symmetry gives $\langle gA,gy,g\rangle\in S$ whenever $\langle A,y,1\rangle\in S$; together, $\langle
+  gA,gy,1\rangle\in S$. Now let $A$ be the property of being a link not in $N$ (links are carried to
+  links by every member of $G$, whose inverse is again $R$-preserving). It is in the domain, being
+  pinned down by that finite set and symmetric, and its extension is nonempty, so $S$ relates $A$ at the
+  identity to some $y$ in its extension. The chosen $y$ is a link $\langle m,n,k\rangle$; the
+  transposition of $y$ with a link $\langle m,n,k^{\prime}\rangle\notin N$, which exists since the fibre
+  is infinite, preserves $R$ and fixes every point, so lies in $G$, fixes $A$ and moves $y$ to some
+  $gy\ne y$, so $S$ relates $A$ to $gy$ as well, and $S$ is not functional at the identity arrow.
+  Argument of 23 September 2026, after Cian Dorr’s observation that a choice over the individuals cannot
+  be finitely pinned down; the well-ordering of the individuals that he had in mind is refuted by the
+  same two facts, but the direct route needs no derivation of a well-ordering from Relational Choice in
+  C.
 changes:
 - date: '2026-09-20'
   by: Claude Fable 5.1 (Anthropic)
@@ -152,3 +184,12 @@ changes:
     a map that collapses the distinguished pair is injective. So every truth is $\Box_{\ne}$-necessary.'
   satisfies:
   - distinctness-preserving-collapse
+- date: '2026-09-27'
+  by: Claude Opus 5.5 (Anthropic), at Cian Dorr's request
+  summary: 'Recorded BF at every type, by pulling any finitely pinned symmetric entity back along a surjective
+    arrow, and the failure of Atomicity at type t, by splitting any finitely pinned proposition below the
+    collapsers on whether a fresh point is merged with 0. Replaces the note that left both unknown.'
+  satisfies:
+  - barcan-r
+  violates:
+  - atomicity-t

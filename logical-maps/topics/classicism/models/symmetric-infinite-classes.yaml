@@ -1,0 +1,67 @@
+id: symmetric-infinite-classes
+name: 'Symmetric ideally-full model: automorphisms of infinitely many infinite classes'
+satisfies:
+- boolean-completeness-r
+- necessary-boolean-completeness-r
+- barcan-r
+- necessary-barcan-r
+- no-pure-contingency-r
+- atomlessness
+violates:
+- transversal-r
+- actuality
+- relational-choice-r
+- atomicity-t
+- distinctness-necessary-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 27 September 2026 (the idea of a symmetric finitely pinned model whose symmetry
+    group is the automorphism group of a rich qualitative structure, in which each new pinned point makes
+    new infinite-coinfinite extensions available), with Claude Opus 5.5 (Anthropic), who chose the structure
+    and wrote the verification
+  recorded_by: Claude Opus 5.5 (Anthropic), 28 September 2026
+  checked_by: []
+  date: '2026-09-27'
+  lean: none
+sources:
+- Cian Dorr, construction idea of 27 September 2026, with Claude Opus 5.5 (Anthropic); verification in
+  the write-up.
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §3 (symmetric
+  ideally-full models); Lemma 21, p. 10; Proposition 22, p. 11; Theorem 36, p. 18.
+source_names:
+- Dorr 27 Sep
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: §3; Lemma 21, p. 10; Proposition 22, p. 11; Theorem 36, p. 18
+  note: The framework of symmetric ideally-full models, which are models of C for every base, and the
+    lemmas and Boolean Completeness theorem used in the verification.
+description: 'A symmetric ideally-full intensional action model over one object, the set of natural numbers,
+  equipped with an equivalence relation that has infinitely many classes, each infinite. Its arrows are
+  all the surjections of that set, as in Base 1 of the draft, and its symmetry group is the automorphism
+  group of the equivalence relation: the permutations that map classes onto classes. The evaluation point
+  is the identity arrow.
+
+
+  Transversal fails at type e. The class of a fixed individual is the extension of a property pinned down
+  by that individual. A classifier F pinned down by a finite set cannot choose a representative for the
+  class of an individual in a class disjoint from that set: by symmetry and uniqueness the representative
+  is fixed by every automorphism that fixes the pinning set of F and preserves the class, so its least
+  pinning set lies inside the pinning set of F, and then its extension would be preserved by an automorphism
+  that swaps the class with another. Boolean Completeness, BF and No Pure Contingency hold as in Base 1,
+  and Actuality, Relational Choice, Atomicity at type t and ND fail as there. Details in the write-up.'
+notes: >-
+  The first recorded model refuting Transversal, so Transversal is not a theorem of C. Since the
+  coalesced roots make every pure sentence consistent with C possible, □Transversal fails there too.
+  The classes must be infinite: with finite classes, being identical to one of the members of a class
+  is a canonical representative. The mechanism is a failure of weak elimination of imaginaries: the
+  class, as a definable set, has no canonical finite set of parameters. Structures with weak elimination
+  of imaginaries, such as a dense linear order or the random graph, give no such failure, and in the
+  binary tree with a parent function the levels are fixed as soon as one node is. Left unknown:
+  Inextensible Comprehension, whose Base 1 argument relabels by arbitrary permutations fixing a finite
+  set, which are no longer all symmetries; the Axiom of Infinity at type e; and every signature
+  schema, since no interpretation of Σ has been fixed. Vicinity fails by derivation: Weakly Inextensible
+  Comprehension holds, and with Vicinity it would give Actuality.
+changes: []

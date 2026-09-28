@@ -1,0 +1,24 @@
+id: transversal-choice-r-implies-transversal-r
+premises:
+- transversal-choice-r
+conclusion: transversal-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Christopher Sun, 26 September 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), 28 September 2026
+  checked_by: []
+  date: '2026-09-26'
+  lean: none
+sources:
+- Christopher Sun, 26 September 2026.
+source_names:
+- Sun 26 Sep
+proof: >-
+  Fix $\sigma$. Coextensiveness, $(\approx X)Y:=\forall z^\sigma\, .\,Xz\leftrightarrow Yz$, is a closed
+  relation of type $(\sigma t)(\sigma t)t$, and it is an equivalence relation by propositional logic.
+  Transversal Choice at type $\sigma t$ gives $F^{(\sigma t)t}$ with exactly one instance in each cell of
+  $\approx$. The cell of $X$ is the set of properties coextensive with $X$, so for each $X$ there is exactly
+  one $Y$ with $FY$ coextensive with $X$. This is Transversal at $\sigma$.
+references: []
+notes: Only the instance of Transversal Choice at type $\sigma\to t$ is used for Transversal at $\sigma$.

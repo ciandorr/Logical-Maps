@@ -1,0 +1,39 @@
+id: actuality-implies-transversal
+premises:
+- actuality
+conclusion: transversal-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Christopher Sun (the claim and the witness), 26 September 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), 28 September 2026
+  checked_by: []
+  date: '2026-09-26'
+  lean: none
+sources:
+- Christopher Sun, 26 September 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §1.5, p. 16 (Intensionality).
+source_names:
+- Sun 26 Sep
+- Classicism
+proof: >-
+  Let $w$ witness Actuality: $w$ is true and $w\le q$ for every true $q$. Fix $\sigma$ and put
+  $FY:=\Box\forall z^\sigma\, .\,Yz\to w$, the property of being a property that can be instantiated only
+  if $w$ obtains. Existence: given $X$, let $Y:=\lambda z\, .\,Xz\land w$. Since $w$ is true, $Y$ is
+  coextensive with $X$, and $FY$ holds because $\forall z\, .\,(Xz\land w)\to w$ is a theorem, hence
+  necessary. Uniqueness: let $Y_1$ and $Y_2$ satisfy $F$ and be coextensive with $X$. Then
+  $\forall z\, .\,Y_1z\leftrightarrow Y_2z$ is true, so Actuality gives $\Box(w\to\forall z\, .\,Y_1z\leftrightarrow
+  Y_2z)$. Together with $\Box\forall z\, .\,Y_1z\to w$ and $\Box\forall z\, .\,Y_2z\to w$, K gives
+  $\Box\forall z\, .\,Y_1z\leftrightarrow Y_2z$: at any $z$, if either side holds then $w$ does, and then
+  the two sides agree. Necessarily coextensive properties are identical in C (Intensionality), so
+  $Y_1=Y_2$.
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §1.5, p. 16
+  note: Intensionality, the identity of necessarily coextensive relations.
+notes: >-
+  Two coextensive $F$-properties are necessarily coextensive. The dual witness
+  $FY:=\Box\forall z\, .\,w\lor Yz$, with representative $\lambda z\, .\,Xz\lor\neg w$, works equally
+  well. With Transversal and Relational Choice implying Transversal Choice, Actuality and Relational Choice
+  together imply Transversal Choice.

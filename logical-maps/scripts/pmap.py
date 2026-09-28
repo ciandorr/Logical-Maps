@@ -891,8 +891,9 @@ class Lynchpins:
         r["score"] = round(2 * r["yes"] * r["no"] / (r["yes"] + r["no"]), 1) if r["yes"] + r["no"] else 0.0
 
     def _group_questions(self, rows):
-        """Same premises, and conclusions equivalent under them and the background.
+        """Equivalent premises, and conclusions equivalent under those premises.
 
+        cl(S) = cl(T) exactly when the premise sets entail each other in the background.
         cl(S + c) = cl(S + d) exactly when each conclusion entails the other given S.
         Scores alone are not evidence of equivalence. Model checks stay separate.
         """
@@ -901,7 +902,7 @@ class Lynchpins:
             if r["kind"] == "question":
                 S = tuple(r["premises"])
                 F = self.sets[self.set_index[S]][2]
-                key = ("question", S, self._ext(F, r["conclusion"]))
+                key = ("question", F, self._ext(F, r["conclusion"]))
             else:
                 key = ("check", r["model"], r["principle"])
             groups.setdefault(key, []).append(r)
@@ -912,7 +913,12 @@ class Lynchpins:
         if len(group) == 1:
             return group[0]
         row = dict(group[0])
-        row["conclusions"] = [r["conclusion"] for r in group]
+        premise_sets = list(dict.fromkeys(tuple(r["premises"]) for r in group))
+        conclusions = list(dict.fromkeys(r["conclusion"] for r in group))
+        if len(premise_sets) > 1:
+            row["premise_sets"] = [list(S) for S in premise_sets]
+        if len(conclusions) > 1:
+            row["conclusions"] = conclusions
         records = {(c["kind"], c["id"]): c for r in group for c in r.get("conjectures", [])}
         if records:
             row["conjectures"] = list(records.values())
@@ -923,8 +929,8 @@ class Lynchpins:
 
     def rank(self, top: int | None = 50, score_all: bool = True) -> dict:
         """The open questions and model checks scored for both answers, in two orders, and the
-        questions recorded conjectures ask. Equivalent conclusions under the same premises
-        share a ranked row. With top=None, retain every ranked group.
+        questions recorded conjectures ask. Equivalent premise sets and conditionally equivalent
+        conclusions share a ranked row. With top=None, retain every ranked group.
 
         The central questions are ranked by the harmonic mean of the two scores: if each answer is
         as likely as the map leaves room for it, inversely to how much it would settle, that is the
@@ -1048,8 +1054,13 @@ def lynchpin_row_text(r: dict, nm, conjecture: bool = False, auto: bool = False)
     star = f" ★ {r['tier']}" if r.get("tier") else ""
     claim = r.get("auto_claim") if auto else r.get("claim") if conjecture else None
     turnstile = "⊬" if claim == "not" else "⊢"
+    premise_sets = r.get("premise_sets", [r["premises"]])
+    antecedents = []
+    for S in premise_sets:
+        text = ' ∧ '.join(nm(x) for x in S) or '⊤'
+        antecedents.append(f"({text})" if len(premise_sets) > 1 and len(S) > 1 else text)
     conclusions = ' or '.join(nm(c) for c in r.get("conclusions", [r["conclusion"]]))
-    return f"{' ∧ '.join(nm(x) for x in r['premises']) or '⊤'} {turnstile} {conclusions}{star}"
+    return f"{' or '.join(antecedents)} {turnstile} {conclusions}{star}"
 
 
 def lynchpin_scores(r: dict) -> tuple:
@@ -3009,6 +3020,48 @@ def selftest():
     assert Lc.rank(top=2)["rows"] == grouped["rows"][:2], "limit after grouping, including cached calls"
     one_way = Lynchpins({**conditional, "results": [conditional["results"][0]]}).rank(top=None)
     assert all("conclusions" not in r for r in one_way["rows"]), "one-way implication is not equivalence"
+    # Equivalent conjunctions and a single principle share a row, on both sides at once.
+    antecedent_data = {"topic": {"background": []}, "principles": [P(x) for x in "pqrsucde"],
+                       "results": [R("pqu", ["p", "q"], "u"), R("rsu", ["r", "s"], "u"),
+                                   *[R("u" + x, ["u"], x) for x in "pqrs"],
+                                   R("ucd", ["u", "c"], "d"), R("udc", ["u", "d"], "c"), R("eu", ["e"], "u"),
+                                   dict(R("ue", ["u"], "e"), status="conjectured"),
+                                   dict(R("pqc", ["p", "q"], "c"), status="conjectured", notes="Pair route."),
+                                   dict(R("ud", ["u"], "d"), status="conjectured", notes="Single route.", tier="silver")],
+                       "models": []}
+    La = Lynchpins(antecedent_data)
+    antecedents = La.rank(top=None)
+    expected_sets = {("p", "q"), ("r", "s"), ("u",)}
+    for key, rank_key in (("rows", "rank"), ("auto", "auto_rank")):
+        groups = antecedents[key]
+        matches = [r for r in groups if ["u"] in r.get("premise_sets", [r["premises"]])
+                   and "c" in r.get("conclusions", [r["conclusion"]])]
+        assert len(matches) == 1
+        row = matches[0]
+        assert set(map(tuple, row["premise_sets"])) == expected_sets and row["conclusions"] == ["c", "d"]
+        assert {c["id"] for c in row["conjectures"]} == {"pqc", "ud"} and row["tier"] == "silver"
+        assert lynchpin_row_text(row, lambda x: x).startswith("(p ∧ q) or (r ∧ s) or u ⊢ c or d")
+        assert [r[rank_key] for r in groups] == list(range(1, len(groups) + 1))
+        consistency = [r for r in groups if r["conclusion"] == FALSE and ["u"] in r.get("premise_sets", [r["premises"]])]
+        assert len(consistency) == 1 and set(map(tuple, consistency[0]["premise_sets"])) == expected_sets
+        assert any(r["premises"] == ["e"] and "c" in r.get("conclusions", [r["conclusion"]]) for r in groups), "one-way or conjectured antecedent links do not merge questions"
+    for group in La._ranked:
+        assert len({(r["yes"], r["no"]) for r in group}) == 1
+        summary = La._group_summary(group)
+        assert {(tuple(r["premises"]), r["conclusion"]) for r in group} == {
+            (tuple(S), c) for S in summary.get("premise_sets", [summary["premises"]])
+            for c in summary.get("conclusions", [summary["conclusion"]])}, "all displayed premise/conclusion combinations are open members"
+    rec_routes = [r for r in antecedents["recorded"] if any(c["id"] in ("pqc", "ud") for c in r["conjectures"])]
+    assert {tuple(r["premises"]) for r in rec_routes} == {("p", "q"), ("u",)} and len({r["rank"] for r in rec_routes}) == 1
+    assert all("premise_sets" not in r and "conclusions" not in r for r in rec_routes), "recorded claims keep their own premises and conclusion"
+    assert La.rank(top=2)["rows"] == antecedents["rows"][:2], "equivalent antecedents consume one rank before the limit"
+    # A premise equivalence requiring an extra background assumption is local to that background.
+    local_antecedents = {"topic": {"background": []}, "principles": [P(x) for x in "bpquc"],
+                        "results": [R("bpqu", ["b", "p", "q"], "u"), R("up", ["u"], "p"), R("uq", ["u"], "q")], "models": []}
+    for background, expect_group in (([], False), (["b"], True)):
+        ranked = Lynchpins(local_antecedents, background).rank(top=None)["rows"]
+        assert any({("p", "q"), ("u",)} <= set(map(tuple, r.get("premise_sets", [r["premises"]])))
+                   and r["conclusion"] == "c" for r in ranked) == expect_group
     # A settled question and one with more than two premises are listed without rank or scores.
     more = {**noted, "results": [*noted["results"], dict(R("pq2", ["p"], "q"), status="conjectured", notes="Long proved."),
                                   dict(R("prs", ["p", "r", "s"], "q"), status="conjectured", notes="Three premises.")],

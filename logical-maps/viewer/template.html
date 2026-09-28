@@ -2540,12 +2540,16 @@ function rankedTable(rep, rows, mode = 'questions') {
   const conjectures = mode !== 'questions';
   const denies = r => mode === 'recorded' ? r.claim === 'not' : mode === 'auto' ? r.auto_claim === 'not' : false;
   const rankOf = r => mode === 'auto' ? r.auto_rank : r.rank;
+  const premiseText = S => S.map(pb).join(' ∧ ') || esc(name(TRUE));
+  const premises = r => r.premise_sets?.length > 1
+    ? `<span class="equivalent-premises" title="Equivalent under the background">${r.premise_sets.map(S => S.length > 1 ? `(${premiseText(S)})` : premiseText(S)).join(' or ')}</span>`
+    : premiseText(r.premises);
   const conclusions = r => r.conclusions?.length > 1
     ? `<span class="equivalent-conclusions" title="Equivalent under these premises and the background">${r.conclusions.map(pb).join(' or ')}</span>`
     : pb(r.conclusion);
   const stmt = r => r.kind === 'check'
     ? `<button class="lnk" data-model="${esc(r.model)}">${esc(byMid.get(r.model)?.name || r.model)}</button>: ${pb(r.principle)}`
-    : `${r.premises.map(pb).join(' ∧ ') || esc(name(TRUE))} ${denies(r) ? '⊬' : '⊢'} ${conclusions(r)}`;
+    : `${premises(r)} ${denies(r) ? '⊬' : '⊢'} ${conclusions(r)}`;
   const key = r => r.kind === 'check' ? `check|${r.model}|${r.principle}` : `q|${r.premises.join('+')}|${r.conclusion}`;
   // A recorded conjecture that asks the row's question travels with it: a star says
   // someone has already worked on it, and a link opens the record. Python sets the
@@ -2571,9 +2575,10 @@ function renderLynchpins() {
   const shown = id => id === TRUE || id === FALSE || trivial.has(id) || literalShown(id);
   const shownQuestion = r => {
     if (r.kind === 'check') return shown(r.principle) ? r : null;
-    if (!r.premises.every(shown)) return null;
+    const premise_sets = (r.premise_sets || [r.premises]).filter(S => S.every(shown));
+    if (!premise_sets.length) return null;
     const conclusions = (r.conclusions || [r.conclusion]).filter(shown);
-    return conclusions.length ? {...r, conclusion: conclusions[0], conclusions} : null;
+    return conclusions.length ? {...r, premises: premise_sets[0], premise_sets, conclusion: conclusions[0], conclusions} : null;
   };
   for (const [id, key] of [['lynchpins', 'rows'], ['open-auto', 'auto'], ['open-recorded', 'recorded']]) {
     const el = document.getElementById(id); if (!el) continue;

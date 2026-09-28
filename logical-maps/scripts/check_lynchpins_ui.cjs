@@ -397,6 +397,46 @@ try {
   gd.querySelector('[data-source-filter="paper"]').click();
   assert.match(groupRow('lynchpins').textContent,/P ∧ Q ⊢ R or S/,'grouping uses all proved evidence, as the ranking does');
 
+  // Equivalent premise combinations remain whole when filtered, independently
+  // of the equivalent conclusions. Original recorded claims stay separate.
+  const ap=['p','q','r','s','u','c','d'].map(id=>({id,name:id.toUpperCase(),statement:`Principle ${id}`,category:'basic'}));
+  const ac=[conjecture('pqc',['p','q'],'c','Pair route.'),conjecture('ud',['u'],'d','Single route.','silver')];
+  const ar={...q(['p','q'],'c',9,6),premise_sets:[['p','q'],['r','s'],['u']],conclusions:['c','d'],rank:1,auto_rank:1,auto_claim:'not',tier:'silver',conjectures:[rec('pqc','Pair route.'),rec('ud','Single route.','silver')]};
+  const adata={topic,principles:ap,results:[rule('pqu',['p','q'],'u'),rule('rsu',['r','s'],'u'),
+    ...['p','q','r','s'].map(p=>rule('u'+p,['u'],p)),rule('ucd',['u','c'],'d'),rule('udc',['u','d'],'c'),...ac],models:[],
+    lynchpins:{reports:[report([],ap.map(p=>[p.id]),[],share([],10,2),[ar],[ar],
+      ac.map((c,i)=>({...q(c.premises,c.conclusion,9,6),rank:1,claim:'entails',conjectures:[ar.conjectures[i]]})))]}};
+  const antecedents=page(adata),ad=antecedents.window.document;
+  show(antecedents,'open');sections.forEach(id=>open(antecedents,true,id));
+  const astmt=id=>ad.querySelector(`#${id} td.stmt`);
+  assert.match(astmt('lynchpins').textContent,/\(P ∧ Q\) or \(R ∧ S\) or U ⊢ C or D/);
+  assert.match(astmt('open-auto').textContent,/\(P ∧ Q\) or \(R ∧ S\) or U ⊬ C or D/);
+  assert.match(astmt('lynchpins').querySelector('.equivalent-premises').title,/Equivalent under the background/);
+  astmt('lynchpins').querySelector('[data-principle="r"]').click();
+  assert.equal(ad.querySelector('#pop .pop-t').textContent,'R','an alternative premise is clickable');
+  const atoggle=id=>ad.querySelector(`#pr-filters [data-show-positive="${id}"]`).click();
+  atoggle('p');
+  assert.match(astmt('lynchpins').textContent,/\(R ∧ S\) or U ⊢ C or D/);
+  assert.equal(astmt('lynchpins').querySelector('[data-principle="q"]'),null,'a partly hidden conjunction is removed in full');
+  for(const id of ['lynchpins','open-auto']) assert.deepEqual(keys(antecedents,id),['q|r+s|c']);
+  assert.deepEqual(keys(antecedents,'open-recorded'),['q|u|d'],'recorded claims keep their own antecedent');
+  atoggle('r');
+  assert.match(astmt('lynchpins').textContent,/U ⊢ C or D/);
+  atoggle('u');
+  sections.forEach(id=>assert.deepEqual(keys(antecedents,id),[],'no complete shown premise combination remains'));
+  atoggle('p');
+  assert.match(astmt('lynchpins').textContent,/P ∧ Q ⊢ C or D/);
+  atoggle('q');
+  assert.deepEqual(keys(antecedents,'lynchpins'),[],'shown fragments of different combinations cannot be combined');
+  atoggle('q');atoggle('r');atoggle('u');atoggle('c');
+  assert.match(astmt('lynchpins').textContent,/\(P ∧ Q\) or \(R ∧ S\) or U ⊢ D/);
+  assert.deepEqual(scores(antecedents,'q|p+q|d'),[9,6]);
+  assert.equal(astmt('lynchpins').querySelectorAll('.links button').length,2,'both equivalent routes keep their evidence links');
+  atoggle('d');
+  sections.forEach(id=>assert.deepEqual(keys(antecedents,id),[]));
+  atoggle('c');atoggle('d');
+  assert.deepEqual(keys(antecedents,'open-recorded'),['q|p+q|c','q|u|d']);
+
   assert.deepEqual(errors,[]);
   console.log('PASS: settled share, Central Questions by the harmonic mean, Automatically Generated Conjectures stated as the answer to expect, and Conjectures in their records\' direction at their central rank, all in one format with tiered stars and a details link, collapsed and lazy, True class under a stored background, none for an ad-hoc background, sparse maps, and inconsistent backgrounds.');
 } finally {

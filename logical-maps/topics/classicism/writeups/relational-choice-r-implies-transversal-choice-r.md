@@ -50,7 +50,7 @@ the stages are not linearly ordered by inclusion.
   those canonical properties gives the transversal
   (`relational-choice-and-very-weak-rigid-comprehension-imply-transversal-choice`).
 - Through recorded arrows, therefore also Gallin comprehension with BF, C5
-  with Actuality, boxed Atomicity with Boolean Completeness and BF, and boxed
+  with Actuality, and boxed
   Functional Choice.
 
 Conversely Transversal Choice implies Relational Choice over C, by rigid

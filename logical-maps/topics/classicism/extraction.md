@@ -54,7 +54,8 @@ made that the source authors regarded them as conjectures.
 
 The formalized statement of Proposition 2.15 uses the intended second
 disjunct with the output variable equal to top; its record identifies the
-printed variable typo. In Proposition 2.11's proof, Actuality is obtained
+printed variable typo. Proposition 2.11 is recorded as a conjecture since 28 September 2026: the
+proof in note 42 has two gaps (see the record). In that proof, Actuality is obtained
 from Proposition 2.7; note 42's reference to Proposition 2.6 would require
 an extra C5 premise. The question in note 93 about BF + Atomicity without
 Actuality is not imported as open: Proposition 2.7 already rules it out.

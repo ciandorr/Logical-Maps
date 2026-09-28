@@ -1,0 +1,26 @@
+id: modalized-plenitude-r
+name: Modalized Plenitude
+category: choice
+statement: >-
+  If necessarily each argument has a value that is necessarily the relation's unique value for it,
+  then some operation necessarily represents the relation. Its output type is relational, as required
+  by the type system.
+formal: >-
+  $\forall^{\mathrm{Ty}}\sigma,\tau,\ \tau\ne e\, .\,\forall U^{\sigma\tau t}\, .\,\Box\bigl(\forall x^\sigma\,
+  .\,\exists y^\tau\, .\,\Box((Ux)y\land\forall z^\tau\, .\,(Ux)z\to y=z)\bigr)\to\exists X^{\sigma\tau}\,
+  .\,\Box\forall x^\sigma\, .\,\forall y^\tau\, .\,(Ux)y\leftrightarrow y=Xx$
+date: '2026-09-28'
+sources:
+- Cian Dorr, 28 September 2026, principle and the proof for output type t.
+source_names:
+- Dorr 28 Sep
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.3, pp. 31–33
+  note: Plenitude, of which this is the modalized form. Unlike Plenitude it is a theorem of C.
+notes: >-
+  A theorem of C (classicism-implies-modalized-plenitude-r), recorded because it is an important fact
+  about the logic even though it does not change the shape of the map. The inner box is what makes it
+  provable: the unique value is then necessarily unique, and a definable operation can pick it out.
+  Plenitude, which asks only for actual functionality and an actual representation, is not a theorem.

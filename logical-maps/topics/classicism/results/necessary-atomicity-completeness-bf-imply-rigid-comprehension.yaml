@@ -4,7 +4,7 @@ premises:
 - boolean-completeness-r
 - barcan-r
 conclusion: rigid-comprehension-r
-status: proved
+status: conjectured
 certificate:
   source_id: bacon-dorr-classicism
   produced_by: Andrew Bacon and Cian Dorr
@@ -16,18 +16,34 @@ sources:
 - Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.11, p. 30 and n. 42.
 source_names:
 - Classicism
-proof: For a relation X, form the property F of haecceities of its instances and take their least upper
-  bound $X^*$. It contains each X-instance. Actuality follows from Atomicity and BF by Proposition 2.7;
-  let w be the actual atom. The relation $w\to X$ is an upper bound of F, so $X^*$ is also contained in
-  X. Each haecceity entails its own necessitation by NI, so $\Box X^*$ is another upper bound; hence $X^*$
-  is persistent. For inextensibility, note 42 assumes a possible failure, uses boxed Atomicity and BF
-  to obtain atoms w and w′ witnessing the two stages, and replaces w′ by the GLB of its w-possible aliases.
-  Then $w^{\prime}\to Y$ is an upper bound of F but is contradicted by the proposed failure of inextensibility.
-  This contradiction establishes rigidity.
+proof: ''
 references:
 - paper: bacon-dorr-classicism
   role: proof
   locator: Proposition 2.11, p. 30 and n. 42
-notes: This is a summary of note 42; see the accompanying write-up for the alias-GLB step. The source’s
-  first cross-reference to Proposition 2.6 is replaced in this transcription by the sufficient Proposition
-  2.7; the statement and premises are unchanged.
+notes: >-
+  Downgraded from proved to conjectured on 28 September 2026, at Cian Dorr's request. The source's proof
+  (Proposition 2.11, note 42) has two gaps, found that day by an agent working in the Lean-Classicism
+  formalization project; the write-up sets out the paper's argument with the gaps marked. (a) Part (iv)
+  of note 42 boxes a claim that holds pointwise in the object variables by BF, where □BF would be needed.
+  Cian Dorr agreed. (b) The same part's "without loss of generality" step replaces the atom $w'$ by
+  $w''$, the greatest lower bound of the propositions $p$ with $w\le(p=w')$. The proof then needs
+  $w\le(w''=w')$, so that $w''$ is still possible and below $X^*z\land\neg Yz$ where $w$ holds; nothing
+  in the premises gives this, and □BF does not help. A propositional structure in which that step fails
+  is sketched in the project's VERIFICATION.md; it has not been extended to a model of C with all the
+  premises, so it shows that the step needs an argument, not that the proposition is false. What is
+  proved there: Actuality, Boolean Completeness and BF (at the relevant types), together with a
+  restriction principle, give Rigid Comprehension with the paper's witness $X^*$. The restriction
+  principle says that for all $p,q$ there is an $r$ with $p\le(r=q)$ such that $r\le s$ whenever
+  $p\le(q\le s)$. It holds in C5, with $r:=q\land\Diamond p$. Restructured this way, gap (a) disappears,
+  and gap (b) becomes the question whether the premises here give the restriction principle. What
+  would settle the conjecture: a derivation of the restriction principle, or another argument, from
+  boxed Atomicity, Boolean Completeness and BF; or a model of C with those three principles that fails
+  Rigid Comprehension. The source's first cross-reference to Proposition 2.6 was replaced in the earlier
+  transcription by Proposition 2.7; the statement and premises are unchanged.
+changes:
+- date: '2026-09-28'
+  by: Claude Opus 5.5 (Anthropic), at Cian Dorr's request
+  summary: 'Downgraded from proved to conjectured: the proof in note 42 has two gaps (see the notes), found
+    in the Lean-Classicism project. The summary of the paper''s argument moved from the proof field to
+    the write-up, where the gaps are marked.'

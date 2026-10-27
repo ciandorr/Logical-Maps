@@ -2,7 +2,12 @@
 
 Use the shared mathematical workflow in the repository's `AGENTS.md` files.
 Paths below are relative to `topics/classicism/`. Start with `topic.yaml` and
-the relevant sections of `background.md`; read the editing rules before edits.
+the relevant page of `background/`; read the editing rules before edits. Its pages,
+in order: `framework` (C, types, notation, conventions, evidence), `necessity`,
+`order` (pointwise operations, ≤, LB/GLB/LUB), `worlds` (atoms, strong and weak
+worlds), `rigidity`, `varieties` (□≠, hats, □5), `relations` (functional, equivalence
+and order predicates; Bourbaki–Witt), `arithmetic` (cardinality, arithmetic,
+analysis), `signatures` (pure and signature schemata).
 
 ## Locate the question
 
@@ -12,10 +17,10 @@ Read a matching `writeups/<id>.md` when it exists.
 
 | User's terminology | Principle IDs / entry points |
 | --- | --- |
-| C, Classicism, H, Logical Equivalence, relational types | `topic.yaml`; `background.md` Framework, Notation, Conventions; these define the standing logic |
+| C, Classicism, H, Logical Equivalence, relational types | `topic.yaml`; `background/framework.md`; it defines the standing logic |
 | BF / Barcan; CBF; NI; ND | `barcan-r`, `converse-barcan-r`, `identity-necessary-r`, `distinctness-necessary-r`; `-t` variants where present |
 | C5, boxed ND | preset `c5` = `necessary-distinctness-necessary-r`; not unboxed ND |
-| BC, completeness, atomicity, weak/strong worlds, Leibniz, Strong Actuality | `boolean-completeness-r`, `atomicity-r`, `strong-leibniz-r`, `strong-actuality`; corresponding `-t` and `necessary-` records; lattice/world definitions in `background.md` |
+| BC, completeness, atomicity, weak/strong worlds, Leibniz, Strong Actuality | `boolean-completeness-r`, `atomicity-r`, `strong-leibniz-r`, `strong-actuality`; corresponding `-t` and `necessary-` records; definitions in `background/order.md` and `background/worlds.md` |
 | RC, rigidity, persistence, inextensibility, weak rigidity, Gallin | `rigid-comprehension-r`, `persistent-comprehension-r`, `inextensible-comprehension-r`, `weakly-inextensible-comprehension-r`, `weak-rigid-comprehension-r`, `gallin-extensional-comprehension-r` |
 | Choice, Plenitude, Actuality, transversals or selectors for equivalence relations | `functional-choice-r`, `relational-choice-r`, `transversal-choice-r`, `plenitude-r`, `actuality`, `actual-profile-r` |
 | Extensionality, Fregean Axiom, Functionality, Tractarianism | `extensionality-r`, `fregean-axiom`, `functionality-r`, `tractarianism-r`; distinguish `modalized-` and `necessary-` variants |
@@ -78,7 +83,7 @@ Read a matching `writeups/<id>.md` when it exists.
   records. Check the connecting result instead of silently substituting one.
 - Pure/signature side conditions refer to C or C(Σ), not to whichever stronger
   theory the user is considering. Σ has a relational constant; distinct symbols
-  do not assert distinct denotations. Preserve the conventions in `background.md`.
+  do not assert distinct denotations. Preserve the conventions in `background/signatures.md`.
 - Schema failure means failure at some admitted instance, not every instance.
   The engine does not instantiate schemas or necessitate theorems on its own.
 

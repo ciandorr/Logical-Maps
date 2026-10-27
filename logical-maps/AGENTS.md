@@ -31,7 +31,7 @@ to formalize it; finish the mathematical question the user asked.
    names alone do not settle scope. Ask for clarification only if a remaining
    ambiguity changes the mathematics; otherwise state the reading you use.
 2. **Fix the framework and assumptions.** Read `topic.yaml` and the relevant
-   definitions in `background.md`. `background: []` does not remove the standing
+   definitions on the Background pages (`background/<page>.md`, or `background.md`). `background: []` does not remove the standing
    mathematical framework described in prose. Expand optional packages from
    `background_presets`; a viewer default is not an assumption in every question.
    Preserve restrictions on types, quantifiers, integrability, and signatures.

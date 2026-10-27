@@ -71,9 +71,8 @@ remain the record's detailed provenance and are still required where configured.
 The Background tab’s Literature section links papers to their records; references also appear in
 write-ups and the AI bundle. Adding a paper does not create an arrow filter.
 Papers referenced by records appear under **Source literature**; uncited entries
-appear under **Other relevant literature**. To choose the catalogue’s location,
-put `<div id="paper-catalogue"></div>` below a Literature heading in
-`background.md`; otherwise it is appended to the Background tab.
+appear under **Other relevant literature**. The catalogue is the Background tab's
+last page, Literature.
 
 Catalogue URLs are external links, never downloads made by the build. Only
 put full documents in `sources/` when they are intended and authorised for
@@ -199,7 +198,30 @@ This describes the database, not the state of all mathematical knowledge.
 ## Prose, files, and Lean
 
 `background.md` and `contribute.md` populate their tabs. Markdown supports links,
-lists, and tables. Put longer result/model accounts in `writeups/<record-id>.md`.
+lists, and tables.
+
+A Background that outgrows one file becomes a series of pages: replace
+`background.md` by `background/<page>.md`, each opening with `# Title`, and list
+the page ids in order under `background_pages` in `topic.yaml`. A page may hold
+definitions and lemmas that records draw on, as blocks:
+
+```
+::: lemma {#weakly-rigid-persistent}
+title: weakly rigid relations are persistent
+lean: Classicism.persistent_of_weaklyRigid
+credit: Who proved it, and when
+sources: Where it is from
+---
+The statement, then *Proof.* …
+:::
+```
+
+The kind is one of definition, lemma, proposition, theorem, corollary, fact or
+remark. The header before `---` is optional; `lean` and `sources` may be lists.
+Item and page ids share the namespace of the records, so `[[weakly-rigid-persistent]]`
+in any record's prose or on any page links to it, and the item lists what refers
+to it. With a Lean project, `lean-check` confirms that each named declaration
+exists and rests on the allowed axioms only, and the build links to it. Put longer result/model accounts in `writeups/<record-id>.md`.
 KaTeX 0.18.7 renders maths in definitions, formal formulations, proofs, notes,
 model descriptions and Markdown, with or without Pandoc. Write `$x^{n+1}$` or
 `\(x^{n+1}\)` inline, and `$$\frac{1}{2}$$` or `\[\frac{1}{2}\]` for a displayed

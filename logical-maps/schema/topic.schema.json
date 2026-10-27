@@ -183,6 +183,15 @@
         }
       }
     },
+    "background_pages": {
+      "type": "array",
+      "description": "The Background's pages, in order: each id names background/<id>.md, which opens with '# Title'. Without it the topic has a single background.md.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
     "lattice_views": {
       "type": "array",
       "description": "Curated lattice views, offered in the lattice's View menu, independent of the graph views. A view sets exactly which principles the lattice draws; it does not change the background.",

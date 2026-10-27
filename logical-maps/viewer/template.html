@@ -565,6 +565,21 @@
   .page .prose, .prose-page { overflow-wrap: anywhere; }
   .prose-page pre { max-width: 100%; overflow-x: auto; padding: 12px; background: var(--panel-2); }
   .prose-page math[display="block"] { display: block; overflow-x: auto; }
+  /* The Background's pages: their list beside the page shown, above it on a narrow screen. */
+  .bg-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px 32px; }
+  @media (min-width: 900px) { .bg-layout { grid-template-columns: 13rem minmax(0, 1fr); } .bg-toc { position: sticky; top: 0; align-self: start; } }
+  .bg-toc ol { list-style: none; margin: 0; padding: 0; font-size: 14px; line-height: 1.4; }
+  .bg-toc li { margin: 0 0 6px; }
+  .bg-toc a { color: var(--ink-2); text-decoration: none; }
+  .bg-toc a[aria-current] { color: var(--ink); font-weight: 600; }
+  .bg-page h1 { font: 600 22px/1.3 var(--sans); margin: 0 0 12px; }
+  .bg-item { border-left: 3px solid var(--line); padding: 2px 0 2px 14px; margin: 14px 0; }
+  .bg-item.bg-lemma, .bg-item.bg-proposition, .bg-item.bg-theorem, .bg-item.bg-corollary { border-left-color: var(--accent); }
+  .bg-item.flash { background: var(--hl); }
+  .bg-item-head { margin: 0 0 6px; }
+  .bg-kind { font-weight: 600; }
+  .bg-meta, .bg-item-foot { font-size: 13px; color: var(--ink-2); }
+  .bg-item-foot details { margin-top: 4px; }
   .badge { border-radius: 2px; }
   .ex > div { min-width: 0; }
   /* Shared signed controls and a quieter Theory Explorer. */
@@ -1153,6 +1168,9 @@ const byGid = new Map(GROUPS.map(g => [g.id, g]));
 // to every record meeting its conditions, marked with its id.
 const GENERAL = DATA.general_arguments || [], TOPIC_CONDITIONS = DATA.conditions || [];
 const byAid = new Map(GENERAL.map(a => [a.id, a])), byCid = new Map(TOPIC_CONDITIONS.map(c => [c.id, c]));
+// The Background's pages and the definitions and lemmas on them, which `[[id]]` links reach too.
+const BG_PAGES = DATA.background_pages || [], BG_ITEMS = DATA.background_items || [];
+const byBgPage = new Map(BG_PAGES.map(p => [p.id, p])), byBgItem = new Map(BG_ITEMS.map(i => [i.id, i]));
 const P = DATA.principles, R = DATA.results.map(r => ({...r, conclusion: r.conclusion === false ? FALSE : r.conclusion})), MODELS = DATA.models, T = DATA.topic;
 const byPid = new Map(P.map(p => [p.id, p])), byRid = new Map(R.map(r => [r.id, r])), byMid = new Map(MODELS.map(m => [m.id, m]));
 const ids = P.map(p => p.id);
@@ -1367,17 +1385,23 @@ function crossRef(id, text) {
   if (byMid.has(id)) return link('open-model', esc(byMid.get(id).name));
   if (byGid.has(id)) return link('open-group', esc(byGid.get(id).name));
   if (byAid.has(id)) return link('open-argument', esc(id));
+  if (byBgItem.has(id)) return link('open-background', esc(bgItemLabel(byBgItem.get(id))));
+  if (byBgPage.has(id)) return link('open-background', esc(byBgPage.get(id).title));
   return text || esc(id);
 }
+// A Background item as a link labels it, its kind and title: "Lemma (weakly rigid relations are persistent)".
+const bgItemLabel = i => i.kind[0].toUpperCase() + i.kind.slice(1) + (i.title ? ` (${i.title})` : '');
 // The records whose prose cross-references a given id, found once for all ids.
 let crossRefIndex = null;
 function referencedBy(id) {
   if (!crossRefIndex) {
     crossRefIndex = new Map();
     const text = v => typeof v === 'string' ? v : Array.isArray(v) ? v.map(text).join('\n') : v && typeof v === 'object' ? Object.values(v).map(text).join('\n') : '';
-    for (const x of [...R, ...P, ...MODELS.filter(m => !m.companion_of), ...GROUPS, ...GENERAL])
+    for (const x of [...R, ...P, ...MODELS.filter(m => !m.companion_of), ...GROUPS, ...GENERAL, ...BG_ITEMS])
       for (const ref of new Set([...text(x).matchAll(CROSS_REF)].map(m => m[1])))
         if (ref !== x.id) crossRefIndex.set(ref, [...(crossRefIndex.get(ref) || []), x.id]);
+    // A Background page's own prose, outside its items, as the build lists it.
+    for (const p of BG_PAGES) for (const ref of p.refs || []) crossRefIndex.set(ref, [...(crossRefIndex.get(ref) || []), p.id]);
   }
   return crossRefIndex.get(id) || [];
 }
@@ -3604,6 +3628,47 @@ function sourceList(items) {
   const linked = refs.length ? `<h2>Paper references</h2>${paperReferenceList(refs)}` : '';
   return linked + (entries.length ? `<h2>Record provenance</h2><ul class="src">${entries.map(x => `<li><b>${esc(x.label)}</b>${x.label === x.source ? '' : ' — ' + esc(x.source)}</li>`).join('')}</ul>` : '');
 }
+// The Background as pages: a list of them beside the one shown. An item's section gets its Lean
+// and what refers to it, and each [[id]] slot the build left becomes a link.
+function renderBackgroundPages(el) {
+  el.innerHTML = `<div class="bg-layout"><nav class="bg-toc" aria-label="Background pages"><ol>${BG_PAGES.map(p =>
+    `<li><a href="#background/${esc(p.id)}" data-bg-nav="${esc(p.id)}">${esc(p.title)}</a></li>`).join('')}</ol></nav>`
+    + `<div class="bg-pages">${BG_PAGES.map(p => `<article class="bg-page" id="bg-page-${esc(p.id)}" data-bg-page="${esc(p.id)}" hidden><h1>${esc(p.title)}</h1>${p.html}</article>`).join('')}</div></div>`;
+  el.querySelectorAll('section[data-bg-item]').forEach(s => {
+    const i = byBgItem.get(s.dataset.bgItem);
+    if (!i) return;
+    const lean = (i.lean || []).length
+      ? `<div class="pop-l">${i.lean_status === 'verified' ? `<span class="badge lean verified" title="Proved in Lean, passing the check of a shallow proof${i.lean_theory ? '; a theorem of ' + esc(i.lean_theory) : ''}">Lean ✓</span> ` : ''}Lean: ${i.lean.map(n => `<code>${esc(n)}</code>`).join(', ')}${(i.lean_links || []).length ? ' · ' + leanLinkTags(i.lean_links).join(' · ') : ''}</div>` : '';
+    const refs = referencedBy(i.id);
+    const used = refs.length ? `<details class="bg-refs"><summary>Referenced by (${refs.length})</summary><ul class="src">${refs.map(r => `<li>${crossRef(r)}</li>`).join('')}</ul></details>` : '';
+    if (lean || used) s.insertAdjacentHTML('beforeend', `<div class="bg-item-foot">${lean}${used}</div>`);
+  });
+  el.querySelectorAll('span.xref-slot').forEach(s => { s.outerHTML = crossRef(s.dataset.xref, s.innerHTML); });
+  el.querySelectorAll('a[data-bg-nav]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); showBackgroundPage(a.dataset.bgNav); }));
+  wire(el);
+}
+// #background/<page>[/<item>] names what the Background shows.
+function bgRoute() {
+  const m = /^#background(?:\/([a-z0-9-]+))?(?:\/([a-z0-9-]+))?$/.exec(window.location.hash || '');
+  return m ? { page: m[1], item: m[2] } : {};
+}
+function showBackgroundPage(pageId, itemId, record = true) {
+  if (!byBgPage.has(pageId)) pageId = BG_PAGES[0]?.id;
+  if (!pageId) return;
+  document.querySelectorAll('#background [data-bg-page]').forEach(a => { a.hidden = a.dataset.bgPage !== pageId; });
+  document.querySelectorAll('#background [data-bg-nav]').forEach(a => a.toggleAttribute('aria-current', a.dataset.bgNav === pageId));
+  if (record) try { window.history.replaceState(window.history.state, '', '#background/' + pageId + (itemId ? '/' + itemId : '')); } catch { /* Local files may not allow history updates. */ }
+  const pane = document.getElementById('pane-background'), target = itemId && document.getElementById('bg-' + itemId);
+  if (target) {
+    target.scrollIntoView?.({ block: 'start' }); target.classList.add('flash'); setTimeout(() => target.classList.remove('flash'), 1600);
+  } else if (pane) pane.scrollTop = 0;
+}
+// A link to a Background page or item opens it on its page.
+function openBackground(id) {
+  const item = byBgItem.get(id), pageId = item ? item.page : id;
+  state.selected = null; document.getElementById('pop').hidden = true;
+  showTab('background'); showBackgroundPage(pageId, item ? id : undefined);
+}
 function mountPaperCatalogue() {
   if (!papers.length) return;
   const backgroundPage = document.getElementById('background');
@@ -3652,6 +3717,7 @@ function openPaper(id) {
   state.selected = null; document.getElementById('pop').hidden = true;
   document.getElementById('paper-search').value = '';
   renderPapers(); showTab('background');
+  if (byBgPage.has('literature')) showBackgroundPage('literature');
   const target = document.getElementById('paper-' + id);
   target.scrollIntoView({block: 'start'}); target.focus({preventScroll: true});
 }
@@ -4172,6 +4238,7 @@ function wire(el) {
   el.querySelectorAll('button[data-open-group]').forEach(b => b.addEventListener('click', () => openPage({ type: 'group', id: b.dataset.openGroup })));
   el.querySelectorAll('button[data-open-argument]').forEach(b => b.addEventListener('click', () => openPage({ type: 'argument', id: b.dataset.openArgument })));
   el.querySelectorAll('button[data-open-result]').forEach(b => b.addEventListener('click', () => openPage({ type: 'result', id: b.dataset.openResult })));
+  el.querySelectorAll('button[data-open-background]').forEach(b => b.addEventListener('click', () => openBackground(b.dataset.openBackground)));
 }
 // A principle's statement at a glance, beside its name, in the lists that name principles:
 // after a short delay on hover, at once on keyboard focus, never on a touch screen, and with
@@ -4724,9 +4791,11 @@ function renderAll(refit) {
   renderSubscripts(document.getElementById('contribute'));
   const backgroundPage = document.getElementById('background');
   if (!backgroundPage.dataset.ready) {
-    backgroundPage.innerHTML = DATA.background_html || '<p class="dim">—</p>';
+    if (BG_PAGES.length) renderBackgroundPages(backgroundPage);
+    else backgroundPage.innerHTML = DATA.background_html || '<p class="dim">—</p>';
     renderSubscripts(backgroundPage);
     mountPaperCatalogue(); backgroundPage.dataset.ready = 'true';
+    if (BG_PAGES.length) showBackgroundPage(bgRoute().page || BG_PAGES[0].id, bgRoute().item, false);
   }
   renderGraph(); if (refit) fitInitial(); renderModels(); renderResults(); renderOpen(); renderTheorems();
   if (state.tab === 'lattice' && typeof renderLattice === 'function') { renderLatticeFilters(); renderLattice(); }
@@ -5833,4 +5902,6 @@ requestAnimationFrame(fit);
 // A topic may open on another tab than the graph (topic.yaml default_tab).
 for (const id of ['pr-filters', 'lat-filters', 'models', 'open', 'pop']) wirePreviews(document.getElementById(id));
 if (T.default_tab && T.default_tab !== 'graph') document.querySelector(`.tab[data-tab="${T.default_tab}"]:not([hidden])`)?.click();
+// A link to a Background page or item, #background/<page>[/<item>], opens it.
+if (BG_PAGES.length && /^#background(\/|$)/.test(window.location.hash || '')) { showTab('background'); showBackgroundPage(bgRoute().page, bgRoute().item, false); }
 </script>

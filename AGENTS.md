@@ -31,8 +31,8 @@ loading nested `AGENTS.md` files during read-only research.
 
 - Paths in the topic guides are relative to that topic. Run project commands
   from `logical-maps/`.
-- Start with the chosen topic's `topic.yaml`, the relevant part of
-  `background.md`, and the few matching `principles/<id>.yaml` files. Follow
+- Start with the chosen topic's `topic.yaml`, the relevant Background page
+  (`background/<page>.md`, or `background.md`), and the few matching `principles/<id>.yaml` files. Follow
   their IDs into `results/`, `models/`, and `writeups/`.
 - Search within that topic. Prefer file names and `rg -l` to dumping every
   match; read only the matching records or sections. Expand the search when

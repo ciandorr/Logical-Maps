@@ -315,54 +315,6 @@ theorem c5_and_necessary_rigid_comprehension_imply_necessary_gallin_comprehensio
 theorem c5_and_persistent_comprehension_imply_gallin : Statements.c5_and_persistent_comprehension_imply_gallin := by
   map_cert _root_.Classicism.c5_and_persistent_comprehension_imply_gallin.entails
 
-/-- `classicism-implies-broad-necessitism-r` -/
-theorem classicism_implies_broad_necessitism_r : Statements.classicism_implies_broad_necessitism_r := by
-  map_cert Proofs.classicism_implies_broad_necessitism_r.entails
-
-/-- `classicism-implies-converse-barcan-r` -/
-theorem classicism_implies_converse_barcan_r : Statements.classicism_implies_converse_barcan_r := by
-  map_cert Proofs.classicism_implies_converse_barcan_r.entails
-
-/-- `classicism-implies-existence-r` -/
-theorem classicism_implies_existence_r : Statements.classicism_implies_existence_r := by
-  map_cert Meta.classicism_implies_existence_r
-
-/-- `classicism-implies-identity-necessary-r` -/
-theorem classicism_implies_identity_necessary_r : Statements.classicism_implies_identity_necessary_r := by
-  map_cert Proofs.classicism_implies_identity_necessary_r.entails
-
-/-- `classicism-implies-intensionality-r` -/
-theorem classicism_implies_intensionality_r : Statements.classicism_implies_intensionality_r := by
-  map_cert Proofs.classicism_implies_intensionality_r.entails
-
-/-- `classicism-implies-modal-four` -/
-theorem classicism_implies_modal_four : Statements.classicism_implies_modal_four := by
-  map_cert Proofs.classicism_implies_modal_four.entails
-
-/-- `classicism-implies-modal-k` -/
-theorem classicism_implies_modal_k : Statements.classicism_implies_modal_k := by
-  map_cert Proofs.classicism_implies_modal_k.entails
-
-/-- `classicism-implies-modal-t` -/
-theorem classicism_implies_modal_t : Statements.classicism_implies_modal_t := by
-  map_cert Proofs.classicism_implies_modal_t.entails
-
-/-- `classicism-implies-modalized-fregean` -/
-theorem classicism_implies_modalized_fregean : Statements.classicism_implies_modalized_fregean := by
-  map_cert Proofs.classicism_implies_modalized_fregean.entails
-
-/-- `classicism-implies-modalized-functionality-r` -/
-theorem classicism_implies_modalized_functionality_r : Statements.classicism_implies_modalized_functionality_r := by
-  map_cert Proofs.classicism_implies_modalized_functionality_r.entails
-
-/-- `classicism-implies-modalized-plenitude-r` -/
-theorem classicism_implies_modalized_plenitude_r : Statements.classicism_implies_modalized_plenitude_r := by
-  map_cert Meta.classicism_implies_modalized_plenitude_r
-
-/-- `classicism-implies-ordinary-comprehension-r` -/
-theorem classicism_implies_ordinary_comprehension_r : Statements.classicism_implies_ordinary_comprehension_r := by
-  map_cert ordinaryComprehension_entails
-
 /-- `completeness-and-actuality-imply-weak-rigid-comprehension` -/
 theorem completeness_and_actuality_imply_weak_rigid_comprehension : Statements.completeness_and_actuality_imply_weak_rigid_comprehension := by
   map_cert Meta.completeness_and_actuality_imply_weak_rigid_comprehension
@@ -1162,10 +1114,6 @@ theorem distinctness_necessary_r.polyadic : Statements.distinctness_necessary_r.
 theorem necessary_distinctness_necessary_r.polyadic : Statements.necessary_distinctness_necessary_r.polyadic := by
   map_form P.NecNecessityOfDistinctness.schema_entails_listSchema P.NecNecessityOfDistinctness.listSchema_entails_schema
 
-/-- `existence-r`, variant `polyadic`: the principle for every list of argument types. -/
-theorem existence_r.polyadic : Statements.existence_r.polyadic := by
-  map_form P.Existence.schema_entails_listSchema P.Existence.listSchema_entails_schema
-
 /-- `functionality-r`, variant `polyadic`: the principle for every list of argument types. -/
 theorem functionality_r.polyadic : Statements.functionality_r.polyadic := by
   map_form P.Functionality.schema_entails_listSchema P.Functionality.listSchema_entails_schema
@@ -1198,26 +1146,6 @@ theorem plenitude_r.polyadic : Statements.plenitude_r.polyadic := by
 theorem necessary_plenitude_r.polyadic : Statements.necessary_plenitude_r.polyadic := by
   map_form P.NecPlenitude.schema_entails_listSchema P.NecPlenitude.listSchema_entails_schema
 
-/-- `modalized-functionality-r`, variant `polyadic`: the principle for every list of argument types. -/
-theorem modalized_functionality_r.polyadic : Statements.modalized_functionality_r.polyadic := by
-  map_form P.ModalizedFunctionality.schema_entails_listSchema P.ModalizedFunctionality.listSchema_entails_schema
-
-/-- `converse-barcan-r`, variant `polyadic`: the principle for every list of argument types. -/
-theorem converse_barcan_r.polyadic : Statements.converse_barcan_r.polyadic := by
-  map_form P.ConverseBarcan.schema_entails_listSchema P.ConverseBarcan.listSchema_entails_schema
-
-/-- `identity-necessary-r`, variant `polyadic`: the principle for every list of argument types. -/
-theorem identity_necessary_r.polyadic : Statements.identity_necessary_r.polyadic := by
-  map_form P.NecessityOfIdentity.schema_entails_listSchema P.NecessityOfIdentity.listSchema_entails_schema
-
-/-- `broad-necessitism-r`, variant `polyadic`: the principle for every list of argument types. -/
-theorem broad_necessitism_r.polyadic : Statements.broad_necessitism_r.polyadic := by
-  map_form P.BroadNecessitism.schema_entails_listSchema P.BroadNecessitism.listSchema_entails_schema
-
-/-- `modalized-plenitude-r`, variant `polyadic`: the principle for every list of argument types. -/
-theorem modalized_plenitude_r.polyadic : Statements.modalized_plenitude_r.polyadic := by
-  map_form P.ModalizedPlenitude.schema_entails_listSchema P.ModalizedPlenitude.listSchema_entails_schema
-
 /-- `atomicity-r`, variant `dual`: the dual form. -/
 theorem atomicity_r.dual : Statements.atomicity_r.dual := by
   map_form P.Atomicity.to_dual.entails
@@ -1248,16 +1176,6 @@ theorem boolean_completeness_t.lub : Statements.boolean_completeness_t.lub := by
   map_form P.BooleanCompletenessT.to_lub.entails
     P.BooleanCompletenessT.of_lub.entails
 
-/-- `converse-barcan-r`, variant `dual`: the dual form. -/
-theorem converse_barcan_r.dual : Statements.converse_barcan_r.dual := by
-  map_form P.ConverseBarcan.to_dual.entails
-    P.ConverseBarcan.of_dual.entails
-
-/-- `converse-barcan-r`, variant `dual-polyadic`: the dual form, for every list of argument types. -/
-theorem converse_barcan_r.dual_polyadic : Statements.converse_barcan_r.dual_polyadic := by
-  map_form (Entails.trans P.ConverseBarcan.schema_entails_listSchema P.ConverseBarcan.to_dual.listEntails)
-    (Entails.trans P.ConverseBarcan.of_dual.listEntails P.ConverseBarcan.listSchema_entails_schema)
-
 /-- `distinctness-necessary-r`, variant `dual`: the dual form. -/
 theorem distinctness_necessary_r.dual : Statements.distinctness_necessary_r.dual := by
   map_form P.NecessityOfDistinctness.to_dual.entails
@@ -1287,21 +1205,6 @@ theorem modal_b.dual : Statements.modal_b.dual := by
 theorem modal_five.dual : Statements.modal_five.dual := by
   map_form P.ModalFive.to_dual.entails
     P.ModalFive.of_dual.entails
-
-/-- `modal-four`, variant `dual`: the dual form. -/
-theorem modal_four.dual : Statements.modal_four.dual := by
-  map_form P.ModalFour.to_dual.entails
-    P.ModalFour.of_dual.entails
-
-/-- `modal-k`, variant `dual`: the dual form. -/
-theorem modal_k.dual : Statements.modal_k.dual := by
-  map_form P.ModalK.to_dual.entails
-    P.ModalK.of_dual.entails
-
-/-- `modal-t`, variant `dual`: the dual form. -/
-theorem modal_t.dual : Statements.modal_t.dual := by
-  map_form P.ModalT.to_dual.entails
-    P.ModalT.of_dual.entails
 
 /-- `necessary-atomicity-r`, variant `dual`: the dual form. -/
 theorem necessary_atomicity_r.dual : Statements.necessary_atomicity_r.dual := by

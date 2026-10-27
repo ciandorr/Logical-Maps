@@ -1,4 +1,5 @@
 import Lean
+import Classicism.Tools.Check
 
 /-!
 # The index of the map's certificates
@@ -137,8 +138,10 @@ def entryOf (c : Name) (byName : Bool) : CommandElabM (Option (Json × Bool)) :=
 the two forms it relates; the general arguments' verdicts (`Classicism.Map.Arguments.<argument
 id>.<principle id>`, or with the group's id first), keyed `<argument>/<principle>` or
 `<group>/<argument>/<principle>`; the models' verdicts (`Classicism.Map.Models.<model id>.<principle
-id>`), each entry also giving where the model is defined; and where each principle's
-definition `Classicism.P.X` is. -/
+id>`), each entry also giving where the model is defined; where each principle's
+definition `Classicism.P.X` is; and, under `declarations`, where each declaration the
+Background's items cite is, the axioms it rests on, and whether it passes
+`#classicism_check` (`classicism`: `C⁻`, `C`, or null with its `errors`). -/
 elab "#classicism_map_index " path:str : command => do
   let env ← getEnv
   let thms := env.constants.fold (init := #[]) fun acc n info =>
@@ -199,9 +202,25 @@ elab "#classicism_map_index " path:str : command => do
   let mut defs : Array (String × Json) := #[]
   for n in defNames.qsort (·.toString < ·.toString) do
     if let some l ← location n then defs := defs.push (n.toString, l)
+  -- the declarations the Background's items cite, listed one per line by `pmap lean` in
+  -- `background-names.txt` beside the index; a name not found is left out
+  let namesFile := ((System.FilePath.mk path.getString).parent.getD ".") / "background-names.txt"
+  let mut decls : Array (String × Json) := #[]
+  if ← namesFile.pathExists then
+    for ln in ← IO.FS.lines namesFile do
+      let s := ln.trim
+      if s.isEmpty then continue
+      if let some l ← location s.toName then
+        -- `#classicism_check`'s verdict: the axioms of Classicism only, and the Equivalence gate
+        let (errors, axioms) ← liftTermElabM (Classicism.Check.checkDecl s.toName)
+        let theory : Json := if !errors.isEmpty then Json.null
+          else toJson (if Classicism.Check.isCMinus axioms then "C⁻" else "C")
+        let messages ← errors.mapM (·.toString)
+        decls := decls.push (s, (l.setObjVal! "axioms" (toJson (axioms.map Name.toString))
+          |>.setObjVal! "classicism" theory) |>.setObjVal! "errors" (toJson messages))
   let json := Json.mkObj [("results", Json.mkObj results.toList), ("forms", formsJson),
     ("models", modelsJson), ("arguments", Json.mkObj arguments.toList),
-    ("definitions", Json.mkObj defs.toList)]
+    ("definitions", Json.mkObj defs.toList), ("declarations", Json.mkObj decls.toList)]
   IO.FS.writeFile path.getString (json.pretty ++ "\n")
   logInfo m!"{results.size} result certificates, {forms.fold (fun n _ fs => n + fs.size) 0} \
     form certificates, {models.fold (fun n _ vs => n + vs.size) 0} model verdicts and \

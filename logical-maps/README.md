@@ -42,7 +42,8 @@ that environment first.
 
 ```
 topics/<topic>/topic.yaml             title, background principle ids
-topics/<topic>/background.md          Background tab (markdown)
+topics/<topic>/background/<page>.md  Background tab, one page each, in topic.yaml's background_pages order
+topics/<topic>/background.md          or a single-page Background tab (markdown)
 topics/<topic>/contribute.md          optional Contribute tab message (markdown)
 topics/<topic>/principles/<id>.yaml   one principle per file
 topics/<topic>/results/<id>.yaml      implication: premises ⇒ conclusion

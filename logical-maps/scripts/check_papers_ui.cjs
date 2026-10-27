@@ -20,7 +20,7 @@ try {
   const pdf = d.querySelector('#paper-bartha-2016 a[href^="sources/"]');
   assert.equal(pdf.getAttribute('href'), 'sources/Bartha%20(2016).pdf');
   assert.match(pdf.textContent, /^PDF/);
-  assert.equal(d.querySelectorAll('#background #literature').length, 1);
+  assert.equal(d.querySelectorAll('#background #bg-page-literature').length, 1);
   assert.equal(d.querySelectorAll('.paper-entry').length, data.papers.length);
   assert.equal(d.querySelectorAll('[data-source-filter]').length, data.topic.source_catalog.length);
   const filters = [...d.querySelectorAll('[data-source-filter]')].map(x => [x.dataset.sourceFilter, x.checked]);

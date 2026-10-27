@@ -26,9 +26,10 @@ for mutate in [
     assert not validate(data), 'Malformed catalogue/reference was accepted'
 
 presentation = pmap.enriched_payload('unbounded-utility', {})
-assert 'Source literature' in presentation['background_html']
+literature = presentation['background_pages'][-1]
+assert literature['id'] == 'literature' and 'Source literature' in literature['html']
 assert 'Other relevant literature' in presentation['background_md']
-assert presentation['background_html'].count('id="paper-catalogue"') == 1
+assert sum(p['html'].count('id="paper-catalogue"') for p in presentation['background_pages']) == 1
 payload = pmap.export_json('unbounded-utility')
 assert payload['papers'] == original['papers']
 assert pmap.export_json('decision-theory')['papers'] == [], 'Legacy topics need no catalogue'

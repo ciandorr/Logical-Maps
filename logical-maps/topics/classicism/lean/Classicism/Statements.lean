@@ -63,14 +63,6 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.BooleanCompletenessT.schemaIn
 
-/-- Principle definition check: `broad-necessitism-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.BroadNecessitism.schemaIn
-
-/-- Principle definition check: `converse-barcan-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ConverseBarcan.schemaIn
-
 /-- Principle definition check: `converse-witnessed-possibility-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   (Classicism.Meta.AxiomSet.converseWitnessedPossibility _)
@@ -98,10 +90,6 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 /-- Principle definition check: `distinctness-signature-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   (Classicism.Meta.AxiomSet.distinctnessC _)
-
-/-- Principle definition check: `existence-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.Existence.schemaIn
 
 /-- Principle definition check: `extensionality-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
@@ -131,10 +119,6 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.GallinExtensionalComprehension.schemaIn
 
-/-- Principle definition check: `identity-necessary-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.NecessityOfIdentity.schemaIn
-
 /-- Principle definition check: `independence-signature-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   (Classicism.Meta.AxiomSet.independence _)
@@ -155,10 +139,6 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.IntensionalChoice.schemaIn
 
-/-- Principle definition check: `intensionality-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.Intensionality.schemaIn
-
 /-- Principle definition check: `logical-necessity-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   (Classicism.Meta.AxiomSet.logicalNecessity _)
@@ -171,37 +151,13 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.ModalFive.schemaIn
 
-/-- Principle definition check: `modal-four`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ModalFour.schemaIn
-
 /-- Principle definition check: `modal-freedom-signature-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   (Classicism.Meta.AxiomSet.modalFreedom _)
 
-/-- Principle definition check: `modal-k`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ModalK.schemaIn
-
-/-- Principle definition check: `modal-t`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ModalT.schemaIn
-
 /-- Principle definition check: `modal-well-ordering-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.ModalWellOrdering.schemaIn
-
-/-- Principle definition check: `modalized-fregean`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ModalizedFregean.schemaIn
-
-/-- Principle definition check: `modalized-functionality-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ModalizedFunctionality.schemaIn
-
-/-- Principle definition check: `modalized-plenitude-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ModalizedPlenitude.schemaIn
 
 /-- Principle definition check: `modalized-relational-choice-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
@@ -402,10 +358,6 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 /-- Principle definition check: `no-pure-contingency-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
-
-/-- Principle definition check: `ordinary-comprehension-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.ordinaryComprehension)
 
 /-- Principle definition check: `persistent-comprehension-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
@@ -1059,90 +1011,6 @@ def c5_implies_tame_rigidity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecNecessityOfDistinctness.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.TameRigidity.schemaIn
-
-/-- `classicism-implies-broad-necessitism-r`
-
-⊤ ⇒ Broad Necessitism -/
-def classicism_implies_broad_necessitism_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BroadNecessitism.schemaIn
-
-/-- `classicism-implies-converse-barcan-r`
-
-⊤ ⇒ CBF -/
-def classicism_implies_converse_barcan_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ConverseBarcan.schemaIn
-
-/-- `classicism-implies-existence-r`
-
-⊤ ⇒ Existence -/
-def classicism_implies_existence_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Existence.schemaIn
-
-/-- `classicism-implies-identity-necessary-r`
-
-⊤ ⇒ NI -/
-def classicism_implies_identity_necessary_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfIdentity.schemaIn
-
-/-- `classicism-implies-intensionality-r`
-
-⊤ ⇒ Intensionality -/
-def classicism_implies_intensionality_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Intensionality.schemaIn
-
-/-- `classicism-implies-modal-four`
-
-⊤ ⇒ 4 -/
-def classicism_implies_modal_four : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFour.schemaIn
-
-/-- `classicism-implies-modal-k`
-
-⊤ ⇒ K -/
-def classicism_implies_modal_k : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalK.schemaIn
-
-/-- `classicism-implies-modal-t`
-
-⊤ ⇒ T -/
-def classicism_implies_modal_t : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalT.schemaIn
-
-/-- `classicism-implies-modalized-fregean`
-
-⊤ ⇒ Modalized Fregean Axiom -/
-def classicism_implies_modalized_fregean : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalizedFregean.schemaIn
-
-/-- `classicism-implies-modalized-functionality-r`
-
-⊤ ⇒ Modalized Functionality -/
-def classicism_implies_modalized_functionality_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalizedFunctionality.schemaIn
-
-/-- `classicism-implies-modalized-plenitude-r`
-
-⊤ ⇒ Modalized Plenitude -/
-def classicism_implies_modalized_plenitude_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalizedPlenitude.schemaIn
-
-/-- `classicism-implies-ordinary-comprehension-r`
-
-⊤ ⇒ Ordinary Comprehension -/
-def classicism_implies_ordinary_comprehension_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.ordinaryComprehension)
 
 /-- `completeness-and-actuality-imply-weak-rigid-comprehension`
 
@@ -4634,38 +4502,6 @@ def boolean_completeness_t.lub : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BooleanCompletenessT.schemaIn ↔
       Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BooleanCompletenessTLUB.schemaIn
 
-/-- `broad-necessitism-r`, variant `polyadic`
-
-Broad Necessitism ⇔ Polyadic form -/
-def broad_necessitism_r.polyadic : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BroadNecessitism.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BroadNecessitism.listSchemaIn
-
-/-- `converse-barcan-r`, variant `polyadic`
-
-CBF ⇔ Polyadic form -/
-def converse_barcan_r.polyadic : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ConverseBarcan.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ConverseBarcan.listSchemaIn
-
-/-- `converse-barcan-r`, variant `dual`
-
-CBF ⇔ Dual form -/
-def converse_barcan_r.dual : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ConverseBarcan.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ConverseBarcanDual.schemaIn
-
-/-- `converse-barcan-r`, variant `dual-polyadic`
-
-CBF ⇔ Dual polyadic form -/
-def converse_barcan_r.dual_polyadic : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ConverseBarcan.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ConverseBarcanDual.listSchemaIn
-
 /-- `distinctness-necessary-r`, variant `polyadic`
 
 ND ⇔ Polyadic form -/
@@ -4722,14 +4558,6 @@ def distinctness_signature_r.possibility : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _) ↔
       Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.possibilityC _)
 
-/-- `existence-r`, variant `polyadic`
-
-Existence ⇔ Polyadic form -/
-def existence_r.polyadic : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Existence.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Existence.listSchemaIn
-
 /-- `functional-choice-r`, variant `polyadic`
 
 Functional Choice ⇔ Polyadic form -/
@@ -4746,14 +4574,6 @@ def functionality_r.polyadic : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Functionality.schemaIn ↔
       Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Functionality.listSchemaIn
 
-/-- `identity-necessary-r`, variant `polyadic`
-
-NI ⇔ Polyadic form -/
-def identity_necessary_r.polyadic : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfIdentity.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfIdentity.listSchemaIn
-
 /-- `modal-b`, variant `dual`
 
 B ⇔ Dual form -/
@@ -4769,46 +4589,6 @@ def modal_five.dual : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFive.schemaIn ↔
       Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFiveDual.schemaIn
-
-/-- `modal-four`, variant `dual`
-
-4 ⇔ Dual form -/
-def modal_four.dual : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFour.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFourDual.schemaIn
-
-/-- `modal-k`, variant `dual`
-
-K ⇔ Dual form -/
-def modal_k.dual : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalK.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalKDual.schemaIn
-
-/-- `modal-t`, variant `dual`
-
-T ⇔ Dual form -/
-def modal_t.dual : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalT.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalTDual.schemaIn
-
-/-- `modalized-functionality-r`, variant `polyadic`
-
-Modalized Functionality ⇔ Polyadic form -/
-def modalized_functionality_r.polyadic : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalizedFunctionality.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalizedFunctionality.listSchemaIn
-
-/-- `modalized-plenitude-r`, variant `polyadic`
-
-Modalized Plenitude ⇔ Polyadic form -/
-def modalized_plenitude_r.polyadic : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalizedPlenitude.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalizedPlenitude.listSchemaIn
 
 /-- `necessary-atomicity-r`, variant `dual`
 

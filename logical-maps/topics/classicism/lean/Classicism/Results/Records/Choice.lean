@@ -247,14 +247,6 @@ theorem relational_choice_and_extensionality_imply_transversal_choice {σ : Type
   rw [e] at hS₂
   exact hSu z hS₂
 
-/-- Two coextensive weakly rigid properties are identical: each is below the other by
-weak persistence and weak inextensibility, and Intensionality. -/
-theorem eq_of_weaklyRigid {σ : Type} [Ty σ] (C C' : σ → Prop) (hC : WeaklyRigid C)
-    (hC' : WeaklyRigid C') (hco : ∀ z, C z ↔ C' z) : C = C' :=
-  le_antisymm_arrow C C'
-    ((le_iff _ _).2 (hC.2 C' fun z hz => weaklyPersistent_apply hC'.1 z ((hco z).1 hz)))
-    ((le_iff _ _).2 (hC'.2 C fun z hz => weaklyPersistent_apply hC.1 z ((hco z).2 hz)))
-
 /-- `relational-choice-and-weak-rigid-comprehension-imply-transversal-choice`: as above,
 with each cell represented by a weakly rigid coextension, which is unique. -/
 theorem relational_choice_and_weak_rigid_comprehension_imply_transversal_choice
@@ -274,7 +266,7 @@ theorem relational_choice_and_weak_rigid_comprehension_imply_transversal_choice
   refine ⟨y, hRxy, ⟨C, hC, fun z => ⟨fun hz => hR.2.2 y x z (hR.2.1 x y hRxy) ((hco z).2 hz),
     fun hz => (hco z).1 (hR.2.2 x y z hRxy hz)⟩, hSy⟩, ?_⟩
   rintro z ⟨hRxz, C', hC', hco', hSC'⟩
-  have e : C' = C := eq_of_weaklyRigid C' C hC' hC fun u =>
+  have e : C' = C := eq_of_weaklyRigid_coext hC' hC fun u =>
     ⟨fun hu => (hco u).1 (hR.2.2 x z u hRxz ((hco' u).1 hu)),
      fun hu => (hco' u).2 (hR.2.2 z x u (hR.2.1 x z hRxz) ((hco u).2 hu))⟩
   rw [e] at hSC'
@@ -1158,10 +1150,6 @@ theorem modal_well_ordering_implies_necessary_modalized_relational_choice {σ τ
 
 
 /-! ### Strong Leibniz, Weak Rigid Comprehension and Relational Choice (20 October 2026) -/
-
-/-- An atom of type `t` is not `⊥`. -/
-theorem atom_ne_false (w : Prop) (hw : Atom w) : w ≠ False := fun e =>
-  not_le_neg_of_atom hw (le_neg_of_eq_false w e)
 
 /-- Distinct atoms of type `t` are incompatible: their meet lies below each, so it is that
 atom or `⊥`, and it is not both atoms. -/

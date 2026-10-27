@@ -53,6 +53,10 @@ theorem atom_le_imp_le (w q : Prop) (hw : Atom w) : w ≤ (q → w ≤ q) :=
       rw [imp_eq_not_or q (w ≤ q)]
       exact le_or_of_le_left_prop w (¬ q) _ h)
 
+/-- An atom of type `t` is not `⊥`. -/
+theorem atom_ne_false (w : Prop) (hw : Atom w) : w ≠ False := fun e =>
+  not_le_neg_of_atom hw (le_neg_of_eq_false w e)
+
 /-! ### At `σ → t` -/
 
 /-- A non-bottom property deciding every property is an atom, at `σ → t`. -/

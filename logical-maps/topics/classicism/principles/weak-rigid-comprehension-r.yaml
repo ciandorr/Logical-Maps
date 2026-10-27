@@ -3,8 +3,7 @@ name: Weak Rigid Comprehension
 category: comprehension
 statement: Every relation, including a proposition, is coextensive with a weakly rigid one, that is, with
   one that is weakly persistent and weakly inextensible.
-formal: $\forall X^{\bar\sigma t}\, .\,\exists Y^{\bar\sigma t}\, .\,\operatorname{WeaklyRigid}(Y)\land(\forall\bar
-  z^{\bar\sigma}\, .\,X[\bar z]\leftrightarrow Y[\bar z])$
+formal: $\forall X^{\bar\sigma t}\, .\,\exists Y^{\bar\sigma t}\, .\,\operatorname{WeaklyRigid}(Y)\land(X\equiv Y)$
 date: '2026-09-19'
 sources:
 - Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Proposition
@@ -44,8 +43,7 @@ variants:
   statement: Every relation, including a proposition, is coextensive with one that is persistent and weakly
     inextensible.
   formal: $\forall X^{\bar\sigma t}\, .\,\exists Y^{\bar\sigma t}\, .\,\operatorname{Persistent}(Y)\land
-    \operatorname{WeaklyInextensible}(Y)\land(\forall\bar z^{\bar\sigma}\, .\,X[\bar z]\leftrightarrow
-    Y[\bar z])$
+    \operatorname{WeaklyInextensible}(Y)\land(X\equiv Y)$
   equivalence: 'Persistence implies weak persistence by T, so the persistent form implies the official
     one. The interesting direction: a weakly rigid $Y$ is persistent. Apply its weak inextensibility to
     $X:=\lambda\bar x\, .\,\Box Y[\bar x]$. The hypothesis $\forall\bar x\, .\,Y[\bar x]\to\Box X[\bar

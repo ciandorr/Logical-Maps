@@ -8,7 +8,7 @@ here. Notation and the lattice facts are as in Background: $Y\le_\tau X$ is
 $\Box\forall\bar y\, .\,Y\bar y\to X\bar y$, $\bot_\tau=\lambda\bar y\, .\,\bot$,
 $Y\le\neg Y$ iff $Y=\bot$, and $\operatorname{Atom}_\tau(Y)$ says that the
 entities strictly below $Y$ are exactly $\bot$. We use Intensionality,
-$\Box\forall\bar y\, .\,(Y\bar y\leftrightarrow X\bar y)\to Y=X$, a theorem of C,
+$\Box(Y\equiv X)\to Y=X$, a theorem of C,
 and the fact that $\Box$ carries H-provable implications (necessitation
 and K).
 
@@ -38,7 +38,7 @@ which is atomhood. From $Z\le A$ we get $Z\bar x\le A\bar x=w$, so by
 atomhood of $w$ either $Z\bar x=\bot$ or $Z\bar x=w$.
 
 *If $Z\bar x=w$, then $Z=A$.* By Intensionality it suffices to show
-$\Box\forall\bar y\, .\,(Z\bar y\leftrightarrow A\bar y)$. One direction is $Z\le A$.
+$\Box(Z\equiv A)$. One direction is $Z\le A$.
 For the other, $Z\bar x=w$ gives $\Box(w\to Z\bar x)$, and
 $(w\to Z\bar x)\to\forall\bar y\, .\,(w\land\bar y=\bar x\to Z\bar y)$ is a
 theorem of H by Leibniz's law, so K gives $\Box\forall\bar y\, .\,(A\bar y\to Z\bar y)$.

@@ -23,9 +23,8 @@ proof: >-
   if $w$ obtains. Existence: given $X$, let $Y:=\lambda z\, .\,Xz\land w$. Since $w$ is true, $Y$ is
   coextensive with $X$, and $FY$ holds because $\forall z\, .\,(Xz\land w)\to w$ is a theorem, hence
   necessary. Uniqueness: let $Y_1$ and $Y_2$ satisfy $F$ and be coextensive with $X$. Then
-  $\forall z\, .\,Y_1z\leftrightarrow Y_2z$ is true, so Actuality gives $\Box(w\to\forall z\, .\,Y_1z\leftrightarrow
-  Y_2z)$. Together with $\Box\forall z\, .\,Y_1z\to w$ and $\Box\forall z\, .\,Y_2z\to w$, K gives
-  $\Box\forall z\, .\,Y_1z\leftrightarrow Y_2z$: at any $z$, if either side holds then $w$ does, and then
+  $Y_1\equiv Y_2$ is true, so Actuality gives $\Box(w\toY_1\equiv Y_2)$. Together with $\Box\forall z\, .\,Y_1z\to w$ and $\Box\forall z\, .\,Y_2z\to w$, K gives
+  $\Box(Y_1\equiv Y_2)$: at any $z$, if either side holds then $w$ does, and then
   the two sides agree. Necessarily coextensive properties are identical in C (Intensionality), so
   $Y_1=Y_2$.
 references:

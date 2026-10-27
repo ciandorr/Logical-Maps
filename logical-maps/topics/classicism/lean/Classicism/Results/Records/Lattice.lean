@@ -505,13 +505,6 @@ theorem necessary_bf_and_actuality_imply_inextensible_comprehension {σ : Type} 
 theorem not_exists_of_forall_not' {τ : Type} [Ty τ] (Y : τ → Prop) :
     (∀ x, ¬ Y x) → ¬ ∃ x, Y x := fun h hx => hx.elim fun x hy => h x hy
 
-/-- The dual of BF: `◇∃x. Yx → ∃x. ◇Yx`. -/
-theorem exists_dia_of_dia_exists {τ : Type} [Ty τ] (bf : P.Barcan τ) (Y : τ → Prop) :
-    ◇ (∃ x, Y x) → ∃ x, ◇ (Y x) := fun h =>
-  (em (∃ x, ◇ (Y x))).elim id fun hn =>
-    (not_dia_of_box_not _ (modal_K _ _ (nec% (not_exists_of_forall_not' Y))
-      (bf (λ x ↦ ¬ Y x) fun x => box_not_of_not_dia _ fun hx => hn ⟨x, hx⟩)) h).elim
-
 /-- `¬(∀z. Cz → Xz) → ∃z. Cz ∧ ¬Xz`. -/
 theorem exists_not_of_not_forall' {σ : Type} [Ty σ] (C X : σ → Prop) :
     ¬ (∀ z, C z → X z) → ∃ z, C z ∧ ¬ X z := fun h =>
@@ -552,10 +545,10 @@ theorem actuality_and_bf_imply_inextensible_comprehension {σ : Type} [Ty σ] :
     Actuality → P.Barcan (σ → Prop) → P.Barcan σ → InextensibleComprehension (σ → Prop) :=
   fun act bf₁ bf X => act.elim fun w (hw : ActualWorld w) =>
     ⟨λ z ↦ ◇ (w ∧ X z), (em (□ (WeaklyInextensible (λ z ↦ ◇ (w ∧ X z))))).elim id fun hn =>
-      ((exists_dia_of_dia_exists bf₁ _ (dia_mono _ _
+      ((dia_exists_of_bf bf₁ _ (dia_mono _ _
           (nec% (not_weaklyInextensible (λ z ↦ ◇ (w ∧ X z)))) (dia_not_of_not_box _ hn))).elim
         fun Y hY =>
-          (exists_dia_of_dia_exists bf _ (dia_dia _ (dia_mono _ _
+          (dia_exists_of_bf bf _ (dia_dia _ (dia_mono _ _
               (nec% (fun (h : (∀ z, ◇ (w ∧ X z) → □ (Y z)) ∧ ◇ (∃ z, ◇ (w ∧ X z) ∧ ¬ Y z)) =>
                 h.2)) hY))).elim fun z hz =>
             have hC : ◇ (w ∧ X z) := dia_dia _
@@ -689,7 +682,7 @@ is possibly instantiated, BF gives `x` with `◇Xx`, a strong world `w` at `t` l
 its necessitation. -/
 theorem strong_leibniz_t_and_bf_imply_strong_leibniz {σ : Type} [Ty σ] :
     StrongLeibnizT → Barcan σ → StrongLeibniz (σ → Prop) := fun sl bf X hX =>
-  (exists_dia_of_dia_exists bf X (dia_exists_of_ne_bot X hX)).elim fun x hx =>
+  (dia_exists_of_bf bf X (dia_exists_of_ne_bot X hX)).elim fun x hx =>
     (sl (X x) hx).elim fun w hw =>
       ⟨λ y ↦ w ∧ y = x,
         ⟨fun e => hw.1.1 ((and_rfl_eq w x).symm.trans (congrFun e x)),
@@ -703,7 +696,7 @@ theorem strong_leibniz_t_and_bf_imply_strong_leibniz {σ : Type} [Ty σ] :
 theorem atomicity_t_and_bf_imply_atomicity {σ : Type} [Ty σ] :
     AtomicityT → Barcan σ → Atomicity (σ → Prop) := fun at_ bf X =>
   (em (X ≤ ¬ X)).elim Or.inl fun hX => Or.inr <|
-    (exists_dia_of_dia_exists bf X
+    (dia_exists_of_bf bf X
         (dia_exists_of_ne_bot X fun e => hX (by rw [e]; exact bot_le_arrow _))).elim fun x hx =>
       ((at_ (X x)).elim (fun h => (hx (eq_false_of_le_neg _ h)).elim) id).elim fun w hw =>
         ⟨λ y ↦ w ∧ y = x,

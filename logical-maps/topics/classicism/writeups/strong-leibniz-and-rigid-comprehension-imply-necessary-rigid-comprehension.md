@@ -60,8 +60,7 @@ give BF at every relational type.
 Comprehension at $\sigma t$ and at $tt$, and BF at $\sigma$ and at $\sigma t$.* Then
 
 $$
-\Box\forall X^{\sigma t}\, .\,\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\land
-\forall z\, .\,(Xz\leftrightarrow Yz).
+\Box\forall X^{\sigma t}\, .\,\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\landX\equiv Y.
 $$
 
 *Proof.* Let $A^{tt}$ be the cover of Lemma 1 at $t$. Here
@@ -69,8 +68,7 @@ $\operatorname{Decides}(w)$ is $\forall q^t\, .\,w\le q\lor w\le\neg q$, and (c)
 $\Box\exists w\, .\,Aw\land w$. For $X^{\sigma t}$ put
 
 $$
-\operatorname{HasRigidCoext}(X):=\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\land
-\forall z\, .\,(Xz\leftrightarrow Yz).
+\operatorname{HasRigidCoext}(X):=\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\landX\equiv Y.
 $$
 
 Fix $X^{\sigma t}$, and let $w$ be an instance of $A$. By Rigid Comprehension at
@@ -99,7 +97,7 @@ $$
 From (2) and (3),
 
 $$
-\Box\bigl(w\to\forall z\, .\,(Xz\leftrightarrow Pz)\bigr),
+\Box\bigl(w\toX\equiv P\bigr),
 $$
 
 and as $\operatorname{Rigid}(P)$ is necessary,

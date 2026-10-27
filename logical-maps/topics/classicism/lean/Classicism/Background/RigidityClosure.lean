@@ -1,6 +1,5 @@
-import Classicism.Results.Records.Lattice
-import Classicism.Tools.Check
-import Classicism.Tools.TypeSystem
+import Classicism.Background.Rigidity
+import Classicism.Principles
 
 /-!
 # Background: closure properties of rigidity
@@ -124,5 +123,12 @@ theorem direct_image_inverse_value (f : σ → τ) (X : σ → Prop) (hi : Injec
     fun hx => ⟨x, hx, rfl⟩⟩
 
 end maps
+
+/-! ### The universal property -/
+
+/-- With BF at `σ`, `λz. ⊤` is weakly rigid. -/
+theorem weaklyRigid_top_of_bf {σ : Type} [Ty σ] : P.Barcan σ → WeaklyRigid (fun _ : σ => True) := fun bf =>
+  ⟨fun _ _ => box_true, fun Z hZ =>
+    bf (λ z ↦ True → Z z) fun z => box_imp_of_box True (Z z) (hZ z trivial)⟩
 
 end Classicism.Rigidity

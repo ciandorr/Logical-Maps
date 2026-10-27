@@ -3,7 +3,7 @@ import Classicism.Principles
 import Classicism.Results.Records.Coarse
 import Classicism.Results.Records.C5
 import Classicism.Results.Records.Lattice
-import Classicism.Results.Records.AppendixD
+import Classicism.Background.AppendixD
 import Classicism.Background.Varieties
 
 /-!

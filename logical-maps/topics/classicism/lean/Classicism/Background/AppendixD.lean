@@ -2,7 +2,7 @@ import Classicism.Paper
 import Classicism.Principles
 
 /-!
-# *The Bounds of Possibility*, Appendix D, in C
+# Background: *The Bounds of Possibility*, Appendix D, in C
 
 Dorr, Hawthorne and Yli-Vakkuri, *The Bounds of Possibility* (OUP 2021), Appendix D,
 *Narrower Modalities in Higher-Order S4*, pp. 400–409, read into C: the appendix's primitive
@@ -20,7 +20,7 @@ Where the appendix uses `H_S5R`, only for `□Actuality`, the propositions here 
 `W@ a` at the world of evaluation only (`D19`), as the map's records need.
 -/
 
-namespace Classicism.Proofs.AppD
+namespace Classicism.AppD
 open Classicism.P Classicism.Paper
 
 /-! ### Properties of operators (p. 400) -/
@@ -231,4 +231,4 @@ theorem prop_D19 (X : Prop → Prop) (h : □ (OpNKJ X)) (a : Prop) (ha : WAt a)
       (d19_core X hX a Y h₁ hn : ∀ z, Y z))) h)
     (modal_four _ (ha.2 _ he))⟩
 
-end Classicism.Proofs.AppD
+end Classicism.AppD

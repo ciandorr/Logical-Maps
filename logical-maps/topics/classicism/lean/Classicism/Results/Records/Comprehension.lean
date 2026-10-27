@@ -1,5 +1,6 @@
 import Classicism.Paper
 import Classicism.Principles
+import Classicism.Background.RigidityClosure
 
 /-!
 # Proofs of map records: Comprehension
@@ -334,19 +335,12 @@ theorem barcan_of_weaklyInextensible_top {σ : Type} [Ty σ]
   modal_K _ _ (nec% (fun (h : ∀ x : σ, True → X x) (x : σ) => h x trivial))
     (wi X (fun x _ => hX x))
 
-/-- BF makes `λx. ⊤` weakly rigid. -/
-theorem weaklyRigid_top_of_barcan {σ : Type} [Ty σ] (bf : Barcan σ) :
-    WeaklyRigid (fun _ : σ => True) :=
-  ⟨fun _ _ => box_true, fun Z hZ =>
-    modal_K _ _ (nec% (fun (h : ∀ x : σ, Z x) (x : σ) (_ : True) => h x))
-      (bf Z fun z => hZ z trivial)⟩
-
 /-- `tame-rigidity-and-barcan-imply-necessary-barcan`, at `σ`: Tame Rigidity at `σ → t`
 makes the weakly rigid `λx. ⊤` rigid, and its inextensibility is `□`BF. -/
 theorem tame_rigidity_and_barcan_imply_necessary_barcan {σ : Type} [Ty σ] :
     TameRigidity (σ → Prop) → Barcan σ → NecBarcan σ := fun tr bf =>
   modal_K _ _ (nec% (barcan_of_weaklyInextensible_top (σ := σ)))
-    (tr _ (weaklyRigid_top_of_barcan bf)).2
+    (tr _ (Rigidity.weaklyRigid_top_of_bf bf)).2
 
 /-- `tame-rigidity-and-bf-relational-imply-necessary-bf-relational`: the same, at a
 relational type. -/

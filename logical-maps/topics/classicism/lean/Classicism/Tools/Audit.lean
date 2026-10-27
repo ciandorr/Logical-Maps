@@ -18,7 +18,7 @@ audit, `Classicism/Strict/Audit.lean`.
 
 -- Every theorem of the shallow layer: the prelude, the identities, the classes, the records.
 #classicism_audit Classicism.Booleanism Classicism.Identities Classicism.Background.Framework Classicism.Background.Necessity
-#classicism_audit Classicism.Background.Order Classicism.Background.Rigidity Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Background.Relations Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Background.Varieties Classicism.Results.Records.Necessity
+#classicism_audit Classicism.Background.Order Classicism.Background.Rigidity Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Background.Relations Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Background.AppendixD Classicism.Background.Varieties Classicism.Results.Records.Necessity
 #classicism_audit Classicism.Pointwise Classicism.Background.Worlds Classicism.Background.Lattice
 #classicism_audit Classicism.Principles.Base Classicism.Principles.Coarse Classicism.Principles.Extensionality Classicism.Principles.Lattice Classicism.Principles.Instances Classicism.Principles.Comprehension Classicism.Principles.Choice Classicism.Principles.Infinity Classicism.Principles.Schematic
 #classicism_audit Classicism.Background.Arithmetic
@@ -39,7 +39,7 @@ not guard, no type outside `R`, and no constant beyond the logical inductives, t
 plumbing and the formalisation's own metalanguage. -/
 
 #classicism_types_audit Classicism.Booleanism Classicism.Identities Classicism.Background.Framework Classicism.Background.Necessity
-#classicism_types_audit Classicism.Background.Order Classicism.Background.Rigidity Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Background.Relations Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Background.Varieties Classicism.Results.Records.Necessity
+#classicism_types_audit Classicism.Background.Order Classicism.Background.Rigidity Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Background.Relations Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Background.AppendixD Classicism.Background.Varieties Classicism.Results.Records.Necessity
 #classicism_types_audit Classicism.Pointwise Classicism.Background.Worlds Classicism.Background.Lattice
 #classicism_types_audit Classicism.Principles.Base Classicism.Principles.Coarse Classicism.Principles.Extensionality Classicism.Principles.Lattice Classicism.Principles.Instances Classicism.Principles.Comprehension Classicism.Principles.Choice Classicism.Principles.Infinity Classicism.Principles.Schematic
 #classicism_types_audit Classicism.Background.Arithmetic

@@ -32,7 +32,8 @@ $$
 \end{aligned}
 $$
 
-Thus an atom is non-bottom and has no non-bottom strict lower bound.
+Thus an atom is non-bottom {lean: Classicism.not_le_neg_of_atom, Classicism.atom_ne_false} and has no
+non-bottom strict lower bound.
 These are the definitions of *Classicism*, §2.2, pp. 23–24.
 :::
 

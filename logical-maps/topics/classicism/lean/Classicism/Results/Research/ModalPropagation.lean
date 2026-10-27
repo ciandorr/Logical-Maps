@@ -1,4 +1,5 @@
 import Classicism.Results.Research.SealedWorldCover
+import Classicism.Results.Records.C5
 
 /-!
 # Rigidity pullback and modal propagation
@@ -52,14 +53,6 @@ theorem universal_rigid_barcan_iff_identity (U : σ → Prop) (hU : Rigid U)
     (hall : ∀ x, U x) : Barcan σ ↔ U = Universe :=
   ⟨universal_rigid_eq_universe_of_barcan U hU hall,
     fun he => box_elim (universe_rigid_iff_necessary_barcan.1 (he ▸ hU))⟩
-
-/-- Only the local universal-comprehension witness is used. -/
-theorem rigid_comprehension_barcan_implies_necessary_barcan :
-    RigidComprehension (σ → Prop) → Barcan σ → NecBarcan σ := fun rc bf =>
-  (rc Universe).elim fun U hU =>
-    universe_rigid_iff_necessary_barcan.1
-      ((universal_rigid_eq_universe_of_barcan U hU.1
-        (fun x => (hU.2 x).1 trivial) bf) ▸ hU.1)
 
 end top
 
@@ -258,7 +251,7 @@ end Classicism.Research.ModalPropagation
   Classicism.Research.ModalPropagation.universe_rigid_iff_necessary_barcan
   Classicism.Research.ModalPropagation.universal_rigid_eq_universe_of_barcan
   Classicism.Research.ModalPropagation.universal_rigid_barcan_iff_identity
-  Classicism.Research.ModalPropagation.rigid_comprehension_barcan_implies_necessary_barcan
+  Classicism.Proofs.rigid_comprehension_and_bf_imply_necessary_bf
   Classicism.Research.ModalPropagation.haecceity_injective
   Classicism.Research.ModalPropagation.lift_on_code
   Classicism.Research.ModalPropagation.code_necessary
@@ -289,7 +282,7 @@ end Classicism.Research.ModalPropagation
   Classicism.Research.ModalPropagation.universe_rigid_iff_necessary_barcan
   Classicism.Research.ModalPropagation.universal_rigid_eq_universe_of_barcan
   Classicism.Research.ModalPropagation.universal_rigid_barcan_iff_identity
-  Classicism.Research.ModalPropagation.rigid_comprehension_barcan_implies_necessary_barcan
+  Classicism.Proofs.rigid_comprehension_and_bf_imply_necessary_bf
   Classicism.Research.ModalPropagation.haecceity_injective
   Classicism.Research.ModalPropagation.lift_on_code
   Classicism.Research.ModalPropagation.code_necessary

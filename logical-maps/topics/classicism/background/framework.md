@@ -47,6 +47,9 @@ written:
 - $X\equiv Y$ (*$X$ and $Y$ are coextensive*) abbreviates
   $\forall\bar z\, .\,X[\bar z]\leftrightarrow Y[\bar z]$. In C coextensive relations are
   identical only when necessarily coextensive ([[intensionality-r|Intensionality]]).
+- For the empty tuple, at type $t$, $p\subseteq q$ is $p\to q$ and $p\equiv q$ is
+  $p\leftrightarrow q$. In Lean these are the notations `X ⊆ Y` and `X ≡ Y`, defined
+  pointwise at every relational type.
 - $\top_\tau$ and $\bot_\tau$, at a relational type $\tau=\bar\sigma t$, are
   $\lambda\bar x\, .\,\top$ and $\lambda\bar x\, .\,\bot$, the top and bottom of $\le_\tau$.
 - $H_{\bar x}:=\lambda\bar y\, .\,\bar y=\bar x$ is the *haecceity* of $\bar x$, the

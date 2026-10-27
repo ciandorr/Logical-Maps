@@ -21,7 +21,7 @@ meet at the sentence.
 **Possibility gives Distinctness.** If `A = B` is not a theorem, `A ≠ B` is consistent
 (the deduction theorem and excluded middle, `consistent_neg_of_not_theorem`), so
 Possibility has `◇(A ≠ B)`; and `◇(A ≠ B) → A ≠ B` is a theorem of Classicism by the
-necessity of identity — proved in the shallow layer (`dia_ne_imp_ne`), certified, carried
+necessity of identity — proved in the shallow layer (`ne_of_dia_ne`), certified, carried
 into the signature (`ofPure`), and applied to `A` and `B` (`allE₂β`).
 
 The maximalization of a theory contains its Distinctness schema, so `Max T` entails both.
@@ -29,15 +29,7 @@ The maximalization of a theory contains its Distinctness schema, so `Max T` enta
 
 namespace Classicism
 
-/-- What is possibly distinct is distinct: `◇(x ≠ y) → x ≠ y`, the contrapositive of the
-necessity of identity. The object-level work is one `simp`: given `x = y`, `x ≠ y` is
-`¬(y = y)`, which is `¬⊤`, which is `⊥`. The `eq_self` step is `propext` at the closed
-argument `rfl`, Necessitation of `y = y`, which the gate checks at the use site and the
-translator turns into Subst. -/
-theorem dia_ne_imp_ne {σ : Type} [Ty σ] (x y : σ) : ◇ (x ≠ y) → x ≠ y :=
-  fun h hxy => h (by simp only [hxy, ne_eq_not, eq_self, not_true_eq])
-
-#classicism_derive Classicism.dia_ne_imp_ne
+#classicism_derive Classicism.ne_of_dia_ne
 
 namespace Meta
 
@@ -56,7 +48,7 @@ theorem possibility_entails_distinctness : possibility Ax ⟹ distinctness Ax :=
   have hd : Theorem (C.axioms ∪ possibility Ax) (Term.dia (Term.neg (Term.eq' x y))) :=
     Theorem.ax ⟨by simpa using hc, Term.neg (Term.eq' x y), consistent_neg_of_not_theorem hxy, rfl⟩
   exact Theorem.mp (Derivable.allE₂β
-    (Theorem.ofCMinus (C.TheoremMinus.ofPure (dia_ne_imp_ne.derivable σ))) x y) hd
+    (Theorem.ofCMinus (C.TheoremMinus.ofPure (ne_of_dia_ne.derivable σ))) x y) hd
 
 theorem max_entails_distinctness : max Ax ⟹ distinctness Ax :=
   Entails.of_subset (distinctness_subset_max Ax)

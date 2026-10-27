@@ -4,9 +4,7 @@ category: choice
 statement: >-
   There is a property of properties that picks out exactly one property from each coextension class,
   that is, exactly one property coextensive with any given property.
-formal: $\exists F^{(\sigma t)t}\, .\,\forall X^{\sigma t}\, .\,\exists Y^{\sigma t}\, .\,FY\land(\forall
-  z^\sigma\, .\,Xz\leftrightarrow Yz)\land\forall Y'^{\sigma t}\, .\,(FY'\land\forall z^\sigma\, .\,Xz\leftrightarrow
-  Y'z)\to Y'=Y$
+formal: $\exists F^{(\sigma t)t}\, .\,\forall X^{\sigma t}\, .\,\exists Y^{\sigma t}\, .\,FY\land(X\equiv Y)\land\forall Y'^{\sigma t}\, .\,(FY'\landX\equiv Y')\to Y'=Y$
 date: '2026-09-26'
 sources:
 - Christopher Sun, 26 September 2026, principle and its connections to Transversal Choice, Relational
@@ -34,9 +32,7 @@ variants:
   name: Polyadic form
   statement: There is a property of relations that picks out exactly one relation from each coextension
     class.
-  formal: $\exists F^{(\bar\sigma t)t}\, .\,\forall X^{\bar\sigma t}\, .\,\exists Y^{\bar\sigma t}\, .\,FY\land(\forall\bar
-    z^{\bar\sigma}\, .\,X[\bar z]\leftrightarrow Y[\bar z])\land\forall Y'^{\bar\sigma t}\, .\,(FY'\land\forall\bar
-    z^{\bar\sigma}\, .\,X[\bar z]\leftrightarrow Y'[\bar z])\to Y'=Y$
+  formal: $\exists F^{(\bar\sigma t)t}\, .\,\forall X^{\bar\sigma t}\, .\,\exists Y^{\bar\sigma t}\, .\,FY\land(X\equiv Y)\land\forall Y'^{\bar\sigma t}\, .\,(FY'\landX\equiv Y')\to Y'=Y$
   equivalence: The original form is the case of a one-element tuple. Code tuples by their haecceities
     (Background, Polyadic forms). Let $F''$ witness the original form at $\bar\sigma t$, and let $\operatorname{Code}:=\lambda
     A\, .\,\exists\bar x\, .\,A=H_{\bar x}$. Put $F:=\lambda Y\, .\,\exists Z\, .\,F''Z\land(\forall A\,

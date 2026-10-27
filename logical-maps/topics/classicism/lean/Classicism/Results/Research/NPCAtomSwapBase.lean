@@ -108,12 +108,9 @@ theorem lift_swap_funext {σ τ : Type} [Ty σ] [Rel τ] (w v : Prop) (X Y : σ 
   modalized_functionality X Y
     (modal_K _ _ (modal_K _ _ hb (modal_four _ hnd)) (hyp_box w v hnd hh))
 
-theorem atom_nonbottom (w : Prop) (hw : Atom w) : w ≠ False :=
-  fun hf => not_le_neg_of_atom hw (le_neg_of_eq_false w hf)
-
 theorem atom_not_both_le (w p : Prop) (hw : Atom w) (hp : w ≤ p)
     (hn : w ≤ ¬ p) : False :=
-  atom_nonbottom w hw (le_antisymm_prop w False
+  atom_ne_false w hw (le_antisymm_prop w False
     ((congrArg (fun r => w ≤ r) (and_not_self_eq p)).mp (le_and_prop w p (¬ p) hp hn))
     (bot_le_prop w))
 
@@ -141,7 +138,7 @@ theorem atom_le_rigid_iff (w p : Prop) (hw : Atom w) (hr : RigidProp p) :
   hr.elim
     (fun ht => ⟨fun _ => ht.mpr trivial,
       fun _ => (congrArg (fun r => w ≤ r) ht).mpr (le_top_prop w)⟩)
-    (fun hf => ⟨fun hp => False.elim (atom_nonbottom w hw
+    (fun hf => ⟨fun hp => False.elim (atom_ne_false w hw
       (le_antisymm_prop w False ((congrArg (fun r => w ≤ r) hf).mp hp) (bot_le_prop w))),
       fun hp => False.elim (hf ▸ hp)⟩)
 

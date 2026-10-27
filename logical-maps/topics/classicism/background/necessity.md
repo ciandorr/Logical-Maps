@@ -132,10 +132,10 @@ credit: Andrew Bacon and Cian Dorr
 sources: Classicism, §1.5, pp. 17–18
 ---
 Necessarily coextensive relations are identical:
-$\forall X Y^{\bar\sigma t}\, .\,\Box(\forall\bar z^{\bar\sigma}\, .\,X[\bar z]\leftrightarrow Y[\bar z])\to X=Y$.
+$\forall X Y^{\bar\sigma t}\, .\,\Box(X\equiv Y)\to X=Y$.
 
 *Proof.* Logical Equivalence identifies the λ-abstractions of
-$X[\bar z]\land(\forall\bar u\, .\,X[\bar u]\leftrightarrow Y[\bar u])$ and of the analogous
+$X[\bar z]\land(X\equiv Y)$ and of the analogous
 expression with $Y$ in the first conjunct. If the biconditional is necessary,
 substitute its identity with $\top$ into the abstraction identity. Boolean identities
 and β-η conversion leave $X=Y$, as on p. 17.

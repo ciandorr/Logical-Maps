@@ -13,20 +13,11 @@ namespace Classicism.Research.ModalPropagationRigidPower
 open Classicism.Paper
 variable {σ : Type} [Ty σ]
 
-/-- A rigid relation is necessarily rigid, by `4`. -/
-theorem box_rigid {τ : Type} [Rel τ] (X : τ) (h : Rigid X) : □ (Rigid X) :=
-  modal_K _ _ (nec% (rigid_iff_box_weaklyRigid X).2)
-    (modal_four _ ((rigid_iff_box_weaklyRigid X).1 h))
-
-/-- Entailment is necessary if true, by `4`. -/
-theorem box_le_rel {τ : Type} [Rel τ] [Order τ] (X Y : τ) (h : X ≤ Y) : □ (X ≤ Y) :=
-  modal_K _ _ (nec% (le_iff X Y).2) (modal_four _ ((le_iff X Y).1 h))
-
 /-- The power property is persistent, in C. -/
 theorem rigid_power_property_persistent {τ : Type} [Rel τ] [Order τ] (F : τ) :
     Persistent (fun X : τ => Rigid X ∧ X ≤ F) :=
   nec% (fun (X : τ) (hX : Rigid X ∧ X ≤ F) =>
-    Eq.mpr (box_and_eq (Rigid X) (X ≤ F)) ⟨box_rigid X hX.1, box_le_rel X F hX.2⟩)
+    Eq.mpr (box_and_eq (Rigid X) (X ≤ F)) ⟨rigid_necessary X hX.1, box_le_rel X F hX.2⟩)
 
 /-! ### Atomicity and Rigid Comprehension give Rigid Power (19 October 2026)
 
@@ -73,7 +64,7 @@ theorem atom_power_pullback (F : σ → Prop) (hF : Rigid F) (rc : P.RigidCompre
           (hb : ∀ z : σ, X z → ∀ Y : σ → Prop, W Y → Y z)
           (hc : ∀ z : σ, F z → ∀ Y : σ → Prop, W Y → Y z → X z)
           (hwX : WeaklyRigid X) (Y : σ → Prop) (hY : W Y) =>
-        Proofs.eq_of_weaklyRigid_coext (weaklyRigid_of_rigid (hWP Y hY).1) hwX
+        eq_of_weaklyRigid_coext (weaklyRigid_of_rigid (hWP Y hY).1) hwX
           fun z => ⟨fun hYz => hc z (incl_of_le (hWP Y hY).2 z hYz) Y hY hYz,
                     fun hXz => hb z hXz Y hY⟩))
       hWP) hb) hc) ((rigid_iff_box_weaklyRigid X).1 hX)⟩
@@ -125,15 +116,15 @@ theorem atom_rc_rigid_power :
 end Classicism.Research.ModalPropagationRigidPower
 
 #classicism_check
-  Classicism.Research.ModalPropagationRigidPower.box_rigid
-  Classicism.Research.ModalPropagationRigidPower.box_le_rel
+  Classicism.rigid_necessary
+  Classicism.box_le_rel
   Classicism.Research.ModalPropagationRigidPower.rigid_power_property_persistent
   Classicism.Research.ModalPropagationRigidPower.atom_power_pullback
   Classicism.Research.ModalPropagationRigidPower.atom_rc_rigid_power_core
   Classicism.Research.ModalPropagationRigidPower.atom_rc_rigid_power
 #classicism_types
-  Classicism.Research.ModalPropagationRigidPower.box_rigid
-  Classicism.Research.ModalPropagationRigidPower.box_le_rel
+  Classicism.rigid_necessary
+  Classicism.box_le_rel
   Classicism.Research.ModalPropagationRigidPower.rigid_power_property_persistent
   Classicism.Research.ModalPropagationRigidPower.atom_power_pullback
   Classicism.Research.ModalPropagationRigidPower.atom_rc_rigid_power_core

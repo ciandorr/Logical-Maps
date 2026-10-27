@@ -19,7 +19,11 @@ $\operatorname{FiniteCardinality}_\sigma$ collects the cardinalities reached fro
 $\mathbf{0}_\sigma$ by finitely many successors, in the impredicative sense
 that they fall under every property of cardinalities that holds of
 $\mathbf{0}_\sigma$ and of a successor whenever it holds of the cardinality
-succeeded. Every type used here ends
+succeeded. In C, $\mathbf{0}_\sigma$ and the successor of a finite cardinality are
+finite cardinalities, and a finite cardinality that holds of a property holds of every
+property coextensive with it
+{lean: Classicism.finiteCardinality_zero, Classicism.finiteCardinality_suc, Classicism.finiteCardinality_coext}.
+Every type used here ends
 in $t$, so all of them are admitted, and no type $\sigma\sigma$ is needed;
 that is why the axiom is not put in the Dedekind form, which would ask for an
 injective non-surjective operation from $\sigma$ to $\sigma$.

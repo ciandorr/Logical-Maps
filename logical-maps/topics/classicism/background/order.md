@@ -9,6 +9,13 @@ equivalent to the necessary universal closure of the pointwise implication
 order: reflexive and transitive because necessary pointwise implication is, and
 antisymmetric by [[intensionality-r|Intensionality]]
 {lean: Classicism.le_refl_rel, Classicism.le_trans_rel, Classicism.le_antisymm_rel}.
+At $t$, $\bot\le p\le\top$, and $p\land q$ and $p\lor q$ are the greatest lower and least
+upper bounds of $p$ and $q$
+{lean: Classicism.bot_le_prop, Classicism.le_top_prop, Classicism.and_le_left_prop, Classicism.and_le_right_prop, Classicism.le_and_prop, Classicism.le_or_left_prop, Classicism.le_or_right_prop};
+at every relational type $\bot_\tau\le X$, and $X\le\neg_\tau X$ only when $X=\bot_\tau$
+{lean: Classicism.bot_le_rel, Classicism.eq_bot_of_le_neg_rel}. An entailment, if true, is
+necessary: $X\le Y\to\Box(X\le Y)$, since $\le$ is boxed inclusion, by [[modal-four|4]]
+{lean: Classicism.box_le_rel}.
 
 ::: definition {#lattice-predicates}
 title: lattice predicates

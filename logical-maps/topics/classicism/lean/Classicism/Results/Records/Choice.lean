@@ -1,5 +1,6 @@
 import Classicism.Paper
 import Classicism.Principles
+import Classicism.Background.Relations
 
 /-!
 # Proofs of map records: Choice, Plenitude and Transversals
@@ -345,56 +346,11 @@ At output `σ' → t`, its list form in `σ'` being the record at every output t
 operation `Fx := λu. ∀y. Uxy → yu` represents `U` wherever its values are necessarily
 unique, by Intensionality. -/
 
-/-- `φ(x, y₀) → ∀u. y₀u ↔ Fxu`. -/
-theorem mp_value_coext {σ σ' : Type} [Ty σ] [Ty σ'] (U : σ → (σ' → Prop) → Prop) (x : σ)
-    (y₀ : σ' → Prop) :
-    (U x y₀ ∧ ∀ z, U x z → y₀ = z) → ∀ u, y₀ u ↔ ∀ y : σ' → Prop, U x y → y u :=
-  fun h u => ⟨fun hu y hy => (h.2 y hy) ▸ hu, fun hF => hF y₀ h.1⟩
-
-/-- `□φ(x, y₀)` makes `y₀` the value `Fx`. -/
-theorem mp_value {σ σ' : Type} [Ty σ] [Ty σ'] (U : σ → (σ' → Prop) → Prop) (x : σ)
-    (y₀ : σ' → Prop) (h : □ (U x y₀ ∧ ∀ z, U x z → y₀ = z)) :
-    y₀ = λ u ↦ ∀ y : σ' → Prop, U x y → y u :=
-  intensionality _ _ (modal_K _ _ (nec% (mp_value_coext U x y₀)) h)
-
-/-- `(∀x. ∃y. □φ(x, y)) → ∀x y. Uxy ↔ y = Fx`. -/
-theorem mp_represents {σ σ' : Type} [Ty σ] [Ty σ'] (U : σ → (σ' → Prop) → Prop) :
-    (∀ x, ∃ y, □ (U x y ∧ ∀ z, U x z → y = z)) →
-      ∀ x (y : σ' → Prop), U x y ↔ y = λ u ↦ ∀ y' : σ' → Prop, U x y' → y' u :=
-  fun H x y => (H x).elim fun y₀ hy₀ =>
-    have e := mp_value U x y₀ hy₀
-    have hφ := box_elim hy₀
-    ⟨fun hU => (hφ.2 y hU).symm.trans e, fun hy => (hy.trans e.symm) ▸ hφ.1⟩
-
 /-- `classicism-implies-modalized-plenitude-r`, at output `σ' → t`, its list form in `σ'`
 being the map's record: `λxu. ∀y. Uxy → yu` necessarily represents `U`. -/
 theorem classicism_implies_modalized_plenitude_r {σ' σ : Type} [Ty σ'] [Ty σ] :
     ModalizedPlenitude σ (σ' → Prop) := fun U hH =>
   ⟨λ x u ↦ ∀ y : σ' → Prop, U x y → y u, modal_K _ _ (nec% (mp_represents U)) hH⟩
-
-/-- At output `t`, `φ(x, p₀) → (p₀ ↔ Fx)` for `Fx := ∀p. Uxp → p`. -/
-theorem mp_value_coext_t {σ : Type} [Ty σ] (U : σ → Prop → Prop) (x : σ) (p₀ : Prop) :
-    (U x p₀ ∧ ∀ z, U x z → p₀ = z) → (p₀ ↔ ∀ p : Prop, U x p → p) :=
-  fun h => ⟨fun hp q hq => (h.2 q hq) ▸ hp, fun hF => hF p₀ h.1⟩
-
-/-- At output `t`, `□φ(x, p₀)` makes `p₀` the value `Fx`, by the Modalized Fregean Axiom. -/
-theorem mp_value_t {σ : Type} [Ty σ] (U : σ → Prop → Prop) (x : σ) (p₀ : Prop)
-    (h : □ (U x p₀ ∧ ∀ z, U x z → p₀ = z)) : p₀ = ∀ p : Prop, U x p → p :=
-  modalized_fregean _ _ (modal_K _ _ (nec% (mp_value_coext_t U x p₀)) h)
-
-/-- At output `t`, `(∀x. ∃p. □φ(x, p)) → ∀x p. Uxp ↔ p = Fx`. -/
-theorem mp_represents_t {σ : Type} [Ty σ] (U : σ → Prop → Prop) :
-    (∀ x, ∃ p, □ (U x p ∧ ∀ z, U x z → p = z)) →
-      ∀ x (p : Prop), U x p ↔ p = ∀ q : Prop, U x q → q :=
-  fun H x p => (H x).elim fun p₀ hp₀ =>
-    have e := mp_value_t U x p₀ hp₀
-    have hφ := box_elim hp₀
-    ⟨fun hU => (hφ.2 p hU).symm.trans e, fun hp => (hp.trans e.symm) ▸ hφ.1⟩
-
-/-- Modalized Plenitude at output `t`: `λx. ∀p. Uxp → p` necessarily represents `U`. -/
-theorem modalized_plenitude_t {σ : Type} [Ty σ] : ModalizedPlenitude σ Prop := fun U hH =>
-  ⟨λ x ↦ ∀ p : Prop, U x p → p, modal_K _ _ (nec% (mp_represents_t U)) hH⟩
-
 
 /-- `necessary-intensional-choice-r-implies-intensional-choice-r`: `T`. -/
 theorem necessary_intensional_choice_r_implies_intensional_choice_r {σ : Type} [Ty σ] :
@@ -415,13 +371,6 @@ theorem extensionality_r_implies_intensional_choice_r {σ : Type} [Ty σ] :
 
 /-! ### Well-orders (7–8 October 2026) -/
 
-/-- In a well-order the minimal instance of a property is its least instance. -/
-theorem least_of_minimal {σ : Type} [Ty σ] {R : σ → σ → Prop} (h : WellOrders R)
-    {Y : σ → Prop} {m : σ} (hmin : ∀ y, Y y → R y m → y = m) : ∀ z, Y z → R m z :=
-  fun z hz => (h.2.2.1 m z).elim id fun hzm => by
-    rw [hmin z hz hzm]
-    exact (h.2.2.1 m m).elim id id
-
 /-- `well-ordering-r-implies-transversal-choice-r`: the least member of each cell. -/
 theorem well_ordering_r_implies_transversal_choice_r {σ : Type} [Ty σ] :
     WellOrdering σ → TransversalChoice σ := fun ⟨R, hR⟩ E hE =>
@@ -439,14 +388,6 @@ theorem necessary_well_ordering_r_implies_well_ordering_r {σ : Type} [Ty σ] :
 theorem necessary_well_ordering_r_implies_necessary_transversal_choice_r {σ : Type} [Ty σ] :
     NecWellOrdering σ → NecTransversalChoice σ :=
   modal_K _ _ (nec% (well_ordering_r_implies_transversal_choice_r (σ := σ)))
-
-/-- A well-order makes the least instance of an instantiated property its unique least
-instance. -/
-theorem unique_least {σ : Type} [Ty σ] (R : σ → σ → Prop) (F : σ → Prop) (h : WellOrders R)
-    (hF : ∃ x, F x) : ∃ x, (F x ∧ ∀ y, F y → R x y) ∧ ∀ y, (F y ∧ ∀ z, F z → R y z) → y = x :=
-  (h.2.2.2 F hF).elim fun m ⟨hm, hmin⟩ =>
-    have least := least_of_minimal h hmin
-    ⟨m, ⟨hm, least⟩, fun y hy => h.2.1 y m (hy.2 m hm) (least y hy.1)⟩
 
 /-- `modal-well-ordering-r-implies-intensional-choice-r`: being the least instance. -/
 theorem modal_well_ordering_r_implies_intensional_choice_r {σ : Type} [Ty σ] :
@@ -471,15 +412,6 @@ theorem modal_well_ordering_r_implies_necessary_intensional_choice_r {σ : Type}
 theorem modal_well_ordering_r_implies_necessary_well_ordering_r {σ : Type} [Ty σ] :
     ModalWellOrdering σ → NecWellOrdering σ := fun ⟨R, hR⟩ =>
   modal_K _ _ (nec% (fun (h : WellOrders R) => (⟨R, h⟩ : WellOrdering σ))) hR
-
-/-- Being a well-order depends only on the extension. -/
-theorem wellOrders_of_iff {σ : Type} [Ty σ] (R R' : σ → σ → Prop) (he : ∀ x y, R' x y ↔ R x y)
-    (h : WellOrders R) : WellOrders R' :=
-  ⟨fun x y z a b => (he x z).2 (h.1 x y z ((he x y).1 a) ((he y z).1 b)),
-   fun x y a b => h.2.1 x y ((he x y).1 a) ((he y x).1 b),
-   fun x y => (h.2.2.1 x y).elim (fun a => Or.inl ((he x y).2 a)) (fun a => Or.inr ((he y x).2 a)),
-   fun Y hY => (h.2.2.2 Y hY).elim fun x ⟨hx, hmin⟩ =>
-     ⟨x, hx, fun y hy hyx => hmin y hy ((he y x).1 hyx)⟩⟩
 
 /-- The relation defined from a unique well-order is a well-order. -/
 theorem wellOrders_of_unique {σ : Type} [Ty σ] (G : (σ → σ → Prop) → Prop)
@@ -933,10 +865,6 @@ theorem wr_le_of_incl (A B : σ → Prop) (hA : WeaklyRigid A) (hB : WeaklyRigid
     (h : ∀ y, A y → B y) : A ≤ B :=
   le_of_box_incl (hA.2 B fun y hy => hB.1 y (h y hy))
 
-/-- Entailment is necessary if true. -/
-theorem box_le_arrow' (A B : σ → Prop) (h : A ≤ B) : □ (A ≤ B) :=
-  modal_K _ _ (nec% (le_iff A B).2) (modal_four _ ((le_iff A B).1 h))
-
 /-- `J x Y`: `Y` is weakly rigid and coextensive with the segment up to `x`. -/
 def MJ (R : σ → σ → Prop) (x : σ) (Y : σ → Prop) : Prop :=
   WeaklyRigid Y ∧ ∀ y, Y y ↔ R y x
@@ -981,9 +909,9 @@ theorem mwo_step1 : □ (MChain Rs) :=
     rs_wi hRs hco (fun M' => A ≤ M' ∨ M' ≤ A) fun C ⟨y, hC⟩ =>
       (hR.2.2.1 x y).elim
         (fun h => modal_K _ _ (nec% (fun (h : A ≤ C) => (Or.inl h : A ≤ C ∨ C ≤ A)))
-          (box_le_arrow' A C (mj_le hR x y A C hA hC h)))
+          (box_le_rel A C (mj_le hR x y A C hA hC h)))
         (fun h => modal_K _ _ (nec% (fun (h : C ≤ A) => (Or.inr h : A ≤ C ∨ C ≤ A)))
-          (box_le_arrow' C A (mj_le hR y x C A hC hA h)))
+          (box_le_rel C A (mj_le hR y x C A hC hA h)))
   modal_K _ _ (nec% (fun (h : ∀ M, Rs M → ∀ M', Rs M' → M ≤ M' ∨ M' ≤ M) M M' hM hM' =>
     h M hM M' hM')) (rs_wi hRs hco _ inner)
 
@@ -1012,7 +940,7 @@ theorem mwo_step2 : □ (∀ M, Rs M → MLeast Rs M) := by
                 fun hne => (hn ⟨h, hne⟩).elim
             modal_K _ _ (nec% (fun (hAC : A ≤ C) (h : C ≤ A ∧ C ≠ A) =>
                 ((h.2 (le_antisymm_arrow C A h.1 hAC)).elim : MLeast Rs C)))
-              (box_le_arrow' A C (mj_le hR x y A C hA hC hxy)))
+              (box_le_rel A C (mj_le hR x y A C hA hC hxy)))
     exact modal_K _ _ (modal_K _ _ (modal_K _ _
       (nec% (fun (hc : MChain Rs) (hA : Rs A)
           (hb : ∀ W, Rs W → (W ≤ A ∧ W ≠ A) → MLeast Rs W) => mwo_step2_world A hc hA hb))
@@ -1075,7 +1003,7 @@ theorem mwo_step4 (wrc : P.WeakRigidComprehension (σ → Prop)) :
           (nec% (fun (h₁ : Rs C) (h₂ : C t) (h₃ : C ≤ B) (h₄ : MGood Rs C) =>
             (⟨C, h₁, h₂, h₃, h₄⟩ : ∃ M, Rs M ∧ M t ∧ M ≤ B ∧ MGood Rs M)))
           (rs_box hRs hco t C hJ)) (hC.1 t ((hJ.2 t).2 ((hR.2.2.1 t t).elim id id))))
-          (box_le_arrow' C B hCB)) (ih t htx.1 htx.2 C hJ)
+          (box_le_rel C B hCB)) (ih t htx.1 htx.2 C hJ)
     exact modal_K _ _ (modal_K _ _ (modal_K _ _
       (nec% (fun (hc : MChain Rs) (hi : ∀ t, A t → t = x ∨ B t)
           (hii : ∀ t, B t → ∃ M, Rs M ∧ M t ∧ M ≤ B ∧ MGood Rs M) =>

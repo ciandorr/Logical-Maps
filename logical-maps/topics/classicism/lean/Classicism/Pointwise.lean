@@ -1,5 +1,5 @@
 import Classicism.Paper
-import Classicism.Order
+import Classicism.Background.Order
 
 /-!
 # Pointwise reasoning at a relational type

@@ -126,8 +126,8 @@ theorem rigid_bottom : Rigid (fun _ : σ => False) :=
 theorem nd_of_weak_meet : WeakMeetClosure σ → NecessityOfDistinctness σ := by
   intro cl a b hn
   have hw := cl (fun x => x = a) (fun x => x = b)
-    (weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid a))
-    (weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid b))
+    (weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid a))
+    (weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid b))
   exact modal_K _ _
     (nec% (fun (h : ∀ x : σ, (x = a ∧ x = b) → x ≠ a) (he : a = b) =>
       h a ⟨rfl, he⟩ rfl))
@@ -136,8 +136,8 @@ theorem nd_of_weak_meet : WeakMeetClosure σ → NecessityOfDistinctness σ := b
 theorem nd_of_rigid_meet : RigidMeetClosure σ → NecessityOfDistinctness σ := by
   intro cl a b hn
   have hw := weaklyRigid_of_rigid (cl (fun x => x = a) (fun x => x = b)
-    (Classicism.Research.ModalRigidityDescent.singleton_rigid a)
-    (Classicism.Research.ModalRigidityDescent.singleton_rigid b))
+    (Classicism.Rigidity.singleton_rigid a)
+    (Classicism.Rigidity.singleton_rigid b))
   exact modal_K _ _
     (nec% (fun (h : ∀ x : σ, (x = a ∧ x = b) → x ≠ a) (he : a = b) =>
       h a ⟨rfl, he⟩ rfl))
@@ -146,14 +146,14 @@ theorem nd_of_rigid_meet : RigidMeetClosure σ → NecessityOfDistinctness σ :=
 theorem nd_of_weak_difference : WeakDifferenceClosure σ → NecessityOfDistinctness σ :=
   fun cl a b hn => modal_K _ _ (nec% (fun (h : a = a ∧ a ≠ b) => h.2))
     ((cl (fun x => x = a) (fun x => x = b)
-      (weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid a))
-      (weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid b))).1 a ⟨rfl, hn⟩)
+      (weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid a))
+      (weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid b))).1 a ⟨rfl, hn⟩)
 
 theorem nd_of_rigid_difference : RigidDifferenceClosure σ → NecessityOfDistinctness σ :=
   fun cl a b hn => modal_K _ _ (nec% (fun (h : a = a ∧ a ≠ b) => h.2))
     ((weaklyRigid_of_rigid (cl (fun x => x = a) (fun x => x = b)
-      (Classicism.Research.ModalRigidityDescent.singleton_rigid a)
-      (Classicism.Research.ModalRigidityDescent.singleton_rigid b))).1 a ⟨rfl, hn⟩)
+      (Classicism.Rigidity.singleton_rigid a)
+      (Classicism.Rigidity.singleton_rigid b))).1 a ⟨rfl, hn⟩)
 
 theorem weak_meet_iff_nd : WeakMeetClosure σ ↔ NecessityOfDistinctness σ :=
   ⟨nd_of_weak_meet, nd_weak_meet⟩
@@ -185,16 +185,16 @@ theorem nd_of_weak_symmetric_difference : WeakSymmetricDifferenceClosure σ → 
     (nec% (fun (h : (a = a ∧ a ≠ b) ∨ (a = b ∧ a ≠ a)) =>
       h.elim And.right (fun h => False.elim (h.2 rfl))))
     ((cl (fun x => x = a) (fun x => x = b)
-      (weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid a))
-      (weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid b))).1 a
+      (weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid a))
+      (weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid b))).1 a
         (Or.inl ⟨rfl, hn⟩))
 theorem nd_of_rigid_symmetric_difference : RigidSymmetricDifferenceClosure σ → NecessityOfDistinctness σ :=
   fun cl a b hn => modal_K _ _
     (nec% (fun (h : (a = a ∧ a ≠ b) ∨ (a = b ∧ a ≠ a)) =>
       h.elim And.right (fun h => False.elim (h.2 rfl))))
     ((weaklyRigid_of_rigid (cl (fun x => x = a) (fun x => x = b)
-      (Classicism.Research.ModalRigidityDescent.singleton_rigid a)
-      (Classicism.Research.ModalRigidityDescent.singleton_rigid b))).1 a
+      (Classicism.Rigidity.singleton_rigid a)
+      (Classicism.Rigidity.singleton_rigid b))).1 a
         (Or.inl ⟨rfl, hn⟩))
 
 theorem weak_symmetric_difference_iff_nd : WeakSymmetricDifferenceClosure σ ↔ NecessityOfDistinctness σ :=
@@ -217,13 +217,13 @@ theorem nd_rigid_bivalence : NecessityOfDistinctness σ → RigidBivalence σ :=
 
 theorem nd_of_weak_bivalence : WeakBivalence σ → NecessityOfDistinctness σ :=
   fun bv a b hn => (bv (fun x => x = b)
-    (weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid b)) a).elim
+    (weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid b)) a).elim
       (fun ht => False.elim (hn (box_elim ht)))
       (fun hf => (box_not_eq (a = b)).mpr hf)
 
 theorem nd_of_rigid_bivalence : RigidBivalence σ → NecessityOfDistinctness σ :=
   fun bv a b hn => (bv (fun x => x = b)
-    (Classicism.Research.ModalRigidityDescent.singleton_rigid b) a).elim
+    (Classicism.Rigidity.singleton_rigid b) a).elim
       (fun ht => False.elim (hn (box_elim ht)))
       (fun hf => (box_not_eq (a = b)).mpr hf)
 

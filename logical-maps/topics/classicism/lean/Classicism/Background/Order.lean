@@ -1,5 +1,5 @@
 import Classicism.Paper
-import Classicism.Modal
+import Classicism.Background.Necessity
 
 /-!
 # The algebraic order and its pointwise characterisation
@@ -107,5 +107,9 @@ theorem incl_of_le {X Y : τ} (h : X ≤ Y) : X ⊆ Y :=
 /-- And the order follows from the boxed pointwise implication. -/
 theorem le_of_box_incl {X Y : τ} (h : □ (X ⊆ Y)) : X ≤ Y :=
   (le_iff X Y).2 h
+
+/-- An entailment, if true, is necessary: `≤` is boxed inclusion, and `4`. -/
+theorem box_le_rel (X Y : τ) (h : X ≤ Y) : □ (X ≤ Y) :=
+  modal_K _ _ (nec% (le_iff X Y).2) (modal_four _ ((le_iff X Y).1 h))
 
 end Classicism

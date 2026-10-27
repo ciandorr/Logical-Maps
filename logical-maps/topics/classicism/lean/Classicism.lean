@@ -3,11 +3,12 @@ import Classicism.Core
 import Classicism.Equivalence
 import Classicism.Booleanism
 import Classicism.Identities
-import Classicism.Modal
-import Classicism.Order
-import Classicism.Comprehension
+import Classicism.Background.Necessity
+import Classicism.Background.Order
+import Classicism.Background.Rigidity
 import Classicism.Pointwise
-import Classicism.Lattice
+import Classicism.Background.Lattice
+import Classicism.Background.Worlds
 import Classicism.Principles
 import Classicism.Results.Records
 -- The object language as an object of Lean
@@ -94,3 +95,7 @@ import Classicism.Tools.MapIndex
 import Classicism.ModelStatements
 import Classicism.MapModels
 import Classicism.MapDerived
+import Classicism.Background.Framework
+import Classicism.Background.Varieties
+import Classicism.Background.Relations
+import Classicism.Background.RigidityClosure

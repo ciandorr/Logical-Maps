@@ -1,5 +1,5 @@
 import Lean
-import Classicism.Order
+import Classicism.Background.Order
 
 /-!
 # The term-level check: staying inside the relational type system

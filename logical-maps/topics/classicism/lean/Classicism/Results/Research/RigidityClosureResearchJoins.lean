@@ -85,7 +85,7 @@ theorem tame_iff_rigid_join_closure : TameRigidity (σ → Prop) ↔ RigidJoinCl
       fun Y hy => weaklyRigid_of_rigid (hh Y hy)),
    fun cl F hf => cl (SingletonFamily F) F ((weaklyRigid_iff_singleton_join F).1 hf)
       (fun Y hy => hy.elim fun a ha => ha.2.symm ▸
-        Classicism.Research.ModalRigidityDescent.singleton_rigid a)⟩
+        Classicism.Rigidity.singleton_rigid a)⟩
 
 /-- ND makes the current singleton join coextensive with its generating relation. -/
 theorem nd_singleton_join_coext (nd : NecessityOfDistinctness σ)
@@ -105,7 +105,7 @@ theorem singleton_join_weakly_rigid (F G : σ → Prop)
     (hg : LUB G (SingletonFamily F)) : WeaklyRigid G :=
   represented_join_preserves_weak_rigidity (SingletonFamily F) G hg
     (fun Y hy => hy.elim fun a ha => ha.2.symm ▸
-      weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid a))
+      weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid a))
 
 /-- Exact typewise ND + BC ⇒ Weak Rigid Comprehension. -/
 theorem nd_bc_weak_comprehension : NecessityOfDistinctness σ →

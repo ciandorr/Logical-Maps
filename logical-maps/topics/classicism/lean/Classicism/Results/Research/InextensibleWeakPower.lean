@@ -20,9 +20,6 @@ theorem decidedTruth_persistent (p : Prop) : DecidedTruth p → □ (DecidedTrut
     (fun hp => modal_K _ _ (nec% (fun h : □ p => (Or.inl h : DecidedTruth p))) (modal_four _ hp))
     (fun hn => modal_K _ _ (nec% (fun h : □ (¬ p) => (Or.inr h : DecidedTruth p))) (modal_four _ hn))
 
-theorem rigid_necessary {τ : Type} [Rel τ] (Y : τ) : Rigid Y → □ (Rigid Y) :=
-  fun h => (box_and_eq _ _).mpr ⟨modal_four _ h.1, modal_four _ h.2⟩
-
 theorem bounded_decisions {σ : Type} [Ty σ] (F X : σ → Prop)
     (hf : Rigid F) (hs : InternallySeparated F) (hx : WeaklyRigid X) (hi : X ≤ F) :
     □ (∀ a, F a → DecidedTruth (X a)) :=

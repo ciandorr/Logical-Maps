@@ -30,6 +30,6 @@ dual $\Diamond_5$. Appendix D defines $\Box_5$ with the condition NKJF$_{\langle
 in place of NKB; its facts (A5) and (C5) make the two definitions necessarily
 equivalent. Theorems of C: $\Box\le\Box_{\ne}\le\hat{\hat\Box}\le\Box_5\le\lambda p\, .\,p$
 (the order is necessary pointwise implication)
-{lean: Classicism.Proofs.box_le_boxNe, Classicism.Proofs.boxNe_le_boxHH, Classicism.Proofs.boxHH_le_box5, Classicism.Proofs.box5_le}; each of these operators is
+{lean: Classicism.box_le_boxNe, Classicism.boxNe_le_boxHH, Classicism.boxHH_le_box5, Classicism.box5_le}; each of these operators is
 necessarily N, K, T and 4, and $\Box_5$ is an S5 operator; and if $\Box_{\ne}$ or
 $\hat{\hat\Box}$ is identical to its own hat, it is identical to $\Box_5$.

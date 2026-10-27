@@ -1,6 +1,6 @@
 import Classicism.Tools.Check
 import Classicism.Tools.TypeSystem
-import Classicism.Modal
+import Classicism.Background.Necessity
 import Classicism.Identities
 import Classicism.Results.Records
 

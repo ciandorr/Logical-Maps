@@ -23,6 +23,6 @@ classical laws of `Pointwise` (`incl_neg_intro`, `incl_neg_neg`): `SPointwise` m
 only the class's first eleven laws.
 -/
 
-#classicism_transform_audit Classicism.Booleanism Classicism.Identities Classicism.Modal
-#classicism_transform_audit Classicism.Order Classicism.Comprehension Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Results.Records.Necessity
+#classicism_transform_audit Classicism.Booleanism Classicism.Identities Classicism.Background.Framework Classicism.Background.Necessity
+#classicism_transform_audit Classicism.Background.Order Classicism.Background.Rigidity Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Background.Relations Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Background.Varieties Classicism.Results.Records.Necessity
 #classicism_transform_audit Classicism.Principles.Base Classicism.Principles.Coarse Classicism.Principles.Extensionality Classicism.Principles.Lattice Classicism.Principles.Instances Classicism.Principles.Comprehension Classicism.Principles.Choice Classicism.Principles.Infinity Classicism.Principles.Schematic

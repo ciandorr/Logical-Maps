@@ -59,8 +59,8 @@ theorem rigid_power_top_eq :
 
 theorem bivalent_propositions_rigid : Rigid (fun q : Prop => q = False ∨ q = True) :=
   rigid_union (fun q : Prop => q = False) (fun q : Prop => q = True)
-    (Classicism.Research.ModalRigidityDescent.singleton_rigid False)
-    (Classicism.Research.ModalRigidityDescent.singleton_rigid True)
+    (Classicism.Rigidity.singleton_rigid False)
+    (Classicism.Rigidity.singleton_rigid True)
 
 theorem nullary_weak_power : WeaklyRigidPower Prop := by
   intro F hF
@@ -70,7 +70,7 @@ theorem nullary_weak_power : WeaklyRigidPower Prop := by
     exact weaklyRigid_of_rigid bivalent_propositions_rigid
   · intro he
     rw [he, weak_power_bottom_eq]
-    exact weaklyRigid_of_rigid (Classicism.Research.ModalRigidityDescent.singleton_rigid False)
+    exact weaklyRigid_of_rigid (Classicism.Rigidity.singleton_rigid False)
 
 theorem nullary_rigid_power : RigidPower Prop := by
   intro F hF
@@ -80,7 +80,7 @@ theorem nullary_rigid_power : RigidPower Prop := by
     exact bivalent_propositions_rigid
   · intro he
     rw [he, rigid_power_bottom_eq]
-    exact Classicism.Research.ModalRigidityDescent.singleton_rigid False
+    exact Classicism.Rigidity.singleton_rigid False
 
 theorem nullary_necessary_weak_power : NecWeaklyRigidPower Prop := nec% nullary_weak_power
 theorem nullary_necessary_rigid_power : NecRigidPower Prop := nec% nullary_rigid_power

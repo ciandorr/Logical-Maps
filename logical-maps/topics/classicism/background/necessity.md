@@ -113,6 +113,16 @@ $\forall x^\sigma\, .\,\Box(\exists y^\sigma\, .\,y=x)$.
 taking $\bar y:=\bar x$ coordinatewise.
 :::
 
+## Further laws
+
+$\Box$ and $\Diamond$ are duals: $\Diamond p=\neg\Box\neg p$ and $\Box\neg p=\neg\Diamond p$,
+and $\Box\neg p$ is $p=\bot$
+{lean: Classicism.dia_eq_not_box_not, Classicism.box_not_eq_not_dia, Classicism.box_not_eq}.
+$\Box$ distributes over conjunction, $\Box(p\land q)=(\Box p\land\Box q)$
+{lean: Classicism.box_and_eq}; $\Diamond(p\lor q)\to\Diamond p\lor\Diamond q$
+{lean: Classicism.dia_or}; and $\Diamond p\land\Box q\to\Diamond(p\land q)$
+{lean: Classicism.dia_and_of_dia_box}.
+
 ## Intensionality
 
 ::: lemma {#intensionality-r}

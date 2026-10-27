@@ -25,7 +25,7 @@ theorem rigid_subrelations_separated {σ : Type} [Ty σ] (F : σ → Prop)
     (hs : InternallySeparated F) : InternallySeparated (RigidBelow F) := by
   intro X Y hx hy hne
   have hnco : ¬ (∀ a, X a ↔ Y a) := fun hc => hne
-    (Proofs.eq_of_weaklyRigid_coext (weaklyRigid_of_rigid hx.1) (weaklyRigid_of_rigid hy.1) hc)
+    (eq_of_weaklyRigid_coext (weaklyRigid_of_rigid hx.1) (weaklyRigid_of_rigid hy.1) hc)
   obtain ⟨a, ha⟩ := (not_forall_eq (fun a => X a ↔ Y a)).mp hnco
   apply (em (X a)).elim
   · intro hxa

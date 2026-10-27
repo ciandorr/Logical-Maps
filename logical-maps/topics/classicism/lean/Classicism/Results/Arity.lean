@@ -299,20 +299,11 @@ theorem atom_actual_instance {σ : Type} [Ty σ] {R : σ → Prop} (hR : WeaklyR
       ((atom_le_or_le_neg a (z = z₁) ha).elim (fun h' => (hn ⟨z₁, h₁, h'⟩).elim) id)))
     ((le_iff_prop a _).1 h))).elim
 
-/-- A rigid relation is necessarily rigid, by `4`. -/
-theorem box_rigid {τ : Type} [Rel τ] (X : τ) (h : Rigid X) : □ (Rigid X) :=
-  modal_K _ _ (nec% (rigid_iff_box_weaklyRigid X).2)
-    (modal_four _ ((rigid_iff_box_weaklyRigid X).1 h))
-
-/-- Entailment is necessary if true, by `4`. -/
-theorem box_le_rel {τ : Type} [Rel τ] [Order τ] (X Y : τ) (h : X ≤ Y) : □ (X ≤ Y) :=
-  modal_K _ _ (nec% (le_iff X Y).2) (modal_four _ ((le_iff X Y).1 h))
-
 /-- The power property is persistent, in C. -/
 theorem rigid_power_property_persistent {τ : Type} [Rel τ] [Order τ] (F : τ) :
     Persistent (fun X : τ => Rigid X ∧ X ≤ F) :=
   nec% (fun (X : τ) (hX : Rigid X ∧ X ≤ F) =>
-    Eq.mpr (box_and_eq (Rigid X) (X ≤ F)) ⟨box_rigid X hX.1, box_le_rel X F hX.2⟩)
+    Eq.mpr (box_and_eq (Rigid X) (X ≤ F)) ⟨rigid_necessary X hX.1, box_le_rel X F hX.2⟩)
 
 /-- The core, at one world: BF at `σ` and at `σ → t`, Atomicity at `t` and Rigid
 Comprehension at `σ → t` make the power property of a rigid `F` weakly inextensible. -/
@@ -379,7 +370,7 @@ theorem rigid_power_core (F : σ → Prop) (bf : P.Barcan σ) (bf₂ : P.Barcan 
   have heq : □ (a → X = X') := modal_K _ _ (modal_K _ _ (modal_K _ _
     (nec% (fun (f : a → (Rigid X ∧ X ≤ F) ∧ ¬ 𝒳 X) (g : WeaklyRigid X')
         (k : ∀ z : σ, a → (X z ↔ X' z)) (ha : a) =>
-      Proofs.eq_of_weaklyRigid_coext (weaklyRigid_of_rigid (f ha).1.1) g (fun z => k z ha)))
+      eq_of_weaklyRigid_coext (weaklyRigid_of_rigid (f ha).1.1) g (fun z => k z ha)))
     hXb) ((rigid_iff_box_weaklyRigid X').1 hX')) hco'
   (atom_absurd ha (modal_K _ _ (modal_K _ _ (modal_K _ _
     (nec% (fun (f : a → (Rigid X ∧ X ≤ F) ∧ ¬ 𝒳 X) (g : 𝒳 X') (k : a → X = X') (ha : a) =>
@@ -393,7 +384,7 @@ theorem nbf_natom_nrc_rigid_power :
       P.NecRigidComprehension (σ → Prop) → P.RigidPower (σ → Prop) := fun h₁ h₂ h₃ h₄ F hF =>
   ⟨rigid_power_property_persistent F,
    modal_K _ _ (modal_K _ _ (modal_K _ _ (modal_K _ _ (modal_K _ _
-     (nec% (rigid_power_core (σ := σ) F)) h₁) h₂) h₃) h₄) (box_rigid F hF)⟩
+     (nec% (rigid_power_core (σ := σ) F)) h₁) h₂) h₃) h₄) (rigid_necessary F hF)⟩
 
 /-- `necessary-bf-atomicity-and-rigid-comprehension-imply-necessary-rigid-power`, at `σ → t`:
 the last, necessitated, the premises boxed again by `4`. -/
@@ -437,7 +428,7 @@ theorem sl_join_rep (A : (σ → Prop) → Prop) (rc : P.RigidComprehension ((σ
     (nec% (fun (h : ∀ W, R W → W ≤ Y) (x : σ) (hx : JoinOf R x) =>
       hx.elim fun W ⟨hW, hWx⟩ => incl_of_le (h W hW) x hWx))
     (weaklyInextensible_of_inextensible hR.2 (fun W => W ≤ Y)
-      fun W hW => Proofs.box_le_arrow' W Y ((hco W).2 hW).2))
+      fun W hW => box_le_rel W Y ((hco W).2 hW).2))
   have hz : □ (∀ W, A W → (∃ x, W x) → W ≤ Y → R W) :=
     wiA (fun W => (∃ x, W x) → W ≤ Y → R W) fun W hW =>
       (box_elim hb W hW Y).elim
@@ -445,7 +436,7 @@ theorem sl_join_rep (A : (σ → Prop) → Prop) (rc : P.RigidComprehension ((σ
           (weaklyPersistent_of_persistent hR.1 W ((hco W).1 ⟨hW, h⟩)))
         (fun h => modal_K _ _ (nec% (fun (hn : W ≤ ¬ Y) (hx : ∃ x, W x) (hy : W ≤ Y) =>
             (hx.elim fun x hx => (incl_of_le hn x hx (incl_of_le hy x hx)).elim : R W)))
-          (Proofs.box_le_arrow' W (¬ Y) h))
+          (box_le_rel W (¬ Y) h))
   have h2 : Y ≤ JoinOf R := (le_iff _ _).2 (modal_K _ _ (modal_K _ _ (modal_K _ _
     (nec% (fun (ha : ∀ x : σ, ∃ W, A W ∧ W x) (hb : ∀ W, A W → ∀ Z : σ → Prop, W ≤ Z ∨ W ≤ ¬ Z)
         (hz : ∀ W, A W → (∃ x, W x) → W ≤ Y → R W) (x : σ) (hY : Y x) =>
@@ -606,7 +597,7 @@ theorem atom_power_pullback (F : σ → Prop) (hF : Rigid F) (rc : P.RigidCompre
           (hb : ∀ z : σ, X z → ∀ Y : σ → Prop, W Y → Y z)
           (hc : ∀ z : σ, F z → ∀ Y : σ → Prop, W Y → Y z → X z)
           (hwX : WeaklyRigid X) (Y : σ → Prop) (hY : W Y) =>
-        Proofs.eq_of_weaklyRigid_coext (weaklyRigid_of_rigid (hWP Y hY).1) hwX
+        eq_of_weaklyRigid_coext (weaklyRigid_of_rigid (hWP Y hY).1) hwX
           fun z => ⟨fun hYz => hc z (incl_of_le (hWP Y hY).2 z hYz) Y hY hYz,
                     fun hXz => hb z hXz Y hY⟩))
       hWP) hb) hc) ((rigid_iff_box_weaklyRigid X).1 hX)⟩

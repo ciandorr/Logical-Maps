@@ -1,5 +1,5 @@
 import Classicism.Tools.Translate
-import Classicism.Modal
+import Classicism.Background.Necessity
 
 /-!
 # Derivations checked at build time

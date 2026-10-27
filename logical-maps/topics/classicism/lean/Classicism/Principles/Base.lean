@@ -1,6 +1,7 @@
 import Classicism.Paper
-import Classicism.Comprehension
-import Classicism.Lattice
+import Classicism.Background.Rigidity
+import Classicism.Background.Lattice
+import Classicism.Background.Worlds
 
 /-!
 # Principles of the map's category `base`

@@ -3,8 +3,9 @@ import Classicism.Tools.TypeSystem
 import Classicism.Booleanism
 import Classicism.Identities
 import Classicism.Pointwise
-import Classicism.Lattice
-import Classicism.Cardinality
+import Classicism.Background.Lattice
+import Classicism.Background.Worlds
+import Classicism.Background.Arithmetic
 import Classicism.Results.Records
 
 /-!
@@ -16,11 +17,11 @@ audit, `Classicism/Strict/Audit.lean`.
 -/
 
 -- Every theorem of the shallow layer: the prelude, the identities, the classes, the records.
-#classicism_audit Classicism.Booleanism Classicism.Identities Classicism.Modal
-#classicism_audit Classicism.Order Classicism.Comprehension Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Results.Records.Necessity
-#classicism_audit Classicism.Pointwise Classicism.Lattice
+#classicism_audit Classicism.Booleanism Classicism.Identities Classicism.Background.Framework Classicism.Background.Necessity
+#classicism_audit Classicism.Background.Order Classicism.Background.Rigidity Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Background.Relations Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Background.Varieties Classicism.Results.Records.Necessity
+#classicism_audit Classicism.Pointwise Classicism.Background.Worlds Classicism.Background.Lattice
 #classicism_audit Classicism.Principles.Base Classicism.Principles.Coarse Classicism.Principles.Extensionality Classicism.Principles.Lattice Classicism.Principles.Instances Classicism.Principles.Comprehension Classicism.Principles.Choice Classicism.Principles.Infinity Classicism.Principles.Schematic
-#classicism_audit Classicism.Cardinality
+#classicism_audit Classicism.Background.Arithmetic
 
 -- The type-class instances carry the Logical-Equivalence instances that Intensionality
 -- uses. They are definitions, not theorems, so the audit names them.
@@ -37,8 +38,8 @@ quantification over Lean types that a `Ty`, `Rel`, `Order` or `Pointwise` instan
 not guard, no type outside `R`, and no constant beyond the logical inductives, the `Eq`
 plumbing and the formalisation's own metalanguage. -/
 
-#classicism_types_audit Classicism.Booleanism Classicism.Identities Classicism.Modal
-#classicism_types_audit Classicism.Order Classicism.Comprehension Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Results.Records.Necessity
-#classicism_types_audit Classicism.Pointwise Classicism.Lattice
+#classicism_types_audit Classicism.Booleanism Classicism.Identities Classicism.Background.Framework Classicism.Background.Necessity
+#classicism_types_audit Classicism.Background.Order Classicism.Background.Rigidity Classicism.Results.Records.Base Classicism.Results.Records.Coarse Classicism.Results.Records.Extensionality Classicism.Results.Records.Comprehension Classicism.Results.Records.Lattice Classicism.Background.Relations Classicism.Results.Records.Choice Classicism.Results.Records.C5 Classicism.Results.Records.Infinity Classicism.Results.Records.AppendixD Classicism.Background.Varieties Classicism.Results.Records.Necessity
+#classicism_types_audit Classicism.Pointwise Classicism.Background.Worlds Classicism.Background.Lattice
 #classicism_types_audit Classicism.Principles.Base Classicism.Principles.Coarse Classicism.Principles.Extensionality Classicism.Principles.Lattice Classicism.Principles.Instances Classicism.Principles.Comprehension Classicism.Principles.Choice Classicism.Principles.Infinity Classicism.Principles.Schematic
-#classicism_types_audit Classicism.Cardinality
+#classicism_types_audit Classicism.Background.Arithmetic

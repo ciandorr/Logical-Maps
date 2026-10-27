@@ -19,14 +19,6 @@ have actually succeeded. No generated statements or record statuses are edited.
 namespace Classicism.Research.SealedWorldCover
 open Classicism.P Classicism.Paper
 
-theorem rigid_necessary {τ : Type} [Rel τ] (R : τ) (h : Rigid R) : □ (Rigid R) :=
-  modal_K _ _ (nec% (rigid_iff_box_weaklyRigid R).2)
-    (modal_four _ ((rigid_iff_box_weaklyRigid R).1 h))
-
-theorem entails_necessary {τ : Type} [Rel τ] [Order τ] (X Y : τ)
-    (h : X ≤ Y) : □ (X ≤ Y) :=
-  modal_K _ _ (nec% (le_iff X Y).2) (modal_four _ ((le_iff X Y).1 h))
-
 section cuts
 variable {τ : Type} [Rel τ] [Order τ] [Pointwise τ]
 
@@ -56,7 +48,7 @@ theorem cut_persistent (A : τ → Prop) (Y : τ) (hA : Persistent A) :
   modal_K _ _
     (nec% (fun (wp : WeaklyPersistent A) (W : τ) (hW : Cut A Y W) =>
       (show □ (Cut A Y W) from
-        (box_and_eq _ _).mpr ⟨wp W hW.1, entails_necessary W Y hW.2⟩))) hA
+        (box_and_eq _ _).mpr ⟨wp W hW.1, box_le_rel W Y hW.2⟩))) hA
 
 theorem opposite_cut_is_bottom (A : τ → Prop) (Y W : τ)
     (hn : W ≤ ¬ Y) (hW : Cut A Y W) : W = Rel.bot τ :=
@@ -75,7 +67,7 @@ theorem cut_weakly_inextensible (A : τ → Prop) (Y : τ)
         (fun hn => modal_K _ _ (modal_K _ _
           (nec% (fun (hn : W ≤ ¬ Y) (hz : Z (Rel.bot τ)) (hc : Cut A Y W) =>
             (opposite_cut_is_bottom A Y W hn hc).symm ▸ hz))
-          (entails_necessary W (¬ Y) hn)) hz)
+          (box_le_rel W (¬ Y) hn)) hz)
   exact modal_K _ _
     (nec% (fun (h : ∀ W, A W → Cut A Y W → Z W) (W : τ) (hc : Cut A Y W) =>
       h W hc.1 hc)) hh
@@ -274,8 +266,8 @@ theorem sl_rc_implies_necessary_strong_leibniz_t : StrongLeibnizT →
 
 end Classicism.Research.SealedWorldCover
 
-#classicism_check Classicism.Research.SealedWorldCover.rigid_necessary
-  Classicism.Research.SealedWorldCover.entails_necessary
+#classicism_check Classicism.rigid_necessary
+  Classicism.box_le_rel
   Classicism.Research.SealedWorldCover.decides_bottom
   Classicism.Research.SealedWorldCover.sealed_necessary
   Classicism.Research.SealedWorldCover.seal_from_coextension
@@ -306,8 +298,8 @@ end Classicism.Research.SealedWorldCover
   Classicism.Research.SealedWorldCover.join_zero_of_only_bottom_t
   Classicism.Research.SealedWorldCover.sealed_implies_strong_leibniz_t
   Classicism.Research.SealedWorldCover.sl_rc_implies_necessary_strong_leibniz_t
-#classicism_types Classicism.Research.SealedWorldCover.rigid_necessary
-  Classicism.Research.SealedWorldCover.entails_necessary
+#classicism_types Classicism.rigid_necessary
+  Classicism.box_le_rel
   Classicism.Research.SealedWorldCover.decides_bottom
   Classicism.Research.SealedWorldCover.sealed_necessary
   Classicism.Research.SealedWorldCover.seal_from_coextension

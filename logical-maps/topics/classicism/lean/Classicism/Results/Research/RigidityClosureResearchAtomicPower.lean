@@ -74,7 +74,7 @@ theorem atom_weak_power_pullback (rc : RigidComprehension (σ → Prop))
       (hxy : ∀ Y : σ → Prop, W Y → ∀ a : σ, X a → Y a)
       (hyx : ∀ Y : σ → Prop, W Y → ∀ a : σ, Y a → X a)
       (Y : σ → Prop) (hy : W Y) =>
-      Proofs.eq_of_weaklyRigid_coext (hi Y hy).1 hx
+      eq_of_weaklyRigid_coext (hi Y hy).1 hx
         (fun a => ⟨hyx Y hy a, hxy Y hy a⟩)))
     ((rigid_iff_box_weaklyRigid X).1 hx)) ((le_iff _ _).1 hi))
     (atomic_profile_lower F X W hx hc)) (atomic_profile_upper F X W hf hw hx hc hi)

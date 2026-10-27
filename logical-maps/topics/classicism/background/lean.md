@@ -78,7 +78,7 @@ paper's type system sits inside Lean's and is not on the route to any certificat
 | What | Where in the Lean project |
 | --- | --- |
 | The language, the gate, the axioms | `Classicism/Core.lean`, `Equivalence.lean` |
-| The lemmas used throughout | `Modal.lean`, `Order.lean`, `Pointwise.lean`, `Lattice.lean`, `Comprehension.lean`, `Cardinality.lean` |
+| The lemmas of these pages, a module per page | `Classicism/Background/` |
 | The map's principles | `Classicism/Principles/` |
 | The shallow proofs of results | `Classicism/Results/Records/` |
 | The object language and its models | `Classicism/Syntax/`, `Classicism/Semantics/`, `Classicism/Models/` |

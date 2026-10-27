@@ -163,16 +163,6 @@ theorem necessary_tame_rigidity_and_necessary_weak_rigid_comprehension_imply_nec
   modal_K _ _ (modal_K _ _
     (nec% (tame_rigidity_and_weak_rigid_comprehension_imply_rigid_comprehension (τ := τ))) h₁) h₂
 
-/-- Coextensive weakly rigid relations are identical: each is below the other by the other's
-weak persistence and its own weak inextensibility, and `≤` is antisymmetric. -/
-theorem eq_of_weaklyRigid_coext {τ : Type} [Rel τ] [Order τ] [Pointwise τ] {F G : τ}
-    (hF : WeaklyRigid F) (hG : WeaklyRigid G) (h : F ≡ G) : F = G :=
-  le_antisymm_rel F G
-    (le_of_box_incl (hF.2 G (Pointwise.incl_trans F G (boxAt G) (Pointwise.incl_of_coext F G h)
-      hG.1)))
-    (le_of_box_incl (hG.2 F (Pointwise.incl_trans G F (boxAt F) (Pointwise.incl_of_coext' F G h)
-      hF.1)))
-
 /-- `rigid-comprehension-implies-tame-rigidity`: a weakly rigid `F` is coextensive with a rigid
 `G`, which is weakly rigid, so `F = G`. -/
 theorem rigid_comprehension_implies_tame_rigidity {τ : Type} [Rel τ] [Order τ] [Pointwise τ] :

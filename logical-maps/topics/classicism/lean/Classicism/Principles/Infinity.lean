@@ -1,7 +1,8 @@
 import Classicism.Paper
-import Classicism.Comprehension
-import Classicism.Lattice
-import Classicism.Cardinality
+import Classicism.Background.Rigidity
+import Classicism.Background.Lattice
+import Classicism.Background.Worlds
+import Classicism.Background.Arithmetic
 
 /-!
 # Principles of the map's category `infinity`

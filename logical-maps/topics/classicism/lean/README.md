@@ -72,13 +72,19 @@ and the `nec%` macro for necessitating a closed theorem.
 *A library of theorems of Classicism*, of the kind any shallow proof draws on.
 `Booleanism.lean` has the propositional and quantifier identities as they are used, in
 `rw` form; `Identities.lean` the paper's eleven closed identities in λ-form, each an
-instance of the gate; `Modal.lean` the modal logic of the defined box — `K`, `T`, `4`,
-the Necessity of Identity, the Converse Barcan Formula, Intensionality and its
-corollaries; `Order.lean` the algebraic order `≤_τ` and its equivalence with the boxed
-pointwise implication, as the class `Order`; `Comprehension.lean` persistence,
-inextensibility and the rigidity variants; `Pointwise.lean` the class `Pointwise`, what
-can be said about the pointwise operations at an abstract relational type; and
-`Lattice.lean` the lattice predicates such as `Atom`. The three classes `Rel`, `Order`,
+instance of the gate; and `Pointwise.lean` the class `Pointwise`, what can be said about
+the pointwise operations at an abstract relational type. The rest of the library is in
+`Background/`, one module (or two) per page of the map's Background, whose lemmas cite
+it: `Framework.lean` (Existence, Ordinary Comprehension), `Necessity.lean` (the modal logic
+of the defined box — `K`, `T`, `4`, the Necessity of Identity, the Converse Barcan Formula,
+Intensionality and its corollaries), `Order.lean` (the algebraic order `≤_τ` and its
+equivalence with the boxed pointwise implication, as the class `Order`) and `Lattice.lean`
+(the order laws and the lattice predicates such as `Atom`), `Worlds.lean` (atoms decide),
+`Rigidity.lean` (persistence, inextensibility and the rigidity variants) and
+`RigidityClosure.lean` (haecceities, unions, images), `Varieties.lean` (the chain
+`□ ≤ □_≠ ≤ □̂̂ ≤ □₅`), `Relations.lean` (well-orders, Modalized Plenitude) and
+`Arithmetic.lean` (finite cardinalities). Lemmas that a single record needs stay beside it
+in `Results/Records/`. The three classes `Rel`, `Order`,
 `Pointwise` share a design: a law that holds by recursion on the structure of a
 relational type is a field, proved once at `Prop` and once at `σ → τ`, since the shallow
 layer has no induction on types (the metalogical layer does, and derives each such law
@@ -99,9 +105,9 @@ Dropping `e_exists` leaves the paper's `C⁻`, that is `H⁻` plus Classicism, w
 the great majority of the paper's theorems. The library is arranged so that this line is
 visible per theorem rather than global: **Existence is not built into the type system.**
 The class `Ty` is a marker with no inhabitation field, so declaring `e` an `R`-type costs
-nothing, and Existence is instead two theorems. `Modal.existence_rel` covers every
+nothing, and Existence is instead two theorems. `existence_rel` (`Background/Framework.lean`) covers every
 relational type, witnessed by the closed term `⊤_τ`, and needs no axiom.
-`Modal.existence_e` is the axiom. Consequently a theorem's `#print axioms` report names
+`existence_e` is the axiom. Consequently a theorem's `#print axioms` report names
 `e_exists` exactly when the theorem really uses it.
 
 Were inhabitation folded back into `Ty`, `C⁻` could not be expressed at all, since there
@@ -290,12 +296,18 @@ Classicism/Core.lean                    e, em, e_exists, □ and ◇, the classe
 Classicism/Equivalence.lean             the gate, the nec% macro, tactic conventions
 Classicism/Booleanism.lean              the propositional and quantifier identities, pointwise
 Classicism/Identities.lean              the eleven closed identities in the paper's λ-form
-Classicism/Modal.lean                   K, T, 4, NI, CBF, Intensionality and its corollaries; the further laws of □ and ◇ the results use
-Classicism/Order.lean                   the algebraic order and its pointwise characterisation
-Classicism/Comprehension.lean           persistence, inextensibility and the rigidity variants
 Classicism/Pointwise.lean               the pointwise laws of ⊑ at a relational type, as a class
-Classicism/Lattice.lean                 Atom, the bounds LB/GLB/UB/LUB, ActualWorld; the order, atoms and bounds at t, at σ → t and at a relational type
-Classicism/Cardinality.lean             the finite cardinalities 𝟎, Suc, FiniteCardinality, and countability Ctbl, of the Background
+Classicism/Background/                  the lemmas of the map's Background pages, a module per page:
+  Framework.lean                          Existence, Ordinary Comprehension
+  Necessity.lean                          K, T, 4, NI, CBF, Intensionality and its corollaries; the further laws of □ and ◇
+  Order.lean                              the algebraic order and its pointwise characterisation; an entailment, if true, is necessary
+  Lattice.lean                            Atom, the bounds LB/GLB/UB/LUB, ActualWorld; the order laws at t, at σ → t and at a relational type
+  Worlds.lean                             atoms decide everything of their type, and conversely
+  Rigidity.lean                           persistence, inextensibility and the rigidity variants; rigidity is necessary if true
+  RigidityClosure.lean                    haecceities are rigid; rigid unions, direct images, inverse images
+  Varieties.lean                          the chain □ ≤ □_≠ ≤ □̂̂ ≤ □₅ ≤ λp. p
+  Relations.lean                          well-orders; Modalized Plenitude at output t and σ' → t
+  Arithmetic.lean                         the finite cardinalities 𝟎, Suc, FiniteCardinality, and countability Ctbl
 Classicism/Principles/                  one Prop per principle of the map, a file per category; its forms and their equivalences beside it
 
 Classicism/Syntax/Types.lean            the types of R as an inductive, with type variables; closed types; σs ⇒* ρ

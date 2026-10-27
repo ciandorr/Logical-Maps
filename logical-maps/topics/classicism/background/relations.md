@@ -17,7 +17,7 @@ individual outputs, since such a relation still ends in $t$.
 
 ::: lemma {#modalized-plenitude-r}
 title: Modalized Plenitude
-lean: [Classicism.Proofs.modalized_plenitude_t, Classicism.Proofs.classicism_implies_modalized_plenitude_r]
+lean: [Classicism.modalized_plenitude_t, Classicism.Proofs.classicism_implies_modalized_plenitude_r]
 credit: Cian Dorr, 28 September 2026 (the statement, and the witness $\lambda x\, .\,\forall p\, .\,(Ux)p\to p$ for output type $t$); Claude Opus 5.5 (Anthropic), 28 September 2026 (the generalization to all relational output types and the written proof)
 sources: Classicism, §1.5, pp. 16–18 (necessitation, T and Intensionality)
 ---
@@ -110,7 +110,8 @@ $$
 
 These orders are non-strict: Total includes reflexivity on $X$, and when
 $R$ totally orders $X$, an $R$-minimal instance of a property included in
-$X$ is its $R$-least instance {lean: Classicism.Proofs.least_of_minimal}. Like Equiv, all of these are unboxed, so they
+$X$ is its $R$-least instance {lean: Classicism.least_of_minimal}, and an instantiated property has a unique least
+instance {lean: Classicism.unique_least}. Like Equiv, all of these are unboxed, so they
 concern the evaluation point, and each depends only on the extensions of $R$
 and $X$ there: coextensive arguments satisfy them together. A relation can
 be a well-order without necessarily being one, because instances that are

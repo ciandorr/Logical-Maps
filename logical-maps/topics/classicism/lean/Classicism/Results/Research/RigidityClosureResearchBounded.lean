@@ -52,7 +52,7 @@ theorem bounded_tame_universal (F : σ → Prop) : Rigid F → InternallySeparat
 
 theorem nd_bounded_propagation : NecessityOfDistinctness σ → BoundedTamePropagation σ :=
   fun nd F hf => modal_K _ _ (modal_K _ _ (nec% (bounded_tame_universal F))
-    (Classicism.Research.InextensiblePower.rigid_necessary F hf))
+    (Classicism.rigid_necessary F hf))
     (argument_nd_seals_separation nd F (weaklyRigid_of_rigid hf))
 
 theorem nd_tame_power_implies_weak_power : NecessityOfDistinctness σ →

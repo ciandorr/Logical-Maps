@@ -1,5 +1,5 @@
 import Classicism.Tools.QuoteTerm
-import Classicism.Cardinality
+import Classicism.Background.Arithmetic
 import Classicism.Certified.Signatures
 
 /-!

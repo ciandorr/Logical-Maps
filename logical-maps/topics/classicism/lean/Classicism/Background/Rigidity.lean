@@ -1,6 +1,7 @@
 import Classicism.Paper
-import Classicism.Order
+import Classicism.Background.Order
 import Classicism.Pointwise
+import Classicism.Background.Lattice
 
 /-!
 # Rigidity and the comprehension predicates
@@ -117,5 +118,22 @@ theorem weaklyPersistent_neg_apply {Y : σ → Prop}
     (h : WeaklyPersistent (¬ Y)) (z : σ) : ¬ Y z → □ (¬ Y z) := h z
 
 end pointwise
+
+/-! ### Further facts -/
+
+/-- Rigidity, if true, is necessary: it is necessary weak rigidity, and `4`. -/
+theorem rigid_necessary {τ : Type} [Rel τ] (X : τ) (h : Rigid X) : □ (Rigid X) :=
+  modal_K _ _ (nec% (rigid_iff_box_weaklyRigid X).2)
+    (modal_four _ ((rigid_iff_box_weaklyRigid X).1 h))
+
+/-- Coextensive weakly rigid relations are identical: each is below the other by the other's
+weak persistence and its own weak inextensibility, and `≤` is antisymmetric. -/
+theorem eq_of_weaklyRigid_coext {τ : Type} [Rel τ] [Order τ] [Pointwise τ] {F G : τ}
+    (hF : WeaklyRigid F) (hG : WeaklyRigid G) (h : F ≡ G) : F = G :=
+  le_antisymm_rel F G
+    (le_of_box_incl (hF.2 G (Pointwise.incl_trans F G (boxAt G) (Pointwise.incl_of_coext F G h)
+      hG.1)))
+    (le_of_box_incl (hG.2 F (Pointwise.incl_trans G F (boxAt F) (Pointwise.incl_of_coext' F G h)
+      hF.1)))
 
 end Classicism

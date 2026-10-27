@@ -19,7 +19,8 @@ $$
 $$
 :::
 
-A weak world is an atom in the sense above; a strong world necessarily settles
+A weak world is an atom in the sense above
+{lean: Classicism.atom_le_or_le_neg_rel, Classicism.atom_of_decides, Classicism.atom_of_decides_arrow}; a strong world necessarily settles
 every entity of its type, including ones that do not actually exist. The
 Weak Leibniz Biconditionals, $\forall X\, .\,\Diamond_\sigma X\to\exists W\, .\,
 \operatorname{WWorld}_\sigma(W)\land W\le X$, are the map's Atomicity; the

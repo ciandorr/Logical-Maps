@@ -11,7 +11,7 @@ t = pathlib.Path(tempfile.mkdtemp())
 (t / 'background').mkdir()
 (t / 'background' / 'first.md').write_text(r'''# First page
 
-Some prose citing [[later-lemma]] and [[r|the result]].
+Some prose citing [[later-lemma]] and [[r|the result]]. A partial order {lean: Example.le_refl, Example.le_trans}, but not $\{lean: x\}$.
 
 ::: definition {#box-def}
 title: necessity
@@ -33,6 +33,7 @@ It uses [[box-def]]. *Proof.* Obvious.
 topic = {'background_pages': ['first', 'second']}
 bg = load_background(t, topic)
 assert not background_errors({'background': bg}, {'p', 'r'}), background_errors({'background': bg}, {'p', 'r'})
+assert bg['pages'][0]['lean_inline'] == ['Example.le_refl', 'Example.le_trans'], bg['pages'][0]['lean_inline']
 bad = load_background(t, {'background_pages': ['first']})
 assert any('not listed' in e for e in bad['errors'])
 out = render_background(bg, {'principles': [], 'results': [], 'models': [], 'papers': [{'id': 'paper', 'title': 'A paper', 'citation': 'Someone, A paper (2026).'}]})
@@ -47,7 +48,8 @@ const data = {
   principles: [{id: 'p', name: 'P', statement: 'P.'}, {id: 'q', name: 'Q', statement: 'Q.'}],
   results: [{id: 'r', premises: ['p'], conclusion: 'q', status: 'proved', certificate, proof: 'By [[later-lemma]].'}],
   models: [],
-  background_pages: prepared.pages, background_items: prepared.items
+  background_pages: prepared.pages, background_items: prepared.items,
+  background_lean: {'Example.le_refl': {link: {label: 'le_refl', url: 'https://lean.example/O.lean#L1-L2'}, theory: 'C⁻'}, 'Example.le_trans': {link: {label: 'le_trans', url: 'https://lean.example/O.lean#L3-L4'}, theory: 'C⁻'}}
 };
 const errors = [], vc = new VirtualConsole(); vc.on('jsdomError', e => errors.push(String(e)));
 const template = fs.readFileSync(path.join(root, 'viewer/template.html'), 'utf8');
@@ -76,6 +78,10 @@ const shown = () => [...d.querySelectorAll('#background [data-bg-page]')].filter
   assert.equal(w.location.hash, '#background/first/box-def');
   assert.ok(d.querySelector('#bg-box-def .katex'), 'Maths in items is typeset');
   assert.equal(d.querySelector('#bg-page-first button[data-open-result="r"]').textContent, 'the result', 'A labelled link keeps its label');
+  const inline = d.querySelectorAll('#bg-page-first .lean-ref');
+  assert.equal(inline.length, 1, 'One citation, and none inside maths');
+  assert.deepEqual([...inline[0].querySelectorAll('a')].map(a => a.textContent), ['le_refl', 'le_trans']);
+  assert.ok(inline[0].querySelector('.badge.lean.verified'), 'All cited declarations pass, so the badge shows');
   // The list of pages switches pages.
   d.querySelector('#background a[data-bg-nav="literature"]').click();
   assert.deepEqual(shown(), ['literature']);

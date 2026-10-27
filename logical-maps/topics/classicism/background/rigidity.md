@@ -41,7 +41,7 @@ $$
 $$
 :::
 
-$\operatorname{Rigid}$ is thus necessary weak rigidity. These are the
+$\operatorname{Rigid}$ is thus necessary weak rigidity {lean: Classicism.rigid_iff_box_weaklyRigid}. These are the
 conventions of Dorr, *Boolean Completeness does not imply Rigid
 Comprehension*, pp. 2 and 12.
 

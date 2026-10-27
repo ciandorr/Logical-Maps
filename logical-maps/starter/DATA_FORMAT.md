@@ -220,8 +220,11 @@ The kind is one of definition, lemma, proposition, theorem, corollary, fact or
 remark. The header before `---` is optional; `lean` and `sources` may be lists.
 Item and page ids share the namespace of the records, so `[[weakly-rigid-persistent]]`
 in any record's prose or on any page links to it, and the item lists what refers
-to it. With a Lean project, `lean-check` confirms that each named declaration
-exists and rests on the allowed axioms only, and the build links to it. Put longer result/model accounts in `writeups/<record-id>.md`.
+to it. Anywhere in a page's prose, `{lean: A, B, C}` cites Lean declarations without
+an item of their own: "≤ is a partial order {lean: le_refl, le_trans, le_antisymm}"
+becomes one small link to all three. With a Lean project, `lean-check` confirms that
+each named declaration exists and passes the project's check of a proof, and the build
+links to it. Put longer result/model accounts in `writeups/<record-id>.md`.
 KaTeX 0.18.7 renders maths in definitions, formal formulations, proofs, notes,
 model descriptions and Markdown, with or without Pandoc. Write `$x^{n+1}$` or
 `\(x^{n+1}\)` inline, and `$$\frac{1}{2}$$` or `\[\frac{1}{2}\]` for a displayed

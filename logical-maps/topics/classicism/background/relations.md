@@ -17,6 +17,7 @@ individual outputs, since such a relation still ends in $t$.
 
 ::: lemma {#modalized-plenitude-r}
 title: Modalized Plenitude
+lean: [Classicism.Proofs.modalized_plenitude_t, Classicism.Proofs.classicism_implies_modalized_plenitude_r]
 credit: Cian Dorr, 28 September 2026 (the statement, and the witness $\lambda x\, .\,\forall p\, .\,(Ux)p\to p$ for output type $t$); Claude Opus 5.5 (Anthropic), 28 September 2026 (the generalization to all relational output types and the written proof)
 sources: Classicism, §1.5, pp. 16–18 (necessitation, T and Intensionality)
 ---
@@ -53,6 +54,11 @@ The inner box is essential; it is what licenses the identity $y_0=Fx$ in step (2
 
 *Polyadic form.* The same for $U^{\bar\sigma\tau t}$, one argument at a time, using each
 step's instance under the box.
+
+In Lean the proof is given at output type $t$ and at output type $\sigma'\to t$ for each
+type $\sigma'$, the cases of none and of one remaining argument. Lean's shallow layer has
+no induction on the shape of a type, so each further number of remaining arguments is a
+separate theorem of the same form.
 :::
 
 For $R^{\sigma\sigma t}$, at any type $\sigma$ including $e$,
@@ -104,7 +110,7 @@ $$
 
 These orders are non-strict: Total includes reflexivity on $X$, and when
 $R$ totally orders $X$, an $R$-minimal instance of a property included in
-$X$ is its $R$-least instance. Like Equiv, all of these are unboxed, so they
+$X$ is its $R$-least instance {lean: Classicism.Proofs.least_of_minimal}. Like Equiv, all of these are unboxed, so they
 concern the evaluation point, and each depends only on the extensions of $R$
 and $X$ there: coextensive arguments satisfy them together. A relation can
 be a well-order without necessarily being one, because instances that are

@@ -35,6 +35,31 @@ $\operatorname{Serial}(U):=\forall\bar x^{\bar\sigma}\, .\,\exists y^\tau\, .\,(
 for $U^{\bar\sigma\tau t}$, and $\operatorname{Equiv}(R)$ for $R^{\bar\sigma\bar\sigma t}$
 uses $(R[\bar x])[\bar y]$.
 
+::: definition {#shorthands}
+title: common shorthands
+---
+For relations $X,Y$ of a type $\bar\sigma t$, and the evaluation point unless a box is
+written:
+
+- $X\subseteq Y$ (*$X$ is included in $Y$*, a *subrelation* of $Y$) abbreviates
+  $\forall\bar z\, .\,X[\bar z]\to Y[\bar z]$; this is actual inclusion, and
+  $X\le Y$ is $\Box(X\subseteq Y)$ ([[order]]).
+- $X\equiv Y$ (*$X$ and $Y$ are coextensive*) abbreviates
+  $\forall\bar z\, .\,X[\bar z]\leftrightarrow Y[\bar z]$. In C coextensive relations are
+  identical only when necessarily coextensive ([[intensionality-r|Intensionality]]).
+- $\top_\tau$ and $\bot_\tau$, at a relational type $\tau=\bar\sigma t$, are
+  $\lambda\bar x\, .\,\top$ and $\lambda\bar x\, .\,\bot$, the top and bottom of $\le_\tau$.
+- $H_{\bar x}:=\lambda\bar y\, .\,\bar y=\bar x$ is the *haecceity* of $\bar x$, the
+  property of being $\bar x$.
+- $X-y:=\lambda u\, .\,Xu\land u\ne y$ is $X$ without $y$.
+- $\exists!x\, .\,\varphi$ abbreviates
+  $\exists x\, .\,\varphi\land\forall x'\, .\,\varphi[x'/x]\to x'=x$.
+- For a relation $R^{\sigma\sigma t}$ given as an order, $x\preccurlyeq y$ is $(Rx)y$, and
+  $x\prec y$ is $x\preccurlyeq y\land x\ne y$.
+- $\bigwedge_{i<j\le n}x_i\ne x_j$ is the finite conjunction of the displayed
+  distinctness claims, saying that $x_1,\ldots,x_n$ are pairwise distinct.
+:::
+
 **Polyadic forms.** A principle with a type variable that may take the value
 $e$ has a *polyadic form*, listed among its equivalent forms. The polyadic form
 replaces that variable $\sigma$ by a tuple $\bar\sigma$, and its variables of type
@@ -72,6 +97,7 @@ original at each $\sigma_i$; for the empty tuple it is $\top$.
 
 ::: lemma {#ordinary-comprehension-r}
 title: Ordinary Comprehension
+lean: [Classicism.ordinary_comprehension_nullary, Classicism.ordinary_comprehension, Classicism.ordinary_comprehension₂]
 credit: Andrew Bacon and Cian Dorr
 sources: Classicism
 ---
@@ -83,6 +109,11 @@ other free object variables being universally closed.
 *Proof.* The λ-term $\lambda\bar y\, .\,P$ is a witness: β-conversion makes its
 application equivalent to $P$ at each tuple, and existential introduction supplies the
 instance.
+
+The schema is in a formula, which no Lean statement with type parameters can quantify
+over. The Lean theorems state, for zero, one and two distinguished variables, that every
+relation $P$ is coextensive with some $X$; each instance of the schema is the theorem at
+the λ-term $\lambda\bar y\, .\,P$, which is how the object language proves it.
 :::
 
 ## Conventions

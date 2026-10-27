@@ -194,7 +194,9 @@ def load_topic(topic_id: str) -> dict:
 #
 # The header before `---` is optional; its keys are BACKGROUND_ITEM_KEYS, and `lean` and
 # `sources` take a string or a list. An item's id, and a page's, share the namespace of the
-# topic's records, so `[[id]]` in any prose links to it.
+# topic's records, so `[[id]]` in any prose links to it. Anywhere in a page's prose,
+# `{lean: A, B, C}` cites Lean declarations without an item of their own: "≤ is a partial
+# order {lean: le_refl, le_trans, le_antisymm}" becomes one link to all three.
 
 import re as _re
 
@@ -253,8 +255,27 @@ def load_background(tdir: Path, topic: dict) -> dict:
                           "credit": header.get("credit", "") if isinstance(header, dict) else "",
                           "sources": listed(header.get("sources")) if isinstance(header, dict) else [],
                           "body": content.strip(), "_header": header})
-        pages.append({"id": pid, "title": title, "md": body.strip(), "file": rel})
+        pages.append({"id": pid, "title": title, "md": body.strip(), "file": rel,
+                      "lean_inline": background_inline_lean(body)})
     return {"pages": pages, "items": items, "errors": errors}
+
+
+LEAN_INLINE = _re.compile(r"\{lean:\s*([^{}\n]+?)\s*\}")
+
+
+def background_inline_lean(md: str) -> list[str]:
+    """The declarations a page's `{lean: …}` citations name, outside math and code, in order."""
+    out = []
+    for m in LEAN_INLINE.finditer(_outside_math_or_code(md)):
+        out += [n.strip() for n in m[1].split(",") if n.strip() and n.strip() not in out]
+    return out
+
+
+def background_lean_names(data: dict) -> list[tuple[str, str]]:
+    """Every Lean declaration the Background cites, with where: an item's header or a page's prose."""
+    bg = data.get("background") or {}
+    return ([(n, f"{i['file']}: item {i['id']}") for i in bg.get("items", []) for n in i["lean"]]
+            + [(n, p["file"]) for p in bg.get("pages", []) for n in p.get("lean_inline", [])])
 
 
 def background_ids(data: dict) -> set:
@@ -297,11 +318,11 @@ def background_errors(data: dict, linkable: set) -> list[str]:
             v = header.get(k)
             if v is not None and not (isinstance(v, str) or isinstance(v, list) and all(isinstance(s, str) for s in v)):
                 errors.append(f"{where}: {k} is neither a string nor a list of strings")
-        for name in i["lean"]:
-            if not _re.fullmatch(r"[A-Za-z_][\w'.]*", str(name)):
-                errors.append(f"{where}: '{name}' is not a Lean declaration name")
         if not i["body"]:
             errors.append(f"{where}: empty")
+    for n, where in background_lean_names(data):
+        if not _re.fullmatch(r"[A-Za-z_][\w'.]*", str(n)):
+            errors.append(f"{where}: '{n}' is not a Lean declaration name")
     known = linkable | seen
     for p in bg.get("pages", []):
         for ln in BACKGROUND_BLOCK.sub("", p["md"]).splitlines():
@@ -2752,14 +2773,24 @@ _MATH_OR_CODE = _re.compile(
 _CROSS_REF_TEXT = _re.compile(r"\[\[([a-z0-9]+(?:-[a-z0-9]+)*)(?:\|([^\]]*))?\]\]")
 
 
+def _outside_math_or_code(md: str) -> str:
+    """The text with its math and code blanked out, for finding markup that is not inside them."""
+    return _MATH_OR_CODE.sub(lambda m: " " * len(m[0]), md)
+
+
 def _xref_slots(md: str) -> str:
     """[[id]] and [[id|text]] outside math and code as `<span data-xref>` slots, which the viewer
-    turns into links labelled as it labels cross-references in records."""
+    turns into links labelled as it labels cross-references in records; `{lean: A, B}` as a
+    `<span data-lean>` slot, which it turns into one link to the declarations."""
+    def slots(text: str) -> str:
+        text = _CROSS_REF_TEXT.sub(lambda r: f'<span class="xref-slot" data-xref="{r[1]}">{r[2] or ""}</span>', text)
+        return LEAN_INLINE.sub(lambda r: '<span class="lean-ref" data-lean="'
+                               + " ".join(n.strip() for n in r[1].split(",") if n.strip()) + '"></span>', text)
     out, end = [], 0
     for m in _MATH_OR_CODE.finditer(md):
-        out += [_CROSS_REF_TEXT.sub(lambda r: f'<span class="xref-slot" data-xref="{r[1]}">{r[2] or ""}</span>', md[end:m.start()]), m[0]]
+        out += [slots(md[end:m.start()]), m[0]]
         end = m.end()
-    out.append(_CROSS_REF_TEXT.sub(lambda r: f'<span class="xref-slot" data-xref="{r[1]}">{r[2] or ""}</span>', md[end:]))
+    out.append(slots(md[end:]))
     return "".join(out)
 
 
@@ -2820,7 +2851,8 @@ def render_background(bg: dict, payload: dict, literature: bool = True) -> dict:
                       "html": '<section id="paper-catalogue">' + _md_to_html(catalogue) + '</section>'})
         md += ["## Literature", "", catalogue, ""]
     out_items = [{k: v for k, v in i.items() if not k.startswith("_") and k != "file"} | {"file": i["file"]} for i in bg.get("items", [])]
-    return {"pages": pages, "items": out_items, "md": "\n".join(md).strip() + "\n"}
+    text = LEAN_INLINE.sub(lambda r: "(Lean: " + ", ".join(f"`{n.strip()}`" for n in r[1].split(",") if n.strip()) + ")", "\n".join(md))
+    return {"pages": pages, "items": out_items, "md": text.strip() + "\n"}
 
 
 def enriched_payload(topic_id: str, downloads: dict, *, base: dict | None = None) -> dict:
@@ -3400,6 +3432,10 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
     if lean_links:
         # A Background item's declarations: linked when indexed, verified when every one passes
         # the check of a shallow proof; `C⁻` when none needs Existence at e.
+        if payload.get("background_pages"):
+            cited = {n for n, _ in background_lean_names(data)}
+            payload["background_lean"] = {n: {"link": d["link"], "theory": d["theory"]}
+                                          for n, d in lean_links["declarations"].items() if n in cited}
         for item in payload.get("background_items", []):
             found = [lean_links["declarations"][n] for n in item["lean"] if n in lean_links["declarations"]]
             if found:
@@ -3764,7 +3800,7 @@ def generate_lean_statements(topic_id: str) -> Path | None:
     # The declarations the Background's items cite, for the index script to locate and audit.
     index_file = ((data["topic"].get("lean") or {}).get("index") or {}).get("file")
     if index_file:
-        cited = sorted({n for i in data["background"]["items"] for n in i["lean"]})
+        cited = sorted({n for n, _ in background_lean_names(data)})
         target = root / Path(index_file).parent / "background-names.txt"
         text = "".join(n + "\n" for n in cited)
         if cited or target.exists():
@@ -4036,12 +4072,11 @@ def lean_check(topic_id: str, update: bool = False) -> bool:
     index_file = ((data["topic"].get("lean") or {}).get("index") or {}).get("file")
     if index_file and (root / index_file).exists():
         decls = json.loads((root / index_file).read_text(encoding="utf-8")).get("declarations", {})
-        for i in data["background"]["items"]:
-            for n in i["lean"]:
-                if n not in decls:
-                    bad.append(f"{i['file']}: item {i['id']}: no Lean declaration {n}")
-                elif not decls[n].get("classicism"):
-                    bad.append(f"{i['file']}: item {i['id']}: {n} fails the check: {'; '.join(decls[n].get('errors') or ['no verdict'])}")
+        for n, where in background_lean_names(data):
+            if n not in decls:
+                bad.append(f"{where}: no Lean declaration {n}")
+            elif not decls[n].get("classicism"):
+                bad.append(f"{where}: {n} fails the check: {'; '.join(decls[n].get('errors') or ['no verdict'])}")
     print(f"  principle definitions: {len(cov['defs'])}/{len(data['principles'])}")
     print(f"  generated statements: {len(ready)}/{len(records)}")
     verified = {rid for rid, wrapper in wrappers.items() if verdicts.get(wrapper, False)}

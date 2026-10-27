@@ -580,6 +580,8 @@
   .bg-kind { font-weight: 600; }
   .bg-meta, .bg-item-foot { font-size: 13px; color: var(--ink-2); }
   .bg-item-foot details { margin-top: 4px; }
+  .lean-ref { font-size: 12px; white-space: normal; color: var(--ink-2); }
+  .lean-ref .badge { margin-right: 2px; }
   .badge { border-radius: 2px; }
   .ex > div { min-width: 0; }
   /* Shared signed controls and a quieter Theory Explorer. */
@@ -3644,6 +3646,13 @@ function renderBackgroundPages(el) {
     if (lean || used) s.insertAdjacentHTML('beforeend', `<div class="bg-item-foot">${lean}${used}</div>`);
   });
   el.querySelectorAll('span.xref-slot').forEach(s => { s.outerHTML = crossRef(s.dataset.xref, s.innerHTML); });
+  // {lean: A, B, C} in the prose: one small link per declaration, with the badge when all pass.
+  el.querySelectorAll('span.lean-ref').forEach(s => {
+    const names = (s.dataset.lean || '').split(' ').filter(Boolean), found = names.map(n => (DATA.background_lean || {})[n]);
+    const verified = found.length && found.every(d => d && d.theory);
+    const links = names.map((n, k) => found[k] ? `<a href="${esc(found[k].link.url)}" target="_blank" title="${esc(n)}">${esc(found[k].link.label)}</a>` : `<code>${esc(n)}</code>`);
+    s.innerHTML = `${verified ? `<span class="badge lean verified" title="Proved in Lean, passing the check of a shallow proof">Lean ✓</span>` : '<span class="badge lean">Lean</span>'} ${links.join(' · ')}`;
+  });
   el.querySelectorAll('a[data-bg-nav]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); showBackgroundPage(a.dataset.bgNav); }));
   wire(el);
 }

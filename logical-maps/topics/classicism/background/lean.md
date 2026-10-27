@@ -39,7 +39,8 @@ and a lemma is a theorem with type parameters, a schema in the sense of
 
 A lemma's Lean link names shallow theorems. Its **Lean ✓** means that each of them
 passes `#classicism_check`, and its tooltip says whether the lemma is a theorem of C or
-of C⁻. Shallow proofs elsewhere in the library use these theorems directly. Whether a
+of C⁻. A smaller link in the running text, after a claim such as "$\le_\tau$ is a
+partial order", names the theorems that prove that claim and carries the same badge. Shallow proofs elsewhere in the library use these theorems directly. Whether a
 Lean statement says what the prose says is checked by reading the two together.
 
 ## Results and their certificates

@@ -323,29 +323,82 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Forcing Possibilism ⇒ Axiom of Infinity (type t)</h1></header><p class="cert">
-Result — Source: Could the truths of mathematics have been different? (draft); produced by Andrew Bacon (§6, the remark that Mathematical Possibilism entails the axiom of infinity); proof written out by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026.
+Result — Source: Could the truths of mathematics have been different?
+(draft); produced by Andrew Bacon (§6, the remark that Mathematical
+Possibilism entails the axiom of infinity); proof written out by Claude
+Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026;
+recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+23 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Forcing Possibilism.</strong> Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.</li>
+<li><strong>Forcing Possibilism.</strong> Every complete Boolean algebra
+that is finite or has strictly fewer elements than there are
+propositions is isomorphic to the entailment algebra below some
+proposition other than top.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Axiom of Infinity (type t).</strong> There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
+<li><strong>Axiom of Infinity (type t).</strong> There are not finitely
+many propositions. No finite cardinality holds of the universal
+property, so the domain of the type cannot be exhausted by finitely many
+steps from the empty property.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Suppose some finite cardinality holds of the universal property of propositions, say there are exactly <span class="math inline">N</span> propositions, <span class="math inline">q_1,\dots,q_N</span> (with <span class="math inline">N\ge2</span>, as <span class="math inline">\top\ne\bot</span>). At type <span class="math inline">tt</span> the properties <span class="math inline">\lambda p\, .\,p=q_{i_1}\lor\dots\lor p=q_{i_k}</span>, one for each subset of <span class="math inline">\{q_1,\dots,q_N\}</span>, are pairwise distinct, since two of them differ at some <span class="math inline">q_i</span>, and under inclusion they form a complete Boolean algebra with <span class="math inline">2^N</span> elements: a finite Boolean algebra is complete, and its carrier, order, meets and joins are given by abstraction. It is finite, hence small. Forcing Possibilism gives a proposition <span class="math inline">p\ne\top</span> whose entailment algebra is isomorphic to it, so there are at least <span class="math inline">2^N&gt;N</span> propositions, those entailing <span class="math inline">p</span>. Contradiction. Hence no finite cardinality holds of the universal property of propositions.</p>
+<p>Suppose some finite cardinality holds of the universal property of
+propositions, say there are exactly <span class="math inline">N</span>
+propositions, <span class="math inline">q_1,\dots,q_N</span> (with <span
+class="math inline">N\ge2</span>, as <span
+class="math inline">\top\ne\bot</span>). At type <span
+class="math inline">tt</span> the properties <span
+class="math inline">\lambda p\, .\,p=q_{i_1}\lor\dots\lor
+p=q_{i_k}</span>, one for each subset of <span
+class="math inline">\{q_1,\dots,q_N\}</span>, are pairwise distinct,
+since two of them differ at some <span class="math inline">q_i</span>,
+and under inclusion they form a complete Boolean algebra with <span
+class="math inline">2^N</span> elements: a finite Boolean algebra is
+complete, and its carrier, order, meets and joins are given by
+abstraction. It is finite, hence small. Forcing Possibilism gives a
+proposition <span class="math inline">p\ne\top</span> whose entailment
+algebra is isomorphic to it, so there are at least <span
+class="math inline">2^N&gt;N</span> propositions, those entailing <span
+class="math inline">p</span>. Contradiction. Hence no finite cardinality
+holds of the universal property of propositions.</p>
 <h2 id="notes">Notes</h2>
-<p>The one general consequence of Forcing Possibilism the map records: the principle is about the propositions there could be below some proposition, so any model with finitely many propositions refutes it, and through this result every such model on the map does, which settles the questions whether principles true in finite models, Atomicity, ND or BF for instance, imply it. Its other verdicts on the map come from Bacon’s lottery model, which has it with □Rigid Comprehension and □Intensional Choice and without Atomicity.</p>
+<p>The one general consequence of Forcing Possibilism the map records:
+the principle is about the propositions there could be below some
+proposition, so any model with finitely many propositions refutes it,
+and through this result every such model on the map does, which settles
+the questions whether principles true in finite models, Atomicity, ND or
+BF for instance, imply it. Its other verdicts on the map come from
+Bacon’s lottery model, which has it with □Rigid Comprehension and
+□Intensional Choice and without Atomicity.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Could mathematics have been different?</strong> — Andrew Bacon, Could the truths of mathematics have been different?, draft of 9 October 2025, §6, p. 27, “A straightforward consequence of Mathematical Possibilism is that it entails the axiom of infinity.”</li>
+<li><strong>Could mathematics have been different?</strong> — Andrew
+Bacon, Could the truths of mathematics have been different?, draft of 9
+October 2025, §6, p. 27, “A straightforward consequence of Mathematical
+Possibilism is that it entails the axiom of infinity.”</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/forcing-possibilism-implies-axiom-of-infinity-t.yaml</code>
+Record:
+<code>topics/classicism/results/forcing-possibilism-implies-axiom-of-infinity-t.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Origin: <a href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could the truths of mathematics have been different?</a>.</strong> Bacon, Andrew (2025). Could the truths of mathematics have been different? Draft dated 9 October 2025, with online appendix; published in Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and Goodsell. Locators refer to the draft. The full Boolean-valued construction is in appendix §B.2, pp. 7–9 of the separately paginated appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — §6, p. 27. Stated there for the axiom of infinity in the form that the finite numerical quantifiers over propositions form a natural number structure; the map’s Axiom of Infinity (type t) says that no finite cardinality holds of the universal property of propositions.</li>
+<li><strong>Origin: <a
+href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could
+the truths of mathematics have been different?</a>.</strong> Bacon,
+Andrew (2025). Could the truths of mathematics have been different?
+Draft dated 9 October 2025, with online appendix; published in
+Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and
+Goodsell. Locators refer to the draft. The full Boolean-valued
+construction is in appendix §B.2, pp. 7–9 of the separately paginated
+appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and
+Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — §6,
+p. 27. Stated there for the axiom of infinity in the form that the
+finite numerical quantifiers over propositions form a natural number
+structure; the map’s Axiom of Infinity (type t) says that no finite
+cardinality holds of the universal property of propositions.</li>
 </ul>
 </body></html>

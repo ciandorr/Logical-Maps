@@ -1,0 +1,19 @@
+id: atoms-are-self-atoms-t
+name: Atoms are self-atoms (type t)
+category: more-boolean-structure
+statement: 'Every atom is a self-atom: necessarily, if it is true, it is an atom.'
+formal: $\forall p\, .\,\operatorname{Atom}_t(p)\to\operatorname{SelfAtom}_t(p)$
+definitions: 'where $\operatorname{SelfAtom}_t(p):=\Diamond p\land\Box(p\to\operatorname{Atom}_t(p))$: a
+  self-atom is a possible proposition that necessarily, if true, is an atom; equivalently, in C, one that
+  entails that it is the actual world, $\Box(p\to\forall q\, .\,q\to p\le q)$.'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: 'The type $t$ instance of [[atoms-are-self-atoms-r]]. Bridge principle (Cian Dorr, 25 October 2026):
+  atoms stay atoms wherever they hold. With Atomicity it gives Self-Atomicity, and it follows from [[atoms-are-strong-atoms-r]].
+  In a full action model it says that no non-identity arrow $m$ has $m\circ k=k$ for an arrow $k$ out
+  of the evaluation object.'
+lean_def: Classicism.P.AtomsAreSelfAtomsT.schemaIn

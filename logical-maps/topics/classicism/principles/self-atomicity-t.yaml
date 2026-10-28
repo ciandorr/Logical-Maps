@@ -1,0 +1,22 @@
+id: self-atomicity-t
+name: Self-Atomicity (type t)
+category: more-boolean-structure
+statement: 'Every possible proposition is entailed by a self-atom: a possible proposition that necessarily,
+  if true, is an atom, that is, one that entails that it is the actual world.'
+formal: $\forall p\, .\,\Diamond p\to\exists q\, .\,\operatorname{SelfAtom}_t(q)\land q\le p$
+definitions: 'where $\operatorname{SelfAtom}_t(p):=\Diamond p\land\Box(p\to\operatorname{Atom}_t(p))$: a
+  self-atom is a possible proposition that necessarily, if true, is an atom; equivalently, in C, one that
+  entails that it is the actual world, $\Box(p\to\forall q\, .\,q\to p\le q)$.'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: 'The type $t$ instance of [[self-atomicity-r]]. Cian Dorr’s weakening of Strong Atomicity
+  (25 October 2026): a strong atom is an atom at every world, a self-atom an atom at every world where
+  it holds. It lies strictly between Strong Atomicity and □Actuality, and is independent
+  of Atomicity in both directions; the bridge principles [[atoms-are-self-atoms-r]], [[self-atoms-are-atoms-r]],
+  [[self-atoms-are-strong-atoms-r]] and [[atoms-are-strong-atoms-r]] connect the three notions. The
+  dual form, that whatever is entailed by every self-atom is necessary, is equivalent as for Atomicity.'
+lean_def: Classicism.P.SelfAtomicityT.schemaIn

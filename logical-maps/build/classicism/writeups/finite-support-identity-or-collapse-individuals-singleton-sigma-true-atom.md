@@ -4,6 +4,8 @@
 
 ## Package
 
+- **□Atoms are self-atoms.** Necessarily, at each relational type, every atom is a self-atom: necessarily, if it is instantiated, it is an atom.
+- **□Atoms are strong atoms.** Necessarily, at each relational type, every atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
@@ -17,6 +19,8 @@
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **¬ Atomicity.** Every non-bottom entity of each relational type has an atom below it.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ Boolean Completeness (type t).** Every property of propositions has a greatest lower bound.
@@ -42,6 +46,12 @@ Interpretation of Σ, fixed for this record: one designated relational constant 
 *A member of the group Finite-support action models on one object, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Atoms are self-atoms, □Atoms are strong atoms. Fails Self-atoms are atoms (type t), Self-Atomicity (type t).
+
+The propositions over the collapses refine, two collapses agreeing with a given one on a finite $N$ differing beyond it, so no atom contains a collapse; $\{1\}$ is in the domain and is the only atom. It is a self-atom and a strong atom, no collapse having a retraction. An atom of a relational type sits over $1$ with one tuple, so is a self-atom and a strong atom. One object, so Atoms are self-atoms and Atoms are strong atoms hold at every world and every type. Self-atoms are atoms (type t) fails: let $k$ be a collapse with $k(0)=k(1)=0$ and $k(y)=1$, and $N\supseteq\{0,y\}$ finite; the set $q$ of collapses agreeing with $k$ on $N$ is pinned down by $N$, and for $k^{\prime}\in q$ a collapse $m$ has $m\circ k^{\prime}\in q$ only if it fixes $k^{\prime}(N)\supseteq\{0,1\}$ pointwise, which no collapse does; so the transport of $q$ along each member is $\{1\}$, $q$ is a self-atom, and it is not an atom. Self-Atomicity (type t) fails: the collapses with value $1$ at $0$ form a possible proposition pinned down by $\{0\}$, every member of which has range inside $[1,\infty)$, so that for any member $k^{\prime}$ and finite $N$ some collapse fixes $k^{\prime}(N)$ pointwise (send $0$ and $1$ to $1$, and fix the rest); so no part of it is a self-atom.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Rigid Power.
 
@@ -221,7 +231,7 @@ The record's revision log before it was written as arguments.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Corrected the reason given for the failures of Independence (signature Σ) and Distinctness (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed by every arrow; the failures come from the other relational constants, which denote top. No verdict changes.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added Relational Choice and its necessitation at Cian Dorr’s direction: ideally full models are extensionally full at every object, and choice in the metatheory supplies the functional subrelation; see the notes. Now satisfies: Relational Choice, □Relational Choice.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of BF at type t, sharpening the failure of BF; argument in the notes. Now violates: BF (type t).
-- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of the Strong Leibniz Biconditionals; see the notes. Now violates: Atomicity (type t).
+- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of Strong Atomicity; see the notes. Now violates: Atomicity (type t).
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 - **2026-09-20** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and identity at the evaluation arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct and each has that individual as finite support, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence has empty support and lies in the domain, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).
 - **2026-09-17** (OpenAI Codex (GPT-6), prompted by Zachary Goodsell) — Adopted the source’s relational type system at the user’s request. The cited construction now directly supplies the recorded model; the former type-extension obligation is removed. Now satisfies: Actuality, No Pure Contingency, □Actuality. Now violates: ND, Atomicity, BF, Boolean Completeness, Rigid Comprehension.

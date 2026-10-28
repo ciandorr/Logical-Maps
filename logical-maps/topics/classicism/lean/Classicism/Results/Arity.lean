@@ -974,7 +974,7 @@ theorem c5_and_atomicity_imply_necessary_plenitude :
       (Entails.union c5_and_atomicity_imply_necessary_completeness (Entails.union_left _ _))
       necessary_completeness_c5_necessary_plenitude.listEntails)
 
-/-- `actual-profile-r-implies-actuality`: Actual Profile over the empty list of argument
+/-- Actuality from its form Actual Profile: over the empty list of argument
 types is Actuality, on the nose. -/
 theorem actual_profile_r_implies_actuality :
     P.ActualProfile.listSchema ⟹ P.Actuality.schema := by

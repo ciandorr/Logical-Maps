@@ -43,6 +43,28 @@ meets:
     the remark after Definition D.3).
 arguments:
 - holds:
+  - necessary-self-atoms-are-atoms-r
+  - necessary-self-atoms-are-strong-atoms-r
+  fails:
+  - necessary-atoms-are-self-atoms-t
+  - necessary-atoms-are-strong-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'Write $!$ for the only arrow $W_0\to W_1$ and $c_n$ for the arrow $W_1\to W_0$ with value $n$.
+    At $W_1$ every proposition is pinned down by $\{0\}$, so the domain is full and the atoms are the
+    singletons. $\{c_n\}$ is not a self-atom: its transport along $c_n$ is the set of maps $m$ of $\mathbb
+    N$ with $m(n)=n$, pinned down by $\{n\}$ but not an atom. So Atoms are self-atoms (type t), and with
+    it Atoms are strong atoms (type t), fail at $W_1$, which $!$ reaches, and their boxed forms fail
+    at $W_0$. No self-atom contains an arrow into $W_0$ at either object, since its transport along that
+    arrow would be an atom containing $1_{W_0}$ and Actuality fails at $W_0$; so the self-atoms are $\{1_{W_1}\}$
+    at $W_1$ and $\{!\}$ at $W_0$, the latter pinned down by $\varnothing$ and an atom. Both are strong
+    atoms: $\{!\}$ becomes $\{1_{W_1}\}$ under $!$ and $\{!\}$ under any map of $\mathbb N$, and $\{1_{W_1}\}$
+    becomes $\{!\}$ under $c_n$. A self-atom of a relational type has a self-atom as its existential projection,
+    so sits over one of these, with one tuple, by the transport condition; so it is an atom and a strong
+    atom. Hence Self-atoms are atoms and Self-atoms are strong atoms hold at both objects, at every
+    type.'
+- holds:
   - barcan-r
   fails:
   - necessary-barcan-r

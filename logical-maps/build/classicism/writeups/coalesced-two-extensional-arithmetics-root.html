@@ -323,118 +323,1082 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum of two extensional models disagreeing about arithmetic</h1></header><p class="cert">
-Model — Source: Misc.; produced by Cian Dorr, 19 October 2026 (the construction), with Claude Opus 5.5 (Anthropic), who wrote the verification; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 19 October 2026.
+Model — Source: Misc.; produced by Cian Dorr, 19 October 2026 (the
+construction), with Claude Opus 5.5 (Anthropic), who wrote the
+verification; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian
+Dorr, 19 October 2026.
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>□Strong Leibniz Biconditionals.</strong> Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a strong world: a possible entity that necessarily entails every entity of the type or its negation.</li>
-<li><strong>□Strong Leibniz Biconditionals (type t).</strong> Necessarily, every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.</li>
-<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
-<li><strong>Infinity Schema (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>Possible Infinity (type e).</strong> Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.</li>
-<li><strong>Boolean Completeness (type t).</strong> Every property of propositions has a greatest lower bound.</li>
-<li><strong>□Boolean Completeness (type t).</strong> Necessarily, every property of propositions has a greatest lower bound.</li>
-<li><strong>□Truth implies ND-necessity.</strong> Necessarily, every truth is ND-necessary. In C this is the identity <span class="math inline">\Box_{\ne}=\lambda p\, .\,p</span>.</li>
-<li><strong>Tame Rigidity.</strong> Every weakly rigid relation, including a proposition, is rigid.</li>
-<li><strong>□Tame Rigidity.</strong> Necessarily, every weakly rigid relation, including a proposition, is rigid.</li>
-<li><strong>□Intensional Choice.</strong> Necessarily, if a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
-<li><strong>Modal Well-Ordering.</strong> Every type, including e, has a relation that is necessarily a well-order of it.</li>
-<li><strong>□Well-Ordering.</strong> Necessarily, every type, including e, is well-ordered by some relation.</li>
-<li><strong>Rigid Rigidity.</strong> Being rigid is a rigid property of relations, including propositions.</li>
-<li><strong>□Rigid Rigidity.</strong> Necessarily, being rigid is a rigid property of relations, including propositions.</li>
-<li><strong>Weakly Rigid Weak Rigidity.</strong> Being weakly rigid is a weakly rigid property of relations, including propositions.</li>
-<li><strong>□Weakly Rigid Weak Rigidity.</strong> Necessarily, being weakly rigid is a weakly rigid property of relations, including propositions.</li>
-<li><strong>Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
-<li><strong>Truth implies ND-necessity.</strong> Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.</li>
-<li><strong>¬ Necessity of Arithmetic.</strong> Every arithmetical sentence is either necessarily true or necessarily false, given that possibly zero is not a successor and successor is injective on numbers, where the numbers are the finite cardinalities of properties of a type <span class="math inline">\sigma</span>. One sentence for each type <span class="math inline">\sigma</span> and each arithmetical sentence at <span class="math inline">\sigma</span>.</li>
-<li><strong>¬ B for pure sentences.</strong> The B instance for every closed sentence in the pure language.</li>
-<li><strong>¬ Axiom of Infinity (type t).</strong> There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
-<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are not finitely many propositions: the Axiom of Infinity at this type, under a diamond.</li>
-<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
-<li><strong>¬ □Rigid Power.</strong> Necessarily, if a relation is rigid, so is the property of being a rigid relation that entails it.</li>
-<li><strong>¬ Weakly Rigid Power.</strong> If a relation is weakly rigid, so is the property of being a weakly rigid relation that entails it.</li>
-<li><strong>¬ □Weakly Rigid Power.</strong> Necessarily, if a relation is weakly rigid, so is the property of being a weakly rigid relation that entails it.</li>
-<li><strong>¬ Arithmetic Necessitism.</strong> Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at <span class="math inline">\sigma</span> form a rigid property with necessarily distinct instances. One sentence for each type <span class="math inline">\sigma</span>.</li>
-<li><strong>¬ Necessity of Analysis.</strong> Every first-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type <span class="math inline">\sigma</span> and each first-order analytical sentence.</li>
-<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.</li>
-<li><strong>¬ Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
-<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
-<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema for the fixed nonlogical signature Σ: every closed identity of its language not provable in C(Σ) is false.</li>
+<li><strong>□Strong Atomicity.</strong> Necessarily, at each relational
+type, every possible entity (one distinct from bottom) is entailed by a
+strong atom: a possible entity that necessarily entails every entity of
+the type or its negation.</li>
+<li><strong>□Strong Atomicity (type t).</strong> Necessarily, every
+possible proposition is entailed by a strong atom, one that is possible
+and necessarily entails every proposition or its negation.</li>
+<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every
+type. The predicate formulation closes the formula schema using lambda
+abstraction.</li>
+<li><strong>Infinity Schema (type e).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>Possible Infinity (type e).</strong> Possibly there are not
+finitely many individuals: the Axiom of Infinity at this type, under a
+diamond.</li>
+<li><strong>Boolean Completeness (type t).</strong> Every property of
+propositions has a greatest lower bound.</li>
+<li><strong>□Boolean Completeness (type t).</strong> Necessarily, every
+property of propositions has a greatest lower bound.</li>
+<li><strong>□Truth implies ND-necessity.</strong> Necessarily, every
+truth is ND-necessary. In C this is the identity <span
+class="math inline">\Box_{\ne}=\lambda p\, .\,p</span>.</li>
+<li><strong>Tame Rigidity.</strong> Every weakly rigid relation,
+including a proposition, is rigid.</li>
+<li><strong>□Tame Rigidity.</strong> Necessarily, every weakly rigid
+relation, including a proposition, is rigid.</li>
+<li><strong>□Intensional Choice.</strong> Necessarily, if a property is
+necessarily instantiated, then some property entailing it is necessarily
+uniquely instantiated.</li>
+<li><strong>Modal Well-Ordering.</strong> Every type, including e, has a
+relation that is necessarily a well-order of it.</li>
+<li><strong>□Well-Ordering.</strong> Necessarily, every type, including
+e, is well-ordered by some relation.</li>
+<li><strong>Rigid Rigidity.</strong> Being rigid is a rigid property of
+relations, including propositions.</li>
+<li><strong>□Rigid Rigidity.</strong> Necessarily, being rigid is a
+rigid property of relations, including propositions.</li>
+<li><strong>Weakly Rigid Weak Rigidity.</strong> Being weakly rigid is a
+weakly rigid property of relations, including propositions.</li>
+<li><strong>□Weakly Rigid Weak Rigidity.</strong> Necessarily, being
+weakly rigid is a weakly rigid property of relations, including
+propositions.</li>
+<li><strong>Relational Choice.</strong> Every serial binary relation has
+a functional subrelation.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
+<li><strong>Truth implies ND-necessity.</strong> Every truth is
+ND-necessary, that is, necessary under the distinctness-preserving
+modality.</li>
+<li><strong>¬ Necessity of Arithmetic.</strong> Every arithmetical
+sentence is either necessarily true or necessarily false, given that
+possibly zero is not a successor and successor is injective on numbers,
+where the numbers are the finite cardinalities of properties of a type
+<span class="math inline">\sigma</span>. One sentence for each type
+<span class="math inline">\sigma</span> and each arithmetical sentence
+at <span class="math inline">\sigma</span>.</li>
+<li><strong>¬ B for pure sentences.</strong> The B instance for every
+closed sentence in the pure language.</li>
+<li><strong>¬ Axiom of Infinity (type t).</strong> There are not
+finitely many propositions. No finite cardinality holds of the universal
+property, so the domain of the type cannot be exhausted by finitely many
+steps from the empty property.</li>
+<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are
+not finitely many propositions: the Axiom of Infinity at this type,
+under a diamond.</li>
+<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
+<li><strong>¬ □Rigid Power.</strong> Necessarily, if a relation is
+rigid, so is the property of being a rigid relation that entails
+it.</li>
+<li><strong>¬ Weakly Rigid Power.</strong> If a relation is weakly
+rigid, so is the property of being a weakly rigid relation that entails
+it.</li>
+<li><strong>¬ □Weakly Rigid Power.</strong> Necessarily, if a relation
+is weakly rigid, so is the property of being a weakly rigid relation
+that entails it.</li>
+<li><strong>¬ Arithmetic Necessitism.</strong> Given that necessarily
+zero is not a successor and successor is injective on numbers, the
+numbers at <span class="math inline">\sigma</span> form a rigid property
+with necessarily distinct instances. One sentence for each type <span
+class="math inline">\sigma</span>.</li>
+<li><strong>¬ Necessity of Analysis.</strong> Every first-order
+analytical sentence is either true in every real number structure in
+every possible world or false in every real number structure in every
+possible world. One sentence for each type <span
+class="math inline">\sigma</span> and each first-order analytical
+sentence.</li>
+<li><strong>¬ Self-atoms are atoms (type t).</strong> Every self-atom is
+an atom.</li>
+<li><strong>¬ Self-atoms are strong atoms (type t).</strong> Every
+self-atom is a strong atom.</li>
+<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with
+free variables among a finite tuple x, and distinct matching nonlogical
+constants c, a witness to P entails that P at those constants is
+possible.</li>
+<li><strong>¬ Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
+<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma
+is a pure operation applied to other constants: for a closed pure term A
+and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied
+to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema
+for the fixed nonlogical signature Σ: every closed identity of its
+language not provable in C(Σ) is false.</li>
 </ul>
 <h2 id="definition">Definition</h2>
-<p>Let <span class="math inline">T</span> be C with Extensionality, Well-Ordering at every type and <span class="math inline">I^*</span> (zero is not a successor and successor is injective on the finite cardinalities of individuals). <span class="math inline">T</span> holds in the full standard model on <span class="math inline">\mathbb N</span>, by choice in the metatheory, so <span class="math inline">T+\operatorname{Con}(T)</span> is consistent, and by Gödel’s second incompleteness theorem so is <span class="math inline">T+\neg\operatorname{Con}(T)</span>. Take one-world Henkin models <span class="math inline">M_1</span> of <span class="math inline">T+\operatorname{Con}(T)</span> and <span class="math inline">M_2</span> of <span class="math inline">T+\neg\operatorname{Con}(T)</span>, as action models with one object and only its identity arrow, and coalesce them at a new root as in Definition E.2. The root’s individuals are the pairs of an individual of <span class="math inline">M_1</span> and one of <span class="math inline">M_2</span>. Evaluation point: the root. Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the top element of its type.</p>
-<p>The root has one distinguished arrow to the root of each component, and every arrow from the root into a component factors through it.</p>
-<p>Root domains are as full as compatibility allows: a root proposition is a choice, for each component, of a proposition of that component’s root domain, together with a truth value at the root’s identity arrow, and a root entity of a relational type is likewise a family of component entities with a root component that is an arbitrary function of the root arguments.</p>
-<p><em>A member of the group Coalesced sums at a new root, which supplies this definition with the record’s settings, and the arguments marked as shared.</em></p>
+<p>Let <span class="math inline">T</span> be C with Extensionality,
+Well-Ordering at every type and <span class="math inline">I^*</span>
+(zero is not a successor and successor is injective on the finite
+cardinalities of individuals). <span class="math inline">T</span> holds
+in the full standard model on <span class="math inline">\mathbb
+N</span>, by choice in the metatheory, so <span
+class="math inline">T+\operatorname{Con}(T)</span> is consistent, and by
+Gödel’s second incompleteness theorem so is <span
+class="math inline">T+\neg\operatorname{Con}(T)</span>. Take one-world
+Henkin models <span class="math inline">M_1</span> of <span
+class="math inline">T+\operatorname{Con}(T)</span> and <span
+class="math inline">M_2</span> of <span
+class="math inline">T+\neg\operatorname{Con}(T)</span>, as action models
+with one object and only its identity arrow, and coalesce them at a new
+root as in Definition E.2. The root’s individuals are the pairs of an
+individual of <span class="math inline">M_1</span> and one of <span
+class="math inline">M_2</span>. Evaluation point: the root.
+Interpretation of Σ, fixed for this record: every constant of Σ is
+relational, and each denotes the top element of its type.</p>
+<p>The root has one distinguished arrow to the root of each component,
+and every arrow from the root into a component factors through it.</p>
+<p>Root domains are as full as compatibility allows: a root proposition
+is a choice, for each component, of a proposition of that component’s
+root domain, together with a truth value at the root’s identity arrow,
+and a root entity of a relational type is likewise a family of component
+entities with a root component that is an arbitrary function of the root
+arguments.</p>
+<p><em>A member of the group Coalesced sums at a new root, which
+supplies this definition with the record’s settings, and the arguments
+marked as shared.</em></p>
 <h2 id="arguments">Arguments</h2>
-<h3 id="fails-necessity-of-arithmetic.">Fails Necessity of Arithmetic.</h3>
-<p>At type <span class="math inline">e</span>. The root sees three worlds: itself and the two component worlds, each of which sees only itself. <span class="math inline">I^*</span> holds in both components, so <span class="math inline">I</span> holds at both component worlds and at the root. The arithmetical sentence <span class="math inline">A:=\operatorname{Con}(T)</span> holds at the world of <span class="math inline">M_1</span> and fails at that of <span class="math inline">M_2</span>, so neither <span class="math inline">\Box(I\to A)</span> nor <span class="math inline">\Box(I\to\neg A)</span> holds at the root.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#arithmetic</code>. By Cian Dorr, recorded by Claude Opus 5.5 (Anthropic), 2026-10-19.</em></p>
-<h3 id="holds-strong-leibniz-biconditionals-strong-leibniz-biconditionals-type-t-bf.">Holds □Strong Leibniz Biconditionals, □Strong Leibniz Biconditionals (type t), □BF.</h3>
-<p>At every relational type the root domain contains, for each world and each tuple there, the entity true of that tuple at that world and of nothing else: the root component is free, and each component contains the singleton of each of its tuples, definable from them. Such an entity lies below every entity or below its negation, and necessarily so, since its transport to a component world is that singleton or <span class="math inline">\bot</span>; so it is a strong world, and every nonzero entity has one below it. In the one-world components the same holds trivially. For BF, the root individuals are pairs, so each component individual is the image of a root individual, and likewise at every type, root entities being families of component entities; the components, with one world each, satisfy BF.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#strong-leibniz</code>. By Cian Dorr, recorded by Claude Opus 5.5 (Anthropic), 2026-10-19.</em></p>
+<h3 id="fails-necessity-of-arithmetic.">Fails Necessity of
+Arithmetic.</h3>
+<p>At type <span class="math inline">e</span>. The root sees three
+worlds: itself and the two component worlds, each of which sees only
+itself. <span class="math inline">I^*</span> holds in both components,
+so <span class="math inline">I</span> holds at both component worlds and
+at the root. The arithmetical sentence <span
+class="math inline">A:=\operatorname{Con}(T)</span> holds at the world
+of <span class="math inline">M_1</span> and fails at that of <span
+class="math inline">M_2</span>, so neither <span
+class="math inline">\Box(I\to A)</span> nor <span
+class="math inline">\Box(I\to\neg A)</span> holds at the root.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#arithmetic</code>. By
+Cian Dorr, recorded by Claude Opus 5.5 (Anthropic), 2026-10-19.</em></p>
+<h3 id="holds-strong-atomicity-strong-atomicity-type-t-bf.">Holds
+□Strong Atomicity, □Strong Atomicity (type t), □BF.</h3>
+<p>At every relational type the root domain contains, for each world and
+each tuple there, the entity true of that tuple at that world and of
+nothing else: the root component is free, and each component contains
+the singleton of each of its tuples, definable from them. Such an entity
+lies below every entity or below its negation, and necessarily so, since
+its transport to a component world is that singleton or <span
+class="math inline">\bot</span>; so it is a strong atom, and every
+nonzero entity has one below it. In the one-world components the same
+holds trivially. For BF, the root individuals are pairs, so each
+component individual is the image of a root individual, and likewise at
+every type, root entities being families of component entities; the
+components, with one world each, satisfy BF.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#strong-atomicity</code>.
+By Cian Dorr, recorded by Claude Opus 5.5 (Anthropic),
+2026-10-19.</em></p>
 <h3 id="fails-b-for-pure-sentences.">Fails B for pure sentences.</h3>
-<p>The closed pure sentence <span class="math inline">\exists p\, .\,p\land\Diamond\neg p</span> is true at the root, where the proposition true only at the root is contingent, and false at each component world, which sees only itself; so it is not possible there, and B for it fails at the root.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#pure-b</code>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-19.</em></p>
-<h3 id="holds-infinity-schema-type-e-possible-infinity-type-e.-fails-axiom-of-infinity-type-t-infinity-schema-type-t-possible-infinity-type-t.">Holds Infinity Schema (type e), Possible Infinity (type e). Fails Axiom of Infinity (type t), Infinity Schema (type t), Possible Infinity (type t).</h3>
-<p>Each component is one-world and extensional, so it has exactly two propositions, and the root, whose propositions are a truth value at the root with one of each component’s, has eight; so there are finitely many propositions at every world. The root individuals are the pairs from two infinite domains, with literal identity, so any number of them are distinct. <span class="math inline">T</span> proves the Axiom of Infinity at type <span class="math inline">e</span>: if a finite cardinality <span class="math inline">n</span> held of the universal property, <span class="math inline">\operatorname{Suc}n</span> and <span class="math inline">\operatorname{Suc}\operatorname{Suc}n</span> would both be the empty cardinality, by Extensionality, while <span class="math inline">n\ne\operatorname{Suc}n</span>, against <span class="math inline">I^*</span>; so it holds at the component worlds and is possible at the root.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#infinity</code>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-19.</em></p>
-<h3 id="holds-boolean-completeness-type-t-boolean-completeness-type-t.">Holds Boolean Completeness (type t), □Boolean Completeness (type t).</h3>
-<p>The propositions form a finite Boolean algebra at every world, so every family has a greatest lower bound.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#boolean-completeness-t</code>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-19.</em></p>
-<h3 id="holds-truth-implies-nd-necessity-tame-rigidity-tame-rigidity-intensional-choice.">Holds □Truth implies ND-necessity, Tame Rigidity, □Tame Rigidity, □Intensional Choice.</h3>
-<p>At a one-world component <span class="math inline">\Box</span> is idle. Every truth is ND-necessary there, with <span class="math inline">\top</span> as witness; every relation is weakly persistent and weakly inextensible, so Tame Rigidity holds there trivially; and Intensional Choice holds, the singleton of a chosen instance being definable. At the root, a weakly rigid relation is rigid, since Rigid is weak rigidity at every world and the other worlds are the components; and Truth implies ND-necessity holds there already.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#one-world-components</code>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-19.</em></p>
-<h3 id="holds-modal-well-ordering-well-ordering.">Holds Modal Well-Ordering, □Well-Ordering.</h3>
-<p>Each component satisfies Well-Ordering, being a model of <span class="math inline">T</span>. For a type <span class="math inline">\sigma</span>, let <span class="math inline">R</span> have as root part a well-ordering of the root’s entities of type <span class="math inline">\sigma</span>, chosen in the metatheory, and as component parts well-orderings in the components; the root domains being fullest, <span class="math inline">R</span> is in the domain, and it well-orders the type at every world, every root property of type <span class="math inline">\sigma t</span> having a root part that is a subset of the root’s entities.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#well-ordering</code>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-19.</em></p>
-<h3 id="fails-rigid-power-rigid-power-weakly-rigid-power-weakly-rigid-power.">Fails Rigid Power, □Rigid Power, Weakly Rigid Power, □Weakly Rigid Power.</h3>
-<p>Throughout, <span class="math inline">M_1</span> and <span class="math inline">M_2</span> are the two one-world extensional Henkin components, with <span class="math inline">M_1\models\operatorname{Con}(T)</span> and <span class="math inline">M_2\models\neg\operatorname{Con}(T)</span>, and <span class="math inline">D^\sigma_r</span>, <span class="math inline">D^\sigma_1</span>, <span class="math inline">D^\sigma_2</span> are the domains of type <span class="math inline">\sigma</span> at the root and at the components. From the root three worlds are accessible, the root itself and the two components; from a component only itself. Since <span class="math inline">M_i</span> is extensional and one-world, an entity of <span class="math inline">M_i</span> of type <span class="math inline">\bar\sigma t</span> is identified with its extension, a set of <span class="math inline">\bar\sigma</span>-tuples of <span class="math inline">M_i</span>, and a set <span class="math inline">S</span> of <span class="math inline">\bar\sigma</span>-tuples of <span class="math inline">M_i</span> is called internal in <span class="math inline">M_i</span> when <span class="math inline">S\in D^{\bar\sigma t}_i</span>, that is, when it is the extension of an entity of <span class="math inline">M_i</span>; every set definable in <span class="math inline">M_i</span> with parameters is internal in <span class="math inline">M_i</span>, by comprehension. The word always refers to one of the two components, named each time; at the root one speaks only of root entities and their root extensions. A root individual is a pair <span class="math inline">(a_1,a_2)</span> with <span class="math inline">a_i\in D^e_i</span>, transported to <span class="math inline">a_i</span> along the distinguished arrow <span class="math inline">d_i</span>. A root entity of a relational type <span class="math inline">\bar\sigma t</span> is a triple <span class="math inline">Y=(Y_o,Y_1,Y_2)</span>: <span class="math inline">Y_o</span>, its root extension, is an arbitrary set of root <span class="math inline">\bar\sigma</span>-tuples, and <span class="math inline">Y_i\in D^{\bar\sigma t}_i</span>, its <span class="math inline">M_i</span>-component, is its transport along <span class="math inline">d_i</span>; the root domains being fullest, every such triple is in <span class="math inline">D^{\bar\sigma t}_r</span>. For a root tuple <span class="math inline">\bar x</span> let <span class="math inline">\pi_i\bar x</span> be the tuple of <span class="math inline">M_i</span>-components of its entries, and for a set <span class="math inline">S</span> of root tuples let <span class="math inline">\pi_i[S]:=\{\pi_i\bar x:\bar x\in S\}</span>, a set of <span class="math inline">\bar\sigma</span>-tuples of <span class="math inline">M_i</span> that need not be internal in <span class="math inline">M_i</span>. For any <span class="math inline">n\in D^\sigma_1</span> and <span class="math inline">m\in D^\sigma_2</span> some root entity <span class="math inline">x</span> of type <span class="math inline">\sigma</span> has <span class="math inline">\pi_1x=n</span> and <span class="math inline">\pi_2x=m</span>: the pair <span class="math inline">(n,m)</span> when <span class="math inline">\sigma=e</span>, the triple <span class="math inline">(\emptyset,n,m)</span> otherwise. Six facts about the semantics are used. (a) At the root, <span class="math inline">\Box\varphi</span> holds iff <span class="math inline">\varphi</span> holds at the root, at <span class="math inline">M_1</span> and at <span class="math inline">M_2</span>, root parameters replaced by their components. (b) Quantifiers at the root range over the root domains, at <span class="math inline">M_i</span> over those of <span class="math inline">M_i</span>. (c) At the root <span class="math inline">Y\bar x</span> holds iff <span class="math inline">\bar x\in Y_o</span>; at <span class="math inline">M_i</span>, after transport, iff <span class="math inline">\pi_i\bar x\in Y_i</span>. (d) So <span class="math inline">Y\le Z</span>, that is <span class="math inline">\Box\forall\bar x\, .\,Y\bar x\to Z\bar x</span>, holds at the root iff <span class="math inline">Y_o\subseteq Z_o</span>, <span class="math inline">Y_1\subseteq Z_1</span> and <span class="math inline">Y_2\subseteq Z_2</span>. (e) Transport commutes with denotation: the <span class="math inline">M_i</span>-component of the root entity denoted by <span class="math inline">\lambda X\, .\,\varphi(X,\bar F)</span> with root parameters <span class="math inline">\bar F</span> is the entity of <span class="math inline">M_i</span> denoted by <span class="math inline">\lambda X\, .\,\varphi(X,\bar F_i)</span>. (f) In the one-world model <span class="math inline">M_i</span> the box is idle, so every entity <span class="math inline">Y</span> of <span class="math inline">M_i</span> is weakly persistent (<span class="math inline">Y\bar x\to\Box Y\bar x</span> reduces to <span class="math inline">Y\bar x\to Y\bar x</span>) and weakly inextensible (<span class="math inline">\forall X\, .\,(\forall\bar x\, .\,Y\bar x\to\Box X\bar x)\to Y\le X</span> reduces to <span class="math inline">\forall X\, .\,Y\subseteq X\to Y\subseteq X</span>); hence every entity of <span class="math inline">M_i</span> is weakly rigid and, the box being idle, rigid. Rigidity at the root. <span class="math inline">\operatorname{Rigid}(Y)</span> is <span class="math inline">\Box\operatorname{WeaklyRigid}(Y)</span>; at the root, by (a), it says that <span class="math inline">Y</span> is weakly rigid at the root and that <span class="math inline">Y_i</span> is weakly rigid in <span class="math inline">M_i</span> for each <span class="math inline">i</span>, and the latter holds by (f). So <span class="math inline">Y</span> is rigid at the root iff it is weakly persistent and weakly inextensible there. Weak persistence at the root, <span class="math inline">\forall\bar x\, .\,Y\bar x\to\Box Y\bar x</span>, asks of each root tuple <span class="math inline">\bar x\in Y_o</span> that <span class="math inline">Y\bar x</span> hold at the root (trivial), at <span class="math inline">M_1</span> (<span class="math inline">\pi_1\bar x\in Y_1</span>) and at <span class="math inline">M_2</span> (<span class="math inline">\pi_2\bar x\in Y_2</span>); so it holds iff <span class="math inline">\pi_1[Y_o]\subseteq Y_1</span> and <span class="math inline">\pi_2[Y_o]\subseteq Y_2</span>. Weak inextensibility at the root, <span class="math inline">\forall X\, .\,(\forall\bar x\, .\,Y\bar x\to\Box X\bar x)\to Y\le X</span> with <span class="math inline">X=(X_o,X_1,X_2)</span> ranging over root entities, has the hypothesis <span class="math inline">Y_o\subseteq X_o</span>, <span class="math inline">\pi_1[Y_o]\subseteq X_1</span>, <span class="math inline">\pi_2[Y_o]\subseteq X_2</span> and, by (d), the conclusion <span class="math inline">Y_o\subseteq X_o</span>, <span class="math inline">Y_1\subseteq X_1</span>, <span class="math inline">Y_2\subseteq X_2</span>. The three parts of <span class="math inline">X</span> being independent, this is a separate condition on each component: given <span class="math inline">X_1\in D^{\bar\sigma t}_1</span> containing <span class="math inline">\pi_1[Y_o]</span>, the root entity <span class="math inline">(Y_o,X_1,\top_2)</span> satisfies the hypothesis, so <span class="math inline">Y_1\subseteq X_1</span> is required, and likewise for <span class="math inline">M_2</span>; conversely the two component conditions give the conclusion for every <span class="math inline">X</span> satisfying the hypothesis. So weak inextensibility at the root holds iff for <span class="math inline">i=1,2</span>, <span class="math inline">Y_i\subseteq X_i</span> for every <span class="math inline">X_i</span> internal in <span class="math inline">M_i</span> with <span class="math inline">X_i\supseteq\pi_i[Y_o]</span>. Together: <span class="math inline">Y</span> is rigid at the root iff for each <span class="math inline">i</span>, <span class="math inline">Y_i</span> is a set internal in <span class="math inline">M_i</span> that contains <span class="math inline">\pi_i[Y_o]</span> and is contained in every set internal in <span class="math inline">M_i</span> that contains <span class="math inline">\pi_i[Y_o]</span>; that is, <span class="math inline">Y_i</span> is the least internal superset of <span class="math inline">\pi_i[Y_o]</span> in <span class="math inline">M_i</span>. Lemma. Let <span class="math inline">M</span> be a one-world extensional model and <span class="math inline">S</span> any set of <span class="math inline">\bar\sigma</span>-tuples of <span class="math inline">M</span>, internal or not; call an <span class="math inline">X</span> internal in <span class="math inline">M</span> a least internal superset of <span class="math inline">S</span> if <span class="math inline">S\subseteq X</span> and <span class="math inline">X\subseteq X&#39;</span> for every <span class="math inline">X&#39;</span> internal in <span class="math inline">M</span> with <span class="math inline">S\subseteq X&#39;</span>. If <span class="math inline">S</span> has a least internal superset <span class="math inline">X</span>, then <span class="math inline">X=S</span>; so <span class="math inline">S</span> has a least internal superset iff <span class="math inline">S</span> is itself internal in <span class="math inline">M</span>, and then that superset is <span class="math inline">S</span>. Proof: suppose <span class="math inline">X</span> is a least internal superset of <span class="math inline">S</span> but <span class="math inline">X\not\subseteq S</span>, and pick <span class="math inline">\bar a\in X\setminus S</span>. The haecceity <span class="math inline">\lambda\bar y\, .\,\bar y=\bar a</span> is internal in <span class="math inline">M</span> by comprehension with the parameter <span class="math inline">\bar a</span>, hence so is <span class="math inline">X&#39;:=X\land\neg(\lambda\bar y\, .\,\bar y=\bar a)</span>, which as a set is <span class="math inline">X\setminus\{\bar a\}</span>. As <span class="math inline">\bar a\notin S</span>, still <span class="math inline">S\subseteq X&#39;</span>; by leastness <span class="math inline">X\subseteq X&#39;</span>, so <span class="math inline">\bar a\in X&#39;</span>, which is absurd. So <span class="math inline">X=S</span>, and <span class="math inline">S</span> is internal. Conversely an internal <span class="math inline">S</span> is its own least internal superset. The point is that an internal set strictly above <span class="math inline">S</span> is never the least one above <span class="math inline">S</span>: it can be shrunk by a point while staying above <span class="math inline">S</span>. Applying the lemma with <span class="math inline">S=\pi_i[Y_o]</span> gives the criterion (Rig): a root entity <span class="math inline">Y=(Y_o,Y_1,Y_2)</span> of type <span class="math inline">\bar\sigma t</span> is rigid at the root iff for each <span class="math inline">i=1,2</span>, (1) <span class="math inline">\pi_i[Y_o]</span> is internal in <span class="math inline">M_i</span> and (2) <span class="math inline">Y_i=\pi_i[Y_o]</span>. A rigid root entity is thus determined by its root extension, and a set <span class="math inline">S</span> of root tuples is the root extension of a rigid root entity iff <span class="math inline">\pi_1[S]</span> is internal in <span class="math inline">M_1</span> and <span class="math inline">\pi_2[S]</span> is internal in <span class="math inline">M_2</span>, the rigid entity then being <span class="math inline">(S,\pi_1[S],\pi_2[S])</span>. The power property. Rigid Power at type <span class="math inline">\bar\sigma t</span> is <span class="math inline">\forall F\, .\,\operatorname{Rigid}(F)\to\operatorname{Rigid}(P_F)</span> with <span class="math inline">P_F:=\lambda X^{\bar\sigma t}\, .\,\operatorname{Rigid}(X)\land X\le F</span>, a root entity of type <span class="math inline">(\bar\sigma t)t</span>; at the root, by (b), it says that <span class="math inline">P_F</span> is rigid at the root for every root entity <span class="math inline">F</span> that is rigid at the root. For such an <span class="math inline">F</span>, the root extension <span class="math inline">(P_F)_o</span> is the set of root entities <span class="math inline">X</span> that are rigid at the root with <span class="math inline">X\le F</span> at the root; by (Rig) such an <span class="math inline">X</span> is <span class="math inline">(E,\pi_1[E],\pi_2[E])</span> for a set <span class="math inline">E</span> of root tuples with both projections internal, and by (d) <span class="math inline">X\le F</span> says <span class="math inline">E\subseteq F_o</span> together with <span class="math inline">\pi_i[E]\subseteq F_i</span>, which is automatic since <span class="math inline">F_i=\pi_i[F_o]</span>; so <span class="math inline">(P_F)_o</span> consists of the <span class="math inline">(E,\pi_1[E],\pi_2[E])</span> with <span class="math inline">E\subseteq F_o</span>, <span class="math inline">\pi_1[E]</span> internal in <span class="math inline">M_1</span> and <span class="math inline">\pi_2[E]</span> internal in <span class="math inline">M_2</span>. The <span class="math inline">M_i</span>-component <span class="math inline">(P_F)_i</span> is, by (e), the entity of <span class="math inline">M_i</span> denoted by <span class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)\land X\le F_i</span>, and by (f) every entity of <span class="math inline">M_i</span> is rigid, so <span class="math inline">(P_F)_i=\mathcal P_i(F_i):=\{X_i\in D^{\bar\sigma t}_i: X_i\subseteq F_i\}</span>, the internal power set of <span class="math inline">F_i</span>, itself internal in <span class="math inline">M_i</span> as the extension of <span class="math inline">\lambda X\, .\,X\le F_i</span>. Now apply (Rig) to <span class="math inline">P_F</span> at type <span class="math inline">(\bar\sigma t)t</span>. The projection <span class="math inline">\pi_i[(P_F)_o]</span> is the set of the <span class="math inline">\pi_i[E]</span> for <span class="math inline">E\subseteq F_o</span> with both projections internal, the set of <span class="math inline">M_i</span>-components of rigid subrelations of <span class="math inline">F</span>; each member is an internal subset of <span class="math inline">\pi_i[F_o]=F_i</span>, so <span class="math inline">\pi_i[(P_F)_o]\subseteq\mathcal P_i(F_i)=(P_F)_i</span> always. Hence the criterion (RP): for a root entity <span class="math inline">F</span> rigid at the root, <span class="math inline">P_F</span> is rigid at the root iff for each <span class="math inline">i=1,2</span>, (1) <span class="math inline">\pi_i[(P_F)_o]</span> is internal in <span class="math inline">M_i</span> and (2) <span class="math inline">(P_F)_i=\pi_i[(P_F)_o]</span>, which by the inclusion just noted says that every <span class="math inline">A\subseteq F_i</span> internal in <span class="math inline">M_i</span> is <span class="math inline">\pi_i[E]</span> for some <span class="math inline">E\subseteq F_o</span> whose other projection <span class="math inline">\pi_j[E]</span> is internal in <span class="math inline">M_j</span>. Clause (2) implies clause (1), <span class="math inline">(P_F)_i</span> being internal, so (RP) comes down to clause (2): Rigid Power holds at the root iff for every rigid <span class="math inline">F</span> and each component, every internal subrelation of <span class="math inline">F</span>’s component there is the component of a rigid subrelation of <span class="math inline">F</span>. To refute it one exhibits a rigid <span class="math inline">F</span>, an <span class="math inline">i</span> and an <span class="math inline">A\subseteq F_i</span> internal in <span class="math inline">M_i</span> that is <span class="math inline">\pi_i[E]</span> for no <span class="math inline">E\subseteq F_o</span> with <span class="math inline">\pi_j[E]</span> internal in <span class="math inline">M_j</span>. The witness, at type <span class="math inline">\nu t</span> with <span class="math inline">\nu:=(et)t</span>, the type of finite cardinalities of individuals. Let <span class="math inline">N_i\subseteq D^\nu_i</span> be the set of finite cardinalities of <span class="math inline">M_i</span>, the extension in <span class="math inline">M_i</span> of <span class="math inline">\lambda n\, .\,\forall\mathcal C\, .\,\mathcal C0\land\forall m\,(\mathcal Cm\to\mathcal C(\operatorname{Suc}m))\to\mathcal Cn</span> with <span class="math inline">\mathcal C</span> ranging over <span class="math inline">D^{\nu t}_i</span>; it is internal in <span class="math inline">M_i</span>. Write <span class="math inline">\bar k^{M_i}\in D^\nu_i</span> for the denotation of <span class="math inline">\operatorname{Suc}^k0</span> in <span class="math inline">M_i</span> and <span class="math inline">\operatorname{Std}_i:=\{\bar k^{M_i}:k\in\mathbb N\}</span> for the standard numbers of <span class="math inline">M_i</span>; <span class="math inline">\operatorname{Std}_i\subseteq N_i</span>, each <span class="math inline">\bar k^{M_i}</span> lying in every inductive class, and the <span class="math inline">\bar k^{M_i}</span> are pairwise distinct by <span class="math inline">I^*</span>. Claim 1: <span class="math inline">\operatorname{Std}_2</span> is not internal in <span class="math inline">M_2</span>. Since <span class="math inline">M_2\models\neg\operatorname{Con}(T)</span> there is <span class="math inline">n_0\in N_2</span> that <span class="math inline">M_2</span> takes to code a <span class="math inline">T</span>-proof of <span class="math inline">\bot</span>; <span class="math inline">n_0</span> is not standard, since <span class="math inline">T</span> decides every bounded arithmetical statement about standard numerals, so that if <span class="math inline">n_0</span> were <span class="math inline">\bar k^{M_2}</span> then <span class="math inline">k</span> would really code a <span class="math inline">T</span>-proof of <span class="math inline">\bot</span>, and there is none, <span class="math inline">T</span> having a model. If <span class="math inline">\operatorname{Std}_2</span> were internal in <span class="math inline">M_2</span> it would be an inductive class in the sense of <span class="math inline">M_2</span>, containing <span class="math inline">\bar 0^{M_2}</span> and closed under <span class="math inline">\operatorname{Suc}</span>, and so would contain <span class="math inline">n_0</span> by the definition of <span class="math inline">N_2</span>; it does not. Define <span class="math inline">\psi:N_1\to\operatorname{Std}_2</span> by <span class="math inline">\psi(\bar k^{M_1}):=\bar k^{M_2}</span> for <span class="math inline">k\in\mathbb N</span> and <span class="math inline">\psi(n):=\bar 0^{M_2}</span> for <span class="math inline">n\in N_1\setminus\operatorname{Std}_1</span> (the second clause matters only if <span class="math inline">M_1</span> has nonstandard numbers; <span class="math inline">M_1</span> might have been taken to be the full standard model on <span class="math inline">\mathbb N</span>, which satisfies <span class="math inline">T+\operatorname{Con}(T)</span>, and then <span class="math inline">N_1=\operatorname{Std}_1</span>); <span class="math inline">\psi</span> is onto <span class="math inline">\operatorname{Std}_2</span> and uses no choice. Let <span class="math inline">F:=(F_o,\top_1,\top_2)</span> be the root entity of type <span class="math inline">\nu t</span> whose <span class="math inline">M_i</span>-components are the universal properties of <span class="math inline">M_i</span>, with extensions <span class="math inline">D^\nu_i</span>, and whose root extension <span class="math inline">F_o</span> is the set of <span class="math inline">x\in D^\nu_r</span> such that either <span class="math inline">x_1\in N_1</span> and <span class="math inline">x_2=\psi(x_1)</span>, or <span class="math inline">x_1\notin N_1</span>, where <span class="math inline">x_1</span> and <span class="math inline">x_2</span> are the <span class="math inline">M_1</span>- and <span class="math inline">M_2</span>-components of <span class="math inline">x</span>: either the <span class="math inline">M_1</span>-component is a finite cardinality of <span class="math inline">M_1</span> and the <span class="math inline">M_2</span>-component is the standard number of <span class="math inline">M_2</span> that <span class="math inline">\psi</span> assigns to it, or the <span class="math inline">M_1</span>-component is not a finite cardinality and the <span class="math inline">M_2</span>-component is anything. Claim 2: <span class="math inline">F</span> is rigid at the root. By (Rig) it suffices that <span class="math inline">\pi_1[F_o]=D^\nu_1</span> and <span class="math inline">\pi_2[F_o]=D^\nu_2</span>, these being internal as the extensions of <span class="math inline">\top_1</span> and <span class="math inline">\top_2</span>. For the first, let <span class="math inline">n\in D^\nu_1</span>: if <span class="math inline">n\in N_1</span>, the root entity <span class="math inline">x:=(\emptyset,n,\psi(n))</span>, with empty root extension, is in <span class="math inline">D^\nu_r</span> (fullest domains) and in the first part of <span class="math inline">F_o</span>, with <span class="math inline">x_1=n</span>; if <span class="math inline">n\notin N_1</span>, <span class="math inline">x:=(\emptyset,n,m)</span> for any <span class="math inline">m\in D^\nu_2</span> is in the second part. For the second, let <span class="math inline">m\in D^\nu_2</span>: the second part of <span class="math inline">F_o</span> supplies <span class="math inline">x:=(\emptyset,n,m)</span> provided <span class="math inline">M_1</span> has some <span class="math inline">n\notin N_1</span>, an entity of type <span class="math inline">\nu</span> that is not a finite cardinality. It does: <span class="math inline">\top_\nu</span>, the property holding of every property of individuals. For <span class="math inline">0</span> holds only of the empty property, while <span class="math inline">\operatorname{Suc}m</span> holds only of nonempty properties, holding of <span class="math inline">A</span> iff some <span class="math inline">x</span> with <span class="math inline">Ax</span> has <span class="math inline">m(\lambda y\, .\,Ay\land y\ne x)</span>; so the class of those <span class="math inline">n</span> that do not hold both of the empty property and of some nonempty property contains <span class="math inline">0</span>, is closed under <span class="math inline">\operatorname{Suc}</span> and is internal in <span class="math inline">M_1</span>, hence contains every member of <span class="math inline">N_1</span>; and <span class="math inline">\top_\nu</span> holds of the empty property and of any singleton. Claim 3: <span class="math inline">P_F</span> is not rigid at the root. Take <span class="math inline">i=1</span> and <span class="math inline">A:=N_1</span>, internal in <span class="math inline">M_1</span> and a subset of <span class="math inline">F_1=D^\nu_1</span>, so that <span class="math inline">A\in\mathcal P_1(F_1)=(P_F)_1</span>. By clause (2) of (RP), <span class="math inline">P_F</span> is rigid at the root only if <span class="math inline">N_1=\pi_1[E]</span> for some <span class="math inline">E\subseteq F_o</span> with <span class="math inline">\pi_2[E]</span> internal in <span class="math inline">M_2</span>. But if <span class="math inline">E\subseteq F_o</span> has <span class="math inline">\pi_1[E]=N_1</span>, every <span class="math inline">x\in E</span> has <span class="math inline">x_1\in N_1</span>, so lies in the first part of <span class="math inline">F_o</span> with <span class="math inline">x_2=\psi(x_1)</span>; hence <span class="math inline">\pi_2[E]=\psi[N_1]=\operatorname{Std}_2</span>, not internal in <span class="math inline">M_2</span> by Claim 1. So <span class="math inline">N_1</span> lies in <span class="math inline">(P_F)_1</span> but not in <span class="math inline">\pi_1[(P_F)_o]</span>, clause (2) of (RP) fails for <span class="math inline">F</span> at <span class="math inline">i=1</span>, and <span class="math inline">P_F</span> is not rigid at the root. Unwound, the failing instance of inextensibility is this: let <span class="math inline">H:=(\top,H_1,\top_2)</span> be the root entity of type <span class="math inline">(\nu t)t</span> with <span class="math inline">H_1:=\lambda X\, .\,\neg(X=N_1)</span>, internal in <span class="math inline">M_1</span>. Then <span class="math inline">\forall X\, .\,P_FX\to\Box HX</span> holds at the root, since for <span class="math inline">X</span> rigid with <span class="math inline">X\le F</span>, <span class="math inline">HX</span> holds trivially at the root and at <span class="math inline">M_2</span>, and at <span class="math inline">M_1</span> it says <span class="math inline">X_1\ne N_1</span>, which holds because <span class="math inline">X_1=\pi_1[X_o]</span> with <span class="math inline">X_o\subseteq F_o</span> and <span class="math inline">\pi_2[X_o]=X_2</span> internal in <span class="math inline">M_2</span>, which Claim 3 shows incompatible with <span class="math inline">\pi_1[X_o]=N_1</span>; but <span class="math inline">P_F\le H</span> fails at <span class="math inline">M_1</span>, where <span class="math inline">(P_F)_1=\mathcal P_1(\top_1)</span> holds of <span class="math inline">N_1</span> and <span class="math inline">H_1</span> does not. So Rigid Power fails at the root at type <span class="math inline">((et)t)t</span>. The boxed form fails with it, <span class="math inline">\Box</span> at the root reaching only the root and the components, where Rigid Power holds trivially by (f). And since at the root weak rigidity is rigidity and in the components both are trivial, <span class="math inline">F</span> is weakly rigid and <span class="math inline">\lambda X\, .\,\operatorname{WeaklyRigid}(X)\land X\le F</span> is the same root entity as <span class="math inline">P_F</span>, so Weakly Rigid Power and its boxed form fail too. The obstacle in one line. The set <span class="math inline">S</span> of root entities <span class="math inline">x</span> of type <span class="math inline">\nu</span> with <span class="math inline">x_1=\bar k^{M_1}</span> and <span class="math inline">x_2=\bar k^{M_2}</span> for some <span class="math inline">k\in\mathbb N</span>, the entities that are the same standard number in both components, is the root extension of plenty of root entities of type <span class="math inline">\nu t</span>, namely of <span class="math inline">(S,Y_1,Y_2)</span> for any <span class="math inline">Y_1\in D^{\nu t}_1</span> and <span class="math inline">Y_2\in D^{\nu t}_2</span>, the root domains being fullest; but by (Rig) none of them is rigid, since <span class="math inline">\pi_2[S]=\operatorname{Std}_2</span> is not internal in <span class="math inline">M_2</span>. There is no rigid root relation whose root extension is “same standard number in both components”. The witness <span class="math inline">F</span> is this non-rigid relation padded until it is rigid, on the number side so that <span class="math inline">\pi_1</span> sees every finite cardinality of <span class="math inline">M_1</span> and on the non-number side so that <span class="math inline">\pi_2</span> sees all of <span class="math inline">D^\nu_2</span>, and <span class="math inline">N_1</span> is the internal subset of <span class="math inline">F_1</span> that could only come from the unpadded part. A rigid relation can be thin enough, a graph, that the rigid subrelations below it are forced to have non-internal projections. Which types, and how the filling in of the construction matters. The same bookkeeping gives the criterion (Crit): Rigid Power at type <span class="math inline">\bar\sigma t</span> fails at the root iff for some <span class="math inline">j\ne i</span> there is a set <span class="math inline">B</span> of <span class="math inline">\bar\sigma</span>-tuples of <span class="math inline">M_j</span>, not internal in <span class="math inline">M_j</span>, with <span class="math inline">|B|\le|D^{\bar\sigma}_i|</span>. For the one direction, fix a tuple <span class="math inline">\bar x_0</span> of <span class="math inline">M_i</span> and a surjection <span class="math inline">\psi:D^{\bar\sigma}_i\setminus\{\bar x_0\}\to B</span>, let <span class="math inline">F_o</span> be the set of root tuples <span class="math inline">\bar x</span> with either <span class="math inline">\pi_i\bar x\ne\bar x_0</span> and <span class="math inline">\pi_j\bar x=\psi(\pi_i\bar x)</span>, or <span class="math inline">\pi_i\bar x=\bar x_0</span>, and let <span class="math inline">F:=(F_o,\top,\top)</span>; then <span class="math inline">\pi_i[F_o]=D^{\bar\sigma}_i</span> and <span class="math inline">\pi_j[F_o]=D^{\bar\sigma}_j</span>, the tuples with <span class="math inline">\pi_i\bar x=\bar x_0</span> pairing <span class="math inline">\bar x_0</span> with every tuple of <span class="math inline">M_j</span>, so <span class="math inline">F</span> is rigid by (Rig); and <span class="math inline">A:=D^{\bar\sigma}_i\setminus\{\bar x_0\}</span>, internal in <span class="math inline">M_i</span> as <span class="math inline">\top</span> minus a haecceity, is <span class="math inline">\pi_i[E]</span> only for <span class="math inline">E\subseteq F_o</span> avoiding <span class="math inline">\bar x_0</span>, whose <span class="math inline">\pi_j[E]=\psi[A]=B</span> is not internal in <span class="math inline">M_j</span>. For the other direction, which uses choice, suppose clause (2) of (RP) fails for some rigid <span class="math inline">F</span>, <span class="math inline">i</span> and <span class="math inline">A\subseteq F_i</span>; choose for each <span class="math inline">a\in A</span> one <span class="math inline">\bar x^a\in F_o</span> with <span class="math inline">\pi_i\bar x^a=a</span>, possible as <span class="math inline">A\subseteq\pi_i[F_o]</span>, and let <span class="math inline">E</span> be the set of these; then <span class="math inline">\pi_i[E]=A</span>, so <span class="math inline">B:=\pi_j[E]</span> is not internal in <span class="math inline">M_j</span>, and <span class="math inline">|B|\le|A|\le|D^{\bar\sigma}_i|</span>. Consequences: with countable Henkin components, which is what the Henkin construction gives, <span class="math inline">D^{et}_2</span> is countable while <span class="math inline">\mathcal P(D^e_2)</span> is not, so some set <span class="math inline">B</span> of individuals of <span class="math inline">M_2</span> is not internal in <span class="math inline">M_2</span> and <span class="math inline">|B|\le\aleph_0=|D^e_1|</span>; Rigid Power fails already at type <span class="math inline">e\to t</span>, and in general at every type at which either component is not full. With <span class="math inline">M_1</span> the full standard model on <span class="math inline">\mathbb N</span>, Rigid Power at <span class="math inline">e\to t</span> fails iff <span class="math inline">M_2</span> has a countable set of individuals not internal in <span class="math inline">M_2</span>, as it does if <span class="math inline">M_2</span> is countable. Rigid Power could hold at <span class="math inline">e\to t</span> only if every non-internal set of individuals of either component outnumbered the individuals of the other. Both components cannot be full at type <span class="math inline">et</span>: if <span class="math inline">M_2</span> were full at <span class="math inline">et</span> and at <span class="math inline">eet</span>, an internal bijection between <span class="math inline">A</span> and <span class="math inline">B</span> would be true equinumerosity and the absence of an internal injection of <span class="math inline">A</span> into a proper subset of itself true finiteness, so the class of those <span class="math inline">n</span> that hold of something, hold only of finite properties and are closed under equinumerosity would be internal and inductive, every finite cardinality of <span class="math inline">M_2</span> would be the property of having exactly <span class="math inline">k</span> members for a true <span class="math inline">k</span>, and <span class="math inline">M_2</span> would satisfy <span class="math inline">\operatorname{Con}(T)</span>. A filling in with Rigid Power at <span class="math inline">e\to t</span> would thus need <span class="math inline">M_2</span> full at <span class="math inline">et</span> but not at <span class="math inline">eet</span>, with uncountably many individuals and every countable set of them internal; whether <span class="math inline">T</span> has such a model has not been checked. Whatever the filling in, the failure at <span class="math inline">((et)t)t</span> remains, using only the countable non-internal set <span class="math inline">\operatorname{Std}_2</span> and the infinitude of <span class="math inline">D^\nu_1</span>.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#rigid-power</code>. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-10-20.</em></p>
-<h3 id="holds-rigid-rigidity-rigid-rigidity-weakly-rigid-weak-rigidity-weakly-rigid-weak-rigidity.">Holds Rigid Rigidity, □Rigid Rigidity, Weakly Rigid Weak Rigidity, □Weakly Rigid Weak Rigidity.</h3>
-<p>In the notation of the argument rigid-power. Rigid Rigidity at type <span class="math inline">\bar\sigma t</span> is <span class="math inline">\operatorname{Rigid}(\lambda X\, .\,\operatorname{Rigid}(X))</span>, which is <span class="math inline">\operatorname{Rigid}(P_\top)</span> for the root entity <span class="math inline">\top</span> whose root extension is the set of all root <span class="math inline">\bar\sigma</span>-tuples and whose components are <span class="math inline">\top_1</span> and <span class="math inline">\top_2</span>; it is rigid by (Rig), since <span class="math inline">\pi_i[\top_o]=D^{\bar\sigma}_i</span> is internal in <span class="math inline">M_i</span>. Check clause (2) of (RP) for <span class="math inline">\top</span>: given <span class="math inline">A\subseteq D^{\bar\sigma}_i</span> internal in <span class="math inline">M_i</span>, let <span class="math inline">E</span> be the set of root tuples <span class="math inline">\bar x</span> with <span class="math inline">\pi_i\bar x\in A</span>; then <span class="math inline">\pi_i[E]=A</span>, and <span class="math inline">\pi_j[E]</span> is <span class="math inline">D^{\bar\sigma}_j</span> if <span class="math inline">A\ne\emptyset</span>, every tuple of <span class="math inline">M_j</span> pairing with some member of <span class="math inline">A</span>, and <span class="math inline">\emptyset</span> if <span class="math inline">A=\emptyset</span>, either way internal in <span class="math inline">M_j</span>. So <span class="math inline">P_\top</span> is rigid at the root, at every type. In each component every entity is rigid by (f), so <span class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span> is rigid there trivially, and the boxed form holds at the root by (a). At the root, <span class="math inline">\lambda X\, .\,\operatorname{WeaklyRigid}(X)</span> has the same root extension as <span class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span>, weak rigidity and rigidity coinciding there, and the same components, everything, by (f); so it is the same root entity, and it is weakly rigid, being rigid. In the components it is weakly rigid trivially. So Weakly Rigid Weak Rigidity and its boxed form hold.</p>
-<p><em>Address: <code>coalesced-two-extensional-arithmetics-root#rigid-rigidity</code>. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-10-20.</em></p>
-<h3 id="fails-arithmetic-necessitism.">Fails Arithmetic Necessitism.</h3>
-<p>At type <span class="math inline">e</span>: inextensibility of <span class="math inline">\mathbb N_e</span> fails at the root. The antecedent <span class="math inline">\Box I^*_e</span> holds, <span class="math inline">I^*</span> being an axiom of <span class="math inline">T</span>, true in both components, and true at the root, where the numbers are the standard numerals, the root parts of entities being free, and the individuals are infinitely many. In <span class="math inline">M_2</span>, which satisfies <span class="math inline">\neg\operatorname{Con}(T)</span>, the numbers at <span class="math inline">e</span>, the instances of the least inductive property in the Henkin domain, include a nonstandard number <span class="math inline">c</span>, one coding a proof of a contradiction from <span class="math inline">T</span>, since no standard numeral does; so no property of <span class="math inline">M_2</span> has exactly the standard numerals as its extension, such a property being inductive. The property <span class="math inline">\lambda x\,.\,x&lt;c</span> of <span class="math inline">M_2</span>, definable from <span class="math inline">c</span> by the order on numbers, holds of every standard numeral and not of <span class="math inline">c</span>. Let <span class="math inline">X</span> be the root entity whose root part is the set of root numerals, whose <span class="math inline">M_1</span>-part is the numbers of <span class="math inline">M_1</span> and whose <span class="math inline">M_2</span>-part is <span class="math inline">\lambda x\,.\,x&lt;c</span>. Every number at the root necessarily has <span class="math inline">X</span>: at the root it is a root numeral, and along the distinguished arrows it becomes the corresponding numeral of <span class="math inline">M_1</span> or of <span class="math inline">M_2</span>, numerals being closed terms. But <span class="math inline">\mathbb N_e\le X</span> fails, since at <span class="math inline">M_2</span> the number <span class="math inline">c</span> lacks <span class="math inline">X</span>. So <span class="math inline">\mathbb N_e</span> is not inextensible and Arithmetic Necessitism fails, although the persistence of <span class="math inline">\mathbb N_e</span> and the necessary distinctness of the numbers hold, as in every model of C with <span class="math inline">\Box I^*_e</span>. This is the failure the principle’s notes anticipate: at <span class="math inline">M_2</span> no property has exactly the numerals as its extension, so the least inductive property gains members there.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<p>The closed pure sentence <span class="math inline">\exists p\,
+.\,p\land\Diamond\neg p</span> is true at the root, where the
+proposition true only at the root is contingent, and false at each
+component world, which sees only itself; so it is not possible there,
+and B for it fails at the root.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#pure-b</code>. By
+Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-19.</em></p>
+<h3
+id="holds-infinity-schema-type-e-possible-infinity-type-e.-fails-axiom-of-infinity-type-t-infinity-schema-type-t-possible-infinity-type-t.">Holds
+Infinity Schema (type e), Possible Infinity (type e). Fails Axiom of
+Infinity (type t), Infinity Schema (type t), Possible Infinity (type
+t).</h3>
+<p>Each component is one-world and extensional, so it has exactly two
+propositions, and the root, whose propositions are a truth value at the
+root with one of each component’s, has eight; so there are finitely many
+propositions at every world. The root individuals are the pairs from two
+infinite domains, with literal identity, so any number of them are
+distinct. <span class="math inline">T</span> proves the Axiom of
+Infinity at type <span class="math inline">e</span>: if a finite
+cardinality <span class="math inline">n</span> held of the universal
+property, <span class="math inline">\operatorname{Suc}n</span> and <span
+class="math inline">\operatorname{Suc}\operatorname{Suc}n</span> would
+both be the empty cardinality, by Extensionality, while <span
+class="math inline">n\ne\operatorname{Suc}n</span>, against <span
+class="math inline">I^*</span>; so it holds at the component worlds and
+is possible at the root.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#infinity</code>. By
+Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-19.</em></p>
+<h3
+id="holds-boolean-completeness-type-t-boolean-completeness-type-t.">Holds
+Boolean Completeness (type t), □Boolean Completeness (type t).</h3>
+<p>The propositions form a finite Boolean algebra at every world, so
+every family has a greatest lower bound.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#boolean-completeness-t</code>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-19.</em></p>
+<h3
+id="holds-truth-implies-nd-necessity-tame-rigidity-tame-rigidity-intensional-choice.">Holds
+□Truth implies ND-necessity, Tame Rigidity, □Tame Rigidity, □Intensional
+Choice.</h3>
+<p>At a one-world component <span class="math inline">\Box</span> is
+idle. Every truth is ND-necessary there, with <span
+class="math inline">\top</span> as witness; every relation is weakly
+persistent and weakly inextensible, so Tame Rigidity holds there
+trivially; and Intensional Choice holds, the singleton of a chosen
+instance being definable. At the root, a weakly rigid relation is rigid,
+since Rigid is weak rigidity at every world and the other worlds are the
+components; and Truth implies ND-necessity holds there already.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#one-world-components</code>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-19.</em></p>
+<h3 id="holds-modal-well-ordering-well-ordering.">Holds Modal
+Well-Ordering, □Well-Ordering.</h3>
+<p>Each component satisfies Well-Ordering, being a model of <span
+class="math inline">T</span>. For a type <span
+class="math inline">\sigma</span>, let <span
+class="math inline">R</span> have as root part a well-ordering of the
+root’s entities of type <span class="math inline">\sigma</span>, chosen
+in the metatheory, and as component parts well-orderings in the
+components; the root domains being fullest, <span
+class="math inline">R</span> is in the domain, and it well-orders the
+type at every world, every root property of type <span
+class="math inline">\sigma t</span> having a root part that is a subset
+of the root’s entities.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#well-ordering</code>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-19.</em></p>
+<h3
+id="fails-rigid-power-rigid-power-weakly-rigid-power-weakly-rigid-power.">Fails
+Rigid Power, □Rigid Power, Weakly Rigid Power, □Weakly Rigid Power.</h3>
+<p>Throughout, <span class="math inline">M_1</span> and <span
+class="math inline">M_2</span> are the two one-world extensional Henkin
+components, with <span
+class="math inline">M_1\models\operatorname{Con}(T)</span> and <span
+class="math inline">M_2\models\neg\operatorname{Con}(T)</span>, and
+<span class="math inline">D^\sigma_r</span>, <span
+class="math inline">D^\sigma_1</span>, <span
+class="math inline">D^\sigma_2</span> are the domains of type <span
+class="math inline">\sigma</span> at the root and at the components.
+From the root three worlds are accessible, the root itself and the two
+components; from a component only itself. Since <span
+class="math inline">M_i</span> is extensional and one-world, an entity
+of <span class="math inline">M_i</span> of type <span
+class="math inline">\bar\sigma t</span> is identified with its
+extension, a set of <span class="math inline">\bar\sigma</span>-tuples
+of <span class="math inline">M_i</span>, and a set <span
+class="math inline">S</span> of <span
+class="math inline">\bar\sigma</span>-tuples of <span
+class="math inline">M_i</span> is called internal in <span
+class="math inline">M_i</span> when <span class="math inline">S\in
+D^{\bar\sigma t}_i</span>, that is, when it is the extension of an
+entity of <span class="math inline">M_i</span>; every set definable in
+<span class="math inline">M_i</span> with parameters is internal in
+<span class="math inline">M_i</span>, by comprehension. The word always
+refers to one of the two components, named each time; at the root one
+speaks only of root entities and their root extensions. A root
+individual is a pair <span class="math inline">(a_1,a_2)</span> with
+<span class="math inline">a_i\in D^e_i</span>, transported to <span
+class="math inline">a_i</span> along the distinguished arrow <span
+class="math inline">d_i</span>. A root entity of a relational type <span
+class="math inline">\bar\sigma t</span> is a triple <span
+class="math inline">Y=(Y_o,Y_1,Y_2)</span>: <span
+class="math inline">Y_o</span>, its root extension, is an arbitrary set
+of root <span class="math inline">\bar\sigma</span>-tuples, and <span
+class="math inline">Y_i\in D^{\bar\sigma t}_i</span>, its <span
+class="math inline">M_i</span>-component, is its transport along <span
+class="math inline">d_i</span>; the root domains being fullest, every
+such triple is in <span class="math inline">D^{\bar\sigma t}_r</span>.
+For a root tuple <span class="math inline">\bar x</span> let <span
+class="math inline">\pi_i\bar x</span> be the tuple of <span
+class="math inline">M_i</span>-components of its entries, and for a set
+<span class="math inline">S</span> of root tuples let <span
+class="math inline">\pi_i[S]:=\{\pi_i\bar x:\bar x\in S\}</span>, a set
+of <span class="math inline">\bar\sigma</span>-tuples of <span
+class="math inline">M_i</span> that need not be internal in <span
+class="math inline">M_i</span>. For any <span class="math inline">n\in
+D^\sigma_1</span> and <span class="math inline">m\in D^\sigma_2</span>
+some root entity <span class="math inline">x</span> of type <span
+class="math inline">\sigma</span> has <span
+class="math inline">\pi_1x=n</span> and <span
+class="math inline">\pi_2x=m</span>: the pair <span
+class="math inline">(n,m)</span> when <span
+class="math inline">\sigma=e</span>, the triple <span
+class="math inline">(\emptyset,n,m)</span> otherwise. Six facts about
+the semantics are used. (a) At the root, <span
+class="math inline">\Box\varphi</span> holds iff <span
+class="math inline">\varphi</span> holds at the root, at <span
+class="math inline">M_1</span> and at <span
+class="math inline">M_2</span>, root parameters replaced by their
+components. (b) Quantifiers at the root range over the root domains, at
+<span class="math inline">M_i</span> over those of <span
+class="math inline">M_i</span>. (c) At the root <span
+class="math inline">Y\bar x</span> holds iff <span
+class="math inline">\bar x\in Y_o</span>; at <span
+class="math inline">M_i</span>, after transport, iff <span
+class="math inline">\pi_i\bar x\in Y_i</span>. (d) So <span
+class="math inline">Y\le Z</span>, that is <span
+class="math inline">\Box\forall\bar x\, .\,Y\bar x\to Z\bar x</span>,
+holds at the root iff <span class="math inline">Y_o\subseteq Z_o</span>,
+<span class="math inline">Y_1\subseteq Z_1</span> and <span
+class="math inline">Y_2\subseteq Z_2</span>. (e) Transport commutes with
+denotation: the <span class="math inline">M_i</span>-component of the
+root entity denoted by <span class="math inline">\lambda X\,
+.\,\varphi(X,\bar F)</span> with root parameters <span
+class="math inline">\bar F</span> is the entity of <span
+class="math inline">M_i</span> denoted by <span
+class="math inline">\lambda X\, .\,\varphi(X,\bar F_i)</span>. (f) In
+the one-world model <span class="math inline">M_i</span> the box is
+idle, so every entity <span class="math inline">Y</span> of <span
+class="math inline">M_i</span> is weakly persistent (<span
+class="math inline">Y\bar x\to\Box Y\bar x</span> reduces to <span
+class="math inline">Y\bar x\to Y\bar x</span>) and weakly inextensible
+(<span class="math inline">\forall X\, .\,(\forall\bar x\, .\,Y\bar
+x\to\Box X\bar x)\to Y\le X</span> reduces to <span
+class="math inline">\forall X\, .\,Y\subseteq X\to Y\subseteq X</span>);
+hence every entity of <span class="math inline">M_i</span> is weakly
+rigid and, the box being idle, rigid. Rigidity at the root. <span
+class="math inline">\operatorname{Rigid}(Y)</span> is <span
+class="math inline">\Box\operatorname{WeaklyRigid}(Y)</span>; at the
+root, by (a), it says that <span class="math inline">Y</span> is weakly
+rigid at the root and that <span class="math inline">Y_i</span> is
+weakly rigid in <span class="math inline">M_i</span> for each <span
+class="math inline">i</span>, and the latter holds by (f). So <span
+class="math inline">Y</span> is rigid at the root iff it is weakly
+persistent and weakly inextensible there. Weak persistence at the root,
+<span class="math inline">\forall\bar x\, .\,Y\bar x\to\Box Y\bar
+x</span>, asks of each root tuple <span class="math inline">\bar x\in
+Y_o</span> that <span class="math inline">Y\bar x</span> hold at the
+root (trivial), at <span class="math inline">M_1</span> (<span
+class="math inline">\pi_1\bar x\in Y_1</span>) and at <span
+class="math inline">M_2</span> (<span class="math inline">\pi_2\bar x\in
+Y_2</span>); so it holds iff <span
+class="math inline">\pi_1[Y_o]\subseteq Y_1</span> and <span
+class="math inline">\pi_2[Y_o]\subseteq Y_2</span>. Weak inextensibility
+at the root, <span class="math inline">\forall X\, .\,(\forall\bar x\,
+.\,Y\bar x\to\Box X\bar x)\to Y\le X</span> with <span
+class="math inline">X=(X_o,X_1,X_2)</span> ranging over root entities,
+has the hypothesis <span class="math inline">Y_o\subseteq X_o</span>,
+<span class="math inline">\pi_1[Y_o]\subseteq X_1</span>, <span
+class="math inline">\pi_2[Y_o]\subseteq X_2</span> and, by (d), the
+conclusion <span class="math inline">Y_o\subseteq X_o</span>, <span
+class="math inline">Y_1\subseteq X_1</span>, <span
+class="math inline">Y_2\subseteq X_2</span>. The three parts of <span
+class="math inline">X</span> being independent, this is a separate
+condition on each component: given <span class="math inline">X_1\in
+D^{\bar\sigma t}_1</span> containing <span
+class="math inline">\pi_1[Y_o]</span>, the root entity <span
+class="math inline">(Y_o,X_1,\top_2)</span> satisfies the hypothesis, so
+<span class="math inline">Y_1\subseteq X_1</span> is required, and
+likewise for <span class="math inline">M_2</span>; conversely the two
+component conditions give the conclusion for every <span
+class="math inline">X</span> satisfying the hypothesis. So weak
+inextensibility at the root holds iff for <span
+class="math inline">i=1,2</span>, <span class="math inline">Y_i\subseteq
+X_i</span> for every <span class="math inline">X_i</span> internal in
+<span class="math inline">M_i</span> with <span
+class="math inline">X_i\supseteq\pi_i[Y_o]</span>. Together: <span
+class="math inline">Y</span> is rigid at the root iff for each <span
+class="math inline">i</span>, <span class="math inline">Y_i</span> is a
+set internal in <span class="math inline">M_i</span> that contains <span
+class="math inline">\pi_i[Y_o]</span> and is contained in every set
+internal in <span class="math inline">M_i</span> that contains <span
+class="math inline">\pi_i[Y_o]</span>; that is, <span
+class="math inline">Y_i</span> is the least internal superset of <span
+class="math inline">\pi_i[Y_o]</span> in <span
+class="math inline">M_i</span>. Lemma. Let <span
+class="math inline">M</span> be a one-world extensional model and <span
+class="math inline">S</span> any set of <span
+class="math inline">\bar\sigma</span>-tuples of <span
+class="math inline">M</span>, internal or not; call an <span
+class="math inline">X</span> internal in <span
+class="math inline">M</span> a least internal superset of <span
+class="math inline">S</span> if <span class="math inline">S\subseteq
+X</span> and <span class="math inline">X\subseteq X&#39;</span> for
+every <span class="math inline">X&#39;</span> internal in <span
+class="math inline">M</span> with <span class="math inline">S\subseteq
+X&#39;</span>. If <span class="math inline">S</span> has a least
+internal superset <span class="math inline">X</span>, then <span
+class="math inline">X=S</span>; so <span class="math inline">S</span>
+has a least internal superset iff <span class="math inline">S</span> is
+itself internal in <span class="math inline">M</span>, and then that
+superset is <span class="math inline">S</span>. Proof: suppose <span
+class="math inline">X</span> is a least internal superset of <span
+class="math inline">S</span> but <span
+class="math inline">X\not\subseteq S</span>, and pick <span
+class="math inline">\bar a\in X\setminus S</span>. The haecceity <span
+class="math inline">\lambda\bar y\, .\,\bar y=\bar a</span> is internal
+in <span class="math inline">M</span> by comprehension with the
+parameter <span class="math inline">\bar a</span>, hence so is <span
+class="math inline">X&#39;:=X\land\neg(\lambda\bar y\, .\,\bar y=\bar
+a)</span>, which as a set is <span class="math inline">X\setminus\{\bar
+a\}</span>. As <span class="math inline">\bar a\notin S</span>, still
+<span class="math inline">S\subseteq X&#39;</span>; by leastness <span
+class="math inline">X\subseteq X&#39;</span>, so <span
+class="math inline">\bar a\in X&#39;</span>, which is absurd. So <span
+class="math inline">X=S</span>, and <span class="math inline">S</span>
+is internal. Conversely an internal <span class="math inline">S</span>
+is its own least internal superset. The point is that an internal set
+strictly above <span class="math inline">S</span> is never the least one
+above <span class="math inline">S</span>: it can be shrunk by a point
+while staying above <span class="math inline">S</span>. Applying the
+lemma with <span class="math inline">S=\pi_i[Y_o]</span> gives the
+criterion (Rig): a root entity <span
+class="math inline">Y=(Y_o,Y_1,Y_2)</span> of type <span
+class="math inline">\bar\sigma t</span> is rigid at the root iff for
+each <span class="math inline">i=1,2</span>, (1) <span
+class="math inline">\pi_i[Y_o]</span> is internal in <span
+class="math inline">M_i</span> and (2) <span
+class="math inline">Y_i=\pi_i[Y_o]</span>. A rigid root entity is thus
+determined by its root extension, and a set <span
+class="math inline">S</span> of root tuples is the root extension of a
+rigid root entity iff <span class="math inline">\pi_1[S]</span> is
+internal in <span class="math inline">M_1</span> and <span
+class="math inline">\pi_2[S]</span> is internal in <span
+class="math inline">M_2</span>, the rigid entity then being <span
+class="math inline">(S,\pi_1[S],\pi_2[S])</span>. The power property.
+Rigid Power at type <span class="math inline">\bar\sigma t</span> is
+<span class="math inline">\forall F\,
+.\,\operatorname{Rigid}(F)\to\operatorname{Rigid}(P_F)</span> with <span
+class="math inline">P_F:=\lambda X^{\bar\sigma t}\,
+.\,\operatorname{Rigid}(X)\land X\le F</span>, a root entity of type
+<span class="math inline">(\bar\sigma t)t</span>; at the root, by (b),
+it says that <span class="math inline">P_F</span> is rigid at the root
+for every root entity <span class="math inline">F</span> that is rigid
+at the root. For such an <span class="math inline">F</span>, the root
+extension <span class="math inline">(P_F)_o</span> is the set of root
+entities <span class="math inline">X</span> that are rigid at the root
+with <span class="math inline">X\le F</span> at the root; by (Rig) such
+an <span class="math inline">X</span> is <span
+class="math inline">(E,\pi_1[E],\pi_2[E])</span> for a set <span
+class="math inline">E</span> of root tuples with both projections
+internal, and by (d) <span class="math inline">X\le F</span> says <span
+class="math inline">E\subseteq F_o</span> together with <span
+class="math inline">\pi_i[E]\subseteq F_i</span>, which is automatic
+since <span class="math inline">F_i=\pi_i[F_o]</span>; so <span
+class="math inline">(P_F)_o</span> consists of the <span
+class="math inline">(E,\pi_1[E],\pi_2[E])</span> with <span
+class="math inline">E\subseteq F_o</span>, <span
+class="math inline">\pi_1[E]</span> internal in <span
+class="math inline">M_1</span> and <span
+class="math inline">\pi_2[E]</span> internal in <span
+class="math inline">M_2</span>. The <span
+class="math inline">M_i</span>-component <span
+class="math inline">(P_F)_i</span> is, by (e), the entity of <span
+class="math inline">M_i</span> denoted by <span
+class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)\land X\le
+F_i</span>, and by (f) every entity of <span
+class="math inline">M_i</span> is rigid, so <span
+class="math inline">(P_F)_i=\mathcal P_i(F_i):=\{X_i\in D^{\bar\sigma
+t}_i: X_i\subseteq F_i\}</span>, the internal power set of <span
+class="math inline">F_i</span>, itself internal in <span
+class="math inline">M_i</span> as the extension of <span
+class="math inline">\lambda X\, .\,X\le F_i</span>. Now apply (Rig) to
+<span class="math inline">P_F</span> at type <span
+class="math inline">(\bar\sigma t)t</span>. The projection <span
+class="math inline">\pi_i[(P_F)_o]</span> is the set of the <span
+class="math inline">\pi_i[E]</span> for <span
+class="math inline">E\subseteq F_o</span> with both projections
+internal, the set of <span class="math inline">M_i</span>-components of
+rigid subrelations of <span class="math inline">F</span>; each member is
+an internal subset of <span class="math inline">\pi_i[F_o]=F_i</span>,
+so <span class="math inline">\pi_i[(P_F)_o]\subseteq\mathcal
+P_i(F_i)=(P_F)_i</span> always. Hence the criterion (RP): for a root
+entity <span class="math inline">F</span> rigid at the root, <span
+class="math inline">P_F</span> is rigid at the root iff for each <span
+class="math inline">i=1,2</span>, (1) <span
+class="math inline">\pi_i[(P_F)_o]</span> is internal in <span
+class="math inline">M_i</span> and (2) <span
+class="math inline">(P_F)_i=\pi_i[(P_F)_o]</span>, which by the
+inclusion just noted says that every <span
+class="math inline">A\subseteq F_i</span> internal in <span
+class="math inline">M_i</span> is <span
+class="math inline">\pi_i[E]</span> for some <span
+class="math inline">E\subseteq F_o</span> whose other projection <span
+class="math inline">\pi_j[E]</span> is internal in <span
+class="math inline">M_j</span>. Clause (2) implies clause (1), <span
+class="math inline">(P_F)_i</span> being internal, so (RP) comes down to
+clause (2): Rigid Power holds at the root iff for every rigid <span
+class="math inline">F</span> and each component, every internal
+subrelation of <span class="math inline">F</span>’s component there is
+the component of a rigid subrelation of <span
+class="math inline">F</span>. To refute it one exhibits a rigid <span
+class="math inline">F</span>, an <span class="math inline">i</span> and
+an <span class="math inline">A\subseteq F_i</span> internal in <span
+class="math inline">M_i</span> that is <span
+class="math inline">\pi_i[E]</span> for no <span
+class="math inline">E\subseteq F_o</span> with <span
+class="math inline">\pi_j[E]</span> internal in <span
+class="math inline">M_j</span>. The witness, at type <span
+class="math inline">\nu t</span> with <span
+class="math inline">\nu:=(et)t</span>, the type of finite cardinalities
+of individuals. Let <span class="math inline">N_i\subseteq
+D^\nu_i</span> be the set of finite cardinalities of <span
+class="math inline">M_i</span>, the extension in <span
+class="math inline">M_i</span> of <span class="math inline">\lambda n\,
+.\,\forall\mathcal C\, .\,\mathcal C0\land\forall m\,(\mathcal
+Cm\to\mathcal C(\operatorname{Suc}m))\to\mathcal Cn</span> with <span
+class="math inline">\mathcal C</span> ranging over <span
+class="math inline">D^{\nu t}_i</span>; it is internal in <span
+class="math inline">M_i</span>. Write <span class="math inline">\bar
+k^{M_i}\in D^\nu_i</span> for the denotation of <span
+class="math inline">\operatorname{Suc}^k0</span> in <span
+class="math inline">M_i</span> and <span
+class="math inline">\operatorname{Std}_i:=\{\bar k^{M_i}:k\in\mathbb
+N\}</span> for the standard numbers of <span
+class="math inline">M_i</span>; <span
+class="math inline">\operatorname{Std}_i\subseteq N_i</span>, each <span
+class="math inline">\bar k^{M_i}</span> lying in every inductive class,
+and the <span class="math inline">\bar k^{M_i}</span> are pairwise
+distinct by <span class="math inline">I^*</span>. Claim 1: <span
+class="math inline">\operatorname{Std}_2</span> is not internal in <span
+class="math inline">M_2</span>. Since <span
+class="math inline">M_2\models\neg\operatorname{Con}(T)</span> there is
+<span class="math inline">n_0\in N_2</span> that <span
+class="math inline">M_2</span> takes to code a <span
+class="math inline">T</span>-proof of <span
+class="math inline">\bot</span>; <span class="math inline">n_0</span> is
+not standard, since <span class="math inline">T</span> decides every
+bounded arithmetical statement about standard numerals, so that if <span
+class="math inline">n_0</span> were <span class="math inline">\bar
+k^{M_2}</span> then <span class="math inline">k</span> would really code
+a <span class="math inline">T</span>-proof of <span
+class="math inline">\bot</span>, and there is none, <span
+class="math inline">T</span> having a model. If <span
+class="math inline">\operatorname{Std}_2</span> were internal in <span
+class="math inline">M_2</span> it would be an inductive class in the
+sense of <span class="math inline">M_2</span>, containing <span
+class="math inline">\bar 0^{M_2}</span> and closed under <span
+class="math inline">\operatorname{Suc}</span>, and so would contain
+<span class="math inline">n_0</span> by the definition of <span
+class="math inline">N_2</span>; it does not. Define <span
+class="math inline">\psi:N_1\to\operatorname{Std}_2</span> by <span
+class="math inline">\psi(\bar k^{M_1}):=\bar k^{M_2}</span> for <span
+class="math inline">k\in\mathbb N</span> and <span
+class="math inline">\psi(n):=\bar 0^{M_2}</span> for <span
+class="math inline">n\in N_1\setminus\operatorname{Std}_1</span> (the
+second clause matters only if <span class="math inline">M_1</span> has
+nonstandard numbers; <span class="math inline">M_1</span> might have
+been taken to be the full standard model on <span
+class="math inline">\mathbb N</span>, which satisfies <span
+class="math inline">T+\operatorname{Con}(T)</span>, and then <span
+class="math inline">N_1=\operatorname{Std}_1</span>); <span
+class="math inline">\psi</span> is onto <span
+class="math inline">\operatorname{Std}_2</span> and uses no choice. Let
+<span class="math inline">F:=(F_o,\top_1,\top_2)</span> be the root
+entity of type <span class="math inline">\nu t</span> whose <span
+class="math inline">M_i</span>-components are the universal properties
+of <span class="math inline">M_i</span>, with extensions <span
+class="math inline">D^\nu_i</span>, and whose root extension <span
+class="math inline">F_o</span> is the set of <span
+class="math inline">x\in D^\nu_r</span> such that either <span
+class="math inline">x_1\in N_1</span> and <span
+class="math inline">x_2=\psi(x_1)</span>, or <span
+class="math inline">x_1\notin N_1</span>, where <span
+class="math inline">x_1</span> and <span class="math inline">x_2</span>
+are the <span class="math inline">M_1</span>- and <span
+class="math inline">M_2</span>-components of <span
+class="math inline">x</span>: either the <span
+class="math inline">M_1</span>-component is a finite cardinality of
+<span class="math inline">M_1</span> and the <span
+class="math inline">M_2</span>-component is the standard number of <span
+class="math inline">M_2</span> that <span
+class="math inline">\psi</span> assigns to it, or the <span
+class="math inline">M_1</span>-component is not a finite cardinality and
+the <span class="math inline">M_2</span>-component is anything. Claim 2:
+<span class="math inline">F</span> is rigid at the root. By (Rig) it
+suffices that <span class="math inline">\pi_1[F_o]=D^\nu_1</span> and
+<span class="math inline">\pi_2[F_o]=D^\nu_2</span>, these being
+internal as the extensions of <span class="math inline">\top_1</span>
+and <span class="math inline">\top_2</span>. For the first, let <span
+class="math inline">n\in D^\nu_1</span>: if <span
+class="math inline">n\in N_1</span>, the root entity <span
+class="math inline">x:=(\emptyset,n,\psi(n))</span>, with empty root
+extension, is in <span class="math inline">D^\nu_r</span> (fullest
+domains) and in the first part of <span class="math inline">F_o</span>,
+with <span class="math inline">x_1=n</span>; if <span
+class="math inline">n\notin N_1</span>, <span
+class="math inline">x:=(\emptyset,n,m)</span> for any <span
+class="math inline">m\in D^\nu_2</span> is in the second part. For the
+second, let <span class="math inline">m\in D^\nu_2</span>: the second
+part of <span class="math inline">F_o</span> supplies <span
+class="math inline">x:=(\emptyset,n,m)</span> provided <span
+class="math inline">M_1</span> has some <span
+class="math inline">n\notin N_1</span>, an entity of type <span
+class="math inline">\nu</span> that is not a finite cardinality. It
+does: <span class="math inline">\top_\nu</span>, the property holding of
+every property of individuals. For <span class="math inline">0</span>
+holds only of the empty property, while <span
+class="math inline">\operatorname{Suc}m</span> holds only of nonempty
+properties, holding of <span class="math inline">A</span> iff some <span
+class="math inline">x</span> with <span class="math inline">Ax</span>
+has <span class="math inline">m(\lambda y\, .\,Ay\land y\ne x)</span>;
+so the class of those <span class="math inline">n</span> that do not
+hold both of the empty property and of some nonempty property contains
+<span class="math inline">0</span>, is closed under <span
+class="math inline">\operatorname{Suc}</span> and is internal in <span
+class="math inline">M_1</span>, hence contains every member of <span
+class="math inline">N_1</span>; and <span
+class="math inline">\top_\nu</span> holds of the empty property and of
+any singleton. Claim 3: <span class="math inline">P_F</span> is not
+rigid at the root. Take <span class="math inline">i=1</span> and <span
+class="math inline">A:=N_1</span>, internal in <span
+class="math inline">M_1</span> and a subset of <span
+class="math inline">F_1=D^\nu_1</span>, so that <span
+class="math inline">A\in\mathcal P_1(F_1)=(P_F)_1</span>. By clause (2)
+of (RP), <span class="math inline">P_F</span> is rigid at the root only
+if <span class="math inline">N_1=\pi_1[E]</span> for some <span
+class="math inline">E\subseteq F_o</span> with <span
+class="math inline">\pi_2[E]</span> internal in <span
+class="math inline">M_2</span>. But if <span
+class="math inline">E\subseteq F_o</span> has <span
+class="math inline">\pi_1[E]=N_1</span>, every <span
+class="math inline">x\in E</span> has <span class="math inline">x_1\in
+N_1</span>, so lies in the first part of <span
+class="math inline">F_o</span> with <span
+class="math inline">x_2=\psi(x_1)</span>; hence <span
+class="math inline">\pi_2[E]=\psi[N_1]=\operatorname{Std}_2</span>, not
+internal in <span class="math inline">M_2</span> by Claim 1. So <span
+class="math inline">N_1</span> lies in <span
+class="math inline">(P_F)_1</span> but not in <span
+class="math inline">\pi_1[(P_F)_o]</span>, clause (2) of (RP) fails for
+<span class="math inline">F</span> at <span
+class="math inline">i=1</span>, and <span class="math inline">P_F</span>
+is not rigid at the root. Unwound, the failing instance of
+inextensibility is this: let <span
+class="math inline">H:=(\top,H_1,\top_2)</span> be the root entity of
+type <span class="math inline">(\nu t)t</span> with <span
+class="math inline">H_1:=\lambda X\, .\,\neg(X=N_1)</span>, internal in
+<span class="math inline">M_1</span>. Then <span
+class="math inline">\forall X\, .\,P_FX\to\Box HX</span> holds at the
+root, since for <span class="math inline">X</span> rigid with <span
+class="math inline">X\le F</span>, <span class="math inline">HX</span>
+holds trivially at the root and at <span class="math inline">M_2</span>,
+and at <span class="math inline">M_1</span> it says <span
+class="math inline">X_1\ne N_1</span>, which holds because <span
+class="math inline">X_1=\pi_1[X_o]</span> with <span
+class="math inline">X_o\subseteq F_o</span> and <span
+class="math inline">\pi_2[X_o]=X_2</span> internal in <span
+class="math inline">M_2</span>, which Claim 3 shows incompatible with
+<span class="math inline">\pi_1[X_o]=N_1</span>; but <span
+class="math inline">P_F\le H</span> fails at <span
+class="math inline">M_1</span>, where <span
+class="math inline">(P_F)_1=\mathcal P_1(\top_1)</span> holds of <span
+class="math inline">N_1</span> and <span class="math inline">H_1</span>
+does not. So Rigid Power fails at the root at type <span
+class="math inline">((et)t)t</span>. The boxed form fails with it, <span
+class="math inline">\Box</span> at the root reaching only the root and
+the components, where Rigid Power holds trivially by (f). And since at
+the root weak rigidity is rigidity and in the components both are
+trivial, <span class="math inline">F</span> is weakly rigid and <span
+class="math inline">\lambda X\, .\,\operatorname{WeaklyRigid}(X)\land
+X\le F</span> is the same root entity as <span
+class="math inline">P_F</span>, so Weakly Rigid Power and its boxed form
+fail too. The obstacle in one line. The set <span
+class="math inline">S</span> of root entities <span
+class="math inline">x</span> of type <span
+class="math inline">\nu</span> with <span class="math inline">x_1=\bar
+k^{M_1}</span> and <span class="math inline">x_2=\bar k^{M_2}</span> for
+some <span class="math inline">k\in\mathbb N</span>, the entities that
+are the same standard number in both components, is the root extension
+of plenty of root entities of type <span class="math inline">\nu
+t</span>, namely of <span class="math inline">(S,Y_1,Y_2)</span> for any
+<span class="math inline">Y_1\in D^{\nu t}_1</span> and <span
+class="math inline">Y_2\in D^{\nu t}_2</span>, the root domains being
+fullest; but by (Rig) none of them is rigid, since <span
+class="math inline">\pi_2[S]=\operatorname{Std}_2</span> is not internal
+in <span class="math inline">M_2</span>. There is no rigid root relation
+whose root extension is “same standard number in both components”. The
+witness <span class="math inline">F</span> is this non-rigid relation
+padded until it is rigid, on the number side so that <span
+class="math inline">\pi_1</span> sees every finite cardinality of <span
+class="math inline">M_1</span> and on the non-number side so that <span
+class="math inline">\pi_2</span> sees all of <span
+class="math inline">D^\nu_2</span>, and <span
+class="math inline">N_1</span> is the internal subset of <span
+class="math inline">F_1</span> that could only come from the unpadded
+part. A rigid relation can be thin enough, a graph, that the rigid
+subrelations below it are forced to have non-internal projections. Which
+types, and how the filling in of the construction matters. The same
+bookkeeping gives the criterion (Crit): Rigid Power at type <span
+class="math inline">\bar\sigma t</span> fails at the root iff for some
+<span class="math inline">j\ne i</span> there is a set <span
+class="math inline">B</span> of <span
+class="math inline">\bar\sigma</span>-tuples of <span
+class="math inline">M_j</span>, not internal in <span
+class="math inline">M_j</span>, with <span
+class="math inline">|B|\le|D^{\bar\sigma}_i|</span>. For the one
+direction, fix a tuple <span class="math inline">\bar x_0</span> of
+<span class="math inline">M_i</span> and a surjection <span
+class="math inline">\psi:D^{\bar\sigma}_i\setminus\{\bar x_0\}\to
+B</span>, let <span class="math inline">F_o</span> be the set of root
+tuples <span class="math inline">\bar x</span> with either <span
+class="math inline">\pi_i\bar x\ne\bar x_0</span> and <span
+class="math inline">\pi_j\bar x=\psi(\pi_i\bar x)</span>, or <span
+class="math inline">\pi_i\bar x=\bar x_0</span>, and let <span
+class="math inline">F:=(F_o,\top,\top)</span>; then <span
+class="math inline">\pi_i[F_o]=D^{\bar\sigma}_i</span> and <span
+class="math inline">\pi_j[F_o]=D^{\bar\sigma}_j</span>, the tuples with
+<span class="math inline">\pi_i\bar x=\bar x_0</span> pairing <span
+class="math inline">\bar x_0</span> with every tuple of <span
+class="math inline">M_j</span>, so <span class="math inline">F</span> is
+rigid by (Rig); and <span
+class="math inline">A:=D^{\bar\sigma}_i\setminus\{\bar x_0\}</span>,
+internal in <span class="math inline">M_i</span> as <span
+class="math inline">\top</span> minus a haecceity, is <span
+class="math inline">\pi_i[E]</span> only for <span
+class="math inline">E\subseteq F_o</span> avoiding <span
+class="math inline">\bar x_0</span>, whose <span
+class="math inline">\pi_j[E]=\psi[A]=B</span> is not internal in <span
+class="math inline">M_j</span>. For the other direction, which uses
+choice, suppose clause (2) of (RP) fails for some rigid <span
+class="math inline">F</span>, <span class="math inline">i</span> and
+<span class="math inline">A\subseteq F_i</span>; choose for each <span
+class="math inline">a\in A</span> one <span class="math inline">\bar
+x^a\in F_o</span> with <span class="math inline">\pi_i\bar x^a=a</span>,
+possible as <span class="math inline">A\subseteq\pi_i[F_o]</span>, and
+let <span class="math inline">E</span> be the set of these; then <span
+class="math inline">\pi_i[E]=A</span>, so <span
+class="math inline">B:=\pi_j[E]</span> is not internal in <span
+class="math inline">M_j</span>, and <span
+class="math inline">|B|\le|A|\le|D^{\bar\sigma}_i|</span>. Consequences:
+with countable Henkin components, which is what the Henkin construction
+gives, <span class="math inline">D^{et}_2</span> is countable while
+<span class="math inline">\mathcal P(D^e_2)</span> is not, so some set
+<span class="math inline">B</span> of individuals of <span
+class="math inline">M_2</span> is not internal in <span
+class="math inline">M_2</span> and <span
+class="math inline">|B|\le\aleph_0=|D^e_1|</span>; Rigid Power fails
+already at type <span class="math inline">e\to t</span>, and in general
+at every type at which either component is not full. With <span
+class="math inline">M_1</span> the full standard model on <span
+class="math inline">\mathbb N</span>, Rigid Power at <span
+class="math inline">e\to t</span> fails iff <span
+class="math inline">M_2</span> has a countable set of individuals not
+internal in <span class="math inline">M_2</span>, as it does if <span
+class="math inline">M_2</span> is countable. Rigid Power could hold at
+<span class="math inline">e\to t</span> only if every non-internal set
+of individuals of either component outnumbered the individuals of the
+other. Both components cannot be full at type <span
+class="math inline">et</span>: if <span class="math inline">M_2</span>
+were full at <span class="math inline">et</span> and at <span
+class="math inline">eet</span>, an internal bijection between <span
+class="math inline">A</span> and <span class="math inline">B</span>
+would be true equinumerosity and the absence of an internal injection of
+<span class="math inline">A</span> into a proper subset of itself true
+finiteness, so the class of those <span class="math inline">n</span>
+that hold of something, hold only of finite properties and are closed
+under equinumerosity would be internal and inductive, every finite
+cardinality of <span class="math inline">M_2</span> would be the
+property of having exactly <span class="math inline">k</span> members
+for a true <span class="math inline">k</span>, and <span
+class="math inline">M_2</span> would satisfy <span
+class="math inline">\operatorname{Con}(T)</span>. A filling in with
+Rigid Power at <span class="math inline">e\to t</span> would thus need
+<span class="math inline">M_2</span> full at <span
+class="math inline">et</span> but not at <span
+class="math inline">eet</span>, with uncountably many individuals and
+every countable set of them internal; whether <span
+class="math inline">T</span> has such a model has not been checked.
+Whatever the filling in, the failure at <span
+class="math inline">((et)t)t</span> remains, using only the countable
+non-internal set <span class="math inline">\operatorname{Std}_2</span>
+and the infinitude of <span class="math inline">D^\nu_1</span>.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#rigid-power</code>. By
+Claude Fable 5.1 (Anthropic), at Cian Dorr’s request,
+2026-10-20.</em></p>
+<h3
+id="holds-rigid-rigidity-rigid-rigidity-weakly-rigid-weak-rigidity-weakly-rigid-weak-rigidity.">Holds
+Rigid Rigidity, □Rigid Rigidity, Weakly Rigid Weak Rigidity, □Weakly
+Rigid Weak Rigidity.</h3>
+<p>In the notation of the argument rigid-power. Rigid Rigidity at type
+<span class="math inline">\bar\sigma t</span> is <span
+class="math inline">\operatorname{Rigid}(\lambda X\,
+.\,\operatorname{Rigid}(X))</span>, which is <span
+class="math inline">\operatorname{Rigid}(P_\top)</span> for the root
+entity <span class="math inline">\top</span> whose root extension is the
+set of all root <span class="math inline">\bar\sigma</span>-tuples and
+whose components are <span class="math inline">\top_1</span> and <span
+class="math inline">\top_2</span>; it is rigid by (Rig), since <span
+class="math inline">\pi_i[\top_o]=D^{\bar\sigma}_i</span> is internal in
+<span class="math inline">M_i</span>. Check clause (2) of (RP) for <span
+class="math inline">\top</span>: given <span
+class="math inline">A\subseteq D^{\bar\sigma}_i</span> internal in <span
+class="math inline">M_i</span>, let <span class="math inline">E</span>
+be the set of root tuples <span class="math inline">\bar x</span> with
+<span class="math inline">\pi_i\bar x\in A</span>; then <span
+class="math inline">\pi_i[E]=A</span>, and <span
+class="math inline">\pi_j[E]</span> is <span
+class="math inline">D^{\bar\sigma}_j</span> if <span
+class="math inline">A\ne\emptyset</span>, every tuple of <span
+class="math inline">M_j</span> pairing with some member of <span
+class="math inline">A</span>, and <span
+class="math inline">\emptyset</span> if <span
+class="math inline">A=\emptyset</span>, either way internal in <span
+class="math inline">M_j</span>. So <span
+class="math inline">P_\top</span> is rigid at the root, at every type.
+In each component every entity is rigid by (f), so <span
+class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span> is
+rigid there trivially, and the boxed form holds at the root by (a). At
+the root, <span class="math inline">\lambda X\,
+.\,\operatorname{WeaklyRigid}(X)</span> has the same root extension as
+<span class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span>,
+weak rigidity and rigidity coinciding there, and the same components,
+everything, by (f); so it is the same root entity, and it is weakly
+rigid, being rigid. In the components it is weakly rigid trivially. So
+Weakly Rigid Weak Rigidity and its boxed form hold.</p>
+<p><em>Address:
+<code>coalesced-two-extensional-arithmetics-root#rigid-rigidity</code>.
+By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request,
+2026-10-20.</em></p>
+<h3 id="fails-arithmetic-necessitism.">Fails Arithmetic
+Necessitism.</h3>
+<p>At type <span class="math inline">e</span>: inextensibility of <span
+class="math inline">\mathbb N_e</span> fails at the root. The antecedent
+<span class="math inline">\Box I^*_e</span> holds, <span
+class="math inline">I^*</span> being an axiom of <span
+class="math inline">T</span>, true in both components, and true at the
+root, where the numbers are the standard numerals, the root parts of
+entities being free, and the individuals are infinitely many. In <span
+class="math inline">M_2</span>, which satisfies <span
+class="math inline">\neg\operatorname{Con}(T)</span>, the numbers at
+<span class="math inline">e</span>, the instances of the least inductive
+property in the Henkin domain, include a nonstandard number <span
+class="math inline">c</span>, one coding a proof of a contradiction from
+<span class="math inline">T</span>, since no standard numeral does; so
+no property of <span class="math inline">M_2</span> has exactly the
+standard numerals as its extension, such a property being inductive. The
+property <span class="math inline">\lambda x\,.\,x&lt;c</span> of <span
+class="math inline">M_2</span>, definable from <span
+class="math inline">c</span> by the order on numbers, holds of every
+standard numeral and not of <span class="math inline">c</span>. Let
+<span class="math inline">X</span> be the root entity whose root part is
+the set of root numerals, whose <span
+class="math inline">M_1</span>-part is the numbers of <span
+class="math inline">M_1</span> and whose <span
+class="math inline">M_2</span>-part is <span class="math inline">\lambda
+x\,.\,x&lt;c</span>. Every number at the root necessarily has <span
+class="math inline">X</span>: at the root it is a root numeral, and
+along the distinguished arrows it becomes the corresponding numeral of
+<span class="math inline">M_1</span> or of <span
+class="math inline">M_2</span>, numerals being closed terms. But <span
+class="math inline">\mathbb N_e\le X</span> fails, since at <span
+class="math inline">M_2</span> the number <span
+class="math inline">c</span> lacks <span class="math inline">X</span>.
+So <span class="math inline">\mathbb N_e</span> is not inextensible and
+Arithmetic Necessitism fails, although the persistence of <span
+class="math inline">\mathbb N_e</span> and the necessary distinctness of
+the numbers hold, as in every model of C with <span
+class="math inline">\Box I^*_e</span>. This is the failure the
+principle’s notes anticipate: at <span class="math inline">M_2</span> no
+property has exactly the numerals as its extension, so the least
+inductive property gains members there.</p>
+<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-23.</em></p>
 <h3 id="fails-necessity-of-analysis.">Fails Necessity of Analysis.</h3>
-<p>At the type <span class="math inline">\sigma:=((et)t)t</span> of properties of the numbers at <span class="math inline">e</span>. In each component, a model of <span class="math inline">T</span> and so of C with <span class="math inline">I^*_e</span>, there is a real number structure of type <span class="math inline">\sigma</span>: the Dedekind cuts over the numbers at <span class="math inline">e</span>, with the rationals coded as numbers, form a complete ordered field, completeness holding by comprehension since the union of a bounded family of cuts is a cut, and its least inductive subproperty is the image of the numbers, so its arithmetic is the component’s. Let <span class="math inline">A</span> be the first-order analytical sentence <span class="math inline">\exists n\in N\,.\,\operatorname{Proof}_T(n,\bot)</span>, written with <span class="math inline">N</span>, <span class="math inline">+</span> and <span class="math inline">\times</span>. In <span class="math inline">M_2</span>, which satisfies <span class="math inline">\neg\operatorname{Con}(T)</span>, every real number structure makes <span class="math inline">A</span> true, and in <span class="math inline">M_1</span>, which satisfies <span class="math inline">\operatorname{Con}(T)</span>, every one makes it false, the real number structures at a world all being isomorphic there. The root reaches both components, so neither <span class="math inline">\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to A(\mathfrak R)</span> nor <span class="math inline">\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak R)</span> holds at the root: the Necessity of Analysis fails, and with it the Necessity of Second-Order Analysis and Analytic Necessitism, which imply it.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<p>At the type <span class="math inline">\sigma:=((et)t)t</span> of
+properties of the numbers at <span class="math inline">e</span>. In each
+component, a model of <span class="math inline">T</span> and so of C
+with <span class="math inline">I^*_e</span>, there is a real number
+structure of type <span class="math inline">\sigma</span>: the Dedekind
+cuts over the numbers at <span class="math inline">e</span>, with the
+rationals coded as numbers, form a complete ordered field, completeness
+holding by comprehension since the union of a bounded family of cuts is
+a cut, and its least inductive subproperty is the image of the numbers,
+so its arithmetic is the component’s. Let <span
+class="math inline">A</span> be the first-order analytical sentence
+<span class="math inline">\exists n\in
+N\,.\,\operatorname{Proof}_T(n,\bot)</span>, written with <span
+class="math inline">N</span>, <span class="math inline">+</span> and
+<span class="math inline">\times</span>. In <span
+class="math inline">M_2</span>, which satisfies <span
+class="math inline">\neg\operatorname{Con}(T)</span>, every real number
+structure makes <span class="math inline">A</span> true, and in <span
+class="math inline">M_1</span>, which satisfies <span
+class="math inline">\operatorname{Con}(T)</span>, every one makes it
+false, the real number structures at a world all being isomorphic there.
+The root reaches both components, so neither <span
+class="math inline">\Box\forall\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to A(\mathfrak R)</span>
+nor <span class="math inline">\Box\forall\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak
+R)</span> holds at the root: the Necessity of Analysis fails, and with
+it the Necessity of Second-Order Analysis and Analytic Necessitism,
+which imply it.</p>
+<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-23.</em></p>
 <h3 id="holds-relational-choice.">Holds Relational Choice.</h3>
-<p>The functionality of a subrelation is evaluated at the root’s identity arrow only, while the subrelation condition is boxed; so for a serial root relation take the subrelation whose root component is a functional choice from the root component, by choice in the metatheory, and whose component parts are empty. Where some component refutes Relational Choice at its root, as when the components are complete for C, its necessitation fails.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#relational-choice-free-root</code>. It requires that A root entity of a relational type has a root component that is an arbitrary function of the root arguments. Here: The root domains are as full as compatibility allows. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic), 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three complete members’ copies stated once; “Its necessitation fails, since some component refutes Relational Choice at its root” became conditional on that, since in the all-finite-domains member every component satisfies Relational Choice.</p>
+<p>The functionality of a subrelation is evaluated at the root’s
+identity arrow only, while the subrelation condition is boxed; so for a
+serial root relation take the subrelation whose root component is a
+functional choice from the root component, by choice in the metatheory,
+and whose component parts are empty. Where some component refutes
+Relational Choice at its root, as when the components are complete for
+C, its necessitation fails.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#relational-choice-free-root</code>. It
+requires that A root entity of a relational type has a root component
+that is an arbitrary function of the root arguments. Here: The root
+domains are as full as compatibility allows. By Cian Dorr, recorded by
+Claude Fable 5.1 (Anthropic), 2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three complete members’ copies stated once; “Its
+necessitation fails, since some component refutes Relational Choice at
+its root” became conditional on that, since in the all-finite-domains
+member every component satisfies Relational Choice.</p>
 <h3 id="holds-actuality.">Holds Actuality.</h3>
 <p>The singleton root proposition witnesses Actuality.</p>
-<p><em>Source: Classicism, Appendix E, p. 83. From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#actuality-singleton-root</code>. It requires that The actual-world proposition <span class="math inline">a</span> is in the domain and entails every truth, and no world outside <span class="math inline">a</span> sees a world in <span class="math inline">a</span>. Here: The singleton root proposition, true at the root’s identity arrow and nowhere in a component, is in the domain and entails every truth; the components have no arrows back to the root (Classicism, Appendix E, p. 83, on the distinctness-preserving collapse). By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three members’ versions stated once.</p>
-<h3 id="holds-truth-implies-nd-necessity.">Holds Truth implies ND-necessity.</h3>
-<p>For a true <span class="math inline">p</span>, <span class="math inline">a\le p</span>, since <span class="math inline">a</span> entails every truth. Take <span class="math inline">q:=a</span> in the definition of <span class="math inline">\Box_{\ne}p</span>: at a world in <span class="math inline">a</span>, <span class="math inline">p</span> holds; at a world outside <span class="math inline">a</span>, <span class="math inline">\Diamond a</span> fails. So every truth is <span class="math inline">\Box_{\ne}</span>-necessary.</p>
-<p><em>General argument <code>arguments/dpc-isolated-actual-world</code>. It requires that The actual-world proposition <span class="math inline">a</span> is in the domain and entails every truth, and no world outside <span class="math inline">a</span> sees a world in <span class="math inline">a</span>. Here: The singleton root proposition, true at the root’s identity arrow and nowhere in a component, is in the domain and entails every truth; the components have no arrows back to the root (Classicism, Appendix E, p. 83, on the distinctness-preserving collapse). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The finite-support, symmetric and full action models’ copies (eight records) stated once for the topic; what varied, why no world outside the actual world sees back into it, is each record’s reason for meeting actual-world-isolated.</p>
-<h3 id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).</h3>
-<p>Let <span class="math inline">c\in\Sigma</span> have relational type <span class="math inline">\tau</span>, so <span class="math inline">c=\top_\tau</span> necessarily. Witnessed Possibility fails for the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span> but impossible of <span class="math inline">c</span>; Separated Structure fails since <span class="math inline">\lambda x\, .\,x</span> and <span class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span class="math inline">c</span> and differ; Independence (signature Σ) fails since <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes; Distinctness Maximalism (signature Σ) fails since <span class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does not prove.</p>
-<p><em>General argument <code>arguments/sigma-top</code>. It requires that Every constant of Σ is relational, and each denotes the top element of its type. Here: This is the interpretation the construction fixes. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic; it uses nothing about the model.</p>
+<p><em>Source: Classicism, Appendix E, p. 83. From the group
+</em>Coalesced sums at a new root<em>, shared argument
+<code>coalesced-sums#actuality-singleton-root</code>. It requires that
+The actual-world proposition <span class="math inline">a</span> is in
+the domain and entails every truth, and no world outside <span
+class="math inline">a</span> sees a world in <span
+class="math inline">a</span>. Here: The singleton root proposition, true
+at the root’s identity arrow and nowhere in a component, is in the
+domain and entails every truth; the components have no arrows back to
+the root (Classicism, Appendix E, p. 83, on the distinctness-preserving
+collapse). By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three members’ versions stated once.</p>
+<h3
+id="fails-self-atoms-are-atoms-type-t-self-atoms-are-strong-atoms-type-t.">Fails
+Self-atoms are atoms (type t), Self-atoms are strong atoms (type
+t).</h3>
+<p>Let <span class="math inline">N</span> and <span
+class="math inline">M</span> be two components whose roots satisfy
+Actuality, with true atoms <span class="math inline">a_N</span> and
+<span class="math inline">a_M</span>, and let <span
+class="math inline">P</span> be the root proposition false at the root,
+with component <span class="math inline">a_N</span> at <span
+class="math inline">N</span>, <span class="math inline">a_M</span> at
+<span class="math inline">M</span> and bottom elsewhere. <span
+class="math inline">P</span> is possible, and it is a self-atom: under
+the distinguished arrow into <span class="math inline">N</span> it
+becomes <span class="math inline">a_N</span>, and a true atom is a
+self-atom, as it entails every truth, including the truth that it
+entails every truth; likewise at <span class="math inline">M</span>; and
+at the root it is false. It is not an atom, since the root proposition
+with component <span class="math inline">a_N</span> alone lies strictly
+below it. So Self-atoms are atoms (type t) fails at the root, and with
+it Self-atoms are strong atoms (type t).</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#self-atom-of-two-actual-components</code>.
+It requires that At least two components are action models whose roots
+satisfy Actuality, and the root domain contains every family of
+component propositions with a truth value at the root (the fullest root
+domains). Here: Both components are one-world Henkin models, where the
+top proposition is the true atom; the root domains are the fullest. By
+Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October
+2026.</em></p>
+<h3 id="holds-truth-implies-nd-necessity.">Holds Truth implies
+ND-necessity.</h3>
+<p>For a true <span class="math inline">p</span>, <span
+class="math inline">a\le p</span>, since <span
+class="math inline">a</span> entails every truth. Take <span
+class="math inline">q:=a</span> in the definition of <span
+class="math inline">\Box_{\ne}p</span>: at a world in <span
+class="math inline">a</span>, <span class="math inline">p</span> holds;
+at a world outside <span class="math inline">a</span>, <span
+class="math inline">\Diamond a</span> fails. So every truth is <span
+class="math inline">\Box_{\ne}</span>-necessary.</p>
+<p><em>General argument
+<code>arguments/dpc-isolated-actual-world</code>. It requires that The
+actual-world proposition <span class="math inline">a</span> is in the
+domain and entails every truth, and no world outside <span
+class="math inline">a</span> sees a world in <span
+class="math inline">a</span>. Here: The singleton root proposition, true
+at the root’s identity arrow and nowhere in a component, is in the
+domain and entails every truth; the components have no arrows back to
+the root (Classicism, Appendix E, p. 83, on the distinctness-preserving
+collapse). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr,
+2026-09-23.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The finite-support, symmetric and full action models’
+copies (eight records) stated once for the topic; what varied, why no
+world outside the actual world sees back into it, is each record’s
+reason for meeting actual-world-isolated.</p>
+<h3
+id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails
+Witnessed Possibility, Separated Structure, Independence (signature Σ),
+Maximalism (signature Σ).</h3>
+<p>Let <span class="math inline">c\in\Sigma</span> have relational type
+<span class="math inline">\tau</span>, so <span
+class="math inline">c=\top_\tau</span> necessarily. Witnessed
+Possibility fails for the pure formula <span
+class="math inline">x\ne\top_\tau</span>, witnessed by <span
+class="math inline">\bot_\tau</span> but impossible of <span
+class="math inline">c</span>; Separated Structure fails since <span
+class="math inline">\lambda x\, .\,x</span> and <span
+class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span
+class="math inline">c</span> and differ; Independence (signature Σ)
+fails since <span class="math inline">c</span> denotes what the closed
+pure term <span class="math inline">\top_\tau</span> denotes;
+Distinctness Maximalism (signature Σ) fails since <span
+class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does
+not prove.</p>
+<p><em>General argument <code>arguments/sigma-top</code>. It requires
+that Every constant of Σ is relational, and each denotes the top element
+of its type. Here: This is the interpretation the construction fixes. By
+Claude Fable 5.1 (Anthropic), at Cian Dorr’s request,
+2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic; it uses nothing about the model.</p>
 <h2 id="notes">Notes</h2>
-<p>Suggested by Cian Dorr on 19 October 2026 as a small model of the boxed Strong Leibniz Biconditionals and □BF without the Necessity of Arithmetic. The root has three atoms, the singletons of its three worlds, all strong worlds. The components are one-world extensional Henkin models, and they satisfy Well-Ordering at every type, so that the choice principles hold at every world. No Lean verification is claimed.</p>
+<p>Suggested by Cian Dorr on 19 October 2026 as a small model of the
+boxed Strong Atomicity and □BF without the Necessity of Arithmetic. The
+root has three atoms, the singletons of its three worlds, all strong
+atoms. The components are one-world extensional Henkin models, and they
+satisfy Well-Ordering at every type, so that the choice principles hold
+at every world. No Lean verification is claimed.</p>
 <h2 id="history">History</h2>
 <p>The record’s revision log before it was written as arguments.</p>
 <ul>
-<li><strong>2026-10-20</strong> (Claude Fable 5.1 (Anthropic), at Cian Dorr’s request) — Added the arguments rigid-power and rigid-rigidity, settling the eight verdicts the engine had left open. Rigid Power, Weakly Rigid Power and their boxed forms fail at the root at type <span class="math inline">((et)t)t</span> in every filling in of the construction, the standard numbers of <span class="math inline">M_2</span> not being internal there; Rigid Rigidity, Weakly Rigid Weak Rigidity and their boxed forms hold at every type.</li>
+<li><strong>2026-10-20</strong> (Claude Fable 5.1 (Anthropic), at Cian
+Dorr’s request) — Added the arguments rigid-power and rigid-rigidity,
+settling the eight verdicts the engine had left open. Rigid Power,
+Weakly Rigid Power and their boxed forms fail at the root at type <span
+class="math inline">((et)t)t</span> in every filling in of the
+construction, the standard numbers of <span
+class="math inline">M_2</span> not being internal there; Rigid Rigidity,
+Weakly Rigid Weak Rigidity and their boxed forms hold at every
+type.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 19 Oct</strong> — Cian Dorr, construction of 19 October 2026, with Claude Opus 5.5 (Anthropic).</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix E, Definition E.2, pp. 80–83.</li>
+<li><strong>Dorr 19 Oct</strong> — Cian Dorr, construction of 19 October
+2026, with Claude Opus 5.5 (Anthropic).</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, Appendix E, Definition E.2,
+pp. 80–83.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/models/coalesced-two-extensional-arithmetics-root.yaml</code>
+Record:
+<code>topics/classicism/models/coalesced-two-extensional-arithmetics-root.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix E, Definition E.2, pp. 80–83. The coalesced sum, here of two components.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix E, Definition E.2, pp. 80–83. The coalesced sum, here of two
+components.</li>
 </ul>
 </body></html>

@@ -1,0 +1,31 @@
+id: self-atomicity-atomicity-t-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice
+premises:
+- self-atomicity-r
+- atomicity-t
+- weak-rigid-comprehension-r
+- relational-choice-r
+conclusion: intensional-choice-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the construction with properties, 20 October 2026); the self-atom form by Claude
+    Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, the notion of a self-atom and the bridge principles, 25 October 2026; the proof by Claude
+  Fable 5.1 (Anthropic) the same day, from the survey of Strong Atomicity results that Cian Dorr requested
+  (session transcript of 25 October 2026).
+source_names:
+- Dorr 25 Oct
+proof: 'See the write-up. For each atom $w$ of type $t$ choose a self-atom $X_w$ of type $\sigma t$ below
+  $\lambda y\, .\,w\land Fy$; take a weakly rigid $R$ coextensive with the property of being some $X_w$,
+  and put $G:=\lambda y\, .\,\exists X\, .\,RX\land Xy$. The recorded argument from Strong Atomicity
+  Biconditionals goes through: the uniqueness step needs the chosen property to settle the haecceity of
+  an instance only at worlds where it is instantiated, where a self-atom is an atom.'
+notes: Strengthens [[strong-atomicity-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice]],
+  since Strong Atomicity gives Self-Atomicity and Atomicity (type t). Atomicity (type
+  t) is used to index the choice by atoms and to make $G$ necessarily instantiated; two self-atoms of
+  type $t$ may overlap, which would break the pair lemma, so self-atoms cannot serve as indices.

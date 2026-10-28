@@ -323,34 +323,73 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Weak Rigid Comprehension ∧ ND ⇒ Plenitude</h1></header><p class="cert">
-Result — Source: Classicism (2024), Lean <code>Classicism.Map.weak_rigid_comprehension_and_nd_imply_plenitude</code>; produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), prompted by Cian Dorr, 17 September 2026.
+Result — Source: Classicism (2024), Lean
+<code>Classicism.Map.weak_rigid_comprehension_and_nd_imply_plenitude</code>;
+produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex
+(GPT-6), prompted by Cian Dorr, 17 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Weak Rigid Comprehension.</strong> Every relation, including a proposition, is coextensive with a weakly rigid one, that is, with one that is weakly persistent and weakly inextensible.</li>
-<li><strong>ND.</strong> Distinct things of any type are necessarily distinct.</li>
+<li><strong>Weak Rigid Comprehension.</strong> Every relation, including
+a proposition, is coextensive with a weakly rigid one, that is, with one
+that is weakly persistent and weakly inextensible.</li>
+<li><strong>ND.</strong> Distinct things of any type are necessarily
+distinct.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Plenitude.</strong> Every total single-valued binary relation is represented by an operation. Its output type is relational, as required by the type system.</li>
+<li><strong>Plenitude.</strong> Every total single-valued binary
+relation is represented by an operation. Its output type is relational,
+as required by the type system.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>For functional U with propositional output, choose a weakly rigid coextension <span class="math inline">U^*</span> and put <span class="math inline">Zy=\forall p\, .\,(U^*y)p\to p</span>. If Uxq, weak persistence makes <span class="math inline">(U^*x)q</span> necessary, so Zx entails q. Functionality, NI and ND make every <span class="math inline">U^*</span>-pair necessarily either have a different first coordinate or have second coordinate q. Weak inextensibility combines this into necessary uniqueness at x, which gives q entails Zx. Thus Zx=q and Z represents U. The source extends this construction pointwise to every relational relational output type.</p>
+<p>For functional U with propositional output, choose a weakly rigid
+coextension <span class="math inline">U^*</span> and put <span
+class="math inline">Zy=\forall p\, .\,(U^*y)p\to p</span>. If Uxq, weak
+persistence makes <span class="math inline">(U^*x)q</span> necessary, so
+Zx entails q. Functionality, NI and ND make every <span
+class="math inline">U^*</span>-pair necessarily either have a different
+first coordinate or have second coordinate q. Weak inextensibility
+combines this into necessary uniqueness at x, which gives q entails Zx.
+Thus Zx=q and Z represents U. The source extends this construction
+pointwise to every relational relational output type.</p>
 <h2 id="notes">Notes</h2>
-<p>Stated in the source with Rigid Comprehension (Proposition 2.16); its proof uses only the weak persistence and the weak inextensibility of the coextension at the evaluation point, so Weak Rigid Comprehension suffices (observed by Cian Dorr, 11 October 2026; the Lean proof, which used rigidity only through those two facts, was adjusted to match). With the recorded plenitude-r-implies-distinctness-necessary-r, Plenitude is at least as strong as ND, and this record makes ND with Weak Rigid Comprehension sufficient for it.</p>
+<p>Stated in the source with Rigid Comprehension (Proposition 2.16); its
+proof uses only the weak persistence and the weak inextensibility of the
+coextension at the evaluation point, so Weak Rigid Comprehension
+suffices (observed by Cian Dorr, 11 October 2026; the Lean proof, which
+used rigidity only through those two facts, was adjusted to match). With
+the recorded plenitude-r-implies-distinctness-necessary-r, Plenitude is
+at least as strong as ND, and this record makes ND with Weak Rigid
+Comprehension sufficient for it.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-11</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction) — Premise weakened from Rigid Comprehension to Weak Rigid Comprehension, the source’s proof using only weak persistence and weak inextensibility; the record’s id changed with it (formerly rigid-comprehension-and-nd-imply-plenitude), and the proof text says “weakly rigid” and “weak” where it said “rigid”, “persistence” and “inextensibility”.</li>
+<li><strong>2026-10-11</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction) — Premise weakened from Rigid Comprehension to Weak
+Rigid Comprehension, the source’s proof using only weak persistence and
+weak inextensibility; the record’s id changed with it (formerly
+rigid-comprehension-and-nd-imply-plenitude), and the proof text says
+“weakly rigid” and “weak” where it said “rigid”, “persistence” and
+“inextensibility”.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.16, p. 33 and n. 49.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, Proposition 2.16, p. 33 and
+n. 49.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/weak-rigid-comprehension-and-nd-imply-plenitude.yaml</code>
+Record:
+<code>topics/classicism/results/weak-rigid-comprehension-and-nd-imply-plenitude.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Proposition 2.16, p. 33 and n. 49</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Proposition 2.16, p. 33 and n. 49</li>
 </ul>
 </body></html>

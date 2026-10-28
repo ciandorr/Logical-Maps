@@ -323,26 +323,64 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>ND ∧ Strong Actuality ⇒ Gallin Extensional Comprehension</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.nd_and_strong_actuality_imply_gallin_comprehension</code>; produced by Cian Dorr, 11 October 2026; checked by Claude Opus 5.5 (Anthropic); recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 11 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.nd_and_strong_actuality_imply_gallin_comprehension</code>;
+produced by Cian Dorr, 11 October 2026; checked by Claude Opus 5.5
+(Anthropic); recorded by Claude Opus 5.5 (Anthropic), prompted by Cian
+Dorr, 11 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>ND.</strong> Distinct things of any type are necessarily distinct.</li>
-<li><strong>Strong Actuality.</strong> There is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.</li>
+<li><strong>ND.</strong> Distinct things of any type are necessarily
+distinct.</li>
+<li><strong>Strong Actuality.</strong> There is a true strong atom: a
+true proposition that necessarily entails every proposition or its
+negation.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Gallin Extensional Comprehension.</strong> Every relation is coextensive with one that is persistent and has a persistent pointwise negation. This is the source’s comparison with Gallin’s different rigidity convention.</li>
+<li><strong>Gallin Extensional Comprehension.</strong> Every relation is
+coextensive with one that is persistent and has a persistent pointwise
+negation. This is the source’s comparison with Gallin’s different
+rigidity convention.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">w</span> witness Strong Actuality: <span class="math inline">w</span> is true and <span class="math inline">\Box\forall q\, .\,w\le q\lor w\le\neg q</span>. Given <span class="math inline">X</span>, put <span class="math inline">Y:=\lambda\bar z\, .\,w\le X[\bar z]</span>. <span class="math inline">Y</span> is coextensive with <span class="math inline">X</span>: <span class="math inline">w</span> is true and settles each <span class="math inline">X[\bar z]</span>. <span class="math inline">Y</span> is persistent, <span class="math inline">w\le X[\bar z]</span> being boxed, by 4. For the persistence of <span class="math inline">\neg Y</span>, that is <span class="math inline">\Box\forall\bar z\, .\,\Diamond(w\land\neg X[\bar z])\to\Box\Diamond(w\land\neg X[\bar z])</span>: ND gives B (ND (type t) gives 5, and 5 gives B, both recorded), so <span class="math inline">\Box\Diamond w</span>, and <span class="math inline">\Box\Box\Diamond w</span> by 4. At any world, if <span class="math inline">\Diamond(w\land\neg X[\bar z])</span> then <span class="math inline">w\not\le X[\bar z]</span>, so <span class="math inline">w\le\neg X[\bar z]</span> by the boxed condition on <span class="math inline">w</span>, and by 4 this holds at every later world, where <span class="math inline">\Diamond w</span> also holds; so <span class="math inline">\Box\Diamond(w\land\neg X[\bar z])</span>.</p>
+<p>Let <span class="math inline">w</span> witness Strong Actuality:
+<span class="math inline">w</span> is true and <span
+class="math inline">\Box\forall q\, .\,w\le q\lor w\le\neg q</span>.
+Given <span class="math inline">X</span>, put <span
+class="math inline">Y:=\lambda\bar z\, .\,w\le X[\bar z]</span>. <span
+class="math inline">Y</span> is coextensive with <span
+class="math inline">X</span>: <span class="math inline">w</span> is true
+and settles each <span class="math inline">X[\bar z]</span>. <span
+class="math inline">Y</span> is persistent, <span
+class="math inline">w\le X[\bar z]</span> being boxed, by 4. For the
+persistence of <span class="math inline">\neg Y</span>, that is <span
+class="math inline">\Box\forall\bar z\, .\,\Diamond(w\land\neg X[\bar
+z])\to\Box\Diamond(w\land\neg X[\bar z])</span>: ND gives B (ND (type t)
+gives 5, and 5 gives B, both recorded), so <span
+class="math inline">\Box\Diamond w</span>, and <span
+class="math inline">\Box\Box\Diamond w</span> by 4. At any world, if
+<span class="math inline">\Diamond(w\land\neg X[\bar z])</span> then
+<span class="math inline">w\not\le X[\bar z]</span>, so <span
+class="math inline">w\le\neg X[\bar z]</span> by the boxed condition on
+<span class="math inline">w</span>, and by 4 this holds at every later
+world, where <span class="math inline">\Diamond w</span> also holds; so
+<span class="math inline">\Box\Diamond(w\land\neg X[\bar z])</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>With the recorded gallin-comprehension-implies-nd and gallin-comprehension-implies-strong-actuality, Gallin Extensional Comprehension is equivalent to ND together with Strong Actuality. ND is used only through B at the witness <span class="math inline">w</span>, and B, 5, ND (type t) and ND are equivalent in C by the recorded results.</p>
+<p>With the recorded gallin-comprehension-implies-nd and
+gallin-comprehension-implies-strong-actuality, Gallin Extensional
+Comprehension is equivalent to ND together with Strong Actuality. ND is
+used only through B at the witness <span class="math inline">w</span>,
+and B, 5, ND (type t) and ND are equivalent in C by the recorded
+results.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October 2026.</li>
+<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/nd-and-strong-actuality-imply-gallin-comprehension.yaml</code>
+Record:
+<code>topics/classicism/results/nd-and-strong-actuality-imply-gallin-comprehension.yaml</code>
 </p>
 </body></html>

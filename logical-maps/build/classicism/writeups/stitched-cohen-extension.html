@@ -323,89 +323,667 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Stitched forcing model: ground-model root with a Cohen extension at its one other world</h1></header><p class="cert">
-Model — Source: Continuum Contingency (draft); produced by Neil Barton and Zachary Goodsell (the construction, □Rigid Comprehension, Relational Choice, the infinite individual domain, □Atomicity at type t and the failure of Rigid Power at the reals, Lemmas 15–19 and Theorems 20–21); Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026 (the remaining verdicts, in the map’s terms); recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026.
+Model — Source: Continuum Contingency (draft); produced by Neil Barton
+and Zachary Goodsell (the construction, □Rigid Comprehension, Relational
+Choice, the infinite individual domain, □Atomicity at type t and the
+failure of Rigid Power at the reals, Lemmas 15–19 and Theorems 20–21);
+Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October
+2026 (the remaining verdicts, in the map’s terms); recorded by Claude
+Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026.
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation, including a proposition, is coextensive with a rigid one.</li>
-<li><strong>□Relational Choice.</strong> Necessarily, every serial binary relation has a functional subrelation.</li>
-<li><strong>Axiom of Infinity (type e).</strong> There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
-<li><strong>□Atomicity (type t).</strong> Necessarily, every non-bottom proposition has an atom below it.</li>
-<li><strong>□BF (type t).</strong> Necessarily, if every proposition necessarily has a property, then necessarily every proposition has it.</li>
-<li><strong>□Truth implies ND-necessity.</strong> Necessarily, every truth is ND-necessary. In C this is the identity <span class="math inline">\Box_{\ne}=\lambda p\, .\,p</span>.</li>
-<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
-<li><strong>¬ Rigid Rigidity.</strong> Being rigid is a rigid property of relations, including propositions.</li>
-<li><strong>¬ BF (relational types).</strong> The Barcan Formula at every relational type, that is, at every type other than e.</li>
-<li><strong>¬ Intensional Choice.</strong> If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
-<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>¬ Analytic Necessitism.</strong> If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type <span class="math inline">\sigma</span>.</li>
-<li><strong>¬ B for pure sentences.</strong> The B instance for every closed sentence in the pure language.</li>
-<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are not finitely many propositions: the Axiom of Infinity at this type, under a diamond.</li>
-<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.</li>
-<li><strong>¬ Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
-<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
-<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema for the fixed nonlogical signature Σ: every closed identity of its language not provable in C(Σ) is false.</li>
+<li><strong>□Atoms are self-atoms.</strong> Necessarily, at each
+relational type, every atom is a self-atom: necessarily, if it is
+instantiated, it is an atom.</li>
+<li><strong>□Atoms are strong atoms.</strong> Necessarily, at each
+relational type, every atom is a strong atom: it necessarily entails
+every entity of the type or its negation.</li>
+<li><strong>□Self-atoms are atoms.</strong> Necessarily, at each
+relational type, every self-atom is an atom.</li>
+<li><strong>□Self-atoms are strong atoms.</strong> Necessarily, at each
+relational type, every self-atom is a strong atom: it necessarily
+entails every entity of the type or its negation.</li>
+<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation,
+including a proposition, is coextensive with a rigid one.</li>
+<li><strong>□Relational Choice.</strong> Necessarily, every serial
+binary relation has a functional subrelation.</li>
+<li><strong>Axiom of Infinity (type e).</strong> There are not finitely
+many individuals. No finite cardinality holds of the universal property,
+so the domain of the type cannot be exhausted by finitely many steps
+from the empty property.</li>
+<li><strong>□Atomicity (type t).</strong> Necessarily, every non-bottom
+proposition has an atom below it.</li>
+<li><strong>□BF (type t).</strong> Necessarily, if every proposition
+necessarily has a property, then necessarily every proposition has
+it.</li>
+<li><strong>□Truth implies ND-necessity.</strong> Necessarily, every
+truth is ND-necessary. In C this is the identity <span
+class="math inline">\Box_{\ne}=\lambda p\, .\,p</span>.</li>
+<li><strong>Non-contingency of the Continuum Hypothesis.</strong> Either
+necessarily every real number structure satisfies the continuum
+hypothesis, or necessarily every real number structure falsifies it:
+that every subproperty of the continuum either injects into the natural
+numbers or is in bijection with the continuum. One sentence for each
+type <span class="math inline">\sigma</span>.</li>
+<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
+<li><strong>¬ Rigid Rigidity.</strong> Being rigid is a rigid property
+of relations, including propositions.</li>
+<li><strong>¬ BF (relational types).</strong> The Barcan Formula at
+every relational type, that is, at every type other than e.</li>
+<li><strong>¬ Intensional Choice.</strong> If a property is necessarily
+instantiated, then some property entailing it is necessarily uniquely
+instantiated.</li>
+<li><strong>¬ Analytic Necessitism.</strong> If there could be a real
+number structure, there is a rigid one that is necessarily a real number
+structure: a rigid property with necessarily distinct instances, with
+rigid order, addition, multiplication and natural numbers, which
+necessarily form a complete ordered field. One sentence for each type
+<span class="math inline">\sigma</span>.</li>
+<li><strong>¬ B for pure sentences.</strong> The B instance for every
+closed sentence in the pure language.</li>
+<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are
+not finitely many propositions: the Axiom of Infinity at this type,
+under a diamond.</li>
+<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with
+free variables among a finite tuple x, and distinct matching nonlogical
+constants c, a witness to P entails that P at those constants is
+possible.</li>
+<li><strong>¬ Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
+<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma
+is a pure operation applied to other constants: for a closed pure term A
+and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied
+to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema
+for the fixed nonlogical signature Σ: every closed identity of its
+language not provable in C(Σ) is false.</li>
 </ul>
 <h2 id="definition">Definition</h2>
-<p>The stitching construction of Barton and Goodsell (Continuum Contingency, §8), in its simplest case. Work in a generic extension <span class="math inline">V[G]</span> of a ground model <span class="math inline">V</span> of ZFC by Cohen forcing, which adds a real and is weakly homogeneous, hence <span class="math inline">V</span>-decisive (§7.1): a set of ordinals definable in <span class="math inline">V[G]</span> from parameters in <span class="math inline">V</span> lies in <span class="math inline">V</span>. Let <span class="math inline">C_0</span> be the canonical extensional model of <span class="math inline">V[G]</span> (§7.2.5): one object with its identity arrow, the natural numbers as individuals, two propositions, and at each relational type every function of <span class="math inline">V[G]</span> between the lower domains, so that its relations of a type are, up to extension, all the subsets in <span class="math inline">V[G]</span> of the tuples of that type. Call an element of <span class="math inline">C_0</span> definable when it is definable in <span class="math inline">V[G]</span> from parameters in <span class="math inline">V</span>. The root <span class="math inline">\hat M</span> is built in <span class="math inline">V</span> (§8.3, Definition 1, with the group <span class="math inline">W</span> trivial): its individuals are the natural numbers; its propositions are the pairs <span class="math inline">\langle a,b\rangle</span> of a truth value <span class="math inline">a</span> at the root and a truth value <span class="math inline">b</span> at <span class="math inline">C_0</span>; and an element of a relational type at the root is a pair of a function in <span class="math inline">V</span> on the root domains, which gives its extension at the root, and a definable element of <span class="math inline">C_0</span> of the same type, which gives its extension at <span class="math inline">C_0</span>, the two compatible in that the <span class="math inline">C_0</span>-coordinate of the function’s value at an argument is the definable element applied to the argument’s <span class="math inline">C_0</span>-component. Every such pair is in the domain, so a root relation may be any set in <span class="math inline">V</span> of root tuples together with any definable relation of <span class="math inline">C_0</span>. The action model <span class="math inline">M</span> (§8.4) has the two objects <span class="math inline">\hat M</span> and <span class="math inline">C_0</span>, their identities, and one arrow <span class="math inline">h\colon\hat M\to C_0</span>, the identity on the individuals, which sends every other element to its <span class="math inline">C_0</span>-component. Truth at the root is the first coordinate, so at the root <span class="math inline">\Box p</span> holds iff <span class="math inline">p</span> is true at both objects, and <span class="math inline">C_0</span> sees only itself. The source works in the full simple type hierarchy; the restriction of its model to the map’s relational types is an action model of the same kind. Evaluation point: <span class="math inline">\hat M</span>, at its identity arrow.</p>
-<p>Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the top element of its type.</p>
+<p>The stitching construction of Barton and Goodsell (Continuum
+Contingency, §8). Work in a generic extension <span
+class="math inline">V[G]</span> of a ground model <span
+class="math inline">V</span> of ZFC by a weakly homogeneous, hence <span
+class="math inline">V</span>-decisive, forcing <span
+class="math inline">P</span> (§7.1): a set of ordinals definable in
+<span class="math inline">V[G]</span> from parameters in <span
+class="math inline">V</span> lies in <span
+class="math inline">V</span>.</p>
+<p>Here <span class="math inline">P</span> is Cohen forcing, which adds
+one real.</p>
+<p>Ground model, fixed for this record: <span
+class="math inline">V</span> is an arbitrary model of ZFC.</p>
+<p>Let <span class="math inline">C_0</span> be the canonical extensional
+model of <span class="math inline">V[G]</span> (§7.2.5): one object with
+its identity arrow, the natural numbers as individuals, two
+propositions, and at each relational type every function of <span
+class="math inline">V[G]</span> between the lower domains, so that its
+relations of a type are, up to extension, all the subsets in <span
+class="math inline">V[G]</span> of the tuples of that type. Call an
+element of <span class="math inline">C_0</span> definable when it is
+definable in <span class="math inline">V[G]</span> from parameters in
+<span class="math inline">V</span>. The root <span
+class="math inline">\hat M</span> is built in <span
+class="math inline">V</span> (§8.3, Definition 1, with the group <span
+class="math inline">W</span> trivial): its individuals are the natural
+numbers; its propositions are the pairs <span
+class="math inline">\langle a,b\rangle</span> of a truth value <span
+class="math inline">a</span> at the root and a truth value <span
+class="math inline">b</span> at <span class="math inline">C_0</span>;
+and an element of a relational type at the root is a pair of a function
+in <span class="math inline">V</span> on the root domains, which gives
+its extension at the root, and a definable element of <span
+class="math inline">C_0</span> of the same type, which gives its
+extension at <span class="math inline">C_0</span>, the two compatible in
+that the <span class="math inline">C_0</span>-coordinate of the
+function’s value at an argument is the definable element applied to the
+argument’s <span class="math inline">C_0</span>-component. Every such
+pair is in the domain, so a root relation may be any set in <span
+class="math inline">V</span> of root tuples together with any definable
+relation of <span class="math inline">C_0</span>. The action model <span
+class="math inline">M</span> (§8.4) has the two objects <span
+class="math inline">\hat M</span> and <span
+class="math inline">C_0</span>, their identities, and one arrow <span
+class="math inline">h\colon\hat M\to C_0</span>, the identity on the
+individuals, which sends every other element to its <span
+class="math inline">C_0</span>-component. Truth at the root is the first
+coordinate, so at the root <span class="math inline">\Box p</span> holds
+iff <span class="math inline">p</span> is true at both objects, and
+<span class="math inline">C_0</span> sees only itself. The source works
+in the full simple type hierarchy; the restriction of its model to the
+map’s relational types is an action model of the same kind. Evaluation
+point: <span class="math inline">\hat M</span>, at its identity
+arrow.</p>
+<p>Interpretation of Σ, fixed for these records: every constant of Σ is
+relational, and each denotes the top element of its type.</p>
+<p><em>A member of the group Stitched forcing models, which supplies
+this definition with the record’s settings, and the arguments marked as
+shared.</em></p>
 <h2 id="arguments">Arguments</h2>
+<h3
+id="holds-atoms-are-self-atoms-atoms-are-strong-atoms-self-atoms-are-atoms-self-atoms-are-strong-atoms.">Holds
+□Atoms are self-atoms, □Atoms are strong atoms, □Self-atoms are atoms,
+□Self-atoms are strong atoms.</h3>
+<p>The root sees itself and <span class="math inline">C_0</span> through
+one arrow each, and <span class="math inline">C_0</span> sees only
+itself. An entity at the root of a relational type is a pair <span
+class="math inline">(E,D)</span> of a root extension <span
+class="math inline">E</span> and a definable element <span
+class="math inline">D</span> of <span class="math inline">C_0</span>,
+with transport <span class="math inline">D</span> along the arrow to
+<span class="math inline">C_0</span>. It is an atom iff <span
+class="math inline">E</span> is a singleton and <span
+class="math inline">D=\bot</span>, or <span
+class="math inline">E=\varnothing</span> and <span
+class="math inline">D</span> is a definable singleton of <span
+class="math inline">C_0</span>; a self-atom likewise, since its
+transport along the identity is itself and along the arrow to <span
+class="math inline">C_0</span> is <span class="math inline">D</span>,
+each of which must be an atom where the entity is instantiated. Each
+such entity is a strong atom, its two transports being an atom or
+bottom. At <span class="math inline">C_0</span>, a one-world model with
+full extensional domains, the atoms are the singletons, which are
+self-atoms and strong atoms. So all four bridge principles hold at both
+worlds, at every type.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#self-atoms-and-strong-atoms</code>. By Claude
+Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</em></p>
 <h3 id="holds-rigid-comprehension.">Holds □Rigid Comprehension.</h3>
-<p>Lemma 16 of the source, in the map’s terms. Write a root relation as the pair of its root extension <span class="math inline">E</span>, a set in <span class="math inline">V</span> of root tuples, and its <span class="math inline">C_0</span>-extension <span class="math inline">g</span>, a definable relation of <span class="math inline">C_0</span>; transport along <span class="math inline">h</span> sends it to <span class="math inline">g</span>, and <span class="math inline">h[E]</span>, the set of <span class="math inline">C_0</span>-components of the members of <span class="math inline">E</span>, is definable from the set in <span class="math inline">V</span> of their names. The relation is persistent iff <span class="math inline">h[E]\subseteq g</span>. It is weakly inextensible iff <span class="math inline">g\subseteq h[E]</span>: the root relation with root extension <span class="math inline">E</span> and <span class="math inline">C_0</span>-extension <span class="math inline">h[E]</span> necessarily holds of every member of <span class="math inline">E</span>, so weak inextensibility gives <span class="math inline">g\subseteq h[E]</span>; conversely, a root relation that necessarily holds of each member of <span class="math inline">E</span> has root extension including <span class="math inline">E</span> and <span class="math inline">C_0</span>-extension including <span class="math inline">h[E]</span>. So a root relation is weakly rigid iff <span class="math inline">g=h[E]</span>, and then rigid, since at <span class="math inline">C_0</span>, which sees only itself, every relation is rigid. Hence <span class="math inline">(E,g)</span> is coextensive with the rigid <span class="math inline">(E,h[E])</span>, and Rigid Comprehension holds at the root; at <span class="math inline">C_0</span> it holds trivially.</p>
-<p><em>By Neil Barton and Zachary Goodsell (the construction, □Rigid Comprehension, Relational Choice, the infinite individual domain, □Atomicity at type t and the failure of Rigid Power at the reals, Lemmas 15–19 and Theorems 20–21); Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026 (the remaining verdicts, in the map’s terms).</em></p>
+<p>Lemma 16 of the source, in the map’s terms. Write a root relation as
+the pair of its root extension <span class="math inline">E</span>, a set
+in <span class="math inline">V</span> of root tuples, and its <span
+class="math inline">C_0</span>-extension <span
+class="math inline">g</span>, a definable relation of <span
+class="math inline">C_0</span>; transport along <span
+class="math inline">h</span> sends it to <span
+class="math inline">g</span>, and <span class="math inline">h[E]</span>,
+the set of <span class="math inline">C_0</span>-components of the
+members of <span class="math inline">E</span>, is definable from the set
+in <span class="math inline">V</span> of their names. The relation is
+persistent iff <span class="math inline">h[E]\subseteq g</span>. It is
+weakly inextensible iff <span class="math inline">g\subseteq
+h[E]</span>: the root relation with root extension <span
+class="math inline">E</span> and <span
+class="math inline">C_0</span>-extension <span
+class="math inline">h[E]</span> necessarily holds of every member of
+<span class="math inline">E</span>, so weak inextensibility gives <span
+class="math inline">g\subseteq h[E]</span>; conversely, a root relation
+that necessarily holds of each member of <span
+class="math inline">E</span> has root extension including <span
+class="math inline">E</span> and <span
+class="math inline">C_0</span>-extension including <span
+class="math inline">h[E]</span>. So a root relation is weakly rigid iff
+<span class="math inline">g=h[E]</span>, and then rigid, since at <span
+class="math inline">C_0</span>, which sees only itself, every relation
+is rigid. Hence <span class="math inline">(E,g)</span> is coextensive
+with the rigid <span class="math inline">(E,h[E])</span>, and Rigid
+Comprehension holds at the root; at <span class="math inline">C_0</span>
+it holds trivially.</p>
+<p><em>Source: Continuum Contingency, Lemma 16. From the group
+</em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#rigid-comprehension</code>. By Neil Barton and
+Zachary Goodsell; in the map’s terms by Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 2026-10-19.</em></p>
 <h3 id="holds-relational-choice.">Holds □Relational Choice.</h3>
-<p>Lemma 17 of the source. A serial root relation <span class="math inline">U</span> has, by choice in <span class="math inline">V</span>, a functional subrelation <span class="math inline">E_S</span> of its root extension; the root relation with root extension <span class="math inline">E_S</span> and the <span class="math inline">C_0</span>-extension of <span class="math inline">U</span> is in the domain, lies within <span class="math inline">U</span> at the root and is functional there, which is all the unboxed principle asks. At <span class="math inline">C_0</span>, <span class="math inline">V[G]</span> supplies a functional subrelation of any serial relation, and the full domain contains it.</p>
-<p><em>By Neil Barton and Zachary Goodsell (the construction, □Rigid Comprehension, Relational Choice, the infinite individual domain, □Atomicity at type t and the failure of Rigid Power at the reals, Lemmas 15–19 and Theorems 20–21); Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026 (the remaining verdicts, in the map’s terms).</em></p>
-<h3 id="holds-axiom-of-infinity-type-e.">Holds Axiom of Infinity (type e).</h3>
-<p>The individuals are the natural numbers at both objects (Lemma 15 of the source). At the root the finite cardinalities of type <span class="math inline">(et)t</span> are the numerals <span class="math inline">\operatorname{Suc}^k\mathbf 0</span>: the root property of cardinalities whose root extension is the set of numerals, with the corresponding definable property at <span class="math inline">C_0</span>, holds of <span class="math inline">\mathbf 0</span> and is closed under successor, so every finite cardinality is a numeral; and the <span class="math inline">k</span>-th numeral holds of a root property of individuals iff its root extension has exactly <span class="math inline">k</span> members, which the universal property has not.</p>
-<p><em>By Neil Barton and Zachary Goodsell (the construction, □Rigid Comprehension, Relational Choice, the infinite individual domain, □Atomicity at type t and the failure of Rigid Power at the reals, Lemmas 15–19 and Theorems 20–21); Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026 (the remaining verdicts, in the map’s terms).</em></p>
+<p>Lemma 17 of the source. A serial root relation <span
+class="math inline">U</span> has, by choice in <span
+class="math inline">V</span>, a functional subrelation <span
+class="math inline">E_S</span> of its root extension; the root relation
+with root extension <span class="math inline">E_S</span> and the <span
+class="math inline">C_0</span>-extension of <span
+class="math inline">U</span> is in the domain, lies within <span
+class="math inline">U</span> at the root and is functional there, which
+is all the unboxed principle asks. At <span
+class="math inline">C_0</span>, <span class="math inline">V[G]</span>
+supplies a functional subrelation of any serial relation, and the full
+domain contains it.</p>
+<p><em>Source: Continuum Contingency, Lemma 17. From the group
+</em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#relational-choice</code>. By Neil Barton and
+Zachary Goodsell; in the map’s terms by Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 2026-10-19.</em></p>
+<h3 id="holds-axiom-of-infinity-type-e.">Holds Axiom of Infinity (type
+e).</h3>
+<p>The individuals are the natural numbers at both objects (Lemma 15 of
+the source). At the root the finite cardinalities of type <span
+class="math inline">(et)t</span> are the numerals <span
+class="math inline">\operatorname{Suc}^k\mathbf 0</span>: the root
+property of cardinalities whose root extension is the set of numerals,
+with the corresponding definable property at <span
+class="math inline">C_0</span>, holds of <span
+class="math inline">\mathbf 0</span> and is closed under successor, so
+every finite cardinality is a numeral; and the <span
+class="math inline">k</span>-th numeral holds of a root property of
+individuals iff its root extension has exactly <span
+class="math inline">k</span> members, which the universal property has
+not.</p>
+<p><em>Source: Continuum Contingency, Lemma 15. From the group
+</em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#axiom-of-infinity-e</code>. By Neil Barton and
+Zachary Goodsell; in the map’s terms by Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 2026-10-19.</em></p>
 <h3 id="holds-atomicity-type-t.">Holds □Atomicity (type t).</h3>
-<p>Theorem 21 of the source, with the trivial group. The root has four propositions, the pairs of a truth value at the root and one at <span class="math inline">C_0</span>, ordered coordinatewise, and <span class="math inline">C_0</span> has two; both algebras are finite, hence atomic.</p>
-<p><em>By Neil Barton and Zachary Goodsell (the construction, □Rigid Comprehension, Relational Choice, the infinite individual domain, □Atomicity at type t and the failure of Rigid Power at the reals, Lemmas 15–19 and Theorems 20–21); Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026 (the remaining verdicts, in the map’s terms).</em></p>
-<h3 id="fails-rigid-power-rigid-rigidity.">Fails Rigid Power, Rigid Rigidity.</h3>
-<p>Lemma 19 of the source, with the universal property of individuals in place of the natural numbers. Let <span class="math inline">F:=\lambda x^e\, .\,\top</span>; it is rigid, its root extension being <span class="math inline">\mathbb N</span> and its <span class="math inline">C_0</span>-extension <span class="math inline">h[\mathbb N]=\mathbb N</span>. Its power property <span class="math inline">P:=\lambda X^{et}\, .\,\operatorname{Rigid}(X)\land X\le F</span> is <span class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span>, as <span class="math inline">X\le F</span> is a theorem. By the criterion in the argument for Rigid Comprehension, the rigid root properties of individuals are the pairs <span class="math inline">(E,E)</span> with <span class="math inline">E\subseteq\mathbb N</span> in <span class="math inline">V</span>, whose <span class="math inline">C_0</span>-components are the reals of <span class="math inline">V</span>, while at <span class="math inline">C_0</span> every property is rigid, so the <span class="math inline">C_0</span>-extension of <span class="math inline">P</span> is the whole power set of <span class="math inline">\mathbb N</span> in <span class="math inline">V[G]</span>. The root property of properties with the root extension of <span class="math inline">P</span> and <span class="math inline">C_0</span>-extension <span class="math inline">\mathcal P(\mathbb N)^V</span>, definable from that parameter, necessarily holds of every root instance of <span class="math inline">P</span>, but not, at <span class="math inline">C_0</span>, of the Cohen real, which is rigid there. So <span class="math inline">P</span> is not weakly inextensible: Rigid Power fails at type <span class="math inline">(et)t</span> and, <span class="math inline">P</span> being rigidity itself, Rigid Rigidity fails at type <span class="math inline">et</span>.</p>
-<p><em>By Neil Barton and Zachary Goodsell (the construction, □Rigid Comprehension, Relational Choice, the infinite individual domain, □Atomicity at type t and the failure of Rigid Power at the reals, Lemmas 15–19 and Theorems 20–21); Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026 (the remaining verdicts, in the map’s terms).</em></p>
+<p>Theorem 21 of the source, with the trivial group. The root has four
+propositions, the pairs of a truth value at the root and one at <span
+class="math inline">C_0</span>, ordered coordinatewise, and <span
+class="math inline">C_0</span> has two; both algebras are finite, hence
+atomic.</p>
+<p><em>Source: Continuum Contingency, Theorem 21. From the group
+</em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#atomicity-t</code>. By Neil Barton and Zachary
+Goodsell; in the map’s terms by Claude Fable 5.1 (Anthropic), prompted
+by Zachary Goodsell, 2026-10-19.</em></p>
 <h3 id="holds-bf-type-t.">Holds □BF (type t).</h3>
-<p>Both propositions of <span class="math inline">C_0</span> are transports of root propositions, so a property of propositions at the root that necessarily holds of every root proposition holds at <span class="math inline">C_0</span> of both propositions there; at <span class="math inline">C_0</span>, which sees only itself, BF is trivial.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-19.</em></p>
-<h3 id="holds-truth-implies-nd-necessity.">Holds □Truth implies ND-necessity.</h3>
-<p>At the root let <span class="math inline">q</span> be the proposition true at the root alone. <span class="math inline">\Diamond q</span> is true at the root and false at <span class="math inline">C_0</span>, so for any truth <span class="math inline">p</span>, <span class="math inline">\Box(\Diamond q\to p)</span> holds, and <span class="math inline">q</span> witnesses <span class="math inline">\Box_{\ne}p</span>. At <span class="math inline">C_0</span>, where necessity is truth, <span class="math inline">\top</span> witnesses <span class="math inline">\Box_{\ne}p</span> for every truth <span class="math inline">p</span>.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-19.</em></p>
+<p>Both propositions of <span class="math inline">C_0</span> are
+transports of root propositions, so a property of propositions at the
+root that necessarily holds of every root proposition holds at <span
+class="math inline">C_0</span> of both propositions there; at <span
+class="math inline">C_0</span>, which sees only itself, BF is
+trivial.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#barcan-t</code>. By Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 2026-10-19.</em></p>
+<h3 id="holds-truth-implies-nd-necessity.">Holds □Truth implies
+ND-necessity.</h3>
+<p>At the root let <span class="math inline">q</span> be the proposition
+true at the root alone. <span class="math inline">\Diamond q</span> is
+true at the root and false at <span class="math inline">C_0</span>, so
+for any truth <span class="math inline">p</span>, <span
+class="math inline">\Box(\Diamond q\to p)</span> holds, and <span
+class="math inline">q</span> witnesses <span
+class="math inline">\Box_{\ne}p</span>. At <span
+class="math inline">C_0</span>, where necessity is truth, <span
+class="math inline">\top</span> witnesses <span
+class="math inline">\Box_{\ne}p</span> for every truth <span
+class="math inline">p</span>.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#distinctness-preserving-collapse</code>. By
+Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-19.</em></p>
+<h3 id="fails-infinity-schema-type-t.">Fails Infinity Schema (type
+t).</h3>
+<p>The root has four propositions, so the instance of the schema asking
+for five pairwise distinct ones fails.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#infinity-t</code>. By Claude Fable 5.1
+(Anthropic), prompted by Zachary Goodsell, 2026-10-19.</em></p>
+<h3 id="fails-rigid-power-rigid-rigidity.">Fails Rigid Power, Rigid
+Rigidity.</h3>
+<p>Lemma 19 of the source, with the universal property of individuals in
+place of the natural numbers. Let <span class="math inline">F:=\lambda
+x^e\, .\,\top</span>; it is rigid, its root extension being <span
+class="math inline">\mathbb N</span> and its <span
+class="math inline">C_0</span>-extension <span
+class="math inline">h[\mathbb N]=\mathbb N</span>. Its power property
+<span class="math inline">P:=\lambda X^{et}\,
+.\,\operatorname{Rigid}(X)\land X\le F</span> is <span
+class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span>, as
+<span class="math inline">X\le F</span> is a theorem. By the criterion
+in the argument for Rigid Comprehension, the rigid root properties of
+individuals are the pairs <span class="math inline">(E,E)</span> with
+<span class="math inline">E\subseteq\mathbb N</span> in <span
+class="math inline">V</span>, whose <span
+class="math inline">C_0</span>-components are the reals of <span
+class="math inline">V</span>, while at <span
+class="math inline">C_0</span> every property is rigid, so the <span
+class="math inline">C_0</span>-extension of <span
+class="math inline">P</span> is the whole power set of <span
+class="math inline">\mathbb N</span> in <span
+class="math inline">V[G]</span>. The root property of properties with
+the root extension of <span class="math inline">P</span> and <span
+class="math inline">C_0</span>-extension <span
+class="math inline">\mathcal P(\mathbb N)^V</span>, definable from that
+parameter, necessarily holds of every root instance of <span
+class="math inline">P</span>, but not, at <span
+class="math inline">C_0</span>, of a real of <span
+class="math inline">V[G]</span> not in <span
+class="math inline">V</span>, which is rigid there. So <span
+class="math inline">P</span> is not weakly inextensible: Rigid Power
+fails at type <span class="math inline">(et)t</span> and, <span
+class="math inline">P</span> being rigidity itself, Rigid Rigidity fails
+at type <span class="math inline">et</span>.</p>
+<p><em>Source: Continuum Contingency, Lemma 19. From the group
+</em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#rigid-power-new-real</code>. It requires that The
+forcing <span class="math inline">P</span> adds a real: some subset of
+<span class="math inline">\mathbb N</span> in <span
+class="math inline">V[G]</span> is not in <span
+class="math inline">V</span>. Here: Cohen forcing adds the Cohen real.
+By Neil Barton and Zachary Goodsell; in the map’s terms by Claude Fable
+5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-19.</em></p>
+<p><em>Revised 2026-10-25 by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr:</em> Moved from stitched-cohen-extension into the group, for
+every member whose forcing adds a real; the Cohen real of the original
+text is now any real of <span class="math inline">V[G]</span> not in
+<span class="math inline">V</span>, and the appeal to the weak
+homogeneity of Cohen forcing is to the <span
+class="math inline">V</span>-decisiveness of <span
+class="math inline">P</span>.</p>
 <h3 id="fails-bf-relational-types.">Fails BF (relational types).</h3>
-<p>By the weak homogeneity of Cohen forcing, a real of <span class="math inline">V[G]</span> definable there from parameters in <span class="math inline">V</span> lies in <span class="math inline">V</span>; so the <span class="math inline">C_0</span>-components of the root properties of individuals are exactly the reals of <span class="math inline">V</span>, and the Cohen real <span class="math inline">c</span> is the component of none. The root property of properties of individuals whose root extension is everything and whose <span class="math inline">C_0</span>-extension is <span class="math inline">\mathcal P(\mathbb N)^V</span> necessarily holds of every root property of individuals, but <span class="math inline">c</span> does not fall under it at <span class="math inline">C_0</span>: BF fails at type <span class="math inline">et</span>.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-19.</em></p>
+<p>By the <span class="math inline">V</span>-decisiveness of <span
+class="math inline">P</span>, a real of <span
+class="math inline">V[G]</span> definable there from parameters in <span
+class="math inline">V</span> lies in <span class="math inline">V</span>;
+so the <span class="math inline">C_0</span>-components of the root
+properties of individuals are exactly the reals of <span
+class="math inline">V</span>, and a real <span
+class="math inline">c</span> of <span class="math inline">V[G]</span>
+not in <span class="math inline">V</span> is the component of none. The
+root property of properties of individuals whose root extension is
+everything and whose <span class="math inline">C_0</span>-extension is
+<span class="math inline">\mathcal P(\mathbb N)^V</span> necessarily
+holds of every root property of individuals, but <span
+class="math inline">c</span> does not fall under it at <span
+class="math inline">C_0</span>: BF fails at type <span
+class="math inline">et</span>.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#barcan-new-real</code>. It requires that The
+forcing <span class="math inline">P</span> adds a real: some subset of
+<span class="math inline">\mathbb N</span> in <span
+class="math inline">V[G]</span> is not in <span
+class="math inline">V</span>. Here: Cohen forcing adds the Cohen real.
+By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-19.</em></p>
+<p><em>Revised 2026-10-25 by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr:</em> Moved from stitched-cohen-extension into the group, for
+every member whose forcing adds a real; the Cohen real of the original
+text is now any real of <span class="math inline">V[G]</span> not in
+<span class="math inline">V</span>, and the appeal to the weak
+homogeneity of Cohen forcing is to the <span
+class="math inline">V</span>-decisiveness of <span
+class="math inline">P</span>.</p>
 <h3 id="fails-intensional-choice.">Fails Intensional Choice.</h3>
-<p>At type <span class="math inline">(et)t</span>. Let <span class="math inline">F</span> be the root property of properties of individuals whose root extension is a single root property and whose <span class="math inline">C_0</span>-extension is the reals of <span class="math inline">V[G]</span> not in <span class="math inline">V</span>. It is necessarily instantiated. A property <span class="math inline">G\le F</span> that is necessarily uniquely instantiated would have a one-element <span class="math inline">C_0</span>-extension <span class="math inline">\{c\}</span>, definable from parameters in <span class="math inline">V</span>, with <span class="math inline">c</span> a new real, which the weak homogeneity of the forcing forbids.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-19.</em></p>
-<h3 id="fails-infinity-schema-type-t.">Fails Infinity Schema (type t).</h3>
-<p>The root has four propositions, so the instance of the schema asking for five pairwise distinct ones fails.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-19.</em></p>
+<p>At type <span class="math inline">(et)t</span>. Let <span
+class="math inline">F</span> be the root property of properties of
+individuals whose root extension is a single root property and whose
+<span class="math inline">C_0</span>-extension is the reals of <span
+class="math inline">V[G]</span> not in <span
+class="math inline">V</span>. It is necessarily instantiated. A property
+<span class="math inline">G\le F</span> that is necessarily uniquely
+instantiated would have a one-element <span
+class="math inline">C_0</span>-extension <span
+class="math inline">\{c\}</span>, definable from parameters in <span
+class="math inline">V</span>, with <span class="math inline">c</span> a
+new real, which the <span class="math inline">V</span>-decisiveness of
+<span class="math inline">P</span> forbids.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#intensional-choice-new-real</code>. It requires
+that The forcing <span class="math inline">P</span> adds a real: some
+subset of <span class="math inline">\mathbb N</span> in <span
+class="math inline">V[G]</span> is not in <span
+class="math inline">V</span>. Here: Cohen forcing adds the Cohen real.
+By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-19.</em></p>
+<p><em>Revised 2026-10-25 by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr:</em> Moved from stitched-cohen-extension into the group, for
+every member whose forcing adds a real; the Cohen real of the original
+text is now any real of <span class="math inline">V[G]</span> not in
+<span class="math inline">V</span>, and the appeal to the weak
+homogeneity of Cohen forcing is to the <span
+class="math inline">V</span>-decisiveness of <span
+class="math inline">P</span>.</p>
 <h3 id="fails-analytic-necessitism.">Fails Analytic Necessitism.</h3>
-<p>At type <span class="math inline">et</span>, at the root. A real number structure exists there: the rigid properties of individuals are the pairs <span class="math inline">(E,E)</span> with <span class="math inline">E\subseteq\mathbb N</span> in <span class="math inline">V</span>, the reals of <span class="math inline">V</span> as sets of naturals, and the field relations on them, defined from membership by arithmetical formulas, are root relations (a function in <span class="math inline">V</span> with the corresponding definable <span class="math inline">C_0</span>-relation); completeness at the root holds because every root property of these is a set in <span class="math inline">V</span>. Now let <span class="math inline">\mathfrak R</span> be any rigid real number structure at <span class="math inline">et</span> with necessarily distinct elements. At the root it is a complete ordered field, so by categoricity its domain <span class="math inline">X</span> is in bijection with the reals of <span class="math inline">V</span> and its rationals are a countable dense subfield. Its root extension is a set <span class="math inline">E</span> in <span class="math inline">V</span> and, <span class="math inline">X</span> being rigid, its <span class="math inline">C_0</span>-extension is <span class="math inline">h[E]=E</span>, the same reals. At <span class="math inline">C_0</span> every property is available, in particular the cut in the rationals of <span class="math inline">X</span> of the Cohen real, a bounded subproperty of <span class="math inline">X</span> with no least upper bound in <span class="math inline">E</span>, a least upper bound being a real of <span class="math inline">V</span> equal to the Cohen real. So <span class="math inline">X</span> is not complete at <span class="math inline">C_0</span>, <span class="math inline">\Box\operatorname{Real}_{et}(\mathfrak R)</span> fails, and the instance fails: a real number structure is possible, indeed actual, and no rigid one is necessarily a real number structure.</p>
-<p><em>By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<p>At type <span class="math inline">et</span>, at the root. A real
+number structure exists there: the rigid properties of individuals are
+the pairs <span class="math inline">(E,E)</span> with <span
+class="math inline">E\subseteq\mathbb N</span> in <span
+class="math inline">V</span>, the reals of <span
+class="math inline">V</span> as sets of naturals, and the field
+relations on them, defined from membership by arithmetical formulas, are
+root relations (a function in <span class="math inline">V</span> with
+the corresponding definable <span
+class="math inline">C_0</span>-relation); completeness at the root holds
+because every root property of these is a set in <span
+class="math inline">V</span>. Now let <span
+class="math inline">\mathfrak R</span> be any rigid real number
+structure at <span class="math inline">et</span> with necessarily
+distinct elements. At the root it is a complete ordered field, so by
+categoricity its domain <span class="math inline">X</span> is in
+bijection with the reals of <span class="math inline">V</span> and its
+rationals are a countable dense subfield. Its root extension is a set
+<span class="math inline">E</span> in <span class="math inline">V</span>
+and, <span class="math inline">X</span> being rigid, its <span
+class="math inline">C_0</span>-extension is <span
+class="math inline">h[E]=E</span>, the same reals. At <span
+class="math inline">C_0</span> every property is available, in
+particular the cut in the rationals of <span
+class="math inline">X</span> of a real of <span
+class="math inline">V[G]</span> not in <span
+class="math inline">V</span>, a bounded subproperty of <span
+class="math inline">X</span> with no least upper bound in <span
+class="math inline">E</span>, a least upper bound being a real of <span
+class="math inline">V</span> equal to that new real. So <span
+class="math inline">X</span> is not complete at <span
+class="math inline">C_0</span>, <span
+class="math inline">\Box\operatorname{Real}_{et}(\mathfrak R)</span>
+fails, and the instance fails: a real number structure is possible,
+indeed actual, and no rigid one is necessarily a real number
+structure.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#analytic-necessitism-new-real</code>. It requires
+that The forcing <span class="math inline">P</span> adds a real: some
+subset of <span class="math inline">\mathbb N</span> in <span
+class="math inline">V[G]</span> is not in <span
+class="math inline">V</span>. Here: Cohen forcing adds the Cohen real.
+By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-23.</em></p>
+<p><em>Revised 2026-10-25 by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr:</em> Moved from stitched-cohen-extension into the group, for
+every member whose forcing adds a real; the Cohen real of the original
+text is now any real of <span class="math inline">V[G]</span> not in
+<span class="math inline">V</span>, and the appeal to the weak
+homogeneity of Cohen forcing is to the <span
+class="math inline">V</span>-decisiveness of <span
+class="math inline">P</span>.</p>
+<h3 id="holds-non-contingency-of-the-continuum-hypothesis.">Holds
+Non-contingency of the Continuum Hypothesis.</h3>
+<p>At each object, every real number structure satisfies the continuum
+hypothesis iff the universe that object is built in does: at the root
+<span class="math inline">V</span>, at <span
+class="math inline">C_0</span> <span class="math inline">V[G]</span>. At
+<span class="math inline">C_0</span> this is because <span
+class="math inline">C_0</span> is the full extensional model of <span
+class="math inline">V[G]</span> over the natural numbers: a real number
+structure there is a complete ordered field of <span
+class="math inline">V[G]</span>, with every subproperty and every
+relation of <span class="math inline">V[G]</span> available, so it has
+<span class="math inline">V[G]</span>’s continuum, and its satisfying CH
+is CH in <span class="math inline">V[G]</span>. At the root it is
+because every set in <span class="math inline">V</span> of root tuples
+is the root extension of a root relation, whatever its <span
+class="math inline">C_0</span>-extension: so the root, read at the root,
+is the full hierarchy of <span class="math inline">V</span> over its
+domains, and the same reasoning applies in <span
+class="math inline">V</span>. Real number structures exist at both
+objects, at type <span class="math inline">et</span> (see the argument
+for the failure of Analytic Necessitism, or take any complete ordered
+field on <span class="math inline">\mathcal P(\mathbb N)</span> at <span
+class="math inline">C_0</span>). When <span class="math inline">P</span>
+leaves CH unchanged, every real number structure, of any type, satisfies
+CH at both objects, or every one falsifies it at both; since the root
+sees exactly the two objects, one of the two disjuncts holds there.</p>
+<p><em>From the group </em>Stitched forcing models<em>, shared argument
+<code>stitched-forcing#continuum-hypothesis-preserved</code>. It
+requires that The continuum hypothesis has the same truth value in <span
+class="math inline">V[G]</span> as in <span
+class="math inline">V</span>. Here: Cohen forcing is countable, so <span
+class="math inline">V[G]</span> has the cardinals of <span
+class="math inline">V</span> and <span
+class="math inline">(\aleph_0^{\aleph_0})^V</span> nice names for reals,
+so the same continuum. By Claude Opus 5.5 (Anthropic), prompted by Cian
+Dorr, 2026-10-25.</em></p>
 <h3 id="fails-b-for-pure-sentences.">Fails B for pure sentences.</h3>
-<p>The pure sentence <span class="math inline">\exists p_1\ldots p_n\bigwedge_{i&lt;j}p_i\ne p_j</span> is true at the evaluation object and false at the world <span class="math inline">V</span> after it and at every world after <span class="math inline">V</span>; so <span class="math inline">\Diamond</span> of it is false at <span class="math inline">V</span>, and <span class="math inline">\Box\Diamond</span> of it false at the evaluation object. (The chain’s own argument of 25 September, stated once.)</p>
-<p><em>General argument <code>arguments/fewer-propositions-after</code>. It requires that For some <span class="math inline">n</span>, the evaluation object has <span class="math inline">n</span> distinct propositions, while some world after it, and every world after that one, has fewer. Here: The root has four propositions; <span class="math inline">C_0</span>, after which there is only itself, has two. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
-<h3 id="fails-possible-infinity-type-t.">Fails Possible Infinity (type t).</h3>
-<p>At a world with <span class="math inline">n</span> propositions, the numeral <span class="math inline">\operatorname{Suc}^n_t\mathbf{0}_t</span>, a finite cardinality, holds of the universal property of propositions, so the Axiom of Infinity at type <span class="math inline">t</span> fails there. It fails at every world, so Possible Infinity at type <span class="math inline">t</span> fails.</p>
-<p><em>General argument <code>arguments/finitely-many-propositions-everywhere</code>. It requires that There are finitely many propositions at every object reachable from the evaluation point. Here: The root has four propositions and <span class="math inline">C_0</span> two. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
-<h3 id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).</h3>
-<p>Let <span class="math inline">c\in\Sigma</span> have relational type <span class="math inline">\tau</span>, so <span class="math inline">c=\top_\tau</span> necessarily. Witnessed Possibility fails for the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span> but impossible of <span class="math inline">c</span>; Separated Structure fails since <span class="math inline">\lambda x\, .\,x</span> and <span class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span class="math inline">c</span> and differ; Independence (signature Σ) fails since <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes; Distinctness Maximalism (signature Σ) fails since <span class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does not prove.</p>
-<p><em>General argument <code>arguments/sigma-top</code>. It requires that Every constant of Σ is relational, and each denotes the top element of its type. Here: This is the interpretation the definition fixes. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic; it uses nothing about the model.</p>
+<p>The pure sentence <span class="math inline">\exists p_1\ldots
+p_n\bigwedge_{i&lt;j}p_i\ne p_j</span> is true at the evaluation object
+and false at the world <span class="math inline">V</span> after it and
+at every world after <span class="math inline">V</span>; so <span
+class="math inline">\Diamond</span> of it is false at <span
+class="math inline">V</span>, and <span
+class="math inline">\Box\Diamond</span> of it false at the evaluation
+object. (The chain’s own argument of 25 September, stated once.)</p>
+<p><em>General argument <code>arguments/fewer-propositions-after</code>.
+It requires that For some <span class="math inline">n</span>, the
+evaluation object has <span class="math inline">n</span> distinct
+propositions, while some world after it, and every world after that one,
+has fewer. Here: The root has four propositions; <span
+class="math inline">C_0</span>, after which there is only itself, has
+two. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-06.</em></p>
+<h3 id="fails-possible-infinity-type-t.">Fails Possible Infinity (type
+t).</h3>
+<p>At a world with <span class="math inline">n</span> propositions, the
+numeral <span
+class="math inline">\operatorname{Suc}^n_t\mathbf{0}_t</span>, a finite
+cardinality, holds of the universal property of propositions, so the
+Axiom of Infinity at type <span class="math inline">t</span> fails
+there. It fails at every world, so Possible Infinity at type <span
+class="math inline">t</span> fails.</p>
+<p><em>General argument
+<code>arguments/finitely-many-propositions-everywhere</code>. It
+requires that There are finitely many propositions at every object
+reachable from the evaluation point. Here: The root has four
+propositions and <span class="math inline">C_0</span> two. By Claude
+Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<h3
+id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails
+Witnessed Possibility, Separated Structure, Independence (signature Σ),
+Maximalism (signature Σ).</h3>
+<p>Let <span class="math inline">c\in\Sigma</span> have relational type
+<span class="math inline">\tau</span>, so <span
+class="math inline">c=\top_\tau</span> necessarily. Witnessed
+Possibility fails for the pure formula <span
+class="math inline">x\ne\top_\tau</span>, witnessed by <span
+class="math inline">\bot_\tau</span> but impossible of <span
+class="math inline">c</span>; Separated Structure fails since <span
+class="math inline">\lambda x\, .\,x</span> and <span
+class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span
+class="math inline">c</span> and differ; Independence (signature Σ)
+fails since <span class="math inline">c</span> denotes what the closed
+pure term <span class="math inline">\top_\tau</span> denotes;
+Distinctness Maximalism (signature Σ) fails since <span
+class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does
+not prove.</p>
+<p><em>General argument <code>arguments/sigma-top</code>. It requires
+that Every constant of Σ is relational, and each denotes the top element
+of its type. Here: This is the interpretation the definition fixes. By
+Claude Fable 5.1 (Anthropic), at Cian Dorr’s request,
+2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic; it uses nothing about the model.</p>
 <h2 id="notes">Notes</h2>
-<p>Verdicts the engine derives, checked directly. □Well-Ordering: a well-ordering in <span class="math inline">V</span> of a root domain is the root extension of a root relation with any definable <span class="math inline">C_0</span>-extension, the well-ordering conditions being unboxed, and at <span class="math inline">C_0</span> the full domain contains a well-ordering of each type. Functionality fails at type <span class="math inline">(et)t</span>: the property of properties of individuals in the argument for the failure of BF and the one with <span class="math inline">C_0</span>-extension <span class="math inline">\mathcal P(\mathbb N)^{V[G]}</span> take the same value, the necessary proposition, at every root property of individuals and differ at <span class="math inline">C_0</span> on the Cohen real. ND fails at type <span class="math inline">t</span>: the proposition true at the root alone and the one true nowhere are distinct at the root and both become the false proposition at <span class="math inline">C_0</span>; and the pure sentence that ND fails at type <span class="math inline">t</span> is true at the root and false at <span class="math inline">C_0</span>, so No Pure Contingency fails. Atomicity fails at type <span class="math inline">(et)t</span>, as atomicity-and-rigid-comprehension-imply-rigid-power requires: the root property <span class="math inline">Z</span> of properties of individuals with empty root extension and <span class="math inline">C_0</span>-extension the reals of <span class="math inline">V[G]</span> not in <span class="math inline">V</span> is not bottom, and a root property <span class="math inline">A</span> below it has a definable <span class="math inline">C_0</span>-extension <span class="math inline">g</span> of new reals; were <span class="math inline">A</span> an atom with <span class="math inline">c\in g</span>, then for each <span class="math inline">n</span> the root property with <span class="math inline">C_0</span>-extension <span class="math inline">\{x\in g : x(n)=c(n)\}</span>, definable from <span class="math inline">g</span> and the bit <span class="math inline">c(n)</span>, would lie below <span class="math inline">A</span> and not be bottom, hence be <span class="math inline">A</span>, so that <span class="math inline">g=\{c\}</span> and <span class="math inline">c</span> would be definable from parameters in <span class="math inline">V</span>, hence in <span class="math inline">V</span>. At type <span class="math inline">et</span>, by contrast, every nonbottom property has an atom below it, since a nonempty definable set of natural numbers has a definable singleton below it.</p>
-<p>The source’s Theorem 20 (first- and second-order continuum contingency with □Rigid Comprehension and □Relational Choice) and Theorem 21 (the same with □Atomicity at type <span class="math inline">t</span>), in the simplest instance of the construction. In the source’s terms the reals, the rigid properties of natural numbers, are persistent but not inextensible: new reals appear at <span class="math inline">C_0</span>. The construction presupposes a generic filter, so, as always with forcing, what it establishes is consistency relative to ZFC; a countable transitive ground model, or Boolean-valued names, turns it into a construction in ZFC. The source varies the construction: any <span class="math inline">V</span>-decisive forcing in place of Cohen forcing (Theorem 20 varies the continuum hypothesis either way), a finite group <span class="math inline">W</span> of automorphisms of the root (Theorem 21), the canonical coin-toss model in place of the extensional one with <span class="math inline">W</span> the reals of <span class="math inline">V</span> (Theorem 22, which gives Recombination, not a principle of the map, and refutes Atomicity at type <span class="math inline">t</span>, Corollary 23, answering a conjecture of Christopher Sun; on the map □Rigid Comprehension without Atomicity at type <span class="math inline">t</span> is already witnessed by symmetric-collapse-pair), and iterated stitching (§10). Only the simplest instance is recorded. It is the first model on the map with Atomicity at type <span class="math inline">t</span> and □Rigid Comprehension in which Rigid Power fails; it separates □Strong Leibniz (type <span class="math inline">t</span>) with □Rigid Comprehension from BF at the relational types and from Atomicity at the higher types; and it shows that the Atomicity in atomicity-and-rigid-comprehension-imply-rigid-power cannot be weakened to type <span class="math inline">t</span>.</p>
+<p>Verdicts the engine derives, checked directly. □Well-Ordering: a
+well-ordering in <span class="math inline">V</span> of a root domain is
+the root extension of a root relation with any definable <span
+class="math inline">C_0</span>-extension, the well-ordering conditions
+being unboxed, and at <span class="math inline">C_0</span> the full
+domain contains a well-ordering of each type. Functionality fails at
+type <span class="math inline">(et)t</span>: the property of properties
+of individuals in the argument for the failure of BF and the one with
+<span class="math inline">C_0</span>-extension <span
+class="math inline">\mathcal P(\mathbb N)^{V[G]}</span> take the same
+value, the necessary proposition, at every root property of individuals
+and differ at <span class="math inline">C_0</span> on the Cohen real. ND
+fails at type <span class="math inline">t</span>: the proposition true
+at the root alone and the one true nowhere are distinct at the root and
+both become the false proposition at <span
+class="math inline">C_0</span>; and the pure sentence that ND fails at
+type <span class="math inline">t</span> is true at the root and false at
+<span class="math inline">C_0</span>, so No Pure Contingency fails.
+Atomicity fails at type <span class="math inline">(et)t</span>, as
+atomicity-and-rigid-comprehension-imply-rigid-power requires: the root
+property <span class="math inline">Z</span> of properties of individuals
+with empty root extension and <span
+class="math inline">C_0</span>-extension the reals of <span
+class="math inline">V[G]</span> not in <span
+class="math inline">V</span> is not bottom, and a root property <span
+class="math inline">A</span> below it has a definable <span
+class="math inline">C_0</span>-extension <span
+class="math inline">g</span> of new reals; were <span
+class="math inline">A</span> an atom with <span class="math inline">c\in
+g</span>, then for each <span class="math inline">n</span> the root
+property with <span class="math inline">C_0</span>-extension <span
+class="math inline">\{x\in g : x(n)=c(n)\}</span>, definable from <span
+class="math inline">g</span> and the bit <span
+class="math inline">c(n)</span>, would lie below <span
+class="math inline">A</span> and not be bottom, hence be <span
+class="math inline">A</span>, so that <span
+class="math inline">g=\{c\}</span> and <span
+class="math inline">c</span> would be definable from parameters in <span
+class="math inline">V</span>, hence in <span
+class="math inline">V</span>. At type <span
+class="math inline">et</span>, by contrast, every nonbottom property has
+an atom below it, since a nonempty definable set of natural numbers has
+a definable singleton below it.</p>
+<p>The source’s Theorem 20 (first- and second-order continuum
+contingency with □Rigid Comprehension and □Relational Choice, though not
+the contingency of CH) and Theorem 21 (the same with □Atomicity at type
+<span class="math inline">t</span>), in the simplest instance of the
+construction. In the source’s terms the reals, the rigid properties of
+natural numbers, are persistent but not inextensible: new reals appear
+at <span class="math inline">C_0</span>. The construction presupposes a
+generic filter, so, as always with forcing, what it establishes is
+consistency relative to ZFC; a countable transitive ground model, or
+Boolean-valued names, turns it into a construction in ZFC. The source
+varies the construction: any <span class="math inline">V</span>-decisive
+forcing in place of Cohen forcing (Theorem 20 varies the continuum
+hypothesis either way), a finite group <span
+class="math inline">W</span> of automorphisms of the root (Theorem 21),
+the canonical coin-toss model in place of the extensional one with <span
+class="math inline">W</span> the reals of <span
+class="math inline">V</span> (Theorem 22, which gives Recombination, not
+a principle of the map, and refutes Atomicity at type <span
+class="math inline">t</span>, Corollary 23, answering a conjecture of
+Christopher Sun; on the map □Rigid Comprehension without Atomicity at
+type <span class="math inline">t</span> is already witnessed by
+symmetric-collapse-pair), and iterated stitching (§10). This record is
+the simplest instance; a single Cohen real leaves CH as it was, so
+Non-contingency of CH holds here, and the instance of Theorem 20 that
+changes CH is stitched-ch-reversing. It is the first model on the map
+with Atomicity at type <span class="math inline">t</span> and □Rigid
+Comprehension in which Rigid Power fails; it separates □Strong Atomicity
+(type <span class="math inline">t</span>) with □Rigid Comprehension from
+BF at the relational types and from Atomicity at the higher types; and
+it shows that the Atomicity in
+atomicity-and-rigid-comprehension-imply-rigid-power cannot be weakened
+to type <span class="math inline">t</span>.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Continuum Contingency</strong> — Neil Barton and Zachary Goodsell, Continuum Contingency, draft of 14 October 2026, §7.1 (V-decisive forcing), §7.2 (BBK and action models, the canonical extensional model), §8 (the stitching construction, Definition 1 and Lemmas 11–19), Theorem 20 and Theorem 21.</li>
+<li><strong>Continuum Contingency</strong> — Neil Barton and Zachary
+Goodsell, Continuum Contingency, draft of 14 October 2026, §7.1
+(V-decisive forcing), §7.2 (BBK and action models, the canonical
+extensional model), §8 (the stitching construction, Definition 1 and
+Lemmas 11–19), Theorem 20 and Theorem 21.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/models/stitched-cohen-extension.yaml</code>
+Record:
+<code>topics/classicism/models/stitched-cohen-extension.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Continuum Contingency.</strong> Barton, Neil, and Zachary Goodsell. Continuum Contingency. Draft dated 14 October 2026, 47 pages. Stitches a ground model of set theory to the canonical model of a forcing extension to show that Classicism with □Rigid Comprehension, □Relational Choice and an axiom of infinity is consistent with first- and second-order continuum contingency, together with □Atomicity at type t (Theorem 21) or with Recombination (Theorem 22, which refutes Atomicity at type t, Corollary 23); formalizes the coin-toss argument (Theorem 9). Read directly on 19 October 2026; locators refer to this draft. — §8, Definition 1, Lemmas 11–19, Theorems 20–21; §7.2.5; §7.1</li>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3, pp. 44–61. Action models, of which the stitched model is one; see §7.2 of the draft.</li>
+<li><strong>Proof: Continuum Contingency.</strong> Barton, Neil, and
+Zachary Goodsell. Continuum Contingency. Draft dated 14 October 2026, 47
+pages. Stitches a ground model of set theory to the canonical model of a
+forcing extension to show that Classicism with □Rigid Comprehension,
+□Relational Choice and an axiom of infinity is consistent with first-
+and second-order continuum contingency, together with □Atomicity at type
+t (Theorem 21) or with Recombination (Theorem 22, which refutes
+Atomicity at type t, Corollary 23); formalizes the coin-toss argument
+(Theorem 9). Read directly on 19 October 2026; locators refer to this
+draft. — §8, Definition 1, Lemmas 11–19, Theorems 20–21; §7.2.5;
+§7.1</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §3,
+pp. 44–61. Action models, of which the stitched model is one; see §7.2
+of the draft.</li>
 </ul>
 </body></html>

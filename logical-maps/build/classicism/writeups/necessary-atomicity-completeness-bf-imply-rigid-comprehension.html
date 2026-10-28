@@ -323,32 +323,147 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Boxed Atomicity, Boolean Completeness and BF imply Rigid Comprehension</h1></header><blockquote>
-<p><strong>Status: conjectured (downgraded 28 September 2026).</strong> The source’s proof has two gaps, marked <strong>Gap (a)</strong> and <strong>Gap (b)</strong> below. They were found by an agent working in the Lean-Classicism formalization project, and Cian Dorr agreed with the diagnosis. The argument below is the source’s, as transcribed on 17 September. It is kept so that the gaps can be seen in place; it is not a proof. See the record’s notes for what is proved and what would settle the question.</p>
+<p><strong>Status: conjectured (downgraded 28 September 2026).</strong>
+The source’s proof has two gaps, marked <strong>Gap (a)</strong> and
+<strong>Gap (b)</strong> below. They were found by an agent working in
+the Lean-Classicism formalization project, and Cian Dorr agreed with the
+diagnosis. The argument below is the source’s, as transcribed on 17
+September. It is kept so that the gaps can be seen in place; it is not a
+proof. See the record’s notes for what is proved and what would settle
+the question.</p>
 </blockquote>
-<p>Assume boxed Atomicity, Boolean Completeness and BF, with the map’s fixed type range. The conclusion is Rigid Comprehension. This is Proposition 2.11 of Bacon and Dorr, <em>Classicism</em> (16 May 2023 draft), p. 30, with the proof in note 42.</p>
-<p>Here is the unary case from that proof. Let <span class="math inline">X</span> be a property. Let <span class="math inline">F</span> be the property of being the haecceity of an <span class="math inline">X</span>-instance, and let <span class="math inline">X^*</span> be the least upper bound of <span class="math inline">F</span>. Boolean Completeness supplies this upper bound by Boolean duality. We verify that <span class="math inline">X^*</span> is a rigid coextension of <span class="math inline">X</span>.</p>
-<p>If <span class="math inline">Xz</span>, the haecceity of <span class="math inline">z</span> belongs to <span class="math inline">F</span> and entails <span class="math inline">X^*</span>, so <span class="math inline">X^*z</span>. For the converse, boxed Atomicity gives Atomicity by T; together with BF, Proposition 2.7 gives Actuality. Let <span class="math inline">w</span> witness Actuality. The property <span class="math inline">\lambda y\, .\,w\to Xy</span> is an upper bound of <span class="math inline">F</span>: for an <span class="math inline">X</span>-instance <span class="math inline">z</span>, <span class="math inline">w</span> entails <span class="math inline">Xz</span>, and identity elimination gives the required necessary conditional for its haecceity. Minimality of <span class="math inline">X^*</span> now gives <span class="math inline">X^*\le\lambda y\, .\,w\to Xy</span>. Since <span class="math inline">w</span> is true, <span class="math inline">X^*z</span> entails <span class="math inline">Xz</span> materially. This proves coextension.</p>
-<p>For persistence, every haecceity in <span class="math inline">F</span> entails <span class="math inline">X^*</span>. NI therefore makes it entail <span class="math inline">\lambda y\, .\,\Box X^*y</span> as well. This last property is another upper bound of <span class="math inline">F</span>. Minimality gives <span class="math inline">X^*\le\lambda y\, .\,\Box X^*y</span>.</p>
-<p>For inextensibility, fix <span class="math inline">Y,z</span>. Suppose, towards contradiction,</p>
+<p>Assume boxed Atomicity, Boolean Completeness and BF, with the map’s
+fixed type range. The conclusion is Rigid Comprehension. This is
+Proposition 2.11 of Bacon and Dorr, <em>Classicism</em> (16 May 2023
+draft), p. 30, with the proof in note 42.</p>
+<p>Here is the unary case from that proof. Let <span
+class="math inline">X</span> be a property. Let <span
+class="math inline">F</span> be the property of being the haecceity of
+an <span class="math inline">X</span>-instance, and let <span
+class="math inline">X^*</span> be the least upper bound of <span
+class="math inline">F</span>. Boolean Completeness supplies this upper
+bound by Boolean duality. We verify that <span
+class="math inline">X^*</span> is a rigid coextension of <span
+class="math inline">X</span>.</p>
+<p>If <span class="math inline">Xz</span>, the haecceity of <span
+class="math inline">z</span> belongs to <span
+class="math inline">F</span> and entails <span
+class="math inline">X^*</span>, so <span
+class="math inline">X^*z</span>. For the converse, boxed Atomicity gives
+Atomicity by T; together with BF, Proposition 2.7 gives Actuality. Let
+<span class="math inline">w</span> witness Actuality. The property <span
+class="math inline">\lambda y\, .\,w\to Xy</span> is an upper bound of
+<span class="math inline">F</span>: for an <span
+class="math inline">X</span>-instance <span
+class="math inline">z</span>, <span class="math inline">w</span> entails
+<span class="math inline">Xz</span>, and identity elimination gives the
+required necessary conditional for its haecceity. Minimality of <span
+class="math inline">X^*</span> now gives <span
+class="math inline">X^*\le\lambda y\, .\,w\to Xy</span>. Since <span
+class="math inline">w</span> is true, <span
+class="math inline">X^*z</span> entails <span
+class="math inline">Xz</span> materially. This proves coextension.</p>
+<p>For persistence, every haecceity in <span
+class="math inline">F</span> entails <span
+class="math inline">X^*</span>. NI therefore makes it entail <span
+class="math inline">\lambda y\, .\,\Box X^*y</span> as well. This last
+property is another upper bound of <span class="math inline">F</span>.
+Minimality gives <span class="math inline">X^*\le\lambda y\, .\,\Box
+X^*y</span>.</p>
+<p>For inextensibility, fix <span class="math inline">Y,z</span>.
+Suppose, towards contradiction,</p>
 <p><span class="math display">
 \Diamond\bigl((\forall x\, .\,X^*x\to\Box Yx)
   \land\Diamond(X^*z\land\neg Yz)\bigr).
 </span></p>
-<p>Use Atomicity to choose an atom <span class="math inline">w</span> below the displayed possible proposition. Boxed Atomicity supplies an atom beneath the further possible <span class="math inline">X^*z\land\neg Yz</span>. BF brings a witness <span class="math inline">w&#39;</span> into the present domain so that <span class="math inline">w</span> entails</p>
+<p>Use Atomicity to choose an atom <span class="math inline">w</span>
+below the displayed possible proposition. Boxed Atomicity supplies an
+atom beneath the further possible <span
+class="math inline">X^*z\land\neg Yz</span>. BF brings a witness <span
+class="math inline">w&#39;</span> into the present domain so that <span
+class="math inline">w</span> entails</p>
 <p><span class="math display">
 (\forall x\, .\,X^*x\to\Box Yx)\land
 \operatorname{Atom}_t(w&#39;)\land w&#39;\le(X^*z\land\neg Yz).
 </span></p>
-<p>Use Boolean Completeness to normalize this witness as in note 42: replace it by the greatest lower bound of the propositions <span class="math inline">p</span> such that <span class="math inline">w\le(p=w&#39;)</span>. The replacement remains identified with the old witness under <span class="math inline">w</span> and is itself the greatest lower bound of its corresponding identity class. Denote this normalized witness again by <span class="math inline">w&#39;</span>.</p>
-<p><strong>Gap (b).</strong> Nothing in the premises makes the replacement identified with the old witness under <span class="math inline">w</span>. Call the GLB <span class="math inline">w&#39;&#39;</span>. The rest of the argument needs <span class="math inline">w\le(w&#39;&#39;=w&#39;)</span>, so that <span class="math inline">w&#39;&#39;</span> is still possible and still below <span class="math inline">X^*z\land\neg Yz</span> where <span class="math inline">w</span> holds. The claim that <span class="math inline">w&#39;&#39;</span> is again the GLB of its own class does not supply this, and □BF does not help. A propositional structure in which the step fails is sketched in the Lean-Classicism project’s <code>VERIFICATION.md</code>, §“Proposition 2.11”. It has not been extended to a model of C with all the premises.</p>
-<p>Set <span class="math inline">H=\lambda x\, .\,w&#39;\to Yx</span>. For any <span class="math inline">u</span> satisfying <span class="math inline">Xu</span>, coextension and persistence give <span class="math inline">\Box X^*u</span>. Thus <span class="math inline">w</span> entails <span class="math inline">X^*u</span>, then <span class="math inline">\Box Yu</span>, and hence <span class="math inline">w&#39;\le Yu</span>. The normalization makes the last entailment hold outright: <span class="math inline">w</span> identifies <span class="math inline">w&#39;</span> with <span class="math inline">w&#39;\land Yu</span>, so <span class="math inline">w&#39;\land Yu</span> lies in the class whose greatest lower bound is <span class="math inline">w&#39;</span>. It follows that <span class="math inline">w&#39;\le w&#39;\land Yu</span>, and consequently <span class="math inline">w&#39;\le Yu</span>. Thus <span class="math inline">\Box Hu</span>.</p>
-<p>NI now shows that every haecceity in <span class="math inline">F</span> entails <span class="math inline">H</span>. Hence <span class="math inline">H</span> is an upper bound of <span class="math inline">F</span> and <span class="math inline">X^*\le H</span>. But <span class="math inline">w&#39;</span> is possible (it is possibly an atom) and entails <span class="math inline">X^*z\land\neg Yz</span>. Together with <span class="math inline">X^*\le H</span>, this would make it entail <span class="math inline">Yz</span> as well, a contradiction.</p>
-<p>We have proved the necessary conditional for arbitrary <span class="math inline">Y,z</span>. BF closes these object variables under the box to give the Inextensible condition.</p>
-<p><strong>Gap (a).</strong> The conditional holds pointwise in <span class="math inline">Y</span> and <span class="math inline">z</span>. Closing these variables under the box takes the Barcan formula inside the box, which is □BF, not BF. Cian Dorr agreed. Restructuring the argument around a restriction principle removes this gap (see the record’s notes), but not Gap (b). Together with persistence this makes <span class="math inline">X^*</span> rigid. For a relation with several arguments, use tuple-haecceities, replace the displayed variable by that finite tuple, and apply the corresponding BF instances; the same upper-bound argument applies. Empty tuples give the propositional case.</p>
-<p>The source’s note 42 cites Proposition 2.6 when obtaining Actuality. The derivation above uses Proposition 2.7, which has the required assumptions without adding C5. The normalization step is the one supplied in note 42, not an assumption of choice or of necessary completeness; it is where Gap (b) lies.</p>
-<p>Mathematical source: Andrew Bacon and Cian Dorr. Recorded by OpenAI Codex (GPT-6), 17 September 2026. No independent checker or Lean verification is claimed. The gaps were found on 28 September 2026 in the Lean-Classicism project, and the record was downgraded to a conjecture the same day.</p>
+<p>Use Boolean Completeness to normalize this witness as in note 42:
+replace it by the greatest lower bound of the propositions <span
+class="math inline">p</span> such that <span
+class="math inline">w\le(p=w&#39;)</span>. The replacement remains
+identified with the old witness under <span class="math inline">w</span>
+and is itself the greatest lower bound of its corresponding identity
+class. Denote this normalized witness again by <span
+class="math inline">w&#39;</span>.</p>
+<p><strong>Gap (b).</strong> Nothing in the premises makes the
+replacement identified with the old witness under <span
+class="math inline">w</span>. Call the GLB <span
+class="math inline">w&#39;&#39;</span>. The rest of the argument needs
+<span class="math inline">w\le(w&#39;&#39;=w&#39;)</span>, so that <span
+class="math inline">w&#39;&#39;</span> is still possible and still below
+<span class="math inline">X^*z\land\neg Yz</span> where <span
+class="math inline">w</span> holds. The claim that <span
+class="math inline">w&#39;&#39;</span> is again the GLB of its own class
+does not supply this, and □BF does not help. A propositional structure
+in which the step fails is sketched in the Lean-Classicism project’s
+<code>VERIFICATION.md</code>, §“Proposition 2.11”. It has not been
+extended to a model of C with all the premises.</p>
+<p>Set <span class="math inline">H=\lambda x\, .\,w&#39;\to Yx</span>.
+For any <span class="math inline">u</span> satisfying <span
+class="math inline">Xu</span>, coextension and persistence give <span
+class="math inline">\Box X^*u</span>. Thus <span
+class="math inline">w</span> entails <span
+class="math inline">X^*u</span>, then <span class="math inline">\Box
+Yu</span>, and hence <span class="math inline">w&#39;\le Yu</span>. The
+normalization makes the last entailment hold outright: <span
+class="math inline">w</span> identifies <span
+class="math inline">w&#39;</span> with <span
+class="math inline">w&#39;\land Yu</span>, so <span
+class="math inline">w&#39;\land Yu</span> lies in the class whose
+greatest lower bound is <span class="math inline">w&#39;</span>. It
+follows that <span class="math inline">w&#39;\le w&#39;\land Yu</span>,
+and consequently <span class="math inline">w&#39;\le Yu</span>. Thus
+<span class="math inline">\Box Hu</span>.</p>
+<p>NI now shows that every haecceity in <span
+class="math inline">F</span> entails <span class="math inline">H</span>.
+Hence <span class="math inline">H</span> is an upper bound of <span
+class="math inline">F</span> and <span class="math inline">X^*\le
+H</span>. But <span class="math inline">w&#39;</span> is possible (it is
+possibly an atom) and entails <span class="math inline">X^*z\land\neg
+Yz</span>. Together with <span class="math inline">X^*\le H</span>, this
+would make it entail <span class="math inline">Yz</span> as well, a
+contradiction.</p>
+<p>We have proved the necessary conditional for arbitrary <span
+class="math inline">Y,z</span>. BF closes these object variables under
+the box to give the Inextensible condition.</p>
+<p><strong>Gap (a).</strong> The conditional holds pointwise in <span
+class="math inline">Y</span> and <span class="math inline">z</span>.
+Closing these variables under the box takes the Barcan formula inside
+the box, which is □BF, not BF. Cian Dorr agreed. Restructuring the
+argument around a restriction principle removes this gap (see the
+record’s notes), but not Gap (b). Together with persistence this makes
+<span class="math inline">X^*</span> rigid. For a relation with several
+arguments, use tuple-haecceities, replace the displayed variable by that
+finite tuple, and apply the corresponding BF instances; the same
+upper-bound argument applies. Empty tuples give the propositional
+case.</p>
+<p>The source’s note 42 cites Proposition 2.6 when obtaining Actuality.
+The derivation above uses Proposition 2.7, which has the required
+assumptions without adding C5. The normalization step is the one
+supplied in note 42, not an assumption of choice or of necessary
+completeness; it is where Gap (b) lies.</p>
+<p>Mathematical source: Andrew Bacon and Cian Dorr. Recorded by OpenAI
+Codex (GPT-6), 17 September 2026. No independent checker or Lean
+verification is claimed. The gaps were found on 28 September 2026 in the
+Lean-Classicism project, and the record was downgraded to a conjecture
+the same day.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Proposition 2.11, p. 30 and n. 42</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Proposition 2.11, p. 30 and n. 42</li>
 </ul>
 </body></html>

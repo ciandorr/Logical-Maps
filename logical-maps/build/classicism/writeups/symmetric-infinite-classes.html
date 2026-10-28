@@ -322,215 +322,553 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric ideally-full model: automorphisms of infinitely many infinite classes</h1></header><p>Construction idea: Cian Dorr, 27 September 2026. He proposed a symmetric finitely pinned model whose symmetry group preserves a rich qualitative structure, so that each newly pinned point makes new infinite-coinfinite extensions available. Claude Opus 5.5 (Anthropic) chose the structure and wrote the verification below; the Inextensible Comprehension argument was added on 28 September 2026. Not yet independently checked.</p>
-<p>The framework and the lemmas cited are from Dorr, <em>Boolean Completeness does not imply Rigid Comprehension</em>, draft of 30 July 2026, §3 and the section on the Boolean Completeness theorem.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric ideally-full model: automorphisms of infinitely many infinite classes</h1></header><p>Construction idea: Cian Dorr, 27 September 2026. He proposed a
+symmetric finitely pinned model whose symmetry group preserves a rich
+qualitative structure, so that each newly pinned point makes new
+infinite-coinfinite extensions available. Claude Opus 5.5 (Anthropic)
+chose the structure and wrote the verification below; the Inextensible
+Comprehension argument was added on 28 September 2026. Not yet
+independently checked.</p>
+<p>The framework and the lemmas cited are from Dorr, <em>Boolean
+Completeness does not imply Rigid Comprehension</em>, draft of 30 July
+2026, §3 and the section on the Boolean Completeness theorem.</p>
 <p><strong>Summary.</strong></p>
 <ul>
-<li>Transversal fails, at type <span class="math inline">e</span>. The model is the first on the map to refute it, so Transversal is not a theorem of C.</li>
-<li>Inextensible Comprehension holds, at every relational type. So Inextensible Comprehension does not imply Transversal.</li>
-<li>Boolean Completeness, BF and No Pure Contingency hold, with their boxed forms.</li>
-<li>Actuality, Relational Choice, Atomicity at type <span class="math inline">t</span> and ND fail.</li>
+<li>Transversal fails, at type <span class="math inline">e</span>. The
+model is the first on the map to refute it, so Transversal is not a
+theorem of C.</li>
+<li>Inextensible Comprehension holds, at every relational type. So
+Inextensible Comprehension does not imply Transversal.</li>
+<li>Boolean Completeness, BF and No Pure Contingency hold, with their
+boxed forms.</li>
+<li>Actuality, Relational Choice, Atomicity at type <span
+class="math inline">t</span> and ND fail.</li>
 </ul>
 <h2 id="the-model">The model</h2>
 <ul>
-<li><strong>Individuals.</strong> One object, <span class="math inline">\mathbb N</span>, carrying an equivalence relation <span class="math inline">\sim</span> with infinitely many classes, each infinite.</li>
-<li><strong>Arrows (worlds).</strong> All the surjections <span class="math inline">\mathbb N\to\mathbb N</span>, as in the draft’s Base 1. The worlds are the arrows. World <span class="math inline">h</span> sees <span class="math inline">k\circ h</span> for every arrow <span class="math inline">k</span>. The evaluation point is the identity arrow <span class="math inline">1</span>.</li>
-<li><strong>Symmetry group.</strong> <span class="math inline">G:=\mathrm{Aut}(\mathbb N,\sim)</span>, the permutations that map classes onto classes.
+<li><strong>Individuals.</strong> One object, <span
+class="math inline">\mathbb N</span>, carrying an equivalence relation
+<span class="math inline">\sim</span> with infinitely many classes, each
+infinite.</li>
+<li><strong>Arrows (worlds).</strong> All the surjections <span
+class="math inline">\mathbb N\to\mathbb N</span>, as in the draft’s Base
+1. The worlds are the arrows. World <span class="math inline">h</span>
+sees <span class="math inline">k\circ h</span> for every arrow <span
+class="math inline">k</span>. The evaluation point is the identity arrow
+<span class="math inline">1</span>.</li>
+<li><strong>Symmetry group.</strong> <span
+class="math inline">G:=\mathrm{Aut}(\mathbb N,\sim)</span>, the
+permutations that map classes onto classes.
 <ul>
 <li>Its members are arrows, so this is a base in the draft’s sense.</li>
-<li><span class="math inline">(\mathbb N,\sim)</span> is homogeneous: a finite partial map that is injective and preserves both <span class="math inline">\sim</span> and <span class="math inline">\not\sim</span> extends to a member of <span class="math inline">G</span>.</li>
+<li><span class="math inline">(\mathbb N,\sim)</span> is homogeneous: a
+finite partial map that is injective and preserves both <span
+class="math inline">\sim</span> and <span
+class="math inline">\not\sim</span> extends to a member of <span
+class="math inline">G</span>.</li>
 </ul></li>
-<li><strong>Domains.</strong> The symmetric ideally-full model: each relational domain holds the intensions that are symmetric and pinned down by some finite set. The draft proves that such a premodel is a model of C, for every base.</li>
+<li><strong>Domains.</strong> The symmetric ideally-full model: each
+relational domain holds the intensions that are symmetric and pinned
+down by some finite set. The draft proves that such a premodel is a
+model of C, for every base.</li>
 </ul>
 <h2 id="notation-and-basic-facts">Notation and basic facts</h2>
-<p>An intension <span class="math inline">A</span> of relational type is a set of pairs <span class="math inline">\langle\bar x,w\rangle</span>, where <span class="math inline">w</span> is an arrow and <span class="math inline">\bar x</span> is a tuple of entities.</p>
+<p>An intension <span class="math inline">A</span> of relational type is
+a set of pairs <span class="math inline">\langle\bar x,w\rangle</span>,
+where <span class="math inline">w</span> is an arrow and <span
+class="math inline">\bar x</span> is a tuple of entities.</p>
 <ul>
-<li><strong>Extension at a world.</strong> Write <span class="math inline">A_w:=\{\bar x : \langle\bar x,w\rangle\in A\}</span>. The extension at the evaluation point is <span class="math inline">A_1</span>.</li>
-<li><strong>Transport.</strong> For an arrow <span class="math inline">h</span>, <span class="math inline">h\cdot A:=\{\langle\bar x,k\rangle :
-\langle\bar x,k\circ h\rangle\in A\}</span>, so <span class="math inline">(h\cdot A)_k=A_{k\circ h}</span>.
+<li><strong>Extension at a world.</strong> Write <span
+class="math inline">A_w:=\{\bar x : \langle\bar x,w\rangle\in
+A\}</span>. The extension at the evaluation point is <span
+class="math inline">A_1</span>.</li>
+<li><strong>Transport.</strong> For an arrow <span
+class="math inline">h</span>, <span class="math inline">h\cdot
+A:=\{\langle\bar x,k\rangle :
+\langle\bar x,k\circ h\rangle\in A\}</span>, so <span
+class="math inline">(h\cdot A)_k=A_{k\circ h}</span>.
 <ul>
 <li>On individuals, <span class="math inline">h\cdot x=h(x)</span>.</li>
-<li>Transport is functorial: <span class="math inline">(k\circ h)\cdot A=k\cdot(h\cdot A)</span>.</li>
+<li>Transport is functorial: <span class="math inline">(k\circ h)\cdot
+A=k\cdot(h\cdot A)</span>.</li>
 </ul></li>
-<li><strong>Pinning.</strong> <span class="math inline">A</span> is pinned down by <span class="math inline">N</span> iff <span class="math inline">h\cdot A=h&#39;\cdot A</span> whenever <span class="math inline">h</span> and <span class="math inline">h&#39;</span> agree on <span class="math inline">N</span>. In particular <span class="math inline">A_h=A_{h&#39;}</span> for such arrows.</li>
-<li><strong>Symmetry.</strong> <span class="math inline">A</span> is symmetric iff <span class="math inline">\langle\bar x,w\rangle\in A</span> implies <span class="math inline">\langle g\cdot\bar x,g\circ w\rangle\in A</span> for all <span class="math inline">g\in G</span>. Equivalently, <span class="math inline">A_{g\circ w}=g\cdot A_w</span>.</li>
+<li><strong>Pinning.</strong> <span class="math inline">A</span> is
+pinned down by <span class="math inline">N</span> iff <span
+class="math inline">h\cdot A=h&#39;\cdot A</span> whenever <span
+class="math inline">h</span> and <span class="math inline">h&#39;</span>
+agree on <span class="math inline">N</span>. In particular <span
+class="math inline">A_h=A_{h&#39;}</span> for such arrows.</li>
+<li><strong>Symmetry.</strong> <span class="math inline">A</span> is
+symmetric iff <span class="math inline">\langle\bar x,w\rangle\in
+A</span> implies <span class="math inline">\langle g\cdot\bar x,g\circ
+w\rangle\in A</span> for all <span class="math inline">g\in G</span>.
+Equivalently, <span class="math inline">A_{g\circ w}=g\cdot
+A_w</span>.</li>
 </ul>
 <p>Three consequences are used below.</p>
 <ul>
-<li><strong>(F1) The extension at a symmetry.</strong> For <span class="math inline">g\in G</span>, <span class="math inline">A_g=g\cdot A_1</span>, by symmetry with <span class="math inline">w=1</span>.</li>
-<li><strong>(F2) Extensions are invariant.</strong> If <span class="math inline">A</span> is pinned down by <span class="math inline">S</span> and <span class="math inline">g\in G</span> fixes <span class="math inline">S</span> pointwise, then <span class="math inline">g</span> agrees with <span class="math inline">1</span> on <span class="math inline">S</span>. So <span class="math inline">A_1=A_g=g\cdot A_1</span>.</li>
-<li><strong>(F3) Least pinning sets.</strong> With all surjections as arrows, two finite sets that pin <span class="math inline">A</span> down have an intersection that pins it down. This is the aside on least pinning sets in the draft’s section on hulls; it uses only the arrows, not <span class="math inline">G</span>. So each <span class="math inline">A</span> has a least finite pinning set <span class="math inline">T_A</span>.
+<li><strong>(F1) The extension at a symmetry.</strong> For <span
+class="math inline">g\in G</span>, <span class="math inline">A_g=g\cdot
+A_1</span>, by symmetry with <span class="math inline">w=1</span>.</li>
+<li><strong>(F2) Extensions are invariant.</strong> If <span
+class="math inline">A</span> is pinned down by <span
+class="math inline">S</span> and <span class="math inline">g\in G</span>
+fixes <span class="math inline">S</span> pointwise, then <span
+class="math inline">g</span> agrees with <span
+class="math inline">1</span> on <span class="math inline">S</span>. So
+<span class="math inline">A_1=A_g=g\cdot A_1</span>.</li>
+<li><strong>(F3) Least pinning sets.</strong> With all surjections as
+arrows, two finite sets that pin <span class="math inline">A</span> down
+have an intersection that pins it down. This is the aside on least
+pinning sets in the draft’s section on hulls; it uses only the arrows,
+not <span class="math inline">G</span>. So each <span
+class="math inline">A</span> has a least finite pinning set <span
+class="math inline">T_A</span>.
 <ul>
-<li>Since <span class="math inline">g\cdot A</span> is pinned down by <span class="math inline">g[T_A]</span> (Lemma 21), <span class="math inline">T_{g\cdot A}=g[T_A]</span>.</li>
+<li>Since <span class="math inline">g\cdot A</span> is pinned down by
+<span class="math inline">g[T_A]</span> (Lemma 21), <span
+class="math inline">T_{g\cdot A}=g[T_A]</span>.</li>
 </ul></li>
 </ul>
-<p>The <strong>orbit lemma</strong> of the draft (just before Theorem 36) is (F2) for classifiers:</p>
+<p>The <strong>orbit lemma</strong> of the draft (just before Theorem
+36) is (F2) for classifiers:</p>
 <ul>
-<li>If <span class="math inline">F</span> is pinned down by <span class="math inline">M_F</span> and <span class="math inline">g\in G</span> fixes <span class="math inline">M_F</span> pointwise, then <span class="math inline">F_1</span> is closed under <span class="math inline">g</span>: whenever <span class="math inline">F</span> holds of <span class="math inline">Y</span> at <span class="math inline">1</span>, it holds of <span class="math inline">g\cdot Y</span> at <span class="math inline">1</span>.</li>
+<li>If <span class="math inline">F</span> is pinned down by <span
+class="math inline">M_F</span> and <span class="math inline">g\in
+G</span> fixes <span class="math inline">M_F</span> pointwise, then
+<span class="math inline">F_1</span> is closed under <span
+class="math inline">g</span>: whenever <span
+class="math inline">F</span> holds of <span class="math inline">Y</span>
+at <span class="math inline">1</span>, it holds of <span
+class="math inline">g\cdot Y</span> at <span
+class="math inline">1</span>.</li>
 </ul>
-<h2 id="transversal-fails-at-type-e">Transversal fails at type <span class="math inline">e</span></h2>
+<h2 id="transversal-fails-at-type-e">Transversal fails at type <span
+class="math inline">e</span></h2>
 <p><strong>The classes are extensions of properties.</strong></p>
 <ul>
-<li>Let <span class="math inline">R:=\{\langle y,z,w\rangle : y\sim z\}</span>.
+<li>Let <span class="math inline">R:=\{\langle y,z,w\rangle : y\sim
+z\}</span>.
 <ul>
-<li>It is pinned down by <span class="math inline">\varnothing</span>, since the condition does not mention the arrow.</li>
-<li>It is symmetric, since every <span class="math inline">g\in G</span> preserves <span class="math inline">\sim</span>.</li>
-<li>So it is in the domain: <span class="math inline">\sim</span> is a qualitative relation of the model.</li>
+<li>It is pinned down by <span class="math inline">\varnothing</span>,
+since the condition does not mention the arrow.</li>
+<li>It is symmetric, since every <span class="math inline">g\in G</span>
+preserves <span class="math inline">\sim</span>.</li>
+<li>So it is in the domain: <span class="math inline">\sim</span> is a
+qualitative relation of the model.</li>
 </ul></li>
-<li>For an individual <span class="math inline">a</span>, put <span class="math inline">X_a:=\lambda y\,.\,R\,y\,a</span>, that is <span class="math inline">\{\langle y,w\rangle : y\sim w(a)\}</span>.
+<li>For an individual <span class="math inline">a</span>, put <span
+class="math inline">X_a:=\lambda y\,.\,R\,y\,a</span>, that is <span
+class="math inline">\{\langle y,w\rangle : y\sim w(a)\}</span>.
 <ul>
 <li>It is pinned down by <span class="math inline">\{a\}</span>.</li>
-<li>Its extension at <span class="math inline">1</span> is the class of <span class="math inline">a</span>.</li>
+<li>Its extension at <span class="math inline">1</span> is the class of
+<span class="math inline">a</span>.</li>
 </ul></li>
 </ul>
-<p><strong>No classifier picks a representative for every class.</strong></p>
+<p><strong>No classifier picks a representative for every
+class.</strong></p>
 <ul>
-<li>Suppose <span class="math inline">F</span> of type <span class="math inline">(e\to t)\to t</span> is pinned down by the finite set <span class="math inline">M_F</span>.</li>
-<li>Choose a class <span class="math inline">C</span> disjoint from <span class="math inline">M_F</span>, which is possible since there are infinitely many classes, and some <span class="math inline">a\in C</span>.</li>
-<li>Suppose <span class="math inline">Y</span> is the unique property in <span class="math inline">F_1</span> coextensive with <span class="math inline">X_a</span>, so <span class="math inline">Y_1=C</span>.</li>
-<li>Let <span class="math inline">H:=\{g\in G : g\text{ fixes }M_F\text{ pointwise and }g[C]=C\}</span>.</li>
+<li>Suppose <span class="math inline">F</span> of type <span
+class="math inline">(e\to t)\to t</span> is pinned down by the finite
+set <span class="math inline">M_F</span>.</li>
+<li>Choose a class <span class="math inline">C</span> disjoint from
+<span class="math inline">M_F</span>, which is possible since there are
+infinitely many classes, and some <span class="math inline">a\in
+C</span>.</li>
+<li>Suppose <span class="math inline">Y</span> is the unique property in
+<span class="math inline">F_1</span> coextensive with <span
+class="math inline">X_a</span>, so <span
+class="math inline">Y_1=C</span>.</li>
+<li>Let <span class="math inline">H:=\{g\in G : g\text{ fixes }M_F\text{
+pointwise and }g[C]=C\}</span>.</li>
 </ul>
 <ol type="1">
-<li><strong><span class="math inline">Y</span> is fixed by <span class="math inline">H</span>.</strong> Take <span class="math inline">g\in H</span>.
+<li><strong><span class="math inline">Y</span> is fixed by <span
+class="math inline">H</span>.</strong> Take <span
+class="math inline">g\in H</span>.
 <ul>
-<li>By the orbit lemma, <span class="math inline">g\cdot Y\in F_1</span>.</li>
-<li>By (F1) and symmetry, <span class="math inline">(g\cdot Y)_1=Y_g=g[Y_1]=g[C]=C</span>.</li>
-<li>So <span class="math inline">g\cdot Y</span> is also an <span class="math inline">F</span>-property coextensive with <span class="math inline">X_a</span>, and uniqueness gives <span class="math inline">g\cdot Y=Y</span>.</li>
+<li>By the orbit lemma, <span class="math inline">g\cdot Y\in
+F_1</span>.</li>
+<li>By (F1) and symmetry, <span class="math inline">(g\cdot
+Y)_1=Y_g=g[Y_1]=g[C]=C</span>.</li>
+<li>So <span class="math inline">g\cdot Y</span> is also an <span
+class="math inline">F</span>-property coextensive with <span
+class="math inline">X_a</span>, and uniqueness gives <span
+class="math inline">g\cdot Y=Y</span>.</li>
 </ul></li>
-<li><strong>So its least pinning set is <span class="math inline">H</span>-invariant.</strong> By (F3), <span class="math inline">T_Y=T_{g\cdot Y}=g[T_Y]</span> for every <span class="math inline">g\in H</span>.</li>
-<li><strong>Every finite <span class="math inline">H</span>-invariant set lies inside <span class="math inline">M_F</span>.</strong> Every point outside <span class="math inline">M_F</span> has an infinite <span class="math inline">H</span>-orbit.
+<li><strong>So its least pinning set is <span
+class="math inline">H</span>-invariant.</strong> By (F3), <span
+class="math inline">T_Y=T_{g\cdot Y}=g[T_Y]</span> for every <span
+class="math inline">g\in H</span>.</li>
+<li><strong>Every finite <span class="math inline">H</span>-invariant
+set lies inside <span class="math inline">M_F</span>.</strong> Every
+point outside <span class="math inline">M_F</span> has an infinite <span
+class="math inline">H</span>-orbit.
 <ul>
-<li><span class="math inline">H</span> contains every permutation of <span class="math inline">C</span>, extended by the identity.</li>
-<li>For each other class <span class="math inline">D</span>, <span class="math inline">H</span> contains every permutation of the infinite set <span class="math inline">D\setminus M_F</span>.</li>
+<li><span class="math inline">H</span> contains every permutation of
+<span class="math inline">C</span>, extended by the identity.</li>
+<li>For each other class <span class="math inline">D</span>, <span
+class="math inline">H</span> contains every permutation of the infinite
+set <span class="math inline">D\setminus M_F</span>.</li>
 <li>Hence <span class="math inline">T_Y\subseteq M_F</span>.</li>
 </ul></li>
-<li><strong>Contradiction.</strong> By (F2), <span class="math inline">Y_1=C</span> is invariant under every <span class="math inline">g\in G</span> fixing <span class="math inline">T_Y</span>, and so under every <span class="math inline">g</span> fixing <span class="math inline">M_F</span>. But one such <span class="math inline">g</span> swaps <span class="math inline">C</span> with another class disjoint from <span class="math inline">M_F</span> by a bijection, and is the identity elsewhere. That <span class="math inline">g</span> moves <span class="math inline">C</span>.</li>
+<li><strong>Contradiction.</strong> By (F2), <span
+class="math inline">Y_1=C</span> is invariant under every <span
+class="math inline">g\in G</span> fixing <span
+class="math inline">T_Y</span>, and so under every <span
+class="math inline">g</span> fixing <span
+class="math inline">M_F</span>. But one such <span
+class="math inline">g</span> swaps <span class="math inline">C</span>
+with another class disjoint from <span class="math inline">M_F</span> by
+a bijection, and is the identity elsewhere. That <span
+class="math inline">g</span> moves <span
+class="math inline">C</span>.</li>
 </ol>
-<p>So no <span class="math inline">F</span> in the domain witnesses the type-<span class="math inline">e</span> instance of Transversal.</p>
+<p>So no <span class="math inline">F</span> in the domain witnesses the
+type-<span class="math inline">e</span> instance of Transversal.</p>
 <p><strong>Remarks.</strong></p>
 <ul>
-<li>Only the uniqueness half is refuted, in step 1. Every property is coextensive with some <span class="math inline">F</span>-property for many <span class="math inline">F</span>.</li>
-<li>The classes must be infinite. If <span class="math inline">C</span> were finite, the property of being identical to one of its members would be pinned down by <span class="math inline">C</span> itself, and it would serve as a canonical representative.</li>
-<li>The mechanism is a failure of weak elimination of imaginaries. The class, as a definable set, has no canonical finite set of parameters: any member of it will do, and none is preferred.
+<li>Only the uniqueness half is refuted, in step 1. Every property is
+coextensive with some <span class="math inline">F</span>-property for
+many <span class="math inline">F</span>.</li>
+<li>The classes must be infinite. If <span class="math inline">C</span>
+were finite, the property of being identical to one of its members would
+be pinned down by <span class="math inline">C</span> itself, and it
+would serve as a canonical representative.</li>
+<li>The mechanism is a failure of weak elimination of imaginaries. The
+class, as a definable set, has no canonical finite set of parameters:
+any member of it will do, and none is preferred.
 <ul>
-<li>Structures that have weak elimination of imaginaries, such as a dense linear order or the random graph, give no such failure.</li>
-<li>In the binary tree with a parent function, the levels form infinitely many infinite classes. But automorphisms act on the levels as translations of <span class="math inline">\mathbb Z</span>, so fixing one node fixes every level.</li>
+<li>Structures that have weak elimination of imaginaries, such as a
+dense linear order or the random graph, give no such failure.</li>
+<li>In the binary tree with a parent function, the levels form
+infinitely many infinite classes. But automorphisms act on the levels as
+translations of <span class="math inline">\mathbb Z</span>, so fixing
+one node fixes every level.</li>
 </ul></li>
 </ul>
-<h2 id="inextensible-comprehension-holds-at-every-relational-type">Inextensible Comprehension holds at every relational type</h2>
-<p>Let <span class="math inline">X</span> be in the domain, pinned down by the finite set <span class="math inline">S</span>, with extension <span class="math inline">E:=X_1</span>.</p>
-<p><strong>Why the witness used in <code>symmetric-all-surjections</code> does not transfer.</strong></p>
+<h2
+id="inextensible-comprehension-holds-at-every-relational-type">Inextensible
+Comprehension holds at every relational type</h2>
+<p>Let <span class="math inline">X</span> be in the domain, pinned down
+by the finite set <span class="math inline">S</span>, with extension
+<span class="math inline">E:=X_1</span>.</p>
+<p><strong>Why the witness used in
+<code>symmetric-all-surjections</code> does not transfer.</strong></p>
 <ul>
-<li>There the witness was <span class="math inline">\delta_S\land X</span>, where <span class="math inline">\delta_S</span> says that no two members of <span class="math inline">S</span> are collapsed. It relied on two facts:
+<li>There the witness was <span class="math inline">\delta_S\land
+X</span>, where <span class="math inline">\delta_S</span> says that no
+two members of <span class="math inline">S</span> are collapsed. It
+relied on two facts:
 <ul>
-<li>every world that does not collapse <span class="math inline">S</span> can be relabelled by a symmetry so as to fix <span class="math inline">S</span> pointwise;</li>
-<li>once <span class="math inline">\delta_S</span> is false it stays false.</li>
+<li>every world that does not collapse <span
+class="math inline">S</span> can be relabelled by a symmetry so as to
+fix <span class="math inline">S</span> pointwise;</li>
+<li>once <span class="math inline">\delta_S</span> is false it stays
+false.</li>
 </ul></li>
-<li>Here a world can be injective on <span class="math inline">S</span> but break its <span class="math inline">\sim</span>-pattern. At such a world no symmetry relabels it to fix <span class="math inline">S</span>, and <span class="math inline">X</span>’s extension there is unrelated to <span class="math inline">E</span>.</li>
-<li>Conjoining the pattern condition does not help, because the condition is not stable: a later arrow can merge or split classes and restore it. In fact no proposition true at <span class="math inline">1</span> that implies the pattern condition stays false once false.
+<li>Here a world can be injective on <span class="math inline">S</span>
+but break its <span class="math inline">\sim</span>-pattern. At such a
+world no symmetry relabels it to fix <span class="math inline">S</span>,
+and <span class="math inline">X</span>’s extension there is unrelated to
+<span class="math inline">E</span>.</li>
+<li>Conjoining the pattern condition does not help, because the
+condition is not stable: a later arrow can merge or split classes and
+restore it. In fact no proposition true at <span
+class="math inline">1</span> that implies the pattern condition stays
+false once false.
 <ul>
-<li>Suppose <span class="math inline">\varphi</span> is pinned down by a finite <span class="math inline">V</span> and has these properties.</li>
-<li>For any world <span class="math inline">k</span>, take an arrow <span class="math inline">h</span> injective on <span class="math inline">V</span> that breaks the pattern of <span class="math inline">S</span>, and an arrow <span class="math inline">m</span> with <span class="math inline">m\circ h</span> agreeing with <span class="math inline">k</span> on <span class="math inline">V</span>.</li>
-<li>Then <span class="math inline">\varphi(h)</span> is false, so <span class="math inline">\varphi(m\circ h)=\varphi(k)</span> is false. So <span class="math inline">\varphi</span> is false everywhere, including at <span class="math inline">1</span>.</li>
+<li>Suppose <span class="math inline">\varphi</span> is pinned down by a
+finite <span class="math inline">V</span> and has these properties.</li>
+<li>For any world <span class="math inline">k</span>, take an arrow
+<span class="math inline">h</span> injective on <span
+class="math inline">V</span> that breaks the pattern of <span
+class="math inline">S</span>, and an arrow <span
+class="math inline">m</span> with <span class="math inline">m\circ
+h</span> agreeing with <span class="math inline">k</span> on <span
+class="math inline">V</span>.</li>
+<li>Then <span class="math inline">\varphi(h)</span> is false, so <span
+class="math inline">\varphi(m\circ h)=\varphi(k)</span> is false. So
+<span class="math inline">\varphi</span> is false everywhere, including
+at <span class="math inline">1</span>.</li>
 </ul></li>
 </ul>
-<p><strong>The witness: send the bad worlds to a hull, not to <span class="math inline">\varnothing</span>.</strong></p>
+<p><strong>The witness: send the bad worlds to a hull, not to <span
+class="math inline">\varnothing</span>.</strong></p>
 <ul>
-<li>The <strong>pattern condition</strong> is <span class="math inline">\pi_S:=\{w : w\text{ agrees on }S\text{ with some member of }G\}</span>. By homogeneity, <span class="math inline">w\in\pi_S</span> iff <span class="math inline">w</span> is injective on <span class="math inline">S</span> and preserves <span class="math inline">\sim</span> and <span class="math inline">\not\sim</span> there. It is symmetric, pinned down by <span class="math inline">S</span>, and true at <span class="math inline">1</span>.</li>
-<li>The <strong>hull</strong> of <span class="math inline">E</span> is <span class="math display">H_E:=\{\langle\bar r,m\rangle : \bar r=m&#39;\cdot\bar c\text{ for some }\bar c\in E\text{ and some arrow }m&#39;\text{ agreeing with }m\text{ on }S\}.</span> It is the draft’s <span class="math inline">S</span>-hull of the union of the haecceities of the members of <span class="math inline">E</span>. It is pinned down by <span class="math inline">S</span> and symmetric.</li>
-<li>The witness is <span class="math display">Y:=\lambda\bar r\,.\,(\pi_S\land X\bar r)\lor(\neg\pi_S\land H_E\bar r).</span> So <span class="math inline">Y_w=X_w</span> if <span class="math inline">w\in\pi_S</span>, and <span class="math inline">Y_w=(H_E)_w</span> otherwise.
+<li>The <strong>pattern condition</strong> is <span
+class="math inline">\pi_S:=\{w : w\text{ agrees on }S\text{ with some
+member of }G\}</span>. By homogeneity, <span
+class="math inline">w\in\pi_S</span> iff <span
+class="math inline">w</span> is injective on <span
+class="math inline">S</span> and preserves <span
+class="math inline">\sim</span> and <span
+class="math inline">\not\sim</span> there. It is symmetric, pinned down
+by <span class="math inline">S</span>, and true at <span
+class="math inline">1</span>.</li>
+<li>The <strong>hull</strong> of <span class="math inline">E</span> is
+<span class="math display">H_E:=\{\langle\bar r,m\rangle : \bar
+r=m&#39;\cdot\bar c\text{ for some }\bar c\in E\text{ and some arrow
+}m&#39;\text{ agreeing with }m\text{ on }S\}.</span> It is the draft’s
+<span class="math inline">S</span>-hull of the union of the haecceities
+of the members of <span class="math inline">E</span>. It is pinned down
+by <span class="math inline">S</span> and symmetric.</li>
+<li>The witness is <span class="math display">Y:=\lambda\bar
+r\,.\,(\pi_S\land X\bar r)\lor(\neg\pi_S\land H_E\bar r).</span> So
+<span class="math inline">Y_w=X_w</span> if <span
+class="math inline">w\in\pi_S</span>, and <span
+class="math inline">Y_w=(H_E)_w</span> otherwise.
 <ul>
-<li><span class="math inline">Y</span> is pinned down by <span class="math inline">S</span> and symmetric, so it is in the domain.</li>
-<li>It is coextensive with <span class="math inline">X</span>, since <span class="math inline">1\in\pi_S</span>.</li>
+<li><span class="math inline">Y</span> is pinned down by <span
+class="math inline">S</span> and symmetric, so it is in the domain.</li>
+<li>It is coextensive with <span class="math inline">X</span>, since
+<span class="math inline">1\in\pi_S</span>.</li>
 </ul></li>
 </ul>
 <p><strong>A sufficient condition for inextensibility.</strong></p>
 <ul>
-<li><p>By transport, <span class="math inline">Y</span> is weakly inextensible at the world <span class="math inline">h</span> iff <span class="math inline">h\cdot Y</span> is weakly inextensible at <span class="math inline">1</span>. Also <span class="math inline">(h\cdot Y)_k=Y_{k\circ h}</span> and <span class="math inline">(h\cdot Y)_1=Y_h</span>.</p></li>
-<li><p>Weak inextensibility at <span class="math inline">1</span> of <span class="math inline">Y&#39;</span> asks: if <span class="math inline">Z</span> holds necessarily of every member of <span class="math inline">Y&#39;_1</span>, then <span class="math inline">Y&#39;_k\subseteq Z_k</span> for every <span class="math inline">k</span>. The antecedent means <span class="math inline">k\cdot\bar q\in Z_k</span> for every <span class="math inline">\bar q\in Y&#39;_1</span> and every arrow <span class="math inline">k</span>.</p></li>
-<li><p>Let <span class="math inline">Z</span> be pinned down by <span class="math inline">U</span>. To show <span class="math inline">\bar r\in Z_k</span> it suffices to find <span class="math inline">\bar q\in Y&#39;_1</span> and an arrow <span class="math inline">k&#39;&#39;</span> agreeing with <span class="math inline">k</span> on <span class="math inline">U</span> with <span class="math inline">k&#39;&#39;\cdot\bar q=\bar r</span>. Then <span class="math inline">\bar r\in Z_{k&#39;&#39;}=Z_k</span>.</p></li>
-<li><p>So <span class="math inline">Y</span> is inextensible if the following holds:</p>
+<li><p>By transport, <span class="math inline">Y</span> is weakly
+inextensible at the world <span class="math inline">h</span> iff <span
+class="math inline">h\cdot Y</span> is weakly inextensible at <span
+class="math inline">1</span>. Also <span class="math inline">(h\cdot
+Y)_k=Y_{k\circ h}</span> and <span class="math inline">(h\cdot
+Y)_1=Y_h</span>.</p></li>
+<li><p>Weak inextensibility at <span class="math inline">1</span> of
+<span class="math inline">Y&#39;</span> asks: if <span
+class="math inline">Z</span> holds necessarily of every member of <span
+class="math inline">Y&#39;_1</span>, then <span
+class="math inline">Y&#39;_k\subseteq Z_k</span> for every <span
+class="math inline">k</span>. The antecedent means <span
+class="math inline">k\cdot\bar q\in Z_k</span> for every <span
+class="math inline">\bar q\in Y&#39;_1</span> and every arrow <span
+class="math inline">k</span>.</p></li>
+<li><p>Let <span class="math inline">Z</span> be pinned down by <span
+class="math inline">U</span>. To show <span class="math inline">\bar
+r\in Z_k</span> it suffices to find <span class="math inline">\bar q\in
+Y&#39;_1</span> and an arrow <span
+class="math inline">k&#39;&#39;</span> agreeing with <span
+class="math inline">k</span> on <span class="math inline">U</span> with
+<span class="math inline">k&#39;&#39;\cdot\bar q=\bar r</span>. Then
+<span class="math inline">\bar r\in Z_{k&#39;&#39;}=Z_k</span>.</p></li>
+<li><p>So <span class="math inline">Y</span> is inextensible if the
+following holds:</p>
 <blockquote>
-<p>For all arrows <span class="math inline">h,k</span>, every <span class="math inline">\bar r\in Y_{k\circ h}</span> and every finite <span class="math inline">U</span>, there are <span class="math inline">\bar q\in Y_h</span> and an arrow <span class="math inline">k&#39;&#39;</span> agreeing with <span class="math inline">k</span> on <span class="math inline">U\cup h[S]</span> with <span class="math inline">k&#39;&#39;\cdot\bar q=\bar r</span>.</p>
+<p>For all arrows <span class="math inline">h,k</span>, every <span
+class="math inline">\bar r\in Y_{k\circ h}</span> and every finite <span
+class="math inline">U</span>, there are <span class="math inline">\bar
+q\in Y_h</span> and an arrow <span
+class="math inline">k&#39;&#39;</span> agreeing with <span
+class="math inline">k</span> on <span class="math inline">U\cup
+h[S]</span> with <span class="math inline">k&#39;&#39;\cdot\bar q=\bar
+r</span>.</p>
 </blockquote>
-<p>This is a finitary form of the old-image criterion in the write-up of <code>finite-support-sections-and-projection</code>. Every world’s new extension must be covered by transports of the old one.</p></li>
+<p>This is a finitary form of the old-image criterion in the write-up of
+<code>finite-support-sections-and-projection</code>. Every world’s new
+extension must be covered by transports of the old one.</p></li>
 </ul>
 <p><strong>Verification.</strong></p>
 <ol type="1">
-<li><strong>Every extension of <span class="math inline">Y</span> lies in the hull: <span class="math inline">Y_w\subseteq(H_E)_w</span> for every world <span class="math inline">w</span>.</strong>
+<li><strong>Every extension of <span class="math inline">Y</span> lies
+in the hull: <span class="math inline">Y_w\subseteq(H_E)_w</span> for
+every world <span class="math inline">w</span>.</strong>
 <ul>
-<li>If <span class="math inline">w\notin\pi_S</span>, this holds by definition.</li>
-<li>If <span class="math inline">w\in\pi_S</span>, take <span class="math inline">g\in G</span> agreeing with <span class="math inline">w</span> on <span class="math inline">S</span>. Then <span class="math inline">X_w=X_g=g\cdot E</span>, by pinning and (F1). Each <span class="math inline">g\cdot\bar c</span> with <span class="math inline">\bar c\in E</span> is in <span class="math inline">(H_E)_w</span>, with <span class="math inline">m&#39;:=g</span>.</li>
+<li>If <span class="math inline">w\notin\pi_S</span>, this holds by
+definition.</li>
+<li>If <span class="math inline">w\in\pi_S</span>, take <span
+class="math inline">g\in G</span> agreeing with <span
+class="math inline">w</span> on <span class="math inline">S</span>. Then
+<span class="math inline">X_w=X_g=g\cdot E</span>, by pinning and (F1).
+Each <span class="math inline">g\cdot\bar c</span> with <span
+class="math inline">\bar c\in E</span> is in <span
+class="math inline">(H_E)_w</span>, with <span
+class="math inline">m&#39;:=g</span>.</li>
 </ul></li>
-<li><strong>The covering condition.</strong> Take <span class="math inline">\bar r\in Y_{k\circ h}</span> and a finite <span class="math inline">U</span>. By step 1, <span class="math inline">\bar r=m&#39;\cdot\bar c</span> with <span class="math inline">\bar c\in E</span> and <span class="math inline">m&#39;</span> agreeing with <span class="math inline">k\circ h</span> on <span class="math inline">S</span>. Let <span class="math inline">\bar c</span> be pinned down by the finite <span class="math inline">T</span>.
+<li><strong>The covering condition.</strong> Take <span
+class="math inline">\bar r\in Y_{k\circ h}</span> and a finite <span
+class="math inline">U</span>. By step 1, <span class="math inline">\bar
+r=m&#39;\cdot\bar c</span> with <span class="math inline">\bar c\in
+E</span> and <span class="math inline">m&#39;</span> agreeing with <span
+class="math inline">k\circ h</span> on <span
+class="math inline">S</span>. Let <span class="math inline">\bar
+c</span> be pinned down by the finite <span
+class="math inline">T</span>.
 <ul>
-<li><strong>Case <span class="math inline">h\in\pi_S</span>.</strong> Take <span class="math inline">g\in G</span> agreeing with <span class="math inline">h</span> on <span class="math inline">S</span>, so <span class="math inline">Y_h=X_h=g\cdot E</span>.
+<li><strong>Case <span class="math inline">h\in\pi_S</span>.</strong>
+Take <span class="math inline">g\in G</span> agreeing with <span
+class="math inline">h</span> on <span class="math inline">S</span>, so
+<span class="math inline">Y_h=X_h=g\cdot E</span>.
 <ul>
-<li>By B2 (below), pick <span class="math inline">\tau\in G</span> fixing <span class="math inline">S</span> pointwise with <span class="math inline">\tau[T\setminus S]</span> disjoint from <span class="math inline">g^{-1}[U]</span>. Then <span class="math inline">\tau\cdot\bar c\in E</span> by (F2).</li>
-<li>Put <span class="math inline">\bar q:=g\cdot\tau\cdot\bar c</span>. It is in <span class="math inline">g\cdot E=Y_h</span>.</li>
-<li>Let <span class="math inline">k&#39;&#39;</span> equal <span class="math inline">k</span> on <span class="math inline">U\cup h[S]</span>, and send <span class="math inline">g\tau(t)</span> to <span class="math inline">m&#39;(t)</span> for <span class="math inline">t\in T\setminus S</span>.</li>
-<li>This is consistent: <span class="math inline">g\tau[T\setminus S]</span> is disjoint from <span class="math inline">U</span> by the choice of <span class="math inline">\tau</span>, and from <span class="math inline">h[S]=g[S]</span> because <span class="math inline">\tau</span> fixes <span class="math inline">S</span>.</li>
-<li><span class="math inline">k&#39;&#39;</span> is prescribed on a finite set, so it extends to a surjection.</li>
+<li>By B2 (below), pick <span class="math inline">\tau\in G</span>
+fixing <span class="math inline">S</span> pointwise with <span
+class="math inline">\tau[T\setminus S]</span> disjoint from <span
+class="math inline">g^{-1}[U]</span>. Then <span
+class="math inline">\tau\cdot\bar c\in E</span> by (F2).</li>
+<li>Put <span class="math inline">\bar q:=g\cdot\tau\cdot\bar c</span>.
+It is in <span class="math inline">g\cdot E=Y_h</span>.</li>
+<li>Let <span class="math inline">k&#39;&#39;</span> equal <span
+class="math inline">k</span> on <span class="math inline">U\cup
+h[S]</span>, and send <span class="math inline">g\tau(t)</span> to <span
+class="math inline">m&#39;(t)</span> for <span class="math inline">t\in
+T\setminus S</span>.</li>
+<li>This is consistent: <span class="math inline">g\tau[T\setminus
+S]</span> is disjoint from <span class="math inline">U</span> by the
+choice of <span class="math inline">\tau</span>, and from <span
+class="math inline">h[S]=g[S]</span> because <span
+class="math inline">\tau</span> fixes <span
+class="math inline">S</span>.</li>
+<li><span class="math inline">k&#39;&#39;</span> is prescribed on a
+finite set, so it extends to a surjection.</li>
 </ul></li>
-<li><strong>Case <span class="math inline">h\notin\pi_S</span>.</strong> Here <span class="math inline">Y_h=(H_E)_h</span>.
+<li><strong>Case <span class="math inline">h\notin\pi_S</span>.</strong>
+Here <span class="math inline">Y_h=(H_E)_h</span>.
 <ul>
-<li>Let <span class="math inline">n</span> agree with <span class="math inline">h</span> on <span class="math inline">S</span>, and send <span class="math inline">T\setminus S</span> injectively to fresh points outside <span class="math inline">U\cup h[S]</span>. Put <span class="math inline">\bar q:=n\cdot\bar c</span>. It is in <span class="math inline">(H_E)_h</span>.</li>
-<li>Let <span class="math inline">k&#39;&#39;</span> equal <span class="math inline">k</span> on <span class="math inline">U\cup h[S]</span>, and send <span class="math inline">n(t)</span> to <span class="math inline">m&#39;(t)</span> for <span class="math inline">t\in T\setminus S</span>.</li>
+<li>Let <span class="math inline">n</span> agree with <span
+class="math inline">h</span> on <span class="math inline">S</span>, and
+send <span class="math inline">T\setminus S</span> injectively to fresh
+points outside <span class="math inline">U\cup h[S]</span>. Put <span
+class="math inline">\bar q:=n\cdot\bar c</span>. It is in <span
+class="math inline">(H_E)_h</span>.</li>
+<li>Let <span class="math inline">k&#39;&#39;</span> equal <span
+class="math inline">k</span> on <span class="math inline">U\cup
+h[S]</span>, and send <span class="math inline">n(t)</span> to <span
+class="math inline">m&#39;(t)</span> for <span class="math inline">t\in
+T\setminus S</span>.</li>
 </ul></li>
-<li><strong>Both cases.</strong> The composite that carries <span class="math inline">\bar c</span> to <span class="math inline">k&#39;&#39;\cdot\bar q</span> agrees with <span class="math inline">m&#39;</span> on <span class="math inline">T</span>:
+<li><strong>Both cases.</strong> The composite that carries <span
+class="math inline">\bar c</span> to <span
+class="math inline">k&#39;&#39;\cdot\bar q</span> agrees with <span
+class="math inline">m&#39;</span> on <span class="math inline">T</span>:
 <ul>
-<li>on <span class="math inline">s\in S</span> it gives <span class="math inline">k(h(s))=m&#39;(s)</span>;</li>
-<li>on <span class="math inline">T\setminus S</span> it gives <span class="math inline">m&#39;</span> by construction.</li>
+<li>on <span class="math inline">s\in S</span> it gives <span
+class="math inline">k(h(s))=m&#39;(s)</span>;</li>
+<li>on <span class="math inline">T\setminus S</span> it gives <span
+class="math inline">m&#39;</span> by construction.</li>
 </ul>
-Since <span class="math inline">\bar c</span> is pinned down by <span class="math inline">T</span>, <span class="math inline">k&#39;&#39;\cdot\bar q=m&#39;\cdot\bar c=\bar r</span>.</li>
+Since <span class="math inline">\bar c</span> is pinned down by <span
+class="math inline">T</span>, <span
+class="math inline">k&#39;&#39;\cdot\bar q=m&#39;\cdot\bar c=\bar
+r</span>.</li>
 </ul></li>
 </ol>
-<p>So <span class="math inline">Y</span> is inextensible and coextensive with <span class="math inline">X</span>.</p>
+<p>So <span class="math inline">Y</span> is inextensible and coextensive
+with <span class="math inline">X</span>.</p>
 <p><strong>Assumptions used, and a comparison.</strong></p>
 <ul>
-<li>The arrows are all the surjections, so any consistent finite prescription extends to an arrow.</li>
-<li><span class="math inline">(\mathbb N,\sim)</span> is homogeneous, so the pattern-preserving worlds are relabellings of worlds fixing <span class="math inline">S</span>.</li>
-<li>B2 holds: a symmetry fixing <span class="math inline">S</span> pointwise can move any finite set off any finite set.</li>
-<li>In <code>symmetric-all-surjections</code>, <span class="math inline">\pi_S</span> is just <span class="math inline">\delta_S</span>. So this witness differs from the recorded one only at the worlds collapsing <span class="math inline">S</span>, where it takes the hull instead of <span class="math inline">\varnothing</span>.</li>
+<li>The arrows are all the surjections, so any consistent finite
+prescription extends to an arrow.</li>
+<li><span class="math inline">(\mathbb N,\sim)</span> is homogeneous, so
+the pattern-preserving worlds are relabellings of worlds fixing <span
+class="math inline">S</span>.</li>
+<li>B2 holds: a symmetry fixing <span class="math inline">S</span>
+pointwise can move any finite set off any finite set.</li>
+<li>In <code>symmetric-all-surjections</code>, <span
+class="math inline">\pi_S</span> is just <span
+class="math inline">\delta_S</span>. So this witness differs from the
+recorded one only at the worlds collapsing <span
+class="math inline">S</span>, where it takes the hull instead of <span
+class="math inline">\varnothing</span>.</li>
 </ul>
 <h2 id="the-other-verdicts">The other verdicts</h2>
 <ul>
-<li><strong>BF, at every type.</strong> The arrows are surjective. The draft’s argument that surjective arrows give BF works for any symmetry group; the witnessing intension is symmetric by composing with <span class="math inline">g</span>.</li>
-<li><strong>No Pure Contingency.</strong> There is one object, and the denotation <span class="math inline">p</span> of a closed pure sentence is pinned down by <span class="math inline">\varnothing</span>. So <span class="math inline">h\cdot p=p</span> for every arrow <span class="math inline">h</span>, and <span class="math inline">p</span> is true iff it contains every arrow. The boxed forms of BF and Boolean Completeness follow.</li>
-<li><strong>Boolean Completeness, at every type.</strong> Apply Theorem 36 with the constant closure <span class="math inline">M_0=\varnothing</span>. It has two hypotheses.
+<li><strong>BF, at every type.</strong> The arrows are surjective. The
+draft’s argument that surjective arrows give BF works for any symmetry
+group; the witnessing intension is symmetric by composing with <span
+class="math inline">g</span>.</li>
+<li><strong>No Pure Contingency.</strong> There is one object, and the
+denotation <span class="math inline">p</span> of a closed pure sentence
+is pinned down by <span class="math inline">\varnothing</span>. So <span
+class="math inline">h\cdot p=p</span> for every arrow <span
+class="math inline">h</span>, and <span class="math inline">p</span> is
+true iff it contains every arrow. The boxed forms of BF and Boolean
+Completeness follow.</li>
+<li><strong>Boolean Completeness, at every type.</strong> Apply Theorem
+36 with the constant closure <span
+class="math inline">M_0=\varnothing</span>. It has two hypotheses.
 <ul>
-<li><em>Amalgamability.</em> As in Base 1, no finite set separates any arrow, since some non-injective surjection agrees with any arrow on a finite set. Every finite set is amalgamable, because the required arrow is prescribed only on a finite set, consistently. This uses only the arrows.</li>
-<li><em>B2, moving points.</em> Given finite <span class="math inline">N,P,Q</span>, some <span class="math inline">g\in G</span> fixes <span class="math inline">N</span> pointwise and has <span class="math inline">g[P\setminus N]\cap Q=\varnothing</span>. Move each point of <span class="math inline">P\setminus N</span>, within its own infinite class, to distinct fresh points outside <span class="math inline">N\cup Q</span>. A permutation that fixes every class setwise is an automorphism.</li>
+<li><em>Amalgamability.</em> As in Base 1, no finite set separates any
+arrow, since some non-injective surjection agrees with any arrow on a
+finite set. Every finite set is amalgamable, because the required arrow
+is prescribed only on a finite set, consistently. This uses only the
+arrows.</li>
+<li><em>B2, moving points.</em> Given finite <span
+class="math inline">N,P,Q</span>, some <span class="math inline">g\in
+G</span> fixes <span class="math inline">N</span> pointwise and has
+<span class="math inline">g[P\setminus N]\cap Q=\varnothing</span>. Move
+each point of <span class="math inline">P\setminus N</span>, within its
+own infinite class, to distinct fresh points outside <span
+class="math inline">N\cup Q</span>. A permutation that fixes every class
+setwise is an automorphism.</li>
 </ul></li>
-<li><strong>Actuality fails.</strong> By Proposition 22, Actuality holds iff <span class="math inline">G</span>, as a set of arrows, is finitely pinned. No finite set pins it down, since on any finite set some non-injective surjection agrees with the identity.</li>
-<li><strong>Atomlessness holds, so Atomicity fails at type <span class="math inline">t</span>.</strong> This is the Base 1 argument, which uses only the arrows.
+<li><strong>Actuality fails.</strong> By Proposition 22, Actuality holds
+iff <span class="math inline">G</span>, as a set of arrows, is finitely
+pinned. No finite set pins it down, since on any finite set some
+non-injective surjection agrees with the identity.</li>
+<li><strong>Atomlessness holds, so Atomicity fails at type <span
+class="math inline">t</span>.</strong> This is the Base 1 argument,
+which uses only the arrows.
 <ul>
-<li>Let <span class="math inline">p</span> be nonzero and pinned down by a nonempty finite <span class="math inline">V</span>, with <span class="math inline">m\in V</span> and <span class="math inline">x\notin V</span>.</li>
-<li>Then <span class="math inline">q:=p\cap\{h : hx=hm\}</span> is symmetric and pinned down by <span class="math inline">V\cup\{x\}</span>.</li>
-<li>Members of <span class="math inline">p</span> can be modified at <span class="math inline">x</span> alone, so <span class="math inline">\bot&lt;q&lt;p</span>.</li>
+<li>Let <span class="math inline">p</span> be nonzero and pinned down by
+a nonempty finite <span class="math inline">V</span>, with <span
+class="math inline">m\in V</span> and <span class="math inline">x\notin
+V</span>.</li>
+<li>Then <span class="math inline">q:=p\cap\{h : hx=hm\}</span> is
+symmetric and pinned down by <span
+class="math inline">V\cup\{x\}</span>.</li>
+<li>Members of <span class="math inline">p</span> can be modified at
+<span class="math inline">x</span> alone, so <span
+class="math inline">\bot&lt;q&lt;p</span>.</li>
 </ul></li>
-<li><strong>ND fails at type <span class="math inline">e</span>.</strong> For distinct <span class="math inline">m,n</span>, the proposition <span class="math inline">\{h : hm=hn\}</span> is nonzero.</li>
-<li><strong>Relational Choice fails</strong>, at types <span class="math inline">(e\to t,e)</span>, by the Base 1 argument.
+<li><strong>ND fails at type <span
+class="math inline">e</span>.</strong> For distinct <span
+class="math inline">m,n</span>, the proposition <span
+class="math inline">\{h : hm=hn\}</span> is nonzero.</li>
+<li><strong>Relational Choice fails</strong>, at types <span
+class="math inline">(e\to t,e)</span>, by the Base 1 argument.
 <ul>
-<li>Let <span class="math inline">S</span> be a functional subrelation of <span class="math inline">U:=\lambda Xy\,.\,Xy\lor\neg\exists z\,.\,Xz</span>, pinned down by <span class="math inline">N</span>.</li>
-<li>The property <span class="math inline">A</span> of not belonging to <span class="math inline">N</span> is in the domain, and <span class="math inline">S</span> relates it to some <span class="math inline">y\notin N</span>.</li>
-<li>Some <span class="math inline">y&#39;\ne y</span> in the class of <span class="math inline">y</span> lies outside <span class="math inline">N</span>. The transposition of <span class="math inline">y</span> with <span class="math inline">y&#39;</span> is in <span class="math inline">G</span>, fixes <span class="math inline">N</span> pointwise and fixes <span class="math inline">A</span>.</li>
-<li>So <span class="math inline">S</span> relates <span class="math inline">A</span> to <span class="math inline">y&#39;</span> too, and <span class="math inline">S</span> is not functional.</li>
+<li>Let <span class="math inline">S</span> be a functional subrelation
+of <span class="math inline">U:=\lambda Xy\,.\,Xy\lor\neg\exists
+z\,.\,Xz</span>, pinned down by <span class="math inline">N</span>.</li>
+<li>The property <span class="math inline">A</span> of not belonging to
+<span class="math inline">N</span> is in the domain, and <span
+class="math inline">S</span> relates it to some <span
+class="math inline">y\notin N</span>.</li>
+<li>Some <span class="math inline">y&#39;\ne y</span> in the class of
+<span class="math inline">y</span> lies outside <span
+class="math inline">N</span>. The transposition of <span
+class="math inline">y</span> with <span
+class="math inline">y&#39;</span> is in <span
+class="math inline">G</span>, fixes <span class="math inline">N</span>
+pointwise and fixes <span class="math inline">A</span>.</li>
+<li>So <span class="math inline">S</span> relates <span
+class="math inline">A</span> to <span class="math inline">y&#39;</span>
+too, and <span class="math inline">S</span> is not functional.</li>
 </ul></li>
 </ul>
 <h2 id="derived-verdicts">Derived verdicts</h2>
 <ul>
-<li>The engine adds Weakly Inextensible Comprehension and its boxed form, which hold.</li>
-<li>Vicinity fails: with Weakly Inextensible Comprehension it would give Actuality.</li>
+<li>The engine adds Weakly Inextensible Comprehension and its boxed
+form, which hold.</li>
+<li>Vicinity fails: with Weakly Inextensible Comprehension it would give
+Actuality.</li>
 <li>□Transversal, Transversal Choice and its boxed form fail.</li>
 </ul>
 <h2 id="left-open">Left open</h2>
 <ul>
-<li>The Axiom of Infinity at type <span class="math inline">e</span>.</li>
+<li>The Axiom of Infinity at type <span
+class="math inline">e</span>.</li>
 <li>The signature schemata: no interpretation of Σ has been fixed.</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — §3; Lemma 21, p. 10; Proposition 22, p. 11; Theorem 36, p. 18. The framework of symmetric ideally-full models, which are models of C for every base, and the lemmas and Boolean Completeness theorem used in the verification.</li>
+<li><strong>Background: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — §3; Lemma 21, p. 10;
+Proposition 22, p. 11; Theorem 36, p. 18. The framework of symmetric
+ideally-full models, which are models of C for every base, and the
+lemmas and Boolean Completeness theorem used in the verification.</li>
 </ul>
 </body></html>

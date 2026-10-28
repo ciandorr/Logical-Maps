@@ -76,6 +76,19 @@ meets:
 # naming the verdict, and attribution sentences, are dropped from the texts, their content being in
 # holds, fails, by and date.
 arguments:
+- holds:
+  - necessary-self-atoms-are-atoms-r
+  - necessary-self-atoms-are-strong-atoms-r
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'Every arrow $k_n$ is determined by its value at $n+1$, so every singleton is in the domain, and
+    the only atom containing the identity is $\{1\}$. A self-atom containing $k_n$ and $k_m$ with $n<m$
+    would have $k_{m-n}$ in its transport along $k_n$, since $k_{m-n}\circ k_n=k_m$, so that transport
+    would not be $\{1\}$. So the self-atoms are the singletons, atoms, and each is a strong atom: $\{k_n\}$
+    becomes under $k_m$ the set of $k_j$ with $j+m=n$, of at most one arrow. A self-atom of a relational
+    type sits over one arrow with one tuple, by the transport condition, so is an atom and a strong atom
+    likewise. One object, so this holds at every world.'
 
 - holds: [rigid-power-r]
   by: Claude Fable 5.1 (Anthropic), at Cian Dorr's direction

@@ -79,7 +79,39 @@ meets:
 # Only the verdicts the engine needs to derive the rest are recorded, the source's first. Lead-ins
 # naming the verdict, and attribution sentences, are dropped from the texts, their content being in
 # holds, fails, by and date.
-arguments: []
+arguments:
+- holds:
+  - necessary-self-atomicity-r
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: Self-Atomicity at every relational type, necessarily, there being one object. Let $I\ne\bot$ be
+    an entity of type $\bar\sigma t$, pinned down by $N$, with a pair $\langle k,\bar x\rangle$ in it.
+    If $k=1$, the singleton of the pair is in the domain, pinned down by $\{0,1\}$, and is a self-atom.
+    Otherwise $k$ is a collapse with $k(0)=k(1)=0$ and $k(y)=1$ for some $y$; let $N^{\prime}:=N\cup\{0,y\}$
+    and $J$ the set of pairs $\langle k_1,\bar x\rangle$ with $k_1$ agreeing with $k$ on $N^{\prime}$,
+    below $I$ and pinned down by $N^{\prime}$. Its transport along $\langle k_1,\bar x\rangle$ is the
+    set of $\langle m,\bar x\rangle$ with $m$ fixing $k(N^{\prime})\supseteq\{0,1\}$ pointwise, which
+    only the identity does; so it is the singleton of $\langle1,\bar x\rangle$, an atom, and $J$ is a
+    self-atom below $I$.
+- holds:
+  - necessary-self-atomicity-t
+  fails:
+  - self-atoms-are-atoms-t
+  - self-atoms-are-strong-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: '$\{1\}$ is in the domain and is the only atom, the propositions over the collapses refining.
+    A monotone surjection sends $0$ to $0$, so a collapse $k$ has $k(0)=k(1)=0$ and $k(y)=1$ for some
+    $y$. For such $k$ and a finite $N\supseteq\{0,y\}$, the set $q$ of collapses agreeing with $k$ on
+    $N$ is pinned down by $N$, and a collapse $m$ has $m\circ k^{\prime}\in q$, for $k^{\prime}\in q$,
+    only if it fixes $k^{\prime}(N)\supseteq\{0,1\}$ pointwise, which no collapse does; so the transport
+    of $q$ along each member is $\{1\}$, and $q$ is a self-atom, not an atom. So Self-atoms are atoms
+    (type t) fails, and with it Self-atoms are strong atoms (type t). Self-Atomicity (type t) holds,
+    and necessarily, there being one object: a possible proposition contains $1$, and then $\{1\}$, or
+    a collapse $k$, and then, being pinned down by some $N$, the self-atom built from $k$ and $N\cup\{0,y\}$.
+    The relational form is the argument that follows.'
 
 notes: >-
   The cited construction is a model of the map’s relational-type framework. The description

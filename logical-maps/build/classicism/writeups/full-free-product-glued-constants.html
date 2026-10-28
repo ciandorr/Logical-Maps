@@ -322,40 +322,260 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full action model: free product of a free monoid with an idempotent, the bicyclic monoid and an involution, glued constants</h1></header><p>This write-up builds a model of C in which Bacon’s Logical Necessity schema holds while BF fails, ND-necessity differs from two-hat necessity, and some truth is not 5-necessary. It follows the gluing construction of Bacon’s <em>Logical Combinatorialism</em> (Appendix A.3; book, Definition 18.15), which the map’s glued free-monoid records carry out over the free monoid; here the free monoid is replaced by a free product in which each extra factor has one job. The point of the design is that the failures can be disaggregated later by dropping factors (§4).</p>
-<p>Throughout, <span class="math inline">\Sigma</span> is the map’s fixed countable signature of relational nonlogical constants, and the model is a full one-object action model (Classicism, §3.5): the arrows are the elements of a monoid <span class="math inline">M</span>, composition is multiplication, <span class="math inline">u\circ h=uh</span>, the propositions are all subsets of <span class="math inline">M</span>, and every intension of every relational type is present. Write <span class="math inline">\mathrm{fix}</span>-free notation: <span class="math inline">\{1\}</span> is the actual-world proposition. Pure sentences have the same truth value at every arrow (Classicism, §3.5, p. 59): one-object models satisfy No Pure Contingency.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full action model: free product of a free monoid with an idempotent, the bicyclic monoid and an involution, glued constants</h1></header><p>This write-up builds a model of C in which Bacon’s Logical Necessity
+schema holds while BF fails, ND-necessity differs from two-hat
+necessity, and some truth is not 5-necessary. It follows the gluing
+construction of Bacon’s <em>Logical Combinatorialism</em> (Appendix A.3;
+book, Definition 18.15), which the map’s glued free-monoid records carry
+out over the free monoid; here the free monoid is replaced by a free
+product in which each extra factor has one job. The point of the design
+is that the failures can be disaggregated later by dropping factors
+(§4).</p>
+<p>Throughout, <span class="math inline">\Sigma</span> is the map’s
+fixed countable signature of relational nonlogical constants, and the
+model is a full one-object action model (Classicism, §3.5): the arrows
+are the elements of a monoid <span class="math inline">M</span>,
+composition is multiplication, <span class="math inline">u\circ
+h=uh</span>, the propositions are all subsets of <span
+class="math inline">M</span>, and every intension of every relational
+type is present. Write <span
+class="math inline">\mathrm{fix}</span>-free notation: <span
+class="math inline">\{1\}</span> is the actual-world proposition. Pure
+sentences have the same truth value at every arrow (Classicism, §3.5,
+p. 59): one-object models satisfy No Pure Contingency.</p>
 <h2 id="the-monoid">1. The monoid</h2>
-<p>Let <span class="math inline">M:=F_\infty * E * B * \mathbb Z_2</span>, the free product of monoids, with</p>
+<p>Let <span class="math inline">M:=F_\infty * E * B * \mathbb
+Z_2</span>, the free product of monoids, with</p>
 <ul>
-<li><span class="math inline">F_\infty</span> the free monoid on the generators <span class="math inline">f_1,f_2,\ldots</span>;</li>
-<li><span class="math inline">E=\{1,e\}</span>, <span class="math inline">e^2=e</span>;</li>
-<li><span class="math inline">B=\langle b,c\mid cb=1\rangle</span> the bicyclic monoid, whose elements are the words <span class="math inline">b^ic^j</span> (<span class="math inline">i,j\ge0</span>), with <span class="math inline">b^ic^j\cdot b^kc^l=b^{i+k-j}c^l</span> if <span class="math inline">j\le k</span> and <span class="math inline">b^ic^{j-k+l}</span> otherwise;</li>
-<li><span class="math inline">\mathbb Z_2=\{1,s\}</span>, <span class="math inline">s^2=1</span>.</li>
+<li><span class="math inline">F_\infty</span> the free monoid on the
+generators <span class="math inline">f_1,f_2,\ldots</span>;</li>
+<li><span class="math inline">E=\{1,e\}</span>, <span
+class="math inline">e^2=e</span>;</li>
+<li><span class="math inline">B=\langle b,c\mid cb=1\rangle</span> the
+bicyclic monoid, whose elements are the words <span
+class="math inline">b^ic^j</span> (<span
+class="math inline">i,j\ge0</span>), with <span
+class="math inline">b^ic^j\cdot b^kc^l=b^{i+k-j}c^l</span> if <span
+class="math inline">j\le k</span> and <span
+class="math inline">b^ic^{j-k+l}</span> otherwise;</li>
+<li><span class="math inline">\mathbb Z_2=\{1,s\}</span>, <span
+class="math inline">s^2=1</span>.</li>
 </ul>
-<p>Every element of <span class="math inline">M</span> has a unique reduced word: a finite sequence of non-identity elements of the factors (<em>syllables</em>) in which adjacent syllables lie in different factors. The product of two reduced words is computed by concatenating and, while the junction consists of two syllables from the same factor, multiplying them and deleting the result if it is <span class="math inline">1</span>.</p>
-<p><strong>Lemma 1 (right cancellation).</strong> If a syllable <span class="math inline">x</span> of a factor <span class="math inline">A</span> is right-cancellable in <span class="math inline">A</span>, then it is right-cancellable in <span class="math inline">M</span>: <span class="math inline">ux=vx</span> implies <span class="math inline">u=v</span>. Hence every product of such syllables is right-cancellable, in particular every element of <span class="math inline">F_\infty</span> and <span class="math inline">s</span>.</p>
-<p><em>Proof.</em> Let <span class="math inline">ux=vx</span>. If neither <span class="math inline">u</span> nor <span class="math inline">v</span> ends in an <span class="math inline">A</span>-syllable, both products are the reduced words <span class="math inline">u,x</span> and <span class="math inline">v,x</span>, so <span class="math inline">u=v</span>. If <span class="math inline">u=u&#39;y</span> with <span class="math inline">y\in A</span> and <span class="math inline">v</span> does not end in an <span class="math inline">A</span>-syllable, then <span class="math inline">ux</span> is <span class="math inline">u&#39;</span> followed by <span class="math inline">yx</span> (or <span class="math inline">u&#39;</span> itself if <span class="math inline">yx=1</span>), while <span class="math inline">vx</span> ends in the syllable <span class="math inline">x</span> preceded by a syllable outside <span class="math inline">A</span> or by nothing; equality of reduced words forces <span class="math inline">u&#39;=v</span> and <span class="math inline">yx=x</span>, so <span class="math inline">y=1</span> by cancellation in <span class="math inline">A</span>, a contradiction, or <span class="math inline">yx=1</span> and <span class="math inline">v,x</span> equal to <span class="math inline">u&#39;</span>, impossible since <span class="math inline">u&#39;</span> does not end in <span class="math inline">A</span>. If both end in <span class="math inline">A</span>-syllables <span class="math inline">y,y&#39;</span>, equality gives <span class="math inline">u&#39;=v&#39;</span> and <span class="math inline">yx=y&#39;x</span>, so <span class="math inline">y=y&#39;</span>. <span class="math inline">\square</span></p>
-<p><strong>Lemma 2 (two non-epic arrows).</strong> <span class="math inline">e</span> and <span class="math inline">b</span> are not right-cancellable: <span class="math inline">1\cdot e=e\cdot e</span> and <span class="math inline">1\cdot b=(bc)\cdot b</span>, with <span class="math inline">e\ne1</span> and <span class="math inline">bc\ne1</span>.</p>
-<p><strong>Lemma 3 (units and split monomorphisms).</strong> If <span class="math inline">uv=1</span> in <span class="math inline">M</span> with reduced words <span class="math inline">u=x_1\cdots x_n</span> and <span class="math inline">v=y_1\cdots y_m</span>, then <span class="math inline">n=m</span> and <span class="math inline">x_{n+1-i}y_i=1</span> in a common factor for each <span class="math inline">i</span>. Hence <span class="math inline">u</span> has a right inverse iff each of its syllables has one in its factor, a left inverse iff each syllable has one, and <span class="math inline">u</span> is a unit iff each syllable is a unit of its factor. The units of <span class="math inline">M</span> are therefore <span class="math inline">1</span> and <span class="math inline">s</span>. The elements with a left inverse (the split monomorphisms, the arrows with a retraction) are the reduced words all of whose syllables are powers <span class="math inline">b^i</span> or <span class="math inline">s</span>; in particular <span class="math inline">b</span>, with retraction <span class="math inline">c</span>, has a left inverse and is not a unit. Left inverses are unique: <span class="math inline">xu=1</span> determines the syllables of <span class="math inline">x</span> one by one as the left inverses, in their own factors, of the syllables of <span class="math inline">u</span> in reverse order, and in each factor a left inverse is unique (<span class="math inline">c^k</span> for <span class="math inline">b^k</span>, <span class="math inline">s</span> for <span class="math inline">s</span>).</p>
-<p><em>Proof.</em> In a reduction of the concatenation <span class="math inline">x_1\cdots x_ny_1\cdots y_m</span> to the empty word, syllables can only disappear at the junction, two at a time, so <span class="math inline">x_ny_1=1</span>, then <span class="math inline">x_{n-1}y_2=1</span>, and so on. In the factors: <span class="math inline">F_\infty</span> has no non-identity element with a one-sided inverse; <span class="math inline">e</span> has none; in <span class="math inline">B</span>, <span class="math inline">b^ic^j</span> has a left inverse iff <span class="math inline">j=0</span> (then <span class="math inline">c^ib^i=1</span>) and a right inverse iff <span class="math inline">i=0</span>, and no non-identity element has both; <span class="math inline">s</span> is its own inverse. <span class="math inline">\square</span></p>
-<p><strong>Lemma 4 (free sites).</strong> For each <span class="math inline">k</span>, the map <span class="math inline">u\mapsto uf_k</span> is injective (Lemma 1), and the sets <span class="math inline">Mf_k</span> are pairwise disjoint: the reduced word of <span class="math inline">uf_k</span> ends in an <span class="math inline">F_\infty</span>-syllable whose last letter is <span class="math inline">f_k</span>.</p>
-<h2 id="the-glued-constants-and-logical-necessity">2. The glued constants and Logical Necessity</h2>
-<p>Take the full one-object action model over <span class="math inline">M</span> with a single individual. Enumerate as <span class="math inline">P_1,P_2,\ldots</span> the pure formulas <span class="math inline">P(\bar x)</span> whose free variables match (in number and type) a tuple <span class="math inline">\bar c</span> of distinct constants of <span class="math inline">\Sigma</span>, and such that <span class="math inline">\exists\bar x\,P</span> is true at the identity; this is a countable list, and the truth of <span class="math inline">\exists\bar x\,P</span> does not depend on the interpretation of <span class="math inline">\Sigma</span>. For each <span class="math inline">k</span> choose a witness tuple <span class="math inline">\bar a_k</span> of elements of the root domains with <span class="math inline">P_k[\bar a_k]</span> true at the identity. For a constant <span class="math inline">c</span> of type <span class="math inline">\bar\sigma t</span>, let its intension <span class="math inline">I_c</span> assign to the arrow <span class="math inline">uf_k</span> the extension <span class="math inline">I_{a}(u)</span>, where <span class="math inline">a</span> is the component of <span class="math inline">\bar a_k</span> matching <span class="math inline">c</span> (or the empty extension if <span class="math inline">c</span> is not among the constants matched by <span class="math inline">P_k</span>), and to every arrow not of the form <span class="math inline">uf_k</span> the empty extension. By Lemma 4 this is well defined; the model being full, it is in the domain. Its transport along <span class="math inline">f_k</span> is <span class="math inline">u\mapsto I_c(uf_k)=I_a(u)</span>, i.e. <span class="math inline">f_k\cdot c=a</span>: at the world <span class="math inline">f_k</span> the constants matched by <span class="math inline">P_k</span> denote the witnesses <span class="math inline">\bar a_k</span>.</p>
-<p><strong>Theorem.</strong> Logical Necessity, <span class="math inline">\Box P[\bar c/\bar x]\leftrightarrow\forall\bar x\,P</span> for pure <span class="math inline">P</span> and distinct matching constants <span class="math inline">\bar c</span>, holds at the identity.</p>
-<p><em>Proof.</em> Right to left: if <span class="math inline">\forall\bar x\,P</span> is true at the identity, it is true at every arrow (No Pure Contingency), and at every arrow the constants denote some tuple, so <span class="math inline">P[\bar c]</span> holds there: <span class="math inline">\Box P[\bar c]</span>. Left to right: if <span class="math inline">\forall\bar x\,P</span> fails, <span class="math inline">\exists\bar x\,\neg P</span> is true, so <span class="math inline">\neg P</span> is some <span class="math inline">P_k</span> of the enumeration, and at the arrow <span class="math inline">f_k</span> the constants denote a witness tuple for it: <span class="math inline">\neg P[\bar c]</span> holds at <span class="math inline">f_k</span>, so <span class="math inline">\Box P[\bar c]</span> fails. <span class="math inline">\square</span></p>
-<p>The same enumeration gives Witnessed Possibility and Modal Freedom (a conjunction <span class="math inline">P\wedge Q</span> in disjoint variables is itself enumerated), and Independence and Separated Structure follow by necessity of identity, as in the glued free-monoid write-up; the map derives these from Logical Necessity where results record the implications.</p>
+<p>Every element of <span class="math inline">M</span> has a unique
+reduced word: a finite sequence of non-identity elements of the factors
+(<em>syllables</em>) in which adjacent syllables lie in different
+factors. The product of two reduced words is computed by concatenating
+and, while the junction consists of two syllables from the same factor,
+multiplying them and deleting the result if it is <span
+class="math inline">1</span>.</p>
+<p><strong>Lemma 1 (right cancellation).</strong> If a syllable <span
+class="math inline">x</span> of a factor <span
+class="math inline">A</span> is right-cancellable in <span
+class="math inline">A</span>, then it is right-cancellable in <span
+class="math inline">M</span>: <span class="math inline">ux=vx</span>
+implies <span class="math inline">u=v</span>. Hence every product of
+such syllables is right-cancellable, in particular every element of
+<span class="math inline">F_\infty</span> and <span
+class="math inline">s</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">ux=vx</span>. If
+neither <span class="math inline">u</span> nor <span
+class="math inline">v</span> ends in an <span
+class="math inline">A</span>-syllable, both products are the reduced
+words <span class="math inline">u,x</span> and <span
+class="math inline">v,x</span>, so <span class="math inline">u=v</span>.
+If <span class="math inline">u=u&#39;y</span> with <span
+class="math inline">y\in A</span> and <span class="math inline">v</span>
+does not end in an <span class="math inline">A</span>-syllable, then
+<span class="math inline">ux</span> is <span
+class="math inline">u&#39;</span> followed by <span
+class="math inline">yx</span> (or <span
+class="math inline">u&#39;</span> itself if <span
+class="math inline">yx=1</span>), while <span
+class="math inline">vx</span> ends in the syllable <span
+class="math inline">x</span> preceded by a syllable outside <span
+class="math inline">A</span> or by nothing; equality of reduced words
+forces <span class="math inline">u&#39;=v</span> and <span
+class="math inline">yx=x</span>, so <span class="math inline">y=1</span>
+by cancellation in <span class="math inline">A</span>, a contradiction,
+or <span class="math inline">yx=1</span> and <span
+class="math inline">v,x</span> equal to <span
+class="math inline">u&#39;</span>, impossible since <span
+class="math inline">u&#39;</span> does not end in <span
+class="math inline">A</span>. If both end in <span
+class="math inline">A</span>-syllables <span
+class="math inline">y,y&#39;</span>, equality gives <span
+class="math inline">u&#39;=v&#39;</span> and <span
+class="math inline">yx=y&#39;x</span>, so <span
+class="math inline">y=y&#39;</span>. <span
+class="math inline">\square</span></p>
+<p><strong>Lemma 2 (two non-epic arrows).</strong> <span
+class="math inline">e</span> and <span class="math inline">b</span> are
+not right-cancellable: <span class="math inline">1\cdot e=e\cdot
+e</span> and <span class="math inline">1\cdot b=(bc)\cdot b</span>, with
+<span class="math inline">e\ne1</span> and <span
+class="math inline">bc\ne1</span>.</p>
+<p><strong>Lemma 3 (units and split monomorphisms).</strong> If <span
+class="math inline">uv=1</span> in <span class="math inline">M</span>
+with reduced words <span class="math inline">u=x_1\cdots x_n</span> and
+<span class="math inline">v=y_1\cdots y_m</span>, then <span
+class="math inline">n=m</span> and <span
+class="math inline">x_{n+1-i}y_i=1</span> in a common factor for each
+<span class="math inline">i</span>. Hence <span
+class="math inline">u</span> has a right inverse iff each of its
+syllables has one in its factor, a left inverse iff each syllable has
+one, and <span class="math inline">u</span> is a unit iff each syllable
+is a unit of its factor. The units of <span class="math inline">M</span>
+are therefore <span class="math inline">1</span> and <span
+class="math inline">s</span>. The elements with a left inverse (the
+split monomorphisms, the arrows with a retraction) are the reduced words
+all of whose syllables are powers <span class="math inline">b^i</span>
+or <span class="math inline">s</span>; in particular <span
+class="math inline">b</span>, with retraction <span
+class="math inline">c</span>, has a left inverse and is not a unit. Left
+inverses are unique: <span class="math inline">xu=1</span> determines
+the syllables of <span class="math inline">x</span> one by one as the
+left inverses, in their own factors, of the syllables of <span
+class="math inline">u</span> in reverse order, and in each factor a left
+inverse is unique (<span class="math inline">c^k</span> for <span
+class="math inline">b^k</span>, <span class="math inline">s</span> for
+<span class="math inline">s</span>).</p>
+<p><em>Proof.</em> In a reduction of the concatenation <span
+class="math inline">x_1\cdots x_ny_1\cdots y_m</span> to the empty word,
+syllables can only disappear at the junction, two at a time, so <span
+class="math inline">x_ny_1=1</span>, then <span
+class="math inline">x_{n-1}y_2=1</span>, and so on. In the factors:
+<span class="math inline">F_\infty</span> has no non-identity element
+with a one-sided inverse; <span class="math inline">e</span> has none;
+in <span class="math inline">B</span>, <span
+class="math inline">b^ic^j</span> has a left inverse iff <span
+class="math inline">j=0</span> (then <span
+class="math inline">c^ib^i=1</span>) and a right inverse iff <span
+class="math inline">i=0</span>, and no non-identity element has both;
+<span class="math inline">s</span> is its own inverse. <span
+class="math inline">\square</span></p>
+<p><strong>Lemma 4 (free sites).</strong> For each <span
+class="math inline">k</span>, the map <span class="math inline">u\mapsto
+uf_k</span> is injective (Lemma 1), and the sets <span
+class="math inline">Mf_k</span> are pairwise disjoint: the reduced word
+of <span class="math inline">uf_k</span> ends in an <span
+class="math inline">F_\infty</span>-syllable whose last letter is <span
+class="math inline">f_k</span>.</p>
+<h2 id="the-glued-constants-and-logical-necessity">2. The glued
+constants and Logical Necessity</h2>
+<p>Take the full one-object action model over <span
+class="math inline">M</span> with a single individual. Enumerate as
+<span class="math inline">P_1,P_2,\ldots</span> the pure formulas <span
+class="math inline">P(\bar x)</span> whose free variables match (in
+number and type) a tuple <span class="math inline">\bar c</span> of
+distinct constants of <span class="math inline">\Sigma</span>, and such
+that <span class="math inline">\exists\bar x\,P</span> is true at the
+identity; this is a countable list, and the truth of <span
+class="math inline">\exists\bar x\,P</span> does not depend on the
+interpretation of <span class="math inline">\Sigma</span>. For each
+<span class="math inline">k</span> choose a witness tuple <span
+class="math inline">\bar a_k</span> of elements of the root domains with
+<span class="math inline">P_k[\bar a_k]</span> true at the identity. For
+a constant <span class="math inline">c</span> of type <span
+class="math inline">\bar\sigma t</span>, let its intension <span
+class="math inline">I_c</span> assign to the arrow <span
+class="math inline">uf_k</span> the extension <span
+class="math inline">I_{a}(u)</span>, where <span
+class="math inline">a</span> is the component of <span
+class="math inline">\bar a_k</span> matching <span
+class="math inline">c</span> (or the empty extension if <span
+class="math inline">c</span> is not among the constants matched by <span
+class="math inline">P_k</span>), and to every arrow not of the form
+<span class="math inline">uf_k</span> the empty extension. By Lemma 4
+this is well defined; the model being full, it is in the domain. Its
+transport along <span class="math inline">f_k</span> is <span
+class="math inline">u\mapsto I_c(uf_k)=I_a(u)</span>, i.e. <span
+class="math inline">f_k\cdot c=a</span>: at the world <span
+class="math inline">f_k</span> the constants matched by <span
+class="math inline">P_k</span> denote the witnesses <span
+class="math inline">\bar a_k</span>.</p>
+<p><strong>Theorem.</strong> Logical Necessity, <span
+class="math inline">\Box P[\bar c/\bar x]\leftrightarrow\forall\bar
+x\,P</span> for pure <span class="math inline">P</span> and distinct
+matching constants <span class="math inline">\bar c</span>, holds at the
+identity.</p>
+<p><em>Proof.</em> Right to left: if <span
+class="math inline">\forall\bar x\,P</span> is true at the identity, it
+is true at every arrow (No Pure Contingency), and at every arrow the
+constants denote some tuple, so <span class="math inline">P[\bar
+c]</span> holds there: <span class="math inline">\Box P[\bar c]</span>.
+Left to right: if <span class="math inline">\forall\bar x\,P</span>
+fails, <span class="math inline">\exists\bar x\,\neg P</span> is true,
+so <span class="math inline">\neg P</span> is some <span
+class="math inline">P_k</span> of the enumeration, and at the arrow
+<span class="math inline">f_k</span> the constants denote a witness
+tuple for it: <span class="math inline">\neg P[\bar c]</span> holds at
+<span class="math inline">f_k</span>, so <span class="math inline">\Box
+P[\bar c]</span> fails. <span class="math inline">\square</span></p>
+<p>The same enumeration gives Witnessed Possibility and Modal Freedom (a
+conjunction <span class="math inline">P\wedge Q</span> in disjoint
+variables is itself enumerated), and Independence and Separated
+Structure follow by necessity of identity, as in the glued free-monoid
+write-up; the map derives these from Logical Necessity where results
+record the implications.</p>
 <h2 id="verdicts">3. Verdicts</h2>
 <ul>
-<li><strong>Full-model package.</strong> Being full, the model satisfies Rigid Comprehension, Actuality, Atomicity, Boolean Completeness, Relational Choice and their necessitations (Classicism, p. 61, and the topic’s general arguments for full models). With necessary Actuality, <span class="math inline">\Box_5=\hat{\hat\Box}</span>, the box over the invertible arrows (The Bounds of Possibility, Proposition D21), and <span class="math inline">\Box_{\ne}=\hat\Box</span> is the box over the arrows with a retraction.</li>
-<li><strong>BF fails</strong> at type <span class="math inline">t</span>: by Lemma 2, <span class="math inline">e^t</span> is not surjective (<span class="math inline">\{1\}</span> is not <span class="math inline">\{x : xe\in p\}</span> for any <span class="math inline">p</span>, since <span class="math inline">xe\ne1</span>), so Classicism, Proposition 3.24(iii), applies. ND fails too, as in every non-group monoid model here (<span class="math inline">e^t</span> is not injective).</li>
-<li><strong>Two-hat necessity implies ND-necessity fails</strong>: <span class="math inline">b</span> has a retraction and is not invertible (Lemma 3), so the true proposition <span class="math inline">\{1\}\cup\{s\}</span> is two-hat necessary and not ND-necessity; in the map this is the general argument from a retracted non-invertible arrow in a full model.</li>
-<li><strong>Truth implies 5-necessity fails</strong>: <span class="math inline">s</span> is a non-identity unit, so <span class="math inline">\{1\}</span> is true but not <span class="math inline">\Box_5</span>-necessary; general argument from a non-identity isomorphism in a full model.</li>
-<li><strong>5-necessity implies two-hat necessity holds</strong>, boxed, as in every full model.</li>
-<li><strong>Strong Actuality holds</strong>, boxed: the true proposition <span class="math inline">\{1\}</span> becomes, under an arrow <span class="math inline">u</span>, the set of left inverses of <span class="math inline">u</span>, which has at most one member (Lemma 3), so it is an atom or empty at every world; in the map this is the general argument from unique retractions in a model with the identity singletons.</li>
-<li><strong>Rigid Power holds</strong>, boxed: the model is full, so a relation is weakly inextensible at a world iff it lies below <span class="math inline">k\mapsto k\cdot E</span> over its extension <span class="math inline">E</span> there, and the rigid relations are exactly the intensions <span class="math inline">k\mapsto k\cdot E</span>; the power property of such a relation is then <span class="math inline">k\mapsto k\cdot E&#39;</span> for its own extension <span class="math inline">E&#39;</span>, hence rigid (the topic’s general argument for full models). Tame Rigidity holds boxed in every full model, so <strong>Weakly Rigid Power holds</strong>, boxed, by the recorded results <span class="math inline">\Box\mathrm{TR}+\mathrm{RP}\Rightarrow\mathrm{WRP}</span> and <span class="math inline">\Box\mathrm{WRP}\Leftrightarrow\Box\mathrm{TR}\wedge\Box\mathrm{RP}</span>.</li>
-<li><strong>Infinity</strong>: with one individual the type-<span class="math inline">e</span> Axiom of Infinity fails; with infinitely many propositions the type-<span class="math inline">t</span> one holds.</li>
+<li><strong>Full-model package.</strong> Being full, the model satisfies
+Rigid Comprehension, Actuality, Atomicity, Boolean Completeness,
+Relational Choice and their necessitations (Classicism, p. 61, and the
+topic’s general arguments for full models). With necessary Actuality,
+<span class="math inline">\Box_5=\hat{\hat\Box}</span>, the box over the
+invertible arrows (The Bounds of Possibility, Proposition D21), and
+<span class="math inline">\Box_{\ne}=\hat\Box</span> is the box over the
+arrows with a retraction.</li>
+<li><strong>BF fails</strong> at type <span
+class="math inline">t</span>: by Lemma 2, <span
+class="math inline">e^t</span> is not surjective (<span
+class="math inline">\{1\}</span> is not <span class="math inline">\{x :
+xe\in p\}</span> for any <span class="math inline">p</span>, since <span
+class="math inline">xe\ne1</span>), so Classicism, Proposition
+3.24(iii), applies. ND fails too, as in every non-group monoid model
+here (<span class="math inline">e^t</span> is not injective).</li>
+<li><strong>Two-hat necessity implies ND-necessity fails</strong>: <span
+class="math inline">b</span> has a retraction and is not invertible
+(Lemma 3), so the true proposition <span
+class="math inline">\{1\}\cup\{s\}</span> is two-hat necessary and not
+ND-necessity; in the map this is the general argument from a retracted
+non-invertible arrow in a full model.</li>
+<li><strong>Truth implies 5-necessity fails</strong>: <span
+class="math inline">s</span> is a non-identity unit, so <span
+class="math inline">\{1\}</span> is true but not <span
+class="math inline">\Box_5</span>-necessary; general argument from a
+non-identity isomorphism in a full model.</li>
+<li><strong>5-necessity implies two-hat necessity holds</strong>, boxed,
+as in every full model.</li>
+<li><strong>Strong Actuality holds</strong>, boxed: the true proposition
+<span class="math inline">\{1\}</span> becomes, under an arrow <span
+class="math inline">u</span>, the set of left inverses of <span
+class="math inline">u</span>, which has at most one member (Lemma 3), so
+it is an atom or empty at every world; in the map this is the general
+argument from unique retractions in a model with the identity
+singletons.</li>
+<li><strong>Rigid Power holds</strong>, boxed: the model is full, so a
+relation is weakly inextensible at a world iff it lies below <span
+class="math inline">k\mapsto k\cdot E</span> over its extension <span
+class="math inline">E</span> there, and the rigid relations are exactly
+the intensions <span class="math inline">k\mapsto k\cdot E</span>; the
+power property of such a relation is then <span
+class="math inline">k\mapsto k\cdot E&#39;</span> for its own extension
+<span class="math inline">E&#39;</span>, hence rigid (the topic’s
+general argument for full models). Tame Rigidity holds boxed in every
+full model, so <strong>Weakly Rigid Power holds</strong>, boxed, by the
+recorded results <span
+class="math inline">\Box\mathrm{TR}+\mathrm{RP}\Rightarrow\mathrm{WRP}</span>
+and <span
+class="math inline">\Box\mathrm{WRP}\Leftrightarrow\Box\mathrm{TR}\wedge\Box\mathrm{RP}</span>.</li>
+<li><strong>Infinity</strong>: with one individual the type-<span
+class="math inline">e</span> Axiom of Infinity fails; with infinitely
+many propositions the type-<span class="math inline">t</span> one
+holds.</li>
 </ul>
-<h2 id="the-job-of-each-factor-and-how-to-disaggregate">4. The job of each factor, and how to disaggregate</h2>
+<h2 id="the-job-of-each-factor-and-how-to-disaggregate">4. The job of
+each factor, and how to disaggregate</h2>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -378,12 +598,17 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <tr>
 <td><span class="math inline">E</span></td>
 <td>the idempotent <span class="math inline">e</span></td>
-<td>a non-epic arrow with no retraction: BF fails; also the irreversible arrow and the Strong Leibniz failure of Classicism’s two-arrow idempotent model</td>
+<td>a non-epic arrow with no retraction: BF fails; also the irreversible
+arrow and Strong Atomicity failure of Classicism’s two-arrow idempotent
+model</td>
 </tr>
 <tr>
 <td><span class="math inline">B</span></td>
-<td><span class="math inline">b</span>, retracted by <span class="math inline">c</span></td>
-<td>a split monomorphism that is not a unit: <span class="math inline">\Box_{\ne}\ne\hat{\hat\Box}</span>, collapse at the second hat</td>
+<td><span class="math inline">b</span>, retracted by <span
+class="math inline">c</span></td>
+<td>a split monomorphism that is not a unit: <span
+class="math inline">\Box_{\ne}\ne\hat{\hat\Box}</span>, collapse at the
+second hat</td>
 </tr>
 <tr>
 <td><span class="math inline">\mathbb Z_2</span></td>
@@ -392,11 +617,44 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 </tr>
 </tbody>
 </table>
-<p>The gluing uses only Lemma 4, so any free product <span class="math inline">F_\infty * N</span> supports it. Dropping factors separates the failures: over <span class="math inline">F_\infty * E</span> the collapse principles all hold and BF fails; over <span class="math inline">F_\infty * B</span> BF fails and only the first collapse fails (<span class="math inline">b</span> is also non-epic, so <span class="math inline">E</span> is not needed for BF); over <span class="math inline">F_\infty * \mathbb Z_2</span>, a cancellative monoid, BF holds and only Truth implies 5-necessity fails. None of these can separate Logical Necessity from the full-model package of §3; that would need a non-full construction closed under gluing, for which symmetry-constrained full domains over a tree-like monoid are the natural candidate, since post-composition by a symmetry keeps an arrow in its site.</p>
+<p>The gluing uses only Lemma 4, so any free product <span
+class="math inline">F_\infty * N</span> supports it. Dropping factors
+separates the failures: over <span class="math inline">F_\infty *
+E</span> the collapse principles all hold and BF fails; over <span
+class="math inline">F_\infty * B</span> BF fails and only the first
+collapse fails (<span class="math inline">b</span> is also non-epic, so
+<span class="math inline">E</span> is not needed for BF); over <span
+class="math inline">F_\infty * \mathbb Z_2</span>, a cancellative
+monoid, BF holds and only Truth implies 5-necessity fails. None of these
+can separate Logical Necessity from the full-model package of §3; that
+would need a non-full construction closed under gluing, for which
+symmetry-constrained full domains over a tree-like monoid are the
+natural candidate, since post-composition by a symmetry keeps an arrow
+in its site.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Formulation: Logical Combinatorialism.</strong> Bacon, Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the import of 22 September 2026; section, footnote and page locators refer to the published pagination. — Appendix A.3. The gluing construction, here carried out over a free product instead of the free monoid.</li>
-<li><strong>Background: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — §18.6, Definition 18.15</li>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.5, pp. 58–61</li>
+<li><strong>Formulation: Logical Combinatorialism.</strong> Bacon,
+Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4),
+537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the
+import of 22 September 2026; section, footnote and page locators refer
+to the published pagination. — Appendix A.3. The gluing construction,
+here carried out over a free product instead of the free monoid.</li>
+<li><strong>Background: A Philosophical Introduction to Higher-Order
+Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to
+Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8,
+Application: Consequences and strengthenings of Classicism, pp. 155–182,
+and Chapter 18, The model theory of classicism, pp. 389–413, were read
+directly on 22 September 2026; locators give the book’s own page
+numbers. The book works in the full simple type hierarchy with Modalized
+Functionality at all types; its results are taken in the map’s
+relational type system, of which its models are models. — §18.6,
+Definition 18.15</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §3.5,
+pp. 58–61</li>
 </ul>
 </body></html>

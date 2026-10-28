@@ -323,31 +323,104 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Strong Leibniz Biconditionals ∧ □Rigid Comprehension ∧ Rigid Power ⇒ BF (relational types)</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.strong_leibniz_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational</code>; produced by Cian Dorr, 11 October 2026; steps (i) and (ii) made precise by Claude Opus 5.5 (Anthropic); recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 11 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.strong_leibniz_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational</code>;
+produced by Cian Dorr, 11 October 2026; steps (i) and (ii) made precise
+by Claude Opus 5.5 (Anthropic); recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 11 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Strong Leibniz Biconditionals.</strong> At each relational type, every possible entity (one distinct from bottom) is entailed by a strong world: a possible entity that necessarily entails every entity of the type or its negation. The right-to-left direction is a theorem of C; the principle records the substantive direction.</li>
-<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation, including a proposition, is coextensive with a rigid one.</li>
-<li><strong>Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
+<li><strong>Strong Leibniz Biconditionals.</strong> At each relational
+type, every possible entity (one distinct from bottom) is entailed by a
+strong world: a possible entity that necessarily entails every entity of
+the type or its negation. The right-to-left direction is a theorem of C;
+the principle records the substantive direction.</li>
+<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation,
+including a proposition, is coextensive with a rigid one.</li>
+<li><strong>Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>BF (relational types).</strong> The Barcan Formula at every relational type, that is, at every type other than e.</li>
+<li><strong>BF (relational types).</strong> The Barcan Formula at every
+relational type, that is, at every type other than e.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix a relational type <span class="math inline">\sigma=\bar\sigma\to t</span>, write <span class="math inline">W\bar x</span> for application to a tuple, and let <span class="math inline">J(R):=\lambda\bar x\,.\,\exists W\,.\,RW\land W\bar x</span>, the join of the members of <span class="math inline">R</span>. This is the argument of strong-leibniz-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t with atoms of type <span class="math inline">\sigma</span> for atoms, “<span class="math inline">W\bar x</span>” for “<span class="math inline">w</span> is true”, and <span class="math inline">J(R)</span> for <span class="math inline">\exists w\,.\,Rw\land w</span>. Let <span class="math inline">A</span> be rigid and coextensive with being an atom of type <span class="math inline">\sigma</span>. (a) <span class="math inline">\Box\forall\bar x\,\exists W\,.\,AW\land W\bar x</span>: <span class="math inline">J(A)</span> is entailed by every atom, so by the dual of Atomicity at <span class="math inline">\sigma</span> (which Strong Leibniz at <span class="math inline">\sigma</span> gives) it is necessarily universal. (b) Necessarily every <span class="math inline">A</span>-instance decides every entity of type <span class="math inline">\sigma</span>, since the actual atoms are strong worlds by Strong Leibniz. (ii) At every world <span class="math inline">v</span>, each <span class="math inline">Y</span> of type <span class="math inline">\sigma</span> is <span class="math inline">J(R_Y)</span> for a rigid <span class="math inline">R_Y\le A</span> coextensive at <span class="math inline">v</span> with <span class="math inline">\lambda W\,.\,AW\land W\le Y</span>, by Rigid Comprehension at <span class="math inline">v</span>: <span class="math inline">J(R_Y)\le Y</span> by weak inextensibility of <span class="math inline">R_Y</span>, and <span class="math inline">Y\le J(R_Y)</span> by weak inextensibility of <span class="math inline">A</span> at <span class="math inline">v</span> applied to <span class="math inline">\lambda W\,.\,(\exists\bar x\,.\,W\bar x)\to W\le Y\to R_YW</span>, with (a) and (b) at later worlds; antisymmetry gives identity. (iii) Rigid Power makes <span class="math inline">\lambda R\,.\,\operatorname{Rigid}(R)\land R\le A</span> rigid; if <span class="math inline">\forall Y\,.\,\Box XY</span>, its weak inextensibility gives <span class="math inline">\Box\forall R\,.\,(\operatorname{Rigid}(R)\land R\le A)\to X(J(R))</span>, and with (ii) under the box, <span class="math inline">\Box\forall Y\,.\,XY</span>. This is BF at <span class="math inline">\sigma</span>.</p>
+<p>Fix a relational type <span class="math inline">\sigma=\bar\sigma\to
+t</span>, write <span class="math inline">W\bar x</span> for application
+to a tuple, and let <span class="math inline">J(R):=\lambda\bar
+x\,.\,\exists W\,.\,RW\land W\bar x</span>, the join of the members of
+<span class="math inline">R</span>. This is the argument of
+strong-leibniz-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t
+with atoms of type <span class="math inline">\sigma</span> for atoms,
+“<span class="math inline">W\bar x</span>” for “<span
+class="math inline">w</span> is true”, and <span
+class="math inline">J(R)</span> for <span class="math inline">\exists
+w\,.\,Rw\land w</span>. Let <span class="math inline">A</span> be rigid
+and coextensive with being an atom of type <span
+class="math inline">\sigma</span>. (a) <span
+class="math inline">\Box\forall\bar x\,\exists W\,.\,AW\land W\bar
+x</span>: <span class="math inline">J(A)</span> is entailed by every
+atom, so by the dual of Atomicity at <span
+class="math inline">\sigma</span> (which Strong Leibniz at <span
+class="math inline">\sigma</span> gives) it is necessarily universal.
+(b) Necessarily every <span class="math inline">A</span>-instance
+decides every entity of type <span class="math inline">\sigma</span>,
+since the actual atoms are strong worlds by Strong Leibniz. (ii) At
+every world <span class="math inline">v</span>, each <span
+class="math inline">Y</span> of type <span
+class="math inline">\sigma</span> is <span
+class="math inline">J(R_Y)</span> for a rigid <span
+class="math inline">R_Y\le A</span> coextensive at <span
+class="math inline">v</span> with <span class="math inline">\lambda
+W\,.\,AW\land W\le Y</span>, by Rigid Comprehension at <span
+class="math inline">v</span>: <span class="math inline">J(R_Y)\le
+Y</span> by weak inextensibility of <span
+class="math inline">R_Y</span>, and <span class="math inline">Y\le
+J(R_Y)</span> by weak inextensibility of <span
+class="math inline">A</span> at <span class="math inline">v</span>
+applied to <span class="math inline">\lambda W\,.\,(\exists\bar
+x\,.\,W\bar x)\to W\le Y\to R_YW</span>, with (a) and (b) at later
+worlds; antisymmetry gives identity. (iii) Rigid Power makes <span
+class="math inline">\lambda R\,.\,\operatorname{Rigid}(R)\land R\le
+A</span> rigid; if <span class="math inline">\forall Y\,.\,\Box
+XY</span>, its weak inextensibility gives <span
+class="math inline">\Box\forall R\,.\,(\operatorname{Rigid}(R)\land R\le
+A)\to X(J(R))</span>, and with (ii) under the box, <span
+class="math inline">\Box\forall Y\,.\,XY</span>. This is BF at <span
+class="math inline">\sigma</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Cian Dorr’s salvage of Bacon’s Theorem 8.2, at every relational type. Strong Leibniz is used at <span class="math inline">\sigma</span> and at the evaluation point only, Rigid Comprehension at <span class="math inline">\sigma\to t</span> at every world, and Rigid Power at <span class="math inline">\sigma\to t</span>. So a model of □Strong Leibniz and Rigid Comprehension refuting BF at a relational type <span class="math inline">\sigma</span> (a countermodel to Bacon’s theorem) must fail □Rigid Comprehension or Rigid Power at <span class="math inline">\sigma\to t</span>.</p>
+<p>Cian Dorr’s salvage of Bacon’s Theorem 8.2, at every relational type.
+Strong Leibniz is used at <span class="math inline">\sigma</span> and at
+the evaluation point only, Rigid Comprehension at <span
+class="math inline">\sigma\to t</span> at every world, and Rigid Power
+at <span class="math inline">\sigma\to t</span>. So a model of □Strong
+Leibniz and Rigid Comprehension refuting BF at a relational type <span
+class="math inline">\sigma</span> (a countermodel to Bacon’s theorem)
+must fail □Rigid Comprehension or Rigid Power at <span
+class="math inline">\sigma\to t</span>.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October 2026, after the gap in Bacon’s Theorem 8.2.</li>
+<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October
+2026, after the gap in Bacon’s Theorem 8.2.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational.yaml</code>
+Record:
+<code>topics/classicism/results/strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Related: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — §8.2, Theorem 8.2, pp. 169–170. A salvage of the theorem’s idea, with □Rigid Comprehension and Rigid Power.</li>
+<li><strong>Related: A Philosophical Introduction to Higher-Order
+Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to
+Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8,
+Application: Consequences and strengthenings of Classicism, pp. 155–182,
+and Chapter 18, The model theory of classicism, pp. 389–413, were read
+directly on 22 September 2026; locators give the book’s own page
+numbers. The book works in the full simple type hierarchy with Modalized
+Functionality at all types; its results are taken in the map’s
+relational type system, of which its models are models. — §8.2, Theorem
+8.2, pp. 169–170. A salvage of the theorem’s idea, with □Rigid
+Comprehension and Rigid Power.</li>
 </ul>
 </body></html>

@@ -4,6 +4,8 @@
 
 ## Package
 
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
@@ -20,8 +22,10 @@
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
+- **¬ Atoms are self-atoms (type t).** Every atom is a self-atom: necessarily, if it is true, it is an atom.
 - **¬ BF.** The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.
-- **¬ Strong Leibniz Biconditionals (type t).** Every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.
+- **¬ Strong Atomicity (type t).** Every possible proposition is entailed by a strong atom, one that is possible and necessarily entails every proposition or its negation.
 - **¬ Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
 - **¬ Countable Boolean Completeness.** Every countable property of entities of a relational type has a least upper bound in that type, where a property is countable relative to a type $\sigma$ when it injects into the finite cardinalities of properties of type $\sigma$; one instance for each $\sigma$.
 - **¬ Boolean Completeness (type t).** Every property of propositions has a greatest lower bound.
@@ -43,6 +47,12 @@ Interpretation of Σ, fixed for this record: one designated relational constant 
 
 ## Arguments
 
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms. Fails Self-Atomicity (type t), Atoms are self-atoms (type t).
+
+The arrows are idempotent, $f_n\circ f_n=f_n$, and determined by finitely many values, so every singleton is in the domain; $\{1\}$ is the only atom containing the identity. The atom $\{f_2\}$ is not a self-atom: its transport along $f_2$ is $\{f_1,f_2\}$, not an atom. So Atoms are self-atoms (type t) fails, and Self-Atomicity (type t) fails, $\{f_2\}$ being possible with no self-atom below it. No self-atom contains an $f_n$ with $n\ge2$, since its transport along $f_n$ would contain $f_n$ and $1$; so the only self-atom is $\{1\}$, an atom, and a strong atom, its transport along every $f_n$ with $n\ge2$ being empty, no arrow having a retraction. A self-atom of a relational type sits over $1$ with one tuple, so is an atom and a strong atom. One object, so this holds at every world.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
 ### Holds Rigid Power.
 
 Write $X_0(E)$ for the intension $m\mapsto f_m\cdot E$. Every arrow is finitely determined, so, as in the group's argument for Tame Rigidity, a weakly inextensible relation is $X_0$ of its extension at the identity, and the rigid relations are the $X_0(E)$ that are in the domain, namely those with $f_m\cdot E$ constant for all $m$ beyond some $s$. For rigid $F=X_0(S)$ the power property $\lambda X\, .\,\operatorname{Rigid}(X)\land X\le F$ has extension $\{X_0(T'):T'\subseteq f_m\cdot S,\ X_0(T')\text{ in the domain}\}$ at $f_m$, while its extension at the identity transported along $f_m$ is $\{X_0(f_m\cdot T):T\subseteq S,\ X_0(T)\text{ in the domain}\}$. Given such a $T'$, put $T:=\{q\in S: f_m\cdot q\in T'\}$, so that $f_m\cdot T=T'$. Since $f_n\circ f_m=f_n$ for $n\ge m$, transport gives $f_n\cdot T=f_n\cdot T'$ for $n\ge m$, constant for large $n$; so $X_0(T)$ is in the domain. Hence the power property is $X_0$ of its extension; and $f_n$ applied to that extension is, by the same correspondence, $\{X_0(T''):T''\subseteq f_n\cdot S,\ X_0(T'')\text{ in the domain}\}$, constant for $n>s$, so the power property is in the domain and rigid. The boxed form follows from No Pure Contingency.
@@ -55,9 +65,9 @@ An arrow sending $1$ to $0$ sends everything to even numbers.
 
 *Source: Classicism, Proposition D.5(7), p. 78. By Andrew Bacon and Cian Dorr, 2026-09-17.*
 
-### Fails Strong Leibniz Biconditionals (type t).
+### Fails Strong Atomicity (type t).
 
-A strong world is an atom, and the atoms are the singletons $\{f_n\}$. Seen from $f_n$ with $n\ge2$, $\{f_n\}$ becomes $\{k : k\circ f_n=f_n\}=\{f_m : m\le n\}$, since $f_m\circ f_n=f_{\max\{m,n\}}$, and the proposition $\{f_1\}$ splits that set. So the only strong world is $\{f_1\}$, whose transport along every other arrow is empty, and the possible proposition $\{f_2\}$ has no strong world below it.
+A strong atom is an atom, and the atoms are the singletons $\{f_n\}$. Seen from $f_n$ with $n\ge2$, $\{f_n\}$ becomes $\{k : k\circ f_n=f_n\}=\{f_m : m\le n\}$, since $f_m\circ f_n=f_{\max\{m,n\}}$, and the proposition $\{f_1\}$ splits that set. So the only strong atom is $\{f_1\}$, whose transport along every other arrow is empty, and the possible proposition $\{f_2\}$ has no strong atom below it.
 
 *By Claude Fable 5.1 (Anthropic), answering Cian Dorr’s questions whether the failure of BF sharpens to type $t$ and whether failures of Atomicity’s strengthening can be found where Atomicity holds, 2026-09-23.*
 
@@ -234,15 +244,15 @@ The record's revision log before it was written as arguments.
 
 - **2026-09-25** (Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell) — Added Transversal Choice, by the argument recorded for Relational Choice: the model is extensionally full at every object, so for an equivalence relation at the evaluation point a transversal of its extension there, chosen in the metatheory, is the extension of an element pinned down by the empty set; the equivalence and transversal conditions are unboxed. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun. Now satisfies: Transversal Choice.
 - **2026-09-25** (OpenAI Codex (GPT-6), prompted by Zachary Goodsell) — Accepted the trawl's type-t Boolean Completeness failure after checking the finite/cofinite domain and replacing the conditional higher-type argument by the source's extensional-fullness lemma. Informal review; no Lean verification. Now violates: Boolean Completeness (type t).
-- **2026-09-25** (OpenAI Codex (GPT-6), prompted by Zachary Goodsell) — Confirmed the trawl's Strong Leibniz-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing both the identity and the idempotent, which a target-domain proposition separates. Quantifiers inside the box range over the entire target domain. The boxed failure follows by T. Now violates: Strong Leibniz Biconditionals (type t).
-- **2026-09-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added the failure of Strong Leibniz Biconditionals (type t), of BF (type t) and of Boolean Completeness (type t), with the arguments in the notes. Now violates: Strong Leibniz Biconditionals (type t), BF (type t), Boolean Completeness (type t).
-- **2026-09-25** (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — Merged the two sets of arguments recorded on 23 and 25 September into one: BF (type t) now follows from Atomicity and the failure of the type-t Strong Leibniz Biconditionals, with a one-line direct witness.
+- **2026-09-25** (OpenAI Codex (GPT-6), prompted by Zachary Goodsell) — Confirmed the trawl's Strong Atomicity-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing both the identity and the idempotent, which a target-domain proposition separates. Quantifiers inside the box range over the entire target domain. The boxed failure follows by T. Now violates: Strong Atomicity (type t).
+- **2026-09-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added the failure of Strong Atomicity (type t), of BF (type t) and of Boolean Completeness (type t), with the arguments in the notes. Now violates: Strong Atomicity (type t), BF (type t), Boolean Completeness (type t).
+- **2026-09-25** (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — Merged the two sets of arguments recorded on 23 and 25 September into one: BF (type t) now follows from Atomicity and the failure of the type-t Strong Atomicity, with a one-line direct witness.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Expanded the description from Appendix D, naming Proposition D.5 and its part; added the failure of Countable Boolean Completeness at type e→t; settled the Distinctness-preserving collapse. Now satisfies: Truth implies ND-necessity. Now violates: Countable Boolean Completeness.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Re-fixed the interpretation of Σ so as to settle No Contingency (signature Σ) and B for sentences of Σ, at Cian Dorr’s request; see the notes. Now violates: No Contingency (signature Σ), B for sentences of Σ.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Corrected the reason given for the failures of Independence (signature Σ) and Distinctness (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed by every arrow; the failures come from the other relational constants, which denote top. No verdict changes.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added Relational Choice and its necessitation at Cian Dorr’s direction: ideally full models are extensionally full at every object, and choice in the metatheory supplies the functional subrelation; see the notes. Now satisfies: Relational Choice, □Relational Choice.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of BF at type t, sharpening the failure of BF; argument in the notes. Now violates: BF (type t).
-- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of the type-t Strong Leibniz Biconditionals, which come apart from Atomicity here; see the notes. Now violates: Strong Leibniz Biconditionals (type t).
+- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of the type-t Strong Atomicity, which come apart from Atomicity here; see the notes. Now violates: Strong Atomicity (type t).
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 - **2026-09-20** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and identity at the evaluation arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct and each has that individual as finite support, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence has empty support and lies in the domain, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).
 - **2026-09-17** (OpenAI Codex (GPT-6), prompted by Zachary Goodsell) — Adopted the source’s relational type system at the user’s request. The cited construction now directly supplies the recorded model; the former type-extension obligation is removed. Now satisfies: Atomicity, Actuality, No Pure Contingency, □Atomicity, □Actuality. Now violates: ND, BF, Boolean Completeness, Rigid Comprehension.
@@ -251,7 +261,7 @@ The record's revision log before it was written as arguments.
 
 - **Classicism** — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 7, pp. 74, 78; p. 79 (No Pure Contingency).
 - **DeepSeek trawl; GPT-6 review 25 Sep** — DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/finite-support-dyadic-roundings.md; Classicism, Definition D.3 and Proposition D.5, pp. 73–79.
-- **DeepSeek trawl; GPT-6 review 25 Sep** — DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/strong-worlds-one-object-action-models.md; Classicism, pp. 55–59, 74 and 78; checks/action_strong_worlds.py.
+- **DeepSeek trawl; GPT-6 review 25 Sep** — DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction attribution is unchanged. writeups/strong-atoms-one-object-action-models.md; Classicism, pp. 55–59, 74 and 78; checks/action_strong_atoms.py.
 
 <p class='cert'>Record: <code>topics/classicism/models/finite-support-dyadic-roundings.yaml</code></p>
 

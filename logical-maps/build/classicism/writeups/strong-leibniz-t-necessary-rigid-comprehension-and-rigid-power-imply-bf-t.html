@@ -323,31 +323,118 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Strong Leibniz Biconditionals (type t) ∧ □Rigid Comprehension ∧ Rigid Power ⇒ BF (type t)</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.strong_leibniz_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t</code>; produced by Cian Dorr, 11 October 2026; steps (i) and (ii) made precise by Claude Opus 5.5 (Anthropic); recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 11 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.strong_leibniz_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t</code>;
+produced by Cian Dorr, 11 October 2026; steps (i) and (ii) made precise
+by Claude Opus 5.5 (Anthropic); recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 11 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Strong Leibniz Biconditionals (type t).</strong> Every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.</li>
-<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation, including a proposition, is coextensive with a rigid one.</li>
-<li><strong>Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
+<li><strong>Strong Leibniz Biconditionals (type t).</strong> Every
+possible proposition is entailed by a strong world proposition, one that
+is possible and necessarily entails every proposition or its
+negation.</li>
+<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation,
+including a proposition, is coextensive with a rigid one.</li>
+<li><strong>Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>BF (type t).</strong> If every proposition necessarily has a property, then necessarily every proposition has it.</li>
+<li><strong>BF (type t).</strong> If every proposition necessarily has a
+property, then necessarily every proposition has it.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">A</span> be rigid and coextensive with being an atom, by Rigid Comprehension at <span class="math inline">t\to t</span>. (a) <span class="math inline">\Box\exists w\,.\,Aw\land w</span>: each atom <span class="math inline">a</span> has <span class="math inline">\Box Aa</span>, so entails <span class="math inline">\exists w\,.\,Aw\land w</span>, and Strong Leibniz (type t) gives Atomicity (type t), whose dual makes a proposition entailed by every atom necessary. (b) <span class="math inline">\Box\forall w\,.\,Aw\to\forall q\,.\,w\le q\lor w\le\neg q</span>: Strong Leibniz puts a strong world below each atom, which by atomicity is the atom itself, so each actual instance of <span class="math inline">A</span> necessarily decides every proposition, and weak inextensibility of <span class="math inline">A</span> boxes the claim. (ii) At every world <span class="math inline">v</span>, each proposition <span class="math inline">p</span> is <span class="math inline">\exists w\,.\,R_pw\land w</span> for a rigid <span class="math inline">R_p\le A</span>: by Rigid Comprehension at <span class="math inline">v</span> (the premise is boxed) let <span class="math inline">R_p</span> be rigid and coextensive with <span class="math inline">\lambda a\,.\,Aa\land a\le p</span>; <span class="math inline">R_p\le A</span> by its weak inextensibility. Necessarily, from <span class="math inline">v</span>, <span class="math inline">R_pw\land w</span> gives <span class="math inline">p</span>, by weak inextensibility of <span class="math inline">R_p</span> applied to <span class="math inline">\lambda w\,.\,w\le p</span>. Conversely apply weak inextensibility of <span class="math inline">A</span> at <span class="math inline">v</span> to <span class="math inline">Z:=\lambda w\,.\,w\to w\le p\to R_pw</span>: for a <span class="math inline">v</span>-instance <span class="math inline">a</span> of <span class="math inline">A</span>, either <span class="math inline">a\le p</span>, so <span class="math inline">R_pa</span> and <span class="math inline">\Box R_pa</span>, or <span class="math inline">a\le\neg p</span> by (b), and then necessarily <span class="math inline">a</span> and <span class="math inline">a\le p</span> are not both true; so <span class="math inline">\Box Za</span>. At a later world where <span class="math inline">p</span> is true, (a) gives a true <span class="math inline">A</span>-instance <span class="math inline">w</span>, which by (b) entails <span class="math inline">p</span>, so <span class="math inline">R_pw</span> by <span class="math inline">Z</span>. So <span class="math inline">p</span> and <span class="math inline">\exists w\,.\,R_pw\land w</span> are necessarily equivalent from <span class="math inline">v</span>, hence identical. (iii) Rigid Power makes the power property <span class="math inline">P_A:=\lambda R\,.\,\operatorname{Rigid}(R)\land R\le A</span> rigid. Suppose <span class="math inline">\forall p\,.\,\Box Xp</span>. Then <span class="math inline">\Box X(\exists w\,.\,Rw\land w)</span> for every <span class="math inline">R</span> with <span class="math inline">P_AR</span>, so weak inextensibility of <span class="math inline">P_A</span> gives <span class="math inline">\Box\forall R\,.\,P_AR\to X(\exists w\,.\,Rw\land w)</span>; with (ii) under the box, <span class="math inline">\Box\forall p\,.\,Xp</span>. This is BF (type t).</p>
+<p>Let <span class="math inline">A</span> be rigid and coextensive with
+being an atom, by Rigid Comprehension at <span class="math inline">t\to
+t</span>. (a) <span class="math inline">\Box\exists w\,.\,Aw\land
+w</span>: each atom <span class="math inline">a</span> has <span
+class="math inline">\Box Aa</span>, so entails <span
+class="math inline">\exists w\,.\,Aw\land w</span>, and Strong Leibniz
+(type t) gives Atomicity (type t), whose dual makes a proposition
+entailed by every atom necessary. (b) <span
+class="math inline">\Box\forall w\,.\,Aw\to\forall q\,.\,w\le q\lor
+w\le\neg q</span>: Strong Leibniz puts a strong world below each atom,
+which by atomicity is the atom itself, so each actual instance of <span
+class="math inline">A</span> necessarily decides every proposition, and
+weak inextensibility of <span class="math inline">A</span> boxes the
+claim. (ii) At every world <span class="math inline">v</span>, each
+proposition <span class="math inline">p</span> is <span
+class="math inline">\exists w\,.\,R_pw\land w</span> for a rigid <span
+class="math inline">R_p\le A</span>: by Rigid Comprehension at <span
+class="math inline">v</span> (the premise is boxed) let <span
+class="math inline">R_p</span> be rigid and coextensive with <span
+class="math inline">\lambda a\,.\,Aa\land a\le p</span>; <span
+class="math inline">R_p\le A</span> by its weak inextensibility.
+Necessarily, from <span class="math inline">v</span>, <span
+class="math inline">R_pw\land w</span> gives <span
+class="math inline">p</span>, by weak inextensibility of <span
+class="math inline">R_p</span> applied to <span
+class="math inline">\lambda w\,.\,w\le p</span>. Conversely apply weak
+inextensibility of <span class="math inline">A</span> at <span
+class="math inline">v</span> to <span class="math inline">Z:=\lambda
+w\,.\,w\to w\le p\to R_pw</span>: for a <span
+class="math inline">v</span>-instance <span class="math inline">a</span>
+of <span class="math inline">A</span>, either <span
+class="math inline">a\le p</span>, so <span
+class="math inline">R_pa</span> and <span class="math inline">\Box
+R_pa</span>, or <span class="math inline">a\le\neg p</span> by (b), and
+then necessarily <span class="math inline">a</span> and <span
+class="math inline">a\le p</span> are not both true; so <span
+class="math inline">\Box Za</span>. At a later world where <span
+class="math inline">p</span> is true, (a) gives a true <span
+class="math inline">A</span>-instance <span
+class="math inline">w</span>, which by (b) entails <span
+class="math inline">p</span>, so <span class="math inline">R_pw</span>
+by <span class="math inline">Z</span>. So <span
+class="math inline">p</span> and <span class="math inline">\exists
+w\,.\,R_pw\land w</span> are necessarily equivalent from <span
+class="math inline">v</span>, hence identical. (iii) Rigid Power makes
+the power property <span class="math inline">P_A:=\lambda
+R\,.\,\operatorname{Rigid}(R)\land R\le A</span> rigid. Suppose <span
+class="math inline">\forall p\,.\,\Box Xp</span>. Then <span
+class="math inline">\Box X(\exists w\,.\,Rw\land w)</span> for every
+<span class="math inline">R</span> with <span
+class="math inline">P_AR</span>, so weak inextensibility of <span
+class="math inline">P_A</span> gives <span
+class="math inline">\Box\forall R\,.\,P_AR\to X(\exists w\,.\,Rw\land
+w)</span>; with (ii) under the box, <span
+class="math inline">\Box\forall p\,.\,Xp</span>. This is BF (type
+t).</p>
 <h2 id="notes">Notes</h2>
-<p>Cian Dorr’s salvage of Bacon’s Theorem 8.2 (now conjectured). Strong Leibniz is used only at type <span class="math inline">t</span> and at the evaluation point, Rigid Comprehension at <span class="math inline">t\to t</span> at every world, and Rigid Power at <span class="math inline">t\to t</span>. With the Tame Rigidity that Rigid Comprehension gives and the recorded TR + BF (relational types) ⇒ □BF (relational types), the map derives □BF (type t). So a model of □Strong Leibniz and Rigid Comprehension refuting BF (type t) must fail □Rigid Comprehension or Rigid Power at <span class="math inline">t\to t</span>. The relational form is strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational.</p>
+<p>Cian Dorr’s salvage of Bacon’s Theorem 8.2 (now conjectured). Strong
+Leibniz is used only at type <span class="math inline">t</span> and at
+the evaluation point, Rigid Comprehension at <span
+class="math inline">t\to t</span> at every world, and Rigid Power at
+<span class="math inline">t\to t</span>. With the Tame Rigidity that
+Rigid Comprehension gives and the recorded TR + BF (relational types) ⇒
+□BF (relational types), the map derives □BF (type t). So a model of
+□Strong Leibniz and Rigid Comprehension refuting BF (type t) must fail
+□Rigid Comprehension or Rigid Power at <span class="math inline">t\to
+t</span>. The relational form is
+strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October 2026, after the gap in Bacon’s Theorem 8.2.</li>
+<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October
+2026, after the gap in Bacon’s Theorem 8.2.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/strong-leibniz-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t.yaml</code>
+Record:
+<code>topics/classicism/results/strong-leibniz-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Related: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — §8.2, Theorem 8.2, pp. 169–170. A salvage of the theorem’s idea, with □Rigid Comprehension and Rigid Power.</li>
+<li><strong>Related: A Philosophical Introduction to Higher-Order
+Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to
+Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8,
+Application: Consequences and strengthenings of Classicism, pp. 155–182,
+and Chapter 18, The model theory of classicism, pp. 389–413, were read
+directly on 22 September 2026; locators give the book’s own page
+numbers. The book works in the full simple type hierarchy with Modalized
+Functionality at all types; its results are taken in the map’s
+relational type system, of which its models are models. — §8.2, Theorem
+8.2, pp. 169–170. A salvage of the theorem’s idea, with □Rigid
+Comprehension and Rigid Power.</li>
 </ul>
 </body></html>

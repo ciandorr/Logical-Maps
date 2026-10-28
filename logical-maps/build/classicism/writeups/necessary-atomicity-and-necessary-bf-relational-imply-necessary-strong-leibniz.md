@@ -19,6 +19,12 @@ Necessitate [[atomicity-and-bf-relational-imply-strong-leibniz]], a theorem of C
 
 With necessary-strong-leibniz-and-rigid-comprehension-imply-necessary-bf-relational, this is Theorem 8.2: given Rigid Comprehension and □Atomicity, □Strong Leibniz is equivalent to □BF (relational types).
 
+Now derived through the boxed bridge results [[necessary-barcan-relational-implies-necessary-atoms-are-strong-worlds-r]] and [[necessary-atomicity-r-and-necessary-atoms-are-strong-worlds-r-imply-necessary-strong-leibniz-r]].
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Dorr 11 Oct** — Cian Dorr, suggestion of 11 October 2026.

@@ -323,31 +323,84 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Vicinity ∧ Weakly Inextensible Comprehension ⇒ Actuality</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.vicinity_and_weakly_inextensible_comprehension_imply_actuality</code>; produced by Christopher Sun (the claim and the witness), 27 September 2026; Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, the written proof, reconstructed from Sun’s witness at Cian Dorr’s request and checked by him; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 27 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.vicinity_and_weakly_inextensible_comprehension_imply_actuality</code>;
+produced by Christopher Sun (the claim and the witness), 27 September
+2026; Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, the written
+proof, reconstructed from Sun’s witness at Cian Dorr’s request and
+checked by him; recorded by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr, 27 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Vicinity.</strong> There is a true proposition that entails the possibility of each true proposition.</li>
-<li><strong>Weakly Inextensible Comprehension.</strong> Every relation, including a proposition, is coextensive with a weakly inextensible one.</li>
+<li><strong>Vicinity.</strong> There is a true proposition that entails
+the possibility of each true proposition.</li>
+<li><strong>Weakly Inextensible Comprehension.</strong> Every relation,
+including a proposition, is coextensive with a weakly inextensible
+one.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">w</span> witness Vicinity. Weakly Inextensible Comprehension at type <span class="math inline">t\to t</span>, applied to <span class="math inline">X:=\lambda p\, .\,p</span>, gives a weakly inextensible <span class="math inline">F</span> with <span class="math inline">\forall p\, .\,Fp\leftrightarrow p</span>. Put <span class="math inline">a:=w\land\forall p\, .\,p\leftrightarrow Fp</span>, which is true. Fix a true <span class="math inline">q</span>; we show <span class="math inline">a\le q</span>. Let <span class="math inline">Z_q:=\lambda p\, .\,w\to\Diamond(q\land p)</span>. If <span class="math inline">Fp</span> then <span class="math inline">p</span> is true, so <span class="math inline">q\land p</span> is true and Vicinity gives <span class="math inline">w\le\Diamond(q\land p)</span>, which is <span class="math inline">\Box Z_q\,p</span>. Hence <span class="math inline">\forall p\, .\,Fp\to\Box Z_q\,p</span>, and weak inextensibility gives <span class="math inline">F\le Z_q</span>, that is <span class="math inline">\Box\forall p\, .\,Fp\to(w\to\Diamond(q\land p))</span>. Instantiate at <span class="math inline">p:=\neg q</span>: since <span class="math inline">\Diamond(q\land\neg q)=\Diamond\bot=\bot</span>, this is <span class="math inline">\Box\neg(w\land F\neg q)</span>. The formula <span class="math inline">a\land\neg q\to w\land F\neg q</span> is a theorem, so by necessitation and K, <span class="math inline">\Box\neg(a\land\neg q)</span>, which is <span class="math inline">a\le q</span>. So <span class="math inline">a</span> witnesses Actuality.</p>
+<p>Let <span class="math inline">w</span> witness Vicinity. Weakly
+Inextensible Comprehension at type <span class="math inline">t\to
+t</span>, applied to <span class="math inline">X:=\lambda p\,
+.\,p</span>, gives a weakly inextensible <span
+class="math inline">F</span> with <span class="math inline">\forall p\,
+.\,Fp\leftrightarrow p</span>. Put <span
+class="math inline">a:=w\land\forall p\, .\,p\leftrightarrow Fp</span>,
+which is true. Fix a true <span class="math inline">q</span>; we show
+<span class="math inline">a\le q</span>. Let <span
+class="math inline">Z_q:=\lambda p\, .\,w\to\Diamond(q\land p)</span>.
+If <span class="math inline">Fp</span> then <span
+class="math inline">p</span> is true, so <span
+class="math inline">q\land p</span> is true and Vicinity gives <span
+class="math inline">w\le\Diamond(q\land p)</span>, which is <span
+class="math inline">\Box Z_q\,p</span>. Hence <span
+class="math inline">\forall p\, .\,Fp\to\Box Z_q\,p</span>, and weak
+inextensibility gives <span class="math inline">F\le Z_q</span>, that is
+<span class="math inline">\Box\forall p\, .\,Fp\to(w\to\Diamond(q\land
+p))</span>. Instantiate at <span class="math inline">p:=\neg q</span>:
+since <span class="math inline">\Diamond(q\land\neg
+q)=\Diamond\bot=\bot</span>, this is <span
+class="math inline">\Box\neg(w\land F\neg q)</span>. The formula <span
+class="math inline">a\land\neg q\to w\land F\neg q</span> is a theorem,
+so by necessitation and K, <span class="math inline">\Box\neg(a\land\neg
+q)</span>, which is <span class="math inline">a\le q</span>. So <span
+class="math inline">a</span> witnesses Actuality.</p>
 <h2 id="notes">Notes</h2>
-<p>Only the type-<span class="math inline">(t\to t)</span> instance of Weakly Inextensible Comprehension at <span class="math inline">X=\lambda p\, .\,p</span> is used. Unlike the derivation of Weakly Inextensible Comprehension from Actuality, the argument uses the box in the antecedent of weak inextensibility, and Vicinity is what supplies it. With that derivation and Actuality ⇒ Vicinity, Actuality is equivalent to Vicinity together with Weakly Inextensible Comprehension. Since the implication is a theorem of C, its necessitation also holds, but the map has no record of necessary Weakly Inextensible Comprehension.</p>
+<p>Only the type-<span class="math inline">(t\to t)</span> instance of
+Weakly Inextensible Comprehension at <span class="math inline">X=\lambda
+p\, .\,p</span> is used. Unlike the derivation of Weakly Inextensible
+Comprehension from Actuality, the argument uses the box in the
+antecedent of weak inextensibility, and Vicinity is what supplies it.
+With that derivation and Actuality ⇒ Vicinity, Actuality is equivalent
+to Vicinity together with Weakly Inextensible Comprehension. Since the
+implication is a theorem of C, its necessitation also holds, but the map
+has no record of necessary Weakly Inextensible Comprehension.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Sun 27 Sep</strong> — Christopher Sun, claim and witness communicated to Cian Dorr, 27 September 2026.</li>
-<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, p. 12 (weak inextensibility).</li>
+<li><strong>Sun 27 Sep</strong> — Christopher Sun, claim and witness
+communicated to Cian Dorr, 27 September 2026.</li>
+<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean
+Completeness does not imply Rigid Comprehension, draft of 30 July 2026,
+p. 12 (weak inextensibility).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/vicinity-and-weakly-inextensible-comprehension-imply-actuality.yaml</code>
+Record:
+<code>topics/classicism/results/vicinity-and-weakly-inextensible-comprehension-imply-actuality.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — p. 12. Source of weak inextensibility.</li>
+<li><strong>Background: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — p. 12. Source of
+weak inextensibility.</li>
 </ul>
 </body></html>

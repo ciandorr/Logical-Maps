@@ -91,7 +91,29 @@ meets:
 # Only the verdicts the engine needs to derive the rest are recorded, the source's first. Lead-ins
 # naming the verdict, and attribution sentences, are dropped from the texts, their content being in
 # holds, fails, by and date.
-arguments: []
+arguments:
+- holds:
+  - necessary-atoms-are-self-atoms-r
+  - necessary-atoms-are-strong-atoms-r
+  fails:
+  - self-atoms-are-atoms-t
+  - self-atomicity-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'The propositions over the collapses refine, two collapses agreeing with a given one on a finite
+    $N$ differing beyond it, so no atom contains a collapse; $\{1\}$ is in the domain and is the only
+    atom. It is a self-atom and a strong atom, no collapse having a retraction. An atom of a relational
+    type sits over $1$ with one tuple, so is a self-atom and a strong atom. One object, so Atoms are
+    self-atoms and Atoms are strong atoms hold at every world and every type. Self-atoms are atoms (type
+    t) fails: let $k$ be a collapse with $k(0)=k(1)=0$ and $k(y)=1$, and $N\supseteq\{0,y\}$ finite; the
+    set $q$ of collapses agreeing with $k$ on $N$ is pinned down by $N$, and for $k^{\prime}\in q$ a collapse
+    $m$ has $m\circ k^{\prime}\in q$ only if it fixes $k^{\prime}(N)\supseteq\{0,1\}$ pointwise, which
+    no collapse does; so the transport of $q$ along each member is $\{1\}$, $q$ is a self-atom, and it
+    is not an atom. Self-Atomicity (type t) fails: the collapses with value $1$ at $0$ form a possible
+    proposition pinned down by $\{0\}$, every member of which has range inside $[1,\infty)$, so that for
+    any member $k^{\prime}$ and finite $N$ some collapse fixes $k^{\prime}(N)$ pointwise (send $0$ and
+    $1$ to $1$, and fix the rest); so no part of it is a self-atom.'
 
 notes: >-
   The cited construction is a model of the map’s relational-type framework. The description

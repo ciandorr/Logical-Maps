@@ -8,11 +8,11 @@
 
 ## Conclusion
 
-- **Strong Actuality.** There is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.
+- **Strong Actuality.** There is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 
 ## Proof
 
-Gallin Extensional Comprehension at type $t\to t$ gives $Y$ coextensive with $\lambda q\, .\,q$ such that $Y$ and $\neg Y$ are both persistent. Put $p:=\forall q\, .\,Yq\leftrightarrow q$, which is true. Necessarily, every $q$ is settled by $p$: if $Yq$, persistence of $Y$ gives $\Box Yq$, so $\Box(p\to q)$, that is $p\le q$; if $\neg Yq$, persistence of $\neg Y$ gives $\Box\neg Yq$, so $p\le\neg q$. Both persistence conditions are boxed, so this holds at every world, giving $\Box\forall q\, .\,p\le q\lor p\le\neg q$. So $p$ is a true strong world.
+Gallin Extensional Comprehension at type $t\to t$ gives $Y$ coextensive with $\lambda q\, .\,q$ such that $Y$ and $\neg Y$ are both persistent. Put $p:=\forall q\, .\,Yq\leftrightarrow q$, which is true. Necessarily, every $q$ is settled by $p$: if $Yq$, persistence of $Y$ gives $\Box Yq$, so $\Box(p\to q)$, that is $p\le q$; if $\neg Yq$, persistence of $\neg Y$ gives $\Box\neg Yq$, so $p\le\neg q$. Both persistence conditions are boxed, so this holds at every world, giving $\Box\forall q\, .\,p\le q\lor p\le\neg q$. So $p$ is a true strong atom.
 
 ## Notes
 

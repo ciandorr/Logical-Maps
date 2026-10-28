@@ -4,8 +4,8 @@
 
 ## Package
 
-- **□Strong Leibniz Biconditionals.** Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a strong world: a possible entity that necessarily entails every entity of the type or its negation.
-- **□Strong Leibniz Biconditionals (type t).** Necessarily, every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.
+- **□Strong Atomicity.** Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a strong atom: a possible entity that necessarily entails every entity of the type or its negation.
+- **□Strong Atomicity (type t).** Necessarily, every possible proposition is entailed by a strong atom, one that is possible and necessarily entails every proposition or its negation.
 - **□BF.** Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.
 - **Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **Possible Infinity (type e).** Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.
@@ -35,6 +35,8 @@
 - **¬ □Weakly Rigid Power.** Necessarily, if a relation is weakly rigid, so is the property of being a weakly rigid relation that entails it.
 - **¬ Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
 - **¬ Necessity of Analysis.** Every first-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each first-order analytical sentence.
+- **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
+- **¬ Self-atoms are strong atoms (type t).** Every self-atom is a strong atom.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
 - **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
 - **¬ Independence (signature Σ).** No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.
@@ -58,11 +60,11 @@ At type $e$. The root sees three worlds: itself and the two component worlds, ea
 
 *Address: `coalesced-two-extensional-arithmetics-root#arithmetic`. By Cian Dorr, recorded by Claude Opus 5.5 (Anthropic), 2026-10-19.*
 
-### Holds □Strong Leibniz Biconditionals, □Strong Leibniz Biconditionals (type t), □BF.
+### Holds □Strong Atomicity, □Strong Atomicity (type t), □BF.
 
-At every relational type the root domain contains, for each world and each tuple there, the entity true of that tuple at that world and of nothing else: the root component is free, and each component contains the singleton of each of its tuples, definable from them. Such an entity lies below every entity or below its negation, and necessarily so, since its transport to a component world is that singleton or $\bot$; so it is a strong world, and every nonzero entity has one below it. In the one-world components the same holds trivially. For BF, the root individuals are pairs, so each component individual is the image of a root individual, and likewise at every type, root entities being families of component entities; the components, with one world each, satisfy BF.
+At every relational type the root domain contains, for each world and each tuple there, the entity true of that tuple at that world and of nothing else: the root component is free, and each component contains the singleton of each of its tuples, definable from them. Such an entity lies below every entity or below its negation, and necessarily so, since its transport to a component world is that singleton or $\bot$; so it is a strong atom, and every nonzero entity has one below it. In the one-world components the same holds trivially. For BF, the root individuals are pairs, so each component individual is the image of a root individual, and likewise at every type, root entities being families of component entities; the components, with one world each, satisfy BF.
 
-*Address: `coalesced-two-extensional-arithmetics-root#strong-leibniz`. By Cian Dorr, recorded by Claude Opus 5.5 (Anthropic), 2026-10-19.*
+*Address: `coalesced-two-extensional-arithmetics-root#strong-atomicity`. By Cian Dorr, recorded by Claude Opus 5.5 (Anthropic), 2026-10-19.*
 
 ### Fails B for pure sentences.
 
@@ -143,6 +145,12 @@ The singleton root proposition witnesses Actuality.
 
 *Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* The three members' versions stated once.
 
+### Fails Self-atoms are atoms (type t), Self-atoms are strong atoms (type t).
+
+Let $N$ and $M$ be two components whose roots satisfy Actuality, with true atoms $a_N$ and $a_M$, and let $P$ be the root proposition false at the root, with component $a_N$ at $N$, $a_M$ at $M$ and bottom elsewhere. $P$ is possible, and it is a self-atom: under the distinguished arrow into $N$ it becomes $a_N$, and a true atom is a self-atom, as it entails every truth, including the truth that it entails every truth; likewise at $M$; and at the root it is false. It is not an atom, since the root proposition with component $a_N$ alone lies strictly below it. So Self-atoms are atoms (type t) fails at the root, and with it Self-atoms are strong atoms (type t).
+
+*From the group *Coalesced sums at a new root*, shared argument `coalesced-sums#self-atom-of-two-actual-components`. It requires that At least two components are action models whose roots satisfy Actuality, and the root domain contains every family of component propositions with a truth value at the root (the fullest root domains). Here: Both components are one-world Henkin models, where the top proposition is the true atom; the root domains are the fullest. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
 ### Holds Truth implies ND-necessity.
 
 For a true $p$, $a\le p$, since $a$ entails every truth. Take $q:=a$ in the definition of $\Box_{\ne}p$: at a world in $a$, $p$ holds; at a world outside $a$, $\Diamond a$ fails. So every truth is $\Box_{\ne}$-necessary.
@@ -162,7 +170,7 @@ Let $c\in\Sigma$ have relational type $\tau$, so $c=\top_\tau$ necessarily. Witn
 
 ## Notes
 
-Suggested by Cian Dorr on 19 October 2026 as a small model of the boxed Strong Leibniz Biconditionals and □BF without the Necessity of Arithmetic. The root has three atoms, the singletons of its three worlds, all strong worlds. The components are one-world extensional Henkin models, and they satisfy Well-Ordering at every type, so that the choice principles hold at every world. No Lean verification is claimed.
+Suggested by Cian Dorr on 19 October 2026 as a small model of the boxed Strong Atomicity and □BF without the Necessity of Arithmetic. The root has three atoms, the singletons of its three worlds, all strong atoms. The components are one-world extensional Henkin models, and they satisfy Well-Ordering at every type, so that the choice principles hold at every world. No Lean verification is claimed.
 
 ## History
 

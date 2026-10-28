@@ -322,40 +322,224 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Second-Order Analytic Necessitism in the finite-support permutation model</h1></header><p>Construction and verification by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026, for the model finite-support-permutations: the one-object ideally full action model of <em>Classicism</em>, Proposition D.5, part 1, whose arrows are the permutations of <span class="math inline">\mathbb N</span>, with the ideal of finite sets, and its generated variants (one individual; Σ true atom). It shows that Second-Order Analytic Necessitism, and so Analytic Necessitism, hold there, although Rigid Comprehension fails: a rigid real number structure need not be made of rigid properties of numbers.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Second-Order Analytic Necessitism in the finite-support permutation model</h1></header><p>Construction and verification by Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 23 October 2026, for the model
+finite-support-permutations: the one-object ideally full action model of
+<em>Classicism</em>, Proposition D.5, part 1, whose arrows are the
+permutations of <span class="math inline">\mathbb N</span>, with the
+ideal of finite sets, and its generated variants (one individual; Σ true
+atom). It shows that Second-Order Analytic Necessitism, and so Analytic
+Necessitism, hold there, although Rigid Comprehension fails: a rigid
+real number structure need not be made of rigid properties of
+numbers.</p>
 <h2 id="setting">Setting</h2>
-<p>Write <span class="math inline">G</span> for the arrows, the permutations of <span class="math inline">\mathbb N</span>. An entity of a relational type at the one object is an intension <span class="math inline">Y</span>, assigning to each arrow <span class="math inline">j</span> a set <span class="math inline">Y_j</span> of tuples of entities of its argument types; <span class="math inline">Y</span> holds of a tuple <span class="math inline">\bar a</span> at the arrow <span class="math inline">k</span> iff <span class="math inline">k\cdot\bar a\in Y_k</span>, and transport along <span class="math inline">k</span> is <span class="math inline">(k\cdot Y)_j:=Y_{j\circ k}</span>. The intension <span class="math inline">Y</span> is <em>pinned down by</em> a finite <span class="math inline">N\subseteq\mathbb N</span> when <span class="math inline">Y_j=Y_{j&#39;}</span> whenever <span class="math inline">j</span> and <span class="math inline">j&#39;</span> agree on <span class="math inline">N</span>, and the domain of each relational type consists of the intensions pinned down by some finite set (finitely-pinned-domains). The individuals are <span class="math inline">\mathbb N</span>, acted on by the arrows, or in the variant a single individual fixed by every arrow; in either case <span class="math inline">k\cdot</span> is a bijection of every domain, with inverse <span class="math inline">k^{-1}\cdot</span>, since <span class="math inline">k^{-1}\cdot(k\cdot Y)=Y</span>.</p>
-<p>Rigidity is as in the Background: <span class="math inline">\operatorname{Rigid}(X)</span> is <span class="math inline">\Box\forall x\,.\,(Xx\to\Box Xx)\land(\neg Xx\to\Box\neg Xx)</span>, which at the evaluation point says that for all arrows <span class="math inline">k,j</span> and all <span class="math inline">x</span>, <span class="math inline">k\cdot x\in X_k</span> iff <span class="math inline">(j\circ k)\cdot x\in
+<p>Write <span class="math inline">G</span> for the arrows, the
+permutations of <span class="math inline">\mathbb N</span>. An entity of
+a relational type at the one object is an intension <span
+class="math inline">Y</span>, assigning to each arrow <span
+class="math inline">j</span> a set <span class="math inline">Y_j</span>
+of tuples of entities of its argument types; <span
+class="math inline">Y</span> holds of a tuple <span
+class="math inline">\bar a</span> at the arrow <span
+class="math inline">k</span> iff <span class="math inline">k\cdot\bar
+a\in Y_k</span>, and transport along <span class="math inline">k</span>
+is <span class="math inline">(k\cdot Y)_j:=Y_{j\circ k}</span>. The
+intension <span class="math inline">Y</span> is <em>pinned down by</em>
+a finite <span class="math inline">N\subseteq\mathbb N</span> when <span
+class="math inline">Y_j=Y_{j&#39;}</span> whenever <span
+class="math inline">j</span> and <span class="math inline">j&#39;</span>
+agree on <span class="math inline">N</span>, and the domain of each
+relational type consists of the intensions pinned down by some finite
+set (finitely-pinned-domains). The individuals are <span
+class="math inline">\mathbb N</span>, acted on by the arrows, or in the
+variant a single individual fixed by every arrow; in either case <span
+class="math inline">k\cdot</span> is a bijection of every domain, with
+inverse <span class="math inline">k^{-1}\cdot</span>, since <span
+class="math inline">k^{-1}\cdot(k\cdot Y)=Y</span>.</p>
+<p>Rigidity is as in the Background: <span
+class="math inline">\operatorname{Rigid}(X)</span> is <span
+class="math inline">\Box\forall x\,.\,(Xx\to\Box Xx)\land(\neg
+Xx\to\Box\neg Xx)</span>, which at the evaluation point says that for
+all arrows <span class="math inline">k,j</span> and all <span
+class="math inline">x</span>, <span class="math inline">k\cdot x\in
+X_k</span> iff <span class="math inline">(j\circ k)\cdot x\in
 X_{j\circ k}</span>.</p>
-<p><strong>Lemma 1.</strong> An intension <span class="math inline">X</span> is rigid iff <span class="math inline">X_j=j\cdot X_1</span> for every arrow <span class="math inline">j</span>, where <span class="math inline">j\cdot X_1=\{j\cdot x:x\in X_1\}</span>; a rigid <span class="math inline">X</span> then has necessarily distinct instances, and at every arrow <span class="math inline">k</span> it holds of exactly the members of <span class="math inline">X_1</span>.</p>
-<p><em>Proof.</em> If <span class="math inline">X</span> is rigid, the clause at <span class="math inline">k=1</span> gives <span class="math inline">x\in X_1</span> iff <span class="math inline">j\cdot x\in X_j</span>, so <span class="math inline">X_j\supseteq j\cdot X_1</span>, and for <span class="math inline">z\in X_j</span>, <span class="math inline">z=j\cdot(j^{-1}\cdot z)</span> with <span class="math inline">j^{-1}\cdot z\in
-X_1</span>, so <span class="math inline">X_j\subseteq j\cdot X_1</span>. Conversely if <span class="math inline">X_j=j\cdot X_1</span> for all <span class="math inline">j</span>, then <span class="math inline">k\cdot
-x\in X_k</span> iff <span class="math inline">x\in X_1</span> iff <span class="math inline">(j\circ k)\cdot x\in X_{j\circ k}</span>, transport being injective. Necessary distinctness is the injectivity of transport, and at <span class="math inline">k</span>, <span class="math inline">X</span> holds of <span class="math inline">x</span> iff <span class="math inline">k\cdot
-x\in k\cdot X_1</span> iff <span class="math inline">x\in X_1</span>. <span class="math inline">\blacksquare</span></p>
-<p>The same holds for relations, with tuples in place of <span class="math inline">x</span>.</p>
+<p><strong>Lemma 1.</strong> An intension <span
+class="math inline">X</span> is rigid iff <span
+class="math inline">X_j=j\cdot X_1</span> for every arrow <span
+class="math inline">j</span>, where <span class="math inline">j\cdot
+X_1=\{j\cdot x:x\in X_1\}</span>; a rigid <span
+class="math inline">X</span> then has necessarily distinct instances,
+and at every arrow <span class="math inline">k</span> it holds of
+exactly the members of <span class="math inline">X_1</span>.</p>
+<p><em>Proof.</em> If <span class="math inline">X</span> is rigid, the
+clause at <span class="math inline">k=1</span> gives <span
+class="math inline">x\in X_1</span> iff <span class="math inline">j\cdot
+x\in X_j</span>, so <span class="math inline">X_j\supseteq j\cdot
+X_1</span>, and for <span class="math inline">z\in X_j</span>, <span
+class="math inline">z=j\cdot(j^{-1}\cdot z)</span> with <span
+class="math inline">j^{-1}\cdot z\in
+X_1</span>, so <span class="math inline">X_j\subseteq j\cdot X_1</span>.
+Conversely if <span class="math inline">X_j=j\cdot X_1</span> for all
+<span class="math inline">j</span>, then <span
+class="math inline">k\cdot
+x\in X_k</span> iff <span class="math inline">x\in X_1</span> iff <span
+class="math inline">(j\circ k)\cdot x\in X_{j\circ k}</span>, transport
+being injective. Necessary distinctness is the injectivity of transport,
+and at <span class="math inline">k</span>, <span
+class="math inline">X</span> holds of <span class="math inline">x</span>
+iff <span class="math inline">k\cdot
+x\in k\cdot X_1</span> iff <span class="math inline">x\in X_1</span>.
+<span class="math inline">\blacksquare</span></p>
+<p>The same holds for relations, with tuples in place of <span
+class="math inline">x</span>.</p>
 <h2 id="the-structure">The structure</h2>
-<p>Fix a relational type <span class="math inline">\sigma=\bar\tau t</span> and a tuple <span class="math inline">\bar u</span> of entities of types <span class="math inline">\bar\tau</span>. For <span class="math inline">A\subseteq\mathbb N</span> let <span class="math inline">Y^A</span> be the intension of type <span class="math inline">\sigma</span> with <span class="math inline">Y^A_j:=\{\bar u\}</span> if <span class="math inline">j0\in A</span> and <span class="math inline">Y^A_j:=\emptyset</span> otherwise. It is pinned down by <span class="math inline">\{0\}</span>, so in the domain, the <span class="math inline">Y^A</span> are pairwise distinct, and <span class="math inline">(k\cdot Y^A)_j=Y^A_{j\circ k}</span> is <span class="math inline">\{\bar u\}</span> iff <span class="math inline">j(k0)\in A</span>, so <span class="math inline">k\cdot Y^A</span> is pinned down by <span class="math inline">\{0\}</span> as well, its value at <span class="math inline">j</span> depending only on <span class="math inline">j(k0)</span>. Let <span class="math inline">P:=\{Y^A:A\subseteq\mathbb N\}</span> and fix a bijection <span class="math inline">\beta\colon P\to\mathbb R</span>, through the bijection of the sets of natural numbers with the reals (a theorem of ZF).</p>
+<p>Fix a relational type <span class="math inline">\sigma=\bar\tau
+t</span> and a tuple <span class="math inline">\bar u</span> of entities
+of types <span class="math inline">\bar\tau</span>. For <span
+class="math inline">A\subseteq\mathbb N</span> let <span
+class="math inline">Y^A</span> be the intension of type <span
+class="math inline">\sigma</span> with <span
+class="math inline">Y^A_j:=\{\bar u\}</span> if <span
+class="math inline">j0\in A</span> and <span
+class="math inline">Y^A_j:=\emptyset</span> otherwise. It is pinned down
+by <span class="math inline">\{0\}</span>, so in the domain, the <span
+class="math inline">Y^A</span> are pairwise distinct, and <span
+class="math inline">(k\cdot Y^A)_j=Y^A_{j\circ k}</span> is <span
+class="math inline">\{\bar u\}</span> iff <span
+class="math inline">j(k0)\in A</span>, so <span
+class="math inline">k\cdot Y^A</span> is pinned down by <span
+class="math inline">\{0\}</span> as well, its value at <span
+class="math inline">j</span> depending only on <span
+class="math inline">j(k0)</span>. Let <span
+class="math inline">P:=\{Y^A:A\subseteq\mathbb N\}</span> and fix a
+bijection <span class="math inline">\beta\colon P\to\mathbb R</span>,
+through the bijection of the sets of natural numbers with the reals (a
+theorem of ZF).</p>
 <p>Define the intensions <span class="math display">X_j:=j\cdot P,\qquad
 {\le}_j:=\{(j\cdot x,j\cdot y):x,y\in P,\ \beta x\le\beta y\},\qquad
-{+}_j:=\{(j\cdot x,j\cdot y,j\cdot z):\beta x+\beta y=\beta z\},</span> <span class="math inline">\times_j</span> likewise, <span class="math inline">N_j:=\{j\cdot x:\beta x\in\mathbb N\}</span>, and the entities <span class="math inline">0:=\beta^{-1}(0)</span> and <span class="math inline">1:=\beta^{-1}(1)</span> of <span class="math inline">P</span>.</p>
-<p><strong>Lemma 2.</strong> These intensions are in the domain, pinned down by <span class="math inline">\{0\}</span>.</p>
-<p><em>Proof.</em> <span class="math inline">j\cdot Y^A</span> depends on <span class="math inline">j</span> only through <span class="math inline">j0</span>, so each of <span class="math inline">X_j</span>, <span class="math inline">\le_j</span>, <span class="math inline">+_j</span>, <span class="math inline">\times_j</span> and <span class="math inline">N_j</span> depends only on <span class="math inline">j0</span>. <span class="math inline">\blacksquare</span></p>
-<p><strong>Lemma 3.</strong> <span class="math inline">\mathfrak R:=(X,\le,+,\times,0,1,N)</span> is a rigid real number structure, necessarily a real number structure: <span class="math inline">\operatorname{RigidStr}(\mathfrak R)\land\Box\operatorname{Real}_\sigma
+{+}_j:=\{(j\cdot x,j\cdot y,j\cdot z):\beta x+\beta y=\beta z\},</span>
+<span class="math inline">\times_j</span> likewise, <span
+class="math inline">N_j:=\{j\cdot x:\beta x\in\mathbb N\}</span>, and
+the entities <span class="math inline">0:=\beta^{-1}(0)</span> and <span
+class="math inline">1:=\beta^{-1}(1)</span> of <span
+class="math inline">P</span>.</p>
+<p><strong>Lemma 2.</strong> These intensions are in the domain, pinned
+down by <span class="math inline">\{0\}</span>.</p>
+<p><em>Proof.</em> <span class="math inline">j\cdot Y^A</span> depends
+on <span class="math inline">j</span> only through <span
+class="math inline">j0</span>, so each of <span
+class="math inline">X_j</span>, <span class="math inline">\le_j</span>,
+<span class="math inline">+_j</span>, <span
+class="math inline">\times_j</span> and <span
+class="math inline">N_j</span> depends only on <span
+class="math inline">j0</span>. <span
+class="math inline">\blacksquare</span></p>
+<p><strong>Lemma 3.</strong> <span class="math inline">\mathfrak
+R:=(X,\le,+,\times,0,1,N)</span> is a rigid real number structure,
+necessarily a real number structure: <span
+class="math inline">\operatorname{RigidStr}(\mathfrak
+R)\land\Box\operatorname{Real}_\sigma
 (\mathfrak R)</span> holds at the evaluation point.</p>
-<p><em>Proof.</em> By construction <span class="math inline">X_j=j\cdot X_1</span> and likewise for the relations, so by Lemma 1 all are rigid with necessarily distinct instances, and at every arrow <span class="math inline">k</span> the instances of <span class="math inline">X</span> are the members of <span class="math inline">P</span>, while <span class="math inline">x\le y</span> holds at <span class="math inline">k</span> iff <span class="math inline">(k\cdot x,k\cdot y)\in{\le}_k</span> iff <span class="math inline">\beta x\le
-\beta y</span>, and similarly for <span class="math inline">+</span>, <span class="math inline">\times</span> and <span class="math inline">N</span>. So at every arrow the structure is the <span class="math inline">\beta</span>-preimage of the real numbers on <span class="math inline">P</span>: an ordered field with <span class="math inline">+</span> and <span class="math inline">\times</span> functional, in which <span class="math inline">N</span> is the set of natural numbers. Completeness at <span class="math inline">k</span>: a subproperty <span class="math inline">Y</span> of <span class="math inline">X</span> bounded at <span class="math inline">k</span> has as instances there a set <span class="math inline">\{x:k\cdot x\in Y_k\}\subseteq P</span> bounded in the <span class="math inline">\beta</span>-order, whose least upper bound in the reals pulls back to a least upper bound in <span class="math inline">P</span>. And <span class="math inline">N</span> is the least inductive subproperty at <span class="math inline">k</span>: its instances contain <span class="math inline">0</span> and are closed under adding <span class="math inline">1</span>, and any subproperty inductive at <span class="math inline">k</span> contains them, the natural numbers being the least inductive subset of the reals. <span class="math inline">\blacksquare</span></p>
+<p><em>Proof.</em> By construction <span class="math inline">X_j=j\cdot
+X_1</span> and likewise for the relations, so by Lemma 1 all are rigid
+with necessarily distinct instances, and at every arrow <span
+class="math inline">k</span> the instances of <span
+class="math inline">X</span> are the members of <span
+class="math inline">P</span>, while <span class="math inline">x\le
+y</span> holds at <span class="math inline">k</span> iff <span
+class="math inline">(k\cdot x,k\cdot y)\in{\le}_k</span> iff <span
+class="math inline">\beta x\le
+\beta y</span>, and similarly for <span class="math inline">+</span>,
+<span class="math inline">\times</span> and <span
+class="math inline">N</span>. So at every arrow the structure is the
+<span class="math inline">\beta</span>-preimage of the real numbers on
+<span class="math inline">P</span>: an ordered field with <span
+class="math inline">+</span> and <span class="math inline">\times</span>
+functional, in which <span class="math inline">N</span> is the set of
+natural numbers. Completeness at <span class="math inline">k</span>: a
+subproperty <span class="math inline">Y</span> of <span
+class="math inline">X</span> bounded at <span
+class="math inline">k</span> has as instances there a set <span
+class="math inline">\{x:k\cdot x\in Y_k\}\subseteq P</span> bounded in
+the <span class="math inline">\beta</span>-order, whose least upper
+bound in the reals pulls back to a least upper bound in <span
+class="math inline">P</span>. And <span class="math inline">N</span> is
+the least inductive subproperty at <span class="math inline">k</span>:
+its instances contain <span class="math inline">0</span> and are closed
+under adding <span class="math inline">1</span>, and any subproperty
+inductive at <span class="math inline">k</span> contains them, the
+natural numbers being the least inductive subset of the reals. <span
+class="math inline">\blacksquare</span></p>
 <h2 id="represented-powers">Represented powers</h2>
-<p>For <span class="math inline">m\ge1</span> and <span class="math inline">E\subseteq P^m</span> let <span class="math inline">\rho(E)</span> be the relation of type <span class="math inline">\sigma^m t</span> with <span class="math inline">\rho(E)_j:=j\cdot E=\{(j\cdot x_1,\ldots,j\cdot x_m):\bar x\in E\}</span>. It is pinned down by <span class="math inline">\{0\}</span> (Lemma 2), rigid by Lemma 1 with <span class="math inline">\rho(E)_j=j\cdot\rho(E)_1</span>, holds at every arrow of exactly the tuples in <span class="math inline">E</span>, which are tuples of instances of <span class="math inline">X</span>, and <span class="math inline">k\cdot\rho(E)=\rho(k\cdot
-E)</span>, since <span class="math inline">(k\cdot\rho(E))_j=(j\circ k)\cdot E=j\cdot(k\cdot E)</span>.</p>
-<p>Let <span class="math inline">\mathcal P^0:=\{\rho(E):E\subseteq P^m\}</span> and define <span class="math inline">\mathcal P_m</span> of type <span class="math inline">(\sigma^m t)t</span> by <span class="math inline">(\mathcal P_m)_k:=k\cdot\mathcal P^0</span>. Then <span class="math inline">(\mathcal P_m)_k=\{\rho(E&#39;):E&#39;\subseteq(k\cdot
-P)^m\}</span> depends on <span class="math inline">k</span> only through <span class="math inline">k0</span>, so <span class="math inline">\mathcal P_m</span> is in the domain; it is rigid by Lemma 1, and at every arrow it holds of exactly the members of <span class="math inline">\mathcal P^0</span>, rigid relations holding only of tuples of instances of <span class="math inline">X</span>. Representation: at an arrow <span class="math inline">k</span> and for any relation <span class="math inline">R</span> of type <span class="math inline">\sigma^m t</span>, let <span class="math inline">E:=\{\bar x\in P^m:k\cdot\bar x\in R_k\}</span>. Then <span class="math inline">\rho(E)\in\mathcal
-P^0</span>, so <span class="math inline">\mathcal P_m</span> holds of it at <span class="math inline">k</span>, and for <span class="math inline">\bar x\in P^m</span>, <span class="math inline">\rho(E)</span> holds of <span class="math inline">\bar x</span> at <span class="math inline">k</span> iff <span class="math inline">\bar x\in E</span> iff <span class="math inline">R</span> holds of <span class="math inline">\bar x</span> at <span class="math inline">k</span>. So <span class="math inline">\operatorname{RepPower}_m(\mathcal P_m,X)</span> holds for every <span class="math inline">m</span>, and with Lemma 3 the consequent of Second-Order Analytic Necessitism holds at <span class="math inline">\sigma</span> for every <span class="math inline">n</span>.</p>
+<p>For <span class="math inline">m\ge1</span> and <span
+class="math inline">E\subseteq P^m</span> let <span
+class="math inline">\rho(E)</span> be the relation of type <span
+class="math inline">\sigma^m t</span> with <span
+class="math inline">\rho(E)_j:=j\cdot E=\{(j\cdot x_1,\ldots,j\cdot
+x_m):\bar x\in E\}</span>. It is pinned down by <span
+class="math inline">\{0\}</span> (Lemma 2), rigid by Lemma 1 with <span
+class="math inline">\rho(E)_j=j\cdot\rho(E)_1</span>, holds at every
+arrow of exactly the tuples in <span class="math inline">E</span>, which
+are tuples of instances of <span class="math inline">X</span>, and <span
+class="math inline">k\cdot\rho(E)=\rho(k\cdot
+E)</span>, since <span class="math inline">(k\cdot\rho(E))_j=(j\circ
+k)\cdot E=j\cdot(k\cdot E)</span>.</p>
+<p>Let <span class="math inline">\mathcal P^0:=\{\rho(E):E\subseteq
+P^m\}</span> and define <span class="math inline">\mathcal P_m</span> of
+type <span class="math inline">(\sigma^m t)t</span> by <span
+class="math inline">(\mathcal P_m)_k:=k\cdot\mathcal P^0</span>. Then
+<span class="math inline">(\mathcal
+P_m)_k=\{\rho(E&#39;):E&#39;\subseteq(k\cdot
+P)^m\}</span> depends on <span class="math inline">k</span> only through
+<span class="math inline">k0</span>, so <span
+class="math inline">\mathcal P_m</span> is in the domain; it is rigid by
+Lemma 1, and at every arrow it holds of exactly the members of <span
+class="math inline">\mathcal P^0</span>, rigid relations holding only of
+tuples of instances of <span class="math inline">X</span>.
+Representation: at an arrow <span class="math inline">k</span> and for
+any relation <span class="math inline">R</span> of type <span
+class="math inline">\sigma^m t</span>, let <span
+class="math inline">E:=\{\bar x\in P^m:k\cdot\bar x\in R_k\}</span>.
+Then <span class="math inline">\rho(E)\in\mathcal
+P^0</span>, so <span class="math inline">\mathcal P_m</span> holds of it
+at <span class="math inline">k</span>, and for <span
+class="math inline">\bar x\in P^m</span>, <span
+class="math inline">\rho(E)</span> holds of <span
+class="math inline">\bar x</span> at <span class="math inline">k</span>
+iff <span class="math inline">\bar x\in E</span> iff <span
+class="math inline">R</span> holds of <span class="math inline">\bar
+x</span> at <span class="math inline">k</span>. So <span
+class="math inline">\operatorname{RepPower}_m(\mathcal P_m,X)</span>
+holds for every <span class="math inline">m</span>, and with Lemma 3 the
+consequent of Second-Order Analytic Necessitism holds at <span
+class="math inline">\sigma</span> for every <span
+class="math inline">n</span>.</p>
 <h2 id="type-e">Type <span class="math inline">e</span></h2>
-<p>At type <span class="math inline">e</span> the antecedent fails: a real number structure of individuals would need continuum many individuals at some world, and the individuals are the natural numbers, or one, at the only object. So every instance of Second-Order Analytic Necessitism holds, and with it Analytic Necessitism. The interpretation of Σ plays no part.</p>
+<p>At type <span class="math inline">e</span> the antecedent fails: a
+real number structure of individuals would need continuum many
+individuals at some world, and the individuals are the natural numbers,
+or one, at the only object. So every instance of Second-Order Analytic
+Necessitism holds, and with it Analytic Necessitism. The interpretation
+of Σ plays no part.</p>
 <h2 id="remark">Remark</h2>
-<p>The construction uses only that the arrows form a group acting on the pinning points and that every finitely pinned intension is present; it does not use the full strength of the permutation group. In the other finite-support models some arrow identifies two points, and there no entity of type <span class="math inline">tt</span> is determined by its transport along it (the general argument analytic-necessitism-collapsing-arrow-pinned), which is why Analytic Necessitism fails in them.</p>
+<p>The construction uses only that the arrows form a group acting on the
+pinning points and that every finitely pinned intension is present; it
+does not use the full strength of the permutation group. In the other
+finite-support models some arrow identifies two points, and there no
+entity of type <span class="math inline">tt</span> is determined by its
+transport along it (the general argument
+analytic-necessitism-collapsing-arrow-pinned), which is why Analytic
+Necessitism fails in them.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, Proposition D.5(1), pp. 74–75; construction pp. 75–76; p. 79 (No Pure Contingency)</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, Proposition D.5(1), pp. 74–75; construction pp. 75–76; p. 79
+(No Pure Contingency)</li>
 </ul>
 </body></html>

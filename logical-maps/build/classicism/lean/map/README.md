@@ -238,7 +238,7 @@ By 6 October, 32 verdicts of 25 arguments were proved this way:
 | `retractions` | retractions | ND holds |
 | `unretracted-arrow` | full, an arrow with no retraction | ND (`t`) fails |
 | `nonidentity-arrow` | full, an arrow other than the identity | the Fregean Axiom fails |
-| `nonepic-strong-leibniz` | full, a non-epi arrow | Strong Leibniz (`t`) fails |
+| `nonepic-strong-atomicity` | full, a non-epi arrow | Strong Atomicity (`t`) fails |
 | `dpc-returning-arrow` | full, a returning arrow | Distinctness-Preserving Collapse fails |
 | `coherent-retractions` | full, coherent retractions | Gallin Extensional Comprehension holds |
 | `fewer-propositions-after` | fewer propositions after some arrow, and after it | B for pure sentences fails |

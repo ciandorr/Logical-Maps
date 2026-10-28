@@ -17,6 +17,7 @@
 - **Infinity Schema (type t).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
 - **¬ Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **¬ Analytic Necessitism.** If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type $\sigma$.
 - **¬ B for pure sentences.** The B instance for every closed sentence in the pure language.
@@ -33,6 +34,12 @@
 An intensional action model with one individual. The objects are the root $o$, $s$, $u$, and $n$ for each $n\ge1$; besides identities the arrows are $h_s\colon o\to s$, $j\colon s\to u$, $h_u:=j\circ h_s$ and $h_n\colon o\to n$, so the root reaches each object by exactly one arrow and worlds may be identified with objects. The domains at $s$, $u$ and each $n$ are full. Identify the domains at the terminal objects $u$ and $n$ with one finite full type structure $M$ over one individual. Fix a non-principal ultrafilter $\mathcal U$ on the positive integers. At the root, an element of a relational type is any element of the full intension space whose extension at $u$ is the $\mathcal U$-limit of its extensions at the worlds $n$; its extensions at $o$, at $s$ and at each $n$ are unconstrained. So a root proposition is any choice of truth values at $o$, $s$ and the $n$s, with its value at $u$ fixed as the limit. Evaluation point: the root. Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the top element of its type.
 
 ## Arguments
+
+### Fails Self-atoms are atoms (type t).
+
+At the root, a proposition is a choice of truth values at $o$, $s$ and the $n$s, its value at $u$ the limit. Let $P$ be true at two worlds $n_1,n_2$ and false elsewhere, so false at $u$. It is possible. It is a self-atom: at $n_1$ and $n_2$, which see only themselves, it becomes the top proposition of the two-element domain, an atom. It is not an atom, since the proposition true at $n_1$ alone lies strictly below it. So Self-atoms are atoms (type t) fails at the root.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds □Atomicity, □Boolean Completeness.
 

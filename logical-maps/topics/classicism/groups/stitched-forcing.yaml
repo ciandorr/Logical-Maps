@@ -92,6 +92,23 @@ meets:
   fewer-propositions-after: The root has four propositions; $C_0$, after which there is only itself, has two.
 
 arguments:
+- id: self-atoms-and-strong-atoms
+  holds:
+  - necessary-atoms-are-self-atoms-r
+  - necessary-atoms-are-strong-atoms-r
+  - necessary-self-atoms-are-atoms-r
+  - necessary-self-atoms-are-strong-atoms-r
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: The root sees itself and $C_0$ through one arrow each, and $C_0$ sees only itself. An entity at
+    the root of a relational type is a pair $(E,D)$ of a root extension $E$ and a definable element $D$
+    of $C_0$, with transport $D$ along the arrow to $C_0$. It is an atom iff $E$ is a singleton and $D=\bot$,
+    or $E=\varnothing$ and $D$ is a definable singleton of $C_0$; a self-atom likewise, since its transport
+    along the identity is itself and along the arrow to $C_0$ is $D$, each of which must be an atom where
+    the entity is instantiated. Each such entity is a strong atom, its two transports being an atom or
+    bottom. At $C_0$, a one-world model with full extensional domains, the atoms are the singletons, which
+    are self-atoms and strong atoms. So all four bridge principles hold at both worlds, at every type.
 
 - id: rigid-comprehension
   holds: [necessary-rigid-comprehension-r]

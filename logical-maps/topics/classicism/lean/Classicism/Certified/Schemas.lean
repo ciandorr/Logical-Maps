@@ -36,6 +36,11 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.NecExtensionality Classicism.P.NecFunctionality Classicism.P.NecTractarianism
   Classicism.P.NecFunctionalChoice Classicism.P.NecRelationalChoice
   Classicism.P.StrongAtomicity Classicism.P.StrongAtomicityT Classicism.P.NecStrongAtomicity
+  Classicism.P.SelfAtomicity Classicism.P.NecSelfAtomicity Classicism.P.SelfAtomicityT Classicism.P.NecSelfAtomicityT
+  Classicism.P.AtomsAreSelfAtoms Classicism.P.NecAtomsAreSelfAtoms Classicism.P.AtomsAreSelfAtomsT Classicism.P.NecAtomsAreSelfAtomsT
+  Classicism.P.SelfAtomsAreAtoms Classicism.P.NecSelfAtomsAreAtoms Classicism.P.SelfAtomsAreAtomsT Classicism.P.NecSelfAtomsAreAtomsT
+  Classicism.P.SelfAtomsAreStrongAtoms Classicism.P.NecSelfAtomsAreStrongAtoms Classicism.P.SelfAtomsAreStrongAtomsT Classicism.P.NecSelfAtomsAreStrongAtomsT
+  Classicism.P.AtomsAreStrongAtoms Classicism.P.NecAtomsAreStrongAtoms Classicism.P.AtomsAreStrongAtomsT Classicism.P.NecAtomsAreStrongAtomsT
   Classicism.P.NecStrongAtomicityT Classicism.P.DistinctnessPreservingCollapse
   Classicism.P.NecDistinctnessPreservingCollapse Classicism.P.TruthImpliesFiveNecessity
   Classicism.P.TruthImpliesTwoHatNecessity Classicism.P.FiveImpliesTwoHatNecessity

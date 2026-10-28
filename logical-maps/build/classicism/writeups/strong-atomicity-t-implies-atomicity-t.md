@@ -1,0 +1,33 @@
+# Strong Atomicity (type t) ⇒ Atomicity (type t)
+
+<p class='cert'>Result — Source: Philosophical Introduction to HOL (2024), Lean `Classicism.Map.strong_atomicity_t_implies_atomicity_t`; produced by Andrew Bacon; type-t instance recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.</p>
+
+## Premises
+
+- **Strong Atomicity (type t).** Every possible proposition is entailed by a strong atom, one that is possible and necessarily entails every proposition or its negation.
+
+## Conclusion
+
+- **Atomicity (type t).** Every non-bottom proposition has an atom below it.
+
+## Proof
+
+A strong atom is an atom: from $\Box\forall q\, .\,w\le q\lor w\le\neg q$, T gives $\forall q\, .\,w\le q\lor w\le\neg q$, and with $w\ne\bot$ this is $\operatorname{Atom}_t(w)$. A possible $p$ is a non-bottom $p$. So the strong atom below $p$ is an atom below it.
+
+## Notes
+
+Strong Atomicity (type t) is equivalent to Atomicity (type t) together with [[atoms-are-strong-atoms-t]]; see [[strong-atomicity-t-implies-atoms-are-strong-atoms-t]].
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
+## Sources
+
+- **Philosophical Introduction to HOL** — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, p. 170.
+
+<p class='cert'>Record: <code>topics/classicism/results/strong-atomicity-t-implies-atomicity-t.yaml</code></p>
+
+## Paper references
+
+- **Proof: A Philosophical Introduction to Higher-Order Logics.** Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book's own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map's relational type system, of which its models are models. — §8.2, p. 170

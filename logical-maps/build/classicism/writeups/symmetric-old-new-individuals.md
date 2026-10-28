@@ -101,7 +101,7 @@ along an arrow $f$.
 - Along an arrow $f$ to $O$, $f^*w_E=\mathrm{Hom}(O,E)$.
 
 Both transports are atoms at their targets. So every proposition there
-contains or excludes each transport, and $w_E$ is a true strong world.
+contains or excludes each transport, and $w_E$ is a true strong atom.
 
 **At $O$.** The proposition $G_O$ is true at $1_O$.
 
@@ -111,7 +111,7 @@ contains or excludes each transport, and $w_E$ is a true strong world.
 - Along an arrow to $E$, its transport is empty, since a composite of an
   arrow to $E$ with an arrow back to $O$ lands in $K$.
 
-So $G_O$ is a true strong world.
+So $G_O$ is a true strong atom.
 
 Every world sees only $E$ and $O$. Strong Actuality is a closed sentence, so
 its truth at an arrow depends only on the arrow's target. Hence □Strong
@@ -267,7 +267,7 @@ coextensive with $X$ and inextensible. Let $Y$ be pinned down by $N$.
 So no coextensive $Y$ is inextensible. This argument uses the individuals,
 so it is recorded for the base individuals only.
 
-## BF at $t$ and the Strong Leibniz Biconditionals fail
+## BF at $t$ and Strong Atomicity fails
 
 **BF at $t$.** Every transport from $E$ to $O$ lies among $\emptyset$,
 $\mathrm{Hom}(O,E)$, $\mathrm{Hom}(O,O)$ and $\top$, and never equals $G_O$.
@@ -277,9 +277,9 @@ It is symmetric, because $G_O$ is invariant under $G_O$, and it is pinned down
 by $\emptyset$. Then $\forall p\,.\,\Box Xp$ holds at $E$, while at $\iota$
 the proposition $G_O$ lacks $X$.
 
-**Strong Leibniz at $t$.** The proposition $\mathrm{Hom}(E,O)$ is possible,
+**Strong Atomicity at $t$.** The proposition $\mathrm{Hom}(E,O)$ is possible,
 and its only nonzero part is itself. Along $\iota$ it becomes $G_O\cup K$,
-which $G_O$ neither contains nor excludes. So it is not a strong world.
+which $G_O$ neither contains nor excludes. So it is not a strong atom.
 
 ## Boolean Completeness holds at $E$ and fails at $O$
 

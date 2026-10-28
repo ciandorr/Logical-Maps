@@ -322,92 +322,282 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric ideally-full model: class-reflecting surjections of infinitely many infinite classes</h1></header><p>Cian Dorr proposed this model on 16 October 2026. He wanted a model of C in which each individual is contingently distinct from some other, but no functional relation takes each individual to one contingently distinct from it. Claude Opus 5.5 (Anthropic) fixed the arrows and wrote this verification the same day. No Lean verification is claimed.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric ideally-full model: class-reflecting surjections of infinitely many infinite classes</h1></header><p>Cian Dorr proposed this model on 16 October 2026. He wanted a model
+of C in which each individual is contingently distinct from some other,
+but no functional relation takes each individual to one contingently
+distinct from it. Claude Opus 5.5 (Anthropic) fixed the arrows and wrote
+this verification the same day. No Lean verification is claimed.</p>
 <h2 id="the-model">The model</h2>
-<p>It is a symmetric ideally-full intensional action model in the sense of Dorr’s draft <em>Boolean Completeness does not imply Rigid Comprehension</em> (Definitions 15–18, p. 8). By its Proposition 20 it is a model of C; for one object, that needs only a monoid of maps on the base and a group of permutations inside it.</p>
+<p>It is a symmetric ideally-full intensional action model in the sense
+of Dorr’s draft <em>Boolean Completeness does not imply Rigid
+Comprehension</em> (Definitions 15–18, p. 8). By its Proposition 20 it
+is a model of C; for one object, that needs only a monoid of maps on the
+base and a group of permutations inside it.</p>
 <ul>
-<li><strong>Base.</strong> One object, <span class="math inline">\mathbb N</span>, with an equivalence relation <span class="math inline">E</span> that has infinitely many classes, each infinite. Write <span class="math inline">[x]</span> for the class of <span class="math inline">x</span>.</li>
-<li><strong>Arrows.</strong> The surjections <span class="math inline">h</span> that <em>reflect</em> <span class="math inline">E</span>: <span class="math inline">hx\mathrel E hy</span> only if <span class="math inline">x\mathrel E y</span>. So an arrow identifies two points only if they lie in one class.
+<li><strong>Base.</strong> One object, <span class="math inline">\mathbb
+N</span>, with an equivalence relation <span
+class="math inline">E</span> that has infinitely many classes, each
+infinite. Write <span class="math inline">[x]</span> for the class of
+<span class="math inline">x</span>.</li>
+<li><strong>Arrows.</strong> The surjections <span
+class="math inline">h</span> that <em>reflect</em> <span
+class="math inline">E</span>: <span class="math inline">hx\mathrel E
+hy</span> only if <span class="math inline">x\mathrel E y</span>. So an
+arrow identifies two points only if they lie in one class.
 <ul>
-<li>These are closed under composition: if <span class="math inline">kh\,x\mathrel E kh\,y</span> then <span class="math inline">hx\mathrel E hy</span>, so <span class="math inline">x\mathrel E y</span>.</li>
-<li>Merely “collapsing only within a class” would not be closed under composition. One map could send two classes into one class, and a second could then collapse across them.</li>
+<li>These are closed under composition: if <span
+class="math inline">kh\,x\mathrel E kh\,y</span> then <span
+class="math inline">hx\mathrel E hy</span>, so <span
+class="math inline">x\mathrel E y</span>.</li>
+<li>Merely “collapsing only within a class” would not be closed under
+composition. One map could send two classes into one class, and a second
+could then collapse across them.</li>
 </ul></li>
-<li><strong>Symmetries.</strong> <span class="math inline">\operatorname{Aut}(E)</span>, the permutations mapping classes onto classes. They are arrows, and they form a group.</li>
-<li><strong>Domains.</strong> Each relational domain holds the intensions that are symmetric and pinned down by a finite set. The individuals are the base, acted on identically.</li>
+<li><strong>Symmetries.</strong> <span
+class="math inline">\operatorname{Aut}(E)</span>, the permutations
+mapping classes onto classes. They are arrows, and they form a
+group.</li>
+<li><strong>Domains.</strong> Each relational domain holds the
+intensions that are symmetric and pinned down by a finite set. The
+individuals are the base, acted on identically.</li>
 <li><strong>Evaluation point.</strong> The identity arrow.</li>
 </ul>
 <p>Two facts are used throughout:</p>
 <ul>
-<li><strong>Extension.</strong> A finite partial isomorphism of <span class="math inline">(\mathbb N,E)</span> extends to a member of <span class="math inline">\operatorname{Aut}(E)</span>, because there are infinitely many classes and each is infinite.</li>
-<li><strong>Contingent distinctness.</strong> <span class="math inline">x</span> and <span class="math inline">y</span> are contingently distinct iff they are distinct and <span class="math inline">x\mathrel E y</span>.
+<li><strong>Extension.</strong> A finite partial isomorphism of <span
+class="math inline">(\mathbb N,E)</span> extends to a member of <span
+class="math inline">\operatorname{Aut}(E)</span>, because there are
+infinitely many classes and each is infinite.</li>
+<li><strong>Contingent distinctness.</strong> <span
+class="math inline">x</span> and <span class="math inline">y</span> are
+contingently distinct iff they are distinct and <span
+class="math inline">x\mathrel E y</span>.
 <ul>
-<li>If <span class="math inline">x\mathrel E y</span> and <span class="math inline">x\ne y</span>, a surjection of <span class="math inline">[x]</span> onto itself that identifies them, extended by the identity on the other classes, is an arrow.</li>
-<li>Arrows identify only points in one class, so points in different classes stay distinct at every world.</li>
+<li>If <span class="math inline">x\mathrel E y</span> and <span
+class="math inline">x\ne y</span>, a surjection of <span
+class="math inline">[x]</span> onto itself that identifies them,
+extended by the identity on the other classes, is an arrow.</li>
+<li>Arrows identify only points in one class, so points in different
+classes stay distinct at every world.</li>
 </ul></li>
 </ul>
 <h2 id="every-truth-is-nd-necessary">Every truth is ND-necessary</h2>
-<p>For finite <span class="math inline">N</span>, let <span class="math inline">\delta_N</span> be the set of arrows that are injective on <span class="math inline">N</span> and preserve the pattern of <span class="math inline">E</span> on <span class="math inline">N</span>: <span class="math inline">n\mathrel E n&#39;\leftrightarrow hn\mathrel E hn&#39;</span> for <span class="math inline">n,n&#39;\in N</span>. Reflection holds for every arrow, so only preservation is a restriction.</p>
+<p>For finite <span class="math inline">N</span>, let <span
+class="math inline">\delta_N</span> be the set of arrows that are
+injective on <span class="math inline">N</span> and preserve the pattern
+of <span class="math inline">E</span> on <span
+class="math inline">N</span>: <span class="math inline">n\mathrel E
+n&#39;\leftrightarrow hn\mathrel E hn&#39;</span> for <span
+class="math inline">n,n&#39;\in N</span>. Reflection holds for every
+arrow, so only preservation is a restriction.</p>
 <ul>
-<li><strong><span class="math inline">\delta_N</span> is a true proposition.</strong> It is symmetric, pinned down by <span class="math inline">N</span>, and contains the identity.</li>
-<li><strong><span class="math inline">\Diamond\delta_N=\delta_N</span>.</strong> Suppose <span class="math inline">kh\in\delta_N</span>. Then <span class="math inline">h</span> is injective on <span class="math inline">N</span>. If <span class="math inline">n\mathrel E n&#39;</span>, then <span class="math inline">kh\,n\mathrel E kh\,n&#39;</span>, so <span class="math inline">hn\mathrel E hn&#39;</span>, because <span class="math inline">k</span> reflects <span class="math inline">E</span>. So <span class="math inline">h\in\delta_N</span>, and the other inclusion takes <span class="math inline">k=1</span>.</li>
-<li><strong>Every truth pinned down by <span class="math inline">N</span> contains <span class="math inline">\delta_N</span>.</strong> Let <span class="math inline">p</span> be such a truth and <span class="math inline">h\in\delta_N</span>. Then <span class="math inline">h|_N</span> is a finite partial isomorphism of <span class="math inline">E</span>, so it extends to some <span class="math inline">\sigma\in\operatorname{Aut}(E)</span>. By symmetry <span class="math inline">\sigma=\sigma\circ 1\in p</span>, and <span class="math inline">h</span> agrees with <span class="math inline">\sigma</span> on <span class="math inline">N</span>, so <span class="math inline">h\in p</span>.</li>
+<li><strong><span class="math inline">\delta_N</span> is a true
+proposition.</strong> It is symmetric, pinned down by <span
+class="math inline">N</span>, and contains the identity.</li>
+<li><strong><span
+class="math inline">\Diamond\delta_N=\delta_N</span>.</strong> Suppose
+<span class="math inline">kh\in\delta_N</span>. Then <span
+class="math inline">h</span> is injective on <span
+class="math inline">N</span>. If <span class="math inline">n\mathrel E
+n&#39;</span>, then <span class="math inline">kh\,n\mathrel E
+kh\,n&#39;</span>, so <span class="math inline">hn\mathrel E
+hn&#39;</span>, because <span class="math inline">k</span> reflects
+<span class="math inline">E</span>. So <span
+class="math inline">h\in\delta_N</span>, and the other inclusion takes
+<span class="math inline">k=1</span>.</li>
+<li><strong>Every truth pinned down by <span
+class="math inline">N</span> contains <span
+class="math inline">\delta_N</span>.</strong> Let <span
+class="math inline">p</span> be such a truth and <span
+class="math inline">h\in\delta_N</span>. Then <span
+class="math inline">h|_N</span> is a finite partial isomorphism of <span
+class="math inline">E</span>, so it extends to some <span
+class="math inline">\sigma\in\operatorname{Aut}(E)</span>. By symmetry
+<span class="math inline">\sigma=\sigma\circ 1\in p</span>, and <span
+class="math inline">h</span> agrees with <span
+class="math inline">\sigma</span> on <span class="math inline">N</span>,
+so <span class="math inline">h\in p</span>.</li>
 </ul>
-<p>So <span class="math inline">\Box(\Diamond\delta_N\to p)</span> holds, with <span class="math inline">\delta_N</span> true, and <span class="math inline">p</span> is ND-necessary: Truth implies ND-necessity holds.</p>
-<p>In symmetric-infinite-classes the arrows are all surjections, and this fails. There, a surjection injective on <span class="math inline">\{0,1\}</span> can separate the classes of the images of <span class="math inline">0\mathrel E 1</span>, and nothing undoes that.</p>
-<h2 id="modalized-relational-choice-fails">Modalized Relational Choice fails</h2>
+<p>So <span class="math inline">\Box(\Diamond\delta_N\to p)</span>
+holds, with <span class="math inline">\delta_N</span> true, and <span
+class="math inline">p</span> is ND-necessary: Truth implies ND-necessity
+holds.</p>
+<p>In symmetric-infinite-classes the arrows are all surjections, and
+this fails. There, a surjection injective on <span
+class="math inline">\{0,1\}</span> can separate the classes of the
+images of <span class="math inline">0\mathrel E 1</span>, and nothing
+undoes that.</p>
+<h2 id="modalized-relational-choice-fails">Modalized Relational Choice
+fails</h2>
 <p>Let</p>
-<p><span class="math display">U:=\lambda xy\, .\,(x\ne y\land\Diamond x=y)\lor\forall z\, .\,(z\ne x\to\Box z\ne x).</span></p>
-<p><span class="math inline">U</span> is necessarily serial by a theorem of C. If some <span class="math inline">y</span> is contingently distinct from <span class="math inline">x</span>, then <span class="math inline">Uxy</span>. Otherwise <span class="math inline">Uxx</span> holds through the second disjunct.</p>
-<p>In this model the second disjunct is false of every individual, at every arrow, because every class is infinite. Now suppose <span class="math inline">S\le U</span> were necessarily functional. At the identity <span class="math inline">S</span> is then a function <span class="math inline">f</span> with <span class="math inline">f(x)\ne x</span> and <span class="math inline">f(x)\mathrel E x</span>.</p>
+<p><span class="math display">U:=\lambda xy\, .\,(x\ne y\land\Diamond
+x=y)\lor\forall z\, .\,(z\ne x\to\Box z\ne x).</span></p>
+<p><span class="math inline">U</span> is necessarily serial by a theorem
+of C. If some <span class="math inline">y</span> is contingently
+distinct from <span class="math inline">x</span>, then <span
+class="math inline">Uxy</span>. Otherwise <span
+class="math inline">Uxx</span> holds through the second disjunct.</p>
+<p>In this model the second disjunct is false of every individual, at
+every arrow, because every class is infinite. Now suppose <span
+class="math inline">S\le U</span> were necessarily functional. At the
+identity <span class="math inline">S</span> is then a function <span
+class="math inline">f</span> with <span class="math inline">f(x)\ne
+x</span> and <span class="math inline">f(x)\mathrel E x</span>.</p>
 <ol type="1">
-<li>Let <span class="math inline">N</span> be a finite set pinning <span class="math inline">S</span> down, and let <span class="math inline">g\in\operatorname{Aut}(E)</span> fix <span class="math inline">N</span> pointwise. From <span class="math inline">\langle x,f(x),1\rangle\in S</span>, symmetry gives <span class="math inline">\langle gx,g f(x),g\rangle\in S</span>. Since <span class="math inline">g</span> agrees with <span class="math inline">1</span> on <span class="math inline">N</span>, pinning gives <span class="math inline">\langle gx,gf(x),1\rangle\in S</span>. So <span class="math inline">f(gx)=g(f(x))</span>.</li>
-<li>Take <span class="math inline">x</span> in a class <span class="math inline">C</span> disjoint from <span class="math inline">N</span>, and <span class="math inline">y&#39;\in C\setminus\{x,f(x)\}</span>. Let <span class="math inline">g</span> be the transposition of <span class="math inline">f(x)</span> and <span class="math inline">y&#39;</span>. It fixes <span class="math inline">N</span> and <span class="math inline">x</span>, so <span class="math inline">f(x)=f(gx)=g(f(x))=y&#39;</span>, a contradiction.</li>
+<li>Let <span class="math inline">N</span> be a finite set pinning <span
+class="math inline">S</span> down, and let <span
+class="math inline">g\in\operatorname{Aut}(E)</span> fix <span
+class="math inline">N</span> pointwise. From <span
+class="math inline">\langle x,f(x),1\rangle\in S</span>, symmetry gives
+<span class="math inline">\langle gx,g f(x),g\rangle\in S</span>. Since
+<span class="math inline">g</span> agrees with <span
+class="math inline">1</span> on <span class="math inline">N</span>,
+pinning gives <span class="math inline">\langle gx,gf(x),1\rangle\in
+S</span>. So <span class="math inline">f(gx)=g(f(x))</span>.</li>
+<li>Take <span class="math inline">x</span> in a class <span
+class="math inline">C</span> disjoint from <span
+class="math inline">N</span>, and <span class="math inline">y&#39;\in
+C\setminus\{x,f(x)\}</span>. Let <span class="math inline">g</span> be
+the transposition of <span class="math inline">f(x)</span> and <span
+class="math inline">y&#39;</span>. It fixes <span
+class="math inline">N</span> and <span class="math inline">x</span>, so
+<span class="math inline">f(x)=f(gx)=g(f(x))=y&#39;</span>, a
+contradiction.</li>
 </ol>
 <p>So the closed pure sentence</p>
-<p><span class="math display">P:=\forall x\,\exists y\,(x\ne y\land\Diamond x=y)\land\neg\exists F\,\bigl(\operatorname{Functional}(F)\land\forall x\,y\,(Fxy\to x\ne y\land\Diamond x=y)\bigr)</span></p>
-<p>is true at the evaluation point: the first conjunct by the classes being infinite, the second by the argument above. This is the consistency premise of maximalism-incompatible-with-modalized-relational-choice.</p>
+<p><span class="math display">P:=\forall x\,\exists y\,(x\ne
+y\land\Diamond x=y)\land\neg\exists
+F\,\bigl(\operatorname{Functional}(F)\land\forall x\,y\,(Fxy\to x\ne
+y\land\Diamond x=y)\bigr)</span></p>
+<p>is true at the evaluation point: the first conjunct by the classes
+being infinite, the second by the argument above. This is the
+consistency premise of
+maximalism-incompatible-with-modalized-relational-choice.</p>
 <h2 id="other-verdicts">Other verdicts</h2>
 <ul>
-<li><strong>No Pure Contingency holds:</strong> the model has one object (general argument).</li>
-<li><strong>BF holds at every type:</strong> the arrows are surjective (the group’s argument barcan-surjective).</li>
-<li><strong>Relational Choice and Transversal fail:</strong> these arguments use only the symmetry group, which is that of symmetric-infinite-classes.</li>
-<li><strong>Intensional Choice fails at type <span class="math inline">e</span></strong>, by a different witness from symmetric-infinite-classes, whose arrows can merge classes.
+<li><strong>No Pure Contingency holds:</strong> the model has one object
+(general argument).</li>
+<li><strong>BF holds at every type:</strong> the arrows are surjective
+(the group’s argument barcan-surjective).</li>
+<li><strong>Relational Choice and Transversal fail:</strong> these
+arguments use only the symmetry group, which is that of
+symmetric-infinite-classes.</li>
+<li><strong>Intensional Choice fails at type <span
+class="math inline">e</span></strong>, by a different witness from
+symmetric-infinite-classes, whose arrows can merge classes.
 <ul>
-<li>Take <span class="math inline">F:=\lambda y\, .\,y\ne n_0\land y\mathrel E n_0</span>.</li>
-<li>Use the arrow that collapses <span class="math inline">N\cap[n_0]</span> onto <span class="math inline">n_0</span> within its class.</li>
-<li>A transposition inside <span class="math inline">[n_0]</span> that avoids the image of the pinning set then moves the supposed unique instance.</li>
+<li>Take <span class="math inline">F:=\lambda y\, .\,y\ne n_0\land
+y\mathrel E n_0</span>.</li>
+<li>Use the arrow that collapses <span
+class="math inline">N\cap[n_0]</span> onto <span
+class="math inline">n_0</span> within its class.</li>
+<li>A transposition inside <span class="math inline">[n_0]</span> that
+avoids the image of the pinning set then moves the supposed unique
+instance.</li>
 </ul></li>
-<li><strong>Atomlessness holds.</strong> Split a possible proposition by whether two fresh points of one class are sent into one class.</li>
-<li><strong>The Axiom of Infinity at type <span class="math inline">e</span> holds</strong>, by the group’s argument.</li>
+<li><strong>Atomlessness holds.</strong> Split a possible proposition by
+whether two fresh points of one class are sent into one class.</li>
+<li><strong>The Axiom of Infinity at type <span
+class="math inline">e</span> holds</strong>, by the group’s
+argument.</li>
 </ul>
-<h2 id="weakly-inextensible-comprehension-fails">Weakly Inextensible Comprehension fails</h2>
-<p>Added later on 16 October, at Cian Dorr’s request to see whether the arguments for Boolean Completeness and Inextensible Comprehension in symmetric-all-surjections (Base 1) carry over. They do not.</p>
+<h2 id="weakly-inextensible-comprehension-fails">Weakly Inextensible
+Comprehension fails</h2>
+<p>Added later on 16 October, at Cian Dorr’s request to see whether the
+arguments for Boolean Completeness and Inextensible Comprehension in
+symmetric-all-surjections (Base 1) carry over. They do not.</p>
 <ul>
-<li><strong>Boolean Completeness.</strong> Base 1 gets it from Dorr’s hull conditions, and (B1) fails here.</li>
-<li><strong>Inextensible Comprehension.</strong> Base 1’s argument needs a transversal lemma: an arrow <span class="math inline">g</span> fixing <span class="math inline">S</span> pointwise has, for the points of a finite <span class="math inline">T</span>, preimages that a symmetry can move them to. When <span class="math inline">g</span> splits one class over two target classes, the preimages of points in both lie in one class, and no automorphism of <span class="math inline">E</span> does the job.</li>
+<li><strong>Boolean Completeness.</strong> Base 1 gets it from Dorr’s
+hull conditions, and (B1) fails here.</li>
+<li><strong>Inextensible Comprehension.</strong> Base 1’s argument needs
+a transversal lemma: an arrow <span class="math inline">g</span> fixing
+<span class="math inline">S</span> pointwise has, for the points of a
+finite <span class="math inline">T</span>, preimages that a symmetry can
+move them to. When <span class="math inline">g</span> splits one class
+over two target classes, the preimages of points in both lie in one
+class, and no automorphism of <span class="math inline">E</span> does
+the job.</li>
 </ul>
-<p>In fact both principles fail, through Weakly Inextensible Comprehension at type <span class="math inline">e\to t</span>.</p>
-<p>Let <span class="math inline">X:=\lambda x\, .\,\neg\, x\mathrel E n_0</span>. It is in the domain, since <span class="math inline">E</span> is. Suppose <span class="math inline">Y</span> is weakly inextensible, coextensive with <span class="math inline">X</span>, and pinned down by a finite <span class="math inline">N</span>.</p>
+<p>In fact both principles fail, through Weakly Inextensible
+Comprehension at type <span class="math inline">e\to t</span>.</p>
+<p>Let <span class="math inline">X:=\lambda x\, .\,\neg\, x\mathrel E
+n_0</span>. It is in the domain, since <span
+class="math inline">E</span> is. Suppose <span
+class="math inline">Y</span> is weakly inextensible, coextensive with
+<span class="math inline">X</span>, and pinned down by a finite <span
+class="math inline">N</span>.</p>
 <ol type="1">
-<li><strong><span class="math inline">Y\le Z^m</span> for each <span class="math inline">m\in[n_0]</span>.</strong> Put <span class="math inline">Z^m:=\lambda x\, .\,\neg\, x\mathrel E n_0\land\neg\, x\mathrel E m</span>. Its extension at an arrow <span class="math inline">k</span> is <span class="math inline">\mathbb N\setminus([kn_0]\cup[km])</span>. If <span class="math inline">y</span> is an instance of <span class="math inline">Y</span>, so <span class="math inline">y\notin[n_0]</span>, then <span class="math inline">ky\notin[kn_0]\cup[km]</span> at every arrow <span class="math inline">k</span>, because <span class="math inline">k</span> reflects <span class="math inline">E</span>. So <span class="math inline">Z^m</span> holds necessarily of every instance of <span class="math inline">Y</span>, and weak inextensibility gives <span class="math inline">Y\le Z^m</span>.</li>
-<li><strong>An arrow sending part of <span class="math inline">[n_0]</span> into a fresh class.</strong> Take a class <span class="math inline">D\ne[n_0]</span> disjoint from <span class="math inline">N</span>, and <span class="math inline">m\in[n_0]\setminus N</span>. Let <span class="math inline">k</span> be:
+<li><strong><span class="math inline">Y\le Z^m</span> for each <span
+class="math inline">m\in[n_0]</span>.</strong> Put <span
+class="math inline">Z^m:=\lambda x\, .\,\neg\, x\mathrel E
+n_0\land\neg\, x\mathrel E m</span>. Its extension at an arrow <span
+class="math inline">k</span> is <span class="math inline">\mathbb
+N\setminus([kn_0]\cup[km])</span>. If <span class="math inline">y</span>
+is an instance of <span class="math inline">Y</span>, so <span
+class="math inline">y\notin[n_0]</span>, then <span
+class="math inline">ky\notin[kn_0]\cup[km]</span> at every arrow <span
+class="math inline">k</span>, because <span class="math inline">k</span>
+reflects <span class="math inline">E</span>. So <span
+class="math inline">Z^m</span> holds necessarily of every instance of
+<span class="math inline">Y</span>, and weak inextensibility gives <span
+class="math inline">Y\le Z^m</span>.</li>
+<li><strong>An arrow sending part of <span
+class="math inline">[n_0]</span> into a fresh class.</strong> Take a
+class <span class="math inline">D\ne[n_0]</span> disjoint from <span
+class="math inline">N</span>, and <span
+class="math inline">m\in[n_0]\setminus N</span>. Let <span
+class="math inline">k</span> be:
 <ul>
-<li>on <span class="math inline">[n_0]</span>, a map onto <span class="math inline">[n_0]\cup D</span> that fixes <span class="math inline">N\cap[n_0]</span> and sends <span class="math inline">m</span> into <span class="math inline">D</span>;</li>
-<li>the identity on the other classes that meet <span class="math inline">N</span>;</li>
-<li>on the remaining classes, which are infinitely many, a map onto the remaining classes other than <span class="math inline">D</span>, class by class.</li>
+<li>on <span class="math inline">[n_0]</span>, a map onto <span
+class="math inline">[n_0]\cup D</span> that fixes <span
+class="math inline">N\cap[n_0]</span> and sends <span
+class="math inline">m</span> into <span
+class="math inline">D</span>;</li>
+<li>the identity on the other classes that meet <span
+class="math inline">N</span>;</li>
+<li>on the remaining classes, which are infinitely many, a map onto the
+remaining classes other than <span class="math inline">D</span>, class
+by class.</li>
 </ul>
-Then <span class="math inline">k</span> is a surjection, the preimage of each class lies in a single class, and <span class="math inline">k</span> agrees with the identity on <span class="math inline">N</span>.</li>
-<li><strong>The contradiction.</strong> By pinning and step 1, <span class="math inline">Y_1=Y_k\subseteq Z^m_k=\mathbb N\setminus([n_0]\cup D)</span>. But <span class="math inline">Y_1=\mathbb N\setminus[n_0]\supseteq D</span>.</li>
+Then <span class="math inline">k</span> is a surjection, the preimage of
+each class lies in a single class, and <span
+class="math inline">k</span> agrees with the identity on <span
+class="math inline">N</span>.</li>
+<li><strong>The contradiction.</strong> By pinning and step 1, <span
+class="math inline">Y_1=Y_k\subseteq Z^m_k=\mathbb N\setminus([n_0]\cup
+D)</span>. But <span class="math inline">Y_1=\mathbb
+N\setminus[n_0]\supseteq D</span>.</li>
 </ol>
-<p>So Weakly Inextensible Comprehension fails. So do Inextensible Comprehension, which implies it, and Boolean Completeness, since Boolean Completeness implies it too.</p>
-<p>The recorded proof of that last implication takes the least upper bound of the haecceities of the instances of <span class="math inline">X</span>. That family is not countable in this model, so the argument says nothing about Countable Boolean Completeness.</p>
+<p>So Weakly Inextensible Comprehension fails. So do Inextensible
+Comprehension, which implies it, and Boolean Completeness, since Boolean
+Completeness implies it too.</p>
+<p>The recorded proof of that last implication takes the least upper
+bound of the haecceities of the instances of <span
+class="math inline">X</span>. That family is not countable in this
+model, so the argument says nothing about Countable Boolean
+Completeness.</p>
 <h2 id="left-open">Left open</h2>
 <ul>
-<li><strong>Countable Boolean Completeness.</strong> As in symmetric-old-new-individuals, a countable property’s instances are invariant under the symmetries fixing a finite set. The step from invariance to uniform pinning has to deal with arrows that split classes.</li>
-<li><strong>The rigidity family:</strong> Tame Rigidity, Rigid Power, Rigid Rigidity and their weak forms. Their recorded arguments assume all surjections or section arrows. Section arrows fail here: when an arrow splits one class across two target classes, a section of points in both would have to merge classes.</li>
+<li><strong>Countable Boolean Completeness.</strong> As in
+symmetric-old-new-individuals, a countable property’s instances are
+invariant under the symmetries fixing a finite set. The step from
+invariance to uniform pinning has to deal with arrows that split
+classes.</li>
+<li><strong>The rigidity family:</strong> Tame Rigidity, Rigid Power,
+Rigid Rigidity and their weak forms. Their recorded arguments assume all
+surjections or section arrows. Section arrows fail here: when an arrow
+splits one class across two target classes, a section of points in both
+would have to merge classes.</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — §3, Definitions 15–18, p. 8; Proposition 20. The framework of symmetric ideally-full models, which are models of C for every base.</li>
+<li><strong>Background: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — §3, Definitions
+15–18, p. 8; Proposition 20. The framework of symmetric ideally-full
+models, which are models of C for every base.</li>
 </ul>
 </body></html>

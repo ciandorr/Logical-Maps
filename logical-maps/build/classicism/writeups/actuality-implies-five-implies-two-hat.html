@@ -323,30 +323,79 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality ⇒ 5-necessity implies two-hat necessity</h1></header><p class="cert">
-Result — Source: The Bounds of Possibility (2021), Lean <code>Classicism.Map.actuality_implies_five_implies_two_hat</code>; produced by The Bounds of Possibility, Appendix D, Propositions D8, D18 and D19; the observation that Actuality is used only at the evaluation world, Cian Dorr and Claude Fable 5.1 (Anthropic), 14 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
+Result — Source: The Bounds of Possibility (2021), Lean
+<code>Classicism.Map.actuality_implies_five_implies_two_hat</code>;
+produced by The Bounds of Possibility, Appendix D, Propositions D8, D18
+and D19; the observation that Actuality is used only at the evaluation
+world, Cian Dorr and Claude Fable 5.1 (Anthropic), 14 October 2026;
+recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14
+October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>5-necessity implies two-hat necessity.</strong> Whatever is 5-necessary is two-hat necessary.</li>
+<li><strong>5-necessity implies two-hat necessity.</strong> Whatever is
+5-necessary is two-hat necessary.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">a</span> witness Actuality at the actual world. Proposition D18 of The Bounds of Possibility, Appendix D, holds for <span class="math inline">X:=\Box_{\ne}</span> with Actuality only at the world of evaluation: <span class="math inline">\hat{\hat\Box}p\leftrightarrow\Box(\hat\Diamond a\to p)</span>. Proposition D19, whose steps use <span class="math inline">W@a</span> only at the world of evaluation and otherwise <span class="math inline">\Box</span>NKJ<span class="math inline">\,\Box_{\ne}</span> (Proposition D14), then gives BF at type <span class="math inline">t</span> for <span class="math inline">\hat{\hat\Box}</span> at the actual world: <span class="math inline">\forall z\,\hat{\hat\Box}(Yz)\to\hat{\hat\Box}\forall z\,Yz</span>. Now relativize as in Proposition D8: let <span class="math inline">C</span> be the closed sentence saying that <span class="math inline">\hat{\hat\Box}</span> is NKJF<span class="math inline">_{\langle\rangle}</span>, true at the actual world, and put <span class="math inline">X^\prime:=\lambda p\, .\,C\to\hat{\hat\Box}p</span>. Then <span class="math inline">X^\prime</span> is coextensive with <span class="math inline">\hat{\hat\Box}</span>, and <span class="math inline">\Box</span>NKJF<span class="math inline">_{\langle\rangle}X^\prime</span> holds because each clause reduces to a theorem about <span class="math inline">\hat{\hat\Box}</span> (N, K, J) or to <span class="math inline">C</span> itself. By the definition of <span class="math inline">\Box_5</span>, <span class="math inline">\Box_5p\to X^\prime p\to\hat{\hat\Box}p</span>.</p>
+<p>Let <span class="math inline">a</span> witness Actuality at the
+actual world. Proposition D18 of The Bounds of Possibility, Appendix D,
+holds for <span class="math inline">X:=\Box_{\ne}</span> with Actuality
+only at the world of evaluation: <span
+class="math inline">\hat{\hat\Box}p\leftrightarrow\Box(\hat\Diamond a\to
+p)</span>. Proposition D19, whose steps use <span
+class="math inline">W@a</span> only at the world of evaluation and
+otherwise <span class="math inline">\Box</span>NKJ<span
+class="math inline">\,\Box_{\ne}</span> (Proposition D14), then gives BF
+at type <span class="math inline">t</span> for <span
+class="math inline">\hat{\hat\Box}</span> at the actual world: <span
+class="math inline">\forall
+z\,\hat{\hat\Box}(Yz)\to\hat{\hat\Box}\forall z\,Yz</span>. Now
+relativize as in Proposition D8: let <span class="math inline">C</span>
+be the closed sentence saying that <span
+class="math inline">\hat{\hat\Box}</span> is NKJF<span
+class="math inline">_{\langle\rangle}</span>, true at the actual world,
+and put <span class="math inline">X^\prime:=\lambda p\,
+.\,C\to\hat{\hat\Box}p</span>. Then <span
+class="math inline">X^\prime</span> is coextensive with <span
+class="math inline">\hat{\hat\Box}</span>, and <span
+class="math inline">\Box</span>NKJF<span
+class="math inline">_{\langle\rangle}X^\prime</span> holds because each
+clause reduces to a theorem about <span
+class="math inline">\hat{\hat\Box}</span> (N, K, J) or to <span
+class="math inline">C</span> itself. By the definition of <span
+class="math inline">\Box_5</span>, <span class="math inline">\Box_5p\to
+X^\prime p\to\hat{\hat\Box}p</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>The unboxed form of the boxed result from necessary Actuality: Actuality at the actual world alone suffices for the material inclusion there.</p>
+<p>The unboxed form of the boxed result from necessary Actuality:
+Actuality at the actual world alone suffices for the material inclusion
+there.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne, and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D, Propositions D8, D18 and D19, pp. 404–408.</li>
-<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1 (Anthropic), conversation of 14 October 2026 (transcript in the private notes).</li>
+<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne,
+and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D,
+Propositions D8, D18 and D19, pp. 404–408.</li>
+<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1
+(Anthropic), conversation of 14 October 2026 (transcript in the private
+notes).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/actuality-implies-five-implies-two-hat.yaml</code>
+Record:
+<code>topics/classicism/results/actuality-implies-five-implies-two-hat.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Propositions D8, D18, D19</li>
+<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John
+Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility.
+Oxford University Press. Appendix D, Narrower Modalities in Higher-Order
+S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May
+2024. Its background logic HS4 (a primitive S4 operator over
+higher-order logic) is read into C by interpreting the primitive box as
+<span class="math inline">\lambda p\, .\,p=\top</span>, under which
+every theorem of HS4 is a theorem of C. — Propositions D8, D18, D19</li>
 </ul>
 </body></html>

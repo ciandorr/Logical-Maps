@@ -322,12 +322,22 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: N and N×2, sections and projection</h1></header><p>This model shows that Actuality, and even □Actuality, does not imply Inextensible Comprehension. It was found by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr on 27 September 2026, in a session with Cian Dorr, and checked informally the same day by Cian Dorr and Christopher Sun. No Lean verification is claimed.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: N and N×2, sections and projection</h1></header><p>This model shows that Actuality, and even □Actuality, does not imply
+Inextensible Comprehension. It was found by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr on 27 September 2026, in a session with Cian Dorr,
+and checked informally the same day by Cian Dorr and Christopher Sun. No
+Lean verification is claimed.</p>
 <h2 id="the-model">The model</h2>
-<p>It is an ideally full, finitely pinned action model in the sense of <em>Classicism</em>, Appendix D (Definitions D.1–D.3, pp. 73–74). The Appendix D construction applies to any category of sets and functions, and p. 79 uses it for a two-object category. The pinning sets are the finite sets of individuals. The category has two objects:</p>
+<p>It is an ideally full, finitely pinned action model in the sense of
+<em>Classicism</em>, Appendix D (Definitions D.1–D.3, pp. 73–74). The
+Appendix D construction applies to any category of sets and functions,
+and p. 79 uses it for a two-object category. The pinning sets are the
+finite sets of individuals. The category has two objects:</p>
 <ul>
-<li><span class="math inline">W_0</span>, with individuals <span class="math inline">\mathbb N</span>;</li>
-<li><span class="math inline">W_1</span>, with individuals <span class="math inline">\mathbb N\times\{0,1\}</span>.</li>
+<li><span class="math inline">W_0</span>, with individuals <span
+class="math inline">\mathbb N</span>;</li>
+<li><span class="math inline">W_1</span>, with individuals <span
+class="math inline">\mathbb N\times\{0,1\}</span>.</li>
 </ul>
 <p>It has these arrows:</p>
 <table>
@@ -352,7 +362,8 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <tr>
 <td><span class="math inline">W_0</span></td>
 <td><span class="math inline">W_1</span></td>
-<td>the sections <span class="math inline">f_T(n)=(n,T(n))</span>, one for each <span class="math inline">T:\mathbb N\to\{0,1\}</span></td>
+<td>the sections <span class="math inline">f_T(n)=(n,T(n))</span>, one
+for each <span class="math inline">T:\mathbb N\to\{0,1\}</span></td>
 </tr>
 <tr>
 <td><span class="math inline">W_1</span></td>
@@ -362,50 +373,215 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <tr>
 <td><span class="math inline">W_1</span></td>
 <td><span class="math inline">W_1</span></td>
-<td>the identity, and the retractions <span class="math inline">e_T:=f_T\circ\pi</span>, which send <span class="math inline">(n,i)</span> to <span class="math inline">(n,T(n))</span></td>
+<td>the identity, and the retractions <span
+class="math inline">e_T:=f_T\circ\pi</span>, which send <span
+class="math inline">(n,i)</span> to <span
+class="math inline">(n,T(n))</span></td>
 </tr>
 </tbody>
 </table>
 <p>The arrows compose as follows:</p>
-<p><span class="math display">\pi\circ f_T=1_{W_0},\qquad e_T\circ f_U=f_T,\qquad e_T\circ e_U=e_T,\qquad \pi\circ e_T=\pi.</span></p>
-<p>So they form a category. The evaluation point is <span class="math inline">1_{W_0}</span>. The worlds reachable from it are <span class="math inline">1_{W_0}</span> and the sections <span class="math inline">f_T</span>: - every <span class="math inline">f_T</span> returns to <span class="math inline">1_{W_0}</span> by <span class="math inline">\pi</span>; - every <span class="math inline">f_T</span> reaches every <span class="math inline">f_U</span> by <span class="math inline">e_U</span>.</p>
-<p>Write <span class="math inline">k\cdot r</span> for the transport of an entity <span class="math inline">r</span> along an arrow <span class="math inline">k</span>. For a property <span class="math inline">Y</span>, write <span class="math inline">Y(k)</span> for its extension at the world <span class="math inline">k</span>. - A formula with parameters <span class="math inline">\bar r</span> holds at the world <span class="math inline">k</span> iff it holds at the identity of <span class="math inline">k</span>’s target with parameters <span class="math inline">k\cdot\bar r</span>. So <span class="math inline">(k\cdot Y)(g)=Y(g\circ k)</span>. - <span class="math inline">Y</span> is pinned down by a finite set <span class="math inline">S</span> iff any two arrows with a common target that agree on <span class="math inline">S</span> transport it alike. - <span class="math inline">Y\le Z</span> at the identity of an object means <span class="math inline">Y(g)\subseteq Z(g)</span> for every arrow <span class="math inline">g</span> out of that object.</p>
+<p><span class="math display">\pi\circ f_T=1_{W_0},\qquad e_T\circ
+f_U=f_T,\qquad e_T\circ e_U=e_T,\qquad \pi\circ e_T=\pi.</span></p>
+<p>So they form a category. The evaluation point is <span
+class="math inline">1_{W_0}</span>. The worlds reachable from it are
+<span class="math inline">1_{W_0}</span> and the sections <span
+class="math inline">f_T</span>: - every <span
+class="math inline">f_T</span> returns to <span
+class="math inline">1_{W_0}</span> by <span
+class="math inline">\pi</span>; - every <span
+class="math inline">f_T</span> reaches every <span
+class="math inline">f_U</span> by <span
+class="math inline">e_U</span>.</p>
+<p>Write <span class="math inline">k\cdot r</span> for the transport of
+an entity <span class="math inline">r</span> along an arrow <span
+class="math inline">k</span>. For a property <span
+class="math inline">Y</span>, write <span
+class="math inline">Y(k)</span> for its extension at the world <span
+class="math inline">k</span>. - A formula with parameters <span
+class="math inline">\bar r</span> holds at the world <span
+class="math inline">k</span> iff it holds at the identity of <span
+class="math inline">k</span>’s target with parameters <span
+class="math inline">k\cdot\bar r</span>. So <span
+class="math inline">(k\cdot Y)(g)=Y(g\circ k)</span>. - <span
+class="math inline">Y</span> is pinned down by a finite set <span
+class="math inline">S</span> iff any two arrows with a common target
+that agree on <span class="math inline">S</span> transport it alike. -
+<span class="math inline">Y\le Z</span> at the identity of an object
+means <span class="math inline">Y(g)\subseteq Z(g)</span> for every
+arrow <span class="math inline">g</span> out of that object.</p>
 <h2 id="a-sufficient-condition">A sufficient condition</h2>
-<p>The model was found by looking for a failure of the following sufficient condition. The condition holds in every earlier model with Actuality.</p>
-<p><strong>Lemma.</strong> Consider an ideally full, finitely pinned action model in which Actuality holds at the evaluation point, witnessed by <span class="math inline">w</span>. Let <span class="math inline">X</span> be a relation there with extension <span class="math inline">A</span>. Define an intension by setting <span class="math inline">Y_X(k)=k(A)</span> when <span class="math inline">\Diamond w</span> holds at the world <span class="math inline">k</span>, and <span class="math inline">Y_X(k)=\emptyset</span> otherwise.</p>
-<p>If <span class="math inline">Y_X</span> is finitely pinned, then it is an inextensible relation coextensive with <span class="math inline">X</span>.</p>
-<p><em>Proof.</em> - <strong>Coextension.</strong> <span class="math inline">Y_X(1)=A</span>. - <strong>Composition.</strong> <span class="math inline">Y_X(g\circ k)=g(Y_X(k))</span> for all <span class="math inline">k</span> and <span class="math inline">g</span>. - If <span class="math inline">\Diamond w</span> holds at <span class="math inline">g\circ k</span>, it holds at <span class="math inline">k</span>, and both sides are images of <span class="math inline">A</span>. - Otherwise the left side is empty. - <strong>Inextensibility at a world <span class="math inline">k</span>.</strong> Suppose <span class="math inline">Z</span> holds necessarily of every instance of <span class="math inline">Y_X</span> there. Then <span class="math inline">Z</span> contains the pointwise hull <span class="math inline">g\mapsto g(Y_X(k))</span>, which is the transported <span class="math inline">Y_X</span> itself. So <span class="math inline">Y_X\le Z</span>. <span class="math inline">\square</span></p>
-<p>For instance, in the truncated-shift and bicyclic monoids, <span class="math inline">Y_\top</span> is “at least the image of <span class="math inline">0</span>”, pinned down by <span class="math inline">\{0\}</span>. So a countermodel needs arrows with three features: - they can return to <span class="math inline">w</span>; - they agree on arbitrarily large finite sets; - they have different images of <span class="math inline">A</span>.</p>
-<p>The sections <span class="math inline">f_T</span> are the simplest such arrows.</p>
+<p>The model was found by looking for a failure of the following
+sufficient condition. The condition holds in every earlier model with
+Actuality.</p>
+<p><strong>Lemma.</strong> Consider an ideally full, finitely pinned
+action model in which Actuality holds at the evaluation point, witnessed
+by <span class="math inline">w</span>. Let <span
+class="math inline">X</span> be a relation there with extension <span
+class="math inline">A</span>. Define an intension by setting <span
+class="math inline">Y_X(k)=k(A)</span> when <span
+class="math inline">\Diamond w</span> holds at the world <span
+class="math inline">k</span>, and <span
+class="math inline">Y_X(k)=\emptyset</span> otherwise.</p>
+<p>If <span class="math inline">Y_X</span> is finitely pinned, then it
+is an inextensible relation coextensive with <span
+class="math inline">X</span>.</p>
+<p><em>Proof.</em> - <strong>Coextension.</strong> <span
+class="math inline">Y_X(1)=A</span>. - <strong>Composition.</strong>
+<span class="math inline">Y_X(g\circ k)=g(Y_X(k))</span> for all <span
+class="math inline">k</span> and <span class="math inline">g</span>. -
+If <span class="math inline">\Diamond w</span> holds at <span
+class="math inline">g\circ k</span>, it holds at <span
+class="math inline">k</span>, and both sides are images of <span
+class="math inline">A</span>. - Otherwise the left side is empty. -
+<strong>Inextensibility at a world <span
+class="math inline">k</span>.</strong> Suppose <span
+class="math inline">Z</span> holds necessarily of every instance of
+<span class="math inline">Y_X</span> there. Then <span
+class="math inline">Z</span> contains the pointwise hull <span
+class="math inline">g\mapsto g(Y_X(k))</span>, which is the transported
+<span class="math inline">Y_X</span> itself. So <span
+class="math inline">Y_X\le Z</span>. <span
+class="math inline">\square</span></p>
+<p>For instance, in the truncated-shift and bicyclic monoids, <span
+class="math inline">Y_\top</span> is “at least the image of <span
+class="math inline">0</span>”, pinned down by <span
+class="math inline">\{0\}</span>. So a countermodel needs arrows with
+three features: - they can return to <span class="math inline">w</span>;
+- they agree on arbitrarily large finite sets; - they have different
+images of <span class="math inline">A</span>.</p>
+<p>The sections <span class="math inline">f_T</span> are the simplest
+such arrows.</p>
 <h2 id="actuality-and-actuality">Actuality and □Actuality</h2>
-<p><strong>At <span class="math inline">W_0</span>.</strong> Let <span class="math inline">w:=\{1_{W_0}\}</span>, the proposition that the target is <span class="math inline">W_0</span>. - It is pinned down by <span class="math inline">\emptyset</span>, since the identity is the only arrow into <span class="math inline">W_0</span> from <span class="math inline">W_0</span>. - Every true proposition contains the identity, so <span class="math inline">w\le q</span> for every true <span class="math inline">q</span>.</p>
+<p><strong>At <span class="math inline">W_0</span>.</strong> Let <span
+class="math inline">w:=\{1_{W_0}\}</span>, the proposition that the
+target is <span class="math inline">W_0</span>. - It is pinned down by
+<span class="math inline">\emptyset</span>, since the identity is the
+only arrow into <span class="math inline">W_0</span> from <span
+class="math inline">W_0</span>. - Every true proposition contains the
+identity, so <span class="math inline">w\le q</span> for every true
+<span class="math inline">q</span>.</p>
 <p>So <span class="math inline">w</span> witnesses Actuality.</p>
-<p><strong>At <span class="math inline">W_1</span>.</strong> The proposition <span class="math inline">\{1_{W_1}\}</span> is pinned down by <span class="math inline">\{(0,0),(0,1)\}</span>: no retraction <span class="math inline">e_T</span> fixes both points, and <span class="math inline">\pi</span> has a different target. By the same argument, it witnesses Actuality at the identity of <span class="math inline">W_1</span>.</p>
-<p>So Actuality is true at every world reachable from the evaluation point, and □Actuality holds there.</p>
+<p><strong>At <span class="math inline">W_1</span>.</strong> The
+proposition <span class="math inline">\{1_{W_1}\}</span> is pinned down
+by <span class="math inline">\{(0,0),(0,1)\}</span>: no retraction <span
+class="math inline">e_T</span> fixes both points, and <span
+class="math inline">\pi</span> has a different target. By the same
+argument, it witnesses Actuality at the identity of <span
+class="math inline">W_1</span>.</p>
+<p>So Actuality is true at every world reachable from the evaluation
+point, and □Actuality holds there.</p>
 <h2 id="failure-of-bf">Failure of BF</h2>
-<p>For each <span class="math inline">T</span>, let <span class="math inline">F</span> be the intension given by: - <span class="math inline">F(1_{W_0})=\mathbb N</span>; - <span class="math inline">F(f_T)=(\mathbb N\times\{0,1\})\setminus\{(0,1-T(0))\}</span>.</p>
-<p>It is pinned down by <span class="math inline">\{0\}</span>. Every individual <span class="math inline">n</span> necessarily has <span class="math inline">F</span>, since <span class="math inline">f_T(n)=(n,T(n))</span>. But <span class="math inline">\forall x\, .\,Fx</span> fails at <span class="math inline">f_T</span>. So BF fails at type <span class="math inline">e</span>, as it must: BF and Actuality together imply Inextensible Comprehension.</p>
-<h2 id="failure-of-inextensible-comprehension">Failure of Inextensible Comprehension</h2>
-<p>Take <span class="math inline">X=\top_e</span> at <span class="math inline">W_0</span>, the universal property. Suppose, for contradiction, that <span class="math inline">Y</span> is an inextensible property with <span class="math inline">Y(1)=\mathbb N</span>, pinned down by a finite <span class="math inline">S\subseteq\mathbb N</span>. The sections agreeing on <span class="math inline">S</span> are the <span class="math inline">f_T</span> with <span class="math inline">T</span> fixed on <span class="math inline">S</span>. So pinning gives:</p>
-<p><span class="math display">T|_S=T&#39;|_S\ \Longrightarrow\ Y(f_T)=Y(f_{T&#39;}).\tag{P}</span></p>
-<p><strong>Step 1: <span class="math inline">Y(f_T)\subseteq\operatorname{graph}(T)</span>.</strong> For each finite <span class="math inline">S&#39;</span>, define <span class="math inline">Z_{S&#39;}</span> by: - <span class="math inline">Z_{S&#39;}(1)=\mathbb N</span>; - <span class="math inline">Z_{S&#39;}(f_T)=\bigcup\{\operatorname{graph}(T&#39;):T&#39;|_{S&#39;}=T|_{S&#39;}\}</span>.</p>
-<p>This <span class="math inline">Z_{S&#39;}</span> is pinned down by <span class="math inline">S&#39;</span>, and every individual <span class="math inline">n</span> necessarily has it, since <span class="math inline">f_T(n)\in\operatorname{graph}(T)</span>. Weak inextensibility at the evaluation point then gives <span class="math inline">Y\le Z_{S&#39;}</span>, so <span class="math inline">Y(f_T)\subseteq Z_{S&#39;}(f_T)</span> for every <span class="math inline">S&#39;</span>.</p>
-<p>If <span class="math inline">i\ne T(n)</span>, any <span class="math inline">S&#39;</span> containing <span class="math inline">n</span> excludes <span class="math inline">(n,i)</span>. So the intersection of these sets is <span class="math inline">\operatorname{graph}(T)</span>.</p>
-<p><strong>Step 2: <span class="math inline">\mathbb N\subseteq\pi(Y(f_T))</span>.</strong> At the world <span class="math inline">f_T</span> the transported property <span class="math inline">f_T\cdot Y</span> has extension <span class="math inline">Y(f_T)</span>. Take <span class="math inline">Z</span> at <span class="math inline">W_1</span> with: - <span class="math inline">Z(1_{W_1})=Z(e_U)=\mathbb N\times\{0,1\}</span> for every <span class="math inline">U</span>; - <span class="math inline">Z(\pi)=\pi(Y(f_T))</span>.</p>
-<p>This <span class="math inline">Z</span> is pinned down by <span class="math inline">\emptyset</span>: - the arrows into <span class="math inline">W_1</span> agree on <span class="math inline">\emptyset</span>, and <span class="math inline">Z</span> is constant on them after any further arrow; - the only arrow into <span class="math inline">W_0</span> is <span class="math inline">\pi</span>.</p>
-<p><span class="math inline">Z</span> holds necessarily of every instance of <span class="math inline">f_T\cdot Y</span>. By the leading box of inextensibility, <span class="math inline">f_T\cdot Y\le Z</span>. At <span class="math inline">\pi</span> this reads:</p>
-<p><span class="math display">Y(\pi\circ f_T)=Y(1)=\mathbb N\subseteq\pi(Y(f_T)).</span></p>
-<p><strong>Step 3.</strong> Step 2 says <span class="math inline">Y(f_T)</span> meets every fibre <span class="math inline">\{n\}\times\{0,1\}</span>. Step 1 says it meets each fibre at most at <span class="math inline">(n,T(n))</span>. So <span class="math inline">Y(f_T)=\operatorname{graph}(T)</span> for every <span class="math inline">T</span>.</p>
-<p>Now take <span class="math inline">T\ne T&#39;</span> that agree on <span class="math inline">S</span>. Then (P) gives <span class="math inline">Y(f_T)=Y(f_{T&#39;})</span>, while Step 3 gives <span class="math inline">\operatorname{graph}(T)\ne\operatorname{graph}(T&#39;)</span>. This is a contradiction, so Inextensible Comprehension fails.</p>
-<p>Weak inextensibility at the evaluation point holds, as Actuality requires. The witness is <span class="math inline">\lambda z\, .\,w\land z=z</span>, whose extension is empty at every section. The failure comes only through the leading box, at the worlds <span class="math inline">f_T</span>.</p>
+<p>For each <span class="math inline">T</span>, let <span
+class="math inline">F</span> be the intension given by: - <span
+class="math inline">F(1_{W_0})=\mathbb N</span>; - <span
+class="math inline">F(f_T)=(\mathbb
+N\times\{0,1\})\setminus\{(0,1-T(0))\}</span>.</p>
+<p>It is pinned down by <span class="math inline">\{0\}</span>. Every
+individual <span class="math inline">n</span> necessarily has <span
+class="math inline">F</span>, since <span
+class="math inline">f_T(n)=(n,T(n))</span>. But <span
+class="math inline">\forall x\, .\,Fx</span> fails at <span
+class="math inline">f_T</span>. So BF fails at type <span
+class="math inline">e</span>, as it must: BF and Actuality together
+imply Inextensible Comprehension.</p>
+<h2 id="failure-of-inextensible-comprehension">Failure of Inextensible
+Comprehension</h2>
+<p>Take <span class="math inline">X=\top_e</span> at <span
+class="math inline">W_0</span>, the universal property. Suppose, for
+contradiction, that <span class="math inline">Y</span> is an
+inextensible property with <span class="math inline">Y(1)=\mathbb
+N</span>, pinned down by a finite <span
+class="math inline">S\subseteq\mathbb N</span>. The sections agreeing on
+<span class="math inline">S</span> are the <span
+class="math inline">f_T</span> with <span class="math inline">T</span>
+fixed on <span class="math inline">S</span>. So pinning gives:</p>
+<p><span class="math display">T|_S=T&#39;|_S\ \Longrightarrow\
+Y(f_T)=Y(f_{T&#39;}).\tag{P}</span></p>
+<p><strong>Step 1: <span
+class="math inline">Y(f_T)\subseteq\operatorname{graph}(T)</span>.</strong>
+For each finite <span class="math inline">S&#39;</span>, define <span
+class="math inline">Z_{S&#39;}</span> by: - <span
+class="math inline">Z_{S&#39;}(1)=\mathbb N</span>; - <span
+class="math inline">Z_{S&#39;}(f_T)=\bigcup\{\operatorname{graph}(T&#39;):T&#39;|_{S&#39;}=T|_{S&#39;}\}</span>.</p>
+<p>This <span class="math inline">Z_{S&#39;}</span> is pinned down by
+<span class="math inline">S&#39;</span>, and every individual <span
+class="math inline">n</span> necessarily has it, since <span
+class="math inline">f_T(n)\in\operatorname{graph}(T)</span>. Weak
+inextensibility at the evaluation point then gives <span
+class="math inline">Y\le Z_{S&#39;}</span>, so <span
+class="math inline">Y(f_T)\subseteq Z_{S&#39;}(f_T)</span> for every
+<span class="math inline">S&#39;</span>.</p>
+<p>If <span class="math inline">i\ne T(n)</span>, any <span
+class="math inline">S&#39;</span> containing <span
+class="math inline">n</span> excludes <span
+class="math inline">(n,i)</span>. So the intersection of these sets is
+<span class="math inline">\operatorname{graph}(T)</span>.</p>
+<p><strong>Step 2: <span class="math inline">\mathbb
+N\subseteq\pi(Y(f_T))</span>.</strong> At the world <span
+class="math inline">f_T</span> the transported property <span
+class="math inline">f_T\cdot Y</span> has extension <span
+class="math inline">Y(f_T)</span>. Take <span
+class="math inline">Z</span> at <span class="math inline">W_1</span>
+with: - <span class="math inline">Z(1_{W_1})=Z(e_U)=\mathbb
+N\times\{0,1\}</span> for every <span class="math inline">U</span>; -
+<span class="math inline">Z(\pi)=\pi(Y(f_T))</span>.</p>
+<p>This <span class="math inline">Z</span> is pinned down by <span
+class="math inline">\emptyset</span>: - the arrows into <span
+class="math inline">W_1</span> agree on <span
+class="math inline">\emptyset</span>, and <span
+class="math inline">Z</span> is constant on them after any further
+arrow; - the only arrow into <span class="math inline">W_0</span> is
+<span class="math inline">\pi</span>.</p>
+<p><span class="math inline">Z</span> holds necessarily of every
+instance of <span class="math inline">f_T\cdot Y</span>. By the leading
+box of inextensibility, <span class="math inline">f_T\cdot Y\le
+Z</span>. At <span class="math inline">\pi</span> this reads:</p>
+<p><span class="math display">Y(\pi\circ f_T)=Y(1)=\mathbb
+N\subseteq\pi(Y(f_T)).</span></p>
+<p><strong>Step 3.</strong> Step 2 says <span
+class="math inline">Y(f_T)</span> meets every fibre <span
+class="math inline">\{n\}\times\{0,1\}</span>. Step 1 says it meets each
+fibre at most at <span class="math inline">(n,T(n))</span>. So <span
+class="math inline">Y(f_T)=\operatorname{graph}(T)</span> for every
+<span class="math inline">T</span>.</p>
+<p>Now take <span class="math inline">T\ne T&#39;</span> that agree on
+<span class="math inline">S</span>. Then (P) gives <span
+class="math inline">Y(f_T)=Y(f_{T&#39;})</span>, while Step 3 gives
+<span
+class="math inline">\operatorname{graph}(T)\ne\operatorname{graph}(T&#39;)</span>.
+This is a contradiction, so Inextensible Comprehension fails.</p>
+<p>Weak inextensibility at the evaluation point holds, as Actuality
+requires. The witness is <span class="math inline">\lambda z\, .\,w\land
+z=z</span>, whose extension is empty at every section. The failure comes
+only through the leading box, at the worlds <span
+class="math inline">f_T</span>.</p>
 <h2 id="remarks">Remarks</h2>
 <ul>
-<li><strong>What goes wrong.</strong> The property “old”, holding at <span class="math inline">f_T</span> of the range of <span class="math inline">f_T</span>, is exactly what an inextensible <span class="math inline">Y</span> would have to track. No finite set of individuals pins it down.</li>
-<li><strong>Principles that fail by derivation.</strong> Since Actuality holds and Inextensible Comprehension fails, the recorded results make these fail: BF, C5, Distinctness-preserving collapse and Rigid Comprehension.</li>
-<li><strong>□ND.</strong> It fails directly as well, since <span class="math inline">\pi</span> collapses <span class="math inline">(n,0)</span> and <span class="math inline">(n,1)</span>.</li>
+<li><strong>What goes wrong.</strong> The property “old”, holding at
+<span class="math inline">f_T</span> of the range of <span
+class="math inline">f_T</span>, is exactly what an inextensible <span
+class="math inline">Y</span> would have to track. No finite set of
+individuals pins it down.</li>
+<li><strong>Principles that fail by derivation.</strong> Since Actuality
+holds and Inextensible Comprehension fails, the recorded results make
+these fail: BF, C5, Distinctness-preserving collapse and Rigid
+Comprehension.</li>
+<li><strong>□ND.</strong> It fails directly as well, since <span
+class="math inline">\pi</span> collapses <span
+class="math inline">(n,0)</span> and <span
+class="math inline">(n,1)</span>.</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, pp. 73–79. The ideally full finitely pinned action models over a category of sets; the construction is applied here to a new two-object category.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, pp. 73–79. The ideally full finitely pinned action models
+over a category of sets; the construction is applied here to a new
+two-object category.</li>
 </ul>
 </body></html>

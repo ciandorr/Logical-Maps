@@ -323,25 +323,62 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Well-Ordering ⇒ Transversal Choice</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.well_ordering_r_implies_transversal_choice_r</code>; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.well_ordering_r_implies_transversal_choice_r</code>;
+produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8
+October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian
+Dorr, 8 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Well-Ordering.</strong> Every type, including e, is well-ordered by some relation.</li>
+<li><strong>Well-Ordering.</strong> Every type, including e, is
+well-ordered by some relation.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Transversal Choice.</strong> Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at
+any type including e, has a transversal, that is, a property with
+exactly one instance in each of its cells.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">\operatorname{WO}(R)</span> at <span class="math inline">\sigma</span>, write <span class="math inline">x\preccurlyeq y</span> for <span class="math inline">(Rx)y</span>, and let <span class="math inline">E</span> be an equivalence relation on <span class="math inline">\sigma</span>. Put <span class="math inline">Fy:=\forall z\, .\,(Ey)z\to y\preccurlyeq z</span>. Given <span class="math inline">x</span>, the cell <span class="math inline">\lambda z\, .\,(Ex)z</span> is instantiated by <span class="math inline">x</span>, so it has an <span class="math inline">R</span>-minimal instance <span class="math inline">m</span>, which is its least instance: for <span class="math inline">z</span> in the cell, Total gives <span class="math inline">m\preccurlyeq z</span> or <span class="math inline">z\preccurlyeq m</span>, and in the second case minimality gives <span class="math inline">z=m</span>. Since <span class="math inline">(Em)z</span> implies <span class="math inline">(Ex)z</span>, <span class="math inline">Fm</span> holds, and <span class="math inline">(Ex)m</span>. If also <span class="math inline">(Ex)z</span> and <span class="math inline">Fz</span>, then <span class="math inline">(Em)z</span> and <span class="math inline">(Ez)m</span>, so <span class="math inline">m\preccurlyeq z</span> and <span class="math inline">z\preccurlyeq m</span>, and Antisymm gives <span class="math inline">z=m</span>.</p>
+<p>Let <span class="math inline">\operatorname{WO}(R)</span> at <span
+class="math inline">\sigma</span>, write <span
+class="math inline">x\preccurlyeq y</span> for <span
+class="math inline">(Rx)y</span>, and let <span
+class="math inline">E</span> be an equivalence relation on <span
+class="math inline">\sigma</span>. Put <span
+class="math inline">Fy:=\forall z\, .\,(Ey)z\to y\preccurlyeq z</span>.
+Given <span class="math inline">x</span>, the cell <span
+class="math inline">\lambda z\, .\,(Ex)z</span> is instantiated by <span
+class="math inline">x</span>, so it has an <span
+class="math inline">R</span>-minimal instance <span
+class="math inline">m</span>, which is its least instance: for <span
+class="math inline">z</span> in the cell, Total gives <span
+class="math inline">m\preccurlyeq z</span> or <span
+class="math inline">z\preccurlyeq m</span>, and in the second case
+minimality gives <span class="math inline">z=m</span>. Since <span
+class="math inline">(Em)z</span> implies <span
+class="math inline">(Ex)z</span>, <span class="math inline">Fm</span>
+holds, and <span class="math inline">(Ex)m</span>. If also <span
+class="math inline">(Ex)z</span> and <span
+class="math inline">Fz</span>, then <span
+class="math inline">(Em)z</span> and <span
+class="math inline">(Ez)m</span>, so <span
+class="math inline">m\preccurlyeq z</span> and <span
+class="math inline">z\preccurlyeq m</span>, and Antisymm gives <span
+class="math inline">z=m</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Each cell’s chosen instance is its least element in the well-order. Well-Ordering is used only at <span class="math inline">\sigma</span>.</p>
+<p>Each cell’s chosen instance is its least element in the well-order.
+Well-Ordering is used only at <span
+class="math inline">\sigma</span>.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 8 Oct</strong> — Cian Dorr, suggestion of 8 October 2026, to connect Transversal Choice, Zorn’s Lemma and Well-Ordering; proof as recorded.</li>
+<li><strong>Dorr 8 Oct</strong> — Cian Dorr, suggestion of 8 October
+2026, to connect Transversal Choice, Zorn’s Lemma and Well-Ordering;
+proof as recorded.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/well-ordering-r-implies-transversal-choice-r.yaml</code>
+Record:
+<code>topics/classicism/results/well-ordering-r-implies-transversal-choice-r.yaml</code>
 </p>
 </body></html>

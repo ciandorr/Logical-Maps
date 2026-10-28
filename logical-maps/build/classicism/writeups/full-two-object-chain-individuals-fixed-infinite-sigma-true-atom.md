@@ -8,8 +8,10 @@
 - **Truth implies ND-necessity.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
 - **□Truth implies 5-necessity.** Necessarily, every truth is 5-necessary: necessary under every S5 operator. In C this is the identity $\Box_5=\lambda p\, .\,p$.
 - **□Atomicity.** Necessarily, every non-bottom entity of each relational type has an atom below it.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
 - **□BF.** Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.
 - **□Rigid Comprehension.** Necessarily, every relation, including a proposition, is coextensive with a rigid one.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **□Intensional Choice.** Necessarily, if a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
@@ -102,6 +104,12 @@ Entailment is inclusion of intensions. Below a relation $Y\ne\bot_\tau$ lies the
 
 *Source: Classicism, p. 61. General argument `arguments/full-atomicity`. It requires that The model is a full action model: an action model (Classicism, Appendix D) that is full at every object. Here: An action model, full at every object (Classicism, §3.5, p. 59; Appendix D). By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
 
+### Holds □Self-atoms are atoms.
+
+The argument of full-comparable-free-arrows-self-atoms at every reachable object: a self-atom there is a singleton intension, so an atom.
+
+*General argument `arguments/full-comparable-free-arrows-everywhere-self-atoms`. It requires that The model is full: at each object, the domain of each relational type contains every intension of that type. Here: Every intension of every relational type is present at every object (Classicism, §3.5, p. 59). It requires that At every object reachable from the evaluation point, any two arrows out of it that are each fixed under post-composition only by the identity are comparable: one is a left multiple of the other. Here: Out of $W_0$ the arrows are $1$ and $h=h\circ1$; out of $W_1$ only $1$. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
 ### Holds □BF.
 
 BF holds at an object whose arrows out all act surjectively at every type (Proposition 3.24(ii)). In a full model the transport of intensions along an epimorphism $k$ is onto: an intension $Y$ at its target is the transport of $\{\langle\bar a,k\circ m\rangle : \langle\bar a,m\rangle\in Y\}$, since $k\circ m=k\circ m'$ only if $m=m'$; and on the individuals the arrows are onto by the condition. So BF holds at every object reachable from the evaluation point, and BF is necessary.
@@ -113,6 +121,12 @@ BF holds at an object whose arrows out all act surjectively at every type (Propo
 Given $X$ of type $\tau$ at an object $W$, let $Y$ be the relation whose extension at an arrow $i$ out of $W$ is $X$'s extension at $W$ transported along $i$, which is in the domain since the model is full. It is coextensive with $X$. It is persistent, since its extension at $i\circ j$ is its extension at $i$ transported along $j$. And it is inextensible: if $\Box X'$ holds at $i$ of everything $Y$ holds of there, then at $i\circ j$ everything $Y$ holds of is the transport along $j$ of something $Y$ holds of at $i$, of which $X'$ then holds. Every object being full, the same holds at every arrow, so Rigid Comprehension is necessary. The source notes that full models satisfy it (p. 61); stated once for the topic, in place of the full models' own arguments.
 
 *Source: Classicism, p. 61. General argument `arguments/full-rigid-comprehension`. It requires that The model is a full action model: an action model (Classicism, Appendix D) that is full at every object. Here: An action model, full at every object (Classicism, §3.5, p. 59; Appendix D). By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
+
+### Holds □Self-atoms are strong atoms.
+
+The argument of full-uniquely-factored-self-atoms-strong at every reachable object.
+
+*General argument `arguments/full-uniquely-factored-everywhere-self-atoms-strong`. It requires that The model is full: at each object, the domain of each relational type contains every intension of that type. Here: Every intension of every relational type is present at every object (Classicism, §3.5, p. 59). It requires that At every object reachable from the evaluation point, any two arrows out of it that are each fixed under post-composition only by the identity are comparable: one is a left multiple of the other. Here: Out of $W_0$ the arrows are $1$ and $h=h\circ1$; out of $W_1$ only $1$. It requires that At every object reachable from the evaluation point, every arrow $k$ out of it that is fixed only by the identity factors through each arrow $h$ out of it in at most one way: $m\circ h=m^{\prime}\circ h=k$ implies $m=m^{\prime}$. Here: $h=m\circ1$ only for $m=h$ and $h=m\circ h$ only for $m=1_{W_1}$; at $W_1$ only the identity. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Axiom of Infinity (type e), Infinity Schema (type e).
 
@@ -216,9 +230,9 @@ The record's revision log before it was written as arguments.
 - **2026-09-25** (Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell) — Added Transversal Choice, by the argument recorded for Relational Choice: a full model contains every intension, in particular one whose extension at the evaluation point is a transversal, chosen in the metatheory, of the extension there of an equivalence relation; the equivalence and transversal conditions are unboxed. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun. Now satisfies: Transversal Choice.
 - **2026-09-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added BF (type t) and □BF (type t), and the failure of Possible Infinity (type t) and of B for pure sentences; see the notes. Now satisfies: BF (type t), □BF (type t). Now violates: Possible Infinity (type t), B for pure sentences.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the Distinctness-preserving collapse; see the notes. Now satisfies: Truth implies ND-necessity.
-- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Extended the Strong Leibniz Biconditionals from type t to every relational type, with the necessitation: transports of atoms along the unique arrow out of W1 are atoms or empty. Now satisfies: Strong Leibniz Biconditionals, □Strong Leibniz Biconditionals.
+- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Extended Strong Atomicity from type t to every relational type, with the necessitation: transports of atoms along the unique arrow out of W1 are atoms or empty. Now satisfies: Strong Atomicity, □Strong Atomicity.
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
-- **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added □Strong Leibniz Biconditionals (type t); see the notes. Now satisfies: □Strong Leibniz Biconditionals (type t).
+- **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added □Strong Atomicity (type t); see the notes. Now satisfies: □Strong Atomicity (type t).
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Boxed the Relational Choice claim; see the notes. Now satisfies: □Relational Choice.
 - **2026-09-20** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added Relational Choice at Cian Dorr's direction. With choice in the metatheory a serial relation has a functional subrelation, and a full model contains every intension, so that subrelation is in the domain; see Classicism, p. 61, on the principles common to full models. The propositions at the evaluation object are the subsets of the two arrows out of it, four in all, and every intension of a full model is present, so the numerals are the finite cardinalities and the fourth holds of the universal property of propositions: the Axiom of Infinity at type t fails, as does the fifth instance of the schema. Now satisfies: Relational Choice. Now violates: Axiom of Infinity (type t), Infinity Schema (type t).
 - **2026-09-17** (OpenAI Codex (GPT-6), prompted by Zachary Goodsell) — Adopted the source’s relational type system at the user’s request. The cited construction now directly supplies the recorded model; the former type-extension obligation is removed. Now satisfies: □Rigid Comprehension, □Atomicity, □Actuality. Now violates: Fregean Axiom, No Pure Contingency.

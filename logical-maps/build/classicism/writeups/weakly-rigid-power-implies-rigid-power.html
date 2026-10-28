@@ -323,23 +323,56 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Weakly Rigid Power ⇒ Rigid Power</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.weakly_rigid_power_implies_rigid_power</code>; produced by Claude Opus 5.5 (Anthropic), 10 October 2026, checking a suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 10 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.weakly_rigid_power_implies_rigid_power</code>;
+produced by Claude Opus 5.5 (Anthropic), 10 October 2026, checking a
+suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 10 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid, so is the property of being a weakly rigid relation that entails it.</li>
+<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid,
+so is the property of being a weakly rigid relation that entails
+it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
+<li><strong>Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix the type tuple, and for <span class="math inline">F</span> of type <span class="math inline">\bar\sigma t</span> write <span class="math inline">P_F:=\lambda X\, .\,\operatorname{WeaklyRigid}(X)\land X\le F</span> and <span class="math inline">R_F:=\lambda X\, .\,\operatorname{Rigid}(X)\land X\le F</span>. Suppose <span class="math inline">\operatorname{Rigid}(F)</span>. By T, <span class="math inline">F</span> is weakly rigid, so Weakly Rigid Power makes <span class="math inline">P_F</span> weakly rigid. Weakly Rigid Power implies Tame Rigidity (recorded) at every type, in particular at <span class="math inline">(\bar\sigma t)t</span>, so <span class="math inline">P_F</span> is rigid. Its persistence is <span class="math inline">\Box\forall X\, .\,P_FX\to\Box P_FX</span>, and <span class="math inline">\Box P_FX</span> gives <span class="math inline">\Box\operatorname{WeaklyRigid}(X)</span>, that is <span class="math inline">\operatorname{Rigid}(X)</span>, and <span class="math inline">\Box(X\le F)</span>; so <span class="math inline">P_F\le R_F</span>. Conversely <span class="math inline">R_F\le P_F</span>, since rigidity implies weak rigidity by T, at every world. Mutual entailment is identity in C, so <span class="math inline">R_F=P_F</span>, and <span class="math inline">R_F</span> is rigid. Tame Rigidity at the evaluation point alone does not identify the two properties, since they can differ at other worlds; the identity comes from the boxed persistence of <span class="math inline">P_F</span>.</p>
+<p>Fix the type tuple, and for <span class="math inline">F</span> of
+type <span class="math inline">\bar\sigma t</span> write <span
+class="math inline">P_F:=\lambda X\,
+.\,\operatorname{WeaklyRigid}(X)\land X\le F</span> and <span
+class="math inline">R_F:=\lambda X\, .\,\operatorname{Rigid}(X)\land
+X\le F</span>. Suppose <span
+class="math inline">\operatorname{Rigid}(F)</span>. By T, <span
+class="math inline">F</span> is weakly rigid, so Weakly Rigid Power
+makes <span class="math inline">P_F</span> weakly rigid. Weakly Rigid
+Power implies Tame Rigidity (recorded) at every type, in particular at
+<span class="math inline">(\bar\sigma t)t</span>, so <span
+class="math inline">P_F</span> is rigid. Its persistence is <span
+class="math inline">\Box\forall X\, .\,P_FX\to\Box P_FX</span>, and
+<span class="math inline">\Box P_FX</span> gives <span
+class="math inline">\Box\operatorname{WeaklyRigid}(X)</span>, that is
+<span class="math inline">\operatorname{Rigid}(X)</span>, and <span
+class="math inline">\Box(X\le F)</span>; so <span
+class="math inline">P_F\le R_F</span>. Conversely <span
+class="math inline">R_F\le P_F</span>, since rigidity implies weak
+rigidity by T, at every world. Mutual entailment is identity in C, so
+<span class="math inline">R_F=P_F</span>, and <span
+class="math inline">R_F</span> is rigid. Tame Rigidity at the evaluation
+point alone does not identify the two properties, since they can differ
+at other worlds; the identity comes from the boxed persistence of <span
+class="math inline">P_F</span>.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October 2026.</li>
+<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/weakly-rigid-power-implies-rigid-power.yaml</code>
+Record:
+<code>topics/classicism/results/weakly-rigid-power-implies-rigid-power.yaml</code>
 </p>
 </body></html>

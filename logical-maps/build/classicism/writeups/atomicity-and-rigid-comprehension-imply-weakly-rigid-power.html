@@ -322,62 +322,164 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Atomicity and Rigid Comprehension imply Weakly Rigid Power</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026. It adapts the atom pullback of <a href="atomicity-and-rigid-comprehension-imply-rigid-power.html">Atomicity and Rigid Comprehension imply Rigid Power</a> (Bacon’s Lemma C.6) to weakly rigid relations.</p>
-<p><strong>Theorem.</strong> Let <span class="math inline">\tau=\bar\sigma t</span> be a relational type. In C, Rigid Comprehension at <span class="math inline">\tau</span> and Atomicity at <span class="math inline">\tau t</span> imply Weakly Rigid Power at <span class="math inline">\tau</span>: if <span class="math inline">F^\tau</span> is weakly rigid, so is</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Atomicity and Rigid Comprehension imply Weakly Rigid Power</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October
+2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr, 24 October 2026. It adapts the atom pullback of <a
+href="atomicity-and-rigid-comprehension-imply-rigid-power.html">Atomicity
+and Rigid Comprehension imply Rigid Power</a> (Bacon’s Lemma C.6) to
+weakly rigid relations.</p>
+<p><strong>Theorem.</strong> Let <span
+class="math inline">\tau=\bar\sigma t</span> be a relational type. In C,
+Rigid Comprehension at <span class="math inline">\tau</span> and
+Atomicity at <span class="math inline">\tau t</span> imply Weakly Rigid
+Power at <span class="math inline">\tau</span>: if <span
+class="math inline">F^\tau</span> is weakly rigid, so is</p>
 <p><span class="math display">
 P:=\lambda Y^\tau\, .\,\operatorname{WeaklyRigid}(Y)\land Y\le F .
 </span></p>
-<p>Both premises are unboxed; Rigid Comprehension at <span class="math inline">\tau t</span> and BF are not used.</p>
-<p>Recall (Background) that <span class="math inline">Y\le Z</span> is <span class="math inline">\Box\forall\bar x\, .\,Y[\bar x]\to Z[\bar x]</span>, that a weakly rigid relation is persistent, that rigidity is necessary weak rigidity, and that an atom <span class="math inline">W</span> of a relational type is non-bottom and, for each <span class="math inline">\mathcal Y</span> of its type, satisfies <span class="math inline">W\le\mathcal Y</span> or <span class="math inline">W\le\neg\mathcal Y</span>.</p>
-<p><strong>Lemma (Sun).</strong> Coextensive weakly rigid relations are identical. If <span class="math inline">A</span> and <span class="math inline">B</span> are weakly rigid and coextensive, each instance of <span class="math inline">A</span> is an instance of <span class="math inline">B</span>, hence necessarily one; weak inextensibility of <span class="math inline">A</span> gives <span class="math inline">A\le B</span>, and likewise <span class="math inline">B\le A</span>.</p>
-<p>So under Rigid Comprehension at <span class="math inline">\tau</span>, every weakly rigid <span class="math inline">Y^\tau</span> is identical to its rigid coextension, and is rigid.</p>
-<h2 id="step-1-p-is-weakly-persistent">Step 1: <span class="math inline">P</span> is weakly persistent</h2>
-<p>Let <span class="math inline">PY</span>. Then <span class="math inline">Y</span> is rigid, so <span class="math inline">\Box\operatorname{WeaklyRigid}(Y)</span>; and <span class="math inline">Y\le F</span> is necessary. So <span class="math inline">\Box PY</span>.</p>
-<h2 id="step-2-pulling-back-an-atom-below-p">Step 2: pulling back an atom below <span class="math inline">P</span></h2>
-<p>Let <span class="math inline">W^{\tau t}</span> be an atom with <span class="math inline">W\le P</span>. We find <span class="math inline">X</span> with</p>
+<p>Both premises are unboxed; Rigid Comprehension at <span
+class="math inline">\tau t</span> and BF are not used.</p>
+<p>Recall (Background) that <span class="math inline">Y\le Z</span> is
+<span class="math inline">\Box\forall\bar x\, .\,Y[\bar x]\to Z[\bar
+x]</span>, that a weakly rigid relation is persistent, that rigidity is
+necessary weak rigidity, and that an atom <span
+class="math inline">W</span> of a relational type is non-bottom and, for
+each <span class="math inline">\mathcal Y</span> of its type, satisfies
+<span class="math inline">W\le\mathcal Y</span> or <span
+class="math inline">W\le\neg\mathcal Y</span>.</p>
+<p><strong>Lemma (Sun).</strong> Coextensive weakly rigid relations are
+identical. If <span class="math inline">A</span> and <span
+class="math inline">B</span> are weakly rigid and coextensive, each
+instance of <span class="math inline">A</span> is an instance of <span
+class="math inline">B</span>, hence necessarily one; weak
+inextensibility of <span class="math inline">A</span> gives <span
+class="math inline">A\le B</span>, and likewise <span
+class="math inline">B\le A</span>.</p>
+<p>So under Rigid Comprehension at <span
+class="math inline">\tau</span>, every weakly rigid <span
+class="math inline">Y^\tau</span> is identical to its rigid coextension,
+and is rigid.</p>
+<h2 id="step-1-p-is-weakly-persistent">Step 1: <span
+class="math inline">P</span> is weakly persistent</h2>
+<p>Let <span class="math inline">PY</span>. Then <span
+class="math inline">Y</span> is rigid, so <span
+class="math inline">\Box\operatorname{WeaklyRigid}(Y)</span>; and <span
+class="math inline">Y\le F</span> is necessary. So <span
+class="math inline">\Box PY</span>.</p>
+<h2 id="step-2-pulling-back-an-atom-below-p">Step 2: pulling back an
+atom below <span class="math inline">P</span></h2>
+<p>Let <span class="math inline">W^{\tau t}</span> be an atom with <span
+class="math inline">W\le P</span>. We find <span
+class="math inline">X</span> with</p>
 <p><span class="math display">
 PX\qquad\text{and}\qquad\Box\forall Y\, .\,WY\to Y=X .
 \tag{1}
 </span></p>
-<p>By Rigid Comprehension at <span class="math inline">\tau</span>, let <span class="math inline">X</span> be rigid and coextensive with</p>
+<p>By Rigid Comprehension at <span class="math inline">\tau</span>, let
+<span class="math inline">X</span> be rigid and coextensive with</p>
 <p><span class="math display">
 Q:=\lambda\bar x\, .\,F[\bar x]\land\Box\forall Y\, .\,WY\to Y[\bar x].
 </span></p>
-<p><em>(a) <span class="math inline">PX</span>.</em> Each instance of <span class="math inline">X</span> is an instance of <span class="math inline">F</span>, so necessarily one; weak inextensibility of <span class="math inline">X</span> gives <span class="math inline">X\le F</span>. As <span class="math inline">X</span> is rigid, <span class="math inline">PX</span>.</p>
-<p><em>(b)</em> Each instance <span class="math inline">\bar x</span> of <span class="math inline">X</span> has <span class="math inline">\Box\forall Y\, .\,WY\to Y[\bar x]</span>, so weak inextensibility of <span class="math inline">X</span> gives</p>
+<p><em>(a) <span class="math inline">PX</span>.</em> Each instance of
+<span class="math inline">X</span> is an instance of <span
+class="math inline">F</span>, so necessarily one; weak inextensibility
+of <span class="math inline">X</span> gives <span
+class="math inline">X\le F</span>. As <span class="math inline">X</span>
+is rigid, <span class="math inline">PX</span>.</p>
+<p><em>(b)</em> Each instance <span class="math inline">\bar x</span> of
+<span class="math inline">X</span> has <span
+class="math inline">\Box\forall Y\, .\,WY\to Y[\bar x]</span>, so weak
+inextensibility of <span class="math inline">X</span> gives</p>
 <p><span class="math display">
 \Box\forall Y\, .\,WY\to\forall\bar x\, .\,X[\bar x]\to Y[\bar x].
 \tag{2}
 </span></p>
-<p><em>(c)</em> Let <span class="math inline">\bar x</span> be an instance of <span class="math inline">F</span>. If <span class="math inline">X[\bar x]</span>, then <span class="math inline">\Box X[\bar x]</span>. If not, then <span class="math inline">\neg Q[\bar x]</span>, so <span class="math inline">W\not\le\lambda Y\, .\,Y[\bar x]</span>, and as <span class="math inline">W</span> is an atom, <span class="math inline">W\le\lambda Y\, .\,\neg Y[\bar x]</span>. Either way,</p>
+<p><em>(c)</em> Let <span class="math inline">\bar x</span> be an
+instance of <span class="math inline">F</span>. If <span
+class="math inline">X[\bar x]</span>, then <span
+class="math inline">\Box X[\bar x]</span>. If not, then <span
+class="math inline">\neg Q[\bar x]</span>, so <span
+class="math inline">W\not\le\lambda Y\, .\,Y[\bar x]</span>, and as
+<span class="math inline">W</span> is an atom, <span
+class="math inline">W\le\lambda Y\, .\,\neg Y[\bar x]</span>. Either
+way,</p>
 <p><span class="math display">
 \Box\forall Y\, .\,WY\to(Y[\bar x]\to X[\bar x]).
 </span></p>
-<p>Weak inextensibility of <span class="math inline">F</span>, applied to <span class="math inline">\lambda\bar x\, .\,\forall Y\, .\,WY\to(Y[\bar x]\to X[\bar x])</span>, gives</p>
+<p>Weak inextensibility of <span class="math inline">F</span>, applied
+to <span class="math inline">\lambda\bar x\, .\,\forall Y\,
+.\,WY\to(Y[\bar x]\to X[\bar x])</span>, gives</p>
 <p><span class="math display">
-\Box\forall\bar x\, .\,F[\bar x]\to\forall Y\, .\,WY\to(Y[\bar x]\to X[\bar x]).
+\Box\forall\bar x\, .\,F[\bar x]\to\forall Y\, .\,WY\to(Y[\bar x]\to
+X[\bar x]).
 </span></p>
-<p>Since <span class="math inline">W\le P</span>, necessarily every <span class="math inline">Y</span> with <span class="math inline">WY</span> has <span class="math inline">Y\le F</span>. Hence</p>
+<p>Since <span class="math inline">W\le P</span>, necessarily every
+<span class="math inline">Y</span> with <span
+class="math inline">WY</span> has <span class="math inline">Y\le
+F</span>. Hence</p>
 <p><span class="math display">
 \Box\forall Y\, .\,WY\to\forall\bar x\, .\,Y[\bar x]\to X[\bar x].
 \tag{3}
 </span></p>
-<p><em>(d)</em> At any world, let <span class="math inline">WY</span>. Then <span class="math inline">PY</span> there, so <span class="math inline">Y</span> is weakly rigid there; <span class="math inline">X</span> is weakly rigid there, being rigid; and by (2) and (3) they are coextensive there. By the Lemma, <span class="math inline">Y=X</span>. This is (1). <span class="math inline">\square</span></p>
-<p>Only the weak rigidity of <span class="math inline">Y</span> at the later world is used in (d), not its rigidity. This is what the Rigid Power argument lacks, and what lets the conclusion be about weakly rigid subrelations.</p>
-<h2 id="step-3-p-is-weakly-inextensible">Step 3: <span class="math inline">P</span> is weakly inextensible</h2>
+<p><em>(d)</em> At any world, let <span class="math inline">WY</span>.
+Then <span class="math inline">PY</span> there, so <span
+class="math inline">Y</span> is weakly rigid there; <span
+class="math inline">X</span> is weakly rigid there, being rigid; and by
+(2) and (3) they are coextensive there. By the Lemma, <span
+class="math inline">Y=X</span>. This is (1). <span
+class="math inline">\square</span></p>
+<p>Only the weak rigidity of <span class="math inline">Y</span> at the
+later world is used in (d), not its rigidity. This is what the Rigid
+Power argument lacks, and what lets the conclusion be about weakly rigid
+subrelations.</p>
+<h2 id="step-3-p-is-weakly-inextensible">Step 3: <span
+class="math inline">P</span> is weakly inextensible</h2>
 <p>Suppose</p>
 <p><span class="math display">
 \forall Y\, .\,PY\to\Box ZY,
 </span></p>
-<p>and suppose for contradiction that <span class="math inline">P\not\le Z</span>, that is, <span class="math inline">\lambda Y\, .\,PY\land\neg ZY\ne\bot</span>. By Atomicity at <span class="math inline">\tau t</span> there is an atom <span class="math inline">W\le\lambda Y\, .\,PY\land\neg ZY</span>. Step 2 gives <span class="math inline">X</span> with <span class="math inline">PX</span>, so <span class="math inline">\Box ZX</span>, and <span class="math inline">\Box\forall Y\, .\,WY\to Y=X</span>. As <span class="math inline">W\ne\bot</span>, possibly some <span class="math inline">Y</span> has <span class="math inline">WY</span>; at such a world <span class="math inline">Y=X</span> and <span class="math inline">\neg ZY</span>, contradicting <span class="math inline">\Box ZX</span>. So <span class="math inline">P\le Z</span>. <span class="math inline">\square</span></p>
-<p>Steps 1 and 3 show that <span class="math inline">P</span> is weakly rigid.</p>
+<p>and suppose for contradiction that <span class="math inline">P\not\le
+Z</span>, that is, <span class="math inline">\lambda Y\, .\,PY\land\neg
+ZY\ne\bot</span>. By Atomicity at <span class="math inline">\tau
+t</span> there is an atom <span class="math inline">W\le\lambda Y\,
+.\,PY\land\neg ZY</span>. Step 2 gives <span
+class="math inline">X</span> with <span class="math inline">PX</span>,
+so <span class="math inline">\Box ZX</span>, and <span
+class="math inline">\Box\forall Y\, .\,WY\to Y=X</span>. As <span
+class="math inline">W\ne\bot</span>, possibly some <span
+class="math inline">Y</span> has <span class="math inline">WY</span>; at
+such a world <span class="math inline">Y=X</span> and <span
+class="math inline">\neg ZY</span>, contradicting <span
+class="math inline">\Box ZX</span>. So <span class="math inline">P\le
+Z</span>. <span class="math inline">\square</span></p>
+<p>Steps 1 and 3 show that <span class="math inline">P</span> is weakly
+rigid.</p>
 <h2 id="remarks">Remarks</h2>
 <ol type="1">
-<li>The premises used are Rigid Comprehension at <span class="math inline">\tau</span> and Atomicity at <span class="math inline">\tau t</span>, including <span class="math inline">\tau=t</span>.</li>
-<li>Weakly Rigid Power implies Rigid Power, so this subsumes <a href="atomicity-and-rigid-comprehension-imply-rigid-power.html">Atomicity and Rigid Comprehension imply Rigid Power</a> at the level of the schemata. That recorded implication uses Weakly Rigid Power at <span class="math inline">\tau t</span> to get Rigid Power at <span class="math inline">\tau</span>, so the typed versions differ.</li>
+<li>The premises used are Rigid Comprehension at <span
+class="math inline">\tau</span> and Atomicity at <span
+class="math inline">\tau t</span>, including <span
+class="math inline">\tau=t</span>.</li>
+<li>Weakly Rigid Power implies Rigid Power, so this subsumes <a
+href="atomicity-and-rigid-comprehension-imply-rigid-power.html">Atomicity
+and Rigid Comprehension imply Rigid Power</a> at the level of the
+schemata. That recorded implication uses Weakly Rigid Power at <span
+class="math inline">\tau t</span> to get Rigid Power at <span
+class="math inline">\tau</span>, so the typed versions differ.</li>
 </ol>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: <a href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could the truths of mathematics have been different?</a>.</strong> Bacon, Andrew (2025). Could the truths of mathematics have been different? Draft dated 9 October 2025, with online appendix; published in Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and Goodsell. Locators refer to the draft. The full Boolean-valued construction is in appendix §B.2, pp. 7–9 of the separately paginated appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — Appendix C.2, Lemma C.6, pp. 15–16 of the separately paginated appendix. The atom pullback, adapted to weakly rigid relations.</li>
+<li><strong>Background: <a
+href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could
+the truths of mathematics have been different?</a>.</strong> Bacon,
+Andrew (2025). Could the truths of mathematics have been different?
+Draft dated 9 October 2025, with online appendix; published in
+Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and
+Goodsell. Locators refer to the draft. The full Boolean-valued
+construction is in appendix §B.2, pp. 7–9 of the separately paginated
+appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and
+Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. —
+Appendix C.2, Lemma C.6, pp. 15–16 of the separately paginated appendix.
+The atom pullback, adapted to weakly rigid relations.</li>
 </ul>
 </body></html>

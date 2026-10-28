@@ -1,6 +1,6 @@
 id: strong-actuality
 name: Strong Actuality
-category: lattice
+category: more-boolean-structure
 statement: 'There is a true strong atom: a true proposition that necessarily entails every
   proposition or its negation.'
 formal: $\exists p\, .\,p\land\Box\forall q\, .\,p\le q\lor p\le\neg q$
@@ -14,7 +14,7 @@ references:
   role: background
   locator: §8.2, pp. 165–166
   note: Strong atoms; the principle says that some strong atom at type $t$ is true, as Actuality says
-    that some atom (atom) is.
+    that some atom is.
 - paper: bacon-dorr-classicism
   role: background
   locator: §2.2, p. 25
@@ -25,4 +25,21 @@ notes: >-
   Actuality asks for a true proposition that settles every proposition, Strong Actuality for one that
   necessarily settles every proposition, including propositions that do not actually exist. In a full
   action model it holds at an object $W$ iff every arrow out of $W$ has at most one retraction.
+changes:
+- date: '2026-10-28'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: the form Strong Actual Profile, as Actual Profile is a form of Actuality.'
+variants:
+- id: strong-actual-profile
+  name: Strong Actual Profile
+  statement: Every finite tuple has a true relational profile that necessarily entails every relation or
+    its negation; the tuple may be empty.
+  formal: $\forall\bar x^{\bar\sigma}\, .\,\exists Y^{\bar\sigma t}\, .\,Y[\bar x]\land\Box\forall Z^{\bar\sigma
+    t}\, .\,Y\le Z\lor Y\le\neg Z$
+  equivalence: 'As for the form Actual Profile of Actuality. Form to official: specialize to the empty tuple,
+    so that $Y$ and $Z$ have type $t$. Official to form: let $w$ be a true proposition with $\Box\forall q\,
+    .\,w\le q\lor w\le\neg q$. At a tuple $\bar x$, use $Y:=\lambda\bar y\, .\,w\land\bar y=\bar x$, which
+    holds at $\bar x$. It is a theorem of C, by Leibniz’s law, that $Y\le Z$ iff $w\le Z[\bar x]$ and
+    $Y\le\neg Z$ iff $w\le\neg Z[\bar x]$; necessitating it and instantiating $q:=Z[\bar x]$ inside the box
+    gives $\Box\forall Z\, .\,Y\le Z\lor Y\le\neg Z$.'
 lean_def: Classicism.P.StrongActuality.schemaIn

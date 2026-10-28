@@ -36,6 +36,30 @@ meets:
   actuality-contingent: The proposition true at $A$ only is the strongest truth; its transport along $i$ is
     $\bot$, so it is necessary at no world and $i$ does not fix it.
 arguments:
+- holds:
+  - self-atoms-are-atoms-r
+  - self-atoms-are-strong-atoms-r
+  fails:
+  - atoms-are-self-atoms-t
+  - self-atomicity-t
+  - necessary-self-atoms-are-atoms-t
+  - necessary-self-atoms-are-strong-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'At $A$ the propositions are the four subsets of $\{1_A,i\}$. The atom $\{i\}$ is not a self-atom:
+    its transport along $i$ is the set of all arrows out of $B$, since $m\circ i=i$ for every $m$, which
+    is not an atom at $B$. So Atoms are self-atoms (type t) fails, and Self-Atomicity (type t) fails,
+    $\{i\}$ being possible with no self-atom below it. No self-atom at $A$ has a pair at $i$, for the
+    same reason: its transport along $i$ would be the constant intension of a set of tuples at $B$ over
+    all arrows out of $B$, which has a proper nonzero part over any nonzero proper proposition of $B$.
+    So the self-atoms at $A$ sit over $1_A$ with one tuple, are atoms, and are strong atoms, their transport
+    along $i$ being empty: Self-atoms are atoms and Self-atoms are strong atoms hold at $A$, at every
+    type. At $B$, the tail of symmetric-qualitative-links with the fixed point $d$, the self-atom of that
+    model built from a collapsing arrow $k$ and a finite $N$ with $k(N)\supseteq\{0,1\}$ is again a self-atom
+    that is not an atom, $d$ being fixed by every arrow and every symmetry; so Self-atoms are atoms (type
+    t) and Self-atoms are strong atoms (type t) fail at $B$, which $i$ reaches, and their boxed forms
+    fail at $A$.'
 - holds: [rigid-comprehension-r]
   choice: free
   writeup: symmetric-entrance-qualitative-links

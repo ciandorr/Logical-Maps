@@ -97,7 +97,7 @@ theorem actuality_implies_weakly_inextensible_comprehension_r {σ : Type} [Ty σ
 theorem profile_of_w_imp {σ : Type} [Ty σ] (w : Prop) (Z : σ → Prop) (x : σ) :
     (w → Z x) → ∀ y, w ∧ y = x → Z y := fun h y hy => hy.2 ▸ h hy.1
 
-/-- `actuality-implies-actual-profile-r` (Classicism, n. 36), at `σ`, its list form being
+/-- Actuality to its form Actual Profile (Classicism, n. 36), at `σ`, its list form being
 the map's record: `λy. w ∧ y = x` is the true profile of `x`, and it entails every `Z`
 with `Zx`, since `w` entails `Zx`. -/
 theorem actuality_implies_actual_profile_r {σ : Type} [Ty σ] : Actuality → ActualProfile σ :=

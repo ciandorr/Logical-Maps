@@ -323,25 +323,61 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Gallin Extensional Comprehension ⇒ Strong Actuality</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.gallin_comprehension_implies_strong_actuality</code>; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 9 October 2026, on Cian Dorr’s hunch that the recorded verdicts of full-two-object-double-retraction settle Gallin Extensional Comprehension through a missing result; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 9 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.gallin_comprehension_implies_strong_actuality</code>;
+produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 9
+October 2026, on Cian Dorr’s hunch that the recorded verdicts of
+full-two-object-double-retraction settle Gallin Extensional
+Comprehension through a missing result; recorded by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 9 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Gallin Extensional Comprehension.</strong> Every relation is coextensive with one that is persistent and has a persistent pointwise negation. This is the source’s comparison with Gallin’s different rigidity convention.</li>
+<li><strong>Gallin Extensional Comprehension.</strong> Every relation is
+coextensive with one that is persistent and has a persistent pointwise
+negation. This is the source’s comparison with Gallin’s different
+rigidity convention.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Strong Actuality.</strong> There is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.</li>
+<li><strong>Strong Actuality.</strong> There is a true strong atom: a
+true proposition that necessarily entails every proposition or its
+negation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Gallin Extensional Comprehension at type <span class="math inline">t\to t</span> gives <span class="math inline">Y</span> coextensive with <span class="math inline">\lambda q\, .\,q</span> such that <span class="math inline">Y</span> and <span class="math inline">\neg Y</span> are both persistent. Put <span class="math inline">p:=\forall q\, .\,Yq\leftrightarrow q</span>, which is true. Necessarily, every <span class="math inline">q</span> is settled by <span class="math inline">p</span>: if <span class="math inline">Yq</span>, persistence of <span class="math inline">Y</span> gives <span class="math inline">\Box Yq</span>, so <span class="math inline">\Box(p\to q)</span>, that is <span class="math inline">p\le q</span>; if <span class="math inline">\neg Yq</span>, persistence of <span class="math inline">\neg Y</span> gives <span class="math inline">\Box\neg Yq</span>, so <span class="math inline">p\le\neg q</span>. Both persistence conditions are boxed, so this holds at every world, giving <span class="math inline">\Box\forall q\, .\,p\le q\lor p\le\neg q</span>. So <span class="math inline">p</span> is a true strong world.</p>
+<p>Gallin Extensional Comprehension at type <span
+class="math inline">t\to t</span> gives <span
+class="math inline">Y</span> coextensive with <span
+class="math inline">\lambda q\, .\,q</span> such that <span
+class="math inline">Y</span> and <span class="math inline">\neg Y</span>
+are both persistent. Put <span class="math inline">p:=\forall q\,
+.\,Yq\leftrightarrow q</span>, which is true. Necessarily, every <span
+class="math inline">q</span> is settled by <span
+class="math inline">p</span>: if <span class="math inline">Yq</span>,
+persistence of <span class="math inline">Y</span> gives <span
+class="math inline">\Box Yq</span>, so <span
+class="math inline">\Box(p\to q)</span>, that is <span
+class="math inline">p\le q</span>; if <span class="math inline">\neg
+Yq</span>, persistence of <span class="math inline">\neg Y</span> gives
+<span class="math inline">\Box\neg Yq</span>, so <span
+class="math inline">p\le\neg q</span>. Both persistence conditions are
+boxed, so this holds at every world, giving <span
+class="math inline">\Box\forall q\, .\,p\le q\lor p\le\neg q</span>. So
+<span class="math inline">p</span> is a true strong atom.</p>
 <h2 id="notes">Notes</h2>
-<p>Only the type-<span class="math inline">t\to t</span> instance is used. With separated-retractions-strong-actuality this refutes Gallin Extensional Comprehension in every model with separated retractions, such as full-two-object-double-retraction, which has ND and □Rigid Comprehension; so neither ND with Weak Rigid Comprehension nor ND with □Rigid Comprehension gives it.</p>
+<p>Only the type-<span class="math inline">t\to t</span> instance is
+used. With separated-retractions-strong-actuality this refutes Gallin
+Extensional Comprehension in every model with separated retractions,
+such as full-two-object-double-retraction, which has ND and □Rigid
+Comprehension; so neither ND with Weak Rigid Comprehension nor ND with
+□Rigid Comprehension gives it.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 9 Oct</strong> — Cian Dorr, question of 9 October 2026; proof as recorded.</li>
+<li><strong>Dorr 9 Oct</strong> — Cian Dorr, question of 9 October 2026;
+proof as recorded.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/gallin-comprehension-implies-strong-actuality.yaml</code>
+Record:
+<code>topics/classicism/results/gallin-comprehension-implies-strong-actuality.yaml</code>
 </p>
 </body></html>

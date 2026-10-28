@@ -322,49 +322,330 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Transversal Choice implies Zorn&#x27;s Lemma</h1></header><p>The proof follows Jonathan Lewin, “A Simple Proof of Zorn’s Lemma”, <em>American Mathematical Monthly</em> 98 (1991), pp. 353–354. It is translated into C and adapted to preorders by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, at Cian Dorr’s suggestion. Lewin’s sets become properties, unions become existential quantifications, and his choice function becomes a functional relation. The translation is faithful except at four points. At each of them two properties are shown to be coextensive, and Lewin’s <span class="math inline">f</span> is then assumed to give them the same value. For sets this is automatic. For properties it is not, and Transversal Choice is used to arrange it.</p>
-<p><strong>Claim.</strong> For each type <span class="math inline">\sigma</span>, including <span class="math inline">e</span>, Transversal Choice (at the type <span class="math inline">\sigma t</span>, and through Relational Choice at the types <span class="math inline">\sigma t</span> and <span class="math inline">\sigma</span>) implies Zorn’s Lemma at <span class="math inline">\sigma</span>.</p>
-<p>Preorder, TotalOrder, WellFounded and WO are as in Background. Everything is unboxed, and the whole argument takes place at the evaluation point.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Transversal Choice implies Zorn&#x27;s Lemma</h1></header><p>The proof follows Jonathan Lewin, “A Simple Proof of Zorn’s Lemma”,
+<em>American Mathematical Monthly</em> 98 (1991), pp. 353–354. It is
+translated into C and adapted to preorders by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 8 October 2026, at Cian Dorr’s
+suggestion. Lewin’s sets become properties, unions become existential
+quantifications, and his choice function becomes a functional relation.
+The translation is faithful except at four points. At each of them two
+properties are shown to be coextensive, and Lewin’s <span
+class="math inline">f</span> is then assumed to give them the same
+value. For sets this is automatic. For properties it is not, and
+Transversal Choice is used to arrange it.</p>
+<p><strong>Claim.</strong> For each type <span
+class="math inline">\sigma</span>, including <span
+class="math inline">e</span>, Transversal Choice (at the type <span
+class="math inline">\sigma t</span>, and through Relational Choice at
+the types <span class="math inline">\sigma t</span> and <span
+class="math inline">\sigma</span>) implies Zorn’s Lemma at <span
+class="math inline">\sigma</span>.</p>
+<p>Preorder, TotalOrder, WellFounded and WO are as in Background.
+Everything is unboxed, and the whole argument takes place at the
+evaluation point.</p>
 <h2 id="notation">Notation</h2>
-<p>Fix a preorder <span class="math inline">R^{\sigma\sigma t}</span>, and write <span class="math inline">x\preccurlyeq y</span> for <span class="math inline">(Rx)y</span>. Put <span class="math display">x\prec y:=x\preccurlyeq y\land\neg\,y\preccurlyeq x.</span> By transitivity, <span class="math inline">x\preccurlyeq y\prec z</span> and <span class="math inline">x\prec y\preccurlyeq z</span> each give <span class="math inline">x\prec z</span>, and <span class="math inline">x\prec x</span> never holds. On a property <span class="math inline">A</span> that <span class="math inline">R</span> totally orders, <span class="math inline">x\prec y</span> is equivalent to <span class="math inline">x\preccurlyeq y\land x\ne y</span>, by antisymmetry on <span class="math inline">A</span>; and for <span class="math inline">x,y</span> in <span class="math inline">A</span>, exactly one of <span class="math inline">x\prec y</span>, <span class="math inline">x=y</span>, <span class="math inline">y\prec x</span> holds.</p>
-<p>For properties <span class="math inline">C,D</span> of type <span class="math inline">\sigma t</span>, <span class="math inline">C\subseteq D</span> means <span class="math inline">\forall y\, .\,Cy\to Dy</span>, and <span class="math inline">C\equiv D</span> means <span class="math inline">\forall y\, .\,Cy\leftrightarrow Dy</span>. Lewin’s equations between sets become <span class="math inline">\equiv</span>, not <span class="math inline">=</span>. The initial segment of <span class="math inline">C</span> below <span class="math inline">x</span> is the property <span class="math display">P(C,x):=\lambda y\, .\,Cy\land y\prec x.</span></p>
-<p>When <span class="math inline">R</span> well-orders <span class="math inline">A</span>, every instantiated property included in <span class="math inline">A</span> has an <span class="math inline">R</span>-minimal instance, which is its <span class="math inline">R</span>-least instance since <span class="math inline">R</span> totally orders <span class="math inline">A</span>. “The least instance of <span class="math inline">Y</span>” below always refers to such a property <span class="math inline">Y\subseteq A</span>.</p>
-<p>Suppose that every property <span class="math inline">R</span> totally orders has an upper bound, and, for reductio, that nothing is maximal: for every <span class="math inline">m</span> there is <span class="math inline">y</span> with <span class="math inline">m\prec y</span>.</p>
-<h2 id="an-extensional-choice-relation">An extensional choice relation</h2>
-<p>Let <span class="math display">(UC)x:=\operatorname{TotalOrder}(R,C)\to\forall y\, .\,Cy\to y\prec x,</span> a relation of type <span class="math inline">\sigma t\to\sigma\to t</span>. It is serial. If <span class="math inline">R</span> totally orders <span class="math inline">C</span>, take an upper bound <span class="math inline">u</span> of <span class="math inline">C</span> and then <span class="math inline">v</span> with <span class="math inline">u\prec v</span>; every instance <span class="math inline">y</span> of <span class="math inline">C</span> has <span class="math inline">y\preccurlyeq u\prec v</span>, so <span class="math inline">y\prec v</span>. Otherwise every <span class="math inline">x</span> is a <span class="math inline">U</span>-image of <span class="math inline">C</span>. Whether <span class="math inline">(UC)x</span> holds depends only on the extension of <span class="math inline">C</span>.</p>
-<p>Transversal Choice implies Relational Choice, by the recorded result, so there is a functional <span class="math inline">S\subseteq U</span>. Coextensiveness is an equivalence relation on <span class="math inline">\sigma t</span>, so Transversal Choice at <span class="math inline">\sigma t</span> also gives <span class="math inline">\mathcal T^{(\sigma t)t}</span> with exactly one instance coextensive with each property (this is Transversal at <span class="math inline">\sigma</span>). Put <span class="math display">(FC)x:=\exists D\, .\,\mathcal TD\land D\equiv C\land(SD)x.</span> Then: - <span class="math inline">F</span> is <strong>functional</strong>, since exactly one <span class="math inline">D</span> in <span class="math inline">\mathcal T</span> is coextensive with <span class="math inline">C</span>, and <span class="math inline">S</span> is functional; - <span class="math inline">F\subseteq U</span>, since <span class="math inline">(SD)x</span> gives <span class="math inline">(UD)x</span>, and <span class="math inline">U</span> depends only on extensions; - <span class="math inline">F</span> is <strong>extensional</strong>: if <span class="math inline">C\equiv C&#39;</span> then <span class="math inline">(FC)x\to(FC&#39;)x</span>, because the same <span class="math inline">D</span> serves for both.</p>
-<p>Lewin’s proof uses extensionality of <span class="math inline">f</span> without comment, since for sets it is automatic. The steps marked <strong>(E)</strong> below are the four places where it is used. Everywhere else, <span class="math inline">S</span> in place of <span class="math inline">F</span> would serve, so the transversal is needed only at those four steps.</p>
+<p>Fix a preorder <span class="math inline">R^{\sigma\sigma t}</span>,
+and write <span class="math inline">x\preccurlyeq y</span> for <span
+class="math inline">(Rx)y</span>. Put <span class="math display">x\prec
+y:=x\preccurlyeq y\land\neg\,y\preccurlyeq x.</span> By transitivity,
+<span class="math inline">x\preccurlyeq y\prec z</span> and <span
+class="math inline">x\prec y\preccurlyeq z</span> each give <span
+class="math inline">x\prec z</span>, and <span
+class="math inline">x\prec x</span> never holds. On a property <span
+class="math inline">A</span> that <span class="math inline">R</span>
+totally orders, <span class="math inline">x\prec y</span> is equivalent
+to <span class="math inline">x\preccurlyeq y\land x\ne y</span>, by
+antisymmetry on <span class="math inline">A</span>; and for <span
+class="math inline">x,y</span> in <span class="math inline">A</span>,
+exactly one of <span class="math inline">x\prec y</span>, <span
+class="math inline">x=y</span>, <span class="math inline">y\prec
+x</span> holds.</p>
+<p>For properties <span class="math inline">C,D</span> of type <span
+class="math inline">\sigma t</span>, <span
+class="math inline">C\subseteq D</span> means <span
+class="math inline">\forall y\, .\,Cy\to Dy</span>, and <span
+class="math inline">C\equiv D</span> means <span
+class="math inline">\forall y\, .\,Cy\leftrightarrow Dy</span>. Lewin’s
+equations between sets become <span class="math inline">\equiv</span>,
+not <span class="math inline">=</span>. The initial segment of <span
+class="math inline">C</span> below <span class="math inline">x</span> is
+the property <span class="math display">P(C,x):=\lambda y\, .\,Cy\land
+y\prec x.</span></p>
+<p>When <span class="math inline">R</span> well-orders <span
+class="math inline">A</span>, every instantiated property included in
+<span class="math inline">A</span> has an <span
+class="math inline">R</span>-minimal instance, which is its <span
+class="math inline">R</span>-least instance since <span
+class="math inline">R</span> totally orders <span
+class="math inline">A</span>. “The least instance of <span
+class="math inline">Y</span>” below always refers to such a property
+<span class="math inline">Y\subseteq A</span>.</p>
+<p>Suppose that every property <span class="math inline">R</span>
+totally orders has an upper bound, and, for reductio, that nothing is
+maximal: for every <span class="math inline">m</span> there is <span
+class="math inline">y</span> with <span class="math inline">m\prec
+y</span>.</p>
+<h2 id="an-extensional-choice-relation">An extensional choice
+relation</h2>
+<p>Let <span
+class="math display">(UC)x:=\operatorname{TotalOrder}(R,C)\to\forall y\,
+.\,Cy\to y\prec x,</span> a relation of type <span
+class="math inline">\sigma t\to\sigma\to t</span>. It is serial. If
+<span class="math inline">R</span> totally orders <span
+class="math inline">C</span>, take an upper bound <span
+class="math inline">u</span> of <span class="math inline">C</span> and
+then <span class="math inline">v</span> with <span
+class="math inline">u\prec v</span>; every instance <span
+class="math inline">y</span> of <span class="math inline">C</span> has
+<span class="math inline">y\preccurlyeq u\prec v</span>, so <span
+class="math inline">y\prec v</span>. Otherwise every <span
+class="math inline">x</span> is a <span
+class="math inline">U</span>-image of <span
+class="math inline">C</span>. Whether <span
+class="math inline">(UC)x</span> holds depends only on the extension of
+<span class="math inline">C</span>.</p>
+<p>Transversal Choice implies Relational Choice, by the recorded result,
+so there is a functional <span class="math inline">S\subseteq U</span>.
+Coextensiveness is an equivalence relation on <span
+class="math inline">\sigma t</span>, so Transversal Choice at <span
+class="math inline">\sigma t</span> also gives <span
+class="math inline">\mathcal T^{(\sigma t)t}</span> with exactly one
+instance coextensive with each property (this is Transversal at <span
+class="math inline">\sigma</span>). Put <span
+class="math display">(FC)x:=\exists D\, .\,\mathcal TD\land D\equiv
+C\land(SD)x.</span> Then: - <span class="math inline">F</span> is
+<strong>functional</strong>, since exactly one <span
+class="math inline">D</span> in <span class="math inline">\mathcal
+T</span> is coextensive with <span class="math inline">C</span>, and
+<span class="math inline">S</span> is functional; - <span
+class="math inline">F\subseteq U</span>, since <span
+class="math inline">(SD)x</span> gives <span
+class="math inline">(UD)x</span>, and <span class="math inline">U</span>
+depends only on extensions; - <span class="math inline">F</span> is
+<strong>extensional</strong>: if <span class="math inline">C\equiv
+C&#39;</span> then <span class="math inline">(FC)x\to(FC&#39;)x</span>,
+because the same <span class="math inline">D</span> serves for both.</p>
+<p>Lewin’s proof uses extensionality of <span
+class="math inline">f</span> without comment, since for sets it is
+automatic. The steps marked <strong>(E)</strong> below are the four
+places where it is used. Everywhere else, <span
+class="math inline">S</span> in place of <span
+class="math inline">F</span> would serve, so the transversal is needed
+only at those four steps.</p>
 <h2 id="conforming-properties">Conforming properties</h2>
-<p>Call <span class="math inline">A^{\sigma t}</span> <strong>conforming</strong> if - (a) <span class="math inline">\operatorname{WO}(R,A)</span>, and - (b) <span class="math inline">\forall x\, .\,Ax\to(F\,P(A,x))\,x</span>.</p>
-<p><strong>Lemma 1.</strong> Let <span class="math inline">A</span> and <span class="math inline">B</span> be conforming, and suppose <span class="math inline">A\not\subseteq B</span>. Let <span class="math inline">x</span> be the least instance of <span class="math inline">\lambda w\, .\,Aw\land\neg Bw</span>. Then <span class="math inline">B\equiv P(A,x)</span>.</p>
-<p><em>Proof.</em> First, <span class="math inline">P(A,x)\subseteq B</span>, by the leastness of <span class="math inline">x</span>. Suppose for contradiction that <span class="math inline">B\not\subseteq P(A,x)</span>, and let <span class="math inline">y</span> be the least instance of <span class="math inline">\lambda w\, .\,Bw\land\neg P(A,x)w</span>. By leastness of <span class="math inline">y</span>, <span class="math display">P(B,y)\subseteq P(A,x)\subseteq A. \tag{1}</span> The property <span class="math inline">\lambda w\, .\,Aw\land\neg P(B,y)w</span> is instantiated by <span class="math inline">x</span>, since <span class="math inline">x</span> is not an instance of <span class="math inline">B</span>. Let <span class="math inline">z</span> be its least instance.</p>
-<p>We show <span class="math inline">P(A,z)\equiv P(B,y)</span>. - <span class="math inline">P(A,z)\subseteq P(B,y)</span>, by leastness of <span class="math inline">z</span>. - Let <span class="math inline">w</span> be in <span class="math inline">P(B,y)</span>. By (1), <span class="math inline">w</span> is in <span class="math inline">A</span> and <span class="math inline">w\prec x</span>. If not <span class="math inline">w\prec z</span>, then <span class="math inline">z\preccurlyeq w</span>, since <span class="math inline">R</span> totally orders <span class="math inline">A</span>. Then <span class="math inline">z\preccurlyeq w\prec x</span> gives <span class="math inline">z\prec x</span>, so <span class="math inline">z</span> is in <span class="math inline">P(A,x)</span> and so in <span class="math inline">B</span>. And <span class="math inline">z\preccurlyeq w\prec y</span> gives <span class="math inline">z\prec y</span>, so <span class="math inline">z</span> is in <span class="math inline">P(B,y)</span>, contradicting the choice of <span class="math inline">z</span>. So <span class="math inline">w\prec z</span>, and <span class="math inline">w</span> is in <span class="math inline">P(A,z)</span>.</p>
-<p>By (b) for <span class="math inline">A</span> and for <span class="math inline">B</span>, <span class="math inline">(F\,P(A,z))\,z</span> and <span class="math inline">(F\,P(B,y))\,y</span>. Since <span class="math inline">P(A,z)\equiv P(B,y)</span>, extensionality gives <span class="math inline">(F\,P(A,z))\,y</span> <strong>(E)</strong>, and functionality gives <span class="math inline">y=z</span>. So <span class="math inline">y</span> is in <span class="math inline">A</span>. It is not in <span class="math inline">P(A,x)</span>, so <span class="math inline">x\preccurlyeq y</span>, and <span class="math inline">y\ne x</span> since <span class="math inline">y</span> is in <span class="math inline">B</span> and <span class="math inline">x</span> is not. Hence <span class="math inline">x\prec y=z</span>, so <span class="math inline">x</span> is in <span class="math inline">P(A,z)\equiv P(B,y)\subseteq B</span>, contradicting the choice of <span class="math inline">x</span>. <span class="math inline">\square</span></p>
-<p><strong>Lemma 2.</strong> If <span class="math inline">A</span> and <span class="math inline">B</span> are conforming, then <span class="math inline">A\subseteq B</span> or <span class="math inline">B\subseteq A</span>. If <span class="math inline">A\subseteq B</span>, then <span class="math inline">A</span> is downward closed in <span class="math inline">B</span>: if <span class="math inline">Aa</span>, <span class="math inline">Bb</span> and <span class="math inline">b\preccurlyeq a</span>, then <span class="math inline">Ab</span>.</p>
-<p><em>Proof.</em> The first part is Lemma 1. For the second, if also <span class="math inline">B\subseteq A</span> there is nothing to show. Otherwise Lemma 1, with <span class="math inline">A</span> and <span class="math inline">B</span> exchanged, gives <span class="math inline">A\equiv P(B,x)</span> for some <span class="math inline">x</span>, and <span class="math inline">b\preccurlyeq a\prec x</span> gives <span class="math inline">b\prec x</span>. <span class="math inline">\square</span></p>
-<h2 id="the-union-of-the-conforming-properties">The union of the conforming properties</h2>
-<p>Let <span class="math display">U^*:=\lambda x\, .\,\exists A^{\sigma t}\, .\,\operatorname{Conf}(A)\land Ax,</span> where <span class="math inline">\operatorname{Conf}(A)</span> abbreviates (a) and (b).</p>
-<p><strong>Lemma 3.</strong> If <span class="math inline">A</span> is conforming, <span class="math inline">Aa</span>, <span class="math inline">U^*w</span> and <span class="math inline">w\preccurlyeq a</span>, then <span class="math inline">Aw</span>. Hence <span class="math inline">P(U^*,a)\equiv P(A,a)</span>.</p>
-<p><em>Proof.</em> Let <span class="math inline">w</span> be in the conforming <span class="math inline">B</span>. If <span class="math inline">B\subseteq A</span>, done. Otherwise <span class="math inline">A\subseteq B</span> by Lemma 2, and <span class="math inline">Aw</span> by downward closure. For the second part, <span class="math inline">P(A,a)\subseteq P(U^*,a)</span> is clear, and the converse is the first part. <span class="math inline">\square</span></p>
-<p><strong>Lemma 4.</strong> <span class="math inline">U^*</span> is conforming.</p>
-<p><em>Proof.</em> (a) Transitivity holds since <span class="math inline">R</span> is a preorder. Any two instances of <span class="math inline">U^*</span> lie in conforming properties, one of which includes the other by Lemma 2. So both lie in a single property that <span class="math inline">R</span> totally orders, which gives totality and antisymmetry. For well-foundedness, let <span class="math inline">Y\subseteq U^*</span> have an instance <span class="math inline">y</span>, lying in a conforming <span class="math inline">A</span>. Let <span class="math inline">m</span> be the least instance of <span class="math inline">\lambda w\, .\,Yw\land Aw</span>. If <span class="math inline">Yw</span> and <span class="math inline">w\preccurlyeq m</span>, then <span class="math inline">Aw</span> by Lemma 3, so <span class="math inline">w=m</span>. So <span class="math inline">m</span> is <span class="math inline">R</span>-minimal in <span class="math inline">Y</span>.</p>
+<p>Call <span class="math inline">A^{\sigma t}</span>
+<strong>conforming</strong> if - (a) <span
+class="math inline">\operatorname{WO}(R,A)</span>, and - (b) <span
+class="math inline">\forall x\, .\,Ax\to(F\,P(A,x))\,x</span>.</p>
+<p><strong>Lemma 1.</strong> Let <span class="math inline">A</span> and
+<span class="math inline">B</span> be conforming, and suppose <span
+class="math inline">A\not\subseteq B</span>. Let <span
+class="math inline">x</span> be the least instance of <span
+class="math inline">\lambda w\, .\,Aw\land\neg Bw</span>. Then <span
+class="math inline">B\equiv P(A,x)</span>.</p>
+<p><em>Proof.</em> First, <span class="math inline">P(A,x)\subseteq
+B</span>, by the leastness of <span class="math inline">x</span>.
+Suppose for contradiction that <span class="math inline">B\not\subseteq
+P(A,x)</span>, and let <span class="math inline">y</span> be the least
+instance of <span class="math inline">\lambda w\, .\,Bw\land\neg
+P(A,x)w</span>. By leastness of <span class="math inline">y</span>,
+<span class="math display">P(B,y)\subseteq P(A,x)\subseteq A.
+\tag{1}</span> The property <span class="math inline">\lambda w\,
+.\,Aw\land\neg P(B,y)w</span> is instantiated by <span
+class="math inline">x</span>, since <span class="math inline">x</span>
+is not an instance of <span class="math inline">B</span>. Let <span
+class="math inline">z</span> be its least instance.</p>
+<p>We show <span class="math inline">P(A,z)\equiv P(B,y)</span>. - <span
+class="math inline">P(A,z)\subseteq P(B,y)</span>, by leastness of <span
+class="math inline">z</span>. - Let <span class="math inline">w</span>
+be in <span class="math inline">P(B,y)</span>. By (1), <span
+class="math inline">w</span> is in <span class="math inline">A</span>
+and <span class="math inline">w\prec x</span>. If not <span
+class="math inline">w\prec z</span>, then <span
+class="math inline">z\preccurlyeq w</span>, since <span
+class="math inline">R</span> totally orders <span
+class="math inline">A</span>. Then <span
+class="math inline">z\preccurlyeq w\prec x</span> gives <span
+class="math inline">z\prec x</span>, so <span
+class="math inline">z</span> is in <span
+class="math inline">P(A,x)</span> and so in <span
+class="math inline">B</span>. And <span
+class="math inline">z\preccurlyeq w\prec y</span> gives <span
+class="math inline">z\prec y</span>, so <span
+class="math inline">z</span> is in <span
+class="math inline">P(B,y)</span>, contradicting the choice of <span
+class="math inline">z</span>. So <span class="math inline">w\prec
+z</span>, and <span class="math inline">w</span> is in <span
+class="math inline">P(A,z)</span>.</p>
+<p>By (b) for <span class="math inline">A</span> and for <span
+class="math inline">B</span>, <span
+class="math inline">(F\,P(A,z))\,z</span> and <span
+class="math inline">(F\,P(B,y))\,y</span>. Since <span
+class="math inline">P(A,z)\equiv P(B,y)</span>, extensionality gives
+<span class="math inline">(F\,P(A,z))\,y</span> <strong>(E)</strong>,
+and functionality gives <span class="math inline">y=z</span>. So <span
+class="math inline">y</span> is in <span class="math inline">A</span>.
+It is not in <span class="math inline">P(A,x)</span>, so <span
+class="math inline">x\preccurlyeq y</span>, and <span
+class="math inline">y\ne x</span> since <span
+class="math inline">y</span> is in <span class="math inline">B</span>
+and <span class="math inline">x</span> is not. Hence <span
+class="math inline">x\prec y=z</span>, so <span
+class="math inline">x</span> is in <span
+class="math inline">P(A,z)\equiv P(B,y)\subseteq B</span>, contradicting
+the choice of <span class="math inline">x</span>. <span
+class="math inline">\square</span></p>
+<p><strong>Lemma 2.</strong> If <span class="math inline">A</span> and
+<span class="math inline">B</span> are conforming, then <span
+class="math inline">A\subseteq B</span> or <span
+class="math inline">B\subseteq A</span>. If <span
+class="math inline">A\subseteq B</span>, then <span
+class="math inline">A</span> is downward closed in <span
+class="math inline">B</span>: if <span class="math inline">Aa</span>,
+<span class="math inline">Bb</span> and <span
+class="math inline">b\preccurlyeq a</span>, then <span
+class="math inline">Ab</span>.</p>
+<p><em>Proof.</em> The first part is Lemma 1. For the second, if also
+<span class="math inline">B\subseteq A</span> there is nothing to show.
+Otherwise Lemma 1, with <span class="math inline">A</span> and <span
+class="math inline">B</span> exchanged, gives <span
+class="math inline">A\equiv P(B,x)</span> for some <span
+class="math inline">x</span>, and <span
+class="math inline">b\preccurlyeq a\prec x</span> gives <span
+class="math inline">b\prec x</span>. <span
+class="math inline">\square</span></p>
+<h2 id="the-union-of-the-conforming-properties">The union of the
+conforming properties</h2>
+<p>Let <span class="math display">U^*:=\lambda x\, .\,\exists A^{\sigma
+t}\, .\,\operatorname{Conf}(A)\land Ax,</span> where <span
+class="math inline">\operatorname{Conf}(A)</span> abbreviates (a) and
+(b).</p>
+<p><strong>Lemma 3.</strong> If <span class="math inline">A</span> is
+conforming, <span class="math inline">Aa</span>, <span
+class="math inline">U^*w</span> and <span
+class="math inline">w\preccurlyeq a</span>, then <span
+class="math inline">Aw</span>. Hence <span
+class="math inline">P(U^*,a)\equiv P(A,a)</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">w</span> be in the
+conforming <span class="math inline">B</span>. If <span
+class="math inline">B\subseteq A</span>, done. Otherwise <span
+class="math inline">A\subseteq B</span> by Lemma 2, and <span
+class="math inline">Aw</span> by downward closure. For the second part,
+<span class="math inline">P(A,a)\subseteq P(U^*,a)</span> is clear, and
+the converse is the first part. <span
+class="math inline">\square</span></p>
+<p><strong>Lemma 4.</strong> <span class="math inline">U^*</span> is
+conforming.</p>
+<p><em>Proof.</em> (a) Transitivity holds since <span
+class="math inline">R</span> is a preorder. Any two instances of <span
+class="math inline">U^*</span> lie in conforming properties, one of
+which includes the other by Lemma 2. So both lie in a single property
+that <span class="math inline">R</span> totally orders, which gives
+totality and antisymmetry. For well-foundedness, let <span
+class="math inline">Y\subseteq U^*</span> have an instance <span
+class="math inline">y</span>, lying in a conforming <span
+class="math inline">A</span>. Let <span class="math inline">m</span> be
+the least instance of <span class="math inline">\lambda w\, .\,Yw\land
+Aw</span>. If <span class="math inline">Yw</span> and <span
+class="math inline">w\preccurlyeq m</span>, then <span
+class="math inline">Aw</span> by Lemma 3, so <span
+class="math inline">w=m</span>. So <span class="math inline">m</span> is
+<span class="math inline">R</span>-minimal in <span
+class="math inline">Y</span>.</p>
 <ol start="2" type="a">
-<li>Let <span class="math inline">U^*x</span>, with <span class="math inline">x</span> in the conforming <span class="math inline">A</span>. Then <span class="math inline">(F\,P(A,x))\,x</span>, and <span class="math inline">P(U^*,x)\equiv P(A,x)</span> by Lemma 3, so <span class="math inline">(F\,P(U^*,x))\,x</span> <strong>(E)</strong>. <span class="math inline">\square</span></li>
+<li>Let <span class="math inline">U^*x</span>, with <span
+class="math inline">x</span> in the conforming <span
+class="math inline">A</span>. Then <span
+class="math inline">(F\,P(A,x))\,x</span>, and <span
+class="math inline">P(U^*,x)\equiv P(A,x)</span> by Lemma 3, so <span
+class="math inline">(F\,P(U^*,x))\,x</span> <strong>(E)</strong>. <span
+class="math inline">\square</span></li>
 </ol>
 <h2 id="the-contradiction">The contradiction</h2>
-<p>By (a), <span class="math inline">R</span> totally orders <span class="math inline">U^*</span>. Since <span class="math inline">F</span> is functional, there is an <span class="math inline">x</span> with <span class="math inline">(FU^*)x</span>. Then <span class="math inline">(U U^*)x</span>, so every instance <span class="math inline">y</span> of <span class="math inline">U^*</span> has <span class="math inline">y\prec x</span>. Let <span class="math display">U&#39;:=\lambda w\, .\,U^*w\lor w=x.</span></p>
-<p><strong>Lemma 5.</strong> <span class="math inline">U&#39;</span> is conforming.</p>
-<p><em>Proof.</em> (a) Transitivity holds since <span class="math inline">R</span> is a preorder. Totality: instances of <span class="math inline">U^*</span> are comparable with one another and lie below <span class="math inline">x</span>. Antisymmetry: within <span class="math inline">U^*</span> it holds already, and for <span class="math inline">U^*y</span> we never have <span class="math inline">x\preccurlyeq y</span>, since <span class="math inline">y\prec x</span>. Well-foundedness: let <span class="math inline">Y\subseteq U&#39;</span> be instantiated. If <span class="math inline">\lambda w\, .\,Yw\land U^*w</span> is instantiated, its <span class="math inline">R</span>-minimal instance <span class="math inline">m</span> is <span class="math inline">R</span>-minimal in <span class="math inline">Y</span>, because <span class="math inline">x\preccurlyeq m</span> is impossible. Otherwise <span class="math inline">x</span> is the only instance of <span class="math inline">Y</span>.</p>
+<p>By (a), <span class="math inline">R</span> totally orders <span
+class="math inline">U^*</span>. Since <span class="math inline">F</span>
+is functional, there is an <span class="math inline">x</span> with <span
+class="math inline">(FU^*)x</span>. Then <span class="math inline">(U
+U^*)x</span>, so every instance <span class="math inline">y</span> of
+<span class="math inline">U^*</span> has <span
+class="math inline">y\prec x</span>. Let <span
+class="math display">U&#39;:=\lambda w\, .\,U^*w\lor w=x.</span></p>
+<p><strong>Lemma 5.</strong> <span class="math inline">U&#39;</span> is
+conforming.</p>
+<p><em>Proof.</em> (a) Transitivity holds since <span
+class="math inline">R</span> is a preorder. Totality: instances of <span
+class="math inline">U^*</span> are comparable with one another and lie
+below <span class="math inline">x</span>. Antisymmetry: within <span
+class="math inline">U^*</span> it holds already, and for <span
+class="math inline">U^*y</span> we never have <span
+class="math inline">x\preccurlyeq y</span>, since <span
+class="math inline">y\prec x</span>. Well-foundedness: let <span
+class="math inline">Y\subseteq U&#39;</span> be instantiated. If <span
+class="math inline">\lambda w\, .\,Yw\land U^*w</span> is instantiated,
+its <span class="math inline">R</span>-minimal instance <span
+class="math inline">m</span> is <span
+class="math inline">R</span>-minimal in <span
+class="math inline">Y</span>, because <span
+class="math inline">x\preccurlyeq m</span> is impossible. Otherwise
+<span class="math inline">x</span> is the only instance of <span
+class="math inline">Y</span>.</p>
 <ol start="2" type="a">
-<li>At <span class="math inline">x</span>: <span class="math inline">P(U&#39;,x)\equiv U^*</span>, since every instance of <span class="math inline">U^*</span> lies below <span class="math inline">x</span>, and <span class="math inline">x\prec x</span> fails. We have <span class="math inline">(FU^*)x</span>, so <span class="math inline">(F\,P(U&#39;,x))\,x</span> <strong>(E)</strong>. At <span class="math inline">u</span> with <span class="math inline">U^*u</span>: <span class="math inline">u\prec x</span>, so <span class="math inline">x\prec u</span> fails, and <span class="math inline">P(U&#39;,u)\equiv P(U^*,u)</span>. By Lemma 4, <span class="math inline">(F\,P(U^*,u))\,u</span>, so <span class="math inline">(F\,P(U&#39;,u))\,u</span> <strong>(E)</strong>. <span class="math inline">\square</span></li>
+<li>At <span class="math inline">x</span>: <span
+class="math inline">P(U&#39;,x)\equiv U^*</span>, since every instance
+of <span class="math inline">U^*</span> lies below <span
+class="math inline">x</span>, and <span class="math inline">x\prec
+x</span> fails. We have <span class="math inline">(FU^*)x</span>, so
+<span class="math inline">(F\,P(U&#39;,x))\,x</span>
+<strong>(E)</strong>. At <span class="math inline">u</span> with <span
+class="math inline">U^*u</span>: <span class="math inline">u\prec
+x</span>, so <span class="math inline">x\prec u</span> fails, and <span
+class="math inline">P(U&#39;,u)\equiv P(U^*,u)</span>. By Lemma 4, <span
+class="math inline">(F\,P(U^*,u))\,u</span>, so <span
+class="math inline">(F\,P(U&#39;,u))\,u</span> <strong>(E)</strong>.
+<span class="math inline">\square</span></li>
 </ol>
-<p>By Lemma 5, <span class="math inline">x</span> is an instance of the conforming <span class="math inline">U&#39;</span>, so <span class="math inline">U^*x</span>, and then <span class="math inline">x\prec x</span>, which is impossible. So some element is maximal: there is <span class="math inline">m</span> with <span class="math inline">\forall y\, .\,m\preccurlyeq y\to y\preccurlyeq m</span>.</p>
+<p>By Lemma 5, <span class="math inline">x</span> is an instance of the
+conforming <span class="math inline">U&#39;</span>, so <span
+class="math inline">U^*x</span>, and then <span
+class="math inline">x\prec x</span>, which is impossible. So some
+element is maximal: there is <span class="math inline">m</span> with
+<span class="math inline">\forall y\, .\,m\preccurlyeq y\to
+y\preccurlyeq m</span>.</p>
 <h2 id="remarks">Remarks</h2>
-<p><strong>Preorders.</strong> The adaptation to preorders affects only the definitions of <span class="math inline">\prec</span> and of conforming. Since chains must be antisymmetric, a conforming property never contains two distinct <span class="math inline">R</span>-equivalent elements.</p>
-<p><strong>Coextension.</strong> The four steps marked (E) are the only non-extensional moves. In each, the two properties are generally distinct. For example, <span class="math inline">P(U&#39;,x)=\lambda w\, .\,(U^*w\lor w=x)\land w\prec x</span> is coextensive with <span class="math inline">U^*</span> but need not be necessarily coextensive with it. Without extensionality of <span class="math inline">F</span>, the argument establishes only coextension of the relevant properties, and gives no information about their <span class="math inline">F</span>-images.</p>
-<p><strong>Relational Choice alone.</strong> Zorn’s Lemma implies Well-Ordering, which implies Transversal Choice, by the recorded results. So a proof of Zorn’s Lemma from Relational Choice alone would settle the open question whether Relational Choice implies Transversal Choice. Any such proof must avoid the four steps marked (E). With Weak Rigid Comprehension in place of the transversal, an extensional <span class="math inline">F</span> is still available: choose from the weakly rigid property coextensive with <span class="math inline">C</span>, which is unique by the recorded result relational-choice-and-weak-rigid-comprehension-imply-transversal-choice.</p>
+<p><strong>Preorders.</strong> The adaptation to preorders affects only
+the definitions of <span class="math inline">\prec</span> and of
+conforming. Since chains must be antisymmetric, a conforming property
+never contains two distinct <span
+class="math inline">R</span>-equivalent elements.</p>
+<p><strong>Coextension.</strong> The four steps marked (E) are the only
+non-extensional moves. In each, the two properties are generally
+distinct. For example, <span class="math inline">P(U&#39;,x)=\lambda w\,
+.\,(U^*w\lor w=x)\land w\prec x</span> is coextensive with <span
+class="math inline">U^*</span> but need not be necessarily coextensive
+with it. Without extensionality of <span class="math inline">F</span>,
+the argument establishes only coextension of the relevant properties,
+and gives no information about their <span
+class="math inline">F</span>-images.</p>
+<p><strong>Relational Choice alone.</strong> Zorn’s Lemma implies
+Well-Ordering, which implies Transversal Choice, by the recorded
+results. So a proof of Zorn’s Lemma from Relational Choice alone would
+settle the open question whether Relational Choice implies Transversal
+Choice. Any such proof must avoid the four steps marked (E). With Weak
+Rigid Comprehension in place of the transversal, an extensional <span
+class="math inline">F</span> is still available: choose from the weakly
+rigid property coextensive with <span class="math inline">C</span>,
+which is unique by the recorded result
+relational-choice-and-weak-rigid-comprehension-imply-transversal-choice.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: <a href="https://digitalcommons.kennesaw.edu/facpubs/1158/">A Simple Proof of Zorn’s Lemma</a>.</strong> Lewin, Jonathan W. (1991). A Simple Proof of Zorn’s Lemma. American Mathematical Monthly 98(4), pp. 353–354. — pp. 353–354. Lewin proves Zorn’s Lemma for partial orders on sets from a choice function. The translation replaces sets by properties and the choice function by a functional relation, adapts the argument to preorders, and uses Transversal Choice to make the relation extensional, which Lewin uses at four steps without comment.</li>
+<li><strong>Proof: <a
+href="https://digitalcommons.kennesaw.edu/facpubs/1158/">A Simple Proof
+of Zorn’s Lemma</a>.</strong> Lewin, Jonathan W. (1991). A Simple Proof
+of Zorn’s Lemma. American Mathematical Monthly 98(4), pp. 353–354. —
+pp. 353–354. Lewin proves Zorn’s Lemma for partial orders on sets from a
+choice function. The translation replaces sets by properties and the
+choice function by a functional relation, adapts the argument to
+preorders, and uses Transversal Choice to make the relation extensional,
+which Lewin uses at four steps without comment.</li>
 </ul>
 </body></html>

@@ -323,26 +323,51 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□Well-Ordering ∧ Intensional Choice ⇒ Modal Well-Ordering</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.necessary_well_ordering_and_intensional_choice_imply_modal_well_ordering</code>; produced by Cian Dorr, 8 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.necessary_well_ordering_and_intensional_choice_imply_modal_well_ordering</code>;
+produced by Cian Dorr, 8 October 2026; recorded by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 8 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□Well-Ordering.</strong> Necessarily, every type, including e, is well-ordered by some relation.</li>
-<li><strong>Intensional Choice.</strong> If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
+<li><strong>□Well-Ordering.</strong> Necessarily, every type, including
+e, is well-ordered by some relation.</li>
+<li><strong>Intensional Choice.</strong> If a property is necessarily
+instantiated, then some property entailing it is necessarily uniquely
+instantiated.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Modal Well-Ordering.</strong> Every type, including e, has a relation that is necessarily a well-order of it.</li>
+<li><strong>Modal Well-Ordering.</strong> Every type, including e, has a
+relation that is necessarily a well-order of it.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Apply Intensional Choice at the type <span class="math inline">\sigma\sigma t</span> to <span class="math inline">F:=\lambda R\, .\,\operatorname{WO}(R)</span>, which is necessarily instantiated by <span class="math inline">\Box</span>Well-Ordering. This gives <span class="math inline">G\le F</span> that is necessarily uniquely instantiated. Put <span class="math inline">R&#39;:=\lambda x\,y\, .\,\exists R\, .\,GR\land(Rx)y</span>. At any world the unique instance <span class="math inline">R_0</span> of <span class="math inline">G</span> there is a well-order, since <span class="math inline">G\le F</span>, and <span class="math inline">R&#39;</span> is coextensive with <span class="math inline">R_0</span> there. WO depends only on the extension of its argument at the evaluation point (Background), so <span class="math inline">\operatorname{WO}(R&#39;)</span> holds there. Hence <span class="math inline">\Box\operatorname{WO}(R&#39;)</span>.</p>
+<p>Apply Intensional Choice at the type <span
+class="math inline">\sigma\sigma t</span> to <span
+class="math inline">F:=\lambda R\, .\,\operatorname{WO}(R)</span>, which
+is necessarily instantiated by <span
+class="math inline">\Box</span>Well-Ordering. This gives <span
+class="math inline">G\le F</span> that is necessarily uniquely
+instantiated. Put <span class="math inline">R&#39;:=\lambda x\,y\,
+.\,\exists R\, .\,GR\land(Rx)y</span>. At any world the unique instance
+<span class="math inline">R_0</span> of <span
+class="math inline">G</span> there is a well-order, since <span
+class="math inline">G\le F</span>, and <span
+class="math inline">R&#39;</span> is coextensive with <span
+class="math inline">R_0</span> there. WO depends only on the extension
+of its argument at the evaluation point (Background), so <span
+class="math inline">\operatorname{WO}(R&#39;)</span> holds there. Hence
+<span class="math inline">\Box\operatorname{WO}(R&#39;)</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Intensional Choice is used at the type <span class="math inline">\sigma\sigma t</span> to obtain Modal Well-Ordering at <span class="math inline">\sigma</span>.</p>
+<p>Intensional Choice is used at the type <span
+class="math inline">\sigma\sigma t</span> to obtain Modal Well-Ordering
+at <span class="math inline">\sigma</span>.</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li><strong>Dorr 8 Oct</strong> — Cian Dorr, 8 October 2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-well-ordering-and-intensional-choice-imply-modal-well-ordering.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-well-ordering-and-intensional-choice-imply-modal-well-ordering.yaml</code>
 </p>
 </body></html>

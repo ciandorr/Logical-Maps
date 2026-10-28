@@ -41,7 +41,7 @@ One file per topic, in the order of the map's categories, each importing those i
 | `Records/Coarse.lean` | `B`, `5`, ND, BF, Tractarianism, Functionality (Propositions 2.1, 2.2) |
 | `Records/Extensionality.lean` | Extensionality, the Fregean Axiom, the Distinctness-Preserving Collapse |
 | `Records/Comprehension.lean` | among the comprehension principles |
-| `Records/Lattice.lean` | Actuality, Boolean Completeness, Atomicity, Vicinity, Strong Leibniz, and the comprehension they give |
+| `Records/Lattice.lean` | Actuality, Boolean Completeness, Atomicity, Vicinity, Strong Atomicity, and the comprehension they give |
 | `Records/Choice.lean` | Choice, Plenitude, Transversals, Modalized Plenitude |
 | `Records/C5.lean` | the records of `C5`, `□ND` at `t` (§§2.1–2.3) |
 | `Records/Infinity.lean` | Infinity, Countable Boolean Completeness |

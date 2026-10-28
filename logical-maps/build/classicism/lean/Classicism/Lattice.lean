@@ -188,7 +188,7 @@ theorem atom_le_imp_le (w q : Prop) (hw : Atom w) : w ≤ (q → w ≤ q) :=
       exact le_or_of_le_left_prop w (¬ q) _ h)
 
 /-- `¬p ≤ p` says that `p` is necessary: `p = (¬p ∨ p)` and `¬p ∨ p` is `⊤`. The duals of
-Atomicity and Strong Leibniz at `t` are stated with `□p`. -/
+Atomicity and Strong Atomicity at `t` are stated with `□p`. -/
 theorem neg_le_iff_box (p : Prop) : (¬ p) ≤ p ↔ □ p :=
   have e : (¬ p ∨ p) = True := (or_comm_eq (¬ p) p).trans (em_eq p)
   ⟨fun h => h.trans e, fun h => h.trans e.symm⟩

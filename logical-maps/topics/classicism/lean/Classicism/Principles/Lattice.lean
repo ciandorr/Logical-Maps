@@ -127,7 +127,7 @@ def Actuality : Prop := ∃ p : Prop, p ∧ ∀ q : Prop, q → p ≤ q
 /-- `necessary-actuality`: Actuality boxed. -/
 def NecActuality : Prop := □ Actuality
 
-/-- `actual-profile-r` at `σ`, for one argument: `∀x. ∃Y. Yx ∧ ∀Z. Zx → Y ≤ Z`, every
+/-- `actuality`, form `actual-profile`, at `σ`, for one argument: `∀x. ∃Y. Yx ∧ ∀Z. Zx → Y ≤ Z`, every
 individual of the type has a true property entailing every property it has. The map's
 principle is over finite argument tuples; this is the unary instance, and its nullary
 instance is Actuality itself. -/
@@ -196,5 +196,44 @@ theorem NecStrongAtomicity.of_dual : NecStrongAtomicityDual τ → NecStrongAtom
   modal_K _ _ (nec% (StrongAtomicity.of_dual (τ := τ)))
 
 end
+
+/-! ## Self-atoms, Self-Atomicity and the bridge principles
+
+Cian Dorr's self-atoms (25 October 2026): `SelfAtom_τ(X) := ◇_τ X ∧ □(∃x̄. X[x̄] → Atom_τ(X))`,
+a possible entity that is necessarily an atom wherever it is instantiated. That `X` is
+instantiated, `∃x̄. X[x̄]`, is stated at a type parameter as `¬(X ⊆ ⊥_τ)`, classically the
+same; at `t` it is `¬¬p`, so `SelfAtom_t(p)` is `◇p ∧ □(p → Atom_t(p))`. -/
+
+/-- `X` is instantiated: `¬(X ⊆ ⊥_τ)`, that is `∃x̄. X[x̄]`. -/
+def Instantiated {τ : Type} [Rel τ] (X : τ) : Prop := ¬ Rel.incl X (Rel.bot τ)
+/-- `SelfAtom_τ(X) := ◇_τ X ∧ □(∃x̄. X[x̄] → Atom_τ(X))`. -/
+def SelfAtom {τ : Type} [Rel τ] (X : τ) : Prop :=
+  X ≠ ⊥ ∧ □ (Instantiated X → Atom X)
+
+/-- `self-atomicity-r` at `τ`: every possible entity is entailed by a self-atom. -/
+def SelfAtomicity (τ : Type) [Rel τ] : Prop :=
+  ∀ X : τ, X ≠ ⊥ → ∃ Q : τ, SelfAtom Q ∧ Q ≤ X
+/-- `necessary-self-atomicity-r` at `τ`: Self-Atomicity, boxed. -/
+def NecSelfAtomicity (τ : Type) [Rel τ] : Prop := □ (SelfAtomicity τ)
+
+/-- `atoms-are-self-atoms-r` at `τ`: every atom is a self-atom. -/
+def AtomsAreSelfAtoms (τ : Type) [Rel τ] : Prop := ∀ X : τ, Atom X → SelfAtom X
+/-- `necessary-atoms-are-self-atoms-r` at `τ`. -/
+def NecAtomsAreSelfAtoms (τ : Type) [Rel τ] : Prop := □ (AtomsAreSelfAtoms τ)
+
+/-- `self-atoms-are-atoms-r` at `τ`: every self-atom is an atom. -/
+def SelfAtomsAreAtoms (τ : Type) [Rel τ] : Prop := ∀ X : τ, SelfAtom X → Atom X
+/-- `necessary-self-atoms-are-atoms-r` at `τ`. -/
+def NecSelfAtomsAreAtoms (τ : Type) [Rel τ] : Prop := □ (SelfAtomsAreAtoms τ)
+
+/-- `self-atoms-are-strong-atoms-r` at `τ`: every self-atom is a strong atom. -/
+def SelfAtomsAreStrongAtoms (τ : Type) [Rel τ] : Prop := ∀ X : τ, SelfAtom X → SAtom X
+/-- `necessary-self-atoms-are-strong-atoms-r` at `τ`. -/
+def NecSelfAtomsAreStrongAtoms (τ : Type) [Rel τ] : Prop := □ (SelfAtomsAreStrongAtoms τ)
+
+/-- `atoms-are-strong-atoms-r` at `τ`: every atom is a strong atom. -/
+def AtomsAreStrongAtoms (τ : Type) [Rel τ] : Prop := ∀ X : τ, Atom X → SAtom X
+/-- `necessary-atoms-are-strong-atoms-r` at `τ`. -/
+def NecAtomsAreStrongAtoms (τ : Type) [Rel τ] : Prop := □ (AtomsAreStrongAtoms τ)
 
 end Classicism.P

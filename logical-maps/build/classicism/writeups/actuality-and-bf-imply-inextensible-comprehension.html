@@ -322,45 +322,134 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>BF and Actuality imply Inextensible Comprehension</h1></header><p>Assume BF and Actuality, in the map’s fixed relational type system. The conclusion is Inextensible Comprehension: every relation is coextensive with an inextensible one. The witness is Christopher Sun’s (26 September 2026). So is the argument from unboxed BF, which Cian Dorr reported on 27 September 2026. Claude Opus 5.5 (Anthropic) wrote out the details below. No independent checker or Lean verification is recorded.</p>
-<p>This strengthens the recorded result from □BF and Actuality, which used the same witness but needed BF at every world.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>BF and Actuality imply Inextensible Comprehension</h1></header><p>Assume BF and Actuality, in the map’s fixed relational type system.
+The conclusion is Inextensible Comprehension: every relation is
+coextensive with an inextensible one. The witness is Christopher Sun’s
+(26 September 2026). So is the argument from unboxed BF, which Cian Dorr
+reported on 27 September 2026. Claude Opus 5.5 (Anthropic) wrote out the
+details below. No independent checker or Lean verification is
+recorded.</p>
+<p>This strengthens the recorded result from □BF and Actuality, which
+used the same witness but needed BF at every world.</p>
 <h2 id="definitions">Definitions</h2>
-<p>For <span class="math inline">Y</span> of type <span class="math inline">\bar\sigma t</span>,</p>
+<p>For <span class="math inline">Y</span> of type <span
+class="math inline">\bar\sigma t</span>,</p>
 <p><span class="math display">
 \operatorname{Inextensible}(Y):=\Box\forall X\, .\,
   (\forall\bar y\, .\,Y[\bar y]\to\Box X[\bar y])\to Y\le X,
 </span></p>
-<p>where <span class="math inline">Y\le X</span> is <span class="math inline">\Box\forall\bar z\, .\,Y[\bar z]\to X[\bar z]</span>. Actuality is <span class="math inline">\exists p\, .\,p\land\forall q\, .\,q\to p\le q</span>. Let <span class="math inline">w</span> be a witness.</p>
+<p>where <span class="math inline">Y\le X</span> is <span
+class="math inline">\Box\forall\bar z\, .\,Y[\bar z]\to X[\bar
+z]</span>. Actuality is <span class="math inline">\exists p\,
+.\,p\land\forall q\, .\,q\to p\le q</span>. Let <span
+class="math inline">w</span> be a witness.</p>
 <h2 id="the-witness">The witness</h2>
-<p>Fix <span class="math inline">F</span> of type <span class="math inline">\bar\sigma t</span> and put</p>
+<p>Fix <span class="math inline">F</span> of type <span
+class="math inline">\bar\sigma t</span> and put</p>
 <p><span class="math display">
 C:=\lambda\bar z\, .\,\Diamond(w\land F[\bar z]).
 </span></p>
-<p><span class="math inline">C</span> is coextensive with <span class="math inline">F</span>. If <span class="math inline">F[\bar z]</span>, then <span class="math inline">w\land F[\bar z]</span> is true, hence possible. If <span class="math inline">\neg F[\bar z]</span>, then <span class="math inline">w\le\neg F[\bar z]</span>, which is <span class="math inline">\neg\Diamond(w\land F[\bar z])</span>.</p>
-<h2 id="two-facts-about-entailment-by-w">Two facts about entailment by <span class="math inline">w</span></h2>
-<p>C proves 4. So for any <span class="math inline">r</span>, <span class="math inline">w\le r</span> gives <span class="math inline">\Box\Box(w\to r)</span>. The formula <span class="math inline">\Box(w\to r)\to(\Diamond w\to\Diamond r)</span> is a theorem, so necessitation and K give</p>
+<p><span class="math inline">C</span> is coextensive with <span
+class="math inline">F</span>. If <span class="math inline">F[\bar
+z]</span>, then <span class="math inline">w\land F[\bar z]</span> is
+true, hence possible. If <span class="math inline">\neg F[\bar
+z]</span>, then <span class="math inline">w\le\neg F[\bar z]</span>,
+which is <span class="math inline">\neg\Diamond(w\land F[\bar
+z])</span>.</p>
+<h2 id="two-facts-about-entailment-by-w">Two facts about entailment by
+<span class="math inline">w</span></h2>
+<p>C proves 4. So for any <span class="math inline">r</span>, <span
+class="math inline">w\le r</span> gives <span
+class="math inline">\Box\Box(w\to r)</span>. The formula <span
+class="math inline">\Box(w\to r)\to(\Diamond w\to\Diamond r)</span> is a
+theorem, so necessitation and K give</p>
 <p><span class="math display">
 (\ast)\qquad w\le r\ \to\ \Box(\Diamond w\to\Diamond r).
 </span></p>
-<p>With <span class="math inline">r:=\Diamond\neg X[\bar z]</span> and 4 inside the box, this gives <span class="math inline">w\le\Diamond\neg X[\bar z]\to\Box(\Diamond w\to\Diamond\neg X[\bar z])</span>. Similarly, if <span class="math inline">w\le F[\bar z]</span>, then 4 gives <span class="math inline">\Box\Box(w\to F[\bar z])</span>. The formula <span class="math inline">\Box(w\to F[\bar z])\to(\Diamond w\to\Diamond(w\land F[\bar z]))</span> is a theorem, so <span class="math inline">w\le F[\bar z]\to\Box(\Diamond w\to C[\bar z])</span>.</p>
+<p>With <span class="math inline">r:=\Diamond\neg X[\bar z]</span> and 4
+inside the box, this gives <span class="math inline">w\le\Diamond\neg
+X[\bar z]\to\Box(\Diamond w\to\Diamond\neg X[\bar z])</span>. Similarly,
+if <span class="math inline">w\le F[\bar z]</span>, then 4 gives <span
+class="math inline">\Box\Box(w\to F[\bar z])</span>. The formula <span
+class="math inline">\Box(w\to F[\bar z])\to(\Diamond w\to\Diamond(w\land
+F[\bar z]))</span> is a theorem, so <span class="math inline">w\le
+F[\bar z]\to\Box(\Diamond w\to C[\bar z])</span>.</p>
 <h2 id="inextensibility">Inextensibility</h2>
-<p>Suppose <span class="math inline">\neg\operatorname{Inextensible}(C)</span>. Write <span class="math inline">A(X):=\forall\bar y\, .\,C[\bar y]\to\Box X[\bar y]</span> and <span class="math inline">B(X,\bar z):=C[\bar z]\land\neg X[\bar z]</span>. Then</p>
+<p>Suppose <span
+class="math inline">\neg\operatorname{Inextensible}(C)</span>. Write
+<span class="math inline">A(X):=\forall\bar y\, .\,C[\bar y]\to\Box
+X[\bar y]</span> and <span class="math inline">B(X,\bar z):=C[\bar
+z]\land\neg X[\bar z]</span>. Then</p>
 <p><span class="math display">
 \Diamond\exists X\, .\,A(X)\land\Diamond\exists\bar z\, .\,B(X,\bar z).
 </span></p>
 <ol type="1">
-<li><strong>Extract <span class="math inline">X</span>.</strong> BF at type <span class="math inline">\bar\sigma t</span>, in its dual form <span class="math inline">\Diamond\exists X\,\psi\to\exists X\,\Diamond\psi</span>, gives an <span class="math inline">X</span> with <span class="math inline">\Diamond(A(X)\land\Diamond\exists\bar z\, .\,B(X,\bar z))</span>.</li>
-<li><strong>Extract <span class="math inline">\bar z</span>.</strong> Step 1 gives <span class="math inline">\Diamond\Diamond\exists\bar z\, .\,B(X,\bar z)</span>, hence <span class="math inline">\Diamond\exists\bar z\, .\,B(X,\bar z)</span> by 4. BF at the types <span class="math inline">\bar\sigma</span>, applied once for each variable, gives <span class="math inline">\bar z</span> with <span class="math inline">\Diamond(C[\bar z]\land\neg X[\bar z])</span>.</li>
-<li><strong>Facts at the actual world.</strong> From step 2, <span class="math inline">\Diamond C[\bar z]</span>, which is <span class="math inline">\Diamond\Diamond(w\land F[\bar z])</span>, so <span class="math inline">C[\bar z]</span> by 4. Hence <span class="math inline">F[\bar z]</span> by coextensiveness. Step 2 also gives <span class="math inline">\Diamond\neg X[\bar z]</span>. Both are truths, so Actuality gives <span class="math inline">w\le F[\bar z]</span> and <span class="math inline">w\le\Diamond\neg X[\bar z]</span>. By the two facts above, <span class="math display">\Box(\Diamond w\to C[\bar z])\quad\text{and}\quad
+<li><strong>Extract <span class="math inline">X</span>.</strong> BF at
+type <span class="math inline">\bar\sigma t</span>, in its dual form
+<span class="math inline">\Diamond\exists X\,\psi\to\exists
+X\,\Diamond\psi</span>, gives an <span class="math inline">X</span> with
+<span class="math inline">\Diamond(A(X)\land\Diamond\exists\bar z\,
+.\,B(X,\bar z))</span>.</li>
+<li><strong>Extract <span class="math inline">\bar z</span>.</strong>
+Step 1 gives <span class="math inline">\Diamond\Diamond\exists\bar z\,
+.\,B(X,\bar z)</span>, hence <span
+class="math inline">\Diamond\exists\bar z\, .\,B(X,\bar z)</span> by 4.
+BF at the types <span class="math inline">\bar\sigma</span>, applied
+once for each variable, gives <span class="math inline">\bar z</span>
+with <span class="math inline">\Diamond(C[\bar z]\land\neg X[\bar
+z])</span>.</li>
+<li><strong>Facts at the actual world.</strong> From step 2, <span
+class="math inline">\Diamond C[\bar z]</span>, which is <span
+class="math inline">\Diamond\Diamond(w\land F[\bar z])</span>, so <span
+class="math inline">C[\bar z]</span> by 4. Hence <span
+class="math inline">F[\bar z]</span> by coextensiveness. Step 2 also
+gives <span class="math inline">\Diamond\neg X[\bar z]</span>. Both are
+truths, so Actuality gives <span class="math inline">w\le F[\bar
+z]</span> and <span class="math inline">w\le\Diamond\neg X[\bar
+z]</span>. By the two facts above, <span
+class="math display">\Box(\Diamond w\to C[\bar z])\quad\text{and}\quad
   \Box(\Diamond w\to\Diamond\neg X[\bar z]).</span></li>
-<li><strong>The world from step 1.</strong> Step 1 gives <span class="math inline">\Diamond(A(X)\land\Diamond w)</span>. Here <span class="math inline">\Diamond w</span> comes from <span class="math inline">\Diamond\exists\bar z\, .\,\Diamond(w\land F[\bar z])\land\ldots</span> by 4, under the box. Instantiating <span class="math inline">A(X)</span> at <span class="math inline">\bar z</span> (with <span class="math inline">\bar z</span> free, the instance holds under the box) gives <span class="math inline">\Diamond((C[\bar z]\to\Box X[\bar z])\land\Diamond w)</span>.</li>
-<li><strong>Contradiction.</strong> At that world, <span class="math inline">\Diamond w</span> gives <span class="math inline">C[\bar z]</span> and <span class="math inline">\Diamond\neg X[\bar z]</span> by step 3. So <span class="math inline">\Box X[\bar z]</span> and <span class="math inline">\Diamond\neg X[\bar z]</span> both hold.</li>
+<li><strong>The world from step 1.</strong> Step 1 gives <span
+class="math inline">\Diamond(A(X)\land\Diamond w)</span>. Here <span
+class="math inline">\Diamond w</span> comes from <span
+class="math inline">\Diamond\exists\bar z\, .\,\Diamond(w\land F[\bar
+z])\land\ldots</span> by 4, under the box. Instantiating <span
+class="math inline">A(X)</span> at <span class="math inline">\bar
+z</span> (with <span class="math inline">\bar z</span> free, the
+instance holds under the box) gives <span
+class="math inline">\Diamond((C[\bar z]\to\Box X[\bar z])\land\Diamond
+w)</span>.</li>
+<li><strong>Contradiction.</strong> At that world, <span
+class="math inline">\Diamond w</span> gives <span
+class="math inline">C[\bar z]</span> and <span
+class="math inline">\Diamond\neg X[\bar z]</span> by step 3. So <span
+class="math inline">\Box X[\bar z]</span> and <span
+class="math inline">\Diamond\neg X[\bar z]</span> both hold.</li>
 </ol>
-<p>So <span class="math inline">\operatorname{Inextensible}(C)</span>, and <span class="math inline">C</span> is an inextensible relation coextensive with <span class="math inline">F</span>.</p>
+<p>So <span class="math inline">\operatorname{Inextensible}(C)</span>,
+and <span class="math inline">C</span> is an inextensible relation
+coextensive with <span class="math inline">F</span>.</p>
 <h2 id="where-bf-is-used">Where BF is used</h2>
-<p>BF is used only at the actual world, in steps 1 and 2, at the type of <span class="math inline">X</span> and at the argument types. It brings the quantifiers out from under the negated leading box of inextensibility, so that Actuality can be applied at the actual world to the chosen <span class="math inline">\bar z</span> and <span class="math inline">X</span>. The earlier argument instead applied a BF instance under that box, which is why it needed □BF. Only worlds where <span class="math inline">\Diamond w</span> holds matter, as the earlier write-up observed. The argument enters one of them in step 4 and uses the two consequences of <span class="math inline">\Diamond w</span> from step 3.</p>
+<p>BF is used only at the actual world, in steps 1 and 2, at the type of
+<span class="math inline">X</span> and at the argument types. It brings
+the quantifiers out from under the negated leading box of
+inextensibility, so that Actuality can be applied at the actual world to
+the chosen <span class="math inline">\bar z</span> and <span
+class="math inline">X</span>. The earlier argument instead applied a BF
+instance under that box, which is why it needed □BF. Only worlds where
+<span class="math inline">\Diamond w</span> holds matter, as the earlier
+write-up observed. The argument enters one of them in step 4 and uses
+the two consequences of <span class="math inline">\Diamond w</span> from
+step 3.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.3, pp. 28–30; Proposition 2.1, pp. 20–21. Definitions of inextensibility and BF.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.3,
+pp. 28–30; Proposition 2.1, pp. 20–21. Definitions of inextensibility
+and BF.</li>
 </ul>
 </body></html>

@@ -1,0 +1,18 @@
+id: no-atoms-no-self-atoms
+requires:
+- no-atoms-anywhere
+holds:
+- necessary-atoms-are-self-atoms-r
+- necessary-atoms-are-strong-atoms-r
+- necessary-self-atoms-are-atoms-r
+- necessary-self-atoms-are-strong-atoms-r
+fails:
+- self-atomicity-t
+choice: free
+by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+date: '2026-10-25'
+text: An atom of a relational type at a reachable object would give, by existential projection, an atom
+  of type $t$ there (as in the argument no-actuality-no-self-atoms), which the condition excludes; so
+  no reachable object has an atom of any relational type, nor a self-atom, since a self-atom is an atom
+  where it is instantiated. All four bridge principles therefore hold vacuously at every type and every
+  reachable object, and Self-Atomicity (type t) fails at the evaluation point.

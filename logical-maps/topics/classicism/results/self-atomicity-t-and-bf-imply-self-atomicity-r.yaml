@@ -1,0 +1,29 @@
+id: self-atomicity-t-and-bf-imply-self-atomicity-r
+premises:
+- self-atomicity-t
+- barcan-r
+conclusion: self-atomicity-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, suggestion of 25 October 2026 that under BF the type-t forms of the new principles lift to
+  their full forms, as Atomicity does; proofs by Claude Fable 5.1 (Anthropic) the same day (session transcript).
+source_names:
+- Dorr 25 Oct
+proof: 'Let $X^{\bar\sigma t}\ne\bot$. As in the recorded [[atomicity-t-and-bf-imply-atomicity]], $\Diamond\exists\bar
+  y\, .\,X\bar y$ and BF at the argument types give $\bar x$ with $\Diamond X\bar x$; for a proposition
+  $w\le X\bar x$ write $A_w:=\lambda\bar y\, .\,w\land\bar y=\bar x$, which lies below $X$. Two facts
+  about $A_w$ are theorems of C and so hold necessarily: $A_w$ is instantiated iff $w$ is true, and $A_w$
+  is an atom iff $w$ is one (the atom step of that record, which uses only Leibniz’s law and Intensionality).
+  Self-Atomicity (type t) gives a self-atom $w\le X\bar x$. Then $A_w\ne\bot$, and necessarily, if $A_w$
+  is instantiated then $w$ is true, so $w$ is an atom, so $A_w$ is an atom: $A_w$ is a self-atom below
+  $X$.'
+notes: The lift of Self-Atomicity from type $t$ to every relational type under BF, on the pattern of [[atomicity-t-and-bf-imply-atomicity]];
+  BF is used at the argument types, to pass from a possible relation to a possible instance. Atoms are
+  strong atoms needs no such lift, since BF at relational types gives it outright ([[barcan-relational-implies-atoms-are-strong-atoms-r]]).

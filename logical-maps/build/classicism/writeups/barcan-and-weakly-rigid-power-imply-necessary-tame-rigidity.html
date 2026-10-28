@@ -323,26 +323,56 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>BF ∧ Weakly Rigid Power ⇒ □Tame Rigidity</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.barcan_and_weakly_rigid_power_imply_necessary_tame_rigidity</code>; produced by Claude Opus 5.5 (Anthropic), 10 October 2026, checking a suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 10 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.barcan_and_weakly_rigid_power_imply_necessary_tame_rigidity</code>;
+produced by Claude Opus 5.5 (Anthropic), 10 October 2026, checking a
+suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 10 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>BF.</strong> The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
-<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid, so is the property of being a weakly rigid relation that entails it.</li>
+<li><strong>BF.</strong> The Barcan Formula at every type. The predicate
+formulation closes the formula schema using lambda abstraction.</li>
+<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid,
+so is the property of being a weakly rigid relation that entails
+it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□Tame Rigidity.</strong> Necessarily, every weakly rigid relation, including a proposition, is rigid.</li>
+<li><strong>□Tame Rigidity.</strong> Necessarily, every weakly rigid
+relation, including a proposition, is rigid.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix the type tuple <span class="math inline">\bar\sigma</span> and put <span class="math inline">T:=\lambda\bar x\, .\,\top</span>. <span class="math inline">T</span> is weakly persistent trivially. It is weakly inextensible: if <span class="math inline">\forall\bar x\, .\,\Box Z\bar x</span>, then BF (iterated over the tuple) gives <span class="math inline">\Box\forall\bar x\, .\,Z\bar x</span>, that is <span class="math inline">T\le Z</span>; for the empty tuple (<span class="math inline">T=\top</span>) no BF is needed. By Weakly Rigid Power, <span class="math inline">P_T:=\lambda Y\, .\,\operatorname{WeaklyRigid}(Y)\land Y\le T</span> is weakly rigid, and Tame Rigidity at type <span class="math inline">(\bar\sigma t)t</span>, which Weakly Rigid Power implies (recorded), makes it rigid, hence persistent: <span class="math inline">\Box\forall Y\, .\,P_TY\to\Box P_TY</span>. Since <span class="math inline">Y\le T</span> holds necessarily for every <span class="math inline">Y</span>, this is <span class="math inline">\Box\forall Y\, .\,\operatorname{WeaklyRigid}(Y)\to\Box\operatorname{WeaklyRigid}(Y)</span>, the instance of □Tame Rigidity at <span class="math inline">\bar\sigma</span>.</p>
+<p>Fix the type tuple <span class="math inline">\bar\sigma</span> and
+put <span class="math inline">T:=\lambda\bar x\, .\,\top</span>. <span
+class="math inline">T</span> is weakly persistent trivially. It is
+weakly inextensible: if <span class="math inline">\forall\bar x\,
+.\,\Box Z\bar x</span>, then BF (iterated over the tuple) gives <span
+class="math inline">\Box\forall\bar x\, .\,Z\bar x</span>, that is <span
+class="math inline">T\le Z</span>; for the empty tuple (<span
+class="math inline">T=\top</span>) no BF is needed. By Weakly Rigid
+Power, <span class="math inline">P_T:=\lambda Y\,
+.\,\operatorname{WeaklyRigid}(Y)\land Y\le T</span> is weakly rigid, and
+Tame Rigidity at type <span class="math inline">(\bar\sigma t)t</span>,
+which Weakly Rigid Power implies (recorded), makes it rigid, hence
+persistent: <span class="math inline">\Box\forall Y\, .\,P_TY\to\Box
+P_TY</span>. Since <span class="math inline">Y\le T</span> holds
+necessarily for every <span class="math inline">Y</span>, this is <span
+class="math inline">\Box\forall Y\,
+.\,\operatorname{WeaklyRigid}(Y)\to\Box\operatorname{WeaklyRigid}(Y)</span>,
+the instance of □Tame Rigidity at <span
+class="math inline">\bar\sigma</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>At type <span class="math inline">t</span> (the empty tuple) the argument needs no BF, so Weakly Rigid Power alone gives □Tame Rigidity for propositions.</p>
+<p>At type <span class="math inline">t</span> (the empty tuple) the
+argument needs no BF, so Weakly Rigid Power alone gives □Tame Rigidity
+for propositions.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October 2026.</li>
+<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/barcan-and-weakly-rigid-power-imply-necessary-tame-rigidity.yaml</code>
+Record:
+<code>topics/classicism/results/barcan-and-weakly-rigid-power-imply-necessary-tame-rigidity.yaml</code>
 </p>
 </body></html>

@@ -4,6 +4,8 @@
 
 ## Package
 
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
@@ -41,6 +43,12 @@ Interpretation of Σ, fixed for this record: one designated relational constant 
 *A member of the group Finite-support action models on one object, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms.
+
+Every arrow $k_n$ is determined by its value at $n+1$, so every singleton is in the domain, and the only atom containing the identity is $\{1\}$. A self-atom containing $k_n$ and $k_m$ with $n<m$ would have $k_{m-n}$ in its transport along $k_n$, since $k_{m-n}\circ k_n=k_m$, so that transport would not be $\{1\}$. So the self-atoms are the singletons, atoms, and each is a strong atom: $\{k_n\}$ becomes under $k_m$ the set of $k_j$ with $j+m=n$, of at most one arrow. A self-atom of a relational type sits over one arrow with one tuple, by the transport condition, so is an atom and a strong atom likewise. One object, so this holds at every world.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Rigid Power.
 

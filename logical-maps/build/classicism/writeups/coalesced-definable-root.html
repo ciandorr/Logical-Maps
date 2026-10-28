@@ -322,60 +322,254 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum: interpretation arrows into every component object, definable root</h1></header><p>Cian Dorr gave this construction on 20 October 2026, for the sentence <span class="math inline">\Psi</span> below; Claude Fable 5.1 (Anthropic) wrote the verification and the arguments. No second reader has checked it, and no Lean verification is claimed.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum: interpretation arrows into every component object, definable root</h1></header><p>Cian Dorr gave this construction on 20 October 2026, for the sentence
+<span class="math inline">\Psi</span> below; Claude Fable 5.1
+(Anthropic) wrote the verification and the arguments. No second reader
+has checked it, and no Lean verification is claimed.</p>
 <h2 id="the-construction">The construction</h2>
 <ul>
-<li><strong>Components.</strong> Fix a set <span class="math inline">A</span> of action models complete for C, with disjoint objects and arrows: every pure sentence consistent with C is true at the root of some model in <span class="math inline">A</span>.</li>
-<li><strong>Signature.</strong> <span class="math inline">\Sigma_0=\{d\}</span>, with <span class="math inline">d</span> of type <span class="math inline">e</span>.</li>
-<li><strong>Arrows.</strong> Add an object <span class="math inline">W_0</span>. Its arrows out are its identity and, for each object <span class="math inline">V</span> of a model in <span class="math inline">A</span> and each individual <span class="math inline">a</span> at <span class="math inline">V</span>, an arrow <span class="math inline">\langle V,a\rangle</span> into <span class="math inline">V</span>. No arrow enters <span class="math inline">W_0</span> except its identity.</li>
-<li><strong>Composition.</strong> For an arrow <span class="math inline">k:V\to V&#39;</span> of a component, <span class="math inline">k\circ\langle V,a\rangle:=\langle V&#39;,k\cdot a\rangle</span>.</li>
-<li><strong>Individuals.</strong> The only individual at <span class="math inline">W_0</span> is <span class="math inline">d</span>, and <span class="math inline">\langle V,a\rangle</span> sends it to <span class="math inline">a</span>.</li>
-<li><strong>Domains at <span class="math inline">W_0</span>.</strong> An entity of a relational type <span class="math inline">\bar\sigma t</span> is an intension <span class="math inline">F</span> over the arrows out of <span class="math inline">W_0</span> such that for some closed term <span class="math inline">t</span> of <span class="math inline">\mathcal L(\Sigma_0)</span>, for every <span class="math inline">\langle V,a\rangle</span>, the value of <span class="math inline">F</span> there is the extension at <span class="math inline">1_V</span> of <span class="math inline">t</span> as interpreted at <span class="math inline">V</span> with <span class="math inline">d\mapsto a</span>. The value of <span class="math inline">F</span> at the identity is unconstrained. Write <span class="math inline">F=(E,t)</span> for such an entity, <span class="math inline">E</span> its value at the identity; <span class="math inline">t</span> is a witness, not part of the entity.</li>
-<li><strong>Evaluation point.</strong> <span class="math inline">1_{W_0}</span>.</li>
-<li><strong>Interpretation of <span class="math inline">\Sigma</span>.</strong> Every constant of <span class="math inline">\Sigma</span> denotes the top element of its type, the entity <span class="math inline">(\text{everything},\lambda\bar x\,.\,\top)</span>.</li>
+<li><strong>Components.</strong> Fix a set <span
+class="math inline">A</span> of action models complete for C, with
+disjoint objects and arrows: every pure sentence consistent with C is
+true at the root of some model in <span
+class="math inline">A</span>.</li>
+<li><strong>Signature.</strong> <span
+class="math inline">\Sigma_0=\{d\}</span>, with <span
+class="math inline">d</span> of type <span
+class="math inline">e</span>.</li>
+<li><strong>Arrows.</strong> Add an object <span
+class="math inline">W_0</span>. Its arrows out are its identity and, for
+each object <span class="math inline">V</span> of a model in <span
+class="math inline">A</span> and each individual <span
+class="math inline">a</span> at <span class="math inline">V</span>, an
+arrow <span class="math inline">\langle V,a\rangle</span> into <span
+class="math inline">V</span>. No arrow enters <span
+class="math inline">W_0</span> except its identity.</li>
+<li><strong>Composition.</strong> For an arrow <span
+class="math inline">k:V\to V&#39;</span> of a component, <span
+class="math inline">k\circ\langle V,a\rangle:=\langle V&#39;,k\cdot
+a\rangle</span>.</li>
+<li><strong>Individuals.</strong> The only individual at <span
+class="math inline">W_0</span> is <span class="math inline">d</span>,
+and <span class="math inline">\langle V,a\rangle</span> sends it to
+<span class="math inline">a</span>.</li>
+<li><strong>Domains at <span class="math inline">W_0</span>.</strong> An
+entity of a relational type <span class="math inline">\bar\sigma
+t</span> is an intension <span class="math inline">F</span> over the
+arrows out of <span class="math inline">W_0</span> such that for some
+closed term <span class="math inline">t</span> of <span
+class="math inline">\mathcal L(\Sigma_0)</span>, for every <span
+class="math inline">\langle V,a\rangle</span>, the value of <span
+class="math inline">F</span> there is the extension at <span
+class="math inline">1_V</span> of <span class="math inline">t</span> as
+interpreted at <span class="math inline">V</span> with <span
+class="math inline">d\mapsto a</span>. The value of <span
+class="math inline">F</span> at the identity is unconstrained. Write
+<span class="math inline">F=(E,t)</span> for such an entity, <span
+class="math inline">E</span> its value at the identity; <span
+class="math inline">t</span> is a witness, not part of the entity.</li>
+<li><strong>Evaluation point.</strong> <span
+class="math inline">1_{W_0}</span>.</li>
+<li><strong>Interpretation of <span
+class="math inline">\Sigma</span>.</strong> Every constant of <span
+class="math inline">\Sigma</span> denotes the top element of its type,
+the entity <span class="math inline">(\text{everything},\lambda\bar
+x\,.\,\top)</span>.</li>
 </ul>
-<p><strong>Landing.</strong> The transport of <span class="math inline">(E,t)</span> along <span class="math inline">\langle V,a\rangle</span> is the intension <span class="math inline">k\mapsto</span> (value at <span class="math inline">\langle V&#39;,k\cdot a\rangle</span>) <span class="math inline">=</span> extension at <span class="math inline">k</span> of <span class="math inline">t</span> interpreted at <span class="math inline">V</span> with <span class="math inline">d\mapsto a</span>: it is the entity <span class="math inline">t</span> denotes at <span class="math inline">V</span> under that interpretation, so it lies in <span class="math inline">V</span>’s domain.</p>
+<p><strong>Landing.</strong> The transport of <span
+class="math inline">(E,t)</span> along <span class="math inline">\langle
+V,a\rangle</span> is the intension <span
+class="math inline">k\mapsto</span> (value at <span
+class="math inline">\langle V&#39;,k\cdot a\rangle</span>) <span
+class="math inline">=</span> extension at <span
+class="math inline">k</span> of <span class="math inline">t</span>
+interpreted at <span class="math inline">V</span> with <span
+class="math inline">d\mapsto a</span>: it is the entity <span
+class="math inline">t</span> denotes at <span
+class="math inline">V</span> under that interpretation, so it lies in
+<span class="math inline">V</span>’s domain.</p>
 <h2 id="it-is-a-model-of-c">It is a model of C</h2>
-<p>Closed formulas are evaluated at an arrow by evaluating at its target with transported parameters. Let <span class="math inline">s</span> be a term with parameters <span class="math inline">\bar F=(\bar
-E,\bar t)</span> from the root domains. At <span class="math inline">\langle V,a\rangle</span> its denotation is computed in <span class="math inline">V</span>’s component from the transported parameters, which are the denotations of <span class="math inline">\bar t</span>; so it is the denotation of the closed term <span class="math inline">s[\bar t/\bar F]</span>, uniformly in the arrow. At the identity the value is the set of tuples of root entities satisfying the formula at <span class="math inline">W_0</span>, and nothing constrains it. So every term with parameters denotes a root entity, with <span class="math inline">s[\bar t/\bar F]</span> as its witness. The axioms of C hold at <span class="math inline">W_0</span> because denotations are computed extensionally on intensions, and the other worlds are worlds of the components.</p>
-<p>Two root entities with the same witness and different values at the identity are distinct at <span class="math inline">W_0</span> (a root property with the right value at the identity separates them) and identical at every component world. So ND fails at <span class="math inline">W_0</span>.</p>
-<h2 id="maximalism-pure-and-possibility-pure">Maximalism (pure) and Possibility+ (pure)</h2>
-<p>A closed pure sentence holds at <span class="math inline">\langle V,a\rangle</span> iff it holds at <span class="math inline">V</span>. Every pure sentence consistent with C holds at the root of some model in <span class="math inline">A</span>, so it is possible at <span class="math inline">W_0</span>. For Possibility+ with one free individual variable, a consistent <span class="math inline">P(x)</span> holds of some <span class="math inline">a</span> at some root <span class="math inline">V</span>, and then <span class="math inline">P(d)</span> holds at <span class="math inline">\langle V,a\rangle</span>. With two or more variables the antecedent, that they are distinct, is false at <span class="math inline">W_0</span>, which has one individual.</p>
-<h2 id="the-sentence-psi">The sentence <span class="math inline">\Psi</span></h2>
+<p>Closed formulas are evaluated at an arrow by evaluating at its target
+with transported parameters. Let <span class="math inline">s</span> be a
+term with parameters <span class="math inline">\bar F=(\bar
+E,\bar t)</span> from the root domains. At <span
+class="math inline">\langle V,a\rangle</span> its denotation is computed
+in <span class="math inline">V</span>’s component from the transported
+parameters, which are the denotations of <span class="math inline">\bar
+t</span>; so it is the denotation of the closed term <span
+class="math inline">s[\bar t/\bar F]</span>, uniformly in the arrow. At
+the identity the value is the set of tuples of root entities satisfying
+the formula at <span class="math inline">W_0</span>, and nothing
+constrains it. So every term with parameters denotes a root entity, with
+<span class="math inline">s[\bar t/\bar F]</span> as its witness. The
+axioms of C hold at <span class="math inline">W_0</span> because
+denotations are computed extensionally on intensions, and the other
+worlds are worlds of the components.</p>
+<p>Two root entities with the same witness and different values at the
+identity are distinct at <span class="math inline">W_0</span> (a root
+property with the right value at the identity separates them) and
+identical at every component world. So ND fails at <span
+class="math inline">W_0</span>.</p>
+<h2 id="maximalism-pure-and-possibility-pure">Maximalism (pure) and
+Possibility+ (pure)</h2>
+<p>A closed pure sentence holds at <span class="math inline">\langle
+V,a\rangle</span> iff it holds at <span class="math inline">V</span>.
+Every pure sentence consistent with C holds at the root of some model in
+<span class="math inline">A</span>, so it is possible at <span
+class="math inline">W_0</span>. For Possibility+ with one free
+individual variable, a consistent <span class="math inline">P(x)</span>
+holds of some <span class="math inline">a</span> at some root <span
+class="math inline">V</span>, and then <span
+class="math inline">P(d)</span> holds at <span
+class="math inline">\langle V,a\rangle</span>. With two or more
+variables the antecedent, that they are distinct, is false at <span
+class="math inline">W_0</span>, which has one individual.</p>
+<h2 id="the-sentence-psi">The sentence <span
+class="math inline">\Psi</span></h2>
 <p>Let C5 be <span class="math inline">\Box</span>ND and</p>
-<p><span class="math display">F(p):=(\Diamond p\land\Diamond\neg p)\land\mathrm{C5}\land
+<p><span class="math display">F(p):=(\Diamond p\land\Diamond\neg
+p)\land\mathrm{C5}\land
 \mathrm{Atomicity}\land\forall x\forall y\,.\,x=y,</span></p>
-<p>a closed pure term of type <span class="math inline">tt</span>: <span class="math inline">p</span> is contingent while C5, Atomicity and “there is exactly one individual” hold. Let</p>
-<p><span class="math display">\Psi:=\forall p\,.\,\neg\Diamond F(p).</span></p>
-<p><strong><span class="math inline">\Psi</span> holds at <span class="math inline">W_0</span>.</strong> Take a root proposition <span class="math inline">p=(b,t)</span> and a world seen from <span class="math inline">W_0</span>.</p>
+<p>a closed pure term of type <span class="math inline">tt</span>: <span
+class="math inline">p</span> is contingent while C5, Atomicity and
+“there is exactly one individual” hold. Let</p>
+<p><span class="math display">\Psi:=\forall p\,.\,\neg\Diamond
+F(p).</span></p>
+<p><strong><span class="math inline">\Psi</span> holds at <span
+class="math inline">W_0</span>.</strong> Take a root proposition <span
+class="math inline">p=(b,t)</span> and a world seen from <span
+class="math inline">W_0</span>.</p>
 <ul>
-<li>At <span class="math inline">W_0</span> itself C5 fails, since ND fails there, so <span class="math inline">p</span> is not <span class="math inline">F</span>.</li>
-<li>At a component world <span class="math inline">w</span> where C5, Atomicity and <span class="math inline">\forall x\forall
-y\,.\,x=y</span> hold, <span class="math inline">p</span> is the proposition <span class="math inline">\llbracket t\rrbracket</span>. C5 gives BF, and <span class="math inline">x=y\to\Box\,x=y</span> is a theorem, so there is necessarily exactly one individual at <span class="math inline">w</span>, and <span class="math inline">t</span> and the pure sentence <span class="math inline">\forall x\,.\,t[x/d]</span> have the same truth value at every world seen from <span class="math inline">w</span>: they are the same proposition there. By the recorded result C5 + Atomicity (type <span class="math inline">t</span>) ⇒ No Pure Contingency, that proposition is not contingent at <span class="math inline">w</span>. So <span class="math inline">p</span> is not <span class="math inline">F</span> at <span class="math inline">w</span>.</li>
-<li>Everywhere else <span class="math inline">F</span> fails by its side conditions.</li>
+<li>At <span class="math inline">W_0</span> itself C5 fails, since ND
+fails there, so <span class="math inline">p</span> is not <span
+class="math inline">F</span>.</li>
+<li>At a component world <span class="math inline">w</span> where C5,
+Atomicity and <span class="math inline">\forall x\forall
+y\,.\,x=y</span> hold, <span class="math inline">p</span> is the
+proposition <span class="math inline">\llbracket t\rrbracket</span>. C5
+gives BF, and <span class="math inline">x=y\to\Box\,x=y</span> is a
+theorem, so there is necessarily exactly one individual at <span
+class="math inline">w</span>, and <span class="math inline">t</span> and
+the pure sentence <span class="math inline">\forall x\,.\,t[x/d]</span>
+have the same truth value at every world seen from <span
+class="math inline">w</span>: they are the same proposition there. By
+the recorded result C5 + Atomicity (type <span
+class="math inline">t</span>) ⇒ No Pure Contingency, that proposition is
+not contingent at <span class="math inline">w</span>. So <span
+class="math inline">p</span> is not <span class="math inline">F</span>
+at <span class="math inline">w</span>.</li>
+<li>Everywhere else <span class="math inline">F</span> fails by its side
+conditions.</li>
 </ul>
-<p>So <span class="math inline">\Psi</span> is consistent with Maximalist Classicism (pure). This is the premise of the result maximalism-signature-incompatible-with-strong-possibility-pure.</p>
-<p><strong>Why the extra conjunct.</strong> Without <span class="math inline">\forall x\forall y\,.\,x=y</span> one would need every closed sentence of <span class="math inline">\mathcal L(\Sigma_0)</span>, <span class="math inline">d</span> included, to be non-contingent where C5 and Atomicity hold. C5 + Atomicity does make the number of individuals non-contingent, but fixing it at one reduces every <span class="math inline">\Sigma_0</span>-sentence to a pure one and costs nothing in the result.</p>
-<p><strong>Why this root.</strong> At the pinned roots the entity <span class="math inline">\hat c</span> for a constant <span class="math inline">c\in\Sigma^+</span> of type <span class="math inline">t</span> has, at such a world, whatever value the interpretation gives <span class="math inline">c</span>, which may be contingent; so <span class="math inline">\Psi</span> fails there. Here every root entity is definable by one closed term at every component world, which is what <span class="math inline">\Psi</span> needs.</p>
+<p>So <span class="math inline">\Psi</span> is consistent with
+Maximalist Classicism (pure). This is the premise of the result
+maximalism-signature-incompatible-with-strong-possibility-pure.</p>
+<p><strong>Why the extra conjunct.</strong> Without <span
+class="math inline">\forall x\forall y\,.\,x=y</span> one would need
+every closed sentence of <span class="math inline">\mathcal
+L(\Sigma_0)</span>, <span class="math inline">d</span> included, to be
+non-contingent where C5 and Atomicity hold. C5 + Atomicity does make the
+number of individuals non-contingent, but fixing it at one reduces every
+<span class="math inline">\Sigma_0</span>-sentence to a pure one and
+costs nothing in the result.</p>
+<p><strong>Why this root.</strong> At the pinned roots the entity <span
+class="math inline">\hat c</span> for a constant <span
+class="math inline">c\in\Sigma^+</span> of type <span
+class="math inline">t</span> has, at such a world, whatever value the
+interpretation gives <span class="math inline">c</span>, which may be
+contingent; so <span class="math inline">\Psi</span> fails there. Here
+every root entity is definable by one closed term at every component
+world, which is what <span class="math inline">\Psi</span> needs.</p>
 <h2 id="bf-fails">BF fails</h2>
-<p>At type <span class="math inline">e</span>, <span class="math inline">\Diamond\exists x\,.\,x\ne d</span> holds, but <span class="math inline">d</span> is the only root individual. At type <span class="math inline">t</span>, let <span class="math inline">X</span> be the root property denoted by</p>
-<p><span class="math display">\lambda p\,.\,\operatorname{Atom}(p)\land\exists q\,.\,(\operatorname{Atom}(q)
-\land q\ne p)\land\mathrm{C5}\land\mathrm{Atomicity}\land\forall x\forall
+<p>At type <span class="math inline">e</span>, <span
+class="math inline">\Diamond\exists x\,.\,x\ne d</span> holds, but <span
+class="math inline">d</span> is the only root individual. At type <span
+class="math inline">t</span>, let <span class="math inline">X</span> be
+the root property denoted by</p>
+<p><span class="math display">\lambda
+p\,.\,\operatorname{Atom}(p)\land\exists q\,.\,(\operatorname{Atom}(q)
+\land q\ne p)\land\mathrm{C5}\land\mathrm{Atomicity}\land\forall
+x\forall
 y\,.\,x=y.</span></p>
-<p><span class="math inline">\Diamond\exists p\,.\,Xp</span> holds at <span class="math inline">W_0</span>: the full S5 model over the two-element group with one individual satisfies <span class="math inline">\exists p\,.\,Xp</span>, so some component does. But no root proposition is possibly <span class="math inline">X</span>: at a world where the side conditions hold, its sentence is, as above, a non-contingent proposition, hence (the world being S5, by C5) <span class="math inline">\top</span> or <span class="math inline">\bot</span> there, and neither is an atom beside another atom. So <span class="math inline">\exists p\,.\,\Diamond Xp</span> fails.</p>
+<p><span class="math inline">\Diamond\exists p\,.\,Xp</span> holds at
+<span class="math inline">W_0</span>: the full S5 model over the
+two-element group with one individual satisfies <span
+class="math inline">\exists p\,.\,Xp</span>, so some component does. But
+no root proposition is possibly <span class="math inline">X</span>: at a
+world where the side conditions hold, its sentence is, as above, a
+non-contingent proposition, hence (the world being S5, by C5) <span
+class="math inline">\top</span> or <span class="math inline">\bot</span>
+there, and neither is an atom beside another atom. So <span
+class="math inline">\exists p\,.\,\Diamond Xp</span> fails.</p>
 <h2 id="the-root-propositions">The root propositions</h2>
-<p>Two root propositions false at the identity, <span class="math inline">(\bot,t)</span> and <span class="math inline">(\bot,t&#39;)</span>, are identical iff <span class="math inline">t\leftrightarrow t&#39;</span> holds at every object of every model in <span class="math inline">A</span> under every interpretation of <span class="math inline">d</span>, which by completeness is iff C(<span class="math inline">\Sigma_0</span>) proves it; and <span class="math inline">(\bot,t)\le(\bot,t&#39;)</span> iff C(<span class="math inline">\Sigma_0</span>) proves <span class="math inline">t\to t&#39;</span>. So the root propositions false at the identity form the Lindenbaum algebra of C(<span class="math inline">\Sigma_0</span>), and all root propositions form that algebra with a truth value at the identity adjoined. The Lindenbaum algebra is countable and atomless (a consistent sentence can always be consistently strengthened). Hence Atomicity fails at type <span class="math inline">t</span>, and so at every relational type; Boolean Completeness at type <span class="math inline">t</span> fails, a countable atomless Boolean algebra not being complete; and Countable Boolean Completeness fails, such an algebra not being countably complete either. Any family of root propositions is the value at the identity of some root property, the value at the identity being unconstrained. Atomlessness fails too, the base proposition <span class="math inline">(\top,\bot)</span> being an atom; it also witnesses Actuality.</p>
+<p>Two root propositions false at the identity, <span
+class="math inline">(\bot,t)</span> and <span
+class="math inline">(\bot,t&#39;)</span>, are identical iff <span
+class="math inline">t\leftrightarrow t&#39;</span> holds at every object
+of every model in <span class="math inline">A</span> under every
+interpretation of <span class="math inline">d</span>, which by
+completeness is iff C(<span class="math inline">\Sigma_0</span>) proves
+it; and <span class="math inline">(\bot,t)\le(\bot,t&#39;)</span> iff
+C(<span class="math inline">\Sigma_0</span>) proves <span
+class="math inline">t\to t&#39;</span>. So the root propositions false
+at the identity form the Lindenbaum algebra of C(<span
+class="math inline">\Sigma_0</span>), and all root propositions form
+that algebra with a truth value at the identity adjoined. The Lindenbaum
+algebra is countable and atomless (a consistent sentence can always be
+consistently strengthened). Hence Atomicity fails at type <span
+class="math inline">t</span>, and so at every relational type; Boolean
+Completeness at type <span class="math inline">t</span> fails, a
+countable atomless Boolean algebra not being complete; and Countable
+Boolean Completeness fails, such an algebra not being countably complete
+either. Any family of root propositions is the value at the identity of
+some root property, the value at the identity being unconstrained.
+Atomlessness fails too, the base proposition <span
+class="math inline">(\top,\bot)</span> being an atom; it also witnesses
+Actuality.</p>
 <h2 id="other-verdicts">Other verdicts</h2>
 <ul>
-<li><strong>Choice.</strong> Well-Ordering and Transversal Choice are evaluated at the identity alone; a well-ordering or a transversal chosen in the metatheory, with the term <span class="math inline">\bot</span> elsewhere, is a root entity. Relational Choice holds by the group’s argument.</li>
-<li><strong>Strong Possibility (pure) fails.</strong> With <span class="math inline">a:=(\top,\bot)</span>, a truth possible only at the identity, <span class="math inline">\Box_{\ne}p</span> holds of every truth <span class="math inline">p</span>, so <span class="math inline">\Diamond_{\ne}P</span> holds iff <span class="math inline">P</span> does; <span class="math inline">\neg</span>Actuality is consistent with Maximalist Classicism (coalesced-pinned-substitutions-root) and false here.</li>
-<li><strong>Tame Rigidity fails</strong> at type <span class="math inline">e\to t</span>: the root property <span class="math inline">(\{d\},\lambda
-x\,.\,\top)</span> is weakly rigid at <span class="math inline">W_0</span>, the only test tuple being <span class="math inline">d</span> and the only test properties the definable ones, which if they necessarily hold of <span class="math inline">d</span> hold of every individual everywhere; but its transport, the universal property, is weakly inextensible at a component world only where BF at type <span class="math inline">e</span> holds, and some component refutes that. Weakly Rigid Power fails with it.</li>
-<li><strong>Boxed principles.</strong> The group’s argument that every pure sentence consistent with C is possible at the root refutes □Vicinity, □Weakly Inextensible Comprehension and □Transversal.</li>
-<li>The map derives the rest: the Maximalism incompatibilities, the consequences of Actuality, and the signature verdicts from the top interpretation of <span class="math inline">\Sigma</span>.</li>
+<li><strong>Choice.</strong> Well-Ordering and Transversal Choice are
+evaluated at the identity alone; a well-ordering or a transversal chosen
+in the metatheory, with the term <span class="math inline">\bot</span>
+elsewhere, is a root entity. Relational Choice holds by the group’s
+argument.</li>
+<li><strong>Strong Possibility (pure) fails.</strong> With <span
+class="math inline">a:=(\top,\bot)</span>, a truth possible only at the
+identity, <span class="math inline">\Box_{\ne}p</span> holds of every
+truth <span class="math inline">p</span>, so <span
+class="math inline">\Diamond_{\ne}P</span> holds iff <span
+class="math inline">P</span> does; <span
+class="math inline">\neg</span>Actuality is consistent with Maximalist
+Classicism (coalesced-pinned-substitutions-root) and false here.</li>
+<li><strong>Tame Rigidity fails</strong> at type <span
+class="math inline">e\to t</span>: the root property <span
+class="math inline">(\{d\},\lambda
+x\,.\,\top)</span> is weakly rigid at <span
+class="math inline">W_0</span>, the only test tuple being <span
+class="math inline">d</span> and the only test properties the definable
+ones, which if they necessarily hold of <span
+class="math inline">d</span> hold of every individual everywhere; but
+its transport, the universal property, is weakly inextensible at a
+component world only where BF at type <span class="math inline">e</span>
+holds, and some component refutes that. Weakly Rigid Power fails with
+it.</li>
+<li><strong>Boxed principles.</strong> The group’s argument that every
+pure sentence consistent with C is possible at the root refutes
+□Vicinity, □Weakly Inextensible Comprehension and □Transversal.</li>
+<li>The map derives the rest: the Maximalism incompatibilities, the
+consequences of Actuality, and the signature verdicts from the top
+interpretation of <span class="math inline">\Sigma</span>.</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix E, Definition E.2, pp. 80–83. The coalesced sum, here with an arrow for every individual of every component object and with the root domains cut down to the definable intensions.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix E, Definition E.2, pp. 80–83. The coalesced sum, here with an
+arrow for every individual of every component object and with the root
+domains cut down to the definable intensions.</li>
 </ul>
 </body></html>

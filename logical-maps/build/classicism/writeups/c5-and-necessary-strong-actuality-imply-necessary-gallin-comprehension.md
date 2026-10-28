@@ -5,7 +5,7 @@
 ## Premises
 
 - **□ND.** Necessarily, distinct things of any type are necessarily distinct.
-- **□Strong Actuality.** Necessarily, there is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.
+- **□Strong Actuality.** Necessarily, there is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 
 ## Conclusion
 

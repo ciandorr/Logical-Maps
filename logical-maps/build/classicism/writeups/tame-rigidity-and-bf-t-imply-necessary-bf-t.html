@@ -323,30 +323,56 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Tame Rigidity ∧ BF (type t) ⇒ □BF (type t)</h1></header><p class="cert">
-Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 3 October 2026; recorded by Claude Opus 5.5 (Anthropic), 16 October 2026, at Cian Dorr’s direction.
+Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 3 October 2026; recorded by Claude Opus 5.5
+(Anthropic), 16 October 2026, at Cian Dorr’s direction.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Tame Rigidity.</strong> Every weakly rigid relation, including a proposition, is rigid.</li>
-<li><strong>BF (type t).</strong> If every proposition necessarily has a property, then necessarily every proposition has it.</li>
+<li><strong>Tame Rigidity.</strong> Every weakly rigid relation,
+including a proposition, is rigid.</li>
+<li><strong>BF (type t).</strong> If every proposition necessarily has a
+property, then necessarily every proposition has it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□BF (type t).</strong> Necessarily, if every proposition necessarily has a property, then necessarily every proposition has it.</li>
+<li><strong>□BF (type t).</strong> Necessarily, if every proposition
+necessarily has a property, then necessarily every proposition has
+it.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>The proof of tame-rigidity-and-barcan-imply-necessary-barcan at type <span class="math inline">t</span>. Apply Tame Rigidity at type <span class="math inline">t\to t</span> to <span class="math inline">Y:=\lambda p\, .\,\top</span>. <span class="math inline">\operatorname{Persistent}(Y)</span> is a theorem, and <span class="math inline">\operatorname{WeaklyInextensible}(Y)</span> unfolds to <span class="math inline">\forall X^{tt}\, .\,(\forall p\, .\,\Box Xp)\to \Box\forall p\, .\,Xp</span>, which is BF (type t), while <span class="math inline">\operatorname{Inextensible}(Y)</span> is its necessitation. So BF (type t) makes <span class="math inline">Y</span> weakly rigid, Tame Rigidity makes it rigid, and its inextensibility is <span class="math inline">\Box</span>BF (type t).</p>
+<p>The proof of tame-rigidity-and-barcan-imply-necessary-barcan at type
+<span class="math inline">t</span>. Apply Tame Rigidity at type <span
+class="math inline">t\to t</span> to <span
+class="math inline">Y:=\lambda p\, .\,\top</span>. <span
+class="math inline">\operatorname{Persistent}(Y)</span> is a theorem,
+and <span
+class="math inline">\operatorname{WeaklyInextensible}(Y)</span> unfolds
+to <span class="math inline">\forall X^{tt}\, .\,(\forall p\, .\,\Box
+Xp)\to \Box\forall p\, .\,Xp</span>, which is BF (type t), while <span
+class="math inline">\operatorname{Inextensible}(Y)</span> is its
+necessitation. So BF (type t) makes <span class="math inline">Y</span>
+weakly rigid, Tame Rigidity makes it rigid, and its inextensibility is
+<span class="math inline">\Box</span>BF (type t).</p>
 <h2 id="notes">Notes</h2>
-<p>The type-<span class="math inline">t</span> counterpart of tame-rigidity-and-barcan-imply-necessary-barcan and of tame-rigidity-and-bf-relational-imply-necessary-bf-relational, which the engine cannot instantiate on its own.</p>
+<p>The type-<span class="math inline">t</span> counterpart of
+tame-rigidity-and-barcan-imply-necessary-barcan and of
+tame-rigidity-and-bf-relational-imply-necessary-bf-relational, which the
+engine cannot instantiate on its own.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Fable 3 Oct</strong> — Claude Fable 5.1 (Anthropic), Classicism session of 3 October 2026, answering Cian Dorr’s question about Tame Rigidity in the coalesced roots.</li>
+<li><strong>Fable 3 Oct</strong> — Claude Fable 5.1 (Anthropic),
+Classicism session of 3 October 2026, answering Cian Dorr’s question
+about Tame Rigidity in the coalesced roots.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/tame-rigidity-and-bf-t-imply-necessary-bf-t.yaml</code>
+Record:
+<code>topics/classicism/results/tame-rigidity-and-bf-t-imply-necessary-bf-t.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Possible Worlds Without Atomicity.</strong> Sun, Christopher. Possible Worlds Without Atomicity. Unpublished draft, September 2026.. Tame Rigidity.</li>
+<li><strong>Background: Possible Worlds Without Atomicity.</strong> Sun,
+Christopher. Possible Worlds Without Atomicity. Unpublished draft,
+September 2026.. Tame Rigidity.</li>
 </ul>
 </body></html>

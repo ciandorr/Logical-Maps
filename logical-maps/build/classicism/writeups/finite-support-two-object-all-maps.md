@@ -4,6 +4,8 @@
 
 ## Package
 
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **BF.** The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
@@ -19,6 +21,8 @@
 - **□Transversal Choice.** Necessarily, every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **¬ □Atoms are self-atoms (type t).** Necessarily, every atom is a self-atom: necessarily, if it is true, it is an atom.
+- **¬ □Atoms are strong atoms (type t).** Necessarily, every atom is a strong atom.
 - **¬ □BF.** Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.
 - **¬ Atomlessness.** Atomlessness in the displayed closed propositional formulation.
 - **¬ Truth implies ND-necessity.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
@@ -46,6 +50,12 @@ Interpretation of Σ, fixed for this record: every constant of Σ is relational,
 *A member of the group Finitely pinned action models on two objects, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms. Fails □Atoms are self-atoms (type t), □Atoms are strong atoms (type t).
+
+Write $!$ for the only arrow $W_0\to W_1$ and $c_n$ for the arrow $W_1\to W_0$ with value $n$. At $W_1$ every proposition is pinned down by $\{0\}$, so the domain is full and the atoms are the singletons. $\{c_n\}$ is not a self-atom: its transport along $c_n$ is the set of maps $m$ of $\mathbb N$ with $m(n)=n$, pinned down by $\{n\}$ but not an atom. So Atoms are self-atoms (type t), and with it Atoms are strong atoms (type t), fail at $W_1$, which $!$ reaches, and their boxed forms fail at $W_0$. No self-atom contains an arrow into $W_0$ at either object, since its transport along that arrow would be an atom containing $1_{W_0}$ and Actuality fails at $W_0$; so the self-atoms are $\{1_{W_1}\}$ at $W_1$ and $\{!\}$ at $W_0$, the latter pinned down by $\varnothing$ and an atom. Both are strong atoms: $\{!\}$ becomes $\{1_{W_1}\}$ under $!$ and $\{!\}$ under any map of $\mathbb N$, and $\{1_{W_1}\}$ becomes $\{!\}$ under $c_n$. A self-atom of a relational type has a self-atom as its existential projection, so sits over one of these, with one tuple, by the transport condition; so it is an atom and a strong atom. Hence Self-atoms are atoms and Self-atoms are strong atoms hold at both objects, at every type.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds BF. Fails □BF.
 
@@ -213,7 +223,7 @@ The record's revision log before it was written as arguments.
 - **2026-09-25** (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — Merged the two sets of arguments recorded on 23 and 25 September into one, keeping the 23 September argument for Atomicity (type t).
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Expanded the description from Appendix D; settled the Distinctness-preserving collapse. Now violates: Truth implies ND-necessity.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added Relational Choice and its necessitation at Cian Dorr’s direction: ideally full models are extensionally full at every object, and choice in the metatheory supplies the functional subrelation; see the notes. Now satisfies: Relational Choice, □Relational Choice.
-- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of the Strong Leibniz Biconditionals; see the notes. Now violates: Atomicity (type t).
+- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of Strong Atomicity; see the notes. Now violates: Atomicity (type t).
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 - **2026-09-20** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and identity at the evaluation arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct and each has that individual as finite support, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence has empty support and lies in the domain, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).
 - **2026-09-19** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added the failure of Atomlessness at N, witnessed by the proposition that there is exactly one individual, which is the singleton of the arrow to {0}. Original observation; not in the source.

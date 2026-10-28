@@ -323,30 +323,62 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>ND (type t) ∧ BF (type t) ⇒ □ND (type t)</h1></header><p class="cert">
-Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), 16 October 2026, at Cian Dorr’s direction.
+Result — Source: Classicism (2024); produced by Andrew Bacon and Cian
+Dorr; recorded by Claude Opus 5.5 (Anthropic), 16 October 2026, at Cian
+Dorr’s direction.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>ND (type t).</strong> Distinct propositions are necessarily distinct.</li>
-<li><strong>BF (type t).</strong> If every proposition necessarily has a property, then necessarily every proposition has it.</li>
+<li><strong>ND (type t).</strong> Distinct propositions are necessarily
+distinct.</li>
+<li><strong>BF (type t).</strong> If every proposition necessarily has a
+property, then necessarily every proposition has it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□ND (type t).</strong> Necessarily, distinct propositions are necessarily distinct.</li>
+<li><strong>□ND (type t).</strong> Necessarily, distinct propositions
+are necessarily distinct.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>The proof of Proposition 2.4 at type <span class="math inline">t</span>. For propositions <span class="math inline">p,q</span>, the classical identity cases, NI and ND (type t) give <span class="math inline">\Box(p=q)\lor\Box(p\ne q)</span>. Using 4, strengthen the second disjunct to <span class="math inline">\Box\Box(p\ne q)</span>; normal modal reasoning yields <span class="math inline">\Box(p=q\lor\Box(p\ne q))</span>, equivalently <span class="math inline">\Box(p\ne q\to\Box(p\ne q))</span>. Generalize over <span class="math inline">q</span> and apply BF (type t) with <span class="math inline">X:=\lambda q\, .\,(p\ne q\to\Box(p\ne q))</span>, then generalize over <span class="math inline">p</span> and apply it again with <span class="math inline">X:=\lambda p\, .\,\forall q\, .\,(p\ne q\to\Box(p\ne q))</span>, both of type <span class="math inline">t\to t</span>. The result is the boxed closed instance of ND (type t).</p>
+<p>The proof of Proposition 2.4 at type <span
+class="math inline">t</span>. For propositions <span
+class="math inline">p,q</span>, the classical identity cases, NI and ND
+(type t) give <span class="math inline">\Box(p=q)\lor\Box(p\ne
+q)</span>. Using 4, strengthen the second disjunct to <span
+class="math inline">\Box\Box(p\ne q)</span>; normal modal reasoning
+yields <span class="math inline">\Box(p=q\lor\Box(p\ne q))</span>,
+equivalently <span class="math inline">\Box(p\ne q\to\Box(p\ne
+q))</span>. Generalize over <span class="math inline">q</span> and apply
+BF (type t) with <span class="math inline">X:=\lambda q\, .\,(p\ne
+q\to\Box(p\ne q))</span>, then generalize over <span
+class="math inline">p</span> and apply it again with <span
+class="math inline">X:=\lambda p\, .\,\forall q\, .\,(p\ne q\to\Box(p\ne
+q))</span>, both of type <span class="math inline">t\to t</span>. The
+result is the boxed closed instance of ND (type t).</p>
 <h2 id="notes">Notes</h2>
-<p>The type-<span class="math inline">t</span> counterpart of nd-and-bf-imply-necessary-nd, which the engine cannot instantiate on its own.</p>
+<p>The type-<span class="math inline">t</span> counterpart of
+nd-and-bf-imply-necessary-nd, which the engine cannot instantiate on its
+own.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Proposition 2.4, p. 23.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, Proposition 2.4, p. 23.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/nd-t-and-bf-t-imply-necessary-nd-t.yaml</code>
+Record:
+<code>topics/classicism/results/nd-t-and-bf-t-imply-necessary-nd-t.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Proposition 2.4, p. 23. The source states and proves the result across the relational types; this is its type-<span class="math inline">t</span> instance, whose proof uses BF and ND at type <span class="math inline">t</span> only.</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Proposition 2.4, p. 23. The source states and proves the result across
+the relational types; this is its type-<span
+class="math inline">t</span> instance, whose proof uses BF and ND at
+type <span class="math inline">t</span> only.</li>
 </ul>
 </body></html>

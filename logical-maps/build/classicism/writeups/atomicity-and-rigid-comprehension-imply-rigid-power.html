@@ -322,30 +322,181 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Atomicity and Rigid Comprehension imply Rigid Power</h1></header><p>Composed by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026, from Lemma C.6 of Andrew Bacon, <em>Could the truths of mathematics have been different?</em> (draft of 9 October 2025, Appendix C.2, pp. 15–16 of the separately paginated appendix), and the lemma, from Christopher Sun’s <em>Possible Worlds Without Atomicity</em>, that coextensive weakly rigid relations are identical (the proof of rigid-comprehension-implies-tame-rigidity). Lean-verified the same day (<code>lean/Classicism/Results/Arity.lean</code>, <code>atom_power_pullback</code>, <code>atom_rc_rigid_power_core</code> and <code>atom_rc_rigid_power</code>; certificate <code>Classicism.Map.atomicity_and_rigid_comprehension_imply_rigid_power</code>, with the necessitated form and the □BF consequence beside it).</p>
-<p>Bacon’s Leibniz Biconditionals say that every possible relation is entailed by a world relation, a possible relation that entails every relation of its type or its negation; with the paper’s unboxed worlds this is the map’s Atomicity (Background, strong and weak worlds). Lemma C.6 is stated there with the relativized necessity <span class="math inline">\Box_N</span> and used for the Necessity of Analysis; here it is run with <span class="math inline">\Box</span> itself, and its conclusion is turned into Rigid Power.</p>
-<p>Fix a type tuple <span class="math inline">\bar\sigma</span>, let <span class="math inline">F^{\bar\sigma t}</span> be rigid, and put <span class="math inline">P:=\lambda X^{\bar\sigma t}\,.\,\operatorname{Rigid}(X)\land X\le F</span>, of type <span class="math inline">(\bar\sigma t)t</span>. Recall that <span class="math inline">W\le\mathcal Y</span> is necessary pointwise implication, that an atom <span class="math inline">W</span> of a relational type is non-bottom and lies below every <span class="math inline">\mathcal Y</span> of its type or below <span class="math inline">\neg\mathcal Y</span>, and that a weakly rigid relation is persistent (Background).</p>
-<p><strong>Step 0 (<span class="math inline">P</span> is persistent).</strong> Both conjuncts of <span class="math inline">PX</span> are necessitated conditions, <span class="math inline">\operatorname{Rigid}(X)</span> by its definition and <span class="math inline">X\le F</span> as an identity, so <span class="math inline">PX\to\Box PX</span> holds at every world, by 4 and NI.</p>
-<p><strong>Step 1 (Lemma C.6).</strong> Let <span class="math inline">W</span> be an atom of type <span class="math inline">(\bar\sigma t)t</span> with <span class="math inline">W\le P</span>, that is, <span class="math inline">\Box\forall Y\,.\,WY\to\operatorname{Rigid}(Y)\land Y\le F</span>. Then there is a rigid <span class="math inline">X\le F</span> with <span class="math inline">\Box\forall Y\,.\,WY\to Y=X</span>.</p>
-<p><em>Proof.</em> By Rigid Comprehension at <span class="math inline">\bar\sigma t</span> let <span class="math inline">X</span> be rigid and coextensive with <span class="math inline">Q:=\lambda\bar x\,.\,F\bar x\land\Box\forall Y\,.\,WY\to Y\bar x</span>.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Atomicity and Rigid Comprehension imply Rigid Power</h1></header><p>Composed by Claude Fable 5.1 (Anthropic), prompted by Zachary
+Goodsell, 19 October 2026, from Lemma C.6 of Andrew Bacon, <em>Could the
+truths of mathematics have been different?</em> (draft of 9 October
+2025, Appendix C.2, pp. 15–16 of the separately paginated appendix), and
+the lemma, from Christopher Sun’s <em>Possible Worlds Without
+Atomicity</em>, that coextensive weakly rigid relations are identical
+(the proof of rigid-comprehension-implies-tame-rigidity). Lean-verified
+the same day (<code>lean/Classicism/Results/Arity.lean</code>,
+<code>atom_power_pullback</code>, <code>atom_rc_rigid_power_core</code>
+and <code>atom_rc_rigid_power</code>; certificate
+<code>Classicism.Map.atomicity_and_rigid_comprehension_imply_rigid_power</code>,
+with the necessitated form and the □BF consequence beside it).</p>
+<p>Bacon’s Leibniz Biconditionals say that every possible relation is
+entailed by a world relation, a possible relation that entails every
+relation of its type or its negation; with the paper’s unboxed worlds
+this is the map’s Atomicity (Background, strong and atoms). Lemma C.6 is
+stated there with the relativized necessity <span
+class="math inline">\Box_N</span> and used for the Necessity of
+Analysis; here it is run with <span class="math inline">\Box</span>
+itself, and its conclusion is turned into Rigid Power.</p>
+<p>Fix a type tuple <span class="math inline">\bar\sigma</span>, let
+<span class="math inline">F^{\bar\sigma t}</span> be rigid, and put
+<span class="math inline">P:=\lambda X^{\bar\sigma
+t}\,.\,\operatorname{Rigid}(X)\land X\le F</span>, of type <span
+class="math inline">(\bar\sigma t)t</span>. Recall that <span
+class="math inline">W\le\mathcal Y</span> is necessary pointwise
+implication, that an atom <span class="math inline">W</span> of a
+relational type is non-bottom and lies below every <span
+class="math inline">\mathcal Y</span> of its type or below <span
+class="math inline">\neg\mathcal Y</span>, and that a weakly rigid
+relation is persistent (Background).</p>
+<p><strong>Step 0 (<span class="math inline">P</span> is
+persistent).</strong> Both conjuncts of <span
+class="math inline">PX</span> are necessitated conditions, <span
+class="math inline">\operatorname{Rigid}(X)</span> by its definition and
+<span class="math inline">X\le F</span> as an identity, so <span
+class="math inline">PX\to\Box PX</span> holds at every world, by 4 and
+NI.</p>
+<p><strong>Step 1 (Lemma C.6).</strong> Let <span
+class="math inline">W</span> be an atom of type <span
+class="math inline">(\bar\sigma t)t</span> with <span
+class="math inline">W\le P</span>, that is, <span
+class="math inline">\Box\forall Y\,.\,WY\to\operatorname{Rigid}(Y)\land
+Y\le F</span>. Then there is a rigid <span class="math inline">X\le
+F</span> with <span class="math inline">\Box\forall Y\,.\,WY\to
+Y=X</span>.</p>
+<p><em>Proof.</em> By Rigid Comprehension at <span
+class="math inline">\bar\sigma t</span> let <span
+class="math inline">X</span> be rigid and coextensive with <span
+class="math inline">Q:=\lambda\bar x\,.\,F\bar x\land\Box\forall
+Y\,.\,WY\to Y\bar x</span>.</p>
 <ol type="a">
-<li><p><span class="math inline">X\le F</span>. Every actual instance of <span class="math inline">X</span> is an instance of <span class="math inline">F</span>, hence necessarily one, <span class="math inline">F</span> being persistent; the weak inextensibility of <span class="math inline">X</span>, applied to <span class="math inline">F</span>, gives <span class="math inline">X\le F</span>. So <span class="math inline">PX</span>.</p></li>
-<li><p><span class="math inline">\Box\forall Y\,.\,WY\to\forall\bar x\,.\,X\bar x\to Y\bar x</span>. For an actual instance <span class="math inline">\bar x</span> of <span class="math inline">X</span>, <span class="math inline">Q\bar x</span> gives <span class="math inline">\Box\forall Y\,.\,WY\to Y\bar x</span>. The weak inextensibility of <span class="math inline">X</span>, applied to <span class="math inline">\lambda\bar x\,.\,\forall Y\,.\,WY\to Y\bar x</span>, gives <span class="math inline">\Box\forall\bar x\,.\,X\bar x\to\forall Y\,.\,WY\to Y\bar x</span>, which is the claim.</p></li>
-<li><p><span class="math inline">\Box\forall Y\,.\,WY\to\forall\bar x\,.\,Y\bar x\to X\bar x</span>. Let <span class="math inline">\bar x</span> be an actual instance of <span class="math inline">F</span>. If <span class="math inline">X\bar x</span>, then <span class="math inline">\Box X\bar x</span> by persistence. If not, then <span class="math inline">\neg\Box\forall Y\,.\,WY\to Y\bar x</span>, that is <span class="math inline">W\not\le\lambda Y\,.\,Y\bar x</span>, so, <span class="math inline">W</span> being an atom, <span class="math inline">W\le\lambda Y\,.\,\neg Y\bar x</span>: <span class="math inline">\Box\forall Y\,.\,WY\to\neg Y\bar x</span>. Either way <span class="math inline">\Box\forall Y\,.\,WY\to Y\bar x\to X\bar x</span>. The weak inextensibility of <span class="math inline">F</span>, applied to <span class="math inline">\lambda\bar x\,.\,\forall Y\,.\,WY\to Y\bar x\to X\bar x</span>, gives <span class="math inline">\Box\forall\bar x\,.\,F\bar x\to\forall Y\,.\,WY\to Y\bar x\to X\bar x</span>. At any world, if <span class="math inline">WY</span> then <span class="math inline">Y\le F</span>, so by T every instance of <span class="math inline">Y</span> there is an instance of <span class="math inline">F</span>, hence of <span class="math inline">X</span>.</p></li>
-<li><p>At any world where <span class="math inline">WY</span>: <span class="math inline">Y</span> is rigid, since <span class="math inline">W\le P</span>; <span class="math inline">X</span> is rigid, rigidity being a necessitated condition; and by (b) and (c) they are coextensive. Coextensive weakly rigid relations are identical, a theorem of C, so <span class="math inline">Y=X</span> there. <span class="math inline">\square</span></p></li>
+<li><p><span class="math inline">X\le F</span>. Every actual instance of
+<span class="math inline">X</span> is an instance of <span
+class="math inline">F</span>, hence necessarily one, <span
+class="math inline">F</span> being persistent; the weak inextensibility
+of <span class="math inline">X</span>, applied to <span
+class="math inline">F</span>, gives <span class="math inline">X\le
+F</span>. So <span class="math inline">PX</span>.</p></li>
+<li><p><span class="math inline">\Box\forall Y\,.\,WY\to\forall\bar
+x\,.\,X\bar x\to Y\bar x</span>. For an actual instance <span
+class="math inline">\bar x</span> of <span class="math inline">X</span>,
+<span class="math inline">Q\bar x</span> gives <span
+class="math inline">\Box\forall Y\,.\,WY\to Y\bar x</span>. The weak
+inextensibility of <span class="math inline">X</span>, applied to <span
+class="math inline">\lambda\bar x\,.\,\forall Y\,.\,WY\to Y\bar
+x</span>, gives <span class="math inline">\Box\forall\bar x\,.\,X\bar
+x\to\forall Y\,.\,WY\to Y\bar x</span>, which is the claim.</p></li>
+<li><p><span class="math inline">\Box\forall Y\,.\,WY\to\forall\bar
+x\,.\,Y\bar x\to X\bar x</span>. Let <span class="math inline">\bar
+x</span> be an actual instance of <span class="math inline">F</span>. If
+<span class="math inline">X\bar x</span>, then <span
+class="math inline">\Box X\bar x</span> by persistence. If not, then
+<span class="math inline">\neg\Box\forall Y\,.\,WY\to Y\bar x</span>,
+that is <span class="math inline">W\not\le\lambda Y\,.\,Y\bar x</span>,
+so, <span class="math inline">W</span> being an atom, <span
+class="math inline">W\le\lambda Y\,.\,\neg Y\bar x</span>: <span
+class="math inline">\Box\forall Y\,.\,WY\to\neg Y\bar x</span>. Either
+way <span class="math inline">\Box\forall Y\,.\,WY\to Y\bar x\to X\bar
+x</span>. The weak inextensibility of <span
+class="math inline">F</span>, applied to <span
+class="math inline">\lambda\bar x\,.\,\forall Y\,.\,WY\to Y\bar x\to
+X\bar x</span>, gives <span class="math inline">\Box\forall\bar
+x\,.\,F\bar x\to\forall Y\,.\,WY\to Y\bar x\to X\bar x</span>. At any
+world, if <span class="math inline">WY</span> then <span
+class="math inline">Y\le F</span>, so by T every instance of <span
+class="math inline">Y</span> there is an instance of <span
+class="math inline">F</span>, hence of <span
+class="math inline">X</span>.</p></li>
+<li><p>At any world where <span class="math inline">WY</span>: <span
+class="math inline">Y</span> is rigid, since <span
+class="math inline">W\le P</span>; <span class="math inline">X</span> is
+rigid, rigidity being a necessitated condition; and by (b) and (c) they
+are coextensive. Coextensive weakly rigid relations are identical, a
+theorem of C, so <span class="math inline">Y=X</span> there. <span
+class="math inline">\square</span></p></li>
 </ol>
-<p><strong>Step 2 (<span class="math inline">P</span> is weakly inextensible).</strong> Let <span class="math inline">\mathcal X^{((\bar\sigma t)t)t}</span> satisfy <span class="math inline">\forall X\,.\,PX\to\Box\mathcal XX</span>, and suppose <span class="math inline">P\not\le\mathcal X</span>: the property <span class="math inline">Q&#39;:=\lambda X\,.\,PX\land\neg\mathcal XX</span> is possibly instantiated, so it is not bottom. Atomicity at type <span class="math inline">(\bar\sigma t)t</span> gives an atom <span class="math inline">W\le Q&#39;</span>; then <span class="math inline">W\le P</span>, and Step 1 gives a rigid <span class="math inline">X\le F</span> with <span class="math inline">\Box\forall Y\,.\,WY\to Y=X</span>. Since <span class="math inline">PX</span>, <span class="math inline">\Box\mathcal XX</span>. But <span class="math inline">W</span> is possible: at some world some <span class="math inline">Y</span> has <span class="math inline">WY</span>, so <span class="math inline">Y=X</span> and, as <span class="math inline">W\le Q&#39;</span>, <span class="math inline">\neg\mathcal XY</span>, that is <span class="math inline">\neg\mathcal XX</span>, contradicting <span class="math inline">\Box\mathcal XX</span>.</p>
-<p><strong>Step 3 (<span class="math inline">P</span> is rigid).</strong> By Steps 0 and 2, <span class="math inline">P</span> is weakly rigid. Rigid Comprehension at <span class="math inline">(\bar\sigma t)t</span> gives Tame Rigidity at that type (rigid-comprehension-implies-tame-rigidity): a rigid relation coextensive with <span class="math inline">P</span> is identical to it. So <span class="math inline">P</span> is rigid, which is Rigid Power at <span class="math inline">\bar\sigma t</span>. <span class="math inline">\blacksquare</span></p>
+<p><strong>Step 2 (<span class="math inline">P</span> is weakly
+inextensible).</strong> Let <span class="math inline">\mathcal
+X^{((\bar\sigma t)t)t}</span> satisfy <span class="math inline">\forall
+X\,.\,PX\to\Box\mathcal XX</span>, and suppose <span
+class="math inline">P\not\le\mathcal X</span>: the property <span
+class="math inline">Q&#39;:=\lambda X\,.\,PX\land\neg\mathcal XX</span>
+is possibly instantiated, so it is not bottom. Atomicity at type <span
+class="math inline">(\bar\sigma t)t</span> gives an atom <span
+class="math inline">W\le Q&#39;</span>; then <span
+class="math inline">W\le P</span>, and Step 1 gives a rigid <span
+class="math inline">X\le F</span> with <span
+class="math inline">\Box\forall Y\,.\,WY\to Y=X</span>. Since <span
+class="math inline">PX</span>, <span class="math inline">\Box\mathcal
+XX</span>. But <span class="math inline">W</span> is possible: at some
+world some <span class="math inline">Y</span> has <span
+class="math inline">WY</span>, so <span class="math inline">Y=X</span>
+and, as <span class="math inline">W\le Q&#39;</span>, <span
+class="math inline">\neg\mathcal XY</span>, that is <span
+class="math inline">\neg\mathcal XX</span>, contradicting <span
+class="math inline">\Box\mathcal XX</span>.</p>
+<p><strong>Step 3 (<span class="math inline">P</span> is
+rigid).</strong> By Steps 0 and 2, <span class="math inline">P</span> is
+weakly rigid. Rigid Comprehension at <span
+class="math inline">(\bar\sigma t)t</span> gives Tame Rigidity at that
+type (rigid-comprehension-implies-tame-rigidity): a rigid relation
+coextensive with <span class="math inline">P</span> is identical to it.
+So <span class="math inline">P</span> is rigid, which is Rigid Power at
+<span class="math inline">\bar\sigma t</span>. <span
+class="math inline">\blacksquare</span></p>
 <h2 id="remarks">Remarks</h2>
 <ul>
-<li>Atomicity is used only at the type of the power property, and Rigid Comprehension at <span class="math inline">\bar\sigma t</span> (Step 1) and at <span class="math inline">(\bar\sigma t)t</span> (Step 3), all at the evaluation point; BF, B and 5 do not appear. This answers the question left open in CANDIDATES.md, whether unboxed BF, Atomicity and Rigid Comprehension give Rigid Power: they do, and BF is not needed.</li>
-<li>Steps 0–2 use of <span class="math inline">F</span> only its persistence and weak inextensibility. So Atomicity at <span class="math inline">(\bar\sigma t)t</span> with Rigid Comprehension at <span class="math inline">\bar\sigma t</span> already gives the variant <span class="math inline">(W,R,W)</span> of CANDIDATES.md: the power property of every weakly rigid relation is weakly rigid.</li>
-<li>The argument is a derivation in C from instances of the two premises, so its necessitation gives □Atomicity and □Rigid Comprehension imply □Rigid Power (necessary-atomicity-and-necessary-rigid-comprehension-imply-necessary-rigid-power), without the □BF of necessary-bf-atomicity-and-rigid-comprehension-imply-necessary-rigid-power.</li>
-<li>Atomicity at type <span class="math inline">t</span> does not suffice, even boxed and with □Rigid Comprehension: the stitched forcing model stitched-cohen-extension has □Atomicity (type <span class="math inline">t</span>), □Rigid Comprehension and □Relational Choice, and Rigid Power fails in it.</li>
+<li>Atomicity is used only at the type of the power property, and Rigid
+Comprehension at <span class="math inline">\bar\sigma t</span> (Step 1)
+and at <span class="math inline">(\bar\sigma t)t</span> (Step 3), all at
+the evaluation point; BF, B and 5 do not appear. This answers the
+question left open in CANDIDATES.md, whether unboxed BF, Atomicity and
+Rigid Comprehension give Rigid Power: they do, and BF is not
+needed.</li>
+<li>Steps 0–2 use of <span class="math inline">F</span> only its
+persistence and weak inextensibility. So Atomicity at <span
+class="math inline">(\bar\sigma t)t</span> with Rigid Comprehension at
+<span class="math inline">\bar\sigma t</span> already gives the variant
+<span class="math inline">(W,R,W)</span> of CANDIDATES.md: the power
+property of every weakly rigid relation is weakly rigid.</li>
+<li>The argument is a derivation in C from instances of the two
+premises, so its necessitation gives □Atomicity and □Rigid Comprehension
+imply □Rigid Power
+(necessary-atomicity-and-necessary-rigid-comprehension-imply-necessary-rigid-power),
+without the □BF of
+necessary-bf-atomicity-and-rigid-comprehension-imply-necessary-rigid-power.</li>
+<li>Atomicity at type <span class="math inline">t</span> does not
+suffice, even boxed and with □Rigid Comprehension: the stitched forcing
+model stitched-cohen-extension has □Atomicity (type <span
+class="math inline">t</span>), □Rigid Comprehension and □Relational
+Choice, and Rigid Power fails in it.</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: <a href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could the truths of mathematics have been different?</a>.</strong> Bacon, Andrew (2025). Could the truths of mathematics have been different? Draft dated 9 October 2025, with online appendix; published in Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and Goodsell. Locators refer to the draft. The full Boolean-valued construction is in appendix §B.2, pp. 7–9 of the separately paginated appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — Appendix C.2, Lemma C.6, pp. 15–16 of the appendix; §5, p. 23. Lemma C.6 pulls a possible rigid subrelation of a rigid relation, singled out by a world property, back to an actual one identical to it; the paper states it with the relativized necessity □_N and uses it for the Necessity of Analysis. Its Leibniz Biconditionals, with unboxed world relations, are the map’s Atomicity.</li>
-<li><strong>Proof: Possible Worlds Without Atomicity.</strong> Sun, Christopher. Possible Worlds Without Atomicity. Unpublished draft, September 2026.. Coextensive weakly rigid relations are identical, so Rigid Comprehension gives Tame Rigidity; this turns the weak rigidity of the power property into rigidity.</li>
+<li><strong>Proof: <a
+href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could
+the truths of mathematics have been different?</a>.</strong> Bacon,
+Andrew (2025). Could the truths of mathematics have been different?
+Draft dated 9 October 2025, with online appendix; published in
+Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and
+Goodsell. Locators refer to the draft. The full Boolean-valued
+construction is in appendix §B.2, pp. 7–9 of the separately paginated
+appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and
+Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. —
+Appendix C.2, Lemma C.6, pp. 15–16 of the appendix; §5, p. 23. Lemma C.6
+pulls a possible rigid subrelation of a rigid relation, singled out by a
+world property, back to an actual one identical to it; the paper states
+it with the relativized necessity □_N and uses it for the Necessity of
+Analysis. Its Leibniz Biconditionals, with unboxed world relations, are
+the map’s Atomicity.</li>
+<li><strong>Proof: Possible Worlds Without Atomicity.</strong> Sun,
+Christopher. Possible Worlds Without Atomicity. Unpublished draft,
+September 2026.. Coextensive weakly rigid relations are identical, so
+Rigid Comprehension gives Tame Rigidity; this turns the weak rigidity of
+the power property into rigidity.</li>
 </ul>
 </body></html>

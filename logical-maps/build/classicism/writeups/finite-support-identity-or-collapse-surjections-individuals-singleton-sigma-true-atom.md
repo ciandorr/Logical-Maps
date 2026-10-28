@@ -4,6 +4,8 @@
 
 ## Package
 
+- **□Self-Atomicity.** Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a self-atom: a possible entity that necessarily, if instantiated, is an atom.
+- **□Self-Atomicity (type t).** Necessarily, every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Actuality.** There is a true proposition that entails every true proposition.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
@@ -17,6 +19,8 @@
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
+- **¬ Self-atoms are strong atoms (type t).** Every self-atom is a strong atom.
 - **¬ Atomicity.** Every non-bottom entity of each relational type has an atom below it.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ Boolean Completeness (type t).** Every property of propositions has a greatest lower bound.
@@ -41,6 +45,18 @@ Interpretation of Σ, fixed for this record: one designated relational constant 
 *A member of the group Finite-support action models on one object, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Self-Atomicity.
+
+Self-Atomicity at every relational type, necessarily, there being one object. Let $I\ne\bot$ be an entity of type $\bar\sigma t$, pinned down by $N$, with a pair $\langle k,\bar x\rangle$ in it. If $k=1$, the singleton of the pair is in the domain, pinned down by $\{0,1\}$, and is a self-atom. Otherwise $k$ is a collapse with $k(0)=k(1)=0$ and $k(y)=1$ for some $y$; let $N^{\prime}:=N\cup\{0,y\}$ and $J$ the set of pairs $\langle k_1,\bar x\rangle$ with $k_1$ agreeing with $k$ on $N^{\prime}$, below $I$ and pinned down by $N^{\prime}$. Its transport along $\langle k_1,\bar x\rangle$ is the set of $\langle m,\bar x\rangle$ with $m$ fixing $k(N^{\prime})\supseteq\{0,1\}$ pointwise, which only the identity does; so it is the singleton of $\langle1,\bar x\rangle$, an atom, and $J$ is a self-atom below $I$.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
+### Holds □Self-Atomicity (type t). Fails Self-atoms are atoms (type t), Self-atoms are strong atoms (type t).
+
+$\{1\}$ is in the domain and is the only atom, the propositions over the collapses refining. A monotone surjection sends $0$ to $0$, so a collapse $k$ has $k(0)=k(1)=0$ and $k(y)=1$ for some $y$. For such $k$ and a finite $N\supseteq\{0,y\}$, the set $q$ of collapses agreeing with $k$ on $N$ is pinned down by $N$, and a collapse $m$ has $m\circ k^{\prime}\in q$, for $k^{\prime}\in q$, only if it fixes $k^{\prime}(N)\supseteq\{0,1\}$ pointwise, which no collapse does; so the transport of $q$ along each member is $\{1\}$, and $q$ is a self-atom, not an atom. So Self-atoms are atoms (type t) fails, and with it Self-atoms are strong atoms (type t). Self-Atomicity (type t) holds, and necessarily, there being one object: a possible proposition contains $1$, and then $\{1\}$, or a collapse $k$, and then, being pinned down by some $N$, the self-atom built from $k$ and $N\cup\{0,y\}$. The relational form is the argument that follows.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Axiom of Infinity (type t).
 

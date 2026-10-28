@@ -53,7 +53,7 @@ The same enumeration gives Witnessed Possibility and Modal Freedom (a conjunctio
 | factor | arrow | job |
 |---|---|---|
 | $F_\infty$ | the generators $f_k$ | free gluing sites (Lemma 4): Logical Necessity |
-| $E$ | the idempotent $e$ | a non-epic arrow with no retraction: BF fails; also the irreversible arrow and the Strong Leibniz failure of Classicism's two-arrow idempotent model |
+| $E$ | the idempotent $e$ | a non-epic arrow with no retraction: BF fails; also the irreversible arrow and Strong Atomicity failure of Classicism's two-arrow idempotent model |
 | $B$ | $b$, retracted by $c$ | a split monomorphism that is not a unit: $\Box_{\ne}\ne\hat{\hat\Box}$, collapse at the second hat |
 | $\mathbb Z_2$ | the involution $s$ | a non-identity unit: a truth that is not 5-necessary |
 

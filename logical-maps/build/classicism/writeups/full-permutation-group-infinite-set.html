@@ -322,55 +322,320 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full action model: permutations of an infinite set</h1></header><p>This note verifies the record <code>full-permutation-group-infinite-set</code>. The construction is the source’s full <span class="math inline">M</span>-set model (Classicism, §3.5, pp. 58–59; Bacon 2020, Appendix A.2), specialised to a group.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full action model: permutations of an infinite set</h1></header><p>This note verifies the record
+<code>full-permutation-group-infinite-set</code>. The construction is
+the source’s full <span class="math inline">M</span>-set model
+(Classicism, §3.5, pp. 58–59; Bacon 2020, Appendix A.2), specialised to
+a group.</p>
 <h2 id="the-model">1. The model</h2>
-<p>Let <span class="math inline">X</span> be a countably infinite set and <span class="math inline">G=\operatorname{Sym}(X)</span> the group of all permutations of <span class="math inline">X</span>, regarded as a one-object category whose arrows are the elements of <span class="math inline">G</span>, composed as functions; write <span class="math inline">ji</span> for <span class="math inline">j\circ i</span> and <span class="math inline">1</span> for the identity. The domains are:</p>
+<p>Let <span class="math inline">X</span> be a countably infinite set
+and <span class="math inline">G=\operatorname{Sym}(X)</span> the group
+of all permutations of <span class="math inline">X</span>, regarded as a
+one-object category whose arrows are the elements of <span
+class="math inline">G</span>, composed as functions; write <span
+class="math inline">ji</span> for <span class="math inline">j\circ
+i</span> and <span class="math inline">1</span> for the identity. The
+domains are:</p>
 <ul>
-<li><span class="math inline">W^e=X</span>, with <span class="math inline">i\cdot a=i(a)</span>;</li>
-<li><span class="math inline">W^t=\mathcal P(G)</span>, with the division action <span class="math inline">i\cdot p=\{j : ji\in p\}</span>;</li>
-<li><span class="math inline">W^{\sigma\to\tau}=W^\sigma\Rightarrow W^\tau</span>, the function-space <span class="math inline">M</span>-set: the functions <span class="math inline">f:W^\sigma\to W^\tau</span> such that <span class="math inline">i\cdot a=i\cdot a&#39;</span> implies <span class="math inline">i\cdot fa=i\cdot fa&#39;</span>, with <span class="math inline">(i\cdot f)(i\cdot a)=i\cdot(fa)</span>.</li>
+<li><span class="math inline">W^e=X</span>, with <span
+class="math inline">i\cdot a=i(a)</span>;</li>
+<li><span class="math inline">W^t=\mathcal P(G)</span>, with the
+division action <span class="math inline">i\cdot p=\{j : ji\in
+p\}</span>;</li>
+<li><span class="math inline">W^{\sigma\to\tau}=W^\sigma\Rightarrow
+W^\tau</span>, the function-space <span
+class="math inline">M</span>-set: the functions <span
+class="math inline">f:W^\sigma\to W^\tau</span> such that <span
+class="math inline">i\cdot a=i\cdot a&#39;</span> implies <span
+class="math inline">i\cdot fa=i\cdot fa&#39;</span>, with <span
+class="math inline">(i\cdot f)(i\cdot a)=i\cdot(fa)</span>.</li>
 </ul>
-<p>Application is function application, and the logical constants have their standard denotations: the Boolean operations act pointwise on sets of arrows, <span class="math inline">\forall_\sigma(f)=\bigcap_{a\in W^\sigma}f(a)</span>, <span class="math inline">[a=_\sigma b]=\{i : i\cdot a=i\cdot b\}</span>, and <span class="math inline">[\Box p]=\{i : ji\in p\text{ for all }j\}</span>. A sentence is true at the arrow <span class="math inline">i</span> when <span class="math inline">i</span> belongs to the proposition it denotes; the evaluation point is <span class="math inline">1</span>. By Classicism, Theorem 3.23 (soundness), every theorem of C is true at every arrow.</p>
-<p>Constants of Σ, for the record: each relational constant denotes <span class="math inline">\top_\tau=\lambda\bar x\, .\,G</span>, and each individual constant denotes one fixed <span class="math inline">d\in X</span>.</p>
-<p><strong>Lemma 1 (group facts).</strong> For every arrow <span class="math inline">i</span> and type <span class="math inline">\sigma</span>:</p>
+<p>Application is function application, and the logical constants have
+their standard denotations: the Boolean operations act pointwise on sets
+of arrows, <span class="math inline">\forall_\sigma(f)=\bigcap_{a\in
+W^\sigma}f(a)</span>, <span class="math inline">[a=_\sigma b]=\{i :
+i\cdot a=i\cdot b\}</span>, and <span class="math inline">[\Box p]=\{i :
+ji\in p\text{ for all }j\}</span>. A sentence is true at the arrow <span
+class="math inline">i</span> when <span class="math inline">i</span>
+belongs to the proposition it denotes; the evaluation point is <span
+class="math inline">1</span>. By Classicism, Theorem 3.23 (soundness),
+every theorem of C is true at every arrow.</p>
+<p>Constants of Σ, for the record: each relational constant denotes
+<span class="math inline">\top_\tau=\lambda\bar x\, .\,G</span>, and
+each individual constant denotes one fixed <span
+class="math inline">d\in X</span>.</p>
+<p><strong>Lemma 1 (group facts).</strong> For every arrow <span
+class="math inline">i</span> and type <span
+class="math inline">\sigma</span>:</p>
 <ol type="1">
-<li><span class="math inline">i^\sigma:W^\sigma\to W^\sigma</span>, <span class="math inline">x\mapsto i\cdot x</span>, is a bijection with inverse <span class="math inline">(i^{-1})^\sigma</span>.</li>
-<li><span class="math inline">W^\sigma\Rightarrow W^\tau</span> is the set of all functions <span class="math inline">W^\sigma\to W^\tau</span>, and <span class="math inline">i\cdot f=i^\tau\circ f\circ(i^{-1})^\sigma</span>.</li>
-<li><span class="math inline">[\Box p]=G</span> if <span class="math inline">p=G</span> and <span class="math inline">\emptyset</span> otherwise; <span class="math inline">[\Diamond p]=G</span> if <span class="math inline">p\ne\emptyset</span> and <span class="math inline">\emptyset</span> otherwise.</li>
-<li><span class="math inline">[a=b]=G</span> if <span class="math inline">a=b</span> and <span class="math inline">\emptyset</span> otherwise.</li>
-<li><span class="math inline">X\le_\tau Y</span>, that is <span class="math inline">\Box\forall\bar x\, .\,X\bar x\to Y\bar x</span>, denotes <span class="math inline">G</span> if <span class="math inline">X(\bar a)\subseteq Y(\bar a)</span> for all <span class="math inline">\bar a</span> and <span class="math inline">\emptyset</span> otherwise; and a relational entity is <span class="math inline">\bot_\tau</span> exactly when it takes the value <span class="math inline">\emptyset</span> everywhere.</li>
+<li><span class="math inline">i^\sigma:W^\sigma\to W^\sigma</span>,
+<span class="math inline">x\mapsto i\cdot x</span>, is a bijection with
+inverse <span class="math inline">(i^{-1})^\sigma</span>.</li>
+<li><span class="math inline">W^\sigma\Rightarrow W^\tau</span> is the
+set of all functions <span class="math inline">W^\sigma\to
+W^\tau</span>, and <span class="math inline">i\cdot f=i^\tau\circ
+f\circ(i^{-1})^\sigma</span>.</li>
+<li><span class="math inline">[\Box p]=G</span> if <span
+class="math inline">p=G</span> and <span
+class="math inline">\emptyset</span> otherwise; <span
+class="math inline">[\Diamond p]=G</span> if <span
+class="math inline">p\ne\emptyset</span> and <span
+class="math inline">\emptyset</span> otherwise.</li>
+<li><span class="math inline">[a=b]=G</span> if <span
+class="math inline">a=b</span> and <span
+class="math inline">\emptyset</span> otherwise.</li>
+<li><span class="math inline">X\le_\tau Y</span>, that is <span
+class="math inline">\Box\forall\bar x\, .\,X\bar x\to Y\bar x</span>,
+denotes <span class="math inline">G</span> if <span
+class="math inline">X(\bar a)\subseteq Y(\bar a)</span> for all <span
+class="math inline">\bar a</span> and <span
+class="math inline">\emptyset</span> otherwise; and a relational entity
+is <span class="math inline">\bot_\tau</span> exactly when it takes the
+value <span class="math inline">\emptyset</span> everywhere.</li>
 </ol>
-<p><em>Proof.</em> (1) <span class="math inline">i\cdot(i^{-1}\cdot x)=(ii^{-1})\cdot x=x</span>. (2) The defining condition of the function-space <span class="math inline">M</span>-set is vacuous, since <span class="math inline">i\cdot a=i\cdot a&#39;</span> forces <span class="math inline">a=a&#39;</span> by (1); the formula for <span class="math inline">i\cdot f</span> restates its definition. (3) As <span class="math inline">j</span> ranges over <span class="math inline">G</span> so does <span class="math inline">ji</span>, so <span class="math inline">ji\in p</span> for all <span class="math inline">j</span> iff <span class="math inline">p=G</span>; dually for <span class="math inline">\Diamond</span>. (4) By injectivity of <span class="math inline">i^\sigma</span>. (5) From (3) and the pointwise Boolean operations, since <span class="math inline">\forall</span> is intersection. <span class="math inline">\square</span></p>
-<p>So the propositional modal logic is S5 with the arrows as worlds, and necessity, possibility, identity and entailment are all uniform: their truth values do not depend on the arrow.</p>
-<p><strong>Lemma 2 (No Pure Contingency).</strong> Every closed pure sentence true at <span class="math inline">1</span> is true at every arrow; more generally the denotation of a closed pure term is fixed by every arrow, and for a pure term <span class="math inline">A</span> with free variables and an assignment <span class="math inline">g</span>, <span class="math inline">i\cdot[A]^g=[A]^{i\cdot g}</span>.</p>
-<p><em>Proof.</em> This is the source’s one-object observation (Classicism, §3.5, p. 58): the logical constants are fixed by every arrow (Bacon 2020, Proposition A.5, and the same computation for identity and the box), and the action commutes with application and abstraction, so the claim follows by induction on terms. <span class="math inline">\square</span></p>
-<p>Consequently every boxed principle below follows from its unboxed form: the closed instances are pure sentences, true at <span class="math inline">1</span>, hence true at every arrow, and <span class="math inline">\Box P</span> is true at <span class="math inline">1</span> iff <span class="math inline">P</span> is true at every arrow.</p>
+<p><em>Proof.</em> (1) <span class="math inline">i\cdot(i^{-1}\cdot
+x)=(ii^{-1})\cdot x=x</span>. (2) The defining condition of the
+function-space <span class="math inline">M</span>-set is vacuous, since
+<span class="math inline">i\cdot a=i\cdot a&#39;</span> forces <span
+class="math inline">a=a&#39;</span> by (1); the formula for <span
+class="math inline">i\cdot f</span> restates its definition. (3) As
+<span class="math inline">j</span> ranges over <span
+class="math inline">G</span> so does <span
+class="math inline">ji</span>, so <span class="math inline">ji\in
+p</span> for all <span class="math inline">j</span> iff <span
+class="math inline">p=G</span>; dually for <span
+class="math inline">\Diamond</span>. (4) By injectivity of <span
+class="math inline">i^\sigma</span>. (5) From (3) and the pointwise
+Boolean operations, since <span class="math inline">\forall</span> is
+intersection. <span class="math inline">\square</span></p>
+<p>So the propositional modal logic is S5 with the arrows as worlds, and
+necessity, possibility, identity and entailment are all uniform: their
+truth values do not depend on the arrow.</p>
+<p><strong>Lemma 2 (No Pure Contingency).</strong> Every closed pure
+sentence true at <span class="math inline">1</span> is true at every
+arrow; more generally the denotation of a closed pure term is fixed by
+every arrow, and for a pure term <span class="math inline">A</span> with
+free variables and an assignment <span class="math inline">g</span>,
+<span class="math inline">i\cdot[A]^g=[A]^{i\cdot g}</span>.</p>
+<p><em>Proof.</em> This is the source’s one-object observation
+(Classicism, §3.5, p. 58): the logical constants are fixed by every
+arrow (Bacon 2020, Proposition A.5, and the same computation for
+identity and the box), and the action commutes with application and
+abstraction, so the claim follows by induction on terms. <span
+class="math inline">\square</span></p>
+<p>Consequently every boxed principle below follows from its unboxed
+form: the closed instances are pure sentences, true at <span
+class="math inline">1</span>, hence true at every arrow, and <span
+class="math inline">\Box P</span> is true at <span
+class="math inline">1</span> iff <span class="math inline">P</span> is
+true at every arrow.</p>
 <h2 id="principles-that-hold">2. Principles that hold</h2>
-<p><strong>ND and <span class="math inline">\Box</span>ND.</strong> By Lemma 1(1) every <span class="math inline">h^\sigma</span> is injective, so ND<span class="math inline">_\sigma</span> holds by Classicism, Proposition 3.24(i); the necessitation follows by Lemma 2.</p>
-<p><strong>BF and <span class="math inline">\Box</span>BF.</strong> Every <span class="math inline">h^\sigma</span> is surjective, so BF<span class="math inline">_\sigma</span> holds by Proposition 3.24(ii); <span class="math inline">\Box</span>BF by Lemma 2 or by n. 84.</p>
-<p><strong>5, B and their necessitations.</strong> By Lemma 1(3), <span class="math inline">[\Diamond p]\in\{\emptyset,G\}</span>, so <span class="math inline">\Diamond p\to\Box\Diamond p</span> denotes <span class="math inline">G</span>; B follows from 5 and T.</p>
-<p><strong>Atomicity and Actuality, necessitated.</strong> Classicism, p. 61: the model is propositionally full. Explicitly, for <span class="math inline">\tau=\bar\sigma\to t</span> and <span class="math inline">Y\ne\bot_\tau</span> pick <span class="math inline">\bar a</span> and <span class="math inline">h</span> with <span class="math inline">h\in Y(\bar a)</span>; the function taking <span class="math inline">\bar a</span> to <span class="math inline">\{h\}</span> and every other tuple to <span class="math inline">\emptyset</span> lies in <span class="math inline">W^\tau</span> by Lemma 1(2), is an atom under the pointwise order of Lemma 1(5), and lies below <span class="math inline">Y</span>. At the arrow <span class="math inline">i</span> the proposition <span class="math inline">\{i\}</span> is true and entails every truth.</p>
-<p><strong>Boolean Completeness, necessitated.</strong> For <span class="math inline">Z:\tau\to t</span> the set <span class="math inline">\{Y : i\in Z(Y)\}</span> has a pointwise intersection, which lies in <span class="math inline">W^\tau</span> and is its greatest lower bound under <span class="math inline">\le_\tau</span> by Lemma 1(5), at every arrow <span class="math inline">i</span>.</p>
-<p><strong>Rigid Comprehension and Gallin Extensional Comprehension, necessitated.</strong> Classicism, p. 61: the model is intensionally full. Explicitly, given <span class="math inline">Y</span> of type <span class="math inline">\bar\sigma\to t</span> let <span class="math inline">Y&#39;(\bar a)=G</span> if <span class="math inline">1\in Y(\bar a)</span> and <span class="math inline">\emptyset</span> otherwise. Then <span class="math inline">Y&#39;</span> is coextensive with <span class="math inline">Y</span> at <span class="math inline">1</span>, and both <span class="math inline">Y&#39;</span> and <span class="math inline">\neg Y&#39;</span> take only the values <span class="math inline">\emptyset</span> and <span class="math inline">G</span>, so both are persistent and <span class="math inline">Y&#39;</span> is rigid. The same at every arrow.</p>
-<p><strong>Functionality, necessitated; Tractarianism.</strong> If <span class="math inline">Xz=Yz</span> is true at <span class="math inline">i</span> for every <span class="math inline">z</span> then <span class="math inline">X(a)=Y(a)</span> for all <span class="math inline">a</span> by Lemma 1(4), so <span class="math inline">X=Y</span> and <span class="math inline">[X=Y]=G</span>. Tractarianism follows by the recorded result, or directly: if <span class="math inline">p\subseteq X(a)</span> for all <span class="math inline">a</span> then <span class="math inline">p\subseteq\bigcap_aX(a)</span>.</p>
-<p><strong>Plenitude, Functional Choice and Relational Choice, necessitated.</strong> Let <span class="math inline">U</span> of type <span class="math inline">\sigma\to\tau\to t</span> be serial at the arrow <span class="math inline">i</span>: for every <span class="math inline">y</span> some <span class="math inline">z</span> has <span class="math inline">i\in U(y)(z)</span>. Choose such a <span class="math inline">z</span> for each <span class="math inline">y</span> (choice in the metatheory; when <span class="math inline">U</span> is functional the choice is forced); the resulting function <span class="math inline">F</span> lies in <span class="math inline">W^{\sigma\to\tau}</span> by Lemma 1(2) and <span class="math inline">\forall y\, .\,(Uy)(Fy)</span> is true at <span class="math inline">i</span>. For Relational Choice take <span class="math inline">S(y)(z)=[z=Fy]</span>, which is <span class="math inline">G</span> or <span class="math inline">\emptyset</span> by Lemma 1(4), so <span class="math inline">S</span> is functional at every arrow and <span class="math inline">(Sy)z\to(Uy)z</span> is true at <span class="math inline">i</span>.</p>
-<p><strong>Infinity.</strong> Identity at <span class="math inline">1</span> is literal by Lemma 1(4), and since the model is full the set of numerals at each type is the extension of an element of the domain and is inductive, so <span class="math inline">\operatorname{FiniteCardinality}_\sigma</span> holds exactly of the numerals, and the <span class="math inline">k</span>-th numeral holds of a property exactly when its extension has <span class="math inline">k</span> members. The extension of <span class="math inline">\lambda u\, .\,\top</span> is <span class="math inline">X</span> at type <span class="math inline">e</span> and <span class="math inline">\mathcal P(G)</span> at type <span class="math inline">t</span>, both infinite, so the Axiom of Infinity holds at both types, and with it the Infinity Schema at type <span class="math inline">e</span>: the individuals are pairwise distinct at <span class="math inline">1</span>.</p>
-<p><strong>No Pure Contingency</strong> is Lemma 2; Necessity of Arithmetic follows by the recorded result.</p>
-<p><strong>Converse Witnessed Possibility</strong>, under any interpretation of Σ. Let <span class="math inline">P</span> be pure with free variables <span class="math inline">\bar x</span> and suppose <span class="math inline">\Diamond P[\bar c]</span> is true, so some arrow <span class="math inline">i</span> lies in <span class="math inline">[P](\bar c)</span>. Then <span class="math inline">1\in i\cdot[P](\bar c)=[P](i\cdot\bar c)</span> by Lemma 2, so <span class="math inline">P</span> holds at <span class="math inline">1</span> of the entities <span class="math inline">i\cdot\bar c</span> and <span class="math inline">\exists\bar x\, .\,P</span> is true.</p>
-<p><strong>No Contingency (signature Σ)</strong>, under the record’s interpretation.</p>
-<p><strong>Lemma 3 (symmetries).</strong> For a bijection <span class="math inline">\beta</span> of <span class="math inline">X</span> let <span class="math inline">\Phi_e=\beta</span>, <span class="math inline">\Phi_t=\mathrm{id}</span>, and <span class="math inline">\Phi_{\sigma\to\tau}(f)=\Phi_\tau\circ f\circ\Phi_\sigma^{-1}</span>. Then <span class="math inline">\Phi</span> is a bijection of each domain, commutes with application, and fixes the denotation of every logical constant; hence <span class="math inline">[A]^{\Phi\circ g}=\Phi[A]^g</span> for every pure term <span class="math inline">A</span> and assignment <span class="math inline">g</span>.</p>
-<p><em>Proof.</em> <span class="math inline">\Phi_{\sigma\to\tau}</span> is well defined and bijective by Lemma 1(2), and <span class="math inline">\Phi(fa)=\Phi(f)(\Phi a)</span> by construction. The Boolean operations and <span class="math inline">\Box</span> act on <span class="math inline">W^t</span>, where <span class="math inline">\Phi</span> is the identity. <span class="math inline">\Phi(\forall_\sigma)(f)=\forall_\sigma(\Phi^{-1}f)=\bigcap_a f(\Phi_\sigma a)=\bigcap_b f(b)=\forall_\sigma(f)</span>. <span class="math inline">\Phi(=_\sigma)(a)(b)=[\Phi^{-1}a=\Phi^{-1}b]=[a=b]</span> by Lemma 1(4). The last claim is by induction on terms. <span class="math inline">\square</span></p>
-<p>Now let <span class="math inline">S</span> be a closed sentence of <span class="math inline">\mathcal L(\Sigma)</span>. Replacing each relational constant by the closed pure term <span class="math inline">\top_\tau</span> that it denotes and each individual constant by a fresh variable gives a pure formula <span class="math inline">P(x_1,\ldots,x_n)</span> with <span class="math inline">[S]=[P](d,\ldots,d)</span>. For any <span class="math inline">a\in X</span> choose a bijection <span class="math inline">\beta</span> with <span class="math inline">\beta(d)=a</span>; by Lemma 3, <span class="math inline">[P](a,\ldots,a)=\Phi[P](d,\ldots,d)=[P](d,\ldots,d)</span>. So <span class="math inline">[S]=\bigcap_a[P](a,\ldots,a)=[\forall x\, .\,P(x,\ldots,x)]</span>, a pure sentence, and if <span class="math inline">S</span> is true it is necessary by Lemma 2. B for sentences of Σ and Modal Freedom (signature Σ) follow by the recorded results.</p>
+<p><strong>ND and <span class="math inline">\Box</span>ND.</strong> By
+Lemma 1(1) every <span class="math inline">h^\sigma</span> is injective,
+so ND<span class="math inline">_\sigma</span> holds by Classicism,
+Proposition 3.24(i); the necessitation follows by Lemma 2.</p>
+<p><strong>BF and <span class="math inline">\Box</span>BF.</strong>
+Every <span class="math inline">h^\sigma</span> is surjective, so
+BF<span class="math inline">_\sigma</span> holds by Proposition
+3.24(ii); <span class="math inline">\Box</span>BF by Lemma 2 or by
+n. 84.</p>
+<p><strong>5, B and their necessitations.</strong> By Lemma 1(3), <span
+class="math inline">[\Diamond p]\in\{\emptyset,G\}</span>, so <span
+class="math inline">\Diamond p\to\Box\Diamond p</span> denotes <span
+class="math inline">G</span>; B follows from 5 and T.</p>
+<p><strong>Atomicity and Actuality, necessitated.</strong> Classicism,
+p. 61: the model is propositionally full. Explicitly, for <span
+class="math inline">\tau=\bar\sigma\to t</span> and <span
+class="math inline">Y\ne\bot_\tau</span> pick <span
+class="math inline">\bar a</span> and <span class="math inline">h</span>
+with <span class="math inline">h\in Y(\bar a)</span>; the function
+taking <span class="math inline">\bar a</span> to <span
+class="math inline">\{h\}</span> and every other tuple to <span
+class="math inline">\emptyset</span> lies in <span
+class="math inline">W^\tau</span> by Lemma 1(2), is an atom under the
+pointwise order of Lemma 1(5), and lies below <span
+class="math inline">Y</span>. At the arrow <span
+class="math inline">i</span> the proposition <span
+class="math inline">\{i\}</span> is true and entails every truth.</p>
+<p><strong>Boolean Completeness, necessitated.</strong> For <span
+class="math inline">Z:\tau\to t</span> the set <span
+class="math inline">\{Y : i\in Z(Y)\}</span> has a pointwise
+intersection, which lies in <span class="math inline">W^\tau</span> and
+is its greatest lower bound under <span
+class="math inline">\le_\tau</span> by Lemma 1(5), at every arrow <span
+class="math inline">i</span>.</p>
+<p><strong>Rigid Comprehension and Gallin Extensional Comprehension,
+necessitated.</strong> Classicism, p. 61: the model is intensionally
+full. Explicitly, given <span class="math inline">Y</span> of type <span
+class="math inline">\bar\sigma\to t</span> let <span
+class="math inline">Y&#39;(\bar a)=G</span> if <span
+class="math inline">1\in Y(\bar a)</span> and <span
+class="math inline">\emptyset</span> otherwise. Then <span
+class="math inline">Y&#39;</span> is coextensive with <span
+class="math inline">Y</span> at <span class="math inline">1</span>, and
+both <span class="math inline">Y&#39;</span> and <span
+class="math inline">\neg Y&#39;</span> take only the values <span
+class="math inline">\emptyset</span> and <span
+class="math inline">G</span>, so both are persistent and <span
+class="math inline">Y&#39;</span> is rigid. The same at every arrow.</p>
+<p><strong>Functionality, necessitated; Tractarianism.</strong> If <span
+class="math inline">Xz=Yz</span> is true at <span
+class="math inline">i</span> for every <span
+class="math inline">z</span> then <span
+class="math inline">X(a)=Y(a)</span> for all <span
+class="math inline">a</span> by Lemma 1(4), so <span
+class="math inline">X=Y</span> and <span
+class="math inline">[X=Y]=G</span>. Tractarianism follows by the
+recorded result, or directly: if <span class="math inline">p\subseteq
+X(a)</span> for all <span class="math inline">a</span> then <span
+class="math inline">p\subseteq\bigcap_aX(a)</span>.</p>
+<p><strong>Plenitude, Functional Choice and Relational Choice,
+necessitated.</strong> Let <span class="math inline">U</span> of type
+<span class="math inline">\sigma\to\tau\to t</span> be serial at the
+arrow <span class="math inline">i</span>: for every <span
+class="math inline">y</span> some <span class="math inline">z</span> has
+<span class="math inline">i\in U(y)(z)</span>. Choose such a <span
+class="math inline">z</span> for each <span class="math inline">y</span>
+(choice in the metatheory; when <span class="math inline">U</span> is
+functional the choice is forced); the resulting function <span
+class="math inline">F</span> lies in <span
+class="math inline">W^{\sigma\to\tau}</span> by Lemma 1(2) and <span
+class="math inline">\forall y\, .\,(Uy)(Fy)</span> is true at <span
+class="math inline">i</span>. For Relational Choice take <span
+class="math inline">S(y)(z)=[z=Fy]</span>, which is <span
+class="math inline">G</span> or <span
+class="math inline">\emptyset</span> by Lemma 1(4), so <span
+class="math inline">S</span> is functional at every arrow and <span
+class="math inline">(Sy)z\to(Uy)z</span> is true at <span
+class="math inline">i</span>.</p>
+<p><strong>Infinity.</strong> Identity at <span
+class="math inline">1</span> is literal by Lemma 1(4), and since the
+model is full the set of numerals at each type is the extension of an
+element of the domain and is inductive, so <span
+class="math inline">\operatorname{FiniteCardinality}_\sigma</span> holds
+exactly of the numerals, and the <span class="math inline">k</span>-th
+numeral holds of a property exactly when its extension has <span
+class="math inline">k</span> members. The extension of <span
+class="math inline">\lambda u\, .\,\top</span> is <span
+class="math inline">X</span> at type <span class="math inline">e</span>
+and <span class="math inline">\mathcal P(G)</span> at type <span
+class="math inline">t</span>, both infinite, so the Axiom of Infinity
+holds at both types, and with it the Infinity Schema at type <span
+class="math inline">e</span>: the individuals are pairwise distinct at
+<span class="math inline">1</span>.</p>
+<p><strong>No Pure Contingency</strong> is Lemma 2; Necessity of
+Arithmetic follows by the recorded result.</p>
+<p><strong>Converse Witnessed Possibility</strong>, under any
+interpretation of Σ. Let <span class="math inline">P</span> be pure with
+free variables <span class="math inline">\bar x</span> and suppose <span
+class="math inline">\Diamond P[\bar c]</span> is true, so some arrow
+<span class="math inline">i</span> lies in <span
+class="math inline">[P](\bar c)</span>. Then <span
+class="math inline">1\in i\cdot[P](\bar c)=[P](i\cdot\bar c)</span> by
+Lemma 2, so <span class="math inline">P</span> holds at <span
+class="math inline">1</span> of the entities <span
+class="math inline">i\cdot\bar c</span> and <span
+class="math inline">\exists\bar x\, .\,P</span> is true.</p>
+<p><strong>No Contingency (signature Σ)</strong>, under the record’s
+interpretation.</p>
+<p><strong>Lemma 3 (symmetries).</strong> For a bijection <span
+class="math inline">\beta</span> of <span class="math inline">X</span>
+let <span class="math inline">\Phi_e=\beta</span>, <span
+class="math inline">\Phi_t=\mathrm{id}</span>, and <span
+class="math inline">\Phi_{\sigma\to\tau}(f)=\Phi_\tau\circ
+f\circ\Phi_\sigma^{-1}</span>. Then <span
+class="math inline">\Phi</span> is a bijection of each domain, commutes
+with application, and fixes the denotation of every logical constant;
+hence <span class="math inline">[A]^{\Phi\circ g}=\Phi[A]^g</span> for
+every pure term <span class="math inline">A</span> and assignment <span
+class="math inline">g</span>.</p>
+<p><em>Proof.</em> <span class="math inline">\Phi_{\sigma\to\tau}</span>
+is well defined and bijective by Lemma 1(2), and <span
+class="math inline">\Phi(fa)=\Phi(f)(\Phi a)</span> by construction. The
+Boolean operations and <span class="math inline">\Box</span> act on
+<span class="math inline">W^t</span>, where <span
+class="math inline">\Phi</span> is the identity. <span
+class="math inline">\Phi(\forall_\sigma)(f)=\forall_\sigma(\Phi^{-1}f)=\bigcap_a
+f(\Phi_\sigma a)=\bigcap_b f(b)=\forall_\sigma(f)</span>. <span
+class="math inline">\Phi(=_\sigma)(a)(b)=[\Phi^{-1}a=\Phi^{-1}b]=[a=b]</span>
+by Lemma 1(4). The last claim is by induction on terms. <span
+class="math inline">\square</span></p>
+<p>Now let <span class="math inline">S</span> be a closed sentence of
+<span class="math inline">\mathcal L(\Sigma)</span>. Replacing each
+relational constant by the closed pure term <span
+class="math inline">\top_\tau</span> that it denotes and each individual
+constant by a fresh variable gives a pure formula <span
+class="math inline">P(x_1,\ldots,x_n)</span> with <span
+class="math inline">[S]=[P](d,\ldots,d)</span>. For any <span
+class="math inline">a\in X</span> choose a bijection <span
+class="math inline">\beta</span> with <span
+class="math inline">\beta(d)=a</span>; by Lemma 3, <span
+class="math inline">[P](a,\ldots,a)=\Phi[P](d,\ldots,d)=[P](d,\ldots,d)</span>.
+So <span class="math inline">[S]=\bigcap_a[P](a,\ldots,a)=[\forall x\,
+.\,P(x,\ldots,x)]</span>, a pure sentence, and if <span
+class="math inline">S</span> is true it is necessary by Lemma 2. B for
+sentences of Σ and Modal Freedom (signature Σ) follow by the recorded
+results.</p>
 <h2 id="principles-that-fail">3. Principles that fail</h2>
-<p><strong>Fregean Axiom, Extensionality.</strong> <span class="math inline">\{1\}</span> and <span class="math inline">G</span> are both true at <span class="math inline">1</span>, so <span class="math inline">\{1\}\leftrightarrow G</span> is true, but <span class="math inline">[\{1\}=G]=\emptyset</span> by Lemma 1(4). Extensionality includes this nullary case.</p>
-<p><strong>Possibility Maximalism (pure)</strong>, and with it Possibility+, Strong Possibility and Possibility Maximalism (signature Σ). The sentence <span class="math inline">\exists x\forall y\, .\,x=y</span> is consistent with C, but <span class="math inline">X</span> has more than one element and identity is literal at every arrow, so it is false everywhere.</p>
-<p><strong>Witnessed Possibility</strong>, and with it Separated Structure, Distinctness Maximalism (signature Σ) and Logical Necessity. Let <span class="math inline">c</span> be a relational constant of type <span class="math inline">\tau</span> and <span class="math inline">P(x)</span> the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span>. Since <span class="math inline">c</span> denotes <span class="math inline">\top_\tau</span>, <span class="math inline">[P](c)=\emptyset</span>, so <span class="math inline">\Diamond P[c]</span> is false.</p>
-<p><strong>Independence (signature Σ).</strong> <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes.</p>
-<p><strong>Distinctness Maximalism (pure).</strong> <span class="math inline">(\exists xy\, .\,x\ne y)=\top</span> is true at <span class="math inline">1</span>, since both sides denote <span class="math inline">G</span>, and C does not prove it, having models with one individual.</p>
-<p><strong>Distinctness-preserving collapse.</strong> Let <span class="math inline">p=\{1\}</span>, true at <span class="math inline">1</span>. For any true <span class="math inline">q</span>, <span class="math inline">q\ne\emptyset</span>, so <span class="math inline">[\Diamond q]=G</span> by Lemma 1(3) and <span class="math inline">[\Box(\Diamond q\to p)]=[\Box p]=\emptyset</span>. So no true <span class="math inline">q</span> witnesses <span class="math inline">\Box_{\ne}p</span>.</p>
+<p><strong>Fregean Axiom, Extensionality.</strong> <span
+class="math inline">\{1\}</span> and <span class="math inline">G</span>
+are both true at <span class="math inline">1</span>, so <span
+class="math inline">\{1\}\leftrightarrow G</span> is true, but <span
+class="math inline">[\{1\}=G]=\emptyset</span> by Lemma 1(4).
+Extensionality includes this nullary case.</p>
+<p><strong>Possibility Maximalism (pure)</strong>, and with it
+Possibility+, Strong Possibility and Possibility Maximalism (signature
+Σ). The sentence <span class="math inline">\exists x\forall y\,
+.\,x=y</span> is consistent with C, but <span
+class="math inline">X</span> has more than one element and identity is
+literal at every arrow, so it is false everywhere.</p>
+<p><strong>Witnessed Possibility</strong>, and with it Separated
+Structure, Distinctness Maximalism (signature Σ) and Logical Necessity.
+Let <span class="math inline">c</span> be a relational constant of type
+<span class="math inline">\tau</span> and <span
+class="math inline">P(x)</span> the pure formula <span
+class="math inline">x\ne\top_\tau</span>, witnessed by <span
+class="math inline">\bot_\tau</span>. Since <span
+class="math inline">c</span> denotes <span
+class="math inline">\top_\tau</span>, <span
+class="math inline">[P](c)=\emptyset</span>, so <span
+class="math inline">\Diamond P[c]</span> is false.</p>
+<p><strong>Independence (signature Σ).</strong> <span
+class="math inline">c</span> denotes what the closed pure term <span
+class="math inline">\top_\tau</span> denotes.</p>
+<p><strong>Distinctness Maximalism (pure).</strong> <span
+class="math inline">(\exists xy\, .\,x\ne y)=\top</span> is true at
+<span class="math inline">1</span>, since both sides denote <span
+class="math inline">G</span>, and C does not prove it, having models
+with one individual.</p>
+<p><strong>Distinctness-preserving collapse.</strong> Let <span
+class="math inline">p=\{1\}</span>, true at <span
+class="math inline">1</span>. For any true <span
+class="math inline">q</span>, <span
+class="math inline">q\ne\emptyset</span>, so <span
+class="math inline">[\Diamond q]=G</span> by Lemma 1(3) and <span
+class="math inline">[\Box(\Diamond q\to p)]=[\Box p]=\emptyset</span>.
+So no true <span class="math inline">q</span> witnesses <span
+class="math inline">\Box_{\ne}p</span>.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.5, pp. 58–59; p. 61 and n. 84. The source describes full M-set models and proves the facts used: Proposition 3.24 on ND and BF, the one-object No Pure Contingency observation, and the principles common to full models. The specific group and the verification are in the write-up.</li>
-<li><strong>Background: Logical Combinatorialism.</strong> Bacon, Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the import of 22 September 2026; section, footnote and page locators refer to the published pagination. — Appendix A.2, Definitions A.1–A.4 and Proposition A.5, pp. 581–583. The M-set presentation of one-object action models: the division action on propositions and the function-space M-set.</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §3.5,
+pp. 58–59; p. 61 and n. 84. The source describes full M-set models and
+proves the facts used: Proposition 3.24 on ND and BF, the one-object No
+Pure Contingency observation, and the principles common to full models.
+The specific group and the verification are in the write-up.</li>
+<li><strong>Background: Logical Combinatorialism.</strong> Bacon, Andrew
+(2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589.
+As cited in Classicism, §§2.5 and 3.5. Read directly for the import of
+22 September 2026; section, footnote and page locators refer to the
+published pagination. — Appendix A.2, Definitions A.1–A.4 and
+Proposition A.5, pp. 581–583. The M-set presentation of one-object
+action models: the division action on propositions and the
+function-space M-set.</li>
 </ul>
 </body></html>

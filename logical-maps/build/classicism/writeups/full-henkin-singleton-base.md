@@ -49,7 +49,7 @@ Explicit specialization of the source’s standard Henkin construction to a sing
 
 The record's revision log before it was written as arguments.
 
-- **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added the Strong Leibniz Biconditionals and their necessitation. Box is truth in this model, so a strong world is an atom and the principle reduces to Atomicity, which holds; boxed principles reduce to their unboxed forms. Now satisfies: Strong Leibniz Biconditionals, □Strong Leibniz Biconditionals.
+- **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added Strong Atomicity and its necessitation. Box is truth in this model, so a strong atom is an atom and the principle reduces to Atomicity, which holds; boxed principles reduce to their unboxed forms. Now satisfies: Strong Atomicity, □Strong Atomicity.
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added No Contingency (signature Σ) and B for sentences of Σ: Box is truth in this model, so every closed sentence, whatever the constants denote, is necessary if true and necessarily possible if true. Now satisfies: No Contingency (signature Σ), B for sentences of Σ.
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Boxed the two Choice claims. Now satisfies: □Relational Choice, □Functional Choice.

@@ -322,45 +322,162 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Vicinity implies 5-necessity implies two-hat necessity</h1></header><p>Conjectured by Cian Dorr, 14 October 2026. Proved by Christopher Sun, in a handwritten argument sent to Cian Dorr on 19 October 2026: he showed that if there is a strongest 5-necessary proposition, every 5-necessary proposition is two-hat necessary, and, from the 5-necessity form of Vicinity, the latter is his argument recorded on the page of Vicinity. The passage from that form to a strongest 5-necessary proposition (Step 1) was added by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr when recording it, 19 October 2026.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Vicinity implies 5-necessity implies two-hat necessity</h1></header><p>Conjectured by Cian Dorr, 14 October 2026. Proved by Christopher Sun,
+in a handwritten argument sent to Cian Dorr on 19 October 2026: he
+showed that if there is a strongest 5-necessary proposition, every
+5-necessary proposition is two-hat necessary, and, from the 5-necessity
+form of Vicinity, the latter is his argument recorded on the page of
+Vicinity. The passage from that form to a strongest 5-necessary
+proposition (Step 1) was added by Claude Opus 5.5 (Anthropic), prompted
+by Cian Dorr when recording it, 19 October 2026.</p>
 <h2 id="facts-used">Facts used</h2>
-<p>All are theorems of C (Background, <em>Hats, two-hat necessity and 5-necessity</em>):</p>
+<p>All are theorems of C (Background, <em>Hats, two-hat necessity and
+5-necessity</em>):</p>
 <ul>
-<li><span class="math inline">\Box\le\Box_{\ne}\le\hat{\hat\Box}\le\Box_5\le\lambda p\,.\,p</span>, the order being necessary pointwise implication. Dually <span class="math inline">\Diamond_5\le\Diamond</span> and <span class="math inline">\Diamond_{\ne}\le\Diamond</span>.</li>
-<li><span class="math inline">\Box_5</span> is an S5 operator: N, K, T, 4 and B. So it also obeys the Barcan formula for propositional quantification, by Prior’s derivation from B and the converse Barcan formula.</li>
-<li><span class="math inline">\Diamond_{\ne}x\leftrightarrow\forall r\,.\,r\to\Diamond(\Diamond r\land x)</span>, the dual of <span class="math inline">\Box_{\ne}p:=\exists q\,.\,q\land\Box(\Diamond q\to p)</span>; it is monotone under <span class="math inline">\le</span>.</li>
-<li><span class="math inline">\hat{\hat\Box}</span> is the hat of <span class="math inline">\Box_{\ne}</span>: <span class="math inline">\hat{\hat\Box}p\leftrightarrow\exists q\,.\,q\land\Box(\Diamond_{\ne}q\to p)</span>.</li>
-<li>Theorem D9 of <em>The Bounds of Possibility</em>, Appendix D: <span class="math inline">\Box_5</span> materially implies every operator that is <span class="math inline">\mathrm{NKJF}_{\langle\rangle}</span>. Here <span class="math inline">\mathrm N X</span> says <span class="math inline">\Box\le X</span>, <span class="math inline">\mathrm K</span> is the K axiom, <span class="math inline">\mathrm J X:=\forall p\,.\,p\to X\Diamond p</span>, and <span class="math inline">\mathrm F_{\langle\rangle}X:=\forall Y^{tt}\,.\,(\forall z\,.\,X(Yz))\to X(\forall z\,.\,Yz)</span>. The definition of <span class="math inline">\Box_5</span> there is necessarily equivalent to the map’s.</li>
+<li><span
+class="math inline">\Box\le\Box_{\ne}\le\hat{\hat\Box}\le\Box_5\le\lambda
+p\,.\,p</span>, the order being necessary pointwise implication. Dually
+<span class="math inline">\Diamond_5\le\Diamond</span> and <span
+class="math inline">\Diamond_{\ne}\le\Diamond</span>.</li>
+<li><span class="math inline">\Box_5</span> is an S5 operator: N, K, T,
+4 and B. So it also obeys the Barcan formula for propositional
+quantification, by Prior’s derivation from B and the converse Barcan
+formula.</li>
+<li><span class="math inline">\Diamond_{\ne}x\leftrightarrow\forall
+r\,.\,r\to\Diamond(\Diamond r\land x)</span>, the dual of <span
+class="math inline">\Box_{\ne}p:=\exists q\,.\,q\land\Box(\Diamond q\to
+p)</span>; it is monotone under <span
+class="math inline">\le</span>.</li>
+<li><span class="math inline">\hat{\hat\Box}</span> is the hat of <span
+class="math inline">\Box_{\ne}</span>: <span
+class="math inline">\hat{\hat\Box}p\leftrightarrow\exists
+q\,.\,q\land\Box(\Diamond_{\ne}q\to p)</span>.</li>
+<li>Theorem D9 of <em>The Bounds of Possibility</em>, Appendix D: <span
+class="math inline">\Box_5</span> materially implies every operator that
+is <span class="math inline">\mathrm{NKJF}_{\langle\rangle}</span>. Here
+<span class="math inline">\mathrm N X</span> says <span
+class="math inline">\Box\le X</span>, <span class="math inline">\mathrm
+K</span> is the K axiom, <span class="math inline">\mathrm J X:=\forall
+p\,.\,p\to X\Diamond p</span>, and <span class="math inline">\mathrm
+F_{\langle\rangle}X:=\forall Y^{tt}\,.\,(\forall z\,.\,X(Yz))\to
+X(\forall z\,.\,Yz)</span>. The definition of <span
+class="math inline">\Box_5</span> there is necessarily equivalent to the
+map’s.</li>
 </ul>
-<h2 id="step-1-a-strongest-5-necessary-proposition">Step 1: a strongest 5-necessary proposition</h2>
-<p>By the 5-necessity form of Vicinity (on the page of Vicinity), let <span class="math inline">t</span> be a truth with <span class="math inline">\forall q\,.\,\Box_5 q\to t\le q</span>, and put <span class="math inline">s:=\Diamond_5 t</span>.</p>
+<h2 id="step-1-a-strongest-5-necessary-proposition">Step 1: a strongest
+5-necessary proposition</h2>
+<p>By the 5-necessity form of Vicinity (on the page of Vicinity), let
+<span class="math inline">t</span> be a truth with <span
+class="math inline">\forall q\,.\,\Box_5 q\to t\le q</span>, and put
+<span class="math inline">s:=\Diamond_5 t</span>.</p>
 <ol type="a">
-<li><p><span class="math inline">s</span> is true, as <span class="math inline">t</span> is (T for <span class="math inline">\Box_5</span>).</p></li>
-<li><p><span class="math inline">\Box_5 s</span>, by B for <span class="math inline">\Box_5</span>.</p></li>
-<li><p>If <span class="math inline">\Box_5 q</span> then <span class="math inline">s\le q</span>. By 4, <span class="math inline">\Box_5\Box_5 q</span>, so <span class="math inline">t\le\Box_5 q</span>, that is <span class="math inline">\Box(t\to\Box_5 q)</span>. Let <span class="math inline">s</span> hold at a world. There <span class="math inline">\Box(t\to\Box_5 q)</span> still holds, by 4, so <span class="math inline">\Box_5(t\to\Box_5 q)</span>, as <span class="math inline">\Box\le\Box_5</span>. With <span class="math inline">\Diamond_5 t</span> this gives <span class="math inline">\Diamond_5\Box_5 q</span>, and so <span class="math inline">q</span>, by B for <span class="math inline">\Box_5</span>.</p></li>
-<li><p>If <span class="math inline">s\le q</span> then <span class="math inline">\Box_5 q</span>, by (b), <span class="math inline">\Box\le\Box_5</span> and K.</p></li>
+<li><p><span class="math inline">s</span> is true, as <span
+class="math inline">t</span> is (T for <span
+class="math inline">\Box_5</span>).</p></li>
+<li><p><span class="math inline">\Box_5 s</span>, by B for <span
+class="math inline">\Box_5</span>.</p></li>
+<li><p>If <span class="math inline">\Box_5 q</span> then <span
+class="math inline">s\le q</span>. By 4, <span
+class="math inline">\Box_5\Box_5 q</span>, so <span
+class="math inline">t\le\Box_5 q</span>, that is <span
+class="math inline">\Box(t\to\Box_5 q)</span>. Let <span
+class="math inline">s</span> hold at a world. There <span
+class="math inline">\Box(t\to\Box_5 q)</span> still holds, by 4, so
+<span class="math inline">\Box_5(t\to\Box_5 q)</span>, as <span
+class="math inline">\Box\le\Box_5</span>. With <span
+class="math inline">\Diamond_5 t</span> this gives <span
+class="math inline">\Diamond_5\Box_5 q</span>, and so <span
+class="math inline">q</span>, by B for <span
+class="math inline">\Box_5</span>.</p></li>
+<li><p>If <span class="math inline">s\le q</span> then <span
+class="math inline">\Box_5 q</span>, by (b), <span
+class="math inline">\Box\le\Box_5</span> and K.</p></li>
 </ol>
-<p>So <span class="math inline">\forall q\,.\,\Box_5 q\leftrightarrow s\le q</span>: in Sun’s terms, 5-necessity is principal.</p>
-<h2 id="step-2-sun-boxdiamond_nesto-s">Step 2 (Sun): <span class="math inline">\Box(\Diamond_{\ne}s\to s)</span></h2>
-<p>Suppose otherwise, put <span class="math inline">A:=\Diamond_{\ne}s\land\neg s</span>, so that <span class="math inline">\Diamond A</span>, and let <span class="math inline">O:=\lambda p\,.\,A\le p</span>.</p>
+<p>So <span class="math inline">\forall q\,.\,\Box_5 q\leftrightarrow
+s\le q</span>: in Sun’s terms, 5-necessity is principal.</p>
+<h2 id="step-2-sun-boxdiamond_nesto-s">Step 2 (Sun): <span
+class="math inline">\Box(\Diamond_{\ne}s\to s)</span></h2>
+<p>Suppose otherwise, put <span
+class="math inline">A:=\Diamond_{\ne}s\land\neg s</span>, so that <span
+class="math inline">\Diamond A</span>, and let <span
+class="math inline">O:=\lambda p\,.\,A\le p</span>.</p>
 <ul>
-<li><span class="math inline">\Box_5 s</span>, but not <span class="math inline">O s</span>, since <span class="math inline">\Diamond(A\land\neg s)</span>. So <span class="math inline">\Box_5</span> does not materially imply <span class="math inline">O</span>, and by Theorem D9, <span class="math inline">O</span> is not <span class="math inline">\mathrm{NKJF}_{\langle\rangle}</span>.</li>
-<li><span class="math inline">O</span> is N and K, as <span class="math inline">\le</span> is necessary implication.</li>
-<li><span class="math inline">O</span> is J. Let <span class="math inline">q</span> be true. Then <span class="math inline">\Box_5\Diamond_5 q</span> (B), so <span class="math inline">\Box_5\Diamond q</span>; by (c), <span class="math inline">s\le\Diamond q</span>; so <span class="math inline">\Diamond s\le\Diamond q</span> by 4; and <span class="math inline">A\le\Diamond_{\ne}s\le\Diamond s</span>. So <span class="math inline">A\le\Diamond q</span>.</li>
-<li>So <span class="math inline">O</span> is not <span class="math inline">\mathrm F_{\langle\rangle}</span>: there is an <span class="math inline">X^{tt}</span> with <span class="math inline">\forall p\,.\,A\le Xp</span> and <span class="math inline">\Diamond\exists q\,.\,A\land\neg Xq</span>.</li>
+<li><span class="math inline">\Box_5 s</span>, but not <span
+class="math inline">O s</span>, since <span
+class="math inline">\Diamond(A\land\neg s)</span>. So <span
+class="math inline">\Box_5</span> does not materially imply <span
+class="math inline">O</span>, and by Theorem D9, <span
+class="math inline">O</span> is not <span
+class="math inline">\mathrm{NKJF}_{\langle\rangle}</span>.</li>
+<li><span class="math inline">O</span> is N and K, as <span
+class="math inline">\le</span> is necessary implication.</li>
+<li><span class="math inline">O</span> is J. Let <span
+class="math inline">q</span> be true. Then <span
+class="math inline">\Box_5\Diamond_5 q</span> (B), so <span
+class="math inline">\Box_5\Diamond q</span>; by (c), <span
+class="math inline">s\le\Diamond q</span>; so <span
+class="math inline">\Diamond s\le\Diamond q</span> by 4; and <span
+class="math inline">A\le\Diamond_{\ne}s\le\Diamond s</span>. So <span
+class="math inline">A\le\Diamond q</span>.</li>
+<li>So <span class="math inline">O</span> is not <span
+class="math inline">\mathrm F_{\langle\rangle}</span>: there is an <span
+class="math inline">X^{tt}</span> with <span class="math inline">\forall
+p\,.\,A\le Xp</span> and <span class="math inline">\Diamond\exists
+q\,.\,A\land\neg Xq</span>.</li>
 </ul>
-<p>Each <span class="math inline">A\le Xp</span> is necessary by 4, hence 5-necessary, so the Barcan formula for <span class="math inline">\Box_5</span> gives <span class="math inline">\Box_5 T</span>, where <span class="math inline">T:=\forall p\,.\,A\le Xp</span>. By (c), <span class="math inline">s\le T</span>, and so <span class="math inline">\Diamond_{\ne}s\le\Diamond_{\ne}T</span>.</p>
-<p>Now take a world, and a <span class="math inline">q</span>, with <span class="math inline">A\land\neg Xq</span>. There <span class="math inline">\Diamond_{\ne}s</span> holds, hence <span class="math inline">\Diamond_{\ne}T</span>; applying the characterization of <span class="math inline">\Diamond_{\ne}</span> to the truth <span class="math inline">r:=A\land\neg Xq</span>, that world sees one where <span class="math inline">\Diamond(A\land\neg Xq)</span> and <span class="math inline">T</span> hold. But <span class="math inline">T</span> gives <span class="math inline">A\le Xq</span> there, that is <span class="math inline">\Box(A\to Xq)</span>: a contradiction.</p>
-<h2 id="step-3-5-necessity-implies-two-hat-necessity">Step 3: 5-necessity implies two-hat necessity</h2>
-<p><span class="math inline">s</span> is true and <span class="math inline">\Box(\Diamond_{\ne}s\to s)</span>. If <span class="math inline">\Box_5 p</span>, then <span class="math inline">s\le p</span> by (c), so <span class="math inline">\Box(\Diamond_{\ne}s\to p)</span>, and <span class="math inline">s</span> witnesses <span class="math inline">\hat{\hat\Box}p</span>. <span class="math inline">\blacksquare</span></p>
+<p>Each <span class="math inline">A\le Xp</span> is necessary by 4,
+hence 5-necessary, so the Barcan formula for <span
+class="math inline">\Box_5</span> gives <span class="math inline">\Box_5
+T</span>, where <span class="math inline">T:=\forall p\,.\,A\le
+Xp</span>. By (c), <span class="math inline">s\le T</span>, and so <span
+class="math inline">\Diamond_{\ne}s\le\Diamond_{\ne}T</span>.</p>
+<p>Now take a world, and a <span class="math inline">q</span>, with
+<span class="math inline">A\land\neg Xq</span>. There <span
+class="math inline">\Diamond_{\ne}s</span> holds, hence <span
+class="math inline">\Diamond_{\ne}T</span>; applying the
+characterization of <span class="math inline">\Diamond_{\ne}</span> to
+the truth <span class="math inline">r:=A\land\neg Xq</span>, that world
+sees one where <span class="math inline">\Diamond(A\land\neg Xq)</span>
+and <span class="math inline">T</span> hold. But <span
+class="math inline">T</span> gives <span class="math inline">A\le
+Xq</span> there, that is <span class="math inline">\Box(A\to Xq)</span>:
+a contradiction.</p>
+<h2 id="step-3-5-necessity-implies-two-hat-necessity">Step 3:
+5-necessity implies two-hat necessity</h2>
+<p><span class="math inline">s</span> is true and <span
+class="math inline">\Box(\Diamond_{\ne}s\to s)</span>. If <span
+class="math inline">\Box_5 p</span>, then <span class="math inline">s\le
+p</span> by (c), so <span class="math inline">\Box(\Diamond_{\ne}s\to
+p)</span>, and <span class="math inline">s</span> witnesses <span
+class="math inline">\hat{\hat\Box}p</span>. <span
+class="math inline">\blacksquare</span></p>
 <h2 id="remarks">Remarks</h2>
 <ul>
-<li>The argument is a derivation in C from Vicinity, so its necessitation gives the boxed form, □Vicinity implies □5-necessity implies two-hat necessity.</li>
-<li>Actuality, and Vicinity with BF at type <span class="math inline">t</span>, were already known to suffice. As the notes of the conjecture explain, the Actuality proof does not adapt; Sun’s argument works through Theorem D9 instead of an atom.</li>
-<li>Sun’s first page derives a strongest 5-necessary proposition from a strongest <span class="math inline">\Box_{\ne}</span>-necessary one, by a different route: <span class="math inline">s:=v\land\forall p\,.\,p\to v\le\Diamond p</span>. Step 1 above needs only Vicinity.</li>
+<li>The argument is a derivation in C from Vicinity, so its
+necessitation gives the boxed form, □Vicinity implies □5-necessity
+implies two-hat necessity.</li>
+<li>Actuality, and Vicinity with BF at type <span
+class="math inline">t</span>, were already known to suffice. As the
+notes of the conjecture explain, the Actuality proof does not adapt;
+Sun’s argument works through Theorem D9 instead of an atom.</li>
+<li>Sun’s first page derives a strongest 5-necessary proposition from a
+strongest <span class="math inline">\Box_{\ne}</span>-necessary one, by
+a different route: <span class="math inline">s:=v\land\forall p\,.\,p\to
+v\le\Diamond p</span>. Step 1 above needs only Vicinity.</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Appendix D, Theorem D9, p. 405. <span class="math inline">\Box_5</span> materially implies every <span class="math inline">\mathrm{NKJF}_{\langle\rangle}</span> operator; Sun applies it to an operator built from the strongest 5-necessary proposition.</li>
+<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John
+Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility.
+Oxford University Press. Appendix D, Narrower Modalities in Higher-Order
+S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May
+2024. Its background logic HS4 (a primitive S4 operator over
+higher-order logic) is read into C by interpreting the primitive box as
+<span class="math inline">\lambda p\, .\,p=\top</span>, under which
+every theorem of HS4 is a theorem of C. — Appendix D, Theorem D9,
+p. 405. <span class="math inline">\Box_5</span> materially implies every
+<span class="math inline">\mathrm{NKJF}_{\langle\rangle}</span>
+operator; Sun applies it to an operator built from the strongest
+5-necessary proposition.</li>
 </ul>
 </body></html>

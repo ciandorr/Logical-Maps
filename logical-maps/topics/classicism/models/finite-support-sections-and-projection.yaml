@@ -53,6 +53,25 @@ meets:
   retractions: The arrows out of $W_0$ are its identity and the sections $f_T$, each retracted by $\pi$.
 arguments:
 - holds:
+  - necessary-atoms-are-self-atoms-r
+  - necessary-atoms-are-strong-atoms-r
+  - necessary-self-atoms-are-atoms-r
+  - necessary-self-atoms-are-strong-atoms-r
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'At $W_0$ the propositions over the sections $f_T$ are pinned down by finite sets and refine (two
+    sections agreeing with $f_T$ on $N$ disagree at a point outside $N$), so no atom contains a section;
+    $\{1_{W_0}\}$ is pinned down by $\varnothing$, its transport along every $f_T$ being $\{\pi\}$, and
+    is the only atom. At $W_1$ likewise no atom contains $1_{W_1}$ or any $e_T$, and $\{\pi\}$ is the
+    only atom. Each is a self-atom and a strong atom: $\{1_{W_0}\}$ becomes $\{\pi\}$ under $f_T$, and
+    $\{\pi\}$ becomes $\{1_{W_0}\}$ under $\pi$ and $\{\pi\}$ under $e_T$, sets of at most one arrow.
+    No self-atom contains a section or an $e_T$ or $1_{W_1}$, since its transport along that arrow would
+    be an atom containing $1_{W_1}$; so the self-atoms are the two atoms. An atom or self-atom of a relational
+    type has an atom, respectively self-atom, as its existential projection, so sits over $1_{W_0}$ or
+    $\pi$ with one tuple; it is then an atom and a strong atom, its transports having at most one pair.
+    So all four bridge principles hold at both objects, at every type.'
+- holds:
   - necessary-actuality
   writeup: finite-support-sections-and-projection
 - fails:

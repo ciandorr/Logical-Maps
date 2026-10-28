@@ -348,3 +348,24 @@ same frame, propositions, individuals and verdicts, and believed elementarily eq
 domains are the modalized model's root-existing entities, which by its Lemma 4.3 are all it ever sees).
 The handout is now a second source of the cloud record; the folded record and its write-up remain in the
 history before this date.
+
+## Self-Atomicity and the bridge principles (25 October 2026)
+
+Cian Dorr proposed the notion of a self-atom, a possible entity that is necessarily an atom whenever it
+is instantiated, the principle Self-Atomicity (every possible entity is entailed by a self-atom) as a
+weakening of the Strong Leibniz Biconditionals, and four bridge principles: atoms are self-atoms,
+self-atoms are atoms, self-atoms are strong worlds, atoms are strong worlds. Claude Fable 5.1
+(Anthropic), prompted by him, surveyed the recorded Strong Leibniz results. Recorded, each at relational
+types and at type t, boxed and unboxed, in the category More Boolean structure: the five principles;
+the structural results (type-t instances, boxed to unboxed, No Pure Contingency); the Strong Leibniz
+Biconditionals as Atomicity with Atoms are strong worlds, BF giving the latter (Bacon’s Exercise 8.12
+refactored, the old records kept with cross-references); the implications among the bridges; □Actuality,
+Two-hat implies ND-necessity, 5 ⇒ □B and the intensional-choice result with Self-Atomicity for the Strong
+Leibniz Biconditionals; 5 and □5 giving self-atoms are atoms and are strong worlds. Models: the
+three-object fork and the monoid with ac = bc (Self-Atomicity with Atomicity and Strong Actuality but
+without the Strong Leibniz Biconditionals or BF), the Cantor fan (Self-Atomicity with Actuality, Strong
+Actuality and BF (type t) but without Atomicity), general arguments for full models, group arguments for
+the symmetry-constrained models and the coalesced sums. Open: whether Self-Atomicity implies Strong
+Actuality (it does in every full and every plain ideally full model), and whether Self-Atomicity with
+Rigid Comprehension implies its own boxed form or □Rigid Comprehension. Transcript in .private
+(25 October 2026).

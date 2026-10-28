@@ -322,16 +322,169 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>C5 and □Rigid Comprehension imply Second-Order Analytic Necessitism</h1></header><p>The connection from □Plenitude is Zachary Goodsell’s (23 October 2026); the proof is by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, after the S5 part of Corollary 5.1 of Andrew Bacon, <em>Could the truths of mathematics have been different?</em> (draft of 9 October 2025). Informal, not Lean-verified.</p>
-<p><strong>Setting.</strong> C5 is C with □ND at every relational type. On the map it gives B and 5, ND at every type (Prior), and BF at every type (necessary-nd-implies-bf); the write-up of c5-implies-necessity-of-arithmetic lists the Lean proofs. Assume also □Rigid Comprehension: at every world, every relation is coextensive with a rigid one. Fix a type <span class="math inline">\sigma</span> and <span class="math inline">n\ge1</span>, and suppose <span class="math inline">\Diamond\exists\mathfrak R\operatorname{Real}_\sigma\mathfrak R</span>: at some world <span class="math inline">w</span> there is a real number structure <span class="math inline">\mathfrak R=(X,\le,+,\times,0,1,N)</span>. Everything below uses the Background’s definitions of <span class="math inline">\operatorname{Rigid}</span> (persistent and inextensible, each with its leading box) and of real number structures.</p>
-<p><strong>Lemma 1 (rigidity travels).</strong> If <span class="math inline">Y</span> is rigid at <span class="math inline">w</span>, it is rigid at the actual world. Rigidity is <span class="math inline">\Box\operatorname{WeaklyRigid}(Y)</span>, so at the actual world <span class="math inline">\Diamond\Box\operatorname{WeaklyRigid}(Y)</span>, and <span class="math inline">\Diamond\Box p\to\Box p</span> holds under 5 (and <span class="math inline">\Diamond\Box p\to p</span> under B). The same transfers any necessary fact between <span class="math inline">w</span> and the actual world, in either direction.</p>
-<p><strong>Lemma 2 (first-order facts).</strong> For rigid relations with necessarily distinct instances, every first-order fact with parameters from the instances is necessary if true and impossible if false: this is Lemma 2 of the write-up of analytic-necessitism-implies-necessity-of-analysis, which uses only persistence, inextensibility, the necessity of identity and necessary distinctness. ND gives the necessary distinctness of all instances at every type.</p>
-<p><strong>The rigidified structure.</strong> At <span class="math inline">w</span>, Rigid Comprehension gives rigid <span class="math inline">Y_X</span>, <span class="math inline">Y_\le</span>, <span class="math inline">Y_+</span>, <span class="math inline">Y_\times</span>, <span class="math inline">Y_N</span> coextensive there with <span class="math inline">X</span>, <span class="math inline">\le</span>, <span class="math inline">+</span>, <span class="math inline">\times</span>, <span class="math inline">N</span>, the relations taken to hold only of tuples of instances of <span class="math inline">X</span>, which Rigid Comprehension preserves by restricting first. Write <span class="math inline">\mathfrak Y=(Y_X,Y_\le,Y_+,Y_\times,0,1,Y_N)</span>. By Lemma 1 its relations are rigid at the actual world, and by ND its instances are necessarily distinct; so <span class="math inline">\operatorname{RigidStr}(\mathfrak Y)</span>.</p>
-<p><strong><span class="math inline">\mathfrak Y</span> is necessarily a real number structure.</strong> The axioms of an ordered field with <span class="math inline">0</span>, <span class="math inline">1</span>, and the clauses that <span class="math inline">+</span>, <span class="math inline">\times</span> are functional on <span class="math inline">Y_X</span> and that <span class="math inline">Y_N</span> is the least subproperty of <span class="math inline">Y_X</span> containing <span class="math inline">0</span> and closed under adding <span class="math inline">1</span>, except for the leastness, are first-order facts about <span class="math inline">\mathfrak Y</span>; they hold at <span class="math inline">w</span>, where <span class="math inline">\mathfrak Y</span> agrees with <span class="math inline">\mathfrak R</span>, so by Lemma 2 they are necessary. Leastness of <span class="math inline">Y_N</span> and completeness quantify over subproperties, and are handled at an arbitrary world <span class="math inline">u</span> (accessible from the actual world, hence, under 5, from <span class="math inline">w</span> and seeing <span class="math inline">w</span>). Let <span class="math inline">F</span> be a subproperty of <span class="math inline">Y_X</span> at <span class="math inline">u</span> with an upper bound in <span class="math inline">Y_X</span>; let <span class="math inline">F&#39;</span> be a rigid relation coextensive with it at <span class="math inline">u</span> (Rigid Comprehension at <span class="math inline">u</span>). “<span class="math inline">F&#39;</span> has an upper bound in <span class="math inline">Y_X</span>” is a first-order fact about rigid relations, true at <span class="math inline">u</span>, hence true at <span class="math inline">w</span> by Lemma 2 and Lemma 1; at <span class="math inline">w</span>, <span class="math inline">F&#39;</span> is coextensive with a bounded subproperty of <span class="math inline">X</span>, so by the completeness of <span class="math inline">\mathfrak R</span> it has a least upper bound <span class="math inline">s</span> in <span class="math inline">X=Y_X</span> there, and “<span class="math inline">s</span> is the least upper bound of <span class="math inline">F&#39;</span> in <span class="math inline">(Y_X,Y_\le)</span>” is again a first-order fact, true at <span class="math inline">w</span>, hence at <span class="math inline">u</span>. So <span class="math inline">F</span> has a least upper bound at <span class="math inline">u</span>. Leastness of <span class="math inline">Y_N</span> is the same argument with the inductive subproperties: an inductive <span class="math inline">F</span> at <span class="math inline">u</span> has a rigid coextension, inductiveness and “contains <span class="math inline">Y_N</span>” are first-order facts about rigid relations, and the latter holds at <span class="math inline">w</span>. Hence <span class="math inline">\Box\operatorname{Real}_\sigma(\mathfrak Y)</span>.</p>
-<p><strong>Represented powers.</strong> For <span class="math inline">k\le n</span> let <span class="math inline">\mathcal P_k</span> be the property of rigid <span class="math inline">k</span>-ary relations holding only of tuples of instances of <span class="math inline">Y_X</span>. Its instances are rigid by definition. It is persistent, since both conjuncts are necessary if true (rigidity carries a box, and <span class="math inline">S</span> holding only of <span class="math inline">Y_X</span>-tuples is a first-order fact about rigid <span class="math inline">S</span> and <span class="math inline">Y_X</span>). It is inextensible: given <span class="math inline">G</span> with <span class="math inline">\forall S(\mathcal P_kS\to\Box GS)</span> at a world <span class="math inline">u</span>, for every <span class="math inline">S</span> at <span class="math inline">u</span> either <span class="math inline">\mathcal P_kS</span>, so <span class="math inline">\Box GS</span>, or <span class="math inline">\neg\mathcal P_kS</span>, and then <span class="math inline">\Box\neg\mathcal P_kS</span>, rigidity being non-contingent under 5 by Lemma 1 and the other conjunct by Lemma 2; so <span class="math inline">\forall S\,\Box(\mathcal P_kS\to GS)</span>, and BF at the type of <span class="math inline">S</span> gives <span class="math inline">\Box\forall S(\mathcal P_kS\to GS)</span>, which is <span class="math inline">\mathcal P_k\le G</span>. And necessarily every <span class="math inline">k</span>-ary relation <span class="math inline">R</span> agrees on <span class="math inline">Y_X</span>-tuples with an instance: at any world, Rigid Comprehension gives a rigid relation coextensive with <span class="math inline">\lambda\bar x\, .\,R\bar x\land\bigwedge_iY_Xx_i</span>, which lies in <span class="math inline">\mathcal P_k</span>. So the instance of Second-Order Analytic Necessitism at <span class="math inline">\sigma</span> and <span class="math inline">n</span> holds. <span class="math inline">\square</span></p>
-<p><strong>Remarks.</strong> Atomicity is not used. Bacon’s Corollary 5.1 derives the sentence-level Necessity of Second-Order Analysis from the same premises through Theorem 5.2, whose proof uses the Leibniz Biconditionals to show that a rigid real number structure stays complete at every accessible world; under S5 the world <span class="math inline">w</span> of the given structure stays accessible, and completeness is read off there. The rigid coextensions exist by □Rigid Comprehension, and 5 and BF do the rest, so □Plenitude, which gives C5 and □Rigid Comprehension on the map, gives the conclusion.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>C5 and □Rigid Comprehension imply Second-Order Analytic Necessitism</h1></header><p>The connection from □Plenitude is Zachary Goodsell’s (23 October
+2026); the proof is by Claude Fable 5.1 (Anthropic), prompted by Zachary
+Goodsell, after the S5 part of Corollary 5.1 of Andrew Bacon, <em>Could
+the truths of mathematics have been different?</em> (draft of 9 October
+2025). Informal, not Lean-verified.</p>
+<p><strong>Setting.</strong> C5 is C with □ND at every relational type.
+On the map it gives B and 5, ND at every type (Prior), and BF at every
+type (necessary-nd-implies-bf); the write-up of
+c5-implies-necessity-of-arithmetic lists the Lean proofs. Assume also
+□Rigid Comprehension: at every world, every relation is coextensive with
+a rigid one. Fix a type <span class="math inline">\sigma</span> and
+<span class="math inline">n\ge1</span>, and suppose <span
+class="math inline">\Diamond\exists\mathfrak
+R\operatorname{Real}_\sigma\mathfrak R</span>: at some world <span
+class="math inline">w</span> there is a real number structure <span
+class="math inline">\mathfrak R=(X,\le,+,\times,0,1,N)</span>.
+Everything below uses the Background’s definitions of <span
+class="math inline">\operatorname{Rigid}</span> (persistent and
+inextensible, each with its leading box) and of real number
+structures.</p>
+<p><strong>Lemma 1 (rigidity travels).</strong> If <span
+class="math inline">Y</span> is rigid at <span
+class="math inline">w</span>, it is rigid at the actual world. Rigidity
+is <span class="math inline">\Box\operatorname{WeaklyRigid}(Y)</span>,
+so at the actual world <span
+class="math inline">\Diamond\Box\operatorname{WeaklyRigid}(Y)</span>,
+and <span class="math inline">\Diamond\Box p\to\Box p</span> holds under
+5 (and <span class="math inline">\Diamond\Box p\to p</span> under B).
+The same transfers any necessary fact between <span
+class="math inline">w</span> and the actual world, in either
+direction.</p>
+<p><strong>Lemma 2 (first-order facts).</strong> For rigid relations
+with necessarily distinct instances, every first-order fact with
+parameters from the instances is necessary if true and impossible if
+false: this is Lemma 2 of the write-up of
+analytic-necessitism-implies-necessity-of-analysis, which uses only
+persistence, inextensibility, the necessity of identity and necessary
+distinctness. ND gives the necessary distinctness of all instances at
+every type.</p>
+<p><strong>The rigidified structure.</strong> At <span
+class="math inline">w</span>, Rigid Comprehension gives rigid <span
+class="math inline">Y_X</span>, <span class="math inline">Y_\le</span>,
+<span class="math inline">Y_+</span>, <span
+class="math inline">Y_\times</span>, <span
+class="math inline">Y_N</span> coextensive there with <span
+class="math inline">X</span>, <span class="math inline">\le</span>,
+<span class="math inline">+</span>, <span
+class="math inline">\times</span>, <span class="math inline">N</span>,
+the relations taken to hold only of tuples of instances of <span
+class="math inline">X</span>, which Rigid Comprehension preserves by
+restricting first. Write <span class="math inline">\mathfrak
+Y=(Y_X,Y_\le,Y_+,Y_\times,0,1,Y_N)</span>. By Lemma 1 its relations are
+rigid at the actual world, and by ND its instances are necessarily
+distinct; so <span class="math inline">\operatorname{RigidStr}(\mathfrak
+Y)</span>.</p>
+<p><strong><span class="math inline">\mathfrak Y</span> is necessarily a
+real number structure.</strong> The axioms of an ordered field with
+<span class="math inline">0</span>, <span class="math inline">1</span>,
+and the clauses that <span class="math inline">+</span>, <span
+class="math inline">\times</span> are functional on <span
+class="math inline">Y_X</span> and that <span
+class="math inline">Y_N</span> is the least subproperty of <span
+class="math inline">Y_X</span> containing <span
+class="math inline">0</span> and closed under adding <span
+class="math inline">1</span>, except for the leastness, are first-order
+facts about <span class="math inline">\mathfrak Y</span>; they hold at
+<span class="math inline">w</span>, where <span
+class="math inline">\mathfrak Y</span> agrees with <span
+class="math inline">\mathfrak R</span>, so by Lemma 2 they are
+necessary. Leastness of <span class="math inline">Y_N</span> and
+completeness quantify over subproperties, and are handled at an
+arbitrary world <span class="math inline">u</span> (accessible from the
+actual world, hence, under 5, from <span class="math inline">w</span>
+and seeing <span class="math inline">w</span>). Let <span
+class="math inline">F</span> be a subproperty of <span
+class="math inline">Y_X</span> at <span class="math inline">u</span>
+with an upper bound in <span class="math inline">Y_X</span>; let <span
+class="math inline">F&#39;</span> be a rigid relation coextensive with
+it at <span class="math inline">u</span> (Rigid Comprehension at <span
+class="math inline">u</span>). “<span class="math inline">F&#39;</span>
+has an upper bound in <span class="math inline">Y_X</span>” is a
+first-order fact about rigid relations, true at <span
+class="math inline">u</span>, hence true at <span
+class="math inline">w</span> by Lemma 2 and Lemma 1; at <span
+class="math inline">w</span>, <span class="math inline">F&#39;</span> is
+coextensive with a bounded subproperty of <span
+class="math inline">X</span>, so by the completeness of <span
+class="math inline">\mathfrak R</span> it has a least upper bound <span
+class="math inline">s</span> in <span class="math inline">X=Y_X</span>
+there, and “<span class="math inline">s</span> is the least upper bound
+of <span class="math inline">F&#39;</span> in <span
+class="math inline">(Y_X,Y_\le)</span>” is again a first-order fact,
+true at <span class="math inline">w</span>, hence at <span
+class="math inline">u</span>. So <span class="math inline">F</span> has
+a least upper bound at <span class="math inline">u</span>. Leastness of
+<span class="math inline">Y_N</span> is the same argument with the
+inductive subproperties: an inductive <span class="math inline">F</span>
+at <span class="math inline">u</span> has a rigid coextension,
+inductiveness and “contains <span class="math inline">Y_N</span>” are
+first-order facts about rigid relations, and the latter holds at <span
+class="math inline">w</span>. Hence <span
+class="math inline">\Box\operatorname{Real}_\sigma(\mathfrak
+Y)</span>.</p>
+<p><strong>Represented powers.</strong> For <span
+class="math inline">k\le n</span> let <span class="math inline">\mathcal
+P_k</span> be the property of rigid <span
+class="math inline">k</span>-ary relations holding only of tuples of
+instances of <span class="math inline">Y_X</span>. Its instances are
+rigid by definition. It is persistent, since both conjuncts are
+necessary if true (rigidity carries a box, and <span
+class="math inline">S</span> holding only of <span
+class="math inline">Y_X</span>-tuples is a first-order fact about rigid
+<span class="math inline">S</span> and <span
+class="math inline">Y_X</span>). It is inextensible: given <span
+class="math inline">G</span> with <span class="math inline">\forall
+S(\mathcal P_kS\to\Box GS)</span> at a world <span
+class="math inline">u</span>, for every <span
+class="math inline">S</span> at <span class="math inline">u</span>
+either <span class="math inline">\mathcal P_kS</span>, so <span
+class="math inline">\Box GS</span>, or <span
+class="math inline">\neg\mathcal P_kS</span>, and then <span
+class="math inline">\Box\neg\mathcal P_kS</span>, rigidity being
+non-contingent under 5 by Lemma 1 and the other conjunct by Lemma 2; so
+<span class="math inline">\forall S\,\Box(\mathcal P_kS\to GS)</span>,
+and BF at the type of <span class="math inline">S</span> gives <span
+class="math inline">\Box\forall S(\mathcal P_kS\to GS)</span>, which is
+<span class="math inline">\mathcal P_k\le G</span>. And necessarily
+every <span class="math inline">k</span>-ary relation <span
+class="math inline">R</span> agrees on <span
+class="math inline">Y_X</span>-tuples with an instance: at any world,
+Rigid Comprehension gives a rigid relation coextensive with <span
+class="math inline">\lambda\bar x\, .\,R\bar
+x\land\bigwedge_iY_Xx_i</span>, which lies in <span
+class="math inline">\mathcal P_k</span>. So the instance of Second-Order
+Analytic Necessitism at <span class="math inline">\sigma</span> and
+<span class="math inline">n</span> holds. <span
+class="math inline">\square</span></p>
+<p><strong>Remarks.</strong> Atomicity is not used. Bacon’s Corollary
+5.1 derives the sentence-level Necessity of Second-Order Analysis from
+the same premises through Theorem 5.2, whose proof uses the Leibniz
+Biconditionals to show that a rigid real number structure stays complete
+at every accessible world; under S5 the world <span
+class="math inline">w</span> of the given structure stays accessible,
+and completeness is read off there. The rigid coextensions exist by
+□Rigid Comprehension, and 5 and BF do the rest, so □Plenitude, which
+gives C5 and □Rigid Comprehension on the map, gives the conclusion.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Related: <a href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could the truths of mathematics have been different?</a>.</strong> Bacon, Andrew (2025). Could the truths of mathematics have been different? Draft dated 9 October 2025, with online appendix; published in Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and Goodsell. Locators refer to the draft. The full Boolean-valued construction is in appendix §B.2, pp. 7–9 of the separately paginated appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — Corollary 5.1; Appendix C.2. Bacon derives the Necessity of Second-Order Analysis from 5 and □Rigid Comprehension through the rigidity of the canonical reals and of their power, using the Leibniz Biconditionals to carry completeness to other worlds. Under S5 the original world stays accessible, so completeness need not be carried, and the conclusion is the entity-level principle at every type.</li>
+<li><strong>Related: <a
+href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could
+the truths of mathematics have been different?</a>.</strong> Bacon,
+Andrew (2025). Could the truths of mathematics have been different?
+Draft dated 9 October 2025, with online appendix; published in
+Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and
+Goodsell. Locators refer to the draft. The full Boolean-valued
+construction is in appendix §B.2, pp. 7–9 of the separately paginated
+appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and
+Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. —
+Corollary 5.1; Appendix C.2. Bacon derives the Necessity of Second-Order
+Analysis from 5 and □Rigid Comprehension through the rigidity of the
+canonical reals and of their power, using the Leibniz Biconditionals to
+carry completeness to other worlds. Under S5 the original world stays
+accessible, so completeness need not be carried, and the conclusion is
+the entity-level principle at every type.</li>
 </ul>
 </body></html>

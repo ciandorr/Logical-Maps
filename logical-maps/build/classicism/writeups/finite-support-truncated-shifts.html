@@ -322,19 +322,108 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: truncated shifts of N</h1></header><h2 id="failure-of-boolean-completeness-at-type-t">Failure of Boolean Completeness at type <span class="math inline">t</span></h2>
-<p>At the identity arrow of this one-object action model, propositions are sets of arrows pinned down by a finite set of individuals. Algebraic entailment is set inclusion, and Boolean operations are the set operations.</p>
-<p>The higher-type domain obligation is essential. By <em>Classicism</em>, Definition D.3 and the following paragraph (16 May 2023 draft, pp. 73–74), an ideally full model is extensionally full. Consequently every set <span class="math inline">R\subseteq D_t</span> is the extension, at the identity, of a property of propositions. Concretely, the intension <span class="math inline">I_R=\{(h,p):p\in R\}</span> is independent of its arrow argument and is pinned down by the empty set. Its applicative behaviour is <span class="math inline">X_R\langle h,p\rangle=\{j:j^t p\in R\}</span>, not a constant truth-value function. This distinction supplies domain membership without the false rigidification argument in some trawl notes.</p>
-<p>Thus a family of domain propositions with no least upper bound refutes Boolean Completeness at type <span class="math inline">t</span>: the family of their complements is also the extension of a domain property, and a greatest lower bound for those complements would, by complementation, give the missing least upper bound. The bounds are taken <strong>inside</strong> <span class="math inline">D_t</span>. A set-theoretic intersection absent from <span class="math inline">D_t</span> need not by itself establish a missing greatest lower bound.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: truncated shifts of N</h1></header><h2 id="failure-of-boolean-completeness-at-type-t">Failure of Boolean
+Completeness at type <span class="math inline">t</span></h2>
+<p>At the identity arrow of this one-object action model, propositions
+are sets of arrows pinned down by a finite set of individuals. Algebraic
+entailment is set inclusion, and Boolean operations are the set
+operations.</p>
+<p>The higher-type domain obligation is essential. By
+<em>Classicism</em>, Definition D.3 and the following paragraph (16 May
+2023 draft, pp. 73–74), an ideally full model is extensionally full.
+Consequently every set <span class="math inline">R\subseteq D_t</span>
+is the extension, at the identity, of a property of propositions.
+Concretely, the intension <span class="math inline">I_R=\{(h,p):p\in
+R\}</span> is independent of its arrow argument and is pinned down by
+the empty set. Its applicative behaviour is <span
+class="math inline">X_R\langle h,p\rangle=\{j:j^t p\in R\}</span>, not a
+constant truth-value function. This distinction supplies domain
+membership without the false rigidification argument in some trawl
+notes.</p>
+<p>Thus a family of domain propositions with no least upper bound
+refutes Boolean Completeness at type <span class="math inline">t</span>:
+the family of their complements is also the extension of a domain
+property, and a greatest lower bound for those complements would, by
+complementation, give the missing least upper bound. The bounds are
+taken <strong>inside</strong> <span class="math inline">D_t</span>. A
+set-theoretic intersection absent from <span
+class="math inline">D_t</span> need not by itself establish a missing
+greatest lower bound.</p>
 <h3 id="the-domain-and-missing-bound">The domain and missing bound</h3>
-<p>Write <span class="math inline">k_n(m)=\max(m-n,0)</span>, for <span class="math inline">n\ge0</span>. The arrows compose by <span class="math inline">k_j\circ k_n=k_{j+n}</span>, and <span class="math inline">k_0</span> is the identity. If <span class="math inline">j&lt;n</span>, these arrows agree on a finite set <span class="math inline">F</span> exactly when every member of <span class="math inline">F</span> is at most <span class="math inline">j</span>. In particular, all indices beyond <span class="math inline">\max F</span> look the same on <span class="math inline">F</span>. Conversely, a sufficiently long finite initial segment distinguishes any specified finite set of arrow indices from one another and from the tail. So <span class="math inline">D_t</span> is precisely the finite/cofinite algebra on the indices <span class="math inline">\mathbb N</span>.</p>
-<p>Every singleton with an even index belongs to <span class="math inline">D_t</span>. Let <span class="math inline">R</span> be the family of those singletons. An upper bound in <span class="math inline">D_t</span> must contain all even indices, so it is cofinite. It therefore contains an odd index <span class="math inline">j</span>. Removing that singleton yields a strictly smaller cofinite upper bound. There is no least upper bound, so the preceding domain argument refutes Boolean Completeness at type <span class="math inline">t</span>.</p>
+<p>Write <span class="math inline">k_n(m)=\max(m-n,0)</span>, for <span
+class="math inline">n\ge0</span>. The arrows compose by <span
+class="math inline">k_j\circ k_n=k_{j+n}</span>, and <span
+class="math inline">k_0</span> is the identity. If <span
+class="math inline">j&lt;n</span>, these arrows agree on a finite set
+<span class="math inline">F</span> exactly when every member of <span
+class="math inline">F</span> is at most <span
+class="math inline">j</span>. In particular, all indices beyond <span
+class="math inline">\max F</span> look the same on <span
+class="math inline">F</span>. Conversely, a sufficiently long finite
+initial segment distinguishes any specified finite set of arrow indices
+from one another and from the tail. So <span
+class="math inline">D_t</span> is precisely the finite/cofinite algebra
+on the indices <span class="math inline">\mathbb N</span>.</p>
+<p>Every singleton with an even index belongs to <span
+class="math inline">D_t</span>. Let <span class="math inline">R</span>
+be the family of those singletons. An upper bound in <span
+class="math inline">D_t</span> must contain all even indices, so it is
+cofinite. It therefore contains an odd index <span
+class="math inline">j</span>. Removing that singleton yields a strictly
+smaller cofinite upper bound. There is no least upper bound, so the
+preceding domain argument refutes Boolean Completeness at type <span
+class="math inline">t</span>.</p>
 <h2 id="attribution-and-review">Attribution and review</h2>
-<p>The model construction is Bacon and Dorr’s. Their footnote 92 (p. 74) conjectures the additional type-<span class="math inline">t</span> Boolean Completeness failures. DeepSeek (<code>deepseek-flash</code>) proposed this model verdict in the trawl of 25 September 2026. OpenAI Codex (GPT-6) checked the source definitions and supplied the corrected proof above on the same date. The immutable drafts and exact API edit provenance are identified in the model record’s <code>certificate.trawl</code>. This is an informal mathematical review; no Lean verification is claimed.</p>
-<h2 id="additional-arguments-25-september-2026">Additional arguments (25 September 2026)</h2>
-<p>Boolean Completeness fails at type <span class="math inline">t</span> as well, which the source (n. 92) conjectures but does not show. Any set <span class="math inline">F</span> of propositions is the extension at the identity of an element of the domain at type <span class="math inline">t\to t</span>, namely the profile <span class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}</span>: it is natural, independent of <span class="math inline">h</span> and so pinned down by the empty set, and each of its values is pinned down by the pinning set of <span class="math inline">p</span>, since <span class="math inline">i\cdot p</span> depends only on the values of <span class="math inline">i</span> there. A least upper bound of <span class="math inline">F</span> under entailment is a least finitely pinned superset of <span class="math inline">\bigcup F</span>, and it exists only if the least <span class="math inline">S</span>-pinned superset of <span class="math inline">\bigcup F</span> stops shrinking as the finite set <span class="math inline">S</span> grows. Here an arrow <span class="math inline">k_n</span> is determined by its value at any <span class="math inline">m\ge n</span> and all <span class="math inline">k_n</span> with <span class="math inline">n\ge N</span> agree on <span class="math inline">\{0,\ldots,N\}</span>, so the finitely pinned propositions are exactly the finite and cofinite sets of arrows. Let <span class="math inline">F</span> be the family of singletons <span class="math inline">\{k_{2j}\}</span>: an upper bound is a cofinite set containing them, and removing an odd-indexed member of it gives a strictly smaller upper bound. So <span class="math inline">F</span> has no least upper bound, and, taking pointwise negations, the family of complements has no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.</p>
+<p>The model construction is Bacon and Dorr’s. Their footnote 92 (p. 74)
+conjectures the additional type-<span class="math inline">t</span>
+Boolean Completeness failures. DeepSeek (<code>deepseek-flash</code>)
+proposed this model verdict in the trawl of 25 September 2026. OpenAI
+Codex (GPT-6) checked the source definitions and supplied the corrected
+proof above on the same date. The immutable drafts and exact API edit
+provenance are identified in the model record’s
+<code>certificate.trawl</code>. This is an informal mathematical review;
+no Lean verification is claimed.</p>
+<h2 id="additional-arguments-25-september-2026">Additional arguments (25
+September 2026)</h2>
+<p>Boolean Completeness fails at type <span class="math inline">t</span>
+as well, which the source (n. 92) conjectures but does not show. Any set
+<span class="math inline">F</span> of propositions is the extension at
+the identity of an element of the domain at type <span
+class="math inline">t\to t</span>, namely the profile <span
+class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in
+F\}</span>: it is natural, independent of <span
+class="math inline">h</span> and so pinned down by the empty set, and
+each of its values is pinned down by the pinning set of <span
+class="math inline">p</span>, since <span class="math inline">i\cdot
+p</span> depends only on the values of <span
+class="math inline">i</span> there. A least upper bound of <span
+class="math inline">F</span> under entailment is a least finitely pinned
+superset of <span class="math inline">\bigcup F</span>, and it exists
+only if the least <span class="math inline">S</span>-pinned superset of
+<span class="math inline">\bigcup F</span> stops shrinking as the finite
+set <span class="math inline">S</span> grows. Here an arrow <span
+class="math inline">k_n</span> is determined by its value at any <span
+class="math inline">m\ge n</span> and all <span
+class="math inline">k_n</span> with <span class="math inline">n\ge
+N</span> agree on <span class="math inline">\{0,\ldots,N\}</span>, so
+the finitely pinned propositions are exactly the finite and cofinite
+sets of arrows. Let <span class="math inline">F</span> be the family of
+singletons <span class="math inline">\{k_{2j}\}</span>: an upper bound
+is a cofinite set containing them, and removing an odd-indexed member of
+it gives a strictly smaller upper bound. So <span
+class="math inline">F</span> has no least upper bound, and, taking
+pointwise negations, the family of complements has no greatest lower
+bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026;
+not in the source.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, Proposition D.5(8), pp. 74–75; construction pp. 78–79, Part 8; p. 79 (No Pure Contingency)</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, Proposition D.5(8), pp. 74–75; construction pp. 78–79, Part
+8; p. 79 (No Pure Contingency)</li>
 </ul>
 </body></html>

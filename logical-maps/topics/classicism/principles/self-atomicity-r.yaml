@@ -1,0 +1,26 @@
+id: self-atomicity-r
+name: Self-Atomicity
+category: more-boolean-structure
+statement: 'At each relational type, every possible entity (one distinct from bottom) is entailed by a
+  self-atom: a possible entity that necessarily, if instantiated, is an atom.'
+formal: $\forall X^\sigma\, .\,\Diamond_\sigma X\to\exists Q^\sigma\, .\,\operatorname{SelfAtom}_\sigma(Q)\land
+  Q\le_\sigma X\qquad(\sigma\ne e)$
+definitions: 'where $\Diamond_\sigma X:=X\ne\bot_\sigma$ and $\operatorname{SelfAtom}_\sigma(X):=\Diamond_\sigma
+  X\land\Box(\exists\bar x\, .\,X\bar x\to\operatorname{Atom}_\sigma(X))$: a self-atom is a possible entity
+  that is necessarily an atom whenever it is instantiated; for a proposition, one that, wherever it is
+  true, is the actual-world proposition there (Background, Self-atoms).'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: 'Cian Dorr’s weakening of Strong Atomicity (25 October 2026): a strong atom is
+  an atom at every world, a self-atom an atom at every world where it holds. It lies strictly between
+  Strong Atomicity and □Actuality, and is independent of Atomicity in both directions;
+  the bridge principles [[atoms-are-self-atoms-r]], [[self-atoms-are-atoms-r]], [[self-atoms-are-strong-atoms-r]]
+  and [[atoms-are-strong-atoms-r]] connect the three notions. The dual form, that whatever is entailed
+  by every self-atom is necessary, is equivalent as for Atomicity.'
+aliases:
+- Self-Atomism
+lean_def: Classicism.P.SelfAtomicity.schemaIn

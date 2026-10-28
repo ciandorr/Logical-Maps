@@ -322,27 +322,145 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>BF, Weak Rigid Comprehension, Atomicity and Relational Choice imply Intensional Choice</h1></header><p>The construction is Cian Dorr’s, proposed on 3 October 2026 with Rigid Comprehension. The restriction to atoms, the uniqueness argument and the weakening to Weak Rigid Comprehension are by Claude Opus 5.5 (Anthropic), 3 October 2026. Informal proof, not Lean-verified.</p>
-<p>Fix <span class="math inline">\sigma</span> and let <span class="math inline">F^{\sigma t}</span> be necessarily instantiated. Atomicity is used at type <span class="math inline">t</span>, BF at types <span class="math inline">t</span> and <span class="math inline">\sigma</span>, Relational Choice at types <span class="math inline">t,\sigma</span>, and Weak Rigid Comprehension at type <span class="math inline">t\sigma t</span>. In this write-up an <em>atom</em> is an atom of type <span class="math inline">t</span>.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>BF, Weak Rigid Comprehension, Atomicity and Relational Choice imply Intensional Choice</h1></header><p>The construction is Cian Dorr’s, proposed on 3 October 2026 with
+Rigid Comprehension. The restriction to atoms, the uniqueness argument
+and the weakening to Weak Rigid Comprehension are by Claude Opus 5.5
+(Anthropic), 3 October 2026. Informal proof, not Lean-verified.</p>
+<p>Fix <span class="math inline">\sigma</span> and let <span
+class="math inline">F^{\sigma t}</span> be necessarily instantiated.
+Atomicity is used at type <span class="math inline">t</span>, BF at
+types <span class="math inline">t</span> and <span
+class="math inline">\sigma</span>, Relational Choice at types <span
+class="math inline">t,\sigma</span>, and Weak Rigid Comprehension at
+type <span class="math inline">t\sigma t</span>. In this write-up an
+<em>atom</em> is an atom of type <span class="math inline">t</span>.</p>
 <h2 id="two-facts-about-atoms">Two facts about atoms</h2>
 <ol type="1">
-<li><em>An atom decides every proposition.</em> If <span class="math inline">w</span> is an atom and <span class="math inline">\Diamond(w\land p)</span>, then <span class="math inline">w\le p</span>. With BF this extends to quantified propositions. If <span class="math inline">w\le\exists x\, .\,\phi</span>, then <span class="math inline">\Diamond\exists x\, .\,(w\land\phi)</span>, so BF gives an <span class="math inline">x</span> with <span class="math inline">\Diamond(w\land\phi)</span>, and hence <span class="math inline">w\le\phi</span>.</li>
-<li><em>Distinct atoms are incompatible.</em> If atoms <span class="math inline">w_1,w_2</span> satisfy <span class="math inline">\Diamond(w_1\land w_2)</span>, then <span class="math inline">w_1\le w_2</span> and <span class="math inline">w_2\le w_1</span>, so <span class="math inline">w_1=w_2</span>.</li>
+<li><em>An atom decides every proposition.</em> If <span
+class="math inline">w</span> is an atom and <span
+class="math inline">\Diamond(w\land p)</span>, then <span
+class="math inline">w\le p</span>. With BF this extends to quantified
+propositions. If <span class="math inline">w\le\exists x\,
+.\,\phi</span>, then <span class="math inline">\Diamond\exists x\,
+.\,(w\land\phi)</span>, so BF gives an <span
+class="math inline">x</span> with <span
+class="math inline">\Diamond(w\land\phi)</span>, and hence <span
+class="math inline">w\le\phi</span>.</li>
+<li><em>Distinct atoms are incompatible.</em> If atoms <span
+class="math inline">w_1,w_2</span> satisfy <span
+class="math inline">\Diamond(w_1\land w_2)</span>, then <span
+class="math inline">w_1\le w_2</span> and <span
+class="math inline">w_2\le w_1</span>, so <span
+class="math inline">w_1=w_2</span>.</li>
 </ol>
 <h2 id="the-construction">The construction</h2>
-<p>Put <span class="math inline">U:=\lambda wx\, .\,\operatorname{Atom}(w)\to w\le Fx</span>. It is serial. A non-atom is related to everything. An atom <span class="math inline">w</span> entails <span class="math inline">\exists x\, .\,Fx</span> by the necessity of that proposition, so by fact 1 <span class="math inline">w\le Fx</span> for some <span class="math inline">x</span>. Relational Choice gives a functional <span class="math inline">V</span> with <span class="math inline">Vwx\to Uwx</span>. Restrict it to atoms, <span class="math inline">V&#39;:=\lambda wx\, .\,\operatorname{Atom}(w)\land Vwx</span>. Weak Rigid Comprehension gives a weakly rigid <span class="math inline">R</span> coextensive with <span class="math inline">V&#39;</span>. So the instances of <span class="math inline">R</span> are exactly the pairs <span class="math inline">(w,x_w)</span>, where <span class="math inline">w</span> is an atom and <span class="math inline">x_w</span> is its chosen value, and <span class="math inline">w\le Fx_w</span> in each case. Put <span class="math display">G:=\lambda x\, .\,\exists w\, .\,w\land Rwx .</span></p>
-<p><strong><span class="math inline">G\le F</span>.</strong> Let <span class="math inline">X:=\lambda wx\, .\,w\to Fx</span>. Every instance <span class="math inline">(w,x_w)</span> of <span class="math inline">R</span> satisfies <span class="math inline">\Box Xwx_w</span>, because <span class="math inline">w\le Fx_w</span>. So weak inextensibility gives <span class="math inline">R\le X</span>, that is, <span class="math inline">\Box\forall wx\, .\,Rwx\to(w\to Fx)</span>. Hence <span class="math inline">\Box\forall x\, .\,Gx\to Fx</span>.</p>
-<p><strong><span class="math inline">\Box\exists x\, .\,Gx</span>.</strong> Suppose otherwise. Atomicity gives an atom <span class="math inline">w_0</span> with <span class="math inline">w_0\le\neg\exists x\, .\,Gx</span>. But <span class="math inline">Rw_0x_{w_0}</span>, so persistence gives <span class="math inline">\Box Rw_0x_{w_0}</span>, and then <span class="math inline">w_0\le\exists x\, .\,Gx</span>. This contradicts <span class="math inline">\Diamond w_0</span>.</p>
-<p><strong>Lemma (no new instances below an atom).</strong> If <span class="math inline">w^*</span> is an atom and <span class="math inline">w^*\le Rwx</span>, then some actual instance <span class="math inline">(w_1,x_1)</span> of <span class="math inline">R</span> satisfies <span class="math inline">w^*\le(w=w_1\land x=x_1)</span>.</p>
-<p><em>Proof.</em> Suppose not. Let <span class="math inline">X:=\lambda ab\, .\,\neg(w^*\land a=w\land b=x)</span>. For each actual instance <span class="math inline">(w_1,x_1)</span>, the proposition <span class="math inline">w^*\land w_1=w\land x_1=x</span> is impossible: otherwise fact 1 would give <span class="math inline">w^*\le(w_1=w\land x_1=x)</span>. So <span class="math inline">\Box Xw_1x_1</span>. Weak inextensibility gives <span class="math inline">R\le X</span>, hence <span class="math inline">\Box(Rwx\to\neg w^*)</span>. With <span class="math inline">w^*\le Rwx</span>, that gives <span class="math inline">\Box\neg w^*</span>, which is impossible. ∎</p>
-<p><strong>Uniqueness.</strong> Suppose <span class="math inline">\Box\exists!x\, .\,Gx</span> fails. Atomicity gives an atom <span class="math inline">w^*</span> entailing that <span class="math inline">G</span> does not have exactly one instance. Since <span class="math inline">\Box\exists x\, .\,Gx</span>, that atom entails <span class="math inline">\exists xy\, .\,Gx\land Gy\land x\ne y</span>. By fact 1, applied three times, there are <span class="math inline">x,y,w,w&#39;</span> such that <span class="math display">w^*\le w\land Rwx,\qquad w^*\le w&#39;\land Rw&#39;y,\qquad w^*\le x\ne y .</span> The lemma gives actual instances <span class="math inline">(w_1,x_1)</span> and <span class="math inline">(w_2,x_2)</span> with <span class="math inline">w^*\le(w=w_1\land x=x_1)</span> and <span class="math inline">w^*\le(w&#39;=w_2\land y=x_2)</span>. - Since <span class="math inline">w^*\le w</span>, we get <span class="math inline">w^*\le w_1</span>, and likewise <span class="math inline">w^*\le w_2</span>. - So <span class="math inline">\Diamond(w_1\land w_2)</span>. Both are actual atoms, since every instance of <span class="math inline">R</span> has an atom as its first term, so <span class="math inline">w_1=w_2</span> by fact 2. - <span class="math inline">V</span> is functional, so <span class="math inline">x_1=x_2</span>, and therefore <span class="math inline">w^*\le x=y</span>.</p>
-<p>This contradicts <span class="math inline">w^*\le x\ne y</span> and <span class="math inline">\Diamond w^*</span>.</p>
-<p>So <span class="math inline">G\le F</span> and <span class="math inline">G</span> is necessarily uniquely instantiated.</p>
+<p>Put <span class="math inline">U:=\lambda wx\,
+.\,\operatorname{Atom}(w)\to w\le Fx</span>. It is serial. A non-atom is
+related to everything. An atom <span class="math inline">w</span>
+entails <span class="math inline">\exists x\, .\,Fx</span> by the
+necessity of that proposition, so by fact 1 <span
+class="math inline">w\le Fx</span> for some <span
+class="math inline">x</span>. Relational Choice gives a functional <span
+class="math inline">V</span> with <span class="math inline">Vwx\to
+Uwx</span>. Restrict it to atoms, <span
+class="math inline">V&#39;:=\lambda wx\, .\,\operatorname{Atom}(w)\land
+Vwx</span>. Weak Rigid Comprehension gives a weakly rigid <span
+class="math inline">R</span> coextensive with <span
+class="math inline">V&#39;</span>. So the instances of <span
+class="math inline">R</span> are exactly the pairs <span
+class="math inline">(w,x_w)</span>, where <span
+class="math inline">w</span> is an atom and <span
+class="math inline">x_w</span> is its chosen value, and <span
+class="math inline">w\le Fx_w</span> in each case. Put <span
+class="math display">G:=\lambda x\, .\,\exists w\, .\,w\land Rwx
+.</span></p>
+<p><strong><span class="math inline">G\le F</span>.</strong> Let <span
+class="math inline">X:=\lambda wx\, .\,w\to Fx</span>. Every instance
+<span class="math inline">(w,x_w)</span> of <span
+class="math inline">R</span> satisfies <span class="math inline">\Box
+Xwx_w</span>, because <span class="math inline">w\le Fx_w</span>. So
+weak inextensibility gives <span class="math inline">R\le X</span>, that
+is, <span class="math inline">\Box\forall wx\, .\,Rwx\to(w\to
+Fx)</span>. Hence <span class="math inline">\Box\forall x\, .\,Gx\to
+Fx</span>.</p>
+<p><strong><span class="math inline">\Box\exists x\,
+.\,Gx</span>.</strong> Suppose otherwise. Atomicity gives an atom <span
+class="math inline">w_0</span> with <span
+class="math inline">w_0\le\neg\exists x\, .\,Gx</span>. But <span
+class="math inline">Rw_0x_{w_0}</span>, so persistence gives <span
+class="math inline">\Box Rw_0x_{w_0}</span>, and then <span
+class="math inline">w_0\le\exists x\, .\,Gx</span>. This contradicts
+<span class="math inline">\Diamond w_0</span>.</p>
+<p><strong>Lemma (no new instances below an atom).</strong> If <span
+class="math inline">w^*</span> is an atom and <span
+class="math inline">w^*\le Rwx</span>, then some actual instance <span
+class="math inline">(w_1,x_1)</span> of <span
+class="math inline">R</span> satisfies <span
+class="math inline">w^*\le(w=w_1\land x=x_1)</span>.</p>
+<p><em>Proof.</em> Suppose not. Let <span class="math inline">X:=\lambda
+ab\, .\,\neg(w^*\land a=w\land b=x)</span>. For each actual instance
+<span class="math inline">(w_1,x_1)</span>, the proposition <span
+class="math inline">w^*\land w_1=w\land x_1=x</span> is impossible:
+otherwise fact 1 would give <span class="math inline">w^*\le(w_1=w\land
+x_1=x)</span>. So <span class="math inline">\Box Xw_1x_1</span>. Weak
+inextensibility gives <span class="math inline">R\le X</span>, hence
+<span class="math inline">\Box(Rwx\to\neg w^*)</span>. With <span
+class="math inline">w^*\le Rwx</span>, that gives <span
+class="math inline">\Box\neg w^*</span>, which is impossible. ∎</p>
+<p><strong>Uniqueness.</strong> Suppose <span
+class="math inline">\Box\exists!x\, .\,Gx</span> fails. Atomicity gives
+an atom <span class="math inline">w^*</span> entailing that <span
+class="math inline">G</span> does not have exactly one instance. Since
+<span class="math inline">\Box\exists x\, .\,Gx</span>, that atom
+entails <span class="math inline">\exists xy\, .\,Gx\land Gy\land x\ne
+y</span>. By fact 1, applied three times, there are <span
+class="math inline">x,y,w,w&#39;</span> such that <span
+class="math display">w^*\le w\land Rwx,\qquad w^*\le w&#39;\land
+Rw&#39;y,\qquad w^*\le x\ne y .</span> The lemma gives actual instances
+<span class="math inline">(w_1,x_1)</span> and <span
+class="math inline">(w_2,x_2)</span> with <span
+class="math inline">w^*\le(w=w_1\land x=x_1)</span> and <span
+class="math inline">w^*\le(w&#39;=w_2\land y=x_2)</span>. - Since <span
+class="math inline">w^*\le w</span>, we get <span
+class="math inline">w^*\le w_1</span>, and likewise <span
+class="math inline">w^*\le w_2</span>. - So <span
+class="math inline">\Diamond(w_1\land w_2)</span>. Both are actual
+atoms, since every instance of <span class="math inline">R</span> has an
+atom as its first term, so <span class="math inline">w_1=w_2</span> by
+fact 2. - <span class="math inline">V</span> is functional, so <span
+class="math inline">x_1=x_2</span>, and therefore <span
+class="math inline">w^*\le x=y</span>.</p>
+<p>This contradicts <span class="math inline">w^*\le x\ne y</span> and
+<span class="math inline">\Diamond w^*</span>.</p>
+<p>So <span class="math inline">G\le F</span> and <span
+class="math inline">G</span> is necessarily uniquely instantiated.</p>
 <h2 id="remarks">Remarks</h2>
-<p>Restricting to atoms is essential. Without ND, a weakly rigid (indeed rigid) relation that is functional need not be necessarily functional. If distinct arguments <span class="math inline">a\ne b</span> with distinct values are identified at some world, the relation gives the merged argument two values there. If <span class="math inline">V</span> were used unrestricted, a non-atom related to some value could be identified, at a world, with the true atom and give <span class="math inline">G</span> a second instance. Distinct actual atoms can also be identified, but only at worlds where both are false, by fact 2, and <span class="math inline">G</span> looks only at true first terms.</p>
-<p>Fact 1 is BF in disguise. Atomicity and BF are used only at the evaluation point. Rigidity enters only through persistence and unboxed weak inextensibility.</p>
+<p>Restricting to atoms is essential. Without ND, a weakly rigid (indeed
+rigid) relation that is functional need not be necessarily functional.
+If distinct arguments <span class="math inline">a\ne b</span> with
+distinct values are identified at some world, the relation gives the
+merged argument two values there. If <span class="math inline">V</span>
+were used unrestricted, a non-atom related to some value could be
+identified, at a world, with the true atom and give <span
+class="math inline">G</span> a second instance. Distinct actual atoms
+can also be identified, but only at worlds where both are false, by fact
+2, and <span class="math inline">G</span> looks only at true first
+terms.</p>
+<p>Fact 1 is BF in disguise. Atomicity and BF are used only at the
+evaluation point. Rigidity enters only through persistence and unboxed
+weak inextensibility.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: <a href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could the truths of mathematics have been different?</a>.</strong> Bacon, Andrew (2025). Could the truths of mathematics have been different? Draft dated 9 October 2025, with online appendix; published in Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and Goodsell. Locators refer to the draft. The full Boolean-valued construction is in appendix §B.2, pp. 7–9 of the separately paginated appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — §6, p. 27. Formulation of Intensional Choice.</li>
+<li><strong>Background: <a
+href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could
+the truths of mathematics have been different?</a>.</strong> Bacon,
+Andrew (2025). Could the truths of mathematics have been different?
+Draft dated 9 October 2025, with online appendix; published in
+Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and
+Goodsell. Locators refer to the draft. The full Boolean-valued
+construction is in appendix §B.2, pp. 7–9 of the separately paginated
+appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and
+Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — §6,
+p. 27. Formulation of Intensional Choice.</li>
 </ul>
 </body></html>

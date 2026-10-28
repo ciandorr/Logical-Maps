@@ -323,29 +323,73 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Logical Necessity ⇒ Separated Structure</h1></header><p class="cert">
-Result — Source: Logical Combinatorialism; produced by Andrew Bacon; the schematic derivation was written out by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.
+Result — Source: Logical Combinatorialism; produced by Andrew Bacon; the
+schematic derivation was written out by Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 22 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Logical Necessity.</strong> The Logical Necessity schema: necessity at distinct matching constants is equivalent to universal truth of the pure-formula. Preserve the side conditions of Witnessed Possibility.</li>
+<li><strong>Logical Necessity.</strong> The Logical Necessity schema:
+necessity at distinct matching constants is equivalent to universal
+truth of the pure-formula. Preserve the side conditions of Witnessed
+Possibility.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
+<li><strong>Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">c</span> be a constant of type <span class="math inline">\sigma</span> and <span class="math inline">F,G</span> closed terms of type <span class="math inline">\sigma\tau</span> not containing <span class="math inline">c</span>, with <span class="math inline">Fc=Gc</span>. Enumerate the constants occurring in <span class="math inline">F</span> or <span class="math inline">G</span> as <span class="math inline">\bar d</span>, all distinct from <span class="math inline">c</span>, and abstract them: <span class="math inline">F=F^\circ\bar d</span>, <span class="math inline">G=G^\circ\bar d</span> with <span class="math inline">F^\circ,G^\circ</span> closed and pure, by <span class="math inline">\beta</span>. Let <span class="math inline">P:=F^\circ\bar y\,x=G^\circ\bar y\,x</span>, pure with free variables <span class="math inline">\bar y,x</span>. NI gives <span class="math inline">\Box P[\bar d,c/\bar y,x]</span>, so Logical Necessity, left to right, gives <span class="math inline">\forall\bar y x\, .\,P</span>. This closed pure truth is necessary by the empty-tuple instance of Logical Necessity, so <span class="math inline">\Box\forall\bar y x\, .\,F^\circ\bar y x=G^\circ\bar y x</span>. CBF gives <span class="math inline">\forall\bar y\, .\,\Box\forall x\, .\,F^\circ\bar yx=G^\circ\bar yx</span> and Modalized Functionality, a theorem of C, gives <span class="math inline">\forall\bar y\, .\,F^\circ\bar y=G^\circ\bar y</span>. Instantiating <span class="math inline">\bar y:=\bar d</span> yields <span class="math inline">F=G</span>.</p>
+<p>Let <span class="math inline">c</span> be a constant of type <span
+class="math inline">\sigma</span> and <span
+class="math inline">F,G</span> closed terms of type <span
+class="math inline">\sigma\tau</span> not containing <span
+class="math inline">c</span>, with <span
+class="math inline">Fc=Gc</span>. Enumerate the constants occurring in
+<span class="math inline">F</span> or <span class="math inline">G</span>
+as <span class="math inline">\bar d</span>, all distinct from <span
+class="math inline">c</span>, and abstract them: <span
+class="math inline">F=F^\circ\bar d</span>, <span
+class="math inline">G=G^\circ\bar d</span> with <span
+class="math inline">F^\circ,G^\circ</span> closed and pure, by <span
+class="math inline">\beta</span>. Let <span
+class="math inline">P:=F^\circ\bar y\,x=G^\circ\bar y\,x</span>, pure
+with free variables <span class="math inline">\bar y,x</span>. NI gives
+<span class="math inline">\Box P[\bar d,c/\bar y,x]</span>, so Logical
+Necessity, left to right, gives <span class="math inline">\forall\bar y
+x\, .\,P</span>. This closed pure truth is necessary by the empty-tuple
+instance of Logical Necessity, so <span
+class="math inline">\Box\forall\bar y x\, .\,F^\circ\bar y x=G^\circ\bar
+y x</span>. CBF gives <span class="math inline">\forall\bar y\,
+.\,\Box\forall x\, .\,F^\circ\bar yx=G^\circ\bar yx</span> and Modalized
+Functionality, a theorem of C, gives <span
+class="math inline">\forall\bar y\, .\,F^\circ\bar y=G^\circ\bar
+y</span>. Instantiating <span class="math inline">\bar y:=\bar d</span>
+yields <span class="math inline">F=G</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Bacon derives the quantified form from Quantified Logical Necessity and Modalized Functionality and says the schematic form follows in the same way. Both directions of Logical Necessity are used: the witnessed direction to pass from the necessary identity at the constants to the universal claim, and No Pure Contingency to necessitate that claim before applying Modalized Functionality.</p>
+<p>Bacon derives the quantified form from Quantified Logical Necessity
+and Modalized Functionality and says the schematic form follows in the
+same way. Both directions of Logical Necessity are used: the witnessed
+direction to pass from the necessary identity at the constants to the
+universal claim, and No Pure Contingency to necessitate that claim
+before applying Modalized Functionality.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Logical Combinatorialism</strong> — Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §4, pp. 561–562.</li>
+<li><strong>Logical Combinatorialism</strong> — Andrew Bacon, Logical
+Combinatorialism, Philosophical Review 129 (2020), §4, pp. 561–562.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/logical-necessity-r-implies-separated-structure-r.yaml</code>
+Record:
+<code>topics/classicism/results/logical-necessity-r-implies-separated-structure-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Logical Combinatorialism.</strong> Bacon, Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the import of 22 September 2026; section, footnote and page locators refer to the published pagination. — §4, pp. 561–562</li>
+<li><strong>Proof: Logical Combinatorialism.</strong> Bacon, Andrew
+(2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589.
+As cited in Classicism, §§2.5 and 3.5. Read directly for the import of
+22 September 2026; section, footnote and page locators refer to the
+published pagination. — §4, pp. 561–562</li>
 </ul>
 </body></html>

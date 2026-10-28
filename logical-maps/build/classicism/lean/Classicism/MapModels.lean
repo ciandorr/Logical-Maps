@@ -3,6 +3,10 @@ import Classicism.Results.Consistency.Consistency
 import Classicism.Models.Conditions
 import Classicism.Models.FullActionModels
 import Classicism.Models.OldNewComplete
+import Classicism.Models.FiniteCompressionSeparation
+import Classicism.Models.FixedPointEntranceBarcan
+import Classicism.Models.FixedPointEntranceRelationalBarcan
+import Classicism.Models.FixedPointEntranceChoice
 import Mathlib.Data.Fintype.Powerset
 import Mathlib.Data.Finite.Sigma
 import Mathlib.Data.Finite.Prod
@@ -233,6 +237,53 @@ theorem necessary_boolean_completeness_r :
     not_holdsAx_of ⟨OldNew.et, ⟨trivial, trivial⟩, rfl⟩ OldNew.root_not_box_bc_et
 
 end symmetric_old_new_individuals
+
+namespace symmetric_finite_compression_entrance
+
+/-! The finite-compression model in Lean (`Models/FiniteCompression*.lean`), ported 25 October 2026
+from Daniel Kodsi's submission; proofs by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi. -/
+
+open Classicism.Meta.Intensional
+
+theorem tame_rigidity_r :
+    Statements.Models.symmetric_finite_compression_entrance.tame_rigidity_r :=
+  verdict_holds FiniteCompression.isModel FiniteCompression.holds_tame_schema
+
+theorem rigid_power_r :
+    Statements.Models.symmetric_finite_compression_entrance.rigid_power_r :=
+  verdict_holds FiniteCompression.isModel FiniteCompression.holds_rigid_power_schema
+
+/-- Weakly Rigid Power fails at `et`. -/
+theorem weakly_rigid_power_r :
+    Statements.Models.symmetric_finite_compression_entrance.weakly_rigid_power_r :=
+  verdict_fails FiniteCompression.isModel <|
+    not_holdsAx_of ⟨FiniteCompression.et, ⟨trivial, trivial⟩, rfl⟩
+      FiniteCompression.not_weakly_rigid_power_et
+
+end symmetric_finite_compression_entrance
+
+namespace symmetric_entrance_qualitative_links
+
+/-! The one-point entrance to the qualitative-links tail (`Models/FixedPointEntrance*.lean`), ported
+25 October 2026 from Daniel Kodsi's submission; proofs by GPT-6 Astra (OpenAI), prompted by Daniel
+Kodsi. The rigidity verdicts are not formalized there. -/
+
+open Classicism.Meta.Intensional.FixedPointEntrance
+
+theorem relational_choice_r :
+    Statements.Models.symmetric_entrance_qualitative_links.relational_choice_r :=
+  verdict_holds Qualitative.isModel Qualitative.RelationalChoice.holds_relational_choice_schema
+
+theorem barcan_t :
+    Statements.Models.symmetric_entrance_qualitative_links.barcan_t :=
+  verdict_fails Qualitative.isModel <| not_holdsAx_of rfl Qualitative.Barcan.not_barcan_t
+
+theorem barcan_relational :
+    Statements.Models.symmetric_entrance_qualitative_links.barcan_relational :=
+  verdict_fails Qualitative.isModel <|
+    not_holdsAx_of ⟨.t, trivial, rfl⟩ (Qualitative.RelationalBarcan.not_barcan_relational .t)
+
+end symmetric_entrance_qualitative_links
 
 namespace finite_support_pair_injections_or_collapses
 

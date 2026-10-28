@@ -64,7 +64,7 @@ and the theorems are stated for them where the record is about them.
   Necessity of Arithmetic is a sentence schema of `Certified/Arithmetic.lean`, and its
   `C5` record is here; Actuality, Boolean Completeness, Atomlessness and Plenitude
   are now in `Principles.lean`, with their shallow records in `Results/Records.lean`.)
-- **Models not yet built**: the incompatibilities of Possibility with `□`Strong Leibniz
+- **Models not yet built**: the incompatibilities of Possibility with `□`Strong Atomicity
   (`t`) and `□`Relational Choice need the coalesced sums and a Henkin model without
   choice; with Countable Boolean Completeness, Gödel. The maximalist incompatibilities with
   `□`Functionality and Rigid Comprehension need models refuting those principles; those

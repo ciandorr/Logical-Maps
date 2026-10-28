@@ -27,3 +27,33 @@ says that every possible entity is entailed by an atom; [[strong-atomicity-r|Str
 Atomicity]] requires a strong atom. Each is one direction of a biconditional that Bacon
 calls the Weak and the Strong Leibniz Biconditionals; the other direction is a theorem of C.
 The type-$t$ instance of each is recorded separately.
+
+## Self-atoms
+
+::: definition {#self-atoms}
+title: self-atoms
+lean: Classicism.P.SelfAtom
+credit: Cian Dorr, 25 October 2026
+---
+A *self-atom* is a possible entity that is necessarily an atom whenever it is instantiated:
+
+$$
+\operatorname{SelfAtom}_\sigma(X):=\Diamond_\sigma X\land
+  \Box\bigl(\exists\bar x\, .\,X\bar x\to\operatorname{Atom}_\sigma(X)\bigr),
+\qquad
+\operatorname{SelfAtom}_t(p):=\Diamond p\land\Box\bigl(p\to\operatorname{Atom}_t(p)\bigr).
+$$
+:::
+
+At type $t$, since $p\land\operatorname{Atom}_t(p)$ is equivalent in C to
+$p\land\forall q\, .\,q\to p\le q$, a self-atom is a possible proposition that
+entails that it is the actual world. A strong atom is an atom at every world,
+a self-atom an atom at every world where it holds, an atom an atom at the
+evaluation point; a strong atom is a self-atom and a true atom is a
+self-atom, but a self-atom need not be an atom. [[self-atomicity-r|Self-Atomicity]] replaces
+$\operatorname{SAtom}$ in Strong Atomicity by $\operatorname{SelfAtom}$, and the four
+*bridge principles* say that [[atoms-are-self-atoms-r|atoms are self-atoms]],
+that [[self-atoms-are-atoms-r|self-atoms are atoms]], that
+[[self-atoms-are-strong-atoms-r|self-atoms are strong atoms]], and that
+[[atoms-are-strong-atoms-r|atoms are strong atoms]]; the last is what Strong Atomicity
+adds to Atomicity.

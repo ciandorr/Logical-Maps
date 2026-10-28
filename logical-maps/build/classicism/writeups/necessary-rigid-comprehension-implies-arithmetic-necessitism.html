@@ -323,35 +323,119 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□Rigid Comprehension ⇒ Arithmetic Necessitism</h1></header><p class="cert">
-Result — Source: Continuum Contingency (draft); produced by Zachary Goodsell (Theorem 3 of Barton and Goodsell’s Continuum Contingency, attributed there to Goodsell 2021); transposed to the map’s numbers at every type by Claude Fable 5.1 (Anthropic), 23 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026.
+Result — Source: Continuum Contingency (draft); produced by Zachary
+Goodsell (Theorem 3 of Barton and Goodsell’s Continuum Contingency,
+attributed there to Goodsell 2021); transposed to the map’s numbers at
+every type by Claude Fable 5.1 (Anthropic), 23 October 2026; recorded by
+Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October
+2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation, including a proposition, is coextensive with a rigid one.</li>
+<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation,
+including a proposition, is coextensive with a rigid one.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at <span class="math inline">\sigma</span> form a rigid property with necessarily distinct instances. One sentence for each type <span class="math inline">\sigma</span>.</li>
+<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero
+is not a successor and successor is injective on numbers, the numbers at
+<span class="math inline">\sigma</span> form a rigid property with
+necessarily distinct instances. One sentence for each type <span
+class="math inline">\sigma</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Assume <span class="math inline">\Box</span>Rigid Comprehension and <span class="math inline">\Box I^*_\sigma</span>. Persistence of <span class="math inline">\mathbb N_\sigma</span> is a theorem of C: numbers are necessarily numbers, by induction with the property <span class="math inline">\lambda n\, .\,\Box\mathbb N_\sigma n</span>, which holds of <span class="math inline">\mathbf 0_\sigma</span> and passes to successors by K (the step arith_N_box of the Lean proof of c5-implies-necessity-of-arithmetic), necessitated. Necessary distinctness: distinct numbers <span class="math inline">m\ne n</span> are comparable, say <span class="math inline">\operatorname{Sum}_\sigma(m,k,n)</span> with <span class="math inline">k\ne\mathbf 0_\sigma</span>, by the trichotomy of the order on numbers, which induction gives; sums of numbers are necessary when true (arith_Sum_box), <span class="math inline">k</span> is necessarily a nonzero number, and at every world <span class="math inline">I^*_\sigma</span> makes <span class="math inline">\operatorname{Sum}_\sigma(m,k,n)</span> with <span class="math inline">k\ne\mathbf 0_\sigma</span> imply <span class="math inline">m\ne n</span>, by induction on <span class="math inline">k</span> from the injectivity of successor; so <span class="math inline">\Box\,m\ne n</span>. Inextensibility, at any world: Rigid Comprehension there gives a rigid <span class="math inline">Z</span> coextensive with <span class="math inline">\mathbb N_\sigma</span>; <span class="math inline">Z</span> holds of <span class="math inline">\mathbf 0_\sigma</span> and is closed under <span class="math inline">\operatorname{Suc}_\sigma</span>, and, <span class="math inline">Z</span> being rigid and <span class="math inline">\mathbf 0_\sigma</span> and the successors of its instances the same entities at every world, it is necessarily so; hence necessarily <span class="math inline">\mathbb N_\sigma\le Z</span>, the numbers being the instances of every inductive property, while <span class="math inline">Z\le\mathbb N_\sigma</span> necessarily by persistence of its instances, which are numbers. So <span class="math inline">\mathbb N_\sigma</span> is necessarily coextensive with a rigid property, and inherits its inextensibility: for any <span class="math inline">X</span> with <span class="math inline">\forall n\in\mathbb N_\sigma\, .\,\Box Xn</span>, inextensibility of <span class="math inline">Z</span> gives <span class="math inline">Z\le X</span> and so <span class="math inline">\mathbb N_\sigma\le X</span>. This is the argument of Theorem 3 of Barton and Goodsell, run at every type.</p>
+<p>Assume <span class="math inline">\Box</span>Rigid Comprehension and
+<span class="math inline">\Box I^*_\sigma</span>. Persistence of <span
+class="math inline">\mathbb N_\sigma</span> is a theorem of C: numbers
+are necessarily numbers, by induction with the property <span
+class="math inline">\lambda n\, .\,\Box\mathbb N_\sigma n</span>, which
+holds of <span class="math inline">\mathbf 0_\sigma</span> and passes to
+successors by K (the step arith_N_box of the Lean proof of
+c5-implies-necessity-of-arithmetic), necessitated. Necessary
+distinctness: distinct numbers <span class="math inline">m\ne n</span>
+are comparable, say <span
+class="math inline">\operatorname{Sum}_\sigma(m,k,n)</span> with <span
+class="math inline">k\ne\mathbf 0_\sigma</span>, by the trichotomy of
+the order on numbers, which induction gives; sums of numbers are
+necessary when true (arith_Sum_box), <span class="math inline">k</span>
+is necessarily a nonzero number, and at every world <span
+class="math inline">I^*_\sigma</span> makes <span
+class="math inline">\operatorname{Sum}_\sigma(m,k,n)</span> with <span
+class="math inline">k\ne\mathbf 0_\sigma</span> imply <span
+class="math inline">m\ne n</span>, by induction on <span
+class="math inline">k</span> from the injectivity of successor; so <span
+class="math inline">\Box\,m\ne n</span>. Inextensibility, at any world:
+Rigid Comprehension there gives a rigid <span
+class="math inline">Z</span> coextensive with <span
+class="math inline">\mathbb N_\sigma</span>; <span
+class="math inline">Z</span> holds of <span class="math inline">\mathbf
+0_\sigma</span> and is closed under <span
+class="math inline">\operatorname{Suc}_\sigma</span>, and, <span
+class="math inline">Z</span> being rigid and <span
+class="math inline">\mathbf 0_\sigma</span> and the successors of its
+instances the same entities at every world, it is necessarily so; hence
+necessarily <span class="math inline">\mathbb N_\sigma\le Z</span>, the
+numbers being the instances of every inductive property, while <span
+class="math inline">Z\le\mathbb N_\sigma</span> necessarily by
+persistence of its instances, which are numbers. So <span
+class="math inline">\mathbb N_\sigma</span> is necessarily coextensive
+with a rigid property, and inherits its inextensibility: for any <span
+class="math inline">X</span> with <span class="math inline">\forall
+n\in\mathbb N_\sigma\, .\,\Box Xn</span>, inextensibility of <span
+class="math inline">Z</span> gives <span class="math inline">Z\le
+X</span> and so <span class="math inline">\mathbb N_\sigma\le X</span>.
+This is the argument of Theorem 3 of Barton and Goodsell, run at every
+type.</p>
 <h2 id="notes">Notes</h2>
-<p>Rigid Comprehension is used at every world, for the rigid coextension of <span class="math inline">\mathbb N_\sigma</span> there, so the premise is its necessitation; the antecedent <span class="math inline">\Box I^*_\sigma</span> of the principle is their axiom of Infinity. Without Rigid Comprehension the conclusion holds in C5 ([[c5-implies-arithmetic-necessitism]]).</p>
+<p>Rigid Comprehension is used at every world, for the rigid coextension
+of <span class="math inline">\mathbb N_\sigma</span> there, so the
+premise is its necessitation; the antecedent <span
+class="math inline">\Box I^*_\sigma</span> of the principle is their
+axiom of Infinity. Without Rigid Comprehension the conclusion holds in
+C5 ([[c5-implies-arithmetic-necessitism]]).</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-24</strong> (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — (minor) Notes updated: C5 gives Arithmetic Necessitism ([[c5-implies-arithmetic-necessitism]]).</li>
+<li><strong>2026-10-24</strong> (Claude Opus 5.5 (Anthropic), prompted
+by Cian Dorr) — (minor) Notes updated: C5 gives Arithmetic Necessitism
+([[c5-implies-arithmetic-necessitism]]).</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Continuum Contingency</strong> — Neil Barton and Zachary Goodsell, Continuum Contingency, draft of 14 October 2026, §5.8, Theorem 3, in CR∞, C with □Rigid Comprehension and the axiom of Infinity (eq. (22)); the paper attributes the result to Goodsell 2021.</li>
-<li><strong>Arithmetic is Necessary</strong> — Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, for the numbers as finite cardinalities and the properties of successor used.</li>
+<li><strong>Continuum Contingency</strong> — Neil Barton and Zachary
+Goodsell, Continuum Contingency, draft of 14 October 2026, §5.8, Theorem
+3, in CR∞, C with □Rigid Comprehension and the axiom of Infinity (eq.
+(22)); the paper attributes the result to Goodsell 2021.</li>
+<li><strong>Arithmetic is Necessary</strong> — Zachary Goodsell,
+Arithmetic is Necessary, draft of 5 June 2024, for the numbers as finite
+cardinalities and the properties of successor used.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-rigid-comprehension-implies-arithmetic-necessitism.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-rigid-comprehension-implies-arithmetic-necessitism.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Continuum Contingency.</strong> Barton, Neil, and Zachary Goodsell. Continuum Contingency. Draft dated 14 October 2026, 47 pages. Stitches a ground model of set theory to the canonical model of a forcing extension to show that Classicism with □Rigid Comprehension, □Relational Choice and an axiom of infinity is consistent with first- and second-order continuum contingency, together with □Atomicity at type t (Theorem 21) or with Recombination (Theorem 22, which refutes Atomicity at type t, Corollary 23); formalizes the coin-toss argument (Theorem 9). Read directly on 19 October 2026; locators refer to this draft. — §5.8, Theorem 3. Stated for the naturals as the Fregean numerical relations on properties of individuals, with Infinity as an axiom of the logic; the map’s numbers at <span class="math inline">\sigma=e</span> are those cardinalities, and the axiom is the principle’s antecedent <span class="math inline">\Box I^*_\sigma</span>. The map’s rigidity convention is theirs.</li>
-<li><strong>Background: Arithmetic is Necessary.</strong> Goodsell, Zachary William Lee. Arithmetic is Necessary. Draft dated 5 June 2024, 28 pages. Derives the necessity of arithmetic in the logic HKC (H plus K plus Countable Boolean Completeness) and shows that Boolean Completeness is inconsistent with the maximalization of any recursively enumerable extension of HK consistent with I, answering the question of Classicism, §2.6. Locators refer to this draft.</li>
+<li><strong>Proof: Continuum Contingency.</strong> Barton, Neil, and
+Zachary Goodsell. Continuum Contingency. Draft dated 14 October 2026, 47
+pages. Stitches a ground model of set theory to the canonical model of a
+forcing extension to show that Classicism with □Rigid Comprehension,
+□Relational Choice and an axiom of infinity is consistent with first-
+and second-order continuum contingency, together with □Atomicity at type
+t (Theorem 21) or with Recombination (Theorem 22, which refutes
+Atomicity at type t, Corollary 23); formalizes the coin-toss argument
+(Theorem 9). Read directly on 19 October 2026; locators refer to this
+draft. — §5.8, Theorem 3. Stated for the naturals as the Fregean
+numerical relations on properties of individuals, with Infinity as an
+axiom of the logic; the map’s numbers at <span
+class="math inline">\sigma=e</span> are those cardinalities, and the
+axiom is the principle’s antecedent <span class="math inline">\Box
+I^*_\sigma</span>. The map’s rigidity convention is theirs.</li>
+<li><strong>Background: Arithmetic is Necessary.</strong> Goodsell,
+Zachary William Lee. Arithmetic is Necessary. Draft dated 5 June 2024,
+28 pages. Derives the necessity of arithmetic in the logic HKC (H plus K
+plus Countable Boolean Completeness) and shows that Boolean Completeness
+is inconsistent with the maximalization of any recursively enumerable
+extension of HK consistent with I, answering the question of Classicism,
+§2.6. Locators refer to this draft.</li>
 </ul>
 </body></html>

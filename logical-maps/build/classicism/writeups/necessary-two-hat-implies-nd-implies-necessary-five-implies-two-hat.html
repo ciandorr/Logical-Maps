@@ -323,34 +323,85 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□Two-hat necessity implies ND-necessity ⇒ □5-necessity implies two-hat necessity</h1></header><p class="cert">
-Result — Source: The Bounds of Possibility (2021), Lean <code>Classicism.Map.necessary_two_hat_implies_nd_implies_necessary_five_implies_two_hat</code>; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026, combining Propositions D3, D6, D11 and D14 and fact (A5) of The Bounds of Possibility, Appendix D; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
+Result — Source: The Bounds of Possibility (2021), Lean
+<code>Classicism.Map.necessary_two_hat_implies_nd_implies_necessary_five_implies_two_hat</code>;
+produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14
+October 2026, combining Propositions D3, D6, D11 and D14 and fact (A5)
+of The Bounds of Possibility, Appendix D; recorded by Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 14 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□Two-hat necessity implies ND-necessity.</strong> Necessarily, whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat. In C this is the identity <span class="math inline">\hat{\hat\Box}=\Box_{\ne}</span>.</li>
+<li><strong>□Two-hat necessity implies ND-necessity.</strong>
+Necessarily, whatever is two-hat necessary is ND-necessary: the
+distinctness-preserving modality agrees with its hat. In C this is the
+identity <span
+class="math inline">\hat{\hat\Box}=\Box_{\ne}</span>.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□5-necessity implies two-hat necessity.</strong> Necessarily, whatever is 5-necessary is two-hat necessary. In C this is the identity <span class="math inline">\Box_5=\hat{\hat\Box}</span>.</li>
+<li><strong>□5-necessity implies two-hat necessity.</strong>
+Necessarily, whatever is 5-necessary is two-hat necessary. In C this is
+the identity <span
+class="math inline">\Box_5=\hat{\hat\Box}</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Write <span class="math inline">X:=\Box_{\ne}</span>, which is necessarily N, K and J (Proposition D14 of The Bounds of Possibility, Appendix D), and suppose <span class="math inline">\hat X=X</span>, i.e. <span class="math inline">\Box\forall p(\hat{\hat\Box}p\leftrightarrow\Box_{\ne}p)</span>. Proposition D11 gives <span class="math inline">p\to\hat X\neg X\neg p</span>, which under the identity is <span class="math inline">p\to X\neg X\neg p</span>: <span class="math inline">X</span> is necessarily B. Propositions D3 and D6 then make <span class="math inline">X</span> necessarily NKJF<span class="math inline">_{\langle\rangle}</span>, so fact (A5) gives <span class="math inline">\Box\forall p(\Box_5p\to Xp)</span>, and with the chain <span class="math inline">\Box_{\ne}\le\hat{\hat\Box}\le\Box_5</span> all three operators are identical. In particular <span class="math inline">\Box_5=\hat{\hat\Box}</span>.</p>
+<p>Write <span class="math inline">X:=\Box_{\ne}</span>, which is
+necessarily N, K and J (Proposition D14 of The Bounds of Possibility,
+Appendix D), and suppose <span class="math inline">\hat X=X</span>,
+i.e. <span class="math inline">\Box\forall
+p(\hat{\hat\Box}p\leftrightarrow\Box_{\ne}p)</span>. Proposition D11
+gives <span class="math inline">p\to\hat X\neg X\neg p</span>, which
+under the identity is <span class="math inline">p\to X\neg X\neg
+p</span>: <span class="math inline">X</span> is necessarily B.
+Propositions D3 and D6 then make <span class="math inline">X</span>
+necessarily NKJF<span class="math inline">_{\langle\rangle}</span>, so
+fact (A5) gives <span class="math inline">\Box\forall p(\Box_5p\to
+Xp)</span>, and with the chain <span
+class="math inline">\Box_{\ne}\le\hat{\hat\Box}\le\Box_5</span> all
+three operators are identical. In particular <span
+class="math inline">\Box_5=\hat{\hat\Box}</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Collapse propagates upward: once an operator in the hat tower equals its own hat, everything above it up to <span class="math inline">\Box_5</span> is identical. The same argument shows that the boxed principle is equivalent to each of: <span class="math inline">\Box_{\ne}</span> is necessarily B; <span class="math inline">\Box_{\ne}</span> necessarily satisfies BF at type <span class="math inline">t</span>; <span class="math inline">\Box_{\ne}=\Box_5</span>.</p>
+<p>Collapse propagates upward: once an operator in the hat tower equals
+its own hat, everything above it up to <span
+class="math inline">\Box_5</span> is identical. The same argument shows
+that the boxed principle is equivalent to each of: <span
+class="math inline">\Box_{\ne}</span> is necessarily B; <span
+class="math inline">\Box_{\ne}</span> necessarily satisfies BF at type
+<span class="math inline">t</span>; <span
+class="math inline">\Box_{\ne}=\Box_5</span>.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-20</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s request) — Lean certificate added, by a shorter route than the proof above. Under the premise, Proposition D11 makes ND-necessity necessarily B, so it is an S5 operator in the map’s sense and the map’s 5-necessity is below it; Propositions D3 and D6 and fact (A5) are not needed.</li>
+<li><strong>2026-10-20</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s request) — Lean certificate added, by a shorter route than the
+proof above. Under the premise, Proposition D11 makes ND-necessity
+necessarily B, so it is an S5 operator in the map’s sense and the map’s
+5-necessity is below it; Propositions D3 and D6 and fact (A5) are not
+needed.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne, and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D, Propositions D3, D6, D11, D14 and fact (A5), pp. 402–406.</li>
-<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1 (Anthropic), conversation of 14 October 2026 (transcript in the private notes).</li>
+<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne,
+and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D,
+Propositions D3, D6, D11, D14 and fact (A5), pp. 402–406.</li>
+<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1
+(Anthropic), conversation of 14 October 2026 (transcript in the private
+notes).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-two-hat-implies-nd-implies-necessary-five-implies-two-hat.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-two-hat-implies-nd-implies-necessary-five-implies-two-hat.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Propositions D3, D6, D11, D14; fact (A5)</li>
+<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John
+Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility.
+Oxford University Press. Appendix D, Narrower Modalities in Higher-Order
+S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May
+2024. Its background logic HS4 (a primitive S4 operator over
+higher-order logic) is read into C by interpreting the primitive box as
+<span class="math inline">\lambda p\, .\,p=\top</span>, under which
+every theorem of HS4 is a theorem of C. — Propositions D3, D6, D11, D14;
+fact (A5)</li>
 </ul>
 </body></html>

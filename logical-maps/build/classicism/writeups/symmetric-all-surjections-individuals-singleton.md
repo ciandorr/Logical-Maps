@@ -11,6 +11,8 @@
 - **Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
 - **Truth implies ND-necessity.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **Rigid Rigidity.** Being rigid is a rigid property of relations, including propositions.
@@ -19,6 +21,7 @@
 - **B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
 - **¬ Actuality.** There is a true proposition that entails every true proposition.
 - **¬ Analytic Necessitism.** If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type $\sigma$.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **¬ Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **¬ Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Possible Infinity (type e).** Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.
@@ -104,6 +107,12 @@ As the argument arithmetic-necessitism-extensionally-full, with the property of 
 Let $p$ be true, pinned by $N$ (and symmetric, when there is a symmetry group), and let $N^\prime$ be as in the condition. Let $q$ be the set of arrows that some arrow composes to agree with the identity on $N^\prime$; it is true, pinned by $N^\prime$, symmetric, and $\Diamond q=q$. By the condition every member of $q$ agrees on $N$ with a symmetry (or the identity), so lies in $p$ together with the identity. Hence $\Box(\Diamond q\to p)$ with $q$ true, i.e. $\Box_{\ne}p$.
 
 *General argument `arguments/dpc-retractable-actual-pattern`. It requires that For every finite set $N$ of individuals at the evaluation object there is a finite $N^\prime\supseteq N$ such that every arrow $u$ out of that object for which some arrow $x$ makes $x\circ u$ agree with the identity on $N^\prime$ agrees on $N$ with a member of the symmetry group (with the identity, when the model has no symmetry group). Here: With $N^\prime=N$: if $x\circ u$ is the identity on $N$ then $u$ is injective on $N$, so it agrees on $N$ with a permutation. By Claude Fable 5.1 (Anthropic), at Cian Dorr's direction, 2026-10-14.*
+
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms. Fails Self-Atomicity (type t).
+
+A self-atom of any relational type at an object $W$ is instantiated at some arrow $k$ out of $W$, and its transport along $k$ is an atom at $k$’s target instantiated at the identity there. The existential projection of an atom $I$ of a relational type, the proposition $\exists\bar x\, .\,I\bar x$, is an atom of type $t$: it is in the domain, it is not bottom, and for any proposition $p$ the entity $I\land\lambda\bar x\, .\,p$ lies below the atom $I$, so is $I$ or bottom, which puts $p$ above the projection or disjoint from it. So the projection is a true atom at $k$’s target, which the condition excludes. Hence no reachable object has a self-atom, and Self-atoms are atoms and Self-atoms are strong atoms hold vacuously at every type and every reachable object, while Self-Atomicity (type t) fails at the evaluation point, the top proposition having no self-atom below it.
+
+*General argument `arguments/no-actuality-no-self-atoms`. It requires that Actuality fails at the identity of every object reachable from the evaluation point: no atom of the domain of propositions there contains that identity. In a one-object model this is the failure of Actuality at the evaluation point, Actuality being a closed sentence. Here: One object, so Actuality, a closed pure sentence, holds at every world iff at the identity, where it fails (recorded in this model’s verdicts). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds No Pure Contingency.
 

@@ -323,34 +323,80 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Rigid Comprehension ⇒ Tame Rigidity</h1></header><p class="cert">
-Result — Source: Possible Worlds Without Atomicity (draft), Lean <code>Classicism.Map.rigid_comprehension_implies_tame_rigidity</code>; produced by Christopher Sun; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2 October 2026.
+Result — Source: Possible Worlds Without Atomicity (draft), Lean
+<code>Classicism.Map.rigid_comprehension_implies_tame_rigidity</code>;
+produced by Christopher Sun; recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 2 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Rigid Comprehension.</strong> Every relation, including a proposition, is coextensive with a rigid one.</li>
+<li><strong>Rigid Comprehension.</strong> Every relation, including a
+proposition, is coextensive with a rigid one.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Tame Rigidity.</strong> Every weakly rigid relation, including a proposition, is rigid.</li>
+<li><strong>Tame Rigidity.</strong> Every weakly rigid relation,
+including a proposition, is rigid.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Lemma: coextensive weakly rigid relations are identical. Let <span class="math inline">F</span> and <span class="math inline">G</span> be weakly rigid with <span class="math inline">\forall\bar x\, .\,F[\bar x]\leftrightarrow G[\bar x]</span>. If <span class="math inline">F[\bar x]</span> then <span class="math inline">G[\bar x]</span>, and the weak persistence of <span class="math inline">G</span> gives <span class="math inline">\Box G[\bar x]</span>. So <span class="math inline">\forall\bar x\, .\,F[\bar x]\to\Box G[\bar x]</span>, and the weak inextensibility of <span class="math inline">F</span>, instantiated at <span class="math inline">G</span>, gives <span class="math inline">F\le G</span>. Symmetrically <span class="math inline">G\le F</span>. Together these say <span class="math inline">\Box\forall\bar x\, .\,F[\bar x]\leftrightarrow G[\bar x]</span>, and necessarily coextensive relations are identical in C (Intensionality), so <span class="math inline">F=G</span>. Now let <span class="math inline">F</span> be weakly rigid. Rigid Comprehension at the same type supplies a rigid <span class="math inline">G</span> coextensive with <span class="math inline">F</span>. A rigid relation is weakly rigid, since T strips the leading boxes from both its conjuncts. By the lemma <span class="math inline">F=G</span>, so <span class="math inline">F</span> is rigid.</p>
+<p>Lemma: coextensive weakly rigid relations are identical. Let <span
+class="math inline">F</span> and <span class="math inline">G</span> be
+weakly rigid with <span class="math inline">\forall\bar x\, .\,F[\bar
+x]\leftrightarrow G[\bar x]</span>. If <span class="math inline">F[\bar
+x]</span> then <span class="math inline">G[\bar x]</span>, and the weak
+persistence of <span class="math inline">G</span> gives <span
+class="math inline">\Box G[\bar x]</span>. So <span
+class="math inline">\forall\bar x\, .\,F[\bar x]\to\Box G[\bar
+x]</span>, and the weak inextensibility of <span
+class="math inline">F</span>, instantiated at <span
+class="math inline">G</span>, gives <span class="math inline">F\le
+G</span>. Symmetrically <span class="math inline">G\le F</span>.
+Together these say <span class="math inline">\Box\forall\bar x\,
+.\,F[\bar x]\leftrightarrow G[\bar x]</span>, and necessarily
+coextensive relations are identical in C (Intensionality), so <span
+class="math inline">F=G</span>. Now let <span
+class="math inline">F</span> be weakly rigid. Rigid Comprehension at the
+same type supplies a rigid <span class="math inline">G</span>
+coextensive with <span class="math inline">F</span>. A rigid relation is
+weakly rigid, since T strips the leading boxes from both its conjuncts.
+By the lemma <span class="math inline">F=G</span>, so <span
+class="math inline">F</span> is rigid.</p>
 <h2 id="notes">Notes</h2>
-<p>The lemma uses only the unboxed persistence of <span class="math inline">F</span> and <span class="math inline">G</span>, so Rigid Comprehension makes every very weakly rigid relation rigid as well. With Rigid Comprehension ⇒ Weak Rigid Comprehension, this gives Sun’s equivalence of Rigid Comprehension with Tame Rigidity plus Weak Rigid Comprehension.</p>
+<p>The lemma uses only the unboxed persistence of <span
+class="math inline">F</span> and <span class="math inline">G</span>, so
+Rigid Comprehension makes every very weakly rigid relation rigid as
+well. With Rigid Comprehension ⇒ Weak Rigid Comprehension, this gives
+Sun’s equivalence of Rigid Comprehension with Tame Rigidity plus Weak
+Rigid Comprehension.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction) — “Weakly rigid” now means weakly persistent and weakly inextensible (until then, persistent and weakly inextensible; Very Weak Rigid Comprehension retired); the proof’s wording is adjusted to match. A weakly rigid relation is still persistent, so the mathematical content is unchanged.</li>
+<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction) — “Weakly rigid” now means weakly persistent and
+weakly inextensible (until then, persistent and weakly inextensible;
+Very Weak Rigid Comprehension retired); the proof’s wording is adjusted
+to match. A weakly rigid relation is still persistent, so the
+mathematical content is unchanged.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Possible Worlds Without Atomicity</strong> — Christopher Sun, Possible Worlds Without Atomicity, draft of September 2026.</li>
+<li><strong>Possible Worlds Without Atomicity</strong> — Christopher
+Sun, Possible Worlds Without Atomicity, draft of September 2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/rigid-comprehension-implies-tame-rigidity.yaml</code>
+Record:
+<code>topics/classicism/results/rigid-comprehension-implies-tame-rigidity.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Origin: Possible Worlds Without Atomicity.</strong> Sun, Christopher. Possible Worlds Without Atomicity. Unpublished draft, September 2026.</li>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §1.5, pp. 16–17. Intensionality and T.</li>
+<li><strong>Origin: Possible Worlds Without Atomicity.</strong> Sun,
+Christopher. Possible Worlds Without Atomicity. Unpublished draft,
+September 2026.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §1.5,
+pp. 16–17. Intensionality and T.</li>
 </ul>
 </body></html>

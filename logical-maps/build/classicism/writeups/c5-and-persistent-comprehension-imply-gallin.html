@@ -323,31 +323,76 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□ND ∧ Persistent Comprehension ⇒ Gallin Extensional Comprehension</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.c5_and_persistent_comprehension_imply_gallin</code>; produced by Claude Opus 5 (Anthropic), 20 September 2026, from a suggestion of Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted by Cian Dorr, 20 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.c5_and_persistent_comprehension_imply_gallin</code>;
+produced by Claude Opus 5 (Anthropic), 20 September 2026, from a
+suggestion of Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted
+by Cian Dorr, 20 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□ND.</strong> Necessarily, distinct things of any type are necessarily distinct.</li>
-<li><strong>Persistent Comprehension.</strong> Every relation, including a proposition, is coextensive with a persistent one.</li>
+<li><strong>□ND.</strong> Necessarily, distinct things of any type are
+necessarily distinct.</li>
+<li><strong>Persistent Comprehension.</strong> Every relation, including
+a proposition, is coextensive with a persistent one.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Gallin Extensional Comprehension.</strong> Every relation is coextensive with one that is persistent and has a persistent pointwise negation. This is the source’s comparison with Gallin’s different rigidity convention.</li>
+<li><strong>Gallin Extensional Comprehension.</strong> Every relation is
+coextensive with one that is persistent and has a persistent pointwise
+negation. This is the source’s comparison with Gallin’s different
+rigidity convention.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">X</span> be given and let <span class="math inline">Y</span> be a persistent coextension, which Persistent Comprehension supplies. Only persistence of <span class="math inline">Y</span> is used. What has to be added is that <span class="math inline">\neg Y</span> is persistent, which is the necessitation of a pointwise implication, so the argument must run at every world; that is what the boxed premise supplies. At any world, take <span class="math inline">\bar x</span> with <span class="math inline">\neg Y[\bar x]</span> and suppose <span class="math inline">\Diamond Y[\bar x]</span>. Persistence of <span class="math inline">Y</span> is itself necessary, so <span class="math inline">\Diamond Y[\bar x]</span> yields <span class="math inline">\Diamond\Box Y[\bar x]</span>. Boxed ND gives B at every world, and B in the form <span class="math inline">\Diamond\Box p\to p</span> then yields <span class="math inline">Y[\bar x]</span>, against the assumption. So <span class="math inline">\Box\neg Y[\bar x]</span>, which is persistence of <span class="math inline">\neg Y</span>. Hence <span class="math inline">Y</span> is Gallin-extensional and coextensive with <span class="math inline">X</span>.</p>
+<p>Let <span class="math inline">X</span> be given and let <span
+class="math inline">Y</span> be a persistent coextension, which
+Persistent Comprehension supplies. Only persistence of <span
+class="math inline">Y</span> is used. What has to be added is that <span
+class="math inline">\neg Y</span> is persistent, which is the
+necessitation of a pointwise implication, so the argument must run at
+every world; that is what the boxed premise supplies. At any world, take
+<span class="math inline">\bar x</span> with <span
+class="math inline">\neg Y[\bar x]</span> and suppose <span
+class="math inline">\Diamond Y[\bar x]</span>. Persistence of <span
+class="math inline">Y</span> is itself necessary, so <span
+class="math inline">\Diamond Y[\bar x]</span> yields <span
+class="math inline">\Diamond\Box Y[\bar x]</span>. Boxed ND gives B at
+every world, and B in the form <span class="math inline">\Diamond\Box
+p\to p</span> then yields <span class="math inline">Y[\bar x]</span>,
+against the assumption. So <span class="math inline">\Box\neg Y[\bar
+x]</span>, which is persistence of <span class="math inline">\neg
+Y</span>. Hence <span class="math inline">Y</span> is Gallin-extensional
+and coextensive with <span class="math inline">X</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Rigid Comprehension implies Persistent Comprehension, so this covers the reading on which rigidity yields Gallin-extensionality. The boxed form of ND is needed rather than the plain form, because persistence of the negation is itself a boxed claim and the argument has to be available at every world. In the other direction the draft’s note uses BF, which is doing separate work: it stops a world from having instances that the base world does not supply, and no amount of ND replaces it.</p>
+<p>Rigid Comprehension implies Persistent Comprehension, so this covers
+the reading on which rigidity yields Gallin-extensionality. The boxed
+form of ND is needed rather than the plain form, because persistence of
+the negation is itself a boxed claim and the argument has to be
+available at every world. In the other direction the draft’s note uses
+BF, which is doing separate work: it stops a world from having instances
+that the base world does not supply, and no amount of ND replaces
+it.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 20 Sep</strong> — Cian Dorr, suggestion of 20 September 2026.</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.1, p. 22 (B); §2.3, n. 37, p. 28.</li>
+<li><strong>Dorr 20 Sep</strong> — Cian Dorr, suggestion of 20 September
+2026.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §2.1, p. 22 (B); §2.3, n. 37,
+p. 28.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/c5-and-persistent-comprehension-imply-gallin.yaml</code>
+Record:
+<code>topics/classicism/results/c5-and-persistent-comprehension-imply-gallin.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.1, p. 22; §2.3, n. 37, p. 28. The equivalence of ND with B, and the Gallin convention.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.1,
+p. 22; §2.3, n. 37, p. 28. The equivalence of ND with B, and the Gallin
+convention.</li>
 </ul>
 </body></html>

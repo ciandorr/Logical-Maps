@@ -4,6 +4,8 @@
 
 ## Package
 
+- **□Self-Atomicity.** Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a self-atom: a possible entity that necessarily, if instantiated, is an atom.
+- **□Self-Atomicity (type t).** Necessarily, every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
@@ -13,8 +15,11 @@
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
 - **Truth implies ND-necessity.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
+- **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
 - **B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
+- **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
+- **¬ Self-atoms are strong atoms (type t).** Every self-atom is a strong atom.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **¬ Rigid Rigidity.** Being rigid is a rigid property of relations, including propositions.
@@ -37,6 +42,18 @@ Interpretation of Σ, fixed for this record: every constant of Σ is relational,
 *A member of the group Symmetric ideally-full models, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Self-Atomicity.
+
+Self-Atomicity at every relational type, necessarily, there being one object. Let $I\ne\bot$ be an entity of type $\bar\sigma t$, pinned down by $N$, and take a pair $\langle k,\bar x\rangle$ in it, $k$ an arrow and $\bar x$ a tuple of individuals and of symmetric entities at $k$’s world. A symmetry $g$ acts on such a pair by relabelling, fixing every symmetric entity and permuting the individuals. Choose a finite $N^{\prime}\supseteq N$ with $k(N^{\prime})$ containing the collapsed pair and every individual in $\bar x$, which surjectivity allows (if $k$ is a symmetry, $N^{\prime}\supseteq k^{-1}$ of those individuals suffices), and let $J$ be the set of pairs $\langle g\circ k_1,g\cdot\bar x\rangle$ with $g$ a symmetry and $k_1$ agreeing with $k$ on $N^{\prime}$. $J$ lies below $I$, since $I$ is pinned down by $N$ and symmetric; it is symmetric and pinned down by $N^{\prime}$. Its transport along a member $\langle g\circ k_1,g\cdot\bar x\rangle$ consists of the pairs $\langle m,\bar y\rangle$ with $m\circ g\circ k_1=g^{\prime}\circ k_2$ and $\bar y=g^{\prime}\cdot\bar x$; then $h:=g^{\prime-1}\circ m\circ g$ fixes $k(N^{\prime})$ pointwise, so is a symmetry fixing the individuals of $\bar x$, and $\bar y=m\cdot g\cdot\bar x$. So the transport is the orbit of the single pair $\langle1,g\cdot\bar x\rangle$, an atom, and $J$ is a self-atom below $I$.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
+### Holds □Self-Atomicity (type t). Fails Self-atoms are atoms (type t), Self-atoms are strong atoms (type t).
+
+Write $\{a,b\}$ for the collapsed pair and $G$ for the symmetry group, the orbit of the identity and the only atom containing it, pinned down by the pair. Let $k$ be a collapser and $N$ a finite set such that $k(N)\supseteq\{a,b\}$; one exists for any collapser, every arrow being surjective. Let $q$ be the set of arrows agreeing on $N$, up to symmetry, with $k$: it is symmetric and pinned down by $N$. For $k^{\prime}\in q$, an arrow $m$ has $m\circ k^{\prime}\in q$ only if some $g\circ m$ fixes $k^{\prime}(N)\supseteq\{a,b\}$ pointwise, which no collapser does; so $m\in G$, and conversely $G\circ k^{\prime}\subseteq q$. So the transport of $q$ along each of its members is $G$, and $q$ is a self-atom. It is not an atom: the arrows agreeing with $k$ on a larger finite set, up to symmetry, form a proper nonempty symmetric pinned part. So Self-atoms are atoms (type t) fails, and with it Self-atoms are strong atoms (type t). Self-Atomicity (type t) holds, and necessarily, there being one object: a possible proposition $p$, pinned down by $N$, contains some arrow; if a permutation, $p\supseteq G$, a self-atom; if a collapser $k$, $p$ contains the self-atom built from $k$ and a finite $N^{\prime}\supseteq N$ with $k(N^{\prime})\supseteq\{a,b\}$. The relational form is the argument that follows.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Rigid Comprehension.
 
@@ -163,6 +180,12 @@ Closed pure terms denote entities fixed by every arrow (§3.5, p. 58). With a si
 *Source: Classicism, §3.5, p. 58; p. 79. General argument `arguments/no-pure-contingency-one-object`. It requires that The model is an action model (Classicism, Appendix D), or an intensional action model in the sense of Dorr's draft (Boolean Completeness does not imply Rigid Comprehension), with a single object. Here: It has one object (Dorr, draft, §3.1: closed pure terms denote entities fixed by every arrow). By Andrew Bacon and Cian Dorr, 2026-09-17.*
 
 *Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* Moved from the group finite-support-one-object to the topic, for every one-object action model; the reason the source's observation holds is spelled out in place of "Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance."
+
+### Holds Necessity of Second-Order Analysis.
+
+Let $v$ be reachable from the evaluation point. If every type is finite at $v$ there is no real number structure there, an ordered field having the infinitely many distinct elements $0$, $1$, $1+1$, and so on. Otherwise let $D$ be as in the condition. Carry the real numbers onto $D$ by a bijection: the carrier, order, sum, product, $0$, $1$ and natural numbers are sets of tuples from $D$, so extensions at $v$ of entities there, which form a real number structure $\mathfrak R^*$ at $v$, its completeness and the leastness of its natural numbers being tested against subproperties whose extensions are all the subsets of $D$. Its second-order quantifiers, applied to tuples from $D$, range over all relations on $D$, so for each second-order analytical sentence $A$, $A(\mathfrak R^*)$ holds at $v$ iff $A$ is true of the real numbers under full second-order semantics. Any real number structure $\mathfrak R$ at $v$, of any type, is isomorphic to $\mathfrak R^*$ by a relation in the domain there (Huntington's theorem, a theorem of C: Background, Analysis), and $A(\mathfrak R)\leftrightarrow A(\mathfrak R^*)$ is a theorem of C given such an isomorphism, relations on one carrier being carried to the other by comprehension. So at every reachable object every real number structure satisfies exactly the second-order analytical sentences true of the reals, and each instance $\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R) \to A(\mathfrak R)$ or $\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak R)$ of the Necessity of Second-Order Analysis holds, with the Necessity of Analysis and the Non-contingency of the Continuum Hypothesis. The choice of the bijection with the reals needs no choice principle, $D$ having the cardinality of the continuum.
+
+*General argument `arguments/second-order-analysis-full-continuum`. It requires that At every object $v$ reachable from the evaluation point, either every type has finitely many entities at $v$, or there is a set $D$ of continuum many entities of one type at $v$ such that, for each $k\ge1$, every set of $k$-tuples from $D$ is the extension at $v$ of an entity in the domain there. Here: At a reachable object $v$, let $\tau$ be a type with infinitely many orbits there, and for a set $A$ of them let $Y_A$ be the intension of type $\tau t$ whose value at an arrow into $v$ is the union of the orbits in $A$ and at other arrows is empty: symmetric, the values being invariant, and pinned down by $\emptyset$, so in the domain; its transport along any arrow depends only on the arrow's codomain. The $Y_A$ are continuum many and pairwise distinct at $v$. For a set $T$ of $k$-tuples of them, the intension whose value at an arrow $h$ is the set of transports along $h$ of the tuples in $T$ depends only on $h$'s codomain, is symmetric, each such transport being fixed by the target's symmetries, and is pinned down by $\emptyset$; its extension at $v$ is $T$. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-25.*
 
 ### Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 

@@ -1,0 +1,21 @@
+id: atoms-are-strong-atoms-t
+name: Atoms are strong atoms (type t)
+category: more-boolean-structure
+statement: Every atom is a strong atom.
+formal: $\forall p\, .\,\operatorname{Atom}_t(p)\to\operatorname{SAtom}_t(p)$
+definitions: 'where $\operatorname{SAtom}_t(W):=\Diamond_t
+  W\land\Box\forall q\, .\,W\le_t q\lor W\le_t\neg_t q$ is a strong atom (Background, Strong atoms)'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: 'The type $t$ instance of [[atoms-are-strong-atoms-r]]. Bridge principle (Cian Dorr, 25 October
+  2026): exactly what Strong Atomicity adds to Atomicity, since the two together are equivalent
+  to them, and what BF supplies in Bacon’s Exercise 8.12. It is the conjunction of [[atoms-are-self-atoms-r]]
+  and [[self-atoms-are-strong-atoms-r]] only given [[self-atoms-are-atoms-r]]: the free-monoid model
+  satisfies it while a non-atomic self-atom fails to be strong.'
+aliases:
+- Atoms are strong atoms (type t)
+lean_def: Classicism.P.AtomsAreStrongAtomsT.schemaIn

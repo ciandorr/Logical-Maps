@@ -19,6 +19,12 @@ Necessitate the recorded implication from Atomicity and BF to the Strong Leibniz
 
 The boxed form of [[atomicity-and-bf-imply-strong-leibniz]].
 
+Now derived through the boxed bridge results [[necessary-barcan-relational-implies-necessary-atoms-are-strong-worlds-r]] and [[necessary-atomicity-r-and-necessary-atoms-are-strong-worlds-r-imply-necessary-strong-leibniz-r]].
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Philosophical Introduction to HOL** — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Exercise 8.12 and Theorem 8.2, pp. 166, 169–170.

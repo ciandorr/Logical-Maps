@@ -323,34 +323,104 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Boolean Completeness ∧ Actuality ⇒ Weak Rigid Comprehension</h1></header><p class="cert">
-Result — Source: BC does not imply RC (draft), Lean <code>Classicism.Map.completeness_and_actuality_imply_weak_rigid_comprehension</code>; produced by Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted by Cian Dorr, 19 September 2026.
+Result — Source: BC does not imply RC (draft), Lean
+<code>Classicism.Map.completeness_and_actuality_imply_weak_rigid_comprehension</code>;
+produced by Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted
+by Cian Dorr, 19 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Boolean Completeness.</strong> Every property of entities of a relational type has a greatest lower bound in that type.</li>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
+<li><strong>Boolean Completeness.</strong> Every property of entities of
+a relational type has a greatest lower bound in that type.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Weak Rigid Comprehension.</strong> Every relation, including a proposition, is coextensive with a weakly rigid one, that is, with one that is weakly persistent and weakly inextensible.</li>
+<li><strong>Weak Rigid Comprehension.</strong> Every relation, including
+a proposition, is coextensive with a weakly rigid one, that is, with one
+that is weakly persistent and weakly inextensible.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix a relational type <span class="math inline">\tau=\bar\sigma t</span> and <span class="math inline">X^\tau</span>. Write <span class="math inline">\operatorname{Haec}_{\bar u}:=\lambda\bar z\, .\,\bigwedge_i z_i=u_i</span> and put <span class="math inline">H:=\lambda Z^\tau\, .\,\exists\bar y\, .\,X[\bar y]\land Z=\operatorname{Haec}_{\bar y}</span>, the property of being the haecceity of some <span class="math inline">X</span> things. By Boolean Completeness in its least-upper-bound form, let <span class="math inline">Y</span> be a least upper bound of <span class="math inline">H</span>. Two observations do the work. (i) If <span class="math inline">X[\bar u]</span> then <span class="math inline">\operatorname{Haec}_{\bar u}\le_\tau Y</span>, and instantiating at <span class="math inline">\bar u</span> with <span class="math inline">\bar u=\bar u</span> gives <span class="math inline">\Box Y[\bar u]</span>. (ii) If <span class="math inline">\Box Z[\bar u]</span> whenever <span class="math inline">X[\bar u]</span>, then <span class="math inline">\operatorname{Haec}_{\bar u}\le_\tau Z</span> for each such <span class="math inline">\bar u</span>, so <span class="math inline">Z</span> is an upper bound of <span class="math inline">H</span> and <span class="math inline">Y\le_\tau Z</span>.</p>
-<p>Coextensiveness. <span class="math inline">X[\bar u]\to Y[\bar u]</span> by (i). Conversely, let <span class="math inline">w</span> witness Actuality and put <span class="math inline">P:=\lambda\bar z\, .\,(w\le X[\bar z])</span>. If <span class="math inline">X[\bar u]</span> then <span class="math inline">X[\bar u]</span> is true, so <span class="math inline">w\le X[\bar u]</span>; a true entailment is necessary, so <span class="math inline">\Box P[\bar u]</span>. By (ii), <span class="math inline">Y\le_\tau P</span>, so <span class="math inline">Y[\bar u]\to w\le X[\bar u]</span>; and <span class="math inline">w</span> is true, so <span class="math inline">Y[\bar u]\to X[\bar u]</span>.</p>
-<p>Persistence. Take <span class="math inline">Z:=\lambda\bar z\, .\,\Box Y[\bar z]</span> in (ii). If <span class="math inline">X[\bar u]</span> then <span class="math inline">\Box Y[\bar u]</span> by (i), hence <span class="math inline">\Box Z[\bar u]</span> by 4. So <span class="math inline">Y\le_\tau\lambda\bar z\, .\,\Box Y[\bar z]</span>, which is <span class="math inline">\operatorname{Persistent}(Y)</span>.</p>
-<p>Weak inextensibility. Suppose <span class="math inline">\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar z]</span>. If <span class="math inline">X[\bar u]</span> then <span class="math inline">Y[\bar u]</span> by coextensiveness, so <span class="math inline">\Box Z[\bar u]</span>; hence <span class="math inline">Y\le_\tau Z</span> by (ii).</p>
+<p>Fix a relational type <span class="math inline">\tau=\bar\sigma
+t</span> and <span class="math inline">X^\tau</span>. Write <span
+class="math inline">\operatorname{Haec}_{\bar u}:=\lambda\bar z\,
+.\,\bigwedge_i z_i=u_i</span> and put <span
+class="math inline">H:=\lambda Z^\tau\, .\,\exists\bar y\, .\,X[\bar
+y]\land Z=\operatorname{Haec}_{\bar y}</span>, the property of being the
+haecceity of some <span class="math inline">X</span> things. By Boolean
+Completeness in its least-upper-bound form, let <span
+class="math inline">Y</span> be a least upper bound of <span
+class="math inline">H</span>. Two observations do the work. (i) If <span
+class="math inline">X[\bar u]</span> then <span
+class="math inline">\operatorname{Haec}_{\bar u}\le_\tau Y</span>, and
+instantiating at <span class="math inline">\bar u</span> with <span
+class="math inline">\bar u=\bar u</span> gives <span
+class="math inline">\Box Y[\bar u]</span>. (ii) If <span
+class="math inline">\Box Z[\bar u]</span> whenever <span
+class="math inline">X[\bar u]</span>, then <span
+class="math inline">\operatorname{Haec}_{\bar u}\le_\tau Z</span> for
+each such <span class="math inline">\bar u</span>, so <span
+class="math inline">Z</span> is an upper bound of <span
+class="math inline">H</span> and <span class="math inline">Y\le_\tau
+Z</span>.</p>
+<p>Coextensiveness. <span class="math inline">X[\bar u]\to Y[\bar
+u]</span> by (i). Conversely, let <span class="math inline">w</span>
+witness Actuality and put <span class="math inline">P:=\lambda\bar z\,
+.\,(w\le X[\bar z])</span>. If <span class="math inline">X[\bar
+u]</span> then <span class="math inline">X[\bar u]</span> is true, so
+<span class="math inline">w\le X[\bar u]</span>; a true entailment is
+necessary, so <span class="math inline">\Box P[\bar u]</span>. By (ii),
+<span class="math inline">Y\le_\tau P</span>, so <span
+class="math inline">Y[\bar u]\to w\le X[\bar u]</span>; and <span
+class="math inline">w</span> is true, so <span
+class="math inline">Y[\bar u]\to X[\bar u]</span>.</p>
+<p>Persistence. Take <span class="math inline">Z:=\lambda\bar z\,
+.\,\Box Y[\bar z]</span> in (ii). If <span class="math inline">X[\bar
+u]</span> then <span class="math inline">\Box Y[\bar u]</span> by (i),
+hence <span class="math inline">\Box Z[\bar u]</span> by 4. So <span
+class="math inline">Y\le_\tau\lambda\bar z\, .\,\Box Y[\bar z]</span>,
+which is <span
+class="math inline">\operatorname{Persistent}(Y)</span>.</p>
+<p>Weak inextensibility. Suppose <span class="math inline">\forall\bar
+z\, .\,Y[\bar z]\to\Box Z[\bar z]</span>. If <span
+class="math inline">X[\bar u]</span> then <span
+class="math inline">Y[\bar u]</span> by coextensiveness, so <span
+class="math inline">\Box Z[\bar u]</span>; hence <span
+class="math inline">Y\le_\tau Z</span> by (ii).</p>
 <h2 id="notes">Notes</h2>
-<p>The argument stops short of Rigid Comprehension exactly at the leading box of Inextensible. It delivers a <span class="math inline">Y</span> that is inextensible at the actual world, while Rigid demands the biconditional at every world. The models recorded from the same draft show that the gap is real.</p>
+<p>The argument stops short of Rigid Comprehension exactly at the
+leading box of Inextensible. It delivers a <span
+class="math inline">Y</span> that is inextensible at the actual world,
+while Rigid demands the biconditional at every world. The models
+recorded from the same draft show that the gap is real.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Proposition 1, p. 2.</li>
+<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean
+Completeness does not imply Rigid Comprehension, draft of 30 July 2026,
+Proposition 1, p. 2.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/completeness-and-actuality-imply-weak-rigid-comprehension.yaml</code>
+Record:
+<code>topics/classicism/results/completeness-and-actuality-imply-weak-rigid-comprehension.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — Proposition 1, p. 2</li>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.2, pp. 23–25. Boolean Completeness and Actuality; the least-upper-bound form of Boolean Completeness is equivalent to the stated greatest-lower-bound form in C.</li>
+<li><strong>Proof: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — Proposition 1,
+p. 2</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.2,
+pp. 23–25. Boolean Completeness and Actuality; the least-upper-bound
+form of Boolean Completeness is equivalent to the stated
+greatest-lower-bound form in C.</li>
 </ul>
 </body></html>

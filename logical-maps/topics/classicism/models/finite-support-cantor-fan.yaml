@@ -1,0 +1,90 @@
+id: finite-support-cantor-fan
+name: 'Finitely pinned action model: Cantor fan of terminal worlds'
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026 (the construction,
+    as a model of Self-Atomicity without Atomicity)
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, survey of Strong Atomicity results under Self-Atomicity,
+  25 October 2026 (session transcript).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Definitions D.1–D.3 and Proposition
+  D.4, pp. 73–74.
+source_names:
+- Fable 25 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: Appendix D, Definitions D.1–D.3 and Proposition D.4, pp. 73–74
+  note: Ideally full action models with the ideal of finite sets are models of C.
+definition: 'An ideally full action model in the sense of Classicism, Appendix D, with the ideal of finite
+  sets. The category has two objects $W_0$ and $V$; its non-identity arrows are $k_u:W_0\to V$, one for
+  each $u\in2^{\mathbb N}$, so $V$ is terminal and every composite is an identity or some $k_u$. The individuals
+  are $\mathbb N$ at $W_0$ and $\{0,1\}$ at $V$, and $k_u$ acts on them as $u$. The domain of propositions
+  at $W_0$ therefore consists of the sets of arrows pinned down by a finite $N\subseteq\mathbb N$: the
+  sets $p$ such that $k_u\in p$ and $u^{\prime}|_N=u|_N$ imply $k_{u^{\prime}}\in p$, that is, $\{1\}$
+  or not together with a clopen subset of Cantor space; at $V$ the domain is $\{\varnothing,\{1_V\}\}$.
+  Evaluation point: $1_{W_0}$. Interpretation of Σ, fixed for this record: every constant of Σ is relational,
+  and each denotes the top element of its type.'
+meets:
+  sigma-top: This is the interpretation the definition fixes.
+  infinitely-many-propositions: The clopen subsets of Cantor space.
+  actual-world-isolated: $\{1_{W_0}\}$ is pinned down by $\varnothing$, since its transport along every
+    $k_u$ is empty, and it entails every truth; no arrow leads back to $W_0$.
+  identity-singletons: $\{1_{W_0}\}$ is pinned down by $\varnothing$, and at $V$ the domain is full.
+  unique-retractions-everywhere: No arrow leads into $W_0$, and $V$ has only its identity.
+  irreversible-arrow: 'Any $k_u$: no arrow leads back to $W_0$.'
+  retracted-arrows-invertible-everywhere: Only identities are retracted.
+arguments:
+- holds:
+  - necessary-self-atomicity-r
+  - necessary-atoms-are-self-atoms-r
+  - necessary-atoms-are-strong-atoms-r
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'At $W_0$ an entity of a relational type is a pinned intension $I$, a set of pairs $\langle k,\bar
+    a\rangle$. Its pairs at $1_{W_0}$ form singletons $\{\langle1,\bar a\rangle\}$, each pinned down by
+    $\varnothing$ (its transport along every $k_u$ is empty), which are atoms, self-atoms and strong atoms,
+    the transport being empty. Its pairs at arrows $k_u$ form sets $\{\langle k_u,b_u\rangle : u\in C\}$
+    with $C$ clopen and $b_u$ depending on finitely many coordinates of $u$; such a set is pinned, and
+    it is a self-atom, since at each $k_u$ it becomes $\{\langle1_V,b_u\rangle\}$, an atom of the full
+    domain at $V$. So every possible entity at $W_0$ has a self-atom below it. No atom lies over the $k_u$:
+    a nonempty pinned set over a cylinder splits by a further coordinate. So at $W_0$ the atoms are the
+    singletons at $1_{W_0}$, which are self-atoms and strong atoms. At $V$ the domain is full with one
+    arrow, so all three principles hold there; hence all three are necessary.'
+- fails:
+  - atomicity-t
+  - self-atoms-are-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'The proposition $\neg\{1_{W_0}\}$, the set of all $k_u$, is possible and pinned down by $\varnothing$,
+    and no atom lies below it: a nonempty pinned subset contains a cylinder, which splits into two nonempty
+    cylinders. So Atomicity (type t) fails. The same set is a self-atom that is not an atom, so Self-atoms
+    are atoms (type t) fails.'
+- holds:
+  - barcan-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: Each $k_u$ acts surjectively at type $t$, the two propositions at $V$ being the transports of
+    $\varnothing$ and of the set of all arrows; so BF (type t) holds at $W_0$ (Classicism, Proposition
+    3.24(ii)).
+- fails:
+  - distinctness-necessary-t
+  - modal-five
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: $k_u$ sends both $\varnothing$ and $\{1_{W_0}\}$ to $\varnothing$, so it is not injective at type
+    $t$ and ND (type t) fails (Proposition 3.24(i)). And $\Diamond\{1_{W_0}\}$ is true while $\Box\Diamond\{1_{W_0}\}$
+    is false, every $k_u$ transporting $\{1_{W_0}\}$ to $\varnothing$; so 5 fails.
+notes: 'Built to show that Self-Atomicity does not imply Atomicity, even with Actuality, Strong Actuality
+  and BF (type t): a root whose propositions are the clopen sets of Cantor space, each point of which
+  is a terminal world. Every nonempty clopen set is a self-atom, becoming the actual-world proposition
+  at each of its points, but none is an atom. Strong Atomicity (type t) fails with Atomicity.'

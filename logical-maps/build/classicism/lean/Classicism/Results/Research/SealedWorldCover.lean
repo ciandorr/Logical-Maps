@@ -5,7 +5,7 @@ import Classicism.Tools.TypeSystem
 /-!
 # Sealed world covers and rigid bottom cuts
 
-Direct research source: `research/2026-10-22/strong-leibniz-rigid-bottom-cut.md`,
+Direct research source: `research/2026-10-22/strong-atomicity-rigid-bottom-cut.md`,
 §§1–6, and `followup/modal-propagation.md`, §§1–2 (22 October 2026).
 These are new research proofs, not proofs attributed to a published source.
 
@@ -43,9 +43,9 @@ theorem sealed_necessary (A : τ → Prop) (h : Sealed A) : □ (Sealed A) :=
   (box_and_eq _ _).mpr ⟨rigid_necessary A h.1,
     (box_and_eq _ _).mpr ⟨modal_four _ h.2.1, modal_four _ h.2.2⟩⟩
 
-/-- A rigid coextension of the strong worlds together with bottom is sealed. -/
+/-- A rigid coextension of the strong atoms together with bottom is sealed. -/
 theorem seal_from_coextension (A : τ → Prop) (hA : Rigid A)
-    (hco : coext (fun W : τ => SWorld W ∨ W = Rel.bot τ) A) : Sealed A :=
+    (hco : coext (fun W : τ => SAtom W ∨ W = Rel.bot τ) A) : Sealed A :=
   ⟨hA, weaklyPersistent_of_persistent hA.1 _ ((hco _).1 (Or.inr rfl)),
     weaklyInextensible_of_inextensible hA.2 Decides fun W hW =>
       ((hco W).2 hW).elim (fun hw => hw.2)
@@ -96,11 +96,11 @@ variable {σ : Type} [Ty σ]
 
 def Join (R : (σ → Prop) → Prop) : σ → Prop := fun x => ∃ W, R W ∧ W x
 
-theorem cover_from_coextension (sl : StrongLeibniz (σ → Prop))
+theorem cover_from_coextension (sl : StrongAtomicity (σ → Prop))
     (A : (σ → Prop) → Prop) (hA : Rigid A)
-    (hco : coext (fun W : σ → Prop => SWorld W ∨ W = Rel.bot (σ → Prop)) A) :
+    (hco : coext (fun W : σ → Prop => SAtom W ∨ W = Rel.bot (σ → Prop)) A) :
     □ (∀ x : σ, Join A x) := by
-  have hle := StrongLeibniz.to_dual sl (Join A) fun W hw =>
+  have hle := StrongAtomicity.to_dual sl (Join A) fun W hw =>
     (le_iff _ _).2 (modal_K _ _
       (nec% (fun (ha : A W) (x : σ) (hx : W x) => (show Join A x from ⟨W, ha, hx⟩)))
       (weaklyPersistent_of_persistent hA.1 W ((hco W).1 (Or.inl hw))))
@@ -108,10 +108,10 @@ theorem cover_from_coextension (sl : StrongLeibniz (σ → Prop))
     (nec% (fun (h : ∀ x : σ, ¬ Join A x → Join A x) (x : σ) =>
       (em (Join A x)).elim (fun hx => hx) (h x))) ((le_iff _ _).1 hle)
 
-theorem exists_sealed_cover : StrongLeibniz (σ → Prop) →
+theorem exists_sealed_cover : StrongAtomicity (σ → Prop) →
     RigidComprehension ((σ → Prop) → Prop) →
     ∃ A : (σ → Prop) → Prop, Sealed A ∧ □ (∀ x : σ, Join A x) := fun sl rc =>
-  (rc (fun W => SWorld W ∨ W = Rel.bot (σ → Prop))).elim fun A hA =>
+  (rc (fun W => SAtom W ∨ W = Rel.bot (σ → Prop))).elim fun A hA =>
     ⟨A, seal_from_coextension A hA.1 hA.2, cover_from_coextension sl A hA.1 hA.2⟩
 
 theorem cut_join_coext (A : (σ → Prop) → Prop) (Y : σ → Prop)
@@ -157,7 +157,7 @@ theorem sealed_power_implies_necessary_barcan (A : (σ → Prop) → Prop)
     (modal_four _ (necessary_join_representation A h hc))
 
 /-- Exact finite dependency version: only local comprehension and local power. -/
-theorem sl_rc_power_implies_necessary_barcan : StrongLeibniz (σ → Prop) →
+theorem strong_atomicity_rc_power_implies_necessary_barcan : StrongAtomicity (σ → Prop) →
     RigidComprehension ((σ → Prop) → Prop) → RigidPower ((σ → Prop) → Prop) →
     NecBarcan (σ → Prop) := fun sl rc rp =>
   (exists_sealed_cover sl rc).elim fun A h =>
@@ -173,8 +173,8 @@ theorem join_zero_of_only_bottom (R : (σ → Prop) → Prop) (hR : Rigid R)
     (weaklyInextensible_of_inextensible hR.2 (fun W => W = Rel.bot (σ → Prop))
       fun W hw => necessity_of_identity W _ (h W hw)))
 
-theorem sealed_implies_strong_leibniz (A : (σ → Prop) → Prop) (h : Sealed A)
-    (hc : □ (∀ x : σ, Join A x)) : StrongLeibniz (σ → Prop) := fun Y hy => by
+theorem sealed_implies_strong_atomicity (A : (σ → Prop) → Prop) (h : Sealed A)
+    (hc : □ (∀ x : σ, Join A x)) : StrongAtomicity (σ → Prop) := fun Y hy => by
   have hex : ∃ W, Cut A Y W ∧ W ≠ Rel.bot (σ → Prop) :=
     (em (∃ W, Cut A Y W ∧ W ≠ Rel.bot (σ → Prop))).elim (fun hw => hw) fun hn =>
       (hy ((cut_join_eq A Y h hc).trans (join_zero_of_only_bottom (Cut A Y)
@@ -185,10 +185,10 @@ theorem sealed_implies_strong_leibniz (A : (σ → Prop) → Prop) (h : Sealed A
     ⟨W, ⟨hw.2, modal_K _ _ (converse_barcan _ h.2.2 W)
       (weaklyPersistent_of_persistent h.1.1 W hw.1.1)⟩, hw.1.2⟩
 
-theorem sl_rc_implies_necessary_strong_leibniz : StrongLeibniz (σ → Prop) →
-    RigidComprehension ((σ → Prop) → Prop) → NecStrongLeibniz (σ → Prop) := fun sl rc =>
+theorem strong_atomicity_rc_implies_necessary_strong_atomicity : StrongAtomicity (σ → Prop) →
+    RigidComprehension ((σ → Prop) → Prop) → NecStrongAtomicity (σ → Prop) := fun sl rc =>
   (exists_sealed_cover sl rc).elim fun A h =>
-    modal_K _ _ (modal_K _ _ (nec% (sealed_implies_strong_leibniz A))
+    modal_K _ _ (modal_K _ _ (nec% (sealed_implies_strong_atomicity A))
       (sealed_necessary A h.1)) (modal_four _ h.2)
 
 end unary
@@ -197,11 +197,11 @@ end unary
 
 def JoinT (R : Prop → Prop) : Prop := ∃ w, R w ∧ w
 
-theorem exists_sealed_cover_t : StrongLeibnizT → RigidComprehension (Prop → Prop) →
+theorem exists_sealed_cover_t : StrongAtomicityT → RigidComprehension (Prop → Prop) →
     ∃ A : Prop → Prop, Sealed A ∧ □ (JoinT A) := fun sl rc =>
-  (rc (fun w => SWorld w ∨ w = False)).elim fun A hA =>
+  (rc (fun w => SAtom w ∨ w = False)).elim fun A hA =>
     ⟨A, seal_from_coextension A hA.1 hA.2,
-      StrongLeibnizT.to_dual sl (JoinT A) fun w hw =>
+      StrongAtomicityT.to_dual sl (JoinT A) fun w hw =>
         (le_iff_prop _ _).2 (modal_K _ _
           (nec% (fun (ha : A w) (hww : w) => (show JoinT A from ⟨w, ha, hww⟩)))
           (weaklyPersistent_of_persistent hA.1.1 w ((hA.2 w).1 (Or.inl hw))))⟩
@@ -239,7 +239,7 @@ theorem barcan_from_join_representation_t (A : Prop → Prop)
       (key : ∀ p : Prop, ∃ R : Prop → Prop, (Rigid R ∧ R ≤ A) ∧ p = JoinT R)
       (p : Prop) => (key p).elim fun R hR => hR.2.symm ▸ hall R hR.1)) hall) key
 
-theorem sl_rc_power_implies_necessary_barcan_t : StrongLeibnizT →
+theorem strong_atomicity_rc_power_implies_necessary_barcan_t : StrongAtomicityT →
     RigidComprehension (Prop → Prop) → RigidPower (Prop → Prop) → NecBarcan Prop :=
   fun sl rc rp => (exists_sealed_cover_t sl rc).elim fun A h =>
     modal_K _ _ (modal_K _ _ (nec% (barcan_from_join_representation_t A))
@@ -254,8 +254,8 @@ theorem join_zero_of_only_bottom_t (R : Prop → Prop) (hR : Rigid R)
     (weaklyInextensible_of_inextensible hR.2 (fun w => w = False)
       fun w hw => necessity_of_identity w False (h w hw)))
 
-theorem sealed_implies_strong_leibniz_t (A : Prop → Prop) (h : Sealed A)
-    (hc : □ (JoinT A)) : StrongLeibnizT := fun p hp => by
+theorem sealed_implies_strong_atomicity_t (A : Prop → Prop) (h : Sealed A)
+    (hc : □ (JoinT A)) : StrongAtomicityT := fun p hp => by
   have hex : ∃ w, Cut A p w ∧ w ≠ False :=
     (em (∃ w, Cut A p w ∧ w ≠ False)).elim (fun hw => hw) fun hn =>
       (hp ((cut_join_eq_t A p h hc).trans (join_zero_of_only_bottom_t (Cut A p)
@@ -266,10 +266,10 @@ theorem sealed_implies_strong_leibniz_t (A : Prop → Prop) (h : Sealed A)
     ⟨w, ⟨hw.2, modal_K _ _ (converse_barcan _ h.2.2 w)
       (weaklyPersistent_of_persistent h.1.1 w hw.1.1)⟩, hw.1.2⟩
 
-theorem sl_rc_implies_necessary_strong_leibniz_t : StrongLeibnizT →
-    RigidComprehension (Prop → Prop) → NecStrongLeibniz Prop := fun sl rc =>
+theorem strong_atomicity_rc_implies_necessary_strong_atomicity_t : StrongAtomicityT →
+    RigidComprehension (Prop → Prop) → NecStrongAtomicity Prop := fun sl rc =>
   (exists_sealed_cover_t sl rc).elim fun A h =>
-    modal_K _ _ (modal_K _ _ (nec% (sealed_implies_strong_leibniz_t A))
+    modal_K _ _ (modal_K _ _ (nec% (sealed_implies_strong_atomicity_t A))
       (sealed_necessary A h.1)) (modal_four _ h.2)
 
 end Classicism.Research.SealedWorldCover
@@ -292,20 +292,20 @@ end Classicism.Research.SealedWorldCover
   Classicism.Research.SealedWorldCover.necessary_join_representation
   Classicism.Research.SealedWorldCover.barcan_from_join_representation
   Classicism.Research.SealedWorldCover.sealed_power_implies_necessary_barcan
-  Classicism.Research.SealedWorldCover.sl_rc_power_implies_necessary_barcan
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_power_implies_necessary_barcan
   Classicism.Research.SealedWorldCover.join_zero_of_only_bottom
-  Classicism.Research.SealedWorldCover.sealed_implies_strong_leibniz
-  Classicism.Research.SealedWorldCover.sl_rc_implies_necessary_strong_leibniz
+  Classicism.Research.SealedWorldCover.sealed_implies_strong_atomicity
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_implies_necessary_strong_atomicity
   Classicism.Research.SealedWorldCover.exists_sealed_cover_t
   Classicism.Research.SealedWorldCover.cut_join_coext_t
   Classicism.Research.SealedWorldCover.cut_join_eq_t
   Classicism.Research.SealedWorldCover.join_representation_t
   Classicism.Research.SealedWorldCover.necessary_join_representation_t
   Classicism.Research.SealedWorldCover.barcan_from_join_representation_t
-  Classicism.Research.SealedWorldCover.sl_rc_power_implies_necessary_barcan_t
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_power_implies_necessary_barcan_t
   Classicism.Research.SealedWorldCover.join_zero_of_only_bottom_t
-  Classicism.Research.SealedWorldCover.sealed_implies_strong_leibniz_t
-  Classicism.Research.SealedWorldCover.sl_rc_implies_necessary_strong_leibniz_t
+  Classicism.Research.SealedWorldCover.sealed_implies_strong_atomicity_t
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_implies_necessary_strong_atomicity_t
 #classicism_types Classicism.Research.SealedWorldCover.rigid_necessary
   Classicism.Research.SealedWorldCover.entails_necessary
   Classicism.Research.SealedWorldCover.decides_bottom
@@ -324,17 +324,17 @@ end Classicism.Research.SealedWorldCover
   Classicism.Research.SealedWorldCover.necessary_join_representation
   Classicism.Research.SealedWorldCover.barcan_from_join_representation
   Classicism.Research.SealedWorldCover.sealed_power_implies_necessary_barcan
-  Classicism.Research.SealedWorldCover.sl_rc_power_implies_necessary_barcan
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_power_implies_necessary_barcan
   Classicism.Research.SealedWorldCover.join_zero_of_only_bottom
-  Classicism.Research.SealedWorldCover.sealed_implies_strong_leibniz
-  Classicism.Research.SealedWorldCover.sl_rc_implies_necessary_strong_leibniz
+  Classicism.Research.SealedWorldCover.sealed_implies_strong_atomicity
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_implies_necessary_strong_atomicity
   Classicism.Research.SealedWorldCover.exists_sealed_cover_t
   Classicism.Research.SealedWorldCover.cut_join_coext_t
   Classicism.Research.SealedWorldCover.cut_join_eq_t
   Classicism.Research.SealedWorldCover.join_representation_t
   Classicism.Research.SealedWorldCover.necessary_join_representation_t
   Classicism.Research.SealedWorldCover.barcan_from_join_representation_t
-  Classicism.Research.SealedWorldCover.sl_rc_power_implies_necessary_barcan_t
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_power_implies_necessary_barcan_t
   Classicism.Research.SealedWorldCover.join_zero_of_only_bottom_t
-  Classicism.Research.SealedWorldCover.sealed_implies_strong_leibniz_t
-  Classicism.Research.SealedWorldCover.sl_rc_implies_necessary_strong_leibniz_t
+  Classicism.Research.SealedWorldCover.sealed_implies_strong_atomicity_t
+  Classicism.Research.SealedWorldCover.strong_atomicity_rc_implies_necessary_strong_atomicity_t

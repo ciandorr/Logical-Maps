@@ -9,7 +9,7 @@
 
 ## Conclusion
 
-- **Strong Actuality.** There is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.
+- **Strong Actuality.** There is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 
 ## Proof
 

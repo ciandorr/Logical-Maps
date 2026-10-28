@@ -322,43 +322,114 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□BF and Actuality imply Inextensible Comprehension</h1></header><p>Assume □BF (every closed instance of the Barcan Formula is necessary) and Actuality, in the map’s fixed relational type system. The conclusion is Inextensible Comprehension: every relation is coextensive with an inextensible one. The witness and the argument are Christopher Sun’s, reported by Cian Dorr on 26 September 2026; the observation that the BF hypothesis must be taken in its boxed form, and this write-up, are by Claude Fable 5.1 (Anthropic) the same day. No independent checker or Lean verification is recorded.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□BF and Actuality imply Inextensible Comprehension</h1></header><p>Assume □BF (every closed instance of the Barcan Formula is necessary)
+and Actuality, in the map’s fixed relational type system. The conclusion
+is Inextensible Comprehension: every relation is coextensive with an
+inextensible one. The witness and the argument are Christopher Sun’s,
+reported by Cian Dorr on 26 September 2026; the observation that the BF
+hypothesis must be taken in its boxed form, and this write-up, are by
+Claude Fable 5.1 (Anthropic) the same day. No independent checker or
+Lean verification is recorded.</p>
 <h2 id="definitions">Definitions</h2>
-<p>For <span class="math inline">Y</span> of type <span class="math inline">\bar\sigma t</span>, with <span class="math inline">Y[\bar z]</span> the left-nested application to the tuple <span class="math inline">\bar z</span>,</p>
+<p>For <span class="math inline">Y</span> of type <span
+class="math inline">\bar\sigma t</span>, with <span
+class="math inline">Y[\bar z]</span> the left-nested application to the
+tuple <span class="math inline">\bar z</span>,</p>
 <p><span class="math display">
 \operatorname{Inextensible}(Y):=\Box\forall X\, .\,
   (\forall\bar z\, .\,Y[\bar z]\to\Box X[\bar z])\to Y\le X,
 </span></p>
-<p>where <span class="math inline">Y\le X</span> is <span class="math inline">\Box\forall\bar z\, .\,Y[\bar z]\to X[\bar z]</span>. Actuality is <span class="math inline">\exists p\, .\,p\land\forall q\, .\,q\to p\le q</span>; write <span class="math inline">w</span> for a witness.</p>
+<p>where <span class="math inline">Y\le X</span> is <span
+class="math inline">\Box\forall\bar z\, .\,Y[\bar z]\to X[\bar
+z]</span>. Actuality is <span class="math inline">\exists p\,
+.\,p\land\forall q\, .\,q\to p\le q</span>; write <span
+class="math inline">w</span> for a witness.</p>
 <h2 id="the-witness">The witness</h2>
-<p>Fix <span class="math inline">F</span> of type <span class="math inline">\bar\sigma t</span> and put</p>
+<p>Fix <span class="math inline">F</span> of type <span
+class="math inline">\bar\sigma t</span> and put</p>
 <p><span class="math display">
 C:=\lambda\bar z\, .\,\Diamond(w\land F[\bar z]).
 </span></p>
-<p><strong><span class="math inline">C</span> is coextensive with <span class="math inline">F</span>.</strong> If <span class="math inline">F[\bar z]</span>, then <span class="math inline">w\land F[\bar z]</span> is true, hence possible by T, so <span class="math inline">C[\bar z]</span>. If <span class="math inline">\neg F[\bar z]</span>, then <span class="math inline">\neg F[\bar z]</span> is a truth, so <span class="math inline">w\le\neg F[\bar z]</span> by the choice of <span class="math inline">w</span>, i.e. <span class="math inline">\Box(w\to\neg F[\bar z])</span>, which is <span class="math inline">\neg\Diamond(w\land F[\bar z])</span>. Only Actuality is used.</p>
+<p><strong><span class="math inline">C</span> is coextensive with <span
+class="math inline">F</span>.</strong> If <span
+class="math inline">F[\bar z]</span>, then <span
+class="math inline">w\land F[\bar z]</span> is true, hence possible by
+T, so <span class="math inline">C[\bar z]</span>. If <span
+class="math inline">\neg F[\bar z]</span>, then <span
+class="math inline">\neg F[\bar z]</span> is a truth, so <span
+class="math inline">w\le\neg F[\bar z]</span> by the choice of <span
+class="math inline">w</span>, i.e. <span
+class="math inline">\Box(w\to\neg F[\bar z])</span>, which is <span
+class="math inline">\neg\Diamond(w\land F[\bar z])</span>. Only
+Actuality is used.</p>
 <h2 id="inextensibility">Inextensibility</h2>
-<p>Two theorems of C, for any <span class="math inline">X</span> and any <span class="math inline">\bar z</span>:</p>
+<p>Two theorems of C, for any <span class="math inline">X</span> and any
+<span class="math inline">\bar z</span>:</p>
 <ol type="1">
-<li><span class="math inline">\neg C[\bar z]</span> is the box <span class="math inline">\Box(w\to\neg F[\bar z])</span>, so by 4, <span class="math inline">\neg C[\bar z]\to\Box\neg C[\bar z]</span>. Hence <span class="math inline">(C[\bar z]\to\Box X[\bar z])\to(\Box\neg C[\bar z]\lor\Box X[\bar z])
+<li><span class="math inline">\neg C[\bar z]</span> is the box <span
+class="math inline">\Box(w\to\neg F[\bar z])</span>, so by 4, <span
+class="math inline">\neg C[\bar z]\to\Box\neg C[\bar z]</span>. Hence
+<span class="math inline">(C[\bar z]\to\Box X[\bar z])\to(\Box\neg
+C[\bar z]\lor\Box X[\bar z])
 \to\Box(C[\bar z]\to X[\bar z])</span>.</li>
-<li>Consequently <span class="math inline">(\forall\bar z\, .\,C[\bar z]\to\Box X[\bar z])\to
+<li>Consequently <span class="math inline">(\forall\bar z\, .\,C[\bar
+z]\to\Box X[\bar z])\to
 \forall\bar z\, .\,\Box(C[\bar z]\to X[\bar z])</span>.</li>
 </ol>
-<p>Let <span class="math inline">\beta</span> be the closed BF instance <span class="math inline">\forall X\, .\,(\forall\bar z\, .\,\Box(C[\bar z]\to X[\bar z]))\to
-\Box\forall\bar z\, .\,(C[\bar z]\to X[\bar z])</span>, obtained from BF at the types <span class="math inline">\bar\sigma</span> by abstracting <span class="math inline">\lambda\bar z\, .\,C[\bar z]\to X[\bar z]</span> and closing in <span class="math inline">X</span>. From 2 and <span class="math inline">\beta</span>,</p>
+<p>Let <span class="math inline">\beta</span> be the closed BF instance
+<span class="math inline">\forall X\, .\,(\forall\bar z\, .\,\Box(C[\bar
+z]\to X[\bar z]))\to
+\Box\forall\bar z\, .\,(C[\bar z]\to X[\bar z])</span>, obtained from BF
+at the types <span class="math inline">\bar\sigma</span> by abstracting
+<span class="math inline">\lambda\bar z\, .\,C[\bar z]\to X[\bar
+z]</span> and closing in <span class="math inline">X</span>. From 2 and
+<span class="math inline">\beta</span>,</p>
 <p><span class="math display">
-\beta\to\forall X\, .\,(\forall\bar z\, .\,C[\bar z]\to\Box X[\bar z])\to C\le X
+\beta\to\forall X\, .\,(\forall\bar z\, .\,C[\bar z]\to\Box X[\bar
+z])\to C\le X
 </span></p>
 <p>is a theorem of C. Necessitating it and applying K,</p>
 <p><span class="math display">
-\Box\beta\to\Box\forall X\, .\,(\forall\bar z\, .\,C[\bar z]\to\Box X[\bar z])\to C\le X,
+\Box\beta\to\Box\forall X\, .\,(\forall\bar z\, .\,C[\bar z]\to\Box
+X[\bar z])\to C\le X,
 </span></p>
-<p>and the consequent is <span class="math inline">\operatorname{Inextensible}(C)</span>. <span class="math inline">\Box\beta</span> is an instance of □BF (its type range and closure are outside the box, as the map’s conventions require). So <span class="math inline">C</span> is an inextensible relation coextensive with <span class="math inline">F</span>.</p>
+<p>and the consequent is <span
+class="math inline">\operatorname{Inextensible}(C)</span>. <span
+class="math inline">\Box\beta</span> is an instance of □BF (its type
+range and closure are outside the box, as the map’s conventions
+require). So <span class="math inline">C</span> is an inextensible
+relation coextensive with <span class="math inline">F</span>.</p>
 <h2 id="why-the-box-on-bf-is-needed">Why the box on BF is needed</h2>
-<p>Everything before the last step uses only Actuality and 4. The BF instance <span class="math inline">\beta</span> is needed under the leading box of inextensibility, that is, at an arbitrary world, and BF at the actual world does not supply it: BF does not imply □BF on the map (the two-object all-maps model has BF without □BF, though it lacks Actuality). Whether Actuality and BF together imply □BF is open, and a proof of that would establish the unboxed claim, which is not recorded. Any other route to the unboxed claim must either find a different witness or show that the BF instance for <span class="math inline">\lambda\bar z\, .\,C[\bar z]\to X[\bar z]</span> holds at every world for other reasons; <span class="math inline">\Diamond w</span> fails at every world from which no arrow leads back to the actual world, and there <span class="math inline">C</span> is empty and trivially inextensible, so only the worlds at which <span class="math inline">\Diamond w</span> holds are in question.</p>
-<p><em>Update, 27 September 2026.</em> The unboxed claim holds. Christopher Sun gave a different argument with the same witness, which uses BF only at the actual world. See <em>BF and Actuality imply Inextensible Comprehension</em> (actuality-and-bf-imply-inextensible-comprehension).</p>
+<p>Everything before the last step uses only Actuality and 4. The BF
+instance <span class="math inline">\beta</span> is needed under the
+leading box of inextensibility, that is, at an arbitrary world, and BF
+at the actual world does not supply it: BF does not imply □BF on the map
+(the two-object all-maps model has BF without □BF, though it lacks
+Actuality). Whether Actuality and BF together imply □BF is open, and a
+proof of that would establish the unboxed claim, which is not recorded.
+Any other route to the unboxed claim must either find a different
+witness or show that the BF instance for <span
+class="math inline">\lambda\bar z\, .\,C[\bar z]\to X[\bar z]</span>
+holds at every world for other reasons; <span
+class="math inline">\Diamond w</span> fails at every world from which no
+arrow leads back to the actual world, and there <span
+class="math inline">C</span> is empty and trivially inextensible, so
+only the worlds at which <span class="math inline">\Diamond w</span>
+holds are in question.</p>
+<p><em>Update, 27 September 2026.</em> The unboxed claim holds.
+Christopher Sun gave a different argument with the same witness, which
+uses BF only at the actual world. See <em>BF and Actuality imply
+Inextensible Comprehension</em>
+(actuality-and-bf-imply-inextensible-comprehension).</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.3, pp. 28–30; Proposition 2.1, pp. 20–21. Definitions of inextensibility and the BF principle. The witness is not one the paper uses.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.3,
+pp. 28–30; Proposition 2.1, pp. 20–21. Definitions of inextensibility
+and the BF principle. The witness is not one the paper uses.</li>
 </ul>
 </body></html>

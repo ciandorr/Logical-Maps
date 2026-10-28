@@ -323,35 +323,83 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Maximalism (pure) ∧ Modalized Relational Choice ⇒ ⊥</h1></header><p class="cert">
-Result — Source: Misc.; produced by Cian Dorr, 16 October 2026; the consistency premise verified by Claude Opus 5.5 (Anthropic) in symmetric-class-reflecting-surjections; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 16 October 2026.
+Result — Source: Misc.; produced by Cian Dorr, 16 October 2026; the
+consistency premise verified by Claude Opus 5.5 (Anthropic) in
+symmetric-class-reflecting-surjections; recorded by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 16 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Maximalism (pure).</strong> Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.</li>
-<li><strong>Modalized Relational Choice.</strong> Every necessarily serial relation is entailed by a necessarily functional relation.</li>
+<li><strong>Maximalism (pure).</strong> Every closed pure identity not
+provable in C is false. The non-theorem condition is
+metalinguistic.</li>
+<li><strong>Modalized Relational Choice.</strong> Every necessarily
+serial relation is entailed by a necessarily functional relation.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
 <li><strong>⊥.</strong> These premises cannot all hold together.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">U:=\lambda xy\, .\,(x\ne y\land\Diamond x=y)\lor\forall z\, .\,(z\ne x\to\Box z\ne x)</span>, of type <span class="math inline">e\to e\to t</span>. It is necessarily serial by a theorem of C: if some <span class="math inline">y</span> is contingently distinct from <span class="math inline">x</span> then <span class="math inline">Uxy</span>, and otherwise <span class="math inline">Uxx</span> by the second disjunct. Modalized Relational Choice at <span class="math inline">\sigma=\tau=e</span> gives <span class="math inline">S</span> with <span class="math inline">\Box(\operatorname{Functional}(S)\land\forall xy\, .\,Sxy\to Uxy)</span>. Let <span class="math inline">P</span> be the closed pure sentence <span class="math inline">\forall x\,\exists y\,(x\ne y\land\Diamond x=y)\land\neg\exists F\, (\operatorname{Functional}(F)\land\forall xy\, .\,Fxy\to x\ne y\land\Diamond x=y)</span>. <span class="math inline">P</span> is consistent with C: it is true at the evaluation point of the model symmetric-class-reflecting-surjections (see its write-up). So Maximalism (pure), in its possibility form, gives <span class="math inline">\Diamond P</span>. Inside the possibility, the first conjunct of <span class="math inline">P</span> makes the second disjunct of <span class="math inline">U</span> false of every individual, so <span class="math inline">S</span> is a functional relation taking each individual to one contingently distinct from it, and instantiating the second conjunct of <span class="math inline">P</span> at <span class="math inline">F:=S</span> gives a contradiction. So <span class="math inline">\Diamond\bot</span>, which is false.</p>
+<p>Let <span class="math inline">U:=\lambda xy\, .\,(x\ne y\land\Diamond
+x=y)\lor\forall z\, .\,(z\ne x\to\Box z\ne x)</span>, of type <span
+class="math inline">e\to e\to t</span>. It is necessarily serial by a
+theorem of C: if some <span class="math inline">y</span> is contingently
+distinct from <span class="math inline">x</span> then <span
+class="math inline">Uxy</span>, and otherwise <span
+class="math inline">Uxx</span> by the second disjunct. Modalized
+Relational Choice at <span class="math inline">\sigma=\tau=e</span>
+gives <span class="math inline">S</span> with <span
+class="math inline">\Box(\operatorname{Functional}(S)\land\forall xy\,
+.\,Sxy\to Uxy)</span>. Let <span class="math inline">P</span> be the
+closed pure sentence <span class="math inline">\forall x\,\exists
+y\,(x\ne y\land\Diamond x=y)\land\neg\exists F\,
+(\operatorname{Functional}(F)\land\forall xy\, .\,Fxy\to x\ne
+y\land\Diamond x=y)</span>. <span class="math inline">P</span> is
+consistent with C: it is true at the evaluation point of the model
+symmetric-class-reflecting-surjections (see its write-up). So Maximalism
+(pure), in its possibility form, gives <span
+class="math inline">\Diamond P</span>. Inside the possibility, the first
+conjunct of <span class="math inline">P</span> makes the second disjunct
+of <span class="math inline">U</span> false of every individual, so
+<span class="math inline">S</span> is a functional relation taking each
+individual to one contingently distinct from it, and instantiating the
+second conjunct of <span class="math inline">P</span> at <span
+class="math inline">F:=S</span> gives a contradiction. So <span
+class="math inline">\Diamond\bot</span>, which is false.</p>
 <h2 id="notes">Notes</h2>
-<p>Uses Modalized Relational Choice only at <span class="math inline">\sigma=\tau=e</span>, and Maximalism only at the one sentence <span class="math inline">P</span>, whose consistency is witnessed by a model rather than by a principle of the map.</p>
+<p>Uses Modalized Relational Choice only at <span
+class="math inline">\sigma=\tau=e</span>, and Maximalism only at the one
+sentence <span class="math inline">P</span>, whose consistency is
+witnessed by a model rather than by a principle of the map.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-16</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction) — Now derivable from maximalism-incompatible-with-intensional-choice, Modalized Relational Choice implying Intensional Choice; kept for its own argument and its witness.</li>
+<li><strong>2026-10-16</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction) — Now derivable from
+maximalism-incompatible-with-intensional-choice, Modalized Relational
+Choice implying Intensional Choice; kept for its own argument and its
+witness.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 16 Oct</strong> — Cian Dorr, suggestion of 16 October 2026.</li>
-<li><strong>Opus 16 Oct</strong> — Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 16 October 2026, for the model witnessing the consistency premise (symmetric-class-reflecting-surjections).</li>
+<li><strong>Dorr 16 Oct</strong> — Cian Dorr, suggestion of 16 October
+2026.</li>
+<li><strong>Opus 16 Oct</strong> — Claude Opus 5.5 (Anthropic), prompted
+by Cian Dorr, 16 October 2026, for the model witnessing the consistency
+premise (symmetric-class-reflecting-surjections).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/maximalism-incompatible-with-modalized-relational-choice.yaml</code>
+Record:
+<code>topics/classicism/results/maximalism-incompatible-with-modalized-relational-choice.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.6, p. 41. Maximalist Classicism and its possibility form.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.6,
+p. 41. Maximalist Classicism and its possibility form.</li>
 </ul>
 </body></html>

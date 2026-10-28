@@ -270,3 +270,26 @@ arguments:
     and $\top$ there lies neither below the proposition $P$ that the arrow is a permutation nor below
     its negation, both being possible. As an atom, $C$ has no possible proposition below it but
     itself, so no strong atom lies below it, and the type-$t$ Strong Atomicity fails.
+
+- id: self-atoms
+  fails:
+  - self-atomicity-t
+  - atoms-are-self-atoms-t
+  holds:
+  - necessary-self-atoms-are-atoms-r
+  - necessary-self-atoms-are-strong-atoms-r
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'At every object the atoms are the orbits of single pairs under the symmetry group. The orbit
+    $C$ of a collapse $c$ (in the two-object member, of the arrows $c_i:W_0\to X$) is an atom; its transport
+    along $c$ is the set of arrows $m$ with $m\circ c$ in $C$, which includes every arrow $X\to X$, since
+    $m\circ c$ is again a collapse, and so is not an atom there, the orbit of the permutations being a
+    proper symmetric part. So $C$ is an atom and not a self-atom, and the only possible proposition below
+    $C$ is $C$ itself: Atoms are self-atoms (type t) and Self-Atomicity (type t) fail. Conversely a self-atom
+    $I$ at a relational type has, at each of its pairs $\langle k,\bar a\rangle$, a transport along $k$
+    that is an atom containing $\langle1,\cdot\rangle$, hence the orbit of the identity; so $m\circ k$
+    carries a pair of $I$ only for symmetries $m$, which excludes collapses ($c\circ c=c$) and leaves
+    pairs at permutations, where symmetry makes $I$ the orbit of one pair, an atom, whose transport along
+    a collapse is empty and along a permutation is an atom again: a strong atom. The same holds at every
+    reachable object, the domains being the symmetric intensions everywhere.'

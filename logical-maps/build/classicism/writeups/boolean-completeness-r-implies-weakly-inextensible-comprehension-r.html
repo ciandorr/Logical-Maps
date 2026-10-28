@@ -322,41 +322,145 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Boolean Completeness implies Weakly Inextensible Comprehension</h1></header><p>Assume Boolean Completeness, with the map’s fixed type range. The conclusion is Weakly Inextensible Comprehension: every relation is coextensive with a weakly inextensible one. This is an original connecting proof by Claude Fable 5.1 (Anthropic), 25 September 2026, at Cian Dorr’s direction. It has no independent checker or Lean verification recorded. The witness is the least upper bound of haecceities that Proposition 1 of Dorr, <em>Boolean Completeness does not imply Rigid Comprehension</em> (30 July 2026 draft, p. 2) uses; there Actuality is also assumed and yields a weakly rigid coextension, while here Actuality is dropped and the join is cut down to the given relation.</p>
-<h2 id="the-shape-of-weak-inextensibility">The shape of weak inextensibility</h2>
-<p>For a relation <span class="math inline">Y</span> of type <span class="math inline">\tau=\bar\sigma t</span>, write <span class="math inline">\operatorname{Haec}_{\bar y}:=\lambda\bar z\, .\,\bigwedge_i z_i=y_i</span> for the haecceity of a tuple, and let <span class="math inline">\operatorname{Haecs}(Y)</span> be the property of being the haecceity of some <span class="math inline">Y</span>-instance, <span class="math inline">\lambda W^\tau\, .\,\exists\bar y\, .\,Y[\bar y]\land W=\operatorname{Haec}_{\bar y}</span>. Since <span class="math inline">\forall\bar z\, .\,\bigwedge_i z_i=y_i\to Z[\bar z]</span> is H-equivalent to <span class="math inline">Z[\bar y]</span>, Logical Equivalence gives, for every <span class="math inline">Z^\tau</span>,</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Boolean Completeness implies Weakly Inextensible Comprehension</h1></header><p>Assume Boolean Completeness, with the map’s fixed type range. The
+conclusion is Weakly Inextensible Comprehension: every relation is
+coextensive with a weakly inextensible one. This is an original
+connecting proof by Claude Fable 5.1 (Anthropic), 25 September 2026, at
+Cian Dorr’s direction. It has no independent checker or Lean
+verification recorded. The witness is the least upper bound of
+haecceities that Proposition 1 of Dorr, <em>Boolean Completeness does
+not imply Rigid Comprehension</em> (30 July 2026 draft, p. 2) uses;
+there Actuality is also assumed and yields a weakly rigid coextension,
+while here Actuality is dropped and the join is cut down to the given
+relation.</p>
+<h2 id="the-shape-of-weak-inextensibility">The shape of weak
+inextensibility</h2>
+<p>For a relation <span class="math inline">Y</span> of type <span
+class="math inline">\tau=\bar\sigma t</span>, write <span
+class="math inline">\operatorname{Haec}_{\bar y}:=\lambda\bar z\,
+.\,\bigwedge_i z_i=y_i</span> for the haecceity of a tuple, and let
+<span class="math inline">\operatorname{Haecs}(Y)</span> be the property
+of being the haecceity of some <span
+class="math inline">Y</span>-instance, <span class="math inline">\lambda
+W^\tau\, .\,\exists\bar y\, .\,Y[\bar y]\land
+W=\operatorname{Haec}_{\bar y}</span>. Since <span
+class="math inline">\forall\bar z\, .\,\bigwedge_i z_i=y_i\to Z[\bar
+z]</span> is H-equivalent to <span class="math inline">Z[\bar y]</span>,
+Logical Equivalence gives, for every <span
+class="math inline">Z^\tau</span>,</p>
 <p><span class="math display">
 \operatorname{Haec}_{\bar y}\le Z\quad\text{iff}\quad\Box Z[\bar y].
 </span></p>
-<p>So the antecedent of weak inextensibility, <span class="math inline">\forall\bar x\, .\,Y[\bar x]\to\Box Z[\bar x]</span>, says exactly that <span class="math inline">Z</span> is an upper bound of <span class="math inline">\operatorname{Haecs}(Y)</span>, and</p>
+<p>So the antecedent of weak inextensibility, <span
+class="math inline">\forall\bar x\, .\,Y[\bar x]\to\Box Z[\bar
+x]</span>, says exactly that <span class="math inline">Z</span> is an
+upper bound of <span class="math inline">\operatorname{Haecs}(Y)</span>,
+and</p>
 <p><span class="math display">
 \operatorname{WeaklyInextensible}(Y)\quad\text{iff}\quad
 Y\le Z\text{ for every upper bound }Z\text{ of }\operatorname{Haecs}(Y).
 </span></p>
-<p>A weakly inextensible relation lies below every upper bound of the haecceities of its instances: it may lose instances at other worlds, but it cannot gain any beyond those that its actual instances necessitate. Weak persistence, <span class="math inline">\forall\bar x\, .\,Y[\bar x]\to\Box Y[\bar x]</span>, says by the same equivalence that <span class="math inline">Y</span> is itself an upper bound of <span class="math inline">\operatorname{Haecs}(Y)</span>. Hence</p>
+<p>A weakly inextensible relation lies below every upper bound of the
+haecceities of its instances: it may lose instances at other worlds, but
+it cannot gain any beyond those that its actual instances necessitate.
+Weak persistence, <span class="math inline">\forall\bar x\, .\,Y[\bar
+x]\to\Box Y[\bar x]</span>, says by the same equivalence that <span
+class="math inline">Y</span> is itself an upper bound of <span
+class="math inline">\operatorname{Haecs}(Y)</span>. Hence</p>
 <p><span class="math display">
 \operatorname{WeaklyRigid}(Y)\quad\text{iff}\quad
 Y\text{ is a least upper bound of }\operatorname{Haecs}(Y),
 </span></p>
-<p>and Weak Rigid Comprehension says that for every <span class="math inline">X</span> the haecceities of the <span class="math inline">X</span>-instances have a least upper bound and that it is coextensive with <span class="math inline">X</span>. Weak inextensibility keeps only the “least” half of this. Two further sanity checks: at type <span class="math inline">t</span> the principle is trivial, since a true proposition is weakly inextensible and <span class="math inline">\bot</span> is a weakly inextensible coextension of any false one; and for <span class="math inline">X=\top</span> the condition <span class="math inline">\operatorname{WeaklyInextensible}(\top)</span> unfolds to <span class="math inline">\forall Z\, .\,(\forall\bar x\, .\,\Box Z[\bar x])\to\Box\forall\bar x\, .\,Z[\bar x]</span>, the Barcan Formula at the argument types, so the instance of the principle at <span class="math inline">\top</span> is a relativised Barcan Formula.</p>
+<p>and Weak Rigid Comprehension says that for every <span
+class="math inline">X</span> the haecceities of the <span
+class="math inline">X</span>-instances have a least upper bound and that
+it is coextensive with <span class="math inline">X</span>. Weak
+inextensibility keeps only the “least” half of this. Two further sanity
+checks: at type <span class="math inline">t</span> the principle is
+trivial, since a true proposition is weakly inextensible and <span
+class="math inline">\bot</span> is a weakly inextensible coextension of
+any false one; and for <span class="math inline">X=\top</span> the
+condition <span
+class="math inline">\operatorname{WeaklyInextensible}(\top)</span>
+unfolds to <span class="math inline">\forall Z\, .\,(\forall\bar x\,
+.\,\Box Z[\bar x])\to\Box\forall\bar x\, .\,Z[\bar x]</span>, the Barcan
+Formula at the argument types, so the instance of the principle at <span
+class="math inline">\top</span> is a relativised Barcan Formula.</p>
 <h2 id="proof">Proof</h2>
-<p>Fix <span class="math inline">X^\tau</span>. Boolean Completeness in its least-upper-bound form, which is equivalent to the recorded greatest-lower-bound form in C, gives <span class="math inline">S^\tau</span> with <span class="math inline">\operatorname{LUB}_\tau(S,\operatorname{Haecs}(X))</span>. Put</p>
+<p>Fix <span class="math inline">X^\tau</span>. Boolean Completeness in
+its least-upper-bound form, which is equivalent to the recorded
+greatest-lower-bound form in C, gives <span
+class="math inline">S^\tau</span> with <span
+class="math inline">\operatorname{LUB}_\tau(S,\operatorname{Haecs}(X))</span>.
+Put</p>
 <p><span class="math display">
 Y:=\lambda\bar z\, .\,S[\bar z]\land X[\bar z].
 </span></p>
-<p><em>Coextension.</em> If <span class="math inline">X[\bar y]</span> then <span class="math inline">\operatorname{Haec}_{\bar y}</span> falls under <span class="math inline">\operatorname{Haecs}(X)</span>, so <span class="math inline">\operatorname{Haec}_{\bar y}\le S</span>, that is <span class="math inline">\Box S[\bar y]</span>, and <span class="math inline">S[\bar y]</span> by T. Thus <span class="math inline">X[\bar y]\to Y[\bar y]</span>, and the converse is immediate.</p>
-<p><em>Weak inextensibility.</em> Suppose <span class="math inline">\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar z]</span>. If <span class="math inline">X[\bar y]</span> then <span class="math inline">Y[\bar y]</span>, so <span class="math inline">\Box Z[\bar y]</span>, so <span class="math inline">\operatorname{Haec}_{\bar y}\le Z</span> by the displayed equivalence. Hence <span class="math inline">Z</span> is an upper bound of <span class="math inline">\operatorname{Haecs}(X)</span>, and leastness gives <span class="math inline">S\le Z</span>. Since <span class="math inline">Y\le S</span> is a necessitated theorem, <span class="math inline">Y\le Z</span>. <span class="math inline">\square</span></p>
-<p>Only the least upper bound of the haecceities of the <span class="math inline">X</span>-instances is used, so a “haecceity completeness” principle restricted to such properties would already suffice.</p>
+<p><em>Coextension.</em> If <span class="math inline">X[\bar y]</span>
+then <span class="math inline">\operatorname{Haec}_{\bar y}</span> falls
+under <span class="math inline">\operatorname{Haecs}(X)</span>, so <span
+class="math inline">\operatorname{Haec}_{\bar y}\le S</span>, that is
+<span class="math inline">\Box S[\bar y]</span>, and <span
+class="math inline">S[\bar y]</span> by T. Thus <span
+class="math inline">X[\bar y]\to Y[\bar y]</span>, and the converse is
+immediate.</p>
+<p><em>Weak inextensibility.</em> Suppose <span
+class="math inline">\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar
+z]</span>. If <span class="math inline">X[\bar y]</span> then <span
+class="math inline">Y[\bar y]</span>, so <span class="math inline">\Box
+Z[\bar y]</span>, so <span class="math inline">\operatorname{Haec}_{\bar
+y}\le Z</span> by the displayed equivalence. Hence <span
+class="math inline">Z</span> is an upper bound of <span
+class="math inline">\operatorname{Haecs}(X)</span>, and leastness gives
+<span class="math inline">S\le Z</span>. Since <span
+class="math inline">Y\le S</span> is a necessitated theorem, <span
+class="math inline">Y\le Z</span>. <span
+class="math inline">\square</span></p>
+<p>Only the least upper bound of the haecceities of the <span
+class="math inline">X</span>-instances is used, so a “haecceity
+completeness” principle restricted to such properties would already
+suffice.</p>
 <h2 id="what-this-places-on-the-map">What this places on the map</h2>
-<p>With the recorded implication from Actuality, Weakly Inextensible Comprehension sits below two principles that the recorded models separate in both directions:</p>
+<p>With the recorded implication from Actuality, Weakly Inextensible
+Comprehension sits below two principles that the recorded models
+separate in both directions:</p>
 <ul>
-<li>Boolean Completeness without Actuality: the symmetric all-surjections model and the symmetric range-gap model without Actuality.</li>
-<li>Actuality without Boolean Completeness: the finite-support identity-or-collapse, dyadic-rounding and truncated-shift models, and the coalesced sums.</li>
+<li>Boolean Completeness without Actuality: the symmetric
+all-surjections model and the symmetric range-gap model without
+Actuality.</li>
+<li>Actuality without Boolean Completeness: the finite-support
+identity-or-collapse, dyadic-rounding and truncated-shift models, and
+the coalesced sums.</li>
 </ul>
-<p>So Weakly Inextensible Comprehension is strictly weaker than each of Actuality and Boolean Completeness, and in particular it does not imply Actuality. The guess that it might be equivalent to Actuality fails on the Boolean Completeness side, where the join of the haecceities does the work that the actual atom does on the other side. Under Actuality the two witnesses differ: <span class="math inline">\lambda\bar z\, .\,w\land X[\bar z]</span> is weakly inextensible but not persistent, while <span class="math inline">\lambda\bar z\, .\,w\le X[\bar z]</span> is persistent but need not be weakly inextensible without B; only with Boolean Completeness, as in Dorr’s Proposition 1, does one witness do both.</p>
+<p>So Weakly Inextensible Comprehension is strictly weaker than each of
+Actuality and Boolean Completeness, and in particular it does not imply
+Actuality. The guess that it might be equivalent to Actuality fails on
+the Boolean Completeness side, where the join of the haecceities does
+the work that the actual atom does on the other side. Under Actuality
+the two witnesses differ: <span class="math inline">\lambda\bar z\,
+.\,w\land X[\bar z]</span> is weakly inextensible but not persistent,
+while <span class="math inline">\lambda\bar z\, .\,w\le X[\bar z]</span>
+is persistent but need not be weakly inextensible without B; only with
+Boolean Completeness, as in Dorr’s Proposition 1, does one witness do
+both.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Related: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — Proposition 1, p. 2. The same least upper bound of haecceities is the witness there; with Actuality added it is also persistent and coextensive with X by itself. Here Actuality is not assumed and the join is cut down to X.</li>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.2, pp. 23–25. Boolean Completeness; its least-upper-bound form is equivalent to the stated greatest-lower-bound form in C.</li>
+<li><strong>Related: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — Proposition 1, p. 2.
+The same least upper bound of haecceities is the witness there; with
+Actuality added it is also persistent and coextensive with X by itself.
+Here Actuality is not assumed and the join is cut down to X.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.2,
+pp. 23–25. Boolean Completeness; its least-upper-bound form is
+equivalent to the stated greatest-lower-bound form in C.</li>
 </ul>
 </body></html>

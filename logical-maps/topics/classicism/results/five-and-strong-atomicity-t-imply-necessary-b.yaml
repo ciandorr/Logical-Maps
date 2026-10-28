@@ -6,7 +6,8 @@ conclusion: necessary-modal-b
 status: proved
 certificate:
   source_id: misc
-  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, from Cian Dorr's sketch (the true strong atom entails each truth and is necessarily possible)
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, from Cian Dorr's sketch
+    (the true strong atom entails each truth and is necessarily possible)
   recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026
   checked_by: []
   date: '2026-10-08'
@@ -17,21 +18,28 @@ sources:
   □ND; proof as recorded.
 source_names:
 - Dorr 8 Oct
-proof: >-
-  Strong atoms are necessarily strong: if $\operatorname{SAtom}(w)$, then 5 gives $\Box\Diamond w$
-  and 4 gives $\Box\Box\forall Y\,(w\le Y\lor w\le\neg Y)$, so $\Box\operatorname{SAtom}(w)$. Let
-  $q:=\exists w\, .\,\Box\operatorname{SAtom}(w)\land w$. Then $\Box q$: if $\Diamond\neg q$, Strong Atomicity gives a strong atom $w\le\neg q$, and $\Box\Box\operatorname{SAtom}(w)$
-  by the above and 4, so at a world where $w$ holds, as one does since $\Diamond w$, $q$ holds too,
-  contradicting $w\le\neg q$. Next, $q\to\forall p\, .\,p\to\Box\Diamond p$ is a theorem of C: given
-  $\Box\operatorname{SAtom}(w_0)\land w_0$ and a true $p$, T twice gives $w_0\le p$ or $w_0\le\neg p$,
-  and the second contradicts $w_0\land p$; and $\Box\operatorname{SAtom}(w_0)$ gives $\Box\Diamond
-  w_0$, so $w_0\le p$ gives $\Box\Diamond p$. Necessitating this theorem and applying K to $\Box q$
-  gives $\Box\forall p\, .\,p\to\Box\Diamond p$, which yields each closed instance of $\Box$B.
+proof: 'Strong atoms are necessarily strong: if $\operatorname{SAtom}(w)$, then 5 gives $\Box\Diamond
+  w$ and 4 gives $\Box\Box\forall Y\,(w\le Y\lor w\le\neg Y)$, so $\Box\operatorname{SAtom}(w)$. Let
+  $q:=\exists w\, .\,\Box\operatorname{SAtom}(w)\land w$. Then $\Box q$: if $\Diamond\neg q$, Strong
+  Atomicity gives a strong atom $w\le\neg q$, and $\Box\Box\operatorname{SAtom}(w)$ by the
+  above and 4, so at a world where $w$ holds, as one does since $\Diamond w$, $q$ holds too, contradicting
+  $w\le\neg q$. Next, $q\to\forall p\, .\,p\to\Box\Diamond p$ is a theorem of C: given $\Box\operatorname{SAtom}(w_0)\land
+  w_0$ and a true $p$, T twice gives $w_0\le p$ or $w_0\le\neg p$, and the second contradicts $w_0\land
+  p$; and $\Box\operatorname{SAtom}(w_0)$ gives $\Box\Diamond w_0$, so $w_0\le p$ gives $\Box\Diamond
+  p$. Necessitating this theorem and applying K to $\Box q$ gives $\Box\forall p\, .\,p\to\Box\Diamond
+  p$, which yields each closed instance of $\Box$B.'
 references:
 - paper: bacon-2024-book
   role: background
   locator: §8.2, pp. 165–170
   note: Strong atoms and Strong Atomicity.
-notes: >-
-  5 is equivalent to ND in C, by the recorded results, so this gives □ND from ND and Strong
-  Atomicity (type t). 5 is used only to make the strong atoms necessarily possible. atoms do not suffice: ND with □Atomicity (type t) does not give □ND, by the recorded models.
+notes: '5 is equivalent to ND in C, by the recorded results, so this gives □ND from ND and Strong
+  Atomicity (type t). 5 is used only to make the strong atoms necessarily possible. Atoms do not suffice: ND with □Atomicity (type t) does not give □ND, by the recorded models.
+
+
+  Strengthened by [[five-and-self-atomicity-t-imply-necessary-b]]: self-atoms serve for strong atoms.'
+changes:
+- date: '2026-10-25'
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  minor: true
+  summary: Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.

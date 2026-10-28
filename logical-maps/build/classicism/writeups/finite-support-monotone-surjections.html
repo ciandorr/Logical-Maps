@@ -322,23 +322,181 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: monotone surjections of N</h1></header><h2 id="failure-of-boolean-completeness-at-type-t">Failure of Boolean Completeness at type <span class="math inline">t</span></h2>
-<p>At the identity arrow of this one-object action model, propositions are sets of arrows pinned down by a finite set of individuals. Algebraic entailment is set inclusion, and Boolean operations are the set operations.</p>
-<p>The higher-type domain obligation is essential. By <em>Classicism</em>, Definition D.3 and the following paragraph (16 May 2023 draft, pp. 73–74), an ideally full model is extensionally full. Consequently every set <span class="math inline">R\subseteq D_t</span> is the extension, at the identity, of a property of propositions. Concretely, the intension <span class="math inline">I_R=\{(h,p):p\in R\}</span> is independent of its arrow argument and is pinned down by the empty set. Its applicative behaviour is <span class="math inline">X_R\langle h,p\rangle=\{j:j^t p\in R\}</span>, not a constant truth-value function. This distinction supplies domain membership without the false rigidification argument in some trawl notes.</p>
-<p>Thus a family of domain propositions with no least upper bound refutes Boolean Completeness at type <span class="math inline">t</span>: the family of their complements is also the extension of a domain property, and a greatest lower bound for those complements would, by complementation, give the missing least upper bound. The bounds are taken <strong>inside</strong> <span class="math inline">D_t</span>. A set-theoretic intersection absent from <span class="math inline">D_t</span> need not by itself establish a missing greatest lower bound.</p>
-<h3 id="a-strictly-decreasing-sequence-of-agreement-classes">A strictly decreasing sequence of agreement classes</h3>
-<p>Take <span class="math inline">h_0(m)=m</span>, the identity. For <span class="math inline">n\ge1</span>, the map equal to <span class="math inline">m</span> on <span class="math inline">m\le n</span> and to <span class="math inline">m-1</span> on <span class="math inline">m&gt;n</span> is a monotone surjection. It agrees with <span class="math inline">h_0</span> through <span class="math inline">n</span> and disagrees at <span class="math inline">n+1</span>.</p>
-<p>Put <span class="math inline">C_n=\{h:h|_{\{0,\ldots,n\}}=h_0|_{\{0,\ldots,n\}}\}</span> and <span class="math inline">A_n=C_n\setminus C_{n+1}</span>, for <span class="math inline">n\ge1</span>. These are finitely pinned propositions. The displayed arrows show that every <span class="math inline">A_n</span> is nonempty. The sets <span class="math inline">A_n</span> are pairwise disjoint.</p>
-<h3 id="a-family-with-no-least-upper-bound">A family with no least upper bound</h3>
-<p>Let <span class="math inline">R=\{A_{2r}:r\ge1\}</span>. Suppose <span class="math inline">u\in D_t</span> is an upper bound for this family, and enlarge a finite support for <span class="math inline">u</span> to <span class="math inline">\{0,\ldots,N\}</span> with <span class="math inline">N\ge1</span>. Choose an even <span class="math inline">m&gt;N</span> and an arrow <span class="math inline">h\in A_m</span>. Since <span class="math inline">h\in u</span> and <span class="math inline">h</span> agrees with <span class="math inline">h_0</span> through <span class="math inline">N</span>, finite pinning implies <span class="math inline">h_0\in u</span> and indeed <span class="math inline">C_N\subseteq u</span>.</p>
-<p>Now choose an odd <span class="math inline">l&gt;N</span>. The nonempty proposition <span class="math inline">A_l</span> lies in <span class="math inline">C_N\subseteq u</span> and is disjoint from every member of <span class="math inline">R</span>. Consequently <span class="math inline">u\setminus A_l</span> is a strictly smaller upper bound in <span class="math inline">D_t</span>; its support is contained in <span class="math inline">\{0,\ldots,\max(N,l+1)\}</span>. Thus <span class="math inline">R</span> has no least upper bound. Extensional fullness supplies the property with the complementary family as its extension, proving the failure of the recorded greatest-lower-bound formulation of BC-t.</p>
-<p>The original descending-family proposal is not a valid proof: its intersection is <span class="math inline">\{h_0\}</span>, but if this singleton is not admitted, the bottom proposition is a greatest lower bound of that descending family. The alternating differences above are the replacement witness.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: monotone surjections of N</h1></header><h2 id="failure-of-boolean-completeness-at-type-t">Failure of Boolean
+Completeness at type <span class="math inline">t</span></h2>
+<p>At the identity arrow of this one-object action model, propositions
+are sets of arrows pinned down by a finite set of individuals. Algebraic
+entailment is set inclusion, and Boolean operations are the set
+operations.</p>
+<p>The higher-type domain obligation is essential. By
+<em>Classicism</em>, Definition D.3 and the following paragraph (16 May
+2023 draft, pp. 73–74), an ideally full model is extensionally full.
+Consequently every set <span class="math inline">R\subseteq D_t</span>
+is the extension, at the identity, of a property of propositions.
+Concretely, the intension <span class="math inline">I_R=\{(h,p):p\in
+R\}</span> is independent of its arrow argument and is pinned down by
+the empty set. Its applicative behaviour is <span
+class="math inline">X_R\langle h,p\rangle=\{j:j^t p\in R\}</span>, not a
+constant truth-value function. This distinction supplies domain
+membership without the false rigidification argument in some trawl
+notes.</p>
+<p>Thus a family of domain propositions with no least upper bound
+refutes Boolean Completeness at type <span class="math inline">t</span>:
+the family of their complements is also the extension of a domain
+property, and a greatest lower bound for those complements would, by
+complementation, give the missing least upper bound. The bounds are
+taken <strong>inside</strong> <span class="math inline">D_t</span>. A
+set-theoretic intersection absent from <span
+class="math inline">D_t</span> need not by itself establish a missing
+greatest lower bound.</p>
+<h3 id="a-strictly-decreasing-sequence-of-agreement-classes">A strictly
+decreasing sequence of agreement classes</h3>
+<p>Take <span class="math inline">h_0(m)=m</span>, the identity. For
+<span class="math inline">n\ge1</span>, the map equal to <span
+class="math inline">m</span> on <span class="math inline">m\le n</span>
+and to <span class="math inline">m-1</span> on <span
+class="math inline">m&gt;n</span> is a monotone surjection. It agrees
+with <span class="math inline">h_0</span> through <span
+class="math inline">n</span> and disagrees at <span
+class="math inline">n+1</span>.</p>
+<p>Put <span
+class="math inline">C_n=\{h:h|_{\{0,\ldots,n\}}=h_0|_{\{0,\ldots,n\}}\}</span>
+and <span class="math inline">A_n=C_n\setminus C_{n+1}</span>, for <span
+class="math inline">n\ge1</span>. These are finitely pinned
+propositions. The displayed arrows show that every <span
+class="math inline">A_n</span> is nonempty. The sets <span
+class="math inline">A_n</span> are pairwise disjoint.</p>
+<h3 id="a-family-with-no-least-upper-bound">A family with no least upper
+bound</h3>
+<p>Let <span class="math inline">R=\{A_{2r}:r\ge1\}</span>. Suppose
+<span class="math inline">u\in D_t</span> is an upper bound for this
+family, and enlarge a finite support for <span
+class="math inline">u</span> to <span
+class="math inline">\{0,\ldots,N\}</span> with <span
+class="math inline">N\ge1</span>. Choose an even <span
+class="math inline">m&gt;N</span> and an arrow <span
+class="math inline">h\in A_m</span>. Since <span
+class="math inline">h\in u</span> and <span class="math inline">h</span>
+agrees with <span class="math inline">h_0</span> through <span
+class="math inline">N</span>, finite pinning implies <span
+class="math inline">h_0\in u</span> and indeed <span
+class="math inline">C_N\subseteq u</span>.</p>
+<p>Now choose an odd <span class="math inline">l&gt;N</span>. The
+nonempty proposition <span class="math inline">A_l</span> lies in <span
+class="math inline">C_N\subseteq u</span> and is disjoint from every
+member of <span class="math inline">R</span>. Consequently <span
+class="math inline">u\setminus A_l</span> is a strictly smaller upper
+bound in <span class="math inline">D_t</span>; its support is contained
+in <span class="math inline">\{0,\ldots,\max(N,l+1)\}</span>. Thus <span
+class="math inline">R</span> has no least upper bound. Extensional
+fullness supplies the property with the complementary family as its
+extension, proving the failure of the recorded greatest-lower-bound
+formulation of BC-t.</p>
+<p>The original descending-family proposal is not a valid proof: its
+intersection is <span class="math inline">\{h_0\}</span>, but if this
+singleton is not admitted, the bottom proposition is a greatest lower
+bound of that descending family. The alternating differences above are
+the replacement witness.</p>
 <h2 id="attribution-and-review">Attribution and review</h2>
-<p>The model construction is Bacon and Dorr’s. Their footnote 92 (p. 74) conjectures the additional type-<span class="math inline">t</span> Boolean Completeness failures. DeepSeek (<code>deepseek-flash</code>) proposed this model verdict in the trawl of 25 September 2026. OpenAI Codex (GPT-6) checked the source definitions and supplied the corrected proof above on the same date. The immutable drafts and exact API edit provenance are identified in the model record’s <code>certificate.trawl</code>. This is an informal mathematical review; no Lean verification is claimed.</p>
-<h2 id="additional-arguments-25-september-2026">Additional arguments (25 September 2026)</h2>
-<p>Inextensible Comprehension fails, at type <span class="math inline">e\to t</span>, for the property of being even, which is in the domain as the constant intension <span class="math inline">\{\langle b,h\rangle : b\text{ even}\}</span>, pinned down by <span class="math inline">\emptyset</span>. Unpacking <span class="math inline">\operatorname{Inextensible}</span> as in the left-to-right half of Dorr’s rigidity criterion (draft, Lemma 14, p. 7, with Lemma 13): even the unboxed matrix, evaluated at the identity, says that <span class="math inline">Y</span> is contained in every persistent (transport-closed) <span class="math inline">B</span> in the domain whose extension includes <span class="math inline">Y</span>’s. For a finite <span class="math inline">N^{\prime}</span>, the smallest such <span class="math inline">B</span> pinned down by <span class="math inline">N^{\prime}</span> is <span class="math inline">B_{N^{\prime}}:=\{\langle b^{\prime\prime},i^{\prime}\rangle : i^{\prime\prime}(b)=b^{\prime\prime}\text{ for some even }b\text{ and some arrow }i^{\prime\prime}\text{ agreeing with }i^{\prime}\text{ on }N^{\prime}\}</span>, which is transport-closed and pinned down by <span class="math inline">N^{\prime}</span>. Now let <span class="math inline">Y</span> be coextensive with evenness and pinned down by a finite <span class="math inline">N_0\subseteq[0,M_0]</span>; then <span class="math inline">\langle b,i\rangle\in Y</span> for every even <span class="math inline">b</span> and every arrow <span class="math inline">i</span> fixing <span class="math inline">N_0</span> pointwise. Take <span class="math inline">i</span> the monotone surjection that is the identity on <span class="math inline">[0,M_0+1]</span>, sends <span class="math inline">M_0+2</span> to <span class="math inline">M_0+1</span> and <span class="math inline">x</span> to <span class="math inline">x-1</span> for <span class="math inline">x\ge M_0+2</span>; an even <span class="math inline">b\ge M_0+2</span>, whose only preimage under <span class="math inline">i</span> is the odd <span class="math inline">b+1</span>; and <span class="math inline">N^{\prime}:=[0,b+2]</span>: a monotone map agreeing with <span class="math inline">i</span> there has the same preimages of <span class="math inline">b</span> within <span class="math inline">[0,b+2]</span> and takes values at least <span class="math inline">i(b+2)=b+1</span> beyond it. So <span class="math inline">\langle b,i\rangle\in Y\setminus B_{N^{\prime}}</span>, and <span class="math inline">Y</span> is not even weakly inextensible, so Weakly Inextensible Comprehension fails too. Observation of 23 September 2026, answering Cian Dorr’s question whether the failure of Actuality can be sharpened to a failure of Inextensible Comprehension. Boolean Completeness fails at type <span class="math inline">t</span> as well, which the source (n. 92) conjectures but does not show. Any set <span class="math inline">F</span> of propositions is the extension at the identity of an element of the domain at type <span class="math inline">t\to t</span>, namely the profile <span class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}</span>: it is natural, independent of <span class="math inline">h</span> and so pinned down by the empty set, and each of its values is pinned down by the pinning set of <span class="math inline">p</span>, since <span class="math inline">i\cdot p</span> depends only on the values of <span class="math inline">i</span> there. A least upper bound of <span class="math inline">F</span> under entailment is a least finitely pinned superset of <span class="math inline">\bigcup F</span>, and it exists only if the least <span class="math inline">S</span>-pinned superset of <span class="math inline">\bigcup F</span> stops shrinking as the finite set <span class="math inline">S</span> grows. Here let <span class="math inline">A_m</span> (<span class="math inline">m\ge1</span>) be the proposition, pinned down by <span class="math inline">\{2m-1,2m\}</span>, that the arrow sends <span class="math inline">2m-1</span> to <span class="math inline">0</span> and <span class="math inline">2m</span> to <span class="math inline">1</span>, so that its first step is at the even position <span class="math inline">2m</span>. The least superset of <span class="math inline">\bigcup_mA_m</span> pinned down by <span class="math inline">\{0,\ldots,N\}</span> consists of the arrows whose first step is at an even position or beyond <span class="math inline">N</span>, and it strictly shrinks as <span class="math inline">N</span> grows. So <span class="math inline">F</span> has no least upper bound, and, taking pointwise negations, the family of complements has no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.</p>
+<p>The model construction is Bacon and Dorr’s. Their footnote 92 (p. 74)
+conjectures the additional type-<span class="math inline">t</span>
+Boolean Completeness failures. DeepSeek (<code>deepseek-flash</code>)
+proposed this model verdict in the trawl of 25 September 2026. OpenAI
+Codex (GPT-6) checked the source definitions and supplied the corrected
+proof above on the same date. The immutable drafts and exact API edit
+provenance are identified in the model record’s
+<code>certificate.trawl</code>. This is an informal mathematical review;
+no Lean verification is claimed.</p>
+<h2 id="additional-arguments-25-september-2026">Additional arguments (25
+September 2026)</h2>
+<p>Inextensible Comprehension fails, at type <span
+class="math inline">e\to t</span>, for the property of being even, which
+is in the domain as the constant intension <span
+class="math inline">\{\langle b,h\rangle : b\text{ even}\}</span>,
+pinned down by <span class="math inline">\emptyset</span>. Unpacking
+<span class="math inline">\operatorname{Inextensible}</span> as in the
+left-to-right half of Dorr’s rigidity criterion (draft, Lemma 14, p. 7,
+with Lemma 13): even the unboxed matrix, evaluated at the identity, says
+that <span class="math inline">Y</span> is contained in every persistent
+(transport-closed) <span class="math inline">B</span> in the domain
+whose extension includes <span class="math inline">Y</span>’s. For a
+finite <span class="math inline">N^{\prime}</span>, the smallest such
+<span class="math inline">B</span> pinned down by <span
+class="math inline">N^{\prime}</span> is <span
+class="math inline">B_{N^{\prime}}:=\{\langle
+b^{\prime\prime},i^{\prime}\rangle :
+i^{\prime\prime}(b)=b^{\prime\prime}\text{ for some even }b\text{ and
+some arrow }i^{\prime\prime}\text{ agreeing with }i^{\prime}\text{ on
+}N^{\prime}\}</span>, which is transport-closed and pinned down by <span
+class="math inline">N^{\prime}</span>. Now let <span
+class="math inline">Y</span> be coextensive with evenness and pinned
+down by a finite <span class="math inline">N_0\subseteq[0,M_0]</span>;
+then <span class="math inline">\langle b,i\rangle\in Y</span> for every
+even <span class="math inline">b</span> and every arrow <span
+class="math inline">i</span> fixing <span class="math inline">N_0</span>
+pointwise. Take <span class="math inline">i</span> the monotone
+surjection that is the identity on <span
+class="math inline">[0,M_0+1]</span>, sends <span
+class="math inline">M_0+2</span> to <span
+class="math inline">M_0+1</span> and <span class="math inline">x</span>
+to <span class="math inline">x-1</span> for <span
+class="math inline">x\ge M_0+2</span>; an even <span
+class="math inline">b\ge M_0+2</span>, whose only preimage under <span
+class="math inline">i</span> is the odd <span
+class="math inline">b+1</span>; and <span
+class="math inline">N^{\prime}:=[0,b+2]</span>: a monotone map agreeing
+with <span class="math inline">i</span> there has the same preimages of
+<span class="math inline">b</span> within <span
+class="math inline">[0,b+2]</span> and takes values at least <span
+class="math inline">i(b+2)=b+1</span> beyond it. So <span
+class="math inline">\langle b,i\rangle\in Y\setminus
+B_{N^{\prime}}</span>, and <span class="math inline">Y</span> is not
+even weakly inextensible, so Weakly Inextensible Comprehension fails
+too. Observation of 23 September 2026, answering Cian Dorr’s question
+whether the failure of Actuality can be sharpened to a failure of
+Inextensible Comprehension. Boolean Completeness fails at type <span
+class="math inline">t</span> as well, which the source (n. 92)
+conjectures but does not show. Any set <span
+class="math inline">F</span> of propositions is the extension at the
+identity of an element of the domain at type <span
+class="math inline">t\to t</span>, namely the profile <span
+class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in
+F\}</span>: it is natural, independent of <span
+class="math inline">h</span> and so pinned down by the empty set, and
+each of its values is pinned down by the pinning set of <span
+class="math inline">p</span>, since <span class="math inline">i\cdot
+p</span> depends only on the values of <span
+class="math inline">i</span> there. A least upper bound of <span
+class="math inline">F</span> under entailment is a least finitely pinned
+superset of <span class="math inline">\bigcup F</span>, and it exists
+only if the least <span class="math inline">S</span>-pinned superset of
+<span class="math inline">\bigcup F</span> stops shrinking as the finite
+set <span class="math inline">S</span> grows. Here let <span
+class="math inline">A_m</span> (<span class="math inline">m\ge1</span>)
+be the proposition, pinned down by <span
+class="math inline">\{2m-1,2m\}</span>, that the arrow sends <span
+class="math inline">2m-1</span> to <span class="math inline">0</span>
+and <span class="math inline">2m</span> to <span
+class="math inline">1</span>, so that its first step is at the even
+position <span class="math inline">2m</span>. The least superset of
+<span class="math inline">\bigcup_mA_m</span> pinned down by <span
+class="math inline">\{0,\ldots,N\}</span> consists of the arrows whose
+first step is at an even position or beyond <span
+class="math inline">N</span>, and it strictly shrinks as <span
+class="math inline">N</span> grows. So <span
+class="math inline">F</span> has no least upper bound, and, taking
+pointwise negations, the family of complements has no greatest lower
+bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026;
+not in the source.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, Proposition D.5(2), pp. 74–75; construction pp. 76–77; p. 79 (No Pure Contingency)</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, Proposition D.5(2), pp. 74–75; construction pp. 76–77; p. 79
+(No Pure Contingency)</li>
 </ul>
 </body></html>

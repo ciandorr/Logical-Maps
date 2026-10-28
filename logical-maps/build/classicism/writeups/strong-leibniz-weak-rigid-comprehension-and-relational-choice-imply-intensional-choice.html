@@ -322,27 +322,162 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Strong Leibniz, Weak Rigid Comprehension and Relational Choice imply Intensional Choice</h1></header><p>The construction is Cian Dorr’s, proposed on 20 October 2026: choose, for each atom of type <span class="math inline">t</span>, a strong world of type <span class="math inline">\sigma t</span> rather than an individual. The details and the pair lemma are by Claude Opus 5.5 (Anthropic), 20 October 2026. Lean-verified the same day: the proof follows this write-up step by step (<code>Classicism.Proofs.strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice</code>, with the pair lemma as <code>box_pairs_of_weaklyInextensible</code>), and is a theorem of C⁻.</p>
-<p>Fix <span class="math inline">\sigma</span> and let <span class="math inline">F^{\sigma t}</span> satisfy <span class="math inline">\Box\exists y\, .\,Fy</span>. The Strong Leibniz Biconditionals are used at type <span class="math inline">\sigma t</span>, and at type <span class="math inline">t</span> through Atomicity (type <span class="math inline">t</span>), which they imply. Relational Choice is used at types <span class="math inline">t,\sigma t</span>, and Weak Rigid Comprehension at type <span class="math inline">(\sigma t)t</span>. Only T and 4 are needed from the modal logic; BF and ND are not used. In this write-up an <em>atom</em> is an atom of type <span class="math inline">t</span>.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Strong Leibniz, Weak Rigid Comprehension and Relational Choice imply Intensional Choice</h1></header><p>The construction is Cian Dorr’s, proposed on 20 October 2026: choose,
+for each atom of type <span class="math inline">t</span>, a strong world
+of type <span class="math inline">\sigma t</span> rather than an
+individual. The details and the pair lemma are by Claude Opus 5.5
+(Anthropic), 20 October 2026. Lean-verified the same day: the proof
+follows this write-up step by step
+(<code>Classicism.Proofs.strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice</code>,
+with the pair lemma as <code>box_pairs_of_weaklyInextensible</code>),
+and is a theorem of C⁻.</p>
+<p>Fix <span class="math inline">\sigma</span> and let <span
+class="math inline">F^{\sigma t}</span> satisfy <span
+class="math inline">\Box\exists y\, .\,Fy</span>. The Strong Leibniz
+Biconditionals are used at type <span class="math inline">\sigma
+t</span>, and at type <span class="math inline">t</span> through
+Atomicity (type <span class="math inline">t</span>), which they imply.
+Relational Choice is used at types <span class="math inline">t,\sigma
+t</span>, and Weak Rigid Comprehension at type <span
+class="math inline">(\sigma t)t</span>. Only T and 4 are needed from the
+modal logic; BF and ND are not used. In this write-up an <em>atom</em>
+is an atom of type <span class="math inline">t</span>.</p>
 <h2 id="the-construction">The construction</h2>
-<p>Put <span class="math display">U:=\lambda wX\, .\,\operatorname{Atom}(w)\to\bigl(\operatorname{SWorld}_{\sigma t}(X)\land X\le\lambda y\, .\,w\land Fy\bigr).</span> It is serial. A non-atom is related to everything. For an atom <span class="math inline">w</span>, <span class="math inline">\Diamond w</span> and <span class="math inline">\Box\exists y\, .\,Fy</span> give <span class="math inline">\Diamond\exists y\, .\,(w\land Fy)</span>, so <span class="math inline">\lambda y\, .\,w\land Fy</span> is not bottom and the Strong Leibniz Biconditionals give a strong world below it. Relational Choice gives a functional <span class="math inline">V</span> with <span class="math inline">VwX\to UwX</span>; write <span class="math inline">X_w</span> for the value of an atom <span class="math inline">w</span>. Weak Rigid Comprehension gives a weakly rigid <span class="math inline">R</span> coextensive with <span class="math inline">\lambda X\, .\,\exists w\, .\,\operatorname{Atom}(w)\land VwX</span>, so the actual instances of <span class="math inline">R</span> are exactly the <span class="math inline">X_w</span>. Put <span class="math display">G:=\lambda y\, .\,\exists X\, .\,RX\land Xy .</span></p>
-<h2 id="two-facts-about-the-actual-instances">Two facts about the actual instances</h2>
-<p><strong>(a)</strong> Let <span class="math inline">A(X):=X\le F\land\forall Y^{\sigma t}\, .\,X\le Y\lor X\le\neg Y</span>. Then <span class="math inline">\Box A(X_w)</span> for every atom <span class="math inline">w</span>: <span class="math inline">X_w\le F</span>, and <span class="math inline">\le</span> is boxed, so 4 gives the first conjunct necessarily; the second is the boxed clause of <span class="math inline">\operatorname{SWorld}_{\sigma t}(X_w)</span>.</p>
-<p><strong>(b)</strong> For all atoms <span class="math inline">w,w&#39;</span>, <span class="math display">\Box\bigl(X_w=X_{w&#39;}\lor\neg(\exists y\, .\,X_wy\land\exists z\, .\,X_{w&#39;}z)\bigr).</span> If <span class="math inline">w=w&#39;</span>, functionality gives <span class="math inline">X_w=X_{w&#39;}</span>, and identities are necessary. If <span class="math inline">w\ne w&#39;</span>, then <span class="math inline">w\land w&#39;</span> lies below the atom <span class="math inline">w</span>, so it is <span class="math inline">w</span> or bottom, and likewise for <span class="math inline">w&#39;</span>; as <span class="math inline">w\ne w&#39;</span> it is bottom. Since <span class="math inline">X_w\le\lambda y\, .\,w</span> and <span class="math inline">X_{w&#39;}\le\lambda y\, .\,w&#39;</span>, the two are necessarily not both instantiated.</p>
+<p>Put <span class="math display">U:=\lambda wX\,
+.\,\operatorname{Atom}(w)\to\bigl(\operatorname{SWorld}_{\sigma
+t}(X)\land X\le\lambda y\, .\,w\land Fy\bigr).</span> It is serial. A
+non-atom is related to everything. For an atom <span
+class="math inline">w</span>, <span class="math inline">\Diamond
+w</span> and <span class="math inline">\Box\exists y\, .\,Fy</span> give
+<span class="math inline">\Diamond\exists y\, .\,(w\land Fy)</span>, so
+<span class="math inline">\lambda y\, .\,w\land Fy</span> is not bottom
+and the Strong Leibniz Biconditionals give a strong world below it.
+Relational Choice gives a functional <span class="math inline">V</span>
+with <span class="math inline">VwX\to UwX</span>; write <span
+class="math inline">X_w</span> for the value of an atom <span
+class="math inline">w</span>. Weak Rigid Comprehension gives a weakly
+rigid <span class="math inline">R</span> coextensive with <span
+class="math inline">\lambda X\, .\,\exists w\,
+.\,\operatorname{Atom}(w)\land VwX</span>, so the actual instances of
+<span class="math inline">R</span> are exactly the <span
+class="math inline">X_w</span>. Put <span
+class="math display">G:=\lambda y\, .\,\exists X\, .\,RX\land Xy
+.</span></p>
+<h2 id="two-facts-about-the-actual-instances">Two facts about the actual
+instances</h2>
+<p><strong>(a)</strong> Let <span class="math inline">A(X):=X\le
+F\land\forall Y^{\sigma t}\, .\,X\le Y\lor X\le\neg Y</span>. Then <span
+class="math inline">\Box A(X_w)</span> for every atom <span
+class="math inline">w</span>: <span class="math inline">X_w\le F</span>,
+and <span class="math inline">\le</span> is boxed, so 4 gives the first
+conjunct necessarily; the second is the boxed clause of <span
+class="math inline">\operatorname{SWorld}_{\sigma t}(X_w)</span>.</p>
+<p><strong>(b)</strong> For all atoms <span
+class="math inline">w,w&#39;</span>, <span
+class="math display">\Box\bigl(X_w=X_{w&#39;}\lor\neg(\exists y\,
+.\,X_wy\land\exists z\, .\,X_{w&#39;}z)\bigr).</span> If <span
+class="math inline">w=w&#39;</span>, functionality gives <span
+class="math inline">X_w=X_{w&#39;}</span>, and identities are necessary.
+If <span class="math inline">w\ne w&#39;</span>, then <span
+class="math inline">w\land w&#39;</span> lies below the atom <span
+class="math inline">w</span>, so it is <span
+class="math inline">w</span> or bottom, and likewise for <span
+class="math inline">w&#39;</span>; as <span class="math inline">w\ne
+w&#39;</span> it is bottom. Since <span
+class="math inline">X_w\le\lambda y\, .\,w</span> and <span
+class="math inline">X_{w&#39;}\le\lambda y\, .\,w&#39;</span>, the two
+are necessarily not both instantiated.</p>
 <h2 id="pair-lemma">Pair lemma</h2>
-<p><strong>Lemma.</strong> Let <span class="math inline">R</span> be weakly inextensible, and suppose <span class="math inline">\Box Z(a,b)</span> for all <span class="math inline">a,b</span> with <span class="math inline">Ra</span> and <span class="math inline">Rb</span>. Then <span class="math inline">\Box\forall ab\, .\,Ra\land Rb\to Z(a,b)</span>.</p>
-<p><em>Proof.</em> Fix <span class="math inline">b</span> with <span class="math inline">Rb</span>. Weak inextensibility with target <span class="math inline">\lambda a\, .\,Z(a,b)</span> gives <span class="math inline">R\le\lambda a\, .\,Z(a,b)</span>, that is, <span class="math inline">\Box\forall a\, .\,Ra\to Z(a,b)</span>, and by 4 this holds necessarily. So every actual instance <span class="math inline">b</span> satisfies <span class="math inline">\Box T(b)</span>, where <span class="math inline">T:=\lambda b\, .\,\Box\forall a\, .\,Ra\to Z(a,b)</span>. Weak inextensibility gives <span class="math inline">R\le T</span>, and T applied inside the box gives the claim. ∎</p>
+<p><strong>Lemma.</strong> Let <span class="math inline">R</span> be
+weakly inextensible, and suppose <span class="math inline">\Box
+Z(a,b)</span> for all <span class="math inline">a,b</span> with <span
+class="math inline">Ra</span> and <span class="math inline">Rb</span>.
+Then <span class="math inline">\Box\forall ab\, .\,Ra\land Rb\to
+Z(a,b)</span>.</p>
+<p><em>Proof.</em> Fix <span class="math inline">b</span> with <span
+class="math inline">Rb</span>. Weak inextensibility with target <span
+class="math inline">\lambda a\, .\,Z(a,b)</span> gives <span
+class="math inline">R\le\lambda a\, .\,Z(a,b)</span>, that is, <span
+class="math inline">\Box\forall a\, .\,Ra\to Z(a,b)</span>, and by 4
+this holds necessarily. So every actual instance <span
+class="math inline">b</span> satisfies <span class="math inline">\Box
+T(b)</span>, where <span class="math inline">T:=\lambda b\,
+.\,\Box\forall a\, .\,Ra\to Z(a,b)</span>. Weak inextensibility gives
+<span class="math inline">R\le T</span>, and T applied inside the box
+gives the claim. ∎</p>
 <h2 id="verification">Verification</h2>
-<p><strong><span class="math inline">G\le F</span>.</strong> Weak inextensibility and (a) give <span class="math inline">\Box\forall X\, .\,RX\to A(X)</span>. So necessarily, if <span class="math inline">Gy</span>, then <span class="math inline">RX</span> and <span class="math inline">Xy</span> for some <span class="math inline">X</span> with <span class="math inline">X\le F</span>, and T gives <span class="math inline">Fy</span>.</p>
-<p><strong><span class="math inline">\Box\exists y\, .\,Gy</span>.</strong> Suppose otherwise. Atomicity (type <span class="math inline">t</span>) gives an atom <span class="math inline">w_0\le\neg\exists y\, .\,Gy</span>. Weak persistence gives <span class="math inline">\Box RX_{w_0}</span>. As <span class="math inline">X_{w_0}</span> is not bottom, <span class="math inline">\Diamond\exists y\, .\,X_{w_0}y</span>, and <span class="math inline">X_{w_0}\le\lambda y\, .\,w_0</span>, so <span class="math inline">\Diamond(w_0\land\exists y\, .\,Gy)</span>. This contradicts <span class="math inline">w_0\le\neg\exists y\, .\,Gy</span>.</p>
-<p><strong>Necessarily at most one instance.</strong> Reason inside the box. Suppose <span class="math inline">Gy</span> and <span class="math inline">Gz</span>, with <span class="math inline">RX</span>, <span class="math inline">Xy</span>, <span class="math inline">RX&#39;</span> and <span class="math inline">X&#39;z</span>. The pair lemma with (b) gives <span class="math inline">X=X&#39;</span>. By (a), <span class="math inline">X\le\lambda u\, .\,u=y</span> or <span class="math inline">X\le\lambda u\, .\,u\ne y</span>. The second, by T, contradicts <span class="math inline">Xy</span>. So the first holds, and T with <span class="math inline">Xz</span> gives <span class="math inline">z=y</span>.</p>
-<p>So <span class="math inline">G\le F</span> and <span class="math inline">\Box\exists y\, .\,(Gy\land\forall z\, .\,Gz\to z=y)</span>.</p>
+<p><strong><span class="math inline">G\le F</span>.</strong> Weak
+inextensibility and (a) give <span class="math inline">\Box\forall X\,
+.\,RX\to A(X)</span>. So necessarily, if <span
+class="math inline">Gy</span>, then <span class="math inline">RX</span>
+and <span class="math inline">Xy</span> for some <span
+class="math inline">X</span> with <span class="math inline">X\le
+F</span>, and T gives <span class="math inline">Fy</span>.</p>
+<p><strong><span class="math inline">\Box\exists y\,
+.\,Gy</span>.</strong> Suppose otherwise. Atomicity (type <span
+class="math inline">t</span>) gives an atom <span
+class="math inline">w_0\le\neg\exists y\, .\,Gy</span>. Weak persistence
+gives <span class="math inline">\Box RX_{w_0}</span>. As <span
+class="math inline">X_{w_0}</span> is not bottom, <span
+class="math inline">\Diamond\exists y\, .\,X_{w_0}y</span>, and <span
+class="math inline">X_{w_0}\le\lambda y\, .\,w_0</span>, so <span
+class="math inline">\Diamond(w_0\land\exists y\, .\,Gy)</span>. This
+contradicts <span class="math inline">w_0\le\neg\exists y\,
+.\,Gy</span>.</p>
+<p><strong>Necessarily at most one instance.</strong> Reason inside the
+box. Suppose <span class="math inline">Gy</span> and <span
+class="math inline">Gz</span>, with <span class="math inline">RX</span>,
+<span class="math inline">Xy</span>, <span
+class="math inline">RX&#39;</span> and <span
+class="math inline">X&#39;z</span>. The pair lemma with (b) gives <span
+class="math inline">X=X&#39;</span>. By (a), <span
+class="math inline">X\le\lambda u\, .\,u=y</span> or <span
+class="math inline">X\le\lambda u\, .\,u\ne y</span>. The second, by T,
+contradicts <span class="math inline">Xy</span>. So the first holds, and
+T with <span class="math inline">Xz</span> gives <span
+class="math inline">z=y</span>.</p>
+<p>So <span class="math inline">G\le F</span> and <span
+class="math inline">\Box\exists y\, .\,(Gy\land\forall z\, .\,Gz\to
+z=y)</span>.</p>
 <h2 id="remarks">Remarks</h2>
-<p><em>Why strong worlds.</em> An atom of type <span class="math inline">\sigma t</span> settles only actual properties. The uniqueness step needs <span class="math inline">X</span> to settle the haecceity <span class="math inline">\lambda u\, .\,u=y</span> of an instance <span class="math inline">y</span> at another world, and that <span class="math inline">y</span> need not be actual. A strong world settles every property necessarily, so the condition is persistent and passes through weak inextensibility as (a).</p>
-<p><em>Comparison.</em> The earlier proof, <a href="bf-weak-rigid-comprehension-atomicity-and-relational-choice-imply-intensional-choice.html">BF, Weak Rigid Comprehension, Atomicity and Relational Choice imply Intensional Choice</a>, used BF to choose an individual <span class="math inline">x</span> with <span class="math inline">w\le Fx</span>, and again to pull instances below an atom back to actual ones. Choosing a property needs no BF, and the pair lemma replaces the pull-back.</p>
-<p><em>Modalized Relational Choice.</em> The argument does not extend. With inputs, values would be chosen for pairs of an atom <span class="math inline">w</span> and an actual input <span class="math inline">x</span>. Two distinct actual inputs <span class="math inline">x_1,x_2</span> may, without ND, be identified at a world where <span class="math inline">w</span> is true, and the chosen values for <span class="math inline">(w,x_1)</span> and <span class="math inline">(w,x_2)</span> are then two values of the merged input; (b) fails for such pairs. Without BF there is a further gap: an input that is not actual has no chosen value.</p>
+<p><em>Why strong worlds.</em> An atom of type <span
+class="math inline">\sigma t</span> settles only actual properties. The
+uniqueness step needs <span class="math inline">X</span> to settle the
+haecceity <span class="math inline">\lambda u\, .\,u=y</span> of an
+instance <span class="math inline">y</span> at another world, and that
+<span class="math inline">y</span> need not be actual. A strong world
+settles every property necessarily, so the condition is persistent and
+passes through weak inextensibility as (a).</p>
+<p><em>Comparison.</em> The earlier proof, <a
+href="bf-weak-rigid-comprehension-atomicity-and-relational-choice-imply-intensional-choice.html">BF,
+Weak Rigid Comprehension, Atomicity and Relational Choice imply
+Intensional Choice</a>, used BF to choose an individual <span
+class="math inline">x</span> with <span class="math inline">w\le
+Fx</span>, and again to pull instances below an atom back to actual
+ones. Choosing a property needs no BF, and the pair lemma replaces the
+pull-back.</p>
+<p><em>Modalized Relational Choice.</em> The argument does not extend.
+With inputs, values would be chosen for pairs of an atom <span
+class="math inline">w</span> and an actual input <span
+class="math inline">x</span>. Two distinct actual inputs <span
+class="math inline">x_1,x_2</span> may, without ND, be identified at a
+world where <span class="math inline">w</span> is true, and the chosen
+values for <span class="math inline">(w,x_1)</span> and <span
+class="math inline">(w,x_2)</span> are then two values of the merged
+input; (b) fails for such pairs. Without BF there is a further gap: an
+input that is not actual has no chosen value.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: <a href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could the truths of mathematics have been different?</a>.</strong> Bacon, Andrew (2025). Could the truths of mathematics have been different? Draft dated 9 October 2025, with online appendix; published in Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and Goodsell. Locators refer to the draft. The full Boolean-valued construction is in appendix §B.2, pp. 7–9 of the separately paginated appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — §6, p. 27. Formulation of Intensional Choice.</li>
+<li><strong>Background: <a
+href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could
+the truths of mathematics have been different?</a>.</strong> Bacon,
+Andrew (2025). Could the truths of mathematics have been different?
+Draft dated 9 October 2025, with online appendix; published in
+Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and
+Goodsell. Locators refer to the draft. The full Boolean-valued
+construction is in appendix §B.2, pp. 7–9 of the separately paginated
+appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and
+Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — §6,
+p. 27. Formulation of Intensional Choice.</li>
 </ul>
 </body></html>

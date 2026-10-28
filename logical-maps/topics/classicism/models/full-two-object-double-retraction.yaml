@@ -28,6 +28,12 @@ settings:
   individuals: singleton
   sigma: top
 meets:
+  fixed-arrow: >-
+    $e_1\circ h=h$ with $e_1\ne1_{W_1}$.
+  comparable-free-arrows: >-
+    Out of $W_0$ only $1$ is fixed by nothing but the identity, $h$ being fixed by $e_1$.
+  free-nonepic-composite: >-
+    $j_1\circ h=j_2\circ h=1_{W_0}$ with $j_1\ne j_2$, and $1_{W_0}$ is fixed only by itself.
   finitely-many-arrows-everywhere: >-
     Two arrows out of $W_0$ and five out of $W_1$.
   nonepic-arrow: $j_1\circ h=j_2\circ h$, with $j_1\ne j_2$.
@@ -44,7 +50,16 @@ meets:
     j_i=e_i\ne 1_{W_1}$.
   trivial-isomorphisms-everywhere: Out of $W_0$ only the identity is invertible; out of $W_1$, $j_i$ has
     no inverse ($h\circ j_i=e_i$) and the $e_i$ are non-identity idempotents.
-arguments: []
+arguments:
+- fails:
+  - necessary-self-atoms-are-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'At $W_1$, which $h$ reaches: $j_1$ and $j_2$ are each fixed only by $1_{W_0}$ and neither is
+    a left multiple of the other, $W_0$ having only its identity, so $\{j_1,j_2\}$ is a self-atom at $W_1$
+    that is not an atom. So Self-atoms are atoms (type t) fails at $W_1$, and its boxed form fails at
+    $W_0$.'
 notes: 'Proposed by Cian Dorr to separate Strong Actuality from Actuality: the model is full, so it has
   □Rigid Comprehension and hence □Actuality, while $h$''s two retractions keep every true proposition
   from being a strong atom. Unlike the two-object retract it does not meet coherent-retractions: with

@@ -322,83 +322,218 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Strong Leibniz and Rigid Comprehension imply □Strong Leibniz</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026.</p>
-<p><strong>Theorem.</strong> Let <span class="math inline">\sigma</span> be a relational type. In C, the Strong Leibniz Biconditionals at <span class="math inline">\sigma</span> and Rigid Comprehension at <span class="math inline">\sigma t</span> imply the Strong Leibniz Biconditionals at <span class="math inline">\sigma</span> necessarily. Both premises are unboxed.</p>
-<p>The lemmas below are also used for <a href="strong-leibniz-and-rigid-comprehension-imply-necessary-rigid-comprehension.html">□Rigid Comprehension</a>.</p>
-<p><strong>Overview.</strong> Take a rigid property <span class="math inline">A</span> whose instances are exactly the strong worlds and <span class="math inline">\bot</span>. Every entity <span class="math inline">Y</span> of type <span class="math inline">\sigma</span> is then, necessarily, the union of the instances of <span class="math inline">A</span> below it, and that subproperty of <span class="math inline">A</span> is rigid. A rigid property cannot gain non-bottom instances, so if <span class="math inline">Y</span> is possible some actual strong world lies below it, at every world.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Strong Leibniz and Rigid Comprehension imply □Strong Leibniz</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October
+2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr, 24 October 2026.</p>
+<p><strong>Theorem.</strong> Let <span class="math inline">\sigma</span>
+be a relational type. In C, the Strong Leibniz Biconditionals at <span
+class="math inline">\sigma</span> and Rigid Comprehension at <span
+class="math inline">\sigma t</span> imply the Strong Leibniz
+Biconditionals at <span class="math inline">\sigma</span> necessarily.
+Both premises are unboxed.</p>
+<p>The lemmas below are also used for <a
+href="strong-leibniz-and-rigid-comprehension-imply-necessary-rigid-comprehension.html">□Rigid
+Comprehension</a>.</p>
+<p><strong>Overview.</strong> Take a rigid property <span
+class="math inline">A</span> whose instances are exactly the strong
+worlds and <span class="math inline">\bot</span>. Every entity <span
+class="math inline">Y</span> of type <span
+class="math inline">\sigma</span> is then, necessarily, the union of the
+instances of <span class="math inline">A</span> below it, and that
+subproperty of <span class="math inline">A</span> is rigid. A rigid
+property cannot gain non-bottom instances, so if <span
+class="math inline">Y</span> is possible some actual strong world lies
+below it, at every world.</p>
 <h2 id="notation">Notation</h2>
-<p>Fix a relational type <span class="math inline">\sigma=\bar\sigma t</span> and write <span class="math inline">\bot</span> for <span class="math inline">\bot_\sigma</span>. Put</p>
+<p>Fix a relational type <span class="math inline">\sigma=\bar\sigma
+t</span> and write <span class="math inline">\bot</span> for <span
+class="math inline">\bot_\sigma</span>. Put</p>
 <p><span class="math display">
 \operatorname{Decides}(W):=\forall Y^\sigma\, .\,W\le Y\lor W\le\neg Y,
 </span></p>
-<p>so that <span class="math inline">\operatorname{SWorld}(W)</span> is <span class="math inline">W\ne\bot\land\Box\operatorname{Decides}(W)</span> (Background, strong and weak worlds). For a property <span class="math inline">R</span> of type <span class="math inline">\sigma t</span>, its <em>union</em> is</p>
+<p>so that <span class="math inline">\operatorname{SWorld}(W)</span> is
+<span
+class="math inline">W\ne\bot\land\Box\operatorname{Decides}(W)</span>
+(Background, strong and weak worlds). For a property <span
+class="math inline">R</span> of type <span class="math inline">\sigma
+t</span>, its <em>union</em> is</p>
 <p><span class="math display">
-\operatorname{Union}(R):=\lambda\bar x\, .\,\exists W^\sigma\, .\,RW\land W[\bar x].
+\operatorname{Union}(R):=\lambda\bar x\, .\,\exists W^\sigma\,
+.\,RW\land W[\bar x].
 </span></p>
-<p>Recall that a relation is rigid iff it is necessarily weakly rigid, and that <span class="math inline">X\le Y</span> means <span class="math inline">\Box\forall\bar x\, .\,X[\bar x]\to Y[\bar x]</span>.</p>
+<p>Recall that a relation is rigid iff it is necessarily weakly rigid,
+and that <span class="math inline">X\le Y</span> means <span
+class="math inline">\Box\forall\bar x\, .\,X[\bar x]\to Y[\bar
+x]</span>.</p>
 <h2 id="lemma-1-a-stable-cover">Lemma 1: a stable cover</h2>
-<p><em>Assume the Strong Leibniz Biconditionals at <span class="math inline">\sigma</span> and Rigid Comprehension at <span class="math inline">\sigma t</span>.</em> By Rigid Comprehension there is a rigid <span class="math inline">A^{\sigma t}</span> coextensive with <span class="math inline">\lambda W\, .\,\operatorname{SWorld}(W)\lor W=\bot</span>. It satisfies</p>
+<p><em>Assume the Strong Leibniz Biconditionals at <span
+class="math inline">\sigma</span> and Rigid Comprehension at <span
+class="math inline">\sigma t</span>.</em> By Rigid Comprehension there
+is a rigid <span class="math inline">A^{\sigma t}</span> coextensive
+with <span class="math inline">\lambda W\,
+.\,\operatorname{SWorld}(W)\lor W=\bot</span>. It satisfies</p>
 <p><span class="math display">
 \text{(a) }\Box A\bot,\qquad\text{(b) }A\le\operatorname{Decides},\qquad
 \text{(c) }\operatorname{Union}(A)=\top_\sigma .
 </span></p>
-<p><em>Proof.</em> (a) <span class="math inline">A\bot</span> holds, and <span class="math inline">A</span> is persistent.</p>
+<p><em>Proof.</em> (a) <span class="math inline">A\bot</span> holds, and
+<span class="math inline">A</span> is persistent.</p>
 <ol start="2" type="a">
-<li>If <span class="math inline">AW</span>, then either <span class="math inline">\operatorname{SWorld}(W)</span>, which gives <span class="math inline">\Box\operatorname{Decides}(W)</span>, or <span class="math inline">W=\bot</span>, and <span class="math inline">\operatorname{Decides}(\bot)</span> is a theorem. So</li>
+<li>If <span class="math inline">AW</span>, then either <span
+class="math inline">\operatorname{SWorld}(W)</span>, which gives <span
+class="math inline">\Box\operatorname{Decides}(W)</span>, or <span
+class="math inline">W=\bot</span>, and <span
+class="math inline">\operatorname{Decides}(\bot)</span> is a theorem.
+So</li>
 </ol>
 <p><span class="math display">
 \forall W\, .\,AW\to\Box\operatorname{Decides}(W),
 </span></p>
-<p>and weak inextensibility of <span class="math inline">A</span> gives <span class="math inline">A\le\operatorname{Decides}</span>.</p>
+<p>and weak inextensibility of <span class="math inline">A</span> gives
+<span class="math inline">A\le\operatorname{Decides}</span>.</p>
 <ol start="3" type="a">
-<li>If <span class="math inline">\operatorname{SWorld}(W)</span> then <span class="math inline">AW</span>, so <span class="math inline">\Box AW</span>, and therefore <span class="math inline">W\le\operatorname{Union}(A)</span>. If <span class="math inline">\operatorname{Union}(A)\ne\top</span>, the Strong Leibniz Biconditionals give <span class="math inline">W</span> with <span class="math inline">\operatorname{SWorld}(W)</span> and <span class="math inline">W\le\neg\operatorname{Union}(A)</span>. Then <span class="math inline">W\le\operatorname{Union}(A)\land
-\neg\operatorname{Union}(A)=\bot</span>, contradicting <span class="math inline">W\ne\bot</span>. <span class="math inline">\square</span></li>
+<li>If <span class="math inline">\operatorname{SWorld}(W)</span> then
+<span class="math inline">AW</span>, so <span class="math inline">\Box
+AW</span>, and therefore <span
+class="math inline">W\le\operatorname{Union}(A)</span>. If <span
+class="math inline">\operatorname{Union}(A)\ne\top</span>, the Strong
+Leibniz Biconditionals give <span class="math inline">W</span> with
+<span class="math inline">\operatorname{SWorld}(W)</span> and <span
+class="math inline">W\le\neg\operatorname{Union}(A)</span>. Then <span
+class="math inline">W\le\operatorname{Union}(A)\land
+\neg\operatorname{Union}(A)=\bot</span>, contradicting <span
+class="math inline">W\ne\bot</span>. <span
+class="math inline">\square</span></li>
 </ol>
-<p>Each of <span class="math inline">\operatorname{Rigid}(A)</span>, (a), (b) and (c) is necessary if true: the first three begin with <span class="math inline">\Box</span> and (c) is an identity. So in Lemmas 2 and 3, which use only these facts, it is enough to argue at the evaluation point; the arguments are derivations in C from these facts and can be necessitated.</p>
+<p>Each of <span class="math inline">\operatorname{Rigid}(A)</span>,
+(a), (b) and (c) is necessary if true: the first three begin with <span
+class="math inline">\Box</span> and (c) is an identity. So in Lemmas 2
+and 3, which use only these facts, it is enough to argue at the
+evaluation point; the arguments are derivations in C from these facts
+and can be necessitated.</p>
 <h2 id="lemma-2-cuts-are-rigid">Lemma 2: cuts are rigid</h2>
-<p><em>Let <span class="math inline">A^{\sigma t}</span> be rigid and satisfy (a) and (b).</em> For <span class="math inline">Y^\sigma</span>, the <em>cut</em> of <span class="math inline">A</span> at <span class="math inline">Y</span> is</p>
+<p><em>Let <span class="math inline">A^{\sigma t}</span> be rigid and
+satisfy (a) and (b).</em> For <span class="math inline">Y^\sigma</span>,
+the <em>cut</em> of <span class="math inline">A</span> at <span
+class="math inline">Y</span> is</p>
 <p><span class="math display">
 \operatorname{Cut}_Y:=\lambda W\, .\,AW\land W\le Y .
 </span></p>
-<p>Then necessarily, for every <span class="math inline">Y</span>, <span class="math inline">\operatorname{Cut}_Y</span> is rigid.</p>
-<p><em>Proof.</em> We show that <span class="math inline">\operatorname{Cut}_Y</span> is weakly rigid. By the remark above, <span class="math inline">\Box\forall Y\, .\,\operatorname{WeaklyRigid}(\operatorname{Cut}_Y)</span>; by 4 and the Converse Barcan Formula (theorems of C) this gives <span class="math inline">\Box\forall Y\, .\,\Box\operatorname{WeaklyRigid}(\operatorname{Cut}_Y)</span>, which is the claim.</p>
-<p><em>Weak persistence.</em> <span class="math inline">AW\land W\le Y</span> gives <span class="math inline">\Box AW\land\Box(W\le Y)</span>.</p>
+<p>Then necessarily, for every <span class="math inline">Y</span>, <span
+class="math inline">\operatorname{Cut}_Y</span> is rigid.</p>
+<p><em>Proof.</em> We show that <span
+class="math inline">\operatorname{Cut}_Y</span> is weakly rigid. By the
+remark above, <span class="math inline">\Box\forall Y\,
+.\,\operatorname{WeaklyRigid}(\operatorname{Cut}_Y)</span>; by 4 and the
+Converse Barcan Formula (theorems of C) this gives <span
+class="math inline">\Box\forall Y\,
+.\,\Box\operatorname{WeaklyRigid}(\operatorname{Cut}_Y)</span>, which is
+the claim.</p>
+<p><em>Weak persistence.</em> <span class="math inline">AW\land W\le
+Y</span> gives <span class="math inline">\Box AW\land\Box(W\le
+Y)</span>.</p>
 <p><em>Weak inextensibility.</em> Suppose</p>
 <p><span class="math display">
 \forall W\, .\,\operatorname{Cut}_YW\to\Box ZW .
 </span></p>
-<p>Since <span class="math inline">A\bot</span> and <span class="math inline">\bot\le Y</span>, <span class="math inline">\operatorname{Cut}_Y\bot</span>, so <span class="math inline">\Box Z\bot</span>. We show</p>
+<p>Since <span class="math inline">A\bot</span> and <span
+class="math inline">\bot\le Y</span>, <span
+class="math inline">\operatorname{Cut}_Y\bot</span>, so <span
+class="math inline">\Box Z\bot</span>. We show</p>
 <p><span class="math display">
 \forall W\, .\,AW\to\Box(\operatorname{Cut}_YW\to ZW).
 </span></p>
-<p>Let <span class="math inline">AW</span>. By (b), <span class="math inline">W\le Y</span> or <span class="math inline">W\le\neg Y</span>.</p>
+<p>Let <span class="math inline">AW</span>. By (b), <span
+class="math inline">W\le Y</span> or <span class="math inline">W\le\neg
+Y</span>.</p>
 <ul>
-<li>If <span class="math inline">W\le Y</span>, then <span class="math inline">\operatorname{Cut}_YW</span>, so <span class="math inline">\Box ZW</span>.</li>
-<li>If <span class="math inline">W\le\neg Y</span>, this is necessary, and <span class="math inline">\Box\bigl(\operatorname{Cut}_YW\to W\le Y\land W\le\neg Y\bigr)</span>, so <span class="math inline">\Box(\operatorname{Cut}_YW\to W=\bot)</span>; with <span class="math inline">\Box Z\bot</span> this gives <span class="math inline">\Box(\operatorname{Cut}_YW\to ZW)</span>.</li>
+<li>If <span class="math inline">W\le Y</span>, then <span
+class="math inline">\operatorname{Cut}_YW</span>, so <span
+class="math inline">\Box ZW</span>.</li>
+<li>If <span class="math inline">W\le\neg Y</span>, this is necessary,
+and <span class="math inline">\Box\bigl(\operatorname{Cut}_YW\to W\le
+Y\land W\le\neg Y\bigr)</span>, so <span
+class="math inline">\Box(\operatorname{Cut}_YW\to W=\bot)</span>; with
+<span class="math inline">\Box Z\bot</span> this gives <span
+class="math inline">\Box(\operatorname{Cut}_YW\to ZW)</span>.</li>
 </ul>
-<p>Weak inextensibility of <span class="math inline">A</span>, applied to <span class="math inline">\lambda W\, .\,\operatorname{Cut}_YW\to ZW</span>, gives</p>
+<p>Weak inextensibility of <span class="math inline">A</span>, applied
+to <span class="math inline">\lambda W\, .\,\operatorname{Cut}_YW\to
+ZW</span>, gives</p>
 <p><span class="math display">
 A\le\lambda W\, .\,(\operatorname{Cut}_YW\to ZW),
 </span></p>
-<p>and since <span class="math inline">\operatorname{Cut}_Y\le A</span>, <span class="math inline">\operatorname{Cut}_Y\le Z</span>. <span class="math inline">\square</span></p>
-<p>Including <span class="math inline">\bot</span> in <span class="math inline">A</span> is essential: otherwise an instance of <span class="math inline">A</span> below <span class="math inline">\neg Y</span> could become an instance of <span class="math inline">\operatorname{Cut}_Y</span> by becoming <span class="math inline">\bot</span>.</p>
-<h2 id="lemma-3-every-entity-is-the-union-of-its-cut">Lemma 3: every entity is the union of its cut</h2>
-<p><em>Let <span class="math inline">A^{\sigma t}</span> be rigid and satisfy (a), (b) and (c).</em> Then</p>
+<p>and since <span class="math inline">\operatorname{Cut}_Y\le A</span>,
+<span class="math inline">\operatorname{Cut}_Y\le Z</span>. <span
+class="math inline">\square</span></p>
+<p>Including <span class="math inline">\bot</span> in <span
+class="math inline">A</span> is essential: otherwise an instance of
+<span class="math inline">A</span> below <span class="math inline">\neg
+Y</span> could become an instance of <span
+class="math inline">\operatorname{Cut}_Y</span> by becoming <span
+class="math inline">\bot</span>.</p>
+<h2 id="lemma-3-every-entity-is-the-union-of-its-cut">Lemma 3: every
+entity is the union of its cut</h2>
+<p><em>Let <span class="math inline">A^{\sigma t}</span> be rigid and
+satisfy (a), (b) and (c).</em> Then</p>
 <p><span class="math display">
 \Box\forall Y^\sigma\, .\,Y=\operatorname{Union}(\operatorname{Cut}_Y).
 </span></p>
-<p><em>Proof.</em> <span class="math inline">\operatorname{Union}(\operatorname{Cut}_Y)\le Y</span>, since <span class="math inline">\exists W\, .\,AW\land W\le Y\land W[\bar x]</span> implies <span class="math inline">Y[\bar x]</span>, necessarily.</p>
-<p>For <span class="math inline">Y\le\operatorname{Union}(\operatorname{Cut}_Y)</span>, work at an arbitrary world and suppose <span class="math inline">Y[\bar x]</span>. By (c), <span class="math inline">\operatorname{Union}(A)[\bar x]</span>, so there is <span class="math inline">W</span> with <span class="math inline">AW\land W[\bar x]</span>. By (b), <span class="math inline">W\le Y</span> or <span class="math inline">W\le\neg Y</span>; the second contradicts <span class="math inline">Y[\bar x]\land W[\bar x]</span>. So <span class="math inline">\operatorname{Cut}_YW\land W[\bar x]</span>, that is, <span class="math inline">\operatorname{Union}(\operatorname{Cut}_Y)[\bar x]</span>. <span class="math inline">\square</span></p>
+<p><em>Proof.</em> <span
+class="math inline">\operatorname{Union}(\operatorname{Cut}_Y)\le
+Y</span>, since <span class="math inline">\exists W\, .\,AW\land W\le
+Y\land W[\bar x]</span> implies <span class="math inline">Y[\bar
+x]</span>, necessarily.</p>
+<p>For <span
+class="math inline">Y\le\operatorname{Union}(\operatorname{Cut}_Y)</span>,
+work at an arbitrary world and suppose <span class="math inline">Y[\bar
+x]</span>. By (c), <span
+class="math inline">\operatorname{Union}(A)[\bar x]</span>, so there is
+<span class="math inline">W</span> with <span
+class="math inline">AW\land W[\bar x]</span>. By (b), <span
+class="math inline">W\le Y</span> or <span class="math inline">W\le\neg
+Y</span>; the second contradicts <span class="math inline">Y[\bar
+x]\land W[\bar x]</span>. So <span
+class="math inline">\operatorname{Cut}_YW\land W[\bar x]</span>, that
+is, <span
+class="math inline">\operatorname{Union}(\operatorname{Cut}_Y)[\bar
+x]</span>. <span class="math inline">\square</span></p>
 <h2 id="proof-of-the-theorem">Proof of the theorem</h2>
-<p>Let <span class="math inline">A</span> be as in Lemma 1. By the remark after Lemma 1 it suffices to derive the Strong Leibniz Biconditionals at <span class="math inline">\sigma</span> from <span class="math inline">\operatorname{Rigid}(A)</span>, (a), (b) and (c). Let <span class="math inline">Y\ne\bot</span>, and put <span class="math inline">R:=\operatorname{Cut}_Y</span>, which is rigid (Lemma 2) with <span class="math inline">Y=\operatorname{Union}(R)</span> (Lemma 3).</p>
-<p>Suppose every instance of <span class="math inline">R</span> were <span class="math inline">\bot</span>. Then</p>
+<p>Let <span class="math inline">A</span> be as in Lemma 1. By the
+remark after Lemma 1 it suffices to derive the Strong Leibniz
+Biconditionals at <span class="math inline">\sigma</span> from <span
+class="math inline">\operatorname{Rigid}(A)</span>, (a), (b) and (c).
+Let <span class="math inline">Y\ne\bot</span>, and put <span
+class="math inline">R:=\operatorname{Cut}_Y</span>, which is rigid
+(Lemma 2) with <span
+class="math inline">Y=\operatorname{Union}(R)</span> (Lemma 3).</p>
+<p>Suppose every instance of <span class="math inline">R</span> were
+<span class="math inline">\bot</span>. Then</p>
 <p><span class="math display">
 \forall W\, .\,RW\to\Box(W=\bot),
 </span></p>
-<p>so by weak inextensibility of <span class="math inline">R</span>, <span class="math inline">R\le\lambda W\, .\,W=\bot</span>, hence <span class="math inline">\operatorname{Union}(R)\le\bot</span> and <span class="math inline">Y=\bot</span>, a contradiction. So there is <span class="math inline">W</span> with <span class="math inline">RW</span> and <span class="math inline">W\ne\bot</span>. Then <span class="math inline">AW</span>, so <span class="math inline">\Box AW</span>, and by (b) <span class="math inline">\Box\operatorname{Decides}(W)</span>. So <span class="math inline">\operatorname{SWorld}(W)</span> and <span class="math inline">W\le Y</span>. <span class="math inline">\square</span></p>
+<p>so by weak inextensibility of <span class="math inline">R</span>,
+<span class="math inline">R\le\lambda W\, .\,W=\bot</span>, hence <span
+class="math inline">\operatorname{Union}(R)\le\bot</span> and <span
+class="math inline">Y=\bot</span>, a contradiction. So there is <span
+class="math inline">W</span> with <span class="math inline">RW</span>
+and <span class="math inline">W\ne\bot</span>. Then <span
+class="math inline">AW</span>, so <span class="math inline">\Box
+AW</span>, and by (b) <span
+class="math inline">\Box\operatorname{Decides}(W)</span>. So <span
+class="math inline">\operatorname{SWorld}(W)</span> and <span
+class="math inline">W\le Y</span>. <span
+class="math inline">\square</span></p>
 <h2 id="remarks">Remarks</h2>
 <ol type="1">
-<li>The premises used are the Strong Leibniz Biconditionals at <span class="math inline">\sigma</span> and Rigid Comprehension at <span class="math inline">\sigma t</span>.</li>
-<li>With <a href="strong-leibniz-and-rigid-comprehension-imply-necessary-rigid-comprehension.html">□Rigid Comprehension</a>, the recorded result that □Strong Leibniz and □Rigid Comprehension imply □BF at relational types gives the conclusion of Bacon’s Theorem 8.2, whose book proof has a gap, from weaker premises.</li>
+<li>The premises used are the Strong Leibniz Biconditionals at <span
+class="math inline">\sigma</span> and Rigid Comprehension at <span
+class="math inline">\sigma t</span>.</li>
+<li>With <a
+href="strong-leibniz-and-rigid-comprehension-imply-necessary-rigid-comprehension.html">□Rigid
+Comprehension</a>, the recorded result that □Strong Leibniz and □Rigid
+Comprehension imply □BF at relational types gives the conclusion of
+Bacon’s Theorem 8.2, whose book proof has a gap, from weaker
+premises.</li>
 </ol>
 </body></html>

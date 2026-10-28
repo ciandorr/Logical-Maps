@@ -323,144 +323,1223 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: pair-preserving injections and pair collapses of N</h1></header><p class="cert">
-Model — Source: Misc.; produced by Cian Dorr (the construction, and the expectation that Vicinity holds and Actuality fails, 7 October 2026); Claude Opus 5.5 (Anthropic) (closure under composition, the other verdicts, and the failure of Rigid Power, 7 October 2026); recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
+Model — Source: Misc.; produced by Cian Dorr (the construction, and the
+expectation that Vicinity holds and Actuality fails, 7 October 2026);
+Claude Opus 5.5 (Anthropic) (closure under composition, the other
+verdicts, and the failure of Rigid Power, 7 October 2026); recorded by
+Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>Vicinity.</strong> There is a true proposition that entails the possibility of each true proposition.</li>
-<li><strong>BF.</strong> The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
-<li><strong>Atomlessness.</strong> Atomlessness in the displayed closed propositional formulation.</li>
-<li><strong>Axiom of Infinity (type e).</strong> There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
-<li><strong>Axiom of Infinity (type t).</strong> There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
-<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at <span class="math inline">\sigma</span> form a rigid property with necessarily distinct instances. One sentence for each type <span class="math inline">\sigma</span>.</li>
-<li><strong>Infinity Schema (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>Infinity Schema (type t).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>□Intensional Choice.</strong> Necessarily, if a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
-<li><strong>□Relational Choice.</strong> Necessarily, every serial binary relation has a functional subrelation.</li>
-<li><strong>□Transversal Choice.</strong> Necessarily, every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
-<li><strong>No Pure Contingency.</strong> Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.</li>
-<li><strong>Necessity of Second-Order Analysis.</strong> Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type <span class="math inline">\sigma</span> and each second-order analytical sentence.</li>
-<li><strong>Tame Rigidity.</strong> Every weakly rigid relation, including a proposition, is rigid.</li>
-<li><strong>Transversal Choice.</strong> Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
-<li><strong>No Contingency (signature Σ).</strong> Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).</li>
-<li><strong>B for sentences of Σ.</strong> The B instance for every closed sentence of the language of the fixed signature Sigma.</li>
-<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
-<li><strong>¬ Rigid Rigidity.</strong> Being rigid is a rigid property of relations, including propositions.</li>
-<li><strong>¬ Boolean Completeness.</strong> Every property of entities of a relational type has a greatest lower bound in that type.</li>
-<li><strong>¬ Countable Boolean Completeness.</strong> Every countable property of entities of a relational type has a least upper bound in that type, where a property is countable relative to a type <span class="math inline">\sigma</span> when it injects into the finite cardinalities of properties of type <span class="math inline">\sigma</span>; one instance for each <span class="math inline">\sigma</span>.</li>
-<li><strong>¬ Boolean Completeness (type t).</strong> Every property of propositions has a greatest lower bound.</li>
-<li><strong>¬ Analytic Necessitism.</strong> If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type <span class="math inline">\sigma</span>.</li>
-<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.</li>
-<li><strong>¬ Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
-<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
-<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema for the fixed nonlogical signature Σ: every closed identity of its language not provable in C(Σ) is false.</li>
+<li><strong>Vicinity.</strong> There is a true proposition that entails
+the possibility of each true proposition.</li>
+<li><strong>BF.</strong> The Barcan Formula at every type. The predicate
+formulation closes the formula schema using lambda abstraction.</li>
+<li><strong>Atomlessness.</strong> Atomlessness in the displayed closed
+propositional formulation.</li>
+<li><strong>Axiom of Infinity (type e).</strong> There are not finitely
+many individuals. No finite cardinality holds of the universal property,
+so the domain of the type cannot be exhausted by finitely many steps
+from the empty property.</li>
+<li><strong>Axiom of Infinity (type t).</strong> There are not finitely
+many propositions. No finite cardinality holds of the universal
+property, so the domain of the type cannot be exhausted by finitely many
+steps from the empty property.</li>
+<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero
+is not a successor and successor is injective on numbers, the numbers at
+<span class="math inline">\sigma</span> form a rigid property with
+necessarily distinct instances. One sentence for each type <span
+class="math inline">\sigma</span>.</li>
+<li><strong>Infinity Schema (type e).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>Infinity Schema (type t).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>□Intensional Choice.</strong> Necessarily, if a property is
+necessarily instantiated, then some property entailing it is necessarily
+uniquely instantiated.</li>
+<li><strong>□Relational Choice.</strong> Necessarily, every serial
+binary relation has a functional subrelation.</li>
+<li><strong>□Transversal Choice.</strong> Necessarily, every equivalence
+relation, at any type including e, has a transversal, that is, a
+property with exactly one instance in each of its cells.</li>
+<li><strong>□Self-atoms are atoms.</strong> Necessarily, at each
+relational type, every self-atom is an atom.</li>
+<li><strong>□Self-atoms are strong atoms.</strong> Necessarily, at each
+relational type, every self-atom is a strong atom: it necessarily
+entails every entity of the type or its negation.</li>
+<li><strong>No Pure Contingency.</strong> Each closed sentence of the
+pure language, if true, is necessary. This is a sentence schema, not a
+quantifier over propositions.</li>
+<li><strong>Necessity of Second-Order Analysis.</strong> Every
+second-order analytical sentence is either true in every real number
+structure in every possible world or false in every real number
+structure in every possible world. One sentence for each type <span
+class="math inline">\sigma</span> and each second-order analytical
+sentence.</li>
+<li><strong>Tame Rigidity.</strong> Every weakly rigid relation,
+including a proposition, is rigid.</li>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at
+any type including e, has a transversal, that is, a property with
+exactly one instance in each of its cells.</li>
+<li><strong>No Contingency (signature Σ).</strong> Each closed sentence
+of the language of the fixed signature Sigma, if true, is necessary. A
+sentence schema, standing to No Pure Contingency as Possibility
+Maximalism (signature Σ) stands to Possibility Maximalism (pure).</li>
+<li><strong>B for sentences of Σ.</strong> The B instance for every
+closed sentence of the language of the fixed signature Sigma.</li>
+<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
+<li><strong>¬ Rigid Rigidity.</strong> Being rigid is a rigid property
+of relations, including propositions.</li>
+<li><strong>¬ Boolean Completeness.</strong> Every property of entities
+of a relational type has a greatest lower bound in that type.</li>
+<li><strong>¬ Countable Boolean Completeness.</strong> Every countable
+property of entities of a relational type has a least upper bound in
+that type, where a property is countable relative to a type <span
+class="math inline">\sigma</span> when it injects into the finite
+cardinalities of properties of type <span
+class="math inline">\sigma</span>; one instance for each <span
+class="math inline">\sigma</span>.</li>
+<li><strong>¬ Boolean Completeness (type t).</strong> Every property of
+propositions has a greatest lower bound.</li>
+<li><strong>¬ Analytic Necessitism.</strong> If there could be a real
+number structure, there is a rigid one that is necessarily a real number
+structure: a rigid property with necessarily distinct instances, with
+rigid order, addition, multiplication and natural numbers, which
+necessarily form a complete ordered field. One sentence for each type
+<span class="math inline">\sigma</span>.</li>
+<li><strong>¬ Self-Atomicity (type t).</strong> Every possible
+proposition is entailed by a self-atom: a possible proposition that
+necessarily, if true, is an atom, that is, one that entails that it is
+the actual world.</li>
+<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with
+free variables among a finite tuple x, and distinct matching nonlogical
+constants c, a witness to P entails that P at those constants is
+possible.</li>
+<li><strong>¬ Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
+<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma
+is a pure operation applied to other constants: for a closed pure term A
+and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied
+to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema
+for the fixed nonlogical signature Σ: every closed identity of its
+language not provable in C(Σ) is false.</li>
 </ul>
 <h2 id="definition">Definition</h2>
-<p>The arrows are the functions <span class="math inline">f</span> on <span class="math inline">\mathbb N</span> that either identify <span class="math inline">0</span> with <span class="math inline">1</span> (<span class="math inline">f0=f1</span>, the collapses) or are injective and map <span class="math inline">\{0,1\}</span> onto itself (the pair-preserving injections). These compose: two pair-preserving injections compose to one, and a composite with a collapse applied after a pair-preserving injection, or with a collapse applied first, identifies <span class="math inline">0</span> with <span class="math inline">1</span>. In every part, <span class="math inline">W_0^\ddagger</span> is the set of finite subsets of <span class="math inline">\mathbb N</span> and the model is ideally full: a proposition is a set of arrows whose membership depends only on the arrows’ values on some finite set of numbers (it is pinned down by that set), and an entity of a higher type is an applicative behaviour profile pinned down by a finite set in the same sense. The individuals are the natural numbers, acted on by the arrows themselves. Propositions and properties are thus about finitely many numbers and indifferent to how the arrows treat the rest. Evaluation point: the sole object, at the identity arrow.</p>
-<p>Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the top element of its type.</p>
-<p><em>A member of the group Finite-support action models on one object, which supplies this definition with the record’s settings, and the arguments marked as shared.</em></p>
+<p>The arrows are the functions <span class="math inline">f</span> on
+<span class="math inline">\mathbb N</span> that either identify <span
+class="math inline">0</span> with <span class="math inline">1</span>
+(<span class="math inline">f0=f1</span>, the collapses) or are injective
+and map <span class="math inline">\{0,1\}</span> onto itself (the
+pair-preserving injections). These compose: two pair-preserving
+injections compose to one, and a composite with a collapse applied after
+a pair-preserving injection, or with a collapse applied first,
+identifies <span class="math inline">0</span> with <span
+class="math inline">1</span>. In every part, <span
+class="math inline">W_0^\ddagger</span> is the set of finite subsets of
+<span class="math inline">\mathbb N</span> and the model is ideally
+full: a proposition is a set of arrows whose membership depends only on
+the arrows’ values on some finite set of numbers (it is pinned down by
+that set), and an entity of a higher type is an applicative behaviour
+profile pinned down by a finite set in the same sense. The individuals
+are the natural numbers, acted on by the arrows themselves. Propositions
+and properties are thus about finitely many numbers and indifferent to
+how the arrows treat the rest. Evaluation point: the sole object, at the
+identity arrow.</p>
+<p>Interpretation of Σ, fixed for this record: every constant of Σ is
+relational, and each denotes the top element of its type.</p>
+<p><em>A member of the group Finite-support action models on one object,
+which supplies this definition with the record’s settings, and the
+arguments marked as shared.</em></p>
 <h2 id="arguments">Arguments</h2>
 <h3 id="holds-vicinity.">Holds Vicinity.</h3>
-<p>The witness is the proposition <span class="math inline">p:=\{h : h0\ne h1\}</span>, the pair-preserving injections, pinned down by <span class="math inline">\{0,1\}</span> and true. Let <span class="math inline">q</span> be true, pinned down by a finite <span class="math inline">N</span>, and let <span class="math inline">k</span> be a pair-preserving injection. The inverse of <span class="math inline">k</span> on <span class="math inline">k[N\cup\{0,1\}]</span> maps <span class="math inline">\{0,1\}</span> onto itself and every other point outside <span class="math inline">\{0,1\}</span>, so it extends to a pair-preserving injection <span class="math inline">j</span>. Then <span class="math inline">j\circ k</span> agrees with the identity on <span class="math inline">N</span>, so <span class="math inline">j\circ k\in q</span>. Hence every <span class="math inline">p</span>-world can reach a <span class="math inline">q</span>-world: <span class="math inline">p\le\Diamond q</span>.</p>
-<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, confirming Cian Dorr’s expectation, 2026-10-07.</em></p>
+<p>The witness is the proposition <span class="math inline">p:=\{h :
+h0\ne h1\}</span>, the pair-preserving injections, pinned down by <span
+class="math inline">\{0,1\}</span> and true. Let <span
+class="math inline">q</span> be true, pinned down by a finite <span
+class="math inline">N</span>, and let <span class="math inline">k</span>
+be a pair-preserving injection. The inverse of <span
+class="math inline">k</span> on <span
+class="math inline">k[N\cup\{0,1\}]</span> maps <span
+class="math inline">\{0,1\}</span> onto itself and every other point
+outside <span class="math inline">\{0,1\}</span>, so it extends to a
+pair-preserving injection <span class="math inline">j</span>. Then <span
+class="math inline">j\circ k</span> agrees with the identity on <span
+class="math inline">N</span>, so <span class="math inline">j\circ k\in
+q</span>. Hence every <span class="math inline">p</span>-world can reach
+a <span class="math inline">q</span>-world: <span
+class="math inline">p\le\Diamond q</span>.</p>
+<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, confirming
+Cian Dorr’s expectation, 2026-10-07.</em></p>
 <h3 id="holds-bf.">Holds BF.</h3>
-<p>At every type. Every arrow agrees on any finite set with a surjective arrow: a pair-preserving injection with a permutation preserving <span class="math inline">\{0,1\}</span>, a collapse with a surjective collapse. So, as for the monoid of all functions (Appendix D, Part 3), if <span class="math inline">\forall y\,\Box Xy</span> holds while <span class="math inline">X</span>, pinned down by <span class="math inline">N</span>, omits <span class="math inline">\langle a,k\rangle</span>, take <span class="math inline">j</span> surjective agreeing with <span class="math inline">k</span> on <span class="math inline">N</span>, so that <span class="math inline">a=j\cdot b</span> for some <span class="math inline">b</span> by pulling back along <span class="math inline">j</span>; then <span class="math inline">\langle a,j\rangle\in X</span>, and so, by pinning, <span class="math inline">\langle a,k\rangle\in X</span>.</p>
-<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-07.</em></p>
+<p>At every type. Every arrow agrees on any finite set with a surjective
+arrow: a pair-preserving injection with a permutation preserving <span
+class="math inline">\{0,1\}</span>, a collapse with a surjective
+collapse. So, as for the monoid of all functions (Appendix D, Part 3),
+if <span class="math inline">\forall y\,\Box Xy</span> holds while <span
+class="math inline">X</span>, pinned down by <span
+class="math inline">N</span>, omits <span class="math inline">\langle
+a,k\rangle</span>, take <span class="math inline">j</span> surjective
+agreeing with <span class="math inline">k</span> on <span
+class="math inline">N</span>, so that <span class="math inline">a=j\cdot
+b</span> for some <span class="math inline">b</span> by pulling back
+along <span class="math inline">j</span>; then <span
+class="math inline">\langle a,j\rangle\in X</span>, and so, by pinning,
+<span class="math inline">\langle a,k\rangle\in X</span>.</p>
+<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr,
+2026-10-07.</em></p>
 <h3 id="holds-atomlessness.">Holds Atomlessness.</h3>
-<p>Every arrow can be changed at a point outside any finite set without leaving its class (a collapse anywhere outside <span class="math inline">\{0,1\}</span>; a pair-preserving injection by sending a fresh point to a value outside its range), so no singleton is finitely pinned, and every nonempty proposition pinned down by <span class="math inline">S</span> is split by the value of its arrows at a point outside <span class="math inline">S</span>.</p>
-<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-07.</em></p>
+<p>Every arrow can be changed at a point outside any finite set without
+leaving its class (a collapse anywhere outside <span
+class="math inline">\{0,1\}</span>; a pair-preserving injection by
+sending a fresh point to a value outside its range), so no singleton is
+finitely pinned, and every nonempty proposition pinned down by <span
+class="math inline">S</span> is split by the value of its arrows at a
+point outside <span class="math inline">S</span>.</p>
+<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr,
+2026-10-07.</em></p>
 <h3 id="fails-rigid-power.">Fails Rigid Power.</h3>
-<p>At type <span class="math inline">e\to t</span>, with <span class="math inline">F:=\top</span>. Write <span class="math inline">Z_k</span> for the extension of a property <span class="math inline">Z</span> at the arrow <span class="math inline">k</span>, so that <span class="math inline">Z</span> holds of <span class="math inline">b</span> at <span class="math inline">k</span> iff <span class="math inline">b\in Z_k</span>, and <span class="math inline">(h\cdot Z)_k=Z_{k\circ h}</span>. Call an arrow a collapse if it identifies <span class="math inline">0</span> with <span class="math inline">1</span>.</p>
+<p>At type <span class="math inline">e\to t</span>, with <span
+class="math inline">F:=\top</span>. Write <span
+class="math inline">Z_k</span> for the extension of a property <span
+class="math inline">Z</span> at the arrow <span
+class="math inline">k</span>, so that <span class="math inline">Z</span>
+holds of <span class="math inline">b</span> at <span
+class="math inline">k</span> iff <span class="math inline">b\in
+Z_k</span>, and <span class="math inline">(h\cdot Z)_k=Z_{k\circ
+h}</span>. Call an arrow a collapse if it identifies <span
+class="math inline">0</span> with <span
+class="math inline">1</span>.</p>
 <ol type="1">
-<li><p><span class="math inline">\top</span> is rigid: it is persistent, and its inextensibility is <span class="math inline">\Box</span>BF at type <span class="math inline">e</span>, which holds (BF holds, and with No Pure Contingency so does <span class="math inline">\Box</span>BF).</p></li>
-<li><p>A rigid property that is not a disjunction of haecceities. Let <span class="math inline">Y_k:=\mathbb N</span> if <span class="math inline">k</span> is a collapse and <span class="math inline">Y_k:=\mathbb N\setminus\{k2\}</span> otherwise; <span class="math inline">Y</span> is pinned down by <span class="math inline">\{0,1,2\}</span>. It is persistent: if <span class="math inline">b\ne k2</span> for a pair-preserving injection <span class="math inline">k</span>, then <span class="math inline">jb\ne jk2</span> for a pair-preserving injection <span class="math inline">j</span>, and every other composite is a collapse. It is inextensible at every world <span class="math inline">w</span>: let <span class="math inline">X</span> be pinned down by <span class="math inline">N\supseteq\{0,1\}</span> and contain <span class="math inline">\langle jx,j\rangle</span> for every <span class="math inline">x\in Y_w</span> and arrow <span class="math inline">j</span>; given <span class="math inline">y\in Y_{j\circ w}</span>, there are an arrow <span class="math inline">j&#39;</span> agreeing with <span class="math inline">j</span> on <span class="math inline">N</span> and an <span class="math inline">x\in Y_w</span> with <span class="math inline">j&#39;x=y</span>, so <span class="math inline">\langle y,j\rangle\in X</span> by pinning. For if <span class="math inline">y=jn</span> with <span class="math inline">n\in N</span> and <span class="math inline">n\in Y_w</span>, take <span class="math inline">j&#39;=j</span>; if <span class="math inline">n\notin Y_w</span>, then <span class="math inline">w</span> is a pair-preserving injection, <span class="math inline">n=w2</span>, and <span class="math inline">y=jw2\in Y_{j\circ w}</span> makes <span class="math inline">j\circ w</span> a collapse, so <span class="math inline">j</span> identifies <span class="math inline">w0</span> with <span class="math inline">w1</span>, that is <span class="math inline">0</span> with <span class="math inline">1</span>, and <span class="math inline">j</span> changed at a fresh <span class="math inline">x</span> to <span class="math inline">j&#39;x=y</span> is still a collapse; and if <span class="math inline">y\notin jN</span>, change <span class="math inline">j</span> at a fresh <span class="math inline">x\notin N\cup\{w2\}</span> to <span class="math inline">j&#39;x=y</span>, after <span class="math inline">j</span> composed with the transposition of <span class="math inline">y</span> and <span class="math inline">jx</span> when <span class="math inline">j</span> is injective. So <span class="math inline">Y</span> is rigid, with the infinite, coinfinite extension <span class="math inline">\mathbb N\setminus\{2\}</span>.</p></li>
-<li><p>Along a collapse, a rigid property moves to one whose extension is everything or finite. Let <span class="math inline">Z</span> be weakly rigid with extension <span class="math inline">S</span>, pinned down by <span class="math inline">N\supseteq\{0,1\}</span>, and let <span class="math inline">m</span> be a collapse. If <span class="math inline">S</span> is infinite, then for any <span class="math inline">b</span> change <span class="math inline">m</span> at some <span class="math inline">x\in S\setminus N</span> to <span class="math inline">m&#39;x=b</span>: <span class="math inline">m&#39;</span> is a collapse agreeing with <span class="math inline">m</span> on <span class="math inline">N</span>, and persistence gives <span class="math inline">b\in Z_{m&#39;}=Z_m</span>; so <span class="math inline">Z_m=\mathbb N</span>. If <span class="math inline">S</span> is finite, the property <span class="math inline">k\mapsto k[S]</span> is pinned down by <span class="math inline">S</span> and necessarily holds of each member of <span class="math inline">S</span>, so weak inextensibility gives <span class="math inline">Z_m\subseteq m[S]</span>.</p></li>
+<li><p><span class="math inline">\top</span> is rigid: it is persistent,
+and its inextensibility is <span class="math inline">\Box</span>BF at
+type <span class="math inline">e</span>, which holds (BF holds, and with
+No Pure Contingency so does <span
+class="math inline">\Box</span>BF).</p></li>
+<li><p>A rigid property that is not a disjunction of haecceities. Let
+<span class="math inline">Y_k:=\mathbb N</span> if <span
+class="math inline">k</span> is a collapse and <span
+class="math inline">Y_k:=\mathbb N\setminus\{k2\}</span> otherwise;
+<span class="math inline">Y</span> is pinned down by <span
+class="math inline">\{0,1,2\}</span>. It is persistent: if <span
+class="math inline">b\ne k2</span> for a pair-preserving injection <span
+class="math inline">k</span>, then <span class="math inline">jb\ne
+jk2</span> for a pair-preserving injection <span
+class="math inline">j</span>, and every other composite is a collapse.
+It is inextensible at every world <span class="math inline">w</span>:
+let <span class="math inline">X</span> be pinned down by <span
+class="math inline">N\supseteq\{0,1\}</span> and contain <span
+class="math inline">\langle jx,j\rangle</span> for every <span
+class="math inline">x\in Y_w</span> and arrow <span
+class="math inline">j</span>; given <span class="math inline">y\in
+Y_{j\circ w}</span>, there are an arrow <span
+class="math inline">j&#39;</span> agreeing with <span
+class="math inline">j</span> on <span class="math inline">N</span> and
+an <span class="math inline">x\in Y_w</span> with <span
+class="math inline">j&#39;x=y</span>, so <span
+class="math inline">\langle y,j\rangle\in X</span> by pinning. For if
+<span class="math inline">y=jn</span> with <span
+class="math inline">n\in N</span> and <span class="math inline">n\in
+Y_w</span>, take <span class="math inline">j&#39;=j</span>; if <span
+class="math inline">n\notin Y_w</span>, then <span
+class="math inline">w</span> is a pair-preserving injection, <span
+class="math inline">n=w2</span>, and <span class="math inline">y=jw2\in
+Y_{j\circ w}</span> makes <span class="math inline">j\circ w</span> a
+collapse, so <span class="math inline">j</span> identifies <span
+class="math inline">w0</span> with <span class="math inline">w1</span>,
+that is <span class="math inline">0</span> with <span
+class="math inline">1</span>, and <span class="math inline">j</span>
+changed at a fresh <span class="math inline">x</span> to <span
+class="math inline">j&#39;x=y</span> is still a collapse; and if <span
+class="math inline">y\notin jN</span>, change <span
+class="math inline">j</span> at a fresh <span
+class="math inline">x\notin N\cup\{w2\}</span> to <span
+class="math inline">j&#39;x=y</span>, after <span
+class="math inline">j</span> composed with the transposition of <span
+class="math inline">y</span> and <span class="math inline">jx</span>
+when <span class="math inline">j</span> is injective. So <span
+class="math inline">Y</span> is rigid, with the infinite, coinfinite
+extension <span class="math inline">\mathbb
+N\setminus\{2\}</span>.</p></li>
+<li><p>Along a collapse, a rigid property moves to one whose extension
+is everything or finite. Let <span class="math inline">Z</span> be
+weakly rigid with extension <span class="math inline">S</span>, pinned
+down by <span class="math inline">N\supseteq\{0,1\}</span>, and let
+<span class="math inline">m</span> be a collapse. If <span
+class="math inline">S</span> is infinite, then for any <span
+class="math inline">b</span> change <span class="math inline">m</span>
+at some <span class="math inline">x\in S\setminus N</span> to <span
+class="math inline">m&#39;x=b</span>: <span
+class="math inline">m&#39;</span> is a collapse agreeing with <span
+class="math inline">m</span> on <span class="math inline">N</span>, and
+persistence gives <span class="math inline">b\in Z_{m&#39;}=Z_m</span>;
+so <span class="math inline">Z_m=\mathbb N</span>. If <span
+class="math inline">S</span> is finite, the property <span
+class="math inline">k\mapsto k[S]</span> is pinned down by <span
+class="math inline">S</span> and necessarily holds of each member of
+<span class="math inline">S</span>, so weak inextensibility gives <span
+class="math inline">Z_m\subseteq m[S]</span>.</p></li>
 </ol>
-<p>Now let <span class="math inline">R:=\lambda X\, .\,\operatorname{Rigid}(X)\land X\le\top</span>, the value of a closed pure term, so that in a one-object model its extension at every arrow is the set of rigid properties. Let <span class="math inline">\mathbf X</span> hold of <span class="math inline">W</span> at <span class="math inline">k</span> iff <span class="math inline">W=k&#39;\cdot Z</span> for some rigid <span class="math inline">Z</span> and some arrow <span class="math inline">k&#39;</span> agreeing with <span class="math inline">k</span> on <span class="math inline">\{0,1\}</span>. It is pinned down by <span class="math inline">\{0,1\}</span>, so it is in the domain, and it necessarily holds of every instance of <span class="math inline">R</span> (take <span class="math inline">k&#39;=k</span>). But at a collapse <span class="math inline">c</span>, every <span class="math inline">k&#39;</span> agreeing with <span class="math inline">c</span> on <span class="math inline">\{0,1\}</span> is a collapse, so by (3) every property in the extension of <span class="math inline">\mathbf X</span> there has extension <span class="math inline">\mathbb N</span> or a finite one, while <span class="math inline">Y</span>, in the extension of <span class="math inline">R</span> there by (2), has extension <span class="math inline">\mathbb N\setminus\{2\}</span>. So <span class="math inline">R\not\le\mathbf X</span>: <span class="math inline">R</span> is not even weakly inextensible, though <span class="math inline">\top</span> is rigid.</p>
-<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-07.</em></p>
+<p>Now let <span class="math inline">R:=\lambda X\,
+.\,\operatorname{Rigid}(X)\land X\le\top</span>, the value of a closed
+pure term, so that in a one-object model its extension at every arrow is
+the set of rigid properties. Let <span class="math inline">\mathbf
+X</span> hold of <span class="math inline">W</span> at <span
+class="math inline">k</span> iff <span class="math inline">W=k&#39;\cdot
+Z</span> for some rigid <span class="math inline">Z</span> and some
+arrow <span class="math inline">k&#39;</span> agreeing with <span
+class="math inline">k</span> on <span
+class="math inline">\{0,1\}</span>. It is pinned down by <span
+class="math inline">\{0,1\}</span>, so it is in the domain, and it
+necessarily holds of every instance of <span
+class="math inline">R</span> (take <span
+class="math inline">k&#39;=k</span>). But at a collapse <span
+class="math inline">c</span>, every <span
+class="math inline">k&#39;</span> agreeing with <span
+class="math inline">c</span> on <span class="math inline">\{0,1\}</span>
+is a collapse, so by (3) every property in the extension of <span
+class="math inline">\mathbf X</span> there has extension <span
+class="math inline">\mathbb N</span> or a finite one, while <span
+class="math inline">Y</span>, in the extension of <span
+class="math inline">R</span> there by (2), has extension <span
+class="math inline">\mathbb N\setminus\{2\}</span>. So <span
+class="math inline">R\not\le\mathbf X</span>: <span
+class="math inline">R</span> is not even weakly inextensible, though
+<span class="math inline">\top</span> is rigid.</p>
+<p><em>By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr,
+2026-10-07.</em></p>
 <h3 id="fails-rigid-rigidity.">Fails Rigid Rigidity.</h3>
-<p>Both arguments for the failure of Rigid Power (at type <span class="math inline">e\to t</span> when the individuals are the natural numbers, at type <span class="math inline">(t\to t)\to t</span> when there is one individual) take <span class="math inline">F:=\top</span>. Their power property <span class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)\land X\le\top</span> is <span class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span>, since <span class="math inline">X\le\top</span> is a theorem of C, and they show that it is not weakly inextensible. So Rigid Rigidity fails at the same type.</p>
-<p><em>Address: <code>finite-support-pair-injections-or-collapses#rigid-rigidity</code>. By Claude Opus 5.5 (Anthropic), on Cian Dorr’s request to settle Rigid Rigidity where it was open, 2026-10-10.</em></p>
-<h3 id="holds-axiom-of-infinity-type-e.">Holds Axiom of Infinity (type e).</h3>
-<p>The individuals are the natural numbers and identity at the evaluation arrow is literal, so no numeral counts them. The set of numerals at type <span class="math inline">e</span> is invariant under every arrow, hence has empty support and lies in the domain, so finite cardinality is standard and no finite cardinality holds of the universal property.</p>
-<p><em>From the group </em>Finite-support action models on one object<em>, shared argument <code>finite-support-one-object#axiom-of-infinity</code>. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-09-20.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Split from the argument for both types; the type-<span class="math inline">t</span> half, which does not need infinitely many individuals, is axiom-of-infinity-t.</p>
-<h3 id="holds-axiom-of-infinity-type-t.">Holds Axiom of Infinity (type t).</h3>
-<p>The propositions that a given number is fixed by the arrow, one for each number, are pairwise distinct and each has that number as finite support, so there are infinitely many propositions. The set of numerals at type <span class="math inline">t</span> is invariant under every arrow, hence has empty support and lies in the domain, so finite cardinality is standard and no finite cardinality holds of the universal property.</p>
-<p><em>From the group </em>Finite-support action models on one object<em>, shared argument <code>finite-support-one-object#axiom-of-infinity-t</code>. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-09-20.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The type-<span class="math inline">t</span> half of the old argument, “individual” becoming “number”, so that it covers the one-individual variants.</p>
+<p>Both arguments for the failure of Rigid Power (at type <span
+class="math inline">e\to t</span> when the individuals are the natural
+numbers, at type <span class="math inline">(t\to t)\to t</span> when
+there is one individual) take <span class="math inline">F:=\top</span>.
+Their power property <span class="math inline">\lambda X\,
+.\,\operatorname{Rigid}(X)\land X\le\top</span> is <span
+class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span>, since
+<span class="math inline">X\le\top</span> is a theorem of C, and they
+show that it is not weakly inextensible. So Rigid Rigidity fails at the
+same type.</p>
+<p><em>Address:
+<code>finite-support-pair-injections-or-collapses#rigid-rigidity</code>.
+By Claude Opus 5.5 (Anthropic), on Cian Dorr’s request to settle Rigid
+Rigidity where it was open, 2026-10-10.</em></p>
+<h3 id="holds-axiom-of-infinity-type-e.">Holds Axiom of Infinity (type
+e).</h3>
+<p>The individuals are the natural numbers and identity at the
+evaluation arrow is literal, so no numeral counts them. The set of
+numerals at type <span class="math inline">e</span> is invariant under
+every arrow, hence has empty support and lies in the domain, so finite
+cardinality is standard and no finite cardinality holds of the universal
+property.</p>
+<p><em>From the group </em>Finite-support action models on one
+object<em>, shared argument
+<code>finite-support-one-object#axiom-of-infinity</code>. By Claude
+Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-09-20.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Split from the argument for both types; the type-<span
+class="math inline">t</span> half, which does not need infinitely many
+individuals, is axiom-of-infinity-t.</p>
+<h3 id="holds-axiom-of-infinity-type-t.">Holds Axiom of Infinity (type
+t).</h3>
+<p>The propositions that a given number is fixed by the arrow, one for
+each number, are pairwise distinct and each has that number as finite
+support, so there are infinitely many propositions. The set of numerals
+at type <span class="math inline">t</span> is invariant under every
+arrow, hence has empty support and lies in the domain, so finite
+cardinality is standard and no finite cardinality holds of the universal
+property.</p>
+<p><em>From the group </em>Finite-support action models on one
+object<em>, shared argument
+<code>finite-support-one-object#axiom-of-infinity-t</code>. By Claude
+Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-09-20.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The type-<span class="math inline">t</span> half of the
+old argument, “individual” becoming “number”, so that it covers the
+one-individual variants.</p>
 <h3 id="fails-boolean-completeness.">Fails Boolean Completeness.</h3>
-<p>At type <span class="math inline">e\to t</span>. In the source’s terms an upper bound of the haecceities of the members of <span class="math inline">A</span> is a persistent property whose extension contains <span class="math inline">A</span>. A least one, pinned down by <span class="math inline">\{0,\ldots,n\}</span>, would be the strongest such property pinned down by <span class="math inline">\{0,\ldots,n\}</span>, and would also lie below the strongest pinned down by <span class="math inline">\{0,\ldots,m\}</span> for each <span class="math inline">m&gt;n</span>, which by the condition is strictly stronger. So the haecceities have no least upper bound.</p>
-<p><em>Source: Classicism, Proposition D.5, parts 1–8, pp. 75–79. From the group </em>Finite-support action models on one object<em>, shared argument <code>finite-support-one-object#boolean-completeness</code>. It requires that For some set <span class="math inline">A</span> of individuals, the strongest persistent property whose extension contains <span class="math inline">A</span> and which is pinned down by <span class="math inline">\{0,\ldots,n\}</span> becomes strictly stronger as <span class="math inline">n</span> grows. Here: With <span class="math inline">A</span> the even numbers, as for the permutations: at a pair-preserving injection <span class="math inline">h</span>, the strongest persistent property pinned down by a finite <span class="math inline">X\supseteq\{0,1\}</span> whose extension contains the even numbers has the extension <span class="math inline">h(X\cap\text{evens})\cup(\mathbb N\setminus(hX))</span>, a member of <span class="math inline">A</span> outside <span class="math inline">X</span> being sent anywhere outside <span class="math inline">hX</span> by some pair-preserving injection agreeing with <span class="math inline">h</span> on <span class="math inline">X</span>; at the identity this strictly shrinks as <span class="math inline">X</span> grows. By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Stated once for the group, with the step from “ever stronger” to the missing least upper bound spelled out; each member’s strongest persistent properties moved to the condition unbounded-haecceities.</p>
-<h3 id="fails-countable-boolean-completeness.">Fails Countable Boolean Completeness.</h3>
-<p>At type <span class="math inline">e\to t</span>: the property <span class="math inline">E</span> whose extension is the family of haecceities of the members of <span class="math inline">A</span>, which has no least upper bound by the shared argument boolean-completeness, is countable, and the extensional fullness the source invokes to put <span class="math inline">E</span> in the domain also puts in the relation pairing the haecceity of the <span class="math inline">k</span>-th member of <span class="math inline">A</span> with the numeral <span class="math inline">k</span>, which injects <span class="math inline">E</span> into the numerals.</p>
-<p><em>From the group </em>Finite-support action models on one object<em>, shared argument <code>finite-support-one-object#countable-boolean-completeness</code>. It requires that For some set <span class="math inline">A</span> of individuals, the strongest persistent property whose extension contains <span class="math inline">A</span> and which is pinned down by <span class="math inline">\{0,\ldots,n\}</span> becomes strictly stronger as <span class="math inline">n</span> grows. Here: With <span class="math inline">A</span> the even numbers, as for the permutations: at a pair-preserving injection <span class="math inline">h</span>, the strongest persistent property pinned down by a finite <span class="math inline">X\supseteq\{0,1\}</span> whose extension contains the even numbers has the extension <span class="math inline">h(X\cap\text{evens})\cup(\mathbb N\setminus(hX))</span>, a member of <span class="math inline">A</span> outside <span class="math inline">X</span> being sent anywhere outside <span class="math inline">hX</span> by some pair-preserving injection agreeing with <span class="math inline">h</span> on <span class="math inline">X</span>; at the identity this strictly shrinks as <span class="math inline">X</span> grows. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Now builds on the shared argument boolean-completeness instead of on each member’s source argument; no change of substance.</p>
-<p><em>Revised 2026-10-16 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Refutes the instance of Countable Boolean Completeness counting at <span class="math inline">e</span>, which the principle, now schematic in that type, includes.</p>
-<h3 id="fails-boolean-completeness-type-t.">Fails Boolean Completeness (type t).</h3>
-<p>The source (n. 92) conjectures this but does not show it. Any set <span class="math inline">F</span> of propositions is the extension at the identity of an element of the domain at type <span class="math inline">t\to t</span>, namely the profile <span class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}</span>: it is natural, independent of <span class="math inline">h</span> and so pinned down by the empty set, and each of its values is pinned down by the pinning set of <span class="math inline">p</span>, since <span class="math inline">i\cdot p</span> depends only on the values of <span class="math inline">i</span> there. A least upper bound of <span class="math inline">F</span> under entailment is a least finitely pinned superset of <span class="math inline">\bigcup F</span>, and it exists only if the least <span class="math inline">S</span>-pinned superset of <span class="math inline">\bigcup F</span> stops shrinking as the finite set <span class="math inline">S</span> grows. So the family <span class="math inline">F</span> of the condition has no least upper bound, and, taking pointwise negations, the family of complements has no greatest lower bound.</p>
-<p><em>From the group </em>Finite-support action models on one object<em>, shared argument <code>finite-support-one-object#boolean-completeness-t</code>. It requires that Some family <span class="math inline">F</span> of propositions has no least finitely pinned superset of its union <span class="math inline">\bigcup F</span>. Here: As for the permutations, with <span class="math inline">2</span> in place of <span class="math inline">0</span>: let <span class="math inline">F</span> be the family of propositions <span class="math inline">\{h : h2=m,\ hm=2\}</span> (<span class="math inline">m\ge3</span>), each pinned down by <span class="math inline">\{2,m\}</span>. A pair-preserving injection <span class="math inline">h</span> belongs to the least superset of <span class="math inline">\bigcup F</span> pinned down by <span class="math inline">S=\{0,\ldots,N\}</span> iff either <span class="math inline">h2\in S\setminus\{0,1,2\}</span> and <span class="math inline">h(h2)=2</span>, or <span class="math inline">h2\notin S</span> and <span class="math inline">2\notin h(S)</span>; the <span class="math inline">3</span>-cycle <span class="math inline">(2\ N{+}1\ N{+}2)</span>, which fixes <span class="math inline">0</span> and <span class="math inline">1</span>, satisfies the second clause for <span class="math inline">S</span> but neither for <span class="math inline">\{0,\ldots,N+1\}</span>, so these supersets strictly shrink. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-25.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The seven members’ copies stated once, each member’s family moved to the condition no-least-pinned-cover; the truncations’ separate argument of 23 September, by Claude Fable 5.1 prompted by Cian Dorr, is now its witness, its own proof that the family is in the domain giving way to the profile above. The trawl’s second arguments for the same verdict (25 September, DeepSeek, reviewed by OpenAI Codex) were dropped.</p>
-<h3 id="fails-countable-boolean-completeness.-1">Fails Countable Boolean Completeness.</h3>
-<p>At <span class="math inline">\sigma=\tau=t</span>: the family <span class="math inline">F</span> of the condition no-least-pinned-cover, which has no least upper bound by the shared argument boolean-completeness-t, is in every member a sequence of propositions <span class="math inline">A_m</span>, and it is countable relative to <span class="math inline">t</span>. The numerals at type <span class="math inline">t</span> are the finite cardinalities and are pairwise distinct (the shared argument axiom-of-infinity-t), and extensional fullness puts in the domain the relation pairing each <span class="math inline">A_m</span> with the <span class="math inline">m</span>-th numeral, which injects <span class="math inline">F</span> into them. This needs no infinity of individuals, so it covers the members with a single individual.</p>
-<p><em>From the group </em>Finite-support action models on one object<em>, shared argument <code>finite-support-one-object#countable-boolean-completeness-t</code>. It requires that Some family <span class="math inline">F</span> of propositions has no least finitely pinned superset of its union <span class="math inline">\bigcup F</span>. Here: As for the permutations, with <span class="math inline">2</span> in place of <span class="math inline">0</span>: let <span class="math inline">F</span> be the family of propositions <span class="math inline">\{h : h2=m,\ hm=2\}</span> (<span class="math inline">m\ge3</span>), each pinned down by <span class="math inline">\{2,m\}</span>. A pair-preserving injection <span class="math inline">h</span> belongs to the least superset of <span class="math inline">\bigcup F</span> pinned down by <span class="math inline">S=\{0,\ldots,N\}</span> iff either <span class="math inline">h2\in S\setminus\{0,1,2\}</span> and <span class="math inline">h(h2)=2</span>, or <span class="math inline">h2\notin S</span> and <span class="math inline">2\notin h(S)</span>; the <span class="math inline">3</span>-cycle <span class="math inline">(2\ N{+}1\ N{+}2)</span>, which fixes <span class="math inline">0</span> and <span class="math inline">1</span>, satisfies the second clause for <span class="math inline">S</span> but neither for <span class="math inline">\{0,\ldots,N+1\}</span>, so these supersets strictly shrink. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-16.</em></p>
+<p>At type <span class="math inline">e\to t</span>. In the source’s
+terms an upper bound of the haecceities of the members of <span
+class="math inline">A</span> is a persistent property whose extension
+contains <span class="math inline">A</span>. A least one, pinned down by
+<span class="math inline">\{0,\ldots,n\}</span>, would be the strongest
+such property pinned down by <span
+class="math inline">\{0,\ldots,n\}</span>, and would also lie below the
+strongest pinned down by <span class="math inline">\{0,\ldots,m\}</span>
+for each <span class="math inline">m&gt;n</span>, which by the condition
+is strictly stronger. So the haecceities have no least upper bound.</p>
+<p><em>Source: Classicism, Proposition D.5, parts 1–8, pp. 75–79. From
+the group </em>Finite-support action models on one object<em>, shared
+argument <code>finite-support-one-object#boolean-completeness</code>. It
+requires that For some set <span class="math inline">A</span> of
+individuals, the strongest persistent property whose extension contains
+<span class="math inline">A</span> and which is pinned down by <span
+class="math inline">\{0,\ldots,n\}</span> becomes strictly stronger as
+<span class="math inline">n</span> grows. Here: With <span
+class="math inline">A</span> the even numbers, as for the permutations:
+at a pair-preserving injection <span class="math inline">h</span>, the
+strongest persistent property pinned down by a finite <span
+class="math inline">X\supseteq\{0,1\}</span> whose extension contains
+the even numbers has the extension <span
+class="math inline">h(X\cap\text{evens})\cup(\mathbb
+N\setminus(hX))</span>, a member of <span class="math inline">A</span>
+outside <span class="math inline">X</span> being sent anywhere outside
+<span class="math inline">hX</span> by some pair-preserving injection
+agreeing with <span class="math inline">h</span> on <span
+class="math inline">X</span>; at the identity this strictly shrinks as
+<span class="math inline">X</span> grows. By Andrew Bacon and Cian Dorr,
+2026-09-17.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Stated once for the group, with the step from “ever
+stronger” to the missing least upper bound spelled out; each member’s
+strongest persistent properties moved to the condition
+unbounded-haecceities.</p>
+<h3 id="fails-countable-boolean-completeness.">Fails Countable Boolean
+Completeness.</h3>
+<p>At type <span class="math inline">e\to t</span>: the property <span
+class="math inline">E</span> whose extension is the family of
+haecceities of the members of <span class="math inline">A</span>, which
+has no least upper bound by the shared argument boolean-completeness, is
+countable, and the extensional fullness the source invokes to put <span
+class="math inline">E</span> in the domain also puts in the relation
+pairing the haecceity of the <span class="math inline">k</span>-th
+member of <span class="math inline">A</span> with the numeral <span
+class="math inline">k</span>, which injects <span
+class="math inline">E</span> into the numerals.</p>
+<p><em>From the group </em>Finite-support action models on one
+object<em>, shared argument
+<code>finite-support-one-object#countable-boolean-completeness</code>.
+It requires that For some set <span class="math inline">A</span> of
+individuals, the strongest persistent property whose extension contains
+<span class="math inline">A</span> and which is pinned down by <span
+class="math inline">\{0,\ldots,n\}</span> becomes strictly stronger as
+<span class="math inline">n</span> grows. Here: With <span
+class="math inline">A</span> the even numbers, as for the permutations:
+at a pair-preserving injection <span class="math inline">h</span>, the
+strongest persistent property pinned down by a finite <span
+class="math inline">X\supseteq\{0,1\}</span> whose extension contains
+the even numbers has the extension <span
+class="math inline">h(X\cap\text{evens})\cup(\mathbb
+N\setminus(hX))</span>, a member of <span class="math inline">A</span>
+outside <span class="math inline">X</span> being sent anywhere outside
+<span class="math inline">hX</span> by some pair-preserving injection
+agreeing with <span class="math inline">h</span> on <span
+class="math inline">X</span>; at the identity this strictly shrinks as
+<span class="math inline">X</span> grows. By Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 2026-09-23.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Now builds on the shared argument boolean-completeness
+instead of on each member’s source argument; no change of substance.</p>
+<p><em>Revised 2026-10-16 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Refutes the instance of Countable Boolean Completeness
+counting at <span class="math inline">e</span>, which the principle, now
+schematic in that type, includes.</p>
+<h3 id="fails-boolean-completeness-type-t.">Fails Boolean Completeness
+(type t).</h3>
+<p>The source (n. 92) conjectures this but does not show it. Any set
+<span class="math inline">F</span> of propositions is the extension at
+the identity of an element of the domain at type <span
+class="math inline">t\to t</span>, namely the profile <span
+class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in
+F\}</span>: it is natural, independent of <span
+class="math inline">h</span> and so pinned down by the empty set, and
+each of its values is pinned down by the pinning set of <span
+class="math inline">p</span>, since <span class="math inline">i\cdot
+p</span> depends only on the values of <span
+class="math inline">i</span> there. A least upper bound of <span
+class="math inline">F</span> under entailment is a least finitely pinned
+superset of <span class="math inline">\bigcup F</span>, and it exists
+only if the least <span class="math inline">S</span>-pinned superset of
+<span class="math inline">\bigcup F</span> stops shrinking as the finite
+set <span class="math inline">S</span> grows. So the family <span
+class="math inline">F</span> of the condition has no least upper bound,
+and, taking pointwise negations, the family of complements has no
+greatest lower bound.</p>
+<p><em>From the group </em>Finite-support action models on one
+object<em>, shared argument
+<code>finite-support-one-object#boolean-completeness-t</code>. It
+requires that Some family <span class="math inline">F</span> of
+propositions has no least finitely pinned superset of its union <span
+class="math inline">\bigcup F</span>. Here: As for the permutations,
+with <span class="math inline">2</span> in place of <span
+class="math inline">0</span>: let <span class="math inline">F</span> be
+the family of propositions <span class="math inline">\{h : h2=m,\
+hm=2\}</span> (<span class="math inline">m\ge3</span>), each pinned down
+by <span class="math inline">\{2,m\}</span>. A pair-preserving injection
+<span class="math inline">h</span> belongs to the least superset of
+<span class="math inline">\bigcup F</span> pinned down by <span
+class="math inline">S=\{0,\ldots,N\}</span> iff either <span
+class="math inline">h2\in S\setminus\{0,1,2\}</span> and <span
+class="math inline">h(h2)=2</span>, or <span
+class="math inline">h2\notin S</span> and <span
+class="math inline">2\notin h(S)</span>; the <span
+class="math inline">3</span>-cycle <span class="math inline">(2\ N{+}1\
+N{+}2)</span>, which fixes <span class="math inline">0</span> and <span
+class="math inline">1</span>, satisfies the second clause for <span
+class="math inline">S</span> but neither for <span
+class="math inline">\{0,\ldots,N+1\}</span>, so these supersets strictly
+shrink. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr,
+2026-09-25.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The seven members’ copies stated once, each member’s
+family moved to the condition no-least-pinned-cover; the truncations’
+separate argument of 23 September, by Claude Fable 5.1 prompted by Cian
+Dorr, is now its witness, its own proof that the family is in the domain
+giving way to the profile above. The trawl’s second arguments for the
+same verdict (25 September, DeepSeek, reviewed by OpenAI Codex) were
+dropped.</p>
+<h3 id="fails-countable-boolean-completeness.-1">Fails Countable Boolean
+Completeness.</h3>
+<p>At <span class="math inline">\sigma=\tau=t</span>: the family <span
+class="math inline">F</span> of the condition no-least-pinned-cover,
+which has no least upper bound by the shared argument
+boolean-completeness-t, is in every member a sequence of propositions
+<span class="math inline">A_m</span>, and it is countable relative to
+<span class="math inline">t</span>. The numerals at type <span
+class="math inline">t</span> are the finite cardinalities and are
+pairwise distinct (the shared argument axiom-of-infinity-t), and
+extensional fullness puts in the domain the relation pairing each <span
+class="math inline">A_m</span> with the <span
+class="math inline">m</span>-th numeral, which injects <span
+class="math inline">F</span> into them. This needs no infinity of
+individuals, so it covers the members with a single individual.</p>
+<p><em>From the group </em>Finite-support action models on one
+object<em>, shared argument
+<code>finite-support-one-object#countable-boolean-completeness-t</code>.
+It requires that Some family <span class="math inline">F</span> of
+propositions has no least finitely pinned superset of its union <span
+class="math inline">\bigcup F</span>. Here: As for the permutations,
+with <span class="math inline">2</span> in place of <span
+class="math inline">0</span>: let <span class="math inline">F</span> be
+the family of propositions <span class="math inline">\{h : h2=m,\
+hm=2\}</span> (<span class="math inline">m\ge3</span>), each pinned down
+by <span class="math inline">\{2,m\}</span>. A pair-preserving injection
+<span class="math inline">h</span> belongs to the least superset of
+<span class="math inline">\bigcup F</span> pinned down by <span
+class="math inline">S=\{0,\ldots,N\}</span> iff either <span
+class="math inline">h2\in S\setminus\{0,1,2\}</span> and <span
+class="math inline">h(h2)=2</span>, or <span
+class="math inline">h2\notin S</span> and <span
+class="math inline">2\notin h(S)</span>; the <span
+class="math inline">3</span>-cycle <span class="math inline">(2\ N{+}1\
+N{+}2)</span>, which fixes <span class="math inline">0</span> and <span
+class="math inline">1</span>, satisfies the second clause for <span
+class="math inline">S</span> but neither for <span
+class="math inline">\{0,\ldots,N+1\}</span>, so these supersets strictly
+shrink. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-16.</em></p>
 <h3 id="fails-analytic-necessitism.">Fails Analytic Necessitism.</h3>
-<p>Let <span class="math inline">k</span> be an arrow out of the evaluation object <span class="math inline">w</span> with <span class="math inline">ka=kb</span> for two distinct points <span class="math inline">a</span> and <span class="math inline">b</span> of the set the arrows act on, and let <span class="math inline">q</span> be the set of arrows <span class="math inline">j</span> out of <span class="math inline">w</span> with <span class="math inline">ja\ne jb</span>. It contains the identity, is pinned down by <span class="math inline">\{a,b\}</span>, is symmetric (an arrow separates <span class="math inline">a</span> from <span class="math inline">b</span> iff its composite with a permutation of the points does), and contains no arrow <span class="math inline">j\circ k</span>. Let <span class="math inline">\tau</span> be <span class="math inline">tt</span>, or <span class="math inline">tttt</span> in the case noted below. No entity <span class="math inline">x</span> of type <span class="math inline">\tau</span> at <span class="math inline">w</span> is determined by its transport along <span class="math inline">k</span>: let <span class="math inline">y</span> agree with <span class="math inline">x</span> except at the arrows in <span class="math inline">q</span>, where the top entity of the argument type of <span class="math inline">\tau</span> is added to its value or removed from it. Then <span class="math inline">y</span> is pinned down by a finite set along with <span class="math inline">x</span>, is symmetric if <span class="math inline">x</span> is, so is in the domain; it differs from <span class="math inline">x</span> and has <span class="math inline">k\cdot y=k\cdot x</span>, transport along <span class="math inline">k</span> reading only the values at the arrows after <span class="math inline">k</span>. If <span class="math inline">\mathfrak R</span> were a rigid real number structure at <span class="math inline">w</span> of type <span class="math inline">\tau</span>, necessarily a real number structure, with carrier <span class="math inline">X</span> (Background, Analysis), an instance <span class="math inline">x</span> of <span class="math inline">X</span> and <span class="math inline">y</span> as above would give <span class="math inline">k\cdot y=k\cdot x\in X_k</span> by persistence, <span class="math inline">Xy</span> by inextensibility, and <span class="math inline">k\cdot y\ne k\cdot x</span> by the necessary distinctness of the instances: so <span class="math inline">X</span> has no instance. The antecedent of Analytic Necessitism holds, however, at type <span class="math inline">\tau</span>. The propositions are infinitely many and, in the recorded instances, include a copy of the natural numbers, so by extensional fullness the entities of type <span class="math inline">tt</span>, which include one with any set of propositions as extension at the identity, include a copy of the sets of natural numbers and so of the reals, whose order, sum, product and natural numbers are the extensions at the identity of relations in the domain; the structure is complete, every subset of its carrier being the extension of a subproperty, so <span class="math inline">\exists\mathfrak R\,.\,\operatorname{Real}_{tt}(\mathfrak R)</span> holds at <span class="math inline">w</span>. (Should the propositions be infinite without including a copy of the natural numbers, the same holds at type <span class="math inline">tttt</span>, the sets of sets of propositions being Dedekind-infinite in ZF.) So Analytic Necessitism fails. No choice is used.</p>
-<p><em>General argument <code>arguments/analytic-necessitism-collapsing-arrow-pinned</code>. It requires that Write an entity of relational type at the evaluation object as its intension <span class="math inline">k\mapsto Y_k</span> over the arrows <span class="math inline">k</span> out of it, so that <span class="math inline">Y\bar a</span> holds at <span class="math inline">k</span> iff <span class="math inline">k\cdot\bar a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a finite set <span class="math inline">N</span> of the points the arrows act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span class="math inline">N</span>. Every entity in a domain is pinned down by a finite set, in the sense that <span class="math inline">k\cdot x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of each relational type at the evaluation object holds every intension pinned down by a finite set (in a symmetric model, every symmetric one). Here: The model is ideally full: every entity is pinned down by a finite set of numbers, and every intension pinned down by one is in the domain (Definitions D.1–D.3). It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set <span class="math inline">R</span> of tuples from the domains at an object <span class="math inline">V</span>, the intension that assigns to every arrow out of <span class="math inline">V</span> into an object <span class="math inline">U</span> a fixed set <span class="math inline">R_U</span> of tuples from <span class="math inline">U</span>’s domains, with <span class="math inline">R_V=R</span>, is pinned down by <span class="math inline">\emptyset</span>, so it is the intension of an element of <span class="math inline">V^{\bar\sigma\to t}</span> with extension <span class="math inline">R</span> at <span class="math inline">1_V</span>. It requires that There are infinitely many propositions at the evaluation world. Here: The propositions that a given number is fixed by the arrow, one for each number, are pairwise distinct, each pinned down by that number (the shared argument axiom-of-infinity-t). It requires that Some arrow out of the evaluation object sends two distinct points of the set the arrows act on to one point. Here: The collapses send <span class="math inline">0</span> and <span class="math inline">1</span> to one number. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
-<h3 id="holds-arithmetic-necessitism.">Holds Arithmetic Necessitism.</h3>
-<p>The numbers at a type <span class="math inline">\sigma</span> are the instances of <span class="math inline">\mathbb N_\sigma</span>, the least property containing <span class="math inline">\mathbf 0_\sigma</span> and closed under <span class="math inline">\operatorname{Suc}_\sigma</span> (Background); the numerals <span class="math inline">\mathbf 0_\sigma</span>, <span class="math inline">\operatorname{Suc}_\sigma\mathbf 0_\sigma,\ldots</span> are closed terms, so each denotes at every object, and transport along an arrow carries its denotation at the source to its denotation at the target. At any object <span class="math inline">v</span> reachable from the evaluation point, extensional fullness gives a property whose extension at <span class="math inline">v</span> is exactly the numerals there; it contains <span class="math inline">\mathbf 0_\sigma</span> and is closed under successor, so the numbers at <span class="math inline">v</span> are exactly the numerals, every numeral being an instance of every inductive property. Persistence of <span class="math inline">\mathbb N_\sigma</span> and, given <span class="math inline">\Box I^*_\sigma</span>, the necessary distinctness of the numbers are theorems of C (the proof of necessary-rigid-comprehension-implies-arithmetic-necessitism). Inextensibility, <span class="math inline">\Box\forall X\,.\,(\forall n\,.\,\mathbb N_\sigma n\to\Box Xn)\to\mathbb N_\sigma\le X</span>: at a reachable <span class="math inline">v</span> and for an arrow <span class="math inline">j</span> from <span class="math inline">v</span> to <span class="math inline">u</span>, the numbers at <span class="math inline">u</span> are the numerals there, which are the transports along <span class="math inline">j</span> of the numbers at <span class="math inline">v</span>, so any <span class="math inline">X</span> that necessarily holds of the numbers at <span class="math inline">v</span> holds at <span class="math inline">u</span> of the numbers there. So <span class="math inline">\mathbb N_\sigma</span> is rigid, and Arithmetic Necessitism holds at every type. No choice is used.</p>
-<p><em>General argument <code>arguments/arithmetic-necessitism-extensionally-full</code>. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set <span class="math inline">R</span> of tuples from the domains at an object <span class="math inline">V</span>, the intension that assigns to every arrow out of <span class="math inline">V</span> into an object <span class="math inline">U</span> a fixed set <span class="math inline">R_U</span> of tuples from <span class="math inline">U</span>’s domains, with <span class="math inline">R_V=R</span>, is pinned down by <span class="math inline">\emptyset</span>, so it is the intension of an element of <span class="math inline">V^{\bar\sigma\to t}</span> with extension <span class="math inline">R</span> at <span class="math inline">1_V</span>. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
-<h3 id="holds-arithmetic-necessitism.-1">Holds Arithmetic Necessitism.</h3>
-<p>As the argument arithmetic-necessitism-extensionally-full, with the property of being a numeral supplied by pinning. The intension <span class="math inline">Z</span> whose value at each arrow <span class="math inline">k</span> out of the evaluation object is the set of numerals <span class="math inline">\mathbf 0_\sigma,\operatorname{Suc}_\sigma\mathbf 0_\sigma,\ldots</span> at the target of <span class="math inline">k</span> is pinned down by the empty set, its value depending on the arrow only through its target, and is symmetric, transport along a permutation of the points carrying numerals to numerals, as transport along any arrow does, numerals being closed terms; so it is in the domain, and so is its transport <span class="math inline">k\cdot Z</span> to any reachable object, whose extension there is exactly the numerals. Hence at every reachable object the numbers at <span class="math inline">\sigma</span>, the instances of the least inductive property, are exactly the numerals, which transport to numerals; persistence and, given <span class="math inline">\Box I^*_\sigma</span>, necessary distinctness are theorems of C, and inextensibility follows as in that argument. So Arithmetic Necessitism holds at every type. No choice is used.</p>
-<p><em>General argument <code>arguments/arithmetic-necessitism-finitely-pinned</code>. It requires that Write an entity of relational type at the evaluation object as its intension <span class="math inline">k\mapsto Y_k</span> over the arrows <span class="math inline">k</span> out of it, so that <span class="math inline">Y\bar a</span> holds at <span class="math inline">k</span> iff <span class="math inline">k\cdot\bar a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a finite set <span class="math inline">N</span> of the points the arrows act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span class="math inline">N</span>. Every entity in a domain is pinned down by a finite set, in the sense that <span class="math inline">k\cdot x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of each relational type at the evaluation object holds every intension pinned down by a finite set (in a symmetric model, every symmetric one). Here: The model is ideally full: every entity is pinned down by a finite set of numbers, and every intension pinned down by one is in the domain (Definitions D.1–D.3). By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
-<h3 id="holds-axiom-of-infinity-type-e-infinity-schema-type-e.">Holds Axiom of Infinity (type e), Infinity Schema (type e).</h3>
-<p>The Infinity schema holds, there being <span class="math inline">n</span> distinct individuals for every <span class="math inline">n</span>. For the Axiom: by extensional fullness the domain has a property of cardinalities true of <span class="math inline">Z</span> exactly when every property <span class="math inline">Z</span> holds of has a finite extension. It holds of <span class="math inline">\mathbf{0}_e</span>, which holds only of empty properties, and passes from <span class="math inline">Y</span> to <span class="math inline">\operatorname{Suc}_e Y</span>, which holds of <span class="math inline">F</span> only if <span class="math inline">Y</span> holds of <span class="math inline">F</span> less one of its instances. So every finite cardinality has it, and none holds of the universal property, whose extension is infinite.</p>
-<p><em>General argument <code>arguments/infinitely-many-individuals</code>. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set <span class="math inline">R</span> of tuples from the domains at an object <span class="math inline">V</span>, the intension that assigns to every arrow out of <span class="math inline">V</span> into an object <span class="math inline">U</span> a fixed set <span class="math inline">R_U</span> of tuples from <span class="math inline">U</span>’s domains, with <span class="math inline">R_V=R</span>, is pinned down by <span class="math inline">\emptyset</span>, so it is the intension of an element of <span class="math inline">V^{\bar\sigma\to t}</span> with extension <span class="math inline">R</span> at <span class="math inline">1_V</span>. It requires that There are infinitely many individuals at the evaluation world. Here: The individuals are the natural numbers. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
-<h3 id="holds-axiom-of-infinity-type-t-infinity-schema-type-t.">Holds Axiom of Infinity (type t), Infinity Schema (type t).</h3>
-<p>As for individuals (the argument infinitely-many-individuals), at type <span class="math inline">t</span>: the Infinity schema holds, and by extensional fullness the property of cardinalities that hold only of properties with finite extensions is in the domain, has every finite cardinality, and excludes those holding of the universal property of propositions, whose extension is infinite.</p>
-<p><em>General argument <code>arguments/infinitely-many-propositions</code>. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set <span class="math inline">R</span> of tuples from the domains at an object <span class="math inline">V</span>, the intension that assigns to every arrow out of <span class="math inline">V</span> into an object <span class="math inline">U</span> a fixed set <span class="math inline">R_U</span> of tuples from <span class="math inline">U</span>’s domains, with <span class="math inline">R_V=R</span>, is pinned down by <span class="math inline">\emptyset</span>, so it is the intension of an element of <span class="math inline">V^{\bar\sigma\to t}</span> with extension <span class="math inline">R</span> at <span class="math inline">1_V</span>. It requires that There are infinitely many propositions at the evaluation world. Here: The propositions that a given number is fixed by the arrow, one for each number, are pairwise distinct, each pinned down by that number (the shared argument axiom-of-infinity-t). By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<p>Let <span class="math inline">k</span> be an arrow out of the
+evaluation object <span class="math inline">w</span> with <span
+class="math inline">ka=kb</span> for two distinct points <span
+class="math inline">a</span> and <span class="math inline">b</span> of
+the set the arrows act on, and let <span class="math inline">q</span> be
+the set of arrows <span class="math inline">j</span> out of <span
+class="math inline">w</span> with <span class="math inline">ja\ne
+jb</span>. It contains the identity, is pinned down by <span
+class="math inline">\{a,b\}</span>, is symmetric (an arrow separates
+<span class="math inline">a</span> from <span
+class="math inline">b</span> iff its composite with a permutation of the
+points does), and contains no arrow <span class="math inline">j\circ
+k</span>. Let <span class="math inline">\tau</span> be <span
+class="math inline">tt</span>, or <span class="math inline">tttt</span>
+in the case noted below. No entity <span class="math inline">x</span> of
+type <span class="math inline">\tau</span> at <span
+class="math inline">w</span> is determined by its transport along <span
+class="math inline">k</span>: let <span class="math inline">y</span>
+agree with <span class="math inline">x</span> except at the arrows in
+<span class="math inline">q</span>, where the top entity of the argument
+type of <span class="math inline">\tau</span> is added to its value or
+removed from it. Then <span class="math inline">y</span> is pinned down
+by a finite set along with <span class="math inline">x</span>, is
+symmetric if <span class="math inline">x</span> is, so is in the domain;
+it differs from <span class="math inline">x</span> and has <span
+class="math inline">k\cdot y=k\cdot x</span>, transport along <span
+class="math inline">k</span> reading only the values at the arrows after
+<span class="math inline">k</span>. If <span
+class="math inline">\mathfrak R</span> were a rigid real number
+structure at <span class="math inline">w</span> of type <span
+class="math inline">\tau</span>, necessarily a real number structure,
+with carrier <span class="math inline">X</span> (Background, Analysis),
+an instance <span class="math inline">x</span> of <span
+class="math inline">X</span> and <span class="math inline">y</span> as
+above would give <span class="math inline">k\cdot y=k\cdot x\in
+X_k</span> by persistence, <span class="math inline">Xy</span> by
+inextensibility, and <span class="math inline">k\cdot y\ne k\cdot
+x</span> by the necessary distinctness of the instances: so <span
+class="math inline">X</span> has no instance. The antecedent of Analytic
+Necessitism holds, however, at type <span
+class="math inline">\tau</span>. The propositions are infinitely many
+and, in the recorded instances, include a copy of the natural numbers,
+so by extensional fullness the entities of type <span
+class="math inline">tt</span>, which include one with any set of
+propositions as extension at the identity, include a copy of the sets of
+natural numbers and so of the reals, whose order, sum, product and
+natural numbers are the extensions at the identity of relations in the
+domain; the structure is complete, every subset of its carrier being the
+extension of a subproperty, so <span
+class="math inline">\exists\mathfrak
+R\,.\,\operatorname{Real}_{tt}(\mathfrak R)</span> holds at <span
+class="math inline">w</span>. (Should the propositions be infinite
+without including a copy of the natural numbers, the same holds at type
+<span class="math inline">tttt</span>, the sets of sets of propositions
+being Dedekind-infinite in ZF.) So Analytic Necessitism fails. No choice
+is used.</p>
+<p><em>General argument
+<code>arguments/analytic-necessitism-collapsing-arrow-pinned</code>. It
+requires that Write an entity of relational type at the evaluation
+object as its intension <span class="math inline">k\mapsto Y_k</span>
+over the arrows <span class="math inline">k</span> out of it, so that
+<span class="math inline">Y\bar a</span> holds at <span
+class="math inline">k</span> iff <span class="math inline">k\cdot\bar
+a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a
+finite set <span class="math inline">N</span> of the points the arrows
+act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any
+arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span
+class="math inline">N</span>. Every entity in a domain is pinned down by
+a finite set, in the sense that <span class="math inline">k\cdot
+x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of
+each relational type at the evaluation object holds every intension
+pinned down by a finite set (in a symmetric model, every symmetric one).
+Here: The model is ideally full: every entity is pinned down by a finite
+set of numbers, and every intension pinned down by one is in the domain
+(Definitions D.1–D.3). It requires that The model is extensionally full
+at every object: every set of tuples from the domains at an object is
+the extension, at the identity arrow, of an element of the domain of the
+matching relational type there. Here: The model is ideally full, hence
+extensionally full at every object (Appendix D, the remark after
+Definition D.3): for any set <span class="math inline">R</span> of
+tuples from the domains at an object <span class="math inline">V</span>,
+the intension that assigns to every arrow out of <span
+class="math inline">V</span> into an object <span
+class="math inline">U</span> a fixed set <span
+class="math inline">R_U</span> of tuples from <span
+class="math inline">U</span>’s domains, with <span
+class="math inline">R_V=R</span>, is pinned down by <span
+class="math inline">\emptyset</span>, so it is the intension of an
+element of <span class="math inline">V^{\bar\sigma\to t}</span> with
+extension <span class="math inline">R</span> at <span
+class="math inline">1_V</span>. It requires that There are infinitely
+many propositions at the evaluation world. Here: The propositions that a
+given number is fixed by the arrow, one for each number, are pairwise
+distinct, each pinned down by that number (the shared argument
+axiom-of-infinity-t). It requires that Some arrow out of the evaluation
+object sends two distinct points of the set the arrows act on to one
+point. Here: The collapses send <span class="math inline">0</span> and
+<span class="math inline">1</span> to one number. By Claude Fable 5.1
+(Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<h3 id="holds-arithmetic-necessitism.">Holds Arithmetic
+Necessitism.</h3>
+<p>The numbers at a type <span class="math inline">\sigma</span> are the
+instances of <span class="math inline">\mathbb N_\sigma</span>, the
+least property containing <span class="math inline">\mathbf
+0_\sigma</span> and closed under <span
+class="math inline">\operatorname{Suc}_\sigma</span> (Background); the
+numerals <span class="math inline">\mathbf 0_\sigma</span>, <span
+class="math inline">\operatorname{Suc}_\sigma\mathbf
+0_\sigma,\ldots</span> are closed terms, so each denotes at every
+object, and transport along an arrow carries its denotation at the
+source to its denotation at the target. At any object <span
+class="math inline">v</span> reachable from the evaluation point,
+extensional fullness gives a property whose extension at <span
+class="math inline">v</span> is exactly the numerals there; it contains
+<span class="math inline">\mathbf 0_\sigma</span> and is closed under
+successor, so the numbers at <span class="math inline">v</span> are
+exactly the numerals, every numeral being an instance of every inductive
+property. Persistence of <span class="math inline">\mathbb
+N_\sigma</span> and, given <span class="math inline">\Box
+I^*_\sigma</span>, the necessary distinctness of the numbers are
+theorems of C (the proof of
+necessary-rigid-comprehension-implies-arithmetic-necessitism).
+Inextensibility, <span class="math inline">\Box\forall X\,.\,(\forall
+n\,.\,\mathbb N_\sigma n\to\Box Xn)\to\mathbb N_\sigma\le X</span>: at a
+reachable <span class="math inline">v</span> and for an arrow <span
+class="math inline">j</span> from <span class="math inline">v</span> to
+<span class="math inline">u</span>, the numbers at <span
+class="math inline">u</span> are the numerals there, which are the
+transports along <span class="math inline">j</span> of the numbers at
+<span class="math inline">v</span>, so any <span
+class="math inline">X</span> that necessarily holds of the numbers at
+<span class="math inline">v</span> holds at <span
+class="math inline">u</span> of the numbers there. So <span
+class="math inline">\mathbb N_\sigma</span> is rigid, and Arithmetic
+Necessitism holds at every type. No choice is used.</p>
+<p><em>General argument
+<code>arguments/arithmetic-necessitism-extensionally-full</code>. It
+requires that The model is extensionally full at every object: every set
+of tuples from the domains at an object is the extension, at the
+identity arrow, of an element of the domain of the matching relational
+type there. Here: The model is ideally full, hence extensionally full at
+every object (Appendix D, the remark after Definition D.3): for any set
+<span class="math inline">R</span> of tuples from the domains at an
+object <span class="math inline">V</span>, the intension that assigns to
+every arrow out of <span class="math inline">V</span> into an object
+<span class="math inline">U</span> a fixed set <span
+class="math inline">R_U</span> of tuples from <span
+class="math inline">U</span>’s domains, with <span
+class="math inline">R_V=R</span>, is pinned down by <span
+class="math inline">\emptyset</span>, so it is the intension of an
+element of <span class="math inline">V^{\bar\sigma\to t}</span> with
+extension <span class="math inline">R</span> at <span
+class="math inline">1_V</span>. By Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<h3 id="holds-arithmetic-necessitism.-1">Holds Arithmetic
+Necessitism.</h3>
+<p>As the argument arithmetic-necessitism-extensionally-full, with the
+property of being a numeral supplied by pinning. The intension <span
+class="math inline">Z</span> whose value at each arrow <span
+class="math inline">k</span> out of the evaluation object is the set of
+numerals <span class="math inline">\mathbf
+0_\sigma,\operatorname{Suc}_\sigma\mathbf 0_\sigma,\ldots</span> at the
+target of <span class="math inline">k</span> is pinned down by the empty
+set, its value depending on the arrow only through its target, and is
+symmetric, transport along a permutation of the points carrying numerals
+to numerals, as transport along any arrow does, numerals being closed
+terms; so it is in the domain, and so is its transport <span
+class="math inline">k\cdot Z</span> to any reachable object, whose
+extension there is exactly the numerals. Hence at every reachable object
+the numbers at <span class="math inline">\sigma</span>, the instances of
+the least inductive property, are exactly the numerals, which transport
+to numerals; persistence and, given <span class="math inline">\Box
+I^*_\sigma</span>, necessary distinctness are theorems of C, and
+inextensibility follows as in that argument. So Arithmetic Necessitism
+holds at every type. No choice is used.</p>
+<p><em>General argument
+<code>arguments/arithmetic-necessitism-finitely-pinned</code>. It
+requires that Write an entity of relational type at the evaluation
+object as its intension <span class="math inline">k\mapsto Y_k</span>
+over the arrows <span class="math inline">k</span> out of it, so that
+<span class="math inline">Y\bar a</span> holds at <span
+class="math inline">k</span> iff <span class="math inline">k\cdot\bar
+a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a
+finite set <span class="math inline">N</span> of the points the arrows
+act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any
+arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span
+class="math inline">N</span>. Every entity in a domain is pinned down by
+a finite set, in the sense that <span class="math inline">k\cdot
+x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of
+each relational type at the evaluation object holds every intension
+pinned down by a finite set (in a symmetric model, every symmetric one).
+Here: The model is ideally full: every entity is pinned down by a finite
+set of numbers, and every intension pinned down by one is in the domain
+(Definitions D.1–D.3). By Claude Fable 5.1 (Anthropic), prompted by
+Zachary Goodsell, 2026-10-23.</em></p>
+<h3 id="holds-axiom-of-infinity-type-e-infinity-schema-type-e.">Holds
+Axiom of Infinity (type e), Infinity Schema (type e).</h3>
+<p>The Infinity schema holds, there being <span
+class="math inline">n</span> distinct individuals for every <span
+class="math inline">n</span>. For the Axiom: by extensional fullness the
+domain has a property of cardinalities true of <span
+class="math inline">Z</span> exactly when every property <span
+class="math inline">Z</span> holds of has a finite extension. It holds
+of <span class="math inline">\mathbf{0}_e</span>, which holds only of
+empty properties, and passes from <span class="math inline">Y</span> to
+<span class="math inline">\operatorname{Suc}_e Y</span>, which holds of
+<span class="math inline">F</span> only if <span
+class="math inline">Y</span> holds of <span class="math inline">F</span>
+less one of its instances. So every finite cardinality has it, and none
+holds of the universal property, whose extension is infinite.</p>
+<p><em>General argument
+<code>arguments/infinitely-many-individuals</code>. It requires that The
+model is extensionally full at every object: every set of tuples from
+the domains at an object is the extension, at the identity arrow, of an
+element of the domain of the matching relational type there. Here: The
+model is ideally full, hence extensionally full at every object
+(Appendix D, the remark after Definition D.3): for any set <span
+class="math inline">R</span> of tuples from the domains at an object
+<span class="math inline">V</span>, the intension that assigns to every
+arrow out of <span class="math inline">V</span> into an object <span
+class="math inline">U</span> a fixed set <span
+class="math inline">R_U</span> of tuples from <span
+class="math inline">U</span>’s domains, with <span
+class="math inline">R_V=R</span>, is pinned down by <span
+class="math inline">\emptyset</span>, so it is the intension of an
+element of <span class="math inline">V^{\bar\sigma\to t}</span> with
+extension <span class="math inline">R</span> at <span
+class="math inline">1_V</span>. It requires that There are infinitely
+many individuals at the evaluation world. Here: The individuals are the
+natural numbers. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction, 2026-10-06.</em></p>
+<h3 id="holds-axiom-of-infinity-type-t-infinity-schema-type-t.">Holds
+Axiom of Infinity (type t), Infinity Schema (type t).</h3>
+<p>As for individuals (the argument infinitely-many-individuals), at
+type <span class="math inline">t</span>: the Infinity schema holds, and
+by extensional fullness the property of cardinalities that hold only of
+properties with finite extensions is in the domain, has every finite
+cardinality, and excludes those holding of the universal property of
+propositions, whose extension is infinite.</p>
+<p><em>General argument
+<code>arguments/infinitely-many-propositions</code>. It requires that
+The model is extensionally full at every object: every set of tuples
+from the domains at an object is the extension, at the identity arrow,
+of an element of the domain of the matching relational type there. Here:
+The model is ideally full, hence extensionally full at every object
+(Appendix D, the remark after Definition D.3): for any set <span
+class="math inline">R</span> of tuples from the domains at an object
+<span class="math inline">V</span>, the intension that assigns to every
+arrow out of <span class="math inline">V</span> into an object <span
+class="math inline">U</span> a fixed set <span
+class="math inline">R_U</span> of tuples from <span
+class="math inline">U</span>’s domains, with <span
+class="math inline">R_V=R</span>, is pinned down by <span
+class="math inline">\emptyset</span>, so it is the intension of an
+element of <span class="math inline">V^{\bar\sigma\to t}</span> with
+extension <span class="math inline">R</span> at <span
+class="math inline">1_V</span>. It requires that There are infinitely
+many propositions at the evaluation world. Here: The propositions that a
+given number is fixed by the arrow, one for each number, are pairwise
+distinct, each pinned down by that number (the shared argument
+axiom-of-infinity-t). By Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction, 2026-10-06.</em></p>
 <h3 id="holds-intensional-choice.">Holds □Intensional Choice.</h3>
-<p>For each object <span class="math inline">U</span> and type <span class="math inline">\sigma</span> fix a well-ordering <span class="math inline">&lt;_U</span> of the domain <span class="math inline">D^\sigma_U</span>, and let <span class="math inline">W</span> be the intension of type <span class="math inline">\sigma\to\sigma\to t</span> with <span class="math inline">W(h):={&lt;_{\operatorname{cod}h}}</span>. Its value depends only on the arrow’s codomain, so by the condition it is in the domain, and at every world its extension well-orders that world’s type-<span class="math inline">\sigma</span> domain. Given <span class="math inline">F</span> with <span class="math inline">\Box\exists x\, .\,Fx</span>, put <span class="math inline">G:=\lambda x\, .\,Fx\land\forall y\, .\,(Fy\to\neg Wyx)</span>, the <span class="math inline">W</span>-least <span class="math inline">F</span>. It is definable from <span class="math inline">F</span> and <span class="math inline">W</span>, so in the domain; <span class="math inline">G\le F</span>, and its extension at every arrow is the singleton of the least element of <span class="math inline">F</span>’s. So Intensional Choice holds, and the same at every reachable object gives <span class="math inline">\Box</span>Intensional Choice. Cian Dorr’s observation that such models are qualitatively full, made precise.</p>
-<p><em>General argument <code>arguments/intensional-choice-well-ordering</code>. It requires that At every object reachable from the evaluation point, the domain contains every intension whose value at an arrow depends only on the arrow’s codomain. Here: With one object such an intension is constant, so it is pinned down by <span class="math inline">\emptyset</span>, and the domain holds every finitely pinned intension. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, at Cian Dorr’s suggestion, 2026-10-03.</em></p>
-<h3 id="holds-relational-choice-transversal-choice.">Holds □Relational Choice, □Transversal Choice.</h3>
-<p>At any reachable object <span class="math inline">W</span>, let <span class="math inline">U</span> be a serial relation in the domain there. Using the axiom of choice, pick for each <span class="math inline">x</span> a <span class="math inline">y</span> with <span class="math inline">(x,y)</span> in the extension of <span class="math inline">U</span> at the identity, and let <span class="math inline">S</span> be the intension whose value at every arrow <span class="math inline">W\to W</span> is the graph of this choice and whose value at arrows with any other codomain is empty; it depends only on the codomain, so the condition puts it in the domain, and at the identity it is a functional subrelation of <span class="math inline">U</span>. Likewise a set of representatives of an equivalence relation at <span class="math inline">W</span>, made into such an intension, is a transversal. Since <span class="math inline">W</span> was any reachable object, both principles hold at every world.</p>
-<p><em>General argument <code>arguments/necessary-relational-choice-codomain-intensions</code>. It requires that At every object reachable from the evaluation point, the domain contains every intension whose value at an arrow depends only on the arrow’s codomain. Here: With one object such an intension is constant, so it is pinned down by <span class="math inline">\emptyset</span>, and the domain holds every finitely pinned intension. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-10-14.</em></p>
+<p>For each object <span class="math inline">U</span> and type <span
+class="math inline">\sigma</span> fix a well-ordering <span
+class="math inline">&lt;_U</span> of the domain <span
+class="math inline">D^\sigma_U</span>, and let <span
+class="math inline">W</span> be the intension of type <span
+class="math inline">\sigma\to\sigma\to t</span> with <span
+class="math inline">W(h):={&lt;_{\operatorname{cod}h}}</span>. Its value
+depends only on the arrow’s codomain, so by the condition it is in the
+domain, and at every world its extension well-orders that world’s
+type-<span class="math inline">\sigma</span> domain. Given <span
+class="math inline">F</span> with <span class="math inline">\Box\exists
+x\, .\,Fx</span>, put <span class="math inline">G:=\lambda x\,
+.\,Fx\land\forall y\, .\,(Fy\to\neg Wyx)</span>, the <span
+class="math inline">W</span>-least <span class="math inline">F</span>.
+It is definable from <span class="math inline">F</span> and <span
+class="math inline">W</span>, so in the domain; <span
+class="math inline">G\le F</span>, and its extension at every arrow is
+the singleton of the least element of <span
+class="math inline">F</span>’s. So Intensional Choice holds, and the
+same at every reachable object gives <span
+class="math inline">\Box</span>Intensional Choice. Cian Dorr’s
+observation that such models are qualitatively full, made precise.</p>
+<p><em>General argument
+<code>arguments/intensional-choice-well-ordering</code>. It requires
+that At every object reachable from the evaluation point, the domain
+contains every intension whose value at an arrow depends only on the
+arrow’s codomain. Here: With one object such an intension is constant,
+so it is pinned down by <span class="math inline">\emptyset</span>, and
+the domain holds every finitely pinned intension. By Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, at Cian Dorr’s suggestion,
+2026-10-03.</em></p>
+<h3 id="holds-relational-choice-transversal-choice.">Holds □Relational
+Choice, □Transversal Choice.</h3>
+<p>At any reachable object <span class="math inline">W</span>, let <span
+class="math inline">U</span> be a serial relation in the domain there.
+Using the axiom of choice, pick for each <span
+class="math inline">x</span> a <span class="math inline">y</span> with
+<span class="math inline">(x,y)</span> in the extension of <span
+class="math inline">U</span> at the identity, and let <span
+class="math inline">S</span> be the intension whose value at every arrow
+<span class="math inline">W\to W</span> is the graph of this choice and
+whose value at arrows with any other codomain is empty; it depends only
+on the codomain, so the condition puts it in the domain, and at the
+identity it is a functional subrelation of <span
+class="math inline">U</span>. Likewise a set of representatives of an
+equivalence relation at <span class="math inline">W</span>, made into
+such an intension, is a transversal. Since <span
+class="math inline">W</span> was any reachable object, both principles
+hold at every world.</p>
+<p><em>General argument
+<code>arguments/necessary-relational-choice-codomain-intensions</code>.
+It requires that At every object reachable from the evaluation point,
+the domain contains every intension whose value at an arrow depends only
+on the arrow’s codomain. Here: With one object such an intension is
+constant, so it is pinned down by <span
+class="math inline">\emptyset</span>, and the domain holds every
+finitely pinned intension. By Claude Fable 5.1 (Anthropic), at Cian
+Dorr’s direction, 2026-10-14.</em></p>
+<h3
+id="holds-self-atoms-are-atoms-self-atoms-are-strong-atoms.-fails-self-atomicity-type-t.">Holds
+□Self-atoms are atoms, □Self-atoms are strong atoms. Fails
+Self-Atomicity (type t).</h3>
+<p>A self-atom of any relational type at an object <span
+class="math inline">W</span> is instantiated at some arrow <span
+class="math inline">k</span> out of <span class="math inline">W</span>,
+and its transport along <span class="math inline">k</span> is an atom at
+<span class="math inline">k</span>’s target instantiated at the identity
+there. The existential projection of an atom <span
+class="math inline">I</span> of a relational type, the proposition <span
+class="math inline">\exists\bar x\, .\,I\bar x</span>, is an atom of
+type <span class="math inline">t</span>: it is in the domain, it is not
+bottom, and for any proposition <span class="math inline">p</span> the
+entity <span class="math inline">I\land\lambda\bar x\, .\,p</span> lies
+below the atom <span class="math inline">I</span>, so is <span
+class="math inline">I</span> or bottom, which puts <span
+class="math inline">p</span> above the projection or disjoint from it.
+So the projection is a true atom at <span class="math inline">k</span>’s
+target, which the condition excludes. Hence no reachable object has a
+self-atom, and Self-atoms are atoms and Self-atoms are strong atoms hold
+vacuously at every type and every reachable object, while Self-Atomicity
+(type t) fails at the evaluation point, the top proposition having no
+self-atom below it.</p>
+<p><em>General argument
+<code>arguments/no-actuality-no-self-atoms</code>. It requires that
+Actuality fails at the identity of every object reachable from the
+evaluation point: no atom of the domain of propositions there contains
+that identity. In a one-object model this is the failure of Actuality at
+the evaluation point, Actuality being a closed sentence. Here: One
+object, so Actuality, a closed pure sentence, holds at every world iff
+at the identity, where it fails (recorded in this model’s verdicts). By
+Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October
+2026.</em></p>
 <h3 id="holds-no-pure-contingency.">Holds No Pure Contingency.</h3>
-<p>Closed pure terms denote entities fixed by every arrow (§3.5, p. 58). With a single object, a proposition fixed by every arrow contains every arrow if it contains the identity and no arrow otherwise, so a true closed pure sentence is necessary: the source’s one-object No Pure Contingency observation (p. 79), applied to each closed instance.</p>
-<p><em>Source: Classicism, §3.5, p. 58; p. 79. General argument <code>arguments/no-pure-contingency-one-object</code>. It requires that The model is an action model (Classicism, Appendix D), or an intensional action model in the sense of Dorr’s draft (Boolean Completeness does not imply Rigid Comprehension), with a single object. Here: Each part of Proposition D.5 is a one-object category acting on <span class="math inline">\mathbb N</span> (Appendix D, Definitions D.1–D.3). By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic, for every one-object action model; the reason the source’s observation holds is spelled out in place of “Boxed positive flags use the source’s explicit one-object No Pure Contingency observation, applied separately to each closed instance.”</p>
-<h3 id="holds-necessity-of-second-order-analysis.">Holds Necessity of Second-Order Analysis.</h3>
-<p>Let <span class="math inline">v</span> be any object reachable from the evaluation point and <span class="math inline">\mathfrak R</span> a real number structure at <span class="math inline">v</span> (Background, Analysis). Its completeness is tested against the subproperties of its carrier present at <span class="math inline">v</span>, and by extensional fullness every subset of the carrier’s extension there is the extension at the identity of one of them; so the carrier, with the extensions of <span class="math inline">\le</span>, <span class="math inline">+</span> and <span class="math inline">\times</span>, is a complete ordered field in the sense of the metatheory and, by Huntington’s theorem, a theorem of ZF, is isomorphic to the real numbers. For the same reason the extension of <span class="math inline">N</span>, the least subproperty containing <span class="math inline">0</span> and closed under adding <span class="math inline">1</span>, is its set of natural numbers, that set being the extension of a subproperty. A second-order analytical sentence <span class="math inline">A(\mathfrak R)</span> quantifies over the relations among entities of the structure’s type at <span class="math inline">v</span>, applied to the structure’s elements, and their extensions at the identity are all the relations on the carrier, again by extensional fullness. So <span class="math inline">A(\mathfrak R)</span> holds at <span class="math inline">v</span> exactly when <span class="math inline">A</span> holds in the real numbers under full second-order semantics, which depends neither on <span class="math inline">v</span> nor on <span class="math inline">\mathfrak R</span>. Hence <span class="math inline">\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to A(\mathfrak R)</span> holds when <span class="math inline">A</span> is true of the reals and <span class="math inline">\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak R)</span> when it is false: every instance of the Necessity of Second-Order Analysis holds, and with it the Necessity of Analysis and the Non-contingency of the Continuum Hypothesis, as recorded. No choice is used.</p>
-<p><em>General argument <code>arguments/second-order-analysis-extensionally-full</code>. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set <span class="math inline">R</span> of tuples from the domains at an object <span class="math inline">V</span>, the intension that assigns to every arrow out of <span class="math inline">V</span> into an object <span class="math inline">U</span> a fixed set <span class="math inline">R_U</span> of tuples from <span class="math inline">U</span>’s domains, with <span class="math inline">R_V=R</span>, is pinned down by <span class="math inline">\emptyset</span>, so it is the intension of an element of <span class="math inline">V^{\bar\sigma\to t}</span> with extension <span class="math inline">R</span> at <span class="math inline">1_V</span>. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
-<h3 id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).</h3>
-<p>Let <span class="math inline">c\in\Sigma</span> have relational type <span class="math inline">\tau</span>, so <span class="math inline">c=\top_\tau</span> necessarily. Witnessed Possibility fails for the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span> but impossible of <span class="math inline">c</span>; Separated Structure fails since <span class="math inline">\lambda x\, .\,x</span> and <span class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span class="math inline">c</span> and differ; Independence (signature Σ) fails since <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes; Distinctness Maximalism (signature Σ) fails since <span class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does not prove.</p>
-<p><em>General argument <code>arguments/sigma-top</code>. It requires that Every constant of Σ is relational, and each denotes the top element of its type. Here: This is the interpretation. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic; it uses nothing about the model.</p>
+<p>Closed pure terms denote entities fixed by every arrow (§3.5, p. 58).
+With a single object, a proposition fixed by every arrow contains every
+arrow if it contains the identity and no arrow otherwise, so a true
+closed pure sentence is necessary: the source’s one-object No Pure
+Contingency observation (p. 79), applied to each closed instance.</p>
+<p><em>Source: Classicism, §3.5, p. 58; p. 79. General argument
+<code>arguments/no-pure-contingency-one-object</code>. It requires that
+The model is an action model (Classicism, Appendix D), or an intensional
+action model in the sense of Dorr’s draft (Boolean Completeness does not
+imply Rigid Comprehension), with a single object. Here: Each part of
+Proposition D.5 is a one-object category acting on <span
+class="math inline">\mathbb N</span> (Appendix D, Definitions D.1–D.3).
+By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic, for every one-object action model; the reason the source’s
+observation holds is spelled out in place of “Boxed positive flags use
+the source’s explicit one-object No Pure Contingency observation,
+applied separately to each closed instance.”</p>
+<h3 id="holds-necessity-of-second-order-analysis.">Holds Necessity of
+Second-Order Analysis.</h3>
+<p>Let <span class="math inline">v</span> be any object reachable from
+the evaluation point and <span class="math inline">\mathfrak R</span> a
+real number structure at <span class="math inline">v</span> (Background,
+Analysis). Its completeness is tested against the subproperties of its
+carrier present at <span class="math inline">v</span>, and by
+extensional fullness every subset of the carrier’s extension there is
+the extension at the identity of one of them; so the carrier, with the
+extensions of <span class="math inline">\le</span>, <span
+class="math inline">+</span> and <span
+class="math inline">\times</span>, is a complete ordered field in the
+sense of the metatheory and, by Huntington’s theorem, a theorem of ZF,
+is isomorphic to the real numbers. For the same reason the extension of
+<span class="math inline">N</span>, the least subproperty containing
+<span class="math inline">0</span> and closed under adding <span
+class="math inline">1</span>, is its set of natural numbers, that set
+being the extension of a subproperty. A second-order analytical sentence
+<span class="math inline">A(\mathfrak R)</span> quantifies over the
+relations among entities of the structure’s type at <span
+class="math inline">v</span>, applied to the structure’s elements, and
+their extensions at the identity are all the relations on the carrier,
+again by extensional fullness. So <span class="math inline">A(\mathfrak
+R)</span> holds at <span class="math inline">v</span> exactly when <span
+class="math inline">A</span> holds in the real numbers under full
+second-order semantics, which depends neither on <span
+class="math inline">v</span> nor on <span class="math inline">\mathfrak
+R</span>. Hence <span class="math inline">\Box\forall\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to A(\mathfrak R)</span>
+holds when <span class="math inline">A</span> is true of the reals and
+<span class="math inline">\Box\forall\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak
+R)</span> when it is false: every instance of the Necessity of
+Second-Order Analysis holds, and with it the Necessity of Analysis and
+the Non-contingency of the Continuum Hypothesis, as recorded. No choice
+is used.</p>
+<p><em>General argument
+<code>arguments/second-order-analysis-extensionally-full</code>. It
+requires that The model is extensionally full at every object: every set
+of tuples from the domains at an object is the extension, at the
+identity arrow, of an element of the domain of the matching relational
+type there. Here: The model is ideally full, hence extensionally full at
+every object (Appendix D, the remark after Definition D.3): for any set
+<span class="math inline">R</span> of tuples from the domains at an
+object <span class="math inline">V</span>, the intension that assigns to
+every arrow out of <span class="math inline">V</span> into an object
+<span class="math inline">U</span> a fixed set <span
+class="math inline">R_U</span> of tuples from <span
+class="math inline">U</span>’s domains, with <span
+class="math inline">R_V=R</span>, is pinned down by <span
+class="math inline">\emptyset</span>, so it is the intension of an
+element of <span class="math inline">V^{\bar\sigma\to t}</span> with
+extension <span class="math inline">R</span> at <span
+class="math inline">1_V</span>. By Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<h3
+id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails
+Witnessed Possibility, Separated Structure, Independence (signature Σ),
+Maximalism (signature Σ).</h3>
+<p>Let <span class="math inline">c\in\Sigma</span> have relational type
+<span class="math inline">\tau</span>, so <span
+class="math inline">c=\top_\tau</span> necessarily. Witnessed
+Possibility fails for the pure formula <span
+class="math inline">x\ne\top_\tau</span>, witnessed by <span
+class="math inline">\bot_\tau</span> but impossible of <span
+class="math inline">c</span>; Separated Structure fails since <span
+class="math inline">\lambda x\, .\,x</span> and <span
+class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span
+class="math inline">c</span> and differ; Independence (signature Σ)
+fails since <span class="math inline">c</span> denotes what the closed
+pure term <span class="math inline">\top_\tau</span> denotes;
+Distinctness Maximalism (signature Σ) fails since <span
+class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does
+not prove.</p>
+<p><em>General argument <code>arguments/sigma-top</code>. It requires
+that Every constant of Σ is relational, and each denotes the top element
+of its type. Here: This is the interpretation. By Claude Fable 5.1
+(Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic; it uses nothing about the model.</p>
 <h3 id="holds-tame-rigidity.">Holds Tame Rigidity.</h3>
-<p>Write <span class="math inline">B_N(E)</span> for the intension <span class="math inline">k\mapsto\bigcup\{k^{\prime}\cdot E:k^{\prime}\text{ agrees with }k \text{ on }N\}</span>; it is pinned down by <span class="math inline">N</span>, and symmetric when the model is, since the symmetry group consists of arrows and <span class="math inline">(gk)\cdot E=g\cdot(k\cdot E)</span>, so it is in the domain. (1) A relation <span class="math inline">Y</span> pinned down by <span class="math inline">S</span>, with extension <span class="math inline">E</span> at the identity, is weakly rigid iff <span class="math inline">Y=B_S(E)=B_N(E)</span> for every finite <span class="math inline">N\supseteq S</span>: weak persistence gives <span class="math inline">k\cdot E\subseteq Y_k</span>, and with pinning <span class="math inline">B_S(E)\subseteq Y</span>; a domain element <span class="math inline">X</span> with <span class="math inline">\Box X</span> true of each member of <span class="math inline">E</span>, pinned down by <span class="math inline">N</span>, contains <span class="math inline">B_N(E)</span>, so weak inextensibility says exactly that <span class="math inline">Y\subseteq B_N(E)</span> for every finite <span class="math inline">N</span>, and <span class="math inline">B_N(E)\subseteq B_S(E)</span> for <span class="math inline">N\supseteq S</span>. (2) Rigidity is (1) at every world: for each arrow <span class="math inline">h</span>, <span class="math inline">h\cdot Y</span>, with <span class="math inline">(h\cdot Y)_k=Y_{kh}</span>, must satisfy <span class="math inline">k\cdot Y_h\subseteq Y_{kh}\subseteq B_N(Y_h)_k</span> for all <span class="math inline">k</span> and finite <span class="math inline">N</span>. (3) Let <span class="math inline">Y</span> be weakly rigid. Persistence at <span class="math inline">h</span>: <span class="math inline">k\cdot Y_h=\bigcup\{(kk^{\prime\prime})\cdot E:k^{\prime\prime}\text{ agrees with }h\text{ on }S\}\subseteq B_S(E)_{kh}=Y_{kh}</span>. Inextensibility at <span class="math inline">h</span>: given <span class="math inline">N</span>, take <span class="math inline">N^{\prime\prime}</span> from the condition. By (1), <span class="math inline">Y_{kh}=B_{N^{\prime\prime}}(E)_{kh}</span>, so a member of it is <span class="math inline">k^{\prime}\cdot e</span> with <span class="math inline">e\in E</span>, pinned down by some finite <span class="math inline">M</span>, and <span class="math inline">k^{\prime}</span> agreeing with <span class="math inline">kh</span> on <span class="math inline">N^{\prime\prime}</span>. The condition gives <span class="math inline">k^{\prime\prime}</span> agreeing with <span class="math inline">h</span> on <span class="math inline">N^{\prime\prime}</span> and <span class="math inline">j</span> agreeing with <span class="math inline">k</span> on <span class="math inline">N</span> with <span class="math inline">jk^{\prime\prime}</span> agreeing with <span class="math inline">k^{\prime}</span> on <span class="math inline">M</span>, so <span class="math inline">k^{\prime}\cdot e=j\cdot(k^{\prime\prime}\cdot e)</span>, where <span class="math inline">k^{\prime\prime}\cdot e\in B_{N^{\prime\prime}}(E)_h=Y_h</span>; hence <span class="math inline">k^{\prime}\cdot e\in B_N(Y_h)_k</span>. So every weakly rigid relation, at every type, is rigid. With No Pure Contingency, which holds in one-object models, the map’s results give <span class="math inline">\Box</span>Tame Rigidity.</p>
-<p><em>General argument <code>arguments/tame-rigidity-factorizable</code>. It requires that The model is an action model (Classicism, Appendix D), or an intensional action model in the sense of Dorr’s draft (Boolean Completeness does not imply Rigid Comprehension), with a single object. Here: Each part of Proposition D.5 is a one-object category acting on <span class="math inline">\mathbb N</span> (Appendix D, Definitions D.1–D.3). It requires that Write an entity of relational type at the evaluation object as its intension <span class="math inline">k\mapsto Y_k</span> over the arrows <span class="math inline">k</span> out of it, so that <span class="math inline">Y\bar a</span> holds at <span class="math inline">k</span> iff <span class="math inline">k\cdot\bar a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a finite set <span class="math inline">N</span> of the points the arrows act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span class="math inline">N</span>. Every entity in a domain is pinned down by a finite set, in the sense that <span class="math inline">k\cdot x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of each relational type at the evaluation object holds every intension pinned down by a finite set (in a symmetric model, every symmetric one). Here: The model is ideally full: every entity is pinned down by a finite set of numbers, and every intension pinned down by one is in the domain (Definitions D.1–D.3). It requires that For every arrow <span class="math inline">h</span> out of the evaluation object and finite sets <span class="math inline">N,S</span> there is a finite <span class="math inline">N^{\prime\prime}\supseteq S</span> such that, whenever <span class="math inline">k^{\prime}</span> agrees with <span class="math inline">k\circ h</span> on <span class="math inline">N^{\prime\prime}</span>, for every finite <span class="math inline">M</span> some arrows <span class="math inline">k^{\prime\prime}</span> agreeing with <span class="math inline">h</span> on <span class="math inline">N^{\prime\prime}</span> and <span class="math inline">j</span> agreeing with <span class="math inline">k</span> on <span class="math inline">N</span> have <span class="math inline">j\circ k^{\prime\prime}</span> agreeing with <span class="math inline">k^{\prime}</span> on <span class="math inline">M</span>. Here: Take <span class="math inline">N^{\prime\prime}:=S\cup\{0,1\}</span> and, enlarging <span class="math inline">N</span>, assume <span class="math inline">\{0,1\}\cup h(N^{\prime\prime})\subseteq N</span>; then <span class="math inline">k^{\prime}</span>, <span class="math inline">k^{\prime\prime}</span> and <span class="math inline">j</span> below are collapses iff <span class="math inline">kh</span>, <span class="math inline">h</span> and <span class="math inline">k</span> are. Let <span class="math inline">k^{\prime\prime}</span> agree with <span class="math inline">h</span> on <span class="math inline">N^{\prime\prime}</span>; for <span class="math inline">m\in M\setminus N^{\prime\prime}</span> let <span class="math inline">k^{\prime\prime}m:=k^{-1}(k^{\prime}m)</span> if <span class="math inline">k</span> is injective and <span class="math inline">k^{\prime}m\in k(N)</span>, and otherwise a fresh point outside <span class="math inline">N</span>, one for each <span class="math inline">m</span> if <span class="math inline">h</span> is injective and one for each value of <span class="math inline">k^{\prime}</span> if not. Let <span class="math inline">j</span> agree with <span class="math inline">k</span> on <span class="math inline">N</span> and send each fresh point to its value. Where <span class="math inline">h</span> is injective, <span class="math inline">k^{\prime}</span> is injective or <span class="math inline">k</span> a collapse, so <span class="math inline">k^{\prime\prime}</span> is injective on <span class="math inline">M</span>, its values <span class="math inline">k^{-1}(k^{\prime}m)</span> avoiding <span class="math inline">h(N^{\prime\prime})</span>; where <span class="math inline">k</span> is injective, the new values of <span class="math inline">j</span> lie outside <span class="math inline">k(N)</span> and are distinct. So both extend to arrows of their kinds, and <span class="math inline">jk^{\prime\prime}</span> agrees with <span class="math inline">k^{\prime}</span> on <span class="math inline">M</span>. By Claude Opus 5.5 (Anthropic), on Cian Dorr’s request to settle Tame Rigidity where it was open, 2026-10-09.</em></p>
+<p>Write <span class="math inline">B_N(E)</span> for the intension <span
+class="math inline">k\mapsto\bigcup\{k^{\prime}\cdot E:k^{\prime}\text{
+agrees with }k \text{ on }N\}</span>; it is pinned down by <span
+class="math inline">N</span>, and symmetric when the model is, since the
+symmetry group consists of arrows and <span
+class="math inline">(gk)\cdot E=g\cdot(k\cdot E)</span>, so it is in the
+domain. (1) A relation <span class="math inline">Y</span> pinned down by
+<span class="math inline">S</span>, with extension <span
+class="math inline">E</span> at the identity, is weakly rigid iff <span
+class="math inline">Y=B_S(E)=B_N(E)</span> for every finite <span
+class="math inline">N\supseteq S</span>: weak persistence gives <span
+class="math inline">k\cdot E\subseteq Y_k</span>, and with pinning <span
+class="math inline">B_S(E)\subseteq Y</span>; a domain element <span
+class="math inline">X</span> with <span class="math inline">\Box
+X</span> true of each member of <span class="math inline">E</span>,
+pinned down by <span class="math inline">N</span>, contains <span
+class="math inline">B_N(E)</span>, so weak inextensibility says exactly
+that <span class="math inline">Y\subseteq B_N(E)</span> for every finite
+<span class="math inline">N</span>, and <span
+class="math inline">B_N(E)\subseteq B_S(E)</span> for <span
+class="math inline">N\supseteq S</span>. (2) Rigidity is (1) at every
+world: for each arrow <span class="math inline">h</span>, <span
+class="math inline">h\cdot Y</span>, with <span
+class="math inline">(h\cdot Y)_k=Y_{kh}</span>, must satisfy <span
+class="math inline">k\cdot Y_h\subseteq Y_{kh}\subseteq
+B_N(Y_h)_k</span> for all <span class="math inline">k</span> and finite
+<span class="math inline">N</span>. (3) Let <span
+class="math inline">Y</span> be weakly rigid. Persistence at <span
+class="math inline">h</span>: <span class="math inline">k\cdot
+Y_h=\bigcup\{(kk^{\prime\prime})\cdot E:k^{\prime\prime}\text{ agrees
+with }h\text{ on }S\}\subseteq B_S(E)_{kh}=Y_{kh}</span>.
+Inextensibility at <span class="math inline">h</span>: given <span
+class="math inline">N</span>, take <span
+class="math inline">N^{\prime\prime}</span> from the condition. By (1),
+<span class="math inline">Y_{kh}=B_{N^{\prime\prime}}(E)_{kh}</span>, so
+a member of it is <span class="math inline">k^{\prime}\cdot e</span>
+with <span class="math inline">e\in E</span>, pinned down by some finite
+<span class="math inline">M</span>, and <span
+class="math inline">k^{\prime}</span> agreeing with <span
+class="math inline">kh</span> on <span
+class="math inline">N^{\prime\prime}</span>. The condition gives <span
+class="math inline">k^{\prime\prime}</span> agreeing with <span
+class="math inline">h</span> on <span
+class="math inline">N^{\prime\prime}</span> and <span
+class="math inline">j</span> agreeing with <span
+class="math inline">k</span> on <span class="math inline">N</span> with
+<span class="math inline">jk^{\prime\prime}</span> agreeing with <span
+class="math inline">k^{\prime}</span> on <span
+class="math inline">M</span>, so <span
+class="math inline">k^{\prime}\cdot e=j\cdot(k^{\prime\prime}\cdot
+e)</span>, where <span class="math inline">k^{\prime\prime}\cdot e\in
+B_{N^{\prime\prime}}(E)_h=Y_h</span>; hence <span
+class="math inline">k^{\prime}\cdot e\in B_N(Y_h)_k</span>. So every
+weakly rigid relation, at every type, is rigid. With No Pure
+Contingency, which holds in one-object models, the map’s results give
+<span class="math inline">\Box</span>Tame Rigidity.</p>
+<p><em>General argument
+<code>arguments/tame-rigidity-factorizable</code>. It requires that The
+model is an action model (Classicism, Appendix D), or an intensional
+action model in the sense of Dorr’s draft (Boolean Completeness does not
+imply Rigid Comprehension), with a single object. Here: Each part of
+Proposition D.5 is a one-object category acting on <span
+class="math inline">\mathbb N</span> (Appendix D, Definitions D.1–D.3).
+It requires that Write an entity of relational type at the evaluation
+object as its intension <span class="math inline">k\mapsto Y_k</span>
+over the arrows <span class="math inline">k</span> out of it, so that
+<span class="math inline">Y\bar a</span> holds at <span
+class="math inline">k</span> iff <span class="math inline">k\cdot\bar
+a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a
+finite set <span class="math inline">N</span> of the points the arrows
+act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any
+arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span
+class="math inline">N</span>. Every entity in a domain is pinned down by
+a finite set, in the sense that <span class="math inline">k\cdot
+x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of
+each relational type at the evaluation object holds every intension
+pinned down by a finite set (in a symmetric model, every symmetric one).
+Here: The model is ideally full: every entity is pinned down by a finite
+set of numbers, and every intension pinned down by one is in the domain
+(Definitions D.1–D.3). It requires that For every arrow <span
+class="math inline">h</span> out of the evaluation object and finite
+sets <span class="math inline">N,S</span> there is a finite <span
+class="math inline">N^{\prime\prime}\supseteq S</span> such that,
+whenever <span class="math inline">k^{\prime}</span> agrees with <span
+class="math inline">k\circ h</span> on <span
+class="math inline">N^{\prime\prime}</span>, for every finite <span
+class="math inline">M</span> some arrows <span
+class="math inline">k^{\prime\prime}</span> agreeing with <span
+class="math inline">h</span> on <span
+class="math inline">N^{\prime\prime}</span> and <span
+class="math inline">j</span> agreeing with <span
+class="math inline">k</span> on <span class="math inline">N</span> have
+<span class="math inline">j\circ k^{\prime\prime}</span> agreeing with
+<span class="math inline">k^{\prime}</span> on <span
+class="math inline">M</span>. Here: Take <span
+class="math inline">N^{\prime\prime}:=S\cup\{0,1\}</span> and, enlarging
+<span class="math inline">N</span>, assume <span
+class="math inline">\{0,1\}\cup h(N^{\prime\prime})\subseteq N</span>;
+then <span class="math inline">k^{\prime}</span>, <span
+class="math inline">k^{\prime\prime}</span> and <span
+class="math inline">j</span> below are collapses iff <span
+class="math inline">kh</span>, <span class="math inline">h</span> and
+<span class="math inline">k</span> are. Let <span
+class="math inline">k^{\prime\prime}</span> agree with <span
+class="math inline">h</span> on <span
+class="math inline">N^{\prime\prime}</span>; for <span
+class="math inline">m\in M\setminus N^{\prime\prime}</span> let <span
+class="math inline">k^{\prime\prime}m:=k^{-1}(k^{\prime}m)</span> if
+<span class="math inline">k</span> is injective and <span
+class="math inline">k^{\prime}m\in k(N)</span>, and otherwise a fresh
+point outside <span class="math inline">N</span>, one for each <span
+class="math inline">m</span> if <span class="math inline">h</span> is
+injective and one for each value of <span
+class="math inline">k^{\prime}</span> if not. Let <span
+class="math inline">j</span> agree with <span
+class="math inline">k</span> on <span class="math inline">N</span> and
+send each fresh point to its value. Where <span
+class="math inline">h</span> is injective, <span
+class="math inline">k^{\prime}</span> is injective or <span
+class="math inline">k</span> a collapse, so <span
+class="math inline">k^{\prime\prime}</span> is injective on <span
+class="math inline">M</span>, its values <span
+class="math inline">k^{-1}(k^{\prime}m)</span> avoiding <span
+class="math inline">h(N^{\prime\prime})</span>; where <span
+class="math inline">k</span> is injective, the new values of <span
+class="math inline">j</span> lie outside <span
+class="math inline">k(N)</span> and are distinct. So both extend to
+arrows of their kinds, and <span
+class="math inline">jk^{\prime\prime}</span> agrees with <span
+class="math inline">k^{\prime}</span> on <span
+class="math inline">M</span>. By Claude Opus 5.5 (Anthropic), on Cian
+Dorr’s request to settle Tame Rigidity where it was open,
+2026-10-09.</em></p>
 <h3 id="holds-transversal-choice.">Holds Transversal Choice.</h3>
-<p>For an equivalence relation at the evaluation point, a transversal of its extension there, chosen in the metatheory, is by extensional fullness the extension of an element of the domain; the equivalence and transversal conditions are unboxed.</p>
-<p><em>General argument <code>arguments/transversal-choice-extensionally-full</code>. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set <span class="math inline">R</span> of tuples from the domains at an object <span class="math inline">V</span>, the intension that assigns to every arrow out of <span class="math inline">V</span> into an object <span class="math inline">U</span> a fixed set <span class="math inline">R_U</span> of tuples from <span class="math inline">U</span>’s domains, with <span class="math inline">R_V=R</span>, is pinned down by <span class="math inline">\emptyset</span>, so it is the intension of an element of <span class="math inline">V^{\bar\sigma\to t}</span> with extension <span class="math inline">R</span> at <span class="math inline">1_V</span>. By Cian Dorr (observation); recorded by Claude Fable 5.1 (Anthropic), on a question of Zachary Goodsell, after an observation of Christopher Sun, 2026-09-25.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The Relational Choice and Transversal Choice arguments merged into one, stated for every extensionally full model.</p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic. Its first sentence, deriving extensional fullness from ideal fullness, is now the group’s reason for meeting extensionally-full.</p>
-<h3 id="holds-no-contingency-signature-σ-b-for-sentences-of-σ.">Holds No Contingency (signature Σ), B for sentences of Σ.</h3>
-<p>Each constant of Σ denotes what the closed pure term <span class="math inline">\top_\tau</span> of its type denotes, so a closed sentence of the language of Σ denotes what the pure sentence with <span class="math inline">\top_\tau</span> in place of each constant denotes; if true it is necessary by No Pure Contingency, which holds here. So No Contingency (signature Σ) holds, and B for sentences of Σ with it: a true Σ-sentence is necessary, hence necessarily possible.</p>
-<p><em>General argument <code>arguments/sigma-top-npc</code>. It requires that Every constant of Σ is relational, and each denotes the top element of its type. Here: This is the interpretation. By Cian Dorr (observation); recorded by Claude Opus 5.5 (Anthropic), 2026-10-02.</em></p>
-<p><em>Revised 2026-10-03 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The argument sigma-single-top, for Σ a single constant of type <span class="math inline">t</span> denoting <span class="math inline">\top</span>, stated for every interpretation of Σ by top elements, now that such interpretations have no individual constants. It replaces that argument and nc-sigma-homogeneous, which reached the same verdicts through an individual constant when the model’s automorphisms carry every individual to every other. With an individual constant and no such automorphisms the verdicts were unknown in 19 models, and nowhere did the individual constants settle a verdict differently.</p>
+<p>For an equivalence relation at the evaluation point, a transversal of
+its extension there, chosen in the metatheory, is by extensional
+fullness the extension of an element of the domain; the equivalence and
+transversal conditions are unboxed.</p>
+<p><em>General argument
+<code>arguments/transversal-choice-extensionally-full</code>. It
+requires that The model is extensionally full at every object: every set
+of tuples from the domains at an object is the extension, at the
+identity arrow, of an element of the domain of the matching relational
+type there. Here: The model is ideally full, hence extensionally full at
+every object (Appendix D, the remark after Definition D.3): for any set
+<span class="math inline">R</span> of tuples from the domains at an
+object <span class="math inline">V</span>, the intension that assigns to
+every arrow out of <span class="math inline">V</span> into an object
+<span class="math inline">U</span> a fixed set <span
+class="math inline">R_U</span> of tuples from <span
+class="math inline">U</span>’s domains, with <span
+class="math inline">R_V=R</span>, is pinned down by <span
+class="math inline">\emptyset</span>, so it is the intension of an
+element of <span class="math inline">V^{\bar\sigma\to t}</span> with
+extension <span class="math inline">R</span> at <span
+class="math inline">1_V</span>. By Cian Dorr (observation); recorded by
+Claude Fable 5.1 (Anthropic), on a question of Zachary Goodsell, after
+an observation of Christopher Sun, 2026-09-25.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The Relational Choice and Transversal Choice arguments
+merged into one, stated for every extensionally full model.</p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic. Its first sentence, deriving extensional fullness from ideal
+fullness, is now the group’s reason for meeting extensionally-full.</p>
+<h3 id="holds-no-contingency-signature-σ-b-for-sentences-of-σ.">Holds No
+Contingency (signature Σ), B for sentences of Σ.</h3>
+<p>Each constant of Σ denotes what the closed pure term <span
+class="math inline">\top_\tau</span> of its type denotes, so a closed
+sentence of the language of Σ denotes what the pure sentence with <span
+class="math inline">\top_\tau</span> in place of each constant denotes;
+if true it is necessary by No Pure Contingency, which holds here. So No
+Contingency (signature Σ) holds, and B for sentences of Σ with it: a
+true Σ-sentence is necessary, hence necessarily possible.</p>
+<p><em>General argument <code>arguments/sigma-top-npc</code>. It
+requires that Every constant of Σ is relational, and each denotes the
+top element of its type. Here: This is the interpretation. By Cian Dorr
+(observation); recorded by Claude Opus 5.5 (Anthropic),
+2026-10-02.</em></p>
+<p><em>Revised 2026-10-03 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The argument sigma-single-top, for Σ a single constant
+of type <span class="math inline">t</span> denoting <span
+class="math inline">\top</span>, stated for every interpretation of Σ by
+top elements, now that such interpretations have no individual
+constants. It replaces that argument and nc-sigma-homogeneous, which
+reached the same verdicts through an individual constant when the
+model’s automorphisms carry every individual to every other. With an
+individual constant and no such automorphisms the verdicts were unknown
+in 19 models, and nowhere did the individual constants settle a verdict
+differently.</p>
 <h2 id="notes">Notes</h2>
-<p>Cian Dorr proposed the functions that are injective or identify <span class="math inline">0</span> with <span class="math inline">1</span>; that set is not closed under composition (the injection swapping <span class="math inline">0</span> with <span class="math inline">2</span> and <span class="math inline">1</span> with <span class="math inline">3</span>, followed by the collapse of <span class="math inline">0</span> with <span class="math inline">1</span>, identifies <span class="math inline">2</span> with <span class="math inline">3</span> but not <span class="math inline">0</span> with <span class="math inline">1</span>), and the monoid recorded is its largest submonoid containing all the collapses, since a collapse applied after an injection <span class="math inline">f</span> must identify <span class="math inline">f0</span> with <span class="math inline">f1</span>. It is the first model on the map with Vicinity without Actuality outside C5 (ND fails at type <span class="math inline">e</span> by a collapse, at type <span class="math inline">t</span> for the proposition <span class="math inline">0\ne1</span>, which is impossible at a collapse, refuting 5 and B as well), and the first model refuting Rigid Power. Tame Rigidity holds at type <span class="math inline">e</span>: the weakly rigid properties of individuals are the finite disjunctions of haecceities <span class="math inline">k\mapsto k[E]</span>, the properties <span class="math inline">Y_F</span> (<span class="math inline">\mathbb N\setminus k[F]</span> at a pair-preserving injection <span class="math inline">k</span>, <span class="math inline">\mathbb N</span> at a collapse) for finite <span class="math inline">F</span>, and <span class="math inline">\top=Y_\emptyset</span>, all rigid; at every type it holds by the general argument tame-rigidity-factorizable (9 October 2026), so this model separates Tame Rigidity from Rigid Power.</p>
+<p>Cian Dorr proposed the functions that are injective or identify <span
+class="math inline">0</span> with <span class="math inline">1</span>;
+that set is not closed under composition (the injection swapping <span
+class="math inline">0</span> with <span class="math inline">2</span> and
+<span class="math inline">1</span> with <span
+class="math inline">3</span>, followed by the collapse of <span
+class="math inline">0</span> with <span class="math inline">1</span>,
+identifies <span class="math inline">2</span> with <span
+class="math inline">3</span> but not <span class="math inline">0</span>
+with <span class="math inline">1</span>), and the monoid recorded is its
+largest submonoid containing all the collapses, since a collapse applied
+after an injection <span class="math inline">f</span> must identify
+<span class="math inline">f0</span> with <span
+class="math inline">f1</span>. It is the first model on the map with
+Vicinity without Actuality outside C5 (ND fails at type <span
+class="math inline">e</span> by a collapse, at type <span
+class="math inline">t</span> for the proposition <span
+class="math inline">0\ne1</span>, which is impossible at a collapse,
+refuting 5 and B as well), and the first model refuting Rigid Power.
+Tame Rigidity holds at type <span class="math inline">e</span>: the
+weakly rigid properties of individuals are the finite disjunctions of
+haecceities <span class="math inline">k\mapsto k[E]</span>, the
+properties <span class="math inline">Y_F</span> (<span
+class="math inline">\mathbb N\setminus k[F]</span> at a pair-preserving
+injection <span class="math inline">k</span>, <span
+class="math inline">\mathbb N</span> at a collapse) for finite <span
+class="math inline">F</span>, and <span
+class="math inline">\top=Y_\emptyset</span>, all rigid; at every type it
+holds by the general argument tame-rigidity-factorizable (9 October
+2026), so this model separates Tame Rigidity from Rigid Power.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 7 Oct</strong> — Cian Dorr, suggestion of 7 October 2026, in conversation with Claude Opus 5.5 (Anthropic): the monoid of the functions on <span class="math inline">\mathbb N</span> that are injective or identify <span class="math inline">0</span> with <span class="math inline">1</span>, for a model with Vicinity but not Actuality outside C5. As stated the set is not closed under composition; the monoid here is its largest submonoid containing every function that identifies <span class="math inline">0</span> with <span class="math inline">1</span>. Transcript in .private.</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Definitions D.1–D.3, pp. 73–74 (the ideally full construction).</li>
+<li><strong>Dorr 7 Oct</strong> — Cian Dorr, suggestion of 7 October
+2026, in conversation with Claude Opus 5.5 (Anthropic): the monoid of
+the functions on <span class="math inline">\mathbb N</span> that are
+injective or identify <span class="math inline">0</span> with <span
+class="math inline">1</span>, for a model with Vicinity but not
+Actuality outside C5. As stated the set is not closed under composition;
+the monoid here is its largest submonoid containing every function that
+identifies <span class="math inline">0</span> with <span
+class="math inline">1</span>. Transcript in .private.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, Appendix D, Definitions D.1–D.3,
+pp. 73–74 (the ideally full construction).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/models/finite-support-pair-injections-or-collapses.yaml</code>
+Record:
+<code>topics/classicism/models/finite-support-pair-injections-or-collapses.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, Definitions D.1–D.3 and Proposition D.5, pp. 73–79. The finite-support construction, here over a new monoid; the analogue in this setting of Dorr’s Base 2 (symmetric-collapse-pair) without the symmetry condition.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, Definitions D.1–D.3 and Proposition D.5, pp. 73–79. The
+finite-support construction, here over a new monoid; the analogue in
+this setting of Dorr’s Base 2 (symmetric-collapse-pair) without the
+symmetry condition.</li>
 </ul>
 </body></html>

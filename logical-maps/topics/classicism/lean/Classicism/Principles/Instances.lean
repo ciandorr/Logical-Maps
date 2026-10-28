@@ -133,4 +133,27 @@ def NecAtomicityT : Prop := □ AtomicityT
 /-- `necessary-boolean-completeness-t`: Boolean Completeness at `t`, boxed. -/
 def NecBooleanCompletenessT : Prop := □ BooleanCompletenessT
 
+/-! ## Self-Atomicity and the bridge principles at `t` -/
+
+/-- `self-atomicity-t`. -/
+def SelfAtomicityT : Prop := SelfAtomicity Prop
+/-- `necessary-self-atomicity-t`. -/
+def NecSelfAtomicityT : Prop := □ SelfAtomicityT
+/-- `atoms-are-self-atoms-t`. -/
+def AtomsAreSelfAtomsT : Prop := AtomsAreSelfAtoms Prop
+/-- `necessary-atoms-are-self-atoms-t`. -/
+def NecAtomsAreSelfAtomsT : Prop := □ AtomsAreSelfAtomsT
+/-- `self-atoms-are-atoms-t`. -/
+def SelfAtomsAreAtomsT : Prop := SelfAtomsAreAtoms Prop
+/-- `necessary-self-atoms-are-atoms-t`. -/
+def NecSelfAtomsAreAtomsT : Prop := □ SelfAtomsAreAtomsT
+/-- `self-atoms-are-strong-atoms-t`. -/
+def SelfAtomsAreStrongAtomsT : Prop := SelfAtomsAreStrongAtoms Prop
+/-- `necessary-self-atoms-are-strong-atoms-t`. -/
+def NecSelfAtomsAreStrongAtomsT : Prop := □ SelfAtomsAreStrongAtomsT
+/-- `atoms-are-strong-atoms-t`. -/
+def AtomsAreStrongAtomsT : Prop := AtomsAreStrongAtoms Prop
+/-- `necessary-atoms-are-strong-atoms-t`. -/
+def NecAtomsAreStrongAtomsT : Prop := □ AtomsAreStrongAtomsT
+
 end Classicism.P

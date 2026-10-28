@@ -1,0 +1,15 @@
+id: full-fixed-arrow-no-self-atom
+requires:
+- full-model
+- fixed-arrow
+fails:
+- self-atomicity-t
+- atoms-are-self-atoms-t
+choice: free
+by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+date: '2026-10-25'
+text: 'Let $m\ne1$ fix $k$: $m\circ k=k$. The singleton $\{k\}$, in the domain since the model is full,
+  is an atom. Its transport along $k$ is $\{x : x\circ k=k\}$, which contains $1$ and $m$, and the proposition
+  $\{1\}$ at $k$’s target, in the domain there, separates them; so $\{k\}$ is true at $k$ without being
+  an atom there, and it is not a self-atom. As $\{k\}$ is the only possible proposition below itself,
+  Self-Atomicity (type t) fails too.'

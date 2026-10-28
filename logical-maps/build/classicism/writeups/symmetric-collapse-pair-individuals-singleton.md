@@ -4,6 +4,8 @@
 
 ## Package
 
+- **□Self-Atomicity.** Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a self-atom: a possible entity that necessarily, if instantiated, is an atom.
+- **□Self-Atomicity (type t).** Necessarily, every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **BF.** The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.
@@ -14,6 +16,8 @@
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
 - **B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
+- **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
+- **¬ Self-atoms are strong atoms (type t).** Every self-atom is a strong atom.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **¬ Rigid Rigidity.** Being rigid is a rigid property of relations, including propositions.
@@ -37,6 +41,18 @@ Interpretation of Σ, fixed for this record: every constant of Σ is relational,
 *A member of the group Symmetric ideally-full models, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Self-Atomicity.
+
+Self-Atomicity at every relational type, necessarily, there being one object. Let $I\ne\bot$ be an entity of type $\bar\sigma t$, pinned down by $N$, and take a pair $\langle k,\bar x\rangle$ in it, $k$ an arrow and $\bar x$ a tuple of individuals and of symmetric entities at $k$’s world. A symmetry $g$ acts on such a pair by relabelling, fixing every symmetric entity and permuting the individuals. Choose a finite $N^{\prime}\supseteq N$ with $k(N^{\prime})$ containing the collapsed pair and every individual in $\bar x$, which surjectivity allows (if $k$ is a symmetry, $N^{\prime}\supseteq k^{-1}$ of those individuals suffices), and let $J$ be the set of pairs $\langle g\circ k_1,g\cdot\bar x\rangle$ with $g$ a symmetry and $k_1$ agreeing with $k$ on $N^{\prime}$. $J$ lies below $I$, since $I$ is pinned down by $N$ and symmetric; it is symmetric and pinned down by $N^{\prime}$. Its transport along a member $\langle g\circ k_1,g\cdot\bar x\rangle$ consists of the pairs $\langle m,\bar y\rangle$ with $m\circ g\circ k_1=g^{\prime}\circ k_2$ and $\bar y=g^{\prime}\cdot\bar x$; then $h:=g^{\prime-1}\circ m\circ g$ fixes $k(N^{\prime})$ pointwise, so is a symmetry fixing the individuals of $\bar x$, and $\bar y=m\cdot g\cdot\bar x$. So the transport is the orbit of the single pair $\langle1,g\cdot\bar x\rangle$, an atom, and $J$ is a self-atom below $I$.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
+### Holds □Self-Atomicity (type t). Fails Self-atoms are atoms (type t), Self-atoms are strong atoms (type t).
+
+Write $\{a,b\}$ for the collapsed pair and $G$ for the symmetry group, the orbit of the identity and the only atom containing it, pinned down by the pair. Let $k$ be a collapser and $N$ a finite set such that $k(N)\supseteq\{a,b\}$; one exists for any collapser, every arrow being surjective. Let $q$ be the set of arrows agreeing on $N$, up to symmetry, with $k$: it is symmetric and pinned down by $N$. For $k^{\prime}\in q$, an arrow $m$ has $m\circ k^{\prime}\in q$ only if some $g\circ m$ fixes $k^{\prime}(N)\supseteq\{a,b\}$ pointwise, which no collapser does; so $m\in G$, and conversely $G\circ k^{\prime}\subseteq q$. So the transport of $q$ along each of its members is $G$, and $q$ is a self-atom. It is not an atom: the arrows agreeing with $k$ on a larger finite set, up to symmetry, form a proper nonempty symmetric pinned part. So Self-atoms are atoms (type t) fails, and with it Self-atoms are strong atoms (type t). Self-Atomicity (type t) holds, and necessarily, there being one object: a possible proposition $p$, pinned down by $N$, contains some arrow; if a permutation, $p\supseteq G$, a self-atom; if a collapser $k$, $p$ contains the self-atom built from $k$ and a finite $N^{\prime}\supseteq N$ with $k(N^{\prime})\supseteq\{a,b\}$. The relational form is the argument that follows.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Rigid Comprehension.
 

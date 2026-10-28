@@ -19,6 +19,12 @@ The proof of [[atomicity-t-and-bf-t-imply-strong-leibniz-t]] uses its premises o
 
 Boxed counterpart of [[atomicity-t-and-bf-t-imply-strong-leibniz-t]].
 
+Now derived through the boxed bridge results [[necessary-barcan-t-implies-necessary-atoms-are-strong-worlds-t]] and [[necessary-atomicity-t-and-necessary-atoms-are-strong-worlds-t-imply-necessary-strong-leibniz-t]].
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Dorr 2 Oct** — Cian Dorr, suggestion of 2 October 2026.

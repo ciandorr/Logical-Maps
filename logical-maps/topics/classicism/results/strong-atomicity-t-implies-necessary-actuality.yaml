@@ -19,17 +19,15 @@ sources:
 source_names:
 - Dorr, 26 Sep (Fitelson)
 - Philosophical Introduction to HOL
-proof: >-
-  Write $A$ for Actuality, $\exists p\, .\,p\land\forall q\, .\,q\to p\le q$. Every strong atom
+proof: 'Write $A$ for Actuality, $\exists p\, .\,p\land\forall q\, .\,q\to p\le q$. Every strong atom
   proposition entails $A$. For any $w$, $(\forall q\, .\,w\le q\lor w\le\neg q)\to(w\to A)$ is a theorem
-  of H: given $w$ and a true $q$, $w\le\neg q$ would give $\neg q$ by T, so $w\le q$; thus $w$ is true and
-  entails every truth, and is itself the witness for $A$. Necessitate the universal closure in $w$,
-  distribute by CBF, and apply K to the second conjunct of $\operatorname{SAtom}_t(w)$, which is
-  $\Box\forall q\, .\,w\le q\lor w\le\neg q$: this gives $\Box(w\to A)$, i.e. $w\le A$. Now suppose
-  $\Diamond\neg A$. Strong Atomicity at type $t$ supplies a strong atom $w$ with $w\le\neg
-  A$. Together with $w\le A$ this gives $w\le A\land\neg A=\bot$, so $w=\bot$, contradicting $\Diamond w$.
-  Hence $\neg\Diamond\neg A$, which is $\Box A$. Actuality has no type parameters, so $\Box A$ is its only
-  closed instance.
+  of H: given $w$ and a true $q$, $w\le\neg q$ would give $\neg q$ by T, so $w\le q$; thus $w$ is true
+  and entails every truth, and is itself the witness for $A$. Necessitate the universal closure in $w$,
+  distribute by CBF, and apply K to the second conjunct of $\operatorname{SAtom}_t(w)$, which is $\Box\forall
+  q\, .\,w\le q\lor w\le\neg q$: this gives $\Box(w\to A)$, i.e. $w\le A$. Now suppose $\Diamond\neg A$.
+  Strong Atomicity at type $t$ supplies a strong atom $w$ with $w\le\neg A$. Together
+  with $w\le A$ this gives $w\le A\land\neg A=\bot$, so $w=\bot$, contradicting $\Diamond w$. Hence $\neg\Diamond\neg
+  A$, which is $\Box A$. Actuality has no type parameters, so $\Box A$ is its only closed instance.'
 references:
 - paper: bacon-2024-book
   role: background
@@ -42,10 +40,17 @@ references:
   note: The recorded derivation of □Actuality from Atomicity and BF goes through the same step, that a
     world proposition entails Actuality, using Tractarianism to combine the case split; a strong atom
     has the combined form built in.
-notes: >-
-  The map already had □Actuality from Atomicity and BF (Proposition 2.7) and from □Plenitude and □Rigid
-  Comprehension. This record is stronger in one direction: only the type-$t$ instance of Strong
+notes: 'The map already had □Actuality from Atomicity and BF (Proposition 2.7) and from □Plenitude and
+  □Rigid Comprehension. This record is stronger in one direction: only the type-$t$ instance of Strong
   Atomicity is used, so with the recorded derivation of that instance from Atomicity (type
   $t$) and BF (type $t$), □Actuality now follows from those two type-$t$ principles without BF at other
-  types. Every model in the map that satisfies Strong Atomicity already satisfied
-  □Actuality, so no recorded verdict changes.
+  types. Every model in the map that satisfies Strong Atomicity already satisfied □Actuality,
+  so no recorded verdict changes.
+
+
+  Strengthened by [[self-atomicity-t-implies-necessary-actuality]]: Self-Atomicity (type t), which Strong Atomicity (type t) implies, suffices.'
+changes:
+- date: '2026-10-25'
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  minor: true
+  summary: Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.

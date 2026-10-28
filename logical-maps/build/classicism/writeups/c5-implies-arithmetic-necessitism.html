@@ -322,31 +322,88 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>C5 implies Arithmetic Necessitism</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; written out for the map by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026.</p>
-<p><strong>Theorem.</strong> In C, □ND (at every type) implies Arithmetic Necessitism at every type <span class="math inline">\sigma</span>, including <span class="math inline">e</span>:</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>C5 implies Arithmetic Necessitism</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October
+2026; written out for the map by Claude Opus 5.5 (Anthropic), prompted
+by Cian Dorr, 24 October 2026.</p>
+<p><strong>Theorem.</strong> In C, □ND (at every type) implies
+Arithmetic Necessitism at every type <span
+class="math inline">\sigma</span>, including <span
+class="math inline">e</span>:</p>
 <p><span class="math display">
-\operatorname{Rigid}(\mathbb N_\sigma)\land\forall m\,n\in\mathbb N_\sigma\, .\,m\ne n\to\Box\,m\ne n .
+\operatorname{Rigid}(\mathbb N_\sigma)\land\forall m\,n\in\mathbb
+N_\sigma\, .\,m\ne n\to\Box\,m\ne n .
 </span></p>
-<p>The antecedent <span class="math inline">\Box I^*_\sigma</span> of the principle is not needed. Write <span class="math inline">\mathbb N</span> for <span class="math inline">\mathbb N_\sigma</span>, <span class="math inline">\mathbf 0</span> for <span class="math inline">\mathbf 0_\sigma</span> and <span class="math inline">\operatorname{Suc}</span> for <span class="math inline">\operatorname{Suc}_\sigma</span> (Background).</p>
-<p><strong>Facts used.</strong> ND at <span class="math inline">t</span> implies 5 and hence B, <span class="math inline">\forall p\, .\,p\to\Box\Diamond p</span> (<em>Classicism</em>, Proposition 2.2), and □ND implies BF at every type (<em>Classicism</em>, Proposition 2.3). Both conclusions are necessary, since □ND is.</p>
-<h2 id="step-1-mathbb-n-is-persistent">Step 1: <span class="math inline">\mathbb N</span> is persistent</h2>
-<p><span class="math inline">\mathbb N\mathbf 0</span> is a theorem of C, so <span class="math inline">\Box\mathbb N\mathbf 0</span>. And <span class="math inline">\forall n\, .\,\mathbb Nn\to\mathbb N(\operatorname{Suc}n)</span> is a theorem of C, so <span class="math inline">\forall n\, .\,\Box\mathbb Nn\to\Box\mathbb N(\operatorname{Suc}n)</span>. So <span class="math inline">\lambda n\, .\,\Box\mathbb Nn</span> holds of <span class="math inline">\mathbf 0</span> and is closed under successor, and since <span class="math inline">\mathbb N</span> is the least such property (the definition of <span class="math inline">\operatorname{FiniteCardinality}</span>),</p>
+<p>The antecedent <span class="math inline">\Box I^*_\sigma</span> of
+the principle is not needed. Write <span class="math inline">\mathbb
+N</span> for <span class="math inline">\mathbb N_\sigma</span>, <span
+class="math inline">\mathbf 0</span> for <span
+class="math inline">\mathbf 0_\sigma</span> and <span
+class="math inline">\operatorname{Suc}</span> for <span
+class="math inline">\operatorname{Suc}_\sigma</span> (Background).</p>
+<p><strong>Facts used.</strong> ND at <span class="math inline">t</span>
+implies 5 and hence B, <span class="math inline">\forall p\,
+.\,p\to\Box\Diamond p</span> (<em>Classicism</em>, Proposition 2.2), and
+□ND implies BF at every type (<em>Classicism</em>, Proposition 2.3).
+Both conclusions are necessary, since □ND is.</p>
+<h2 id="step-1-mathbb-n-is-persistent">Step 1: <span
+class="math inline">\mathbb N</span> is persistent</h2>
+<p><span class="math inline">\mathbb N\mathbf 0</span> is a theorem of
+C, so <span class="math inline">\Box\mathbb N\mathbf 0</span>. And <span
+class="math inline">\forall n\, .\,\mathbb Nn\to\mathbb
+N(\operatorname{Suc}n)</span> is a theorem of C, so <span
+class="math inline">\forall n\, .\,\Box\mathbb Nn\to\Box\mathbb
+N(\operatorname{Suc}n)</span>. So <span class="math inline">\lambda n\,
+.\,\Box\mathbb Nn</span> holds of <span class="math inline">\mathbf
+0</span> and is closed under successor, and since <span
+class="math inline">\mathbb N</span> is the least such property (the
+definition of <span
+class="math inline">\operatorname{FiniteCardinality}</span>),</p>
 <p><span class="math display">
 \forall n\, .\,\mathbb Nn\to\Box\mathbb Nn .
 </span></p>
-<p>This is a theorem of C, so it is necessary: <span class="math inline">\mathbb N</span> is persistent.</p>
-<h2 id="step-2-mathbb-n-is-inextensible">Step 2: <span class="math inline">\mathbb N</span> is inextensible</h2>
-<p>By B and persistence, a non-number is necessarily a non-number: <span class="math inline">\neg\mathbb Nn\to\Box\neg\mathbb Nn</span>. For if <span class="math inline">\Diamond\mathbb Nn</span> then <span class="math inline">\Diamond\Box\mathbb Nn</span>, and B gives <span class="math inline">\mathbb Nn</span>.</p>
-<p>Now suppose <span class="math inline">\forall n\, .\,\mathbb Nn\to\Box Xn</span>. Then</p>
+<p>This is a theorem of C, so it is necessary: <span
+class="math inline">\mathbb N</span> is persistent.</p>
+<h2 id="step-2-mathbb-n-is-inextensible">Step 2: <span
+class="math inline">\mathbb N</span> is inextensible</h2>
+<p>By B and persistence, a non-number is necessarily a non-number: <span
+class="math inline">\neg\mathbb Nn\to\Box\neg\mathbb Nn</span>. For if
+<span class="math inline">\Diamond\mathbb Nn</span> then <span
+class="math inline">\Diamond\Box\mathbb Nn</span>, and B gives <span
+class="math inline">\mathbb Nn</span>.</p>
+<p>Now suppose <span class="math inline">\forall n\, .\,\mathbb
+Nn\to\Box Xn</span>. Then</p>
 <p><span class="math display">
 \forall n\, .\,\Box(\mathbb Nn\to Xn),
 </span></p>
-<p>from <span class="math inline">\Box Xn</span> if <span class="math inline">\mathbb Nn</span>, and from <span class="math inline">\Box\neg\mathbb Nn</span> otherwise. BF gives <span class="math inline">\Box\forall n\, .\,\mathbb Nn\to Xn</span>, that is, <span class="math inline">\mathbb N\le X</span>. So <span class="math inline">\mathbb N</span> is weakly inextensible. The argument uses only B, BF and Step 1, which hold necessarily, so it can be carried out at every world: <span class="math inline">\mathbb N</span> is inextensible, and with Step 1, rigid.</p>
-<h2 id="step-3-necessary-distinctness">Step 3: necessary distinctness</h2>
-<p>ND at the type <span class="math inline">(\sigma t)t</span> of cardinalities gives <span class="math inline">m\ne n\to\Box\,m\ne n</span> for all <span class="math inline">m,n</span>, in particular for numbers. <span class="math inline">\square</span></p>
-<p>Rigid Comprehension is not used. The recorded proof from □Rigid Comprehension (<a href="necessary-rigid-comprehension-implies-arithmetic-necessitism.html">□Rigid Comprehension implies Arithmetic Necessitism</a>, Barton and Goodsell’s Theorem 3) needs no ND.</p>
+<p>from <span class="math inline">\Box Xn</span> if <span
+class="math inline">\mathbb Nn</span>, and from <span
+class="math inline">\Box\neg\mathbb Nn</span> otherwise. BF gives <span
+class="math inline">\Box\forall n\, .\,\mathbb Nn\to Xn</span>, that is,
+<span class="math inline">\mathbb N\le X</span>. So <span
+class="math inline">\mathbb N</span> is weakly inextensible. The
+argument uses only B, BF and Step 1, which hold necessarily, so it can
+be carried out at every world: <span class="math inline">\mathbb
+N</span> is inextensible, and with Step 1, rigid.</p>
+<h2 id="step-3-necessary-distinctness">Step 3: necessary
+distinctness</h2>
+<p>ND at the type <span class="math inline">(\sigma t)t</span> of
+cardinalities gives <span class="math inline">m\ne n\to\Box\,m\ne
+n</span> for all <span class="math inline">m,n</span>, in particular for
+numbers. <span class="math inline">\square</span></p>
+<p>Rigid Comprehension is not used. The recorded proof from □Rigid
+Comprehension (<a
+href="necessary-rigid-comprehension-implies-arithmetic-necessitism.html">□Rigid
+Comprehension implies Arithmetic Necessitism</a>, Barton and Goodsell’s
+Theorem 3) needs no ND.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Propositions 2.2 and 2.3, p. 22. ND at <span class="math inline">t</span> gives B; □ND gives BF.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Propositions 2.2 and 2.3, p. 22. ND at <span
+class="math inline">t</span> gives B; □ND gives BF.</li>
 </ul>
 </body></html>

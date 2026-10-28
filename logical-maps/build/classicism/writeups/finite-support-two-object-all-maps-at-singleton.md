@@ -4,6 +4,8 @@
 
 ## Package
 
+- **Strong Actuality.** There is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Atomicity.** Every non-bottom entity of each relational type has an atom below it.
 - **Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
 - **Actuality.** There is a true proposition that entails every true proposition.
@@ -15,6 +17,7 @@
 - **□Transversal Choice.** Necessarily, every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **¬ □Strong Actuality.** Necessarily, there is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 - **¬ □Atomicity (type t).** Necessarily, every non-bottom proposition has an atom below it.
 - **¬ □Boolean Completeness (type t).** Necessarily, every property of propositions has a greatest lower bound.
 - **¬ No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
@@ -37,6 +40,12 @@ Interpretation of Σ, fixed for this record: every constant of Σ is relational,
 *A member of the group Finitely pinned action models on two objects, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds Strong Actuality, □Self-atoms are strong atoms. Fails □Strong Actuality.
+
+At $W_1$ the true atom is $\{1_{W_1}\}$, which under $c_n$ becomes $\{!\}$, a set of one arrow, so it is a strong atom and Strong Actuality holds. It fails at $W_0$, which $c_n$ reaches, since Actuality fails there; so □Strong Actuality fails. The self-atoms are $\{1_{W_1}\}$ at $W_1$ and $\{!\}$ at $W_0$, both strong atoms, and at relational types they carry one tuple (the argument of finite-support-two-object-all-maps); so Self-atoms are strong atoms holds at both objects, at every type.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Atomicity, Boolean Completeness, Actuality.
 

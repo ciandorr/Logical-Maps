@@ -323,30 +323,68 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality ∧ Atomlessness ⇒ ⊥</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.actuality_incompatible_with_atomlessness</code>; produced by Claude Fable 5.1 (Anthropic), 19 September 2026, at the suggestion of Cian Dorr; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 19 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.actuality_incompatible_with_atomlessness</code>;
+produced by Claude Fable 5.1 (Anthropic), 19 September 2026, at the
+suggestion of Cian Dorr; recorded by Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 19 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
-<li><strong>Atomlessness.</strong> Atomlessness in the displayed closed propositional formulation.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
+<li><strong>Atomlessness.</strong> Atomlessness in the displayed closed
+propositional formulation.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
 <li><strong>⊥.</strong> These premises cannot all hold together.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">a</span> be a strongest truth, as Actuality supplies. Since <span class="math inline">a</span> is true, <span class="math inline">a\ne\bot</span>, so <span class="math inline">\Diamond a</span>. Atomlessness then gives <span class="math inline">q</span> with <span class="math inline">\Diamond q</span>, <span class="math inline">q\le a</span> and <span class="math inline">q\ne a</span>. If <span class="math inline">q</span> were true, Actuality would give <span class="math inline">a\le q</span>, and with <span class="math inline">q\le a</span> antisymmetry gives <span class="math inline">q=a</span>, contrary to <span class="math inline">q\ne a</span>. So <span class="math inline">q</span> is false, and <span class="math inline">a\land\neg q</span> is true, whence <span class="math inline">a\le a\land\neg q\le\neg q</span>. Combined with <span class="math inline">q\le a</span> this gives <span class="math inline">q\le\neg q</span>, so <span class="math inline">q=q\land\neg q=\bot</span>, contradicting <span class="math inline">\Diamond q</span>. In short, a strongest truth is an atom.</p>
+<p>Let <span class="math inline">a</span> be a strongest truth, as
+Actuality supplies. Since <span class="math inline">a</span> is true,
+<span class="math inline">a\ne\bot</span>, so <span
+class="math inline">\Diamond a</span>. Atomlessness then gives <span
+class="math inline">q</span> with <span class="math inline">\Diamond
+q</span>, <span class="math inline">q\le a</span> and <span
+class="math inline">q\ne a</span>. If <span class="math inline">q</span>
+were true, Actuality would give <span class="math inline">a\le q</span>,
+and with <span class="math inline">q\le a</span> antisymmetry gives
+<span class="math inline">q=a</span>, contrary to <span
+class="math inline">q\ne a</span>. So <span class="math inline">q</span>
+is false, and <span class="math inline">a\land\neg q</span> is true,
+whence <span class="math inline">a\le a\land\neg q\le\neg q</span>.
+Combined with <span class="math inline">q\le a</span> this gives <span
+class="math inline">q\le\neg q</span>, so <span
+class="math inline">q=q\land\neg q=\bot</span>, contradicting <span
+class="math inline">\Diamond q</span>. In short, a strongest truth is an
+atom.</p>
 <h2 id="notes">Notes</h2>
-<p>This explains why Atomlessness holds only in Parts 1–3 of Proposition D.5, since Parts 4, 5, 7 and 8 satisfy Actuality and Parts 6–8 satisfy Atomicity. The restriction of Atomlessness to false propositions, which the draft notes holds in Part 4, is not a principle of the map.</p>
+<p>This explains why Atomlessness holds only in Parts 1–3 of Proposition
+D.5, since Parts 4, 5, 7 and 8 satisfy Actuality and Parts 6–8 satisfy
+Atomicity. The restriction of Atomlessness to false propositions, which
+the draft notes holds in Part 4, is not a principle of the map.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.2, p. 25; Appendix D, p. 78 (Part 4).</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §2.2, p. 25; Appendix D, p. 78 (Part
+4).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/actuality-incompatible-with-atomlessness.yaml</code>
+Record:
+<code>topics/classicism/results/actuality-incompatible-with-atomlessness.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.2, p. 25; Appendix D, p. 78. The draft does not state the incompatibility, but its discussion of the Part 4 model observes that only the restriction of Atomlessness to false propositions can hold once the strongest truth is available.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.2,
+p. 25; Appendix D, p. 78. The draft does not state the incompatibility,
+but its discussion of the Part 4 model observes that only the
+restriction of Atomlessness to false propositions can hold once the
+strongest truth is available.</li>
 </ul>
 </body></html>

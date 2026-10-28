@@ -24,6 +24,10 @@
 - **¬ □Weakly Inextensible Comprehension.** Necessarily, every relation, including a proposition, is coextensive with a weakly inextensible one.
 - **¬ □Transversal.** Necessarily, there is a property of properties that picks out exactly one property from each coextension class, that is, exactly one property coextensive with any given property.
 - **¬ Necessity of Analysis.** Every first-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each first-order analytical sentence.
+- **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
+- **¬ Self-atoms are strong atoms (type t).** Every self-atom is a strong atom.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
+- **¬ Atoms are self-atoms (type t).** Every atom is a self-atom: necessarily, if it is true, it is an atom.
 
 ## Definition
 
@@ -147,6 +151,18 @@ Vacuously, at every type $\sigma$. The negation of $I^*_\sigma$, that zero is a 
 The negation of an instance of the Necessity of Analysis is a closed pure sentence consistent with C: at the root of coalesced-two-extensional-arithmetics-root, with $\sigma$ and $A$ as in that model's argument, both $\Diamond\exists\mathfrak R\,.\,(\operatorname{Real}_\sigma(\mathfrak R)\land A(\mathfrak R))$ and $\Diamond\exists\mathfrak R\,.\,(\operatorname{Real}_\sigma(\mathfrak R)\land\neg A(\mathfrak R))$ hold. So it is possible at the root (pure-sentences-possible), and since arrows compose, what is possibly possible is possible: both conjuncts hold at the root, and the instance fails.
 
 *From the group *Coalesced sums at a new root*, shared argument `coalesced-sums#necessity-of-analysis-complete-components`. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
+
+### Fails Self-atoms are atoms (type t), Self-atoms are strong atoms (type t).
+
+Let $N$ and $M$ be two components whose roots satisfy Actuality, with true atoms $a_N$ and $a_M$, and let $P$ be the root proposition false at the root, with component $a_N$ at $N$, $a_M$ at $M$ and bottom elsewhere. $P$ is possible, and it is a self-atom: under the distinguished arrow into $N$ it becomes $a_N$, and a true atom is a self-atom, as it entails every truth, including the truth that it entails every truth; likewise at $M$; and at the root it is false. It is not an atom, since the root proposition with component $a_N$ alone lies strictly below it. So Self-atoms are atoms (type t) fails at the root, and with it Self-atoms are strong atoms (type t).
+
+*From the group *Coalesced sums at a new root*, shared argument `coalesced-sums#self-atom-of-two-actual-components`. It requires that At least two components are action models whose roots satisfy Actuality, and the root domain contains every family of component propositions with a truth value at the root (the fullest root domains). Here: The components are complete for C, so two of them satisfy Actuality; the root domains are the fullest. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
+### Fails Self-Atomicity (type t), Atoms are self-atoms (type t).
+
+Atoms are self-atoms (type t) fails in a model of C, the full idempotent monoid, where the atom $\{k\}$ becomes $\{1,k\}$ under $k$; so some component $N$ refutes it at its root with an atom $q$. The root proposition with component $q$ at $N$ and bottom elsewhere, false at the root, is an atom at the root, is possible, and under the distinguished arrow into $N$ becomes $q$, which is true at a world of $N$ without being an atom there. So it is an atom that is not a self-atom, and as nothing possible lies below it but itself, Self-Atomicity (type t) fails at the root too.
+
+*From the group *Coalesced sums at a new root*, shared argument `coalesced-sums#self-atomicity-component`. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. It requires that Every arrow from the root into a component factors through a single distinguished arrow to that component's root. Here: This is the construction. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Truth implies ND-necessity.
 

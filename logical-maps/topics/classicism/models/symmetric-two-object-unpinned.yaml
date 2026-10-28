@@ -61,6 +61,35 @@ meets:
     of the first object.'
 arguments:
 - holds:
+  - atoms-are-self-atoms-r
+  - atoms-are-strong-atoms-r
+  - necessary-self-atoms-are-atoms-r
+  - self-atoms-are-strong-atoms-r
+  fails:
+  - necessary-atoms-are-self-atoms-t
+  - necessary-atoms-are-strong-atoms-t
+  - necessary-self-atoms-are-strong-atoms-t
+  - self-atomicity-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'At $W_0$ the orbit $G$ of the identity, all permutations, is pinned down by $\varnothing$ and
+    is the only atom, the symmetric propositions over the arrows into $W_1$ refining by kernels; it is
+    a self-atom and a strong atom, its transport along an arrow into $W_1$ being empty. So Atoms are
+    self-atoms and Atoms are strong atoms hold at $W_0$, at every type, atoms of relational types sitting
+    over $G$ as orbits of one pair. At $W_1$, where every symmetric intension is in the domain, the atoms
+    are the orbits of single arrows, and the orbit of a non-injective or non-surjective $k$ is not a self-atom:
+    some non-permutation $m$ has $m\circ k=k$ or $m\circ k$ in the orbit, as $m$ may act freely off the
+    range of $k$. So the boxed forms of both fail at $W_0$. No self-atom at $W_0$ contains an arrow $f$
+    into $W_1$: the transport along $f$ would be the orbit of $1_{W_1}$, but a non-permutation fixing
+    $f(N)$ pointwise, for $N$ pinning the self-atom, carries $f$ to an arrow agreeing with it on $N$.
+    So the self-atoms at $W_0$ are $G$ and its relational counterparts, atoms and strong atoms; at $W_1$
+    the only self-atoms are the orbits of permutations, by the same reasoning, which are atoms; so Self-atoms
+    are atoms holds at both objects. But the orbit of $1_{W_1}$ is not a strong atom there (the recorded
+    failure of Strong Actuality at $W_1$), so Self-atoms are strong atoms (type t) fails at $W_1$ and
+    its boxed form fails at $W_0$. Self-Atomicity (type t) fails at $W_0$: the proposition of the arrows
+    into $W_1$ is pinned down by $\varnothing$, possible, and has no self-atom below it.'
+- holds:
   - necessary-actuality
   text: 'At both objects, and hence necessarily: at each, the orbit of the identity under the symmetry
     group is the smallest symmetric set of arrows containing it, and it is in the domain, at the first

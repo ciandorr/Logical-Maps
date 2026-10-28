@@ -1,6 +1,6 @@
 id: necessary-strong-atomicity-t
 name: □Strong Atomicity (type t)
-category: lattice
+category: more-boolean-structure
 statement: "Necessarily, every possible proposition is entailed by a strong atom, one that is possible and necessarily entails every proposition or its negation."
 formal: $\Box\forall p\, .\,\Diamond p\to\exists w\, .\,\operatorname{SAtom}_t(w)\land w\le p$
 definitions: 'where $\operatorname{SAtom}_t(w):=\Diamond w\land\Box\forall q\, .\,w\le q\lor w\le\neg
@@ -29,7 +29,7 @@ changes:
     equivalent forms); the notes now name the base principle with a link, without the boilerplate about
     closed instances and the box; the equivalent forms are stated as necessitations of the base forms;
     the notes link to the unrestricted form; definitions of its technical terms added.'
-- date: '2026-10-27'
+- date: '2026-10-28'
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
   summary: 'At Cian Dorr’s request: renamed from the Strong Leibniz Biconditionals to Strong Atomicity,
     and strong worlds to strong atoms; Bacon’s name kept as an alias.'

@@ -322,17 +322,37 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric ideally-full model: old and new individuals</h1></header><p>This model was found by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr on 6 October 2026, in a session with Cian Dorr, as a countermodel to a principle from another context. It satisfies □Strong Actuality and refutes Inextensible Comprehension. Claude Opus 5.5 (Anthropic) added the remaining verdicts the same day, and corrected the argument for the failure of Inextensible Comprehension. No Lean verification is claimed.</p>
-<p>The verdicts that matter most for the map are these. Atomicity holds at every type, and so does ND, while Inextensible Comprehension fails. So Atomicity + Actuality, with ND and □Strong Actuality added, does not imply Inextensible Comprehension.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric ideally-full model: old and new individuals</h1></header><p>This model was found by Claude Fable 5.1 (Anthropic), prompted by
+Cian Dorr on 6 October 2026, in a session with Cian Dorr, as a
+countermodel to a principle from another context. It satisfies □Strong
+Actuality and refutes Inextensible Comprehension. Claude Opus 5.5
+(Anthropic) added the remaining verdicts the same day, and corrected the
+argument for the failure of Inextensible Comprehension. No Lean
+verification is claimed.</p>
+<p>The verdicts that matter most for the map are these. Atomicity holds
+at every type, and so does ND, while Inextensible Comprehension fails.
+So Atomicity + Actuality, with ND and □Strong Actuality added, does not
+imply Inextensible Comprehension.</p>
 <h2 id="the-model">The model</h2>
-<p>It is a symmetric ideally-full intensional action model in the sense of Dorr’s draft <em>Boolean Completeness does not imply Rigid Comprehension</em> (Definitions 15–18, p. 8). By that draft’s Proposition 20 it is a model of C.</p>
+<p>It is a symmetric ideally-full intensional action model in the sense
+of Dorr’s draft <em>Boolean Completeness does not imply Rigid
+Comprehension</em> (Definitions 15–18, p. 8). By that draft’s
+Proposition 20 it is a model of C.</p>
 <p>There are two objects:</p>
 <ul>
-<li><span class="math inline">E</span>, whose individuals are <span class="math inline">\mathbb N</span>;</li>
-<li><span class="math inline">O</span>, whose individuals are <span class="math inline">\mathbb N\sqcup\mathbb N&#39;</span>, where <span class="math inline">\mathbb N&#39;</span> is a disjoint copy of <span class="math inline">\mathbb N</span>.</li>
+<li><span class="math inline">E</span>, whose individuals are <span
+class="math inline">\mathbb N</span>;</li>
+<li><span class="math inline">O</span>, whose individuals are <span
+class="math inline">\mathbb N\sqcup\mathbb N&#39;</span>, where <span
+class="math inline">\mathbb N&#39;</span> is a disjoint copy of <span
+class="math inline">\mathbb N</span>.</li>
 </ul>
-<p>At <span class="math inline">O</span>, members of <span class="math inline">\mathbb N</span> are called <em>old</em> and members of <span class="math inline">\mathbb N&#39;</span> are called <em>new</em>.</p>
-<p>The arrows are functions, and the action on individuals is the identity action.</p>
+<p>At <span class="math inline">O</span>, members of <span
+class="math inline">\mathbb N</span> are called <em>old</em> and members
+of <span class="math inline">\mathbb N&#39;</span> are called
+<em>new</em>.</p>
+<p>The arrows are functions, and the action on individuals is the
+identity action.</p>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -350,7 +370,8 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <tr>
 <td><span class="math inline">E</span></td>
 <td><span class="math inline">E</span></td>
-<td>all injections <span class="math inline">\mathbb N\to\mathbb N</span></td>
+<td>all injections <span class="math inline">\mathbb N\to\mathbb
+N</span></td>
 </tr>
 <tr>
 <td><span class="math inline">E</span></td>
@@ -360,209 +381,800 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <tr>
 <td><span class="math inline">O</span></td>
 <td><span class="math inline">E</span></td>
-<td>all injections <span class="math inline">\mathbb N\sqcup\mathbb N&#39;\to\mathbb N</span></td>
+<td>all injections <span class="math inline">\mathbb N\sqcup\mathbb
+N&#39;\to\mathbb N</span></td>
 </tr>
 <tr>
 <td><span class="math inline">O</span></td>
 <td><span class="math inline">O</span></td>
-<td><span class="math inline">G_O</span>, the permutations preserving old and new; and <span class="math inline">K</span>, the injections with range among the old</td>
+<td><span class="math inline">G_O</span>, the permutations preserving
+old and new; and <span class="math inline">K</span>, the injections with
+range among the old</td>
 </tr>
 </tbody>
 </table>
-<p>These arrows are closed under composition. A composite that passes through <span class="math inline">E</span> and ends at <span class="math inline">O</span> lands among the old individuals, and so does any composite with a member of <span class="math inline">K</span>.</p>
-<p>The symmetry groups are <span class="math inline">G_E=\mathrm{Sym}(\mathbb N)</span> and <span class="math inline">G_O</span>. Both objects carry the ideal of finite sets.</p>
-<p>An intension <span class="math inline">D</span> at an object <span class="math inline">W</span> is a set of tuples <span class="math inline">\langle\bar a,h\rangle</span>, where <span class="math inline">h</span> is an arrow out of <span class="math inline">W</span> and <span class="math inline">\bar a</span> are entities at the target of <span class="math inline">h</span>. The domain at <span class="math inline">W</span> consists of the intensions that satisfy two conditions:</p>
+<p>These arrows are closed under composition. A composite that passes
+through <span class="math inline">E</span> and ends at <span
+class="math inline">O</span> lands among the old individuals, and so
+does any composite with a member of <span
+class="math inline">K</span>.</p>
+<p>The symmetry groups are <span
+class="math inline">G_E=\mathrm{Sym}(\mathbb N)</span> and <span
+class="math inline">G_O</span>. Both objects carry the ideal of finite
+sets.</p>
+<p>An intension <span class="math inline">D</span> at an object <span
+class="math inline">W</span> is a set of tuples <span
+class="math inline">\langle\bar a,h\rangle</span>, where <span
+class="math inline">h</span> is an arrow out of <span
+class="math inline">W</span> and <span class="math inline">\bar a</span>
+are entities at the target of <span class="math inline">h</span>. The
+domain at <span class="math inline">W</span> consists of the intensions
+that satisfy two conditions:</p>
 <ul>
-<li><strong>Symmetric.</strong> If <span class="math inline">\langle\bar a,h\rangle\in D</span>, then <span class="math inline">\langle g\cdot\bar a,g\circ h\rangle\in D</span> for every <span class="math inline">g</span> in the symmetry group of <span class="math inline">h</span>’s target. Here <span class="math inline">g</span> acts on entities by transport.</li>
-<li><strong>Finitely pinned.</strong> For some finite <span class="math inline">N\subseteq W^e</span>, whenever two arrows <span class="math inline">h,h&#39;</span> with a common target agree on <span class="math inline">N</span>, we have <span class="math inline">\langle\bar a,h\rangle\in D\iff\langle\bar a,h&#39;\rangle\in D</span>. This is Definition D.2.</li>
+<li><strong>Symmetric.</strong> If <span class="math inline">\langle\bar
+a,h\rangle\in D</span>, then <span class="math inline">\langle
+g\cdot\bar a,g\circ h\rangle\in D</span> for every <span
+class="math inline">g</span> in the symmetry group of <span
+class="math inline">h</span>’s target. Here <span
+class="math inline">g</span> acts on entities by transport.</li>
+<li><strong>Finitely pinned.</strong> For some finite <span
+class="math inline">N\subseteq W^e</span>, whenever two arrows <span
+class="math inline">h,h&#39;</span> with a common target agree on <span
+class="math inline">N</span>, we have <span
+class="math inline">\langle\bar a,h\rangle\in D\iff\langle\bar
+a,h&#39;\rangle\in D</span>. This is Definition D.2.</li>
 </ul>
-<p>The evaluation point is <span class="math inline">1_E</span>. Call an arrow out of <span class="math inline">E</span> with target <span class="math inline">O</span> “an arrow to <span class="math inline">O</span>”, and so on.</p>
-<p><strong>Single classes.</strong> Two facts drive most of what follows:</p>
+<p>The evaluation point is <span class="math inline">1_E</span>. Call an
+arrow out of <span class="math inline">E</span> with target <span
+class="math inline">O</span> “an arrow to <span
+class="math inline">O</span>”, and so on.</p>
+<p><strong>Single classes.</strong> Two facts drive most of what
+follows:</p>
 <ul>
-<li>Any finite partial injection of <span class="math inline">\mathbb N</span> extends to a member of <span class="math inline">G_E</span>.</li>
-<li>Any finite partial injection of <span class="math inline">\mathbb N\sqcup\mathbb N&#39;</span> that preserves old and new extends to a member of <span class="math inline">G_O</span>.</li>
+<li>Any finite partial injection of <span class="math inline">\mathbb
+N</span> extends to a member of <span
+class="math inline">G_E</span>.</li>
+<li>Any finite partial injection of <span class="math inline">\mathbb
+N\sqcup\mathbb N&#39;</span> that preserves old and new extends to a
+member of <span class="math inline">G_O</span>.</li>
 </ul>
-<p>Let <span class="math inline">D</span> be a symmetric proposition pinned down by <span class="math inline">N</span> that contains an arrow <span class="math inline">h</span>. Then <span class="math inline">D</span> contains every arrow <span class="math inline">h&#39;</span> of the same kind. To see this, choose a symmetry <span class="math inline">g</span> with <span class="math inline">g(h(n))=h&#39;(n)</span> for <span class="math inline">n\in N</span>. Then <span class="math inline">g\circ h\in D</span>, and <span class="math inline">g\circ h</span> agrees with <span class="math inline">h&#39;</span> on <span class="math inline">N</span>.</p>
+<p>Let <span class="math inline">D</span> be a symmetric proposition
+pinned down by <span class="math inline">N</span> that contains an arrow
+<span class="math inline">h</span>. Then <span
+class="math inline">D</span> contains every arrow <span
+class="math inline">h&#39;</span> of the same kind. To see this, choose
+a symmetry <span class="math inline">g</span> with <span
+class="math inline">g(h(n))=h&#39;(n)</span> for <span
+class="math inline">n\in N</span>. Then <span class="math inline">g\circ
+h\in D</span>, and <span class="math inline">g\circ h</span> agrees with
+<span class="math inline">h&#39;</span> on <span
+class="math inline">N</span>.</p>
 <p>Here “kind” means one of the following:</p>
 <ul>
 <li>into <span class="math inline">E</span>;</li>
-<li>from <span class="math inline">E</span> into <span class="math inline">O</span>;</li>
+<li>from <span class="math inline">E</span> into <span
+class="math inline">O</span>;</li>
 <li>in <span class="math inline">G_O</span>;</li>
 <li>in <span class="math inline">K</span>.</li>
 </ul>
-<p>Arrows of different kinds differ in target. The one exception is <span class="math inline">G_O</span> versus <span class="math inline">K</span>, which are separated by the proposition “the arrow sends <span class="math inline">0&#39;</span> to a new individual”, pinned down by <span class="math inline">\{0&#39;\}</span>.</p>
+<p>Arrows of different kinds differ in target. The one exception is
+<span class="math inline">G_O</span> versus <span
+class="math inline">K</span>, which are separated by the proposition
+“the arrow sends <span class="math inline">0&#39;</span> to a new
+individual”, pinned down by <span
+class="math inline">\{0&#39;\}</span>.</p>
 <p>So the propositions are as follows:</p>
 <ul>
-<li><strong>At <span class="math inline">E</span>:</strong> the four unions of <span class="math inline">\mathrm{Hom}(E,E)</span> and <span class="math inline">\mathrm{Hom}(E,O)</span>.</li>
-<li><strong>At <span class="math inline">O</span>:</strong> the eight unions of <span class="math inline">\mathrm{Hom}(O,E)</span>, <span class="math inline">G_O</span> and <span class="math inline">K</span>.</li>
+<li><strong>At <span class="math inline">E</span>:</strong> the four
+unions of <span class="math inline">\mathrm{Hom}(E,E)</span> and <span
+class="math inline">\mathrm{Hom}(E,O)</span>.</li>
+<li><strong>At <span class="math inline">O</span>:</strong> the eight
+unions of <span class="math inline">\mathrm{Hom}(O,E)</span>, <span
+class="math inline">G_O</span> and <span
+class="math inline">K</span>.</li>
 </ul>
-<p>The model therefore meets the conditions finitely-many-propositions and finitely-many-propositions-everywhere.</p>
+<p>The model therefore meets the conditions finitely-many-propositions
+and finitely-many-propositions-everywhere.</p>
 <h2 id="strong-actuality-fable">□Strong Actuality (Fable)</h2>
-<p>Write <span class="math inline">f^*p:=\{k: k\circ f\in p\}</span> for the transport of a proposition <span class="math inline">p</span> along an arrow <span class="math inline">f</span>.</p>
-<p><strong>At <span class="math inline">E</span>.</strong> Let <span class="math inline">w_E:=\mathrm{Hom}(E,E)</span>. It is true at <span class="math inline">1_E</span>.</p>
+<p>Write <span class="math inline">f^*p:=\{k: k\circ f\in p\}</span> for
+the transport of a proposition <span class="math inline">p</span> along
+an arrow <span class="math inline">f</span>.</p>
+<p><strong>At <span class="math inline">E</span>.</strong> Let <span
+class="math inline">w_E:=\mathrm{Hom}(E,E)</span>. It is true at <span
+class="math inline">1_E</span>.</p>
 <ul>
-<li>Along an arrow <span class="math inline">f</span> to <span class="math inline">E</span>, <span class="math inline">f^*w_E=\mathrm{Hom}(E,E)</span>, since every arrow from <span class="math inline">E</span> to <span class="math inline">E</span> composed with <span class="math inline">f</span> is again an arrow from <span class="math inline">E</span> to <span class="math inline">E</span>.</li>
-<li>Along an arrow <span class="math inline">f</span> to <span class="math inline">O</span>, <span class="math inline">f^*w_E=\mathrm{Hom}(O,E)</span>.</li>
+<li>Along an arrow <span class="math inline">f</span> to <span
+class="math inline">E</span>, <span
+class="math inline">f^*w_E=\mathrm{Hom}(E,E)</span>, since every arrow
+from <span class="math inline">E</span> to <span
+class="math inline">E</span> composed with <span
+class="math inline">f</span> is again an arrow from <span
+class="math inline">E</span> to <span class="math inline">E</span>.</li>
+<li>Along an arrow <span class="math inline">f</span> to <span
+class="math inline">O</span>, <span
+class="math inline">f^*w_E=\mathrm{Hom}(O,E)</span>.</li>
 </ul>
-<p>Both transports are atoms at their targets. So every proposition there contains or excludes each transport, and <span class="math inline">w_E</span> is a true strong world.</p>
-<p><strong>At <span class="math inline">O</span>.</strong> The proposition <span class="math inline">G_O</span> is true at <span class="math inline">1_O</span>.</p>
+<p>Both transports are atoms at their targets. So every proposition
+there contains or excludes each transport, and <span
+class="math inline">w_E</span> is a true strong atom.</p>
+<p><strong>At <span class="math inline">O</span>.</strong> The
+proposition <span class="math inline">G_O</span> is true at <span
+class="math inline">1_O</span>.</p>
 <ul>
-<li>Along a member of <span class="math inline">G_O</span>, its transport is <span class="math inline">G_O</span> again.</li>
-<li>Along a member of <span class="math inline">K</span>, its transport is empty: a composite with a member of <span class="math inline">K</span> misses every new individual, so it is not in <span class="math inline">G_O</span>.</li>
-<li>Along an arrow to <span class="math inline">E</span>, its transport is empty, since a composite of an arrow to <span class="math inline">E</span> with an arrow back to <span class="math inline">O</span> lands in <span class="math inline">K</span>.</li>
+<li>Along a member of <span class="math inline">G_O</span>, its
+transport is <span class="math inline">G_O</span> again.</li>
+<li>Along a member of <span class="math inline">K</span>, its transport
+is empty: a composite with a member of <span
+class="math inline">K</span> misses every new individual, so it is not
+in <span class="math inline">G_O</span>.</li>
+<li>Along an arrow to <span class="math inline">E</span>, its transport
+is empty, since a composite of an arrow to <span
+class="math inline">E</span> with an arrow back to <span
+class="math inline">O</span> lands in <span
+class="math inline">K</span>.</li>
 </ul>
-<p>So <span class="math inline">G_O</span> is a true strong world.</p>
-<p>Every world sees only <span class="math inline">E</span> and <span class="math inline">O</span>. Strong Actuality is a closed sentence, so its truth at an arrow depends only on the arrow’s target. Hence □Strong Actuality holds.</p>
-<p>The actual world at <span class="math inline">E</span> is <span class="math inline">\mathrm{Hom}(E,E)</span>, which properly contains <span class="math inline">\{1_E\}</span>, so the arrows from <span class="math inline">E</span> to <span class="math inline">E</span> that are not surjective are actual-world arrows. The singleton of the identity is not pinned, and neither is the symmetry group <span class="math inline">G_E</span> as a set of arrows. So the model does not meet the group’s condition symmetry-group-pinned. That condition’s argument is not needed here, since Actuality follows from Strong Actuality.</p>
-<h2 id="nd-at-every-type-at-e">ND at every type at <span class="math inline">E</span></h2>
-<p>Call an arrow <span class="math inline">f:E\to V</span> <em>finitely invertible</em> if it satisfies the following: for every arrow <span class="math inline">h:E\to U</span> and every finite <span class="math inline">N\subseteq\mathbb N</span>, there is an arrow <span class="math inline">k:V\to U</span> with <span class="math inline">k\circ f</span> agreeing with <span class="math inline">h</span> on <span class="math inline">N</span>.</p>
-<p>Every arrow out of <span class="math inline">E</span> is finitely invertible. In each case we define <span class="math inline">k</span> on <span class="math inline">f(N)</span> by <span class="math inline">k(f(n)):=h(n)</span> and extend it to an arrow of the right kind:</p>
+<p>So <span class="math inline">G_O</span> is a true strong atom.</p>
+<p>Every world sees only <span class="math inline">E</span> and <span
+class="math inline">O</span>. Strong Actuality is a closed sentence, so
+its truth at an arrow depends only on the arrow’s target. Hence □Strong
+Actuality holds.</p>
+<p>The actual world at <span class="math inline">E</span> is <span
+class="math inline">\mathrm{Hom}(E,E)</span>, which properly contains
+<span class="math inline">\{1_E\}</span>, so the arrows from <span
+class="math inline">E</span> to <span class="math inline">E</span> that
+are not surjective are actual-world arrows. The singleton of the
+identity is not pinned, and neither is the symmetry group <span
+class="math inline">G_E</span> as a set of arrows. So the model does not
+meet the group’s condition symmetry-group-pinned. That condition’s
+argument is not needed here, since Actuality follows from Strong
+Actuality.</p>
+<h2 id="nd-at-every-type-at-e">ND at every type at <span
+class="math inline">E</span></h2>
+<p>Call an arrow <span class="math inline">f:E\to V</span> <em>finitely
+invertible</em> if it satisfies the following: for every arrow <span
+class="math inline">h:E\to U</span> and every finite <span
+class="math inline">N\subseteq\mathbb N</span>, there is an arrow <span
+class="math inline">k:V\to U</span> with <span
+class="math inline">k\circ f</span> agreeing with <span
+class="math inline">h</span> on <span class="math inline">N</span>.</p>
+<p>Every arrow out of <span class="math inline">E</span> is finitely
+invertible. In each case we define <span class="math inline">k</span> on
+<span class="math inline">f(N)</span> by <span
+class="math inline">k(f(n)):=h(n)</span> and extend it to an arrow of
+the right kind:</p>
 <ul>
-<li>If <span class="math inline">f</span> and <span class="math inline">h</span> both go to <span class="math inline">E</span>, extend to an injection.</li>
-<li>If <span class="math inline">f</span> goes to <span class="math inline">E</span> and <span class="math inline">h</span> to <span class="math inline">O</span>, extend to an injection into the old individuals; this works because <span class="math inline">h(N)</span> is old.</li>
-<li>If <span class="math inline">f</span> goes to <span class="math inline">O</span> and <span class="math inline">h</span> to <span class="math inline">E</span>, extend to an injection <span class="math inline">O^e\to\mathbb N</span>.</li>
-<li>If <span class="math inline">f</span> and <span class="math inline">h</span> both go to <span class="math inline">O</span>, extend to a member of <span class="math inline">K</span>. Both <span class="math inline">f(N)</span> and <span class="math inline">h(N)</span> are old.</li>
+<li>If <span class="math inline">f</span> and <span
+class="math inline">h</span> both go to <span
+class="math inline">E</span>, extend to an injection.</li>
+<li>If <span class="math inline">f</span> goes to <span
+class="math inline">E</span> and <span class="math inline">h</span> to
+<span class="math inline">O</span>, extend to an injection into the old
+individuals; this works because <span class="math inline">h(N)</span> is
+old.</li>
+<li>If <span class="math inline">f</span> goes to <span
+class="math inline">O</span> and <span class="math inline">h</span> to
+<span class="math inline">E</span>, extend to an injection <span
+class="math inline">O^e\to\mathbb N</span>.</li>
+<li>If <span class="math inline">f</span> and <span
+class="math inline">h</span> both go to <span
+class="math inline">O</span>, extend to a member of <span
+class="math inline">K</span>. Both <span class="math inline">f(N)</span>
+and <span class="math inline">h(N)</span> are old.</li>
 </ul>
-<p>Now let <span class="math inline">X\ne Y</span> be entities of a relational type at <span class="math inline">E</span>, both pinned down by <span class="math inline">N</span>. They differ at some tuple <span class="math inline">\langle\bar a,h\rangle</span>. Take <span class="math inline">k</span> as above. The transport <span class="math inline">f\cdot X</span> contains <span class="math inline">\langle\bar a,k\rangle</span> iff <span class="math inline">X</span> contains <span class="math inline">\langle\bar a,k\circ f\rangle</span>. By pinning, that holds iff <span class="math inline">X</span> contains <span class="math inline">\langle\bar a,h\rangle</span>, and likewise for <span class="math inline">Y</span>. So <span class="math inline">f\cdot X\ne f\cdot Y</span>.</p>
-<p>At type <span class="math inline">e</span>, every arrow is injective. So transport along every arrow out of <span class="math inline">E</span> is injective at every type, and ND holds at <span class="math inline">E</span>. The map derives ND at <span class="math inline">t</span>, B, 5 and the pure B schema from this.</p>
-<p>ND at <span class="math inline">t</span> fails at <span class="math inline">O</span>, and so □ND at <span class="math inline">t</span> fails at <span class="math inline">E</span>. A member <span class="math inline">f</span> of <span class="math inline">K</span> gives <span class="math inline">f^*G_O=\emptyset=f^*\emptyset</span>.</p>
-<h2 id="atomicity-at-every-type-at-both-objects">Atomicity at every type, at both objects</h2>
-<p>Fix an object <span class="math inline">W</span> (either <span class="math inline">E</span> or <span class="math inline">O</span>), a relational type, and a finite <span class="math inline">M\subseteq W^e</span>. Let <span class="math inline">D_M</span> be the set of entities pinned down by <span class="math inline">M</span>. It is closed under arbitrary unions and under complement, so it is a complete atomic Boolean algebra. Its atoms are the classes of an equivalence relation on tuples, which is generated by two kinds of step:</p>
+<p>Now let <span class="math inline">X\ne Y</span> be entities of a
+relational type at <span class="math inline">E</span>, both pinned down
+by <span class="math inline">N</span>. They differ at some tuple <span
+class="math inline">\langle\bar a,h\rangle</span>. Take <span
+class="math inline">k</span> as above. The transport <span
+class="math inline">f\cdot X</span> contains <span
+class="math inline">\langle\bar a,k\rangle</span> iff <span
+class="math inline">X</span> contains <span
+class="math inline">\langle\bar a,k\circ f\rangle</span>. By pinning,
+that holds iff <span class="math inline">X</span> contains <span
+class="math inline">\langle\bar a,h\rangle</span>, and likewise for
+<span class="math inline">Y</span>. So <span class="math inline">f\cdot
+X\ne f\cdot Y</span>.</p>
+<p>At type <span class="math inline">e</span>, every arrow is injective.
+So transport along every arrow out of <span class="math inline">E</span>
+is injective at every type, and ND holds at <span
+class="math inline">E</span>. The map derives ND at <span
+class="math inline">t</span>, B, 5 and the pure B schema from this.</p>
+<p>ND at <span class="math inline">t</span> fails at <span
+class="math inline">O</span>, and so □ND at <span
+class="math inline">t</span> fails at <span
+class="math inline">E</span>. A member <span
+class="math inline">f</span> of <span class="math inline">K</span> gives
+<span class="math inline">f^*G_O=\emptyset=f^*\emptyset</span>.</p>
+<h2 id="atomicity-at-every-type-at-both-objects">Atomicity at every
+type, at both objects</h2>
+<p>Fix an object <span class="math inline">W</span> (either <span
+class="math inline">E</span> or <span class="math inline">O</span>), a
+relational type, and a finite <span class="math inline">M\subseteq
+W^e</span>. Let <span class="math inline">D_M</span> be the set of
+entities pinned down by <span class="math inline">M</span>. It is closed
+under arbitrary unions and under complement, so it is a complete atomic
+Boolean algebra. Its atoms are the classes of an equivalence relation on
+tuples, which is generated by two kinds of step:</p>
 <ul>
-<li>the symmetry steps <span class="math inline">\langle\bar a,h\rangle\sim\langle g\cdot\bar a,g\circ h\rangle</span>;</li>
-<li>the pinning steps <span class="math inline">\langle\bar a,h\rangle\sim\langle\bar a,h&#39;\rangle</span>, for <span class="math inline">h,h&#39;</span> agreeing on <span class="math inline">M</span>.</li>
+<li>the symmetry steps <span class="math inline">\langle\bar
+a,h\rangle\sim\langle g\cdot\bar a,g\circ h\rangle</span>;</li>
+<li>the pinning steps <span class="math inline">\langle\bar
+a,h\rangle\sim\langle\bar a,h&#39;\rangle</span>, for <span
+class="math inline">h,h&#39;</span> agreeing on <span
+class="math inline">M</span>.</li>
 </ul>
-<p>A symmetry step after a pinning step can be traded for a pinning step after a symmetry step. So the class of <span class="math inline">\langle\bar a,h\rangle</span> is</p>
+<p>A symmetry step after a pinning step can be traded for a pinning step
+after a symmetry step. So the class of <span
+class="math inline">\langle\bar a,h\rangle</span> is</p>
 <p><span class="math display">
-c_M(\bar a,h)=\{\langle g\cdot\bar a,h&#39;\rangle : g\in G_V,\ h&#39;\text{ agrees with }g\circ h\text{ on }M\},
+c_M(\bar a,h)=\{\langle g\cdot\bar a,h&#39;\rangle : g\in G_V,\
+h&#39;\text{ agrees with }g\circ h\text{ on }M\},
 </span></p>
-<p>where <span class="math inline">V</span> is the target of <span class="math inline">h</span>.</p>
-<p>A class <span class="math inline">c_M</span> is an atom of the whole domain if it is <em>stable</em>, meaning that <span class="math inline">c_{M&#39;}(\bar a,h)=c_M(\bar a,h)</span> for every finite <span class="math inline">M&#39;\supseteq M</span>. Indeed, suppose a nonzero <span class="math inline">Z\subseteq c_M</span> in the domain is pinned down by <span class="math inline">M&#39;&#39;</span>. Then <span class="math inline">Z</span> is a union of <span class="math inline">(M\cup M&#39;&#39;)</span>-classes, and the only one inside <span class="math inline">c_M</span> is <span class="math inline">c_M</span> itself.</p>
-<p>Let <span class="math inline">P\subseteq V^e</span> be the union of finite pinning sets of the arguments <span class="math inline">\bar a</span>, where an individual argument pins itself. Let <span class="math inline">\mathrm{Reach}(h)</span> be the set of individuals that some arrow of <span class="math inline">h</span>’s kind can take as a value:</p>
+<p>where <span class="math inline">V</span> is the target of <span
+class="math inline">h</span>.</p>
+<p>A class <span class="math inline">c_M</span> is an atom of the whole
+domain if it is <em>stable</em>, meaning that <span
+class="math inline">c_{M&#39;}(\bar a,h)=c_M(\bar a,h)</span> for every
+finite <span class="math inline">M&#39;\supseteq M</span>. Indeed,
+suppose a nonzero <span class="math inline">Z\subseteq c_M</span> in the
+domain is pinned down by <span class="math inline">M&#39;&#39;</span>.
+Then <span class="math inline">Z</span> is a union of <span
+class="math inline">(M\cup M&#39;&#39;)</span>-classes, and the only one
+inside <span class="math inline">c_M</span> is <span
+class="math inline">c_M</span> itself.</p>
+<p>Let <span class="math inline">P\subseteq V^e</span> be the union of
+finite pinning sets of the arguments <span class="math inline">\bar
+a</span>, where an individual argument pins itself. Let <span
+class="math inline">\mathrm{Reach}(h)</span> be the set of individuals
+that some arrow of <span class="math inline">h</span>’s kind can take as
+a value:</p>
 <ul>
-<li>all of <span class="math inline">V^e</span> for arrows into <span class="math inline">E</span> and for <span class="math inline">G_O</span>;</li>
-<li>the old individuals for arrows from <span class="math inline">E</span> into <span class="math inline">O</span> and for <span class="math inline">K</span>.</li>
+<li>all of <span class="math inline">V^e</span> for arrows into <span
+class="math inline">E</span> and for <span
+class="math inline">G_O</span>;</li>
+<li>the old individuals for arrows from <span
+class="math inline">E</span> into <span class="math inline">O</span> and
+for <span class="math inline">K</span>.</li>
 </ul>
-<p><strong>Claim.</strong> The class <span class="math inline">c_M(\bar a,h)</span> is stable provided three conditions hold:</p>
+<p><strong>Claim.</strong> The class <span class="math inline">c_M(\bar
+a,h)</span> is stable provided three conditions hold:</p>
 <ol type="1">
-<li><span class="math inline">h(M)\supseteq P\cap\mathrm{Reach}(h)</span>;</li>
-<li>when <span class="math inline">W=O</span>, <span class="math inline">M</span> contains a new individual;</li>
-<li><span class="math inline">h</span> is injective, which it always is.</li>
+<li><span class="math inline">h(M)\supseteq
+P\cap\mathrm{Reach}(h)</span>;</li>
+<li>when <span class="math inline">W=O</span>, <span
+class="math inline">M</span> contains a new individual;</li>
+<li><span class="math inline">h</span> is injective, which it always
+is.</li>
 </ol>
-<p><em>Proof.</em> Let <span class="math inline">M&#39;\supseteq M</span>, and let <span class="math inline">h&#39;</span> agree with <span class="math inline">h</span> on <span class="math inline">M</span>. We need a symmetry <span class="math inline">s</span> satisfying three conditions:</p>
+<p><em>Proof.</em> Let <span class="math inline">M&#39;\supseteq
+M</span>, and let <span class="math inline">h&#39;</span> agree with
+<span class="math inline">h</span> on <span
+class="math inline">M</span>. We need a symmetry <span
+class="math inline">s</span> satisfying three conditions:</p>
 <ul>
 <li><span class="math inline">s\cdot\bar a=\bar a</span>;</li>
-<li><span class="math inline">s</span> fixes <span class="math inline">h(M)</span> pointwise;</li>
-<li><span class="math inline">s(h(m&#39;))=h&#39;(m&#39;)</span> for <span class="math inline">m&#39;\in M&#39;\setminus M</span>.</li>
+<li><span class="math inline">s</span> fixes <span
+class="math inline">h(M)</span> pointwise;</li>
+<li><span class="math inline">s(h(m&#39;))=h&#39;(m&#39;)</span> for
+<span class="math inline">m&#39;\in M&#39;\setminus M</span>.</li>
 </ul>
-<p>By condition 2, <span class="math inline">h</span> and <span class="math inline">h&#39;</span> are of the same kind. Indeed, if <span class="math inline">W=O</span>, a new individual in <span class="math inline">M</span> goes to a new one under members of <span class="math inline">G_O</span> and to an old one under members of <span class="math inline">K</span>.</p>
-<p>Now take <span class="math inline">m&#39;\in M&#39;\setminus M</span>. The values <span class="math inline">h(m&#39;)</span> and <span class="math inline">h&#39;(m&#39;)</span> lie in <span class="math inline">\mathrm{Reach}(h)</span> outside <span class="math inline">h(M)</span>, by injectivity. By condition 1 they lie outside <span class="math inline">P</span>. They also have the same status. For members of <span class="math inline">G_O</span> this is the status of <span class="math inline">m&#39;</span>; otherwise every value in <span class="math inline">O</span> is old, and <span class="math inline">E</span> has no statuses.</p>
-<p>So the finite partial injection that fixes <span class="math inline">P\cup h(M)</span> and sends each <span class="math inline">h(m&#39;)</span> to <span class="math inline">h&#39;(m&#39;)</span> preserves status. It therefore extends to a symmetry <span class="math inline">s</span>. A symmetry fixing <span class="math inline">P</span> pointwise fixes each argument, since transport along an arrow that agrees with the identity on a pinning set is the identity. So <span class="math inline">\langle\bar a,h&#39;\rangle\in c_{M&#39;}(\bar a,h)</span>.</p>
-<p>In general, an element of <span class="math inline">c_M</span> has the form <span class="math inline">\langle g\cdot\bar a,h&#39;&#39;\rangle</span> with <span class="math inline">h&#39;&#39;</span> agreeing with <span class="math inline">g\circ h</span> on <span class="math inline">M</span>. Applying <span class="math inline">g^{-1}</span> reduces this to the case just treated. <span class="math inline">\square</span></p>
-<p><strong>Every nonzero entity has a stable class below it.</strong> Let <span class="math inline">X\ne\emptyset</span> be pinned down by <span class="math inline">N</span>, and let <span class="math inline">\langle\bar a,h\rangle\in X</span>. Choose finitely many fresh points of <span class="math inline">W^e\setminus N</span>, including a new one when <span class="math inline">W=O</span>. Choose an arrow <span class="math inline">h&#39;</span> of <span class="math inline">h</span>’s kind that agrees with <span class="math inline">h</span> on <span class="math inline">N</span> and sends the fresh points onto <span class="math inline">P\cap\mathrm{Reach}(h)\setminus h(N)</span>, with each status going to the same status. This is possible for each kind, since an injection, an injection into the old individuals, or a status-preserving permutation can be prescribed on finitely many points.</p>
-<p>Then <span class="math inline">\langle\bar a,h&#39;\rangle\in X</span> by pinning. Let <span class="math inline">M</span> be <span class="math inline">N</span> together with the fresh points. The class <span class="math inline">c_M(\bar a,h&#39;)</span> is stable. It lies inside <span class="math inline">X</span>, because <span class="math inline">X</span> is symmetric and pinned down by <span class="math inline">N\subseteq M</span>, so it is a union of <span class="math inline">M</span>-classes. Hence <span class="math inline">c_M(\bar a,h&#39;)</span> is an atom below <span class="math inline">X</span>.</p>
-<p>So Atomicity holds at every relational type at <span class="math inline">E</span> and at <span class="math inline">O</span>. Atomicity is closed, so □Atomicity holds as well. The argument does not depend on what the individuals are, so it holds in the variant with one individual too.</p>
-<h2 id="inextensible-comprehension-fails-corrected">Inextensible Comprehension fails (corrected)</h2>
-<p>Fable’s summary named the property of being old. That property does not by itself refute Inextensible Comprehension: it is weakly inextensible at <span class="math inline">E</span>. The failure is the following.</p>
-<p>Let <span class="math inline">X</span> be the universal property of individuals at <span class="math inline">E</span>, and suppose <span class="math inline">Y</span> is coextensive with <span class="math inline">X</span> and inextensible. Let <span class="math inline">Y</span> be pinned down by <span class="math inline">N</span>.</p>
+<p>By condition 2, <span class="math inline">h</span> and <span
+class="math inline">h&#39;</span> are of the same kind. Indeed, if <span
+class="math inline">W=O</span>, a new individual in <span
+class="math inline">M</span> goes to a new one under members of <span
+class="math inline">G_O</span> and to an old one under members of <span
+class="math inline">K</span>.</p>
+<p>Now take <span class="math inline">m&#39;\in M&#39;\setminus
+M</span>. The values <span class="math inline">h(m&#39;)</span> and
+<span class="math inline">h&#39;(m&#39;)</span> lie in <span
+class="math inline">\mathrm{Reach}(h)</span> outside <span
+class="math inline">h(M)</span>, by injectivity. By condition 1 they lie
+outside <span class="math inline">P</span>. They also have the same
+status. For members of <span class="math inline">G_O</span> this is the
+status of <span class="math inline">m&#39;</span>; otherwise every value
+in <span class="math inline">O</span> is old, and <span
+class="math inline">E</span> has no statuses.</p>
+<p>So the finite partial injection that fixes <span
+class="math inline">P\cup h(M)</span> and sends each <span
+class="math inline">h(m&#39;)</span> to <span
+class="math inline">h&#39;(m&#39;)</span> preserves status. It therefore
+extends to a symmetry <span class="math inline">s</span>. A symmetry
+fixing <span class="math inline">P</span> pointwise fixes each argument,
+since transport along an arrow that agrees with the identity on a
+pinning set is the identity. So <span class="math inline">\langle\bar
+a,h&#39;\rangle\in c_{M&#39;}(\bar a,h)</span>.</p>
+<p>In general, an element of <span class="math inline">c_M</span> has
+the form <span class="math inline">\langle g\cdot\bar
+a,h&#39;&#39;\rangle</span> with <span
+class="math inline">h&#39;&#39;</span> agreeing with <span
+class="math inline">g\circ h</span> on <span
+class="math inline">M</span>. Applying <span
+class="math inline">g^{-1}</span> reduces this to the case just treated.
+<span class="math inline">\square</span></p>
+<p><strong>Every nonzero entity has a stable class below it.</strong>
+Let <span class="math inline">X\ne\emptyset</span> be pinned down by
+<span class="math inline">N</span>, and let <span
+class="math inline">\langle\bar a,h\rangle\in X</span>. Choose finitely
+many fresh points of <span class="math inline">W^e\setminus N</span>,
+including a new one when <span class="math inline">W=O</span>. Choose an
+arrow <span class="math inline">h&#39;</span> of <span
+class="math inline">h</span>’s kind that agrees with <span
+class="math inline">h</span> on <span class="math inline">N</span> and
+sends the fresh points onto <span
+class="math inline">P\cap\mathrm{Reach}(h)\setminus h(N)</span>, with
+each status going to the same status. This is possible for each kind,
+since an injection, an injection into the old individuals, or a
+status-preserving permutation can be prescribed on finitely many
+points.</p>
+<p>Then <span class="math inline">\langle\bar a,h&#39;\rangle\in
+X</span> by pinning. Let <span class="math inline">M</span> be <span
+class="math inline">N</span> together with the fresh points. The class
+<span class="math inline">c_M(\bar a,h&#39;)</span> is stable. It lies
+inside <span class="math inline">X</span>, because <span
+class="math inline">X</span> is symmetric and pinned down by <span
+class="math inline">N\subseteq M</span>, so it is a union of <span
+class="math inline">M</span>-classes. Hence <span
+class="math inline">c_M(\bar a,h&#39;)</span> is an atom below <span
+class="math inline">X</span>.</p>
+<p>So Atomicity holds at every relational type at <span
+class="math inline">E</span> and at <span class="math inline">O</span>.
+Atomicity is closed, so □Atomicity holds as well. The argument does not
+depend on what the individuals are, so it holds in the variant with one
+individual too.</p>
+<h2 id="inextensible-comprehension-fails-corrected">Inextensible
+Comprehension fails (corrected)</h2>
+<p>Fable’s summary named the property of being old. That property does
+not by itself refute Inextensible Comprehension: it is weakly
+inextensible at <span class="math inline">E</span>. The failure is the
+following.</p>
+<p>Let <span class="math inline">X</span> be the universal property of
+individuals at <span class="math inline">E</span>, and suppose <span
+class="math inline">Y</span> is coextensive with <span
+class="math inline">X</span> and inextensible. Let <span
+class="math inline">Y</span> be pinned down by <span
+class="math inline">N</span>.</p>
 <ol type="1">
-<li><strong><span class="math inline">Y(f)=\mathbb N</span> for every arrow <span class="math inline">f</span> to <span class="math inline">E</span>.</strong> Take a permutation <span class="math inline">g</span> agreeing with <span class="math inline">f</span> on <span class="math inline">N</span>. Then <span class="math inline">Y(g)=g\,Y(1_E)=\mathbb N</span>, and by pinning <span class="math inline">Y(f)=Y(g)</span>.</li>
-<li><strong><span class="math inline">Y(\iota)</span> is old, for <span class="math inline">\iota</span> the inclusion of <span class="math inline">\mathbb N</span> into <span class="math inline">O</span>.</strong> Being old is pinned down by <span class="math inline">\emptyset</span>, and every individual of <span class="math inline">E</span> necessarily has it, since arrows into <span class="math inline">O</span> from worlds over <span class="math inline">E</span> land among the old. By weak inextensibility at <span class="math inline">E</span>, <span class="math inline">Y\le</span> old there. So <span class="math inline">0&#39;\notin
+<li><strong><span class="math inline">Y(f)=\mathbb N</span> for every
+arrow <span class="math inline">f</span> to <span
+class="math inline">E</span>.</strong> Take a permutation <span
+class="math inline">g</span> agreeing with <span
+class="math inline">f</span> on <span class="math inline">N</span>. Then
+<span class="math inline">Y(g)=g\,Y(1_E)=\mathbb N</span>, and by
+pinning <span class="math inline">Y(f)=Y(g)</span>.</li>
+<li><strong><span class="math inline">Y(\iota)</span> is old, for <span
+class="math inline">\iota</span> the inclusion of <span
+class="math inline">\mathbb N</span> into <span
+class="math inline">O</span>.</strong> Being old is pinned down by <span
+class="math inline">\emptyset</span>, and every individual of <span
+class="math inline">E</span> necessarily has it, since arrows into <span
+class="math inline">O</span> from worlds over <span
+class="math inline">E</span> land among the old. By weak inextensibility
+at <span class="math inline">E</span>, <span
+class="math inline">Y\le</span> old there. So <span
+class="math inline">0&#39;\notin
 Y(\iota)</span>.</li>
-<li><strong><span class="math inline">Y</span> is not weakly inextensible at <span class="math inline">\iota</span>.</strong> Let <span class="math inline">Z:=\lambda y\,.\,y\ne
-0&#39;</span>, in the domain at <span class="math inline">O</span>, since it is symmetric under <span class="math inline">G_O</span> and pinned down by <span class="math inline">\{0&#39;\}</span>. Every <span class="math inline">Y</span>-thing at <span class="math inline">\iota</span> is distinct from <span class="math inline">0&#39;</span>, and necessarily so, since all arrows are injective. Now take any <span class="math inline">m:O\to E</span>. At the world <span class="math inline">m\circ\iota</span>, which is an arrow to <span class="math inline">E</span>, <span class="math inline">Y</span> holds of <span class="math inline">m(0&#39;)</span>, by step 1. But <span class="math inline">Z</span> fails of <span class="math inline">m(0&#39;)</span> there.</li>
+<li><strong><span class="math inline">Y</span> is not weakly
+inextensible at <span class="math inline">\iota</span>.</strong> Let
+<span class="math inline">Z:=\lambda y\,.\,y\ne
+0&#39;</span>, in the domain at <span class="math inline">O</span>,
+since it is symmetric under <span class="math inline">G_O</span> and
+pinned down by <span class="math inline">\{0&#39;\}</span>. Every <span
+class="math inline">Y</span>-thing at <span
+class="math inline">\iota</span> is distinct from <span
+class="math inline">0&#39;</span>, and necessarily so, since all arrows
+are injective. Now take any <span class="math inline">m:O\to E</span>.
+At the world <span class="math inline">m\circ\iota</span>, which is an
+arrow to <span class="math inline">E</span>, <span
+class="math inline">Y</span> holds of <span
+class="math inline">m(0&#39;)</span>, by step 1. But <span
+class="math inline">Z</span> fails of <span
+class="math inline">m(0&#39;)</span> there.</li>
 </ol>
-<p>So no coextensive <span class="math inline">Y</span> is inextensible. This argument uses the individuals, so it is recorded for the base individuals only.</p>
-<h2 id="bf-at-t-and-the-strong-leibniz-biconditionals-fail">BF at <span class="math inline">t</span> and the Strong Leibniz Biconditionals fail</h2>
-<p><strong>BF at <span class="math inline">t</span>.</strong> Every transport from <span class="math inline">E</span> to <span class="math inline">O</span> lies among <span class="math inline">\emptyset</span>, <span class="math inline">\mathrm{Hom}(O,E)</span>, <span class="math inline">\mathrm{Hom}(O,O)</span> and <span class="math inline">\top</span>, and never equals <span class="math inline">G_O</span>. Let <span class="math inline">X</span> be the property of propositions that holds of every proposition at an arrow to <span class="math inline">E</span>, and of every proposition other than <span class="math inline">G_O</span> at an arrow to <span class="math inline">O</span>. It is symmetric, because <span class="math inline">G_O</span> is invariant under <span class="math inline">G_O</span>, and it is pinned down by <span class="math inline">\emptyset</span>. Then <span class="math inline">\forall p\,.\,\Box Xp</span> holds at <span class="math inline">E</span>, while at <span class="math inline">\iota</span> the proposition <span class="math inline">G_O</span> lacks <span class="math inline">X</span>.</p>
-<p><strong>Strong Leibniz at <span class="math inline">t</span>.</strong> The proposition <span class="math inline">\mathrm{Hom}(E,O)</span> is possible, and its only nonzero part is itself. Along <span class="math inline">\iota</span> it becomes <span class="math inline">G_O\cup K</span>, which <span class="math inline">G_O</span> neither contains nor excludes. So it is not a strong world.</p>
-<h2 id="boolean-completeness-holds-at-e-and-fails-at-o">Boolean Completeness holds at <span class="math inline">E</span> and fails at <span class="math inline">O</span></h2>
-<p><em>Corrected 24 October 2026.</em> This section previously argued that Boolean Completeness fails at <span class="math inline">E</span> at <span class="math inline">e\to t</span>, using the haecceities of the even numbers. That family is not a property in the model: a property pinned down by a finite <span class="math inline">N</span> has an extension invariant under the symmetries fixing <span class="math inline">N</span>, and the set of even numbers is not. Boolean Completeness holds at <span class="math inline">E</span> at every type, and fails at <span class="math inline">O</span>. The corrected arguments are by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026, checked and written out by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr.</p>
-<p>Write <span class="math inline">\iota:E\to O</span> for the inclusion into the old individuals, and for a finite <span class="math inline">S\subseteq\mathbb N</span> let <span class="math inline">\mathrm{Fix}_E(S)</span> be the permutations of <span class="math inline">\mathbb N</span> fixing <span class="math inline">S</span> pointwise, and <span class="math inline">\mathrm{Fix}_O(\iota S)</span> the members of <span class="math inline">G_O</span> fixing <span class="math inline">\iota S</span> pointwise. Each permutation acts on the tuple domains by transport.</p>
-<p><strong>Entities at <span class="math inline">E</span> are pairs.</strong> Fix a relational type <span class="math inline">\tau</span>. An entity <span class="math inline">F</span> of type <span class="math inline">\tau</span> at <span class="math inline">E</span>, pinned down by <span class="math inline">S</span>, is determined by</p>
+<p>So no coextensive <span class="math inline">Y</span> is inextensible.
+This argument uses the individuals, so it is recorded for the base
+individuals only.</p>
+<h2 id="bf-at-t-and-strong-atomicity-fails">BF at <span
+class="math inline">t</span> and Strong Atomicity fails</h2>
+<p><strong>BF at <span class="math inline">t</span>.</strong> Every
+transport from <span class="math inline">E</span> to <span
+class="math inline">O</span> lies among <span
+class="math inline">\emptyset</span>, <span
+class="math inline">\mathrm{Hom}(O,E)</span>, <span
+class="math inline">\mathrm{Hom}(O,O)</span> and <span
+class="math inline">\top</span>, and never equals <span
+class="math inline">G_O</span>. Let <span class="math inline">X</span>
+be the property of propositions that holds of every proposition at an
+arrow to <span class="math inline">E</span>, and of every proposition
+other than <span class="math inline">G_O</span> at an arrow to <span
+class="math inline">O</span>. It is symmetric, because <span
+class="math inline">G_O</span> is invariant under <span
+class="math inline">G_O</span>, and it is pinned down by <span
+class="math inline">\emptyset</span>. Then <span
+class="math inline">\forall p\,.\,\Box Xp</span> holds at <span
+class="math inline">E</span>, while at <span
+class="math inline">\iota</span> the proposition <span
+class="math inline">G_O</span> lacks <span
+class="math inline">X</span>.</p>
+<p><strong>Strong Atomicity at <span
+class="math inline">t</span>.</strong> The proposition <span
+class="math inline">\mathrm{Hom}(E,O)</span> is possible, and its only
+nonzero part is itself. Along <span class="math inline">\iota</span> it
+becomes <span class="math inline">G_O\cup K</span>, which <span
+class="math inline">G_O</span> neither contains nor excludes. So it is
+not a strong atom.</p>
+<h2 id="boolean-completeness-holds-at-e-and-fails-at-o">Boolean
+Completeness holds at <span class="math inline">E</span> and fails at
+<span class="math inline">O</span></h2>
+<p><em>Corrected 24 October 2026.</em> This section previously argued
+that Boolean Completeness fails at <span class="math inline">E</span> at
+<span class="math inline">e\to t</span>, using the haecceities of the
+even numbers. That family is not a property in the model: a property
+pinned down by a finite <span class="math inline">N</span> has an
+extension invariant under the symmetries fixing <span
+class="math inline">N</span>, and the set of even numbers is not.
+Boolean Completeness holds at <span class="math inline">E</span> at
+every type, and fails at <span class="math inline">O</span>. The
+corrected arguments are by GPT-6 Astra (OpenAI), prompted by Daniel
+Kodsi, 22 October 2026, checked and written out by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr.</p>
+<p>Write <span class="math inline">\iota:E\to O</span> for the inclusion
+into the old individuals, and for a finite <span
+class="math inline">S\subseteq\mathbb N</span> let <span
+class="math inline">\mathrm{Fix}_E(S)</span> be the permutations of
+<span class="math inline">\mathbb N</span> fixing <span
+class="math inline">S</span> pointwise, and <span
+class="math inline">\mathrm{Fix}_O(\iota S)</span> the members of <span
+class="math inline">G_O</span> fixing <span class="math inline">\iota
+S</span> pointwise. Each permutation acts on the tuple domains by
+transport.</p>
+<p><strong>Entities at <span class="math inline">E</span> are
+pairs.</strong> Fix a relational type <span
+class="math inline">\tau</span>. An entity <span
+class="math inline">F</span> of type <span
+class="math inline">\tau</span> at <span class="math inline">E</span>,
+pinned down by <span class="math inline">S</span>, is determined by</p>
 <p><span class="math display">
 A_F:=F_{1_E},\qquad B_F:=F_\iota ,
 </span></p>
-<p>with <span class="math inline">A_F</span> invariant under <span class="math inline">\mathrm{Fix}_E(S)</span> and <span class="math inline">B_F</span> under <span class="math inline">\mathrm{Fix}_O(\iota S)</span>. For an arrow <span class="math inline">h:E\to E</span>, extend <span class="math inline">h|_S</span> to a permutation <span class="math inline">g</span>; then <span class="math inline">F_h=F_g=gA_F</span>. For <span class="math inline">h:E\to O</span>, whose range is old, extend the partial injection <span class="math inline">\iota s\mapsto h(s)</span> to some <span class="math inline">\gamma\in G_O</span>; then <span class="math inline">F_h=F_{\gamma\iota}=\gamma B_F</span>. Conversely, any pair <span class="math inline">(A,B)</span> invariant under <span class="math inline">\mathrm{Fix}_E(S)</span> and <span class="math inline">\mathrm{Fix}_O(\iota S)</span> for some finite <span class="math inline">S</span> defines, by these formulas, a symmetric intension pinned down by <span class="math inline">S</span>, so an entity at <span class="math inline">E</span>. Using one extending symmetry for two entities at once,</p>
+<p>with <span class="math inline">A_F</span> invariant under <span
+class="math inline">\mathrm{Fix}_E(S)</span> and <span
+class="math inline">B_F</span> under <span
+class="math inline">\mathrm{Fix}_O(\iota S)</span>. For an arrow <span
+class="math inline">h:E\to E</span>, extend <span
+class="math inline">h|_S</span> to a permutation <span
+class="math inline">g</span>; then <span
+class="math inline">F_h=F_g=gA_F</span>. For <span
+class="math inline">h:E\to O</span>, whose range is old, extend the
+partial injection <span class="math inline">\iota s\mapsto h(s)</span>
+to some <span class="math inline">\gamma\in G_O</span>; then <span
+class="math inline">F_h=F_{\gamma\iota}=\gamma B_F</span>. Conversely,
+any pair <span class="math inline">(A,B)</span> invariant under <span
+class="math inline">\mathrm{Fix}_E(S)</span> and <span
+class="math inline">\mathrm{Fix}_O(\iota S)</span> for some finite <span
+class="math inline">S</span> defines, by these formulas, a symmetric
+intension pinned down by <span class="math inline">S</span>, so an
+entity at <span class="math inline">E</span>. Using one extending
+symmetry for two entities at once,</p>
 <p><span class="math display">
 F\le G\iff A_F\subseteq A_G\ \text{and}\ B_F\subseteq B_G .
 </span></p>
-<p><strong>Joins at <span class="math inline">E</span>.</strong> Let <span class="math inline">X</span> be a property of type <span class="math inline">\tau t</span> at <span class="math inline">E</span>, pinned down by <span class="math inline">N</span>, and put</p>
+<p><strong>Joins at <span class="math inline">E</span>.</strong> Let
+<span class="math inline">X</span> be a property of type <span
+class="math inline">\tau t</span> at <span class="math inline">E</span>,
+pinned down by <span class="math inline">N</span>, and put</p>
 <p><span class="math display">
 A^*:=\bigcup\{A_F:X_{1_E}(F)\},\qquad B^*:=\bigcup\{B_F:X_{1_E}(F)\}.
 </span></p>
-<p>A symmetry <span class="math inline">g\in\mathrm{Fix}_E(N)</span> sends <span class="math inline">(A_F,B_F)</span> to <span class="math inline">(gA_F,\hat gB_F)</span>, where <span class="math inline">\hat g</span> acts as <span class="math inline">g</span> on old individuals and trivially on new ones, and it permutes the instances of <span class="math inline">X</span>. So <span class="math inline">A^*</span> is invariant under <span class="math inline">\mathrm{Fix}_E(N)</span>, and <span class="math inline">B^*</span> under the old-coordinate symmetries fixing <span class="math inline">\iota N</span>. Each <span class="math inline">B_F</span> is pinned down by old points, so it is invariant under all permutations of the new individuals, and so is <span class="math inline">B^*</span>. These two kinds of permutation generate <span class="math inline">\mathrm{Fix}_O(\iota N)</span>. So <span class="math inline">(A^*,B^*)</span> is an entity <span class="math inline">J</span>, and by the order criterion <span class="math inline">J</span> is the least upper bound of the instances of <span class="math inline">X</span>. So Boolean Completeness holds at <span class="math inline">E</span>, at every relational type.</p>
-<p><strong>Failure at <span class="math inline">O</span>.</strong> Let <span class="math inline">D</span> be the property of individuals that holds of every individual at arrows into <span class="math inline">E</span> and of the old individuals at arrows into <span class="math inline">O</span>; it is symmetric and pinned down by <span class="math inline">\emptyset</span>. At <span class="math inline">1_O</span> the property</p>
+<p>A symmetry <span class="math inline">g\in\mathrm{Fix}_E(N)</span>
+sends <span class="math inline">(A_F,B_F)</span> to <span
+class="math inline">(gA_F,\hat gB_F)</span>, where <span
+class="math inline">\hat g</span> acts as <span
+class="math inline">g</span> on old individuals and trivially on new
+ones, and it permutes the instances of <span
+class="math inline">X</span>. So <span class="math inline">A^*</span> is
+invariant under <span class="math inline">\mathrm{Fix}_E(N)</span>, and
+<span class="math inline">B^*</span> under the old-coordinate symmetries
+fixing <span class="math inline">\iota N</span>. Each <span
+class="math inline">B_F</span> is pinned down by old points, so it is
+invariant under all permutations of the new individuals, and so is <span
+class="math inline">B^*</span>. These two kinds of permutation generate
+<span class="math inline">\mathrm{Fix}_O(\iota N)</span>. So <span
+class="math inline">(A^*,B^*)</span> is an entity <span
+class="math inline">J</span>, and by the order criterion <span
+class="math inline">J</span> is the least upper bound of the instances
+of <span class="math inline">X</span>. So Boolean Completeness holds at
+<span class="math inline">E</span>, at every relational type.</p>
+<p><strong>Failure at <span class="math inline">O</span>.</strong> Let
+<span class="math inline">D</span> be the property of individuals that
+holds of every individual at arrows into <span
+class="math inline">E</span> and of the old individuals at arrows into
+<span class="math inline">O</span>; it is symmetric and pinned down by
+<span class="math inline">\emptyset</span>. At <span
+class="math inline">1_O</span> the property</p>
 <p><span class="math display">
 X:=\lambda F^{et}\, .\,\exists x\, .\,Dx\land F=\lambda y\, .\,y=x
 </span></p>
-<p>has as instances the haecceities <span class="math inline">\eta_a</span> of the old individuals <span class="math inline">a</span>. Suppose <span class="math inline">L</span>, pinned down by a finite <span class="math inline">S</span>, were their least upper bound. Take an old <span class="math inline">n\notin S</span>, a new <span class="math inline">m\notin S</span>, and an injection <span class="math inline">h:O\to E</span>. Some injection <span class="math inline">h&#39;:O\to E</span> agrees with <span class="math inline">h</span> on <span class="math inline">S</span> and has <span class="math inline">h&#39;(n)=h(m)</span>. As <span class="math inline">\eta_n\le L</span>, <span class="math inline">L_{h&#39;}</span> contains <span class="math inline">h&#39;(n)=h(m)</span>, and by pinning so does <span class="math inline">L_h</span>. But <span class="math inline">\lambda y\, .\,y\ne m</span> is an upper bound of every <span class="math inline">\eta_a</span> with <span class="math inline">a</span> old, and its extension at <span class="math inline">h</span> omits <span class="math inline">h(m)</span>. This contradicts the leastness of <span class="math inline">L</span>. So Boolean Completeness fails at <span class="math inline">O</span> at <span class="math inline">e\to t</span>, and as <span class="math inline">O</span> is reachable from <span class="math inline">E</span>, □Boolean Completeness fails.</p>
-<p>With ND, this model shows that ND and Boolean Completeness together do not imply Inextensible Comprehension, Rigid Comprehension or Tame Rigidity.</p>
-<h2 id="countable-boolean-completeness-holds-at-e">Countable Boolean Completeness holds at <span class="math inline">E</span></h2>
-<p>Added by Claude Opus 5.5 (Anthropic) on 16 October 2026, at Cian Dorr’s direction. It holds there for countability relative to every type <span class="math inline">\sigma</span>. (This section was written when Boolean Completeness was believed to fail at <span class="math inline">E</span>; since it holds, the argument is now needed only at <span class="math inline">O</span>, below.)</p>
-<p>Write <span class="math inline">k\cdot x</span> for the transport of an entity <span class="math inline">x</span> along an arrow <span class="math inline">k</span>, so that <span class="math inline">\langle\bar a,h\rangle\in k\cdot x</span> iff <span class="math inline">\langle\bar a,h\circ k\rangle\in
-x</span>. For a finite <span class="math inline">N\subseteq\mathbb N</span>, let <span class="math inline">\mathrm{Fix}(N)</span> be the set of permutations in <span class="math inline">G_E</span> that fix <span class="math inline">N</span> pointwise.</p>
-<p><strong>Step 1: the members of a countable property are invariant.</strong> Let <span class="math inline">X</span> be a property at <span class="math inline">E</span> that is countable relative to <span class="math inline">\sigma</span>, witnessed by <span class="math inline">R</span>, and let a finite <span class="math inline">N</span> pin down both. Take <span class="math inline">x</span> with <span class="math inline">X(x)</span> at <span class="math inline">1_E</span>. Then <span class="math inline">R(x,\bar
-n)</span> at <span class="math inline">1_E</span> for some numeral <span class="math inline">\bar n</span> at <span class="math inline">\sigma</span>. Let <span class="math inline">g\in\mathrm{Fix}(N)</span>.</p>
+<p>has as instances the haecceities <span
+class="math inline">\eta_a</span> of the old individuals <span
+class="math inline">a</span>. Suppose <span
+class="math inline">L</span>, pinned down by a finite <span
+class="math inline">S</span>, were their least upper bound. Take an old
+<span class="math inline">n\notin S</span>, a new <span
+class="math inline">m\notin S</span>, and an injection <span
+class="math inline">h:O\to E</span>. Some injection <span
+class="math inline">h&#39;:O\to E</span> agrees with <span
+class="math inline">h</span> on <span class="math inline">S</span> and
+has <span class="math inline">h&#39;(n)=h(m)</span>. As <span
+class="math inline">\eta_n\le L</span>, <span
+class="math inline">L_{h&#39;}</span> contains <span
+class="math inline">h&#39;(n)=h(m)</span>, and by pinning so does <span
+class="math inline">L_h</span>. But <span class="math inline">\lambda
+y\, .\,y\ne m</span> is an upper bound of every <span
+class="math inline">\eta_a</span> with <span
+class="math inline">a</span> old, and its extension at <span
+class="math inline">h</span> omits <span
+class="math inline">h(m)</span>. This contradicts the leastness of <span
+class="math inline">L</span>. So Boolean Completeness fails at <span
+class="math inline">O</span> at <span class="math inline">e\to t</span>,
+and as <span class="math inline">O</span> is reachable from <span
+class="math inline">E</span>, □Boolean Completeness fails.</p>
+<p>With ND, this model shows that ND and Boolean Completeness together
+do not imply Inextensible Comprehension, Rigid Comprehension or Tame
+Rigidity.</p>
+<h2 id="countable-boolean-completeness-holds-at-e">Countable Boolean
+Completeness holds at <span class="math inline">E</span></h2>
+<p>Added by Claude Opus 5.5 (Anthropic) on 16 October 2026, at Cian
+Dorr’s direction. It holds there for countability relative to every type
+<span class="math inline">\sigma</span>. (This section was written when
+Boolean Completeness was believed to fail at <span
+class="math inline">E</span>; since it holds, the argument is now needed
+only at <span class="math inline">O</span>, below.)</p>
+<p>Write <span class="math inline">k\cdot x</span> for the transport of
+an entity <span class="math inline">x</span> along an arrow <span
+class="math inline">k</span>, so that <span
+class="math inline">\langle\bar a,h\rangle\in k\cdot x</span> iff <span
+class="math inline">\langle\bar a,h\circ k\rangle\in
+x</span>. For a finite <span class="math inline">N\subseteq\mathbb
+N</span>, let <span class="math inline">\mathrm{Fix}(N)</span> be the
+set of permutations in <span class="math inline">G_E</span> that fix
+<span class="math inline">N</span> pointwise.</p>
+<p><strong>Step 1: the members of a countable property are
+invariant.</strong> Let <span class="math inline">X</span> be a property
+at <span class="math inline">E</span> that is countable relative to
+<span class="math inline">\sigma</span>, witnessed by <span
+class="math inline">R</span>, and let a finite <span
+class="math inline">N</span> pin down both. Take <span
+class="math inline">x</span> with <span class="math inline">X(x)</span>
+at <span class="math inline">1_E</span>. Then <span
+class="math inline">R(x,\bar
+n)</span> at <span class="math inline">1_E</span> for some numeral <span
+class="math inline">\bar n</span> at <span
+class="math inline">\sigma</span>. Let <span
+class="math inline">g\in\mathrm{Fix}(N)</span>.</p>
 <ul>
-<li>Numerals denote closed pure terms, so <span class="math inline">g\cdot\bar n=\bar n</span>.</li>
-<li>By symmetry, <span class="math inline">\langle g\cdot x,\bar n,g\rangle\in R</span> and <span class="math inline">\langle g\cdot
+<li>Numerals denote closed pure terms, so <span
+class="math inline">g\cdot\bar n=\bar n</span>.</li>
+<li>By symmetry, <span class="math inline">\langle g\cdot x,\bar
+n,g\rangle\in R</span> and <span class="math inline">\langle g\cdot
 x,g\rangle\in X</span>.</li>
-<li>The arrows <span class="math inline">g</span> and <span class="math inline">1_E</span> agree on <span class="math inline">N</span> and have the same target, so by pinning, <span class="math inline">R(g\cdot x,\bar n)</span> and <span class="math inline">X(g\cdot x)</span> hold at <span class="math inline">1_E</span>.</li>
+<li>The arrows <span class="math inline">g</span> and <span
+class="math inline">1_E</span> agree on <span
+class="math inline">N</span> and have the same target, so by pinning,
+<span class="math inline">R(g\cdot x,\bar n)</span> and <span
+class="math inline">X(g\cdot x)</span> hold at <span
+class="math inline">1_E</span>.</li>
 </ul>
-<p><span class="math inline">R</span> is injective on the instances of <span class="math inline">X</span> at <span class="math inline">1_E</span>, so <span class="math inline">g\cdot x=x</span>.</p>
-<p><strong>Step 2: invariance shrinks pinning sets.</strong> Suppose <span class="math inline">x</span> is pinned down by a finite <span class="math inline">M</span> and <span class="math inline">g\cdot x=x</span> for every <span class="math inline">g\in\mathrm{Fix}(N)</span>. We show that <span class="math inline">x</span> is pinned down by <span class="math inline">M\cap N</span>.</p>
-<p>Let <span class="math inline">h,h&#39;</span> be arrows out of <span class="math inline">E</span> with a common target that agree on <span class="math inline">M\cap N</span>. Every arrow into <span class="math inline">E</span> is an injection into <span class="math inline">\mathbb N</span>, and every arrow into <span class="math inline">O</span> an injection into the old individuals.</p>
+<p><span class="math inline">R</span> is injective on the instances of
+<span class="math inline">X</span> at <span
+class="math inline">1_E</span>, so <span class="math inline">g\cdot
+x=x</span>.</p>
+<p><strong>Step 2: invariance shrinks pinning sets.</strong> Suppose
+<span class="math inline">x</span> is pinned down by a finite <span
+class="math inline">M</span> and <span class="math inline">g\cdot
+x=x</span> for every <span
+class="math inline">g\in\mathrm{Fix}(N)</span>. We show that <span
+class="math inline">x</span> is pinned down by <span
+class="math inline">M\cap N</span>.</p>
+<p>Let <span class="math inline">h,h&#39;</span> be arrows out of <span
+class="math inline">E</span> with a common target that agree on <span
+class="math inline">M\cap N</span>. Every arrow into <span
+class="math inline">E</span> is an injection into <span
+class="math inline">\mathbb N</span>, and every arrow into <span
+class="math inline">O</span> an injection into the old individuals.</p>
 <ol type="1">
-<li>Choose <span class="math inline">g\in\mathrm{Fix}(N)</span> sending the points of <span class="math inline">M\setminus N</span> outside <span class="math inline">N\cup M</span> and outside <span class="math inline">h^{-1}(h&#39;(M))</span>.</li>
-<li>Choose distinct fresh points <span class="math inline">p_m</span>, one for each <span class="math inline">m\in M\setminus N</span>, outside <span class="math inline">N\cup M\cup g(M)</span>. Let <span class="math inline">h&#39;&#39;</span> be an arrow with the target of <span class="math inline">h</span> that agrees with <span class="math inline">h\circ g</span> on <span class="math inline">M</span> and sends each <span class="math inline">p_m</span> to <span class="math inline">h&#39;(m)</span>. The prescribed values are distinct: <span class="math inline">h&#39;</span> is injective and agrees with <span class="math inline">h</span> on <span class="math inline">M\cap N</span>, and step 1 kept <span class="math inline">h(g(M\setminus N))</span> away from <span class="math inline">h&#39;(M)</span>. So <span class="math inline">h&#39;&#39;</span> can be taken injective, with old range when the target is <span class="math inline">O</span>.</li>
-<li>Let <span class="math inline">g&#39;\in\mathrm{Fix}(N)</span> swap each <span class="math inline">m\in M\setminus N</span> with <span class="math inline">p_m</span>. Then <span class="math inline">h&#39;&#39;\circ g&#39;</span> agrees with <span class="math inline">h&#39;</span> on <span class="math inline">M</span>.</li>
+<li>Choose <span class="math inline">g\in\mathrm{Fix}(N)</span> sending
+the points of <span class="math inline">M\setminus N</span> outside
+<span class="math inline">N\cup M</span> and outside <span
+class="math inline">h^{-1}(h&#39;(M))</span>.</li>
+<li>Choose distinct fresh points <span class="math inline">p_m</span>,
+one for each <span class="math inline">m\in M\setminus N</span>, outside
+<span class="math inline">N\cup M\cup g(M)</span>. Let <span
+class="math inline">h&#39;&#39;</span> be an arrow with the target of
+<span class="math inline">h</span> that agrees with <span
+class="math inline">h\circ g</span> on <span
+class="math inline">M</span> and sends each <span
+class="math inline">p_m</span> to <span
+class="math inline">h&#39;(m)</span>. The prescribed values are
+distinct: <span class="math inline">h&#39;</span> is injective and
+agrees with <span class="math inline">h</span> on <span
+class="math inline">M\cap N</span>, and step 1 kept <span
+class="math inline">h(g(M\setminus N))</span> away from <span
+class="math inline">h&#39;(M)</span>. So <span
+class="math inline">h&#39;&#39;</span> can be taken injective, with old
+range when the target is <span class="math inline">O</span>.</li>
+<li>Let <span class="math inline">g&#39;\in\mathrm{Fix}(N)</span> swap
+each <span class="math inline">m\in M\setminus N</span> with <span
+class="math inline">p_m</span>. Then <span
+class="math inline">h&#39;&#39;\circ g&#39;</span> agrees with <span
+class="math inline">h&#39;</span> on <span
+class="math inline">M</span>.</li>
 </ol>
-<p>Pinning by <span class="math inline">M</span> and invariance give <span class="math inline">x(h)=x(h\circ g)=x(h&#39;&#39;)=x(h&#39;&#39;\circ g&#39;)=x(h&#39;)</span>.</p>
-<p><strong>Step 3: the join.</strong> By steps 1 and 2, every instance of <span class="math inline">X</span> at <span class="math inline">1_E</span> is pinned down by <span class="math inline">N</span>. Their union <span class="math inline">J</span>, tuple by tuple at each arrow, is symmetric, being a union of symmetric intensions, and is pinned down by <span class="math inline">N</span>. So <span class="math inline">J</span> is in the domain. At <span class="math inline">1_E</span>, <span class="math inline">Y\le Z</span> is inclusion at every arrow out of <span class="math inline">E</span>, so <span class="math inline">J</span> is the least upper bound of <span class="math inline">X</span>.</p>
-<p>This is the Fraenkel–Mostowski phenomenon: in a permutation model, a set of atoms is countable only if it is finite.</p>
-<p><strong>At <span class="math inline">O</span>, so □Countable Boolean Completeness holds.</strong> The worlds reachable from <span class="math inline">1_E</span> are the arrows into <span class="math inline">E</span> and into <span class="math inline">O</span>, and a closed sentence holds at an arrow iff it holds at the identity of its target. So it remains to run the argument at <span class="math inline">1_O</span>, with <span class="math inline">G_O</span>, the permutations preserving old and new, as the symmetry group. Step 1 is unchanged. Step 2 fails as stated: the proposition <span class="math inline">G_O</span> is pinned down by <span class="math inline">\{0&#39;\}</span> and invariant under all of <span class="math inline">G_O</span>, but not pinned down by <span class="math inline">\emptyset</span>. Repair it by enlarging <span class="math inline">N</span> to contain a new individual <span class="math inline">0&#39;</span>, which keeps <span class="math inline">X</span> and <span class="math inline">R</span> pinned down by <span class="math inline">N</span>, and prove that an <span class="math inline">x</span> pinned down by <span class="math inline">M</span> and invariant under <span class="math inline">\mathrm{Fix}(N)</span> is pinned down by <span class="math inline">(M\cap N)\cup\{0&#39;\}</span>, a subset of <span class="math inline">N</span>.</p>
-<p>Let <span class="math inline">h,h&#39;</span> be arrows out of <span class="math inline">O</span> with a common target that agree on <span class="math inline">(M\cap N)\cup\{0&#39;\}</span>. If the target is <span class="math inline">E</span>, both are injections into <span class="math inline">\mathbb N</span> and the construction of step 2 applies, with each fresh point <span class="math inline">p_m</span> of the same sort, old or new, as <span class="math inline">m</span>, so that <span class="math inline">g</span> and <span class="math inline">g&#39;</span> lie in <span class="math inline">G_O</span>. If the target is <span class="math inline">O</span>, then <span class="math inline">h</span> and <span class="math inline">h&#39;</span> agree on <span class="math inline">0&#39;</span>, so both send it to a new individual or both to an old one: both lie in <span class="math inline">G_O</span>, or both in <span class="math inline">K</span>.</p>
+<p>Pinning by <span class="math inline">M</span> and invariance give
+<span class="math inline">x(h)=x(h\circ
+g)=x(h&#39;&#39;)=x(h&#39;&#39;\circ g&#39;)=x(h&#39;)</span>.</p>
+<p><strong>Step 3: the join.</strong> By steps 1 and 2, every instance
+of <span class="math inline">X</span> at <span
+class="math inline">1_E</span> is pinned down by <span
+class="math inline">N</span>. Their union <span
+class="math inline">J</span>, tuple by tuple at each arrow, is
+symmetric, being a union of symmetric intensions, and is pinned down by
+<span class="math inline">N</span>. So <span
+class="math inline">J</span> is in the domain. At <span
+class="math inline">1_E</span>, <span class="math inline">Y\le Z</span>
+is inclusion at every arrow out of <span class="math inline">E</span>,
+so <span class="math inline">J</span> is the least upper bound of <span
+class="math inline">X</span>.</p>
+<p>This is the Fraenkel–Mostowski phenomenon: in a permutation model, a
+set of atoms is countable only if it is finite.</p>
+<p><strong>At <span class="math inline">O</span>, so □Countable Boolean
+Completeness holds.</strong> The worlds reachable from <span
+class="math inline">1_E</span> are the arrows into <span
+class="math inline">E</span> and into <span
+class="math inline">O</span>, and a closed sentence holds at an arrow
+iff it holds at the identity of its target. So it remains to run the
+argument at <span class="math inline">1_O</span>, with <span
+class="math inline">G_O</span>, the permutations preserving old and new,
+as the symmetry group. Step 1 is unchanged. Step 2 fails as stated: the
+proposition <span class="math inline">G_O</span> is pinned down by <span
+class="math inline">\{0&#39;\}</span> and invariant under all of <span
+class="math inline">G_O</span>, but not pinned down by <span
+class="math inline">\emptyset</span>. Repair it by enlarging <span
+class="math inline">N</span> to contain a new individual <span
+class="math inline">0&#39;</span>, which keeps <span
+class="math inline">X</span> and <span class="math inline">R</span>
+pinned down by <span class="math inline">N</span>, and prove that an
+<span class="math inline">x</span> pinned down by <span
+class="math inline">M</span> and invariant under <span
+class="math inline">\mathrm{Fix}(N)</span> is pinned down by <span
+class="math inline">(M\cap N)\cup\{0&#39;\}</span>, a subset of <span
+class="math inline">N</span>.</p>
+<p>Let <span class="math inline">h,h&#39;</span> be arrows out of <span
+class="math inline">O</span> with a common target that agree on <span
+class="math inline">(M\cap N)\cup\{0&#39;\}</span>. If the target is
+<span class="math inline">E</span>, both are injections into <span
+class="math inline">\mathbb N</span> and the construction of step 2
+applies, with each fresh point <span class="math inline">p_m</span> of
+the same sort, old or new, as <span class="math inline">m</span>, so
+that <span class="math inline">g</span> and <span
+class="math inline">g&#39;</span> lie in <span
+class="math inline">G_O</span>. If the target is <span
+class="math inline">O</span>, then <span class="math inline">h</span>
+and <span class="math inline">h&#39;</span> agree on <span
+class="math inline">0&#39;</span>, so both send it to a new individual
+or both to an old one: both lie in <span class="math inline">G_O</span>,
+or both in <span class="math inline">K</span>.</p>
 <ul>
-<li>Both in <span class="math inline">K</span>: the prescribed values of <span class="math inline">h&#39;&#39;</span> are all old, and any injection into the old individuals is in <span class="math inline">K</span>.</li>
-<li>Both in <span class="math inline">G_O</span>: the prescribed values preserve sort, since <span class="math inline">h\circ g</span> does and <span class="math inline">h&#39;(m)</span> has the sort of <span class="math inline">m</span> and of <span class="math inline">p_m</span>. A finite sort-preserving partial injection extends to a member of <span class="math inline">G_O</span>.</li>
+<li>Both in <span class="math inline">K</span>: the prescribed values of
+<span class="math inline">h&#39;&#39;</span> are all old, and any
+injection into the old individuals is in <span
+class="math inline">K</span>.</li>
+<li>Both in <span class="math inline">G_O</span>: the prescribed values
+preserve sort, since <span class="math inline">h\circ g</span> does and
+<span class="math inline">h&#39;(m)</span> has the sort of <span
+class="math inline">m</span> and of <span
+class="math inline">p_m</span>. A finite sort-preserving partial
+injection extends to a member of <span
+class="math inline">G_O</span>.</li>
 </ul>
-<p>In either case the chain <span class="math inline">x(h)=x(h\circ g)=x(h&#39;&#39;)=x(h&#39;&#39;\circ g&#39;)=x(h&#39;)</span> goes through. Step 3 is unchanged. So Countable Boolean Completeness holds at <span class="math inline">1_O</span> as well, and every closed instance is necessary at <span class="math inline">1_E</span>.</p>
-<h2 id="with-one-individual-bc-and-rigid-comprehension">With one individual: □BC and □Rigid Comprehension</h2>
-<p>In the variant with a single individual, the failures of Inextensible Comprehension and of Boolean Completeness at <span class="math inline">O</span> above disappear. Both used individuals: the parameter <span class="math inline">0&#39;</span>, and haecceities of infinitely many old individuals.</p>
+<p>In either case the chain <span class="math inline">x(h)=x(h\circ
+g)=x(h&#39;&#39;)=x(h&#39;&#39;\circ g&#39;)=x(h&#39;)</span> goes
+through. Step 3 is unchanged. So Countable Boolean Completeness holds at
+<span class="math inline">1_O</span> as well, and every closed instance
+is necessary at <span class="math inline">1_E</span>.</p>
+<h2 id="with-one-individual-bc-and-rigid-comprehension">With one
+individual: □BC and □Rigid Comprehension</h2>
+<p>In the variant with a single individual, the failures of Inextensible
+Comprehension and of Boolean Completeness at <span
+class="math inline">O</span> above disappear. Both used individuals: the
+parameter <span class="math inline">0&#39;</span>, and haecceities of
+infinitely many old individuals.</p>
 <p>Call the following four classes of arrows the <em>kinds</em>:</p>
 <ul>
 <li>the arrows into <span class="math inline">E</span>;</li>
-<li>the arrows from <span class="math inline">E</span> into <span class="math inline">O</span>;</li>
+<li>the arrows from <span class="math inline">E</span> into <span
+class="math inline">O</span>;</li>
 <li><span class="math inline">G_O</span>;</li>
 <li><span class="math inline">K</span>.</li>
 </ul>
 <p>The kind of a composite is fixed by the kinds of its factors.</p>
-<p><strong>Claim.</strong> At each object, every entity of each type is a union of classes, one class for each kind of arrow and each tuple of arguments. Every entity is fixed by every symmetry, and each domain is finite.</p>
-<p><em>Proof, by induction on types.</em> The single individual is fixed by every symmetry. Suppose the arguments at every object are fixed by every symmetry, and there are finitely many of them.</p>
+<p><strong>Claim.</strong> At each object, every entity of each type is
+a union of classes, one class for each kind of arrow and each tuple of
+arguments. Every entity is fixed by every symmetry, and each domain is
+finite.</p>
+<p><em>Proof, by induction on types.</em> The single individual is fixed
+by every symmetry. Suppose the arguments at every object are fixed by
+every symmetry, and there are finitely many of them.</p>
 <ol type="1">
-<li><strong>Classes are determined by kind.</strong> The class of a tuple <span class="math inline">\langle\bar a,h\rangle</span> under pinning by <span class="math inline">M</span> is the orbit of <span class="math inline">(\bar a,h\restriction M)</span>. Since <span class="math inline">\bar a</span> is fixed, the orbit is determined by the kind of <span class="math inline">h</span>. At <span class="math inline">O</span> this needs <span class="math inline">M</span> to contain a new individual, which separates <span class="math inline">G_O</span> from <span class="math inline">K</span>. Larger <span class="math inline">M</span> split nothing further.</li>
-<li><strong>The domain is finite.</strong> An entity is a union of such classes, and there are finitely many of them.</li>
-<li><strong>Entities are fixed by symmetries.</strong> Precomposing with a symmetry preserves kinds, so every entity is fixed by every symmetry. This carries the induction to the next type. <span class="math inline">\square</span></li>
+<li><strong>Classes are determined by kind.</strong> The class of a
+tuple <span class="math inline">\langle\bar a,h\rangle</span> under
+pinning by <span class="math inline">M</span> is the orbit of <span
+class="math inline">(\bar a,h\restriction M)</span>. Since <span
+class="math inline">\bar a</span> is fixed, the orbit is determined by
+the kind of <span class="math inline">h</span>. At <span
+class="math inline">O</span> this needs <span
+class="math inline">M</span> to contain a new individual, which
+separates <span class="math inline">G_O</span> from <span
+class="math inline">K</span>. Larger <span class="math inline">M</span>
+split nothing further.</li>
+<li><strong>The domain is finite.</strong> An entity is a union of such
+classes, and there are finitely many of them.</li>
+<li><strong>Entities are fixed by symmetries.</strong> Precomposing with
+a symmetry preserves kinds, so every entity is fixed by every symmetry.
+This carries the induction to the next type. <span
+class="math inline">\square</span></li>
 </ol>
-<p>So every domain is a finite Boolean algebra, hence complete. BC holds at <span class="math inline">E</span> and at <span class="math inline">O</span>, and so does □BC.</p>
-<p><strong>Transport depends only on kind.</strong> The transport of an entity along an arrow depends only on the arrow’s kind, since kinds of composites are determined by the kinds of their factors.</p>
-<p><strong>Rigid Comprehension.</strong> Given <span class="math inline">X</span> at an object, let <span class="math inline">Y</span> be the intension whose extension at <span class="math inline">h</span> is the transport along <span class="math inline">h</span> of <span class="math inline">X</span>’s extension at the identity. This is the witness used for full action models.</p>
+<p>So every domain is a finite Boolean algebra, hence complete. BC holds
+at <span class="math inline">E</span> and at <span
+class="math inline">O</span>, and so does □BC.</p>
+<p><strong>Transport depends only on kind.</strong> The transport of an
+entity along an arrow depends only on the arrow’s kind, since kinds of
+composites are determined by the kinds of their factors.</p>
+<p><strong>Rigid Comprehension.</strong> Given <span
+class="math inline">X</span> at an object, let <span
+class="math inline">Y</span> be the intension whose extension at <span
+class="math inline">h</span> is the transport along <span
+class="math inline">h</span> of <span class="math inline">X</span>’s
+extension at the identity. This is the witness used for full action
+models.</p>
 <ul>
-<li><span class="math inline">Y</span> is a union of classes, so it is in the domain.</li>
-<li><span class="math inline">Y</span> is coextensive with <span class="math inline">X</span>.</li>
-<li><span class="math inline">Y</span> is persistent, since its extension at <span class="math inline">h\circ j</span> is its extension at <span class="math inline">h</span> transported along <span class="math inline">j</span>.</li>
-<li><span class="math inline">Y</span> is inextensible. Suppose every <span class="math inline">Y</span>-thing at a world is necessarily <span class="math inline">Z</span>. Then at every later world, each <span class="math inline">Y</span>-thing is the transport of one of them, so it is <span class="math inline">Z</span> there.</li>
+<li><span class="math inline">Y</span> is a union of classes, so it is
+in the domain.</li>
+<li><span class="math inline">Y</span> is coextensive with <span
+class="math inline">X</span>.</li>
+<li><span class="math inline">Y</span> is persistent, since its
+extension at <span class="math inline">h\circ j</span> is its extension
+at <span class="math inline">h</span> transported along <span
+class="math inline">j</span>.</li>
+<li><span class="math inline">Y</span> is inextensible. Suppose every
+<span class="math inline">Y</span>-thing at a world is necessarily <span
+class="math inline">Z</span>. Then at every later world, each <span
+class="math inline">Y</span>-thing is the transport of one of them, so
+it is <span class="math inline">Z</span> there.</li>
 </ul>
 <p>This works at both objects, so □Rigid Comprehension holds.</p>
 <h2 id="other-verdicts">Other verdicts</h2>
 <ul>
-<li>The group’s shared arguments give the failure of Relational Choice (transposable) and the Axiom of Infinity at <span class="math inline">e</span>.</li>
-<li>The topic’s general arguments for finitely many propositions give the failure of the Infinity schema, the Axiom of Infinity and Possible Infinity at <span class="math inline">t</span>.</li>
-<li>The map derives the rest, including the failure of No Pure Contingency (ND holds at <span class="math inline">t</span> and □ND at <span class="math inline">t</span> fails) and of the Distinctness-preserving collapse (Actuality holds and Inextensible Comprehension fails).</li>
+<li>The group’s shared arguments give the failure of Relational Choice
+(transposable) and the Axiom of Infinity at <span
+class="math inline">e</span>.</li>
+<li>The topic’s general arguments for finitely many propositions give
+the failure of the Infinity schema, the Axiom of Infinity and Possible
+Infinity at <span class="math inline">t</span>.</li>
+<li>The map derives the rest, including the failure of No Pure
+Contingency (ND holds at <span class="math inline">t</span> and □ND at
+<span class="math inline">t</span> fails) and of the
+Distinctness-preserving collapse (Actuality holds and Inextensible
+Comprehension fails).</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — Definitions 15–18, p. 8; Proposition 20. The symmetric ideally-full models, of which this is one, on a new two-object category.</li>
+<li><strong>Background: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — Definitions 15–18,
+p. 8; Proposition 20. The symmetric ideally-full models, of which this
+is one, on a new two-object category.</li>
 </ul>
 </body></html>

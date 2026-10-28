@@ -323,26 +323,88 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Transversal ∧ Relational Choice ⇒ Transversal Choice</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.transversal_and_relational_choice_imply_transversal_choice</code>; produced by Christopher Sun (the claim and the argument), 26 September 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.transversal_and_relational_choice_imply_transversal_choice</code>;
+produced by Christopher Sun (the claim and the argument), 26 September
+2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28
+September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Transversal.</strong> There is a property of properties that picks out exactly one property from each coextension class, that is, exactly one property coextensive with any given property.</li>
-<li><strong>Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
+<li><strong>Transversal.</strong> There is a property of properties that
+picks out exactly one property from each coextension class, that is,
+exactly one property coextensive with any given property.</li>
+<li><strong>Relational Choice.</strong> Every serial binary relation has
+a functional subrelation.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Transversal Choice.</strong> Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at
+any type including e, has a transversal, that is, a property with
+exactly one instance in each of its cells.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">R^{\sigma\sigma t}</span> be an equivalence relation, and write <span class="math inline">[x]</span> for its cell <span class="math inline">\lambda z\, .\,(Rx)z</span>. Transversal at <span class="math inline">\sigma</span> gives <span class="math inline">F^{(\sigma t)t}</span> such that each property is coextensive with exactly one <span class="math inline">F</span>-property. Relational Choice at types <span class="math inline">(\sigma t,\sigma)</span>, applied to the serial relation <span class="math inline">(UC)y:=Cy\lor\neg\exists z\, .\,Cz</span>, gives a functional <span class="math inline">S</span> with <span class="math inline">(SC)y\to(UC)y</span>. Put <span class="math inline">Gy:=\exists Y\, .\,FY\land(\forall z\, .\,Yz\leftrightarrow(Ry)z)\land(SY)y</span>. Existence: given <span class="math inline">x</span>, let <span class="math inline">Y_x</span> be the <span class="math inline">F</span>-property coextensive with <span class="math inline">[x]</span>. It has the instance <span class="math inline">x</span>, so the <span class="math inline">y</span> with <span class="math inline">(SY_x)y</span> satisfies <span class="math inline">Y_xy</span>, hence <span class="math inline">(Rx)y</span>. Then <span class="math inline">[y]</span> is coextensive with <span class="math inline">[x]</span> and so with <span class="math inline">Y_x</span>, and <span class="math inline">Gy</span> holds through <span class="math inline">Y_x</span>. Uniqueness: suppose <span class="math inline">(Rx)y</span> and <span class="math inline">(Rx)y&#39;</span>, with <span class="math inline">Gy</span> through <span class="math inline">Y</span> and <span class="math inline">Gy&#39;</span> through <span class="math inline">Y&#39;</span>. Then <span class="math inline">Y</span> is coextensive with <span class="math inline">[y]</span>, <span class="math inline">[y]</span> with <span class="math inline">[x]</span>, <span class="math inline">[x]</span> with <span class="math inline">[y&#39;]</span>, and <span class="math inline">[y&#39;]</span> with <span class="math inline">Y&#39;</span>; so <span class="math inline">Y</span> and <span class="math inline">Y&#39;</span> are <span class="math inline">F</span>-properties coextensive with <span class="math inline">[x]</span>, and <span class="math inline">Y=Y&#39;</span> by the uniqueness clause of Transversal. Now <span class="math inline">(SY)y</span> and <span class="math inline">(SY)y&#39;</span>, so <span class="math inline">y=y&#39;</span> by functionality of <span class="math inline">S</span>. Thus <span class="math inline">G</span> is a transversal of <span class="math inline">R</span>.</p>
+<p>Let <span class="math inline">R^{\sigma\sigma t}</span> be an
+equivalence relation, and write <span class="math inline">[x]</span> for
+its cell <span class="math inline">\lambda z\, .\,(Rx)z</span>.
+Transversal at <span class="math inline">\sigma</span> gives <span
+class="math inline">F^{(\sigma t)t}</span> such that each property is
+coextensive with exactly one <span
+class="math inline">F</span>-property. Relational Choice at types <span
+class="math inline">(\sigma t,\sigma)</span>, applied to the serial
+relation <span class="math inline">(UC)y:=Cy\lor\neg\exists z\,
+.\,Cz</span>, gives a functional <span class="math inline">S</span> with
+<span class="math inline">(SC)y\to(UC)y</span>. Put <span
+class="math inline">Gy:=\exists Y\, .\,FY\land(\forall z\,
+.\,Yz\leftrightarrow(Ry)z)\land(SY)y</span>. Existence: given <span
+class="math inline">x</span>, let <span class="math inline">Y_x</span>
+be the <span class="math inline">F</span>-property coextensive with
+<span class="math inline">[x]</span>. It has the instance <span
+class="math inline">x</span>, so the <span class="math inline">y</span>
+with <span class="math inline">(SY_x)y</span> satisfies <span
+class="math inline">Y_xy</span>, hence <span
+class="math inline">(Rx)y</span>. Then <span
+class="math inline">[y]</span> is coextensive with <span
+class="math inline">[x]</span> and so with <span
+class="math inline">Y_x</span>, and <span class="math inline">Gy</span>
+holds through <span class="math inline">Y_x</span>. Uniqueness: suppose
+<span class="math inline">(Rx)y</span> and <span
+class="math inline">(Rx)y&#39;</span>, with <span
+class="math inline">Gy</span> through <span class="math inline">Y</span>
+and <span class="math inline">Gy&#39;</span> through <span
+class="math inline">Y&#39;</span>. Then <span
+class="math inline">Y</span> is coextensive with <span
+class="math inline">[y]</span>, <span class="math inline">[y]</span>
+with <span class="math inline">[x]</span>, <span
+class="math inline">[x]</span> with <span
+class="math inline">[y&#39;]</span>, and <span
+class="math inline">[y&#39;]</span> with <span
+class="math inline">Y&#39;</span>; so <span class="math inline">Y</span>
+and <span class="math inline">Y&#39;</span> are <span
+class="math inline">F</span>-properties coextensive with <span
+class="math inline">[x]</span>, and <span
+class="math inline">Y=Y&#39;</span> by the uniqueness clause of
+Transversal. Now <span class="math inline">(SY)y</span> and <span
+class="math inline">(SY)y&#39;</span>, so <span
+class="math inline">y=y&#39;</span> by functionality of <span
+class="math inline">S</span>. Thus <span class="math inline">G</span> is
+a transversal of <span class="math inline">R</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>With the converse arrows from Transversal Choice to Transversal and to Relational Choice, Transversal Choice is equivalent to Transversal together with Relational Choice. The argument is the quotient argument of relational-choice-and-extensionality-imply-transversal-choice, with the <span class="math inline">F</span>-representative of each cell in place of the cell itself; this is the step Relational Choice alone does not supply. Consequently Relational Choice implies Transversal Choice if and only if it implies Transversal.</p>
+<p>With the converse arrows from Transversal Choice to Transversal and
+to Relational Choice, Transversal Choice is equivalent to Transversal
+together with Relational Choice. The argument is the quotient argument
+of relational-choice-and-extensionality-imply-transversal-choice, with
+the <span class="math inline">F</span>-representative of each cell in
+place of the cell itself; this is the step Relational Choice alone does
+not supply. Consequently Relational Choice implies Transversal Choice if
+and only if it implies Transversal.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Sun 26 Sep</strong> — Christopher Sun, 26 September 2026.</li>
+<li><strong>Sun 26 Sep</strong> — Christopher Sun, 26 September
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/transversal-and-relational-choice-imply-transversal-choice.yaml</code>
+Record:
+<code>topics/classicism/results/transversal-and-relational-choice-imply-transversal-choice.yaml</code>
 </p>
 </body></html>

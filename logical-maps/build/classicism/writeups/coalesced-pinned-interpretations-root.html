@@ -322,74 +322,263 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum: interpretation arrows into every component object, finitely pinned root</h1></header><p>Cian Dorr gave this construction on 19 October 2026, to show that Maximalist Classicism is consistent with BF. In the same discussion Claude Opus 5.5 (Anthropic) added a condition on the domains: transports must land in the component domains. This write-up gives the verification. No second reader has checked it, and no Lean verification is claimed.</p>
-<h2 id="why-the-existing-coalesced-sums-fail-bf">Why the existing coalesced sums fail BF</h2>
-<p>In a coalesced sum (<em>Classicism</em>, Appendix E), every arrow from the root into a component factors through a single distinguished arrow, and a root entity may have any component parts. So any component that fails BF at its root makes BF fail at the coalesced root. The component’s counterexample becomes a component part of a root entity, as in the group’s argument barcan-t-component. Maximalism needs such components, since the negation of BF is consistent with C.</p>
-<p>The construction below replaces the distinguished arrows. The root gets an arrow into every object of every component, one for each interpretation of a large signature. Its domains are pinned down by finite sets of constants, just as the finitely pinned models of Appendix D are pinned down by finite sets of individuals.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum: interpretation arrows into every component object, finitely pinned root</h1></header><p>Cian Dorr gave this construction on 19 October 2026, to show that
+Maximalist Classicism is consistent with BF. In the same discussion
+Claude Opus 5.5 (Anthropic) added a condition on the domains: transports
+must land in the component domains. This write-up gives the
+verification. No second reader has checked it, and no Lean verification
+is claimed.</p>
+<h2 id="why-the-existing-coalesced-sums-fail-bf">Why the existing
+coalesced sums fail BF</h2>
+<p>In a coalesced sum (<em>Classicism</em>, Appendix E), every arrow
+from the root into a component factors through a single distinguished
+arrow, and a root entity may have any component parts. So any component
+that fails BF at its root makes BF fail at the coalesced root. The
+component’s counterexample becomes a component part of a root entity, as
+in the group’s argument barcan-t-component. Maximalism needs such
+components, since the negation of BF is consistent with C.</p>
+<p>The construction below replaces the distinguished arrows. The root
+gets an arrow into every object of every component, one for each
+interpretation of a large signature. Its domains are pinned down by
+finite sets of constants, just as the finitely pinned models of Appendix
+D are pinned down by finite sets of individuals.</p>
 <h2 id="the-construction">The construction</h2>
 <ul>
-<li><strong>Components.</strong> Fix a set <span class="math inline">A</span> of action models complete for C(<span class="math inline">\Sigma</span>), with disjoint objects and arrows. Every <span class="math inline">\Sigma</span>-sentence consistent with C(<span class="math inline">\Sigma</span>) is true at the root of some model in <span class="math inline">A</span> under some interpretation of <span class="math inline">\Sigma</span>.</li>
-<li><strong>Signature.</strong> Fix <span class="math inline">\Sigma^+\supseteq\Sigma</span> with countably infinitely many constants of every type.</li>
-<li><strong>Arrows.</strong> Add an object <span class="math inline">W_0</span>. The arrows out of <span class="math inline">W_0</span> are its identity and the pairs <span class="math inline">\langle V,I\rangle</span>, for <span class="math inline">V</span> an object of a model in <span class="math inline">A</span> and <span class="math inline">I</span> an interpretation of <span class="math inline">\Sigma^+</span> at <span class="math inline">V</span>, giving each constant of type <span class="math inline">\tau</span> an entity of type <span class="math inline">\tau</span> at <span class="math inline">V</span>. No arrow enters <span class="math inline">W_0</span> except its identity.</li>
-<li><strong>Composition.</strong> For an arrow <span class="math inline">k:V\to V&#39;</span> of a component, <span class="math inline">k\circ\langle V,I\rangle:=\langle V&#39;,k\cdot I\rangle</span>, transporting each constant’s interpretation. This is associative because transport is functorial.</li>
-<li><strong>Individuals.</strong> The individuals at <span class="math inline">W_0</span> are the individual constants of <span class="math inline">\Sigma^+</span>, and <span class="math inline">\langle V,I\rangle</span> sends <span class="math inline">c</span> to <span class="math inline">I(c)</span>.</li>
-<li><strong>Domains at <span class="math inline">W_0</span>.</strong> An entity at <span class="math inline">W_0</span> of a relational type is an intension <span class="math inline">F</span>, assigning to each arrow out of <span class="math inline">W_0</span> a set of tuples of entities at its target, subject to two conditions:
+<li><strong>Components.</strong> Fix a set <span
+class="math inline">A</span> of action models complete for C(<span
+class="math inline">\Sigma</span>), with disjoint objects and arrows.
+Every <span class="math inline">\Sigma</span>-sentence consistent with
+C(<span class="math inline">\Sigma</span>) is true at the root of some
+model in <span class="math inline">A</span> under some interpretation of
+<span class="math inline">\Sigma</span>.</li>
+<li><strong>Signature.</strong> Fix <span
+class="math inline">\Sigma^+\supseteq\Sigma</span> with countably
+infinitely many constants of every type.</li>
+<li><strong>Arrows.</strong> Add an object <span
+class="math inline">W_0</span>. The arrows out of <span
+class="math inline">W_0</span> are its identity and the pairs <span
+class="math inline">\langle V,I\rangle</span>, for <span
+class="math inline">V</span> an object of a model in <span
+class="math inline">A</span> and <span class="math inline">I</span> an
+interpretation of <span class="math inline">\Sigma^+</span> at <span
+class="math inline">V</span>, giving each constant of type <span
+class="math inline">\tau</span> an entity of type <span
+class="math inline">\tau</span> at <span class="math inline">V</span>.
+No arrow enters <span class="math inline">W_0</span> except its
+identity.</li>
+<li><strong>Composition.</strong> For an arrow <span
+class="math inline">k:V\to V&#39;</span> of a component, <span
+class="math inline">k\circ\langle V,I\rangle:=\langle V&#39;,k\cdot
+I\rangle</span>, transporting each constant’s interpretation. This is
+associative because transport is functorial.</li>
+<li><strong>Individuals.</strong> The individuals at <span
+class="math inline">W_0</span> are the individual constants of <span
+class="math inline">\Sigma^+</span>, and <span
+class="math inline">\langle V,I\rangle</span> sends <span
+class="math inline">c</span> to <span
+class="math inline">I(c)</span>.</li>
+<li><strong>Domains at <span class="math inline">W_0</span>.</strong> An
+entity at <span class="math inline">W_0</span> of a relational type is
+an intension <span class="math inline">F</span>, assigning to each arrow
+out of <span class="math inline">W_0</span> a set of tuples of entities
+at its target, subject to two conditions:
 <ol type="1">
-<li><em>Finite pinning.</em> For some finite <span class="math inline">S\subseteq\Sigma^+</span>, two arrows <span class="math inline">\langle V,I\rangle</span> and <span class="math inline">\langle V,I&#39;\rangle</span> into the same object with <span class="math inline">I{\restriction}S=I&#39;{\restriction}S</span> give <span class="math inline">F</span> the same value. The identity is the only arrow into <span class="math inline">W_0</span>, so its value is unconstrained.</li>
-<li><em>Landing.</em> For every arrow <span class="math inline">h=\langle V,I\rangle</span>, the transport <span class="math inline">h\cdot
-F</span>, the intension <span class="math inline">k\mapsto F_{k\circ h}</span> over the arrows out of <span class="math inline">V</span>, is an element of <span class="math inline">V</span>’s domain in its component.</li>
+<li><em>Finite pinning.</em> For some finite <span
+class="math inline">S\subseteq\Sigma^+</span>, two arrows <span
+class="math inline">\langle V,I\rangle</span> and <span
+class="math inline">\langle V,I&#39;\rangle</span> into the same object
+with <span
+class="math inline">I{\restriction}S=I&#39;{\restriction}S</span> give
+<span class="math inline">F</span> the same value. The identity is the
+only arrow into <span class="math inline">W_0</span>, so its value is
+unconstrained.</li>
+<li><em>Landing.</em> For every arrow <span
+class="math inline">h=\langle V,I\rangle</span>, the transport <span
+class="math inline">h\cdot
+F</span>, the intension <span class="math inline">k\mapsto F_{k\circ
+h}</span> over the arrows out of <span class="math inline">V</span>, is
+an element of <span class="math inline">V</span>’s domain in its
+component.</li>
 </ol>
-The types are well-founded, so this defines the domains by recursion on the type.</li>
-<li><strong>Evaluation point.</strong> <span class="math inline">1_{W_0}</span>.</li>
-<li><strong>Interpretation of <span class="math inline">\Sigma</span>.</strong> Each constant <span class="math inline">c\in\Sigma</span> denotes <span class="math inline">\hat c</span>, defined below.</li>
+The types are well-founded, so this defines the domains by recursion on
+the type.</li>
+<li><strong>Evaluation point.</strong> <span
+class="math inline">1_{W_0}</span>.</li>
+<li><strong>Interpretation of <span
+class="math inline">\Sigma</span>.</strong> Each constant <span
+class="math inline">c\in\Sigma</span> denotes <span
+class="math inline">\hat c</span>, defined below.</li>
 </ul>
-<p>Without the landing condition the structure would not be an action model. For instance, <span class="math inline">\{\langle V&#39;,I&#39;\rangle : I&#39;(c)\in B_{V&#39;}\}</span>, for an arbitrary assignment <span class="math inline">B</span> of sets of individuals to objects, is pinned down by <span class="math inline">\{c\}</span>. But its transport along <span class="math inline">\langle V,I\rangle</span> is the proposition that <span class="math inline">I(c)</span> has the codomain property <span class="math inline">B</span>, which need not be in the component’s domain, for instance when the component is symmetric.</p>
-<h2 id="the-entities-hat-c">The entities <span class="math inline">\hat c</span></h2>
-<p>For a constant <span class="math inline">c</span> of type <span class="math inline">\sigma</span>, let <span class="math inline">\hat c</span> be the following.</p>
+<p>Without the landing condition the structure would not be an action
+model. For instance, <span class="math inline">\{\langle
+V&#39;,I&#39;\rangle : I&#39;(c)\in B_{V&#39;}\}</span>, for an
+arbitrary assignment <span class="math inline">B</span> of sets of
+individuals to objects, is pinned down by <span
+class="math inline">\{c\}</span>. But its transport along <span
+class="math inline">\langle V,I\rangle</span> is the proposition that
+<span class="math inline">I(c)</span> has the codomain property <span
+class="math inline">B</span>, which need not be in the component’s
+domain, for instance when the component is symmetric.</p>
+<h2 id="the-entities-hat-c">The entities <span class="math inline">\hat
+c</span></h2>
+<p>For a constant <span class="math inline">c</span> of type <span
+class="math inline">\sigma</span>, let <span class="math inline">\hat
+c</span> be the following.</p>
 <ul>
-<li>If <span class="math inline">\sigma=e</span>, <span class="math inline">\hat c</span> is <span class="math inline">c</span> itself.</li>
-<li>If <span class="math inline">\sigma</span> is relational, <span class="math inline">\hat c_{\langle V&#39;,I&#39;\rangle}</span> is the extension of <span class="math inline">I&#39;(c)</span> at <span class="math inline">1_{V&#39;}</span>, and <span class="math inline">\hat c_{1_{W_0}}:=\emptyset</span>.</li>
+<li>If <span class="math inline">\sigma=e</span>, <span
+class="math inline">\hat c</span> is <span class="math inline">c</span>
+itself.</li>
+<li>If <span class="math inline">\sigma</span> is relational, <span
+class="math inline">\hat c_{\langle V&#39;,I&#39;\rangle}</span> is the
+extension of <span class="math inline">I&#39;(c)</span> at <span
+class="math inline">1_{V&#39;}</span>, and <span
+class="math inline">\hat c_{1_{W_0}}:=\emptyset</span>.</li>
 </ul>
-<p>Then <span class="math inline">\langle V,I\rangle\cdot\hat c=I(c)</span>:</p>
-<p><span class="math display">(\langle V,I\rangle\cdot\hat c)_k=\hat c_{\langle V&#39;,k\cdot I\rangle}=(k\cdot I(c))_{1_{V&#39;}}=I(c)_k.</span></p>
-<p>So <span class="math inline">\hat c</span> satisfies the landing condition, and it is pinned down by <span class="math inline">\{c\}</span>. Hence <span class="math inline">\hat c\in D_\sigma(W_0)</span>.</p>
+<p>Then <span class="math inline">\langle V,I\rangle\cdot\hat
+c=I(c)</span>:</p>
+<p><span class="math display">(\langle V,I\rangle\cdot\hat c)_k=\hat
+c_{\langle V&#39;,k\cdot I\rangle}=(k\cdot
+I(c))_{1_{V&#39;}}=I(c)_k.</span></p>
+<p>So <span class="math inline">\hat c</span> satisfies the landing
+condition, and it is pinned down by <span
+class="math inline">\{c\}</span>. Hence <span class="math inline">\hat
+c\in D_\sigma(W_0)</span>.</p>
 <h2 id="it-is-a-model-of-c">It is a model of C</h2>
-<p>The argument follows <em>Classicism</em>, Proposition D.4, together with the treatment of the root in Appendix E. Closed formulas are evaluated at an arrow by evaluating at its target with transported parameters. So what has to be shown is that every term with parameters from the domains denotes an element of the domains. Let <span class="math inline">t</span> be such a term, with parameters <span class="math inline">\bar P</span> pinned down by finite sets whose union is <span class="math inline">S</span>.</p>
+<p>The argument follows <em>Classicism</em>, Proposition D.4, together
+with the treatment of the root in Appendix E. Closed formulas are
+evaluated at an arrow by evaluating at its target with transported
+parameters. So what has to be shown is that every term with parameters
+from the domains denotes an element of the domains. Let <span
+class="math inline">t</span> be such a term, with parameters <span
+class="math inline">\bar P</span> pinned down by finite sets whose union
+is <span class="math inline">S</span>.</p>
 <ol type="1">
-<li><strong>Pinning.</strong> The value of <span class="math inline">t</span>’s denotation at <span class="math inline">\langle V,I\rangle</span> is computed in <span class="math inline">V</span>’s component from the transported parameters <span class="math inline">\langle
-V,I\rangle\cdot\bar P</span>. These depend on <span class="math inline">I</span> only through <span class="math inline">I{\restriction}S</span>. So the denotation is pinned down by <span class="math inline">S</span>.</li>
-<li><strong>Landing.</strong> Transport commutes with the operations of the language. So <span class="math inline">\langle V,I\rangle\cdot\llbracket t\rrbracket(\bar P)</span> is the denotation in <span class="math inline">V</span>’s component of <span class="math inline">t</span> with the parameters <span class="math inline">\langle V,I\rangle\cdot\bar
-P</span>. That lies in <span class="math inline">V</span>’s domain, because the component is a model of C.</li>
-<li><strong>At <span class="math inline">W_0</span> itself.</strong> The value at the identity is the set of tuples of <span class="math inline">W_0</span>-entities satisfying the formula at <span class="math inline">W_0</span>. Quantifiers there range over <span class="math inline">D(W_0)</span>, and no condition constrains this value.</li>
+<li><strong>Pinning.</strong> The value of <span
+class="math inline">t</span>’s denotation at <span
+class="math inline">\langle V,I\rangle</span> is computed in <span
+class="math inline">V</span>’s component from the transported parameters
+<span class="math inline">\langle
+V,I\rangle\cdot\bar P</span>. These depend on <span
+class="math inline">I</span> only through <span
+class="math inline">I{\restriction}S</span>. So the denotation is pinned
+down by <span class="math inline">S</span>.</li>
+<li><strong>Landing.</strong> Transport commutes with the operations of
+the language. So <span class="math inline">\langle
+V,I\rangle\cdot\llbracket t\rrbracket(\bar P)</span> is the denotation
+in <span class="math inline">V</span>’s component of <span
+class="math inline">t</span> with the parameters <span
+class="math inline">\langle V,I\rangle\cdot\bar
+P</span>. That lies in <span class="math inline">V</span>’s domain,
+because the component is a model of C.</li>
+<li><strong>At <span class="math inline">W_0</span> itself.</strong> The
+value at the identity is the set of tuples of <span
+class="math inline">W_0</span>-entities satisfying the formula at <span
+class="math inline">W_0</span>. Quantifiers there range over <span
+class="math inline">D(W_0)</span>, and no condition constrains this
+value.</li>
 </ol>
-<p>Application is the special case <span class="math inline">h\cdot(Fa)=(h\cdot F)(h\cdot a)</span>. The axioms of C hold at <span class="math inline">W_0</span> because, as in every action model, denotations are computed extensionally on intensions. The worlds other than <span class="math inline">W_0</span> are worlds of the components, which are models of C.</p>
+<p>Application is the special case <span
+class="math inline">h\cdot(Fa)=(h\cdot F)(h\cdot a)</span>. The axioms
+of C hold at <span class="math inline">W_0</span> because, as in every
+action model, denotations are computed extensionally on intensions. The
+worlds other than <span class="math inline">W_0</span> are worlds of the
+components, which are models of C.</p>
 <h2 id="bf-holds-at-every-type">BF holds at every type</h2>
-<p>Take the form <span class="math inline">\Diamond\exists x\,.\,Fx\to\exists x\,.\,\Diamond Fx</span>. Let <span class="math inline">F</span> be of type <span class="math inline">\sigma\to t</span>, pinned down by a finite <span class="math inline">S</span>, with <span class="math inline">\Diamond\exists x\,.\,Fx</span> true at <span class="math inline">W_0</span>.</p>
+<p>Take the form <span class="math inline">\Diamond\exists
+x\,.\,Fx\to\exists x\,.\,\Diamond Fx</span>. Let <span
+class="math inline">F</span> be of type <span
+class="math inline">\sigma\to t</span>, pinned down by a finite <span
+class="math inline">S</span>, with <span
+class="math inline">\Diamond\exists x\,.\,Fx</span> true at <span
+class="math inline">W_0</span>.</p>
 <ul>
-<li><strong>The witness is at the identity.</strong> Then <span class="math inline">\exists x\,.\,Fx</span> holds already, and <span class="math inline">Fx</span> implies <span class="math inline">\Diamond Fx</span>.</li>
-<li><strong>The witness is at some <span class="math inline">\langle V,I\rangle</span>.</strong> Then <span class="math inline">y\in F_{\langle
-V,I\rangle}</span> for some <span class="math inline">y</span> of type <span class="math inline">\sigma</span> at <span class="math inline">V</span>.
+<li><strong>The witness is at the identity.</strong> Then <span
+class="math inline">\exists x\,.\,Fx</span> holds already, and <span
+class="math inline">Fx</span> implies <span class="math inline">\Diamond
+Fx</span>.</li>
+<li><strong>The witness is at some <span class="math inline">\langle
+V,I\rangle</span>.</strong> Then <span class="math inline">y\in
+F_{\langle
+V,I\rangle}</span> for some <span class="math inline">y</span> of type
+<span class="math inline">\sigma</span> at <span
+class="math inline">V</span>.
 <ol type="1">
-<li>Choose a constant <span class="math inline">c</span> of type <span class="math inline">\sigma</span> outside <span class="math inline">S</span>; infinitely many are available.</li>
-<li>Let <span class="math inline">I&#39;</span> agree with <span class="math inline">I</span> except that <span class="math inline">I&#39;(c)=y</span>.</li>
-<li>Then <span class="math inline">\langle V,I&#39;\rangle</span> agrees with <span class="math inline">\langle V,I\rangle</span> on <span class="math inline">S</span>, so <span class="math inline">F_{\langle V,I&#39;\rangle}=F_{\langle V,I\rangle}\ni y=\langle
+<li>Choose a constant <span class="math inline">c</span> of type <span
+class="math inline">\sigma</span> outside <span
+class="math inline">S</span>; infinitely many are available.</li>
+<li>Let <span class="math inline">I&#39;</span> agree with <span
+class="math inline">I</span> except that <span
+class="math inline">I&#39;(c)=y</span>.</li>
+<li>Then <span class="math inline">\langle V,I&#39;\rangle</span> agrees
+with <span class="math inline">\langle V,I\rangle</span> on <span
+class="math inline">S</span>, so <span class="math inline">F_{\langle
+V,I&#39;\rangle}=F_{\langle V,I\rangle}\ni y=\langle
 V,I&#39;\rangle\cdot\hat c</span>.</li>
-<li>So <span class="math inline">F\hat c</span> holds at <span class="math inline">\langle V,I&#39;\rangle</span>, and <span class="math inline">\Diamond F\hat c</span> holds at <span class="math inline">W_0</span>.</li>
+<li>So <span class="math inline">F\hat c</span> holds at <span
+class="math inline">\langle V,I&#39;\rangle</span>, and <span
+class="math inline">\Diamond F\hat c</span> holds at <span
+class="math inline">W_0</span>.</li>
 </ol></li>
 </ul>
-<p>This is the criterion that gives BF in the all-maps finitely pinned model. Every arrow agrees on a finite set with one under which a fresh constant is mapped wherever one likes.</p>
-<p>□BF fails, as it must, since Maximalism is incompatible with it (recorded results). The components that refute BF are seen from <span class="math inline">W_0</span>.</p>
-<h2 id="maximalism-holds-for-sigma-and-in-the-pure-form">Maximalism holds, for <span class="math inline">\Sigma</span> and in the pure form</h2>
-<p>A closed <span class="math inline">\Sigma</span>-sentence holds at <span class="math inline">\langle V,I\rangle</span> iff it holds at <span class="math inline">V</span> in its component under <span class="math inline">I{\restriction}\Sigma</span>, the constants of <span class="math inline">\Sigma</span> denoting the <span class="math inline">\hat c</span>. Let <span class="math inline">\phi</span> be consistent with C(<span class="math inline">\Sigma</span>). Then <span class="math inline">\phi</span> holds at the root <span class="math inline">V</span> of some model in <span class="math inline">A</span> under some interpretation of <span class="math inline">\Sigma</span>. Extend that interpretation arbitrarily to <span class="math inline">\Sigma^+</span>, giving <span class="math inline">I</span>; then <span class="math inline">\phi</span> holds at <span class="math inline">\langle V,I\rangle</span>, so <span class="math inline">\Diamond\phi</span> holds at <span class="math inline">W_0</span>. This is Maximalism for <span class="math inline">\Sigma</span> in its possibility form, which is equivalent in C to the official form. The pure form follows.</p>
+<p>This is the criterion that gives BF in the all-maps finitely pinned
+model. Every arrow agrees on a finite set with one under which a fresh
+constant is mapped wherever one likes.</p>
+<p>□BF fails, as it must, since Maximalism is incompatible with it
+(recorded results). The components that refute BF are seen from <span
+class="math inline">W_0</span>.</p>
+<h2 id="maximalism-holds-for-sigma-and-in-the-pure-form">Maximalism
+holds, for <span class="math inline">\Sigma</span> and in the pure
+form</h2>
+<p>A closed <span class="math inline">\Sigma</span>-sentence holds at
+<span class="math inline">\langle V,I\rangle</span> iff it holds at
+<span class="math inline">V</span> in its component under <span
+class="math inline">I{\restriction}\Sigma</span>, the constants of <span
+class="math inline">\Sigma</span> denoting the <span
+class="math inline">\hat c</span>. Let <span
+class="math inline">\phi</span> be consistent with C(<span
+class="math inline">\Sigma</span>). Then <span
+class="math inline">\phi</span> holds at the root <span
+class="math inline">V</span> of some model in <span
+class="math inline">A</span> under some interpretation of <span
+class="math inline">\Sigma</span>. Extend that interpretation
+arbitrarily to <span class="math inline">\Sigma^+</span>, giving <span
+class="math inline">I</span>; then <span class="math inline">\phi</span>
+holds at <span class="math inline">\langle V,I\rangle</span>, so <span
+class="math inline">\Diamond\phi</span> holds at <span
+class="math inline">W_0</span>. This is Maximalism for <span
+class="math inline">\Sigma</span> in its possibility form, which is
+equivalent in C to the official form. The pure form follows.</p>
 <h2 id="other-verdicts">Other verdicts</h2>
 <ul>
-<li><strong>Actuality.</strong> <span class="math inline">\{1_{W_0}\}</span> is pinned down by <span class="math inline">\emptyset</span>, and its transports are empty. It is a true proposition that entails every truth.</li>
-<li><strong>Relational Choice.</strong> As at the other coalesced roots, a choice at the identity with empty component parts is in the domain.</li>
-<li><strong>Boxed principles.</strong> The group’s argument that every pure sentence consistent with C is possible at the root refutes □Vicinity, □Weakly Inextensible Comprehension and □Transversal here too.</li>
+<li><strong>Actuality.</strong> <span
+class="math inline">\{1_{W_0}\}</span> is pinned down by <span
+class="math inline">\emptyset</span>, and its transports are empty. It
+is a true proposition that entails every truth.</li>
+<li><strong>Relational Choice.</strong> As at the other coalesced roots,
+a choice at the identity with empty component parts is in the
+domain.</li>
+<li><strong>Boxed principles.</strong> The group’s argument that every
+pure sentence consistent with C is possible at the root refutes
+□Vicinity, □Weakly Inextensible Comprehension and □Transversal here
+too.</li>
 </ul>
-<p>The map derives much more. Inextensible Comprehension holds, from Actuality with BF, and so do the signature principles that follow from Maximalism for <span class="math inline">\Sigma</span>. None of the group’s arguments that transfer a counterexample through a distinguished arrow applies, so this model’s other verdicts at the root need arguments of their own.</p>
+<p>The map derives much more. Inextensible Comprehension holds, from
+Actuality with BF, and so do the signature principles that follow from
+Maximalism for <span class="math inline">\Sigma</span>. None of the
+group’s arguments that transfer a counterexample through a distinguished
+arrow applies, so this model’s other verdicts at the root need arguments
+of their own.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, Definitions D.1–D.3, Proposition D.4, pp. 73–74; Appendix E, Definition E.2, pp. 80–83. The finitely pinned domains of Appendix D, with finite sets of constants in place of finite sets of individuals, over the components of a coalesced sum as in Appendix E.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, Definitions D.1–D.3, Proposition D.4, pp. 73–74; Appendix E,
+Definition E.2, pp. 80–83. The finitely pinned domains of Appendix D,
+with finite sets of constants in place of finite sets of individuals,
+over the components of a coalesced sum as in Appendix E.</li>
 </ul>
 </body></html>

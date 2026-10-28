@@ -1,0 +1,1009 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Supported-product action model: κ⁺ free-monoid coordinates, glued constants</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* A prismatic name: one rainbow wheel around a point in the word, spinning;
+   --prism-x and --prism-y move that point off the middle.
+   Pure spectral stops, turned by a registered angle rather than a hue
+   filter, which would muddy them. */
+@property --prism { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.prismatic { font-weight: 600; color: transparent; background: conic-gradient(from var(--prism) at var(--prism-x, 50%) var(--prism-y, 50%), #ff1a1a, #ff8a00, #ffd000, #22c33a, #00a8f0, #3d4bff, #b026ff, #ff1a1a); -webkit-background-clip: text; background-clip: text; animation: prism-spin 6s linear infinite; }
+/* As a link it keeps the gradient on hover, under an accent underline. */
+a.prismatic, a.prismatic:hover { color: transparent; }
+a.prismatic:hover { text-decoration-color: var(--accent); }
+@keyframes prism-spin { to { --prism: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .prismatic { animation: none; } }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Teal-grey, muted rust, deep teal and warm stone. Screen-only overrides
+   preserve print styling. */
+@media screen {
+  :root {
+    --bg: #ebf1f1;
+    --panel: #e1eae9;
+    --panel-2: #d0dfde;
+    --line: #c0cecd;
+    --line-strong: #849997;
+    --ink: #303b3a;
+    --ink-2: #4a5a59;
+    --ink-3: #526160;
+    --accent: #884932;
+    --link-hover: #6f3827;
+    --derived: #6f8180;
+    --open: #d6e2e1;
+    --open-ink: #526160;
+    --node-fill: #f1f6f6;
+    --node-stroke: #7f9391;
+    --junction: #596b6a;
+    --human: #2f6b66;
+    --source-forest: #2f6b66;
+    --hl: #e6ddd0;
+    --focus: #884932;
+    --shadow: 0 4px 24px rgb(48 59 58 / 10%);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #171e1d;
+    --panel: #202a29;
+    --panel-2: #2b3736;
+    --line: #3d4b4a;
+    --line-strong: #6b817f;
+    --ink: #dbe8e7;
+    --ink-2: #b9cbca;
+    --ink-3: #a6bdbb;
+    --accent: #e2ad92;
+    --link-hover: #f0c3aa;
+    --derived: #87a09e;
+    --open: #303d3c;
+    --open-ink: #aec6c4;
+    --node-fill: #263130;
+    --node-stroke: #738d8b;
+    --junction: #b3cbc9;
+    --human: #86c0b6;
+    --source-forest: #86c0b6;
+    --hl: #463f37;
+    --focus: #e2ad92;
+    --badge-ink: #171e1a;
+    --shadow: 0 4px 24px rgb(0 0 0 / 24%);
+  }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Supported-product action model: κ⁺ free-monoid coordinates, glued constants</h1></header><p>Construction and verification by GPT-6 Astra (OpenAI), prompted by
+Daniel Kodsi, 22 October 2026; checked and rewritten for the map by
+Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026.</p>
+<p>At its evaluation point this model satisfies Logical Necessity, □BF,
+□Relational Choice, □Countable Boolean Completeness and Atomlessness,
+and fails Actuality, Vicinity, Weakly Inextensible Comprehension (at
+<span class="math inline">tt</span>) and Rigid Power (at <span
+class="math inline">(tt)t</span>). So Logical Necessity, even with □BF
+and □Relational Choice, gives none of the comprehension or actuality
+principles, and Countable Boolean Completeness does not give Boolean
+Completeness. §9 adds the choice principles in their boxed and modalized
+forms, the Distinctness-Preserving Collapse, □Tame Rigidity, Arithmetic
+and Second-Order Analytic Necessitism, and the failure of Forcing
+Possibilism.</p>
+<h2 id="the-model">The model</h2>
+<p>Fix an infinite cardinal <span
+class="math inline">\kappa\ge|\Sigma|</span>. Let <span
+class="math inline">I</span> be a set of size <span
+class="math inline">\kappa^+</span>, and <span
+class="math inline">L</span> the free monoid of finite words on an
+alphabet of size <span class="math inline">\kappa</span>, with empty
+word <span class="math inline">\varepsilon</span>. The arrows are the
+elements of</p>
+<p><span class="math display">
+M:=L^I,\qquad (mh)_i:=m_ih_i\ \ (\text{concatenation}),\qquad
+1:=(\varepsilon)_{i\in I},
+</span></p>
+<p>forming a one-object category. For <span
+class="math inline">m,m&#39;\in M</span> and <span
+class="math inline">S\subseteq I</span> write <span
+class="math inline">m\equiv_Sm&#39;</span> for <span
+class="math inline">m|_S=m&#39;|_S</span>.</p>
+<p><strong>Domains.</strong> <span
+class="math inline">D_e:=\{*\}</span>. For a relational type <span
+class="math inline">\tau=\sigma_1\cdots\sigma_nt</span>, <span
+class="math inline">D_\tau</span> is the set of <em>profiles</em> <span
+class="math inline">F:M\to\mathcal P(D_{\sigma_1}\times\cdots\times
+D_{\sigma_n})</span> that have a <em>support</em>: a set <span
+class="math inline">S\subseteq I</span> with <span
+class="math inline">|S|\le\kappa</span> such that</p>
+<p><span class="math display">
+m\equiv_Sm&#39;\ \Rightarrow\ F_m=F_{m&#39;} .
+</span></p>
+<p>For <span class="math inline">n=0</span> a profile is a subset of
+<span class="math inline">M</span>, a proposition, true at <span
+class="math inline">m</span> iff <span class="math inline">m\in
+p</span>.</p>
+<p><strong>Transport.</strong> <span class="math inline">(h\cdot
+F)_k:=F_{kh}</span>, and <span class="math inline">h\cdot *=*</span>.
+Then <span class="math inline">(g\cdot(h\cdot F))_k=F_{kgh}</span>, so
+<span class="math inline">g\cdot(h\cdot F)=(gh)\cdot F</span>, and <span
+class="math inline">h\cdot F</span> has the support of <span
+class="math inline">F</span>.</p>
+<p><strong>Interpretation.</strong> The usual one-object action-model
+semantics (<em>Classicism</em>, §§3.4–3.5): a formula with parameters
+<span class="math inline">\bar a</span> holds at <span
+class="math inline">m</span> iff it holds at <span
+class="math inline">1</span> with parameters <span
+class="math inline">m\cdot\bar a</span>, quantifiers range over the
+domains, and</p>
+<p><span class="math display">
+(\lambda\bar x\, .\,\varphi(\bar x;\bar a))_m:=\{\bar b:\ \varphi(\bar
+b;m\cdot\bar a)\text{ holds at }1\}.
+</span></p>
+<p><strong>Σ.</strong> Each individual constant denotes <span
+class="math inline">*</span>; the relational constants are interpreted
+by gluing (§7).</p>
+<p>Evaluation point: <span class="math inline">1</span>.</p>
+<h2 id="a-model-of-c">1. A model of C</h2>
+<p><strong>Lemma 1.</strong> If <span class="math inline">F</span> has
+support <span class="math inline">S</span> and <span
+class="math inline">m\equiv_Sm&#39;</span>, then <span
+class="math inline">m\cdot F=m&#39;\cdot F</span>.</p>
+<p><em>Proof.</em> <span class="math inline">(m\cdot F)_k=F_{km}</span>
+and <span
+class="math inline">(km)_i=k_im_i=k_im&#39;_i=(km&#39;)_i</span> for
+<span class="math inline">i\in S</span>. <span
+class="math inline">\square</span></p>
+<p>So the profile of <span class="math inline">\lambda\bar x\,
+.\,\varphi(\bar x;\bar a)</span> at <span class="math inline">m</span>
+depends only on <span class="math inline">m\cdot\bar a</span>, hence
+only on <span class="math inline">m</span> restricted to the union of
+the parameters’ supports, a set of size <span
+class="math inline">\le\kappa</span>: the domains are closed under the
+denotations of terms. Each <span class="math inline">h\cdot F</span> is
+again supported, so transport maps domains to domains. An H-valid
+equivalence holds at every arrow under every assignment, so the
+corresponding abstractions have equal profiles: Logical Equivalence
+holds, and this is a model of C.</p>
+<p>As there is one object, a closed pure sentence has the same truth
+value at every arrow; in particular every such sentence true at <span
+class="math inline">1</span> is necessary there.</p>
+<h2 id="transport-is-surjective-bf">2. Transport is surjective; □BF</h2>
+<p><strong>Lemma 2.</strong> For every <span class="math inline">h\in
+M</span> and <span class="math inline">F\in D_\tau</span> there is <span
+class="math inline">G\in D_\tau</span> with <span
+class="math inline">h\cdot G=F</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">S</span> support <span
+class="math inline">F</span>. For <span class="math inline">m\in
+M</span>: if for every <span class="math inline">i\in S</span> the word
+<span class="math inline">m_i</span> ends with <span
+class="math inline">h_i</span>, say <span
+class="math inline">m_i=w_ih_i</span>, put <span
+class="math inline">r(m)_i:=w_i</span> for <span
+class="math inline">i\in S</span> and <span
+class="math inline">\varepsilon</span> elsewhere, and <span
+class="math inline">G_m:=F_{r(m)}</span>; otherwise <span
+class="math inline">G_m:=\varnothing</span>. Then <span
+class="math inline">G</span> has support <span
+class="math inline">S</span>, and for every <span
+class="math inline">k</span>, <span
+class="math inline">r(kh)\equiv_Sk</span>, so</p>
+<p><span class="math display">
+(h\cdot G)_k=G_{kh}=F_{r(kh)}=F_k .\qquad\square
+</span></p>
+<p><strong>BF.</strong> Suppose <span class="math inline">\forall a\,
+.\,\Box Ra</span> at <span class="math inline">1</span>, that is, <span
+class="math inline">k\cdot a\in R_k</span> for all <span
+class="math inline">a</span> and <span class="math inline">k</span>. At
+an arrow <span class="math inline">h</span>, each <span
+class="math inline">b</span> is <span class="math inline">h\cdot
+a</span> for some <span class="math inline">a</span> by Lemma 2, so
+<span class="math inline">b\in R_h</span>. Hence <span
+class="math inline">\Box\forall b\, .\,Rb</span>. This holds at every
+type, and BF is a closed pure schema, so □BF holds.</p>
+<h2 id="atomlessness-actuality-and-vicinity-fail">3. Atomlessness;
+Actuality and Vicinity fail</h2>
+<p>For <span class="math inline">i\in I</span> let</p>
+<p><span class="math display">
+q_i:=\{m:m_i=\varepsilon\},
+</span></p>
+<p>a true proposition with support <span
+class="math inline">\{i\}</span>. Since <span
+class="math inline">(km)_i=\varepsilon</span> iff <span
+class="math inline">k_i=m_i=\varepsilon</span>,</p>
+<p><span class="math display">
+h\cdot q_i=\begin{cases}q_i&amp;h_i=\varepsilon,\\
+\bot&amp;h_i\ne\varepsilon,\end{cases}
+\qquad\qquad \Diamond q_i=q_i .
+\tag{1}
+</span></p>
+<p>The second holds as <span class="math inline">\Diamond q_i</span> is
+true at <span class="math inline">m</span> iff <span
+class="math inline">k_im_i=\varepsilon</span> for some <span
+class="math inline">k</span>, iff <span
+class="math inline">m_i=\varepsilon</span>.</p>
+<p><em>Atomlessness.</em> Let <span class="math inline">p\ne\bot</span>
+have support <span class="math inline">S</span>, and take <span
+class="math inline">j\notin S</span>. Changing the <span
+class="math inline">j</span>th coordinate of a member of <span
+class="math inline">p</span> to <span
+class="math inline">\varepsilon</span>, or to a nonempty word, gives
+members of <span class="math inline">p</span> in <span
+class="math inline">q_j</span> and outside it. So <span
+class="math inline">\bot\ne p\land q_j&lt;p</span>.</p>
+<p><em>Actuality and Vicinity fail.</em> Let <span
+class="math inline">p</span> be true, with support <span
+class="math inline">S</span>; take <span class="math inline">j\notin
+S</span> and <span class="math inline">h</span> with a one-letter word
+at <span class="math inline">j</span> and <span
+class="math inline">\varepsilon</span> elsewhere. Then <span
+class="math inline">h\in p</span> (as <span
+class="math inline">h\equiv_S1</span>), while <span
+class="math inline">h\notin q_j=\Diamond q_j</span>. So <span
+class="math inline">p\not\le\Diamond q_j</span>, although <span
+class="math inline">q_j</span> is true. No truth entails the possibility
+of every truth, and a fortiori none entails every truth.</p>
+<h2 id="weakly-inextensible-comprehension-fails-at-tt">4. Weakly
+Inextensible Comprehension fails at <span
+class="math inline">tt</span></h2>
+<p>Let <span class="math inline">X\in D_{tt}</span> be the constant
+profile <span class="math inline">X_m:=\{q_i:i\in I\}</span>, with
+support <span class="math inline">\varnothing</span>. Suppose <span
+class="math inline">Y\in D_{tt}</span> is coextensive with <span
+class="math inline">X</span>, so <span
+class="math inline">Y_1=\{q_i:i\in I\}</span>, and let <span
+class="math inline">S</span> support <span class="math inline">Y</span>.
+Take <span class="math inline">j\notin S</span> and <span
+class="math inline">h</span> with a one-letter word at <span
+class="math inline">j</span> and <span
+class="math inline">\varepsilon</span> elsewhere; then <span
+class="math inline">Y_h=Y_1\ni q_j</span>. Let <span
+class="math inline">Z\in D_{tt}</span>, with support <span
+class="math inline">\{j\}</span>, be</p>
+<p><span class="math display">
+Z_m:=\begin{cases}D_t&amp;m_j=\varepsilon,\\
+D_t\setminus\{q_j\}&amp;m_j\ne\varepsilon.\end{cases}
+</span></p>
+<p>Every instance <span class="math inline">q_i</span> of <span
+class="math inline">Y</span> satisfies <span class="math inline">\Box
+Zq_i</span>: by (1), <span class="math inline">m\cdot q_i</span> is
+<span class="math inline">q_i</span> or <span
+class="math inline">\bot</span>, and if <span
+class="math inline">m_j\ne\varepsilon</span> neither is <span
+class="math inline">q_j</span> (for <span class="math inline">i=j</span>
+it is <span class="math inline">\bot</span>). So</p>
+<p><span class="math display">
+\forall p\, .\,Yp\to\Box Zp,
+</span></p>
+<p>but <span class="math inline">q_j\in Y_h\setminus Z_h</span>, so
+<span class="math inline">Y\not\le Z</span>, and <span
+class="math inline">Y</span> is not weakly inextensible. Boolean
+Completeness, which implies Weakly Inextensible Comprehension, therefore
+fails too.</p>
+<h2 id="relational-choice">5. □Relational Choice</h2>
+<p>Let <span class="math inline">U</span> be serial at <span
+class="math inline">1</span>. By choice in the metatheory pick, for each
+<span class="math inline">x</span> in the input domain, a <span
+class="math inline">y_x</span> with <span class="math inline">\langle
+x,y_x\rangle\in U_1</span>, and let <span class="math inline">S</span>
+be the constant profile <span class="math inline">S_m:=\{\langle
+x,y_x\rangle\}</span>, with support <span
+class="math inline">\varnothing</span>. It is functional and included in
+<span class="math inline">U</span> at <span
+class="math inline">1</span>. Relational Choice is a closed pure schema,
+so □Relational Choice holds.</p>
+<h2 id="countable-boolean-completeness">6. □Countable Boolean
+Completeness</h2>
+<p>The order on profiles is pointwise inclusion at every arrow, and the
+pointwise union of at most <span class="math inline">\kappa</span>
+supported profiles is supported (by the union of the supports), and is
+their least upper bound.</p>
+<p>At a type <span class="math inline">\sigma</span>, the actual
+instances of <span
+class="math inline">\operatorname{FiniteCardinality}_\sigma</span> are
+exactly the <span
+class="math inline">\operatorname{Suc}^n_\sigma(\mathbf
+0_\sigma)</span>, <span class="math inline">n\in\mathbb N</span>: each
+is in every inductive property, and the constant profile with exactly
+these instances is an inductive property. So if <span
+class="math inline">\operatorname{Ctbl}_{\sigma,\tau}(A)</span> holds at
+<span class="math inline">1</span>, the actual instances of <span
+class="math inline">A</span> inject into <span
+class="math inline">\mathbb N</span>, and their pointwise union is their
+least upper bound. This holds at every arrow, so □Countable Boolean
+Completeness holds.</p>
+<h2 id="logical-necessity">7. Logical Necessity</h2>
+<p><strong>Gluing lemma.</strong> Let <span
+class="math inline">(F_\alpha)_{\alpha&lt;\kappa}</span> (one for each
+letter) be entities of one relational type and <span
+class="math inline">j\in I</span> outside all their supports. Let <span
+class="math inline">h_\alpha</span> have the one-letter word <span
+class="math inline">\alpha</span> at <span class="math inline">j</span>
+and <span class="math inline">\varepsilon</span> elsewhere, and put</p>
+<p><span class="math display">
+G_m:=\begin{cases}(F_\alpha)_m&amp;m_j\text{ ends in the letter
+}\alpha,\\ \varnothing&amp;m_j=\varepsilon.\end{cases}
+</span></p>
+<p><span class="math inline">G</span> has support <span
+class="math inline">\{j\}\cup\bigcup_\alpha\operatorname{supp}(F_\alpha)</span>,
+of size <span class="math inline">\le\kappa</span>, and since <span
+class="math inline">(kh_\alpha)_j</span> ends in <span
+class="math inline">\alpha</span> and <span
+class="math inline">kh_\alpha\equiv_{I\setminus\{j\}}k</span>,</p>
+<p><span class="math display">
+(h_\alpha\cdot G)_k=G_{kh_\alpha}=(F_\alpha)_{kh_\alpha}=(F_\alpha)_k .
+</span></p>
+<p><strong>The interpretation of Σ.</strong> There are at most <span
+class="math inline">\kappa</span> sentences of <span
+class="math inline">\mathcal L(\Sigma)</span>. For each sentence <span
+class="math inline">\varphi_\alpha</span> true at <span
+class="math inline">1</span> under some interpretation of Σ over these
+domains, choose one, <span class="math inline">J_\alpha</span>. Pick
+<span class="math inline">j</span> outside the supports of all the <span
+class="math inline">J_\alpha(c)</span>, at most <span
+class="math inline">\kappa\cdot\kappa\cdot\kappa</span> coordinates, and
+interpret each relational constant <span class="math inline">c</span> by
+the gluing <span class="math inline">G_c</span> of <span
+class="math inline">(J_\alpha(c))_\alpha</span> at <span
+class="math inline">j</span>. Then <span
+class="math inline">h_\alpha\cdot G_c=J_\alpha(c)</span> for every <span
+class="math inline">c</span> simultaneously, so <span
+class="math inline">\varphi_\alpha</span> holds at <span
+class="math inline">h_\alpha</span>. Conversely, a sentence true at an
+arrow <span class="math inline">h</span> is true at <span
+class="math inline">1</span> under the interpretation <span
+class="math inline">c\mapsto h\cdot G_c</span>. So</p>
+<p><span class="math display">
+\Diamond\varphi\ \text{holds at }1\iff\varphi\text{ is true at }1\text{
+under some interpretation of }\Sigma .
+</span></p>
+<p>For <span class="math inline">P</span> pure with free variables among
+<span class="math inline">\bar x</span>, and distinct constants <span
+class="math inline">\bar c</span>, <span class="math inline">P[\bar
+c/\bar x]</span> is true under some interpretation iff <span
+class="math inline">\exists\bar x\, .\,P</span> is true at <span
+class="math inline">1</span>. So <span class="math inline">\Diamond
+P[\bar c/\bar x]\leftrightarrow\exists\bar x\, .\,P</span>, and, applied
+to <span class="math inline">\neg P</span>,</p>
+<p><span class="math display">
+\Box P[\bar c/\bar x]\leftrightarrow\forall\bar x\, .\,P ,
+</span></p>
+<p>which is Logical Necessity at <span class="math inline">1</span>.</p>
+<h2 id="rigid-power-fails-at-ttt">8. Rigid Power fails at <span
+class="math inline">(tt)t</span></h2>
+<p>For a set <span class="math inline">E</span> of argument tuples write
+<span class="math inline">H_E</span> for the profile <span
+class="math inline">m\mapsto m\cdot E</span>, which need not be
+supported.</p>
+<p><strong>Lemma 3 (exact images).</strong> A supported <span
+class="math inline">Y</span> with actual extension <span
+class="math inline">E=Y_1</span> is weakly rigid iff <span
+class="math inline">Y=H_E</span>. In that case <span
+class="math inline">Y</span> is rigid.</p>
+<p><em>Proof.</em> If <span class="math inline">Y=H_E</span>: for <span
+class="math inline">\bar a\in E</span>, <span
+class="math inline">k\cdot\bar a\in Y_k</span> for every <span
+class="math inline">k</span>, so <span class="math inline">Y</span> is
+weakly persistent; and any <span class="math inline">Z</span> with <span
+class="math inline">\Box Z\bar a</span> for every <span
+class="math inline">\bar a\in E</span> has <span
+class="math inline">m\cdot E\subseteq Z_m</span>, so <span
+class="math inline">Y\le Z</span>. Since <span
+class="math inline">(h\cdot Y)_k=k\cdot(h\cdot E)</span>, every
+transport of <span class="math inline">Y</span> is again an exact image,
+so <span class="math inline">Y</span> is rigid.</p>
+<p>Conversely let <span class="math inline">Y</span> be weakly rigid
+with support <span class="math inline">S</span>. Weak persistence gives
+<span class="math inline">m\cdot E\subseteq Y_m</span>. For <span
+class="math inline">T\subseteq I</span> with <span
+class="math inline">|T|\le\kappa</span> let</p>
+<p><span class="math display">
+B_T(E)_k:=\bigcup\{n\cdot E:\ n\equiv_Tk\},
+</span></p>
+<p>a profile with support <span class="math inline">T</span>. Each <span
+class="math inline">\bar a\in E</span> has <span
+class="math inline">\Box B_T(E)\bar a</span> (take <span
+class="math inline">n=k</span>), so weak inextensibility gives <span
+class="math inline">Y\le B_T(E)</span>. Now let <span
+class="math inline">\bar b\in Y_m</span>, and let <span
+class="math inline">T</span> contain <span class="math inline">S</span>
+and the supports of the entries of <span class="math inline">\bar
+b</span>. Then <span class="math inline">\bar b=n\cdot\bar a</span> for
+some <span class="math inline">\bar a\in E</span> and <span
+class="math inline">n\equiv_Tm</span>. Define arrows <span
+class="math inline">r,u</span> by</p>
+<p><span class="math display">
+r_i=u_i:=\varepsilon\ (i\in T),\qquad r_i:=n_i,\ u_i:=m_i\ (i\notin T).
+</span></p>
+<p>Then <span class="math inline">mr=un</span>: on <span
+class="math inline">T</span> both sides are <span
+class="math inline">m_i=n_i</span>, off <span
+class="math inline">T</span> both are <span
+class="math inline">m_in_i</span>. As <span
+class="math inline">r\equiv_S1</span>, <span
+class="math inline">Y_r=E</span>, and weak persistence gives <span
+class="math inline">r\cdot\bar a\in E</span>. As <span
+class="math inline">u</span> is <span
+class="math inline">\varepsilon</span> on the supports of the entries of
+<span class="math inline">\bar b</span>, <span
+class="math inline">u\cdot\bar b=\bar b</span>. So</p>
+<p><span class="math display">
+\bar b=u\cdot(n\cdot\bar a)=(un)\cdot\bar a=(mr)\cdot\bar
+a=m\cdot(r\cdot\bar a)\in m\cdot E .\qquad\square
+</span></p>
+<p><strong>The counterexample.</strong> Fix <span
+class="math inline">o\in I</span> and let <span
+class="math inline">J:=I\setminus\{o\}</span>. For <span
+class="math inline">j\in J</span> let <span class="math inline">y_j\in
+D_{tt}</span> be the constant profile <span
+class="math inline">\{q_j\}</span>; every arrow fixes it. Let <span
+class="math inline">\chi(n):=1</span> if <span
+class="math inline">n\ge0</span> is a perfect square and <span
+class="math inline">0</span> otherwise, so that the sequences <span
+class="math inline">(\chi(n+z))_{n\ge0}</span> for <span
+class="math inline">z\in\mathbb Z</span> are pairwise distinct and each
+contains a <span class="math inline">1</span>. For <span
+class="math inline">z\in\mathbb Z</span> and <span
+class="math inline">j\in J</span> let <span
+class="math inline">e_{z,j}\in D_{tt}</span> have support <span
+class="math inline">\{o,j\}</span> and, with <span
+class="math inline">r:=|m_o|</span> and <span
+class="math inline">n:=|m_j|</span>,</p>
+<p><span class="math display">
+(e_{z,j})_m:=\begin{cases}
+\{q_j\}\cup\{\bot:\chi(n+z)=1\}&amp;r=0,\\
+\{q_j\}\text{ if }n+z\ge0,\ \varnothing\text{ otherwise}&amp;r=1,\\
+\{q_j\}&amp;r\ge2 .
+\end{cases}
+</span></p>
+<p>These are pairwise distinct. Let <span class="math inline">a</span>
+have a one-letter word at <span class="math inline">o</span>, and <span
+class="math inline">b_j</span> one at <span
+class="math inline">j</span>, <span
+class="math inline">\varepsilon</span> elsewhere. Directly from the
+definition:</p>
+<p><span class="math display">
+b_j\cdot e_{z,j}=e_{z+1,j},\qquad b_j\cdot e_{z,k}=e_{z,k}\ (k\ne
+j),\qquad
+a\cdot e_{z,j}=y_j\iff z\ge0,\qquad a\cdot a\cdot e_{z,j}=y_j ,
+</span></p>
+<p>and for <span class="math inline">z&lt;0</span>, <span
+class="math inline">a\cdot e_{z,j}</span> has empty extension at <span
+class="math inline">1</span>, so is no <span
+class="math inline">y_k</span>.</p>
+<p>Let <span class="math inline">E:=\{e_{z,j}:z\in\mathbb Z,\ j\in
+J\}</span> and <span class="math inline">B:=\{y_j:j\in J\}</span>. An
+arrow <span class="math inline">m</span> shifts <span
+class="math inline">z</span> by <span class="math inline">|m_j|</span>
+within the <span class="math inline">j</span>th family, so <span
+class="math inline">m\cdot E</span> depends only on <span
+class="math inline">|m_o|</span>: it is <span
+class="math inline">E</span>, <span class="math inline">a\cdot E</span>
+or <span class="math inline">B</span> according as <span
+class="math inline">|m_o|</span> is <span class="math inline">0</span>,
+<span class="math inline">1</span> or at least <span
+class="math inline">2</span>. So <span class="math inline">F:=H_E</span>
+is supported (by <span class="math inline">\{o\}</span>), and <span
+class="math inline">X:=H_B</span> is the constant profile <span
+class="math inline">B</span>. Both are rigid by Lemma 3, and <span
+class="math inline">X\le a\cdot F</span>: at every <span
+class="math inline">m</span>, <span class="math inline">(a\cdot
+F)_m=(ma)\cdot E</span> is <span class="math inline">a\cdot E</span> or
+<span class="math inline">B</span>, and both contain <span
+class="math inline">B</span>.</p>
+<p>Suppose some rigid <span class="math inline">Y\le F</span> had <span
+class="math inline">a\cdot Y=X</span>. By Lemma 3, <span
+class="math inline">Y=H_A</span> with <span
+class="math inline">A:=Y_1\subseteq E</span>, and <span
+class="math inline">a\cdot A=B</span>. Let <span
+class="math inline">S</span> support <span class="math inline">Y</span>
+and take <span class="math inline">j\in J\setminus S</span>. As <span
+class="math inline">b_j\equiv_S1</span>, <span
+class="math inline">b_j\cdot A=A</span>, so <span
+class="math inline">A_j:=\{z:e_{z,j}\in A\}</span> is invariant under
+<span class="math inline">z\mapsto z+1</span>, hence empty or <span
+class="math inline">\mathbb Z</span>. It is not empty, since <span
+class="math inline">y_j\in a\cdot A</span> and the only <span
+class="math inline">e</span>’s that <span class="math inline">a</span>
+sends to <span class="math inline">y_j</span> are the <span
+class="math inline">e_{z,j}</span> with <span
+class="math inline">z\ge0</span>. So <span
+class="math inline">e_{-1,j}\in A</span>, and <span
+class="math inline">a\cdot e_{-1,j}\in B</span>, a contradiction.</p>
+<p>So <span class="math inline">\mathcal P:=\lambda Y\,
+.\,\operatorname{Rigid}(Y)\land Y\le F</span> has <span
+class="math inline">X</span> in its extension at <span
+class="math inline">a</span>, while <span class="math inline">X</span>
+is not <span class="math inline">a\cdot Y</span> for any <span
+class="math inline">Y</span> in its actual extension. By Lemma 3 applied
+to <span class="math inline">\mathcal P</span>, it is not weakly rigid.
+Rigid Power fails for the rigid <span class="math inline">F</span>, of
+type <span class="math inline">(tt)t</span>.</p>
+<h2 id="further-verdicts">9. Further verdicts</h2>
+<p>Added 25 October 2026 by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr. As there is one object, a closed pure principle holds at
+<span class="math inline">1</span> iff it holds necessarily, so each
+verdict below holds in its boxed form too.</p>
+<p><strong>Constant profiles.</strong> For any set <span
+class="math inline">E</span> of tuples, the constant profile <span
+class="math inline">m\mapsto E</span> has support <span
+class="math inline">\varnothing</span> and is fixed by every arrow.</p>
+<p><em>Transversal Choice and Modal Well-Ordering.</em> A transversal of
+an actual equivalence relation, chosen in the metatheory, is the
+extension of its constant profile. If <span class="math inline">W</span>
+is a well-order of <span class="math inline">D_\sigma</span>, chosen in
+the metatheory, its constant profile is <span
+class="math inline">W</span> at every arrow, and every property’s
+extension at an arrow is a subset of <span
+class="math inline">D_\sigma</span>, so</p>
+<p><span class="math display">
+\Box\operatorname{WO}(W).
+</span></p>
+<p><em>Intensional Choice.</em> Let <span
+class="math inline">\Box\exists x\, .\,Fx</span>, and let <span
+class="math inline">S</span> support <span class="math inline">F</span>.
+Then <span class="math inline">F_m\ne\varnothing</span> for every <span
+class="math inline">m</span>, and <span class="math inline">F_m</span>
+depends only on <span class="math inline">m|_S</span>; choose <span
+class="math inline">g(m)\in F_m</span> depending only on <span
+class="math inline">m|_S</span>. Then <span
+class="math inline">G_m:=\{g(m)\}</span> has support <span
+class="math inline">S</span>, and</p>
+<p><span class="math display">
+G\le F,\qquad \Box\exists x\, .\,(Gx\land\forall y\, .\,Gy\to y=x).
+</span></p>
+<p><em>Modalized Relational Choice.</em> The same, choosing for each
+<span class="math inline">m|_S</span> a functional graph inside <span
+class="math inline">R_m</span>.</p>
+<p><strong>Distinctness-Preserving Collapse.</strong> Let <span
+class="math inline">p</span> be true, with support <span
+class="math inline">S</span>, and</p>
+<p><span class="math display">
+q_S:=\{m:m_i=\varepsilon\text{ for all }i\in S\}.
+</span></p>
+<p><span class="math inline">q_S</span> is true and <span
+class="math inline">\Diamond q_S=q_S</span>, since <span
+class="math inline">(km)_i=\varepsilon</span> iff <span
+class="math inline">k_i=m_i=\varepsilon</span>. Each <span
+class="math inline">m\in q_S</span> agrees with <span
+class="math inline">1</span> on <span class="math inline">S</span>, so
+<span class="math inline">m\in p</span>. Hence <span
+class="math inline">q_S\land\Box(\Diamond q_S\to p)</span>, so <span
+class="math inline">\Box_{\ne}p</span>.</p>
+<p><strong>Tame Rigidity.</strong> By Lemma 3, every weakly rigid
+relation is an exact image, and exact images are rigid.</p>
+<p><strong>Arithmetic Necessitism.</strong> <span
+class="math inline">\mathbb N_\sigma</span> is a closed pure term, so
+its profile is constant, with the numerals as instances; they are closed
+pure terms, so fixed by every arrow. So <span
+class="math inline">\mathbb N_\sigma</span> is the exact image of its
+extension, hence rigid, and distinct numerals are necessarily
+distinct.</p>
+<p><strong>Second-Order Analytic Necessitism.</strong> At a type <span
+class="math inline">\sigma</span>:</p>
+<ul>
+<li><em>If <span class="math inline">\sigma</span> has a relational
+argument</em>, there are continuum many distinct fixed entities of type
+<span class="math inline">\sigma</span> (constant profiles). Put a real
+structure on them with constant relations, and take as represented power
+of arity <span class="math inline">k</span> the constant profile of all
+constant <span class="math inline">k</span>-ary relations on them. Every
+set of these entities, and of tuples of them, is the extension of a
+constant profile, so the structure is real, and the powers represent
+every relation, at every arrow.</li>
+<li><em>If <span class="math inline">\sigma</span> has only individual
+arguments</em> (as <span class="math inline">t</span>), use, for <span
+class="math inline">x\subseteq\mathbb Z</span>, <span
+class="math display">
+p_x:=\{m:\ \#_a(m_o)-\#_b(m_o)\in x\},
+</span> where <span class="math inline">a,b</span> are two letters and
+<span class="math inline">o\in I</span> is fixed. Then <span
+class="math inline">k\cdot p_x=p_{x-c}</span> with <span
+class="math inline">c:=\#_a(k_o)-\#_b(k_o)</span>, so each arrow acts
+injectively on these propositions. Put a real structure on continuum
+many of them, and let <span class="math inline">\mathfrak R</span>
+consist of the exact images of its carrier and relations, and the
+represented powers of the exact images of the sets of exact images <span
+class="math inline">H_D</span>, <span class="math inline">D</span> a set
+of <span class="math inline">k</span>-tuples of the carrier. All are
+supported by <span class="math inline">\{o\}</span>, hence rigid by
+Lemma 3; at each arrow <span class="math inline">k</span>, <span
+class="math inline">k\cdot\mathfrak R</span> is the image of the
+structure under the injection <span class="math inline">k\cdot{}</span>,
+so a real structure, and any relation agrees on its carrier with some
+<span class="math inline">H_{k\cdot D}</span>.</li>
+</ul>
+<p>So Second-Order Analytic Necessitism, and with it Analytic
+Necessitism, holds.</p>
+<p><strong>Forcing Possibilism fails</strong>, as in every atomless
+model (Atomlessness is incompatible with it). Directly: four distinct
+constant profiles of type <span class="math inline">tt</span> with the
+constant order of the four-element Boolean algebra form a complete,
+Dedekind-finite Boolean algebra. Forcing Possibilism would give a
+proposition with exactly four propositions below it; but a nonzero
+proposition has infinitely many below it (Atomlessness), and <span
+class="math inline">\bot</span> one.</p>
+<p><strong>Boolean Completeness at <span class="math inline">t</span>
+fails.</strong> Lower bounds of a property <span
+class="math inline">X</span> of propositions are the supported subsets
+of <span class="math inline">\bigcap X</span> (its actual instances), so
+a greatest lower bound exists iff the union <span
+class="math inline">U</span> of all supported subsets of <span
+class="math inline">\bigcap X</span> is itself supported, and is then
+<span class="math inline">U</span>. Fix <span
+class="math inline">C\subseteq I</span> with <span
+class="math inline">|C|=\kappa</span>, a set <span
+class="math inline">P</span> of <span
+class="math inline">\kappa^+</span> maps <span
+class="math inline">x:C\to L</span> (there are <span
+class="math inline">\kappa^\kappa&gt;\kappa</span>), and distinct <span
+class="math inline">j_x\in I\setminus C</span>, and put</p>
+<p><span class="math display">
+p_x:=\{n:\ n|_C\ne x\}\cup\{n:\ n_{j_x}=\varepsilon\},
+</span></p>
+<p>with support <span class="math inline">C\cup\{j_x\}</span>. Let <span
+class="math inline">X</span> be the constant profile <span
+class="math inline">\{p_x:x\in P\}</span>. For <span
+class="math inline">m</span> and <span class="math inline">T\supseteq
+C</span>, the class <span
+class="math inline">[m]_T:=\{n:n|_T=m|_T\}</span> lies in every <span
+class="math inline">p_x</span> iff either <span
+class="math inline">m|_C\notin P</span>, or <span
+class="math inline">m|_C=x\in P</span>, <span class="math inline">j_x\in
+T</span> and <span class="math inline">m_{j_x}=\varepsilon</span>; and
+if <span class="math inline">m|_C=x\in P</span> with <span
+class="math inline">m_{j_x}\ne\varepsilon</span> no class of <span
+class="math inline">m</span> lies in <span
+class="math inline">p_x</span>. So</p>
+<p><span class="math display">
+U=\{m:\ m|_C\notin P\}\cup\{m:\ m|_C=x\in P,\ m_{j_x}=\varepsilon\}.
+</span></p>
+<p>Given <span class="math inline">S</span> of size <span
+class="math inline">\le\kappa</span>, take <span
+class="math inline">x\in P</span> with <span
+class="math inline">j_x\notin S</span>, <span
+class="math inline">m</span> with <span
+class="math inline">m|_C=x</span> and <span
+class="math inline">m_{j_x}=\varepsilon</span>, and <span
+class="math inline">m&#39;</span> differing from <span
+class="math inline">m</span> only at <span
+class="math inline">j_x</span>: they agree on <span
+class="math inline">S</span>, and <span class="math inline">m\in
+U</span>, <span class="math inline">m&#39;\notin U</span>. So <span
+class="math inline">U</span> has no support, and <span
+class="math inline">X</span> has no greatest lower bound.</p>
+<p><strong>Rigid Rigidity.</strong> <em>Lifting lemma: for every rigid
+<span class="math inline">Y</span> and arrow <span
+class="math inline">k</span> there is a rigid <span
+class="math inline">X</span> with <span class="math inline">k\cdot
+X=Y</span>.</em> By Lemma 3, <span class="math inline">Y=H_D</span> for
+<span class="math inline">D:=Y_1</span>; let <span
+class="math inline">S</span> support <span class="math inline">Y</span>.
+For an entity <span class="math inline">q</span> let</p>
+<p><span class="math display">
+L(q)_n:=\begin{cases}q_{n^\flat}&amp;\text{if }n_i\text{ ends with
+}k_i\text{ for every }i\in S,\\
+\varnothing&amp;\text{otherwise,}\end{cases}
+</span></p>
+<p>where <span class="math inline">n^\flat</span> strips the suffix
+<span class="math inline">k_i</span> from <span
+class="math inline">n_i</span> for <span class="math inline">i\in
+S</span>; <span class="math inline">L(q)</span> has support <span
+class="math inline">S\cup\operatorname{supp}(q)</span>, and <span
+class="math inline">k\cdot L(q)=k&#39;&#39;\cdot q</span>, where <span
+class="math inline">k&#39;&#39;</span> is <span
+class="math inline">k</span> off <span class="math inline">S</span> and
+<span class="math inline">\varepsilon</span> on <span
+class="math inline">S</span>. Write <span
+class="math inline">m=m_S\,m_{\bar S}</span> for the factorization into
+the parts on and off <span class="math inline">S</span>. Unwinding the
+definition, <span class="math inline">m\cdot L(q)=\Phi_{m|_S}(m_{\bar
+S}\cdot q)</span> for an operation <span
+class="math inline">\Phi_{m|_S}</span> depending only on <span
+class="math inline">m|_S</span>. As <span class="math inline">Y</span>
+has support <span class="math inline">S</span>, <span
+class="math inline">m_{\bar S}\cdot D=D</span>, so for <span
+class="math inline">C:=\{L(\bar q):\bar q\in D\}</span> (applied to each
+entry)</p>
+<p><span class="math display">
+m\cdot C=\Phi_{m|_S}[D],\qquad k\cdot C=k&#39;&#39;\cdot D=D .
+</span></p>
+<p>So <span class="math inline">H_C</span> has support <span
+class="math inline">S</span>, is admitted, rigid by Lemma 3, and <span
+class="math inline">k\cdot H_C=H_D=Y</span>.</p>
+<p>Now let <span class="math inline">R</span> be <span
+class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)</span>, whose
+profile is constant, with the rigid relations as instances. It is weakly
+persistent, transports of rigid relations being rigid. If <span
+class="math inline">Z</span> necessarily holds of every rigid <span
+class="math inline">X</span>, then <span class="math inline">k\cdot X\in
+Z_k</span> for all rigid <span class="math inline">X</span> and arrows
+<span class="math inline">k</span>; by the lifting lemma every rigid
+relation is such a <span class="math inline">k\cdot X</span>, so <span
+class="math inline">R\le Z</span>. So <span class="math inline">R</span>
+is weakly rigid, and since the principle is closed and pure, □Rigid
+Rigidity holds. With □Tame Rigidity, Weakly Rigid Weak Rigidity and its
+boxed form follow. The lemma does not conflict with §8: Rigid Power asks
+for a lift below a given rigid <span class="math inline">F</span>.</p>
+<h2 id="remarks">Remarks</h2>
+<ol type="1">
+<li><strong>Tame Rigidity.</strong> Lemma 3 also shows that every weakly
+rigid relation is rigid, at every arrow, so □Tame Rigidity holds
+(§9).</li>
+<li><strong>Choice.</strong> §§5 and 7, and the choice principles of §9,
+use choice in the metatheory; the other arguments do not.</li>
+<li><strong>Infinitely many individuals.</strong> Astra also gives a
+variant in which the arrows carry an extra coordinate, a surjection of a
+set of size <span class="math inline">\kappa^+</span> acting on the
+individuals. It keeps these verdicts and adds the Axioms of Infinity at
+<span class="math inline">e</span> and <span
+class="math inline">t</span>. It is not recorded here.</li>
+<li><strong>Lean.</strong> Astra’s Lean development certifies, for one
+predicate constant, that Logical Necessity, □BF and □Relational Choice
+are consistent and imply neither Actuality nor Vicinity, using this
+construction. It is not yet connected to this record.</li>
+</ol>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+§§3.4–3.5, pp. 55–61; Appendix D, pp. 73–74. One-object action models
+and their semantics.</li>
+<li><strong>Background: Logical Combinatorialism.</strong> Bacon, Andrew
+(2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589.
+As cited in Classicism, §§2.5 and 3.5. Read directly for the import of
+22 September 2026; section, footnote and page locators refer to the
+published pagination. — Appendix A.3. Gluing the interpretations of Σ at
+fresh arrows, as in the glued free-monoid models.</li>
+</ul>
+</body></html>

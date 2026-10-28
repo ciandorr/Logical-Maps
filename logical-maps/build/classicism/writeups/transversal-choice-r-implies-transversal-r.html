@@ -323,25 +323,49 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Transversal Choice ⇒ Transversal</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.transversal_choice_r_implies_transversal_r</code>; produced by Christopher Sun, 26 September 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.transversal_choice_r_implies_transversal_r</code>;
+produced by Christopher Sun, 26 September 2026; recorded by Claude Opus
+5.5 (Anthropic), prompted by Cian Dorr, 28 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Transversal Choice.</strong> Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at
+any type including e, has a transversal, that is, a property with
+exactly one instance in each of its cells.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Transversal.</strong> There is a property of properties that picks out exactly one property from each coextension class, that is, exactly one property coextensive with any given property.</li>
+<li><strong>Transversal.</strong> There is a property of properties that
+picks out exactly one property from each coextension class, that is,
+exactly one property coextensive with any given property.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix <span class="math inline">\sigma</span>. Coextensiveness, <span class="math inline">(\approx X)Y:=\forall z^\sigma\, .\,Xz\leftrightarrow Yz</span>, is a closed relation of type <span class="math inline">(\sigma t)(\sigma t)t</span>, and it is an equivalence relation by propositional logic. Transversal Choice at type <span class="math inline">\sigma t</span> gives <span class="math inline">F^{(\sigma t)t}</span> with exactly one instance in each cell of <span class="math inline">\approx</span>. The cell of <span class="math inline">X</span> is the set of properties coextensive with <span class="math inline">X</span>, so for each <span class="math inline">X</span> there is exactly one <span class="math inline">Y</span> with <span class="math inline">FY</span> coextensive with <span class="math inline">X</span>. This is Transversal at <span class="math inline">\sigma</span>.</p>
+<p>Fix <span class="math inline">\sigma</span>. Coextensiveness, <span
+class="math inline">(\approx X)Y:=\forall z^\sigma\,
+.\,Xz\leftrightarrow Yz</span>, is a closed relation of type <span
+class="math inline">(\sigma t)(\sigma t)t</span>, and it is an
+equivalence relation by propositional logic. Transversal Choice at type
+<span class="math inline">\sigma t</span> gives <span
+class="math inline">F^{(\sigma t)t}</span> with exactly one instance in
+each cell of <span class="math inline">\approx</span>. The cell of <span
+class="math inline">X</span> is the set of properties coextensive with
+<span class="math inline">X</span>, so for each <span
+class="math inline">X</span> there is exactly one <span
+class="math inline">Y</span> with <span class="math inline">FY</span>
+coextensive with <span class="math inline">X</span>. This is Transversal
+at <span class="math inline">\sigma</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Only the instance of Transversal Choice at type <span class="math inline">\sigma\to t</span> is used for Transversal at <span class="math inline">\sigma</span>.</p>
+<p>Only the instance of Transversal Choice at type <span
+class="math inline">\sigma\to t</span> is used for Transversal at <span
+class="math inline">\sigma</span>.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Sun 26 Sep</strong> — Christopher Sun, 26 September 2026.</li>
+<li><strong>Sun 26 Sep</strong> — Christopher Sun, 26 September
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/transversal-choice-r-implies-transversal-r.yaml</code>
+Record:
+<code>topics/classicism/results/transversal-choice-r-implies-transversal-r.yaml</code>
 </p>
 </body></html>

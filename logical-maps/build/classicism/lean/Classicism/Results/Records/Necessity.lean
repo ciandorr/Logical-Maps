@@ -194,7 +194,7 @@ theorem necessary_two_hat_implies_nd_and_five_implies_two_hat_imply_five_implies
   modal_K _ _ (modal_K _ _
     (nec% two_hat_implies_nd_and_five_implies_two_hat_imply_five_implies_nd) h₁) h₂
 
-/-! ### `□_≠` from a witness: Vicinity with BF at `t`, and Strong Leibniz at `t` -/
+/-! ### `□_≠` from a witness: Vicinity with BF at `t`, and Strong Atomicity at `t` -/
 
 /-- `□(w → ◇t) → □(◇w → ◇t)`, by `4` and `◇◇t → ◇t`. -/
 theorem box_dia_imp_of_box_imp_dia (w t : Prop) (h : □ (w → ◇ t)) : □ (◇ w → ◇ t) :=
@@ -247,15 +247,15 @@ theorem not_boxNe_neg_of_decides (v q : Prop) :
         (modal_four _ ((le_iff_prop v r).1 (le_of_decides_true v r (S r) hv hr))))
     not_box_of_dia_and r q (dia_mono _ _ hdr (D hv)) hb
 
-/-- `strong-leibniz-t-implies-two-hat-implies-nd`. Let `w` be a true strong world (Strong
-Actuality) and `q` witness `□̂̂p`; `w` witnesses `□_≠p`, by the dual of Strong Leibniz: every
-strong world `v` entails `◇w → p`. If `v ≤ ¬◇w`, trivially. If `v ≤ ◇w`: `w` entails the truth
+/-- `strong-atomicity-t-implies-two-hat-implies-nd`. Let `w` be a true strong atom (Strong
+Actuality) and `q` witness `□̂̂p`; `w` witnesses `□_≠p`, by the dual of Strong Atomicity: every
+strong atom `v` entails `◇w → p`. If `v ≤ ¬◇w`, trivially. If `v ≤ ◇w`: `w` entails the truth
 `◇v ∧ q`, so `v ≤ ◇(◇v ∧ q)`, and since `v` necessarily decides everything,
 `v ≤ ¬□_≠¬q ≤ p`. -/
-theorem strong_leibniz_t_implies_two_hat_implies_nd :
-    StrongLeibnizT → TwoHatImpliesNdNecessity := fun sl p ⟨q, hq, hb⟩ =>
-  (strong_leibniz_t_implies_strong_actuality sl).elim fun w ⟨hw, hS⟩ =>
-    have key : ∀ v : Prop, SWorld v → v ≤ (◇ w → p) := fun v ⟨hv0, hvS⟩ =>
+theorem strong_atomicity_t_implies_two_hat_implies_nd :
+    StrongAtomicityT → TwoHatImpliesNdNecessity := fun sl p ⟨q, hq, hb⟩ =>
+  (strong_atomicity_t_implies_strong_actuality sl).elim fun w ⟨hw, hS⟩ =>
+    have key : ∀ v : Prop, SAtom v → v ≤ (◇ w → p) := fun v ⟨hv0, hvS⟩ =>
       ((box_elim hvS) (◇ w)).elim
         (fun hvw =>
           have hwv : w ≤ (◇ v ∧ q) := le_of_decides_true w _ (box_elim hS _) hw ⟨hv0, hq⟩
@@ -273,12 +273,12 @@ theorem strong_leibniz_t_implies_two_hat_implies_nd :
         (fun hvn => (le_iff_prop _ _).2 (modal_K _ _
           (nec% (fun (a : v → ¬ ◇ w) (hv : v) (h : ◇ w) => ((a hv h).elim : p)))
           ((le_iff_prop _ _).1 hvn)))
-    ⟨w, hw, StrongLeibnizT.to_dual sl _ key⟩
+    ⟨w, hw, StrongAtomicityT.to_dual sl _ key⟩
 
-/-- `necessary-strong-leibniz-t-implies-necessary-two-hat-implies-nd`: necessitated, and `K`. -/
-theorem necessary_strong_leibniz_t_implies_necessary_two_hat_implies_nd :
-    NecStrongLeibnizT → NecTwoHatImpliesNdNecessity :=
-  modal_K _ _ (nec% strong_leibniz_t_implies_two_hat_implies_nd)
+/-- `necessary-strong-atomicity-t-implies-necessary-two-hat-implies-nd`: necessitated, and `K`. -/
+theorem necessary_strong_atomicity_t_implies_necessary_two_hat_implies_nd :
+    NecStrongAtomicityT → NecTwoHatImpliesNdNecessity :=
+  modal_K _ _ (nec% strong_atomicity_t_implies_two_hat_implies_nd)
 
 /-! ### Records from *The Bounds of Possibility*, Appendix D -/
 

@@ -16,6 +16,28 @@ references:
   role: proof
   locator: Definitions 2.1–2.10 and 4.1; Theorem 4.4
 arguments:
+- id: self-atoms
+  holds:
+  - necessary-self-atomicity-r
+  fails:
+  - self-atoms-are-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'At a cloud point $t$ every proposition is identical to $\top$ or to $\bot$ (Remark 4.6(iv)),
+    and Atom $q$ holds at $t$ exactly when $q$ holds at $t$: if $t\in q$, then at every refinement $t^{\prime}$
+    a $z\le q$ is distinct from $q$ there iff $z$ is bottom there; if $t\notin q$, some refinement has
+    $q=\bot$, where Atom $q$ fails, and holding persists. So a proposition not containing the root is
+    a self-atom at the root whenever it is nonzero, and $\{r\}$ is an atom; every possible proposition
+    has one of these below it, and Self-Atomicity (type t) holds at the root. At relational types, a possible
+    $X$ at any point has, by no new entities (Lemma 4.3), an actual tuple $\bar x$ with $X\bar x$ possible;
+    $Y:=\lambda\bar y\, .\,\bar y=\bar x\land X\bar x$ lies below $X$, is possible, and has at most one
+    instance at every point, which at a cloud point where it is instantiated makes it an atom there (its
+    parts are $\{\bar x\}$ cut down by propositions, and such a part differs from $Y$ at a refinement
+    exactly when it is bottom there); so $Y$ is a self-atom. At cloud points every possible $X$ likewise
+    has such a $Y$ below it, so Self-Atomicity holds at every point and every type. Self-atoms are atoms
+    (type t) fails at the root: the set of points of an atomless component is a self-atom, and by Theorem
+    4.4(d) no atom lies below it.'
 - text: The frame is a world–cloud frame. At transparent cloud points every relation is rigid. At the
     isolated root, the check-closure of an actual extension is a coextensive rigid relation (Definition
     3.11 and Theorem 3.12). Thus RC holds at every point, and each boxed instance is valid.

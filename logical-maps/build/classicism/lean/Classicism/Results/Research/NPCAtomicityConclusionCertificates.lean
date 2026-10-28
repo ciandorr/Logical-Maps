@@ -1,0 +1,9 @@
+import Classicism.Results.Research.NPCAtomicityConclusion
+import Classicism.Tools.Check
+import Classicism.Tools.TypeSystem
+import Classicism.Tools.Schema
+
+#classicism_check Classicism.Research.NPC.necessary_of_atom_agreement
+#classicism_types Classicism.Research.NPC.necessary_of_atom_agreement
+#classicism_derive Classicism.Research.NPC.necessary_of_atom_agreement
+#print axioms Classicism.Research.NPC.necessary_of_atom_agreement.derivable

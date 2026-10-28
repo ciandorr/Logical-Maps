@@ -1,0 +1,17 @@
+id: necessary-self-atomicity-t
+name: □Self-Atomicity (type t)
+category: more-boolean-structure
+statement: 'Necessarily, every possible proposition is entailed by a self-atom: a possible proposition
+  that necessarily, if true, is an atom, that is, one that entails that it is the actual world.'
+formal: $\Box\forall p\, .\,\Diamond p\to\exists q\, .\,\operatorname{SelfAtom}_t(q)\land q\le p$
+definitions: 'where $\operatorname{SelfAtom}_t(p):=\Diamond p\land\Box(p\to\operatorname{Atom}_t(p))$: a
+  self-atom is a possible proposition that necessarily, if true, is an atom; equivalently, in C, one that
+  entails that it is the actual world, $\Box(p\to\forall q\, .\,q\to p\le q)$.'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: The boxed form of [[self-atomicity-t]], and the type $t$ instance of [[necessary-self-atomicity-r]].
+lean_def: Classicism.P.NecSelfAtomicityT.schemaIn

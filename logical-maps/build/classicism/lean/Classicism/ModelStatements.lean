@@ -12,6 +12,8 @@ import Classicism.Models.SymmetricFull
 import Classicism.Models.SymmetricIdeal
 import Classicism.Models.PairInjCollapse
 import Classicism.Models.OldNewBase
+import Classicism.Models.FiniteCompressionBase
+import Classicism.Models.FixedPointEntranceModel
 
 /-!
 # Generated statements: models' verdicts
@@ -108,6 +110,30 @@ def Models.finite_support_two_object_all_maps.barcan_r : Prop :=
 /-- `finite-support-two-object-all-maps`: □BF fails. -/
 def Models.finite_support_two_object_all_maps.necessary_barcan_r : Prop :=
   (Classicism.Meta.Intensional.ContingentBarcan.model).IsModel ∧ ¬ (Classicism.Meta.Intensional.ContingentBarcan.model).HoldsAx Classicism.P.NecBarcan.schemaIn
+
+/-- `symmetric-entrance-qualitative-links`: Relational Choice holds. -/
+def Models.symmetric_entrance_qualitative_links.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).IsModel ∧ (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `symmetric-entrance-qualitative-links`: BF (type t) fails. -/
+def Models.symmetric_entrance_qualitative_links.barcan_t : Prop :=
+  (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).IsModel ∧ ¬ (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).HoldsAx Classicism.P.BarcanT.schemaIn
+
+/-- `symmetric-entrance-qualitative-links`: BF (relational types) fails. -/
+def Models.symmetric_entrance_qualitative_links.barcan_relational : Prop :=
+  (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).IsModel ∧ ¬ (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).HoldsAx Classicism.P.BarcanRelational.schemaIn
+
+/-- `symmetric-finite-compression-entrance`: Tame Rigidity holds. -/
+def Models.symmetric_finite_compression_entrance.tame_rigidity_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)).HoldsAx Classicism.P.TameRigidity.schemaIn
+
+/-- `symmetric-finite-compression-entrance`: Rigid Power holds. -/
+def Models.symmetric_finite_compression_entrance.rigid_power_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)).HoldsAx Classicism.P.RigidPower.schemaIn
+
+/-- `symmetric-finite-compression-entrance`: Weakly Rigid Power fails. -/
+def Models.symmetric_finite_compression_entrance.weakly_rigid_power_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)).IsModel ∧ ¬ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)).HoldsAx Classicism.P.WeaklyRigidPower.schemaIn
 
 /-- `symmetric-old-new-individuals`: ND holds. -/
 def Models.symmetric_old_new_individuals.distinctness_necessary_r : Prop :=
@@ -341,9 +367,9 @@ def Models.full_idempotent_monoid.necessary_rigid_comprehension_r : Prop :=
 def Models.full_idempotent_monoid.no_pure_contingency_r : Prop :=
   (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
 
-/-- `full-idempotent-monoid`: Strong Leibniz Biconditionals (type t) fails. -/
-def Models.full_idempotent_monoid.strong_leibniz_t : Prop :=
-  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- `full-idempotent-monoid`: Strong Atomicity (type t) fails. -/
+def Models.full_idempotent_monoid.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `full-idempotent-monoid`: Fregean Axiom fails. -/
 def Models.full_idempotent_monoid.fregean_axiom : Prop :=
@@ -693,9 +719,9 @@ def Models.full_two_object_double_retraction.necessary_atomicity_r : Prop :=
 def Models.full_two_object_double_retraction.necessary_rigid_comprehension_r : Prop :=
   (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
 
-/-- `full-two-object-double-retraction`: Strong Leibniz Biconditionals (type t) fails. -/
-def Models.full_two_object_double_retraction.strong_leibniz_t : Prop :=
-  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- `full-two-object-double-retraction`: Strong Atomicity (type t) fails. -/
+def Models.full_two_object_double_retraction.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `full-two-object-double-retraction`: Fregean Axiom fails. -/
 def Models.full_two_object_double_retraction.fregean_axiom : Prop :=
@@ -765,9 +791,9 @@ def Models.full_two_object_retract.necessary_atomicity_r : Prop :=
 def Models.full_two_object_retract.necessary_rigid_comprehension_r : Prop :=
   (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
 
-/-- `full-two-object-retract`: Strong Leibniz Biconditionals (type t) fails. -/
-def Models.full_two_object_retract.strong_leibniz_t : Prop :=
-  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- `full-two-object-retract`: Strong Atomicity (type t) fails. -/
+def Models.full_two_object_retract.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `full-two-object-retract`: Fregean Axiom fails. -/
 def Models.full_two_object_retract.fregean_axiom : Prop :=
@@ -880,6 +906,14 @@ def Models.symmetric_collapse_pair.independence_signature_r : Prop :=
 /-- `symmetric-collapse-pair`: No Contingency (signature Σ) holds. -/
 def Models.symmetric_collapse_pair.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
+
+/-- `symmetric-entrance-qualitative-links`: Independence (signature Σ) fails. -/
+def Models.symmetric_entrance_qualitative_links.independence_signature_r : Prop :=
+  (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model) (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model) (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model) (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)).HoldsAx (Classicism.Meta.AxiomSet.independence _)
+
+/-- `symmetric-finite-compression-entrance`: Independence (signature Σ) fails. -/
+def Models.symmetric_finite_compression_entrance.independence_signature_r : Prop :=
+  (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A))).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A))).HoldsAx (Classicism.Meta.AxiomSet.independence _)
 
 /-- `symmetric-infinite-classes`: Relational Choice fails. -/
 def Models.symmetric_infinite_classes.relational_choice_r : Prop :=
@@ -1109,9 +1143,9 @@ def Arguments.invertible_arrows.necessary_barcan_r : Prop :=
 def Arguments.no_pure_contingency_one_object.no_pure_contingency_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} {C : Type} [CategoryTheory.SmallCategory C] (A : Classicism.Meta.Intensional.Premodel Sig C), A.IsModel → Classicism.Meta.Intensional.Premodel.OneObject A → (A).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
 
-/-- argument `nonepic-strong-leibniz`: Strong Leibniz Biconditionals (type t) fails in every model meeting its conditions. -/
-def Arguments.nonepic_strong_leibniz.strong_leibniz_t : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} {C : Type} [CategoryTheory.SmallCategory C] (A : Classicism.Meta.Intensional.Premodel Sig C), A.IsModel → Classicism.Meta.Intensional.Premodel.Full A → Classicism.Meta.Intensional.Premodel.NonepicArrow A → ¬ (A).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- argument `nonepic-strong-atomicity`: Strong Atomicity (type t) fails in every model meeting its conditions. -/
+def Arguments.nonepic_strong_atomicity.strong_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} {C : Type} [CategoryTheory.SmallCategory C] (A : Classicism.Meta.Intensional.Premodel Sig C), A.IsModel → Classicism.Meta.Intensional.Premodel.Full A → Classicism.Meta.Intensional.Premodel.NonepicArrow A → ¬ (A).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- argument `nonidentity-arrow`: Fregean Axiom fails in every model meeting its conditions. -/
 def Arguments.nonidentity_arrow.fregean_axiom : Prop :=

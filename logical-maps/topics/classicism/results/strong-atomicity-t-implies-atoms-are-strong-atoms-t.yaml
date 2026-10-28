@@ -1,0 +1,23 @@
+id: strong-atomicity-t-implies-atoms-are-strong-atoms-t
+premises:
+- strong-atomicity-t
+conclusion: atoms-are-strong-atoms-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, the notion of a self-atom and the bridge principles, 25 October 2026; the proof by Claude
+  Fable 5.1 (Anthropic) the same day, from the survey of Strong Atomicity results that Cian Dorr requested
+  (session transcript of 25 October 2026).
+source_names:
+- Dorr 25 Oct
+proof: Let $X$ be an atom. It is not bottom, so Strong Atomicity gives a strong atom
+  $W\le X$. $W$ is not bottom and is a part of the atom $X$, so $W=X$, and $X$ is a strong atom.
+notes: With [[atomicity-t-and-atoms-are-strong-atoms-t-imply-strong-atomicity-t]] and the recorded derivation
+  of Atomicity, Strong Atomicity is equivalent to Atomicity together with Atoms are
+  strong atoms.

@@ -163,10 +163,6 @@ macro_rules
 
 /-! ## The certificates -/
 
-/-- `actual-profile-r-implies-actuality` -/
-theorem actual_profile_r_implies_actuality : Statements.actual_profile_r_implies_actuality := by
-  map_cert Meta.actual_profile_r_implies_actuality
-
 /-- `actuality-and-bf-imply-inextensible-comprehension` -/
 theorem actuality_and_bf_imply_inextensible_comprehension : Statements.actuality_and_bf_imply_inextensible_comprehension := by
   map_cert Meta.actuality_and_bf_imply_inextensible_comprehension
@@ -182,10 +178,6 @@ theorem actuality_and_distinctness_preserving_collapse_imply_inextensible_compre
 /-- `actuality-and-distinctness-preserving-collapse-imply-strong-actuality` -/
 theorem actuality_and_distinctness_preserving_collapse_imply_strong_actuality : Statements.actuality_and_distinctness_preserving_collapse_imply_strong_actuality := by
   map_cert Proofs.actuality_and_distinctness_preserving_collapse_imply_strong_actuality.entails
-
-/-- `actuality-implies-actual-profile-r` -/
-theorem actuality_implies_actual_profile_r : Statements.actuality_implies_actual_profile_r := by
-  map_cert Proofs.actuality_implies_actual_profile_r.listEntails
 
 /-- `actuality-implies-persistent-comprehension-r` -/
 theorem actuality_implies_persistent_comprehension_r : Statements.actuality_implies_persistent_comprehension_r := by
@@ -1155,6 +1147,11 @@ theorem atomicity_r.dual : Statements.atomicity_r.dual := by
 theorem atomicity_t.dual : Statements.atomicity_t.dual := by
   map_form P.AtomicityT.to_dual.entails
     P.AtomicityT.of_dual.entails
+
+/-- `actuality`, variant `actual-profile`: Actual Profile, at every list of argument types. -/
+theorem actuality.actual_profile : Statements.actuality.actual_profile := by
+  map_form Proofs.actuality_implies_actual_profile_r.listEntails
+    Meta.actual_profile_r_implies_actuality
 
 /-- `barcan-r`, variant `dual`: the dual form. -/
 theorem barcan_r.dual : Statements.barcan_r.dual := by

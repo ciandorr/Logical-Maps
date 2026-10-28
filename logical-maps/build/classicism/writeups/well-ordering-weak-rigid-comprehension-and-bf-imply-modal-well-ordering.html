@@ -322,62 +322,298 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Well-Ordering, Weak Rigid Comprehension and BF imply Modal Well-Ordering</h1></header><p>Cian Dorr sketched the argument on 7 October 2026: from a well-order, build a rigid property of rigid initial segments, and hope that it is <em>necessarily</em> well-ordered by inclusion. Claude Opus 5.5 (Anthropic) filled in the steps the same day. The new idea is in Step 4, where separation is handled by applying weak inextensibility to the strict segments. Cian Dorr checked the argument as first written. This version reorganizes the notation and has not been independently checked.</p>
-<p><strong>Claim.</strong> For each type <span class="math inline">\sigma</span>: <span class="math display">
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Well-Ordering, Weak Rigid Comprehension and BF imply Modal Well-Ordering</h1></header><p>Cian Dorr sketched the argument on 7 October 2026: from a well-order,
+build a rigid property of rigid initial segments, and hope that it is
+<em>necessarily</em> well-ordered by inclusion. Claude Opus 5.5
+(Anthropic) filled in the steps the same day. The new idea is in Step 4,
+where separation is handled by applying weak inextensibility to the
+strict segments. Cian Dorr checked the argument as first written. This
+version reorganizes the notation and has not been independently
+checked.</p>
+<p><strong>Claim.</strong> For each type <span
+class="math inline">\sigma</span>: <span class="math display">
 \exists R^{\sigma\sigma t}\, .\,\operatorname{WO}(R),\quad
 \text{Weak Rigid Comprehension at }\sigma t\text{ and }(\sigma t)t,\quad
 \text{BF at }\sigma
-\ \vdash_{\mathrm C}\ 
+\ \vdash_{\mathrm C}\
 \exists R&#39;^{\sigma\sigma t}\, .\,\Box\operatorname{WO}(R&#39;).
 </span></p>
-<p>WO, Trans, Antisymm, Total, WellFounded and WeaklyRigid are as in Background. <span class="math inline">A\le B</span> is entailment, <span class="math inline">\Box\forall y\, .\,Ay\to By</span>. It is necessary when true, by 4, and at any world it implies inclusion there, by T. <span class="math inline">A&lt;B</span> means <span class="math inline">A\le B\land A\ne B</span>.</p>
-<h2 id="two-facts-about-weak-rigidity">Two facts about weak rigidity</h2>
-<p><strong>(F1) Inclusion.</strong> If <span class="math inline">A</span> and <span class="math inline">B</span> are weakly rigid and <span class="math inline">\forall y\,
-.\,Ay\to By</span>, then <span class="math inline">A\le B</span>. <em>Proof.</em> Each instance <span class="math inline">y</span> of <span class="math inline">A</span> is an instance of <span class="math inline">B</span>, so <span class="math inline">\Box By</span> by weak persistence of <span class="math inline">B</span>. Weak inextensibility of <span class="math inline">A</span> with <span class="math inline">X:=B</span> gives <span class="math inline">A\le B</span>.</p>
-<p><strong>(F2) Identity.</strong> Coextensive weakly rigid properties are identical. By (F1) each entails the other, and Intensionality applies.</p>
+<p>WO, Trans, Antisymm, Total, WellFounded and WeaklyRigid are as in
+Background. <span class="math inline">A\le B</span> is entailment, <span
+class="math inline">\Box\forall y\, .\,Ay\to By</span>. It is necessary
+when true, by 4, and at any world it implies inclusion there, by T.
+<span class="math inline">A&lt;B</span> means <span
+class="math inline">A\le B\land A\ne B</span>.</p>
+<h2 id="two-facts-about-weak-rigidity">Two facts about weak
+rigidity</h2>
+<p><strong>(F1) Inclusion.</strong> If <span
+class="math inline">A</span> and <span class="math inline">B</span> are
+weakly rigid and <span class="math inline">\forall y\,
+.\,Ay\to By</span>, then <span class="math inline">A\le B</span>.
+<em>Proof.</em> Each instance <span class="math inline">y</span> of
+<span class="math inline">A</span> is an instance of <span
+class="math inline">B</span>, so <span class="math inline">\Box
+By</span> by weak persistence of <span class="math inline">B</span>.
+Weak inextensibility of <span class="math inline">A</span> with <span
+class="math inline">X:=B</span> gives <span class="math inline">A\le
+B</span>.</p>
+<p><strong>(F2) Identity.</strong> Coextensive weakly rigid properties
+are identical. By (F1) each entails the other, and Intensionality
+applies.</p>
 <h2 id="setup">Setup</h2>
-<p>Let <span class="math inline">R</span> be a well-order and write <span class="math inline">x\preceq y</span> for <span class="math inline">(Rx)y</span>, and <span class="math inline">x\prec y</span> for <span class="math inline">x\preceq y\land x\ne y</span>. Define relations of type <span class="math inline">\sigma\to(\sigma t)\to t</span>: <span class="math display">
+<p>Let <span class="math inline">R</span> be a well-order and write
+<span class="math inline">x\preceq y</span> for <span
+class="math inline">(Rx)y</span>, and <span class="math inline">x\prec
+y</span> for <span class="math inline">x\preceq y\land x\ne y</span>.
+Define relations of type <span class="math inline">\sigma\to(\sigma
+t)\to t</span>: <span class="math display">
 \begin{aligned}
-JxY&amp;:=\operatorname{WeaklyRigid}(Y)\land\forall y\, .\,Yy\leftrightarrow y\preceq x,\\
-KxY&amp;:=\operatorname{WeaklyRigid}(Y)\land\forall y\, .\,Yy\leftrightarrow y\prec x.
+JxY&amp;:=\operatorname{WeaklyRigid}(Y)\land\forall y\,
+.\,Yy\leftrightarrow y\preceq x,\\
+KxY&amp;:=\operatorname{WeaklyRigid}(Y)\land\forall y\,
+.\,Yy\leftrightarrow y\prec x.
 \end{aligned}
-</span> By Weak Rigid Comprehension at <span class="math inline">\sigma t</span> and (F2), each <span class="math inline">x</span> bears <span class="math inline">J</span> to exactly one property and <span class="math inline">K</span> to exactly one property. These are two <em>relations</em>. No function from <span class="math inline">\sigma</span> to <span class="math inline">\sigma t</span> is defined, and none is needed: everything below quantifies over pairs <span class="math inline">x,Y</span> with <span class="math inline">JxY</span>.</p>
-<p>By (F1), if <span class="math inline">JxA</span>, <span class="math inline">KxB</span> and <span class="math inline">JyC</span>, then - <span class="math inline">B\le A</span>; - <span class="math inline">C\le B</span> when <span class="math inline">y\prec x</span>; - <span class="math inline">A\le C</span> when <span class="math inline">x\preceq y</span>.</p>
+</span> By Weak Rigid Comprehension at <span class="math inline">\sigma
+t</span> and (F2), each <span class="math inline">x</span> bears <span
+class="math inline">J</span> to exactly one property and <span
+class="math inline">K</span> to exactly one property. These are two
+<em>relations</em>. No function from <span
+class="math inline">\sigma</span> to <span class="math inline">\sigma
+t</span> is defined, and none is needed: everything below quantifies
+over pairs <span class="math inline">x,Y</span> with <span
+class="math inline">JxY</span>.</p>
+<p>By (F1), if <span class="math inline">JxA</span>, <span
+class="math inline">KxB</span> and <span class="math inline">JyC</span>,
+then - <span class="math inline">B\le A</span>; - <span
+class="math inline">C\le B</span> when <span class="math inline">y\prec
+x</span>; - <span class="math inline">A\le C</span> when <span
+class="math inline">x\preceq y</span>.</p>
 <p>These are necessary, by 4.</p>
-<p>Separately, Weak Rigid Comprehension at <span class="math inline">(\sigma t)t</span> gives a weakly rigid <span class="math inline">R^*</span> coextensive with <span class="math inline">\lambda Y\, .\,\exists x\, .\,JxY</span>. At any world, a <em>member</em> is an instance of <span class="math inline">R^*</span> there. Actually, the members are exactly the <span class="math inline">Y</span> with <span class="math inline">JxY</span> for some <span class="math inline">x</span>, and by weak persistence each of them is necessarily a member.</p>
-<p>Weak inextensibility of <span class="math inline">R^*</span> is used repeatedly in the following form. If <span class="math inline">\Box\psi(A)</span> whenever <span class="math inline">JxA</span>, then <span class="math inline">\Box\forall M\, .\,R^*M\to\psi(M)</span>: apply it with <span class="math inline">X:=\lambda M\, .\,\psi(M)</span>.</p>
-<h2 id="step-1-necessarily-the-members-form-a-chain-under-le">Step 1: necessarily, the members form a chain under <span class="math inline">\le</span></h2>
-<p>If <span class="math inline">JxA</span> and <span class="math inline">JyC</span>, then <span class="math inline">A\le C</span> or <span class="math inline">C\le A</span>, since <span class="math inline">R</span> is total, and this is necessary by 4. Fix <span class="math inline">A</span> with <span class="math inline">JxA</span>. Weak inextensibility of <span class="math inline">R^*</span> gives <span class="math inline">\Box\forall M\, .\,R^*M\to(A\le M\lor M\le A)</span>. This holds for every such <span class="math inline">A</span>, so applying weak inextensibility again, to <span class="math inline">\psi(M):=\forall M&#39;\, .\,R^*M&#39;\to(M\le M&#39;\lor M&#39;\le M)</span>, gives <span class="math display">\Box\forall M\,M&#39;\, .\,R^*M\land R^*M&#39;\to M\le M&#39;\lor M&#39;\le M.</span></p>
-<h2 id="step-2-necessarily-every-nonempty-family-of-members-has-a-le-least-instance">Step 2: necessarily, every nonempty family of members has a <span class="math inline">\le</span>-least instance</h2>
-<p>Let <span class="math inline">\psi(M)</span> say: every <span class="math inline">\mathcal Z^{(\sigma t)t}</span> such that <span class="math inline">\mathcal Z M</span> holds and every instance of <span class="math inline">\mathcal Z</span> is a member has a <span class="math inline">\le</span>-least instance. We show <span class="math inline">\Box\psi(A)</span> whenever <span class="math inline">JxA</span>, by induction on <span class="math inline">x</span> along <span class="math inline">R</span>. The induction applies WellFounded, at the evaluation point, to <span class="math inline">\lambda x\, .\,\exists A\, .\,JxA\land\neg\Box\psi(A)</span>.</p>
-<p>Fix <span class="math inline">x</span> and <span class="math inline">A</span> with <span class="math inline">JxA</span>. Suppose <span class="math inline">\Box\psi(C)</span> whenever <span class="math inline">JyC</span> with <span class="math inline">y\prec x</span>. If instead <span class="math inline">x\preceq y</span>, then <span class="math inline">A\le C</span> necessarily, so <span class="math inline">C&lt;A</span> is impossible. So <span class="math inline">\Box(C&lt;A\to\psi(C))</span> for every <span class="math inline">C</span> with <span class="math inline">JyC</span>, whatever <span class="math inline">y</span> is. Weak inextensibility of <span class="math inline">R^*</span> gives <span class="math display">\Box\forall W\, .\,R^*W\land W&lt;A\to\psi(W).</span></p>
-<p>At a world <span class="math inline">w</span>, let <span class="math inline">\mathcal Z</span> be as in <span class="math inline">\psi(A)</span>. - If some instance <span class="math inline">W</span> of <span class="math inline">\mathcal Z</span> satisfies <span class="math inline">W&lt;A</span>, then <span class="math inline">\psi(W)</span> supplies a least instance. - Otherwise every instance <span class="math inline">W</span> is a member and is comparable with <span class="math inline">A</span>, which is a member at <span class="math inline">w</span>, by Step 1. Since <span class="math inline">W&lt;A</span> fails, <span class="math inline">A\le W</span>. So <span class="math inline">A</span> is least.</p>
-<p>So <span class="math inline">\Box\psi(A)</span>, and by weak inextensibility of <span class="math inline">R^*</span>, <span class="math inline">\Box\forall M\, .\,R^*M\to\psi(M)</span>.</p>
-<p>Members may become identical at other worlds, but this does not matter: the argument only ever looks strictly below <span class="math inline">A</span> at <span class="math inline">w</span> itself.</p>
-<h2 id="step-3-necessarily-every-individual-belongs-to-a-member">Step 3: necessarily, every individual belongs to a member</h2>
-<p>For each actual <span class="math inline">t</span>, take <span class="math inline">A</span> with <span class="math inline">JtA</span>. Then <span class="math inline">At</span>, so <span class="math inline">\Box At</span> by weak persistence, and <span class="math inline">\Box R^*A</span>. So <span class="math inline">\forall t\, .\,\Box\exists M\, .\,R^*M\land
-Mt</span>, and BF at <span class="math inline">\sigma</span> gives <span class="math inline">\Box\forall t\,\exists M\, .\,R^*M\land Mt</span>.</p>
-<h2 id="step-4-necessarily-distinct-individuals-are-separated-by-a-member">Step 4: necessarily, distinct individuals are separated by a member</h2>
-<p>Let <span class="math display">\operatorname{Good}(M):=\forall a\,b\, .\,Ma\land Mb\land a\ne b\to
-\exists N\, .\,R^*N\land(Na\leftrightarrow\neg Nb).</span> We show <span class="math inline">\Box\operatorname{Good}(A)</span> whenever <span class="math inline">JxA</span>, by induction on <span class="math inline">x</span> along <span class="math inline">R</span> as in Step 2. Fix <span class="math inline">x</span>, <span class="math inline">A</span> with <span class="math inline">JxA</span> and <span class="math inline">B</span> with <span class="math inline">KxB</span>, and suppose <span class="math inline">\Box\operatorname{Good}(C)</span> whenever <span class="math inline">JyC</span> with <span class="math inline">y\prec x</span>.</p>
+<p>Separately, Weak Rigid Comprehension at <span
+class="math inline">(\sigma t)t</span> gives a weakly rigid <span
+class="math inline">R^*</span> coextensive with <span
+class="math inline">\lambda Y\, .\,\exists x\, .\,JxY</span>. At any
+world, a <em>member</em> is an instance of <span
+class="math inline">R^*</span> there. Actually, the members are exactly
+the <span class="math inline">Y</span> with <span
+class="math inline">JxY</span> for some <span
+class="math inline">x</span>, and by weak persistence each of them is
+necessarily a member.</p>
+<p>Weak inextensibility of <span class="math inline">R^*</span> is used
+repeatedly in the following form. If <span
+class="math inline">\Box\psi(A)</span> whenever <span
+class="math inline">JxA</span>, then <span
+class="math inline">\Box\forall M\, .\,R^*M\to\psi(M)</span>: apply it
+with <span class="math inline">X:=\lambda M\, .\,\psi(M)</span>.</p>
+<h2 id="step-1-necessarily-the-members-form-a-chain-under-le">Step 1:
+necessarily, the members form a chain under <span
+class="math inline">\le</span></h2>
+<p>If <span class="math inline">JxA</span> and <span
+class="math inline">JyC</span>, then <span class="math inline">A\le
+C</span> or <span class="math inline">C\le A</span>, since <span
+class="math inline">R</span> is total, and this is necessary by 4. Fix
+<span class="math inline">A</span> with <span
+class="math inline">JxA</span>. Weak inextensibility of <span
+class="math inline">R^*</span> gives <span
+class="math inline">\Box\forall M\, .\,R^*M\to(A\le M\lor M\le
+A)</span>. This holds for every such <span class="math inline">A</span>,
+so applying weak inextensibility again, to <span
+class="math inline">\psi(M):=\forall M&#39;\, .\,R^*M&#39;\to(M\le
+M&#39;\lor M&#39;\le M)</span>, gives <span
+class="math display">\Box\forall M\,M&#39;\, .\,R^*M\land R^*M&#39;\to
+M\le M&#39;\lor M&#39;\le M.</span></p>
+<h2
+id="step-2-necessarily-every-nonempty-family-of-members-has-a-le-least-instance">Step
+2: necessarily, every nonempty family of members has a <span
+class="math inline">\le</span>-least instance</h2>
+<p>Let <span class="math inline">\psi(M)</span> say: every <span
+class="math inline">\mathcal Z^{(\sigma t)t}</span> such that <span
+class="math inline">\mathcal Z M</span> holds and every instance of
+<span class="math inline">\mathcal Z</span> is a member has a <span
+class="math inline">\le</span>-least instance. We show <span
+class="math inline">\Box\psi(A)</span> whenever <span
+class="math inline">JxA</span>, by induction on <span
+class="math inline">x</span> along <span class="math inline">R</span>.
+The induction applies WellFounded, at the evaluation point, to <span
+class="math inline">\lambda x\, .\,\exists A\,
+.\,JxA\land\neg\Box\psi(A)</span>.</p>
+<p>Fix <span class="math inline">x</span> and <span
+class="math inline">A</span> with <span class="math inline">JxA</span>.
+Suppose <span class="math inline">\Box\psi(C)</span> whenever <span
+class="math inline">JyC</span> with <span class="math inline">y\prec
+x</span>. If instead <span class="math inline">x\preceq y</span>, then
+<span class="math inline">A\le C</span> necessarily, so <span
+class="math inline">C&lt;A</span> is impossible. So <span
+class="math inline">\Box(C&lt;A\to\psi(C))</span> for every <span
+class="math inline">C</span> with <span class="math inline">JyC</span>,
+whatever <span class="math inline">y</span> is. Weak inextensibility of
+<span class="math inline">R^*</span> gives <span
+class="math display">\Box\forall W\, .\,R^*W\land
+W&lt;A\to\psi(W).</span></p>
+<p>At a world <span class="math inline">w</span>, let <span
+class="math inline">\mathcal Z</span> be as in <span
+class="math inline">\psi(A)</span>. - If some instance <span
+class="math inline">W</span> of <span class="math inline">\mathcal
+Z</span> satisfies <span class="math inline">W&lt;A</span>, then <span
+class="math inline">\psi(W)</span> supplies a least instance. -
+Otherwise every instance <span class="math inline">W</span> is a member
+and is comparable with <span class="math inline">A</span>, which is a
+member at <span class="math inline">w</span>, by Step 1. Since <span
+class="math inline">W&lt;A</span> fails, <span class="math inline">A\le
+W</span>. So <span class="math inline">A</span> is least.</p>
+<p>So <span class="math inline">\Box\psi(A)</span>, and by weak
+inextensibility of <span class="math inline">R^*</span>, <span
+class="math inline">\Box\forall M\, .\,R^*M\to\psi(M)</span>.</p>
+<p>Members may become identical at other worlds, but this does not
+matter: the argument only ever looks strictly below <span
+class="math inline">A</span> at <span class="math inline">w</span>
+itself.</p>
+<h2 id="step-3-necessarily-every-individual-belongs-to-a-member">Step 3:
+necessarily, every individual belongs to a member</h2>
+<p>For each actual <span class="math inline">t</span>, take <span
+class="math inline">A</span> with <span class="math inline">JtA</span>.
+Then <span class="math inline">At</span>, so <span
+class="math inline">\Box At</span> by weak persistence, and <span
+class="math inline">\Box R^*A</span>. So <span
+class="math inline">\forall t\, .\,\Box\exists M\, .\,R^*M\land
+Mt</span>, and BF at <span class="math inline">\sigma</span> gives <span
+class="math inline">\Box\forall t\,\exists M\, .\,R^*M\land
+Mt</span>.</p>
+<h2
+id="step-4-necessarily-distinct-individuals-are-separated-by-a-member">Step
+4: necessarily, distinct individuals are separated by a member</h2>
+<p>Let <span class="math display">\operatorname{Good}(M):=\forall a\,b\,
+.\,Ma\land Mb\land a\ne b\to
+\exists N\, .\,R^*N\land(Na\leftrightarrow\neg Nb).</span> We show <span
+class="math inline">\Box\operatorname{Good}(A)</span> whenever <span
+class="math inline">JxA</span>, by induction on <span
+class="math inline">x</span> along <span class="math inline">R</span> as
+in Step 2. Fix <span class="math inline">x</span>, <span
+class="math inline">A</span> with <span class="math inline">JxA</span>
+and <span class="math inline">B</span> with <span
+class="math inline">KxB</span>, and suppose <span
+class="math inline">\Box\operatorname{Good}(C)</span> whenever <span
+class="math inline">JyC</span> with <span class="math inline">y\prec
+x</span>.</p>
 <ol type="i">
-<li><p><em>Weak inextensibility of <span class="math inline">A</span></em>, with <span class="math inline">X:=\lambda t\, .\,t=x\lor Bt</span>. An actual instance <span class="math inline">t</span> of <span class="math inline">A</span> satisfies <span class="math inline">t\preceq x</span>. Either <span class="math inline">t=x</span>, and <span class="math inline">\Box\, t=x</span> by the necessity of identity, or <span class="math inline">t\prec x</span>, and then <span class="math inline">Bt</span>, so <span class="math inline">\Box Bt</span> by weak persistence of <span class="math inline">B</span>. Hence <span class="math display">\Box\forall t\, .\,At\to t=x\lor Bt.</span></p></li>
-<li><p><em>Weak inextensibility of <span class="math inline">B</span></em>, with <span class="math inline">X:=\lambda t\, .\,\exists M\, .\,R^*M\land Mt\land M\le B\land
-\operatorname{Good}(M)</span>. An actual instance <span class="math inline">t</span> of <span class="math inline">B</span> satisfies <span class="math inline">t\prec x</span>. Take <span class="math inline">C</span> with <span class="math inline">JtC</span>. Then <span class="math inline">\Box R^*C</span> and <span class="math inline">\Box Ct</span> by weak persistence; <span class="math inline">C\le B</span>, and so <span class="math inline">\Box\,C\le B</span>; and <span class="math inline">\Box\operatorname{Good}(C)</span> by the induction hypothesis. Hence <span class="math display">\Box\forall t\, .\,Bt\to\exists M\, .\,R^*M\land Mt\land M\le B\land
+<li><p><em>Weak inextensibility of <span
+class="math inline">A</span></em>, with <span
+class="math inline">X:=\lambda t\, .\,t=x\lor Bt</span>. An actual
+instance <span class="math inline">t</span> of <span
+class="math inline">A</span> satisfies <span
+class="math inline">t\preceq x</span>. Either <span
+class="math inline">t=x</span>, and <span class="math inline">\Box\,
+t=x</span> by the necessity of identity, or <span
+class="math inline">t\prec x</span>, and then <span
+class="math inline">Bt</span>, so <span class="math inline">\Box
+Bt</span> by weak persistence of <span class="math inline">B</span>.
+Hence <span class="math display">\Box\forall t\, .\,At\to t=x\lor
+Bt.</span></p></li>
+<li><p><em>Weak inextensibility of <span
+class="math inline">B</span></em>, with <span
+class="math inline">X:=\lambda t\, .\,\exists M\, .\,R^*M\land Mt\land
+M\le B\land
+\operatorname{Good}(M)</span>. An actual instance <span
+class="math inline">t</span> of <span class="math inline">B</span>
+satisfies <span class="math inline">t\prec x</span>. Take <span
+class="math inline">C</span> with <span class="math inline">JtC</span>.
+Then <span class="math inline">\Box R^*C</span> and <span
+class="math inline">\Box Ct</span> by weak persistence; <span
+class="math inline">C\le B</span>, and so <span
+class="math inline">\Box\,C\le B</span>; and <span
+class="math inline">\Box\operatorname{Good}(C)</span> by the induction
+hypothesis. Hence <span class="math display">\Box\forall t\,
+.\,Bt\to\exists M\, .\,R^*M\land Mt\land M\le B\land
 \operatorname{Good}(M).</span></p></li>
 </ol>
-<p>At a world <span class="math inline">w</span>, let <span class="math inline">a\ne b</span> be instances of <span class="math inline">A</span>. - <strong>Both are instances of <span class="math inline">B</span>.</strong> By (ii) they lie in Good members <span class="math inline">M_1</span> and <span class="math inline">M_2</span>. By Step 1 one of these, say <span class="math inline">M_2</span>, includes the other. It contains both, and its Goodness gives a separating member. - <strong>One of them, say <span class="math inline">a</span>, is not an instance of <span class="math inline">B</span>.</strong> Then <span class="math inline">a=x</span>, by (i). Since <span class="math inline">b\ne a</span>, (i) gives <span class="math inline">Bb</span>, and (ii) gives a member <span class="math inline">M_2</span> with <span class="math inline">M_2b</span> and <span class="math inline">M_2\le B</span>. So <span class="math inline">M_2a</span> fails, and <span class="math inline">M_2</span> separates <span class="math inline">a</span> from <span class="math inline">b</span>. - <strong>Neither is an instance of <span class="math inline">B</span>.</strong> This cannot happen: then <span class="math inline">a=x=b</span>, by (i).</p>
-<p>So <span class="math inline">\Box\operatorname{Good}(A)</span>. By weak inextensibility of <span class="math inline">R^*</span>, necessarily every member is Good.</p>
-<p>This is where the obvious argument fails. If <span class="math inline">x</span> is identified at <span class="math inline">w</span> with some <span class="math inline">y\prec x</span>, then <span class="math inline">A</span> and <span class="math inline">B</span> can coincide at <span class="math inline">w</span>. The induction cannot then be run through members strictly below <span class="math inline">A</span>, and applying weak inextensibility to <span class="math inline">B</span> avoids the problem.</p>
-<h2 id="step-5-the-necessary-well-order">Step 5: the necessary well-order</h2>
-<p>Put <span class="math display">R&#39;:=\lambda x\,y\, .\,\forall M\, .\,R^*M\land My\to Mx.</span> At any world <span class="math inline">w</span>: - <strong>Trans.</strong> Immediate. - <strong>Total.</strong> Suppose <span class="math inline">(R&#39;x)y</span> fails: some member <span class="math inline">M</span> has <span class="math inline">My</span> but not <span class="math inline">Mx</span>. Let <span class="math inline">N</span> be any member with <span class="math inline">Nx</span>. By Step 1, <span class="math inline">N\le M</span> or <span class="math inline">M\le N</span>. The first would give <span class="math inline">Mx</span>, so <span class="math inline">M\le N</span>, and <span class="math inline">Ny</span>. Hence <span class="math inline">(R&#39;y)x</span>. - <strong>Antisymm.</strong> Let <span class="math inline">(R&#39;x)y</span> and <span class="math inline">(R&#39;y)x</span> with <span class="math inline">x\ne y</span>. By Step 3, <span class="math inline">x</span> and <span class="math inline">y</span> lie in members, and by Step 1 the larger of these contains both. By Step 4 some member contains exactly one of them. That contradicts one of the two hypotheses. - <strong>WellFounded.</strong> Let <span class="math inline">X</span> be instantiated at <span class="math inline">w</span>. The family <span class="math inline">\mathcal Z:=\lambda M\, .\,R^*M\land\exists y\, .\,Xy\land My</span> consists of members and is instantiated, by Step 3. By Step 2 it has a least instance <span class="math inline">M_0</span>, which contains some <span class="math inline">y_0</span> with <span class="math inline">Xy_0</span>. Let <span class="math inline">y</span> be any instance of <span class="math inline">X</span>. Every member containing <span class="math inline">y</span> belongs to <span class="math inline">\mathcal Z</span>, so it includes <span class="math inline">M_0</span> and therefore contains <span class="math inline">y_0</span>. So <span class="math inline">(R&#39;y_0)y</span>. Thus <span class="math inline">y_0</span> is <span class="math inline">R&#39;</span>-least among the instances of <span class="math inline">X</span>, and by Antisymm it is <span class="math inline">R&#39;</span>-minimal.</p>
-<p>So <span class="math inline">\Box\operatorname{WO}(R&#39;)</span>, as required.</p>
+<p>At a world <span class="math inline">w</span>, let <span
+class="math inline">a\ne b</span> be instances of <span
+class="math inline">A</span>. - <strong>Both are instances of <span
+class="math inline">B</span>.</strong> By (ii) they lie in Good members
+<span class="math inline">M_1</span> and <span
+class="math inline">M_2</span>. By Step 1 one of these, say <span
+class="math inline">M_2</span>, includes the other. It contains both,
+and its Goodness gives a separating member. - <strong>One of them, say
+<span class="math inline">a</span>, is not an instance of <span
+class="math inline">B</span>.</strong> Then <span
+class="math inline">a=x</span>, by (i). Since <span
+class="math inline">b\ne a</span>, (i) gives <span
+class="math inline">Bb</span>, and (ii) gives a member <span
+class="math inline">M_2</span> with <span
+class="math inline">M_2b</span> and <span class="math inline">M_2\le
+B</span>. So <span class="math inline">M_2a</span> fails, and <span
+class="math inline">M_2</span> separates <span
+class="math inline">a</span> from <span class="math inline">b</span>. -
+<strong>Neither is an instance of <span
+class="math inline">B</span>.</strong> This cannot happen: then <span
+class="math inline">a=x=b</span>, by (i).</p>
+<p>So <span class="math inline">\Box\operatorname{Good}(A)</span>. By
+weak inextensibility of <span class="math inline">R^*</span>,
+necessarily every member is Good.</p>
+<p>This is where the obvious argument fails. If <span
+class="math inline">x</span> is identified at <span
+class="math inline">w</span> with some <span class="math inline">y\prec
+x</span>, then <span class="math inline">A</span> and <span
+class="math inline">B</span> can coincide at <span
+class="math inline">w</span>. The induction cannot then be run through
+members strictly below <span class="math inline">A</span>, and applying
+weak inextensibility to <span class="math inline">B</span> avoids the
+problem.</p>
+<h2 id="step-5-the-necessary-well-order">Step 5: the necessary
+well-order</h2>
+<p>Put <span class="math display">R&#39;:=\lambda x\,y\, .\,\forall M\,
+.\,R^*M\land My\to Mx.</span> At any world <span
+class="math inline">w</span>: - <strong>Trans.</strong> Immediate. -
+<strong>Total.</strong> Suppose <span
+class="math inline">(R&#39;x)y</span> fails: some member <span
+class="math inline">M</span> has <span class="math inline">My</span> but
+not <span class="math inline">Mx</span>. Let <span
+class="math inline">N</span> be any member with <span
+class="math inline">Nx</span>. By Step 1, <span class="math inline">N\le
+M</span> or <span class="math inline">M\le N</span>. The first would
+give <span class="math inline">Mx</span>, so <span
+class="math inline">M\le N</span>, and <span
+class="math inline">Ny</span>. Hence <span
+class="math inline">(R&#39;y)x</span>. - <strong>Antisymm.</strong> Let
+<span class="math inline">(R&#39;x)y</span> and <span
+class="math inline">(R&#39;y)x</span> with <span
+class="math inline">x\ne y</span>. By Step 3, <span
+class="math inline">x</span> and <span class="math inline">y</span> lie
+in members, and by Step 1 the larger of these contains both. By Step 4
+some member contains exactly one of them. That contradicts one of the
+two hypotheses. - <strong>WellFounded.</strong> Let <span
+class="math inline">X</span> be instantiated at <span
+class="math inline">w</span>. The family <span
+class="math inline">\mathcal Z:=\lambda M\, .\,R^*M\land\exists y\,
+.\,Xy\land My</span> consists of members and is instantiated, by Step 3.
+By Step 2 it has a least instance <span class="math inline">M_0</span>,
+which contains some <span class="math inline">y_0</span> with <span
+class="math inline">Xy_0</span>. Let <span class="math inline">y</span>
+be any instance of <span class="math inline">X</span>. Every member
+containing <span class="math inline">y</span> belongs to <span
+class="math inline">\mathcal Z</span>, so it includes <span
+class="math inline">M_0</span> and therefore contains <span
+class="math inline">y_0</span>. So <span
+class="math inline">(R&#39;y_0)y</span>. Thus <span
+class="math inline">y_0</span> is <span
+class="math inline">R&#39;</span>-least among the instances of <span
+class="math inline">X</span>, and by Antisymm it is <span
+class="math inline">R&#39;</span>-minimal.</p>
+<p>So <span class="math inline">\Box\operatorname{WO}(R&#39;)</span>, as
+required.</p>
 <h2 id="what-is-used">What is used</h2>
 <ul>
-<li>Well-Ordering, only at the evaluation point: totality in Step 1, and well-foundedness for the two inductions.</li>
-<li>Weak Rigid Comprehension at <span class="math inline">\sigma t</span> (for <span class="math inline">J</span> and <span class="math inline">K</span>) and at <span class="math inline">(\sigma t)t</span> (for <span class="math inline">R^*</span>).</li>
+<li>Well-Ordering, only at the evaluation point: totality in Step 1, and
+well-foundedness for the two inductions.</li>
+<li>Weak Rigid Comprehension at <span class="math inline">\sigma
+t</span> (for <span class="math inline">J</span> and <span
+class="math inline">K</span>) and at <span class="math inline">(\sigma
+t)t</span> (for <span class="math inline">R^*</span>).</li>
 <li>BF at <span class="math inline">\sigma</span>, once, in Step 3.</li>
-<li>From C itself: necessity of identity, 4, T, Intensionality, and comprehension for the properties used in the inductions.</li>
+<li>From C itself: necessity of identity, 4, T, Intensionality, and
+comprehension for the properties used in the inductions.</li>
 </ul>
-<p>With boxed premises the same argument gives the boxed conclusion. That conclusion already follows, because Modal Well-Ordering implies its own necessitation by 4.</p>
+<p>With boxed premises the same argument gives the boxed conclusion.
+That conclusion already follows, because Modal Well-Ordering implies its
+own necessitation by 4.</p>
 </body></html>

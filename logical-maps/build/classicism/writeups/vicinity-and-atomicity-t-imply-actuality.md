@@ -1,0 +1,26 @@
+# Vicinity ∧ Atomicity (type t) ⇒ Actuality
+
+<p class='cert'>Result — Source: Misc.; produced by Cian Dorr (the argument and its use of BF for 5-necessity, 28 October 2026), with Claude Opus 5.5 (Anthropic), who completed the step showing that the atoms below the witness are self-atoms; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
+
+## Premises
+
+- **Vicinity.** There is a true proposition that entails the possibility of each true proposition.
+- **Atomicity (type t).** Every non-bottom proposition has an atom below it.
+
+## Conclusion
+
+- **Actuality.** There is a true proposition that entails every true proposition.
+
+## Proof
+
+By the 5-necessity form of [[vicinity]], some truth $v$ entails every 5-necessary truth. We show that every atom $w\le v$ is a self-atom. Let $A:=\operatorname{Atom}_t(w)$. Since $w$ is an atom, $w\le A$ or $w\le\neg A$; suppose $w\le\neg A$. First, $\Diamond_5w$: otherwise $\Box_5\neg w$, so $v\le\neg w$, and with $w\le v$, $w=\bot$. As $\Box\le\Box_5$ and $\Box_5$ is K, $\Diamond_5\neg A$, that is, $\Diamond_5\exists z\, .\,\psi(z)$, where $\psi(z)$ says that $z$ falsifies the clause of $\operatorname{Atom}_t(w)$ for $z$. $\Box_5$ satisfies BF at type $t$: in the form of The Bounds of Possibility, Appendix D, $\Box_5p$ says that $p$ is $X$-necessary for every $X$ that is necessarily NKJF$_{\langle\rangle}$, and F$_{\langle\rangle}$ is BF for $X$; that definition is necessarily equivalent to the map's (Background). So $\Diamond_5\psi(z)$ for some $z$. But $\psi(z)$ is a truth-functional compound of identities among $z$, $w$ and $\bot$ (the order $\le$ is an identity), and such a formula $\varphi$ satisfies $\Diamond_5\varphi\to\varphi$: identities are necessary (NI), hence 5-necessary, so $\varphi\to\Box_5\varphi$ holds for identities and their negations by B for the S5 operator $\Box_5$, and so for their compounds; contraposing for $\neg\varphi$ gives the claim. Hence $\psi(z)$ holds, contradicting that $w$ is an atom. So $w\le A$, and $w$ is a self-atom. Wherever $w$ is true it is then a true atom, and a true atom entails every truth (it lies below $q$ or $\neg q$, and not below a falsehood); so $w\le\mathrm{Act}$, where $\mathrm{Act}$ is Actuality. Finally, were $v\land\neg\mathrm{Act}$ possible, Atomicity (type $t$) would give an atom $w\le v\land\neg\mathrm{Act}$, with $w\le v$ and hence $w\le\mathrm{Act}$, so $w=\bot$. So $v\le\mathrm{Act}$, and since $v$ is true, Actuality holds.
+
+## Notes
+
+Vicinity and Atomicity thus give Actuality as Vicinity and Weakly Inextensible Comprehension do ([[vicinity-and-weakly-inextensible-comprehension-imply-actuality]]). The proof shows more, that every atom below the strongest 5-necessary truth is a self-atom.
+
+## Sources
+
+- **Dorr 28 Oct** — Cian Dorr, argument of 28 October 2026 that Vicinity and Atomicity give Actuality, through the 5-necessity form of Vicinity and BF for 5-necessity (session transcript).
+
+<p class='cert'>Record: <code>topics/classicism/results/vicinity-and-atomicity-t-imply-actuality.yaml</code></p>

@@ -9,11 +9,11 @@
 
 ## Conclusion
 
-- **Strong Actuality.** There is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.
+- **Strong Actuality.** There is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 
 ## Proof
 
-Let $a$ witness Actuality. For each $q$, $a\le q\lor a\le\neg q$: if $q$ is true, $a\le q$; if not, $\neg q$ is true and $a\le\neg q$. Each disjunct is necessary by 4, so the disjunction is necessary: $\forall q\, .\,\Box(a\le q\lor a\le\neg q)$. BF (type t), for the property $\lambda q\, .\,a\le q\lor a\le\neg q$, gives $\Box\forall q\, .\,a\le q\lor a\le\neg q$. With $a$ true, $a$ witnesses Strong Actuality. (The argument of Bacon's Exercise 8.12 for the Strong Leibniz Biconditionals, applied to the actual-world proposition.)
+Let $a$ witness Actuality. For each $q$, $a\le q\lor a\le\neg q$: if $q$ is true, $a\le q$; if not, $\neg q$ is true and $a\le\neg q$. Each disjunct is necessary by 4, so the disjunction is necessary: $\forall q\, .\,\Box(a\le q\lor a\le\neg q)$. BF (type t), for the property $\lambda q\, .\,a\le q\lor a\le\neg q$, gives $\Box\forall q\, .\,a\le q\lor a\le\neg q$. With $a$ true, $a$ witnesses Strong Actuality. (The argument of Bacon's Exercise 8.12 for Strong Atomicity, applied to the actual-world proposition.)
 
 ## Sources
 

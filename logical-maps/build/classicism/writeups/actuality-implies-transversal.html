@@ -323,30 +323,78 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality ⇒ Transversal</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.actuality_implies_transversal</code>; produced by Christopher Sun (the claim and the witness), 26 September 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.actuality_implies_transversal</code>; produced by
+Christopher Sun (the claim and the witness), 26 September 2026; recorded
+by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 September
+2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Transversal.</strong> There is a property of properties that picks out exactly one property from each coextension class, that is, exactly one property coextensive with any given property.</li>
+<li><strong>Transversal.</strong> There is a property of properties that
+picks out exactly one property from each coextension class, that is,
+exactly one property coextensive with any given property.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">w</span> witness Actuality: <span class="math inline">w</span> is true and <span class="math inline">w\le q</span> for every true <span class="math inline">q</span>. Fix <span class="math inline">\sigma</span> and put <span class="math inline">FY:=\Box\forall z^\sigma\, .\,Yz\to w</span>, the property of being a property that can be instantiated only if <span class="math inline">w</span> obtains. Existence: given <span class="math inline">X</span>, let <span class="math inline">Y:=\lambda z\, .\,Xz\land w</span>. Since <span class="math inline">w</span> is true, <span class="math inline">Y</span> is coextensive with <span class="math inline">X</span>, and <span class="math inline">FY</span> holds because <span class="math inline">\forall z\, .\,(Xz\land w)\to w</span> is a theorem, hence necessary. Uniqueness: let <span class="math inline">Y_1</span> and <span class="math inline">Y_2</span> satisfy <span class="math inline">F</span> and be coextensive with <span class="math inline">X</span>. Then <span class="math inline">\forall z\, .\,Y_1z\leftrightarrow Y_2z</span> is true, so Actuality gives <span class="math inline">\Box(w\to\forall z\, .\,Y_1z\leftrightarrow Y_2z)</span>. Together with <span class="math inline">\Box\forall z\, .\,Y_1z\to w</span> and <span class="math inline">\Box\forall z\, .\,Y_2z\to w</span>, K gives <span class="math inline">\Box\forall z\, .\,Y_1z\leftrightarrow Y_2z</span>: at any <span class="math inline">z</span>, if either side holds then <span class="math inline">w</span> does, and then the two sides agree. Necessarily coextensive properties are identical in C (Intensionality), so <span class="math inline">Y_1=Y_2</span>.</p>
+<p>Let <span class="math inline">w</span> witness Actuality: <span
+class="math inline">w</span> is true and <span class="math inline">w\le
+q</span> for every true <span class="math inline">q</span>. Fix <span
+class="math inline">\sigma</span> and put <span
+class="math inline">FY:=\Box\forall z^\sigma\, .\,Yz\to w</span>, the
+property of being a property that can be instantiated only if <span
+class="math inline">w</span> obtains. Existence: given <span
+class="math inline">X</span>, let <span class="math inline">Y:=\lambda
+z\, .\,Xz\land w</span>. Since <span class="math inline">w</span> is
+true, <span class="math inline">Y</span> is coextensive with <span
+class="math inline">X</span>, and <span class="math inline">FY</span>
+holds because <span class="math inline">\forall z\, .\,(Xz\land w)\to
+w</span> is a theorem, hence necessary. Uniqueness: let <span
+class="math inline">Y_1</span> and <span class="math inline">Y_2</span>
+satisfy <span class="math inline">F</span> and be coextensive with <span
+class="math inline">X</span>. Then <span class="math inline">\forall z\,
+.\,Y_1z\leftrightarrow Y_2z</span> is true, so Actuality gives <span
+class="math inline">\Box(w\to\forall z\, .\,Y_1z\leftrightarrow
+Y_2z)</span>. Together with <span class="math inline">\Box\forall z\,
+.\,Y_1z\to w</span> and <span class="math inline">\Box\forall z\,
+.\,Y_2z\to w</span>, K gives <span class="math inline">\Box\forall z\,
+.\,Y_1z\leftrightarrow Y_2z</span>: at any <span
+class="math inline">z</span>, if either side holds then <span
+class="math inline">w</span> does, and then the two sides agree.
+Necessarily coextensive properties are identical in C (Intensionality),
+so <span class="math inline">Y_1=Y_2</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Two coextensive <span class="math inline">F</span>-properties are necessarily coextensive. The dual witness <span class="math inline">FY:=\Box\forall z\, .\,w\lor Yz</span>, with representative <span class="math inline">\lambda z\, .\,Xz\lor\neg w</span>, works equally well. With Transversal and Relational Choice implying Transversal Choice, Actuality and Relational Choice together imply Transversal Choice.</p>
+<p>Two coextensive <span class="math inline">F</span>-properties are
+necessarily coextensive. The dual witness <span
+class="math inline">FY:=\Box\forall z\, .\,w\lor Yz</span>, with
+representative <span class="math inline">\lambda z\, .\,Xz\lor\neg
+w</span>, works equally well. With Transversal and Relational Choice
+implying Transversal Choice, Actuality and Relational Choice together
+imply Transversal Choice.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Sun 26 Sep</strong> — Christopher Sun, 26 September 2026.</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §1.5, p. 16 (Intensionality).</li>
+<li><strong>Sun 26 Sep</strong> — Christopher Sun, 26 September
+2026.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §1.5, p. 16 (Intensionality).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/actuality-implies-transversal.yaml</code>
+Record:
+<code>topics/classicism/results/actuality-implies-transversal.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §1.5, p. 16. Intensionality, the identity of necessarily coextensive relations.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §1.5,
+p. 16. Intensionality, the identity of necessarily coextensive
+relations.</li>
 </ul>
 </body></html>

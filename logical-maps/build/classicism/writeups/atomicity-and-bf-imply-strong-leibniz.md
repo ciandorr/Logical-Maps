@@ -19,6 +19,12 @@ Let $W$ be a weak world of relational type $\sigma$: $W\ne\bot$ and $\forall Y\,
 
 Bacon states this for relational types other than e, which is the map’s type range for both worlds principles; BF is used only at those types.
 
+Now derived: BF gives Atoms are strong worlds ([[barcan-relational-implies-atoms-are-strong-worlds-r]]) and with Atomicity that gives the Strong Leibniz Biconditionals ([[atomicity-r-and-atoms-are-strong-worlds-r-imply-strong-leibniz-r]]).
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Philosophical Introduction to HOL** — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Exercise 8.12, p. 166.

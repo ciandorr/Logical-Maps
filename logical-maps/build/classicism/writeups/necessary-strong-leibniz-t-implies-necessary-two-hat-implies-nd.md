@@ -20,6 +20,12 @@ The boxed form of [[strong-leibniz-t-implies-two-hat-implies-nd]].
 
 Boxed form; by the collapse-propagation result it makes $\Box_{\ne}$, $\hat{\hat\Box}$ and $\Box_5$ identical.
 
+Strengthened by [[necessary-self-atomicity-t-implies-necessary-two-hat-implies-nd]].
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Dorr 14 Oct** — Cian Dorr, argument of 14 October 2026 (see the unboxed result).

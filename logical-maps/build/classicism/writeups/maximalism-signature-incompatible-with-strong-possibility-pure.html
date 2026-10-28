@@ -323,36 +323,131 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Maximalism (signature Σ) ∧ Strong Possibility (pure) ⇒ ⊥</h1></header><p class="cert">
-Result — Source: Misc.; produced by Cian Dorr, 20 October 2026, with two amendments by Claude Fable 5.1 (Anthropic), who verified the consistency premise in coalesced-definable-root; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 20 October 2026.
+Result — Source: Misc.; produced by Cian Dorr, 20 October 2026, with two
+amendments by Claude Fable 5.1 (Anthropic), who verified the consistency
+premise in coalesced-definable-root; recorded by Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 20 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Maximalism (signature Σ).</strong> The Maximalism schema for the fixed nonlogical signature Σ: every closed identity of its language not provable in C(Σ) is false.</li>
-<li><strong>Strong Possibility (pure).</strong> Each closed pure sentence consistent with Maximalist Classicism is possible under the distinctness-preserving modality.</li>
+<li><strong>Maximalism (signature Σ).</strong> The Maximalism schema for
+the fixed nonlogical signature Σ: every closed identity of its language
+not provable in C(Σ) is false.</li>
+<li><strong>Strong Possibility (pure).</strong> Each closed pure
+sentence consistent with Maximalist Classicism is possible under the
+distinctness-preserving modality.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
 <li><strong>⊥.</strong> These premises cannot all hold together.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Suppose <span class="math inline">\Sigma</span> has a constant <span class="math inline">c</span> of type <span class="math inline">t</span>. Let C5 be <span class="math inline">\Box</span>ND and let <span class="math inline">F:=\lambda p\, .\, (\Diamond p\land\Diamond\neg p)\land\mathrm{C5}\land\mathrm{Atomicity}\land\forall x\forall y\, .\, x=y</span>, a closed pure term of type <span class="math inline">tt</span>: being contingent while <span class="math inline">\Box</span>ND, Atomicity and “there is exactly one individual” hold. Let <span class="math inline">\Psi:=\forall p\, .\,\neg\Diamond F(p)</span>, closed and pure. (1) <span class="math inline">\Psi</span> is consistent with Maximalist Classicism (pure): it holds at the evaluation point of coalesced-definable-root, which satisfies Maximalism (pure) (see its write-up). In brief: at that root <span class="math inline">\Box</span>ND fails, so nothing is <span class="math inline">F</span> there; and at a world where the side conditions of <span class="math inline">F</span> hold there is necessarily exactly one individual, so the sentence defining a root proposition is there the same proposition as a pure sentence, which is not contingent by <span class="math inline">\Box</span>ND + Atomicity (type <span class="math inline">t</span>) ⇒ No Pure Contingency. (2) Strong Possibility (pure) therefore gives <span class="math inline">\Diamond_{\ne}\Psi</span>, that is <span class="math inline">\forall q\, .\,q\to\Diamond( \Diamond q\land\Psi)</span>. Suppose <span class="math inline">\Diamond F(p_0)</span> for some <span class="math inline">p_0</span>. With <span class="math inline">q:=\Diamond F(p_0)</span> there is a world <span class="math inline">w</span> at which <span class="math inline">\Psi</span> and <span class="math inline">\Diamond\Diamond F(p_0)</span> hold, hence <span class="math inline">\Diamond F(p_0)</span> by 4; but <span class="math inline">\Psi</span> at <span class="math inline">w</span>, instantiated at <span class="math inline">p_0</span>, says <span class="math inline">\neg\Diamond F(p_0)</span>. So <span class="math inline">\forall p\, .\,\neg\Diamond F(p)</span>. (3) <span class="math inline">F(c)</span> is a closed sentence of <span class="math inline">\mathcal L(\Sigma)</span> consistent with C(<span class="math inline">\Sigma</span>): the full S5 model over the two-element group with one individual, with <span class="math inline">c</span> true at one world and false at the other, satisfies it. Maximalism for <span class="math inline">\Sigma</span>, in its possibility form, gives <span class="math inline">\Diamond F(c)</span>, contradicting (2) at <span class="math inline">p:=c</span>. If the constant of <span class="math inline">\Sigma</span> has a relational type <span class="math inline">\bar\sigma t</span> instead, replace “contingent” in <span class="math inline">F</span> by “contingently universal”, <span class="math inline">(X\ne\top\land\Diamond X=\top)\lor(X=\top\land\Diamond X\ne\top)</span>: for a closed term <span class="math inline">X=\top</span> is the closed sentence <span class="math inline">\forall\bar x\, .\,X\bar x</span>, non-contingent by the same route, and <span class="math inline">F(c)</span> is satisfied by the same two-world model with <span class="math inline">c</span> universal at one world only.</p>
+<p>Suppose <span class="math inline">\Sigma</span> has a constant <span
+class="math inline">c</span> of type <span class="math inline">t</span>.
+Let C5 be <span class="math inline">\Box</span>ND and let <span
+class="math inline">F:=\lambda p\, .\, (\Diamond p\land\Diamond\neg
+p)\land\mathrm{C5}\land\mathrm{Atomicity}\land\forall x\forall y\, .\,
+x=y</span>, a closed pure term of type <span
+class="math inline">tt</span>: being contingent while <span
+class="math inline">\Box</span>ND, Atomicity and “there is exactly one
+individual” hold. Let <span class="math inline">\Psi:=\forall p\,
+.\,\neg\Diamond F(p)</span>, closed and pure. (1) <span
+class="math inline">\Psi</span> is consistent with Maximalist Classicism
+(pure): it holds at the evaluation point of coalesced-definable-root,
+which satisfies Maximalism (pure) (see its write-up). In brief: at that
+root <span class="math inline">\Box</span>ND fails, so nothing is <span
+class="math inline">F</span> there; and at a world where the side
+conditions of <span class="math inline">F</span> hold there is
+necessarily exactly one individual, so the sentence defining a root
+proposition is there the same proposition as a pure sentence, which is
+not contingent by <span class="math inline">\Box</span>ND + Atomicity
+(type <span class="math inline">t</span>) ⇒ No Pure Contingency. (2)
+Strong Possibility (pure) therefore gives <span
+class="math inline">\Diamond_{\ne}\Psi</span>, that is <span
+class="math inline">\forall q\, .\,q\to\Diamond( \Diamond
+q\land\Psi)</span>. Suppose <span class="math inline">\Diamond
+F(p_0)</span> for some <span class="math inline">p_0</span>. With <span
+class="math inline">q:=\Diamond F(p_0)</span> there is a world <span
+class="math inline">w</span> at which <span
+class="math inline">\Psi</span> and <span
+class="math inline">\Diamond\Diamond F(p_0)</span> hold, hence <span
+class="math inline">\Diamond F(p_0)</span> by 4; but <span
+class="math inline">\Psi</span> at <span class="math inline">w</span>,
+instantiated at <span class="math inline">p_0</span>, says <span
+class="math inline">\neg\Diamond F(p_0)</span>. So <span
+class="math inline">\forall p\, .\,\neg\Diamond F(p)</span>. (3) <span
+class="math inline">F(c)</span> is a closed sentence of <span
+class="math inline">\mathcal L(\Sigma)</span> consistent with C(<span
+class="math inline">\Sigma</span>): the full S5 model over the
+two-element group with one individual, with <span
+class="math inline">c</span> true at one world and false at the other,
+satisfies it. Maximalism for <span class="math inline">\Sigma</span>, in
+its possibility form, gives <span class="math inline">\Diamond
+F(c)</span>, contradicting (2) at <span class="math inline">p:=c</span>.
+If the constant of <span class="math inline">\Sigma</span> has a
+relational type <span class="math inline">\bar\sigma t</span> instead,
+replace “contingent” in <span class="math inline">F</span> by
+“contingently universal”, <span
+class="math inline">(X\ne\top\land\Diamond
+X=\top)\lor(X=\top\land\Diamond X\ne\top)</span>: for a closed term
+<span class="math inline">X=\top</span> is the closed sentence <span
+class="math inline">\forall\bar x\, .\,X\bar x</span>, non-contingent by
+the same route, and <span class="math inline">F(c)</span> is satisfied
+by the same two-world model with <span class="math inline">c</span>
+universal at one world only.</p>
 <h2 id="notes">Notes</h2>
-<p>Uses Maximalism for <span class="math inline">\Sigma</span> at the one sentence <span class="math inline">F(c)</span>, and Strong Possibility (pure) at the one sentence <span class="math inline">\Psi</span>, whose consistency with Maximalist Classicism is witnessed by a model rather than by a principle of the map. The conjunct <span class="math inline">\forall x\forall y\, .\,x=y</span> in <span class="math inline">F</span> is an amendment: without it the consistency of <span class="math inline">\Psi</span> would need every closed sentence with the individual constant of the model’s signature, not only the pure ones, to be non-contingent under <span class="math inline">\Box</span>ND + Atomicity. The argument does not reach Strong Possibility for <span class="math inline">\Sigma</span>, whose consistency premise is stronger; whether Maximalism for <span class="math inline">\Sigma</span> is compatible with it stays open.</p>
-<p>A different proof was given later and independently by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22–23 October 2026: Maximalism for <span class="math inline">\Sigma</span> splits the proposition that there is exactly one individual and the Fregean Axiom holds, refuting its atomhood, whose consistency with Maximalist Classicism (pure) Astra shows with a separate model; Strong Possibility (pure) then makes that atomhood true. With this incompatibility the map excludes [[strong-possibility-signature-r-implies-strong-possibility-r]] unless Strong Possibility for <span class="math inline">\Sigma</span> is inconsistent.</p>
+<p>Uses Maximalism for <span class="math inline">\Sigma</span> at the
+one sentence <span class="math inline">F(c)</span>, and Strong
+Possibility (pure) at the one sentence <span
+class="math inline">\Psi</span>, whose consistency with Maximalist
+Classicism is witnessed by a model rather than by a principle of the
+map. The conjunct <span class="math inline">\forall x\forall y\,
+.\,x=y</span> in <span class="math inline">F</span> is an amendment:
+without it the consistency of <span class="math inline">\Psi</span>
+would need every closed sentence with the individual constant of the
+model’s signature, not only the pure ones, to be non-contingent under
+<span class="math inline">\Box</span>ND + Atomicity. The argument does
+not reach Strong Possibility for <span
+class="math inline">\Sigma</span>, whose consistency premise is
+stronger; whether Maximalism for <span class="math inline">\Sigma</span>
+is compatible with it stays open.</p>
+<p>A different proof was given later and independently by GPT-6 Astra
+(OpenAI), prompted by Daniel Kodsi, 22–23 October 2026: Maximalism for
+<span class="math inline">\Sigma</span> splits the proposition that
+there is exactly one individual and the Fregean Axiom holds, refuting
+its atomhood, whose consistency with Maximalist Classicism (pure) Astra
+shows with a separate model; Strong Possibility (pure) then makes that
+atomhood true. With this incompatibility the map excludes
+[[strong-possibility-signature-r-implies-strong-possibility-r]] unless
+Strong Possibility for <span class="math inline">\Sigma</span> is
+inconsistent.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-24</strong> (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — (minor) Noted the later independent proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi.</li>
+<li><strong>2026-10-24</strong> (Claude Opus 5.5 (Anthropic), prompted
+by Cian Dorr) — (minor) Noted the later independent proof by GPT-6 Astra
+(OpenAI), prompted by Daniel Kodsi.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 20 Oct</strong> — Cian Dorr, argument of 20 October 2026.</li>
-<li><strong>Fable 20 Oct</strong> — Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 20 October 2026, for the amendments and the model witnessing the consistency premise (coalesced-definable-root).</li>
+<li><strong>Dorr 20 Oct</strong> — Cian Dorr, argument of 20 October
+2026.</li>
+<li><strong>Fable 20 Oct</strong> — Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 20 October 2026, for the amendments and the model
+witnessing the consistency premise (coalesced-definable-root).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/maximalism-signature-incompatible-with-strong-possibility-pure.yaml</code>
+Record:
+<code>topics/classicism/results/maximalism-signature-incompatible-with-strong-possibility-pure.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.6, pp. 41–42. Maximalist Classicism, its possibility form, and the distinctness-preserving modality.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.6,
+pp. 41–42. Maximalist Classicism, its possibility form, and the
+distinctness-preserving modality.</li>
 </ul>
 </body></html>

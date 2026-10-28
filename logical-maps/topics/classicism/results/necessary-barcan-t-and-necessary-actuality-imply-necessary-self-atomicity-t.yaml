@@ -1,0 +1,24 @@
+id: necessary-barcan-t-and-necessary-actuality-imply-necessary-self-atomicity-t
+premises:
+- necessary-barcan-t
+- necessary-actuality
+conclusion: necessary-self-atomicity-t
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 28 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- Cian Dorr, argument of 28 October 2026 that BF and □Actuality give Self-Atomicity, and its boxed form (session
+  transcript).
+source_names:
+- Dorr 28 Oct
+proof: 'The proof of [[barcan-t-and-necessary-actuality-imply-self-atomicity-t]] derives Self-Atomicity (type
+  $t$) in C from BF (type $t$) and □Actuality, so C proves $\Box(\mathrm{BF}_t\land\Box\mathrm{Act}\to\mathrm{SelfAt}_t)$
+  by necessitation. □Actuality gives $\Box\Box\mathrm{Act}$ by 4, and with $\Box\mathrm{BF}_t$, K gives
+  $\Box\mathrm{SelfAt}_t$.'
+notes: Under □BF at every type, [[necessary-self-atomicity-t-and-necessary-bf-imply-necessary-self-atomicity-r]]
+  lifts the conclusion to [[necessary-self-atomicity-r]], so □BF and □Actuality give □Self-Atomicity.

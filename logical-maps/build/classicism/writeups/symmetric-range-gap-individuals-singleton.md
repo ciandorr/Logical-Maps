@@ -4,6 +4,10 @@
 
 ## Package
 
+- **□Atoms are self-atoms.** Necessarily, at each relational type, every atom is a self-atom: necessarily, if it is instantiated, it is an atom.
+- **□Atoms are strong atoms.** Necessarily, at each relational type, every atom is a strong atom: it necessarily entails every entity of the type or its negation.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Actuality.** There is a true proposition that entails every true proposition.
 - **Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
@@ -13,6 +17,7 @@
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
 - **No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
 - **B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **¬ Analytic Necessitism.** If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type $\sigma$.
@@ -36,6 +41,18 @@ Interpretation of Σ, fixed for this record: every constant of Σ is relational,
 *A member of the group Symmetric ideally-full models, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Atoms are self-atoms, □Atoms are strong atoms.
+
+The symmetric propositions over the arrows omitting $d$ refine, two such arrows agreeing with a given one on a finite $N$ differing in kernel beyond it, which post-composition with permutations preserves; so no atom contains an arrow omitting $d$, and the symmetry group $G$, pinned down by $\{d\}$, is the only atom. It is a self-atom and a strong atom (the argument for Self-atoms are atoms). An atom of a relational type has an atom as its existential projection, so sits over $G$, and symmetry with pinning makes it the orbit of a single pair, a self-atom and a strong atom. One object, so both principles hold at every world and every type.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms. Fails Self-Atomicity (type t).
+
+The symmetry group $G$ is the orbit of the identity and the only atom containing it, pinned down by the distinguished individual $d$. Let $q$ be a self-atom containing an arrow $k$ that omits $d$ from its range, pinned down by a finite $N$. Then $q$ contains every arrow agreeing with $k$ on $N$ up to symmetry. Let $h$ fix $k(N)$, which omits $d$, pointwise and send every other individual to one fixed individual other than $d$: $h$ is an arrow omitting $d$, not in $G$, and $h\circ k$ agrees with $k$ on $N$, so lies in $q$. So the transport of $q$ along $k$ contains $h$, while it should be the atom $G$. Hence every self-atom lies inside $G$, and is $G$, an atom; and $G$ is a strong atom, its transport along an arrow omitting $d$ being empty and along a permutation being $G$. A self-atom of a relational type has a self-atom as its existential projection, so sits over $G$, and symmetry with the transport condition makes it the orbit of a single pair, an atom and a strong atom. One object, so all this holds at every world. Self-Atomicity (type t) fails: the proposition of the arrows omitting $d$ is pinned down by $\{d\}$, possible, and has no self-atom below it.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Fails Atomicity (type t).
 
@@ -158,7 +175,7 @@ The record's revision log before it was written as arguments.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Corrected the reason given for the failures of Independence (signature Σ) and Distinctness (signature Σ): the true atom is denoted by no closed pure term, since such terms denote entities fixed by every arrow; the failures come from the other relational constants, which denote top. No verdict changes.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Relational Choice, at types (e→t) and e: a functional subrelation of the serial relation pairing each property with its members would be symmetric and finitely pinned, and a symmetry fixing its pinning set would carry its choice for the property of lying outside that set to a second choice. Cian Dorr’s observation that a choice cannot be finitely pinned; argument in the notes. Now violates: Relational Choice.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of BF at type t, sharpening the failure of BF; argument in the notes. Now violates: BF (type t).
-- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of the Strong Leibniz Biconditionals; see the notes. Now violates: Atomicity (type t).
+- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of Strong Atomicity; see the notes. Now violates: Atomicity (type t).
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 - **2026-09-20** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and identity at the identity arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned by that individual, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).
 

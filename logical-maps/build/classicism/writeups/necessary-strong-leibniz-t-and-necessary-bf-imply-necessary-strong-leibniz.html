@@ -323,30 +323,94 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□Strong Leibniz Biconditionals (type t) ∧ □BF ⇒ □Strong Leibniz Biconditionals</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz</code>; produced by Cian Dorr, question of 23 September 2026; proof written out by Claude Fable 5.1 (Anthropic); recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 23 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz</code>;
+produced by Cian Dorr, question of 23 September 2026; proof written out
+by Claude Fable 5.1 (Anthropic); recorded by Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 23 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□Strong Leibniz Biconditionals (type t).</strong> Necessarily, every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.</li>
-<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
+<li><strong>□Strong Leibniz Biconditionals (type t).</strong>
+Necessarily, every possible proposition is entailed by a strong world
+proposition, one that is possible and necessarily entails every
+proposition or its negation.</li>
+<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every
+type. The predicate formulation closes the formula schema using lambda
+abstraction.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□Strong Leibniz Biconditionals.</strong> Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a strong world: a possible entity that necessarily entails every entity of the type or its negation.</li>
+<li><strong>□Strong Leibniz Biconditionals.</strong> Necessarily, at
+each relational type, every possible entity (one distinct from bottom)
+is entailed by a strong world: a possible entity that necessarily
+entails every entity of the type or its negation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>First the unboxed statement, for a relational type <span class="math inline">\tau=\bar\sigma t</span>. Let <span class="math inline">X^\tau\ne\bot</span>. Intensionality’s contrapositive gives <span class="math inline">\Diamond\exists\bar y\, .\,X\bar y</span>, and BF at the argument types gives <span class="math inline">\bar x</span> with <span class="math inline">\Diamond X\bar x</span>. The type-t Strong Leibniz Biconditionals give a strong world <span class="math inline">w\le X\bar x</span>: <span class="math inline">w\ne\bot</span> and <span class="math inline">\Box\forall q\, .\,(w\le q\lor w\le\neg q)</span>. Put <span class="math inline">W:=\lambda\bar y\, .\,w\land\bar y=\bar x</span>. Then <span class="math inline">W\ne\bot</span>, since <span class="math inline">W\bar x=w</span>, and <span class="math inline">W\le X</span>, since <span class="math inline">\Box(w\to X\bar x)</span> and Leibniz’s law give <span class="math inline">\Box\forall\bar y\, .\,W\bar y\to X\bar y</span> by K. <span class="math inline">W</span> is a strong world at <span class="math inline">\tau</span>: under the box, for any <span class="math inline">Y^\tau</span>, instantiate the strong-world clause of <span class="math inline">w</span> at <span class="math inline">q:=Y\bar x</span>; if <span class="math inline">w\le Y\bar x</span> then <span class="math inline">\Box\forall\bar y\, .\,W\bar y\to Y\bar y</span>, that is <span class="math inline">W\le Y</span>, by the same K step, and if <span class="math inline">w\le\neg Y\bar x</span> then <span class="math inline">W\le\neg Y</span> likewise; so <span class="math inline">\Box\forall Y\, .\,(W\le Y\lor W\le\neg Y)</span>, the passage under the outer box being by necessitation and K since each step is a theorem of C. For each <span class="math inline">\tau</span> this derives the closed instance <span class="math inline">\mathrm{SL}_\tau</span> from <span class="math inline">\mathrm{SL}_t</span> and finitely many BF instances in C; necessitating that conditional and applying K gives <span class="math inline">\Box\mathrm{SL}_\tau</span> from <span class="math inline">\Box\mathrm{SL}_t</span> and <span class="math inline">\Box</span>BF.</p>
+<p>First the unboxed statement, for a relational type <span
+class="math inline">\tau=\bar\sigma t</span>. Let <span
+class="math inline">X^\tau\ne\bot</span>. Intensionality’s
+contrapositive gives <span class="math inline">\Diamond\exists\bar y\,
+.\,X\bar y</span>, and BF at the argument types gives <span
+class="math inline">\bar x</span> with <span
+class="math inline">\Diamond X\bar x</span>. The type-t Strong Leibniz
+Biconditionals give a strong world <span class="math inline">w\le X\bar
+x</span>: <span class="math inline">w\ne\bot</span> and <span
+class="math inline">\Box\forall q\, .\,(w\le q\lor w\le\neg q)</span>.
+Put <span class="math inline">W:=\lambda\bar y\, .\,w\land\bar y=\bar
+x</span>. Then <span class="math inline">W\ne\bot</span>, since <span
+class="math inline">W\bar x=w</span>, and <span class="math inline">W\le
+X</span>, since <span class="math inline">\Box(w\to X\bar x)</span> and
+Leibniz’s law give <span class="math inline">\Box\forall\bar y\,
+.\,W\bar y\to X\bar y</span> by K. <span class="math inline">W</span> is
+a strong world at <span class="math inline">\tau</span>: under the box,
+for any <span class="math inline">Y^\tau</span>, instantiate the
+strong-world clause of <span class="math inline">w</span> at <span
+class="math inline">q:=Y\bar x</span>; if <span class="math inline">w\le
+Y\bar x</span> then <span class="math inline">\Box\forall\bar y\,
+.\,W\bar y\to Y\bar y</span>, that is <span class="math inline">W\le
+Y</span>, by the same K step, and if <span class="math inline">w\le\neg
+Y\bar x</span> then <span class="math inline">W\le\neg Y</span>
+likewise; so <span class="math inline">\Box\forall Y\, .\,(W\le Y\lor
+W\le\neg Y)</span>, the passage under the outer box being by
+necessitation and K since each step is a theorem of C. For each <span
+class="math inline">\tau</span> this derives the closed instance <span
+class="math inline">\mathrm{SL}_\tau</span> from <span
+class="math inline">\mathrm{SL}_t</span> and finitely many BF instances
+in C; necessitating that conditional and applying K gives <span
+class="math inline">\Box\mathrm{SL}_\tau</span> from <span
+class="math inline">\Box\mathrm{SL}_t</span> and <span
+class="math inline">\Box</span>BF.</p>
 <h2 id="notes">Notes</h2>
-<p>The unboxed form, Strong Leibniz Biconditionals (type t) + BF ⇒ Strong Leibniz Biconditionals, is already derivable on the map through Atomicity: SL (t) gives Atomicity (t), Atomicity (t) + BF gives Atomicity, and Atomicity + BF gives SL. The direct construction above proves it in one step and is what is necessitated here; the boxed form was not derivable, since no record boxes the type-t instance of Atomicity. Only BF at the argument types of the target type is used, as in atomicity-t-and-bf-imply-atomicity.</p>
+<p>The unboxed form, Strong Leibniz Biconditionals (type t) + BF ⇒
+Strong Leibniz Biconditionals, is already derivable on the map through
+Atomicity: SL (t) gives Atomicity (t), Atomicity (t) + BF gives
+Atomicity, and Atomicity + BF gives SL. The direct construction above
+proves it in one step and is what is necessitated here; the boxed form
+was not derivable, since no record boxes the type-t instance of
+Atomicity. Only BF at the argument types of the target type is used, as
+in atomicity-t-and-bf-imply-atomicity.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 23 Sep</strong> — Cian Dorr, question of 23 September 2026, whether the Strong Leibniz Biconditionals follow from their type-t instance given BF; proof as recorded.</li>
+<li><strong>Dorr 23 Sep</strong> — Cian Dorr, question of 23 September
+2026, whether the Strong Leibniz Biconditionals follow from their type-t
+instance given BF; proof as recorded.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-strong-leibniz-t-and-necessary-bf-imply-necessary-strong-leibniz.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-strong-leibniz-t-and-necessary-bf-imply-necessary-strong-leibniz.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — Chapter 8, pp. 155–182. Strong worlds and the Strong Leibniz Biconditionals.</li>
+<li><strong>Background: A Philosophical Introduction to Higher-Order
+Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to
+Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8,
+Application: Consequences and strengthenings of Classicism, pp. 155–182,
+and Chapter 18, The model theory of classicism, pp. 389–413, were read
+directly on 22 September 2026; locators give the book’s own page
+numbers. The book works in the full simple type hierarchy with Modalized
+Functionality at all types; its results are taken in the map’s
+relational type system, of which its models are models. — Chapter 8,
+pp. 155–182. Strong worlds and the Strong Leibniz Biconditionals.</li>
 </ul>
 </body></html>

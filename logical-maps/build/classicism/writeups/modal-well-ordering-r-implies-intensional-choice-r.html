@@ -323,25 +323,56 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Modal Well-Ordering ⇒ Intensional Choice</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.modal_well_ordering_r_implies_intensional_choice_r</code>; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 7 October 2026, in an argument sketched by Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.modal_well_ordering_r_implies_intensional_choice_r</code>;
+produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 7
+October 2026, in an argument sketched by Cian Dorr; recorded by Claude
+Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Modal Well-Ordering.</strong> Every type, including e, has a relation that is necessarily a well-order of it.</li>
+<li><strong>Modal Well-Ordering.</strong> Every type, including e, has a
+relation that is necessarily a well-order of it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Intensional Choice.</strong> If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
+<li><strong>Intensional Choice.</strong> If a property is necessarily
+instantiated, then some property entailing it is necessarily uniquely
+instantiated.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">\Box\operatorname{WO}(R)</span>, and let <span class="math inline">F</span> be necessarily instantiated. Put <span class="math inline">G:=\lambda x\, .\,Fx\land\forall y\, .\,Fy\to(Rx)y</span>, so that <span class="math inline">G\le F</span>. At any world, <span class="math inline">F</span> is instantiated and <span class="math inline">R</span> is a well-order, so <span class="math inline">F</span> has an <span class="math inline">R</span>-minimal instance <span class="math inline">x</span>. For any instance <span class="math inline">y</span> of <span class="math inline">F</span>, Total gives <span class="math inline">(Rx)y</span> or <span class="math inline">(Ry)x</span>, and in the second case minimality gives <span class="math inline">y=x</span>, whence <span class="math inline">(Rx)y</span> by Total again; so <span class="math inline">Gx</span>. If also <span class="math inline">Gy</span>, then <span class="math inline">(Rx)y</span> and <span class="math inline">(Ry)x</span>, and Antisymm gives <span class="math inline">y=x</span>. Hence <span class="math inline">\Box\exists x\, .\,Gx\land\forall y\, .\,Gy\to y=x</span>.</p>
+<p>Let <span class="math inline">\Box\operatorname{WO}(R)</span>, and
+let <span class="math inline">F</span> be necessarily instantiated. Put
+<span class="math inline">G:=\lambda x\, .\,Fx\land\forall y\,
+.\,Fy\to(Rx)y</span>, so that <span class="math inline">G\le F</span>.
+At any world, <span class="math inline">F</span> is instantiated and
+<span class="math inline">R</span> is a well-order, so <span
+class="math inline">F</span> has an <span
+class="math inline">R</span>-minimal instance <span
+class="math inline">x</span>. For any instance <span
+class="math inline">y</span> of <span class="math inline">F</span>,
+Total gives <span class="math inline">(Rx)y</span> or <span
+class="math inline">(Ry)x</span>, and in the second case minimality
+gives <span class="math inline">y=x</span>, whence <span
+class="math inline">(Rx)y</span> by Total again; so <span
+class="math inline">Gx</span>. If also <span
+class="math inline">Gy</span>, then <span
+class="math inline">(Rx)y</span> and <span
+class="math inline">(Ry)x</span>, and Antisymm gives <span
+class="math inline">y=x</span>. Hence <span
+class="math inline">\Box\exists x\, .\,Gx\land\forall y\, .\,Gy\to
+y=x</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>The selected property is the least instance of <span class="math inline">F</span> in the necessary well-order, which may be a different individual at different worlds.</p>
+<p>The selected property is the least instance of <span
+class="math inline">F</span> in the necessary well-order, which may be a
+different individual at different worlds.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 7 Oct</strong> — Cian Dorr, suggestion of 7 October 2026, in conversation with Claude Opus 5.5 (Anthropic).</li>
+<li><strong>Dorr 7 Oct</strong> — Cian Dorr, suggestion of 7 October
+2026, in conversation with Claude Opus 5.5 (Anthropic).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/modal-well-ordering-r-implies-intensional-choice-r.yaml</code>
+Record:
+<code>topics/classicism/results/modal-well-ordering-r-implies-intensional-choice-r.yaml</code>
 </p>
 </body></html>

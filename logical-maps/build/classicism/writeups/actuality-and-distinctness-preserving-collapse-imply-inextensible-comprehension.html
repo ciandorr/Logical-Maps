@@ -322,36 +322,152 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality and Distinctness-preserving collapse imply Inextensible Comprehension</h1></header><p>Assume Actuality and Distinctness-preserving collapse, with the map’s fixed type range. The conclusion is Inextensible Comprehension: every relation is coextensive with an inextensible one, where inextensibility carries its leading box. This is an original connecting proof by Claude Fable 5.1, prompted by Cian Dorr (Anthropic), 25 September 2026, at Cian Dorr’s direction. It has no independent checker or Lean verification recorded. The witness is the one note 38 of Bacon and Dorr, <em>Classicism</em> (16 May 2023 draft, p. 29) uses for Actuality; the distinctness-preserving modality <span class="math inline">\Box_{\ne}p:=\exists q\, .\,q\land\Box(\Diamond q\to p)</span> is that of §2.6, p. 42, and the collapse principle <span class="math inline">\forall p\, .\,p\to\Box_{\ne}p</span> is from Appendix E, p. 83.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality and Distinctness-preserving collapse imply Inextensible Comprehension</h1></header><p>Assume Actuality and Distinctness-preserving collapse, with the map’s
+fixed type range. The conclusion is Inextensible Comprehension: every
+relation is coextensive with an inextensible one, where inextensibility
+carries its leading box. This is an original connecting proof by Claude
+Fable 5.1, prompted by Cian Dorr (Anthropic), 25 September 2026, at Cian
+Dorr’s direction. It has no independent checker or Lean verification
+recorded. The witness is the one note 38 of Bacon and Dorr,
+<em>Classicism</em> (16 May 2023 draft, p. 29) uses for Actuality; the
+distinctness-preserving modality <span
+class="math inline">\Box_{\ne}p:=\exists q\, .\,q\land\Box(\Diamond q\to
+p)</span> is that of §2.6, p. 42, and the collapse principle <span
+class="math inline">\forall p\, .\,p\to\Box_{\ne}p</span> is from
+Appendix E, p. 83.</p>
 <h2 id="where-actuality-alone-stops">Where Actuality alone stops</h2>
-<p>Let <span class="math inline">w</span> witness Actuality and fix <span class="math inline">X^\tau</span>, <span class="math inline">\tau=\bar\sigma t</span>. The recorded result from Actuality shows that <span class="math inline">Y_w:=\lambda\bar z\, .\,w\land X[\bar z]</span> is coextensive with <span class="math inline">X</span> and weakly inextensible: whenever <span class="math inline">\forall\bar z\, .\,Y_w[\bar z]\to Z[\bar z]</span> is true, <span class="math inline">w</span> entails it, and that entailment is <span class="math inline">Y_w\le Z</span>. Inextensibility asks for weak inextensibility at every world. At a world where <span class="math inline">w</span> is false, <span class="math inline">Y_w</span> has no instances, so the antecedent of weak inextensibility holds vacuously for every <span class="math inline">Z</span>, and the conclusion <span class="math inline">Y_w\le Z</span> for every <span class="math inline">Z</span> amounts to <span class="math inline">Y_w\le\bot</span>: it is impossible there that <span class="math inline">w\land\exists\bar z\,
-.\,X[\bar z]</span>. That is fine where <span class="math inline">w</span> is impossible, and it fails wherever <span class="math inline">w</span> is false but possible and <span class="math inline">X</span> is possibly nonempty under <span class="math inline">w</span>. Under B, for instance, it fails whenever <span class="math inline">X</span> is actually nonempty. Under C5 Rigid Comprehension holds anyway by Proposition 2.10, through a different witness; so the question is what happens between the two extremes.</p>
+<p>Let <span class="math inline">w</span> witness Actuality and fix
+<span class="math inline">X^\tau</span>, <span
+class="math inline">\tau=\bar\sigma t</span>. The recorded result from
+Actuality shows that <span class="math inline">Y_w:=\lambda\bar z\,
+.\,w\land X[\bar z]</span> is coextensive with <span
+class="math inline">X</span> and weakly inextensible: whenever <span
+class="math inline">\forall\bar z\, .\,Y_w[\bar z]\to Z[\bar z]</span>
+is true, <span class="math inline">w</span> entails it, and that
+entailment is <span class="math inline">Y_w\le Z</span>. Inextensibility
+asks for weak inextensibility at every world. At a world where <span
+class="math inline">w</span> is false, <span
+class="math inline">Y_w</span> has no instances, so the antecedent of
+weak inextensibility holds vacuously for every <span
+class="math inline">Z</span>, and the conclusion <span
+class="math inline">Y_w\le Z</span> for every <span
+class="math inline">Z</span> amounts to <span
+class="math inline">Y_w\le\bot</span>: it is impossible there that <span
+class="math inline">w\land\exists\bar z\,
+.\,X[\bar z]</span>. That is fine where <span
+class="math inline">w</span> is impossible, and it fails wherever <span
+class="math inline">w</span> is false but possible and <span
+class="math inline">X</span> is possibly nonempty under <span
+class="math inline">w</span>. Under B, for instance, it fails whenever
+<span class="math inline">X</span> is actually nonempty. Under C5 Rigid
+Comprehension holds anyway by Proposition 2.10, through a different
+witness; so the question is what happens between the two extremes.</p>
 <h2 id="two-theorems-of-c">Two theorems of C</h2>
-<p>Write <span class="math inline">L(a)</span> for <span class="math inline">a\land\forall q\, .\,q\to a\le q</span>, “<span class="math inline">a</span> is a true proposition entailing every truth”, and <span class="math inline">Y_a:=\lambda\bar z\, .\,a\land X[\bar z]</span>.</p>
-<p><strong>(i)</strong> <span class="math inline">L(a)\to\operatorname{WeaklyInextensible}(Y_a)</span>. This is the recorded argument from Actuality, read with <span class="math inline">a</span> as a free variable: given <span class="math inline">\forall\bar z\, .\,Y_a[\bar z]\to\Box Z[\bar z]</span>, T gives the truth <span class="math inline">\forall\bar z\, .\,a\land X[\bar z]\to Z[\bar z]</span>, so <span class="math inline">\Box(a\to\forall\bar z\, .\,a\land X[\bar z]\to Z[\bar z])</span>, and the boxed formula is H-equivalent to <span class="math inline">\forall\bar z\, .\,Y_a[\bar z]\to Z[\bar z]</span>, so Logical Equivalence gives <span class="math inline">Y_a\le Z</span>.</p>
-<p><strong>(ii)</strong> <span class="math inline">\Box\neg a\to\operatorname{WeaklyInextensible}(Y_a)</span>. From <span class="math inline">\Box\neg a</span> and the H-theorem <span class="math inline">\neg a\to\forall\bar z\, .\,a\land X[\bar z]\to Z[\bar z]</span>, K gives <span class="math inline">Y_a\le Z</span> for every <span class="math inline">Z</span>.</p>
-<p>Combining them, since <span class="math inline">\neg\Diamond a</span> is <span class="math inline">\Box\neg a</span>,</p>
+<p>Write <span class="math inline">L(a)</span> for <span
+class="math inline">a\land\forall q\, .\,q\to a\le q</span>, “<span
+class="math inline">a</span> is a true proposition entailing every
+truth”, and <span class="math inline">Y_a:=\lambda\bar z\, .\,a\land
+X[\bar z]</span>.</p>
+<p><strong>(i)</strong> <span
+class="math inline">L(a)\to\operatorname{WeaklyInextensible}(Y_a)</span>.
+This is the recorded argument from Actuality, read with <span
+class="math inline">a</span> as a free variable: given <span
+class="math inline">\forall\bar z\, .\,Y_a[\bar z]\to\Box Z[\bar
+z]</span>, T gives the truth <span class="math inline">\forall\bar z\,
+.\,a\land X[\bar z]\to Z[\bar z]</span>, so <span
+class="math inline">\Box(a\to\forall\bar z\, .\,a\land X[\bar z]\to
+Z[\bar z])</span>, and the boxed formula is H-equivalent to <span
+class="math inline">\forall\bar z\, .\,Y_a[\bar z]\to Z[\bar z]</span>,
+so Logical Equivalence gives <span class="math inline">Y_a\le
+Z</span>.</p>
+<p><strong>(ii)</strong> <span class="math inline">\Box\neg
+a\to\operatorname{WeaklyInextensible}(Y_a)</span>. From <span
+class="math inline">\Box\neg a</span> and the H-theorem <span
+class="math inline">\neg a\to\forall\bar z\, .\,a\land X[\bar z]\to
+Z[\bar z]</span>, K gives <span class="math inline">Y_a\le Z</span> for
+every <span class="math inline">Z</span>.</p>
+<p>Combining them, since <span class="math inline">\neg\Diamond a</span>
+is <span class="math inline">\Box\neg a</span>,</p>
 <p><span class="math display">
 (\Diamond a\to L(a))\to\operatorname{WeaklyInextensible}(Y_a)
 </span></p>
-<p>is a theorem of C with <span class="math inline">a</span>, <span class="math inline">X</span> free. C is closed under necessitation, so its box is a theorem too, and K gives</p>
+<p>is a theorem of C with <span class="math inline">a</span>, <span
+class="math inline">X</span> free. C is closed under necessitation, so
+its box is a theorem too, and K gives</p>
 <p><span class="math display">
 \Box(\Diamond a\to L(a))\to\operatorname{Inextensible}(Y_a). \tag{$*$}
 </span></p>
-<p>No optional hypothesis has been necessitated: the only hypothesis used inside the box is the boxed statement on the left of <span class="math inline">(*)</span>.</p>
+<p>No optional hypothesis has been necessitated: the only hypothesis
+used inside the box is the boxed statement on the left of <span
+class="math inline">(*)</span>.</p>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">a</span> witness Actuality, so <span class="math inline">L(a)</span> is true. Apply Distinctness-preserving collapse to the truth <span class="math inline">L(a)</span>: there is a true <span class="math inline">q^*</span> with <span class="math inline">\Box(\Diamond q^*\to L(a))</span>. Since <span class="math inline">q^*</span> is true and <span class="math inline">a</span> entails every truth, <span class="math inline">\Box(a\to q^*)</span>. The K-theorem <span class="math inline">\Box(a\to q^*)\to(\Diamond a\to\Diamond q^*)</span>, necessitated, together with 4 and K, gives <span class="math inline">\Box(\Diamond a\to\Diamond q^*)</span>, hence <span class="math inline">\Box(\Diamond a\to L(a))</span>. Now for any <span class="math inline">X</span>, <span class="math inline">(*)</span> makes <span class="math inline">Y_a=\lambda\bar z\, .\,a\land X[\bar z]</span> inextensible, and it is coextensive with <span class="math inline">X</span> because <span class="math inline">a</span> is true. <span class="math inline">\square</span></p>
-<p>The hypothesis actually used is <span class="math inline">\Box(\Diamond a\to L(a))</span>: necessarily, the actual atom is the least truth wherever it is so much as possible. It says two things at once, that <span class="math inline">a</span> is possible only where true and that it stays the least truth wherever it is true. Distinctness-preserving collapse gives it directly; the recorded verifications of that principle in the action models all take <span class="math inline">q:=a</span> and check exactly these two facts.</p>
+<p>Let <span class="math inline">a</span> witness Actuality, so <span
+class="math inline">L(a)</span> is true. Apply Distinctness-preserving
+collapse to the truth <span class="math inline">L(a)</span>: there is a
+true <span class="math inline">q^*</span> with <span
+class="math inline">\Box(\Diamond q^*\to L(a))</span>. Since <span
+class="math inline">q^*</span> is true and <span
+class="math inline">a</span> entails every truth, <span
+class="math inline">\Box(a\to q^*)</span>. The K-theorem <span
+class="math inline">\Box(a\to q^*)\to(\Diamond a\to\Diamond q^*)</span>,
+necessitated, together with 4 and K, gives <span
+class="math inline">\Box(\Diamond a\to\Diamond q^*)</span>, hence <span
+class="math inline">\Box(\Diamond a\to L(a))</span>. Now for any <span
+class="math inline">X</span>, <span class="math inline">(*)</span> makes
+<span class="math inline">Y_a=\lambda\bar z\, .\,a\land X[\bar z]</span>
+inextensible, and it is coextensive with <span
+class="math inline">X</span> because <span class="math inline">a</span>
+is true. <span class="math inline">\square</span></p>
+<p>The hypothesis actually used is <span
+class="math inline">\Box(\Diamond a\to L(a))</span>: necessarily, the
+actual atom is the least truth wherever it is so much as possible. It
+says two things at once, that <span class="math inline">a</span> is
+possible only where true and that it stays the least truth wherever it
+is true. Distinctness-preserving collapse gives it directly; the
+recorded verifications of that principle in the action models all take
+<span class="math inline">q:=a</span> and check exactly these two
+facts.</p>
 <h2 id="what-this-places-on-the-map">What this places on the map</h2>
-<p>Every recorded model with Actuality also satisfies Distinctness-preserving collapse, so Inextensible Comprehension now holds in all of them by derivation, including</p>
+<p>Every recorded model with Actuality also satisfies
+Distinctness-preserving collapse, so Inextensible Comprehension now
+holds in all of them by derivation, including</p>
 <ul>
-<li>the symmetric two-object unpinned model and the qualitative-link model, where boxed Boolean Completeness and boxed Actuality hold, hence Weak Rigid Comprehension, and Rigid Comprehension fails;</li>
-<li>the finite-support identity-or-collapse, dyadic-rounding and truncated-shift models and the coalesced sums, where Boolean Completeness fails, hence Weak Rigid Comprehension fails.</li>
+<li>the symmetric two-object unpinned model and the qualitative-link
+model, where boxed Boolean Completeness and boxed Actuality hold, hence
+Weak Rigid Comprehension, and Rigid Comprehension fails;</li>
+<li>the finite-support identity-or-collapse, dyadic-rounding and
+truncated-shift models and the coalesced sums, where Boolean
+Completeness fails, hence Weak Rigid Comprehension fails.</li>
 </ul>
-<p>So an inextensible coextension and a persistent, weakly inextensible coextension can both exist while no single relation is both persistent and inextensible: Rigid Comprehension is not the conjunction of Inextensible Comprehension and Weak Rigid Comprehension. Inextensible Comprehension also implies neither Boolean Completeness nor Weak Rigid Comprehension. The witness that does the work, <span class="math inline">\lambda\bar z\, .\,a\land X[\bar z]</span>, is about as far from persistent as a relation can be: it loses every instance as soon as <span class="math inline">a</span> fails.</p>
-<p>A countermodel to Actuality alone implying Inextensible Comprehension would need an Actuality witness that is possible at some world where it is false, so that Distinctness-preserving collapse fails, without the symmetry that makes C5 deliver Rigid Comprehension; and it would have to defeat not only <span class="math inline">Y_a</span> but every other coextension of some <span class="math inline">X</span>. None is recorded. The converse questions, whether Inextensible Comprehension or Weakly Inextensible Comprehension implies Actuality, are also open, except that Weakly Inextensible Comprehension does not, since it follows from Boolean Completeness.</p>
+<p>So an inextensible coextension and a persistent, weakly inextensible
+coextension can both exist while no single relation is both persistent
+and inextensible: Rigid Comprehension is not the conjunction of
+Inextensible Comprehension and Weak Rigid Comprehension. Inextensible
+Comprehension also implies neither Boolean Completeness nor Weak Rigid
+Comprehension. The witness that does the work, <span
+class="math inline">\lambda\bar z\, .\,a\land X[\bar z]</span>, is about
+as far from persistent as a relation can be: it loses every instance as
+soon as <span class="math inline">a</span> fails.</p>
+<p>A countermodel to Actuality alone implying Inextensible Comprehension
+would need an Actuality witness that is possible at some world where it
+is false, so that Distinctness-preserving collapse fails, without the
+symmetry that makes C5 deliver Rigid Comprehension; and it would have to
+defeat not only <span class="math inline">Y_a</span> but every other
+coextension of some <span class="math inline">X</span>. None is
+recorded. The converse questions, whether Inextensible Comprehension or
+Weakly Inextensible Comprehension implies Actuality, are also open,
+except that Weakly Inextensible Comprehension does not, since it follows
+from Boolean Completeness.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.3, n. 38, p. 29; §2.6, p. 42; Appendix E, p. 83. The witness is the one note 38 uses for Actuality; the distinctness-preserving modality is that of §2.6, and the collapse principle is from Appendix E.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.3,
+n. 38, p. 29; §2.6, p. 42; Appendix E, p. 83. The witness is the one
+note 38 uses for Actuality; the distinctness-preserving modality is that
+of §2.6, and the collapse principle is from Appendix E.</li>
 </ul>
 </body></html>

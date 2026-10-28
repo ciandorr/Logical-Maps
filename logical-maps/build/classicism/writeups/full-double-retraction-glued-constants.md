@@ -38,7 +38,7 @@ The other half of Logical Necessity, No Pure Contingency, fails (§3.2), so this
 
 ### 3.1 Strong Actuality fails at the root and holds at $W_1$
 
-At $W_0$ the only candidate strong world is the true atom $\{1_{W_0}\}$, and its transport along $h$ is the set of retractions of $h$, $\{j_1,j_2\}$ (Corollary 3), which the proposition $\{j_1\}$ at $W_1$ separates; in the map this is the general argument from separated retractions. At $W_1$, the true atom $\{1_{W_1}\}$ becomes empty under every non-identity arrow out of $W_1$, none of which has a retraction (Corollary 3), so it is a strong world there. Since a closed pure sentence's truth at an arrow depends only on the arrow's target, **the pure sentence Strong Actuality is true at exactly the worlds with target $W_1$**.
+At $W_0$ the only candidate strong atom is the true atom $\{1_{W_0}\}$, and its transport along $h$ is the set of retractions of $h$, $\{j_1,j_2\}$ (Corollary 3), which the proposition $\{j_1\}$ at $W_1$ separates; in the map this is the general argument from separated retractions. At $W_1$, the true atom $\{1_{W_1}\}$ becomes empty under every non-identity arrow out of $W_1$, none of which has a retraction (Corollary 3), so it is a strong atom there. Since a closed pure sentence's truth at an arrow depends only on the arrow's target, **the pure sentence Strong Actuality is true at exactly the worlds with target $W_1$**.
 
 ### 3.2 No Pure Contingency, Converse Witnessed Possibility, Modal Freedom fail
 
@@ -55,7 +55,7 @@ Every object reaches every object: $h$ leads from $W_0$ to $W_1$ and $j_1$ back.
 ### 3.5 The rest
 
 - **Full-model package.** Being full, the model satisfies Rigid Comprehension, Actuality, Atomicity, Boolean Completeness, the choice principles, Tame Rigidity, Rigid Power and their necessitations (Classicism, p. 61, and the topic's general arguments for full models), and 5-necessity implies two-hat necessity.
-- **BF fails** at type $t$: transports along $h$ contain $1_{W_1}$ iff they contain $e_1$, so $h^t$ is not surjective (Classicism, Proposition 3.24(iii)); $h$ is not epic ($e_1\circ h=1_{W_1}\circ h$). **ND fails**, as it must given Witnessed Possibility (recorded incompatibility). **Two-hat necessity implies ND-necessity fails**: $h$ has a retraction and no inverse. **Truth implies 5-necessity holds**, boxed: the identities are the only isomorphisms (Corollary 3). Strong Leibniz (type $t$) fails: $h$ is not epic.
+- **BF fails** at type $t$: transports along $h$ contain $1_{W_1}$ iff they contain $e_1$, so $h^t$ is not surjective (Classicism, Proposition 3.24(iii)); $h$ is not epic ($e_1\circ h=1_{W_1}\circ h$). **ND fails**, as it must given Witnessed Possibility (recorded incompatibility). **Two-hat necessity implies ND-necessity fails**: $h$ has a retraction and no inverse. **Truth implies 5-necessity holds**, boxed: the identities are the only isomorphisms (Corollary 3). Strong Atomicity (type $t$) fails: $h$ is not epic.
 - **Signature.** Independence holds, since Witnessed Possibility implies it (recorded). No Contingency and B for sentences of $\Sigma$ fail, being incompatible with Witnessed Possibility. Maximalism fails, the pure necessities of a full model exceeding C.
 - **Infinity**: with one individual the type-$e$ principles fail; with infinitely many arrows out of the root the type-$t$ ones hold.
 

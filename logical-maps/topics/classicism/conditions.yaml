@@ -81,8 +81,8 @@ conditions:
   text: There are infinitely many individuals at the evaluation world.
   lean: Classicism.Meta.Intensional.Premodel.InfinitelyManyIndividuals
 - id: continuum-many-arrows
-  text: 'The continuum injects into the arrows out of the evaluation object: there is an injection from the
-    sets of natural numbers into them, given outright, without choice.'
+  text: 'The continuum injects into the arrows out of the evaluation object: there is an injection from
+    the sets of natural numbers into them, given outright, without choice.'
 - id: infinitely-many-propositions
   text: There are infinitely many propositions at the evaluation world.
   lean: Classicism.Meta.Intensional.Premodel.InfinitelyManyPropositions
@@ -186,15 +186,51 @@ conditions:
 - id: finitely-many-individuals-everywhere
   text: There are finitely many individuals at every object reachable from the evaluation point.
 - id: non-injective-arrow
-  text: Some arrow out of the evaluation object sends two distinct points of the set the arrows act on to one
-    point.
+  text: Some arrow out of the evaluation object sends two distinct points of the set the arrows act on
+    to one point.
 - id: exact-collapses-of-every-size
-  text: For every $n\ge2$ there are a set $N$ of $n$ points of the set the arrows act on and an arrow out of
-    the evaluation object that is constant on $N$ and injective off $N$, with its values off $N$ different
-    from its value on $N$.
+  text: For every $n\ge2$ there are a set $N$ of $n$ points of the set the arrows act on and an arrow
+    out of the evaluation object that is constant on $N$ and injective off $N$, with its values off $N$
+    different from its value on $N$.
 - id: countably-many-arrows
   text: The arrows out of the evaluation object are countably many, in bijection with the natural numbers.
 - id: full-continuum-everywhere
   text: At every object $v$ reachable from the evaluation point, either every type has finitely many entities
     at $v$, or there is a set $D$ of continuum many entities of one type at $v$ such that, for each $k\ge1$,
     every set of $k$-tuples from $D$ is the extension at $v$ of an entity in the domain there.
+- id: trivial-left-stabilisers-everywhere
+  text: At every object reachable from the evaluation point, the only arrow $m$ with $m\circ k=k$, for
+    an arrow $k$ out of that object, is the identity of $k$’s target.
+- id: fixed-arrow
+  text: 'Some arrow $k$ out of the evaluation object is fixed by a non-identity arrow: $m\circ k=k$ with
+    $m\ne1$.'
+- id: incomparable-free-arrows
+  text: 'Two distinct arrows $k,k^{\prime}$ out of the evaluation object are each fixed under post-composition
+    only by the identity, and neither is a left multiple of the other: $k^{\prime}\ne m\circ k$ and $k\ne
+    m\circ k^{\prime}$ for every $m$.'
+- id: comparable-free-arrows
+  text: 'Any two arrows out of the evaluation object that are each fixed under post-composition only by
+    the identity are comparable: one is a left multiple of the other.'
+- id: comparable-free-arrows-everywhere
+  text: 'At every object reachable from the evaluation point, any two arrows out of it that are each fixed
+    under post-composition only by the identity are comparable: one is a left multiple of the other.'
+- id: uniquely-factored-free-arrows
+  text: 'Every arrow $k$ out of the evaluation object that is fixed only by the identity factors through
+    each arrow $h$ out of it in at most one way: $m\circ h=m^{\prime}\circ h=k$ implies $m=m^{\prime}$.'
+- id: uniquely-factored-free-arrows-everywhere
+  text: 'At every object reachable from the evaluation point, every arrow $k$ out of it that is fixed
+    only by the identity factors through each arrow $h$ out of it in at most one way: $m\circ h=m^{\prime}\circ
+    h=k$ implies $m=m^{\prime}$.'
+- id: free-nonepic-composite
+  text: There are an arrow $h$ out of the evaluation object and arrows $j\ne j^{\prime}$ after it with
+    $j\circ h=j^{\prime}\circ h$, where the composite $j\circ h$ is fixed under post-composition only
+    by the identity.
+- id: two-actual-components
+  text: At least two components are action models whose roots satisfy Actuality, and the root domain contains
+    every family of component propositions with a truth value at the root (the fullest root domains).
+- id: no-actuality-anywhere
+  text: 'Actuality fails at the identity of every object reachable from the evaluation point: no atom
+    of the domain of propositions there contains that identity. In a one-object model this is the failure
+    of Actuality at the evaluation point, Actuality being a closed sentence.'
+- id: no-atoms-anywhere
+  text: At every object reachable from the evaluation point, no proposition in the domain is an atom.

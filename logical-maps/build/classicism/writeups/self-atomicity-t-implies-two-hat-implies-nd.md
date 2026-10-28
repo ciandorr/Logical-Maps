@@ -1,0 +1,25 @@
+# Self-Atomicity (type t) ⇒ Two-hat necessity implies ND-necessity
+
+<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+
+## Premises
+
+- **Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
+
+## Conclusion
+
+- **Two-hat necessity implies ND-necessity.** Whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat.
+
+## Proof
+
+Let $w$ be the true atom, which Actuality supplies ([[self-atomicity-t-implies-necessary-actuality]]); it entails every truth. We show that every ND-possible proposition is two-hat possible, the dual of the principle. Suppose $\Diamond_{\ne}p$, i.e. $\forall q\, .\,q\to\Diamond(\Diamond q\land p)$. Taking $q:=w$, $\Diamond(\Diamond w\land p)$. Self-Atomicity (type t) gives a self-atom $v\le\Diamond w\land p$. Since $w$ is the true atom and $\Diamond v$ is true, $w\le\Diamond v$; with $v\le\Diamond w$ and K, $v\le\Diamond(\Diamond v\land w)$. Now $v$ is a self-atom: at any world where $v$ holds it is the actual-world proposition, so for every truth $q$ there, $v\le q$, i.e. $\Box(v\to q)$, and from $v\le\Diamond(\Diamond v\land w)$ we get $\Diamond(\Diamond q\land w)$. So $v\le\forall q\, .\,q\to\Diamond(\Diamond q\land w)$, i.e. $v\le\Diamond_{\ne}w$. As $v\le p$ and $\Diamond v$, we have $\Diamond(\Diamond_{\ne}w\land p)$. Finally, for every true $q$, $w\le q$, and $\Diamond_{\ne}$ is monotone under necessary implication ($\Box_{\ne}$ is necessarily N and K), so $\Diamond_{\ne}w\le\Diamond_{\ne}q$ and $\Diamond(\Diamond_{\ne}q\land p)$: that is $\hat{\hat\Diamond}p$.
+
+## Notes
+
+Strengthens [[strong-atomicity-t-implies-two-hat-implies-nd]]: that proof uses the strong atom $v$ only through the clause that wherever $v$ holds it entails every truth there, which is the self-atom clause, and its true strong atom only as the true atom.
+
+## Sources
+
+- **Dorr 25 Oct** — Cian Dorr, the notion of a self-atom and the bridge principles, 25 October 2026; the proof by Claude Fable 5.1 (Anthropic) the same day, from the survey of Strong Atomicity results that Cian Dorr requested (session transcript of 25 October 2026).
+
+<p class='cert'>Record: <code>topics/classicism/results/self-atomicity-t-implies-two-hat-implies-nd.yaml</code></p>

@@ -323,24 +323,66 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Tame Rigidity ∧ Rigid Power ⇒ Weakly Rigid Power</h1></header><p class="cert">
-Conjecture — Source: Misc.; produced by Cian Dorr, question of 10 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 10 October 2026.
+Conjecture — Source: Misc.; produced by Cian Dorr, question of 10
+October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian
+Dorr, 10 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Tame Rigidity.</strong> Every weakly rigid relation, including a proposition, is rigid.</li>
-<li><strong>Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
+<li><strong>Tame Rigidity.</strong> Every weakly rigid relation,
+including a proposition, is rigid.</li>
+<li><strong>Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid, so is the property of being a weakly rigid relation that entails it.</li>
+<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid,
+so is the property of being a weakly rigid relation that entails
+it.</li>
 </ul>
 <h2 id="notes">Notes</h2>
-<p>The converse of weakly-rigid-power-implies-tame-rigidity and weakly-rigid-power-implies-rigid-power. With □Tame Rigidity in place of Tame Rigidity it is proved (necessary-tame-rigidity-and-rigid-power-imply-weakly-rigid-power). The unboxed argument fails at weak inextensibility: for weakly rigid <span class="math inline">F</span>, <span class="math inline">P_F:=\lambda X\, .\,\operatorname{WeaklyRigid}(X)\land X\le F</span> is weakly persistent, but <span class="math inline">Z:=\lambda X\, .\,\operatorname{Rigid}(X)\land X\le F</span> satisfies <span class="math inline">\forall X\, .\,P_FX\to\Box ZX</span>, so the weak inextensibility of <span class="math inline">P_F</span> requires <span class="math inline">P_F\le Z</span>, which is Tame Rigidity below <span class="math inline">F</span> at every accessible world. Weakly Rigid Power implies □Tame Rigidity at type <span class="math inline">t</span> (and, with BF, at every type: barcan-and-weakly-rigid-power-imply-necessary-tame-rigidity), so the conjecture would follow from Tame Rigidity + Rigid Power ⇒ □Tame Rigidity, and a countermodel must satisfy Tame Rigidity and Rigid Power while failing □Tame Rigidity at type <span class="math inline">t</span>. No recorded model yet separates Tame Rigidity from □Tame Rigidity.</p>
+<p>The converse of weakly-rigid-power-implies-tame-rigidity and
+weakly-rigid-power-implies-rigid-power. With □Tame Rigidity in place of
+Tame Rigidity it is proved
+(necessary-tame-rigidity-and-rigid-power-imply-weakly-rigid-power). The
+unboxed argument fails at weak inextensibility: for weakly rigid <span
+class="math inline">F</span>, <span class="math inline">P_F:=\lambda X\,
+.\,\operatorname{WeaklyRigid}(X)\land X\le F</span> is weakly
+persistent, but <span class="math inline">Z:=\lambda X\,
+.\,\operatorname{Rigid}(X)\land X\le F</span> satisfies <span
+class="math inline">\forall X\, .\,P_FX\to\Box ZX</span>, so the weak
+inextensibility of <span class="math inline">P_F</span> requires <span
+class="math inline">P_F\le Z</span>, which is Tame Rigidity below <span
+class="math inline">F</span> at every accessible world. Weakly Rigid
+Power implies □Tame Rigidity at type <span class="math inline">t</span>
+(and, with BF, at every type:
+barcan-and-weakly-rigid-power-imply-necessary-tame-rigidity), so the
+conjecture would follow from Tame Rigidity + Rigid Power ⇒ □Tame
+Rigidity, and a countermodel must satisfy Tame Rigidity and Rigid Power
+while failing □Tame Rigidity at type <span class="math inline">t</span>.
+No recorded model yet separates Tame Rigidity from □Tame Rigidity.</p>
+<p>Refuted (25 October 2026): [[symmetric-finite-compression-entrance]],
+GPT-6 Astra’s construction (prompted by Daniel Kodsi, 23 October 2026),
+satisfies Tame Rigidity and Rigid Power at every type and fails Weakly
+Rigid Power at type <span class="math inline">et</span>, through a
+weakly rigid but not rigid relation below the transport of a rigid
+bound, at a world where □Tame Rigidity fails at type <span
+class="math inline">et</span>. Since then
+[[symmetric-entrance-qualitative-links]] and this model both separate
+Tame Rigidity from □Tame Rigidity.</p>
+<h2 id="revisions">Revisions</h2>
+<ul>
+<li><strong>2026-10-25</strong> (Claude Opus 5.5 (Anthropic), prompted
+by Cian Dorr) — (minor) Notes: the countermodel that refutes the
+conjecture.</li>
+</ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 10 Oct</strong> — Cian Dorr, question of 10 October 2026.</li>
+<li><strong>Dorr 10 Oct</strong> — Cian Dorr, question of 10 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/tame-rigidity-and-rigid-power-imply-weakly-rigid-power.yaml</code>
+Record:
+<code>topics/classicism/results/tame-rigidity-and-rigid-power-imply-weakly-rigid-power.yaml</code>
 </p>
 </body></html>

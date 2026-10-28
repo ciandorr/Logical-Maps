@@ -322,24 +322,204 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>C5 ⇒ Necessity of Arithmetic</h1></header><p>Theorem 4.4 of Andrew Bacon, <em>Could the truths of mathematics have been different?</em> (draft of 9 October 2025, p. 19; proved as Theorem C.1 in Appendix C.1, pp. 10–11 of the separately paginated appendix, through Proposition C.2 and Lemma C.1), transposed to the map’s formulation of the Necessity of Arithmetic, which follows Goodsell (Background). Transposition by Claude Fable 5.1, prompted by Zachary Goodsell (Anthropic), 19 October 2026. Lean-verified the same day: the steps below are derived shallow theorems (<code>lean/Classicism/Results/SentenceSchemas/Arithmetic.lean</code>), and the induction on arithmetical sentences composes their derivations (<code>ArithmeticMeta.lean</code>, <code>c5_entails_necessityOfArithmetic</code>; certificate <code>Classicism.Map.c5_implies_necessity_of_arithmetic</code>).</p>
-<p>Bacon’s logic <span class="math inline">\mathrm H\Box.5</span> is his background logic with T, 4 and B necessitated. C5, which is C with □ND at every type, contains it: □ND gives □5, hence □B (recorded), BF at every type (necessary-nd-implies-bf) and ND at every type. His theorem concerns first-order arithmetic over natural-number structures of individuals, and its proof passes through the canonical structure of numerical quantifiers, which he shows rigid in S5 (Proposition C.2) before an induction on sentences (Lemma C.1). The map’s arithmetical sentences are already about the canonical structure, the finite cardinalities <span class="math inline">\mathbb N_\sigma</span> of properties of a type <span class="math inline">\sigma</span>, with <span class="math inline">\operatorname{Sum}_\sigma</span> and <span class="math inline">\operatorname{Prod}_\sigma</span> defined by recursion, so the argument below runs his Proposition C.2 and Lemma C.1 directly on it. It proves more than the recorded principle: in C5 every arithmetical sentence is necessary or impossible outright, with no antecedent <span class="math inline">I_\sigma</span>.</p>
-<p>Fix <span class="math inline">\sigma</span> and drop the subscripts; write <span class="math inline">n^+</span> for <span class="math inline">\operatorname{Suc}n</span> and <span class="math inline">\nu</span> for <span class="math inline">(\sigma t)t</span>. A term is a variable of type <span class="math inline">\nu</span>, <span class="math inline">\mathbf 0</span>, or the successor of a term; when the variables of a term take numbers as values so does the term, since <span class="math inline">\mathbb Nn\to\mathbb Nn^+</span> is a theorem of C. Besides theorems of C (T, 4, K, NI, CBF), the argument uses ND at type <span class="math inline">\nu</span>, the dual of B (<span class="math inline">\Diamond\Box p\to p</span>) and BF at type <span class="math inline">\nu</span>, all at the evaluation point, and all supplied by C5.</p>
-<p><strong>Lemma 1 (numbers are necessarily numbers; C).</strong> <span class="math inline">\forall n\,.\,\mathbb Nn\to\Box\mathbb Nn</span>. By the definition of <span class="math inline">\mathbb N</span> with the property <span class="math inline">\lambda n\,.\,\Box\mathbb Nn</span>: <span class="math inline">\Box\mathbb N\mathbf 0</span> since <span class="math inline">\mathbb N\mathbf 0</span> is a theorem, and <span class="math inline">\Box\mathbb Nn\to\Box\mathbb Nn^+</span> by K from the necessitated theorem <span class="math inline">\mathbb Nn\to\mathbb Nn^+</span>. (Lemma 3 of the write-up for countable-boolean-completeness-implies-necessity-of-arithmetic.)</p>
-<p><strong>Lemma 2 (non-numbers are necessarily non-numbers; C5).</strong> <span class="math inline">\forall n\,.\,\neg\mathbb Nn\to\Box\neg\mathbb Nn</span>. Contrapose: if <span class="math inline">\Diamond\mathbb Nn</span>, then <span class="math inline">\Diamond\Box\mathbb Nn</span> by the necessitation of Lemma 1 and K, so <span class="math inline">\mathbb Nn</span> by the dual of B.</p>
-<p><strong>Lemma 3 (sums and products are necessary when true; C).</strong> For numbers <span class="math inline">m,n,o</span>: <span class="math inline">\operatorname{Sum}(m,n,o)\to\Box\operatorname{Sum}(m,n,o)</span> and <span class="math inline">\operatorname{Prod}(m,n,o)\to\Box\operatorname{Prod}(m,n,o)</span>. For <span class="math inline">\operatorname{Sum}</span>, instantiate its definition at <span class="math inline">R:=\lambda i\,j\,.\,\Box\operatorname{Sum}(m,i,j)</span>. <span class="math inline">R\mathbf 0m</span> holds, since <span class="math inline">\operatorname{Sum}(m,\mathbf 0,m)</span> is a theorem of C (the consequent of its definition is its own antecedent) and so necessary. <span class="math inline">R</span> is closed under the recursion on numbers: for numbers <span class="math inline">i,j</span>, <span class="math inline">\operatorname{Sum}(m,i,j)\to\operatorname{Sum}(m,i^+,j^+)</span> is a theorem of C, since any <span class="math inline">R&#39;</span> with <span class="math inline">R&#39;\mathbf 0m</span> that is closed under the recursion has <span class="math inline">R&#39;ij</span> and hence <span class="math inline">R&#39;i^+j^+</span>; necessitating it and using Lemma 1 for <span class="math inline">i</span> and <span class="math inline">j</span>, <span class="math inline">\Box\operatorname{Sum}(m,i,j)\to\Box\operatorname{Sum}(m,i^+,j^+)</span>. So <span class="math inline">\operatorname{Sum}(m,n,o)</span> gives <span class="math inline">Rno</span>. For <span class="math inline">\operatorname{Prod}</span>, instantiate at <span class="math inline">R:=\lambda i\,j\,.\,\Box\operatorname{Prod}(m,i,j)</span>: <span class="math inline">R\mathbf 0\mathbf 0</span> since <span class="math inline">\operatorname{Prod}(m,\mathbf 0,\mathbf 0)</span> is a theorem; and for numbers <span class="math inline">i,j,k</span>, <span class="math inline">\operatorname{Prod}(m,i,j)\to\operatorname{Sum}(m,j,k)\to\operatorname{Prod}(m,i^+,k)</span> is a theorem, so with Lemma 1 and the case of <span class="math inline">\operatorname{Sum}</span>, <span class="math inline">\Box\operatorname{Prod}(m,i,j)\to\operatorname{Sum}(m,j,k)\to\Box\operatorname{Prod}(m,i^+,k)</span>, which is the recursion clause for <span class="math inline">R</span>.</p>
-<p><strong>Lemma 4 (sums and products are impossible when false; C5).</strong> For numbers <span class="math inline">m,n,o</span>: <span class="math inline">\neg\operatorname{Sum}(m,n,o)\to\Box\neg\operatorname{Sum}(m,n,o)</span>, and likewise for <span class="math inline">\operatorname{Prod}</span>. Contrapose: <span class="math inline">\Diamond\operatorname{Sum}(m,n,o)</span> gives <span class="math inline">\Diamond\Box\operatorname{Sum}(m,n,o)</span> by the necessitation of Lemma 3, whose hypotheses <span class="math inline">\mathbb Nm</span>, <span class="math inline">\mathbb Nn</span>, <span class="math inline">\mathbb No</span> are necessary by Lemma 1, and then <span class="math inline">\operatorname{Sum}(m,n,o)</span> by the dual of B.</p>
-<p><strong>Lemma 5 (identities).</strong> For any <span class="math inline">m,n</span> of type <span class="math inline">\nu</span>: <span class="math inline">m=n\to\Box\,m=n</span> (NI) and <span class="math inline">m\ne n\to\Box\,m\ne n</span> (ND at <span class="math inline">\nu</span>).</p>
-<p><strong>Lemma 6 (arithmetical formulas are non-contingent on numbers; C5).</strong> For every arithmetical formula <span class="math inline">A</span> with free variables <span class="math inline">\bar v</span>: <span class="math inline">\forall\bar v\in\mathbb N\,.\,(A\to\Box A)\land(\neg A\to\Box\neg A)</span>. By induction on <span class="math inline">A</span>, for all values of <span class="math inline">\bar v</span> in <span class="math inline">\mathbb N</span> at once. Atomic formulas: <span class="math inline">\mathbb N\mathbf t</span> by Lemmas 1 and 2; <span class="math inline">\operatorname{Sum}(\mathbf m,\mathbf n,\mathbf o)</span> and <span class="math inline">\operatorname{Prod}(\mathbf m,\mathbf n,\mathbf o)</span> by Lemmas 3 and 4, the values of the terms being numbers; and <span class="math inline">\mathbf m=\mathbf n</span> by Lemma 5. Negation is immediate; for <span class="math inline">A\land B</span>, <span class="math inline">\Box A\land\Box B</span> gives <span class="math inline">\Box(A\land B)</span>, and <span class="math inline">\Box\neg A</span> or <span class="math inline">\Box\neg B</span> gives <span class="math inline">\Box\neg(A\land B)</span>, by K; disjunction likewise. For <span class="math inline">\forall v\in\mathbb N\,.\,A</span>: if it holds, then for every <span class="math inline">v</span>, either <span class="math inline">\mathbb Nv</span> and <span class="math inline">\Box A</span> by the hypothesis, or <span class="math inline">\neg\mathbb Nv</span> and <span class="math inline">\Box\neg\mathbb Nv</span> by Lemma 2; either way <span class="math inline">\Box(\mathbb Nv\to A)</span>, so <span class="math inline">\forall v\,.\,\Box(\mathbb Nv\to A)</span>, and BF at <span class="math inline">\nu</span> gives <span class="math inline">\Box\forall v\,.\,\mathbb Nv\to A</span>. If it fails, some number <span class="math inline">v</span> has <span class="math inline">\neg A</span>, so <span class="math inline">\Box\neg A</span> by the hypothesis and <span class="math inline">\Box\mathbb Nv</span> by Lemma 1, whence <span class="math inline">\Box\exists v\,.\,\mathbb Nv\land\neg A</span> by K. The existential quantifier is the dual.</p>
-<p><strong>Theorem.</strong> For every arithmetical sentence <span class="math inline">A</span> at <span class="math inline">\sigma</span>, <span class="math inline">\Box A\lor\Box\neg A</span> in C5, and so <span class="math inline">\Box(I_\sigma\to A)\lor\Box(I_\sigma\to\neg A)</span>. The first is Lemma 6 for a sentence; the second follows by K. <span class="math inline">\blacksquare</span></p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>C5 ⇒ Necessity of Arithmetic</h1></header><p>Theorem 4.4 of Andrew Bacon, <em>Could the truths of mathematics have
+been different?</em> (draft of 9 October 2025, p. 19; proved as Theorem
+C.1 in Appendix C.1, pp. 10–11 of the separately paginated appendix,
+through Proposition C.2 and Lemma C.1), transposed to the map’s
+formulation of the Necessity of Arithmetic, which follows Goodsell
+(Background). Transposition by Claude Fable 5.1, prompted by Zachary
+Goodsell (Anthropic), 19 October 2026. Lean-verified the same day: the
+steps below are derived shallow theorems
+(<code>lean/Classicism/Results/SentenceSchemas/Arithmetic.lean</code>),
+and the induction on arithmetical sentences composes their derivations
+(<code>ArithmeticMeta.lean</code>,
+<code>c5_entails_necessityOfArithmetic</code>; certificate
+<code>Classicism.Map.c5_implies_necessity_of_arithmetic</code>).</p>
+<p>Bacon’s logic <span class="math inline">\mathrm H\Box.5</span> is his
+background logic with T, 4 and B necessitated. C5, which is C with □ND
+at every type, contains it: □ND gives □5, hence □B (recorded), BF at
+every type (necessary-nd-implies-bf) and ND at every type. His theorem
+concerns first-order arithmetic over natural-number structures of
+individuals, and its proof passes through the canonical structure of
+numerical quantifiers, which he shows rigid in S5 (Proposition C.2)
+before an induction on sentences (Lemma C.1). The map’s arithmetical
+sentences are already about the canonical structure, the finite
+cardinalities <span class="math inline">\mathbb N_\sigma</span> of
+properties of a type <span class="math inline">\sigma</span>, with <span
+class="math inline">\operatorname{Sum}_\sigma</span> and <span
+class="math inline">\operatorname{Prod}_\sigma</span> defined by
+recursion, so the argument below runs his Proposition C.2 and Lemma C.1
+directly on it. It proves more than the recorded principle: in C5 every
+arithmetical sentence is necessary or impossible outright, with no
+antecedent <span class="math inline">I_\sigma</span>.</p>
+<p>Fix <span class="math inline">\sigma</span> and drop the subscripts;
+write <span class="math inline">n^+</span> for <span
+class="math inline">\operatorname{Suc}n</span> and <span
+class="math inline">\nu</span> for <span class="math inline">(\sigma
+t)t</span>. A term is a variable of type <span
+class="math inline">\nu</span>, <span class="math inline">\mathbf
+0</span>, or the successor of a term; when the variables of a term take
+numbers as values so does the term, since <span
+class="math inline">\mathbb Nn\to\mathbb Nn^+</span> is a theorem of C.
+Besides theorems of C (T, 4, K, NI, CBF), the argument uses ND at type
+<span class="math inline">\nu</span>, the dual of B (<span
+class="math inline">\Diamond\Box p\to p</span>) and BF at type <span
+class="math inline">\nu</span>, all at the evaluation point, and all
+supplied by C5.</p>
+<p><strong>Lemma 1 (numbers are necessarily numbers; C).</strong> <span
+class="math inline">\forall n\,.\,\mathbb Nn\to\Box\mathbb Nn</span>. By
+the definition of <span class="math inline">\mathbb N</span> with the
+property <span class="math inline">\lambda n\,.\,\Box\mathbb Nn</span>:
+<span class="math inline">\Box\mathbb N\mathbf 0</span> since <span
+class="math inline">\mathbb N\mathbf 0</span> is a theorem, and <span
+class="math inline">\Box\mathbb Nn\to\Box\mathbb Nn^+</span> by K from
+the necessitated theorem <span class="math inline">\mathbb Nn\to\mathbb
+Nn^+</span>. (Lemma 3 of the write-up for
+countable-boolean-completeness-implies-necessity-of-arithmetic.)</p>
+<p><strong>Lemma 2 (non-numbers are necessarily non-numbers;
+C5).</strong> <span class="math inline">\forall n\,.\,\neg\mathbb
+Nn\to\Box\neg\mathbb Nn</span>. Contrapose: if <span
+class="math inline">\Diamond\mathbb Nn</span>, then <span
+class="math inline">\Diamond\Box\mathbb Nn</span> by the necessitation
+of Lemma 1 and K, so <span class="math inline">\mathbb Nn</span> by the
+dual of B.</p>
+<p><strong>Lemma 3 (sums and products are necessary when true;
+C).</strong> For numbers <span class="math inline">m,n,o</span>: <span
+class="math inline">\operatorname{Sum}(m,n,o)\to\Box\operatorname{Sum}(m,n,o)</span>
+and <span
+class="math inline">\operatorname{Prod}(m,n,o)\to\Box\operatorname{Prod}(m,n,o)</span>.
+For <span class="math inline">\operatorname{Sum}</span>, instantiate its
+definition at <span class="math inline">R:=\lambda
+i\,j\,.\,\Box\operatorname{Sum}(m,i,j)</span>. <span
+class="math inline">R\mathbf 0m</span> holds, since <span
+class="math inline">\operatorname{Sum}(m,\mathbf 0,m)</span> is a
+theorem of C (the consequent of its definition is its own antecedent)
+and so necessary. <span class="math inline">R</span> is closed under the
+recursion on numbers: for numbers <span class="math inline">i,j</span>,
+<span
+class="math inline">\operatorname{Sum}(m,i,j)\to\operatorname{Sum}(m,i^+,j^+)</span>
+is a theorem of C, since any <span class="math inline">R&#39;</span>
+with <span class="math inline">R&#39;\mathbf 0m</span> that is closed
+under the recursion has <span class="math inline">R&#39;ij</span> and
+hence <span class="math inline">R&#39;i^+j^+</span>; necessitating it
+and using Lemma 1 for <span class="math inline">i</span> and <span
+class="math inline">j</span>, <span
+class="math inline">\Box\operatorname{Sum}(m,i,j)\to\Box\operatorname{Sum}(m,i^+,j^+)</span>.
+So <span class="math inline">\operatorname{Sum}(m,n,o)</span> gives
+<span class="math inline">Rno</span>. For <span
+class="math inline">\operatorname{Prod}</span>, instantiate at <span
+class="math inline">R:=\lambda
+i\,j\,.\,\Box\operatorname{Prod}(m,i,j)</span>: <span
+class="math inline">R\mathbf 0\mathbf 0</span> since <span
+class="math inline">\operatorname{Prod}(m,\mathbf 0,\mathbf 0)</span> is
+a theorem; and for numbers <span class="math inline">i,j,k</span>, <span
+class="math inline">\operatorname{Prod}(m,i,j)\to\operatorname{Sum}(m,j,k)\to\operatorname{Prod}(m,i^+,k)</span>
+is a theorem, so with Lemma 1 and the case of <span
+class="math inline">\operatorname{Sum}</span>, <span
+class="math inline">\Box\operatorname{Prod}(m,i,j)\to\operatorname{Sum}(m,j,k)\to\Box\operatorname{Prod}(m,i^+,k)</span>,
+which is the recursion clause for <span
+class="math inline">R</span>.</p>
+<p><strong>Lemma 4 (sums and products are impossible when false;
+C5).</strong> For numbers <span class="math inline">m,n,o</span>: <span
+class="math inline">\neg\operatorname{Sum}(m,n,o)\to\Box\neg\operatorname{Sum}(m,n,o)</span>,
+and likewise for <span class="math inline">\operatorname{Prod}</span>.
+Contrapose: <span
+class="math inline">\Diamond\operatorname{Sum}(m,n,o)</span> gives <span
+class="math inline">\Diamond\Box\operatorname{Sum}(m,n,o)</span> by the
+necessitation of Lemma 3, whose hypotheses <span
+class="math inline">\mathbb Nm</span>, <span class="math inline">\mathbb
+Nn</span>, <span class="math inline">\mathbb No</span> are necessary by
+Lemma 1, and then <span
+class="math inline">\operatorname{Sum}(m,n,o)</span> by the dual of
+B.</p>
+<p><strong>Lemma 5 (identities).</strong> For any <span
+class="math inline">m,n</span> of type <span
+class="math inline">\nu</span>: <span
+class="math inline">m=n\to\Box\,m=n</span> (NI) and <span
+class="math inline">m\ne n\to\Box\,m\ne n</span> (ND at <span
+class="math inline">\nu</span>).</p>
+<p><strong>Lemma 6 (arithmetical formulas are non-contingent on numbers;
+C5).</strong> For every arithmetical formula <span
+class="math inline">A</span> with free variables <span
+class="math inline">\bar v</span>: <span class="math inline">\forall\bar
+v\in\mathbb N\,.\,(A\to\Box A)\land(\neg A\to\Box\neg A)</span>. By
+induction on <span class="math inline">A</span>, for all values of <span
+class="math inline">\bar v</span> in <span class="math inline">\mathbb
+N</span> at once. Atomic formulas: <span class="math inline">\mathbb
+N\mathbf t</span> by Lemmas 1 and 2; <span
+class="math inline">\operatorname{Sum}(\mathbf m,\mathbf n,\mathbf
+o)</span> and <span class="math inline">\operatorname{Prod}(\mathbf
+m,\mathbf n,\mathbf o)</span> by Lemmas 3 and 4, the values of the terms
+being numbers; and <span class="math inline">\mathbf m=\mathbf n</span>
+by Lemma 5. Negation is immediate; for <span class="math inline">A\land
+B</span>, <span class="math inline">\Box A\land\Box B</span> gives <span
+class="math inline">\Box(A\land B)</span>, and <span
+class="math inline">\Box\neg A</span> or <span
+class="math inline">\Box\neg B</span> gives <span
+class="math inline">\Box\neg(A\land B)</span>, by K; disjunction
+likewise. For <span class="math inline">\forall v\in\mathbb
+N\,.\,A</span>: if it holds, then for every <span
+class="math inline">v</span>, either <span class="math inline">\mathbb
+Nv</span> and <span class="math inline">\Box A</span> by the hypothesis,
+or <span class="math inline">\neg\mathbb Nv</span> and <span
+class="math inline">\Box\neg\mathbb Nv</span> by Lemma 2; either way
+<span class="math inline">\Box(\mathbb Nv\to A)</span>, so <span
+class="math inline">\forall v\,.\,\Box(\mathbb Nv\to A)</span>, and BF
+at <span class="math inline">\nu</span> gives <span
+class="math inline">\Box\forall v\,.\,\mathbb Nv\to A</span>. If it
+fails, some number <span class="math inline">v</span> has <span
+class="math inline">\neg A</span>, so <span class="math inline">\Box\neg
+A</span> by the hypothesis and <span class="math inline">\Box\mathbb
+Nv</span> by Lemma 1, whence <span class="math inline">\Box\exists
+v\,.\,\mathbb Nv\land\neg A</span> by K. The existential quantifier is
+the dual.</p>
+<p><strong>Theorem.</strong> For every arithmetical sentence <span
+class="math inline">A</span> at <span class="math inline">\sigma</span>,
+<span class="math inline">\Box A\lor\Box\neg A</span> in C5, and so
+<span class="math inline">\Box(I_\sigma\to A)\lor\Box(I_\sigma\to\neg
+A)</span>. The first is Lemma 6 for a sentence; the second follows by K.
+<span class="math inline">\blacksquare</span></p>
 <h2 id="remarks">Remarks</h2>
 <ul>
-<li>Beyond C the argument uses only the dual of B (Lemmas 2 and 4), ND at <span class="math inline">\nu</span> (Lemma 5) and BF at <span class="math inline">\nu</span> (the quantifier step), all at the evaluation point. Bacon states the theorem for <span class="math inline">\mathrm H\Box.5</span>, without Intensionality; it is recorded with the preset C5, the map’s name for that logic over C.</li>
-<li>Bacon’s Theorem 4.3 shows that the result fails in second-order modal logic with S5, where the numerical quantifiers need not be rigid; the higher-order comprehension behind Lemma 1, the property <span class="math inline">\lambda n\,.\,\Box\mathbb Nn</span> of cardinalities, is what makes the difference.</li>
+<li>Beyond C the argument uses only the dual of B (Lemmas 2 and 4), ND
+at <span class="math inline">\nu</span> (Lemma 5) and BF at <span
+class="math inline">\nu</span> (the quantifier step), all at the
+evaluation point. Bacon states the theorem for <span
+class="math inline">\mathrm H\Box.5</span>, without Intensionality; it
+is recorded with the preset C5, the map’s name for that logic over
+C.</li>
+<li>Bacon’s Theorem 4.3 shows that the result fails in second-order
+modal logic with S5, where the numerical quantifiers need not be rigid;
+the higher-order comprehension behind Lemma 1, the property <span
+class="math inline">\lambda n\,.\,\Box\mathbb Nn</span> of
+cardinalities, is what makes the difference.</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Origin: <a href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could the truths of mathematics have been different?</a>.</strong> Bacon, Andrew (2025). Could the truths of mathematics have been different? Draft dated 9 October 2025, with online appendix; published in Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and Goodsell. Locators refer to the draft. The full Boolean-valued construction is in appendix §B.2, pp. 7–9 of the separately paginated appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. — Theorem 4.4, p. 19; Appendix C.1, pp. 10–11 of the appendix. Stated for H□.5 and first-order arithmetic over natural-number structures of individuals, through the rigidity in S5 of the canonical structure of numerical quantifiers (Proposition C.2) and an induction on sentences (Lemma C.1); the map’s numbers are that canonical structure at each type σ, and the write-up runs the argument on it.</li>
-<li><strong>Formulation: Arithmetic is Necessary.</strong> Goodsell, Zachary William Lee. Arithmetic is Necessary. Draft dated 5 June 2024, 28 pages. Derives the necessity of arithmetic in the logic HKC (H plus K plus Countable Boolean Completeness) and shows that Boolean Completeness is inconsistent with the maximalization of any recursively enumerable extension of HK consistent with I, answering the question of Classicism, §2.6. Locators refer to this draft.. The map’s formulation of the Necessity of Arithmetic, with the antecedent I_σ, which the S5 argument does not need.</li>
+<li><strong>Origin: <a
+href="https://andrew-bacon.github.io/papers/Could%20mathematics%20have%20been%20different.pdf">Could
+the truths of mathematics have been different?</a>.</strong> Bacon,
+Andrew (2025). Could the truths of mathematics have been different?
+Draft dated 9 October 2025, with online appendix; published in
+Philosophical Review 135(3), 2026, pp. 221–285, as cited by Barton and
+Goodsell. Locators refer to the draft. The full Boolean-valued
+construction is in appendix §B.2, pp. 7–9 of the separately paginated
+appendix (PDF pp. 41–43); Theorem 4.4 and its proof (Appendix C.1) and
+Lemma C.6 (Appendix C.2) were read directly on 19 October 2026. —
+Theorem 4.4, p. 19; Appendix C.1, pp. 10–11 of the appendix. Stated for
+H□.5 and first-order arithmetic over natural-number structures of
+individuals, through the rigidity in S5 of the canonical structure of
+numerical quantifiers (Proposition C.2) and an induction on sentences
+(Lemma C.1); the map’s numbers are that canonical structure at each type
+σ, and the write-up runs the argument on it.</li>
+<li><strong>Formulation: Arithmetic is Necessary.</strong> Goodsell,
+Zachary William Lee. Arithmetic is Necessary. Draft dated 5 June 2024,
+28 pages. Derives the necessity of arithmetic in the logic HKC (H plus K
+plus Countable Boolean Completeness) and shows that Boolean Completeness
+is inconsistent with the maximalization of any recursively enumerable
+extension of HK consistent with I, answering the question of Classicism,
+§2.6. Locators refer to this draft.. The map’s formulation of the
+Necessity of Arithmetic, with the antecedent I_σ, which the S5 argument
+does not need.</li>
 </ul>
 </body></html>

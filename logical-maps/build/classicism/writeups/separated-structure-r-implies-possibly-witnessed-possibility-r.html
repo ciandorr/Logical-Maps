@@ -323,33 +323,76 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Separated Structure ⇒ Possibly Witnessed Possibility</h1></header><p class="cert">
-Result — Source: Misc.; produced by Cian Dorr, suggestion of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic), 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.
+Result — Source: Misc.; produced by Cian Dorr, suggestion of 22
+September 2026; proof written out by Claude Fable 5.1 (Anthropic), 22
+September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by
+Cian Dorr, 22 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
+<li><strong>Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Possibly Witnessed Possibility.</strong> For pure formulas P with free variables among a finite tuple x and distinct matching constants c, a possible witness to P entails that P at those constants is possible. Equivalently, P necessary at the constants is necessary universally.</li>
+<li><strong>Possibly Witnessed Possibility.</strong> For pure formulas P
+with free variables among a finite tuple x and distinct matching
+constants c, a possible witness to P entails that P at those constants
+is possible. Equivalently, P necessary at the constants is necessary
+universally.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Iterating Separated Structure, as in the proof of the general form of Separated Structure (on its page), gives <span class="math inline">F\bar c=G\bar c\to F=G</span> for closed pure <span class="math inline">F,G</span> and distinct constants <span class="math inline">\bar c</span>. Let <span class="math inline">P</span> be pure with free variables among <span class="math inline">\bar x</span> and put <span class="math inline">F:=\lambda\bar x\, .\,\neg P</span>, <span class="math inline">G:=\lambda\bar x\, .\,\top</span>, both closed and pure. Suppose <span class="math inline">\Box\neg P[\bar c/\bar x]</span>, that is <span class="math inline">\neg P[\bar c/\bar x]=\top</span>. By <span class="math inline">\beta</span>, <span class="math inline">F\bar c=\top=G\bar c</span>, so <span class="math inline">F=G</span>. By NI, <span class="math inline">\Box(F=\lambda\bar x\, .\,\top)</span>, and <span class="math inline">F=\lambda\bar x\, .\,\top\to\forall\bar x\, .\,F\bar x</span> is a theorem, so K gives <span class="math inline">\Box\forall\bar x\, .\,\neg P</span>. Contraposing, <span class="math inline">\Diamond\exists\bar x\, .\,P\to\Diamond P[\bar c/\bar x]</span>.</p>
+<p>Iterating Separated Structure, as in the proof of the general form of
+Separated Structure (on its page), gives <span class="math inline">F\bar
+c=G\bar c\to F=G</span> for closed pure <span
+class="math inline">F,G</span> and distinct constants <span
+class="math inline">\bar c</span>. Let <span
+class="math inline">P</span> be pure with free variables among <span
+class="math inline">\bar x</span> and put <span
+class="math inline">F:=\lambda\bar x\, .\,\neg P</span>, <span
+class="math inline">G:=\lambda\bar x\, .\,\top</span>, both closed and
+pure. Suppose <span class="math inline">\Box\neg P[\bar c/\bar
+x]</span>, that is <span class="math inline">\neg P[\bar c/\bar
+x]=\top</span>. By <span class="math inline">\beta</span>, <span
+class="math inline">F\bar c=\top=G\bar c</span>, so <span
+class="math inline">F=G</span>. By NI, <span
+class="math inline">\Box(F=\lambda\bar x\, .\,\top)</span>, and <span
+class="math inline">F=\lambda\bar x\, .\,\top\to\forall\bar x\, .\,F\bar
+x</span> is a theorem, so K gives <span
+class="math inline">\Box\forall\bar x\, .\,\neg P</span>. Contraposing,
+<span class="math inline">\Diamond\exists\bar x\, .\,P\to\Diamond P[\bar
+c/\bar x]</span>.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction) — General Separated Structure became a form of Separated Structure; the proof’s cross-reference is updated.</li>
+<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction) — General Separated Structure became a form of
+Separated Structure; the proof’s cross-reference is updated.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 22 Sep</strong> — Cian Dorr, suggestion of 22 September 2026; proof as recorded.</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.5, pp. 38–39 and n. 57.</li>
+<li><strong>Dorr 22 Sep</strong> — Cian Dorr, suggestion of 22 September
+2026; proof as recorded.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §2.5, pp. 38–39 and n. 57.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/separated-structure-r-implies-possibly-witnessed-possibility-r.yaml</code>
+Record:
+<code>topics/classicism/results/separated-structure-r-implies-possibly-witnessed-possibility-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.5, pp. 38–39 and n. 57</li>
-<li><strong>Background: Logical Combinatorialism.</strong> Bacon, Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the import of 22 September 2026; section, footnote and page locators refer to the published pagination. — §4, pp. 561–562</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.5,
+pp. 38–39 and n. 57</li>
+<li><strong>Background: Logical Combinatorialism.</strong> Bacon, Andrew
+(2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589.
+As cited in Classicism, §§2.5 and 3.5. Read directly for the import of
+22 September 2026; section, footnote and page locators refer to the
+published pagination. — §4, pp. 561–562</li>
 </ul>
 </body></html>

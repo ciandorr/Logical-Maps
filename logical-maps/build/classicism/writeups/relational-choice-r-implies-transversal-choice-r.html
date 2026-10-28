@@ -322,28 +322,176 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Does Relational Choice imply Transversal Choice?</h1></header><p>Christopher Sun observed that this implication is claimed in the literature without proof. Zachary Goodsell passed the observation on and raised the question here on 25 September 2026. The analysis below is by Claude Fable 5.1 (Anthropic) and has not been independently checked.</p>
-<p><strong>Transversal Choice.</strong> For every type <span class="math inline">\sigma</span> and every <span class="math inline">R^{\sigma\sigma t}</span> that is an equivalence relation, <span class="math inline">\exists F^{\sigma t}\, .\,\forall x\, .\,\exists y\, .\,(Rx)y\land Fy\land
-\forall z\, .\,((Rx)z\land Fz)\to y=z</span>. Write <span class="math inline">[x]</span> for the cell <span class="math inline">\lambda z\, .\,(Rx)z</span>. Everything is unboxed and concerns the evaluation point.</p>
-<h2 id="the-quotient-argument-and-its-gap">The quotient argument and its gap</h2>
-<p>Apply Relational Choice at types <span class="math inline">(\sigma t,\sigma)</span> to the serial relation <span class="math inline">(UC)y:=Cy\lor\neg\exists z\, .\,Cz</span>, obtaining a functional <span class="math inline">S</span> below <span class="math inline">U</span>, and put <span class="math inline">Fy:=\exists x\, .\,(S[x])y</span>.</p>
-<p>Existence holds: the <span class="math inline">y</span> with <span class="math inline">(S[x])y</span> satisfies <span class="math inline">[x]y</span>, because <span class="math inline">[x]</span> has the instance <span class="math inline">x</span>.</p>
-<p>Uniqueness needs more. If <span class="math inline">y</span> and <span class="math inline">y&#39;</span> are <span class="math inline">F</span>-instances in the cell of <span class="math inline">x</span>, their witnesses <span class="math inline">x_1,x_2</span> lie in that cell, so <span class="math inline">[x_1]</span> and <span class="math inline">[x_2]</span> are coextensive. Functionality of <span class="math inline">S</span> gives <span class="math inline">y=y&#39;</span> only if <span class="math inline">[x_1]=[x_2]</span> as properties. In C, identity of properties is necessary coextension (Intensionality, <em>Classicism</em> §1.5), and the hypothesis supplies actual coextension only. <span class="math inline">R</span> may be an equivalence relation contingently, and even a necessary equivalence relation may relate <span class="math inline">x_1</span> and <span class="math inline">x_2</span> contingently. Then <span class="math inline">[x_1]\ne[x_2]</span> and <span class="math inline">S</span> may choose differently from them.</p>
-<p>No definable replacement for <span class="math inline">[x]</span> closes the gap. Any operation built by <span class="math inline">\lambda</span>-abstraction from <span class="math inline">R</span> and <span class="math inline">x</span> sends <span class="math inline">x</span> and <span class="math inline">x&#39;</span> to the same value only when the defining condition is necessarily equivalent for them, whereas the hypothesis is actual indiscernibility with respect to <span class="math inline">R</span>. The same obstruction defeats a Zermelo-style well-ordering argument: the least family closed under <span class="math inline">A\mapsto A\setminus\{f(A)\}</span> and under intersections contains coextensive but distinct stages, which receive different chosen elements, so the stages are not linearly ordered by inclusion.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Does Relational Choice imply Transversal Choice?</h1></header><p>Christopher Sun observed that this implication is claimed in the
+literature without proof. Zachary Goodsell passed the observation on and
+raised the question here on 25 September 2026. The analysis below is by
+Claude Fable 5.1 (Anthropic) and has not been independently checked.</p>
+<p><strong>Transversal Choice.</strong> For every type <span
+class="math inline">\sigma</span> and every <span
+class="math inline">R^{\sigma\sigma t}</span> that is an equivalence
+relation, <span class="math inline">\exists F^{\sigma t}\, .\,\forall
+x\, .\,\exists y\, .\,(Rx)y\land Fy\land
+\forall z\, .\,((Rx)z\land Fz)\to y=z</span>. Write <span
+class="math inline">[x]</span> for the cell <span
+class="math inline">\lambda z\, .\,(Rx)z</span>. Everything is unboxed
+and concerns the evaluation point.</p>
+<h2 id="the-quotient-argument-and-its-gap">The quotient argument and its
+gap</h2>
+<p>Apply Relational Choice at types <span class="math inline">(\sigma
+t,\sigma)</span> to the serial relation <span
+class="math inline">(UC)y:=Cy\lor\neg\exists z\, .\,Cz</span>, obtaining
+a functional <span class="math inline">S</span> below <span
+class="math inline">U</span>, and put <span
+class="math inline">Fy:=\exists x\, .\,(S[x])y</span>.</p>
+<p>Existence holds: the <span class="math inline">y</span> with <span
+class="math inline">(S[x])y</span> satisfies <span
+class="math inline">[x]y</span>, because <span
+class="math inline">[x]</span> has the instance <span
+class="math inline">x</span>.</p>
+<p>Uniqueness needs more. If <span class="math inline">y</span> and
+<span class="math inline">y&#39;</span> are <span
+class="math inline">F</span>-instances in the cell of <span
+class="math inline">x</span>, their witnesses <span
+class="math inline">x_1,x_2</span> lie in that cell, so <span
+class="math inline">[x_1]</span> and <span
+class="math inline">[x_2]</span> are coextensive. Functionality of <span
+class="math inline">S</span> gives <span
+class="math inline">y=y&#39;</span> only if <span
+class="math inline">[x_1]=[x_2]</span> as properties. In C, identity of
+properties is necessary coextension (Intensionality, <em>Classicism</em>
+§1.5), and the hypothesis supplies actual coextension only. <span
+class="math inline">R</span> may be an equivalence relation
+contingently, and even a necessary equivalence relation may relate <span
+class="math inline">x_1</span> and <span class="math inline">x_2</span>
+contingently. Then <span class="math inline">[x_1]\ne[x_2]</span> and
+<span class="math inline">S</span> may choose differently from them.</p>
+<p>No definable replacement for <span class="math inline">[x]</span>
+closes the gap. Any operation built by <span
+class="math inline">\lambda</span>-abstraction from <span
+class="math inline">R</span> and <span class="math inline">x</span>
+sends <span class="math inline">x</span> and <span
+class="math inline">x&#39;</span> to the same value only when the
+defining condition is necessarily equivalent for them, whereas the
+hypothesis is actual indiscernibility with respect to <span
+class="math inline">R</span>. The same obstruction defeats a
+Zermelo-style well-ordering argument: the least family closed under
+<span class="math inline">A\mapsto A\setminus\{f(A)\}</span> and under
+intersections contains coextensive but distinct stages, which receive
+different chosen elements, so the stages are not linearly ordered by
+inclusion.</p>
 <h2 id="what-does-suffice">What does suffice</h2>
 <ul>
-<li><strong>Extensionality</strong> identifies <span class="math inline">[x_1]</span> with <span class="math inline">[x_2]</span> directly (<code>relational-choice-and-extensionality-imply-transversal-choice</code>).</li>
-<li><strong>Weak Rigid Comprehension</strong> gives, for each cell, a weakly rigid coextensive property. Two weakly rigid coextensive properties are identical: weak inextensibility of one against weak persistence of the other gives necessary coextension, and Intensionality gives identity. Choosing from those canonical properties gives the transversal (<code>relational-choice-and-weak-rigid-comprehension-imply-transversal-choice</code>).</li>
-<li>Through recorded arrows, therefore also Gallin comprehension with BF, C5 with Actuality, and boxed Functional Choice.</li>
+<li><strong>Extensionality</strong> identifies <span
+class="math inline">[x_1]</span> with <span
+class="math inline">[x_2]</span> directly
+(<code>relational-choice-and-extensionality-imply-transversal-choice</code>).</li>
+<li><strong>Weak Rigid Comprehension</strong> gives, for each cell, a
+weakly rigid coextensive property. Two weakly rigid coextensive
+properties are identical: weak inextensibility of one against weak
+persistence of the other gives necessary coextension, and Intensionality
+gives identity. Choosing from those canonical properties gives the
+transversal
+(<code>relational-choice-and-weak-rigid-comprehension-imply-transversal-choice</code>).</li>
+<li>Through recorded arrows, therefore also Gallin comprehension with
+BF, C5 with Actuality, and boxed Functional Choice.</li>
 </ul>
-<p>Conversely Transversal Choice implies Relational Choice over C, by rigid pairs <span class="math inline">\lambda uv\, .\,u=x\land v=y</span> (<code>transversal-choice-r-implies-relational-choice-r</code>). So the question is whether Transversal Choice is strictly stronger.</p>
-<h2 id="transversal-added-28-september-2026">Transversal (added 28 September 2026)</h2>
-<p>Christopher Sun isolated the missing ingredient on 26 September 2026 as the principle Transversal: some <span class="math inline">F^{(\sigma t)t}</span> picks out exactly one property from each coextension class. It is Transversal Choice for coextensiveness, and with Relational Choice it gives Transversal Choice by running the quotient argument on the <span class="math inline">F</span>-representative of each cell (<code>transversal-and-relational-choice-imply-transversal-choice</code>). The question above is therefore equivalent to whether Relational Choice implies Transversal. Actuality implies Transversal (Sun, <code>actuality-implies-transversal</code>), and hence so does everything on the map that implies Actuality, including Weak Rigid Comprehension; there weak rigidity itself also serves as <span class="math inline">F</span>, by the first paragraph of the proof of <code>relational-choice-and-weak-rigid-comprehension-imply-transversal-choice</code>.</p>
+<p>Conversely Transversal Choice implies Relational Choice over C, by
+rigid pairs <span class="math inline">\lambda uv\, .\,u=x\land
+v=y</span>
+(<code>transversal-choice-r-implies-relational-choice-r</code>). So the
+question is whether Transversal Choice is strictly stronger.</p>
+<h2 id="transversal-added-28-september-2026">Transversal (added 28
+September 2026)</h2>
+<p>Christopher Sun isolated the missing ingredient on 26 September 2026
+as the principle Transversal: some <span class="math inline">F^{(\sigma
+t)t}</span> picks out exactly one property from each coextension class.
+It is Transversal Choice for coextensiveness, and with Relational Choice
+it gives Transversal Choice by running the quotient argument on the
+<span class="math inline">F</span>-representative of each cell
+(<code>transversal-and-relational-choice-imply-transversal-choice</code>).
+The question above is therefore equivalent to whether Relational Choice
+implies Transversal. Actuality implies Transversal (Sun,
+<code>actuality-implies-transversal</code>), and hence so does
+everything on the map that implies Actuality, including Weak Rigid
+Comprehension; there weak rigidity itself also serves as <span
+class="math inline">F</span>, by the first paragraph of the proof of
+<code>relational-choice-and-weak-rigid-comprehension-imply-transversal-choice</code>.</p>
 <h2 id="models">Models</h2>
-<p>Every recorded model of Relational Choice is extensionally full at its evaluation point: each set of tuples from the domains there is the extension of a rigid element (full models, ideally full action models, full Henkin models, and the free root components of the coalesced sums). That is how Relational Choice is verified in them, by choice in the metatheory, and the same choice of a transversal set verifies Transversal Choice. None separates the two principles.</p>
-<p>Symmetric Henkin models in the Fraenkel–Mostowski style cannot separate them either. Let a group <span class="math inline">G</span> act on a set <span class="math inline">W</span> of worlds and on <span class="math inline">D_e</span>, let <span class="math inline">\mathcal F</span> be a normal filter of subgroups, and form the hereditarily symmetric hierarchy: <span class="math inline">D_t</span> the symmetric subsets of <span class="math inline">W</span>, and <span class="math inline">D_{\sigma\tau}</span> the symmetric functions <span class="math inline">D_\sigma\to D_\tau</span>, where <span class="math inline">(gf)(x)=g\,f(g^{-1}x)</span> and symmetric means fixed by some member of <span class="math inline">\mathcal F</span>. The value of a term with symmetric parameters is symmetric, so this is a Henkin model of C. Evaluate at <span class="math inline">w_0</span> with stabilizer <span class="math inline">G_0</span>, and write <span class="math inline">H_0:=H\cap G_0</span>.</p>
-<p>Suppose Relational Choice holds at <span class="math inline">w_0</span>, and let <span class="math inline">S</span>, fixed by <span class="math inline">K\in\mathcal
-F</span>, be a functional subrelation of the relation <span class="math inline">U</span> above at types <span class="math inline">(\sigma t,\sigma)</span>. Take <span class="math inline">H\in\mathcal F</span> with <span class="math inline">H\subseteq K</span> and <span class="math inline">z_0\in D_\sigma</span>. Let <span class="math inline">p</span> be the orbit of <span class="math inline">w_0</span> under <span class="math inline">H\cap\mathrm{Stab}(z_0)</span>, a symmetric proposition, and let <span class="math inline">f(z)</span> be <span class="math inline">gp</span> for any <span class="math inline">g\in H</span> with <span class="math inline">gz_0=z</span>, and empty if there is none. This is well defined, <span class="math inline">f</span> is fixed by <span class="math inline">H</span>, each <span class="math inline">f(z)</span> is fixed by <span class="math inline">H\cap\mathrm{Stab}(z)</span>, so <span class="math inline">f\in D_{\sigma t}</span>, and a short computation shows that the extension of <span class="math inline">f</span> at <span class="math inline">w_0</span> is the orbit <span class="math inline">H_0z_0</span>. The element <span class="math inline">y</span> chosen by <span class="math inline">S</span> from <span class="math inline">f</span> lies in that orbit and is fixed by <span class="math inline">K\cap\mathrm{Stab}(f)\cap G_0\supseteq H_0</span>. Hence <span class="math inline">H_0z_0=H_0y=\{y\}</span>, and <span class="math inline">z_0</span> is fixed by <span class="math inline">H_0</span>. So <span class="math inline">K_0</span> acts trivially on every domain. Then for an equivalence relation at <span class="math inline">w_0</span> take a transversal <span class="math inline">T</span> of its extension there and put <span class="math inline">F(z):=\{gw_0: g\in K,\ g^{-1}z\in T\}</span>: <span class="math inline">F</span> is <span class="math inline">K</span>-symmetric, each <span class="math inline">F(z)</span> is <span class="math inline">(K\cap\mathrm{Stab}(z))</span>-symmetric, and the extension of <span class="math inline">F</span> at <span class="math inline">w_0</span> is <span class="math inline">K_0T=T</span>. Transversal Choice holds.</p>
-<h2 id="what-would-settle-the-question">What would settle the question</h2>
-<p>A proof must use the chosen relation <span class="math inline">S</span> itself to break the symmetry between coextensive cells, not a canonical property definable from <span class="math inline">R</span>. A countermodel must be a model of C with Relational Choice that is not extensionally full at its evaluation point and that escapes the symmetric-model argument above, for example a Henkin model whose domains are the definable closure of a seed relation, with definable choice for every definable serial relation but no definable transversal. No construction of that kind is available in the sources of the map. The expectation recorded here is that the implication fails.</p>
+<p>Every recorded model of Relational Choice is extensionally full at
+its evaluation point: each set of tuples from the domains there is the
+extension of a rigid element (full models, ideally full action models,
+full Henkin models, and the free root components of the coalesced sums).
+That is how Relational Choice is verified in them, by choice in the
+metatheory, and the same choice of a transversal set verifies
+Transversal Choice. None separates the two principles.</p>
+<p>Symmetric Henkin models in the Fraenkel–Mostowski style cannot
+separate them either. Let a group <span class="math inline">G</span> act
+on a set <span class="math inline">W</span> of worlds and on <span
+class="math inline">D_e</span>, let <span class="math inline">\mathcal
+F</span> be a normal filter of subgroups, and form the hereditarily
+symmetric hierarchy: <span class="math inline">D_t</span> the symmetric
+subsets of <span class="math inline">W</span>, and <span
+class="math inline">D_{\sigma\tau}</span> the symmetric functions <span
+class="math inline">D_\sigma\to D_\tau</span>, where <span
+class="math inline">(gf)(x)=g\,f(g^{-1}x)</span> and symmetric means
+fixed by some member of <span class="math inline">\mathcal F</span>. The
+value of a term with symmetric parameters is symmetric, so this is a
+Henkin model of C. Evaluate at <span class="math inline">w_0</span> with
+stabilizer <span class="math inline">G_0</span>, and write <span
+class="math inline">H_0:=H\cap G_0</span>.</p>
+<p>Suppose Relational Choice holds at <span
+class="math inline">w_0</span>, and let <span
+class="math inline">S</span>, fixed by <span
+class="math inline">K\in\mathcal
+F</span>, be a functional subrelation of the relation <span
+class="math inline">U</span> above at types <span
+class="math inline">(\sigma t,\sigma)</span>. Take <span
+class="math inline">H\in\mathcal F</span> with <span
+class="math inline">H\subseteq K</span> and <span
+class="math inline">z_0\in D_\sigma</span>. Let <span
+class="math inline">p</span> be the orbit of <span
+class="math inline">w_0</span> under <span
+class="math inline">H\cap\mathrm{Stab}(z_0)</span>, a symmetric
+proposition, and let <span class="math inline">f(z)</span> be <span
+class="math inline">gp</span> for any <span class="math inline">g\in
+H</span> with <span class="math inline">gz_0=z</span>, and empty if
+there is none. This is well defined, <span class="math inline">f</span>
+is fixed by <span class="math inline">H</span>, each <span
+class="math inline">f(z)</span> is fixed by <span
+class="math inline">H\cap\mathrm{Stab}(z)</span>, so <span
+class="math inline">f\in D_{\sigma t}</span>, and a short computation
+shows that the extension of <span class="math inline">f</span> at <span
+class="math inline">w_0</span> is the orbit <span
+class="math inline">H_0z_0</span>. The element <span
+class="math inline">y</span> chosen by <span
+class="math inline">S</span> from <span class="math inline">f</span>
+lies in that orbit and is fixed by <span
+class="math inline">K\cap\mathrm{Stab}(f)\cap G_0\supseteq H_0</span>.
+Hence <span class="math inline">H_0z_0=H_0y=\{y\}</span>, and <span
+class="math inline">z_0</span> is fixed by <span
+class="math inline">H_0</span>. So <span class="math inline">K_0</span>
+acts trivially on every domain. Then for an equivalence relation at
+<span class="math inline">w_0</span> take a transversal <span
+class="math inline">T</span> of its extension there and put <span
+class="math inline">F(z):=\{gw_0: g\in K,\ g^{-1}z\in T\}</span>: <span
+class="math inline">F</span> is <span
+class="math inline">K</span>-symmetric, each <span
+class="math inline">F(z)</span> is <span
+class="math inline">(K\cap\mathrm{Stab}(z))</span>-symmetric, and the
+extension of <span class="math inline">F</span> at <span
+class="math inline">w_0</span> is <span
+class="math inline">K_0T=T</span>. Transversal Choice holds.</p>
+<h2 id="what-would-settle-the-question">What would settle the
+question</h2>
+<p>A proof must use the chosen relation <span
+class="math inline">S</span> itself to break the symmetry between
+coextensive cells, not a canonical property definable from <span
+class="math inline">R</span>. A countermodel must be a model of C with
+Relational Choice that is not extensionally full at its evaluation point
+and that escapes the symmetric-model argument above, for example a
+Henkin model whose domains are the definable closure of a seed relation,
+with definable choice for every definable serial relation but no
+definable transversal. No construction of that kind is available in the
+sources of the map. The expectation recorded here is that the
+implication fails.</p>
 </body></html>

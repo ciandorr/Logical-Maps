@@ -18,6 +18,12 @@ A strong world is a weak world: $\operatorname{SWorld}_\sigma(W)$ has the conjun
 
 The map’s Atomicity is stated with the predicate Atom, which coincides with WWorld: a non-bottom entity every non-bottom part of which is itself, equivalently one that settles every entity of the type.
 
+The Strong Leibniz Biconditionals are equivalent to Atomicity together with [[atoms-are-strong-worlds-r]]; see [[strong-leibniz-r-implies-atoms-are-strong-worlds-r]].
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Philosophical Introduction to HOL** — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, p. 170 (proof of Theorem 8.2).

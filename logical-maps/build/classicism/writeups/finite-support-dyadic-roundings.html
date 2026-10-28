@@ -322,45 +322,147 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: dyadic roundings of N</h1></header><h2 id="failure-of-boolean-completeness-at-type-t">Failure of Boolean Completeness at type <span class="math inline">t</span></h2>
-<p>At the identity arrow of this one-object action model, propositions are sets of arrows pinned down by a finite set of individuals. Algebraic entailment is set inclusion, and Boolean operations are the set operations.</p>
-<p>The higher-type domain obligation is essential. By <em>Classicism</em>, Definition D.3 and the following paragraph (16 May 2023 draft, pp. 73–74), an ideally full model is extensionally full. Consequently every set <span class="math inline">R\subseteq D_t</span> is the extension, at the identity, of a property of propositions. Concretely, the intension <span class="math inline">I_R=\{(h,p):p\in R\}</span> is independent of its arrow argument and is pinned down by the empty set. Its applicative behaviour is <span class="math inline">X_R\langle h,p\rangle=\{j:j^t p\in R\}</span>, not a constant truth-value function. This distinction supplies domain membership without the false rigidification argument in some trawl notes.</p>
-<p>Thus a family of domain propositions with no least upper bound refutes Boolean Completeness at type <span class="math inline">t</span>: the family of their complements is also the extension of a domain property, and a greatest lower bound for those complements would, by complementation, give the missing least upper bound. The bounds are taken <strong>inside</strong> <span class="math inline">D_t</span>. A set-theoretic intersection absent from <span class="math inline">D_t</span> need not by itself establish a missing greatest lower bound.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Finite-support action model: dyadic roundings of N</h1></header><h2 id="failure-of-boolean-completeness-at-type-t">Failure of Boolean
+Completeness at type <span class="math inline">t</span></h2>
+<p>At the identity arrow of this one-object action model, propositions
+are sets of arrows pinned down by a finite set of individuals. Algebraic
+entailment is set inclusion, and Boolean operations are the set
+operations.</p>
+<p>The higher-type domain obligation is essential. By
+<em>Classicism</em>, Definition D.3 and the following paragraph (16 May
+2023 draft, pp. 73–74), an ideally full model is extensionally full.
+Consequently every set <span class="math inline">R\subseteq D_t</span>
+is the extension, at the identity, of a property of propositions.
+Concretely, the intension <span class="math inline">I_R=\{(h,p):p\in
+R\}</span> is independent of its arrow argument and is pinned down by
+the empty set. Its applicative behaviour is <span
+class="math inline">X_R\langle h,p\rangle=\{j:j^t p\in R\}</span>, not a
+constant truth-value function. This distinction supplies domain
+membership without the false rigidification argument in some trawl
+notes.</p>
+<p>Thus a family of domain propositions with no least upper bound
+refutes Boolean Completeness at type <span class="math inline">t</span>:
+the family of their complements is also the extension of a domain
+property, and a greatest lower bound for those complements would, by
+complementation, give the missing least upper bound. The bounds are
+taken <strong>inside</strong> <span class="math inline">D_t</span>. A
+set-theoretic intersection absent from <span
+class="math inline">D_t</span> need not by itself establish a missing
+greatest lower bound.</p>
 <h3 id="the-domain-and-missing-bound">The domain and missing bound</h3>
-<p>Index the arrows by <span class="math inline">j\ge0</span>, writing <span class="math inline">f_{2^j}(m)=2^j\lfloor m/2^j\rfloor</span>. Composition takes the maximum of the indices. For any finite support <span class="math inline">F</span>, every sufficiently large <span class="math inline">2^j</span> exceeds all members of <span class="math inline">F</span>, so all the corresponding arrows vanish on <span class="math inline">F</span>. Conversely, for a finite collection of indices, an initial segment including the relevant powers of two distinguishes their arrows and the remaining tail. Hence <span class="math inline">D_t</span> is precisely the finite/cofinite algebra on these indices.</p>
-<p>Every singleton with an even index belongs to <span class="math inline">D_t</span>. Let <span class="math inline">R</span> be the family of those singletons. An upper bound in <span class="math inline">D_t</span> must contain all even indices, so it is cofinite. It therefore contains an odd index <span class="math inline">j</span>. Removing that singleton yields a strictly smaller cofinite upper bound. There is no least upper bound, so the preceding domain argument refutes Boolean Completeness at type <span class="math inline">t</span>.</p>
+<p>Index the arrows by <span class="math inline">j\ge0</span>, writing
+<span class="math inline">f_{2^j}(m)=2^j\lfloor m/2^j\rfloor</span>.
+Composition takes the maximum of the indices. For any finite support
+<span class="math inline">F</span>, every sufficiently large <span
+class="math inline">2^j</span> exceeds all members of <span
+class="math inline">F</span>, so all the corresponding arrows vanish on
+<span class="math inline">F</span>. Conversely, for a finite collection
+of indices, an initial segment including the relevant powers of two
+distinguishes their arrows and the remaining tail. Hence <span
+class="math inline">D_t</span> is precisely the finite/cofinite algebra
+on these indices.</p>
+<p>Every singleton with an even index belongs to <span
+class="math inline">D_t</span>. Let <span class="math inline">R</span>
+be the family of those singletons. An upper bound in <span
+class="math inline">D_t</span> must contain all even indices, so it is
+cofinite. It therefore contains an odd index <span
+class="math inline">j</span>. Removing that singleton yields a strictly
+smaller cofinite upper bound. There is no least upper bound, so the
+preceding domain argument refutes Boolean Completeness at type <span
+class="math inline">t</span>.</p>
 <h2 id="attribution-and-review">Attribution and review</h2>
-<p>The model construction is Bacon and Dorr’s. Their footnote 92 (p. 74) conjectures the additional type-<span class="math inline">t</span> Boolean Completeness failures. DeepSeek (<code>deepseek-flash</code>) proposed this model verdict in the trawl of 25 September 2026. OpenAI Codex (GPT-6) checked the source definitions and supplied the corrected proof above on the same date. The immutable drafts and exact API edit provenance are identified in the model record’s <code>certificate.trawl</code>. This is an informal mathematical review; no Lean verification is claimed.</p>
-<h2 id="strong-worlds-and-barcan">Strong worlds and Barcan</h2>
-<p>The finite-support truncation model, the finite-support dyadic-rounding model, and the full two-arrow idempotent model all fail the type-t Strong Leibniz Biconditionals. The truncation model also fails BF at type t. These statements concern the existing constructions; no modification of their domains is needed.</p>
-<p>The Strong Leibniz failures were proposed in the DeepSeek <code>deepseek-flash</code> trawl of 25 September 2026. OpenAI Codex (GPT-6) checked them against the source semantics and supplied the unified proof below on the same date. The direct BF witness below was supplied during that review to repair the trawl’s unsupported use of a converse to Proposition 3.24(ii). These are informal mathematical checks, without Lean verification. The model constructions remain attributed to Bacon and Dorr.</p>
-<h2 id="quantification-at-a-successor">Quantification at a successor</h2>
-<p>We use Bacon and Dorr, <em>Classicism</em>, draft of 16 May 2023, Definition 3.19, pp.55–56, and the satisfaction clauses on p.57. At an arrow from an object W to an object V, assigned entities are transported to V, while newly bound variables range over V’s entire domain. They do not range merely over the image of W’s domain under that arrow.</p>
-<p>For a one-object model let A be its monoid and P its type-t domain. Its proposition action is</p>
+<p>The model construction is Bacon and Dorr’s. Their footnote 92 (p. 74)
+conjectures the additional type-<span class="math inline">t</span>
+Boolean Completeness failures. DeepSeek (<code>deepseek-flash</code>)
+proposed this model verdict in the trawl of 25 September 2026. OpenAI
+Codex (GPT-6) checked the source definitions and supplied the corrected
+proof above on the same date. The immutable drafts and exact API edit
+provenance are identified in the model record’s
+<code>certificate.trawl</code>. This is an informal mathematical review;
+no Lean verification is claimed.</p>
+<h2 id="strong-atoms-and-barcan">Strong atoms and Barcan</h2>
+<p>The finite-support truncation model, the finite-support
+dyadic-rounding model, and the full two-arrow idempotent model all fail
+the type-t Strong Atomicity Biconditionals. The truncation model also
+fails BF at type t. These statements concern the existing constructions;
+no modification of their domains is needed.</p>
+<p>Strong Atomicity failures were proposed in the DeepSeek
+<code>deepseek-flash</code> trawl of 25 September 2026. OpenAI Codex
+(GPT-6) checked them against the source semantics and supplied the
+unified proof below on the same date. The direct BF witness below was
+supplied during that review to repair the trawl’s unsupported use of a
+converse to Proposition 3.24(ii). These are informal mathematical
+checks, without Lean verification. The model constructions remain
+attributed to Bacon and Dorr.</p>
+<h2 id="quantification-at-a-successor">Quantification at a
+successor</h2>
+<p>We use Bacon and Dorr, <em>Classicism</em>, draft of 16 May 2023,
+Definition 3.19, pp.55–56, and the satisfaction clauses on p.57. At an
+arrow from an object W to an object V, assigned entities are transported
+to V, while newly bound variables range over V’s entire domain. They do
+not range merely over the image of W’s domain under that arrow.</p>
+<p>For a one-object model let A be its monoid and P its type-t domain.
+Its proposition action is</p>
 <p><span class="math display">
 h^t p=\{u\in A:u\circ h\in p\}.
 </span></p>
-<p>At the basepoint, possibility means nonemptiness and entailment means set inclusion. Consequently an admitted proposition w is a strong world exactly when it is nonempty and, for every arrow h and every <strong>target-domain</strong> proposition Y in P,</p>
+<p>At the basepoint, possibility means nonemptiness and entailment means
+set inclusion. Consequently an admitted proposition w is a strong atom
+exactly when it is nonempty and, for every arrow h and every
+<strong>target-domain</strong> proposition Y in P,</p>
 <p><span class="math display">
 h^t w\subseteq Y\quad\text{or}\quad h^t w\subseteq A\setminus Y.
 </span></p>
-<p>The quantifier over Y here is inside the box in the definition of a strong world. Restricting it to propositions of the form h^t p changes the definition and gives the wrong answer in the examples below.</p>
-<h2 id="a-nonidentity-idempotent-refutes-strong-leibniz">A nonidentity idempotent refutes Strong Leibniz</h2>
-<p>Suppose h is a nonidentity idempotent arrow and the singleton p={h} is an admitted proposition. Then p is possible, and the only possible proposition w entailing p is p itself. But</p>
+<p>The quantifier over Y here is inside the box in the definition of a
+strong atom. Restricting it to propositions of the form h^t p changes
+the definition and gives the wrong answer in the examples below.</p>
+<h2 id="a-nonidentity-idempotent-refutes-strong-atomicity">A nonidentity
+idempotent refutes Strong Atomicity</h2>
+<p>Suppose h is a nonidentity idempotent arrow and the singleton p={h}
+is an admitted proposition. Then p is possible, and the only possible
+proposition w entailing p is p itself. But</p>
 <p><span class="math display">
 1,h\in h^t\{h\},
 </span></p>
-<p>because both 1∘h and h∘h equal h. At the successor h, take the independently quantified proposition Y={h}. The shift h^t{h} meets Y at h and meets its complement at 1. It therefore entails neither Y nor its negation. Thus p is not a strong world, and the possible p has no strong world below it.</p>
-<p>This proves failure of Strong Leibniz at type t in each of the following existing models:</p>
+<p>because both 1∘h and h∘h equal h. At the successor h, take the
+independently quantified proposition Y={h}. The shift h^t{h} meets Y at
+h and meets its complement at 1. It therefore entails neither Y nor its
+negation. Thus p is not a strong atom, and the possible p has no strong
+atom below it.</p>
+<p>This proves failure of Strong Atomicity at type t in each of the
+following existing models:</p>
 <ul>
-<li><strong>Full idempotent monoid:</strong> A={1,k}, with k²=k and k≠1. Every subset of A is a proposition, so take h=k. The construction is <em>Classicism</em>, §3.5, p.59. In this model the only strong world at the basepoint is {1}; the possible proposition {k} has none below it.</li>
-<li><strong>Finite-support truncations:</strong> arrows are the identity and g_n(m)=min(m,n). Take h=g_0. Its singleton is pinned down by the finite individual set {0,1}: g_0 is the unique arrow sending 1 to 0. Also g_0²=g_0≠1. See Proposition D.5(6), construction on p.78.</li>
-<li><strong>Finite-support dyadic roundings:</strong> f_n rounds down to a multiple of n, for n a power of two. Take h=f_2. The singleton {f_2} is pinned by {0,1,2}, since f_2(1)=0 and f_2(2)=2 distinguish it from the identity and all coarser dyadic roundings. Also f_2²=f_2≠1. See Proposition D.5(7), construction on p.78.</li>
+<li><strong>Full idempotent monoid:</strong> A={1,k}, with k²=k and k≠1.
+Every subset of A is a proposition, so take h=k. The construction is
+<em>Classicism</em>, §3.5, p.59. In this model the only strong atom at
+the basepoint is {1}; the possible proposition {k} has none below
+it.</li>
+<li><strong>Finite-support truncations:</strong> arrows are the identity
+and g_n(m)=min(m,n). Take h=g_0. Its singleton is pinned down by the
+finite individual set {0,1}: g_0 is the unique arrow sending 1 to 0.
+Also g_0²=g_0≠1. See Proposition D.5(6), construction on p.78.</li>
+<li><strong>Finite-support dyadic roundings:</strong> f_n rounds down to
+a multiple of n, for n a power of two. Take h=f_2. The singleton {f_2}
+is pinned by {0,1,2}, since f_2(1)=0 and f_2(2)=2 distinguish it from
+the identity and all coarser dyadic roundings. Also f_2²=f_2≠1. See
+Proposition D.5(7), construction on p.78.</li>
 </ul>
-<p>In all three cases, the necessary type-t Strong Leibniz Biconditionals fail as well: by T, their truth would imply the unboxed sentence. This corrects the earlier positive flag for the full idempotent model. Its source construction and other independently established properties are unchanged.</p>
-<p>For comparison, in a group h<sup>t{g}={g∘h</sup>{-1}} is a singleton, and in the truncated-shift monoid k_n∘k_m=k_{n+m}, each such precomposition fibre is empty or a singleton. Their singleton worlds therefore do decide every target proposition. Those positive Strong Leibniz verdicts already follow from the map’s Atomicity and Barcan rules.</p>
-<h2 id="a-finitely-pinned-bft-witness-in-the-truncation-model">A finitely pinned BF(t) witness in the truncation model</h2>
-<p>Let A and P now be the truncation monoid and its proposition domain. Define an intension for a property X of propositions by assigning the following extensions to arrows:</p>
+<p>In all three cases, the necessary type-t Strong Atomicity fails as
+well: by T, their truth would imply the unboxed sentence. This corrects
+the earlier positive flag for the full idempotent model. Its source
+construction and other independently established properties are
+unchanged.</p>
+<p>For comparison, in a group h<sup>t{g}={g∘h</sup>{-1}} is a singleton,
+and in the truncated-shift monoid k_n∘k_m=k_{n+m}, each such
+precomposition fibre is empty or a singleton. Their singleton worlds
+therefore do decide every target proposition. Those positive Strong
+Atomicity verdicts already follow from the map’s Atomicity and Barcan
+rules.</p>
+<h2 id="a-finitely-pinned-bft-witness-in-the-truncation-model">A
+finitely pinned BF(t) witness in the truncation model</h2>
+<p>Let A and P now be the truncation monoid and its proposition domain.
+Define an intension for a property X of propositions by assigning the
+following extensions to arrows:</p>
 <p><span class="math display">
 I_h=
 \begin{cases}
@@ -368,8 +470,14 @@ I_h=
 P,&amp;h\ne g_0.
 \end{cases}
 </span></p>
-<p>This is an admissible type-tt entity. Indeed h=g_0 exactly when h(1)=0, so the intension is pinned down by the finite individual set {1}. Definition D.3’s equivalent intension characterization on p.74 places every such finitely pinned intension in this ideally full model’s domain.</p>
-<p>For every proposition p assigned at the base and every arrow h, h^t p belongs to I_h. For h≠g_0 this is immediate. For h=g_0, the identity u∘g_0=g_0 for every arrow u gives</p>
+<p>This is an admissible type-tt entity. Indeed h=g_0 exactly when
+h(1)=0, so the intension is pinned down by the finite individual set
+{1}. Definition D.3’s equivalent intension characterization on p.74
+places every such finitely pinned intension in this ideally full model’s
+domain.</p>
+<p>For every proposition p assigned at the base and every arrow h, h^t p
+belongs to I_h. For h≠g_0 this is immediate. For h=g_0, the identity
+u∘g_0=g_0 for every arrow u gives</p>
 <p><span class="math display">
 g_0^t p=
 \begin{cases}
@@ -377,21 +485,115 @@ A,&amp;g_0\in p,\\
 \varnothing,&amp;g_0\notin p,
 \end{cases}
 </span></p>
-<p>and both values belong to I_{g_0}. Thus forall p Box Xp holds at the base.</p>
-<p>At the successor g_0 the quantifier ranges over all of P. In particular, the admitted proposition {g_0} is neither A nor empty and does not belong to I_{g_0}. Hence forall p Xp is false there, and Box forall p Xp is false at the base. This X refutes</p>
+<p>and both values belong to I_{g_0}. Thus forall p Box Xp holds at the
+base.</p>
+<p>At the successor g_0 the quantifier ranges over all of P. In
+particular, the admitted proposition {g_0} is neither A nor empty and
+does not belong to I_{g_0}. Hence forall p Xp is false there, and Box
+forall p Xp is false at the base. This X refutes</p>
 <p><span class="math display">
 \forall X^{tt}\bigl((\forall p\,\Box Xp)\to\Box\forall p\,Xp\bigr).
 </span></p>
-<p>The boxed BF(t) sentence fails by T. Appendix D, footnote 92 on p.74 also explicitly covers BF failure at every type in this example. The direct witness above makes clear why no converse to Proposition 3.24(ii) is being assumed for an arbitrary non-full model.</p>
+<p>The boxed BF(t) sentence fails by T. Appendix D, footnote 92 on p.74
+also explicitly covers BF failure at every type in this example. The
+direct witness above makes clear why no converse to Proposition 3.24(ii)
+is being assumed for an arbitrary non-full model.</p>
 <h2 id="sources-and-verification">Sources and verification</h2>
 <ul>
-<li>Bacon, Andrew, and Cian Dorr, <em>Classicism</em>, draft of 16 May 2023, <a href="https://philpapers.org/archive/BACC-8.pdf">public reference</a>: pp.55–58 for action semantics and Proposition 3.24; p.59 for the idempotent model; Definitions D.1–D.3, pp.73–74, for ideals, pinning and ideally full domains; Proposition D.5(6–7), p.78, for truncations and dyadic roundings.</li>
-<li>The exact finite calculation in <code>checks/action_strong_worlds.py</code> enumerates all four propositions of the two-arrow monoid and the successor-domain quantifier in the strong-world condition. It also checks the analogous BF witness and demonstrates the erroneous answer obtained by restricting successor quantifiers to transported propositions. This finite calculation supplements the proofs; it does not replace the infinite-model argument above.</li>
+<li>Bacon, Andrew, and Cian Dorr, <em>Classicism</em>, draft of 16 May
+2023, <a href="https://philpapers.org/archive/BACC-8.pdf">public
+reference</a>: pp.55–58 for action semantics and Proposition 3.24; p.59
+for the idempotent model; Definitions D.1–D.3, pp.73–74, for ideals,
+pinning and ideally full domains; Proposition D.5(6–7), p.78, for
+truncations and dyadic roundings.</li>
+<li>The exact finite calculation in
+<code>checks/action_strong_atoms.py</code> enumerates all four
+propositions of the two-arrow monoid and the successor-domain quantifier
+in the strong-world condition. It also checks the analogous BF witness
+and demonstrates the erroneous answer obtained by restricting successor
+quantifiers to transported propositions. This finite calculation
+supplements the proofs; it does not replace the infinite-model argument
+above.</li>
 </ul>
-<h2 id="additional-arguments-25-september-2026">Additional arguments (25 September 2026)</h2>
-<p>The type-<span class="math inline">t</span> Strong Leibniz Biconditionals fail although Atomicity holds, so the two come apart here. A strong world is an atom, and the atoms are the singletons <span class="math inline">\{f_n\}</span>. Seen from <span class="math inline">f_n</span> with <span class="math inline">n\ge2</span>, <span class="math inline">\{f_n\}</span> becomes <span class="math inline">\{k : k\circ f_n=f_n\}=\{f_m : m\le n\}</span>, since <span class="math inline">f_m\circ f_n=f_{\max\{m,n\}}</span>, and the proposition <span class="math inline">\{f_1\}</span> splits that set. So the only strong world is <span class="math inline">\{f_1\}</span>, whose transport along every other arrow is empty, and the possible proposition <span class="math inline">\{f_2\}</span> has no strong world below it. BF fails at type <span class="math inline">t</span> as a consequence, by the recorded result that Atomicity (type <span class="math inline">t</span>) and BF (type <span class="math inline">t</span>) imply the type-<span class="math inline">t</span> Strong Leibniz Biconditionals. Directly: transports along <span class="math inline">f_n</span> depend only on an arrow’s values on the multiples of <span class="math inline">n</span>, where <span class="math inline">f_1</span> and <span class="math inline">f_2</span> agree, so for <span class="math inline">n\ge2</span> the actual world <span class="math inline">\{f_1\}</span> is the transport along <span class="math inline">f_n</span> of no proposition; so for the relation <span class="math inline">X</span> holding of every proposition except <span class="math inline">\{f_1\}</span> at the arrows sending <span class="math inline">1</span> to <span class="math inline">0</span>, pinned down by <span class="math inline">\{1\}</span>, <span class="math inline">\forall p\, .\,\Box Xp</span> holds at the identity but <span class="math inline">\Box\forall p\, .\,Xp</span> fails at <span class="math inline">f_2</span>. Observations of 23 September 2026, answering Cian Dorr’s questions whether the failure of BF sharpens to type <span class="math inline">t</span> and whether failures of Atomicity’s strengthening can be found where Atomicity holds; the derivation of BF’s failure from them, 25 September 2026. Boolean Completeness fails at type <span class="math inline">t</span> as well, which the source (n. 92) conjectures but does not show. Any set <span class="math inline">F</span> of propositions is the extension at the identity of an element of the domain at type <span class="math inline">t\to t</span>, namely the profile <span class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in F\}</span>: it is natural, independent of <span class="math inline">h</span> and so pinned down by the empty set, and each of its values is pinned down by the pinning set of <span class="math inline">p</span>, since <span class="math inline">i\cdot p</span> depends only on the values of <span class="math inline">i</span> there. A least upper bound of <span class="math inline">F</span> under entailment is a least finitely pinned superset of <span class="math inline">\bigcup F</span>, and it exists only if the least <span class="math inline">S</span>-pinned superset of <span class="math inline">\bigcup F</span> stops shrinking as the finite set <span class="math inline">S</span> grows. Here an arrow <span class="math inline">f_n</span> is determined by its value at any <span class="math inline">m\ge n</span> and all <span class="math inline">f_n</span> with <span class="math inline">n&gt;N</span> agree on <span class="math inline">\{0,\ldots,N\}</span>, so the finitely pinned propositions are exactly the finite and cofinite sets of arrows. Let <span class="math inline">F</span> be the family of singletons <span class="math inline">\{f_n\}</span> for <span class="math inline">n</span> an even power of <span class="math inline">2</span>: an upper bound is a cofinite set containing them, and removing an odd-power member of it gives a strictly smaller upper bound. So <span class="math inline">F</span> has no least upper bound, and, taking pointwise negations, the family of complements has no greatest lower bound. Observation of Claude Fable 5.1 (Anthropic), 25 September 2026; not in the source.</p>
+<h2 id="additional-arguments-25-september-2026">Additional arguments (25
+September 2026)</h2>
+<p>The type-<span class="math inline">t</span> Strong Atomicity fails
+although Atomicity holds, so the two come apart here. A strong atom is
+an atom, and the atoms are the singletons <span
+class="math inline">\{f_n\}</span>. Seen from <span
+class="math inline">f_n</span> with <span
+class="math inline">n\ge2</span>, <span
+class="math inline">\{f_n\}</span> becomes <span class="math inline">\{k
+: k\circ f_n=f_n\}=\{f_m : m\le n\}</span>, since <span
+class="math inline">f_m\circ f_n=f_{\max\{m,n\}}</span>, and the
+proposition <span class="math inline">\{f_1\}</span> splits that set. So
+the only strong atom is <span class="math inline">\{f_1\}</span>, whose
+transport along every other arrow is empty, and the possible proposition
+<span class="math inline">\{f_2\}</span> has no strong atom below it. BF
+fails at type <span class="math inline">t</span> as a consequence, by
+the recorded result that Atomicity (type <span
+class="math inline">t</span>) and BF (type <span
+class="math inline">t</span>) imply the type-<span
+class="math inline">t</span> Strong Atomicity. Directly: transports
+along <span class="math inline">f_n</span> depend only on an arrow’s
+values on the multiples of <span class="math inline">n</span>, where
+<span class="math inline">f_1</span> and <span
+class="math inline">f_2</span> agree, so for <span
+class="math inline">n\ge2</span> the actual world <span
+class="math inline">\{f_1\}</span> is the transport along <span
+class="math inline">f_n</span> of no proposition; so for the relation
+<span class="math inline">X</span> holding of every proposition except
+<span class="math inline">\{f_1\}</span> at the arrows sending <span
+class="math inline">1</span> to <span class="math inline">0</span>,
+pinned down by <span class="math inline">\{1\}</span>, <span
+class="math inline">\forall p\, .\,\Box Xp</span> holds at the identity
+but <span class="math inline">\Box\forall p\, .\,Xp</span> fails at
+<span class="math inline">f_2</span>. Observations of 23 September 2026,
+answering Cian Dorr’s questions whether the failure of BF sharpens to
+type <span class="math inline">t</span> and whether failures of
+Atomicity’s strengthening can be found where Atomicity holds; the
+derivation of BF’s failure from them, 25 September 2026. Boolean
+Completeness fails at type <span class="math inline">t</span> as well,
+which the source (n. 92) conjectures but does not show. Any set <span
+class="math inline">F</span> of propositions is the extension at the
+identity of an element of the domain at type <span
+class="math inline">t\to t</span>, namely the profile <span
+class="math inline">\langle h,p\rangle\mapsto\{i : i\cdot p\in
+F\}</span>: it is natural, independent of <span
+class="math inline">h</span> and so pinned down by the empty set, and
+each of its values is pinned down by the pinning set of <span
+class="math inline">p</span>, since <span class="math inline">i\cdot
+p</span> depends only on the values of <span
+class="math inline">i</span> there. A least upper bound of <span
+class="math inline">F</span> under entailment is a least finitely pinned
+superset of <span class="math inline">\bigcup F</span>, and it exists
+only if the least <span class="math inline">S</span>-pinned superset of
+<span class="math inline">\bigcup F</span> stops shrinking as the finite
+set <span class="math inline">S</span> grows. Here an arrow <span
+class="math inline">f_n</span> is determined by its value at any <span
+class="math inline">m\ge n</span> and all <span
+class="math inline">f_n</span> with <span
+class="math inline">n&gt;N</span> agree on <span
+class="math inline">\{0,\ldots,N\}</span>, so the finitely pinned
+propositions are exactly the finite and cofinite sets of arrows. Let
+<span class="math inline">F</span> be the family of singletons <span
+class="math inline">\{f_n\}</span> for <span
+class="math inline">n</span> an even power of <span
+class="math inline">2</span>: an upper bound is a cofinite set
+containing them, and removing an odd-power member of it gives a strictly
+smaller upper bound. So <span class="math inline">F</span> has no least
+upper bound, and, taking pointwise negations, the family of complements
+has no greatest lower bound. Observation of Claude Fable 5.1
+(Anthropic), 25 September 2026; not in the source.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, Proposition D.5(7), pp. 74–75; construction p. 78, Part 7; p. 79 (No Pure Contingency)</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, Proposition D.5(7), pp. 74–75; construction p. 78, Part 7;
+p. 79 (No Pure Contingency)</li>
 </ul>
 </body></html>

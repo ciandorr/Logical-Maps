@@ -15,10 +15,6 @@ change to a record or to a principle's `lean_def`.
 namespace Classicism.Statements
 open Classicism
 
-/-- Principle definition check: `actual-profile-r`. -/
-example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.ActualProfile.listSchemaIn
-
 /-- Principle definition check: `actuality`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.Actuality.schemaIn
@@ -34,6 +30,22 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 /-- Principle definition check: `atomlessness`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.Atomlessness.schemaIn
+
+/-- Principle definition check: `atoms-are-self-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.AtomsAreSelfAtoms.schemaIn
+
+/-- Principle definition check: `atoms-are-self-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.AtomsAreSelfAtomsT.schemaIn
+
+/-- Principle definition check: `atoms-are-strong-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.AtomsAreStrongAtoms.schemaIn
+
+/-- Principle definition check: `atoms-are-strong-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.AtomsAreStrongAtomsT.schemaIn
 
 /-- Principle definition check: `axiom-of-infinity-e`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
@@ -219,6 +231,22 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.NecAtomicityT.schemaIn
 
+/-- Principle definition check: `necessary-atoms-are-self-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecAtomsAreSelfAtoms.schemaIn
+
+/-- Principle definition check: `necessary-atoms-are-self-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecAtomsAreSelfAtomsT.schemaIn
+
+/-- Principle definition check: `necessary-atoms-are-strong-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecAtomsAreStrongAtoms.schemaIn
+
+/-- Principle definition check: `necessary-atoms-are-strong-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecAtomsAreStrongAtomsT.schemaIn
+
 /-- Principle definition check: `necessary-barcan-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.NecBarcan.schemaIn
@@ -327,17 +355,41 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.NecRigidRigidity.schemaIn
 
+/-- Principle definition check: `necessary-self-atomicity-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecSelfAtomicity.schemaIn
+
+/-- Principle definition check: `necessary-self-atomicity-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecSelfAtomicityT.schemaIn
+
+/-- Principle definition check: `necessary-self-atoms-are-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecSelfAtomsAreAtoms.schemaIn
+
+/-- Principle definition check: `necessary-self-atoms-are-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecSelfAtomsAreAtomsT.schemaIn
+
+/-- Principle definition check: `necessary-self-atoms-are-strong-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn
+
+/-- Principle definition check: `necessary-self-atoms-are-strong-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn
+
 /-- Principle definition check: `necessary-strong-actuality`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.NecStrongActuality.schemaIn
 
-/-- Principle definition check: `necessary-strong-leibniz-r`. -/
+/-- Principle definition check: `necessary-strong-atomicity-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.NecStrongLeibniz.schemaIn
+  Classicism.P.NecStrongAtomicity.schemaIn
 
-/-- Principle definition check: `necessary-strong-leibniz-t`. -/
+/-- Principle definition check: `necessary-strong-atomicity-t`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.NecStrongLeibnizT.schemaIn
+  Classicism.P.NecStrongAtomicityT.schemaIn
 
 /-- Principle definition check: `necessary-tame-rigidity-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
@@ -455,6 +507,30 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.RigidRigidity.schemaIn
 
+/-- Principle definition check: `self-atomicity-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.SelfAtomicity.schemaIn
+
+/-- Principle definition check: `self-atomicity-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.SelfAtomicityT.schemaIn
+
+/-- Principle definition check: `self-atoms-are-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.SelfAtomsAreAtoms.schemaIn
+
+/-- Principle definition check: `self-atoms-are-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.SelfAtomsAreAtomsT.schemaIn
+
+/-- Principle definition check: `self-atoms-are-strong-atoms-r`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.SelfAtomsAreStrongAtoms.schemaIn
+
+/-- Principle definition check: `self-atoms-are-strong-atoms-t`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn
+
 /-- Principle definition check: `separated-structure-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   (Classicism.Meta.AxiomSet.separatedStructure _)
@@ -467,13 +543,13 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.StrongActuality.schemaIn
 
-/-- Principle definition check: `strong-leibniz-r`. -/
+/-- Principle definition check: `strong-atomicity-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.StrongLeibniz.schemaIn
+  Classicism.P.StrongAtomicity.schemaIn
 
-/-- Principle definition check: `strong-leibniz-t`. -/
+/-- Principle definition check: `strong-atomicity-t`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
-  Classicism.P.StrongLeibnizT.schemaIn
+  Classicism.P.StrongAtomicityT.schemaIn
 
 /-- Principle definition check: `strong-possibility-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
@@ -543,14 +619,6 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.Zorn.schemaIn
 
-/-- `actual-profile-r-implies-actuality`
-
-Actual Profile ⇒ Actuality -/
-def actual_profile_r_implies_actuality : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ActualProfile.listSchemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn
-
 /-- `actuality-and-bf-imply-inextensible-comprehension`
 
 Actuality ∧ BF ⇒ Inextensible Comprehension -/
@@ -587,6 +655,15 @@ def actuality_and_distinctness_preserving_collapse_imply_strong_actuality : Prop
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.DistinctnessPreservingCollapse.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn
 
+/-- `actuality-and-self-atoms-are-strong-atoms-t-imply-strong-actuality`
+
+Actuality ∧ Self-atoms are strong atoms (type t) ⇒ Strong Actuality -/
+def actuality_and_self_atoms_are_strong_atoms_t_imply_strong_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn
+
 /-- `actuality-and-two-hat-implies-nd-imply-strong-actuality`
 
 Actuality ∧ Two-hat necessity implies ND-necessity ⇒ Strong Actuality -/
@@ -595,14 +672,6 @@ def actuality_and_two_hat_implies_nd_imply_strong_actuality : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.TwoHatImpliesNdNecessity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn
-
-/-- `actuality-implies-actual-profile-r`
-
-Actuality ⇒ Actual Profile -/
-def actuality_implies_actual_profile_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ActualProfile.listSchemaIn
 
 /-- `actuality-implies-five-implies-two-hat`
 
@@ -662,23 +731,23 @@ def atomicity_and_bf_imply_necessary_actuality : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn
 
-/-- `atomicity-and-bf-imply-strong-leibniz`
+/-- `atomicity-and-bf-imply-strong-atomicity`
 
-Atomicity ∧ BF ⇒ Strong Leibniz Biconditionals -/
-def atomicity_and_bf_imply_strong_leibniz : Prop :=
+Atomicity ∧ BF ⇒ Strong Atomicity -/
+def atomicity_and_bf_imply_strong_atomicity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn
 
-/-- `atomicity-and-bf-relational-imply-strong-leibniz`
+/-- `atomicity-and-bf-relational-imply-strong-atomicity`
 
-Atomicity ∧ BF (relational types) ⇒ Strong Leibniz Biconditionals -/
-def atomicity_and_bf_relational_imply_strong_leibniz : Prop :=
+Atomicity ∧ BF (relational types) ⇒ Strong Atomicity -/
+def atomicity_and_bf_relational_imply_strong_atomicity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn
 
 /-- `atomicity-and-rigid-comprehension-imply-rigid-power`
 
@@ -698,6 +767,24 @@ def atomicity_and_rigid_comprehension_imply_weakly_rigid_power : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.WeaklyRigidPower.schemaIn
 
+/-- `atomicity-r-and-atoms-are-self-atoms-r-imply-self-atomicity-r`
+
+Atomicity ∧ Atoms are self-atoms ⇒ Self-Atomicity -/
+def atomicity_r_and_atoms_are_self_atoms_r_imply_self_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn
+
+/-- `atomicity-r-and-atoms-are-strong-atoms-r-imply-strong-atomicity-r`
+
+Atomicity ∧ Atoms are strong atoms ⇒ Strong Atomicity -/
+def atomicity_r_and_atoms_are_strong_atoms_r_imply_strong_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn
+
 /-- `atomicity-r-implies-atomicity-t`
 
 Atomicity ⇒ Atomicity (type t) -/
@@ -705,6 +792,24 @@ def atomicity_r_implies_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn
+
+/-- `atomicity-t-and-atoms-are-self-atoms-t-imply-self-atomicity-t`
+
+Atomicity (type t) ∧ Atoms are self-atoms (type t) ⇒ Self-Atomicity (type t) -/
+def atomicity_t_and_atoms_are_self_atoms_t_imply_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn
+
+/-- `atomicity-t-and-atoms-are-strong-atoms-t-imply-strong-atomicity-t`
+
+Atomicity (type t) ∧ Atoms are strong atoms (type t) ⇒ Strong Atomicity (type t) -/
+def atomicity_t_and_atoms_are_strong_atoms_t_imply_strong_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `atomicity-t-and-bf-imply-atomicity`
 
@@ -724,14 +829,14 @@ def atomicity_t_and_bf_imply_necessary_actuality : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn
 
-/-- `atomicity-t-and-bf-t-imply-strong-leibniz-t`
+/-- `atomicity-t-and-bf-t-imply-strong-atomicity-t`
 
-Atomicity (type t) ∧ BF (type t) ⇒ Strong Leibniz Biconditionals (type t) -/
-def atomicity_t_and_bf_t_imply_strong_leibniz_t : Prop :=
+Atomicity (type t) ∧ BF (type t) ⇒ Strong Atomicity (type t) -/
+def atomicity_t_and_bf_t_imply_strong_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `atomicity-t-and-weakly-inextensible-comprehension-imply-actuality`
 
@@ -751,6 +856,14 @@ def atomicity_t_incompatible_with_atomlessness : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn →
     ¬ Classicism.Meta.AxiomSet.Consistent Ax
 
+/-- `atomlessness-implies-atoms-are-strong-atoms-r`
+
+Atomlessness ⇒ Atoms are strong atoms -/
+def atomlessness_implies_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn
+
 /-- `atomlessness-implies-axiom-of-infinity-t`
 
 Atomlessness ⇒ Axiom of Infinity (type t) -/
@@ -766,6 +879,83 @@ def atomlessness_implies_infinity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `atoms-are-self-atoms-r-and-self-atoms-are-strong-atoms-r-imply-atoms-are-strong-atoms-r`
+
+Atoms are self-atoms ∧ Self-atoms are strong atoms ⇒ Atoms are strong atoms -/
+def atoms_are_self_atoms_r_and_self_atoms_are_strong_atoms_r_imply_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn
+
+/-- `atoms-are-self-atoms-r-implies-atoms-are-self-atoms-t`
+
+Atoms are self-atoms ⇒ Atoms are self-atoms (type t) -/
+def atoms_are_self_atoms_r_implies_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn
+
+/-- `atoms-are-self-atoms-t-and-self-atoms-are-strong-atoms-t-imply-atoms-are-strong-atoms-t`
+
+Atoms are self-atoms (type t) ∧ Self-atoms are strong atoms (type t) ⇒ Atoms are strong atoms (type t) -/
+def atoms_are_self_atoms_t_and_self_atoms_are_strong_atoms_t_imply_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn
+
+/-- `atoms-are-strong-atoms-r-and-self-atoms-are-atoms-r-imply-self-atoms-are-strong-atoms-r`
+
+Atoms are strong atoms ∧ Self-atoms are atoms ⇒ Self-atoms are strong atoms -/
+def atoms_are_strong_atoms_r_and_self_atoms_are_atoms_r_imply_self_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn
+
+/-- `atoms-are-strong-atoms-r-implies-atoms-are-self-atoms-r`
+
+Atoms are strong atoms ⇒ Atoms are self-atoms -/
+def atoms_are_strong_atoms_r_implies_atoms_are_self_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtoms.schemaIn
+
+/-- `atoms-are-strong-atoms-r-implies-atoms-are-strong-atoms-t`
+
+Atoms are strong atoms ⇒ Atoms are strong atoms (type t) -/
+def atoms_are_strong_atoms_r_implies_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn
+
+/-- `atoms-are-strong-atoms-t-and-actuality-imply-strong-actuality`
+
+Atoms are strong atoms (type t) ∧ Actuality ⇒ Strong Actuality -/
+def atoms_are_strong_atoms_t_and_actuality_imply_strong_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn
+
+/-- `atoms-are-strong-atoms-t-and-self-atoms-are-atoms-t-imply-self-atoms-are-strong-atoms-t`
+
+Atoms are strong atoms (type t) ∧ Self-atoms are atoms (type t) ⇒ Self-atoms are strong atoms (type t) -/
+def atoms_are_strong_atoms_t_and_self_atoms_are_atoms_t_imply_self_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn
+
+/-- `atoms-are-strong-atoms-t-implies-atoms-are-self-atoms-t`
+
+Atoms are strong atoms (type t) ⇒ Atoms are self-atoms (type t) -/
+def atoms_are_strong_atoms_t_implies_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn
 
 /-- `axiom-of-infinity-e-implies-infinity-e`
 
@@ -841,6 +1031,14 @@ def barcan_r_implies_functionality_r : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Functionality.schemaIn
 
+/-- `barcan-relational-implies-atoms-are-strong-atoms-r`
+
+BF (relational types) ⇒ Atoms are strong atoms -/
+def barcan_relational_implies_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn
+
 /-- `barcan-relational-implies-barcan-t`
 
 BF (relational types) ⇒ BF (type t) -/
@@ -848,6 +1046,23 @@ def barcan_relational_implies_barcan_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn
+
+/-- `barcan-t-and-necessary-actuality-imply-self-atomicity-t`
+
+BF (type t) ∧ □Actuality ⇒ Self-Atomicity (type t) -/
+def barcan_t_and_necessary_actuality_imply_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn
+
+/-- `barcan-t-implies-atoms-are-strong-atoms-t`
+
+BF (type t) ⇒ Atoms are strong atoms (type t) -/
+def barcan_t_implies_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn
 
 /-- `bf-weak-rigid-comprehension-atomicity-and-relational-choice-imply-intensional-choice`
 
@@ -1299,13 +1514,22 @@ def extensionality_r_implies_rigid_comprehension_r : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Extensionality.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn
 
-/-- `five-and-strong-leibniz-t-imply-necessary-b`
+/-- `five-and-self-atomicity-t-imply-necessary-b`
 
-5 ∧ Strong Leibniz Biconditionals (type t) ⇒ □B -/
-def five_and_strong_leibniz_t_imply_necessary_b : Prop :=
+5 ∧ Self-Atomicity (type t) ⇒ □B -/
+def five_and_self_atomicity_t_imply_necessary_b : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFive.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecModalB.schemaIn
+
+/-- `five-and-strong-atomicity-t-imply-necessary-b`
+
+5 ∧ Strong Atomicity (type t) ⇒ □B -/
+def five_and_strong_atomicity_t_imply_necessary_b : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFive.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecModalB.schemaIn
 
 /-- `five-implies-nd-and-truth-implies-five-imply-truth-implies-nd`
@@ -1745,6 +1969,14 @@ def modal_five_implies_modal_b : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFive.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalB.schemaIn
 
+/-- `modal-five-implies-self-atoms-are-atoms-r`
+
+5 ⇒ Self-atoms are atoms -/
+def modal_five_implies_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFive.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn
+
 /-- `modal-freedom-signature-r-implies-no-pure-contingency-r`
 
 Modal Freedom (signature Σ) ⇒ No Pure Contingency -/
@@ -1863,6 +2095,15 @@ def necessary_actuality_and_necessary_distinctness_preserving_collapse_imply_nec
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecDistinctnessPreservingCollapse.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecInextensibleComprehension.schemaIn
 
+/-- `necessary-actuality-and-necessary-self-atoms-are-strong-atoms-t-imply-necessary-strong-actuality`
+
+□Actuality ∧ □Self-atoms are strong atoms (type t) ⇒ □Strong Actuality -/
+def necessary_actuality_and_necessary_self_atoms_are_strong_atoms_t_imply_necessary_strong_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn
+
 /-- `necessary-actuality-and-necessary-two-hat-implies-nd-imply-necessary-strong-actuality`
 
 □Actuality ∧ □Two-hat necessity implies ND-necessity ⇒ □Strong Actuality -/
@@ -1920,32 +2161,32 @@ def necessary_actuality_implies_necessary_weakly_inextensible_comprehension_r : 
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecWeaklyInextensibleComprehension.schemaIn
 
-/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-leibniz`
+/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-atomicity`
 
-□Atomicity ∧ □BF ⇒ □Strong Leibniz Biconditionals -/
-def necessary_atomicity_and_necessary_bf_imply_necessary_strong_leibniz : Prop :=
+□Atomicity ∧ □BF ⇒ □Strong Atomicity -/
+def necessary_atomicity_and_necessary_bf_imply_necessary_strong_atomicity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn
 
-/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-leibniz`
+/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-atomicity`
 
-□Atomicity ∧ □BF (relational types) ⇒ □Strong Leibniz Biconditionals -/
-def necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_leibniz : Prop :=
+□Atomicity ∧ □BF (relational types) ⇒ □Strong Atomicity -/
+def necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_atomicity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanRelational.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn
 
-/-- `necessary-atomicity-and-necessary-bf-t-imply-necessary-strong-leibniz-t`
+/-- `necessary-atomicity-and-necessary-bf-t-imply-necessary-strong-atomicity-t`
 
-□Atomicity ∧ □BF (type t) ⇒ □Strong Leibniz Biconditionals (type t) -/
-def necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_leibniz_t : Prop :=
+□Atomicity ∧ □BF (type t) ⇒ □Strong Atomicity (type t) -/
+def necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanT.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn
 
 /-- `necessary-atomicity-and-necessary-rigid-comprehension-imply-necessary-rigid-power`
 
@@ -1966,6 +2207,24 @@ def necessary_atomicity_completeness_bf_imply_rigid_comprehension : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn
 
+/-- `necessary-atomicity-r-and-necessary-atoms-are-self-atoms-r-imply-necessary-self-atomicity-r`
+
+□Atomicity ∧ □Atoms are self-atoms ⇒ □Self-Atomicity -/
+def necessary_atomicity_r_and_necessary_atoms_are_self_atoms_r_imply_necessary_self_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn
+
+/-- `necessary-atomicity-r-and-necessary-atoms-are-strong-atoms-r-imply-necessary-strong-atomicity-r`
+
+□Atomicity ∧ □Atoms are strong atoms ⇒ □Strong Atomicity -/
+def necessary_atomicity_r_and_necessary_atoms_are_strong_atoms_r_imply_necessary_strong_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn
+
 /-- `necessary-atomicity-r-implies-atomicity-r`
 
 □Atomicity ⇒ Atomicity -/
@@ -1982,6 +2241,24 @@ def necessary_atomicity_r_implies_necessary_atomicity_t : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn
 
+/-- `necessary-atomicity-t-and-necessary-atoms-are-self-atoms-t-imply-necessary-self-atomicity-t`
+
+□Atomicity (type t) ∧ □Atoms are self-atoms (type t) ⇒ □Self-Atomicity (type t) -/
+def necessary_atomicity_t_and_necessary_atoms_are_self_atoms_t_imply_necessary_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn
+
+/-- `necessary-atomicity-t-and-necessary-atoms-are-strong-atoms-t-imply-necessary-strong-atomicity-t`
+
+□Atomicity (type t) ∧ □Atoms are strong atoms (type t) ⇒ □Strong Atomicity (type t) -/
+def necessary_atomicity_t_and_necessary_atoms_are_strong_atoms_t_imply_necessary_strong_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn
+
 /-- `necessary-atomicity-t-and-necessary-bf-imply-necessary-atomicity`
 
 □Atomicity (type t) ∧ □BF ⇒ □Atomicity -/
@@ -1991,14 +2268,14 @@ def necessary_atomicity_t_and_necessary_bf_imply_necessary_atomicity : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn
 
-/-- `necessary-atomicity-t-and-necessary-bf-t-imply-necessary-strong-leibniz-t`
+/-- `necessary-atomicity-t-and-necessary-bf-t-imply-necessary-strong-atomicity-t`
 
-□Atomicity (type t) ∧ □BF (type t) ⇒ □Strong Leibniz Biconditionals (type t) -/
-def necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_leibniz_t : Prop :=
+□Atomicity (type t) ∧ □BF (type t) ⇒ □Strong Atomicity (type t) -/
+def necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanT.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn
 
 /-- `necessary-atomicity-t-and-necessary-wic-imply-necessary-actuality`
 
@@ -2016,6 +2293,115 @@ def necessary_atomicity_t_implies_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn
+
+/-- `necessary-atoms-are-self-atoms-r-and-necessary-self-atoms-are-strong-atoms-r-imply-necessary-atoms-are-strong-atoms-r`
+
+□Atoms are self-atoms ∧ □Self-atoms are strong atoms ⇒ □Atoms are strong atoms -/
+def necessary_atoms_are_self_atoms_r_and_necessary_self_atoms_are_strong_atoms_r_imply_necessary_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn
+
+/-- `necessary-atoms-are-self-atoms-r-implies-atoms-are-self-atoms-r`
+
+□Atoms are self-atoms ⇒ Atoms are self-atoms -/
+def necessary_atoms_are_self_atoms_r_implies_atoms_are_self_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtoms.schemaIn
+
+/-- `necessary-atoms-are-self-atoms-r-implies-necessary-atoms-are-self-atoms-t`
+
+□Atoms are self-atoms ⇒ □Atoms are self-atoms (type t) -/
+def necessary_atoms_are_self_atoms_r_implies_necessary_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn
+
+/-- `necessary-atoms-are-self-atoms-t-and-necessary-self-atoms-are-strong-atoms-t-imply-necessary-atoms-are-strong-atoms-t`
+
+□Atoms are self-atoms (type t) ∧ □Self-atoms are strong atoms (type t) ⇒ □Atoms are strong atoms (type t) -/
+def necessary_atoms_are_self_atoms_t_and_necessary_self_atoms_are_strong_atoms_t_imply_necessary_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn
+
+/-- `necessary-atoms-are-self-atoms-t-implies-atoms-are-self-atoms-t`
+
+□Atoms are self-atoms (type t) ⇒ Atoms are self-atoms (type t) -/
+def necessary_atoms_are_self_atoms_t_implies_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-r-and-necessary-self-atoms-are-atoms-r-imply-necessary-self-atoms-are-strong-atoms-r`
+
+□Atoms are strong atoms ∧ □Self-atoms are atoms ⇒ □Self-atoms are strong atoms -/
+def necessary_atoms_are_strong_atoms_r_and_necessary_self_atoms_are_atoms_r_imply_necessary_self_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-r-implies-atoms-are-strong-atoms-r`
+
+□Atoms are strong atoms ⇒ Atoms are strong atoms -/
+def necessary_atoms_are_strong_atoms_r_implies_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-r-implies-necessary-atoms-are-self-atoms-r`
+
+□Atoms are strong atoms ⇒ □Atoms are self-atoms -/
+def necessary_atoms_are_strong_atoms_r_implies_necessary_atoms_are_self_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-r-implies-necessary-atoms-are-strong-atoms-t`
+
+□Atoms are strong atoms ⇒ □Atoms are strong atoms (type t) -/
+def necessary_atoms_are_strong_atoms_r_implies_necessary_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-t-and-necessary-actuality-imply-necessary-strong-actuality`
+
+□Atoms are strong atoms (type t) ∧ □Actuality ⇒ □Strong Actuality -/
+def necessary_atoms_are_strong_atoms_t_and_necessary_actuality_imply_necessary_strong_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-t-and-necessary-self-atoms-are-atoms-t-imply-necessary-self-atoms-are-strong-atoms-t`
+
+□Atoms are strong atoms (type t) ∧ □Self-atoms are atoms (type t) ⇒ □Self-atoms are strong atoms (type t) -/
+def necessary_atoms_are_strong_atoms_t_and_necessary_self_atoms_are_atoms_t_imply_necessary_self_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-t-implies-atoms-are-strong-atoms-t`
+
+□Atoms are strong atoms (type t) ⇒ Atoms are strong atoms (type t) -/
+def necessary_atoms_are_strong_atoms_t_implies_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn
+
+/-- `necessary-atoms-are-strong-atoms-t-implies-necessary-atoms-are-self-atoms-t`
+
+□Atoms are strong atoms (type t) ⇒ □Atoms are self-atoms (type t) -/
+def necessary_atoms_are_strong_atoms_t_implies_necessary_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn
 
 /-- `necessary-barcan-and-rigid-power-imply-rigid-rigidity`
 
@@ -2066,6 +2452,14 @@ def necessary_barcan_relational_implies_barcan_relational : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanRelational.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn
 
+/-- `necessary-barcan-relational-implies-necessary-atoms-are-strong-atoms-r`
+
+□BF (relational types) ⇒ □Atoms are strong atoms -/
+def necessary_barcan_relational_implies_necessary_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanRelational.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn
+
 /-- `necessary-barcan-relational-implies-necessary-barcan-t`
 
 □BF (relational types) ⇒ □BF (type t) -/
@@ -2074,6 +2468,15 @@ def necessary_barcan_relational_implies_necessary_barcan_t : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanRelational.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanT.schemaIn
 
+/-- `necessary-barcan-t-and-necessary-actuality-imply-necessary-self-atomicity-t`
+
+□BF (type t) ∧ □Actuality ⇒ □Self-Atomicity (type t) -/
+def necessary_barcan_t_and_necessary_actuality_imply_necessary_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn
+
 /-- `necessary-barcan-t-implies-barcan-t`
 
 □BF (type t) ⇒ BF (type t) -/
@@ -2081,6 +2484,14 @@ def necessary_barcan_t_implies_barcan_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn
+
+/-- `necessary-barcan-t-implies-necessary-atoms-are-strong-atoms-t`
+
+□BF (type t) ⇒ □Atoms are strong atoms (type t) -/
+def necessary_barcan_t_implies_necessary_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn
 
 /-- `necessary-bf-and-actuality-imply-inextensible-comprehension`
 
@@ -2424,6 +2835,22 @@ def necessary_modal_five_implies_necessary_modal_b : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecModalFive.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecModalB.schemaIn
 
+/-- `necessary-modal-five-implies-necessary-self-atoms-are-atoms-r`
+
+□5 ⇒ □Self-atoms are atoms -/
+def necessary_modal_five_implies_necessary_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecModalFive.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn
+
+/-- `necessary-modal-five-implies-necessary-self-atoms-are-strong-atoms-r`
+
+□5 ⇒ □Self-atoms are strong atoms -/
+def necessary_modal_five_implies_necessary_self_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecModalFive.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn
+
 /-- `necessary-modalized-relational-choice-implies-necessary-intensional-choice`
 
 □Modalized Relational Choice ⇒ □Intensional Choice -/
@@ -2611,6 +3038,181 @@ def necessary_rigid_rigidity_r_implies_rigid_rigidity_r : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidRigidity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidRigidity.schemaIn
 
+/-- `necessary-self-atomicity-r-and-necessary-self-atoms-are-atoms-r-imply-necessary-atomicity-r`
+
+□Self-Atomicity ∧ □Self-atoms are atoms ⇒ □Atomicity -/
+def necessary_self_atomicity_r_and_necessary_self_atoms_are_atoms_r_imply_necessary_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn
+
+/-- `necessary-self-atomicity-r-and-necessary-self-atoms-are-strong-atoms-r-imply-necessary-strong-atomicity-r`
+
+□Self-Atomicity ∧ □Self-atoms are strong atoms ⇒ □Strong Atomicity -/
+def necessary_self_atomicity_r_and_necessary_self_atoms_are_strong_atoms_r_imply_necessary_strong_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn
+
+/-- `necessary-self-atomicity-r-implies-necessary-atoms-are-self-atoms-r`
+
+□Self-Atomicity ⇒ □Atoms are self-atoms -/
+def necessary_self_atomicity_r_implies_necessary_atoms_are_self_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn
+
+/-- `necessary-self-atomicity-r-implies-necessary-self-atomicity-t`
+
+□Self-Atomicity ⇒ □Self-Atomicity (type t) -/
+def necessary_self_atomicity_r_implies_necessary_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn
+
+/-- `necessary-self-atomicity-r-implies-self-atomicity-r`
+
+□Self-Atomicity ⇒ Self-Atomicity -/
+def necessary_self_atomicity_r_implies_self_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn
+
+/-- `necessary-self-atomicity-t-and-necessary-bf-imply-necessary-self-atomicity-r`
+
+□Self-Atomicity (type t) ∧ □BF ⇒ □Self-Atomicity -/
+def necessary_self_atomicity_t_and_necessary_bf_imply_necessary_self_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn
+
+/-- `necessary-self-atomicity-t-and-necessary-self-atoms-are-atoms-t-imply-necessary-atomicity-t`
+
+□Self-Atomicity (type t) ∧ □Self-atoms are atoms (type t) ⇒ □Atomicity (type t) -/
+def necessary_self_atomicity_t_and_necessary_self_atoms_are_atoms_t_imply_necessary_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn
+
+/-- `necessary-self-atomicity-t-and-necessary-self-atoms-are-strong-atoms-t-imply-necessary-strong-atomicity-t`
+
+□Self-Atomicity (type t) ∧ □Self-atoms are strong atoms (type t) ⇒ □Strong Atomicity (type t) -/
+def necessary_self_atomicity_t_and_necessary_self_atoms_are_strong_atoms_t_imply_necessary_strong_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn
+
+/-- `necessary-self-atomicity-t-implies-necessary-atoms-are-self-atoms-t`
+
+□Self-Atomicity (type t) ⇒ □Atoms are self-atoms (type t) -/
+def necessary_self_atomicity_t_implies_necessary_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn
+
+/-- `necessary-self-atomicity-t-implies-necessary-two-hat-implies-nd`
+
+□Self-Atomicity (type t) ⇒ □Two-hat necessity implies ND-necessity -/
+def necessary_self_atomicity_t_implies_necessary_two_hat_implies_nd : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecTwoHatImpliesNdNecessity.schemaIn
+
+/-- `necessary-self-atomicity-t-implies-self-atomicity-t`
+
+□Self-Atomicity (type t) ⇒ Self-Atomicity (type t) -/
+def necessary_self_atomicity_t_implies_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn
+
+/-- `necessary-self-atoms-are-atoms-r-implies-necessary-self-atoms-are-atoms-t`
+
+□Self-atoms are atoms ⇒ □Self-atoms are atoms (type t) -/
+def necessary_self_atoms_are_atoms_r_implies_necessary_self_atoms_are_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn
+
+/-- `necessary-self-atoms-are-atoms-r-implies-self-atoms-are-atoms-r`
+
+□Self-atoms are atoms ⇒ Self-atoms are atoms -/
+def necessary_self_atoms_are_atoms_r_implies_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn
+
+/-- `necessary-self-atoms-are-atoms-t-and-necessary-bf-imply-necessary-self-atoms-are-atoms-r`
+
+□Self-atoms are atoms (type t) ∧ □BF ⇒ □Self-atoms are atoms -/
+def necessary_self_atoms_are_atoms_t_and_necessary_bf_imply_necessary_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn
+
+/-- `necessary-self-atoms-are-atoms-t-implies-self-atoms-are-atoms-t`
+
+□Self-atoms are atoms (type t) ⇒ Self-atoms are atoms (type t) -/
+def necessary_self_atoms_are_atoms_t_implies_self_atoms_are_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn
+
+/-- `necessary-self-atoms-are-strong-atoms-r-implies-necessary-self-atoms-are-atoms-r`
+
+□Self-atoms are strong atoms ⇒ □Self-atoms are atoms -/
+def necessary_self_atoms_are_strong_atoms_r_implies_necessary_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn
+
+/-- `necessary-self-atoms-are-strong-atoms-r-implies-necessary-self-atoms-are-strong-atoms-t`
+
+□Self-atoms are strong atoms ⇒ □Self-atoms are strong atoms (type t) -/
+def necessary_self_atoms_are_strong_atoms_r_implies_necessary_self_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn
+
+/-- `necessary-self-atoms-are-strong-atoms-r-implies-self-atoms-are-strong-atoms-r`
+
+□Self-atoms are strong atoms ⇒ Self-atoms are strong atoms -/
+def necessary_self_atoms_are_strong_atoms_r_implies_self_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn
+
+/-- `necessary-self-atoms-are-strong-atoms-t-and-necessary-bf-imply-necessary-self-atoms-are-strong-atoms-r`
+
+□Self-atoms are strong atoms (type t) ∧ □BF ⇒ □Self-atoms are strong atoms -/
+def necessary_self_atoms_are_strong_atoms_t_and_necessary_bf_imply_necessary_self_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn
+
+/-- `necessary-self-atoms-are-strong-atoms-t-implies-necessary-self-atoms-are-atoms-t`
+
+□Self-atoms are strong atoms (type t) ⇒ □Self-atoms are atoms (type t) -/
+def necessary_self_atoms_are_strong_atoms_t_implies_necessary_self_atoms_are_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn
+
+/-- `necessary-self-atoms-are-strong-atoms-t-implies-self-atoms-are-strong-atoms-t`
+
+□Self-atoms are strong atoms (type t) ⇒ Self-atoms are strong atoms (type t) -/
+def necessary_self_atoms_are_strong_atoms_t_implies_self_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn
+
 /-- `necessary-strong-actuality-implies-necessary-actuality`
 
 □Strong Actuality ⇒ □Actuality -/
@@ -2627,88 +3229,120 @@ def necessary_strong_actuality_implies_strong_actuality : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn
 
-/-- `necessary-strong-leibniz-and-necessary-rigid-comprehension-imply-necessary-bf-relational`
+/-- `necessary-strong-atomicity-and-necessary-rigid-comprehension-imply-necessary-bf-relational`
 
-□Strong Leibniz Biconditionals ∧ □Rigid Comprehension ⇒ □BF (relational types) -/
-def necessary_strong_leibniz_and_necessary_rigid_comprehension_imply_necessary_bf_relational : Prop :=
+□Strong Atomicity ∧ □Rigid Comprehension ⇒ □BF (relational types) -/
+def necessary_strong_atomicity_and_necessary_rigid_comprehension_imply_necessary_bf_relational : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanRelational.schemaIn
 
-/-- `necessary-strong-leibniz-and-rigid-comprehension-imply-necessary-bf-relational`  (conjectured)
+/-- `necessary-strong-atomicity-and-rigid-comprehension-imply-necessary-bf-relational`  (conjectured)
 
-□Strong Leibniz Biconditionals ∧ Rigid Comprehension ⇒ □BF (relational types) -/
-def necessary_strong_leibniz_and_rigid_comprehension_imply_necessary_bf_relational : Prop :=
+□Strong Atomicity ∧ Rigid Comprehension ⇒ □BF (relational types) -/
+def necessary_strong_atomicity_and_rigid_comprehension_imply_necessary_bf_relational : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanRelational.schemaIn
 
-/-- `necessary-strong-leibniz-implies-necessary-atomicity`
+/-- `necessary-strong-atomicity-implies-necessary-atomicity`
 
-□Strong Leibniz Biconditionals ⇒ □Atomicity -/
-def necessary_strong_leibniz_implies_necessary_atomicity : Prop :=
+□Strong Atomicity ⇒ □Atomicity -/
+def necessary_strong_atomicity_implies_necessary_atomicity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn
 
-/-- `necessary-strong-leibniz-r-implies-necessary-strong-leibniz-t`
+/-- `necessary-strong-atomicity-r-implies-necessary-atoms-are-strong-atoms-r`
 
-□Strong Leibniz Biconditionals ⇒ □Strong Leibniz Biconditionals (type t) -/
-def necessary_strong_leibniz_r_implies_necessary_strong_leibniz_t : Prop :=
+□Strong Atomicity ⇒ □Atoms are strong atoms -/
+def necessary_strong_atomicity_r_implies_necessary_atoms_are_strong_atoms_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn
 
-/-- `necessary-strong-leibniz-r-implies-strong-leibniz-r`
+/-- `necessary-strong-atomicity-r-implies-necessary-self-atomicity-r`
 
-□Strong Leibniz Biconditionals ⇒ Strong Leibniz Biconditionals -/
-def necessary_strong_leibniz_r_implies_strong_leibniz_r : Prop :=
+□Strong Atomicity ⇒ □Self-Atomicity -/
+def necessary_strong_atomicity_r_implies_necessary_self_atomicity_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn
 
-/-- `necessary-strong-leibniz-t-and-necessary-bf-imply-necessary-strong-leibniz`
+/-- `necessary-strong-atomicity-r-implies-necessary-strong-atomicity-t`
 
-□Strong Leibniz Biconditionals (type t) ∧ □BF ⇒ □Strong Leibniz Biconditionals -/
-def necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz : Prop :=
+□Strong Atomicity ⇒ □Strong Atomicity (type t) -/
+def necessary_strong_atomicity_r_implies_necessary_strong_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn
+
+/-- `necessary-strong-atomicity-r-implies-strong-atomicity-r`
+
+□Strong Atomicity ⇒ Strong Atomicity -/
+def necessary_strong_atomicity_r_implies_strong_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn
+
+/-- `necessary-strong-atomicity-t-and-necessary-bf-imply-necessary-strong-atomicity`
+
+□Strong Atomicity (type t) ∧ □BF ⇒ □Strong Atomicity -/
+def necessary_strong_atomicity_t_and_necessary_bf_imply_necessary_strong_atomicity : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn
 
-/-- `necessary-strong-leibniz-t-implies-necessary-atomicity-t`
+/-- `necessary-strong-atomicity-t-implies-necessary-atomicity-t`
 
-□Strong Leibniz Biconditionals (type t) ⇒ □Atomicity (type t) -/
-def necessary_strong_leibniz_t_implies_necessary_atomicity_t : Prop :=
+□Strong Atomicity (type t) ⇒ □Atomicity (type t) -/
+def necessary_strong_atomicity_t_implies_necessary_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn
 
-/-- `necessary-strong-leibniz-t-implies-necessary-strong-actuality`
+/-- `necessary-strong-atomicity-t-implies-necessary-atoms-are-strong-atoms-t`
 
-□Strong Leibniz Biconditionals (type t) ⇒ □Strong Actuality -/
-def necessary_strong_leibniz_t_implies_necessary_strong_actuality : Prop :=
+□Strong Atomicity (type t) ⇒ □Atoms are strong atoms (type t) -/
+def necessary_strong_atomicity_t_implies_necessary_atoms_are_strong_atoms_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn
+
+/-- `necessary-strong-atomicity-t-implies-necessary-self-atomicity-t`
+
+□Strong Atomicity (type t) ⇒ □Self-Atomicity (type t) -/
+def necessary_strong_atomicity_t_implies_necessary_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn
+
+/-- `necessary-strong-atomicity-t-implies-necessary-strong-actuality`
+
+□Strong Atomicity (type t) ⇒ □Strong Actuality -/
+def necessary_strong_atomicity_t_implies_necessary_strong_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn
 
-/-- `necessary-strong-leibniz-t-implies-necessary-two-hat-implies-nd`
+/-- `necessary-strong-atomicity-t-implies-necessary-two-hat-implies-nd`
 
-□Strong Leibniz Biconditionals (type t) ⇒ □Two-hat necessity implies ND-necessity -/
-def necessary_strong_leibniz_t_implies_necessary_two_hat_implies_nd : Prop :=
+□Strong Atomicity (type t) ⇒ □Two-hat necessity implies ND-necessity -/
+def necessary_strong_atomicity_t_implies_necessary_two_hat_implies_nd : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecTwoHatImpliesNdNecessity.schemaIn
 
-/-- `necessary-strong-leibniz-t-implies-strong-leibniz-t`
+/-- `necessary-strong-atomicity-t-implies-strong-atomicity-t`
 
-□Strong Leibniz Biconditionals (type t) ⇒ Strong Leibniz Biconditionals (type t) -/
-def necessary_strong_leibniz_t_implies_strong_leibniz_t : Prop :=
+□Strong Atomicity (type t) ⇒ Strong Atomicity (type t) -/
+def necessary_strong_atomicity_t_implies_strong_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `necessary-tame-rigidity-and-necessary-rigid-power-imply-necessary-weakly-rigid-power`
 
@@ -2882,6 +3516,15 @@ def necessary_two_hat_implies_nd_necessity_implies_two_hat_implies_nd_necessity 
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecTwoHatImpliesNdNecessity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.TwoHatImpliesNdNecessity.schemaIn
+
+/-- `necessary-vicinity-and-necessary-atomicity-t-imply-necessary-actuality`
+
+□Vicinity ∧ □Atomicity (type t) ⇒ □Actuality -/
+def necessary_vicinity_and_necessary_atomicity_t_imply_necessary_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecVicinity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn
 
 /-- `necessary-vicinity-and-necessary-barcan-t-imply-necessary-two-hat-implies-nd`
 
@@ -3074,6 +3717,42 @@ def no_pure_contingency_and_atomicity_t_imply_necessary_atomicity_t : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn
+
+/-- `no-pure-contingency-and-atoms-are-self-atoms-r-imply-necessary-atoms-are-self-atoms-r`
+
+No Pure Contingency ∧ Atoms are self-atoms ⇒ □Atoms are self-atoms -/
+def no_pure_contingency_and_atoms_are_self_atoms_r_imply_necessary_atoms_are_self_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn
+
+/-- `no-pure-contingency-and-atoms-are-self-atoms-t-imply-necessary-atoms-are-self-atoms-t`
+
+No Pure Contingency ∧ Atoms are self-atoms (type t) ⇒ □Atoms are self-atoms (type t) -/
+def no_pure_contingency_and_atoms_are_self_atoms_t_imply_necessary_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn
+
+/-- `no-pure-contingency-and-atoms-are-strong-atoms-r-imply-necessary-atoms-are-strong-atoms-r`
+
+No Pure Contingency ∧ Atoms are strong atoms ⇒ □Atoms are strong atoms -/
+def no_pure_contingency_and_atoms_are_strong_atoms_r_imply_necessary_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn
+
+/-- `no-pure-contingency-and-atoms-are-strong-atoms-t-imply-necessary-atoms-are-strong-atoms-t`
+
+No Pure Contingency ∧ Atoms are strong atoms (type t) ⇒ □Atoms are strong atoms (type t) -/
+def no_pure_contingency_and_atoms_are_strong_atoms_t_imply_necessary_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn
 
 /-- `no-pure-contingency-and-b-imply-necessary-b`
 
@@ -3300,6 +3979,60 @@ def no_pure_contingency_and_rigid_power_imply_necessary_rigid_power : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidPower.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidPower.schemaIn
 
+/-- `no-pure-contingency-and-self-atomicity-r-imply-necessary-self-atomicity-r`
+
+No Pure Contingency ∧ Self-Atomicity ⇒ □Self-Atomicity -/
+def no_pure_contingency_and_self_atomicity_r_imply_necessary_self_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn
+
+/-- `no-pure-contingency-and-self-atomicity-t-imply-necessary-self-atomicity-t`
+
+No Pure Contingency ∧ Self-Atomicity (type t) ⇒ □Self-Atomicity (type t) -/
+def no_pure_contingency_and_self_atomicity_t_imply_necessary_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicityT.schemaIn
+
+/-- `no-pure-contingency-and-self-atoms-are-atoms-r-imply-necessary-self-atoms-are-atoms-r`
+
+No Pure Contingency ∧ Self-atoms are atoms ⇒ □Self-atoms are atoms -/
+def no_pure_contingency_and_self_atoms_are_atoms_r_imply_necessary_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn
+
+/-- `no-pure-contingency-and-self-atoms-are-atoms-t-imply-necessary-self-atoms-are-atoms-t`
+
+No Pure Contingency ∧ Self-atoms are atoms (type t) ⇒ □Self-atoms are atoms (type t) -/
+def no_pure_contingency_and_self_atoms_are_atoms_t_imply_necessary_self_atoms_are_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn
+
+/-- `no-pure-contingency-and-self-atoms-are-strong-atoms-r-imply-necessary-self-atoms-are-strong-atoms-r`
+
+No Pure Contingency ∧ Self-atoms are strong atoms ⇒ □Self-atoms are strong atoms -/
+def no_pure_contingency_and_self_atoms_are_strong_atoms_r_imply_necessary_self_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn
+
+/-- `no-pure-contingency-and-self-atoms-are-strong-atoms-t-imply-necessary-self-atoms-are-strong-atoms-t`
+
+No Pure Contingency ∧ Self-atoms are strong atoms (type t) ⇒ □Self-atoms are strong atoms (type t) -/
+def no_pure_contingency_and_self_atoms_are_strong_atoms_t_imply_necessary_self_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn
+
 /-- `no-pure-contingency-and-strong-actuality-imply-necessary-strong-actuality`
 
 No Pure Contingency ∧ Strong Actuality ⇒ □Strong Actuality -/
@@ -3309,23 +4042,23 @@ def no_pure_contingency_and_strong_actuality_imply_necessary_strong_actuality : 
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn
 
-/-- `no-pure-contingency-and-strong-leibniz-imply-necessary-strong-leibniz`
+/-- `no-pure-contingency-and-strong-atomicity-imply-necessary-strong-atomicity`
 
-No Pure Contingency ∧ Strong Leibniz Biconditionals ⇒ □Strong Leibniz Biconditionals -/
-def no_pure_contingency_and_strong_leibniz_imply_necessary_strong_leibniz : Prop :=
+No Pure Contingency ∧ Strong Atomicity ⇒ □Strong Atomicity -/
+def no_pure_contingency_and_strong_atomicity_imply_necessary_strong_atomicity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn
 
-/-- `no-pure-contingency-and-strong-leibniz-t-imply-necessary-strong-leibniz-t`
+/-- `no-pure-contingency-and-strong-atomicity-t-imply-necessary-strong-atomicity-t`
 
-No Pure Contingency ∧ Strong Leibniz Biconditionals (type t) ⇒ □Strong Leibniz Biconditionals (type t) -/
-def no_pure_contingency_and_strong_leibniz_t_imply_necessary_strong_leibniz_t : Prop :=
+No Pure Contingency ∧ Strong Atomicity (type t) ⇒ □Strong Atomicity (type t) -/
+def no_pure_contingency_and_strong_atomicity_t_imply_necessary_strong_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn
 
 /-- `no-pure-contingency-and-tame-rigidity-imply-necessary-tame-rigidity`
 
@@ -3492,6 +4225,24 @@ def possibility_and_countable_boolean_completeness_incompatible : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.CountableBooleanCompleteness.schemaIn →
     ¬ Classicism.Meta.AxiomSet.Consistent Ax
 
+/-- `possibility-and-necessary-atoms-are-self-atoms-t-incompatible`
+
+Maximalism (pure) ∧ □Atoms are self-atoms (type t) ⇒ ⊥ -/
+def possibility_and_necessary_atoms_are_self_atoms_t_incompatible : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.distinctnessC) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtomsT.schemaIn →
+    ¬ Classicism.Meta.AxiomSet.Consistent Ax
+
+/-- `possibility-and-necessary-atoms-are-strong-atoms-t-incompatible`
+
+Maximalism (pure) ∧ □Atoms are strong atoms (type t) ⇒ ⊥ -/
+def possibility_and_necessary_atoms_are_strong_atoms_t_incompatible : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.distinctnessC) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtomsT.schemaIn →
+    ¬ Classicism.Meta.AxiomSet.Consistent Ax
+
 /-- `possibility-and-necessary-barcan-t-incompatible`
 
 Maximalism (pure) ∧ □BF (type t) ⇒ ⊥ -/
@@ -3528,13 +4279,31 @@ def possibility_and_necessary_rigid_power_incompatible : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidPower.schemaIn →
     ¬ Classicism.Meta.AxiomSet.Consistent Ax
 
-/-- `possibility-and-necessary-strong-leibniz-t-incompatible`
+/-- `possibility-and-necessary-self-atoms-are-atoms-t-incompatible`
 
-Maximalism (pure) ∧ □Strong Leibniz Biconditionals (type t) ⇒ ⊥ -/
-def possibility_and_necessary_strong_leibniz_t_incompatible : Prop :=
+Maximalism (pure) ∧ □Self-atoms are atoms (type t) ⇒ ⊥ -/
+def possibility_and_necessary_self_atoms_are_atoms_t_incompatible : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.distinctnessC) →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn →
+    ¬ Classicism.Meta.AxiomSet.Consistent Ax
+
+/-- `possibility-and-necessary-self-atoms-are-strong-atoms-t-incompatible`
+
+Maximalism (pure) ∧ □Self-atoms are strong atoms (type t) ⇒ ⊥ -/
+def possibility_and_necessary_self_atoms_are_strong_atoms_t_incompatible : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.distinctnessC) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn →
+    ¬ Classicism.Meta.AxiomSet.Consistent Ax
+
+/-- `possibility-and-necessary-strong-atomicity-t-incompatible`
+
+Maximalism (pure) ∧ □Strong Atomicity (type t) ⇒ ⊥ -/
+def possibility_and_necessary_strong_atomicity_t_incompatible : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.distinctnessC) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn →
     ¬ Classicism.Meta.AxiomSet.Consistent Ax
 
 /-- `possibility-and-necessity-of-arithmetic-incompatible`
@@ -3857,6 +4626,152 @@ def rigid_rigidity_implies_rigid_power : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidRigidity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidPower.schemaIn
 
+/-- `self-atomicity-atomicity-t-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice`
+
+Self-Atomicity ∧ Atomicity (type t) ∧ Weak Rigid Comprehension ∧ Relational Choice ⇒ Intensional Choice -/
+def self_atomicity_atomicity_t_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.WeakRigidComprehension.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RelationalChoice.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.IntensionalChoice.schemaIn
+
+/-- `self-atomicity-r-and-self-atoms-are-atoms-r-imply-atomicity-r`
+
+Self-Atomicity ∧ Self-atoms are atoms ⇒ Atomicity -/
+def self_atomicity_r_and_self_atoms_are_atoms_r_imply_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn
+
+/-- `self-atomicity-r-and-self-atoms-are-strong-atoms-r-imply-strong-atomicity-r`
+
+Self-Atomicity ∧ Self-atoms are strong atoms ⇒ Strong Atomicity -/
+def self_atomicity_r_and_self_atoms_are_strong_atoms_r_imply_strong_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn
+
+/-- `self-atomicity-r-implies-atoms-are-self-atoms-r`
+
+Self-Atomicity ⇒ Atoms are self-atoms -/
+def self_atomicity_r_implies_atoms_are_self_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtoms.schemaIn
+
+/-- `self-atomicity-r-implies-self-atomicity-t`
+
+Self-Atomicity ⇒ Self-Atomicity (type t) -/
+def self_atomicity_r_implies_self_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn
+
+/-- `self-atomicity-t-and-bf-imply-self-atomicity-r`
+
+Self-Atomicity (type t) ∧ BF ⇒ Self-Atomicity -/
+def self_atomicity_t_and_bf_imply_self_atomicity_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn
+
+/-- `self-atomicity-t-and-self-atoms-are-atoms-t-imply-atomicity-t`
+
+Self-Atomicity (type t) ∧ Self-atoms are atoms (type t) ⇒ Atomicity (type t) -/
+def self_atomicity_t_and_self_atoms_are_atoms_t_imply_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn
+
+/-- `self-atomicity-t-and-self-atoms-are-strong-atoms-t-imply-strong-atomicity-t`
+
+Self-Atomicity (type t) ∧ Self-atoms are strong atoms (type t) ⇒ Strong Atomicity (type t) -/
+def self_atomicity_t_and_self_atoms_are_strong_atoms_t_imply_strong_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn
+
+/-- `self-atomicity-t-implies-atoms-are-self-atoms-t`
+
+Self-Atomicity (type t) ⇒ Atoms are self-atoms (type t) -/
+def self_atomicity_t_implies_atoms_are_self_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn
+
+/-- `self-atomicity-t-implies-necessary-actuality`
+
+Self-Atomicity (type t) ⇒ □Actuality -/
+def self_atomicity_t_implies_necessary_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn
+
+/-- `self-atomicity-t-implies-two-hat-implies-nd`
+
+Self-Atomicity (type t) ⇒ Two-hat necessity implies ND-necessity -/
+def self_atomicity_t_implies_two_hat_implies_nd : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.TwoHatImpliesNdNecessity.schemaIn
+
+/-- `self-atoms-are-atoms-r-implies-self-atoms-are-atoms-t`
+
+Self-atoms are atoms ⇒ Self-atoms are atoms (type t) -/
+def self_atoms_are_atoms_r_implies_self_atoms_are_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn
+
+/-- `self-atoms-are-atoms-t-and-bf-imply-self-atoms-are-atoms-r`
+
+Self-atoms are atoms (type t) ∧ BF ⇒ Self-atoms are atoms -/
+def self_atoms_are_atoms_t_and_bf_imply_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn
+
+/-- `self-atoms-are-strong-atoms-r-implies-self-atoms-are-atoms-r`
+
+Self-atoms are strong atoms ⇒ Self-atoms are atoms -/
+def self_atoms_are_strong_atoms_r_implies_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn
+
+/-- `self-atoms-are-strong-atoms-r-implies-self-atoms-are-strong-atoms-t`
+
+Self-atoms are strong atoms ⇒ Self-atoms are strong atoms (type t) -/
+def self_atoms_are_strong_atoms_r_implies_self_atoms_are_strong_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn
+
+/-- `self-atoms-are-strong-atoms-t-and-bf-imply-self-atoms-are-strong-atoms-r`
+
+Self-atoms are strong atoms (type t) ∧ BF ⇒ Self-atoms are strong atoms -/
+def self_atoms_are_strong_atoms_t_and_bf_imply_self_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn
+
+/-- `self-atoms-are-strong-atoms-t-implies-self-atoms-are-atoms-t`
+
+Self-atoms are strong atoms (type t) ⇒ Self-atoms are atoms (type t) -/
+def self_atoms_are_strong_atoms_t_implies_self_atoms_are_atoms_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn
+
 /-- `separated-structure-incompatible-with-nd`
 
 Separated Structure ∧ ND ⇒ ⊥ -/
@@ -3907,98 +4822,130 @@ def strong_actuality_implies_actuality : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn
 
-/-- `strong-leibniz-and-rigid-comprehension-imply-necessary-rigid-comprehension`
+/-- `strong-atomicity-and-rigid-comprehension-imply-necessary-rigid-comprehension`
 
-Strong Leibniz Biconditionals ∧ Rigid Comprehension ⇒ □Rigid Comprehension -/
-def strong_leibniz_and_rigid_comprehension_imply_necessary_rigid_comprehension : Prop :=
+Strong Atomicity ∧ Rigid Comprehension ⇒ □Rigid Comprehension -/
+def strong_atomicity_and_rigid_comprehension_imply_necessary_rigid_comprehension : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn
 
-/-- `strong-leibniz-and-rigid-comprehension-imply-necessary-strong-leibniz`
+/-- `strong-atomicity-and-rigid-comprehension-imply-necessary-strong-atomicity`
 
-Strong Leibniz Biconditionals ∧ Rigid Comprehension ⇒ □Strong Leibniz Biconditionals -/
-def strong_leibniz_and_rigid_comprehension_imply_necessary_strong_leibniz : Prop :=
+Strong Atomicity ∧ Rigid Comprehension ⇒ □Strong Atomicity -/
+def strong_atomicity_and_rigid_comprehension_imply_necessary_strong_atomicity : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn
 
-/-- `strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational`
+/-- `strong-atomicity-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational`
 
-Strong Leibniz Biconditionals ∧ □Rigid Comprehension ∧ Rigid Power ⇒ BF (relational types) -/
-def strong_leibniz_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational : Prop :=
+Strong Atomicity ∧ □Rigid Comprehension ∧ Rigid Power ⇒ BF (relational types) -/
+def strong_atomicity_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidPower.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn
 
-/-- `strong-leibniz-r-implies-atomicity-r`
+/-- `strong-atomicity-r-implies-atomicity-r`
 
-Strong Leibniz Biconditionals ⇒ Atomicity -/
-def strong_leibniz_r_implies_atomicity_r : Prop :=
+Strong Atomicity ⇒ Atomicity -/
+def strong_atomicity_r_implies_atomicity_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn
 
-/-- `strong-leibniz-r-implies-strong-leibniz-t`
+/-- `strong-atomicity-r-implies-atoms-are-strong-atoms-r`
 
-Strong Leibniz Biconditionals ⇒ Strong Leibniz Biconditionals (type t) -/
-def strong_leibniz_r_implies_strong_leibniz_t : Prop :=
+Strong Atomicity ⇒ Atoms are strong atoms -/
+def strong_atomicity_r_implies_atoms_are_strong_atoms_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtoms.schemaIn
 
-/-- `strong-leibniz-t-implies-atomicity-t`
+/-- `strong-atomicity-r-implies-self-atomicity-r`
 
-Strong Leibniz Biconditionals (type t) ⇒ Atomicity (type t) -/
-def strong_leibniz_t_implies_atomicity_t : Prop :=
+Strong Atomicity ⇒ Self-Atomicity -/
+def strong_atomicity_r_implies_self_atomicity_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicity.schemaIn
+
+/-- `strong-atomicity-r-implies-strong-atomicity-t`
+
+Strong Atomicity ⇒ Strong Atomicity (type t) -/
+def strong_atomicity_r_implies_strong_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn
+
+/-- `strong-atomicity-t-implies-atomicity-t`
+
+Strong Atomicity (type t) ⇒ Atomicity (type t) -/
+def strong_atomicity_t_implies_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn
 
-/-- `strong-leibniz-t-implies-necessary-actuality`
+/-- `strong-atomicity-t-implies-atoms-are-strong-atoms-t`
 
-Strong Leibniz Biconditionals (type t) ⇒ □Actuality -/
-def strong_leibniz_t_implies_necessary_actuality : Prop :=
+Strong Atomicity (type t) ⇒ Atoms are strong atoms (type t) -/
+def strong_atomicity_t_implies_atoms_are_strong_atoms_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreStrongAtomsT.schemaIn
+
+/-- `strong-atomicity-t-implies-necessary-actuality`
+
+Strong Atomicity (type t) ⇒ □Actuality -/
+def strong_atomicity_t_implies_necessary_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn
 
-/-- `strong-leibniz-t-implies-strong-actuality`
+/-- `strong-atomicity-t-implies-self-atomicity-t`
 
-Strong Leibniz Biconditionals (type t) ⇒ Strong Actuality -/
-def strong_leibniz_t_implies_strong_actuality : Prop :=
+Strong Atomicity (type t) ⇒ Self-Atomicity (type t) -/
+def strong_atomicity_t_implies_self_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn
+
+/-- `strong-atomicity-t-implies-strong-actuality`
+
+Strong Atomicity (type t) ⇒ Strong Actuality -/
+def strong_atomicity_t_implies_strong_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn
 
-/-- `strong-leibniz-t-implies-two-hat-implies-nd`
+/-- `strong-atomicity-t-implies-two-hat-implies-nd`
 
-Strong Leibniz Biconditionals (type t) ⇒ Two-hat necessity implies ND-necessity -/
-def strong_leibniz_t_implies_two_hat_implies_nd : Prop :=
+Strong Atomicity (type t) ⇒ Two-hat necessity implies ND-necessity -/
+def strong_atomicity_t_implies_two_hat_implies_nd : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.TwoHatImpliesNdNecessity.schemaIn
 
-/-- `strong-leibniz-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t`
+/-- `strong-atomicity-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t`
 
-Strong Leibniz Biconditionals (type t) ∧ □Rigid Comprehension ∧ Rigid Power ⇒ BF (type t) -/
-def strong_leibniz_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t : Prop :=
+Strong Atomicity (type t) ∧ □Rigid Comprehension ∧ Rigid Power ⇒ BF (type t) -/
+def strong_atomicity_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidPower.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn
 
-/-- `strong-leibniz-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice`
+/-- `strong-atomicity-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice`
 
-Strong Leibniz Biconditionals ∧ Weak Rigid Comprehension ∧ Relational Choice ⇒ Intensional Choice -/
-def strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice : Prop :=
+Strong Atomicity ∧ Weak Rigid Comprehension ∧ Relational Choice ⇒ Intensional Choice -/
+def strong_atomicity_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.WeakRigidComprehension.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RelationalChoice.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.IntensionalChoice.schemaIn
@@ -4190,6 +5137,15 @@ def two_hat_implies_nd_and_five_implies_two_hat_imply_five_implies_nd : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.FiveImpliesTwoHatNecessity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.FiveImpliesNdNecessity.schemaIn
 
+/-- `vicinity-and-atomicity-t-imply-actuality`
+
+Vicinity ∧ Atomicity (type t) ⇒ Actuality -/
+def vicinity_and_atomicity_t_imply_actuality : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Vicinity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn
+
 /-- `vicinity-and-barcan-t-imply-five-implies-two-hat`
 
 Vicinity ∧ BF (type t) ⇒ 5-necessity implies two-hat necessity -/
@@ -4371,13 +5327,13 @@ def zorn_r_implies_well_ordering_r : Prop :=
 /-- `coalesced-all-finite-individual-domains`
 
 Coalesced sum: root over all finite individual domains: a witness satisfying 13 principles
-and violating 6. -/
+and violating 8. -/
 def coalesced_all_finite_individual_domains : Prop :=
   ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityE.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityT.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn ∧
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BooleanCompletenessT.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRelationalChoice.schemaIn ∧
@@ -4389,6 +5345,30 @@ def coalesced_all_finite_individual_domains : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.DistinctnessPreservingCollapse.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctness.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.signatureB) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
+
+/-- `finite-support-cantor-fan`
+
+Finitely pinned action model: Cantor fan of terminal worlds: a witness satisfying 7 principles
+and violating 8. -/
+def finite_support_cantor_fan : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreSelfAtoms.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.DistinctnessPreservingCollapse.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctnessT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ModalFive.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
@@ -4438,27 +5418,164 @@ def henkin_without_relational_choice : Prop :=
 
 /-- `modalized-cohen-cloud`
 
-Modalized domains: Cohen cloud: a witness satisfying 3 principles
-and violating 2. -/
+Modalized domains: Cohen cloud: a witness satisfying 4 principles
+and violating 3. -/
 def modalized_cohen_cloud : Prop :=
   ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomicity.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecIntensionalChoice.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctnessT.schemaIn
 
 /-- `modalized-cohen-idempotent-sum`
 
-Modalized domains: Cohen–idempotent rooted sum: a witness satisfying 2 principles
-and violating 3. -/
+Modalized domains: Cohen–idempotent rooted sum: a witness satisfying 4 principles
+and violating 6. -/
 def modalized_cohen_idempotent_sum : Prop :=
   ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn ∧
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecIntensionalChoice.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctnessT.schemaIn
+
+/-- `symmetric-entrance-qualitative-links`
+
+Symmetric ideally-full model: a one-point entrance to the qualitative-links tail: a witness satisfying 8 principles
+and violating 15. -/
+def symmetric_entrance_qualitative_links : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RelationalChoice.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.WeaklyRigidPower.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecTameRigidity.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctnessT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.PossibleInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
+
+/-- `symmetric-entrance-qualitative-links-sigma-true-atom`
+
+Symmetric ideally-full model: a one-point entrance to the qualitative-links tail [Σ true atom]: a witness satisfying 8 principles
+and violating 16. -/
+def symmetric_entrance_qualitative_links_sigma_true_atom : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtoms.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreStrongAtoms.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RelationalChoice.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.WeaklyRigidPower.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongActuality.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomsAreSelfAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtomsT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecTameRigidity.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctnessT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.PossibleInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.noContingency _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
+
+/-- `symmetric-finite-compression-entrance`
+
+Symmetric ideally-full model: finite-compression labels at an entrance: a witness satisfying 4 principles
+and violating 8. -/
+def symmetric_finite_compression_entrance : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.TameRigidity.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidPower.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityE.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.WeaklyRigidPower.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecTameRigidity.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Barcan.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RelationalChoice.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
+
+/-- `symmetric-finite-compression-entrance-individuals-singleton`
+
+Symmetric ideally-full model: finite-compression labels at an entrance [one individual]: a witness satisfying 1 principles
+and violating 7. -/
+def symmetric_finite_compression_entrance_individuals_singleton : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.PossibleInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
+
+/-- `ultraproduct-finite-full-s5`
+
+Henkin ultraproduct: finite full S5 models, n worlds and n individuals: a witness satisfying 14 principles
+and violating 6. -/
+def ultraproduct_finite_full_s5 : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecFunctionalChoice.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecIntensionalChoice.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecNecessityOfDistinctness.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicity.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecWellOrdering.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) ∧
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE) ∧
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT) ∧
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.noContingency _) ∧
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.signatureB _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.PossibleInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.PossibleInfinityT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
+
+/-- `actuality`, variant `actual-profile`
+
+Actuality ⇔ Actual Profile -/
+def actuality.actual_profile : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn ↔
+      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.ActualProfile.listSchemaIn
 
 /-- `atomicity-r`, variant `dual`
 
@@ -4828,21 +5945,21 @@ def necessary_relational_choice_r.polyadic : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRelationalChoice.schemaIn ↔
       Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRelationalChoice.listSchemaIn
 
-/-- `necessary-strong-leibniz-r`, variant `dual`
+/-- `necessary-strong-atomicity-r`, variant `dual`
 
-□Strong Leibniz Biconditionals ⇔ Dual form -/
-def necessary_strong_leibniz_r.dual : Prop :=
+□Strong Atomicity ⇔ Dual form -/
+def necessary_strong_atomicity_r.dual : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibniz.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizDual.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicity.schemaIn ↔
+      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityDual.schemaIn
 
-/-- `necessary-strong-leibniz-t`, variant `dual`
+/-- `necessary-strong-atomicity-t`, variant `dual`
 
-□Strong Leibniz Biconditionals (type t) ⇔ Dual form -/
-def necessary_strong_leibniz_t.dual : Prop :=
+□Strong Atomicity (type t) ⇔ Dual form -/
+def necessary_strong_atomicity_t.dual : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizT.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongLeibnizTDual.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn ↔
+      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityTDual.schemaIn
 
 /-- `necessary-tractarianism-r`, variant `polyadic`
 
@@ -4916,21 +6033,21 @@ def separated_structure_r.general : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ↔
       Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.generalSeparatedStructure _)
 
-/-- `strong-leibniz-r`, variant `dual`
+/-- `strong-atomicity-r`, variant `dual`
 
-Strong Leibniz Biconditionals ⇔ Dual form -/
-def strong_leibniz_r.dual : Prop :=
+Strong Atomicity ⇔ Dual form -/
+def strong_atomicity_r.dual : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibniz.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizDual.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicity.schemaIn ↔
+      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityDual.schemaIn
 
-/-- `strong-leibniz-t`, variant `dual`
+/-- `strong-atomicity-t`, variant `dual`
 
-Strong Leibniz Biconditionals (type t) ⇔ Dual form -/
-def strong_leibniz_t.dual : Prop :=
+Strong Atomicity (type t) ⇔ Dual form -/
+def strong_atomicity_t.dual : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizT.schemaIn ↔
-      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongLeibnizTDual.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn ↔
+      Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityTDual.schemaIn
 
 /-- `tractarianism-r`, variant `polyadic`
 

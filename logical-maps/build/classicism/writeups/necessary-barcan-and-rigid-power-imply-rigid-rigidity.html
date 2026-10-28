@@ -323,24 +323,47 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□BF ∧ Rigid Power ⇒ Rigid Rigidity</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.necessary_barcan_and_rigid_power_imply_rigid_rigidity</code>; produced by Claude Opus 5.5 (Anthropic), 10 October 2026, checking a suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 10 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.necessary_barcan_and_rigid_power_imply_rigid_rigidity</code>;
+produced by Claude Opus 5.5 (Anthropic), 10 October 2026, checking a
+suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 10 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
-<li><strong>Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
+<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every
+type. The predicate formulation closes the formula schema using lambda
+abstraction.</li>
+<li><strong>Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Rigid Rigidity.</strong> Being rigid is a rigid property of relations, including propositions.</li>
+<li><strong>Rigid Rigidity.</strong> Being rigid is a rigid property of
+relations, including propositions.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix the type tuple <span class="math inline">\bar\sigma</span> and put <span class="math inline">T:=\lambda\bar x\, .\,\top</span>. <span class="math inline">T</span> is persistent trivially, and inextensible: necessarily, if <span class="math inline">\forall\bar x\, .\,\Box Z\bar x</span> then <span class="math inline">\Box\forall\bar x\, .\,Z\bar x</span>, by BF at each type in the tuple, which □BF gives at every accessible world. For the empty tuple <span class="math inline">T=\top</span> is rigid in C. Rigid Power makes <span class="math inline">\lambda Y\, .\,\operatorname{Rigid}(Y)\land Y\le T</span> rigid. Since <span class="math inline">Y\le T</span> is a theorem of C, that property is necessarily coextensive with <span class="math inline">\lambda Y\, .\,\operatorname{Rigid}(Y)</span>, hence identical to it. Unboxed BF does not suffice for this argument: it makes <span class="math inline">T</span> only weakly rigid.</p>
+<p>Fix the type tuple <span class="math inline">\bar\sigma</span> and
+put <span class="math inline">T:=\lambda\bar x\, .\,\top</span>. <span
+class="math inline">T</span> is persistent trivially, and inextensible:
+necessarily, if <span class="math inline">\forall\bar x\, .\,\Box Z\bar
+x</span> then <span class="math inline">\Box\forall\bar x\, .\,Z\bar
+x</span>, by BF at each type in the tuple, which □BF gives at every
+accessible world. For the empty tuple <span
+class="math inline">T=\top</span> is rigid in C. Rigid Power makes <span
+class="math inline">\lambda Y\, .\,\operatorname{Rigid}(Y)\land Y\le
+T</span> rigid. Since <span class="math inline">Y\le T</span> is a
+theorem of C, that property is necessarily coextensive with <span
+class="math inline">\lambda Y\, .\,\operatorname{Rigid}(Y)</span>, hence
+identical to it. Unboxed BF does not suffice for this argument: it makes
+<span class="math inline">T</span> only weakly rigid.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October 2026.</li>
+<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-barcan-and-rigid-power-imply-rigid-rigidity.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-barcan-and-rigid-power-imply-rigid-rigidity.yaml</code>
 </p>
 </body></html>

@@ -4,7 +4,9 @@
 
 ## Package
 
-- **□Strong Actuality.** Necessarily, there is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
+- **□Strong Actuality.** Necessarily, there is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 - **ND.** Distinct things of any type are necessarily distinct.
 - **□Atomicity.** Necessarily, every non-bottom entity of each relational type has an atom below it.
 - **□Boolean Completeness (type t).** Necessarily, every property of propositions has a greatest lower bound.
@@ -16,7 +18,7 @@
 - **Countable Boolean Completeness.** Every countable property of entities of a relational type has a least upper bound in that type, where a property is countable relative to a type $\sigma$ when it injects into the finite cardinalities of properties of type $\sigma$; one instance for each $\sigma$.
 - **□Countable Boolean Completeness.** Necessarily, every countable property of entities of a relational type has a least upper bound in that type, with countability relative to a type $\sigma$ as in Countable Boolean Completeness; one instance for each $\sigma$.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
-- **¬ Strong Leibniz Biconditionals (type t).** Every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.
+- **¬ Strong Atomicity (type t).** Every possible proposition is entailed by a strong atom, one that is possible and necessarily entails every proposition or its negation.
 - **¬ Infinity Schema (type t).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Two-hat necessity implies ND-necessity.** Whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat.
 - **¬ Possible Infinity (type t).** Possibly there are not finitely many propositions: the Axiom of Infinity at this type, under a diamond.
@@ -40,9 +42,15 @@ Interpretation of Σ, fixed for this record: every constant of Σ is relational,
 
 ## Arguments
 
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms.
+
+At $E$ the only symmetric propositions over the arrows $E\to E$ are empty or everything, any two injections of $\mathbb N$ agreeing on a finite set up to a permutation; so the set of all arrows $E\to E$ is the atom containing $1_E$. At $O$ the symmetry group $G_O$ is pinned down by any new individual, since an injection into the old individuals cannot agree with a permutation preserving old and new at it, and is the atom containing $1_O$. No self-atom at $E$ contains an arrow $f$ into $O$: its transport along $f$ would be $G_O$, but an injection $m$ into the old individuals fixing $f(N)$ pointwise, for $N$ pinning the self-atom, is not in $G_O$ and carries $f$ to an arrow agreeing with it on $N$. So the self-atoms at $E$ sit over the atom of all arrows $E\to E$, and are atoms; at $O$, likewise, no self-atom contains an injection into the old individuals, and the symmetric pinned propositions over the arrows $O\to E$ are empty or everything, so the self-atoms there are $G_O$ and the set of all arrows $O\to E$, both atoms. Each is a strong atom: the atom at $E$ is the recorded true strong atom; $G_O$ becomes empty under an injection into the old individuals and under an arrow to $E$; the set of all arrows $O\to E$ becomes itself under an arrow $O\to O$ and the set of all arrows $E\to E$ under an arrow to $E$, atoms. At relational types a self-atom sits over one of these as the orbit of a single pair, an atom and a strong atom. So both principles hold at both objects, at every type.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
 ### Holds □Strong Actuality.
 
-At $E$ the arrows to $E$ form a true strong world: along an arrow to $E$ it becomes itself, along an arrow to $O$ the set of arrows from $O$ to $E$, an atom. At $O$, $G_O$ is one: along a member of $G_O$ it becomes itself, along a member of $K$ or an arrow to $E$ the empty set. Both objects are reachable from $E$.
+At $E$ the arrows to $E$ form a true strong atom: along an arrow to $E$ it becomes itself, along an arrow to $O$ the set of arrows from $O$ to $E$, an atom. At $O$, $G_O$ is one: along a member of $G_O$ it becomes itself, along a member of $K$ or an arrow to $E$ the empty set. Both objects are reachable from $E$.
 
 *Write-up: [symmetric-old-new-individuals](symmetric-old-new-individuals.html). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-10-06.*
 
@@ -58,9 +66,9 @@ At both objects every relational type is atomic. The entities pinned down by a f
 
 *Write-up: [symmetric-old-new-individuals](symmetric-old-new-individuals.html). By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
 
-### Fails Strong Leibniz Biconditionals (type t).
+### Fails Strong Atomicity (type t).
 
-The arrows from $E$ to $O$ form a possible proposition whose only nonzero part is itself, and along the inclusion $\iota$ it becomes $G_O\cup K$, which $G_O$ splits; so no strong world lies below it. (The map derives the failures of BF and of □ND at $t$; the write-up also gives them directly.)
+The arrows from $E$ to $O$ form a possible proposition whose only nonzero part is itself, and along the inclusion $\iota$ it becomes $G_O\cup K$, which $G_O$ splits; so no strong atom lies below it. (The map derives the failures of BF and of □ND at $t$; the write-up also gives them directly.)
 
 *Write-up: [symmetric-old-new-individuals](symmetric-old-new-individuals.html). By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
 
@@ -93,7 +101,7 @@ Boxed Rigid Power, for either choice of individuals. Arrows are injective; at $E
 
 ### Holds □Truth implies 5-necessity. Fails Two-hat necessity implies ND-necessity.
 
-At $E$ the four propositions are determined by the target, and the strong world $a$ is the set of arrows $E\to E$. $\Diamond a$ is every arrow out of $E$, since an injection $E\to O$ with old range is followed by an injection $O\to E$, so $\Box_{\ne}=\Box$ at $E$. But $\hat\Diamond a$ contains no arrow $u:E\to O$: its retractions $v:O\to E$ cannot return to the truth $G_O$ at $O$, because any $x:E\to O$ has old range and $x\circ v\in K$. So $\hat{\hat\Box}$ at $E$ is the box over $a$; $a$ is two-hat necessary and not ND-necessary, and every truth ($\top$ and $a$) is two-hat necessary. At $O$, with strong world $G_O$, $\hat\Diamond G_O=G_O$ (a member of $K$ or an arrow to $E$ cannot be brought back into $G_O$), so every truth at $O$, each containing $G_O$, is two-hat necessary. With necessary Strong Actuality, $\Box_5=\hat{\hat\Box}$ everywhere, so every truth is 5-necessary at both objects.
+At $E$ the four propositions are determined by the target, and the strong atom $a$ is the set of arrows $E\to E$. $\Diamond a$ is every arrow out of $E$, since an injection $E\to O$ with old range is followed by an injection $O\to E$, so $\Box_{\ne}=\Box$ at $E$. But $\hat\Diamond a$ contains no arrow $u:E\to O$: its retractions $v:O\to E$ cannot return to the truth $G_O$ at $O$, because any $x:E\to O$ has old range and $x\circ v\in K$. So $\hat{\hat\Box}$ at $E$ is the box over $a$; $a$ is two-hat necessary and not ND-necessary, and every truth ($\top$ and $a$) is two-hat necessary. At $O$, with strong atom $G_O$, $\hat\Diamond G_O=G_O$ (a member of $K$ or an arrow to $E$ cannot be brought back into $G_O$), so every truth at $O$, each containing $G_O$, is two-hat necessary. With necessary Strong Actuality, $\Box_5=\hat{\hat\Box}$ everywhere, so every truth is 5-necessary at both objects.
 
 *Address: `symmetric-old-new-individuals-individuals-singleton#collapse-split`. By Claude Fable 5.1 (Anthropic), at Cian Dorr's direction, 2026-10-14.*
 
@@ -147,7 +155,7 @@ Found by Claude Fable 5.1 as a countermodel to a principle from another context,
 ## Sources
 
 - **Fable 5.1, 6 Oct** — Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 6 October 2026, in a session with Cian Dorr, as a countermodel to a principle (“Frex*”) from another context; it satisfies □Strong Actuality and refutes Inextensible Comprehension.
-- **Opus 5.5, 6 Oct** — Claude Opus 5.5 (Anthropic), 6 October 2026, at Cian Dorr's direction; the corrected argument for the failure of Inextensible Comprehension, and the verdicts on ND, Atomicity, Boolean Completeness, BF and the Strong Leibniz Biconditionals; see the write-up.
+- **Opus 5.5, 6 Oct** — Claude Opus 5.5 (Anthropic), 6 October 2026, at Cian Dorr's direction; the corrected argument for the failure of Inextensible Comprehension, and the verdicts on ND, Atomicity, Boolean Completeness, BF and Strong Atomicity; see the write-up.
 - **BC does not imply RC** — Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Definitions 15–18, p. 8; Proposition 20 (symmetric ideally-full models are models of C).
 - **Astra (Kodsi) 22 Oct** — GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Old/new model, Boolean Completeness and the rigidity separation, research note of 22 October 2026 (unpaginated), in Daniel Kodsi's submission of 24 October 2026 (branch classicism-results-2026-10-24 of github.com/dkodsi/Logical-Maps); the correction of Boolean Completeness.
 

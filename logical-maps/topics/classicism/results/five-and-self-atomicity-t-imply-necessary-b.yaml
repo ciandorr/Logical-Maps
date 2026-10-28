@@ -1,0 +1,30 @@
+id: five-and-self-atomicity-t-imply-necessary-b
+premises:
+- modal-five
+- self-atomicity-t
+conclusion: necessary-modal-b
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, the notion of a self-atom and the bridge principles, 25 October 2026; the proof by Claude
+  Fable 5.1 (Anthropic) the same day, from the survey of Strong Atomicity results that Cian Dorr requested
+  (session transcript of 25 October 2026).
+source_names:
+- Dorr 25 Oct
+proof: 'With 5, every self-atom $w$ is necessarily a self-atom: 5 gives $\Box\Diamond w$ and 4 gives $\Box\Box(w\to\operatorname{Atom}(w))$,
+  so $\Box\operatorname{SelfAtom}_t(w)$. Let $q:=\exists w\, .\,\Box\operatorname{SelfAtom}_t(w)\land w$. Then
+  $\Box q$: if $\Diamond\neg q$, Self-Atomicity (type t) gives a self-atom $w\le\neg q$, and $\Box\Box\operatorname{SelfAtom}_t(w)$
+  by the above and 4, so at a world where $w$ holds, as one does since $\Diamond w$, $q$ holds too, contradicting
+  $w\le\neg q$. Next, $q\to\forall p\, .\,p\to\Box\Diamond p$ is a theorem of C: given $\Box\operatorname{SelfAtom}_t(w_0)\land
+  w_0$ and a true $p$, T gives $\operatorname{SelfAtom}_t(w_0)$ and then $\operatorname{Atom}_t(w_0)$, so
+  $w_0\le p$ or $w_0\le\neg p$, and the second contradicts $w_0\land p$; $\Box\operatorname{SelfAtom}_t(w_0)$
+  gives $\Box\Diamond w_0$, so $w_0\le p$ gives $\Box\Diamond p$. Necessitating this theorem and applying
+  K to $\Box q$ gives $\Box\forall p\, .\,p\to\Box\Diamond p$.'
+notes: 'Strengthens [[five-and-strong-atomicity-t-imply-necessary-b]], whose proof this follows with self-atoms
+  for strong atoms: 5 is used only to make the self-atoms necessarily possible.'

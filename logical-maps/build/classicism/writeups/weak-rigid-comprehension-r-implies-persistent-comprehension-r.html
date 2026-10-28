@@ -323,33 +323,65 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Weak Rigid Comprehension ⇒ Persistent Comprehension</h1></header><p class="cert">
-Result — Source: BC does not imply RC (draft), Lean <code>Classicism.Map.weak_rigid_comprehension_r_implies_persistent_comprehension_r</code>; produced by Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted by Cian Dorr, 19 September 2026.
+Result — Source: BC does not imply RC (draft), Lean
+<code>Classicism.Map.weak_rigid_comprehension_r_implies_persistent_comprehension_r</code>;
+produced by Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted
+by Cian Dorr, 19 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Weak Rigid Comprehension.</strong> Every relation, including a proposition, is coextensive with a weakly rigid one, that is, with one that is weakly persistent and weakly inextensible.</li>
+<li><strong>Weak Rigid Comprehension.</strong> Every relation, including
+a proposition, is coextensive with a weakly rigid one, that is, with one
+that is weakly persistent and weakly inextensible.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Persistent Comprehension.</strong> Every relation, including a proposition, is coextensive with a persistent one.</li>
+<li><strong>Persistent Comprehension.</strong> Every relation, including
+a proposition, is coextensive with a persistent one.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>A weakly rigid relation <span class="math inline">Y</span> is persistent: apply its weak inextensibility to <span class="math inline">\lambda\bar x\, .\,\Box Y[\bar x]</span>, whose hypothesis <span class="math inline">Y[\bar x]\to\Box\Box Y[\bar x]</span> holds by weak persistence and 4; this gives <span class="math inline">Y\le\lambda\bar x\, .\,\Box Y[\bar x]</span>, which is <span class="math inline">\operatorname{Persistent}(Y)</span>. So a weakly rigid coextension is already a persistent coextension.</p>
+<p>A weakly rigid relation <span class="math inline">Y</span> is
+persistent: apply its weak inextensibility to <span
+class="math inline">\lambda\bar x\, .\,\Box Y[\bar x]</span>, whose
+hypothesis <span class="math inline">Y[\bar x]\to\Box\Box Y[\bar
+x]</span> holds by weak persistence and 4; this gives <span
+class="math inline">Y\le\lambda\bar x\, .\,\Box Y[\bar x]</span>, which
+is <span class="math inline">\operatorname{Persistent}(Y)</span>. So a
+weakly rigid coextension is already a persistent coextension.</p>
 <h2 id="notes">Notes</h2>
-<p>With the recorded implication from Persistent Comprehension to Actuality, this completes the converse of the implication from Boolean Completeness and Actuality, so Weak Rigid Comprehension is equivalent to their conjunction.</p>
+<p>With the recorded implication from Persistent Comprehension to
+Actuality, this completes the converse of the implication from Boolean
+Completeness and Actuality, so Weak Rigid Comprehension is equivalent to
+their conjunction.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction) — “Weakly rigid” now means weakly persistent and weakly inextensible (until then, persistent and weakly inextensible; Very Weak Rigid Comprehension retired); the proof’s wording is adjusted to match. A weakly rigid relation is still persistent, so the mathematical content is unchanged.</li>
+<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction) — “Weakly rigid” now means weakly persistent and
+weakly inextensible (until then, persistent and weakly inextensible;
+Very Weak Rigid Comprehension retired); the proof’s wording is adjusted
+to match. A weakly rigid relation is still persistent, so the
+mathematical content is unchanged.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, footnote on p. 12.</li>
+<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean
+Completeness does not imply Rigid Comprehension, draft of 30 July 2026,
+footnote on p. 12.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/weak-rigid-comprehension-r-implies-persistent-comprehension-r.yaml</code>
+Record:
+<code>topics/classicism/results/weak-rigid-comprehension-r-implies-persistent-comprehension-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — footnote on p. 12. The footnote’s opening observation, that weakly rigid properties are persistent, from which it obtains Actuality through Persistent Comprehension.</li>
+<li><strong>Proof: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — footnote on p. 12.
+The footnote’s opening observation, that weakly rigid properties are
+persistent, from which it obtains Actuality through Persistent
+Comprehension.</li>
 </ul>
 </body></html>

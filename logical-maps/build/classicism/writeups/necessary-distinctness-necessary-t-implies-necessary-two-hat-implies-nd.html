@@ -323,30 +323,68 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□ND (type t) ⇒ □Two-hat necessity implies ND-necessity</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.necessary_distinctness_necessary_t_implies_necessary_two_hat_implies_nd</code>; produced by Claude Fable 5.1 (Anthropic), 14 October 2026, at Cian Dorr’s direction; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.necessary_distinctness_necessary_t_implies_necessary_two_hat_implies_nd</code>;
+produced by Claude Fable 5.1 (Anthropic), 14 October 2026, at Cian
+Dorr’s direction; recorded by Claude Fable 5.1 (Anthropic), prompted by
+Cian Dorr, 14 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□ND (type t).</strong> Necessarily, distinct propositions are necessarily distinct.</li>
+<li><strong>□ND (type t).</strong> Necessarily, distinct propositions
+are necessarily distinct.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□Two-hat necessity implies ND-necessity.</strong> Necessarily, whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat. In C this is the identity <span class="math inline">\hat{\hat\Box}=\Box_{\ne}</span>.</li>
+<li><strong>□Two-hat necessity implies ND-necessity.</strong>
+Necessarily, whatever is two-hat necessary is ND-necessary: the
+distinctness-preserving modality agrees with its hat. In C this is the
+identity <span
+class="math inline">\hat{\hat\Box}=\Box_{\ne}</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>In C, <span class="math inline">\Box p</span> is <span class="math inline">p=\top</span>, so ND at type <span class="math inline">t</span> instantiated at <span class="math inline">y:=\neg p</span>, <span class="math inline">z:=\top</span> reads <span class="math inline">\Diamond p\to\Box\Diamond p</span>, the 5 axiom; with T this gives B, <span class="math inline">p\to\Box\Diamond p</span>. Under the boxed premise <span class="math inline">\Box</span> is therefore necessarily N, K and B, an S5 operator, so <span class="math inline">\Box_5p\to\Box p</span> by the definition of <span class="math inline">\Box_5</span>. With the chain <span class="math inline">\Box\le\Box_{\ne}\le\hat{\hat\Box}\le\Box_5</span> all four operators are identical, necessarily.</p>
+<p>In C, <span class="math inline">\Box p</span> is <span
+class="math inline">p=\top</span>, so ND at type <span
+class="math inline">t</span> instantiated at <span
+class="math inline">y:=\neg p</span>, <span
+class="math inline">z:=\top</span> reads <span
+class="math inline">\Diamond p\to\Box\Diamond p</span>, the 5 axiom;
+with T this gives B, <span class="math inline">p\to\Box\Diamond
+p</span>. Under the boxed premise <span class="math inline">\Box</span>
+is therefore necessarily N, K and B, an S5 operator, so <span
+class="math inline">\Box_5p\to\Box p</span> by the definition of <span
+class="math inline">\Box_5</span>. With the chain <span
+class="math inline">\Box\le\Box_{\ne}\le\hat{\hat\Box}\le\Box_5</span>
+all four operators are identical, necessarily.</p>
 <h2 id="notes">Notes</h2>
-<p>Boxed ND at type <span class="math inline">t</span> makes <span class="math inline">\Box</span> itself S5, so every operator in the tower collapses to <span class="math inline">\Box</span> (collapse at level 0); the other boxed principles of the category follow by the composition results. Proposition D2 of The Bounds of Possibility gives the same step for identity-based operators.</p>
+<p>Boxed ND at type <span class="math inline">t</span> makes <span
+class="math inline">\Box</span> itself S5, so every operator in the
+tower collapses to <span class="math inline">\Box</span> (collapse at
+level 0); the other boxed principles of the category follow by the
+composition results. Proposition D2 of The Bounds of Possibility gives
+the same step for identity-based operators.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1 (Anthropic), conversation of 14 October 2026 (transcript in the private notes).</li>
-<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne, and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D, Proposition D2, p. 401.</li>
+<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1
+(Anthropic), conversation of 14 October 2026 (transcript in the private
+notes).</li>
+<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne,
+and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D,
+Proposition D2, p. 401.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-distinctness-necessary-t-implies-necessary-two-hat-implies-nd.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-distinctness-necessary-t-implies-necessary-two-hat-implies-nd.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Related: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Proposition D2</li>
+<li><strong>Related: The Bounds of Possibility.</strong> Dorr, Cian,
+John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of
+Possibility. Oxford University Press. Appendix D, Narrower Modalities in
+Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof
+dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over
+higher-order logic) is read into C by interpreting the primitive box as
+<span class="math inline">\lambda p\, .\,p=\top</span>, under which
+every theorem of HS4 is a theorem of C. — Proposition D2</li>
 </ul>
 </body></html>

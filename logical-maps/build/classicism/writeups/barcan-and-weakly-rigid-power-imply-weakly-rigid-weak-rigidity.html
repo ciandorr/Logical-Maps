@@ -323,26 +323,48 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>BF ∧ Weakly Rigid Power ⇒ Weakly Rigid Weak Rigidity</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.barcan_and_weakly_rigid_power_imply_weakly_rigid_weak_rigidity</code>; produced by Cian Dorr, 10 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 10 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.barcan_and_weakly_rigid_power_imply_weakly_rigid_weak_rigidity</code>;
+produced by Cian Dorr, 10 October 2026; recorded by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 10 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>BF.</strong> The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
-<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid, so is the property of being a weakly rigid relation that entails it.</li>
+<li><strong>BF.</strong> The Barcan Formula at every type. The predicate
+formulation closes the formula schema using lambda abstraction.</li>
+<li><strong>Weakly Rigid Power.</strong> If a relation is weakly rigid,
+so is the property of being a weakly rigid relation that entails
+it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Weakly Rigid Weak Rigidity.</strong> Being weakly rigid is a weakly rigid property of relations, including propositions.</li>
+<li><strong>Weakly Rigid Weak Rigidity.</strong> Being weakly rigid is a
+weakly rigid property of relations, including propositions.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix the type tuple <span class="math inline">\bar\sigma</span> and put <span class="math inline">T:=\lambda\bar x\, .\,\top</span>. <span class="math inline">T</span> is weakly persistent trivially, and weakly inextensible by BF at each type in the tuple: if <span class="math inline">\forall\bar x\, .\,\Box Z\bar x</span> then <span class="math inline">\Box\forall\bar x\, .\,Z\bar x</span>, that is <span class="math inline">T\le Z</span>. For the empty tuple no BF is needed. Weakly Rigid Power makes <span class="math inline">\lambda Y\, .\,\operatorname{WeaklyRigid}(Y)\land Y\le T</span> weakly rigid, and since <span class="math inline">Y\le T</span> is a theorem of C that property is identical to <span class="math inline">\lambda Y\, .\,\operatorname{WeaklyRigid}(Y)</span>.</p>
+<p>Fix the type tuple <span class="math inline">\bar\sigma</span> and
+put <span class="math inline">T:=\lambda\bar x\, .\,\top</span>. <span
+class="math inline">T</span> is weakly persistent trivially, and weakly
+inextensible by BF at each type in the tuple: if <span
+class="math inline">\forall\bar x\, .\,\Box Z\bar x</span> then <span
+class="math inline">\Box\forall\bar x\, .\,Z\bar x</span>, that is <span
+class="math inline">T\le Z</span>. For the empty tuple no BF is needed.
+Weakly Rigid Power makes <span class="math inline">\lambda Y\,
+.\,\operatorname{WeaklyRigid}(Y)\land Y\le T</span> weakly rigid, and
+since <span class="math inline">Y\le T</span> is a theorem of C that
+property is identical to <span class="math inline">\lambda Y\,
+.\,\operatorname{WeaklyRigid}(Y)</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>It makes barcan-and-weakly-rigid-power-imply-necessary-tame-rigidity derivable, through weakly-rigid-weak-rigidity-implies-necessary-tame-rigidity.</p>
+<p>It makes barcan-and-weakly-rigid-power-imply-necessary-tame-rigidity
+derivable, through
+weakly-rigid-weak-rigidity-implies-necessary-tame-rigidity.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October 2026.</li>
+<li><strong>Dorr 10 Oct</strong> — Cian Dorr, suggestion of 10 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/barcan-and-weakly-rigid-power-imply-weakly-rigid-weak-rigidity.yaml</code>
+Record:
+<code>topics/classicism/results/barcan-and-weakly-rigid-power-imply-weakly-rigid-weak-rigidity.yaml</code>
 </p>
 </body></html>

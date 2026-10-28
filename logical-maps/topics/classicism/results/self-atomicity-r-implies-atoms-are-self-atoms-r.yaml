@@ -1,0 +1,21 @@
+id: self-atomicity-r-implies-atoms-are-self-atoms-r
+premises:
+- self-atomicity-r
+conclusion: atoms-are-self-atoms-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 25 October 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, observation of 25 October 2026 (session transcript).
+source_names:
+- Dorr 25 Oct
+proof: Let $X$ be an atom of a relational type. It is not bottom, so Self-Atomicity gives a self-atom
+  $Q\le X$; as $Q\ne\bot$ and $X$ is an atom, $Q=X$, so $X$ is a self-atom.
+notes: So Self-Atomicity lies between Atomicity with Atoms are self-atoms, which imply it, and Atoms are
+  self-atoms alone; the converse fails, since Atoms are self-atoms holds vacuously wherever there are
+  no atoms (symmetric-all-surjections) while Self-Atomicity fails there.

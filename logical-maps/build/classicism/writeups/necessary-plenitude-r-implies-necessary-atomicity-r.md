@@ -18,7 +18,7 @@ The recorded implication from □Plenitude to Atomicity is a theorem of C, so it
 
 The boxed form of [[necessary-plenitude-r-implies-atomicity-r]].
 
-The general pattern: a theorem whose premise is already boxed yields the boxed conclusion from the same premise, by 4 and K. With □ND ⇒ □BF and □Atomicity + □BF ⇒ □SL this recovers the book’s remark (p. 176) that □Functional Choice yields the Strong Leibniz Biconditionals.
+The general pattern: a theorem whose premise is already boxed yields the boxed conclusion from the same premise, by 4 and K. With □ND ⇒ □BF and □Atomicity + □BF ⇒ □Strong Atomicity this recovers the book’s remark (p. 176) that □Functional Choice yields Strong Atomicity.
 
 ## Sources
 

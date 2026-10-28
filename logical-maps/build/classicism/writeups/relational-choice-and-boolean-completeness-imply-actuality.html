@@ -322,12 +322,36 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Relational Choice and Boolean Completeness imply Actuality</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026.</p>
-<p><strong>Theorem.</strong> In C, Relational Choice from <span class="math inline">t</span> to <span class="math inline">t</span> together with Boolean Completeness at <span class="math inline">t</span> and at <span class="math inline">tt</span> implies Actuality. All premises are unboxed.</p>
-<p>Since Boolean Completeness at <span class="math inline">tt</span> implies it at <span class="math inline">t</span> (Remark 2), the instances used are <span class="math inline">\mathrm{RC}_{t,t}</span> and <span class="math inline">\mathrm{BC}_{tt}</span>. Nothing else is assumed: no ND, BF, Plenitude, or necessitated premise.</p>
-<p><strong>Overview.</strong> If Actuality fails, the false propositions have join <span class="math inline">\top</span> (Lemma 3). Relational Choice refines them into a family of pairwise disjoint false propositions with the same join <span class="math inline">\top</span> (Lemma 4). But Boolean Completeness at <span class="math inline">tt</span> guarantees that a pairwise disjoint family whose join is true has a true member (Lemma 2).</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Relational Choice and Boolean Completeness imply Actuality</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October
+2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr, 24 October 2026.</p>
+<p><strong>Theorem.</strong> In C, Relational Choice from <span
+class="math inline">t</span> to <span class="math inline">t</span>
+together with Boolean Completeness at <span class="math inline">t</span>
+and at <span class="math inline">tt</span> implies Actuality. All
+premises are unboxed.</p>
+<p>Since Boolean Completeness at <span class="math inline">tt</span>
+implies it at <span class="math inline">t</span> (Remark 2), the
+instances used are <span class="math inline">\mathrm{RC}_{t,t}</span>
+and <span class="math inline">\mathrm{BC}_{tt}</span>. Nothing else is
+assumed: no ND, BF, Plenitude, or necessitated premise.</p>
+<p><strong>Overview.</strong> If Actuality fails, the false propositions
+have join <span class="math inline">\top</span> (Lemma 3). Relational
+Choice refines them into a family of pairwise disjoint false
+propositions with the same join <span class="math inline">\top</span>
+(Lemma 4). But Boolean Completeness at <span
+class="math inline">tt</span> guarantees that a pairwise disjoint family
+whose join is true has a true member (Lemma 2).</p>
 <h2 id="notation">Notation</h2>
-<p>Throughout, <span class="math inline">\le</span> is <span class="math inline">\le_t</span>, and <span class="math inline">p&lt;q</span> means <span class="math inline">p\le q\land p\ne q</span>. For a property <span class="math inline">A^{tt}</span> of propositions, <span class="math inline">\bigvee A</span> is its least upper bound at <span class="math inline">t</span>, which Boolean Completeness at <span class="math inline">t</span> provides. For a proposition <span class="math inline">a</span>, its haecceity is</p>
+<p>Throughout, <span class="math inline">\le</span> is <span
+class="math inline">\le_t</span>, and <span
+class="math inline">p&lt;q</span> means <span class="math inline">p\le
+q\land p\ne q</span>. For a property <span
+class="math inline">A^{tt}</span> of propositions, <span
+class="math inline">\bigvee A</span> is its least upper bound at <span
+class="math inline">t</span>, which Boolean Completeness at <span
+class="math inline">t</span> provides. For a proposition <span
+class="math inline">a</span>, its haecceity is</p>
 <p><span class="math display">
 H_a:=\lambda z^t\, .\,z=a\qquad(\text{type }tt),
 </span></p>
@@ -335,104 +359,293 @@ H_a:=\lambda z^t\, .\,z=a\qquad(\text{type }tt),
 <p><span class="math display">
 \operatorname{SameOrDisjoint}(x,y):=x=y\lor x\land y=\bot.
 </span></p>
-<p>A property <span class="math inline">A^{tt}</span> is <em>pairwise disjoint</em> when <span class="math inline">\forall a\,b\, .\,Aa\land Ab\to\operatorname{SameOrDisjoint}(a,b)</span>.</p>
-<p>Recall that <span class="math inline">p\le q</span> is equivalent to <span class="math inline">\Box(p\to q)</span>, and <span class="math inline">X\le_{tt}Y</span> to <span class="math inline">\Box\forall z\, .\,Xz\to Yz</span> (Background). In particular <span class="math inline">p\le q</span> gives <span class="math inline">p\to q</span>.</p>
-<h2 id="lemma-1-evaluation-preserves-joins">Lemma 1: evaluation preserves joins</h2>
-<p>For <span class="math inline">X^{tt}</span> and propositions <span class="math inline">x,c</span>:</p>
+<p>A property <span class="math inline">A^{tt}</span> is <em>pairwise
+disjoint</em> when <span class="math inline">\forall a\,b\, .\,Aa\land
+Ab\to\operatorname{SameOrDisjoint}(a,b)</span>.</p>
+<p>Recall that <span class="math inline">p\le q</span> is equivalent to
+<span class="math inline">\Box(p\to q)</span>, and <span
+class="math inline">X\le_{tt}Y</span> to <span
+class="math inline">\Box\forall z\, .\,Xz\to Yz</span> (Background). In
+particular <span class="math inline">p\le q</span> gives <span
+class="math inline">p\to q</span>.</p>
+<h2 id="lemma-1-evaluation-preserves-joins">Lemma 1: evaluation
+preserves joins</h2>
+<p>For <span class="math inline">X^{tt}</span> and propositions <span
+class="math inline">x,c</span>:</p>
 <p><span class="math display">
 X\le_{tt}\lambda z\, .\,(z=x\to c)\quad\text{iff}\quad Xx\le c.
 </span></p>
-<p>Indeed the left side is <span class="math inline">\Box\forall z\, .\,Xz\to(z=x\to c)</span>, the right side is <span class="math inline">\Box(Xx\to c)</span>, and <span class="math inline">\forall z\, .\,(Xz\to(z=x\to c))\leftrightarrow(Xx\to c)</span> is a theorem of C, so its necessitation holds.</p>
-<p>Consequently, if <span class="math inline">J</span> is the least upper bound at <span class="math inline">tt</span> of a property <span class="math inline">\mathcal A^{(tt)t}</span>, then for all <span class="math inline">x,c</span>:</p>
+<p>Indeed the left side is <span class="math inline">\Box\forall z\,
+.\,Xz\to(z=x\to c)</span>, the right side is <span
+class="math inline">\Box(Xx\to c)</span>, and <span
+class="math inline">\forall z\, .\,(Xz\to(z=x\to
+c))\leftrightarrow(Xx\to c)</span> is a theorem of C, so its
+necessitation holds.</p>
+<p>Consequently, if <span class="math inline">J</span> is the least
+upper bound at <span class="math inline">tt</span> of a property <span
+class="math inline">\mathcal A^{(tt)t}</span>, then for all <span
+class="math inline">x,c</span>:</p>
 <p><span class="math display">
 Jx\le c\quad\text{iff}\quad\forall Y\, .\,\mathcal AY\to Yx\le c.
 </span></p>
-<p>For <span class="math inline">Jx\le c</span> iff <span class="math inline">J\le_{tt}\lambda z\, .\,(z=x\to c)</span> iff every <span class="math inline">Y</span> in <span class="math inline">\mathcal A</span> has <span class="math inline">Y\le_{tt}\lambda z\, .\,(z=x\to c)</span> iff every <span class="math inline">Y</span> in <span class="math inline">\mathcal A</span> has <span class="math inline">Yx\le c</span>.</p>
-<h2 id="lemma-2-a-pairwise-disjoint-family-with-a-true-join-has-a-true-member">Lemma 2: a pairwise disjoint family with a true join has a true member</h2>
-<p><em>Assume Boolean Completeness at <span class="math inline">t</span> and <span class="math inline">tt</span>.</em> Let <span class="math inline">A^{tt}</span> be pairwise disjoint, with every member false. Then <span class="math inline">\bigvee A</span> is false.</p>
-<p><em>Proof.</em> Suppose <span class="math inline">\bigvee A</span> is true. Let <span class="math inline">J</span> be the least upper bound at <span class="math inline">tt</span> of the haecceities of members of <span class="math inline">A</span>,</p>
+<p>For <span class="math inline">Jx\le c</span> iff <span
+class="math inline">J\le_{tt}\lambda z\, .\,(z=x\to c)</span> iff every
+<span class="math inline">Y</span> in <span class="math inline">\mathcal
+A</span> has <span class="math inline">Y\le_{tt}\lambda z\, .\,(z=x\to
+c)</span> iff every <span class="math inline">Y</span> in <span
+class="math inline">\mathcal A</span> has <span
+class="math inline">Yx\le c</span>.</p>
+<h2
+id="lemma-2-a-pairwise-disjoint-family-with-a-true-join-has-a-true-member">Lemma
+2: a pairwise disjoint family with a true join has a true member</h2>
+<p><em>Assume Boolean Completeness at <span class="math inline">t</span>
+and <span class="math inline">tt</span>.</em> Let <span
+class="math inline">A^{tt}</span> be pairwise disjoint, with every
+member false. Then <span class="math inline">\bigvee A</span> is
+false.</p>
+<p><em>Proof.</em> Suppose <span class="math inline">\bigvee A</span> is
+true. Let <span class="math inline">J</span> be the least upper bound at
+<span class="math inline">tt</span> of the haecceities of members of
+<span class="math inline">A</span>,</p>
 <p><span class="math display">
 \mathcal A:=\lambda Y^{tt}\, .\,\exists a\, .\,Aa\land Y=H_a .
 </span></p>
-<p><strong>Step 1.</strong> For all propositions <span class="math inline">x,y</span>:</p>
+<p><strong>Step 1.</strong> For all propositions <span
+class="math inline">x,y</span>:</p>
 <p><span class="math display">
 Jx\land Jy\le\operatorname{SameOrDisjoint}(x,y). \tag{1}
 </span></p>
-<p>Let <span class="math inline">a,b</span> be members of <span class="math inline">A</span>. Then <span class="math inline">\operatorname{SameOrDisjoint}(a,b)</span>, and as a disjunction of identities it is necessary. Since <span class="math inline">x=a\land y=b\land\operatorname{SameOrDisjoint}(a,b)\to\operatorname{SameOrDisjoint}(x,y)</span> is a theorem of C, its necessitation gives the first line of</p>
+<p>Let <span class="math inline">a,b</span> be members of <span
+class="math inline">A</span>. Then <span
+class="math inline">\operatorname{SameOrDisjoint}(a,b)</span>, and as a
+disjunction of identities it is necessary. Since <span
+class="math inline">x=a\land
+y=b\land\operatorname{SameOrDisjoint}(a,b)\to\operatorname{SameOrDisjoint}(x,y)</span>
+is a theorem of C, its necessitation gives the first line of</p>
 <p><span class="math display">
 \begin{aligned}
 H_ax\land H_by&amp;\le\operatorname{SameOrDisjoint}(x,y),\\
-H_by&amp;\le H_ax\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{for all }b\text{ in }A,\\
-Jy&amp;\le H_ax\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{by Lemma 1},\\
-H_ax&amp;\le Jy\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{for all }a\text{ in }A,\\
-Jx&amp;\le Jy\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{by Lemma 1},
+H_by&amp;\le
+H_ax\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{for all
+}b\text{ in }A,\\
+Jy&amp;\le H_ax\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{by
+Lemma 1},\\
+H_ax&amp;\le Jy\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{for
+all }a\text{ in }A,\\
+Jx&amp;\le Jy\to\operatorname{SameOrDisjoint}(x,y)&amp;&amp;\text{by
+Lemma 1},
 \end{aligned}
 </span></p>
 <p>which is (1).</p>
-<p><strong>Step 2.</strong> For each member <span class="math inline">a</span> of <span class="math inline">A</span>, <span class="math inline">H_a\le_{tt}J</span> and <span class="math inline">H_aa=(a=a)=\top</span>, so <span class="math inline">Ja=\top</span>.</p>
-<p><strong>Step 3.</strong> Put <span class="math inline">v:=\forall p\, .\,Jp\to\neg p</span>. For each member <span class="math inline">a</span> of <span class="math inline">A</span>,</p>
+<p><strong>Step 2.</strong> For each member <span
+class="math inline">a</span> of <span class="math inline">A</span>,
+<span class="math inline">H_a\le_{tt}J</span> and <span
+class="math inline">H_aa=(a=a)=\top</span>, so <span
+class="math inline">Ja=\top</span>.</p>
+<p><strong>Step 3.</strong> Put <span class="math inline">v:=\forall p\,
+.\,Jp\to\neg p</span>. For each member <span
+class="math inline">a</span> of <span class="math inline">A</span>,</p>
 <p><span class="math display">
 v\le(Ja\to\neg a)=\neg a,\qquad\text{so}\qquad a\le\neg v .
 </span></p>
-<p>Hence <span class="math inline">\bigvee A\le\neg v</span>. As <span class="math inline">\bigvee A</span> is true, <span class="math inline">v</span> is false, so there is a proposition <span class="math inline">q</span> with</p>
+<p>Hence <span class="math inline">\bigvee A\le\neg v</span>. As <span
+class="math inline">\bigvee A</span> is true, <span
+class="math inline">v</span> is false, so there is a proposition <span
+class="math inline">q</span> with</p>
 <p><span class="math display">
 Jq\land q .
 </span></p>
-<p><strong>Step 4.</strong> Let <span class="math inline">a</span> be a member of <span class="math inline">A</span>. Then <span class="math inline">q\ne a</span>, since <span class="math inline">q</span> is true and <span class="math inline">a</span> is false. By (1) and Step 2, <span class="math inline">\operatorname{SameOrDisjoint}(q,a)</span>, so <span class="math inline">q\land a=\bot</span> and <span class="math inline">a\le\neg q</span>. Hence <span class="math inline">\bigvee A\le\neg q</span>, and <span class="math inline">\bigvee A</span> is false since <span class="math inline">q</span> is true: a contradiction. <span class="math inline">\square</span></p>
-<p>Equivalently, for any pairwise disjoint <span class="math inline">A^{tt}</span>, <span class="math inline">\bigvee A</span> is true iff some member of <span class="math inline">A</span> is true. Relational Choice is not used.</p>
-<h2 id="lemma-3-without-actuality-the-false-propositions-have-join-top">Lemma 3: without Actuality, the false propositions have join <span class="math inline">\top</span></h2>
-<p><em>Assume Boolean Completeness at <span class="math inline">t</span>.</em> Let <span class="math inline">k:=\bigvee\lambda p\, .\,\neg p</span>.</p>
+<p><strong>Step 4.</strong> Let <span class="math inline">a</span> be a
+member of <span class="math inline">A</span>. Then <span
+class="math inline">q\ne a</span>, since <span
+class="math inline">q</span> is true and <span
+class="math inline">a</span> is false. By (1) and Step 2, <span
+class="math inline">\operatorname{SameOrDisjoint}(q,a)</span>, so <span
+class="math inline">q\land a=\bot</span> and <span
+class="math inline">a\le\neg q</span>. Hence <span
+class="math inline">\bigvee A\le\neg q</span>, and <span
+class="math inline">\bigvee A</span> is false since <span
+class="math inline">q</span> is true: a contradiction. <span
+class="math inline">\square</span></p>
+<p>Equivalently, for any pairwise disjoint <span
+class="math inline">A^{tt}</span>, <span class="math inline">\bigvee
+A</span> is true iff some member of <span class="math inline">A</span>
+is true. Relational Choice is not used.</p>
+<h2
+id="lemma-3-without-actuality-the-false-propositions-have-join-top">Lemma
+3: without Actuality, the false propositions have join <span
+class="math inline">\top</span></h2>
+<p><em>Assume Boolean Completeness at <span
+class="math inline">t</span>.</em> Let <span
+class="math inline">k:=\bigvee\lambda p\, .\,\neg p</span>.</p>
 <ul>
-<li>If <span class="math inline">k</span> is false, then <span class="math inline">\neg k</span> witnesses Actuality: <span class="math inline">\neg k</span> is true, and for each true <span class="math inline">q</span>, <span class="math inline">\neg q</span> is false, so <span class="math inline">\neg q\le k</span> and <span class="math inline">\neg k\le q</span>.</li>
-<li>If <span class="math inline">k</span> is true, then <span class="math inline">\neg k</span> is false, so <span class="math inline">\neg k\le k</span>, hence <span class="math inline">\neg k=\neg k\land k=\bot</span> and <span class="math inline">k=\top</span>.</li>
+<li>If <span class="math inline">k</span> is false, then <span
+class="math inline">\neg k</span> witnesses Actuality: <span
+class="math inline">\neg k</span> is true, and for each true <span
+class="math inline">q</span>, <span class="math inline">\neg q</span> is
+false, so <span class="math inline">\neg q\le k</span> and <span
+class="math inline">\neg k\le q</span>.</li>
+<li>If <span class="math inline">k</span> is true, then <span
+class="math inline">\neg k</span> is false, so <span
+class="math inline">\neg k\le k</span>, hence <span
+class="math inline">\neg k=\neg k\land k=\bot</span> and <span
+class="math inline">k=\top</span>.</li>
 </ul>
 <p>So if Actuality fails, <span class="math inline">k=\top</span>.</p>
 <h2 id="lemma-4-disjoint-refinement">Lemma 4: disjoint refinement</h2>
-<p><em>Assume Relational Choice from <span class="math inline">t</span> to <span class="math inline">t</span> and Boolean Completeness at <span class="math inline">t</span>.</em> Let <span class="math inline">X^{tt}</span> and <span class="math inline">j:=\bigvee X</span>. There is a pairwise disjoint <span class="math inline">\Delta^{tt}</span> such that</p>
+<p><em>Assume Relational Choice from <span class="math inline">t</span>
+to <span class="math inline">t</span> and Boolean Completeness at <span
+class="math inline">t</span>.</em> Let <span
+class="math inline">X^{tt}</span> and <span
+class="math inline">j:=\bigvee X</span>. There is a pairwise disjoint
+<span class="math inline">\Delta^{tt}</span> such that</p>
 <ul>
 <li><ol type="i">
-<li>each member of <span class="math inline">\Delta</span> lies below some member of <span class="math inline">X</span>, and</li>
+<li>each member of <span class="math inline">\Delta</span> lies below
+some member of <span class="math inline">X</span>, and</li>
 </ol></li>
 <li>(ii) <span class="math inline">\bigvee\Delta=j</span>.</li>
 </ul>
 <p><em>Proof.</em> Let <span class="math inline">U^{ttt}</span> be</p>
 <p><span class="math display">
-(Ub)x:=\bigl(b&lt;j\to Xx\land x\not\le b\bigr)\land\bigl(\neg\,b&lt;j\to x=\bot\bigr).
+(Ub)x:=\bigl(b&lt;j\to Xx\land x\not\le
+b\bigr)\land\bigl(\neg\,b&lt;j\to x=\bot\bigr).
 </span></p>
-<p><span class="math inline">U</span> is serial: if <span class="math inline">b&lt;j</span>, some member <span class="math inline">x</span> of <span class="math inline">X</span> has <span class="math inline">x\not\le b</span>, since otherwise <span class="math inline">b</span> would be an upper bound of <span class="math inline">X</span> and <span class="math inline">j\le b</span>. By Relational Choice there is a functional <span class="math inline">S</span> with <span class="math inline">\forall b\,x\, .\,(Sb)x\to(Ub)x</span>; write <span class="math inline">s(b)</span> for the unique <span class="math inline">x</span> with <span class="math inline">(Sb)x</span>, and let</p>
+<p><span class="math inline">U</span> is serial: if <span
+class="math inline">b&lt;j</span>, some member <span
+class="math inline">x</span> of <span class="math inline">X</span> has
+<span class="math inline">x\not\le b</span>, since otherwise <span
+class="math inline">b</span> would be an upper bound of <span
+class="math inline">X</span> and <span class="math inline">j\le
+b</span>. By Relational Choice there is a functional <span
+class="math inline">S</span> with <span class="math inline">\forall
+b\,x\, .\,(Sb)x\to(Ub)x</span>; write <span
+class="math inline">s(b)</span> for the unique <span
+class="math inline">x</span> with <span
+class="math inline">(Sb)x</span>, and let</p>
 <p><span class="math display">
 (Gb)c:=\exists x\, .\,(Sb)x\land c=b\lor x,\qquad g(b):=b\lor s(b).
 </span></p>
-<p>Apply the Bourbaki–Witt lemma (Background, <em>General lemmas</em>) at type <span class="math inline">t</span> with the property <span class="math inline">I:=\lambda b\, .\,b\le j</span>, the order <span class="math inline">\le</span>, and the function <span class="math inline">G</span>:</p>
+<p>Apply the Bourbaki–Witt lemma (Background, <em>General lemmas</em>)
+at type <span class="math inline">t</span> with the property <span
+class="math inline">I:=\lambda b\, .\,b\le j</span>, the order <span
+class="math inline">\le</span>, and the function <span
+class="math inline">G</span>:</p>
 <ul>
-<li><span class="math inline">\le</span> partially orders <span class="math inline">I</span>;</li>
-<li>a chain <span class="math inline">Z\subseteq I</span> has supremum <span class="math inline">\bigvee Z</span> in <span class="math inline">I</span>, because <span class="math inline">j</span> bounds <span class="math inline">Z</span>;</li>
-<li><span class="math inline">g</span> maps <span class="math inline">I</span> into <span class="math inline">I</span> and <span class="math inline">b\le g(b)</span>: if <span class="math inline">b&lt;j</span> then <span class="math inline">s(b)</span> is in <span class="math inline">X</span>, so <span class="math inline">s(b)\le j</span>; and <span class="math inline">g(j)=j\lor\bot=j</span>.</li>
+<li><span class="math inline">\le</span> partially orders <span
+class="math inline">I</span>;</li>
+<li>a chain <span class="math inline">Z\subseteq I</span> has supremum
+<span class="math inline">\bigvee Z</span> in <span
+class="math inline">I</span>, because <span class="math inline">j</span>
+bounds <span class="math inline">Z</span>;</li>
+<li><span class="math inline">g</span> maps <span
+class="math inline">I</span> into <span class="math inline">I</span> and
+<span class="math inline">b\le g(b)</span>: if <span
+class="math inline">b&lt;j</span> then <span
+class="math inline">s(b)</span> is in <span
+class="math inline">X</span>, so <span class="math inline">s(b)\le
+j</span>; and <span class="math inline">g(j)=j\lor\bot=j</span>.</li>
 </ul>
-<p>Moreover <span class="math inline">g(b)\ne b</span> when <span class="math inline">b&lt;j</span>, since <span class="math inline">s(b)\not\le b</span>. Let <span class="math inline">M</span> be the tower. By the lemma, <span class="math inline">M</span> is a chain; if <span class="math inline">b&lt;c</span> in <span class="math inline">M</span> then <span class="math inline">g(b)\le c</span>; and the supremum <span class="math inline">m</span> of <span class="math inline">M</span> is in <span class="math inline">M</span> with <span class="math inline">g(m)=m</span>, so <span class="math inline">m=j</span> and <span class="math inline">Mj</span>.</p>
-<p>For <span class="math inline">b</span> in <span class="math inline">M</span> with <span class="math inline">b&lt;j</span>, the <em>increment</em> at <span class="math inline">b</span> is <span class="math inline">g(b)\land\neg b</span>. Let</p>
+<p>Moreover <span class="math inline">g(b)\ne b</span> when <span
+class="math inline">b&lt;j</span>, since <span
+class="math inline">s(b)\not\le b</span>. Let <span
+class="math inline">M</span> be the tower. By the lemma, <span
+class="math inline">M</span> is a chain; if <span
+class="math inline">b&lt;c</span> in <span class="math inline">M</span>
+then <span class="math inline">g(b)\le c</span>; and the supremum <span
+class="math inline">m</span> of <span class="math inline">M</span> is in
+<span class="math inline">M</span> with <span
+class="math inline">g(m)=m</span>, so <span
+class="math inline">m=j</span> and <span
+class="math inline">Mj</span>.</p>
+<p>For <span class="math inline">b</span> in <span
+class="math inline">M</span> with <span
+class="math inline">b&lt;j</span>, the <em>increment</em> at <span
+class="math inline">b</span> is <span class="math inline">g(b)\land\neg
+b</span>. Let</p>
 <p><span class="math display">
-\Delta:=\lambda d\, .\,\exists b\, .\,Mb\land b&lt;j\land d=g(b)\land\neg b .
+\Delta:=\lambda d\, .\,\exists b\, .\,Mb\land b&lt;j\land
+d=g(b)\land\neg b .
 </span></p>
-<p><em>Pairwise disjoint.</em> Let <span class="math inline">b&lt;c</span> be in <span class="math inline">M</span>, both below <span class="math inline">j</span>. Then</p>
+<p><em>Pairwise disjoint.</em> Let <span
+class="math inline">b&lt;c</span> be in <span
+class="math inline">M</span>, both below <span
+class="math inline">j</span>. Then</p>
 <p><span class="math display">
-(g(b)\land\neg b)\land(g(c)\land\neg c)\le g(b)\land\neg c\le c\land\neg c=\bot .
+(g(b)\land\neg b)\land(g(c)\land\neg c)\le g(b)\land\neg c\le c\land\neg
+c=\bot .
 </span></p>
-<p>Since <span class="math inline">M</span> is a chain, the increments at distinct members of <span class="math inline">M</span> are disjoint.</p>
-<p><em>(i).</em> <span class="math inline">g(b)\land\neg b=(b\lor s(b))\land\neg b=s(b)\land\neg b\le s(b)</span>, and <span class="math inline">s(b)</span> is in <span class="math inline">X</span>.</p>
-<p><em>(ii).</em> Every increment is below <span class="math inline">g(b)\le j</span>. Let <span class="math inline">k</span> be any upper bound of <span class="math inline">\Delta</span>. The property <span class="math inline">\lambda b\, .\,Mb\land b\le k</span> is closed:</p>
+<p>Since <span class="math inline">M</span> is a chain, the increments
+at distinct members of <span class="math inline">M</span> are
+disjoint.</p>
+<p><em>(i).</em> <span class="math inline">g(b)\land\neg b=(b\lor
+s(b))\land\neg b=s(b)\land\neg b\le s(b)</span>, and <span
+class="math inline">s(b)</span> is in <span
+class="math inline">X</span>.</p>
+<p><em>(ii).</em> Every increment is below <span
+class="math inline">g(b)\le j</span>. Let <span
+class="math inline">k</span> be any upper bound of <span
+class="math inline">\Delta</span>. The property <span
+class="math inline">\lambda b\, .\,Mb\land b\le k</span> is closed:</p>
 <ul>
-<li>if <span class="math inline">b&lt;j</span> and <span class="math inline">b\le k</span> then <span class="math inline">g(b)=b\lor(g(b)\land\neg b)\le k</span>; and <span class="math inline">g(j)=j</span>;</li>
-<li>the supremum of a chain of propositions below <span class="math inline">k</span> is below <span class="math inline">k</span>.</li>
+<li>if <span class="math inline">b&lt;j</span> and <span
+class="math inline">b\le k</span> then <span
+class="math inline">g(b)=b\lor(g(b)\land\neg b)\le k</span>; and <span
+class="math inline">g(j)=j</span>;</li>
+<li>the supremum of a chain of propositions below <span
+class="math inline">k</span> is below <span
+class="math inline">k</span>.</li>
 </ul>
-<p>So every member of <span class="math inline">M</span> is below <span class="math inline">k</span>, in particular <span class="math inline">j\le k</span>. Thus <span class="math inline">j=\bigvee\Delta</span>. <span class="math inline">\square</span></p>
+<p>So every member of <span class="math inline">M</span> is below <span
+class="math inline">k</span>, in particular <span
+class="math inline">j\le k</span>. Thus <span
+class="math inline">j=\bigvee\Delta</span>. <span
+class="math inline">\square</span></p>
 <h2 id="proof-of-the-theorem">Proof of the theorem</h2>
-<p>Suppose Actuality fails. By Lemma 3, <span class="math inline">X:=\lambda p\, .\,\neg p</span> has <span class="math inline">\bigvee X=\top</span>. Let <span class="math inline">\Delta</span> be as in Lemma 4. Each member of <span class="math inline">\Delta</span> lies below a false proposition and so is false; <span class="math inline">\Delta</span> is pairwise disjoint; and <span class="math inline">\bigvee\Delta=\top</span> is true. This contradicts Lemma 2. <span class="math inline">\square</span></p>
+<p>Suppose Actuality fails. By Lemma 3, <span
+class="math inline">X:=\lambda p\, .\,\neg p</span> has <span
+class="math inline">\bigvee X=\top</span>. Let <span
+class="math inline">\Delta</span> be as in Lemma 4. Each member of <span
+class="math inline">\Delta</span> lies below a false proposition and so
+is false; <span class="math inline">\Delta</span> is pairwise disjoint;
+and <span class="math inline">\bigvee\Delta=\top</span> is true. This
+contradicts Lemma 2. <span class="math inline">\square</span></p>
 <h2 id="remarks">Remarks</h2>
 <ol type="1">
-<li><p><strong>Transversal Choice.</strong> With the recorded results that <a href="actuality-implies-transversal.html">Actuality implies Transversal</a> and that <a href="transversal-and-relational-choice-imply-transversal-choice.html">Transversal and Relational Choice imply Transversal Choice</a>, this settles the conjecture that Relational Choice and Boolean Completeness imply Transversal Choice. Astra also gave a direct proof of that conjecture, adapting Bourbaki–Witt to partial transversals, which needs Relational Choice from <span class="math inline">\sigma t</span> to <span class="math inline">\sigma</span> and suprema of represented chains at <span class="math inline">\sigma t</span>.</p></li>
-<li><p><strong>Boolean Completeness at <span class="math inline">tt</span> gives it at <span class="math inline">t</span>.</strong> For <span class="math inline">A^{tt}</span>, let <span class="math inline">J</span> be the least upper bound at <span class="math inline">tt</span> of the constant properties <span class="math inline">\lambda z\, .\,p</span> with <span class="math inline">Ap</span>. By Lemma 1, <span class="math inline">J\top\le c</span> iff <span class="math inline">p\le c</span> for every member <span class="math inline">p</span> of <span class="math inline">A</span>, so <span class="math inline">J\top=\bigvee A</span>.</p></li>
-<li><p><strong>Where the higher type is used.</strong> Lemma 4 needs only Boolean Completeness at <span class="math inline">t</span>. The type-<span class="math inline">tt</span> instance is used only in Lemma 2, for the join of the haecceities. The argument does not show that Relational Choice and Boolean Completeness at <span class="math inline">t</span> alone imply Actuality.</p></li>
-<li><p><strong>The boxed form.</strong> The theorem is a theorem of C with its premises discharged, so necessitating it gives □Relational Choice and □Boolean Completeness imply □Actuality. The unboxed premises do not give □Actuality: the model <a href="full-boolean-valued-atom-and-atomless.html">Full Boolean-valued model: one atom and an atomless component</a> separates them.</p></li>
+<li><p><strong>Transversal Choice.</strong> With the recorded results
+that <a href="actuality-implies-transversal.html">Actuality implies
+Transversal</a> and that <a
+href="transversal-and-relational-choice-imply-transversal-choice.html">Transversal
+and Relational Choice imply Transversal Choice</a>, this settles the
+conjecture that Relational Choice and Boolean Completeness imply
+Transversal Choice. Astra also gave a direct proof of that conjecture,
+adapting Bourbaki–Witt to partial transversals, which needs Relational
+Choice from <span class="math inline">\sigma t</span> to <span
+class="math inline">\sigma</span> and suprema of represented chains at
+<span class="math inline">\sigma t</span>.</p></li>
+<li><p><strong>Boolean Completeness at <span
+class="math inline">tt</span> gives it at <span
+class="math inline">t</span>.</strong> For <span
+class="math inline">A^{tt}</span>, let <span
+class="math inline">J</span> be the least upper bound at <span
+class="math inline">tt</span> of the constant properties <span
+class="math inline">\lambda z\, .\,p</span> with <span
+class="math inline">Ap</span>. By Lemma 1, <span
+class="math inline">J\top\le c</span> iff <span class="math inline">p\le
+c</span> for every member <span class="math inline">p</span> of <span
+class="math inline">A</span>, so <span class="math inline">J\top=\bigvee
+A</span>.</p></li>
+<li><p><strong>Where the higher type is used.</strong> Lemma 4 needs
+only Boolean Completeness at <span class="math inline">t</span>. The
+type-<span class="math inline">tt</span> instance is used only in Lemma
+2, for the join of the haecceities. The argument does not show that
+Relational Choice and Boolean Completeness at <span
+class="math inline">t</span> alone imply Actuality.</p></li>
+<li><p><strong>The boxed form.</strong> The theorem is a theorem of C
+with its premises discharged, so necessitating it gives □Relational
+Choice and □Boolean Completeness imply □Actuality. The unboxed premises
+do not give □Actuality: the model <a
+href="full-boolean-valued-atom-and-atomless.html">Full Boolean-valued
+model: one atom and an atomless component</a> separates them.</p></li>
 </ol>
 </body></html>

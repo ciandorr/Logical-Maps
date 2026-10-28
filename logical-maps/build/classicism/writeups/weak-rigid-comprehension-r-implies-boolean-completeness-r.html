@@ -323,28 +323,80 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Weak Rigid Comprehension ⇒ Boolean Completeness</h1></header><p class="cert">
-Result — Source: BC does not imply RC (draft), Lean <code>Classicism.Map.weak_rigid_comprehension_r_implies_boolean_completeness_r</code>; produced by Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted by Cian Dorr, 19 September 2026.
+Result — Source: BC does not imply RC (draft), Lean
+<code>Classicism.Map.weak_rigid_comprehension_r_implies_boolean_completeness_r</code>;
+produced by Cian Dorr; recorded by Claude Opus 5 (Anthropic), prompted
+by Cian Dorr, 19 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Weak Rigid Comprehension.</strong> Every relation, including a proposition, is coextensive with a weakly rigid one, that is, with one that is weakly persistent and weakly inextensible.</li>
+<li><strong>Weak Rigid Comprehension.</strong> Every relation, including
+a proposition, is coextensive with a weakly rigid one, that is, with one
+that is weakly persistent and weakly inextensible.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Boolean Completeness.</strong> Every property of entities of a relational type has a greatest lower bound in that type.</li>
+<li><strong>Boolean Completeness.</strong> Every property of entities of
+a relational type has a greatest lower bound in that type.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Take the propositional case first. Given <span class="math inline">F^{tt}</span>, let <span class="math inline">C^{tt}</span> be weakly rigid and coextensive with <span class="math inline">F</span>, and put <span class="math inline">q:=\exists p\, .\,Cp\land p</span>. Every <span class="math inline">F</span> proposition <span class="math inline">p</span> is <span class="math inline">C</span>, hence necessarily <span class="math inline">C</span> by persistence, so <span class="math inline">p</span> entails <span class="math inline">Cp\land p</span> and thereby <span class="math inline">q</span>; so <span class="math inline">q</span> is an upper bound of the <span class="math inline">F</span> propositions. Now suppose every <span class="math inline">F</span> proposition entails <span class="math inline">r</span>. The <span class="math inline">C</span> propositions are the <span class="math inline">F</span> propositions, so every <span class="math inline">C</span> proposition entails <span class="math inline">r</span>; entailments are necessary if true, so <span class="math inline">\forall p\, .\,Cp\to\Box(p\le r)</span>. Weak inextensibility with <span class="math inline">X:=\lambda p\, .\,(p\le r)</span> gives <span class="math inline">C\le X</span>, so at every world <span class="math inline">Cp</span> implies <span class="math inline">p\le r</span>; hence <span class="math inline">Cp\land p</span> entails <span class="math inline">r</span> whatever <span class="math inline">p</span> may be, and <span class="math inline">q\le r</span>. So <span class="math inline">q</span> is a least upper bound of the <span class="math inline">F</span> propositions. The same reasoning with extra parameters gives the least-upper-bound form at every relational type, and that form is equivalent in C to the greatest-lower-bound form in which the principle is stated.</p>
+<p>Take the propositional case first. Given <span
+class="math inline">F^{tt}</span>, let <span
+class="math inline">C^{tt}</span> be weakly rigid and coextensive with
+<span class="math inline">F</span>, and put <span
+class="math inline">q:=\exists p\, .\,Cp\land p</span>. Every <span
+class="math inline">F</span> proposition <span
+class="math inline">p</span> is <span class="math inline">C</span>,
+hence necessarily <span class="math inline">C</span> by persistence, so
+<span class="math inline">p</span> entails <span
+class="math inline">Cp\land p</span> and thereby <span
+class="math inline">q</span>; so <span class="math inline">q</span> is
+an upper bound of the <span class="math inline">F</span> propositions.
+Now suppose every <span class="math inline">F</span> proposition entails
+<span class="math inline">r</span>. The <span
+class="math inline">C</span> propositions are the <span
+class="math inline">F</span> propositions, so every <span
+class="math inline">C</span> proposition entails <span
+class="math inline">r</span>; entailments are necessary if true, so
+<span class="math inline">\forall p\, .\,Cp\to\Box(p\le r)</span>. Weak
+inextensibility with <span class="math inline">X:=\lambda p\, .\,(p\le
+r)</span> gives <span class="math inline">C\le X</span>, so at every
+world <span class="math inline">Cp</span> implies <span
+class="math inline">p\le r</span>; hence <span
+class="math inline">Cp\land p</span> entails <span
+class="math inline">r</span> whatever <span class="math inline">p</span>
+may be, and <span class="math inline">q\le r</span>. So <span
+class="math inline">q</span> is a least upper bound of the <span
+class="math inline">F</span> propositions. The same reasoning with extra
+parameters gives the least-upper-bound form at every relational type,
+and that form is equivalent in C to the greatest-lower-bound form in
+which the principle is stated.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, footnote on p. 12.</li>
+<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean
+Completeness does not imply Rigid Comprehension, draft of 30 July 2026,
+footnote on p. 12.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/weak-rigid-comprehension-r-implies-boolean-completeness-r.yaml</code>
+Record:
+<code>topics/classicism/results/weak-rigid-comprehension-r-implies-boolean-completeness-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — footnote on p. 12</li>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.2, pp. 23–24. Boolean Completeness and the equivalence of its two forms.</li>
+<li><strong>Proof: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — footnote on
+p. 12</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.2,
+pp. 23–24. Boolean Completeness and the equivalence of its two
+forms.</li>
 </ul>
 </body></html>

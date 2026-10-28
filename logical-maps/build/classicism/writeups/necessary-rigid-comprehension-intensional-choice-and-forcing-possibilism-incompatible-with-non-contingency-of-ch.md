@@ -17,6 +17,14 @@
 
 Stated by Bacon as a theorem, with the proof deferred to another venue; his handout of 19 October 2026 on the lottery-algebra model and the draft Modalized Domains on Possibility Frames do not reproduce it (the lottery record notes a transfer argument not given there). The expected proof: Forcing Possibilism supplies a proposition whose entailment algebra is a complete Boolean algebra forcing CH, and one forcing its negation; under □Rigid Comprehension and Intensional Choice the real number structures at the worlds below each are those of the corresponding generic extensions. Recorded as conjectured until a proof is supplied; a written proof, or a model of the three premises deciding CH one way necessarily, would settle it.
 
+As encoded, with the map's strict reading of smallness (finite, or with strictly fewer elements than there are propositions), the conjecture is refuted: [[full-free-monoid-glued-constants]], [[full-free-monoid-glued-constants-singleton]], [[full-free-product-glued-constants]], [[full-double-retraction-glued-constants]] and [[ultraproduct-countable-full-s5-finite-individuals]] satisfy □Rigid Comprehension, Intensional Choice, Forcing Possibilism and Non-contingency of CH. Each has exactly $2^{\aleph_0}$ propositions, and an infinite complete Boolean algebra has at least $2^{\aleph_0}$ elements, so only finite algebras are small there, and Forcing Possibilism never asks for an algebra that changes CH. (For the ultraproduct, this holds in every factor.) The expected proof needs a CH-changing algebra to be small: an algebra forcing $\neg$CH has at least $\aleph_2$ elements, and one forcing CH over a model of $\neg$CH may have $2^{2^{\aleph_0}}$, so a premise saying that there are more than $2^{2^{\aleph_0}}$ propositions would suffice for that step, while one saying only that there are more than $2^{\aleph_0}$ might not. In the lottery cloud of Modalized Domains (Bacon and Claude Opus 5.5, Remark 6.12), which the source cites, every complete Boolean algebra of size below a strong limit $\mu$ is small and realized; Bacon's Theorem 6.1 is cited there as showing that CH is contingent in it.
+
+Suggested repair (Cian Dorr, 25 October 2026): add the premise that there are more than $2^{2^{\aleph_0}}$ propositions, i.e. that no injective relation runs from the properties of the reals of some real number structure into the propositions. All five models above falsify it. It is not recorded as a principle until the repaired implication is proved, since by itself it would only call for large variants of many models.
+
+## Revisions
+
+- **2026-10-25** (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — Notes: refuted as encoded, by five recorded models with exactly continuum many propositions; what a repaired premise would need.
+
 ## Sources
 
 - **Could mathematics have been different?** — Andrew Bacon, Could the truths of mathematics have been different?, draft of 9 October 2025, §6, Theorem 6.1, p. 27.

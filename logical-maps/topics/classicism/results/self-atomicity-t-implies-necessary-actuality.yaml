@@ -1,0 +1,28 @@
+id: self-atomicity-t-implies-necessary-actuality
+premises:
+- self-atomicity-t
+conclusion: necessary-actuality
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, the notion of a self-atom and the bridge principles, 25 October 2026; the proof by Claude
+  Fable 5.1 (Anthropic) the same day, from the survey of Strong Atomicity results that Cian Dorr requested
+  (session transcript of 25 October 2026).
+source_names:
+- Dorr 25 Oct
+proof: 'Let $P:=\exists q\, .\,\operatorname{SelfAtom}_t(q)\land q$. Every self-atom $q$ entails $P$: $\Box(q\to\Diamond
+  q)$ is a theorem, and 4 turns $\Box(q\to\operatorname{Atom}(q))$ into $\Box\Box(q\to\operatorname{Atom}(q))$,
+  so $\Box(q\to\operatorname{SelfAtom}_t(q))$ and $q\le P$. If $\Diamond\neg P$, Self-Atomicity (type t)
+  gives a self-atom $q\le\neg P$; with $q\le P$ this makes $q=\bot$, contradicting $\Diamond q$. So $\Box
+  P$. A true self-atom is a true atom by T, and a true atom entails every truth, so $P\to$ Actuality is
+  a theorem of C; necessitate it and apply K.'
+notes: Strengthens [[strong-atomicity-t-implies-necessary-actuality]], since Strong Atomicity
+  (type t) implies Self-Atomicity (type t). Conversely every true atom is a self-atom, as it entails every
+  truth, including the truth that it entails every truth; so Actuality is equivalent to the existence
+  of a true self-atom.

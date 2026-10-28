@@ -5,11 +5,11 @@ import Classicism.Results.Records.Extensionality
 import Classicism.Results.Records.Comprehension
 
 /-!
-# Proofs of map records: Actuality, Boolean Completeness, Atomicity, Vicinity and Strong Leibniz
+# Proofs of map records: Actuality, Boolean Completeness, Atomicity, Vicinity and Strong Atomicity
 
 Records concluding in the principles of the map's category `lattice`, and the
 comprehension principles they give: Classicism, §2.2, Propositions 2.5–2.9 and 2.15, and
-n. 42; Vicinity; Inextensible Comprehension from Actuality; the Strong Leibniz
+n. 42; Vicinity; Inextensible Comprehension from Actuality; Strong Atomicity
 Biconditionals (Bacon, §8.2). The records that need `C5` are in `C5.lean`.
 The conventions are in `Results/Records.lean`.
 -/
@@ -97,7 +97,7 @@ theorem actuality_implies_weakly_inextensible_comprehension_r {σ : Type} [Ty σ
 theorem profile_of_w_imp {σ : Type} [Ty σ] (w : Prop) (Z : σ → Prop) (x : σ) :
     (w → Z x) → ∀ y, w ∧ y = x → Z y := fun h y hy => hy.2 ▸ h hy.1
 
-/-- `actuality-implies-actual-profile-r` (Classicism, n. 36), at `σ`, its list form being
+/-- Actuality to its form Actual Profile (Classicism, n. 36), at `σ`, its list form being
 the map's record: `λy. w ∧ y = x` is the true profile of `x`, and it entails every `Z`
 with `Zx`, since `w` entails `Zx`. -/
 theorem actuality_implies_actual_profile_r {σ : Type} [Ty σ] : Actuality → ActualProfile σ :=
@@ -305,18 +305,18 @@ theorem completeness_and_actuality_imply_weak_rigid_comprehension {σ : Type} [T
 
 /-- `atomicity-r-implies-atomicity-t`: the `t`-instance. -/
 theorem atomicity_r_implies_atomicity_t : Atomicity Prop → AtomicityT := fun h => h
-/-- `strong-leibniz-r-implies-strong-leibniz-t`: the `t`-instance. -/
-theorem strong_leibniz_r_implies_strong_leibniz_t : StrongLeibniz Prop → StrongLeibnizT :=
+/-- `strong-atomicity-r-implies-strong-atomicity-t`: the `t`-instance. -/
+theorem strong_atomicity_r_implies_strong_atomicity_t : StrongAtomicity Prop → StrongAtomicityT :=
   fun h => h
-/-- `necessary-strong-leibniz-r-implies-necessary-strong-leibniz-t`. -/
-theorem necessary_strong_leibniz_r_implies_necessary_strong_leibniz_t :
-    NecStrongLeibniz Prop → NecStrongLeibnizT := fun h => h
+/-- `necessary-strong-atomicity-r-implies-necessary-strong-atomicity-t`. -/
+theorem necessary_strong_atomicity_r_implies_necessary_strong_atomicity_t :
+    NecStrongAtomicity Prop → NecStrongAtomicityT := fun h => h
 
 /-- `necessary-atomicity-r-implies-atomicity-r`: `T`. -/
 theorem necessary_atomicity_r_implies_atomicity_r {τ : Type} [Rel τ] :
     NecAtomicity τ → Atomicity τ := box_elim
-/-- `necessary-strong-leibniz-t-implies-strong-leibniz-t`: `T`. -/
-theorem necessary_strong_leibniz_t_implies_strong_leibniz_t : NecStrongLeibnizT → StrongLeibnizT :=
+/-- `necessary-strong-atomicity-t-implies-strong-atomicity-t`: `T`. -/
+theorem necessary_strong_atomicity_t_implies_strong_atomicity_t : NecStrongAtomicityT → StrongAtomicityT :=
   box_elim
 
 /-- `extensionality-r-implies-boolean-completeness-r` (Classicism, n. 33), at `σ → t`, its
@@ -341,25 +341,25 @@ theorem atomicity_t_incompatible_with_atomlessness : AtomicityT → Atomlessness
       (atl q hdq).elim fun r hr =>
         hr.1 (eq_false_of_le_neg r ((hq.1 r).1 ⟨hr.2.1, hr.2.2⟩))))
 
-/-- `strong-leibniz-t-implies-atomicity-t`: a strong world is a weak one, `T`, hence an
+/-- `strong-atomicity-t-implies-atomicity-t`: a strong atom is a weak one, `T`, hence an
 atom. -/
-theorem strong_leibniz_t_implies_atomicity_t : StrongLeibnizT → AtomicityT := fun sl x =>
+theorem strong_atomicity_t_implies_atomicity_t : StrongAtomicityT → AtomicityT := fun sl x =>
   (em (x ≤ ¬ x)).elim Or.inl fun hx =>
     have hne : x ≠ False := fun e => hx (le_neg_of_eq_false x e)
     (sl x hne).elim fun w hw => Or.inr ⟨w, atom_of_decides w ⟨hw.1.1, box_elim hw.1.2⟩, hw.2⟩
 
-/-- `atomicity-t-and-bf-t-imply-strong-leibniz-t`: an atom below `p` decides every `q`,
+/-- `atomicity-t-and-bf-t-imply-strong-atomicity-t`: an atom below `p` decides every `q`,
 each decision is necessary, and BF at `t` boxes the quantifier. -/
-theorem atomicity_t_and_bf_t_imply_strong_leibniz_t : AtomicityT → BarcanT → StrongLeibnizT :=
+theorem atomicity_t_and_bf_t_imply_strong_atomicity_t : AtomicityT → BarcanT → StrongAtomicityT :=
   fun at_ bf p hp => ((at_ p).elim (fun h => absurd h (not_le_neg_of_ne_false p hp))
     (fun h => h.elim fun w hw =>
       ⟨w, ⟨fun e => not_le_neg_of_atom hw.1 (le_neg_of_eq_false w e),
         bf (λ q ↦ w ≤ q ∨ w ≤ ¬ q) fun q => box_le_or_le w q (atom_le_or_le_neg w q hw.1)⟩, hw.2⟩))
 
-/-- `necessary-atomicity-and-necessary-bf-t-imply-necessary-strong-leibniz-t`. -/
-theorem necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_leibniz_t :
-    NecAtomicity Prop → NecBarcanT → NecStrongLeibnizT := fun h₁ h₂ =>
-  modal_K _ _ (modal_K _ _ (nec% atomicity_t_and_bf_t_imply_strong_leibniz_t) h₁) h₂
+/-- `necessary-atomicity-and-necessary-bf-t-imply-necessary-strong-atomicity-t`. -/
+theorem necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_atomicity_t :
+    NecAtomicity Prop → NecBarcanT → NecStrongAtomicityT := fun h₁ h₂ =>
+  modal_K _ _ (modal_K _ _ (nec% atomicity_t_and_bf_t_imply_strong_atomicity_t) h₁) h₂
 
 /-- `necessary-actuality-implies-necessary-weakly-inextensible-comprehension-r`, at `σ → t`:
 the unboxed record necessitated, and `K`. -/
@@ -572,43 +572,43 @@ theorem actuality_and_bf_imply_inextensible_comprehension {σ : Type} [Ty σ] :
               (nec% (inext_dia_contra w X Y z)) f₂) f₃))).elim,
       coext_dia_actual w hw X⟩
 
-/-! ### Strong Leibniz (22–26 September)
+/-! ### Strong Atomicity (22–26 September)
 
 At `σ → t` where the principle is over relational types, the list forms being the records
 at every arity (`Results/Arity.lean`). -/
 
-/-- `necessary-strong-leibniz-r-implies-strong-leibniz-r`: `T`. -/
-theorem necessary_strong_leibniz_r_implies_strong_leibniz_r {τ : Type} [Rel τ] :
-    NecStrongLeibniz τ → StrongLeibniz τ := fun h => box_elim h
+/-- `necessary-strong-atomicity-r-implies-strong-atomicity-r`: `T`. -/
+theorem necessary_strong_atomicity_r_implies_strong_atomicity_r {τ : Type} [Rel τ] :
+    NecStrongAtomicity τ → StrongAtomicity τ := fun h => box_elim h
 
-/-- `strong-leibniz-r-implies-atomicity-r`, at `σ → t`, its list form being the map's
-record: a strong world decides every property, by `T`, so it is an atom. -/
-theorem strong_leibniz_r_implies_atomicity_r {σ : Type} [Ty σ] :
-    StrongLeibniz (σ → Prop) → Atomicity (σ → Prop) := fun sl X =>
+/-- `strong-atomicity-r-implies-atomicity-r`, at `σ → t`, its list form being the map's
+record: a strong atom decides every property, by `T`, so it is an atom. -/
+theorem strong_atomicity_r_implies_atomicity_r {σ : Type} [Ty σ] :
+    StrongAtomicity (σ → Prop) → Atomicity (σ → Prop) := fun sl X =>
   (em (X ≤ ¬ X)).elim Or.inl fun hX => Or.inr
     ((sl X fun e => hX (by rw [e]; exact bot_le_arrow _)).elim fun W hW =>
       ⟨W, atom_of_decides_arrow W hW.1.1 (box_elim hW.1.2), hW.2⟩)
 
-/-- `atomicity-and-bf-imply-strong-leibniz`, at `σ → t`, its list form being the map's
+/-- `atomicity-and-bf-imply-strong-atomicity`, at `σ → t`, its list form being the map's
 record: an atom below a non-bottom property decides every property, each decision is
 necessary, and BF at the type of properties boxes the quantifier. -/
-theorem atomicity_and_bf_imply_strong_leibniz {σ : Type} [Ty σ] :
-    Atomicity (σ → Prop) → Barcan (σ → Prop) → StrongLeibniz (σ → Prop) := fun at_ bf X hX =>
+theorem atomicity_and_bf_imply_strong_atomicity {σ : Type} [Ty σ] :
+    Atomicity (σ → Prop) → Barcan (σ → Prop) → StrongAtomicity (σ → Prop) := fun at_ bf X hX =>
   (at_ X).elim (fun h => (hX (eq_bot_of_le_neg_arrow X h)).elim) fun h => h.elim fun W hW =>
     ⟨W, ⟨fun e => not_le_neg_of_atom hW.1 (by rw [e]; exact bot_le_arrow _),
       bf (λ Y ↦ W ≤ Y ∨ W ≤ ¬ Y) fun Y => box_le_or_le_arrow W Y (atom_decides_arrow W Y hW.1)⟩,
      hW.2⟩
 
-/-- `necessary-strong-leibniz-implies-necessary-atomicity`, at `σ → t`. -/
-theorem necessary_strong_leibniz_implies_necessary_atomicity {σ : Type} [Ty σ] :
-    NecStrongLeibniz (σ → Prop) → NecAtomicity (σ → Prop) :=
-  modal_K _ _ (nec% (strong_leibniz_r_implies_atomicity_r (σ := σ)))
+/-- `necessary-strong-atomicity-implies-necessary-atomicity`, at `σ → t`. -/
+theorem necessary_strong_atomicity_implies_necessary_atomicity {σ : Type} [Ty σ] :
+    NecStrongAtomicity (σ → Prop) → NecAtomicity (σ → Prop) :=
+  modal_K _ _ (nec% (strong_atomicity_r_implies_atomicity_r (σ := σ)))
 
-/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-leibniz`, at `σ → t`. -/
-theorem necessary_atomicity_and_necessary_bf_imply_necessary_strong_leibniz {σ : Type} [Ty σ] :
-    NecAtomicity (σ → Prop) → NecBarcan (σ → Prop) → NecStrongLeibniz (σ → Prop) :=
+/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-atomicity`, at `σ → t`. -/
+theorem necessary_atomicity_and_necessary_bf_imply_necessary_strong_atomicity {σ : Type} [Ty σ] :
+    NecAtomicity (σ → Prop) → NecBarcan (σ → Prop) → NecStrongAtomicity (σ → Prop) :=
   fun h₁ h₂ => modal_K _ _ (modal_K _ _
-    (nec% (atomicity_and_bf_imply_strong_leibniz (σ := σ))) h₁) h₂
+    (nec% (atomicity_and_bf_imply_strong_atomicity (σ := σ))) h₁) h₂
 
 /-- A true proposition deciding every proposition is an actual world. -/
 theorem actuality_of_decides (w : Prop) : (∀ q, w ≤ q ∨ w ≤ ¬ q) → w → Actuality :=
@@ -617,53 +617,53 @@ theorem actuality_of_decides (w : Prop) : (∀ q, w ≤ q ∨ w ≤ ¬ q) → w 
 /-- `(w → A) → (w → ¬A) → ¬w`. -/
 theorem not_of_imp_both (w A : Prop) : (w → A) → (w → ¬ A) → ¬ w := fun h₁ h₂ hw => h₂ hw (h₁ hw)
 
-/-- `strong-leibniz-t-implies-necessary-actuality`: a strong world entails Actuality, since
-where it holds it decides every truth; so were Actuality possibly false, a strong world
+/-- `strong-atomicity-t-implies-necessary-actuality`: a strong atom entails Actuality, since
+where it holds it decides every truth; so were Actuality possibly false, a strong atom
 below its negation would entail both, and be `⊥`. -/
-theorem strong_leibniz_t_implies_necessary_actuality : StrongLeibnizT → NecActuality := fun sl =>
+theorem strong_atomicity_t_implies_necessary_actuality : StrongAtomicityT → NecActuality := fun sl =>
   (em (□ Actuality)).elim id fun hn =>
     (sl (¬ Actuality) (dia_not_of_not_box _ hn)).elim fun w hw =>
       (hw.1.1 ((box_not_eq w).mp (modal_K _ _ (modal_K _ _ (nec% (not_of_imp_both w Actuality))
         (modal_K _ _ (nec% (actuality_of_decides w)) hw.1.2))
         ((le_iff_prop _ _).1 hw.2)))).elim
 
-/-- A strong world is possible. -/
-theorem dia_of_sworld (w : Prop) : SWorld w → ◇ w := fun h => h.1
+/-- A strong atom is possible. -/
+theorem dia_of_satom (w : Prop) : SAtom w → ◇ w := fun h => h.1
 
-/-- Under 5, a strong world is necessarily one: 5 boxes its possibility, 4 its decisions. -/
-theorem box_sworld_of_five (five : ModalFive) (w : Prop) (h : SWorld w) : □ (SWorld w) :=
+/-- Under 5, a strong atom is necessarily one: 5 boxes its possibility, 4 its decisions. -/
+theorem box_satom_of_five (five : ModalFive) (w : Prop) (h : SAtom w) : □ (SAtom w) :=
   (box_and_eq (◇ w) (□ (∀ Y : Prop, w ≤ Y ∨ w ≤ ¬ Y))).mpr ⟨five w h.1, modal_four _ h.2⟩
 
-/-- A necessarily strong world, where it holds, makes some necessarily strong world true. -/
-theorem not_of_box_sworld (w : Prop) :
-    □ (SWorld w) → (w → ¬ ∃ v : Prop, □ (SWorld v) ∧ v) → ¬ w :=
+/-- A necessarily strong atom, where it holds, makes some necessarily strong atom true. -/
+theorem not_of_box_satom (w : Prop) :
+    □ (SAtom w) → (w → ¬ ∃ v : Prop, □ (SAtom v) ∧ v) → ¬ w :=
   fun hs hi hw => hi hw ⟨w, hs, hw⟩
 
-/-- A true, necessarily strong world entails each truth and is necessarily possible, so
+/-- A true, necessarily strong atom entails each truth and is necessarily possible, so
 every truth is necessarily possible: B. -/
-theorem modal_b_of_true_box_sworld : (∃ v : Prop, □ (SWorld v) ∧ v) → ModalB := fun h p hp =>
+theorem modal_b_of_true_box_satom : (∃ v : Prop, □ (SAtom v) ∧ v) → ModalB := fun h p hp =>
   h.elim fun v hv =>
     ((box_elim (box_elim hv.1).2) p).elim
       (fun hle => modal_K _ _ (modal_K _ _ (nec% (dia_mono v p))
           (modal_four _ ((le_iff_prop _ _).1 hle)))
-        (modal_K _ _ (nec% (dia_of_sworld v)) hv.1))
+        (modal_K _ _ (nec% (dia_of_satom v)) hv.1))
       (fun hle => (imp_of_le_prop v (¬ p) hle hv.2 hp).elim)
 
-/-- Under 5 and the Strong Leibniz Biconditionals at `t`, necessarily some necessarily strong
-world is true: were that possibly false, a strong world would entail its falsity, though
+/-- Under 5 and Strong Atomicity at `t`, necessarily some necessarily strong
+atom is true: were that possibly false, a strong atom would entail its falsity, though
 wherever that world holds it is itself such a world. -/
-theorem box_true_box_sworld (five : ModalFive) (sl : StrongLeibnizT) :
-    □ (∃ v : Prop, □ (SWorld v) ∧ v) :=
-  (em (□ (∃ v : Prop, □ (SWorld v) ∧ v))).elim id fun hn =>
+theorem box_true_box_satom (five : ModalFive) (sl : StrongAtomicityT) :
+    □ (∃ v : Prop, □ (SAtom v) ∧ v) :=
+  (em (□ (∃ v : Prop, □ (SAtom v) ∧ v))).elim id fun hn =>
     (sl _ (dia_not_of_not_box _ hn)).elim fun w hw =>
-      (hw.1.1 ((box_not_eq w).mp (modal_K _ _ (modal_K _ _ (nec% (not_of_box_sworld w))
-        (modal_four _ (box_sworld_of_five five w hw.1)))
+      (hw.1.1 ((box_not_eq w).mp (modal_K _ _ (modal_K _ _ (nec% (not_of_box_satom w))
+        (modal_four _ (box_satom_of_five five w hw.1)))
         ((le_iff_prop _ _).1 hw.2)))).elim
 
-/-- `five-and-strong-leibniz-t-imply-necessary-b`: necessitate the passage from a true
-necessarily strong world to B, and apply `K`. -/
-theorem five_and_strong_leibniz_t_imply_necessary_b : ModalFive → StrongLeibnizT → NecModalB :=
-  fun five sl => modal_K _ _ (nec% modal_b_of_true_box_sworld) (box_true_box_sworld five sl)
+/-- `five-and-strong-atomicity-t-imply-necessary-b`: necessitate the passage from a true
+necessarily strong atom to B, and apply `K`. -/
+theorem five_and_strong_atomicity_t_imply_necessary_b : ModalFive → StrongAtomicityT → NecModalB :=
+  fun five sl => modal_K _ _ (nec% modal_b_of_true_box_satom) (box_true_box_satom five sl)
 
 /-- `(w ∧ x = x) = w`. -/
 theorem and_rfl_eq {σ : Type} [Ty σ] (w : Prop) (x : σ) : (w ∧ x = x) = w :=
@@ -683,12 +683,12 @@ theorem pin_decides {σ : Type} [Ty σ] (w : Prop) (x : σ) :
   (h (Y x)).elim (fun h₁ => Or.inl (pin_le_of_le w x Y h₁))
     (fun h₂ => Or.inr (pin_le_of_le w x (¬ Y) h₂))
 
-/-- Strong Leibniz at `t` and BF at `σ` give Strong Leibniz at `σ → t`: a non-bottom `X`
-is possibly instantiated, BF gives `x` with `◇Xx`, a strong world `w` at `t` lies below
-`Xx`, and `λy. w ∧ y = x` is a strong world below `X`. Not a record of the map, which has
+/-- Strong Atomicity at `t` and BF at `σ` give Strong Atomicity at `σ → t`: a non-bottom `X`
+is possibly instantiated, BF gives `x` with `◇Xx`, a strong atom `w` at `t` lies below
+`Xx`, and `λy. w ∧ y = x` is a strong atom below `X`. Not a record of the map, which has
 its necessitation. -/
-theorem strong_leibniz_t_and_bf_imply_strong_leibniz {σ : Type} [Ty σ] :
-    StrongLeibnizT → Barcan σ → StrongLeibniz (σ → Prop) := fun sl bf X hX =>
+theorem strong_atomicity_t_and_bf_imply_strong_atomicity {σ : Type} [Ty σ] :
+    StrongAtomicityT → Barcan σ → StrongAtomicity (σ → Prop) := fun sl bf X hX =>
   (exists_dia_of_dia_exists bf X (dia_exists_of_ne_bot X hX)).elim fun x hx =>
     (sl (X x) hx).elim fun w hw =>
       ⟨λ y ↦ w ∧ y = x,
@@ -713,12 +713,12 @@ theorem atomicity_t_and_bf_imply_atomicity {σ : Type} [Ty σ] :
             (pin_decides w x fun q => atom_le_or_le_neg w q hw.1),
           pin_le_of_le w x X hw.2⟩
 
-/-- `necessary-strong-leibniz-t-and-necessary-bf-imply-necessary-strong-leibniz`, at `σ → t`,
+/-- `necessary-strong-atomicity-t-and-necessary-bf-imply-necessary-strong-atomicity`, at `σ → t`,
 its list form being the map's record: the last theorem necessitated, and `K`. -/
-theorem necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz
+theorem necessary_strong_atomicity_t_and_necessary_bf_imply_necessary_strong_atomicity
     {σ : Type} [Ty σ] :
-    NecStrongLeibnizT → NecBarcan σ → NecStrongLeibniz (σ → Prop) := fun h₁ h₂ =>
-  modal_K _ _ (modal_K _ _ (nec% (strong_leibniz_t_and_bf_imply_strong_leibniz (σ := σ))) h₁) h₂
+    NecStrongAtomicityT → NecBarcan σ → NecStrongAtomicity (σ → Prop) := fun h₁ h₂ =>
+  modal_K _ _ (modal_K _ _ (nec% (strong_atomicity_t_and_bf_imply_strong_atomicity (σ := σ))) h₁) h₂
 
 
 /-! ### Atomicity and Boolean Completeness at `t`, boxed -/
@@ -735,11 +735,11 @@ theorem necessary_atomicity_r_implies_necessary_atomicity_t :
 at `t`. -/
 theorem necessary_boolean_completeness_r_implies_necessary_boolean_completeness_t :
     NecBooleanCompleteness Prop → NecBooleanCompletenessT := fun h => h
-/-- `necessary-strong-leibniz-t-implies-necessary-atomicity-t`: the unboxed record,
+/-- `necessary-strong-atomicity-t-implies-necessary-atomicity-t`: the unboxed record,
 necessitated. -/
-theorem necessary_strong_leibniz_t_implies_necessary_atomicity_t :
-    NecStrongLeibnizT → NecAtomicityT :=
-  modal_K _ _ (nec% strong_leibniz_t_implies_atomicity_t)
+theorem necessary_strong_atomicity_t_implies_necessary_atomicity_t :
+    NecStrongAtomicityT → NecAtomicityT :=
+  modal_K _ _ (nec% strong_atomicity_t_implies_atomicity_t)
 /-- `necessary-persistent-comprehension-implies-necessary-actuality`: the unboxed record,
 necessitated. -/
 theorem necessary_persistent_comprehension_implies_necessary_actuality :
@@ -755,11 +755,11 @@ theorem necessary_atomicity_t_and_necessary_bf_imply_necessary_atomicity {σ : T
     NecAtomicityT → NecBarcan σ → NecAtomicity (σ → Prop) := fun h₁ h₂ =>
   modal_K _ _ (modal_K _ _ (nec% (atomicity_t_and_bf_imply_atomicity (σ := σ))) h₁) h₂
 
-/-- `necessary-atomicity-t-and-necessary-bf-t-imply-necessary-strong-leibniz-t`: the unboxed
+/-- `necessary-atomicity-t-and-necessary-bf-t-imply-necessary-strong-atomicity-t`: the unboxed
 record, necessitated. -/
-theorem necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_leibniz_t :
-    NecAtomicityT → NecBarcanT → NecStrongLeibnizT := fun h₁ h₂ =>
-  modal_K _ _ (modal_K _ _ (nec% atomicity_t_and_bf_t_imply_strong_leibniz_t) h₁) h₂
+theorem necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_atomicity_t :
+    NecAtomicityT → NecBarcanT → NecStrongAtomicityT := fun h₁ h₂ =>
+  modal_K _ _ (modal_K _ _ (nec% atomicity_t_and_bf_t_imply_strong_atomicity_t) h₁) h₂
 
 /-- `necessary-actuality-and-necessary-bf-imply-necessary-inextensible-comprehension`: the
 unboxed record, necessitated. -/
@@ -779,7 +779,7 @@ theorem necessary_completeness_and_necessary_actuality_imply_necessary_weak_rigi
 
 /-! ### Strong Actuality (6 October) -/
 
-/-- `strong-actuality-implies-actuality`: a true strong world decides every proposition,
+/-- `strong-actuality-implies-actuality`: a true strong atom decides every proposition,
 by `T`, so it is an actual world. -/
 theorem strong_actuality_implies_actuality : StrongActuality → Actuality := fun h =>
   h.elim fun w hw => actuality_of_decides w (box_elim hw.2) hw.1
@@ -793,19 +793,19 @@ theorem necessary_strong_actuality_implies_necessary_actuality :
 theorem necessary_strong_actuality_implies_strong_actuality :
     NecStrongActuality → StrongActuality := fun h => box_elim h
 
-/-- `strong-leibniz-t-implies-strong-actuality`: with `a` the actual world (Actuality from
-the Strong Leibniz Biconditionals), a strong world `w ≤ a` is true, since otherwise
+/-- `strong-atomicity-t-implies-strong-actuality`: with `a` the actual world (Actuality from
+Strong Atomicity), a strong atom `w ≤ a` is true, since otherwise
 `a ≤ ¬w` and `w ≤ ¬w`, making `w` bottom. -/
-theorem strong_leibniz_t_implies_strong_actuality : StrongLeibnizT → StrongActuality := fun sl =>
-  (box_elim (strong_leibniz_t_implies_necessary_actuality sl)).elim fun a ha =>
+theorem strong_atomicity_t_implies_strong_actuality : StrongAtomicityT → StrongActuality := fun sl =>
+  (box_elim (strong_atomicity_t_implies_necessary_actuality sl)).elim fun a ha =>
     (sl a (dia_intro a ha.1)).elim fun w hw =>
       ⟨w, (em w).elim id fun hnw => (hw.1.1 (eq_false_of_le_neg w
         (le_trans_prop w a (¬ w) hw.2 (ha.2 (¬ w) hnw)))).elim, hw.1.2⟩
 
-/-- `necessary-strong-leibniz-t-implies-necessary-strong-actuality`: necessitated, and `K`. -/
-theorem necessary_strong_leibniz_t_implies_necessary_strong_actuality :
-    NecStrongLeibnizT → NecStrongActuality :=
-  modal_K _ _ (nec% strong_leibniz_t_implies_strong_actuality)
+/-- `necessary-strong-atomicity-t-implies-necessary-strong-actuality`: necessitated, and `K`. -/
+theorem necessary_strong_atomicity_t_implies_necessary_strong_actuality :
+    NecStrongAtomicityT → NecStrongActuality :=
+  modal_K _ _ (nec% strong_atomicity_t_implies_strong_actuality)
 
 /-- `actuality-and-bf-t-imply-strong-actuality`: the actual world decides each
 proposition, each decision is necessary, and BF at `t` boxes the quantifier (Bacon's
@@ -836,7 +836,7 @@ theorem decides_of_dia_actual (a : Prop) :
 
 /-- `actuality-and-distinctness-preserving-collapse-imply-strong-actuality`: with `a` the
 actual world, the collapse makes `◇a → ActualWorld a` necessary (as for Inextensible
-Comprehension), and that decides every proposition, so `a` is a strong world. -/
+Comprehension), and that decides every proposition, so `a` is a strong atom. -/
 theorem actuality_and_distinctness_preserving_collapse_imply_strong_actuality :
     Actuality → DistinctnessPreservingCollapse → StrongActuality :=
   fun act col => act.elim fun a (ha : ActualWorld a) => (col (ActualWorld a) ha).elim
@@ -849,18 +849,18 @@ theorem actuality_and_distinctness_preserving_collapse_imply_strong_actuality :
 
 /-! ### BF at the relational types (11 October 2026) -/
 
-/-- `atomicity-and-bf-relational-imply-strong-leibniz`, at `σ → t`: the argument of
-`atomicity_and_bf_imply_strong_leibniz` uses BF only at the relational type `σ → t`. -/
-theorem atomicity_and_bf_relational_imply_strong_leibniz {σ : Type} [Ty σ] :
-    Atomicity (σ → Prop) → BarcanRelational (σ → Prop) → StrongLeibniz (σ → Prop) :=
-  atomicity_and_bf_imply_strong_leibniz
+/-- `atomicity-and-bf-relational-imply-strong-atomicity`, at `σ → t`: the argument of
+`atomicity_and_bf_imply_strong_atomicity` uses BF only at the relational type `σ → t`. -/
+theorem atomicity_and_bf_relational_imply_strong_atomicity {σ : Type} [Ty σ] :
+    Atomicity (σ → Prop) → BarcanRelational (σ → Prop) → StrongAtomicity (σ → Prop) :=
+  atomicity_and_bf_imply_strong_atomicity
 
-/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-leibniz`. -/
-theorem necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_leibniz
+/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-atomicity`. -/
+theorem necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_atomicity
     {σ : Type} [Ty σ] :
-    NecAtomicity (σ → Prop) → NecBarcanRelational (σ → Prop) → NecStrongLeibniz (σ → Prop) :=
+    NecAtomicity (σ → Prop) → NecBarcanRelational (σ → Prop) → NecStrongAtomicity (σ → Prop) :=
   fun h₁ h₂ => modal_K _ _ (modal_K _ _
-    (nec% (atomicity_and_bf_relational_imply_strong_leibniz (σ := σ))) h₁) h₂
+    (nec% (atomicity_and_bf_relational_imply_strong_atomicity (σ := σ))) h₁) h₂
 
 /-! ### Atomicity (type t) and Weakly Inextensible Comprehension give Actuality (11 October 2026) -/
 

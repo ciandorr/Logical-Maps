@@ -1,0 +1,26 @@
+id: atomlessness-implies-atoms-are-strong-atoms-r
+premises:
+- atomlessness
+conclusion: atoms-are-strong-atoms-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 25 October 2026 (the type-t observation); extended to every relational type
+    by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, the same day
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, observation of 25 October 2026 (session transcript).
+source_names:
+- Dorr 25 Oct
+proof: 'Vacuously. Atomlessness says that every possible proposition has a possible strict part, so there
+  is no atom of type $t$. Nor is there one of any relational type: the existential projection $\exists\bar
+  x\, .\,I\bar x$ of an atom $I$ of type $\bar\sigma t$ would be an atom of type $t$, since it is not
+  bottom and, for any proposition $p$, the entity $I\land\lambda\bar x\, .\,p$ lies below $I$, so is $I$
+  or bottom, which puts the projection below $p$ or disjoint from it. So every atom of every relational
+  type is a strong atom.'
+notes: With it Atomlessness gives Atoms are self-atoms at every type, through [[atoms-are-strong-atoms-r-implies-atoms-are-self-atoms-r]].
+  It gives nothing about self-atoms, which are atoms only at the worlds where they hold; Self-Atomicity
+  fails under Atomlessness through the recorded incompatibility of Atomlessness with Actuality.

@@ -4,6 +4,10 @@
 
 ## Package
 
+- **Atoms are self-atoms.** At each relational type, every atom is a self-atom: necessarily, if it is instantiated, it is an atom.
+- **Atoms are strong atoms.** At each relational type, every atom is a strong atom: it necessarily entails every entity of the type or its negation.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **Self-atoms are strong atoms.** At each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **□Actuality.** Necessarily, there is a true proposition that entails every true proposition.
 - **□Boolean Completeness.** Necessarily, every property of entities of a relational type has a greatest lower bound in that type.
 - **□Rigid Power.** Necessarily, if a relation is rigid, so is the property of being a rigid relation that entails it.
@@ -13,13 +17,18 @@
 - **Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
 - **Truth implies ND-necessity.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
+- **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
+- **¬ □Atoms are self-atoms (type t).** Necessarily, every atom is a self-atom: necessarily, if it is true, it is an atom.
+- **¬ □Atoms are strong atoms (type t).** Necessarily, every atom is a strong atom.
+- **¬ □Self-atoms are strong atoms (type t).** Necessarily, every self-atom is a strong atom.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **¬ Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **¬ □BF.** Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.
 - **¬ No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **¬ ND.** Distinct things of any type are necessarily distinct.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ B for pure sentences.** The B instance for every closed sentence in the pure language.
-- **¬ □Strong Actuality.** Necessarily, there is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.
+- **¬ □Strong Actuality.** Necessarily, there is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 - **¬ BF (type t).** If every proposition necessarily has a property, then necessarily every proposition has it.
 - **¬ □Two-hat necessity implies ND-necessity.** Necessarily, whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat. In C this is the identity $\hat{\hat\Box}=\Box_{\ne}$.
 - **¬ Relational Choice.** Every serial binary relation has a functional subrelation.
@@ -42,6 +51,12 @@ Interpretation of Σ, fixed for this record: one designated relational constant 
 *A member of the group Symmetric ideally-full models, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds Atoms are self-atoms, Atoms are strong atoms, □Self-atoms are atoms, Self-atoms are strong atoms. Fails □Atoms are self-atoms (type t), □Atoms are strong atoms (type t), □Self-atoms are strong atoms (type t), Self-Atomicity (type t).
+
+At $W_0$ the orbit $G$ of the identity, all permutations, is pinned down by $\varnothing$ and is the only atom, the symmetric propositions over the arrows into $W_1$ refining by kernels; it is a self-atom and a strong atom, its transport along an arrow into $W_1$ being empty. So Atoms are self-atoms and Atoms are strong atoms hold at $W_0$, at every type, atoms of relational types sitting over $G$ as orbits of one pair. At $W_1$, where every symmetric intension is in the domain, the atoms are the orbits of single arrows, and the orbit of a non-injective or non-surjective $k$ is not a self-atom: some non-permutation $m$ has $m\circ k=k$ or $m\circ k$ in the orbit, as $m$ may act freely off the range of $k$. So the boxed forms of both fail at $W_0$. No self-atom at $W_0$ contains an arrow $f$ into $W_1$: the transport along $f$ would be the orbit of $1_{W_1}$, but a non-permutation fixing $f(N)$ pointwise, for $N$ pinning the self-atom, carries $f$ to an arrow agreeing with it on $N$. So the self-atoms at $W_0$ are $G$ and its relational counterparts, atoms and strong atoms; at $W_1$ the only self-atoms are the orbits of permutations, by the same reasoning, which are atoms; so Self-atoms are atoms holds at both objects. But the orbit of $1_{W_1}$ is not a strong atom there (the recorded failure of Strong Actuality at $W_1$), so Self-atoms are strong atoms (type t) fails at $W_1$ and its boxed form fails at $W_0$. Self-Atomicity (type t) fails at $W_0$: the proposition of the arrows into $W_1$ is pinned down by $\varnothing$, possible, and has no self-atom below it.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds □Actuality.
 
@@ -89,7 +104,7 @@ The type-$e$ instance of BF is a closed pure sentence true at the base world and
 
 ### Fails □Strong Actuality.
 
-Strong Actuality fails at the second object, which an arrow from the first reaches. There a true proposition contains the identity and, being symmetric, every permutation. Let $s$ be the successor map, an arrow from the second object to itself, and $k_0,k_1$ its retractions sending $n+1$ to $n$ and $0$ to $0$ and to $1$ respectively. Under $s$ the true proposition becomes one containing $k_0$ and $k_1$. The proposition that the arrow sends $0$ and $1$ to the same individual is closed under composition with permutations, so in the domain at the second object, where every symmetric intension is; it contains $k_0$ and not $k_1$. So no true proposition at the second object is a strong world. (Strong Actuality holds at the first object, by Actuality and the Distinctness-preserving collapse.)
+Strong Actuality fails at the second object, which an arrow from the first reaches. There a true proposition contains the identity and, being symmetric, every permutation. Let $s$ be the successor map, an arrow from the second object to itself, and $k_0,k_1$ its retractions sending $n+1$ to $n$ and $0$ to $0$ and to $1$ respectively. Under $s$ the true proposition becomes one containing $k_0$ and $k_1$. The proposition that the arrow sends $0$ and $1$ to the same individual is closed under composition with permutations, so in the domain at the second object, where every symmetric intension is; it contains $k_0$ and not $k_1$. So no true proposition at the second object is a strong atom. (Strong Actuality holds at the first object, by Actuality and the Distinctness-preserving collapse.)
 
 *By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
 
@@ -171,6 +186,12 @@ At type $e$. Let $F$ and $a$ be as the condition gives them, and suppose $G\le F
 
 *Revised 2026-10-04 by Claude Fable 5.1 (Anthropic), at Cian Dorr's direction:* Moved from the group symmetric-ideally-full to the topic, so that the symmetry-constrained full models use it too: in those models every intension is pinned down by the finite set of all individuals, and the collapses are the constant maps. The group's `when: individuals: base` is now the condition construction-individuals, met by that parameter value.
 
+### Holds Necessity of Second-Order Analysis.
+
+Let $v$ be reachable from the evaluation point. If every type is finite at $v$ there is no real number structure there, an ordered field having the infinitely many distinct elements $0$, $1$, $1+1$, and so on. Otherwise let $D$ be as in the condition. Carry the real numbers onto $D$ by a bijection: the carrier, order, sum, product, $0$, $1$ and natural numbers are sets of tuples from $D$, so extensions at $v$ of entities there, which form a real number structure $\mathfrak R^*$ at $v$, its completeness and the leastness of its natural numbers being tested against subproperties whose extensions are all the subsets of $D$. Its second-order quantifiers, applied to tuples from $D$, range over all relations on $D$, so for each second-order analytical sentence $A$, $A(\mathfrak R^*)$ holds at $v$ iff $A$ is true of the real numbers under full second-order semantics. Any real number structure $\mathfrak R$ at $v$, of any type, is isomorphic to $\mathfrak R^*$ by a relation in the domain there (Huntington's theorem, a theorem of C: Background, Analysis), and $A(\mathfrak R)\leftrightarrow A(\mathfrak R^*)$ is a theorem of C given such an isomorphism, relations on one carrier being carried to the other by comprehension. So at every reachable object every real number structure satisfies exactly the second-order analytical sentences true of the reals, and each instance $\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R) \to A(\mathfrak R)$ or $\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak R)$ of the Necessity of Second-Order Analysis holds, with the Necessity of Analysis and the Non-contingency of the Continuum Hypothesis. The choice of the bijection with the reals needs no choice principle, $D$ having the cardinality of the continuum.
+
+*General argument `arguments/second-order-analysis-full-continuum`. It requires that At every object $v$ reachable from the evaluation point, either every type has finitely many entities at $v$, or there is a set $D$ of continuum many entities of one type at $v$ such that, for each $k\ge1$, every set of $k$-tuples from $D$ is the extension at $v$ of an entity in the domain there. Here: At a reachable object $v$, let $\tau$ be a type with infinitely many orbits there, and for a set $A$ of them let $Y_A$ be the intension of type $\tau t$ whose value at an arrow into $v$ is the union of the orbits in $A$ and at other arrows is empty: symmetric, the values being invariant, and pinned down by $\emptyset$, so in the domain; its transport along any arrow depends only on the arrow's codomain. The $Y_A$ are continuum many and pairwise distinct at $v$. For a set $T$ of $k$-tuples of them, the intension whose value at an arrow $h$ is the set of transports along $h$ of the tuples in $T$ depends only on $h$'s codomain, is symmetric, each such transport being fixed by the target's symmetries, and is pinned down by $\emptyset$; its extension at $v$ is $T$. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-25.*
+
 ### Fails B for sentences of Σ.
 
 B for sentences of Σ fails: the Σ-sentence $\forall\bar x\, .\,c\bar x$ denotes $a$, which is true, and under an arrow from which no world in $a$ is accessible $\Diamond a$ is false, so $\Box\Diamond a$ fails.
@@ -199,7 +220,7 @@ The record's revision log before it was written as arguments.
 - **2026-09-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added the failure of B for pure sentences; see the notes. Now violates: B for pure sentences.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the Distinctness-preserving collapse; see the notes. Now satisfies: Truth implies ND-necessity.
 - **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Relational Choice, at types (e→t) and e: a functional subrelation of the serial relation pairing each property with its members would be symmetric and finitely pinned, and a symmetry fixing its pinning set would carry its choice for the property of lying outside that set to a second choice. Cian Dorr’s observation that a choice cannot be finitely pinned; argument in the notes. Now violates: Relational Choice.
-- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of the Strong Leibniz Biconditionals; see the notes. Now violates: Atomicity (type t).
+- **2026-09-23** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of Atomicity (type t), and with it of Strong Atomicity; see the notes. Now violates: Atomicity (type t).
 - **2026-09-22** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 - **2026-09-20** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added both Axioms of Infinity at Cian Dorr's direction. The individuals are the natural numbers and identity at the identity arrow is literal, so no numeral counts them. The propositions that a given individual is fixed by the arrow, one for each individual, are pairwise distinct, symmetric and pinned by that individual, so there are infinitely many propositions. The set of numerals at each type is invariant under every arrow, hence symmetric and pinned by the empty set, so finite cardinality is standard and no finite cardinality holds of the universal property at either type. Now satisfies: Axiom of Infinity (type e), Axiom of Infinity (type t).
 

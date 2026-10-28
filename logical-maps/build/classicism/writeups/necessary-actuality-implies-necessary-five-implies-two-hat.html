@@ -323,31 +323,67 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□Actuality ⇒ □5-necessity implies two-hat necessity</h1></header><p class="cert">
-Result — Source: The Bounds of Possibility (2021), Lean <code>Classicism.Map.necessary_actuality_implies_necessary_five_implies_two_hat</code>; produced by The Bounds of Possibility, Appendix D, Propositions D19–D21 (in HS4R); the weakening of the hypothesis to necessary Actuality observed by Cian Dorr and Claude Fable 5.1 (Anthropic), 14 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
+Result — Source: The Bounds of Possibility (2021), Lean
+<code>Classicism.Map.necessary_actuality_implies_necessary_five_implies_two_hat</code>;
+produced by The Bounds of Possibility, Appendix D, Propositions D19–D21
+(in HS4R); the weakening of the hypothesis to necessary Actuality
+observed by Cian Dorr and Claude Fable 5.1 (Anthropic), 14 October 2026;
+recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14
+October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□Actuality.</strong> Necessarily, there is a true proposition that entails every true proposition.</li>
+<li><strong>□Actuality.</strong> Necessarily, there is a true
+proposition that entails every true proposition.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□5-necessity implies two-hat necessity.</strong> Necessarily, whatever is 5-necessary is two-hat necessary. In C this is the identity <span class="math inline">\Box_5=\hat{\hat\Box}</span>.</li>
+<li><strong>□5-necessity implies two-hat necessity.</strong>
+Necessarily, whatever is 5-necessary is two-hat necessary. In C this is
+the identity <span
+class="math inline">\Box_5=\hat{\hat\Box}</span>.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Proposition D21 of The Bounds of Possibility, Appendix D, proves <span class="math inline">\forall p(\Box_5p\leftrightarrow\hat{\hat\Box}p)</span> in HS4R. Its right-to-left direction uses only HS4. Its left-to-right direction uses, through Corollary D20 and Proposition D19, only Actuality (<span class="math inline">\exists w\,W@w</span>) at the world of evaluation, and needs it at every world accessible from the actual one in order to obtain <span class="math inline">\Box</span>NKJF<span class="math inline">_{\langle\rangle}\hat{\hat\Box}</span>; <span class="math inline">\Box</span>Actuality supplies exactly that. Necessitating gives the boxed principle.</p>
+<p>Proposition D21 of The Bounds of Possibility, Appendix D, proves
+<span class="math inline">\forall
+p(\Box_5p\leftrightarrow\hat{\hat\Box}p)</span> in HS4R. Its
+right-to-left direction uses only HS4. Its left-to-right direction uses,
+through Corollary D20 and Proposition D19, only Actuality (<span
+class="math inline">\exists w\,W@w</span>) at the world of evaluation,
+and needs it at every world accessible from the actual one in order to
+obtain <span class="math inline">\Box</span>NKJF<span
+class="math inline">_{\langle\rangle}\hat{\hat\Box}</span>; <span
+class="math inline">\Box</span>Actuality supplies exactly that.
+Necessitating gives the boxed principle.</p>
 <h2 id="notes">Notes</h2>
 <p>The boxed form of [[actuality-implies-five-implies-two-hat]].</p>
-<p>Appendix D notes that the proof needs only this consequence of the rigidity axioms (Proposition C7). Corollary D23 is the same fact stated as <span class="math inline">\hat{\hat{\hat\Box}}\equiv\hat{\hat\Box}</span>.</p>
+<p>Appendix D notes that the proof needs only this consequence of the
+rigidity axioms (Proposition C7). Corollary D23 is the same fact stated
+as <span
+class="math inline">\hat{\hat{\hat\Box}}\equiv\hat{\hat\Box}</span>.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne, and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D, Propositions D18–D21 and Corollary D23, pp. 407–409.</li>
-<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1 (Anthropic), conversation of 14 October 2026 (transcript in the private notes).</li>
+<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne,
+and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D,
+Propositions D18–D21 and Corollary D23, pp. 407–409.</li>
+<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1
+(Anthropic), conversation of 14 October 2026 (transcript in the private
+notes).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-actuality-implies-necessary-five-implies-two-hat.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-actuality-implies-necessary-five-implies-two-hat.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Propositions D18–D21, pp. 407–408</li>
+<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John
+Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility.
+Oxford University Press. Appendix D, Narrower Modalities in Higher-Order
+S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May
+2024. Its background logic HS4 (a primitive S4 operator over
+higher-order logic) is read into C by interpreting the primitive box as
+<span class="math inline">\lambda p\, .\,p=\top</span>, under which
+every theorem of HS4 is a theorem of C. — Propositions D18–D21,
+pp. 407–408</li>
 </ul>
 </body></html>

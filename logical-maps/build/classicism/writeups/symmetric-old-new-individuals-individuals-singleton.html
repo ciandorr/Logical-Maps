@@ -323,102 +323,584 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Symmetric ideally-full model: old and new individuals [one individual]</h1></header><p class="cert">
-Model — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 6 October 2026, in a session with Cian Dorr; further verdicts by Claude Opus 5.5 (Anthropic), the same day; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 6 October 2026.
+Model — Source: Misc.; produced by Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 6 October 2026, in a session with Cian Dorr;
+further verdicts by Claude Opus 5.5 (Anthropic), the same day; recorded
+by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 6 October 2026.
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>□Strong Actuality.</strong> Necessarily, there is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.</li>
-<li><strong>ND.</strong> Distinct things of any type are necessarily distinct.</li>
-<li><strong>□Atomicity.</strong> Necessarily, every non-bottom entity of each relational type has an atom below it.</li>
-<li><strong>□Boolean Completeness (type t).</strong> Necessarily, every property of propositions has a greatest lower bound.</li>
-<li><strong>Boolean Completeness.</strong> Every property of entities of a relational type has a greatest lower bound in that type.</li>
-<li><strong>□Boolean Completeness.</strong> Necessarily, every property of entities of a relational type has a greatest lower bound in that type.</li>
-<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation, including a proposition, is coextensive with a rigid one.</li>
-<li><strong>□Rigid Power.</strong> Necessarily, if a relation is rigid, so is the property of being a rigid relation that entails it.</li>
-<li><strong>□Truth implies 5-necessity.</strong> Necessarily, every truth is 5-necessary: necessary under every S5 operator. In C this is the identity <span class="math inline">\Box_5=\lambda p\, .\,p</span>.</li>
-<li><strong>Countable Boolean Completeness.</strong> Every countable property of entities of a relational type has a least upper bound in that type, where a property is countable relative to a type <span class="math inline">\sigma</span> when it injects into the finite cardinalities of properties of type <span class="math inline">\sigma</span>; one instance for each <span class="math inline">\sigma</span>.</li>
-<li><strong>□Countable Boolean Completeness.</strong> Necessarily, every countable property of entities of a relational type has a least upper bound in that type, with countability relative to a type <span class="math inline">\sigma</span> as in Countable Boolean Completeness; one instance for each <span class="math inline">\sigma</span>.</li>
-<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at <span class="math inline">\sigma</span> form a rigid property with necessarily distinct instances. One sentence for each type <span class="math inline">\sigma</span>.</li>
-<li><strong>¬ Strong Leibniz Biconditionals (type t).</strong> Every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.</li>
-<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>¬ Two-hat necessity implies ND-necessity.</strong> Whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat.</li>
-<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are not finitely many propositions: the Axiom of Infinity at this type, under a diamond.</li>
-<li><strong>¬ Axiom of Infinity (type e).</strong> There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
-<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>¬ Possible Infinity (type e).</strong> Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.</li>
-<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.</li>
-<li><strong>¬ Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
-<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
-<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema for the fixed nonlogical signature Σ: every closed identity of its language not provable in C(Σ) is false.</li>
+<li><strong>□Self-atoms are atoms.</strong> Necessarily, at each
+relational type, every self-atom is an atom.</li>
+<li><strong>□Self-atoms are strong atoms.</strong> Necessarily, at each
+relational type, every self-atom is a strong atom: it necessarily
+entails every entity of the type or its negation.</li>
+<li><strong>□Strong Actuality.</strong> Necessarily, there is a true
+strong atom: a true proposition that necessarily entails every
+proposition or its negation.</li>
+<li><strong>ND.</strong> Distinct things of any type are necessarily
+distinct.</li>
+<li><strong>□Atomicity.</strong> Necessarily, every non-bottom entity of
+each relational type has an atom below it.</li>
+<li><strong>□Boolean Completeness (type t).</strong> Necessarily, every
+property of propositions has a greatest lower bound.</li>
+<li><strong>Boolean Completeness.</strong> Every property of entities of
+a relational type has a greatest lower bound in that type.</li>
+<li><strong>□Boolean Completeness.</strong> Necessarily, every property
+of entities of a relational type has a greatest lower bound in that
+type.</li>
+<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation,
+including a proposition, is coextensive with a rigid one.</li>
+<li><strong>□Rigid Power.</strong> Necessarily, if a relation is rigid,
+so is the property of being a rigid relation that entails it.</li>
+<li><strong>□Truth implies 5-necessity.</strong> Necessarily, every
+truth is 5-necessary: necessary under every S5 operator. In C this is
+the identity <span class="math inline">\Box_5=\lambda p\,
+.\,p</span>.</li>
+<li><strong>Countable Boolean Completeness.</strong> Every countable
+property of entities of a relational type has a least upper bound in
+that type, where a property is countable relative to a type <span
+class="math inline">\sigma</span> when it injects into the finite
+cardinalities of properties of type <span
+class="math inline">\sigma</span>; one instance for each <span
+class="math inline">\sigma</span>.</li>
+<li><strong>□Countable Boolean Completeness.</strong> Necessarily, every
+countable property of entities of a relational type has a least upper
+bound in that type, with countability relative to a type <span
+class="math inline">\sigma</span> as in Countable Boolean Completeness;
+one instance for each <span class="math inline">\sigma</span>.</li>
+<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero
+is not a successor and successor is injective on numbers, the numbers at
+<span class="math inline">\sigma</span> form a rigid property with
+necessarily distinct instances. One sentence for each type <span
+class="math inline">\sigma</span>.</li>
+<li><strong>¬ Strong Atomicity (type t).</strong> Every possible
+proposition is entailed by a strong atom, one that is possible and
+necessarily entails every proposition or its negation.</li>
+<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ Two-hat necessity implies ND-necessity.</strong> Whatever
+is two-hat necessary is ND-necessary: the distinctness-preserving
+modality agrees with its hat.</li>
+<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are
+not finitely many propositions: the Axiom of Infinity at this type,
+under a diamond.</li>
+<li><strong>¬ Axiom of Infinity (type e).</strong> There are not
+finitely many individuals. No finite cardinality holds of the universal
+property, so the domain of the type cannot be exhausted by finitely many
+steps from the empty property.</li>
+<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ Possible Infinity (type e).</strong> Possibly there are
+not finitely many individuals: the Axiom of Infinity at this type, under
+a diamond.</li>
+<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with
+free variables among a finite tuple x, and distinct matching nonlogical
+constants c, a witness to P entails that P at those constants is
+possible.</li>
+<li><strong>¬ Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
+<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma
+is a pure operation applied to other constants: for a closed pure term A
+and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied
+to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema
+for the fixed nonlogical signature Σ: every closed identity of its
+language not provable in C(Σ) is false.</li>
 </ul>
 <h2 id="definition">Definition</h2>
-<p>A symmetric ideally-full intensional action model over two objects, <span class="math inline">E</span> and <span class="math inline">O</span>, with individuals <span class="math inline">\mathbb N</span> at <span class="math inline">E</span> and <span class="math inline">\mathbb N\sqcup\mathbb N&#39;</span> at <span class="math inline">O</span>, <span class="math inline">\mathbb N&#39;</span> a disjoint copy of <span class="math inline">\mathbb N</span>; members of <span class="math inline">\mathbb N</span> at <span class="math inline">O</span> are old, members of <span class="math inline">\mathbb N&#39;</span> new. The arrows are injections: from <span class="math inline">E</span> to <span class="math inline">E</span> all injections of <span class="math inline">\mathbb N</span>; from <span class="math inline">E</span> to <span class="math inline">O</span> the injections with range among the old individuals; from <span class="math inline">O</span> to <span class="math inline">E</span> all injections into <span class="math inline">\mathbb N</span>; from <span class="math inline">O</span> to <span class="math inline">O</span> the permutations preserving old and new (<span class="math inline">G_O</span>) and the injections with range among the old (<span class="math inline">K</span>). The symmetry groups are all permutations of <span class="math inline">\mathbb N</span> at <span class="math inline">E</span> and <span class="math inline">G_O</span> at <span class="math inline">O</span>, and both objects carry the ideal of finite sets. The evaluation point is the identity arrow on <span class="math inline">E</span>.</p>
-<p>Individuals, fixed for this record: there is a single individual at every object. The arrows still act on the base as the construction says, and the base still supplies the pinning sets and the symmetry groups.</p>
-<p>Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the top element of its type.</p>
-<p><em>A member of the group Symmetric ideally-full models, which supplies this definition with the record’s settings, and the arguments marked as shared.</em></p>
+<p>A symmetric ideally-full intensional action model over two objects,
+<span class="math inline">E</span> and <span
+class="math inline">O</span>, with individuals <span
+class="math inline">\mathbb N</span> at <span
+class="math inline">E</span> and <span class="math inline">\mathbb
+N\sqcup\mathbb N&#39;</span> at <span class="math inline">O</span>,
+<span class="math inline">\mathbb N&#39;</span> a disjoint copy of <span
+class="math inline">\mathbb N</span>; members of <span
+class="math inline">\mathbb N</span> at <span
+class="math inline">O</span> are old, members of <span
+class="math inline">\mathbb N&#39;</span> new. The arrows are
+injections: from <span class="math inline">E</span> to <span
+class="math inline">E</span> all injections of <span
+class="math inline">\mathbb N</span>; from <span
+class="math inline">E</span> to <span class="math inline">O</span> the
+injections with range among the old individuals; from <span
+class="math inline">O</span> to <span class="math inline">E</span> all
+injections into <span class="math inline">\mathbb N</span>; from <span
+class="math inline">O</span> to <span class="math inline">O</span> the
+permutations preserving old and new (<span
+class="math inline">G_O</span>) and the injections with range among the
+old (<span class="math inline">K</span>). The symmetry groups are all
+permutations of <span class="math inline">\mathbb N</span> at <span
+class="math inline">E</span> and <span class="math inline">G_O</span> at
+<span class="math inline">O</span>, and both objects carry the ideal of
+finite sets. The evaluation point is the identity arrow on <span
+class="math inline">E</span>.</p>
+<p>Individuals, fixed for this record: there is a single individual at
+every object. The arrows still act on the base as the construction says,
+and the base still supplies the pinning sets and the symmetry
+groups.</p>
+<p>Interpretation of Σ, fixed for this record: every constant of Σ is
+relational, and each denotes the top element of its type.</p>
+<p><em>A member of the group Symmetric ideally-full models, which
+supplies this definition with the record’s settings, and the arguments
+marked as shared.</em></p>
 <h2 id="arguments">Arguments</h2>
+<h3 id="holds-self-atoms-are-atoms-self-atoms-are-strong-atoms.">Holds
+□Self-atoms are atoms, □Self-atoms are strong atoms.</h3>
+<p>At <span class="math inline">E</span> the only symmetric propositions
+over the arrows <span class="math inline">E\to E</span> are empty or
+everything, any two injections of <span class="math inline">\mathbb
+N</span> agreeing on a finite set up to a permutation; so the set of all
+arrows <span class="math inline">E\to E</span> is the atom containing
+<span class="math inline">1_E</span>. At <span
+class="math inline">O</span> the symmetry group <span
+class="math inline">G_O</span> is pinned down by any new individual,
+since an injection into the old individuals cannot agree with a
+permutation preserving old and new at it, and is the atom containing
+<span class="math inline">1_O</span>. No self-atom at <span
+class="math inline">E</span> contains an arrow <span
+class="math inline">f</span> into <span class="math inline">O</span>:
+its transport along <span class="math inline">f</span> would be <span
+class="math inline">G_O</span>, but an injection <span
+class="math inline">m</span> into the old individuals fixing <span
+class="math inline">f(N)</span> pointwise, for <span
+class="math inline">N</span> pinning the self-atom, is not in <span
+class="math inline">G_O</span> and carries <span
+class="math inline">f</span> to an arrow agreeing with it on <span
+class="math inline">N</span>. So the self-atoms at <span
+class="math inline">E</span> sit over the atom of all arrows <span
+class="math inline">E\to E</span>, and are atoms; at <span
+class="math inline">O</span>, likewise, no self-atom contains an
+injection into the old individuals, and the symmetric pinned
+propositions over the arrows <span class="math inline">O\to E</span> are
+empty or everything, so the self-atoms there are <span
+class="math inline">G_O</span> and the set of all arrows <span
+class="math inline">O\to E</span>, both atoms. Each is a strong atom:
+the atom at <span class="math inline">E</span> is the recorded true
+strong atom; <span class="math inline">G_O</span> becomes empty under an
+injection into the old individuals and under an arrow to <span
+class="math inline">E</span>; the set of all arrows <span
+class="math inline">O\to E</span> becomes itself under an arrow <span
+class="math inline">O\to O</span> and the set of all arrows <span
+class="math inline">E\to E</span> under an arrow to <span
+class="math inline">E</span>, atoms. At relational types a self-atom
+sits over one of these as the orbit of a single pair, an atom and a
+strong atom. So both principles hold at both objects, at every type.</p>
+<p><em>By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25
+October 2026.</em></p>
 <h3 id="holds-strong-actuality.">Holds □Strong Actuality.</h3>
-<p>At <span class="math inline">E</span> the arrows to <span class="math inline">E</span> form a true strong world: along an arrow to <span class="math inline">E</span> it becomes itself, along an arrow to <span class="math inline">O</span> the set of arrows from <span class="math inline">O</span> to <span class="math inline">E</span>, an atom. At <span class="math inline">O</span>, <span class="math inline">G_O</span> is one: along a member of <span class="math inline">G_O</span> it becomes itself, along a member of <span class="math inline">K</span> or an arrow to <span class="math inline">E</span> the empty set. Both objects are reachable from <span class="math inline">E</span>.</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-10-06.</em></p>
+<p>At <span class="math inline">E</span> the arrows to <span
+class="math inline">E</span> form a true strong atom: along an arrow to
+<span class="math inline">E</span> it becomes itself, along an arrow to
+<span class="math inline">O</span> the set of arrows from <span
+class="math inline">O</span> to <span class="math inline">E</span>, an
+atom. At <span class="math inline">O</span>, <span
+class="math inline">G_O</span> is one: along a member of <span
+class="math inline">G_O</span> it becomes itself, along a member of
+<span class="math inline">K</span> or an arrow to <span
+class="math inline">E</span> the empty set. Both objects are reachable
+from <span class="math inline">E</span>.</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr,
+2026-10-06.</em></p>
 <h3 id="holds-nd.">Holds ND.</h3>
-<p>Every arrow <span class="math inline">f</span> out of <span class="math inline">E</span> is finitely invertible: for any arrow <span class="math inline">h</span> out of <span class="math inline">E</span> and finite <span class="math inline">N</span>, some arrow <span class="math inline">k</span> after <span class="math inline">f</span> has <span class="math inline">k\circ f</span> agreeing with <span class="math inline">h</span> on <span class="math inline">N</span>. So entities that differ at a tuple <span class="math inline">\langle\bar a,h\rangle</span> differ, after <span class="math inline">f</span>, at <span class="math inline">\langle\bar a,k\rangle</span>, by pinning; and arrows are injective on individuals.</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<p>Every arrow <span class="math inline">f</span> out of <span
+class="math inline">E</span> is finitely invertible: for any arrow <span
+class="math inline">h</span> out of <span class="math inline">E</span>
+and finite <span class="math inline">N</span>, some arrow <span
+class="math inline">k</span> after <span class="math inline">f</span>
+has <span class="math inline">k\circ f</span> agreeing with <span
+class="math inline">h</span> on <span class="math inline">N</span>. So
+entities that differ at a tuple <span class="math inline">\langle\bar
+a,h\rangle</span> differ, after <span class="math inline">f</span>, at
+<span class="math inline">\langle\bar a,k\rangle</span>, by pinning; and
+arrows are injective on individuals.</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-06.</em></p>
 <h3 id="holds-atomicity.">Holds □Atomicity.</h3>
-<p>At both objects every relational type is atomic. The entities pinned down by a finite <span class="math inline">M</span> form the complete atomic algebra whose atoms are the orbits of the tuples <span class="math inline">\langle\bar a,h\rangle</span> with <span class="math inline">h</span> restricted to <span class="math inline">M</span>; such an orbit stays an atom for every larger <span class="math inline">M</span> once <span class="math inline">h(M)</span> contains every individual in the arguments’ pinning sets that an arrow of <span class="math inline">h</span>’s kind can reach. Any nonzero entity contains such a tuple, after moving <span class="math inline">h</span> on fresh points. See the write-up.</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
-<h3 id="fails-strong-leibniz-biconditionals-type-t.">Fails Strong Leibniz Biconditionals (type t).</h3>
-<p>The arrows from <span class="math inline">E</span> to <span class="math inline">O</span> form a possible proposition whose only nonzero part is itself, and along the inclusion <span class="math inline">\iota</span> it becomes <span class="math inline">G_O\cup K</span>, which <span class="math inline">G_O</span> splits; so no strong world lies below it. (The map derives the failures of BF and of □ND at <span class="math inline">t</span>; the write-up also gives them directly.)</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
-<h3 id="holds-boolean-completeness-type-t.-fails-infinity-schema-type-t.">Holds □Boolean Completeness (type t). Fails Infinity Schema (type t).</h3>
-<p>The propositions at <span class="math inline">E</span> are four and those at <span class="math inline">O</span> eight, finite Boolean algebras, so complete; and there are not five pairwise distinct propositions at <span class="math inline">E</span>.</p>
-<p><em>By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<p>At both objects every relational type is atomic. The entities pinned
+down by a finite <span class="math inline">M</span> form the complete
+atomic algebra whose atoms are the orbits of the tuples <span
+class="math inline">\langle\bar a,h\rangle</span> with <span
+class="math inline">h</span> restricted to <span
+class="math inline">M</span>; such an orbit stays an atom for every
+larger <span class="math inline">M</span> once <span
+class="math inline">h(M)</span> contains every individual in the
+arguments’ pinning sets that an arrow of <span
+class="math inline">h</span>’s kind can reach. Any nonzero entity
+contains such a tuple, after moving <span class="math inline">h</span>
+on fresh points. See the write-up.</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-06.</em></p>
+<h3 id="fails-strong-atomicity-type-t.">Fails Strong Atomicity (type
+t).</h3>
+<p>The arrows from <span class="math inline">E</span> to <span
+class="math inline">O</span> form a possible proposition whose only
+nonzero part is itself, and along the inclusion <span
+class="math inline">\iota</span> it becomes <span
+class="math inline">G_O\cup K</span>, which <span
+class="math inline">G_O</span> splits; so no strong atom lies below it.
+(The map derives the failures of BF and of □ND at <span
+class="math inline">t</span>; the write-up also gives them
+directly.)</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-06.</em></p>
+<h3
+id="holds-boolean-completeness-type-t.-fails-infinity-schema-type-t.">Holds
+□Boolean Completeness (type t). Fails Infinity Schema (type t).</h3>
+<p>The propositions at <span class="math inline">E</span> are four and
+those at <span class="math inline">O</span> eight, finite Boolean
+algebras, so complete; and there are not five pairwise distinct
+propositions at <span class="math inline">E</span>.</p>
+<p><em>By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-06.</em></p>
 <h3 id="holds-boolean-completeness.">Holds Boolean Completeness.</h3>
-<p>At <span class="math inline">E</span>, every relational type. An entity <span class="math inline">F</span> pinned down by a finite <span class="math inline">S</span> is determined by the pair <span class="math inline">(F_{1_E},F_\iota)</span>, <span class="math inline">\iota</span> the inclusion into the old individuals, invariant under the symmetries fixing <span class="math inline">S</span> and <span class="math inline">\iota S</span>; every such pair is an entity, and the order is componentwise inclusion. For a property pinned down by <span class="math inline">N</span>, the componentwise unions of its instances are invariant under the symmetries fixing <span class="math inline">N</span>, and the second under all permutations of the new individuals, so they form an entity, the least upper bound.</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. Address: <code>symmetric-old-new-individuals-individuals-singleton#boolean-completeness-root</code>. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-24.</em></p>
-<h3 id="holds-boolean-completeness-rigid-comprehension.">Holds □Boolean Completeness, □Rigid Comprehension.</h3>
-<p>With one individual every entity is fixed by every symmetry, and is a union of finitely many classes, one for each kind of arrow (to <span class="math inline">E</span>, from <span class="math inline">E</span> to <span class="math inline">O</span>, in <span class="math inline">G_O</span>, in <span class="math inline">K</span>) and tuple of arguments; by induction on types, so every domain is finite and complete. Transport along an arrow then depends only on its kind, and the kind of a composite on the kinds of its factors, so the intension whose extension at <span class="math inline">h</span> is <span class="math inline">X</span>’s extension at the identity transported along <span class="math inline">h</span> is a union of classes, in the domain; it is persistent and inextensible, at both objects.</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-07.</em></p>
+<p>At <span class="math inline">E</span>, every relational type. An
+entity <span class="math inline">F</span> pinned down by a finite <span
+class="math inline">S</span> is determined by the pair <span
+class="math inline">(F_{1_E},F_\iota)</span>, <span
+class="math inline">\iota</span> the inclusion into the old individuals,
+invariant under the symmetries fixing <span class="math inline">S</span>
+and <span class="math inline">\iota S</span>; every such pair is an
+entity, and the order is componentwise inclusion. For a property pinned
+down by <span class="math inline">N</span>, the componentwise unions of
+its instances are invariant under the symmetries fixing <span
+class="math inline">N</span>, and the second under all permutations of
+the new individuals, so they form an entity, the least upper bound.</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+Address:
+<code>symmetric-old-new-individuals-individuals-singleton#boolean-completeness-root</code>.
+By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded
+by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr,
+2026-10-24.</em></p>
+<h3 id="holds-boolean-completeness-rigid-comprehension.">Holds □Boolean
+Completeness, □Rigid Comprehension.</h3>
+<p>With one individual every entity is fixed by every symmetry, and is a
+union of finitely many classes, one for each kind of arrow (to <span
+class="math inline">E</span>, from <span class="math inline">E</span> to
+<span class="math inline">O</span>, in <span
+class="math inline">G_O</span>, in <span class="math inline">K</span>)
+and tuple of arguments; by induction on types, so every domain is finite
+and complete. Transport along an arrow then depends only on its kind,
+and the kind of a composite on the kinds of its factors, so the
+intension whose extension at <span class="math inline">h</span> is <span
+class="math inline">X</span>’s extension at the identity transported
+along <span class="math inline">h</span> is a union of classes, in the
+domain; it is persistent and inextensible, at both objects.</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-07.</em></p>
 <h3 id="holds-rigid-power.">Holds □Rigid Power.</h3>
-<p>Boxed Rigid Power, for either choice of individuals. Arrows are injective; at <span class="math inline">E</span> the symmetry group is all permutations, at <span class="math inline">O</span> those preserving old and new; the arrows out of <span class="math inline">O</span> other than symmetries (exiting arrows) go to <span class="math inline">E</span> or have old range. (a) At <span class="math inline">E</span>, a rigid <span class="math inline">F</span> pinned down by <span class="math inline">S</span> has every tuple of its extension pinned down by <span class="math inline">S</span>. Each tuple has a least finite support under the permutations. Suppose <span class="math inline">z\in F_1</span> has a point <span class="math inline">n\notin S</span> in it. Let <span class="math inline">i:E\to O</span> be the inclusion into the old individuals, <span class="math inline">b</span> a new point, and <span class="math inline">r:O\to E</span> an injection with <span class="math inline">rb=n</span> and <span class="math inline">ri</span> fixing <span class="math inline">S</span>; so <span class="math inline">z\in F_{ri}</span>. Every tuple of <span class="math inline">F_i</span> is pinned down by old points (it is <span class="math inline">lz^{\prime}</span> for an arrow <span class="math inline">l:E\to O</span>, of old range). By the weak inextensibility of <span class="math inline">i\cdot F</span> at <span class="math inline">O</span>, tested on <span class="math inline">B_Q(F_i)</span> with <span class="math inline">Q\ni b</span> containing <span class="math inline">iS</span> (part (1) of tame-rigidity-factorizable, which holds with several objects), <span class="math inline">z=r^{\prime}z^{\prime\prime}</span> for an <span class="math inline">r^{\prime}</span> agreeing with <span class="math inline">r</span> on <span class="math inline">Q</span> and <span class="math inline">z^{\prime\prime}\in F_i</span> pinned down by old points <span class="math inline">M</span>; then <span class="math inline">z</span> is pinned down by <span class="math inline">r^{\prime}M</span>, which omits <span class="math inline">n=r^{\prime}b</span> by injectivity, contradicting the least support. Support by <span class="math inline">S</span> then gives pinning by <span class="math inline">S</span>, through injections agreeing on <span class="math inline">S</span> factored through permutations fixing <span class="math inline">S</span>. (b) So <span class="math inline">X_0(A)</span> (<span class="math inline">k\mapsto kA</span>) is in the domain and rigid for every <span class="math inline">A\subseteq F_1</span>, and <span class="math inline">F=X_0(F_1)</span>. For an arrow <span class="math inline">h</span> and rigid <span class="math inline">X\le h\cdot F</span> with extension <span class="math inline">D</span>, the tuples of <span class="math inline">D\subseteq hF_1</span> are pinned down by <span class="math inline">hS</span>, so <span class="math inline">X=X_0(D)</span>, and <span class="math inline">X=h\cdot X_0(A)</span> for <span class="math inline">A:=\{z\in F_1:hz\in D\}</span>. So the power property is <span class="math inline">X_0</span> of its extension, and rigid. (c) At <span class="math inline">O</span>: let <span class="math inline">F</span> be rigid, pinned down by <span class="math inline">S</span> containing a new point. Composing with a bijection <span class="math inline">O\to E</span> and (a), each exiting arrow <span class="math inline">h</span> acts on the tuples of <span class="math inline">F_1</span> through <span class="math inline">h|_S</span>, and <span class="math inline">F_1</span> is invariant under the symmetries fixing <span class="math inline">S</span>; a symmetry and an exiting arrow cannot agree on <span class="math inline">S</span>. So <span class="math inline">F=X_0(F_1)</span>, and (b) goes through for exiting arrows, symmetries being lifted by their inverses. Rigid Power holds at both objects, hence at every world.</p>
-<p><em>Address: <code>symmetric-old-new-individuals-individuals-singleton#rigid-power</code>. By GPT-6 Astra (OpenAI), at Cian Dorr’s request; checked and recorded by Claude Opus 5.5 (Anthropic), 2026-10-11.</em></p>
-<h3 id="holds-truth-implies-5-necessity.-fails-two-hat-necessity-implies-nd-necessity.">Holds □Truth implies 5-necessity. Fails Two-hat necessity implies ND-necessity.</h3>
-<p>At <span class="math inline">E</span> the four propositions are determined by the target, and the strong world <span class="math inline">a</span> is the set of arrows <span class="math inline">E\to E</span>. <span class="math inline">\Diamond a</span> is every arrow out of <span class="math inline">E</span>, since an injection <span class="math inline">E\to O</span> with old range is followed by an injection <span class="math inline">O\to E</span>, so <span class="math inline">\Box_{\ne}=\Box</span> at <span class="math inline">E</span>. But <span class="math inline">\hat\Diamond a</span> contains no arrow <span class="math inline">u:E\to O</span>: its retractions <span class="math inline">v:O\to E</span> cannot return to the truth <span class="math inline">G_O</span> at <span class="math inline">O</span>, because any <span class="math inline">x:E\to O</span> has old range and <span class="math inline">x\circ v\in K</span>. So <span class="math inline">\hat{\hat\Box}</span> at <span class="math inline">E</span> is the box over <span class="math inline">a</span>; <span class="math inline">a</span> is two-hat necessary and not ND-necessary, and every truth (<span class="math inline">\top</span> and <span class="math inline">a</span>) is two-hat necessary. At <span class="math inline">O</span>, with strong world <span class="math inline">G_O</span>, <span class="math inline">\hat\Diamond G_O=G_O</span> (a member of <span class="math inline">K</span> or an arrow to <span class="math inline">E</span> cannot be brought back into <span class="math inline">G_O</span>), so every truth at <span class="math inline">O</span>, each containing <span class="math inline">G_O</span>, is two-hat necessary. With necessary Strong Actuality, <span class="math inline">\Box_5=\hat{\hat\Box}</span> everywhere, so every truth is 5-necessary at both objects.</p>
-<p><em>Address: <code>symmetric-old-new-individuals-individuals-singleton#collapse-split</code>. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-10-14.</em></p>
-<h3 id="holds-countable-boolean-completeness.">Holds Countable Boolean Completeness.</h3>
-<p>At <span class="math inline">E</span>, for every <span class="math inline">\sigma</span>. If <span class="math inline">R</span> injects <span class="math inline">X</span> into the numerals at <span class="math inline">\sigma</span>, with <span class="math inline">N</span> a finite set pinning both, then each instance of <span class="math inline">X</span> is fixed by every symmetry fixing <span class="math inline">N</span> pointwise: the symmetry carries the pair of the instance and its numeral to another such pair, and the numeral is fixed. An entity pinned down by <span class="math inline">M</span> and fixed by those symmetries is pinned down by <span class="math inline">M\cap N</span>. So the instances of <span class="math inline">X</span> are all pinned down by <span class="math inline">N</span>, and their union is in the domain and is the least upper bound. The haecceities of the even numbers, which have none, are not countable in the model. See the write-up.</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-16.</em></p>
-<p><em>Revised 2026-10-24 by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr:</em> The remark about the haecceities of the even numbers is moot. They are not a property in the model at all, and Boolean Completeness holds at <span class="math inline">E</span> (boolean-completeness-root).</p>
-<h3 id="holds-countable-boolean-completeness.-1">Holds □Countable Boolean Completeness.</h3>
-<p>The argument for Countable Boolean Completeness at <span class="math inline">E</span> also works at <span class="math inline">O</span>, the other object reachable from <span class="math inline">E</span>, once a new individual <span class="math inline">0&#39;</span> is put into the finite set <span class="math inline">N</span>: arrows into <span class="math inline">O</span> that agree on <span class="math inline">0&#39;</span> are both in <span class="math inline">G_O</span> or both in <span class="math inline">K</span>, and within each kind the construction of the intermediate arrow goes through, with the fresh points chosen of the same sort. So every closed instance holds at both objects, hence necessarily. See the write-up.</p>
-<p><em>Write-up: <a href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-16.</em></p>
-<h3 id="holds-arithmetic-necessitism.">Holds Arithmetic Necessitism.</h3>
-<p>As the argument arithmetic-necessitism-extensionally-full, with the property of being a numeral supplied by pinning. The intension <span class="math inline">Z</span> whose value at each arrow <span class="math inline">k</span> out of the evaluation object is the set of numerals <span class="math inline">\mathbf 0_\sigma,\operatorname{Suc}_\sigma\mathbf 0_\sigma,\ldots</span> at the target of <span class="math inline">k</span> is pinned down by the empty set, its value depending on the arrow only through its target, and is symmetric, transport along a permutation of the points carrying numerals to numerals, as transport along any arrow does, numerals being closed terms; so it is in the domain, and so is its transport <span class="math inline">k\cdot Z</span> to any reachable object, whose extension there is exactly the numerals. Hence at every reachable object the numbers at <span class="math inline">\sigma</span>, the instances of the least inductive property, are exactly the numerals, which transport to numerals; persistence and, given <span class="math inline">\Box I^*_\sigma</span>, necessary distinctness are theorems of C, and inextensibility follows as in that argument. So Arithmetic Necessitism holds at every type. No choice is used.</p>
-<p><em>General argument <code>arguments/arithmetic-necessitism-finitely-pinned</code>. It requires that Write an entity of relational type at the evaluation object as its intension <span class="math inline">k\mapsto Y_k</span> over the arrows <span class="math inline">k</span> out of it, so that <span class="math inline">Y\bar a</span> holds at <span class="math inline">k</span> iff <span class="math inline">k\cdot\bar a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a finite set <span class="math inline">N</span> of the points the arrows act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span class="math inline">N</span>. Every entity in a domain is pinned down by a finite set, in the sense that <span class="math inline">k\cdot x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of each relational type at the evaluation object holds every intension pinned down by a finite set (in a symmetric model, every symmetric one). Here: Both objects carry the ideal of finite sets: the domains hold every symmetric intension pinned down by a finite set, and every entity in them is one. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
-<h3 id="fails-possible-infinity-type-t.">Fails Possible Infinity (type t).</h3>
-<p>At a world with <span class="math inline">n</span> propositions, the numeral <span class="math inline">\operatorname{Suc}^n_t\mathbf{0}_t</span>, a finite cardinality, holds of the universal property of propositions, so the Axiom of Infinity at type <span class="math inline">t</span> fails there. It fails at every world, so Possible Infinity at type <span class="math inline">t</span> fails.</p>
-<p><em>General argument <code>arguments/finitely-many-propositions-everywhere</code>. It requires that There are finitely many propositions at every object reachable from the evaluation point. Here: <span class="math inline">E</span> has four propositions and <span class="math inline">O</span> eight, generated by the arrows into <span class="math inline">E</span>, <span class="math inline">G_O</span> and <span class="math inline">K</span>, the last two separated by whether the arrow sends a given new individual to a new one. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
-<h3 id="fails-axiom-of-infinity-type-e-infinity-schema-type-e-possible-infinity-type-e.">Fails Axiom of Infinity (type e), Infinity Schema (type e), Possible Infinity (type e).</h3>
-<p>No two individuals are distinct, and the numeral <span class="math inline">\operatorname{Suc}_e\mathbf{0}_e</span> holds of the universal property at type <span class="math inline">e</span> at every world.</p>
-<p><em>General argument <code>arguments/one-individual</code>. It requires that There is exactly one individual, at every world. Here: There is a single individual at every object. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-02.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic.</p>
-<h3 id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).</h3>
-<p>Let <span class="math inline">c\in\Sigma</span> have relational type <span class="math inline">\tau</span>, so <span class="math inline">c=\top_\tau</span> necessarily. Witnessed Possibility fails for the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span> but impossible of <span class="math inline">c</span>; Separated Structure fails since <span class="math inline">\lambda x\, .\,x</span> and <span class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span class="math inline">c</span> and differ; Independence (signature Σ) fails since <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes; Distinctness Maximalism (signature Σ) fails since <span class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does not prove.</p>
-<p><em>General argument <code>arguments/sigma-top</code>. It requires that Every constant of Σ is relational, and each denotes the top element of its type. Here: This is the interpretation. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic; it uses nothing about the model.</p>
+<p>Boxed Rigid Power, for either choice of individuals. Arrows are
+injective; at <span class="math inline">E</span> the symmetry group is
+all permutations, at <span class="math inline">O</span> those preserving
+old and new; the arrows out of <span class="math inline">O</span> other
+than symmetries (exiting arrows) go to <span
+class="math inline">E</span> or have old range. (a) At <span
+class="math inline">E</span>, a rigid <span class="math inline">F</span>
+pinned down by <span class="math inline">S</span> has every tuple of its
+extension pinned down by <span class="math inline">S</span>. Each tuple
+has a least finite support under the permutations. Suppose <span
+class="math inline">z\in F_1</span> has a point <span
+class="math inline">n\notin S</span> in it. Let <span
+class="math inline">i:E\to O</span> be the inclusion into the old
+individuals, <span class="math inline">b</span> a new point, and <span
+class="math inline">r:O\to E</span> an injection with <span
+class="math inline">rb=n</span> and <span class="math inline">ri</span>
+fixing <span class="math inline">S</span>; so <span
+class="math inline">z\in F_{ri}</span>. Every tuple of <span
+class="math inline">F_i</span> is pinned down by old points (it is <span
+class="math inline">lz^{\prime}</span> for an arrow <span
+class="math inline">l:E\to O</span>, of old range). By the weak
+inextensibility of <span class="math inline">i\cdot F</span> at <span
+class="math inline">O</span>, tested on <span
+class="math inline">B_Q(F_i)</span> with <span class="math inline">Q\ni
+b</span> containing <span class="math inline">iS</span> (part (1) of
+tame-rigidity-factorizable, which holds with several objects), <span
+class="math inline">z=r^{\prime}z^{\prime\prime}</span> for an <span
+class="math inline">r^{\prime}</span> agreeing with <span
+class="math inline">r</span> on <span class="math inline">Q</span> and
+<span class="math inline">z^{\prime\prime}\in F_i</span> pinned down by
+old points <span class="math inline">M</span>; then <span
+class="math inline">z</span> is pinned down by <span
+class="math inline">r^{\prime}M</span>, which omits <span
+class="math inline">n=r^{\prime}b</span> by injectivity, contradicting
+the least support. Support by <span class="math inline">S</span> then
+gives pinning by <span class="math inline">S</span>, through injections
+agreeing on <span class="math inline">S</span> factored through
+permutations fixing <span class="math inline">S</span>. (b) So <span
+class="math inline">X_0(A)</span> (<span class="math inline">k\mapsto
+kA</span>) is in the domain and rigid for every <span
+class="math inline">A\subseteq F_1</span>, and <span
+class="math inline">F=X_0(F_1)</span>. For an arrow <span
+class="math inline">h</span> and rigid <span class="math inline">X\le
+h\cdot F</span> with extension <span class="math inline">D</span>, the
+tuples of <span class="math inline">D\subseteq hF_1</span> are pinned
+down by <span class="math inline">hS</span>, so <span
+class="math inline">X=X_0(D)</span>, and <span
+class="math inline">X=h\cdot X_0(A)</span> for <span
+class="math inline">A:=\{z\in F_1:hz\in D\}</span>. So the power
+property is <span class="math inline">X_0</span> of its extension, and
+rigid. (c) At <span class="math inline">O</span>: let <span
+class="math inline">F</span> be rigid, pinned down by <span
+class="math inline">S</span> containing a new point. Composing with a
+bijection <span class="math inline">O\to E</span> and (a), each exiting
+arrow <span class="math inline">h</span> acts on the tuples of <span
+class="math inline">F_1</span> through <span
+class="math inline">h|_S</span>, and <span
+class="math inline">F_1</span> is invariant under the symmetries fixing
+<span class="math inline">S</span>; a symmetry and an exiting arrow
+cannot agree on <span class="math inline">S</span>. So <span
+class="math inline">F=X_0(F_1)</span>, and (b) goes through for exiting
+arrows, symmetries being lifted by their inverses. Rigid Power holds at
+both objects, hence at every world.</p>
+<p><em>Address:
+<code>symmetric-old-new-individuals-individuals-singleton#rigid-power</code>.
+By GPT-6 Astra (OpenAI), at Cian Dorr’s request; checked and recorded by
+Claude Opus 5.5 (Anthropic), 2026-10-11.</em></p>
+<h3
+id="holds-truth-implies-5-necessity.-fails-two-hat-necessity-implies-nd-necessity.">Holds
+□Truth implies 5-necessity. Fails Two-hat necessity implies
+ND-necessity.</h3>
+<p>At <span class="math inline">E</span> the four propositions are
+determined by the target, and the strong atom <span
+class="math inline">a</span> is the set of arrows <span
+class="math inline">E\to E</span>. <span class="math inline">\Diamond
+a</span> is every arrow out of <span class="math inline">E</span>, since
+an injection <span class="math inline">E\to O</span> with old range is
+followed by an injection <span class="math inline">O\to E</span>, so
+<span class="math inline">\Box_{\ne}=\Box</span> at <span
+class="math inline">E</span>. But <span class="math inline">\hat\Diamond
+a</span> contains no arrow <span class="math inline">u:E\to O</span>:
+its retractions <span class="math inline">v:O\to E</span> cannot return
+to the truth <span class="math inline">G_O</span> at <span
+class="math inline">O</span>, because any <span
+class="math inline">x:E\to O</span> has old range and <span
+class="math inline">x\circ v\in K</span>. So <span
+class="math inline">\hat{\hat\Box}</span> at <span
+class="math inline">E</span> is the box over <span
+class="math inline">a</span>; <span class="math inline">a</span> is
+two-hat necessary and not ND-necessary, and every truth (<span
+class="math inline">\top</span> and <span class="math inline">a</span>)
+is two-hat necessary. At <span class="math inline">O</span>, with strong
+atom <span class="math inline">G_O</span>, <span
+class="math inline">\hat\Diamond G_O=G_O</span> (a member of <span
+class="math inline">K</span> or an arrow to <span
+class="math inline">E</span> cannot be brought back into <span
+class="math inline">G_O</span>), so every truth at <span
+class="math inline">O</span>, each containing <span
+class="math inline">G_O</span>, is two-hat necessary. With necessary
+Strong Actuality, <span class="math inline">\Box_5=\hat{\hat\Box}</span>
+everywhere, so every truth is 5-necessary at both objects.</p>
+<p><em>Address:
+<code>symmetric-old-new-individuals-individuals-singleton#collapse-split</code>.
+By Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction,
+2026-10-14.</em></p>
+<h3 id="holds-countable-boolean-completeness.">Holds Countable Boolean
+Completeness.</h3>
+<p>At <span class="math inline">E</span>, for every <span
+class="math inline">\sigma</span>. If <span class="math inline">R</span>
+injects <span class="math inline">X</span> into the numerals at <span
+class="math inline">\sigma</span>, with <span
+class="math inline">N</span> a finite set pinning both, then each
+instance of <span class="math inline">X</span> is fixed by every
+symmetry fixing <span class="math inline">N</span> pointwise: the
+symmetry carries the pair of the instance and its numeral to another
+such pair, and the numeral is fixed. An entity pinned down by <span
+class="math inline">M</span> and fixed by those symmetries is pinned
+down by <span class="math inline">M\cap N</span>. So the instances of
+<span class="math inline">X</span> are all pinned down by <span
+class="math inline">N</span>, and their union is in the domain and is
+the least upper bound. The haecceities of the even numbers, which have
+none, are not countable in the model. See the write-up.</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-16.</em></p>
+<p><em>Revised 2026-10-24 by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr:</em> The remark about the haecceities of the even numbers is
+moot. They are not a property in the model at all, and Boolean
+Completeness holds at <span class="math inline">E</span>
+(boolean-completeness-root).</p>
+<h3 id="holds-countable-boolean-completeness.-1">Holds □Countable
+Boolean Completeness.</h3>
+<p>The argument for Countable Boolean Completeness at <span
+class="math inline">E</span> also works at <span
+class="math inline">O</span>, the other object reachable from <span
+class="math inline">E</span>, once a new individual <span
+class="math inline">0&#39;</span> is put into the finite set <span
+class="math inline">N</span>: arrows into <span
+class="math inline">O</span> that agree on <span
+class="math inline">0&#39;</span> are both in <span
+class="math inline">G_O</span> or both in <span
+class="math inline">K</span>, and within each kind the construction of
+the intermediate arrow goes through, with the fresh points chosen of the
+same sort. So every closed instance holds at both objects, hence
+necessarily. See the write-up.</p>
+<p><em>Write-up: <a
+href="symmetric-old-new-individuals.html">symmetric-old-new-individuals</a>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-16.</em></p>
+<h3 id="holds-arithmetic-necessitism.">Holds Arithmetic
+Necessitism.</h3>
+<p>As the argument arithmetic-necessitism-extensionally-full, with the
+property of being a numeral supplied by pinning. The intension <span
+class="math inline">Z</span> whose value at each arrow <span
+class="math inline">k</span> out of the evaluation object is the set of
+numerals <span class="math inline">\mathbf
+0_\sigma,\operatorname{Suc}_\sigma\mathbf 0_\sigma,\ldots</span> at the
+target of <span class="math inline">k</span> is pinned down by the empty
+set, its value depending on the arrow only through its target, and is
+symmetric, transport along a permutation of the points carrying numerals
+to numerals, as transport along any arrow does, numerals being closed
+terms; so it is in the domain, and so is its transport <span
+class="math inline">k\cdot Z</span> to any reachable object, whose
+extension there is exactly the numerals. Hence at every reachable object
+the numbers at <span class="math inline">\sigma</span>, the instances of
+the least inductive property, are exactly the numerals, which transport
+to numerals; persistence and, given <span class="math inline">\Box
+I^*_\sigma</span>, necessary distinctness are theorems of C, and
+inextensibility follows as in that argument. So Arithmetic Necessitism
+holds at every type. No choice is used.</p>
+<p><em>General argument
+<code>arguments/arithmetic-necessitism-finitely-pinned</code>. It
+requires that Write an entity of relational type at the evaluation
+object as its intension <span class="math inline">k\mapsto Y_k</span>
+over the arrows <span class="math inline">k</span> out of it, so that
+<span class="math inline">Y\bar a</span> holds at <span
+class="math inline">k</span> iff <span class="math inline">k\cdot\bar
+a\in Y_k</span>; <span class="math inline">Y</span> is pinned down by a
+finite set <span class="math inline">N</span> of the points the arrows
+act on when <span class="math inline">Y_k=Y_{k^{\prime}}</span> for any
+arrows <span class="math inline">k,k^{\prime}</span> agreeing on <span
+class="math inline">N</span>. Every entity in a domain is pinned down by
+a finite set, in the sense that <span class="math inline">k\cdot
+x=k^{\prime}\cdot x</span> for arrows agreeing on it, and the domain of
+each relational type at the evaluation object holds every intension
+pinned down by a finite set (in a symmetric model, every symmetric one).
+Here: Both objects carry the ideal of finite sets: the domains hold
+every symmetric intension pinned down by a finite set, and every entity
+in them is one. By Claude Fable 5.1 (Anthropic), prompted by Zachary
+Goodsell, 2026-10-23.</em></p>
+<h3 id="fails-possible-infinity-type-t.">Fails Possible Infinity (type
+t).</h3>
+<p>At a world with <span class="math inline">n</span> propositions, the
+numeral <span
+class="math inline">\operatorname{Suc}^n_t\mathbf{0}_t</span>, a finite
+cardinality, holds of the universal property of propositions, so the
+Axiom of Infinity at type <span class="math inline">t</span> fails
+there. It fails at every world, so Possible Infinity at type <span
+class="math inline">t</span> fails.</p>
+<p><em>General argument
+<code>arguments/finitely-many-propositions-everywhere</code>. It
+requires that There are finitely many propositions at every object
+reachable from the evaluation point. Here: <span
+class="math inline">E</span> has four propositions and <span
+class="math inline">O</span> eight, generated by the arrows into <span
+class="math inline">E</span>, <span class="math inline">G_O</span> and
+<span class="math inline">K</span>, the last two separated by whether
+the arrow sends a given new individual to a new one. By Claude Opus 5.5
+(Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<h3
+id="fails-axiom-of-infinity-type-e-infinity-schema-type-e-possible-infinity-type-e.">Fails
+Axiom of Infinity (type e), Infinity Schema (type e), Possible Infinity
+(type e).</h3>
+<p>No two individuals are distinct, and the numeral <span
+class="math inline">\operatorname{Suc}_e\mathbf{0}_e</span> holds of the
+universal property at type <span class="math inline">e</span> at every
+world.</p>
+<p><em>General argument <code>arguments/one-individual</code>. It
+requires that There is exactly one individual, at every world. Here:
+There is a single individual at every object. By Claude Opus 5.5
+(Anthropic), at Cian Dorr’s direction, 2026-10-02.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic.</p>
+<h3
+id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails
+Witnessed Possibility, Separated Structure, Independence (signature Σ),
+Maximalism (signature Σ).</h3>
+<p>Let <span class="math inline">c\in\Sigma</span> have relational type
+<span class="math inline">\tau</span>, so <span
+class="math inline">c=\top_\tau</span> necessarily. Witnessed
+Possibility fails for the pure formula <span
+class="math inline">x\ne\top_\tau</span>, witnessed by <span
+class="math inline">\bot_\tau</span> but impossible of <span
+class="math inline">c</span>; Separated Structure fails since <span
+class="math inline">\lambda x\, .\,x</span> and <span
+class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span
+class="math inline">c</span> and differ; Independence (signature Σ)
+fails since <span class="math inline">c</span> denotes what the closed
+pure term <span class="math inline">\top_\tau</span> denotes;
+Distinctness Maximalism (signature Σ) fails since <span
+class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does
+not prove.</p>
+<p><em>General argument <code>arguments/sigma-top</code>. It requires
+that Every constant of Σ is relational, and each denotes the top element
+of its type. Here: This is the interpretation. By Claude Fable 5.1
+(Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic; it uses nothing about the model.</p>
 <h2 id="notes">Notes</h2>
-<p>Found by Claude Fable 5.1 as a countermodel to a principle from another context, and recorded at Cian Dorr’s request on 6 October 2026. Like the sections-and-projection model it has □Actuality without Inextensible Comprehension; unlike it, it has Atomicity at every type, and so separates Atomicity and Actuality, even with ND and □Strong Actuality, from Inextensible Comprehension. Its actual world at <span class="math inline">E</span> is the set of all arrows from <span class="math inline">E</span> to <span class="math inline">E</span>, which properly contains the identity, so it does not meet the group’s condition symmetry-group-pinned. No Lean verification is claimed.</p>
+<p>Found by Claude Fable 5.1 as a countermodel to a principle from
+another context, and recorded at Cian Dorr’s request on 6 October 2026.
+Like the sections-and-projection model it has □Actuality without
+Inextensible Comprehension; unlike it, it has Atomicity at every type,
+and so separates Atomicity and Actuality, even with ND and □Strong
+Actuality, from Inextensible Comprehension. Its actual world at <span
+class="math inline">E</span> is the set of all arrows from <span
+class="math inline">E</span> to <span class="math inline">E</span>,
+which properly contains the identity, so it does not meet the group’s
+condition symmetry-group-pinned. No Lean verification is claimed.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Fable 5.1, 6 Oct</strong> — Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 6 October 2026, in a session with Cian Dorr, as a countermodel to a principle (“Frex*”) from another context; it satisfies □Strong Actuality and refutes Inextensible Comprehension.</li>
-<li><strong>Opus 5.5, 6 Oct</strong> — Claude Opus 5.5 (Anthropic), 6 October 2026, at Cian Dorr’s direction; the corrected argument for the failure of Inextensible Comprehension, and the verdicts on ND, Atomicity, Boolean Completeness, BF and the Strong Leibniz Biconditionals; see the write-up.</li>
-<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Definitions 15–18, p. 8; Proposition 20 (symmetric ideally-full models are models of C).</li>
-<li><strong>Astra (Kodsi) 22 Oct</strong> — GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Old/new model, Boolean Completeness and the rigidity separation, research note of 22 October 2026 (unpaginated), in Daniel Kodsi’s submission of 24 October 2026 (branch classicism-results-2026-10-24 of github.com/dkodsi/Logical-Maps); the correction of Boolean Completeness.</li>
+<li><strong>Fable 5.1, 6 Oct</strong> — Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 6 October 2026, in a session with Cian Dorr, as a
+countermodel to a principle (“Frex*”) from another context; it satisfies
+□Strong Actuality and refutes Inextensible Comprehension.</li>
+<li><strong>Opus 5.5, 6 Oct</strong> — Claude Opus 5.5 (Anthropic), 6
+October 2026, at Cian Dorr’s direction; the corrected argument for the
+failure of Inextensible Comprehension, and the verdicts on ND,
+Atomicity, Boolean Completeness, BF and Strong Atomicity; see the
+write-up.</li>
+<li><strong>BC does not imply RC</strong> — Cian Dorr, Boolean
+Completeness does not imply Rigid Comprehension, draft of 30 July 2026,
+Definitions 15–18, p. 8; Proposition 20 (symmetric ideally-full models
+are models of C).</li>
+<li><strong>Astra (Kodsi) 22 Oct</strong> — GPT-6 Astra (OpenAI),
+prompted by Daniel Kodsi, Old/new model, Boolean Completeness and the
+rigidity separation, research note of 22 October 2026 (unpaginated), in
+Daniel Kodsi’s submission of 24 October 2026 (branch
+classicism-results-2026-10-24 of github.com/dkodsi/Logical-Maps); the
+correction of Boolean Completeness.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/models/symmetric-old-new-individuals.yaml</code>
+Record:
+<code>topics/classicism/models/symmetric-old-new-individuals.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Boolean Completeness does not imply Rigid Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27 pages. All page, proposition and lemma locators for this source refer to that draft. Parts of the draft were drafted with AI assistance; its mathematical claims are attributed to the author. — Definitions 15–18, p. 8; Proposition 20. The symmetric ideally-full models, of which this is one, on a new two-object category.</li>
+<li><strong>Background: Boolean Completeness does not imply Rigid
+Comprehension.</strong> Dorr, Cian. Boolean Completeness does not imply
+Rigid Comprehension. Unpublished draft in progress, 30 July 2026, 27
+pages. All page, proposition and lemma locators for this source refer to
+that draft. Parts of the draft were drafted with AI assistance; its
+mathematical claims are attributed to the author. — Definitions 15–18,
+p. 8; Proposition 20. The symmetric ideally-full models, of which this
+is one, on a new two-object category.</li>
 </ul>
 </body></html>

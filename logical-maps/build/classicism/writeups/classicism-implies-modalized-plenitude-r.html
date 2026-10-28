@@ -323,7 +323,14 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>⊤ ⇒ Modalized Plenitude</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.classicism_implies_modalized_plenitude_r</code>; produced by Cian Dorr, 28 September 2026 (the principle, and the witness <span class="math inline">\lambda x\, .\,\forall p\, .\,(Ux)p\to p</span> for output type t); Claude Opus 5.5 (Anthropic), 28 September 2026, the generalization to all relational output types and the written proof; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.classicism_implies_modalized_plenitude_r</code>;
+produced by Cian Dorr, 28 September 2026 (the principle, and the witness
+<span class="math inline">\lambda x\, .\,\forall p\, .\,(Ux)p\to
+p</span> for output type t); Claude Opus 5.5 (Anthropic), 28 September
+2026, the generalization to all relational output types and the written
+proof; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr,
+28 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
@@ -331,22 +338,87 @@ Result — Source: Misc., Lean <code>Classicism.Map.classicism_implies_modalized
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Modalized Plenitude.</strong> If necessarily each argument has a value that is necessarily the relation’s unique value for it, then some operation necessarily represents the relation. Its output type is relational, as required by the type system.</li>
+<li><strong>Modalized Plenitude.</strong> If necessarily each argument
+has a value that is necessarily the relation’s unique value for it, then
+some operation necessarily represents the relation. Its output type is
+relational, as required by the type system.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">\tau=\bar\rho\to t</span>, which covers <span class="math inline">\tau=t</span> with the empty tuple, and fix <span class="math inline">U^{\sigma\tau t}</span>. Write <span class="math inline">\varphi(x,y):=(Ux)y\land\forall z\, .\,(Ux)z\to y=z</span> and define the operation <span class="math inline">F:=\lambda x^\sigma\, .\,\lambda\bar u\, .\,\forall y^\tau\, .\,(Ux)y\to y[\bar u]</span>; for <span class="math inline">\tau=t</span> this is <span class="math inline">\lambda x\, .\,\forall p\, .\,(Ux)p\to p</span>. (1) Lemma, a theorem of C: <span class="math inline">\varphi(x,y_0)\to\forall\bar u\, .\,y_0[\bar u]\leftrightarrow(Fx)[\bar u]</span>. Assume <span class="math inline">\varphi(x,y_0)</span>. If <span class="math inline">y_0[\bar u]</span> and <span class="math inline">(Ux)y</span>, then <span class="math inline">y=y_0</span> by uniqueness, so <span class="math inline">y[\bar u]</span>; hence <span class="math inline">(Fx)[\bar u]</span>. Conversely, if <span class="math inline">(Fx)[\bar u]</span>, instantiate <span class="math inline">y:=y_0</span> and use <span class="math inline">(Ux)y_0</span>. (2) Necessitate the lemma and apply K: <span class="math inline">\Box\varphi(x,y_0)</span> gives <span class="math inline">\Box\forall\bar u\, .\,y_0[\bar u]\leftrightarrow(Fx)[\bar u]</span>, and Intensionality gives <span class="math inline">y_0=Fx</span>. (3) Let <span class="math inline">H:=\forall x\, .\,\exists y\, .\,\Box\varphi(x,y)</span> and <span class="math inline">G:=\forall x\, .\,\forall y\, .\,(Ux)y\leftrightarrow y=Fx</span>. Then <span class="math inline">H\to G</span> is a theorem of C. Given <span class="math inline">x</span> and <span class="math inline">y</span>, take <span class="math inline">y_0</span> with <span class="math inline">\Box\varphi(x,y_0)</span>; by (2) <span class="math inline">y_0=Fx</span>, and by T <span class="math inline">\varphi(x,y_0)</span>. If <span class="math inline">(Ux)y</span> then <span class="math inline">y=y_0=Fx</span> by uniqueness. If <span class="math inline">y=Fx</span> then <span class="math inline">y=y_0</span>, and <span class="math inline">(Ux)y_0</span> gives <span class="math inline">(Ux)y</span>. (4) Necessitate <span class="math inline">H\to G</span> and apply K: <span class="math inline">\Box H\to\Box G</span>. Existential generalization on the closed term <span class="math inline">F</span> (with parameter <span class="math inline">U</span>) gives <span class="math inline">\Box H\to\exists X\, .\,\Box\forall x\, .\,\forall y\, .\,(Ux)y\leftrightarrow y=Xx</span>. Only necessitation of theorems of C is used, so the theoremhood side condition is respected.</p>
+<p>Let <span class="math inline">\tau=\bar\rho\to t</span>, which covers
+<span class="math inline">\tau=t</span> with the empty tuple, and fix
+<span class="math inline">U^{\sigma\tau t}</span>. Write <span
+class="math inline">\varphi(x,y):=(Ux)y\land\forall z\, .\,(Ux)z\to
+y=z</span> and define the operation <span class="math inline">F:=\lambda
+x^\sigma\, .\,\lambda\bar u\, .\,\forall y^\tau\, .\,(Ux)y\to y[\bar
+u]</span>; for <span class="math inline">\tau=t</span> this is <span
+class="math inline">\lambda x\, .\,\forall p\, .\,(Ux)p\to p</span>. (1)
+Lemma, a theorem of C: <span
+class="math inline">\varphi(x,y_0)\to\forall\bar u\, .\,y_0[\bar
+u]\leftrightarrow(Fx)[\bar u]</span>. Assume <span
+class="math inline">\varphi(x,y_0)</span>. If <span
+class="math inline">y_0[\bar u]</span> and <span
+class="math inline">(Ux)y</span>, then <span
+class="math inline">y=y_0</span> by uniqueness, so <span
+class="math inline">y[\bar u]</span>; hence <span
+class="math inline">(Fx)[\bar u]</span>. Conversely, if <span
+class="math inline">(Fx)[\bar u]</span>, instantiate <span
+class="math inline">y:=y_0</span> and use <span
+class="math inline">(Ux)y_0</span>. (2) Necessitate the lemma and apply
+K: <span class="math inline">\Box\varphi(x,y_0)</span> gives <span
+class="math inline">\Box\forall\bar u\, .\,y_0[\bar
+u]\leftrightarrow(Fx)[\bar u]</span>, and Intensionality gives <span
+class="math inline">y_0=Fx</span>. (3) Let <span
+class="math inline">H:=\forall x\, .\,\exists y\,
+.\,\Box\varphi(x,y)</span> and <span class="math inline">G:=\forall x\,
+.\,\forall y\, .\,(Ux)y\leftrightarrow y=Fx</span>. Then <span
+class="math inline">H\to G</span> is a theorem of C. Given <span
+class="math inline">x</span> and <span class="math inline">y</span>,
+take <span class="math inline">y_0</span> with <span
+class="math inline">\Box\varphi(x,y_0)</span>; by (2) <span
+class="math inline">y_0=Fx</span>, and by T <span
+class="math inline">\varphi(x,y_0)</span>. If <span
+class="math inline">(Ux)y</span> then <span
+class="math inline">y=y_0=Fx</span> by uniqueness. If <span
+class="math inline">y=Fx</span> then <span
+class="math inline">y=y_0</span>, and <span
+class="math inline">(Ux)y_0</span> gives <span
+class="math inline">(Ux)y</span>. (4) Necessitate <span
+class="math inline">H\to G</span> and apply K: <span
+class="math inline">\Box H\to\Box G</span>. Existential generalization
+on the closed term <span class="math inline">F</span> (with parameter
+<span class="math inline">U</span>) gives <span class="math inline">\Box
+H\to\exists X\, .\,\Box\forall x\, .\,\forall y\,
+.\,(Ux)y\leftrightarrow y=Xx</span>. Only necessitation of theorems of C
+is used, so the theoremhood side condition is respected.</p>
 <h2 id="notes">Notes</h2>
-<p>The operation is definable from <span class="math inline">U</span>, so no choice is involved. The outer box of the hypothesis is used only to get the boxed conclusion: the same proof shows, as a theorem of C, the unboxed variant <span class="math inline">H\to\exists X\, .\,\forall x\, .\,\forall y\, .\,(Ux)y\leftrightarrow y=Xx</span>. The inner box is essential; it is what licenses the identity <span class="math inline">y_0=Fx</span> in step (2). A natural target for a Lean proof, at every relational output type.</p>
+<p>The operation is definable from <span class="math inline">U</span>,
+so no choice is involved. The outer box of the hypothesis is used only
+to get the boxed conclusion: the same proof shows, as a theorem of C,
+the unboxed variant <span class="math inline">H\to\exists X\, .\,\forall
+x\, .\,\forall y\, .\,(Ux)y\leftrightarrow y=Xx</span>. The inner box is
+essential; it is what licenses the identity <span
+class="math inline">y_0=Fx</span> in step (2). A natural target for a
+Lean proof, at every relational output type.</p>
 <h2 id="sources">Sources</h2>
 <ul>
 <li><strong>Dorr 28 Sep</strong> — Cian Dorr, 28 September 2026.</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §1.5, pp. 16–18 (necessitation, T and Intensionality).</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §1.5, pp. 16–18 (necessitation, T and
+Intensionality).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/classicism-implies-modalized-plenitude-r.yaml</code>
+Record:
+<code>topics/classicism/results/classicism-implies-modalized-plenitude-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §1.5, pp. 16–18. Necessitation, T and Intensionality (necessarily coextensive relations are identical).</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §1.5,
+pp. 16–18. Necessitation, T and Intensionality (necessarily coextensive
+relations are identical).</li>
 </ul>
 </body></html>

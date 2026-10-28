@@ -323,25 +323,76 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Transversal Choice ⇒ Relational Choice</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.transversal_choice_r_implies_relational_choice_r</code>; produced by Claude Fable 5.1 (Anthropic), 25 September 2026, on a question of Zachary Goodsell after an observation of Christopher Sun; recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 25 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.transversal_choice_r_implies_relational_choice_r</code>;
+produced by Claude Fable 5.1 (Anthropic), 25 September 2026, on a
+question of Zachary Goodsell after an observation of Christopher Sun;
+recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+25 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Transversal Choice.</strong> Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at
+any type including e, has a transversal, that is, a property with
+exactly one instance in each of its cells.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
+<li><strong>Relational Choice.</strong> Every serial binary relation has
+a functional subrelation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">U^{\sigma\tau t}</span> be serial. For <span class="math inline">x^\sigma</span> and <span class="math inline">y^\tau</span> write <span class="math inline">\langle x,y\rangle</span> for the rigid pair <span class="math inline">\lambda u^\sigma v^\tau\, .\,u=x\land v=y</span>, of the admitted type <span class="math inline">\sigma\tau t</span>; the case <span class="math inline">\tau=e</span> is included. Pairing is injective: if <span class="math inline">\langle x,y\rangle=\langle x&#39;,y&#39;\rangle</span>, apply both sides to <span class="math inline">x</span> and <span class="math inline">y</span>. The left side is <span class="math inline">x=x\land y=y</span>, a theorem of H, so by Logical Equivalence it is <span class="math inline">\top</span>; hence <span class="math inline">x=x&#39;\land y=y&#39;</span> is <span class="math inline">\top</span> and so true. Call <span class="math inline">P</span> a <span class="math inline">U</span>-pair if <span class="math inline">\exists x y\, .\,(Ux)y\land P=\langle x,y\rangle</span>. Let <span class="math inline">E</span> relate two <span class="math inline">U</span>-pairs when some <span class="math inline">x</span> is the first coordinate of both, and relate any two non-<span class="math inline">U</span>-pairs. By injectivity <span class="math inline">E</span> is an equivalence relation on type <span class="math inline">\sigma\tau t</span>, and the cell of a <span class="math inline">U</span>-pair <span class="math inline">\langle x,y_0\rangle</span> consists exactly of the pairs <span class="math inline">\langle x,y\rangle</span> with <span class="math inline">(Ux)y</span>. Transversal Choice gives <span class="math inline">F^{(\sigma\tau t)t}</span> with exactly one instance in each cell. Put <span class="math inline">(Sx)y:=(Ux)y\land F\langle x,y\rangle</span>; this is a subrelation of <span class="math inline">U</span>. Given <span class="math inline">x</span>, seriality gives <span class="math inline">y_0</span> with <span class="math inline">(Ux)y_0</span>, so the cell of <span class="math inline">\langle x,y_0\rangle</span> has a unique <span class="math inline">F</span>-instance <span class="math inline">\langle x,y_x\rangle</span>, and <span class="math inline">(Sx)y</span> holds iff <span class="math inline">\langle x,y\rangle</span> is that instance iff <span class="math inline">y=y_x</span>. So <span class="math inline">S</span> is functional.</p>
+<p>Let <span class="math inline">U^{\sigma\tau t}</span> be serial. For
+<span class="math inline">x^\sigma</span> and <span
+class="math inline">y^\tau</span> write <span
+class="math inline">\langle x,y\rangle</span> for the rigid pair <span
+class="math inline">\lambda u^\sigma v^\tau\, .\,u=x\land v=y</span>, of
+the admitted type <span class="math inline">\sigma\tau t</span>; the
+case <span class="math inline">\tau=e</span> is included. Pairing is
+injective: if <span class="math inline">\langle x,y\rangle=\langle
+x&#39;,y&#39;\rangle</span>, apply both sides to <span
+class="math inline">x</span> and <span class="math inline">y</span>. The
+left side is <span class="math inline">x=x\land y=y</span>, a theorem of
+H, so by Logical Equivalence it is <span
+class="math inline">\top</span>; hence <span
+class="math inline">x=x&#39;\land y=y&#39;</span> is <span
+class="math inline">\top</span> and so true. Call <span
+class="math inline">P</span> a <span class="math inline">U</span>-pair
+if <span class="math inline">\exists x y\, .\,(Ux)y\land P=\langle
+x,y\rangle</span>. Let <span class="math inline">E</span> relate two
+<span class="math inline">U</span>-pairs when some <span
+class="math inline">x</span> is the first coordinate of both, and relate
+any two non-<span class="math inline">U</span>-pairs. By injectivity
+<span class="math inline">E</span> is an equivalence relation on type
+<span class="math inline">\sigma\tau t</span>, and the cell of a <span
+class="math inline">U</span>-pair <span class="math inline">\langle
+x,y_0\rangle</span> consists exactly of the pairs <span
+class="math inline">\langle x,y\rangle</span> with <span
+class="math inline">(Ux)y</span>. Transversal Choice gives <span
+class="math inline">F^{(\sigma\tau t)t}</span> with exactly one instance
+in each cell. Put <span class="math inline">(Sx)y:=(Ux)y\land F\langle
+x,y\rangle</span>; this is a subrelation of <span
+class="math inline">U</span>. Given <span class="math inline">x</span>,
+seriality gives <span class="math inline">y_0</span> with <span
+class="math inline">(Ux)y_0</span>, so the cell of <span
+class="math inline">\langle x,y_0\rangle</span> has a unique <span
+class="math inline">F</span>-instance <span class="math inline">\langle
+x,y_x\rangle</span>, and <span class="math inline">(Sx)y</span> holds
+iff <span class="math inline">\langle x,y\rangle</span> is that instance
+iff <span class="math inline">y=y_x</span>. So <span
+class="math inline">S</span> is functional.</p>
 <h2 id="notes">Notes</h2>
-<p>Transversal Choice is therefore at least as strong as Relational Choice over C. Whether it is strictly stronger is the recorded question relational-choice-r-implies-transversal-choice-r.</p>
+<p>Transversal Choice is therefore at least as strong as Relational
+Choice over C. Whether it is strictly stronger is the recorded question
+relational-choice-r-implies-transversal-choice-r.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Sun via Goodsell 25 Sep</strong> — Zachary Goodsell, question of 25 September 2026, after Christopher Sun’s observation; proof as recorded.</li>
+<li><strong>Sun via Goodsell 25 Sep</strong> — Zachary Goodsell,
+question of 25 September 2026, after Christopher Sun’s observation;
+proof as recorded.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/transversal-choice-r-implies-relational-choice-r.yaml</code>
+Record:
+<code>topics/classicism/results/transversal-choice-r-implies-relational-choice-r.yaml</code>
 </p>
 </body></html>

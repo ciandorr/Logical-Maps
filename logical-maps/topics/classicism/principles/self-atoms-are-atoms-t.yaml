@@ -1,0 +1,19 @@
+id: self-atoms-are-atoms-t
+name: Self-atoms are atoms (type t)
+category: more-boolean-structure
+statement: Every self-atom is an atom.
+formal: $\forall p\, .\,\operatorname{SelfAtom}_t(p)\to\operatorname{Atom}_t(p)$
+definitions: 'where $\operatorname{SelfAtom}_t(p):=\Diamond p\land\Box(p\to\operatorname{Atom}_t(p))$: a
+  self-atom is a possible proposition that necessarily, if true, is an atom; equivalently, in C, one that
+  entails that it is the actual world, $\Box(p\to\forall q\, .\,q\to p\le q)$.'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: 'The type $t$ instance of [[self-atoms-are-atoms-r]]. Bridge principle (Cian Dorr, 25 October 2026).
+  A self-atom need not be an atom: in the full model over the free monoid on $a,b$ the proposition $\{a,b\}$
+  becomes the actual-world proposition under either generator, but $\{a\}$ lies strictly below it. With
+  Self-Atomicity it gives Atomicity; 5 implies it.'
+lean_def: Classicism.P.SelfAtomsAreAtomsT.schemaIn

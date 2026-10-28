@@ -43,6 +43,22 @@ settings:
 meets:
   complete-components: The models in $A$ are complete for C($\Sigma$), so in particular for C.
 arguments:
+- fails:
+  - self-atoms-are-atoms-t
+  - self-atoms-are-strong-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'Self-atoms are atoms (type t) fails at the root, and with it Self-atoms are strong atoms (type
+    t). Some component has an object $V$ satisfying Actuality, with true atom $a_V$, since the components
+    are complete and Actuality is consistent with C(Σ); and $a_V$ is a self-atom, so for an arrow $m$
+    out of $V$ its transport is $a_V$ exactly when $m\in a_V$ (then $a_V$ is the true atom at $m$’s target,
+    the atom containing the identity there), and otherwise excludes the identity. Let $c$ be a propositional
+    constant of $\Sigma^+$ and $P$ the root proposition false at the identity and at every map of the
+    constants and true exactly at the arrows $\langle V,I\rangle$ with $I(c)=a_V$: pinned down by $\{c\}$,
+    with transport along such an arrow the set of $m$ with $m\cdot a_V=a_V$, that is $a_V$, an atom at
+    $V$. So $P$ is possible and a self-atom. It is not an atom: for another propositional constant $c^{\prime}$,
+    the arrows with $I(c)=a_V$ and $I(c^{\prime})=\top$ form a proper nonempty part pinned down by $\{c,c^{\prime}\}$.'
 - id: barcan
   holds:
   - barcan-r

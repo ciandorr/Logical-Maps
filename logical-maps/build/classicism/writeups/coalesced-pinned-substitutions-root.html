@@ -322,52 +322,146 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum: interpretation and substitution arrows, finitely pinned root</h1></header><p>Cian Dorr suggested this variant of coalesced-pinned-interpretations-root on 19 October 2026, and Claude Opus 5.5 (Anthropic) wrote the verification. The extra arrows make Actuality fail, as in the finitely pinned model on all maps, while Maximalism and BF still hold. No second reader has checked it, and no Lean verification is claimed.</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum: interpretation and substitution arrows, finitely pinned root</h1></header><p>Cian Dorr suggested this variant of
+coalesced-pinned-interpretations-root on 19 October 2026, and Claude
+Opus 5.5 (Anthropic) wrote the verification. The extra arrows make
+Actuality fail, as in the finitely pinned model on all maps, while
+Maximalism and BF still hold. No second reader has checked it, and no
+Lean verification is claimed.</p>
 <h2 id="the-construction">The construction</h2>
-<p>Everything is as in coalesced-pinned-interpretations-root, except that <span class="math inline">W_0</span> has more arrows to itself.</p>
+<p>Everything is as in coalesced-pinned-interpretations-root, except
+that <span class="math inline">W_0</span> has more arrows to itself.</p>
 <ul>
-<li><strong>Substitutions.</strong> For every type-preserving map <span class="math inline">f</span> of the constants of <span class="math inline">\Sigma^+</span> to themselves there is an arrow <span class="math inline">f:W_0\to W_0</span>. The identity map is <span class="math inline">1_{W_0}</span>.</li>
-<li><strong>Composition.</strong> Maps compose as functions, and <span class="math inline">\langle V,I\rangle\circ f:=\langle V,I\circ f\rangle</span>.</li>
-<li><strong>Individuals.</strong> <span class="math inline">f</span> acts on the individuals at <span class="math inline">W_0</span>, the individual constants, as it does on constants.</li>
-<li><strong>Pinning.</strong> An entity pinned down by a finite <span class="math inline">S</span> takes the same value at two arrows into the same object if they agree on <span class="math inline">S</span>. For arrows <span class="math inline">\langle V,I\rangle</span> that means <span class="math inline">I{\restriction}S=I&#39;{\restriction}S</span>; for maps it means <span class="math inline">f{\restriction}S=f&#39;{\restriction}S</span>.</li>
-<li><strong>Landing.</strong> Transports along every <span class="math inline">\langle V,I\rangle</span> lie in the component domains, as before.</li>
+<li><strong>Substitutions.</strong> For every type-preserving map <span
+class="math inline">f</span> of the constants of <span
+class="math inline">\Sigma^+</span> to themselves there is an arrow
+<span class="math inline">f:W_0\to W_0</span>. The identity map is <span
+class="math inline">1_{W_0}</span>.</li>
+<li><strong>Composition.</strong> Maps compose as functions, and <span
+class="math inline">\langle V,I\rangle\circ f:=\langle V,I\circ
+f\rangle</span>.</li>
+<li><strong>Individuals.</strong> <span class="math inline">f</span>
+acts on the individuals at <span class="math inline">W_0</span>, the
+individual constants, as it does on constants.</li>
+<li><strong>Pinning.</strong> An entity pinned down by a finite <span
+class="math inline">S</span> takes the same value at two arrows into the
+same object if they agree on <span class="math inline">S</span>. For
+arrows <span class="math inline">\langle V,I\rangle</span> that means
+<span class="math inline">I{\restriction}S=I&#39;{\restriction}S</span>;
+for maps it means <span
+class="math inline">f{\restriction}S=f&#39;{\restriction}S</span>.</li>
+<li><strong>Landing.</strong> Transports along every <span
+class="math inline">\langle V,I\rangle</span> lie in the component
+domains, as before.</li>
 </ul>
-<p><strong>Transport along a map keeps an entity in the domain.</strong> Let <span class="math inline">F</span> be pinned down by <span class="math inline">S</span>.</p>
+<p><strong>Transport along a map keeps an entity in the domain.</strong>
+Let <span class="math inline">F</span> be pinned down by <span
+class="math inline">S</span>.</p>
 <ul>
-<li><span class="math inline">f\cdot F</span> is pinned down by <span class="math inline">f(S)</span>: if <span class="math inline">k</span> and <span class="math inline">k&#39;</span> agree on <span class="math inline">f(S)</span>, then <span class="math inline">k\circ f</span> and <span class="math inline">k&#39;\circ f</span> agree on <span class="math inline">S</span>.</li>
-<li>Its transports are transports of <span class="math inline">F</span>: <span class="math inline">\langle V,I\rangle\cdot(f\cdot F)=\langle V,I\circ f\rangle\cdot F</span>, so they land.</li>
+<li><span class="math inline">f\cdot F</span> is pinned down by <span
+class="math inline">f(S)</span>: if <span class="math inline">k</span>
+and <span class="math inline">k&#39;</span> agree on <span
+class="math inline">f(S)</span>, then <span class="math inline">k\circ
+f</span> and <span class="math inline">k&#39;\circ f</span> agree on
+<span class="math inline">S</span>.</li>
+<li>Its transports are transports of <span class="math inline">F</span>:
+<span class="math inline">\langle V,I\rangle\cdot(f\cdot F)=\langle
+V,I\circ f\rangle\cdot F</span>, so they land.</li>
 </ul>
-<p><strong>The entities <span class="math inline">\hat c</span>.</strong> Give <span class="math inline">\hat c</span> the empty extension at every map, in addition to its values at the arrows <span class="math inline">\langle V,I\rangle</span> as before. Then <span class="math inline">f\cdot\hat c=\widehat{f(c)}</span>:</p>
+<p><strong>The entities <span class="math inline">\hat
+c</span>.</strong> Give <span class="math inline">\hat c</span> the
+empty extension at every map, in addition to its values at the arrows
+<span class="math inline">\langle V,I\rangle</span> as before. Then
+<span class="math inline">f\cdot\hat c=\widehat{f(c)}</span>:</p>
 <ul>
-<li>at <span class="math inline">\langle V,I\rangle</span> both sides are the extension of <span class="math inline">I(f(c))</span>;</li>
+<li>at <span class="math inline">\langle V,I\rangle</span> both sides
+are the extension of <span class="math inline">I(f(c))</span>;</li>
 <li>at a map <span class="math inline">g</span> both are empty.</li>
 </ul>
-<p>The argument that this is a model of C is the same as before. The denotation of a term with parameters pinned down by <span class="math inline">S</span> is pinned down by <span class="math inline">S</span>, because at a map <span class="math inline">f</span> it is computed at <span class="math inline">W_0</span> from <span class="math inline">f\cdot\bar P</span>, which depends only on <span class="math inline">f{\restriction}S</span>. Transport commutes with the operations, so denotations land.</p>
+<p>The argument that this is a model of C is the same as before. The
+denotation of a term with parameters pinned down by <span
+class="math inline">S</span> is pinned down by <span
+class="math inline">S</span>, because at a map <span
+class="math inline">f</span> it is computed at <span
+class="math inline">W_0</span> from <span class="math inline">f\cdot\bar
+P</span>, which depends only on <span
+class="math inline">f{\restriction}S</span>. Transport commutes with the
+operations, so denotations land.</p>
 <h2 id="actuality-fails">Actuality fails</h2>
-<p>Let <span class="math inline">p</span> be a true proposition pinned down by a finite <span class="math inline">S</span>. Every map fixing <span class="math inline">S</span> pointwise agrees with the identity on <span class="math inline">S</span>, so it lies in <span class="math inline">p</span>. Take a constant <span class="math inline">c\notin S</span>, and let <span class="math inline">q</span> be the set of maps fixing <span class="math inline">S\cup\{c\}</span> pointwise.</p>
+<p>Let <span class="math inline">p</span> be a true proposition pinned
+down by a finite <span class="math inline">S</span>. Every map fixing
+<span class="math inline">S</span> pointwise agrees with the identity on
+<span class="math inline">S</span>, so it lies in <span
+class="math inline">p</span>. Take a constant <span
+class="math inline">c\notin S</span>, and let <span
+class="math inline">q</span> be the set of maps fixing <span
+class="math inline">S\cup\{c\}</span> pointwise.</p>
 <ul>
-<li><span class="math inline">q</span> is in the domain. It is pinned down by <span class="math inline">S\cup\{c\}</span>, and its transports along the arrows <span class="math inline">\langle V,I\rangle</span> are empty, so they land.</li>
-<li><span class="math inline">q</span> is true, since it contains the identity.</li>
-<li><span class="math inline">p</span> does not entail <span class="math inline">q</span>: a map fixing <span class="math inline">S</span> and moving <span class="math inline">c</span> is in <span class="math inline">p</span> but not in <span class="math inline">q</span>.</li>
+<li><span class="math inline">q</span> is in the domain. It is pinned
+down by <span class="math inline">S\cup\{c\}</span>, and its transports
+along the arrows <span class="math inline">\langle V,I\rangle</span> are
+empty, so they land.</li>
+<li><span class="math inline">q</span> is true, since it contains the
+identity.</li>
+<li><span class="math inline">p</span> does not entail <span
+class="math inline">q</span>: a map fixing <span
+class="math inline">S</span> and moving <span
+class="math inline">c</span> is in <span class="math inline">p</span>
+but not in <span class="math inline">q</span>.</li>
 </ul>
 <p>So no truth entails every truth.</p>
 <h2 id="bf-holds-at-every-type">BF holds at every type</h2>
-<p>Take the form <span class="math inline">\Diamond\exists x\,.\,Fx\to\exists x\,.\,\Diamond Fx</span>, with <span class="math inline">F</span> pinned down by a finite <span class="math inline">S</span>.</p>
+<p>Take the form <span class="math inline">\Diamond\exists
+x\,.\,Fx\to\exists x\,.\,\Diamond Fx</span>, with <span
+class="math inline">F</span> pinned down by a finite <span
+class="math inline">S</span>.</p>
 <ul>
-<li><strong>A witness at an arrow <span class="math inline">\langle V,I\rangle</span>.</strong> This is handled as in coalesced-pinned-interpretations-root, by a fresh constant <span class="math inline">c</span> with <span class="math inline">I&#39;(c)=y</span>.</li>
-<li><strong>A witness <span class="math inline">y</span> at a map <span class="math inline">f</span>.</strong> Here <span class="math inline">y</span> is an entity at <span class="math inline">W_0</span>, pinned down by some finite <span class="math inline">S_y</span>.
+<li><strong>A witness at an arrow <span class="math inline">\langle
+V,I\rangle</span>.</strong> This is handled as in
+coalesced-pinned-interpretations-root, by a fresh constant <span
+class="math inline">c</span> with <span
+class="math inline">I&#39;(c)=y</span>.</li>
+<li><strong>A witness <span class="math inline">y</span> at a map <span
+class="math inline">f</span>.</strong> Here <span
+class="math inline">y</span> is an entity at <span
+class="math inline">W_0</span>, pinned down by some finite <span
+class="math inline">S_y</span>.
 <ol type="1">
-<li>Let <span class="math inline">g</span> be a map sending <span class="math inline">S_y</span> to fresh constants outside <span class="math inline">S</span>.</li>
-<li>Let <span class="math inline">f&#39;</span> agree with <span class="math inline">f</span> on <span class="math inline">S</span> and send those fresh constants back, so that <span class="math inline">f&#39;\circ g</span> fixes <span class="math inline">S_y</span> pointwise.</li>
-<li>Then <span class="math inline">f&#39;\cdot(g\cdot y)=(f&#39;\circ g)\cdot y=y</span>, by pinning.</li>
-<li><span class="math inline">f&#39;</span> agrees with <span class="math inline">f</span> on <span class="math inline">S</span>, so <span class="math inline">F</span> holds at <span class="math inline">f&#39;</span> of <span class="math inline">y=f&#39;\cdot(g\cdot y)</span>.</li>
+<li>Let <span class="math inline">g</span> be a map sending <span
+class="math inline">S_y</span> to fresh constants outside <span
+class="math inline">S</span>.</li>
+<li>Let <span class="math inline">f&#39;</span> agree with <span
+class="math inline">f</span> on <span class="math inline">S</span> and
+send those fresh constants back, so that <span
+class="math inline">f&#39;\circ g</span> fixes <span
+class="math inline">S_y</span> pointwise.</li>
+<li>Then <span class="math inline">f&#39;\cdot(g\cdot y)=(f&#39;\circ
+g)\cdot y=y</span>, by pinning.</li>
+<li><span class="math inline">f&#39;</span> agrees with <span
+class="math inline">f</span> on <span class="math inline">S</span>, so
+<span class="math inline">F</span> holds at <span
+class="math inline">f&#39;</span> of <span
+class="math inline">y=f&#39;\cdot(g\cdot y)</span>.</li>
 <li>Hence <span class="math inline">\Diamond F(g\cdot y)</span>.</li>
 </ol></li>
 </ul>
 <h2 id="maximalism-and-possibility">Maximalism and Possibility+</h2>
-<p>The arguments of coalesced-pinned-interpretations-root use only the arrows <span class="math inline">\langle V,I\rangle</span>, so they carry over unchanged. Maximalism (for <span class="math inline">\Sigma</span> and pure) and Possibility+ (for <span class="math inline">\Sigma</span> and pure) hold.</p>
+<p>The arguments of coalesced-pinned-interpretations-root use only the
+arrows <span class="math inline">\langle V,I\rangle</span>, so they
+carry over unchanged. Maximalism (for <span
+class="math inline">\Sigma</span> and pure) and Possibility+ (for <span
+class="math inline">\Sigma</span> and pure) hold.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — Appendix D, Definitions D.1–D.3, Proposition D.4, pp. 73–74; Appendix E, Definition E.2, pp. 80–83. The finitely pinned domains of Appendix D, with finite sets of constants in place of finite sets of individuals, over the components of a coalesced sum as in Appendix E.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. —
+Appendix D, Definitions D.1–D.3, Proposition D.4, pp. 73–74; Appendix E,
+Definition E.2, pp. 80–83. The finitely pinned domains of Appendix D,
+with finite sets of constants in place of finite sets of individuals,
+over the components of a coalesced sum as in Appendix E.</li>
 </ul>
 </body></html>

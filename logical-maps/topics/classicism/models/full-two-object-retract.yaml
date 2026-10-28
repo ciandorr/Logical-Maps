@@ -22,6 +22,14 @@ settings:
   individuals: singleton
   sigma: top
 meets:
+  fixed-arrow: >-
+    $k\circ h=h$ with $k\ne1_{W_1}$.
+  comparable-free-arrows-everywhere: >-
+    Out of $W_0$ only $1$ is fixed by nothing but the identity, $h$ being fixed by $k$; out of $W_1$
+    the arrows fixed only by the identity are $1$ and $j$ ($k$ is fixed by $k$), and $j=j\circ1$.
+  uniquely-factored-free-arrows-everywhere: >-
+    At $W_0$, $1=m\circ h$ forces $m=j$ and $1=m\circ1$ forces $m=1$; at $W_1$, $j=m\circ k$ forces
+    $m\circ h=1$, so $m=j$, and $j=m\circ j$ or $1=m\circ x$ force $m=1$ and $x=1$.
   finitely-many-arrows-everywhere: >-
     Two arrows out of $W_0$ and three out of $W_1$.
   nonepic-arrow: $1\circ h=k\circ h$, with $1\ne k$.

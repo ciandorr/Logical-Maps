@@ -323,26 +323,80 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Relational Choice ∧ Extensionality ⇒ Transversal Choice</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.relational_choice_and_extensionality_imply_transversal_choice</code>; produced by Claude Fable 5.1 (Anthropic), 25 September 2026, on a question of Zachary Goodsell after an observation of Christopher Sun; the usual quotient argument; recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 25 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.relational_choice_and_extensionality_imply_transversal_choice</code>;
+produced by Claude Fable 5.1 (Anthropic), 25 September 2026, on a
+question of Zachary Goodsell after an observation of Christopher Sun;
+the usual quotient argument; recorded by Claude Fable 5.1 (Anthropic),
+prompted by Zachary Goodsell, 25 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
-<li><strong>Extensionality.</strong> At each relational type, coextensive relations are identical; include the nullary propositional case.</li>
+<li><strong>Relational Choice.</strong> Every serial binary relation has
+a functional subrelation.</li>
+<li><strong>Extensionality.</strong> At each relational type,
+coextensive relations are identical; include the nullary propositional
+case.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Transversal Choice.</strong> Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.</li>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at
+any type including e, has a transversal, that is, a property with
+exactly one instance in each of its cells.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">R^{\sigma\sigma t}</span> be an equivalence relation and write <span class="math inline">[x]</span> for the cell <span class="math inline">\lambda z\, .\,(Rx)z</span>. The relation <span class="math inline">U^{(\sigma t)\sigma t}</span> with <span class="math inline">(UC)y:=Cy\lor\neg\exists z\, .\,Cz</span> is serial, so Relational Choice gives a functional <span class="math inline">S</span> with <span class="math inline">(SC)y\to(UC)y</span>. Put <span class="math inline">Fy:=\exists x\, .\,(S[x])y</span>. Existence: given <span class="math inline">x</span>, functionality gives <span class="math inline">y</span> with <span class="math inline">(S[x])y</span>; the cell <span class="math inline">[x]</span> has the instance <span class="math inline">x</span>, so <span class="math inline">(U[x])y</span> gives <span class="math inline">(Rx)y</span>, and <span class="math inline">Fy</span> holds. Uniqueness: suppose <span class="math inline">(Rx)y</span>, <span class="math inline">Fy</span>, <span class="math inline">(Rx)y&#39;</span> and <span class="math inline">Fy&#39;</span>, with witnesses <span class="math inline">x_1</span> and <span class="math inline">x_2</span>, so that <span class="math inline">(S[x_1])y</span> and <span class="math inline">(S[x_2])y&#39;</span>. As before <span class="math inline">(Rx_1)y</span> and <span class="math inline">(Rx_2)y&#39;</span>, so <span class="math inline">x_1</span>, <span class="math inline">y</span>, <span class="math inline">x</span>, <span class="math inline">y&#39;</span> and <span class="math inline">x_2</span> lie in one cell and <span class="math inline">\forall z\, .\,(Rx_1)z\leftrightarrow(Rx_2)z</span>. Extensionality at type <span class="math inline">\sigma t</span> gives <span class="math inline">[x_1]=[x_2]</span>, and functionality of <span class="math inline">S</span> gives <span class="math inline">y=y&#39;</span>.</p>
+<p>Let <span class="math inline">R^{\sigma\sigma t}</span> be an
+equivalence relation and write <span class="math inline">[x]</span> for
+the cell <span class="math inline">\lambda z\, .\,(Rx)z</span>. The
+relation <span class="math inline">U^{(\sigma t)\sigma t}</span> with
+<span class="math inline">(UC)y:=Cy\lor\neg\exists z\, .\,Cz</span> is
+serial, so Relational Choice gives a functional <span
+class="math inline">S</span> with <span
+class="math inline">(SC)y\to(UC)y</span>. Put <span
+class="math inline">Fy:=\exists x\, .\,(S[x])y</span>. Existence: given
+<span class="math inline">x</span>, functionality gives <span
+class="math inline">y</span> with <span
+class="math inline">(S[x])y</span>; the cell <span
+class="math inline">[x]</span> has the instance <span
+class="math inline">x</span>, so <span
+class="math inline">(U[x])y</span> gives <span
+class="math inline">(Rx)y</span>, and <span
+class="math inline">Fy</span> holds. Uniqueness: suppose <span
+class="math inline">(Rx)y</span>, <span class="math inline">Fy</span>,
+<span class="math inline">(Rx)y&#39;</span> and <span
+class="math inline">Fy&#39;</span>, with witnesses <span
+class="math inline">x_1</span> and <span class="math inline">x_2</span>,
+so that <span class="math inline">(S[x_1])y</span> and <span
+class="math inline">(S[x_2])y&#39;</span>. As before <span
+class="math inline">(Rx_1)y</span> and <span
+class="math inline">(Rx_2)y&#39;</span>, so <span
+class="math inline">x_1</span>, <span class="math inline">y</span>,
+<span class="math inline">x</span>, <span
+class="math inline">y&#39;</span> and <span
+class="math inline">x_2</span> lie in one cell and <span
+class="math inline">\forall z\, .\,(Rx_1)z\leftrightarrow(Rx_2)z</span>.
+Extensionality at type <span class="math inline">\sigma t</span> gives
+<span class="math inline">[x_1]=[x_2]</span>, and functionality of <span
+class="math inline">S</span> gives <span
+class="math inline">y=y&#39;</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>The only use of Extensionality is to identify the coextensive cells <span class="math inline">[x_1]</span> and <span class="math inline">[x_2]</span>. In C alone properties are identical only when necessarily coextensive, which the hypothesis does not supply; see the recorded question relational-choice-r-implies-transversal-choice-r. The arrow is also derivable through Extensionality implies Rigid Comprehension and the arrow from Relational Choice with Weak Rigid Comprehension; it is recorded directly because it is the argument usually given.</p>
+<p>The only use of Extensionality is to identify the coextensive cells
+<span class="math inline">[x_1]</span> and <span
+class="math inline">[x_2]</span>. In C alone properties are identical
+only when necessarily coextensive, which the hypothesis does not supply;
+see the recorded question
+relational-choice-r-implies-transversal-choice-r. The arrow is also
+derivable through Extensionality implies Rigid Comprehension and the
+arrow from Relational Choice with Weak Rigid Comprehension; it is
+recorded directly because it is the argument usually given.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Sun via Goodsell 25 Sep</strong> — Zachary Goodsell, question of 25 September 2026, after Christopher Sun’s observation; the quotient argument as recorded.</li>
+<li><strong>Sun via Goodsell 25 Sep</strong> — Zachary Goodsell,
+question of 25 September 2026, after Christopher Sun’s observation; the
+quotient argument as recorded.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/relational-choice-and-extensionality-imply-transversal-choice.yaml</code>
+Record:
+<code>topics/classicism/results/relational-choice-and-extensionality-imply-transversal-choice.yaml</code>
 </p>
 </body></html>

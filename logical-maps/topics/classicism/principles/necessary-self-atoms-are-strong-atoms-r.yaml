@@ -1,0 +1,23 @@
+id: necessary-self-atoms-are-strong-atoms-r
+name: □Self-atoms are strong atoms
+category: more-boolean-structure
+statement: 'Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails
+  every entity of the type or its negation.'
+formal: $\Box\forall X^\sigma\, .\,\operatorname{SelfAtom}_\sigma(X)\to\operatorname{SAtom}_\sigma(X)\qquad(\sigma\ne
+  e)$
+definitions: 'where $\Diamond_\sigma X:=X\ne\bot_\sigma$ and $\operatorname{SelfAtom}_\sigma(X):=\Diamond_\sigma
+  X\land\Box(\exists\bar x\, .\,X\bar x\to\operatorname{Atom}_\sigma(X))$: a self-atom is a possible entity
+  that is necessarily an atom whenever it is instantiated; for a proposition, one that, wherever it is
+  true, is the actual-world proposition there (Background, Self-atoms); and $\operatorname{SAtom}_\sigma(W):=\Diamond_\sigma
+  W\land\Box\forall Y^\sigma\, .\,W\le_\sigma Y\lor W\le_\sigma\neg_\sigma Y$ is a strong atom (Background,
+  Strong atoms)'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: The boxed form of [[self-atoms-are-strong-atoms-r]].
+aliases:
+- □Self-atoms are strong atoms
+lean_def: Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn

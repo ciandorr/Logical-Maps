@@ -323,31 +323,118 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality ∧ Two-hat necessity implies ND-necessity ⇒ Strong Actuality</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.actuality_and_two_hat_implies_nd_imply_strong_actuality</code>; produced by Cian Dorr, 14 October 2026 (with 5-necessity implies ND-necessity as the second premise); weakened to Two-hat necessity implies ND-necessity, and checked, by Claude Fable 5.1 (Anthropic) the same day; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.actuality_and_two_hat_implies_nd_imply_strong_actuality</code>;
+produced by Cian Dorr, 14 October 2026 (with 5-necessity implies
+ND-necessity as the second premise); weakened to Two-hat necessity
+implies ND-necessity, and checked, by Claude Fable 5.1 (Anthropic) the
+same day; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian
+Dorr, 14 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
-<li><strong>Two-hat necessity implies ND-necessity.</strong> Whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
+<li><strong>Two-hat necessity implies ND-necessity.</strong> Whatever is
+two-hat necessary is ND-necessary: the distinctness-preserving modality
+agrees with its hat.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Strong Actuality.</strong> There is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.</li>
+<li><strong>Strong Actuality.</strong> There is a true strong atom: a
+true proposition that necessarily entails every proposition or its
+negation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">w</span> witness Actuality; it is a true atom, since a possible <span class="math inline">p\le w</span> cannot be false (<span class="math inline">\neg p</span> true would give <span class="math inline">w\le\neg p</span>, so <span class="math inline">p\le\neg p</span>) and if true satisfies <span class="math inline">w\le p</span>. Suppose <span class="math inline">w</span> is not a strong world: possibly some <span class="math inline">Y</span> has <span class="math inline">w\not\le Y</span> and <span class="math inline">w\not\le\neg Y</span>, so <span class="math inline">\Diamond(\Diamond w\wedge\neg\operatorname{Atom}w)</span>, since there <span class="math inline">w\wedge Y</span> is a possible strict lower bound of <span class="math inline">w</span>. For every true <span class="math inline">q</span>, <span class="math inline">w\le q</span>, so <span class="math inline">\Diamond w\le\Diamond q</span> and <span class="math inline">\Diamond(\Diamond q\wedge\Diamond w\wedge\neg\operatorname{Atom}w)</span>: that is <span class="math inline">\Diamond_{\ne}(\Diamond w\wedge\neg\operatorname{Atom}w)</span>. The premise, dualized, gives <span class="math inline">\hat{\hat\Diamond}(\Diamond w\wedge\neg\operatorname{Atom}w)</span>, hence <span class="math inline">\hat{\hat\Diamond}\,\exists p(p\ne w\wedge p\le w\wedge\Diamond p)</span>, as <span class="math inline">\Diamond w\wedge\neg\operatorname{Atom}w</span> entails that <span class="math inline">w</span> has a possible strict lower bound and <span class="math inline">\hat{\hat\Box}</span> is N and K. Under Actuality, <span class="math inline">\hat{\hat\Box}</span> satisfies BF at type <span class="math inline">t</span> at the actual world (Proposition D19 of The Bounds of Possibility, Appendix D, for <span class="math inline">X=\Box_{\ne}</span>, which uses Actuality only at the world of evaluation), so <span class="math inline">\exists p\,\hat{\hat\Diamond}(p\ne w\wedge p\le w\wedge\Diamond p)</span>. Fix such a <span class="math inline">p</span>. Since <span class="math inline">\hat{\hat\Box}</span> is N, <span class="math inline">\Box</span> is below it (if <span class="math inline">p=\top</span> then <span class="math inline">\hat{\hat\Box}p=\hat{\hat\Box}\top</span>), so <span class="math inline">\hat{\hat\Diamond}</span> is below <span class="math inline">\Diamond</span> and <span class="math inline">\Diamond\Diamond p</span> gives <span class="math inline">\Diamond p</span>; for the same reason it inherits the necessity of identity, so <span class="math inline">\hat{\hat\Diamond}(p\ne w)</span> gives <span class="math inline">p\ne w</span>; and being the hat of the NK operator <span class="math inline">\Box_{\ne}</span> it is NKJ (Proposition D14) and so satisfies the necessity of distinctness at every type (Proposition D1): <span class="math inline">\hat{\hat\Diamond}((p\to w)=\top)</span> gives <span class="math inline">(p\to w)=\top</span>, i.e. <span class="math inline">p\le w</span>. Thus <span class="math inline">p</span> is a possible strict lower bound of the atom <span class="math inline">w</span>, a contradiction. So <span class="math inline">w</span> is a true strong world.</p>
+<p>Let <span class="math inline">w</span> witness Actuality; it is a
+true atom, since a possible <span class="math inline">p\le w</span>
+cannot be false (<span class="math inline">\neg p</span> true would give
+<span class="math inline">w\le\neg p</span>, so <span
+class="math inline">p\le\neg p</span>) and if true satisfies <span
+class="math inline">w\le p</span>. Suppose <span
+class="math inline">w</span> is not a strong atom: possibly some <span
+class="math inline">Y</span> has <span class="math inline">w\not\le
+Y</span> and <span class="math inline">w\not\le\neg Y</span>, so <span
+class="math inline">\Diamond(\Diamond
+w\wedge\neg\operatorname{Atom}w)</span>, since there <span
+class="math inline">w\wedge Y</span> is a possible strict lower bound of
+<span class="math inline">w</span>. For every true <span
+class="math inline">q</span>, <span class="math inline">w\le q</span>,
+so <span class="math inline">\Diamond w\le\Diamond q</span> and <span
+class="math inline">\Diamond(\Diamond q\wedge\Diamond
+w\wedge\neg\operatorname{Atom}w)</span>: that is <span
+class="math inline">\Diamond_{\ne}(\Diamond
+w\wedge\neg\operatorname{Atom}w)</span>. The premise, dualized, gives
+<span class="math inline">\hat{\hat\Diamond}(\Diamond
+w\wedge\neg\operatorname{Atom}w)</span>, hence <span
+class="math inline">\hat{\hat\Diamond}\,\exists p(p\ne w\wedge p\le
+w\wedge\Diamond p)</span>, as <span class="math inline">\Diamond
+w\wedge\neg\operatorname{Atom}w</span> entails that <span
+class="math inline">w</span> has a possible strict lower bound and <span
+class="math inline">\hat{\hat\Box}</span> is N and K. Under Actuality,
+<span class="math inline">\hat{\hat\Box}</span> satisfies BF at type
+<span class="math inline">t</span> at the actual world (Proposition D19
+of The Bounds of Possibility, Appendix D, for <span
+class="math inline">X=\Box_{\ne}</span>, which uses Actuality only at
+the world of evaluation), so <span class="math inline">\exists
+p\,\hat{\hat\Diamond}(p\ne w\wedge p\le w\wedge\Diamond p)</span>. Fix
+such a <span class="math inline">p</span>. Since <span
+class="math inline">\hat{\hat\Box}</span> is N, <span
+class="math inline">\Box</span> is below it (if <span
+class="math inline">p=\top</span> then <span
+class="math inline">\hat{\hat\Box}p=\hat{\hat\Box}\top</span>), so <span
+class="math inline">\hat{\hat\Diamond}</span> is below <span
+class="math inline">\Diamond</span> and <span
+class="math inline">\Diamond\Diamond p</span> gives <span
+class="math inline">\Diamond p</span>; for the same reason it inherits
+the necessity of identity, so <span
+class="math inline">\hat{\hat\Diamond}(p\ne w)</span> gives <span
+class="math inline">p\ne w</span>; and being the hat of the NK operator
+<span class="math inline">\Box_{\ne}</span> it is NKJ (Proposition D14)
+and so satisfies the necessity of distinctness at every type
+(Proposition D1): <span class="math inline">\hat{\hat\Diamond}((p\to
+w)=\top)</span> gives <span class="math inline">(p\to w)=\top</span>,
+i.e. <span class="math inline">p\le w</span>. Thus <span
+class="math inline">p</span> is a possible strict lower bound of the
+atom <span class="math inline">w</span>, a contradiction. So <span
+class="math inline">w</span> is a true strong atom.</p>
 <h2 id="notes">Notes</h2>
-<p>Cian Dorr’s argument used 5-necessity implies ND-necessity, with BF and the necessity of distinctness for <span class="math inline">\Box_5</span> (Theorem D16, Corollary D6); the same steps go through for <span class="math inline">\hat{\hat\Box}</span> once Actuality supplies its BF at the actual world, so the weaker collapse principle suffices. The recorded result from Actuality and Truth implies ND-necessity is now derivable, that principle implying this one. The hypothesis Actuality cannot be dropped (the one-object models in which every truth is ND-necessary but Actuality fails), and the converse fails: the two-object retract full model has Strong Actuality but not Two-hat necessity implies ND-necessity.</p>
+<p>Cian Dorr’s argument used 5-necessity implies ND-necessity, with BF
+and the necessity of distinctness for <span
+class="math inline">\Box_5</span> (Theorem D16, Corollary D6); the same
+steps go through for <span class="math inline">\hat{\hat\Box}</span>
+once Actuality supplies its BF at the actual world, so the weaker
+collapse principle suffices. The recorded result from Actuality and
+Truth implies ND-necessity is now derivable, that principle implying
+this one. The hypothesis Actuality cannot be dropped (the one-object
+models in which every truth is ND-necessary but Actuality fails), and
+the converse fails: the two-object retract full model has Strong
+Actuality but not Two-hat necessity implies ND-necessity.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 14 Oct</strong> — Cian Dorr, argument of 14 October 2026, communicated in conversation with Claude Fable 5.1 (Anthropic) and checked there (transcript in the private notes).</li>
-<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne, and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D, Propositions D1 and D19.</li>
+<li><strong>Dorr 14 Oct</strong> — Cian Dorr, argument of 14 October
+2026, communicated in conversation with Claude Fable 5.1 (Anthropic) and
+checked there (transcript in the private notes).</li>
+<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne,
+and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D,
+Propositions D1 and D19.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/actuality-and-two-hat-implies-nd-imply-strong-actuality.yaml</code>
+Record:
+<code>topics/classicism/results/actuality-and-two-hat-implies-nd-imply-strong-actuality.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Propositions D1, D14, D19. Necessity of distinctness for NKJ operators, NKJ for the hat of an NK operator, and BF for the hat of an NKJ operator; the last needs Actuality only at the evaluation world.</li>
+<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John
+Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility.
+Oxford University Press. Appendix D, Narrower Modalities in Higher-Order
+S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May
+2024. Its background logic HS4 (a primitive S4 operator over
+higher-order logic) is read into C by interpreting the primitive box as
+<span class="math inline">\lambda p\, .\,p=\top</span>, under which
+every theorem of HS4 is a theorem of C. — Propositions D1, D14, D19.
+Necessity of distinctness for NKJ operators, NKJ for the hat of an NK
+operator, and BF for the hat of an NKJ operator; the last needs
+Actuality only at the evaluation world.</li>
 </ul>
 </body></html>

@@ -323,31 +323,102 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Vicinity ∧ BF (type t) ⇒ 5-necessity implies two-hat necessity</h1></header><p class="cert">
-Result — Source: The Bounds of Possibility (2021); produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026, from Propositions D8 and D18 of The Bounds of Possibility, Appendix D; Vicinity in place of Actuality suggested by Christopher Sun; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
+Result — Source: The Bounds of Possibility (2021); produced by Claude
+Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026, from
+Propositions D8 and D18 of The Bounds of Possibility, Appendix D;
+Vicinity in place of Actuality suggested by Christopher Sun; recorded by
+Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Vicinity.</strong> There is a true proposition that entails the possibility of each true proposition.</li>
-<li><strong>BF (type t).</strong> If every proposition necessarily has a property, then necessarily every proposition has it.</li>
+<li><strong>Vicinity.</strong> There is a true proposition that entails
+the possibility of each true proposition.</li>
+<li><strong>BF (type t).</strong> If every proposition necessarily has a
+property, then necessarily every proposition has it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>5-necessity implies two-hat necessity.</strong> Whatever is 5-necessary is two-hat necessary.</li>
+<li><strong>5-necessity implies two-hat necessity.</strong> Whatever is
+5-necessary is two-hat necessary.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">w</span> witness Vicinity: <span class="math inline">w</span> is true and <span class="math inline">\forall t(t\to\Box(w\to\Diamond t))</span>. First, <span class="math inline">\Box_{\ne}p\leftrightarrow\Box(\Diamond w\to p)</span> for every <span class="math inline">p</span>: right to left take <span class="math inline">q:=w</span> in the definition of <span class="math inline">\Box_{\ne}</span>; left to right, if <span class="math inline">q</span> is true with <span class="math inline">\Box(\Diamond q\to p)</span>, Vicinity gives <span class="math inline">\Box(w\to\Diamond q)</span>, so <span class="math inline">\Box(\Diamond w\to\Diamond q)</span> by S4 and <span class="math inline">\Box(\Diamond w\to p)</span>. (Equivalently, by the ND-necessity form of Vicinity, <span class="math inline">w</span> entails every ND-necessary truth, and <span class="math inline">\Diamond r</span> is ND-necessary for true <span class="math inline">r</span>; this is Proposition D18 of The Bounds of Possibility for <span class="math inline">X=\Box</span>, with the Vicinity witness in place of the atom.) Second, B for <span class="math inline">\Box_{\ne}</span> at every true <span class="math inline">p</span>: <span class="math inline">\hat\Diamond p=\forall r(r\to\Diamond(\Diamond r\wedge p))</span>, so by the first step it suffices to show <span class="math inline">\Box(\Diamond w\to\forall r(r\to\Diamond(\Diamond r\wedge p)))</span>, and by BF at type <span class="math inline">t</span> (with CBF) it suffices to show <span class="math inline">\Box(\Diamond w\wedge r\to\Diamond(\Diamond r\wedge p))</span> for each <span class="math inline">r</span>. If <span class="math inline">\Box\neg r</span> this is vacuous. Otherwise <span class="math inline">\Diamond r\wedge p</span> is true, so Vicinity gives <span class="math inline">\Box(w\to\Diamond(\Diamond r\wedge p))</span>, hence <span class="math inline">\Box(\Diamond w\to\Diamond(\Diamond r\wedge p))</span> by S4. Third, B for <span class="math inline">\Box_{\ne}</span> at every true <span class="math inline">q</span> gives <span class="math inline">\Box(\Diamond w\to\hat\Diamond q)</span>, hence the characterization <span class="math inline">\hat{\hat\Box}p\leftrightarrow\Box(\hat\Diamond w\to p)</span> (right to left is trivial, as <span class="math inline">w</span> is true). Fourth, BF at type <span class="math inline">t</span> applied to <span class="math inline">\lambda z\, .\,\hat\Diamond w\to Yz</span> turns <span class="math inline">\forall z\,\Box(\hat\Diamond w\to Yz)</span> into <span class="math inline">\Box(\hat\Diamond w\to\forall z\,Yz)</span>: <span class="math inline">\hat{\hat\Box}</span> satisfies BF at type <span class="math inline">t</span> at the actual world. Finally relativize as in Proposition D8: with <span class="math inline">C</span> the true closed sentence that <span class="math inline">\hat{\hat\Box}</span> is NKJF<span class="math inline">_{\langle\rangle}</span>, the operator <span class="math inline">\lambda p\, .\,C\to\hat{\hat\Box}p</span> is coextensive with <span class="math inline">\hat{\hat\Box}</span> and necessarily NKJF<span class="math inline">_{\langle\rangle}</span>, so <span class="math inline">\Box_5p\to\hat{\hat\Box}p</span>.</p>
+<p>Let <span class="math inline">w</span> witness Vicinity: <span
+class="math inline">w</span> is true and <span
+class="math inline">\forall t(t\to\Box(w\to\Diamond t))</span>. First,
+<span class="math inline">\Box_{\ne}p\leftrightarrow\Box(\Diamond w\to
+p)</span> for every <span class="math inline">p</span>: right to left
+take <span class="math inline">q:=w</span> in the definition of <span
+class="math inline">\Box_{\ne}</span>; left to right, if <span
+class="math inline">q</span> is true with <span
+class="math inline">\Box(\Diamond q\to p)</span>, Vicinity gives <span
+class="math inline">\Box(w\to\Diamond q)</span>, so <span
+class="math inline">\Box(\Diamond w\to\Diamond q)</span> by S4 and <span
+class="math inline">\Box(\Diamond w\to p)</span>. (Equivalently, by the
+ND-necessity form of Vicinity, <span class="math inline">w</span>
+entails every ND-necessary truth, and <span class="math inline">\Diamond
+r</span> is ND-necessary for true <span class="math inline">r</span>;
+this is Proposition D18 of The Bounds of Possibility for <span
+class="math inline">X=\Box</span>, with the Vicinity witness in place of
+the atom.) Second, B for <span class="math inline">\Box_{\ne}</span> at
+every true <span class="math inline">p</span>: <span
+class="math inline">\hat\Diamond p=\forall r(r\to\Diamond(\Diamond
+r\wedge p))</span>, so by the first step it suffices to show <span
+class="math inline">\Box(\Diamond w\to\forall r(r\to\Diamond(\Diamond
+r\wedge p)))</span>, and by BF at type <span
+class="math inline">t</span> (with CBF) it suffices to show <span
+class="math inline">\Box(\Diamond w\wedge r\to\Diamond(\Diamond r\wedge
+p))</span> for each <span class="math inline">r</span>. If <span
+class="math inline">\Box\neg r</span> this is vacuous. Otherwise <span
+class="math inline">\Diamond r\wedge p</span> is true, so Vicinity gives
+<span class="math inline">\Box(w\to\Diamond(\Diamond r\wedge p))</span>,
+hence <span class="math inline">\Box(\Diamond w\to\Diamond(\Diamond
+r\wedge p))</span> by S4. Third, B for <span
+class="math inline">\Box_{\ne}</span> at every true <span
+class="math inline">q</span> gives <span
+class="math inline">\Box(\Diamond w\to\hat\Diamond q)</span>, hence the
+characterization <span
+class="math inline">\hat{\hat\Box}p\leftrightarrow\Box(\hat\Diamond w\to
+p)</span> (right to left is trivial, as <span
+class="math inline">w</span> is true). Fourth, BF at type <span
+class="math inline">t</span> applied to <span
+class="math inline">\lambda z\, .\,\hat\Diamond w\to Yz</span> turns
+<span class="math inline">\forall z\,\Box(\hat\Diamond w\to Yz)</span>
+into <span class="math inline">\Box(\hat\Diamond w\to\forall
+z\,Yz)</span>: <span class="math inline">\hat{\hat\Box}</span> satisfies
+BF at type <span class="math inline">t</span> at the actual world.
+Finally relativize as in Proposition D8: with <span
+class="math inline">C</span> the true closed sentence that <span
+class="math inline">\hat{\hat\Box}</span> is NKJF<span
+class="math inline">_{\langle\rangle}</span>, the operator <span
+class="math inline">\lambda p\, .\,C\to\hat{\hat\Box}p</span> is
+coextensive with <span class="math inline">\hat{\hat\Box}</span> and
+necessarily NKJF<span class="math inline">_{\langle\rangle}</span>, so
+<span class="math inline">\Box_5p\to\hat{\hat\Box}p</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>Vicinity alone is not known to suffice; see the conjecture. With Actuality in place of Vicinity the result holds without BF.</p>
+<p>Vicinity alone is not known to suffice; see the conjecture. With
+Actuality in place of Vicinity the result holds without BF.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne, and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D, Propositions D8 and D18.</li>
-<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1 (Anthropic), conversation of 14 October 2026 (transcript in the private notes).</li>
+<li><strong>Bounds of Possibility</strong> — Cian Dorr, John Hawthorne,
+and Juhani Yli-Vakkuri, The Bounds of Possibility, Appendix D,
+Propositions D8 and D18.</li>
+<li><strong>Dorr–Claude 14 Oct</strong> — Cian Dorr and Claude Fable 5.1
+(Anthropic), conversation of 14 October 2026 (transcript in the private
+notes).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/vicinity-and-barcan-t-imply-five-implies-two-hat.yaml</code>
+Record:
+<code>topics/classicism/results/vicinity-and-barcan-t-imply-five-implies-two-hat.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Propositions D8, D18</li>
+<li><strong>Proof: The Bounds of Possibility.</strong> Dorr, Cian, John
+Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility.
+Oxford University Press. Appendix D, Narrower Modalities in Higher-Order
+S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May
+2024. Its background logic HS4 (a primitive S4 operator over
+higher-order logic) is read into C by interpreting the primitive box as
+<span class="math inline">\lambda p\, .\,p=\top</span>, under which
+every theorem of HS4 is a theorem of C. — Propositions D8, D18</li>
 </ul>
 </body></html>

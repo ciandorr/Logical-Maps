@@ -323,33 +323,82 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality ⇒ Weakly Inextensible Comprehension</h1></header><p class="cert">
-Result — Source: Classicism (2024), Lean <code>Classicism.Map.actuality_implies_weakly_inextensible_comprehension_r</code>; produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), prompted by Cian Dorr, 17 September 2026; conclusion corrected by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 September 2026.
+Result — Source: Classicism (2024), Lean
+<code>Classicism.Map.actuality_implies_weakly_inextensible_comprehension_r</code>;
+produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex
+(GPT-6), prompted by Cian Dorr, 17 September 2026; conclusion corrected
+by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 September
+2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Weakly Inextensible Comprehension.</strong> Every relation, including a proposition, is coextensive with a weakly inextensible one.</li>
+<li><strong>Weakly Inextensible Comprehension.</strong> Every relation,
+including a proposition, is coextensive with a weakly inextensible
+one.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">w</span> witness Actuality and put <span class="math inline">Y:=\lambda\bar z\, .\,w\land X[\bar z]</span>. Since <span class="math inline">w</span> is true, <span class="math inline">Y</span> is coextensive with <span class="math inline">X</span>. For weak inextensibility, suppose <span class="math inline">\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar z]</span>. By T, <span class="math inline">\forall\bar z\, .\,w\land X[\bar z]\to Z[\bar z]</span> is true, so <span class="math inline">w</span> entails it: <span class="math inline">\Box(w\to\forall\bar z\, .\,w\land X[\bar z]\to Z[\bar z])</span>. The formula in the box is H-equivalent to <span class="math inline">\forall\bar z\, .\,w\land X[\bar z]\to Z[\bar z]</span>, so by Logical Equivalence they are the same proposition, and <span class="math inline">\Box\forall\bar z\, .\,Y[\bar z]\to Z[\bar z]</span>, which is <span class="math inline">Y\le Z</span>. The box in the antecedent is not used: every relation that actually includes <span class="math inline">Y</span> is entailed by <span class="math inline">Y</span>.</p>
+<p>Let <span class="math inline">w</span> witness Actuality and put
+<span class="math inline">Y:=\lambda\bar z\, .\,w\land X[\bar z]</span>.
+Since <span class="math inline">w</span> is true, <span
+class="math inline">Y</span> is coextensive with <span
+class="math inline">X</span>. For weak inextensibility, suppose <span
+class="math inline">\forall\bar z\, .\,Y[\bar z]\to\Box Z[\bar
+z]</span>. By T, <span class="math inline">\forall\bar z\, .\,w\land
+X[\bar z]\to Z[\bar z]</span> is true, so <span
+class="math inline">w</span> entails it: <span
+class="math inline">\Box(w\to\forall\bar z\, .\,w\land X[\bar z]\to
+Z[\bar z])</span>. The formula in the box is H-equivalent to <span
+class="math inline">\forall\bar z\, .\,w\land X[\bar z]\to Z[\bar
+z]</span>, so by Logical Equivalence they are the same proposition, and
+<span class="math inline">\Box\forall\bar z\, .\,Y[\bar z]\to Z[\bar
+z]</span>, which is <span class="math inline">Y\le Z</span>. The box in
+the antecedent is not used: every relation that actually includes <span
+class="math inline">Y</span> is entailed by <span
+class="math inline">Y</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>The argument establishes weak inextensibility at the world of evaluation only. It does not give Inextensible Comprehension, whose witness must be weakly inextensible at every world: at a world where <span class="math inline">w</span> is false but still possible, <span class="math inline">\lambda\bar z\, .\,w\land X[\bar z]</span> has no instances, so inextensibility there would need it to entail <span class="math inline">\bot</span>, which fails whenever <span class="math inline">w\land\exists\bar z\, .\,X[\bar z]</span> is possible there. Under C5 the gap closes by Proposition 2.10, and it also closes under Distinctness-preserving collapse; see the recorded results. Whether Actuality alone implies Inextensible Comprehension is open.</p>
+<p>The argument establishes weak inextensibility at the world of
+evaluation only. It does not give Inextensible Comprehension, whose
+witness must be weakly inextensible at every world: at a world where
+<span class="math inline">w</span> is false but still possible, <span
+class="math inline">\lambda\bar z\, .\,w\land X[\bar z]</span> has no
+instances, so inextensibility there would need it to entail <span
+class="math inline">\bot</span>, which fails whenever <span
+class="math inline">w\land\exists\bar z\, .\,X[\bar z]</span> is
+possible there. Under C5 the gap closes by Proposition 2.10, and it also
+closes under Distinctness-preserving collapse; see the recorded results.
+Whether Actuality alone implies Inextensible Comprehension is open.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-09-25</strong> (Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction) — Corrected the conclusion from Inextensible Comprehension to Weakly Inextensible Comprehension, which is what the recorded argument proves; the record was previously filed as actuality-implies-inextensible-comprehension-r. Rewrote the proof to make the single step explicit and noted why the boxed principle does not follow from it.</li>
+<li><strong>2026-09-25</strong> (Claude Fable 5.1 (Anthropic), at Cian
+Dorr’s direction) — Corrected the conclusion from Inextensible
+Comprehension to Weakly Inextensible Comprehension, which is what the
+recorded argument proves; the record was previously filed as
+actuality-implies-inextensible-comprehension-r. Rewrote the proof to
+make the single step explicit and noted why the boxed principle does not
+follow from it.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.3, n. 38, p. 29.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §2.3, n. 38, p. 29.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/actuality-implies-weakly-inextensible-comprehension-r.yaml</code>
+Record:
+<code>topics/classicism/results/actuality-implies-weakly-inextensible-comprehension-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.3, n. 38, p. 29</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.3,
+n. 38, p. 29</li>
 </ul>
 </body></html>

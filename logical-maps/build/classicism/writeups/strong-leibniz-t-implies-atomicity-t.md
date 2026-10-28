@@ -14,6 +14,14 @@
 
 A strong world proposition is an atom: from $\Box\forall q\, .\,w\le q\lor w\le\neg q$, T gives $\forall q\, .\,w\le q\lor w\le\neg q$, and with $w\ne\bot$ this is $\operatorname{Atom}_t(w)$. A possible $p$ is a non-bottom $p$. So the strong world below $p$ is an atom below it.
 
+## Notes
+
+The Strong Leibniz Biconditionals (type t) are equivalent to Atomicity (type t) together with [[atoms-are-strong-worlds-t]]; see [[strong-leibniz-t-implies-atoms-are-strong-worlds-t]].
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Philosophical Introduction to HOL** — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, p. 170.

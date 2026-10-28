@@ -323,30 +323,63 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Tame Rigidity ∧ BF ⇒ □BF</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.tame_rigidity_and_barcan_imply_necessary_barcan</code>; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 3 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 3 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.tame_rigidity_and_barcan_imply_necessary_barcan</code>;
+produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 3
+October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian
+Dorr, 3 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Tame Rigidity.</strong> Every weakly rigid relation, including a proposition, is rigid.</li>
-<li><strong>BF.</strong> The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
+<li><strong>Tame Rigidity.</strong> Every weakly rigid relation,
+including a proposition, is rigid.</li>
+<li><strong>BF.</strong> The Barcan Formula at every type. The predicate
+formulation closes the formula schema using lambda abstraction.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
+<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every
+type. The predicate formulation closes the formula schema using lambda
+abstraction.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Apply Tame Rigidity at the type tuple <span class="math inline">\bar\sigma</span> to <span class="math inline">Y:=\lambda\bar x\, .\,\top</span>. <span class="math inline">\operatorname{Persistent}(Y)</span> is <span class="math inline">Y\le\lambda\bar x\, .\,\Box\top</span>, a theorem. Since <span class="math inline">Y\le X</span> is <span class="math inline">\Box\forall\bar x\, .\,X[\bar x]</span>, <span class="math inline">\operatorname{WeaklyInextensible}(Y)</span> unfolds to <span class="math inline">\forall X\, .\, (\forall\bar x\, .\,\Box X[\bar x])\to\Box\forall\bar x\, .\,X[\bar x]</span>, which is BF at <span class="math inline">\bar\sigma</span>, and <span class="math inline">\operatorname{Inextensible}(Y)</span> is its necessitation. So BF makes <span class="math inline">Y</span> weakly rigid, Tame Rigidity makes it rigid, and its inextensibility is <span class="math inline">\Box</span>BF at <span class="math inline">\bar\sigma</span>. This for every type tuple gives the result.</p>
+<p>Apply Tame Rigidity at the type tuple <span
+class="math inline">\bar\sigma</span> to <span
+class="math inline">Y:=\lambda\bar x\, .\,\top</span>. <span
+class="math inline">\operatorname{Persistent}(Y)</span> is <span
+class="math inline">Y\le\lambda\bar x\, .\,\Box\top</span>, a theorem.
+Since <span class="math inline">Y\le X</span> is <span
+class="math inline">\Box\forall\bar x\, .\,X[\bar x]</span>, <span
+class="math inline">\operatorname{WeaklyInextensible}(Y)</span> unfolds
+to <span class="math inline">\forall X\, .\, (\forall\bar x\, .\,\Box
+X[\bar x])\to\Box\forall\bar x\, .\,X[\bar x]</span>, which is BF at
+<span class="math inline">\bar\sigma</span>, and <span
+class="math inline">\operatorname{Inextensible}(Y)</span> is its
+necessitation. So BF makes <span class="math inline">Y</span> weakly
+rigid, Tame Rigidity makes it rigid, and its inextensibility is <span
+class="math inline">\Box</span>BF at <span
+class="math inline">\bar\sigma</span>. This for every type tuple gives
+the result.</p>
 <h2 id="notes">Notes</h2>
-<p>Tame Rigidity applied to the top relation: weak inextensibility of <span class="math inline">\top</span> is BF and its inextensibility is <span class="math inline">\Box</span>BF. With it the map derives the failure of Tame Rigidity in finite-support-two-object-all-maps, where BF holds and <span class="math inline">\Box</span>BF fails.</p>
+<p>Tame Rigidity applied to the top relation: weak inextensibility of
+<span class="math inline">\top</span> is BF and its inextensibility is
+<span class="math inline">\Box</span>BF. With it the map derives the
+failure of Tame Rigidity in finite-support-two-object-all-maps, where BF
+holds and <span class="math inline">\Box</span>BF fails.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Fable 3 Oct</strong> — Claude Fable 5.1 (Anthropic), Classicism session of 3 October 2026, answering Cian Dorr’s question about Tame Rigidity in the coalesced roots.</li>
+<li><strong>Fable 3 Oct</strong> — Claude Fable 5.1 (Anthropic),
+Classicism session of 3 October 2026, answering Cian Dorr’s question
+about Tame Rigidity in the coalesced roots.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/tame-rigidity-and-barcan-imply-necessary-barcan.yaml</code>
+Record:
+<code>topics/classicism/results/tame-rigidity-and-barcan-imply-necessary-barcan.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Possible Worlds Without Atomicity.</strong> Sun, Christopher. Possible Worlds Without Atomicity. Unpublished draft, September 2026.. Tame Rigidity.</li>
+<li><strong>Background: Possible Worlds Without Atomicity.</strong> Sun,
+Christopher. Possible Worlds Without Atomicity. Unpublished draft,
+September 2026.. Tame Rigidity.</li>
 </ul>
 </body></html>

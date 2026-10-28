@@ -323,26 +323,52 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□Relational Choice ∧ Intensional Choice ⇒ Modalized Relational Choice</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.necessary_relational_choice_and_intensional_choice_imply_modalized_relational_choice</code>; produced by Cian Dorr, 11 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 11 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.necessary_relational_choice_and_intensional_choice_imply_modalized_relational_choice</code>;
+produced by Cian Dorr, 11 October 2026; recorded by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 11 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>□Relational Choice.</strong> Necessarily, every serial binary relation has a functional subrelation.</li>
-<li><strong>Intensional Choice.</strong> If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
+<li><strong>□Relational Choice.</strong> Necessarily, every serial
+binary relation has a functional subrelation.</li>
+<li><strong>Intensional Choice.</strong> If a property is necessarily
+instantiated, then some property entailing it is necessarily uniquely
+instantiated.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Modalized Relational Choice.</strong> Every necessarily serial relation is entailed by a necessarily functional relation.</li>
+<li><strong>Modalized Relational Choice.</strong> Every necessarily
+serial relation is entailed by a necessarily functional relation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">R^{\sigma\tau t}</span> be necessarily serial and <span class="math inline">F:=\lambda Z\,.\,\operatorname{Functional}(Z)\land\forall xy\,.\,(Zx)y\to(Rx)y</span>. By □Relational Choice, necessarily some <span class="math inline">Z</span> has <span class="math inline">FZ</span>. Intensional Choice at <span class="math inline">\sigma\tau t</span> gives <span class="math inline">G\le F</span> that is necessarily uniquely instantiated. Then <span class="math inline">S:=\lambda xy\,.\,\exists Z\,.\,GZ\land(Zx)y</span> is necessarily functional, since at each world it is coextensive with the unique instance of <span class="math inline">G</span>, a functional relation; and <span class="math inline">S\le R</span>, since <span class="math inline">G\le F</span>.</p>
+<p>Let <span class="math inline">R^{\sigma\tau t}</span> be necessarily
+serial and <span class="math inline">F:=\lambda
+Z\,.\,\operatorname{Functional}(Z)\land\forall
+xy\,.\,(Zx)y\to(Rx)y</span>. By □Relational Choice, necessarily some
+<span class="math inline">Z</span> has <span
+class="math inline">FZ</span>. Intensional Choice at <span
+class="math inline">\sigma\tau t</span> gives <span
+class="math inline">G\le F</span> that is necessarily uniquely
+instantiated. Then <span class="math inline">S:=\lambda xy\,.\,\exists
+Z\,.\,GZ\land(Zx)y</span> is necessarily functional, since at each world
+it is coextensive with the unique instance of <span
+class="math inline">G</span>, a functional relation; and <span
+class="math inline">S\le R</span>, since <span class="math inline">G\le
+F</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>With unboxed Relational Choice the argument fails: <span class="math inline">F</span> is then instantiated only at the evaluation point, while Intensional Choice needs it necessarily instantiated. Whether Relational Choice with Intensional Choice implies Modalized Relational Choice is open.</p>
+<p>With unboxed Relational Choice the argument fails: <span
+class="math inline">F</span> is then instantiated only at the evaluation
+point, while Intensional Choice needs it necessarily instantiated.
+Whether Relational Choice with Intensional Choice implies Modalized
+Relational Choice is open.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October 2026.</li>
+<li><strong>Dorr 11 Oct</strong> — Cian Dorr, suggestion of 11 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/necessary-relational-choice-and-intensional-choice-imply-modalized-relational-choice.yaml</code>
+Record:
+<code>topics/classicism/results/necessary-relational-choice-and-intensional-choice-imply-modalized-relational-choice.yaml</code>
 </p>
 </body></html>

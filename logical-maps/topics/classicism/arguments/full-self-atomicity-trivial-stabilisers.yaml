@@ -1,0 +1,16 @@
+id: full-self-atomicity-trivial-stabilisers
+requires:
+- full-model
+- trivial-left-stabilisers-everywhere
+holds:
+- necessary-self-atomicity-r
+- necessary-atoms-are-self-atoms-r
+choice: free
+by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+date: '2026-10-25'
+text: 'In a full model the atoms of a relational type at an object are the singleton intensions $\{\langle
+  k,\bar a\rangle\}$, with $k$ an arrow out of it. Such a singleton is instantiated only at $k$, and its
+  transport along $k$ is $\{\langle m,\bar a\rangle : m\circ k=k\}$, which is the atom $\{\langle 1,\bar
+  a\rangle\}$ at $k$’s target when only the identity fixes $k$. So every atom is a self-atom, and the
+  atom below a non-bottom entity, which the full model supplies, is a self-atom below it. The same holds
+  at every reachable object, so both principles are necessary.'

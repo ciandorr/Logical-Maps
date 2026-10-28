@@ -322,37 +322,100 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Maximalism (pure) and Atomicity (type t) are incompatible</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22–23 October 2026: the splitting sentence, Atomicity’s refutation of it, and its non-refutability via a full Boolean-valued model over the rigid Jech–Shelah algebra. Rewritten for the map, with a simpler coding of the algebra (third-order arithmetic in place of hereditarily small sets) and a direct definition of the splitter, by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026.</p>
-<p><strong>Claim.</strong> C + Maximalism (pure) + Atomicity (type <span class="math inline">t</span>) is inconsistent.</p>
-<p><strong>Overview.</strong> For a closed term <span class="math inline">F</span> of type <span class="math inline">tt</span> put</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Maximalism (pure) and Atomicity (type t) are incompatible</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22–23
+October 2026: the splitting sentence, Atomicity’s refutation of it, and
+its non-refutability via a full Boolean-valued model over the rigid
+Jech–Shelah algebra. Rewritten for the map, with a simpler coding of the
+algebra (third-order arithmetic in place of hereditarily small sets) and
+a direct definition of the splitter, by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 24 October 2026.</p>
+<p><strong>Claim.</strong> C + Maximalism (pure) + Atomicity (type <span
+class="math inline">t</span>) is inconsistent.</p>
+<p><strong>Overview.</strong> For a closed term <span
+class="math inline">F</span> of type <span class="math inline">tt</span>
+put</p>
 <p><span class="math display">
-S_F:=\forall p\, .\,p\ne\bot\to\bigl(p\land Fp\ne\bot\ \land\ p\land\neg Fp\ne\bot\bigr),
+S_F:=\forall p\, .\,p\ne\bot\to\bigl(p\land Fp\ne\bot\ \land\ p\land\neg
+Fp\ne\bot\bigr),
 </span></p>
-<p>“<span class="math inline">F</span> splits every non-bottom proposition”. Lemma 1 shows that C + Atomicity<span class="math inline">(t)</span> proves <span class="math inline">S_F=\bot</span>, for <em>every</em> closed <span class="math inline">F</span>: an atom below <span class="math inline">S_F</span> could not be split. It remains to find a closed <strong>pure</strong> <span class="math inline">F</span> with <span class="math inline">C\nvdash S_F=\bot</span>; then Maximalism (pure) gives <span class="math inline">S_F\ne\bot</span>. We obtain <span class="math inline">F</span> from a full Boolean-valued model of C over a complete Boolean algebra <span class="math inline">B</span> that is rigid and has an explicit, arithmetically definable presentation: the algebra of Jech and Shelah. Full higher-order logic over <span class="math inline">B</span> interprets third-order arithmetic, and in third-order arithmetic one can define the Jech–Shelah algebra together with a canonical splitter of each non-zero element. Rigidity makes the isomorphism between <span class="math inline">B</span> and this arithmetically defined copy unique, so the splitter is pure-definable over <span class="math inline">B</span> itself.</p>
-<p>Notation is that of Background. In particular <span class="math inline">\Box p:=(p=\top)</span>, <span class="math inline">\Diamond p:=(p\ne\bot)</span>, and at type <span class="math inline">t</span>, <span class="math inline">x\le y</span> is <span class="math inline">y=x\lor y</span>, which C proves equivalent to <span class="math inline">\Box(x\to y)</span>.</p>
-<h2 id="atomicity-refutes-every-splitter">1. Atomicity refutes every splitter</h2>
-<p>The following theorems of C are used: (C1) if <span class="math inline">\vdash A</span> then <span class="math inline">\vdash\Box A</span>, and <span class="math inline">\vdash\Box(A\to B)\to\Box A\to\Box B</span>; (C2) <span class="math inline">\vdash a=b\to\Box\,a=b</span>, hence <span class="math inline">\vdash\Diamond(a\ne b)\to a\ne b</span>; (C3) <span class="math inline">\vdash x\le y\leftrightarrow\Box(x\to y)</span>, <span class="math inline">\vdash x\le\neg x\leftrightarrow x=\bot</span>, and <span class="math inline">\vdash x\to x\ne\bot</span>, for <span class="math inline">x,y</span> of type <span class="math inline">t</span>.</p>
-<p><strong>Lemma 1.</strong> For every closed term <span class="math inline">F^{tt}</span>, C + Atomicity<span class="math inline">(t)</span> <span class="math inline">\vdash S_F=\bot</span>.</p>
-<p><em>Proof.</em> Suppose <span class="math inline">S_F\ne\bot</span>. Then <span class="math inline">\neg(S_F\le\neg S_F)</span> by (C3), so the instance of Atomicity<span class="math inline">(t)</span> at <span class="math inline">p:=S_F</span> gives <span class="math inline">w</span> with</p>
+<p>“<span class="math inline">F</span> splits every non-bottom
+proposition”. Lemma 1 shows that C + Atomicity<span
+class="math inline">(t)</span> proves <span
+class="math inline">S_F=\bot</span>, for <em>every</em> closed <span
+class="math inline">F</span>: an atom below <span
+class="math inline">S_F</span> could not be split. It remains to find a
+closed <strong>pure</strong> <span class="math inline">F</span> with
+<span class="math inline">C\nvdash S_F=\bot</span>; then Maximalism
+(pure) gives <span class="math inline">S_F\ne\bot</span>. We obtain
+<span class="math inline">F</span> from a full Boolean-valued model of C
+over a complete Boolean algebra <span class="math inline">B</span> that
+is rigid and has an explicit, arithmetically definable presentation: the
+algebra of Jech and Shelah. Full higher-order logic over <span
+class="math inline">B</span> interprets third-order arithmetic, and in
+third-order arithmetic one can define the Jech–Shelah algebra together
+with a canonical splitter of each non-zero element. Rigidity makes the
+isomorphism between <span class="math inline">B</span> and this
+arithmetically defined copy unique, so the splitter is pure-definable
+over <span class="math inline">B</span> itself.</p>
+<p>Notation is that of Background. In particular <span
+class="math inline">\Box p:=(p=\top)</span>, <span
+class="math inline">\Diamond p:=(p\ne\bot)</span>, and at type <span
+class="math inline">t</span>, <span class="math inline">x\le y</span> is
+<span class="math inline">y=x\lor y</span>, which C proves equivalent to
+<span class="math inline">\Box(x\to y)</span>.</p>
+<h2 id="atomicity-refutes-every-splitter">1. Atomicity refutes every
+splitter</h2>
+<p>The following theorems of C are used: (C1) if <span
+class="math inline">\vdash A</span> then <span
+class="math inline">\vdash\Box A</span>, and <span
+class="math inline">\vdash\Box(A\to B)\to\Box A\to\Box B</span>; (C2)
+<span class="math inline">\vdash a=b\to\Box\,a=b</span>, hence <span
+class="math inline">\vdash\Diamond(a\ne b)\to a\ne b</span>; (C3) <span
+class="math inline">\vdash x\le y\leftrightarrow\Box(x\to y)</span>,
+<span class="math inline">\vdash x\le\neg x\leftrightarrow
+x=\bot</span>, and <span class="math inline">\vdash x\to
+x\ne\bot</span>, for <span class="math inline">x,y</span> of type <span
+class="math inline">t</span>.</p>
+<p><strong>Lemma 1.</strong> For every closed term <span
+class="math inline">F^{tt}</span>, C + Atomicity<span
+class="math inline">(t)</span> <span class="math inline">\vdash
+S_F=\bot</span>.</p>
+<p><em>Proof.</em> Suppose <span class="math inline">S_F\ne\bot</span>.
+Then <span class="math inline">\neg(S_F\le\neg S_F)</span> by (C3), so
+the instance of Atomicity<span class="math inline">(t)</span> at <span
+class="math inline">p:=S_F</span> gives <span
+class="math inline">w</span> with</p>
 <p><span class="math display">
 \operatorname{Atom}_t(w)\land w\le S_F. \tag{1}
 </span></p>
-<p>The instances <span class="math inline">z:=\bot</span> and <span class="math inline">z:=w\land Fw</span> of <span class="math inline">\operatorname{Atom}_t(w)</span> are</p>
+<p>The instances <span class="math inline">z:=\bot</span> and <span
+class="math inline">z:=w\land Fw</span> of <span
+class="math inline">\operatorname{Atom}_t(w)</span> are</p>
 <p><span class="math display">
 (\bot\le w\land\bot\ne w)\leftrightarrow\bot\le\neg\bot,\qquad
-(w\land Fw\le w\land w\land Fw\ne w)\leftrightarrow w\land Fw\le\neg(w\land Fw).
+(w\land Fw\le w\land w\land Fw\ne w)\leftrightarrow w\land
+Fw\le\neg(w\land Fw).
 </span></p>
-<p>The first gives <span class="math inline">w\ne\bot</span>, that is,</p>
+<p>The first gives <span class="math inline">w\ne\bot</span>, that
+is,</p>
 <p><span class="math display">
 \Diamond w. \tag{2}
 </span></p>
-<p>By the second, either <span class="math inline">w\land Fw=w</span>, whence <span class="math inline">w\land\neg Fw=w\land Fw\land\neg Fw=\bot</span>, or <span class="math inline">w\land Fw\le\neg(w\land Fw)</span>, whence <span class="math inline">w\land Fw=\bot</span> by (C3):</p>
+<p>By the second, either <span class="math inline">w\land Fw=w</span>,
+whence <span class="math inline">w\land\neg Fw=w\land Fw\land\neg
+Fw=\bot</span>, or <span class="math inline">w\land Fw\le\neg(w\land
+Fw)</span>, whence <span class="math inline">w\land Fw=\bot</span> by
+(C3):</p>
 <p><span class="math display">
 w\land Fw=\bot\ \lor\ w\land\neg Fw=\bot. \tag{3}
 </span></p>
-<p>From (1) and (C3), <span class="math inline">\Box(w\to S_F)</span>. By (C1) applied to instantiation of the universal <span class="math inline">S_F</span> at <span class="math inline">w</span>, and to <span class="math inline">w\to w\ne\bot</span>,</p>
+<p>From (1) and (C3), <span class="math inline">\Box(w\to S_F)</span>.
+By (C1) applied to instantiation of the universal <span
+class="math inline">S_F</span> at <span class="math inline">w</span>,
+and to <span class="math inline">w\to w\ne\bot</span>,</p>
 <p><span class="math display">
-\Box\bigl(S_F\to(w\ne\bot\to(w\land Fw\ne\bot\land w\land\neg Fw\ne\bot))\bigr),\qquad
+\Box\bigl(S_F\to(w\ne\bot\to(w\land Fw\ne\bot\land w\land\neg
+Fw\ne\bot))\bigr),\qquad
 \Box(w\to w\ne\bot),
 </span></p>
 <p>so</p>
@@ -367,146 +430,492 @@ w\land Fw=\bot\ \lor\ w\land\neg Fw=\bot. \tag{3}
 <p><span class="math display">
 w\land Fw\ne\bot\ \land\ w\land\neg Fw\ne\bot,
 </span></p>
-<p>contradicting (3). Hence <span class="math inline">S_F=\bot</span>. <span class="math inline">\square</span></p>
-<p>Atomicity is used once, unboxed, as a premise; everything necessitated is a theorem of C.</p>
+<p>contradicting (3). Hence <span class="math inline">S_F=\bot</span>.
+<span class="math inline">\square</span></p>
+<p>Atomicity is used once, unboxed, as a premise; everything
+necessitated is a theorem of C.</p>
 <h2 id="full-boolean-valued-models">2. Full Boolean-valued models</h2>
-<p>Let <span class="math inline">B</span> be a complete Boolean algebra. The <strong>full model</strong> over <span class="math inline">B</span> has</p>
+<p>Let <span class="math inline">B</span> be a complete Boolean algebra.
+The <strong>full model</strong> over <span class="math inline">B</span>
+has</p>
 <p><span class="math display">
 D_e=\{*\},\qquad D_t=B,\qquad D_{\sigma\tau}=D_\tau^{D_\sigma},
 </span></p>
-<p>ordinary application and abstraction, Boolean operations for the connectives, meets and joins over <span class="math inline">D_\sigma</span> for <span class="math inline">\forall x^\sigma</span> and <span class="math inline">\exists x^\sigma</span>, and</p>
+<p>ordinary application and abstraction, Boolean operations for the
+connectives, meets and joins over <span
+class="math inline">D_\sigma</span> for <span
+class="math inline">\forall x^\sigma</span> and <span
+class="math inline">\exists x^\sigma</span>, and</p>
 <p><span class="math display">
-\llbracket a=b\rrbracket=\begin{cases}1&amp;\text{if }\llbracket a\rrbracket=\llbracket b\rrbracket,\\ 0&amp;\text{otherwise.}\end{cases}
+\llbracket a=b\rrbracket=\begin{cases}1&amp;\text{if }\llbracket
+a\rrbracket=\llbracket b\rrbracket,\\ 0&amp;\text{otherwise.}\end{cases}
 </span></p>
-<p><strong>Lemma 2 (soundness).</strong> Every theorem of C has value <span class="math inline">1</span> in the full model over <span class="math inline">B</span>, under every assignment.</p>
-<p>This is the standard verification (Bacon, <em>Could the truths of mathematics have been different?</em>, online appendix §B.2; see also <a href="full-boolean-valued-atom-and-atomless.html">the full Boolean-valued model</a>, §2, whose argument does not depend on the particular algebra). In brief: the axioms of H have value <span class="math inline">1</span> and its rules preserve value <span class="math inline">1</span>; and if <span class="math inline">A\leftrightarrow A&#39;</span> has value <span class="math inline">1</span> under every assignment, then <span class="math inline">\llbracket A\rrbracket=\llbracket A&#39;\rrbracket</span> under every assignment, so <span class="math inline">\lambda\bar x\, .\,A</span> and <span class="math inline">\lambda\bar x\, .\,A&#39;</span> denote the same function and Logical Equivalence holds.</p>
-<p>Call a formula an <strong>identity formula</strong> if it is built from identities <span class="math inline">a=b</span> (between arbitrary terms) by connectives and quantifiers. Let <span class="math inline">\mathfrak D</span> be the classical many-sorted structure with domains <span class="math inline">D_\sigma</span>, application, and identity.</p>
-<p><strong>Lemma 3.</strong> For an identity formula <span class="math inline">\varphi</span> and every assignment <span class="math inline">g</span>, <span class="math inline">\llbracket\varphi\rrbracket_g\in\{0,1\}</span>, and <span class="math inline">\llbracket\varphi\rrbracket_g=1</span> iff <span class="math inline">\mathfrak D\models\varphi[g]</span>.</p>
-<p><em>Proof.</em> Induction on <span class="math inline">\varphi</span>: identities have values in <span class="math inline">\{0,1\}</span>; Boolean operations on <span class="math inline">\{0,1\}</span> are the classical ones; a meet (join) of a family from <span class="math inline">\{0,1\}</span> is <span class="math inline">1</span> iff every (some) member is <span class="math inline">1</span>. <span class="math inline">\square</span></p>
-<p>For <span class="math inline">X</span> of type <span class="math inline">\sigma t</span> write</p>
+<p><strong>Lemma 2 (soundness).</strong> Every theorem of C has value
+<span class="math inline">1</span> in the full model over <span
+class="math inline">B</span>, under every assignment.</p>
+<p>This is the standard verification (Bacon, <em>Could the truths of
+mathematics have been different?</em>, online appendix §B.2; see also <a
+href="full-boolean-valued-atom-and-atomless.html">the full
+Boolean-valued model</a>, §2, whose argument does not depend on the
+particular algebra). In brief: the axioms of H have value <span
+class="math inline">1</span> and its rules preserve value <span
+class="math inline">1</span>; and if <span
+class="math inline">A\leftrightarrow A&#39;</span> has value <span
+class="math inline">1</span> under every assignment, then <span
+class="math inline">\llbracket A\rrbracket=\llbracket
+A&#39;\rrbracket</span> under every assignment, so <span
+class="math inline">\lambda\bar x\, .\,A</span> and <span
+class="math inline">\lambda\bar x\, .\,A&#39;</span> denote the same
+function and Logical Equivalence holds.</p>
+<p>Call a formula an <strong>identity formula</strong> if it is built
+from identities <span class="math inline">a=b</span> (between arbitrary
+terms) by connectives and quantifiers. Let <span
+class="math inline">\mathfrak D</span> be the classical many-sorted
+structure with domains <span class="math inline">D_\sigma</span>,
+application, and identity.</p>
+<p><strong>Lemma 3.</strong> For an identity formula <span
+class="math inline">\varphi</span> and every assignment <span
+class="math inline">g</span>, <span
+class="math inline">\llbracket\varphi\rrbracket_g\in\{0,1\}</span>, and
+<span class="math inline">\llbracket\varphi\rrbracket_g=1</span> iff
+<span class="math inline">\mathfrak D\models\varphi[g]</span>.</p>
+<p><em>Proof.</em> Induction on <span
+class="math inline">\varphi</span>: identities have values in <span
+class="math inline">\{0,1\}</span>; Boolean operations on <span
+class="math inline">\{0,1\}</span> are the classical ones; a meet (join)
+of a family from <span class="math inline">\{0,1\}</span> is <span
+class="math inline">1</span> iff every (some) member is <span
+class="math inline">1</span>. <span
+class="math inline">\square</span></p>
+<p>For <span class="math inline">X</span> of type <span
+class="math inline">\sigma t</span> write</p>
 <p><span class="math display">
-x\mathrel{\varepsilon}X\ :=\ Xx=\top,\qquad \operatorname{ext}(X):=\{d\in D_\sigma:X(d)=1\}.
+x\mathrel{\varepsilon}X\ :=\ Xx=\top,\qquad
+\operatorname{ext}(X):=\{d\in D_\sigma:X(d)=1\}.
 </span></p>
-<p>Every subset of <span class="math inline">D_\sigma</span> is <span class="math inline">\operatorname{ext}(X)</span> for some <span class="math inline">X\in D_{\sigma t}</span>, namely its <span class="math inline">\{0,1\}</span>-valued characteristic function. So, restricted to identity formulas, the full model is full classical higher-order logic over the set <span class="math inline">B</span>.</p>
+<p>Every subset of <span class="math inline">D_\sigma</span> is <span
+class="math inline">\operatorname{ext}(X)</span> for some <span
+class="math inline">X\in D_{\sigma t}</span>, namely its <span
+class="math inline">\{0,1\}</span>-valued characteristic function. So,
+restricted to identity formulas, the full model is full classical
+higher-order logic over the set <span class="math inline">B</span>.</p>
 <h2 id="the-jechshelah-algebra">3. The Jech–Shelah algebra</h2>
-<p>The following is from T. Jech and S. Shelah, “A complete Boolean algebra that has no proper atomless complete subalgebra”, <em>Journal of Algebra</em> 182 (1996), 748–755, pp. 749–750. Let</p>
+<p>The following is from T. Jech and S. Shelah, “A complete Boolean
+algebra that has no proper atomless complete subalgebra”, <em>Journal of
+Algebra</em> 182 (1996), 748–755, pp. 749–750. Let</p>
 <p><span class="math display">
 P_0=N_0=1,\qquad P_k=N_0\cdots N_{k-1},\qquad N_k=2^{P_k}\quad(k\ge1).
 </span></p>
-<p>The <strong>master tree</strong> <span class="math inline">\mathbb T\subseteq\omega^{&lt;\omega}</span> and the bijection <span class="math inline">\operatorname{ind}:\mathbb T\to\omega</span> are fixed by: <span class="math inline">\operatorname{ind}(\langle\rangle)=0</span>; <span class="math inline">\operatorname{ind}</span> enumerates <span class="math inline">\mathbb T</span> by length and, within a length, lexicographically; and the node <span class="math inline">s</span> with <span class="math inline">\operatorname{ind}(s)=k</span> has exactly the <span class="math inline">N_k</span> successors <span class="math inline">s^\frown i</span>, <span class="math inline">i&lt;N_k</span>. Write <span class="math inline">s_k</span> for the node with index <span class="math inline">k</span>. Both <span class="math inline">\mathbb T</span> and <span class="math inline">\operatorname{ind}</span> are recursive.</p>
-<p><span class="math inline">\mathbb P</span> is the set of non-empty, prefix-closed <span class="math inline">T\subseteq\mathbb T</span> such that</p>
+<p>The <strong>master tree</strong> <span class="math inline">\mathbb
+T\subseteq\omega^{&lt;\omega}</span> and the bijection <span
+class="math inline">\operatorname{ind}:\mathbb T\to\omega</span> are
+fixed by: <span
+class="math inline">\operatorname{ind}(\langle\rangle)=0</span>; <span
+class="math inline">\operatorname{ind}</span> enumerates <span
+class="math inline">\mathbb T</span> by length and, within a length,
+lexicographically; and the node <span class="math inline">s</span> with
+<span class="math inline">\operatorname{ind}(s)=k</span> has exactly the
+<span class="math inline">N_k</span> successors <span
+class="math inline">s^\frown i</span>, <span
+class="math inline">i&lt;N_k</span>. Write <span
+class="math inline">s_k</span> for the node with index <span
+class="math inline">k</span>. Both <span class="math inline">\mathbb
+T</span> and <span class="math inline">\operatorname{ind}</span> are
+recursive.</p>
+<p><span class="math inline">\mathbb P</span> is the set of non-empty,
+prefix-closed <span class="math inline">T\subseteq\mathbb T</span> such
+that</p>
 <p><span class="math display">
-\forall s\in T\ \forall m\ \exists t\in T\, .\ t\supsetneq s\ \land\ |\{i:t^\frown i\in T\}|\ge P_{\operatorname{ind}(t)}^m, \tag{4}
+\forall s\in T\ \forall m\ \exists t\in T\, .\ t\supsetneq s\ \land\
+|\{i:t^\frown i\in T\}|\ge P_{\operatorname{ind}(t)}^m, \tag{4}
 </span></p>
-<p>ordered by inclusion. For <span class="math inline">T\in\mathbb P</span> and <span class="math inline">a\in T</span> put <span class="math inline">(T)_a:=\{s\in T:s\subseteq a\lor a\subseteq s\}</span>; then <span class="math inline">(T)_a\in\mathbb P</span> and <span class="math inline">(T)_a\subseteq T</span>. By (4) every <span class="math inline">T\in\mathbb P</span> has nodes of every length.</p>
-<p><span class="math inline">\operatorname{RO}(\mathbb P)</span> is the set of <span class="math inline">U\subseteq\mathbb P</span> such that</p>
+<p>ordered by inclusion. For <span class="math inline">T\in\mathbb
+P</span> and <span class="math inline">a\in T</span> put <span
+class="math inline">(T)_a:=\{s\in T:s\subseteq a\lor a\subseteq
+s\}</span>; then <span class="math inline">(T)_a\in\mathbb P</span> and
+<span class="math inline">(T)_a\subseteq T</span>. By (4) every <span
+class="math inline">T\in\mathbb P</span> has nodes of every length.</p>
+<p><span class="math inline">\operatorname{RO}(\mathbb P)</span> is the
+set of <span class="math inline">U\subseteq\mathbb P</span> such
+that</p>
 <p><span class="math display">
 \begin{aligned}
-&amp;T\in U\land T&#39;\in\mathbb P\land T&#39;\subseteq T\ \Rightarrow\ T&#39;\in U,\\
-&amp;T\in\mathbb P\land\forall T&#39;\in\mathbb P\,(T&#39;\subseteq T\Rightarrow\exists T&#39;&#39;\in U\, .\,T&#39;&#39;\subseteq T&#39;)\ \Rightarrow\ T\in U,
+&amp;T\in U\land T&#39;\in\mathbb P\land T&#39;\subseteq T\ \Rightarrow\
+T&#39;\in U,\\
+&amp;T\in\mathbb P\land\forall T&#39;\in\mathbb P\,(T&#39;\subseteq
+T\Rightarrow\exists T&#39;&#39;\in U\, .\,T&#39;&#39;\subseteq T&#39;)\
+\Rightarrow\ T\in U,
 \end{aligned}
 </span></p>
-<p>ordered by inclusion. It is a complete Boolean algebra, Jech’s <span class="math inline">B(\mathbb P)</span>, in which <span class="math inline">U\land V=U\cap V</span>, <span class="math inline">0=\varnothing</span>, and <span class="math inline">U\le V</span> iff <span class="math inline">U\subseteq V</span> (see T. Jech, <em>Set Theory</em>, 3rd millennium ed., Springer 2003, Chapter 7 and §14).</p>
-<p><strong>Theorem (Jech–Shelah, p. 749; proof pp. 752–754).</strong> <span class="math inline">\operatorname{RO}(\mathbb P)</span> is rigid: its only automorphism is the identity.</p>
-<p>The proof is in ZFC. Nothing else from the paper is used: neither the minimality of the generic real nor the absence of proper atomless complete subalgebras.</p>
+<p>ordered by inclusion. It is a complete Boolean algebra, Jech’s <span
+class="math inline">B(\mathbb P)</span>, in which <span
+class="math inline">U\land V=U\cap V</span>, <span
+class="math inline">0=\varnothing</span>, and <span
+class="math inline">U\le V</span> iff <span
+class="math inline">U\subseteq V</span> (see T. Jech, <em>Set
+Theory</em>, 3rd millennium ed., Springer 2003, Chapter 7 and §14).</p>
+<p><strong>Theorem (Jech–Shelah, p. 749; proof pp. 752–754).</strong>
+<span class="math inline">\operatorname{RO}(\mathbb P)</span> is rigid:
+its only automorphism is the identity.</p>
+<p>The proof is in ZFC. Nothing else from the paper is used: neither the
+minimality of the generic real nor the absence of proper atomless
+complete subalgebras.</p>
 <p>For <span class="math inline">a\in\mathbb T</span> let</p>
 <p><span class="math display">
-\operatorname{Cyl}_a:=\{T\in\mathbb P:\text{every node of }T\text{ is }\subseteq\text{-comparable with }a\}.
+\operatorname{Cyl}_a:=\{T\in\mathbb P:\text{every node of }T\text{ is
+}\subseteq\text{-comparable with }a\}.
 </span></p>
-<p><strong>Lemma 4.</strong> (i) <span class="math inline">\operatorname{Cyl}_a\in\operatorname{RO}(\mathbb P)</span>. (ii) For every <span class="math inline">U\in\operatorname{RO}(\mathbb P)</span> with <span class="math inline">U\ne\varnothing</span> there is <span class="math inline">a\in\mathbb T</span> with</p>
+<p><strong>Lemma 4.</strong> (i) <span
+class="math inline">\operatorname{Cyl}_a\in\operatorname{RO}(\mathbb
+P)</span>. (ii) For every <span
+class="math inline">U\in\operatorname{RO}(\mathbb P)</span> with <span
+class="math inline">U\ne\varnothing</span> there is <span
+class="math inline">a\in\mathbb T</span> with</p>
 <p><span class="math display">
-U\cap\operatorname{Cyl}_a\ne\varnothing\quad\text{and}\quad U\not\subseteq\operatorname{Cyl}_a,
+U\cap\operatorname{Cyl}_a\ne\varnothing\quad\text{and}\quad
+U\not\subseteq\operatorname{Cyl}_a,
 </span></p>
-<p>that is, <span class="math inline">U\land\operatorname{Cyl}_a\ne0</span> and <span class="math inline">U\land\neg\operatorname{Cyl}_a\ne0</span>.</p>
-<p><em>Proof.</em> (i) <span class="math inline">\operatorname{Cyl}_a</span> is closed downwards. Let <span class="math inline">T\in\mathbb P\setminus\operatorname{Cyl}_a</span>, with <span class="math inline">b\in T</span> incomparable with <span class="math inline">a</span>. Every <span class="math inline">T&#39;&#39;\in\mathbb P</span> with <span class="math inline">T&#39;&#39;\subseteq(T)_b</span> has a node longer than <span class="math inline">b</span>; it extends <span class="math inline">b</span>, so it is incomparable with <span class="math inline">a</span>, and <span class="math inline">T&#39;&#39;\notin\operatorname{Cyl}_a</span>. So <span class="math inline">T&#39;:=(T)_b\subseteq T</span> has no <span class="math inline">T&#39;&#39;\subseteq T&#39;</span> in <span class="math inline">\operatorname{Cyl}_a</span>, and <span class="math inline">\operatorname{Cyl}_a</span> satisfies the second clause.</p>
+<p>that is, <span
+class="math inline">U\land\operatorname{Cyl}_a\ne0</span> and <span
+class="math inline">U\land\neg\operatorname{Cyl}_a\ne0</span>.</p>
+<p><em>Proof.</em> (i) <span
+class="math inline">\operatorname{Cyl}_a</span> is closed downwards. Let
+<span class="math inline">T\in\mathbb
+P\setminus\operatorname{Cyl}_a</span>, with <span
+class="math inline">b\in T</span> incomparable with <span
+class="math inline">a</span>. Every <span
+class="math inline">T&#39;&#39;\in\mathbb P</span> with <span
+class="math inline">T&#39;&#39;\subseteq(T)_b</span> has a node longer
+than <span class="math inline">b</span>; it extends <span
+class="math inline">b</span>, so it is incomparable with <span
+class="math inline">a</span>, and <span
+class="math inline">T&#39;&#39;\notin\operatorname{Cyl}_a</span>. So
+<span class="math inline">T&#39;:=(T)_b\subseteq T</span> has no <span
+class="math inline">T&#39;&#39;\subseteq T&#39;</span> in <span
+class="math inline">\operatorname{Cyl}_a</span>, and <span
+class="math inline">\operatorname{Cyl}_a</span> satisfies the second
+clause.</p>
 <ol start="2" type="i">
-<li>Let <span class="math inline">T\in U</span> and <span class="math inline">s\in T</span> with <span class="math inline">|s|=2</span>. As <span class="math inline">N_0=1</span>, the only node of length <span class="math inline">1</span> is <span class="math inline">\langle0\rangle</span>, with index <span class="math inline">1</span>, so <span class="math inline">\operatorname{ind}(s)\ge2</span>. By (4) with <span class="math inline">m=1</span> there is <span class="math inline">t\supsetneq s</span> in <span class="math inline">T</span> with at least <span class="math inline">P_{\operatorname{ind}(t)}\ge P_3=8</span> successors in <span class="math inline">T</span>; let <span class="math inline">a\ne b</span> be two of them. Then <span class="math inline">(T)_a,(T)_b\in U</span>, <span class="math inline">(T)_a\in\operatorname{Cyl}_a</span>, and <span class="math inline">(T)_b\notin\operatorname{Cyl}_a</span> since <span class="math inline">b\in(T)_b</span> is incomparable with <span class="math inline">a</span>. <span class="math inline">\square</span></li>
+<li>Let <span class="math inline">T\in U</span> and <span
+class="math inline">s\in T</span> with <span
+class="math inline">|s|=2</span>. As <span
+class="math inline">N_0=1</span>, the only node of length <span
+class="math inline">1</span> is <span
+class="math inline">\langle0\rangle</span>, with index <span
+class="math inline">1</span>, so <span
+class="math inline">\operatorname{ind}(s)\ge2</span>. By (4) with <span
+class="math inline">m=1</span> there is <span
+class="math inline">t\supsetneq s</span> in <span
+class="math inline">T</span> with at least <span
+class="math inline">P_{\operatorname{ind}(t)}\ge P_3=8</span> successors
+in <span class="math inline">T</span>; let <span
+class="math inline">a\ne b</span> be two of them. Then <span
+class="math inline">(T)_a,(T)_b\in U</span>, <span
+class="math inline">(T)_a\in\operatorname{Cyl}_a</span>, and <span
+class="math inline">(T)_b\notin\operatorname{Cyl}_a</span> since <span
+class="math inline">b\in(T)_b</span> is incomparable with <span
+class="math inline">a</span>. <span
+class="math inline">\square</span></li>
 </ol>
-<p>In particular <span class="math inline">\operatorname{RO}(\mathbb P)</span> is atomless, hence infinite.</p>
-<p>From now on identify each <span class="math inline">T\in\mathbb P</span> with <span class="math inline">\operatorname{ind}[T]\subseteq\omega</span>, so that <span class="math inline">\mathbb P\subseteq\mathcal P(\omega)</span> and <span class="math inline">\operatorname{RO}(\mathbb P)\subseteq\mathcal P(\mathcal P(\omega))</span>, and let</p>
+<p>In particular <span class="math inline">\operatorname{RO}(\mathbb
+P)</span> is atomless, hence infinite.</p>
+<p>From now on identify each <span class="math inline">T\in\mathbb
+P</span> with <span
+class="math inline">\operatorname{ind}[T]\subseteq\omega</span>, so that
+<span class="math inline">\mathbb P\subseteq\mathcal P(\omega)</span>
+and <span class="math inline">\operatorname{RO}(\mathbb
+P)\subseteq\mathcal P(\mathcal P(\omega))</span>, and let</p>
 <p><span class="math display">
-B:=\operatorname{RO}(\mathbb P),\qquad \mathfrak D:=\text{the full model over }B.
+B:=\operatorname{RO}(\mathbb P),\qquad \mathfrak D:=\text{the full model
+over }B.
 </span></p>
-<h2 id="third-order-arithmetic-inside-the-full-model">4. Third-order arithmetic inside the full model</h2>
-<p>Let <span class="math inline">\mathcal L^3</span> be the language of third-order arithmetic: number variables <span class="math inline">x,y,\ldots</span>; real variables <span class="math inline">X,Y,\ldots</span> (sets of numbers); class variables <span class="math inline">\mathcal U,\mathcal V,\ldots</span> (sets of reals); and, for each <span class="math inline">k\ge2</span>, variables <span class="math inline">R,\ldots</span> for <span class="math inline">k</span>-ary relations on numbers. Its atomic formulas are identities between number terms (built from <span class="math inline">0</span> and successor <span class="math inline">\mathrm s</span>), between reals, and between classes, and <span class="math inline">x\in X</span>, <span class="math inline">X\in\mathcal U</span>, <span class="math inline">R(\bar x)</span>. Let <span class="math inline">\mathfrak A</span> be its standard full model over <span class="math inline">\omega</span>.</p>
-<p><strong>Lemma 5 (arithmetic).</strong> Every arithmetical relation on numbers and reals is definable in <span class="math inline">\mathfrak A</span> by an <span class="math inline">\mathcal L^3</span> formula.</p>
-<p>This is standard: <span class="math inline">x+y=z</span> holds iff <span class="math inline">(x,y,z)</span> belongs to every ternary relation containing all <span class="math inline">(u,0,u)</span> and closed under <span class="math inline">(u,v,w)\mapsto(u,\mathrm sv,\mathrm sw)</span>, similarly for multiplication, and every arithmetical formula is a first-order formula in <span class="math inline">0,\mathrm s,+,\times</span> and <span class="math inline">\in</span>. Since <span class="math inline">\mathbb T</span>, <span class="math inline">\operatorname{ind}</span>, <span class="math inline">k\mapsto P_k</span> and <span class="math inline">k\mapsto N_k</span> are recursive, and (4) is arithmetical in <span class="math inline">T</span>, there are <span class="math inline">\mathcal L^3</span> formulas such that in <span class="math inline">\mathfrak A</span>:</p>
+<h2 id="third-order-arithmetic-inside-the-full-model">4. Third-order
+arithmetic inside the full model</h2>
+<p>Let <span class="math inline">\mathcal L^3</span> be the language of
+third-order arithmetic: number variables <span
+class="math inline">x,y,\ldots</span>; real variables <span
+class="math inline">X,Y,\ldots</span> (sets of numbers); class variables
+<span class="math inline">\mathcal U,\mathcal V,\ldots</span> (sets of
+reals); and, for each <span class="math inline">k\ge2</span>, variables
+<span class="math inline">R,\ldots</span> for <span
+class="math inline">k</span>-ary relations on numbers. Its atomic
+formulas are identities between number terms (built from <span
+class="math inline">0</span> and successor <span
+class="math inline">\mathrm s</span>), between reals, and between
+classes, and <span class="math inline">x\in X</span>, <span
+class="math inline">X\in\mathcal U</span>, <span
+class="math inline">R(\bar x)</span>. Let <span
+class="math inline">\mathfrak A</span> be its standard full model over
+<span class="math inline">\omega</span>.</p>
+<p><strong>Lemma 5 (arithmetic).</strong> Every arithmetical relation on
+numbers and reals is definable in <span class="math inline">\mathfrak
+A</span> by an <span class="math inline">\mathcal L^3</span>
+formula.</p>
+<p>This is standard: <span class="math inline">x+y=z</span> holds iff
+<span class="math inline">(x,y,z)</span> belongs to every ternary
+relation containing all <span class="math inline">(u,0,u)</span> and
+closed under <span class="math inline">(u,v,w)\mapsto(u,\mathrm
+sv,\mathrm sw)</span>, similarly for multiplication, and every
+arithmetical formula is a first-order formula in <span
+class="math inline">0,\mathrm s,+,\times</span> and <span
+class="math inline">\in</span>. Since <span class="math inline">\mathbb
+T</span>, <span class="math inline">\operatorname{ind}</span>, <span
+class="math inline">k\mapsto P_k</span> and <span
+class="math inline">k\mapsto N_k</span> are recursive, and (4) is
+arithmetical in <span class="math inline">T</span>, there are <span
+class="math inline">\mathcal L^3</span> formulas such that in <span
+class="math inline">\mathfrak A</span>:</p>
 <ul>
-<li><span class="math inline">\operatorname{Cond}(X)</span> holds iff <span class="math inline">X\in\mathbb P</span>;</li>
-<li><span class="math inline">\operatorname{InCyl}(x,X)</span> holds iff <span class="math inline">X\in\operatorname{Cyl}_{s_x}</span>;</li>
+<li><span class="math inline">\operatorname{Cond}(X)</span> holds iff
+<span class="math inline">X\in\mathbb P</span>;</li>
+<li><span class="math inline">\operatorname{InCyl}(x,X)</span> holds iff
+<span class="math inline">X\in\operatorname{Cyl}_{s_x}</span>;</li>
 <li><span class="math inline">x&lt;y</span> is the usual order.</li>
 </ul>
 <p>Define further</p>
 <p><span class="math display">
 \begin{aligned}
-\operatorname{RegOpen}(\mathcal U)&amp;:=\forall X\,(X\in\mathcal U\to\operatorname{Cond}(X))\\
-&amp;\quad\land\forall X\,\forall Y\,\bigl(X\in\mathcal U\land\operatorname{Cond}(Y)\land Y\subseteq X\to Y\in\mathcal U\bigr)\\
-&amp;\quad\land\forall X\,\bigl(\operatorname{Cond}(X)\land\forall Y\,(\operatorname{Cond}(Y)\land Y\subseteq X\to\exists Z\,(Z\in\mathcal U\land Z\subseteq Y))\to X\in\mathcal U\bigr),\\
-\operatorname{Included}(\mathcal U,\mathcal V)&amp;:=\forall X\,(X\in\mathcal U\to X\in\mathcal V),\\
-\operatorname{IsCyl}(\mathcal U,x)&amp;:=\forall X\,(X\in\mathcal U\leftrightarrow\operatorname{InCyl}(x,X)),\\
-\operatorname{SplitsAt}(\mathcal U,x)&amp;:=\exists X\,(X\in\mathcal U\land\operatorname{InCyl}(x,X))\land\exists X\,(X\in\mathcal U\land\neg\operatorname{InCyl}(x,X)).
+\operatorname{RegOpen}(\mathcal U)&amp;:=\forall X\,(X\in\mathcal
+U\to\operatorname{Cond}(X))\\
+&amp;\quad\land\forall X\,\forall Y\,\bigl(X\in\mathcal
+U\land\operatorname{Cond}(Y)\land Y\subseteq X\to Y\in\mathcal U\bigr)\\
+&amp;\quad\land\forall X\,\bigl(\operatorname{Cond}(X)\land\forall
+Y\,(\operatorname{Cond}(Y)\land Y\subseteq X\to\exists Z\,(Z\in\mathcal
+U\land Z\subseteq Y))\to X\in\mathcal U\bigr),\\
+\operatorname{Included}(\mathcal U,\mathcal V)&amp;:=\forall
+X\,(X\in\mathcal U\to X\in\mathcal V),\\
+\operatorname{IsCyl}(\mathcal U,x)&amp;:=\forall X\,(X\in\mathcal
+U\leftrightarrow\operatorname{InCyl}(x,X)),\\
+\operatorname{SplitsAt}(\mathcal U,x)&amp;:=\exists X\,(X\in\mathcal
+U\land\operatorname{InCyl}(x,X))\land\exists X\,(X\in\mathcal
+U\land\neg\operatorname{InCyl}(x,X)).
 \end{aligned}
 </span></p>
-<p>In <span class="math inline">\mathfrak A</span>, <span class="math inline">\operatorname{RegOpen}</span> defines <span class="math inline">B</span>, <span class="math inline">\operatorname{Included}</span> defines its order, <span class="math inline">\operatorname{IsCyl}(\mathcal U,x)</span> says <span class="math inline">\mathcal U=\operatorname{Cyl}_{s_x}</span>, and, by Lemma 4, <span class="math inline">\operatorname{SplitsAt}(\mathcal U,x)</span> says <span class="math inline">\mathcal U\land\operatorname{Cyl}_{s_x}\ne0</span> and <span class="math inline">\mathcal U\land\neg\operatorname{Cyl}_{s_x}\ne0</span>.</p>
-<p><strong>Representing <span class="math inline">\mathcal L^3</span> in <span class="math inline">\mathfrak D</span>.</strong> Let <span class="math inline">N,\mathrm S</span> have type <span class="math inline">tt</span> and <span class="math inline">z</span> type <span class="math inline">t</span>, and put</p>
+<p>In <span class="math inline">\mathfrak A</span>, <span
+class="math inline">\operatorname{RegOpen}</span> defines <span
+class="math inline">B</span>, <span
+class="math inline">\operatorname{Included}</span> defines its order,
+<span class="math inline">\operatorname{IsCyl}(\mathcal U,x)</span> says
+<span class="math inline">\mathcal U=\operatorname{Cyl}_{s_x}</span>,
+and, by Lemma 4, <span
+class="math inline">\operatorname{SplitsAt}(\mathcal U,x)</span> says
+<span class="math inline">\mathcal
+U\land\operatorname{Cyl}_{s_x}\ne0</span> and <span
+class="math inline">\mathcal
+U\land\neg\operatorname{Cyl}_{s_x}\ne0</span>.</p>
+<p><strong>Representing <span class="math inline">\mathcal L^3</span> in
+<span class="math inline">\mathfrak D</span>.</strong> Let <span
+class="math inline">N,\mathrm S</span> have type <span
+class="math inline">tt</span> and <span class="math inline">z</span>
+type <span class="math inline">t</span>, and put</p>
 <p><span class="math display">
 \begin{aligned}
-\operatorname{Nat}(N,z,\mathrm S)&amp;:=z\mathrel{\varepsilon}N\land\forall x\,(x\mathrel{\varepsilon}N\to\mathrm Sx\mathrel{\varepsilon}N\land\mathrm Sx\ne z)\\
-&amp;\quad\land\forall x\,\forall y\,(x\mathrel{\varepsilon}N\land y\mathrel{\varepsilon}N\land\mathrm Sx=\mathrm Sy\to x=y)\\
-&amp;\quad\land\forall X^{tt}\,\bigl(z\mathrel{\varepsilon}X\land\forall x\,(x\mathrel{\varepsilon}N\land x\mathrel{\varepsilon}X\to\mathrm Sx\mathrel{\varepsilon}X)\to\forall x\,(x\mathrel{\varepsilon}N\to x\mathrel{\varepsilon}X)\bigr),\\
-\operatorname{Real}_N(X^{tt})&amp;:=\forall x\,\bigl((x\mathrel{\varepsilon}N\land x\mathrel{\varepsilon}X)\lor Xx=\bot\bigr),\\
-\operatorname{Class}_N(\mathcal U^{(tt)t})&amp;:=\forall X\,\bigl((\operatorname{Real}_N(X)\land X\mathrel{\varepsilon}\mathcal U)\lor\mathcal UX=\bot\bigr).
+\operatorname{Nat}(N,z,\mathrm
+S)&amp;:=z\mathrel{\varepsilon}N\land\forall
+x\,(x\mathrel{\varepsilon}N\to\mathrm
+Sx\mathrel{\varepsilon}N\land\mathrm Sx\ne z)\\
+&amp;\quad\land\forall x\,\forall y\,(x\mathrel{\varepsilon}N\land
+y\mathrel{\varepsilon}N\land\mathrm Sx=\mathrm Sy\to x=y)\\
+&amp;\quad\land\forall X^{tt}\,\bigl(z\mathrel{\varepsilon}X\land\forall
+x\,(x\mathrel{\varepsilon}N\land x\mathrel{\varepsilon}X\to\mathrm
+Sx\mathrel{\varepsilon}X)\to\forall x\,(x\mathrel{\varepsilon}N\to
+x\mathrel{\varepsilon}X)\bigr),\\
+\operatorname{Real}_N(X^{tt})&amp;:=\forall
+x\,\bigl((x\mathrel{\varepsilon}N\land x\mathrel{\varepsilon}X)\lor
+Xx=\bot\bigr),\\
+\operatorname{Class}_N(\mathcal U^{(tt)t})&amp;:=\forall
+X\,\bigl((\operatorname{Real}_N(X)\land X\mathrel{\varepsilon}\mathcal
+U)\lor\mathcal UX=\bot\bigr).
 \end{aligned}
 </span></p>
-<p>For <span class="math inline">W=(N,z,\mathrm S)</span>, the translation <span class="math inline">\varphi\mapsto\varphi^W</span> of <span class="math inline">\mathcal L^3</span> replaces <span class="math inline">0</span> by <span class="math inline">z</span> and <span class="math inline">\mathrm s</span> by <span class="math inline">\mathrm S</span>; relativizes number quantifiers to <span class="math inline">x\mathrel{\varepsilon}N</span> (variables of type <span class="math inline">t</span>), real quantifiers to <span class="math inline">\operatorname{Real}_N</span> (type <span class="math inline">tt</span>), and class quantifiers to <span class="math inline">\operatorname{Class}_N</span> (type <span class="math inline">(tt)t</span>); leaves <span class="math inline">k</span>-ary relation quantifiers (type <span class="math inline">t\cdots tt</span>) unrestricted; and replaces <span class="math inline">x\in X</span>, <span class="math inline">X\in\mathcal U</span>, <span class="math inline">R(\bar x)</span> by <span class="math inline">x\mathrel{\varepsilon}X</span>, <span class="math inline">X\mathrel{\varepsilon}\mathcal U</span>, <span class="math inline">R\bar x=\top</span>. Every <span class="math inline">\varphi^W</span> is an identity formula with no nonlogical constants.</p>
-<p><strong>Lemma 6 (transport).</strong> Suppose <span class="math inline">\mathfrak D\models\operatorname{Nat}(N,z,\mathrm S)</span>. Then there are bijections</p>
+<p>For <span class="math inline">W=(N,z,\mathrm S)</span>, the
+translation <span class="math inline">\varphi\mapsto\varphi^W</span> of
+<span class="math inline">\mathcal L^3</span> replaces <span
+class="math inline">0</span> by <span class="math inline">z</span> and
+<span class="math inline">\mathrm s</span> by <span
+class="math inline">\mathrm S</span>; relativizes number quantifiers to
+<span class="math inline">x\mathrel{\varepsilon}N</span> (variables of
+type <span class="math inline">t</span>), real quantifiers to <span
+class="math inline">\operatorname{Real}_N</span> (type <span
+class="math inline">tt</span>), and class quantifiers to <span
+class="math inline">\operatorname{Class}_N</span> (type <span
+class="math inline">(tt)t</span>); leaves <span
+class="math inline">k</span>-ary relation quantifiers (type <span
+class="math inline">t\cdots tt</span>) unrestricted; and replaces <span
+class="math inline">x\in X</span>, <span
+class="math inline">X\in\mathcal U</span>, <span
+class="math inline">R(\bar x)</span> by <span
+class="math inline">x\mathrel{\varepsilon}X</span>, <span
+class="math inline">X\mathrel{\varepsilon}\mathcal U</span>, <span
+class="math inline">R\bar x=\top</span>. Every <span
+class="math inline">\varphi^W</span> is an identity formula with no
+nonlogical constants.</p>
+<p><strong>Lemma 6 (transport).</strong> Suppose <span
+class="math inline">\mathfrak D\models\operatorname{Nat}(N,z,\mathrm
+S)</span>. Then there are bijections</p>
 <p><span class="math display">
 \theta:\operatorname{ext}(N)\to\omega,\qquad
-\theta:\{X:\mathfrak D\models\operatorname{Real}_N(X)\}\to\mathcal P(\omega),\qquad
-\theta:\{\mathcal U:\mathfrak D\models\operatorname{Class}_N(\mathcal U)\}\to\mathcal P(\mathcal P(\omega)),
+\theta:\{X:\mathfrak D\models\operatorname{Real}_N(X)\}\to\mathcal
+P(\omega),\qquad
+\theta:\{\mathcal U:\mathfrak D\models\operatorname{Class}_N(\mathcal
+U)\}\to\mathcal P(\mathcal P(\omega)),
 </span></p>
-<p>and surjections <span class="math inline">\theta</span> from <span class="math inline">D_{t\cdots tt}</span> onto the <span class="math inline">k</span>-ary relations on <span class="math inline">\omega</span>, such that for every <span class="math inline">\mathcal L^3</span> formula <span class="math inline">\varphi</span> and every assignment <span class="math inline">g</span> of such arguments,</p>
+<p>and surjections <span class="math inline">\theta</span> from <span
+class="math inline">D_{t\cdots tt}</span> onto the <span
+class="math inline">k</span>-ary relations on <span
+class="math inline">\omega</span>, such that for every <span
+class="math inline">\mathcal L^3</span> formula <span
+class="math inline">\varphi</span> and every assignment <span
+class="math inline">g</span> of such arguments,</p>
 <p><span class="math display">
-\mathfrak D\models\varphi^W[g]\iff\mathfrak A\models\varphi[\theta\circ g].
+\mathfrak D\models\varphi^W[g]\iff\mathfrak A\models\varphi[\theta\circ
+g].
 </span></p>
-<p>Moreover such <span class="math inline">N,z,\mathrm S</span> exist.</p>
-<p><em>Proof.</em> On numbers, <span class="math inline">\theta</span> is the unique isomorphism <span class="math inline">(\operatorname{ext}(N),z,\mathrm S)\cong(\omega,0,\mathrm s)</span>, which exists by Dedekind’s categoricity theorem, since every subset of <span class="math inline">\operatorname{ext}(N)</span> is <span class="math inline">\operatorname{ext}(X)</span> for some <span class="math inline">X</span>. Put <span class="math inline">\theta(X):=\theta[\operatorname{ext}(X)]</span>, <span class="math inline">\theta(\mathcal U):=\{\theta(X):\operatorname{Real}_N(X),\ \mathcal U(X)=1\}</span>, and <span class="math inline">\theta(R):=\{\theta(\bar x):\bar x\in\operatorname{ext}(N)^k,\ R\bar x=1\}</span>. A <span class="math inline">\operatorname{Real}_N</span> predicate takes value <span class="math inline">1</span> on <span class="math inline">\operatorname{ext}(X)\subseteq\operatorname{ext}(N)</span> and <span class="math inline">0</span> elsewhere, so it is determined by <span class="math inline">\operatorname{ext}(X)</span>; by fullness every subset of <span class="math inline">\operatorname{ext}(N)</span> arises. Hence <span class="math inline">\theta</span> is a bijection on reals, and likewise on classes. Fullness also makes <span class="math inline">\theta</span> onto the <span class="math inline">k</span>-ary relations. The equivalence follows by induction on <span class="math inline">\varphi</span>, using Lemma 3; the quantifier cases use surjectivity of <span class="math inline">\theta</span>. For existence, <span class="math inline">B</span> is infinite: take distinct <span class="math inline">b_0,b_1,\ldots\in B</span>, let <span class="math inline">N</span> be the characteristic function of <span class="math inline">\{b_k:k\in\omega\}</span>, <span class="math inline">z=b_0</span>, and <span class="math inline">\mathrm S(b_k)=b_{k+1}</span>, <span class="math inline">\mathrm S(c)=c</span> otherwise. <span class="math inline">\square</span></p>
+<p>Moreover such <span class="math inline">N,z,\mathrm S</span>
+exist.</p>
+<p><em>Proof.</em> On numbers, <span class="math inline">\theta</span>
+is the unique isomorphism <span
+class="math inline">(\operatorname{ext}(N),z,\mathrm
+S)\cong(\omega,0,\mathrm s)</span>, which exists by Dedekind’s
+categoricity theorem, since every subset of <span
+class="math inline">\operatorname{ext}(N)</span> is <span
+class="math inline">\operatorname{ext}(X)</span> for some <span
+class="math inline">X</span>. Put <span
+class="math inline">\theta(X):=\theta[\operatorname{ext}(X)]</span>,
+<span class="math inline">\theta(\mathcal
+U):=\{\theta(X):\operatorname{Real}_N(X),\ \mathcal U(X)=1\}</span>, and
+<span class="math inline">\theta(R):=\{\theta(\bar x):\bar
+x\in\operatorname{ext}(N)^k,\ R\bar x=1\}</span>. A <span
+class="math inline">\operatorname{Real}_N</span> predicate takes value
+<span class="math inline">1</span> on <span
+class="math inline">\operatorname{ext}(X)\subseteq\operatorname{ext}(N)</span>
+and <span class="math inline">0</span> elsewhere, so it is determined by
+<span class="math inline">\operatorname{ext}(X)</span>; by fullness
+every subset of <span class="math inline">\operatorname{ext}(N)</span>
+arises. Hence <span class="math inline">\theta</span> is a bijection on
+reals, and likewise on classes. Fullness also makes <span
+class="math inline">\theta</span> onto the <span
+class="math inline">k</span>-ary relations. The equivalence follows by
+induction on <span class="math inline">\varphi</span>, using Lemma 3;
+the quantifier cases use surjectivity of <span
+class="math inline">\theta</span>. For existence, <span
+class="math inline">B</span> is infinite: take distinct <span
+class="math inline">b_0,b_1,\ldots\in B</span>, let <span
+class="math inline">N</span> be the characteristic function of <span
+class="math inline">\{b_k:k\in\omega\}</span>, <span
+class="math inline">z=b_0</span>, and <span class="math inline">\mathrm
+S(b_k)=b_{k+1}</span>, <span class="math inline">\mathrm S(c)=c</span>
+otherwise. <span class="math inline">\square</span></p>
 <h2 id="the-pure-splitter">5. The pure splitter</h2>
-<p>With <span class="math inline">W=(N,z,\mathrm S)</span>, <span class="math inline">h</span> of type <span class="math inline">t((tt)t)</span>, and <span class="math inline">p,q,n,m</span> of type <span class="math inline">t</span>, define</p>
+<p>With <span class="math inline">W=(N,z,\mathrm S)</span>, <span
+class="math inline">h</span> of type <span
+class="math inline">t((tt)t)</span>, and <span
+class="math inline">p,q,n,m</span> of type <span
+class="math inline">t</span>, define</p>
 <p><span class="math display">
 \begin{aligned}
-\operatorname{Iso}_W(h)&amp;:=\forall p\,\bigl(\operatorname{Class}_N(hp)\land\operatorname{RegOpen}^W(hp)\bigr)\\
-&amp;\quad\land\forall\mathcal U\,\bigl(\operatorname{Class}_N(\mathcal U)\land\operatorname{RegOpen}^W(\mathcal U)\to\exists p\, .\,hp=\mathcal U\bigr)\\
-&amp;\quad\land\forall p\,\forall q\,\bigl(p\le q\leftrightarrow\operatorname{Included}^W(hp,hq)\bigr),\\[4pt]
-\operatorname{Sel}(p,q)&amp;:=\exists N\,\exists z\,\exists\mathrm S\,\exists h\,\exists n\,.\ \operatorname{Nat}(N,z,\mathrm S)\land\operatorname{Iso}_W(h)\land n\mathrel{\varepsilon}N\land\operatorname{IsCyl}^W(hq,n)\\
-&amp;\qquad\land\operatorname{SplitsAt}^W(hp,n)\land\forall m\,\bigl(m\mathrel{\varepsilon}N\land(m&lt;n)^W\to\neg\operatorname{SplitsAt}^W(hp,m)\bigr),\\[4pt]
+\operatorname{Iso}_W(h)&amp;:=\forall
+p\,\bigl(\operatorname{Class}_N(hp)\land\operatorname{RegOpen}^W(hp)\bigr)\\
+&amp;\quad\land\forall\mathcal U\,\bigl(\operatorname{Class}_N(\mathcal
+U)\land\operatorname{RegOpen}^W(\mathcal U)\to\exists p\, .\,hp=\mathcal
+U\bigr)\\
+&amp;\quad\land\forall p\,\forall q\,\bigl(p\le
+q\leftrightarrow\operatorname{Included}^W(hp,hq)\bigr),\\[4pt]
+\operatorname{Sel}(p,q)&amp;:=\exists N\,\exists z\,\exists\mathrm
+S\,\exists h\,\exists n\,.\ \operatorname{Nat}(N,z,\mathrm
+S)\land\operatorname{Iso}_W(h)\land
+n\mathrel{\varepsilon}N\land\operatorname{IsCyl}^W(hq,n)\\
+&amp;\qquad\land\operatorname{SplitsAt}^W(hp,n)\land\forall
+m\,\bigl(m\mathrel{\varepsilon}N\land(m&lt;n)^W\to\neg\operatorname{SplitsAt}^W(hp,m)\bigr),\\[4pt]
 F&amp;:=\lambda p\, .\,\exists q\, .\,\operatorname{Sel}(p,q)\land q.
 \end{aligned}
 </span></p>
-<p><span class="math inline">F</span> is a closed term of type <span class="math inline">tt</span> containing no nonlogical constants. All its types end in <span class="math inline">t</span>, so it belongs to the language of the map. <span class="math inline">\operatorname{Sel}</span> is an identity formula.</p>
-<p>For <span class="math inline">p\in B</span>, <span class="math inline">p\ne0</span>, let <span class="math inline">n(p)</span> be the least <span class="math inline">n</span> such that <span class="math inline">p\land\operatorname{Cyl}_{s_n}\ne0</span> and <span class="math inline">p\land\neg\operatorname{Cyl}_{s_n}\ne0</span>. It exists by Lemma 4(ii).</p>
-<p><strong>Lemma 7.</strong> In <span class="math inline">\mathfrak D</span>, <span class="math inline">\llbracket F\rrbracket(p)=\operatorname{Cyl}_{s_{n(p)}}</span> for every <span class="math inline">p\ne0</span>.</p>
-<p><em>Proof.</em> Let <span class="math inline">N,z,\mathrm S,h</span> satisfy <span class="math inline">\operatorname{Nat}(N,z,\mathrm S)\land\operatorname{Iso}_W(h)</span> in <span class="math inline">\mathfrak D</span>, and let <span class="math inline">\theta</span> be as in Lemma 6. By Lemma 6, <span class="math inline">\theta\circ h:B\to B</span> maps <span class="math inline">B</span> into <span class="math inline">\operatorname{RO}(\mathbb P)=B</span> and onto it, and</p>
+<p><span class="math inline">F</span> is a closed term of type <span
+class="math inline">tt</span> containing no nonlogical constants. All
+its types end in <span class="math inline">t</span>, so it belongs to
+the language of the map. <span
+class="math inline">\operatorname{Sel}</span> is an identity
+formula.</p>
+<p>For <span class="math inline">p\in B</span>, <span
+class="math inline">p\ne0</span>, let <span
+class="math inline">n(p)</span> be the least <span
+class="math inline">n</span> such that <span
+class="math inline">p\land\operatorname{Cyl}_{s_n}\ne0</span> and <span
+class="math inline">p\land\neg\operatorname{Cyl}_{s_n}\ne0</span>. It
+exists by Lemma 4(ii).</p>
+<p><strong>Lemma 7.</strong> In <span class="math inline">\mathfrak
+D</span>, <span class="math inline">\llbracket
+F\rrbracket(p)=\operatorname{Cyl}_{s_{n(p)}}</span> for every <span
+class="math inline">p\ne0</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">N,z,\mathrm S,h</span>
+satisfy <span class="math inline">\operatorname{Nat}(N,z,\mathrm
+S)\land\operatorname{Iso}_W(h)</span> in <span
+class="math inline">\mathfrak D</span>, and let <span
+class="math inline">\theta</span> be as in Lemma 6. By Lemma 6, <span
+class="math inline">\theta\circ h:B\to B</span> maps <span
+class="math inline">B</span> into <span
+class="math inline">\operatorname{RO}(\mathbb P)=B</span> and onto it,
+and</p>
 <p><span class="math display">
 p\le q\iff\theta(hp)\subseteq\theta(hq).
 </span></p>
-<p>So <span class="math inline">\theta\circ h</span> is an order automorphism of <span class="math inline">B</span>, hence a Boolean automorphism, hence the identity by the Jech–Shelah theorem. Therefore, by Lemma 6,</p>
+<p>So <span class="math inline">\theta\circ h</span> is an order
+automorphism of <span class="math inline">B</span>, hence a Boolean
+automorphism, hence the identity by the Jech–Shelah theorem. Therefore,
+by Lemma 6,</p>
 <p><span class="math display">
-\mathfrak D\models\operatorname{Sel}(p,q)\iff\exists n\in\omega\, .\ q=\operatorname{Cyl}_{s_n}\land n\text{ is least with }p\land\operatorname{Cyl}_{s_n}\ne0\land p\land\neg\operatorname{Cyl}_{s_n}\ne0,
+\mathfrak D\models\operatorname{Sel}(p,q)\iff\exists n\in\omega\, .\
+q=\operatorname{Cyl}_{s_n}\land n\text{ is least with
+}p\land\operatorname{Cyl}_{s_n}\ne0\land
+p\land\neg\operatorname{Cyl}_{s_n}\ne0,
 </span></p>
-<p>provided some <span class="math inline">N,z,\mathrm S,h</span> satisfy <span class="math inline">\operatorname{Nat}\land\operatorname{Iso}_W</span>. They do: take <span class="math inline">N,z,\mathrm S</span> from Lemma 6 and <span class="math inline">h(p):=</span> the <span class="math inline">\operatorname{Class}_N</span> predicate with <span class="math inline">\theta(h(p))=p</span>. Hence, for <span class="math inline">p\ne0</span>, <span class="math inline">\llbracket\operatorname{Sel}(p,q)\rrbracket=1</span> if <span class="math inline">q=\operatorname{Cyl}_{s_{n(p)}}</span> and <span class="math inline">=0</span> otherwise, by Lemma 3, and</p>
+<p>provided some <span class="math inline">N,z,\mathrm S,h</span>
+satisfy <span
+class="math inline">\operatorname{Nat}\land\operatorname{Iso}_W</span>.
+They do: take <span class="math inline">N,z,\mathrm S</span> from Lemma
+6 and <span class="math inline">h(p):=</span> the <span
+class="math inline">\operatorname{Class}_N</span> predicate with <span
+class="math inline">\theta(h(p))=p</span>. Hence, for <span
+class="math inline">p\ne0</span>, <span
+class="math inline">\llbracket\operatorname{Sel}(p,q)\rrbracket=1</span>
+if <span class="math inline">q=\operatorname{Cyl}_{s_{n(p)}}</span> and
+<span class="math inline">=0</span> otherwise, by Lemma 3, and</p>
 <p><span class="math display">
-\llbracket F\rrbracket(p)=\bigvee_{q\in B}\bigl(\llbracket\operatorname{Sel}(p,q)\rrbracket\land q\bigr)=\operatorname{Cyl}_{s_{n(p)}}.\qquad\square
+\llbracket F\rrbracket(p)=\bigvee_{q\in
+B}\bigl(\llbracket\operatorname{Sel}(p,q)\rrbracket\land
+q\bigr)=\operatorname{Cyl}_{s_{n(p)}}.\qquad\square
 </span></p>
-<p>Without rigidity the argument fails at exactly one point. Different witnesses <span class="math inline">h</span> could select different <span class="math inline">q</span>, and <span class="math inline">\llbracket F\rrbracket(p)</span> would be their join, which need not split <span class="math inline">p</span>. Some such restriction is unavoidable for a full model: every automorphism of <span class="math inline">B</span> extends to an automorphism of the full model, which fixes the denotation of every closed pure term. So <span class="math inline">\llbracket F\rrbracket</span> must commute with every automorphism of <span class="math inline">B</span>.</p>
+<p>Without rigidity the argument fails at exactly one point. Different
+witnesses <span class="math inline">h</span> could select different
+<span class="math inline">q</span>, and <span
+class="math inline">\llbracket F\rrbracket(p)</span> would be their
+join, which need not split <span class="math inline">p</span>. Some such
+restriction is unavoidable for a full model: every automorphism of <span
+class="math inline">B</span> extends to an automorphism of the full
+model, which fixes the denotation of every closed pure term. So <span
+class="math inline">\llbracket F\rrbracket</span> must commute with
+every automorphism of <span class="math inline">B</span>.</p>
 <h2 id="proof-of-the-claim">6. Proof of the claim</h2>
-<p><span class="math inline">S_F</span> is an identity formula. For <span class="math inline">p=0</span> its matrix has value <span class="math inline">1</span> because the antecedent has value <span class="math inline">0</span>. For <span class="math inline">p\ne0</span>, Lemma 7 and the definition of <span class="math inline">n(p)</span> give</p>
+<p><span class="math inline">S_F</span> is an identity formula. For
+<span class="math inline">p=0</span> its matrix has value <span
+class="math inline">1</span> because the antecedent has value <span
+class="math inline">0</span>. For <span
+class="math inline">p\ne0</span>, Lemma 7 and the definition of <span
+class="math inline">n(p)</span> give</p>
 <p><span class="math display">
-p\land\llbracket F\rrbracket(p)\ne0,\qquad p\land\neg\llbracket F\rrbracket(p)\ne0.
+p\land\llbracket F\rrbracket(p)\ne0,\qquad p\land\neg\llbracket
+F\rrbracket(p)\ne0.
 </span></p>
-<p>So by Lemma 3, <span class="math inline">\llbracket S_F\rrbracket=1</span> and <span class="math inline">\llbracket S_F=\bot\rrbracket=0\ne1</span>. By Lemma 2,</p>
+<p>So by Lemma 3, <span class="math inline">\llbracket
+S_F\rrbracket=1</span> and <span class="math inline">\llbracket
+S_F=\bot\rrbracket=0\ne1</span>. By Lemma 2,</p>
 <p><span class="math display">
 C\nvdash S_F=\bot.
 </span></p>
-<p>As <span class="math inline">S_F=\bot</span> is a closed pure identity, Maximalism (pure) gives <span class="math inline">S_F\ne\bot</span>, while Lemma 1 gives <span class="math inline">S_F=\bot</span> from Atomicity<span class="math inline">(t)</span>. <span class="math inline">\square</span></p>
+<p>As <span class="math inline">S_F=\bot</span> is a closed pure
+identity, Maximalism (pure) gives <span
+class="math inline">S_F\ne\bot</span>, while Lemma 1 gives <span
+class="math inline">S_F=\bot</span> from Atomicity<span
+class="math inline">(t)</span>. <span
+class="math inline">\square</span></p>
 </body></html>

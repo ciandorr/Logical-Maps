@@ -1,6 +1,6 @@
 # □ND ∧ Atomicity (type t) ⇒ No Pure Contingency
 
-<p class='cert'>Result — Source: Goodsell / Yli-Vakkuri (unpublished); produced by Zachary Goodsell and Juhani Yli-Vakkuri (theorem); proof by Cian Dorr, 23 September 2026, with permission from Zachary Goodsell, written out by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 23 September 2026.</p>
+<p class='cert'>Result — Source: Goodsell / Yli-Vakkuri (unpublished), Lean `Classicism.Map.c5_and_atomicity_t_imply_no_pure_contingency`; produced by Zachary Goodsell and Juhani Yli-Vakkuri (theorem); proof by Cian Dorr, 23 September 2026, with permission from Zachary Goodsell, written out by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 23 September 2026.</p>
 
 ## Premises
 
@@ -18,6 +18,10 @@ The proof written up for c5-and-atomicity-imply-no-pure-contingency uses Atomici
 ## Notes
 
 The sharpening of the reported theorem to the type-t instance of Atomicity, which is all the argument needs. Recorded separately so that the reported statement keeps its own record.
+
+## Revisions
+
+- **2026-10-25** (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — (minor) Lean proof connected: GPT-6 Astra's formalization (prompted by Daniel Kodsi, 23 October 2026), ported from Daniel Kodsi's submission.
 
 ## Sources
 

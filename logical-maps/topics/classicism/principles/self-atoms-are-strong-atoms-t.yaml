@@ -1,0 +1,20 @@
+id: self-atoms-are-strong-atoms-t
+name: Self-atoms are strong atoms (type t)
+category: more-boolean-structure
+statement: Every self-atom is a strong atom.
+formal: $\forall p\, .\,\operatorname{SelfAtom}_t(p)\to\operatorname{SAtom}_t(p)$
+definitions: 'where $\operatorname{SelfAtom}_t(p):=\Diamond p\land\Box(p\to\operatorname{Atom}_t(p))$: a
+  self-atom is a possible proposition that necessarily, if true, is an atom; equivalently, in C, one that
+  entails that it is the actual world, $\Box(p\to\forall q\, .\,q\to p\le q)$; and $\operatorname{SAtom}_t(W):=\Diamond_t
+  W\land\Box\forall q\, .\,W\le_t q\lor W\le_t\neg_t q$ is a strong atom (Background, Strong atoms)'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: The type $t$ instance of [[self-atoms-are-strong-atoms-r]]. Bridge principle (Cian Dorr, 25 October
+  2026). With Self-Atomicity it gives Strong Atomicity; □5 implies it.
+aliases:
+- Self-atoms are strong atoms (type t)
+lean_def: Classicism.P.SelfAtomsAreStrongAtomsT.schemaIn

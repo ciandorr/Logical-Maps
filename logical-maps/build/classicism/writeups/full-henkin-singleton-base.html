@@ -323,54 +323,157 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full Henkin model: singleton individual domain</h1></header><p class="cert">
-Model — Source: Misc.; produced by OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17 September 2026; recorded by OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17 September 2026.
+Model — Source: Misc.; produced by OpenAI Codex (GPT-6), prompted by
+Zachary Goodsell, 17 September 2026; recorded by OpenAI Codex (GPT-6),
+prompted by Zachary Goodsell, 17 September 2026.
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>Fregean Axiom.</strong> Materially equivalent propositions are identical.</li>
-<li><strong>Functional Choice.</strong> Every serial binary relation admits a selecting operation. Its output type is relational, as required by the type system.</li>
-<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.</li>
-<li><strong>¬ Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
-<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
-<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema for the fixed nonlogical signature Σ: every closed identity of its language not provable in C(Σ) is false.</li>
+<li><strong>Fregean Axiom.</strong> Materially equivalent propositions
+are identical.</li>
+<li><strong>Functional Choice.</strong> Every serial binary relation
+admits a selecting operation. Its output type is relational, as required
+by the type system.</li>
+<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with
+free variables among a finite tuple x, and distinct matching nonlogical
+constants c, a witness to P entails that P at those constants is
+possible.</li>
+<li><strong>¬ Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
+<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma
+is a pure operation applied to other constants: for a closed pure term A
+and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied
+to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema
+for the fixed nonlogical signature Σ: every closed identity of its
+language not provable in C(Σ) is false.</li>
 </ul>
 <h2 id="definition">Definition</h2>
-<p>Use the ordinary full Henkin interpretation: D_e is a singleton, D_t={0,1}, and every admitted function type contains all functions between its domains.</p>
-<p>Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the top element of its type.</p>
+<p>Use the ordinary full Henkin interpretation: D_e is a singleton,
+D_t={0,1}, and every admitted function type contains all functions
+between its domains.</p>
+<p>Interpretation of Σ, fixed for this record: every constant of Σ is
+relational, and each denotes the top element of its type.</p>
 <h2 id="arguments">Arguments</h2>
-<h3 id="holds-fregean-axiom-functional-choice.">Holds Fregean Axiom, Functional Choice.</h3>
-<p>Domains are finite by induction on types, so every serial relation has a functional subrelation and, when the output type is relational, a selecting operation. Equality is genuine equality and Box is the identity on truth values. These facts verify the listed positive assertions.</p>
-<p><em>By OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17 September 2026.</em></p>
-<h3 id="fails-infinity-schema-type-e.">Fails Infinity Schema (type e).</h3>
-<p>The two finite base domains refute the infinity assertions, top is an atom, and the possible existence of two individuals is false although its pure sentence is C-consistent.</p>
-<p><em>By OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17 September 2026.</em></p>
-<h3 id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).</h3>
-<p>Let <span class="math inline">c\in\Sigma</span> have relational type <span class="math inline">\tau</span>, so <span class="math inline">c=\top_\tau</span> necessarily. Witnessed Possibility fails for the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span> but impossible of <span class="math inline">c</span>; Separated Structure fails since <span class="math inline">\lambda x\, .\,x</span> and <span class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span class="math inline">c</span> and differ; Independence (signature Σ) fails since <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes; Distinctness Maximalism (signature Σ) fails since <span class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does not prove.</p>
-<p><em>General argument <code>arguments/sigma-top</code>. It requires that Every constant of Σ is relational, and each denotes the top element of its type. Here: This is the interpretation the definition fixes. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic; it uses nothing about the model.</p>
+<h3 id="holds-fregean-axiom-functional-choice.">Holds Fregean Axiom,
+Functional Choice.</h3>
+<p>Domains are finite by induction on types, so every serial relation
+has a functional subrelation and, when the output type is relational, a
+selecting operation. Equality is genuine equality and Box is the
+identity on truth values. These facts verify the listed positive
+assertions.</p>
+<p><em>By OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17
+September 2026.</em></p>
+<h3 id="fails-infinity-schema-type-e.">Fails Infinity Schema (type
+e).</h3>
+<p>The two finite base domains refute the infinity assertions, top is an
+atom, and the possible existence of two individuals is false although
+its pure sentence is C-consistent.</p>
+<p><em>By OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17
+September 2026.</em></p>
+<h3
+id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails
+Witnessed Possibility, Separated Structure, Independence (signature Σ),
+Maximalism (signature Σ).</h3>
+<p>Let <span class="math inline">c\in\Sigma</span> have relational type
+<span class="math inline">\tau</span>, so <span
+class="math inline">c=\top_\tau</span> necessarily. Witnessed
+Possibility fails for the pure formula <span
+class="math inline">x\ne\top_\tau</span>, witnessed by <span
+class="math inline">\bot_\tau</span> but impossible of <span
+class="math inline">c</span>; Separated Structure fails since <span
+class="math inline">\lambda x\, .\,x</span> and <span
+class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span
+class="math inline">c</span> and differ; Independence (signature Σ)
+fails since <span class="math inline">c</span> denotes what the closed
+pure term <span class="math inline">\top_\tau</span> denotes;
+Distinctness Maximalism (signature Σ) fails since <span
+class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does
+not prove.</p>
+<p><em>General argument <code>arguments/sigma-top</code>. It requires
+that Every constant of Σ is relational, and each denotes the top element
+of its type. Here: This is the interpretation the definition fixes. By
+Claude Fable 5.1 (Anthropic), at Cian Dorr’s request,
+2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic; it uses nothing about the model.</p>
 <h2 id="notes">Notes</h2>
-<p>Explicit specialization of the source’s standard Henkin construction to a singleton individual domain. No independent checking or formal verification is claimed. Everything that implies these fails with them.</p>
+<p>Explicit specialization of the source’s standard Henkin construction
+to a singleton individual domain. No independent checking or formal
+verification is claimed. Everything that implies these fails with
+them.</p>
 <h2 id="history">History</h2>
 <p>The record’s revision log before it was written as arguments.</p>
 <ul>
-<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added the Strong Leibniz Biconditionals and their necessitation. Box is truth in this model, so a strong world is an atom and the principle reduces to Atomicity, which holds; boxed principles reduce to their unboxed forms. Now satisfies: Strong Leibniz Biconditionals, □Strong Leibniz Biconditionals.</li>
-<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Added No Contingency (signature Σ) and B for sentences of Σ: Box is truth in this model, so every closed sentence, whatever the constants denote, is necessary if true and necessarily possible if true. Now satisfies: No Contingency (signature Σ), B for sentences of Σ.</li>
-<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Fixed an interpretation of Σ (relational constants as top, individual constants as one fixed individual) and recorded the signature schemata it refutes, at Cian Dorr’s request. Now violates: Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).</li>
-<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Boxed the two Choice claims. Now satisfies: □Relational Choice, □Functional Choice.</li>
-<li><strong>2026-09-20</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Verified the Possible Infinity principles added on this date. Box is the identity on truth values, so each fails with the corresponding Axiom of Infinity. Now violates: Possible Infinity (type e), Possible Infinity (type t).</li>
-<li><strong>2026-09-20</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Listed the strongest principles the model obviously satisfies, at Cian Dorr’s request. Since Box is truth and identity is genuine, each boxed principle reduces to its unboxed form; coextensive relations are identical because every function type is full; every relation is persistent, inextensible and Gallin-extensional trivially; Actuality holds with top as the actual world; each relational type is a complete atomic Boolean algebra, giving Atomicity and Boolean Completeness; Tractarianism is the tautology that a proposition entailing each instance entails the universal claim; and ND holds outright, giving C5. Now satisfies: □Fregean Axiom, Modalized Fregean Axiom, Extensionality, □Extensionality, Intensionality, □Functionality, □Plenitude, Tractarianism, □Tractarianism, □ND, □Actuality, □Atomicity, □Boolean Completeness, □Rigid Comprehension, □Gallin Extensional Comprehension.</li>
-<li><strong>2026-09-17</strong> (OpenAI Codex (GPT-6), prompted by Zachary Goodsell) — Restricted the example and its recorded choice properties to the map’s relational type system at the user’s request. Now satisfies: Fregean Axiom, Functionality, Modalized Functionality, Plenitude, Functional Choice, Relational Choice, No Pure Contingency, Truth implies ND-necessity.</li>
+<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Added Strong Atomicity and its necessitation. Box is
+truth in this model, so a strong atom is an atom and the principle
+reduces to Atomicity, which holds; boxed principles reduce to their
+unboxed forms. Now satisfies: Strong Atomicity, □Strong Atomicity.</li>
+<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Added No Contingency (signature Σ) and B for sentences
+of Σ: Box is truth in this model, so every closed sentence, whatever the
+constants denote, is necessary if true and necessarily possible if true.
+Now satisfies: No Contingency (signature Σ), B for sentences of Σ.</li>
+<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Fixed an interpretation of Σ (relational constants as
+top, individual constants as one fixed individual) and recorded the
+signature schemata it refutes, at Cian Dorr’s request. Now violates:
+Witnessed Possibility, Separated Structure, Independence (signature Σ),
+Maximalism (signature Σ).</li>
+<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Boxed the two Choice claims. Now satisfies: □Relational
+Choice, □Functional Choice.</li>
+<li><strong>2026-09-20</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Verified the Possible Infinity principles added on this
+date. Box is the identity on truth values, so each fails with the
+corresponding Axiom of Infinity. Now violates: Possible Infinity (type
+e), Possible Infinity (type t).</li>
+<li><strong>2026-09-20</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Listed the strongest principles the model obviously
+satisfies, at Cian Dorr’s request. Since Box is truth and identity is
+genuine, each boxed principle reduces to its unboxed form; coextensive
+relations are identical because every function type is full; every
+relation is persistent, inextensible and Gallin-extensional trivially;
+Actuality holds with top as the actual world; each relational type is a
+complete atomic Boolean algebra, giving Atomicity and Boolean
+Completeness; Tractarianism is the tautology that a proposition
+entailing each instance entails the universal claim; and ND holds
+outright, giving C5. Now satisfies: □Fregean Axiom, Modalized Fregean
+Axiom, Extensionality, □Extensionality, Intensionality, □Functionality,
+□Plenitude, Tractarianism, □Tractarianism, □ND, □Actuality, □Atomicity,
+□Boolean Completeness, □Rigid Comprehension, □Gallin Extensional
+Comprehension.</li>
+<li><strong>2026-09-17</strong> (OpenAI Codex (GPT-6), prompted by
+Zachary Goodsell) — Restricted the example and its recorded choice
+properties to the map’s relational type system at the user’s request.
+Now satisfies: Fregean Axiom, Functionality, Modalized Functionality,
+Plenitude, Functional Choice, Relational Choice, No Pure Contingency,
+Truth implies ND-necessity.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48; §1.4, n. 18, p. 16.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition
+3.7, pp. 47–48; §1.4, n. 18, p. 16.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/models/full-henkin-singleton-base.yaml</code>
+Record:
+<code>topics/classicism/models/full-henkin-singleton-base.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48; §1.4, n. 18, p. 16</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §3.2,
+Definition 3.6 and Proposition 3.7, pp. 47–48; §1.4, n. 18, p. 16</li>
 </ul>
 </body></html>

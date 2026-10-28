@@ -323,116 +323,617 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Coalesced sum: singleton individual root</h1></header><p class="cert">
-Model — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17 September 2026.
+Model — Source: Classicism (2024); produced by Andrew Bacon and Cian
+Dorr; recorded by OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17
+September 2026.
 </p>
 <h2 id="package">Package</h2>
 <ul>
-<li><strong>Possibility+ (pure).</strong> The strengthened Possibility Maximalism schema for pure C-consistent formulas whose only free variables are the displayed individual variables; include the empty tuple.</li>
-<li><strong>Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
-<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at <span class="math inline">\sigma</span> form a rigid property with necessarily distinct instances. One sentence for each type <span class="math inline">\sigma</span>.</li>
-<li><strong>Truth implies ND-necessity.</strong> Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.</li>
-<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
-<li><strong>¬ □Two-hat necessity implies ND-necessity.</strong> Necessarily, whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat. In C this is the identity <span class="math inline">\hat{\hat\Box}=\Box_{\ne}</span>.</li>
-<li><strong>¬ □5-necessity implies two-hat necessity.</strong> Necessarily, whatever is 5-necessary is two-hat necessary. In C this is the identity <span class="math inline">\Box_5=\hat{\hat\Box}</span>.</li>
-<li><strong>¬ □Truth implies 5-necessity.</strong> Necessarily, every truth is 5-necessary: necessary under every S5 operator. In C this is the identity <span class="math inline">\Box_5=\lambda p\, .\,p</span>.</li>
-<li><strong>¬ Tame Rigidity.</strong> Every weakly rigid relation, including a proposition, is rigid.</li>
-<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the property of being a rigid relation that entails it.</li>
-<li><strong>¬ Intensional Choice.</strong> If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
-<li><strong>¬ BF (type t).</strong> If every proposition necessarily has a property, then necessarily every proposition has it.</li>
-<li><strong>¬ Atomicity (type t).</strong> Every non-bottom proposition has an atom below it.</li>
-<li><strong>¬ Boolean Completeness (type t).</strong> Every property of propositions has a greatest lower bound.</li>
-<li><strong>¬ □Vicinity.</strong> Necessarily, there is a true proposition that entails the possibility of each true proposition.</li>
-<li><strong>¬ □Weakly Inextensible Comprehension.</strong> Necessarily, every relation, including a proposition, is coextensive with a weakly inextensible one.</li>
-<li><strong>¬ □Transversal.</strong> Necessarily, there is a property of properties that picks out exactly one property from each coextension class, that is, exactly one property coextensive with any given property.</li>
-<li><strong>¬ Necessity of Analysis.</strong> Every first-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type <span class="math inline">\sigma</span> and each first-order analytical sentence.</li>
+<li><strong>Possibility+ (pure).</strong> The strengthened Possibility
+Maximalism schema for pure C-consistent formulas whose only free
+variables are the displayed individual variables; include the empty
+tuple.</li>
+<li><strong>Relational Choice.</strong> Every serial binary relation has
+a functional subrelation.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
+<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero
+is not a successor and successor is injective on numbers, the numbers at
+<span class="math inline">\sigma</span> form a rigid property with
+necessarily distinct instances. One sentence for each type <span
+class="math inline">\sigma</span>.</li>
+<li><strong>Truth implies ND-necessity.</strong> Every truth is
+ND-necessary, that is, necessary under the distinctness-preserving
+modality.</li>
+<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ □Two-hat necessity implies ND-necessity.</strong>
+Necessarily, whatever is two-hat necessary is ND-necessary: the
+distinctness-preserving modality agrees with its hat. In C this is the
+identity <span
+class="math inline">\hat{\hat\Box}=\Box_{\ne}</span>.</li>
+<li><strong>¬ □5-necessity implies two-hat necessity.</strong>
+Necessarily, whatever is 5-necessary is two-hat necessary. In C this is
+the identity <span
+class="math inline">\Box_5=\hat{\hat\Box}</span>.</li>
+<li><strong>¬ □Truth implies 5-necessity.</strong> Necessarily, every
+truth is 5-necessary: necessary under every S5 operator. In C this is
+the identity <span class="math inline">\Box_5=\lambda p\,
+.\,p</span>.</li>
+<li><strong>¬ Tame Rigidity.</strong> Every weakly rigid relation,
+including a proposition, is rigid.</li>
+<li><strong>¬ Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
+<li><strong>¬ Intensional Choice.</strong> If a property is necessarily
+instantiated, then some property entailing it is necessarily uniquely
+instantiated.</li>
+<li><strong>¬ BF (type t).</strong> If every proposition necessarily has
+a property, then necessarily every proposition has it.</li>
+<li><strong>¬ Atomicity (type t).</strong> Every non-bottom proposition
+has an atom below it.</li>
+<li><strong>¬ Boolean Completeness (type t).</strong> Every property of
+propositions has a greatest lower bound.</li>
+<li><strong>¬ □Vicinity.</strong> Necessarily, there is a true
+proposition that entails the possibility of each true proposition.</li>
+<li><strong>¬ □Weakly Inextensible Comprehension.</strong> Necessarily,
+every relation, including a proposition, is coextensive with a weakly
+inextensible one.</li>
+<li><strong>¬ □Transversal.</strong> Necessarily, there is a property of
+properties that picks out exactly one property from each coextension
+class, that is, exactly one property coextensive with any given
+property.</li>
+<li><strong>¬ Necessity of Analysis.</strong> Every first-order
+analytical sentence is either true in every real number structure in
+every possible world or false in every real number structure in every
+possible world. One sentence for each type <span
+class="math inline">\sigma</span> and each first-order analytical
+sentence.</li>
+<li><strong>¬ Self-atoms are atoms (type t).</strong> Every self-atom is
+an atom.</li>
+<li><strong>¬ Self-atoms are strong atoms (type t).</strong> Every
+self-atom is a strong atom.</li>
+<li><strong>¬ Self-Atomicity (type t).</strong> Every possible
+proposition is entailed by a self-atom: a possible proposition that
+necessarily, if true, is an atom, that is, one that entails that it is
+the actual world.</li>
+<li><strong>¬ Atoms are self-atoms (type t).</strong> Every atom is a
+self-atom: necessarily, if it is true, it is an atom.</li>
 </ul>
 <h2 id="definition">Definition</h2>
-<p>Take the alternative coalesced-sum root of Appendix E, p. 83: a set of source action models complete for C, coalesced at a new root whose individual domain is a singleton, the unique root individual being carried by each distinguished arrow to a chosen individual of that component. Evaluation point: the root.</p>
-<p>The root has one distinguished arrow to the root of each component, and every arrow from the root into a component factors through it.</p>
-<p>Root domains are as full as compatibility allows: a root proposition is a choice, for each component, of a proposition of that component’s root domain, together with a truth value at the root’s identity arrow, and a root entity of a relational type is likewise a family of component entities with a root component that is an arbitrary function of the root arguments.</p>
-<p><em>A member of the group Coalesced sums at a new root, which supplies this definition with the record’s settings, and the arguments marked as shared.</em></p>
+<p>Take the alternative coalesced-sum root of Appendix E, p. 83: a set
+of source action models complete for C, coalesced at a new root whose
+individual domain is a singleton, the unique root individual being
+carried by each distinguished arrow to a chosen individual of that
+component. Evaluation point: the root.</p>
+<p>The root has one distinguished arrow to the root of each component,
+and every arrow from the root into a component factors through it.</p>
+<p>Root domains are as full as compatibility allows: a root proposition
+is a choice, for each component, of a proposition of that component’s
+root domain, together with a truth value at the root’s identity arrow,
+and a root entity of a relational type is likewise a family of component
+entities with a root component that is an arbitrary function of the root
+arguments.</p>
+<p><em>A member of the group Coalesced sums at a new root, which
+supplies this definition with the record’s settings, and the arguments
+marked as shared.</em></p>
 <h2 id="arguments">Arguments</h2>
 <h3 id="holds-possibility-pure.">Holds Possibility+ (pure).</h3>
-<p>Choosing the components so that every C-consistent formula with one free individual variable is true of the chosen individual in some component gives the n = 1 instances of Possibility+; the instances with two or more variables have false antecedents at the root, and the empty-tuple instances are Possibility Maximalism.</p>
-<p><em>Source: Classicism, §2.6, pp. 41–42 and n. 61; Appendix E, p. 83. By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
-<h3 id="fails-infinity-schema-type-e.">Fails Infinity Schema (type e).</h3>
-<p>At the root, where there is one individual, although infinitely many are possible.</p>
+<p>Choosing the components so that every C-consistent formula with one
+free individual variable is true of the chosen individual in some
+component gives the n = 1 instances of Possibility+; the instances with
+two or more variables have false antecedents at the root, and the
+empty-tuple instances are Possibility Maximalism.</p>
+<p><em>Source: Classicism, §2.6, pp. 41–42 and n. 61; Appendix E, p. 83.
+By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
+<h3 id="fails-infinity-schema-type-e.">Fails Infinity Schema (type
+e).</h3>
+<p>At the root, where there is one individual, although infinitely many
+are possible.</p>
 <p><em>By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
-<h3 id="fails-two-hat-necessity-implies-nd-necessity-5-necessity-implies-two-hat-necessity-truth-implies-5-necessity.">Fails □Two-hat necessity implies ND-necessity, □5-necessity implies two-hat necessity, □Truth implies 5-necessity.</h3>
-<p>The components form a set of action models complete for C in the signature, so for each of the three unboxed collapse principles, which fail in some model of C (the paired-individuals two-object model for 5-necessity implies two-hat necessity, the two-object retract full model for two-hat necessity implies ND-necessity, the involution group for Truth implies 5-necessity), some component falsifies it at its own evaluation point; the component is carried into the coalesced sum unchanged and its evaluation point is a world accessible from the root by the distinguished arrow. So none of the boxed collapse principles holds at the root, although every truth at the root is ND-necessary.</p>
-<p><em>Address: <code>coalesced-single-individual-root#no-boxed-collapse</code>. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-10-14.</em></p>
+<h3
+id="fails-two-hat-necessity-implies-nd-necessity-5-necessity-implies-two-hat-necessity-truth-implies-5-necessity.">Fails
+□Two-hat necessity implies ND-necessity, □5-necessity implies two-hat
+necessity, □Truth implies 5-necessity.</h3>
+<p>The components form a set of action models complete for C in the
+signature, so for each of the three unboxed collapse principles, which
+fail in some model of C (the paired-individuals two-object model for
+5-necessity implies two-hat necessity, the two-object retract full model
+for two-hat necessity implies ND-necessity, the involution group for
+Truth implies 5-necessity), some component falsifies it at its own
+evaluation point; the component is carried into the coalesced sum
+unchanged and its evaluation point is a world accessible from the root
+by the distinguished arrow. So none of the boxed collapse principles
+holds at the root, although every truth at the root is ND-necessary.</p>
+<p><em>Address:
+<code>coalesced-single-individual-root#no-boxed-collapse</code>. By
+Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction,
+2026-10-14.</em></p>
 <h3 id="fails-tame-rigidity.">Fails Tame Rigidity.</h3>
-<p>Tame Rigidity fails at a relational argument type in models of C (ultralimit-fork, symmetric-qualitative-links), so some component <span class="math inline">M</span> refutes it at its root <span class="math inline">M_0</span>: some <span class="math inline">F_M</span> of type <span class="math inline">\sigma\to t</span>, <span class="math inline">\sigma</span> relational, is weakly rigid there but not rigid. A root entity <span class="math inline">F</span> of that type is a root extension <span class="math inline">F_o</span> together with a component <span class="math inline">F_N</span> in each component <span class="math inline">N</span>, and a formula about <span class="math inline">F</span> at a world of <span class="math inline">N</span> is the same formula about <span class="math inline">F_N</span> in <span class="math inline">N</span>. Since the components of root entities are arbitrary, <span class="math inline">F</span> is weakly inextensible at the root exactly when, for every <span class="math inline">N</span>, every <span class="math inline">X_N</span> that necessarily holds of the <span class="math inline">N</span>-components of the members of <span class="math inline">F_o</span> has <span class="math inline">F_N\le X_N</span>. For each other component <span class="math inline">N</span> fix <span class="math inline">z_N</span>, and for each <span class="math inline">y</span> in the extension of <span class="math inline">F_M</span> at <span class="math inline">M_0</span> let <span class="math inline">x_y</span> be the root entity with <span class="math inline">M</span>-component <span class="math inline">y</span> and <span class="math inline">N</span>-components <span class="math inline">z_N</span>, free at the root by the condition. Put <span class="math inline">F_o:=\{x_y\}</span>, <span class="math inline">F_N:=\lambda y\, .\,y=z_N</span>, a haecceity, rigid in every model of C, and keep <span class="math inline">F_M</span>. Then <span class="math inline">F</span> is persistent and weakly inextensible at the root, each component’s condition being the weak inextensibility of its own component, but not inextensible, since <span class="math inline">F_M</span> is not inextensible in <span class="math inline">M</span> and every arrow from the root into <span class="math inline">M</span> factors through the distinguished one. So Tame Rigidity fails at the root.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#tame-rigidity-component</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. It requires that A root entity of a relational type has a root component that is an arbitrary function of the root arguments. Here: The root domains are as full as compatibility allows. It requires that Every arrow from the root into a component factors through a single distinguished arrow to that component’s root. Here: This is the construction. By Claude Fable 5.1 (Anthropic), answering Cian Dorr’s conjecture, 2026-10-03.</em></p>
-<p><em>Revised 2026-10-03 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> One direction of Fable’s transfer theorem: at a coalesced root, Tame Rigidity at a relational type holds iff it holds at the root of every component. The other direction is not recorded, the engine deriving the positive verdict in the one model where it applies.</p>
+<p>Tame Rigidity fails at a relational argument type in models of C
+(ultralimit-fork, symmetric-qualitative-links), so some component <span
+class="math inline">M</span> refutes it at its root <span
+class="math inline">M_0</span>: some <span
+class="math inline">F_M</span> of type <span
+class="math inline">\sigma\to t</span>, <span
+class="math inline">\sigma</span> relational, is weakly rigid there but
+not rigid. A root entity <span class="math inline">F</span> of that type
+is a root extension <span class="math inline">F_o</span> together with a
+component <span class="math inline">F_N</span> in each component <span
+class="math inline">N</span>, and a formula about <span
+class="math inline">F</span> at a world of <span
+class="math inline">N</span> is the same formula about <span
+class="math inline">F_N</span> in <span class="math inline">N</span>.
+Since the components of root entities are arbitrary, <span
+class="math inline">F</span> is weakly inextensible at the root exactly
+when, for every <span class="math inline">N</span>, every <span
+class="math inline">X_N</span> that necessarily holds of the <span
+class="math inline">N</span>-components of the members of <span
+class="math inline">F_o</span> has <span class="math inline">F_N\le
+X_N</span>. For each other component <span class="math inline">N</span>
+fix <span class="math inline">z_N</span>, and for each <span
+class="math inline">y</span> in the extension of <span
+class="math inline">F_M</span> at <span class="math inline">M_0</span>
+let <span class="math inline">x_y</span> be the root entity with <span
+class="math inline">M</span>-component <span
+class="math inline">y</span> and <span
+class="math inline">N</span>-components <span
+class="math inline">z_N</span>, free at the root by the condition. Put
+<span class="math inline">F_o:=\{x_y\}</span>, <span
+class="math inline">F_N:=\lambda y\, .\,y=z_N</span>, a haecceity, rigid
+in every model of C, and keep <span class="math inline">F_M</span>. Then
+<span class="math inline">F</span> is persistent and weakly inextensible
+at the root, each component’s condition being the weak inextensibility
+of its own component, but not inextensible, since <span
+class="math inline">F_M</span> is not inextensible in <span
+class="math inline">M</span> and every arrow from the root into <span
+class="math inline">M</span> factors through the distinguished one. So
+Tame Rigidity fails at the root.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#tame-rigidity-component</code>. It
+requires that The components are a family of action models complete for
+C: every sentence consistent with C is true at the root of some
+component. Here: The source action models are a set complete for C. It
+requires that A root entity of a relational type has a root component
+that is an arbitrary function of the root arguments. Here: The root
+domains are as full as compatibility allows. It requires that Every
+arrow from the root into a component factors through a single
+distinguished arrow to that component’s root. Here: This is the
+construction. By Claude Fable 5.1 (Anthropic), answering Cian Dorr’s
+conjecture, 2026-10-03.</em></p>
+<p><em>Revised 2026-10-03 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> One direction of Fable’s transfer theorem: at a
+coalesced root, Tame Rigidity at a relational type holds iff it holds at
+the root of every component. The other direction is not recorded, the
+engine deriving the positive verdict in the one model where it
+applies.</p>
 <h3 id="fails-rigid-power.">Fails Rigid Power.</h3>
-<p>The transfer of tame-rigidity-component, applied to a rigid relation whose power property is not rigid. The pure sentence <span class="math inline">\exists A^{tt}\, .\,\operatorname{Rigid}(A)\land\neg\operatorname{Rigid} (\lambda X\, .\,\operatorname{Rigid}(X)\land X\le A)</span> is consistent with C (it holds in the one-individual variants of finite-support-pair-injections-or-collapses and symmetric-collapse-pair, with <span class="math inline">A:=\top</span>), so some component <span class="math inline">m</span> satisfies it at its root, with witness <span class="math inline">A</span>. Its extension <span class="math inline">D</span> there is nonempty: otherwise weak inextensibility tested on <span class="math inline">\bot</span> makes <span class="math inline">A=\bot</span>, whose power property is the haecceity of <span class="math inline">\bot</span>, which is rigid. For <span class="math inline">p\in D</span> let <span class="math inline">\widehat p</span> be the root proposition false at the root, with <span class="math inline">m</span>-component <span class="math inline">p</span> and <span class="math inline">\bot</span> in every other component; let <span class="math inline">F</span> have root extension <span class="math inline">\{\widehat p:p\in D\}</span>, <span class="math inline">m</span>-component <span class="math inline">A</span>, and in each other component <span class="math inline">i</span> the haecceity of <span class="math inline">\bot</span>. Both are in the domain, the root domains being fullest. <span class="math inline">F</span> is weakly persistent at the root, <span class="math inline">A</span> and the haecceities being persistent. It is weakly inextensible there: if <span class="math inline">H</span> necessarily holds of every <span class="math inline">\widehat p</span>, its root extension contains them, <span class="math inline">A\le H_m</span> by the weak inextensibility of <span class="math inline">A</span>, and the haecceity of <span class="math inline">\bot</span> entails <span class="math inline">H_i</span>; entailment in the sum is componentwise. Every other accessible world lies in a component, where <span class="math inline">F</span>’s components are rigid; so <span class="math inline">F</span> is rigid. The <span class="math inline">m</span>-component of its power property is that of <span class="math inline">A</span>, transport respecting abstraction, rigidity and entailment, and every arrow into <span class="math inline">m</span> factors through the distinguished one; so it is not rigid. Rigid Power fails at the root, at type <span class="math inline">t\to t</span>.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#rigid-power-component</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. It requires that A root entity of a relational type has a root component that is an arbitrary function of the root arguments. Here: The root domains are as full as compatibility allows. It requires that Every arrow from the root into a component factors through a single distinguished arrow to that component’s root. Here: This is the construction. By GPT-6 Astra (OpenAI), at Cian Dorr’s request; checked and recorded by Claude Opus 5.5 (Anthropic), 2026-10-11.</em></p>
+<p>The transfer of tame-rigidity-component, applied to a rigid relation
+whose power property is not rigid. The pure sentence <span
+class="math inline">\exists A^{tt}\,
+.\,\operatorname{Rigid}(A)\land\neg\operatorname{Rigid} (\lambda X\,
+.\,\operatorname{Rigid}(X)\land X\le A)</span> is consistent with C (it
+holds in the one-individual variants of
+finite-support-pair-injections-or-collapses and symmetric-collapse-pair,
+with <span class="math inline">A:=\top</span>), so some component <span
+class="math inline">m</span> satisfies it at its root, with witness
+<span class="math inline">A</span>. Its extension <span
+class="math inline">D</span> there is nonempty: otherwise weak
+inextensibility tested on <span class="math inline">\bot</span> makes
+<span class="math inline">A=\bot</span>, whose power property is the
+haecceity of <span class="math inline">\bot</span>, which is rigid. For
+<span class="math inline">p\in D</span> let <span
+class="math inline">\widehat p</span> be the root proposition false at
+the root, with <span class="math inline">m</span>-component <span
+class="math inline">p</span> and <span class="math inline">\bot</span>
+in every other component; let <span class="math inline">F</span> have
+root extension <span class="math inline">\{\widehat p:p\in D\}</span>,
+<span class="math inline">m</span>-component <span
+class="math inline">A</span>, and in each other component <span
+class="math inline">i</span> the haecceity of <span
+class="math inline">\bot</span>. Both are in the domain, the root
+domains being fullest. <span class="math inline">F</span> is weakly
+persistent at the root, <span class="math inline">A</span> and the
+haecceities being persistent. It is weakly inextensible there: if <span
+class="math inline">H</span> necessarily holds of every <span
+class="math inline">\widehat p</span>, its root extension contains them,
+<span class="math inline">A\le H_m</span> by the weak inextensibility of
+<span class="math inline">A</span>, and the haecceity of <span
+class="math inline">\bot</span> entails <span
+class="math inline">H_i</span>; entailment in the sum is componentwise.
+Every other accessible world lies in a component, where <span
+class="math inline">F</span>’s components are rigid; so <span
+class="math inline">F</span> is rigid. The <span
+class="math inline">m</span>-component of its power property is that of
+<span class="math inline">A</span>, transport respecting abstraction,
+rigidity and entailment, and every arrow into <span
+class="math inline">m</span> factors through the distinguished one; so
+it is not rigid. Rigid Power fails at the root, at type <span
+class="math inline">t\to t</span>.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#rigid-power-component</code>. It requires
+that The components are a family of action models complete for C: every
+sentence consistent with C is true at the root of some component. Here:
+The source action models are a set complete for C. It requires that A
+root entity of a relational type has a root component that is an
+arbitrary function of the root arguments. Here: The root domains are as
+full as compatibility allows. It requires that Every arrow from the root
+into a component factors through a single distinguished arrow to that
+component’s root. Here: This is the construction. By GPT-6 Astra
+(OpenAI), at Cian Dorr’s request; checked and recorded by Claude Opus
+5.5 (Anthropic), 2026-10-11.</em></p>
 <h3 id="fails-intensional-choice.">Fails Intensional Choice.</h3>
-<p>The type-<span class="math inline">e</span> instance of Intensional Choice fails in a model of C (symmetric-all-surjections), so its negation is consistent with C and some component <span class="math inline">M</span> refutes it at its root <span class="math inline">M_0</span>: some <span class="math inline">F</span> in <span class="math inline">M_0</span>’s domain is necessarily instantiated and no <span class="math inline">G\le F</span> there is necessarily uniquely instantiated. As in barcan-t-component, the thread <span class="math inline">F^{\prime}</span> that is universal at the root and in every other component and is carried onto <span class="math inline">F</span> by the distinguished arrow to <span class="math inline">M_0</span> is in the root domain, and it is necessarily instantiated. A root <span class="math inline">G\le F^{\prime}</span> that is necessarily uniquely instantiated would be carried onto such a <span class="math inline">G</span> for <span class="math inline">F</span> at <span class="math inline">M_0</span>, every arrow from the root into <span class="math inline">M</span> factoring through the distinguished one. So the unboxed principle fails at the root.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#intensional-choice-component</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. It requires that Every arrow from the root into a component factors through a single distinguished arrow to that component’s root. Here: This is the construction. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, at Cian Dorr’s suggestion, 2026-10-03.</em></p>
+<p>The type-<span class="math inline">e</span> instance of Intensional
+Choice fails in a model of C (symmetric-all-surjections), so its
+negation is consistent with C and some component <span
+class="math inline">M</span> refutes it at its root <span
+class="math inline">M_0</span>: some <span class="math inline">F</span>
+in <span class="math inline">M_0</span>’s domain is necessarily
+instantiated and no <span class="math inline">G\le F</span> there is
+necessarily uniquely instantiated. As in barcan-t-component, the thread
+<span class="math inline">F^{\prime}</span> that is universal at the
+root and in every other component and is carried onto <span
+class="math inline">F</span> by the distinguished arrow to <span
+class="math inline">M_0</span> is in the root domain, and it is
+necessarily instantiated. A root <span class="math inline">G\le
+F^{\prime}</span> that is necessarily uniquely instantiated would be
+carried onto such a <span class="math inline">G</span> for <span
+class="math inline">F</span> at <span class="math inline">M_0</span>,
+every arrow from the root into <span class="math inline">M</span>
+factoring through the distinguished one. So the unboxed principle fails
+at the root.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#intensional-choice-component</code>. It
+requires that The components are a family of action models complete for
+C: every sentence consistent with C is true at the root of some
+component. Here: The source action models are a set complete for C. It
+requires that Every arrow from the root into a component factors through
+a single distinguished arrow to that component’s root. Here: This is the
+construction. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, at
+Cian Dorr’s suggestion, 2026-10-03.</em></p>
 <h3 id="holds-relational-choice.">Holds Relational Choice.</h3>
-<p>The functionality of a subrelation is evaluated at the root’s identity arrow only, while the subrelation condition is boxed; so for a serial root relation take the subrelation whose root component is a functional choice from the root component, by choice in the metatheory, and whose component parts are empty. Where some component refutes Relational Choice at its root, as when the components are complete for C, its necessitation fails.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#relational-choice-free-root</code>. It requires that A root entity of a relational type has a root component that is an arbitrary function of the root arguments. Here: The root domains are as full as compatibility allows. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic), 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three complete members’ copies stated once; “Its necessitation fails, since some component refutes Relational Choice at its root” became conditional on that, since in the all-finite-domains member every component satisfies Relational Choice.</p>
+<p>The functionality of a subrelation is evaluated at the root’s
+identity arrow only, while the subrelation condition is boxed; so for a
+serial root relation take the subrelation whose root component is a
+functional choice from the root component, by choice in the metatheory,
+and whose component parts are empty. Where some component refutes
+Relational Choice at its root, as when the components are complete for
+C, its necessitation fails.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#relational-choice-free-root</code>. It
+requires that A root entity of a relational type has a root component
+that is an arbitrary function of the root arguments. Here: The root
+domains are as full as compatibility allows. By Cian Dorr, recorded by
+Claude Fable 5.1 (Anthropic), 2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three complete members’ copies stated once; “Its
+necessitation fails, since some component refutes Relational Choice at
+its root” became conditional on that, since in the all-finite-domains
+member every component satisfies Relational Choice.</p>
 <h3 id="holds-actuality.">Holds Actuality.</h3>
 <p>The singleton root proposition witnesses Actuality.</p>
-<p><em>Source: Classicism, Appendix E, p. 83. From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#actuality-singleton-root</code>. It requires that The actual-world proposition <span class="math inline">a</span> is in the domain and entails every truth, and no world outside <span class="math inline">a</span> sees a world in <span class="math inline">a</span>. Here: The singleton root proposition, true at the root’s identity arrow and nowhere in a component, is in the domain and entails every truth; the components have no arrows back to the root (Classicism, Appendix E, p. 83, on the distinctness-preserving collapse). By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three members’ versions stated once.</p>
+<p><em>Source: Classicism, Appendix E, p. 83. From the group
+</em>Coalesced sums at a new root<em>, shared argument
+<code>coalesced-sums#actuality-singleton-root</code>. It requires that
+The actual-world proposition <span class="math inline">a</span> is in
+the domain and entails every truth, and no world outside <span
+class="math inline">a</span> sees a world in <span
+class="math inline">a</span>. Here: The singleton root proposition, true
+at the root’s identity arrow and nowhere in a component, is in the
+domain and entails every truth; the components have no arrows back to
+the root (Classicism, Appendix E, p. 83, on the distinctness-preserving
+collapse). By Andrew Bacon and Cian Dorr, 2026-09-17.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three members’ versions stated once.</p>
 <h3 id="fails-bf-type-t.">Fails BF (type t).</h3>
-<p>C is complete for the component set, so some component <span class="math inline">M</span> refutes BF at its root <span class="math inline">M_0</span>, at type <span class="math inline">t</span> say: some <span class="math inline">F</span> in <span class="math inline">M_0</span>’s domain has <span class="math inline">\forall y\, .\,\Box Fy</span> true and <span class="math inline">\Diamond\exists y\, .\,\neg Fy</span> true at <span class="math inline">M_0</span>. Because the root’s domains are as full as possible, the thread <span class="math inline">F^{\prime}</span> that is universal at the root and in every other component and is carried onto <span class="math inline">F</span> by the distinguished arrow to <span class="math inline">M_0</span> is in the root domain. Every arrow from the root into <span class="math inline">M</span> factors through that distinguished arrow, so <span class="math inline">\forall y\, .\,\Box F^{\prime}y</span> at the root reduces to <span class="math inline">\forall y\, .\,\Box Fy</span> at <span class="math inline">M_0</span> together with trivial checks elsewhere, and <span class="math inline">\Diamond\exists y\, .\,\neg F^{\prime}y</span> at the root follows from <span class="math inline">\Diamond\exists y\, .\,\neg Fy</span> at <span class="math inline">M_0</span> through the same factorization.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#barcan-t-component</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. It requires that Every arrow from the root into a component factors through a single distinguished arrow to that component’s root. Here: This is the construction. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic), 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three members’ verbatim copies stated once.</p>
+<p>C is complete for the component set, so some component <span
+class="math inline">M</span> refutes BF at its root <span
+class="math inline">M_0</span>, at type <span
+class="math inline">t</span> say: some <span
+class="math inline">F</span> in <span class="math inline">M_0</span>’s
+domain has <span class="math inline">\forall y\, .\,\Box Fy</span> true
+and <span class="math inline">\Diamond\exists y\, .\,\neg Fy</span> true
+at <span class="math inline">M_0</span>. Because the root’s domains are
+as full as possible, the thread <span
+class="math inline">F^{\prime}</span> that is universal at the root and
+in every other component and is carried onto <span
+class="math inline">F</span> by the distinguished arrow to <span
+class="math inline">M_0</span> is in the root domain. Every arrow from
+the root into <span class="math inline">M</span> factors through that
+distinguished arrow, so <span class="math inline">\forall y\, .\,\Box
+F^{\prime}y</span> at the root reduces to <span
+class="math inline">\forall y\, .\,\Box Fy</span> at <span
+class="math inline">M_0</span> together with trivial checks elsewhere,
+and <span class="math inline">\Diamond\exists y\, .\,\neg
+F^{\prime}y</span> at the root follows from <span
+class="math inline">\Diamond\exists y\, .\,\neg Fy</span> at <span
+class="math inline">M_0</span> through the same factorization.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#barcan-t-component</code>. It requires
+that The components are a family of action models complete for C: every
+sentence consistent with C is true at the root of some component. Here:
+The source action models are a set complete for C. It requires that
+Every arrow from the root into a component factors through a single
+distinguished arrow to that component’s root. Here: This is the
+construction. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic),
+2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three members’ verbatim copies stated once.</p>
 <h3 id="fails-atomicity-type-t.">Fails Atomicity (type t).</h3>
-<p>C is complete for the components, so some component <span class="math inline">M</span> refutes Atomicity at its root, by a proposition <span class="math inline">p_M</span> with no atom below it in <span class="math inline">M</span>’s domain; the root proposition that is <span class="math inline">p_M</span> on <span class="math inline">M</span>, empty on every other component and false at the root has as its root lower bounds exactly the root propositions that are lower bounds of <span class="math inline">p_M</span> on <span class="math inline">M</span> and empty elsewhere, so it has no atom below it either.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#atomicity-t-component</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. It requires that Every arrow from the root into a component factors through a single distinguished arrow to that component’s root. Here: This is the construction. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic), 2026-09-22.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three members’ verbatim copies stated once.</p>
-<h3 id="fails-boolean-completeness-type-t.">Fails Boolean Completeness (type t).</h3>
-<p>The truncation model of Appendix D, part 6, refutes it at type <span class="math inline">t</span>, as its record now shows, and the components are complete for C, so one of them does; the root propositions false at every arrow except those into that component form a copy of its propositional domain under the root’s entailment order, and a root property of propositions holding exactly of the copies of the members of that component’s counterexample family has no least upper bound at the root.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#boolean-completeness-t-component</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. It requires that Every arrow from the root into a component factors through a single distinguished arrow to that component’s root. Here: This is the construction. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic), 2026-09-23.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three members’ verbatim copies stated once.</p>
-<h3 id="fails-vicinity-weakly-inextensible-comprehension.">Fails □Vicinity, □Weakly Inextensible Comprehension.</h3>
-<p>The components are complete for C and a closed pure sentence at the distinguished arrow into a component has its truth value at that component root, so every pure sentence consistent with C is possible at the root; the negation of Vicinity is consistent (the truncation model) and so is the negation of a closed instance of Weakly Inextensible Comprehension at type <span class="math inline">t\to t</span> (the permutation model). Since □Actuality fails here while Vicinity and Weakly Inextensible Comprehension hold, the boxed results show that at least one of the boxed principles had to fail.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#pure-sentences-possible</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s request, 2026-09-27.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three members’ verbatim copies stated once.</p>
+<p>C is complete for the components, so some component <span
+class="math inline">M</span> refutes Atomicity at its root, by a
+proposition <span class="math inline">p_M</span> with no atom below it
+in <span class="math inline">M</span>’s domain; the root proposition
+that is <span class="math inline">p_M</span> on <span
+class="math inline">M</span>, empty on every other component and false
+at the root has as its root lower bounds exactly the root propositions
+that are lower bounds of <span class="math inline">p_M</span> on <span
+class="math inline">M</span> and empty elsewhere, so it has no atom
+below it either.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#atomicity-t-component</code>. It requires
+that The components are a family of action models complete for C: every
+sentence consistent with C is true at the root of some component. Here:
+The source action models are a set complete for C. It requires that
+Every arrow from the root into a component factors through a single
+distinguished arrow to that component’s root. Here: This is the
+construction. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic),
+2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three members’ verbatim copies stated once.</p>
+<h3 id="fails-boolean-completeness-type-t.">Fails Boolean Completeness
+(type t).</h3>
+<p>The truncation model of Appendix D, part 6, refutes it at type <span
+class="math inline">t</span>, as its record now shows, and the
+components are complete for C, so one of them does; the root
+propositions false at every arrow except those into that component form
+a copy of its propositional domain under the root’s entailment order,
+and a root property of propositions holding exactly of the copies of the
+members of that component’s counterexample family has no least upper
+bound at the root.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#boolean-completeness-t-component</code>.
+It requires that The components are a family of action models complete
+for C: every sentence consistent with C is true at the root of some
+component. Here: The source action models are a set complete for C. It
+requires that Every arrow from the root into a component factors through
+a single distinguished arrow to that component’s root. Here: This is the
+construction. By Cian Dorr, recorded by Claude Fable 5.1 (Anthropic),
+2026-09-23.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three members’ verbatim copies stated once.</p>
+<h3 id="fails-vicinity-weakly-inextensible-comprehension.">Fails
+□Vicinity, □Weakly Inextensible Comprehension.</h3>
+<p>The components are complete for C and a closed pure sentence at the
+distinguished arrow into a component has its truth value at that
+component root, so every pure sentence consistent with C is possible at
+the root; the negation of Vicinity is consistent (the truncation model)
+and so is the negation of a closed instance of Weakly Inextensible
+Comprehension at type <span class="math inline">t\to t</span> (the
+permutation model). Since □Actuality fails here while Vicinity and
+Weakly Inextensible Comprehension hold, the boxed results show that at
+least one of the boxed principles had to fail.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#pure-sentences-possible</code>. It
+requires that The components are a family of action models complete for
+C: every sentence consistent with C is true at the root of some
+component. Here: The source action models are a set complete for C. By
+Claude Opus 5.5 (Anthropic), at Cian Dorr’s request,
+2026-09-27.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three members’ verbatim copies stated once.</p>
 <h3 id="fails-transversal.">Fails □Transversal.</h3>
-<p>Every pure sentence consistent with C is possible at the root (pure-sentences-possible): the negation of the type-<span class="math inline">e</span> instance of Transversal is a pure sentence consistent with C, since it holds in symmetric-infinite-classes, so it is possible at the root.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#transversal-boxed</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-09-28.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The three members’ verbatim copies stated once; “By the same argument” became a reference to pure-sentences-possible.</p>
-<h3 id="holds-arithmetic-necessitism.">Holds Arithmetic Necessitism.</h3>
-<p>Vacuously, at every type <span class="math inline">\sigma</span>. The negation of <span class="math inline">I^*_\sigma</span>, that zero is a successor or successor is not injective on the numbers at <span class="math inline">\sigma</span>, is a pure sentence consistent with C: it holds in the full model with one world, one individual and two propositions, where every type is finite and the finite cardinalities beyond the size of the type coincide. So it is possible at the root (pure-sentences-possible), the antecedent <span class="math inline">\Box I^*_\sigma</span> fails there, and the instance of Arithmetic Necessitism at <span class="math inline">\sigma</span> is true.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#arithmetic-necessitism-complete-components</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<p>Every pure sentence consistent with C is possible at the root
+(pure-sentences-possible): the negation of the type-<span
+class="math inline">e</span> instance of Transversal is a pure sentence
+consistent with C, since it holds in symmetric-infinite-classes, so it
+is possible at the root.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#transversal-boxed</code>. It requires that
+The components are a family of action models complete for C: every
+sentence consistent with C is true at the root of some component. Here:
+The source action models are a set complete for C. By Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 2026-09-28.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The three members’ verbatim copies stated once; “By the
+same argument” became a reference to pure-sentences-possible.</p>
+<h3 id="holds-arithmetic-necessitism.">Holds Arithmetic
+Necessitism.</h3>
+<p>Vacuously, at every type <span class="math inline">\sigma</span>. The
+negation of <span class="math inline">I^*_\sigma</span>, that zero is a
+successor or successor is not injective on the numbers at <span
+class="math inline">\sigma</span>, is a pure sentence consistent with C:
+it holds in the full model with one world, one individual and two
+propositions, where every type is finite and the finite cardinalities
+beyond the size of the type coincide. So it is possible at the root
+(pure-sentences-possible), the antecedent <span class="math inline">\Box
+I^*_\sigma</span> fails there, and the instance of Arithmetic
+Necessitism at <span class="math inline">\sigma</span> is true.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument
+<code>coalesced-sums#arithmetic-necessitism-complete-components</code>.
+It requires that The components are a family of action models complete
+for C: every sentence consistent with C is true at the root of some
+component. Here: The source action models are a set complete for C. By
+Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-23.</em></p>
 <h3 id="fails-necessity-of-analysis.">Fails Necessity of Analysis.</h3>
-<p>The negation of an instance of the Necessity of Analysis is a closed pure sentence consistent with C: at the root of coalesced-two-extensional-arithmetics-root, with <span class="math inline">\sigma</span> and <span class="math inline">A</span> as in that model’s argument, both <span class="math inline">\Diamond\exists\mathfrak R\,.\,(\operatorname{Real}_\sigma(\mathfrak R)\land A(\mathfrak R))</span> and <span class="math inline">\Diamond\exists\mathfrak R\,.\,(\operatorname{Real}_\sigma(\mathfrak R)\land\neg A(\mathfrak R))</span> hold. So it is possible at the root (pure-sentences-possible), and since arrows compose, what is possibly possible is possible: both conjuncts hold at the root, and the instance fails.</p>
-<p><em>From the group </em>Coalesced sums at a new root<em>, shared argument <code>coalesced-sums#necessity-of-analysis-complete-components</code>. It requires that The components are a family of action models complete for C: every sentence consistent with C is true at the root of some component. Here: The source action models are a set complete for C. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
-<h3 id="holds-truth-implies-nd-necessity.">Holds Truth implies ND-necessity.</h3>
-<p>For a true <span class="math inline">p</span>, <span class="math inline">a\le p</span>, since <span class="math inline">a</span> entails every truth. Take <span class="math inline">q:=a</span> in the definition of <span class="math inline">\Box_{\ne}p</span>: at a world in <span class="math inline">a</span>, <span class="math inline">p</span> holds; at a world outside <span class="math inline">a</span>, <span class="math inline">\Diamond a</span> fails. So every truth is <span class="math inline">\Box_{\ne}</span>-necessary.</p>
-<p><em>General argument <code>arguments/dpc-isolated-actual-world</code>. It requires that The actual-world proposition <span class="math inline">a</span> is in the domain and entails every truth, and no world outside <span class="math inline">a</span> sees a world in <span class="math inline">a</span>. Here: The singleton root proposition, true at the root’s identity arrow and nowhere in a component, is in the domain and entails every truth; the components have no arrows back to the root (Classicism, Appendix E, p. 83, on the distinctness-preserving collapse). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.</em></p>
-<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> The finite-support, symmetric and full action models’ copies (eight records) stated once for the topic; what varied, why no world outside the actual world sees back into it, is each record’s reason for meeting actual-world-isolated.</p>
+<p>The negation of an instance of the Necessity of Analysis is a closed
+pure sentence consistent with C: at the root of
+coalesced-two-extensional-arithmetics-root, with <span
+class="math inline">\sigma</span> and <span class="math inline">A</span>
+as in that model’s argument, both <span
+class="math inline">\Diamond\exists\mathfrak
+R\,.\,(\operatorname{Real}_\sigma(\mathfrak R)\land A(\mathfrak
+R))</span> and <span class="math inline">\Diamond\exists\mathfrak
+R\,.\,(\operatorname{Real}_\sigma(\mathfrak R)\land\neg A(\mathfrak
+R))</span> hold. So it is possible at the root
+(pure-sentences-possible), and since arrows compose, what is possibly
+possible is possible: both conjuncts hold at the root, and the instance
+fails.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument
+<code>coalesced-sums#necessity-of-analysis-complete-components</code>.
+It requires that The components are a family of action models complete
+for C: every sentence consistent with C is true at the root of some
+component. Here: The source action models are a set complete for C. By
+Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell,
+2026-10-23.</em></p>
+<h3
+id="fails-self-atoms-are-atoms-type-t-self-atoms-are-strong-atoms-type-t.">Fails
+Self-atoms are atoms (type t), Self-atoms are strong atoms (type
+t).</h3>
+<p>Let <span class="math inline">N</span> and <span
+class="math inline">M</span> be two components whose roots satisfy
+Actuality, with true atoms <span class="math inline">a_N</span> and
+<span class="math inline">a_M</span>, and let <span
+class="math inline">P</span> be the root proposition false at the root,
+with component <span class="math inline">a_N</span> at <span
+class="math inline">N</span>, <span class="math inline">a_M</span> at
+<span class="math inline">M</span> and bottom elsewhere. <span
+class="math inline">P</span> is possible, and it is a self-atom: under
+the distinguished arrow into <span class="math inline">N</span> it
+becomes <span class="math inline">a_N</span>, and a true atom is a
+self-atom, as it entails every truth, including the truth that it
+entails every truth; likewise at <span class="math inline">M</span>; and
+at the root it is false. It is not an atom, since the root proposition
+with component <span class="math inline">a_N</span> alone lies strictly
+below it. So Self-atoms are atoms (type t) fails at the root, and with
+it Self-atoms are strong atoms (type t).</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#self-atom-of-two-actual-components</code>.
+It requires that At least two components are action models whose roots
+satisfy Actuality, and the root domain contains every family of
+component propositions with a truth value at the root (the fullest root
+domains). Here: The components are complete for C, so two of them
+satisfy Actuality at their roots; the root domains are the fullest. By
+Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October
+2026.</em></p>
+<h3 id="fails-self-atomicity-type-t-atoms-are-self-atoms-type-t.">Fails
+Self-Atomicity (type t), Atoms are self-atoms (type t).</h3>
+<p>Atoms are self-atoms (type t) fails in a model of C, the full
+idempotent monoid, where the atom <span class="math inline">\{k\}</span>
+becomes <span class="math inline">\{1,k\}</span> under <span
+class="math inline">k</span>; so some component <span
+class="math inline">N</span> refutes it at its root with an atom <span
+class="math inline">q</span>. The root proposition with component <span
+class="math inline">q</span> at <span class="math inline">N</span> and
+bottom elsewhere, false at the root, is an atom at the root, is
+possible, and under the distinguished arrow into <span
+class="math inline">N</span> becomes <span class="math inline">q</span>,
+which is true at a world of <span class="math inline">N</span> without
+being an atom there. So it is an atom that is not a self-atom, and as
+nothing possible lies below it but itself, Self-Atomicity (type t) fails
+at the root too.</p>
+<p><em>From the group </em>Coalesced sums at a new root<em>, shared
+argument <code>coalesced-sums#self-atomicity-component</code>. It
+requires that The components are a family of action models complete for
+C: every sentence consistent with C is true at the root of some
+component. Here: The source action models are a set complete for C. It
+requires that Every arrow from the root into a component factors through
+a single distinguished arrow to that component’s root. Here: This is the
+construction. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25
+October 2026.</em></p>
+<h3 id="holds-truth-implies-nd-necessity.">Holds Truth implies
+ND-necessity.</h3>
+<p>For a true <span class="math inline">p</span>, <span
+class="math inline">a\le p</span>, since <span
+class="math inline">a</span> entails every truth. Take <span
+class="math inline">q:=a</span> in the definition of <span
+class="math inline">\Box_{\ne}p</span>: at a world in <span
+class="math inline">a</span>, <span class="math inline">p</span> holds;
+at a world outside <span class="math inline">a</span>, <span
+class="math inline">\Diamond a</span> fails. So every truth is <span
+class="math inline">\Box_{\ne}</span>-necessary.</p>
+<p><em>General argument
+<code>arguments/dpc-isolated-actual-world</code>. It requires that The
+actual-world proposition <span class="math inline">a</span> is in the
+domain and entails every truth, and no world outside <span
+class="math inline">a</span> sees a world in <span
+class="math inline">a</span>. Here: The singleton root proposition, true
+at the root’s identity arrow and nowhere in a component, is in the
+domain and entails every truth; the components have no arrows back to
+the root (Classicism, Appendix E, p. 83, on the distinctness-preserving
+collapse). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr,
+2026-09-23.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The finite-support, symmetric and full action models’
+copies (eight records) stated once for the topic; what varied, why no
+world outside the actual world sees back into it, is each record’s
+reason for meeting actual-world-isolated.</p>
 <h2 id="notes">Notes</h2>
-<p>Promoted on 22 September 2026 for the pure package, which the source establishes; the earlier conjectured status concerned an expansion to the map’s signature Σ. That expansion exists exactly when Σ has at most one individual constant: with two, the unique root individual would have to be carried to two different interpretations in a component where they differ, which no arrow can do. So the signature principles are not listed; for a signature with individual constants see the constant-indexed root.</p>
+<p>Promoted on 22 September 2026 for the pure package, which the source
+establishes; the earlier conjectured status concerned an expansion to
+the map’s signature Σ. That expansion exists exactly when Σ has at most
+one individual constant: with two, the unique root individual would have
+to be carried to two different interpretations in a component where they
+differ, which no arrow can do. So the signature principles are not
+listed; for a signature with individual constants see the
+constant-indexed root.</p>
 <h2 id="history">History</h2>
 <p>The record’s revision log before it was written as arguments.</p>
 <ul>
-<li><strong>2026-09-28</strong> (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — Recorded the failure of □Transversal: every pure sentence consistent with C is possible at the root, and symmetric-infinite-classes refutes Transversal at type e. Now violates: □Transversal.</li>
-<li><strong>2026-09-27</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s request) — Recorded the failure of □Vicinity and □Weakly Inextensible Comprehension; argument in the notes. Now violates: □Vicinity, □Weakly Inextensible Comprehension.</li>
-<li><strong>2026-09-25</strong> (Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell) — Added Transversal Choice at the root, by the argument recorded for Relational Choice: a root entity has an arbitrary root component, so take the property whose root component is a transversal, chosen in the metatheory, of the root component of an equivalence relation at the root, with empty component parts; the equivalence and transversal conditions are all evaluated at the root’s identity arrow. Recorded on a question of Zachary Goodsell, after an observation of Christopher Sun. Now satisfies: Transversal Choice.</li>
-<li><strong>2026-09-23</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Corrected the Boolean Completeness claim from the type-t instance to the type schema, since no component is known to refute it at type t; added the failure of Countable Boolean Completeness by the same transfer. Now violates: Boolean Completeness, Countable Boolean Completeness.</li>
-<li><strong>2026-09-23</strong> (Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)) — Restored the failure of Boolean Completeness (type t), now that a component refuting it at type t is on the map; see the notes. Now violates: Boolean Completeness (type t).</li>
-<li><strong>2026-09-22</strong> (Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)) — Promoted to proved for the pure assertions, which Classicism n. 61 and Appendix E, p. 83 establish; the signature expansion is now understood to exist only for at most one individual constant, so no signature principle is listed. Added the failure of BF and BF (type t) at the root. Now violates: BF, BF (type t).</li>
-<li><strong>2026-09-22</strong> (Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)) — Settled Atomicity (type t) and Boolean Completeness (type t) as failing and Relational Choice as holding, as at the maximalist root. Now satisfies: Relational Choice. Now violates: Atomicity (type t).</li>
-<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr) — Recorded the failure of □Relational Choice, already argued in the notes. Now violates: □Relational Choice.</li>
+<li><strong>2026-09-28</strong> (Claude Opus 5.5 (Anthropic), prompted
+by Cian Dorr) — Recorded the failure of □Transversal: every pure
+sentence consistent with C is possible at the root, and
+symmetric-infinite-classes refutes Transversal at type e. Now violates:
+□Transversal.</li>
+<li><strong>2026-09-27</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s request) — Recorded the failure of □Vicinity and □Weakly
+Inextensible Comprehension; argument in the notes. Now violates:
+□Vicinity, □Weakly Inextensible Comprehension.</li>
+<li><strong>2026-09-25</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Zachary Goodsell) — Added Transversal Choice at the root, by the
+argument recorded for Relational Choice: a root entity has an arbitrary
+root component, so take the property whose root component is a
+transversal, chosen in the metatheory, of the root component of an
+equivalence relation at the root, with empty component parts; the
+equivalence and transversal conditions are all evaluated at the root’s
+identity arrow. Recorded on a question of Zachary Goodsell, after an
+observation of Christopher Sun. Now satisfies: Transversal Choice.</li>
+<li><strong>2026-09-23</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Corrected the Boolean Completeness claim from the type-t
+instance to the type schema, since no component is known to refute it at
+type t; added the failure of Countable Boolean Completeness by the same
+transfer. Now violates: Boolean Completeness, Countable Boolean
+Completeness.</li>
+<li><strong>2026-09-23</strong> (Cian Dorr, recorded by Claude Fable 5.1
+(Anthropic)) — Restored the failure of Boolean Completeness (type t),
+now that a component refuting it at type t is on the map; see the notes.
+Now violates: Boolean Completeness (type t).</li>
+<li><strong>2026-09-22</strong> (Cian Dorr, recorded by Claude Fable 5.1
+(Anthropic)) — Promoted to proved for the pure assertions, which
+Classicism n. 61 and Appendix E, p. 83 establish; the signature
+expansion is now understood to exist only for at most one individual
+constant, so no signature principle is listed. Added the failure of BF
+and BF (type t) at the root. Now violates: BF, BF (type t).</li>
+<li><strong>2026-09-22</strong> (Cian Dorr, recorded by Claude Fable 5.1
+(Anthropic)) — Settled Atomicity (type t) and Boolean Completeness (type
+t) as failing and Relational Choice as holding, as at the maximalist
+root. Now satisfies: Relational Choice. Now violates: Atomicity (type
+t).</li>
+<li><strong>2026-09-22</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr) — Recorded the failure of □Relational Choice, already
+argued in the notes. Now violates: □Relational Choice.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, pp. 41–42 and n. 61; Appendix E, p. 83.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §2.6, pp. 41–42 and n. 61; Appendix E,
+p. 83.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/models/coalesced-single-individual-root.yaml</code>
+Record:
+<code>topics/classicism/models/coalesced-single-individual-root.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.6, pp. 41–42 and n. 61; Appendix E, p. 83</li>
+<li><strong>Proof: Classicism.</strong> Bacon, Andrew, and Cian Dorr
+(2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.6,
+pp. 41–42 and n. 61; Appendix E, p. 83</li>
 </ul>
 </body></html>

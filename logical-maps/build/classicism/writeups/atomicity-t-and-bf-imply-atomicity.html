@@ -322,20 +322,103 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Atomicity (type t) and BF imply Atomicity</h1></header><p>Assume Atomicity at type <span class="math inline">t</span> and BF at every type. The conclusion is Atomicity at every relational type <span class="math inline">\tau=\sigma_1\cdots\sigma_n t</span>: every <span class="math inline">X^\tau</span> with <span class="math inline">X\ne\bot_\tau</span> has an atom below it. The argument is Cian Dorr’s (23 September 2026); the verification of atomhood is written out here. Notation and the lattice facts are as in Background: <span class="math inline">Y\le_\tau X</span> is <span class="math inline">\Box\forall\bar y\, .\,Y\bar y\to X\bar y</span>, <span class="math inline">\bot_\tau=\lambda\bar y\, .\,\bot</span>, <span class="math inline">Y\le\neg Y</span> iff <span class="math inline">Y=\bot</span>, and <span class="math inline">\operatorname{Atom}_\tau(Y)</span> says that the entities strictly below <span class="math inline">Y</span> are exactly <span class="math inline">\bot</span>. We use Intensionality, <span class="math inline">\Box\forall\bar y\, .\,(Y\bar y\leftrightarrow X\bar y)\to Y=X</span>, a theorem of C, and the fact that <span class="math inline">\Box</span> carries H-provable implications (necessitation and K).</p>
-<p><strong>Step 1: a possible instance.</strong> Let <span class="math inline">X\ne\bot_\tau</span>. By the contrapositive of Intensionality, <span class="math inline">\neg\Box\forall\bar y\, .\,(X\bar y\leftrightarrow\bot)</span>, that is <span class="math inline">\Diamond\exists\bar y\, .\,X\bar y</span>. BF at <span class="math inline">\sigma_1,\ldots,\sigma_n</span> in its dual form <span class="math inline">\Diamond\exists y\, .\,P\to\exists y\, .\,\Diamond P</span>, applied <span class="math inline">n</span> times, gives <span class="math inline">\bar x</span> with <span class="math inline">\Diamond X\bar x</span>, that is <span class="math inline">X\bar x\ne\bot</span>.</p>
-<p><strong>Step 2: an atom below the instance.</strong> Atomicity at type <span class="math inline">t</span> gives an atom <span class="math inline">w</span> with <span class="math inline">w\le X\bar x</span>. Put</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Atomicity (type t) and BF imply Atomicity</h1></header><p>Assume Atomicity at type <span class="math inline">t</span> and BF at
+every type. The conclusion is Atomicity at every relational type <span
+class="math inline">\tau=\sigma_1\cdots\sigma_n t</span>: every <span
+class="math inline">X^\tau</span> with <span
+class="math inline">X\ne\bot_\tau</span> has an atom below it. The
+argument is Cian Dorr’s (23 September 2026); the verification of
+atomhood is written out here. Notation and the lattice facts are as in
+Background: <span class="math inline">Y\le_\tau X</span> is <span
+class="math inline">\Box\forall\bar y\, .\,Y\bar y\to X\bar y</span>,
+<span class="math inline">\bot_\tau=\lambda\bar y\, .\,\bot</span>,
+<span class="math inline">Y\le\neg Y</span> iff <span
+class="math inline">Y=\bot</span>, and <span
+class="math inline">\operatorname{Atom}_\tau(Y)</span> says that the
+entities strictly below <span class="math inline">Y</span> are exactly
+<span class="math inline">\bot</span>. We use Intensionality, <span
+class="math inline">\Box\forall\bar y\, .\,(Y\bar y\leftrightarrow X\bar
+y)\to Y=X</span>, a theorem of C, and the fact that <span
+class="math inline">\Box</span> carries H-provable implications
+(necessitation and K).</p>
+<p><strong>Step 1: a possible instance.</strong> Let <span
+class="math inline">X\ne\bot_\tau</span>. By the contrapositive of
+Intensionality, <span class="math inline">\neg\Box\forall\bar y\,
+.\,(X\bar y\leftrightarrow\bot)</span>, that is <span
+class="math inline">\Diamond\exists\bar y\, .\,X\bar y</span>. BF at
+<span class="math inline">\sigma_1,\ldots,\sigma_n</span> in its dual
+form <span class="math inline">\Diamond\exists y\, .\,P\to\exists y\,
+.\,\Diamond P</span>, applied <span class="math inline">n</span> times,
+gives <span class="math inline">\bar x</span> with <span
+class="math inline">\Diamond X\bar x</span>, that is <span
+class="math inline">X\bar x\ne\bot</span>.</p>
+<p><strong>Step 2: an atom below the instance.</strong> Atomicity at
+type <span class="math inline">t</span> gives an atom <span
+class="math inline">w</span> with <span class="math inline">w\le X\bar
+x</span>. Put</p>
 <p><span class="math display">
 A:=\lambda\bar y\, .\,w\land\bar y=\bar x,
 </span></p>
-<p>where <span class="math inline">\bar y=\bar x</span> abbreviates <span class="math inline">y_1=x_1\land\cdots\land y_n=x_n</span>.</p>
-<p><strong>Step 3: <span class="math inline">A\le X</span>.</strong> We need <span class="math inline">\Box\forall\bar y\, .\,(w\land\bar y=\bar x)\to X\bar y</span>. From <span class="math inline">w\le X\bar x</span>, that is <span class="math inline">\Box(w\to X\bar x)</span>, this follows by K, since <span class="math inline">(w\to X\bar x)\to\forall\bar y\, .\,(w\land\bar y=\bar x\to X\bar y)</span> is a theorem of H by Leibniz’s law.</p>
-<p><strong>Step 4: <span class="math inline">A</span> is an atom.</strong> First <span class="math inline">A\ne\bot_\tau</span>: <span class="math inline">A\bar x=w\land\bar x=\bar x=w\ne\bot</span>, while <span class="math inline">\bot_\tau\bar x=\bot</span>. Now let <span class="math inline">Z\le A</span>; we show <span class="math inline">Z=\bot_\tau</span> or <span class="math inline">Z=A</span>, which is atomhood. From <span class="math inline">Z\le A</span> we get <span class="math inline">Z\bar x\le A\bar x=w</span>, so by atomhood of <span class="math inline">w</span> either <span class="math inline">Z\bar x=\bot</span> or <span class="math inline">Z\bar x=w</span>.</p>
-<p><em>If <span class="math inline">Z\bar x=w</span>, then <span class="math inline">Z=A</span>.</em> By Intensionality it suffices to show <span class="math inline">\Box\forall\bar y\, .\,(Z\bar y\leftrightarrow A\bar y)</span>. One direction is <span class="math inline">Z\le A</span>. For the other, <span class="math inline">Z\bar x=w</span> gives <span class="math inline">\Box(w\to Z\bar x)</span>, and <span class="math inline">(w\to Z\bar x)\to\forall\bar y\, .\,(w\land\bar y=\bar x\to Z\bar y)</span> is a theorem of H by Leibniz’s law, so K gives <span class="math inline">\Box\forall\bar y\, .\,(A\bar y\to Z\bar y)</span>.</p>
-<p><em>If <span class="math inline">Z\bar x=\bot</span>, then <span class="math inline">Z=\bot_\tau</span>.</em> Again by Intensionality it suffices to show <span class="math inline">\Box\forall\bar y\, .\,\neg Z\bar y</span>. We have <span class="math inline">\Box\forall\bar y\, .\,(Z\bar y\to w\land\bar y=\bar x)</span> from <span class="math inline">Z\le A</span> and <span class="math inline">\Box\neg Z\bar x</span> from <span class="math inline">Z\bar x=\bot</span>. Under the box, <span class="math inline">Z\bar y</span> gives <span class="math inline">\bar y=\bar x</span>, hence <span class="math inline">Z\bar x</span> by Leibniz’s law, against <span class="math inline">\neg Z\bar x</span>; so <span class="math inline">\neg Z\bar y</span>. This is an H-provable consequence of the two boxed premises, so K gives the boxed conclusion. <span class="math inline">\square</span></p>
-<p>Only BF is used beyond C and the type-<span class="math inline">t</span> instance, and only at the argument types of <span class="math inline">\tau</span>, in Step 1. Conversely, no instance of BF is needed when <span class="math inline">n=0</span>, where the conclusion is the premise.</p>
+<p>where <span class="math inline">\bar y=\bar x</span> abbreviates
+<span class="math inline">y_1=x_1\land\cdots\land y_n=x_n</span>.</p>
+<p><strong>Step 3: <span class="math inline">A\le X</span>.</strong> We
+need <span class="math inline">\Box\forall\bar y\, .\,(w\land\bar y=\bar
+x)\to X\bar y</span>. From <span class="math inline">w\le X\bar
+x</span>, that is <span class="math inline">\Box(w\to X\bar x)</span>,
+this follows by K, since <span class="math inline">(w\to X\bar
+x)\to\forall\bar y\, .\,(w\land\bar y=\bar x\to X\bar y)</span> is a
+theorem of H by Leibniz’s law.</p>
+<p><strong>Step 4: <span class="math inline">A</span> is an
+atom.</strong> First <span class="math inline">A\ne\bot_\tau</span>:
+<span class="math inline">A\bar x=w\land\bar x=\bar x=w\ne\bot</span>,
+while <span class="math inline">\bot_\tau\bar x=\bot</span>. Now let
+<span class="math inline">Z\le A</span>; we show <span
+class="math inline">Z=\bot_\tau</span> or <span
+class="math inline">Z=A</span>, which is atomhood. From <span
+class="math inline">Z\le A</span> we get <span class="math inline">Z\bar
+x\le A\bar x=w</span>, so by atomhood of <span
+class="math inline">w</span> either <span class="math inline">Z\bar
+x=\bot</span> or <span class="math inline">Z\bar x=w</span>.</p>
+<p><em>If <span class="math inline">Z\bar x=w</span>, then <span
+class="math inline">Z=A</span>.</em> By Intensionality it suffices to
+show <span class="math inline">\Box\forall\bar y\, .\,(Z\bar
+y\leftrightarrow A\bar y)</span>. One direction is <span
+class="math inline">Z\le A</span>. For the other, <span
+class="math inline">Z\bar x=w</span> gives <span
+class="math inline">\Box(w\to Z\bar x)</span>, and <span
+class="math inline">(w\to Z\bar x)\to\forall\bar y\, .\,(w\land\bar
+y=\bar x\to Z\bar y)</span> is a theorem of H by Leibniz’s law, so K
+gives <span class="math inline">\Box\forall\bar y\, .\,(A\bar y\to Z\bar
+y)</span>.</p>
+<p><em>If <span class="math inline">Z\bar x=\bot</span>, then <span
+class="math inline">Z=\bot_\tau</span>.</em> Again by Intensionality it
+suffices to show <span class="math inline">\Box\forall\bar y\, .\,\neg
+Z\bar y</span>. We have <span class="math inline">\Box\forall\bar y\,
+.\,(Z\bar y\to w\land\bar y=\bar x)</span> from <span
+class="math inline">Z\le A</span> and <span class="math inline">\Box\neg
+Z\bar x</span> from <span class="math inline">Z\bar x=\bot</span>. Under
+the box, <span class="math inline">Z\bar y</span> gives <span
+class="math inline">\bar y=\bar x</span>, hence <span
+class="math inline">Z\bar x</span> by Leibniz’s law, against <span
+class="math inline">\neg Z\bar x</span>; so <span
+class="math inline">\neg Z\bar y</span>. This is an H-provable
+consequence of the two boxed premises, so K gives the boxed conclusion.
+<span class="math inline">\square</span></p>
+<p>Only BF is used beyond C and the type-<span
+class="math inline">t</span> instance, and only at the argument types of
+<span class="math inline">\tau</span>, in Step 1. Conversely, no
+instance of BF is needed when <span class="math inline">n=0</span>,
+where the conclusion is the premise.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.2, pp. 23–24. Definitions of Atom and the order; the source records Atomicity as a single principle across types and does not separate the type-t instance.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.2,
+pp. 23–24. Definitions of Atom and the order; the source records
+Atomicity as a single principle across types and does not separate the
+type-t instance.</li>
 </ul>
 </body></html>

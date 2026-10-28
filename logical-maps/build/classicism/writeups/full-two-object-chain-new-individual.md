@@ -11,8 +11,10 @@
 - **Truth implies ND-necessity.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
 - **□Truth implies 5-necessity.** Necessarily, every truth is 5-necessary: necessary under every S5 operator. In C this is the identity $\Box_5=\lambda p\, .\,p$.
 - **□Atomicity.** Necessarily, every non-bottom entity of each relational type has an atom below it.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
 - **□BF (relational types).** Necessarily, BF holds at every relational type.
 - **□Rigid Comprehension.** Necessarily, every relation, including a proposition, is coextensive with a rigid one.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **□Intensional Choice.** Necessarily, if a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
 - **□Relational Choice.** Necessarily, every serial binary relation has a functional subrelation.
 - **□Transversal Choice.** Necessarily, every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
@@ -109,6 +111,12 @@ Entailment is inclusion of intensions. Below a relation $Y\ne\bot_\tau$ lies the
 
 *Source: Classicism, p. 61. General argument `arguments/full-atomicity`. It requires that The model is a full action model: an action model (Classicism, Appendix D) that is full at every object. Here: An action model, full at every object. By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
 
+### Holds □Self-atoms are atoms.
+
+The argument of full-comparable-free-arrows-self-atoms at every reachable object: a self-atom there is a singleton intension, so an atom.
+
+*General argument `arguments/full-comparable-free-arrows-everywhere-self-atoms`. It requires that The model is full: at each object, the domain of each relational type contains every intension of that type. Here: Every intension of every relational type is present at every object. It requires that At every object reachable from the evaluation point, any two arrows out of it that are each fixed under post-composition only by the identity are comparable: one is a left multiple of the other. Here: Out of $W_0$ the arrows are $1$ and $h=h\circ1$; out of $W_1$ only $1$. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
+
 ### Holds □BF (relational types).
 
 The relational half of full-epic-barcan. In an action model BF at a type $\sigma$ holds at a world iff transport along every arrow out of it is onto the entities of type $\sigma$ at its target: if some $z$ there is no transport, the property of being one is necessary of everything at the world and fails of $z$ after the arrow; and if transport is onto, a property necessary of everything holds of every transport. In a full model the transport of intensions along an epimorphism $k$ is onto at every relational type: an intension $Y$ at its target is the transport of $\{\langle\bar a,k\circ m\rangle:\langle\bar a,m\rangle\in Y\}$, since $k\circ m=k\circ m'$ only if $m=m'$. Nothing here concerns the individuals. So BF holds at every relational type at every object reachable from the evaluation point.
@@ -120,6 +128,12 @@ The relational half of full-epic-barcan. In an action model BF at a type $\sigma
 Given $X$ of type $\tau$ at an object $W$, let $Y$ be the relation whose extension at an arrow $i$ out of $W$ is $X$'s extension at $W$ transported along $i$, which is in the domain since the model is full. It is coextensive with $X$. It is persistent, since its extension at $i\circ j$ is its extension at $i$ transported along $j$. And it is inextensible: if $\Box X'$ holds at $i$ of everything $Y$ holds of there, then at $i\circ j$ everything $Y$ holds of is the transport along $j$ of something $Y$ holds of at $i$, of which $X'$ then holds. Every object being full, the same holds at every arrow, so Rigid Comprehension is necessary. The source notes that full models satisfy it (p. 61); stated once for the topic, in place of the full models' own arguments.
 
 *Source: Classicism, p. 61. General argument `arguments/full-rigid-comprehension`. It requires that The model is a full action model: an action model (Classicism, Appendix D) that is full at every object. Here: An action model, full at every object. By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
+
+### Holds □Self-atoms are strong atoms.
+
+The argument of full-uniquely-factored-self-atoms-strong at every reachable object.
+
+*General argument `arguments/full-uniquely-factored-everywhere-self-atoms-strong`. It requires that The model is full: at each object, the domain of each relational type contains every intension of that type. Here: Every intension of every relational type is present at every object. It requires that At every object reachable from the evaluation point, any two arrows out of it that are each fixed under post-composition only by the identity are comparable: one is a left multiple of the other. Here: Out of $W_0$ the arrows are $1$ and $h=h\circ1$; out of $W_1$ only $1$. It requires that At every object reachable from the evaluation point, every arrow $k$ out of it that is fixed only by the identity factors through each arrow $h$ out of it in at most one way: $m\circ h=m^{\prime}\circ h=k$ implies $m=m^{\prime}$. Here: $h=m\circ1$ only for $m=h$ and $h=m\circ h$ only for $m=1_{W_1}$; at $W_1$ only the identity. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds □Intensional Choice.
 

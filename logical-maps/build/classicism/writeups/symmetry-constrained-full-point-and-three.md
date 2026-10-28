@@ -4,6 +4,7 @@
 
 ## Package
 
+- **□Strong Actuality.** Necessarily, there is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 - **Plenitude.** Every total single-valued binary relation is represented by an operation. Its output type is relational, as required by the type system.
 - **Atomicity.** Every non-bottom entity of each relational type has an atom below it.
 - **□Atomicity.** Necessarily, every non-bottom entity of each relational type has an atom below it.
@@ -11,6 +12,8 @@
 - **Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
 - **Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Analytic Necessitism.** If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type $\sigma$.
 - **Second-Order Analytic Necessitism.** If there could be a real number structure, there is a rigid one, necessarily a real number structure, together with represented powers of every arity up to $n$: rigid properties of rigid relations among the structure's elements that necessarily represent every relation on them. One sentence for each type $\sigma$ and each $n\ge1$.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
@@ -24,6 +27,8 @@
 - **¬ No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **¬ Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **¬ Infinity Schema (type t).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
+- **¬ Atoms are self-atoms (type t).** Every atom is a self-atom: necessarily, if it is true, it is an atom.
 - **¬ Intensional Choice.** If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
 - **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
@@ -41,6 +46,12 @@ Interpretation of Σ, fixed for this record: every constant of Σ is relational,
 *A member of the group Symmetry-constrained full models, which supplies this definition with the record's settings, and the arguments marked as shared.*
 
 ## Arguments
+
+### Holds □Strong Actuality.
+
+At $W_0$ the true atom is $\{1_{W_0}\}$, whose transport along $c_i$ is $\{!\}$, the one arrow $X\to W_0$; so it is a strong atom. At $X$ the true atom is the orbit $P$ of the permutations, whose transport along a collapse or along $!$ is empty and along a permutation is $P$; so it is a strong atom too. Hence Strong Actuality holds at every object.
+
+*By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Fails Infinity Schema (type e), Axiom of Infinity (type e), Possible Infinity (type e).
 
@@ -95,6 +106,12 @@ Let $Y$ be weakly rigid with extension $E$ at the identity. The intension $h\map
 There are finitely many propositions, $n$ say, with literal identity. The numerals are closed terms, so in the domain, and the numeral $n$ holds of the universal property of propositions, so the Axiom of Infinity at type $t$ fails, as does the instance of the schema asking for $n+1$ pairwise distinct propositions.
 
 *From the group *Symmetry-constrained full models*, shared argument `symmetry-constrained-full#axiom-of-infinity-t`. By Claude Fable 5.1 (Anthropic), at Cian Dorr's direction, 2026-10-04.*
+
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms. Fails Self-Atomicity (type t), Atoms are self-atoms (type t).
+
+At every object the atoms are the orbits of single pairs under the symmetry group. The orbit $C$ of a collapse $c$ (in the two-object member, of the arrows $c_i:W_0\to X$) is an atom; its transport along $c$ is the set of arrows $m$ with $m\circ c$ in $C$, which includes every arrow $X\to X$, since $m\circ c$ is again a collapse, and so is not an atom there, the orbit of the permutations being a proper symmetric part. So $C$ is an atom and not a self-atom, and the only possible proposition below $C$ is $C$ itself: Atoms are self-atoms (type t) and Self-Atomicity (type t) fail. Conversely a self-atom $I$ at a relational type has, at each of its pairs $\langle k,\bar a\rangle$, a transport along $k$ that is an atom containing $\langle1,\cdot\rangle$, hence the orbit of the identity; so $m\circ k$ carries a pair of $I$ only for symmetries $m$, which excludes collapses ($c\circ c=c$) and leaves pairs at permutations, where symmetry makes $I$ the orbit of one pair, an atom, whose transport along a collapse is empty and along a permutation is an atom again: a strong atom. The same holds at every reachable object, the domains being the symmetric intensions everywhere.
+
+*From the group *Symmetry-constrained full models*, shared argument `symmetry-constrained-full#self-atoms`. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Analytic Necessitism, Second-Order Analytic Necessitism, Necessity of Second-Order Analysis.
 

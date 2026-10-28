@@ -322,79 +322,282 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>ND (type t) and Inextensible Comprehension imply Weakly Rigid Power</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026.</p>
-<p><strong>Theorem.</strong> Let <span class="math inline">\tau=\bar\sigma t</span> be a relational type. In C, ND at <span class="math inline">t</span> and Inextensible Comprehension at <span class="math inline">\tau t</span> imply Weakly Rigid Power at <span class="math inline">\tau</span>: if <span class="math inline">F^\tau</span> is weakly rigid, so is</p>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>ND (type t) and Inextensible Comprehension imply Weakly Rigid Power</h1></header><p>Proof by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October
+2026; rewritten for the map by Claude Opus 5.5 (Anthropic), prompted by
+Cian Dorr, 24 October 2026.</p>
+<p><strong>Theorem.</strong> Let <span
+class="math inline">\tau=\bar\sigma t</span> be a relational type. In C,
+ND at <span class="math inline">t</span> and Inextensible Comprehension
+at <span class="math inline">\tau t</span> imply Weakly Rigid Power at
+<span class="math inline">\tau</span>: if <span
+class="math inline">F^\tau</span> is weakly rigid, so is</p>
 <p><span class="math display">
 P_F:=\lambda Y^\tau\, .\,\operatorname{WeaklyRigid}(Y)\land Y\le F .
 </span></p>
-<p>Both premises are unboxed. BF, Atomicity, Boolean Completeness and Rigid Comprehension are not used.</p>
-<p><strong>Overview.</strong> ND at <span class="math inline">t</span> makes weakly rigid relations <em>necessarily separated</em>: instances that are distinct anywhere are necessarily distinct (Lemma 3). A separated persistent relation with an inextensible coextension is rigid (Lemma 2). Using this, <span class="math inline">F</span> is rigid, and so is <span class="math inline">R_F:=\lambda Y\, .\,\operatorname{Rigid}(Y)\land Y\le F</span> (Lemma 5). Finally, separation of <span class="math inline">F</span> makes every weakly rigid subrelation of <span class="math inline">F</span>, at any world, rigid there (Lemma 6), so <span class="math inline">P_F=R_F</span>.</p>
+<p>Both premises are unboxed. BF, Atomicity, Boolean Completeness and
+Rigid Comprehension are not used.</p>
+<p><strong>Overview.</strong> ND at <span class="math inline">t</span>
+makes weakly rigid relations <em>necessarily separated</em>: instances
+that are distinct anywhere are necessarily distinct (Lemma 3). A
+separated persistent relation with an inextensible coextension is rigid
+(Lemma 2). Using this, <span class="math inline">F</span> is rigid, and
+so is <span class="math inline">R_F:=\lambda Y\,
+.\,\operatorname{Rigid}(Y)\land Y\le F</span> (Lemma 5). Finally,
+separation of <span class="math inline">F</span> makes every weakly
+rigid subrelation of <span class="math inline">F</span>, at any world,
+rigid there (Lemma 6), so <span class="math inline">P_F=R_F</span>.</p>
 <h2 id="notation">Notation</h2>
-<p>Recall (Background) that <span class="math inline">Y\le Z</span> is <span class="math inline">\Box\forall\bar x\, .\,Y[\bar x]\to Z[\bar x]</span>, that <span class="math inline">\operatorname{Inextensible}</span> and <span class="math inline">\operatorname{Rigid}</span> are the necessitations of weak inextensibility and weak rigidity, and that a weakly rigid relation is persistent. Put</p>
+<p>Recall (Background) that <span class="math inline">Y\le Z</span> is
+<span class="math inline">\Box\forall\bar x\, .\,Y[\bar x]\to Z[\bar
+x]</span>, that <span
+class="math inline">\operatorname{Inextensible}</span> and <span
+class="math inline">\operatorname{Rigid}</span> are the necessitations
+of weak inextensibility and weak rigidity, and that a weakly rigid
+relation is persistent. Put</p>
 <p><span class="math display">
 \operatorname{NecSeparated}(A):=\Box\forall\bar a\,\bar b\, .\,
 A[\bar a]\land A[\bar b]\land\bar a\ne\bar b\to\Box(\bar a\ne\bar b),
 </span></p>
-<p>and for a tuple <span class="math inline">\bar a</span> let <span class="math inline">\delta_{\bar a}:=\lambda\bar b\, .\,\bar b=\bar a</span> be its haecceity. Haecceities are rigid in C.</p>
-<h2 id="lemma-1-two-consequences-of-nd-at-t">Lemma 1: two consequences of ND at <span class="math inline">t</span></h2>
+<p>and for a tuple <span class="math inline">\bar a</span> let <span
+class="math inline">\delta_{\bar a}:=\lambda\bar b\, .\,\bar b=\bar
+a</span> be its haecceity. Haecceities are rigid in C.</p>
+<h2 id="lemma-1-two-consequences-of-nd-at-t">Lemma 1: two consequences
+of ND at <span class="math inline">t</span></h2>
 <p><em>Assume ND at <span class="math inline">t</span>.</em></p>
 <ol type="a">
-<li><p>For entities <span class="math inline">a,b</span> of any type, <span class="math inline">a\ne b\to\Box(a\ne b)</span>. For if <span class="math inline">a\ne b</span>, then <span class="math inline">(a=b)\ne\top</span>, so <span class="math inline">\Box((a=b)\ne\top)</span>; and <span class="math inline">a=b</span> at some world would give <span class="math inline">\Box(a=b)</span>, that is <span class="math inline">(a=b)=\top</span>, there.</p></li>
-<li><p>If <span class="math inline">\Box(q\to\Box q)</span> and <span class="math inline">\neg q</span>, then <span class="math inline">\Box\neg q</span>. For <span class="math inline">q\ne\top</span>, so <span class="math inline">\Box(q\ne\top)</span>, that is <span class="math inline">\Box\neg\Box q</span>; with <span class="math inline">\Box(q\to\Box q)</span> this gives <span class="math inline">\Box\neg q</span>.</p></li>
+<li><p>For entities <span class="math inline">a,b</span> of any type,
+<span class="math inline">a\ne b\to\Box(a\ne b)</span>. For if <span
+class="math inline">a\ne b</span>, then <span
+class="math inline">(a=b)\ne\top</span>, so <span
+class="math inline">\Box((a=b)\ne\top)</span>; and <span
+class="math inline">a=b</span> at some world would give <span
+class="math inline">\Box(a=b)</span>, that is <span
+class="math inline">(a=b)=\top</span>, there.</p></li>
+<li><p>If <span class="math inline">\Box(q\to\Box q)</span> and <span
+class="math inline">\neg q</span>, then <span
+class="math inline">\Box\neg q</span>. For <span
+class="math inline">q\ne\top</span>, so <span
+class="math inline">\Box(q\ne\top)</span>, that is <span
+class="math inline">\Box\neg\Box q</span>; with <span
+class="math inline">\Box(q\to\Box q)</span> this gives <span
+class="math inline">\Box\neg q</span>.</p></li>
 </ol>
-<h2 id="lemma-2-separated-persistent-relations-with-an-inextensible-coextension-are-rigid">Lemma 2: separated persistent relations with an inextensible coextension are rigid</h2>
-<p><em>Assume ND at <span class="math inline">t</span>.</em> Let <span class="math inline">A</span> be persistent with <span class="math inline">\operatorname{NecSeparated}(A)</span>, and let <span class="math inline">G</span> be inextensible and coextensive with <span class="math inline">A</span>. Then <span class="math inline">A=G</span>, so <span class="math inline">A</span> is rigid.</p>
-<p><em>Proof.</em> Each instance of <span class="math inline">G</span> is an instance of <span class="math inline">A</span>, hence necessarily one; weak inextensibility of <span class="math inline">G</span> gives <span class="math inline">G\le A</span>.</p>
-<p>Let <span class="math inline">q:=\exists\bar a\, .\,A[\bar a]\land\neg G[\bar a]</span>. We show <span class="math inline">\Box(q\to\Box q)</span>. At any world, let <span class="math inline">A[\bar a]\land\neg G[\bar a]</span>. Each instance <span class="math inline">\bar b</span> of <span class="math inline">G</span> there is an instance of <span class="math inline">A</span> with <span class="math inline">\bar b\ne\bar a</span>, so <span class="math inline">\Box(\bar b\ne\bar a)</span>. Weak inextensibility of <span class="math inline">G</span> there gives <span class="math inline">G\le\lambda\bar b\, .\,\bar b\ne\bar a</span>, so <span class="math inline">\Box\neg G[\bar a]</span>; and <span class="math inline">\Box A[\bar a]</span> by persistence. So <span class="math inline">\Box q</span>.</p>
-<p>As <span class="math inline">A</span> and <span class="math inline">G</span> are coextensive, <span class="math inline">\neg q</span>. By Lemma 1(b), <span class="math inline">\Box\neg q</span>, which says <span class="math inline">A\le G</span>. <span class="math inline">\square</span></p>
-<h2 id="lemma-3-weakly-rigid-relations-are-necessarily-separated">Lemma 3: weakly rigid relations are necessarily separated</h2>
-<p><em>Assume ND at <span class="math inline">t</span>.</em> If <span class="math inline">A</span> is weakly rigid, then <span class="math inline">\operatorname{NecSeparated}(A)</span>.</p>
-<p><em>Proof.</em> First, the product <span class="math inline">K:=\lambda\bar a\,\bar b\, .\,A[\bar a]\land A[\bar b]</span> is weakly rigid. Weak persistence is clear. For weak inextensibility, suppose</p>
+<h2
+id="lemma-2-separated-persistent-relations-with-an-inextensible-coextension-are-rigid">Lemma
+2: separated persistent relations with an inextensible coextension are
+rigid</h2>
+<p><em>Assume ND at <span class="math inline">t</span>.</em> Let <span
+class="math inline">A</span> be persistent with <span
+class="math inline">\operatorname{NecSeparated}(A)</span>, and let <span
+class="math inline">G</span> be inextensible and coextensive with <span
+class="math inline">A</span>. Then <span class="math inline">A=G</span>,
+so <span class="math inline">A</span> is rigid.</p>
+<p><em>Proof.</em> Each instance of <span class="math inline">G</span>
+is an instance of <span class="math inline">A</span>, hence necessarily
+one; weak inextensibility of <span class="math inline">G</span> gives
+<span class="math inline">G\le A</span>.</p>
+<p>Let <span class="math inline">q:=\exists\bar a\, .\,A[\bar
+a]\land\neg G[\bar a]</span>. We show <span
+class="math inline">\Box(q\to\Box q)</span>. At any world, let <span
+class="math inline">A[\bar a]\land\neg G[\bar a]</span>. Each instance
+<span class="math inline">\bar b</span> of <span
+class="math inline">G</span> there is an instance of <span
+class="math inline">A</span> with <span class="math inline">\bar
+b\ne\bar a</span>, so <span class="math inline">\Box(\bar b\ne\bar
+a)</span>. Weak inextensibility of <span class="math inline">G</span>
+there gives <span class="math inline">G\le\lambda\bar b\, .\,\bar
+b\ne\bar a</span>, so <span class="math inline">\Box\neg G[\bar
+a]</span>; and <span class="math inline">\Box A[\bar a]</span> by
+persistence. So <span class="math inline">\Box q</span>.</p>
+<p>As <span class="math inline">A</span> and <span
+class="math inline">G</span> are coextensive, <span
+class="math inline">\neg q</span>. By Lemma 1(b), <span
+class="math inline">\Box\neg q</span>, which says <span
+class="math inline">A\le G</span>. <span
+class="math inline">\square</span></p>
+<h2 id="lemma-3-weakly-rigid-relations-are-necessarily-separated">Lemma
+3: weakly rigid relations are necessarily separated</h2>
+<p><em>Assume ND at <span class="math inline">t</span>.</em> If <span
+class="math inline">A</span> is weakly rigid, then <span
+class="math inline">\operatorname{NecSeparated}(A)</span>.</p>
+<p><em>Proof.</em> First, the product <span
+class="math inline">K:=\lambda\bar a\,\bar b\, .\,A[\bar a]\land A[\bar
+b]</span> is weakly rigid. Weak persistence is clear. For weak
+inextensibility, suppose</p>
 <p><span class="math display">
-\forall\bar a\,\bar b\, .\,A[\bar a]\land A[\bar b]\to\Box Z[\bar a,\bar b].
+\forall\bar a\,\bar b\, .\,A[\bar a]\land A[\bar b]\to\Box Z[\bar a,\bar
+b].
 </span></p>
-<p>For each instance <span class="math inline">\bar a</span> of <span class="math inline">A</span>, weak inextensibility of <span class="math inline">A</span> applied to <span class="math inline">\lambda\bar b\, .\,Z[\bar a,\bar b]</span> gives <span class="math inline">\Box\forall\bar b\, .\,A[\bar b]\to Z[\bar a,\bar b]</span>. Weak inextensibility of <span class="math inline">A</span> applied to <span class="math inline">\lambda\bar a\, .\,\forall\bar b\, .\,A[\bar b]\to Z[\bar a,\bar b]</span> then gives <span class="math inline">K\le Z</span>.</p>
+<p>For each instance <span class="math inline">\bar a</span> of <span
+class="math inline">A</span>, weak inextensibility of <span
+class="math inline">A</span> applied to <span
+class="math inline">\lambda\bar b\, .\,Z[\bar a,\bar b]</span> gives
+<span class="math inline">\Box\forall\bar b\, .\,A[\bar b]\to Z[\bar
+a,\bar b]</span>. Weak inextensibility of <span
+class="math inline">A</span> applied to <span
+class="math inline">\lambda\bar a\, .\,\forall\bar b\, .\,A[\bar b]\to
+Z[\bar a,\bar b]</span> then gives <span class="math inline">K\le
+Z</span>.</p>
 <p>Now let</p>
 <p><span class="math display">
-\operatorname{Settled}(\bar a,\bar b):=\Box(\bar a=\bar b)\lor\Box(\bar a\ne\bar b).
+\operatorname{Settled}(\bar a,\bar b):=\Box(\bar a=\bar b)\lor\Box(\bar
+a\ne\bar b).
 </span></p>
-<p>Every pair of instances of <span class="math inline">A</span> satisfies it, by necessity of identity and Lemma 1(a), and so necessarily satisfies it, by 4. Weak inextensibility of <span class="math inline">K</span> gives <span class="math inline">K\le\operatorname{Settled}</span>. At any world, distinct instances <span class="math inline">\bar a,\bar b</span> of <span class="math inline">A</span> therefore satisfy <span class="math inline">\Box(\bar a\ne\bar b)</span>, since <span class="math inline">\Box(\bar a=\bar b)</span> would give <span class="math inline">\bar a=\bar b</span>. <span class="math inline">\square</span></p>
-<h2 id="lemma-4-inextensible-comprehension-descends">Lemma 4: Inextensible Comprehension descends</h2>
-<p>It is a theorem of C that Inextensible Comprehension at <span class="math inline">\tau t</span> implies it at <span class="math inline">\tau</span>.</p>
-<p><em>Proof.</em> Let <span class="math inline">X^\tau</span>. By Inextensible Comprehension at <span class="math inline">\tau t</span>, let <span class="math inline">G</span> be inextensible and coextensive with <span class="math inline">\lambda Y\, .\,\exists\bar a\, .\,X[\bar a]\land Y=\delta_{\bar a}</span>, and put</p>
+<p>Every pair of instances of <span class="math inline">A</span>
+satisfies it, by necessity of identity and Lemma 1(a), and so
+necessarily satisfies it, by 4. Weak inextensibility of <span
+class="math inline">K</span> gives <span
+class="math inline">K\le\operatorname{Settled}</span>. At any world,
+distinct instances <span class="math inline">\bar a,\bar b</span> of
+<span class="math inline">A</span> therefore satisfy <span
+class="math inline">\Box(\bar a\ne\bar b)</span>, since <span
+class="math inline">\Box(\bar a=\bar b)</span> would give <span
+class="math inline">\bar a=\bar b</span>. <span
+class="math inline">\square</span></p>
+<h2 id="lemma-4-inextensible-comprehension-descends">Lemma 4:
+Inextensible Comprehension descends</h2>
+<p>It is a theorem of C that Inextensible Comprehension at <span
+class="math inline">\tau t</span> implies it at <span
+class="math inline">\tau</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">X^\tau</span>. By
+Inextensible Comprehension at <span class="math inline">\tau t</span>,
+let <span class="math inline">G</span> be inextensible and coextensive
+with <span class="math inline">\lambda Y\, .\,\exists\bar a\, .\,X[\bar
+a]\land Y=\delta_{\bar a}</span>, and put</p>
 <p><span class="math display">
 U:=\lambda\bar a\, .\,\exists Y\, .\,GY\land Y[\bar a].
 </span></p>
-<p><span class="math inline">U</span> is coextensive with <span class="math inline">X</span>. Each instance of <span class="math inline">G</span> is a haecceity, so rigid, so necessarily rigid; weak inextensibility of <span class="math inline">G</span> gives <span class="math inline">G\le\lambda Y\, .\,\operatorname{Rigid}(Y)</span>.</p>
-<p><span class="math inline">U</span> is inextensible. At any world, suppose <span class="math inline">\forall\bar a\, .\,U[\bar a]\to\Box Z[\bar a]</span>. For each <span class="math inline">Y</span> with <span class="math inline">GY</span>, <span class="math inline">Y</span> is rigid there and each instance of <span class="math inline">Y</span> is an instance of <span class="math inline">U</span>, so weak inextensibility of <span class="math inline">Y</span> gives <span class="math inline">Y\le Z</span>. Weak inextensibility of <span class="math inline">G</span>, applied to <span class="math inline">\lambda Y\, .\,\forall\bar a\, .\,Y[\bar a]\to Z[\bar a]</span>, gives <span class="math inline">\Box\forall Y\, .\,GY\to\forall\bar a\, .\,(Y[\bar a]\to Z[\bar a])</span>, that is, <span class="math inline">U\le Z</span>. <span class="math inline">\square</span></p>
-<p><strong>Corollary (Tame Rigidity at <span class="math inline">\tau</span>).</strong> Under ND at <span class="math inline">t</span> and Inextensible Comprehension at <span class="math inline">\tau t</span>, every weakly rigid <span class="math inline">F^\tau</span> is rigid: it is persistent, necessarily separated by Lemma 3, and has an inextensible coextension by Lemma 4, so Lemma 2 applies.</p>
-<h2 id="lemma-5-the-rigid-subrelations-of-a-rigid-f-form-a-rigid-property">Lemma 5: the rigid subrelations of a rigid <span class="math inline">F</span> form a rigid property</h2>
-<p><em>Assume ND at <span class="math inline">t</span> and Inextensible Comprehension at <span class="math inline">\tau t</span>, and let <span class="math inline">F^\tau</span> be rigid.</em> Then <span class="math inline">R_F:=\lambda Y\, .\,\operatorname{Rigid}(Y)\land Y\le F</span> is rigid.</p>
-<p><em>Proof.</em> <span class="math inline">R_F</span> is persistent, since both conjuncts are necessary when true. We show <span class="math inline">\operatorname{NecSeparated}(R_F)</span>; Inextensible Comprehension at <span class="math inline">\tau t</span> and Lemma 2 then make <span class="math inline">R_F</span> rigid.</p>
-<p>At any world, let <span class="math inline">X\ne Y</span> both satisfy <span class="math inline">R_F</span>. Being weakly rigid and distinct, they are not coextensive (Sun’s lemma: coextensive weakly rigid relations are identical), say <span class="math inline">X[\bar a]\land\neg Y[\bar a]</span>. Each instance <span class="math inline">\bar b</span> of <span class="math inline">Y</span> is an instance of <span class="math inline">F</span> with <span class="math inline">\bar b\ne\bar a</span>, and <span class="math inline">\bar a</span> is an instance of <span class="math inline">F</span>, so by <span class="math inline">\operatorname{NecSeparated}(F)</span> (Lemma 3), <span class="math inline">\Box(\bar b\ne\bar a)</span>. Weak inextensibility of <span class="math inline">Y</span> gives <span class="math inline">\Box\neg Y[\bar a]</span>, and persistence of <span class="math inline">X</span> gives <span class="math inline">\Box X[\bar a]</span>. So <span class="math inline">\Box(X\ne Y)</span>. <span class="math inline">\square</span></p>
-<h2 id="lemma-6-weakly-rigid-subrelations-of-f-are-rigid-at-every-world">Lemma 6: weakly rigid subrelations of <span class="math inline">F</span> are rigid, at every world</h2>
-<p><em>Let <span class="math inline">F^\tau</span> be rigid with <span class="math inline">\operatorname{NecSeparated}(F)</span>.</em> Then</p>
+<p><span class="math inline">U</span> is coextensive with <span
+class="math inline">X</span>. Each instance of <span
+class="math inline">G</span> is a haecceity, so rigid, so necessarily
+rigid; weak inextensibility of <span class="math inline">G</span> gives
+<span class="math inline">G\le\lambda Y\,
+.\,\operatorname{Rigid}(Y)</span>.</p>
+<p><span class="math inline">U</span> is inextensible. At any world,
+suppose <span class="math inline">\forall\bar a\, .\,U[\bar a]\to\Box
+Z[\bar a]</span>. For each <span class="math inline">Y</span> with <span
+class="math inline">GY</span>, <span class="math inline">Y</span> is
+rigid there and each instance of <span class="math inline">Y</span> is
+an instance of <span class="math inline">U</span>, so weak
+inextensibility of <span class="math inline">Y</span> gives <span
+class="math inline">Y\le Z</span>. Weak inextensibility of <span
+class="math inline">G</span>, applied to <span
+class="math inline">\lambda Y\, .\,\forall\bar a\, .\,Y[\bar a]\to
+Z[\bar a]</span>, gives <span class="math inline">\Box\forall Y\,
+.\,GY\to\forall\bar a\, .\,(Y[\bar a]\to Z[\bar a])</span>, that is,
+<span class="math inline">U\le Z</span>. <span
+class="math inline">\square</span></p>
+<p><strong>Corollary (Tame Rigidity at <span
+class="math inline">\tau</span>).</strong> Under ND at <span
+class="math inline">t</span> and Inextensible Comprehension at <span
+class="math inline">\tau t</span>, every weakly rigid <span
+class="math inline">F^\tau</span> is rigid: it is persistent,
+necessarily separated by Lemma 3, and has an inextensible coextension by
+Lemma 4, so Lemma 2 applies.</p>
+<h2
+id="lemma-5-the-rigid-subrelations-of-a-rigid-f-form-a-rigid-property">Lemma
+5: the rigid subrelations of a rigid <span class="math inline">F</span>
+form a rigid property</h2>
+<p><em>Assume ND at <span class="math inline">t</span> and Inextensible
+Comprehension at <span class="math inline">\tau t</span>, and let <span
+class="math inline">F^\tau</span> be rigid.</em> Then <span
+class="math inline">R_F:=\lambda Y\, .\,\operatorname{Rigid}(Y)\land
+Y\le F</span> is rigid.</p>
+<p><em>Proof.</em> <span class="math inline">R_F</span> is persistent,
+since both conjuncts are necessary when true. We show <span
+class="math inline">\operatorname{NecSeparated}(R_F)</span>;
+Inextensible Comprehension at <span class="math inline">\tau t</span>
+and Lemma 2 then make <span class="math inline">R_F</span> rigid.</p>
+<p>At any world, let <span class="math inline">X\ne Y</span> both
+satisfy <span class="math inline">R_F</span>. Being weakly rigid and
+distinct, they are not coextensive (Sun’s lemma: coextensive weakly
+rigid relations are identical), say <span class="math inline">X[\bar
+a]\land\neg Y[\bar a]</span>. Each instance <span
+class="math inline">\bar b</span> of <span class="math inline">Y</span>
+is an instance of <span class="math inline">F</span> with <span
+class="math inline">\bar b\ne\bar a</span>, and <span
+class="math inline">\bar a</span> is an instance of <span
+class="math inline">F</span>, so by <span
+class="math inline">\operatorname{NecSeparated}(F)</span> (Lemma 3),
+<span class="math inline">\Box(\bar b\ne\bar a)</span>. Weak
+inextensibility of <span class="math inline">Y</span> gives <span
+class="math inline">\Box\neg Y[\bar a]</span>, and persistence of <span
+class="math inline">X</span> gives <span class="math inline">\Box X[\bar
+a]</span>. So <span class="math inline">\Box(X\ne Y)</span>. <span
+class="math inline">\square</span></p>
+<h2
+id="lemma-6-weakly-rigid-subrelations-of-f-are-rigid-at-every-world">Lemma
+6: weakly rigid subrelations of <span class="math inline">F</span> are
+rigid, at every world</h2>
+<p><em>Let <span class="math inline">F^\tau</span> be rigid with <span
+class="math inline">\operatorname{NecSeparated}(F)</span>.</em> Then</p>
 <p><span class="math display">
-\Box\forall X^\tau\, .\,\operatorname{WeaklyRigid}(X)\land X\le F\to\operatorname{Rigid}(X).
+\Box\forall X^\tau\, .\,\operatorname{WeaklyRigid}(X)\land X\le
+F\to\operatorname{Rigid}(X).
 </span></p>
-<p><em>Proof.</em> At any world <span class="math inline">v</span>, let <span class="math inline">X</span> be weakly rigid with <span class="math inline">X\le F</span>. Put</p>
+<p><em>Proof.</em> At any world <span class="math inline">v</span>, let
+<span class="math inline">X</span> be weakly rigid with <span
+class="math inline">X\le F</span>. Put</p>
 <p><span class="math display">
 \operatorname{Settled}_X(\bar a):=\Box X[\bar a]\lor\Box\neg X[\bar a].
 </span></p>
-<p>Each instance <span class="math inline">\bar a</span> of <span class="math inline">F</span> at <span class="math inline">v</span> satisfies <span class="math inline">\operatorname{Settled}_X</span>: if <span class="math inline">X[\bar a]</span>, by weak persistence of <span class="math inline">X</span>; if not, each instance <span class="math inline">\bar b</span> of <span class="math inline">X</span> is an instance of <span class="math inline">F</span> with <span class="math inline">\bar b\ne\bar a</span>, so <span class="math inline">\Box(\bar b\ne\bar a)</span>, and weak inextensibility of <span class="math inline">X</span> gives <span class="math inline">\Box\neg X[\bar a]</span>. By 4 this holds necessarily, so weak inextensibility of <span class="math inline">F</span> gives</p>
+<p>Each instance <span class="math inline">\bar a</span> of <span
+class="math inline">F</span> at <span class="math inline">v</span>
+satisfies <span class="math inline">\operatorname{Settled}_X</span>: if
+<span class="math inline">X[\bar a]</span>, by weak persistence of <span
+class="math inline">X</span>; if not, each instance <span
+class="math inline">\bar b</span> of <span class="math inline">X</span>
+is an instance of <span class="math inline">F</span> with <span
+class="math inline">\bar b\ne\bar a</span>, so <span
+class="math inline">\Box(\bar b\ne\bar a)</span>, and weak
+inextensibility of <span class="math inline">X</span> gives <span
+class="math inline">\Box\neg X[\bar a]</span>. By 4 this holds
+necessarily, so weak inextensibility of <span
+class="math inline">F</span> gives</p>
 <p><span class="math display">
 F\le\operatorname{Settled}_X .
 </span></p>
-<p>Now let <span class="math inline">u</span> be any world accessible from <span class="math inline">v</span>, and suppose <span class="math inline">\forall\bar a\, .\,X[\bar a]\to\Box Z[\bar a]</span> at <span class="math inline">u</span>. Each instance <span class="math inline">\bar a</span> of <span class="math inline">F</span> at <span class="math inline">u</span> satisfies <span class="math inline">\operatorname{Settled}_X</span>: if <span class="math inline">\Box X[\bar a]</span>, then <span class="math inline">X[\bar a]</span> and <span class="math inline">\Box Z[\bar a]</span>; if <span class="math inline">\Box\neg X[\bar a]</span>, trivially; either way <span class="math inline">\Box(X[\bar a]\to Z[\bar a])</span>. Weak inextensibility of <span class="math inline">F</span> at <span class="math inline">u</span> gives</p>
+<p>Now let <span class="math inline">u</span> be any world accessible
+from <span class="math inline">v</span>, and suppose <span
+class="math inline">\forall\bar a\, .\,X[\bar a]\to\Box Z[\bar a]</span>
+at <span class="math inline">u</span>. Each instance <span
+class="math inline">\bar a</span> of <span class="math inline">F</span>
+at <span class="math inline">u</span> satisfies <span
+class="math inline">\operatorname{Settled}_X</span>: if <span
+class="math inline">\Box X[\bar a]</span>, then <span
+class="math inline">X[\bar a]</span> and <span class="math inline">\Box
+Z[\bar a]</span>; if <span class="math inline">\Box\neg X[\bar
+a]</span>, trivially; either way <span class="math inline">\Box(X[\bar
+a]\to Z[\bar a])</span>. Weak inextensibility of <span
+class="math inline">F</span> at <span class="math inline">u</span>
+gives</p>
 <p><span class="math display">
 F\le\lambda\bar a\, .\,X[\bar a]\to Z[\bar a],
 </span></p>
-<p>and with <span class="math inline">X\le F</span>, <span class="math inline">X\le Z</span>. So <span class="math inline">X</span> is weakly inextensible at every world accessible from <span class="math inline">v</span>, and persistent, hence rigid at <span class="math inline">v</span>. <span class="math inline">\square</span></p>
+<p>and with <span class="math inline">X\le F</span>, <span
+class="math inline">X\le Z</span>. So <span class="math inline">X</span>
+is weakly inextensible at every world accessible from <span
+class="math inline">v</span>, and persistent, hence rigid at <span
+class="math inline">v</span>. <span
+class="math inline">\square</span></p>
 <h2 id="proof-of-the-theorem">Proof of the theorem</h2>
-<p>Let <span class="math inline">F^\tau</span> be weakly rigid. By the Corollary it is rigid, and by Lemma 3 it is necessarily separated. By Lemma 6 and T, necessarily <span class="math inline">P_FY\leftrightarrow R_FY</span> for every <span class="math inline">Y</span>, so <span class="math inline">P_F=R_F</span>, which is rigid by Lemma 5 and hence weakly rigid. <span class="math inline">\square</span></p>
+<p>Let <span class="math inline">F^\tau</span> be weakly rigid. By the
+Corollary it is rigid, and by Lemma 3 it is necessarily separated. By
+Lemma 6 and T, necessarily <span class="math inline">P_FY\leftrightarrow
+R_FY</span> for every <span class="math inline">Y</span>, so <span
+class="math inline">P_F=R_F</span>, which is rigid by Lemma 5 and hence
+weakly rigid. <span class="math inline">\square</span></p>
 <h2 id="remarks">Remarks</h2>
 <ol type="1">
-<li>The premises used are ND at <span class="math inline">t</span> and Inextensible Comprehension at <span class="math inline">\tau t</span>. The Corollary is Tame Rigidity at <span class="math inline">\tau</span> from the same premises, and Lemma 5 is Rigid Power at <span class="math inline">\tau</span>.</li>
-<li>Over ND and Boolean Completeness, the map already derives Inextensible Comprehension from Weakly Rigid Power, Tame Rigidity and Rigid Comprehension, and these from one another, except for the step to Weakly Rigid Power. With this result the four are equivalent over ND and Boolean Completeness.</li>
+<li>The premises used are ND at <span class="math inline">t</span> and
+Inextensible Comprehension at <span class="math inline">\tau t</span>.
+The Corollary is Tame Rigidity at <span class="math inline">\tau</span>
+from the same premises, and Lemma 5 is Rigid Power at <span
+class="math inline">\tau</span>.</li>
+<li>Over ND and Boolean Completeness, the map already derives
+Inextensible Comprehension from Weakly Rigid Power, Tame Rigidity and
+Rigid Comprehension, and these from one another, except for the step to
+Weakly Rigid Power. With this result the four are equivalent over ND and
+Boolean Completeness.</li>
 </ol>
 </body></html>

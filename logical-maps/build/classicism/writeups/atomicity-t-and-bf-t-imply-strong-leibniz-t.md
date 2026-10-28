@@ -15,6 +15,14 @@
 
 Let $w$ be an atom below the possible $p$. For each $q$, $w\le q\lor w\le\neg q$ is true and, being a disjunction of two necessities, necessary by 4; so $\forall q\, .\,\Box(w\le q\lor w\le\neg q)$. BF (type t), for the property $\lambda q\, .\,w\le q\lor w\le\neg q$, gives $\Box\forall q\, .\,w\le q\lor w\le\neg q$. With $\Diamond w$, which is $w\ne\bot$, $w$ is a strong world.
 
+## Notes
+
+Now derived: BF (type t) gives Atoms are strong worlds (type t) ([[barcan-t-implies-atoms-are-strong-worlds-t]]), which with Atomicity (type t) gives the Strong Leibniz Biconditionals (type t) ([[atomicity-t-and-atoms-are-strong-worlds-t-imply-strong-leibniz-t]]).
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Philosophical Introduction to HOL** — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Exercise 8.12, p. 166.

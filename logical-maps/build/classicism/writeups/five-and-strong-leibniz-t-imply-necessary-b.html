@@ -323,30 +323,95 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>5 ∧ Strong Leibniz Biconditionals (type t) ⇒ □B</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.five_and_strong_leibniz_t_imply_necessary_b</code>; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, from Cian Dorr’s sketch (the true strong world entails each truth and is necessarily possible); recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.five_and_strong_leibniz_t_imply_necessary_b</code>;
+produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8
+October 2026, from Cian Dorr’s sketch (the true strong world entails
+each truth and is necessarily possible); recorded by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 8 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>5.</strong> Every possible proposition is necessarily possible.</li>
-<li><strong>Strong Leibniz Biconditionals (type t).</strong> Every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.</li>
+<li><strong>5.</strong> Every possible proposition is necessarily
+possible.</li>
+<li><strong>Strong Leibniz Biconditionals (type t).</strong> Every
+possible proposition is entailed by a strong world proposition, one that
+is possible and necessarily entails every proposition or its
+negation.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>□B.</strong> Necessarily, every true proposition is necessarily possible.</li>
+<li><strong>□B.</strong> Necessarily, every true proposition is
+necessarily possible.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Strong worlds are necessarily strong: if <span class="math inline">\operatorname{SWorld}(w)</span>, then 5 gives <span class="math inline">\Box\Diamond w</span> and 4 gives <span class="math inline">\Box\Box\forall Y\,(w\le Y\lor w\le\neg Y)</span>, so <span class="math inline">\Box\operatorname{SWorld}(w)</span>. Let <span class="math inline">q:=\exists w\, .\,\Box\operatorname{SWorld}(w)\land w</span>. Then <span class="math inline">\Box q</span>: if <span class="math inline">\Diamond\neg q</span>, the Strong Leibniz Biconditionals give a strong world <span class="math inline">w\le\neg q</span>, and <span class="math inline">\Box\Box\operatorname{SWorld}(w)</span> by the above and 4, so at a world where <span class="math inline">w</span> holds, as one does since <span class="math inline">\Diamond w</span>, <span class="math inline">q</span> holds too, contradicting <span class="math inline">w\le\neg q</span>. Next, <span class="math inline">q\to\forall p\, .\,p\to\Box\Diamond p</span> is a theorem of C: given <span class="math inline">\Box\operatorname{SWorld}(w_0)\land w_0</span> and a true <span class="math inline">p</span>, T twice gives <span class="math inline">w_0\le p</span> or <span class="math inline">w_0\le\neg p</span>, and the second contradicts <span class="math inline">w_0\land p</span>; and <span class="math inline">\Box\operatorname{SWorld}(w_0)</span> gives <span class="math inline">\Box\Diamond w_0</span>, so <span class="math inline">w_0\le p</span> gives <span class="math inline">\Box\Diamond p</span>. Necessitating this theorem and applying K to <span class="math inline">\Box q</span> gives <span class="math inline">\Box\forall p\, .\,p\to\Box\Diamond p</span>, which yields each closed instance of <span class="math inline">\Box</span>B.</p>
+<p>Strong worlds are necessarily strong: if <span
+class="math inline">\operatorname{SWorld}(w)</span>, then 5 gives <span
+class="math inline">\Box\Diamond w</span> and 4 gives <span
+class="math inline">\Box\Box\forall Y\,(w\le Y\lor w\le\neg Y)</span>,
+so <span class="math inline">\Box\operatorname{SWorld}(w)</span>. Let
+<span class="math inline">q:=\exists w\,
+.\,\Box\operatorname{SWorld}(w)\land w</span>. Then <span
+class="math inline">\Box q</span>: if <span
+class="math inline">\Diamond\neg q</span>, the Strong Leibniz
+Biconditionals give a strong world <span class="math inline">w\le\neg
+q</span>, and <span
+class="math inline">\Box\Box\operatorname{SWorld}(w)</span> by the above
+and 4, so at a world where <span class="math inline">w</span> holds, as
+one does since <span class="math inline">\Diamond w</span>, <span
+class="math inline">q</span> holds too, contradicting <span
+class="math inline">w\le\neg q</span>. Next, <span
+class="math inline">q\to\forall p\, .\,p\to\Box\Diamond p</span> is a
+theorem of C: given <span
+class="math inline">\Box\operatorname{SWorld}(w_0)\land w_0</span> and a
+true <span class="math inline">p</span>, T twice gives <span
+class="math inline">w_0\le p</span> or <span
+class="math inline">w_0\le\neg p</span>, and the second contradicts
+<span class="math inline">w_0\land p</span>; and <span
+class="math inline">\Box\operatorname{SWorld}(w_0)</span> gives <span
+class="math inline">\Box\Diamond w_0</span>, so <span
+class="math inline">w_0\le p</span> gives <span
+class="math inline">\Box\Diamond p</span>. Necessitating this theorem
+and applying K to <span class="math inline">\Box q</span> gives <span
+class="math inline">\Box\forall p\, .\,p\to\Box\Diamond p</span>, which
+yields each closed instance of <span
+class="math inline">\Box</span>B.</p>
 <h2 id="notes">Notes</h2>
-<p>5 is equivalent to ND in C, by the recorded results, so this gives □ND from ND and the Strong Leibniz Biconditionals (type t). 5 is used only to make the strong worlds necessarily possible. Weak worlds do not suffice: ND with □Atomicity (type t) does not give □ND, by the recorded models.</p>
+<p>5 is equivalent to ND in C, by the recorded results, so this gives
+□ND from ND and the Strong Leibniz Biconditionals (type t). 5 is used
+only to make the strong worlds necessarily possible. Weak worlds do not
+suffice: ND with □Atomicity (type t) does not give □ND, by the recorded
+models.</p>
+<p>Strengthened by [[five-and-self-atomicity-t-imply-necessary-b]]:
+self-atoms serve for strong worlds.</p>
+<h2 id="revisions">Revisions</h2>
+<ul>
+<li><strong>2026-10-25</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the
+Self-Atomicity and bridge-principle records added; the record is
+unchanged.</li>
+</ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 8 Oct</strong> — Cian Dorr, suggestion of 8 October 2026, that ND and the Strong Leibniz Biconditionals (type t) give □ND; proof as recorded.</li>
+<li><strong>Dorr 8 Oct</strong> — Cian Dorr, suggestion of 8 October
+2026, that ND and the Strong Leibniz Biconditionals (type t) give □ND;
+proof as recorded.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/five-and-strong-leibniz-t-imply-necessary-b.yaml</code>
+Record:
+<code>topics/classicism/results/five-and-strong-leibniz-t-imply-necessary-b.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — §8.2, pp. 165–170. Strong worlds and the Strong Leibniz Biconditionals.</li>
+<li><strong>Background: A Philosophical Introduction to Higher-Order
+Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to
+Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8,
+Application: Consequences and strengthenings of Classicism, pp. 155–182,
+and Chapter 18, The model theory of classicism, pp. 389–413, were read
+directly on 22 September 2026; locators give the book’s own page
+numbers. The book works in the full simple type hierarchy with Modalized
+Functionality at all types; its results are taken in the map’s
+relational type system, of which its models are models. — §8.2,
+pp. 165–170. Strong worlds and the Strong Leibniz Biconditionals.</li>
 </ul>
 </body></html>

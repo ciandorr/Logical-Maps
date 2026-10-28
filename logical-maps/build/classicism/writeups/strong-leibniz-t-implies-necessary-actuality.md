@@ -18,6 +18,12 @@ Write $A$ for Actuality, $\exists p\, .\,p\land\forall q\, .\,q\to p\le q$. Ever
 
 The map already had □Actuality from Atomicity and BF (Proposition 2.7) and from □Plenitude and □Rigid Comprehension. This record is stronger in one direction: only the type-$t$ instance of the Strong Leibniz Biconditionals is used, so with the recorded derivation of that instance from Atomicity (type $t$) and BF (type $t$), □Actuality now follows from those two type-$t$ principles without BF at other types. Every model in the map that satisfies the Strong Leibniz Biconditionals already satisfied □Actuality, so no recorded verdict changes.
 
+Strengthened by [[self-atomicity-t-implies-necessary-actuality]]: Self-Atomicity (type t), which the Strong Leibniz Biconditionals (type t) imply, suffices.
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Dorr, 26 Sep (Fitelson)** — Cian Dorr, argument given 26 September 2026, after Branden Fitelson pointed out at a conference that day that the map lacked this arrow.

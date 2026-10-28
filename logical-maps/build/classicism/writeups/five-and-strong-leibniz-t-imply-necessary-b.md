@@ -19,6 +19,12 @@ Strong worlds are necessarily strong: if $\operatorname{SWorld}(w)$, then 5 give
 
 5 is equivalent to ND in C, by the recorded results, so this gives □ND from ND and the Strong Leibniz Biconditionals (type t). 5 is used only to make the strong worlds necessarily possible. Weak worlds do not suffice: ND with □Atomicity (type t) does not give □ND, by the recorded models.
 
+Strengthened by [[five-and-self-atomicity-t-imply-necessary-b]]: self-atoms serve for strong worlds.
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Dorr 8 Oct** — Cian Dorr, suggestion of 8 October 2026, that ND and the Strong Leibniz Biconditionals (type t) give □ND; proof as recorded.

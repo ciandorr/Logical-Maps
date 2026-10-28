@@ -10,6 +10,8 @@
 - **Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
 - **Rigid Comprehension.** Every relation, including a proposition, is coextensive with a rigid one.
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
+- **□Self-atoms are atoms.** Necessarily, at each relational type, every self-atom is an atom.
+- **□Self-atoms are strong atoms.** Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.
 - **Analytic Necessitism.** If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type $\sigma$.
 - **Second-Order Analytic Necessitism.** If there could be a real number structure, there is a rigid one, necessarily a real number structure, together with represented powers of every arity up to $n$: rigid properties of rigid relations among the structure's elements that necessarily represent every relation on them. One sentence for each type $\sigma$ and each $n\ge1$.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
@@ -27,7 +29,9 @@
 - **¬ Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **¬ Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Possible Infinity (type e).** Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.
-- **¬ Strong Leibniz Biconditionals (type t).** Every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.
+- **¬ Strong Atomicity (type t).** Every possible proposition is entailed by a strong atom, one that is possible and necessarily entails every proposition or its negation.
+- **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
+- **¬ Atoms are self-atoms (type t).** Every atom is a self-atom: necessarily, if it is true, it is an atom.
 - **¬ B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
 - **¬ No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
@@ -107,11 +111,17 @@ There are exactly three individuals at every world, with literal identity, so th
 
 *From the group *Symmetry-constrained full models*, shared argument `symmetry-constrained-full#axiom-of-infinity-e`. By Claude Fable 5.1 (Anthropic), at Cian Dorr's direction, 2026-10-04.*
 
-### Fails Strong Leibniz Biconditionals (type t).
+### Fails Strong Atomicity (type t).
 
-The constant maps form one orbit of the symmetry group, so the proposition $C$ that the arrow is constant (for individuals $a,b,c$, the proposition that $a=b=c$) is an atom: it is possible, and a symmetric proposition contains all the constant maps or none. It is not a strong world. At a constant map $c_i$, every composite $l\circ c_i$ is constant, so $C$ transported there is $\top$; and $\top$ there lies neither below the proposition $P$ that the arrow is a permutation nor below its negation, both being possible. As an atom, $C$ has no possible proposition below it but itself, so no strong world lies below it, and the type-$t$ Strong Leibniz Biconditionals fail.
+The constant maps form one orbit of the symmetry group, so the proposition $C$ that the arrow is constant (for individuals $a,b,c$, the proposition that $a=b=c$) is an atom: it is possible, and a symmetric proposition contains all the constant maps or none. It is not a strong atom. At a constant map $c_i$, every composite $l\circ c_i$ is constant, so $C$ transported there is $\top$; and $\top$ there lies neither below the proposition $P$ that the arrow is a permutation nor below its negation, both being possible. As an atom, $C$ has no possible proposition below it but itself, so no strong atom lies below it, and the type-$t$ Strong Atomicity fails.
 
-*From the group *Symmetry-constrained full models*, shared argument `symmetry-constrained-full#strong-leibniz-t`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, from Cian Dorr's observation, 2026-10-08.*
+*From the group *Symmetry-constrained full models*, shared argument `symmetry-constrained-full#strong-atomicity-t`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, from Cian Dorr's observation, 2026-10-08.*
+
+### Holds □Self-atoms are atoms, □Self-atoms are strong atoms. Fails Self-Atomicity (type t), Atoms are self-atoms (type t).
+
+At every object the atoms are the orbits of single pairs under the symmetry group. The orbit $C$ of a collapse $c$ (in the two-object member, of the arrows $c_i:W_0\to X$) is an atom; its transport along $c$ is the set of arrows $m$ with $m\circ c$ in $C$, which includes every arrow $X\to X$, since $m\circ c$ is again a collapse, and so is not an atom there, the orbit of the permutations being a proper symmetric part. So $C$ is an atom and not a self-atom, and the only possible proposition below $C$ is $C$ itself: Atoms are self-atoms (type t) and Self-Atomicity (type t) fail. Conversely a self-atom $I$ at a relational type has, at each of its pairs $\langle k,\bar a\rangle$, a transport along $k$ that is an atom containing $\langle1,\cdot\rangle$, hence the orbit of the identity; so $m\circ k$ carries a pair of $I$ only for symmetries $m$, which excludes collapses ($c\circ c=c$) and leaves pairs at permutations, where symmetry makes $I$ the orbit of one pair, an atom, whose transport along a collapse is empty and along a permutation is an atom again: a strong atom. The same holds at every reachable object, the domains being the symmetric intensions everywhere.
+
+*From the group *Symmetry-constrained full models*, shared argument `symmetry-constrained-full#self-atoms`. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
 ### Holds Analytic Necessitism, Second-Order Analytic Necessitism, Necessity of Second-Order Analysis.
 

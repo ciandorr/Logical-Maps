@@ -25,6 +25,28 @@ definition: Work in ZFC. Form M_C ⊕ M_k by Definition 5.2. M_C is the full mod
   those of Definition 5.2, not the full function-space construction. Evaluate at the new root. Interpret
   any relational signature constants as top; no signature verdict is asserted.
 arguments:
+- holds:
+  - strong-actuality
+  - necessary-strong-actuality
+  fails:
+  - self-atomicity-t
+  - atoms-are-self-atoms-t
+  - self-atoms-are-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'In the chain component $M_k$, the unravelling of the idempotent monoid, the proposition $q$ true
+    at $a_1,a_2,\ldots$ and false at $a_0$ exists at $a_0$ and is an atom there, its only parts existing
+    at $a_0$ being itself and bottom; but at $a_1$ it is identical to $\top$, which has the strict nonzero
+    part $\{a_1\}$ there, so $q$ is not an atom at $a_1$ and not a self-atom. The root proposition with
+    chain component $q$ and the other components bottom is therefore an atom at the root that is not a
+    self-atom, with no self-atom below it: Atoms are self-atoms (type t) and Self-Atomicity (type t) fail.
+    The root proposition with the Cohen component the whole cloud and the rest bottom is a self-atom (the
+    argument self-atoms of the cloud models) with no atom below it, so Self-atoms are atoms (type t) fails.
+    Strong Actuality holds at the root, whose singleton is the true atom and is seen by no other point,
+    so transports to bottom everywhere; at the chain points the singleton of the point is the true atom
+    and is likewise unseen from later points; and at the cloud points every proposition is $\top$ or $\bot$,
+    so the true atom decides everything. Hence □Strong Actuality holds.'
 - text: The Cohen component is rigidifiable and admits global choice by Lemma 5.5(a). The idempotent action
     model validates □RC, is extensionally full at its root, and validates □IC by the natural selector
     constructed in Lemma 5.7. Its unravelled modalized-domain model therefore satisfies Lemma 5.5(b).

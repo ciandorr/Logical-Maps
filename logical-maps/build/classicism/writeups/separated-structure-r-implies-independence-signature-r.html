@@ -323,29 +323,64 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Separated Structure ⇒ Independence (signature Σ)</h1></header><p class="cert">
-Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.
+Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 22 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
+<li><strong>Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>Independence (signature Σ).</strong> No constant of Sigma is
+a pure operation applied to other constants: for a closed pure term A
+and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied
+to the d’s. With n = 0, no constant denotes a pure entity.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">c</span> be a constant of relational type <span class="math inline">\tau</span>, <span class="math inline">\bar d</span> distinct constants other than <span class="math inline">c</span>, and <span class="math inline">A</span> closed and pure, and suppose <span class="math inline">c=A\bar d</span>. By <span class="math inline">\beta</span>, <span class="math inline">(\lambda\bar y x\, .\,x)\bar d c=(\lambda\bar y x\, .\,A\bar y)\bar d c</span>. The two abstracts are closed and pure, so they contain neither <span class="math inline">c</span> nor <span class="math inline">\bar d</span>. Peeling off <span class="math inline">c</span> and then each <span class="math inline">d_i</span> with Separated Structure, as in the proof of General Separated Structure, gives <span class="math inline">\lambda\bar yx\, .\,x=\lambda\bar yx\, .\,A\bar y</span>. Applying both sides to <span class="math inline">\bar d</span> and then to <span class="math inline">\top_\tau</span> and to <span class="math inline">\bot_\tau</span> gives <span class="math inline">\top_\tau=A\bar d=\bot_\tau</span>, contradicting <span class="math inline">\top_\tau\ne\bot_\tau</span> in C.</p>
+<p>Let <span class="math inline">c</span> be a constant of relational
+type <span class="math inline">\tau</span>, <span
+class="math inline">\bar d</span> distinct constants other than <span
+class="math inline">c</span>, and <span class="math inline">A</span>
+closed and pure, and suppose <span class="math inline">c=A\bar d</span>.
+By <span class="math inline">\beta</span>, <span
+class="math inline">(\lambda\bar y x\, .\,x)\bar d c=(\lambda\bar y x\,
+.\,A\bar y)\bar d c</span>. The two abstracts are closed and pure, so
+they contain neither <span class="math inline">c</span> nor <span
+class="math inline">\bar d</span>. Peeling off <span
+class="math inline">c</span> and then each <span
+class="math inline">d_i</span> with Separated Structure, as in the proof
+of General Separated Structure, gives <span
+class="math inline">\lambda\bar yx\, .\,x=\lambda\bar yx\, .\,A\bar
+y</span>. Applying both sides to <span class="math inline">\bar d</span>
+and then to <span class="math inline">\top_\tau</span> and to <span
+class="math inline">\bot_\tau</span> gives <span
+class="math inline">\top_\tau=A\bar d=\bot_\tau</span>, contradicting
+<span class="math inline">\top_\tau\ne\bot_\tau</span> in C.</p>
 <h2 id="notes">Notes</h2>
-<p>The n = 0 case, that no constant denotes a pure entity, is the first step of the recorded incompatibility of Separated Structure with ND.</p>
+<p>The n = 0 case, that no constant denotes a pure entity, is the first
+step of the recorded incompatibility of Separated Structure with ND.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Logical Combinatorialism</strong> — Andrew Bacon, Logical Combinatorialism, Philosophical Review 129 (2020), §4, p. 568 and n. 53.</li>
+<li><strong>Logical Combinatorialism</strong> — Andrew Bacon, Logical
+Combinatorialism, Philosophical Review 129 (2020), §4, p. 568 and
+n. 53.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/separated-structure-r-implies-independence-signature-r.yaml</code>
+Record:
+<code>topics/classicism/results/separated-structure-r-implies-independence-signature-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Origin: Logical Combinatorialism.</strong> Bacon, Andrew (2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589. As cited in Classicism, §§2.5 and 3.5. Read directly for the import of 22 September 2026; section, footnote and page locators refer to the published pagination. — §4, p. 568 and n. 53. Fundamental Independence and its derivation from Logical Necessity; this record derives the constant-indexed form from Separated Structure instead.</li>
+<li><strong>Origin: Logical Combinatorialism.</strong> Bacon, Andrew
+(2020). Logical Combinatorialism. Philosophical Review 129(4), 537–589.
+As cited in Classicism, §§2.5 and 3.5. Read directly for the import of
+22 September 2026; section, footnote and page locators refer to the
+published pagination. — §4, p. 568 and n. 53. Fundamental Independence
+and its derivation from Logical Necessity; this record derives the
+constant-indexed form from Separated Structure instead.</li>
 </ul>
 </body></html>

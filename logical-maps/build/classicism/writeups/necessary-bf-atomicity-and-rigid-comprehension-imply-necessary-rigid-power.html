@@ -322,21 +322,103 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <link rel="stylesheet" href="../math/katex.min.css">
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
-<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□BF, □Atomicity and □Rigid Comprehension imply □Rigid Power</h1></header><p>Original argument of Claude Opus 5.5 (Anthropic), 3 October 2026. Informal, not Lean-verified.</p>
-<p>Let <span class="math inline">F</span> be rigid and <span class="math inline">P:=\lambda X\, .\,\operatorname{Rigid}(X)\land X\le F</span>. Persistence of <span class="math inline">P</span> holds in C, since both conjuncts are necessitated and 4 holds. Since <span class="math inline">F</span> is rigid, it is necessarily rigid. So it suffices to show that at any world <span class="math inline">v</span>, given BF, Atomicity (type <span class="math inline">t</span>) and Rigid Comprehension at <span class="math inline">v</span>, and <span class="math inline">F</span> rigid at <span class="math inline">v</span>, the property <span class="math inline">P</span> is weakly inextensible at <span class="math inline">v</span>. The boxed premises supply this at every world.</p>
-<h2 id="two-facts-at-v">Two facts, at <span class="math inline">v</span></h2>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>□BF, □Atomicity and □Rigid Comprehension imply □Rigid Power</h1></header><p>Original argument of Claude Opus 5.5 (Anthropic), 3 October 2026.
+Informal, not Lean-verified.</p>
+<p>Let <span class="math inline">F</span> be rigid and <span
+class="math inline">P:=\lambda X\, .\,\operatorname{Rigid}(X)\land X\le
+F</span>. Persistence of <span class="math inline">P</span> holds in C,
+since both conjuncts are necessitated and 4 holds. Since <span
+class="math inline">F</span> is rigid, it is necessarily rigid. So it
+suffices to show that at any world <span class="math inline">v</span>,
+given BF, Atomicity (type <span class="math inline">t</span>) and Rigid
+Comprehension at <span class="math inline">v</span>, and <span
+class="math inline">F</span> rigid at <span
+class="math inline">v</span>, the property <span
+class="math inline">P</span> is weakly inextensible at <span
+class="math inline">v</span>. The boxed premises supply this at every
+world.</p>
+<h2 id="two-facts-at-v">Two facts, at <span
+class="math inline">v</span></h2>
 <ol type="1">
-<li><em>Atoms decide.</em> If <span class="math inline">a</span> is an atom and <span class="math inline">\Diamond(a\land p)</span>, then <span class="math inline">a\le p</span>. By BF this extends to existential propositions, as in the Intensional Choice write-up.</li>
-<li><em>No new instances below an atom.</em> If <span class="math inline">R</span> is weakly rigid, <span class="math inline">a</span> is an atom and <span class="math inline">a\le Rz</span>, then <span class="math inline">a\le z=z_1</span> for some actual instance <span class="math inline">z_1</span> of <span class="math inline">R</span>. (Apply weak inextensibility to <span class="math inline">\lambda z&#39;\, .\,\neg(a\land z&#39;=z)</span>.) In C, coextensive weakly rigid relations are identical, at every world.</li>
+<li><em>Atoms decide.</em> If <span class="math inline">a</span> is an
+atom and <span class="math inline">\Diamond(a\land p)</span>, then <span
+class="math inline">a\le p</span>. By BF this extends to existential
+propositions, as in the Intensional Choice write-up.</li>
+<li><em>No new instances below an atom.</em> If <span
+class="math inline">R</span> is weakly rigid, <span
+class="math inline">a</span> is an atom and <span
+class="math inline">a\le Rz</span>, then <span class="math inline">a\le
+z=z_1</span> for some actual instance <span
+class="math inline">z_1</span> of <span class="math inline">R</span>.
+(Apply weak inextensibility to <span class="math inline">\lambda
+z&#39;\, .\,\neg(a\land z&#39;=z)</span>.) In C, coextensive weakly
+rigid relations are identical, at every world.</li>
 </ol>
 <h2 id="the-argument">The argument</h2>
-<p>Let <span class="math inline">\forall X\, .\,PX\to\Box\mathcal XX</span>, and suppose <span class="math inline">\Diamond\exists X\, .\,PX\land\neg\mathcal XX</span>. By BF and Atomicity there are an <span class="math inline">X</span> and an atom <span class="math inline">a</span> with <span class="math inline">a\le PX\land\neg\mathcal XX</span>. Let <span class="math inline">X&#39;</span> be a rigid relation coextensive with <span class="math inline">Q:=\lambda z\, .\,Fz\land\Diamond(a\land Xz)</span>, which Rigid Comprehension supplies.</p>
-<p><em><span class="math inline">X&#39;\le F</span>.</em> Every actual instance of <span class="math inline">X&#39;</span> is an instance of <span class="math inline">F</span>, and so necessarily an instance of <span class="math inline">F</span> by persistence. Weak inextensibility of <span class="math inline">X&#39;</span> gives <span class="math inline">X&#39;\le F</span>. So <span class="math inline">PX&#39;</span>, and therefore <span class="math inline">\Box\mathcal XX&#39;</span>.</p>
-<p><em><span class="math inline">a</span> entails that <span class="math inline">X</span> and <span class="math inline">X&#39;</span> are coextensive.</em> Suppose instead that <span class="math inline">a</span> entails <span class="math inline">Xz\land\neg X&#39;z</span> for some <span class="math inline">z</span>; such a <span class="math inline">z</span> exists by facts 1 and BF. Since <span class="math inline">a\le X\le F</span>, we have <span class="math inline">a\le Fz</span>. By fact 2 for <span class="math inline">F</span>, <span class="math inline">a\le z=z_1</span> for some actual instance <span class="math inline">z_1</span> of <span class="math inline">F</span>. Then <span class="math inline">a\le Xz_1</span>, so <span class="math inline">Qz_1</span> holds, hence <span class="math inline">X&#39;z_1</span>, hence <span class="math inline">\Box X&#39;z_1</span>, and so <span class="math inline">a\le X&#39;z</span>. Contradiction. Conversely, suppose <span class="math inline">a</span> entails <span class="math inline">X&#39;z\land\neg Xz</span>. By fact 2 for <span class="math inline">X&#39;</span>, <span class="math inline">a\le z=z_1</span> for an actual instance <span class="math inline">z_1</span> of <span class="math inline">X&#39;</span>. So <span class="math inline">Qz_1</span>, so <span class="math inline">\Diamond(a\land Xz_1)</span>, so <span class="math inline">a\le Xz_1</span> by fact 1, and <span class="math inline">a\le Xz</span>. Contradiction.</p>
-<p><em>Conclusion.</em> At the worlds where <span class="math inline">a</span> holds, <span class="math inline">X</span> is rigid, since <span class="math inline">a\le PX</span>. <span class="math inline">X&#39;</span> is rigid there too, being necessarily rigid. Coextensive weakly rigid relations are identical, so <span class="math inline">a\le X=X&#39;</span>. Hence <span class="math inline">a\le\mathcal XX&#39;=\mathcal XX</span>, which contradicts <span class="math inline">a\le\neg\mathcal XX</span> and <span class="math inline">\Diamond a</span>.</p>
-<p>The argument uses BF at the type of the arguments of <span class="math inline">F</span> and at the type of <span class="math inline">F</span>, Atomicity at type <span class="math inline">t</span>, and Rigid Comprehension at the type of <span class="math inline">F</span>. It makes no use of B or 5.</p>
+<p>Let <span class="math inline">\forall X\, .\,PX\to\Box\mathcal
+XX</span>, and suppose <span class="math inline">\Diamond\exists X\,
+.\,PX\land\neg\mathcal XX</span>. By BF and Atomicity there are an <span
+class="math inline">X</span> and an atom <span
+class="math inline">a</span> with <span class="math inline">a\le
+PX\land\neg\mathcal XX</span>. Let <span
+class="math inline">X&#39;</span> be a rigid relation coextensive with
+<span class="math inline">Q:=\lambda z\, .\,Fz\land\Diamond(a\land
+Xz)</span>, which Rigid Comprehension supplies.</p>
+<p><em><span class="math inline">X&#39;\le F</span>.</em> Every actual
+instance of <span class="math inline">X&#39;</span> is an instance of
+<span class="math inline">F</span>, and so necessarily an instance of
+<span class="math inline">F</span> by persistence. Weak inextensibility
+of <span class="math inline">X&#39;</span> gives <span
+class="math inline">X&#39;\le F</span>. So <span
+class="math inline">PX&#39;</span>, and therefore <span
+class="math inline">\Box\mathcal XX&#39;</span>.</p>
+<p><em><span class="math inline">a</span> entails that <span
+class="math inline">X</span> and <span class="math inline">X&#39;</span>
+are coextensive.</em> Suppose instead that <span
+class="math inline">a</span> entails <span
+class="math inline">Xz\land\neg X&#39;z</span> for some <span
+class="math inline">z</span>; such a <span class="math inline">z</span>
+exists by facts 1 and BF. Since <span class="math inline">a\le X\le
+F</span>, we have <span class="math inline">a\le Fz</span>. By fact 2
+for <span class="math inline">F</span>, <span class="math inline">a\le
+z=z_1</span> for some actual instance <span
+class="math inline">z_1</span> of <span class="math inline">F</span>.
+Then <span class="math inline">a\le Xz_1</span>, so <span
+class="math inline">Qz_1</span> holds, hence <span
+class="math inline">X&#39;z_1</span>, hence <span
+class="math inline">\Box X&#39;z_1</span>, and so <span
+class="math inline">a\le X&#39;z</span>. Contradiction. Conversely,
+suppose <span class="math inline">a</span> entails <span
+class="math inline">X&#39;z\land\neg Xz</span>. By fact 2 for <span
+class="math inline">X&#39;</span>, <span class="math inline">a\le
+z=z_1</span> for an actual instance <span class="math inline">z_1</span>
+of <span class="math inline">X&#39;</span>. So <span
+class="math inline">Qz_1</span>, so <span
+class="math inline">\Diamond(a\land Xz_1)</span>, so <span
+class="math inline">a\le Xz_1</span> by fact 1, and <span
+class="math inline">a\le Xz</span>. Contradiction.</p>
+<p><em>Conclusion.</em> At the worlds where <span
+class="math inline">a</span> holds, <span class="math inline">X</span>
+is rigid, since <span class="math inline">a\le PX</span>. <span
+class="math inline">X&#39;</span> is rigid there too, being necessarily
+rigid. Coextensive weakly rigid relations are identical, so <span
+class="math inline">a\le X=X&#39;</span>. Hence <span
+class="math inline">a\le\mathcal XX&#39;=\mathcal XX</span>, which
+contradicts <span class="math inline">a\le\neg\mathcal XX</span> and
+<span class="math inline">\Diamond a</span>.</p>
+<p>The argument uses BF at the type of the arguments of <span
+class="math inline">F</span> and at the type of <span
+class="math inline">F</span>, Atomicity at type <span
+class="math inline">t</span>, and Rigid Comprehension at the type of
+<span class="math inline">F</span>. It makes no use of B or 5.</p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.3, pp. 28–33. Rigidity and Rigid Comprehension.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.3,
+pp. 28–33. Rigidity and Rigid Comprehension.</li>
 </ul>
 </body></html>

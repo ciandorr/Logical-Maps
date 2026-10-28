@@ -1,0 +1,27 @@
+id: necessary-modal-five-implies-necessary-self-atoms-are-strong-atoms-r
+premises:
+- necessary-modal-five
+conclusion: necessary-self-atoms-are-strong-atoms-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  checked_by: []
+  date: '2026-10-25'
+  lean: none
+sources:
+- Cian Dorr, the notion of a self-atom and the bridge principles, 25 October 2026; the proof by Claude
+  Fable 5.1 (Anthropic) the same day, from the survey of Strong Atomicity results that Cian Dorr requested
+  (session transcript of 25 October 2026).
+source_names:
+- Dorr 25 Oct
+proof: 'Let $X$ be a self-atom at a world $u$; we show $\Box\forall Y\, .\,X\le Y\lor X\le\neg Y$ at $u$.
+  At any world $v$ after $u$, suppose some $Y$ has $X\land Y\ne\bot$ and $X\land\neg Y\ne\bot$, and put
+  $Z:=X\land Y$. Then $Z\le X$, $Z\ne\bot$, and $X\land\neg Z=X\land\neg Y\ne\bot$ gives $\Diamond\exists\bar
+  x\, .\,X\bar x\land\neg Z\bar x$ at $v$. By 5 at $v$, $\Box\Diamond\exists\bar x\, .\,Z\bar x$ holds
+  at $v$, so at a world after $v$ where $X\bar x\land\neg Z\bar x$, the entity $X$ is instantiated, hence
+  an atom, with the non-bottom strict part $Z$: impossible. So every self-atom at $u$ is a strong atom.
+  The argument uses 5 at the worlds after $u$, which □5 supplies at every $u$.'
+notes: So under C5 Self-Atomicity and Strong Atomicity coincide, by [[self-atomicity-r-and-self-atoms-are-strong-atoms-r-imply-strong-atomicity-r]].
+  5 at the evaluation point alone gives only [[modal-five-implies-self-atoms-are-atoms-r]].

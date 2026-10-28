@@ -1,0 +1,24 @@
+id: atoms-are-strong-atoms-r
+name: Atoms are strong atoms
+category: more-boolean-structure
+statement: 'At each relational type, every atom is a strong atom: it necessarily entails every entity
+  of the type or its negation.'
+formal: $\forall X^\sigma\, .\,\operatorname{Atom}_\sigma(X)\to\operatorname{SAtom}_\sigma(X)\qquad(\sigma\ne
+  e)$
+definitions: 'where $\Diamond_\sigma X:=X\ne\bot_\sigma$ and $\operatorname{SAtom}_\sigma(W):=\Diamond_\sigma
+  W\land\Box\forall Y^\sigma\, .\,W\le_\sigma Y\lor W\le_\sigma\neg_\sigma Y$ is a strong atom (Background,
+  Strong atoms)'
+date: '2026-10-25'
+sources:
+- Cian Dorr, the notion of a self-atom, Self-Atomicity (Self-Atomism) and the four bridge principles,
+  25 October 2026.
+source_names:
+- Dorr 25 Oct
+notes: 'Bridge principle (Cian Dorr, 25 October 2026): exactly what Strong Atomicity
+  adds to Atomicity, since the two together are equivalent to them, and what BF supplies in Bacon’s Exercise
+  8.12. It is the conjunction of [[atoms-are-self-atoms-r]] and [[self-atoms-are-strong-atoms-r]] only
+  given [[self-atoms-are-atoms-r]]: the free-monoid model satisfies it while a non-atomic self-atom fails
+  to be strong.'
+aliases:
+- Atoms are strong atoms
+lean_def: Classicism.P.AtomsAreStrongAtoms.schemaIn

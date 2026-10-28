@@ -69,6 +69,23 @@ meets:
     member gives a strictly smaller one.
 
 arguments:
+- holds:
+  - necessary-self-atoms-are-atoms-r
+  - necessary-self-atoms-are-strong-atoms-r
+  fails:
+  - self-atomicity-t
+  - atoms-are-self-atoms-t
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026
+  date: '2026-10-25'
+  choice: free
+  text: 'The arrows are idempotent, $f_n\circ f_n=f_n$, and determined by finitely many values, so every
+    singleton is in the domain; $\{1\}$ is the only atom containing the identity. The atom $\{f_2\}$ is
+    not a self-atom: its transport along $f_2$ is $\{f_1,f_2\}$, not an atom. So Atoms are self-atoms
+    (type t) fails, and Self-Atomicity (type t) fails, $\{f_2\}$ being possible with no self-atom below
+    it. No self-atom contains an $f_n$ with $n\ge2$, since its transport along $f_n$ would contain $f_n$
+    and $1$; so the only self-atom is $\{1\}$, an atom, and a strong atom, its transport along every
+    $f_n$ with $n\ge2$ being empty, no arrow having a retraction. A self-atom of a relational type sits
+    over $1$ with one tuple, so is an atom and a strong atom. One object, so this holds at every world.'
 
 - holds: [rigid-power-r]
   by: Claude Fable 5.1 (Anthropic), at Cian Dorr's direction

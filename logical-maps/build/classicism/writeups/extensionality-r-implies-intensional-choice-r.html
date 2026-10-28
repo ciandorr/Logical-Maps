@@ -323,29 +323,55 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Extensionality ⇒ Intensional Choice</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.extensionality_r_implies_intensional_choice_r</code>; produced by Claude Opus 5.5 (Anthropic), 3 October 2026, from a suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 3 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.extensionality_r_implies_intensional_choice_r</code>;
+produced by Claude Opus 5.5 (Anthropic), 3 October 2026, from a
+suggestion of Cian Dorr; recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 3 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Extensionality.</strong> At each relational type, coextensive relations are identical; include the nullary propositional case.</li>
+<li><strong>Extensionality.</strong> At each relational type,
+coextensive relations are identical; include the nullary propositional
+case.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Intensional Choice.</strong> If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
+<li><strong>Intensional Choice.</strong> If a property is necessarily
+instantiated, then some property entailing it is necessarily uniquely
+instantiated.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Extensionality at type <span class="math inline">t</span> identifies every truth with <span class="math inline">\top</span>, so <span class="math inline">p\to\Box p</span> for every proposition <span class="math inline">p</span>. Let <span class="math inline">F</span> be necessarily instantiated. By T it is instantiated, say by <span class="math inline">a</span>, and then <span class="math inline">\Box Fa</span>. Put <span class="math inline">G:=\lambda x\, .\,x=a</span>. Then <span class="math inline">\Box\forall x\, .\,Gx\to Fx</span>, that is <span class="math inline">G\le F</span>, and <span class="math inline">\exists x\, .\,(Gx\land\forall y\, .\,Gy\to y=x)</span> is a theorem, hence necessary.</p>
+<p>Extensionality at type <span class="math inline">t</span> identifies
+every truth with <span class="math inline">\top</span>, so <span
+class="math inline">p\to\Box p</span> for every proposition <span
+class="math inline">p</span>. Let <span class="math inline">F</span> be
+necessarily instantiated. By T it is instantiated, say by <span
+class="math inline">a</span>, and then <span class="math inline">\Box
+Fa</span>. Put <span class="math inline">G:=\lambda x\, .\,x=a</span>.
+Then <span class="math inline">\Box\forall x\, .\,Gx\to Fx</span>, that
+is <span class="math inline">G\le F</span>, and <span
+class="math inline">\exists x\, .\,(Gx\land\forall y\, .\,Gy\to
+y=x)</span> is a theorem, hence necessary.</p>
 <h2 id="notes">Notes</h2>
 <p>The witness is the haecceity of any instance.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 3 Oct</strong> — Cian Dorr, suggestion of 3 October 2026.</li>
+<li><strong>Dorr 3 Oct</strong> — Cian Dorr, suggestion of 3 October
+2026.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/extensionality-r-implies-intensional-choice-r.yaml</code>
+Record:
+<code>topics/classicism/results/extensionality-r-implies-intensional-choice-r.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.1, pp. 21–23. Extensionality and its modal collapse.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.1,
+pp. 21–23. Extensionality and its modal collapse.</li>
 </ul>
 </body></html>

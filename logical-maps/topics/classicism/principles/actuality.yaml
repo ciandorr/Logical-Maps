@@ -13,4 +13,30 @@ references:
   role: formulation
   locator: §2.2, p. 25
 notes: ''
+changes:
+- date: '2026-10-28'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: Actual Profile, formerly its own principle, is now this principle’s form
+    actual-profile, with the two results connecting them as its equivalence.'
+variants:
+- id: actual-profile
+  lean:
+    ref: Classicism.P.ActualProfile.listSchemaIn
+    equivalence_ref: Classicism.Map.actuality.actual_profile
+    status: verified
+  name: Actual Profile
+  statement: Every finite tuple has a true relational profile entailing every relation it instantiates;
+    the tuple may be empty.
+  formal: $\forall\bar x^{\bar\sigma}\, .\,\exists Y^{\bar\sigma t}\, .\,Y[\bar x]\land\forall Z^{\bar\sigma
+    t}\, .\,Z[\bar x]\to Y\le Z$
+  references:
+  - paper: bacon-dorr-classicism
+    role: formulation
+    locator: §2.2, n. 31, p. 25
+  equivalence: 'Form to official: specialize Actual Profile to the empty tuple, so that its relation
+    variables have type $t$; it then says that there is a true proposition entailing every truth. Official
+    to form (Classicism, §2.2, n. 31): let $w$ witness Actuality. At a tuple $\bar x$, use the relation
+    $\lambda\bar y\, .\,w\land\bar y=\bar x$. It holds at $\bar x$. If $Z[\bar x]$ is true, $w$ entails that
+    truth, and NI preserves the tuple identities, so the relation entails $Z$. This gives the profile at
+    every tuple of types.'
 lean_def: Classicism.P.Actuality.schemaIn

@@ -323,31 +323,72 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Truth implies ND-necessity ∧ ND ⇒ Fregean Axiom</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.distinctness_preserving_collapse_and_nd_imply_fregean_axiom</code>; produced by Cian Dorr, suggestion of 23 September 2026; proof written out by Claude Fable 5.1 (Anthropic), 23 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 23 September 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.distinctness_preserving_collapse_and_nd_imply_fregean_axiom</code>;
+produced by Cian Dorr, suggestion of 23 September 2026; proof written
+out by Claude Fable 5.1 (Anthropic), 23 September 2026; recorded by
+Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 23 September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Truth implies ND-necessity.</strong> Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.</li>
-<li><strong>ND.</strong> Distinct things of any type are necessarily distinct.</li>
+<li><strong>Truth implies ND-necessity.</strong> Every truth is
+ND-necessary, that is, necessary under the distinctness-preserving
+modality.</li>
+<li><strong>ND.</strong> Distinct things of any type are necessarily
+distinct.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Fregean Axiom.</strong> Materially equivalent propositions are identical.</li>
+<li><strong>Fregean Axiom.</strong> Materially equivalent propositions
+are identical.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Under ND the two necessities coincide. If <span class="math inline">\Box_{\ne}p</span>, there is a true <span class="math inline">q</span> with <span class="math inline">\Box(\Diamond q\to p)</span>; <span class="math inline">q</span> true gives <span class="math inline">q\ne\bot</span>, and ND at type <span class="math inline">t</span> gives <span class="math inline">\Box(q\ne\bot)</span>, that is <span class="math inline">\Box\Diamond q</span>; K then gives <span class="math inline">\Box p</span>. So the collapse yields <span class="math inline">\forall p\, .\,p\to\Box p</span>: every truth is <span class="math inline">\top</span>. Then materially equivalent propositions are identical: if both are true both are <span class="math inline">\top</span>; if both are false their negations are <span class="math inline">\top</span>, so both are <span class="math inline">\bot</span>. That is the Fregean Axiom.</p>
+<p>Under ND the two necessities coincide. If <span
+class="math inline">\Box_{\ne}p</span>, there is a true <span
+class="math inline">q</span> with <span
+class="math inline">\Box(\Diamond q\to p)</span>; <span
+class="math inline">q</span> true gives <span
+class="math inline">q\ne\bot</span>, and ND at type <span
+class="math inline">t</span> gives <span
+class="math inline">\Box(q\ne\bot)</span>, that is <span
+class="math inline">\Box\Diamond q</span>; K then gives <span
+class="math inline">\Box p</span>. So the collapse yields <span
+class="math inline">\forall p\, .\,p\to\Box p</span>: every truth is
+<span class="math inline">\top</span>. Then materially equivalent
+propositions are identical: if both are true both are <span
+class="math inline">\top</span>; if both are false their negations are
+<span class="math inline">\top</span>, so both are <span
+class="math inline">\bot</span>. That is the Fregean Axiom.</p>
 <h2 id="notes">Notes</h2>
-<p>The converse of the first step holds without ND: <span class="math inline">\Box p</span> gives <span class="math inline">\Box_{\ne}p</span> with <span class="math inline">q:=\top</span>. So ND makes <span class="math inline">\Diamond</span> and <span class="math inline">\Diamond_{\ne}</span> coextensive, and with it the collapse is Extensionalism. This settles the collapse as false in every model with ND and more than two propositions.</p>
+<p>The converse of the first step holds without ND: <span
+class="math inline">\Box p</span> gives <span
+class="math inline">\Box_{\ne}p</span> with <span
+class="math inline">q:=\top</span>. So ND makes <span
+class="math inline">\Diamond</span> and <span
+class="math inline">\Diamond_{\ne}</span> coextensive, and with it the
+collapse is Extensionalism. This settles the collapse as false in every
+model with ND and more than two propositions.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 23 Sep</strong> — Cian Dorr, suggestion of 23 September 2026; proof as recorded.</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §2.6, p. 42 (the distinctness-preserving modality); §1.4, pp. 15–16 (the Fregean Axiom).</li>
+<li><strong>Dorr 23 Sep</strong> — Cian Dorr, suggestion of 23 September
+2026; proof as recorded.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §2.6, p. 42 (the
+distinctness-preserving modality); §1.4, pp. 15–16 (the Fregean
+Axiom).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/distinctness-preserving-collapse-and-nd-imply-fregean-axiom.yaml</code>
+Record:
+<code>topics/classicism/results/distinctness-preserving-collapse-and-nd-imply-fregean-axiom.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §2.6, p. 42; §1.4, pp. 15–16</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §2.6,
+p. 42; §1.4, pp. 15–16</li>
 </ul>
 </body></html>

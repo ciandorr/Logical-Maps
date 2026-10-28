@@ -323,25 +323,89 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Strong Leibniz Biconditionals (type t) ⇒ Two-hat necessity implies ND-necessity</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.strong_leibniz_t_implies_two_hat_implies_nd</code>; produced by Cian Dorr, 14 October 2026; checked step by step by Claude Fable 5.1 (Anthropic) the same day; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.strong_leibniz_t_implies_two_hat_implies_nd</code>;
+produced by Cian Dorr, 14 October 2026; checked step by step by Claude
+Fable 5.1 (Anthropic) the same day; recorded by Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 14 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Strong Leibniz Biconditionals (type t).</strong> Every possible proposition is entailed by a strong world proposition, one that is possible and necessarily entails every proposition or its negation.</li>
+<li><strong>Strong Leibniz Biconditionals (type t).</strong> Every
+possible proposition is entailed by a strong world proposition, one that
+is possible and necessarily entails every proposition or its
+negation.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Two-hat necessity implies ND-necessity.</strong> Whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat.</li>
+<li><strong>Two-hat necessity implies ND-necessity.</strong> Whatever is
+two-hat necessary is ND-necessary: the distinctness-preserving modality
+agrees with its hat.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">w</span> be a true strong world, which Strong Leibniz (type <span class="math inline">t</span>) supplies (strong-leibniz-t-implies-strong-actuality); <span class="math inline">w</span> is the true atom, so it entails every truth. We show that every ND-possible proposition is two-hat possible, the dual of the principle. Suppose <span class="math inline">\Diamond_{\ne}p</span>, i.e. <span class="math inline">\forall q(q\to\Diamond(\Diamond q\wedge p))</span>. Taking <span class="math inline">q:=w</span>, <span class="math inline">\Diamond(\Diamond w\wedge p)</span>. By Strong Leibniz there is a strong world <span class="math inline">v\le\Diamond w\wedge p</span>. Since <span class="math inline">w</span> is the true atom and <span class="math inline">\Diamond v</span> is true, <span class="math inline">w\le\Diamond v</span>; with <span class="math inline">v\le\Diamond w</span> and K, <span class="math inline">v\le\Diamond(\Diamond v\wedge w)</span>. Now <span class="math inline">v</span> is strong: <span class="math inline">\Box\forall Y(v\le Y\vee v\le\neg Y)</span>. At any world where <span class="math inline">v</span> holds, <span class="math inline">v\le\neg Y</span> is impossible for a true <span class="math inline">Y</span> (by T), so <span class="math inline">v</span> entails every truth there; hence for every truth <span class="math inline">q</span> at such a world, <span class="math inline">v\le q</span>, and from <span class="math inline">v\le\Diamond(\Diamond v\wedge w)</span> we get <span class="math inline">\Diamond(\Diamond q\wedge w)</span>. So <span class="math inline">v\le\forall q(q\to\Diamond(\Diamond q\wedge w))</span>, i.e. <span class="math inline">v\le\Diamond_{\ne}w</span>. As <span class="math inline">v\le p</span> and <span class="math inline">\Diamond v</span>, we have <span class="math inline">\Diamond(\Diamond_{\ne}w\wedge p)</span>. Finally, for every true <span class="math inline">q</span>, <span class="math inline">w\le q</span>, and <span class="math inline">\Diamond_{\ne}</span> is monotone under necessary implication (<span class="math inline">\Box_{\ne}</span> is necessarily N and K), so <span class="math inline">\Diamond_{\ne}w\le\Diamond_{\ne}q</span> and <span class="math inline">\Diamond(\Diamond_{\ne}q\wedge p)</span>: that is <span class="math inline">\hat{\hat\Diamond}p</span>.</p>
+<p>Let <span class="math inline">w</span> be a true strong world, which
+Strong Leibniz (type <span class="math inline">t</span>) supplies
+(strong-leibniz-t-implies-strong-actuality); <span
+class="math inline">w</span> is the true atom, so it entails every
+truth. We show that every ND-possible proposition is two-hat possible,
+the dual of the principle. Suppose <span
+class="math inline">\Diamond_{\ne}p</span>, i.e. <span
+class="math inline">\forall q(q\to\Diamond(\Diamond q\wedge p))</span>.
+Taking <span class="math inline">q:=w</span>, <span
+class="math inline">\Diamond(\Diamond w\wedge p)</span>. By Strong
+Leibniz there is a strong world <span class="math inline">v\le\Diamond
+w\wedge p</span>. Since <span class="math inline">w</span> is the true
+atom and <span class="math inline">\Diamond v</span> is true, <span
+class="math inline">w\le\Diamond v</span>; with <span
+class="math inline">v\le\Diamond w</span> and K, <span
+class="math inline">v\le\Diamond(\Diamond v\wedge w)</span>. Now <span
+class="math inline">v</span> is strong: <span
+class="math inline">\Box\forall Y(v\le Y\vee v\le\neg Y)</span>. At any
+world where <span class="math inline">v</span> holds, <span
+class="math inline">v\le\neg Y</span> is impossible for a true <span
+class="math inline">Y</span> (by T), so <span
+class="math inline">v</span> entails every truth there; hence for every
+truth <span class="math inline">q</span> at such a world, <span
+class="math inline">v\le q</span>, and from <span
+class="math inline">v\le\Diamond(\Diamond v\wedge w)</span> we get <span
+class="math inline">\Diamond(\Diamond q\wedge w)</span>. So <span
+class="math inline">v\le\forall q(q\to\Diamond(\Diamond q\wedge
+w))</span>, i.e. <span class="math inline">v\le\Diamond_{\ne}w</span>.
+As <span class="math inline">v\le p</span> and <span
+class="math inline">\Diamond v</span>, we have <span
+class="math inline">\Diamond(\Diamond_{\ne}w\wedge p)</span>. Finally,
+for every true <span class="math inline">q</span>, <span
+class="math inline">w\le q</span>, and <span
+class="math inline">\Diamond_{\ne}</span> is monotone under necessary
+implication (<span class="math inline">\Box_{\ne}</span> is necessarily
+N and K), so <span
+class="math inline">\Diamond_{\ne}w\le\Diamond_{\ne}q</span> and <span
+class="math inline">\Diamond(\Diamond_{\ne}q\wedge p)</span>: that is
+<span class="math inline">\hat{\hat\Diamond}p</span>.</p>
 <h2 id="notes">Notes</h2>
-<p>With Actuality’s consequence that 5-necessity implies two-hat necessity, this gives that Strong Leibniz (type t) makes 5-necessity, two-hat necessity and ND-necessity coextensive. It cannot be pushed to <span class="math inline">\Box</span> itself: the two-object chain full model satisfies Strong Leibniz while ND fails.</p>
+<p>With Actuality’s consequence that 5-necessity implies two-hat
+necessity, this gives that Strong Leibniz (type t) makes 5-necessity,
+two-hat necessity and ND-necessity coextensive. It cannot be pushed to
+<span class="math inline">\Box</span> itself: the two-object chain full
+model satisfies Strong Leibniz while ND fails.</p>
+<p>Strengthened by [[self-atomicity-t-implies-two-hat-implies-nd]]: the
+strong world <span class="math inline">v</span> is used only as a
+self-atom.</p>
+<h2 id="revisions">Revisions</h2>
+<ul>
+<li><strong>2026-10-25</strong> (Claude Fable 5.1 (Anthropic), prompted
+by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the
+Self-Atomicity and bridge-principle records added; the record is
+unchanged.</li>
+</ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 14 Oct</strong> — Cian Dorr, argument of 14 October 2026, communicated in conversation with Claude Fable 5.1 (Anthropic) and checked there (transcript in the private notes).</li>
+<li><strong>Dorr 14 Oct</strong> — Cian Dorr, argument of 14 October
+2026, communicated in conversation with Claude Fable 5.1 (Anthropic) and
+checked there (transcript in the private notes).</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/strong-leibniz-t-implies-two-hat-implies-nd.yaml</code>
+Record:
+<code>topics/classicism/results/strong-leibniz-t-implies-two-hat-implies-nd.yaml</code>
 </p>
 </body></html>

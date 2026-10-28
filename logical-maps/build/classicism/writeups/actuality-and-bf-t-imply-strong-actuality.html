@@ -323,29 +323,64 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality ∧ BF (type t) ⇒ Strong Actuality</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.actuality_and_bf_t_imply_strong_actuality</code>; produced by Cian Dorr, 6 October 2026 (statement); proof written out by Claude Opus 5.5 (Anthropic); recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 6 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.actuality_and_bf_t_imply_strong_actuality</code>;
+produced by Cian Dorr, 6 October 2026 (statement); proof written out by
+Claude Opus 5.5 (Anthropic); recorded by Claude Opus 5.5 (Anthropic),
+prompted by Cian Dorr, 6 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Actuality.</strong> There is a true proposition that entails every true proposition.</li>
-<li><strong>BF (type t).</strong> If every proposition necessarily has a property, then necessarily every proposition has it.</li>
+<li><strong>Actuality.</strong> There is a true proposition that entails
+every true proposition.</li>
+<li><strong>BF (type t).</strong> If every proposition necessarily has a
+property, then necessarily every proposition has it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Strong Actuality.</strong> There is a true strong world proposition: a true proposition that necessarily entails every proposition or its negation.</li>
+<li><strong>Strong Actuality.</strong> There is a true strong atom: a
+true proposition that necessarily entails every proposition or its
+negation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">a</span> witness Actuality. For each <span class="math inline">q</span>, <span class="math inline">a\le q\lor a\le\neg q</span>: if <span class="math inline">q</span> is true, <span class="math inline">a\le q</span>; if not, <span class="math inline">\neg q</span> is true and <span class="math inline">a\le\neg q</span>. Each disjunct is necessary by 4, so the disjunction is necessary: <span class="math inline">\forall q\, .\,\Box(a\le q\lor a\le\neg q)</span>. BF (type t), for the property <span class="math inline">\lambda q\, .\,a\le q\lor a\le\neg q</span>, gives <span class="math inline">\Box\forall q\, .\,a\le q\lor a\le\neg q</span>. With <span class="math inline">a</span> true, <span class="math inline">a</span> witnesses Strong Actuality. (The argument of Bacon’s Exercise 8.12 for the Strong Leibniz Biconditionals, applied to the actual-world proposition.)</p>
+<p>Let <span class="math inline">a</span> witness Actuality. For each
+<span class="math inline">q</span>, <span class="math inline">a\le q\lor
+a\le\neg q</span>: if <span class="math inline">q</span> is true, <span
+class="math inline">a\le q</span>; if not, <span
+class="math inline">\neg q</span> is true and <span
+class="math inline">a\le\neg q</span>. Each disjunct is necessary by 4,
+so the disjunction is necessary: <span class="math inline">\forall q\,
+.\,\Box(a\le q\lor a\le\neg q)</span>. BF (type t), for the property
+<span class="math inline">\lambda q\, .\,a\le q\lor a\le\neg q</span>,
+gives <span class="math inline">\Box\forall q\, .\,a\le q\lor a\le\neg
+q</span>. With <span class="math inline">a</span> true, <span
+class="math inline">a</span> witnesses Strong Actuality. (The argument
+of Bacon’s Exercise 8.12 for Strong Atomicity, applied to the
+actual-world proposition.)</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 6 Oct</strong> — Cian Dorr, suggestion of 6 October 2026, introducing Strong Actuality.</li>
-<li><strong>Philosophical Introduction to HOL</strong> — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Exercise 8.12, p. 166.</li>
+<li><strong>Dorr 6 Oct</strong> — Cian Dorr, suggestion of 6 October
+2026, introducing Strong Actuality.</li>
+<li><strong>Philosophical Introduction to HOL</strong> — Andrew Bacon, A
+Philosophical Introduction to Higher-Order Logics, Routledge, 2024,
+§8.2, Exercise 8.12, p. 166.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/actuality-and-bf-t-imply-strong-actuality.yaml</code>
+Record:
+<code>topics/classicism/results/actuality-and-bf-t-imply-strong-actuality.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — §8.2, Exercise 8.12, p. 166. The same argument, for an atom below a possible proposition.</li>
+<li><strong>Proof: A Philosophical Introduction to Higher-Order
+Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to
+Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8,
+Application: Consequences and strengthenings of Classicism, pp. 155–182,
+and Chapter 18, The model theory of classicism, pp. 389–413, were read
+directly on 22 September 2026; locators give the book’s own page
+numbers. The book works in the full simple type hierarchy with Modalized
+Functionality at all types; its results are taken in the map’s
+relational type system, of which its models are models. — §8.2, Exercise
+8.12, p. 166. The same argument, for an atom below a possible
+proposition.</li>
 </ul>
 </body></html>

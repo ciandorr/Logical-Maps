@@ -323,36 +323,89 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>B for pure sentences ∧ Maximalism (pure) ⇒ ⊥</h1></header><p class="cert">
-Result — Source: Philosophical Introduction to HOL (2024), Lean <code>Classicism.Map.pure_b_and_pure_possibility_incompatible</code>; produced by Andrew Bacon; set as Exercise 8.19, solution written out by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.
+Result — Source: Philosophical Introduction to HOL (2024), Lean
+<code>Classicism.Map.pure_b_and_pure_possibility_incompatible</code>;
+produced by Andrew Bacon; set as Exercise 8.19, solution written out by
+Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026;
+recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22
+September 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>B for pure sentences.</strong> The B instance for every closed sentence in the pure language.</li>
-<li><strong>Maximalism (pure).</strong> Every closed pure identity not provable in C is false. The non-theorem condition is metalinguistic.</li>
+<li><strong>B for pure sentences.</strong> The B instance for every
+closed sentence in the pure language.</li>
+<li><strong>Maximalism (pure).</strong> Every closed pure identity not
+provable in C is false. The non-theorem condition is
+metalinguistic.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
 <li><strong>⊥.</strong> These premises cannot all hold together.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Let <span class="math inline">F</span> be the Fregean Axiom, a closed pure sentence. Both <span class="math inline">F</span> and <span class="math inline">\neg F</span> are consistent with C (a two-valued Henkin model and the two-element-group model), so Possibility Maximalism (pure) gives <span class="math inline">\Diamond F</span> and <span class="math inline">\Diamond\neg F</span>. In C, <span class="math inline">\Box(F\to\Box F)</span>: the Fregean Axiom, if true, makes every truth identical to <span class="math inline">\top</span>, and this reasoning is a theorem, so it holds necessarily. If <span class="math inline">F</span> then <span class="math inline">\Box F</span>, contradicting <span class="math inline">\Diamond\neg F</span>. If <span class="math inline">\neg F</span>, B for the pure sentence <span class="math inline">\neg F</span> gives <span class="math inline">\Box\Diamond\neg F</span>; but at the possibility where <span class="math inline">F</span> holds, <span class="math inline">\Box F</span> holds, so <span class="math inline">\neg\Diamond\neg F</span> holds there, a contradiction.</p>
+<p>Let <span class="math inline">F</span> be the Fregean Axiom, a closed
+pure sentence. Both <span class="math inline">F</span> and <span
+class="math inline">\neg F</span> are consistent with C (a two-valued
+Henkin model and the two-element-group model), so Possibility Maximalism
+(pure) gives <span class="math inline">\Diamond F</span> and <span
+class="math inline">\Diamond\neg F</span>. In C, <span
+class="math inline">\Box(F\to\Box F)</span>: the Fregean Axiom, if true,
+makes every truth identical to <span class="math inline">\top</span>,
+and this reasoning is a theorem, so it holds necessarily. If <span
+class="math inline">F</span> then <span class="math inline">\Box
+F</span>, contradicting <span class="math inline">\Diamond\neg F</span>.
+If <span class="math inline">\neg F</span>, B for the pure sentence
+<span class="math inline">\neg F</span> gives <span
+class="math inline">\Box\Diamond\neg F</span>; but at the possibility
+where <span class="math inline">F</span> holds, <span
+class="math inline">\Box F</span> holds, so <span
+class="math inline">\neg\Diamond\neg F</span> holds there, a
+contradiction.</p>
 <h2 id="notes">Notes</h2>
-<p>Sharpens the recorded incompatibility of Possibility Maximalism (pure) with No Pure Contingency and with ND: even B restricted to pure sentences is excluded.</p>
+<p>Sharpens the recorded incompatibility of Possibility Maximalism
+(pure) with No Pure Contingency and with ND: even B restricted to pure
+sentences is excluded.</p>
 <h2 id="revisions">Revisions</h2>
 <ul>
-<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction) — Distinctness Maximalism and Possibility Maximalism unified as Maximalism, with Distinctness the official form and Possibility a variant form; this record’s premise changed from the Possibility principle to Maximalism. The proof is unchanged, the two forms being equivalent in C.</li>
+<li><strong>2026-10-08</strong> (Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction) — Distinctness Maximalism and Possibility Maximalism
+unified as Maximalism, with Distinctness the official form and
+Possibility a variant form; this record’s premise changed from the
+Possibility principle to Maximalism. The proof is unchanged, the two
+forms being equivalent in C.</li>
 </ul>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Philosophical Introduction to HOL</strong> — Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.3, Exercise 8.19, p. 172.</li>
-<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.5, n. 81, p. 59.</li>
+<li><strong>Philosophical Introduction to HOL</strong> — Andrew Bacon, A
+Philosophical Introduction to Higher-Order Logics, Routledge, 2024,
+§8.3, Exercise 8.19, p. 172.</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §3.5, n. 81, p. 59.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/pure-b-and-pure-possibility-incompatible.yaml</code>
+Record:
+<code>topics/classicism/results/pure-b-and-pure-possibility-incompatible.yaml</code>
 </p>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Proof: A Philosophical Introduction to Higher-Order Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8, Application: Consequences and strengthenings of Classicism, pp. 155–182, and Chapter 18, The model theory of classicism, pp. 389–413, were read directly on 22 September 2026; locators give the book’s own page numbers. The book works in the full simple type hierarchy with Modalized Functionality at all types; its results are taken in the map’s relational type system, of which its models are models. — §8.3, Exercise 8.19, p. 172. Set as an exercise: prove □(F → □F) and derive a contradiction with B from the broad contingency of the Fregean Axiom.</li>
-<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.5, n. 81, p. 59</li>
+<li><strong>Proof: A Philosophical Introduction to Higher-Order
+Logics.</strong> Bacon, Andrew (2024). A Philosophical Introduction to
+Higher-Order Logics. Routledge. DOI 10.4324/9781003039181. Chapter 8,
+Application: Consequences and strengthenings of Classicism, pp. 155–182,
+and Chapter 18, The model theory of classicism, pp. 389–413, were read
+directly on 22 September 2026; locators give the book’s own page
+numbers. The book works in the full simple type hierarchy with Modalized
+Functionality at all types; its results are taken in the map’s
+relational type system, of which its models are models. — §8.3, Exercise
+8.19, p. 172. Set as an exercise: prove □(F → □F) and derive a
+contradiction with B from the broad contingency of the Fregean
+Axiom.</li>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §3.5,
+n. 81, p. 59</li>
 </ul>
 </body></html>

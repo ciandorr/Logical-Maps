@@ -15,6 +15,14 @@
 
 The argument of atomicity-and-bf-imply-strong-leibniz uses BF only at the relational type $\sigma$ of the worlds, for the property $\lambda Y\, .\,W\le Y\lor W\le\neg Y$: every weak world of type $\sigma$ is then a strong world, and Atomicity supplies a weak world below each possible $X$.
 
+## Notes
+
+Now derived: BF at relational types gives Atoms are strong worlds ([[barcan-relational-implies-atoms-are-strong-worlds-r]]), which with Atomicity gives the Strong Leibniz Biconditionals ([[atomicity-r-and-atoms-are-strong-worlds-r-imply-strong-leibniz-r]]).
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Dorr 11 Oct** — Cian Dorr, suggestion of 11 October 2026.

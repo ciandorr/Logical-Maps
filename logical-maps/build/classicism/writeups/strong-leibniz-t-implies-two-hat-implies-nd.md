@@ -18,6 +18,12 @@ Let $w$ be a true strong world, which Strong Leibniz (type $t$) supplies (strong
 
 With Actuality's consequence that 5-necessity implies two-hat necessity, this gives that Strong Leibniz (type t) makes 5-necessity, two-hat necessity and ND-necessity coextensive. It cannot be pushed to $\Box$ itself: the two-object chain full model satisfies Strong Leibniz while ND fails.
 
+Strengthened by [[self-atomicity-t-implies-two-hat-implies-nd]]: the strong world $v$ is used only as a self-atom.
+
+## Revisions
+
+- **2026-10-25** (Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026) — (minor) Cross-reference to the Self-Atomicity and bridge-principle records added; the record is unchanged.
+
 ## Sources
 
 - **Dorr 14 Oct** — Cian Dorr, argument of 14 October 2026, communicated in conversation with Claude Fable 5.1 (Anthropic) and checked there (transcript in the private notes).

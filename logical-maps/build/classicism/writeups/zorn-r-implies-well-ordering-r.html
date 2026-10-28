@@ -323,25 +323,97 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/katex.min.js"></script>
 <script defer src="../math/contrib/auto-render.min.js"></script>
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Zorn&#x27;s Lemma ⇒ Well-Ordering</h1></header><p class="cert">
-Result — Source: Misc., Lean <code>Classicism.Map.zorn_r_implies_well_ordering_r</code>; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, translating the standard set-theoretic argument into C; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
+Result — Source: Misc., Lean
+<code>Classicism.Map.zorn_r_implies_well_ordering_r</code>; produced by
+Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026,
+translating the standard set-theoretic argument into C; recorded by
+Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.
 </p>
 <h2 id="premises">Premises</h2>
 <ul>
-<li><strong>Zorn’s Lemma.</strong> If a preorder is such that every chain, that is, every property it totally orders, has an upper bound, then something is maximal: everything above it is also below it.</li>
+<li><strong>Zorn’s Lemma.</strong> If a preorder is such that every
+chain, that is, every property it totally orders, has an upper bound,
+then something is maximal: everything above it is also below it.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>Well-Ordering.</strong> Every type, including e, is well-ordered by some relation.</li>
+<li><strong>Well-Ordering.</strong> Every type, including e, is
+well-ordered by some relation.</li>
 </ul>
 <h2 id="proof">Proof</h2>
-<p>Fix <span class="math inline">\sigma</span> and apply Zorn’s Lemma at <span class="math inline">\sigma\sigma t</span>. For <span class="math inline">S^{\sigma\sigma t}</span> let <span class="math inline">\operatorname{Fld}(S):=\lambda x\, .\,(Sx)x</span>, and call <span class="math inline">S</span> good if <span class="math inline">\forall x\,y\, .\,(Sx)y\to(Sx)x\land(Sy)y</span> and <span class="math inline">\operatorname{WO}(S,\operatorname{Fld}(S))</span>. Say <span class="math inline">S\sqsubseteq S&#39;</span> (<span class="math inline">S&#39;</span> end-extends <span class="math inline">S</span>) if <span class="math inline">\forall x\,y\, .\,(Sx)y\to(S&#39;x)y</span> and <span class="math inline">\forall x\,y\, .\,(Sx)x\land(S&#39;y)x\to(Sy)x</span>; this is reflexive and transitive, and if <span class="math inline">S\sqsubseteq S&#39;</span> then <span class="math inline">S&#39;</span> agrees with <span class="math inline">S</span> on <span class="math inline">\operatorname{Fld}(S)</span>. Put <span class="math inline">(\mathsf RS)S&#39;:=\neg\operatorname{Good}(S)\lor(\operatorname{Good}(S&#39;)\land S\sqsubseteq S&#39;)</span>, a preorder on <span class="math inline">\sigma\sigma t</span> in which everything not good lies below everything. Chains have upper bounds: if <span class="math inline">\mathsf R</span> totally orders <span class="math inline">\mathcal X</span>, its good members are <span class="math inline">\sqsubseteq</span>-comparable, and <span class="math inline">T:=\lambda x\,y\, .\,\exists S\, .\,\mathcal XS\land\operatorname{Good}(S)\land(Sx)y</span> end-extends each of them. <span class="math inline">T</span> is good: any finitely many points of <span class="math inline">\operatorname{Fld}(T)</span> lie in the field of one good member <span class="math inline">S</span>, on which <span class="math inline">T</span> agrees with <span class="math inline">S</span>; and if <span class="math inline">Y\subseteq\operatorname{Fld}(T)</span> has an instance in <span class="math inline">\operatorname{Fld}(S)</span>, the <span class="math inline">S</span>-minimal instance of <span class="math inline">\lambda w\, .\,Yw\land(Sw)w</span> is <span class="math inline">T</span>-minimal in <span class="math inline">Y</span>, since <span class="math inline">(Tw)m</span> with <span class="math inline">(Sm)m</span> gives <span class="math inline">(Sw)m</span>. So <span class="math inline">T</span> is an <span class="math inline">\mathsf R</span>-upper bound of <span class="math inline">\mathcal X</span>. Zorn’s Lemma gives a maximal <span class="math inline">m</span>. It is good, since otherwise <span class="math inline">(\mathsf Rm)(\lambda x\,y\, .\,\bot)</span> holds and the converse fails, the empty relation being good. If some <span class="math inline">z</span> had <span class="math inline">\neg(mz)z</span>, then <span class="math inline">m&#39;:=\lambda x\,y\, .\,(mx)y\lor((mx)x\land y=z)\lor(x=z\land y=z)</span>, which puts <span class="math inline">z</span> on top, would be good with <span class="math inline">m\sqsubseteq m&#39;</span>; maximality gives <span class="math inline">m&#39;\sqsubseteq m</span>, so <span class="math inline">(mz)z</span>, a contradiction. So <span class="math inline">\operatorname{Fld}(m)</span> is coextensive with <span class="math inline">\lambda x\, .\,\top</span>, and <span class="math inline">\operatorname{WO}(m)</span>, since WO depends only on extensions.</p>
+<p>Fix <span class="math inline">\sigma</span> and apply Zorn’s Lemma at
+<span class="math inline">\sigma\sigma t</span>. For <span
+class="math inline">S^{\sigma\sigma t}</span> let <span
+class="math inline">\operatorname{Fld}(S):=\lambda x\, .\,(Sx)x</span>,
+and call <span class="math inline">S</span> good if <span
+class="math inline">\forall x\,y\, .\,(Sx)y\to(Sx)x\land(Sy)y</span> and
+<span
+class="math inline">\operatorname{WO}(S,\operatorname{Fld}(S))</span>.
+Say <span class="math inline">S\sqsubseteq S&#39;</span> (<span
+class="math inline">S&#39;</span> end-extends <span
+class="math inline">S</span>) if <span class="math inline">\forall
+x\,y\, .\,(Sx)y\to(S&#39;x)y</span> and <span
+class="math inline">\forall x\,y\,
+.\,(Sx)x\land(S&#39;y)x\to(Sy)x</span>; this is reflexive and
+transitive, and if <span class="math inline">S\sqsubseteq S&#39;</span>
+then <span class="math inline">S&#39;</span> agrees with <span
+class="math inline">S</span> on <span
+class="math inline">\operatorname{Fld}(S)</span>. Put <span
+class="math inline">(\mathsf
+RS)S&#39;:=\neg\operatorname{Good}(S)\lor(\operatorname{Good}(S&#39;)\land
+S\sqsubseteq S&#39;)</span>, a preorder on <span
+class="math inline">\sigma\sigma t</span> in which everything not good
+lies below everything. Chains have upper bounds: if <span
+class="math inline">\mathsf R</span> totally orders <span
+class="math inline">\mathcal X</span>, its good members are <span
+class="math inline">\sqsubseteq</span>-comparable, and <span
+class="math inline">T:=\lambda x\,y\, .\,\exists S\, .\,\mathcal
+XS\land\operatorname{Good}(S)\land(Sx)y</span> end-extends each of them.
+<span class="math inline">T</span> is good: any finitely many points of
+<span class="math inline">\operatorname{Fld}(T)</span> lie in the field
+of one good member <span class="math inline">S</span>, on which <span
+class="math inline">T</span> agrees with <span
+class="math inline">S</span>; and if <span
+class="math inline">Y\subseteq\operatorname{Fld}(T)</span> has an
+instance in <span class="math inline">\operatorname{Fld}(S)</span>, the
+<span class="math inline">S</span>-minimal instance of <span
+class="math inline">\lambda w\, .\,Yw\land(Sw)w</span> is <span
+class="math inline">T</span>-minimal in <span
+class="math inline">Y</span>, since <span
+class="math inline">(Tw)m</span> with <span
+class="math inline">(Sm)m</span> gives <span
+class="math inline">(Sw)m</span>. So <span class="math inline">T</span>
+is an <span class="math inline">\mathsf R</span>-upper bound of <span
+class="math inline">\mathcal X</span>. Zorn’s Lemma gives a maximal
+<span class="math inline">m</span>. It is good, since otherwise <span
+class="math inline">(\mathsf Rm)(\lambda x\,y\, .\,\bot)</span> holds
+and the converse fails, the empty relation being good. If some <span
+class="math inline">z</span> had <span
+class="math inline">\neg(mz)z</span>, then <span
+class="math inline">m&#39;:=\lambda x\,y\, .\,(mx)y\lor((mx)x\land
+y=z)\lor(x=z\land y=z)</span>, which puts <span
+class="math inline">z</span> on top, would be good with <span
+class="math inline">m\sqsubseteq m&#39;</span>; maximality gives <span
+class="math inline">m&#39;\sqsubseteq m</span>, so <span
+class="math inline">(mz)z</span>, a contradiction. So <span
+class="math inline">\operatorname{Fld}(m)</span> is coextensive with
+<span class="math inline">\lambda x\, .\,\top</span>, and <span
+class="math inline">\operatorname{WO}(m)</span>, since WO depends only
+on extensions.</p>
 <h2 id="notes">Notes</h2>
-<p>The standard argument. End-extension of relations is only a preorder, since coextensive but distinct relations end-extend each other, which is why Zorn’s Lemma is recorded for preorders. The non-good relations are placed at the bottom so that the preorder is defined on the whole type.</p>
+<p>The standard argument. End-extension of relations is only a preorder,
+since coextensive but distinct relations end-extend each other, which is
+why Zorn’s Lemma is recorded for preorders. The non-good relations are
+placed at the bottom so that the preorder is defined on the whole
+type.</p>
 <h2 id="sources">Sources</h2>
 <ul>
-<li><strong>Dorr 8 Oct</strong> — Cian Dorr, suggestion of 8 October 2026, to connect Transversal Choice, Zorn’s Lemma and Well-Ordering; proof as recorded.</li>
+<li><strong>Dorr 8 Oct</strong> — Cian Dorr, suggestion of 8 October
+2026, to connect Transversal Choice, Zorn’s Lemma and Well-Ordering;
+proof as recorded.</li>
 </ul>
 <p class="cert">
-Record: <code>topics/classicism/results/zorn-r-implies-well-ordering-r.yaml</code>
+Record:
+<code>topics/classicism/results/zorn-r-implies-well-ordering-r.yaml</code>
 </p>
 </body></html>

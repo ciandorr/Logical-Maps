@@ -1,0 +1,1212 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Full action model: three-object fork with a merged composite</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* A prismatic name: one rainbow wheel around a point in the word, spinning;
+   --prism-x and --prism-y move that point off the middle.
+   Pure spectral stops, turned by a registered angle rather than a hue
+   filter, which would muddy them. */
+@property --prism { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.prismatic { font-weight: 600; color: transparent; background: conic-gradient(from var(--prism) at var(--prism-x, 50%) var(--prism-y, 50%), #ff1a1a, #ff8a00, #ffd000, #22c33a, #00a8f0, #3d4bff, #b026ff, #ff1a1a); -webkit-background-clip: text; background-clip: text; animation: prism-spin 6s linear infinite; }
+/* As a link it keeps the gradient on hover, under an accent underline. */
+a.prismatic, a.prismatic:hover { color: transparent; }
+a.prismatic:hover { text-decoration-color: var(--accent); }
+@keyframes prism-spin { to { --prism: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .prismatic { animation: none; } }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Teal-grey, muted rust, deep teal and warm stone. Screen-only overrides
+   preserve print styling. */
+@media screen {
+  :root {
+    --bg: #ebf1f1;
+    --panel: #e1eae9;
+    --panel-2: #d0dfde;
+    --line: #c0cecd;
+    --line-strong: #849997;
+    --ink: #303b3a;
+    --ink-2: #4a5a59;
+    --ink-3: #526160;
+    --accent: #884932;
+    --link-hover: #6f3827;
+    --derived: #6f8180;
+    --open: #d6e2e1;
+    --open-ink: #526160;
+    --node-fill: #f1f6f6;
+    --node-stroke: #7f9391;
+    --junction: #596b6a;
+    --human: #2f6b66;
+    --source-forest: #2f6b66;
+    --hl: #e6ddd0;
+    --focus: #884932;
+    --shadow: 0 4px 24px rgb(48 59 58 / 10%);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #171e1d;
+    --panel: #202a29;
+    --panel-2: #2b3736;
+    --line: #3d4b4a;
+    --line-strong: #6b817f;
+    --ink: #dbe8e7;
+    --ink-2: #b9cbca;
+    --ink-3: #a6bdbb;
+    --accent: #e2ad92;
+    --link-hover: #f0c3aa;
+    --derived: #87a09e;
+    --open: #303d3c;
+    --open-ink: #aec6c4;
+    --node-fill: #263130;
+    --node-stroke: #738d8b;
+    --junction: #b3cbc9;
+    --human: #86c0b6;
+    --source-forest: #86c0b6;
+    --hl: #463f37;
+    --focus: #e2ad92;
+    --badge-ink: #171e1a;
+    --shadow: 0 4px 24px rgb(0 0 0 / 24%);
+  }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Full action model: three-object fork with a merged composite</h1></header><p class="cert">
+Model — Source: Misc.; produced by Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 25 October 2026 (the construction, as a
+separating model for Self-Atomicity); recorded by Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 25 October 2026.
+</p>
+<h2 id="package">Package</h2>
+<ul>
+<li><strong>Analytic Necessitism.</strong> If there could be a real
+number structure, there is a rigid one that is necessarily a real number
+structure: a rigid property with necessarily distinct instances, with
+rigid order, addition, multiplication and natural numbers, which
+necessarily form a complete ordered field. One sentence for each type
+<span class="math inline">\sigma</span>.</li>
+<li><strong>Second-Order Analytic Necessitism.</strong> If there could
+be a real number structure, there is a rigid one, necessarily a real
+number structure, together with represented powers of every arity up to
+<span class="math inline">n</span>: rigid properties of rigid relations
+among the structure’s elements that necessarily represent every relation
+on them. One sentence for each type <span
+class="math inline">\sigma</span> and each <span
+class="math inline">n\ge1</span>.</li>
+<li><strong>Necessity of Second-Order Analysis.</strong> Every
+second-order analytical sentence is either true in every real number
+structure in every possible world or false in every real number
+structure in every possible world. One sentence for each type <span
+class="math inline">\sigma</span> and each second-order analytical
+sentence.</li>
+<li><strong>Arithmetic Necessitism.</strong> Given that necessarily zero
+is not a successor and successor is injective on numbers, the numbers at
+<span class="math inline">\sigma</span> form a rigid property with
+necessarily distinct instances. One sentence for each type <span
+class="math inline">\sigma</span>.</li>
+<li><strong>Truth implies ND-necessity.</strong> Every truth is
+ND-necessary, that is, necessary under the distinctness-preserving
+modality.</li>
+<li><strong>□Atomicity.</strong> Necessarily, every non-bottom entity of
+each relational type has an atom below it.</li>
+<li><strong>Self-atoms are atoms.</strong> At each relational type,
+every self-atom is an atom.</li>
+<li><strong>□Rigid Comprehension.</strong> Necessarily, every relation,
+including a proposition, is coextensive with a rigid one.</li>
+<li><strong>□Self-Atomicity.</strong> Necessarily, at each relational
+type, every possible entity (one distinct from bottom) is entailed by a
+self-atom: a possible entity that necessarily, if instantiated, is an
+atom.</li>
+<li><strong>□Atoms are self-atoms.</strong> Necessarily, at each
+relational type, every atom is a self-atom: necessarily, if it is
+instantiated, it is an atom.</li>
+<li><strong>□Intensional Choice.</strong> Necessarily, if a property is
+necessarily instantiated, then some property entailing it is necessarily
+uniquely instantiated.</li>
+<li><strong>□Relational Choice.</strong> Necessarily, every serial
+binary relation has a functional subrelation.</li>
+<li><strong>□Transversal Choice.</strong> Necessarily, every equivalence
+relation, at any type including e, has a transversal, that is, a
+property with exactly one instance in each of its cells.</li>
+<li><strong>Relational Choice.</strong> Every serial binary relation has
+a functional subrelation.</li>
+<li><strong>Rigid Power.</strong> If a relation is rigid, so is the
+property of being a rigid relation that entails it.</li>
+<li><strong>□Rigid Power.</strong> Necessarily, if a relation is rigid,
+so is the property of being a rigid relation that entails it.</li>
+<li><strong>Strong Actuality.</strong> There is a true strong atom: a
+true proposition that necessarily entails every proposition or its
+negation.</li>
+<li><strong>□Strong Actuality.</strong> Necessarily, there is a true
+strong atom: a true proposition that necessarily entails every
+proposition or its negation.</li>
+<li><strong>Transversal Choice.</strong> Every equivalence relation, at
+any type including e, has a transversal, that is, a property with
+exactly one instance in each of its cells.</li>
+<li><strong>□Two-hat necessity implies ND-necessity.</strong>
+Necessarily, whatever is two-hat necessary is ND-necessary: the
+distinctness-preserving modality agrees with its hat. In C this is the
+identity <span
+class="math inline">\hat{\hat\Box}=\Box_{\ne}</span>.</li>
+<li><strong>¬ □Self-atoms are atoms (type t).</strong> Necessarily,
+every self-atom is an atom.</li>
+<li><strong>¬ Possible Infinity (type t).</strong> Possibly there are
+not finitely many propositions: the Axiom of Infinity at this type,
+under a diamond.</li>
+<li><strong>¬ Infinity Schema (type t).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ Axiom of Infinity (type t).</strong> There are not
+finitely many propositions. No finite cardinality holds of the universal
+property, so the domain of the type cannot be exhausted by finitely many
+steps from the empty property.</li>
+<li><strong>¬ Self-atoms are strong atoms (type t).</strong> Every
+self-atom is a strong atom.</li>
+<li><strong>¬ Strong Atomicity (type t).</strong> Every possible
+proposition is entailed by a strong atom, one that is possible and
+necessarily entails every proposition or its negation.</li>
+<li><strong>¬ Fregean Axiom.</strong> Materially equivalent propositions
+are identical.</li>
+<li><strong>¬ Axiom of Infinity (type e).</strong> There are not
+finitely many individuals. No finite cardinality holds of the universal
+property, so the domain of the type cannot be exhausted by finitely many
+steps from the empty property.</li>
+<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily
+many pairwise distinct entities of this fixed type; one sentence for
+each positive integer n.</li>
+<li><strong>¬ Possible Infinity (type e).</strong> Possibly there are
+not finitely many individuals: the Axiom of Infinity at this type, under
+a diamond.</li>
+<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with
+free variables among a finite tuple x, and distinct matching nonlogical
+constants c, a witness to P entails that P at those constants is
+possible.</li>
+<li><strong>¬ Separated Structure.</strong> For each typed nonlogical
+constant c and closed same-typed terms F,G not containing c, equality
+after application to c implies equality of F and G.</li>
+<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma
+is a pure operation applied to other constants: for a closed pure term A
+and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied
+to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema
+for the fixed nonlogical signature Σ: every closed identity of its
+language not provable in C(Σ) is false.</li>
+<li><strong>¬ ND (type t).</strong> Distinct propositions are
+necessarily distinct.</li>
+</ul>
+<h2 id="definition">Definition</h2>
+<p>The category with objects <span class="math inline">W_0</span>, <span
+class="math inline">V</span>, <span class="math inline">U</span>
+generated by <span class="math inline">h:W_0\to V</span> and <span
+class="math inline">g_1,g_2:V\to U</span> subject to <span
+class="math inline">g_1\circ h=g_2\circ h</span>; its arrows are the
+identities, <span class="math inline">h</span>, <span
+class="math inline">g_1</span>, <span class="math inline">g_2</span> and
+<span class="math inline">d:=g_1\circ h</span>. Evaluated at <span
+class="math inline">W_0</span>. Every endomorphism monoid is trivial and
+no arrow leads back towards <span class="math inline">W_0</span>.</p>
+<p>Individuals, fixed for this record: there is a single individual at
+every object, and every arrow sends it to the single individual at its
+target.</p>
+<p>Interpretation of Σ, fixed for this record: every constant of Σ is
+relational, and each denotes the top element of its type.</p>
+<p>Metatheory, fixed for this record: the axiom of choice is used
+freely, as in ordinary mathematics in ZFC, or in Lean’s classical type
+theory for the verdicts certified there.</p>
+<p><em>A member of the group Full action models, which supplies this
+definition with the record’s settings, and the arguments marked as
+shared.</em></p>
+<h2 id="arguments">Arguments</h2>
+<h3 id="fails-self-atoms-are-atoms-type-t.">Fails □Self-atoms are atoms
+(type t).</h3>
+<p>At <span class="math inline">V</span>, which <span
+class="math inline">h</span> reaches: the arrows <span
+class="math inline">g_1,g_2</span> out of it are each fixed only by
+<span class="math inline">1_U</span> and neither is a left multiple of
+the other, <span class="math inline">U</span> having only its identity,
+so <span class="math inline">\{g_1,g_2\}</span> is a self-atom at <span
+class="math inline">V</span> (its transport along either is <span
+class="math inline">\{1_U\}</span>) that is not an atom. So Self-atoms
+are atoms (type t) fails at <span class="math inline">V</span>, and its
+boxed form fails at <span class="math inline">W_0</span>.</p>
+<p><em>By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25
+October 2026.</em></p>
+<h3
+id="holds-analytic-necessitism-second-order-analytic-necessitism-necessity-of-second-order-analysis.">Holds
+Analytic Necessitism, Second-Order Analytic Necessitism, Necessity of
+Second-Order Analysis.</h3>
+<p>Every type is finite at every object <span
+class="math inline">v</span> reachable from the evaluation point, by
+induction on types: the individuals at <span
+class="math inline">v</span> are finitely many by hypothesis, the
+propositions at <span class="math inline">v</span> are sets of the
+finitely many arrows out of it, and an entity of a relational type <span
+class="math inline">\bar\sigma t</span> at <span
+class="math inline">v</span> is an intension assigning to each of those
+arrows a set of tuples of entities of types <span
+class="math inline">\bar\sigma</span> at its target, which is reachable
+too, so that finitely many values are available at each arrow. An
+ordered field has infinitely many elements, its <span
+class="math inline">0</span>, <span class="math inline">1</span>, <span
+class="math inline">1+1,\ldots</span> being pairwise distinct, so no
+real number structure exists at any reachable object, at any type. The
+antecedents <span class="math inline">\Diamond\exists\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)</span> of Analytic
+Necessitism and of Second-Order Analytic Necessitism are therefore false
+at every type, and both hold; and <span
+class="math inline">\Box\forall\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to A(\mathfrak R)</span>
+holds for every sentence <span class="math inline">A</span>, so the
+Necessity of Second-Order Analysis holds, with the Necessity of Analysis
+and the Non-contingency of the Continuum Hypothesis. No choice is
+used.</p>
+<p><em>General argument
+<code>arguments/analysis-finite-everywhere</code>. It requires that Out
+of every object reachable from the evaluation point there are finitely
+many arrows. Here: Three arrows out of <span
+class="math inline">W_0</span>, three out of <span
+class="math inline">V</span>, one out of <span
+class="math inline">U</span>. It requires that There are finitely many
+individuals at every object reachable from the evaluation point. Here:
+There is a single individual at every object. By Claude Fable 5.1
+(Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<h3 id="holds-arithmetic-necessitism.">Holds Arithmetic
+Necessitism.</h3>
+<p>The numbers at a type <span class="math inline">\sigma</span> are the
+instances of <span class="math inline">\mathbb N_\sigma</span>, the
+least property containing <span class="math inline">\mathbf
+0_\sigma</span> and closed under <span
+class="math inline">\operatorname{Suc}_\sigma</span> (Background); the
+numerals <span class="math inline">\mathbf 0_\sigma</span>, <span
+class="math inline">\operatorname{Suc}_\sigma\mathbf
+0_\sigma,\ldots</span> are closed terms, so each denotes at every
+object, and transport along an arrow carries its denotation at the
+source to its denotation at the target. At any object <span
+class="math inline">v</span> reachable from the evaluation point,
+extensional fullness gives a property whose extension at <span
+class="math inline">v</span> is exactly the numerals there; it contains
+<span class="math inline">\mathbf 0_\sigma</span> and is closed under
+successor, so the numbers at <span class="math inline">v</span> are
+exactly the numerals, every numeral being an instance of every inductive
+property. Persistence of <span class="math inline">\mathbb
+N_\sigma</span> and, given <span class="math inline">\Box
+I^*_\sigma</span>, the necessary distinctness of the numbers are
+theorems of C (the proof of
+necessary-rigid-comprehension-implies-arithmetic-necessitism).
+Inextensibility, <span class="math inline">\Box\forall X\,.\,(\forall
+n\,.\,\mathbb N_\sigma n\to\Box Xn)\to\mathbb N_\sigma\le X</span>: at a
+reachable <span class="math inline">v</span> and for an arrow <span
+class="math inline">j</span> from <span class="math inline">v</span> to
+<span class="math inline">u</span>, the numbers at <span
+class="math inline">u</span> are the numerals there, which are the
+transports along <span class="math inline">j</span> of the numbers at
+<span class="math inline">v</span>, so any <span
+class="math inline">X</span> that necessarily holds of the numbers at
+<span class="math inline">v</span> holds at <span
+class="math inline">u</span> of the numbers there. So <span
+class="math inline">\mathbb N_\sigma</span> is rigid, and Arithmetic
+Necessitism holds at every type. No choice is used.</p>
+<p><em>General argument
+<code>arguments/arithmetic-necessitism-extensionally-full</code>. It
+requires that The model is extensionally full at every object: every set
+of tuples from the domains at an object is the extension, at the
+identity arrow, of an element of the domain of the matching relational
+type there. Here: A full model contains every intension, so in
+particular one with any given extension at the identity. By Claude Fable
+5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<h3 id="holds-truth-implies-nd-necessity.">Holds Truth implies
+ND-necessity.</h3>
+<p>For a true <span class="math inline">p</span>, <span
+class="math inline">a\le p</span>, since <span
+class="math inline">a</span> entails every truth. Take <span
+class="math inline">q:=a</span> in the definition of <span
+class="math inline">\Box_{\ne}p</span>: at a world in <span
+class="math inline">a</span>, <span class="math inline">p</span> holds;
+at a world outside <span class="math inline">a</span>, <span
+class="math inline">\Diamond a</span> fails. So every truth is <span
+class="math inline">\Box_{\ne}</span>-necessary.</p>
+<p><em>General argument
+<code>arguments/dpc-isolated-actual-world</code>. It requires that The
+actual-world proposition <span class="math inline">a</span> is in the
+domain and entails every truth, and no world outside <span
+class="math inline">a</span> sees a world in <span
+class="math inline">a</span>. Here: The actual-world proposition <span
+class="math inline">\{1_{W_0}\}</span> is in the domain, the model being
+full; no arrow leads back to <span class="math inline">W_0</span>, so no
+other world sees it. By Claude Fable 5.1 (Anthropic), prompted by Cian
+Dorr, 2026-09-23.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The finite-support, symmetric and full action models’
+copies (eight records) stated once for the topic; what varied, why no
+world outside the actual world sees back into it, is each record’s
+reason for meeting actual-world-isolated.</p>
+<h3 id="fails-possible-infinity-type-t.">Fails Possible Infinity (type
+t).</h3>
+<p>At a world with <span class="math inline">n</span> propositions, the
+numeral <span
+class="math inline">\operatorname{Suc}^n_t\mathbf{0}_t</span>, a finite
+cardinality, holds of the universal property of propositions, so the
+Axiom of Infinity at type <span class="math inline">t</span> fails
+there. It fails at every world, so Possible Infinity at type <span
+class="math inline">t</span> fails.</p>
+<p><em>General argument
+<code>arguments/finitely-many-propositions-everywhere</code>. It
+requires that There are finitely many propositions at every object
+reachable from the evaluation point. Here: Eight propositions at <span
+class="math inline">W_0</span> and at <span
+class="math inline">V</span>, two at <span class="math inline">U</span>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-06.</em></p>
+<h3 id="fails-infinity-schema-type-t-axiom-of-infinity-type-t.">Fails
+Infinity Schema (type t), Axiom of Infinity (type t).</h3>
+<p>The propositions at the evaluation world are finitely many, and every
+intension of a full model is present, so the numerals are the finite
+cardinalities and one of them holds of the universal property of
+propositions: the Axiom of Infinity at type t fails, as does an instance
+of the schema.</p>
+<p><em>General argument
+<code>arguments/finitely-many-propositions</code>. It requires that The
+model is full: at each object, the domain of each relational type
+contains every intension of that type. Here: Every intension of every
+relational type is present at every object (Classicism, §3.5, p. 59). It
+requires that There are finitely many propositions at the evaluation
+world. Here: Eight propositions at <span class="math inline">W_0</span>,
+the subsets of <span class="math inline">\{1,h,d\}</span>. By Claude
+Fable 5.1 (Anthropic), at Cian Dorr’s direction, 2026-09-20.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The copies in three full action models (each with four
+propositions) stated once for the topic; each record’s count is its
+reason for meeting finitely-many-propositions.</p>
+<p><em>Revised 2026-10-06 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The Axiom of Infinity’s failure, which the text states,
+recorded as a verdict of its own, so that it is certified without the
+result that the Axiom implies the schema.</p>
+<h3 id="holds-atomicity.">Holds □Atomicity.</h3>
+<p>Entailment is inclusion of intensions. Below a relation <span
+class="math inline">Y\ne\bot_\tau</span> lies the relation whose
+intension is the singleton of one of <span
+class="math inline">Y</span>’s tuples, which is in the domain since the
+model is full, and is an atom: its only proper part is <span
+class="math inline">\bot_\tau</span>. Every object being full, the same
+holds at every arrow, so Atomicity is necessary. The source notes that
+full models are atomic (p. 61); stated once for the topic, in place of
+the full models’ own arguments.</p>
+<p><em>Source: Classicism, p. 61. General argument
+<code>arguments/full-atomicity</code>. It requires that The model is a
+full action model: an action model (Classicism, Appendix D) that is full
+at every object. Here: An action model, full at every object
+(Classicism, §3.5, p. 59; Appendix D). By Claude Opus 5.5 (Anthropic),
+at Cian Dorr’s direction, 2026-10-06.</em></p>
+<h3 id="holds-self-atoms-are-atoms.">Holds Self-atoms are atoms.</h3>
+<p>Let <span class="math inline">I</span> be a self-atom of a relational
+type at the evaluation object. For <span class="math inline">\langle
+k,\bar a\rangle\in I</span>, the transport of <span
+class="math inline">I</span> along <span class="math inline">k</span> is
+<span class="math inline">\{\langle m,\bar b\rangle : \langle m\circ
+k,\bar b\rangle\in I\}</span>, an atom containing <span
+class="math inline">\langle1,\bar a\rangle</span>, hence the singleton
+of it: so <span class="math inline">k</span> is fixed only by the
+identity, <span class="math inline">I</span> has no other pair at <span
+class="math inline">k</span>, and no pair of <span
+class="math inline">I</span> sits at a proper left multiple of <span
+class="math inline">k</span>. If <span class="math inline">I</span> had
+pairs at two arrows <span class="math inline">k\ne k^{\prime}</span>,
+both fixed only by identities, comparability would make one a proper
+left multiple of the other. So <span class="math inline">I</span> is a
+singleton, an atom.</p>
+<p><em>General argument
+<code>arguments/full-comparable-free-arrows-self-atoms</code>. It
+requires that The model is full: at each object, the domain of each
+relational type contains every intension of that type. Here: Every
+intension of every relational type is present at every object
+(Classicism, §3.5, p. 59). It requires that Any two arrows out of the
+evaluation object that are each fixed under post-composition only by the
+identity are comparable: one is a left multiple of the other. Here: The
+arrows out of <span class="math inline">W_0</span> are <span
+class="math inline">1</span>, <span class="math inline">h=h\circ1</span>
+and <span class="math inline">d=g_1\circ h</span>: each is a left
+multiple of the one before. By Claude Fable 5.1 (Anthropic), prompted by
+Cian Dorr, 25 October 2026.</em></p>
+<h3 id="fails-self-atoms-are-strong-atoms-type-t.">Fails Self-atoms are
+strong atoms (type t).</h3>
+<p>Let <span class="math inline">j\circ h=j^{\prime}\circ h</span> with
+<span class="math inline">j\ne j^{\prime}</span>, the composite fixed
+only by the identity. The singleton of the composite is a self-atom: it
+is true only at the composite, where its transport is <span
+class="math inline">\{m : m\circ j\circ h=j\circ h\}=\{1\}</span>, an
+atom. It is not a strong atom: under <span class="math inline">h</span>
+it becomes <span class="math inline">\{m : m\circ h=j\circ h\}</span>,
+which contains <span class="math inline">j</span> and <span
+class="math inline">j^{\prime}</span>, and the proposition <span
+class="math inline">\{j\}</span> at <span class="math inline">h</span>’s
+target neither contains nor excludes it.</p>
+<p><em>General argument
+<code>arguments/full-free-nonepic-composite-self-atom-not-strong</code>.
+It requires that The model is full: at each object, the domain of each
+relational type contains every intension of that type. Here: Every
+intension of every relational type is present at every object
+(Classicism, §3.5, p. 59). It requires that There are an arrow <span
+class="math inline">h</span> out of the evaluation object and arrows
+<span class="math inline">j\ne j^{\prime}</span> after it with <span
+class="math inline">j\circ h=j^{\prime}\circ h</span>, where the
+composite <span class="math inline">j\circ h</span> is fixed under
+post-composition only by the identity. Here: <span
+class="math inline">d=g_1\circ h=g_2\circ h</span> with <span
+class="math inline">g_1\ne g_2</span>, and <span
+class="math inline">d</span> is fixed only by <span
+class="math inline">1_U</span>. By Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, 25 October 2026.</em></p>
+<h3 id="holds-rigid-comprehension.">Holds □Rigid Comprehension.</h3>
+<p>Given <span class="math inline">X</span> of type <span
+class="math inline">\tau</span> at an object <span
+class="math inline">W</span>, let <span class="math inline">Y</span> be
+the relation whose extension at an arrow <span
+class="math inline">i</span> out of <span class="math inline">W</span>
+is <span class="math inline">X</span>’s extension at <span
+class="math inline">W</span> transported along <span
+class="math inline">i</span>, which is in the domain since the model is
+full. It is coextensive with <span class="math inline">X</span>. It is
+persistent, since its extension at <span class="math inline">i\circ
+j</span> is its extension at <span class="math inline">i</span>
+transported along <span class="math inline">j</span>. And it is
+inextensible: if <span class="math inline">\Box X&#39;</span> holds at
+<span class="math inline">i</span> of everything <span
+class="math inline">Y</span> holds of there, then at <span
+class="math inline">i\circ j</span> everything <span
+class="math inline">Y</span> holds of is the transport along <span
+class="math inline">j</span> of something <span
+class="math inline">Y</span> holds of at <span
+class="math inline">i</span>, of which <span
+class="math inline">X&#39;</span> then holds. Every object being full,
+the same holds at every arrow, so Rigid Comprehension is necessary. The
+source notes that full models satisfy it (p. 61); stated once for the
+topic, in place of the full models’ own arguments.</p>
+<p><em>Source: Classicism, p. 61. General argument
+<code>arguments/full-rigid-comprehension</code>. It requires that The
+model is a full action model: an action model (Classicism, Appendix D)
+that is full at every object. Here: An action model, full at every
+object (Classicism, §3.5, p. 59; Appendix D). By Claude Opus 5.5
+(Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<h3 id="holds-self-atomicity-atoms-are-self-atoms.">Holds
+□Self-Atomicity, □Atoms are self-atoms.</h3>
+<p>In a full model the atoms of a relational type at an object are the
+singleton intensions <span class="math inline">\{\langle k,\bar
+a\rangle\}</span>, with <span class="math inline">k</span> an arrow out
+of it. Such a singleton is instantiated only at <span
+class="math inline">k</span>, and its transport along <span
+class="math inline">k</span> is <span class="math inline">\{\langle
+m,\bar a\rangle : m\circ k=k\}</span>, which is the atom <span
+class="math inline">\{\langle 1,\bar a\rangle\}</span> at <span
+class="math inline">k</span>’s target when only the identity fixes <span
+class="math inline">k</span>. So every atom is a self-atom, and the atom
+below a non-bottom entity, which the full model supplies, is a self-atom
+below it. The same holds at every reachable object, so both principles
+are necessary.</p>
+<p><em>General argument
+<code>arguments/full-self-atomicity-trivial-stabilisers</code>. It
+requires that The model is full: at each object, the domain of each
+relational type contains every intension of that type. Here: Every
+intension of every relational type is present at every object
+(Classicism, §3.5, p. 59). It requires that At every object reachable
+from the evaluation point, the only arrow <span
+class="math inline">m</span> with <span class="math inline">m\circ
+k=k</span>, for an arrow <span class="math inline">k</span> out of that
+object, is the identity of <span class="math inline">k</span>’s target.
+Here: Every endomorphism monoid is <span
+class="math inline">\{1\}</span>, so <span class="math inline">m\circ
+k=k</span> forces <span class="math inline">m=1</span> everywhere. By
+Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October
+2026.</em></p>
+<h3 id="holds-intensional-choice.">Holds □Intensional Choice.</h3>
+<p>At an object reachable from the evaluation point the propositions are
+all the sets of arrows out of it, so there are finitely many arrows out.
+A necessarily instantiated <span class="math inline">F</span> there
+assigns to each of them a nonempty set, and a finite family of nonempty
+sets has a choice function without the axiom of choice; the intension
+holding at each arrow of the chosen member alone is in the domain, the
+model being full, lies below <span class="math inline">F</span> and is
+necessarily uniquely instantiated. So Intensional Choice holds at every
+reachable object, at every type. (The finite-germ argument of the 3
+October 2026 analysis, for full models; with choice the well-ordering
+argument gives the same.)</p>
+<p><em>General argument
+<code>arguments/intensional-choice-finitely-many-arrows</code>. It
+requires that The model is full: at each object, the domain of each
+relational type contains every intension of that type. Here: Every
+intension of every relational type is present at every object
+(Classicism, §3.5, p. 59). It requires that There are finitely many
+propositions at every object reachable from the evaluation point. Here:
+Eight propositions at <span class="math inline">W_0</span> and at <span
+class="math inline">V</span>, two at <span class="math inline">U</span>.
+By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction,
+2026-10-08.</em></p>
+<h3 id="holds-intensional-choice.-1">Holds □Intensional Choice.</h3>
+<p>For each object <span class="math inline">U</span> and type <span
+class="math inline">\sigma</span> fix a well-ordering <span
+class="math inline">&lt;_U</span> of the domain <span
+class="math inline">D^\sigma_U</span>, and let <span
+class="math inline">W</span> be the intension of type <span
+class="math inline">\sigma\to\sigma\to t</span> with <span
+class="math inline">W(h):={&lt;_{\operatorname{cod}h}}</span>. Its value
+depends only on the arrow’s codomain, so by the condition it is in the
+domain, and at every world its extension well-orders that world’s
+type-<span class="math inline">\sigma</span> domain. Given <span
+class="math inline">F</span> with <span class="math inline">\Box\exists
+x\, .\,Fx</span>, put <span class="math inline">G:=\lambda x\,
+.\,Fx\land\forall y\, .\,(Fy\to\neg Wyx)</span>, the <span
+class="math inline">W</span>-least <span class="math inline">F</span>.
+It is definable from <span class="math inline">F</span> and <span
+class="math inline">W</span>, so in the domain; <span
+class="math inline">G\le F</span>, and its extension at every arrow is
+the singleton of the least element of <span
+class="math inline">F</span>’s. So Intensional Choice holds, and the
+same at every reachable object gives <span
+class="math inline">\Box</span>Intensional Choice. Cian Dorr’s
+observation that such models are qualitatively full, made precise.</p>
+<p><em>General argument
+<code>arguments/intensional-choice-well-ordering</code>. It requires
+that At every object reachable from the evaluation point, the domain
+contains every intension whose value at an arrow depends only on the
+arrow’s codomain. Here: The domains are full at every object. By Claude
+Fable 5.1 (Anthropic), prompted by Cian Dorr, at Cian Dorr’s suggestion,
+2026-10-03.</em></p>
+<h3 id="holds-relational-choice-transversal-choice.">Holds □Relational
+Choice, □Transversal Choice.</h3>
+<p>At any reachable object <span class="math inline">W</span>, let <span
+class="math inline">U</span> be a serial relation in the domain there.
+Using the axiom of choice, pick for each <span
+class="math inline">x</span> a <span class="math inline">y</span> with
+<span class="math inline">(x,y)</span> in the extension of <span
+class="math inline">U</span> at the identity, and let <span
+class="math inline">S</span> be the intension whose value at every arrow
+<span class="math inline">W\to W</span> is the graph of this choice and
+whose value at arrows with any other codomain is empty; it depends only
+on the codomain, so the condition puts it in the domain, and at the
+identity it is a functional subrelation of <span
+class="math inline">U</span>. Likewise a set of representatives of an
+equivalence relation at <span class="math inline">W</span>, made into
+such an intension, is a transversal. Since <span
+class="math inline">W</span> was any reachable object, both principles
+hold at every world.</p>
+<p><em>General argument
+<code>arguments/necessary-relational-choice-codomain-intensions</code>.
+It requires that At every object reachable from the evaluation point,
+the domain contains every intension whose value at an arrow depends only
+on the arrow’s codomain. Here: The domains are full at every object. By
+Claude Fable 5.1 (Anthropic), at Cian Dorr’s direction,
+2026-10-14.</em></p>
+<h3 id="fails-strong-atomicity-type-t.">Fails Strong Atomicity (type
+t).</h3>
+<p>Let <span class="math inline">k</span> out of the evaluation object
+have distinct <span class="math inline">j\ne j^{\prime}</span> after it
+with <span class="math inline">j\circ k= j^{\prime}\circ k</span>. The
+proposition <span class="math inline">\{j\circ k\}</span>, in the domain
+since the model is full, is possible, and the only possible proposition
+below it is itself. It is not a strong atom: under <span
+class="math inline">k</span> it becomes <span class="math inline">\{m :
+m\circ k=j\circ k\}</span>, which contains <span
+class="math inline">j</span> and <span
+class="math inline">j^{\prime}</span>, and the proposition <span
+class="math inline">\{j\}</span> at <span class="math inline">k</span>’s
+target, in the domain there, neither contains nor excludes it. So the
+type-<span class="math inline">t</span> Strong Atomicity fails. (The
+idempotent monoid’s and the retract’s own arguments of 22–23 September,
+stated once.)</p>
+<p><em>General argument <code>arguments/nonepic-strong-atomicity</code>.
+It requires that The model is full: at each object, the domain of each
+relational type contains every intension of that type. Here: Every
+intension of every relational type is present at every object
+(Classicism, §3.5, p. 59). It requires that Some arrow out of the
+evaluation object is not an epimorphism: two distinct arrows after it
+agree after it. Here: <span class="math inline">g_1\circ h=g_2\circ
+h</span> with <span class="math inline">g_1\ne g_2</span>. By Claude
+Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<h3 id="fails-fregean-axiom.">Fails Fregean Axiom.</h3>
+<p>The propositions <span class="math inline">\top</span> and <span
+class="math inline">\{1\}</span> are in the domain, the model being
+full; they are both true at the evaluation point and differ at the other
+arrow, so the Fregean Axiom fails.</p>
+<p><em>Source: Classicism, p. 61. General argument
+<code>arguments/nonidentity-arrow</code>. It requires that The model is
+full: at each object, the domain of each relational type contains every
+intension of that type. Here: Every intension of every relational type
+is present at every object (Classicism, §3.5, p. 59). It requires that
+Some arrow out of the evaluation object is not its identity. Here: <span
+class="math inline">h</span>. By Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction, 2026-10-06.</em></p>
+<h3
+id="fails-axiom-of-infinity-type-e-infinity-schema-type-e-possible-infinity-type-e.">Fails
+Axiom of Infinity (type e), Infinity Schema (type e), Possible Infinity
+(type e).</h3>
+<p>No two individuals are distinct, and the numeral <span
+class="math inline">\operatorname{Suc}_e\mathbf{0}_e</span> holds of the
+universal property at type <span class="math inline">e</span> at every
+world.</p>
+<p><em>General argument <code>arguments/one-individual</code>. It
+requires that There is exactly one individual, at every world. Here:
+There is a single individual at every object. By Claude Opus 5.5
+(Anthropic), at Cian Dorr’s direction, 2026-10-02.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic.</p>
+<h3 id="holds-relational-choice.">Holds □Relational Choice.</h3>
+<p>The truncation of a full action model at any arrow is again a full
+action model, its domains at the reachable objects being unchanged, and
+Relational Choice holds in every full model given choice in the
+metatheory (Classicism, p. 61).</p>
+<p><em>General argument
+<code>arguments/relational-choice-full-boxed</code>. It requires that
+The model is a full action model: an action model (Classicism, Appendix
+D) that is full at every object. Here: An action model, full at every
+object (Classicism, §3.5, p. 59; Appendix D). By Claude Fable 5.1
+(Anthropic), prompted by Cian Dorr, 2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The two-object full action models’ copies stated once
+for the topic, for every full action model.</p>
+<h3 id="holds-relational-choice.-1">Holds Relational Choice.</h3>
+<p>With choice in the metatheory a serial relation has a functional
+subrelation, and a full model contains every intension, so that
+subrelation is in the domain; see Classicism, p. 61, on the principles
+common to full models.</p>
+<p><em>General argument <code>arguments/relational-choice-full</code>.
+It requires that The model is full: at each object, the domain of each
+relational type contains every intension of that type. Here: Every
+intension of every relational type is present at every object
+(Classicism, §3.5, p. 59). By Claude Fable 5.1 (Anthropic), at Cian
+Dorr’s direction, 2026-09-20.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The full action models’ copies stated once for the
+topic.</p>
+<h3 id="holds-rigid-power-rigid-power.">Holds Rigid Power, □Rigid
+Power.</h3>
+<p>Write <span class="math inline">X_0(E)</span> for the intension <span
+class="math inline">k\mapsto k\cdot E</span>. The extension at an arrow
+<span class="math inline">h</span> of the power property <span
+class="math inline">\lambda X\, .\,\operatorname{Rigid}(X)\land X\le
+F</span> is the set of rigid <span class="math inline">X</span> with
+<span class="math inline">X\le h\cdot F</span>, the bound variable
+ranging over the domain untransported and the parameter transported. By
+the condition the rigid relations are the <span
+class="math inline">X_0(E)</span>, and <span
+class="math inline">X_0(T)\le X_0(S)</span> iff <span
+class="math inline">T\subseteq S</span>; so for rigid <span
+class="math inline">F=X_0(S)</span> the power property has extension
+<span class="math inline">\{X_0(T&#39;):T&#39;\subseteq k\cdot
+S\}</span> at <span class="math inline">k</span>, while transporting its
+extension at the identity along <span class="math inline">k</span> gives
+<span class="math inline">\{X_0(k\cdot T):T\subseteq S\}</span>. These
+coincide, since every <span class="math inline">T&#39;\subseteq k\cdot
+S</span> is <span class="math inline">k\cdot T</span> for <span
+class="math inline">T:=\{s\in S:k\cdot s\in T&#39;\}</span>. So the
+power property is itself <span class="math inline">X_0</span> of its
+extension, hence rigid, and the same at every reachable object gives the
+boxed form.</p>
+<p><em>General argument <code>arguments/rigid-power-tight</code>. It
+requires that At every object reachable from the evaluation point, the
+rigid relations of each relational type are exactly the intensions <span
+class="math inline">k\mapsto k\cdot E</span>, the disjunctions of the
+haecceities of the members of <span class="math inline">E</span>, for
+<span class="math inline">E</span> any set of tuples from the domains
+there; in particular every such intension is in the domain. Here: Every
+intension is present, so for any set <span class="math inline">E</span>
+the intension <span class="math inline">k\mapsto k\cdot E</span> is in
+the domain, and a relation is weakly inextensible at a world iff it lies
+below that intension over its extension there, since that is the
+smallest intension satisfying the hypothesis; with persistence, a rigid
+relation equals it (the argument deferred in extraction.md, 3 October
+2026). By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 3 October
+2026 (full action models); extended by Claude Fable 5.1, prompted by
+Cian Dorr (Anthropic), 4 October 2026, at Cian Dorr’s
+direction.</em></p>
+<p><em>Revised 2026-10-04 by Claude Fable 5.1 (Anthropic), at Cian
+Dorr’s direction:</em> The argument deferred in extraction.md on 3
+October for the full action models, where every intension is present,
+stated under the condition it actually uses, which the
+symmetry-constrained full models also meet.</p>
+<h3 id="holds-necessity-of-second-order-analysis.">Holds Necessity of
+Second-Order Analysis.</h3>
+<p>Let <span class="math inline">v</span> be any object reachable from
+the evaluation point and <span class="math inline">\mathfrak R</span> a
+real number structure at <span class="math inline">v</span> (Background,
+Analysis). Its completeness is tested against the subproperties of its
+carrier present at <span class="math inline">v</span>, and by
+extensional fullness every subset of the carrier’s extension there is
+the extension at the identity of one of them; so the carrier, with the
+extensions of <span class="math inline">\le</span>, <span
+class="math inline">+</span> and <span
+class="math inline">\times</span>, is a complete ordered field in the
+sense of the metatheory and, by Huntington’s theorem, a theorem of ZF,
+is isomorphic to the real numbers. For the same reason the extension of
+<span class="math inline">N</span>, the least subproperty containing
+<span class="math inline">0</span> and closed under adding <span
+class="math inline">1</span>, is its set of natural numbers, that set
+being the extension of a subproperty. A second-order analytical sentence
+<span class="math inline">A(\mathfrak R)</span> quantifies over the
+relations among entities of the structure’s type at <span
+class="math inline">v</span>, applied to the structure’s elements, and
+their extensions at the identity are all the relations on the carrier,
+again by extensional fullness. So <span class="math inline">A(\mathfrak
+R)</span> holds at <span class="math inline">v</span> exactly when <span
+class="math inline">A</span> holds in the real numbers under full
+second-order semantics, which depends neither on <span
+class="math inline">v</span> nor on <span class="math inline">\mathfrak
+R</span>. Hence <span class="math inline">\Box\forall\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to A(\mathfrak R)</span>
+holds when <span class="math inline">A</span> is true of the reals and
+<span class="math inline">\Box\forall\mathfrak
+R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak
+R)</span> when it is false: every instance of the Necessity of
+Second-Order Analysis holds, and with it the Necessity of Analysis and
+the Non-contingency of the Continuum Hypothesis, as recorded. No choice
+is used.</p>
+<p><em>General argument
+<code>arguments/second-order-analysis-extensionally-full</code>. It
+requires that The model is extensionally full at every object: every set
+of tuples from the domains at an object is the extension, at the
+identity arrow, of an element of the domain of the matching relational
+type there. Here: A full model contains every intension, so in
+particular one with any given extension at the identity. By Claude Fable
+5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.</em></p>
+<h3
+id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails
+Witnessed Possibility, Separated Structure, Independence (signature Σ),
+Maximalism (signature Σ).</h3>
+<p>Let <span class="math inline">c\in\Sigma</span> have relational type
+<span class="math inline">\tau</span>, so <span
+class="math inline">c=\top_\tau</span> necessarily. Witnessed
+Possibility fails for the pure formula <span
+class="math inline">x\ne\top_\tau</span>, witnessed by <span
+class="math inline">\bot_\tau</span> but impossible of <span
+class="math inline">c</span>; Separated Structure fails since <span
+class="math inline">\lambda x\, .\,x</span> and <span
+class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span
+class="math inline">c</span> and differ; Independence (signature Σ)
+fails since <span class="math inline">c</span> denotes what the closed
+pure term <span class="math inline">\top_\tau</span> denotes;
+Distinctness Maximalism (signature Σ) fails since <span
+class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does
+not prove.</p>
+<p><em>General argument <code>arguments/sigma-top</code>. It requires
+that Every constant of Σ is relational, and each denotes the top element
+of its type. Here: This is the interpretation. By Claude Fable 5.1
+(Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic; it uses nothing about the model.</p>
+<h3 id="holds-strong-actuality-strong-actuality.">Holds Strong
+Actuality, □Strong Actuality.</h3>
+<p>Let <span class="math inline">V</span> be the evaluation object or
+the target of an arrow out of it, and <span
+class="math inline">w:=\{1_V\}</span>, in the domain at <span
+class="math inline">V</span>. It is true at <span
+class="math inline">1_V</span>. Under an arrow <span
+class="math inline">f</span> out of <span class="math inline">V</span>
+it becomes <span class="math inline">\{k : k\circ f=1_V\}</span>, the
+set of retractions of <span class="math inline">f</span>, which has at
+most one member and so lies below <span class="math inline">q</span> or
+below <span class="math inline">\neg q</span> for every proposition
+<span class="math inline">q</span> at <span
+class="math inline">f</span>’s target. So Strong Actuality holds at
+<span class="math inline">1_V</span>. A closed sentence holds at an
+arrow iff it holds at the identity of the arrow’s target, so Strong
+Actuality holds at every world after the evaluation point, and □Strong
+Actuality holds there.</p>
+<p><em>General argument
+<code>arguments/strong-actuality-unique-retractions</code>. It requires
+that At the evaluation object, and at the target of every arrow out of
+it, the singleton of the identity arrow is in the domain. Here: The
+singleton of the identity arrow at any object is in the domain, the
+model being full. It requires that At the evaluation object, and at the
+target of every arrow out of it, every arrow out of that object has at
+most one retraction. Here: No non-identity arrow has a retraction: the
+only arrows into <span class="math inline">W_0</span>, <span
+class="math inline">V</span> and <span class="math inline">U</span> from
+elsewhere go forward along the fork. By Claude Opus 5.5 (Anthropic), at
+Cian Dorr’s direction, 2026-10-06.</em></p>
+<h3 id="holds-countable-boolean-completeness.">Holds Countable Boolean
+Completeness.</h3>
+<p><em>Withdrawn 2026-10-16 by Claude Opus 5.5 (Anthropic), at Cian
+Dorr’s direction: Countable Boolean Completeness now measures
+countability at every type, not only by the finite cardinalities of
+individuals. The argument shows only the instance counting at <span
+class="math inline">e</span>; at a type with infinitely many entities a
+countable property may have infinitely many instances, so the verdict no
+longer follows.</em></p>
+<p>The natural numbers are the finite cardinalities at type <span
+class="math inline">e</span> (Background, after Goodsell), and with a
+single individual there are three: <span
+class="math inline">\mathbf{0}_e</span>, true of the empty property;
+<span class="math inline">\operatorname{Suc}_e\mathbf{0}_e</span>, true
+of the universal one; and the empty cardinality, which is <span
+class="math inline">\operatorname{Suc}_e</span> of the second and of
+itself. By extensional fullness the property of being one of these three
+is in the domain, so it bounds natural numberhood. A countable property
+therefore has at most three members in its extension, and their join is
+its least upper bound.</p>
+<p><em>General argument <code>arguments/three-numbers</code>. It
+requires that There is exactly one individual, at every world. Here:
+There is a single individual at every object. It requires that The model
+is extensionally full at every object: every set of tuples from the
+domains at an object is the extension, at the identity arrow, of an
+element of the domain of the matching relational type there. Here: A
+full model contains every intension, so in particular one with any given
+extension at the identity. By Claude Opus 5.5 (Anthropic), on Cian
+Dorr’s question whether the failure of Boolean Completeness at type
+<span class="math inline">t</span> refutes its countable form here,
+2026-10-02.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic.</p>
+<h3 id="holds-transversal-choice.">Holds Transversal Choice.</h3>
+<p>For an equivalence relation at the evaluation point, a transversal of
+its extension there, chosen in the metatheory, is by extensional
+fullness the extension of an element of the domain; the equivalence and
+transversal conditions are unboxed.</p>
+<p><em>General argument
+<code>arguments/transversal-choice-extensionally-full</code>. It
+requires that The model is extensionally full at every object: every set
+of tuples from the domains at an object is the extension, at the
+identity arrow, of an element of the domain of the matching relational
+type there. Here: A full model contains every intension, so in
+particular one with any given extension at the identity. By Cian Dorr
+(observation); recorded by Claude Fable 5.1 (Anthropic), on a question
+of Zachary Goodsell, after an observation of Christopher Sun,
+2026-09-25.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> The Relational Choice and Transversal Choice arguments
+merged into one, stated for every extensionally full model.</p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s
+direction:</em> Moved from the group finite-support-one-object to the
+topic. Its first sentence, deriving extensional fullness from ideal
+fullness, is now the group’s reason for meeting extensionally-full.</p>
+<h3 id="holds-two-hat-necessity-implies-nd-necessity.">Holds □Two-hat
+necessity implies ND-necessity.</h3>
+<p>In a full action model the actual-world proposition <span
+class="math inline">\{1\}</span> is in the domain at every object.
+Taking it as the witness, <span class="math inline">\Box_{\ne}p</span>
+holds at an identity iff <span class="math inline">p</span> contains
+every arrow out of that object with a retraction (these are the arrows
+at which <span class="math inline">\Diamond\{1\}</span> holds), and
+<span class="math inline">\hat{\hat\Box}p</span> iff <span
+class="math inline">p</span> contains every invertible arrow out of it
+(an arrow lies in <span class="math inline">\hat\Diamond\{1\}</span> iff
+some retraction of it has a retraction, i.e. iff it is invertible). Full
+models satisfy necessary Actuality, so <span
+class="math inline">\Box_5=\hat{\hat\Box}</span> by Proposition D21 of
+The Bounds of Possibility. When every retracted arrow is invertible, the
+two boxes coincide at every reachable object, so <span
+class="math inline">\Box_{\ne}=\hat{\hat\Box}</span>.</p>
+<p><em>General argument
+<code>arguments/two-hat-nd-retracted-invertible</code>. It requires that
+The model is full: at each object, the domain of each relational type
+contains every intension of that type. Here: Every intension of every
+relational type is present at every object (Classicism, §3.5, p. 59). It
+requires that Out of every object reachable from the evaluation point,
+every arrow that has a retraction is invertible. Here: Only identities
+are retracted. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s
+direction, 2026-10-14.</em></p>
+<h3 id="fails-nd-type-t.">Fails ND (type t).</h3>
+<p>Let <span class="math inline">k</span> out of the evaluation object
+have no retraction. The propositions <span
+class="math inline">\bot</span> and <span
+class="math inline">\{1\}</span> are in the domain, the model being
+full, and <span class="math inline">k</span> transports both to <span
+class="math inline">\bot</span>: no arrow <span
+class="math inline">m</span> after <span class="math inline">k</span>
+has <span class="math inline">m\circ k=1</span>. So <span
+class="math inline">k</span>’s action at type <span
+class="math inline">t</span> is not injective, and ND fails there
+(Proposition 3.24(i)).</p>
+<p><em>Source: Classicism, §3.5, Proposition 3.24(i). General argument
+<code>arguments/unretracted-arrow</code>. It requires that The model is
+full: at each object, the domain of each relational type contains every
+intension of that type. Here: Every intension of every relational type
+is present at every object (Classicism, §3.5, p. 59). It requires that
+Some arrow out of the evaluation object has no retraction. Here: No
+arrow leads into <span class="math inline">W_0</span> but its identity,
+so <span class="math inline">h</span> has no retraction. By Claude Opus
+5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-06.</em></p>
+<h2 id="notes">Notes</h2>
+<p>Built to separate Self-Atomicity from Strong Atomicity: every arrow
+is fixed only by the identity, so every singleton is a self-atom, but
+<span class="math inline">h</span> is not epic. With □Atomicity,
+□Actuality, □Strong Actuality, □Rigid Comprehension and Rigid Power all
+holding, it shows that no result deriving BF, or Strong Atomicity, from
+them can replace the latter by Self-Atomicity with any of those added.
+Self-atoms are atoms holds at <span class="math inline">W_0</span> but
+not at <span class="math inline">V</span>.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><strong>Fable 25 Oct</strong> — Claude Fable 5.1 (Anthropic),
+prompted by Cian Dorr, survey of Strong Atomicity results under
+Self-Atomicity, 25 October 2026 (session transcript).</li>
+<li><strong>Classicism</strong> — Andrew Bacon and Cian Dorr,
+Classicism, draft of 16 May 2023, §3.5, pp. 58–61 (full action
+models).</li>
+</ul>
+<p class="cert">
+Record:
+<code>topics/classicism/models/full-three-object-fork.yaml</code>
+</p>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian
+Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds),
+Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map
+was built from the draft dated 16 May 2023, 87 pages, which does not
+differ materially from the published version; all page, proposition and
+footnote locators in this map refer to that draft’s numbering. — §3.5,
+pp. 58–61. Full action models.</li>
+</ul>
+</body></html>

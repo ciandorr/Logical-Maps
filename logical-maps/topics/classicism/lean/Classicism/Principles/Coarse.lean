@@ -1,7 +1,7 @@
 import Classicism.Paper
 import Classicism.Background.Rigidity
 import Classicism.Background.Lattice
-import Classicism.Background.Worlds
+import Classicism.Background.Atoms
 
 /-!
 # Principles of the map's category `coarse`
@@ -163,6 +163,36 @@ theorem NecBarcan.to_dual {σ : Type} [Ty σ] : NecBarcan σ → NecBarcanDual �
 /-- `necessary-barcan-r` from its dual form. -/
 theorem NecBarcan.of_dual {σ : Type} [Ty σ] : NecBarcanDual σ → NecBarcan σ :=
   modal_K _ _ (nec% (Barcan.of_dual (σ := σ)))
+
+/-- `barcan-r`, form `universal-weakly-rigid`, at `σ`: `λz. ⊤` is weakly rigid. -/
+def BarcanUniversalWeaklyRigid (σ : Type) [Ty σ] : Prop := WeaklyRigid (fun _ : σ => True)
+
+/-- `barcan-r` to its form `universal-weakly-rigid`: `λz. ⊤` is weakly persistent since `□⊤`;
+weakly inextensible, since `∀z. □Zz` gives `□∀z. Zz` by BF. -/
+theorem Barcan.to_universalWeaklyRigid {σ : Type} [Ty σ] :
+    Barcan σ → BarcanUniversalWeaklyRigid σ := fun bf =>
+  ⟨fun _ _ => box_true, fun Z hZ =>
+    bf (λ z ↦ True → Z z) fun z => box_imp_of_box True (Z z) (hZ z trivial)⟩
+
+/-- `barcan-r` from its form `universal-weakly-rigid`: the weak inextensibility of `λz. ⊤`
+at `X` is BF at `X`. -/
+theorem Barcan.of_universalWeaklyRigid {σ : Type} [Ty σ] :
+    BarcanUniversalWeaklyRigid σ → Barcan σ := fun h X hX =>
+  modal_K _ _ (nec% (fun (k : ∀ z : σ, True → X z) (z : σ) => k z trivial))
+    (h.2 X (fun z _ => hX z))
+
+/-- `necessary-barcan-r`, form `universal-rigid`, at `σ`: `λz. ⊤` is rigid. -/
+def NecBarcanUniversalRigid (σ : Type) [Ty σ] : Prop := Rigid (fun _ : σ => True)
+
+/-- `necessary-barcan-r` to its form `universal-rigid`: rigidity is necessary weak rigidity. -/
+theorem NecBarcan.to_universalRigid {σ : Type} [Ty σ] :
+    NecBarcan σ → NecBarcanUniversalRigid σ := fun h =>
+  (rigid_iff_box_weaklyRigid _).2 (modal_K _ _ (nec% (Barcan.to_universalWeaklyRigid (σ := σ))) h)
+
+/-- `necessary-barcan-r` from its form `universal-rigid`. -/
+theorem NecBarcan.of_universalRigid {σ : Type} [Ty σ] :
+    NecBarcanUniversalRigid σ → NecBarcan σ := fun h =>
+  modal_K _ _ (nec% (Barcan.of_universalWeaklyRigid (σ := σ))) ((rigid_iff_box_weaklyRigid _).1 h)
 
 /-- `barcan-relational` at `τ`: BF at a relational type. -/
 def BarcanRelational (τ : Type) [Rel τ] : Prop :=

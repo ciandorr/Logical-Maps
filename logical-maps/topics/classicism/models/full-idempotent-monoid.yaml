@@ -16,8 +16,8 @@ sources:
   principles).
 - DeepSeek (deepseek-flash), Classicism theorem trawl, 25 September 2026; mathematically reviewed and
   corrected by OpenAI Codex (GPT-6), 25 September 2026. Accepted additions only; original construction
-  attribution is unchanged. writeups/strong-worlds-one-object-action-models.md; Classicism, pp. 55–59,
-  74 and 78; checks/action_strong_worlds.py.
+  attribution is unchanged. writeups/strong-atoms-one-object-action-models.md; Classicism, pp. 55–59,
+  74 and 78; checks/action_strong_atoms.py.
 source_names:
 - Classicism
 - DeepSeek trawl; GPT-6 review 25 Sep
@@ -80,7 +80,7 @@ arguments: []
 # --- later additions ---
 
 # 6 October 2026 (Claude Opus 5.5, at Cian Dorr's direction): the remaining own arguments are
-# now general arguments, reached through this record's `meets`, and dropped: strong-leibniz-t (nonepic-strong-leibniz).
+# now general arguments, reached through this record's `meets`, and dropped: strong-atomicity-t (nonepic-strong-atomicity).
 
 # migration: text of the old notes that no argument holds, verbatim: their first two sentences, and
 # the sentence that followed the Σ argument, referring to its failures. The argument for □Relational
@@ -132,7 +132,7 @@ history:
   - distinctness-signature-r
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
-  summary: 'Added □Strong Leibniz Biconditionals (type t): every singleton of an arrow is a strong world
+  summary: 'Added □Strong Atomicity (type t): every singleton of an arrow is a strong atom
     in a propositionally full one-object model; see the notes. Superseded on 25 September 2026: the transported-image
     quantifier argument was false; the removed positive flag is preserved here as history, not a current
     verdict. Withdrawn on 23 September 2026: the claim was mistaken; see the later entry.'
@@ -170,19 +170,19 @@ history:
   - transversal-choice-r
 - date: '2026-09-25'
   by: OpenAI Codex (GPT-6), prompted by Zachary Goodsell
-  summary: 'Corrected the previously recorded necessary Strong Leibniz-t flag. Confirmed the trawl''s
-    Strong Leibniz-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing
+  summary: 'Corrected the previously recorded necessary Strong Atomicity-t flag. Confirmed the trawl''s
+    Strong Atomicity-t failure: an admitted nonidentity-idempotent singleton shifts to a set containing
     both the identity and the idempotent, which a target-domain proposition separates. Quantifiers inside
     the box range over the entire target domain. The boxed failure follows by T.'
   violates:
-  - strong-leibniz-t
+  - strong-atomicity-t
 - date: '2026-09-23'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
-  summary: 'Corrected the claim of 22 September 2026 that □Strong Leibniz Biconditionals (type t) hold:
-    the argument that every singleton is a strong world needs the monoid to be right-cancellative, and
+  summary: 'Corrected the claim of 22 September 2026 that □Strong Atomicity (type t) holds:
+    the argument that every singleton is a strong atom needs the monoid to be right-cancellative, and
     here the transport of {k} along k is {1, k}. The type-t principle fails; see the notes.'
   violates:
-  - strong-leibniz-t
+  - strong-atomicity-t
 
 # The model in Lean, and its verdicts proved there (Classicism/MapModels.lean); statuses are written by
 # lean-check --update. The verdicts the map's general arguments give it are certified from the

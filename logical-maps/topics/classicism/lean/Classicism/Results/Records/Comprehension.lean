@@ -340,7 +340,7 @@ makes the weakly rigid `λx. ⊤` rigid, and its inextensibility is `□`BF. -/
 theorem tame_rigidity_and_barcan_imply_necessary_barcan {σ : Type} [Ty σ] :
     TameRigidity (σ → Prop) → Barcan σ → NecBarcan σ := fun tr bf =>
   modal_K _ _ (nec% (barcan_of_weaklyInextensible_top (σ := σ)))
-    (tr _ (Rigidity.weaklyRigid_top_of_bf bf)).2
+    (tr _ (P.Barcan.to_universalWeaklyRigid bf)).2
 
 /-- `tame-rigidity-and-bf-relational-imply-necessary-bf-relational`: the same, at a
 relational type. -/

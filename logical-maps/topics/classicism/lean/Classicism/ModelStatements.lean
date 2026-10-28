@@ -367,9 +367,9 @@ def Models.full_idempotent_monoid.necessary_rigid_comprehension_r : Prop :=
 def Models.full_idempotent_monoid.no_pure_contingency_r : Prop :=
   (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
 
-/-- `full-idempotent-monoid`: Strong Leibniz Biconditionals (type t) fails. -/
-def Models.full_idempotent_monoid.strong_leibniz_t : Prop :=
-  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- `full-idempotent-monoid`: Strong Atomicity (type t) fails. -/
+def Models.full_idempotent_monoid.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `full-idempotent-monoid`: Fregean Axiom fails. -/
 def Models.full_idempotent_monoid.fregean_axiom : Prop :=
@@ -719,9 +719,9 @@ def Models.full_two_object_double_retraction.necessary_atomicity_r : Prop :=
 def Models.full_two_object_double_retraction.necessary_rigid_comprehension_r : Prop :=
   (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
 
-/-- `full-two-object-double-retraction`: Strong Leibniz Biconditionals (type t) fails. -/
-def Models.full_two_object_double_retraction.strong_leibniz_t : Prop :=
-  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- `full-two-object-double-retraction`: Strong Atomicity (type t) fails. -/
+def Models.full_two_object_double_retraction.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `full-two-object-double-retraction`: Fregean Axiom fails. -/
 def Models.full_two_object_double_retraction.fregean_axiom : Prop :=
@@ -791,9 +791,9 @@ def Models.full_two_object_retract.necessary_atomicity_r : Prop :=
 def Models.full_two_object_retract.necessary_rigid_comprehension_r : Prop :=
   (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
 
-/-- `full-two-object-retract`: Strong Leibniz Biconditionals (type t) fails. -/
-def Models.full_two_object_retract.strong_leibniz_t : Prop :=
-  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- `full-two-object-retract`: Strong Atomicity (type t) fails. -/
+def Models.full_two_object_retract.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- `full-two-object-retract`: Fregean Axiom fails. -/
 def Models.full_two_object_retract.fregean_axiom : Prop :=
@@ -1143,9 +1143,9 @@ def Arguments.invertible_arrows.necessary_barcan_r : Prop :=
 def Arguments.no_pure_contingency_one_object.no_pure_contingency_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} {C : Type} [CategoryTheory.SmallCategory C] (A : Classicism.Meta.Intensional.Premodel Sig C), A.IsModel → Classicism.Meta.Intensional.Premodel.OneObject A → (A).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
 
-/-- argument `nonepic-strong-leibniz`: Strong Leibniz Biconditionals (type t) fails in every model meeting its conditions. -/
-def Arguments.nonepic_strong_leibniz.strong_leibniz_t : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} {C : Type} [CategoryTheory.SmallCategory C] (A : Classicism.Meta.Intensional.Premodel Sig C), A.IsModel → Classicism.Meta.Intensional.Premodel.Full A → Classicism.Meta.Intensional.Premodel.NonepicArrow A → ¬ (A).HoldsAx Classicism.P.StrongLeibnizT.schemaIn
+/-- argument `nonepic-strong-atomicity`: Strong Atomicity (type t) fails in every model meeting its conditions. -/
+def Arguments.nonepic_strong_atomicity.strong_atomicity_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} {C : Type} [CategoryTheory.SmallCategory C] (A : Classicism.Meta.Intensional.Premodel Sig C), A.IsModel → Classicism.Meta.Intensional.Premodel.Full A → Classicism.Meta.Intensional.Premodel.NonepicArrow A → ¬ (A).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
 
 /-- argument `nonidentity-arrow`: Fregean Axiom fails in every model meeting its conditions. -/
 def Arguments.nonidentity_arrow.fregean_axiom : Prop :=

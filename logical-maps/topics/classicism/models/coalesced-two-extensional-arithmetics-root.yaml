@@ -47,10 +47,10 @@ arguments:
     only itself. $I^*$ holds in both components, so $I$ holds at both component worlds and at the root.
     The arithmetical sentence $A:=\operatorname{Con}(T)$ holds at the world of $M_1$ and fails at that of
     $M_2$, so neither $\Box(I\to A)$ nor $\Box(I\to\neg A)$ holds at the root.
-- id: strong-leibniz
+- id: strong-atomicity
   holds:
-  - necessary-strong-leibniz-r
-  - necessary-strong-leibniz-t
+  - necessary-strong-atomicity-r
+  - necessary-strong-atomicity-t
   - necessary-barcan-r
   by: Cian Dorr, recorded by Claude Opus 5.5 (Anthropic)
   date: '2026-10-19'
@@ -60,7 +60,7 @@ arguments:
     true of that tuple at that world and of nothing else: the root component is free, and each component
     contains the singleton of each of its tuples, definable from them. Such an entity lies below every
     entity or below its negation, and necessarily so, since its transport to a component world is that
-    singleton or $\bot$; so it is a strong world, and every nonzero entity has one below it. In the one-world
+    singleton or $\bot$; so it is a strong atom, and every nonzero entity has one below it. In the one-world
     components the same holds trivially. For BF, the root individuals are pairs, so each component
     individual is the image of a root individual, and likewise at every type, root entities being
     families of component entities; the components, with one world each, satisfy BF.
@@ -413,9 +413,9 @@ arguments:
     $\Box\forall\mathfrak R\,.\,\operatorname{Real}_\sigma(\mathfrak R)\to\neg A(\mathfrak R)$ holds
     at the root: the Necessity of Analysis fails, and with it the Necessity of Second-Order Analysis
     and Analytic Necessitism, which imply it.
-notes: 'Suggested by Cian Dorr on 19 October 2026 as a small model of the boxed Strong Leibniz Biconditionals
+notes: 'Suggested by Cian Dorr on 19 October 2026 as a small model of the boxed Strong Atomicity
   and □BF without the Necessity of Arithmetic. The root has three atoms, the singletons of its three worlds,
-  all strong worlds. The components are one-world extensional Henkin models, and they satisfy Well-Ordering
+  all strong atoms. The components are one-world extensional Henkin models, and they satisfy Well-Ordering
   at every type, so that the choice principles hold at every world. No Lean verification is claimed.'
 history:
 - date: '2026-10-20'

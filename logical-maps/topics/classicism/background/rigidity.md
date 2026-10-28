@@ -84,7 +84,9 @@ and $G\le F$ likewise. Since $\le$ is antisymmetric, $F=G$. $\square$
 
 ## Closure properties
 
-The first four lemmas below use no BF, choice, ND or comprehension.
+The lemmas below use no BF, choice, ND or comprehension. That BF at $\sigma$ makes
+$\lambda z^\sigma\, .\,\top$ weakly rigid, and □BF makes it rigid, are forms of
+[[barcan-r|BF]] and [[necessary-barcan-r|□BF]].
 
 ::: lemma {#haecceities-rigid}
 title: haecceities are rigid
@@ -147,15 +149,3 @@ necessarily every $x$ with $fx=fx_0$ is $x_0$, so $\Box Z'y$. By the inextensibi
 $P$, $P\le Z'$, and so $\Box\forall x\, .\,P(fx)\to Zx$. Both the range condition and
 injectivity keep their modal scopes. $\square$
 :::
-
-::: lemma {#bf-universal-weakly-rigid}
-title: BF makes the universal property weakly rigid
-lean: Classicism.Rigidity.weaklyRigid_top_of_bf
----
-If BF holds at $\sigma$, then $\lambda z^\sigma\, .\,\top$ is weakly rigid.
-
-*Proof.* It is weakly persistent, since $\Box\top$. For weak inextensibility, suppose
-$\forall z\, .\,\top\to\Box Zz$, that is, $\forall z\, .\,\Box Zz$. BF gives
-$\Box\forall z\, .\,Zz$, which is $\lambda z\, .\,\top\le Z$. $\square$
-:::
-

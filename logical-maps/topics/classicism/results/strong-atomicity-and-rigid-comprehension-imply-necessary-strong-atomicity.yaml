@@ -1,0 +1,34 @@
+id: strong-atomicity-and-rigid-comprehension-imply-necessary-strong-atomicity
+premises:
+- strong-atomicity-r
+- rigid-comprehension-r
+conclusion: necessary-strong-atomicity-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 24 October 2026
+  checked_by: []
+  date: '2026-10-24'
+  lean: verified
+  lean_ref: Classicism.Map.strong_atomicity_and_rigid_comprehension_imply_necessary_strong_atomicity
+sources:
+- GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Strong Atomicity and Rigid Comprehension imply BF at relational
+  types, research note of 22 October 2026, §§1–3 and 5 (unpaginated), in Daniel Kodsi's submission of 24 October
+  2026 (branch classicism-results-2026-10-24 of github.com/dkodsi/Logical-Maps).
+source_names:
+- Astra (Kodsi) 22 Oct
+proof: >-
+  See the write-up. Take a rigid $A$ coextensive with the property of being a strong atom or $\bot$.
+  Then $\Box A\bot$, $A$ necessarily entails deciding every entity, and the union of $A$'s instances
+  is $\top$. Necessarily, for every $Y$, the cut $\lambda W\, .\,AW\land W\le Y$ is rigid (because
+  $\bot$ is in $A$) and has union $Y$. If $Y\ne\bot$, its cut has an instance other than $\bot$, since
+  a rigid property whose actual instances are all $\bot$ has only $\bot$ as instance; that instance is
+  a strong atom below $Y$.
+references: []
+notes: >-
+  Uses Strong Atomicity at $\sigma$ and Rigid Comprehension at $\sigma t$ to get
+  them necessarily at $\sigma$. With [[strong-atomicity-and-rigid-comprehension-imply-necessary-rigid-comprehension]]
+  and [[necessary-strong-atomicity-and-necessary-rigid-comprehension-imply-necessary-bf-relational]] this settles
+  the conjecture [[necessary-strong-atomicity-and-rigid-comprehension-imply-necessary-bf-relational]]
+  (Bacon's Theorem 8.2) from weaker premises.

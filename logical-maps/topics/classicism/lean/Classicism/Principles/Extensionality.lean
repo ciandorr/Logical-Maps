@@ -1,7 +1,7 @@
 import Classicism.Paper
 import Classicism.Background.Rigidity
 import Classicism.Background.Lattice
-import Classicism.Background.Worlds
+import Classicism.Background.Atoms
 
 /-!
 # Principles of the map's category `extensionality`

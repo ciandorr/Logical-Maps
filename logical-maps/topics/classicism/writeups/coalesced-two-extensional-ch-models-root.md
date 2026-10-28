@@ -6,7 +6,7 @@ components chosen by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 
 to disagree about the continuum hypothesis. Written for the map by Claude Opus 5.5
 (Anthropic), prompted by Cian Dorr, 24 October 2026.
 
-At its root this model satisfies □Atomicity, □BF, □Strong Leibniz, □Tame Rigidity,
+At its root this model satisfies □Atomicity, □BF, □Strong Atomicity, □Tame Rigidity,
 □Rigid Rigidity, □Weakly Rigid Weak Rigidity, Modal Well-Ordering and □Intensional
 Choice, and fails Non-contingency of CH at type $e$.
 
@@ -82,8 +82,8 @@ They are the arithmetic model's arguments, which use only that the components ar
 one-world extensional Henkin models with infinitely many individuals satisfying
 Well-Ordering at every type:
 
-- `strong-leibniz`: the root entities true of one tuple at one world are strong worlds,
-  giving □Strong Leibniz and so □Atomicity; and transport onto each component is
+- `strong-atomicity`: the root entities true of one tuple at one world are strong atoms,
+  giving □Strong Atomicity and so □Atomicity; and transport onto each component is
   surjective, giving □BF;
 - `one-world-components`: □Tame Rigidity, □Intensional Choice and □Distinctness-Preserving
   Collapse;

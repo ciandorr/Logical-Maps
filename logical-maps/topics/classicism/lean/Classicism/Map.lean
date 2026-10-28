@@ -10,7 +10,7 @@ import Classicism.Results.SentenceSchemas.ArithmeticMeta
 import Classicism.Certified.Research
 import Classicism.Results.Research.NPCC5Atomicity
 import Classicism.Results.Research.RigidityClosureResearchAtomicPowerCertificates
-import Classicism.Results.Research.ModalPropagationCertificates.StableLeibniz
+import Classicism.Results.Research.ModalPropagationCertificates.StrongAtomicity
 import Classicism.Results.Research.ModalPropagationCertificates.BoxedComprehension
 
 /-!
@@ -211,9 +211,9 @@ theorem actuality_incompatible_with_atomlessness : Statements.actuality_incompat
 theorem atomicity_and_bf_imply_necessary_actuality : Statements.atomicity_and_bf_imply_necessary_actuality := by
   map_cert Proofs.atomicity_and_bf_imply_necessary_actuality.entails
 
-/-- `atomicity-and-bf-imply-strong-leibniz` -/
-theorem atomicity_and_bf_imply_strong_leibniz : Statements.atomicity_and_bf_imply_strong_leibniz := by
-  map_cert Meta.atomicity_and_bf_imply_strong_leibniz
+/-- `atomicity-and-bf-imply-strong-atomicity` -/
+theorem atomicity_and_bf_imply_strong_atomicity : Statements.atomicity_and_bf_imply_strong_atomicity := by
+  map_cert Meta.atomicity_and_bf_imply_strong_atomicity
 
 /-- `atomicity-r-implies-atomicity-t` -/
 theorem atomicity_r_implies_atomicity_t : Statements.atomicity_r_implies_atomicity_t := by
@@ -227,9 +227,9 @@ theorem atomicity_t_and_bf_imply_atomicity : Statements.atomicity_t_and_bf_imply
 theorem atomicity_t_and_bf_imply_necessary_actuality : Statements.atomicity_t_and_bf_imply_necessary_actuality := by
   map_cert Proofs.atomicity_t_and_bf_imply_necessary_actuality.entails
 
-/-- `atomicity-t-and-bf-t-imply-strong-leibniz-t` -/
-theorem atomicity_t_and_bf_t_imply_strong_leibniz_t : Statements.atomicity_t_and_bf_t_imply_strong_leibniz_t := by
-  map_cert Proofs.atomicity_t_and_bf_t_imply_strong_leibniz_t.entails
+/-- `atomicity-t-and-bf-t-imply-strong-atomicity-t` -/
+theorem atomicity_t_and_bf_t_imply_strong_atomicity_t : Statements.atomicity_t_and_bf_t_imply_strong_atomicity_t := by
+  map_cert Proofs.atomicity_t_and_bf_t_imply_strong_atomicity_t.entails
 
 /-- `atomicity-t-incompatible-with-atomlessness` -/
 theorem atomicity_t_incompatible_with_atomlessness : Statements.atomicity_t_incompatible_with_atomlessness := by
@@ -375,9 +375,9 @@ theorem extensionality_r_implies_plenitude_r : Statements.extensionality_r_impli
 theorem extensionality_r_implies_rigid_comprehension_r : Statements.extensionality_r_implies_rigid_comprehension_r := by
   map_cert _root_.Classicism.extensionality_r_implies_rigid_comprehension_r.entails
 
-/-- `five-and-strong-leibniz-t-imply-necessary-b` -/
-theorem five_and_strong_leibniz_t_imply_necessary_b : Statements.five_and_strong_leibniz_t_imply_necessary_b := by
-  map_cert Proofs.five_and_strong_leibniz_t_imply_necessary_b.entails
+/-- `five-and-strong-atomicity-t-imply-necessary-b` -/
+theorem five_and_strong_atomicity_t_imply_necessary_b : Statements.five_and_strong_atomicity_t_imply_necessary_b := by
+  map_cert Proofs.five_and_strong_atomicity_t_imply_necessary_b.entails
 
 /-- `fregean-axiom-implies-distinctness-preserving-collapse` -/
 theorem fregean_axiom_implies_distinctness_preserving_collapse : Statements.fregean_axiom_implies_distinctness_preserving_collapse := by
@@ -532,13 +532,13 @@ theorem necessary_actuality_implies_necessary_vicinity : Statements.necessary_ac
 theorem necessary_actuality_implies_necessary_weakly_inextensible_comprehension_r : Statements.necessary_actuality_implies_necessary_weakly_inextensible_comprehension_r := by
   map_cert Meta.necessary_actuality_implies_necessary_weakly_inextensible_comprehension_r
 
-/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-leibniz` -/
-theorem necessary_atomicity_and_necessary_bf_imply_necessary_strong_leibniz : Statements.necessary_atomicity_and_necessary_bf_imply_necessary_strong_leibniz := by
-  map_cert Meta.necessary_atomicity_and_necessary_bf_imply_necessary_strong_leibniz
+/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-atomicity` -/
+theorem necessary_atomicity_and_necessary_bf_imply_necessary_strong_atomicity : Statements.necessary_atomicity_and_necessary_bf_imply_necessary_strong_atomicity := by
+  map_cert Meta.necessary_atomicity_and_necessary_bf_imply_necessary_strong_atomicity
 
-/-- `necessary-atomicity-and-necessary-bf-t-imply-necessary-strong-leibniz-t` -/
-theorem necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_leibniz_t : Statements.necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_leibniz_t := by
-  map_cert Proofs.necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_leibniz_t.entails
+/-- `necessary-atomicity-and-necessary-bf-t-imply-necessary-strong-atomicity-t` -/
+theorem necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_atomicity_t : Statements.necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_atomicity_t := by
+  map_cert Proofs.necessary_atomicity_and_necessary_bf_t_imply_necessary_strong_atomicity_t.entails
 
 /-- `necessary-atomicity-r-implies-atomicity-r` -/
 theorem necessary_atomicity_r_implies_atomicity_r : Statements.necessary_atomicity_r_implies_atomicity_r := by
@@ -704,29 +704,29 @@ theorem necessary_strong_actuality_implies_necessary_actuality : Statements.nece
 theorem necessary_strong_actuality_implies_strong_actuality : Statements.necessary_strong_actuality_implies_strong_actuality := by
   map_cert Proofs.necessary_strong_actuality_implies_strong_actuality.entails
 
-/-- `necessary-strong-leibniz-implies-necessary-atomicity` -/
-theorem necessary_strong_leibniz_implies_necessary_atomicity : Statements.necessary_strong_leibniz_implies_necessary_atomicity := by
-  map_cert Meta.necessary_strong_leibniz_implies_necessary_atomicity
+/-- `necessary-strong-atomicity-implies-necessary-atomicity` -/
+theorem necessary_strong_atomicity_implies_necessary_atomicity : Statements.necessary_strong_atomicity_implies_necessary_atomicity := by
+  map_cert Meta.necessary_strong_atomicity_implies_necessary_atomicity
 
-/-- `necessary-strong-leibniz-r-implies-necessary-strong-leibniz-t` -/
-theorem necessary_strong_leibniz_r_implies_necessary_strong_leibniz_t : Statements.necessary_strong_leibniz_r_implies_necessary_strong_leibniz_t := by
-  map_cert Proofs.necessary_strong_leibniz_r_implies_necessary_strong_leibniz_t.entails
+/-- `necessary-strong-atomicity-r-implies-necessary-strong-atomicity-t` -/
+theorem necessary_strong_atomicity_r_implies_necessary_strong_atomicity_t : Statements.necessary_strong_atomicity_r_implies_necessary_strong_atomicity_t := by
+  map_cert Proofs.necessary_strong_atomicity_r_implies_necessary_strong_atomicity_t.entails
 
-/-- `necessary-strong-leibniz-r-implies-strong-leibniz-r` -/
-theorem necessary_strong_leibniz_r_implies_strong_leibniz_r : Statements.necessary_strong_leibniz_r_implies_strong_leibniz_r := by
-  map_cert Proofs.necessary_strong_leibniz_r_implies_strong_leibniz_r.entails
+/-- `necessary-strong-atomicity-r-implies-strong-atomicity-r` -/
+theorem necessary_strong_atomicity_r_implies_strong_atomicity_r : Statements.necessary_strong_atomicity_r_implies_strong_atomicity_r := by
+  map_cert Proofs.necessary_strong_atomicity_r_implies_strong_atomicity_r.entails
 
-/-- `necessary-strong-leibniz-t-and-necessary-bf-imply-necessary-strong-leibniz` -/
-theorem necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz : Statements.necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz := by
-  map_cert Meta.necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz
+/-- `necessary-strong-atomicity-t-and-necessary-bf-imply-necessary-strong-atomicity` -/
+theorem necessary_strong_atomicity_t_and_necessary_bf_imply_necessary_strong_atomicity : Statements.necessary_strong_atomicity_t_and_necessary_bf_imply_necessary_strong_atomicity := by
+  map_cert Meta.necessary_strong_atomicity_t_and_necessary_bf_imply_necessary_strong_atomicity
 
-/-- `necessary-strong-leibniz-t-implies-necessary-strong-actuality` -/
-theorem necessary_strong_leibniz_t_implies_necessary_strong_actuality : Statements.necessary_strong_leibniz_t_implies_necessary_strong_actuality := by
-  map_cert Proofs.necessary_strong_leibniz_t_implies_necessary_strong_actuality.entails
+/-- `necessary-strong-atomicity-t-implies-necessary-strong-actuality` -/
+theorem necessary_strong_atomicity_t_implies_necessary_strong_actuality : Statements.necessary_strong_atomicity_t_implies_necessary_strong_actuality := by
+  map_cert Proofs.necessary_strong_atomicity_t_implies_necessary_strong_actuality.entails
 
-/-- `necessary-strong-leibniz-t-implies-strong-leibniz-t` -/
-theorem necessary_strong_leibniz_t_implies_strong_leibniz_t : Statements.necessary_strong_leibniz_t_implies_strong_leibniz_t := by
-  map_cert Proofs.necessary_strong_leibniz_t_implies_strong_leibniz_t.entails
+/-- `necessary-strong-atomicity-t-implies-strong-atomicity-t` -/
+theorem necessary_strong_atomicity_t_implies_strong_atomicity_t : Statements.necessary_strong_atomicity_t_implies_strong_atomicity_t := by
+  map_cert Proofs.necessary_strong_atomicity_t_implies_strong_atomicity_t.entails
 
 /-- `necessary-tractarianism-r-implies-necessary-barcan-r` -/
 theorem necessary_tractarianism_r_implies_necessary_barcan_r : Statements.necessary_tractarianism_r_implies_necessary_barcan_r := by
@@ -857,13 +857,13 @@ theorem no_pure_contingency_and_rigid_comprehension_imply_necessary_rigid_compre
 theorem no_pure_contingency_and_strong_actuality_imply_necessary_strong_actuality : Statements.no_pure_contingency_and_strong_actuality_imply_necessary_strong_actuality := by
   map_cert npc_strongActuality_entails_necStrongActuality
 
-/-- `no-pure-contingency-and-strong-leibniz-imply-necessary-strong-leibniz` -/
-theorem no_pure_contingency_and_strong_leibniz_imply_necessary_strong_leibniz : Statements.no_pure_contingency_and_strong_leibniz_imply_necessary_strong_leibniz := by
-  map_cert (Entails.mono_right (Ax₃ := P.NecStrongLeibniz.schema) (by map_box) (npc_union_entails_box_pure P.StrongLeibniz.schema_closedTypes))
+/-- `no-pure-contingency-and-strong-atomicity-imply-necessary-strong-atomicity` -/
+theorem no_pure_contingency_and_strong_atomicity_imply_necessary_strong_atomicity : Statements.no_pure_contingency_and_strong_atomicity_imply_necessary_strong_atomicity := by
+  map_cert (Entails.mono_right (Ax₃ := P.NecStrongAtomicity.schema) (by map_box) (npc_union_entails_box_pure P.StrongAtomicity.schema_closedTypes))
 
-/-- `no-pure-contingency-and-strong-leibniz-t-imply-necessary-strong-leibniz-t` -/
-theorem no_pure_contingency_and_strong_leibniz_t_imply_necessary_strong_leibniz_t : Statements.no_pure_contingency_and_strong_leibniz_t_imply_necessary_strong_leibniz_t := by
-  map_cert (Entails.mono_right (Ax₃ := P.NecStrongLeibnizT.schema) (by map_box) (npc_union_entails_box_pure P.StrongLeibnizT.schema_closedTypes))
+/-- `no-pure-contingency-and-strong-atomicity-t-imply-necessary-strong-atomicity-t` -/
+theorem no_pure_contingency_and_strong_atomicity_t_imply_necessary_strong_atomicity_t : Statements.no_pure_contingency_and_strong_atomicity_t_imply_necessary_strong_atomicity_t := by
+  map_cert (Entails.mono_right (Ax₃ := P.NecStrongAtomicityT.schema) (by map_box) (npc_union_entails_box_pure P.StrongAtomicityT.schema_closedTypes))
 
 /-- `no-pure-contingency-and-tractarianism-imply-necessary-tractarianism` -/
 theorem no_pure_contingency_and_tractarianism_imply_necessary_tractarianism : Statements.no_pure_contingency_and_tractarianism_imply_necessary_tractarianism := by
@@ -1016,25 +1016,25 @@ theorem signature_b_r_implies_pure_b_r : Statements.signature_b_r_implies_pure_b
 theorem strong_actuality_implies_actuality : Statements.strong_actuality_implies_actuality := by
   map_cert Proofs.strong_actuality_implies_actuality.entails
 
-/-- `strong-leibniz-r-implies-atomicity-r` -/
-theorem strong_leibniz_r_implies_atomicity_r : Statements.strong_leibniz_r_implies_atomicity_r := by
-  map_cert Meta.strong_leibniz_r_implies_atomicity_r
+/-- `strong-atomicity-r-implies-atomicity-r` -/
+theorem strong_atomicity_r_implies_atomicity_r : Statements.strong_atomicity_r_implies_atomicity_r := by
+  map_cert Meta.strong_atomicity_r_implies_atomicity_r
 
-/-- `strong-leibniz-r-implies-strong-leibniz-t` -/
-theorem strong_leibniz_r_implies_strong_leibniz_t : Statements.strong_leibniz_r_implies_strong_leibniz_t := by
-  map_cert Proofs.strong_leibniz_r_implies_strong_leibniz_t.entails
+/-- `strong-atomicity-r-implies-strong-atomicity-t` -/
+theorem strong_atomicity_r_implies_strong_atomicity_t : Statements.strong_atomicity_r_implies_strong_atomicity_t := by
+  map_cert Proofs.strong_atomicity_r_implies_strong_atomicity_t.entails
 
-/-- `strong-leibniz-t-implies-atomicity-t` -/
-theorem strong_leibniz_t_implies_atomicity_t : Statements.strong_leibniz_t_implies_atomicity_t := by
-  map_cert Proofs.strong_leibniz_t_implies_atomicity_t.entails
+/-- `strong-atomicity-t-implies-atomicity-t` -/
+theorem strong_atomicity_t_implies_atomicity_t : Statements.strong_atomicity_t_implies_atomicity_t := by
+  map_cert Proofs.strong_atomicity_t_implies_atomicity_t.entails
 
-/-- `strong-leibniz-t-implies-necessary-actuality` -/
-theorem strong_leibniz_t_implies_necessary_actuality : Statements.strong_leibniz_t_implies_necessary_actuality := by
-  map_cert Proofs.strong_leibniz_t_implies_necessary_actuality.entails
+/-- `strong-atomicity-t-implies-necessary-actuality` -/
+theorem strong_atomicity_t_implies_necessary_actuality : Statements.strong_atomicity_t_implies_necessary_actuality := by
+  map_cert Proofs.strong_atomicity_t_implies_necessary_actuality.entails
 
-/-- `strong-leibniz-t-implies-strong-actuality` -/
-theorem strong_leibniz_t_implies_strong_actuality : Statements.strong_leibniz_t_implies_strong_actuality := by
-  map_cert Proofs.strong_leibniz_t_implies_strong_actuality.entails
+/-- `strong-atomicity-t-implies-strong-actuality` -/
+theorem strong_atomicity_t_implies_strong_actuality : Statements.strong_atomicity_t_implies_strong_actuality := by
+  map_cert Proofs.strong_atomicity_t_implies_strong_actuality.entails
 
 /-- `tractarianism-r-implies-barcan-r` -/
 theorem tractarianism_r_implies_barcan_r : Statements.tractarianism_r_implies_barcan_r := by
@@ -1161,6 +1161,11 @@ theorem barcan_r.dual : Statements.barcan_r.dual := by
   map_form P.Barcan.to_dual.entails
     P.Barcan.of_dual.entails
 
+/-- `barcan-r`, variant `universal-weakly-rigid`: the universal property is weakly rigid. -/
+theorem barcan_r.universal_weakly_rigid : Statements.barcan_r.universal_weakly_rigid := by
+  map_form P.Barcan.to_universalWeaklyRigid.entails
+    P.Barcan.of_universalWeaklyRigid.entails
+
 /-- `barcan-r`, variant `dual-polyadic`: the dual form, for every list of argument types. -/
 theorem barcan_r.dual_polyadic : Statements.barcan_r.dual_polyadic := by
   map_form (Entails.trans P.Barcan.schema_entails_listSchema P.Barcan.to_dual.listEntails)
@@ -1215,6 +1220,11 @@ theorem necessary_atomicity_r.dual : Statements.necessary_atomicity_r.dual := by
 theorem necessary_barcan_r.dual : Statements.necessary_barcan_r.dual := by
   map_form P.NecBarcan.to_dual.entails
     P.NecBarcan.of_dual.entails
+
+/-- `necessary-barcan-r`, variant `universal-rigid`: the universal property is rigid. -/
+theorem necessary_barcan_r.universal_rigid : Statements.necessary_barcan_r.universal_rigid := by
+  map_form P.NecBarcan.to_universalRigid.entails
+    P.NecBarcan.of_universalRigid.entails
 
 /-- `necessary-barcan-r`, variant `dual-polyadic`: the dual form, for every list of argument types. -/
 theorem necessary_barcan_r.dual_polyadic : Statements.necessary_barcan_r.dual_polyadic := by
@@ -1275,15 +1285,15 @@ theorem necessary_modal_five.dual : Statements.necessary_modal_five.dual := by
   map_form P.NecModalFive.to_dual.entails
     P.NecModalFive.of_dual.entails
 
-/-- `necessary-strong-leibniz-r`, variant `dual`: the dual form. -/
-theorem necessary_strong_leibniz_r.dual : Statements.necessary_strong_leibniz_r.dual := by
-  map_form P.NecStrongLeibniz.to_dual.entails
-    P.NecStrongLeibniz.of_dual.entails
+/-- `necessary-strong-atomicity-r`, variant `dual`: the dual form. -/
+theorem necessary_strong_atomicity_r.dual : Statements.necessary_strong_atomicity_r.dual := by
+  map_form P.NecStrongAtomicity.to_dual.entails
+    P.NecStrongAtomicity.of_dual.entails
 
-/-- `necessary-strong-leibniz-t`, variant `dual`: the dual form. -/
-theorem necessary_strong_leibniz_t.dual : Statements.necessary_strong_leibniz_t.dual := by
-  map_form P.NecStrongLeibnizT.to_dual.entails
-    P.NecStrongLeibnizT.of_dual.entails
+/-- `necessary-strong-atomicity-t`, variant `dual`: the dual form. -/
+theorem necessary_strong_atomicity_t.dual : Statements.necessary_strong_atomicity_t.dual := by
+  map_form P.NecStrongAtomicityT.to_dual.entails
+    P.NecStrongAtomicityT.of_dual.entails
 
 /-- `necessary-tractarianism-r`, variant `dual`: the dual form. -/
 theorem necessary_tractarianism_r.dual : Statements.necessary_tractarianism_r.dual := by
@@ -1295,15 +1305,15 @@ theorem necessary_tractarianism_r.dual_polyadic : Statements.necessary_tractaria
   map_form (Entails.trans P.NecTractarianism.schema_entails_listSchema P.NecTractarianism.to_dual.listEntails)
     (Entails.trans P.NecTractarianism.of_dual.listEntails P.NecTractarianism.listSchema_entails_schema)
 
-/-- `strong-leibniz-r`, variant `dual`: the dual form. -/
-theorem strong_leibniz_r.dual : Statements.strong_leibniz_r.dual := by
-  map_form P.StrongLeibniz.to_dual.entails
-    P.StrongLeibniz.of_dual.entails
+/-- `strong-atomicity-r`, variant `dual`: the dual form. -/
+theorem strong_atomicity_r.dual : Statements.strong_atomicity_r.dual := by
+  map_form P.StrongAtomicity.to_dual.entails
+    P.StrongAtomicity.of_dual.entails
 
-/-- `strong-leibniz-t`, variant `dual`: the dual form. -/
-theorem strong_leibniz_t.dual : Statements.strong_leibniz_t.dual := by
-  map_form P.StrongLeibnizT.to_dual.entails
-    P.StrongLeibnizT.of_dual.entails
+/-- `strong-atomicity-t`, variant `dual`: the dual form. -/
+theorem strong_atomicity_t.dual : Statements.strong_atomicity_t.dual := by
+  map_form P.StrongAtomicityT.to_dual.entails
+    P.StrongAtomicityT.of_dual.entails
 
 /-- `tractarianism-r`, variant `dual`: the dual form. -/
 theorem tractarianism_r.dual : Statements.tractarianism_r.dual := by
@@ -1370,9 +1380,9 @@ theorem necessary_atomicity_r_implies_necessary_atomicity_t : Statements.necessa
 theorem necessary_boolean_completeness_r_implies_necessary_boolean_completeness_t : Statements.necessary_boolean_completeness_r_implies_necessary_boolean_completeness_t := by
   map_cert Proofs.necessary_boolean_completeness_r_implies_necessary_boolean_completeness_t.entails
 
-/-- `necessary-strong-leibniz-t-implies-necessary-atomicity-t` -/
-theorem necessary_strong_leibniz_t_implies_necessary_atomicity_t : Statements.necessary_strong_leibniz_t_implies_necessary_atomicity_t := by
-  map_cert Proofs.necessary_strong_leibniz_t_implies_necessary_atomicity_t.entails
+/-- `necessary-strong-atomicity-t-implies-necessary-atomicity-t` -/
+theorem necessary_strong_atomicity_t_implies_necessary_atomicity_t : Statements.necessary_strong_atomicity_t_implies_necessary_atomicity_t := by
+  map_cert Proofs.necessary_strong_atomicity_t_implies_necessary_atomicity_t.entails
 
 /-- `necessary-persistent-comprehension-implies-necessary-actuality` -/
 theorem necessary_persistent_comprehension_implies_necessary_actuality : Statements.necessary_persistent_comprehension_implies_necessary_actuality := by
@@ -1446,9 +1456,9 @@ theorem necessary_rigid_comprehension_implies_necessary_tame_rigidity : Statemen
 theorem necessary_atomicity_t_and_necessary_bf_imply_necessary_atomicity : Statements.necessary_atomicity_t_and_necessary_bf_imply_necessary_atomicity := by
   map_cert Meta.necessary_atomicity_t_and_necessary_bf_imply_necessary_atomicity
 
-/-- `necessary-atomicity-t-and-necessary-bf-t-imply-necessary-strong-leibniz-t` -/
-theorem necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_leibniz_t : Statements.necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_leibniz_t := by
-  map_cert Proofs.necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_leibniz_t.entails
+/-- `necessary-atomicity-t-and-necessary-bf-t-imply-necessary-strong-atomicity-t` -/
+theorem necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_atomicity_t : Statements.necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_atomicity_t := by
+  map_cert Proofs.necessary_atomicity_t_and_necessary_bf_t_imply_necessary_strong_atomicity_t.entails
 
 /-- `necessary-actuality-and-necessary-bf-imply-necessary-inextensible-comprehension` -/
 theorem necessary_actuality_and_necessary_bf_imply_necessary_inextensible_comprehension : Statements.necessary_actuality_and_necessary_bf_imply_necessary_inextensible_comprehension := by
@@ -1590,13 +1600,13 @@ theorem tame_rigidity_and_bf_relational_imply_necessary_bf_relational : Statemen
 theorem tame_rigidity_and_barcan_imply_necessary_barcan : Statements.tame_rigidity_and_barcan_imply_necessary_barcan := by
   map_cert Proofs.tame_rigidity_and_barcan_imply_necessary_barcan.entails
 
-/-- `atomicity-and-bf-relational-imply-strong-leibniz` -/
-theorem atomicity_and_bf_relational_imply_strong_leibniz : Statements.atomicity_and_bf_relational_imply_strong_leibniz := by
-  map_cert Meta.atomicity_and_bf_relational_imply_strong_leibniz
+/-- `atomicity-and-bf-relational-imply-strong-atomicity` -/
+theorem atomicity_and_bf_relational_imply_strong_atomicity : Statements.atomicity_and_bf_relational_imply_strong_atomicity := by
+  map_cert Meta.atomicity_and_bf_relational_imply_strong_atomicity
 
-/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-leibniz` -/
-theorem necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_leibniz : Statements.necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_leibniz := by
-  map_cert Meta.necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_leibniz
+/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-atomicity` -/
+theorem necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_atomicity : Statements.necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_atomicity := by
+  map_cert Meta.necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_atomicity
 
 /-- `gallin-comprehension-implies-strong-actuality` -/
 theorem gallin_comprehension_implies_strong_actuality : Statements.gallin_comprehension_implies_strong_actuality := by
@@ -1682,17 +1692,17 @@ theorem well_ordering_weak_rigid_comprehension_and_bf_imply_modal_well_ordering 
 theorem bf_weak_rigid_comprehension_atomicity_and_relational_choice_imply_intensional_choice : Statements.bf_weak_rigid_comprehension_atomicity_and_relational_choice_imply_intensional_choice := by
   map_cert Meta.bf_weak_rigid_comprehension_atomicity_and_relational_choice_imply_intensional_choice
 
-/-- `strong-leibniz-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice` -/
-theorem strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice : Statements.strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice := by
-  map_cert Proofs.strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice.entails
+/-- `strong-atomicity-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice` -/
+theorem strong_atomicity_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice : Statements.strong_atomicity_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice := by
+  map_cert Proofs.strong_atomicity_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice.entails
 
-/-- `strong-leibniz-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t` -/
-theorem strong_leibniz_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t : Statements.strong_leibniz_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t := by
+/-- `strong-atomicity-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t` -/
+theorem strong_atomicity_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t : Statements.strong_atomicity_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t := by
   map_cert _root_.Classicism.slt_nrc_rp_bft.entails
 
-/-- `strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational` -/
-theorem strong_leibniz_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational : Statements.strong_leibniz_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational := by
-  map_cert Meta.strong_leibniz_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational
+/-- `strong-atomicity-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational` -/
+theorem strong_atomicity_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational : Statements.strong_atomicity_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational := by
+  map_cert Meta.strong_atomicity_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational
 
 /-- `atomicity-and-rigid-comprehension-imply-rigid-power` -/
 theorem atomicity_and_rigid_comprehension_imply_rigid_power : Statements.atomicity_and_rigid_comprehension_imply_rigid_power := by
@@ -1702,9 +1712,9 @@ theorem atomicity_and_rigid_comprehension_imply_rigid_power : Statements.atomici
 theorem necessary_atomicity_and_necessary_rigid_comprehension_imply_necessary_rigid_power : Statements.necessary_atomicity_and_necessary_rigid_comprehension_imply_necessary_rigid_power := by
   map_cert Meta.necessary_atomicity_and_necessary_rigid_comprehension_imply_necessary_rigid_power
 
-/-- `necessary-strong-leibniz-and-necessary-rigid-comprehension-imply-necessary-bf-relational` -/
-theorem necessary_strong_leibniz_and_necessary_rigid_comprehension_imply_necessary_bf_relational : Statements.necessary_strong_leibniz_and_necessary_rigid_comprehension_imply_necessary_bf_relational := by
-  map_cert Meta.necessary_strong_leibniz_and_necessary_rigid_comprehension_imply_necessary_bf_relational
+/-- `necessary-strong-atomicity-and-necessary-rigid-comprehension-imply-necessary-bf-relational` -/
+theorem necessary_strong_atomicity_and_necessary_rigid_comprehension_imply_necessary_bf_relational : Statements.necessary_strong_atomicity_and_necessary_rigid_comprehension_imply_necessary_bf_relational := by
+  map_cert Meta.necessary_strong_atomicity_and_necessary_rigid_comprehension_imply_necessary_bf_relational
 
 /-- `modalized-relational-choice-implies-intensional-choice` -/
 theorem modalized_relational_choice_implies_intensional_choice : Statements.modalized_relational_choice_implies_intensional_choice := by
@@ -1850,13 +1860,13 @@ theorem vicinity_and_barcan_t_imply_two_hat_implies_nd : Statements.vicinity_and
 theorem necessary_vicinity_and_necessary_barcan_t_imply_necessary_two_hat_implies_nd : Statements.necessary_vicinity_and_necessary_barcan_t_imply_necessary_two_hat_implies_nd := by
   map_cert Proofs.necessary_vicinity_and_necessary_barcan_t_imply_necessary_two_hat_implies_nd.entails
 
-/-- `strong-leibniz-t-implies-two-hat-implies-nd` -/
-theorem strong_leibniz_t_implies_two_hat_implies_nd : Statements.strong_leibniz_t_implies_two_hat_implies_nd := by
-  map_cert Proofs.strong_leibniz_t_implies_two_hat_implies_nd.entails
+/-- `strong-atomicity-t-implies-two-hat-implies-nd` -/
+theorem strong_atomicity_t_implies_two_hat_implies_nd : Statements.strong_atomicity_t_implies_two_hat_implies_nd := by
+  map_cert Proofs.strong_atomicity_t_implies_two_hat_implies_nd.entails
 
-/-- `necessary-strong-leibniz-t-implies-necessary-two-hat-implies-nd` -/
-theorem necessary_strong_leibniz_t_implies_necessary_two_hat_implies_nd : Statements.necessary_strong_leibniz_t_implies_necessary_two_hat_implies_nd := by
-  map_cert Proofs.necessary_strong_leibniz_t_implies_necessary_two_hat_implies_nd.entails
+/-- `necessary-strong-atomicity-t-implies-necessary-two-hat-implies-nd` -/
+theorem necessary_strong_atomicity_t_implies_necessary_two_hat_implies_nd : Statements.necessary_strong_atomicity_t_implies_necessary_two_hat_implies_nd := by
+  map_cert Proofs.necessary_strong_atomicity_t_implies_necessary_two_hat_implies_nd.entails
 
 /-- `no-pure-contingency-and-truth-implies-five-necessity-imply-necessary-truth-implies-five-necessity` -/
 theorem no_pure_contingency_and_truth_implies_five_necessity_imply_necessary_truth_implies_five_necessity : Statements.no_pure_contingency_and_truth_implies_five_necessity_imply_necessary_truth_implies_five_necessity := by
@@ -1908,22 +1918,22 @@ there by the map's own pipeline. -/
 theorem relational_choice_and_boolean_completeness_imply_actuality : Statements.relational_choice_and_boolean_completeness_imply_actuality := by
   map_cert _root_.Classicism.Research.Choice.choice_completeness_actuality_sharp.entails
 
-/-- `strong-leibniz-and-rigid-comprehension-imply-necessary-strong-leibniz` -/
-theorem strong_leibniz_and_rigid_comprehension_imply_necessary_strong_leibniz : Statements.strong_leibniz_and_rigid_comprehension_imply_necessary_strong_leibniz := by
+/-- `strong-atomicity-and-rigid-comprehension-imply-necessary-strong-atomicity` -/
+theorem strong_atomicity_and_rigid_comprehension_imply_necessary_strong_atomicity : Statements.strong_atomicity_and_rigid_comprehension_imply_necessary_strong_atomicity := by
   map_cert (AxiomSet.Entails.mono_right (schema_subset_args _)
-    _root_.Classicism.Research.SealedWorldCover.sl_rc_implies_necessary_strong_leibniz.listEntails)
+    _root_.Classicism.Research.SealedWorldCover.strong_atomicity_rc_implies_necessary_strong_atomicity.listEntails)
 
-/-- `strong-leibniz-and-rigid-comprehension-imply-necessary-rigid-comprehension` -/
-theorem strong_leibniz_and_rigid_comprehension_imply_necessary_rigid_comprehension : Statements.strong_leibniz_and_rigid_comprehension_imply_necessary_rigid_comprehension := by
+/-- `strong-atomicity-and-rigid-comprehension-imply-necessary-rigid-comprehension` -/
+theorem strong_atomicity_and_rigid_comprehension_imply_necessary_rigid_comprehension : Statements.strong_atomicity_and_rigid_comprehension_imply_necessary_rigid_comprehension := by
   map_cert (
-    have sl := AxiomSet.Entails.union_left P.StrongLeibniz.schema P.RigidComprehension.schema
-    have rc := AxiomSet.Entails.union_right P.StrongLeibniz.schema P.RigidComprehension.schema
+    have sl := AxiomSet.Entails.union_left P.StrongAtomicity.schema P.RigidComprehension.schema
+    have rc := AxiomSet.Entails.union_right P.StrongAtomicity.schema P.RigidComprehension.schema
     have hs := AxiomSet.Entails.union (AxiomSet.Entails.union (AxiomSet.Entails.union
       (AxiomSet.Entails.union sl sl) sl) sl) sl
     have hr := AxiomSet.Entails.union (AxiomSet.Entails.union (AxiomSet.Entails.union
       (AxiomSet.Entails.union hs rc) rc) rc) rc
     AxiomSet.Entails.mono_right (schema_subset_args _) (AxiomSet.Entails.trans hr
-      _root_.Classicism.Research.ModalPropagationConsequences.sl_rc_necessary_comprehension.listEntails))
+      _root_.Classicism.Research.ModalPropagationConsequences.strong_atomicity_rc_necessary_comprehension.listEntails))
 
 /-- `c5-and-atomicity-t-imply-no-pure-contingency` (ported 25 October 2026) -/
 theorem c5_and_atomicity_t_imply_no_pure_contingency : Statements.c5_and_atomicity_t_imply_no_pure_contingency :=

@@ -11,7 +11,7 @@ individuals is not generated: the base at the evaluation object is the single po
 At its evaluation point this model satisfies Atomicity, Rigid Comprehension (hence
 Boolean Completeness and Tame Rigidity), Relational Choice, Weakly Rigid Power (hence
 Rigid Power) and □Strong Actuality, and fails □Tame Rigidity, BF (at $t$, and at every
-relational type), ND (at $t$) and the Strong Leibniz Biconditionals (at $t$, and at
+relational type), ND (at $t$) and Strong Atomicity (at $t$, and at
 every relational type). So Rigid Comprehension and Weakly Rigid Power, even with the
 rest, do not make Tame Rigidity necessary.
 
@@ -109,14 +109,14 @@ qualitative-links model with one individual. The domains at $B$ are those of tha
 $d$ being a pinning point only, and the entrance adds no arrow out of $B$, so the same relation refutes Tame Rigidity at
 $B$. As $B$ is reachable from $A$, □Tame Rigidity fails at $A$.
 
-## 6. Strong Actuality; BF, ND and Strong Leibniz fail
+## 6. Strong Actuality; BF, ND and Strong Atomicity fails
 
 The propositions at $A$ are the four pairs $(a,b)$ of truth values, and their
 transports to $B$ are $\bot$ or $\top$. Let $r:=(\top,\bot)$, the proposition true at $A$
 only.
 
 *□Strong Actuality.* $r$ is a true atom at $A$, and its transport $\bot$ decides every
-proposition at $B$, so $r$ is a strong world at $A$ entailing every truth. At $B$, the
+proposition at $B$, so $r$ is a strong atom at $A$ entailing every truth. At $B$, the
 tail's strong true atom does the same (the tail satisfies □Strong Actuality). So
 Strong Actuality holds at both objects.
 
@@ -127,12 +127,12 @@ contingent proposition.
 
 *ND at $t$ fails.* $r\ne\bot$ at $A$, while $i\cdot r=\bot=i\cdot\bot$.
 
-*Strong Leibniz at $t$ fails.* $\neg r=(\bot,\top)$ is an atom at $A$ with transport $\top$
-at $B$, which a contingent proposition of the tail splits; so it is not a strong world,
-and no strong world lies below it.
+*Strong Atomicity at $t$ fails.* $\neg r=(\bot,\top)$ is an atom at $A$ with transport $\top$
+at $B$, which a contingent proposition of the tail splits; so it is not a strong atom,
+and no strong atom lies below it.
 
 The relational forms fail too: through $p\mapsto\lambda\bar x\, .\,p$ and back by
-universal quantification, BF or Strong Leibniz at a relational type would give it at
+universal quantification, BF or Strong Atomicity at a relational type would give it at
 $t$.
 
 ## Remark

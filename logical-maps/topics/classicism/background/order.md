@@ -27,6 +27,9 @@ $$
 \operatorname{LB}_\tau(y,X)&:=\forall z^\tau\, .\,Xz\to y\le_\tau z,\\
 \operatorname{GLB}_\tau(y,X)&:=\forall z^\tau\, .\,
   \operatorname{LB}_\tau(z,X)\leftrightarrow z\le_\tau y,\\
+\operatorname{UB}_\tau(y,X)&:=\forall z^\tau\, .\,Xz\to z\le_\tau y,\\
+\operatorname{LUB}_\tau(y,X)&:=\forall z^\tau\, .\,
+  \operatorname{UB}_\tau(z,X)\leftrightarrow y\le_\tau z,\\
 \operatorname{Atom}_\tau(y)&:=\forall z^\tau\, .\,
   (z\le_\tau y\land z\ne y)\leftrightarrow z\le_\tau\neg_\tau z.
 \end{aligned}
@@ -34,12 +37,35 @@ $$
 
 Thus an atom is non-bottom {lean: Classicism.not_le_neg_of_atom, Classicism.atom_ne_false} and has no
 non-bottom strict lower bound.
-These are the definitions of *Classicism*, §2.2, pp. 23–24.
+$\operatorname{LB}$, $\operatorname{GLB}$ and $\operatorname{Atom}$ are the definitions of
+*Classicism*, §2.2, pp. 23–24; $\operatorname{UB}$ and $\operatorname{LUB}$ are their duals.
 :::
 
-Boolean Completeness is stated with $\operatorname{GLB}$. The dual form,
-with $\operatorname{LUB}_\tau(y,X):=\forall z^\tau\, .\,
-(\forall w^\tau\, .\,Xw\to w\le_\tau z)\leftrightarrow y\le_\tau z$,
-is equivalent to it in C, and some proofs in the map use that form: the greatest lower
-bound of a property's upper bounds is its least upper bound, and dually
+So $y$ is a lower (upper) bound of $X$ when it entails (is entailed by) every member of $X$,
+and a greatest lower (least upper) bound when the lower (upper) bounds of $X$ are exactly what
+entails it (what it entails).
+
+::: lemma {#glb-neg-lub}
+title: greatest lower bounds and least upper bounds
+lean: [Classicism.glb_neg_iff_lub, Classicism.lb_neg_iff_ub_neg]
+---
+At a relational type $\tau$, the negation of a least upper bound of $X$ is a greatest lower
+bound of the negations of the members of $X$, and conversely:
+$\operatorname{GLB}_\tau(\neg_\tau y,\lambda w\, .\,X(\neg_\tau w))\leftrightarrow
+\operatorname{LUB}_\tau(y,X)$.
+
+*Proof.* Negation reverses $\le_\tau$, since necessary pointwise implication contraposes, and
+$\neg_\tau\neg_\tau z=z$ by [[intensionality-r|Intensionality]]
+{lean: Classicism.neg_le_neg_rel, Classicism.neg_neg_rel}. Hence $z\le_\tau\neg_\tau y$ iff
+$y\le_\tau\neg_\tau z$, and $z$ is a lower bound of the negations of the members of $X$ iff
+$\neg_\tau z$ is an upper bound of $X$. So the lower bounds of $\lambda w\, .\,X(\neg_\tau w)$
+are exactly the entities below $\neg_\tau y$ iff the upper bounds of $X$ are exactly the
+entities above $y$. $\square$
+:::
+
+The greatest lower bound of a property's upper bounds is also its least upper bound, and dually
 {lean: Classicism.lub_of_glb_ubs, Classicism.glb_of_lub_lbs}.
+
+Classicism does not entail that any relational type $\tau$ forms a *complete* or an *atomic*
+Boolean algebra, though these claims can consistently be added: see
+[[boolean-completeness-r|Boolean Completeness]] and [[atomicity-r|Atomicity]].

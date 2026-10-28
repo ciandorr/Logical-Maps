@@ -149,7 +149,7 @@ theorem box_le_or_le (w q : Prop) (h : w ≤ q ∨ w ≤ ¬ q) : □ (w ≤ q �
       (box_le_prop w (¬ q) h))
 
 /-- `¬p ≤ p` says that `p` is necessary: `p = (¬p ∨ p)` and `¬p ∨ p` is `⊤`. The duals of
-Atomicity and Strong Leibniz at `t` are stated with `□p`. -/
+Atomicity and Strong Atomicity at `t` are stated with `□p`. -/
 theorem neg_le_iff_box (p : Prop) : (¬ p) ≤ p ↔ □ p :=
   have e : (¬ p ∨ p) = True := (or_comm_eq (¬ p) p).trans (em_eq p)
   ⟨fun h => h.trans e, fun h => h.trans e.symm⟩
@@ -321,6 +321,41 @@ theorem eq_bot_of_le_neg_rel (x : τ) (h : x ≤ ¬ x) : x = ⊥ :=
   le_antisymm_rel x ⊥
     ((le_iff _ _).2 (modal_K _ _ (nec% (incl_of_incl_neg x (⊥ : τ))) ((le_iff _ _).1 h)))
     (bot_le_rel x)
+
+/-- `¬_τ` reverses `≤`: `x ≤ y → ¬y ≤ ¬x`. -/
+theorem neg_le_neg_rel (x y : τ) (h : x ≤ y) : (¬ y) ≤ (¬ x) :=
+  (le_iff _ _).2 (modal_K _ _ (nec% (incl_contra x y)) ((le_iff _ _).1 h))
+
+/-- `¬_τ ¬_τ x = x`. -/
+theorem neg_neg_rel (x : τ) : (¬ ¬ x) = x :=
+  le_antisymm_rel _ _ (neg_neg_le_rel x) (le_neg_neg_rel x)
+
+/-- `¬y ≤ ¬x → x ≤ y`. -/
+theorem le_of_neg_le_neg_rel (x y : τ) (h : (¬ y) ≤ (¬ x)) : x ≤ y := by
+  have h' := neg_le_neg_rel _ _ h
+  rw [neg_neg_rel, neg_neg_rel] at h'
+  exact h'
+
+/-- `z ≤ ¬y → y ≤ ¬z`. -/
+theorem le_neg_comm_rel (y z : τ) (h : z ≤ ¬ y) : y ≤ ¬ z := by
+  have h' := neg_le_neg_rel _ _ h
+  rw [neg_neg_rel] at h'
+  exact h'
+
+/-- `z` is a lower bound of the negations of the members of `X` iff `¬z` is an upper bound
+of `X`. -/
+theorem lb_neg_iff_ub_neg (X : τ → Prop) (z : τ) : LB z (λ w ↦ X (¬ w)) ↔ UB (¬ z) X :=
+  ⟨fun h x hx => le_neg_comm_rel x z (h (¬ x) (show X (¬ ¬ x) by rw [neg_neg_rel]; exact hx)),
+   fun h w hw => le_of_neg_le_neg_rel z w (h (¬ w) hw)⟩
+
+/-- The greatest lower bound of the negations of the members of `X` is the negation of
+their least upper bound: `GLB(¬y, λw. X(¬w)) ↔ LUB(y, X)`. -/
+theorem glb_neg_iff_lub (X : τ → Prop) (y : τ) : GLB (¬ y) (λ w ↦ X (¬ w)) ↔ LUB y X :=
+  ⟨fun h u => by
+     have e : UB u X ↔ LB (¬ u) (λ w ↦ X (¬ w)) := by rw [lb_neg_iff_ub_neg, neg_neg_rel]
+     exact e.trans ((h (¬ u)).trans ⟨le_of_neg_le_neg_rel y u, neg_le_neg_rel y u⟩),
+   fun h z => (lb_neg_iff_ub_neg X z).trans ((h (¬ z)).trans
+     ⟨le_neg_comm_rel z y, le_neg_comm_rel y z⟩)⟩
 
 end rel
 

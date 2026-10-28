@@ -1,0 +1,53 @@
+id: strong-atomicity-r
+name: Strong Atomicity
+category: lattice
+statement: 'At each relational type, every possible entity (one distinct from bottom) is entailed by a
+  strong atom: a possible entity that necessarily entails every entity of the type or its negation. The
+  right-to-left direction is a theorem of C; the principle records the substantive direction.'
+formal: $\forall X^\sigma\, .\,\Diamond_\sigma X\to\exists W^\sigma\, .\,\operatorname{SAtom}_\sigma(W)\land
+  W\le_\sigma X\qquad(\sigma\ne e)$
+definitions: 'where $\Diamond_\sigma X:=X\ne\bot_\sigma$ and $\operatorname{SAtom}_\sigma(W):=\Diamond_\sigma
+  W\land\Box\forall Y^\sigma\, .\,W\le_\sigma Y\lor W\le_\sigma\neg_\sigma Y$: a strong atom is a possible
+  entity that necessarily entails every entity of its type or its negation.'
+date: '2026-09-22'
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, pp. 164–166.
+source_names:
+- Philosophical Introduction to HOL
+references:
+- paper: bacon-2024-book
+  role: formulation
+  locator: §8.2, pp. 164–166
+notes: 'Strong Atomicity is one direction of what Bacon calls the Strong Leibniz Biconditionals; the other
+  direction is a theorem of C. His name for a strong atom is a strong world. It is his higher-order
+  rendering of the possible-worlds thesis that a proposition is possible iff true at some world, with
+  worlds required to settle merely possible propositions too. Definitions in Background ([[strong-atoms]]).
+  The book presents the connection between Strong Atomicity and BF at relational types as new to it (§8.4,
+  p. 177).'
+changes:
+- date: '2026-10-19'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: definitions of its technical terms added.'
+- date: '2026-10-27'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: renamed from the Strong Leibniz Biconditionals to Strong Atomicity,
+    and strong worlds to strong atoms; Bacon’s name kept as an alias.'
+aliases:
+- Strong Leibniz Biconditionals (Bacon 2024)
+variants:
+- id: dual
+  lean:
+    ref: Classicism.P.StrongAtomicityDual.schemaIn
+    equivalence_ref: Classicism.Map.strong_atomicity_r.dual
+    status: verified
+  name: Dual form
+  statement: Whatever is entailed by every strong atom of its type is the top element of that type.
+  formal: $\forall X^\sigma\, .\,(\forall W^\sigma\, .\,\operatorname{SAtom}_\sigma(W)\to W\le_\sigma
+    X)\to\neg_\sigma X\le_\sigma X\qquad(\sigma\ne e)$
+  equivalence: 'As for the dual form of Atomicity. A strong atom $W$ is non-bottom and, by T applied
+    to its boxed clause, lies below $Y$ or below $\neg_\sigma Y$ for every $Y$. Official to dual: if every
+    strong atom lies below $X$ but $\neg_\sigma X$ is non-bottom, a strong atom lies below $\neg_\sigma
+    X$ and $X$, hence below bottom, which is impossible. Dual to official: if $X$ is non-bottom and no
+    strong atom lies below it, every strong atom lies below $\neg_\sigma X$, so $X$ is bottom by the
+    dual form.'
+lean_def: Classicism.P.StrongAtomicity.schemaIn

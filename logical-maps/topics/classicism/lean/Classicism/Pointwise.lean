@@ -266,6 +266,11 @@ theorem incl_neg_of_and_constP (X : τ) (p : Prop) :
 theorem incl_neg_neg' (X : τ) : X ⊆ ¬ ¬ X :=
   incl_neg_intro X (¬ X) X (incl_and_left X (¬ X)) (incl_and_right X (¬ X))
 
+/-- `X ⊑ Y → ¬_τ Y ⊑ ¬_τ X`: contraposition, pointwise. -/
+theorem incl_contra (X Y : τ) : X ⊆ Y → (¬ Y) ⊆ (¬ X) :=
+  fun h => incl_neg_intro (¬ Y) X Y (incl_trans _ X Y (incl_and_right (¬ Y) X) h)
+    (incl_and_left (¬ Y) X)
+
 /-- `X ⊑ Y → X ⊑ ¬_τ Y → X ⊑ ¬_τ X`: what is below a relation and its negation is below
 its own negation. -/
 theorem incl_neg_of_incl_both (X Y : τ) : X ⊆ Y → X ⊆ ¬ Y → X ⊆ ¬ X :=

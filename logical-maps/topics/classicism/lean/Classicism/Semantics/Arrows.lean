@@ -21,7 +21,7 @@ non-injectivity):
   (`Premodel.not_fregean_of_propFull`).
 - **`identity-singletons`** and **`unique-retractions-everywhere`**: at each world, the
   singleton of the identity becomes, along an arrow, the set of that arrow's retractions, at
-  most one, so it is a true strong world: Strong Actuality and its necessitation
+  most one, so it is a true strong atom: Strong Actuality and its necessitation
   (`holds_box_strongActuality_of_unique`): `strong-actuality-unique-retractions`.
 - **`separated-retractions`**: a true proposition becomes, along an arrow with two
   retractions, a set containing both, which a proposition there separates, so Strong Actuality
@@ -203,16 +203,16 @@ theorem not_holds_dpc_of_returning {B : Premodel Signature.pure C} (M : B.IsMode
   exact hne this
 
 omit M in
-/-- **Strong Leibniz at `t` fails** in a full model with an arrow `k` out of the evaluation
+/-- **Strong Atomicity at `t` fails** in a full model with an arrow `k` out of the evaluation
 object that is not an epimorphism, `k ≫ j = k ≫ j'` with `j ≠ j'`: the proposition `{k ≫ j}` is
-possible, its only candidate strong world is itself, and after `k` it holds at both `j` and
+possible, its only candidate strong atom is itself, and after `k` it holds at both `j` and
 `j'`, which a proposition there separates. -/
-theorem not_holds_strongLeibnizT_of_nonepic {B : Premodel Signature.pure C} (M : B.IsModel)
-    (hF : B.Full) (hN : B.NonepicArrow) : ¬ B.HoldsSentence P.StrongLeibnizT.quoted := by
+theorem not_holds_strongAtomicityT_of_nonepic {B : Premodel Signature.pure C} (M : B.IsModel)
+    (hF : B.Full) (hN : B.NonepicArrow) : ¬ B.HoldsSentence P.StrongAtomicityT.quoted := by
   obtain ⟨V, U, k, j, j', hjj', hk⟩ := hN
   have sem_bot' : ∀ {Γ : Ctx} {W : C} (h : B.W₀ ⟶ W) (g : IEnv (B.Dom W) Γ),
       B.sem h (Term.bot : Formula Signature.pure Γ) g = ∅ := fun h g => B.sem_bot M h g
-  simp only [Premodel.HoldsSentence, P.StrongLeibnizT.quoted, B.holds_forall M, B.holds_imp M,
+  simp only [Premodel.HoldsSentence, P.StrongAtomicityT.quoted, B.holds_forall M, B.holds_imp M,
     B.holds_exists M, B.holds_conj M, B.holds_neg M, B.holds_box M, B.holds_disj M]
   simp only [B.holds_eq M, sem_var, sem_bot', B.sem_disj M, B.sem_neg M, IEnv.get, IEnv.get_map,
     B.incl_map]

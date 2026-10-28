@@ -4,8 +4,7 @@ Use the shared mathematical workflow in the repository's `AGENTS.md` files.
 Paths below are relative to `topics/classicism/`. Start with `topic.yaml` and
 the relevant page of `background/`; read the editing rules before edits. Its pages,
 in order: `framework` (C, types, notation, conventions, evidence), `necessity`,
-`order` (pointwise operations, ≤, LB/GLB/LUB), `worlds` (atoms, strong and weak
-worlds), `rigidity`, `varieties` (□≠, hats, □5), `relations` (functional, equivalence
+`order` (pointwise operations, ≤, LB/GLB/LUB), `atoms` (atoms and strong atoms), `rigidity`, `varieties` (□≠, hats, □5), `relations` (functional, equivalence
 and order predicates; Bourbaki–Witt), `arithmetic` (cardinality, arithmetic,
 analysis), `signatures` (pure and signature schemata).
 
@@ -20,7 +19,7 @@ Read a matching `writeups/<id>.md` when it exists.
 | C, Classicism, H, Logical Equivalence, relational types | `topic.yaml`; `background/framework.md`; it defines the standing logic |
 | BF / Barcan; CBF; NI; ND | `barcan-r`, `converse-barcan-r`, `identity-necessary-r`, `distinctness-necessary-r`; `-t` variants where present |
 | C5, boxed ND | preset `c5` = `necessary-distinctness-necessary-r`; not unboxed ND |
-| BC, completeness, atomicity, weak/strong worlds, Leibniz, Strong Actuality | `boolean-completeness-r`, `atomicity-r`, `strong-leibniz-r`, `strong-actuality`; corresponding `-t` and `necessary-` records; definitions in `background/order.md` and `background/worlds.md` |
+| BC, completeness, atomicity, strong atoms, Strong Atomicity (Leibniz Biconditionals), Strong Actuality | `boolean-completeness-r`, `atomicity-r`, `strong-atomicity-r`, `strong-actuality`; corresponding `-t` and `necessary-` records; definitions in `background/order.md` and `background/worlds.md` |
 | RC, rigidity, persistence, inextensibility, weak rigidity, Gallin | `rigid-comprehension-r`, `persistent-comprehension-r`, `inextensible-comprehension-r`, `weakly-inextensible-comprehension-r`, `weak-rigid-comprehension-r`, `gallin-extensional-comprehension-r` |
 | Choice, Plenitude, Actuality, transversals or selectors for equivalence relations | `functional-choice-r`, `relational-choice-r`, `transversal-choice-r`, `plenitude-r`, `actuality`, `actual-profile-r` |
 | Extensionality, Fregean Axiom, Functionality, Tractarianism | `extensionality-r`, `fregean-axiom`, `functionality-r`, `tractarianism-r`; distinguish `modalized-` and `necessary-` variants |

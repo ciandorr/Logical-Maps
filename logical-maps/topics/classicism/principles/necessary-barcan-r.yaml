@@ -61,4 +61,15 @@ variants:
   equivalence: Each instance of the dual polyadic form of BF is derivable in C from finitely many instances
     of the official form, and conversely; the derivation is on the page of BF. Necessitating it and applying
     K carries the equivalence to the boxed forms.
+- id: universal-rigid
+  lean:
+    ref: Classicism.P.NecBarcanUniversalRigid.schemaIn
+    equivalence_ref: Classicism.Map.necessary_barcan_r.universal_rigid
+    status: verified
+  name: Rigidity of the universal property
+  statement: The universal property, of being something, is rigid.
+  formal: $\operatorname{Rigid}(\lambda z^\sigma\, .\,\top)$
+  equivalence: 'Rigidity is necessary weak rigidity ([[weak-rigidity-predicates]]), and the weak rigidity of
+    $\lambda z\, .\,\top$ is equivalent to BF at $\sigma$ in C; see the form on the page of BF. Necessitating
+    that equivalence and applying K carries it to □BF.'
 lean_def: Classicism.P.NecBarcan.schemaIn

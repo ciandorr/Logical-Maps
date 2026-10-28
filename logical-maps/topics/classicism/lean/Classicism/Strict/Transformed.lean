@@ -18,7 +18,7 @@ does not redeclare what exists.
 
 The report lists any theorem not reached, with the reason. Today every theorem is reached
 except ten of the equivalences between forms in `Principles/Lattice.lean` and
-`Principles/Instances.lean` (Atomicity and Strong Leibniz and their duals), which use the
+`Principles/Instances.lean` (Atomicity and Strong Atomicity and their duals), which use the
 classical laws of `Pointwise` (`incl_neg_intro`, `incl_neg_neg`): `SPointwise` mirrors
 only the class's first eleven laws.
 -/

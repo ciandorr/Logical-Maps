@@ -75,7 +75,7 @@ Each factor is a full S5 model, at every world:
 - the domains are constant, which gives □BF;
 - identity is crisp, which gives C5;
 - the algebra of propositions is atomic, and its atoms are the worlds, each entailing every
-  truth, which gives □Atomicity, □Actuality and □Strong Leibniz;
+  truth, which gives □Atomicity, □Actuality and □Strong Atomicity;
 - any two worlds are related by an automorphism, so a true pure sentence is true
   everywhere: No Pure Contingency.
 

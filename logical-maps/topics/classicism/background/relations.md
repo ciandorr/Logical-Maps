@@ -122,10 +122,17 @@ preorders: coextensive but distinct relations each include the other.
 ::: lemma {#bourbaki-witt}
 title: the Bourbaki–Witt fixed-point lemma
 ---
-Work at any type $\sigma$, including
-$e$. Let $X^{\sigma t}$ be a property, $R^{\sigma\sigma t}$ a relation, and
-$F^{\sigma\sigma t}$ a relation, written $x\preccurlyeq y$ for $(Rx)y$ and
-$x\prec y$ for $x\preccurlyeq y\land x\ne y$. For properties $Z,Y$ of type $\sigma t$ write $Z\subseteq Y$ for $\forall x\, .\,Zx\to Yx$ (actual inclusion, not $\le$). For $Z\subseteq X$ put
+Work at any type $\sigma$, including $e$. Let $X^{\sigma t}$ be a property, and
+$R^{\sigma\sigma t}$ and $F^{\sigma\sigma t}$ relations; write $x\preccurlyeq y$ for
+$(Rx)y$. Since $R$ need only be a preorder, put
+
+$$
+x\approx y:=x\preccurlyeq y\land y\preccurlyeq x,\qquad
+x\prec y:=x\preccurlyeq y\land\neg\,y\preccurlyeq x .
+$$
+
+When $R$ is antisymmetric on $X$, this $\prec$ agrees on $X$ with the shorthand
+$x\preccurlyeq y\land x\ne y$. For $Z\subseteq X$ put
 
 $$
 \begin{aligned}
@@ -134,19 +141,25 @@ $$
 \end{aligned}
 $$
 
+In this lemma a *chain* is a property $Z\subseteq X$ with $\operatorname{Total}(R,Z)$.
+Because $R$ is only a preorder, a chain need not be antisymmetric. That is weaker than
+being an $R$-chain in the sense above.
+
 Assume, at the evaluation point:
 
-1. $R$ partially orders $X$: it is reflexive on $X$, and
-   $\operatorname{Trans}(R,X)$ and $\operatorname{Antisymm}(R,X)$;
-2. every chain has a supremum in $X$: $\forall Z\, .\,Z\subseteq X\land
-   \operatorname{TotalOrder}(R,Z)\to\exists s\, .\,\operatorname{Sup}(s,Z)$;
-3. $F$ is a progressive function on $X$: for every $x$ with $Xx$ there is
-   exactly one $y$ with $(Fx)y$, written $f(x)$, and $Xf(x)$ and
-   $x\preccurlyeq f(x)$.
+1. $R$ preorders $X$: it is reflexive on $X$, and $\operatorname{Trans}(R,X)$;
+2. every chain has a supremum in $X$:
+   $\forall Z\, .\,Z\subseteq X\land\operatorname{Total}(R,Z)\to\exists s\, .\,\operatorname{Sup}(s,Z)$;
+3. $F$ is progressive and invariant on $X$: for every $x$ with $Xx$, there is some $y$
+   with $(Fx)y$, every such $y$ has $Xy$ and $x\preccurlyeq y$ (*progressive*), and if
+   moreover $x\approx x'$, $(Fx)y$ and $(Fx')y'$, then $y\approx y'$ (*invariant*).
+
+Taking $x':=x$ in the invariance clause, any two $F$-values of one $x$ are
+$\approx$-equivalent; $F$ is functional up to $\approx$.
 
 Call $Y^{\sigma t}$ *closed* if $Y\subseteq X$,
-$\forall x\, .\,Yx\to Yf(x)$, and $\forall Z\,s\, .\,Z\subseteq Y\land
-\operatorname{TotalOrder}(R,Z)\land\operatorname{Sup}(s,Z)\to Ys$. Let
+$\forall x\,y\, .\,Yx\land(Fx)y\to Yy$, and
+$\forall Z\,s\, .\,Z\subseteq Y\land\operatorname{Total}(R,Z)\land\operatorname{Sup}(s,Z)\to Ys$. Let
 
 $$
 M:=\lambda x\, .\,\forall Y\, .\,\operatorname{Closed}(Y)\to Yx
@@ -155,46 +168,104 @@ $$
 be the least closed property (the *tower*). Then:
 
 - (a) $M$ is closed, and $M\subseteq Y$ for every closed $Y$;
-- (b) for all $b,c$ with $Mb$ and $Mc$: $c\preccurlyeq b$ or $f(b)\preccurlyeq c$.
-  In particular $M$ is a chain, and $b\prec c$ implies $f(b)\preccurlyeq c$;
-- (c) the supremum $m$ of $M$ satisfies $Mm$ and $f(m)=m$.
+- (b) for all $b,c,d$ with $Mb$, $Mc$ and $(Fb)d$: $c\preccurlyeq b$ or $d\preccurlyeq c$.
+  In particular $M$ is a chain, and if $b\prec c$ then $d\preccurlyeq c$;
+- (c) $M$ has a supremum, and every supremum $m$ of $M$ satisfies $Mm$, and $n\approx m$
+  whenever $(Fm)n$.
+
+Two special cases:
+
+- *Partial orders.* Suppose $R$ partially orders $X$ (Antisymm as well) and $F$ is
+  functional on $X$. Then $\approx$ is identity on $X$, a chain is an $R$-chain, invariance
+  is automatic, and (c) gives an $m$ in $X$ with $(Fm)m$.
+- *Inclusion.* Suppose $\sigma=\bar\tau t$ and $\preccurlyeq$ is $\subseteq$. Then
+  $\approx$ is coextension $\equiv$. Invariance says that coextensive arguments have
+  coextensive $F$-values.
 
 No choice principle is used, and the lemma holds at the evaluation point
 only; it is a theorem schema of C, so it can be necessitated when its
 hypotheses hold necessarily.
 
-*Proof.* (a) is immediate from the definition of $M$. Call $c$ a *pivot* if
-$Mc$ and $\forall b\, .\,Mb\land b\prec c\to f(b)\preccurlyeq c$.
+*Proof.* Throughout, $\preccurlyeq$ is transitive on $X$, and $x\preccurlyeq y\prec z$
+and $x\prec y\preccurlyeq z$ each give $x\prec z$.
 
-*Claim 1.* If $c$ is a pivot, then for every $b$ with $Mb$: $b\preccurlyeq c$ or
-$f(c)\preccurlyeq b$. Put $M_c:=\lambda b\, .\,Mb\land(b\preccurlyeq c\lor
-f(c)\preccurlyeq b)$. It is closed:
+(a) By hypotheses 2 and 3, $X$ is closed, so $M\subseteq X$. The remaining clauses are
+immediate from the definition of $M$.
 
-- if $b\prec c$ then $f(b)\preccurlyeq c$, as $c$ is a pivot; if $b=c$ then
-  $f(c)\preccurlyeq f(b)$; if $f(c)\preccurlyeq b$ then
-  $f(c)\preccurlyeq b\preccurlyeq f(b)$;
-- if $Z\subseteq M_c$ is a chain with supremum $s$: either $z\preccurlyeq c$ for
-  every $z$ with $Zz$, and then $s\preccurlyeq c$; or $f(c)\preccurlyeq z
-  \preccurlyeq s$ for some such $z$.
+Call $c$ a *pivot* if $Mc$ and
+$\forall b\,d\, .\,Mb\land b\prec c\land(Fb)d\to d\preccurlyeq c$.
 
-In each case the new member is in $M$, since $M$ is closed. So $M\subseteq M_c$ by (a).
+*Claim 1.* Let $c$ be a pivot and $(Fc)e$. Then for every $b$ with $Mb$:
+$b\preccurlyeq c$ or $e\preccurlyeq b$. Put
+$M_{c,e}:=\lambda b\, .\,Mb\land(b\preccurlyeq c\lor e\preccurlyeq b)$. It is closed:
+
+- Let $M_{c,e}b$ and $(Fb)d$. If $b\prec c$, then $d\preccurlyeq c$, as $c$ is a pivot.
+  If $b\approx c$, then $d\approx e$ by invariance, so $e\preccurlyeq d$. If
+  $e\preccurlyeq b$, then $e\preccurlyeq b\preccurlyeq d$.
+- Let $Z\subseteq M_{c,e}$ be a chain with supremum $s$. Either $z\preccurlyeq c$ for
+  every $z$ with $Zz$, and then $s\preccurlyeq c$; or $e\preccurlyeq z\preccurlyeq s$ for
+  some such $z$.
+
+In each case the new member is in $M$, since $M$ is closed. So $M\subseteq M_{c,e}$ by
+(a).
 
 *Claim 2.* Every $c$ with $Mc$ is a pivot. The pivots form a closed property:
 
-- if $c$ is a pivot and $Mb$, $b\prec f(c)$, then by Claim 1 $b\preccurlyeq c$
-  (the alternative $f(c)\preccurlyeq b$ would give $b=f(c)$); so either
-  $b\prec c$ and $f(b)\preccurlyeq c\preccurlyeq f(c)$, or $b=c$ and
-  $f(b)=f(c)$;
-- if $Z$ is a chain of pivots with supremum $s$, and $Mb$, $b\prec s$, then
-  $Ms$, since $M$ is closed, and some $z$ with $Zz$ has $z\not\preccurlyeq b$ (else $s\preccurlyeq b$).
-  By Claim 1 for $z$, $b\preccurlyeq z$ or $f(z)\preccurlyeq b$; the second would
-  give $z\preccurlyeq f(z)\preccurlyeq b$. So $b\prec z$, and
-  $f(b)\preccurlyeq z\preccurlyeq s$.
+- Let $c$ be a pivot and $(Fc)e$. Then $Me$, since $M$ is closed. Let $Mb$, $b\prec e$
+  and $(Fb)d$. By Claim 1, $b\preccurlyeq c$, since the alternative $e\preccurlyeq b$
+  contradicts $b\prec e$. If $b\prec c$, then $d\preccurlyeq c\preccurlyeq e$. If
+  $b\approx c$, then $d\approx e$ by invariance. Either way $d\preccurlyeq e$, so $e$ is
+  a pivot.
+- Let $Z$ be a chain of pivots with supremum $s$, and let $Mb$, $b\prec s$ and $(Fb)d$.
+  Then $Ms$, since $M$ is closed. Some $z$ with $Zz$ has $z\not\preccurlyeq b$; otherwise
+  $b$, which is in $X$, would bound $Z$, giving $s\preccurlyeq b$ and contradicting $b\prec s$. Take $e$ with $(Fz)e$.
+  By Claim 1 for $z$ and $e$, either $b\preccurlyeq z$ or $e\preccurlyeq b$. The second
+  would give $z\preccurlyeq e\preccurlyeq b$. So $b\prec z$, and
+  $d\preccurlyeq z\preccurlyeq s$, as $z$ is a pivot.
 
-Claims 1 and 2 give (b). For (c), $M$ is a chain included in $X$, so it has a
-supremum $m$; $Mm$ since $M$ is closed, so $Mf(m)$, so
-$f(m)\preccurlyeq m\preccurlyeq f(m)$, and $f(m)=m$. $\square$
+(b) Let $Mb$, $Mc$ and $(Fb)d$. By Claim 2, $b$ is a pivot. By Claim 1, applied to $b$,
+$d$ and $c$, either $c\preccurlyeq b$ or $d\preccurlyeq c$. In the second case
+$b\preccurlyeq d\preccurlyeq c$. So any two members of $M$ are comparable. If $b\prec c$,
+then $c\not\preccurlyeq b$, and so $d\preccurlyeq c$.
+
+(c) $M$ is a chain included in $X$, so it has a supremum. Let $m$ be one. Then $Mm$,
+since $M$ is closed. If $(Fm)n$, then $Mn$, so $n\preccurlyeq m$; and
+$m\preccurlyeq n$, as $F$ is progressive. So $n\approx m$. $\square$
 
 The tower also supports induction: to show that every member of $M$ has a
 property, show that the members of $M$ having it form a closed property.
+:::
+
+::: lemma {#bourbaki-witt-admissible}
+title: the Bourbaki–Witt lemma for admissible chains
+---
+The [[bourbaki-witt|Bourbaki–Witt lemma]] has a variant for the case where only some
+chains are known to have suprema. These are the chains singled out by a property
+$\mathcal A^{(\sigma t)t}$, the *admissible* properties. Take $X$, $R$ and $F$ as there,
+and change it as follows.
+
+- Hypothesis 2 is required only for admissible chains:
+  $\forall Z\, .\,\mathcal AZ\land Z\subseteq X\land\operatorname{Total}(R,Z)\to\exists s\, .\,\operatorname{Sup}(s,Z)$.
+- In the definition of *closed*, the clause for suprema is likewise restricted to
+  admissible $Z$. The tower quantifies only over admissible closed properties:
+  $M:=\lambda x\, .\,\forall Y\, .\,\mathcal AY\land\operatorname{Closed}(Y)\to Yx$.
+- There is a new hypothesis. Each of the properties that the proof forms must be
+  coextensive with an admissible property:
+  - $X$;
+  - $M$;
+  - the property of being a pivot;
+  - each $M_{c,e}$ of Claim 1.
+
+Conclusion (a) becomes: $M$ is closed, and $M\subseteq Y$ for every admissible closed
+$Y$. Conclusions (b) and (c) are unchanged.
+
+The proof is the same. Two facts let it go through:
+
+- closedness depends only on a property's actual extension;
+- the new hypothesis brings each property the proof forms within the scope of (a).
+
+With $\mathcal A:=\lambda Z\, .\,\top$ this is the original lemma.
+
+Only the actual extensions of admissible properties matter, so two predicates with the
+same admissible extensions give the same lemma.
 :::

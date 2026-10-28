@@ -1,189 +1,131 @@
 # Transversal Choice implies Zorn's Lemma
 
-The proof follows Jonathan Lewin, "A Simple Proof of Zorn's Lemma",
-*American Mathematical Monthly* 98 (1991), pp. 353–354. It is translated into
-C and adapted to preorders by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, at
-Cian Dorr's suggestion. Lewin's sets become properties, unions become
-existential quantifications, and his choice function becomes a functional
-relation. The translation is faithful except at four points. At each of them
-two properties are shown to be coextensive, and Lewin's $f$ is then assumed
-to give them the same value. For sets this is automatic. For properties it
-is not, and Transversal Choice is used to arrange it.
+The proof follows the route through the Bourbaki–Witt fixed-point lemma in Serge Lang,
+*Algebra*, Appendix 2. It applies the Bourbaki–Witt lemma (Background, "Relations, orders and fixed points") to the
+$R$-chains, preordered by inclusion. The step function adds a chosen point to any chain
+that can be extended. A fixed point is then a chain that nothing extends, and an upper
+bound of such a chain is maximal. The translation into C is by Claude Opus 5.5
+(Anthropic), prompted by Cian Dorr, 27 October 2026.
 
-**Claim.** For each type $\sigma$, including $e$, Transversal Choice
-(at the type $\sigma t$, and through Relational Choice at the types
-$\sigma t$ and $\sigma$) implies Zorn's Lemma at $\sigma$.
+**Claim.** For each type $\sigma$, including $e$, Transversal Choice implies Zorn's Lemma
+at $\sigma$. The proof uses two consequences of Transversal Choice:
 
-Preorder, TotalOrder, WellFounded and WO are as in Background. Everything
-is unboxed, and the whole argument takes place at the evaluation point.
+- Transversal at $\sigma$, which is Transversal Choice at $\sigma t$ for coextension;
+- Relational Choice at $(\sigma t,\sigma)$, by the recorded result that Transversal Choice
+  implies Relational Choice.
 
-## Notation
+Preorder, Total and TotalOrder are as in Background. Everything is unboxed, and the whole
+argument takes place at the evaluation point.
 
-Fix a preorder $R^{\sigma\sigma t}$, and write $x\preccurlyeq y$ for $(Rx)y$.
-Put
-$$x\prec y:=x\preccurlyeq y\land\neg\,y\preccurlyeq x.$$
-By transitivity, $x\preccurlyeq y\prec z$ and $x\prec y\preccurlyeq z$ each
-give $x\prec z$, and $x\prec x$ never holds. On a property $A$ that $R$
-totally orders, $x\prec y$ is equivalent to $x\preccurlyeq y\land x\ne y$,
-by antisymmetry on $A$; and for $x,y$ in $A$, exactly one of $x\prec y$,
-$x=y$, $y\prec x$ holds.
+## Setting
 
-For properties $C,D$ of type $\sigma t$, $C\subseteq D$ means
-$\forall y\, .\,Cy\to Dy$, and $C\equiv D$ means
-$\forall y\, .\,Cy\leftrightarrow Dy$. Lewin's equations between sets become
-$\equiv$, not $=$. The initial segment of $C$ below $x$ is the property
-$$P(C,x):=\lambda y\, .\,Cy\land y\prec x.$$
+Fix a preorder $R^{\sigma\sigma t}$, write $x\preccurlyeq y$ for $(Rx)y$, and suppose
+every $R$-chain has an upper bound. Here an $R$-chain is a property $C$ with
+$\operatorname{TotalOrder}(R,C)$.
 
-When $R$ well-orders $A$, every instantiated property included in $A$ has an
-$R$-minimal instance, which is its $R$-least instance since $R$ totally
-orders $A$. "The least instance of $Y$" below always refers to such a
-property $Y\subseteq A$.
+For $C^{\sigma t}$ and $y^\sigma$ put $C+y:=\lambda z\, .\,Cz\lor z=y$. Say that $y$
+*extends* $C$ if $\neg Cy$ and $C+y$ is an $R$-chain. Whether $y$ extends $C$ depends only
+on the extension of $C$.
 
-Suppose that every property $R$ totally orders has an upper bound, and,
-for reductio, that nothing is maximal: for every $m$ there is $y$ with
-$m\prec y$.
+## The step relation
 
-## An extensional choice relation
+The relation
 
-Let
-$$(UC)x:=\operatorname{TotalOrder}(R,C)\to\forall y\, .\,Cy\to y\prec x,$$
-a relation of type $\sigma t\to\sigma\to t$. It is serial. If $R$ totally
-orders $C$, take an upper bound $u$ of $C$ and then $v$ with $u\prec v$; every
-instance $y$ of $C$ has $y\preccurlyeq u\prec v$, so $y\prec v$. Otherwise
-every $x$ is a $U$-image of $C$. Whether $(UC)x$ holds depends only on the
-extension of $C$.
+$$
+(UC)y:=(\neg\exists y'\, .\,y'\text{ extends }C)\lor y\text{ extends }C
+$$
 
-Transversal Choice implies Relational Choice, by the recorded result, so
-there is a functional $S\subseteq U$. Coextensiveness is an equivalence
-relation on $\sigma t$, so Transversal Choice at $\sigma t$ also gives
-$\mathcal T^{(\sigma t)t}$ with exactly one instance coextensive with each
-property (this is Transversal at $\sigma$). Put
-$$(FC)x:=\exists D\, .\,\mathcal TD\land D\equiv C\land(SD)x.$$
-Then:
-- $F$ is **functional**, since exactly one $D$ in $\mathcal T$ is coextensive
-  with $C$, and $S$ is functional;
-- $F\subseteq U$, since $(SD)x$ gives $(UD)x$, and $U$ depends only on
-  extensions;
-- $F$ is **extensional**: if $C\equiv C'$ then $(FC)x\to(FC')x$, because the
-  same $D$ serves for both.
+is serial, so Relational Choice gives a functional $S\subseteq U$. Transversal gives
+$\mathcal T^{(\sigma t)t}$, with exactly one instance coextensive with each property. Put
 
-Lewin's proof uses extensionality of $f$ without comment, since for sets it
-is automatic. The steps marked **(E)** below are the four places where it is
-used. Everywhere else, $S$ in place of $F$ would serve, so the transversal is
-needed only at those four steps.
+$$
+\begin{aligned}
+(FC)D:=\exists C'\,k\, .\,{}&\mathcal TC'\land C'\equiv C\land(SC')k\\
+&\land\bigl((k\text{ extends }C\land D\equiv C+k)\lor
+(\neg\,k\text{ extends }C\land D\equiv C)\bigr).
+\end{aligned}
+$$
 
-## Conforming properties
+In words: to step from $C$, take the $\mathcal T$-representative $C'$ of $C$'s
+coextension class, take the point $k$ that $S$ chooses for $C'$, and add $k$ to $C$ if it
+extends $C$.
 
-Call $A^{\sigma t}$ **conforming** if
-- (a) $\operatorname{WO}(R,A)$, and
-- (b) $\forall x\, .\,Ax\to(F\,P(A,x))\,x$.
+## Applying Bourbaki–Witt
 
-**Lemma 1.** Let $A$ and $B$ be conforming, and suppose $A\not\subseteq B$.
-Let $x$ be the least instance of $\lambda w\, .\,Aw\land\neg Bw$. Then
-$B\equiv P(A,x)$.
+Apply the lemma at type $\sigma t$, with:
 
-*Proof.* First, $P(A,x)\subseteq B$, by the leastness of $x$. Suppose for
-contradiction that $B\not\subseteq P(A,x)$, and let $y$ be the least instance
-of $\lambda w\, .\,Bw\land\neg P(A,x)w$. By leastness of $y$,
-$$P(B,y)\subseteq P(A,x)\subseteq A. \tag{1}$$
-The property $\lambda w\, .\,Aw\land\neg P(B,y)w$ is instantiated by $x$,
-since $x$ is not an instance of $B$. Let $z$ be its least instance.
+- $X:=\lambda C\, .\,\operatorname{TotalOrder}(R,C)$, the $R$-chains;
+- $\preccurlyeq\ :=\ \subseteq$, so that $\approx$ is $\equiv$;
+- $F$ as above.
 
-We show $P(A,z)\equiv P(B,y)$.
-- $P(A,z)\subseteq P(B,y)$, by leastness of $z$.
-- Let $w$ be in $P(B,y)$. By (1), $w$ is in $A$ and $w\prec x$. If not
-  $w\prec z$, then $z\preccurlyeq w$, since $R$ totally orders $A$. Then
-  $z\preccurlyeq w\prec x$ gives $z\prec x$, so $z$ is in $P(A,x)$ and so in $B$.
-  And $z\preccurlyeq w\prec y$ gives $z\prec y$, so $z$ is in $P(B,y)$,
-  contradicting the choice of $z$. So $w\prec z$, and $w$ is in $P(A,z)$.
+The hypotheses hold as follows.
 
-By (b) for $A$ and for $B$, $(F\,P(A,z))\,z$ and $(F\,P(B,y))\,y$. Since
-$P(A,z)\equiv P(B,y)$, extensionality gives $(F\,P(A,z))\,y$ **(E)**, and
-functionality gives $y=z$. So $y$ is in $A$. It is not in $P(A,x)$, so
-$x\preccurlyeq y$, and $y\ne x$ since $y$ is in $B$ and $x$ is not. Hence
-$x\prec y=z$, so $x$ is in $P(A,z)\equiv P(B,y)\subseteq B$, contradicting
-the choice of $x$. $\square$
+**Hypothesis 1.** Inclusion is reflexive and transitive.
 
-**Lemma 2.** If $A$ and $B$ are conforming, then $A\subseteq B$ or
-$B\subseteq A$. If $A\subseteq B$, then $A$ is downward closed in $B$: if
-$Aa$, $Bb$ and $b\preccurlyeq a$, then $Ab$.
+**Hypothesis 2: chains have suprema.** Let $Z$ be a family of $R$-chains that $\subseteq$
+totally preorders, and put $J:=\lambda x\, .\,\exists C\, .\,ZC\land Cx$.
 
-*Proof.* The first part is Lemma 1. For the second, if also $B\subseteq A$
-there is nothing to show. Otherwise Lemma 1, with $A$ and $B$ exchanged,
-gives $A\equiv P(B,x)$ for some $x$, and $b\preccurlyeq a\prec x$ gives
-$b\prec x$. $\square$
+- $J$ is an $R$-chain. Each of Trans, Antisymm and Total concerns at most three instances
+  of $J$. Each of these lies in a member of $Z$, and the members are comparable under
+  inclusion, so the largest of those members contains all of them. That member is an
+  $R$-chain.
+- Every member of $Z$ is included in $J$, and $J$ is included in every property that
+  includes all the members.
+- So $J$ is a supremum of $Z$. When $Z$ is empty, $J$ is $\bot_{\sigma t}$.
 
-## The union of the conforming properties
+**Hypothesis 3: $F$ is progressive and invariant.** Let $C$ be an $R$-chain.
 
-Let
-$$U^*:=\lambda x\, .\,\exists A^{\sigma t}\, .\,\operatorname{Conf}(A)\land Ax,$$
-where $\operatorname{Conf}(A)$ abbreviates (a) and (b).
+- *Existence.* $\mathcal T$ has an instance $C'\equiv C$, and $S$ gives $k$ with
+  $(SC')k$, so $C$ has an $F$-value.
+- *Progress.* Every $F$-value $D$ includes $C$. It is an $R$-chain, since it is
+  coextensive with $C+k$ for a $k$ that extends $C$, or else with $C$, and TotalOrder
+  depends only on extensions.
+- *Invariance.* Let $C\equiv C_1$, $(FC)D$ and $(FC_1)D_1$. The two witnesses for $C'$
+  are $\mathcal T$-instances coextensive with $C$, so they are identical by the uniqueness
+  clause of Transversal. Functionality of $S$ then gives the same $k$. Since $k$ extends
+  $C$ iff it extends $C_1$, $D\equiv D_1$.
 
-**Lemma 3.** If $A$ is conforming, $Aa$, $U^*w$ and $w\preccurlyeq a$, then
-$Aw$. Hence $P(U^*,a)\equiv P(A,a)$.
+Invariance is the only place where Transversal is used. Everything else would work with
+$S$ applied to $C$ directly.
 
-*Proof.* Let $w$ be in the conforming $B$. If $B\subseteq A$, done. Otherwise
-$A\subseteq B$ by Lemma 2, and $Aw$ by downward closure. For the second
-part, $P(A,a)\subseteq P(U^*,a)$ is clear, and the converse is the first
-part. $\square$
+## A maximal chain, and a maximal element
 
-**Lemma 4.** $U^*$ is conforming.
+By part (c) of the lemma, there is an $R$-chain $m$ such that $D\equiv m$ whenever
+$(Fm)D$.
 
-*Proof.* (a) Transitivity holds since $R$ is a preorder. Any two instances
-of $U^*$ lie in conforming properties, one of which includes the other by
-Lemma 2. So both lie in a single property that $R$ totally orders, which
-gives totality and antisymmetry. For well-foundedness, let $Y\subseteq U^*$
-have an instance $y$, lying in a conforming $A$. Let $m$ be the least
-instance of $\lambda w\, .\,Yw\land Aw$. If $Yw$ and $w\preccurlyeq m$, then
-$Aw$ by Lemma 3, so $w=m$. So $m$ is $R$-minimal in $Y$.
+Nothing extends $m$. Suppose something did. Let $C'$ be the $\mathcal T$-instance
+coextensive with $m$, and $k$ the point with $(SC')k$. Something extends $C'$, so $(UC')k$
+gives that $k$ extends $C'$, and hence $m$. Then $m+k$ is an $F$-value of $m$. It
+contains $k$, while $m$ does not, so $m+k\not\equiv m$, contradicting the choice of $m$.
 
-(b) Let $U^*x$, with $x$ in the conforming $A$. Then $(F\,P(A,x))\,x$, and
-$P(U^*,x)\equiv P(A,x)$ by Lemma 3, so $(F\,P(U^*,x))\,x$ **(E)**. $\square$
+By hypothesis, $m$ has an upper bound $u$. Suppose $u\preccurlyeq y$ but
+$y\not\preccurlyeq u$. Then $\neg my$, since every instance of $m$ is $\preccurlyeq u$.
+Also $m+y$ is an $R$-chain:
 
-## The contradiction
+- transitivity holds since $R$ is a preorder;
+- every instance $x$ of $m$ has $x\preccurlyeq u\preccurlyeq y$;
+- $y\preccurlyeq x$ would give $y\preccurlyeq u$, so antisymmetry holds at $y$.
 
-By (a), $R$ totally orders $U^*$. Since $F$ is functional, there is an $x$
-with $(FU^*)x$. Then $(U U^*)x$, so every instance $y$ of $U^*$ has $y\prec x$.
-Let
-$$U':=\lambda w\, .\,U^*w\lor w=x.$$
-
-**Lemma 5.** $U'$ is conforming.
-
-*Proof.* (a) Transitivity holds since $R$ is a preorder. Totality: instances
-of $U^*$ are comparable with one another and lie below $x$. Antisymmetry:
-within $U^*$ it holds already, and for $U^*y$ we never have $x\preccurlyeq y$,
-since $y\prec x$. Well-foundedness: let $Y\subseteq U'$ be instantiated. If
-$\lambda w\, .\,Yw\land U^*w$ is instantiated, its $R$-minimal instance $m$
-is $R$-minimal in $Y$, because $x\preccurlyeq m$ is impossible. Otherwise
-$x$ is the only instance of $Y$.
-
-(b) At $x$: $P(U',x)\equiv U^*$, since every instance of $U^*$ lies below $x$,
-and $x\prec x$ fails. We have $(FU^*)x$, so $(F\,P(U',x))\,x$ **(E)**. At $u$
-with $U^*u$: $u\prec x$, so $x\prec u$ fails, and $P(U',u)\equiv P(U^*,u)$.
-By Lemma 4, $(F\,P(U^*,u))\,u$, so $(F\,P(U',u))\,u$ **(E)**. $\square$
-
-By Lemma 5, $x$ is an instance of the conforming $U'$, so $U^*x$, and then
-$x\prec x$, which is impossible. So some element is maximal: there is $m$
-with $\forall y\, .\,m\preccurlyeq y\to y\preccurlyeq m$.
+So $y$ extends $m$, which is impossible. Hence $u\preccurlyeq y$ implies
+$y\preccurlyeq u$, and $u$ is maximal. $\square$
 
 ## Remarks
 
-**Preorders.** The adaptation to preorders affects only the definitions of
-$\prec$ and of conforming. Since chains must be antisymmetric, a conforming
-property never contains two distinct $R$-equivalent elements.
+**Two kinds of chain.** The lemma's chains are families of $R$-chains, totally preordered
+by inclusion, and they need not be antisymmetric. Zorn's Lemma concerns $R$-chains, which
+must be antisymmetric. The two notions meet only in hypothesis 2, where a union of
+$R$-chains is shown to be an $R$-chain.
 
-**Coextension.** The four steps marked (E) are the only non-extensional
-moves. In each, the two properties are generally distinct. For example,
-$P(U',x)=\lambda w\, .\,(U^*w\lor w=x)\land w\prec x$ is coextensive with
-$U^*$ but need not be necessarily coextensive with it. Without
-extensionality of $F$, the argument establishes only coextension of the
-relevant properties, and gives no information about their $F$-images.
+**Relational Choice alone.** If the lemma did not require invariance, the argument would
+run with $S$ applied to $C$ in place of the $\mathcal T$-mediated $F$. It would then give
+Zorn's Lemma from Relational Choice alone. Zorn's Lemma implies Well-Ordering, which
+implies Transversal Choice, by the recorded results. So a proof of Zorn's Lemma from
+Relational Choice alone would settle the open question whether Relational Choice implies Transversal Choice.
 
-**Relational Choice alone.** Zorn's Lemma implies Well-Ordering, which
-implies Transversal Choice, by the recorded results. So a proof of Zorn's
-Lemma from Relational Choice alone would settle the open question whether
-Relational Choice implies Transversal Choice. Any such proof must avoid the
-four steps marked (E). With Weak Rigid Comprehension in place of the
-transversal, an extensional $F$ is still available: choose from the weakly
-rigid property coextensive with $C$, which is unique by the recorded result
-relational-choice-and-weak-rigid-comprehension-imply-transversal-choice.
+Weak Rigid Comprehension can do the job of the transversal: choose from the weakly rigid
+property coextensive with $C$, which is unique by the recorded result that Relational Choice and Weak Rigid
+Comprehension imply Transversal Choice.
+
+**Earlier proof.** An earlier version of this write-up followed Jonathan Lewin's proof by
+conforming subsets ("A Simple Proof of Zorn's Lemma", *American Mathematical Monthly* 98,
+1991). The Lean certificate formalizes that earlier argument.

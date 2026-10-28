@@ -35,8 +35,8 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.NecModalB Classicism.P.NecModalFive Classicism.P.NecFregeanAxiom
   Classicism.P.NecExtensionality Classicism.P.NecFunctionality Classicism.P.NecTractarianism
   Classicism.P.NecFunctionalChoice Classicism.P.NecRelationalChoice
-  Classicism.P.StrongLeibniz Classicism.P.StrongLeibnizT Classicism.P.NecStrongLeibniz
-  Classicism.P.NecStrongLeibnizT Classicism.P.DistinctnessPreservingCollapse
+  Classicism.P.StrongAtomicity Classicism.P.StrongAtomicityT Classicism.P.NecStrongAtomicity
+  Classicism.P.NecStrongAtomicityT Classicism.P.DistinctnessPreservingCollapse
   Classicism.P.NecDistinctnessPreservingCollapse Classicism.P.TruthImpliesFiveNecessity
   Classicism.P.TruthImpliesTwoHatNecessity Classicism.P.FiveImpliesTwoHatNecessity
   Classicism.P.FiveImpliesNdNecessity Classicism.P.TwoHatImpliesNdNecessity
@@ -67,14 +67,15 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.ConverseBarcanDual Classicism.P.ModalBDual Classicism.P.NecModalBDual
   Classicism.P.ModalFiveDual Classicism.P.NecModalFiveDual
   Classicism.P.NecessityOfDistinctnessDual Classicism.P.NecNecessityOfDistinctnessDual
-  Classicism.P.BarcanDual Classicism.P.NecBarcanDual Classicism.P.TractarianismDual
+  Classicism.P.BarcanDual Classicism.P.NecBarcanDual Classicism.P.BarcanUniversalWeaklyRigid
+  Classicism.P.NecBarcanUniversalRigid Classicism.P.TractarianismDual
   Classicism.P.NecTractarianismDual Classicism.P.AtomicityDual Classicism.P.NecAtomicityDual
-  Classicism.P.NecBooleanCompletenessLUB Classicism.P.StrongLeibnizDual
-  Classicism.P.NecStrongLeibnizDual Classicism.P.NecessityOfDistinctnessTDual
+  Classicism.P.NecBooleanCompletenessLUB Classicism.P.StrongAtomicityDual
+  Classicism.P.NecStrongAtomicityDual Classicism.P.NecessityOfDistinctnessTDual
   Classicism.P.NecNecessityOfDistinctnessTDual Classicism.P.BarcanTDual
   Classicism.P.NecBarcanTDual Classicism.P.AtomicityTDual
-  Classicism.P.BooleanCompletenessTLUB Classicism.P.StrongLeibnizTDual
-  Classicism.P.NecStrongLeibnizTDual Classicism.P.DistinctnessPreservingCollapseDual
+  Classicism.P.BooleanCompletenessTLUB Classicism.P.StrongAtomicityTDual
+  Classicism.P.NecStrongAtomicityTDual Classicism.P.DistinctnessPreservingCollapseDual
 
 /-! ### Every principle's schema is in the paper's language
 

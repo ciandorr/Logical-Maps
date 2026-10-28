@@ -9,7 +9,7 @@ Put $\Box p:=(p=\top)$ and $\Diamond p:=(p\ne\bot)$.
 The facts below are theorems of C, schemata in their type variables. Each was
 formerly recorded as a result with no premises.
 
-## The modal logic of $\Box$
+## The propositional modal logic of $\Box$
 
 ::: lemma {#modal-k}
 title: K
@@ -43,22 +43,6 @@ Necessary propositions are true: $\forall p\, .\,\Box p\to p$.
 and $\Diamond=\neg\Box\neg$.
 :::
 
-::: lemma {#identity-necessary-r}
-title: Necessity of Identity (NI)
-lean: Classicism.necessity_of_identity
-credit: W. V. Quine (historical attribution in Classicism, p. 22)
-sources: Classicism, §2.1, p. 22
----
-Identity is necessary at every type: $\forall x y^\sigma\, .\,x=y\to\Box(x=y)$.
-
-*Proof.* Reflexivity is a theorem, so its necessitation gives $\Box(x=x)$. Leibniz's
-Law substitutes $y$ for the second $x$ under the premise $x=y$, giving $\Box(x=y)$.
-
-*Polyadic form.* $\forall\bar x\,\bar y^{\bar\sigma}\, .\,\bar x=\bar y\to\Box(\bar x=\bar y)$:
-$\bar x=\bar y$ is a conjunction of identities, each necessary, and a conjunction of
-necessities is necessary.
-:::
-
 ::: lemma {#modal-four}
 title: 4
 lean: Classicism.modal_four
@@ -75,7 +59,35 @@ $\forall p\, .\,\Diamond\Diamond p\to\Diamond p$, by contraposition and
 $\Diamond=\neg\Box\neg$.
 :::
 
-## Quantifiers
+**Further laws.** $\Box$ and $\Diamond$ are duals: $\Diamond p=\neg\Box\neg p$ and $\Box\neg p=\neg\Diamond p$,
+and $\Box\neg p$ is $p=\bot$
+{lean: Classicism.dia_eq_not_box_not, Classicism.box_not_eq_not_dia, Classicism.box_not_eq}.
+$\Box$ distributes over conjunction, $\Box(p\land q)=(\Box p\land\Box q)$
+{lean: Classicism.box_and_eq}; $\Diamond(p\lor q)\to\Diamond p\lor\Diamond q$
+{lean: Classicism.dia_or}; and $\Diamond p\land\Box q\to\Diamond(p\land q)$
+{lean: Classicism.dia_and_of_dia_box}.
+
+By a result of Andrew Bacon (*The Broadest Necessity*, 2018), the propositional modal logic of $\Box$
+in C is exactly S4, the smallest normal modal logic containing T and 4. The [[modal-five|5]] and [[modal-b|B]] axioms are not theorems of C, though they can consistently
+be added.
+
+## Quantifiers and identity
+
+::: lemma {#identity-necessary-r}
+title: Necessity of Identity (NI)
+lean: Classicism.necessity_of_identity
+credit: W. V. Quine (historical attribution in Classicism, p. 22)
+sources: Classicism, §2.1, p. 22
+---
+Identity is necessary at every type: $\forall x y^\sigma\, .\,x=y\to\Box(x=y)$.
+
+*Proof.* Reflexivity is a theorem, so its necessitation gives $\Box(x=x)$. Leibniz's
+Law substitutes $y$ for the second $x$ under the premise $x=y$, giving $\Box(x=y)$.
+
+*Polyadic form.* $\forall\bar x\,\bar y^{\bar\sigma}\, .\,\bar x=\bar y\to\Box(\bar x=\bar y)$:
+$\bar x=\bar y$ is a conjunction of identities, each necessary, and a conjunction of
+necessities is necessary.
+:::
 
 ::: lemma {#converse-barcan-r}
 title: Converse Barcan Formula (CBF)
@@ -113,15 +125,8 @@ $\forall x^\sigma\, .\,\Box(\exists y^\sigma\, .\,y=x)$.
 taking $\bar y:=\bar x$ coordinatewise.
 :::
 
-## Further laws
-
-$\Box$ and $\Diamond$ are duals: $\Diamond p=\neg\Box\neg p$ and $\Box\neg p=\neg\Diamond p$,
-and $\Box\neg p$ is $p=\bot$
-{lean: Classicism.dia_eq_not_box_not, Classicism.box_not_eq_not_dia, Classicism.box_not_eq}.
-$\Box$ distributes over conjunction, $\Box(p\land q)=(\Box p\land\Box q)$
-{lean: Classicism.box_and_eq}; $\Diamond(p\lor q)\to\Diamond p\lor\Diamond q$
-{lean: Classicism.dia_or}; and $\Diamond p\land\Box q\to\Diamond(p\land q)$
-{lean: Classicism.dia_and_of_dia_box}.
+The [[barcan-r|Barcan Formula]] and the [[distinctness-necessary-r|Necessity of Distinctness]] are not
+theorems of C, though they can consistently be added.
 
 ## Intensionality
 

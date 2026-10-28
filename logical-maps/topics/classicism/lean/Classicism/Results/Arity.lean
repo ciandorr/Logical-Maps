@@ -178,7 +178,7 @@ theorem bf_wrp_weakly_rigid_weak_rigidity :
       (le_of_box_incl (nec% (fun (X : σ → Prop) (h : WeaklyRigid X) =>
         (⟨h, le_top_unary X⟩ : WeaklyRigid X ∧ X ≤ (fun _ : σ => True)))))
   show WeaklyRigid (fun X : σ → Prop => WeaklyRigid X) from
-    heq ▸ wrp _ (Rigidity.weaklyRigid_top_of_bf bf)
+    heq ▸ wrp _ (P.Barcan.to_universalWeaklyRigid bf)
 
 /-- `rigid-rigidity-implies-necessary-barcan`, at `σ → t`: at every world, a property
 necessary of everything is entailed by every rigid property, by the latter's weak
@@ -202,7 +202,7 @@ theorem nbf_rp_rigid_rigidity :
     P.NecBarcan σ → P.RigidPower (σ → Prop) → P.RigidRigidity (σ → Prop) := fun nbf rp =>
   have htop : Rigid (fun _ : σ => True) :=
     ⟨nec% (fun (_ : σ) (_ : True) => box_true),
-     modal_K _ _ (nec% (fun (bf : P.Barcan σ) => (Rigidity.weaklyRigid_top_of_bf bf).2)) nbf⟩
+     modal_K _ _ (nec% (fun (bf : P.Barcan σ) => (P.Barcan.to_universalWeaklyRigid bf).2)) nbf⟩
   have heq : (fun X : σ → Prop => Rigid X ∧ X ≤ (fun _ : σ => True)) =
       (fun X : σ → Prop => Rigid X) :=
     le_antisymm_rel _ _
@@ -384,7 +384,7 @@ theorem nbf_natom_nrc_nec_rigid_power :
     (nec% (nbf_natom_nrc_rigid_power (σ := σ))) (modal_four _ h₁)) (modal_four _ h₂))
     (modal_four _ h₃)) (modal_four _ h₄)
 
-/-! ### Strong Leibniz, □Rigid Comprehension and Rigid Power give BF (11 October 2026)
+/-! ### Strong Atomicity, □Rigid Comprehension and Rigid Power give BF (11 October 2026)
 
 Cian Dorr's argument. Let `A` be rigid and coextensive with being an atom. (a) Necessarily
 everything lies in some `A`-member; (b) necessarily every `A`-member decides every entity of
@@ -392,8 +392,8 @@ its type. (ii) At every world each entity `Y` is the join `J(R_Y)` of a rigid `R
 Rigid Comprehension there. (iii) BF at the type of `Y` then follows from the weak
 inextensibility of the rigid power property of `A`. -/
 
-/-- An atom of type `σ → t` is a strong world, given Strong Leibniz there. -/
-theorem sl_atom_decides (sl : P.StrongLeibniz (σ → Prop)) (W : σ → Prop) (hW : Atom W) :
+/-- An atom of type `σ → t` is a strong atom, given Strong Atomicity there. -/
+theorem sl_atom_decides (sl : P.StrongAtomicity (σ → Prop)) (W : σ → Prop) (hW : Atom W) :
     □ (∀ Z : σ → Prop, W ≤ Z ∨ W ≤ ¬ Z) :=
   (sl W fun e => not_le_neg_of_atom hW (by rw [e]; exact bot_le_arrow _)).elim fun S ⟨hS, hSW⟩ =>
     have e : S = W := (em (S = W)).elim id fun hne =>
@@ -435,15 +435,15 @@ theorem sl_join_rep (A : (σ → Prop) → Prop) (rc : P.RigidComprehension ((σ
     ha) hb) hz)
   ⟨R, ⟨hR, hRA⟩, le_antisymm_arrow Y _ h2 h1⟩
 
-/-- `strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational`, at
+/-- `strong-atomicity-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational`, at
 `σ → t` (Cian Dorr). -/
 theorem sl_nrc_rp_bf :
-    P.StrongLeibniz (σ → Prop) → P.NecRigidComprehension ((σ → Prop) → Prop) →
+    P.StrongAtomicity (σ → Prop) → P.NecRigidComprehension ((σ → Prop) → Prop) →
       P.RigidPower ((σ → Prop) → Prop) → P.BarcanRelational (σ → Prop) := fun sl nrc rp X hX =>
   (box_elim nrc (fun W => Atom W)).elim fun A ⟨hA, hco⟩ =>
   -- (a)
   have ha : □ (∀ x : σ, ∃ W, A W ∧ W x) :=
-    have h := P.Atomicity.to_dual (Proofs.strong_leibniz_r_implies_atomicity_r sl) (JoinOf A)
+    have h := P.Atomicity.to_dual (Proofs.strong_atomicity_r_implies_atomicity_r sl) (JoinOf A)
       fun W hW => (le_iff _ _).2 (modal_K _ _
         (nec% (fun (h : A W) (x : σ) (hx : W x) => (⟨W, h, hx⟩ : JoinOf A x)))
         (weaklyPersistent_of_persistent hA.1 W ((hco W).1 hW)))
@@ -473,8 +473,8 @@ theorem sl_nrc_rp_bf :
 
 /-! ### The same at type `t` (11 October 2026) -/
 
-/-- An atom is a strong world, given Strong Leibniz at `t`. -/
-theorem slt_atom_decides (sl : P.StrongLeibnizT) (w : Prop) (hw : Atom w) :
+/-- An atom is a strong atom, given Strong Atomicity at `t`. -/
+theorem slt_atom_decides (sl : P.StrongAtomicityT) (w : Prop) (hw : Atom w) :
     □ (∀ q : Prop, w ≤ q ∨ w ≤ ¬ q) :=
   (sl w (dia_of_atom hw)).elim fun s ⟨hs, hsw⟩ =>
     have e : s = w := (em (s = w)).elim id fun hne =>
@@ -511,13 +511,13 @@ theorem slt_join_rep (A : Prop → Prop) (rc : P.RigidComprehension (Prop → Pr
     ha) hb) hz)
   ⟨R, ⟨hR, hRA⟩, le_antisymm_prop p _ h2 h1⟩
 
-/-- `strong-leibniz-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t` (Cian Dorr). -/
+/-- `strong-atomicity-t-necessary-rigid-comprehension-and-rigid-power-imply-bf-t` (Cian Dorr). -/
 theorem slt_nrc_rp_bft :
-    P.StrongLeibnizT → P.NecRigidComprehension (Prop → Prop) → P.RigidPower (Prop → Prop) →
+    P.StrongAtomicityT → P.NecRigidComprehension (Prop → Prop) → P.RigidPower (Prop → Prop) →
       P.BarcanT := fun sl nrc rp X hX =>
   (box_elim nrc (fun w => Atom w)).elim fun A ⟨hA, hco⟩ =>
   have ha : □ (∃ w, A w ∧ w) :=
-    (Proofs.strong_leibniz_t_implies_atomicity_t sl (¬ ∃ w, A w ∧ w)).elim
+    (Proofs.strong_atomicity_t_implies_atomicity_t sl (¬ ∃ w, A w ∧ w)).elim
       (fun h => Proofs.box_of_neg_le_neg_neg _ h)
       (fun ⟨y, hy, hyn⟩ => (atom_absurd hy (modal_K _ _ (modal_K _ _
         (nec% (fun (h : A y) (f : y → ¬ ∃ w, A w ∧ w) (hy : y) => f hy ⟨y, h, hy⟩))
@@ -644,10 +644,10 @@ theorem natom_nrc_nec_rigid_power :
 
 /-- Cian Dorr's core `sl_nrc_rp_bf`, necessitated, its premises boxed (`4` boxes `□`Rigid
 Comprehension again): the step of
-`necessary-strong-leibniz-and-necessary-rigid-comprehension-imply-necessary-bf-relational`
+`necessary-strong-atomicity-and-necessary-rigid-comprehension-imply-necessary-bf-relational`
 after `□`Rigid Power has been obtained in the metalogic. -/
 theorem nsl_nrc_nrp_nbf :
-    P.NecStrongLeibniz (σ → Prop) → P.NecRigidComprehension ((σ → Prop) → Prop) →
+    P.NecStrongAtomicity (σ → Prop) → P.NecRigidComprehension ((σ → Prop) → Prop) →
       P.NecRigidPower ((σ → Prop) → Prop) → P.NecBarcanRelational (σ → Prop) := fun h₁ h₂ h₃ =>
   modal_K _ _ (modal_K _ _ (modal_K _ _ (nec% (sl_nrc_rp_bf (σ := σ))) h₁) (modal_four _ h₂)) h₃
 
@@ -1040,42 +1040,42 @@ theorem classicism_implies_modalized_plenitude_r :
   Entails.mono_right (schema_subset_args₂ _)
     Proofs.classicism_implies_modalized_plenitude_r.listEntails
 
-/-! ### Strong Leibniz
+/-! ### Strong Atomicity
 
 The records at `σ → t` in `Results/Records.lean`, vectorized. -/
 
-/-- `strong-leibniz-r-implies-atomicity-r`, at every arity. -/
-theorem strong_leibniz_r_implies_atomicity_r :
-    P.StrongLeibniz.schema ⟹ P.Atomicity.schema :=
-  Entails.mono_right (schema_subset_args _) Proofs.strong_leibniz_r_implies_atomicity_r.listEntails
+/-- `strong-atomicity-r-implies-atomicity-r`, at every arity. -/
+theorem strong_atomicity_r_implies_atomicity_r :
+    P.StrongAtomicity.schema ⟹ P.Atomicity.schema :=
+  Entails.mono_right (schema_subset_args _) Proofs.strong_atomicity_r_implies_atomicity_r.listEntails
 
-/-- `atomicity-and-bf-imply-strong-leibniz`, at every arity. -/
-theorem atomicity_and_bf_imply_strong_leibniz :
-    P.Atomicity.schema ∪ P.Barcan.schema ⟹ P.StrongLeibniz.schema :=
+/-- `atomicity-and-bf-imply-strong-atomicity`, at every arity. -/
+theorem atomicity_and_bf_imply_strong_atomicity :
+    P.Atomicity.schema ∪ P.Barcan.schema ⟹ P.StrongAtomicity.schema :=
   Entails.mono_right (schema_subset_args _)
-    Proofs.atomicity_and_bf_imply_strong_leibniz.listEntails
+    Proofs.atomicity_and_bf_imply_strong_atomicity.listEntails
 
-/-- `necessary-strong-leibniz-implies-necessary-atomicity`, at every arity. -/
-theorem necessary_strong_leibniz_implies_necessary_atomicity :
-    P.NecStrongLeibniz.schema ⟹ P.NecAtomicity.schema :=
+/-- `necessary-strong-atomicity-implies-necessary-atomicity`, at every arity. -/
+theorem necessary_strong_atomicity_implies_necessary_atomicity :
+    P.NecStrongAtomicity.schema ⟹ P.NecAtomicity.schema :=
   Entails.mono_right (schema_subset_args _)
-    Proofs.necessary_strong_leibniz_implies_necessary_atomicity.listEntails
+    Proofs.necessary_strong_atomicity_implies_necessary_atomicity.listEntails
 
-/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-leibniz`, at every arity. -/
-theorem necessary_atomicity_and_necessary_bf_imply_necessary_strong_leibniz :
-    P.NecAtomicity.schema ∪ P.NecBarcan.schema ⟹ P.NecStrongLeibniz.schema :=
+/-- `necessary-atomicity-and-necessary-bf-imply-necessary-strong-atomicity`, at every arity. -/
+theorem necessary_atomicity_and_necessary_bf_imply_necessary_strong_atomicity :
+    P.NecAtomicity.schema ∪ P.NecBarcan.schema ⟹ P.NecStrongAtomicity.schema :=
   Entails.mono_right (schema_subset_args _)
-    Proofs.necessary_atomicity_and_necessary_bf_imply_necessary_strong_leibniz.listEntails
+    Proofs.necessary_atomicity_and_necessary_bf_imply_necessary_strong_atomicity.listEntails
 
-/-- `necessary-strong-leibniz-t-and-necessary-bf-imply-necessary-strong-leibniz`, at every
+/-- `necessary-strong-atomicity-t-and-necessary-bf-imply-necessary-strong-atomicity`, at every
 arity: `□`BF over the list of argument types, from `□`BF. -/
-theorem necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz :
-    P.NecStrongLeibnizT.schema ∪ P.NecBarcan.schema ⟹ P.NecStrongLeibniz.schema :=
+theorem necessary_strong_atomicity_t_and_necessary_bf_imply_necessary_strong_atomicity :
+    P.NecStrongAtomicityT.schema ∪ P.NecBarcan.schema ⟹ P.NecStrongAtomicity.schema :=
   Entails.mono_right (schema_subset_args _)
     (Entails.trans
       (Entails.union (Entails.union_left _ _)
         (Entails.trans (Entails.union_right _ _) P.NecBarcan.schema_entails_listSchema))
-      Proofs.necessary_strong_leibniz_t_and_necessary_bf_imply_necessary_strong_leibniz.listEntails)
+      Proofs.necessary_strong_atomicity_t_and_necessary_bf_imply_necessary_strong_atomicity.listEntails)
 
 
 /-! ### Boxed forms, at every arity (6 October 2026) -/
@@ -1161,18 +1161,18 @@ theorem necessary_barcan_and_rigid_power_imply_rigid_rigidity :
 
 /-! ### BF at the relational types; ND, Strong Actuality and Gallin (11 October 2026) -/
 
-/-- `atomicity-and-bf-relational-imply-strong-leibniz`, at every arity. -/
-theorem atomicity_and_bf_relational_imply_strong_leibniz :
-    P.Atomicity.schema ∪ P.BarcanRelational.schema ⟹ P.StrongLeibniz.schema :=
+/-- `atomicity-and-bf-relational-imply-strong-atomicity`, at every arity. -/
+theorem atomicity_and_bf_relational_imply_strong_atomicity :
+    P.Atomicity.schema ∪ P.BarcanRelational.schema ⟹ P.StrongAtomicity.schema :=
   Entails.mono_right (schema_subset_args _)
-    Proofs.atomicity_and_bf_relational_imply_strong_leibniz.listEntails
+    Proofs.atomicity_and_bf_relational_imply_strong_atomicity.listEntails
 
-/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-leibniz`, at every
+/-- `necessary-atomicity-and-necessary-bf-relational-imply-necessary-strong-atomicity`, at every
 arity. -/
-theorem necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_leibniz :
-    P.NecAtomicity.schema ∪ P.NecBarcanRelational.schema ⟹ P.NecStrongLeibniz.schema :=
+theorem necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_atomicity :
+    P.NecAtomicity.schema ∪ P.NecBarcanRelational.schema ⟹ P.NecStrongAtomicity.schema :=
   Entails.mono_right (schema_subset_args _)
-    Proofs.necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_leibniz.listEntails
+    Proofs.necessary_atomicity_and_necessary_bf_relational_imply_necessary_strong_atomicity.listEntails
 
 /-- `nd-and-strong-actuality-imply-gallin-comprehension`, at every arity. -/
 theorem nd_and_strong_actuality_imply_gallin_comprehension :
@@ -1225,10 +1225,10 @@ theorem bf_weak_rigid_comprehension_atomicity_and_relational_choice_imply_intens
     Proofs.modal_well_ordering_r_implies_intensional_choice_r.entails
 
 
-/-- `strong-leibniz-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational`, at every
+/-- `strong-atomicity-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational`, at every
 relational type (Cian Dorr): the core at `σ → t`, vectorized. -/
-theorem strong_leibniz_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational :
-    P.StrongLeibniz.schema ∪ P.NecRigidComprehension.schema ∪ P.RigidPower.schema ⟹
+theorem strong_atomicity_necessary_rigid_comprehension_and_rigid_power_imply_bf_relational :
+    P.StrongAtomicity.schema ∪ P.NecRigidComprehension.schema ∪ P.RigidPower.schema ⟹
       P.BarcanRelational.schema :=
   Entails.mono_right (schema_subset_args _) sl_nrc_rp_bf.listEntails
 
@@ -1256,15 +1256,15 @@ theorem necessary_atomicity_and_necessary_rigid_comprehension_imply_necessary_ri
         (Entails.union_right _ _))
       natom_nrc_nec_rigid_power.listEntails)
 
-/-- `necessary-strong-leibniz-and-necessary-rigid-comprehension-imply-necessary-bf-relational`,
-at every relational type: `□`Strong Leibniz gives `□`Atomicity, with `□`Rigid Comprehension
+/-- `necessary-strong-atomicity-and-necessary-rigid-comprehension-imply-necessary-bf-relational`,
+at every relational type: `□`Strong Atomicity gives `□`Atomicity, with `□`Rigid Comprehension
 `□`Rigid Power, and Cian Dorr's core, necessitated, gives `□`BF. -/
-theorem necessary_strong_leibniz_and_necessary_rigid_comprehension_imply_necessary_bf_relational :
-    P.NecStrongLeibniz.schema ∪ P.NecRigidComprehension.schema ⟹ P.NecBarcanRelational.schema :=
-  have sl := Entails.union_left P.NecStrongLeibniz.schema P.NecRigidComprehension.schema
-  have rc := Entails.union_right P.NecStrongLeibniz.schema P.NecRigidComprehension.schema
+theorem necessary_strong_atomicity_and_necessary_rigid_comprehension_imply_necessary_bf_relational :
+    P.NecStrongAtomicity.schema ∪ P.NecRigidComprehension.schema ⟹ P.NecBarcanRelational.schema :=
+  have sl := Entails.union_left P.NecStrongAtomicity.schema P.NecRigidComprehension.schema
+  have rc := Entails.union_right P.NecStrongAtomicity.schema P.NecRigidComprehension.schema
   have rp := Entails.trans
-    (Entails.union (Entails.trans sl necessary_strong_leibniz_implies_necessary_atomicity) rc)
+    (Entails.union (Entails.trans sl necessary_strong_atomicity_implies_necessary_atomicity) rc)
     necessary_atomicity_and_necessary_rigid_comprehension_imply_necessary_rigid_power
   Entails.mono_right (schema_subset_args _)
     (Entails.trans (Entails.union (Entails.union sl rc) rp) nsl_nrc_nrp_nbf.listEntails)

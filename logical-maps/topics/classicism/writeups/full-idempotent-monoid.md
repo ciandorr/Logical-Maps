@@ -1,13 +1,13 @@
 # Full action model: idempotent two-arrow monoid
 
-## Strong worlds and Barcan
+## Strong atoms and Barcan
 
 The finite-support truncation model, the finite-support dyadic-rounding model,
-and the full two-arrow idempotent model all fail the type-t Strong Leibniz
+and the full two-arrow idempotent model all fail the type-t Strong Atomicity
 Biconditionals. The truncation model also fails BF at type t. These statements
 concern the existing constructions; no modification of their domains is needed.
 
-The Strong Leibniz failures were proposed in the DeepSeek `deepseek-flash`
+Strong Atomicity failures were proposed in the DeepSeek `deepseek-flash`
 trawl of 25 September 2026. OpenAI Codex (GPT-6) checked them against the source
 semantics and supplied the unified proof below on the same date. The direct
 BF witness below was supplied during that review to repair the trawl's
@@ -31,7 +31,7 @@ h^t p=\{u\in A:u\circ h\in p\}.
 \]
 
 At the basepoint, possibility means nonemptiness and entailment means set
-inclusion. Consequently an admitted proposition w is a strong world exactly
+inclusion. Consequently an admitted proposition w is a strong atom exactly
 when it is nonempty and, for every arrow h and every **target-domain**
 proposition Y in P,
 
@@ -40,10 +40,10 @@ h^t w\subseteq Y\quad\text{or}\quad h^t w\subseteq A\setminus Y.
 \]
 
 The quantifier over Y here is inside the box in the definition of a strong
-world. Restricting it to propositions of the form h^t p changes the definition
+atom. Restricting it to propositions of the form h^t p changes the definition
 and gives the wrong answer in the examples below.
 
-## A nonidentity idempotent refutes Strong Leibniz
+## A nonidentity idempotent refutes Strong Atomicity
 
 Suppose h is a nonidentity idempotent arrow and the singleton p={h} is an
 admitted proposition. Then p is possible, and the only possible proposition
@@ -56,14 +56,14 @@ w entailing p is p itself. But
 because both 1∘h and h∘h equal h. At the successor h, take the independently
 quantified proposition Y={h}. The shift h^t{h} meets Y at h and meets its
 complement at 1. It therefore entails neither Y nor its negation. Thus p is
-not a strong world, and the possible p has no strong world below it.
+not a strong atom, and the possible p has no strong atom below it.
 
-This proves failure of Strong Leibniz at type t in each of the following
+This proves failure of Strong Atomicity at type t in each of the following
 existing models:
 
 - **Full idempotent monoid:** A={1,k}, with k²=k and k≠1. Every subset of A
   is a proposition, so take h=k. The construction is *Classicism*, §3.5,
-  p.59. In this model the only strong world at the basepoint is {1}; the
+  p.59. In this model the only strong atom at the basepoint is {1}; the
   possible proposition {k} has none below it.
 - **Finite-support truncations:** arrows are the identity and g_n(m)=min(m,n).
   Take h=g_0. Its singleton is pinned down by the finite individual set
@@ -75,7 +75,7 @@ existing models:
   and all coarser dyadic roundings. Also f_2²=f_2≠1. See Proposition
   D.5(7), construction on p.78.
 
-In all three cases, the necessary type-t Strong Leibniz Biconditionals fail
+In all three cases, the necessary type-t Strong Atomicity fails
 as well: by T, their truth would imply the unboxed sentence. This corrects
 the earlier positive flag for the full idempotent model. Its source
 construction and other independently established properties are unchanged.
@@ -83,7 +83,7 @@ construction and other independently established properties are unchanged.
 For comparison, in a group h^t{g}={g∘h^{-1}} is a singleton, and in the
 truncated-shift monoid k_n∘k_m=k_{n+m}, each such precomposition fibre is
 empty or a singleton. Their singleton worlds therefore do decide every
-target proposition. Those positive Strong Leibniz verdicts already follow
+target proposition. Those positive Strong Atomicity verdicts already follow
 from the map's Atomicity and Barcan rules.
 
 ## A finitely pinned BF(t) witness in the truncation model
@@ -140,7 +140,7 @@ assumed for an arbitrary non-full model.
   for action semantics and Proposition 3.24; p.59 for the idempotent model;
   Definitions D.1–D.3, pp.73–74, for ideals, pinning and ideally full domains;
   Proposition D.5(6–7), p.78, for truncations and dyadic roundings.
-- The exact finite calculation in `checks/action_strong_worlds.py`
+- The exact finite calculation in `checks/action_strong_atoms.py`
   enumerates all four propositions of the two-arrow monoid and the
   successor-domain quantifier in the strong-world condition. It also checks
   the analogous BF witness and demonstrates the erroneous answer obtained

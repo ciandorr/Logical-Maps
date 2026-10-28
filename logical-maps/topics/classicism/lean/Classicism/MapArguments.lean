@@ -285,16 +285,16 @@ theorem fregean_axiom : Statements.Arguments.nonidentity_arrow.fregean_axiom := 
 
 end nonidentity_arrow
 
-namespace nonepic_strong_leibniz
+namespace nonepic_strong_atomicity
 
-/-- The type-`t` Strong Leibniz Biconditionals fail in a full model with a non-epi arrow out of
-the evaluation object (`Premodel.not_holds_strongLeibnizT_of_nonepic`). -/
-theorem strong_leibniz_t : Statements.Arguments.nonepic_strong_leibniz.strong_leibniz_t := by
+/-- The type-`t` Strong Atomicity fails in a full model with a non-epi arrow out of
+the evaluation object (`Premodel.not_holds_strongAtomicityT_of_nonepic`). -/
+theorem strong_atomicity_t : Statements.Arguments.nonepic_strong_atomicity.strong_atomicity_t := by
   intro Sig C _ A M hF hN H
   rw [holdsAx_ofPure] at H
-  exact not_holds_strongLeibnizT_of_nonepic (A.reduct_isModel M) hF hN (H _ rfl)
+  exact not_holds_strongAtomicityT_of_nonepic (A.reduct_isModel M) hF hN (H _ rfl)
 
-end nonepic_strong_leibniz
+end nonepic_strong_atomicity
 
 namespace strong_actuality_unique_retractions
 

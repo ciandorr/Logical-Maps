@@ -20,7 +20,7 @@ One definition per principle of the map with a shallow statement, named as the m
 | `Principles/Base.lean` | `base`: theorems of `C`: `K`, `T`, `4`, CBF, NI, Existence |
 | `Principles/Coarse.lean` | `coarse`: `B`, `5`, ND, BF, Tractarianism |
 | `Principles/Extensionality.lean` | `extensionality`: the Fregean Axiom, Extensionality, Functionality |
-| `Principles/Lattice.lean` | `lattice`: Atomicity, Boolean Completeness, Actuality, Strong Leibniz |
+| `Principles/Lattice.lean` | `lattice`: Atomicity, Boolean Completeness, Actuality, Strong Atomicity |
 | `Principles/Instances.lean` | `instances`: the principles at `t` kept beside their general forms |
 | `Principles/Comprehension.lean` | `comprehension`: the comprehension principles |
 | `Principles/Choice.lean` | `choice`: Choice, Plenitude, Transversals |

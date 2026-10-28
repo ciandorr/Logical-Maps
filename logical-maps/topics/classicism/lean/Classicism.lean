@@ -8,7 +8,7 @@ import Classicism.Background.Order
 import Classicism.Background.Rigidity
 import Classicism.Pointwise
 import Classicism.Background.Lattice
-import Classicism.Background.Worlds
+import Classicism.Background.Atoms
 import Classicism.Principles
 import Classicism.Results.Records
 -- The object language as an object of Lean

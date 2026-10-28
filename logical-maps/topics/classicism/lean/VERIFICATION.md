@@ -879,7 +879,7 @@ Later the same night, 38 routine records in `Results/Records.lean` and four more
 results in `Results/Arity.lean`, with sixteen principles and three `Pointwise` laws
 (`HANDOFF.md` §4a); the record audits then report 199 of 199 derived and 111 of 111
 certified. Each new principle is the record's `formal` field with its type quantifier made
-a parameter; `SWorld` is Bacon's strong world with `◇_τ W := W ≠ ⊥_τ`, and `BoxNe` the
+a parameter; `SAtom` is Bacon's strong atom with `◇_τ W := W ≠ ⊥_τ`, and `BoxNe` the
 distinctness-preserving necessity of §2.6, both as the map's Background defines them.
 
 *Choices.* BF over a tuple is stated as `(⊤ ⊆ □X) → □(⊤ ⊆ X)` at the relational type, so
@@ -1028,11 +1028,11 @@ Transversal Choice at single types, so nothing needs those list forms.
   `(UC)y := Cy ∨ ¬∃z. Cz` needs an element of the type. The proofs split on whether the
   type has one: if not, Transversal Choice holds vacuously.
 
-## Strong Leibniz, 1 October
+## Strong Atomicity, 1 October
 
-Seven of the map's eight Strong Leibniz results, in `Results/Records.lean`, section
-"Strong Leibniz". Five are over relational types: they are proved unary at `σ → t` and
-reach every arity in `Results/Arity.lean`. The other two are proved as stated. Not proved: `necessary-strong-leibniz-and-rigid-comprehension-imply-
+Seven of the map's eight Strong Atomicity results, in `Results/Records.lean`, section
+"Strong Atomicity". Five are over relational types: they are proved unary at `σ → t` and
+reach every arity in `Results/Arity.lean`. The other two are proved as stated. Not proved: `necessary-strong-atomicity-and-rigid-comprehension-imply-
 necessary-bf-t` (Bacon's Theorem 8.2).
 
 *Checked.* The full build passes. The record audits report:
@@ -1044,15 +1044,15 @@ necessary-bf-t` (Bacon's Theorem 8.2).
 The theorems checked rest on `propext` and `Quot.sound` only.
 
 *Choices.*
-- `necessary-strong-leibniz-t-and-necessary-bf-imply-necessary-strong-leibniz` goes
-  through a record that is not a map result, `strong_leibniz_t_and_bf_imply_strong_leibniz`
-  (Strong Leibniz at `t` and BF at `σ` give Strong Leibniz at `σ → t`), proved under `□`.
+- `necessary-strong-atomicity-t-and-necessary-bf-imply-necessary-strong-atomicity` goes
+  through a record that is not a map result, `strong_atomicity_t_and_bf_imply_strong_atomicity`
+  (Strong Atomicity at `t` and BF at `σ` give Strong Atomicity at `σ → t`), proved under `□`.
 
 ## Atomicity folded in, 2 October
 
 `Results/Atomicity.lean` is gone. `atomicity-t-and-bf-imply-atomicity` is now proved like
 the other results at every arity: the record at `σ → t` in `Results/Records.lean`, from
-the lemmas of the Strong Leibniz section (an atom at `t`, pinned at `x` as
+the lemmas of Strong Atomicity section (an atom at `t`, pinned at `x` as
 `λy. w ∧ y = x`, decides every property and is an atom), certified by the entailment audit,
 and at every arity in `Results/Arity.lean`. The boxed step there, `necAtomicity_step`, is
 the record necessitated, at `σ → t` rather than at a Rel-parameter, which no use needed.

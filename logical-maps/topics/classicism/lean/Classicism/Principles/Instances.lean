@@ -101,32 +101,32 @@ theorem BooleanCompletenessT.to_lub : BooleanCompletenessT → BooleanCompletene
 theorem BooleanCompletenessT.of_lub : BooleanCompletenessTLUB → BooleanCompletenessT :=
   fun h => BooleanCompleteness.of_lub h
 
-/-! ## The Strong Leibniz Biconditionals at `t` -/
+/-! ## Strong Atomicity at `t` -/
 
-/-- `strong-leibniz-t`. -/
-def StrongLeibnizT : Prop := StrongLeibniz Prop
-/-- `strong-leibniz-t`, form `dual`: `∀p. (∀w. SWorld_t(w) → w ≤ p) → □p`, a proposition
-entailed by every strong world is necessary. -/
-def StrongLeibnizTDual : Prop := ∀ p : Prop, (∀ w : Prop, SWorld w → w ≤ p) → □ p
+/-- `strong-atomicity-t`. -/
+def StrongAtomicityT : Prop := StrongAtomicity Prop
+/-- `strong-atomicity-t`, form `dual`: `∀p. (∀w. SAtom_t(w) → w ≤ p) → □p`, a proposition
+entailed by every strong atom is necessary. -/
+def StrongAtomicityTDual : Prop := ∀ p : Prop, (∀ w : Prop, SAtom w → w ≤ p) → □ p
 
-/-- `strong-leibniz-t` to its dual form: the dual at `t`, where `¬p ≤ p` is `□p`. -/
-theorem StrongLeibnizT.to_dual : StrongLeibnizT → StrongLeibnizTDual := fun h p hp =>
-  (neg_le_iff_box p).1 (StrongLeibniz.to_dual h p hp)
-/-- `strong-leibniz-t` from its dual form. -/
-theorem StrongLeibnizT.of_dual : StrongLeibnizTDual → StrongLeibnizT := fun d =>
-  StrongLeibniz.of_dual fun p hp => (neg_le_iff_box p).2 (d p hp)
+/-- `strong-atomicity-t` to its dual form: the dual at `t`, where `¬p ≤ p` is `□p`. -/
+theorem StrongAtomicityT.to_dual : StrongAtomicityT → StrongAtomicityTDual := fun h p hp =>
+  (neg_le_iff_box p).1 (StrongAtomicity.to_dual h p hp)
+/-- `strong-atomicity-t` from its dual form. -/
+theorem StrongAtomicityT.of_dual : StrongAtomicityTDual → StrongAtomicityT := fun d =>
+  StrongAtomicity.of_dual fun p hp => (neg_le_iff_box p).2 (d p hp)
 
-/-- `necessary-strong-leibniz-t`. -/
-def NecStrongLeibnizT : Prop := □ StrongLeibnizT
-/-- `necessary-strong-leibniz-t`, form `dual`: the dual at `t`, boxed. -/
-def NecStrongLeibnizTDual : Prop := □ StrongLeibnizTDual
+/-- `necessary-strong-atomicity-t`. -/
+def NecStrongAtomicityT : Prop := □ StrongAtomicityT
+/-- `necessary-strong-atomicity-t`, form `dual`: the dual at `t`, boxed. -/
+def NecStrongAtomicityTDual : Prop := □ StrongAtomicityTDual
 
-/-- `necessary-strong-leibniz-t` to its dual form. -/
-theorem NecStrongLeibnizT.to_dual : NecStrongLeibnizT → NecStrongLeibnizTDual :=
-  modal_K _ _ (nec% StrongLeibnizT.to_dual)
-/-- `necessary-strong-leibniz-t` from its dual form. -/
-theorem NecStrongLeibnizT.of_dual : NecStrongLeibnizTDual → NecStrongLeibnizT :=
-  modal_K _ _ (nec% StrongLeibnizT.of_dual)
+/-- `necessary-strong-atomicity-t` to its dual form. -/
+theorem NecStrongAtomicityT.to_dual : NecStrongAtomicityT → NecStrongAtomicityTDual :=
+  modal_K _ _ (nec% StrongAtomicityT.to_dual)
+/-- `necessary-strong-atomicity-t` from its dual form. -/
+theorem NecStrongAtomicityT.of_dual : NecStrongAtomicityTDual → NecStrongAtomicityT :=
+  modal_K _ _ (nec% StrongAtomicityT.of_dual)
 
 /-- `necessary-atomicity-t`: Atomicity at `t`, boxed. -/
 def NecAtomicityT : Prop := □ AtomicityT

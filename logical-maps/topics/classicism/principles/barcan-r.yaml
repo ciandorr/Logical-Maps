@@ -58,4 +58,16 @@ variants:
     contrapose, and rewrite with $\Diamond=\neg\Box\neg$ and $q\le r\leftrightarrow\neg r\le\neg q$. This
     yields the other form, and the same steps lead back. Combined with the polyadic form, this gives the
     equivalence with the official form.
+- id: universal-weakly-rigid
+  lean:
+    ref: Classicism.P.BarcanUniversalWeaklyRigid.schemaIn
+    equivalence_ref: Classicism.Map.barcan_r.universal_weakly_rigid
+    status: verified
+  name: Weak rigidity of the universal property
+  statement: The universal property, of being something, is weakly rigid.
+  formal: $\operatorname{WeaklyRigid}(\lambda z^\sigma\, .\,\top)$
+  equivalence: '$\lambda z\, .\,\top$ is weakly persistent in C, since $\Box\top$. Its weak inextensibility
+    says that for every $Z$, if $\forall z\, .\,\top\to\Box Zz$ then $\lambda z\, .\,\top\le Z$, that is,
+    $(\forall z\, .\,\Box Zz)\to\Box\forall z\, .\,Zz$: BF at $Z$. So the form is equivalent to BF at $\sigma$,
+    instance by instance. See [[weak-rigidity-predicates]].'
 lean_def: Classicism.P.Barcan.schemaIn

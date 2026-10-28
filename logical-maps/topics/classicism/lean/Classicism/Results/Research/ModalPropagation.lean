@@ -207,41 +207,41 @@ theorem sealed_cover_propagates_comprehension (A : Prop → Prop) (hA : Sealed A
     (bf : Barcan σ) (bfP : Barcan (σ → Prop)) : NecRigidComprehension (σ → Prop) :=
   bfP HasRigidCoextension fun X => sealed_cover_propagates_witness A hA hc rc bf X
 
-theorem sl_rc_barcan_propagates_comprehension : StrongLeibnizT →
+theorem strong_atomicity_rc_barcan_propagates_comprehension : StrongAtomicityT →
     RigidComprehension (Prop → Prop) → RigidComprehension (σ → Prop) →
     Barcan σ → Barcan (σ → Prop) → NecRigidComprehension (σ → Prop) :=
   fun sl rcT rc bf bfP => (exists_sealed_cover_t sl rcT).elim fun A hA =>
     sealed_cover_propagates_comprehension A hA.1 hA.2 rc bf bfP
 
 /-- Both BF instances are relational even when σ = e. -/
-theorem sl_rc_relational_barcan_propagates_comprehension : StrongLeibnizT →
+theorem strong_atomicity_rc_relational_barcan_propagates_comprehension : StrongAtomicityT →
     RigidComprehension (Prop → Prop) → RigidComprehension ((σ → Prop) → Prop) →
     Barcan (σ → Prop) → Barcan ((σ → Prop) → Prop) →
     NecRigidComprehension (σ → Prop) := fun sl rcT rc bf bfP =>
   necessary_rigid_comprehension_pullback
-    (sl_rc_barcan_propagates_comprehension sl rcT rc bf bfP)
+    (strong_atomicity_rc_barcan_propagates_comprehension sl rcT rc bf bfP)
 
 /-- The same finite premises give boxed Boolean Completeness at σ → t. -/
-theorem sl_rc_relational_barcan_propagates_completeness : StrongLeibnizT →
+theorem strong_atomicity_rc_relational_barcan_propagates_completeness : StrongAtomicityT →
     RigidComprehension (Prop → Prop) → RigidComprehension ((σ → Prop) → Prop) →
     Barcan (σ → Prop) → Barcan ((σ → Prop) → Prop) →
     NecBooleanCompleteness (σ → Prop) := fun sl rcT rc bf bfP =>
   Proofs.necessary_rigid_comprehension_r_implies_necessary_boolean_completeness_r
-    (sl_rc_barcan_propagates_comprehension sl rcT rc bf bfP)
+    (strong_atomicity_rc_barcan_propagates_comprehension sl rcT rc bf bfP)
 
 end propagation
 
-theorem sl_rc_barcan_propagates_comprehension_t : StrongLeibnizT →
+theorem strong_atomicity_rc_barcan_propagates_comprehension_t : StrongAtomicityT →
     RigidComprehension (Prop → Prop) → Barcan Prop → Barcan (Prop → Prop) →
     NecRigidComprehension Prop := fun sl rc bf bfP =>
   necessary_rigid_comprehension_pullback_t
-    (sl_rc_barcan_propagates_comprehension sl rc rc bf bfP)
+    (strong_atomicity_rc_barcan_propagates_comprehension sl rc rc bf bfP)
 
-theorem sl_rc_barcan_propagates_completeness_t : StrongLeibnizT →
+theorem strong_atomicity_rc_barcan_propagates_completeness_t : StrongAtomicityT →
     RigidComprehension (Prop → Prop) → Barcan Prop → Barcan (Prop → Prop) →
     NecBooleanCompleteness Prop := fun sl rc bf bfP =>
   modal_K _ _ (nec% Proofs.rigid_comprehension_r_implies_boolean_completeness_r_at_t)
-    (sl_rc_barcan_propagates_comprehension sl rc rc bf bfP)
+    (strong_atomicity_rc_barcan_propagates_comprehension sl rc rc bf bfP)
 
 end Classicism.Research.ModalPropagation
 
@@ -271,11 +271,11 @@ end Classicism.Research.ModalPropagation
   Classicism.Research.ModalPropagation.deciding_world_gives_necessary_witness
   Classicism.Research.ModalPropagation.sealed_cover_propagates_witness
   Classicism.Research.ModalPropagation.sealed_cover_propagates_comprehension
-  Classicism.Research.ModalPropagation.sl_rc_barcan_propagates_comprehension
-  Classicism.Research.ModalPropagation.sl_rc_relational_barcan_propagates_comprehension
-  Classicism.Research.ModalPropagation.sl_rc_relational_barcan_propagates_completeness
-  Classicism.Research.ModalPropagation.sl_rc_barcan_propagates_comprehension_t
-  Classicism.Research.ModalPropagation.sl_rc_barcan_propagates_completeness_t
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_barcan_propagates_comprehension
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_relational_barcan_propagates_comprehension
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_relational_barcan_propagates_completeness
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_barcan_propagates_comprehension_t
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_barcan_propagates_completeness_t
 #classicism_types Classicism.Research.ModalPropagation.universe_weakly_inextensible_of_barcan
   Classicism.Research.ModalPropagation.barcan_of_universe_weakly_inextensible
   Classicism.Research.ModalPropagation.universe_weakly_rigid_iff_barcan
@@ -302,8 +302,8 @@ end Classicism.Research.ModalPropagation
   Classicism.Research.ModalPropagation.deciding_world_gives_necessary_witness
   Classicism.Research.ModalPropagation.sealed_cover_propagates_witness
   Classicism.Research.ModalPropagation.sealed_cover_propagates_comprehension
-  Classicism.Research.ModalPropagation.sl_rc_barcan_propagates_comprehension
-  Classicism.Research.ModalPropagation.sl_rc_relational_barcan_propagates_comprehension
-  Classicism.Research.ModalPropagation.sl_rc_relational_barcan_propagates_completeness
-  Classicism.Research.ModalPropagation.sl_rc_barcan_propagates_comprehension_t
-  Classicism.Research.ModalPropagation.sl_rc_barcan_propagates_completeness_t
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_barcan_propagates_comprehension
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_relational_barcan_propagates_comprehension
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_relational_barcan_propagates_completeness
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_barcan_propagates_comprehension_t
+  Classicism.Research.ModalPropagation.strong_atomicity_rc_barcan_propagates_completeness_t

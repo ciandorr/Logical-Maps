@@ -1,0 +1,50 @@
+id: necessary-strong-atomicity-and-necessary-rigid-comprehension-imply-necessary-bf-relational
+premises:
+- necessary-strong-atomicity-r
+- necessary-rigid-comprehension-r
+conclusion: necessary-barcan-relational
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026, from Cian Dorr's argument of 11 October 2026
+    and Bacon's Lemma C.6
+  recorded_by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 19 October 2026
+  checked_by: []
+  date: '2026-10-19'
+  lean: verified
+  lean_ref: Classicism.Map.necessary_strong_atomicity_and_necessary_rigid_comprehension_imply_necessary_bf_relational
+sources:
+- Cian Dorr, suggestion of 11 October 2026, after the gap in Bacon's Theorem 8.2
+  (strong-atomicity-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational).
+- Andrew Bacon, Could the truths of mathematics have been different?, draft of 9 October 2025, Appendix C.2,
+  Lemma C.6 (atomicity-and-rigid-comprehension-imply-rigid-power).
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, Theorem 8.2,
+  pp. 169–170, the theorem this record proves with □Rigid Comprehension in place of Rigid Comprehension.
+source_names:
+- Dorr 11 Oct
+- Could mathematics have been different?
+- Philosophical Introduction to HOL
+references:
+- paper: bacon-2024-book
+  role: related
+  locator: §8.2, Theorem 8.2, pp. 169–170
+  note: The theorem as stated there, with unboxed Rigid Comprehension, remains the recorded conjecture
+    necessary-strong-atomicity-and-rigid-comprehension-imply-necessary-bf-relational.
+- paper: bacon-mathematical-contingency
+  role: proof
+  locator: Appendix C.2, Lemma C.6
+proof: >-
+  □Strong Atomicity gives □Atomicity (necessary-strong-atomicity-implies-necessary-atomicity), and with □Rigid
+  Comprehension, □Rigid Power (necessary-atomicity-and-necessary-rigid-comprehension-imply-necessary-rigid-power).
+  Cian Dorr's argument in strong-atomicity-necessary-rigid-comprehension-and-rigid-power-imply-bf-relational
+  derives BF at a relational type $\sigma$ in C from Strong Atomicity at $\sigma$, Rigid Comprehension at
+  $\sigma\to t$ at every world, and Rigid Power at $\sigma\to t$. It is a derivation in C from instances of
+  its three premises, so its necessitation is a theorem of C, and □Strong Atomicity, □Rigid Comprehension
+  (whose own necessitation it is by 4) and □Rigid Power give □BF at $\sigma$.
+notes: 'The boxed form of [[necessary-strong-atomicity-and-rigid-comprehension-imply-necessary-bf-relational]].
+
+
+  Theorem 8.2 of Bacon''s book, with □Rigid Comprehension in place of Rigid Comprehension. Rigid Comprehension
+  at other worlds enters twice: in Lemma C.6''s pull-back, run at every world for □Rigid Power, and in step
+  (ii) of Dorr''s argument. The conjecture with unboxed Rigid Comprehension is untouched: a countermodel to
+  it would have □Strong Atomicity and Rigid Comprehension without □Rigid Comprehension.'

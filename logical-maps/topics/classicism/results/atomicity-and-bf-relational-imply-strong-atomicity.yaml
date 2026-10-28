@@ -1,0 +1,27 @@
+id: atomicity-and-bf-relational-imply-strong-atomicity
+premises:
+- atomicity-r
+- barcan-relational
+conclusion: strong-atomicity-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), 11 October 2026, from a suggestion of Cian Dorr
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 11 October 2026
+  checked_by: []
+  date: '2026-10-11'
+  lean: verified
+  lean_ref: Classicism.Map.atomicity_and_bf_relational_imply_strong_atomicity
+sources:
+- Cian Dorr, suggestion of 11 October 2026.
+source_names:
+- Dorr 11 Oct
+proof: >-
+  The argument of atomicity-and-bf-imply-strong-atomicity uses BF only at the relational type $\sigma$
+  of the worlds, for the property $\lambda Y\, .\,W\le Y\lor W\le\neg Y$: every atom of type
+  $\sigma$ is then a strong atom, and Atomicity supplies an atom below each possible $X$.
+references:
+- paper: bacon-2024-book
+  role: proof
+  locator: §8.2, Exercise 8.12, p. 166
+notes: ''

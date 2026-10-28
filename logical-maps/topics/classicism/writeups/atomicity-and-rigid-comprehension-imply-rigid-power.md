@@ -11,7 +11,7 @@ with the necessitated form and the □BF consequence beside it).
 
 Bacon's Leibniz Biconditionals say that every possible relation is entailed by a world relation, a
 possible relation that entails every relation of its type or its negation; with the paper's unboxed
-worlds this is the map's Atomicity (Background, strong and weak worlds). Lemma C.6 is stated there
+worlds this is the map's Atomicity (Background, strong and atoms). Lemma C.6 is stated there
 with the relativized necessity $\Box_N$ and used for the Necessity of Analysis; here it is run with
 $\Box$ itself, and its conclusion is turned into Rigid Power.
 

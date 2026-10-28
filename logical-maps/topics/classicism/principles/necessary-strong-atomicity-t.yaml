@@ -1,0 +1,49 @@
+id: necessary-strong-atomicity-t
+name: □Strong Atomicity (type t)
+category: lattice
+statement: "Necessarily, every possible proposition is entailed by a strong atom, one that is possible and necessarily entails every proposition or its negation."
+formal: $\Box\forall p\, .\,\Diamond p\to\exists w\, .\,\operatorname{SAtom}_t(w)\land w\le p$
+definitions: 'where $\operatorname{SAtom}_t(w):=\Diamond w\land\Box\forall q\, .\,w\le q\lor w\le\neg
+  q$: a strong atom is a possible proposition that necessarily entails every proposition
+  or its negation.'
+date: '2026-09-22'
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, pp. 164–166.
+source_names:
+- Philosophical Introduction to HOL
+references:
+- paper: bacon-2024-book
+  role: formulation
+  locator: §8.2, pp. 164–166
+notes: The necessitated form of [[strong-atomicity-t]], and the type $t$ instance of [[necessary-strong-atomicity-r]].
+aliases:
+- □Strong Leibniz Biconditionals, type t (Bacon 2024)
+changes:
+- date: '2026-10-03'
+  by: Claude Opus 5.5 (Anthropic), prompted by Zachary Goodsell
+  summary: Restated the statement as the necessitation of the base principle's statement, in place of
+    a generic description of necessitation; the formal statement is unchanged.
+- date: '2026-10-19'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: the formal statement now displays the boxed formula (and so do the
+    equivalent forms); the notes now name the base principle with a link, without the boilerplate about
+    closed instances and the box; the equivalent forms are stated as necessitations of the base forms;
+    the notes link to the unrestricted form; definitions of its technical terms added.'
+- date: '2026-10-27'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: renamed from the Strong Leibniz Biconditionals to Strong Atomicity,
+    and strong worlds to strong atoms; Bacon’s name kept as an alias.'
+variants:
+- id: dual
+  lean:
+    ref: Classicism.P.NecStrongAtomicityTDual.schemaIn
+    equivalence_ref: Classicism.Map.necessary_strong_atomicity_t.dual
+    status: verified
+  name: Dual form
+  statement: Necessarily, whatever is entailed by every strong atom is necessary.
+  formal: $\Box\forall p\, .\,(\forall w\, .\,\operatorname{SAtom}_t(w)\to w\le p)\to\Box p$
+  equivalence: Each instance of the dual form of Strong Atomicity (type t) is derivable in
+    C from finitely many instances of the official form, and conversely; the derivation is on the page
+    of Strong Atomicity (type t). Necessitating it and applying K carries the equivalence
+    to the boxed forms.
+lean_def: Classicism.P.NecStrongAtomicityT.schemaIn

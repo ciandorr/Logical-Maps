@@ -1,0 +1,19 @@
+id: strong-atomicity-t-implies-strong-actuality
+premises:
+- strong-atomicity-t
+conclusion: strong-actuality
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 6 October 2026 (statement); proof written out by Claude Opus 5.5 (Anthropic)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 6 October 2026
+  checked_by: []
+  date: '2026-10-06'
+  lean: verified
+  lean_ref: Classicism.Map.strong_atomicity_t_implies_strong_actuality
+sources:
+- Cian Dorr, suggestion of 6 October 2026, introducing Strong Actuality.
+source_names:
+- Dorr 6 Oct
+proof: 'Strong Atomicity (type $t$) implies □Actuality (recorded), hence Actuality by T; let $a$ witness it. Since $a$ is true it is possible, so Strong Atomicity supplies a strong atom $w\le a$. Suppose $w$ false. Then $\neg w$ is true, so $a\le\neg w$, i.e. $w\le\neg a$; with $w\le a$ this gives $w\le\bot$, so $w=\bot$, contradicting $\Diamond w$. So $w$ is a true strong atom.'
+notes: 'Cian Dorr proposed Actuality and Strong Atomicity (type $t$) as premises; the first follows from the second by the recorded strong-atomicity-t-implies-necessary-actuality, so it is dropped.'

@@ -1,0 +1,62 @@
+id: strong-atomicity-t
+name: Strong Atomicity (type t)
+category: lattice
+statement: Every possible proposition is entailed by a strong atom, one that is possible
+  and necessarily entails every proposition or its negation.
+formal: $\forall p\, .\,\Diamond p\to\exists w\, .\,\operatorname{SAtom}_t(w)\land w\le p$
+definitions: 'where $\operatorname{SAtom}_t(w):=\Diamond w\land\Box\forall q\, .\,w\le q\lor w\le\neg
+  q$: a strong atom is a possible proposition that necessarily entails every proposition
+  or its negation.'
+date: '2026-09-22'
+sources:
+- Andrew Bacon, A Philosophical Introduction to Higher-Order Logics, Routledge, 2024, §8.2, pp. 164–165.
+source_names:
+- Philosophical Introduction to HOL
+references:
+- paper: bacon-2024-book
+  role: formulation
+  locator: §8.2, pp. 164–165
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Definition 3.19 and satisfaction clauses, pp. 55–57; idempotent model, p. 59
+  note: Semantics used to correct the supplementary singleton claim on 25 September 2026; the defining
+    Strong Atomicity formula is unchanged.
+notes: 'The type $t$ instance of [[strong-atomicity-r]]. Broken out as its own principle, like Atomicity
+  (type t), at Cian Dorr’s request, because the type-t case can be settled in many models where the higher
+  types have not been checked. A singleton need not be a strong atom in a one-object action model.
+
+  At an arrow h its shift is the precomposition fibre, but a proposition newly quantified
+
+  inside the box ranges over the entire target domain, not just shifted root propositions.
+
+  For the full monoid {1,k} with k²=k≠1, the singleton {k} shifts under k to {1,k},
+
+  which the target proposition {k} splits. Group actions do send singletons to singletons.
+
+  Correction found by the DeepSeek deepseek-flash trawl and informally checked against
+
+  Classicism pp. 55–57 by OpenAI Codex (GPT-6), 25 September 2026; see the handwritten
+
+  strong-atoms-one-object-action-models proof and the full-idempotent-monoid change history.'
+changes:
+- date: '2026-10-19'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: the statement now says what the principle says; the notes link to
+    the unrestricted form; definitions of its technical terms added.'
+- date: '2026-10-27'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: 'At Cian Dorr’s request: renamed from the Strong Leibniz Biconditionals to Strong Atomicity,
+    and strong worlds to strong atoms; Bacon’s name kept as an alias.'
+aliases:
+- Strong Leibniz Biconditionals, type t (Bacon 2024)
+variants:
+- id: dual
+  lean:
+    ref: Classicism.P.StrongAtomicityTDual.schemaIn
+    equivalence_ref: Classicism.Map.strong_atomicity_t.dual
+    status: verified
+  name: Dual form
+  statement: Whatever is entailed by every strong atom is necessary.
+  formal: $\forall p\, .\,(\forall w\, .\,\operatorname{SAtom}_t(w)\to w\le p)\to\Box p$
+  equivalence: The argument for the dual form of Strong Atomicity, at type $t$.
+lean_def: Classicism.P.StrongAtomicityT.schemaIn

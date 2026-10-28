@@ -1,14 +1,14 @@
 import Classicism.Paper
 import Classicism.Background.Rigidity
 import Classicism.Background.Lattice
-import Classicism.Background.Worlds
+import Classicism.Background.Atoms
 import Classicism.Background.Arithmetic
 
 /-!
 # Principles of the map's category `lattice`
 
 Atomicity, Boolean Completeness and Countable Boolean Completeness, Actuality, Actual
-Profile, Vicinity, Strong Actuality and the Strong Leibniz Biconditionals, with their boxed forms: what the
+Profile, Vicinity, Strong Actuality and Strong Atomicity, with their boxed forms: what the
 order `≤_τ` at a relational type is like. See `Classicism/Principles.lean` for how a
 principle is stated and where its forms go.
 
@@ -140,60 +140,60 @@ def Vicinity : Prop := ∃ p : Prop, p ∧ ∀ q : Prop, q → p ≤ ◇ q
 /-- `necessary-vicinity`: Vicinity boxed. -/
 def NecVicinity : Prop := □ Vicinity
 
-/-- `strong-actuality`: `∃p. p ∧ □∀q. p ≤ q ∨ p ≤ ¬q`, there is a true strong world at
+/-- `strong-actuality`: `∃p. p ∧ □∀q. p ≤ q ∨ p ≤ ¬q`, there is a true strong atom at
 type `t`: a truth that necessarily decides every proposition. -/
 def StrongActuality : Prop := ∃ p : Prop, p ∧ □ (∀ q : Prop, p ≤ q ∨ p ≤ ¬ q)
 /-- `necessary-strong-actuality`: Strong Actuality boxed. -/
 def NecStrongActuality : Prop := □ StrongActuality
 
-/-! ## The Strong Leibniz Biconditionals -/
+/-! ## Strong Atomicity -/
 
-/-- `SWorld_τ(W) := ◇_τ W ∧ □∀Y. W ≤ Y ∨ W ≤ ¬Y`, with `◇_τ W := W ≠ ⊥_τ` (Bacon §8.2). -/
-def SWorld {τ : Type} [Rel τ] (W : τ) : Prop :=
+/-- `SAtom_τ(W) := ◇_τ W ∧ □∀Y. W ≤ Y ∨ W ≤ ¬Y`, with `◇_τ W := W ≠ ⊥_τ` (Bacon §8.2). -/
+def SAtom {τ : Type} [Rel τ] (W : τ) : Prop :=
   W ≠ ⊥ ∧ □ (∀ Y : τ, W ≤ Y ∨ W ≤ ¬ Y)
-/-- `strong-leibniz-r` at `τ`: every possible entity is entailed by a strong world. -/
-def StrongLeibniz (τ : Type) [Rel τ] : Prop :=
-  ∀ X : τ, X ≠ ⊥ → ∃ W : τ, SWorld W ∧ W ≤ X
-/-- `strong-leibniz-r`, form `dual`, at `τ`: `∀X. (∀W. SWorld(W) → W ≤ X) → ¬X ≤ X`,
-whatever is above every strong world is top. -/
-def StrongLeibnizDual (τ : Type) [Rel τ] : Prop :=
-  ∀ X : τ, (∀ W : τ, SWorld W → W ≤ X) → (¬ X) ≤ X
+/-- `strong-atomicity-r` at `τ`: every possible entity is entailed by a strong atom. -/
+def StrongAtomicity (τ : Type) [Rel τ] : Prop :=
+  ∀ X : τ, X ≠ ⊥ → ∃ W : τ, SAtom W ∧ W ≤ X
+/-- `strong-atomicity-r`, form `dual`, at `τ`: `∀X. (∀W. SAtom(W) → W ≤ X) → ¬X ≤ X`,
+whatever is above every strong atom is top. -/
+def StrongAtomicityDual (τ : Type) [Rel τ] : Prop :=
+  ∀ X : τ, (∀ W : τ, SAtom W → W ≤ X) → (¬ X) ≤ X
 
 section
 variable {τ : Type} [Rel τ] [Order τ] [Pointwise τ]
 
-/-- `strong-leibniz-r` to its dual form: if every strong world is below `X` but `¬X` is
-not bottom, a strong world is below `¬X` and `X`, hence bottom, which it is not. -/
-theorem StrongLeibniz.to_dual : StrongLeibniz τ → StrongLeibnizDual τ := fun sl X hX =>
+/-- `strong-atomicity-r` to its dual form: if every strong atom is below `X` but `¬X` is
+not bottom, a strong atom is below `¬X` and `X`, hence bottom, which it is not. -/
+theorem StrongAtomicity.to_dual : StrongAtomicity τ → StrongAtomicityDual τ := fun sl X hX =>
   (em ((¬ X) = ⊥)).elim
     (fun e => by rw [e]; exact bot_le_rel X)
     (fun hne => (sl (¬ X) hne).elim fun W hW =>
       absurd (eq_bot_of_le_neg_rel W (le_neg_of_le_both_rel W X (hX W hW.1) hW.2)) hW.1.1)
 
-/-- `strong-leibniz-r` from its dual form: a strong world lies below `X` or below `¬X`
+/-- `strong-atomicity-r` from its dual form: a strong atom lies below `X` or below `¬X`
 (`T` on its boxed clause), so if none lies below `X`, every one lies below `¬X`, which the
 dual form makes top, and `X` bottom. -/
-theorem StrongLeibniz.of_dual : StrongLeibnizDual τ → StrongLeibniz τ := fun d X hX =>
-  (em (∃ W : τ, SWorld W ∧ W ≤ X)).elim (fun h => h) fun hn =>
+theorem StrongAtomicity.of_dual : StrongAtomicityDual τ → StrongAtomicity τ := fun d X hX =>
+  (em (∃ W : τ, SAtom W ∧ W ≤ X)).elim (fun h => h) fun hn =>
     absurd (eq_bot_of_le_neg_rel X (le_trans_rel _ _ _ (le_neg_neg_rel X) (d (¬ X) fun W hW =>
       (box_elim hW.2 X).elim (fun h => absurd ⟨W, hW, h⟩ hn) (fun h => h)))) hX
 
 end
 
-/-- `necessary-strong-leibniz-r` at `τ`. -/
-def NecStrongLeibniz (τ : Type) [Rel τ] : Prop := □ (StrongLeibniz τ)
-/-- `necessary-strong-leibniz-r`, form `dual`, at `τ`: the dual, boxed. -/
-def NecStrongLeibnizDual (τ : Type) [Rel τ] : Prop := □ (StrongLeibnizDual τ)
+/-- `necessary-strong-atomicity-r` at `τ`. -/
+def NecStrongAtomicity (τ : Type) [Rel τ] : Prop := □ (StrongAtomicity τ)
+/-- `necessary-strong-atomicity-r`, form `dual`, at `τ`: the dual, boxed. -/
+def NecStrongAtomicityDual (τ : Type) [Rel τ] : Prop := □ (StrongAtomicityDual τ)
 
 section
 variable {τ : Type} [Rel τ] [Order τ] [Pointwise τ]
 
-/-- `necessary-strong-leibniz-r` to its dual form. -/
-theorem NecStrongLeibniz.to_dual : NecStrongLeibniz τ → NecStrongLeibnizDual τ :=
-  modal_K _ _ (nec% (StrongLeibniz.to_dual (τ := τ)))
-/-- `necessary-strong-leibniz-r` from its dual form. -/
-theorem NecStrongLeibniz.of_dual : NecStrongLeibnizDual τ → NecStrongLeibniz τ :=
-  modal_K _ _ (nec% (StrongLeibniz.of_dual (τ := τ)))
+/-- `necessary-strong-atomicity-r` to its dual form. -/
+theorem NecStrongAtomicity.to_dual : NecStrongAtomicity τ → NecStrongAtomicityDual τ :=
+  modal_K _ _ (nec% (StrongAtomicity.to_dual (τ := τ)))
+/-- `necessary-strong-atomicity-r` from its dual form. -/
+theorem NecStrongAtomicity.of_dual : NecStrongAtomicityDual τ → NecStrongAtomicity τ :=
+  modal_K _ _ (nec% (StrongAtomicity.of_dual (τ := τ)))
 
 end
 

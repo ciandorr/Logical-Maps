@@ -39,7 +39,7 @@ other: `consistent_neg_of_imp`). And one consequence of Possibility rather than 
 exclusion: `possibility-schema-r-implies-possible-infinity-e`, since the Axiom of Infinity
 at `e` holds in the full Henkin model on `ℕ`.
 
-Not here, for want of the models: the incompatibilities with `□`Strong Leibniz (`t`),
+Not here, for want of the models: the incompatibilities with `□`Strong Atomicity (`t`),
 `□`Relational Choice, Countable Boolean Completeness and the Necessity of Arithmetic
 (coalesced sums, a Henkin model without choice, Gödel), and the maximalist one with
 Rigid Comprehension unboxed (Gödel, through the Necessity of Arithmetic).

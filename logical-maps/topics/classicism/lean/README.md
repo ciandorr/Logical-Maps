@@ -79,7 +79,7 @@ it: `Framework.lean` (Existence, Ordinary Comprehension), `Necessity.lean` (the 
 of the defined box — `K`, `T`, `4`, the Necessity of Identity, the Converse Barcan Formula,
 Intensionality and its corollaries), `Order.lean` (the algebraic order `≤_τ` and its
 equivalence with the boxed pointwise implication, as the class `Order`) and `Lattice.lean`
-(the order laws and the lattice predicates such as `Atom`), `Worlds.lean` (atoms decide),
+(the order laws and the lattice predicates such as `Atom`), `Atoms.lean` (atoms decide),
 `Rigidity.lean` (persistence, inextensibility and the rigidity variants) and
 `RigidityClosure.lean` (haecceities, unions, images), `Varieties.lean` (the chain
 `□ ≤ □_≠ ≤ □̂̂ ≤ □₅`), `Relations.lean` (well-orders, Modalized Plenitude) and
@@ -302,7 +302,7 @@ Classicism/Background/                  the lemmas of the map's Background pages
   Necessity.lean                          K, T, 4, NI, CBF, Intensionality and its corollaries; the further laws of □ and ◇
   Order.lean                              the algebraic order and its pointwise characterisation; an entailment, if true, is necessary
   Lattice.lean                            Atom, the bounds LB/GLB/UB/LUB, ActualWorld; the order laws at t, at σ → t and at a relational type
-  Worlds.lean                             atoms decide everything of their type, and conversely
+  Atoms.lean                              atoms decide everything of their type, and conversely
   Rigidity.lean                           persistence, inextensibility and the rigidity variants; rigidity is necessary if true
   RigidityClosure.lean                    haecceities are rigid; rigid unions, direct images, inverse images
   Varieties.lean                          the chain □ ≤ □_≠ ≤ □̂̂ ≤ □₅ ≤ λp. p

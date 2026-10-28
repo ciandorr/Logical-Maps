@@ -88,7 +88,7 @@ numeral of type $(tt)t$ holds of $\lambda p\, .\,\top$ at the root.
 *ND fails.* Take threads $a\ne b$ with $a_1=b_1$. Then $a\ne b$ at the root
 while $a=b$ is true at world $1$, so $\Diamond(a=b)$ holds at the root.
 
-## Atomicity, Boolean Completeness, Strong Leibniz and rigidity at every relational type
+## Atomicity, Boolean Completeness, Strong Atomicity and rigidity at every relational type
 
 The additional flags below were proposed by DeepSeek `deepseek-flash` in the
 Classicism trawl of 25 September 2026, principally in workspaces
@@ -130,8 +130,8 @@ the quantified atomicity condition there is precisely that of the full
 power-set algebra $\mathcal P(A_n)$. Atomicity holds at every world and
 every relational type, establishing `necessary-atomicity-r`.
 
-**Strong Leibniz.** Each root atom $W$ just constructed is also a strong
-world at the root. For any $Y$, its unique supported tuple belongs either
+**Strong Atomicity.** Each root atom $W$ just constructed is also a strong
+atom at the root. For any $Y$, its unique supported tuple belongs either
 to the corresponding coordinate of $Y$ or to its complement, so
 $W\le Y$ or $W\le\neg Y$ holds at the root. At any component, the image
 of $W$ is either a singleton or empty. In the first case the same
@@ -139,9 +139,9 @@ alternative holds there; in the second both disjuncts hold. Consequently
 $\Box\forall Y\,(W\le Y\lor W\le\neg Y)$ holds at the root, and $W$ is
 non-bottom there. The settling condition is necessary; non-bottomness is
 not required at the other worlds. At each one-world component, the
-modality is the identity and singletons are strong worlds. The Strong
-Leibniz Biconditionals therefore hold at every relational type and world,
-establishing `necessary-strong-leibniz-r` as well as `strong-leibniz-r`.
+modality is the identity and singletons are strong atoms. Strong
+Atomicity therefore hold at every relational type and world,
+establishing `necessary-strong-atomicity-r` as well as `strong-atomicity-r`.
 
 **Boolean Completeness.** Given a property $F$ of $\tau$-entities, let
 $S=\{x\in D_\tau:F_0(x)=1\}$ be its extension at the root. Set
@@ -196,8 +196,8 @@ For the record, it suffices to add `necessary-atomicity-r`,
 `necessary-boolean-completeness-r` and `necessary-rigid-comprehension-r`.
 The existing implication rules, with the already recorded BF and □BF,
 derive Atomicity, Boolean Completeness, Rigid Comprehension and both
-Strong Leibniz schemata from these flags.
+Strong Atomicity schemata from these flags.
 
 ## Additional arguments (25 September 2026)
 
-The lattice principles hold at the root at every relational type, and necessarily. At a type $\sigma\to t$ a root entity is a pair $(G_0,(G_n)_n)$ with $G_0$ any function on the root domain and $G_n$ in the full domain of $M_n$; entailment is componentwise. Atomicity: below a nonzero $G$ lies the atom that is true at the root of one argument $a$ with $G_0(a)=1$ and bottom in every component, or, if $G_0=0$, the atom that is bottom at the root and in all but one component $M_n$, where it is an atom of that full model below $G_n$. Both kinds of atom are strong worlds: at the root they entail every entity or its negation, being singletons in one coordinate and bottom elsewhere, and their shifts to the components are bottom or atoms of a one-world full model. So the Strong Leibniz Biconditionals hold at every type. Boolean Completeness: the componentwise meet of any set of root entities is a root entity and is the greatest lower bound. Rigid Comprehension: given $X$ with root extension $E$, let $Y$ have root component $X_0$ and, in $M_n$, the projection of $E$ to the $n$-th coordinates; $Y$ is persistent, since a root instance has its projection in every component, and inextensible, since a relation necessary of every root instance contains those projections, while in the one-world components persistence and inextensibility are automatic. Each component is a full Henkin model, in which all of these hold, so the boxed forms hold at the root; Countable Boolean Completeness, the weak rigid comprehension principles and Necessity of Arithmetic follow by the recorded results. B for pure sentences fails, and B for sentences of $\Sigma$ with it: the pure sentence that there are two individuals is true at the root and false at the first component, from which no arrow returns. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026.
+The lattice principles hold at the root at every relational type, and necessarily. At a type $\sigma\to t$ a root entity is a pair $(G_0,(G_n)_n)$ with $G_0$ any function on the root domain and $G_n$ in the full domain of $M_n$; entailment is componentwise. Atomicity: below a nonzero $G$ lies the atom that is true at the root of one argument $a$ with $G_0(a)=1$ and bottom in every component, or, if $G_0=0$, the atom that is bottom at the root and in all but one component $M_n$, where it is an atom of that full model below $G_n$. Both kinds of atom are strong atoms: at the root they entail every entity or its negation, being singletons in one coordinate and bottom elsewhere, and their shifts to the components are bottom or atoms of a one-world full model. So Strong Atomicity holds at every type. Boolean Completeness: the componentwise meet of any set of root entities is a root entity and is the greatest lower bound. Rigid Comprehension: given $X$ with root extension $E$, let $Y$ have root component $X_0$ and, in $M_n$, the projection of $E$ to the $n$-th coordinates; $Y$ is persistent, since a root instance has its projection in every component, and inextensible, since a relation necessary of every root instance contains those projections, while in the one-world components persistence and inextensibility are automatic. Each component is a full Henkin model, in which all of these hold, so the boxed forms hold at the root; Countable Boolean Completeness, the weak rigid comprehension principles and Necessity of Arithmetic follow by the recorded results. B for pure sentences fails, and B for sentences of $\Sigma$ with it: the pure sentence that there are two individuals is true at the root and false at the first component, from which no arrow returns. Observations of Claude Fable 5.1 (Anthropic), 25 September 2026.

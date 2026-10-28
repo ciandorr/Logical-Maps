@@ -63,12 +63,12 @@ arguments:
     at the root then every component of $X$ is universal and so is its root component, whence $\Box\forall
     y\, .\,Xy$; BF holds at the one-world components trivially, so $\Box$BF holds.
 - holds:
-  - necessary-strong-leibniz-t
+  - necessary-strong-atomicity-t
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
   date: '2026-09-22'
   text: At the root, the singleton of the arrow to component $n$ becomes that component’s identity under
     it and empty under every other arrow, and the root proposition becomes empty under every non-identity
-    arrow, so every singleton is a strong world; the components are one-world models.
+    arrow, so every singleton is a strong atom; the components are one-world models.
 - id: free-root-component
   holds:
   - atomicity-t
@@ -97,9 +97,9 @@ arguments:
     root domain and $G_n$ in the full domain of $M_n$; entailment is componentwise. Atomicity: below a
     nonzero $G$ lies the atom that is true at the root of one argument $a$ with $G_0(a)=1$ and bottom
     in every component, or, if $G_0=0$, the atom that is bottom at the root and in all but one component
-    $M_n$, where it is an atom of that full model below $G_n$. Both kinds of atom are strong worlds: at
+    $M_n$, where it is an atom of that full model below $G_n$. Both kinds of atom are strong atoms: at
     the root they entail every entity or its negation, being singletons in one coordinate and bottom elsewhere,
-    and their shifts to the components are bottom or atoms of a one-world full model. So the Strong Leibniz
+    and their shifts to the components are bottom or atoms of a one-world full model. So Strong Atomicity
     Biconditionals hold at every type. Boolean Completeness: the componentwise meet of any set of root
     entities is a root entity and is the greatest lower bound. Rigid Comprehension: given $X$ with root
     extension $E$, let $Y$ have root component $X_0$ and, in $M_n$, the projection of $E$ to the $n$-th
@@ -158,9 +158,9 @@ history:
   - distinctness-schema-r
 - date: '2026-09-22'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
-  summary: Added □Strong Leibniz Biconditionals (type t); see the notes.
+  summary: Added □Strong Atomicity (type t); see the notes.
   satisfies:
-  - necessary-strong-leibniz-t
+  - necessary-strong-atomicity-t
 - date: '2026-09-22'
   by: Cian Dorr, recorded by Claude Fable 5.1 (Anthropic)
   summary: Added Atomicity (type t), Boolean Completeness (type t) and Relational Choice, and the failure
@@ -194,7 +194,7 @@ history:
   by: OpenAI Codex (GPT-6), prompted by Zachary Goodsell
   summary: 'Accepted all-type product-algebra additions from the DeepSeek trawl after correcting the proof:
     Atomicity, Boolean Completeness and Rigid Comprehension hold at every world. Root atoms remain atoms
-    or bottom in the components, so the Strong Leibniz schemata hold too. The projected-extension RC proof
+    or bottom in the components, so Strong Atomicity schemata hold too. The projected-extension RC proof
     is supplied by this review; boxed claims are checked at every world, not obtained by necessitating
     a hypothesis.'
   satisfies:
@@ -203,12 +203,12 @@ history:
   - necessary-rigid-comprehension-r
 - date: '2026-09-25'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
-  summary: Added □Atomicity, □Boolean Completeness, □Rigid Comprehension and □Strong Leibniz Biconditionals
+  summary: Added □Atomicity, □Boolean Completeness, □Rigid Comprehension and □Strong Atomicity
     at the root, and the failure of B for pure sentences, with the arguments in the notes.
   satisfies:
   - necessary-atomicity-r
   - necessary-boolean-completeness-r
   - necessary-rigid-comprehension-r
-  - necessary-strong-leibniz-r
+  - necessary-strong-atomicity-r
   violates:
   - pure-b-r

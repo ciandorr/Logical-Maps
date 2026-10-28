@@ -12,7 +12,7 @@ sources:
   (“Frex*”) from another context; it satisfies □Strong Actuality and refutes Inextensible Comprehension.
 - Claude Opus 5.5 (Anthropic), 6 October 2026, at Cian Dorr's direction; the corrected argument for the
   failure of Inextensible Comprehension, and the verdicts on ND, Atomicity, Boolean Completeness, BF and
-  the Strong Leibniz Biconditionals; see the write-up.
+  Strong Atomicity; see the write-up.
 - Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Definitions
   15–18, p. 8; Proposition 20 (symmetric ideally-full models are models of C).
 - GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Old/new model, Boolean Completeness and the rigidity separation,
@@ -63,7 +63,7 @@ arguments:
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
   date: '2026-10-06'
   writeup: symmetric-old-new-individuals
-  text: 'At $E$ the arrows to $E$ form a true strong world: along an arrow to $E$ it becomes itself, along
+  text: 'At $E$ the arrows to $E$ form a true strong atom: along an arrow to $E$ it becomes itself, along
     an arrow to $O$ the set of arrows from $O$ to $E$, an atom. At $O$, $G_O$ is one: along a member of
     $G_O$ it becomes itself, along a member of $K$ or an arrow to $E$ the empty set. Both objects are
     reachable from $E$.'
@@ -100,12 +100,12 @@ arguments:
     distinct from $0'$, yet after any arrow $m:O\to E$, $Y$ holds of $m(0')$; so $Y$ is not weakly inextensible
     at $\iota$.
 - fails:
-  - strong-leibniz-t
+  - strong-atomicity-t
   by: Claude Opus 5.5 (Anthropic), at Cian Dorr's direction
   date: '2026-10-06'
   writeup: symmetric-old-new-individuals
   text: The arrows from $E$ to $O$ form a possible proposition whose only nonzero part is itself, and
-    along the inclusion $\iota$ it becomes $G_O\cup K$, which $G_O$ splits; so no strong world lies below
+    along the inclusion $\iota$ it becomes $G_O\cup K$, which $G_O$ splits; so no strong atom lies below
     it. (The map derives the failures of BF and of □ND at $t$; the write-up also gives them directly.)
 - holds:
   - necessary-boolean-completeness-t
@@ -222,13 +222,13 @@ arguments:
   - necessary-truth-implies-five-necessity
   by: Claude Fable 5.1 (Anthropic), at Cian Dorr's direction
   date: '2026-10-14'
-  text: 'At $E$ the four propositions are determined by the target, and the strong world $a$ is the set
+  text: 'At $E$ the four propositions are determined by the target, and the strong atom $a$ is the set
     of arrows $E\to E$. $\Diamond a$ is every arrow out of $E$, since an injection $E\to O$ with old range
     is followed by an injection $O\to E$, so $\Box_{\ne}=\Box$ at $E$. But $\hat\Diamond a$ contains no
     arrow $u:E\to O$: its retractions $v:O\to E$ cannot return to the truth $G_O$ at $O$, because any
     $x:E\to O$ has old range and $x\circ v\in K$. So $\hat{\hat\Box}$ at $E$ is the box over $a$; $a$
     is two-hat necessary and not ND-necessary, and every truth ($\top$ and $a$) is two-hat necessary.
-    At $O$, with strong world $G_O$, $\hat\Diamond G_O=G_O$ (a member of $K$ or an arrow to $E$ cannot
+    At $O$, with strong atom $G_O$, $\hat\Diamond G_O=G_O$ (a member of $K$ or an arrow to $E$ cannot
     be brought back into $G_O$), so every truth at $O$, each containing $G_O$, is two-hat necessary. With
     necessary Strong Actuality, $\Box_5=\hat{\hat\Box}$ everywhere, so every truth is 5-necessary at both
     objects.'

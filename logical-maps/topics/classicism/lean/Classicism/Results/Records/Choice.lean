@@ -1149,7 +1149,7 @@ theorem modal_well_ordering_implies_necessary_modalized_relational_choice {σ τ
     (box_modal_well_ordering h)
 
 
-/-! ### Strong Leibniz, Weak Rigid Comprehension and Relational Choice (20 October 2026) -/
+/-! ### Strong Atomicity, Weak Rigid Comprehension and Relational Choice (20 October 2026) -/
 
 /-- Distinct atoms of type `t` are incompatible: their meet lies below each, so it is that
 atom or `⊥`, and it is not both atoms. -/
@@ -1185,26 +1185,26 @@ theorem box_pairs_of_weaklyInextensible {α : Type} [Ty α] (R : α → Prop)
       box_elim (H b hb) a ha))
     (hR (fun b => □ (∀ a, R a → Z a b)) hb)
 
-/-- `strong-leibniz-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice`
+/-- `strong-atomicity-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice`
 (Cian Dorr's construction). For each atom `w` of type `t`, Relational Choice picks a strong
-world `X_w` of type `σt` below `λy. w ∧ Fy`; Weak Rigid Comprehension gives a weakly rigid `R`
+atom `X_w` of type `σt` below `λy. w ∧ Fy`; Weak Rigid Comprehension gives a weakly rigid `R`
 coextensive with the property of being some `X_w`; and `G := λy. ∃X. RX ∧ Xy`. Weak
 inextensibility carries to every world that each instance of `R` is below `F` and has at most
 one instance, and, by the pair lemma, that two instances of `R` are identical or not both
 instantiated, since distinct atoms are incompatible. -/
-theorem strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice
+theorem strong_atomicity_weak_rigid_comprehension_and_relational_choice_imply_intensional_choice
     {σ : Type} [Ty σ] :
-    StrongLeibniz Prop → StrongLeibniz (σ → Prop) →
+    StrongAtomicity Prop → StrongAtomicity (σ → Prop) →
       WeakRigidComprehension ((σ → Prop) → Prop) → RelationalChoice Prop (σ → Prop) →
         IntensionalChoice σ := by
   intro sl₀ sl₁ wrc rc F hF
-  -- Atomicity at `t`, as in `strong-leibniz-t-implies-atomicity-t`.
+  -- Atomicity at `t`, as in `strong-atomicity-t-implies-atomicity-t`.
   have at₀ : Atomicity Prop := fun x => (em (x ≤ ¬ x)).elim Or.inl fun hx =>
     (sl₀ x fun e => hx (le_neg_of_eq_false x e)).elim fun w hw =>
       Or.inr ⟨w, atom_of_decides w ⟨hw.1.1, box_elim hw.1.2⟩, hw.2⟩
-  -- Each atom `w` is related to the strong worlds of type `σt` below `λy. w ∧ Fy`.
+  -- Each atom `w` is related to the strong atoms of type `σt` below `λy. w ∧ Fy`.
   have hser : Serial (λ (w : Prop) (X : σ → Prop) ↦
-      Atom w → SWorld X ∧ X ≤ (λ y ↦ w ∧ F y)) := by
+      Atom w → SAtom X ∧ X ≤ (λ y ↦ w ∧ F y)) := by
     intro w
     em_cases hw : Atom w
     · have hne : (λ y ↦ w ∧ F y) ≠ Rel.bot (σ → Prop) := fun e => by
@@ -1224,8 +1224,8 @@ theorem strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_inte
   obtain ⟨V, hVf, hVU⟩ := rc _ hser
   obtain ⟨R, ⟨hRp, hRi⟩, hco⟩ := wrc (λ X ↦ ∃ w, Atom w ∧ V w X)
   have hco' : ∀ X, R X ↔ ∃ w, Atom w ∧ V w X := fun X => (hco X).symm
-  -- What an actual instance of `R` is: a strong world below `λy. w ∧ Fy` for an atom `w`.
-  have hinst : ∀ X, R X → ∃ w, Atom w ∧ V w X ∧ SWorld X ∧ □ (∀ y, X y → w ∧ F y) :=
+  -- What an actual instance of `R` is: a strong atom below `λy. w ∧ Fy` for an atom `w`.
+  have hinst : ∀ X, R X → ∃ w, Atom w ∧ V w X ∧ SAtom X ∧ □ (∀ y, X y → w ∧ F y) :=
     fun X hX => ((hco' X).1 hX).elim fun w ⟨hw, hV⟩ =>
       ⟨w, hw, hV, (hVU w X hV hw).1, (le_iff _ _).1 (hVU w X hV hw).2⟩
   -- (a) Necessarily, each instance of `R` is below `F` and has at most one instance.
@@ -1262,7 +1262,7 @@ theorem strong_leibniz_weak_rigid_comprehension_and_relational_choice_imply_inte
       (Atomicity.to_dual at₀ _ fun w hw => (atom_le_or_le_neg w _ hw).elim id fun hn => by
         obtain ⟨X, hV, -⟩ := hVf w
         have hRX : R X := (hco' X).2 ⟨w, hw, hV⟩
-        have hS : SWorld X := (hVU w X hV hw).1
+        have hS : SAtom X := (hVU w X hV hw).1
         have hle : □ (∀ y, X y → w ∧ F y) := (le_iff _ _).1 (hVU w X hV hw).2
         have hbot : □ (X ⊆ Rel.bot (σ → Prop)) := modal_K _ _ (modal_K _ _ (modal_K _ _
           (nec% (fun (h₁ : w → ¬ ∃ y, ∃ X, R X ∧ X y) (h₂ : R X) (h₃ : ∀ y, X y → w ∧ F y) =>

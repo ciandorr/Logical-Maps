@@ -12,17 +12,17 @@ definitions: where $\operatorname{Preorder}(R)$ says that $R$ is reflexive and t
 date: '2026-10-08'
 sources:
 - Cian Dorr, suggestion of 8 October 2026, to add Zorn's Lemma in preorder form with a proof from
-  Transversal Choice of the shape of Lewin's.
-- Jonathan Lewin, A Simple Proof of Zorn's Lemma, American Mathematical Monthly 98 (1991), pp. 353–354.
+  Transversal Choice.
+- Serge Lang, Algebra, Appendix 2.
 source_names:
 - Dorr 8 Oct
-- Lewin 1991
+- Lang
 references:
-- paper: lewin-1991
+- paper: lang-algebra
   role: background
-  locator: pp. 353–354
-  note: Zorn's Lemma for partial orders on sets, with a proof from the axiom of choice by conforming
-    subsets.
+  locator: Appendix 2
+  note: Zorn's Lemma for partial orders on sets, derived from the axiom of choice through the
+    Bourbaki–Witt fixed-point theorem applied to chains ordered by inclusion.
 notes: >-
   Preorder and TotalOrder are as in Background; everything is unboxed. The preorder form is
   used because the orders to which Zorn's Lemma is applied at higher types, such as extension of
@@ -30,10 +30,16 @@ notes: >-
   so antisymmetric, so the hypothesis concerns fewer properties than comparability alone would; this
   makes the principle stronger. For a partial order the conclusion says that $m$ is maximal in the
   usual sense. Zorn's Lemma is equivalent to Transversal Choice and to Well-Ordering, by the recorded
-  results; the proof from Transversal Choice follows Lewin and uses Transversal Choice only to make
-  the choice relation give coextensive chains the same value.
+  results; the proof from Transversal Choice follows Lang, through the Bourbaki–Witt lemma, and uses
+  Transversal Choice beyond Relational Choice only to make the step from a chain invariant under
+  coextension.
 changes:
 - date: '2026-10-19'
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
   summary: 'At Cian Dorr’s request: definitions of its technical terms added.'
+- date: '2026-10-27'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: >-
+    Source and note updated: the proof from Transversal Choice now follows Lang, through the
+    Bourbaki–Witt lemma, instead of Lewin.
 lean_def: Classicism.P.Zorn.schemaIn

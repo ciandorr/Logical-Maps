@@ -511,8 +511,7 @@
   .page .group-detail { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 8px; }
   .page .group-detail h3 { font: 600 15px var(--sans); margin: 4px 0 6px; }
   .page .group-param { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; border-top: 1px solid var(--line); padding: 8px 0; }
-  .page .group-param > .note { grid-column: 1; }
-  .page .group-param > button { grid-row: 1 / span 2; grid-column: 2; align-self: start; }
+  .page .group-param > button { grid-column: 2; align-self: start; }
   .page .group-param > button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
   .page dl.group-params dt { font-weight: 600; margin-top: 6px; } .page dl.group-params dd { margin: 2px 0 6px 14px; }
   .page details.argument details.review { margin: 2px 0 6px 14px; font-size: 12.5px; color: var(--ink-2); }
@@ -582,7 +581,7 @@
   .bg-item-foot details { margin-top: 4px; }
   .lean-ref { font-size: 12px; white-space: nowrap; }
   .lean-menu { display: inline; }
-  button.badge.lean { cursor: pointer; font-family: var(--sans); line-height: inherit; }
+  button.badge.lean { cursor: pointer; margin: 0; }
   button.badge.lean:hover, button.badge.lean[aria-expanded="true"] { background: var(--panel-2); }
   .lean-pop { position: fixed; z-index: 1000; display: flex; flex-direction: column; min-width: 160px; max-width: min(360px, calc(100vw - 32px));
     max-height: min(60vh, 420px); overflow-y: auto; padding: 4px 0; background: var(--panel); color: var(--ink);
@@ -687,7 +686,6 @@
   .ex-m > .model-heading[data-ex-inspect]:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
   .ex-m.sel > .model-heading[data-ex-inspect] { background: var(--hl); }
   .ex-p .family-verdict { font-size: 11.5px; margin-left: 6px; font-variant-numeric: tabular-nums; }
-  .ex-m .ex-fit { font-size: 12px; color: var(--ink-2); margin: 2px 0 0 16px; }
   .ex-m .twisty { flex: none; align-self: center; width: 18px; height: 18px; margin: -4px 2px -4px -4px; padding: 0; border: 0; border-radius: 4px; background: none; color: var(--ink-3); font-size: 10px; line-height: 18px; cursor: pointer; transition: transform .12s; }
   .ex-m .twisty:hover { color: var(--ink); background: color-mix(in srgb, var(--ink) 8%, transparent); }
   .ex-m .twisty[aria-expanded="true"] { transform: rotate(90deg); }
@@ -3153,7 +3151,6 @@ function renderModels() {
     const extra = groupsKnown.has(e.g.id) ? potentialOf(e.g.id).length : 0, sel = state.groupId === e.g.id && !inspected;
     const open = state.openGroups.has(e.g.id);
     return `<li class="ex-m ex-group${sel ? ' sel' : ''}"><div ${inspector('group', e.g.id, sel)}>${twisty('members', e.g.id, open, 'Its models')}<button class="lnk" data-open-group="${esc(e.g.id)}">${esc(e.g.name)}</button><span class="via ex-sum">${groupCount(e.g, e.fits)}${extra ? ` +${extra} potential` : ''}</span></div>`
-      + (fitDescription(e.g, e.fits) ? `<div class="ex-fit">${esc(fitDescription(e.g, e.fits))}</div>` : '')
       + `<div class="ex-sub" data-ex-members="${esc(e.g.id)}"${open ? '' : ' hidden'}><ul class="ex-list">${groupMembers(e.g).map(m => memberRow(e.g, m, e.fits)).join('')}</ul></div></li>`;
   };
   const row = e => e.g ? groupRow(e) : modelRow(e.m);
@@ -3918,25 +3915,6 @@ function shortName(g, m) {
   const names = groupMembers(g).map(x => x.name), cut = names.every(n => n.includes(': ')) ? 0 : -1;
   return cut === 0 ? m.name.slice(m.name.indexOf(': ') + 2) : m.name;
 }
-// What changing one generated parameter does, member by member: the principles whose verdict changes.
-function parameterEffects(g, k) {
-  const out = new Map();
-  for (const m of groupMembers(g)) for (const v of groupVariants(m)) {
-    const d = variantDiff(g, v, m);
-    if (d.length !== 1 || d[0] !== k) continue;
-    const changes = ids.map(c => [c, cellOf(m, c)[0], cellOf(v, c)[0]]).filter(([, a, b]) => a !== b);
-    const key = valueLabel(g.parameters[k], v.settings[k]) + '|' + changes.map(x => x.join(':')).join(',');
-    if (!out.has(key)) out.set(key, { to: valueLabel(g.parameters[k], v.settings[k]), changes, ms: [] });
-    out.get(key).ms.push(m);
-  }
-  return [...out.values()];
-}
-function describeChanges(changes) {
-  if (!changes.length) return 'no verdict changes';
-  const by = new Map();
-  for (const [c, a, b] of changes) { const k = `${a}>${b}`; if (!by.has(k)) by.set(k, []); by.get(k).push(c); }
-  return [...by.entries()].map(([k, cs]) => { const [a, b] = k.split('>'); return `${cs.map(c => esc(name(c))).join(', ')}: ${CELL_WORD[a]} → ${CELL_WORD[b]}`; }).join('; ');
-}
 function groupGrid(g, view) {
   const rows = groupRows(g, view), members = rows.filter(r => r.first);
   const varies = (rs, c) => new Set(rs.map(r => cellOf(r.m, c)[0])).size > 1;
@@ -3968,19 +3946,18 @@ function groupGrid(g, view) {
 function groupDetail(g, view, rows) {
   const s = view.sel, r = s && rows[s.ri];
   if (!r) return '<p class="dim">Click a cell for its arguments, or a row’s name for the model.</p>';
-  const label = `${esc(shortName(g, r.member))}${r.tags.length ? ` <span class="dim">(${r.tags.map(esc).join(', ')})</span>` : ''}`;
-  const page = `<button class="lnk" data-open-model="${esc(r.m.id)}">The model’s page →</button>`;
+  const label = `<button class="lnk" data-open-model="${esc(r.m.id)}" title="The model’s page">${esc(shortName(g, r.member))}</button>${r.tags.length ? ` <span class="dim">(${r.tags.map(esc).join(', ')})</span>` : ''}`;
   if (s.row) {
     const prose = Object.entries(g.parameters || {}).filter(([, p]) => !p.generate).map(([k]) => (r.m.settings || {})[k]).map(v => typeof v === 'string' ? v : v && v.text).filter(Boolean);
     const gen = generatedParams(g).map(([k, p]) => `${esc(valueLabel(p, (r.m.settings || {})[k]))}${sameSetting((r.m.settings || {})[k], (r.member.settings || {})[k]) ? '' : ' <span class="dim">(variant)</span>'}`);
-    return `<h3>${label}</h3>${prose.map(t => `<div class="prose reading">${fmt(t)}</div>`).join('')}<p class="note">${gen.join(' · ')}</p><p>${page}</p>`;
+    return `<h3>${label}</h3>${prose.map(t => `<div class="prose reading">${fmt(t)}</div>`).join('')}<p class="note">${gen.join(' · ')}</p>`;
   }
   const c = s.c, [st, rec] = cellOf(r.m, c);
   let body;
   if (st === 'u') body = '<p>Nothing recorded or derived settles it.</p>';
   else if (rec) body = `<div class="arguments">${argumentsFor(r.m, c).map(a => argumentHtml(r.m, a).replace('<details class="argument', '<details open class="argument')).join('')}</div>`;
   else { const e = modelEvidence(r.m, c); body = e ? modelWhy(r.m, c, e, true) : '<p>Derived.</p>'; }
-  return `<h3>${esc(name(c))} ${CELL_WORD[st]} in ${label}</h3>${body}<p>${page}</p>`;
+  return `<h3>${esc(name(c))} ${CELL_WORD[st]} in ${label}</h3>${body}`;
 }
 function groupPage(g) {
   const view = groupView(g.id), members = groupMembers(g);
@@ -3989,13 +3966,8 @@ function groupPage(g) {
   h += groupGrid(g, view);
   const gen = generatedParams(g);
   if (gen.length) {
-    h += `<h2>Variants</h2><p class="note">Each row above is a member as its record has it. Each parameter below also gives every member a variant for each of its other values; the summary says what that changes.</p>`;
-    h += gen.map(([k, p]) => {
-      const effects = parameterEffects(g, k), all = effects.length === 1 && effects[0].ms.length === members.length;
-      const lines = all ? [`For every member, ${esc(effects[0].to)}: ${describeChanges(effects[0].changes)}.`]
-        : effects.map(e => `${e.ms.length === members.length ? 'For every member' : 'For ' + e.ms.map(m => esc(shortName(g, m))).join(', ')}, ${esc(e.to)}: ${describeChanges(e.changes)}.`);
-      return `<div class="group-param"><div><b>${esc(k)}</b> <span class="dim">${fmt(p.text)}</span></div><button class="btn small" data-group-toggle="${esc(k)}" aria-pressed="${view.open.has(k)}">${view.open.has(k) ? 'Hide variants' : 'Show variants'}</button><div class="note">${lines.join('<br>')}</div></div>`;
-    }).join('');
+    h += `<h2>Variants</h2><p class="note">Each row above is a member as its record has it. Each parameter below also gives every member a variant for each of its other values; show them to add them to the grid.</p>`;
+    h += gen.map(([k, p]) => `<div class="group-param"><div><b>${esc(k)}</b> <span class="dim">${fmt(p.text)}</span></div><button class="btn small" data-group-toggle="${esc(k)}" aria-pressed="${view.open.has(k)}">${view.open.has(k) ? 'Hide variants' : 'Show variants'}</button></div>`).join('');
   }
   const rows = groupRows(g, view);
   const same = principleOrder().filter(c => new Set(rows.map(r => cellOf(r.m, c)[0])).size === 1 && cellOf(rows[0].m, c)[0] !== 'u');
@@ -4299,7 +4271,7 @@ function wirePreviews(root) {
   root.addEventListener('click', hidePreview, true);
 }
 function relList(items) { return items.length ? `<ul class="rel">${items.map(([id, via]) => `<li><button data-principle="${id}">${esc(name(id))}</button>${via ? `<span class="via">${via}</span>` : ''}</li>`).join('')}</ul>` : `<div class="empty">—</div>`; }
-function certDl(c) { return `<dl>${c.produced_by ? `<dt>by</dt><dd>${esc(c.produced_by)}</dd>` : ''}${c.recorded_by ? `<dt>recorded by</dt><dd>${esc(c.recorded_by)}</dd>` : ''}${(c.checked_by || []).length ? `<dt>checked</dt><dd>${esc(c.checked_by.join(', '))}</dd>` : ''}${c.lean_ref ? `<dt>Lean</dt><dd class="mono">${esc(c.lean_ref)}</dd>` : ''}${c.date ? `<dt>date</dt><dd>${esc(c.date)}</dd>` : ''}</dl>`; }
+function certDl(c) { return `<dl>${c.produced_by ? `<dt>by</dt><dd>${esc(c.produced_by)}</dd>` : ''}${c.recorded_by ? `<dt>recorded by</dt><dd>${esc(c.recorded_by)}</dd>` : ''}${(c.checked_by || []).length ? `<dt>checked</dt><dd>${esc(c.checked_by.join(', '))}</dd>` : ''}${c.date ? `<dt>date</dt><dd>${esc(c.date)}</dd>` : ''}</dl>`; }
 let popAt = null;
 // One relation verdict with its evidence: proof steps or witness models.
 function relHead(text) { return `<span class="rel-head">${esc(text)}</span>`; }
@@ -4424,7 +4396,7 @@ function renderDetail() {
     // saying it twice says nothing.
     const recorded = sel.type === 'result' ? resultStmt(x).replace(/<[^>]*>/g, '') : '';
     if (sel.display && sel.display !== recorded) h += `<div class="pop-t">${esc(sel.display)}</div><p class="note">${sel.contraposed ? 'Contrapositive, under the current assumptions.' : 'Shown under the current assumptions.'} Original result:</p>`;
-    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="pop-meta"><span class="badges">${certBadges(x)}</span>${sourceSummary([x])}</div>${x.certificate.lean_ref ? `<div class="pop-l">Lean: <code>${esc(x.certificate.lean_ref)}</code></div>` : ''}<div class="links"><button class="lnk" data-goto="1">details</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
+    h += `<div class="pop-t">${sel.type === 'result' ? resultStmt(x) : esc(x.name)}</div>${sel.type === 'result' ? fullConjunctionDetails(x) : ''}<div class="pop-meta"><span class="badges">${certBadges(x)}</span>${sourceSummary([x])}</div><div class="links"><button class="lnk" data-goto="1">details</button>${fileLinks(x).replace('<div class="links">', ' · ').replace('</div>', '')}</div>`;
     if (sel.type === 'result' && sel.premises) h += edgeContext(sel.premises, sel.conclusion);
   }
   el.innerHTML = '<button class="lnk detail-close" aria-label="Close details">×</button>' + h; el.hidden = false; el.scrollTop = 0; wire(el);

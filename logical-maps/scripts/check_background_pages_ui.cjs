@@ -68,7 +68,17 @@ const shown = () => [...d.querySelectorAll('#background [data-bg-page]')].filter
   assert.equal(text(lemma.querySelector('.bg-item-head')), 'Lemma (a lemma)');
   assert.equal(text(lemma.querySelector('.bg-meta')), 'Credit: Someone, 1 January 2026 · Sources: A paper, p. 2');
   assert.ok(lemma.querySelector('.badge.lean.verified'), 'A verified item shows the Lean badge');
-  assert.equal(lemma.querySelector('.bg-item-foot a').href, 'https://lean.example/L.lean#L1-L3');
+  assert.equal(lemma.querySelector('.bg-item-foot .lean-pop a').href, 'https://lean.example/L.lean#L1-L3', 'Its menu links the declaration');
+  assert.ok(!/later_lemma/.test(text(lemma.querySelector('.bg-item-foot')).replace(text(lemma.querySelector('.lean-pop')), '')), 'whose name appears only in the menu');
+  const badge = lemma.querySelector('[data-lean-menu]'), menu = lemma.querySelector('.lean-pop');
+  assert.equal(menu.hidden, true, 'The menu starts closed');
+  badge.click();
+  assert.equal(menu.hidden, false, 'The badge opens it');
+  assert.equal(badge.getAttribute('aria-expanded'), 'true');
+  d.body.click();
+  assert.equal(menu.hidden, true, 'A click elsewhere closes it');
+  badge.click(); badge.click();
+  assert.equal(menu.hidden, true, 'and so does a second click on the badge');
   const refs = [...lemma.querySelectorAll('.bg-refs li button')].map(b => b.dataset.openResult || b.dataset.openBackground);
   assert.deepEqual(refs.sort(), ['first', 'r'], 'Referenced by: the result and the first page’s prose');
   assert.equal(d.querySelectorAll('#background .xref-slot').length, 0, 'Every slot became a link');
@@ -80,7 +90,8 @@ const shown = () => [...d.querySelectorAll('#background [data-bg-page]')].filter
   assert.equal(d.querySelector('#bg-page-first button[data-open-result="r"]').textContent, 'the result', 'A labelled link keeps its label');
   const inline = d.querySelectorAll('#bg-page-first .lean-ref');
   assert.equal(inline.length, 1, 'One citation, and none inside maths');
-  assert.deepEqual([...inline[0].querySelectorAll('a')].map(a => a.textContent), ['le_refl', 'le_trans']);
+  assert.deepEqual([...inline[0].querySelectorAll('.lean-pop a')].map(a => a.textContent), ['le_refl', 'le_trans'], 'One menu for both declarations');
+  assert.equal(text(inline[0]).replace(text(inline[0].querySelector('.lean-pop')), ''), 'Lean ✓', 'The prose shows only the badge');
   assert.ok(inline[0].querySelector('.badge.lean.verified'), 'All cited declarations pass, so the badge shows');
   // The list of pages switches pages.
   d.querySelector('#background a[data-bg-nav="literature"]').click();

@@ -580,8 +580,19 @@
   .bg-kind { font-weight: 600; }
   .bg-meta, .bg-item-foot { font-size: 13px; color: var(--ink-2); }
   .bg-item-foot details { margin-top: 4px; }
-  .lean-ref { font-size: 12px; white-space: normal; color: var(--ink-2); }
-  .lean-ref .badge { margin-right: 2px; }
+  .lean-ref { font-size: 12px; white-space: nowrap; }
+  .lean-menu { display: inline; }
+  button.badge.lean { cursor: pointer; font-family: var(--sans); line-height: inherit; }
+  button.badge.lean:hover, button.badge.lean[aria-expanded="true"] { background: var(--panel-2); }
+  .lean-pop { position: fixed; z-index: 1000; display: flex; flex-direction: column; min-width: 160px; max-width: min(360px, calc(100vw - 32px));
+    max-height: min(60vh, 420px); overflow-y: auto; padding: 4px 0; background: var(--panel); color: var(--ink);
+    border: 1px solid var(--line-strong); border-radius: 4px; box-shadow: 0 4px 14px rgba(0, 0, 0, .18); font: 13px/1.35 var(--sans); white-space: normal; text-align: left; }
+  .lean-pop[hidden] { display: none; }
+  .lean-pop-note { padding: 4px 12px 6px; color: var(--ink-2); font-size: 12px; border-bottom: 1px solid var(--line); margin-bottom: 2px; }
+  .lean-pop-head { padding: 6px 12px 2px; color: var(--ink-2); font-size: 12px; font-weight: 600; }
+  .lean-pop a { display: block; padding: 5px 12px; color: var(--accent); text-decoration: none; overflow-wrap: anywhere; }
+  .lean-pop a:hover, .lean-pop a:focus { background: var(--panel-2); outline: none; }
+  .lean-pop code { font-size: 12px; }
   .badge { border-radius: 2px; }
   .ex > div { min-width: 0; }
   /* Shared signed controls and a quieter Theory Explorer. */
@@ -3206,9 +3217,9 @@ function renderModels() {
   drawExFind(); markFound();
 }
 
-function certBadges(r) {
+function certBadges(r, menu = false) {
   const c = r.certificate, n = leanVerdicts(r).length;
-  const lean = c.lean === 'verified' ? '<span class="badge lean verified">Lean ✓</span>'
+  const lean = c.lean === 'verified' ? leanBadge({note: 'Proved in Lean, passing the check of a shallow proof', links: menu ? r.lean_links : []})
     : n ? `<span class="badge lean" title="${n} of its verdicts proved in Lean">Lean: ${n} verdict${n === 1 ? '' : 's'}</span>` : '';
   return `${sourceBadge(sourceOf(r))}${lean}${r.status === 'conjectured' ? '<span class="badge conj">conjecture</span>' : ''}`;
 }
@@ -3220,7 +3231,7 @@ const leanVerdictLinks = (m, c) => {
   const v = leanVerdict(m, c);
   if (!v) return '';
   const via = !v.via ? '' : ` <span class="dim">by ${v.via.group ? `the group’s argument ${esc(v.via.argument)}` : `the argument <button class="lnk" data-open-argument="${esc(v.via.argument)}">${esc(v.via.argument)}</button>`}</span>`;
-  return `<div class="links">${['<span class="badge lean verified">Lean ✓</span>', ...leanLinkTags(v.lean_links)].join(' ')}${via}</div>`;
+  return `<div class="links">${leanBadge({note: 'Proved in Lean for this model', links: v.lean_links})}${via}</div>`;
 };
 
 // Abbreviate only equivalent positive conjunctions. These are presentation
@@ -3639,19 +3650,20 @@ function renderBackgroundPages(el) {
   el.querySelectorAll('section[data-bg-item]').forEach(s => {
     const i = byBgItem.get(s.dataset.bgItem);
     if (!i) return;
-    const lean = (i.lean || []).length
-      ? `<div class="pop-l">${i.lean_status === 'verified' ? `<span class="badge lean verified" title="Proved in Lean, passing the check of a shallow proof${i.lean_theory ? '; a theorem of ' + esc(i.lean_theory) : ''}">Lean ✓</span> ` : ''}Lean: ${i.lean.map(n => `<code>${esc(n)}</code>`).join(', ')}${(i.lean_links || []).length ? ' · ' + leanLinkTags(i.lean_links).join(' · ') : ''}</div>` : '';
+    const verified = i.lean_status === 'verified';
+    const lean = (i.lean || []).length ? `<div class="pop-l">${leanBadge({verified, code: true, links: i.lean_links,
+      note: verified ? 'Proved in Lean, passing the check of a shallow proof' + (i.lean_theory ? '; a theorem of ' + i.lean_theory : '') : 'Stated in Lean; not every declaration passes the check'})}</div>` : '';
     const refs = referencedBy(i.id);
     const used = refs.length ? `<details class="bg-refs"><summary>Referenced by (${refs.length})</summary><ul class="src">${refs.map(r => `<li>${crossRef(r)}</li>`).join('')}</ul></details>` : '';
     if (lean || used) s.insertAdjacentHTML('beforeend', `<div class="bg-item-foot">${lean}${used}</div>`);
   });
   el.querySelectorAll('span.xref-slot').forEach(s => { s.outerHTML = crossRef(s.dataset.xref, s.innerHTML); });
-  // {lean: A, B, C} in the prose: one small link per declaration, with the badge when all pass.
+  // {lean: A, B, C} in the prose: one badge, its menu listing the declarations.
   el.querySelectorAll('span.lean-ref').forEach(s => {
     const names = (s.dataset.lean || '').split(' ').filter(Boolean), found = names.map(n => (DATA.background_lean || {})[n]);
-    const verified = found.length && found.every(d => d && d.theory);
-    const links = names.map((n, k) => found[k] ? `<a href="${esc(found[k].link.url)}" target="_blank" title="${esc(n)}">${esc(found[k].link.label)}</a>` : `<code>${esc(n)}</code>`);
-    s.innerHTML = `${verified ? `<span class="badge lean verified" title="Proved in Lean, passing the check of a shallow proof">Lean ✓</span>` : '<span class="badge lean">Lean</span>'} ${links.join(' · ')}`;
+    const verified = found.length > 0 && found.every(d => d && d.theory);
+    s.innerHTML = leanBadge({verified, code: true, links: found.filter(Boolean).map(d => d.link),
+      note: verified ? 'Proved in Lean, passing the check of a shallow proof' : 'Stated in Lean; not every declaration passes the check'});
   });
   el.querySelectorAll('a[data-bg-nav]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); showBackgroundPage(a.dataset.bgNav); }));
   wire(el);
@@ -3732,12 +3744,22 @@ function openPaper(id) {
 }
 // Links to the Lean sources: a record's own, pinned to the commit the map was built from,
 // when the topic's Lean index has them; else the Lean files.
-const leanLinkTags = ls => (ls || []).map(l => `<a href="${esc(l.url)}" target="_blank">Lean ${esc(l.label)}</a>`);
+// A Lean badge is a button opening a small menu: what the badge means, then one row per
+// link, under a heading when the links come in groups. Without links it is a plain badge.
+// `code` sets the row labels as declaration names.
+function leanBadge({verified = true, text, note = '', links = [], groups, code = false} = {}) {
+  const gs = (groups || [{links}]).filter(g => (g.links || []).length);
+  const cls = `badge lean${verified ? ' verified' : ''}`, label = esc(text || (verified ? 'Lean ✓' : 'Lean'));
+  if (!gs.length) return `<span class="${cls}"${note ? ` title="${esc(note)}"` : ''}>${label}</span>`;
+  const row = l => `<a role="menuitem" href="${esc(l.url)}" target="_blank" rel="noopener">${code ? `<code>${esc(l.label)}</code>` : esc(l.label)}</a>`;
+  return `<span class="lean-menu"><button type="button" class="${cls}"${note ? ` title="${esc(note)}"` : ''} data-lean-menu aria-haspopup="menu" aria-expanded="false">${label}</button>`
+    + `<span class="lean-pop" role="menu" hidden>${note ? `<span class="lean-pop-note">${esc(note)}</span>` : ''}`
+    + gs.map(g => (g.title ? `<span class="lean-pop-head">${g.title}</span>` : '') + g.links.map(row).join('')).join('') + '</span></span>';
+}
+// The Lean files, for a record whose Lean certificate the index does not link.
 function fileLinks(x) {
-  const f = x.files || {}; const parts = [];
-  if ((x.lean_links || []).length) parts.push(...leanLinkTags(x.lean_links));
-  else if (x.certificate.lean_ref && (DATA.downloads || {}).lean) parts.push(`<a href="${DATA.downloads.lean}" target="_blank">lean</a>`);
-  return parts.length ? `<div class="links">${parts.join(' · ')}</div>` : '';
+  return !(x.lean_links || []).length && x.certificate.lean_ref && (DATA.downloads || {}).lean
+    ? `<div class="links"><a href="${DATA.downloads.lean}" target="_blank">lean</a></div>` : '';
 }
 // A record with a hand-written write-up shows that write-up in full on its page.
 // The record's own description is rendered first so the page is complete without
@@ -3775,26 +3797,17 @@ function shortAuthor(by) { return String(by || '').split(/ \(|[,;]/)[0].trim(); 
 function trawlChain(m, a) { return a.provenance ? (PROVENANCE.get(a.provenance)?.records || {})[m.companion_of || m.id] || null : null; }
 const isoDay = t => String(t || '').slice(0, 10);
 function argumentTags(a, m) {
-  const forModel = m && leanForArgument(m, a).length;
+  const forModel = m ? leanForArgument(m, a) : [], general = leanArgument(a);
+  const groups = vs => vs.map(v => ({title: (v.holds ? '✓ ' : '✗ ') + esc(name(v.holds || v.fails)), links: v.lean_links}));
   return (a.standing === 'conjectured' ? `<span class="badge conj">conjecture${a.tier ? ' · ' + esc(a.tier) : ''}</span>` : '')
     + (a.withdrawn ? '<span class="badge withdrawn">withdrawn</span>' : '')
-    + (forModel ? '<span class="badge lean verified" title="Proved in Lean for this model">Lean ✓</span>'
-      : leanArgument(a).length ? '<span class="badge lean verified" title="Proved in Lean, for every model meeting its conditions">Lean ✓</span>' : '');
+    + (forModel.length ? leanBadge({note: 'Proved in Lean for this model', groups: groups(forModel)})
+      : general.length ? leanBadge({note: 'Proved in Lean, for every model meeting its conditions', groups: groups(general)}) : '');
 }
 // The model's Lean certificates of the verdicts an argument gives it.
 const leanForArgument = (m, a) => [...(a.holds || []), ...(a.fails || [])].map(c => leanVerdict(m, c)).filter(Boolean);
-const leanModelLine = (m, a) => {
-  const ls = leanForArgument(m, a);
-  return ls.length ? `<p class="note lean-argument">Proved in Lean for this model: ${ls.map(v => (v.holds ? '✓ ' : '✗ ') + esc(name(v.holds || v.fails))
-    + ((v.lean_links || []).length ? ' (' + leanLinkTags(v.lean_links).join(' · ') + ')' : '')).join('; ')}.</p>` : '';
-};
 // A general argument's verdicts proved in Lean, for every model meeting its conditions.
 const leanArgument = a => (a.lean || []).filter(e => e.status === 'verified');
-const leanArgumentLine = a => {
-  const ls = leanArgument(a);
-  return ls.length ? `<p class="note lean-argument">Proved in Lean: ${ls.map(e => (e.holds ? '✓ ' : '✗ ') + esc(name(e.holds || e.fails))
-    + ((e.lean_links || []).length ? ' (' + leanLinkTags(e.lean_links).join(' · ') + ')' : '')).join('; ')}.</p>` : '';
-};
 // Who and when, without repeating a date the name already gives ("…, 20 September 2026").
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 function withDate(by, date) {
@@ -3838,7 +3851,6 @@ function argumentHtml(m, a, i) {
     + (a.text ? `<div class="prose reading">${fmt(a.text)}</div>` : '')
     + ((a.adapt || '').trim() ? `<div class="prose reading">${fmt(a.adapt)}</div>` : '')
     + conditions
-    + (leanModelLine(m, a) || leanArgumentLine(a))
     + creditHtml(m, a)
     + (meta ? `<p class="note">${meta}</p>` : '')
     + (a.revisions || []).map(r => `<p class="note">Revised ${esc(r.date)}${r.by ? ' by ' + esc(r.by) : ''}: ${esc(r.note)}</p>`).join('')
@@ -4059,7 +4071,7 @@ function renderPage(sel) {
     h += `<h2>Incompatibilities</h2><ul>${R.filter(r => r.conclusion === FALSE && passes(r) && (r.status === 'proved' || state.showConj)).map(r => `<li><button class="lnk" data-result="${r.id}">${resultStmt(r)}</button> ${certBadges(r)}</li>`).join('')}</ul>`;
   } else if (sel.type === 'result') {
     const r = byRid.get(sel.id);
-    h += `<h1>${resultStmt(r)}</h1>${fullConjunctionDetails(r)}<div class="badges">${certBadges(r)}</div>${fileLinks(r)}${certDl(r.certificate)}`;
+    h += `<h1>${resultStmt(r)}</h1>${fullConjunctionDetails(r)}<div class="badges">${certBadges(r, true)}</div>${fileLinks(r)}${certDl(r.certificate)}`;
     h += `<h2>Premises</h2><ul class="plist">${r.premises.map(pstmt).join('') || '<li>⊤</li>'}</ul><h2>Conclusion</h2><ul class="plist">${pstmt(r.conclusion)}</ul>`;
     h += `<div class="record-summary">${writeupNote(r)}${r.proof ? `<h2>Proof</h2><div class="prose">${fmt(r.proof)}</div>` : ''}</div>`;
     if (r.notes) h += `<h2>Notes</h2><div class="prose">${fmt(r.notes)}</div>`;
@@ -4071,7 +4083,7 @@ function renderPage(sel) {
     const base = m.companion_of ? byMid.get(m.companion_of) : null, construction = m.construction || {};
     // A companion's certificate is its model's; what it adds is who proposed the conjectured arguments.
     const proposed = [...new Set((m.arguments || []).map(a => withDate(a.by || m.certificate.produced_by || '', a.date || m.certificate.date || '')))];
-    h += `<h1>${esc(m.name)}</h1><div class="badges">${certBadges(m)}</div>${fileLinks(m)}`
+    h += `<h1>${esc(m.name)}</h1><div class="badges">${certBadges(m, true)}</div>${fileLinks(m)}`
       + (base ? `<dl><dt>conjectured by</dt><dd>${proposed.map(esc).join('; ')}</dd><dt>model</dt><dd><button class="lnk" data-open-model="${esc(base.id)}">${esc(base.name)}</button></dd></dl>` : certDl(m.certificate));
     const doubt = construction.withdrawn ? 'withdrawn' : construction.standing === 'conjectured' ? 'conjectured' : '';
     h += `<div class="record-summary">${writeupNote(m)}${m.description ? `<h2>Construction</h2><div class="prose">${fmt(m.description)}</div>` : ''}`
@@ -4114,7 +4126,7 @@ function renderPage(sel) {
   } else if (sel.type === 'principle') {
     const p = byPid.get(sel.id);
     h += `<h1>${sel.negative ? '¬' : ''}${esc(p.name)}</h1>${sel.negative ? '<p>Negation of the following principle:</p>' : ''}${(p.aliases || []).length ? `<div class="id">${esc(p.aliases.join(', '))}</div>` : ''}<div class="prose statement">${esc(p.statement)}</div>${p.formal ? `<div class="formal">${esc(p.formal)}</div>` : ''}${p.definitions ? `<div class="defs">${fmt(p.definitions)}</div>` : ''}`
-      + (p.lean_def ? `<div class="pop-l">Lean: <code>${esc(p.lean_def)}</code>${(p.lean_links || []).length ? ' · ' + leanLinkTags(p.lean_links).join(' · ') : ''}</div>` : '');
+      + (p.lean_def ? `<div class="pop-l">${leanBadge({verified: false, note: 'Defined in Lean', links: p.lean_links})}</div>` : '');
     if (p.about) h += `<h2>About</h2><div class="prose about">${fmt(p.about)}</div>`;
     h += variantsSection(p);
     if (p.notes) h += `<h2>Notes</h2><div class="prose">${fmt(p.notes)}</div>`;
@@ -4158,7 +4170,8 @@ function variantsSection(p) {
   return `<h2>Equivalent forms</h2><p class="note">Each is provably equivalent to the statement above in the base theory, instance by instance.</p><div class="variants">${vs.map(v =>
     `<section class="variant" id="variant-${esc(v.id)}"><h3>${esc(v.name)}</h3>${v.statement ? `<div class="prose">${esc(v.statement)}</div>` : ''}${v.formal ? `<div class="formal">${esc(v.formal)}</div>` : ''}${v.definitions ? `<div class="defs">${fmt(v.definitions)}</div>` : ''}`
     + `<details><summary>Why it is equivalent</summary><div class="prose">${fmt(v.equivalence)}</div>${(v.references || []).length ? paperReferenceList(paperReferences([v])) : ''}</details>`
-    + (v.lean && v.lean.ref ? `<div class="pop-l">${v.lean.status === 'verified' ? '<span class="badge lean verified">Lean ✓</span> ' : ''}Lean: <code>${esc(v.lean.ref)}</code>${v.lean.equivalence_ref ? `; equivalence <code>${esc(v.lean.equivalence_ref)}</code>` : ''}${(v.lean_links || []).length ? ' · ' + leanLinkTags(v.lean_links).join(' · ') : ''}</div>` : '')
+    + (v.lean && v.lean.ref ? `<div class="pop-l">${leanBadge({verified: v.lean.status === 'verified', links: v.lean_links,
+      note: v.lean.status === 'verified' ? 'Equivalence proved in Lean' : 'Stated in Lean'})}</div>` : '')
     + '</section>').join('')}</div>`;
 }
 function jumpToArguments(el, indices) {
@@ -4440,6 +4453,44 @@ function placeDetail() {
   if (docked) { el.style.removeProperty('left'); el.style.removeProperty('top'); }
 }
 document.addEventListener('pointerdown', ev => { popAt = { x: ev.clientX, y: ev.clientY }; const el = document.getElementById('pop'); if (!el.hidden && !['graph-details', 'lat-detail'].includes(el.parentElement.id) && !el.contains(ev.target)) el.hidden = true; });
+// Lean menus: open below their badge (above it when there is no room), clamped to the
+// viewport; one open at a time; closed by Escape, a click elsewhere, scrolling or resizing.
+// Clicks are caught first, so a badge inside a table row or a summary opens only its menu.
+let leanMenuOpen = null;
+function closeLeanMenu(focus = false) {
+  if (!leanMenuOpen) return;
+  const b = leanMenuOpen; leanMenuOpen = null;
+  b.setAttribute('aria-expanded', 'false'); b.nextElementSibling.hidden = true;
+  if (focus) b.focus({preventScroll: true});
+}
+function openLeanMenu(b, keyboard) {
+  closeLeanMenu();
+  const pop = b.nextElementSibling, r = b.getBoundingClientRect();
+  pop.hidden = false; b.setAttribute('aria-expanded', 'true'); leanMenuOpen = b;
+  const w = pop.offsetWidth, h = pop.offsetHeight, gap = 4, edge = 8;
+  pop.style.left = Math.max(edge, Math.min(r.left, innerWidth - w - edge)) + 'px';
+  pop.style.top = (r.bottom + gap + h <= innerHeight - edge || r.top - gap - h < edge ? r.bottom + gap : r.top - gap - h) + 'px';
+  if (keyboard) pop.querySelector('a')?.focus();
+}
+document.addEventListener('click', ev => {
+  const b = ev.target.closest?.('[data-lean-menu]');
+  if (b) {
+    ev.preventDefault(); ev.stopPropagation();
+    if (leanMenuOpen === b) closeLeanMenu(); else openLeanMenu(b, ev.detail === 0);
+  } else if (ev.target.closest?.('.lean-pop')) ev.stopPropagation();
+  else closeLeanMenu();
+}, true);
+document.addEventListener('keydown', ev => {
+  if (!leanMenuOpen) return;
+  const items = [...leanMenuOpen.nextElementSibling.querySelectorAll('a')], k = items.indexOf(document.activeElement);
+  if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); closeLeanMenu(true); }
+  else if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+    ev.preventDefault(); ev.stopPropagation();
+    items[(k + (ev.key === 'ArrowDown' ? 1 : items.length - 1 + (k < 0 ? 1 : 0))) % items.length]?.focus();
+  } else if (ev.key === 'Tab') closeLeanMenu();
+}, true);
+addEventListener('scroll', ev => { if (leanMenuOpen && !leanMenuOpen.nextElementSibling.contains(ev.target)) closeLeanMenu(); }, true);
+addEventListener('resize', () => closeLeanMenu());
 document.addEventListener('keydown', ev => {
   if (ev.key !== 'Escape' || ev.target.closest?.('.graph-search') || document.body.classList.contains('resizing-panes')) return;
   if (state.focus || state.selected?.type === 'principle') select(null);

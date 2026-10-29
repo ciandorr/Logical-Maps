@@ -1,0 +1,129 @@
+id: symmetric-collapse-pair-and-point
+name: 'Symmetric ideally-full model: collapsers of a fixed pair, and a point'
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the construction), 29 October 2026; Claude Opus 5.5 (Anthropic), prompted by Cian
+    Dorr (the verification)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, construction of 29 October 2026, in conversation with Claude Opus 5.5 (Anthropic).
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §3.1, p. 9 (Base
+  2); Definitions 15–18, p. 8; Theorem 36, p. 18.
+source_names:
+- Dorr 29 Oct
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: §3.1, p. 9; Definitions 15–18, p. 8; Theorem 36, p. 18
+  note: Base 2, which is the object $W_0$ here, and the hull theorem.
+group: symmetric-ideally-full
+settings:
+  construction: 'A symmetric ideally-full model on two objects. $W_0$ has base $\mathbb N$ with a fixed pair
+    $\{0,1\}$, and $W_1$ has base $\{0\}$. The arrows $W_0\to W_0$ are the permutations preserving $\{0,1\}$
+    setwise, the surjections $h$ with $h0=h1$ (the collapsers), and the constant
+    maps $k_n$; there is one arrow $!:W_0\to W_1$, an arrow $c_n:W_1\to W_0$ with value $n$ for each $n$, and
+    the identity of $W_1$. These are closed under composition: $c_n\circ!=k_n$, $!\circ c_n=1_{W_1}$, $h\circ
+    c_n=c_{hn}$, and a composite with a collapser or a constant collapses $\{0,1\}$ and is a surjection or a
+    constant. The symmetry group is the permutations preserving $\{0,1\}$ at $W_0$ and trivial at $W_1$. Both
+    objects carry the ideal of finite sets. Evaluation point: $1_{W_0}$.'
+  sigma: top
+meets:
+  finitely-pinned-domains: >-
+    The domains hold every symmetric intension pinned down by a finite set, and every entity in them is one.
+  finite-pinning: Both objects carry the ideal of finite sets.
+  infinite-base: The base at $W_0$ is $\mathbb N$.
+  transposable: >-
+    For finite $N$, the property of not belonging to $N\cup\{0,1\}$ (at an arrow $h$, the points outside
+    $h[N\cup\{0,1\}]$; empty at arrows into $W_1$) is symmetric and pinned down by $N\cup\{0,1\}$; the
+    transposition of a member $y$ with another point outside $N\cup\{0,1\}$ fixes $N\cup\{0,1\}$ pointwise, so
+    is in the symmetry group and fixes the property.
+  separable-collapses: >-
+    The pairs $\{n,m\}$ with $n,m\ge2$: a surjection that collapses $0$ with $1$ and $n$ with $m$, and nothing
+    else, is an arrow.
+  symmetry-group-pinned: >-
+    Pinned down by $\{0,1\}$: an arrow into $W_0$ that does not collapse $0$ and $1$ is in the symmetry group,
+    and every composite with an arrow that does collapses them; there is one arrow into $W_1$.
+  actual-world-isolated: >-
+    The actual-world proposition is the symmetry group, pinned down by $\{0,1\}$; every world outside it is a
+    collapser, a constant or $!$, and every composite with one of these collapses $\{0,1\}$ or lands in $W_1$.
+  actuality-contingent: >-
+    The symmetry group is in the domain; from every world a collapser leads outside it, and a collapser
+    carries it to the empty proposition.
+  irreversible-arrow: A collapser, or $!$; no composite with either is in the symmetry group.
+  exact-collapses-of-every-size: >-
+    Take $\{0,1\}$ and $n-2$ further points: the surjection sending them all to one point and the remaining
+    points bijectively onto the others is a collapser.
+  collapse-onto-point: >-
+    As in symmetric-collapse-pair: $a:=0$ and $F:=\lambda x\, .\,x\ne 0$; for finite $N$, $h$ a surjection
+    sending $N\cup\{0,1\}$ to one point $p\ge2$ and injective elsewhere. A member $y\ne p$ of $F_h=\mathbb
+    N\setminus\{p\}$ is moved, fixing $p$, by swapping $0$ and $1$ (if $y\in\{0,1\}$) or by transposing $y$
+    with another point outside $\{0,1,p\}$; composites of $h$ with symmetries are collapsers.
+  hull-conditions: >-
+    With $M_0=\{0,1\}$. (B1) For $M\supseteq\{0,1\}$, an arrow into $W_0$ agreeing with a symmetry on $M$ does
+    not collapse the pair, so is a symmetry: the symmetries are separated, and an arrow $h$ that is not
+    collapses the pair, as does any $h^{\prime}$ agreeing with it on $M$. For $P\cap Q\subseteq M$, prescribe
+    $h^{\prime}$ on $P$, $h$ on $Q$ and $h0=h1$ on the pair (consistent, the pair lying in $M$), and extend to a
+    surjection: it is a collapser. There is one arrow into $W_1$. (B2) As for symmetric-collapse-pair: a
+    permutation fixing $N\supseteq\{0,1\}$ pointwise preserves the pair and moves the finitely many points of
+    $P\setminus N$ off $Q$.
+arguments:
+- id: barcan-at-root
+  holds: [barcan-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type, at $W_0$. Every arrow out of $W_0$ agrees on any finite set $S$ with a surjective arrow: a
+    symmetry, a collapser and $!$ are surjective, and $k_n$ agrees on $S$ with the collapser sending
+    $S\cup\{0,1\}$ to $n$ and the remaining points onto $\mathbb N$. So the argument of
+    symmetric-two-object-all-maps applies: if $\forall x\,\Box Fx$ with $F$ pinned down by $S$, and $y$ is an
+    entity at the target of an arrow $h$, take a surjective $h^{\prime}$ agreeing with $h$ on $S$; by the section
+    construction of the group's argument barcan-surjective, $y=h^{\prime}\cdot x$ for an entity $x$ at $W_0$, so
+    $y$ is in $F_{h^{\prime}}$, which is $F_h$.
+- id: barcan-fails-at-point
+  fails: [necessary-barcan-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_1$ a proposition is a set $A$ of points closed under the symmetries of $W_0$ (a union of the orbits
+    $\{0,1\}$ and $\mathbb N\setminus\{0,1\}$), given as the $c_n$ with $n\in A$, together with a bit for
+    $1_{W_1}$: eight propositions $q$. Their transports along $c_n$ are $c_n\cdot q=\{h:W_0\to W_0 : hn\in
+    A\}$, with $!$ added if the bit is set. The intension $F$ of type $t\to t$ with all eight at $1_{W_1}$ and
+    the eight $c_n\cdot q$ at each $c_n$ is pinned down by $\{0\}$ and symmetric, since $g\cdot(c_n\cdot
+    q)=c_{gn}\cdot q$; so every proposition at $W_1$ necessarily has it. But at $c_2$ the proposition
+    $\{h:h2=h3\}$, symmetric and pinned down by $\{2,3\}$, does not: it contains every constant map, so it could
+    only be a $c_2\cdot q$ with $A=\mathbb N$, which contains the identity. So BF at type $t$ fails at $W_1$,
+    which $!$ reaches.
+- id: point-actuality
+  holds: [necessary-strong-actuality, necessary-boolean-completeness-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_0$ the symmetry group is a true strong atom: its transport along a symmetry is itself, an atom, and
+    along a collapser, a constant or $!$ it is empty. At $W_1$, which has eight propositions, Boolean
+    Completeness holds at type $t$, and $\{1_{W_1}\}$ is a true strong atom: its transport along $c_n$ is
+    $\{!\}$, an atom at $W_0$. Every world is an arrow into $W_0$ or $W_1$, so Strong Actuality and, with
+    the group's argument boolean-completeness at $W_0$, Boolean Completeness at type $t$ are necessary.
+- id: atomicity
+  fails: [atomicity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    As in symmetric-collapse-pair: the proposition $\{h:W_0\to W_0 : h0=h1\}$ has no atom below it. A
+    proposition $q$ below it containing $h$ and pinned down by $S\supseteq\{0,1\}$ contains every arrow
+    agreeing with $h$ on $S$; for $x\notin S$ two collapsers agreeing with $h$ on $S$ send $x$ to $h0$ and
+    outside $h[S]$ respectively, and they are separated by $\{h\in q : hx=h0\}$, symmetric and pinned down by
+    $S\cup\{x\}$.
+notes: >-
+  Cian Dorr's suggestion of 29 October 2026: the one-object model symmetric-collapse-pair as $W_0$, with a
+  point $W_1$ added as in symmetric-two-object-all-maps. The constant maps forced by composition do not spoil
+  BF at $W_0$, since each agrees on any finite set with a surjective collapser. BF, Boolean Completeness, and
+  necessarily Strong Actuality and Boolean Completeness at type $t$, hold at $W_0$; BF at type $t$ fails at
+  $W_1$.

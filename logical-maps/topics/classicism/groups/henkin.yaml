@@ -53,6 +53,7 @@ parameters:
           Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each
           denotes the top element of its type.
         label: Σ top
+        brief: every constant of Σ denotes the top element of its type
         meets:
           sigma-top: This is the interpretation.
       independent:
@@ -65,6 +66,7 @@ parameters:
           $\tau=\bar\sigma t$ with $e$ occurring in $\sigma_i$, $x_\tau:=\{\bar y : y_i=x_{\sigma_i}\}$;
           for one predicate of type $et$, the singleton $\{a_c\}$.
         label: Σ independent
+        brief: each constant denotes something built from individuals of its own
         requires: [several-individuals]
 
 meets:

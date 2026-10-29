@@ -45,12 +45,14 @@ parameters:
         text: $K$ is the free monoid $W$ of finite words on an alphabet of size $\kappa$, with empty word
           $\varepsilon$.
         label: free words
+        brief: K is the free monoid of finite words
         meets:
           right-cancellative-factor: The free monoid is right cancellative.
       words-idempotent:
         text: $K$ is $W\times\{1,d\}$, with $W$ the free monoid of finite words on an alphabet of size
           $\kappa$ and $d^2=d\ne1$, so that $K$ is not right cancellative.
         label: free words × idempotent
+        brief: K is the free monoid times an idempotent, so not right cancellative
         meets:
           idempotent-factor: $K$ has the idempotent $d_0:=(\varepsilon,d)\ne1_K$, with $1_Kd_0=d_0d_0$.
   individuals:
@@ -62,12 +64,14 @@ parameters:
         text: There is a single individual, fixed by every arrow; $U$ only supplies the pinning sets and
           the symmetries.
         label: one individual
+        brief: a single individual; U supplies only the pinning sets and symmetries
         meets:
           one-individual: There is a single individual at every world.
       moving:
         text: The individuals are the members of $U$, with $(k,s)\cdot a:=s(a)$, and each individual $a$
           is pinned down by $\{a\}$.
         label: individuals $U$
+        brief: the individuals are the members of U, moved by the arrows
         meets:
           infinitely-many-individuals: The individuals are the $\kappa^+$ members of $U$.
           moving-individuals: The individuals are the members of $U$, moved by the surjections.

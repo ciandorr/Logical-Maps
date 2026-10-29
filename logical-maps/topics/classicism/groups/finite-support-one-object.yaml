@@ -47,6 +47,7 @@ parameters:
       naturals:
         text: The individuals are the natural numbers, acted on by the arrows themselves.
         label: individuals ℕ
+        brief: the individuals are the natural numbers, moved by the arrows
         meets:
           infinitely-many-individuals: The individuals are the natural numbers.
       singleton:
@@ -54,6 +55,7 @@ parameters:
           There is a single individual, which every arrow fixes; the arrows still act on
           $\mathbb N$, which supplies the pinning sets.
         label: one individual
+        brief: a single individual, fixed by every arrow; the arrows still act on ℕ
         meets:
           one-individual: The only individual is fixed by every arrow, at the sole object.
   sigma:
@@ -69,6 +71,7 @@ parameters:
           Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each
           denotes the top element of its type.
         label: Σ top
+        brief: every constant of Σ denotes the top element of its type
         meets:
           sigma-top: This is the interpretation.
       true-atom:
@@ -79,6 +82,7 @@ parameters:
           other constant of Σ, of which there is at least one, is relational and denotes the top
           element of its type.
         label: Σ true atom
+        brief: one constant denotes the true atom (as a constant relation), the others top
         requires: [actual-world-pinned]
         meets:
           sigma-true-atom: This is the interpretation.

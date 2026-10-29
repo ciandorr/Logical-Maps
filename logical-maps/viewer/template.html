@@ -515,6 +515,8 @@
   .page .group-detail h3 { font: 600 15px var(--sans); margin: 4px 0 6px; }
   .page .group-param { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; border-top: 1px solid var(--line); padding: 8px 0; }
   .page .group-param > button { grid-column: 2; align-self: start; }
+  .page .group-param .param-values { margin: 4px 0 0; padding-left: 18px; font-size: 13px; }
+  .page .group-param .param-values li { margin: 1px 0; }
   .page .group-param > button[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
   .page dl.group-params dt { font-weight: 600; margin-top: 6px; } .page dl.group-params dd { margin: 2px 0 6px 14px; }
   .page details.argument details.review { margin: 2px 0 6px 14px; font-size: 12.5px; color: var(--ink-2); }
@@ -3997,7 +3999,7 @@ function groupPage(g) {
   const gen = generatedParams(g);
   if (gen.length) {
     h += `<h2>Variants</h2><p class="note">Each row above is a member as its record has it. Each parameter below also gives every member a variant for each of its other values; show them to add them to the grid.</p>`;
-    h += gen.map(([k, p]) => `<div class="group-param"><div><b>${esc(k)}</b> <span class="dim">${fmt(p.text)}</span></div><button class="btn small" data-group-toggle="${esc(k)}" aria-pressed="${view.open.has(k)}">${view.open.has(k) ? 'Hide variants' : 'Show variants'}</button></div>`).join('');
+    h += gen.map(([k, p]) => `<div class="group-param"><div><b>${esc(k)}</b> <span class="dim">${fmt(p.text)}</span><ul class="param-values">${Object.entries(p.values || {}).map(([v, e]) => `<li><b>${esc(valueLabel(p, v))}</b>${e && e.brief ? ` <span class="dim">— ${fmt(e.brief)}</span>` : ''}</li>`).join('')}</ul></div><button class="btn small" data-group-toggle="${esc(k)}" aria-pressed="${view.open.has(k)}">${view.open.has(k) ? 'Hide variants' : 'Show variants'}</button></div>`).join('');
   }
   const rows = groupRows(g, view);
   const same = principleOrder().filter(c => new Set(rows.map(r => cellOf(r.m, c)[0])).size === 1 && cellOf(rows[0].m, c)[0] !== 'u');

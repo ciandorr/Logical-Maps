@@ -46,6 +46,7 @@ parameters:
           Individuals, fixed for this record: the individuals at each object are the base the
           construction describes, and the arrows act on them as on the base.
         label: individuals the base
+        brief: the individuals are the base, moved by the arrows
         # Revised 25 October 2026 (Claude Opus 5.5, prompted by Cian Dorr): generated only for a member
         # whose base at the evaluation object is infinite, as this value's meets assume.
         requires: [infinite-base]
@@ -58,6 +59,7 @@ parameters:
           arrows still act on the base as the construction says, and the base still supplies the
           pinning sets and the symmetry groups.
         label: one individual
+        brief: a single individual; the base still supplies the pinning sets and symmetries
         meets:
           one-individual: There is a single individual at every object.
           homogeneous-individuals: There is only one individual.
@@ -75,6 +77,7 @@ parameters:
           Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each
           denotes the top element of its type.
         label: Σ top
+        brief: every constant of Σ denotes the top element of its type
         meets:
           sigma-top: This is the interpretation.
       true-atom:
@@ -84,6 +87,7 @@ parameters:
           the model, the actual-world proposition, the symmetry group; every other constant of Σ, of
           which there is at least one, is relational and denotes the top element of its type.
         label: Σ true atom
+        brief: one constant denotes the true atom (as a constant relation), the others top
         requires: [actuality-contingent]
         meets:
           sigma-true-atom: This is the interpretation.

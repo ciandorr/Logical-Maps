@@ -31,6 +31,7 @@
        {"type": "object", "additionalProperties": false, "required": ["text"], "properties": {
         "text": {"type": "string", "minLength": 1, "description": "The prose this value puts in the definition."},
         "label": {"type": "string", "minLength": 1, "description": "A few words naming the value in a variant's name."},
+        "brief": {"type": "string", "minLength": 1, "description": "One line saying what the value means, listed with its label on the group's page."},
         "requires": {"type": "array", "items": {"type": "string"}, "uniqueItems": true, "description": "Conditions a member must meet to take this value."},
         "choiceless": {"type": "boolean", "description": "The value reads the construction in a metatheory without the axiom of choice: a model or variant at it gets only the arguments marked choice: free, and no Lean certificates."},
         "meets": {"type": "object", "additionalProperties": {"type": "string", "minLength": 1}, "description": "Conditions (the group's or the topic's) every model at this value meets, with the reason."}

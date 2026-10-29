@@ -333,15 +333,66 @@ rigid carrier from inextensibility, which only bounds a carrier from above.
   object. So it is one at every world, rigid, with necessarily distinct instances. The constant
   intensions of the sets of its constant relations are represented powers.
 
+## 10. Inextensible Comprehension
+
+GPT-6 Astra (OpenAI), prompted by Cian Dorr, 29 October 2026; checked and recorded by Claude
+Opus 5.5 (Anthropic). □Inextensible Comprehension holds in all four variants. The finite-model
+argument relabels an arrow fixing the pinning set into one that leaves the entity unchanged, and
+the monoid coordinate blocks that step. This argument instead switches the witness off for good
+once the monoid coordinate leaves $1_K$.
+
+**The witness.** Let $X$ be pinned down by $N$, with $|N|\le\kappa$, and put
+
+$$
+Y_{(k,s)}:=\begin{cases}X_{(k,s)}&k=1_K\text{ and }s|_N\text{ injective},\\ \varnothing&\text{otherwise.}\end{cases}
+$$
+
+Injectivity on $N$ depends only on $s|_N$ and is unchanged by composing with a permutation, so $Y$ is
+pinned down by $N$ and symmetric. And $Y_1=X_1$, so $Y$ is coextensive with $X$ at $1$.
+
+**The defects are permanent.** In both monoid factors, $jk=1_K$ only if $k=1_K$: in $W$ by length,
+and in $W\times\{1,d\}$ because $xy=1$ forces $x=y=1$. And if $s$ collapses two points of $N$, so does
+$ts$. So along an arrow $h=(k,s)$ with $k\ne1_K$, or with $s$ not injective on $N$, $(h\cdot
+Y)_j=Y_{jh}=\varnothing$ for every $j$: the transport is $\bot$, which is weakly inextensible.
+
+Along $h=(1_K,s)$ with $s|_N$ injective, $h\cdot X$ is pinned down by $s[N]$. Since $ts|_N$ is
+injective iff $t|_{s[N]}$ is, $h\cdot Y$ is the same construction applied to $h\cdot X$ with pinning
+set $s[N]$. So it suffices to show that $Y$ is weakly inextensible at $1$, for every $X$ and $N$.
+
+**Lifting.** Put $E:=X_1$. A permutation $\tau$ fixing $N$ has $X_{(1_K,\tau)}=X_1$ by pinning
+and $=\tau\cdot X_1$ by symmetry, so $\tau\cdot E=E$. Let $g$ be a surjection fixing $N$ pointwise
+and $\bar a\in E$, its entries pinned down by $T$, $|T|\le\kappa$. For $t\in T\setminus N$ choose a
+$g$-preimage $p_t$. These are distinct and lie outside $N$, since $g$ fixes $N$. So the identity on
+$N$ together with $t\mapsto p_t$ is injective, with domain and range of size at most $\kappa$, whose
+complements have size $\kappa^+$, and it extends to a permutation $\tau$. Then $g\tau$ is the identity
+on $T$, so $(g\tau)\cdot\bar a=\bar a$: for an entity $F$ pinned down by $T$,
+$F_{(k,t\circ g\tau)}=F_{(k,t)}$, and an individual $a$ is pinned down by $\{a\}$. Thus
+$\tau\cdot\bar a\in E$ and $g\cdot(\tau\cdot\bar a)=\bar a$: every member of $E$ is the $g$-image of
+a member of $E$.
+
+**Weak inextensibility at $1$.** Suppose $Z$ necessarily holds of every member of $E$. Take $\bar b\in
+Y_{(k,s)}$, so that $k=1_K$ and $s|_N$ is injective. Extend $s|_N$ to a permutation $\pi$ and put
+$g:=\pi^{-1}s$, which fixes $N$. By pinning and symmetry, $Y_{(1_K,s)}=X_{(1_K,\pi)}=\pi\cdot E$; write
+$\bar b=\pi\cdot\bar a$ with $\bar a\in E$, and lift $\bar a$ to $\bar a'\in E$ with $g\cdot\bar
+a'=\bar a$. Transport is a left action, so $(1_K,s)\cdot\bar a'=(1_K,\pi)\cdot((1_K,g)\cdot\bar
+a')=\bar b$. Since $Z$ holds necessarily of $\bar a'$, $\bar b\in Z_{(1_K,s)}$. At every other arrow
+$Y$ is empty. So $Y\le Z$.
+
+**Conclusion.** Every $X$ is coextensive at $1$ with an inextensible $Y$, so Inextensible
+Comprehension holds at $1$. It is a closed pure sentence and the models have one object, so it holds
+at every arrow: □Inextensible Comprehension holds. Nothing depends on whether the individuals are
+$U$ or a single point. The argument uses choice, for the preimages $p_t$ and the extending
+permutations.
+
 ## Remarks
 
 1. **Choice.** Logical Necessity uses choice in the metatheory, in choosing the witnesses
    $J_\alpha$, and so do the lifts in BF and Rigid Power.
-2. **What is left open.** Transversal and Inextensible Comprehension hold in the finite model,
-   and they are open here. The finite arguments break in two places:
-   - The Transversal argument takes least supports, which need not exist for pinning sets of
-     size $\kappa$.
-   - Both arguments relabel an arrow fixing the pinning set into one that leaves the entity
-     unchanged. The monoid coordinate blocks that step.
+2. **What is left open.** Transversal holds in the finite model and is open here. The finite
+   argument breaks in two places:
+   - It takes least supports, which need not exist for pinning sets of size $\kappa$.
+   - It relabels an arrow fixing the pinning set into one that leaves the entity unchanged. The
+     monoid coordinate blocks that step. For Inextensible Comprehension, which had the same
+     obstacle, §10 avoids it by making the witness empty once the monoid coordinate leaves $1_K$.
 3. **Source.** Astra's note also gives the general criterion: with any monoid factor $K$, BF holds
    iff $K$ is right cancellative. The map records the two instances above.

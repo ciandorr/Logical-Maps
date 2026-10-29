@@ -232,9 +232,12 @@ arguments:
     locator: Online appendix §B.2, Lemmas B.1–B.4, pp. 7–9
   text: >-
     At type $t$. Write $\pi,\rho$ for the coordinate projections of $B=\mathbf 2\times A$. By extensional
-    fullness the $\pi$-coordinate of a box-free sentence is its truth in the full standard model over
-    the same domains, and the $\rho$-coordinate its value in $V^A$, relations on a ground set ranging
-    over all names for subsets of it. Both $V$ and $V^A$ have a real number structure on a subset of
+    fullness, for a box-free formula whose relation variables are only applied to elements of a fixed
+    carrier, with identity only between those elements, the $\pi$-coordinate is its truth in the full
+    standard model over the same domains, and the $\rho$-coordinate its value in $V^A$, relations on a
+    ground set ranging over all names for subsets of it. (Not every box-free sentence transfers: identity
+    between relations is crisp, so box-free Extensionality has value $\bot$.) The sentences below are in
+    this fragment. Both $V$ and $V^A$ have a real number structure on a subset of
     $D_t=B$: $|B|\ge2^{\aleph_0}$, and $|B|\ge(2^{\aleph_0})^{V^A}$, which is $\aleph_2$ in the first
     case (where $|B|=\aleph_2^{\aleph_0}=\aleph_2$, by CH) and $\aleph_1$ in the second. Real number structures are unique up to
     isomorphism, so $\exists\mathfrak R\, .\,\operatorname{Real}_t(\mathfrak R)\land\operatorname{CH}(\mathfrak R)$
@@ -244,6 +247,16 @@ arguments:
     and $\forall\mathfrak R\, .\,\operatorname{Real}_t(\mathfrak R)\to\neg\operatorname{CH}(\mathfrak R)$ is
     $(1,0_A)$ or $(0,1_A)$, not $\top$. As $\Box p$ is $p=\top$, both disjuncts of Non-contingency of CH
     are $\bot$.
+  revisions:
+  - date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, from a correction by OpenAI Codex (GPT-6),
+      prompted by Daniel Kodsi, 25 October 2026, in Daniel Kodsi's pull request #18
+    note: >-
+      The first sentence claimed the transfer for every box-free sentence. That is false: with crisp
+      identity of entities, take $F(*)=\bot$ and $G(*)=(1,0_A)$ at type $et$; coextension has value
+      $(0,1_A)$ and identity $\bot$, so box-free Extensionality has value $\bot$. The transfer is now stated for
+      formulas whose relation variables are only applied to carrier elements, with identity only on those;
+      the real number structure and CH sentences are in that fragment, and the verdict is unchanged.
 - holds: [arithmetic-necessitism]
   by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell
   date: '2026-10-23'

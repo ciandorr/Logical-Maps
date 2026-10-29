@@ -7,11 +7,14 @@ pull request #21. Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, extended i
 every signature for which it can work, and showed that no other signature is possible.
 
 **What the models show.** Independence (signature Σ) is consistent with Extensionality and □Functional
-Choice whenever every constant of Σ has a type in which $e$ occurs. Two versions are recorded:
+Choice whenever every constant of Σ has a type in which $e$ occurs. These are the variants with
+independent constants of the members of the Henkin models group:
 
-- With finitely many individuals, Σ is finite, and both Infinity schemata fail.
-- With infinitely many individuals, Σ is arbitrary, and the Axiom of Infinity holds at $e$ while the
-  Infinity schema fails at $t$.
+- full-henkin-finite-base: finitely many individuals and finite Σ; both Infinity schemata fail.
+- full-henkin-infinite-base: individuals $\mathbb N$ and countable Σ; the Axiom of Infinity holds at $e$,
+  while the Infinity schema fails at $t$. With a larger set of individuals, Σ can be of any size.
+- henkin-without-relational-choice: in ZF, with a serial relation that has no functional subrelation;
+  finite Σ, and Relational Choice fails.
 
 **The restriction on Σ is necessary.** Extensionality and Independence (Σ) are inconsistent if Σ has a
 constant whose type does not contain $e$. Under Extensionality there are just two propositions, by the

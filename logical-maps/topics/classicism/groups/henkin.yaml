@@ -1,0 +1,129 @@
+id: henkin
+name: 'Henkin models'
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48
+  note: The full Henkin interpretation, a model of C.
+
+# The one-world extensional models: the full Henkin interpretation of Classicism, Definition 3.6, over
+# various individual domains and metatheories, with Σ at its top interpretation or with independent
+# constants. Formed on 29 October 2026 by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, from
+# full-henkin-singleton-base, full-henkin-infinite-base, henkin-without-relational-choice and the two
+# extensional-independent-constants models of the same day, which became the variants of the members
+# at the independent interpretation of Σ. The members' own arguments for Extensionality, the Fregean
+# Axiom, Functional Choice and the Infinity principles at type e gave way to the shared arguments below
+# and the topic's arguments for extensionally full models; a finite member was added.
+
+definition: >-
+  {{construction}} There is one world, so $\Box p$ is $p=\top$, and identity is genuine identity: a
+  full Henkin interpretation (Classicism, Definition 3.6), a model of C by Proposition 3.7.
+
+
+  {{metatheory}}
+
+
+  {{sigma}}
+
+parameters:
+  construction:
+    text: The individual domain, as the member gives it.
+  metatheory:
+    text: The metatheory in which the construction is carried out, as the member gives it.
+    values:
+      zfc:
+        text: 'Metatheory, fixed for this record: ZFC.'
+        label: ZFC
+      no-choice-function:
+        text: >-
+          Metatheory, fixed for this record: ZF, with a serial relation that has no functional
+          subrelation, whose domain is the set of individuals (Classicism, §2.3, n. 46). ZF with this
+          hypothesis is consistent if ZF is, so the verdicts of this record are relative-consistency
+          claims.
+        label: ZF, no choice function
+        choiceless: true
+  sigma:
+    text: The interpretation of Σ. Each member is recorded with Σ top; its variant with independent
+      constants is generated where there are at least two individuals.
+    generate: true
+    default: top
+    values:
+      top:
+        text: >-
+          Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each
+          denotes the top element of its type.
+        label: Σ top
+        meets:
+          sigma-top: This is the interpretation.
+      independent:
+        text: >-
+          Interpretation of Σ, fixed for this record: Σ is any signature every constant of which has a
+          type in which $e$ occurs, with individuals enough to give each individual constant one and
+          each relational constant two of its own: any finite Σ, and any countable Σ when the individuals
+          are $\mathbb N$. An individual constant denotes its individual. A relational constant $c$ of type
+          $\tau$, with individuals $a_c,b_c$, denotes $x_\tau$, where $x_e:=a_c$ and, for
+          $\tau=\bar\sigma t$ with $e$ occurring in $\sigma_i$, $x_\tau:=\{\bar y : y_i=x_{\sigma_i}\}$;
+          for one predicate of type $et$, the singleton $\{a_c\}$.
+        label: Σ independent
+        requires: [several-individuals]
+
+meets:
+  extensionally-full: Every relational type holds every function between its domains, and there is one
+    world.
+
+conditions:
+- id: several-individuals
+  text: There are at least two individuals.
+- id: finitely-many-individuals
+  text: There are finitely many individuals.
+
+arguments:
+
+- id: extensionality
+  holds: [extensionality-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Every relation is a function between the lower domains, and identity is identity of functions, so
+    coextensive relations are identical. With one world, the boxed principles reduce to their unboxed
+    forms, and the comprehension, completeness and atomicity principles hold as in every two-valued full
+    model: each relational type is the complete atomic Boolean algebra of the subsets of a domain.
+
+- id: functional-choice
+  holds: [functional-choice-r]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Every function between the domains is present, so choice in the metatheory gives every serial
+    relation a functional subrelation, and, when the output type is relational, a selecting operation.
+
+- id: finitely-many-individuals
+  requires: [finitely-many-individuals]
+  fails: [infinity-e]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    In a full model the numbers are the standard finite cardinalities, and with finitely many
+    individuals one of them holds of the universal property of individuals.
+
+- id: independence
+  when: {sigma: independent}
+  holds: [independence-signature-r]
+  choice: free
+  writeup: extensional-independent-constants
+  by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi, 22 October 2026, for one predicate of type $et$; Claude
+    Opus 5.5 (Anthropic), prompted by Cian Dorr, for every such Σ
+  date: '2026-10-29'
+  text: >-
+    Permutations of the individuals act on every type, by conjugation, preserving application,
+    identity, the Boolean operations and the quantifiers, so every closed pure term $A$ is equivariant:
+    $\pi(A\,\bar d)=A\,(\pi\bar d)$. For distinct constants $c,d_1,\dots,d_n$ with $c$ relational, the
+    transposition of $a_c$ and $b_c$ fixes the individuals of the $d_i$, hence each $d_i$, and so
+    $A\,\bar d$; but it moves $c$, by induction on its type. So $c\ne A\,\bar d$. For an individual
+    constant $c$ the instance is vacuous, no term $A\,\bar d$ being of type $e$. The restriction on Σ
+    cannot be dropped: Extensionality and Independence (Σ) are inconsistent when Σ has a constant whose
+    type does not contain $e$, since such a constant is provably one of finitely many closed pure terms
+    (write-up).

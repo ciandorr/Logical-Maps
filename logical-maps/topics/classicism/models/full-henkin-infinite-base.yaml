@@ -22,53 +22,19 @@ references:
 # migration (3 October): the interpretation of Σ has no individual constants, as the topic's condition
 # sigma-top now says (Cian Dorr's decision); it read "and each individual constant denotes one
 # fixed individual".
-definition: >-
-  Use the ordinary full Henkin interpretation with $D_e$ countably infinite, $D_t=\{0,1\}$, and
-  every admitted function type containing all functions between its domains; by Proposition 3.7 it
-  is a model of C. Identity is genuine identity and $\Box$ is the identity on truth values, so
-  $\Diamond$ is truth.
-
-
-  Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each
-  denotes the top element of its type.
-
-# The interpretation of Σ in the definition meets the topic's condition sigma-top, so the general
-# argument sigma-top (arguments/) gives its failures (2 October 2026; this record's copy of it went).
+group: henkin
+settings:
+  construction: The individual domain $D_e$ is countably infinite, $D_t=\{0,1\}$, and every relational type
+    holds all functions between its domains.
+  metatheory: zfc
 meets:
-  sigma-top: This is the interpretation the definition fixes.
+  infinitely-many-individuals: The individual domain is countably infinite.
+  several-individuals: There are infinitely many individuals.
 
-arguments:
-
-# Only the verdicts the engine needs to derive the rest are recorded, the source's first. Lead-ins
-# naming the verdict, and attribution sentences, are dropped from the texts, their content being in
-# holds, fails, by and date; a text cut from a longer sentence begins with a capital and ends with a
-# full stop.
-
-# --- as first recorded (20 Sep) ---
-
-- holds: [axiom-of-infinity-e]
-  text: >-
-    Because every domain is full, $\operatorname{FiniteCardinality}_\sigma$ holds exactly of the
-    values of the numerals $\operatorname{Suc}_\sigma^k\mathbf{0}_\sigma$: the characteristic
-    function of that set is in the domain and is inductive. At type $e$ the $k$-th numeral says
-    that there are exactly $k$ individuals, which is false for every $k$, so the Axiom of Infinity
-    at type $e$ holds, and with it the schema.
-
-- holds: [fregean-axiom, functional-choice-r]
-  # migration: the sentences before this one, on the failures at type $t$ and of Possibility
-  # Maximalism (pure), now derived, are dropped.
-  text: >-
-    The remaining positive assertions hold as in every two-valued full model: each boxed principle
-    reduces to its unboxed form; coextensive relations are identical, so Extensionality, the
-    Fregean axiom and its modalized form hold; every relation is persistent, inextensible and
-    Gallin-extensional, giving the comprehension principles; Actuality holds with top as the
-    actual world; each relational type is the complete atomic Boolean algebra of subsets of a
-    domain, giving Atomicity and Boolean Completeness; Tractarianism is a tautology; ND holds
-    outright, giving C5; every closed sentence is non-contingent; and the choice principles hold
-    because every function between domains is present, using choice in the metatheory to select
-    from a serial relation on an infinite domain.
-
-# --- later additions ---
+# 29 October 2026: the definition, the Σ interpretation and the two arguments (the Axiom of Infinity at
+# type e; the Fregean Axiom and Functional Choice) are now the henkin group's and the topic's
+# (infinitely-many-individuals).
+arguments: []
 
 # migration: text of the old notes that no argument holds, verbatim; "listed" in the second sentence
 # now means derived. The sentences on No Contingency (signature Σ) and on the boxed choice

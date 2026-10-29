@@ -17,46 +17,18 @@ references:
   role: proof
   locator: §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48; §1.4, n. 18, p. 16
 
-# migration: the definition is the old description's first sentence, then the notes' interpretation
-# of Σ.
-# migration (3 October): the interpretation of Σ has no individual constants, as the topic's condition
-# sigma-top now says (Cian Dorr's decision); it read "and each individual constant denotes one
-# fixed individual".
-definition: >-
-  Use the ordinary full Henkin interpretation: D_e is a singleton, D_t={0,1}, and every admitted
-  function type contains all functions between its domains.
-
-
-  Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each
-  denotes the top element of its type.
-
-# The interpretation of Σ in the definition meets the topic's condition sigma-top, so the general
-# argument sigma-top (arguments/) gives its failures (2 October 2026; this record's copy of it went).
+group: henkin
+settings:
+  construction: The individual domain $D_e$ is a singleton, $D_t=\{0,1\}$, and every relational type holds
+    all functions between its domains.
+  metatheory: zfc
 meets:
-  sigma-top: This is the interpretation the definition fixes.
+  one-individual: The individual domain is a singleton.
+  finitely-many-individuals: There is one individual.
 
-arguments:
-
-# Only the verdicts the engine needs to derive the rest are recorded, the source's first. Lead-ins
-# naming the verdict, and attribution sentences, are dropped from the texts, their content being in
-# holds, fails, by and date; a text cut from a longer sentence begins with a capital and ends with a
-# full stop.
-
-# --- as first recorded (17 Sep) ---
-
-- holds: [fregean-axiom, functional-choice-r]
-  text: >-
-    Domains are finite by induction on types, so every serial relation has a functional
-    subrelation and, when the output type is relational, a selecting operation. Equality is
-    genuine equality and Box is the identity on truth values. These facts verify the listed
-    positive assertions.
-
-- fails: [infinity-e]
-  text: >-
-    The two finite base domains refute the infinity assertions, top is an atom, and the possible
-    existence of two individuals is false although its pure sentence is C-consistent.
-
-# --- later additions ---
+# 29 October 2026: the definition, the Σ interpretation and the two arguments (the Fregean Axiom and
+# Functional Choice; the failure of the Infinity schema at type e) are now the henkin group's.
+arguments: []
 
 # migration: text of the old notes that no argument holds, verbatim. Their arguments of 20 and 22
 # September for verdicts now derived (the one-world principles, the pure schemata, No Contingency

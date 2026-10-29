@@ -21,43 +21,30 @@ references:
 # migration (3 October): the interpretation of Σ has no individual constants, as the topic's condition
 # sigma-top now says (Cian Dorr's decision); it read "and each individual constant denotes one
 # fixed individual".
-definition: >-
-  The source’s relative-consistency construction starts in a model of ZF without choice and uses
-  the domain of a serial relation with no functional subrelation as its individual domain.
-
-
-  Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each
-  denotes the top element of its type.
-
-# The interpretation of Σ in the definition meets the topic's condition sigma-top, so the general
-# argument sigma-top (arguments/) gives its failures (2 October 2026; this record's copy of it went).
+group: henkin
+settings:
+  construction: The individual domain is the domain of a serial relation with no functional subrelation,
+    $D_t=\{0,1\}$, and every relational type holds all functions between its domains (the source's
+    relative-consistency construction).
+  metatheory: no-choice-function
 meets:
-  sigma-top: This is the interpretation the definition fixes.
+  infinitely-many-individuals: A serial relation on a finite set has a functional subrelation in ZF, so the
+    individual domain is infinite.
+  several-individuals: There are infinitely many individuals.
 
 arguments:
 
-# Only the verdicts the engine needs to derive the rest are recorded, the source's first. Lead-ins
-# naming the verdict, and attribution sentences, are dropped from the texts, their content being in
-# holds, fails, by and date; a text cut from a longer sentence begins with a capital and ends with a
-# full stop.
-
 # --- from the source (17 Sep record) ---
 
-- holds: [extensionality-r]
-  fails: [relational-choice-r]
+# 29 October 2026: Extensionality, which this argument also gave, and the Axiom of Infinity at type e
+# (Claude Fable 5.1, 25 September) are now the henkin group's and the topic's
+# (infinitely-many-individuals); the Axiom of Infinity's reason is the reason given above for meeting
+# infinitely-many-individuals.
+- fails: [relational-choice-r]
+  choice: free
   source: {paper: bacon-dorr-classicism, locator: '§2.3, n. 46, p. 32'}
   text: >-
     Refer to note 46; its set-theoretic hypothesis is part of the construction.
-
-# --- later additions ---
-
-- holds: [axiom-of-infinity-e]
-  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
-  date: '2026-09-25'
-  text: >-
-    A serial relation on a finite set has a functional subrelation in ZF, so the individual domain
-    is infinite, and in the full extensional construction the finite cardinalities are the
-    standard numerals, none of which holds of an infinite universal property.
 
 # migration: text of the old notes that no argument holds, verbatim: their first two sentences, and
 # the sentence that followed the Σ argument, referring to its failures.

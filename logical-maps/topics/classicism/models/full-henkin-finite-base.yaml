@@ -1,0 +1,41 @@
+id: full-henkin-finite-base
+name: 'Full Henkin model: finite individual domain'
+certificate:
+  source_id: misc
+  produced_by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi, 22 October 2026 (two individuals, with one
+    independent predicate); Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- >-
+  OpenAI Codex (GPT-6), prompted by Daniel Kodsi, Central question audit, 22 October 2026 (unpaginated),
+  and the model extensional-single-predicate-two-individuals in Daniel Kodsi's pull request #21 of 28
+  October 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, §3.2, Definition 3.6 and Proposition 3.7,
+  pp. 47–48.
+source_names:
+- Codex via Kodsi 22 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: proof
+  locator: §3.2, Definition 3.6 and Proposition 3.7, pp. 47–48
+group: henkin
+settings:
+  construction: The individual domain $D_e$ is finite with at least two members (with independent
+    constants, at least twice as many as Σ has relational constants, plus one for each individual
+    constant), $D_t=\{0,1\}$, and every relational type holds all functions between its domains.
+  metatheory: zfc
+meets:
+  finitely-many-individuals: The individual domain is finite.
+  several-individuals: There are at least two individuals.
+arguments: []
+notes: >-
+  With independent constants (the generated variant), it witnesses the consistency of Independence
+  (signature Σ) with Extensionality and the failure of both Infinity schemata, for every finite Σ whose
+  constants all have types in which $e$ occurs. Codex's model is the case Σ $=\{c\}$, $c$ of type $et$
+  denoting $\{0\}$, over $\{0,1\}$; two individuals suffice for one relational constant only. Whether
+  infinitely many constants are possible with finitely many individuals is open (write-up
+  extensional-independent-constants).

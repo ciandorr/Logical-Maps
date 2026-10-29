@@ -1,0 +1,118 @@
+id: symmetric-boolean-prefix-recurrent-colours
+name: 'Symmetric ideally-full model: atomless Boolean prefix with recurrent colour subalgebras'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Symmetric ideally-full model: an atomless Boolean prefix
+  with recurrent colour subalgebras, research note of 26 October 2026, §§2–11 (unpaginated), in Daniel
+  Kodsi's pull request #18 of 26 October 2026 (boolean-prefix-rigidity.md in the integration register of
+  branch classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Definitions 15–18,
+  p. 8.
+source_names:
+- Astra via Kodsi 26 Oct
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: Definitions 15–18, p. 8
+  note: Symmetric ideally-full models, of which this is one.
+group: symmetric-ideally-full
+settings:
+  construction: 'A symmetric ideally-full model with a prefix object $A$, whose base is the countable
+    atomless Boolean algebra $B$, and tail objects $V_m$ ($m\ge0$) and $V_\infty$, whose bases are countable
+    atomless Boolean algebras with colour subalgebras: at $V_m$, free on $c_0,\dots,c_{m-1},d_0,d_1,\dots$,
+    the colours are $C_m:=\langle c_0,\dots,c_{m-1}\rangle$; at $V_\infty$, free on
+    $c_0,c_1,\dots,d_0,d_1,\dots$, they are $C_\infty:=\langle c_0,c_1,\dots\rangle$. The arrows $A\to A$ are
+    the automorphisms of $B$; the arrows from $A$ to a tail object are the surjective homomorphisms with dense
+    kernel (every nonzero element has a nonzero element of the kernel below it); the arrows between tail
+    objects are the surjective homomorphisms $f$ with $f[C_V]\subseteq C_W$; no arrows go from the tail to
+    $A$. The symmetry group is $\operatorname{Aut}(B)$ at $A$ and the automorphisms with $f[C_V]=C_V$ at a
+    tail object. Every object carries the ideal of finite sets. Evaluation point: $1_A$.'
+  sigma: top
+meets:
+  finitely-pinned-domains: >-
+    The domains hold every symmetric intension pinned down by a finite set, and every entity in them is
+    one.
+  finite-pinning: Every object carries the ideal of finite sets.
+  surjective-arrows: Every arrow is a surjection of the bases.
+  infinite-base: The base at $A$ is the countable atomless Boolean algebra.
+  symmetry-group-pinned: >-
+    The arrows into $A$ are exactly the automorphisms of $B$, the symmetry group, and the proposition true
+    at the arrows into $A$ is pinned down by $\varnothing$.
+  transposable: >-
+    For finite $N$, the property of lying outside $\langle h[N]\rangle$ (at an arrow $h$) is symmetric and
+    pinned down by $N$, with a nonempty extension; an element $y\notin\langle N\rangle$ splits some atom
+    $s$ of $\langle N\rangle$, and the automorphism exchanging $y\land s$ with $s\setminus y$ inside
+    $[0,s]$ and fixing everything disjoint from $s$ fixes $\langle N\rangle$, hence the property, and moves
+    $y$.
+  separable-collapses: >-
+    Present $B$ as free on $a_0,a_1,\dots$ and take the pairs $\{0,a_n\}$. For $i\ne j$, the homomorphism
+    onto $V_0$ sending $a_i$ and infinitely many other generators to $0$, $a_j$ to a generator, and the rest
+    onto the remaining generators is a surjection with dense kernel that collapses the one pair and not the
+    other.
+arguments:
+- id: necessary-barcan
+  holds: [necessary-barcan-r]
+  choice: free
+  writeup: symmetric-boolean-prefix-recurrent-colours
+  text: >-
+    At every type and every object. Every arrow is surjective and every object carries the ideal of finite
+    sets, so the argument barcan-surjective of the group applies at each object.
+- id: rigid-comprehension
+  when: {individuals: base}
+  holds: [rigid-comprehension-r]
+  choice: free
+  writeup: symmetric-boolean-prefix-recurrent-colours
+  text: >-
+    At every relational type. If a set $D$ of tuples is invariant under the automorphisms fixing a finite
+    subalgebra $P$ pointwise, then $h\mapsto h[D]$ is in the domain, pinned down by $P$, and rigid, as an
+    exact-image relation. For arrows $h,h^{\prime}$ into the tail that agree on $P$, and $a\in D$ pinned down
+    by $M\supseteq P$, an automorphism $u$ fixing $P$ with $hu=h^{\prime}$ on $M$ exists because $\ker h$ is
+    dense: within each atom of $P$, the atoms of $M$ are matched with a partition having the right images,
+    nonzero pieces with zero image being carved out of a kernel element. So $h^{\prime}\cdot a=h\cdot(u\cdot
+    a)$. The extension of a relation pinned down by $P$ is such a $D$.
+- id: rigid-power
+  when: {individuals: base}
+  holds: [necessary-rigid-power-r]
+  choice: free
+  writeup: symmetric-boolean-prefix-recurrent-colours
+  text: >-
+    At every type. Let $F$ be rigid at $A$, so $F_h=h[F_1]$, and $Y\le h\cdot F$ rigid at the target of $h$.
+    At $A$, invert $h$. At $V_m$, pin $F$, $Y$ and the finite colour algebra by a finite $P$, and fix one
+    kernel element $z$ meeting every live atom of $P$ and covering the dead ones. Every tuple of $F_1$ is then
+    conjugate, by an automorphism fixing $P$ and not changing its image, to one whose pinning algebra has its
+    kernel below $z$. The orbit, under the automorphisms fixing $P$ and $z$, of the normalised tuples with
+    image in $Y$ gives a rigid $X\le F$ with $h\cdot X=Y$: the image of a conjugate is moved back into $Y$ by
+    an endomorphism of $V_m$ fixing the colours and the pin of $Y$. At $V_\infty$, pass through a finite-colour
+    object by tail arrows $c$ and $k$ with $kc$ fixing the pins of $Y$ and of the test. So the property of
+    being rigid and below $F$ is weakly inextensible, hence rigid by Tame Rigidity. With □BF, Rigid Power at
+    the universal relation is Rigid Rigidity, so Rigid Power is necessary
+    (rigid-rigidity-and-rigid-power-imply-necessary-rigid-power).
+- id: tame-rigidity-fails-at-infinite-colour
+  when: {individuals: base}
+  fails: [necessary-tame-rigidity-r, weakly-rigid-power-r]
+  choice: free
+  writeup: symmetric-boolean-prefix-recurrent-colours
+  text: >-
+    At type $et$. At $V_\infty$ let $U$ have extension $C_W$ at every arrow into $W$: symmetric, pinned down by
+    $\varnothing$, persistent because arrows preserve colour, and weakly inextensible, since a test pinned down
+    by $P$ and necessary of every colour is met at any $h$ by each $y\in C_W$, as some arrow agreeing with $h$
+    on $P$ sends a fresh colour generator to $y$. It is not rigid: along the arrow $l$ to $V_0$ sending every
+    colour generator to $0$ its extension is $\{0,1\}$, and it does not entail the disjunction of their
+    haecceities, which along an isomorphism back to $V_\infty$ has two instances while $l\cdot U$ has
+    infinitely many. An entrance $A\to V_\infty$ exists, so □Tame Rigidity fails. And the weakly rigid
+    subproperties of the universal property at $A$ are rigid, by Tame Rigidity, but $U$ is a weakly rigid one
+    at $V_\infty$ that is not, so Weakly Rigid Power fails.
+notes: >-
+  Separates Rigid Comprehension, □BF and □Rigid Power from Weakly Rigid Power and □Tame Rigidity,
+  strengthening symmetric-recurrent-colours, which has Tame Rigidity in place of Rigid Comprehension. So Rigid
+  Comprehension is not necessary here. The prefix object's arrows into the tail have dense kernels, which is
+  what lets rigid relations at $A$ lift. Recorded with the base as individuals; the arguments using
+  individuals do not apply to the generated variant with one individual.

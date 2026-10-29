@@ -1701,6 +1701,15 @@ def maximalist_distinctness_incompatible_with_necessary_atomicity_t : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn →
     ¬ Classicism.Meta.AxiomSet.Consistent Ax
 
+/-- `maximalist-distinctness-incompatible-with-necessary-atomlessness`
+
+Maximalism (pure) ∧ □Atomlessness ⇒ ⊥ -/
+def maximalist_distinctness_incompatible_with_necessary_atomlessness : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.distinctnessC) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn →
+    ¬ Classicism.Meta.AxiomSet.Consistent Ax
+
 /-- `maximalist-distinctness-incompatible-with-necessary-barcan-r`
 
 Maximalism (pure) ∧ □BF ⇒ ⊥ -/
@@ -2226,13 +2235,13 @@ def necessary_atomlessness_implies_necessary_atoms_are_strong_atoms_r : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn
 
-/-- `necessary-atomlessness-implies-necessary-self-atoms-are-atoms-r`
+/-- `necessary-atomlessness-implies-necessary-self-atoms-are-strong-atoms-r`
 
-□Atomlessness ⇒ □Self-atoms are atoms -/
-def necessary_atomlessness_implies_necessary_self_atoms_are_atoms_r : Prop :=
+□Atomlessness ⇒ □Self-atoms are strong atoms -/
+def necessary_atomlessness_implies_necessary_self_atoms_are_strong_atoms_r : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn →
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn
 
 /-- `necessary-atoms-are-self-atoms-r-and-necessary-self-atoms-are-strong-atoms-r-imply-necessary-atoms-are-strong-atoms-r`
 

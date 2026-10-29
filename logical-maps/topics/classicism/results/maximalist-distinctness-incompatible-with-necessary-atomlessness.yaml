@@ -1,0 +1,27 @@
+id: maximalist-distinctness-incompatible-with-necessary-atomlessness
+premises:
+- distinctness-schema-r
+- necessary-atomlessness
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026, at Cian Dorr's suggestion
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, observation of 29 October 2026, an instance of his observation of 8 October 2026 that Maximalism
+  (pure) excludes the necessitation of any pure principle that is not a theorem of C.
+source_names:
+- Dorr 29 Oct
+proof: >-
+  Atomlessness is a closed pure sentence, and it fails in full-henkin-singleton-base, a model of C whose
+  propositions are $\top$ and $\bot$, $\top$ being an atom. So its negation is consistent with C, and the
+  possibility form of Maximalism (pure) makes it possible, while □Atomlessness makes Atomlessness necessary.
+references: []
+notes: >-
+  Instance of the pattern of maximalist-distinctness-incompatible-with-necessary-atomicity-t, from the other
+  side: since Atomlessness and Atomicity (type $t$) each hold in some model of C, Maximalism (pure) excludes
+  the necessitation of either.

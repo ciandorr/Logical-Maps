@@ -4969,14 +4969,6 @@ def strong_possibility_signature_r_implies_possibility_signature_r : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.strongPossibility _) →
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
 
-/-- `strong-possibility-signature-r-implies-strong-possibility-r`  (conjectured)
-
-Strong Possibility (signature Σ) ⇒ Strong Possibility (pure) -/
-def strong_possibility_signature_r_implies_strong_possibility_r : Prop :=
-  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
-    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.strongPossibility _) →
-    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.strongPossibility)
-
 /-- `tame-rigidity-and-barcan-imply-necessary-barcan`
 
 Tame Rigidity ∧ BF ⇒ □BF -/

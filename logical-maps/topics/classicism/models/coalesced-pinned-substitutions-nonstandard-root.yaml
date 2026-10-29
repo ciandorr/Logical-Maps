@@ -1,0 +1,146 @@
+id: coalesced-pinned-substitutions-nonstandard-root
+name: 'Coalesced sum: substitution arrows over an atomless component with nonstandard arithmetic'
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts,
+    29 October 2026 (a variant of Cian Dorr's coalesced-pinned-substitutions-root with one chosen component)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, construction of 19 October 2026 (coalesced-pinned-substitutions-root), with Claude Opus 5.5
+  (Anthropic); the choice of component here by Claude Opus 5.5 (Anthropic), 29 October 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Theorem 3.23, §3.4, p. 57; Appendix D,
+  Definitions D.1–D.3 and Proposition D.4, pp. 73–74; Appendix E, Definition E.2, pp. 80–83.
+source_names:
+- Dorr 19 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Theorem 3.23, §3.4, p. 57; Appendix D, pp. 73–74; Appendix E, pp. 80–83
+  note: Soundness and completeness of action models for C (Theorem 3.23) supply the consistency of T and the component; the root is pinned down by finite sets
+    of constants as in coalesced-pinned-substitutions-root.
+group: coalesced-sums
+settings:
+  root-arrows: interpretations-and-substitutions
+  construction: >-
+    Let $T$ be C together with $\Box$Atomlessness, $\Box I^*_e$ and the negation of BF at type $t$, a
+    recursively axiomatized theory. $T$ holds in finite-support-monotone-maps, which is atomless, fails BF at
+    type $t$, and has infinitely many individuals and the standard numerals as its numbers at $e$ (the property
+    of being a numeral is pinned down by $\emptyset$); it has one object, so its boxes are idle. So $T$ is
+    consistent, by soundness. $T$ proves $I^*_e$, and so the Peano axioms for its numbers at $e$, so by Gödel's
+    second incompleteness theorem $T+\neg\operatorname{Con}(T)$ is consistent, and by the completeness of action
+    models for C (Classicism, Theorem 3.23: every formula consistent with C holds at some world of some action
+    model) it holds at an object $V_2$ of some action model. The single component is that model cut down to the
+    objects reachable from $V_2$, so that every closed sentence keeps its truth value at each object. The root
+    $W_0$ is built over it exactly as in coalesced-pinned-substitutions-root: an arrow $\langle V,I\rangle$ into
+    each object $V$ of the component for each interpretation $I$ of $\Sigma^+$ there, and an arrow from $W_0$ to
+    itself for each type-preserving map of the constants of $\Sigma^+$. Evaluation point: $W_0$, at its identity
+    arrow. Interpretation of Σ as there. The write-up's argument that the root is a model of C does not use the
+    completeness of the family of components, only that each is an action model of C.
+  domains:
+    text: >-
+      As in coalesced-pinned-substitutions-root, intensions over the arrows out of $W_0$ pinned down
+      by a finite set of constants of $\Sigma^+$, whose transports along the arrows into the component land
+      in its domains.
+meets: {}
+arguments:
+- id: atomlessness
+  holds:
+  - necessary-atomlessness
+  - barcan-r
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    The arrows out of $W_0$ end at $W_0$ (the maps of the constants) or at objects of the component, and a
+    closed sentence holds at an arrow iff it holds at the identity of its target. At every object of the
+    component Atomlessness holds, by $\Box$Atomlessness at $V_2$, the component being generated from
+    $V_2$. At $W_0$ it holds by the argument atomlessness of coalesced-pinned-substitutions-root, which
+    uses of the components only that $\top\ne\bot$ at each of their objects: a possible $p$ pinned down
+    by $S$ that contains a map is split by a fresh individual constant, and one that contains only arrows
+    into the component by a fresh propositional constant sent to $\top$ or to $\bot$. So $\Box$Atomlessness
+    holds. BF holds at every type by the argument barcan of that model, which uses only fresh
+    constants.
+- id: arithmetic
+  fails:
+  - necessity-of-arithmetic
+  - necessity-of-analysis
+  - arithmetic-necessitism
+  holds:
+  - axiom-of-infinity-e
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    At type $e$. $W_0$ is extensionally full at its identity: any set of tuples there is the extension of
+    the entity with that value at every map of the constants and $\bot$ at every arrow into the component,
+    pinned down by $\emptyset$ and landing. So the property with the numerals as its extension is an
+    inductive property at $W_0$, the numbers there are the standard numerals, and Sum and Prod are
+    standard on them (a relation refuting a false instance is in the domain). The individuals at $W_0$ are the infinitely many individual constants, so distinct numerals are distinct
+    there and $I^*_e$ holds at $W_0$, and it holds throughout the component by $\Box I^*_e$ at $V_2$; so
+    $\Box I^*_e$ holds at $W_0$. With $A:=\operatorname{Con}(T)$, an arithmetical sentence, $A$ holds at
+    $W_0$, whose arithmetic is standard, and fails at $V_2$; so neither $\Box(I\to A)$ nor
+    $\Box(I\to\neg A)$ holds at $W_0$, and the Necessity of Arithmetic fails. The Necessity of Analysis
+    fails as in coalesced-two-extensional-arithmetics-root, with $W_0$ and $V_2$ for the two components:
+    the Dedekind cuts over the numbers form a real number structure at each, every real number structure
+    at a world is isomorphic to it, and $\exists n\in N\,.\,\operatorname{Proof}_T(n,\bot)$ is false in
+    those at $W_0$ and true in those at $V_2$. Arithmetic Necessitism fails by the inextensibility of
+    $\mathbb N_e$: let $X:=\lambda x\, .\,\mathbb N x\land\neg\exists m\in\mathbb N\, .\,m<x\land
+    \operatorname{Proof}_T(m,\bot)$, a closed pure term. Each number at $W_0$ is a numeral
+    $\mathbf n$, and at every world $X\mathbf n$ holds, since under $I^*_e$ the numbers below
+    $\mathbf n$ are the numerals below it and each $\neg\operatorname{Proof}_T(\mathbf m,\bot)$ is a
+    true bounded sentence, $T$ being consistent. But at $V_2$ some number $m$ codes a proof of $\bot$
+    from $T$, and $\operatorname{Suc}m$ is a number lacking $X$; so $\mathbb N_e\le X$ fails. The Axiom of
+    Infinity (type e) holds at $W_0$: its finite cardinalities are the numerals, and none holds of the
+    universal property, which has infinitely many instances there.
+- id: bf-component
+  fails:
+  - necessary-barcan-t
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    BF at type $t$ is a closed pure sentence false at $V_2$, an object reachable from $W_0$. With BF at
+    $W_0$, the recorded result that Tame Rigidity and BF (type t) give $\Box$BF (type t) makes Tame
+    Rigidity fail at the root.
+- id: as-in-pinned-substitutions
+  fails:
+  - vicinity
+  - weakly-inextensible-comprehension-r
+  - boolean-completeness-t
+  - truth-implies-five-necessity
+  holds:
+  - two-hat-implies-nd-necessity
+  - five-implies-two-hat-necessity
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    The arguments as-in-all-maps and collapse-at-root of coalesced-pinned-substitutions-root apply
+    unchanged. They use the maps of the constants and propositions and properties containing no arrow into
+    a component, whose transports there are $\bot$ and land, together with the fact that no composite of
+    an arrow into a component with anything is a map; none of this depends on which action models the
+    components are. For Vicinity, the worlds seen from a map $f$ collapsing two individual constants $c,d$
+    are the maps $g\circ f$ and the arrows $\langle V,I\circ f\rangle$, all of which identify them.
+- holds: [transversal-choice-r]
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  choice: uses
+  text: >-
+    As in coalesced-pinned-substitutions-root, by the general argument transversal-choice-extensionally-full
+    applied at the root alone: any set of tuples at the identity is the extension there of the entity with
+    that value at every map of the constants and empty at every arrow into the component, pinned down by
+    $\emptyset$ and landing.
+notes: 'A variant of coalesced-pinned-substitutions-root proposed on 29 October 2026 in a trawl for the open
+  questions created by □Atomlessness: the substitution arrows keep the root atomless, and the one component
+  is atomless at every object but disagrees with the root about arithmetic and about BF. Audited by Claude Opus
+  5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026; it inherits the model-of-C argument of
+  coalesced-pinned-substitutions-root, which has not had a second reader. No Lean verification is claimed.'

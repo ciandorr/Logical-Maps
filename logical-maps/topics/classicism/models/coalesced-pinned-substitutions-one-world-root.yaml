@@ -1,0 +1,64 @@
+id: coalesced-pinned-substitutions-one-world-root
+name: 'Coalesced sum: substitution arrows over a one-world component'
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts,
+    29 October 2026 (a variant of Cian Dorr's coalesced-pinned-substitutions-root with one chosen component)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, construction of 19 October 2026 (coalesced-pinned-substitutions-root), with Claude Opus 5.5
+  (Anthropic); the choice of component here by Claude Opus 5.5 (Anthropic), 29 October 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, pp. 73–74; Appendix E,
+  Definition E.2, pp. 80–83.
+source_names:
+- Dorr 19 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, pp. 73–74; Appendix E, pp. 80–83
+group: coalesced-sums
+settings:
+  root-arrows: interpretations-and-substitutions
+  construction: >-
+    As in coalesced-pinned-substitutions-root, with a single component in place of a family complete for
+    C($\Sigma$): the one-object action model $V$ with only its identity arrow, one individual, and the full
+    extensional type hierarchy over it, so that $V$ has exactly two propositions. The root $W_0$ has an
+    arrow $\langle V,I\rangle$ for each interpretation $I$ of $\Sigma^+$ at $V$ and an arrow to itself for
+    each type-preserving map of the constants of $\Sigma^+$. Evaluation point: $W_0$, at its identity
+    arrow. Interpretation of Σ as there. The write-up's argument that the root is a model of C uses only
+    that each component is an action model of C.
+  domains:
+    text: >-
+      As in coalesced-pinned-substitutions-root, intensions over the arrows out of $W_0$ pinned down by a
+      finite set of constants of $\Sigma^+$; every transport lands, the component's domains being full.
+meets: {}
+arguments:
+- id: bridges
+  holds:
+  - atomlessness
+  - necessary-atoms-are-strong-atoms-r
+  fails:
+  - self-atoms-are-atoms-t
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    Atomlessness holds at $W_0$ by the argument atomlessness of coalesced-pinned-substitutions-root, which
+    needs of the component only that $\top\ne\bot$ there; so $W_0$ has no atom of type $t$, and by
+    existential projection (as in no-actuality-no-self-atoms) no atom of any relational type, and the
+    bridge principles for atoms hold vacuously there. At $V$, which sees only itself, $\Box$ is idle and
+    $\top$ is an atom, so Atomlessness fails there and $\Box$Atomlessness fails at $W_0$; and at $V$ an
+    atom, being non-bottom and below every entity of its type or its negation, is a strong atom and a
+    self-atom, the boxes being idle. So both necessitated bridge principles for atoms hold at every type.
+    Self-atoms are atoms (type t) fails at $W_0$: the proposition $P$ true exactly at the arrows into $V$
+    is pinned down by $\emptyset$, with transport $\top$ along every $\langle V,I\rangle$, so it lands; it
+    is possible, and wherever it is true it is $\top$ at $V$, an atom, so it is a self-atom, but not an atom
+    at the atomless $W_0$.
+notes: 'Proposed on 29 October 2026 in a trawl for the open questions created by □Atomlessness, to show that
+  Atomlessness with the necessitated bridge principles for atoms does not give □Atomlessness. Checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr; it inherits the model-of-C argument of
+  coalesced-pinned-substitutions-root, which has not had a second reader. No Lean verification is claimed.'

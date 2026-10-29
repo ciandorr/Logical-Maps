@@ -1,0 +1,59 @@
+id: coalesced-pinned-substitutions-truncations-root
+name: 'Coalesced sum: substitution arrows over the truncations model'
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts,
+    29 October 2026 (a variant of Cian Dorr's coalesced-pinned-substitutions-root with one chosen component)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, construction of 19 October 2026 (coalesced-pinned-substitutions-root), with Claude Opus 5.5
+  (Anthropic); the choice of component here by Claude Opus 5.5 (Anthropic), 29 October 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Proposition D.5, part 6, pp.
+  74, 78; Appendix E, Definition E.2, pp. 80–83.
+source_names:
+- Dorr 19 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, pp. 73–78; Appendix E, pp. 80–83
+group: coalesced-sums
+settings:
+  root-arrows: interpretations-and-substitutions
+  construction: >-
+    As in coalesced-pinned-substitutions-root, with a single component in place of a family complete for
+    C($\Sigma$): the one-object model finite-support-truncations, with object $V$. The root $W_0$ has an
+    arrow $\langle V,I\rangle$ for each interpretation $I$ of $\Sigma^+$ at $V$ and an arrow to itself for
+    each type-preserving map of the constants of $\Sigma^+$. Evaluation point: $W_0$, at its identity
+    arrow. Interpretation of Σ as there. The write-up's argument that the root is a model of C uses only
+    that each component is an action model of C.
+  domains:
+    text: >-
+      As in coalesced-pinned-substitutions-root, intensions over the arrows out of $W_0$ pinned down by a
+      finite set of constants of $\Sigma^+$, whose transports along the arrows into $V$ land in its domains.
+meets:
+  no-actuality-anywhere: >-
+    The objects reachable from $W_0$ are $W_0$ and $V$. Actuality fails at $V$, as recorded for
+    finite-support-truncations, and at $W_0$, where Atomlessness holds (argument atomlessness), there being
+    no atom at all.
+arguments:
+- id: atomlessness
+  holds:
+  - atomlessness
+  fails:
+  - necessary-atomlessness
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    Atomlessness holds at $W_0$ by the argument atomlessness of coalesced-pinned-substitutions-root, which
+    needs of the component only that $\top\ne\bot$ there. It fails at $V$, where Atomicity (type t) holds,
+    the singletons $\{g_n\}$ being atoms, and $V$ is reachable; so $\Box$Atomlessness fails.
+notes: 'Proposed on 29 October 2026 in a trawl for the open questions created by □Atomlessness, to show that
+  Atomlessness with the bridge principles for self-atoms, boxed or not, does not give □Atomlessness: with no
+  Actuality anywhere there are no self-atoms, by the argument no-actuality-no-self-atoms. Checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr; it inherits the model-of-C argument of
+  coalesced-pinned-substitutions-root, which has not had a second reader. No Lean verification is claimed.'

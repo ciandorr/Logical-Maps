@@ -1,0 +1,80 @@
+id: finite-support-permutations-and-doubled-points
+name: 'Finite-support action model: permutations of N, with each point doubled at a second object'
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 29 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, construction of 29 October 2026, in conversation with Claude Opus 5.5 (Anthropic).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Definitions D.1–D.3 and Proposition
+  D.4, pp. 73–74 (ideally full action models).
+source_names:
+- Dorr 29 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, pp. 73–74
+  note: The ideally full finitely pinned action models over a category of sets.
+group: finite-support-two-object
+settings: {}
+definition: >-
+  $W_0$ has individuals $\mathbb N$ and $W_1$ has individuals $\mathbb N\times\{0,1\}$; write $\pi_0$ for the
+  projection onto $\mathbb N$. The arrows are: $W_0\to W_0$, the permutations of $\mathbb N$; $W_1\to W_0$, the
+  maps $g\circ\pi_0$ with $g$ a permutation; $W_0\to W_1$, the maps $h$ with $\pi_0\circ h$ a permutation;
+  and $W_1\to W_1$, the maps $f$ with $\pi_0\circ f=g\circ\pi_0$ for some permutation $g$. These are closed
+  under composition: whatever the arrows, the first coordinate of a composite is a permutation applied
+  after $\pi_0$ or not. The evaluation point is the identity of $W_0$.
+meets:
+  finitely-pinned-domains: >-
+    Ideally full with the ideal of finite sets at both objects: every intension pinned down by a finite set
+    is in the domain, and every entity in a domain is one.
+  infinitely-many-individuals: The individuals at $W_0$ are the natural numbers.
+  infinitely-many-propositions-everywhere: >-
+    At either object, for distinct $m,n\in\mathbb N$, the propositions that the arrow's first coordinate
+    sends the point over $m$ (at $W_1$, the point $(m,0)$) below the point over $n$ are pinned down by two
+    points and pairwise distinct.
+  infinitely-many-propositions: As for infinitely-many-propositions-everywhere, at $W_0$.
+  no-atoms-anywhere: >-
+    At both objects every nonzero proposition is split by one of the order propositions (argument
+    atomlessness).
+arguments:
+- id: distinctness-at-root
+  holds: [distinctness-necessary-r]
+  choice: free
+  by: Cian Dorr, with Claude Opus 5.5 (Anthropic)
+  date: '2026-10-29'
+  text: >-
+    At every type. Every arrow out of $W_0$ has a left inverse: a permutation is invertible, and an arrow
+    $h:W_0\to W_1$ with $\pi_0\circ h=\sigma$ has the left inverse $\sigma^{-1}\circ\pi_0$. So transport along
+    it is injective at every type.
+- id: collapse-at-doubled-object
+  fails: [necessary-distinctness-necessary-t]
+  choice: free
+  by: Cian Dorr, with Claude Opus 5.5 (Anthropic)
+  date: '2026-10-29'
+  text: >-
+    At $W_1$ let $p$ be the arrows $k$ with $k(0,0)=k(0,1)$, pinned down by $\{(0,0),(0,1)\}$. It is not
+    $\top$, the identity separating the two points; but every arrow after $\pi_0$ collapses them, so the
+    transports of $p$ and $\top$ along $\pi_0$ are both $\top$. So ND at type $t$ fails at $W_1$, which $W_0$
+    sees.
+- id: atomlessness
+  holds: [atomlessness]
+  choice: free
+  by: Cian Dorr, with Claude Opus 5.5 (Anthropic)
+  date: '2026-10-29'
+  text: >-
+    At both objects, as in finite-support-permutations. A nonzero proposition $p$, pinned down by a finite
+    $S$, contains an arrow $k$. For distinct $a,b\in\mathbb N$ outside $\pi_0[S]$ (over which $S$ has no
+    points), there are arrows of each kind agreeing with $k$ on $S$, one sending the point over $a$ below the
+    point over $b$ in the first coordinate and one above, the permutation part being free off a finite set;
+    both lie in $p$. So the proposition that the point over $a$ goes below that over $b$, pinned down by
+    finitely many points, splits $p$.
+notes: >-
+  Atomlessness with Distinctness-Necessity (at every type) but not □Distinctness-Necessity at type $t$; so,
+  by the recorded result that ND and BF at $t$ give □ND, BF fails at $t$ too. Replaces GPT-6 Astra's
+  Ω-valued model with current distinctness (Kodsi's pull request #18, item 20), which witnessed the same
+  separations.

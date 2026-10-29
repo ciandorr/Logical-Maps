@@ -494,8 +494,6 @@
   .page table.group-grid thead th.gcol button { position: absolute; left: 14px; bottom: 4px; transform-origin: 0 100%; transform: rotate(-45deg); white-space: nowrap; max-width: 260px; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; font: 500 12.5px var(--sans); text-align: left; }
   .page table.group-grid thead tr { height: 190px; }
   .page .group-grid-wrap { padding-right: 190px; }
-  .page tr.group-models summary { cursor: pointer; }
-  .page ul.group-model-list { margin: 4px 0 2px; padding-left: 18px; list-style: none; columns: 2 18em; font-size: 13px; }
   .page table.group-grid thead th.gcol.derived button { color: var(--ink-3); font-style: italic; }
   .page table.group-grid tbody th { text-align: left; font-weight: 500; padding: 3px 14px 3px 0; white-space: nowrap; position: sticky; left: 0; background: var(--bg); z-index: 1; }
   .page table.group-grid tbody tr.first > * { border-top: 1px solid var(--line); }
@@ -4124,7 +4122,8 @@ function renderPage(sel) {
   } else if (sel.type === 'principle') {
     const p = byPid.get(sel.id);
     h += `<h1>${sel.negative ? '¬' : ''}${esc(p.name)}</h1>${sel.negative ? '<p>Negation of the following principle:</p>' : ''}${(p.aliases || []).length ? `<div class="id">${esc(p.aliases.join(', '))}</div>` : ''}<div class="prose statement">${esc(p.statement)}</div>${p.formal ? `<div class="formal">${esc(p.formal)}</div>` : ''}${p.definitions ? `<div class="defs">${fmt(p.definitions)}</div>` : ''}`
-      + (p.lean_def ? `<div class="pop-l">${leanBadge({verified: false, note: 'Defined in Lean', links: p.lean_links})}</div>` : '');
+      + (p.lean_def ? `<div class="pop-l">${leanBadge({verified: false, note: 'Defined in Lean', links: p.lean_links})}</div>` : '')
+      + (topicBackground.includes(p.id) ? '' : `<div class="links explore-links"><button class="lnk" data-explore="${esc(p.id)}" data-explore-sign="positive">View in Theory Explorer</button> · <button class="lnk" data-explore="${esc(p.id)}" data-explore-sign="negative">View negation in Theory Explorer</button></div>`);
     if (p.about) h += `<h2>About</h2><div class="prose about">${fmt(p.about)}</div>`;
     h += variantsSection(p);
     if (p.notes) h += `<h2>Notes</h2><div class="prose">${fmt(p.notes)}</div>`;
@@ -4133,22 +4132,8 @@ function renderPage(sel) {
     const premisesName = r => r.premises.map(name).join(' ∧ ');
     const concluding = R.filter(r => r.conclusion === p.id).sort((a, b) => a.premises.length - b.premises.length || compareNames(premisesName(a), premisesName(b)));
     const using = R.filter(r => r.premises.includes(p.id)).sort((a, b) => (a.conclusion === FALSE) - (b.conclusion === FALSE) || compareNames(name(a.conclusion), name(b.conclusion)) || a.premises.length - b.premises.length || compareNames(premisesName(a), premisesName(b)));
-    const inM = MODELS.filter(m => !m.group && (m.satisfies.includes(p.id) || m.violates.includes(p.id)));
-    // A group is one row: how many of its models satisfy the principle and how many violate it;
-    // which they are waits behind a triangle, named as in the theory explorer.
-    const groupRows = GROUPS.map(g => {
-      const fam = groupFamily(g.id), sat = fam.filter(m => cellOf(m, p.id)[0] === 'h'), vio = fam.filter(m => cellOf(m, p.id)[0] === 'f');
-      if (!sat.length && !vio.length) return '';
-      const label = m => { const base = m.variant_of && byMid.get(m.variant_of);
-        return base ? `${shortName(g, base)} (${variantDiff(g, m, base).map(k => valueLabel(g.parameters[k], (m.settings || {})[k])).join(', ')})` : shortName(g, m); };
-      const item = (mark, m) => `<li>${mark} <button class="lnk" data-open-model="${esc(m.id)}">${esc(label(m))}</button></li>`;
-      const counts = [sat.length ? `✓ ${sat.length} of ${fam.length}` : '', vio.length ? `✗ ${vio.length} of ${fam.length}` : ''].filter(Boolean).join(' · ');
-      return `<tr class="group-models"><td class="mono nowrap">${sat.length && vio.length ? '✓✗' : sat.length ? '✓' : '✗'}</td><td class="stmt"><details><summary><button class="lnk" data-open-group="${esc(g.id)}"><b>${esc(g.name)}</b></button> <span class="dim">${counts}</span></summary>`
-        + `<ul class="group-model-list">${sat.map(m => item('✓', m)).join('')}${vio.map(m => item('✗', m)).join('')}</ul></details></td><td></td></tr>`;
-    }).join('');
     const resultsTable = rows => `<table class="results"><tbody>${rows.map(r => `<tr data-result="${r.id}"><td class="stmt">${resultStmt(r)}</td><td>${certBadges(r)}</td></tr>`).join('') || '<tr><td>—</td></tr>'}</tbody></table>`;
     h += `<h2>Results</h2><h3 class="verdict-group">Concluding it <span class="n">${concluding.length}</span></h3>${resultsTable(concluding)}<h3 class="verdict-group">Using it as a premise <span class="n">${using.length}</span></h3>${resultsTable(using)}`;
-    h += `<h2>Models</h2><table class="results"><tbody>${groupRows}${inM.map(m => `<tr data-model="${m.id}"><td class="mono nowrap">${m.satisfies.includes(p.id) ? '✓' : '✗'}</td><td class="stmt"><b>${esc(m.name)}</b> &nbsp; ${modelStmt(m)}</td><td>${certBadges(m)}</td></tr>`).join('') || (groupRows ? '' : '<tr><td>—</td></tr>')}</tbody></table>`;
     h += referencedBySection(p.id);
     h += sourceList([p]);
     h += `<div class="file">${esc(p.file)}</div>`;
@@ -4260,6 +4245,7 @@ function wire(el) {
   el.querySelectorAll('button[data-open-arg]').forEach(b => b.addEventListener('click', () => openPage({ type: 'model', id: b.dataset.openArg, jump: b.dataset.argPrinciple })));
   el.querySelectorAll('button[data-open-model]').forEach(b => b.addEventListener('click', () => openPage({ type: 'model', id: b.dataset.openModel })));
   el.querySelectorAll('button[data-open-group]').forEach(b => b.addEventListener('click', () => openPage({ type: 'group', id: b.dataset.openGroup })));
+  el.querySelectorAll('button[data-explore]').forEach(b => b.addEventListener('click', () => exploreTheory(b.dataset.explore, b.dataset.exploreSign)));
   el.querySelectorAll('button[data-open-argument]').forEach(b => b.addEventListener('click', () => openPage({ type: 'argument', id: b.dataset.openArgument })));
   el.querySelectorAll('button[data-open-result]').forEach(b => b.addEventListener('click', () => openPage({ type: 'result', id: b.dataset.openResult })));
   el.querySelectorAll('button[data-open-background]').forEach(b => b.addEventListener('click', () => openBackground(b.dataset.openBackground)));
@@ -4783,6 +4769,14 @@ function addTheoryPreset(presetId) {
   if (!preset) return;
   for (const id of preset.principles) { theory.positive.add(id); theory.negative.delete(id); }
   rerenderTheory();
+}
+// A principle's page opens the theory explorer with it, or its negation, as the one assumption.
+function exploreTheory(id, sign) {
+  for (const x of [...theory.positive]) if (!topicBackground.includes(x)) theory.positive.delete(x);
+  theory.negative.clear();
+  state.modelId = null; state.groupId = null;
+  showTab('models');
+  setTheoryAssumption(id, sign);
 }
 function resetTheory() {
   for (const id of [...theory.positive]) if (!topicBackground.includes(id)) theory.positive.delete(id);

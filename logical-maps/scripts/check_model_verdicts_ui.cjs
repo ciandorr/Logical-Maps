@@ -309,17 +309,15 @@ try{
   assert.equal(same.querySelector('ul.verdict-list:not(.derived) [data-principle="a"]').closest('li').querySelector('details.why'),null,'A recorded verdict has none');
   page.querySelector('button[data-group-toggle="sigma"]').click();
   assert.deepEqual(rowNames(),['group member']);
-  // On a principle's page a group is one line, its models behind a triangle.
-  w3.eval('openPage({type:"principle", id:"e"})');
-  const gRow=page.querySelector('tr.group-models');
-  assert.ok(gRow,'The group is a row of the Models section');
-  assert.equal(gRow.querySelector('details').open,false,'Its models start hidden');
-  assert.match(gRow.querySelector('summary').textContent,/Fixture group\s+✓ 1 of 2 · ✗ 1 of 2/,'The line counts them');
-  assert.deepEqual([...gRow.querySelectorAll('.group-model-list li')].map(li=>li.textContent.replace(/\s+/g,' ').trim()),['✓ group member','✗ group member (Σ atom)'],'Members by short name, variants by what they change');
-  assert.ok(gRow.querySelector('summary button[data-open-group="g"]'),'The name links to the group');
-  page.querySelector('#page-back').click();
   page.querySelector('#page-back').click();
   assert.equal(page.querySelector('h1').textContent,'Fixture: group member','Back to the member');
+  // A principle's page has no list of models; it opens the theory explorer with the principle assumed.
+  w3.eval('openPage({type:"principle", id:"e"})');
+  assert.equal([...page.querySelectorAll('h2')].some(h=>h.textContent==='Models'),false,'No Models section');
+  page.querySelector('button[data-explore="e"][data-explore-sign="negative"]').click();
+  assert.equal(d3.querySelector('.tab[data-tab="models"]').getAttribute('aria-selected'),'true','The explorer opens');
+  assert.equal(w3.eval('JSON.stringify([[...theory.positive].filter(p=>!topicBackground.includes(p)), [...theory.negative]])'),'[[],["e"]]','with the negation as its one assumption');
+  w3.eval('resetTheory()');
   // The theory explorer lists the group once, counting the models that fit and saying which.
   d3.querySelector('[data-tab="models"]').click();
   const exRows=()=>[...d3.querySelectorAll('#models .explorer-models > ul.ex-list > li.ex-m')];

@@ -711,6 +711,8 @@
   .ex-m.ex-unfit > .model-heading > .lnk { color: var(--ink-3); }
   .ex-m .fit-note { font-size: 11.5px; line-height: normal; color: var(--ink-3); }
   .page table.group-grid tbody tr.nofit > * { opacity: .35; }
+  /* The row whose model or cell is shown below the grid. */
+  .page table.group-grid tbody tr.gsel > * { background: var(--hl); }
   .page table.group-grid tbody tr.mayfit th .gname::after, .page table.group-grid tbody tr.mayfit:not(.first) th .gtags::after { content: ' ?'; color: var(--ink-3); }
   .inspection-note { font-size: 12px; color: var(--ink-2); margin-bottom: 8px; }
   .inspection-note > .lnk { display: inline-block; margin-left: 10px; font-size: 11px; }
@@ -3960,7 +3962,7 @@ function groupGrid(g, view) {
   h += `<div class="group-grid-wrap"><table class="group-grid"><thead><tr style="height:${head}px"><th></th>${cols.map(c => `<th style="height:${head}px" class="gcol${extra.includes(c) && c === extra[0] ? ' xfirst' : ''}${rows.some(r => cellOf(r.m, c)[1]) ? '' : ' derived'}"><button class="lnk" data-principle="${c}" title="${esc(name(c))}">${esc(name(c))}</button></th>`).join('')}</tr></thead><tbody>`;
   rows.forEach((r, ri) => {
     const fit = assumptionsActive ? modelFit(r.m) : 'known';
-    h += `<tr class="${r.first ? 'first' : ''}${fit === 'out' ? ' nofit' : fit === 'potential' ? ' mayfit' : ''}"><th><button class="growlab" data-grow="${ri}">${r.first ? `<span class="gname">${esc(shortName(g, r.m))}</span>` : ''}${r.tags.length ? `<span class="gtags">${r.tags.map(esc).join(' · ')}</span>` : ''}</button></th>`;
+    h += `<tr class="${r.first ? 'first' : ''}${fit === 'out' ? ' nofit' : fit === 'potential' ? ' mayfit' : ''}${view.sel && view.sel.ri === ri ? ' gsel' : ''}"><th><button class="growlab" data-grow="${ri}">${r.first ? `<span class="gname">${esc(shortName(g, r.m))}</span>` : ''}${r.tags.length ? `<span class="gtags">${r.tags.map(esc).join(' · ')}</span>` : ''}</button></th>`;
     for (const c of cols) {
       const [st, rec] = cellOf(r.m, c), sel = view.sel && view.sel.ri === ri && view.sel.c === c;
       h += `<td${extra.includes(c) && c === extra[0] ? ' class="xfirst"' : ''}><button class="gcell ${st} ${st === 'u' ? '' : rec ? 'r' : 'd'}" data-gcell="${ri}" data-gc="${c}" aria-pressed="${sel}" aria-label="${esc(shortName(g, r.member))}${r.tags.length ? ' (' + esc(r.tags.join(', ')) + ')' : ''}: ${esc(name(c))} ${CELL_WORD[st]}">${CELL_SYM[st]}</button></td>`;
@@ -3975,7 +3977,8 @@ function groupDetail(g, view, rows) {
   if (!r) return '<p class="dim">Click a cell for its arguments, or a row’s name for the model.</p>';
   const label = `<button class="lnk" data-open-model="${esc(r.m.id)}" title="The model’s page">${esc(shortName(g, r.member))}</button>${r.tags.length ? ` <span class="dim">(${r.tags.map(esc).join(', ')})</span>` : ''}`;
   if (s.row) {
-    const prose = Object.entries(g.parameters || {}).filter(([, p]) => !p.generate).map(([k]) => (r.m.settings || {})[k]).map(v => typeof v === 'string' ? v : v && v.text).filter(Boolean);
+    // A setting is the member's own prose, or the id of one of the parameter's values, shown as that value's text.
+    const prose = Object.entries(g.parameters || {}).filter(([, p]) => !p.generate).map(([k, p]) => { const v = (r.m.settings || {})[k]; return typeof v === 'string' ? (p.values?.[v]?.text ?? v) : v && v.text; }).filter(Boolean);
     const gen = generatedParams(g).map(([k, p]) => `${esc(valueLabel(p, (r.m.settings || {})[k]))}${sameSetting((r.m.settings || {})[k], (r.member.settings || {})[k]) ? '' : ' <span class="dim">(variant)</span>'}`);
     return `<h3>${label}</h3>${prose.map(t => `<div class="prose reading">${fmt(t)}</div>`).join('')}<p class="note">${gen.join(' · ')}</p>`;
   }

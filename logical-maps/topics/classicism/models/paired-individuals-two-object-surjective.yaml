@@ -92,8 +92,9 @@ arguments:
     pinned by $\emptyset$. It is not two-hat necessary: every $C_1(\mathrm{fix}^{00}_N)$ contains a surjective
     arrow $\iota\colon W_0\to V$ injective on $N$, collapsing a block outside $N$ onto $\star$ (given
     $r$ true at $V$ pinned by $N_1$, let $v\colon V\to W_0$ be the identity on $\mathbb N$ with $\star$
-    sent to a block $\{e,\pi e\}$ disjoint from $N_1$; then $v\iota=1_{W_0}$, and the map collapsing that
-    block onto $\star$ and fixing everything else brings $v$ back into $\mathrm{fix}^{VV}_{N_1}$). It
+    sent to a block $\{e,\pi e\}$ disjoint from $N_1$; then $v\iota$ agrees with $1_{W_0}$ on $N$, $\iota$ being
+    the identity on $N$, and a surjection fixing $N_1$ and collapsing that block onto $\star$ brings $v$ back
+    into $\mathrm{fix}^{VV}_{N_1}$). It
     is 5-necessary: let $Y_k$, for an arrow $k$ out of $W_0$, be the set of propositions at $\mathrm{trg}(k)$
     pinned by a finite set of individuals in the range of some arrow from $W_0$ (at $W_0$ all propositions,
     at $V$ those pinned by old individuals); $Y$ is pinned by $\emptyset$. For $z$ pinned by $S$ put $N_z:=S\cup\pi
@@ -103,6 +104,14 @@ arguments:
     $\Box_5\forall z\,Yz$ holds, and $\forall z\,Yz=p_0$ because at $V$ the proposition that $\star$ is
     fixed is pinned by no set of old individuals (the identity and a surjection sending $\star$ into $\mathbb
     N$ and collapsing a block away from that set onto $\star$ agree on it).'
+  revisions:
+  - date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, from an audit of GPT-6 Astra's note (prompted by Cian
+      Dorr)
+    note: >-
+      The text said $v\iota=1_{W_0}$, which cannot hold for the non-injective $\iota$, and used a map that
+      is not surjective. Now $\iota$ is the identity on $N$, so $v\iota$ agrees with $1_{W_0}$ on $N$, and the
+      return map is a surjection fixing $N_1$ that collapses $\{e,\pi e\}$ onto $\star$. The verdict is unchanged.
 - id: not-all-truths-five-necessary
   fails:
   - truth-implies-five-necessity
@@ -155,6 +164,33 @@ arguments:
     There are arrows each way between the objects, so from every world both identities are reachable,
     and a closed sentence holds at an arrow iff at its codomain's identity; so
     $\varphi\to\Box\Diamond\varphi$. With Σ top a closed Σ-sentence denotes what a pure one does.
+- id: tame-rigidity
+  holds: [necessary-tame-rigidity-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: paired-individuals-two-object
+  like: paired-individuals-two-object#tame-rigidity
+  adapt: >-
+    The arrows are the surjective block-respecting maps. The write-up proves the argument at both objects in both categories: every arrow it constructs completes a finite block prescription, and can be made surjective by mapping the infinitely many unused pairs onto the uncovered pairs and collapsing one more onto $\star$ if needed.
+- id: weakly-inextensible-comprehension
+  fails: [weakly-inextensible-comprehension-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: paired-individuals-two-object
+  like: paired-individuals-two-object#weakly-inextensible-comprehension
+  adapt: >-
+    The arrows are the surjective block-respecting maps. The write-up proves the argument at both objects in both categories: every arrow it constructs completes a finite block prescription, and can be made surjective by mapping the infinitely many unused pairs onto the uncovered pairs and collapsing one more onto $\star$ if needed.
+- id: rigid-power
+  holds: [necessary-rigid-power-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: paired-individuals-two-object
+  like: paired-individuals-two-object#rigid-power
+  adapt: >-
+    The arrows are the surjective block-respecting maps. The write-up proves the argument at both objects in both categories: every arrow it constructs completes a finite block prescription, and can be made surjective by mapping the infinitely many unused pairs onto the uncovered pairs and collapsing one more onto $\star$ if needed.
 notes: 'The surjective variant of the paired-individuals model: necessary BF holds at every type by Classicism,
   Proposition D.6, yet 5-necessity still fails to imply two-hat necessity at the evaluation point and
   $\Box_{\ne}\ne\hat{\hat\Box}$. Built in the conversation of 14 October 2026. The two operators $\Box_{\ne}$

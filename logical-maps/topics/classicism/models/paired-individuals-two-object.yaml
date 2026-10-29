@@ -108,6 +108,18 @@ arguments:
 - id: barcan-t-fails
   fails:
   - barcan-t
+  withdrawn:
+    date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, after GPT-6 Astra (OpenAI), prompted by Cian Dorr
+    reason: >-
+      The premise fails: $k^tz$ is pinned down by $k(S)$, but an arrow $k\colon W_0\to V$ can collapse
+      a block of $S$ onto $\star$, so $k(S)$ need not consist of old individuals. For $z$ the
+      proposition that an arrow sends $a$ to $\star$, pinned down by $\{a\}$, and $k$ collapsing the
+      block of $a$ onto $\star$, $k^tz$ is the proposition that $\star$ is fixed, which no set of old
+      individuals pins down; so $\Box(Yz)$ fails. Read literally (individuals in the range of some
+      arrow from $W_0$), $Y$ holds of every proposition at $V$ and $\forall z\,Yz$ is $\top$. BF holds
+      at every type (argument barcan-local-sections). The argument for 5-necessity uses $Y$ only along
+      arrows injective on $S\cup\pi S$ and is unaffected.
   text: With $Y$ as in the argument for 5-necessity, $k^tz$ is pinned by $k(S)$, a set of individuals
     in the range of $k$, so $\Box(Yz)$ holds for every $z$, while $\Box\forall z\,Yz$ fails at the inclusion
     $\iota$, whose target has the proposition that $\star$ is fixed.
@@ -162,10 +174,81 @@ arguments:
     There are arrows each way between the objects, so from every world both identities are reachable,
     and a closed sentence holds at an arrow iff at its codomain's identity; so
     $\varphi\to\Box\Diamond\varphi$. With Σ top a closed Σ-sentence denotes what a pure one does.
+- id: barcan-local-sections
+  holds: [necessary-barcan-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: paired-individuals-two-object
+  text: >-
+    For arrows $h\colon A\to B$ and finite $N\subseteq A$, $T\subseteq B$ there are arrows $j\colon
+    A\to B$ agreeing with $h$ on $N$ and $\sigma\colon B\to A$ with $j\sigma$ the identity on $T$:
+    keep $h$ on the blocks meeting $N$, send fresh pairs of $A$ bijectively onto the pairs meeting $T$
+    with $\sigma$ inverting them, and if $\star\in T$ collapse a further fresh pair onto $\star$ and
+    let $\sigma$ send $\star$ into it. If $R$ at $A$, pinned down by $N$, is necessarily true of every
+    entity, and $b$ at $B$ is pinned down by $T$, then $b=(j\sigma)\cdot b=j\cdot(\sigma\cdot b)$ is
+    in the extension of $R$ at $j$, which is its extension at $h$. So BF holds at every type with
+    either object as evaluation point, and □BF holds.
+- id: tame-rigidity
+  holds: [necessary-tame-rigidity-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: paired-individuals-two-object
+  text: >-
+    Write $F_h$ for the extension of $F$ at $h$ and $B_N(E)_h$ for the transports $f\cdot a$ of members
+    of $E$ along arrows $f$ into the codomain of $h$ agreeing with $h$ on $N$; as in
+    tame-rigidity-factorizable, a relation pinned down by $S$ with extension $E$ is weakly rigid iff
+    it is $B_N(E)$ for every finite $N\supseteq S$. Block-respecting maps factor finitely: given
+    $h\colon A\to B$, $k\colon B\to C$, a finite union $S$ of blocks (containing $\star$ at $V$), a
+    finite $N\subseteq B$ and $f$ agreeing with $kh$ on $S$, for every finite $M$ there are $r$
+    agreeing with $h$ on $S$ and $j$ agreeing with $k$ on $N$ with $jr=f$ on $M$ (send the pairs of
+    $M\setminus S$ bijectively to fresh pairs of $B$ and let $j$ copy $f$ there). Then for $F$ weakly
+    rigid with that pin $S$, and $Z$ at $B$ pinned down by $N$ necessarily holding of each member of
+    $F_h$, each $b=f\cdot a\in F_{kh}$ is $j\cdot(r\cdot a)$ with $r\cdot a\in F_r=F_h$, so $b\in
+    Z_j=Z_k$. So $h\cdot F$ is weakly inextensible for every $h$, and $F$, persistent by C, is rigid.
+    This holds at both objects and with all arrows or only surjective ones.
+- id: weakly-inextensible-comprehension
+  fails: [weakly-inextensible-comprehension-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: paired-individuals-two-object
+  text: >-
+    At type $(t)t$. At the evaluation object $A$ let $p_n$, for even $n$, be the endomorphisms fixing
+    $n$, pinned down by $\{n\}$; for an endomorphism $f$, $f\cdot p_m=p_n$ iff $m=n$ and $f(n)=n$
+    (otherwise an endomorphism sending $n$ and $f(m)$ to $n$, or fixing $n$ and moving $f(n)$,
+    separates them). The property holding of every $p_n$ at arrows into $A$ and of nothing at arrows
+    into the other object is pinned down by $\varnothing$. Suppose $Y$, pinned down by $S$, is weakly
+    inextensible with that extension. Take $n$ with its block outside $S$ and a block permutation $g$
+    fixing $S$ with $g(n)$ in another block; then $p_n$ is in $Y$'s extension at $g$. Each $p_m$
+    necessarily has the property $Z$ of being $f\cdot p_{m'}$ for some even $m'$ and some arrow $f$
+    agreeing with the current arrow at $n$, so $Y\le Z$, and $p_n=f\cdot p_{m'}$ with $f(n)=g(n)\ne n$,
+    which is impossible.
+- id: rigid-power
+  holds: [necessary-rigid-power-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: paired-individuals-two-object
+  text: >-
+    The lifting of rigid-power-surjections, with blocks. Given $h\colon A\to B$ and a finite union $N$
+    of blocks, some surjective arrow $j$ agrees with $h$ on $N$, maps some pair bijectively onto each
+    pair of $B$, and has finite fibres, only finitely many with more than one point. For such $j$ and
+    weakly rigid $F$ with extension $E$, the extension of $F$ at $j$ is $j\cdot E$ (lift through the
+    bijective preimage pairs). Given a rigid $X\le h\cdot F$ with extension $D$ and pin $T$, let $P$ be
+    a finite union of blocks containing $N$, the fibres of $j$ with more than one point and
+    $j^{-1}[T]$, and $D_0$ the members of $E$ that $j$ sends into $D$. Every endomorphism $u$ fixing
+    $P$ satisfies $ju=vj$ for a block-respecting $v$ fixing $T$, so $D_0$ is closed under such $u$,
+    and $Y:=B_P(D_0)$ is weakly rigid (move the rest of a pin of $a$ outside any larger $Q$ by a block
+    permutation fixing $P$), so rigid, below $F$, with $j\cdot Y$ coextensive with $X$, so equal to it.
+    So the power property of $F$ is weakly inextensible, hence rigid by Tame Rigidity, at both
+    objects.
 notes: 'Built in the conversation of 14 October 2026 to settle the question left open on p. 407 of The
   Bounds of Possibility, Appendix D: whether $\Box_5$ is equivalent to $\hat{\hat\Box}$ without the rigidity
-  axioms. Actuality fails here, and so do the collapse principles from 5-necessity down; the surjective
-  variant adds necessary BF at every type and shows that BF does not help. The two operators $\Box_{\ne}$
+  axioms. Actuality fails here, and so do the collapse principles from 5-necessity down. Necessary BF
+  holds at every type (argument barcan-local-sections, 29 October 2026; the failure recorded on 14
+  October was withdrawn), as in the surjective variant. The two operators $\Box_{\ne}$
   and $\hat{\hat\Box}$ are coextensive at the evaluation point but differ at $V$: Let $p:=\mathrm{fix}^{VV}_{\{\star\}}$.
   For any true $q$ at $V$, pinned by $N_q$, let $u\colon V\to W_0$ be the identity on $\mathbb N$ with
   $\star\mapsto b$ for a block $B\ni b$ disjoint from $N_q$; then $u\in\Diamond q$, since the map fixing

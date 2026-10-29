@@ -5385,6 +5385,28 @@ def coalesced_all_finite_individual_domains : Prop :=
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
 
+/-- `coalesced-pinned-substitutions-one-world-root`
+
+Coalesced sum: substitution arrows over a one-world component: a witness satisfying 2 principles
+and violating 1. -/
+def coalesced_pinned_substitutions_one_world_root : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomsAreAtomsT.schemaIn
+
+/-- `coalesced-pinned-substitutions-truncations-root`
+
+Coalesced sum: substitution arrows over the truncations model: a witness satisfying 3 principles
+and violating 2. -/
+def coalesced_pinned_substitutions_truncations_root : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreStrongAtoms.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.SelfAtomicityT.schemaIn
+
 /-- `stitched-cohen-coalesced-middle`
 
 Stitched Cohen model with a coalesced middle world: a witness satisfying 5 principles

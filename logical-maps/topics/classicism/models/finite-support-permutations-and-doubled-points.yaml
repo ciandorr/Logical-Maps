@@ -41,6 +41,14 @@ meets:
   no-atoms-anywhere: >-
     At both objects every nonzero proposition is split by one of the order propositions (argument
     atomlessness).
+  extensionally-full: >-
+    The model is ideally full, hence extensionally full at both objects (Appendix D, the remark after
+    Definition D.3): for a set $R$ of tuples from the domains at an object $V$, the intension with value
+    $R$ at every arrow out of $V$ into $V$ and $\varnothing$ at the arrows into the other object depends
+    only on the codomain, so is pinned down by $\varnothing$; it is in the domain with extension $R$ at $1_V$.
+  codomain-intensions: >-
+    The model is ideally full at both objects, and an intension whose value at an arrow depends only on
+    the arrow's codomain is pinned down by $\varnothing$ (Appendix D, the remark after Definition D.3).
 arguments:
 - id: distinctness-at-root
   holds: [distinctness-necessary-r]
@@ -73,6 +81,112 @@ arguments:
     point over $b$ in the first coordinate and one above, the permutation part being free off a finite set;
     both lie in $p$. So the proposition that the point over $a$ goes below that over $b$, pinned down by
     finitely many points, splits $p$.
+- id: haecceities-no-join
+  fails: [countable-boolean-completeness-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $\sigma=e$, $\tau=e\to t$, for the property $H$ of being the haecceity of an individual, at $W_0$.
+    An upper bound $Y$ of the haecceities has $Y_k\supseteq k[\mathbb N]$ at every arrow $k$ out of $W_0$.
+    For finite $S$ let $B_S$ hold at $k$ of every individual $k^{\prime}(n)$ with $k^{\prime}$ agreeing with
+    $k$ on $S$ and having its codomain: it is pinned down by $S$, so in the domain, an upper bound, and
+    below every upper bound pinned down by $S$. At the arrow $h(n)=(n,0)$ into $W_1$, $B_S$ omits $(m,1)$
+    for $m\in S$ (an arrow agreeing with $h$ at $m$ and permuting first coordinates sends nothing else
+    over $m$) and contains it for $m\notin S$. So an upper bound pinned down by $S$ is not below
+    $B_{S\cup\{m\}}$ for $m\notin S$, and there is no least one. $H$ is countable relative to $e$: the
+    numerals at $e$ are the finite cardinalities and pairwise distinct, the individuals being infinitely
+    many, and extensional fullness puts in the domain $H$ and the relation pairing the haecceity of $n$
+    with the $n$-th numeral.
+- id: necessity-of-arithmetic
+  holds: [necessity-of-arithmetic]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Both objects are extensionally full with infinitely many individuals and propositions, so at each
+    the numbers at every type are the distinct numerals with standard sum and product, and an
+    arithmetical sentence holds at every world iff it is true.
+- id: collapse-blocks-vicinity
+  fails: [necessary-vicinity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Vicinity fails at $W_1$, which every arrow $W_0\to W_1$ reaches. Let $p$ be a true proposition there,
+    pinned down by a finite $S$, and take $m$ with $(m,0),(m,1)\notin S$. The arrow $k$ sending $(m,1)$ to
+    $(m,0)$ and fixing every other point agrees with the identity on $S$, so $k\in p$. The proposition
+    $q$ that the arrow goes into $W_1$ and separates $(m,0)$ and $(m,1)$ is pinned down by those two
+    points and true; but every arrow after $k$ identifies them, so $\Diamond q$ fails at $k$, and $p$ does
+    not entail $\Diamond q$.
+- id: two-hat-necessity-at-root
+  fails: [truth-implies-two-hat-necessity, two-hat-implies-nd-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_0$ every world sees every world, an arrow $u$ being $(u\circ r)\circ k$ for $r$ a left inverse of
+    $k$; so a true $q$ is possible everywhere, and $\Box_{\ne}=\Box$. At $W_1$, writing $I_M$ for the arrows
+    into $W_1$ injective on the fibres over a finite $M\subseteq\mathbb N$: a true proposition contains the
+    arrows into $W_1$ agreeing with the identity on the fibres over some $M$, and the worlds that can reach
+    one of those are exactly $I_M$, so $\Box_{\ne}r$ iff $r\supseteq I_M$ for some $M$. Let $w_0$ be the
+    proposition, pinned down by $\varnothing$, that the arrow goes into $W_0$. At a world $h$ into $W_1$,
+    $\Diamond_{\ne}w_0$ fails, since there the arrows into $W_1$, which contain $I_M$, make $\neg w_0$
+    $\Box_{\ne}$-necessary; at a world into $W_0$ it holds. So
+    $\Diamond_{\ne}w_0=w_0$, while $\Diamond_{\ne}q\supseteq w_0$ for every true $q$, and at $W_0$
+    $\hat{\hat\Box}p$ iff $w_0\subseteq p$. Hence $w_0$ is two-hat necessary but not necessary, so not
+    ND-necessary; and the truth that the first coordinate of the arrow fixes $0$, pinned down by $\{0\}$,
+    is not two-hat necessary.
+- id: five-is-two-hat
+  holds: [necessary-five-implies-two-hat-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    With the computations of two-hat-necessity-at-root, let $X$ be the operator, depending only on the
+    codomain and so in the domain, that holds at an object $W_0$ of the $p\supseteq w_0$ and at $W_1$ of
+    the $r\supseteq I_M$ for some finite $M$. At each object it is a filter, so N and K, and it is B: for
+    $p$ true at $W_0$, $\neg X\neg p$ holds at every arrow into $W_0$, since $p$ contains a permutation; for
+    $r$ true at $W_1$, pinned down by the fibres over $M$, $\neg X\neg r$ holds throughout $I_M$, since
+    from $k\in I_M$ every $I_{M^{\prime}}$ contains a fibrewise bijection $j$ with $j\circ k$ agreeing with
+    the identity on those fibres. So $X$ is an S5 operator and $\Box_5\le X$. At $W_0$, $X=\hat{\hat\Box}$;
+    at $W_1$, where $\Diamond_{\ne}$ of the proposition that the arrow agrees with the identity on the
+    fibres over $M$ is $I_M$, $\hat{\hat\Box}=\Box_{\ne}=X$. So $\Box_5\le\hat{\hat\Box}$ at both objects,
+    hence at every world.
+- id: weakly-rigid-power-at-root
+  holds: [weakly-rigid-power-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_0$, at every type. Write a relation $Y$ as its intension $k\mapsto Y_k$, so $(h\cdot
+    Y)_k=Y_{k\circ h}$; put $X_0(E)_k:=k\cdot E$ and $B_N(E)_k:=\bigcup\{k^{\prime}\cdot
+    E:k^{\prime}\text{ agrees with }k\text{ on }N\text{ and has its codomain}\}$, pinned down by $N$, so
+    in the domain at either object. (1) An $X_0(E)$ in the domain is rigid: its transport along $k$ is
+    $X_0(k\cdot E)$, persistent and below every $Z$ that necessarily holds of each member of $k\cdot E$.
+    (2) A weakly rigid $Y$ with extension $E$ has $X_0(E)\le Y\le B_N(E)$ for every finite $N$, by
+    persistence and weak inextensibility. (3) Every arrow $u$ out of $W_0$ has a left inverse depending
+    only on its first coordinate, $\sigma^{-1}$ or $\sigma^{-1}\circ\pi_0$. If $x=u^{\prime}\cdot a$ for
+    arrows $u^{\prime}$ agreeing with $u$ on arbitrarily large finite $N$, then for $N$ large the left
+    inverses of $u^{\prime}$ and $u$ agree on a pin of $x$, so $a$ is the transport of $x$ along $u$'s
+    left inverse, whatever $N$, and taking $N$ to contain a pin of $a$ gives $x=u\cdot a$. By (2), a weakly
+    rigid relation at $W_0$ is $X_0(E)$, rigid by (1). (4) Let $F=X_0(E)$ be weakly rigid at $W_0$, $h$ an
+    arrow out of $W_0$, and $X$ weakly rigid at its target with $X\le h\cdot F$ and extension $D$. For
+    $x\in X_k$: $x\in(k\circ h)\cdot E$, and by (2) $x=k^{\prime}\cdot d$ with $k^{\prime}$ agreeing with
+    $k$ on $N$ and $d=h\cdot a^{\prime}\in D$; applying (3) to $k^{\prime}\circ h$ and $k\circ h$, $d=h\cdot
+    a$ with $a$ independent of $N$, so $x=k\cdot d$. So $X=X_0(D)$, rigid by (1), and it is $h\cdot
+    X_0(A)$ for $A:=\{a\in E:h\cdot a\in D\}$, where $X_0(A)$, the transport of $X$ along a left inverse of
+    $h$, is in the domain and below $F$. Hence $\lambda X\, .\,\operatorname{WeaklyRigid}(X)\land X\le F$
+    has at each world $h$ the transport along $h$ of its extension at the identity: it is $X_0$ of that
+    extension, rigid by (1). Weakly Rigid Power holds at $W_0$, and the same property is the power
+    property of rigid relations below $F$.
+
 notes: >-
   Atomlessness with Distinctness-Necessity (at every type) but not □Distinctness-Necessity at type $t$; so,
   by the recorded result that ND and BF at $t$ give □ND, BF fails at $t$ too. Replaces GPT-6 Astra's

@@ -49,6 +49,10 @@ meets:
   codomain-intensions: >-
     The model is ideally full at both objects, and an intension whose value at an arrow depends only on
     the arrow's codomain is pinned down by $\varnothing$ (Appendix D, the remark after Definition D.3).
+  finitely-determined-left-inverses: >-
+    A permutation $\sigma$ has the left inverse $\sigma^{-1}$, and an arrow $h:W_0\to W_1$ with $\pi_0\circ h=\sigma$
+    the left inverse $\sigma^{-1}\circ\pi_0$; on a finite set $P$ of points it depends only on $\sigma^{-1}$ on the
+    finitely many first coordinates of $P$, so only on $u$ on their $\sigma$-preimages.
 arguments:
 - id: distinctness-at-root
   holds: [distinctness-necessary-r]
@@ -158,35 +162,6 @@ arguments:
     at $W_1$, where $\Diamond_{\ne}$ of the proposition that the arrow agrees with the identity on the
     fibres over $M$ is $I_M$, $\hat{\hat\Box}=\Box_{\ne}=X$. So $\Box_5\le\hat{\hat\Box}$ at both objects,
     hence at every world.
-- id: weakly-rigid-power-at-root
-  holds: [weakly-rigid-power-r]
-  choice: free
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
-    prompted by Cian Dorr
-  date: '2026-10-29'
-  text: >-
-    At $W_0$, at every type. Write a relation $Y$ as its intension $k\mapsto Y_k$, so $(h\cdot
-    Y)_k=Y_{k\circ h}$; put $X_0(E)_k:=k\cdot E$ and $B_N(E)_k:=\bigcup\{k^{\prime}\cdot
-    E:k^{\prime}\text{ agrees with }k\text{ on }N\text{ and has its codomain}\}$, pinned down by $N$, so
-    in the domain at either object. (1) An $X_0(E)$ in the domain is rigid: its transport along $k$ is
-    $X_0(k\cdot E)$, persistent and below every $Z$ that necessarily holds of each member of $k\cdot E$.
-    (2) A weakly rigid $Y$ with extension $E$ has $X_0(E)\le Y\le B_N(E)$ for every finite $N$, by
-    persistence and weak inextensibility. (3) Every arrow $u$ out of $W_0$ has a left inverse depending
-    only on its first coordinate, $\sigma^{-1}$ or $\sigma^{-1}\circ\pi_0$. If $x=u^{\prime}\cdot a$ for
-    arrows $u^{\prime}$ agreeing with $u$ on arbitrarily large finite $N$, then for $N$ large the left
-    inverses of $u^{\prime}$ and $u$ agree on a pin of $x$, so $a$ is the transport of $x$ along $u$'s
-    left inverse, whatever $N$, and taking $N$ to contain a pin of $a$ gives $x=u\cdot a$. By (2), a weakly
-    rigid relation at $W_0$ is $X_0(E)$, rigid by (1). (4) Let $F=X_0(E)$ be weakly rigid at $W_0$, $h$ an
-    arrow out of $W_0$, and $X$ weakly rigid at its target with $X\le h\cdot F$ and extension $D$. For
-    $x\in X_k$: $x\in(k\circ h)\cdot E$, and by (2) $x=k^{\prime}\cdot d$ with $k^{\prime}$ agreeing with
-    $k$ on $N$ and $d=h\cdot a^{\prime}\in D$; applying (3) to $k^{\prime}\circ h$ and $k\circ h$, $d=h\cdot
-    a$ with $a$ independent of $N$, so $x=k\cdot d$. So $X=X_0(D)$, rigid by (1), and it is $h\cdot
-    X_0(A)$ for $A:=\{a\in E:h\cdot a\in D\}$, where $X_0(A)$, the transport of $X$ along a left inverse of
-    $h$, is in the domain and below $F$. Hence $\lambda X\, .\,\operatorname{WeaklyRigid}(X)\land X\le F$
-    has at each world $h$ the transport along $h$ of its extension at the identity: it is $X_0$ of that
-    extension, rigid by (1). Weakly Rigid Power holds at $W_0$, and the same property is the power
-    property of rigid relations below $F$.
-
 notes: >-
   Atomlessness with Distinctness-Necessity (at every type) but not □Distinctness-Necessity at type $t$; so,
   by the recorded result that ND and BF at $t$ give □ND, BF fails at $t$ too. Replaces GPT-6 Astra's

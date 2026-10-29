@@ -20,4 +20,37 @@ definition: >-
 
 parameters: {}
 
-arguments: []
+conditions:
+- id: finitely-determined-left-inverses
+  text: >-
+    Every arrow $u$ out of the evaluation object $W_0$ has a left inverse $r_u$ ($r_u\circ u=1_{W_0}$) such that,
+    for every finite set $P$ of points at the codomain of $u$, there is a finite set $N$ of points at $W_0$ with
+    $r_{u'}$ agreeing with $r_u$ on $P$ whenever $u'$ has the same codomain as $u$ and agrees with $u$ on $N$.
+
+# Added 29 October 2026 (Claude Opus 5.5, prompted by Cian Dorr): the argument for Weakly Rigid Power
+# found in a trawl of finite-support-permutations-and-doubled-points, stated once for the members whose
+# arrows out of the evaluation object have finitely determined left inverses.
+arguments:
+- id: weakly-rigid-power-left-inverses
+  requires: [finitely-determined-left-inverses]
+  holds: [weakly-rigid-power-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_0$, at every type. Write a relation $Y$ as its intension $k\mapsto Y_k$, put $X_0(E)_k:=k\cdot E$, and
+    let $B_N(E)_k$ be the union of the $k^{\prime}\cdot E$ for $k^{\prime}$ agreeing with $k$ on $N$ and having its
+    codomain; $B_N(E)$ is pinned down by $N$, so in the domain at either object. (1) An $X_0(E)$ in the domain
+    is rigid: its transports are $X_0$ of the transported extensions, persistent and below whatever holds
+    necessarily of their members. (2) A weakly rigid $Y$ with extension $E$ has $X_0(E)\le Y\le B_N(E)$ for every
+    finite $N$, by weak persistence and weak inextensibility. (3) If $x$ is in $B_N(E)_u$ for every $N$, then
+    $x=u\cdot a$ for some $a\in E$: for $N$ large, $x=u^{\prime}\cdot a_N$ with $u^{\prime}$ agreeing with $u$ on
+    $N$ and $r_{u^{\prime}}$ agreeing with $r_u$ on a pin of $x$, so $a_N=r_{u^{\prime}}\cdot x=r_u\cdot x=:a$, and
+    taking $N$ to contain a pin of $a$ also, $x=u^{\prime}\cdot a=u\cdot a$. So a weakly rigid relation at $W_0$
+    is $X_0$ of its extension, and rigid: Tame Rigidity. (4) Let $F=X_0(E)$, $h$ an arrow out of $W_0$, and $X$
+    weakly rigid at its target with $X\le h\cdot F$ and extension $D$. Applying (2) at the target and (3) to
+    the arrows $k\circ h$, $X=X_0(D)$, and $D=h\cdot A$ for $A:=\{a\in E:h\cdot a\in D\}$; $X_0(A)$, the transport of
+    $X$ along $r_h$, is in the domain, weakly rigid and below $F$, with $h\cdot X_0(A)=X$. So the property of
+    being weakly rigid and below $F$ has at each world the transports of its extension at the identity: it is
+    $X_0$ of that extension, which is rigid by (1). Weakly Rigid Power holds at $W_0$.

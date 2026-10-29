@@ -40,6 +40,27 @@ meets:
     pointwise moves.
   separable-collapses: The pairs $\{2k,2k+1\}$ of $N$; for any two of them a surjection of $N$ collapses
     the one and is injective elsewhere.
+  no-atoms-anywhere: >-
+    At both objects every nonzero proposition is split by a proposition that two points are collapsed
+    (argument atomlessness).
+  hull-conditions: >-
+    With $M_0=\varnothing$. (B1) The arrows out of $A$ into either object are the surjections of $N$
+    (onto the summand $N$ of $B$'s base, for those into $B$), so values prescribed by $h^{\prime}$ on $P$
+    and by $h$ on $Q$, which agree on $P\cap Q\subseteq M$, extend to an arrow into the same object, the
+    infinitely many remaining points covering $N$. (B2) The symmetry group at $A$ is all permutations of
+    $N$, so one fixing $N$ pointwise moves the finitely many points of $P$ outside $N$ off $Q$.
+  finitely-pinned-domains: >-
+    Both objects carry the ideal of finite sets: the domains hold exactly the symmetric intensions pinned
+    down by a finite set (Dorr, draft, Definitions 15–18), arrows with different targets never agreeing
+    on a set.
+  collapse-onto-point:
+    when: {individuals: base}
+    text: >-
+      Any $a\in N$, with $F:=\lambda x\, .\,x\ne a$, symmetric, pinned down by $\{a\}$ and necessarily
+      instantiated, the bases being infinite. For finite $N_1$, a surjection $h$ of $N$ sending
+      $N_1\cup\{a\}$ to one point $p$ is an arrow, and $p=h(a)$ is outside $F_h=N\setminus\{p\}$; each
+      $y\in F_h$ is moved by the transposition of $y$ with a third point, a symmetry fixing $p$, and
+      $\sigma\circ h$ is again a surjection.
 arguments:
 - holds: [tame-rigidity-r]
   when: {individuals: base}
@@ -80,6 +101,79 @@ arguments:
   text: >-
     At type $e$. Every individual at $A$ necessarily falls under the rigid property $F$ with extension
     $h[N]$ at every arrow $h$, but after an entrance the labels are individuals outside it.
+- id: atomlessness
+  holds: [atomlessness]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At both objects. A nonzero proposition $p$ there, pinned down by a finite $S$, contains an arrow $h$.
+    Choose distinct $a,b\in N$ outside $S$, in a block whose label is not in $S$, and in no fibre
+    $R(q_D)$ with $q_D\in S$. Change $h$ only off $S$: keep its values on $S$, on the blocks whose
+    labels are in $S$ and on the fibres $R(q_D)$ with $q_D\in S$; send every label outside $S$ to
+    $q_\top$; send $a$ and $b$ to one point, or to two distinct points; and make the map onto $N$ by way
+    of a further block whose label is not in $S$. Into $A$, or out of $A$ into $B$, any surjection of
+    $N$ is an arrow; out of $B$, condition (1) holds for the labels in $S$, whose fibres keep their
+    values, and for the others, whose image is $q_\top$. Both arrows agree with $h$ on $S$ and so lie in
+    $p$. The proposition $C_{a,b}=\{k : ka=kb\}$ is symmetric, the symmetries being injective on $N$,
+    and pinned down by $\{a,b\}$, so it splits $p$. No proposition is an atom at either object.
+- id: barcan-t
+  fails: [barcan-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Let $Z$ be the property of propositions whose extension at an arrow into $A$ is every proposition
+    there, and at an arrow into $B$ the set of transports $j\cdot p$ of propositions $p$ at $A$ along
+    arrows $j:A\to B$. Its value depends on an arrow only through its target, and the symmetries
+    there preserve it, since $s\cdot(j\cdot p)=(s\circ j)\cdot p$; so $Z$ is symmetric, pinned down by
+    $\varnothing$, and in the domain. Every proposition $p$ at $A$ necessarily satisfies $Z$, since
+    $h\cdot p\in Z_h$ for every arrow $h$. But at the entrance $i$ the proposition $r:=\{(f,g) :
+    g(q_1)\text{ is a block label}\}$, symmetric and pinned down by $\{q_1\}$, is not a transport. If
+    $j=i\circ f_j$, then $(f,g)\in j\cdot p$ iff $i\circ f\circ f_j\in p$, which depends only on $f$;
+    but $(\mathrm{id}_N,\mathrm{id}_Q)\in r$ while $(\mathrm{id}_N,g^{\prime})\notin r$, where
+    $g^{\prime}$ sends $q_1$ to $q_\top$ and fixes every other label, an arrow since $R(q_\top)=N$. So
+    BF fails at type $t$.
+- id: distinctness-preserving-collapse
+  holds: [distinctness-preserving-collapse]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Let $p$ be true, pinned down by a finite $S\subseteq N$, and let $q$ be the proposition that the
+    arrow goes into $A$ and is injective on $S$: symmetric, pinned down by $S$, and true. If $\Diamond
+    q$ holds at an arrow $h$, then $k\circ h\in q$ for some $k$; there are no arrows from $B$ to $A$, so
+    $h$ goes into $A$ and is injective on $S$, and it agrees on $S$ with a permutation $\sigma$ of $N$.
+    As $p$ is symmetric and true, $\sigma\in p$, and as $p$ is pinned down by $S$, $h\in p$. So
+    $\Box(\Diamond q\to p)$ with $q$ true: every truth is ND-necessary.
+- id: necessary-distinctness-preserving-collapse
+  fails: [necessary-distinctness-preserving-collapse]
+  choice: free
+  writeup: symmetric-finite-compression-entrance
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At the entrance $i$, where a closed sentence has its value at $1_B$. Let $p:=\{(f,g) :
+    g(q_1)\text{ is a block label}\}$, true at $1_B$, symmetric and pinned down by $\{q_1\}$. Let $q$ be
+    a truth at $1_B$, pinned down by a finite $P\ni q_1$, and take the compression $c$ and the return
+    $r$ of the write-up's descent lemma for this $P$. Then $r\circ c$ agrees with $1_B$ on $P$, so
+    $r\circ c\in q$ and $\Diamond q$ holds at $c$; but $c$ sends $q_1$ to the finite label $q_{D_1}$,
+    so $c\notin p$. So $p$ is a truth at $1_B$ that is not ND-necessary there.
+- id: pure-b
+  fails: [pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Truth implies ND-necessity is a closed pure sentence. It is true at the evaluation point (argument
+    distinctness-preserving-collapse) and false at every arrow into $B$, where it has its value at $1_B$
+    (argument necessary-distinctness-preserving-collapse). There are no arrows from $B$ to $A$, so at
+    the evaluation point it is true but not necessarily possible.
 lean:
   param: Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A
   verdicts:

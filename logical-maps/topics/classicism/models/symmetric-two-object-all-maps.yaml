@@ -1,0 +1,79 @@
+id: symmetric-two-object-all-maps
+name: 'Symmetric ideally-full model: N and a point, all maps'
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 29 October 2026 (the construction); Claude Opus 5.5 (Anthropic), prompted by Cian Dorr,
+    29 October 2026 (the verification)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, construction of 29 October 2026, in conversation with Claude Opus 5.5 (Anthropic).
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, p. 79 (the unsymmetric model).
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Definitions 15–18,
+  p. 8; Theorem 36, p. 18.
+source_names:
+- Dorr 29 Oct
+- Classicism
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: Definitions 15–18, p. 8; Theorem 36, p. 18
+  note: Symmetric ideally-full models and the hull theorem.
+group: symmetric-ideally-full
+settings:
+  construction: 'A symmetric ideally-full model on two objects, $W_0$ with base $\mathbb N$ and $W_1$ with base
+    $\{0\}$, the arrows being all maps between the bases; write $!$ for the arrow $W_0\to W_1$ and $c_n$ for the
+    arrow $W_1\to W_0$ with value $n$. The symmetry group is $\operatorname{Sym}(\mathbb N)$ at $W_0$ and trivial
+    at $W_1$. Both objects carry the ideal of finite sets. Evaluation point: $1_{W_0}$.'
+  sigma: top
+meets:
+  finitely-pinned-domains: >-
+    The domains hold every symmetric intension pinned down by a finite set, and every entity in them is one.
+  finite-pinning: Both objects carry the ideal of finite sets.
+  infinite-base: The base at $W_0$ is $\mathbb N$.
+  transposable: For finite $N$, the property of not belonging to $N$ (at an arrow $h$ into $W_0$, the points
+    outside $h[N]$) is symmetric and pinned down by $N$, with an infinite extension; the transposition of any
+    member with another point outside $N$ fixes $N$ pointwise and the property.
+  separable-collapses: The pairs $\{2k,2k+1\}$; for any two of them some map of $\mathbb N$ collapses the one and
+    is injective elsewhere.
+  hull-conditions: 'With $M_0=\varnothing$: (B1) every map of $\mathbb N$ is an arrow, so prescriptions agreeing
+    with $h^{\prime}$ on $P$ and with $h$ on $Q$, which agree on $P\cap Q\subseteq M$, extend to an arrow, and
+    there is only one arrow into $W_1$; (B2) a permutation fixing $N$ pointwise moves the finitely many points of
+    $P$ outside $N$ off $Q$.'
+arguments:
+- id: barcan-at-root
+  holds: [barcan-r]
+  choice: free
+  writeup: symmetric-two-object-all-maps
+  text: >-
+    At every type, at $W_0$. If $\forall x\,\Box Fx$ with $F$ pinned down by $S$, and $y$ is an entity at the
+    target of an arrow $h$, choose an arrow $h^{\prime}$ agreeing with $h$ on $S$ that is surjective, a map being
+    changeable off a finite set; by the section construction of the group's argument barcan-surjective,
+    $y=h^{\prime}\cdot x$ for some entity $x$ at $W_0$, so $y$ is in $F_{h^{\prime}}$, which is $F_h$.
+- id: barcan-fails-at-point
+  fails: [necessary-barcan-t]
+  choice: free
+  writeup: symmetric-two-object-all-maps
+  text: >-
+    At $W_1$ symmetry forces a proposition to contain all the $c_n$ or none, so there are four propositions,
+    and their transports along any $c_n$ are $\varnothing$, $\{!\}$, the arrows $W_0\to W_0$, and these with $!$.
+    The property with all four at $1_{W_1}$ and those four transports at each $c_n$ is symmetric and pinned down
+    by $\varnothing$, so every proposition at $W_1$ necessarily has it; but at $c_0$ the proposition
+    $\{f:f(0)=f(1)\}$ does not. So BF at type $t$ fails at $W_1$, which $!$ reaches.
+- id: propositions
+  holds: [necessary-boolean-completeness-t]
+  fails: [atomicity-t, actuality]
+  choice: free
+  writeup: symmetric-two-object-all-maps
+  text: >-
+    A proposition at $W_0$ pinned down by $S$ is, by symmetry, a set of patterns of identification on $S$
+    together with a bit for $!$: the part over $W_0$ is atomless, a pattern on $S$ splitting into its extensions
+    to $S\cup\{a\}$, and the atom $\{!\}$ is false; so Atomicity (type $t$) and Actuality fail. Boolean
+    Completeness holds at $W_0$ (the group's argument, with the hull conditions), and at $W_1$, which has four
+    propositions, at type $t$; so it holds at type $t$ at every world.
+notes: >-
+  Without the symmetry this is finite-support-two-object-all-maps. Separates Boolean Completeness (every type), □BC (type $t$) and BF from □BF (type $t$), the separation that
+  GPT-6 Astra's Ω-valued cofinite-interior model gave (Daniel Kodsi's pull request #18, item 20).

@@ -10,7 +10,7 @@ Vicinity, Weakly Inextensible Comprehension (at $tt$) and Rigid Power (at
 $(tt)t$). So Logical Necessity, even with □BF and □Relational Choice, gives none of
 the comprehension or actuality principles, and Countable Boolean Completeness does
 not give Boolean Completeness. §9 adds the choice principles in their boxed and modalized
-forms, Truth implies ND-necessity, □Tame Rigidity, Arithmetic and Second-Order
+forms, Truths are ND-necessary, □Tame Rigidity, Arithmetic and Second-Order
 Analytic Necessitism, and the failure of Forcing Possibilism.
 
 ## The model
@@ -312,7 +312,7 @@ $$
 *Modalized Relational Choice.* The same, choosing for each $m|_S$ a functional graph inside
 $R_m$.
 
-**Truth implies ND-necessity.** Let $p$ be true, with support $S$, and
+**Truths are ND-necessary.** Let $p$ be true, with support $S$, and
 
 $$
 q_S:=\{m:m_i=\varepsilon\text{ for all }i\in S\}.
@@ -419,7 +419,7 @@ Power asks for a lift below a given rigid $F$.
 3. **Infinitely many individuals.** Astra also gives a variant in which the arrows carry
    an extra coordinate, a surjection of a set of size $\kappa^+$ acting on the individuals.
    It adds the Axioms of Infinity at $e$ and $t$ and keeps these verdicts, except the
-   principle Truth implies ND-necessity and, at type $e$, Analytic Necessitism, which fail
+   principle Truths are ND-necessary and, at type $e$, Analytic Necessitism, which fail
    there. It is recorded separately, with surjections of the individuals in its name.
 4. **Lean.** Astra's Lean development certifies, for one predicate constant, that
    Logical Necessity, □BF and □Relational Choice are consistent and imply neither

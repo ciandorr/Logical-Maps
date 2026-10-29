@@ -1,4 +1,4 @@
-# Vicinity implies 5-necessity implies two-hat necessity
+# Vicinity implies 5-necessities are two-hat necessary
 
 Conjectured by Cian Dorr, 14 October 2026. Proved by Christopher Sun, in a handwritten argument
 sent to Cian Dorr on 19 October 2026: he showed that if there is a strongest 5-necessary
@@ -64,7 +64,7 @@ $\Diamond_{\ne}T$; applying the characterization of $\Diamond_{\ne}$ to the trut
 $r:=A\land\neg Xq$, that world sees one where $\Diamond(A\land\neg Xq)$ and $T$ hold. But $T$ gives
 $A\le Xq$ there, that is $\Box(A\to Xq)$: a contradiction.
 
-## Step 3: 5-necessity implies two-hat necessity
+## Step 3: 5-necessities are two-hat necessary
 
 $s$ is true and $\Box(\Diamond_{\ne}s\to s)$. If $\Box_5 p$, then $s\le p$ by (c), so
 $\Box(\Diamond_{\ne}s\to p)$, and $s$ witnesses $\hat{\hat\Box}p$. $\blacksquare$
@@ -72,7 +72,7 @@ $\Box(\Diamond_{\ne}s\to p)$, and $s$ witnesses $\hat{\hat\Box}p$. $\blacksquare
 ## Remarks
 
 - The argument is a derivation in C from Vicinity, so its necessitation gives the boxed form,
-  □Vicinity implies □5-necessity implies two-hat necessity.
+  □Vicinity implies □5-necessities are two-hat necessary.
 - Actuality, and Vicinity with BF at type $t$, were already known to suffice. As the notes of the
   conjecture explain, the Actuality proof does not adapt; Sun's argument works through Theorem D9
   instead of an atom.

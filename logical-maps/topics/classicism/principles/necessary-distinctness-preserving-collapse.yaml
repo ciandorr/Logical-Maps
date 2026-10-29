@@ -1,5 +1,5 @@
 id: necessary-distinctness-preserving-collapse
-name: □Truth implies ND-necessity
+name: □Truths are ND-necessary
 category: necessity-varieties
 statement: Necessarily, every truth is ND-necessary. In C this is the identity $\Box_{\ne}=\lambda p\,
   .\,p$.
@@ -20,6 +20,7 @@ references:
     category.
 aliases:
 - □Distinctness-preserving collapse
+- □Truth implies ND-necessity
 notes: The necessitated form of [[distinctness-preserving-collapse]]. Added 14 October 2026 to match the
   boxed forms of the other collapse principles, at the suggestion of Christopher Sun and Cian Dorr. Equivalent
   to the conjunction of [[necessary-five-implies-nd-necessity]] and [[necessary-truth-implies-five-necessity]].
@@ -30,12 +31,17 @@ changes:
     equivalent forms); the notes now name the base principle with a link, without the boilerplate about
     closed instances and the box; the equivalent forms are stated as necessitations of the base forms;
     definitions of its technical terms added.'
+- date: '2026-10-29'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  summary: Renamed from □Truth implies ND-necessity to □Truths are ND-necessary, at Cian Dorr's request, so that the name does not use the verb
+    of entailment; the statement is unchanged.
+  minor: true
 variants:
 - id: dual
   name: Dual form
   statement: Necessarily, whatever is possible under the distinctness-preserving modality is true.
   formal: $\Box\forall p\, .\,\Diamond_{\ne}p\to p$
   equivalence: The dual form is derivable from the official form in C and conversely, as on the page of
-    Truth implies ND-necessity; necessitating the derivation and applying K carries the equivalence to
+    Truths are ND-necessary; necessitating the derivation and applying K carries the equivalence to
     the boxed forms.
 lean_def: Classicism.P.NecDistinctnessPreservingCollapse.schemaIn

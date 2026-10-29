@@ -9,7 +9,7 @@ coordinates and glued constants, whose write-up should be read first. The base m
 one individual. Here each arrow also carries a surjection of a large set of individuals.
 That adds the Axioms of Infinity and keeps every verdict of the base model except two:
 
-- Truth implies ND-necessity fails (§5);
+- Truths are ND-necessary fails (§5);
 - Analytic Necessitism, in both forms, fails at type $e$ (§6), though it holds at every
   other type.
 
@@ -169,7 +169,7 @@ $\varepsilon$ on $S$, and such arrows fix $D$ and the individuals. So $(m,s)\cdo
 only on $m|_S$ and $s$. Hence $H_C$ is supported by $S$, and it is rigid by Lemma 3', with
 $k\cdot H_C=Y$. The rest of the base model's argument is unchanged.
 
-## 5. Truth implies ND-necessity fails
+## 5. Truths are ND-necessary fails
 
 Let $p:=\{(m,s):s=\mathrm{id}\}$, a true proposition with empty support. Let $q$ be any truth,
 and let $\pi\ne\mathrm{id}$ be a permutation of $U$. Then $\Diamond q$ holds at

@@ -63,7 +63,7 @@ holds for every arrow, so only preservation is a restriction.
   $\sigma=\sigma\circ 1\in p$, and $h$ agrees with $\sigma$ on $N$, so $h\in p$.
 
 So $\Box(\Diamond\delta_N\to p)$ holds, with $\delta_N$ true, and $p$ is
-ND-necessary: Truth implies ND-necessity holds.
+ND-necessary: Truths are ND-necessary holds.
 
 In symmetric-infinite-classes the arrows are all surjections, and this fails.
 There, a surjection injective on $\{0,1\}$ can separate the classes of the

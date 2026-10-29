@@ -289,7 +289,7 @@ instances are the numerals at a type is symmetric and pinned down by $\varnothin
 Added 28 October 2026 by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr. Write
 $q_{x,y}:=\{(k,s):s(x)\ne s(y)\}$ for any $x,y\in U$, so that $\pi\cdot q_{x,y}=q_{\pi x,\pi y}$.
 
-**Truth implies ND-necessity holds.** Let $p$ be true, pinned down by $N$, and let
+**Truths are ND-necessary holds.** Let $p$ be true, pinned down by $N$, and let
 $q:=\{(1_K,s):s\text{ injective on }N\}$. It is true, pinned down by $N$, and symmetric.
 
 - **$\Diamond q=q$.** In both monoid factors, $jk=1_K$ only if $k=1_K$, and $ts$ is injective on $N$

@@ -490,10 +490,12 @@
   .page table.group-grid { border-collapse: separate; border-spacing: 0; font-size: 13px; }
   .page table.group-grid th, .page table.group-grid td { padding: 0; }
   /* Column labels slant up to the right from the foot of their column; the wrap scrolls to show the last. */
-  .page table.group-grid thead th.gcol { vertical-align: bottom; height: 130px; width: 32px; min-width: 32px; max-width: 32px; position: relative; }
-  .page table.group-grid thead th.gcol button { position: absolute; left: 14px; bottom: 4px; transform-origin: 0 100%; transform: rotate(-45deg); white-space: nowrap; max-width: 175px; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; font: 500 12.5px var(--sans); text-align: left; }
-  .page table.group-grid thead tr { height: 130px; }
-  .page .group-grid-wrap { padding-right: 130px; }
+  .page table.group-grid thead th.gcol { vertical-align: bottom; height: 190px; width: 32px; min-width: 32px; max-width: 32px; position: relative; }
+  .page table.group-grid thead th.gcol button { position: absolute; left: 14px; bottom: 4px; transform-origin: 0 100%; transform: rotate(-45deg); white-space: nowrap; max-width: 260px; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; font: 500 12.5px var(--sans); text-align: left; }
+  .page table.group-grid thead tr { height: 190px; }
+  .page .group-grid-wrap { padding-right: 190px; }
+  .page tr.group-models summary { cursor: pointer; }
+  .page ul.group-model-list { margin: 4px 0 2px; padding-left: 18px; list-style: none; columns: 2 18em; font-size: 13px; }
   .page table.group-grid thead th.gcol.derived button { color: var(--ink-3); font-style: italic; }
   .page table.group-grid tbody th { text-align: left; font-weight: 500; padding: 3px 14px 3px 0; white-space: nowrap; position: sticky; left: 0; background: var(--bg); z-index: 1; }
   .page table.group-grid tbody tr.first > * { border-top: 1px solid var(--line); }
@@ -3952,7 +3954,9 @@ function groupGrid(g, view) {
   let h = `<div class="group-bar"><label><input type="checkbox" id="group-derived"${view.derived ? ' checked' : ''}> Principles derived in every row <span class="dim">(${hiddenDerived})</span></label>${hiddenInSidebar ? ` <span class="dim">${hiddenInSidebar} more differ${hiddenInSidebar === 1 ? 's' : ''} among principles hidden in the sidebar</span>` : ''}`
     + `<span class="group-legend"><span class="gcell h r">✓</span> recorded <span class="gcell h d">✓</span> derived <span class="gcell u">?</span> unknown</span></div>`
     + (assumptionsActive ? `<p class="note">Assumed in the theory explorer: ${assumed.join(', ')}. Rows that do not fit are dimmed; rows that might fit are marked ?.</p>` : '');
-  h += `<div class="group-grid-wrap"><table class="group-grid"><thead><tr><th></th>${cols.map(c => `<th class="gcol${extra.includes(c) && c === extra[0] ? ' xfirst' : ''}${rows.some(r => cellOf(r.m, c)[1]) ? '' : ' derived'}"><button class="lnk" data-principle="${c}" title="${esc(name(c))}">${esc(name(c))}</button></th>`).join('')}</tr></thead><tbody>`;
+  // The header is as tall as the longest slanted label needs, up to the labels' cap.
+  const head = Math.round(Math.min(260, 7.2 * Math.max(0, ...cols.map(c => name(c).length))) * 0.71) + 18;
+  h += `<div class="group-grid-wrap"><table class="group-grid"><thead><tr style="height:${head}px"><th></th>${cols.map(c => `<th style="height:${head}px" class="gcol${extra.includes(c) && c === extra[0] ? ' xfirst' : ''}${rows.some(r => cellOf(r.m, c)[1]) ? '' : ' derived'}"><button class="lnk" data-principle="${c}" title="${esc(name(c))}">${esc(name(c))}</button></th>`).join('')}</tr></thead><tbody>`;
   rows.forEach((r, ri) => {
     const fit = assumptionsActive ? modelFit(r.m) : 'known';
     h += `<tr class="${r.first ? 'first' : ''}${fit === 'out' ? ' nofit' : fit === 'potential' ? ' mayfit' : ''}"><th><button class="growlab" data-grow="${ri}">${r.first ? `<span class="gname">${esc(shortName(g, r.m))}</span>` : ''}${r.tags.length ? `<span class="gtags">${r.tags.map(esc).join(' · ')}</span>` : ''}</button></th>`;
@@ -4130,12 +4134,17 @@ function renderPage(sel) {
     const concluding = R.filter(r => r.conclusion === p.id).sort((a, b) => a.premises.length - b.premises.length || compareNames(premisesName(a), premisesName(b)));
     const using = R.filter(r => r.premises.includes(p.id)).sort((a, b) => (a.conclusion === FALSE) - (b.conclusion === FALSE) || compareNames(name(a.conclusion), name(b.conclusion)) || a.premises.length - b.premises.length || compareNames(premisesName(a), premisesName(b)));
     const inM = MODELS.filter(m => !m.group && (m.satisfies.includes(p.id) || m.violates.includes(p.id)));
-    // A group is one row: how many of its models satisfy the principle and how many violate it, and which.
+    // A group is one row: how many of its models satisfy the principle and how many violate it;
+    // which they are waits behind a triangle, named as in the theory explorer.
     const groupRows = GROUPS.map(g => {
       const fam = groupFamily(g.id), sat = fam.filter(m => cellOf(m, p.id)[0] === 'h'), vio = fam.filter(m => cellOf(m, p.id)[0] === 'f');
       if (!sat.length && !vio.length) return '';
-      const part = (mark, list) => list.length ? `<div>${mark} ${list.length} of ${fam.length}${fitDescription(g, list) ? ': ' + esc(fitDescription(g, list)) : ''}</div>` : '';
-      return `<tr data-open-group-row="${esc(g.id)}"><td class="mono nowrap">${sat.length && vio.length ? '✓✗' : sat.length ? '✓' : '✗'}</td><td class="stmt"><b>${esc(g.name)}</b> <span class="dim">group of ${fam.length} models</span>${part('✓', sat)}${part('✗', vio)}</td><td></td></tr>`;
+      const label = m => { const base = m.variant_of && byMid.get(m.variant_of);
+        return base ? `${shortName(g, base)} (${variantDiff(g, m, base).map(k => valueLabel(g.parameters[k], (m.settings || {})[k])).join(', ')})` : shortName(g, m); };
+      const item = (mark, m) => `<li>${mark} <button class="lnk" data-open-model="${esc(m.id)}">${esc(label(m))}</button></li>`;
+      const counts = [sat.length ? `✓ ${sat.length} of ${fam.length}` : '', vio.length ? `✗ ${vio.length} of ${fam.length}` : ''].filter(Boolean).join(' · ');
+      return `<tr class="group-models"><td class="mono nowrap">${sat.length && vio.length ? '✓✗' : sat.length ? '✓' : '✗'}</td><td class="stmt"><details><summary><button class="lnk" data-open-group="${esc(g.id)}"><b>${esc(g.name)}</b></button> <span class="dim">${counts}</span></summary>`
+        + `<ul class="group-model-list">${sat.map(m => item('✓', m)).join('')}${vio.map(m => item('✗', m)).join('')}</ul></details></td><td></td></tr>`;
     }).join('');
     const resultsTable = rows => `<table class="results"><tbody>${rows.map(r => `<tr data-result="${r.id}"><td class="stmt">${resultStmt(r)}</td><td>${certBadges(r)}</td></tr>`).join('') || '<tr><td>—</td></tr>'}</tbody></table>`;
     h += `<h2>Results</h2><h3 class="verdict-group">Concluding it <span class="n">${concluding.length}</span></h3>${resultsTable(concluding)}<h3 class="verdict-group">Using it as a premise <span class="n">${using.length}</span></h3>${resultsTable(using)}`;
@@ -4147,7 +4156,6 @@ function renderPage(sel) {
   el.innerHTML = h;
   el.querySelectorAll('tr[data-result]').forEach(tr => tr.addEventListener('click', () => select({ type: 'result', id: tr.dataset.result })));
   el.querySelectorAll('tr[data-model]').forEach(tr => tr.addEventListener('click', () => openPage({ type: 'model', id: tr.dataset.model })));
-  el.querySelectorAll('tr[data-open-group-row]').forEach(tr => tr.addEventListener('click', () => openPage({ type: 'group', id: tr.dataset.openGroupRow })));
   el.querySelector('#page-back').addEventListener('click', pageBack);
   el.querySelectorAll('button[data-jump]').forEach(b => b.addEventListener('click', () => jumpToArguments(el, b.dataset.jump.split(' '))));
   wire(el);

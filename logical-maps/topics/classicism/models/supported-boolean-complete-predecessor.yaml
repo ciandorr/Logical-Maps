@@ -36,6 +36,9 @@ settings:
   root: free
 meets:
   one-individual: There is a single individual.
+  actual-world-isolated: >-
+    The root proposition $(1,\varnothing)$, true at $r$ alone, is in the domain and entails every truth
+    at $r$ (argument actuality), and no world of the component sees $r$.
 arguments:
 - id: boolean-completeness-t
   holds: [necessary-boolean-completeness-t]
@@ -95,6 +98,155 @@ arguments:
     At a world $U$ of the component, an actual-world proposition would be some $\hat b$ with $b\in U$ and
     $\hat b\subseteq\hat c$ for every $c\in U$, so $b$ would be an atom of $B$. $B$ is atomless, so Actuality
     fails at every world of the component, which $r$ sees.
+- id: axiom-of-infinity-at-root
+  holds: [axiom-of-infinity-t]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $r$ every set of tuples of root entities is the current extension of a root entity, its pair with
+    any component entity, and the propositions at $r$, the pairs $(\varepsilon,\hat b)$, are infinitely
+    many and genuinely distinct. So the argument infinitely-many-propositions applies at $r$, where all
+    the quantifiers involved are evaluated: the root property of cardinalities whose current extension
+    is the cardinalities holding at $r$ only of properties with finite current extension holds of
+    $\mathbf 0_t$ and is closed under $\operatorname{Suc}_t$, the current extension of
+    $\lambda u\,.\,Xu\land u\ne y$ being that of $X$ less $y$. So every finite cardinality holds at $r$
+    only of properties with finite current extension, and none holds of $\lambda u^t\,.\,\top$.
+- id: countable-boolean-completeness-root
+  fails: [countable-boolean-completeness-r]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At type $tt$, relative to $t$. An element $y\notin\langle Q\rangle$ has continuum many images under
+    $H_Q$: it meets some cell $e$ of $\langle Q\rangle$ with $0<y\wedge e<e$, and for each $0<z<e$
+    homogeneity gives isomorphisms $[0,y\wedge e]\cong[0,z]$ and $[0,e-y]\cong[0,e-z]$, which with the
+    identity off $e$ make a member of $H_Q$ carrying $y$ to $(y-e)\vee z$. So a countably infinite
+    $S\subseteq B$ is invariant under no $H_Q$. For $b\in B$ let $F_b$ be the component property true
+    everywhere of $\hat b$ and of nothing else, supported by $\{b\}$. At $r$ let $X$ have as current
+    extension the root properties $(\varnothing,F_b)$, $b\in S$; it is countable relative to $t$, a root
+    relation pairing them injectively with the numerals $\operatorname{Suc}^n_t\mathbf 0_t$, which differ
+    at $r$ in their current extensions. Suppose $(R,L)$ were a least upper bound of $X$, with $L$
+    supported by $P$. Entailment between root entities is inclusion at $r$ together with entailment
+    between component parts, so $L$ is true everywhere of $\hat b$ for $b\in S$, and so, by invariance,
+    of $\hat x$ for every $x$ in the set $S_P$ of $H_P$-images of members of $S$; and some
+    $x\in S_P\setminus S$. The component property true everywhere of $\hat z$ for $z\in S_{P\cup\{x\}}$,
+    and nowhere else, is admitted, and paired with $\varnothing$ it is an upper bound of $X$. But
+    $x\notin S_{P\cup\{x\}}$, since $H_{P\cup\{x\}}$ fixes $x$, so $(R,L)$ is not below it.
+- id: intensional-choice
+  holds: [intensional-choice-r]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type, at $r$ and at every world of the component. In the component, let $F$ be supported
+    by $P$ and instantiated at every world, with fibre $\hat c_x$ at $x$. The $c_x$ form an
+    $H_P$-invariant set with join $1$, so by finite attainment (write-up, Lemma 2)
+    $1=c_{x_1}\vee\dots\vee c_{x_k}$ for some $x_1,\dots,x_k$. Let $G$ hold of $x_i$ exactly at the worlds
+    in $\hat e_i$, where $e_i:=c_{x_i}-\bigvee_{j<i}c_{x_j}$, and of nothing else. Its fibres are finite
+    joins of the $e_i$, and it is supported by $P$ together with finite supports of the $x_i$, whose
+    automorphisms fix each $x_i$ and so each $c_{x_i}$; so $G$ is admitted, $G\le F$, and at each world
+    exactly one $x_i$ has $G$, the $e_i$ partitioning $1$. At $r$, a root $F=(R,a)$ with
+    $\Box\exists x\,Fx$ has a nonempty current extension and a component part $a$ as above; pair a
+    singleton $\{x_0\}\subseteq R$ with the $G$ built for $a$. Only finitely many choices are made.
+- id: self-atoms
+  holds: [necessary-self-atoms-are-atoms-t]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type. The component has no atoms: if $X$ has a nonempty fibre $\hat b$ at a tuple, meeting it
+    pointwise with $\hat d$, where $0<d\wedge b<b$, gives an admitted $Y$ with $\bot<Y<X$. So at a world of
+    the component nothing is a self-atom, a possible entity being instantiated somewhere and an atom
+    nowhere. At $r$ a self-atom $(R,a)$ has $a=\bot$, since wherever it is instantiated it is an atom and the
+    component has none; being possible it has $R\ne\varnothing$, and $(R,\bot)$ is an atom at $r$, that is, $R$ is a singleton. Such a
+    $(R,\bot)$ is a strong atom: at $r$ it entails each root entity or its negation, according as the
+    tuple in $R$ is in the current extension, and at a world of the component its transport is bottom.
+    So self-atoms are atoms, and strong atoms, at $r$ and at every world it sees.
+- id: vicinity
+  holds: [necessary-vicinity]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $r$, by Actuality: the actual-world proposition entails each truth $q$, which entails
+    $\Diamond q$. At a world of the component a true $\hat b$ has $b\ne0$, and every world of the
+    component sees every other, so $\Diamond\hat b$ is true throughout the component, which is all that
+    world sees; so $\top$ entails it, and witnesses Vicinity.
+- id: no-pure-b
+  fails: [pure-b-r]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Actuality is a closed pure sentence, true at $r$ and false at every world of the component (arguments
+    actuality and no-actuality-in-component). Those worlds see only worlds of the component, so
+    $\Diamond$Actuality is false at each of them, and $\Box\Diamond$Actuality is false at $r$.
+- id: weakly-rigid-power
+  holds: [weakly-rigid-power-r]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Write $\chi_T$ for the component relation true everywhere of the tuples in $T$ and nowhere else; it
+    is admitted just when $T$ is invariant under some $H_Q$. For any $T$ and finite $Q$, the set $T_Q$ of
+    $H_Q$-images of members of $T$ is so invariant, and a tuple fixed by $H_Q$ lies in $T_Q$ only if it
+    lies in $T$. (a) In the component, a relation $Y$ weakly rigid at a world $U$ has every fibre empty
+    or $W$: weak persistence makes a fibre containing $U$ all of $W$; and if $T$ is the set of tuples $Y$
+    holds of at $U$, weak inextensibility applied to $\chi_{T_Q}$, for $Q$ a support of a tuple outside
+    $T$, empties the fibre there. Such relations are rigid. (b) At $r$, with $\operatorname{tr}R$ the
+    transports of the members of $R$, a root $(R,a)$ is weakly rigid iff $a=\chi_{\operatorname{tr}R}$:
+    weak persistence gives $a$ the fibre $W$ on $\operatorname{tr}R$, and weak inextensibility applied to
+    $(R,\chi_{(\operatorname{tr}R)_Q})$ empties it elsewhere; conversely, if every $\bar x\in R$ is
+    necessarily in $(S,s)$, then $R\subseteq S$ and $s$ has fibre $W$ on $\operatorname{tr}R$, so
+    $(R,a)\le(S,s)$. By (a) such an $(R,a)$ is rigid. Now let $F=(R,\chi_T)$, $T=\operatorname{tr}R$, and
+    $\Phi:=\lambda X\,.\,\operatorname{WeaklyRigid}(X)\land X\le F$. By (b) the current extension of
+    $\Phi$ is the $(R',\chi_{\operatorname{tr}R'})$ with $R'\subseteq R$ and $\operatorname{tr}R'$
+    invariant under some $H_Q$; by (a), $\le$ being boxed, its component part is $\chi$ of the set of $\chi_{T'}$ with
+    $T'\subseteq T$ invariant under some $H_Q$. These are exactly the transports of the former, taking for $R'$ the
+    members of $R$ with transports in $T'$. So $\Phi$ is weakly rigid, by (b).
+- id: arithmetic-necessitism
+  holds: [arithmetic-necessitism]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type $\sigma$. The numerals $\operatorname{Suc}^n_\sigma\mathbf 0_\sigma$ denote, in the
+    component, entities fixed by every automorphism, so the relation $\chi_N$ true everywhere of them and
+    of nothing else is admitted; taken as $W$ in the definition of $\operatorname{FiniteCardinality}_\sigma$
+    it shows that at each world of the component the numbers at $\sigma$ are exactly the numerals. At $r$
+    the root entity whose current extension is the root numerals, paired with $\chi_N$, does the same.
+    So $\mathbb N_\sigma$ denotes at $r$ the pair of the set of root numerals and $\chi_N$, the
+    transports of the root numerals being the component numerals, and it is rigid by (b) of the argument
+    weakly-rigid-power. Given $\Box I^*_\sigma$, distinct numbers at $r$ are numerals
+    $\operatorname{Suc}^i_\sigma\mathbf 0_\sigma$ and $\operatorname{Suc}^j_\sigma\mathbf 0_\sigma$ with
+    $i\ne j$, and their transports are distinct at every world of the component by $I^*_\sigma$ there.
+- id: necessity-of-arithmetic
+  holds: [necessity-of-arithmetic]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $\sigma=e$ there is one individual, so $\operatorname{Suc}^2_e\mathbf 0_e$ and
+    $\operatorname{Suc}^3_e\mathbf 0_e$ are the same necessarily empty property, $I^*_e$ fails at every
+    world and $I_e$ fails throughout. At a relational type $\sigma$ there are infinitely many entities at
+    $r$ and at each world of the component, and every finite set of them is the extension there of a
+    property in the domain, so the numerals are distinct and $I^*_\sigma$ holds everywhere. As in the
+    argument arithmetic-necessitism, at $r$ and at each world the numbers at $\sigma$ are exactly the
+    numerals; and $\operatorname{Sum}_\sigma$ and $\operatorname{Prod}_\sigma$ hold exactly of the true
+    sums and products, taking for $R$ the relation, true everywhere or with that current extension, of
+    the pairs of numerals $(\mathbf i,\mathbf{i+m})$, resp. $(\mathbf i,\mathbf{i\cdot m})$, which
+    automorphisms fix. So wherever $I_\sigma$ holds an arithmetical sentence at $\sigma$ has its standard
+    truth value.
 notes: >-
   Separates □Boolean Completeness (type $t$), □BF, Relational Choice and Actuality from □Actuality: the
   component is a model of C5 in which Actuality is necessarily false. The completeness of $B$ is used only at

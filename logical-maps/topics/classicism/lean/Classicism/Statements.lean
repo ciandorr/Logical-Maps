@@ -4879,6 +4879,16 @@ def strong_atomicity_t_necessary_rigid_comprehension_and_rigid_power_imply_bf_t 
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidPower.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn
 
+/-- `strong-atomicity-t-rigid-comprehension-and-barcan-relational-imply-necessary-rigid-comprehension`
+
+Strong Atomicity (type t) ∧ Rigid Comprehension ∧ BF (relational types) ⇒ □Rigid Comprehension -/
+def strong_atomicity_t_rigid_comprehension_and_barcan_relational_imply_necessary_rigid_comprehension : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongAtomicityT.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRigidComprehension.schemaIn
+
 /-- `strong-atomicity-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice`
 
 Strong Atomicity ∧ Weak Rigid Comprehension ∧ Relational Choice ⇒ Intensional Choice -/

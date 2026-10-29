@@ -1,0 +1,57 @@
+id: strong-atomicity-t-rigid-comprehension-and-barcan-relational-imply-necessary-rigid-comprehension
+premises:
+- strong-atomicity-t
+- rigid-comprehension-r
+- barcan-relational
+conclusion: necessary-rigid-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Strong Leibniz and Rigid Comprehension propagate,
+  research note of 22 October 2026, §§2–3 (unpaginated), in Daniel Kodsi's submission of 24 October 2026,
+  listed in his pull request #18 of 26 October 2026.
+source_names:
+- Astra via Kodsi 22 Oct
+proof: >-
+  Write $D(w):=\forall q\, .\,w\le q\lor w\le\neg q$, so that $\operatorname{SAtom}_t(w)$ is $\Diamond
+  w\land\Box D(w)$. (1) By Rigid Comprehension let $A$ be a rigid property of propositions coextensive
+  with $\operatorname{SAtom}_t$. Each current instance $w$ has $\Box D(w)$, so weak inextensibility of $A$
+  gives $\Box\forall w\, .\,Aw\to D(w)$. And $J:=\exists w\, .\,Aw\land w$ is $\top$: otherwise
+  $\Diamond\neg J$, and Strong Atomicity (type $t$) gives a strong atom $w\le\neg J$; but $w$ is an
+  instance of $A$, so $w\le J$, and $w=\bot$, contradicting $\Diamond w$. So $\Box\exists w\, .\,Aw\land w$.
+  (2) Let $\sigma$ be a relational type and $X$ of type $\sigma t$. Fix a current instance $w$ of $A$. By
+  $D(w)$, every current $z$ has $w\le Xz$ or $w\le\neg Xz$; by Rigid Comprehension let $P$ and $Q$ be rigid
+  and coextensive with $\lambda z\, .\,w\le Xz$ and $\lambda z\, .\,w\le\neg Xz$. Identities being
+  necessary, weak inextensibility of $P$ applied to $\lambda z\, .\,w\to Xz$ gives $\Box\forall z\,
+  .\,Pz\to(w\to Xz)$, and likewise $\Box\forall z\, .\,Qz\to(w\to\neg Xz)$. Every current $z$ is in $P$ or
+  $Q$, so, by persistence, $\forall z\, .\,\Box(Pz\lor Qz)$, and BF at the relational type $\sigma$ gives
+  $\Box\forall z\, .\,Pz\lor Qz$. So necessarily, if $w$, then $X$ is coextensive with $P$, which is rigid
+  ([[rigid-necessary]]): $\Box(w\to E_X)$, with $E_X:=\exists Y\, .\,\operatorname{Rigid}(Y)\land X\equiv Y$.
+  Weak inextensibility of $A$ applied to $\lambda w\, .\,w\to E_X$ gives $\Box\forall w\, .\,Aw\to(w\to
+  E_X)$, and with (1), $\Box E_X$. This holds for every current $X$, so BF at the relational type $\sigma t$
+  gives $\Box\forall X\, .\,E_X$: Rigid Comprehension at relational argument types is necessary. (3)
+  Individual and mixed argument tuples reduce to relational ones by a theorem of C, which is therefore
+  necessary. For a tuple type $\bar\sigma$ let $H_{\bar x}:=\lambda\bar z\, .\,\bar z=\bar x$, of the
+  relational type $\delta:=\bar\sigma t$, and $\operatorname{Code}(H):=\exists\bar x\, .\,H=H_{\bar x}$.
+  Given $X$ of type $\bar\sigma t$, let $P$ be rigid and coextensive with $\lambda H\, .\,\exists\bar x\,
+  .\,H=H_{\bar x}\land X\bar x$, and $Y:=\lambda\bar x\, .\,P(H_{\bar x})$, which is coextensive with $X$
+  since $H_{\bar x}=H_{\bar y}$ iff $\bar x=\bar y$. Each current instance of $P$ is a code, necessarily,
+  so weak inextensibility gives $\Box\forall H\, .\,PH\to\operatorname{Code}(H)$. $Y$ is persistent since
+  $P$ is. At any point, if $Y\bar x\to\Box Z\bar x$ for all $\bar x$, then each instance $H_{\bar a}$ of $P$
+  there has $\Box\forall\bar x\, .\,H=H_{\bar x}\to Z\bar x$, and weak inextensibility of $P$ gives $Y\le
+  Z$. So $Y$ is rigid.
+notes: >-
+  With [[necessary-rigid-comprehension-implies-necessary-weak-rigid-comprehension]] and
+  [[necessary-weak-rigid-comprehension-implies-necessary-boolean-completeness]], □Boolean Completeness
+  follows. BF is used only at the evaluation point and only at relational types; BF at type $e$ is not
+  needed, and fails in full-two-object-chain-new-individual, where Strong Atomicity and Rigid
+  Comprehension hold. Astra also proposed a countermodel showing that BF at relational types cannot be
+  weakened to □BF (type $t$); it is not recorded yet.
+references: []

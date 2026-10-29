@@ -1,0 +1,194 @@
+id: supported-products
+name: 'Supported-product action models, with glued constants'
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §§3.4–3.5, pp. 55–61; Appendix D, pp. 73–74
+  note: One-object action models and their semantics.
+- paper: bacon-2020
+  role: background
+  locator: Appendix A.3
+  note: Gluing the interpretations of Σ at fresh arrows, as in the glued free-monoid models.
+
+# GPT-6 Astra's models of Logical Necessity without Actuality (prompted by Daniel Kodsi, research note of
+# 22 October 2026): one-object action models whose arrows are words at κ⁺ coordinates, with entities
+# depending on at most κ of them, and Σ glued at a fresh coordinate. Formed on 29 October 2026 by Claude
+# Opus 5.5 (Anthropic), prompted by Cian Dorr, from supported-product-free-monoids-glued-constants and its
+# variant with moving individuals, supported-product-surjections-glued-constants. The arguments that the
+# variant gave "as in the base model" are the group's, their texts the base model's, adjusted where the
+# variant's said what changes; each member keeps the arguments that are its alone.
+
+definition: >-
+  Fix an infinite cardinal $\kappa$, a set $I$ of size $\kappa^+$, and the free monoid $L$ of finite words on
+  an alphabet of size $\kappa$. {{individuals}} There is one object, and the evaluation point is the
+  identity. Write $m$ for the $L^I$-coordinate of an arrow. At a relational type the domain consists of the
+  profiles $F$ on the arrows with a support: a set $S\subseteq I$ of size at most $\kappa$ such that $F$
+  takes the same value at arrows whose $L^I$-coordinates agree on $S$ (and whose other coordinates, if
+  any, agree). Transport is $(h\cdot F)_k:=F_{kh}$, with the usual action-model semantics. Each relational
+  constant of Σ denotes the gluing, at a coordinate outside every support involved, of chosen
+  interpretations $J_\alpha(c)$, one for each $\mathcal L(\Sigma)$-sentence satisfiable over the pure
+  model (the members' write-ups).
+
+parameters:
+  individuals:
+    text: The individuals and the arrows, as the member gives them.
+    values:
+      one:
+        text: >-
+          Here $\kappa\ge|\Sigma|$, and the arrows are $L^I$ with coordinatewise concatenation. There is one
+          individual, which the individual constants denote.
+        label: one individual
+        meets:
+          one-individual: There is one individual.
+      surjections:
+        text: >-
+          Here $\kappa\ge\max(|\Sigma|,2^{\aleph_0})$, and $U$ is a set of size $\kappa^+$. The arrows are the
+          pairs $(m,s)$ with $m\in L^I$ and $s$ a surjection $U\to U$, composed by
+          $(m,s)(m^{\prime},s^{\prime}):=(mm^{\prime},s\circ s^{\prime})$, with identity
+          $(\varepsilon,\mathrm{id})$. The individuals are the members of $U$, with $(m,s)\cdot a:=s(a)$, and a
+          profile may depend arbitrarily on $s$. The individual constants denote distinct individuals $a_c$.
+        label: moving individuals
+
+meets:
+  no-actuality-anywhere: >-
+    One object, so Actuality, a closed pure sentence, holds at every world iff at the identity, where it
+    fails (recorded in the members' verdicts).
+
+arguments:
+
+- id: atomlessness
+  holds: [atomlessness]
+  choice: free
+  writeup: supported-product-free-monoids-glued-constants
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-24'
+  text: >-
+    With $q_j$ the arrows whose $L^I$-coordinate is empty at $j$, for $j$ outside the support of $p\ne\bot$,
+    $\bot\ne p\land q_j<p$.
+
+- id: countable-boolean-completeness
+  holds: [necessary-countable-boolean-completeness-r]
+  choice: free
+  writeup: supported-product-free-monoids-glued-constants
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-24'
+  text: >-
+    The finite cardinalities at each type are exactly the standard numerals, so a countable property has
+    countably many actual instances; their pointwise union is supported by the union of their supports and
+    is their least upper bound. The schema is closed and pure, so it holds necessarily.
+
+- id: vicinity
+  fails: [vicinity]
+  choice: free
+  writeup: supported-product-free-monoids-glued-constants
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-24'
+  text: >-
+    $\Diamond q_j=q_j$, the free monoid having no inverses. For a truth $p$ with support $S$ and $j\notin S$,
+    the arrow with one letter at $j$ (and identity in any other coordinate) satisfies $p$ and not
+    $\Diamond q_j$, though $q_j$ is true.
+
+- id: weakly-inextensible-comprehension
+  fails: [weakly-inextensible-comprehension-r]
+  choice: free
+  writeup: supported-product-free-monoids-glued-constants
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-24'
+  text: >-
+    At $tt$, for the constant property $\{q_i:i\in I\}$: a coextensive $Y$ with support $S$, $j\notin S$,
+    keeps $q_j$ at the arrow $h$ with one letter at $j$, while $Z$, all propositions where $m_j=\varepsilon$
+    and all but $q_j$ elsewhere, necessarily holds of each actual instance and omits $q_j$ at $h$. The $q_i$
+    ignore any other coordinate.
+
+- id: rigid-power
+  fails: [rigid-power-r]
+  choice: free
+  writeup: supported-product-free-monoids-glued-constants
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-24'
+  text: >-
+    At type $(tt)t$. Weakly rigid relations are exactly the exact images $h\mapsto h\cdot E$ of their actual
+    extensions (the exact-image lemma, adapted to moving individuals in that variant's write-up); a family
+    $e_{z,j}$ of properties of propositions, shifted in $z$ by the $j$th coordinate and marked by the squares,
+    has a supported exact image $F$, but the rigid relation $X\le a\cdot F$ formed from the $y_j$ lifts to no
+    rigid $Y\le F$, so the power property of $F$ is not weakly rigid.
+
+- id: tame-rigidity
+  holds: [necessary-tame-rigidity-r]
+  choice: free
+  writeup: supported-product-free-monoids-glued-constants
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-25'
+  text: >-
+    By the exact-image lemma (with the auxiliary profiles taken with the surjection fixed, for moving
+    individuals), a weakly rigid relation is the profile $h\mapsto h\cdot E$ of its actual extension $E$, and
+    such a relation, with all its transports, is rigid. The schema is closed and pure.
+
+- id: transversal-choice
+  holds: [necessary-transversal-choice-r, modal-well-ordering-r]
+  choice: uses
+  writeup: supported-product-free-monoids-glued-constants
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-25'
+  text: >-
+    The constant profile of any set of tuples has empty support and is fixed by every arrow. So a
+    transversal of an actual equivalence relation, chosen in the metatheory, is the extension of an entity;
+    and the constant profile of a well-order of a type's domain, chosen in the metatheory, well-orders the
+    type at every arrow, every property's extension at an arrow being a subset of that domain. Transversal
+    Choice is closed and pure, so it holds necessarily.
+
+- id: intensional-choice
+  holds: [necessary-intensional-choice-r, necessary-modalized-relational-choice-r]
+  choice: uses
+  writeup: supported-product-free-monoids-glued-constants
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-25'
+  text: >-
+    If $\Box\exists x\, .\,Fx$ and $F$ has support $S$, choose for each arrow $h$ an element $g(h)\in F_h$
+    depending only on the restriction of its $L^I$-coordinate to $S$ (and on its other coordinates); then
+    $G_h:=\{g(h)\}$ has support $S$, $G\le F$, and $G$ has exactly one instance at every arrow. Likewise, for
+    $R$ necessarily serial with support $S$, a functional graph chosen inside each $R_h$. Both principles
+    are closed and pure, so they hold necessarily.
+
+- id: arithmetic-necessitism
+  holds: [arithmetic-necessitism]
+  choice: free
+  writeup: supported-product-free-monoids-glued-constants
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-25'
+  text: >-
+    $\mathbb N_\sigma$ and the numerals are closed pure terms, so their profiles are constant and fixed by
+    every arrow: $\mathbb N_\sigma$ is rigid with necessarily distinct instances.
+
+- id: boolean-completeness-t
+  fails: [necessary-boolean-completeness-t, boolean-completeness-t]
+  choice: uses
+  writeup: supported-product-free-monoids-glued-constants
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-25'
+  text: >-
+    Fix $C\subseteq I$ of size $\kappa$, a set $P$ of $\kappa^+$ maps $x:C\to L$, and distinct coordinates
+    $j_x\notin C$, and let $p_x$ be the arrows whose $L^I$-coordinate $n$ has $n|_C\ne x$ or $n_{j_x}=\varepsilon$,
+    with support $C\cup\{j_x\}$. A greatest lower bound of the constant property $\{p_x:x\in P\}$ would be
+    the union of the supported subsets of $\bigcap_xp_x$, the arrows with $m|_C\notin P$ or with $m|_C=x\in P$
+    and $m_{j_x}=\varepsilon$, which depends on every coordinate $j_x$, so has no support.
+
+- id: rigid-rigidity
+  holds: [necessary-rigid-rigidity-r]
+  choice: uses
+  writeup: supported-product-free-monoids-glued-constants
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-25'
+  text: >-
+    Every rigid $Y$ is, for every arrow $k$, the transport along $k$ of a rigid relation: with $Y$ the exact
+    image of $D$ with support $S$, the members of $D$ lifted along $k$, by stripping $k$'s suffixes on $S$
+    (and, with moving individuals, peeling $k$'s surjection off and replacing each individual by a preimage
+    chosen by a fixed section of it), have a supported exact image. So the constant property of being rigid,
+    which is persistent, is weakly inextensible: a test necessarily holding of every rigid $X$ holds at $k$
+    of every $k\cdot X$, that is, of every rigid relation. The principle is closed and pure.

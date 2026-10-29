@@ -18,31 +18,20 @@ references:
   role: background
   locator: §3.5, pp. 58–61
   note: Full action models; the factors are full S5 models with countably many worlds.
-definition: >-
-  As ultraproduct-finite-full-s5, with factors $M_n$ the full S5 models with the worlds $\mathbb N$ and
-  $n$ individuals: the full action model on the category with objects $\mathbb N$ and exactly one arrow
-  between any two, the same $n$ individuals at every object, fixed by every arrow. $M:=\prod_nM_n/U$
-  for a nonprincipal ultrafilter $U$ on the positive integers, a Henkin model of C in which a sentence
-  is true iff it is true in $U$-many $M_n$.
+group: s5-ultraproducts
+settings:
+  factors: countable-worlds
 
-
-  Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the
-  top element of its type in every factor, hence in $M$.
-meets:
-  sigma-top: This is the interpretation the definition fixes.
+# 29 October 2026: the definition, the transfer argument and the type-e Infinity arguments are the
+# s5-ultraproducts group's.
 arguments:
-- holds: [necessary-functional-choice-r, necessary-intensional-choice-r, necessary-barcan-r,
-    necessary-distinctness-necessary-r, necessary-atomicity-r, necessary-actuality,
-    necessary-rigid-comprehension-r, necessary-strong-atomicity-r, necessary-well-ordering-r,
-    no-pure-contingency-r, axiom-of-infinity-t]
-  choice: uses
+- holds: [axiom-of-infinity-t]
+  choice: free
   writeup: ultraproduct-finite-full-s5
   text: >-
-    As for ultraproduct-finite-full-s5, each instance holds in every factor: the factors are full, with
-    constant domains, crisp identity, atomic algebras whose atoms are the worlds, and automorphisms
-    taking any world to any other. In each factor there are infinitely many propositions, and the
-    finite cardinalities, the domains being full, are the standard ones, so the Axiom of Infinity (type
-    $t$) is true in each factor, hence in $M$.
+    In each factor there are infinitely many propositions, and the finite cardinalities, the domains
+    being full, are the standard ones, so the Axiom of Infinity (type $t$) is true in each factor, hence in
+    $M$.
 - holds: [forcing-possibilism]
   choice: uses
   writeup: ultraproduct-finite-full-s5
@@ -53,18 +42,7 @@ arguments:
     Dedekind-finite or strictly smaller than the propositions is finite, with $k$ atoms say, and is
     isomorphic to the propositions below any proposition true at exactly $k$ worlds, which is not $\top$.
     So each instance holds in every factor, hence in $M$.
-- holds: [infinity-e]
-  choice: free
-  writeup: ultraproduct-finite-full-s5
-  text: >-
-    The instance asking for $k$ distinct individuals holds in $M_n$ for $n\ge k$.
-- fails: [possible-infinity-e]
-  choice: free
-  writeup: ultraproduct-finite-full-s5
-  text: >-
-    In $M_n$, at every world, the $n$-th finite cardinality counts the universal property of
-    individuals, so $\Box\exists Z\, .\,\operatorname{FiniteCardinality}_e(Z)\land Z(\lambda u\, .\,\top)$
-    is true in every factor, hence in $M$.
+
 notes: >-
   The Axiom of Infinity at $t$ with the Infinity Schema at $e$ does not imply the Axiom of Infinity at
   $e$, nor its possibility, even with Forcing Possibilism, □Functional Choice, C5 and BF.

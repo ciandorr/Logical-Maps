@@ -22,21 +22,14 @@ references:
   role: background
   locator: Appendix A.3
   note: Gluing the interpretations of Σ at fresh arrows, as in the glued free-monoid models.
-meets:
-  no-actuality-anywhere: >-
-    One object, so Actuality, a closed pure sentence, holds at every world iff at the identity,
-    where it fails (recorded in this model’s verdicts).
-  one-individual: $D_e=\{*\}$.
-definition: >-
-  Fix an infinite cardinal $\kappa\ge|\Sigma|$, a set $I$ of size $\kappa^+$, and the free monoid $L$ of
-  finite words on an alphabet of size $\kappa$. The arrows are $M:=L^I$ with coordinatewise concatenation,
-  one object, and evaluation point the identity $1$. There is one individual. At a relational type
-  $\sigma_1\cdots\sigma_nt$ the domain consists of the profiles $F:M\to\mathcal P(D_{\sigma_1}\times\cdots\times
-  D_{\sigma_n})$ with a support: a set $S\subseteq I$ of size at most $\kappa$ such that $F_m=F_{m'}$ whenever
-  $m$ and $m'$ agree on $S$. Transport is $(h\cdot F)_k:=F_{kh}$, with the usual action-model semantics.
-  Σ: individual constants denote the individual; each relational constant $c$ denotes the gluing, at a
-  coordinate outside every support involved, of chosen interpretations $J_\alpha(c)$, one for each
-  $\mathcal L(\Sigma)$-sentence satisfiable over the pure model (see the write-up, §7).
+group: supported-products
+settings:
+  individuals: one
+
+# 29 October 2026: its arguments for Atomlessness, □Countable Boolean Completeness, the failures of
+# Vicinity, Weakly Inextensible Comprehension, Rigid Power and Boolean Completeness at t, □Tame Rigidity,
+# the choice principles and □Rigid Rigidity are the supported-products group's; Arithmetic Necessitism is
+# the group's, and Second-Order Analytic Necessitism stays here.
 arguments:
 - holds: [logical-necessity-r]
   choice: uses
@@ -60,60 +53,6 @@ arguments:
   text: >-
     For a serial $U$, choose a value for each input and take the constant profile of the resulting graph,
     which has empty support.
-- holds: [atomlessness]
-  choice: free
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    With $q_j:=\{m:m_j=\varepsilon\}$ for $j$ outside the support of $p\ne\bot$, $\bot\ne p\land q_j<p$.
-- holds: [necessary-countable-boolean-completeness-r]
-  choice: free
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    The finite cardinalities at each type are exactly the standard numerals, so a countable property has
-    countably many actual instances; their pointwise union is supported and is their least upper bound.
-    The schema is closed and pure, so it holds necessarily.
-- fails: [vicinity]
-  choice: free
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    $\Diamond q_j=q_j$, the free monoid having no inverses. For a truth $p$ with support $S$ and $j\notin S$,
-    the arrow with one letter at $j$ satisfies $p$ and not $\Diamond q_j$, though $q_j$ is true.
-- fails: [weakly-inextensible-comprehension-r]
-  choice: free
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    At $tt$, for the constant property $\{q_i:i\in I\}$: a coextensive $Y$ with support $S$, $j\notin S$,
-    keeps $q_j$ at the arrow $h$ with one letter at $j$, while $Z$, all propositions where $m_j=\varepsilon$
-    and all but $q_j$ elsewhere, necessarily holds of each actual instance and omits $q_j$ at $h$.
-- fails: [rigid-power-r]
-  choice: free
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    At type $(tt)t$. Weakly rigid relations are exactly the exact images $m\mapsto m\cdot E$ of their actual
-    extensions; a family $e_{z,j}$ of properties of propositions, shifted in $z$ by the $j$th coordinate and
-    marked by the squares, has a supported exact image $F$, but the rigid relation $X\le a\cdot F$ formed
-    from the $y_j$ lifts to no rigid $Y\le F$, so the power property of $F$ is not weakly rigid.
-- holds: [necessary-transversal-choice-r, modal-well-ordering-r]
-  choice: uses
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-25'
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    The constant profile of any set of tuples has empty support and is fixed by every arrow. So a
-    transversal of an actual equivalence relation, chosen in the metatheory, is the extension of an
-    entity; and the constant profile of a well-order of a type's domain, chosen in the metatheory,
-    well-orders the type at every arrow, every property's extension at an arrow being a subset of that
-    domain. Transversal Choice is closed and pure, so it holds necessarily.
-- holds: [necessary-intensional-choice-r, necessary-modalized-relational-choice-r]
-  choice: uses
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-25'
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    If $\Box\exists x\, .\,Fx$ and $F$ has support $S$, choose for each restriction $m|_S$ an element
-    $g(m)\in F_m$; then $G_m:=\{g(m)\}$ has support $S$, $G\le F$, and $G$ has exactly one instance at
-    every arrow. Likewise, for $R$ necessarily serial with support $S$, a functional graph chosen inside
-    $R_m$ for each $m|_S$. Both principles are closed and pure, so they hold necessarily.
 - holds: [necessary-distinctness-preserving-collapse]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
@@ -123,15 +62,6 @@ arguments:
     For a true $p$ with support $S$, let $q_S:=\{m:m_i=\varepsilon\text{ for all }i\in S\}$. It is true,
     $\Diamond q_S=q_S$ since the free monoid has no inverses, and every member of $q_S$ agrees with $1$ on
     $S$, so lies in $p$. So $\Box(\Diamond q_S\to p)$, and $p$ is ND-necessary.
-- holds: [necessary-tame-rigidity-r]
-  choice: free
-  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
-    prompted by Cian Dorr
-  date: '2026-10-25'
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    By the exact-image lemma, a weakly rigid relation is the profile $m\mapsto m\cdot E$ of its actual
-    extension $E$, and such a relation, with all its transports, is rigid. The schema is closed and pure.
 - holds: [second-order-analytic-necessitism, arithmetic-necessitism]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
@@ -147,28 +77,7 @@ arguments:
     $x\subseteq\mathbb Z$, are transported by integer shifts of $x$, injectively; the exact images of a
     real structure on continuum many of them, and of all relations among them, are supported by $\{o\}$
     and are rigid, and every transport is an isomorphic real structure. See the write-up.
-- fails: [necessary-boolean-completeness-t, boolean-completeness-t]
-  choice: uses
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-25'
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    Fix $C\subseteq I$ of size $\kappa$, a set $P$ of $\kappa^+$ maps $x:C\to L$, and distinct coordinates
-    $j_x\notin C$, and let $p_x:=\{n:n|_C\ne x\}\cup\{n:n_{j_x}=\varepsilon\}$, with support $C\cup\{j_x\}$.
-    A greatest lower bound of the constant property $\{p_x:x\in P\}$ would be the union of the supported
-    subsets of $\bigcap_xp_x$, which is $\{m:m|_C\notin P\}\cup\{m:m|_C=x\in P,\ m_{j_x}=\varepsilon\}$ and
-    depends on every coordinate $j_x$, so has no support.
-- holds: [necessary-rigid-rigidity-r]
-  choice: free
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-25'
-  writeup: supported-product-free-monoids-glued-constants
-  text: >-
-    Every rigid $Y$ is, for every arrow $k$, the transport along $k$ of a rigid relation: with $Y$ the exact
-    image of $D$ with support $S$, the members of $D$ lifted by stripping $k$ on $S$ have a supported exact
-    image. So the constant property of being rigid, which is persistent, is weakly inextensible: a test
-    necessarily holding of every rigid $X$ holds at $k$ of every $k\cdot X$, that is, of every rigid
-    relation. The principle is closed and pure.
+
 notes: >-
   Separates Logical Necessity, with □BF and □Relational Choice, from Actuality, Vicinity and the
   comprehension principles, and Countable Boolean Completeness from Boolean Completeness. Every verdict

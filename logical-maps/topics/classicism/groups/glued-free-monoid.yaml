@@ -1,5 +1,5 @@
 id: glued-free-monoid
-name: 'Full action models over the free monoid, with glued constants'
+name: 'Full action models with constants glued at free-monoid sites'
 references:
 - paper: bacon-2020
   role: origin
@@ -13,6 +13,12 @@ references:
 # action models with Logical Necessity. The members differ in their individuals. What they share
 # as full action models (the group's `meets`, as in full-action-models) brings the topic's general
 # arguments; texts are the members'.
+#
+# Revised 29 October 2026 (Claude Opus 5.5, prompted by Cian Dorr): full-double-retraction-glued-constants
+# and full-free-product-glued-constants, whose categories adjoin a free monoid of sites to other arrows
+# and glue Σ at the sites in the same way, joined as members; the group's name now says sites, and its
+# conditions that are particular to the free monoid (countably-many-arrows, unretracted-arrow,
+# infinitely-many-propositions) moved, their texts unchanged, to its two original members.
 
 definition: >-
   {{construction}}
@@ -25,12 +31,6 @@ parameters:
     text: The individuals and the gluing, as the member's write-up gives them.
 
 meets:
-  countably-many-arrows: >-
-    The arrows are the finite sequences of natural numbers.
-  unretracted-arrow: >-
-    A non-identity element of the free monoid has no left inverse, so no arrow retracts it.
-  infinitely-many-propositions: >-
-    The arrows are infinitely many and the model is full, so every set of them is a proposition.
   codomain-intensions: >-
     The domains are full at every object.
   full-model: >-

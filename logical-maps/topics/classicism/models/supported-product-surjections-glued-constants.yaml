@@ -25,19 +25,14 @@ references:
   role: background
   locator: Appendix A.3
   note: Gluing the interpretations of Σ at fresh arrows, as in the glued free-monoid models.
-meets:
-  no-actuality-anywhere: >-
-    One object, so Actuality, a closed pure sentence, holds at every world iff at the identity,
-    where it fails (recorded in this model’s verdicts).
-definition: >-
-  As supported-product-free-monoids-glued-constants, with a second coordinate on the arrows. Fix an infinite
-  cardinal $\kappa\ge\max(|\Sigma|,2^{\aleph_0})$, sets $I$ and $U$ of size $\kappa^+$, and the free monoid
-  $L$ of finite words on an alphabet of size $\kappa$. The arrows are the pairs $(m,s)$ with $m\in L^I$ and
-  $s$ a surjection $U\to U$, composed by $(m,s)(m',s'):=(mm',s\circ s')$, one object, and evaluation point
-  $1:=(\varepsilon,\mathrm{id})$. The individuals are the members of $U$, with $(m,s)\cdot a:=s(a)$. At a
-  relational type the domain consists of the profiles $F$ on arrows that depend on at most $\kappa$
-  coordinates of $m$ and arbitrarily on $s$; transport is $(h\cdot F)_k:=F_{kh}$. Σ: distinct individuals
-  $a_c$ for the individual constants; the relational constants are glued (see the write-up).
+group: supported-products
+settings:
+  individuals: surjections
+
+# 29 October 2026: its arguments "as in the base model" (Atomlessness, □Countable Boolean Completeness,
+# the failures of Vicinity, Weakly Inextensible Comprehension, Rigid Power and Boolean Completeness at t,
+# □Tame Rigidity, the choice principles, Arithmetic Necessitism and □Rigid Rigidity) are the
+# supported-products group's.
 arguments:
 - holds: [logical-necessity-r]
   choice: uses
@@ -49,17 +44,6 @@ arguments:
     at a fresh coordinate $j$ as in the base model, give an arrow $h_\alpha$ at which every constant
     takes its $J_\alpha$-value at once. So a $\Sigma$-sentence is possible iff it is true under some
     interpretation, which gives Logical Necessity.
-- holds: [atomlessness]
-  choice: free
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    As in the base model, with $q_j:=\{(m,s):m_j=\varepsilon\}$ for $j$ outside the support of $p\ne\bot$.
-- holds: [necessary-countable-boolean-completeness-r]
-  choice: free
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    As in the base model: the finite cardinalities are the standard numerals, and the pointwise union of
-    countably many profiles is supported by the union of their supports.
 - holds: [axiom-of-infinity-e]
   choice: free
   writeup: supported-product-surjections-glued-constants
@@ -67,51 +51,6 @@ arguments:
     The finite cardinalities are the standard numerals, and each holds exactly of the properties with that
     many actual instances. The universal property of individuals has $\kappa^+$ of them, so it has no finite
     cardinality. The axiom is closed and pure, so it holds necessarily.
-- fails: [vicinity]
-  choice: free
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    As in the base model, with the arrow that has one letter at a coordinate $j$ outside the support of
-    a truth $p$ and surjection $\mathrm{id}$: it satisfies $p$ but not $\Diamond q_j=q_j$.
-- fails: [weakly-inextensible-comprehension-r]
-  choice: free
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    As in the base model, at $tt$, for the constant property $\{q_i:i\in I\}$; the arrows used have surjection
-    $\mathrm{id}$, and the $q_i$ ignore the surjection.
-- fails: [rigid-power-r]
-  choice: free
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    At type $(tt)t$, by the base model's shifted family $e_{z,j}$, which ignores the surjection, with the
-    exact-image lemma as adapted in the write-up.
-- holds: [necessary-tame-rigidity-r]
-  choice: free
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    By the exact-image lemma, which survives once the auxiliary profiles $B_T(E)$ are taken with the
-    surjection fixed: a weakly rigid relation is the profile $h\mapsto h\cdot E$ of its actual extension,
-    and such a relation, with all its transports, is rigid.
-- holds: [necessary-transversal-choice-r, modal-well-ordering-r]
-  choice: uses
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    As in the base model: constant profiles of a transversal, or of a well-order of a type's domain,
-    chosen in the metatheory, are fixed by every arrow, so a formula about them has the same truth value at
-    every arrow.
-- holds: [necessary-intensional-choice-r, necessary-modalized-relational-choice-r]
-  choice: uses
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    As in the base model: if $\Box\exists x\, .\,Fx$, choose $g(m,s)\in F_{(m,s)}$ depending only on $s$ and
-    $m$ restricted to the support of $F$, and take $G_{(m,s)}:=\{g(m,s)\}$; transport being onto, $G$ is
-    necessarily uniquely instantiated. Likewise a functional graph inside $R_{(m,s)}$.
-- holds: [arithmetic-necessitism]
-  choice: free
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    $\mathbb N_\sigma$ and the numerals are closed pure terms, so their profiles are constant and fixed by
-    every arrow: $\mathbb N_\sigma$ is rigid with necessarily distinct instances.
 - fails: [analytic-necessitism]
   choice: free
   writeup: supported-product-surjections-glued-constants
@@ -121,20 +60,6 @@ arguments:
     instances $a,b$ of its carrier are identified at the arrow $(\varepsilon,s)$ for a surjection $s$ with
     $s(a)=s(b)$, so they are not necessarily distinct. At every other type both principles hold, by the
     base model's arguments (see the write-up).
-- fails: [boolean-completeness-t]
-  choice: uses
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    As in the base model: the propositions $p_x$ there ignore the surjection, and the union of the supported
-    subsets of their intersection has no support.
-- holds: [necessary-rigid-rigidity-r]
-  choice: uses
-  writeup: supported-product-surjections-glued-constants
-  text: >-
-    The base model's lifting lemma survives: a rigid relation is lifted along $(k_L,k_s)$ by stripping
-    $k_L$'s suffixes on its support, peeling $k_s$ off the surjection coordinate, and replacing each individual
-    in its tuples by a $k_s$-preimage chosen by a fixed section of $k_s$. So the constant property of being
-    rigid is weakly rigid.
 - holds: [necessary-two-hat-implies-nd-necessity, necessary-five-implies-nd-necessity, necessary-five-implies-two-hat-necessity]
   choice: free
   writeup: supported-product-surjections-glued-constants

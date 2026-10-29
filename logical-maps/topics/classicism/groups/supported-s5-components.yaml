@@ -1,0 +1,55 @@
+id: supported-s5-components
+name: 'Supported models over an S5 component'
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61; Appendix D, pp. 73–74; Appendix E, Definition E.2, pp. 80–83
+  note: Action models; the unrestricted root is attached as in the coalesced sums.
+
+# Action models in which the domains are cut down by finite support under a group that acts on the
+# model without being part of its category: the symmetries change no accessibility. Formed on 29 October
+# 2026 by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, from Cian Dorr's reformulation as an
+# action model of GPT-6 Astra's finite-support Boolean-valued construction (prompted by Daniel Kodsi,
+# note of 25 October 2026, item 20 of Kodsi's pull request #18). The same device, a group acting on the
+# individuals but not in the category, is used by absorbing-entrance-swappable-pairs; a generalization
+# to categories the group acts on without moving objects would bring it in.
+
+definition: >-
+  Fix a set $W$ of worlds, a set $D$ of individuals, a group $G$ acting on $W$ and on $D$, and a set $X$
+  of support points on which $G$ acts. {{component}} The component is the action model on the category
+  with object set $W$ and exactly one arrow between any two objects, every arrow acting on $D$ as the
+  identity. Transport between its objects is then trivial, so an entity of relational type
+  $\bar\sigma t$ there is a relation $F\subseteq D_{\bar\sigma}\times W$, giving its extension at each
+  world, and the same entities are available at every world. $G$ acts on these relations by $g\cdot
+  F:=\{(g\bar x,gw):(\bar x,w)\in F\}$, its action on the argument entities being defined in the same way
+  by recursion on their types. $F$ is supported by a finite $P\subseteq X$ if $g\cdot F=F$ for every $g$
+  fixing $P$ pointwise. The component's domains hold the supported relations satisfying the member's
+  further restriction, if any. Identity is genuine identity, transports being bijective. {{root}} Every
+  constant of Σ is relational and denotes the top element of its type.
+
+parameters:
+  component:
+    text: The worlds, individuals, group, support points and any further restriction on the component's
+      domains, as the member gives them.
+  root:
+    text: Whether an unrestricted root is attached in front of the component.
+    values:
+      none:
+        text: 'The evaluation point is a world of the component.'
+        label: no root
+        brief: evaluation at a world of the component
+      free:
+        text: >-
+          A root object $r$ is added, with one arrow to each world of the component and none back. A root
+          entity of relational type is a pair $(R,a)$ of an arbitrary set $R$ of tuples of root entities,
+          its extension at $r$, and a component entity $a$, its transport along every arrow out of $r$;
+          the root's individuals are those of $D$, each arrow acting on them as the identity. So the
+          propositions at $r$ are the pairs of a truth value at $r$ and a component proposition. The
+          evaluation point is $r$.
+        label: free root
+        brief: an unrestricted root sees every world of the component
+
+meets:
+  sigma-top: This is the interpretation the definition fixes.
+
+arguments: []

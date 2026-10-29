@@ -1,0 +1,102 @@
+id: supported-boolean-complete-predecessor
+name: 'Supported model over the ultrafilters of a complete homogeneous algebra, with a free root'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026 (as a Boolean-valued model);
+    reformulated as an action model by Cian Dorr, 29 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Observer separation with propositional completeness and
+  divergent possibilities, research note of 25 October 2026, §§1–3 (unpaginated), in Daniel Kodsi's pull
+  request #18 (complete-boolean-root.md in the integration register); OpenAI Codex (GPT-6), prompted by
+  Daniel Kodsi, the record supported-boolean-complete-predecessor in his pull request #21 of 28 October 2026.
+- Cian Dorr, reformulation as an action model, 29 October 2026, in conversation with Claude Opus 5.5
+  (Anthropic).
+source_names:
+- Astra via Kodsi 25 Oct
+- Dorr 29 Oct
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61; Appendix E, Definition E.2, pp. 80–83
+  note: Action models, and the unrestricted root of the coalesced sums.
+group: supported-s5-components
+settings:
+  component: >-
+    Here $B$ is the regular open algebra of Cantor space, complete, atomless and homogeneous (every
+    nonzero interval is isomorphic to $B$). The worlds $W$ are the ultrafilters of $B$, $D$ is a single
+    individual, $G=\operatorname{Aut}(B)$ acting on the ultrafilters, and the support points are the
+    elements of $B$. A relation is admitted only if, for each tuple $\bar x$, the set of worlds at which it
+    holds of $\bar x$ is $\hat b:=\{U:b\in U\}$ for some $b\in B$; so the component's propositions are the
+    sets $\hat b$, a copy of $B$.
+  root: free
+meets:
+  one-individual: There is a single individual.
+arguments:
+- id: boolean-completeness-t
+  holds: [necessary-boolean-completeness-t]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    For finite $P\subseteq B$, the elements of $B$ fixed by the automorphisms fixing $P$ pointwise are the
+    joins of the cells of $\langle P\rangle$, and the join of a set invariant under those automorphisms is
+    attained by at most two members per cell, by homogeneity (write-up, Lemmas 1–2). So at a world of the
+    component a family of propositions in the domain, being supported, has as union a finite union, which
+    is a proposition and its least upper bound. At $r$ the least upper bound of root propositions
+    $(\varepsilon_i,\hat b_i)$ is $(\bigvee\varepsilon_i,\widehat{\bigvee b_i})$, the join taken in the complete
+    algebra $B$.
+- id: barcan
+  holds: [necessary-barcan-r]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type. In the component the same entities are available at every world, transport being
+    trivial. At $r$, every component entity is the transport of a root entity, the one with empty current
+    extension; so what holds necessarily of every root entity holds at every world of every entity there.
+- id: relational-choice
+  holds: [relational-choice-r]
+  choice: uses
+  writeup: supported-boolean-complete-predecessor
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    For a serial $U$ at $r$, choose in the metatheory a functional subrelation of its current extension,
+    and pair it with the empty component entity: the result is admitted, functional, and below $U$ at $r$.
+- id: actuality
+  holds: [actuality]
+  fails: [atomicity-t]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $r$ the proposition $(1,\varnothing)$, true at $r$ alone, is true and below every truth. No atom
+    lies below a nonzero $(0,\hat b)$, since $B$ is atomless.
+- id: no-actuality-in-component
+  fails: [necessary-actuality]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At a world $U$ of the component, an actual-world proposition would be some $\hat b$ with $b\in U$ and
+    $\hat b\subseteq\hat c$ for every $c\in U$, so $b$ would be an atom of $B$. $B$ is atomless, so Actuality
+    fails at every world of the component, which $r$ sees.
+notes: >-
+  Separates □Boolean Completeness (type $t$), □BF, Relational Choice and Actuality from □Actuality: the
+  component is a model of C5 in which Actuality is necessarily false. The completeness of $B$ is used only at
+  the root, whose arbitrary current extensions make every family of component propositions the component part
+  of a root family; with the countable atomless algebra the root would fail Boolean Completeness (type $t$).

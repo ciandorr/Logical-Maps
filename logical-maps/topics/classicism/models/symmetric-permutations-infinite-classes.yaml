@@ -1,0 +1,83 @@
+id: symmetric-permutations-infinite-classes
+name: 'Symmetric ideally-full model: permutations, with the automorphisms of infinitely many infinite classes as symmetries'
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026 (the construction, a variant
+    of symmetric-infinite-classes with permutations as arrows, and the verification)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026, on Cian Dorr's question whether C5
+  implies Transversal; the symmetry group and the argument against Transversal are those of
+  symmetric-infinite-classes (Cian Dorr, 27 September 2026).
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, §3 (symmetric
+  ideally-full models).
+source_names:
+- Opus 29 Oct
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: §3
+  note: The framework of symmetric ideally-full models.
+group: symmetric-ideally-full
+settings:
+  construction: >-
+    A symmetric ideally-full intensional action model over one object, the set of natural numbers, equipped
+    with an equivalence relation that has infinitely many classes, each infinite. Its arrows are all the
+    permutations of that set, and its symmetry group is the automorphism group of the equivalence relation:
+    the permutations that map classes onto classes. The object carries the ideal of finite sets. The
+    evaluation point is the identity arrow.
+  sigma: top
+meets:
+  one-object-action-model: It has one object.
+  finitely-pinned-domains: >-
+    The domains hold every symmetric intension pinned down by a finite set, and every entity in them is one.
+  finite-pinning: The object carries the ideal of finite sets.
+  infinite-base: The base is $\mathbb N$.
+  surjective-arrows: The arrows are permutations.
+  transposable: >-
+    For finite $N$, the property of not belonging to $N$ (at an arrow $h$, the points outside $h[N]$) is
+    symmetric and pinned down by $N$, with an infinite extension; a member $y$ is moved by its transposition
+    with another point of its class outside $N$, an automorphism of the equivalence relation fixing $N$
+    pointwise and the property.
+arguments:
+- id: c5
+  holds: [necessary-distinctness-necessary-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Every arrow is invertible, so transport along any arrow is injective at every type, at every world:
+    distinct entities stay distinct along every arrow, and ND holds at every world, at every type.
+- id: transversal
+  when: {individuals: base}
+  fails: [transversal-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At type $e$. Write $G$ for the symmetry group and $\sim$ for the equivalence relation; the constant
+    intension with value $\sim$ is symmetric and pinned down by $\varnothing$, so for an individual $a$ the
+    property $\lambda x\, .\,x\sim a$, pinned down by $\{a\}$, has as extension the class of $a$. Suppose $F$,
+    pinned down by a finite $S$, picked exactly one property from each coextension class, and let $Y$ be the
+    one it picks with extension a class $C$ disjoint from $S$. A $g\in G$ fixing $S$ pointwise fixes $F$ (by
+    pinning and symmetry), so $g\cdot Y$ is picked too; if $g$ also maps $C$ onto itself, $g\cdot Y$ has
+    extension $g[C]=C$, so $g\cdot Y=Y$ by uniqueness, that is, $Y_{k\circ g}=Y_k$ for every arrow $k$. Let $Y$
+    be pinned down by a finite $T$. The permutations of each class fixing $S$ pointwise are such $g$; with
+    the permutations fixing $T$ pointwise, which include transpositions across classes outside $T$, they
+    generate every finitary permutation of $\mathbb N\setminus S$, and with the permutations fixing $T$ these
+    generate all those fixing $S$ pointwise. So $Y$ is pinned down by $S$. Now take $g^{\prime}\in G$ fixing $S$
+    pointwise and exchanging $C$ with another class disjoint from $S$: $Y_{g^{\prime}}=Y_1$ by pinning, and
+    $Y_{g^{\prime}}=g^{\prime}[Y_1]$ by symmetry, so $C=g^{\prime}[C]$, which is false. So there is no such $F$.
+notes: >-
+  With all surjections as arrows this is symmetric-infinite-classes. Separates C5 from Transversal (and so from Transversal Choice and Actuality, which implies Transversal):
+  a symmetric ideally-full model with invertible arrows, so C5 holds, in which the symmetry group, the
+  automorphisms of an equivalence relation with infinitely many infinite classes, leaves no canonical
+  representative of a class, as in symmetric-infinite-classes. Transversal holds in ideally full models with
+  codomain intensions whatever the metatheory, the constant intension with value $E$ being a canonical
+  member of each coextension class; it is the symmetry that removes those representatives. Recorded with the
+  base as individuals; the argument against Transversal does not apply to the generated variant with one
+  individual.

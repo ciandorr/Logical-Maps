@@ -31,6 +31,11 @@ settings:
   individuals: singleton
   sigma: top
 meets:
+  finitely-pinned-domains: >-
+    Both objects carry the ideal of finite sets, and the domains hold every symmetric intension pinned
+    down by a finite set.
+  actual-world-isolated: >-
+    $\{1_A\}$ is in the domain and entails every truth, and the only other world, $i$, sees only itself.
   finite-pinning: Both objects carry the ideal of finite sets.
   symmetry-group-pinned: The symmetry group at $A$ is its identity alone, pinned down by $\varnothing$.
   actuality-contingent: The proposition true at $A$ only is the strongest truth; its transport along $i$ is
@@ -108,6 +113,20 @@ arguments:
     $r\lor p=\top\lor p=\bot$, its transport being $\top$ or $\bot$, but a contingent proposition of the
     tail does not, so BF at $t$ fails; $r\ne\bot$ while their transports agree; and $\neg r$ is an atom whose
     transport $\top$ is split at $B$, so no strong atom lies below it.
+- id: transfer
+  holds: [necessary-distinctness-preserving-collapse, necessary-weak-rigid-comprehension-r, possible-infinity-t]
+  fails: [necessary-atomicity-t, necessary-rigid-power-r, infinity-t, pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    The arrows out of $A$ are $1_A$ and $i$, with $m\circ i=i$ for every $m$, so $i$ sees only itself
+    and a closed sentence holds at $i$ iff at $1_B$; so a boxed sentence holds at $1_A$ iff it holds
+    there and at $1_B$, where the tail, as the notes say, has the verdicts of the qualitative-links
+    model with one individual: Truth implies ND-necessity and Weak Rigid Comprehension hold, Atomicity
+    at $t$ and Rigid Power fail, and there are infinitely many propositions. At $A$ there are exactly
+    four propositions, so Infinity at $t$ fails there, and the pure sentence saying so is true at $1_A$
+    and false at $1_B$, impossible at $i$.
 lean:
   model: Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model
   is_model: Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel

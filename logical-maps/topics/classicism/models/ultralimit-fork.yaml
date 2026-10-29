@@ -47,6 +47,9 @@ definition: 'An intensional action model with one individual. The objects are th
   point: the root. Interpretation of Σ, fixed for this record: every constant of Σ is relational, and
   each denotes the top element of its type.'
 meets:
+  finite-reachable-object: >-
+    The objects $u$ and $n$ carry one finite full type structure over one individual, and the root,
+    extensionally full with continuum many propositions, has a real number structure of propositions.
   sigma-top: This is the interpretation the definition fixes.
   one-individual: The definition fixes one individual, at every world.
   extensionally-full: At the root an element's extension at $o$ is unconstrained, so every set of tuples
@@ -159,6 +162,13 @@ arguments:
     $p$ is true: $\Box_{\ne}$ is the identity operator at every object, hence so are $\hat{\hat\Box}$
     and $\Box_5$, and every truth is 5-necessary everywhere.'
 - fails: [analytic-necessitism]
+  withdrawn:
+    date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, after a trawl subagent's report
+    reason: >-
+      The step from the equality of transports to membership in the carrier by inextensibility does not
+      follow: inextensibility bounds a rigid carrier from above, by the transports of its actual
+      instances, and puts nothing new into its actual extension.
   by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell
   date: '2026-10-23'
   choice: free

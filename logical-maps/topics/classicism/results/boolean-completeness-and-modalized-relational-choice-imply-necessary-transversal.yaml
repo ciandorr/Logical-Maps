@@ -1,0 +1,37 @@
+id: boolean-completeness-and-modalized-relational-choice-imply-necessary-transversal
+premises:
+- boolean-completeness-r
+- modalized-relational-choice-r
+conclusion: necessary-transversal-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026; presentation by Claude
+    Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Modal transversals from current Boolean completeness,
+  research note of 26 October 2026, §§1–4 (unpaginated), in Daniel Kodsi's pull request #18 of 26 October
+  2026 (branch classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+source_names:
+- Astra via Kodsi 26 Oct
+proof: >-
+  See the write-up. Put $\rho:=\sigma t$ and call $Y^{\rho t}$ separated if necessarily no two distinct
+  instances of $Y$ are coextensive. Modalized Relational Choice gives a necessarily functional $S$ that
+  picks an instance of every instantiated property of type $\rho$. Let $\Phi Y$ add to $Y$ the $S$-choice
+  from the properties coextensive with no instance of $Y$. The [[bourbaki-witt|Bourbaki–Witt lemma]],
+  for the partial order $\le$ on the separated properties and the graph of $\Phi$, gives a separated $m$
+  with $\Phi m=m$: Boolean Completeness supplies joins of chains, which are separated, and $\Phi$
+  preserves separation. As $\Phi m=m$ is an identity, necessarily no property is missed by $m$, so $m$
+  is necessarily a transversal.
+references: []
+notes: >-
+  The instance at $\sigma$ uses Boolean Completeness at $(\sigma t)t$ and Modalized Relational Choice at
+  $((\sigma t)t,\sigma t)$. The unboxed Transversal already followed, through Relational Choice and Boolean
+  Completeness ⇒ Actuality. With [[modalized-relational-choice-implies-necessary-modalized-relational-choice]],
+  Boolean Completeness and Modalized Relational Choice now give □Transversal Choice, □Well-Ordering and
+  Modal Well-Ordering.

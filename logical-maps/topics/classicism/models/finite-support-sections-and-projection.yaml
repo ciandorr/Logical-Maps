@@ -32,6 +32,14 @@ definition: An ideally full finitely pinned action model over a two-object categ
   $e_T\circ e_U=e_T$ and $\pi\circ e_T=\pi$. The evaluation point is the identity of $W_0$; every world
   reachable from it can return to it through $\pi$.
 meets:
+  extensionally-full: >-
+    At $W_0$ the identity is the only arrow into $W_0$, so an intension with any value at the identity
+    and $\varnothing$ at the sections is pinned down by $\varnothing$; at $W_1$ the identity is the only
+    arrow agreeing with the identity on a fibre of $\pi$, so the same holds with that fibre as pin.
+  infinitely-many-individuals: >-
+    The individuals at $W_0$ are the natural numbers.
+  infinitely-many-propositions: >-
+    The propositions $\{f_T:T(n)=0\}$ are pairwise distinct.
   full-continuum-everywhere: >-
     The domains contain every intension whose value depends only on the arrow's codomain, and there are
     infinitely many propositions at $W_0$ and at $W_1$. So the intensions of type $tt$ with value an
@@ -199,6 +207,13 @@ arguments:
     X_{f_{T^{\prime}}}$ and both contain $f_T(n)=f_{T^{\prime}}(n)$ or neither: $Xn$ is true at both or
     at neither, while $Z_n$ is true at $f_T$ and not at $f_{T^{\prime}}$.
 - fails: [analytic-necessitism]
+  withdrawn:
+    date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, after a trawl subagent's report
+    reason: >-
+      The step from the equality of transports to membership in the carrier by inextensibility does not
+      follow: inextensibility bounds a rigid carrier from above, by the transports of its actual
+      instances, and puts nothing new into its actual extension.
   by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell
   date: '2026-10-23'
   choice: free
@@ -220,6 +235,27 @@ arguments:
     has $\pi\cdot y=\pi\cdot x$; for $x\in X_f$ persistence gives $\pi\cdot y\in X_{\pi\circ f}$,
     inextensibility $y\in X_f$, and necessary distinctness $\pi\cdot y\ne\pi\cdot x$. So $X_f$ is
     empty, a contradiction, and Analytic Necessitism fails.
+- id: necessity-of-arithmetic
+  holds: [necessity-of-arithmetic]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Both objects are extensionally full with infinitely many individuals and propositions, so at each
+    the numbers at every type are the distinct numerals with standard sum and product, and an
+    arithmetical sentence holds at every world iff it is true.
+- id: boolean-completeness-t
+  fails: [boolean-completeness-t, forcing-possibilism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    The propositions at $W_0$ are $\{1_{W_0}\}$ or not together with a clopen set of sections. Let $a_m$
+    be the sections $f_T$ with $T$ zero below $m$ and $T(m)=1$; an upper bound of the $a_{2m}$ pinned
+    down by $\{0,\ldots,k-1\}$ contains every $f_T$ with $T$ zero below $k$, hence some $a_{2m+1}$,
+    whose removal leaves a smaller upper bound. And $\{1_{W_0}\}$ is the only atom, so no proposition
+    has exactly four below it, though $\bot$, $\{1_{W_0}\}$, its negation and $\top$ form a complete
+    four-element algebra.
 notes: Found on 27 September 2026 in answer to Cian Dorr's question whether Actuality implies Inextensible
   Comprehension, after the observation that Christopher Sun's witness $\lambda\bar z\, .\,\Diamond(w\land
   F\bar z)$ can fail only at worlds from which the actual world is reachable, and only through entities

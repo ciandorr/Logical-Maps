@@ -1,0 +1,103 @@
+id: full-boolean-valued-atom-and-cohen-real
+name: 'Full Boolean-valued model: one atom and the Cohen algebra, with infinitely many individuals'
+certificate:
+  source_id: misc
+  produced_by: Andrew Bacon (underlying Boolean-valued construction and analytical contingency); GPT-6 Astra (OpenAI),
+    prompted by Daniel Kodsi, 25 October 2026 (the Cohen algebra over L, with the additional premises)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- Andrew Bacon, Could the truths of mathematics have been different?, draft of 9 October 2025, pp. 22–23 and
+  note 55; online appendix §B.2, pp. 7–9 (PDF pp. 41–43).
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, C5 and Functional Choice do not entail Necessity of
+  Analysis, research note of 25 October 2026, §§2–7 (unpaginated), item 03 of the next-update batch in
+  Daniel Kodsi's pull request #18 of 26 October 2026 (branch classicism-integration-2026-10-26 of
+  github.com/dkodsi/Logical-Maps).
+source_names:
+- Mathematical Contingency
+- Astra via Kodsi 25 Oct
+references:
+- paper: bacon-mathematical-contingency
+  role: proof
+  locator: pp. 22–23, note 55; online appendix §B.2, pp. 7–9 (PDF pp. 41–43)
+  note: The full Boolean-valued construction, and the observation that a nonconstructible real makes an
+    analytical truth contingent.
+meets:
+  sigma-top: This is the interpretation the definition fixes.
+  infinitely-many-individuals: $D_e=\omega$.
+group: full-boolean-valued
+settings:
+  construction: >-
+    Bacon's full Boolean-valued construction of §B.2 with $A:=\operatorname{RO}(\operatorname{Add}(\omega,1))$,
+    the algebra adding one Cohen real. Set $B=\mathbf 2\times A$, $D_e=\omega$, $D_t=B$, and
+    $D_{\sigma\to\tau}=D_\tau^{D_\sigma}$ for every admitted function type. Use ordinary application and
+    abstraction, Boolean connectives, quantifiers given by meets and joins, and crisp equality. Evaluation
+    point: the atom $a=(1,0_A)$; a proposition is true iff its first coordinate is $1$.
+
+
+    Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the
+    top element of its type.
+arguments:
+- holds: [barcan-r]
+  choice: free
+  text: >-
+    As in full-boolean-valued-atom-and-atomless: $\Box p$ is $p=\top$, identity is crisp, and the full
+    function domains with complete meets and joins validate C, □BF and □ND.
+- holds: [functional-choice-r]
+  choice: uses
+  text: >-
+    At the atom, metatheoretic choice selects an output in each nonempty fibre of a serial relation's
+    first-coordinate extension, and the full function domains contain the resulting function.
+- fails: [atomicity-t]
+  choice: free
+  text: >-
+    $(0,1_A)$ is nonzero with no atom below it, $A$ being atomless.
+- holds: [necessary-intensional-choice-r, necessary-transversal-choice-r]
+  choice: uses
+  text: >-
+    As in full-boolean-valued-atom-and-atomless, whose arguments use only fullness, crisp identity and a
+    well-ordering of each domain: disjointify a necessarily instantiated property along a well-order, and
+    take least elements of classes.
+- holds: [axiom-of-infinity-e, axiom-of-infinity-t, arithmetic-necessitism]
+  choice: free
+  text: >-
+    $D_e=\omega$ and $D_t=B$ are infinite with crisp identity. The crisp characteristic function of the
+    standard numerals at a type is inductive, so the numerals are crisply the standard ones, rigid with
+    necessarily distinct instances, and the $n$th holds of a universal property with the value of "the
+    domain has exactly $n$ elements", $0_B$.
+- fails: [necessary-boolean-completeness-t, necessary-countable-boolean-completeness-r, analytic-necessitism]
+  choice: free
+  text: >-
+    The arguments of full-boolean-valued-atom-and-atomless for these verdicts use only that forcing with
+    $A$ adds a Cohen real and that $B$ has at least continuum many elements, both true here.
+- fails: [forcing-possibilism]
+  choice: free
+  text: >-
+    As in full-boolean-valued-atom-and-atomless: no proposition has exactly four propositions entailing
+    it, $A$ being atomless.
+- id: ch-non-contingent
+  holds: [non-contingency-of-ch]
+  choice: uses
+  writeup: full-boolean-valued-atom-and-cohen-real
+  text: >-
+    At every type. Write $\pi,\rho$ for the projections of $B$ onto its coordinates. As in the argument
+    ch-contingent of full-boolean-valued-atom-and-atomless, the $\pi$-coordinate of a box-free sentence
+    about real number structures is its truth in $V$ and its $\rho$-coordinate its value in $V^A$, real
+    number structures being unique up to isomorphism in each. Adding one Cohen real preserves cardinals
+    and the value of $2^{\aleph_0}$, there being $(2^{\aleph_0})^{\aleph_0}=2^{\aleph_0}$ nice names for
+    reals; so CH has the same truth value in $V$ and $V^A$. Hence whichever of $\forall\mathfrak R\,
+    .\,\operatorname{Real}_\sigma(\mathfrak R)\to\operatorname{CH}(\mathfrak R)$ and its counterpart with
+    $\neg\operatorname{CH}$ is true in $V$ has value $\top$, and its box is true.
+notes: >-
+  Recorded for the variant built in $L$, generated by the group: there the group's argument
+  necessity-of-analysis-constructible refutes Necessity of Analysis, since one Cohen real over $L$ is not
+  constructible, while CH holds, and so is non-contingent, in both coordinates. So C5, Functional Choice,
+  Intensional and Transversal Choice, both Axioms of Infinity and Non-contingency of CH do not give
+  Necessity of Analysis. Unlike full-boolean-valued-atom-and-atomless, whose algebra is chosen by cases on
+  CH so as to make CH contingent, the algebra here is fixed, and it leaves CH unchanged. Bacon already
+  reports that C5 alone does not give Necessity of Analysis (pp. 22–23, note 55); the contribution of
+  Astra's note is the stronger package, with CH non-contingent. In ZFC alone, whether Necessity of
+  Analysis holds here depends on whether one Cohen real preserves the analytical truths of the ground.

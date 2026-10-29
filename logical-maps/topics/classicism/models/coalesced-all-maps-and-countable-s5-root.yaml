@@ -1,0 +1,139 @@
+id: coalesced-all-maps-and-countable-s5-root
+name: 'Coalesced sum: free root over the all-maps model and countable full S5'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Forcing Possibilism, Choice and Infinity, research note
+  of 23 October 2026, §§1 and 4 (unpaginated), in Daniel Kodsi's submission of 24 October 2026 (branch
+  classicism-results-2026-10-24 of github.com/dkodsi/Logical-Maps), listed in his pull request #18 of 26
+  October 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix E, Definition E.2, pp. 80–83.
+source_names:
+- Astra via Kodsi 23 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix E, Definition E.2, pp. 80–83
+  note: The coalesced sum, here of two components.
+group: coalesced-sums
+settings:
+  root-arrows: distinguished
+  construction: >-
+    The components are $A$, the model of symmetry-constrained-full-all-maps (three individuals, all $27$
+    maps as arrows), and $B$, the model of full-infinite-s5 with $W=\mathbb N$ and a single individual,
+    each evaluated at its root. Coalesce them at a new root as in Definition E.2. The root's individuals
+    are the natural numbers, sent by the distinguished arrows into $A$ and $B$ by arbitrary fixed maps.
+    Evaluation point: the root. Interpretation of Σ, fixed for this record: every constant of Σ is
+    relational, and each denotes the top element of its type.
+  domains: fullest
+meets:
+  two-actual-components: >-
+    $A$ and $B$ are action models whose roots satisfy Actuality, and the root domains are the fullest.
+  free-root-component: The root domains are as full as compatibility allows.
+  sigma-top: This is the interpretation the construction fixes.
+arguments:
+- id: forcing-possibilism
+  holds: [forcing-possibilism]
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  choice: uses
+  text: >-
+    At every type. Every set of tuples of root entities is the root component of a root relation, so
+    internal completeness, injections and isomorphisms at the root agree with the external ones. A root
+    proposition is a truth value with a proposition of $A$ (of which there are $32$) and one of $B$ (a set
+    of worlds), so there are continuum many, and among them infinitely many atoms, those false at the
+    root, bottom in $A$, and a singleton in $B$. An infinite complete Boolean algebra has at least continuum
+    many elements (it has infinitely many pairwise disjoint nonzero elements, whose subfamilies have
+    distinct joins), so a complete Boolean algebra that is Dedekind finite, or has fewer elements than there
+    are root propositions, is finite. A finite one with $k$ atoms is isomorphic to the propositions below
+    the join of $k$ of those atoms, which is not $\top$.
+- id: intensional-choice
+  fails: [intensional-choice-r]
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  choice: free
+  text: >-
+    Intensional Choice fails at the root of $A$ (symmetry-constrained-full-all-maps, at type $t$, and also
+    at type $e$ by intensional-choice-collapse), for a necessarily instantiated $F_A$. Let $F$ be the root
+    property with universal root component, $F_A$ as its component in $A$ and the universal property as
+    its component in $B$: it is necessarily instantiated. A property entailing $F$ and necessarily uniquely
+    instantiated would have as its component in $A$ a property entailing $F_A$ and necessarily uniquely
+    instantiated there.
+- id: infinity
+  holds: [axiom-of-infinity-e]
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  choice: free
+  text: >-
+    There are infinitely many individuals at the root, and identity there is literal. Every set of root
+    entities is the root component of a root property, so the finite cardinalities at the root are the
+    standard ones, and none of them holds of the universal property of individuals. (The Axiom of
+    Infinity at type $t$ follows from Forcing Possibilism.)
+- id: component-transfer
+  holds: [necessary-atomicity-r, necessary-rigid-comprehension-r, necessary-five-implies-nd-necessity]
+  fails: [necessary-truth-implies-five-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    The worlds of the root are its identity and the worlds of $A$ and $B$, and a closed sentence holds
+    at a component world iff it holds there in the component; so a boxed principle holds at the root iff
+    the principle holds at the root and the boxed one in $A$ and $B$. Atomicity: the singletons of root
+    tuples, with zero components, are admitted, and a nonzero component lies above an atom of $A$ or of
+    $B$, both of which satisfy □Atomicity. Rigid Comprehension: give a root entity's root extension $S$
+    the transports into $A$ and $B$ of the haecceity disjunction of $S$, rigid there ($A$'s domains
+    contain the finite disjunctions of haecceities, $B$ is full); the result is rigid and coextensive
+    with it, and $A$ and $B$ satisfy □Rigid Comprehension. 5-necessity implies ND-necessity: at the root
+    the proposition true at the root alone is in the domain and seen from no component world, so every
+    truth is ND-necessary there; $A$ and $B$ satisfy the boxed principle. In $B$, an S5 model with more
+    than one world, $\Box_5$ is $\Box$, so not every truth is 5-necessary.
+- id: well-ordering
+  holds: [necessary-well-ordering-r]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At the root every set of tuples is a root extension, so a well-order of the root domain chosen in
+    the metatheory is the root extension of a relation, which well-orders the type there; $A$ and $B$
+    satisfy □Well-Ordering.
+- id: self-atomicity-t
+  fails: [self-atomicity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    Self-Atomicity at $t$ fails at the root of $A$, for a possible $p_A$. The root proposition false at
+    the root, equal to $p_A$ in $A$ and $\bot$ in $B$, is possible, and the propositions below it are of
+    the same form, with self-atomhood that of their $A$-component in $A$.
+- id: pure-b
+  fails: [pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    Distinctness-Necessity at $t$ fails at the root and holds at every world of $B$, an S5 model with
+    invertible arrows; so its negation is true at the root and not possible at $B$'s root.
+- id: analytic-necessitism
+  fails: [analytic-necessitism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $t$. There are continuum many root propositions and every set of root tuples is a root
+    extension, so there is a real number structure at the root. A rigid one necessarily a real number
+    structure would carry one in $A$, whose domains are finite.
+notes: >-
+  Recorded for the separation of Forcing Possibilism, even with both Axioms of Infinity, from Intensional
+  Choice; every other recorded model of Forcing Possibilism satisfies Intensional Choice. Forcing
+  Possibilism is not claimed to be necessary here: it fails at the root of $A$, whose 32 propositions
+  have only five atoms. Relational Choice and Actuality hold at the root by the group's arguments.

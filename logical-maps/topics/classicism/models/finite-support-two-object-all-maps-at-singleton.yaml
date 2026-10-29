@@ -31,6 +31,9 @@ definition: 'The model of finite-support-two-object-all-maps: two objects, $W_0=
   Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the
   top element of its type.'
 meets:
+  infinitely-many-propositions-everywhere: >-
+    At $W_1$ every set of the arrows $1_{W_1}$ and $c_n:0\mapsto n$ is pinned down by $\{0\}$; at $W_0$
+    the sets of arrows pinned down by a finite set are infinitely many.
   sigma-top: This is the interpretation the definition fixes.
   codomain-intensions: The model is ideally full at both objects, and an intension whose value at an
     arrow depends only on the arrow's codomain is pinned down by $\emptyset$.
@@ -106,6 +109,13 @@ arguments:
     $X_k:=\{(k\cdot y,\bar a):\bar a\in(Z_y)_k\}$, well defined by ND, and in the domain, which at $W_1$
     holds every intension (see full-at-singleton); and $Xy=Z_y$.
 - fails: [analytic-necessitism]
+  withdrawn:
+    date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, after a trawl subagent's report
+    reason: >-
+      The step from the equality of transports to membership in the carrier by inextensibility does not
+      follow: inextensibility bounds a rigid carrier from above, by the transports of its actual
+      instances, and puts nothing new into its actual extension.
   by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell
   date: '2026-10-23'
   choice: free
@@ -123,6 +133,49 @@ arguments:
     $x\in X_{c_1}$ persistence gives $k\cdot y\in X_{k\circ c_1}$, inextensibility $y\in X_{c_1}$,
     and necessary distinctness $k\cdot y\ne k\cdot x$. So $X_{c_1}$ is empty, a contradiction, and
     Analytic Necessitism fails.
+- id: transfer-boxed
+  holds: [necessary-five-implies-two-hat-necessity, necessary-rigid-power-r]
+  fails: [necessary-countable-boolean-completeness-r, necessary-truth-implies-two-hat-necessity, necessary-vicinity, necessary-weakly-inextensible-comprehension-r, necessary-weakly-rigid-power-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    All maps between the objects are arrows, so from $1_{W_1}$ and from $1_{W_0}$ both identities are
+    reachable, and a closed sentence holds at an arrow iff at its codomain's identity. So a boxed
+    sentence holds at $W_1$ iff at $W_0$, the evaluation point of finite-support-two-object-all-maps,
+    whose verdicts these are.
+- id: tame-rigidity
+  holds: [tame-rigidity-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    An arrow out of $W_1$ is fixed by its value at $0$, so every intension at $W_1$ is pinned down by
+    $\{0\}$ and in the domain. A weakly rigid $Y$ with extension $E$ is therefore the exact image
+    $h\mapsto h\cdot E$: weak persistence gives one inclusion, weak inextensibility tested against that
+    exact image the other; and exact images are rigid.
+- id: truth-implies-two-hat
+  holds: [truth-implies-two-hat-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Let $q:=\{1_{W_1}\}$, which transports along $c_n$ to $\{!\}$, $!$ the arrow back to $W_1$. At
+    $1_{W_0}$ the arrows injective on $\{0,1\}$ form a truth, impossible at $!$, from which one sees
+    only $!$ and constant maps; so $\neg\{!\}$ is ND-necessary there and $\Diamond_{\ne}q$ fails at
+    every $c_n$. So every truth $p$ at $W_1$ has $\Box(\Diamond_{\ne}q\to p)$ with $q$ true: it is two-
+    hat necessary.
+- id: forcing-possibilism
+  holds: [forcing-possibilism]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    The propositions at $W_1$ are all the sets of its arrows out, continuum many, and the model is
+    extensionally full there, so completeness, finiteness, size and isomorphism are the external
+    notions. A complete Boolean algebra that is Dedekind finite or smaller than the continuum is finite,
+    with $2^k$ elements, and isomorphic to the propositions below $\{c_0,\ldots,c_{k-1}\}$, which is not
+    $\top$.
 notes: 'Suggested by Cian Dorr on 16 October 2026 as a separation of Atomicity from □Atomicity, which no
   recorded model gave: Atomicity holds at every type at the singleton object, and fails at type t at the
   worlds into $W_0$. No Lean verification is claimed.'

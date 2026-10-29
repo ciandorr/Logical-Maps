@@ -1,0 +1,163 @@
+id: cofinite-entrance-idempotent
+name: 'Cofinite entrance to the full idempotent action'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Strong worlds do not control modal domains, research note
+  of 26 October 2026, §§2, 4–5 (unpaginated), in Daniel Kodsi's pull request #18 of 26 October 2026 (branch
+  classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+source_names:
+- Astra via Kodsi 26 Oct
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61; Appendix D, pp. 73–74
+  note: Full action models, here the target, with a restricted domain at the entrance.
+meets:
+  extensionally-full: >-
+    At $r$ the current extension of an entity is arbitrary, and $s$ is a full action model.
+  infinitely-many-propositions: >-
+    The propositions true at a single $h_n$ are pairwise distinct.
+  codomain-intensions: >-
+    An intension at $r$ with the same value $V$ at every $h_n$ and at $b$ is admitted, with
+    $d_n=d_\infty=(V,V)$, which $k$ fixes; $s$ is full.
+  sigma-top: Every constant of Σ is relational and denotes the top element of its type, which every arrow
+    fixes.
+  one-individual: There is a single individual at both objects.
+definition: >-
+  Two objects: the target $s$, whose arrows $s\to s$ are $1$ and an idempotent $k\ne1$, with the full
+  action-model domains over one individual; and the entrance $r$, with only its identity and arrows
+  $h_n:r\to s$ ($n\in\mathbb N$) and $b:r\to s$, where $k\circ h_n=b$ and $k\circ b=b$. An entity of
+  relational type at $r$ is an arbitrary current extension together with target entities $d_n$ (its
+  transports along the $h_n$) and $d_\infty$ (along $b$) such that $k\cdot d_n=k\cdot d_\infty=d_\infty$ and
+  $d_n=d_\infty$ for all but finitely many $n$. Evaluation point: $1_r$. Interpretation of Σ: every
+  constant of Σ is relational, and each denotes the top element of its type.
+arguments:
+- id: strong-atomicity
+  holds: [necessary-atomicity-r]
+  choice: free
+  writeup: cofinite-entrance-idempotent
+  text: >-
+    At $r$, at every relational type, the singletons of one current tuple and of one tuple $\bar a$ at an
+    arrow $h_n$ (with $d_n$ the target singleton at the coordinate $1$ and everything else $0$) are
+    admitted, and every nonzero entity contains one: a nonempty extension at $b$ is the extension at all
+    but finitely many $h_n$. Their transports are $0$ or target singletons at the coordinate $1$, which are
+    atoms that $k$ sends to $0$. So they are strong atoms. The full target is atomic at every type.
+- id: strong-atomicity-target
+  fails: [necessary-strong-atomicity-t]
+  choice: free
+  writeup: cofinite-entrance-idempotent
+  text: >-
+    At $s$ the proposition $\{k\}$ is an atom with $k\cdot\{k\}=\top$, which $\{1\}$ splits at $k$; so no
+    strong atom entails it, and Strong Atomicity at $t$ fails at $s$.
+- id: barcan
+  holds: [barcan-r]
+  choice: free
+  writeup: cofinite-entrance-idempotent
+  text: >-
+    At every type. Transport along each $h_n$ is onto: any target entity $d$ is the transport of an entity
+    with $d_n=d$ and every other component $k\cdot d$. So if every entity at $r$ necessarily has $F$, the
+    extension of $F$ at each $h_n$ is everything; and at $b$ it is the extension at an $h_n$ outside $F$'s
+    finitely many exceptions.
+- id: boolean-completeness-t
+  fails: [boolean-completeness-t, countable-boolean-completeness-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $t$. A proposition at $r$ is a truth value with values $u_n$ at the $h_n$ and $v$ at $b$,
+    $u_n=v$ for all but finitely many $n$, ordered coordinatewise. Let $p_n$ be true at $h_{2n}$ alone.
+    An upper bound is true at every $h_{2n}$, hence at $b$ and at all but finitely many $h_n$; making it
+    false at one more odd index gives a smaller upper bound. So the $p_n$ have no least upper bound; as
+    at the stationary entrance they are countable relative to $t$.
+- id: modal-well-ordering
+  holds: [modal-well-ordering-r]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $e$ there is one individual. At a relational type, choose well-orders $A$ of the domain at $r$
+    and $W$ of the domain at $s$, and let $R$ have current extension $A$ and $d_n=d_\infty=(W,W)$, which
+    $k$ fixes. Every transport of $R$ is $(W,W)$, so $\Box\operatorname{WO}(R)$, well-ordering being the
+    external notion at both objects.
+- id: truth-implies-nd-necessity
+  holds: [necessary-distinctness-preserving-collapse]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $r$, $\{1_r\}$ is true and possible only at $1_r$; at $s$, $\{1\}$ is true and possible only at
+    $1$, since $j\circ i=1$ only if $i=1$. So at each object every truth is ND-necessary.
+- id: necessity-of-arithmetic
+  holds: [necessity-of-arithmetic]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    Every type has finitely many entities at $s$, so $I_\sigma$ fails at every world of $s$, and at $e$
+    everywhere. At $r$ every relational type is infinite and, by extensional fullness, the numbers are
+    the numerals with standard sum and product. So $I_\sigma\to A$ is necessary or necessarily false
+    according as $A$ is true.
+- id: forcing-possibilism
+  holds: [forcing-possibilism]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    As at the stationary entrance: the propositions at $r$ are countably many and current extensions are
+    arbitrary, so a complete Boolean algebra that is Dedekind finite or smaller than the propositions is
+    finite, with $2^k$ elements, and isomorphic to the propositions below the one true at
+    $h_0,\ldots,h_{k-1}$ alone, which is not $\top$.
+- id: pure-b
+  fails: [pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    BF at $t$ holds at $r$ (recorded) and fails at $s$ (recorded), and a closed pure sentence has the
+    same value at the two worlds $h_0$ and $b$ of $s$; so $\mathrm{BF}_t$ is true at $r$ and not
+    possible at $h_0$.
+- id: self-atoms-t
+  fails: [self-atoms-are-strong-atoms-t, necessary-self-atomicity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    Let $p$ be true at $h_0$ and $h_1$ and nowhere else. At each of them its transport is $\{1\}$, an
+    atom of $s$, so $p$ is a self-atom; it is the join of two propositions each true at one $h_n$, so
+    not an atom, nor a strong atom. At $s$, $\{k\}$ is an atom whose transport along $k$ is $\top$, so
+    it is not a self-atom and nothing possible below it is: Self-Atomicity at $t$ fails at $s$.
+- id: rigid-power
+  holds: [necessary-rigid-power-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $s$, full, a rigid relation is $H_D:=(D,k\cdot D)$, and a rigid $Y\le H_D$ at $1$ or at $k$ is
+    $H_E$, $E\subseteq D$ or $E\subseteq k\cdot D$, the transport of $H_{E'}$ with $E'$ the members of
+    $D$ sent into $E$; so power properties are exact images and Rigid Power holds at $s$. At $r$, a
+    rigid $F$ with current extension $A$ has rows $h_n\cdot A$ at the $h_n$, by weak inextensibility,
+    and row $V$ at $b$ with $(V,V)$ rigid, so $V=k\cdot V$ consists of points fixed by $k$; since
+    $V=h_n\cdot A$ for all large $n$, $h_n\cdot\bar a=k\cdot h_n\cdot\bar a=b\cdot\bar a$ for those $n$
+    uniformly, and $V=b\cdot A$. So for $A'\subseteq A$ the exact image of $A'$ is admitted and rigid,
+    and every rigid relation below a transport of $F$ is the transport of one of them. Hence the power
+    property of $F$ is weakly rigid, and rigid, by Rigid Power at $s$.
+- id: analytic-necessitism
+  fails: [analytic-necessitism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $tt$. At $r$ there are continuum many entities of type $tt$, current extensions being
+    arbitrary, and they carry a real number structure. A rigid structure necessarily one would carry one
+    at $s$, along $h_0$; but every type has finitely many entities at $s$.
+notes: >-
+  Separates Strong Atomicity, with the Barcan Formula at every type and □Atomicity, from □Strong Atomicity
+  (at $t$) and □BF (at $t$). The arrow $b$ is not onto, but no admitted predicate at $r$ can detect it,
+  since each agrees with its transport along $b$ along all but finitely many of the onto arrows $h_n$.

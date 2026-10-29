@@ -1,0 +1,157 @@
+id: symmetric-recurrent-colours
+name: 'Symmetric ideally-full model: recurrent finite colour approximations'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Symmetric ideally-full model: recurrent finite colour
+  approximations, research note of 26 October 2026, §§2–12 (unpaginated), in Daniel Kodsi's pull request #18
+  of 26 October 2026 (branch classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+- Cian Dorr, Boolean Completeness does not imply Rigid Comprehension, draft of 30 July 2026, Definitions 15–18,
+  p. 8; Theorem 36, p. 18.
+source_names:
+- Astra via Kodsi 26 Oct
+- BC does not imply RC
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: Definitions 15–18, p. 8; Theorem 36 and Corollary 37, pp. 18–19
+  note: Symmetric ideally-full models, of which this is one, and the hull theorem for Boolean Completeness.
+group: symmetric-ideally-full
+settings:
+  construction: 'A symmetric ideally-full model with an object $W_m$ for each positive integer $m$ and an
+    object $W_\infty$, each with base a copy of $\mathbb N$ in which a set $E_V$ of coloured points is
+    fixed: $m$ of them at $W_m$, an infinite coinfinite set at $W_\infty$. The arrows $V\to W$, for every
+    pair of objects, are the surjections $f$ of the bases with $f[E_V]\subseteq E_W$. The symmetry group at
+    $V$ consists of the permutations preserving $E_V$ setwise. Every object carries the ideal of finite
+    sets. Evaluation point: $1_{W_1}$.'
+  sigma: top
+meets:
+  finitely-pinned-domains: >-
+    The domains hold every symmetric intension pinned down by a finite set, and every entity in them is
+    one.
+  no-atoms-anywhere: >-
+    At every object a nonzero proposition pinned down by $S$ and containing $h$ contains arrows agreeing
+    with $h$ on $S$ that collapse and that separate two uncoloured points outside $S$.
+  finite-pinning: Every object carries the ideal of finite sets.
+  surjective-arrows: Every arrow is a surjection of the bases.
+  infinite-base: The base at $W_1$ is $\mathbb N$.
+  transposable: For finite $N$, the property of being uncoloured and outside $N$ (at an arrow $h$, the
+    points outside $h[N]$ and the target's colour set) is pinned down by $N$ and symmetric, its extension is
+    infinite, and the transposition of any member with another fixes $N$ pointwise, preserves the colour
+    set and fixes the property.
+  separable-collapses: Pairs of uncoloured points; for any two disjoint such pairs some surjection fixing
+    the colour set collapses the one and not the other.
+  hull-conditions: 'With $M_0=E_{W_1}$: (B1) prescriptions agreeing with $h^{\prime}$ on $P$ and with $h$
+    on $Q$ agree on $P\cap Q\subseteq M$ and send coloured points to coloured ones, so they extend to an
+    arrow, the uncoloured complement being infinite; (B2) a permutation fixing $N\supseteq E_{W_1}$
+    pointwise can move the finitely many uncoloured points of $P$ outside $N$ off $Q$.'
+arguments:
+- id: necessary-barcan
+  holds: [necessary-barcan-r]
+  choice: free
+  writeup: symmetric-recurrent-colours
+  text: >-
+    At every type and every object. Every arrow is surjective and every object carries the ideal of finite
+    sets, so the argument barcan-surjective of the group applies at each object: an entity at the target of
+    an arrow $h$, pinned down by $M$, is the transport along $h$ of the entity at the source built from a
+    finite section of $h$ over $M$.
+- id: tame-rigidity
+  when: {individuals: base}
+  holds: [tame-rigidity-r]
+  choice: free
+  writeup: symmetric-recurrent-colours
+  text: >-
+    At $W_1$ (indeed at every $W_m$), at every type. If a set $D$ of tuples is closed under the endomorphisms
+    fixing a finite $S\supseteq E_{W_1}$ pointwise, then $h\mapsto h[D]$ is pinned down by $S$ and symmetric,
+    so it is in the domain and rigid: for $h,h^{\prime}$ agreeing on $S$ and $a\in D$ pinned down by $M$, an
+    endomorphism $u$ fixing $S$ with $hu=h^{\prime}$ on $M$ exists, since every coloured point is in $S$, and
+    $h^{\prime}\cdot a=h\cdot(u\cdot a)$. A weakly rigid $F$ pinned down by $S$ has such an extension by weak
+    persistence, so it is that exact image.
+- id: tame-rigidity-fails-at-infinite-colour
+  when: {individuals: base}
+  fails: [necessary-tame-rigidity-r, weakly-rigid-power-r]
+  choice: free
+  writeup: symmetric-recurrent-colours
+  text: >-
+    At type $et$. At $W_\infty$ let $U$ have extension $E_V$ at every arrow into $V$: pinned down by
+    $\varnothing$, symmetric, weakly persistent by colour preservation, and weakly inextensible, since a test
+    necessary of each coloured point and pinned down by $N$ is met, at any $h$, by each $y\in E_V$, as some
+    arrow agreeing with $h$ on $N$ sends a coloured point outside $N$ to $y$. It is not rigid: along an arrow
+    $c$ to $W_1$ it has extension $\{a\}$, $E_{W_1}=\{a\}$, but it does not entail the haecceity of $a$,
+    which along any arrow back to $W_\infty$ has a single instance while $c\cdot U$ has infinitely many. So
+    □Tame Rigidity fails. And at $W_1$ the property of being a weakly rigid relation of type $et$ entailing
+    the universal one, whose actual instances are rigid by Tame Rigidity, does not entail the property of
+    being rigid, $U$ being a counterexample along an arrow to $W_\infty$: Weakly Rigid Power fails.
+- id: rigid-power
+  when: {individuals: base}
+  holds: [necessary-rigid-power-r]
+  choice: free
+  writeup: symmetric-recurrent-colours
+  text: >-
+    At every type. At $W_1$, let $F$ be rigid and $Y\le h\cdot F$ rigid at the target of $h$. If the target
+    is some $W_m$, an arrow $j$ agreeing with $h$ on a finite $N$ and bijective off it, and a set of
+    instances of $F$ closed under the endomorphisms fixing a finite set, give a rigid $X\le F$ with $j\cdot
+    X=Y$. If it is $W_\infty$, pass through a $W_r$ whose colours map bijectively onto finitely many colours
+    of $W_\infty$ containing the relevant ones, and return. So the property of being rigid and below $F$ is
+    weakly inextensible, hence rigid by Tame Rigidity. With □BF every universal relation is rigid, and Rigid
+    Power at it is Rigid Rigidity; so Rigid Power is necessary (rigid-rigidity-and-rigid-power-imply-necessary-rigid-power).
+- id: necessary-boolean-completeness
+  holds: [necessary-boolean-completeness-r]
+  choice: free
+  writeup: symmetric-recurrent-colours
+  text: >-
+    Dorr's hull theorem applies at every object, with $M_0$ the colour set at a $W_m$ and $\varnothing$ at
+    $W_\infty$: prescriptions respecting colour extend to arrows, the uncoloured complement being infinite,
+    and at $W_\infty$ both the coloured and the uncoloured points form infinite orbits, so points can be moved
+    off any finite set by a symmetry fixing another.
+- id: atomlessness
+  holds: [atomlessness]
+  choice: free
+  writeup: symmetric-recurrent-colours
+  text: >-
+    A nonzero proposition $p$ pinned down by $S$ is true at some arrow $h$; for distinct uncoloured $a,b$
+    outside $S$, arrows agreeing with $h$ on $S$ that collapse and that separate $a$ and $b$ both lie in $p$,
+    so the proposition that $a$ and $b$ are collapsed splits $p$.
+- id: weak-rigid-comprehension
+  when: {individuals: base}
+  fails: [weak-rigid-comprehension-r]
+  choice: free
+  writeup: symmetric-recurrent-colours
+  text: >-
+    At type $et$, for $\lambda x\, .\,x\ne a$ with $a$ the coloured point of $W_1$. A weakly rigid coextensive
+    $G$, pinned down by a finite $S\ni a$, holds of an uncoloured $x\notin S$; an endomorphism fixing $S$ and
+    sending $x$ to $a$ fixes $G$, so weak persistence puts $a$ in $G$'s extension.
+- id: signature-b
+  holds: [signature-b-r, pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    There are arrows between every pair of objects, so a closed sentence true anywhere is possible
+    everywhere; with Σ top the same holds of Σ-sentences.
+- id: two-hat-not-nd
+  fails: [two-hat-implies-nd-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Let $p$ be the arrows into $W_1$, true, symmetric and pinned down by $\varnothing$. It is not ND-
+    necessary: for a truth $q$ pinned down by $M$, an arrow $h:W_1\to W_\infty$ injective on $M$,
+    sending the coloured point $a$ to a coloured point and $M\setminus\{a\}$ to uncoloured ones, and an
+    arrow $k$ back sending every coloured point to $a$ and each $h(m)$ to $m$, give $k\circ h\in q$, so
+    $h\in\Diamond q\setminus p$. But it is two-hat necessary with witness $p$: at an arrow into an
+    object with two coloured points $c_1\ne c_2$, the arrows not collapsing them form a truth that is
+    impossible at every arrow into $W_1$, so $\neg p$ is ND-necessary there and $\Diamond_{\ne}p$ fails
+    outside $p$.
+notes: >-
+  Separates □BF, □Rigid Power, □Boolean Completeness and Tame Rigidity from Weakly Rigid Power and □Tame
+  Rigidity, strengthening symmetric-finite-compression-entrance: there a one-way collapse of labels ends the
+  failures, here every object can return to a finite-colour one. Tame Rigidity holds at every finite-colour
+  object and fails at $W_\infty$, so No Pure Contingency fails. Recorded with the base as individuals; the
+  arguments using individuals do not apply to the generated variant with one individual.

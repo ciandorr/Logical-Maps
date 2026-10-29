@@ -1,0 +1,43 @@
+id: modalized-relational-choice-implies-necessary-modalized-relational-choice
+premises:
+- modalized-relational-choice-r
+conclusion: necessary-modalized-relational-choice-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Universal modal selectors and persistence of MRC,
+  research note of 26 October 2026, §§2–4 (unpaginated), in Daniel Kodsi's pull request #18 of 26 October
+  2026 (branch classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+source_names:
+- Astra via Kodsi 26 Oct
+proof: >-
+  One necessarily functional relation chooses, at every world, an instance of every instantiated
+  property; it can then be used to choose from the rows of any relation. Fix $\tau$ and let $U:=\lambda
+  F^{\tau t}y^\tau\, .\,Fy\lor\neg\exists z\, .\,Fz$. It is a theorem of C that $U$ is serial (types
+  are inhabited), so $U$ is necessarily serial, and Modalized Relational Choice at $(\tau t,\tau)$ gives
+  $S\le U$ with $\Box\operatorname{Functional}(S)$. So necessarily, for every $F$, exactly one $y$ has
+  $(SF)y$, and it is an instance of $F$ if $F$ has one. By 4 this holds at every accessible world as
+  well. Now work at any accessible world $w$, fix $\sigma$, and let $R^{\sigma\tau t}$ be necessarily
+  serial there. Put $T:=\lambda x^\sigma y^\tau\, .\,(Rx)y\land(S(\lambda z\, .\,(Rx)z))y$. Then $T\le R$,
+  and necessarily, for every $x$, the row $\lambda z\, .\,(Rx)z$ is instantiated, so its unique
+  $S$-choice is an $R$-value of $x$ and is the unique $T$-value of $x$. So $\Box\operatorname{Functional}(T)$,
+  and $T$ witnesses Modalized Relational Choice for $R$ at $w$. As $w$ was arbitrary, this is □Modalized
+  Relational Choice at $(\sigma,\tau)$; no Barcan Formula is used, since the box over the universal
+  quantifiers comes from the boxed functionality of $S$.
+references: []
+notes: >-
+  The instance at $(\sigma,\tau)$ of the conclusion uses the instance at $(\tau t,\tau)$ of the premise.
+  With the recorded results, Modalized Relational Choice is therefore equivalent to □Relational Choice
+  together with Intensional Choice, and to □Relational Choice together with □Intensional Choice. This
+  makes [[no-pure-contingency-and-modalized-relational-choice-imply-necessary-modalized-relational-choice]]
+  and [[modal-well-ordering-implies-necessary-modalized-relational-choice]] derivable. Astra's note also
+  proves the type-specific variant BF at $\sigma\tau t$ + Modalized Relational Choice at $(\sigma,\tau)$
+  ⇒ its necessitation, by the argument of [[barcan-and-intensional-choice-imply-necessary-intensional-choice]];
+  at the level of principles that is subsumed here.

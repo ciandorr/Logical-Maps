@@ -1,0 +1,173 @@
+id: stationary-entrance-successor
+name: 'Eventually stationary entrance to the full successor action'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Strong worlds do not control modal domains, research note
+  of 26 October 2026, §§2–3 (unpaginated), in Daniel Kodsi's pull request #18 of 26 October 2026 (branch
+  classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+source_names:
+- Astra via Kodsi 26 Oct
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61; Appendix D, pp. 73–74
+  note: Full action models, here the target, with a restricted domain at the entrance.
+meets:
+  extensionally-full: >-
+    At $r$ the current extension of an entity is arbitrary, and $s$ is a full action model.
+  infinitely-many-propositions: >-
+    The propositions $(\varnothing,\{n\})$, true at $h_n$ alone, are pairwise distinct.
+  codomain-intensions: >-
+    An intension at $r$ whose value at every $h_n$ is the same is a pair $(A,b)$ with $b$ a constant
+    profile, which the successor fixes; $s$ is full.
+  sigma-top: Every constant of Σ is relational and denotes the top element of its type, which is fixed by
+    the successor.
+  one-individual: There is a single individual at both objects.
+definition: >-
+  Two objects: the target $s$, whose arrows $s\to s$ are the natural numbers under addition, with the
+  full action-model domains over one individual; and the entrance $r$, with only its identity, arrows
+  $h_n:r\to s$ for $n\in\mathbb N$, and $m\circ h_n=h_{m+n}$. An entity of relational type at $r$ is a pair
+  $(A,b)$ of an arbitrary current extension $A$ and a target entity $b$ that is eventually stationary under
+  the successor $S$ (some $S^{N+1}b=S^Nb$); its transport along $h_n$ is $S^nb$. Evaluation point: $1_r$.
+  Interpretation of Σ: every constant of Σ is relational, and each denotes the top element of its type.
+arguments:
+- id: strong-atomicity
+  holds: [necessary-strong-atomicity-r]
+  choice: free
+  writeup: stationary-entrance-successor
+  text: >-
+    At every relational type. At $r$ the singletons of one current tuple (with target part $0$) and of one
+    target coordinate $(n,\bar a)$ (with empty current extension; the successor carries it to the coordinate
+    $n-1$ and then to $0$, so it is eventually stationary) are admitted, and every nonzero entity contains
+    one. Their transports are $0$ or singletons, which are atoms of the full target domain and decide every
+    target relation. So they are strong atoms; the full target is likewise strongly atomic, at every
+    arrow.
+- id: barcan
+  fails: [barcan-t]
+  choice: free
+  writeup: stationary-entrance-successor
+  text: >-
+    At $t$: the target parts of the propositions at $r$ are the finite and cofinite sets of numbers, so
+    every proposition at $r$ necessarily has the pure property $\Diamond\Box p\lor\Diamond\Box\neg p$; but
+    the set of even numbers, at $s$, lacks it. At a relational type $\tau$: with $E_\tau$ an operation whose
+    target part is the shift, every entity at $r$ necessarily has $\Diamond(E_\tau Y=Y)$, while an entity at
+    $s$ alternating between even and odd coordinates never does.
+- id: boolean-completeness-t
+  fails: [boolean-completeness-t, countable-boolean-completeness-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $t$. The target part of a proposition at $r$ is a finite or cofinite set of numbers, and the
+    order is inclusion of pairs. Let $X$ have as current extension the propositions
+    $p_n:=(\varnothing,\{2n\})$, with target part $0$. An upper bound has a target part containing every
+    even number, so cofinite; removing one of its odd members leaves a smaller upper bound. So the $p_n$
+    have no least upper bound. They are countable relative to $t$: by extensional fullness and the
+    infinitely many propositions the numbers at $t$ are the distinct numerals, and the relation pairing
+    $p_n$ with the $n$th numeral is in the domain.
+- id: modal-well-ordering
+  holds: [modal-well-ordering-r]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $e$ there is one individual. At a relational type, choose a well-order $A$ of the domain at $r$
+    and a well-order $W$ of the domain at $s$, and let $R:=(A,b)$ with $b$ the constant profile $W$,
+    which the successor fixes. Every transport of $R$ is $b$, whose extension at every world of $s$ is
+    $W$; $s$ is full and current extensions at $r$ are arbitrary, so well-ordering is the external
+    notion at both objects, and $\Box\operatorname{WO}(R)$.
+- id: truth-implies-nd-necessity
+  holds: [necessary-distinctness-preserving-collapse]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $r$, the truth $(\{1_r\},0)$ is possible only at $1_r$, no arrow returning to $r$; at $s$, the
+    truth $\{0\}$ is possible only at $0$, as $j+k=0$ only if $j=k=0$. So at each object some truth $q$
+    has $\Box(\Diamond q\to p)$ for every truth $p$.
+- id: self-atoms
+  holds: [necessary-self-atoms-are-strong-atoms-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At every relational type. At $s$ the atoms are the singletons $\delta_{m,\bar a}$ of one tuple at
+    one coordinate. A self-atom $Y$ at $s$ with least nonempty coordinate $m$ is instantiated at the
+    arrow $m$, so its transport there is an atom, $\delta_{0,\bar a}$, and $Y=\delta_{m,\bar a}$. At
+    $r$, a self-atom with nonempty current extension is an atom; with empty current extension, the same
+    shift makes it $(\varnothing,\delta_{m,\bar a})$. These singletons are strong atoms at both objects.
+- id: necessity-of-arithmetic
+  holds: [necessity-of-arithmetic]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $e$ there is one individual at both objects, so $I_e$ fails at every world. Every relational type
+    is infinite at both objects, and by extensional fullness the numbers there are the distinct numerals
+    with the standard sum and product, so an arithmetical sentence holds at a world iff it is true.
+- id: forcing-possibilism
+  holds: [forcing-possibilism]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $r$ every set of tuples is a current extension, so completeness, injections and isomorphisms
+    there are the external ones. There are countably many propositions at $r$, and an infinite complete
+    Boolean algebra has at least continuum many elements, so a complete Boolean algebra at $r$ that is
+    Dedekind finite or has fewer elements than the propositions is finite, with $2^k$ elements; it is
+    isomorphic to the propositions below $(\varnothing,\{0,\ldots,k-1\})$, which is not $\top$.
+- id: pure-b
+  fails: [pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    BF at $t$ fails at $r$ (recorded) and holds at every world of $s$, a full action model whose arrows
+    are cancellable and act onto the one individual. So the pure sentence $\neg\mathrm{BF}_t$ is true at
+    $r$ and not possible at $h_0$.
+- id: tame-rigidity
+  holds: [necessary-tame-rigidity-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $r$, a weakly rigid $(A,b)$ has $b_n=h_n\cdot A$ at every coordinate $n$: weak persistence gives
+    $\supseteq$, and weak inextensibility, tested against the entity with current extension $A$ and
+    target part $h_n\cdot A$ at coordinates below $N$ and everything from $N$ on, gives $\subseteq$
+    below every $N$. At $s$, full, a weakly rigid $Y$ has $Y_m=m\cdot Y_0$, by the test of the haecceity
+    disjunction. Such exact images are rigid, and the transports $S^nb$ of the former are again of that
+    form, so weak rigidity is rigidity at both objects.
+- id: rigid-power
+  fails: [rigid-power-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $tt$. Let $A$ be the propositions $(\varnothing,\{j\})$, $j\in\mathbb N$, with
+    $(\varnothing,\varnothing)$; then $h_n\cdot A$ is the set of singletons with $\varnothing$, for
+    every $n$, so $F:=(A,b)$ with $b$ that constant profile is rigid. At $h_0$, the property $P$ of
+    being rigid and below $F$ holds of the exact image $X_D:=m\mapsto m\cdot D$, $D$ the singletons of
+    even numbers, which alternates and so is no transport of an entity at $r$. The entity with $P$'s
+    current extension and target part $h_0\cdot P$ at coordinate $0$ and everything after necessarily
+    holds of $P$'s instances but omits $X_D$ at $h_0$, so $P$ is not weakly inextensible.
+- id: analytic-necessitism
+  fails: [analytic-necessitism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $t$. The target is full with continuum many propositions, so a real number structure there
+    is possible. A rigid structure necessarily a real number structure would be one at $r$, on countably
+    many propositions, with completeness the external notion since current extensions are arbitrary.
+notes: >-
+  Separates □Strong Atomicity (hence □Strong Actuality) from the Barcan Formula at every relational type;
+  the Barcan Formula at $e$ holds trivially, with one individual. The entrance's domains are the
+  eventually stationary part of the full action model; closure under the terms of C needs only that the
+  finitely many parameters of a term have a common stage after which the successor fixes them.

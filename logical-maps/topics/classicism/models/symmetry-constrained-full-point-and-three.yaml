@@ -33,6 +33,8 @@ settings:
   individuals: three
   sigma: top
 meets:
+  finitely-many-propositions-everywhere: >-
+    Four propositions at $W_0$, sixty-four at $X$.
   symmetric-domains: >-
     The domains hold exactly the symmetric intensions, the symmetry group being trivial at $W_0$
     and the permutations of $X$ at $X$; every intension at $W_0$ is pinned down by $\{x\}$, an
@@ -98,6 +100,36 @@ arguments:
     Given $U$ functional at the identity with values $Z_y$, put $X_k:=\{(k\cdot y,\bar a):\bar a\in
     (Z_y)_k\}$, well defined by ND, symmetric because each $Z_y$ is, and so in the full domain; and
     $Xy=Z_y$.
+- id: two-hat
+  holds: [necessary-truth-implies-two-hat-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_0$, with $q:=\{1_{W_0}\}$, at each $h_n$ the transport of $\neg q$ is the self-maps of $X$,
+    ND-necessary at $1_X$ with the permutations as witness, since from the map back to $W_0$ one sees
+    only it and constant maps; so $\Diamond_{\ne}q$ fails at every $h_n$ and every truth at $W_0$ is
+    two-hat necessary. At $X$ the permutations form a true proposition possible only at permutations, so
+    every truth there is ND-necessary. (Checked by brute force over the finite domains.)
+- id: rigid-comprehension-exact-images
+  holds: [necessary-rigid-comprehension-r, necessary-tame-rigidity-r, necessary-boolean-completeness-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At either object the exact image $h\mapsto h\cdot E$ of an extension $E$ is symmetric, so in the
+    domain, rigid and coextensive with any relation with extension $E$; a weakly rigid relation is that
+    exact image. The domains are finite and closed under joins, so every property has a least upper
+    bound.
+- id: well-ordering
+  holds: [necessary-well-ordering-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At either object every set of tuples at the identity is an extension (at $W_0$ with $\varnothing$ at
+    the $h_n$; at $X$ with $g\cdot E$ at each permutation $g$ and $\varnothing$ elsewhere, which is
+    symmetric). The domains are finite, so well-orders exist and are extensions.
 notes: 'Added on 16 October 2026 as the witness for maximalism-incompatible-with-intensional-choice. At
   the evaluation point the closed pure sentence "there is exactly one individual, and no necessarily uniquely
   instantiated property entails being distinct from it if anything is" is true: a necessarily uniquely

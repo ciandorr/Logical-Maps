@@ -16,6 +16,24 @@ references:
   role: proof
   locator: Definitions 2.1–2.10 and 4.1; Theorem 4.4
 arguments:
+- id: relational-choice
+  holds: [relational-choice-r]
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  choice: uses
+  source:
+    paper: bacon-modalized-domains-2026
+    locator: Lemma 6.7, p. 31 (numbered so in the draft of 23 October 2026)
+  text: >-
+    At the root $r$, quantifiers range over the entities existing at $r$ and identity is $\sim_r$ (Lemma
+    2.13), and every set of tuples of such entities closed under $\sim_r$ is the extension at $r$ of a
+    relation existing at $r$ (Lemma 6.7: the relation with value $\{r\}$ on the tuples in the set and
+    $\emptyset$ elsewhere, which respects identity at every cloud point because it is empty there). Given
+    a relation $U$ serial at $r$, choose in the metatheory, for each $\sim_r$-class of inputs, one
+    $\sim_r$-class of outputs to which its members bear $U$ at $r$. The set of pairs from chosen classes
+    is closed under $\sim_r$, so it is the extension at $r$ of some $S$ existing at $r$; $S$ is functional
+    at $r$ and its pairs bear $U$. This holds whatever the output type, $e$ included.
 - id: self-atoms
   holds:
   - necessary-self-atomicity-r
@@ -94,3 +112,47 @@ arguments:
   fails:
   - distinctness-necessary-t
   id: distinctness
+- id: axiom-of-infinity-e
+  holds: [axiom-of-infinity-e]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At the root identity of individuals is literal and every $\sim_r$-closed set of tuples is the root
+    extension of a relation existing there (Lemma 6.7). So the property of cardinalities false at the
+    root of every property with an infinite root extension exists at the root; it holds of $\mathbf 0_e$
+    and is closed under successor, so contains every finite cardinality, none of which holds of $\lambda
+    u\,.\,\top$, whose root extension is $\omega$.
+- id: truth-implies-nd-necessity
+  holds: [necessary-distinctness-preserving-collapse]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At the root, $\{r\}$ is a true proposition (Proposition 1.12) possible only at $r$, which no cloud
+    point sees, so every truth $p$ has $\Box(\Diamond\{r\}\to p)$. At a cloud point the box is idle
+    (Lemma 3.9(c)), so with $q:=\top$ the condition is $p$ itself.
+- id: rigid-rigidity
+  fails: [rigid-rigidity-r, rigid-power-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Each member has the Cohen algebra as a component (the lottery's family includes it, of cardinality
+    $2^{\aleph_0}<\mu$). At type $e\to t$ let $c$ send $n$ to the Cohen bit $\{p:p(n)=1\}$ on that
+    component and to $\varnothing$ elsewhere; it is rigid at every Cohen point (Lemma 3.10). A relation
+    rigid at the root with root extension $D$ agrees on the Cohen component with the check-closure
+    $\check D$ (persistence, and inextensibility against $\check D$), which decides every $n$; so its
+    identity with $c$ holds at no Cohen point. If $\lambda X\,.\,\operatorname{Rigid}(X)$ were rigid at
+    the root, inextensibility against the check-closure of its root extension would make it entail, at
+    every Cohen point, a join of such identities, none containing a Cohen point; but it holds of $c$ on
+    the whole Cohen component. The same refutes Rigid Power at $\lambda x\,.\,\top$.
+- id: pure-b
+  fails: [pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Extensionality at $t$ fails at the root (Theorem 4.4(c)) and holds at every cloud point (Remark
+    4.6(iv)), which sees only cloud points; so its negation is true at the root and not possible at any
+    cloud point.

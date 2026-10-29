@@ -1,0 +1,32 @@
+id: rigid-rigidity-and-rigid-power-imply-necessary-rigid-power
+premises:
+- rigid-rigidity-r
+- rigid-power-r
+conclusion: necessary-rigid-power-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, A recurrent-colour countermodel, research note of 26
+  October 2026, §11 (unpaginated), in Daniel Kodsi's pull request #18 of 26 October 2026 (branch
+  classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+source_names:
+- Astra via Kodsi 26 Oct
+proof: >-
+  Let $R:=\lambda X\, .\,\operatorname{Rigid}(X)$ and $Z:=\lambda F\, .\,\operatorname{Rigid}(\lambda
+  X\, .\,\operatorname{Rigid}(X)\land X\le F)$. By Rigid Power, every $F$ with $RF$ has $ZF$, and so
+  $\Box ZF$, since rigidity, if true, is necessary ([[rigid-necessary]]). Rigid Rigidity makes $R$ rigid,
+  so in particular inextensible; at the actual world, by T, this says that if every $F$ with $RF$ has
+  $\Box ZF$ then $R\le Z$. So $R\le Z$, that is, $\Box\forall F\, .\,\operatorname{Rigid}(F)\to
+  \operatorname{Rigid}(\lambda X\, .\,\operatorname{Rigid}(X)\land X\le F)$, which is □Rigid Power.
+references: []
+notes: >-
+  The instance of Rigid Rigidity used is the one at the type of $F$, together with Rigid Power at the
+  same type. Since □BF and Rigid Power imply Rigid Rigidity
+  ([[necessary-barcan-and-rigid-power-imply-rigid-rigidity]]), □BF and Rigid Power imply □Rigid Power.

@@ -40,6 +40,17 @@ definition: 'A two-object ideally full action model. Fix a fixed-point-free invo
   Interpretation of Σ, fixed for this record: every constant of Σ is relational, and each denotes the
   top element of its type.'
 meets:
+  infinitely-many-individuals: >-
+    The individuals are infinite at both objects.
+  no-atoms-anywhere: >-
+    At either object let $p\ne\bot$ be pinned down by a finite $N$ and contain $h$. Take a block $B$
+    disjoint from $N$ and its $\pi$-image and $b\in B$: some arrow agreeing with $h$ on $N$ sends $b$ to
+    $h(b)$ and some sends it elsewhere, both in $p$ (in the surjective model the infinitely many other
+    blocks keep it surjective), so the arrows in $p$ sending $b$ to $h(b)$ lie strictly between $\bot$
+    and $p$.
+  infinitely-many-propositions-everywhere: >-
+    At both objects the propositions that an arrow sends $0$ to $n$, one for each $n$, are pinned down
+    by $\{0\}$ and pairwise distinct.
   finitely-pinned-domains: >-
     Ideally full with the ideal of finite sets: every intension pinned down by a finite set is in
     the domain, and every entity in a domain is one.
@@ -115,6 +126,35 @@ arguments:
     included, can be made surjective by mapping the infinitely many blocks after those named onto every
     block.
 
+- id: atomlessness
+  holds: [atomlessness]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At either object let $p\ne\bot$ be pinned down by a finite $N$ and contain $h$. Take a block $B$
+    disjoint from $N$ and its $\pi$-image and $b\in B$: some arrow agreeing with $h$ on $N$ sends $b$ to
+    $h(b)$ and some sends it elsewhere, both in $p$ (in the surjective model the infinitely many other
+    blocks keep it surjective), so the arrows in $p$ sending $b$ to $h(b)$ lie strictly between $\bot$
+    and $p$.
+- id: necessity-of-arithmetic
+  holds: [necessity-of-arithmetic]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Both objects are extensionally full with infinitely many individuals, so at each the numbers at
+    every type are the distinct numerals with standard sum and product, and an arithmetical sentence
+    holds at every world iff it is true.
+- id: signature-b
+  holds: [signature-b-r, pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    There are arrows each way between the objects, so from every world both identities are reachable,
+    and a closed sentence holds at an arrow iff at its codomain's identity; so
+    $\varphi\to\Box\Diamond\varphi$. With Σ top a closed Σ-sentence denotes what a pure one does.
 notes: 'The surjective variant of the paired-individuals model: necessary BF holds at every type by Classicism,
   Proposition D.6, yet 5-necessity still fails to imply two-hat necessity at the evaluation point and
   $\Box_{\ne}\ne\hat{\hat\Box}$. Built in the conversation of 14 October 2026. The two operators $\Box_{\ne}$

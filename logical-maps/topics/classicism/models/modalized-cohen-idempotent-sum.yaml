@@ -91,6 +91,69 @@ arguments:
   date: '2026-10-21'
   fails:
   - distinctness-necessary-t
+- id: infinity
+  holds: [axiom-of-infinity-e, axiom-of-infinity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    As for the cloud models: identity at the root is literal for individuals and propositions, there are
+    infinitely many of each, and every $\sim_r$-closed set of root tuples is the root extension of a
+    relation existing there, with bottom components.
+- id: truth-implies-nd-necessity
+  holds: [necessary-distinctness-preserving-collapse]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At the root $\{r\}$ is true and possible only at the root; at the Cohen points the box is idle; and
+    full-idempotent-monoid satisfies the boxed principle, so it holds at every point of $M_k$, closed
+    sentences holding there as in that model (Lemma 5.3).
+- id: relational-choice
+  holds: [necessary-relational-choice-r]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At the root, choose for each $\sim_r$-class of inputs of a relation serial there a related class of
+    outputs; the pairs from chosen classes, with bottom components, form a functional subrelation
+    existing at the root. At the Cohen points the model is the full Boolean-valued model, whose type
+    hierarchy is that of $V^B$, a model of ZFC. In $M_k$ it holds by □Relational Choice in full-
+    idempotent-monoid.
+- id: ch-non-contingent
+  holds: [non-contingency-of-ch]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At the root and the Cohen points as in modalized-cohen-cloud; the points of $M_k$ have finitely many
+    entities of every type, so no real number structure.
+- id: rigid-power
+  fails: [rigid-power-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    As the group's argument in modalized-atomless-cloud, at type $e\to t$ on the Cohen component, with
+    the rigidifier of Theorem 5.6(b) in place of the check-closure.
+- id: forcing-possibilism
+  fails: [forcing-possibilism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    The root algebra has three atoms, $\{r\}$ and the two atoms of the four propositions of $M_k$, and
+    an atomless Cohen part. These four disjoint parts generate a complete sixteen-element algebra, while
+    the propositions below one other than $\top$ form a sixteen-element algebra only if it is a join of
+    four atoms.
+- id: pure-b
+  fails: [pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    As for the clouds: the negation of Extensionality at $t$ is true at the root and impossible at every
+    Cohen point.
 notes: 'Theorem B. The chain description in §5.3 is intuition for the unravelling, not a replacement for
   the source’s action-model construction. No propositionally full world–cloud model is claimed here: Proposition
   5.1 explains why that simpler construction cannot refute BF_t. Mathematical evidence is supplied by

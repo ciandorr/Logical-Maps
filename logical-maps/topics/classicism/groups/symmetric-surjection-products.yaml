@@ -1,0 +1,330 @@
+id: symmetric-surjection-products
+name: 'Symmetric surjection products with free-word gluing'
+references:
+- paper: dorr-bc-not-rc
+  role: background
+  locator: §3.1, p. 9; Definitions 15–18, p. 8; Theorem 36, pp. 18–19
+  note: The symmetric ideally-full models, of which these are κ-pinned products with a monoid factor; the
+    hull argument for Boolean Completeness is the κ-pinned form of Dorr's.
+- paper: bacon-2020
+  role: background
+  locator: Appendix A.3
+  note: Gluing the interpretations of Σ at fresh arrows.
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §§3.4–3.5, pp. 55–61
+  note: One-object action models and their semantics.
+
+# GPT-6 Astra's symmetric surjection model with free-word gluing and its variants (research note of 22
+# October 2026, in Daniel Kodsi's submission of 24 October 2026). Recorded 28 October 2026 by Claude Opus
+# 5.5 (Anthropic), prompted by Cian Dorr, as a group of its own rather than as κ-pinned members of
+# symmetric-ideally-full: the free-word coordinate, which Logical Necessity needs, is not an action on
+# the base, so these models fall outside that group's framework. Each argument below is the κ-pinned form
+# of the corresponding argument for symmetric-all-surjections, where there is one, checked again here.
+
+definition: >-
+  Fix an infinite cardinal $\kappa\ge|\Sigma|$, a set $U$ of size $\kappa^+$, the monoid $S$ of
+  surjections $U\to U$, and a monoid $K$: {{monoid}} The arrows of the one object are the pairs $(k,s)$
+  with $k\in K$ and $s\in S$, composed by $(k,s)(k',s'):=(kk',s\circ s')$; the evaluation point is
+  $1:=(1_K,\mathrm{id})$, and the symmetry group is $\{1_K\}\times\operatorname{Sym}(U)$. {{individuals}}
+  A relational domain consists of the profiles $F$, assigning to each arrow a set of argument tuples, that
+  are pinned down by a set $N\subseteq U$ of size at most $\kappa$ ($F_{(k,s)}$ depends only on $k$ and
+  $s|_N$) and symmetric ($F_{(k,\pi s)}=\pi\cdot F_{(k,s)}$ for every permutation $\pi$ of $U$).
+  Transport is $(h\cdot F)_j:=F_{jh}$. Σ is interpreted by gluing: individual constants denote distinct
+  individuals (or the only one), and each relational constant glues, along fresh final letters of the word
+  coordinate, chosen interpretations witnessing every satisfiable $\mathcal L(\Sigma)$-sentence (see the
+  write-up).
+
+parameters:
+  monoid:
+    text: The monoid factor $K$ of the arrows.
+    generate: true
+    default: free-words
+    values:
+      free-words:
+        text: $K$ is the free monoid $W$ of finite words on an alphabet of size $\kappa$, with empty word
+          $\varepsilon$.
+        label: free words
+        meets:
+          right-cancellative-factor: The free monoid is right cancellative.
+      words-idempotent:
+        text: $K$ is $W\times\{1,d\}$, with $W$ the free monoid of finite words on an alphabet of size
+          $\kappa$ and $d^2=d\ne1$, so that $K$ is not right cancellative.
+        label: free words × idempotent
+        meets:
+          idempotent-factor: $K$ has the idempotent $d_0:=(\varepsilon,d)\ne1_K$, with $1_Kd_0=d_0d_0$.
+  individuals:
+    text: What the individuals are.
+    generate: true
+    default: singleton
+    values:
+      singleton:
+        text: There is a single individual, fixed by every arrow; $U$ only supplies the pinning sets and
+          the symmetries.
+        label: one individual
+        meets:
+          one-individual: There is a single individual at every world.
+      moving:
+        text: The individuals are the members of $U$, with $(k,s)\cdot a:=s(a)$, and each individual $a$
+          is pinned down by $\{a\}$.
+        label: individuals $U$
+        meets:
+          infinitely-many-individuals: The individuals are the $\kappa^+$ members of $U$.
+          moving-individuals: The individuals are the members of $U$, moved by the surjections.
+
+meets:
+  one-object-action-model: >-
+    One object, with the semantics of Dorr's intensional action models: a formula holds at an arrow iff it
+    holds at $1$ with its parameters transported.
+  no-actuality-anywhere: >-
+    One object, so Actuality, a closed pure sentence, holds at every world iff at the identity, where it
+    fails (recorded in this group's verdicts).
+  infinitely-many-propositions: >-
+    The propositions $q_{a,b}$ of the argument atomlessness are pairwise distinct for distinct pairs.
+
+conditions:
+- id: right-cancellative-factor
+  text: >-
+    The monoid factor of the arrows is right cancellative: $av=bv$ implies $a=b$.
+- id: idempotent-factor
+  text: >-
+    The monoid factor of the arrows has an idempotent other than its identity.
+- id: moving-individuals
+  text: >-
+    The individuals are the members of the set $U$ on which the surjections act, and every arrow acts on
+    them by its surjection.
+
+arguments:
+
+- id: logical-necessity
+  holds: [logical-necessity-r]
+  choice: uses
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    For each of the at most $\kappa$ $\mathcal L(\Sigma)$-sentences true at $1$ under some interpretation,
+    choose one, $J_\alpha$, and a letter $f_\alpha$. Let $s_\alpha$ be a surjection sending each individual
+    constant's denotation $a_c$ to $J_\alpha(c)$ (the identity with one individual), and $B_{\alpha,c}$ a
+    preimage of $J_\alpha(c)$ under $(1_K,s_\alpha)$. Interpret a relational $c$ by $G_c$, equal at
+    $(uf_\alpha,j,s)$ to $B_{\alpha,c}$ at $(u,j,s)$ and empty where the word is empty: pinned down by the
+    union of at most $\kappa$ pinning sets, and symmetric. At $h_\alpha:=(f_\alpha,1,s_\alpha)$ every
+    constant transports to its $J_\alpha$-value at once, so a Σ-sentence is possible iff it is true under
+    some interpretation, which gives Logical Necessity.
+
+- id: barcan
+  requires: [right-cancellative-factor]
+  holds: [necessary-barcan-r]
+  choice: uses
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    Every arrow acts onto every domain. At $e$ the surjections are onto. At a relational type, given $F$
+    pinned down by $N$ and an arrow $(v,s)$: choose a permutation $\pi$ with $s\pi$ the identity on $N$, so
+    that $(1_K,s)\cdot(\pi\cdot F)=F$; and lift along $(v,1)$ by the profile equal at $(uv,s)$ to $F$ at
+    $(u,s)$ and empty elsewhere, well defined by right cancellation. So BF holds at every type, and,
+    being closed and pure in a one-object model, necessarily.
+
+- id: barcan-t-idempotent
+  requires: [idempotent-factor]
+  fails: [barcan-t]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    Let $p$ be the proposition that the monoid coordinate is $1_K$, and $R$ of type $tt$ hold of $p$ alone
+    at the arrows with monoid coordinate $d_0$ and of nothing elsewhere; both are pinned down by
+    $\varnothing$ and symmetric. Then $\Diamond\exists q\, .\,Rq$. But a transport $h\cdot q$ along an arrow
+    with monoid coordinate $d_0$ takes the same value at $(1_K,s)$ and $(d_0,s)$, as $1_Kd_0=d_0d_0$, while
+    $p$ does not; so no $q$ has $\Diamond Rq$, and BF fails at $t$.
+
+- id: atomlessness
+  holds: [atomlessness]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    For distinct $a,b\in U$ let $q_{a,b}$ be the proposition that the arrow's surjection keeps $a$ and $b$
+    apart: symmetric, pinned down by $\{a,b\}$. Given $p\ne\bot$ pinned down by $N$, a member $(k,s)$ of $p$
+    and $a,b\notin N$, the restriction $s|_N$ extends to surjections that separate and that identify $a$ and
+    $b$; so $p\land q_{a,b}$ and $p\land\neg q_{a,b}$ are both nonzero.
+
+- id: vicinity
+  fails: [vicinity]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    Let $p$ be true, pinned down by $N$, and $a,b\notin N$. A surjection $s$ fixing $N$ and identifying $a$
+    and $b$ gives an arrow $(1_K,s)$ at which $p$ holds, while the true $q_{a,b}$ is impossible there, as
+    composition on the left keeps the collapse. So no truth entails the possibility of every truth.
+
+- id: relational-choice
+  fails: [relational-choice-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    At input type $tt$ and output type $t$. Let $U$ relate a property of propositions with exactly two
+    actual instances to each of them, and any other to every proposition: a closed term, serial. A
+    functional subrelation $R$, pinned down by $N$, has an actual extension invariant under every
+    permutation fixing $N$. For distinct $a,b,c\notin N$, the property $A$ whose instances are the
+    transports of $q_{c,a}$ and $q_{c,b}$ is in the domain, and the transposition of $a$ and $b$ fixes $N$
+    and $A$ and exchanges $q_{c,a}$ and $q_{c,b}$; so $R$ relates $A$ to both.
+
+- id: boolean-completeness
+  holds: [necessary-boolean-completeness-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    At every relational type, by the hull argument of Dorr's Theorem 36 with pinning sets of size at most
+    $\kappa$. For $A$ pinned down by $N$ with actual instances $E$, let $J$ hold at $(k,s)$ of everything
+    some $a\in E$ holds of at some $(k,t)$ with $t|_N=s|_N$: pinned down by $N$, symmetric, an upper bound.
+    If $Z$, pinned down by $T$, bounds $E$ and $\bar b\in a_{(k,t)}$, take a permutation $\pi$ fixing $N$
+    and moving $a$'s pinning set off $T$ outside $N$, so that $\pi\cdot a\in E$, and a surjection $r$
+    agreeing with $s$ on $T$ with $r\pi=t$ on $a$'s pinning set; then $\bar b\in(\pi\cdot a)_{(k,r)}\subseteq
+    Z_{(k,r)}=Z_{(k,s)}$. So $J$ is the least upper bound. The schema is closed and pure.
+
+- id: tame-rigidity
+  holds: [necessary-tame-rigidity-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    A weakly rigid $Y$ pinned down by $N$, with actual extension $E$, is the profile $h\mapsto h\cdot E$,
+    by the argument of tame-rigidity-factorizable with pinning sets of size at most $\kappa$: given
+    $\bar b=(k,t)\cdot\bar a$ with $\bar a\in E$ and $t|_N=s|_N$, a surjection $u$ fixing $N$ with $su=t$ on
+    the pinning set of $\bar a$ gives $u\cdot\bar a\in E$ and $\bar b=(k,s)\cdot(u\cdot\bar a)$. Such
+    profiles, and their transports, are rigid.
+
+- id: rigid-power
+  holds: [necessary-weakly-rigid-power-r]
+  choice: uses
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    As rigid-power-surjections, with pinning sets of size at most $\kappa$ and the monoid coordinate held
+    fixed. If $X\le h\cdot F$ is rigid at $h=(k,s)$, let $j_0$ agree with $s$ on a set $N$ pinning down $F$
+    and the test $Z$, and map the rest of $U$ bijectively onto the rest; then $j:=(k,j_0)$ has
+    $j\cdot F=h\cdot F$, and the instances of $F$ that $j$ sends into $X$ form a set closed under the
+    surjections fixing a set of size at most $\kappa$, whose exact image $Y$ is rigid, below $F$, with
+    $j\cdot Y=X$. So the power property of $F$ is weakly inextensible, and rigid by Tame Rigidity.
+
+- id: axiom-of-infinity-e
+  requires: [moving-individuals]
+  holds: [axiom-of-infinity-e]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    The numerals are closed pure terms, fixed by every arrow, so the constant profile with the numerals as
+    instances is symmetric and pinned down by $\varnothing$; hence the finite cardinalities are the
+    standard ones, each holding of exactly the properties with that many actual instances. The universal
+    property of individuals has $\kappa^+$ instances.
+
+- id: axiom-of-infinity-t
+  holds: [axiom-of-infinity-t]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    As axiom-of-infinity-e, the propositions $q_{a,b}$ being infinitely many.
+
+- id: distinctness-preserving-collapse
+  holds: [necessary-distinctness-preserving-collapse]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    Let $p$ be true, pinned down by $N$, and $q$ the set of arrows $(1_K,s)$ with $s$ injective on $N$:
+    true, pinned down by $N$, symmetric. In both monoid factors $jk=1_K$ only if $k=1_K$, so $\Diamond q=q$.
+    A member $(1_K,s)$ of $q$ agrees on $N$ with a permutation $\pi$, and $(1_K,\pi)\in p$ by symmetry, so
+    $(1_K,s)\in p$. Hence $\Box(\Diamond q\to p)$, and $p$ is ND-necessary. The principle is closed and
+    pure.
+
+- id: intensional-choice
+  fails: [intensional-choice-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    At type $t$, as intensional-choice-collapse. Fix $c\in U$, write $q_{x,y}$ for the set of arrows whose
+    surjection keeps $x$ and $y$ apart, and let $F$ hold at $(k,s)$ of the $q_{s(c),y}$ with $y\ne s(c)$:
+    pinned down by $\{c\}$, symmetric, and necessarily instantiated. Let $G\le F$ be necessarily uniquely
+    instantiated, pinned down by $N\ni c$, and $h=(1_K,s)$ with $s$ sending $N$ to a single point $p$. Then
+    $G_h=\{q_{p,y}\}$ with $y\ne p$. A permutation $\pi$ fixing $p$ has $\pi h$ agreeing with $h$ on $N$, so
+    $G_{\pi h}=G_h$ by pinning, while symmetry gives $G_{\pi h}=\{q_{p,\pi y}\}$; but some such $\pi$ moves $y$.
+
+- id: arithmetic-necessitism
+  holds: [arithmetic-necessitism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    As arithmetic-necessitism-finitely-pinned: the profile whose value at every arrow is the set of numerals
+    at $\sigma$ is pinned down by $\varnothing$ and symmetric, numerals being closed terms fixed by every
+    arrow; so the numbers are the numerals, rigid and, given the Infinity axiom, necessarily distinct.
+
+- id: analytic-necessitism
+  fails: [analytic-necessitism]
+  withdrawn:
+    date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, after a trawl subagent's report
+    reason: >-
+      The step from the equality of transports to membership in the carrier by inextensibility does not
+      follow: inextensibility bounds a rigid carrier from above, by the transports of its actual
+      instances, and puts nothing new into its actual extension.
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  writeup: symmetric-surjection-products
+  text: >-
+    As analytic-necessitism-exact-collapses-symmetric, at type $tt$, with the arrows $(1_K,s)$. For finite
+    $N\subseteq U$ the arrows whose surjection is constant on $N$ form a symmetric proposition pinned down by
+    $N$, and the orbits of these under the permutations, one for each size of $N$, give continuum many
+    invariant sets of propositions, the values of constant intensions fixed by every arrow, which carry a
+    real number structure. None is rigid: for $(1_K,s)$ with $s(a)=s(b)$, toggling $\top$ in an entity $x$ of
+    type $tt$ at the arrows that keep $a$ and $b$ apart gives a distinct entity $y$ with the same transport
+    along $(1_K,s)$, so persistence, inextensibility and necessary distinctness of a carrier conflict.
+
+- id: analytic-necessitism-fixed-orbits
+  holds: [analytic-necessitism, second-order-analytic-necessitism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  writeup: symmetric-surjection-products
+  text: >-
+    At type $tt$. For finite $N\subseteq U$ the arrows whose surjection is constant on $N$ form a symmetric
+    proposition, and its orbit under the permutations depends only on $|N|$; for $A\subseteq\mathbb N$ the union
+    $S_A$ of the orbits for sizes in $A$ is invariant under the permutations, so the constant intension $Y_A$ with
+    value $S_A$ is symmetric, pinned down by $\varnothing$, in the domain, and fixed by every arrow, and distinct
+    sets $A$ give distinct $Y_A$. Every set of tuples of the $Y_A$, and every set of such constant relations, is
+    likewise invariant, so the value of a constant intension in the domain. With one object and all parameters
+    fixed, a real number structure on the $Y_A$ by constant relations is one at every world, rigid with
+    necessarily distinct instances, and the constant intensions of the sets of its constant relations are
+    represented powers. So Analytic Necessitism and its second-order form hold.

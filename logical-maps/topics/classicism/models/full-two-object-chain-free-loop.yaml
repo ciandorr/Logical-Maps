@@ -67,6 +67,13 @@ arguments:
 - fails: [analytic-necessitism]
   by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell
   date: '2026-10-23'
+  withdrawn:
+    date: '2026-10-29'
+    by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, after a trawl subagent's report
+    reason: >-
+      It rests on the step of the withdrawn analytic-necessitism-unretracted-arrow: the instances of a
+      rigid carrier need not be determined by their transports along $h$, only to be transported
+      injectively, and here they can be (see the argument analytic-necessitism-codomain-chain).
   choice: free
   text: >-
     At $W_0$, at type $tt$. The propositions at $W_1$ are the sets of the arrows $s^n$, continuum
@@ -79,6 +86,22 @@ arguments:
     by its transport along $h$, its value at the identity being free, while the instances of a rigid
     carrier would have to be. With infinitely many individuals the general argument applies as it
     stands; this one covers the single individual, where the infinite type lies at $W_1$.
+- id: analytic-necessitism-codomain-chain
+  holds: [analytic-necessitism, second-order-analytic-necessitism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At type $tt$. For a set $A$ of natural numbers let $Y_A$ be the intension whose value at every arrow into
+    $W_1$ is $E^A$, for an injection $A\mapsto E^A$ into the sets of propositions at $W_1$, which are continuum
+    many, and at the identity of $W_0$ is $\varnothing$. It depends only on the codomain, so it is in the full
+    domain; its transport along $h$, or along any arrow into $W_1$, is the codomain-only intension at $W_1$ with
+    value $E^A$; and distinct $A$ give distinct $Y_A$ at both objects. Carry the reals onto the $Y_A$ by
+    codomain-only relations, whose values at $W_1$ are the transported sets of tuples. Along every arrow the
+    structure goes to an isomorphic one, a real number structure at the target, the model being full. So it is
+    rigid, with necessarily distinct instances, and necessarily a real number structure, and the codomain-only
+    intensions of the sets of its codomain-only relations are represented powers. So Analytic Necessitism and
+    its second-order form hold.
 notes: >-
   The two-object chain with an infinite monoid of endomorphisms at the second object. It is recorded to
   refute the conjecture possible-infinity-t-implies-axiom-of-infinity-t: the evaluation object has four

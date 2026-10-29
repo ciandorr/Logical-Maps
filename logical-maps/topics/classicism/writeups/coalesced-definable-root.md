@@ -137,6 +137,79 @@ propositions is the value at the identity of some root property, the value
 at the identity being unconstrained. Atomlessness fails too, the base
 proposition $(\top,\bot)$ being an atom; it also witnesses Actuality.
 
+*Correction of 28 October 2026.* The Lindenbaum algebra is not atomless:
+for each $n\ge1$ the sentence "the Fregean Axiom holds and there are exactly
+$n$ individuals" is complete over C($\Sigma_0$), so it is an atom (found by
+GPT-6 Astra, prompted by Daniel Kodsi). The verdicts of this paragraph stand,
+by the argument of the next section.
+
+## Atoms, completeness and Forcing Possibilism
+
+*Added 28 October 2026, from GPT-6 Astra's notes of 25 October 2026 in
+Daniel Kodsi's pull request #18, checked and written up by Claude Opus 5.5,
+prompted by Cian Dorr.*
+
+For $n\ge1$ let $A_n$ be the closed pure sentence "the Fregean Axiom holds
+and there are exactly $n$ individuals", and use the same letter for the root
+proposition it denotes.
+
+**Each $A_n$ is an atom.** At a component object $V$ where $A_n$ is true,
+the Fregean Axiom gives Extensionality at every type (recorded), so every
+entity at $V$ is fixed by its extension there. By induction on types, the
+domains at $V$ are finite, and every set of tuples is the extension of an
+entity, being definable from parameters by a finite disjunction of
+conjunctions of identities. So the domains at $V$, with application at its
+identity arrow, form the full extensional hierarchy over $n$ individuals,
+and the truth at $V$ of a formula depends only on this structure. Any two
+such structures are isomorphic, by an isomorphism that may be chosen to send
+any given individual to any other. So the truth of $t(a)$ at $V$, for a
+closed term $t(d)$ of $\mathcal L(\Sigma_0)$, is the same for every such
+$V$ and every individual $a$ at $V$. Now take any root proposition $p$, with
+term $t$. At the identity, $p\land A_n$ is false, as $A_n$ is: there are
+infinitely many root propositions, so two distinct ones agree in truth
+value there and the Fregean Axiom fails. At an arrow $\langle V,a\rangle$
+with $A_n$ false at $V$, $p\land A_n$ is false; at those with $A_n$ true at
+$V$, it is uniformly true or uniformly false. So $p\land A_n$ is $A_n$ or
+$\bot$. And $A_n\ne\bot$, since the full extensional hierarchy over $n$
+individuals is a model of C in which $A_n$ is true, and the components are
+complete for C. The $A_n$ are pairwise disjoint.
+
+**Completeness fails.** There are only countably many root propositions, a
+truth value together with a closed term of $\mathcal L(\Sigma_0)$. If every
+subfamily $\{A_n:n\in N\}$ had a least upper bound $s_N$, then $A_k\le s_N$
+iff $k\in N$: for $k\notin N$, $s_N\land\neg A_k$ is also an upper bound, so
+$s_N\le\neg A_k$. So $N\mapsto s_N$ would be injective on the subsets of
+$\mathbb N$, which is impossible. Fix an $N$ for which the join is missing;
+$\{A_n:n\in N\}$ is the value at the identity of a root property of
+propositions, so Boolean Completeness at type $t$ fails (for the meet form,
+take the complements $\neg A_n$). The family is moreover countable in the
+sense of Countable Boolean Completeness at $\sigma=t$: the numbers
+$\operatorname{Suc}^n\mathbf 0$ of type $(tt)t$ are natural numbers, by
+theorems of C, and pairwise distinct at the root, since a root property of
+propositions can have exactly $n$ instances there; and the relation with
+value $\{(A_n,\operatorname{Suc}^n\mathbf 0):n\in N\}$ at the identity, and
+empty elsewhere, is a root relation injecting the family into them. So
+Countable Boolean Completeness fails. Atomicity fails as before, and also
+because Maximalism (pure) holds and excludes Atomicity (type $t$).
+
+**Forcing Possibilism holds**, at every type $\sigma$. Every set of tuples of
+root entities is the value at the identity of a root relation, so the
+internal notions at $W_0$ agree with the external ones: a complete Boolean
+algebra $(X,R)$ there is externally one, and injections and isomorphisms
+exist internally exactly when they exist externally. If $X$ is Dedekind
+finite, it is finite. If $X\prec\lambda p\,.\,\top$, then $X$ injects into
+the countable set of root propositions; were it infinite, it would be
+countably infinite, and there would be an injection back. So in both cases
+$(X,R)$ is a finite Boolean algebra, with $k$ atoms say. Put
+$p:=A_1\lor\dots\lor A_k$ ($p:=\bot$ if $k=0$). Then $p\ne\top$, as
+$A_{k+1}$ is disjoint from it, and every $q\le p$ is the join of the $A_i$
+below it, since $q=\bigvee_i(q\land A_i)$ and each $q\land A_i$ is $A_i$ or
+$\bot$. So the propositions below $p$ form the algebra of subsets of
+$\{A_1,\dots,A_k\}$, which is isomorphic to $(X,R)$, and the root relation
+with that isomorphism as its value at the identity witnesses Forcing
+Possibilism. The argument uses choice in the metatheory, to pass from
+Dedekind finiteness to finiteness.
+
 ## Other verdicts
 
 - **Choice.** Well-Ordering and Transversal Choice are evaluated at the

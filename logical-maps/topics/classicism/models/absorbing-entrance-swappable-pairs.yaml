@@ -1,0 +1,163 @@
+id: absorbing-entrance-swappable-pairs
+name: 'Absorbing entrance to an integer action, with finitely supported swappable pairs'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Absorbing entrance with finitely supported pair
+  intensions, research note of 26 October 2026, §§1–5 (unpaginated), in Daniel Kodsi's pull request #18 of
+  26 October 2026 (branch classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+source_names:
+- Astra via Kodsi 26 Oct
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61; Appendix D, pp. 73–74
+  note: Action models; the domains here are the finitely supported part of a full action model.
+meets:
+  sigma-top: Every constant of Σ is relational and denotes the top element of its type, which is fixed by
+    every swap.
+  infinitely-many-individuals: The individuals are the countably many $A_n^i$.
+definition: >-
+  Two objects $r$ and $s$, with one arrow $a:r\to s$, the integers as the arrows $s\to s$ (composed by
+  addition), none from $s$ to $r$, and $k\circ a=a$ for every integer $k$; so only $1_r$ and $a$ leave $r$.
+  The individuals at both objects are $A_n^0,A_n^1$ ($n\in\mathbb N$), fixed by every arrow. The group
+  $\Gamma=\{0,1\}^{\mathbb N}$ acts on them by swapping the $n$th pair when $\gamma(n)=1$, and on
+  everything else through them; it is not part of the category. A relational domain at an object holds the
+  intensions of the full action model (sets of tuples tagged by the arrows out of the object) that have
+  finite support, being fixed by every $\gamma$ vanishing on some finite set. Evaluation point: $1_r$.
+  Interpretation of Σ: every constant of Σ is relational, and each denotes the top element of its type.
+arguments:
+- id: intensional-choice
+  holds: [intensional-choice-r]
+  fails: [necessary-intensional-choice-r]
+  choice: free
+  writeup: absorbing-entrance-swappable-pairs
+  text: >-
+    Intensional Choice holds at $r$ at every type: if $F$ is necessarily instantiated, pick $x$ in its row
+    at $1_r$ and $y$ in its row at $a$; the intension holding of $x$ at $1_r$ and of $y$ at $a$ is finitely
+    supported, entails $F$, and has exactly one instance at both arrows out of $r$. It fails at $s$ at type
+    $e$, for the intension $F$ holding at the arrow $\nu(n)$, for a bijection $\nu:\mathbb N\to\mathbb Z$,
+    of the $n$th pair: $F$ is fixed by every swap and necessarily instantiated, but if $G\le F$ is
+    necessarily uniquely instantiated with support $N$ and $n\notin N$, the swap of the $n$th pair fixes $G$
+    and the arrow $\nu(n)$ and exchanges the two candidates for $G$'s instance there.
+- id: boolean-completeness
+  holds: [necessary-boolean-completeness-r]
+  choice: free
+  writeup: absorbing-entrance-swappable-pairs
+  text: >-
+    At each object and relational type the order is inclusion of tagged sets. The actual instances of a
+    property with support $N$ form a family invariant under the swaps vanishing on $N$, so its union is
+    supported by $N$, admitted, and the least upper bound.
+- id: atomicity
+  holds: [necessary-atomicity-r]
+  choice: free
+  writeup: absorbing-entrance-swappable-pairs
+  text: >-
+    A singleton tagged tuple is supported by the union of its entries' finite supports, so it is admitted,
+    and it is an atom below every relation containing it.
+- id: barcan-t
+  fails: [barcan-t]
+  choice: free
+  writeup: absorbing-entrance-swappable-pairs
+  text: >-
+    Since $k\circ a=a$, every proposition at $r$ transports along $a$ to $\varnothing$ or $\mathbb Z$. Let
+    $Q$ hold at $1_r$ of every proposition and at $a$ of these two. Then every proposition necessarily has
+    $Q$, but $\{0\}$ lacks it at $a$.
+- id: distinctness-necessary-t
+  fails: [distinctness-necessary-t]
+  choice: free
+  writeup: absorbing-entrance-swappable-pairs
+  text: >-
+    $\{1_r\}$ and $\bot$ are distinct at $r$, and both transport to $\bot$ along $a$.
+- id: tame-rigidity
+  holds: [necessary-tame-rigidity-r, necessary-rigid-comprehension-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At either object, for an entity with support $N$ and current extension $E$, the haecceity
+    disjunction $k\mapsto k\cdot E$ has support $N$, transport commuting with the swaps, so it is
+    admitted, rigid and coextensive with it: Rigid Comprehension holds. A weakly rigid $Y$ has rows
+    containing $k\cdot Y_1$, by weak persistence, and contained in it, by weak inextensibility tested
+    against that haecceity disjunction; so it is rigid.
+- id: truth-implies-nd-necessity
+  holds: [distinctness-preserving-collapse]
+  fails: [necessary-truth-implies-five-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    $\{1_r\}$ is true, entails every truth, and is possible only at $1_r$, every arrow into $s$ staying
+    there; so every truth is ND-necessary at $r$. At $s$ every arrow is invertible, so $\Box$ is an S5
+    operator there, $\Box_5\le\Box$, and the true $\{0\}$ is not 5-necessary.
+- id: five-implies-nd
+  holds: [necessary-five-implies-nd-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $r$ every truth is ND-necessary. At $s$, $\Box_5\le\Box$, the arrows being invertible, and
+    $\Box\le\Box_{\ne}$ is a theorem.
+- id: self-atoms
+  holds: [necessary-self-atoms-are-strong-atoms-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At every relational type the atoms are the singleton tagged tuples. At $r$, a self-atom instantiated
+    at $1_r$ is an atom, the singleton of a tuple tagged $1_r$, whose transport along $a$ is $0$; one
+    instantiated only at $a$ has a transport holding of its tuples at every integer, not an atom. At
+    $s$, transport shifts the tags bijectively, so a self-atom is a singleton. These singletons are
+    strong atoms.
+- id: infinity
+  holds: [axiom-of-infinity-e, possible-infinity-t]
+  fails: [infinity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    The property of cardinalities that hold, at every arrow, only of properties with finitely many
+    instances is fixed by every swap, so admitted; it holds of $\mathbf 0_e$ and passes to successors,
+    so no finite cardinality holds of the universal property of individuals, which has infinitely many
+    instances. There are four propositions at $r$, so Infinity fails at $t$; at $s$ the domains at types
+    built from $t$ are full, the swaps acting trivially there, and there are infinitely many
+    propositions, so it holds there.
+- id: transversal-choice
+  fails: [transversal-choice-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $e$. Being in the same pair is fixed by every swap, so it is an admitted equivalence
+    relation. A transversal with support $N$ is fixed by the swap of a pair outside $N$, which exchanges
+    its members, so it holds of both or neither.
+- id: pure-b
+  fails: [pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    Distinctness-Necessity at $t$ fails at $r$ (recorded) and holds at every world of $s$, whose arrows
+    are invertible; so its negation is true at $r$ and not possible at $a$.
+- id: analytic-necessitism
+  fails: [analytic-necessitism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $t$. The domains at $s$ at types built from $t$ are full, so the continuum many propositions
+    there carry a real number structure, and there could be one. A rigid structure necessarily one would
+    be one at $r$, among four propositions.
+notes: >-
+  Separates Intensional Choice, with □Boolean Completeness, □Atomicity and □Actuality, from its
+  necessitation. The entrance $r$ has only two outgoing arrows, which a choice of two witnesses covers,
+  while the integer action at $s$ has a necessarily instantiated property of individuals with no
+  finitely supported selector. Astra's source also gives a full action model on the same category, without
+  the finite-support restriction, in a metatheory without countable choice for sets of reals; it is not
+  recorded.

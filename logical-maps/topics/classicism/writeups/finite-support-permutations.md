@@ -106,6 +106,9 @@ Necessitism. The interpretation of Σ plays no part.
 
 The construction uses only that the arrows form a group acting on the pinning points and that
 every finitely pinned intension is present; it does not use the full strength of the
-permutation group. In the other finite-support models some arrow identifies two points, and
-there no entity of type $tt$ is determined by its transport along it (the general argument
-analytic-necessitism-collapsing-arrow-pinned), which is why Analytic Necessitism fails in them.
+permutation group. The other finite-support models were once recorded as failing Analytic
+Necessitism, because some arrow identifies two points and no entity of type $tt$ is determined by
+its transport along it. That argument was withdrawn on 29 October 2026. A rigid carrier only needs
+to be transported injectively, and the constant intensions, fixed by every arrow, give one in each
+of them (the general argument analytic-necessitism-codomain-fixed). So Analytic Necessitism holds
+there as well.

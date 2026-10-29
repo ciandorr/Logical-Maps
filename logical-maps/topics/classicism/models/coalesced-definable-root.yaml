@@ -119,6 +119,33 @@ arguments:
     decreasing sequence without a greatest lower bound being available there; any family of root
     propositions is the value at the identity of a root property, the value at the identity being
     unconstrained.
+  revisions:
+  - date: '2026-10-28'
+    by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026 (the error and the repair); checked
+      and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+    note: >-
+      The Lindenbaum algebra is not atomless: "the Fregean Axiom holds and there are exactly $n$
+      individuals" is complete over C, so for each $n\ge1$ it gives an atom $A_n$. The verdicts stand.
+      Countably many root propositions cannot supply joins for all the subfamilies of the pairwise
+      disjoint $A_n$, so one subfamily has no join, which refutes Boolean Completeness at type $t$; the
+      root relation sending $A_n$ to the number $\operatorname{Suc}^n\mathbf 0$ of type $(tt)t$ makes that
+      subfamily countable, which refutes Countable Boolean Completeness; and Maximalism excludes Atomicity.
+      See the write-up, section "Atoms, completeness and Forcing Possibilism".
+- id: finite-fregean-atoms
+  holds: [forcing-possibilism]
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  choice: uses
+  writeup: coalesced-definable-root
+  text: >-
+    At every type. The atoms $A_n$ of the revised lindenbaum argument are pairwise disjoint. Every set of
+    tuples of root entities is the value at the identity of a root relation, so internal Dedekind
+    finiteness, injections and isomorphisms at $W_0$ agree with the external ones. A Dedekind-finite
+    complete Boolean algebra is then finite, and so is one with fewer elements than the countably many root
+    propositions, a countably infinite one having an injection back. A finite one with $k$ atoms is
+    isomorphic to the propositions below $A_1\lor\dots\lor A_k$, which is not $\top$, since $A_{k+1}$ is
+    disjoint from it. See the write-up.
 - id: one-individual-at-root
   fails:
   - infinity-e

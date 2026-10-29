@@ -115,6 +115,44 @@ arguments:
     component, pinned down by $\emptyset$. The components, any action models complete for
     C($\Sigma$), need not be extensionally full, so the model does not meet the condition
     extensionally-full, which asks for it at every object.
+- id: parity-family
+  fails: [boolean-completeness-t]
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  choice: free
+  text: >-
+    In the join form, which is equivalent. Let $c_0,c_1,\ldots$ be distinct propositional constants of
+    $\Sigma^+$ outside $\Sigma$, and $a_n:=\hat c_n\land\bigwedge_{j<n}\neg\hat c_j$. The $a_n$ are
+    pairwise disjoint and nonzero: $a_n$ is true at any $\langle V,I\rangle$ with $I(c_n)=\top$ and
+    $I(c_j)=\bot$ for $j<n$. Let $Y$ be the root property whose value at the identity is $\{a_n:n\text{
+    even}\}$ and which is empty elsewhere, pinned down by $\emptyset$. Suppose $u$ is an upper bound of the
+    $a_n$ with $n$ even, pinned down by a finite $S$. Fix an object $V$ and an interpretation $I$ sending
+    every $c_j$ to $\bot$. Choose an even $n$ and an odd $m$ with $c_n,c_m\notin S$, and let $I_n$ and
+    $I_m$ differ from $I$ only in sending $c_n$, respectively $c_m$, to $\top$. Then $a_n$, and so $u$,
+    is true at $\langle V,I_n\rangle$; as $I_n$ agrees with $I$ on $S$, $u$ is true at $\langle
+    V,I\rangle$, and so at $\langle V,I_m\rangle$, where $a_m$ is true. So $u\land\neg a_m$ is an upper
+    bound of the even $a_n$, $a_m$ being disjoint from each of them, and it is strictly below $u$. No upper
+    bound is least. From Astra's note "Unrestricted interpretation roots fail propositional completeness"
+    (26 October 2026, §§1–2), in Daniel Kodsi's pull request #18, which states it for a variant of this
+    model with the same four relevant features.
+- id: one-atom
+  fails: [forcing-possibilism]
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  choice: free
+  text: >-
+    The only atom is $\delta$, the proposition true at the identity alone. A proposition $p$ true at some
+    $\langle V,I\rangle$, pinned down by a finite $S$, is split by $\hat c$ for a propositional constant
+    $c\notin S$: $p$ is true at the two arrows that differ from $\langle V,I\rangle$ only in sending $c$
+    to $\top$ and to $\bot$, and $\hat c$ is true at just one of them. Any other nonzero proposition is
+    $\delta$. Now let $X$ have as its value at the identity four individual constants and let $R$ order
+    them as the four-element Boolean algebra, both empty elsewhere. $(X,R)$ is a finite complete Boolean
+    algebra, every subset of the four being the value at the identity of a root property. An interval
+    below some $p$ isomorphic to it would contain two atoms, which would be atoms of the whole algebra.
+    From Astra's note "Pure Maximalism and Forcing Possibilism" (25 October 2026, §6), in Daniel Kodsi's
+    pull request #18.
 notes: 'Built on 19 October 2026 to show that Maximalism (pure, and for Σ) is consistent with BF, which no
   recorded model did. The construction is Cian Dorr''s; the condition that transports land in the component
   domains, without which a transport could leave a component''s domain, was added in discussion. That it is

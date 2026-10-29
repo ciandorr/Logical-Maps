@@ -1,0 +1,164 @@
+id: supported-product-surjections-glued-constants
+name: 'Supported-product action model: free-monoid coordinates and surjections of the individuals, glued constants'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; further verdicts by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Logical Necessity without Actuality, research note of 22
+  October 2026, §11 (unpaginated), in Daniel Kodsi's submission of 24 October 2026 (branch
+  classicism-results-2026-10-24 of github.com/dkodsi/Logical-Maps), listed in his pull request #18 of 26
+  October 2026.
+source_names:
+- Astra via Kodsi 22 Oct
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §§3.4–3.5, pp. 55–61
+  note: One-object action models and their semantics.
+- paper: bacon-2020
+  role: background
+  locator: Appendix A.3
+  note: Gluing the interpretations of Σ at fresh arrows, as in the glued free-monoid models.
+meets:
+  no-actuality-anywhere: >-
+    One object, so Actuality, a closed pure sentence, holds at every world iff at the identity,
+    where it fails (recorded in this model’s verdicts).
+definition: >-
+  As supported-product-free-monoids-glued-constants, with a second coordinate on the arrows. Fix an infinite
+  cardinal $\kappa\ge\max(|\Sigma|,2^{\aleph_0})$, sets $I$ and $U$ of size $\kappa^+$, and the free monoid
+  $L$ of finite words on an alphabet of size $\kappa$. The arrows are the pairs $(m,s)$ with $m\in L^I$ and
+  $s$ a surjection $U\to U$, composed by $(m,s)(m',s'):=(mm',s\circ s')$, one object, and evaluation point
+  $1:=(\varepsilon,\mathrm{id})$. The individuals are the members of $U$, with $(m,s)\cdot a:=s(a)$. At a
+  relational type the domain consists of the profiles $F$ on arrows that depend on at most $\kappa$
+  coordinates of $m$ and arbitrarily on $s$; transport is $(h\cdot F)_k:=F_{kh}$. Σ: distinct individuals
+  $a_c$ for the individual constants; the relational constants are glued (see the write-up).
+arguments:
+- holds: [logical-necessity-r]
+  choice: uses
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    For each $\mathcal L(\Sigma)$-sentence true under some interpretation $J_\alpha$, a surjection
+    $s_\alpha$ sends each $a_c$ to $J_\alpha(c)$, there being at most $\kappa$ constants and $\kappa^+$
+    other individuals. Lifts $B_{\alpha,c}$ of the relational values along $(\varepsilon,s_\alpha)$, glued
+    at a fresh coordinate $j$ as in the base model, give an arrow $h_\alpha$ at which every constant
+    takes its $J_\alpha$-value at once. So a $\Sigma$-sentence is possible iff it is true under some
+    interpretation, which gives Logical Necessity.
+- holds: [atomlessness]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    As in the base model, with $q_j:=\{(m,s):m_j=\varepsilon\}$ for $j$ outside the support of $p\ne\bot$.
+- holds: [necessary-countable-boolean-completeness-r]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    As in the base model: the finite cardinalities are the standard numerals, and the pointwise union of
+    countably many profiles is supported by the union of their supports.
+- holds: [axiom-of-infinity-e]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    The finite cardinalities are the standard numerals, and each holds exactly of the properties with that
+    many actual instances. The universal property of individuals has $\kappa^+$ of them, so it has no finite
+    cardinality. The axiom is closed and pure, so it holds necessarily.
+- fails: [vicinity]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    As in the base model, with the arrow that has one letter at a coordinate $j$ outside the support of
+    a truth $p$ and surjection $\mathrm{id}$: it satisfies $p$ but not $\Diamond q_j=q_j$.
+- fails: [weakly-inextensible-comprehension-r]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    As in the base model, at $tt$, for the constant property $\{q_i:i\in I\}$; the arrows used have surjection
+    $\mathrm{id}$, and the $q_i$ ignore the surjection.
+- fails: [rigid-power-r]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    At type $(tt)t$, by the base model's shifted family $e_{z,j}$, which ignores the surjection, with the
+    exact-image lemma as adapted in the write-up.
+- holds: [necessary-tame-rigidity-r]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    By the exact-image lemma, which survives once the auxiliary profiles $B_T(E)$ are taken with the
+    surjection fixed: a weakly rigid relation is the profile $h\mapsto h\cdot E$ of its actual extension,
+    and such a relation, with all its transports, is rigid.
+- holds: [necessary-transversal-choice-r, modal-well-ordering-r]
+  choice: uses
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    As in the base model: constant profiles of a transversal, or of a well-order of a type's domain,
+    chosen in the metatheory, are fixed by every arrow, so a formula about them has the same truth value at
+    every arrow.
+- holds: [necessary-intensional-choice-r, necessary-modalized-relational-choice-r]
+  choice: uses
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    As in the base model: if $\Box\exists x\, .\,Fx$, choose $g(m,s)\in F_{(m,s)}$ depending only on $s$ and
+    $m$ restricted to the support of $F$, and take $G_{(m,s)}:=\{g(m,s)\}$; transport being onto, $G$ is
+    necessarily uniquely instantiated. Likewise a functional graph inside $R_{(m,s)}$.
+- holds: [arithmetic-necessitism]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    $\mathbb N_\sigma$ and the numerals are closed pure terms, so their profiles are constant and fixed by
+    every arrow: $\mathbb N_\sigma$ is rigid with necessarily distinct instances.
+- fails: [analytic-necessitism]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    At type $e$. Every set of tuples of individuals is the extension of a constant profile, and
+    $|U|>2^{\aleph_0}$, so a real number structure on individuals exists. None is rigid: two distinct
+    instances $a,b$ of its carrier are identified at the arrow $(\varepsilon,s)$ for a surjection $s$ with
+    $s(a)=s(b)$, so they are not necessarily distinct. At every other type both principles hold, by the
+    base model's arguments (see the write-up).
+- fails: [boolean-completeness-t]
+  choice: uses
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    As in the base model: the propositions $p_x$ there ignore the surjection, and the union of the supported
+    subsets of their intersection has no support.
+- holds: [necessary-rigid-rigidity-r]
+  choice: uses
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    The base model's lifting lemma survives: a rigid relation is lifted along $(k_L,k_s)$ by stripping
+    $k_L$'s suffixes on its support, peeling $k_s$ off the surjection coordinate, and replacing each individual
+    in its tuples by a $k_s$-preimage chosen by a fixed section of $k_s$. So the constant property of being
+    rigid is weakly rigid.
+- holds: [necessary-two-hat-implies-nd-necessity, necessary-five-implies-nd-necessity, necessary-five-implies-two-hat-necessity]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    For $S\subseteq I$ of size at most $\kappa$, let $V_S$ be the set of arrows $(m,s)$ with $m$ empty on $S$ and $s$ a
+    bijection. A truth $q$ with support $S$ has $V_S\le\Diamond q$, with equality for the truth
+    $\{(m,s):m|_S=\varepsilon,\ s=\mathrm{id}\}$, so $\Box_{\ne}p$ iff $V_S\le p$ for some $S$. Hence
+    $\Diamond_{\ne}q$ holds at $(m,s)$ iff $(m,\pi\circ s)\in q$ for some permutation $\pi$, and again some truth $q$
+    has $\Box(\Diamond_{\ne}q\to p)$ iff $V_S\le p$ for some $S$. So $\Box_{\ne}$ is identical to its hat, and
+    therefore to $\Box_5$ (Background, Hats). The principles are closed and pure.
+- fails: [distinctness-preserving-collapse]
+  choice: free
+  writeup: supported-product-surjections-glued-constants
+  text: >-
+    $p:=\{(m,s):s=\mathrm{id}\}$ is true. Any true $q$ is possible at $(\varepsilon,\pi)$ for a permutation
+    $\pi\ne\mathrm{id}$, since $(\varepsilon,\pi^{-1})(\varepsilon,\pi)=1$, while $p$ is false there; so
+    no truth $q$ has $\Box(\Diamond q\to p)$. In the base model every truth is ND-necessary, but that relied on
+    the free monoid having no inverses.
+notes: >-
+  The variant of supported-product-free-monoids-glued-constants with infinitely many individuals. It adds
+  the Axioms of Infinity at $e$ and $t$ to Logical Necessity, □BF, □Relational Choice, □Countable Boolean
+  Completeness and the choice principles, without Actuality, Vicinity, the comprehension principles or Rigid
+  Power. Unlike the base model it fails Truth implies ND-necessity. Analytic Necessitism, in both
+  forms, holds at every type but $e$, and fails at $e$ because $\kappa$ is taken at least $2^{\aleph_0}$
+  (Astra's note needs only $\kappa\ge|\Sigma|$). For countable $\Sigma$, the construction also works with
+  $\kappa=\aleph_0$ and $U$ countable. Then no real number structure on individuals is possible, so both
+  forms hold at $e$ trivially.

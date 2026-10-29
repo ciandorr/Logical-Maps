@@ -19,6 +19,35 @@ references:
 group: modalized-atomless-cloud
 settings:
   family: Use the one-element family consisting of the Cohen algebra RO(Fn(ω,2)).
-arguments: []
+arguments:
+- id: infinity-t
+  holds: [axiom-of-infinity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    As the group's argument for type $e$, with the infinitely many propositions at the root, whose
+    identity there is literal.
+- id: ch-non-contingent
+  holds: [non-contingency-of-ch]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At the root real number structures are standard, by extensional fullness. At a Cohen point the model
+    is the full Boolean-valued model over $\omega$ for the Cohen algebra, so real number structures
+    there are those of $V^{\mathrm{RO}(\mathrm{Fn}(\omega,2))}$; adding one Cohen real preserves
+    cardinals and the value of $2^{\aleph_0}$, so CH holds there iff in $V$. At type $e$ there is no
+    real number structure anywhere. So the disjunct of Non-contingency of CH true in $V$ holds
+    necessarily.
+- id: forcing-possibilism
+  fails: [forcing-possibilism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    The propositions at the root form $\mathbf 2\times\mathrm{RO}(\mathrm{Fn}(\omega,2))$, with the
+    single atom $\{r\}$. The four propositions $\bot$, $\{r\}$, its negation and $\top$ form a complete
+    Boolean algebra, but below a proposition other than $\top$ there are one, two or infinitely many.
 notes: Theorem A. This is the full modalized-domain model of the paper, with world-indexed existence and
   identity. The construction and its proofs are source-reported mathematical evidence, not Lean verification.

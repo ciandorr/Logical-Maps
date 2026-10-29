@@ -1,0 +1,44 @@
+id: vicinity-and-relational-choice-imply-transversal-choice
+premises:
+- vicinity
+- relational-choice-r
+conclusion: transversal-choice-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026 (the theorem, by an interpretation
+    of C5 in C with Vicinity); direct proof by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 26–28
+    October 2026, using Christopher Sun's collection argument
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Vicinity suffices for Relational Choice to imply Transversal
+  Choice, research note of 26 October 2026 (unpaginated), in Daniel Kodsi's pull request #18 of 26 October
+  2026 (branch classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+- Christopher Sun, argument sent to Cian Dorr on 19 October 2026, for the 5-necessity form of Vicinity,
+  whose collection step is Lemma 2 of the write-up.
+source_names:
+- Astra via Kodsi 26 Oct
+- Sun 19 Oct
+proof: >-
+  See the write-up. Let $v$ witness [[vicinity]] and put $s:=v\land\forall r\, .\,r\to v\le\Diamond r$,
+  which is true. Then $s$ settles every identity statement ($s\le p$ or $s\le\neg p$), and if $s\le Fx$
+  for every $x$ then $s\le\forall x\, .\,Fx$ (Sun's argument). So every formula built from identities
+  and atoms $Yb$, with each such $Y$ settled or bound by a quantifier restricted to settled properties,
+  is settled. Given an equivalence relation $R$ at $\sigma$, call $B^{\sigma t}$ a candidate if $B\le\lambda
+  x\, .\,s$ and $B$ is necessarily a partial transversal. [[relational-choice-r|Relational Choice]] chooses,
+  for each $B$, a point outside the cells $B$ meets, if there is one, and $fB$ adds it to $B$. The [[bourbaki-witt-admissible|Bourbaki–Witt
+  lemma for admissible chains]], with the settled properties admissible, the candidates ordered by $\le$,
+  and $f$ as the step, gives a candidate $m$ with $fm=m$, which must be a transversal. Its hypotheses
+  hold: the union of a settled chain of candidates, restricted to $s$, is their supremum, and the properties
+  the lemma's proof forms are settled.
+references: []
+notes: >-
+  Through the recorded results, ND at type $t$, and in particular C5, gives Transversal Choice from Relational
+  Choice, and Vicinity with Relational Choice gives Transversal. So any model separating Relational Choice
+  from Transversal Choice ([[relational-choice-r-implies-transversal-choice-r]]) falsifies Vicinity. Astra's
+  proof interprets C5 in C with Vicinity and proves the result for C5. The recorded proof works directly
+  in C, and the core of that interpretation reappears in its first three lemmas.

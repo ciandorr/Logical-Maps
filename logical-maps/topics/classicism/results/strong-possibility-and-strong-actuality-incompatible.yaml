@@ -1,0 +1,46 @@
+id: strong-possibility-and-strong-actuality-incompatible
+premises:
+- strong-possibility-r
+- strong-actuality
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Strong Possibility: products, reduced products, and minimal
+  identity algebras, research note of 22 October 2026, §5 (unpaginated), and Strong Possibility: density,
+  universal theory, and algebraic embeddings, research note of 22 October 2026, §§2–3 (unpaginated), in
+  Daniel Kodsi's submission of 24 October 2026 (branch classicism-results-2026-10-24 of
+  github.com/dkodsi/Logical-Maps), listed in his pull request #18 of 26 October 2026.
+source_names:
+- Astra via Kodsi 22 Oct
+proof: >-
+  (1) Reflection: if $U$ is a closed sentence $\forall\bar x\,\theta(\bar x)$ with $\theta$ a Boolean
+  combination of identities between terms, then $\Diamond_{\ne}U\to U$ is a theorem of C. For suppose
+  $\theta(\bar a)$ fails. Let $q$ be the conjunction of the negations of the identities in $\theta(\bar a)$
+  that are false; $q$ is true. Necessarily, if $\Diamond q$ then those identities are still false, since an
+  identity, once true, is necessary (NI); and the true ones are still true, by NI. So necessarily, if
+  $\Diamond q$ then $\theta(\bar a)$ fails and $U$ is false: $q$ witnesses $\Box_{\ne}\neg U$, which is
+  $\neg\Diamond_{\ne}U$. (2) Let $D(w):=\forall p\, .\,w\le p\lor w\le\neg p$, a term of type $t$, and
+  $U_t:=\forall w\, .\,w=\bot\lor D(w)\ne\top$, "nothing is a strong atom", $\Diamond w$ being $w\ne\bot$
+  and $\Box D(w)$ being $D(w)=\top$. $U_t$ is of the form in (1). (3) $U_t$ is consistent with Maximalist
+  Classicism: at the root of coalesced-pinned-substitutions-root, Maximalism (pure) and Atomlessness hold,
+  and a strong atom $w$ has no possible proposition strictly below it, since a possible $q\le w$ has
+  $w\le q$ or $w\le\neg q$, and the second gives $q\le\neg q$, so $q=\bot$. (4) So Strong Possibility (pure)
+  gives $\Diamond_{\ne}U_t$, hence $U_t$ by (1); but Strong Actuality says that some true proposition, which is
+  then possible, is a strong atom.
+references: []
+notes: >-
+  Strong Atomicity (type $t$) implies Strong Actuality, so it is excluded too; Astra's note also derives,
+  in C, that a strong atom at a relational type projects, by existential quantification, to a strong atom
+  of type $t$, so Strong Possibility (pure) excludes strong atoms at every relational type. Step (3) relies on
+  the recorded atomlessness argument for coalesced-pinned-substitutions-root, which, like the model's
+  verification, has not had a second reader. Astra's second note shows more generally that Strong
+  Possibility (pure) is equivalent to the set of universal identity sentences consistent with Maximalist
+  Classicism, by the reflection lemma (1).

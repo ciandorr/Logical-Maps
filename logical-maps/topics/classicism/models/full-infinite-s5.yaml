@@ -85,10 +85,34 @@ arguments:
     fail, with one individual as with the socks as individuals. (Cian Dorr's construction of the
     choiceless S5 model, with the relation "lies in the next pair" for $F$.)
 
+- id: forcing-possibilism-socks
+  fails: [forcing-possibilism]
+  when: {metatheory: socks}
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked and recorded by Claude Opus
+    5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    As in the general argument forcing-possibilism-continuum-arrows, with the worlds the union $W$ of the
+    socks $P_n$, so that the propositions are the sets of worlds. The regular-open algebra $B$ of Cantor
+    space has the size of the continuum in ZF, and it injects into the propositions, $S\mapsto\bigcup_{n\in
+    S}P_n$ injecting the sets of natural numbers. The propositions do not inject into $B$: an injection
+    would give one of $W$ into the sets of natural numbers, through $w\mapsto\{w\}$, and the lexicographic
+    order of those sets would then choose a member of each sock. So $B$, realised at type $t$ by fullness,
+    is a small complete Boolean algebra, atomless, while every entailment algebra below a proposition is
+    atomic or has one element. (From Astra's note "Forcing Possibilism, Choice and Infinity", §6, in
+    Daniel Kodsi's submission of 24 October 2026.)
+
 notes: >-
   A basic reference model, recorded at Cian Dorr's request: the full S5 model with infinitely many
-  worlds. Nothing depends on which infinite set $W$ is. In the variant with infinitely many
-  individuals the group fixes them as the natural numbers; any infinite set gives the same verdicts
-  under choice. Its verdicts are those of the full permutation group model, whose arrows are
-  likewise all invertible. Without choice in the metatheory, the same construction over a family of nonempty
-  sets with no choice function refutes Intensional Choice; that variant is not recorded.
+  worlds. Except for Forcing Possibilism, no recorded verdict depends on which infinite set $W$ is. In
+  the variant with infinitely many individuals the group fixes them as the natural numbers; any
+  infinite set gives the same verdicts under choice. Its verdicts are those of the full permutation
+  group model, whose arrows are likewise all invertible, again except for Forcing Possibilism, which
+  the map leaves unknown here. Under choice, Forcing Possibilism holds iff $2^{|W|}=2^{\aleph_0}$ (GPT-6
+  Astra, prompted by Daniel Kodsi, 23 October 2026): if so, every small or Dedekind-finite complete
+  Boolean algebra is finite, an infinite one having at least continuum many elements, and is isomorphic
+  to the subsets of a finite set of worlds; if not, the regular-open algebra of Cantor space is small
+  and atomless, while the algebra below any proposition is atomic. So it holds for $W=\mathbb N$ and
+  fails for $|W|=2^{\aleph_0}$. With $W$ the union of Russell's socks it fails without choice
+  (forcing-possibilism-socks).

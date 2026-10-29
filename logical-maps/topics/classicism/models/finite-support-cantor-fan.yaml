@@ -31,6 +31,14 @@ definition: 'An ideally full action model in the sense of Classicism, Appendix D
   Evaluation point: $1_{W_0}$. Interpretation of Σ, fixed for this record: every constant of Σ is relational,
   and each denotes the top element of its type.'
 meets:
+  extensionally-full: >-
+    At $W_0$ the identity is the only arrow into $W_0$, so an intension with any value at the identity
+    and $\varnothing$ at the $k_u$ is pinned down by $\varnothing$; at $V$ the domain is full.
+  infinitely-many-individuals: >-
+    The individuals at $W_0$ are the natural numbers.
+  codomain-intensions: >-
+    An intension depending only on the codomain is pinned down by $\varnothing$, and the model is
+    ideally full.
   sigma-top: This is the interpretation the definition fixes.
   infinitely-many-propositions: The clopen subsets of Cantor space.
   actual-world-isolated: $\{1_{W_0}\}$ is pinned down by $\varnothing$, since its transport along every
@@ -84,6 +92,36 @@ arguments:
   text: $k_u$ sends both $\varnothing$ and $\{1_{W_0}\}$ to $\varnothing$, so it is not injective at type
     $t$ and ND (type t) fails (Proposition 3.24(i)). And $\Diamond\{1_{W_0}\}$ is true while $\Box\Diamond\{1_{W_0}\}$
     is false, every $k_u$ transporting $\{1_{W_0}\}$ to $\varnothing$; so 5 fails.
+- id: necessity-of-arithmetic
+  holds: [necessity-of-arithmetic]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    $V$ is a one-world full model with finitely many entities of every type, so $I_\sigma$ fails at the
+    worlds into $V$; $W_0$ is extensionally full with infinitely many individuals and propositions, so
+    arithmetic is standard there.
+- id: well-ordering
+  holds: [necessary-well-ordering-r]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_0$ extensional fullness makes a well-order of the domain at the identity an extension there;
+    $V$ is finite and full.
+- id: boolean-completeness-t
+  fails: [boolean-completeness-t, countable-boolean-completeness-r, forcing-possibilism, pure-b-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    The propositions at $W_0$ are $\{1_{W_0}\}$ or not with a clopen subset of Cantor space, so the
+    family $a_{2m}$ of finite-support-sections-and-projection has no least upper bound; it is countable
+    relative to $e$, the numerals at $e$ being standard and distinct, and the relation pairing $a_{2m}$
+    with the $m$th numeral being an extension. $\{1_{W_0}\}$ is the only atom, so no proposition has
+    exactly four below it, though $\bot$, $\{1_{W_0}\}$, its negation and $\top$ form a complete
+    algebra. And there are at least three individuals at $W_0$ and not at $V$, which every $k_u$ sees
+    alone.
 notes: 'Built to show that Self-Atomicity does not imply Atomicity, even with Actuality, Strong Actuality
   and BF (type t): a root whose propositions are the clopen sets of Cantor space, each point of which
   is a terminal world. Every nonempty clopen set is a self-atom, becoming the actual-world proposition

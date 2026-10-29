@@ -1,0 +1,48 @@
+id: vicinity-boolean-completeness-t-and-relational-choice-imply-actuality
+premises:
+- vicinity
+- boolean-completeness-t
+- relational-choice-r
+conclusion: actuality
+status: proved
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25–26 October 2026 (the theorem, by an interpretation
+    of C5 in C with Vicinity); direct proof by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October
+    2026, following Cian Dorr's suggestion to run the C5 argument below the strongest 5-necessary truth
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Relational Choice and propositional completeness imply
+  Actuality over C5, research note of 25 October 2026, §§3–8 (unpaginated), with its transfer to Vicinity,
+  items 05 and 23 of the next-update batch in Daniel Kodsi's pull request #18 of 26 October 2026 (branch
+  classicism-integration-2026-10-26 of github.com/dkodsi/Logical-Maps).
+- Christopher Sun, argument sent to Cian Dorr on 19 October 2026, for the 5-necessity form of Vicinity,
+  whose collection step is used.
+- Cian Dorr, suggestion of 28 October 2026 that the C5 argument be run with 5-necessity in place of necessity.
+source_names:
+- Astra via Kodsi 25–26 Oct
+- Sun 19 Oct
+- Dorr 28 Oct
+proof: >-
+  See the write-up. Let $s$ be the true proposition of [[vicinity-and-relational-choice-imply-transversal-choice]],
+  below which every identity is settled and material quantification over a settled family of propositions
+  computes its actual meet or join. If no atom is true, some true $h\le s$ has nothing but atomless
+  elements below it. [[relational-choice-r|Relational Choice]] partitions each nonzero $p\le h$ into proper
+  parts, settledly, and the [[bourbaki-witt|Bourbaki–Witt lemma]], with [[boolean-completeness-t|Boolean
+  Completeness]] at $t$ for the glbs of chains, gives a descending chain $M$ following the true parts, all
+  of whose members are true except the last, $m$, which is their glb. A second use of Relational Choice
+  codes the discarded parts in one proposition $b$, which yields a term $g$ agreeing with the step of $M$
+  at its true members. The [[bourbaki-witt-admissible|admissible Bourbaki–Witt lemma]] for $g$, with the
+  settled properties admissible, gives a settled chain $N$ containing $M$, whose members above $m$ form a
+  settled family of truths with glb $m$. So $m$ is true, a contradiction.
+references: []
+notes: >-
+  The instance used is Relational Choice with inputs and outputs of type $t$. Astra derives the theorem by
+  interpreting C5 inside C with Vicinity and proving it for C5; Astra also proves the form with Zorn at
+  type $t$ in place of Relational Choice, which follows from this one through the recorded implications
+  from Zorn to Relational Choice. With [[actuality-implies-vicinity]], over Boolean Completeness at $t$ and
+  Relational Choice, Vicinity and Actuality are equivalent.

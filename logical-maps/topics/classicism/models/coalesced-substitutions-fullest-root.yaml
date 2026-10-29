@@ -1,0 +1,109 @@
+id: coalesced-substitutions-fullest-root
+name: 'Coalesced sum: interpretation and substitution arrows, fullest root'
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 29 October 2026 (the construction, coalesced-pinned-substitutions-root without
+    the pinning, and the identification of ND-possibility and 5-possibility with truth at an injective
+    and at a bijective substitution), with Claude Opus 5.5 (Anthropic), who wrote the verification
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, construction of 29 October 2026, with Claude Opus 5.5 (Anthropic); verification in the
+  write-up.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix E, Definition E.2, pp. 80–83.
+- Cian Dorr, John Hawthorne and Juhani Yli-Vakkuri, The Bounds of Possibility (2021), Appendix D,
+  Propositions D17, D18 and D21, pp. 405–408.
+source_names:
+- Dorr 29 Oct
+- Classicism
+- The Bounds of Possibility
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix E, Definition E.2, pp. 80–83
+  note: The coalesced sum, with an arrow for every interpretation into every component object and the
+    fullest root domains compatible with the components.
+group: coalesced-sums
+settings:
+  root-arrows: interpretations-and-substitutions
+  construction: 'Fix a set $A$ of action models complete for C($\Sigma$), with disjoint objects and arrows,
+    and a signature
+    $\Sigma^+\supseteq\Sigma$ with countably infinitely many constants of every type. Add an object
+    $W_0$. Its arrows out are, for each object $V$ of a model in $A$ and each interpretation $I$ of
+    $\Sigma^+$ at $V$, an arrow $\langle V,I\rangle$ into $V$, with $k\circ\langle V,I\rangle=\langle
+    V^{\prime},k\cdot I\rangle$ for an arrow $k:V\to V^{\prime}$ of the component; and for every
+    type-preserving map $f$ of the constants of $\Sigma^+$ to themselves an arrow $f:W_0\to W_0$, the
+    identity map being $1_{W_0}$, with maps composing as functions and $\langle V,I\rangle\circ
+    f=\langle V,I\circ f\rangle$. The individuals at $W_0$ are the individual constants of $\Sigma^+$;
+    $\langle V,I\rangle$ sends each to its interpretation and $f$ acts on them as on constants.
+    Evaluation point: $W_0$, at its identity arrow. Interpretation of Σ, fixed for this record: each
+    constant $c$ of Σ denotes $\hat c$, with transport $I(c)$ along $\langle V,I\rangle$, empty
+    extension at every map, and $f\cdot\hat c=\widehat{f(c)}$.'
+  domains:
+    text: 'An entity at $W_0$ of a relational type is any intension over the arrows out of $W_0$ whose
+      transport along every arrow $\langle V,I\rangle$ is in the domain of $V$ in its component. Transport
+      along a map $f$ keeps an entity in the domain, its transports along the $\langle V,I\rangle$ being
+      transports of the original along the $\langle V,I\circ f\rangle$.'
+meets:
+  complete-components: The models in $A$ are complete for C($\Sigma$), so in particular for C.
+  free-root-component: >-
+    Any extension at the identity of $W_0$ is that of the entity with that extension at the identity
+    and the empty extension at every other arrow, whose transports into the components are empty.
+arguments:
+- id: actuality
+  holds:
+  - actuality
+  by: Cian Dorr, recorded by Claude Opus 5.5 (Anthropic)
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    The proposition $a:=\{1_{W_0}\}$ is in the domain: its transport along a map $f$ is $\{m:m\circ
+    f=1_{W_0}\}$, a set of maps, and along every $\langle V,I\rangle$ it is empty. It is true, and it
+    entails every truth, since a truth contains $1_{W_0}$.
+- id: substitutions
+  fails:
+  - five-implies-nd-necessity
+  - two-hat-implies-nd-necessity
+  - truth-implies-five-necessity
+  by: Cian Dorr, with Claude Opus 5.5 (Anthropic)
+  date: '2026-10-29'
+  choice: free
+  writeup: coalesced-substitutions-fullest-root
+  text: >-
+    $\Box_{\ne}p$ at $W_0$ iff $p$ contains every injective map, and $\hat{\hat\Box}p$ and $\Box_5p$ iff
+    $p$ contains every bijection. With $a$ as in the argument for Actuality, the strongest truth,
+    $\Box_{\ne}p\leftrightarrow\Box(\Diamond a\to p)$; $\Diamond a$ fails at every $\langle V,I\rangle$,
+    no arrow leading back, and holds at a map $k$ iff $k$ has a left inverse, that is, is injective
+    (every type has constants). As $a$ is the actual world, Proposition D18 of The Bounds of Possibility
+    and the witness $q:=a$ give $\hat{\hat\Box}p\leftrightarrow\Box(\Diamond_{\ne}a\to p)$, and
+    $\Diamond_{\ne}a$ holds at $k$ iff $k\cdot a=\{m:m\circ k=1_{W_0}\}$ contains an injective $m$,
+    which is then a bijection with inverse $k$: so iff $k$ is a bijection. Actuality gives $\Box_5\le
+    \hat{\hat\Box}$ (actuality-implies-five-implies-two-hat), and the converse is a theorem of C. Now let
+    $j$ be injective and not surjective, say a shift of the individual constants fixing the rest. The
+    proposition $\neg\{j\}$ is in the domain ($\{j\}$ has transports $\{m:m\circ f=j\}$ and $\varnothing$)
+    and contains every bijection but not $j$: it is 5-necessary and two-hat necessary but not
+    ND-necessary. And the truth $a$ is not 5-necessary, missing every bijection but the identity.
+- id: maximalism
+  holds:
+  - distinctness-signature-r
+  - possibility-plus-signature-r
+  by: Cian Dorr, recorded by Claude Opus 5.5 (Anthropic)
+  date: '2026-10-29'
+  choice: free
+  text: >-
+    As in coalesced-pinned-substitutions-root, whose arguments use only the arrows $\langle
+    V,I\rangle$. A $\Sigma$-formula holds of individual constants $\bar c$ at $\langle V,I\rangle$ iff
+    it holds of $I(\bar c)$ at $V$ under the restriction of $I$ to $\Sigma$. A closed $\Sigma$-sentence
+    consistent with C($\Sigma$) holds at the root of some model in $A$ under some interpretation,
+    which extends to $\Sigma^+$; and a $\Sigma$-formula $P(\bar x)$ consistent with C($\Sigma$) holds
+    there of some $\bar b$, and for distinct $\bar c$ an $I$ with $I(\bar c)=\bar b$ makes $P(\bar c)$
+    possible at $W_0$. So Maximalism and Possibility+ hold for $\Sigma$, and with them the pure forms.
+notes: 'coalesced-pinned-substitutions-root without the finite pinning, suggested by Cian Dorr on 29 October
+  2026. Dropping the pinning lets the singleton of the identity into the domain, so Actuality returns, and
+  with it the coincidence of 5-necessity and two-hat necessity; the substitutions that are injective and
+  not surjective then separate them from ND-necessity, while the arrows into the components keep
+  Maximalism. The argument that it is a model of C is that of coalesced-maximalist-root with the
+  substitutions added (see the write-up) and has not been checked by a second reader. No Lean
+  verification is claimed.'

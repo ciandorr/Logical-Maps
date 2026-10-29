@@ -1,0 +1,33 @@
+id: maximalism-incompatible-with-self-atoms-are-atoms-t
+premises:
+- distinctness-schema-r
+- self-atoms-are-atoms-t
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the argument, a pure self-atom that Maximalism splits, 28 October 2026), with Claude
+    Opus 5.5 (Anthropic), who chose the self-atom so that one-world models witness the possibilities
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026
+  checked_by: []
+  date: '2026-10-28'
+  lean: none
+sources:
+- Cian Dorr, argument of 28 October 2026 that Maximalism (pure) and Self-atoms are atoms are incompatible
+  (session transcript).
+source_names:
+- Dorr 28 Oct
+proof: 'Let $p:=\operatorname{Atom}_t(\top)$, the closed pure sentence saying that $\top$ is an atom, that
+  is, that every proposition is $\top$ or $\bot$. In C, $p$ is necessarily an atom if true: if $p$, then
+  $p\le\top$ and $p\ne\bot$, so $p=\top$, which is then an atom. Let $E_1:=\exists x^e\forall y^e\, .\,y=x$,
+  saying that there is exactly one individual. The closed pure sentences $p\land E_1$ and $p\land\neg E_1$
+  are each consistent with C: they are true in the one-world full models [[full-henkin-singleton-base]]
+  and [[full-henkin-infinite-base]] respectively, where $\top$ is an atom since $D_t=\{0,1\}$. By the possibility
+  form of Maximalism (pure), both are possible; in particular $\Diamond p$, so $p$ is a self-atom, and
+  by Self-atoms are atoms (type $t$) it is an atom. Now $p\land E_1$ and $p\land\neg E_1$ are possible,
+  hence distinct from $\bot$, and lie below the atom $p$, so each is $p$. Then $p=(p\land E_1)\land(p\land\neg
+  E_1)=\bot$, contradicting $\Diamond p$.'
+notes: Cian Dorr's first version took $p$ to be "there is exactly one individual, and that proposition
+  is an atom", split by $\Box$ and $\Diamond$ of claims about the number of individuals; the possibilities
+  it needs call for models in which the number of individuals grows along an arrow. With $p:=\operatorname{Atom}_t(\top)$,
+  $\Box$ is trivial wherever $p$ holds, and two one-world full models witness everything. Compare [[maximalist-distinctness-incompatible-with-atomicity-t]].

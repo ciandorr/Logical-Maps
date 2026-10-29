@@ -86,6 +86,8 @@ theorem AtomicityT.of_dual : AtomicityTDual → AtomicityT := fun d =>
 /-- `atomlessness`: `∀p. ◇p → ∃q. ◇q ∧ q ≤ p ∧ q ≠ p`, every possible proposition has a
 possible proposition strictly below it. -/
 def Atomlessness : Prop := ∀ p : Prop, ◇ p → ∃ q : Prop, ◇ q ∧ q ≤ p ∧ q ≠ p
+/-- `necessary-atomlessness`: Atomlessness, boxed. -/
+def NecAtomlessness : Prop := □ Atomlessness
 
 /-! ## Boolean Completeness at `t` -/
 

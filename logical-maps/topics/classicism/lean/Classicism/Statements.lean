@@ -187,6 +187,10 @@ example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.NecAtomicityT.schemaIn
 
+/-- Principle definition check: `necessary-atomlessness`. -/
+example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
+  Classicism.P.NecAtomlessness.schemaIn
+
 /-- Principle definition check: `necessary-atoms-are-self-atoms-r`. -/
 example {Sig : Classicism.Meta.Signature} : Classicism.Meta.AxiomSet Sig :=
   Classicism.P.NecAtomsAreSelfAtoms.schemaIn
@@ -1140,6 +1144,15 @@ def c5_and_atomicity_t_imply_no_pure_contingency : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecNecessityOfDistinctness.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `c5-and-atomlessness-imply-necessary-atomlessness`
+
+□ND ∧ Atomlessness ⇒ □Atomlessness -/
+def c5_and_atomlessness_imply_necessary_atomlessness : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecNecessityOfDistinctness.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn
 
 /-- `c5-and-completeness-imply-actuality`
 
@@ -2196,6 +2209,30 @@ def necessary_atomicity_t_implies_atomicity_t : Prop :=
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn
+
+/-- `necessary-atomlessness-implies-atomlessness`
+
+□Atomlessness ⇒ Atomlessness -/
+def necessary_atomlessness_implies_atomlessness : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn
+
+/-- `necessary-atomlessness-implies-necessary-atoms-are-strong-atoms-r`
+
+□Atomlessness ⇒ □Atoms are strong atoms -/
+def necessary_atomlessness_implies_necessary_atoms_are_strong_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomsAreStrongAtoms.schemaIn
+
+/-- `necessary-atomlessness-implies-necessary-self-atoms-are-atoms-r`
+
+□Atomlessness ⇒ □Self-atoms are atoms -/
+def necessary_atomlessness_implies_necessary_self_atoms_are_atoms_r : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecSelfAtomsAreAtoms.schemaIn
 
 /-- `necessary-atoms-are-self-atoms-r-and-necessary-self-atoms-are-strong-atoms-r-imply-necessary-atoms-are-strong-atoms-r`
 
@@ -3639,6 +3676,15 @@ def no_pure_contingency_and_atomicity_t_imply_necessary_atomicity_t : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomicityT.schemaIn
+
+/-- `no-pure-contingency-and-atomlessness-imply-necessary-atomlessness`
+
+No Pure Contingency ∧ Atomlessness ⇒ □Atomlessness -/
+def no_pure_contingency_and_atomlessness_imply_necessary_atomlessness : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomlessness.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecAtomlessness.schemaIn
 
 /-- `no-pure-contingency-and-atoms-are-self-atoms-r-imply-necessary-atoms-are-self-atoms-r`
 
@@ -5346,26 +5392,6 @@ def stitched_cohen_coalesced_middle : Prop :=
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctnessT.schemaIn ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
-
-/-- `supported-boolean-complete-predecessor`
-
-Supported model over the ultrafilters of a complete homogeneous algebra, with a free root: a witness satisfying 4 principles
-and violating 9. -/
-def supported_boolean_complete_predecessor : Prop :=
-  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBooleanCompletenessT.schemaIn ∧
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcan.schemaIn ∧
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RelationalChoice.schemaIn ∧
-    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AtomicityT.schemaIn ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityE.schemaIn ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE) ∧
-    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.PossibleInfinityE.schemaIn ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧

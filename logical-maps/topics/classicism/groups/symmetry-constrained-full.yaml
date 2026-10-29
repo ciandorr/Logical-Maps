@@ -61,10 +61,13 @@ parameters:
             $a$, a non-permutation $h$, every $l\circ h$ is again a non-permutation, outside $a$.
       two:
         text: >-
-          The member has two objects, $W_0$ with a single point $x$, and $X$; the arrows are all
-          maps between them, and the symmetry group at $W_0$ is trivial, so the condition bites at
-          the arrows into $X$. Evaluation point: $W_0$, at its identity arrow.
+          The member has two objects, $W_0$ with a single point $x$, and $X$; the symmetry group at
+          $W_0$ is trivial, so the condition bites at the arrows into $X$. Evaluation point: $W_0$,
+          at its identity arrow.
         label: two objects
+        # Revised 29 October 2026 (Claude Opus 5.5, prompted by Cian Dorr): the arrows are the
+        # member's construction; until then this text said they were all maps between the objects,
+        # true of point-and-three only.
   individuals:
     text: What the individuals are. Each member is recorded with the three individuals the arrows
       act on; its variant with a single individual, the arrows still acting on the three-element set
@@ -157,6 +160,12 @@ conditions:
   text: >-
     The construction does not itself interpret Σ, so either of the group's interpretations can be
     added to it.
+# Added 29 October 2026 (Claude Opus 5.5, prompted by Cian Dorr), when the member
+# point-and-three-forward, which lacks it, joined the group.
+- id: absorbed-arrow
+  text: >-
+    Some arrow $c$ out of the evaluation object is absorbed by an arrow $m$ out of its codomain that
+    is not a symmetry: $m\circ c$ lies in the orbit of $c$ under the symmetry group.
 
 arguments:
 
@@ -272,6 +281,10 @@ arguments:
     itself, so no strong atom lies below it, and the type-$t$ Strong Atomicity fails.
 
 - id: self-atoms
+  # Revised 29 October 2026 (Claude Opus 5.5, prompted by Cian Dorr): limited to the members whose
+  # collapse is absorbed by an arrow that is not a symmetry, which is what makes its transport a
+  # non-atom; in point-and-three-forward every arrow out of $X$ is a symmetry.
+  requires: [absorbed-arrow]
   fails:
   - self-atomicity-t
   - atoms-are-self-atoms-t

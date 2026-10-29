@@ -1,0 +1,85 @@
+id: restricted-entrances
+name: 'Restricted entrances to full one-object actions'
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61; Appendix D, pp. 73–74
+  note: Full action models, here the target, with a restricted domain at the entrance.
+
+# GPT-6 Astra's entrance models (prompted by Daniel Kodsi, research note of 26 October 2026): a full
+# one-object action model over one individual, entered from a new world r by countably many arrows h_n,
+# the entities at r being arbitrary current extensions together with transports restricted to be
+# eventually constant along the h_n. Formed on 29 October 2026 by Claude Opus 5.5 (Anthropic), prompted by
+# Cian Dorr, from cofinite-entrance-idempotent and stationary-entrance-successor; the arguments the two
+# gave in substance alike are the group's, texts stated for both.
+
+definition: >-
+  Two objects, the target $s$ and the entrance $r$. {{construction}} There is a single individual at both
+  objects, and no arrow returns to $r$. Evaluation point: $1_r$. Interpretation of Σ: every constant of Σ is
+  relational, and each denotes the top element of its type.
+
+parameters:
+  construction:
+    text: The target's monoid, the arrows from $r$, and the restriction on the entities at $r$, as the
+      member gives them.
+
+meets:
+  extensionally-full: >-
+    At $r$ the current extension of an entity is arbitrary, and $s$ is a full action model.
+  sigma-top: Every constant of Σ is relational and denotes the top element of its type, which every arrow
+    fixes.
+  one-individual: There is a single individual at both objects.
+
+arguments:
+
+- id: boolean-completeness-t
+  fails: [boolean-completeness-t, countable-boolean-completeness-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At type $t$. The values of a proposition at $r$ along the $h_n$ are eventually constant, by the
+    restriction. Let $p_n$ be true at $h_{2n}$ alone. An upper bound is true at every $h_{2n}$, so at all but
+    finitely many $h_n$; making it false at one more odd index gives a smaller upper bound. So the $p_n$ have
+    no least upper bound. They are countable relative to $t$: by extensional fullness and the infinitely many
+    propositions the numbers at $t$ are the distinct numerals, and the relation pairing $p_n$ with the $n$th
+    numeral is in the domain.
+
+- id: modal-well-ordering
+  holds: [modal-well-ordering-r]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $e$ there is one individual. At a relational type, choose well-orders $A$ of the domain at $r$ and
+    $W$ of the domain at $s$, and let $R$ have current extension $A$ and, along every arrow out of $r$, the
+    transport with extension $W$ at every world of $s$, which every arrow of $s$ fixes. Every transport of $R$
+    is that one, so $\Box\operatorname{WO}(R)$, well-ordering being the external notion at both objects, as
+    $s$ is full and current extensions at $r$ are arbitrary.
+
+- id: truth-implies-nd-necessity
+  holds: [necessary-distinctness-preserving-collapse]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $r$, $\{1_r\}$ is true and possible only at $1_r$, no arrow returning to $r$; at $s$, $\{1\}$ is true
+    and possible only at $1$, since in the target's monoid $jk=1$ only if $j=k=1$. So at each object some
+    truth $q$ has $\Box(\Diamond q\to p)$ for every truth $p$.
+
+- id: forcing-possibilism
+  holds: [forcing-possibilism]
+  choice: uses
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
+    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-28'
+  text: >-
+    At $r$ every set of tuples is a current extension, so completeness, injections and isomorphisms there are
+    the external ones. There are countably many propositions at $r$, their values along the $h_n$ being
+    eventually constant, and an infinite complete Boolean algebra has at least continuum many elements, so a
+    complete Boolean algebra at $r$ that is Dedekind finite or has fewer elements than the propositions is
+    finite, with $2^k$ elements; it is isomorphic to the propositions below the one true at
+    $h_0,\ldots,h_{k-1}$ alone, which is not $\top$.

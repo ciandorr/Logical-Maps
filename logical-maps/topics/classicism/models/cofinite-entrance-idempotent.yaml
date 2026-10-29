@@ -20,24 +20,23 @@ references:
   locator: §3.5, pp. 58–61; Appendix D, pp. 73–74
   note: Full action models, here the target, with a restricted domain at the entrance.
 meets:
-  extensionally-full: >-
-    At $r$ the current extension of an entity is arbitrary, and $s$ is a full action model.
   infinitely-many-propositions: >-
     The propositions true at a single $h_n$ are pairwise distinct.
   codomain-intensions: >-
     An intension at $r$ with the same value $V$ at every $h_n$ and at $b$ is admitted, with
     $d_n=d_\infty=(V,V)$, which $k$ fixes; $s$ is full.
-  sigma-top: Every constant of Σ is relational and denotes the top element of its type, which every arrow
-    fixes.
-  one-individual: There is a single individual at both objects.
-definition: >-
-  Two objects: the target $s$, whose arrows $s\to s$ are $1$ and an idempotent $k\ne1$, with the full
-  action-model domains over one individual; and the entrance $r$, with only its identity and arrows
-  $h_n:r\to s$ ($n\in\mathbb N$) and $b:r\to s$, where $k\circ h_n=b$ and $k\circ b=b$. An entity of
-  relational type at $r$ is an arbitrary current extension together with target entities $d_n$ (its
-  transports along the $h_n$) and $d_\infty$ (along $b$) such that $k\cdot d_n=k\cdot d_\infty=d_\infty$ and
-  $d_n=d_\infty$ for all but finitely many $n$. Evaluation point: $1_r$. Interpretation of Σ: every
-  constant of Σ is relational, and each denotes the top element of its type.
+group: restricted-entrances
+settings:
+  construction: >-
+    The arrows $s\to s$ are $1$ and an idempotent $k\ne1$, with the full action-model domains
+    over one individual. Besides its identity, $r$ has arrows $h_n:r\to s$ ($n\in\mathbb N$) and $b:r\to s$,
+    where $k\circ h_n=b$ and $k\circ b=b$. An entity of relational type at $r$ is an arbitrary current
+    extension together with target entities $d_n$ (its transports along the $h_n$) and $d_\infty$ (along
+    $b$) such that $k\cdot d_n=k\cdot d_\infty=d_\infty$ and $d_n=d_\infty$ for all but finitely many $n$.
+
+# 29 October 2026: the definition's common part, three conditions and the arguments for Boolean
+# Completeness at t, Modal Well-Ordering, Truth implies ND-necessity and Forcing Possibilism are the
+# restricted-entrances group's.
 arguments:
 - id: strong-atomicity
   holds: [necessary-atomicity-r]
@@ -65,35 +64,6 @@ arguments:
     with $d_n=d$ and every other component $k\cdot d$. So if every entity at $r$ necessarily has $F$, the
     extension of $F$ at each $h_n$ is everything; and at $b$ it is the extension at an $h_n$ outside $F$'s
     finitely many exceptions.
-- id: boolean-completeness-t
-  fails: [boolean-completeness-t, countable-boolean-completeness-r]
-  choice: free
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-28'
-  text: >-
-    At type $t$. A proposition at $r$ is a truth value with values $u_n$ at the $h_n$ and $v$ at $b$,
-    $u_n=v$ for all but finitely many $n$, ordered coordinatewise. Let $p_n$ be true at $h_{2n}$ alone.
-    An upper bound is true at every $h_{2n}$, hence at $b$ and at all but finitely many $h_n$; making it
-    false at one more odd index gives a smaller upper bound. So the $p_n$ have no least upper bound; as
-    at the stationary entrance they are countable relative to $t$.
-- id: modal-well-ordering
-  holds: [modal-well-ordering-r]
-  choice: uses
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-28'
-  text: >-
-    At $e$ there is one individual. At a relational type, choose well-orders $A$ of the domain at $r$
-    and $W$ of the domain at $s$, and let $R$ have current extension $A$ and $d_n=d_\infty=(W,W)$, which
-    $k$ fixes. Every transport of $R$ is $(W,W)$, so $\Box\operatorname{WO}(R)$, well-ordering being the
-    external notion at both objects.
-- id: truth-implies-nd-necessity
-  holds: [necessary-distinctness-preserving-collapse]
-  choice: free
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-28'
-  text: >-
-    At $r$, $\{1_r\}$ is true and possible only at $1_r$; at $s$, $\{1\}$ is true and possible only at
-    $1$, since $j\circ i=1$ only if $i=1$. So at each object every truth is ND-necessary.
 - id: necessity-of-arithmetic
   holds: [necessity-of-arithmetic]
   choice: free
@@ -104,16 +74,6 @@ arguments:
     everywhere. At $r$ every relational type is infinite and, by extensional fullness, the numbers are
     the numerals with standard sum and product. So $I_\sigma\to A$ is necessary or necessarily false
     according as $A$ is true.
-- id: forcing-possibilism
-  holds: [forcing-possibilism]
-  choice: uses
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-28'
-  text: >-
-    As at the stationary entrance: the propositions at $r$ are countably many and current extensions are
-    arbitrary, so a complete Boolean algebra that is Dedekind finite or smaller than the propositions is
-    finite, with $2^k$ elements, and isomorphic to the propositions below the one true at
-    $h_0,\ldots,h_{k-1}$ alone, which is not $\top$.
 - id: pure-b
   fails: [pure-b-r]
   choice: free

@@ -4925,6 +4925,15 @@ def strong_possibility_and_two_hat_implies_nd_incompatible : Prop :=
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.TwoHatImpliesNdNecessity.schemaIn →
     ¬ Classicism.Meta.AxiomSet.Consistent Ax
 
+/-- `strong-possibility-incompatible-with-barcan-t`
+
+Strong Possibility (pure) ∧ BF (type t) ⇒ ⊥ -/
+def strong_possibility_incompatible_with_barcan_t : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.strongPossibility) →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanT.schemaIn →
+    ¬ Classicism.Meta.AxiomSet.Consistent Ax
+
 /-- `strong-possibility-r-implies-possibility-schema-r`
 
 Strong Possibility (pure) ⇒ Maximalism (pure) -/

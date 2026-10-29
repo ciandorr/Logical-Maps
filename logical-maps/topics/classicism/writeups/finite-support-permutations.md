@@ -44,7 +44,7 @@ Fix a relational type $\sigma=\bar\tau t$ and a tuple $\bar u$ of entities of ty
 For $A\subseteq\mathbb N$ let $Y^A$ be the intension of type $\sigma$ with $Y^A_j:=\{\bar u\}$ if
 $j0\in A$ and $Y^A_j:=\emptyset$ otherwise. It is pinned down by $\{0\}$, so in the domain, the
 $Y^A$ are pairwise distinct, and $(k\cdot Y^A)_j=Y^A_{j\circ k}$ is $\{\bar u\}$ iff $j(k0)\in A$,
-so $k\cdot Y^A$ is pinned down by $\{0\}$ as well, its value at $j$ depending only on $j(k0)$.
+so $k\cdot Y^A$ is pinned down by $\{k0\}$, its value at $j$ depending only on $j(k0)$.
 Let $P:=\{Y^A:A\subseteq\mathbb N\}$ and fix a bijection $\beta\colon P\to\mathbb R$, through the
 bijection of the sets of natural numbers with the reals (a theorem of ZF).
 

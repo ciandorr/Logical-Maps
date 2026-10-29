@@ -1,0 +1,60 @@
+id: strong-possibility-incompatible-with-barcan-t
+premises:
+- strong-possibility-r
+- barcan-t
+conclusion: false
+status: proved
+certificate:
+  source_id: misc
+  produced_by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi, 22 and 28 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- >-
+  OpenAI Codex (GPT-6), prompted by Daniel Kodsi, research notes finite-c5-profile-cells and
+  signature-sp-barcan of 22 October 2026, and Strong Possibility: explicit Barcan failures and the
+  signature boundary, 28 October 2026, §§2–3 (unpaginated), in Daniel Kodsi's pull request #21.
+source_names:
+- Codex via Kodsi 28 Oct
+proof: >-
+  (1) Let $B$ be the closed pure sentence "$\Box\mathrm{ND}_t$, there is exactly one individual and there
+  are exactly four propositions". It is consistent with C, being true in the full model with two worlds
+  and one individual. Over C, $\Box\mathrm{ND}_t$ gives C5
+  ([[necessary-distinctness-necessary-t-implies-necessary-distinctness-necessary-r]]) and so BF at every
+  type ([[necessary-nd-implies-bf]]). Under C5, a closed formula built from identities by connectives and
+  quantifiers denotes $\top$ or $\bot$: identities do by ND and NI, connectives preserve this, and if every
+  instance of $\forall x\,\varphi$ is $\top$ then BF makes $\forall x\,\varphi$ necessary. The last two
+  conjuncts of $B$ are such formulas, and $\Box\mathrm{ND}_t\to\Box\Box\mathrm{ND}_t$. So $B\to\Box B$ is a
+  theorem of C.
+  (2) $\operatorname{Atom}(B):=\forall p\, .\,B\ne\bot\land(B\land p=B\lor B\land p=\bot)$ is a universal
+  Boolean combination of identities, true at the root of [[coalesced-definable-root]], where Maximalism
+  (pure) holds. The argument is the one for the atoms $A_n$ in that model's write-up. Let $V$ be a component
+  object where $B$ is true. By C5, BF and [[modalized-functionality-r]], an entity of type $\sigma t$ at $V$
+  is fixed by its values, propositions, at the finitely many entities of type $\sigma$; and every function
+  is realised, by $\lambda x\, .\,\bigvee_i(x=a_i\land q_i)$. Quantifiers are finite meets and joins. So the
+  domains at $V$ are the full finite function spaces over one individual and the four-element Boolean
+  algebra, with crisp identity, and the truth at $V$ of a formula depends only on this structure and the
+  ultrafilter of truths at $V$. Any two such pointed structures are isomorphic, the swap of the algebra's
+  two atoms exchanging its two ultrafilters. So a root proposition $p$, with witness $t$, has the same
+  value at every arrow $\langle V,a\rangle$ with $B$ true at $V$. At the identity $B$ is false, as there are
+  infinitely many root propositions. So $B\land p$ is $B$ or $\bot$, and $B\ne\bot$ since the components
+  are complete for C.
+  (3) By the reflection lemma of [[strong-possibility-and-strong-actuality-incompatible]], Strong
+  Possibility (pure) gives $\operatorname{Atom}(B)$. It also gives Maximalism (pure)
+  ([[strong-possibility-r-implies-possibility-schema-r]]), so $B\ne\bot$, that is $\Diamond B$, since
+  $B=\bot$ is not a theorem of C.
+  (4) Let $\Phi:=\lambda p\, .\,B\to(p=\top\lor p=\bot)$. For each $p$, $\operatorname{Atom}(B)$ gives
+  $B\land p=B$ or $B\land p=\bot$, which is necessary by NI; and necessarily, if $B$ then $B=\top$ by
+  (1), so $p=\top$ or $p=\bot$. So $\forall p\, .\,\Box\Phi p$. But at a possible point where $B$ is true
+  there are four propositions, two of them neither $\top$ nor $\bot$, so $\Diamond\neg\forall p\, .\,\Phi
+  p$. This contradicts BF at type $t$.
+notes: >-
+  Full BF and Functionality are excluded too, by recorded implications. Codex's write-up also
+  gives a counterinstance at every input type, and at type $e$, through $\lambda\bar x\, .\,p$ and the
+  sentence "there is exactly one individual". It also proves the same incompatibility for Strong Possibility
+  over a fixed finite signature, which is not recorded, since signature principles on the map range over
+  arbitrary signatures. Step (2) rests on the construction of coalesced-definable-root, which has not
+  had a second reader.
+references: []

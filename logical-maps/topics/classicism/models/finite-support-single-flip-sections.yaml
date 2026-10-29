@@ -1,0 +1,106 @@
+id: finite-support-single-flip-sections
+name: 'Finite-support action model: single-flip sections and projection'
+certificate:
+  source_id: misc
+  produced_by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi, 28 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- >-
+  OpenAI Codex (GPT-6), prompted by Daniel Kodsi, Admissible replacement witnesses for four completeness
+  separations, 28 October 2026, §§1–5 (unpaginated), and the write-up finite-support-single-flip-sections, in
+  Daniel Kodsi's pull request #21.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix D, Definitions D.1–D.3 and Proposition
+  D.4, pp. 73–74 (ideally full action models).
+source_names:
+- Codex via Kodsi 28 Oct
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix D, pp. 73–74
+  note: The ideally full finitely pinned action models over a category of sets.
+group: finite-support-two-object
+settings: {}
+definition: An ideally full finitely pinned action model over a two-object category,. $W_0$ has individuals
+  $\mathbb N$ and $W_1$ has individuals $\mathbb N\times\{0,1\}$. Let $f_*(n):=(n,0)$, and let $f_k$ agree
+  with $f_*$ except that $f_k(k)=(k,1)$. The arrows are the identity of $W_0$ (the only arrow $W_0\to W_0$);
+  the sections $f_j$, $j\in\{*\}\cup\mathbb N$, from $W_0$ to $W_1$; the projection $\pi(n,i)=n$ from $W_1$
+  to $W_0$; and the identity of $W_1$ with the retractions $e_j:=f_j\circ\pi$ from $W_1$ to itself. They
+  compose by $\pi\circ f_j=1$, $e_i\circ f_j=f_i$, $e_i\circ e_j=e_i$ and $\pi\circ e_j=\pi$. The evaluation
+  point is the identity of $W_0$.
+meets:
+  extensionally-full: >-
+    At $W_0$ the identity is the only arrow into $W_0$, so an intension with any value at the identity and
+    $\varnothing$ at the sections is pinned down by $\varnothing$; at $W_1$ no $e_j$ agrees with the identity
+    on a fibre $\{(n,0),(n,1)\}$ of $\pi$, as $e_j$ collapses it, so the same holds with that fibre as pin.
+  infinitely-many-individuals: The individuals at $W_0$ are the natural numbers.
+  infinitely-many-propositions: The propositions $\{f_k\}$, each pinned down by $\{k\}$, are pairwise distinct.
+  infinitely-many-propositions-everywhere: >-
+    At $W_0$ the $\{f_k\}$; at $W_1$ the $\{e_k\}$, pinned down by $\{(k,0)\}$, since $e_j(k,0)=f_j(k)$ is
+    $(k,1)$ just when $j=k$, and the identity fixes $(k,0)$.
+  full-continuum-everywhere: >-
+    The domains contain every intension whose value depends only on the arrow's codomain, and there are
+    infinitely many propositions at $W_0$ and at $W_1$. So the intensions of type $tt$ with value an
+    arbitrary set of propositions at each codomain are continuum many, and every set of tuples of them is
+    the extension at the object of the intension, again depending only on the codomain, whose value at an
+    arrow is the set of the tuples' transports along it.
+  finitely-pinned-domains: >-
+    Ideally full with the ideal of finite sets at both objects: every intension pinned down by a finite set
+    is in the domain, and every entity in a domain is one.
+  codomain-intensions: The model is ideally full at both objects, and an intension whose value at an arrow
+    depends only on the arrow's codomain is pinned down by $\emptyset$ (Appendix D, the remark after
+    Definition D.3).
+  identity-singletons: $\{1_{W_0}\}$ is pinned down by $\emptyset$, the identity being the only arrow from
+    $W_0$ to $W_0$, and $\{1_{W_1}\}$ by $\{(0,0),(0,1)\}$, on which no $e_j$ agrees with the identity.
+  unique-retractions-everywhere: Out of $W_0$, the identity has only itself as retraction and each section
+    $f_j$ only $\pi$, the one arrow back. Out of $W_1$, the identity has only itself; $\pi$ has none, since
+    $f_j\circ\pi=e_j\ne1$; and no $e_j$ has one, since $e_j$ is not injective.
+arguments:
+- id: current-distinctness
+  holds: [distinctness-necessary-r]
+  by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type. Every arrow out of $W_0$ has the left inverse $\pi$, as $\pi\circ f_j=1$, so transport
+    along it is injective at every type: $f_j\cdot X=f_j\cdot Y$ gives $X=\pi\cdot f_j\cdot X=\pi\cdot
+    f_j\cdot Y=Y$.
+- id: propositional-atomicity
+  holds: [atomicity-t, necessary-atomicity-t]
+  by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    A proposition at $W_0$ is a truth value at the identity together with a set of sections, and it is
+    pinned down by a finite $S$ just when it does not distinguish $f_*$ from the $f_k$ with $k\notin S$,
+    these being the sections agreeing with $f_*$ on $S$ (their transports along $\pi$ and the $e_i$ are
+    all equal). So its sections form a finite set of flips $f_k$, or $f_*$ with a cofinite set of them.
+    The atoms are $\{1_{W_0}\}$ and the $\{f_k\}$, and every nonzero proposition contains one. At $W_1$,
+    likewise, $e_*$ agrees with $e_k$ on a finite $S$ for all $k$ outside the finite set $\pi[S]$, so a
+    proposition containing $e_*$ contains some $e_k$; and $\{1_{W_1}\}$, $\{\pi\}$ (the one arrow to
+    $W_0$) and the $\{e_k\}$ are atoms. So Atomicity at type $t$ holds at both objects.
+- id: even-flips-no-join
+  fails: [boolean-completeness-t]
+  by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Let $X$ of type $tt$ have value $\{\{f_{2n}\}:n\in\mathbb N\}$ at the identity and $\varnothing$ at the
+    sections. It is pinned down by $\varnothing$: two sections transport it alike, along $\pi$ to the value
+    at the identity, as $\pi\circ f_j=1$, and to $\varnothing$ otherwise. An upper bound of its instances
+    contains infinitely many sections, so it contains $f_*$ and cofinitely many flips, among them some
+    $f_{2m+1}$; removing $\{f_{2m+1}\}$ gives a smaller upper bound. So $X$ has no least upper bound, and
+    $\lambda p\, .\,X\neg p$ has no greatest lower bound.
+- id: tail-identity-collapses
+  fails: [necessary-distinctness-necessary-t]
+  by: OpenAI Codex (GPT-6), prompted by Daniel Kodsi; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $W_1$, $\{1_{W_1}\}$ is a proposition (identity-singletons) distinct from $\bot$, and its transport
+    along $\pi$ is $\bot$, since $1_{W_1}$ is not of the form $k\circ\pi$. So ND at type $t$ fails at $W_1$,
+    and it is not necessary at $W_0$.
+notes: >-
+  Restricting the sections of finite-support-sections-and-projection to those flipping at most one point
+  gives a propositional algebra at $W_0$ that is atomic, the finite–cofinite algebra on the flips times the
+  truth value at the identity, while Boolean Completeness at type $t$ still fails. So, with current ND and
+  □Strong Actuality, it separates Atomicity (type $t$) from Boolean Completeness (type $t$).

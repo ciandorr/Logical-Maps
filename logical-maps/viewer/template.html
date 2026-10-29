@@ -3790,28 +3790,82 @@ function fileLinks(x) {
 // A record with a hand-written write-up shows that write-up in full on its page.
 // The record's own description is rendered first so the page is complete without
 // network access; the write-up replaces it once fetched.
+// The hand-written write-ups, each by its id: those of records, and those an argument names.
+let writeupSet = null;
+function writeupIds() {
+  if (writeupSet) return writeupSet;
+  writeupSet = new Set([...R, ...MODELS].filter(x => (x.files || {}).handwritten).map(x => x.id));
+  for (const a of [...MODELS.flatMap(m => m.arguments || []), ...GROUPS.flatMap(g => g.arguments || []), ...GENERAL]) if (a && a.writeup) writeupSet.add(a.writeup);
+  return writeupSet;
+}
+function writeupLink(id, text) { return `<a href="writeups/${esc(id)}.html" data-open-writeup-page="${esc(id)}">${text}</a>`; }
+// The write-up a record's prose means by "the write-up": its own, or else its source record's.
+function recordWriteup(x) {
+  for (const id of [x && x.id, x && x.variant_of, x && x.companion_of]) if (id && writeupIds().has(id)) return id;
+  return null;
+}
 function writeupNote(x) {
   const f = x.files || {};
-  if (x.definition) return f.handwritten && f.html ? `<p class="note writeup-note">Write-up: <a href="${esc(f.html)}" target="_blank">${esc(f.html)}</a>.</p>` : '';
-  return f.handwritten && f.html ? `<p class="note writeup-note">The record’s own summary follows; the full details are at <a href="${esc(f.html)}" target="_blank">${esc(f.html)}</a>.</p>` : '';
+  if (!f.handwritten || !f.html) return '';
+  return x.definition ? `<p class="note writeup-note">Write-up: ${writeupLink(x.id, esc(x.id))}.</p>`
+    : `<p class="note writeup-note">The record’s own summary follows; the full details are in the ${writeupLink(x.id, 'write-up')}.</p>`;
 }
-function loadWriteup(el, x) {
-  const f = x.files || {}, box = el.querySelector('.record-summary');
-  if (!box || x.definition || !f.handwritten || !f.html || typeof fetch !== 'function') return;  // a definition is not replaced
-  fetch(f.html).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(html => {
+// Fetch a write-up's page into box, its links pointing into the viewer where they can.
+function fillWriteup(box, href, done) {
+  if (typeof fetch !== 'function') return;
+  fetch(href).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(html => {
     if (!box.isConnected) return;
     const doc = new DOMParser().parseFromString(html, 'text/html');
+    const title = (doc.querySelector('header#title-block-header h1') || doc.querySelector('title'))?.textContent || '';
     doc.querySelectorAll('nav.writeup-nav, header#title-block-header, script, style').forEach(n => n.remove());
     doc.body.querySelectorAll('a[href]').forEach(a => {
       const href = a.getAttribute('href'), m = /^([a-z0-9-]+)\.html$/.exec(href);
       if (m && (byRid.has(m[1]) || byMid.has(m[1]))) { a.setAttribute('href', 'writeups/' + href); a.dataset.openWriteup = m[1]; }
+      else if (m && writeupIds().has(m[1])) { a.setAttribute('href', 'writeups/' + href); a.dataset.openWriteupPage = m[1]; }
       else if (/^[a-z0-9.-]+\.(html|md)$/.test(href)) a.setAttribute('href', 'writeups/' + href);
       else if (/^https?:/.test(href)) a.target = '_blank';
     });
-    box.className = 'prose writeup'; box.innerHTML = doc.body.innerHTML;
+    box.classList.remove('record-summary'); box.classList.add('prose', 'writeup'); box.innerHTML = doc.body.innerHTML;
     renderSubscripts(box);
     box.querySelectorAll('a[data-open-writeup]').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); const id = a.dataset.openWriteup; openPage({ type: byRid.has(id) ? 'result' : 'model', id }); }));
-  }).catch(() => {});
+    wireWriteupLinks(box);
+    if (done) done(title);
+  }).catch(() => { if (box.isConnected && box.classList.contains('writeup-body')) box.innerHTML = `<p class="note">The write-up could not be loaded here; <a href="${esc(href)}" target="_blank">open it on its own</a>.</p>`; });
+}
+function loadWriteup(el, x) {
+  const f = x.files || {}, box = el.querySelector('.record-summary');
+  if (!box || x.definition || !f.handwritten || !f.html) return;  // a definition is not replaced
+  fillWriteup(box, f.html);
+}
+function wireWriteupLinks(el) {
+  el.querySelectorAll('a[data-open-writeup-page]').forEach(a => a.addEventListener('click', ev => {
+    if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button) return;  // a new tab or window, as the reader asked
+    ev.preventDefault(); openPage({ type: 'writeup', id: a.dataset.openWriteupPage });
+  }));
+}
+// "write-up" in a record's prose links to the write-up it means: an argument's own, else the
+// record's; "the write-up <id>" and "writeups/<id>.md" to the one they name. Sources, links and
+// mathematics are left alone, as is a write-up's own text.
+function linkWriteups(el, fallback) {
+  const ids = writeupIds(), skip = 'a, button, .katex, .formal, .writeup, .writeup-note, .writeup-label, .src, .pop-sources, script, style, summary';
+  const pattern = /writeups\/([a-z0-9-]+)\.(?:md|html)\b|\b(write-up)(?!s\b)(\s+([a-z0-9]+(?:-[a-z0-9]+)+))?/gi;
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) if (/write-?up/i.test(n.nodeValue) && !n.parentElement.closest(skip)) nodes.push(n);
+  for (const n of nodes) {
+    const target = n.parentElement.closest('[data-writeup]')?.dataset.writeup || fallback;
+    let html = '', last = 0, changed = false;
+    n.nodeValue.replace(pattern, (match, path, word, rest, named, at) => {
+      let out = null;
+      if (path) out = ids.has(path) ? writeupLink(path, esc(match)) : null;
+      else if (named && ids.has(named.toLowerCase())) out = writeupLink(named.toLowerCase(), esc(match));
+      else if (target) out = writeupLink(target, esc(word)) + esc(rest || '');
+      if (out) { html += esc(n.nodeValue.slice(last, at)) + out; last = at + match.length; changed = true; }
+      return match;
+    });
+    if (!changed) continue;
+    const span = document.createElement('span'); span.innerHTML = html + esc(n.nodeValue.slice(last));
+    n.replaceWith(...span.childNodes);
+  }
 }
 function pstmt(id) { if (id === FALSE) return "<li><b>⊥.</b> These premises cannot all hold together.</li>"; const p = byPid.get(id); return `<li><button class="lnk" data-principle="${id}"><b>${esc(p.name)}</b></button> ${esc(p.statement)}</li>`; }
 // A model written as arguments: each argument once, in the record's order, under its
@@ -3862,7 +3916,7 @@ function argumentHtml(m, a, i) {
   const marks = [(a.holds || []).length ? '✓ ' + a.holds.map(name).map(esc).join(', ') : '', (a.fails || []).length ? '✗ ' + a.fails.map(name).map(esc).join(', ') : ''].filter(Boolean).join(' ');
   const meta = [
     a.source ? `Source: ${paper ? `<button class="lnk" data-paper="${esc(paper.id)}">${esc(paper.title)}</button>` : esc(a.source.paper)}${a.source.locator ? ', ' + esc(a.source.locator) : ''}.${paperFileLink(paper)}` : '',
-    a.writeup ? `Write-up: <a href="writeups/${esc(a.writeup)}.html" target="_blank">${esc(a.writeup)}</a>.` : '',
+    a.writeup ? `<span class="writeup-label">Write-up:</span> ${writeupLink(a.writeup, esc(a.writeup))}.` : '',
     a.like ? `Like <button class="lnk" data-open-model="${esc(a.like.split('#')[0])}">${esc(a.like)}</button>${(a.adapt || '').trim() ? ':' : ', word for word.'}` : '',
     side?.folded ? `Folded in from the record <span class="mono">${esc(side.id)}</span>.` : '',
     a.provenance ? `Provenance: <span class="mono">provenance/${esc(a.provenance)}.yaml</span>.` : '',
@@ -3873,7 +3927,7 @@ function argumentHtml(m, a, i) {
   ].filter(Boolean).join(' ');
   // A shared argument applies to a member through the conditions it requires; say why the member meets each.
   const conditions = (a.conditions || []).map(c => `<div class="note condition"><b>Requires:</b> ${fmt(c.text || '')}${c.reason ? ` <b>Here:</b> ${fmt(c.reason)}` : ''}</div>`).join('');
-  return `<details class="argument${a.withdrawn ? ' withdrawn' : ''}"${i === undefined ? '' : ` id="argument-${i}"`}><summary><span class="argument-verdicts">${marks}</span> ${argumentTags(a, m)}</summary>`
+  return `<details class="argument${a.withdrawn ? ' withdrawn' : ''}"${i === undefined ? '' : ` id="argument-${i}"`}${a.writeup ? ` data-writeup="${esc(a.writeup)}"` : ''}><summary><span class="argument-verdicts">${marks}</span> ${argumentTags(a, m)}</summary>`
     + (a.text ? `<div class="prose reading">${fmt(a.text)}</div>` : '')
     + ((a.adapt || '').trim() ? `<div class="prose reading">${fmt(a.adapt)}</div>` : '')
     + conditions
@@ -4123,6 +4177,13 @@ function renderPage(sel) {
     h += referencedBySection(m.id);
     if (!m.arguments) h += sourceList([m]);
     h += `<div class="file">${esc(m.file)}</div>`;
+  } else if (sel.type === 'writeup') {
+    // A write-up read in the viewer: its record, if it has one, and the page itself in a new tab.
+    const owner = byMid.get(sel.id) || byRid.get(sel.id);
+    h += `<h1 class="writeup-title">${esc(owner ? (owner.name || resultStmt(owner)) : sel.id)}</h1>`
+      + `<p class="note">Write-up${owner ? ` of the ${byMid.has(sel.id) ? 'model' : 'result'} <button class="lnk" data-open-${byMid.has(sel.id) ? 'model' : 'result'}="${esc(sel.id)}">${byMid.has(sel.id) ? esc(owner.name) : resultStmt(owner)}</button>` : ''}`
+      + ` · <a href="writeups/${esc(sel.id)}.html" target="_blank">open on its own ↗</a></p>`
+      + `<div class="writeup-body prose"><p class="dim">Loading…</p></div>`;
   } else if (sel.type === 'group') {
     h += groupPage(byGid.get(sel.id)) + referencedBySection(sel.id);
   } else if (sel.type === 'argument') {
@@ -4154,7 +4215,12 @@ function renderPage(sel) {
   el.querySelectorAll('button[data-jump]').forEach(b => b.addEventListener('click', () => jumpToArguments(el, b.dataset.jump.split(' '))));
   wire(el);
   if (sel.type === 'group' && byGid.has(sel.id)) wireGroup(el, byGid.get(sel.id));
+  if (sel.type === 'model' || sel.type === 'result' || sel.type === 'group') linkWriteups(el, sel.type === 'group' ? null : recordWriteup(sel.type === 'result' ? byRid.get(sel.id) : byMid.get(sel.id)));
+  wireWriteupLinks(el);
   if (sel.type === 'result' || sel.type === 'model') loadWriteup(el, sel.type === 'result' ? byRid.get(sel.id) : byMid.get(sel.id));
+  if (sel.type === 'writeup') fillWriteup(el.querySelector('.writeup-body'), `writeups/${sel.id}.html`, title => {
+    const h1 = el.querySelector('.writeup-title'); if (h1 && title && !byMid.has(sel.id) && !byRid.has(sel.id)) h1.textContent = title;
+  });
   if (sel.type === 'model' && sel.jump) { const m = byMid.get(sel.id); jumpToArguments(el, argumentsFor(m, sel.jump).map(a => m.arguments.indexOf(a))); }
 }
 // The forms a principle can be stated in, each provably equivalent to the official one
@@ -4193,11 +4259,11 @@ function openPage(sel, back = null) {
     pane.scrollTop = back.scroll;
   } else if (!sel.jump) pane.scrollTop = 0;
 }
-// #model/<id>, #result/<id>, #principle/<id> and #group/<id> name the record page shown, so its
+// #model/<id>, #result/<id>, #principle/<id>, #group/<id> and #writeup/<id> name the page shown, so its
 // address can be copied as a link to it.
 // (Functions, not constants, since a page may open before this point of the script runs.)
-function pageLookup(type) { return { model: byMid, result: byRid, principle: byPid, group: byGid }[type]; }
-function pageRoute(hash = window.location.hash || '') { return /^#(model|result|principle|group)\/([A-Za-z0-9_.-]+)$/.exec(hash); }
+function pageLookup(type) { return type === 'writeup' ? writeupIds() : { model: byMid, result: byRid, principle: byPid, group: byGid }[type]; }
+function pageRoute(hash = window.location.hash || '') { return /^#(model|result|principle|group|writeup)\/([A-Za-z0-9_.-]+)$/.exec(hash); }
 function pageHash(sel) {
   const hash = sel && pageLookup(sel.type)?.has(sel.id) ? '#' + sel.type + '/' + sel.id : '';
   if (hash === (window.location.hash || '') || (!hash && !pageRoute())) return;

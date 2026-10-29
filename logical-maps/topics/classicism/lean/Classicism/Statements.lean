@@ -5380,6 +5380,27 @@ def henkin_without_relational_choice : Prop :=
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
 
+/-- `stitched-cohen-coalesced-middle`
+
+Stitched Cohen model with a coalesced middle world: a witness satisfying 5 principles
+and violating 9. -/
+def stitched_cohen_coalesced_middle : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.RigidComprehension.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecStrongAtomicityT.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBarcanT.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBooleanCompletenessT.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecRelationalChoice.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecWeakRigidComprehension.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecBooleanCompleteness.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.BarcanRelational.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Atomicity.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecessityOfDistinctnessT.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.witnessedPossibility _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.separatedStructure _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
+
 /-- `symmetric-finite-compression-entrance`
 
 Symmetric ideally-full model: finite-compression labels at an entrance: a witness satisfying 4 principles

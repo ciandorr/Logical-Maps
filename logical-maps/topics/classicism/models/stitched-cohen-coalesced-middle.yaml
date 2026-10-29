@@ -1,0 +1,110 @@
+id: stitched-cohen-coalesced-middle
+name: 'Stitched Cohen model with a coalesced middle world'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 22 October 2026; integrated by OpenAI Codex
+    (GPT-6), prompted by Daniel Kodsi, 28 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by:
+  - Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, audit of 29 October 2026
+  date: '2026-10-29'
+  lean: none
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Stitched forcing model with a coalesced middle world,
+  research note of 22 October 2026, §§1–7 (unpaginated), in Daniel Kodsi's submission of 24 October 2026,
+  listed in his pull request #18; OpenAI Codex (GPT-6), prompted by Daniel Kodsi, the record and write-up
+  stitched-cohen-coalesced-middle in his pull request #21 of 28 October 2026.
+- Neil Barton and Zachary Goodsell, Continuum Contingency, draft of 14 October 2026, §7.1 and §8, Definition 1.
+source_names:
+- Astra via Kodsi 22 Oct
+- Continuum Contingency
+references:
+- paper: barton-goodsell-continuum-contingency
+  role: background
+  locator: §7.1; §8, Definition 1
+  note: The stitching construction, here applied over a coalesced sum and with invariantly named rather
+    than ground-definable elements.
+definition: >-
+  An action model in a Cohen extension $V[G]$ of a model $V$ of ZFC, with Cohen real $c$. Four objects:
+  $A$, the full extensional one-world hierarchy over $\mathbb N$ built in $V$; $B$, the same built in
+  $V[G]$; $s$, their coalesced sum with the fullest domains, with individuals $\mathbb N\times\mathbb N$,
+  arrows $a\colon s\to A$ and $b\colon s\to B$ acting as the two projections, and
+  $D_{s,\bar\sigma t}=\mathcal P^{V[G]}(D_{s,\bar\sigma})\times D_{A,\bar\sigma t}\times D_{B,\bar\sigma
+  t}$; and the root $r$, with the individuals of $s$ and an arrow $h\colon r\to s$ that is the identity on
+  them. The only other arrows are the identities and the composites $ah$ and $bh$, and every set of arrows
+  out of an object is a proposition. A root entity of type $\bar\sigma t$ is a pair of a set in $V$ of root
+  tuples, its extension at $r$, and a $\mathbb P$-name for an element of $D_{s,\bar\sigma t}$, its transport
+  along $h$, that $1$ forces to be fixed by every finite bit-flip of the Cohen real, taken up to equality
+  forced by $1$; every such pair is admitted. Every constant of Σ is relational and denotes the top element
+  of its type. Evaluation point: $r$.
+meets:
+  sigma-top: This is the interpretation the definition fixes.
+arguments:
+- id: rigid-comprehension
+  holds: [rigid-comprehension-r]
+  writeup: stitched-cohen-coalesced-middle
+  text: >-
+    At every relational type, with any argument types. A root relation $(E,[u])$ is coextensive with
+    $Y_E:=(E,[R_E])$, where $R_E:=(hE,a(hE),b(hE))$ consists of the images of the tuples of $E$. $a(hE)$
+    is a ground set, since the $A$-projection of an invariantly named entity is forced into a ground set and
+    so is a value computed in $V$; and $R_E$ has an invariant name. $Y_E$ is an exact-image relation,
+    persistent and inextensible at $r$ and at $s$, since every member of its extensions there and at $A$
+    and $B$ is the image of a member of $E$; so it is rigid.
+- id: finite-propositional-algebras
+  holds: [necessary-strong-atomicity-t, necessary-barcan-t, necessary-boolean-completeness-t]
+  writeup: stitched-cohen-coalesced-middle
+  text: >-
+    At every object every set of arrows out of it is a proposition, so its propositions form a finite power
+    set. The singletons are possible and decide every proposition, and their transports are singletons or
+    $\bot$ (or $\top$ at $A$ and $B$), so they are strong atoms and every nonzero proposition contains one.
+    Transport of propositions along each arrow is onto, so BF holds at type $t$ everywhere; and every family
+    of propositions has a meet.
+- id: relational-choice
+  holds: [necessary-relational-choice-r]
+  writeup: stitched-cohen-coalesced-middle
+  text: >-
+    At $r$, a serial root relation has a serial extension in $V$, and choice in $V$ gives a functional
+    subrelation of it, admitted with transport $\bot$. At $s$, choice in $V[G]$ on the fullest domains does
+    the same, and $A$ and $B$ are full in $V$ and $V[G]$.
+- id: new-real-at-middle
+  fails: [necessary-weak-rigid-comprehension-r, necessary-boolean-completeness-r]
+  writeup: stitched-cohen-coalesced-middle
+  text: >-
+    At $s$, at type $et$. If $Y=(c\times\{0\},C,C^{\prime})$ were weakly rigid, weak persistence would give
+    $c\subseteq C$, and for $n\notin c$ weak inextensibility applied to $Z_n:=(\mathbb N\times\mathbb
+    N,\mathbb N\setminus\{n\},\mathbb N)$, necessary of every $(k,0)$ with $k\in c$, would give
+    $C\subseteq\mathbb N\setminus\{n\}$; so $C=c$, which is not in $V$. Likewise a least upper bound $J$ of
+    the haecceities of the $(k,0)$, $k\in c$, would have $J_A=c$. So Weak Rigid Comprehension and Boolean
+    Completeness fail at $s$, which $r$ sees.
+- id: barcan-new-entities
+  fails: [barcan-relational]
+  writeup: stitched-cohen-coalesced-middle
+  text: >-
+    At type $et$. Every root entity of type $et$ has, as transport, an invariantly named element of
+    $D_{s,et}$, whose three components are ground sets. So $Y_{D_{r,et}}$, the exact-image relation of all
+    of them, holds necessarily of every root entity of type $et$, but at $s$ it does not hold of
+    $(c\times\{0\},\varnothing,\varnothing)$. BF fails at $et$; at type $e$ it holds, $h$ being the identity
+    on individuals and $a,b$ onto.
+- id: atomless-new-entities
+  fails: [atomicity-r]
+  writeup: stitched-cohen-coalesced-middle
+  text: >-
+    At type $(et)t$. The root entity with empty root extension whose transport is the set of $s$-entities of
+    type $et$ that are not transports of root entities, with empty terminal components, is nonzero. A
+    nonzero entity below it with a single instance at $s$ would have that instance invariantly named, hence a
+    transport of a root entity. So every nonzero entity below it has two instances there, which a ground
+    coordinate test separates.
+- id: nd-t-fails
+  fails: [distinctness-necessary-t]
+  writeup: stitched-cohen-coalesced-middle
+  text: >-
+    $\{1_r\}$ and $\bot$ are distinct propositions at $r$, and both have transport $\bot$ along $h$.
+notes: >-
+  With strong-atomicity-t-rigid-comprehension-and-barcan-relational-imply-necessary-rigid-comprehension,
+  this shows that BF at relational types cannot be weakened to □BF (type $t$), even with □Strong
+  Atomicity (type $t$), □Relational Choice, □Actuality and BF at type $e$. The invariantly named class
+  of the construction is strictly larger than Barton and Goodsell's ground-definable one (the set of
+  finite modifications of the Cohen real is invariantly named but not ground-definable); the arguments work
+  for either. Claude Fable 5.1's audit confirmed every verdict and supplied the absoluteness argument for
+  closure of $A$'s domains in $V[G]$.

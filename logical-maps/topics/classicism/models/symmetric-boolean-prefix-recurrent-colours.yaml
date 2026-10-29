@@ -57,6 +57,10 @@ meets:
     onto $V_0$ sending $a_i$ and infinitely many other generators to $0$, $a_j$ to a generator, and the rest
     onto the remaining generators is a surjection with dense kernel that collapses the one pair and not the
     other.
+  actual-world-isolated: >-
+    The proposition true at the arrows into $A$, the symmetry group, is in the domain and entails every
+    truth (argument actuality of the group); no arrow goes from a tail object to $A$, so no world outside
+    it sees a world in it.
 arguments:
 - id: necessary-barcan
   holds: [necessary-barcan-r]
@@ -110,6 +114,87 @@ arguments:
     infinitely many. An entrance $A\to V_\infty$ exists, so □Tame Rigidity fails. And the weakly rigid
     subproperties of the universal property at $A$ are rigid, by Tame Rigidity, but $U$ is a weakly rigid one
     at $V_\infty$ that is not, so Weakly Rigid Power fails.
+- id: tail-atomless
+  holds: [necessary-self-atoms-are-strong-atoms-r, necessary-self-atoms-are-atoms-r]
+  fails: [pure-b-r, necessary-vicinity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    No tail object $V$ has an atom of type $t$. Let $p$ be a nonzero proposition there, pinned down by a
+    finite subalgebra $S$, and $h:V\to W$ in $p$. Choose a $d$-generator $y$ outside the finitely many
+    generators $S$ depends on, and let $j_0,j_1$ agree with $h$ on the other generators except an infinite
+    set of further $d$-generators, which they send onto the base of $W$, with $j_0(y)=0$ and $j_1(y)=1$.
+    Both are tail arrows agreeing with $h$ on $S$, so both lie in $p$, and the proposition
+    $\{j : j(y)=0\}$, symmetric and pinned down by $\{y\}$, splits $p$. By existential projection (as in
+    the argument no-actuality-no-self-atoms) no tail object has an atom of any relational type either.
+    Nothing returns from the tail to $A$, so every world seen from a tail world is a tail world.
+
+
+    So Actuality, a closed pure sentence true at $1_A$, is impossible at an entrance $A\to V_0$, and B for
+    pure sentences fails. Vicinity fails at each tail object $V$: given a truth $p$ pinned down by
+    $T$, the endomorphism fixing every generator except $d_n,d_{n+1},\dots$ for a $d_n$ outside $T$'s
+    generators, sending $d_n$ to $0$ and $d_{k+1}$ to $d_k$, is an arrow in $p$ at which the truth that
+    $d_n\ne0$ is impossible. So □Vicinity fails.
+
+
+    Self-atoms. At a tail object a self-atom would be possible, so instantiated at some arrow, and an
+    atom at its target; so there are none, and the bridge principles hold there vacuously. At $A$, a
+    self-atom $X$ of any relational type is instantiated at no entrance, since it would be an atom at a
+    tail object; being nonzero it is instantiated at an automorphism, hence by symmetry at $1_A$ and at
+    every automorphism, so it is an atom there. Its transport along an entrance $h$ is $\bot$, every
+    arrow after $h$ being an entrance. So $X$ is necessarily an atom or $\bot$, a strong atom. At type
+    $t$ the only self-atom is the actual-world proposition. Hence self-atoms are necessarily atoms and
+    strong atoms, at every type.
+- id: forcing-possibilism
+  fails: [forcing-possibilism]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    The actual-world proposition $a$ is the only atom of type $t$ at $A$. A nonzero proposition $p$
+    containing no entrance lies in $a=\operatorname{Aut}(B)$, and by symmetry is $a$. If $p$, pinned
+    down by a finite subalgebra $S$, contains an entrance $h$, take an atom $s$ of $S$ with $h(s)\ne0$
+    and a nonzero $z<s$ in $\ker h$, and an automorphism $u$ fixing $S$ pointwise that exchanges $z$
+    and $s\setminus z$ inside $[0,s]$, by fact (a). Then $hu$ is an entrance agreeing with $h$ on $S$,
+    so it lies in $p$, with $hu(z)=h(s)\ne0=h(z)$; so the proposition $\{k : k(z)=0\}$ splits $p$.
+
+
+    Now the four propositions $\bot,a,\neg a,\top$ are distinct, $a$ being true and not necessary, and
+    the property of being one of them, with entailment among them, is a complete Boolean algebra in the
+    domain, defined from $a$, and Dedekind finite. Forcing Possibilism would give $p\ne\top$ whose
+    entailment algebra is isomorphic to it, so with exactly two atoms below it. There is only one atom.
+- id: intensional-choice
+  when: {individuals: base}
+  fails: [intensional-choice-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At type $e$, for $F:=\lambda x\, .\,x\ne0\land x\ne1$, necessarily instantiated since every base is
+    atomless. Let $G\le F$ be necessarily uniquely instantiated, pinned down by a finite subalgebra $S$.
+    Take an atom $s$ of $S$ and a dense-kernel surjection $f:[0,s]\to V_0$, by fact (d), and put
+    $h(b):=f(b\land s)$: an entrance $A\to V_0$ sending $S$ into $\{0,1\}$. So $G_h=\{y\}$ with $y\notin
+    \{0,1\}$. Every automorphism $\sigma$ of $V_0$ is a symmetry there and fixes $0$ and $1$, so
+    $\sigma h$ agrees with $h$ on $S$ and $\{\sigma y\}=G_{\sigma h}=G_h$. But by fact (a) some
+    automorphism exchanges $y$ and $\neg y$. So Intensional Choice fails, and with it □Intensional
+    Choice.
+- id: two-hat-not-nd-from-v0
+  fails: [necessary-two-hat-implies-nd-necessity]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At $V_0$, which an entrance reaches, let $p$ be the arrows into $V_0$: true, symmetric and pinned
+    down by $\varnothing$. It is not ND-necessary there. For a truth $q$ pinned down by $S$, generated
+    by $d_0,\dots,d_n$, the arrow $h:V_0\to V_1$ fixing $d_0,\dots,d_n$, sending $d_{n+1}$ to $c_0$ and
+    $d_{k+1}$ to $d_k$ for $k>n$, and the arrow $k:V_1\to V_0$ sending $c_0$ to $0$ and fixing every
+    $d_i$, give $k\circ h\in q$, as it agrees with $1_{V_0}$ on $S$; so $h\in\Diamond q\setminus p$.
+    But $p$ is two-hat necessary with witness $p$: at an arrow into a $V_m$ with $m\ge1$, or into
+    $V_\infty$, the arrows not sending $c_0$ into $\{0,1\}$ form a truth that is impossible at every
+    arrow into $V_0$, colours being preserved and $C_0=\{0,1\}$, so $\neg p$ is ND-necessary there and
+    $\Diamond_{\ne}p$ fails outside $p$. So at $V_0$ two-hat necessity, and hence 5-necessity and
+    truth, do not imply ND-necessity, and the boxed forms fail at $A$.
 notes: >-
   Separates Rigid Comprehension, □BF and □Rigid Power from Weakly Rigid Power and □Tame Rigidity,
   strengthening symmetric-recurrent-colours, which has Tame Rigidity in place of Rigid Comprehension. So Rigid

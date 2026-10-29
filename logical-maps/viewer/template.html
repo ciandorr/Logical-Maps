@@ -489,8 +489,11 @@
   .page .group-grid-wrap { overflow-x: auto; }
   .page table.group-grid { border-collapse: separate; border-spacing: 0; font-size: 13px; }
   .page table.group-grid th, .page table.group-grid td { padding: 0; }
-  .page table.group-grid thead th.gcol { vertical-align: bottom; height: 170px; width: 32px; min-width: 32px; }
-  .page table.group-grid thead th.gcol button { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; max-height: 170px; overflow: hidden; text-overflow: ellipsis; padding: 4px 0; font: 500 12.5px var(--sans); text-align: left; }
+  /* Column labels slant up to the right from the foot of their column; the wrap scrolls to show the last. */
+  .page table.group-grid thead th.gcol { vertical-align: bottom; height: 130px; width: 32px; min-width: 32px; max-width: 32px; position: relative; }
+  .page table.group-grid thead th.gcol button { position: absolute; left: 14px; bottom: 4px; transform-origin: 0 100%; transform: rotate(-45deg); white-space: nowrap; max-width: 175px; overflow: hidden; text-overflow: ellipsis; padding: 0 2px; font: 500 12.5px var(--sans); text-align: left; }
+  .page table.group-grid thead tr { height: 130px; }
+  .page .group-grid-wrap { padding-right: 130px; }
   .page table.group-grid thead th.gcol.derived button { color: var(--ink-3); font-style: italic; }
   .page table.group-grid tbody th { text-align: left; font-weight: 500; padding: 3px 14px 3px 0; white-space: nowrap; position: sticky; left: 0; background: var(--bg); z-index: 1; }
   .page table.group-grid tbody tr.first > * { border-top: 1px solid var(--line); }
@@ -620,6 +623,14 @@
   .principle-line .evidence-link { margin-left: 5px; }
   .ex-p.fin, .ex-p.model-in { background: color-mix(in srgb, var(--human) 10%, transparent); }
   .ex-p.fout, .ex-p.model-out { background: color-mix(in srgb, var(--indep) 10%, transparent); }
+  /* A swatch split as the graph's and the lattice's boxes are: upper left, a matching model
+     satisfies it; lower right, one violates it. */
+  .ex-p[class*="split-"] .principle-line::before, .ex-p.fin .principle-line::before, .ex-p.fout .principle-line::before { content: ''; display: inline-block; width: 15px; height: 15px; margin-right: 7px; vertical-align: -3px; border: 1px solid var(--line-strong); border-radius: 2px; }
+  .ex-p.fin .principle-line::before { background: var(--rel-entailed); }
+  .ex-p.fout .principle-line::before { background: var(--rel-excluded); border-color: var(--indep); }
+  .ex-p.split-consistent .principle-line::before { background: linear-gradient(to bottom right, var(--rel-entailed) 50%, var(--node-fill) 50%); }
+  .ex-p.split-separated .principle-line::before { background: linear-gradient(to bottom right, var(--node-fill) 50%, var(--rel-excluded) 50%); }
+  .ex-p.split-independent .principle-line::before { background: linear-gradient(to bottom right, var(--rel-entailed) 50%, var(--rel-excluded) 50%); }
   .seg button.auto-positive { color: var(--human); background: color-mix(in srgb, var(--human) 18%, var(--panel)); }
   .seg button.auto-negative { color: var(--indep); background: color-mix(in srgb, var(--indep) 18%, var(--panel)); }
   /* The Assumptions box heads the model column: the theory's statement above what it yields. */
@@ -3091,6 +3102,17 @@ function renderModels() {
   // A group is inspected through the models of it that fit: those known to, else those that might.
   const igFits = ig ? (() => { const fam = groupFamily(ig.id), known = fam.filter(m => modelFit(m, IN, OUT) === 'known'); return known.length ? known : fam.filter(m => modelFit(m, IN, OUT) === 'potential'); })() : [];
   const conflict = theoryE.conflict([]), implied = conflict ? new Set() : theoryE.cl([]).facts;
+  // With assumptions, a principle they do not settle is shaded as on the graph: its upper left
+  // when a model matching them satisfies it, its lower right when one violates it.
+  const matching = !conflict && (IN.length || OUT.length) ? MODELS.filter(m => modelFit(m, IN, OUT) === 'known') : [];
+  const splitTint = id => {
+    const pos = matching.some(m => cellOf(m, id)[0] === 'h'), neg = matching.some(m => cellOf(m, id)[0] === 'f');
+    return !matching.length && !(IN.length || OUT.length) ? '' : pos && neg ? 'split-independent' : pos ? 'split-consistent' : neg ? 'split-separated' : 'split-open';
+  };
+  const splitTitle = {'split-independent': 'Independent of the assumptions: matching models satisfy it and violate it',
+    'split-consistent': 'Consistent with the assumptions: a matching model satisfies it',
+    'split-separated': 'Not entailed by the assumptions: a matching model violates it',
+    'split-open': 'No matching model settles it either way'};
   // Clearing sits on the heading line with the category control; the packages, which are
   // used far less often than the list, wait at its foot.
   let h = `<div class="ex"><div class="ex-col ex-principles"><div class="ex-head">Principles <span class="n">${ids.filter(inTheory).length} assumed</span>${categoryExpander()}<button class="lnk" id="ex-clear">clear assumptions</button></div>`;
@@ -3109,14 +3131,14 @@ function renderModels() {
       const evidence = inspected && modelEvidence(inspected, id);
       const fv = ig && igFits.length ? familyVerdict(igFits, id) : null;
       const groupTint = fv ? (fv.h === igFits.length ? 'model-in' : fv.f === igFits.length ? 'model-out' : '') : '';
-      const tint = inspected ? evidence ? evidence.value ? 'model-in' : 'model-out' : '' : ig ? groupTint : positive ? 'in' : negative ? 'out' : follows ? 'fin' : ruledOut ? 'fout' : '';
+      const tint = inspected ? evidence ? evidence.value ? 'model-in' : 'model-out' : '' : ig ? groupTint : positive ? 'in' : negative ? 'out' : follows ? 'fin' : ruledOut ? 'fout' : splitTint(id);
       const groupNote = fv ? `<span class="via family-verdict">${fv.h === igFits.length ? '✓ in all' : fv.f === igFits.length ? '✗ in all' : [fv.h ? fv.h + '✓' : '', fv.f ? fv.f + '✗' : '', fv.u ? fv.u + '?' : ''].filter(Boolean).join(' ')}</span>` : '';
       // After the name: the inspected model's verdict, a derived one opening to its derivation
       // in place; a group's tally; or, for a principle the assumptions settle, why.
       const tail = inspected ? ' ' + (evidence && !evidence.direct ? `<span class="model-flag">${evidence.value ? '✓' : '✗'} derived</span>${modelWhy(inspected, id, evidence)}` : verdictButton(inspected, id, evidence, true))
         : groupNote ? ' ' + groupNote
         : follows && !positive ? theoryWhy(id, true) : ruledOut && !negative ? theoryWhy(id, false) : '';
-      h += `<li class="ex-p ${tint}" data-assumption-row="${id}">${assumptionButtons(id, follows, ruledOut, theory.positive, theory.negative)}<div class="principle-line"><button class="lnk" data-principle="${id}">${esc(name(id))}</button>${tail}</div></li>`;
+      h += `<li class="ex-p ${tint}" data-assumption-row="${id}"${splitTitle[tint] ? ` title="${splitTitle[tint]}"` : ''}>${assumptionButtons(id, follows, ruledOut, theory.positive, theory.negative)}<div class="principle-line"><button class="lnk" data-principle="${id}">${esc(name(id))}</button>${tail}</div></li>`;
 
     }
     h += '</ul></details>';
@@ -3920,7 +3942,7 @@ function groupGrid(g, view) {
   const varies = (rs, c) => new Set(rs.map(r => cellOf(r.m, c)[0])).size > 1;
   const qualifies = (rs, c) => varies(rs, c) && (view.derived || rs.some(r => cellOf(r.m, c)[1]));
   // Principles hidden in the sidebar (signature schemata, by default) are left out here too.
-  const all = principleOrder(), order = all.filter(c => !state.excluded.has(c));
+  const all = principleGroups().flatMap(g => g.principles.map(p => p.id)), order = all.filter(c => !state.excluded.has(c));
   const baseCols = order.filter(c => qualifies(members, c)), extra = order.filter(c => !baseCols.includes(c) && qualifies(rows, c));
   const cols = [...baseCols, ...extra];
   const hiddenDerived = order.filter(c => varies(rows, c) && !rows.some(r => cellOf(r.m, c)[1])).length;

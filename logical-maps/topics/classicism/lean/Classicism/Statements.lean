@@ -5338,6 +5338,30 @@ def coalesced_all_finite_individual_domains : Prop :=
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
     ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.distinctnessC _)
 
+/-- `extensional-independent-constants-finite-individuals`
+
+Extensional model: independent constants, finitely many individuals: a witness satisfying 3 principles
+and violating 2. -/
+def extensional_independent_constants_finite_individuals : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Extensionality.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecFunctionalChoice.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE) ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `extensional-independent-constants-infinite-individuals`
+
+Extensional model: independent constants, infinitely many individuals: a witness satisfying 4 principles
+and violating 1. -/
+def extensional_independent_constants_infinite_individuals : Prop :=
+  ∃ (Sig : Classicism.Meta.Signature) (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig), Classicism.Meta.AxiomSet.Consistent Ax ∧ Classicism.Meta.AxiomSet.Complete Ax ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Extensionality.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecFunctionalChoice.schemaIn ∧
+    Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.independence _) ∧
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.AxiomOfInfinityE.schemaIn ∧
+    ¬ Classicism.Meta.AxiomSet.Entails Ax (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
 /-- `full-henkin-infinite-base`
 
 Full Henkin model: countably infinite individual domain: a witness satisfying 3 principles

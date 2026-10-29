@@ -1201,6 +1201,7 @@ const ids = P.map(p => p.id);
 const topicBackground = T.background || [];
 const backgroundPresets = T.background_presets || [];
 const backgroundParams = new URLSearchParams(window.location.search);
+const initialHash = window.location.hash || '';  // read before any tab change clears a record page's hash
 const initialBackground = backgroundParams.has('assume') ? (backgroundParams.get('assume') || '').split(',') : backgroundPresets.filter(p => p.default).flatMap(p => p.principles);
 const background = new Set([...topicBackground, ...initialBackground.filter(id => byPid.has(id))]);
 const negativeBackground = new Set((backgroundParams.get('deny') || '').split(',').filter(id => byPid.has(id) && !topicBackground.includes(id)));
@@ -4179,7 +4180,7 @@ function openPage(sel, back = null) {
   if (!back && state.page && pane.dataset.active === 'true')
     pageHistory.push({ sel: { ...state.page, jump: undefined }, scroll: pane.scrollTop, open: [...el.querySelectorAll('details')].map(d => d.open) });
   else if (!back) pageHistory.length = 0;
-  state.page = sel; renderPage(sel);
+  state.page = sel; renderPage(sel); pageHash(sel);
   document.getElementById('pop').hidden = true; document.querySelectorAll('.tab').forEach(x => x.setAttribute('aria-selected', 'false')); document.querySelectorAll('.pane').forEach(p => p.dataset.active = (p.id === 'pane-page'));
   if (back) {
     const details = [...el.querySelectorAll('details')];
@@ -4187,13 +4188,23 @@ function openPage(sel, back = null) {
     pane.scrollTop = back.scroll;
   } else if (!sel.jump) pane.scrollTop = 0;
 }
+// #model/<id>, #result/<id>, #principle/<id> and #group/<id> name the record page shown, so its
+// address can be copied as a link to it.
+// (Functions, not constants, since a page may open before this point of the script runs.)
+function pageLookup(type) { return { model: byMid, result: byRid, principle: byPid, group: byGid }[type]; }
+function pageRoute(hash = window.location.hash || '') { return /^#(model|result|principle|group)\/([A-Za-z0-9_.-]+)$/.exec(hash); }
+function pageHash(sel) {
+  const hash = sel && pageLookup(sel.type)?.has(sel.id) ? '#' + sel.type + '/' + sel.id : '';
+  if (hash === (window.location.hash || '') || (!hash && !pageRoute())) return;
+  try { window.history.replaceState(window.history.state, '', hash || window.location.pathname + window.location.search); } catch { /* Local files may not allow history updates. */ }
+}
 function pageBack() {
   const prev = pageHistory.pop();
   if (prev) openPage(prev.sel, prev); else { state.page = null; showTab(state.tab); }
 }
 function showTab(tab) {
   hover(null);
-  state.tab = tab; state.page = null; pageHistory.length = 0;
+  state.tab = tab; state.page = null; pageHistory.length = 0; pageHash(null);
   if (tab === 'graph' || tab === 'open' || tab === 'lattice' || tab === 'theorems') {
     // One sidebar for the three views, so background, source selections,
     // click slots, scrolling and pane sizes are shared rather than duplicated.
@@ -5963,4 +5974,6 @@ for (const id of ['pr-filters', 'lat-filters', 'models', 'open', 'pop']) wirePre
 if (T.default_tab && T.default_tab !== 'graph') document.querySelector(`.tab[data-tab="${T.default_tab}"]:not([hidden])`)?.click();
 // A link to a Background page or item, #background/<page>[/<item>], opens it.
 if (BG_PAGES.length && /^#background(\/|$)/.test(window.location.hash || '')) { showTab('background'); showBackgroundPage(bgRoute().page, bgRoute().item, false); }
+// A link to a record page, #model/<id> (or result, principle, group), opens it.
+{ const m = pageRoute(initialHash); if (m && pageLookup(m[1]).has(m[2])) openPage({ type: m[1], id: m[2] }); }
 </script>

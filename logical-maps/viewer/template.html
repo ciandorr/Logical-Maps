@@ -584,6 +584,8 @@
   .bg-item-foot details { margin-top: 4px; }
   .lean-ref { font-size: 12px; white-space: nowrap; }
   .lean-menu { display: inline; }
+  .principle-tools { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px 16px; margin: 8px 0; font-size: 13px; }
+  .principle-tools .explore-links { margin-left: auto; }
   button.badge.lean { cursor: pointer; margin: 0; }
   button.badge.lean:hover, button.badge.lean[aria-expanded="true"] { background: var(--panel-2); }
   .lean-pop { position: fixed; z-index: 1000; display: flex; flex-direction: column; min-width: 160px; max-width: min(360px, calc(100vw - 32px));
@@ -4122,8 +4124,9 @@ function renderPage(sel) {
   } else if (sel.type === 'principle') {
     const p = byPid.get(sel.id);
     h += `<h1>${sel.negative ? '¬' : ''}${esc(p.name)}</h1>${sel.negative ? '<p>Negation of the following principle:</p>' : ''}${(p.aliases || []).length ? `<div class="id">${esc(p.aliases.join(', '))}</div>` : ''}<div class="prose statement">${esc(p.statement)}</div>${p.formal ? `<div class="formal">${esc(p.formal)}</div>` : ''}${p.definitions ? `<div class="defs">${fmt(p.definitions)}</div>` : ''}`
-      + (p.lean_def ? `<div class="pop-l">${leanBadge({verified: false, note: 'Defined in Lean', links: p.lean_links})}</div>` : '')
-      + (topicBackground.includes(p.id) ? '' : `<div class="links explore-links"><button class="lnk" data-explore="${esc(p.id)}" data-explore-sign="positive">View in Theory Explorer</button> · <button class="lnk" data-explore="${esc(p.id)}" data-explore-sign="negative">View negation in Theory Explorer</button></div>`);
+      // One line: the Lean badge on the left, the explorer controls on the right.
+      + `<div class="principle-tools"><span>${p.lean_def ? leanBadge({verified: false, note: 'Defined in Lean', links: p.lean_links}) : ''}</span>`
+      + (topicBackground.includes(p.id) ? '' : `<span class="explore-links"><button class="lnk" data-explore="${esc(p.id)}" data-explore-sign="positive">View in Theory Explorer</button> · <button class="lnk" data-explore="${esc(p.id)}" data-explore-sign="negative">View negation in Theory Explorer</button></span>`) + '</div>';
     if (p.about) h += `<h2>About</h2><div class="prose about">${fmt(p.about)}</div>`;
     h += variantsSection(p);
     if (p.notes) h += `<h2>Notes</h2><div class="prose">${fmt(p.notes)}</div>`;

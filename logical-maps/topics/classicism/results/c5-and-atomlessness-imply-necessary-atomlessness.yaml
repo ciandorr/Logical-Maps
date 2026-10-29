@@ -1,0 +1,29 @@
+id: c5-and-atomlessness-imply-necessary-atomlessness
+premises:
+- necessary-distinctness-necessary-r
+- atomlessness
+conclusion: necessary-atomlessness
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026, while adding □Atomlessness at Cian
+  Dorr's request.
+source_names:
+- Opus 29 Oct
+proof: >-
+  In C, $\Diamond p$ is equivalent to $p\ne\bot$ and $q\le p$ is the identity $q\land p=q$, so Atomlessness is
+  equivalent to a closed formula built from identities by connectives and quantifiers. Under C5, BF holds
+  ([[necessary-nd-implies-bf]]), and every such formula denotes $\top$ or $\bot$: identities do by ND and
+  NI, connectives preserve this, and if every instance of $\forall x\,\varphi$ is $\top$ then BF makes
+  $\forall x\,\varphi$ necessary, so $\top$. So if Atomlessness is true it is $\top$, and hence necessary.
+references: []
+notes: >-
+  C5 does not give No Pure Contingency without Atomicity ([[c5-and-atomicity-imply-no-pure-contingency]]),
+  which Atomlessness excludes, so this does not follow from
+  [[no-pure-contingency-and-atomlessness-imply-necessary-atomlessness]].

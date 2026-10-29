@@ -2,6 +2,7 @@ id: no-atoms-no-self-atoms
 requires:
 - no-atoms-anywhere
 holds:
+- necessary-atomlessness
 - necessary-atoms-are-self-atoms-r
 - necessary-atoms-are-strong-atoms-r
 - necessary-self-atoms-are-atoms-r
@@ -16,3 +17,10 @@ text: An atom of a relational type at a reachable object would give, by existent
   no reachable object has an atom of any relational type, nor a self-atom, since a self-atom is an atom
   where it is instantiated. All four bridge principles therefore hold vacuously at every type and every
   reachable object, and Self-Atomicity (type t) fails at the evaluation point.
+revisions:
+- date: '2026-10-29'
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  note: >-
+    Now also gives □Atomlessness, which the condition states: a reachable object with no atom of type $t$
+    satisfies Atomlessness. The bridge verdicts and the failure of Self-Atomicity are now also consequences
+    of □Atomlessness by recorded results.

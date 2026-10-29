@@ -1,0 +1,31 @@
+id: necessary-atomlessness-implies-necessary-self-atoms-are-atoms-r
+premises:
+- necessary-atomlessness
+conclusion: necessary-self-atoms-are-atoms-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026, from Claude Fable 5.1's
+    argument no-atoms-no-self-atoms of 25 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, argument no-atoms-no-self-atoms, 25 October 2026,
+  turned into a result at Cian Dorr's suggestion of 29 October 2026.
+source_names:
+- Fable 25 Oct
+proof: >-
+  By 4, $\Box$Atomlessness gives $\Box\Box$Atomlessness, so at every world, and every world it sees, there is no
+  atom of type $t$. Nor is there one of a relational type: an atom $X$ of type $\bar\sigma t$ would give the
+  atom $\exists\bar x\, .\,X\bar x$ of type $t$, since for $q$ below it, $\lambda\bar x\, .\,X\bar x\land q$ is
+  below $X$, so it is $X$ or $\bot$, and $q$ is then $\exists\bar x\, .\,X\bar x$ or $\bot$. So, necessarily,
+  nothing is a self-atom: a self-atom is possible, so instantiated at some world it sees, where it is an atom.
+  Necessarily, then, every self-atom is an atom, vacuously.
+references: []
+notes: >-
+  With [[necessary-atomlessness-implies-necessary-atoms-are-strong-atoms-r]] and
+  [[necessary-atoms-are-strong-atoms-r-and-necessary-self-atoms-are-atoms-r-imply-necessary-self-atoms-are-strong-atoms-r]],
+  every boxed bridge principle follows: these are the verdicts of the argument no-atoms-no-self-atoms, stated
+  as consequences of □Atomlessness.

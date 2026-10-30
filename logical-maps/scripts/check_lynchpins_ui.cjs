@@ -290,7 +290,7 @@ try {
   const positive=id=>fd.querySelector(`#pr-filters [data-show-positive="${id}"]`);
   const negative=id=>fd.querySelector(`#pr-filters [data-show-negative="${id}"]`);
   positive('r').click();
-  assert.equal(fd.getElementById('open-progress').textContent,'9 (60%) of 15 questions with up to two premises are open.','percentage and count follow the shown principles');
+  assert.equal(fd.getElementById('open-progress').textContent,'9 (60.0%) of 15 questions with up to two premises are open.','percentage and count follow the shown principles');
   assert.match(fd.getElementById('open-progress').title,/^9 of 15 questions/);
   const withoutR={
     lynchpins:['q|p+s|false','q|s|p','q|q+s|false'],
@@ -303,7 +303,7 @@ try {
   assert.equal(fd.querySelector('#pr-filters .pr-category-count').textContent,'3/4');
   negative('r').click();
   for(const id of sections) assert.deepEqual(keys(filtered,id),withoutR[id],'showing ¬R does not restore positive R questions, including non-entailments');
-  assert.equal(fd.getElementById('open-progress').textContent,'9 (60%) of 15 questions with up to two premises are open.');
+  assert.equal(fd.getElementById('open-progress').textContent,'9 (60.0%) of 15 questions with up to two premises are open.');
   negative('r').click();
   show(filtered,'graph');
   assert.equal(positive('r').getAttribute('aria-pressed'),'true','the graph keeps its own shown principles');

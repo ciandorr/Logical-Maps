@@ -3539,7 +3539,7 @@ function renderProgress() {
 // The open share, with a decimal: the share left is small, and it moves in small steps.
 function openShare(c) {
   const share = 100 * c.open / c.questions;
-  return c.open && share < 0.1 ? '<0.1' : c.open < c.questions && share > 99.9 ? '>99.9' : share.toFixed(1).replace(/\.0$/, '');
+  return c.open && share < 0.1 ? '<0.1' : c.open < c.questions && share > 99.9 ? '>99.9' : share === 100 ? '100' : share.toFixed(1);
 }
 const SETTLED = new Set(['proved', 'refuted', 'excluded', 'consistent', 'inconsistent']);
 function rankedTable(rep, rows, mode = 'questions') {

@@ -52,7 +52,7 @@ try{
   w.eval(`state.openExcluded.add("d"); renderLynchpins()`);
   open('open-core');
   assert.deepEqual(keys('open-core'),['q|a+b|c']);
-  assert.equal(d.getElementById('open-core-progress').textContent,'1 (20%) of 5 Core Questions are open.');
+  assert.equal(d.getElementById('open-core-progress').textContent,'1 (20.0%) of 5 Core Questions are open.');
   assert.deepEqual(errors.map(String),[]);
   console.log('PASS: Core Questions sit below the renamed High-Value Questions, list only core questions in core order with core scores, and count their open ones over the shown principles.');
 }finally{w.close();}

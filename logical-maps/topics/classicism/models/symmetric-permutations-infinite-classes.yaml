@@ -32,6 +32,18 @@ settings:
     evaluation point is the identity arrow.
   sigma: top
 meets:
+  moved-instances: >-
+    At type $t$, so with either individuals. Write $[u\sim v]$ for the proposition $\{k : ku\sim kv\}$,
+    symmetric and pinned down by $\{u,v\}$; a symmetry $g$ carries it to $[gu\sim gv]$, and $[u\sim
+    v]=[u'\sim v']$ only if $\{u,v\}=\{u',v'\}$. Fix a point $a$ and let $F$, of type $tt$, have as
+    extension at $h$ the propositions $[u\sim v]$ with $u\ne v$, $u\sim v$ and $u\not\sim h(a)$:
+    symmetric, pinned down by $\{a\}$, and necessarily instantiated, there being other classes. Given
+    $N$, let $h$ be a permutation carrying $N\cup\{a\}$ into one class. For $[u\sim v]$ in $F$'s
+    extension at $h$, $u$ and $v$ lie in another class, so the transposition of $u$ with a third member
+    $w$ of its class fixes $h(N)$ pointwise, is an automorphism of the equivalence relation, and carries
+    $[u\sim v]$ to $[w\sim v]\ne[u\sim v]$; composed with $h$ it is again a permutation. With the base
+    as individuals, $F:=\lambda x\, .\,\neg(x\sim a)$ at type $e$ works the same way: every instance at
+    $h$ lies outside the class containing $h(N)$ and is moved by a transposition inside its own class.
   one-object-action-model: It has one object.
   finitely-pinned-domains: >-
     The domains hold every symmetric intension pinned down by a finite set, and every entity in them is one.
@@ -72,12 +84,74 @@ arguments:
     generate all those fixing $S$ pointwise. So $Y$ is pinned down by $S$. Now take $g^{\prime}\in G$ fixing $S$
     pointwise and exchanging $C$ with another class disjoint from $S$: $Y_{g^{\prime}}=Y_1$ by pinning, and
     $Y_{g^{\prime}}=g^{\prime}[Y_1]$ by symmetry, so $C=g^{\prime}[C]$, which is false. So there is no such $F$.
+- id: atomlessness
+  holds: [atomlessness]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Let $p$ be a possible proposition, pinned down by a finite $N$ and containing the arrow $h$. Take
+    distinct points $m,m^{\prime}\notin N$ and put $q:=\{k\in p : km\sim km^{\prime}\}$, symmetric and
+    pinned down by $N\cup\{m,m^{\prime}\}$, so in the domain, with $q\le p$. A permutation agreeing with
+    $h$ on $N$ and sending $m$ and $m^{\prime}$ to two fresh points of one class lies in $q$, and one
+    sending them to fresh points of different classes lies in $p$ but not in $q$, both lying in $p$ by
+    pinning. So $q$ is possible and $q\ne p$.
+- id: boolean-completeness-t
+  holds: [boolean-completeness-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    Write $E_k:=\{(x,y) : kx\sim ky\}$ for an arrow $k$. If $E_k$ and $E_{k^{\prime}}$ agree on a finite
+    $M$, the map $k(m)\mapsto k^{\prime}(m)$ preserves and reflects $\sim$, so it extends to an automorphism
+    $g$ of the equivalence relation, the classes being infinitely many and infinite, and $g\circ k$ agrees
+    with $k^{\prime}$ on $M$; so a proposition pinned down by $M$ contains $k$ iff it contains $k^{\prime}$.
+    And for finite sets $A$ and $B$ and arrows $k_A$, $k_B$ with $E_{k_A}$ and $E_{k_B}$ agreeing on $A\cap
+    B$, some permutation $k$ has $E_k$ equal to $E_{k_A}$ on $A$ and to $E_{k_B}$ on $B$: amalgamate the
+    two equivalence relations over $A\cap B$ and send each class of the result into its own class.
+    Now let $X$ be a property of propositions, pinned down by a finite $N$, and let $\ell$ hold at $h$
+    iff every arrow $k$ with $E_k=E_h$ on $N$ belongs to every member of $X$'s extension at the
+    identity. $\ell$ is symmetric and pinned down by $N$, and it entails every member. Let $q$, pinned
+    down by $M\supseteq N$, entail every member, and let $h\in q$; suppose some $k$ with $E_k=E_h$ on
+    $N$ lies outside some member $p$, pinned down by $P$. Take a symmetry $g$ fixing $N$ pointwise
+    that moves each point of $P\setminus N$ inside its class to a point outside $M$. Then $g\cdot p=\{k^{\prime}
+    : k^{\prime}\circ g\in p\}$ is a member, $X$ being fixed by $g$, it is pinned down by $g(P)$, whose
+    intersection with $M$ lies in $N$, and $k\circ g^{-1}$, which agrees with $k$ on $N$, lies outside it.
+    An arrow $h^{\prime}$ with $E_{h^{\prime}}$ equal to $E_h$ on $M$ and to $E_{k\circ g^{-1}}$ on $g(P)$ lies
+    in $q$ but not in $g\cdot p$, a contradiction. So $q\le\ell$, and $\ell$ is the greatest lower bound.
+- id: countable-boolean-completeness
+  holds: [countable-boolean-completeness-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every relational type. First, an entity $Y$ pinned down by a finite $T$ and fixed by every
+    symmetry fixing a finite $N$ pointwise is pinned down by $N$. For $Y$'s extension at $k\circ w$ equals
+    its extension at $k$ both when $w$ is a symmetry fixing $N$ pointwise and, by pinning, when $w$ is any
+    permutation fixing $T$ pointwise. These $w$ generate every permutation fixing $N$ pointwise: a
+    transposition $(a\,b)$ of points outside $N$, with $a\in T$ say, is $(a\,c)(c\,b)(a\,c)$ for $c\notin
+    T\cup N$ in the class of $a$, where $(a\,c)$ is a symmetry fixing $N$ and $(c\,b)$ fixes $T$ if $b\notin
+    T$ (if $b\in T$, do the same for $b$); so every finitary permutation of the points outside $N$ is
+    generated, and every permutation fixing $N$ pointwise agrees on $T$ with one of those. Now let $X$
+    be countable, and let a finite $N$ pin down both $X$ and an injection $I$ of $X$ into the finite
+    cardinalities. These are standard and fixed by every arrow, as in the group's arguments for the
+    Axiom of Infinity, so for a symmetry $g$ fixing $N$ pointwise and a member $Y$ of $X$'s extension,
+    $g\cdot Y$ is a member too and $I$ assigns it the cardinality it assigns $Y$; so $g\cdot Y=Y$, and every
+    member is pinned down by $N$. Their union, taken arrow by arrow, is then symmetric and pinned down by
+    $N$, so in the domain, and it is the least upper bound, the order being inclusion of intensions.
+
 notes: >-
   With all surjections as arrows this is symmetric-infinite-classes. Separates C5 from Transversal (and so from Transversal Choice and Actuality, which implies Transversal):
   a symmetric ideally-full model with invertible arrows, so C5 holds, in which the symmetry group, the
   automorphisms of an equivalence relation with infinitely many infinite classes, leaves no canonical
   representative of a class, as in symmetric-infinite-classes. Transversal holds in ideally full models with
   codomain intensions whatever the metatheory, the constant intension with value $E$ being a canonical
-  member of each coextension class; it is the symmetry that removes those representatives. Recorded with the
+  member of each coextension class; it is the symmetry that removes those representatives. Intensional
+  Choice fails too, at types $e$ and $t$, although no arrow collapses: an arrow carrying the pinning set into one
+  class leaves every instance of $\lambda x\, .\,\neg(x\sim a)$ movable by the symmetries fixing its image (topic
+  argument intensional-choice-moved-instances). Recorded with the
   base as individuals; the argument against Transversal does not apply to the generated variant with one
   individual.

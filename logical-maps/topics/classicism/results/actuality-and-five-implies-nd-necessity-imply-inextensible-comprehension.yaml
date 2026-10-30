@@ -1,0 +1,42 @@
+id: actuality-and-five-implies-nd-necessity-imply-inextensible-comprehension
+premises:
+- actuality
+- five-implies-nd-necessity
+conclusion: inextensible-comprehension-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, with help from GPT-6 Astra (OpenAI), 29 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: none
+sources:
+- Cian Dorr, with help from GPT-6 Astra (OpenAI), argument of 29 October 2026; see the write-up.
+source_names:
+- Dorr 29 Oct
+proof: >-
+  See the write-up. Let $a$ witness [[actuality]] and put $D_ap:=\Diamond(\Diamond a\land p)$. Actuality
+  makes $D_a$ coextensive with $\Diamond_{\ne}$: one direction takes $q:=a$ in
+  $\Diamond_{\ne}p\leftrightarrow\forall q\, .\,q\to\Diamond(\Diamond q\land p)$, and the other uses
+  $a\le q$ for each truth $q$. With [[five-implies-nd-necessity|5-necessities are ND-necessary]] and the
+  theorem $\Box_{\ne}\le\Box_5$, $D_a$ is then coextensive with $\Diamond_5$. The Barcan formula for
+  $\Box_5$ holds at every type ([[box5-barcan]]), so, transferring it through these actual
+  coextensions, $\Diamond\exists\bar x\, .\,\Diamond a\land R[\bar x]\to\exists\bar x\,
+  .\,\Diamond(\Diamond a\land R[\bar x])$. This replaces BF in the proof of
+  [[actuality-and-bf-imply-inextensible-comprehension]]: the relation $\lambda\bar z\,
+  .\,\Diamond(a\land F[\bar z])$ is coextensive with $F$ and inextensible, since both formulas from
+  which that proof extracts witnesses imply $\Diamond a$.
+references:
+- paper: bounds-of-possibility
+  role: background
+  locator: Appendix D, pp. 400–409
+  note: The 5-necessity operator.
+notes: >-
+  BF itself is not needed. Its restriction to the possibilities compatible with the
+  actual world, that is to those of the form $\Diamond(\Diamond a\land p)$, is derived from the
+  5-necessity collapse. Since 5-necessity obeys the Barcan formula outright, the collapse is used
+  only at the actual world, through actual coextensiveness of the operators. With the recorded results,
+  Self-Atomicity and Strong Atomicity (each at type $t$ or at every type) now give Inextensible
+  Comprehension. The recorded results from Actuality with BF, and from Actuality with Distinctness-Preserving
+  Collapse, now follow from this one and the recorded implications to the 5-necessity collapse.

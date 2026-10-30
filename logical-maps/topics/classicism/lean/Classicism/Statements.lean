@@ -611,6 +611,15 @@ def actuality_and_distinctness_preserving_collapse_imply_strong_actuality : Prop
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.DistinctnessPreservingCollapse.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.StrongActuality.schemaIn
 
+/-- `actuality-and-five-implies-nd-necessity-imply-inextensible-comprehension`
+
+Actuality ∧ 5-necessities are ND-necessary ⇒ Inextensible Comprehension -/
+def actuality_and_five_implies_nd_necessity_imply_inextensible_comprehension : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.Actuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.FiveImpliesNdNecessity.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.InextensibleComprehension.schemaIn
+
 /-- `actuality-and-self-atoms-are-strong-atoms-t-imply-strong-actuality`
 
 Actuality ∧ Self-atoms are strong atoms (type t) ⇒ Strong Actuality -/
@@ -2018,6 +2027,15 @@ def necessary_actuality_and_necessary_distinctness_preserving_collapse_imply_nec
   ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecDistinctnessPreservingCollapse.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecInextensibleComprehension.schemaIn
+
+/-- `necessary-actuality-and-necessary-five-implies-nd-necessity-imply-necessary-inextensible-comprehension`
+
+□Actuality ∧ □5-necessities are ND-necessary ⇒ □Inextensible Comprehension -/
+def necessary_actuality_and_necessary_five_implies_nd_necessity_imply_necessary_inextensible_comprehension : Prop :=
+  ∀ {Sig : Classicism.Meta.Signature} (_ : Sig.Admitted) (Ax : Classicism.Meta.AxiomSet Sig),
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecActuality.schemaIn →
+    Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecFiveImpliesNdNecessity.schemaIn →
     Classicism.Meta.AxiomSet.Entails Ax Classicism.P.NecInextensibleComprehension.schemaIn
 
 /-- `necessary-actuality-and-necessary-self-atoms-are-strong-atoms-t-imply-necessary-strong-actuality`

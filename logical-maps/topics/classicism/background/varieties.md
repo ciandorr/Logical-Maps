@@ -151,3 +151,20 @@ map's records need.
 
 The link $\hat{\hat\Box}\le\Box_5$ of the chain above is Proposition D21, right to left,
 and $\hat\Box=\Box_{\ne}$ is Proposition D17.
+
+::: proposition {#box5-barcan}
+title: the Barcan formula for 5-necessity
+credit: Cian Dorr, with help from GPT-6 Astra (OpenAI), 29 October 2026
+---
+At every type $\sigma$, C proves $\forall x^\sigma\, .\,\Box_5Rx\to\Box_5\forall x\, .\,Rx$, and
+dually $\Diamond_5\exists x\, .\,Rx\to\exists x\, .\,\Diamond_5Rx$; iterating, the same holds for
+tuples of variables.
+
+*Proof.* This is Prior's derivation of the Barcan formula from B. It uses only that
+$\Box_5$ is an S5 operator, a theorem of C, so every step below is a theorem and may
+be necessitated. Put $U:=\forall x\, .\,\Box_5Rx$. For each $x$, $U\to\Box_5Rx$ is a
+theorem, so by necessitation, N and K for $\Box_5$, $\Diamond_5U\to\Diamond_5\Box_5Rx$.
+The dual of B gives $\Diamond_5\Box_5Rx\to Rx$. So $\Diamond_5U\to\forall x\, .\,Rx$ is a
+theorem, and necessitation, N and K give $\Box_5\Diamond_5U\to\Box_5\forall x\, .\,Rx$.
+B gives $U\to\Box_5\Diamond_5U$. $\square$
+:::

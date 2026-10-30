@@ -92,6 +92,14 @@ and reports unless it is asked for by name.
   The settled percentage and question count use the
   same shown principles, counting stored statuses for all eligible questions.
   `check_lynchpins_ui.cjs` guards the tab.
+- `python3 scripts/pmap.py history` — add to `topics/<topic>/history.json` a point for each
+  day of `origin/main`'s first-parent history (its last commit that day) that the ledger lacks:
+  the settled counts of the whole map under the topic background alone, two-premise and Core.
+  Each commit is loaded by its own `pmap.py` and counted by today's `Lynchpins`; `--rebuild`
+  recounts every point, and bumping `HISTORY_VERSION` does so too, for when what counts as a
+  question changes. Run it after merges to main, having fetched. A build only reads the ledger,
+  adding this build as a live last point, for the Changes tab's "Progress over time"
+  (`check_history_ui.cjs`).
 - `python3 scripts/pmap.py starter` — build the reusable starter ZIP. Normal
   builds also regenerate it and add a relative Contribute download. Keep its
   allowlist limited to shared tooling and `starter/` assets. Run

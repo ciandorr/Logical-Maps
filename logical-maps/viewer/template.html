@@ -83,6 +83,34 @@
   .changes-summary { color: var(--ink-2); font-size: 13px; margin: 4px 0 8px; }
   table.changes tr.new td.mono { font-weight: 600; }
   .changes-more { margin: 10px 0; }
+  /* Progress over time, above the Changes list: one step chart, four views. */
+  details.history { margin: 0 0 14px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+  details.history > summary { padding: 7px 10px; cursor: pointer; font: 600 14px/1.4 var(--sans); color: var(--ink); }
+  details.history[open] > summary { border-bottom: 1px solid var(--line); }
+  .history-controls { display: flex; flex-wrap: wrap; gap: 8px 14px; padding: 10px 10px 0; }
+  .history-controls .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 4px; overflow: hidden; }
+  .history-controls .seg button { width: auto; height: auto; min-height: 26px; padding: 2px 10px; border: 0; background: var(--panel); color: var(--ink-2); font-size: 13px; white-space: nowrap; cursor: pointer; }
+  .history-controls .seg button + button { border-left: 1px solid var(--line-strong); }
+  .history-controls .seg button[aria-pressed="true"] { background: var(--hl); color: var(--ink); font-weight: 600; }
+  .history-chart { position: relative; padding: 6px 10px 0; }
+  .history-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .history-chart .axis text { fill: var(--ink-3); font-size: 11px; }
+  .history-chart .grid { stroke: var(--line); stroke-width: 1; }
+  .history-chart .total { fill: none; stroke: var(--ink-2); stroke-width: 1.5; }
+  .history-chart .settled-area { fill: var(--accent); opacity: .22; }
+  .history-chart .main-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+  .history-chart .live { stroke-dasharray: 4 3; }
+  .history-chart .guide { stroke: var(--ink-3); stroke-width: 1; }
+  .history-chart .dot { fill: var(--accent); }
+  .history-tip { position: absolute; top: 6px; pointer-events: none; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--panel); color: var(--ink); font-size: 12px; line-height: 1.45; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,.12); }
+  .history-tip .dim { color: var(--ink-3); }
+  .history-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 2px 10px 0; font-size: 12px; color: var(--ink-2); }
+  .history-legend i { display: inline-block; width: 14px; height: 0; margin-right: 5px; vertical-align: middle; border-top: 2px solid var(--accent); }
+  .history-legend i.total { border-top-color: var(--ink-2); border-top-width: 1.5px; }
+  .history-legend i.area { height: 8px; border: 0; background: var(--accent); opacity: .3; }
+  .history-legend i.live { border-top-style: dashed; }
+  .history-note { margin: 4px 10px 10px; font-size: 12px; color: var(--ink-3); }
+  .changes-filter { margin: 0 0 10px; font-size: 13px; color: var(--ink-2); }
   .legend-note { color: var(--ink-3); font-size: 12px; }
   .framework { font-size: 12.5px; color: var(--ink-2); }
   .framework p { margin: 0 0 6px; }
@@ -935,7 +963,7 @@
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
-      <section class="pane" id="pane-results"><div class="list"><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
+      <section class="pane" id="pane-results"><div class="list"><details class="history" id="history" hidden><summary>Progress over time</summary><div class="history-controls"><span class="seg" role="group" aria-label="Questions"><button type="button" data-history-kind="two" aria-pressed="true">Two-premise</button><button type="button" data-history-kind="core" aria-pressed="false">Core</button></span><span class="seg" role="group" aria-label="Measure"><button type="button" data-history-measure="share" aria-pressed="true">Open share</button><button type="button" data-history-measure="counts" aria-pressed="false">Counts</button></span></div><div class="history-chart" id="history-chart"></div><p class="history-note" id="history-note"></p></details><div class="changes-filter" id="changes-filter" hidden></div><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
       <section class="pane" id="pane-theorems"><div class="open-content"><div class="list" id="theorems"></div></div></section>
       <section class="pane" id="pane-open"><div class="open-content"><div id="open-warning" class="graph-warning" role="alert" hidden></div><div class="list" id="open"></div></div></section>
       <section class="pane" id="pane-page"><div class="page" id="page"></div></section>
@@ -3326,7 +3354,7 @@ function kindOf(x) { return x.satisfies ? 'model' : x.premises ? 'result' : 'pri
 // a record's text is computed once, and typing redraws the list when it pauses. A long list comes
 // in pages. The tab's number is what is new: the rows dated since the reader's previous visit,
 // remembered in this browser, or in the last seven days on a first visit or without storage.
-const changesView = { timer: null, limit: 0, text: new Map() };
+const changesView = { timer: null, limit: 0, text: new Map(), range: null };
 const CHANGES_PAGE = 300;
 const isoDate = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const longDate = iso => { const [y, m, d] = iso.split('-').map(Number); return `${d} ${['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][m - 1]} ${y}`; };
@@ -3373,7 +3401,9 @@ function renderResults() {
   if (!changesView.limit) changesView.limit = CHANGES_PAGE;
   const qf = findText(state.search);
   const all = changesRows();
-  const matching = qf ? all.filter(r => changesText(r.x).includes(qf)) : all;
+  const range = changesView.range;
+  const dated = range ? all.filter(r => r.date > range.after && r.date <= range.through) : all;
+  const matching = qf ? dated.filter(r => changesText(r.x).includes(qf)) : dated;
   const minor = matching.filter(r => r.change?.minor).length;
   const rows = matching.filter(r => state.showMinor || !r.change?.minor);
   const fresh = all.filter(r => !r.change?.minor && r.date >= lastVisit.since).length;
@@ -3391,7 +3421,136 @@ function renderResults() {
   document.getElementById('changes-summary').textContent = `${fresh} ${fresh === 1 ? 'change' : 'changes'} ${lastVisit.label} · ${rows.length} ${qf ? 'matching' : 'in all'}`;
   document.getElementById('n-minor').textContent = minor;
   document.getElementById('show-minor').closest('label').hidden = !minor && !state.showMinor;
+  const filter = document.getElementById('changes-filter');
+  filter.hidden = !range;
+  if (range) {
+    filter.innerHTML = `Showing changes dated ${esc(range.label)}. <button class="lnk" id="changes-filter-clear">Show all</button>`;
+    filter.querySelector('#changes-filter-clear').addEventListener('click', () => { changesView.range = null; changesView.limit = CHANGES_PAGE; renderResults(); });
+  }
+  renderHistory();
 }
+// ---------------------------------------------------------------- progress over time
+// The settled counts of the published branch, one point a day (pmap.py history), and this build
+// as a dashed last step: the whole map under the topic background alone, whatever is shown.
+const historyView = { kind: 'two', measure: 'share', width: 0, key: '' };
+function historyPoints() {
+  const h = DATA.history;
+  if (!h) return [];
+  const pts = (h.points || []).map(p => ({ ...p }));
+  const last = pts[pts.length - 1];
+  if (h.live && (!last || h.live.date > last.date || ['questions', 'settled', 'core_questions', 'core_settled'].some(k => h.live[k] !== last[k])))
+    pts.push({ ...h.live, date: last && h.live.date <= last.date ? last.date : h.live.date });
+  return pts;
+}
+function historyValue(p, kind) {
+  const q = kind === 'core' ? p.core_questions : p.questions, s = kind === 'core' ? p.core_settled : p.settled;
+  return { q, s, open: q - s, share: q ? 100 * (q - s) / q : 0 };
+}
+const shortDate = d => new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' });
+function niceTicks(max, n = 4) {
+  const raw = max / n, mag = 10 ** Math.floor(Math.log10(raw || 1)), step = [1, 2, 2.5, 5, 10].map(m => m * mag).find(x => x >= raw) || raw;
+  const ticks = []; for (let v = 0; v <= max + 1e-9; v += step) ticks.push(v);
+  if (ticks[ticks.length - 1] < max) ticks.push(ticks[ticks.length - 1] + step);
+  return ticks;
+}
+const compact = v => v >= 1e6 ? (v / 1e6).toFixed(v % 1e6 ? 1 : 0) + 'M' : v >= 1e3 ? Math.round(v / 1e3) + 'k' : String(Math.round(v));
+function renderHistory() {
+  const box = document.getElementById('history');
+  const pts = historyPoints();
+  box.hidden = pts.length < 2;
+  if (box.hidden || !box.open) return;
+  const el = document.getElementById('history-chart');
+  const width = Math.max(280, el.clientWidth - 20), key = [historyView.kind, historyView.measure, width, pts.length].join();
+  if (key === historyView.key) return;
+  historyView.key = key;
+  const { kind, measure } = historyView, H = 220, m = { l: 46, r: 12, t: 10, b: 24 };
+  const t = p => Date.parse(p.date + 'T00:00:00Z'), t0 = t(pts[0]), t1 = t(pts[pts.length - 1]) + 864e5;
+  const x = v => m.l + (width - m.l - m.r) * (v - t0) / (t1 - t0);
+  const vals = pts.map(p => historyValue(p, kind));
+  const top = measure === 'share' ? Math.max(...vals.map(v => v.share)) : Math.max(...vals.map(v => v.q));
+  const ticks = niceTicks(top), ymax = ticks[ticks.length - 1];
+  const y = v => m.t + (H - m.t - m.b) * (1 - v / ymax);
+  // A value holds from its day until the next point's day.
+  const step = (f, from = 0, to = pts.length) => {
+    let d = '';
+    for (let i = from; i < to; i++) {
+      const xa = x(t(pts[i])), xb = i + 1 < pts.length ? x(t(pts[i + 1])) : x(t1), yv = y(f(vals[i]));
+      d += (d ? `L${xa},${yv}` : `M${xa},${yv}`) + `L${xb},${yv}`;
+    }
+    return d;
+  };
+  const liveFrom = pts[pts.length - 1].live ? pts.length - 1 : pts.length;
+  // This build's step is dashed: from the published value, up or down to its own, to the end.
+  const line = (f, cls) => `<path class="${cls}" d="${step(f, 0, liveFrom)}"/>` + (liveFrom < pts.length
+    ? `<path class="${cls} live" d="M${x(t(pts[liveFrom]))},${y(f(vals[liveFrom - 1]))}L${x(t(pts[liveFrom]))},${y(f(vals[liveFrom]))}L${x(t1)},${y(f(vals[liveFrom]))}"/>` : '');
+  let g = ticks.map(v => `<line class="grid" x1="${m.l}" x2="${width - m.r}" y1="${y(v)}" y2="${y(v)}"/><text x="${m.l - 6}" y="${y(v) + 4}" text-anchor="end">${measure === 'share' ? v + '%' : compact(v)}</text>`).join('');
+  // Date labels at Mondays, thinned to fit.
+  const days = []; for (let d = t0; d < t1; d += 864e5) if (new Date(d).getUTCDay() === 1) days.push(d);
+  const every = Math.max(1, Math.ceil(days.length * 64 / (width - m.l - m.r)));
+  g += days.filter((_, i) => i % every === 0).map(d => `<text x="${x(d)}" y="${H - 6}" text-anchor="middle">${shortDate(new Date(d).toISOString().slice(0, 10))}</text>`).join('');
+  let body;
+  if (measure === 'share') body = line(v => v.share, 'main-line');
+  else {
+    const area = (from, to) => { const d = step(v => v.s, from, to); if (!d) return ''; const xs = d.match(/[ML]([\d.]+),/g).map(c => c.slice(1, -1)); return d + `L${xs[xs.length - 1]},${y(0)}L${xs[0]},${y(0)}Z`; };
+    body = `<path class="settled-area" d="${area(0, liveFrom)}"/>` + (liveFrom < pts.length ? `<path class="settled-area" d="${area(liveFrom, pts.length)}" style="opacity:.12"/>` : '')
+      + line(v => v.s, 'main-line') + line(v => v.q, 'total');
+  }
+  const label = `${kind === 'core' ? 'Core Questions' : 'Questions with up to two premises'}: ${measure === 'share' ? 'open share' : 'questions and settled questions'} from ${shortDate(pts[0].date)} to ${shortDate(pts[pts.length - 1].date)}`;
+  el.innerHTML = `<svg viewBox="0 0 ${width} ${H}" role="img" aria-label="${esc(label)}"><g class="axis">${g}</g>${body}<line class="guide" y1="${m.t}" y2="${H - m.b}" hidden/><circle class="dot" r="3.5" hidden/><rect x="${m.l}" y="${m.t}" width="${width - m.l - m.r}" height="${H - m.t - m.b}" fill="transparent" style="cursor:pointer"/></svg><div class="history-tip" hidden></div>`;
+  const legend = measure === 'share'
+    ? `<span><i></i>open share</span>`
+    : `<span><i class="total"></i>questions</span><span><i class="area"></i>settled</span>`;
+  el.insertAdjacentHTML('beforeend', `<div class="history-legend">${legend}${liveFrom < pts.length ? '<span><i class="live"></i>this build, not yet published</span>' : ''}</div>`);
+  const svg = el.querySelector('svg'), tip = el.querySelector('.history-tip'), guide = svg.querySelector('.guide'), dot = svg.querySelector('.dot'), hit = svg.querySelector('rect');
+  const at = ev => {
+    const r = svg.getBoundingClientRect(), vx = (ev.clientX - r.left) * width / r.width, tv = t0 + (vx - m.l) * (t1 - t0) / (width - m.l - m.r);
+    let i = 0; while (i + 1 < pts.length && t(pts[i + 1]) <= tv) i++;
+    return i;
+  };
+  hit.addEventListener('mousemove', ev => {
+    const i = at(ev), p = pts[i], v = vals[i], prev = i ? vals[i - 1] : null, pp = i ? pts[i - 1] : null;
+    const xv = x(t(p)), yv = y(measure === 'share' ? v.share : v.s);
+    guide.setAttribute('x1', xv); guide.setAttribute('x2', xv); guide.hidden = false;
+    dot.setAttribute('cx', xv); dot.setAttribute('cy', yv); dot.hidden = false;
+    const n = k => (p[k] - (pp ? pp[k] : 0)), sign = d => (d > 0 ? '+' : d < 0 ? '−' : '±') + Math.abs(d).toLocaleString('en-US');
+    const records = pp ? ['principles', 'results', 'models'].map(k => [n(k), k]).filter(([d]) => d).map(([d, k]) => `${sign(d)} ${d === 1 || d === -1 ? k.slice(0, -1) : k}`).join(', ') : '';
+    tip.innerHTML = `<b>${esc(shortDate(p.date))}</b>${p.live ? ' <span class="dim">(this build)</span>' : ''}<br>${v.open.toLocaleString('en-US')} open (${openShare({ open: v.open, questions: v.q })}%) of ${v.q.toLocaleString('en-US')}`
+      + (prev ? `<br><span class="dim">${sign(v.s - prev.s)} settled, ${sign(v.q - prev.q)} questions</span>` : '')
+      + (records ? `<br><span class="dim">${esc(records)}</span>` : '') + `<br><span class="dim">Click for the changes</span>`;
+    tip.hidden = false;
+    const r = svg.getBoundingClientRect(), px = xv * r.width / width + 10;
+    tip.style.left = Math.min(px + 12, el.clientWidth - tip.offsetWidth - 4) + 'px';
+  });
+  hit.addEventListener('mouseleave', () => { tip.hidden = true; guide.hidden = true; dot.hidden = true; });
+  // A point reached the published branch on its day; the records it brought are dated when the
+  // work was done, so the changes shown are those dated since the previous point.
+  hit.addEventListener('click', ev => {
+    const i = at(ev), p = pts[i], after = i ? pts[i - 1].date : '';
+    changesView.range = { after, through: p.live ? '9999' : p.date, label: historyRange(after, p) };
+    changesView.limit = CHANGES_PAGE; renderResults();
+    document.getElementById('changes-filter').scrollIntoView?.({ block: 'nearest' });
+  });
+  const src = DATA.history.ref || 'main';
+  document.getElementById('history-note').textContent = `Whole map, no background, whatever is shown; one point a day of ${src.replace(/^origin\//, '')}${liveFrom < pts.length ? ', then this build' : ''}.`;
+}
+function historyRange(after, p) {
+  if (p.live) return `after ${shortDate(after)}`;
+  if (!after) return `up to ${shortDate(p.date)}`;
+  const first = new Date(Date.parse(after + 'T00:00:00Z') + 864e5).toISOString().slice(0, 10);
+  return first === p.date ? shortDate(p.date) : `${shortDate(first)}–${shortDate(p.date)}`;
+}
+(function wireHistory() {
+  const box = document.getElementById('history');
+  try { box.open = localStorage.getItem('pmap-history-open') === '1'; } catch (_) {}
+  box.addEventListener('toggle', () => { try { localStorage.setItem('pmap-history-open', box.open ? '1' : '0'); } catch (_) {} historyView.key = ''; renderHistory(); });
+  box.querySelectorAll('button[data-history-kind], button[data-history-measure]').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.historyKind) historyView.kind = b.dataset.historyKind; else historyView.measure = b.dataset.historyMeasure;
+    box.querySelectorAll('button[data-history-kind]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.historyKind === historyView.kind)));
+    box.querySelectorAll('button[data-history-measure]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.historyMeasure === historyView.measure)));
+    renderHistory();
+  }));
+  window.addEventListener('resize', () => { if (box.open && !box.hidden) renderHistory(); });
+})();
 // ---------------------------------------------------------------- results
 // Every proved result among the principles the sidebar shows, from its sources, grouped by
 // what it concludes, with the incompatibilities last; narrowed by text found anywhere in a

@@ -10,6 +10,7 @@ Subcommands
                             working copy (MAP.md, OPEN-QUESTIONS.md, README, records, tooling)
   status   [TOPIC ...]      print a text summary (counts, open pairs, redundancies)
   lynchpins [TOPIC ...]     rank open questions by what each answer would settle
+  history  [TOPIC ...]      add the days of the published branch's history to the settled-count ledger
   new-topic TOPIC           scaffold topics/TOPIC/
   new-principle TOPIC ID    scaffold a principle file
   new-result TOPIC ID       scaffold an implication file
@@ -1774,6 +1775,108 @@ def progress_report(data: dict) -> list[dict]:
             for bid, name, L in _engines(data)]
 
 
+# ---------------------------------------------------------------------------- progress history
+# The settled counts over time, for the chart on the Changes tab: one point for each day of the
+# published branch's first-parent history (its last commit that day), for the whole map under the
+# topic background alone. Each commit is loaded by its own pmap.py, which knows its record
+# format; only the engine's inputs are kept, and today's Lynchpins counts them, so the series
+# stays comparable. Bump HISTORY_VERSION when what counts as a question changes: `pmap.py
+# history` then recounts every point. The ledger is written only by that command, never by a
+# build, which adds the current records as a live point of its own.
+HISTORY_REF = "origin/main"
+HISTORY_VERSION = 1
+_HISTORY_EXTRACT = r"""
+import json, sys
+sys.path.insert(0, 'scripts')
+import pmap
+d = pmap.load_topic(sys.argv[1])
+keep = lambda x, ks: {k: x.get(k) for k in ks}
+json.dump({"topic": {"id": d["topic"].get("id"), "background": d["topic"].get("background") or []},
+           "principles": [keep(p, ("id", "name")) for p in d["principles"]],
+           "results": [keep(r, ("id", "premises", "conclusion", "status")) for r in d["results"]],
+           "models": [keep(m, ("id", "satisfies", "violates", "status")) for m in d["models"]]},
+          open(sys.argv[2], "w"))
+"""
+
+
+def history_path(topic_id: str) -> Path:
+    return TOPICS / topic_id / "history.json"
+
+
+def history_counts(data: dict) -> dict:
+    """The counts one point of the history records, under the topic background alone."""
+    p = Lynchpins(data).progress()
+    return {"principles": len(data["principles"]),
+            "results": sum(r.get("status") == "proved" for r in data["results"]),
+            "models": sum(m.get("status") == "proved" for m in data["models"]),
+            "questions": p["questions"], "settled": p["settled"],
+            "core_questions": p["core"]["questions"], "core_settled": p["core"]["settled"]}
+
+
+def _history_inputs(topic_id: str, commit: str) -> dict | None:
+    """The engine's inputs at a commit, read by that commit's own loader; None if it has no topic."""
+    import subprocess, tempfile, tarfile, io
+    repo = ROOT.parent
+    prefix = ROOT.relative_to(repo).as_posix()
+    paths = [f"{prefix}/scripts", f"{prefix}/schema", f"{prefix}/topics/{topic_id}"]
+    paths = [x for x in paths if subprocess.run(["git", "cat-file", "-e", f"{commit}:{x}"], cwd=repo, capture_output=True).returncode == 0]
+    if not any(x.endswith(f"/topics/{topic_id}") for x in paths):
+        return None
+    tar = subprocess.run(["git", "archive", commit, *paths], cwd=repo, capture_output=True, check=True).stdout
+    with tempfile.TemporaryDirectory() as tmp:
+        with tarfile.open(fileobj=io.BytesIO(tar)) as t:
+            t.extractall(tmp, filter="data")
+        out = Path(tmp) / "inputs.json"
+        run = subprocess.run([sys.executable, "-c", _HISTORY_EXTRACT, topic_id, str(out)],
+                             cwd=Path(tmp) / prefix, capture_output=True, text=True)
+        if run.returncode or not out.exists():
+            raise RuntimeError(f"{commit[:8]}: its loader failed: {run.stderr.strip().splitlines()[-1:] or run.returncode}")
+        inputs = json.loads(out.read_text())
+    # Older loaders may leave a status out; read it as the loader of the day did, as proved.
+    for x in inputs["results"] + inputs["models"]:
+        x["status"] = x.get("status") or "proved"
+        for k in ("premises", "satisfies", "violates"):
+            if k in x:
+                x[k] = x[k] or []
+    return inputs
+
+
+def update_history(topic_id: str, ref: str = HISTORY_REF, rebuild: bool = False) -> Path:
+    """Add to the ledger a point for each day of ref's first-parent history it lacks."""
+    import subprocess
+    path = history_path(topic_id)
+    old = json.loads(path.read_text()) if path.exists() else {}
+    known = {} if rebuild or old.get("version") != HISTORY_VERSION else {x["commit"]: x for x in old.get("points", [])}
+    log = subprocess.run(["git", "log", ref, "--first-parent", "--format=%H %cd", "--date=short"],
+                         cwd=ROOT.parent, capture_output=True, text=True, check=True).stdout.split("\n")
+    last = {}
+    for line in reversed([x for x in log if x.strip()]):   # oldest first; a later commit that day replaces an earlier one
+        commit, day = line.split()
+        last[day] = commit
+    points = []
+    for day, commit in sorted(last.items()):
+        short = commit[:8]
+        if short in known:
+            points.append(known[short]); continue
+        inputs = _history_inputs(topic_id, commit)
+        if inputs is None:
+            continue
+        point = {"date": day, "commit": short, **history_counts(inputs)}
+        print(f"{day} {short}: {point['settled']:,} of {point['questions']:,} settled; core {point['core_settled']:,} of {point['core_questions']:,}")
+        points.append(point)
+    path.write_text(json.dumps({"version": HISTORY_VERSION, "ref": ref, "points": points}, indent=1) + "\n", encoding="utf-8")
+    return path
+
+
+def history_export(topic_id: str, data: dict) -> dict | None:
+    """The ledger's points for the viewer, with the current records as a live point."""
+    path = history_path(topic_id)
+    ledger = json.loads(path.read_text()) if path.exists() else {}
+    points = ledger.get("points", []) if ledger.get("version") == HISTORY_VERSION else []
+    live = {"date": _dt.date.today().isoformat(), "live": True, **history_counts(data)}
+    return {"ref": ledger.get("ref", HISTORY_REF), "points": points, "live": live}
+
+
 def lynchpin_report(data: dict, *, sparse_ok: bool = True, top: int | None = 50) -> dict:
     """Rankings under the topic background alone and under each background preset.
 
@@ -2724,6 +2827,7 @@ def export_json(topic_id: str, *, data: dict | None = None, an: dict | None = No
         "general_arguments": [clean(c) | {"file": c["_file"]} for c in data.get("general_arguments", [])],
         "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
         "progress": progress_report(data),
+        "history": history_export(topic_id, data),
         # The viewer takes its top 30 after applying the shown-principle filter.
         "lynchpins": lynchpin_report(data, sparse_ok=False, top=None),
         "server_analysis": {
@@ -5696,9 +5800,12 @@ def selftest():
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="pmap", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("validate", "build", "status", "bundle", "lean", "lean-check", "lynchpins"):
+    for name in ("validate", "build", "status", "bundle", "lean", "lean-check", "lynchpins", "history"):
         s = sub.add_parser(name)
         s.add_argument("topics", nargs="*")
+        if name == "history":
+            s.add_argument("--ref", default=HISTORY_REF, help=f"the published branch (default {HISTORY_REF})")
+            s.add_argument("--rebuild", action="store_true", help="recount every point, not only the new days")
         if name == "lynchpins":
             s.add_argument("--background", action="append", metavar="PRESET", help="a background preset id, or none; repeatable (default: none and every preset)")
             s.add_argument("--top", type=int, default=10, help="rows per list (default 10)")
@@ -5749,6 +5856,10 @@ def main(argv=None):
             status(t, a.model)
         elif a.cmd == "lynchpins":
             lynchpins(t, a.background, a.top, a.json)
+        elif a.cmd == "history":
+            if load_topic(t)["topic"].get("draft"):
+                continue
+            print(f"wrote {update_history(t, a.ref, a.rebuild).relative_to(ROOT)}")
         elif a.cmd == "lean":
             path = generate_lean_statements(t)
             print(f"wrote {path.relative_to(ROOT)}" if path else f"{t}: no Lean library configured")

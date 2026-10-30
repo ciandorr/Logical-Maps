@@ -146,7 +146,7 @@ try {
   // The share and the list come from the stored evidence, so selecting sources changes neither.
   const progressEl=()=>doc.getElementById('open-progress');
   const settled=progressEl().textContent;
-  assert.equal(settled,'8 (14%) of 56 questions with up to two premises are settled.');
+  assert.equal(settled,'48 (85.7%) of 56 questions with up to two premises are open.');
   sourceCheckbox.click();
   assert.equal(progressEl().textContent,settled,'Source filters do not change the settled share');
   assert.deepEqual(keys(dom),['q|b|a','q|a|b','q|b|false'],'nor the conjectures');

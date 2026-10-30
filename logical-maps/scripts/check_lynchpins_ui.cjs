@@ -126,8 +126,8 @@ try {
   show(dom,'open');
   assert.equal(body().innerHTML,'','still nothing while the section is closed');
   assert.equal(progress().hidden,false);
-  assert.equal(progress().textContent,'6 (18%) of 33 questions with up to two premises are settled.');
-  assert.match(progress().title,/^6 of 33 questions/);
+  assert.equal(progress().textContent,'27 (81.8%) of 33 questions with up to two premises are open.');
+  assert.match(progress().title,/^27 of 33 questions/);
 
   // Central questions: by the harmonic mean, so a one-sided question sinks and a balanced one leads.
   open(dom,true);
@@ -252,7 +252,7 @@ try {
   const dom2=page(fixture,'http://localhost/?assume=p'),doc2=dom2.window.document;
   show(dom2,'open'); open(dom2,true); open(dom2,true,'open-auto'); open(dom2,true,'open-recorded');
   const det2=doc2.getElementById('lynchpins');
-  assert.equal(doc2.getElementById('open-progress').textContent,'1 (14%) of 7 questions with up to two premises are settled.','the stored share for the p background');
+  assert.equal(doc2.getElementById('open-progress').textContent,'6 (85.7%) of 7 questions with up to two premises are open.','the stored share for the p background');
   assert.equal(det2.querySelectorAll('tbody tr').length,rowsP.length);
   assert.deepEqual(keys(dom2,'lynchpins').slice(0,2),['q|r+s|false','check|m1|r'],'r ∧ s ⊢ ⊥ at 2 / 2 leads under p');
   assert.ok(stmt(dom2,'q||r').replace(/^★/,'').startsWith('⊤ ⊢ R'),'q ⊢ r reads as ⊤ ⊢ r under p, starred');
@@ -273,7 +273,7 @@ try {
   assert.deepEqual(keys(dom3,'open-recorded'),['q|q|r']);
   assert.deepEqual(scores(dom3,'q|q|r','open-recorded'),[2,2]);
   assert.equal(doc3.querySelector('#open-recorded [data-lynchpin="q|q|r"] td.rank').textContent,'—','unranked on a sparse map');
-  assert.equal(doc3.getElementById('open-progress').textContent,'0 (0%) of 38 questions with up to two premises are settled.');
+  assert.equal(doc3.getElementById('open-progress').textContent,'38 (100%) of 38 questions with up to two premises are open.');
 
   // An inconsistent background reports that instead of scores.
   const dom4=page({topic,principles,results:[rule('pq',['p'],'q'),rule('ps',['p','s'],false)],models:[]},'http://localhost/?assume=p,s'),doc4=dom4.window.document;
@@ -290,8 +290,8 @@ try {
   const positive=id=>fd.querySelector(`#pr-filters [data-show-positive="${id}"]`);
   const negative=id=>fd.querySelector(`#pr-filters [data-show-negative="${id}"]`);
   positive('r').click();
-  assert.equal(fd.getElementById('open-progress').textContent,'6 (40%) of 15 questions with up to two premises are settled.','percentage and count follow the shown principles');
-  assert.match(fd.getElementById('open-progress').title,/^6 of 15 questions/);
+  assert.equal(fd.getElementById('open-progress').textContent,'9 (60%) of 15 questions with up to two premises are open.','percentage and count follow the shown principles');
+  assert.match(fd.getElementById('open-progress').title,/^9 of 15 questions/);
   const withoutR={
     lynchpins:['q|p+s|false','q|s|p','q|q+s|false'],
     'open-auto':['q|s|false','q|q+s|false','q||p'],
@@ -303,7 +303,7 @@ try {
   assert.equal(fd.querySelector('#pr-filters .pr-category-count').textContent,'3/4');
   negative('r').click();
   for(const id of sections) assert.deepEqual(keys(filtered,id),withoutR[id],'showing ¬R does not restore positive R questions, including non-entailments');
-  assert.equal(fd.getElementById('open-progress').textContent,'6 (40%) of 15 questions with up to two premises are settled.');
+  assert.equal(fd.getElementById('open-progress').textContent,'9 (60%) of 15 questions with up to two premises are open.');
   negative('r').click();
   show(filtered,'graph');
   assert.equal(positive('r').getAttribute('aria-pressed'),'true','the graph keeps its own shown principles');
@@ -318,7 +318,7 @@ try {
   fd.getElementById('pr-reset').click();
   assert.equal(positive('r').getAttribute('aria-pressed'),'true','whose own reset restores it');
   show(filtered,'open');
-  assert.equal(fd.getElementById('open-progress').textContent,'6 (18%) of 33 questions with up to two premises are settled.');
+  assert.equal(fd.getElementById('open-progress').textContent,'27 (81.8%) of 33 questions with up to two premises are open.');
 
   const category=fd.querySelector('#pr-filters [data-category-select]');
   category.click();
@@ -334,7 +334,7 @@ try {
   sections.forEach(id=>assert.deepEqual(keys(filtered,id),[]));
   fd.getElementById('pr-all').click();
   sections.forEach(id=>assert.deepEqual(keys(filtered,id),original[id]));
-  assert.equal(fd.getElementById('open-progress').textContent,'6 (18%) of 33 questions with up to two premises are settled.');
+  assert.equal(fd.getElementById('open-progress').textContent,'27 (81.8%) of 33 questions with up to two premises are open.');
 
   positive('s').click();
   fd.getElementById('show-resolved').click();

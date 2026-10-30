@@ -41,7 +41,7 @@ try{
   assert.match(core.querySelector('.hint').textContent,/^Core Questions correspond to implications of the form \(a\) ⊢ C, with no premises; \(b\) A ⊢ C.*\(c\) A ∧ B ⊢ ⊥.*\(d\) A ∧ B ⊢ C, where C ⊢ A and C ⊢ B are already established\. Open Core Questions are ranked by how many Core Questions both answers would settle, the geometric mean of if yes and if no/);
   assert.equal(core.open,false,'starts collapsed');
   assert.equal(d.getElementById('open-core-progress').textContent,'5 (41.7%) of 12 Core Questions are open.','its own settled share, from the core masks');
-  assert.equal(d.getElementById('open-progress').textContent,'8 (53%) of 15 questions with up to two premises are settled.');
+  assert.equal(d.getElementById('open-progress').textContent,'7 (46.7%) of 15 questions with up to two premises are open.');
   open('open-core');
   assert.deepEqual(keys('open-core'),['q|d|a','q|a+b|c','q|b+d|false'],'only the core questions, in core order');
   const cells=[...d.querySelectorAll('#open-core tbody tr')].map(tr=>[...tr.querySelectorAll('td.num')].map(td=>td.textContent));

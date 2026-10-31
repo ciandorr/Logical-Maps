@@ -91,7 +91,7 @@
   .history-controls .seg button { width: auto; height: auto; min-height: 26px; padding: 2px 10px; border: 0; background: var(--panel); color: var(--ink-2); font-size: 13px; white-space: nowrap; cursor: pointer; }
   .history-controls .seg button + button { border-left: 1px solid var(--line-strong); }
   .history-controls [hidden], .history-chart svg [hidden] { display: none; }
-  .history-controls .seg button[aria-pressed="true"] { background: var(--hl); color: var(--ink); font-weight: 600; }
+  .history-controls .seg button[aria-pressed="true"] { background: var(--hl); color: var(--ink); text-shadow: 0 0 .6px currentColor, 0 0 .6px currentColor; }  /* emboldened without bold's wider glyphs, so the controls never shift */
   .history-chart { position: relative; padding: 6px 10px 0; }
   .history-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
   .history-chart .axis text { fill: var(--ink-3); font-size: 11px; }
@@ -973,7 +973,7 @@
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
-      <section class="pane" id="pane-results"><div class="list"><section class="history-box" id="history" hidden><div class="history-controls"><h2 class="history-title">Progress over time</h2><span class="seg" role="group" aria-label="View"><button type="button" data-history-measure="size" aria-pressed="true">Contributions</button><button type="button" data-history-measure="share" aria-pressed="false">Open share</button><button type="button" data-history-measure="counts" aria-pressed="false">Counts</button></span><span class="seg" role="group" aria-label="Questions"><button type="button" data-history-kind="two" aria-pressed="true">Two-premise</button><button type="button" data-history-kind="core" aria-pressed="false">Core</button></span></div><div class="history-chart" id="history-chart"></div><p class="history-note" id="history-note"></p></section><div class="changes-filter" id="changes-filter" hidden></div><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
+      <section class="pane" id="pane-results"><div class="list"><section class="history-box" id="history" hidden><div class="history-controls"><h2 class="history-title">Progress over time</h2><span class="seg" role="group" aria-label="Questions"><button type="button" data-history-kind="two" aria-pressed="true">Two-premise</button><button type="button" data-history-kind="core" aria-pressed="false">Core</button></span><span class="seg" role="group" aria-label="View"><button type="button" data-history-measure="size" aria-pressed="true">Contributions</button><button type="button" data-history-measure="share" aria-pressed="false">Open share</button><button type="button" data-history-measure="counts" aria-pressed="false">Counts</button></span></div><div class="history-chart" id="history-chart"></div><p class="history-note" id="history-note"></p></section><div class="changes-filter" id="changes-filter" hidden></div><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
       <section class="pane" id="pane-theorems"><div class="open-content"><div class="list" id="theorems"></div></div></section>
       <section class="pane" id="pane-open"><div class="open-content"><div id="open-warning" class="graph-warning" role="alert" hidden></div><div class="list" id="open"></div></div></section>
       <section class="pane" id="pane-page"><div class="page" id="page"></div></section>
@@ -3456,7 +3456,7 @@ const historyView = { kind: 'two', measure: 'size', width: 0, key: '' };
 // A new principle, result or model counts 1, and an argument bringing verdicts on a model already
 // on the map ½, once however many models share it; generated variants of a model count with it.
 // Revisions count nothing, minor or not: the logged ones reword, correct or relink.
-const CONTRIBUTION_KINDS = [['principles', 'principle', 'principles', 1], ['results', 'result', 'results', 1], ['models', 'model', 'models', 1], ['verdicts', 'argument with new verdicts', 'arguments with new verdicts', 0.5]];
+const CONTRIBUTION_KINDS = [['principles', 'principle', 'principles', 1], ['results', 'result', 'results', 1], ['models', 'model', 'models', 1], ['verdicts', 'argument', 'arguments', 0.5]];
 function contributionDays() {
   const days = new Map();
   const add = (date, k) => {
@@ -3568,7 +3568,9 @@ function renderHistory() {
     guide.setAttribute('x1', xv); guide.setAttribute('x2', xv); guide.hidden = false;
     dot.setAttribute('cx', xv); dot.setAttribute('cy', yv); dot.hidden = false;
     const n = k => (p[k] - (pp ? pp[k] : 0)), sign = d => (d > 0 ? '+' : d < 0 ? '−' : '±') + Math.abs(d).toLocaleString('en-US');
-    const records = pp ? ['principles', 'results', 'models'].map(k => [n(k), k]).filter(([d]) => d).map(([d, k]) => `${sign(d)} ${d === 1 || d === -1 ? k.slice(0, -1) : k}`).join(', ') : '';
+    // Arguments are not in the ledger: those dated since the point before, counted as in Contributions.
+    const args = pp ? work.filter(w => w.date > pp.date && (p.live || w.date <= p.date)).reduce((a, w) => a + w.verdicts, 0) : 0;
+    const records = pp ? [...['principles', 'results', 'models'].map(k => [n(k), k]), [args, 'arguments']].filter(([d]) => d).map(([d, k]) => `${sign(d)} ${d === 1 || d === -1 ? k.slice(0, -1) : k}`).join(', ') : '';
     tip.innerHTML = `<b>${esc(shortDate(p.date))}</b>${p.live ? ' <span class="dim">(this build)</span>' : ''}<br>${v.open.toLocaleString('en-US')} open (${openShare({ open: v.open, questions: v.q })}%) of ${v.q.toLocaleString('en-US')}`
       + (prev ? `<br><span class="dim">${sign(v.s - prev.s)} settled, ${sign(v.q - prev.q)} questions</span>` : '')
       + (records ? `<br><span class="dim">${esc(records)}</span>` : '') + `<br><span class="dim">Click for the changes</span>`;
@@ -3618,7 +3620,7 @@ function renderContributions(el, width, days) {
     const d = byDate.get(hit.dataset.date);
     hit.addEventListener('mouseenter', () => {
       const parts = CONTRIBUTION_KINDS.filter(([k]) => d[k]).map(([k, one, many]) => `${d[k]} ${d[k] === 1 ? one : many}`);
-      tip.innerHTML = `<b>${esc(shortDate(d.date))}</b><br>size ${d.size.toLocaleString('en-US')}<br><span class="dim">${esc(parts.join(', '))}</span><br><span class="dim">Click for the changes</span>`;
+      tip.innerHTML = `<b>${esc(shortDate(d.date))}</b><br><span class="dim">${esc(parts.join(', '))}</span><br><span class="dim">Click for the changes</span>`;
       tip.hidden = false;
       const r = svg.getBoundingClientRect(), px = (x(d.date) + slot) * r.width / width + 10;
       tip.style.left = Math.max(4, Math.min(px + 12, el.clientWidth - tip.offsetWidth - 4)) + 'px';

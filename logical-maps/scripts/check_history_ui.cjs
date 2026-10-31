@@ -18,7 +18,7 @@ const base={topic:{id:'hist',title:'History fixture',background:[],source_catalo
   models:[model('m1','2026-01-02',{arguments:[{id:'own',date:'2026-01-02',holds:['b'],text:'Own.'},{$ref:0}]}),model('m2','2026-01-02',{arguments:[{$ref:0}]})],
   shared_arguments:shared};
 const point=(date,q,s,cq,cs,extra={})=>({date,commit:'c'+date.slice(-2),principles:2,results:0,models:0,questions:q,settled:s,core_questions:cq,core_settled:cs,...extra});
-const history={ref:'origin/main',points:[point('2026-01-02',10,4,5,2),point('2026-01-05',20,15,8,7)],
+const history={ref:'origin/main',points:[point('2026-01-02',10,4,5,2),point('2026-01-05',20,15,8,7,{lean_settled:5,core_lean_settled:3})],
   live:{date:'2026-01-07',live:true,principles:2,results:0,models:0,questions:22,settled:19,core_questions:8,core_settled:8}};
 function page(data){
   const errors=[],vc=new VirtualConsole();vc.on('jsdomError',e=>errors.push(e));
@@ -58,12 +58,15 @@ assert.deepEqual(segs,['Questions','View'],'the question kinds sit left of the v
 press('data-history-measure','share');
 assert.equal(d.querySelector('button[data-history-kind]').closest('.seg').hidden,false,'the question kinds come with the question views');
 assert.match(svg(d).getAttribute('aria-label'),/Questions with up to two premises: open share/);
+assert.ok(svg(d).querySelector('path.lean-line'),'a Lean line from the first point with Lean counts');
+assert.match(d.querySelector('.history-legend').textContent,/open share with Lean-checked work only/);
 assert.ok(svg(d).querySelector('path.main-line.live'),'this build is a dashed last step');
 assert.match(d.querySelector('.history-legend').textContent,/this build, not yet published/);
 assert.match(d.getElementById('history-note').textContent,/one point a day of main, then this build/);
 press('data-history-measure','counts');
 assert.match(svg(d).getAttribute('aria-label'),/questions and settled questions/);
 assert.ok(svg(d).querySelector('path.settled-area')&&svg(d).querySelector('path.total'),'counts: settled area under the questions line');
+assert.ok(svg(d).querySelector('path.lean-area'),'counts: the Lean-settled area inside it');
 assert.equal(d.querySelector('button[data-history-measure="counts"]').getAttribute('aria-pressed'),'true');
 press('data-history-kind','core');
 assert.match(svg(d).getAttribute('aria-label'),/^Core Questions: questions and settled questions/);
@@ -75,6 +78,7 @@ const hit=svg(d).querySelector('rect');
 svg(d).getBoundingClientRect=()=>({left:0,top:0,width:280,height:220,right:280,bottom:220});
 hit.dispatchEvent(new w.MouseEvent('mousemove',{bubbles:true,clientX:200,clientY:100}));
 assert.match(d.querySelector('.history-tip').textContent,/\+1 argument(?!s)/,'arguments dated since the point before');
+assert.match(d.querySelector('.history-tip').textContent,/Lean-checked only: 5 open \(62\.5%\)/,'core: 8 questions, 3 settled in Lean');
 hit.dispatchEvent(new w.MouseEvent('click',{bubbles:true,clientX:200,clientY:100}));
 const filter=d.getElementById('changes-filter');
 assert.equal(filter.hidden,false,'a day filters the changes');

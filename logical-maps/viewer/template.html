@@ -84,13 +84,13 @@
   table.changes tr.new td.mono { font-weight: 600; }
   .changes-more { margin: 10px 0; }
   /* Progress over time, above the Changes list: one step chart, four views. */
-  details.history { margin: 0 0 14px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
-  details.history > summary { padding: 7px 10px; cursor: pointer; font: 600 14px/1.4 var(--sans); color: var(--ink); }
-  details.history[open] > summary { border-bottom: 1px solid var(--line); }
-  .history-controls { display: flex; flex-wrap: wrap; gap: 8px 14px; padding: 10px 10px 0; }
+  .history-box { margin: 0 0 14px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+  .history-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 8px 10px 0; }
+  .history-title { margin: 0 auto 0 0; font: 600 14px/1.4 var(--sans); color: var(--ink); }
   .history-controls .seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 4px; overflow: hidden; }
   .history-controls .seg button { width: auto; height: auto; min-height: 26px; padding: 2px 10px; border: 0; background: var(--panel); color: var(--ink-2); font-size: 13px; white-space: nowrap; cursor: pointer; }
   .history-controls .seg button + button { border-left: 1px solid var(--line-strong); }
+  .history-controls [hidden], .history-chart svg [hidden] { display: none; }
   .history-controls .seg button[aria-pressed="true"] { background: var(--hl); color: var(--ink); font-weight: 600; }
   .history-chart { position: relative; padding: 6px 10px 0; }
   .history-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -102,6 +102,12 @@
   .history-chart .live { stroke-dasharray: 4 3; }
   .history-chart .guide { stroke: var(--ink-3); stroke-width: 1; }
   .history-chart .dot { fill: var(--accent); }
+  .history-chart .bar { fill: var(--accent); }
+  .history-chart .bar.results { fill-opacity: .66; }
+  .history-chart .bar.models { fill-opacity: .4; }
+  .history-chart .bar.verdicts { fill-opacity: .24; }
+  .history-chart .bar-day { fill: transparent; cursor: pointer; }
+  .history-chart .bar-day:hover, .history-chart .bar-day.on { fill: var(--ink); fill-opacity: .06; }
   .history-tip { position: absolute; top: 6px; pointer-events: none; padding: 6px 8px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--panel); color: var(--ink); font-size: 12px; line-height: 1.45; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,.12); }
   .history-tip .dim { color: var(--ink-3); }
   .history-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 2px 10px 0; font-size: 12px; color: var(--ink-2); }
@@ -109,6 +115,10 @@
   .history-legend i.total { border-top-color: var(--ink-2); border-top-width: 1.5px; }
   .history-legend i.area { height: 8px; border: 0; background: var(--accent); opacity: .3; }
   .history-legend i.live { border-top-style: dashed; }
+  .history-legend i.bar { width: 10px; height: 10px; border: 0; border-radius: 2px; background: var(--accent); }
+  .history-legend i.bar.results { opacity: .66; }
+  .history-legend i.bar.models { opacity: .4; }
+  .history-legend i.bar.verdicts { opacity: .24; }
   .history-note { margin: 4px 10px 10px; font-size: 12px; color: var(--ink-3); }
   .changes-filter { margin: 0 0 10px; font-size: 13px; color: var(--ink-2); }
   .legend-note { color: var(--ink-3); font-size: 12px; }
@@ -963,7 +973,7 @@
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
-      <section class="pane" id="pane-results"><div class="list"><details class="history" id="history" hidden><summary>Progress over time</summary><div class="history-controls"><span class="seg" role="group" aria-label="Questions"><button type="button" data-history-kind="two" aria-pressed="true">Two-premise</button><button type="button" data-history-kind="core" aria-pressed="false">Core</button></span><span class="seg" role="group" aria-label="Measure"><button type="button" data-history-measure="share" aria-pressed="true">Open share</button><button type="button" data-history-measure="counts" aria-pressed="false">Counts</button></span></div><div class="history-chart" id="history-chart"></div><p class="history-note" id="history-note"></p></details><div class="changes-filter" id="changes-filter" hidden></div><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
+      <section class="pane" id="pane-results"><div class="list"><section class="history-box" id="history" hidden><div class="history-controls"><h2 class="history-title">Progress over time</h2><span class="seg" role="group" aria-label="View"><button type="button" data-history-measure="size" aria-pressed="true">Contributions</button><button type="button" data-history-measure="share" aria-pressed="false">Open share</button><button type="button" data-history-measure="counts" aria-pressed="false">Counts</button></span><span class="seg" role="group" aria-label="Questions"><button type="button" data-history-kind="two" aria-pressed="true">Two-premise</button><button type="button" data-history-kind="core" aria-pressed="false">Core</button></span></div><div class="history-chart" id="history-chart"></div><p class="history-note" id="history-note"></p></section><div class="changes-filter" id="changes-filter" hidden></div><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
       <section class="pane" id="pane-theorems"><div class="open-content"><div class="list" id="theorems"></div></div></section>
       <section class="pane" id="pane-open"><div class="open-content"><div id="open-warning" class="graph-warning" role="alert" hidden></div><div class="list" id="open"></div></div></section>
       <section class="pane" id="pane-page"><div class="page" id="page"></div></section>
@@ -980,6 +990,9 @@ const DATA = /*__PMAP_DATA__*/null;
 // payload exactly: lynchpin rows stored as tables with dictionary-encoded ids, the automatic
 // conjectures as the rows reordered by `auto_rank`, and repeated model arguments as references.
 // A payload without the encoding (the UI checks' fixtures) passes through unchanged.
+// Each model's copy of a shared argument (a group's, the topic's, or a parent's shared with its
+// variants), mapped to the one it copies, so that the argument can be counted once.
+const SHARED_ARGUMENT = new WeakMap();
 (function decodePayload(D) {
   if (!D) return;
   const LP = D.lynchpins, S = (LP && LP.strings) || [];
@@ -1003,7 +1016,12 @@ const DATA = /*__PMAP_DATA__*/null;
   const shared = D.shared_arguments;
   if (shared) {
     for (const m of D.models || []) {
-      if (m.arguments) m.arguments = m.arguments.map(a => a && a.$ref !== undefined ? JSON.parse(JSON.stringify(shared[a.$ref])) : a);
+      if (m.arguments) m.arguments = m.arguments.map(a => {
+        if (!a || a.$ref === undefined) return a;
+        const copy = JSON.parse(JSON.stringify(shared[a.$ref]));
+        SHARED_ARGUMENT.set(copy, a.$ref);
+        return copy;
+      });
     }
     delete D.shared_arguments;
   }
@@ -3430,9 +3448,41 @@ function renderResults() {
   renderHistory();
 }
 // ---------------------------------------------------------------- progress over time
-// The settled counts of the published branch, one point a day (pmap.py history), and this build
-// as a dashed last step: the whole map under the topic background alone, whatever is shown.
-const historyView = { kind: 'two', measure: 'share', width: 0, key: '' };
+// Two kinds of view. Contributions: the size of each day's work, by the dates the records carry,
+// from the records themselves. Open share and counts: the settled counts of the published branch,
+// one point a day (pmap.py history), and this build as a dashed last step: the whole map under the
+// topic background alone, whatever is shown.
+const historyView = { kind: 'two', measure: 'size', width: 0, key: '' };
+// A new principle, result or model counts 1, and an argument bringing verdicts on a model already
+// on the map ½, once however many models share it; generated variants of a model count with it.
+// Revisions count nothing, minor or not: the logged ones reword, correct or relink.
+const CONTRIBUTION_KINDS = [['principles', 'principle', 'principles', 1], ['results', 'result', 'results', 1], ['models', 'model', 'models', 1], ['verdicts', 'argument with new verdicts', 'arguments with new verdicts', 0.5]];
+function contributionDays() {
+  const days = new Map();
+  const add = (date, k) => {
+    if (!date) return;
+    if (!days.has(date)) days.set(date, { date, principles: 0, results: 0, models: 0, verdicts: 0 });
+    days.get(date)[k]++;
+  };
+  for (const x of P) add(x.date, 'principles');
+  for (const x of R) add(x.certificate.date, 'results');
+  const seen = new Set();
+  for (const m of MODELS) {
+    if (m.companion_of) continue;
+    if (!m.variant_of) {
+      add(m.certificate.date, 'models');
+      for (const h of m.history || []) if ((h.satisfies || []).length || (h.violates || []).length) add(String(h.date || ''), 'verdicts');
+    }
+    const since = [m.certificate.date || '', ...(m.history || []).map(h => String(h.date || ''))].sort().pop();
+    (m.arguments || []).forEach((a, i) => {
+      const date = String(a.date || m.certificate.date || ''), key = SHARED_ARGUMENT.has(a) ? SHARED_ARGUMENT.get(a) : `${m.id}#${i}`;
+      if (date <= since || a.standing === 'conjectured' || a.withdrawn || !(a.holds || []).length && !(a.fails || []).length || seen.has(key)) return;
+      seen.add(key); add(date, 'verdicts');
+    });
+  }
+  return [...days.values()].sort((a, b) => a.date.localeCompare(b.date))
+    .map(d => ({ ...d, size: CONTRIBUTION_KINDS.reduce((n, [k, , , w]) => n + w * d[k], 0) }));
+}
 function historyPoints() {
   const h = DATA.history;
   if (!h) return [];
@@ -3456,13 +3506,18 @@ function niceTicks(max, n = 4) {
 const compact = v => v >= 1e6 ? (v / 1e6).toFixed(v % 1e6 ? 1 : 0) + 'M' : v >= 1e3 ? Math.round(v / 1e3) + 'k' : String(Math.round(v));
 function renderHistory() {
   const box = document.getElementById('history');
-  const pts = historyPoints();
-  box.hidden = pts.length < 2;
-  if (box.hidden || !box.open) return;
+  const pts = historyPoints(), work = contributionDays(), questions = pts.length >= 2;
+  if (!questions) historyView.measure = 'size';
+  box.hidden = !questions && !work.length;
+  if (box.hidden) return;
+  box.querySelectorAll('button[data-history-measure]').forEach(b => { b.hidden = !questions && b.dataset.historyMeasure !== 'size'; b.setAttribute('aria-pressed', String(b.dataset.historyMeasure === historyView.measure)); });
+  box.querySelector('button[data-history-kind]').closest('.seg').hidden = historyView.measure === 'size';
   const el = document.getElementById('history-chart');
-  const width = Math.max(280, el.clientWidth - 20), key = [historyView.kind, historyView.measure, width, pts.length].join();
+  const width = Math.max(280, el.clientWidth - 20), range = changesView.range?.day || '';
+  const key = [historyView.kind, historyView.measure, width, pts.length, work.length, work.reduce((n, d) => n + d.size, 0), range].join();
   if (key === historyView.key) return;
   historyView.key = key;
+  if (historyView.measure === 'size') return renderContributions(el, width, work);
   const { kind, measure } = historyView, H = 220, m = { l: 46, r: 12, t: 10, b: 24 };
   const t = p => Date.parse(p.date + 'T00:00:00Z'), t0 = t(pts[0]), t1 = t(pts[pts.length - 1]) + 864e5;
   const x = v => m.l + (width - m.l - m.r) * (v - t0) / (t1 - t0);
@@ -3533,6 +3588,51 @@ function renderHistory() {
   const src = DATA.history.ref || 'main';
   document.getElementById('history-note').textContent = `Whole map, no background, whatever is shown; one point a day of ${src.replace(/^origin\//, '')}${liveFrom < pts.length ? ', then this build' : ''}.`;
 }
+function renderContributions(el, width, days) {
+  const H = 220, m = { l: 46, r: 12, t: 10, b: 24 };
+  const t = d => Date.parse(d + 'T00:00:00Z'), t0 = t(days[0].date), t1 = t(days[days.length - 1].date) + 864e5;
+  const slot = (width - m.l - m.r) * 864e5 / (t1 - t0), x = d => m.l + (width - m.l - m.r) * (t(d) - t0) / (t1 - t0);
+  const ticks = niceTicks(Math.max(...days.map(d => d.size))), ymax = ticks[ticks.length - 1];
+  const y = v => m.t + (H - m.t - m.b) * (1 - v / ymax);
+  let g = ticks.map(v => `<line class="grid" x1="${m.l}" x2="${width - m.r}" y1="${y(v)}" y2="${y(v)}"/><text x="${m.l - 6}" y="${y(v) + 4}" text-anchor="end">${compact(v)}</text>`).join('');
+  const mondays = []; for (let d = t0; d < t1; d += 864e5) if (new Date(d).getUTCDay() === 1) mondays.push(new Date(d).toISOString().slice(0, 10));
+  const every = Math.max(1, Math.ceil(mondays.length * 64 / (width - m.l - m.r)));
+  g += mondays.filter((_, i) => i % every === 0).map(d => `<text x="${x(d) + slot / 2}" y="${H - 6}" text-anchor="middle">${shortDate(d)}</text>`).join('');
+  // Stacked from the baseline in the order of the legend; a thin surface stroke parts the segments.
+  const bw = Math.max(1, slot - 2), on = changesView.range?.day;
+  let bars = '', hits = '';
+  for (const d of days) {
+    let v = 0;
+    for (const [k, , , w] of CONTRIBUTION_KINDS) {
+      if (!d[k]) continue;
+      bars += `<rect class="bar ${k}" x="${x(d.date) + 1}" width="${bw}" y="${y(v + w * d[k])}" height="${y(v) - y(v + w * d[k])}"/>`;
+      v += w * d[k];
+    }
+    hits += `<rect class="bar-day${d.date === on ? ' on' : ''}" data-date="${d.date}" x="${x(d.date)}" width="${slot}" y="${m.t}" height="${H - m.t - m.b}"/>`;
+  }
+  const label = `Contributions by day from ${shortDate(days[0].date)} to ${shortDate(days[days.length - 1].date)}`;
+  el.innerHTML = `<svg viewBox="0 0 ${width} ${H}" role="img" aria-label="${esc(label)}"><g class="axis">${g}</g>${hits}<g style="pointer-events:none">${bars}</g></svg><div class="history-tip" hidden></div>`
+    + `<div class="history-legend">${CONTRIBUTION_KINDS.map(([k, , many, w]) => `<span><i class="bar ${k}"></i>${many}${w === 1 ? '' : ' (½)'}</span>`).join('')}</div>`;
+  const svg = el.querySelector('svg'), tip = el.querySelector('.history-tip'), byDate = new Map(days.map(d => [d.date, d]));
+  svg.querySelectorAll('.bar-day').forEach(hit => {
+    const d = byDate.get(hit.dataset.date);
+    hit.addEventListener('mouseenter', () => {
+      const parts = CONTRIBUTION_KINDS.filter(([k]) => d[k]).map(([k, one, many]) => `${d[k]} ${d[k] === 1 ? one : many}`);
+      tip.innerHTML = `<b>${esc(shortDate(d.date))}</b><br>size ${d.size.toLocaleString('en-US')}<br><span class="dim">${esc(parts.join(', '))}</span><br><span class="dim">Click for the changes</span>`;
+      tip.hidden = false;
+      const r = svg.getBoundingClientRect(), px = (x(d.date) + slot) * r.width / width + 10;
+      tip.style.left = Math.max(4, Math.min(px + 12, el.clientWidth - tip.offsetWidth - 4)) + 'px';
+    });
+    hit.addEventListener('mouseleave', () => { tip.hidden = true; });
+    hit.addEventListener('click', () => {
+      const after = new Date(t(d.date) - 864e5).toISOString().slice(0, 10);
+      changesView.range = { after, through: d.date, label: shortDate(d.date), day: d.date };
+      changesView.limit = CHANGES_PAGE; renderResults();
+      document.getElementById('changes-filter').scrollIntoView?.({ block: 'nearest' });
+    });
+  });
+  document.getElementById('history-note').textContent = 'Each day’s work, by the dates on the records: a new principle, result or model counts 1, and an argument adding verdicts on a model already on the map counts ½, once however many models share it. Revisions do not count.';
+}
 function historyRange(after, p) {
   if (p.live) return `after ${shortDate(after)}`;
   if (!after) return `up to ${shortDate(p.date)}`;
@@ -3541,15 +3641,15 @@ function historyRange(after, p) {
 }
 (function wireHistory() {
   const box = document.getElementById('history');
-  try { box.open = localStorage.getItem('pmap-history-open') === '1'; } catch (_) {}
-  box.addEventListener('toggle', () => { try { localStorage.setItem('pmap-history-open', box.open ? '1' : '0'); } catch (_) {} historyView.key = ''; renderHistory(); });
   box.querySelectorAll('button[data-history-kind], button[data-history-measure]').forEach(b => b.addEventListener('click', () => {
     if (b.dataset.historyKind) historyView.kind = b.dataset.historyKind; else historyView.measure = b.dataset.historyMeasure;
     box.querySelectorAll('button[data-history-kind]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.historyKind === historyView.kind)));
-    box.querySelectorAll('button[data-history-measure]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.historyMeasure === historyView.measure)));
     renderHistory();
   }));
-  window.addEventListener('resize', () => { if (box.open && !box.hidden) renderHistory(); });
+  // Drawn to the chart's width, which is unknown while the tab is hidden: redraw when it changes.
+  const chart = document.getElementById('history-chart');
+  if (window.ResizeObserver) new ResizeObserver(() => { if (!box.hidden && chart.clientWidth) renderHistory(); }).observe(chart);
+  else window.addEventListener('resize', () => { if (!box.hidden) renderHistory(); });
 })();
 // ---------------------------------------------------------------- results
 // Every proved result among the principles the sidebar shows, from its sources, grouped by

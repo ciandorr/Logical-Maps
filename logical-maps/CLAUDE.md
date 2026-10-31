@@ -99,7 +99,9 @@ and reports unless it is asked for by name.
   recounts every point, and bumping `HISTORY_VERSION` does so too, for when what counts as a
   question changes. Run it after merges to main, having fetched. A build only reads the ledger,
   adding this build as a live last point, for the Changes tab's "Progress over time"
-  (`check_history_ui.cjs`).
+  (`check_history_ui.cjs`). That chart's default view, Contributions, needs no ledger: the
+  viewer sizes each day's work from the record dates (a new principle, result or model 1, an
+  argument with verdicts on an older model ½, revisions nothing).
 - `python3 scripts/pmap.py starter` — build the reusable starter ZIP. Normal
   builds also regenerate it and add a relative Contribute download. Keep its
   allowlist limited to shared tooling and `starter/` assets. Run

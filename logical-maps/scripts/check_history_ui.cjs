@@ -79,6 +79,11 @@ svg(d).getBoundingClientRect=()=>({left:0,top:0,width:280,height:220,right:280,b
 hit.dispatchEvent(new w.MouseEvent('mousemove',{bubbles:true,clientX:200,clientY:100}));
 assert.match(d.querySelector('.history-tip').textContent,/\+1 argument(?!s)/,'arguments dated since the point before');
 assert.match(d.querySelector('.history-tip').textContent,/Lean-checked only: 5 open \(62\.5%\)/,'core: 8 questions, 3 settled in Lean');
+press('data-history-measure','counts');
+svg(d).getBoundingClientRect=()=>({left:0,top:0,width:280,height:220,right:280,bottom:220});
+svg(d).querySelector('rect').dispatchEvent(new w.MouseEvent('mousemove',{bubbles:true,clientX:200,clientY:100}));
+assert.match(d.querySelector('.history-tip').textContent,/7 settled \(87\.5%\) of 8.*Lean-checked only: 3 settled \(37\.5%\)/,'the counts view tells what is settled');
+press('data-history-measure','share');
 hit.dispatchEvent(new w.MouseEvent('click',{bubbles:true,clientX:200,clientY:100}));
 const filter=d.getElementById('changes-filter');
 assert.equal(filter.hidden,false,'a day filters the changes');

@@ -3582,9 +3582,11 @@ function renderHistory() {
     // Arguments are not in the ledger: those dated since the point before, counted as in Contributions.
     const args = pp ? work.filter(w => w.date > pp.date && (p.live || w.date <= p.date)).reduce((a, w) => a + w.verdicts, 0) : 0;
     const records = pp ? [...['principles', 'results', 'models'].map(k => [n(k), k]), [args, 'arguments']].filter(([d]) => d).map(([d, k]) => `${sign(d)} ${d === 1 || d === -1 ? k.slice(0, -1) : k}`).join(', ') : '';
-    tip.innerHTML = `<b>${esc(shortDate(p.date))}</b>${p.live ? ' <span class="dim">(this build)</span>' : ''}<br>${v.open.toLocaleString('en-US')} open (${openShare({ open: v.open, questions: v.q })}%) of ${v.q.toLocaleString('en-US')}`
+    // The counts view shows what is settled, the share view what is open: the tooltip follows.
+    const counts = measure === 'counts', part = (n, q) => `${n.toLocaleString('en-US')} ${counts ? 'settled' : 'open'} (${openShare({ open: n, questions: q })}%)`;
+    tip.innerHTML = `<b>${esc(shortDate(p.date))}</b>${p.live ? ' <span class="dim">(this build)</span>' : ''}<br>${part(counts ? v.s : v.open, v.q)} of ${v.q.toLocaleString('en-US')}`
       + (prev ? `<br><span class="dim">${sign(v.s - prev.s)} settled, ${sign(v.q - prev.q)} questions</span>` : '')
-      + (v.lean ? `<br>Lean-checked only: ${v.leanOpen.toLocaleString('en-US')} open (${openShare({ open: v.leanOpen, questions: v.q })}%)` + (prev?.lean && v.lean !== prev.lean ? ` <span class="dim">${sign(v.lean - prev.lean)} settled</span>` : '') : '')
+      + (v.lean ? `<br>Lean-checked only: ${part(counts ? v.lean : v.leanOpen, v.q)}` + (prev?.lean && v.lean !== prev.lean ? ` <span class="dim">${sign(v.lean - prev.lean)} settled</span>` : '') : '')
       + (records ? `<br><span class="dim">${esc(records)}</span>` : '') + `<br><span class="dim">Click for the changes</span>`;
     tip.hidden = false;
     const r = svg.getBoundingClientRect(), px = xv * r.width / width + 10;

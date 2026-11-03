@@ -1,6 +1,6 @@
 # □Rigid Comprehension ⇒ Arithmetic Necessitism
 
-<p class='cert'>Result — Source: Continuum Contingency (draft); produced by Zachary Goodsell (Theorem 3 of Barton and Goodsell's Continuum Contingency, attributed there to Goodsell 2021); transposed to the map's numbers at every type by Claude Fable 5.1 (Anthropic), 23 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026.</p>
+<p class='cert'>Result — Source: Continuum Contingency (draft), Lean `Classicism.Map.necessary_rigid_comprehension_implies_arithmetic_necessitism`; produced by Zachary Goodsell (Theorem 3 of Barton and Goodsell's Continuum Contingency, attributed there to Goodsell 2021); transposed to the map's numbers at every type by Claude Fable 5.1 (Anthropic), 23 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026.</p>
 
 ## Premises
 

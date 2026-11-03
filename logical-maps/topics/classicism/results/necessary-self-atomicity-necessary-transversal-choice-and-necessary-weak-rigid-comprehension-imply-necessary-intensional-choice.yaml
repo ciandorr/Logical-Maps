@@ -1,0 +1,28 @@
+id: necessary-self-atomicity-necessary-transversal-choice-and-necessary-weak-rigid-comprehension-imply-necessary-intensional-choice
+premises:
+- necessary-self-atomicity-r
+- necessary-transversal-choice-r
+- necessary-weak-rigid-comprehension-r
+conclusion: necessary-intensional-choice-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026, from the unboxed result
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: stated
+sources:
+- Cian Dorr, argument of 30 October 2026 from Self-Atomicity, Transversal Choice and Rigid Comprehension; gap
+  and repair by Claude Opus 5.5 (Anthropic) the same day (session transcript).
+source_names:
+- Dorr 30 Oct
+proof: >-
+  The proofs of [[self-atomicity-zorn-and-weak-rigid-comprehension-imply-intensional-choice]] and of [[transversal-choice-r-implies-zorn-r]]
+  use their premises only at finitely many closed instances and nothing beyond C. So for each closed instance
+  of the conclusion, C proves the conditional from the corresponding instances of Self-Atomicity, Transversal
+  Choice and Weak Rigid Comprehension. Necessitate that theorem and apply K with the boxed premise instances.
+  Generalization over the admitted types is metalinguistic; no type quantifier is placed inside the box.
+notes: >-
+  Boxed counterpart of [[self-atomicity-zorn-and-weak-rigid-comprehension-imply-intensional-choice]], with
+  Transversal Choice for Zorn's Lemma, since the map has no boxed Zorn. The engine also derives it, through □Transversal Choice ⇒ □Well-Ordering and [[necessary-well-ordering-and-intensional-choice-imply-modal-well-ordering]]; recorded directly at Cian Dorr's request.

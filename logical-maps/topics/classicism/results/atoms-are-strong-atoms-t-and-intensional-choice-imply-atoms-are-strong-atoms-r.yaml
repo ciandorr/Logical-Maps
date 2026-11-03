@@ -1,0 +1,28 @@
+id: atoms-are-strong-atoms-t-and-intensional-choice-imply-atoms-are-strong-atoms-r
+premises:
+- atoms-are-strong-atoms-t
+- intensional-choice-r
+conclusion: atoms-are-strong-atoms-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026, on the pattern of Cian
+    Dorr's argument for Atomicity
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: verified
+  lean_ref: Classicism.Map.atoms_are_strong_atoms_t_and_intensional_choice_imply_atoms_are_strong_atoms_r
+sources:
+- Cian Dorr, observation of 30 October 2026 (session transcript).
+source_names:
+- Dorr 30 Oct
+proof: >-
+  Let $X^{\bar\sigma t}$ be an atom. By [[unique-instance-copies]], Intensional Choice makes $X$ the copy $A_w$
+  of its instance proposition $w:=\exists\bar x\, .\,X\bar x$ along a necessarily uniquely instantiated $G$,
+  and $w$ is an atom. By the type-$t$ principle $w$ is a strong atom, so $X=A_w$ is a strong atom by the same
+  lemma.
+notes: >-
+  Intensional Choice is what makes an atom a copy of a proposition: without it an atom may have several instances
+  at a world where none of them exists at the evaluation point. Compare [[barcan-relational-implies-atoms-are-strong-atoms-r]],
+  where BF gives the relational form outright.

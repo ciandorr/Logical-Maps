@@ -29,6 +29,12 @@ meets:
   sigma-top: Every constant of Σ is relational and denotes the top element of its type, which every arrow
     fixes.
   one-individual: There is a single individual at both objects.
+  finite-extension-properties-everywhere: >-
+    At $s$, a full action model, every intension is present. At $r$ take the entity whose current extension
+    is the set of entities with finite current extension and whose transports into $s$ are all the
+    intension of $s$ true at each arrow of the entities with finite extension there, which depends only on
+    the codomain, so every arrow of $s$ fixes it and the restriction is met. Singletons at $r$, with any
+    admissible transports, give literal identity there.
 
 arguments:
 
@@ -60,7 +66,7 @@ arguments:
     $s$ is full and current extensions at $r$ are arbitrary.
 
 - id: truth-implies-nd-necessity
-  holds: [necessary-distinctness-preserving-collapse]
+  holds: [necessary-truths-are-nd-necessary]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by
     Claude Opus 5.5 (Anthropic), prompted by Cian Dorr

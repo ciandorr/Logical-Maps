@@ -6,7 +6,7 @@ import Classicism.Results.Records.Coarse
 # Proofs of map records: Extensionality and the Fregean Axiom
 
 Records concluding in the principles of the map's category `extensionality`, and the
-Distinctness-Preserving Collapse, which the Fregean Axiom gives (Classicism, §§1.4, 2.6).
+Truths are ND-necessary, which the Fregean Axiom gives (Classicism, §§1.4, 2.6).
 The conventions are in `Results/Records.lean`.
 -/
 
@@ -57,16 +57,16 @@ theorem extensionality_r_implies_necessary_extensionality_r {τ : Type} [Rel τ]
     Extensionality τ → Extensionality Prop → NecExtensionality τ := fun ext extP =>
   box_of_fregean (extensionality_r_implies_fregean_axiom extP) _ ext
 
-/-- `fregean-axiom-implies-distinctness-preserving-collapse`: `⊤` is a true `q` with
+/-- `fregean-axiom-implies-truths-are-nd-necessary`: `⊤` is a true `q` with
 `□(◇⊤ → p)`, since `p` is necessary. -/
-theorem fregean_axiom_implies_distinctness_preserving_collapse :
-    FregeanAxiom → DistinctnessPreservingCollapse := fun fa p hp =>
+theorem fregean_axiom_implies_truths_are_nd_necessary :
+    FregeanAxiom → TruthsAreNDNecessary := fun fa p hp =>
   ⟨True, trivial, box_of_fregean fa _ (fun _ => hp)⟩
 
-/-- `distinctness-preserving-collapse-and-nd-imply-fregean-axiom`: under `ND_t` the two
+/-- `truths-are-nd-necessary-and-nd-imply-fregean-axiom`: under `ND_t` the two
 necessities coincide, so every truth is `⊤` and every falsehood `⊥`. -/
-theorem distinctness_preserving_collapse_and_nd_imply_fregean_axiom :
-    DistinctnessPreservingCollapse → NecessityOfDistinctness Prop → FregeanAxiom :=
+theorem truths_are_nd_necessary_and_nd_imply_fregean_axiom :
+    TruthsAreNDNecessary → NecessityOfDistinctness Prop → FregeanAxiom :=
   fun col nd p q hpq =>
     have box : ∀ r : Prop, r → □ r := fun r hr => (col r hr).elim fun s hs =>
       modal_K _ _ hs.2 (nd s False (fun e => (e ▸ hs.1 : False)))

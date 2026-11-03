@@ -111,3 +111,44 @@ whatever the size of a given type. Where $\sigma$ necessarily has only
 finitely many members, $\mathbb N_\sigma$ is finite, a property countable
 relative to $\sigma$ is finite and so has a least upper bound in C, and
 $I_\sigma$ is necessarily false; those instances are trivial.
+
+::: lemma {#necessary-infinity-injective-successor}
+title: necessary infinity makes successor injective
+credit: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+---
+At each type $\sigma$, $\Box\operatorname{AxInf}_\sigma\to\Box I^*_\sigma$, where
+$\operatorname{AxInf}_\sigma$ is the Axiom of Infinity at $\sigma$: no finite cardinality holds
+of $\lambda u^\sigma\, .\,\top$. So the boxed Axiom of Infinity at $\sigma$ is Barton and
+Goodsell's Infinity, eq. (22), at $\sigma$, and discharges the antecedent of Arithmetic
+Necessitism at $\sigma$.
+
+*Proof.* The first conjunct of $I^*_\sigma$ is a theorem of C. By 4 it is enough to derive
+injectivity at a world from $\Box\operatorname{AxInf}_\sigma$ there. Three facts about finite
+cardinalities $Z$ are proved by induction along $\operatorname{FiniteCardinality}_\sigma$,
+quantifying over the other variables:
+
+1. $Z$ is $\mathbf 0_\sigma$ or $\operatorname{Suc}_\sigma Z'$ for a finite cardinality $Z'$.
+2. $Z$ respects exchange: if $Xz$, $\neg Xy$ and $ZX$, then $Z$ holds of $X$ with $z$ replaced
+   by $y$.
+3. Hence, if $\neg Xy$, then $\operatorname{Suc}_\sigma Z$ holds of $X$ with $y$ added iff $ZX$.
+   For the left-to-right direction, a witness $z\ne y$ is exchanged for $y$ by fact 2.
+
+Finite cardinalities are necessarily finite cardinalities, and the three facts are theorems, so
+they hold at every world. Now show, by induction on $m$, that $\operatorname{Suc}m=\operatorname{Suc}n$
+gives $m=n$ for every finite cardinality $n$, using fact 1 for each of $m$ and $n$.
+
+- *A zero and a successor of a successor.* $\operatorname{Suc}\mathbf 0$ holds of a singleton
+  $\lambda x\, .\,x=a$ (Existence), and $\operatorname{Suc}\operatorname{Suc}n'$ does not.
+- *Two successors of successors.* Suppose $\operatorname{Suc}\operatorname{Suc}m'=\operatorname{Suc}\operatorname{Suc}n'$.
+  At any world and for any $X$:
+  - if some $y$ has $\neg Xy$, fact 3 applied twice gives
+    $\operatorname{Suc}m'X\leftrightarrow\operatorname{Suc}\operatorname{Suc}m'(X+y)\leftrightarrow
+    \operatorname{Suc}\operatorname{Suc}n'(X+y)\leftrightarrow\operatorname{Suc}n'X$;
+  - otherwise $X$ is coextensive with $\lambda u\, .\,\top$, and by $\operatorname{AxInf}_\sigma$
+    at that world neither $\operatorname{Suc}m'$ nor $\operatorname{Suc}n'$ holds of it.
+
+  So $\operatorname{Suc}m'$ and $\operatorname{Suc}n'$ are necessarily coextensive, hence identical
+  by Intensionality, and the induction hypothesis gives $m'=n'$.
+
+The box on the Axiom is used in the last case, at every world. $\square$
+:::

@@ -1,6 +1,6 @@
 # Strong Possibility (pure) ∧ Infinity Schema (type e) ⇒ ⊥
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, 16 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 16 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.strong_possibility_and_infinity_e_incompatible`; produced by Cian Dorr, 16 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 16 October 2026.</p>
 
 ## Premises
 

@@ -26,20 +26,49 @@ settings:
   root-arrows: interpretations-and-substitutions
   sigma: construction
   construction: >-
-    Assume $\operatorname{Con}(\mathrm{ZFC})$ in the metatheory, as for coalesced-two-extensional-ch-models-root,
-    so that there are models $N_+\models\mathrm{ZFC}+\mathrm{CH}$ and $N_-\models\mathrm{ZFC}+\neg\mathrm{CH}$. In each
-    $N\in\{N_+,N_-\}$, carry out the construction of coalesced-pinned-substitutions-root with a single component,
-    finite-support-monotone-maps as built in $N$, giving an action model $M_N$ with root object $R_N$. Being an
-    action model, and the truth of a formula at a world, are computed by recursion inside $N$, so $M_N$ is an
-    action model of C in the metatheory, with the same truths. The components are $M_{N_+}$ and $M_{N_-}$, and the
-    root $W_0$ is built over them as in coalesced-pinned-substitutions-root. Evaluation point: $W_0$, at its
-    identity arrow. Interpretation of Σ as there.
+    Assume in the metatheory that there is a transitive set model of ZFC, and let $L_\alpha$ be the least
+    one: $\alpha$ is the least ordinal with $L_\alpha\models\mathrm{ZFC}$, which is countable. Let
+    $N_+:=L_\alpha$, which satisfies CH, and $N_-:=L_\alpha[G]$ for a filter $G$ generic over $L_\alpha$ for
+    the forcing adding $\aleph_2^{L_\alpha}$ Cohen reals, which exists because $L_\alpha$ is countable, so that
+    $N_-\models\mathrm{ZFC}+\neg\mathrm{CH}$. Both are transitive with the same ordinals, so their natural
+    numbers are the true ones. In each $N\in\{N_+,N_-\}$, carry out the construction of
+    coalesced-pinned-substitutions-root with a single component, finite-support-monotone-maps as built in
+    $N$, giving an action model $M_N$ with root object $R_N$. $N$ being transitive, $M_N$ is an action model
+    of C in the metatheory, and a formula has the same truth value at a world of $M_N$ whether that is
+    computed in $N$ or in the metatheory. The components are $M_{N_+}$ and $M_{N_-}$, and the root $W_0$ is
+    built over them as in coalesced-pinned-substitutions-root. Evaluation point: $W_0$, at its identity
+    arrow. Interpretation of Σ as there.
   domains:
     text: >-
       As in coalesced-pinned-substitutions-root, intensions over the arrows out of $W_0$ pinned down by a
       finite set of constants of $\Sigma^+$, whose transports along the arrows into a component land in its
       domains.
-meets: {}
+meets:
+  infinitely-many-individuals-everywhere: >-
+    The individuals are the infinitely many individual constants at $W_0$ and at each $R_N$, and the
+    natural numbers at the objects of finite-support-monotone-maps as built in $N$, $N$ being
+    transitive.
+  finite-extension-properties-everywhere: >-
+    At every reachable object $U$, take the intension depending only on the codomain whose value at
+    an arrow into $U'$ is the set of entities of type $\sigma t$ at $U'$ with finite extension at
+    $1_{U'}$. At an object of finite-support-monotone-maps it is pinned down by $\emptyset$; at a
+    pinned-substitution root, $R_N$ or $W_0$, it is pinned down by $\emptyset$ and lands, its
+    transports being the like intensions at the targets. Inside $M_N$ it is defined in $N$ from
+    parameters in $N$ by a formula absolute for transitive models, finiteness being absolute, so it
+    belongs to the domains computed in $N$; at $W_0$ the domains are as full as pinning and landing
+    allow. Haecceities are pinned down by the constants or points that pin their entities, so
+    identity is literal.
+  pinned-substitution-root: The root, its domains and the interpretation of Σ are as in
+    coalesced-pinned-substitutions-root; only the components differ.
+  root-only-sentence: >-
+    $B:=\Diamond\exists\mathfrak R\,.\,(\operatorname{Real}_{et}(\mathfrak R)\land\operatorname{CH}(\mathfrak
+    R))\land\Diamond\exists\mathfrak R\,.\,(\operatorname{Real}_{et}(\mathfrak R)\land\neg\operatorname{CH}(\mathfrak
+    R))$. It is true at $W_0$, by the argument atomlessness-and-ch. The worlds seen from $R_{N_+}$ are
+    $R_{N_+}$ and the object $V_{N_+}$ of finite-support-monotone-maps as built in $N_+$; both are
+    extensionally full inside $N_+$ (the first as in that argument, the second as recorded for the
+    finite-support models), so every real number structure at $et$ at either is isomorphic inside $N_+$
+    to $N_+$'s reals and satisfies CH. So the second conjunct of $B$ fails at $R_{N_+}$ and at $V_{N_+}$,
+    and likewise the first at $R_{N_-}$ and at $V_{N_-}$.
 arguments:
 - id: atomlessness-and-ch
   holds:
@@ -62,7 +91,96 @@ arguments:
     arrow $\langle R_N,I\rangle$ iff it holds at $R_N$, so at $W_0$ the arrows into $R_{N_-}$ refute
     $\Box\forall\mathfrak R\,.\,\operatorname{Real}_{et}(\mathfrak R)\to\operatorname{CH}(\mathfrak R)$ and those into
     $R_{N_+}$ its counterpart with $\neg\operatorname{CH}$.
+- id: boxed-through-components
+  holds:
+  - necessary-five-implies-two-hat-necessity
+  fails:
+  - necessary-barcan-t
+  - necessary-two-hat-implies-nd-necessity
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    These principles are closed pure sentences, one for each type, and a closed sentence holds at an
+    arrow out of $W_0$ iff it holds at the identity of its target: $W_0$, $R_{N_\pm}$, or the object
+    $V_{N_\pm}$ of finite-support-monotone-maps as built in $N_\pm$, whose truths are those of that model,
+    its verdicts being theorems of ZFC and so true in $N_\pm$. So a necessitation holds at $W_0$ iff the
+    principle holds at these five objects. BF (type t) and the conditional from two-hat to ND-necessity
+    fail at $V_{N_\pm}$, as recorded for finite-support-monotone-maps, so their necessitations fail;
+    with BF (type t) at $W_0$, the recorded result that Tame Rigidity and BF (type t) give $\Box$BF
+    (type t) makes Tame Rigidity fail at the root. The conditional from 5- to two-hat necessity holds at
+    $W_0$ by the group's argument substitution-root, at $R_{N_\pm}$ by the same argument carried out in
+    $N_\pm$, and at $V_{N_\pm}$ as recorded for finite-support-monotone-maps.
+- id: intensional-choice
+  holds:
+  - necessary-intensional-choice-r
+  - modal-well-ordering-r
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: uses
+  text: >-
+    The argument intensional-choice-well-ordering, with the well-orderings at the objects of the
+    components chosen inside $N_\pm$. Fix a type $\sigma$; for $U$ among $R_{N_\pm}$ and $V_{N_\pm}$ let
+    $<_U\in N_\pm$ well-order $D^\sigma_U$ inside $N_\pm$, and let $<_{W_0}$ well-order $D^\sigma_{W_0}$.
+    The intension $W$ with value $<_{\operatorname{cod}h}$ at each arrow $h$ out of $W_0$ is pinned down by
+    $\emptyset$; its transport along an arrow into $R_N$ is the intension $k\mapsto<_{\operatorname{cod}k}$
+    there, which is in $N$, pinned down by $\emptyset$, and lands in the domain of $V_N$, where it is
+    constant and finite-support-monotone-maps meets codomain-intensions; so it is in the domain of $R_N$,
+    and $W$ is in the domain of $W_0$. At every world its extension well-orders the type-$\sigma$ domain
+    there, the subproperties tested at a component object being sets of $N$: so $W$ is necessarily a
+    well-order of type $\sigma$, and Modal Well-Ordering holds. Given $F$ necessarily instantiated at a
+    reachable object, $G:=\lambda x\,.\,Fx\land\forall y\,.\,(Fy\to\neg Wyx)$, definable from $F$ and $W$,
+    is below $F$ and necessarily uniquely instantiated, its extension at every arrow being the singleton of
+    the least element of $F$'s. So $\Box$Intensional Choice holds.
+- id: arithmetic
+  holds:
+  - necessity-of-arithmetic
+  - arithmetic-necessitism
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    At each type $\sigma$. The objects reachable from $W_0$ are $W_0$, $R_{N_\pm}$ and the objects
+    $V_{N_\pm}$ of finite-support-monotone-maps as built in $N_\pm$, and every type is infinite at each.
+    $W_0$ is extensionally full at its identity, and $R_N$ and $V_N$ are extensionally full inside $N$
+    (see the argument atomlessness-and-ch and the condition root-only-sentence). So at each, as in the
+    argument arithmetic-necessitism-extensionally-full, the numbers at $\sigma$ are the numerals, pairwise
+    distinct, and $\operatorname{Sum}_\sigma$ and $\operatorname{Prod}_\sigma$ are addition and
+    multiplication on them, the relations with those graphs being present; at $R_N$ and $V_N$ this is
+    computed in $N$, whose natural numbers are the true ones, $N$ being transitive. So every arithmetical
+    sentence at $\sigma$ has its standard truth value at every world, and the Necessity of Arithmetic
+    holds. Arithmetic Necessitism: the intension $Z$ whose value at each arrow out of $W_0$ is the set of
+    numerals at its target is pinned down by $\emptyset$; its transport along an arrow into $R_N$ is the
+    corresponding intension of $M_N$, which is in $N$, pinned down by $\emptyset$, and lands in the domain
+    of $V_N$, full inside $N$; so $Z$ is in the domain of $W_0$. With the numerals a property at every
+    reachable object, which transports to the numerals, the argument
+    arithmetic-necessitism-finitely-pinned goes through: the numbers are the numerals everywhere, and
+    $\mathbb N_\sigma$ is rigid with necessarily distinct instances.
+- id: analysis
+  fails:
+  - necessity-of-analysis
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    At type $et$, where there are real number structures at every reachable object (see the argument
+    atomlessness-and-ch). Let $A$ be the first-order analytical sentence saying that some real codes a
+    well-founded model of ZFC, a sentence of second-order arithmetic. At $W_0$, extensionally full at its
+    identity, every real number structure at $et$ is isomorphic to the reals of the metatheory, and $A$
+    is true there: $L_\alpha$ is countable, so a real codes it. At $R_N$ and at $V_N$ every real number
+    structure is isomorphic inside $N$ to $N$'s reals, and $A$ has there its truth value in $N$, since
+    $N$ is transitive and well-foundedness of a relation on $\omega$ is absolute. In $N$, $A$ is false:
+    a model coded by a real in $N$ that is well-founded collapses, inside $N$, to a transitive model $T$
+    of ZFC, of height $\beta<\alpha$ since $N$ has height $\alpha$; then $L^T=L_\beta\models\mathrm{ZFC}$,
+    against the leastness of $\alpha$. So neither $\Box\forall\mathfrak R\,.\,\operatorname{Real}_{et}(\mathfrak
+    R)\to A(\mathfrak R)$, false at the arrows into $R_{N_+}$, nor $\Box\forall\mathfrak
+    R\,.\,\operatorname{Real}_{et}(\mathfrak R)\to\neg A(\mathfrak R)$, false at the identity, holds at
+    $W_0$.
 notes: 'Proposed on 29 October 2026 in a trawl for the open questions created by □Atomlessness: □Atomlessness
-  does not give Non-contingency of CH. It assumes Con(ZFC) in the metatheory. Checked by Claude Opus 5.5
+  does not give Non-contingency of CH. On 30 October 2026, at the direction of Cian Dorr, the components were fixed
+  as $L_\alpha$ and a Cohen extension of it, in place of arbitrary models of ZFC ± CH, so that arithmetic is
+  standard everywhere and Arithmetic Necessitism holds; the model then shows that □Atomlessness with
+  Arithmetic Necessitism gives neither the Non-contingency of CH nor the Necessity of Analysis. It assumes
+  in the metatheory that ZFC has a transitive set model. Checked by Claude Opus 5.5
   (Anthropic), prompted by Cian Dorr; it inherits the model-of-C argument of coalesced-pinned-substitutions-root,
   which has not had a second reader. No Lean verification is claimed.'

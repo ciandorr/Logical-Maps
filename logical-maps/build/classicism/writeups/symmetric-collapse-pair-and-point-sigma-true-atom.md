@@ -16,6 +16,8 @@
 - **¬ □BF (type t).** Necessarily, if every proposition necessarily has a property, then necessarily every proposition has it.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ Relational Choice.** Every serial binary relation has a functional subrelation.
+- **¬ □Axiom of Infinity (type e).** Necessarily, there are not finitely many individuals.
+- **¬ □Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
 - **¬ Intensional Choice.** If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
 - **¬ B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
 - **¬ No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
@@ -110,13 +112,17 @@ As the argument arithmetic-necessitism-extensionally-full, with the property of 
 
 *General argument `arguments/arithmetic-necessitism-finitely-pinned`. It requires that Write an entity of relational type at the evaluation object as its intension $k\mapsto Y_k$ over the arrows $k$ out of it, so that $Y\bar a$ holds at $k$ iff $k\cdot\bar a\in Y_k$; $Y$ is pinned down by a finite set $N$ of the points the arrows act on when $Y_k=Y_{k^{\prime}}$ for any arrows $k,k^{\prime}$ agreeing on $N$. Every entity in a domain is pinned down by a finite set, in the sense that $k\cdot x=k^{\prime}\cdot x$ for arrows agreeing on it, and the domain of each relational type at the evaluation object holds every intension pinned down by a finite set (in a symmetric model, every symmetric one). Here: The domains hold every symmetric intension pinned down by a finite set, and every entity in them is one. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
 
-### Holds Truths are ND-necessary.
+### Fails □Axiom of Infinity (type e).
 
-For a true $p$, $a\le p$, since $a$ entails every truth. Take $q:=a$ in the definition of $\Box_{\ne}p$: at a world in $a$, $p$ holds; at a world outside $a$, $\Diamond a$ fails. So every truth is $\Box_{\ne}$-necessary.
+At the identity arrow of a reachable object $v$ with $n$ individuals there are not $n+1$ individuals any two of which are distinct, distinctness implying literal distinctness, identity being reflexive. So the Infinity schema at type $e$ fails there, and with it the Axiom of Infinity at type $e$, which implies it in C (axiom-of-infinity-e-implies-infinity-e). A closed sentence holds at an arrow out of the evaluation object exactly when it holds at the identity arrow of the arrow's target (at the world seen, in a Kripke-style model), so the arrow into $v$ is a world at which the Axiom fails, and its necessitation fails at the evaluation point.
 
-*General argument `arguments/dpc-isolated-actual-world`. It requires that The actual-world proposition $a$ is in the domain and entails every truth, and no world outside $a$ sees a world in $a$. Here: The actual-world proposition is the symmetry group, pinned down by $\{0,1\}$; every world outside it is a collapser, a constant or $!$, and every composite with one of these collapses $\{0,1\}$ or lands in $W_1$. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.*
+*General argument `arguments/finitely-many-individuals-somewhere`. It requires that Some object reachable from the evaluation point has finitely many individuals. Here: The object $W_1$, reached by $!$, has the single individual $0$ (with either choice of individuals). By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
 
-*Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* The finite-support, symmetric and full action models' copies (eight records) stated once for the topic; what varied, why no world outside the actual world sees back into it, is each record's reason for meeting actual-world-isolated.
+### Fails □Axiom of Infinity (type t).
+
+As for individuals (finitely-many-individuals-somewhere), at type $t$: at the identity arrow of a reachable object with $n$ propositions the Infinity schema at type $t$ fails, and so does the Axiom of Infinity at type $t$, which implies it in C (axiom-of-infinity-t-implies-infinity-t); so its necessitation fails at the evaluation point.
+
+*General argument `arguments/finitely-many-propositions-somewhere`. It requires that Some object reachable from the evaluation point has finitely many propositions. Here: At $W_1$, reached by $!$, every set of arrows is pinned down by the base $\{0\}$, and a symmetric one is a union of the orbits $\{1_{W_1}\}$, $\{c_0,c_1\}$ and $\{c_n:n\ge2\}$ under post-composition with the permutations preserving $\{0,1\}$: there are eight propositions. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
 
 ### Fails Intensional Choice.
 
@@ -127,6 +133,14 @@ At type $e$. Let $F$ and $a$ be as the condition gives them, and suppose $G\le F
 *Revised 2026-10-03 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* Recorded from the collapse lemma deferred in extraction.md on 3 October until the model records' new format landed (not yet checked by a human). It needs the individuals the construction gives. Not covered: the qualitative-links model, whose arrows preserve a ternary relation and so cannot send everything to one point, and the qualitative-contrast model, whose arrows are bijections and where Intensional Choice holds.
 
 *Revised 2026-10-04 by Claude Fable 5.1 (Anthropic), at Cian Dorr's direction:* Moved from the group symmetric-ideally-full to the topic, so that the symmetry-constrained full models use it too: in those models every intension is pinned down by the finite set of all individuals, and the collapses are the constant maps. The group's `when: individuals: base` is now the condition construction-individuals, met by that parameter value.
+
+### Holds Truths are ND-necessary.
+
+For a true $p$, $a\le p$, since $a$ entails every truth. Take $q:=a$ in the definition of $\Box_{\ne}p$: at a world in $a$, $p$ holds; at a world outside $a$, $\Diamond a$ fails. So every truth is $\Box_{\ne}$-necessary.
+
+*General argument `arguments/nd-necessity-isolated-actual-world`. It requires that The actual-world proposition $a$ is in the domain and entails every truth, and no world outside $a$ sees a world in $a$. Here: The actual-world proposition is the symmetry group, pinned down by $\{0,1\}$; every world outside it is a collapser, a constant or $!$, and every composite with one of these collapses $\{0,1\}$ or lands in $W_1$. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.*
+
+*Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* The finite-support, symmetric and full action models' copies (eight records) stated once for the topic; what varied, why no world outside the actual world sees back into it, is each record's reason for meeting actual-world-isolated.
 
 ### Fails B for sentences of Σ.
 

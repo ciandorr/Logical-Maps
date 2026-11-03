@@ -340,29 +340,29 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <col style="width: 33%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>From</th>
 <th>To</th>
 <th>Arrows</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><span class="math inline">E</span></td>
 <td><span class="math inline">E</span></td>
 <td>all injections <span class="math inline">\mathbb N\to\mathbb N</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td><span class="math inline">E</span></td>
 <td><span class="math inline">O</span></td>
 <td>the injections with range among the old individuals</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><span class="math inline">O</span></td>
 <td><span class="math inline">E</span></td>
 <td>all injections <span class="math inline">\mathbb N\sqcup\mathbb N&#39;\to\mathbb N</span></td>
 </tr>
-<tr class="even">
+<tr>
 <td><span class="math inline">O</span></td>
 <td><span class="math inline">O</span></td>
 <td><span class="math inline">G_O</span>, the permutations preserving old and new; and <span class="math inline">K</span>, the injections with range among the old</td>
@@ -467,8 +467,10 @@ c_M(\bar a,h)=\{\langle g\cdot\bar a,h&#39;\rangle : g\in G_V,\ h&#39;\text{ agr
 <p>Let <span class="math inline">X</span> be the universal property of individuals at <span class="math inline">E</span>, and suppose <span class="math inline">Y</span> is coextensive with <span class="math inline">X</span> and inextensible. Let <span class="math inline">Y</span> be pinned down by <span class="math inline">N</span>.</p>
 <ol type="1">
 <li><strong><span class="math inline">Y(f)=\mathbb N</span> for every arrow <span class="math inline">f</span> to <span class="math inline">E</span>.</strong> Take a permutation <span class="math inline">g</span> agreeing with <span class="math inline">f</span> on <span class="math inline">N</span>. Then <span class="math inline">Y(g)=g\,Y(1_E)=\mathbb N</span>, and by pinning <span class="math inline">Y(f)=Y(g)</span>.</li>
-<li><strong><span class="math inline">Y(\iota)</span> is old, for <span class="math inline">\iota</span> the inclusion of <span class="math inline">\mathbb N</span> into <span class="math inline">O</span>.</strong> Being old is pinned down by <span class="math inline">\emptyset</span>, and every individual of <span class="math inline">E</span> necessarily has it, since arrows into <span class="math inline">O</span> from worlds over <span class="math inline">E</span> land among the old. By weak inextensibility at <span class="math inline">E</span>, <span class="math inline">Y\le</span> old there. So <span class="math inline">0&#39;\notin Y(\iota)</span>.</li>
-<li><strong><span class="math inline">Y</span> is not weakly inextensible at <span class="math inline">\iota</span>.</strong> Let <span class="math inline">Z:=\lambda y\,.\,y\ne 0&#39;</span>, in the domain at <span class="math inline">O</span>, since it is symmetric under <span class="math inline">G_O</span> and pinned down by <span class="math inline">\{0&#39;\}</span>. Every <span class="math inline">Y</span>-thing at <span class="math inline">\iota</span> is distinct from <span class="math inline">0&#39;</span>, and necessarily so, since all arrows are injective. Now take any <span class="math inline">m:O\to E</span>. At the world <span class="math inline">m\circ\iota</span>, which is an arrow to <span class="math inline">E</span>, <span class="math inline">Y</span> holds of <span class="math inline">m(0&#39;)</span>, by step 1. But <span class="math inline">Z</span> fails of <span class="math inline">m(0&#39;)</span> there.</li>
+<li><strong><span class="math inline">Y(\iota)</span> is old, for <span class="math inline">\iota</span> the inclusion of <span class="math inline">\mathbb N</span> into <span class="math inline">O</span>.</strong> Being old is pinned down by <span class="math inline">\emptyset</span>, and every individual of <span class="math inline">E</span> necessarily has it, since arrows into <span class="math inline">O</span> from worlds over <span class="math inline">E</span> land among the old. By weak inextensibility at <span class="math inline">E</span>, <span class="math inline">Y\le</span> old there. So <span class="math inline">0&#39;\notin
+Y(\iota)</span>.</li>
+<li><strong><span class="math inline">Y</span> is not weakly inextensible at <span class="math inline">\iota</span>.</strong> Let <span class="math inline">Z:=\lambda y\,.\,y\ne
+0&#39;</span>, in the domain at <span class="math inline">O</span>, since it is symmetric under <span class="math inline">G_O</span> and pinned down by <span class="math inline">\{0&#39;\}</span>. Every <span class="math inline">Y</span>-thing at <span class="math inline">\iota</span> is distinct from <span class="math inline">0&#39;</span>, and necessarily so, since all arrows are injective. Now take any <span class="math inline">m:O\to E</span>. At the world <span class="math inline">m\circ\iota</span>, which is an arrow to <span class="math inline">E</span>, <span class="math inline">Y</span> holds of <span class="math inline">m(0&#39;)</span>, by step 1. But <span class="math inline">Z</span> fails of <span class="math inline">m(0&#39;)</span> there.</li>
 </ol>
 <p>So no coextensive <span class="math inline">Y</span> is inextensible. This argument uses the individuals, so it is recorded for the base individuals only.</p>
 <h2 id="bf-at-t-and-strong-atomicity-fails">BF at <span class="math inline">t</span> and Strong Atomicity fails</h2>
@@ -498,11 +500,14 @@ X:=\lambda F^{et}\, .\,\exists x\, .\,Dx\land F=\lambda y\, .\,y=x
 <p>With ND, this model shows that ND and Boolean Completeness together do not imply Inextensible Comprehension, Rigid Comprehension or Tame Rigidity.</p>
 <h2 id="countable-boolean-completeness-holds-at-e">Countable Boolean Completeness holds at <span class="math inline">E</span></h2>
 <p>Added by Claude Opus 5.5 (Anthropic) on 16 October 2026, at Cian Dorr’s direction. It holds there for countability relative to every type <span class="math inline">\sigma</span>. (This section was written when Boolean Completeness was believed to fail at <span class="math inline">E</span>; since it holds, the argument is now needed only at <span class="math inline">O</span>, below.)</p>
-<p>Write <span class="math inline">k\cdot x</span> for the transport of an entity <span class="math inline">x</span> along an arrow <span class="math inline">k</span>, so that <span class="math inline">\langle\bar a,h\rangle\in k\cdot x</span> iff <span class="math inline">\langle\bar a,h\circ k\rangle\in x</span>. For a finite <span class="math inline">N\subseteq\mathbb N</span>, let <span class="math inline">\mathrm{Fix}(N)</span> be the set of permutations in <span class="math inline">G_E</span> that fix <span class="math inline">N</span> pointwise.</p>
-<p><strong>Step 1: the members of a countable property are invariant.</strong> Let <span class="math inline">X</span> be a property at <span class="math inline">E</span> that is countable relative to <span class="math inline">\sigma</span>, witnessed by <span class="math inline">R</span>, and let a finite <span class="math inline">N</span> pin down both. Take <span class="math inline">x</span> with <span class="math inline">X(x)</span> at <span class="math inline">1_E</span>. Then <span class="math inline">R(x,\bar n)</span> at <span class="math inline">1_E</span> for some numeral <span class="math inline">\bar n</span> at <span class="math inline">\sigma</span>. Let <span class="math inline">g\in\mathrm{Fix}(N)</span>.</p>
+<p>Write <span class="math inline">k\cdot x</span> for the transport of an entity <span class="math inline">x</span> along an arrow <span class="math inline">k</span>, so that <span class="math inline">\langle\bar a,h\rangle\in k\cdot x</span> iff <span class="math inline">\langle\bar a,h\circ k\rangle\in
+x</span>. For a finite <span class="math inline">N\subseteq\mathbb N</span>, let <span class="math inline">\mathrm{Fix}(N)</span> be the set of permutations in <span class="math inline">G_E</span> that fix <span class="math inline">N</span> pointwise.</p>
+<p><strong>Step 1: the members of a countable property are invariant.</strong> Let <span class="math inline">X</span> be a property at <span class="math inline">E</span> that is countable relative to <span class="math inline">\sigma</span>, witnessed by <span class="math inline">R</span>, and let a finite <span class="math inline">N</span> pin down both. Take <span class="math inline">x</span> with <span class="math inline">X(x)</span> at <span class="math inline">1_E</span>. Then <span class="math inline">R(x,\bar
+n)</span> at <span class="math inline">1_E</span> for some numeral <span class="math inline">\bar n</span> at <span class="math inline">\sigma</span>. Let <span class="math inline">g\in\mathrm{Fix}(N)</span>.</p>
 <ul>
 <li>Numerals denote closed pure terms, so <span class="math inline">g\cdot\bar n=\bar n</span>.</li>
-<li>By symmetry, <span class="math inline">\langle g\cdot x,\bar n,g\rangle\in R</span> and <span class="math inline">\langle g\cdot x,g\rangle\in X</span>.</li>
+<li>By symmetry, <span class="math inline">\langle g\cdot x,\bar n,g\rangle\in R</span> and <span class="math inline">\langle g\cdot
+x,g\rangle\in X</span>.</li>
 <li>The arrows <span class="math inline">g</span> and <span class="math inline">1_E</span> agree on <span class="math inline">N</span> and have the same target, so by pinning, <span class="math inline">R(g\cdot x,\bar n)</span> and <span class="math inline">X(g\cdot x)</span> hold at <span class="math inline">1_E</span>.</li>
 </ul>
 <p><span class="math inline">R</span> is injective on the instances of <span class="math inline">X</span> at <span class="math inline">1_E</span>, so <span class="math inline">g\cdot x=x</span>.</p>
@@ -554,7 +559,7 @@ X:=\lambda F^{et}\, .\,\exists x\, .\,Dx\land F=\lambda y\, .\,y=x
 <ul>
 <li>The group’s shared arguments give the failure of Relational Choice (transposable) and the Axiom of Infinity at <span class="math inline">e</span>.</li>
 <li>The topic’s general arguments for finitely many propositions give the failure of the Infinity schema, the Axiom of Infinity and Possible Infinity at <span class="math inline">t</span>.</li>
-<li>The map derives the rest, including the failure of No Pure Contingency (ND holds at <span class="math inline">t</span> and □ND at <span class="math inline">t</span> fails) and of the Distinctness-preserving collapse (Actuality holds and Inextensible Comprehension fails).</li>
+<li>The map derives the rest, including the failure of No Pure Contingency (ND holds at <span class="math inline">t</span> and □ND at <span class="math inline">t</span> fails) and of Truths are ND-necessary (Actuality holds and Inextensible Comprehension fails).</li>
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>

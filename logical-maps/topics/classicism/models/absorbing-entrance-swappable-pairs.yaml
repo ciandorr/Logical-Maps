@@ -23,6 +23,13 @@ meets:
   sigma-top: Every constant of Σ is relational and denotes the top element of its type, which is fixed by
     every swap.
   infinitely-many-individuals: The individuals are the countably many $A_n^i$.
+  infinitely-many-individuals-everywhere: The individuals at both $r$ and $s$ are the countably many $A_n^i$.
+  finite-extension-properties-everywhere: >-
+    At $r$ and at $s$ the domain holds every finitely supported intension. The haecceity of an
+    individual $A_n^i$ is supported by $\{n\}$, and that of a proposition by the proposition's support, so
+    identity is literal. The intension holding at each arrow, into $U$, of exactly the entities of type
+    $\sigma t$ at $U$ whose extension at $1_U$ is finite is fixed by every swap, swaps preserving
+    finiteness, so it is supported by $\varnothing$ and admitted.
 definition: >-
   Two objects $r$ and $s$, with one arrow $a:r\to s$, the integers as the arrows $s\to s$ (composed by
   addition), none from $s$ to $r$, and $k\circ a=a$ for every integer $k$; so only $1_r$ and $a$ leave $r$.
@@ -87,7 +94,7 @@ arguments:
     containing $k\cdot Y_1$, by weak persistence, and contained in it, by weak inextensibility tested
     against that haecceity disjunction; so it is rigid.
 - id: truth-implies-nd-necessity
-  holds: [distinctness-preserving-collapse]
+  holds: [truths-are-nd-necessary]
   fails: [necessary-truth-implies-five-necessity]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr

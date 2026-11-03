@@ -1,6 +1,6 @@
 # Atomlessness ⇒ Infinity Schema (type t)
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, suggestion of 19 September 2026; recorded by Claude Opus 5 (Anthropic), prompted by Cian Dorr, 19 September 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.atomlessness_implies_infinity_t`; produced by Cian Dorr, suggestion of 19 September 2026; recorded by Claude Opus 5 (Anthropic), prompted by Cian Dorr, 19 September 2026.</p>
 
 ## Premises
 

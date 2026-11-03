@@ -1,6 +1,6 @@
 # □Atomicity ∧ □Atoms are strong atoms ⇒ □Strong Atomicity
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.necessary_atomicity_r_and_necessary_atoms_are_strong_atoms_r_imply_necessary_strong_atomicity_r`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

@@ -7,7 +7,7 @@ certificate:
   recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
   checked_by: []
   date: '2026-10-29'
-  lean: stated
+  lean: none
 sources:
 - Cian Dorr, construction of 19 October 2026 (coalesced-pinned-substitutions-root), with Claude Opus 5.5
   (Anthropic); the choice of component here by Claude Opus 5.5 (Anthropic), 29 October 2026.
@@ -36,6 +36,33 @@ settings:
       As in coalesced-pinned-substitutions-root, intensions over the arrows out of $W_0$ pinned down by a
       finite set of constants of $\Sigma^+$, whose transports along the arrows into $V$ land in its domains.
 meets:
+  infinitely-many-individuals-everywhere: >-
+    The individuals are the infinitely many individual constants at $W_0$ and the natural numbers at
+    $V$.
+  finite-extension-properties-everywhere: >-
+    By codomain-intensions, as for that condition: at $W_0$ and at $V$ the intensions depending only
+    on the arrow's codomain are in the domain, giving any extension at the identity arrow, among
+    them the singletons, so identity is literal.
+  pinned-substitution-root: The root, its domains and the interpretation of Σ are as in
+    coalesced-pinned-substitutions-root; only the components differ.
+  extensionally-full: >-
+    The objects are $W_0$ and $V$. The root is extensionally full at its identity: any set of tuples there is the extension of the entity
+    with that value at every map of the constants and $\bot$ at every arrow into the component, pinned down by
+    $\emptyset$ and landing. $V$ is extensionally full, as recorded for finite-support-truncations.
+  codomain-intensions: >-
+    An intension at $W_0$ with value $E$ at every map and $E^{\prime}$ at every arrow into $V$ is pinned
+    down by $\emptyset$, and its transport along each $\langle V,I\rangle$ is the constant intension
+    $k\mapsto E^{\prime}$, which is in $V$'s domain, $V$ meeting the condition as recorded for finite-support-truncations; so
+    it lands and is in the domain at $W_0$, whose domains are as full as pinning and landing allow.
+  infinitely-many-individuals: The individuals at $W_0$ are the infinitely many individual constants of $\Sigma^+$.
+  finite-types-stay-finite: Every type has infinitely many entities at both objects.
+  infinitely-many-propositions-everywhere: >-
+    At $W_0$ the propositions $\hat c$ for the propositional constants $c$ are pairwise distinct, each true
+    at an arrow sending $c$ to $\top$ and the others to $\bot$; $V$ has infinitely many propositions, as
+    recorded for finite-support-truncations.
+  root-only-sentence: >-
+    Atomlessness is true at $W_0$ (argument atomlessness) and false at $V$, where the singletons
+    $\{g_n\}$ are atoms.
   no-actuality-anywhere: >-
     The objects reachable from $W_0$ are $W_0$ and $V$. Actuality fails at $V$, as recorded for
     finite-support-truncations, and at $W_0$, where Atomlessness holds (argument atomlessness), there being
@@ -54,6 +81,25 @@ arguments:
     Atomlessness holds at $W_0$ by the argument atomlessness of coalesced-pinned-substitutions-root, which
     needs of the component only that $\top\ne\bot$ there. It fails at $V$, where Atomicity (type t) holds,
     the singletons $\{g_n\}$ being atoms, and $V$ is reachable; so $\Box$Atomlessness fails.
+- id: boxed-through-v
+  holds:
+  - necessary-two-hat-implies-nd-necessity
+  fails:
+  - necessary-barcan-t
+  - necessary-atoms-are-strong-atoms-t
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    These principles are closed pure sentences, one for each type, and a closed sentence holds at an
+    arrow out of $W_0$ iff it holds at the identity of the arrow's target, $W_0$ for the maps of the
+    constants and $V$ for the others; $V$ sees only itself. So each necessitation holds at $W_0$ iff the
+    principle holds at $W_0$ and at $V$, where it has its verdict in finite-support-truncations. The
+    conditional from two-hat to ND-necessity holds at $W_0$ by the group's argument substitution-root
+    and at $V$ as recorded there. BF (type t) and Atoms are strong atoms (type t) fail at $V$, as
+    recorded there, so their necessitations fail at $W_0$; the map derives the failure of the other
+    boxed principles that fail at $V$. With BF (type t) at $W_0$, the recorded result
+    that Tame Rigidity and BF (type t) give $\Box$BF (type t) makes Tame Rigidity fail at the root.
 notes: 'Proposed on 29 October 2026 in a trawl for the open questions created by □Atomlessness, to show that
   Atomlessness with the bridge principles for self-atoms, boxed or not, does not give □Atomlessness: with no
   Actuality anywhere there are no self-atoms, by the argument no-actuality-no-self-atoms. Checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr; it inherits the model-of-C argument of

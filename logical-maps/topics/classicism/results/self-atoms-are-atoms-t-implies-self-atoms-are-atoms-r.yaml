@@ -1,0 +1,27 @@
+id: self-atoms-are-atoms-t-implies-self-atoms-are-atoms-r
+premises:
+- self-atoms-are-atoms-t
+conclusion: self-atoms-are-atoms-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026, in a survey of the type-t
+    principles after Cian Dorr's argument for Atomicity
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: verified
+  lean_ref: Classicism.Map.self_atoms_are_atoms_t_implies_self_atoms_are_atoms_r
+sources:
+- Claude Opus 5.5 (Anthropic), survey of 30 October 2026 requested by Cian Dorr (session transcript).
+source_names:
+- Opus 30 Oct
+proof: >-
+  Let $X^{\bar\sigma t}$ be a self-atom and $w:=\exists\bar x\, .\,X\bar x$. By [[atom-instance-proposition]],
+  $w$ is a self-atom, so by the type-$t$ principle an atom; and $X\ne\bot$. Let $Z\le X$. Then $\exists\bar
+  x\, .\,Z\bar x\le w$, so it is $w$ or $\bot$. If $\bot$, $Z=\bot$ by Intensionality. Otherwise $\Box(w\to\exists\bar
+  x\, .\,Z\bar x)$. Necessarily, if $X\bar a$, then $X$ is an atom (being a self-atom), $Z\le X$ (an identity,
+  so necessary), and $Z$ is instantiated, hence non-bottom; so $Z=X$ and $Z\bar a$. Hence $X\le Z$, and $Z=X$.
+notes: >-
+  No choice is needed: a self-atom is an atom wherever it is instantiated, and that already forces its instances
+  there to be unique, which is what Intensional Choice supplies for atoms in [[atoms-are-self-atoms-t-and-intensional-choice-imply-atoms-are-self-atoms-r]].

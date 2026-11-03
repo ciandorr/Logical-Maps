@@ -1,6 +1,6 @@
 # Self-Atomicity (type t) ⇒ Atoms are self-atoms (type t)
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.self_atomicity_t_implies_atoms_are_self_atoms_t`; produced by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

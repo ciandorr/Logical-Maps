@@ -1,0 +1,397 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Transversal in the supported model over the ultrafilters of a complete homogeneous algebra</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* A prismatic name: one rainbow wheel around a point in the word, spinning;
+   --prism-x and --prism-y move that point off the middle.
+   Pure spectral stops, turned by a registered angle rather than a hue
+   filter, which would muddy them. */
+@property --prism { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.prismatic { font-weight: 600; color: transparent; background: conic-gradient(from var(--prism) at var(--prism-x, 50%) var(--prism-y, 50%), #ff1a1a, #ff8a00, #ffd000, #22c33a, #00a8f0, #3d4bff, #b026ff, #ff1a1a); -webkit-background-clip: text; background-clip: text; animation: prism-spin 6s linear infinite; }
+/* As a link it keeps the gradient on hover, under an accent underline. */
+a.prismatic, a.prismatic:hover { color: transparent; }
+a.prismatic:hover { text-decoration-color: var(--accent); }
+@keyframes prism-spin { to { --prism: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .prismatic { animation: none; } }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Teal-grey, muted rust, deep teal and warm stone. Screen-only overrides
+   preserve print styling. */
+@media screen {
+  :root {
+    --bg: #ebf1f1;
+    --panel: #e1eae9;
+    --panel-2: #d0dfde;
+    --line: #c0cecd;
+    --line-strong: #849997;
+    --ink: #303b3a;
+    --ink-2: #4a5a59;
+    --ink-3: #526160;
+    --accent: #884932;
+    --link-hover: #6f3827;
+    --derived: #6f8180;
+    --open: #d6e2e1;
+    --open-ink: #526160;
+    --node-fill: #f1f6f6;
+    --node-stroke: #7f9391;
+    --junction: #596b6a;
+    --human: #2f6b66;
+    --source-forest: #2f6b66;
+    --hl: #e6ddd0;
+    --focus: #884932;
+    --shadow: 0 4px 24px rgb(48 59 58 / 10%);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #171e1d;
+    --panel: #202a29;
+    --panel-2: #2b3736;
+    --line: #3d4b4a;
+    --line-strong: #6b817f;
+    --ink: #dbe8e7;
+    --ink-2: #b9cbca;
+    --ink-3: #a6bdbb;
+    --accent: #e2ad92;
+    --link-hover: #f0c3aa;
+    --derived: #87a09e;
+    --open: #303d3c;
+    --open-ink: #aec6c4;
+    --node-fill: #263130;
+    --node-stroke: #738d8b;
+    --junction: #b3cbc9;
+    --human: #86c0b6;
+    --source-forest: #86c0b6;
+    --hl: #463f37;
+    --focus: #e2ad92;
+    --badge-ink: #171e1a;
+    --shadow: 0 4px 24px rgb(0 0 0 / 24%);
+  }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Transversal in the supported model over the ultrafilters of a complete homogeneous algebra</h1></header><p>The model <span class="math inline">K</span> is supported-boolean-complete-component, the component of <a href="supported-boolean-complete-predecessor.md">the supported Boolean-complete model</a> without its root. Transversal holds in <span class="math inline">K</span> at every type and at every world, with a single witness <span class="math inline">\Phi</span> invariant under every automorphism. So □Transversal holds too.</p>
+<p>The argument is due to Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, on 29 October 2026. Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, checked it and adapted this text on 30 October 2026. No independent checker or Lean verification is recorded.</p>
+<p>In <span class="math inline">K</span>, Intensional Choice holds by compactness and Relational Choice fails. So Transversal Choice, which is Transversal together with Relational Choice, fails here although Transversal holds. The model does not separate Intensional Choice from Transversal; the last section says why.</p>
+<p>Throughout, the cells of a finite subalgebra <span class="math inline">A</span> are its atoms, and <span class="math inline">H_A</span> is the group of automorphisms of <span class="math inline">B</span> fixing <span class="math inline">A</span> pointwise. Lemmas 1 and 2 are those of the model’s write-up: the elements fixed by <span class="math inline">H_P</span> are the joins of cells, and joins of <span class="math inline">H_P</span>-invariant families are finitely attained.</p>
+<h2 id="setting-and-coextension-as-sharing-a-germ">Setting, and coextension as sharing a germ</h2>
+<p><span class="math inline">B=\mathrm{RO}(2^\omega)</span>: complete, atomless, homogeneous (every <span class="math inline">[0,b]</span>, <span class="math inline">b\neq0</span>, is isomorphic to <span class="math inline">B</span>). <span class="math inline">G=\operatorname{Aut}(B)</span>. For a finite subalgebra <span class="math inline">A</span> (I always pass from a finite set <span class="math inline">P</span> to the subalgebra <span class="math inline">\langle P\rangle</span> it generates, since <span class="math inline">H_P=H_{\langle P\rangle}</span>), <span class="math inline">H_A</span> is the pointwise stabiliser; if <span class="math inline">A</span> has cells (atoms) <span class="math inline">c_1,\dots,c_m</span> then <span class="math inline">H_A=\prod_i\operatorname{Aut}([0,c_i])</span>, and each <span class="math inline">\operatorname{Aut}([0,c_i])</span> is transitive on the proper elements <span class="math inline">0&lt;a&lt;c_i</span> (homogeneity: <span class="math inline">[0,a]\cong[0,c_i-a]\cong B</span>).</p>
+<p>Worlds: ultrafilters <span class="math inline">U</span> of <span class="math inline">B</span>; all are nonprincipal since <span class="math inline">B</span> is atomless, so every <span class="math inline">b\in U</span> has some <span class="math inline">b&#39;\in U</span> with <span class="math inline">b&#39;&lt;b</span>. The component is S5 with one individual, so an entity of type <span class="math inline">\sigma t</span> is a function <span class="math inline">x:D_\sigma\to B</span> (its fibre map: <span class="math inline">Xz</span> is true at <span class="math inline">U</span> iff <span class="math inline">x(z)\in U</span>), where <span class="math inline">D_\sigma</span> is the domain of type <span class="math inline">\sigma</span>, a <span class="math inline">G</span>-set. <span class="math inline">G</span> acts by <span class="math inline">(g\cdot x)(z)=g\,x(g^{-1}z)</span>. Admissible: <span class="math inline">x</span> is <span class="math inline">H_A</span>-equivariant for some finite <span class="math inline">A</span> (“<span class="math inline">A</span>-supported”), i.e. <span class="math inline">x(gz)=g\,x(z)</span> for <span class="math inline">g\in H_A</span>. Fibres are automatically in <span class="math inline">B</span> in this presentation. I write <span class="math inline">x\wedge b</span> for the function <span class="math inline">z\mapsto x(z)\wedge b</span> (the <em>restriction of <span class="math inline">x</span> to <span class="math inline">b</span></em>); note <span class="math inline">g\cdot(x\wedge b)=(g\cdot x)\wedge gb</span>, and <span class="math inline">x\wedge b</span> is <span class="math inline">\langle A,b\rangle</span>-supported when <span class="math inline">x</span> is <span class="math inline">A</span>-supported.</p>
+<p><strong>Lemma 0 (coextension = germ equality).</strong> Let <span class="math inline">X,Y</span> be of type <span class="math inline">\sigma t</span> with fibre maps <span class="math inline">x,y</span>. Then <span class="math inline">X\equiv Y</span> (i.e. <span class="math inline">\forall z^\sigma(Xz\leftrightarrow Yz)</span>) is true at <span class="math inline">U</span> iff there is <span class="math inline">b\in U</span> with <span class="math inline">x\wedge b=y\wedge b</span>.</p>
+<p><em>Proof.</em> The fibre of <span class="math inline">Xz\leftrightarrow Yz</span> is <span class="math inline">e_z:=\neg(x(z)\triangle y(z))</span>. If <span class="math inline">A</span> supports both <span class="math inline">x</span> and <span class="math inline">y</span>, the family <span class="math inline">\{e_z\}_z</span> is <span class="math inline">H_A</span>-invariant, so by Lemma 2 <span class="math inline">m:=\bigwedge_z e_z</span> is a finite meet and the fibre of <span class="math inline">\forall z(Xz\leftrightarrow Yz)</span> is <span class="math inline">\hat m</span>. Now <span class="math inline">m\in U</span> gives <span class="math inline">b:=m</span> (<span class="math inline">x(z)\wedge m=y(z)\wedge m</span> for all <span class="math inline">z</span>), and conversely <span class="math inline">x\wedge b=y\wedge b</span> gives <span class="math inline">b\le e_z</span> for all <span class="math inline">z</span>, so <span class="math inline">b\le m\in U</span>. <span class="math inline">\square</span></p>
+<p>Call the equivalence class of <span class="math inline">x</span> under “<span class="math inline">\exists b\in U:\ x\wedge b=y\wedge b</span>” the <strong>germ</strong> of <span class="math inline">x</span> at <span class="math inline">U</span>, <span class="math inline">[x]_U</span>. Transversal at <span class="math inline">\sigma</span>, evaluated at <span class="math inline">U_0</span>, asks for an admissible <span class="math inline">\Phi:D_{\sigma t}\to B</span> such that every germ at <span class="math inline">U_0</span> contains exactly one <span class="math inline">y</span> with <span class="math inline">\Phi(y)\in U_0</span>. (Identity is genuine identity of functions.)</p>
+<h2 id="lemma-a-supports-intersect">Lemma A: supports intersect</h2>
+<p><strong>Lemma A.</strong> For finite subalgebras <span class="math inline">A_1,A_2</span> of <span class="math inline">B</span>: <span class="math inline">\langle H_{A_1},H_{A_2}\rangle=H_{A_1\cap A_2}</span>. Consequently an entity (of any type) supported by <span class="math inline">A_1</span> and by <span class="math inline">A_2</span> is supported by <span class="math inline">A_1\cap A_2</span>, and every supported entity has a <strong>least support</strong>, the intersection of all its supports (a descending chain of finite subalgebras is finite).</p>
+<p>The inclusion <span class="math inline">\subseteq</span> is trivial. For <span class="math inline">\supseteq</span>, write <span class="math inline">K:=\langle H_{A_1},H_{A_2}\rangle</span>. Two general remarks: (R1) <span class="math inline">K</span> is closed under conjugation by its own elements, so if <span class="math inline">a&#39;=k\,a</span> with <span class="math inline">k\in K</span> and <span class="math inline">H_a\subseteq K</span> then <span class="math inline">H_{a&#39;}=kH_ak^{-1}\subseteq K</span>. (R2) If <span class="math inline">K</span> acts transitively on the proper elements of <span class="math inline">B</span> and contains <span class="math inline">H_a</span> for one proper <span class="math inline">a</span>, then <span class="math inline">K=G</span>: for <span class="math inline">g\in G</span> pick <span class="math inline">k\in K</span> with <span class="math inline">k(ga)=a</span>; then <span class="math inline">kg\in H_a\subseteq K</span>.</p>
+<p><em>Step 1: two elements.</em> Let <span class="math inline">a,b</span> be proper with <span class="math inline">\langle a\rangle\cap\langle b\rangle=\{0,1\}</span>, i.e. <span class="math inline">b\notin\{0,a,\neg a,1\}</span>. Then <span class="math inline">\langle H_a,H_b\rangle=G</span>.</p>
+<ul>
+<li><em>Independent case</em> (all four of <span class="math inline">a\wedge b,\ a-b,\ b-a,\ \neg a\wedge\neg b</span> nonzero). <span class="math inline">H_a=\operatorname{Aut}([0,a])\times\operatorname{Aut}([0,\neg a])</span>, so <span class="math inline">H_a\cdot b</span> is the set of all elements independent of <span class="math inline">a</span>. Given any proper <span class="math inline">c</span>, choose <span class="math inline">b&#39;</span> meeting every nonzero cell of <span class="math inline">\langle a,c\rangle</span> properly; <span class="math inline">b&#39;</span> is independent of <span class="math inline">a</span> and of <span class="math inline">c</span>. Then <span class="math inline">b&#39;\in H_a\cdot b</span>, so <span class="math inline">H_{b&#39;}\subseteq K</span> by (R1), and <span class="math inline">H_{b&#39;}\cdot a\ni c</span> since <span class="math inline">a,c</span> are both independent of <span class="math inline">b&#39;</span>. So <span class="math inline">K</span> is transitive on proper elements and <span class="math inline">K=G</span> by (R2).</li>
+<li><em>Nested case</em> <span class="math inline">a&lt;b</span>. <span class="math inline">H_b\cdot a=\{a&#39;:0&lt;a&#39;&lt;b\}</span>; choose such an <span class="math inline">a&#39;</span> incomparable with <span class="math inline">a</span> (a piece of <span class="math inline">a</span> joined with a piece of <span class="math inline">b-a</span>). Then <span class="math inline">H_{a&#39;}\subseteq K</span> and <span class="math inline">H_{a&#39;}\cdot b=\{b&#39;:a&#39;&lt;b&#39;&lt;1\}</span> contains <span class="math inline">b&#39;:=a&#39;\vee(\text{proper piece of }\neg b)</span>, which is independent of <span class="math inline">a</span> (<span class="math inline">b&#39;\wedge a=a&#39;\wedge a</span>, <span class="math inline">b&#39;\wedge\neg a\ge a&#39;\wedge(b-a)</span>, <span class="math inline">a-b&#39;=a-a&#39;</span>, <span class="math inline">\neg a\wedge\neg b&#39;\ge\neg b-\text{piece}</span>, all nonzero). So <span class="math inline">K\supseteq\langle H_a,H_{b&#39;}\rangle=G</span>.</li>
+<li><em>Disjoint case</em> <span class="math inline">a\wedge b=0</span> (then <span class="math inline">a\vee b&lt;1</span>). <span class="math inline">H_b\cdot a=\{a&#39;:0&lt;a&#39;&lt;\neg b\}</span> contains an <span class="math inline">a&#39;</span> independent of <span class="math inline">a</span> (a piece of <span class="math inline">a</span> joined with a piece of <span class="math inline">\neg(a\vee b)</span>), and <span class="math inline">K\supseteq\langle H_a,H_{a&#39;}\rangle=G</span>.</li>
+<li>The remaining patterns (<span class="math inline">b&lt;a</span>; <span class="math inline">a\vee b=1</span>) reduce to these by swapping <span class="math inline">a,b</span> or replacing <span class="math inline">b</span> by <span class="math inline">\neg b</span> (<span class="math inline">H_b=H_{\neg b}</span>).</li>
+</ul>
+<p><em>Step 2: one element against a subalgebra.</em> If <span class="math inline">a\notin A_2</span> then <span class="math inline">\langle H_a,H_{A_2}\rangle=G</span>. Some cell <span class="math inline">d</span> of <span class="math inline">A_2</span> has <span class="math inline">a\wedge d</span> proper in <span class="math inline">d</span>. Choose <span class="math inline">e</span> proper in <span class="math inline">d</span> and independent of <span class="math inline">a\wedge d</span> inside <span class="math inline">[0,d]</span>, and put <span class="math inline">a&#39;:=(a-d)\vee e</span>; then <span class="math inline">a&#39;\in H_{A_2}\cdot a</span> and <span class="math inline">a&#39;\notin\{0,a,\neg a,1\}</span>, so Step 1 gives <span class="math inline">K\supseteq\langle H_a,H_{a&#39;}\rangle=G</span>.</p>
+<p><em>Step 3: reduction to trivial intersection.</em> Let <span class="math inline">C:=A_1\cap A_2</span> with cells <span class="math inline">d_1,\dots,d_r</span>. <span class="math inline">H_C=\prod_i\operatorname{Aut}([0,d_i])</span> and <span class="math inline">H_{A_j}=\prod_i H^{[0,d_i]}_{A_j|d_i}</span> where <span class="math inline">A_j|d_i:=\{a\wedge d_i:a\in A_j\}</span>. If <span class="math inline">e\in A_1|d_i\cap A_2|d_i</span> then <span class="math inline">e\in A_1\cap A_2=C</span> and <span class="math inline">e\le d_i</span>, so <span class="math inline">e\in\{0,d_i\}</span>: the restricted algebras intersect trivially inside the homogeneous algebra <span class="math inline">[0,d_i]\cong B</span>. So it suffices to show: <span class="math inline">A_1\cap A_2=\{0,1\}</span> implies <span class="math inline">K=G</span>.</p>
+<p><em>Step 4: induction on the number of cells of <span class="math inline">A_1</span></em> (with <span class="math inline">A_1\cap A_2</span> trivial). If <span class="math inline">A_1</span> is trivial there is nothing to do; if <span class="math inline">A_1=\langle a\rangle</span>, Step 2 applies. Otherwise I claim two cells <span class="math inline">c,c&#39;</span> of <span class="math inline">A_1</span> are <strong>not separated</strong> by <span class="math inline">A_2</span> (no <span class="math inline">d\in A_2</span> has <span class="math inline">c\le d</span>, <span class="math inline">d\wedge c&#39;=0</span>): if every pair were separated, each cell <span class="math inline">c</span> would equal <span class="math inline">\bigwedge_{c&#39;\ne c}d_{c,c&#39;}\in A_2</span>, so <span class="math inline">A_1\subseteq A_2</span>, so <span class="math inline">A_1=C</span> is trivial. Work inside the homogeneous algebra <span class="math inline">[0,c\vee c&#39;]</span>: <span class="math inline">K</span> contains <span class="math inline">\operatorname{Aut}([0,c])\times\operatorname{Aut}([0,c&#39;])</span> (from <span class="math inline">H_{A_1}</span>), which is the stabiliser of <span class="math inline">c</span> in <span class="math inline">\operatorname{Aut}([0,c\vee c&#39;])</span>, and contains <span class="math inline">H_{A_2}\cap\operatorname{Aut}([0,c\vee c&#39;])</span>, which is the pointwise stabiliser of <span class="math inline">A_2|(c\vee c&#39;)</span> there. Since <span class="math inline">c,c&#39;</span> are not separated, <span class="math inline">c\notin A_2|(c\vee c&#39;)</span>, and Step 2 inside <span class="math inline">[0,c\vee c&#39;]</span> gives <span class="math inline">\operatorname{Aut}([0,c\vee c&#39;])\subseteq K</span>. Together with <span class="math inline">H_{A_1}</span> this generates <span class="math inline">H_{A_1&#39;}</span>, where <span class="math inline">A_1&#39;</span> is <span class="math inline">A_1</span> with <span class="math inline">c,c&#39;</span> merged. <span class="math inline">A_1&#39;\cap A_2\subseteq A_1\cap A_2</span> is trivial and <span class="math inline">A_1&#39;</span> has fewer cells; induct. <span class="math inline">\square</span></p>
+<p>The proof uses only that every nonzero interval of <span class="math inline">B</span> is homogeneous and atomless, so it applies verbatim to the countable atomless algebra with <span class="math inline">G=\operatorname{Homeo}(2^\omega)</span>.</p>
+<h2 id="lemmas-b-and-d-a-boolean-computation-and-propagation">Lemmas B and D: a Boolean computation, and propagation</h2>
+<p><strong>Lemma B.</strong> Let <span class="math inline">A_1,A_2</span> be finite subalgebras, <span class="math inline">C=A_1\cap A_2</span>, <span class="math inline">c</span> a cell of <span class="math inline">\langle A_1\cup A_2\rangle</span>, and <span class="math inline">0&lt;b&lt;c</span>. Then <span class="math inline">\langle A_1,b\rangle\cap\langle A_2,b\rangle=\langle C,b\rangle</span>.</p>
+<p><em>Proof.</em> Let <span class="math inline">c_j</span> be the <span class="math inline">A_j</span>-cell containing <span class="math inline">c</span>. The cells of <span class="math inline">\langle A_j,b\rangle</span> are the <span class="math inline">A_j</span>-cells other than <span class="math inline">c_j</span>, together with <span class="math inline">b</span> and <span class="math inline">c_j-b</span>. Take <span class="math inline">e</span> in the intersection and write <span class="math inline">e=e_j\vee\varepsilon_j</span> with <span class="math inline">e_j</span> a join of <span class="math inline">A_j</span>-cells other than <span class="math inline">c_j</span> and <span class="math inline">\varepsilon_j\in\{0,b,c_j-b,c_j\}</span>. Since <span class="math inline">e\wedge(c-b)=\varepsilon_1\wedge(c-b)=\varepsilon_2\wedge(c-b)</span> and <span class="math inline">c-b\neq0</span>, either both <span class="math inline">\varepsilon_j\in\{0,b\}</span> or both <span class="math inline">\varepsilon_j\in\{c_j-b,c_j\}</span>. In the first case <span class="math inline">e-b=e_1=e_2\in A_1\cap A_2=C</span> and <span class="math inline">e\in\{e-b,(e-b)\vee b\}</span>; in the second <span class="math inline">e\vee b=e_1\vee c_1=e_2\vee c_2\in C</span> and <span class="math inline">e\in\{e\vee b,(e\vee b)-b\}</span>. Either way <span class="math inline">e\in\langle C,b\rangle</span>; the converse inclusion is clear. <span class="math inline">\square</span></p>
+<p><strong>Lemma B′.</strong> With <span class="math inline">C\subseteq A_1</span>, <span class="math inline">d</span> a <span class="math inline">C</span>-cell, <span class="math inline">c_1\le d</span> an <span class="math inline">A_1</span>-cell, and <span class="math inline">0&lt;b&#39;&lt;b&lt;c_1</span>: <span class="math inline">\langle A_1,b&#39;\rangle\cap\langle C,b,b&#39;\rangle=\langle C,b&#39;\rangle</span>.</p>
+<p><em>Proof.</em> Inside <span class="math inline">d</span> the cells of <span class="math inline">\langle C,b,b&#39;\rangle</span> are <span class="math inline">b&#39;,\ b-b&#39;,\ d-b</span> and those of <span class="math inline">\langle A_1,b&#39;\rangle</span> are <span class="math inline">b&#39;,\ c_1-b&#39;</span> and the <span class="math inline">A_1</span>-cells in <span class="math inline">d</span> other than <span class="math inline">c_1</span>. An element <span class="math inline">e</span> of both satisfies <span class="math inline">e\wedge(c_1-b&#39;)\in\{0,c_1-b&#39;\}</span>, while <span class="math inline">c_1-b&#39;=(b-b&#39;)\vee(c_1-b)</span> with both parts nonzero and <span class="math inline">c_1-b\le d-b</span>; so <span class="math inline">e\wedge d</span> contains both of <span class="math inline">b-b&#39;,\ d-b</span> or neither, i.e. <span class="math inline">e\wedge d\in\{0,b&#39;,d-b&#39;,d\}</span>. Outside <span class="math inline">d</span>, <span class="math inline">e</span> is in <span class="math inline">A_1\cap C=C</span>. <span class="math inline">\square</span></p>
+<p><strong>Lemma D (propagation).</strong> Let <span class="math inline">x,y:D\to B</span> be <span class="math inline">A</span>-supported, <span class="math inline">c</span> an <span class="math inline">A</span>-cell, and <span class="math inline">0&lt;b\le c</span> with <span class="math inline">x\wedge b=y\wedge b</span>. Then <span class="math inline">x\wedge c=y\wedge c</span>.</p>
+<p><em>Proof.</em> If <span class="math inline">b=c</span> there is nothing to show. Otherwise, as in Lemma 1, pick <span class="math inline">u\in\operatorname{Aut}([0,c])\subseteq H_A</span> exchanging <span class="math inline">[0,b]</span> and <span class="math inline">[0,c-b]</span> (both <span class="math inline">\cong B</span>), extended by the identity. Then <span class="math inline">u\cdot x=x</span>, <span class="math inline">u\cdot y=y</span>, and <span class="math inline">x\wedge(c-b)=u\cdot(x\wedge b)=u\cdot(y\wedge b)=y\wedge(c-b)</span>. Join with <span class="math inline">x\wedge b=y\wedge b</span>. <span class="math inline">\square</span></p>
+<p>Lemma D is the rigidity that will make canonical representatives unique.</p>
+<h2 id="lemma-c-germs-have-least-supports">Lemma C: germs have least supports</h2>
+<p><strong>Lemma C.</strong> Fix a world <span class="math inline">U</span> and a type <span class="math inline">\sigma t</span>. If a germ at <span class="math inline">U</span> has a representative <span class="math inline">y_1</span> supported by <span class="math inline">A_1</span> and a representative <span class="math inline">y_2</span> supported by <span class="math inline">A_2</span>, then it has a representative <span class="math inline">y_3</span> supported by <span class="math inline">C:=A_1\cap A_2</span>. Hence every germ <span class="math inline">\gamma</span> at <span class="math inline">U</span> has a least support <span class="math inline">A_\gamma</span>, the intersection of the supports of all its representatives.</p>
+<p><em>Proof.</em> Let <span class="math inline">c</span> be the cell of <span class="math inline">\langle A_1\cup A_2\rangle</span> in <span class="math inline">U</span>, and <span class="math inline">c_1\supseteq c</span> the <span class="math inline">A_1</span>-cell, <span class="math inline">d\supseteq c_1</span> the <span class="math inline">C</span>-cell in <span class="math inline">U</span>. By Lemma 0, <span class="math inline">y_1</span> and <span class="math inline">y_2</span> agree on some member of <span class="math inline">U</span>; shrinking it (nonprincipality) we get <span class="math inline">0&lt;b&lt;c</span>, <span class="math inline">b\in U</span>, with <span class="math inline">s:=y_1\wedge b=y_2\wedge b</span>.</p>
+<ol type="a">
+<li><p><span class="math inline">s</span> is supported by <span class="math inline">\langle A_1,b\rangle</span> and by <span class="math inline">\langle A_2,b\rangle</span>, hence (Lemmas A, B) by <span class="math inline">\langle C,b\rangle</span>: <span class="math inline">s</span> is <span class="math inline">K_b</span>-equivariant, where <span class="math inline">K:=H_C</span> and <span class="math inline">K_b</span> is the stabiliser of <span class="math inline">b</span> in <span class="math inline">K</span> (which is <span class="math inline">H_{\langle C,b\rangle}</span>).</p></li>
+<li><p>For every <span class="math inline">0&lt;b&#39;\le b</span>, <span class="math inline">s\wedge b&#39;</span> is <span class="math inline">K_{b&#39;}</span>-equivariant. For <span class="math inline">b&#39;=b</span> this is (a). For <span class="math inline">b&#39;&lt;b</span>: <span class="math inline">s\wedge b&#39;=y_1\wedge b&#39;</span> is supported by <span class="math inline">\langle A_1,b&#39;\rangle</span>, and <span class="math inline">s\wedge b&#39;</span> is supported by <span class="math inline">\langle C,b,b&#39;\rangle</span> (since <span class="math inline">s</span> is <span class="math inline">\langle C,b\rangle</span>-supported); by Lemmas A and B′ it is supported by <span class="math inline">\langle C,b&#39;\rangle</span>.</p></li>
+<li><p>Define <span class="math inline">y_3:=\bigvee_{g\in K}g\cdot s</span>, i.e. <span class="math inline">y_3(z)=\bigvee_{g\in K}g\,s(g^{-1}z)</span> (joins in the complete algebra <span class="math inline">B</span>). This is <span class="math inline">K</span>-equivariant, so <span class="math inline">C</span>-supported, and admissible. I claim <span class="math inline">y_3\wedge b=s</span>. The <span class="math inline">g=1</span> term gives <span class="math inline">y_3\wedge b\ge s</span>. For the other terms fix <span class="math inline">g\in K</span> and put <span class="math inline">e:=gb\wedge b</span>; if <span class="math inline">e=0</span> the term contributes nothing to <span class="math inline">y_3\wedge b</span>. Otherwise put <span class="math inline">b&#39;:=g^{-1}e=b\wedge g^{-1}b</span>, so <span class="math inline">0&lt;b&#39;\le b</span> and <span class="math inline">gb&#39;=e</span>. Then <span class="math display">(g\cdot s)\wedge b=g\cdot(s\wedge g^{-1}b)=g\cdot(s\wedge b&#39;).</span> Both <span class="math inline">b&#39;</span> and <span class="math inline">e</span> are nonzero proper elements of <span class="math inline">[0,c_1]</span> (they lie below <span class="math inline">b&lt;c_1</span>), so there is <span class="math inline">h\in\operatorname{Aut}([0,c_1])\subseteq H_{A_1}\subseteq K</span> with <span class="math inline">hb&#39;=e</span>. Then <span class="math inline">h^{-1}g\in K_{b&#39;}</span>, and by (b) <span class="math inline">h^{-1}g\cdot(s\wedge b&#39;)=s\wedge b&#39;</span>, so <span class="math display">g\cdot(s\wedge b&#39;)=h\cdot(s\wedge b&#39;)=h\cdot(y_1\wedge b&#39;)=(h\cdot y_1)\wedge hb&#39;=y_1\wedge e=s\wedge e\le s,</span> using <span class="math inline">h\in H_{A_1}</span> and <span class="math inline">e\le b</span>. So every term of <span class="math inline">y_3\wedge b</span> lies below <span class="math inline">s</span>, and <span class="math inline">y_3\wedge b=s</span>.</p></li>
+</ol>
+<p>Thus <span class="math inline">y_3</span> is a <span class="math inline">C</span>-supported representative of the germ. The least support exists because the supports of representatives are finite subalgebras closed under intersection. <span class="math inline">\square</span></p>
+<p>So a germ cannot have two incomparable minimal supports. Note the two ingredients: Lemma A (group generation) to see that the <em>local</em> data <span class="math inline">s\wedge b&#39;</span> is as symmetric as it could be, and the single transitivity fact “<span class="math inline">\operatorname{Aut}([0,c_1])</span> moves any proper <span class="math inline">b&#39;</span> to any proper <span class="math inline">e</span>” to compare <span class="math inline">g</span>-translates with <span class="math inline">H_{A_1}</span>-translates.</p>
+<h2 id="the-witness-and-transversal-at-every-type">The witness, and Transversal at every type</h2>
+<p>Fix a type <span class="math inline">\sigma</span> (any type: <span class="math inline">e</span>, or a relational type; <span class="math inline">D_\sigma</span> is just some <span class="math inline">G</span>-set and nothing about it is used). For a germ <span class="math inline">\gamma</span> at a world <span class="math inline">U</span>:</p>
+<ul>
+<li><span class="math inline">A_\gamma</span> is its least support (Lemma C), <span class="math inline">c_\gamma</span> the <span class="math inline">A_\gamma</span>-cell containing <span class="math inline">U</span>.</li>
+<li>By Lemma D, all <span class="math inline">A_\gamma</span>-supported representatives of <span class="math inline">\gamma</span> have the same restriction to <span class="math inline">c_\gamma</span> (any two agree on some <span class="math inline">b\in U</span>, which may be taken <span class="math inline">\le c_\gamma</span>).</li>
+<li>The <strong>canonical representative</strong> <span class="math inline">y_\gamma</span> is that restriction on <span class="math inline">c_\gamma</span>, and <span class="math inline">0</span> on the other <span class="math inline">A_\gamma</span>-cells: <span class="math inline">y_\gamma:=y\wedge c_\gamma</span> for any <span class="math inline">A_\gamma</span>-supported representative <span class="math inline">y</span>. It is <span class="math inline">A_\gamma</span>-supported (<span class="math inline">c_\gamma\in A_\gamma</span>), and it is a representative of <span class="math inline">\gamma</span> (it agrees with <span class="math inline">y</span> on <span class="math inline">c_\gamma\in U</span>).</li>
+</ul>
+<p><strong>Definition of <span class="math inline">\Phi</span>.</strong> <span class="math inline">\Phi</span> has type <span class="math inline">(\sigma t)t</span> with fibre map <span class="math inline">\varphi(y):=\{U:\ y=y_{[y]_U}\}</span>: “<span class="math inline">Y</span> is the canonical representative of its own germ at the current world”.</p>
+<p><strong><span class="math inline">\Phi</span> is <span class="math inline">G</span>-invariant.</strong> For <span class="math inline">g\in G</span>, <span class="math inline">g</span> carries germs at <span class="math inline">U</span> to germs at <span class="math inline">gU</span>, supports to supports (so least supports to least supports), cells to cells, and <span class="math inline">g\cdot(y\wedge c)=(g\cdot y)\wedge gc</span>; so <span class="math inline">g\cdot y_\gamma=y_{g\gamma}</span> and <span class="math inline">\varphi(g\cdot y)=g\,\varphi(y)</span>. Thus <span class="math inline">\Phi</span> has empty support.</p>
+<p><strong><span class="math inline">\Phi</span>’s fibres are in <span class="math inline">B</span>.</strong> Let <span class="math inline">y</span> have least support <span class="math inline">A_y</span> (Lemma A) with cells <span class="math inline">c_1,\dots,c_m</span>, and let <span class="math inline">U\in\hat c_k</span>, <span class="math inline">\gamma=[y]_U</span>. Then <span class="math inline">A_\gamma\subseteq A_y</span> (Lemma C applied to the representatives <span class="math inline">y</span> and one of least support). For a subalgebra <span class="math inline">A&#39;\subseteq A_y</span>: <span class="math inline">\gamma</span> has an <span class="math inline">A&#39;</span>-supported representative iff some <span class="math inline">A&#39;</span>-supported <span class="math inline">y&#39;</span> has <span class="math inline">y&#39;\wedge c_k=y\wedge c_k</span>. (If <span class="math inline">y&#39;</span> represents <span class="math inline">\gamma</span> it agrees with <span class="math inline">y</span> on some nonzero <span class="math inline">b\le c_k</span>; both are <span class="math inline">A_y</span>-supported, so by Lemma D they agree on <span class="math inline">c_k</span>. The converse is immediate as <span class="math inline">c_k\in U</span>.) This condition does not mention <span class="math inline">U</span>, only <span class="math inline">k</span>; so <span class="math inline">A_\gamma=:A_k</span> depends only on <span class="math inline">k</span>. Now <span class="math display">y=y_\gamma\iff A_\gamma=A_y\ \text{ and }\ y\wedge c_j=0\text{ for all }j\ne k,</span> since <span class="math inline">y=y_\gamma</span> forces <span class="math inline">A_y\subseteq A_\gamma</span> and vanishing off <span class="math inline">c_\gamma=c_k</span>, while conversely if <span class="math inline">A_\gamma=A_y</span> then <span class="math inline">y</span> is an <span class="math inline">A_\gamma</span>-supported representative and <span class="math inline">y\wedge c_k=y_\gamma\wedge c_k</span>, both vanishing elsewhere. Both conditions depend on <span class="math inline">k</span> alone, so <span class="math display">\varphi(y)=\bigvee\{c_k:\ A_k=A_y\text{ and }y\wedge c_j=0\ (j\ne k)\}\in A_y\subseteq B.</span></p>
+<p><strong>Correctness.</strong> At any world <span class="math inline">U</span> and for any <span class="math inline">X</span> of type <span class="math inline">\sigma t</span> with fibre map <span class="math inline">x</span>, let <span class="math inline">\gamma=[x]_U</span> and <span class="math inline">Y:=y_\gamma</span>. Then <span class="math inline">X\equiv Y</span> at <span class="math inline">U</span> (Lemma 0, <span class="math inline">Y</span> represents <span class="math inline">\gamma</span>), and <span class="math inline">\Phi Y</span> at <span class="math inline">U</span> since <span class="math inline">[y_\gamma]_U=\gamma</span>. If <span class="math inline">\Phi Y&#39;</span> and <span class="math inline">X\equiv Y&#39;</span> at <span class="math inline">U</span> then <span class="math inline">[Y&#39;]_U=\gamma</span> and <span class="math inline">Y&#39;=y_\gamma=Y</span>. So <span class="math display">\forall X\,\exists Y\,(\Phi Y\wedge X\equiv Y\wedge\forall Y&#39;(\Phi Y&#39;\wedge X\equiv Y&#39;\to Y&#39;=Y))</span> is true at every world. <strong>Transversal holds at <span class="math inline">\sigma</span>, for every type <span class="math inline">\sigma</span>, at every world of <span class="math inline">K</span>, and so does □Transversal.</strong> The polyadic variant follows by the recorded coding, or directly (the argument never used anything about <span class="math inline">D_\sigma</span>, so it applies to tuples).</p>
+<p>Remarks.</p>
+<ul>
+<li>Since RC fails, Transversal Choice (<span class="math inline">=</span> Transversal <span class="math inline">+</span> RC) fails in <span class="math inline">K</span>; <span class="math inline">K</span> therefore separates Transversal from Transversal Choice and from RC (the map already has Transversal <span class="math inline">\not\Rightarrow</span> RC via Actuality-type models, but here with □BF, □BC<span class="math inline">_t</span>, □IntCh).</li>
+<li>The witness is unique only up to the convention “<span class="math inline">0</span> off the cell”; any <span class="math inline">G</span>-invariant rule for extending the determined restriction would do. What is forced is the germ’s least support and its restriction to the cell.</li>
+</ul>
+<h2 id="what-makes-it-work">What makes it work</h2>
+<p>The proof isolates two properties of the action of <span class="math inline">G</span> on the finite subalgebras of <span class="math inline">B</span> (its “support points”):</p>
+<ol type="1">
+<li><strong>Canonical supports</strong> (Lemma A): <span class="math inline">\langle H_{A_1},H_{A_2}\rangle=H_{A_1\cap A_2}</span>. In model-theoretic language this is weak elimination of imaginaries for the relevant imaginaries: every invariant object has a least finite support, and the same holds for germs after the local step (c) of Lemma C.</li>
+<li><strong>Propagation / rigidity within a cell</strong> (Lemma D): an <span class="math inline">A</span>-supported object is determined on an <span class="math inline">A</span>-cell <span class="math inline">c</span> by its restriction to any nonzero <span class="math inline">b\le c</span>, because <span class="math inline">H_A\supseteq\operatorname{Aut}([0,c])</span> contains an element swapping <span class="math inline">b</span> and <span class="math inline">c-b</span>. This is also what drives Lemma 2 (finite attainment) and hence the closure of the domains and the compactness that gives Intensional Choice.</li>
+</ol>
+<p>So in this model the very feature that gives IntCh (compact Stone space together with finite attainment, i.e. property 2) also yields the canonical representatives that give Transversal. For this group the imaginaries “germ of an entity at <span class="math inline">U</span>” are eliminable.</p>
+<p>A separating model (IntCh, ideally with C5, □BF, □BC<span class="math inline">_t</span>, but not Transversal) would have to keep compactness-type reasoning for IntCh while breaking one of the two properties for germs. Concretely:</p>
+<ul>
+<li>break property 1: an action on the propositions in which two supports of the same germ can be incomparable with no common sub-support (e.g. a group whose finite-set stabilisers do not generate the stabiliser of the intersection: this fails for <span class="math inline">\operatorname{Aut}</span> of a homogeneous algebra, but holds in many permutation-group actions, such as actions with non-trivial “algebraic closure” like vector spaces with forms, or trees);</li>
+<li>or break property 2: supports whose stabilisers are <em>not</em> transitive within cells, so that agreement on a piece does not propagate (then a germ no longer determines a restriction to a cell, and canonical choices must be made among infinitely many restrictions). But the stabilisers must still give finite attainment for closure under quantifiers, which is in tension with this.</li>
+</ul>
+<p>The three recorded refutations of Transversal (symmetric finitely pinned models) break property 1 (no canonical finite parameter for a coextension class) and also lack compactness, which is why they refute IntCh too.</p>
+<p>The countable variant, with the clopens of Cantor space and its homeomorphisms, goes the same way. Lemmas A, B, B′ and D use only homogeneity and atomlessness. The completeness of <span class="math inline">B</span> is used only for the join <span class="math inline">y_3</span> in Lemma C, and in the countable variant the supported sets of worlds are exactly the clopen ones. Lemma A is proved here; the agent did not find it in the literature under that name.</p>
+</body></html>

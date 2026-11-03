@@ -93,7 +93,7 @@ As axiom-of-infinity-e, the propositions $q_{a,b}$ being infinitely many.
 
 Let $p$ be true, pinned down by $N$, and $q$ the set of arrows $(1_K,s)$ with $s$ injective on $N$: true, pinned down by $N$, symmetric. In both monoid factors $jk=1_K$ only if $k=1_K$, so $\Diamond q=q$. A member $(1_K,s)$ of $q$ agrees on $N$ with a permutation $\pi$, and $(1_K,\pi)\in p$ by symmetry, so $(1_K,s)\in p$. Hence $\Box(\Diamond q\to p)$, and $p$ is ND-necessary. The principle is closed and pure.
 
-*Write-up: [symmetric-surjection-products](symmetric-surjection-products.html). From the group *Symmetric surjection products with free-word gluing*, shared argument `symmetric-surjection-products#distinctness-preserving-collapse`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
+*Write-up: [symmetric-surjection-products](symmetric-surjection-products.html). From the group *Symmetric surjection products with free-word gluing*, shared argument `symmetric-surjection-products#truths-are-nd-necessary`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
 
 ### Fails Intensional Choice.
 

@@ -1,6 +1,6 @@
 # BF ∧ Intensional Choice ⇒ □Intensional Choice
 
-<p class='cert'>Result — Source: Misc.; produced by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.barcan_and_intensional_choice_imply_necessary_intensional_choice`; produced by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
 
 ## Premises
 

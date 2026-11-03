@@ -1,0 +1,34 @@
+import Classicism.Results.Other.Shallow
+import Classicism.Tools.Check
+import Classicism.Tools.TypeSystem
+import Classicism.Tools.Schema
+import Classicism.Certified.Schemas
+
+/-!
+# The records of `Results/Other/Shallow.lean`, certified
+
+The gate and the type-system check over the file, each record derived in the object language
+and read as an entailment between schemas (`foo.entails`).
+-/
+
+#classicism_audit Classicism.Results.Other.Shallow
+#classicism_types_audit Classicism.Results.Other.Shallow
+
+#classicism_derive Classicism.Proofs.Other.necessary_atomlessness_implies_atomlessness
+  Classicism.Proofs.Other.necessary_distinctness_preserving_collapse_implies_distinctness_preserving_collapse
+  Classicism.Proofs.Other.tame_rigidity_and_bf_t_imply_necessary_bf_t
+  Classicism.Proofs.Other.rigid_comprehension_and_bf_t_imply_necessary_bf_t
+  Classicism.Proofs.Other.rigid_rigidity_and_rigid_power_imply_necessary_rigid_power
+  Classicism.Proofs.Other.c5_and_atomlessness_imply_necessary_atomlessness
+
+#classicism_entails Classicism.Proofs.Other.necessary_atomlessness_implies_atomlessness
+#classicism_entails Classicism.Proofs.Other.necessary_distinctness_preserving_collapse_implies_distinctness_preserving_collapse
+#classicism_entails Classicism.Proofs.Other.tame_rigidity_and_bf_t_imply_necessary_bf_t
+#classicism_entails Classicism.Proofs.Other.rigid_comprehension_and_bf_t_imply_necessary_bf_t
+#classicism_entails Classicism.Proofs.Other.rigid_rigidity_and_rigid_power_imply_necessary_rigid_power
+#classicism_entails Classicism.Proofs.Other.c5_and_atomlessness_imply_necessary_atomlessness
+
+#check @Classicism.Proofs.Other.necessary_atomlessness_implies_atomlessness.entails
+#check @Classicism.Proofs.Other.rigid_comprehension_and_bf_t_imply_necessary_bf_t.entails
+#check @Classicism.Proofs.Other.rigid_rigidity_and_rigid_power_imply_necessary_rigid_power.entails
+#check @Classicism.Proofs.Other.c5_and_atomlessness_imply_necessary_atomlessness.entails

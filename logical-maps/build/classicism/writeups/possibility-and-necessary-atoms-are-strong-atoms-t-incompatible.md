@@ -1,6 +1,6 @@
 # Maximalism (pure) ∧ □Atoms are strong atoms (type t) ⇒ ⊥
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.possibility_and_necessary_atoms_are_strong_atoms_t_incompatible`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

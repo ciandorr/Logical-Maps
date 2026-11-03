@@ -7,6 +7,12 @@ import Classicism.Models.FiniteCompressionSeparation
 import Classicism.Models.FixedPointEntranceBarcan
 import Classicism.Models.FixedPointEntranceRelationalBarcan
 import Classicism.Models.FixedPointEntranceChoice
+import Classicism.Coalesced.SumData
+import Classicism.Models.CoalescedFinite
+import Classicism.Models.CoalescedInterpretations
+import Classicism.Models.GluedFreeMonoid
+import Classicism.Models.GluedFreeProduct
+import Classicism.Semantics.OneIndividual
 import Mathlib.Data.Fintype.Powerset
 import Mathlib.Data.Finite.Sigma
 import Mathlib.Data.Finite.Prod
@@ -305,6 +311,194 @@ theorem rigid_power_r : Statements.Models.finite_support_pair_injections_or_coll
   verdict_fails M <| not_holdsAx_of ⟨.arr .e .t, by simp, rfl⟩ Monoids.PairInjCol.not_rigidPower
 
 end finite_support_pair_injections_or_collapses
+
+/-! ### The coalesced sums over the complete family (`Coalesced/SumData.lean`) -/
+
+namespace coalesced_maximalist_root
+
+open Coalesced
+
+/-- **Theorem 3.26**: Maximalism for the signature, every closed identity that `C(Σ)` does not
+prove being false at the root, the components being complete for `C(Σ)`
+(`Coalesced.maximalist_distinctnessC`). -/
+theorem distinctness_signature_r : Statements.Models.coalesced_maximalist_root.distinctness_signature_r :=
+  ⟨Signature.sigmaTop_admitted, maximalistRoot.isModel, maximalistData_distinctnessC sigmaTop_closed⟩
+
+/-- The root individuals, the families of the components' individuals, are infinitely many, and
+the root is extensionally full, its root components being free
+(`Coalesced.SumData.holds_axiomOfInfinityE_root`). -/
+theorem axiom_of_infinity_e : Statements.Models.coalesced_maximalist_root.axiom_of_infinity_e :=
+  ⟨maximalistRoot.isModel, SumData.holds_axiomOfInfinityE_root maximalistData_free
+    (maximalistData_infinite sigmaTop_closed)⟩
+
+end coalesced_maximalist_root
+
+namespace coalesced_single_individual_root
+
+/-- One individual at the root: no two distinct ones (`Coalesced.singleIndividualData_not_infinityE`). -/
+theorem infinity_e : Statements.Models.coalesced_single_individual_root.infinity_e :=
+  ⟨Coalesced.singleIndividualData.isModel, Coalesced.singleIndividualData_not_infinityE⟩
+
+end coalesced_single_individual_root
+
+namespace coalesced_constant_indexed_root
+
+/-- The root individuals are the indices of the constants, infinitely many, and the root is
+extensionally full (`Coalesced.SumData.holds_axiomOfInfinityE_root`). -/
+theorem axiom_of_infinity_e : Statements.Models.coalesced_constant_indexed_root.axiom_of_infinity_e :=
+  ⟨Coalesced.constantIndexedData.isModel, Coalesced.SumData.holds_axiomOfInfinityE_root
+    Coalesced.constantIndexedData_free Coalesced.constantIndexedData_infinite⟩
+
+end coalesced_constant_indexed_root
+
+namespace coalesced_all_finite_individual_domains
+
+local notation "M" => Classicism.Meta.Coalesced.AllFinite.isModel
+
+/-- **Every truth is necessarily 5-necessary** at the root of the coalesced sum over the finite
+individual domains (the record's argument `five-necessity-is-truth`): Distinctness-Preserving
+Collapse holds at every world, the actual world being isolated at the root and in each
+one-world component (`AllFinite.holds_necessary_truth_implies_five_necessity`). -/
+theorem necessary_truth_implies_five_necessity :
+    Statements.Models.coalesced_all_finite_individual_domains.necessary_truth_implies_five_necessity :=
+  verdict_holds M Meta.Coalesced.AllFinite.holds_necessary_truth_implies_five_necessity
+
+end coalesced_all_finite_individual_domains
+
+namespace coalesced_definable_root
+
+/-! The definable coalesced root over the canonical model of `Σ₀ = {d}`
+(`Models/CoalescedInterpretations.lean`, 31 October 2026, Claude Opus 5.5, prompted by Cian Dorr). -/
+
+open CategoryTheory
+
+local notation "M" => Classicism.Meta.Coalesced.definableRoot_isModel
+
+/-- Every pure sentence consistent with `C` is possible at the root; Possibility gives Distinctness. -/
+theorem distinctness_schema_r : Statements.Models.coalesced_definable_root.distinctness_schema_r :=
+  verdict_holds M Coalesced.definableRoot_distinctness
+
+/-- The only individual at the root is `d`: no two distinct ones (`Premodel.holds_count`). -/
+theorem infinity_e : Statements.Models.coalesced_definable_root.infinity_e := by
+  refine ⟨M, fun H => ?_⟩
+  rw [holdsAx_ofPure] at H
+  obtain ⟨f, hf⟩ := (holds_count (Coalesced.definableRoot.reduct_isModel M) (𝟙 _) .e 2).1 (H _ ⟨2, by decide, rfl⟩)
+  have : Subsingleton (Coalesced.definableRoot.reduct.Dom Coalesced.definableRoot.reduct.W₀ .e) :=
+    Coalesced.definableRoot_subsingleton
+  exact absurd (hf (Subsingleton.elim (f 0) (f 1))) (by decide)
+
+/-- `Suc_e 𝟎_e` is a finite cardinality holding of the universal property
+(`Premodel.not_holds_axiomOfInfinityE`), the root having one individual. -/
+theorem axiom_of_infinity_e : Statements.Models.coalesced_definable_root.axiom_of_infinity_e := by
+  refine ⟨M, fun H => ?_⟩
+  rw [holdsAx_ofPure] at H
+  exact not_holds_axiomOfInfinityE (Coalesced.definableRoot.reduct_isModel M) (𝟙 _)
+    Coalesced.definableRoot_subsingleton (H _ rfl)
+
+end coalesced_definable_root
+
+namespace coalesced_pinned_interpretations_root
+
+/-! The finitely pinned coalesced root over the canonical model of `Σ⁺`
+(`Models/CoalescedInterpretations.lean`, 31 October 2026, Claude Opus 5.5, prompted by Cian Dorr). -/
+
+local notation "M" => Classicism.Meta.Coalesced.pinnedInterpRoot_isModel
+
+/-- BF at every closed type (`Coalesced.pinned_bf`): a fresh constant witnesses each instance. -/
+theorem barcan_r : Statements.Models.coalesced_pinned_interpretations_root.barcan_r :=
+  ⟨M, (holdsAx_ofPure _ _).2 <| holdsAx_indexed.2 fun σ hσ => Coalesced.pinnedInterpRoot_bf σ hσ⟩
+
+/-- Every sentence of `Σ⁺` consistent with `C(Σ⁺)` is possible at the root. -/
+theorem distinctness_signature_r : Statements.Models.coalesced_pinned_interpretations_root.distinctness_signature_r :=
+  ⟨Signature.plus_admitted, M, Coalesced.pinnedInterpRoot_distinctness⟩
+
+end coalesced_pinned_interpretations_root
+
+namespace coalesced_pinned_substitutions_root
+
+/-! As `coalesced-pinned-interpretations-root`, with the maps of the constants at the root. -/
+
+local notation "M" => Classicism.Meta.Coalesced.pinnedSubstRoot_isModel
+
+/-- BF at every closed type (`Coalesced.pinned_bf`), the maps of the constants undone by shifts. -/
+theorem barcan_r : Statements.Models.coalesced_pinned_substitutions_root.barcan_r :=
+  ⟨M, (holdsAx_ofPure _ _).2 <| holdsAx_indexed.2 fun σ hσ => Coalesced.pinnedSubstRoot_bf σ hσ⟩
+
+theorem distinctness_signature_r : Statements.Models.coalesced_pinned_substitutions_root.distinctness_signature_r :=
+  ⟨Signature.plus_admitted, M, Coalesced.pinnedSubstRoot_distinctness⟩
+
+end coalesced_pinned_substitutions_root
+
+/-! ### The glued free-monoid models (`Models/GluedFreeMonoid.lean`)
+
+The members of `glued-free-monoid`, at the signature `Σ = {c : t}`: their own arguments.
+Everything else they get from the topic's arguments for full models (`MapDerived.lean`). -/
+
+namespace full_free_monoid_glued_constants
+
+open Meta.Intensional
+
+/-- **Logical Necessity**: the constants glued by sentences, on one object
+(`Premodel.holdsAx_logicalNecessity`). -/
+theorem logical_necessity_r : Statements.Models.full_free_monoid_glued_constants.logical_necessity_r :=
+  ⟨Signature.sigmaTop_admitted, freeMonoidThread.isModel, FreeMonoidMembers.thread_logicalNecessity⟩
+
+/-- The thread individuals are infinitely many, and the model is full. -/
+theorem axiom_of_infinity_e : Statements.Models.full_free_monoid_glued_constants.axiom_of_infinity_e :=
+  ⟨freeMonoidThread.isModel, FreeMonoidMembers.thread_axiomOfInfinityE⟩
+
+/-- Every word is an epimorphism acting onto the thread individuals, in a full model. -/
+theorem barcan_r : Statements.Models.full_free_monoid_glued_constants.barcan_r :=
+  ⟨freeMonoidThread.isModel, FreeMonoidMembers.thread_barcan⟩
+
+end full_free_monoid_glued_constants
+
+namespace full_free_monoid_glued_constants_singleton
+
+open Meta.Intensional
+
+theorem logical_necessity_r :
+    Statements.Models.full_free_monoid_glued_constants_singleton.logical_necessity_r :=
+  ⟨Signature.sigmaTop_admitted, freeMonoidSingleton.isModel, FreeMonoidMembers.singleton_logicalNecessity⟩
+
+theorem barcan_r : Statements.Models.full_free_monoid_glued_constants_singleton.barcan_r :=
+  ⟨freeMonoidSingleton.isModel, FreeMonoidMembers.singleton_barcan⟩
+
+end full_free_monoid_glued_constants_singleton
+
+namespace full_double_retraction_glued_constants
+
+open Meta.Intensional
+
+/-- **Witnessed Possibility**: the constants glued by formulas at the sites at `W₀`
+(`Premodel.holdsAx_witnessedPossibility`). -/
+theorem witnessed_possibility_r :
+    Statements.Models.full_double_retraction_glued_constants.witnessed_possibility_r :=
+  ⟨Signature.sigmaTop_admitted, doubleRetractionSites.isModel, DoubleRetractionSites.witnessedPossibility⟩
+
+/-- **Possibly Witnessed Possibility fails**: a true atom where Strong Actuality holds is
+possible, but no constant is one (`DoubleRetractionSites.not_possiblyWitnessedPossibility`). -/
+theorem possibly_witnessed_possibility_r :
+    Statements.Models.full_double_retraction_glued_constants.possibly_witnessed_possibility_r :=
+  ⟨Signature.sigmaTop_admitted, doubleRetractionSites.isModel,
+    DoubleRetractionSites.not_possiblyWitnessedPossibility⟩
+
+/-- **B for pure sentences**: every object reaches the base. -/
+theorem pure_b_r : Statements.Models.full_double_retraction_glued_constants.pure_b_r :=
+  ⟨doubleRetractionSites.isModel, DoubleRetractionSites.pureB⟩
+
+end full_double_retraction_glued_constants
+
+namespace full_free_product_glued_constants
+
+open Meta.Intensional
+
+/-- **Logical Necessity**: the free generators of `F_∞ * E * B * ℤ₂` are sites
+(`FreeProd.sites_sep`), the constants glued by formulas, on one object. -/
+theorem logical_necessity_r : Statements.Models.full_free_product_glued_constants.logical_necessity_r :=
+  ⟨Signature.sigmaTop_admitted, freeProductSites.isModel, FreeProductSites.logicalNecessity⟩
+
+end full_free_product_glued_constants
 
 end Classicism.Map.Models
 

@@ -13,7 +13,8 @@ type `σ`:
   cardinalities of properties of type `σ`), `Arith.Sum σ` and `Arith.Prod σ`, quoted into pure
   terms with a type parameter by `#classicism_quote_term`, each with its reflection checked;
   and from them `arithI σ`, `I_σ := ◇I*_σ`, possibly zero is not a successor and successor is
-  injective on numbers;
+  injective on numbers; and `IStar.term σ`, the sentence `I*_σ` itself (`Classicism.IStar`,
+  the antecedent of Arithmetic Necessitism unboxed), quoted the same way;
 - the **arithmetical formulas** (`AForm k`, in `k` free number variables): atomic `ℕt`,
   `Sum(t, t', t'')`, `Prod(t, t', t'')` and `t = t'`, whose terms are variables, zero and
   successors (`ATerm k`), closed under `¬`, `∨`, `∧` and `∀v ∈ ℕ`; read as formulas of the
@@ -51,6 +52,9 @@ end Classicism.Arith
 
 #classicism_quote_term Classicism.Arith.zero Classicism.Arith.suc Classicism.Arith.N
   Classicism.Arith.Sum Classicism.Arith.Prod
+
+-- `I*_σ`, the antecedent of Arithmetic Necessitism unboxed, as a sentence with a type parameter
+#classicism_quote_term Classicism.IStar
 
 noncomputable section
 

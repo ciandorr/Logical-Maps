@@ -7,6 +7,9 @@ import Classicism.Coalesced.SumData
 import Classicism.Models.Henkin
 import Classicism.Coalesced.Transfer
 import Classicism.Results.SentenceSchemas.ArithmeticNecessitism
+import Classicism.Coalesced.TransferBC
+import Classicism.Coalesced.TransferChoice
+import Classicism.Coalesced.TransferSelfAtoms
 import Mathlib.SetTheory.Cardinal.NatCard
 
 /-!
@@ -94,18 +97,18 @@ theorem transversal_choice_r :
 
 end transversal_choice_extensionally_full
 
-namespace dpc_isolated_actual_world
+namespace nd_necessity_isolated_actual_world
 
-/-- Distinctness-Preserving Collapse holds where the actual world is isolated
-(`Premodel.holds_dpc`). -/
-theorem distinctness_preserving_collapse :
-    Statements.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse := by
+/-- Truths are ND-necessary holds where the actual world is isolated
+(`Premodel.holds_truths_nd_necessary`). -/
+theorem truths_are_nd_necessary :
+    Statements.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary := by
   intro Sig C _ A M hI
   rw [holdsAx_ofPure]
   rintro _ rfl
-  exact holds_dpc (A.reduct_isModel M) hI
+  exact holds_truths_nd_necessary (A.reduct_isModel M) hI
 
-end dpc_isolated_actual_world
+end nd_necessity_isolated_actual_world
 
 namespace one_individual
 
@@ -333,17 +336,17 @@ theorem strong_actuality :
 
 end separated_retractions_strong_actuality
 
-namespace dpc_returning_arrow
+namespace nd_necessity_returning_arrow
 
-/-- Distinctness-Preserving Collapse fails in a full model where some arrow other than the
-identity returns (`Premodel.not_holds_dpc_of_returning`). -/
-theorem distinctness_preserving_collapse :
-    Statements.Arguments.dpc_returning_arrow.distinctness_preserving_collapse := by
+/-- Truths are ND-necessary fails in a full model where some arrow other than the
+identity returns (`Premodel.not_holds_truths_nd_necessary_of_returning`). -/
+theorem truths_are_nd_necessary :
+    Statements.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary := by
   intro Sig C _ A M hF hR H
   rw [holdsAx_ofPure] at H
-  exact not_holds_dpc_of_returning (A.reduct_isModel M) hF hR (H _ rfl)
+  exact not_holds_truths_nd_necessary_of_returning (A.reduct_isModel M) hF hR (H _ rfl)
 
-end dpc_returning_arrow
+end nd_necessity_returning_arrow
 
 namespace coherent_retractions
 
@@ -562,6 +565,42 @@ theorem arithmetic_necessitism :
       (not_iStar_consistent σ))
 
 end arithmetic_necessitism_complete_components
+
+/-! #### Witness transfers (`Coalesced/TransferBC.lean`) -/
+
+namespace boolean_completeness_t_component
+
+/-- The single-component copies of a component's counterexample family, from the truncation
+model's failure of BC at `t` (`Coalesced.SumData.not_holds_bcT`). -/
+theorem boolean_completeness_t :
+    Statements.Arguments.coalesced_sums.boolean_completeness_t_component.boolean_completeness_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_bcT hD hF hc
+
+end boolean_completeness_t_component
+
+namespace self_atomicity_component
+
+/-- The single-component copy of a component's atom that is no self-atom
+(`Coalesced/TransferSelfAtoms.lean`). -/
+theorem self_atomicity_t : Statements.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_selfAtomicityT hD hF hc
+
+theorem atoms_are_self_atoms_t :
+    Statements.Arguments.coalesced_sums.self_atomicity_component.atoms_are_self_atoms_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_aasaT hD hF hc
+
+end self_atomicity_component
+
+namespace intensional_choice_component
+
+/-- The thread on a component's counterexample (`Coalesced/TransferChoice.lean`). -/
+theorem intensional_choice_r :
+    Statements.Arguments.coalesced_sums.intensional_choice_component.intensional_choice_r :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_ic hD hF hc
+
+end intensional_choice_component
+
+/-! #### End of witness transfers -/
 
 end coalesced_sums
 

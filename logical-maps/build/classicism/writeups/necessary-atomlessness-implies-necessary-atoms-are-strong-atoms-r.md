@@ -1,6 +1,6 @@
 # □Atomlessness ⇒ □Atoms are strong atoms
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.necessary_atomlessness_implies_necessary_atoms_are_strong_atoms_r`; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026.</p>
 
 ## Premises
 

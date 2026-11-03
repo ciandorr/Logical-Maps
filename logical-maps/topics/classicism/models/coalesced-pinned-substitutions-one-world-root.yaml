@@ -7,7 +7,7 @@ certificate:
   recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
   checked_by: []
   date: '2026-10-29'
-  lean: stated
+  lean: none
 sources:
 - Cian Dorr, construction of 19 October 2026 (coalesced-pinned-substitutions-root), with Claude Opus 5.5
   (Anthropic); the choice of component here by Claude Opus 5.5 (Anthropic), 29 October 2026.
@@ -36,7 +36,32 @@ settings:
     text: >-
       As in coalesced-pinned-substitutions-root, intensions over the arrows out of $W_0$ pinned down by a
       finite set of constants of $\Sigma^+$; every transport lands, the component's domains being full.
-meets: {}
+meets:
+  finitely-many-individuals-somewhere: >-
+    The component $V$, reached by every $\langle V,I\rangle$, has one individual.
+  finitely-many-propositions-somewhere: >-
+    The component $V$, reached by every $\langle V,I\rangle$, has two propositions.
+  pinned-substitution-root: The root, its domains and the interpretation of Σ are as in
+    coalesced-pinned-substitutions-root; only the components differ.
+  extensionally-full: >-
+    The objects are $W_0$ and $V$. The root is extensionally full at its identity: any set of tuples there is the extension of the entity
+    with that value at every map of the constants and $\bot$ at every arrow into the component, pinned down by
+    $\emptyset$ and landing. $V$ is full.
+  codomain-intensions: >-
+    An intension at $W_0$ with value $E$ at every map and $E^{\prime}$ at every arrow into $V$ is pinned
+    down by $\emptyset$, and its transport along each $\langle V,I\rangle$ is the constant intension
+    $k\mapsto E^{\prime}$, which is in $V$'s domain, $V$ being full; so it lands and is in the domain at $W_0$.
+  infinitely-many-individuals: The individuals at $W_0$ are the infinitely many individual constants of $\Sigma^+$.
+  finite-types-stay-finite: Every type has infinitely many entities at $W_0$, and $V$, where every type is finite, sees only itself.
+  root-only-sentence: >-
+    $\exists x^e\,y^e\, .\,x\ne y$ is true at $W_0$, whose individuals are the infinitely many
+    individual constants, and false at $V$, which has one individual.
+  finite-reachable-object: >-
+    $V$ has one individual and two propositions, so finitely many entities of every type. At $W_0$, by
+    extensional fullness at the identity, the entities of type $et$ include continuum many with pairwise
+    distinct extensions, every subset of the individual constants being one, and any relations among them
+    with any extensions there; carrying the real numbers onto continuum many of them gives a real number
+    structure at $W_0$.
 arguments:
 - id: bridges
   holds:
@@ -60,6 +85,59 @@ arguments:
     is pinned down by $\emptyset$, with transport $\top$ along every $\langle V,I\rangle$, so it lands; it
     is possible, and wherever it is true it is $\top$ at $V$, an atom, so it is a self-atom, but not an atom
     at the atomless $W_0$.
+- id: boxed-through-v
+  holds:
+  - necessary-barcan-r
+  - necessary-two-hat-implies-nd-necessity
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    These principles are closed pure sentences, one for each type, and a closed sentence holds at an
+    arrow out of $W_0$ iff it holds at the identity of the arrow's target, $W_0$ for the maps of the
+    constants and $V$ for the others; $V$ sees only itself. So each necessitation holds at $W_0$ iff the
+    principle holds at $W_0$ and at $V$. At $W_0$ BF (every type) and the conditional from two-hat to
+    ND-necessity hold by the group's argument substitution-root. $V$, with its identity arrow alone, is
+    the full Henkin model on one individual (full-henkin-singleton-base), where both hold, the second
+    because $\Box$ is idle there.
+- id: rigidity
+  holds:
+  - necessary-tame-rigidity-r
+  - necessary-rigid-rigidity-r
+  - necessary-weakly-rigid-weak-rigidity-r
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    The argument tame-rigidity-factorizable, adapted to the two objects. At $V$, which sees only itself,
+    $\Box$ is idle and every relation is weakly rigid and rigid, so all three principles hold there, and
+    it remains to show them at $W_0$. Two arrows out of $W_0$ agree on a finite set $N$ of constants
+    when they are maps agreeing on $N$ or arrows $\langle V,I\rangle,\langle V,I^{\prime}\rangle$ with
+    $I{\restriction}N=I^{\prime}{\restriction}N$. For a set $E$ of entities at $W_0$, each pinned down by
+    a finite set, let $B_N(E)$ be the intension $k\mapsto\bigcup\{k^{\prime}\cdot E:k^{\prime}\text{
+    agrees with }k\text{ on }N\}$; it is pinned down by $N$ and lands, $V$ being full, so it is in the
+    domain. (1) As there, a relation $Y$ pinned down by $S$ with extension $E$ at the identity is weakly
+    rigid iff $Y=B_N(E)$ for every finite $N\supseteq S$. (2) $Y$ is rigid iff $h\cdot Y$ is weakly
+    rigid for every arrow $h$; for $h$ into $V$ this is automatic, and for a map $h$ it says $k\cdot
+    Y_h\subseteq Y_{kh}\subseteq B_N(Y_h)_k$ for every arrow $k$ and finite $N$. (3) The factorization
+    of that argument holds at every map $h$, with $N^{\prime\prime}:=S$: given $k^{\prime}$ agreeing with
+    $kh$ on $S$ and a finite $M$, let $k^{\prime\prime}$ agree with $h$ on $S$ and send $M\setminus S$
+    injectively to fresh constants, and let $j$ agree with $k$ on $N\cup h(S)$ and send each
+    $k^{\prime\prime}(m)$ to $k^{\prime}(m)$ (for $k=\langle V,I\rangle$, $j=\langle V,J\rangle$ with $J$
+    so defined); then $jk^{\prime\prime}$ agrees with $k^{\prime}$ on $M$, since $k^{\prime}$ agrees
+    with $kh$ on $S$. So, as there, every weakly rigid relation is rigid: Tame Rigidity holds at $W_0$.
+    Rigid Rigidity: $R:=\lambda X\,.\,\operatorname{Rigid}(X)$ is a closed pure term, so $h\cdot R=R$
+    for every arrow and by (1) and (2) it suffices that $R=B_N(\mathcal R)$, $\mathcal R$ the rigid
+    relations at $W_0$. $\supseteq$: transports of rigid relations are rigid. $\subseteq$ at a map $k$:
+    a rigid $Z$ pinned down by $T$ is $k^{\prime}\cdot(\sigma\cdot Z)$, where $\sigma$ sends $T$ to fresh
+    constants outside $N$ and $k^{\prime}$ agrees with $k$ on $N$ and sends $\sigma(t)$ back to $t$.
+    $\subseteq$ at $\langle V,I\rangle$: every relation $z$ at $V$ is the transport of a rigid relation,
+    since every element of $V$'s finite full domains is the denotation of a closed pure term, so $z$ is
+    the transport of $\lambda\bar x\,.\,\bigvee_{\bar u\in z}\bar x=\bar t_{\bar u}$, a finite disjunction
+    of haecceities and so rigid. So Rigid Rigidity holds at $W_0$. Weakly Rigid Weak Rigidity: by Tame
+    Rigidity at $W_0$ and the triviality of $V$, $\lambda X\,.\,\operatorname{WeaklyRigid}(X)$ has the
+    same value as $R$ at every arrow out of $W_0$, so it is $R$, which is rigid and so weakly rigid. All
+    three are closed sentences true at $W_0$ and at $V$, so their necessitations hold.
 notes: 'Proposed on 29 October 2026 in a trawl for the open questions created by □Atomlessness, to show that
   Atomlessness with the necessitated bridge principles for atoms does not give □Atomlessness. Checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr; it inherits the model-of-C argument of
   coalesced-pinned-substitutions-root, which has not had a second reader. No Lean verification is claimed.'

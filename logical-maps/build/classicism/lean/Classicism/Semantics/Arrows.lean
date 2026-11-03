@@ -186,13 +186,13 @@ theorem not_holds_nd_t_of_unretracted (hF : A.Full) (hU : A.UnretractedArrow) :
   exact Set.singleton_ne_empty _ hy.symm
 
 omit M in
-/-- **Distinctness-Preserving Collapse fails** in a full model with a returning arrow `i` other
+/-- **Truths are ND-necessary fails** in a full model with a returning arrow `i` other
 than the identity: `{1}` is true, every true `q` contains the identity, so after `i`, which
 returns, `◇q` holds while `{1}` does not. -/
-theorem not_holds_dpc_of_returning {B : Premodel Signature.pure C} (M : B.IsModel) (hF : B.Full)
-    (hR : B.ReturningArrow) : ¬ B.HoldsSentence P.DistinctnessPreservingCollapse.quoted := by
+theorem not_holds_truths_nd_necessary_of_returning {B : Premodel Signature.pure C} (M : B.IsModel) (hF : B.Full)
+    (hR : B.ReturningArrow) : ¬ B.HoldsSentence P.TruthsAreNDNecessary.quoted := by
   obtain ⟨V, i, r, hir, hne⟩ := hR
-  simp only [Premodel.HoldsSentence, P.DistinctnessPreservingCollapse.quoted, B.holds_forall M,
+  simp only [Premodel.HoldsSentence, P.TruthsAreNDNecessary.quoted, B.holds_forall M,
     B.holds_imp M, B.holds_exists M, B.holds_conj M, B.holds_box M, B.holds_dia M, holds_var,
     IEnv.get, IEnv.get_map, B.incl_map, Intension.mem_map, Category.comp_id, Category.id_comp]
   intro H

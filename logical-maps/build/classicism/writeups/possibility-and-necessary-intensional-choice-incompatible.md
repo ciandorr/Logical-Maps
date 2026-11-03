@@ -1,6 +1,6 @@
 # Maximalism (pure) ∧ □Intensional Choice ⇒ ⊥
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 3 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 3 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.possibility_and_necessary_intensional_choice_incompatible`; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 3 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 3 October 2026.</p>
 
 ## Premises
 

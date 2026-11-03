@@ -83,7 +83,7 @@ arguments:
     The strongest true proposition pinned down by $\{0,\ldots,n\}$ is
     $\{1_{\mathbb N}\}\cup\{g_m:m\ge n\}$, ever stronger as $n$ grows.
 
-- holds: [distinctness-preserving-collapse]
+- holds: [truths-are-nd-necessary]
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
   date: '2026-09-23'
   text: >-
@@ -140,9 +140,9 @@ history:
 - date: '2026-09-23'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
   summary: Expanded the description from Appendix D, naming Proposition D.5 and its part; added the failure
-    of Countable Boolean Completeness at type e→t; settled the Distinctness-preserving collapse.
+    of Countable Boolean Completeness at type e→t; settled Truths are ND-necessary.
   satisfies:
-  - distinctness-preserving-collapse
+  - truths-are-nd-necessary
   violates:
   - countable-boolean-completeness-r
 - date: '2026-09-23'
@@ -225,4 +225,10 @@ lean:
     status: verified
   - fails: boolean-completeness-r
     ref: Classicism.Map.Models.finite_support_truncations.boolean_completeness_r
+    status: verified
+  - holds: truths-are-nd-necessary
+    ref: Classicism.Map.Models.finite_support_truncations.truths_are_nd_necessary
+    status: verified
+  - fails: boolean-completeness-t
+    ref: Classicism.Map.Models.finite_support_truncations.boolean_completeness_t
     status: verified

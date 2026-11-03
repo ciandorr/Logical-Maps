@@ -1,6 +1,6 @@
 # □Vicinity ∧ □Boolean Completeness (type t) ∧ □Relational Choice ⇒ □Actuality
 
-<p class='cert'>Result — Source: Misc.; produced by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25–26 October 2026 (the unboxed theorem); direct proof by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.necessary_vicinity_boolean_completeness_t_and_relational_choice_imply_necessary_actuality`; produced by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25–26 October 2026 (the unboxed theorem); direct proof by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
 
 ## Premises
 

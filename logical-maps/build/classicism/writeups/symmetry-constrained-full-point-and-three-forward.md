@@ -87,7 +87,7 @@ The closed pure sentence that there are exactly four propositions is true at $W_
 
 At $W_0$ take $q:=a$: at $1_{W_0}$, $\Diamond a$ holds, and at $h_n$ it fails, the transport of $a$ being empty; so $\Box(\Diamond a\to p)$ says just that $p$ holds at $1_{W_0}$, and every truth is ND-necessary. At $X$, where $\Box$ is trivial, every truth is necessary.
 
-*Address: `symmetry-constrained-full-point-and-three-forward#distinctness-preserving-collapse`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
+*Address: `symmetry-constrained-full-point-and-three-forward#truths-are-nd-necessary`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
 
 ### Holds Atomicity.
 

@@ -126,6 +126,17 @@ conditions:
     The root domains are the fullest: every intension at the root whose transport along every root
     arrow lies in the component's domain is a root entity.
   lean: Classicism.Meta.Coalesced.SumData.FullestDomains
+- id: pinned-substitution-root
+  text: >-
+    The root is built as in coalesced-pinned-substitutions-root: its arrows are the interpretation
+    arrows $\langle V,I\rangle$ into every object of every component and the maps of the constants of
+    $\Sigma^+$; its entities are the intensions pinned down by a finite set of constants whose
+    transports land in the component domains; and each constant $c$ of $\Sigma$ denotes $\hat c$,
+    with transport $I(c)$ along $\langle V,I\rangle$ and empty extension at every map.
+- id: root-only-sentence
+  text: >-
+    Some closed pure sentence $B$ is true at the root and false at every object of every component,
+    so that $B$ holds at an arrow out of the root exactly when its target is the root.
 
 arguments:
 - id: tame-rigidity-component
@@ -218,6 +229,9 @@ arguments:
       Condition fullest-domains added to the requirements: the argument builds root entities whose
       parts in the components are chosen freely, which needs the root domains to be the fullest.
       Every member with distinguished arrows has them, so no member's verdicts change.
+  lean:
+  - fails: intensional-choice-r
+    ref: Classicism.Map.Arguments.coalesced_sums.intensional_choice_component.intensional_choice_r
 
 
 - id: relational-choice-free-root
@@ -336,6 +350,9 @@ arguments:
       Condition fullest-domains added to the requirements: the argument builds root entities whose
       parts in the components are chosen freely, which needs the root domains to be the fullest.
       Every member with distinguished arrows has them, so no member's verdicts change.
+  lean:
+  - fails: boolean-completeness-t
+    ref: Classicism.Map.Arguments.coalesced_sums.boolean_completeness_t_component.boolean_completeness_t
 
 - id: pure-sentences-possible
   requires: [complete-components]
@@ -384,6 +401,17 @@ arguments:
   lean:
   - holds: arithmetic-necessitism
     ref: Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism
+- id: necessary-axiom-of-infinity-complete-components
+  requires: [complete-components]
+  fails: [necessary-axiom-of-infinity-e, necessary-axiom-of-infinity-t]
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-31'
+  choice: free
+  text: >-
+    The negations of the Axioms of Infinity at types $e$ and $t$ are closed pure sentences consistent
+    with C: both hold in the full model with one world, one individual and two propositions, where a
+    numeral holds of the universal property at each type. So they are possible at the root
+    (pure-sentences-possible), and the boxed Axioms fail there.
 - id: necessity-of-analysis-complete-components
   requires: [complete-components]
   fails: [necessity-of-analysis]
@@ -440,3 +468,118 @@ arguments:
       Condition fullest-domains added to the requirements: the argument builds root entities whose
       parts in the components are chosen freely, which needs the root domains to be the fullest.
       Every member with distinguished arrows has them, so no member's verdicts change.
+  lean:
+  - fails: self-atomicity-t
+    ref: Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t
+  - fails: atoms-are-self-atoms-t
+    ref: Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.atoms_are_self_atoms_t
+
+- id: substitution-root
+  requires: [pinned-substitution-root]
+  holds:
+  - barcan-r
+  - two-hat-implies-nd-necessity
+  - five-implies-two-hat-necessity
+  fails:
+  - truths-are-nd-necessary
+  - vicinity
+  - weakly-inextensible-comprehension-r
+  - boolean-completeness-t
+  - truth-implies-five-necessity
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  writeup: coalesced-pinned-substitutions-root
+  text: >-
+    The arguments barcan, as-in-all-maps and collapse-at-root of coalesced-pinned-substitutions-root,
+    stated once for every member with substitution arrows, since none depends on which action models the
+    components are. BF uses only fresh constants: a witness at an arrow $\langle V,I\rangle$ is moved
+    onto a fresh constant by changing $I$ there, and one at a map by a map sending its pinning set to
+    fresh constants. The others use the maps of the constants and propositions and properties containing
+    no arrow into a component, whose transports along the arrows into a component are $\bot$ and so land
+    in any component's domains, together with the fact that no composite of an arrow into a component
+    with anything is a map. For Vicinity, the worlds seen from a map $f$ collapsing two individual
+    constants $c,d$ are the maps $g\circ f$ and the arrows $\langle V,I\circ f\rangle$, all of which
+    identify them.
+
+- id: substitution-root-transversal-choice
+  requires: [pinned-substitution-root]
+  holds: [transversal-choice-r]
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: uses
+  text: >-
+    By the general argument transversal-choice-extensionally-full applied at the root alone: any set of
+    tuples at the identity is the extension there of the entity with that value at every map of the
+    constants and empty at every arrow into a component, pinned down by $\emptyset$ and landing. Stated
+    once for the members with substitution arrows, as in coalesced-pinned-substitutions-root.
+
+- id: substitution-root-infinity-and-countable-completeness
+  requires: [pinned-substitution-root]
+  holds: [axiom-of-infinity-e]
+  fails: [countable-boolean-completeness-r]
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    The root is extensionally full at its identity: any set of tuples there is the extension of the
+    entity with that value at every map of the constants and $\bot$ at every arrow into a component,
+    pinned down by $\emptyset$ and landing; and quantifiers at the identity range over the root
+    domains. So the argument infinitely-many-individuals applies at the root alone: the property of
+    cardinalities true of $Z$ exactly when every property $Z$ holds of has a finite extension contains
+    $\mathbf 0_e$ and is closed under successor, so every finite cardinality has it, and none holds of
+    the universal property, the individuals being the infinitely many individual constants. For the
+    same reason the numbers at $e$ at the root are the numerals. Countable Boolean Completeness fails
+    at type $t$ by the argument parity-family of coalesced-pinned-interpretations-root, which uses only
+    arrows $\langle V,I\rangle$ into one component object and interpretations differing at fresh
+    propositional constants; the property $Y$ is now given the value $\{a_n:n\text{ even}\}$ at every
+    map and $\emptyset$ at the arrows into components, pinned down by $\emptyset$. The family is
+    countable at the root: the relation whose extension at the identity pairs $a_{2k}$ with the numeral
+    $\mathbf k_e$ is in the domain, by extensional fullness at the identity, and is an injection into
+    the numbers at $e$. So the countable property $Y$ has no least upper bound.
+
+- id: root-only-sentence-pure-b
+  requires: [root-only-sentence]
+  fails: [pure-b-r]
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    Let $B$ be the sentence of the condition. The worlds seen from a world of a component are worlds
+    of that component, where $B$ is false, so $\Diamond B$ fails at every such world; some such world
+    is seen from the root, where $B$ is true. So the B instance $B\to\Box\Diamond B$ fails at the
+    root.
+
+- id: root-only-sentence-signature
+  requires: [root-only-sentence, pinned-substitution-root]
+  fails: [witnessed-possibility-r, separated-structure-r]
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    Let $B$ be the sentence of the condition, $c$ a relational constant of $\Sigma$, of type
+    $\tau=\bar\sigma t$ (for $\tau=t$ read $\exists\bar y\,.\,x\bar y$ below as $x$), and
+    $P(x):=B\land\exists\bar y\,.\,x\bar y$, a pure formula. At the root $\exists x\,.\,P(x)$
+    holds, witnessed by $\top_\tau$. But $P(\hat c)$ holds at no arrow out of the root: at an arrow
+    into a component $B$ is false, and at an arrow into the root (the identity, or a map $f$, which
+    carries $\hat c$ to $\widehat{f(c)}$) the entity is a $\hat d$, whose extension at the identity is
+    empty. So $\Diamond P(\hat c)$ fails and Witnessed Possibility fails. Separated Structure: with
+    the closed pure terms $F:=\lambda x^\tau\,.\,P(x)$ and $G:=\lambda x^\tau\,.\,\bot$, the
+    proposition $Fc$ is true at no arrow out of the root, so $Fc=Gc$, while $F\ne G$, $F$ holding of
+    $\top_\tau$ at the identity.
+
+- id: substitution-root-independence
+  requires: [pinned-substitution-root]
+  holds: [independence-signature-r]
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts
+  date: '2026-10-30'
+  choice: free
+  text: >-
+    For an individual constant $c$ the instance is vacuous, no term $A\,\bar d$ being of type $e$.
+    Let $c$ be relational, of type $\tau$, and $A$ closed and pure, $\bar d$ constants other than
+    $c$ ($n\ge0$). $A\,\bar{\hat d}$ is pinned down by $\bar d$, the denotation of a closed pure
+    term being pinned down by $\emptyset$. Fix an object $V$ of a component and an interpretation $I$,
+    and let $I^{\prime}$ and $I^{\prime\prime}$ agree with $I$ except that they send $c$ to $\top_\tau$ and
+    to $\bot_\tau$. Then $A\,\bar{\hat d}$ has the same value at $\langle V,I^{\prime}\rangle$ and
+    $\langle V,I^{\prime\prime}\rangle$, while $\hat c$ has there the extensions at $1_V$ of $\top_\tau$ and
+    $\bot_\tau$, which differ, every domain being nonempty. So $\hat c\ne A\,\bar{\hat d}$.

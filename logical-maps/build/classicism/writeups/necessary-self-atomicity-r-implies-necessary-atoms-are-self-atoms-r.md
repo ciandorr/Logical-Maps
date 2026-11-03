@@ -1,6 +1,6 @@
 # □Self-Atomicity ⇒ □Atoms are self-atoms
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.necessary_self_atomicity_r_implies_necessary_atoms_are_self_atoms_r`; produced by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

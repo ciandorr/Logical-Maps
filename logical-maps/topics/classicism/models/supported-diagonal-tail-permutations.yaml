@@ -1,0 +1,125 @@
+id: supported-diagonal-tail-permutations
+name: 'Supported model over Cantor space with diagonal tail permutations'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Cian Dorr, 30 October 2026
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: stated
+sources:
+- GPT-6 Astra (OpenAI), prompted by Cian Dorr, countermodel to Intensional Choice ⇒ Transversal, in
+  conversation, 30 October 2026, answering a brief by Claude Opus 5.5 (Anthropic).
+source_names:
+- Astra 30 Oct
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61
+  note: Action models.
+group: supported-s5-components
+settings:
+  component: >-
+    The worlds are the points of Cantor space $W=2^{\mathbb N}$, which are the ultrafilters of its
+    clopen algebra $B$, and $D$ is a single individual. The group is $\Gamma=\bigcup_r\Gamma_r$, where
+    $\Gamma_r$ permutes the binary strings of length $r$ as prefixes, acting trivially on later
+    coordinates. For each $n$, $K_n\le\Gamma$ is the group of diagonal tail permutations
+    $s^\frown z\mapsto s^\frown h(z)$ ($|s|=n$, $h\in\Gamma$), the same $h$ in every cylinder of length
+    $n$. The support points are the elements of $B$ and the cosets $\Gamma/K_n$; since $\Gamma_r$
+    commutes with $K_n$ for $n\ge r$, a relation is supported by a finite set of them iff it is fixed by
+    some $K_n$. A relation is admitted only if its fibres are clopen.
+  root: none
+meets:
+  one-individual: There is a single individual.
+  stone-worlds: The points of Cantor space are the ultrafilters of $B$, the fibres are clopen, and the
+    elements of $B$ are support points.
+  no-actuality-anywhere: Every world sees every world, and at none of them does Actuality hold (argument
+    no-actuality).
+  no-atoms-anywhere: Every world sees every world, and no proposition is an atom (argument atomlessness).
+arguments:
+- id: model-of-c
+  holds: [necessary-atomlessness]
+  choice: free
+  writeup: supported-diagonal-tail-permutations
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-30'
+  text: >-
+    Every $K_n$-orbit is dense in its cylinder of length $n$, so a $K_n$-invariant open set is a union of
+    such cylinders. Hence for $F$ fixed by $K_n$ the union $\bigcup_aF(a)$, the value of $\exists x\,Fx$,
+    is clopen, and the domains, closed under the Boolean operations, application and abstraction at a
+    common level, the $K_n$ being nested, are closed under the quantifiers too: the structure is an action
+    model of C (write-up). $B$ is atomless, and every world sees every world, so Atomlessness holds
+    necessarily.
+- id: no-actuality
+  fails: [actuality]
+  choice: free
+  writeup: supported-diagonal-tail-permutations
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-30'
+  text: >-
+    An actual-world proposition at a point $u$ would be a clopen set containing $u$ and included in every
+    clopen set containing $u$. No point of Cantor space has a least clopen neighbourhood.
+- id: boolean-completeness-t
+  holds: [necessary-boolean-completeness-t]
+  choice: free
+  writeup: supported-diagonal-tail-permutations
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-30'
+  text: >-
+    At a world $u=a^\frown z$ ($|a|=n$), the extension of an $X$ fixed by $K_n$ is invariant under
+    $H:=K_n\cap\operatorname{Stab}(u)$. In each cylinder of length $n$, $H$ fixes the point with tail $z$,
+    and every other point has a dense $H$-orbit there. So the closure of the union of the extension is a
+    finite union of cylinders of length $n$: a clopen set, and the least upper bound. Greatest lower
+    bounds follow by complementation.
+- id: no-relational-choice
+  fails: [relational-choice-r]
+  choice: free
+  writeup: supported-diagonal-tail-permutations
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-30'
+  text: >-
+    At input and output type $t$. $R(p,q):=(p\land q\land q<p)\lor(\neg p\land q=\bot)$ is serial at
+    every world. If a functional $S\le R$ at $u$ is fixed by $K_n$ and $p$ is the cylinder of length $n$
+    containing $u$, then the unique $q$ with $S(p,q)$ at $u$ is fixed by $K_n\cap\operatorname{Stab}(u)$.
+    By the density fact of the argument boolean-completeness-t, such a clopen part of $p$ is empty or
+    all of $p$, so it cannot be a proper true part of $p$.
+- id: no-transversal
+  fails: [transversal-r]
+  choice: free
+  writeup: supported-diagonal-tail-permutations
+  by: GPT-6 Astra (OpenAI), prompted by Cian Dorr; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-30'
+  text: >-
+    At type $t$, at $w=000\cdots$. Suppose $\Phi$, fixed by $K_n$, witnesses Transversal. Let $g$ flip
+    coordinate $n+1$, $v:=g(w)$, and $Y$ the selected property coextensive at $w$ with $F_g:=\lambda
+    p\,.\,g^{-1}[p]$, so that $w\in Y(p)$ iff $v\in p$. By uniqueness, $Y$ is fixed by every $h\in K_n$
+    fixing $w$ and $v$. Let $K_m$ fix $Y$, with $m>n$, and let $k\in K_m$ flip coordinate $m+1$. Some
+    $l\in K_n$ fixes $w$, $v$ and $k(w)$ but moves $k(v)$, so $s:=k^{-1}lk$ fixes $Y$ and $w$ but moves
+    $v$. Then $v\in p$ iff $w\in Y(p)$ iff $w\in Y(s^{-1}p)$ iff $s(v)\in p$ for every clopen $p$, which
+    is impossible, since clopen sets separate points.
+- id: no-pure-contingency
+  holds: [no-pure-contingency-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-30'
+  text: >-
+    The logical constants are fixed by every element of $\Gamma$ and the term-forming operations are
+    equivariant, so the denotation of a closed pure term is fixed by all of $\Gamma$. A clopen set fixed by
+    $\Gamma$ depends on the first $r$ coordinates for some $r$, and $\Gamma_r$ permutes the cylinders of
+    length $r$ transitively, so it is $\varnothing$ or $W$. So every closed pure sentence is necessary or
+    impossible.
+notes: >-
+  A model of C5 with □BF, □Boolean Completeness (type $t$), □Atomlessness and □Intensional Choice, in
+  which Transversal fails at type $t$: Intensional Choice does not imply Transversal, even with all of
+  these and Vicinity. Relational Choice, Actuality and Atomicity (type $t$) fail, so the questions whether
+  Intensional Choice implies Transversal given one of them stay open. Compare
+  supported-boolean-complete-component, where the symmetry group is the full automorphism group of a
+  homogeneous algebra and Transversal holds: there supports intersect, and an entity is determined on a
+  whole cell of its support by its restriction to any nonzero piece. Here the support groups permute the
+  tails in the same way in every cell, which still gives finite attainment, and with it Intensional
+  Choice by compactness, but not canonical representatives.

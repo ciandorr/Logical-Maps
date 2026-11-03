@@ -1,6 +1,6 @@
 # Rigid Rigidity ∧ Rigid Power ⇒ □Rigid Power
 
-<p class='cert'>Result — Source: Misc.; produced by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.rigid_rigidity_and_rigid_power_imply_necessary_rigid_power`; produced by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 26 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
 
 ## Premises
 

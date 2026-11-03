@@ -34,6 +34,10 @@ settings:
     accordingly. Both objects carry the ideal of finite sets. Evaluation point: $1_A$.'
   sigma: top
 meets:
+  infinitely-many-individuals-everywhere:
+    when: {individuals: base}
+    text: >-
+      The individuals are $N$ at $A$ and $N\sqcup Q$ at $B$.
   finite-pinning: Both objects carry the ideal of finite sets.
   transposable: For finite $N_0\subseteq N$, the property true of the individuals outside $N_0$ is pinned
     down by $N_0$ and has an infinite extension, each member of which some permutation fixing $N_0$
@@ -136,8 +140,8 @@ arguments:
     but $(\mathrm{id}_N,\mathrm{id}_Q)\in r$ while $(\mathrm{id}_N,g^{\prime})\notin r$, where
     $g^{\prime}$ sends $q_1$ to $q_\top$ and fixes every other label, an arrow since $R(q_\top)=N$. So
     BF fails at type $t$.
-- id: distinctness-preserving-collapse
-  holds: [distinctness-preserving-collapse]
+- id: truths-are-nd-necessary
+  holds: [truths-are-nd-necessary]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
     prompted by Cian Dorr
@@ -149,8 +153,8 @@ arguments:
     $h$ goes into $A$ and is injective on $S$, and it agrees on $S$ with a permutation $\sigma$ of $N$.
     As $p$ is symmetric and true, $\sigma\in p$, and as $p$ is pinned down by $S$, $h\in p$. So
     $\Box(\Diamond q\to p)$ with $q$ true: every truth is ND-necessary.
-- id: necessary-distinctness-preserving-collapse
-  fails: [necessary-distinctness-preserving-collapse]
+- id: necessary-truths-are-nd-necessary
+  fails: [necessary-truths-are-nd-necessary]
   choice: free
   writeup: symmetric-finite-compression-entrance
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic),
@@ -171,8 +175,8 @@ arguments:
   date: '2026-10-29'
   text: >-
     Truths are ND-necessary is a closed pure sentence. It is true at the evaluation point (argument
-    distinctness-preserving-collapse) and false at every arrow into $B$, where it has its value at $1_B$
-    (argument necessary-distinctness-preserving-collapse). There are no arrows from $B$ to $A$, so at
+    truths-are-nd-necessary) and false at every arrow into $B$, where it has its value at $1_B$
+    (argument necessary-truths-are-nd-necessary). There are no arrows from $B$ to $A$, so at
     the evaluation point it is true but not necessarily possible.
 lean:
   param: Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A

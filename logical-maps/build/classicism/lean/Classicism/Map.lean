@@ -1,17 +1,25 @@
 import Classicism.Statements
 import Classicism.Results.Arity
+import Classicism.Results.Boxed
 import Classicism.Results.SentenceSchemas.Incompatibilities
 import Classicism.Results.SentenceSchemas.RigidPower
 import Classicism.Results.SentenceSchemas.WitnessedPossibility
 import Classicism.Results.SentenceSchemas.PossibilityPlus
 import Classicism.Results.SentenceSchemas.Infinity
 import Classicism.Results.SentenceSchemas.Constants
+import Classicism.Results.SentenceSchemas.SeparatedStructure
 import Classicism.Results.SentenceSchemas.ArithmeticMeta
+import Classicism.Results.SentenceSchemas.ArithmeticNecessitism
 import Classicism.Certified.Research
 import Classicism.Results.Research.NPCC5Atomicity
 import Classicism.Results.Research.RigidityClosureResearchAtomicPowerCertificates
 import Classicism.Results.Research.ModalPropagationCertificates.StrongAtomicity
 import Classicism.Results.Research.ModalPropagationCertificates.BoxedComprehension
+import Classicism.Results.Other.Meta
+import Classicism.Results.BourbakiWitt.Certificates
+import Classicism.Certified.Box5
+import Classicism.Results.Existence
+import Classicism.Results.Other.Witnesses
 
 /-!
 # The map's results, certified
@@ -171,13 +179,13 @@ theorem actuality_and_bf_imply_inextensible_comprehension : Statements.actuality
 theorem actuality_and_bf_t_imply_strong_actuality : Statements.actuality_and_bf_t_imply_strong_actuality := by
   map_cert Proofs.actuality_and_bf_t_imply_strong_actuality.entails
 
-/-- `actuality-and-distinctness-preserving-collapse-imply-inextensible-comprehension` -/
-theorem actuality_and_distinctness_preserving_collapse_imply_inextensible_comprehension : Statements.actuality_and_distinctness_preserving_collapse_imply_inextensible_comprehension := by
-  map_cert Meta.actuality_and_distinctness_preserving_collapse_imply_inextensible_comprehension
+/-- `actuality-and-truths-are-nd-necessary-imply-inextensible-comprehension` -/
+theorem actuality_and_truths_are_nd_necessary_imply_inextensible_comprehension : Statements.actuality_and_truths_are_nd_necessary_imply_inextensible_comprehension := by
+  map_cert Meta.actuality_and_truths_are_nd_necessary_imply_inextensible_comprehension
 
-/-- `actuality-and-distinctness-preserving-collapse-imply-strong-actuality` -/
-theorem actuality_and_distinctness_preserving_collapse_imply_strong_actuality : Statements.actuality_and_distinctness_preserving_collapse_imply_strong_actuality := by
-  map_cert Proofs.actuality_and_distinctness_preserving_collapse_imply_strong_actuality.entails
+/-- `actuality-and-truths-are-nd-necessary-imply-strong-actuality` -/
+theorem actuality_and_truths_are_nd_necessary_imply_strong_actuality : Statements.actuality_and_truths_are_nd_necessary_imply_strong_actuality := by
+  map_cert Proofs.actuality_and_truths_are_nd_necessary_imply_strong_actuality.entails
 
 /-- `actuality-implies-persistent-comprehension-r` -/
 theorem actuality_implies_persistent_comprehension_r : Statements.actuality_implies_persistent_comprehension_r := by
@@ -307,6 +315,10 @@ theorem c5_and_necessary_rigid_comprehension_imply_necessary_gallin_comprehensio
 theorem c5_and_persistent_comprehension_imply_gallin : Statements.c5_and_persistent_comprehension_imply_gallin := by
   map_cert _root_.Classicism.c5_and_persistent_comprehension_imply_gallin.entails
 
+/-- `c5-implies-arithmetic-necessitism` -/
+theorem c5_implies_arithmetic_necessitism : Statements.c5_implies_arithmetic_necessitism := by
+  map_cert Proofs.c5_implies_arithmetic_necessitism.entails
+
 /-- `completeness-and-actuality-imply-weak-rigid-comprehension` -/
 theorem completeness_and_actuality_imply_weak_rigid_comprehension : Statements.completeness_and_actuality_imply_weak_rigid_comprehension := by
   map_cert Meta.completeness_and_actuality_imply_weak_rigid_comprehension
@@ -327,9 +339,9 @@ theorem distinctness_necessary_t_implies_modal_five : Statements.distinctness_ne
 theorem distinctness_necessary_t_implies_vicinity : Statements.distinctness_necessary_t_implies_vicinity := by
   map_cert Proofs.distinctness_necessary_t_implies_vicinity.entails
 
-/-- `distinctness-preserving-collapse-and-nd-imply-fregean-axiom` -/
-theorem distinctness_preserving_collapse_and_nd_imply_fregean_axiom : Statements.distinctness_preserving_collapse_and_nd_imply_fregean_axiom := by
-  map_cert Proofs.distinctness_preserving_collapse_and_nd_imply_fregean_axiom.entails
+/-- `truths-are-nd-necessary-and-nd-imply-fregean-axiom` -/
+theorem truths_are_nd_necessary_and_nd_imply_fregean_axiom : Statements.truths_are_nd_necessary_and_nd_imply_fregean_axiom := by
+  map_cert Proofs.truths_are_nd_necessary_and_nd_imply_fregean_axiom.entails
 
 /-- `distinctness-signature-r-implies-distinctness-schema-r` -/
 theorem distinctness_signature_r_implies_distinctness_schema_r : Statements.distinctness_signature_r_implies_distinctness_schema_r :=
@@ -371,9 +383,9 @@ theorem extensionality_r_implies_rigid_comprehension_r : Statements.extensionali
 theorem five_and_strong_atomicity_t_imply_necessary_b : Statements.five_and_strong_atomicity_t_imply_necessary_b := by
   map_cert Proofs.five_and_strong_atomicity_t_imply_necessary_b.entails
 
-/-- `fregean-axiom-implies-distinctness-preserving-collapse` -/
-theorem fregean_axiom_implies_distinctness_preserving_collapse : Statements.fregean_axiom_implies_distinctness_preserving_collapse := by
-  map_cert Proofs.fregean_axiom_implies_distinctness_preserving_collapse.entails
+/-- `fregean-axiom-implies-truths-are-nd-necessary` -/
+theorem fregean_axiom_implies_truths_are_nd_necessary : Statements.fregean_axiom_implies_truths_are_nd_necessary := by
+  map_cert Proofs.fregean_axiom_implies_truths_are_nd_necessary.entails
 
 /-- `fregean-axiom-implies-extensionality-r` -/
 theorem fregean_axiom_implies_extensionality_r : Statements.fregean_axiom_implies_extensionality_r := by
@@ -434,6 +446,10 @@ theorem logical_necessity_r_implies_no_pure_contingency_r : Statements.logical_n
 /-- `logical-necessity-r-implies-witnessed-possibility-r` -/
 theorem logical_necessity_r_implies_witnessed_possibility_r : Statements.logical_necessity_r_implies_witnessed_possibility_r := by
   map_cert_sig logicalNecessity_entails_witnessedPossibility
+
+/-- `maximalism-implies-arithmetic-necessitism` -/
+theorem maximalism_implies_arithmetic_necessitism : Statements.maximalism_implies_arithmetic_necessitism := by
+  map_cert distinctness_entails_arithmeticNecessitism
 
 /-- `maximalist-distinctness-incompatible-with-nd` -/
 theorem maximalist_distinctness_incompatible_with_nd : Statements.maximalist_distinctness_incompatible_with_nd := by
@@ -910,21 +926,21 @@ theorem possibility_and_necessary_rigid_power_incompatible : Statements.possibil
 theorem possibility_and_no_pure_contingency_incompatible : Statements.possibility_and_no_pure_contingency_incompatible := by
   map_cert_incompatible possibility_schema_npc_inconsistent
 
-/-- `possibility-plus-r-implies-possibility-schema-r` -/
-theorem possibility_plus_r_implies_possibility_schema_r : Statements.possibility_plus_r_implies_possibility_schema_r := by
+/-- `possibility-plus-r-implies-distinctness-schema-r` -/
+theorem possibility_plus_r_implies_distinctness_schema_r : Statements.possibility_plus_r_implies_distinctness_schema_r := by
   map_cert (Entails.trans possibilityPlus_entails_possibility Meta.possibility_schema_r_implies_distinctness_schema_r)
 
 /-- `possibility-plus-signature-r-implies-possibility-plus-r` -/
 theorem possibility_plus_signature_r_implies_possibility_plus_r : Statements.possibility_plus_signature_r_implies_possibility_plus_r :=
   fun hS _ h => Entails.trans h (Entails.of_subset (ofPure_possibilityPlus_subset hS.1))
 
-/-- `possibility-plus-signature-r-implies-possibility-signature-r` -/
-theorem possibility_plus_signature_r_implies_possibility_signature_r : Statements.possibility_plus_signature_r_implies_possibility_signature_r := by
+/-- `possibility-plus-signature-r-implies-distinctness-signature-r` -/
+theorem possibility_plus_signature_r_implies_distinctness_signature_r : Statements.possibility_plus_signature_r_implies_distinctness_signature_r := by
   map_cert_sig (Entails.trans possibilityPlusSig_entails_possibility
     Meta.possibility_signature_r_implies_distinctness_signature_r)
 
-/-- `possibility-schema-r-implies-possible-infinity-e` -/
-theorem possibility_schema_r_implies_possible_infinity_e : Statements.possibility_schema_r_implies_possible_infinity_e := by
+/-- `distinctness-schema-r-implies-possible-infinity-e` -/
+theorem distinctness_schema_r_implies_possible_infinity_e : Statements.distinctness_schema_r_implies_possible_infinity_e := by
   map_cert possibility_entails_possibleInfinityE
 
 /-- `possible-infinity-e-and-bf-imply-axiom-of-infinity-e` -/
@@ -1044,9 +1060,9 @@ theorem transversal_choice_r_implies_relational_choice_r : Statements.transversa
 theorem transversal_choice_r_implies_transversal_r : Statements.transversal_choice_r_implies_transversal_r := by
   map_cert Proofs.transversal_choice_r_implies_transversal_r.entails
 
-/-- `vicinity-and-distinctness-preserving-collapse-imply-actuality` -/
-theorem vicinity_and_distinctness_preserving_collapse_imply_actuality : Statements.vicinity_and_distinctness_preserving_collapse_imply_actuality := by
-  map_cert Proofs.vicinity_and_distinctness_preserving_collapse_imply_actuality.entails
+/-- `vicinity-and-truths-are-nd-necessary-imply-actuality` -/
+theorem vicinity_and_truths_are_nd_necessary_imply_actuality : Statements.vicinity_and_truths_are_nd_necessary_imply_actuality := by
+  map_cert Proofs.vicinity_and_truths_are_nd_necessary_imply_actuality.entails
 
 /-- `vicinity-and-weakly-inextensible-comprehension-imply-actuality` -/
 theorem vicinity_and_weakly_inextensible_comprehension_imply_actuality : Statements.vicinity_and_weakly_inextensible_comprehension_imply_actuality := by
@@ -1193,10 +1209,10 @@ theorem distinctness_necessary_t.dual : Statements.distinctness_necessary_t.dual
   map_form P.NecessityOfDistinctnessT.to_dual.entails
     P.NecessityOfDistinctnessT.of_dual.entails
 
-/-- `distinctness-preserving-collapse`, variant `dual`: the dual form. -/
-theorem distinctness_preserving_collapse.dual : Statements.distinctness_preserving_collapse.dual := by
-  map_form P.DistinctnessPreservingCollapse.to_dual.entails
-    P.DistinctnessPreservingCollapse.of_dual.entails
+/-- `truths-are-nd-necessary`, variant `dual`: the dual form. -/
+theorem truths_are_nd_necessary.dual : Statements.truths_are_nd_necessary.dual := by
+  map_form P.TruthsAreNDNecessary.to_dual.entails
+    P.TruthsAreNDNecessary.of_dual.entails
 
 /-- `modal-b`, variant `dual`: the dual form. -/
 theorem modal_b.dual : Statements.modal_b.dual := by
@@ -1348,6 +1364,10 @@ theorem necessary_rigid_power_r_implies_rigid_power_r : Statements.necessary_rig
 /-- `necessary-rigid-comprehension-implies-necessary-weak-rigid-comprehension` -/
 theorem necessary_rigid_comprehension_implies_necessary_weak_rigid_comprehension : Statements.necessary_rigid_comprehension_implies_necessary_weak_rigid_comprehension := by
   map_cert Proofs.necessary_rigid_comprehension_implies_necessary_weak_rigid_comprehension.entails
+
+/-- `necessary-rigid-comprehension-implies-arithmetic-necessitism` -/
+theorem necessary_rigid_comprehension_implies_arithmetic_necessitism : Statements.necessary_rigid_comprehension_implies_arithmetic_necessitism := by
+  map_cert Proofs.necessary_rigid_comprehension_implies_arithmetic_necessitism.entails
 
 /-- `necessary-rigid-comprehension-implies-necessary-inextensible-comprehension` -/
 theorem necessary_rigid_comprehension_implies_necessary_inextensible_comprehension : Statements.necessary_rigid_comprehension_implies_necessary_inextensible_comprehension := by
@@ -1957,5 +1977,328 @@ theorem distinctness_necessary_t_and_inextensible_comprehension_imply_weakly_rig
         Proofs.modal_five_implies_modal_b.entails Proofs.modal_b_implies_distinctness_necessary_r.entails))
     AxiomSet.Entails.mono_right (schema_subset_args _) (AxiomSet.Entails.trans (AxiomSet.Entails.union nd ic)
       _root_.Classicism.Research.InextensiblePower.nd_ic_weaklyRigidPower.listEntails))
+
+/-! ## Further results (`lean-results-other`, 1 November 2026)
+
+Proofs in `Results/Other/`: the shallow records in `Shallow.lean`, certified in
+`Certificates.lean`; the metalogical ones in `Meta.lean`. -/
+
+/-- `necessary-atomlessness-implies-atomlessness` -/
+theorem necessary_atomlessness_implies_atomlessness : Statements.necessary_atomlessness_implies_atomlessness := by
+  map_cert Proofs.Other.necessary_atomlessness_implies_atomlessness.entails
+
+/-- `necessary-distinctness-preserving-collapse-implies-distinctness-preserving-collapse` -/
+theorem necessary_truths_are_nd_necessary_implies_truths_are_nd_necessary : Statements.necessary_truths_are_nd_necessary_implies_truths_are_nd_necessary := by
+  map_cert Proofs.Other.necessary_distinctness_preserving_collapse_implies_distinctness_preserving_collapse.entails
+
+/-- `tame-rigidity-and-bf-t-imply-necessary-bf-t` -/
+theorem tame_rigidity_and_bf_t_imply_necessary_bf_t : Statements.tame_rigidity_and_bf_t_imply_necessary_bf_t := by
+  map_cert Proofs.Other.tame_rigidity_and_bf_t_imply_necessary_bf_t.entails
+
+/-- `rigid-comprehension-and-bf-t-imply-necessary-bf-t` -/
+theorem rigid_comprehension_and_bf_t_imply_necessary_bf_t : Statements.rigid_comprehension_and_bf_t_imply_necessary_bf_t := by
+  map_cert Proofs.Other.rigid_comprehension_and_bf_t_imply_necessary_bf_t.entails
+
+/-- `rigid-rigidity-and-rigid-power-imply-necessary-rigid-power`, at every type: the shallow
+core is at a Rel-parameter. -/
+theorem rigid_rigidity_and_rigid_power_imply_necessary_rigid_power : Statements.rigid_rigidity_and_rigid_power_imply_necessary_rigid_power := by
+  map_cert Proofs.Other.rigid_rigidity_and_rigid_power_imply_necessary_rigid_power.entails
+
+/-- `c5-and-atomlessness-imply-necessary-atomlessness`, through `□ND` at `t` -/
+theorem c5_and_atomlessness_imply_necessary_atomlessness : Statements.c5_and_atomlessness_imply_necessary_atomlessness := by
+  map_cert Proofs.Other.c5_and_atomlessness_imply_necessary_atomlessness.entails
+
+/-- `nd-t-and-bf-t-imply-necessary-nd-t` (Proposition 2.4 at `t`) -/
+theorem nd_t_and_bf_t_imply_necessary_nd_t : Statements.nd_t_and_bf_t_imply_necessary_nd_t := by
+  map_cert Proofs.distinctness_necessary_t_and_barcan_t_imply_necessary_distinctness_necessary_t.entails
+
+/-- `no-pure-contingency-and-atomlessness-imply-necessary-atomlessness` -/
+theorem no_pure_contingency_and_atomlessness_imply_necessary_atomlessness : Statements.no_pure_contingency_and_atomlessness_imply_necessary_atomlessness := by
+  map_cert npc_atomlessness_entails_necAtomlessness
+
+/-- `no-pure-contingency-and-well-ordering-imply-necessary-well-ordering` -/
+theorem no_pure_contingency_and_well_ordering_imply_necessary_well_ordering : Statements.no_pure_contingency_and_well_ordering_imply_necessary_well_ordering := by
+  map_cert npc_wellOrdering_entails_necWellOrdering
+
+/-- `maximalist-distinctness-incompatible-with-necessary-atomlessness` -/
+theorem maximalist_distinctness_incompatible_with_necessary_atomlessness : Statements.maximalist_distinctness_incompatible_with_necessary_atomlessness := by
+  map_cert_incompatible maximalist_necAtomlessness_inconsistent
+
+/-- `possibility-and-necessary-relational-choice-incompatible` -/
+theorem possibility_and_necessary_relational_choice_incompatible : Statements.possibility_and_necessary_relational_choice_incompatible := by
+  map_cert_incompatible maximalist_necRelationalChoice_inconsistent
+
+/-- `possibility-schema-r-implies-possible-infinity-t` -/
+theorem distinctness_schema_r_implies_possible_infinity_t : Statements.distinctness_schema_r_implies_possible_infinity_t := by
+  map_cert possibility_entails_possibleInfinityT
+
+/-- `strong-possibility-r-implies-possibility-schema-r` -/
+theorem strong_possibility_r_implies_distinctness_schema_r : Statements.strong_possibility_r_implies_distinctness_schema_r := by
+  map_cert (AxiomSet.Entails.trans strongPossibility_entails_possibility (possibility_entails_distinctness _))
+
+/-- `strong-possibility-and-infinity-e-incompatible` -/
+theorem strong_possibility_and_infinity_e_incompatible : Statements.strong_possibility_and_infinity_e_incompatible := by
+  map_cert_incompatible strongPossibility_infinityE_inconsistent
+
+/-- `strong-possibility-and-distinctness-preserving-collapse-incompatible` -/
+theorem strong_possibility_and_truths_are_nd_necessary_incompatible : Statements.strong_possibility_and_truths_are_nd_necessary_incompatible := by
+  map_cert_incompatible strongPossibility_dpc_inconsistent
+
+/-- `strong-possibility-and-two-hat-implies-nd-incompatible` -/
+theorem strong_possibility_and_two_hat_implies_nd_incompatible : Statements.strong_possibility_and_two_hat_implies_nd_incompatible := by
+  map_cert_incompatible strongPossibility_twoHat_inconsistent
+
+/-- `axiom-of-infinity-e-implies-infinity-e`, by completeness -/
+theorem axiom_of_infinity_e_implies_infinity_e : Statements.axiom_of_infinity_e_implies_infinity_e := by
+  map_cert axiomOfInfinityE_entails_infinityE
+
+/-- `axiom-of-infinity-t-implies-infinity-t`, by completeness -/
+theorem axiom_of_infinity_t_implies_infinity_t : Statements.axiom_of_infinity_t_implies_infinity_t := by
+  map_cert axiomOfInfinityT_entails_infinityT
+
+/-- `atomlessness-implies-infinity-t`, through the Axiom of Infinity at `t`
+(`atomlessness-implies-axiom-of-infinity-t`) -/
+theorem atomlessness_implies_infinity_t : Statements.atomlessness_implies_infinity_t := by
+  map_cert (Entails.trans Proofs.atomlessness_implies_axiom_of_infinity_t.entails
+    axiomOfInfinityT_entails_infinityT)
+
+/-! ### Separated Structure and the signature schemas (`Results/SentenceSchemas/SeparatedStructure.lean`) -/
+
+/-- `distinctness-signature-r-implies-separated-structure-r` -/
+theorem distinctness_signature_r_implies_separated_structure_r :
+    Statements.distinctness_signature_r_implies_separated_structure_r :=
+  fun _ _ h => Entails.trans h distinctness_entails_separatedStructure
+
+/-- `possibility-signature-r-implies-witnessed-possibility-r` (premise: Maximalism, Distinctness form) -/
+theorem distinctness_signature_r_implies_witnessed_possibility_r :
+    Statements.distinctness_signature_r_implies_witnessed_possibility_r :=
+  fun _ _ h => Entails.trans h distinctness_entails_witnessedPossibility
+
+/-- `separated-structure-r-implies-possibly-witnessed-possibility-r` -/
+theorem separated_structure_r_implies_possibly_witnessed_possibility_r :
+    Statements.separated_structure_r_implies_possibly_witnessed_possibility_r :=
+  fun _ _ h => Entails.trans h separatedStructure_entails_possiblyWitnessedPossibility
+
+/-- `possibly-witnessed-possibility-r-implies-separated-structure-r` -/
+theorem possibly_witnessed_possibility_r_implies_separated_structure_r :
+    Statements.possibly_witnessed_possibility_r_implies_separated_structure_r :=
+  fun hS _ h => Entails.trans h (possiblyWitnessedPossibility_entails_separatedStructure hS.1)
+
+/-- `logical-necessity-r-implies-separated-structure-r`, through Possibly Witnessed Possibility -/
+theorem logical_necessity_r_implies_separated_structure_r :
+    Statements.logical_necessity_r_implies_separated_structure_r :=
+  fun hS _ h => Entails.trans h (logicalNecessity_entails_separatedStructure hS.1)
+
+/-- `logical-necessity-r-implies-modal-freedom-signature-r` -/
+theorem logical_necessity_r_implies_modal_freedom_signature_r :
+    Statements.logical_necessity_r_implies_modal_freedom_signature_r :=
+  fun hS _ h => Entails.trans h (logicalNecessity_entails_modalFreedom hS.1)
+
+/-- `separated-structure-r-implies-independence-signature-r` -/
+theorem separated_structure_r_implies_independence_signature_r :
+    Statements.separated_structure_r_implies_independence_signature_r :=
+  fun hS _ h => Entails.trans h (separatedStructure_entails_independence hS.1)
+
+/-- `witnessed-possibility-r-implies-independence-signature-r` -/
+theorem witnessed_possibility_r_implies_independence_signature_r :
+    Statements.witnessed_possibility_r_implies_independence_signature_r :=
+  fun hS _ h => Entails.trans h (witnessedPossibility_entails_independence hS.1)
+
+/-- `pure-distinctness-and-separated-structure-imply-signature-distinctness` -/
+theorem pure_distinctness_and_separated_structure_imply_signature_distinctness :
+    Statements.pure_distinctness_and_separated_structure_imply_signature_distinctness :=
+  fun hS _ h₁ h₂ => Entails.trans (Entails.union h₁ h₂)
+    (pureDistinctness_separatedStructure_entails_distinctness hS.1)
+
+/-! ### Boxed twins, by `map_boxed` (`Results/Boxed.lean`) -/
+
+/-- `necessary-actuality-and-necessary-distinctness-preserving-collapse-imply-necessary-inextensible-comprehension`: the boxed form of `actuality-and-distinctness-preserving-collapse-imply-inextensible-comprehension` -/
+theorem necessary_actuality_and_necessary_truths_are_nd_necessary_imply_necessary_inextensible_comprehension : Statements.necessary_actuality_and_necessary_truths_are_nd_necessary_imply_necessary_inextensible_comprehension := by
+  map_boxed actuality_and_truths_are_nd_necessary_imply_inextensible_comprehension
+
+/-- `necessary-boolean-completeness-implies-necessary-weakly-inextensible-comprehension`: the boxed form of `boolean-completeness-r-implies-weakly-inextensible-comprehension-r` -/
+theorem necessary_boolean_completeness_implies_necessary_weakly_inextensible_comprehension : Statements.necessary_boolean_completeness_implies_necessary_weakly_inextensible_comprehension := by
+  map_boxed boolean_completeness_r_implies_weakly_inextensible_comprehension_r
+
+/-- `necessary-vicinity-and-necessary-distinctness-preserving-collapse-imply-necessary-actuality`: the boxed form of `vicinity-and-distinctness-preserving-collapse-imply-actuality` -/
+theorem necessary_vicinity_and_necessary_truths_are_nd_necessary_imply_necessary_actuality : Statements.necessary_vicinity_and_necessary_truths_are_nd_necessary_imply_necessary_actuality := by
+  map_boxed vicinity_and_truths_are_nd_necessary_imply_actuality
+
+/-- `necessary-weak-rigid-comprehension-implies-necessary-boolean-completeness`: the boxed form of `weak-rigid-comprehension-r-implies-boolean-completeness-r` -/
+theorem necessary_weak_rigid_comprehension_implies_necessary_boolean_completeness : Statements.necessary_weak_rigid_comprehension_implies_necessary_boolean_completeness := by
+  map_boxed weak_rigid_comprehension_r_implies_boolean_completeness_r
+
+/-! ### Resting on the Bourbaki–Witt lemma (`Background/BourbakiWitt.lean`, `Results/BourbakiWitt/`) -/
+
+/-- `boolean-completeness-and-modalized-relational-choice-imply-necessary-transversal` -/
+theorem boolean_completeness_and_modalized_relational_choice_imply_necessary_transversal : Statements.boolean_completeness_and_modalized_relational_choice_imply_necessary_transversal := by
+  map_cert Proofs.BWTransversal.boolean_completeness_and_modalized_relational_choice_imply_necessary_transversal.entails
+
+/-- `vicinity-and-relational-choice-imply-transversal-choice` -/
+theorem vicinity_and_relational_choice_imply_transversal_choice : Statements.vicinity_and_relational_choice_imply_transversal_choice := by
+  map_cert Proofs.BWChoice.vicinity_and_relational_choice_imply_transversal_choice.entails
+
+/-- `vicinity-boolean-completeness-t-and-relational-choice-imply-actuality` -/
+theorem vicinity_boolean_completeness_t_and_relational_choice_imply_actuality : Statements.vicinity_boolean_completeness_t_and_relational_choice_imply_actuality := by
+  map_cert Proofs.BWActuality.vicinity_boolean_completeness_t_and_relational_choice_imply_actuality.entails
+
+/-- `necessary-vicinity-and-necessary-relational-choice-imply-necessary-transversal-choice`: the boxed form of `vicinity-and-relational-choice-imply-transversal-choice` -/
+theorem necessary_vicinity_and_necessary_relational_choice_imply_necessary_transversal_choice : Statements.necessary_vicinity_and_necessary_relational_choice_imply_necessary_transversal_choice := by
+  map_boxed vicinity_and_relational_choice_imply_transversal_choice
+
+/-- `necessary-vicinity-boolean-completeness-t-and-relational-choice-imply-necessary-actuality`: the boxed form of `vicinity-boolean-completeness-t-and-relational-choice-imply-actuality` -/
+theorem necessary_vicinity_boolean_completeness_t_and_relational_choice_imply_necessary_actuality : Statements.necessary_vicinity_boolean_completeness_t_and_relational_choice_imply_necessary_actuality := by
+  map_boxed vicinity_boolean_completeness_t_and_relational_choice_imply_actuality
+
+/-! ## The theory of 5-necessity (`lean-box5`, 1 November 2026)
+
+Proofs in `Results/Records/Box5.lean`, from `Background/Box5.lean` (the Barcan formula for
+`□₅`, the equivalence of its two definitions, Theorem D9 of *The Bounds of Possibility*,
+Appendix D); certified in `Certified/Box5.lean`. -/
+
+/-- `vicinity-implies-five-implies-two-hat` -/
+theorem vicinity_implies_five_implies_two_hat : Statements.vicinity_implies_five_implies_two_hat := by
+  map_cert Proofs.vicinity_implies_five_implies_two_hat.entails
+
+/-- `vicinity-and-barcan-t-imply-five-implies-two-hat`, Vicinity alone sufficing -/
+theorem vicinity_and_barcan_t_imply_five_implies_two_hat : Statements.vicinity_and_barcan_t_imply_five_implies_two_hat := by
+  map_cert Proofs.vicinity_and_barcan_t_imply_five_implies_two_hat.entails
+
+/-- `vicinity-and-atomicity-t-imply-actuality` -/
+theorem vicinity_and_atomicity_t_imply_actuality : Statements.vicinity_and_atomicity_t_imply_actuality := by
+  map_cert Proofs.vicinity_and_atomicity_t_imply_actuality.entails
+
+/-- `actuality-and-five-implies-nd-necessity-imply-inextensible-comprehension`, at every arity -/
+theorem actuality_and_five_implies_nd_necessity_imply_inextensible_comprehension : Statements.actuality_and_five_implies_nd_necessity_imply_inextensible_comprehension := by
+  map_cert Meta.actuality_and_five_implies_nd_necessity_imply_inextensible_comprehension
+
+/-- `necessary-vicinity-implies-necessary-five-implies-two-hat`: the boxed form of `vicinity-implies-five-implies-two-hat` -/
+theorem necessary_vicinity_implies_necessary_five_implies_two_hat : Statements.necessary_vicinity_implies_necessary_five_implies_two_hat := by
+  map_boxed vicinity_implies_five_implies_two_hat
+
+/-- `necessary-vicinity-and-necessary-atomicity-t-imply-necessary-actuality`: the boxed form of `vicinity-and-atomicity-t-imply-actuality` -/
+theorem necessary_vicinity_and_necessary_atomicity_t_imply_necessary_actuality : Statements.necessary_vicinity_and_necessary_atomicity_t_imply_necessary_actuality := by
+  map_boxed vicinity_and_atomicity_t_imply_actuality
+
+/-- `necessary-actuality-and-necessary-five-implies-nd-necessity-imply-necessary-inextensible-comprehension`: the boxed form of `actuality-and-five-implies-nd-necessity-imply-inextensible-comprehension` -/
+theorem necessary_actuality_and_necessary_five_implies_nd_necessity_imply_necessary_inextensible_comprehension : Statements.necessary_actuality_and_necessary_five_implies_nd_necessity_imply_necessary_inextensible_comprehension := by
+  map_boxed actuality_and_five_implies_nd_necessity_imply_inextensible_comprehension
+
+/-! ## End of the theory of 5-necessity (`lean-box5`) -/
+
+/-! ### Existence as a premise, discharged (`Results/Existence.lean`; lean-type-existence) -/
+
+/-- `barcan-and-intensional-choice-imply-necessary-intensional-choice` -/
+theorem barcan_and_intensional_choice_imply_necessary_intensional_choice : Statements.barcan_and_intensional_choice_imply_necessary_intensional_choice := by
+  map_cert (Entails.discharge_existence Proofs.barcan_and_intensional_choice_imply_necessary_intensional_choice.entails)
+
+/-- `modalized-relational-choice-implies-necessary-modalized-relational-choice` -/
+theorem modalized_relational_choice_implies_necessary_modalized_relational_choice : Statements.modalized_relational_choice_implies_necessary_modalized_relational_choice := by
+  map_cert (Entails.discharge_existence Proofs.modalized_relational_choice_implies_necessary_modalized_relational_choice.entails)
+
+/-! ### End of Existence as a premise, discharged -/
+
+/-! ### Witness verdicts: Maximalism against necessitations (`Results/Other/Witnesses.lean`) -/
+
+/-- `maximalist-distinctness-incompatible-with-necessary-truth-implies-five-necessity` -/
+theorem maximalist_distinctness_incompatible_with_necessary_truth_implies_five_necessity : Statements.maximalist_distinctness_incompatible_with_necessary_truth_implies_five_necessity := by
+  map_cert_incompatible maximalist_necTruthImpliesFive_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-truth-implies-two-hat-necessity` -/
+theorem maximalist_distinctness_incompatible_with_necessary_truth_implies_two_hat_necessity : Statements.maximalist_distinctness_incompatible_with_necessary_truth_implies_two_hat_necessity := by
+  map_cert_incompatible maximalist_necTruthImpliesTwoHat_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-two-hat-implies-nd-necessity` -/
+theorem maximalist_distinctness_incompatible_with_necessary_two_hat_implies_nd_necessity : Statements.maximalist_distinctness_incompatible_with_necessary_two_hat_implies_nd_necessity := by
+  map_cert_incompatible maximalist_necTwoHatImpliesNd_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-five-implies-nd-necessity` -/
+theorem maximalist_distinctness_incompatible_with_necessary_five_implies_nd_necessity : Statements.maximalist_distinctness_incompatible_with_necessary_five_implies_nd_necessity := by
+  map_cert_incompatible maximalist_necFiveImpliesNd_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-weakly-inextensible-comprehension-r` -/
+theorem maximalist_distinctness_incompatible_with_necessary_weakly_inextensible_comprehension_r : Statements.maximalist_distinctness_incompatible_with_necessary_weakly_inextensible_comprehension_r := by
+  map_cert_incompatible maximalist_necWeaklyInextensibleComprehension_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-tame-rigidity-r` -/
+theorem maximalist_distinctness_incompatible_with_necessary_tame_rigidity_r : Statements.maximalist_distinctness_incompatible_with_necessary_tame_rigidity_r := by
+  map_cert_incompatible maximalist_necTameRigidity_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-vicinity` -/
+theorem maximalist_distinctness_incompatible_with_necessary_vicinity : Statements.maximalist_distinctness_incompatible_with_necessary_vicinity := by
+  map_cert_incompatible maximalist_necVicinity_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-boolean-completeness-t` -/
+theorem maximalist_distinctness_incompatible_with_necessary_boolean_completeness_t : Statements.maximalist_distinctness_incompatible_with_necessary_boolean_completeness_t := by
+  map_cert_incompatible maximalist_necBooleanCompletenessT_inconsistent
+
+/-- `possibility-and-necessary-strong-atomicity-t-incompatible` -/
+theorem possibility_and_necessary_strong_atomicity_t_incompatible : Statements.possibility_and_necessary_strong_atomicity_t_incompatible := by
+  map_cert_incompatible maximalist_necStrongAtomicityT_inconsistent
+
+/-- `possibility-and-necessary-atoms-are-self-atoms-t-incompatible` -/
+theorem possibility_and_necessary_atoms_are_self_atoms_t_incompatible : Statements.possibility_and_necessary_atoms_are_self_atoms_t_incompatible := by
+  map_cert_incompatible maximalist_necAtomsAreSelfAtomsT_inconsistent
+
+/-- `possibility-and-necessary-intensional-choice-incompatible` -/
+theorem possibility_and_necessary_intensional_choice_incompatible : Statements.possibility_and_necessary_intensional_choice_incompatible := by
+  map_cert_incompatible maximalist_necIntensionalChoice_inconsistent
+
+/-- `maximalist-distinctness-incompatible-with-necessary-transversal-r` -/
+theorem maximalist_distinctness_incompatible_with_necessary_transversal_r : Statements.maximalist_distinctness_incompatible_with_necessary_transversal_r := by
+  map_cert_incompatible maximalist_necTransversal_inconsistent
+
+/-! ### End of witness verdicts -/
+
+theorem self_atoms_are_atoms_t_implies_self_atoms_are_atoms_r : Statements.self_atoms_are_atoms_t_implies_self_atoms_are_atoms_r := by
+  map_cert Proofs.self_atoms_are_atoms_t_implies_self_atoms_are_atoms_r.entails
+
+theorem necessary_self_atoms_are_atoms_t_implies_necessary_self_atoms_are_atoms_r : Statements.necessary_self_atoms_are_atoms_t_implies_necessary_self_atoms_are_atoms_r := by
+  map_cert Proofs.necessary_self_atoms_are_atoms_t_implies_necessary_self_atoms_are_atoms_r.entails
+
+theorem self_atoms_are_strong_atoms_t_implies_self_atoms_are_strong_atoms_r : Statements.self_atoms_are_strong_atoms_t_implies_self_atoms_are_strong_atoms_r := by
+  map_cert Proofs.self_atoms_are_strong_atoms_t_implies_self_atoms_are_strong_atoms_r.entails
+
+theorem necessary_self_atoms_are_strong_atoms_t_implies_necessary_self_atoms_are_strong_atoms_r : Statements.necessary_self_atoms_are_strong_atoms_t_implies_necessary_self_atoms_are_strong_atoms_r := by
+  map_cert Proofs.necessary_self_atoms_are_strong_atoms_t_implies_necessary_self_atoms_are_strong_atoms_r.entails
+
+theorem atomicity_t_and_intensional_choice_imply_atomicity : Statements.atomicity_t_and_intensional_choice_imply_atomicity := by
+  map_cert Meta.atomicity_t_and_intensional_choice_imply_atomicity
+
+theorem necessary_atomicity_t_and_necessary_intensional_choice_imply_necessary_atomicity : Statements.necessary_atomicity_t_and_necessary_intensional_choice_imply_necessary_atomicity := by
+  map_cert Meta.necessary_atomicity_t_and_necessary_intensional_choice_imply_necessary_atomicity
+
+theorem strong_atomicity_t_and_intensional_choice_imply_strong_atomicity : Statements.strong_atomicity_t_and_intensional_choice_imply_strong_atomicity := by
+  map_cert Meta.strong_atomicity_t_and_intensional_choice_imply_strong_atomicity
+
+theorem necessary_strong_atomicity_t_and_necessary_intensional_choice_imply_necessary_strong_atomicity : Statements.necessary_strong_atomicity_t_and_necessary_intensional_choice_imply_necessary_strong_atomicity := by
+  map_cert Meta.necessary_strong_atomicity_t_and_necessary_intensional_choice_imply_necessary_strong_atomicity
+
+theorem self_atomicity_t_and_intensional_choice_imply_self_atomicity_r : Statements.self_atomicity_t_and_intensional_choice_imply_self_atomicity_r := by
+  map_cert Meta.self_atomicity_t_and_intensional_choice_imply_self_atomicity_r
+
+theorem necessary_self_atomicity_t_and_necessary_intensional_choice_imply_necessary_self_atomicity_r : Statements.necessary_self_atomicity_t_and_necessary_intensional_choice_imply_necessary_self_atomicity_r := by
+  map_cert Meta.necessary_self_atomicity_t_and_necessary_intensional_choice_imply_necessary_self_atomicity_r
+
+theorem atoms_are_self_atoms_t_and_intensional_choice_imply_atoms_are_self_atoms_r : Statements.atoms_are_self_atoms_t_and_intensional_choice_imply_atoms_are_self_atoms_r := by
+  map_cert Meta.atoms_are_self_atoms_t_and_intensional_choice_imply_atoms_are_self_atoms_r
+
+theorem necessary_atoms_are_self_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_self_atoms_r : Statements.necessary_atoms_are_self_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_self_atoms_r := by
+  map_cert Meta.necessary_atoms_are_self_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_self_atoms_r
+
+theorem atoms_are_strong_atoms_t_and_intensional_choice_imply_atoms_are_strong_atoms_r : Statements.atoms_are_strong_atoms_t_and_intensional_choice_imply_atoms_are_strong_atoms_r := by
+  map_cert Meta.atoms_are_strong_atoms_t_and_intensional_choice_imply_atoms_are_strong_atoms_r
+
+theorem necessary_atoms_are_strong_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_strong_atoms_r : Statements.necessary_atoms_are_strong_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_strong_atoms_r := by
+  map_cert Meta.necessary_atoms_are_strong_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_strong_atoms_r
+
+theorem necessary_axiom_of_infinity_e_implies_axiom_of_infinity_e : Statements.necessary_axiom_of_infinity_e_implies_axiom_of_infinity_e := by
+  map_cert Proofs.necessary_axiom_of_infinity_e_implies_axiom_of_infinity_e.entails
+
+theorem necessary_axiom_of_infinity_t_implies_axiom_of_infinity_t : Statements.necessary_axiom_of_infinity_t_implies_axiom_of_infinity_t := by
+  map_cert Proofs.necessary_axiom_of_infinity_t_implies_axiom_of_infinity_t.entails
+
+theorem necessary_atomlessness_implies_necessary_axiom_of_infinity_t : Statements.necessary_atomlessness_implies_necessary_axiom_of_infinity_t := by
+  map_cert Proofs.necessary_atomlessness_implies_necessary_axiom_of_infinity_t.entails
 
 end Classicism.Map

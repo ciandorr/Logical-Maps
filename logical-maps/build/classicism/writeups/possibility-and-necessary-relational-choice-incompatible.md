@@ -1,6 +1,6 @@
 # Maximalism (pure) ∧ □Relational Choice ⇒ ⊥
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, observation of 23 September 2026 (whatever is consistent with Maximalist Classicism is made possible by Strong Possibility); proof written out by Claude Fable 5.1 (Anthropic), 23 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 23 September 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.possibility_and_necessary_relational_choice_incompatible`; produced by Cian Dorr, observation of 23 September 2026 (whatever is consistent with Maximalist Classicism is made possible by Strong Possibility); proof written out by Claude Fable 5.1 (Anthropic), 23 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 23 September 2026.</p>
 
 ## Premises
 

@@ -16,7 +16,7 @@ Let $w$ witness Actuality and put $Y:=\lambda\bar z\, .\,w\land X[\bar z]$. Sinc
 
 ## Notes
 
-The argument establishes weak inextensibility at the world of evaluation only. It does not give Inextensible Comprehension, whose witness must be weakly inextensible at every world: at a world where $w$ is false but still possible, $\lambda\bar z\, .\,w\land X[\bar z]$ has no instances, so inextensibility there would need it to entail $\bot$, which fails whenever $w\land\exists\bar z\, .\,X[\bar z]$ is possible there. Under C5 the gap closes by Proposition 2.10, and it also closes under Distinctness-preserving collapse; see the recorded results. Whether Actuality alone implies Inextensible Comprehension is open.
+The argument establishes weak inextensibility at the world of evaluation only. It does not give Inextensible Comprehension, whose witness must be weakly inextensible at every world: at a world where $w$ is false but still possible, $\lambda\bar z\, .\,w\land X[\bar z]$ has no instances, so inextensibility there would need it to entail $\bot$, which fails whenever $w\land\exists\bar z\, .\,X[\bar z]$ is possible there. Under C5 the gap closes by Proposition 2.10, and it also closes under Truths are ND-necessary; see the recorded results. Whether Actuality alone implies Inextensible Comprehension is open.
 
 ## Revisions
 

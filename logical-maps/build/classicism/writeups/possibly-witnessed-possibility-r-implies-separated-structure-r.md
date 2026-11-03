@@ -1,6 +1,6 @@
 # Possibly Witnessed Possibility ⇒ Separated Structure
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, suggestion of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic), 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.possibly_witnessed_possibility_r_implies_separated_structure_r`; produced by Cian Dorr, suggestion of 22 September 2026; proof written out by Claude Fable 5.1 (Anthropic), 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.</p>
 
 ## Premises
 

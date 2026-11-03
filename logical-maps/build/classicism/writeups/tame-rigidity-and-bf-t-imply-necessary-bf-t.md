@@ -1,6 +1,6 @@
 # Tame Rigidity ∧ BF (type t) ⇒ □BF (type t)
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 3 October 2026; recorded by Claude Opus 5.5 (Anthropic), 16 October 2026, at Cian Dorr's direction.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.tame_rigidity_and_bf_t_imply_necessary_bf_t`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 3 October 2026; recorded by Claude Opus 5.5 (Anthropic), 16 October 2026, at Cian Dorr's direction.</p>
 
 ## Premises
 

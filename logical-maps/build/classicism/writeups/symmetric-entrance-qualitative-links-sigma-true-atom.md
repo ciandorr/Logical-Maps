@@ -122,7 +122,7 @@ As the argument arithmetic-necessitism-extensionally-full, with the property of 
 
 For a true $p$, $a\le p$, since $a$ entails every truth. Take $q:=a$ in the definition of $\Box_{\ne}p$: at a world in $a$, $p$ holds; at a world outside $a$, $\Diamond a$ fails. So every truth is $\Box_{\ne}$-necessary.
 
-*General argument `arguments/dpc-isolated-actual-world`. It requires that The actual-world proposition $a$ is in the domain and entails every truth, and no world outside $a$ sees a world in $a$. Here: $\{1_A\}$ is in the domain and entails every truth, and the only other world, $i$, sees only itself. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.*
+*General argument `arguments/nd-necessity-isolated-actual-world`. It requires that The actual-world proposition $a$ is in the domain and entails every truth, and no world outside $a$ sees a world in $a$. Here: $\{1_A\}$ is in the domain and entails every truth, and the only other world, $i$, sees only itself. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.*
 
 *Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* The finite-support, symmetric and full action models' copies (eight records) stated once for the topic; what varied, why no world outside the actual world sees back into it, is each record's reason for meeting actual-world-isolated.
 

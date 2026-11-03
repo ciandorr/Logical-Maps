@@ -49,6 +49,36 @@ parameters:
 
 arguments:
 
+- id: necessary-axiom-of-infinity-t
+  holds: [necessary-axiom-of-infinity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-31'
+  text: >-
+    As $\Box p$ is $p=\top$, it suffices that the Axiom of Infinity at type $t$ has value $\top$. Let
+    $\Phi\in D_{(tt)t}$ send $X\in B^{B}$ to $\bigvee_F\bigwedge_{b\notin F}\neg X(b)$, the join over the
+    finite sets $F\subseteq B$: the value of the claim that $X$ holds of only finitely many propositions. It
+    is in the domain, which holds every function, and so is $W:=\lambda Y\, .\,\forall X\, .\,YX\to\Phi X$,
+    whose value at $Y$ is $\bigwedge_X(Y(X)\to\Phi(X))$. $W\mathbf 0_t$ has value $\top$, since
+    $\mathbf 0_t(X)=\bigwedge_b\neg X(b)\le\Phi(X)$, taking $F=\varnothing$. And $WY\le W(\operatorname{Suc}_tY)$:
+    $\operatorname{Suc}_tY(X)=\bigvee_y X(y)\land Y(X_y)$, where $X_y$, the value of $\lambda u\, .\,Xu\land
+    u\ne y$, agrees with $X$ except that $X_y(y)=0$, equality being crisp; so $\Phi(X_y)\le\Phi(X)$, each
+    $F$ for $X_y$ giving $F\cup\{y\}$ for $X$. Hence the value of $\operatorname{FiniteCardinality}_t(Z)$ is
+    at most that of $WZ$, and that of $\operatorname{FiniteCardinality}_t(Z)\land Z(\lambda u\, .\,\top)$ is
+    at most $\Phi(\lambda u\, .\,\top)=\bigvee_F\bigwedge_{b\notin F}\bot=\bot$, $B$ being infinite, as $A$ is
+    in every member. So the existential has value $\bot$ and the Axiom value $\top$.
+
+- id: necessary-axiom-of-infinity-e
+  requires: [infinitely-many-individuals]
+  holds: [necessary-axiom-of-infinity-e]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-31'
+  text: >-
+    As for necessary-axiom-of-infinity-t, at type $e$: with $\Phi(X):=\bigvee_F\bigwedge_{n\notin F}\neg
+    X(n)$ for $X\in B^{D_e}$, the Axiom of Infinity at $e$ has value $\top$, since
+    $\Phi(\lambda u\, .\,\top)=\bot$ when $D_e$ is infinite.
+
 - id: necessity-of-analysis-constructible
   when: {universe: constructible}
   fails: [necessity-of-analysis]

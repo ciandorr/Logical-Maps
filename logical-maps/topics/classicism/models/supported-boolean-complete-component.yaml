@@ -1,0 +1,119 @@
+id: supported-boolean-complete-component
+name: 'Supported model over the ultrafilters of a complete homogeneous algebra'
+certificate:
+  source_id: misc
+  produced_by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026 (as a Boolean-valued model,
+    the component of a model with a root); reformulated as an action model by Cian Dorr, 29 October 2026;
+    the component recorded on its own by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026
+  checked_by: []
+  date: '2026-10-29'
+  lean: stated
+sources:
+- >-
+  GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Observer separation with propositional completeness and
+  divergent possibilities, research note of 25 October 2026, §§1–3 (unpaginated), in Daniel Kodsi's pull
+  request #18 (complete-boolean-root.md in the integration register).
+- Cian Dorr, reformulation as an action model, 29 October 2026, in conversation with Claude Opus 5.5
+  (Anthropic).
+source_names:
+- Astra via Kodsi 25 Oct
+- Dorr 29 Oct
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §3.5, pp. 58–61
+  note: Action models.
+group: supported-s5-components
+settings:
+  component: >-
+    Here $B$ is the regular open algebra of Cantor space, complete, atomless and homogeneous (every
+    nonzero interval is isomorphic to $B$). The worlds $W$ are the ultrafilters of $B$, $D$ is a single
+    individual, $G=\operatorname{Aut}(B)$ acting on the ultrafilters, and the support points are the
+    elements of $B$. A relation is admitted only if, for each tuple $\bar x$, the set of worlds at which it
+    holds of $\bar x$ is $\hat b:=\{U:b\in U\}$ for some $b\in B$; so the propositions are the sets
+    $\hat b$, a copy of $B$.
+  root: none
+meets:
+  one-individual: There is a single individual.
+  stone-worlds: The worlds are the ultrafilters of $B$, the fibres are its elements' clopen sets, and its
+    elements are the support points.
+  no-actuality-anywhere: Every world sees every world, and at none of them does Actuality hold (argument
+    no-actuality).
+  no-atoms-anywhere: Every world sees every world, and no proposition is an atom (argument atomlessness).
+arguments:
+- id: boolean-completeness-t
+  holds: [necessary-boolean-completeness-t]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    For finite $P\subseteq B$, the elements of $B$ fixed by the automorphisms fixing $P$ pointwise are the
+    joins of the cells of $\langle P\rangle$, and the join of a set invariant under those automorphisms is
+    attained by at most two members per cell, by homogeneity (write-up, Lemmas 1–2). So at any world a
+    family of propositions in the domain, being supported, has as union a finite union, which is a
+    proposition and its least upper bound.
+- id: no-actuality
+  fails: [actuality]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
+    prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At a world $U$, an actual-world proposition would be some $\hat b$ with $b\in U$ and
+    $\hat b\subseteq\hat c$ for every $c\in U$, so $b$ would be an atom of $B$. $B$ is atomless.
+- id: atomlessness
+  holds: [necessary-atomlessness]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    A possible proposition is $\hat b$ with $b\ne0$. Since $B$ is atomless there is $0<d<b$, and $\hat d$ is
+    possible, entails $\hat b$ and differs from it. Every world sees every world, so this holds at every
+    world.
+- id: no-relational-choice
+  fails: [relational-choice-r]
+  choice: free
+  writeup: supported-boolean-complete-predecessor
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At input and output type $t$. Let $R:=\lambda p\,q\,.\,p\to(q\land q\le p\land q\ne p)$, serial at the
+    world of evaluation $U_0$ since $B$ is atomless. Suppose $S\le R$ is functional at $U_0$, with fibres
+    $s(p,q)$ and support $P$, and let $k$ be the cell of $\langle P\rangle$ in $U_0$; the automorphisms
+    $H_P$ fixing $P$ pointwise fix $S$ and $k$. Let $q$ be the unique proposition with $Skq$ at $U_0$. Then
+    $0<q<k$, and $c:=s(k,q)\wedge k$ is in $U_0$ and below $q$, since $S\le R$. The fibre of the claim that
+    $Sk$ is functional is fixed by $H_P$, so it is a join of cells, and it contains $U_0$, so it contains
+    $\hat k$. Shrinking $c$ if $c=q$, we may take $0<c<q$. Homogeneity gives an automorphism of $[0,k-c]$
+    moving $q-c$; with the identity below $c$ and below $\neg k$ it is an $h\in H_P$ with $hq\ne q$. Then
+    $s(k,hq)=h\,s(k,q)\ge h c=c$. So at the worlds in $\hat c$, inside $\hat k$, both $q$ and $hq$ bear $Sk$,
+    and $Sk$ is not functional there: a contradiction.
+- id: transversal
+  holds: [necessary-transversal-r]
+  choice: free
+  writeup: transversal-supported-boolean-component
+  by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 29 October 2026; checked and recorded by Claude
+    Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-30'
+  text: >-
+    At every type and every world. Coextension at a world $U$ is sharing a germ at $U$: agreeing below some
+    $b\in U$. Two facts about $G=\operatorname{Aut}(B)$ give each germ a canonical representative. First,
+    supports intersect: the automorphisms fixing finite subalgebras $A_1$ and $A_2$ generate those fixing
+    $A_1\cap A_2$. So every entity, and with a further step every germ, has a least support. Second,
+    propagation: two entities supported by $A$ that agree below a nonzero $b$ under an $A$-cell $c$ agree
+    under all of $c$. Some automorphism fixing $A$ swaps $b$ and $c-b$. The canonical representative of a
+    germ at $U$ is any representative with the germ's least support, cut down to the cell of that support
+    containing $U$ and made $0$ elsewhere. The witness $\Phi$ holds of $Y$ at $U$ just when $Y$ is the
+    canonical representative of its own germ there. $\Phi$ is invariant under $G$, and its fibre at $Y$ is a
+    join of cells of the least support of $Y$, so it is admitted (write-up).
+notes: >-
+  The component of supported-boolean-complete-predecessor, recorded on its own: a model of C5 with
+  □Boolean Completeness (type $t$), □BF, □Atomlessness and □Intensional Choice, in which Actuality and
+  Relational Choice fail. It separates Intensional Choice with Boolean Completeness (type $t$), even with
+  BF or Vicinity, from Actuality. Transversal holds, so Transversal Choice fails with Relational Choice;
+  the model does not separate Intensional Choice from Transversal; supported-diagonal-tail-permutations,
+  with a smaller symmetry group, does.

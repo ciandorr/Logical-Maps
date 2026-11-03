@@ -1,0 +1,47 @@
+id: necessary-rigid-comprehension-rigid-power-and-necessary-axiom-of-infinity-e-imply-necessity-of-second-order-analysis
+premises:
+- necessary-rigid-comprehension-r
+- rigid-power-r
+- necessary-axiom-of-infinity-e
+conclusion: necessity-of-second-order-analysis
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the idea, 30 October 2026), by Barton and Goodsell's Theorems 3–7; written out by
+    Claude Opus 5.5 (Anthropic)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: none
+sources:
+- Cian Dorr, observation of 30 October 2026 that Rigid Power at the numbers and at the reals rules out continuum
+  contingency under □Rigid Comprehension (session transcript); the argument is Barton and Goodsell's, Continuum
+  Contingency, Theorems 3–7, with Rigid Power supplying the inextensibility of the reals and of the classes
+  of reals.
+source_names:
+- Dorr 30 Oct
+proof: >-
+  See the write-up. Work at $\sigma:=e$. The Axiom of Infinity at $e$, boxed, gives $\Box I^*_e$ ([[necessary-infinity-injective-successor]]),
+  so □Rigid Comprehension gives Arithmetic Necessitism at $e$: $\mathbb N_e$ is rigid with necessarily distinct
+  members. Rigid Power at $\mathbb N_e$ makes the property $R$ of rigid properties of numbers rigid, and Rigid
+  Power at $R$ makes the property of rigid properties of reals rigid; their instances are necessarily distinct,
+  as in Barton and Goodsell's Theorems 4 and 6. By □Rigid Comprehension every property of numbers, and every
+  relation among reals (coded as a class of reals), is at every world coextensive with one of these fixed rigid
+  entities. So the field defined arithmetically on $R$ is necessarily a real number structure, and every second-order
+  analytical sentence is non-contingent in it (Barton and Goodsell's Theorem 7). In each world every real number
+  structure, at any type, is isomorphic to it and agrees with it on such sentences.
+references:
+- paper: barton-goodsell-continuum-contingency
+  role: proof
+  locator: §§5.6–5.9, Theorems 3–7 and eqs. (22)–(33), pp. 16–21
+  note: Their reals are the rigid properties of numbers, R = PN, and their Theorem 7 derives the non-contingency
+    of analytical sentences from continuum necessitism; Rigid Power at N and at R is that necessitism.
+notes: >-
+  Rigid Power is used at two instances only, at $\mathbb N_e$ and one type up, and unboxed, since rigidity
+  is necessary when true. □Rigid Comprehension cannot be weakened to Rigid Comprehension: [[full-boolean-valued-atom-and-atomless]]
+  has Rigid Comprehension, Rigid Power and Arithmetic Necessitism but refutes the Non-contingency of CH. Without
+  Rigid Power, □Rigid Comprehension and infinity do not suffice: Barton and Goodsell's stitched models refute
+  it. The same holds with the Axiom of Infinity at $t$ ([[necessary-rigid-comprehension-rigid-power-and-necessary-axiom-of-infinity-t-imply-necessity-of-second-order-analysis]]);
+  one type that is necessarily infinite is all the argument needs. Whether the infinity premise can be dropped
+  is open; Bacon's Theorem 5.2 ([[atomicity-and-necessary-rigid-comprehension-imply-necessity-of-second-order-analysis]])
+  avoids one by relativizing to worlds with a natural number structure.

@@ -167,7 +167,7 @@ $f_T$.
   set of individuals pins it down.
 - **Principles that fail by derivation.** Since Actuality holds and
   Inextensible Comprehension fails, the recorded results make these fail:
-  BF, C5, Distinctness-preserving collapse and Rigid Comprehension.
+  BF, C5, Truths are ND-necessary and Rigid Comprehension.
 - **□ND.** It fails directly as well, since $\pi$ collapses $(n,0)$ and
   $(n,1)$.
 

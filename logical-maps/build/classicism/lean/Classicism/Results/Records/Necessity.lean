@@ -10,7 +10,7 @@ import Classicism.Background.Varieties
 # Proofs of map records: varieties of necessity
 
 Records concluding in the principles of the map's category `necessity-varieties`: the
-Distinctness-Preserving Collapse and the principles comparing truth, `□₅`, `□̂̂` and `□_≠`
+Truths are ND-necessary and the principles comparing truth, `□₅`, `□̂̂` and `□_≠`
 (Background, *Hats, two-hat necessity and 5-necessity*). The conventions are in
 `Results/Records.lean`.
 
@@ -38,12 +38,12 @@ theorem five_implies_nd_implies_two_hat_implies_nd :
 
 /-- `truth-implies-nd-implies-five-implies-nd`: `□₅p → p → □_≠p`. -/
 theorem truth_implies_nd_implies_five_implies_nd :
-    DistinctnessPreservingCollapse → FiveImpliesNdNecessity := fun h p hp =>
+    TruthsAreNDNecessary → FiveImpliesNdNecessity := fun h p hp =>
   h p (box5_le p hp)
 
 /-- `truth-implies-nd-implies-truth-implies-five`: `p → □_≠p → □̂̂p → □₅p`. -/
 theorem truth_implies_nd_implies_truth_implies_five :
-    DistinctnessPreservingCollapse → TruthImpliesFiveNecessity := fun h p hp =>
+    TruthsAreNDNecessary → TruthImpliesFiveNecessity := fun h p hp =>
   boxHH_le_box5 p (boxNe_le_boxHH p (h p hp))
 
 /-- `truth-implies-two-hat-implies-five-implies-two-hat`: `□₅p → p → □̂̂p`. -/
@@ -63,7 +63,7 @@ theorem five_implies_nd_implies_five_implies_two_hat :
 
 /-- `five-implies-nd-and-truth-implies-five-imply-truth-implies-nd`: `p → □₅p → □_≠p`. -/
 theorem five_implies_nd_and_truth_implies_five_imply_truth_implies_nd :
-    FiveImpliesNdNecessity → TruthImpliesFiveNecessity → DistinctnessPreservingCollapse :=
+    FiveImpliesNdNecessity → TruthImpliesFiveNecessity → TruthsAreNDNecessary :=
   fun h₁ h₂ p hp => h₁ p (h₂ p hp)
 
 /-- `five-implies-two-hat-and-truth-implies-five-imply-truth-implies-two-hat`:
@@ -108,12 +108,12 @@ theorem necessary_five_implies_nd_implies_two_hat_implies_nd :
 
 /-- `necessary-truth-implies-nd-implies-necessary-five-implies-nd`. -/
 theorem necessary_truth_implies_nd_implies_necessary_five_implies_nd :
-    NecDistinctnessPreservingCollapse → NecFiveImpliesNdNecessity :=
+    NecTruthsAreNDNecessary → NecFiveImpliesNdNecessity :=
   modal_K _ _ (nec% truth_implies_nd_implies_five_implies_nd)
 
 /-- `necessary-truth-implies-nd-implies-necessary-truth-implies-five`. -/
 theorem necessary_truth_implies_nd_implies_necessary_truth_implies_five :
-    NecDistinctnessPreservingCollapse → NecTruthImpliesFiveNecessity :=
+    NecTruthsAreNDNecessary → NecTruthImpliesFiveNecessity :=
   modal_K _ _ (nec% truth_implies_nd_implies_truth_implies_five)
 
 /-- `necessary-truth-implies-two-hat-implies-five-implies-two-hat`. -/
@@ -134,7 +134,7 @@ theorem necessary_five_implies_nd_implies_five_implies_two_hat :
 /-- `necessary-five-implies-nd-and-necessary-truth-implies-five-imply-necessary-truth-implies-nd`. -/
 theorem necessary_five_implies_nd_and_necessary_truth_implies_five_imply_necessary_truth_implies_nd :
     NecFiveImpliesNdNecessity → NecTruthImpliesFiveNecessity →
-      NecDistinctnessPreservingCollapse := fun h₁ h₂ =>
+      NecTruthsAreNDNecessary := fun h₁ h₂ =>
   modal_K _ _ (modal_K _ _
     (nec% five_implies_nd_and_truth_implies_five_imply_truth_implies_nd) h₁) h₂
 

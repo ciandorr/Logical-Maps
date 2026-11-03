@@ -52,4 +52,48 @@ parameters:
 meets:
   sigma-top: This is the interpretation the definition fixes.
 
-arguments: []
+conditions:
+- id: stone-worlds
+  text: The worlds are the ultrafilters of a Boolean algebra $B$, each fibre of an admitted relation is
+    $\hat b:=\{U:b\in U\}$ for some $b\in B$, and the elements of $B$ are among the support points.
+
+arguments:
+
+- id: barcan
+  holds: [necessary-barcan-r]
+  choice: free
+  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, for supported-boolean-complete-predecessor; checked and
+    recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, and stated for the group
+  date: '2026-10-29'
+  text: >-
+    At every type. In the component the same entities are available at every world, transport being
+    trivial. With a free root $r$, every component entity is the transport of a root entity, the one with
+    empty current extension; so what holds necessarily of every root entity holds at every world of every
+    entity there.
+
+- id: component-distinctness
+  when: {root: none}
+  holds: [necessary-distinctness-necessary-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type. Every arrow acts as the identity and an entity is the same relation at every world, so
+    distinct entities are distinct at every world.
+
+- id: intensional-choice-compactness
+  requires: [stone-worlds]
+  holds: [necessary-intensional-choice-r]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-29'
+  text: >-
+    At every type. In the component, let $F$ be instantiated at every world, with fibre $\hat c_x$ at $x$.
+    The clopen sets $\hat c_x$ cover the Stone space of $B$, so by compactness finitely many do, those of
+    $x_1,\dots,x_k$, distinct. Let $G$ hold of $x_i$ exactly on $\hat e_i$, where
+    $e_i:=c_{x_i}\wedge\neg\bigvee_{j<i}c_{x_j}$, and of nothing else. Its fibres are in $B$, and it is
+    supported by the supports of the $x_i$ together with the $e_i$, which are support points; so $G$ is
+    admitted, $G\le F$, and at each world exactly one $x_i$ has $G$. With a free root $r$, a root
+    $F=(R,a)$ with $\Box\exists x\,Fx$ has a nonempty current extension and a component part $a$ as above;
+    pair a singleton $\{x_0\}\subseteq R$ with the $G$ built for $a$. Only finitely many choices are made.
+    So Intensional Choice holds at every world the evaluation point sees, and at $r$.

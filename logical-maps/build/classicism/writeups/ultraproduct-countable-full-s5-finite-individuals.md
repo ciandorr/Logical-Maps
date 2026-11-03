@@ -16,6 +16,7 @@
 - **□Strong Atomicity.** Necessarily, at each relational type, every possible entity (one distinct from bottom) is entailed by a strong atom: a possible entity that necessarily entails every entity of the type or its negation.
 - **□Well-Ordering.** Necessarily, every type, including e, is well-ordered by some relation.
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
+- **□Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
 - **Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
 - **B for sentences of Σ.** The B instance for every closed sentence of the language of the fixed signature Sigma.
@@ -52,6 +53,12 @@ In each factor the propositions are the $2^{\aleph_0}$ subsets of $\mathbb N$, a
 Each instance of each of these schemata is a sentence true in every factor, so true in $M$. The full domains contain every function, which gives the choice principles, Rigid Comprehension and Well-Ordering; constant domains give BF; identity is crisp, which gives ND; the algebras are atomic, the worlds being the atoms and every true proposition entailed by the actual one; and any two worlds are related by an automorphism, so a true pure sentence is necessary. All of this holds at every world.
 
 *Write-up: [ultraproduct-finite-full-s5](ultraproduct-finite-full-s5.html). From the group *Ultraproducts of full S5 models*, shared argument `s5-ultraproducts#transfer`. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-25.*
+
+### Holds □Axiom of Infinity (type t).
+
+In each factor, the full S5 model on the worlds $\mathbb N$, every object is reachable, has a proposition for every set of worlds, infinitely many, and is full, so the topic argument necessary-axiom-of-infinity-propositions gives $\Box$ of the Axiom of Infinity at type $t$ there. It is a sentence true in every factor, so true in $M$.
+
+*From the group *Ultraproducts of full S5 models*, shared argument `s5-ultraproducts#necessary-axiom-of-infinity-t`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
 
 ### Holds Infinity Schema (type e).
 

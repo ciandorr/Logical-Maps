@@ -350,6 +350,7 @@ Classicism/Semantics/IntensionalFull.lean  full intensional models are models, a
 Classicism/Semantics/IntensionalProperties.lean  fullness; NPC in every one-object model
 Classicism/Semantics/IntensionalExamples.lean  the M-set models in the intensional form, cited by the results
 Classicism/Semantics/IdeallyFull.lean   Appendix D's technique: pinning, ideally full models, Proposition D.4
+Classicism/Coalesced/                   Appendix E: coalesced sums, transport, root closure, fullest domains, Theorem 3.26
 
 Classicism/Models/Permutations.lean     Appendix D, Part 1: the permutation model; ND, BF, Atomlessness hold, Actuality and Atomicity fail
 Classicism/Models/MonoidModel.lean      the ideally full model over any monoid acting on ℕ; the verdict lemmas, parametrized
@@ -370,6 +371,7 @@ Classicism/Tools/Tests.lean             negative and positive controls for the c
 
 Classicism/Results/Lists.lean           each principle's restricted form entails its list form: lists, codes
 Classicism/Results/Arity.lean           the map's arity results: shallow cores at a type parameter, unary cores vectorized, composition
+Classicism/Results/Existence.lean       a premise `Existence τ`, taken where a proof says "types are inhabited" at a type parameter, discharged in C
 scripts/FunKinds.lean                   which `fun`s in a file are terms (written λ … ↦) and which are proofs
 
 Classicism/Certified/Quoted.lean        the record theorems quoted; home of foo.quoted

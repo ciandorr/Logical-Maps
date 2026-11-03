@@ -1,6 +1,6 @@
 # Maximalism (pure) ⇒ Arithmetic Necessitism
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026; stated as a result by OpenAI Codex (GPT-6), prompted by Daniel Kodsi, 28 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.maximalism_implies_arithmetic_necessitism`; produced by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026; stated as a result by OpenAI Codex (GPT-6), prompted by Daniel Kodsi, 28 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026.</p>
 
 ## Premises
 

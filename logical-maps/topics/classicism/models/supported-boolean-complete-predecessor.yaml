@@ -36,6 +36,7 @@ settings:
   root: free
 meets:
   one-individual: There is a single individual.
+  stone-worlds: The worlds are the ultrafilters of $B$, the fibres are its elements' clopen sets, and its elements are the support points.
   actual-world-isolated: >-
     The root proposition $(1,\varnothing)$, true at $r$ alone, is in the domain and entails every truth
     at $r$ (argument actuality), and no world of the component sees $r$.
@@ -55,17 +56,6 @@ arguments:
     is a proposition and its least upper bound. At $r$ the least upper bound of root propositions
     $(\varepsilon_i,\hat b_i)$ is $(\bigvee\varepsilon_i,\widehat{\bigvee b_i})$, the join taken in the complete
     algebra $B$.
-- id: barcan
-  holds: [necessary-barcan-r]
-  choice: free
-  writeup: supported-boolean-complete-predecessor
-  by: GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic),
-    prompted by Cian Dorr
-  date: '2026-10-29'
-  text: >-
-    At every type. In the component the same entities are available at every world, transport being
-    trivial. At $r$, every component entity is the transport of a root entity, the one with empty current
-    extension; so what holds necessarily of every root entity holds at every world of every entity there.
 - id: relational-choice
   holds: [relational-choice-r]
   choice: uses
@@ -135,23 +125,6 @@ arguments:
     $x\in S_P\setminus S$. The component property true everywhere of $\hat z$ for $z\in S_{P\cup\{x\}}$,
     and nowhere else, is admitted, and paired with $\varnothing$ it is an upper bound of $X$. But
     $x\notin S_{P\cup\{x\}}$, since $H_{P\cup\{x\}}$ fixes $x$, so $(R,L)$ is not below it.
-- id: intensional-choice
-  holds: [intensional-choice-r]
-  choice: free
-  writeup: supported-boolean-complete-predecessor
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-29'
-  text: >-
-    At every type, at $r$ and at every world of the component. In the component, let $F$ be supported
-    by $P$ and instantiated at every world, with fibre $\hat c_x$ at $x$. The $c_x$ form an
-    $H_P$-invariant set with join $1$, so by finite attainment (write-up, Lemma 2)
-    $1=c_{x_1}\vee\dots\vee c_{x_k}$ for some $x_1,\dots,x_k$. Let $G$ hold of $x_i$ exactly at the worlds
-    in $\hat e_i$, where $e_i:=c_{x_i}-\bigvee_{j<i}c_{x_j}$, and of nothing else. Its fibres are finite
-    joins of the $e_i$, and it is supported by $P$ together with finite supports of the $x_i$, whose
-    automorphisms fix each $x_i$ and so each $c_{x_i}$; so $G$ is admitted, $G\le F$, and at each world
-    exactly one $x_i$ has $G$, the $e_i$ partitioning $1$. At $r$, a root $F=(R,a)$ with
-    $\Box\exists x\,Fx$ has a nonempty current extension and a component part $a$ as above; pair a
-    singleton $\{x_0\}\subseteq R$ with the $G$ built for $a$. Only finitely many choices are made.
 - id: self-atoms
   holds: [necessary-self-atoms-are-atoms-t]
   choice: free
@@ -247,6 +220,17 @@ arguments:
     the pairs of numerals $(\mathbf i,\mathbf{i+m})$, resp. $(\mathbf i,\mathbf{i\cdot m})$, which
     automorphisms fix. So wherever $I_\sigma$ holds an arithmetical sentence at $\sigma$ has its standard
     truth value.
+- id: necessary-axiom-of-infinity-t
+  holds: [necessary-axiom-of-infinity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-31'
+  text: >-
+    The root sees itself and the worlds of the component. At $r$ the Axiom of Infinity at type $t$ holds
+    (axiom-of-infinity-at-root). At a world of the component the propositions are the $\hat b$, ordered as
+    $B$, the same entities being available at every world and identity genuine; $B$ is atomless, so
+    Atomlessness holds there, and with it the Axiom of Infinity at type $t$, which it implies in C
+    (atomlessness-implies-axiom-of-infinity-t). So the Axiom holds at every world the root sees.
 notes: >-
   Separates □Boolean Completeness (type $t$), □BF, Relational Choice and Actuality from □Actuality: the
   component is a model of C5 in which Actuality is necessarily false. The completeness of $B$ is used only at

@@ -1285,4 +1285,101 @@ theorem strong_atomicity_weak_rigid_comprehension_and_relational_choice_imply_in
         (h₁.elim fun x hx => ⟨x, hx, fun y hy => h₂ x y hx hy⟩ :
           ∃ x, (∃ X, R X ∧ X x) ∧ ∀ y, (∃ X, R X ∧ X y) → y = x))) hex) huniq
 
+/-! ### Persistence of modal choice, with Existence at the type (lean-type-existence, 1 November 2026)
+
+The two records below argue that a property is serial "since types are inhabited". At a
+type parameter `[Ty τ]` that is not a theorem of the shallow layer, which deliberately leaves
+Existence out of `Ty` (`lean/README.md`, "C and C⁻"). So each proof takes the instance of
+Existence it uses as one more hypothesis, `Existence τ`, like any other instance of a
+principle. Read as an entailment, the hypothesis is the schema `P.Existence.schema`, which
+`C` proves at every closed type (`Meta.classicism_implies_existence_r`: at `e` by the axiom
+`e_exists`, at relational types by `⊤_ρ`); the certificates discharge it there with
+`Entails.discharge_existence` (`Results/Existence.lean`). The witness enters each
+necessitation as a free variable, which `nec%` admits. -/
+
+/-- With a necessarily functional `S` necessarily below `λF y. Fy ∨ ¬∃z. Fz`, Modalized
+Relational Choice holds at `σ`, `τ`: `λx y. Rxy ∧ S(Rx)y` chooses from the rows of `R`. -/
+theorem mrc_of_box_selector {σ τ : Type} [Ty σ] [Ty τ] (S : (τ → Prop) → τ → Prop)
+    (hS : □ (Functional S)) (hle : □ (∀ (F : τ → Prop) (y : τ), S F y → F y ∨ ¬ ∃ z, F z)) :
+    ModalizedRelationalChoice σ τ := fun R hR =>
+  ⟨fun x y => R x y ∧ S (fun z => R x z) y,
+   modal_K _ _ (modal_K _ _ (modal_K _ _
+     (nec% (fun (hf : Functional S) (hi : ∀ (F : τ → Prop) (y : τ), S F y → F y ∨ ¬ ∃ z, F z)
+         (hs : Serial R) (x : σ) =>
+       ((hf (fun z => R x z)).elim fun y ⟨hy, hu⟩ =>
+         ⟨y, ⟨(hi _ y hy).elim id fun hn => (hn (hs x)).elim, hy⟩,
+           fun z hz => hu z hz.2⟩ :
+         ∃ y, (R x y ∧ S (fun z => R x z) y) ∧
+           ∀ z, (R x z ∧ S (fun z => R x z) z) → y = z)))
+     hS) hle) hR,
+   le_of_box_incl (nec% (fun (x : σ) (y : τ) (h : R x y ∧ S (fun z => R x z) y) => h.1))⟩
+
+/-- `modalized-relational-choice-implies-necessary-modalized-relational-choice` (Astra via
+Kodsi, 26 October 2026): Modalized Relational Choice at `(τt, τ)` gives a necessarily
+functional `S` below `U := λF y. Fy ∨ ¬∃z. Fz`, necessarily serial since `τ` has an
+inhabitant `y₀`; by `4` the two facts about `S` are necessary, and `mrc_of_box_selector`
+under the box gives □Modalized Relational Choice at `(σ, τ)`. Existence at `τ` is the
+instance the record's "types are inhabited" uses. -/
+theorem modalized_relational_choice_implies_necessary_modalized_relational_choice
+    {σ τ : Type} [Ty σ] [Ty τ] :
+    ModalizedRelationalChoice (τ → Prop) τ → Existence τ → NecModalizedRelationalChoice σ τ :=
+  fun mrc ⟨y₀, _⟩ =>
+    (mrc (fun F y => F y ∨ ¬ ∃ z, F z)
+      (nec% (fun (F : τ → Prop) => ((em (∃ z, F z)).elim
+        (fun h => h.elim fun z hz => ⟨z, Or.inl hz⟩) (fun h => ⟨y₀, Or.inr h⟩) :
+          ∃ y, F y ∨ ¬ ∃ z, F z)))).elim fun S ⟨hS, hle⟩ =>
+    modal_K _ _ (modal_K _ _ (nec% (mrc_of_box_selector (σ := σ) S))
+      (modal_four _ hS)) (modal_four _ ((le_iff _ _).1 hle))
+
+/-- Intensional Choice at `σ`, in its entailing form: for each `F`, some `G` with
+`□((∀x. Gx → Fx) ∧ (∃x. Fx → ∃!x. Gx))`. From it at `F' := λx. Fx ∨ ¬∃x. Fx`, necessarily
+instantiated since `σ` has an inhabitant `x₀`, take `H` and put `G := λx. Hx ∧ Fx`. -/
+theorem intensional_choice_entailing {σ : Type} [Ty σ] (ic : IntensionalChoice σ) (x₀ : σ)
+    (F : σ → Prop) :
+    ∃ G : σ → Prop, □ ((∀ x, G x → F x) ∧
+      ((∃ x, F x) → ∃ x, G x ∧ ∀ y, G y → y = x)) :=
+  (ic (fun x => F x ∨ ¬ ∃ x, F x)
+    (nec% (((em (∃ x, F x)).elim (fun h => h.elim fun x hx => ⟨x, Or.inl hx⟩)
+      (fun h => ⟨x₀, Or.inr h⟩) : ∃ x, F x ∨ ¬ ∃ x, F x)))).elim fun H ⟨hle, hu⟩ =>
+  ⟨fun x => H x ∧ F x, modal_K _ _ (modal_K _ _
+    (nec% (fun (hi : ∀ x, H x → F x ∨ ¬ ∃ x, F x) (hu : ∃ x, H x ∧ ∀ y, H y → y = x) =>
+      (⟨fun _ h => h.2, fun hF => hu.elim fun x ⟨hx, hxu⟩ =>
+        ⟨x, ⟨hx, (hi x hx).elim id fun hn => (hn hF).elim⟩, fun y hy => hxu y hy.1⟩⟩ :
+        (∀ x, H x ∧ F x → F x) ∧
+          ((∃ x, F x) → ∃ x, (H x ∧ F x) ∧ ∀ y, H y ∧ F y → y = x))))
+    ((le_iff _ _).1 hle)) hu⟩
+
+/-- The entailing form gives Intensional Choice, with no Existence: `T` gives `G ≤ F` and
+`K` gives `□∃!x. Gx` from `□∃x. Fx`. -/
+theorem intensional_choice_of_entailing {σ : Type} [Ty σ]
+    (h : ∀ F : σ → Prop, ∃ G : σ → Prop, □ ((∀ x, G x → F x) ∧
+      ((∃ x, F x) → ∃ x, G x ∧ ∀ y, G y → y = x))) : IntensionalChoice σ := fun F hF =>
+  (h F).elim fun G hG =>
+    ⟨G, le_of_box_incl (modal_K _ _
+        (nec% (fun (h : (∀ x, G x → F x) ∧ ((∃ x, F x) → ∃ x, G x ∧ ∀ y, G y → y = x)) =>
+          (h.1 : G ⊆ F))) hG),
+     modal_K _ _ (modal_K _ _
+       (nec% (fun (h : (∀ x, G x → F x) ∧ ((∃ x, F x) → ∃ x, G x ∧ ∀ y, G y → y = x)) =>
+         h.2)) hG) hF⟩
+
+/-- `barcan-and-intensional-choice-imply-necessary-intensional-choice` (Astra via Kodsi,
+26 October 2026): the entailing form's matrix is boxed, so by `4` each `F` necessarily has
+a `G` for it; BF at `σt` moves the box out, and under it the entailing form gives
+Intensional Choice. Existence at `σ` is the instance the record's "it is a theorem that it
+is instantiated" uses. -/
+theorem barcan_and_intensional_choice_imply_necessary_intensional_choice {σ : Type} [Ty σ] :
+    Barcan (σ → Prop) → IntensionalChoice σ → Existence σ → NecIntensionalChoice σ :=
+  fun bf ic ⟨x₀, _⟩ =>
+    modal_K _ _ (nec% (intensional_choice_of_entailing (σ := σ)))
+      (bf (fun F => ∃ G : σ → Prop, □ ((∀ x, G x → F x) ∧
+          ((∃ x, F x) → ∃ x, G x ∧ ∀ y, G y → y = x)))
+        fun F => (intensional_choice_entailing ic x₀ F).elim fun G hG =>
+          modal_K _ _ (nec% (fun (h : □ ((∀ x, G x → F x) ∧
+              ((∃ x, F x) → ∃ x, G x ∧ ∀ y, G y → y = x))) =>
+            (⟨G, h⟩ : ∃ G : σ → Prop, □ ((∀ x, G x → F x) ∧
+              ((∃ x, F x) → ∃ x, G x ∧ ∀ y, G y → y = x)))))
+            (modal_four _ hG))
+
+/-! ### End of persistence of modal choice -/
+
 end Classicism.Proofs

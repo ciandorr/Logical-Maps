@@ -76,4 +76,4 @@ Now let $S$ be a closed sentence of $\mathcal L(\Sigma)$. Replacing each relatio
 
 **Distinctness Maximalism (pure).** $(\exists xy\, .\,x\ne y)=\top$ is true at $1$, since both sides denote $G$, and C does not prove it, having models with one individual.
 
-**Distinctness-preserving collapse.** Let $p=\{1\}$, true at $1$. For any true $q$, $q\ne\emptyset$, so $[\Diamond q]=G$ by Lemma 1(3) and $[\Box(\Diamond q\to p)]=[\Box p]=\emptyset$. So no true $q$ witnesses $\Box_{\ne}p$.
+**Truths are ND-necessary.** Let $p=\{1\}$, true at $1$. For any true $q$, $q\ne\emptyset$, so $[\Diamond q]=G$ by Lemma 1(3) and $[\Box(\Diamond q\to p)]=[\Box p]=\emptyset$. So no true $q$ witnesses $\Box_{\ne}p$.

@@ -91,6 +91,15 @@ conditions:
 meets:
   sigma-top: This is the interpretation the definition fixes.
   finitely-many-propositions-everywhere: The root has four propositions and $C_0$ two.
+  infinitely-many-individuals-everywhere: The individuals are the natural numbers at both objects.
+  finite-extension-properties-everywhere: >-
+    At $C_0$, whose domains hold every function of $V[G]$ between the lower domains, the function true of
+    exactly the entities with finite extension is in the domain, and definable without parameters; so are
+    the singletons, making identity literal. At the root, the function in $V$ sending a root entity of type
+    $\sigma t$ to the proposition whose root coordinate says that its root extension is finite and whose
+    $C_0$-coordinate is that definable function applied to its $C_0$-component is compatible with it, so
+    the pair is in the domain, finiteness being absolute between $V$ and $V[G]$; the singleton of a root
+    tuple, with the definable singleton of its $C_0$-component, is in the domain too.
   fewer-propositions-after: The root has four propositions; $C_0$, after which there is only itself, has two.
 
 arguments:
@@ -178,8 +187,8 @@ arguments:
     root that necessarily holds of every root proposition holds at $C_0$ of both propositions there; at
     $C_0$, which sees only itself, BF is trivial.
 
-- id: distinctness-preserving-collapse
-  holds: [necessary-distinctness-preserving-collapse]
+- id: truths-are-nd-necessary
+  holds: [necessary-truths-are-nd-necessary]
   by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell
   date: '2026-10-19'
   text: >-

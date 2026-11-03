@@ -61,6 +61,18 @@ arguments:
     worlds being the atoms and every true proposition entailed by the actual one; and any two worlds are
     related by an automorphism, so a true pure sentence is necessary. All of this holds at every world.
 
+- id: necessary-axiom-of-infinity-t
+  when: {factors: countable-worlds}
+  holds: [necessary-axiom-of-infinity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-31'
+  text: >-
+    In each factor, the full S5 model on the worlds $\mathbb N$, every object is reachable, has a
+    proposition for every set of worlds, infinitely many, and is full, so the topic argument
+    necessary-axiom-of-infinity-propositions gives $\Box$ of the Axiom of Infinity at type $t$ there. It is
+    a sentence true in every factor, so true in $M$.
+
 - id: infinity-e
   holds: [infinity-e]
   choice: free

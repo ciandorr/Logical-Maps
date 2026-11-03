@@ -48,6 +48,21 @@ settings:
   individuals: base
   sigma: top
 meets:
+  infinitely-many-individuals-everywhere:
+    when: {individuals: base}
+    text: >-
+      The individuals at $W_0$ and at $W_1$ are copies of $\mathbb N$.
+  infinitely-many-propositions-everywhere: >-
+    Both objects are reachable from each. At either object the sets $\{h:\operatorname{cod}h=W_1,\
+    h(0)=n\}$, one for each $n$, are pinned down by $\{0\}$ and symmetric, $W_1$'s symmetry group
+    being trivial; they are pairwise distinct.
+  finite-extension-properties-everywhere: >-
+    Each object's domains hold every symmetric intension pinned down by a set in its ideal (the
+    finite sets, at both objects). The intension holding at each arrow, into $U$, of exactly the
+    entities of type $\sigma t$ at $U$ with finite extension at $1_U$ depends only on the codomain
+    and is preserved by the symmetries, so it is symmetric and pinned down by $\emptyset$;
+    haecceities are symmetric and pinned down by the sets pinning their entities, so identity is
+    literal.
   infinitely-many-orbits-everywhere: >-
     With the base as individuals, at $W_0$ and $W_1$ the properties of being one of a finite set of
     individuals lie in infinitely many orbits, symmetries preserving the size of the set. With one
@@ -186,9 +201,9 @@ history:
   - distinctness-signature-r
 - date: '2026-09-23'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
-  summary: Expanded the description from Appendix D; settled the Distinctness-preserving collapse.
+  summary: Expanded the description from Appendix D; settled Truths are ND-necessary.
   violates:
-  - distinctness-preserving-collapse
+  - truths-are-nd-necessary
 - date: '2026-09-23'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
   summary: 'Noted why Relational Choice is left unknown: the construction goes beyond ideal fullness,

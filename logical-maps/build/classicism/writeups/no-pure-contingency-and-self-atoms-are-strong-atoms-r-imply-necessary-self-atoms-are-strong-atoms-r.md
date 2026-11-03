@@ -1,6 +1,6 @@
 # No Pure Contingency ∧ Self-atoms are strong atoms ⇒ □Self-atoms are strong atoms
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.no_pure_contingency_and_self_atoms_are_strong_atoms_r_imply_necessary_self_atoms_are_strong_atoms_r`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

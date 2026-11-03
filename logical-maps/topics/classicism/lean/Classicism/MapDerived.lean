@@ -25,10 +25,6 @@ theorem coalesced_all_finite_individual_domains.relational_choice_r : Statements
 theorem coalesced_all_finite_individual_domains.actuality : Statements.Models.coalesced_all_finite_individual_domains.actuality :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel), Classicism.Map.Arguments.coalesced_sums.actuality_singleton_root.actuality (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel) (Classicism.Meta.Coalesced.AllFinite.actualWorldIsolated)⟩
 
-/-- `coalesced-all-finite-individual-domains`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem coalesced_all_finite_individual_domains.distinctness_preserving_collapse : Statements.Models.coalesced_all_finite_individual_domains.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.AllFinite.actualWorldIsolated)⟩
-
 /-- `coalesced-all-finite-individual-domains`: B for pure sentences fails, by the argument `fewer-propositions-after`. -/
 theorem coalesced_all_finite_individual_domains.pure_b_r : Statements.Models.coalesced_all_finite_individual_domains.pure_b_r :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel), Classicism.Map.Arguments.fewer_propositions_after.pure_b_r (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.AllFinite.fewerPropositionsAfter)⟩
@@ -61,6 +57,10 @@ theorem coalesced_all_finite_individual_domains.axiom_of_infinity_t : Statements
 theorem coalesced_all_finite_individual_domains.infinity_t : Statements.Models.coalesced_all_finite_individual_domains.infinity_t :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel), Classicism.Map.Arguments.infinitely_many_propositions.infinity_t (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Intensional.Premodel.Full.extFull _ Classicism.Meta.Coalesced.AllFinite.full) (Classicism.Meta.Coalesced.AllFinite.infinitelyManyPropositions)⟩
 
+/-- `coalesced-all-finite-individual-domains`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem coalesced_all_finite_individual_domains.truths_are_nd_necessary : Statements.Models.coalesced_all_finite_individual_domains.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.AllFinite.actualWorldIsolated)⟩
+
 /-- `coalesced-all-finite-individual-domains`: □Relational Choice holds, by the argument `relational-choice-full-boxed`. -/
 theorem coalesced_all_finite_individual_domains.necessary_relational_choice_r : Statements.Models.coalesced_all_finite_individual_domains.necessary_relational_choice_r :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel), Classicism.Map.Arguments.relational_choice_full_boxed.necessary_relational_choice_r (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.AllFinite.full)⟩
@@ -76,6 +76,10 @@ theorem coalesced_all_finite_individual_domains.distinctness_necessary_t : State
 /-- `coalesced-all-finite-individual-domains`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
 theorem coalesced_all_finite_individual_domains.independence_signature_r : Statements.Models.coalesced_all_finite_individual_domains.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.SumData.ofAppendixE Classicism.Meta.Coalesced.AllFinite.comp Classicism.Meta.Coalesced.AllFinite.comp_isModel)))⟩
+
+/-- `coalesced-constant-indexed-root`: Intensional Choice fails, by `coalesced-sums`'s argument `intensional-choice-component`. -/
+theorem coalesced_constant_indexed_root.intensional_choice_r : Statements.Models.coalesced_constant_indexed_root.intensional_choice_r :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.intensional_choice_component.intensional_choice_r (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete) (Classicism.Meta.Coalesced.constantIndexedData_distinguished) (Classicism.Meta.Coalesced.constantIndexedData_fullest)⟩
 
 /-- `coalesced-constant-indexed-root`: Relational Choice holds, by `coalesced-sums`'s argument `relational-choice-free-root`. -/
 theorem coalesced_constant_indexed_root.relational_choice_r : Statements.Models.coalesced_constant_indexed_root.relational_choice_r :=
@@ -93,21 +97,37 @@ theorem coalesced_constant_indexed_root.barcan_t : Statements.Models.coalesced_c
 theorem coalesced_constant_indexed_root.atomicity_t : Statements.Models.coalesced_constant_indexed_root.atomicity_t :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.atomicity_t_component.atomicity_t (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete) (Classicism.Meta.Coalesced.constantIndexedData_distinguished) (Classicism.Meta.Coalesced.constantIndexedData_fullest)⟩
 
+/-- `coalesced-constant-indexed-root`: Boolean Completeness (type t) fails, by `coalesced-sums`'s argument `boolean-completeness-t-component`. -/
+theorem coalesced_constant_indexed_root.boolean_completeness_t : Statements.Models.coalesced_constant_indexed_root.boolean_completeness_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.boolean_completeness_t_component.boolean_completeness_t (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete) (Classicism.Meta.Coalesced.constantIndexedData_distinguished) (Classicism.Meta.Coalesced.constantIndexedData_fullest)⟩
+
 /-- `coalesced-constant-indexed-root`: Arithmetic Necessitism holds, by `coalesced-sums`'s argument `arithmetic-necessitism-complete-components`. -/
 theorem coalesced_constant_indexed_root.arithmetic_necessitism : Statements.Models.coalesced_constant_indexed_root.arithmetic_necessitism :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete)⟩
 
-/-- `coalesced-constant-indexed-root`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem coalesced_constant_indexed_root.distinctness_preserving_collapse : Statements.Models.coalesced_constant_indexed_root.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.constantIndexedData)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData)) (Classicism.Meta.Coalesced.constantIndexedData_isolated)⟩
+/-- `coalesced-constant-indexed-root`: Self-Atomicity (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
+theorem coalesced_constant_indexed_root.self_atomicity_t : Statements.Models.coalesced_constant_indexed_root.self_atomicity_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete) (Classicism.Meta.Coalesced.constantIndexedData_distinguished) (Classicism.Meta.Coalesced.constantIndexedData_fullest)⟩
 
-/-- `coalesced-definable-root`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem coalesced_definable_root.distinctness_preserving_collapse : Statements.Models.coalesced_definable_root.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Coalesced.definableRoot_isModel, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Coalesced.definableRoot) (Classicism.Meta.Coalesced.definableRoot_isModel) (Classicism.Meta.Coalesced.definableRoot_actualWorldIsolated)⟩
+/-- `coalesced-constant-indexed-root`: Atoms are self-atoms (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
+theorem coalesced_constant_indexed_root.atoms_are_self_atoms_t : Statements.Models.coalesced_constant_indexed_root.atoms_are_self_atoms_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.atoms_are_self_atoms_t (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete) (Classicism.Meta.Coalesced.constantIndexedData_distinguished) (Classicism.Meta.Coalesced.constantIndexedData_fullest)⟩
+
+/-- `coalesced-constant-indexed-root`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem coalesced_constant_indexed_root.truths_are_nd_necessary : Statements.Models.coalesced_constant_indexed_root.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.constantIndexedData)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData)) (Classicism.Meta.Coalesced.constantIndexedData_isolated)⟩
+
+/-- `coalesced-definable-root`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem coalesced_definable_root.truths_are_nd_necessary : Statements.Models.coalesced_definable_root.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Coalesced.definableRoot_isModel, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.definableRoot) (Classicism.Meta.Coalesced.definableRoot_isModel) (Classicism.Meta.Coalesced.definableRoot_actualWorldIsolated)⟩
 
 /-- `coalesced-definable-root`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
 theorem coalesced_definable_root.independence_signature_r : Statements.Models.coalesced_definable_root.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Coalesced.definableRoot_isModel), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Coalesced.definableRoot) (Classicism.Meta.Coalesced.definableRoot_isModel)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Coalesced.definableRoot_isModel)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Coalesced.definableRoot_isModel))⟩
+
+/-- `coalesced-maximalist-root`: Intensional Choice fails, by `coalesced-sums`'s argument `intensional-choice-component`. -/
+theorem coalesced_maximalist_root.intensional_choice_r : Statements.Models.coalesced_maximalist_root.intensional_choice_r :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.intensional_choice_component.intensional_choice_r (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed) (Classicism.Meta.Coalesced.maximalistData_distinguished) (Classicism.Meta.Coalesced.maximalistData_fullest)⟩
 
 /-- `coalesced-maximalist-root`: Relational Choice holds, by `coalesced-sums`'s argument `relational-choice-free-root`. -/
 theorem coalesced_maximalist_root.relational_choice_r : Statements.Models.coalesced_maximalist_root.relational_choice_r :=
@@ -125,17 +145,33 @@ theorem coalesced_maximalist_root.barcan_t : Statements.Models.coalesced_maximal
 theorem coalesced_maximalist_root.atomicity_t : Statements.Models.coalesced_maximalist_root.atomicity_t :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.atomicity_t_component.atomicity_t (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed) (Classicism.Meta.Coalesced.maximalistData_distinguished) (Classicism.Meta.Coalesced.maximalistData_fullest)⟩
 
+/-- `coalesced-maximalist-root`: Boolean Completeness (type t) fails, by `coalesced-sums`'s argument `boolean-completeness-t-component`. -/
+theorem coalesced_maximalist_root.boolean_completeness_t : Statements.Models.coalesced_maximalist_root.boolean_completeness_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.boolean_completeness_t_component.boolean_completeness_t (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed) (Classicism.Meta.Coalesced.maximalistData_distinguished) (Classicism.Meta.Coalesced.maximalistData_fullest)⟩
+
 /-- `coalesced-maximalist-root`: Arithmetic Necessitism holds, by `coalesced-sums`'s argument `arithmetic-necessitism-complete-components`. -/
 theorem coalesced_maximalist_root.arithmetic_necessitism : Statements.Models.coalesced_maximalist_root.arithmetic_necessitism :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed)⟩
 
-/-- `coalesced-maximalist-root`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem coalesced_maximalist_root.distinctness_preserving_collapse : Statements.Models.coalesced_maximalist_root.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.maximalistRoot)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot)) (Classicism.Meta.Coalesced.maximalistData_isolated)⟩
+/-- `coalesced-maximalist-root`: Self-Atomicity (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
+theorem coalesced_maximalist_root.self_atomicity_t : Statements.Models.coalesced_maximalist_root.self_atomicity_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed) (Classicism.Meta.Coalesced.maximalistData_distinguished) (Classicism.Meta.Coalesced.maximalistData_fullest)⟩
 
-/-- `coalesced-pinned-interpretations-root`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem coalesced_pinned_interpretations_root.distinctness_preserving_collapse : Statements.Models.coalesced_pinned_interpretations_root.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Coalesced.pinnedInterpRoot) (Classicism.Meta.Coalesced.pinnedInterpRoot_isModel) (Classicism.Meta.Coalesced.pinnedInterpRoot_actualWorldIsolated)⟩
+/-- `coalesced-maximalist-root`: Atoms are self-atoms (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
+theorem coalesced_maximalist_root.atoms_are_self_atoms_t : Statements.Models.coalesced_maximalist_root.atoms_are_self_atoms_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.atoms_are_self_atoms_t (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed) (Classicism.Meta.Coalesced.maximalistData_distinguished) (Classicism.Meta.Coalesced.maximalistData_fullest)⟩
+
+/-- `coalesced-maximalist-root`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem coalesced_maximalist_root.truths_are_nd_necessary : Statements.Models.coalesced_maximalist_root.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.maximalistRoot)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot)) (Classicism.Meta.Coalesced.maximalistData_isolated)⟩
+
+/-- `coalesced-pinned-interpretations-root`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem coalesced_pinned_interpretations_root.truths_are_nd_necessary : Statements.Models.coalesced_pinned_interpretations_root.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.pinnedInterpRoot) (Classicism.Meta.Coalesced.pinnedInterpRoot_isModel) (Classicism.Meta.Coalesced.pinnedInterpRoot_actualWorldIsolated)⟩
+
+/-- `coalesced-single-individual-root`: Intensional Choice fails, by `coalesced-sums`'s argument `intensional-choice-component`. -/
+theorem coalesced_single_individual_root.intensional_choice_r : Statements.Models.coalesced_single_individual_root.intensional_choice_r :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.intensional_choice_component.intensional_choice_r (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete) (Classicism.Meta.Coalesced.singleIndividualData_distinguished) (Classicism.Meta.Coalesced.singleIndividualData_fullest)⟩
 
 /-- `coalesced-single-individual-root`: Relational Choice holds, by `coalesced-sums`'s argument `relational-choice-free-root`. -/
 theorem coalesced_single_individual_root.relational_choice_r : Statements.Models.coalesced_single_individual_root.relational_choice_r :=
@@ -153,13 +189,25 @@ theorem coalesced_single_individual_root.barcan_t : Statements.Models.coalesced_
 theorem coalesced_single_individual_root.atomicity_t : Statements.Models.coalesced_single_individual_root.atomicity_t :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.atomicity_t_component.atomicity_t (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete) (Classicism.Meta.Coalesced.singleIndividualData_distinguished) (Classicism.Meta.Coalesced.singleIndividualData_fullest)⟩
 
+/-- `coalesced-single-individual-root`: Boolean Completeness (type t) fails, by `coalesced-sums`'s argument `boolean-completeness-t-component`. -/
+theorem coalesced_single_individual_root.boolean_completeness_t : Statements.Models.coalesced_single_individual_root.boolean_completeness_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.boolean_completeness_t_component.boolean_completeness_t (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete) (Classicism.Meta.Coalesced.singleIndividualData_distinguished) (Classicism.Meta.Coalesced.singleIndividualData_fullest)⟩
+
 /-- `coalesced-single-individual-root`: Arithmetic Necessitism holds, by `coalesced-sums`'s argument `arithmetic-necessitism-complete-components`. -/
 theorem coalesced_single_individual_root.arithmetic_necessitism : Statements.Models.coalesced_single_individual_root.arithmetic_necessitism :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete)⟩
 
-/-- `coalesced-single-individual-root`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem coalesced_single_individual_root.distinctness_preserving_collapse : Statements.Models.coalesced_single_individual_root.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.singleIndividualData)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData)) (Classicism.Meta.Coalesced.singleIndividualData_isolated)⟩
+/-- `coalesced-single-individual-root`: Self-Atomicity (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
+theorem coalesced_single_individual_root.self_atomicity_t : Statements.Models.coalesced_single_individual_root.self_atomicity_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete) (Classicism.Meta.Coalesced.singleIndividualData_distinguished) (Classicism.Meta.Coalesced.singleIndividualData_fullest)⟩
+
+/-- `coalesced-single-individual-root`: Atoms are self-atoms (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
+theorem coalesced_single_individual_root.atoms_are_self_atoms_t : Statements.Models.coalesced_single_individual_root.atoms_are_self_atoms_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.atoms_are_self_atoms_t (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete) (Classicism.Meta.Coalesced.singleIndividualData_distinguished) (Classicism.Meta.Coalesced.singleIndividualData_fullest)⟩
+
+/-- `coalesced-single-individual-root`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem coalesced_single_individual_root.truths_are_nd_necessary : Statements.Models.coalesced_single_individual_root.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.singleIndividualData)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData)) (Classicism.Meta.Coalesced.singleIndividualData_isolated)⟩
 
 /-- `finite-support-dyadic-roundings`: Actuality holds, by `finite-support-one-object`'s argument `actual-world`. -/
 theorem finite_support_dyadic_roundings.actuality : Statements.Models.finite_support_dyadic_roundings.actuality :=
@@ -473,10 +521,6 @@ theorem finite_support_truncations.independence_signature_r : Statements.Models.
 theorem finite_support_truncations.no_contingency_signature_r : Statements.Models.finite_support_truncations.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.truncs)), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.truncs)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.truncs))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.truncs))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.truncs))) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.finite_support_truncations.no_pure_contingency_r).2))⟩
 
-/-- `full-double-retraction-glued-constants`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_double_retraction_glued_constants.distinctness_preserving_collapse : Statements.Models.full_double_retraction_glued_constants.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites), Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.DoubleRetractionSites.returning)⟩
-
 /-- `full-double-retraction-glued-constants`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_double_retraction_glued_constants.necessary_atomicity_r : Statements.Models.full_double_retraction_glued_constants.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites), Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.doubleRetractionSites))⟩
@@ -492,6 +536,10 @@ theorem full_double_retraction_glued_constants.axiom_of_infinity_t : Statements.
 /-- `full-double-retraction-glued-constants`: Infinity Schema (type t) holds, by the argument `infinitely-many-propositions`. -/
 theorem full_double_retraction_glued_constants.infinity_t : Statements.Models.full_double_retraction_glued_constants.infinity_t :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites), Classicism.Map.Arguments.infinitely_many_propositions.infinity_t (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.Premodel.Full.extFull _ (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.doubleRetractionSites))) (Classicism.Meta.Intensional.DoubleRetractionSites.infinitely_many_propositions)⟩
+
+/-- `full-double-retraction-glued-constants`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_double_retraction_glued_constants.truths_are_nd_necessary : Statements.Models.full_double_retraction_glued_constants.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites), Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.DoubleRetractionSites.returning)⟩
 
 /-- `full-double-retraction-glued-constants`: Strong Atomicity (type t) fails, by the argument `nonepic-strong-atomicity`. -/
 theorem full_double_retraction_glued_constants.strong_atomicity_t : Statements.Models.full_double_retraction_glued_constants.strong_atomicity_t :=
@@ -533,10 +581,6 @@ theorem full_double_retraction_glued_constants.transversal_choice_r : Statements
 theorem full_double_retraction_glued_constants.distinctness_necessary_t : Statements.Models.full_double_retraction_glued_constants.distinctness_necessary_t :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites), Classicism.Map.Arguments.unretracted_arrow.distinctness_necessary_t (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.doubleRetractionSites)) (Classicism.Meta.Intensional.DoubleRetractionSites.unretracted)⟩
 
-/-- `full-free-monoid-glued-constants-singleton`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem full_free_monoid_glued_constants_singleton.distinctness_preserving_collapse : Statements.Models.full_free_monoid_glued_constants_singleton.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.FreeMonoidMembers.singleton_actual_world_isolated)⟩
-
 /-- `full-free-monoid-glued-constants-singleton`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_free_monoid_glued_constants_singleton.necessary_atomicity_r : Statements.Models.full_free_monoid_glued_constants_singleton.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton), Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeMonoidSingleton))⟩
@@ -552,6 +596,10 @@ theorem full_free_monoid_glued_constants_singleton.axiom_of_infinity_t : Stateme
 /-- `full-free-monoid-glued-constants-singleton`: Infinity Schema (type t) holds, by the argument `infinitely-many-propositions`. -/
 theorem full_free_monoid_glued_constants_singleton.infinity_t : Statements.Models.full_free_monoid_glued_constants_singleton.infinity_t :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton), Classicism.Map.Arguments.infinitely_many_propositions.infinity_t (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.Premodel.Full.extFull _ (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeMonoidSingleton))) (Classicism.Meta.Intensional.FreeMonoidMembers.singleton_infinitely_many_propositions)⟩
+
+/-- `full-free-monoid-glued-constants-singleton`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem full_free_monoid_glued_constants_singleton.truths_are_nd_necessary : Statements.Models.full_free_monoid_glued_constants_singleton.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.FreeMonoidMembers.singleton_actual_world_isolated)⟩
 
 /-- `full-free-monoid-glued-constants-singleton`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_free_monoid_glued_constants_singleton.no_pure_contingency_r : Statements.Models.full_free_monoid_glued_constants_singleton.no_pure_contingency_r :=
@@ -585,10 +633,6 @@ theorem full_free_monoid_glued_constants_singleton.transversal_choice_r : Statem
 theorem full_free_monoid_glued_constants_singleton.distinctness_necessary_t : Statements.Models.full_free_monoid_glued_constants_singleton.distinctness_necessary_t :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton), Classicism.Map.Arguments.unretracted_arrow.distinctness_necessary_t (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeMonoidSingleton)) (Classicism.Meta.Intensional.FreeMonoidMembers.singleton_unretracted)⟩
 
-/-- `full-free-monoid-glued-constants`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem full_free_monoid_glued_constants.distinctness_preserving_collapse : Statements.Models.full_free_monoid_glued_constants.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.FreeMonoidMembers.thread_actual_world_isolated)⟩
-
 /-- `full-free-monoid-glued-constants`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_free_monoid_glued_constants.necessary_atomicity_r : Statements.Models.full_free_monoid_glued_constants.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread), Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeMonoidThread))⟩
@@ -604,6 +648,10 @@ theorem full_free_monoid_glued_constants.axiom_of_infinity_t : Statements.Models
 /-- `full-free-monoid-glued-constants`: Infinity Schema (type t) holds, by the argument `infinitely-many-propositions`. -/
 theorem full_free_monoid_glued_constants.infinity_t : Statements.Models.full_free_monoid_glued_constants.infinity_t :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread), Classicism.Map.Arguments.infinitely_many_propositions.infinity_t (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.Premodel.Full.extFull _ (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeMonoidThread))) (Classicism.Meta.Intensional.FreeMonoidMembers.thread_infinitely_many_propositions)⟩
+
+/-- `full-free-monoid-glued-constants`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem full_free_monoid_glued_constants.truths_are_nd_necessary : Statements.Models.full_free_monoid_glued_constants.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.FreeMonoidMembers.thread_actual_world_isolated)⟩
 
 /-- `full-free-monoid-glued-constants`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_free_monoid_glued_constants.no_pure_contingency_r : Statements.Models.full_free_monoid_glued_constants.no_pure_contingency_r :=
@@ -625,10 +673,6 @@ theorem full_free_monoid_glued_constants.transversal_choice_r : Statements.Model
 theorem full_free_monoid_glued_constants.distinctness_necessary_t : Statements.Models.full_free_monoid_glued_constants.distinctness_necessary_t :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread), Classicism.Map.Arguments.unretracted_arrow.distinctness_necessary_t (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeMonoidThread)) (Classicism.Meta.Intensional.FreeMonoidMembers.thread_unretracted)⟩
 
-/-- `full-free-product-glued-constants`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_free_product_glued_constants.distinctness_preserving_collapse : Statements.Models.full_free_product_glued_constants.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites), Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.FreeProductSites.returning)⟩
-
 /-- `full-free-product-glued-constants`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_free_product_glued_constants.necessary_atomicity_r : Statements.Models.full_free_product_glued_constants.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites), Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeProductSites))⟩
@@ -644,6 +688,10 @@ theorem full_free_product_glued_constants.axiom_of_infinity_t : Statements.Model
 /-- `full-free-product-glued-constants`: Infinity Schema (type t) holds, by the argument `infinitely-many-propositions`. -/
 theorem full_free_product_glued_constants.infinity_t : Statements.Models.full_free_product_glued_constants.infinity_t :=
   ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites), Classicism.Map.Arguments.infinitely_many_propositions.infinity_t (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.Premodel.Full.extFull _ (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeProductSites))) (Classicism.Meta.Intensional.FreeProductSites.infinitely_many_propositions)⟩
+
+/-- `full-free-product-glued-constants`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_free_product_glued_constants.truths_are_nd_necessary : Statements.Models.full_free_product_glued_constants.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites), Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.GluedData.model (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.GluedData.isModel (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.GluedData.full (Classicism.Meta.Intensional.freeProductSites)) (Classicism.Meta.Intensional.FreeProductSites.returning)⟩
 
 /-- `full-free-product-glued-constants`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_free_product_glued_constants.no_pure_contingency_r : Statements.Models.full_free_product_glued_constants.no_pure_contingency_r :=
@@ -793,10 +841,6 @@ theorem full_henkin_singleton_base.transversal_choice_r : Statements.Models.full
 theorem full_henkin_singleton_base.independence_signature_r : Statements.Models.full_henkin_singleton_base.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.Henkin.isModel (Unit)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.Henkin.model (Unit)) (Classicism.Meta.Intensional.Henkin.isModel (Unit))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.Henkin.isModel (Unit))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.Henkin.isModel (Unit)))⟩
 
-/-- `full-idempotent-monoid`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem full_idempotent_monoid.distinctness_preserving_collapse : Statements.Models.full_idempotent_monoid.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem) (Classicism.Map.Meets.full_idempotent_monoid.actual_world_isolated)⟩
-
 /-- `full-idempotent-monoid`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_idempotent_monoid.possible_infinity_t : Statements.Models.full_idempotent_monoid.possible_infinity_t :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem, Classicism.Map.Arguments.finitely_many_propositions_everywhere.possible_infinity_t (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.FullActionModels.mset_finitely_many_everywhere Classicism.Meta.Intensional.Idem)⟩
@@ -816,6 +860,10 @@ theorem full_idempotent_monoid.necessary_atomicity_r : Statements.Models.full_id
 /-- `full-idempotent-monoid`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_idempotent_monoid.necessary_rigid_comprehension_r : Statements.Models.full_idempotent_monoid.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Idem)⟩
+
+/-- `full-idempotent-monoid`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem full_idempotent_monoid.truths_are_nd_necessary : Statements.Models.full_idempotent_monoid.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem) (Classicism.Map.Meets.full_idempotent_monoid.actual_world_isolated)⟩
 
 /-- `full-idempotent-monoid`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_idempotent_monoid.no_pure_contingency_r : Statements.Models.full_idempotent_monoid.no_pure_contingency_r :=
@@ -865,9 +913,9 @@ theorem full_idempotent_monoid.independence_signature_r : Statements.Models.full
 theorem full_idempotent_monoid.no_contingency_signature_r : Statements.Models.full_idempotent_monoid.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.full_idempotent_monoid.no_pure_contingency_r).2))⟩
 
-/-- `full-idempotent-monoid-sigma-true-atom`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem full_idempotent_monoid_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.full_idempotent_monoid_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem) (Classicism.Map.Meets.full_idempotent_monoid.actual_world_isolated)⟩
+/-- `full-idempotent-monoid-sigma-true-atom`: Atoms are self-atoms (type t) fails, by its member's certificate, on the same model (`Classicism.Map.Models.full_idempotent_monoid.atoms_are_self_atoms_t`). -/
+theorem full_idempotent_monoid_sigma_true_atom.atoms_are_self_atoms_t : Statements.Models.full_idempotent_monoid_sigma_true_atom.atoms_are_self_atoms_t :=
+  Classicism.Map.Models.full_idempotent_monoid.atoms_are_self_atoms_t
 
 /-- `full-idempotent-monoid-sigma-true-atom`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_idempotent_monoid_sigma_true_atom.possible_infinity_t : Statements.Models.full_idempotent_monoid_sigma_true_atom.possible_infinity_t :=
@@ -888,6 +936,10 @@ theorem full_idempotent_monoid_sigma_true_atom.necessary_atomicity_r : Statement
 /-- `full-idempotent-monoid-sigma-true-atom`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_idempotent_monoid_sigma_true_atom.necessary_rigid_comprehension_r : Statements.Models.full_idempotent_monoid_sigma_true_atom.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Idem)⟩
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem full_idempotent_monoid_sigma_true_atom.truths_are_nd_necessary : Statements.Models.full_idempotent_monoid_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem) (Classicism.Map.Meets.full_idempotent_monoid.actual_world_isolated)⟩
 
 /-- `full-idempotent-monoid-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_idempotent_monoid_sigma_true_atom.no_pure_contingency_r : Statements.Models.full_idempotent_monoid_sigma_true_atom.no_pure_contingency_r :=
@@ -933,10 +985,6 @@ theorem full_idempotent_monoid_sigma_true_atom.distinctness_necessary_t : Statem
 theorem full_involution_group.gallin_extensional_comprehension_r : Statements.Models.full_involution_group.gallin_extensional_comprehension_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.coherent_retractions.gallin_extensional_comprehension_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_coherent Classicism.Meta.Intensional.Invol)⟩
 
-/-- `full-involution-group`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_involution_group.distinctness_preserving_collapse : Statements.Models.full_involution_group.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_returning Classicism.Meta.Intensional.Invol.k Classicism.Meta.Intensional.Invol.k_ne_one)⟩
-
 /-- `full-involution-group`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_involution_group.possible_infinity_t : Statements.Models.full_involution_group.possible_infinity_t :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.finitely_many_propositions_everywhere.possible_infinity_t (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.mset_finitely_many_everywhere Classicism.Meta.Intensional.Invol)⟩
@@ -964,6 +1012,10 @@ theorem full_involution_group.necessary_rigid_comprehension_r : Statements.Model
 /-- `full-involution-group`: □ND holds, by the argument `invertible-arrows`. -/
 theorem full_involution_group.necessary_distinctness_necessary_r : Statements.Models.full_involution_group.necessary_distinctness_necessary_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.invertible_arrows.necessary_distinctness_necessary_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_invertible Classicism.Meta.Intensional.Invol)⟩
+
+/-- `full-involution-group`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_involution_group.truths_are_nd_necessary : Statements.Models.full_involution_group.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_returning Classicism.Meta.Intensional.Invol.k Classicism.Meta.Intensional.Invol.k_ne_one)⟩
 
 /-- `full-involution-group`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_involution_group.no_pure_contingency_r : Statements.Models.full_involution_group.no_pure_contingency_r :=
@@ -1009,10 +1061,6 @@ theorem full_involution_group.no_contingency_signature_r : Statements.Models.ful
 theorem full_involution_group_sigma_true_atom.gallin_extensional_comprehension_r : Statements.Models.full_involution_group_sigma_true_atom.gallin_extensional_comprehension_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.coherent_retractions.gallin_extensional_comprehension_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_coherent Classicism.Meta.Intensional.Invol)⟩
 
-/-- `full-involution-group-sigma-true-atom`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_involution_group_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.full_involution_group_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_returning Classicism.Meta.Intensional.Invol.k Classicism.Meta.Intensional.Invol.k_ne_one)⟩
-
 /-- `full-involution-group-sigma-true-atom`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_involution_group_sigma_true_atom.possible_infinity_t : Statements.Models.full_involution_group_sigma_true_atom.possible_infinity_t :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.finitely_many_propositions_everywhere.possible_infinity_t (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.mset_finitely_many_everywhere Classicism.Meta.Intensional.Invol)⟩
@@ -1040,6 +1088,10 @@ theorem full_involution_group_sigma_true_atom.necessary_rigid_comprehension_r : 
 /-- `full-involution-group-sigma-true-atom`: □ND holds, by the argument `invertible-arrows`. -/
 theorem full_involution_group_sigma_true_atom.necessary_distinctness_necessary_r : Statements.Models.full_involution_group_sigma_true_atom.necessary_distinctness_necessary_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.invertible_arrows.necessary_distinctness_necessary_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_invertible Classicism.Meta.Intensional.Invol)⟩
+
+/-- `full-involution-group-sigma-true-atom`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_involution_group_sigma_true_atom.truths_are_nd_necessary : Statements.Models.full_involution_group_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.FullActionModels.group_returning Classicism.Meta.Intensional.Invol.k Classicism.Meta.Intensional.Invol.k_ne_one)⟩
 
 /-- `full-involution-group-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_involution_group_sigma_true_atom.no_pure_contingency_r : Statements.Models.full_involution_group_sigma_true_atom.no_pure_contingency_r :=
@@ -1077,10 +1129,6 @@ theorem full_involution_group_sigma_true_atom.transversal_choice_r : Statements.
 theorem full_permutation_group_infinite_set.gallin_extensional_comprehension_r : Statements.Models.full_permutation_group_infinite_set.gallin_extensional_comprehension_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.coherent_retractions.gallin_extensional_comprehension_r (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.group_coherent (Equiv.Perm ℕ))⟩
 
-/-- `full-permutation-group-infinite-set`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_permutation_group_infinite_set.distinctness_preserving_collapse : Statements.Models.full_permutation_group_infinite_set.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.perm_returning)⟩
-
 /-- `full-permutation-group-infinite-set`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_permutation_group_infinite_set.necessary_atomicity_r : Statements.Models.full_permutation_group_infinite_set.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ))⟩
@@ -1104,6 +1152,10 @@ theorem full_permutation_group_infinite_set.infinity_t : Statements.Models.full_
 /-- `full-permutation-group-infinite-set`: □ND holds, by the argument `invertible-arrows`. -/
 theorem full_permutation_group_infinite_set.necessary_distinctness_necessary_r : Statements.Models.full_permutation_group_infinite_set.necessary_distinctness_necessary_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.invertible_arrows.necessary_distinctness_necessary_r (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.group_invertible (Equiv.Perm ℕ))⟩
+
+/-- `full-permutation-group-infinite-set`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_permutation_group_infinite_set.truths_are_nd_necessary : Statements.Models.full_permutation_group_infinite_set.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.perm_returning)⟩
 
 /-- `full-permutation-group-infinite-set`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_permutation_group_infinite_set.no_pure_contingency_r : Statements.Models.full_permutation_group_infinite_set.no_pure_contingency_r :=
@@ -1149,10 +1201,6 @@ theorem full_permutation_group_infinite_set.no_contingency_signature_r : Stateme
 theorem full_permutation_group_infinite_set_sigma_true_atom.gallin_extensional_comprehension_r : Statements.Models.full_permutation_group_infinite_set_sigma_true_atom.gallin_extensional_comprehension_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.coherent_retractions.gallin_extensional_comprehension_r (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.group_coherent (Equiv.Perm ℕ))⟩
 
-/-- `full-permutation-group-infinite-set-sigma-true-atom`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_permutation_group_infinite_set_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.full_permutation_group_infinite_set_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.perm_returning)⟩
-
 /-- `full-permutation-group-infinite-set-sigma-true-atom`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_permutation_group_infinite_set_sigma_true_atom.necessary_atomicity_r : Statements.Models.full_permutation_group_infinite_set_sigma_true_atom.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ))⟩
@@ -1176,6 +1224,10 @@ theorem full_permutation_group_infinite_set_sigma_true_atom.infinity_t : Stateme
 /-- `full-permutation-group-infinite-set-sigma-true-atom`: □ND holds, by the argument `invertible-arrows`. -/
 theorem full_permutation_group_infinite_set_sigma_true_atom.necessary_distinctness_necessary_r : Statements.Models.full_permutation_group_infinite_set_sigma_true_atom.necessary_distinctness_necessary_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.invertible_arrows.necessary_distinctness_necessary_r (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.group_invertible (Equiv.Perm ℕ))⟩
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_permutation_group_infinite_set_sigma_true_atom.truths_are_nd_necessary : Statements.Models.full_permutation_group_infinite_set_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.FullActionModels.perm_returning)⟩
 
 /-- `full-permutation-group-infinite-set-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_permutation_group_infinite_set_sigma_true_atom.no_pure_contingency_r : Statements.Models.full_permutation_group_infinite_set_sigma_true_atom.no_pure_contingency_r :=
@@ -1209,10 +1261,6 @@ theorem full_permutation_group_infinite_set_sigma_true_atom.relational_choice_r 
 theorem full_permutation_group_infinite_set_sigma_true_atom.transversal_choice_r : Statements.Models.full_permutation_group_infinite_set_sigma_true_atom.transversal_choice_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ), Classicism.Map.Arguments.transversal_choice_extensionally_full.transversal_choice_r (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.Premodel.Full.extFull _ (Classicism.Meta.Intensional.MSet.model_full (Equiv.Perm ℕ)))⟩
 
-/-- `full-surjection-monoid`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_surjection_monoid.distinctness_preserving_collapse : Statements.Models.full_surjection_monoid.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.FullActionModels.surj_returning)⟩
-
 /-- `full-surjection-monoid`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_surjection_monoid.necessary_atomicity_r : Statements.Models.full_surjection_monoid.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj)⟩
@@ -1232,6 +1280,10 @@ theorem full_surjection_monoid.axiom_of_infinity_t : Statements.Models.full_surj
 /-- `full-surjection-monoid`: Infinity Schema (type t) holds, by the argument `infinitely-many-propositions`. -/
 theorem full_surjection_monoid.infinity_t : Statements.Models.full_surjection_monoid.infinity_t :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.infinitely_many_propositions.infinity_t (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.Premodel.Full.extFull _ (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj)) (Classicism.Meta.Intensional.FullActionModels.mset_infinitely_many_propositions Classicism.Meta.Intensional.FullActionModels.surj)⟩
+
+/-- `full-surjection-monoid`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_surjection_monoid.truths_are_nd_necessary : Statements.Models.full_surjection_monoid.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.FullActionModels.surj_returning)⟩
 
 /-- `full-surjection-monoid`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_surjection_monoid.no_pure_contingency_r : Statements.Models.full_surjection_monoid.no_pure_contingency_r :=
@@ -1277,10 +1329,6 @@ theorem full_surjection_monoid.independence_signature_r : Statements.Models.full
 theorem full_surjection_monoid.no_contingency_signature_r : Statements.Models.full_surjection_monoid.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj)) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.full_surjection_monoid.no_pure_contingency_r).2))⟩
 
-/-- `full-surjection-monoid-sigma-true-atom`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_surjection_monoid_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.full_surjection_monoid_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.FullActionModels.surj_returning)⟩
-
 /-- `full-surjection-monoid-sigma-true-atom`: □Atomicity holds, by the argument `full-atomicity`. -/
 theorem full_surjection_monoid_sigma_true_atom.necessary_atomicity_r : Statements.Models.full_surjection_monoid_sigma_true_atom.necessary_atomicity_r :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.full_atomicity.necessary_atomicity_r (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj)⟩
@@ -1300,6 +1348,10 @@ theorem full_surjection_monoid_sigma_true_atom.axiom_of_infinity_t : Statements.
 /-- `full-surjection-monoid-sigma-true-atom`: Infinity Schema (type t) holds, by the argument `infinitely-many-propositions`. -/
 theorem full_surjection_monoid_sigma_true_atom.infinity_t : Statements.Models.full_surjection_monoid_sigma_true_atom.infinity_t :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.infinitely_many_propositions.infinity_t (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.Premodel.Full.extFull _ (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj)) (Classicism.Meta.Intensional.FullActionModels.mset_infinitely_many_propositions Classicism.Meta.Intensional.FullActionModels.surj)⟩
+
+/-- `full-surjection-monoid-sigma-true-atom`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_surjection_monoid_sigma_true_atom.truths_are_nd_necessary : Statements.Models.full_surjection_monoid_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.FullActionModels.surj_returning)⟩
 
 /-- `full-surjection-monoid-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem full_surjection_monoid_sigma_true_atom.no_pure_contingency_r : Statements.Models.full_surjection_monoid_sigma_true_atom.no_pure_contingency_r :=
@@ -1337,10 +1389,6 @@ theorem full_surjection_monoid_sigma_true_atom.transversal_choice_r : Statements
 theorem full_surjection_monoid_sigma_true_atom.distinctness_necessary_t : Statements.Models.full_surjection_monoid_sigma_true_atom.distinctness_necessary_t :=
   ⟨Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj, Classicism.Map.Arguments.unretracted_arrow.distinctness_necessary_t (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_full Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.FullActionModels.surj_unretracted)⟩
 
-/-- `full-two-object-chain`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem full_two_object_chain.distinctness_preserving_collapse : Statements.Models.full_two_object_chain.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.chain_actual_world_isolated)⟩
-
 /-- `full-two-object-chain`: B for pure sentences fails, by the argument `fewer-propositions-after`. -/
 theorem full_two_object_chain.pure_b_r : Statements.Models.full_two_object_chain.pure_b_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.fewer_propositions_after.pure_b_r (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.chain_fewer_propositions_after)⟩
@@ -1368,6 +1416,10 @@ theorem full_two_object_chain.necessary_barcan_r : Statements.Models.full_two_ob
 /-- `full-two-object-chain`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_two_object_chain.necessary_rigid_comprehension_r : Statements.Models.full_two_object_chain.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _)⟩
+
+/-- `full-two-object-chain`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem full_two_object_chain.truths_are_nd_necessary : Statements.Models.full_two_object_chain.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.chain_actual_world_isolated)⟩
 
 /-- `full-two-object-chain`: Fregean Axiom fails, by the argument `nonidentity-arrow`. -/
 theorem full_two_object_chain.fregean_axiom : Statements.Models.full_two_object_chain.fregean_axiom :=
@@ -1405,10 +1457,6 @@ theorem full_two_object_chain.distinctness_necessary_t : Statements.Models.full_
 theorem full_two_object_chain.independence_signature_r : Statements.Models.full_two_object_chain.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _))⟩
 
-/-- `full-two-object-chain-sigma-true-atom`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem full_two_object_chain_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.full_two_object_chain_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.chain_actual_world_isolated)⟩
-
 /-- `full-two-object-chain-sigma-true-atom`: B for pure sentences fails, by the argument `fewer-propositions-after`. -/
 theorem full_two_object_chain_sigma_true_atom.pure_b_r : Statements.Models.full_two_object_chain_sigma_true_atom.pure_b_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.fewer_propositions_after.pure_b_r (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.chain_fewer_propositions_after)⟩
@@ -1436,6 +1484,10 @@ theorem full_two_object_chain_sigma_true_atom.necessary_barcan_r : Statements.Mo
 /-- `full-two-object-chain-sigma-true-atom`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_two_object_chain_sigma_true_atom.necessary_rigid_comprehension_r : Statements.Models.full_two_object_chain_sigma_true_atom.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _)⟩
+
+/-- `full-two-object-chain-sigma-true-atom`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem full_two_object_chain_sigma_true_atom.truths_are_nd_necessary : Statements.Models.full_two_object_chain_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.chain_actual_world_isolated)⟩
 
 /-- `full-two-object-chain-sigma-true-atom`: Fregean Axiom fails, by the argument `nonidentity-arrow`. -/
 theorem full_two_object_chain_sigma_true_atom.fregean_axiom : Statements.Models.full_two_object_chain_sigma_true_atom.fregean_axiom :=
@@ -1469,10 +1521,6 @@ theorem full_two_object_chain_sigma_true_atom.transversal_choice_r : Statements.
 theorem full_two_object_chain_sigma_true_atom.distinctness_necessary_t : Statements.Models.full_two_object_chain_sigma_true_atom.distinctness_necessary_t :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.unretracted_arrow.distinctness_necessary_t (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.chain_unretracted)⟩
 
-/-- `full-two-object-double-retraction`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_two_object_double_retraction.distinctness_preserving_collapse : Statements.Models.full_two_object_double_retraction.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.doubleRetraction_returning)⟩
-
 /-- `full-two-object-double-retraction`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_two_object_double_retraction.possible_infinity_t : Statements.Models.full_two_object_double_retraction.possible_infinity_t :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.finitely_many_propositions_everywhere.possible_infinity_t (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.doubleRetraction_finitely_many_everywhere)⟩
@@ -1492,6 +1540,10 @@ theorem full_two_object_double_retraction.necessary_atomicity_r : Statements.Mod
 /-- `full-two-object-double-retraction`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_two_object_double_retraction.necessary_rigid_comprehension_r : Statements.Models.full_two_object_double_retraction.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _)⟩
+
+/-- `full-two-object-double-retraction`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_two_object_double_retraction.truths_are_nd_necessary : Statements.Models.full_two_object_double_retraction.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.doubleRetraction_returning)⟩
 
 /-- `full-two-object-double-retraction`: Strong Atomicity (type t) fails, by the argument `nonepic-strong-atomicity`. -/
 theorem full_two_object_double_retraction.strong_atomicity_t : Statements.Models.full_two_object_double_retraction.strong_atomicity_t :=
@@ -1537,10 +1589,6 @@ theorem full_two_object_double_retraction.transversal_choice_r : Statements.Mode
 theorem full_two_object_double_retraction.independence_signature_r : Statements.Models.full_two_object_double_retraction.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _))⟩
 
-/-- `full-two-object-double-retraction-sigma-true-atom`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_two_object_double_retraction_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.full_two_object_double_retraction_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.doubleRetraction_returning)⟩
-
 /-- `full-two-object-double-retraction-sigma-true-atom`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_two_object_double_retraction_sigma_true_atom.possible_infinity_t : Statements.Models.full_two_object_double_retraction_sigma_true_atom.possible_infinity_t :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.finitely_many_propositions_everywhere.possible_infinity_t (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.doubleRetraction_finitely_many_everywhere)⟩
@@ -1560,6 +1608,10 @@ theorem full_two_object_double_retraction_sigma_true_atom.necessary_atomicity_r 
 /-- `full-two-object-double-retraction-sigma-true-atom`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_two_object_double_retraction_sigma_true_atom.necessary_rigid_comprehension_r : Statements.Models.full_two_object_double_retraction_sigma_true_atom.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _)⟩
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_two_object_double_retraction_sigma_true_atom.truths_are_nd_necessary : Statements.Models.full_two_object_double_retraction_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.doubleRetraction_returning)⟩
 
 /-- `full-two-object-double-retraction-sigma-true-atom`: Strong Atomicity (type t) fails, by the argument `nonepic-strong-atomicity`. -/
 theorem full_two_object_double_retraction_sigma_true_atom.strong_atomicity_t : Statements.Models.full_two_object_double_retraction_sigma_true_atom.strong_atomicity_t :=
@@ -1605,10 +1657,6 @@ theorem full_two_object_double_retraction_sigma_true_atom.transversal_choice_r :
 theorem full_two_object_retract.gallin_extensional_comprehension_r : Statements.Models.full_two_object_retract.gallin_extensional_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.coherent_retractions.gallin_extensional_comprehension_r (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.retract_coherent)⟩
 
-/-- `full-two-object-retract`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_two_object_retract.distinctness_preserving_collapse : Statements.Models.full_two_object_retract.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.retract_returning)⟩
-
 /-- `full-two-object-retract`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_two_object_retract.possible_infinity_t : Statements.Models.full_two_object_retract.possible_infinity_t :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.finitely_many_propositions_everywhere.possible_infinity_t (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.retract_finitely_many_everywhere)⟩
@@ -1628,6 +1676,10 @@ theorem full_two_object_retract.necessary_atomicity_r : Statements.Models.full_t
 /-- `full-two-object-retract`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_two_object_retract.necessary_rigid_comprehension_r : Statements.Models.full_two_object_retract.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _)⟩
+
+/-- `full-two-object-retract`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_two_object_retract.truths_are_nd_necessary : Statements.Models.full_two_object_retract.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.retract_returning)⟩
 
 /-- `full-two-object-retract`: Strong Atomicity (type t) fails, by the argument `nonepic-strong-atomicity`. -/
 theorem full_two_object_retract.strong_atomicity_t : Statements.Models.full_two_object_retract.strong_atomicity_t :=
@@ -1681,10 +1733,6 @@ theorem full_two_object_retract.independence_signature_r : Statements.Models.ful
 theorem full_two_object_retract_sigma_true_atom.gallin_extensional_comprehension_r : Statements.Models.full_two_object_retract_sigma_true_atom.gallin_extensional_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.coherent_retractions.gallin_extensional_comprehension_r (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.retract_coherent)⟩
 
-/-- `full-two-object-retract-sigma-true-atom`: Truths are ND-necessary fails, by the argument `dpc-returning-arrow`. -/
-theorem full_two_object_retract_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.full_two_object_retract_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.dpc_returning_arrow.distinctness_preserving_collapse (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.retract_returning)⟩
-
 /-- `full-two-object-retract-sigma-true-atom`: Possible Infinity (type t) fails, by the argument `finitely-many-propositions-everywhere`. -/
 theorem full_two_object_retract_sigma_true_atom.possible_infinity_t : Statements.Models.full_two_object_retract_sigma_true_atom.possible_infinity_t :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.finitely_many_propositions_everywhere.possible_infinity_t (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.retract_finitely_many_everywhere)⟩
@@ -1704,6 +1752,10 @@ theorem full_two_object_retract_sigma_true_atom.necessary_atomicity_r : Statemen
 /-- `full-two-object-retract-sigma-true-atom`: □Rigid Comprehension holds, by the argument `full-rigid-comprehension`. -/
 theorem full_two_object_retract_sigma_true_atom.necessary_rigid_comprehension_r : Statements.Models.full_two_object_retract_sigma_true_atom.necessary_rigid_comprehension_r :=
   ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.full_rigid_comprehension.necessary_rigid_comprehension_r (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _)⟩
+
+/-- `full-two-object-retract-sigma-true-atom`: Truths are ND-necessary fails, by the argument `nd-necessity-returning-arrow`. -/
+theorem full_two_object_retract_sigma_true_atom.truths_are_nd_necessary : Statements.Models.full_two_object_retract_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _, Classicism.Map.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _) (Classicism.Meta.Intensional.FullActionModels.unitModel_full _) (Classicism.Meta.Intensional.FullActionModels.retract_returning)⟩
 
 /-- `full-two-object-retract-sigma-true-atom`: Strong Atomicity (type t) fails, by the argument `nonepic-strong-atomicity`. -/
 theorem full_two_object_retract_sigma_true_atom.strong_atomicity_t : Statements.Models.full_two_object_retract_sigma_true_atom.strong_atomicity_t :=
@@ -1801,9 +1853,9 @@ theorem symmetric_collapse_pair.actuality : Statements.Models.symmetric_collapse
 theorem symmetric_collapse_pair.boolean_completeness_r : Statements.Models.symmetric_collapse_pair.boolean_completeness_r :=
   ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair) (Classicism.Meta.Intensional.SymIdeal.collapsePair_hullConditions)⟩
 
-/-- `symmetric-collapse-pair`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetric_collapse_pair.distinctness_preserving_collapse : Statements.Models.symmetric_collapse_pair.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymIdeal.collapsePair_actualWorldIsolated)⟩
+/-- `symmetric-collapse-pair`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetric_collapse_pair.truths_are_nd_necessary : Statements.Models.symmetric_collapse_pair.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymIdeal.collapsePair_actualWorldIsolated)⟩
 
 /-- `symmetric-collapse-pair`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetric_collapse_pair.no_pure_contingency_r : Statements.Models.symmetric_collapse_pair.no_pure_contingency_r :=
@@ -1841,9 +1893,9 @@ theorem symmetric_collapse_pair_sigma_true_atom.actuality : Statements.Models.sy
 theorem symmetric_collapse_pair_sigma_true_atom.boolean_completeness_r : Statements.Models.symmetric_collapse_pair_sigma_true_atom.boolean_completeness_r :=
   ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair) (Classicism.Meta.Intensional.SymIdeal.collapsePair_hullConditions)⟩
 
-/-- `symmetric-collapse-pair-sigma-true-atom`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetric_collapse_pair_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.symmetric_collapse_pair_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymIdeal.collapsePair_actualWorldIsolated)⟩
+/-- `symmetric-collapse-pair-sigma-true-atom`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetric_collapse_pair_sigma_true_atom.truths_are_nd_necessary : Statements.Models.symmetric_collapse_pair_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymIdeal.collapsePair_actualWorldIsolated)⟩
 
 /-- `symmetric-collapse-pair-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetric_collapse_pair_sigma_true_atom.no_pure_contingency_r : Statements.Models.symmetric_collapse_pair_sigma_true_atom.no_pure_contingency_r :=
@@ -1961,9 +2013,9 @@ theorem symmetric_range_gap.barcan_r : Statements.Models.symmetric_range_gap.bar
 theorem symmetric_range_gap.boolean_completeness_r : Statements.Models.symmetric_range_gap.boolean_completeness_r :=
   ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap) (Classicism.Meta.Intensional.SymIdeal.rangeGap_hullConditions)⟩
 
-/-- `symmetric-range-gap`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetric_range_gap.distinctness_preserving_collapse : Statements.Models.symmetric_range_gap.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymIdeal.rangeGap_actualWorldIsolated)⟩
+/-- `symmetric-range-gap`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetric_range_gap.truths_are_nd_necessary : Statements.Models.symmetric_range_gap.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymIdeal.rangeGap_actualWorldIsolated)⟩
 
 /-- `symmetric-range-gap`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetric_range_gap.no_pure_contingency_r : Statements.Models.symmetric_range_gap.no_pure_contingency_r :=
@@ -2001,9 +2053,9 @@ theorem symmetric_range_gap_sigma_true_atom.barcan_r : Statements.Models.symmetr
 theorem symmetric_range_gap_sigma_true_atom.boolean_completeness_r : Statements.Models.symmetric_range_gap_sigma_true_atom.boolean_completeness_r :=
   ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap) (Classicism.Meta.Intensional.SymIdeal.rangeGap_hullConditions)⟩
 
-/-- `symmetric-range-gap-sigma-true-atom`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetric_range_gap_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.symmetric_range_gap_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap), Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymIdeal.rangeGap_actualWorldIsolated)⟩
+/-- `symmetric-range-gap-sigma-true-atom`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetric_range_gap_sigma_true_atom.truths_are_nd_necessary : Statements.Models.symmetric_range_gap_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymIdeal.rangeGap_actualWorldIsolated)⟩
 
 /-- `symmetric-range-gap-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetric_range_gap_sigma_true_atom.no_pure_contingency_r : Statements.Models.symmetric_range_gap_sigma_true_atom.no_pure_contingency_r :=
@@ -2025,9 +2077,9 @@ theorem symmetric_two_object_unpinned_sigma_true_atom.necessary_boolean_complete
 theorem symmetric_two_object_unpinned_sigma_true_atom.boolean_completeness_r : Statements.Models.symmetric_two_object_unpinned_sigma_true_atom.boolean_completeness_r :=
   ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.twoBase) (Classicism.Meta.Intensional.SymIdeal.two_hullConditions)⟩
 
-/-- `symmetry-constrained-full-all-maps`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetry_constrained_full_all_maps.distinctness_preserving_collapse : Statements.Models.symmetry_constrained_full_all_maps.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.allMaps))⟩
+/-- `symmetry-constrained-full-all-maps`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetry_constrained_full_all_maps.truths_are_nd_necessary : Statements.Models.symmetry_constrained_full_all_maps.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.allMaps))⟩
 
 /-- `symmetry-constrained-full-all-maps`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetry_constrained_full_all_maps.no_pure_contingency_r : Statements.Models.symmetry_constrained_full_all_maps.no_pure_contingency_r :=
@@ -2045,9 +2097,9 @@ theorem symmetry_constrained_full_all_maps.independence_signature_r : Statements
 theorem symmetry_constrained_full_all_maps.no_contingency_signature_r : Statements.Models.symmetry_constrained_full_all_maps.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps)) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetry_constrained_full_all_maps.no_pure_contingency_r).2))⟩
 
-/-- `symmetry-constrained-full-all-maps-sigma-true-atom`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetry_constrained_full_all_maps_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.symmetry_constrained_full_all_maps_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.allMaps))⟩
+/-- `symmetry-constrained-full-all-maps-sigma-true-atom`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetry_constrained_full_all_maps_sigma_true_atom.truths_are_nd_necessary : Statements.Models.symmetry_constrained_full_all_maps_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.allMaps))⟩
 
 /-- `symmetry-constrained-full-all-maps-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetry_constrained_full_all_maps_sigma_true_atom.no_pure_contingency_r : Statements.Models.symmetry_constrained_full_all_maps_sigma_true_atom.no_pure_contingency_r :=
@@ -2057,9 +2109,9 @@ theorem symmetry_constrained_full_all_maps_sigma_true_atom.no_pure_contingency_r
 theorem symmetry_constrained_full_all_maps_sigma_true_atom.transversal_choice_r : Statements.Models.symmetry_constrained_full_all_maps_sigma_true_atom.transversal_choice_r :=
   ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps, Classicism.Map.Arguments.transversal_choice_extensionally_full.transversal_choice_r (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.extFull (M := Classicism.Meta.Intensional.SymFull.allMaps))⟩
 
-/-- `symmetry-constrained-full-collapse`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetry_constrained_full_collapse.distinctness_preserving_collapse : Statements.Models.symmetry_constrained_full_collapse.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.permsCollapses))⟩
+/-- `symmetry-constrained-full-collapse`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetry_constrained_full_collapse.truths_are_nd_necessary : Statements.Models.symmetry_constrained_full_collapse.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.permsCollapses))⟩
 
 /-- `symmetry-constrained-full-collapse`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetry_constrained_full_collapse.no_pure_contingency_r : Statements.Models.symmetry_constrained_full_collapse.no_pure_contingency_r :=
@@ -2077,9 +2129,9 @@ theorem symmetry_constrained_full_collapse.independence_signature_r : Statements
 theorem symmetry_constrained_full_collapse.no_contingency_signature_r : Statements.Models.symmetry_constrained_full_collapse.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses)) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetry_constrained_full_collapse.no_pure_contingency_r).2))⟩
 
-/-- `symmetry-constrained-full-collapse-sigma-true-atom`: Truths are ND-necessary holds, by the argument `dpc-isolated-actual-world`. -/
-theorem symmetry_constrained_full_collapse_sigma_true_atom.distinctness_preserving_collapse : Statements.Models.symmetry_constrained_full_collapse_sigma_true_atom.distinctness_preserving_collapse :=
-  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses, Classicism.Map.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.permsCollapses))⟩
+/-- `symmetry-constrained-full-collapse-sigma-true-atom`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetry_constrained_full_collapse_sigma_true_atom.truths_are_nd_necessary : Statements.Models.symmetry_constrained_full_collapse_sigma_true_atom.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.actualWorldIsolated (M := Classicism.Meta.Intensional.SymFull.permsCollapses))⟩
 
 /-- `symmetry-constrained-full-collapse-sigma-true-atom`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
 theorem symmetry_constrained_full_collapse_sigma_true_atom.no_pure_contingency_r : Statements.Models.symmetry_constrained_full_collapse_sigma_true_atom.no_pure_contingency_r :=

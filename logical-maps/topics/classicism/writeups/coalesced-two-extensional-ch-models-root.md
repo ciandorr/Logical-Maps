@@ -85,8 +85,8 @@ Well-Ordering at every type:
 - `strong-atomicity`: the root entities true of one tuple at one world are strong atoms,
   giving □Strong Atomicity and so □Atomicity; and transport onto each component is
   surjective, giving □BF;
-- `one-world-components`: □Tame Rigidity, □Intensional Choice and □Distinctness-Preserving
-  Collapse;
+- `one-world-components`: □Tame Rigidity, □Intensional Choice and □Truths are
+  ND-necessary;
 - `rigid-rigidity`: □Rigid Rigidity and □Weakly Rigid Weak Rigidity;
 - `well-ordering`: Modal Well-Ordering and □Well-Ordering;
 - `boolean-completeness-t`, `pure-b` and `infinity`: Boolean Completeness at $t$ necessarily,

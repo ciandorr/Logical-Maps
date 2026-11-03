@@ -1,6 +1,6 @@
 # Vicinity ∧ Atomicity (type t) ⇒ Actuality
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr (the argument and its use of BF for 5-necessity, 28 October 2026), with Claude Opus 5.5 (Anthropic), who completed the step showing that the atoms below the witness are self-atoms; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.vicinity_and_atomicity_t_imply_actuality`; produced by Cian Dorr (the argument and its use of BF for 5-necessity, 28 October 2026), with Claude Opus 5.5 (Anthropic), who completed the step showing that the atoms below the witness are self-atoms; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
 
 ## Premises
 

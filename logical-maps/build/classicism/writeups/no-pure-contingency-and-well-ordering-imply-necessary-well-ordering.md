@@ -1,6 +1,6 @@
 # No Pure Contingency ∧ Well-Ordering ⇒ □Well-Ordering
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.no_pure_contingency_and_well_ordering_imply_necessary_well_ordering`; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.</p>
 
 ## Premises
 

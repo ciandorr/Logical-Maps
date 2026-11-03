@@ -1,6 +1,6 @@
 # Separated Structure ⇒ Independence (signature Σ)
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.separated_structure_r_implies_independence_signature_r`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 22 September 2026.</p>
 
 ## Premises
 

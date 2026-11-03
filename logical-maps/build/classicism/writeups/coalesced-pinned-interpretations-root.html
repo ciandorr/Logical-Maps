@@ -336,7 +336,8 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <li><strong>Domains at <span class="math inline">W_0</span>.</strong> An entity at <span class="math inline">W_0</span> of a relational type is an intension <span class="math inline">F</span>, assigning to each arrow out of <span class="math inline">W_0</span> a set of tuples of entities at its target, subject to two conditions:
 <ol type="1">
 <li><em>Finite pinning.</em> For some finite <span class="math inline">S\subseteq\Sigma^+</span>, two arrows <span class="math inline">\langle V,I\rangle</span> and <span class="math inline">\langle V,I&#39;\rangle</span> into the same object with <span class="math inline">I{\restriction}S=I&#39;{\restriction}S</span> give <span class="math inline">F</span> the same value. The identity is the only arrow into <span class="math inline">W_0</span>, so its value is unconstrained.</li>
-<li><em>Landing.</em> For every arrow <span class="math inline">h=\langle V,I\rangle</span>, the transport <span class="math inline">h\cdot F</span>, the intension <span class="math inline">k\mapsto F_{k\circ h}</span> over the arrows out of <span class="math inline">V</span>, is an element of <span class="math inline">V</span>’s domain in its component.</li>
+<li><em>Landing.</em> For every arrow <span class="math inline">h=\langle V,I\rangle</span>, the transport <span class="math inline">h\cdot
+F</span>, the intension <span class="math inline">k\mapsto F_{k\circ h}</span> over the arrows out of <span class="math inline">V</span>, is an element of <span class="math inline">V</span>’s domain in its component.</li>
 </ol>
 The types are well-founded, so this defines the domains by recursion on the type.</li>
 <li><strong>Evaluation point.</strong> <span class="math inline">1_{W_0}</span>.</li>
@@ -355,8 +356,10 @@ The types are well-founded, so this defines the domains by recursion on the type
 <h2 id="it-is-a-model-of-c">It is a model of C</h2>
 <p>The argument follows <em>Classicism</em>, Proposition D.4, together with the treatment of the root in Appendix E. Closed formulas are evaluated at an arrow by evaluating at its target with transported parameters. So what has to be shown is that every term with parameters from the domains denotes an element of the domains. Let <span class="math inline">t</span> be such a term, with parameters <span class="math inline">\bar P</span> pinned down by finite sets whose union is <span class="math inline">S</span>.</p>
 <ol type="1">
-<li><strong>Pinning.</strong> The value of <span class="math inline">t</span>’s denotation at <span class="math inline">\langle V,I\rangle</span> is computed in <span class="math inline">V</span>’s component from the transported parameters <span class="math inline">\langle V,I\rangle\cdot\bar P</span>. These depend on <span class="math inline">I</span> only through <span class="math inline">I{\restriction}S</span>. So the denotation is pinned down by <span class="math inline">S</span>.</li>
-<li><strong>Landing.</strong> Transport commutes with the operations of the language. So <span class="math inline">\langle V,I\rangle\cdot\llbracket t\rrbracket(\bar P)</span> is the denotation in <span class="math inline">V</span>’s component of <span class="math inline">t</span> with the parameters <span class="math inline">\langle V,I\rangle\cdot\bar P</span>. That lies in <span class="math inline">V</span>’s domain, because the component is a model of C.</li>
+<li><strong>Pinning.</strong> The value of <span class="math inline">t</span>’s denotation at <span class="math inline">\langle V,I\rangle</span> is computed in <span class="math inline">V</span>’s component from the transported parameters <span class="math inline">\langle
+V,I\rangle\cdot\bar P</span>. These depend on <span class="math inline">I</span> only through <span class="math inline">I{\restriction}S</span>. So the denotation is pinned down by <span class="math inline">S</span>.</li>
+<li><strong>Landing.</strong> Transport commutes with the operations of the language. So <span class="math inline">\langle V,I\rangle\cdot\llbracket t\rrbracket(\bar P)</span> is the denotation in <span class="math inline">V</span>’s component of <span class="math inline">t</span> with the parameters <span class="math inline">\langle V,I\rangle\cdot\bar
+P</span>. That lies in <span class="math inline">V</span>’s domain, because the component is a model of C.</li>
 <li><strong>At <span class="math inline">W_0</span> itself.</strong> The value at the identity is the set of tuples of <span class="math inline">W_0</span>-entities satisfying the formula at <span class="math inline">W_0</span>. Quantifiers there range over <span class="math inline">D(W_0)</span>, and no condition constrains this value.</li>
 </ol>
 <p>Application is the special case <span class="math inline">h\cdot(Fa)=(h\cdot F)(h\cdot a)</span>. The axioms of C hold at <span class="math inline">W_0</span> because, as in every action model, denotations are computed extensionally on intensions. The worlds other than <span class="math inline">W_0</span> are worlds of the components, which are models of C.</p>
@@ -364,11 +367,13 @@ The types are well-founded, so this defines the domains by recursion on the type
 <p>Take the form <span class="math inline">\Diamond\exists x\,.\,Fx\to\exists x\,.\,\Diamond Fx</span>. Let <span class="math inline">F</span> be of type <span class="math inline">\sigma\to t</span>, pinned down by a finite <span class="math inline">S</span>, with <span class="math inline">\Diamond\exists x\,.\,Fx</span> true at <span class="math inline">W_0</span>.</p>
 <ul>
 <li><strong>The witness is at the identity.</strong> Then <span class="math inline">\exists x\,.\,Fx</span> holds already, and <span class="math inline">Fx</span> implies <span class="math inline">\Diamond Fx</span>.</li>
-<li><strong>The witness is at some <span class="math inline">\langle V,I\rangle</span>.</strong> Then <span class="math inline">y\in F_{\langle V,I\rangle}</span> for some <span class="math inline">y</span> of type <span class="math inline">\sigma</span> at <span class="math inline">V</span>.
+<li><strong>The witness is at some <span class="math inline">\langle V,I\rangle</span>.</strong> Then <span class="math inline">y\in F_{\langle
+V,I\rangle}</span> for some <span class="math inline">y</span> of type <span class="math inline">\sigma</span> at <span class="math inline">V</span>.
 <ol type="1">
 <li>Choose a constant <span class="math inline">c</span> of type <span class="math inline">\sigma</span> outside <span class="math inline">S</span>; infinitely many are available.</li>
 <li>Let <span class="math inline">I&#39;</span> agree with <span class="math inline">I</span> except that <span class="math inline">I&#39;(c)=y</span>.</li>
-<li>Then <span class="math inline">\langle V,I&#39;\rangle</span> agrees with <span class="math inline">\langle V,I\rangle</span> on <span class="math inline">S</span>, so <span class="math inline">F_{\langle V,I&#39;\rangle}=F_{\langle V,I\rangle}\ni y=\langle V,I&#39;\rangle\cdot\hat c</span>.</li>
+<li>Then <span class="math inline">\langle V,I&#39;\rangle</span> agrees with <span class="math inline">\langle V,I\rangle</span> on <span class="math inline">S</span>, so <span class="math inline">F_{\langle V,I&#39;\rangle}=F_{\langle V,I\rangle}\ni y=\langle
+V,I&#39;\rangle\cdot\hat c</span>.</li>
 <li>So <span class="math inline">F\hat c</span> holds at <span class="math inline">\langle V,I&#39;\rangle</span>, and <span class="math inline">\Diamond F\hat c</span> holds at <span class="math inline">W_0</span>.</li>
 </ol></li>
 </ul>

@@ -325,11 +325,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Actuality and the 5-necessity collapse imply Inextensible Comprehension</h1></header><p>Assume Actuality and that 5-necessities are ND-necessary, in the map’s fixed relational type system. The conclusion is Inextensible Comprehension: every relation is coextensive with an inextensible one. The theorem and argument are Cian Dorr’s, found with help from GPT-6 Astra (OpenAI) on 29 October 2026. Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, checked and adapted the text. No independent checker or Lean verification is recorded.</p>
 <p>The argument is the one for <a href="actuality-and-bf-imply-inextensible-comprehension.md">BF and Actuality</a>, with BF replaced by a restricted Barcan formula. That formula is derived from the premises.</p>
 <h2 id="definitions">Definitions</h2>
-<p><span class="math inline">\Box_{\ne}p:=\exists q\, .\,q\land\Box(\Diamond q\to p)</span>, with dual</p>
-<p><span class="math display">
-\Diamond_{\ne}p\ \leftrightarrow\ \forall q\, .\,q\to\Diamond(\Diamond q\land p).
-</span></p>
-<p><span class="math inline">\Box_5</span> is necessity under every S5 operator, with dual <span class="math inline">\Diamond_5</span> (Background, Varieties of necessity). C proves <span class="math inline">\Box_{\ne}\le\Box_5</span>. The premise <span class="math inline">\forall p\, .\,\Box_5p\to\Box_{\ne}p</span> therefore makes the two operators coextensive, and so also their duals. Inextensibility and Actuality are as in the BF write-up. Let <span class="math inline">a</span> witness Actuality.</p>
+<p><span class="math inline">\Box_{\ne}p:=\exists q\, .\,q\land\Box(\Diamond q\to p)</span>, with dual <span class="math inline">\Diamond_{\ne}p\leftrightarrow\forall q\, .\,q\to\Diamond(\Diamond q\land p)</span>. <span class="math inline">\Box_5</span> is necessity under every S5 operator, with dual <span class="math inline">\Diamond_5</span> (Background, Varieties of necessity). C proves <span class="math inline">\Box_{\ne}\le\Box_5</span>. The premise <span class="math inline">\forall p\, .\,\Box_5p\to\Box_{\ne}p</span> therefore makes the two operators coextensive, and so also their duals. Inextensibility and Actuality are as in the BF write-up. Let <span class="math inline">a</span> witness Actuality.</p>
 <h2 id="step-1-actuality-gives-diamond_ne-a-simple-form">Step 1: Actuality gives <span class="math inline">\Diamond_{\ne}</span> a simple form</h2>
 <p>Put <span class="math inline">D_ap:=\Diamond(\Diamond a\land p)</span>. Then</p>
 <p><span class="math display">
@@ -343,7 +339,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 </span></p>
 <p>This is coextensiveness at the actual world only. The argument never needs the operators to be identical or necessarily coextensive.</p>
 <h2 id="step-3-a-barcan-formula-restricted-to-diamond-a">Step 3: a Barcan formula restricted to <span class="math inline">\Diamond a</span></h2>
-<p><span class="math inline">\Box_5</span> obeys the Barcan formula at every type, as a theorem of C. This is Prior’s derivation from B (Background, [[box5-barcan]]). Dually, for tuples, <span class="math inline">\Diamond_5\exists\bar x\, .\,R[\bar x]\to\exists\bar x\, .\,\Diamond_5R[\bar x]</span>.</p>
+<p><span class="math inline">\Box_5</span> obeys the Barcan formula at every type, as a theorem of C. This is shown in <em>The Bounds of Possibility</em>, Appendix D: fact (C5), p. 402, from Theorem D16 and Corollary D6, which rests on Prior’s derivation from B, Proposition D3 (Background, [[box5-barcan]]). Dually, for tuples, <span class="math inline">\Diamond_5\exists\bar x\, .\,R[\bar x]\to\exists\bar x\, .\,\Diamond_5R[\bar x]</span>.</p>
 <p>Transfer this through (2), applying (2) once to <span class="math inline">\exists\bar x\, .\,R[\bar x]</span> and once to each <span class="math inline">R[\bar x]</span>:</p>
 <p><span class="math display">
 \text{(RB)}\qquad
@@ -352,6 +348,7 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 </span></p>
 <p>This holds at the actual world, for every relation <span class="math inline">R</span> and at every type.</p>
 <h2 id="step-4-inextensibility">Step 4: inextensibility</h2>
+<p>The strategy for this part of the proof is due to Christopher Sun. It was used in the earlier proof that BF and Actuality imply Inextensible Comprehension.</p>
 <p>Fix <span class="math inline">F</span> of type <span class="math inline">\bar\sigma t</span> and put <span class="math inline">C:=\lambda\bar z\, .\,\Diamond(a\land F[\bar z])</span>. As in the BF write-up, Actuality makes <span class="math inline">C</span> coextensive with <span class="math inline">F</span>. Suppose <span class="math inline">C</span> is not inextensible. With <span class="math inline">A(X):=\forall\bar y\, .\,C[\bar y]\to\Box X[\bar y]</span>,</p>
 <p><span class="math display">
 (3)\qquad \Diamond\exists X\, .\,A(X)\land\Diamond\exists\bar z\, .\,
@@ -375,6 +372,6 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 </ul>
 <h2 id="paper-references">Paper references</h2>
 <ul>
-<li><strong>Background: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Appendix D, pp. 400–409. The 5-necessity operator.</li>
+<li><strong>Background: The Bounds of Possibility.</strong> Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as <span class="math inline">\lambda p\, .\,p=\top</span>, under which every theorem of HS4 is a theorem of C. — Appendix D, pp. 400–409; fact (C5), p. 402; Proposition D3, p. 403; Corollary D6, p. 404; Theorem D16, p. 406. The 5-necessity operator, and its Barcan formula at every type.</li>
 </ul>
 </body></html>

@@ -1,6 +1,6 @@
 # BF (relational types) ⇒ Atoms are strong atoms
 
-<p class='cert'>Result — Source: Misc.; produced by Andrew Bacon (Exercise 8.12); isolated as a bridge result by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.barcan_relational_implies_atoms_are_strong_atoms_r`; produced by Andrew Bacon (Exercise 8.12); isolated as a bridge result by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

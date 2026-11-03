@@ -10,6 +10,7 @@
 - **□Transversal Choice.** Necessarily, every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
+- **□Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ □Boolean Completeness (type t).** Necessarily, every property of propositions has a greatest lower bound.
 - **¬ □Countable Boolean Completeness.** Necessarily, every countable property of entities of a relational type has a least upper bound in that type, with countability relative to a type $\sigma$ as in Countable Boolean Completeness; one instance for each $\sigma$.
@@ -124,6 +125,12 @@ At type $t$. Write $\pi,\rho$ for the coordinate projections of $B=\mathbf 2\tim
 At every type. The numerals are crisp entities, and the crisp characteristic function of the set of numerals at $\sigma$ is in the full domain and inductive with value $\top$, so $\mathbb N_\sigma$ is crisp, with the numerals as its instances. Here $\Box p$ is $p=\top$, so persistence, $\Box\forall n\,.\,\mathbb N_\sigma n\to\Box\mathbb N_\sigma n$, has value $\top$; inextensibility, $\Box\forall X\,.\,(\forall n\,.\,\mathbb N_\sigma n\to\Box Xn)\to\mathbb N_\sigma\le X$, has value $\top$, since for each $X$ both sides of the implication are $\bigwedge_n[\![Xn=\top]\!]$ over the numerals $n$; and distinct numerals are necessarily distinct, identity being crisp. So $\mathbb N_\sigma$ is rigid with necessarily distinct instances, whether or not $\Box I^*_\sigma$ holds.
 
 *By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
+
+### Holds □Axiom of Infinity (type t).
+
+As $\Box p$ is $p=\top$, it suffices that the Axiom of Infinity at type $t$ has value $\top$. Let $\Phi\in D_{(tt)t}$ send $X\in B^{B}$ to $\bigvee_F\bigwedge_{b\notin F}\neg X(b)$, the join over the finite sets $F\subseteq B$: the value of the claim that $X$ holds of only finitely many propositions. It is in the domain, which holds every function, and so is $W:=\lambda Y\, .\,\forall X\, .\,YX\to\Phi X$, whose value at $Y$ is $\bigwedge_X(Y(X)\to\Phi(X))$. $W\mathbf 0_t$ has value $\top$, since $\mathbf 0_t(X)=\bigwedge_b\neg X(b)\le\Phi(X)$, taking $F=\varnothing$. And $WY\le W(\operatorname{Suc}_tY)$: $\operatorname{Suc}_tY(X)=\bigvee_y X(y)\land Y(X_y)$, where $X_y$, the value of $\lambda u\, .\,Xu\land u\ne y$, agrees with $X$ except that $X_y(y)=0$, equality being crisp; so $\Phi(X_y)\le\Phi(X)$, each $F$ for $X_y$ giving $F\cup\{y\}$ for $X$. Hence the value of $\operatorname{FiniteCardinality}_t(Z)$ is at most that of $WZ$, and that of $\operatorname{FiniteCardinality}_t(Z)\land Z(\lambda u\, .\,\top)$ is at most $\Phi(\lambda u\, .\,\top)=\bigvee_F\bigwedge_{b\notin F}\bot=\bot$, $B$ being infinite, as $A$ is in every member. So the existential has value $\bot$ and the Axiom value $\top$.
+
+*From the group *Full Boolean-valued models*, shared argument `full-boolean-valued#necessary-axiom-of-infinity-t`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
 
 ### Fails Necessity of Analysis.
 

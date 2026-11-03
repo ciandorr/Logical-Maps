@@ -794,6 +794,146 @@ theorem atomicity_of_atomicity_at_t_barcan :
       (Entails.union_right _ _))
     atomicity_t_and_bf_imply_atomicity
 
+/-- `atomicity-t-and-intensional-choice-imply-atomicity`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem atomicity_t_and_intensional_choice_imply_atomicity :
+    P.AtomicityT.schema ∪ P.IntensionalChoice.schema ⟹ P.Atomicity.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.IntensionalChoice.schema_entails_listSchema))
+      Proofs.atomicity_t_and_intensional_choice_imply_atomicity.listEntails)
+
+/-- `necessary-atomicity-t-and-necessary-intensional-choice-imply-necessary-atomicity`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem necessary_atomicity_t_and_necessary_intensional_choice_imply_necessary_atomicity :
+    P.NecAtomicityT.schema ∪ P.NecIntensionalChoice.schema ⟹ P.NecAtomicity.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.NecIntensionalChoice.schema_entails_listSchema))
+      Proofs.necessary_atomicity_t_and_necessary_intensional_choice_imply_necessary_atomicity.listEntails)
+
+/-- `strong-atomicity-t-and-intensional-choice-imply-strong-atomicity`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem strong_atomicity_t_and_intensional_choice_imply_strong_atomicity :
+    P.StrongAtomicityT.schema ∪ P.IntensionalChoice.schema ⟹ P.StrongAtomicity.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.IntensionalChoice.schema_entails_listSchema))
+      Proofs.strong_atomicity_t_and_intensional_choice_imply_strong_atomicity.listEntails)
+
+/-- `necessary-strong-atomicity-t-and-necessary-intensional-choice-imply-necessary-strong-atomicity`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem necessary_strong_atomicity_t_and_necessary_intensional_choice_imply_necessary_strong_atomicity :
+    P.NecStrongAtomicityT.schema ∪ P.NecIntensionalChoice.schema ⟹ P.NecStrongAtomicity.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.NecIntensionalChoice.schema_entails_listSchema))
+      Proofs.necessary_strong_atomicity_t_and_necessary_intensional_choice_imply_necessary_strong_atomicity.listEntails)
+
+/-- `self-atomicity-t-and-intensional-choice-imply-self-atomicity-r`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem self_atomicity_t_and_intensional_choice_imply_self_atomicity_r :
+    P.SelfAtomicityT.schema ∪ P.IntensionalChoice.schema ⟹ P.SelfAtomicity.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.IntensionalChoice.schema_entails_listSchema))
+      Proofs.self_atomicity_t_and_intensional_choice_imply_self_atomicity_r.listEntails)
+
+/-- `necessary-self-atomicity-t-and-necessary-intensional-choice-imply-necessary-self-atomicity-r`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem necessary_self_atomicity_t_and_necessary_intensional_choice_imply_necessary_self_atomicity_r :
+    P.NecSelfAtomicityT.schema ∪ P.NecIntensionalChoice.schema ⟹ P.NecSelfAtomicity.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.NecIntensionalChoice.schema_entails_listSchema))
+      Proofs.necessary_self_atomicity_t_and_necessary_intensional_choice_imply_necessary_self_atomicity_r.listEntails)
+
+/-- `atoms-are-self-atoms-t-and-intensional-choice-imply-atoms-are-self-atoms-r`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem atoms_are_self_atoms_t_and_intensional_choice_imply_atoms_are_self_atoms_r :
+    P.AtomsAreSelfAtomsT.schema ∪ P.IntensionalChoice.schema ⟹ P.AtomsAreSelfAtoms.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.IntensionalChoice.schema_entails_listSchema))
+      Proofs.atoms_are_self_atoms_t_and_intensional_choice_imply_atoms_are_self_atoms_r.listEntails)
+
+/-- `necessary-atoms-are-self-atoms-t-and-necessary-intensional-choice-imply-necessary-atoms-are-self-atoms-r`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem necessary_atoms_are_self_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_self_atoms_r :
+    P.NecAtomsAreSelfAtomsT.schema ∪ P.NecIntensionalChoice.schema ⟹ P.NecAtomsAreSelfAtoms.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.NecIntensionalChoice.schema_entails_listSchema))
+      Proofs.necessary_atoms_are_self_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_self_atoms_r.listEntails)
+
+/-- `atoms-are-strong-atoms-t-and-intensional-choice-imply-atoms-are-strong-atoms-r`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem atoms_are_strong_atoms_t_and_intensional_choice_imply_atoms_are_strong_atoms_r :
+    P.AtomsAreStrongAtomsT.schema ∪ P.IntensionalChoice.schema ⟹ P.AtomsAreStrongAtoms.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.IntensionalChoice.schema_entails_listSchema))
+      Proofs.atoms_are_strong_atoms_t_and_intensional_choice_imply_atoms_are_strong_atoms_r.listEntails)
+
+/-- `necessary-atoms-are-strong-atoms-t-and-necessary-intensional-choice-imply-necessary-atoms-are-strong-atoms-r`, at every arity: the record at `σ → t`, vectorized, with Intensional Choice
+over every list through the codes and Existence over every list a theorem of `C`. -/
+theorem necessary_atoms_are_strong_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_strong_atoms_r :
+    P.NecAtomsAreStrongAtomsT.schema ∪ P.NecIntensionalChoice.schema ⟹ P.NecAtomsAreStrongAtoms.schema :=
+  Entails.mono_right (schema_subset_args _)
+    (Entails.trans
+      (Entails.union
+        (Entails.union
+          (Entails.mono_left (fun _ h => h.elim)
+            (Entails.trans classicism_implies_existence_r P.Existence.schema_entails_listSchema))
+          (Entails.union_left _ _))
+        (Entails.trans (Entails.union_right _ _) P.NecIntensionalChoice.schema_entails_listSchema))
+      Proofs.necessary_atoms_are_strong_atoms_t_and_necessary_intensional_choice_imply_necessary_atoms_are_strong_atoms_r.listEntails)
+
 /-- `c5-and-necessary-actuality-imply-atomicity` (Proposition 2.6, right to left), at every
 arity: Atomicity at `t` from the `t` record, BF from `□ND`, and the induction. -/
 theorem c5_and_necessary_actuality_imply_atomicity :
@@ -1026,13 +1166,13 @@ theorem necessary_bf_and_actuality_imply_inextensible_comprehension :
         (Entails.union_right _ _))
       Proofs.necessary_bf_and_actuality_imply_inextensible_comprehension.listEntails)
 
-/-- `actuality-and-distinctness-preserving-collapse-imply-inextensible-comprehension`, at
+/-- `actuality-and-truths-are-nd-necessary-imply-inextensible-comprehension`, at
 every arity. -/
-theorem actuality_and_distinctness_preserving_collapse_imply_inextensible_comprehension :
-    P.Actuality.schema ∪ P.DistinctnessPreservingCollapse.schema ⟹
+theorem actuality_and_truths_are_nd_necessary_imply_inextensible_comprehension :
+    P.Actuality.schema ∪ P.TruthsAreNDNecessary.schema ⟹
       P.InextensibleComprehension.schema :=
   Entails.mono_right (schema_subset_args _)
-    Proofs.actuality_and_distinctness_preserving_collapse_imply_inextensible_comprehension.listEntails
+    Proofs.actuality_and_truths_are_nd_necessary_imply_inextensible_comprehension.listEntails
 
 /-- `classicism-implies-modalized-plenitude-r`, at every output type. -/
 theorem classicism_implies_modalized_plenitude_r :

@@ -36,7 +36,7 @@ Comprehension, from the idempotent-monoid and permutation models through certifi
 records (`¬`Tractarianism at `t` and `¬`Boolean Completeness at `e → t` are consistent,
 and Functionality at `t → t` implies the one, Rigid Comprehension at `(e → t) → t` the
 other: `consistent_neg_of_imp`). And one consequence of Possibility rather than an
-exclusion: `possibility-schema-r-implies-possible-infinity-e`, since the Axiom of Infinity
+exclusion: `distinctness-schema-r-implies-possible-infinity-e`, since the Axiom of Infinity
 at `e` holds in the full Henkin model on `ℕ`.
 
 Not here, for want of the models: the incompatibilities with `□`Strong Atomicity (`t`),
@@ -203,7 +203,7 @@ theorem maximalist_necFunctionality_inconsistent :
       (Proofs.functionality_r_implies_tractarianism_r.rule Ty.t) Idem.not_tractarianism_t_consistent)) rfl
     (Consistent.mono (fun a ha => ha.elim Or.inl (fun h => Or.inr ⟨_, _, by simp, by simp, h⟩)) hc)
 
-/-- `possibility-schema-r-implies-possible-infinity-e`: the Axiom of Infinity at `e` is
+/-- `distinctness-schema-r-implies-possible-infinity-e`: the Axiom of Infinity at `e` is
 consistent (`axiomOfInfinityE_consistent`), so Possibility makes it possible. -/
 theorem possibility_entails_possibleInfinityE :
     possibility (empty : AxiomSet Signature.pure) ⟹ P.PossibleInfinityE.schema := by

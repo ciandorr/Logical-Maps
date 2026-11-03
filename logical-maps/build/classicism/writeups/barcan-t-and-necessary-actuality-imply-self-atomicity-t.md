@@ -1,6 +1,6 @@
 # BF (type t) ∧ □Actuality ⇒ Self-Atomicity (type t)
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, 28 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.barcan_t_and_necessary_actuality_imply_self_atomicity_t`; produced by Cian Dorr, 28 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 28 October 2026.</p>
 
 ## Premises
 

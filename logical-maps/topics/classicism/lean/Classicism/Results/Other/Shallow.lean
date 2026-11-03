@@ -18,7 +18,7 @@ theorem necessary_atomlessness_implies_atomlessness : NecAtomlessness → Atomle
 
 /-- `necessary-distinctness-preserving-collapse-implies-distinctness-preserving-collapse`: `T`. -/
 theorem necessary_distinctness_preserving_collapse_implies_distinctness_preserving_collapse :
-    NecDistinctnessPreservingCollapse → DistinctnessPreservingCollapse :=
+    NecTruthsAreNDNecessary → TruthsAreNDNecessary :=
   fun h => box_elim h
 
 /-- `tame-rigidity-and-bf-t-imply-necessary-bf-t`: the record at `t` of

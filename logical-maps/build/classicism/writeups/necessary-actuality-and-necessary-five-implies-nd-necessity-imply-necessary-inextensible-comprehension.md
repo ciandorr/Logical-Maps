@@ -1,6 +1,6 @@
 # □Actuality ∧ □5-necessities are ND-necessary ⇒ □Inextensible Comprehension
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, with help from GPT-6 Astra (OpenAI), 29 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.necessary_actuality_and_necessary_five_implies_nd_necessity_imply_necessary_inextensible_comprehension`; produced by Cian Dorr, with help from GPT-6 Astra (OpenAI), 29 October 2026; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026.</p>
 
 ## Premises
 
@@ -17,7 +17,7 @@ The proof of [[actuality-and-five-implies-nd-necessity-imply-inextensible-compre
 
 ## Notes
 
-Boxed counterpart of [[actuality-and-five-implies-nd-necessity-imply-inextensible-comprehension]]. The boxed results from □Actuality with □BF, and with □Distinctness-Preserving Collapse, now follow from it.
+Boxed counterpart of [[actuality-and-five-implies-nd-necessity-imply-inextensible-comprehension]]. The boxed results from □Actuality with □BF, and with □Truths are ND-necessary, now follow from it.
 
 ## Sources
 

@@ -85,6 +85,14 @@ meets:
     fails (recorded in this group's verdicts).
   infinitely-many-propositions: >-
     The propositions $q_{a,b}$ of the argument atomlessness are pairwise distinct for distinct pairs.
+  finite-extension-properties-everywhere: >-
+    The evaluation object is the only object. The profile with constant value the set of entities of type
+    $\sigma t$ whose extension at $1$ is finite is pinned down by $\varnothing$ and symmetric, since a
+    permutation $\pi$ of $U$ preserves finiteness of extensions; the haecceity $j\mapsto\{j\cdot x\}$ of an
+    entity is pinned down by the set pinning $x$ and symmetric, so identity is literal.
+  infinitely-many-individuals-everywhere:
+    requires: [infinitely-many-individuals]
+    text: The evaluation object is the only object.
 
 conditions:
 - id: right-cancellative-factor
@@ -256,8 +264,8 @@ arguments:
   text: >-
     As axiom-of-infinity-e, the propositions $q_{a,b}$ being infinitely many.
 
-- id: distinctness-preserving-collapse
-  holds: [necessary-distinctness-preserving-collapse]
+- id: truths-are-nd-necessary
+  holds: [necessary-truths-are-nd-necessary]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
   date: '2026-10-28'

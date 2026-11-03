@@ -91,11 +91,16 @@ import Classicism.Strict.Audit
 import Classicism.Strict.Tests
 import Classicism.Statements
 import Classicism.Map
+import Classicism.MapAtoms
 import Classicism.Tools.MapIndex
 import Classicism.ModelStatements
 import Classicism.MapModels
 import Classicism.MapDerived
+import Classicism.MapWitnesses
 import Classicism.Background.Framework
 import Classicism.Background.Varieties
 import Classicism.Background.Relations
 import Classicism.Background.RigidityClosure
+-- Completeness of intensional action models, and coalesced sums
+import Classicism.Completeness.Completeness
+import Classicism.Coalesced

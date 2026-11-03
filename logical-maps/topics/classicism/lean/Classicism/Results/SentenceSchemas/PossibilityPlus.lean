@@ -6,8 +6,8 @@ import Classicism.Syntax.WitnessedPossibility
 
 The map's arrows out of Possibility+ (`Syntax/PossibilityPlus.lean`):
 
-- `possibility-plus-r-implies-possibility-schema-r` and
-  `possibility-plus-signature-r-implies-possibility-signature-r`: the instances with no
+- `possibility-plus-r-implies-distinctness-schema-r` and
+  `possibility-plus-signature-r-implies-distinctness-signature-r`: the instances with no
   variables, `⊤ → ◇P` (for a signature, with `⊤ ∧ … ∧ ⊤` for the constants of `P`).
 - `possibility-plus-signature-r-implies-possibility-plus-r`: a pure instance read in a
   closed signature is an instance for the signature, with no constants to keep the
@@ -34,7 +34,7 @@ theorem Derivable.neConsts_zero {Ax : AxiomSet Sig} {Γ : Ctx} {Δ : List (Formu
   | [] => Derivable.top
   | _ :: ds => Derivable.andI Derivable.top (neConsts_zero ds)
 
-/-- `possibility-plus-r-implies-possibility-schema-r`: the instance with no variables. -/
+/-- `possibility-plus-r-implies-distinctness-schema-r`: the instance with no variables. -/
 theorem possibilityPlus_entails_possibility :
     possibilityPlus Signature.pure ⟹ possibility (empty : AxiomSet Signature.pure) := by
   rintro a ⟨hc0, p, hc, rfl⟩
@@ -43,7 +43,7 @@ theorem possibilityPlus_entails_possibility :
       Consistent.mono (subset_union_right _ _) hc, rfl⟩
   exact Theorem.mp h Derivable.top
 
-/-- `possibility-plus-signature-r-implies-possibility-signature-r`: the instance with no
+/-- `possibility-plus-signature-r-implies-distinctness-signature-r`: the instance with no
 variables. -/
 theorem possibilityPlusSig_entails_possibility :
     possibilityPlusSig Sig ⟹ possibility (empty : AxiomSet Sig) := by

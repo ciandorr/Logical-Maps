@@ -1,0 +1,27 @@
+id: self-atomicity-t-and-intensional-choice-imply-self-atomicity-r
+premises:
+- self-atomicity-t
+- intensional-choice-r
+conclusion: self-atomicity-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026, on the pattern of Cian
+    Dorr's argument for Atomicity
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: verified
+  lean_ref: Classicism.Map.self_atomicity_t_and_intensional_choice_imply_self_atomicity_r
+sources:
+- Cian Dorr, observation of 30 October 2026 (session transcript).
+source_names:
+- Dorr 30 Oct
+proof: >-
+  Let $X^{\bar\sigma t}\ne\bot$, so that $\Diamond\exists\bar x\, .\,X\bar x$ by Intensionality. Self-Atomicity
+  (type t) gives a self-atom $w\le\exists\bar x\, .\,X\bar x$. Intensional Choice (polyadic form), applied
+  to $\lambda\bar x\, .\,w\to X\bar x$, which is necessarily instantiated, gives a necessarily uniquely instantiated
+  $G$ with $A_w:=\lambda\bar x\, .\,w\land G\bar x\le X$. By [[unique-instance-copies]], $A_w$ is a self-atom
+  because $w$ is one.
+notes: >-
+  The Intensional Choice counterpart of [[self-atomicity-t-and-bf-imply-self-atomicity-r]].

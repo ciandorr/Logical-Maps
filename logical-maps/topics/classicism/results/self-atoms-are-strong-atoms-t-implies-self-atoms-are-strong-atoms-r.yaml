@@ -1,0 +1,28 @@
+id: self-atoms-are-strong-atoms-t-implies-self-atoms-are-strong-atoms-r
+premises:
+- self-atoms-are-strong-atoms-t
+conclusion: self-atoms-are-strong-atoms-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026, in a survey of the type-t
+    principles after Cian Dorr's argument for Atomicity
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: verified
+  lean_ref: Classicism.Map.self_atoms_are_strong_atoms_t_implies_self_atoms_are_strong_atoms_r
+sources:
+- Claude Opus 5.5 (Anthropic), survey of 30 October 2026 requested by Cian Dorr (session transcript).
+source_names:
+- Opus 30 Oct
+proof: >-
+  Let $X^{\bar\sigma t}$ be a self-atom and $w:=\exists\bar x\, .\,X\bar x$. By [[atom-instance-proposition]],
+  $w$ is a self-atom, so by the type-$t$ principle a strong atom; and $X\ne\bot$. Reason inside the box, with
+  $Y^{\bar\sigma t}$ arbitrary, and put $r:=\exists\bar x\, .\,X\bar x\land Y\bar x$. Then $w\le r$ or $w\le\neg
+  r$. In the second case $X\le\neg Y$. In the first, necessarily, if $X\bar a$, then $X$ is an atom (its self-atom
+  clause holds there by 4), and $Z:=\lambda\bar x\, .\,X\bar x\land Y\bar x\le X$ is instantiated, since $r$
+  holds, hence non-bottom; so $Z=X$ and $Y\bar a$. That is, $X\le Y$. So $X$ is a strong atom.
+notes: >-
+  No choice is needed: a self-atom is an atom wherever it is instantiated, and that already forces its instances
+  there to be unique, which is what Intensional Choice supplies for atoms in [[atoms-are-strong-atoms-t-and-intensional-choice-imply-atoms-are-strong-atoms-r]].

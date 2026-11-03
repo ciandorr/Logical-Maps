@@ -111,6 +111,22 @@ meets:
       intension whose value at an arrow $h$ is the set of transports along $h$ of the tuples in $T$ depends
       only on $h$'s codomain, is symmetric, each such transport being fixed by the target's symmetries, and
       is pinned down by $\emptyset$; its extension at $v$ is $T$.
+  finite-extension-properties-everywhere:
+    requires: [finite-pinning]
+    text: >-
+      Every object's domains hold the symmetric intensions pinned down by a finite set. The intension
+      holding at each arrow, into $U$, of exactly the entities of type $\sigma t$ at $U$ with finite extension
+      at $1_U$ depends only on the codomain and is preserved by the symmetries, which preserve finiteness,
+      so it is symmetric and pinned down by $\emptyset$; the haecceity of an entity is symmetric and pinned
+      down by the set pinning the entity, so identity is literal.
+  infinitely-many-individuals-everywhere:
+    requires: [one-object-action-model, infinitely-many-individuals]
+    text: The evaluation object is the only object.
+  infinitely-many-propositions-everywhere:
+    requires: [one-object-action-model, separable-collapses]
+    text: >-
+      The evaluation object is the only object, and the propositions $C_{n,m}$ that an arrow collapses
+      $n$ and $m$ are infinitely many there (the shared argument axiom-of-infinity-t).
   infinitely-many-orbits-everywhere:
     requires: [one-object-action-model, infinitely-many-individuals]
     text: >-

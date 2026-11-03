@@ -1,6 +1,6 @@
 # Maximalism (pure) ∧ □Boolean Completeness (type t) ⇒ ⊥
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, at Cian Dorr's suggestion; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.maximalist_distinctness_incompatible_with_necessary_boolean_completeness_t`; produced by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026, at Cian Dorr's suggestion; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 8 October 2026.</p>
 
 ## Premises
 

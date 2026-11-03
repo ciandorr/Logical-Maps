@@ -1,6 +1,6 @@
 # Atomlessness ⇒ Atoms are strong atoms
 
-<p class='cert'>Result — Source: Misc.; produced by Cian Dorr, 25 October 2026 (the type-t observation); extended to every relational type by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, the same day; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.atomlessness_implies_atoms_are_strong_atoms_r`; produced by Cian Dorr, 25 October 2026 (the type-t observation); extended to every relational type by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, the same day; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

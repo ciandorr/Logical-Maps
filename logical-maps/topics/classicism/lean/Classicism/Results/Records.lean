@@ -40,7 +40,7 @@ One file per topic, in the order of the map's categories, each importing those i
 | --- | --- |
 | `Records/Base.lean` | theorems of `C`: the map's category `base` |
 | `Records/Coarse.lean` | `B`, `5`, ND, BF, Tractarianism, Functionality (Propositions 2.1, 2.2) |
-| `Records/Extensionality.lean` | Extensionality, the Fregean Axiom, the Distinctness-Preserving Collapse |
+| `Records/Extensionality.lean` | Extensionality, the Fregean Axiom, Truths are ND-necessary |
 | `Records/Comprehension.lean` | among the comprehension principles |
 | `Records/Lattice.lean` | Actuality, Boolean Completeness, Atomicity, Vicinity, Strong Atomicity, and the comprehension they give |
 | `Records/Choice.lean` | Choice, Plenitude, Transversals, Modalized Plenitude |

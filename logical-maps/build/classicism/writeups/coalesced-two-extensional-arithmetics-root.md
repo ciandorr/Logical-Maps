@@ -21,6 +21,7 @@
 - **□Rigid Rigidity.** Necessarily, being rigid is a rigid property of relations, including propositions.
 - **Weakly Rigid Weak Rigidity.** Being weakly rigid is a weakly rigid property of relations, including propositions.
 - **□Weakly Rigid Weak Rigidity.** Necessarily, being weakly rigid is a weakly rigid property of relations, including propositions.
+- **□Axiom of Infinity (type e).** Necessarily, there are not finitely many individuals.
 - **Relational Choice.** Every serial binary relation has a functional subrelation.
 - **Actuality.** There is a true proposition that entails every true proposition.
 - **Truths are ND-necessary.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
@@ -129,6 +130,12 @@ At the type $\sigma:=((et)t)t$ of properties of the numbers at $e$. In each comp
 
 *By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
 
+### Holds □Axiom of Infinity (type e).
+
+The worlds are the root and the two component worlds, and a closed sentence holds at a component world iff it holds in that component. In each component the Axiom of Infinity at type $e$ holds, $T$ proving it (the argument infinity). At the root it holds by the argument infinitely-many-individuals applied at the root alone: a root entity has an arbitrary root component, so the property of cardinalities that hold at the root only of properties with finite root extension is in the domain, with any component parts, and quantifiers at the root range over root entities; it holds of $\mathbf 0_e$, passes to successors, identity at the root being literal, and excludes the universal property, the root individuals being the infinitely many pairs. So the Axiom holds at every world.
+
+*Address: `coalesced-two-extensional-arithmetics-root#necessary-axiom-of-infinity-e`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
+
 ### Holds Relational Choice.
 
 The functionality of a subrelation is evaluated at the root’s identity arrow only, while the subrelation condition is boxed; so for a serial root relation take the subrelation whose root component is a functional choice from the root component, by choice in the metatheory, and whose component parts are empty. Where some component refutes Relational Choice at its root, as when the components are complete for C, its necessitation fails.
@@ -155,7 +162,7 @@ Let $N$ and $M$ be two components whose roots satisfy Actuality, with true atoms
 
 For a true $p$, $a\le p$, since $a$ entails every truth. Take $q:=a$ in the definition of $\Box_{\ne}p$: at a world in $a$, $p$ holds; at a world outside $a$, $\Diamond a$ fails. So every truth is $\Box_{\ne}$-necessary.
 
-*General argument `arguments/dpc-isolated-actual-world`. It requires that The actual-world proposition $a$ is in the domain and entails every truth, and no world outside $a$ sees a world in $a$. Here: The singleton root proposition, true at the root's identity arrow and nowhere in a component, is in the domain and entails every truth; the components have no arrows back to the root (Classicism, Appendix E, p. 83, on the distinctness-preserving collapse). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.*
+*General argument `arguments/nd-necessity-isolated-actual-world`. It requires that The actual-world proposition $a$ is in the domain and entails every truth, and no world outside $a$ sees a world in $a$. Here: The singleton root proposition, true at the root's identity arrow and nowhere in a component, is in the domain and entails every truth; the components have no arrows back to the root (Classicism, Appendix E, p. 83, on the distinctness-preserving collapse). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 2026-09-23.*
 
 *Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* The finite-support, symmetric and full action models' copies (eight records) stated once for the topic; what varied, why no world outside the actual world sees back into it, is each record's reason for meeting actual-world-isolated.
 

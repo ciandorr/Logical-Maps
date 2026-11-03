@@ -15,11 +15,7 @@ the premises.
 ## Definitions
 
 $\Box_{\ne}p:=\exists q\, .\,q\land\Box(\Diamond q\to p)$, with dual
-
-$$
-\Diamond_{\ne}p\ \leftrightarrow\ \forall q\, .\,q\to\Diamond(\Diamond q\land p).
-$$
-
+$\Diamond_{\ne}p\leftrightarrow\forall q\, .\,q\to\Diamond(\Diamond q\land p)$.
 $\Box_5$ is necessity under every S5 operator, with dual $\Diamond_5$
 (Background, Varieties of necessity). C proves $\Box_{\ne}\le\Box_5$. The
 premise $\forall p\, .\,\Box_5p\to\Box_{\ne}p$ therefore makes the two
@@ -52,7 +48,9 @@ the operators to be identical or necessarily coextensive.
 ## Step 3: a Barcan formula restricted to $\Diamond a$
 
 $\Box_5$ obeys the Barcan formula at every type, as a theorem of C. This is
-Prior's derivation from B (Background, [[box5-barcan]]). Dually, for tuples,
+shown in *The Bounds of Possibility*, Appendix D: fact (C5), p. 402, from
+Theorem D16 and Corollary D6, which rests on Prior's derivation from B,
+Proposition D3 (Background, [[box5-barcan]]). Dually, for tuples,
 $\Diamond_5\exists\bar x\, .\,R[\bar x]\to\exists\bar x\, .\,\Diamond_5R[\bar x]$.
 
 Transfer this through (2), applying (2) once to $\exists\bar x\, .\,R[\bar x]$
@@ -67,6 +65,10 @@ $$
 This holds at the actual world, for every relation $R$ and at every type.
 
 ## Step 4: inextensibility
+
+The strategy for this part of the proof is due to Christopher Sun. It was
+used in the earlier proof that BF and Actuality imply Inextensible
+Comprehension.
 
 Fix $F$ of type $\bar\sigma t$ and put
 $C:=\lambda\bar z\, .\,\Diamond(a\land F[\bar z])$. As in the BF write-up,
@@ -110,4 +112,4 @@ So $C$ is inextensible and coextensive with $F$.
 
 ## Paper references
 
-- **Background: The Bounds of Possibility.** Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as $\lambda p\, .\,p=\top$, under which every theorem of HS4 is a theorem of C. — Appendix D, pp. 400–409. The 5-necessity operator.
+- **Background: The Bounds of Possibility.** Dorr, Cian, John Hawthorne, and Juhani Yli-Vakkuri (2021). The Bounds of Possibility. Oxford University Press. Appendix D, Narrower Modalities in Higher-Order S4, pp. 400–409; locators follow the OUP corrected proof dated 9 May 2024. Its background logic HS4 (a primitive S4 operator over higher-order logic) is read into C by interpreting the primitive box as $\lambda p\, .\,p=\top$, under which every theorem of HS4 is a theorem of C. — Appendix D, pp. 400–409; fact (C5), p. 402; Proposition D3, p. 403; Corollary D6, p. 404; Theorem D16, p. 406. The 5-necessity operator, and its Barcan formula at every type.

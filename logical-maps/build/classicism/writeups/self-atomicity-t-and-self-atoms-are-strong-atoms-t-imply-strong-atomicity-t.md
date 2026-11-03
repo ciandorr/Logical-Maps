@@ -1,6 +1,6 @@
 # Self-Atomicity (type t) ∧ Self-atoms are strong atoms (type t) ⇒ Strong Atomicity (type t)
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.self_atomicity_t_and_self_atoms_are_strong_atoms_t_imply_strong_atomicity_t`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

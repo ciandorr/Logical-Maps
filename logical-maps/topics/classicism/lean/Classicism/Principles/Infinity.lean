@@ -27,5 +27,9 @@ def AxiomOfInfinityT : Prop := AxiomOfInfinity Prop
 def PossibleInfinityE : Prop := ◇ AxiomOfInfinityE
 /-- `possible-infinity-t`: the Axiom of Infinity at `t`, under a diamond. -/
 def PossibleInfinityT : Prop := ◇ AxiomOfInfinityT
+/-- `necessary-axiom-of-infinity-e`: the Axiom of Infinity at `e`, boxed. -/
+def NecAxiomOfInfinityE : Prop := □ AxiomOfInfinityE
+/-- `necessary-axiom-of-infinity-t`: the Axiom of Infinity at `t`, boxed. -/
+def NecAxiomOfInfinityT : Prop := □ AxiomOfInfinityT
 
 end Classicism.P

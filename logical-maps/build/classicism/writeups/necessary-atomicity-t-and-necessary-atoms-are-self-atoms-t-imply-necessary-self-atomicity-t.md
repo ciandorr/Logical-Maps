@@ -1,6 +1,6 @@
 # □Atomicity (type t) ∧ □Atoms are self-atoms (type t) ⇒ □Self-Atomicity (type t)
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.necessary_atomicity_t_and_necessary_atoms_are_self_atoms_t_imply_necessary_self_atomicity_t`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 

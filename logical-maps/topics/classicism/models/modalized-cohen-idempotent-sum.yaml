@@ -24,6 +24,12 @@ definition: Work in ZFC. Form M_C ⊕ M_k by Definition 5.2. M_C is the full mod
   the sole individual of M_k. Underlying domains, component projections and root partial identities are
   those of Definition 5.2, not the full function-space construction. Evaluate at the new root. Interpret
   any relational signature constants as top; no signature verdict is asserted.
+meets:
+  finitely-many-individuals-somewhere: >-
+    The points of $M_k$, which the root sees, have the single individual of $M_k$.
+  finitely-many-propositions-somewhere: >-
+    $M_k$, which the root sees, unravels the full one-object action model on $\{1,k\}$, so its points
+    have finitely many propositions.
 arguments:
 - holds:
   - strong-actuality
@@ -101,7 +107,7 @@ arguments:
     infinitely many of each, and every $\sim_r$-closed set of root tuples is the root extension of a
     relation existing there, with bottom components.
 - id: truth-implies-nd-necessity
-  holds: [necessary-distinctness-preserving-collapse]
+  holds: [necessary-truths-are-nd-necessary]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
   date: '2026-10-29'

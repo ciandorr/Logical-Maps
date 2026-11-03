@@ -3,6 +3,13 @@ import Classicism.Models.Conditions
 import Classicism.Semantics.OneIndividual
 import Classicism.Semantics.Interpretations
 import Classicism.Models.SymBase
+import Classicism.Coalesced.SumData
+import Classicism.Models.Henkin
+import Classicism.Coalesced.Transfer
+import Classicism.Results.SentenceSchemas.ArithmeticNecessitism
+import Classicism.Coalesced.TransferBC
+import Classicism.Coalesced.TransferChoice
+import Classicism.Coalesced.TransferSelfAtoms
 import Mathlib.SetTheory.Cardinal.NatCard
 
 /-!
@@ -90,18 +97,18 @@ theorem transversal_choice_r :
 
 end transversal_choice_extensionally_full
 
-namespace dpc_isolated_actual_world
+namespace nd_necessity_isolated_actual_world
 
-/-- Distinctness-Preserving Collapse holds where the actual world is isolated
-(`Premodel.holds_dpc`). -/
-theorem distinctness_preserving_collapse :
-    Statements.Arguments.dpc_isolated_actual_world.distinctness_preserving_collapse := by
+/-- Truths are ND-necessary holds where the actual world is isolated
+(`Premodel.holds_truths_nd_necessary`). -/
+theorem truths_are_nd_necessary :
+    Statements.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary := by
   intro Sig C _ A M hI
   rw [holdsAx_ofPure]
   rintro _ rfl
-  exact holds_dpc (A.reduct_isModel M) hI
+  exact holds_truths_nd_necessary (A.reduct_isModel M) hI
 
-end dpc_isolated_actual_world
+end nd_necessity_isolated_actual_world
 
 namespace one_individual
 
@@ -329,17 +336,17 @@ theorem strong_actuality :
 
 end separated_retractions_strong_actuality
 
-namespace dpc_returning_arrow
+namespace nd_necessity_returning_arrow
 
-/-- Distinctness-Preserving Collapse fails in a full model where some arrow other than the
-identity returns (`Premodel.not_holds_dpc_of_returning`). -/
-theorem distinctness_preserving_collapse :
-    Statements.Arguments.dpc_returning_arrow.distinctness_preserving_collapse := by
+/-- Truths are ND-necessary fails in a full model where some arrow other than the
+identity returns (`Premodel.not_holds_truths_nd_necessary_of_returning`). -/
+theorem truths_are_nd_necessary :
+    Statements.Arguments.nd_necessity_returning_arrow.truths_are_nd_necessary := by
   intro Sig C _ A M hF hR H
   rw [holdsAx_ofPure] at H
-  exact not_holds_dpc_of_returning (A.reduct_isModel M) hF hR (H _ rfl)
+  exact not_holds_truths_nd_necessary_of_returning (A.reduct_isModel M) hF hR (H _ rfl)
 
-end dpc_returning_arrow
+end nd_necessity_returning_arrow
 
 namespace coherent_retractions
 
@@ -494,5 +501,155 @@ theorem barcan_r : Statements.Arguments.finite_support_one_object.barcan_positiv
 end barcan_positive
 
 end finite_support_one_object
+
+/-! ## Arguments of the coalesced sums
+
+The group's parameter is the data of a coalesced sum that is a model (`Coalesced.SumData`), for
+any root arrows and root domains. -/
+
+namespace coalesced_sums
+
+namespace actuality_singleton_root
+
+/-- The singleton root proposition, the actual-world proposition, entails every truth
+(`Premodel.holds_actuality_of`, in the pure reduct). -/
+theorem actuality : Statements.Arguments.coalesced_sums.actuality_singleton_root.actuality := by
+  intro D ⟨a, ha, hle, _⟩
+  rw [holdsAx_ofPure]
+  rintro _ rfl
+  exact holds_actuality_of (D.model.reduct_isModel D.isModel) a ha hle
+
+end actuality_singleton_root
+
+namespace relational_choice_free_root
+
+/-- With a free root component the root is extensionally full, and a serial relation's extension
+there has a functional subset by choice (`Coalesced.SumData.holds_rc_root`). -/
+theorem relational_choice_r :
+    Statements.Arguments.coalesced_sums.relational_choice_free_root.relational_choice_r :=
+  fun _ hF => Coalesced.SumData.holds_rc_root hF
+
+end relational_choice_free_root
+
+namespace barcan_t_component
+
+/-- A component refutes BF at `t` at its root; the thread universal at the root and elsewhere and
+the counterexample in that component refutes it at the root (`Coalesced.SumData.not_holds_barcanT`). -/
+theorem barcan_t : Statements.Arguments.coalesced_sums.barcan_t_component.barcan_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_barcanT hD hF hc
+
+end barcan_t_component
+
+namespace atomicity_t_component
+
+/-- A component refutes Atomicity at `t` at its root with a proposition `p`; the root proposition
+that is `p` there and empty elsewhere has no atom below it (`Coalesced.SumData.not_holds_atomicityT`). -/
+theorem atomicity_t : Statements.Arguments.coalesced_sums.atomicity_t_component.atomicity_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_atomicityT hD hF hc
+
+end atomicity_t_component
+
+namespace arithmetic_necessitism_complete_components
+
+/-- Vacuously: `¬I*_σ` is consistent with `C` (`not_iStar_consistent`, the full model on one
+individual), so with complete components `□I*_σ` fails at the root
+(`RootAction.not_holds_box_of_complete`), and the instance `□I*_σ → …` holds. -/
+theorem arithmetic_necessitism :
+    Statements.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism := by
+  intro D hc
+  rintro _ ⟨_, ⟨σ, hσ, rfl⟩, rfl⟩
+  obtain ⟨R, hR⟩ := P.ArithmeticNecessitism.quoted_eq σ
+  rw [hR]
+  exact ((D.model).holds_imp D.isModel (𝟙 _) IEnv.nil _ _).2 fun hb =>
+    absurd hb (D.RA.not_holds_box_of_complete D.I D.RI D.ne D.isModel hc.2 (iStar_closedTypes hσ)
+      (not_iStar_consistent σ))
+
+end arithmetic_necessitism_complete_components
+
+/-! #### Witness transfers (`Coalesced/TransferBC.lean`) -/
+
+namespace boolean_completeness_t_component
+
+/-- The single-component copies of a component's counterexample family, from the truncation
+model's failure of BC at `t` (`Coalesced.SumData.not_holds_bcT`). -/
+theorem boolean_completeness_t :
+    Statements.Arguments.coalesced_sums.boolean_completeness_t_component.boolean_completeness_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_bcT hD hF hc
+
+end boolean_completeness_t_component
+
+namespace self_atomicity_component
+
+/-- The single-component copy of a component's atom that is no self-atom
+(`Coalesced/TransferSelfAtoms.lean`). -/
+theorem self_atomicity_t : Statements.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_selfAtomicityT hD hF hc
+
+theorem atoms_are_self_atoms_t :
+    Statements.Arguments.coalesced_sums.self_atomicity_component.atoms_are_self_atoms_t :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_aasaT hD hF hc
+
+end self_atomicity_component
+
+namespace intensional_choice_component
+
+/-- The thread on a component's counterexample (`Coalesced/TransferChoice.lean`). -/
+theorem intensional_choice_r :
+    Statements.Arguments.coalesced_sums.intensional_choice_component.intensional_choice_r :=
+  fun _ hc hD hF => Coalesced.SumData.not_holds_ic hD hF hc
+
+end intensional_choice_component
+
+/-! #### End of witness transfers -/
+
+end coalesced_sums
+
+/-! ## Arguments of the full Henkin models
+
+The group's parameter is the individual domain `D`; the model is the full model on the one-object
+category of the trivial monoid (`Models/Henkin.lean`). -/
+
+namespace henkin
+
+namespace extensionality
+
+/-- Every tuple of an intension is one at the identity arrow, so coextensive relations are
+identical (`Henkin.holds_extensionality`). -/
+theorem extensionality_r : Statements.Arguments.henkin.extensionality.extensionality_r := by
+  intro D _
+  rw [holdsAx_schemaIn_iff]
+  rintro _ ⟨ρ, -, rfl⟩
+  exact Henkin.holds_extensionality (Henkin.isModel D) (𝟙 _) ρ
+
+end extensionality
+
+namespace functional_choice
+
+/-- By choice, a serial relation's selecting operation is in the full domain
+(`Henkin.holds_functionalChoice`). -/
+theorem functional_choice_r : Statements.Arguments.henkin.functional_choice.functional_choice_r := by
+  intro D _
+  rw [holdsAx_schemaIn_iff]
+  rintro _ ⟨σ, ρ, -, -, rfl⟩
+  exact Henkin.holds_functionalChoice (Henkin.isModel D) (Henkin.full D) (𝟙 _) σ ρ
+
+end functional_choice
+
+namespace finitely_many_individuals
+
+/-- With `k` individuals there are no `k + 1` distinct ones: that instance of the Infinity
+schema at `e` fails (`Premodel.holds_count`). -/
+theorem infinity_e : Statements.Arguments.henkin.finitely_many_individuals.infinity_e := by
+  intro D _ hfin H
+  have : Finite D := hfin
+  rw [holdsAx_ofPure, reduct_pure] at H
+  obtain ⟨f, hf⟩ := (holds_count (Henkin.isModel D) (𝟙 _) .e (Nat.card D + 1)).1
+    (H _ ⟨_, Nat.le_add_left 1 _, rfl⟩)
+  have := Nat.card_le_card_of_injective (β := D) f hf
+  simp at this
+
+end finitely_many_individuals
+
+end henkin
 
 end Classicism.Map.Arguments

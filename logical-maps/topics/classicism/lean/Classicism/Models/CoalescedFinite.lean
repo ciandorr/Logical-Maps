@@ -310,10 +310,10 @@ theorem fullest : (appendixE comp).Fullest (fullRootIncl _ _) := fullest_full _ 
 /-! ### Every truth necessarily 5-necessary -/
 
 /-- **Distinctness-Preserving Collapse is necessary at the root**: it holds at the root and in
-every component, the actual world being isolated in each (`Premodel.holds_dpc`). -/
-theorem holds_box_dpc : model.HoldsSentence (Term.box P.DistinctnessPreservingCollapse.quoted) :=
-  (holdsSentence_box_iff _).2 ⟨Premodel.holds_dpc isModel actualWorldIsolated,
-    fun n => Premodel.holds_dpc (comp_isModel n) (comp_actualWorldIsolated n)⟩
+every component, the actual world being isolated in each (`Premodel.holds_truths_nd_necessary`). -/
+theorem holds_box_dpc : model.HoldsSentence (Term.box P.TruthsAreNDNecessary.quoted) :=
+  (holdsSentence_box_iff _).2 ⟨Premodel.holds_truths_nd_necessary isModel actualWorldIsolated,
+    fun n => Premodel.holds_truths_nd_necessary (comp_isModel n) (comp_actualWorldIsolated n)⟩
 
 /-- **Every truth is necessarily 5-necessary** at the root (the record's argument
 `five-necessity-is-truth`): every truth is ND-necessary at every world (`holds_box_dpc`), and
@@ -321,7 +321,7 @@ the map's result `necessary-truth-implies-nd-implies-necessary-truth-implies-fiv
 to 5-necessity, through the theory of the model. -/
 theorem holds_necessary_truth_implies_five_necessity :
     model.HoldsAx P.NecTruthImpliesFiveNecessity.schema := by
-  have h : AxiomSet.Entails model.theory P.NecDistinctnessPreservingCollapse.schema :=
+  have h : AxiomSet.Entails model.theory P.NecTruthsAreNDNecessary.schema :=
     Premodel.entails_of_holdsAx isModel fun _ e => e ▸ holds_box_dpc
   have := (Premodel.theory_entails_iff isModel _).1
     (h.trans Proofs.necessary_truth_implies_nd_implies_necessary_truth_implies_five.entails)

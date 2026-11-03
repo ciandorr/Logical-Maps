@@ -27,7 +27,7 @@ settings:
   root-arrows: interpretations-and-substitutions
   sigma: construction
   construction: >-
-    Let $T$ be C together with $\Box$Atomlessness, $\Box I^*_e$ and the negation of BF at type $t$, a
+    Let $T$ be C together with $\Box$Atomlessness, $\Box I^*_e$ and $\Box\neg$BF at type $t$, a
     recursively axiomatized theory. $T$ holds in finite-support-monotone-maps, which is atomless, fails BF at
     type $t$, and has infinitely many individuals and the standard numerals as its numbers at $e$ (the property
     of being a numeral is pinned down by $\emptyset$); it has one object, so its boxes are idle. So $T$ is
@@ -46,12 +46,17 @@ settings:
       As in coalesced-pinned-substitutions-root, intensions over the arrows out of $W_0$ pinned down
       by a finite set of constants of $\Sigma^+$, whose transports along the arrows into the component land
       in its domains.
-meets: {}
+meets:
+  pinned-substitution-root: The root, its domains and the interpretation of Σ are as in
+    coalesced-pinned-substitutions-root; only the components differ.
+  root-only-sentence: >-
+    BF at type $t$. It holds at $W_0$ by the group's argument substitution-root, and it fails at every
+    object of the component, by $\Box\neg$BF (type t) at $V_2$, every object of the component being
+    reachable from $V_2$.
 arguments:
 - id: atomlessness
   holds:
   - necessary-atomlessness
-  - barcan-r
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
     Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
   date: '2026-10-29'
@@ -64,8 +69,7 @@ arguments:
     uses of the components only that $\top\ne\bot$ at each of their objects: a possible $p$ pinned down
     by $S$ that contains a map is split by a fresh individual constant, and one that contains only arrows
     into the component by a fresh propositional constant sent to $\top$ or to $\bot$. So $\Box$Atomlessness
-    holds. BF holds at every type by the argument barcan of that model, which uses only fresh
-    constants.
+    holds.
 - id: arithmetic
   fails:
   - necessity-of-arithmetic
@@ -110,38 +114,11 @@ arguments:
     BF at type $t$ is a closed pure sentence false at $V_2$, an object reachable from $W_0$. With BF at
     $W_0$, the recorded result that Tame Rigidity and BF (type t) give $\Box$BF (type t) makes Tame
     Rigidity fail at the root.
-- id: as-in-pinned-substitutions
-  fails:
-  - vicinity
-  - weakly-inextensible-comprehension-r
-  - boolean-completeness-t
-  - truth-implies-five-necessity
-  holds:
-  - two-hat-implies-nd-necessity
-  - five-implies-two-hat-necessity
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
-    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-29'
-  choice: free
-  text: >-
-    The arguments as-in-all-maps and collapse-at-root of coalesced-pinned-substitutions-root apply
-    unchanged. They use the maps of the constants and propositions and properties containing no arrow into
-    a component, whose transports there are $\bot$ and land, together with the fact that no composite of
-    an arrow into a component with anything is a map; none of this depends on which action models the
-    components are. For Vicinity, the worlds seen from a map $f$ collapsing two individual constants $c,d$
-    are the maps $g\circ f$ and the arrows $\langle V,I\circ f\rangle$, all of which identify them.
-- holds: [transversal-choice-r]
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by
-    Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-29'
-  choice: uses
-  text: >-
-    As in coalesced-pinned-substitutions-root, by the general argument transversal-choice-extensionally-full
-    applied at the root alone: any set of tuples at the identity is the extension there of the entity with
-    that value at every map of the constants and empty at every arrow into the component, pinned down by
-    $\emptyset$ and landing.
 notes: 'A variant of coalesced-pinned-substitutions-root proposed on 29 October 2026 in a trawl for the open
   questions created by □Atomlessness: the substitution arrows keep the root atomless, and the one component
-  is atomless at every object but disagrees with the root about arithmetic and about BF. Audited by Claude Opus
+  is atomless at every object but disagrees with the root about arithmetic and about BF. On 30 October 2026, at the direction of Cian Dorr, the
+  theory $T$ was strengthened from $\neg$BF (type t) to $\Box\neg$BF (type t), so that BF (type t) is a
+  sentence true at the root alone, and the arguments that merely repeated the argument
+  substitution-root of the group were dropped. Audited by Claude Opus
   5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026; it inherits the model-of-C argument of
   coalesced-pinned-substitutions-root, which has not had a second reader. No Lean verification is claimed.'

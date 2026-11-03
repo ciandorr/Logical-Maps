@@ -504,5 +504,5 @@ This works at both objects, so □Rigid Comprehension holds.
   failure of the Infinity schema, the Axiom of Infinity and Possible Infinity
   at $t$.
 - The map derives the rest, including the failure of No Pure Contingency
-  (ND holds at $t$ and □ND at $t$ fails) and of the Distinctness-preserving
-  collapse (Actuality holds and Inextensible Comprehension fails).
+  (ND holds at $t$ and □ND at $t$ fails) and of Truths are
+  ND-necessary (Actuality holds and Inextensible Comprehension fails).

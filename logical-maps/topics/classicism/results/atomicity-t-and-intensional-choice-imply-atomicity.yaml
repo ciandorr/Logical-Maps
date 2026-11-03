@@ -1,0 +1,28 @@
+id: atomicity-t-and-intensional-choice-imply-atomicity
+premises:
+- atomicity-t
+- intensional-choice-r
+conclusion: atomicity-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr, 30 October 2026; written out by Claude Opus 5.5 (Anthropic)
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: verified
+  lean_ref: Classicism.Map.atomicity_t_and_intensional_choice_imply_atomicity
+sources:
+- Cian Dorr, observation of 30 October 2026 (session transcript).
+source_names:
+- Dorr 30 Oct
+proof: >-
+  Let $X^{\bar\sigma t}\ne\bot$, so that $\Diamond\exists\bar x\, .\,X\bar x$ by Intensionality. Atomicity
+  (type t) gives an atom $w\le\exists\bar x\, .\,X\bar x$. Intensional Choice (polyadic form), applied to $\lambda\bar
+  x\, .\,w\to X\bar x$, which is necessarily instantiated, gives a necessarily uniquely instantiated $G$ with
+  $A_w:=\lambda\bar x\, .\,w\land G\bar x\le X$. By [[unique-instance-copies]], $A_w$ is an atom because $w$
+  is one.
+notes: >-
+  The Intensional Choice counterpart of [[atomicity-t-and-bf-imply-atomicity]]: there BF supplies an instance
+  $\bar x$ of $X$ and the atom is $\lambda\bar y\, .\,w\land\bar y=\bar x$; here Intensional Choice supplies
+  an instance that may vary from world to world.

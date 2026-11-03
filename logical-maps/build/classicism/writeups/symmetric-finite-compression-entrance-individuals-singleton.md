@@ -54,17 +54,17 @@ Let $Z$ be the property of propositions whose extension at an arrow into $A$ is 
 
 Let $p$ be true, pinned down by a finite $S\subseteq N$, and let $q$ be the proposition that the arrow goes into $A$ and is injective on $S$: symmetric, pinned down by $S$, and true. If $\Diamond q$ holds at an arrow $h$, then $k\circ h\in q$ for some $k$; there are no arrows from $B$ to $A$, so $h$ goes into $A$ and is injective on $S$, and it agrees on $S$ with a permutation $\sigma$ of $N$. As $p$ is symmetric and true, $\sigma\in p$, and as $p$ is pinned down by $S$, $h\in p$. So $\Box(\Diamond q\to p)$ with $q$ true: every truth is ND-necessary.
 
-*Address: `symmetric-finite-compression-entrance-individuals-singleton#distinctness-preserving-collapse`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
+*Address: `symmetric-finite-compression-entrance-individuals-singleton#truths-are-nd-necessary`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
 
 ### Fails □Truths are ND-necessary.
 
 At the entrance $i$, where a closed sentence has its value at $1_B$. Let $p:=\{(f,g) : g(q_1)\text{ is a block label}\}$, true at $1_B$, symmetric and pinned down by $\{q_1\}$. Let $q$ be a truth at $1_B$, pinned down by a finite $P\ni q_1$, and take the compression $c$ and the return $r$ of the write-up's descent lemma for this $P$. Then $r\circ c$ agrees with $1_B$ on $P$, so $r\circ c\in q$ and $\Diamond q$ holds at $c$; but $c$ sends $q_1$ to the finite label $q_{D_1}$, so $c\notin p$. So $p$ is a truth at $1_B$ that is not ND-necessary there.
 
-*Write-up: [symmetric-finite-compression-entrance](symmetric-finite-compression-entrance.html). Address: `symmetric-finite-compression-entrance-individuals-singleton#necessary-distinctness-preserving-collapse`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
+*Write-up: [symmetric-finite-compression-entrance](symmetric-finite-compression-entrance.html). Address: `symmetric-finite-compression-entrance-individuals-singleton#necessary-truths-are-nd-necessary`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
 
 ### Fails B for pure sentences.
 
-Truths are ND-necessary is a closed pure sentence. It is true at the evaluation point (argument distinctness-preserving-collapse) and false at every arrow into $B$, where it has its value at $1_B$ (argument necessary-distinctness-preserving-collapse). There are no arrows from $B$ to $A$, so at the evaluation point it is true but not necessarily possible.
+Truths are ND-necessary is a closed pure sentence. It is true at the evaluation point (argument truths-are-nd-necessary) and false at every arrow into $B$, where it has its value at $1_B$ (argument necessary-truths-are-nd-necessary). There are no arrows from $B$ to $A$, so at the evaluation point it is true but not necessarily possible.
 
 *Address: `symmetric-finite-compression-entrance-individuals-singleton#pure-b`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
 

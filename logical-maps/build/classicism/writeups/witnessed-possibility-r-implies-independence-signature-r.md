@@ -1,6 +1,6 @@
 # Witnessed Possibility ⇒ Independence (signature Σ)
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), 14 October 2026, at Cian Dorr's direction, after Bacon's derivation of Independence from Logical Necessity; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.witnessed_possibility_r_implies_independence_signature_r`; produced by Claude Fable 5.1 (Anthropic), 14 October 2026, at Cian Dorr's direction, after Bacon's derivation of Independence from Logical Necessity; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 14 October 2026.</p>
 
 ## Premises
 

@@ -124,7 +124,7 @@ arguments:
     and is closed under successor, so contains every finite cardinality, none of which holds of $\lambda
     u\,.\,\top$, whose root extension is $\omega$.
 - id: truth-implies-nd-necessity
-  holds: [necessary-distinctness-preserving-collapse]
+  holds: [necessary-truths-are-nd-necessary]
   choice: free
   by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
   date: '2026-10-29'
@@ -147,6 +147,17 @@ arguments:
     the root, inextensibility against the check-closure of its root extension would make it entail, at
     every Cohen point, a join of such identities, none containing a Cohen point; but it holds of $c$ on
     the whole Cohen component. The same refutes Rigid Power at $\lambda x\,.\,\top$.
+- id: necessary-axiom-of-infinity-t
+  fails: [necessary-axiom-of-infinity-t]
+  choice: free
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-10-31'
+  text: >-
+    At a cloud point every proposition is identical to $\top$ or to $\bot$ (Remark 4.6(iv), as in
+    self-atoms), so no three propositions are pairwise distinct there, and the Infinity schema at type
+    $t$ fails; so does the Axiom of Infinity at type $t$, which implies it in C
+    (axiom-of-infinity-t-implies-infinity-t), the model being a model of C (Theorem 4.4). The root sees
+    every cloud point, so the boxed Axiom fails at the root.
 - id: pure-b
   fails: [pure-b-r]
   choice: free

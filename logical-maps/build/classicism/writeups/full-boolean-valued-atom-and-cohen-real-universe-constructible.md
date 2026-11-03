@@ -12,6 +12,8 @@
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
 - **Non-contingency of the Continuum Hypothesis.** Either necessarily every real number structure satisfies the continuum hypothesis, or necessarily every real number structure falsifies it: that every subproperty of the continuum either injects into the natural numbers or is in bijection with the continuum. One sentence for each type $\sigma$.
+- **□Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
+- **□Axiom of Infinity (type e).** Necessarily, there are not finitely many individuals.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ □Boolean Completeness (type t).** Necessarily, every property of propositions has a greatest lower bound.
 - **¬ □Countable Boolean Completeness.** Necessarily, every countable property of entities of a relational type has a least upper bound in that type, with countability relative to a type $\sigma$ as in Countable Boolean Completeness; one instance for each $\sigma$.
@@ -82,6 +84,18 @@ As in full-boolean-valued-atom-and-atomless: no proposition has exactly four pro
 At every type. Write $\pi,\rho$ for the projections of $B$ onto its coordinates. As in the argument ch-contingent of full-boolean-valued-atom-and-atomless, the $\pi$-coordinate of a box-free sentence about real number structures is its truth in $V$ and its $\rho$-coordinate its value in $V^A$, real number structures being unique up to isomorphism in each. Adding one Cohen real preserves cardinals and the value of $2^{\aleph_0}$, there being $(2^{\aleph_0})^{\aleph_0}=2^{\aleph_0}$ nice names for reals; so CH has the same truth value in $V$ and $V^A$. Hence whichever of $\forall\mathfrak R\, .\,\operatorname{Real}_\sigma(\mathfrak R)\to\operatorname{CH}(\mathfrak R)$ and its counterpart with $\neg\operatorname{CH}$ is true in $V$ has value $\top$, and its box is true.
 
 *Write-up: [full-boolean-valued-atom-and-cohen-real](full-boolean-valued-atom-and-cohen-real.html). Address: `full-boolean-valued-atom-and-cohen-real-universe-constructible#ch-non-contingent`. By Andrew Bacon (underlying Boolean-valued construction and analytical contingency); GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026 (the Cohen algebra over L, with the additional premises), 2026-10-28.*
+
+### Holds □Axiom of Infinity (type t).
+
+As $\Box p$ is $p=\top$, it suffices that the Axiom of Infinity at type $t$ has value $\top$. Let $\Phi\in D_{(tt)t}$ send $X\in B^{B}$ to $\bigvee_F\bigwedge_{b\notin F}\neg X(b)$, the join over the finite sets $F\subseteq B$: the value of the claim that $X$ holds of only finitely many propositions. It is in the domain, which holds every function, and so is $W:=\lambda Y\, .\,\forall X\, .\,YX\to\Phi X$, whose value at $Y$ is $\bigwedge_X(Y(X)\to\Phi(X))$. $W\mathbf 0_t$ has value $\top$, since $\mathbf 0_t(X)=\bigwedge_b\neg X(b)\le\Phi(X)$, taking $F=\varnothing$. And $WY\le W(\operatorname{Suc}_tY)$: $\operatorname{Suc}_tY(X)=\bigvee_y X(y)\land Y(X_y)$, where $X_y$, the value of $\lambda u\, .\,Xu\land u\ne y$, agrees with $X$ except that $X_y(y)=0$, equality being crisp; so $\Phi(X_y)\le\Phi(X)$, each $F$ for $X_y$ giving $F\cup\{y\}$ for $X$. Hence the value of $\operatorname{FiniteCardinality}_t(Z)$ is at most that of $WZ$, and that of $\operatorname{FiniteCardinality}_t(Z)\land Z(\lambda u\, .\,\top)$ is at most $\Phi(\lambda u\, .\,\top)=\bigvee_F\bigwedge_{b\notin F}\bot=\bot$, $B$ being infinite, as $A$ is in every member. So the existential has value $\bot$ and the Axiom value $\top$.
+
+*From the group *Full Boolean-valued models*, shared argument `full-boolean-valued#necessary-axiom-of-infinity-t`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
+
+### Holds □Axiom of Infinity (type e).
+
+As for necessary-axiom-of-infinity-t, at type $e$: with $\Phi(X):=\bigvee_F\bigwedge_{n\notin F}\neg X(n)$ for $X\in B^{D_e}$, the Axiom of Infinity at $e$ has value $\top$, since $\Phi(\lambda u\, .\,\top)=\bot$ when $D_e$ is infinite.
+
+*From the group *Full Boolean-valued models*, shared argument `full-boolean-valued#necessary-axiom-of-infinity-e`. It requires that There are infinitely many individuals at the evaluation world. Here: $D_e=\omega$. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
 
 ### Fails Necessity of Analysis.
 

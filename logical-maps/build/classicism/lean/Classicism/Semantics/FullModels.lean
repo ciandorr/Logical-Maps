@@ -12,7 +12,7 @@ topic), as theorems about intensional action models:
   `relational-choice-full`; and at every arrow of a full one, so `□`Relational Choice
   (`holds_box_rc`), `relational-choice-full-boxed`.
 - **Transversal Choice** holds in every extensionally full model (`holds_tc`).
-- **Distinctness-Preserving Collapse** holds where the actual world is isolated (`holds_dpc`).
+- **Truths are ND-necessary** holds where the actual world is isolated (`holds_truths_nd_necessary`).
 - **Atomicity** and **Rigid Comprehension** hold at every arrow of a full model
   (`holds_box_atomicity`, `holds_box_rigid_comprehension`): below a nonzero relation is the
   singleton of one of its tuples; and the relation whose extension at an arrow is `X`'s
@@ -80,22 +80,28 @@ theorem holds_eq_var (M : A.IsModel) {Γ : Ctx} {W : C} (h : A.W₀ ⟶ W) (g : 
 
 /-! ### Relational Choice -/
 
-/-- Relational Choice at `σ`, `τ`, at any arrow of an extensionally full model: a serial
-relation's extension has a functional subset by choice, and that subset is the extension of an
-element of the domain. -/
-theorem holds_rc {B : Premodel Signature.pure C} (M : B.IsModel) (hE : B.ExtFull) {W : C}
+/-- Relational Choice at `σ`, `τ`, at an arrow into an object where the model is extensionally
+full: a serial relation's extension has a functional subset by choice, and that subset is the
+extension of an element of the domain. -/
+theorem holds_rc_at {B : Premodel Signature.pure C} (M : B.IsModel) {W : C}
+    (hE : ∀ (ρ : RTy) (E : Set (Args B.inner ρ W)), ∃ x : B.Dom W (.rel ρ), (B.incl ρ W x).ext' B.inner = E)
     (h : B.W₀ ⟶ W) (σ τ : Ty) : B.Holds h (P.RelationalChoice.quoted σ τ) .nil := by
   simp only [P.RelationalChoice.quoted, B.holds_forall M, B.holds_imp M, B.holds_exists M,
     B.holds_conj M, holds_app_var2, holds_eq_var M, IEnv.get]
   intro U hU
   choose f hf using hU
-  obtain ⟨S, hS⟩ := hE (.arr σ (.arr τ .t)) W {a | a.2.1 = f a.1}
+  obtain ⟨S, hS⟩ := hE (.arr σ (.arr τ .t)) {a | a.2.1 = f a.1}
   refine ⟨S, fun x => ⟨f x, ?_, fun z hz => ?_⟩, fun x y hxy => ?_⟩
   · rw [hS]; rfl
   · rw [hS] at hz; exact hz.symm
   · rw [hS] at hxy
     have hy : y = f x := hxy
     exact hy ▸ hf x
+
+/-- Relational Choice at `σ`, `τ`, at any arrow of an extensionally full model. -/
+theorem holds_rc {B : Premodel Signature.pure C} (M : B.IsModel) (hE : B.ExtFull) {W : C}
+    (h : B.W₀ ⟶ W) (σ τ : Ty) : B.Holds h (P.RelationalChoice.quoted σ τ) .nil :=
+  holds_rc_at M (hE · W) h σ τ
 
 /-- `□`Relational Choice: Relational Choice at every arrow, every object being extensionally
 full. -/
@@ -128,7 +134,7 @@ theorem holds_tc {B : Premodel Signature.pure C} (M : B.IsModel) (hE : B.ExtFull
     have hz : z = (Quotient.mk r z).out := hz
     rw [hz, Quotient.sound (s := r) (hsymm _ _ hxz)]
 
-/-! ### Distinctness-Preserving Collapse -/
+/-! ### Truths are ND-necessary -/
 
 variable (A) in
 /-- **The actual world is isolated**: the actual-world proposition `a`, true and entailing
@@ -140,12 +146,12 @@ def ActualWorldIsolated : Prop :=
     ∀ {V U : C} (i : A.W₀ ⟶ V) (j : V ⟶ U), (⟨V, PUnit.unit, i⟩ : Tuple A.inner .t A.W₀) ∉ A.incl .t A.W₀ a →
       (⟨U, PUnit.unit, i ≫ j⟩ : Tuple A.inner .t A.W₀) ∉ A.incl .t A.W₀ a
 
-/-- Distinctness-Preserving Collapse where the actual world is isolated: for a true `p`, take
+/-- Truths are ND-necessary where the actual world is isolated: for a true `p`, take
 `q := a`; at a world in `a`, `p` holds, and at a world outside it `◇a` fails. -/
-theorem holds_dpc {B : Premodel Signature.pure C} (M : B.IsModel) (hI : B.ActualWorldIsolated) :
-    B.HoldsSentence P.DistinctnessPreservingCollapse.quoted := by
+theorem holds_truths_nd_necessary {B : Premodel Signature.pure C} (M : B.IsModel) (hI : B.ActualWorldIsolated) :
+    B.HoldsSentence P.TruthsAreNDNecessary.quoted := by
   obtain ⟨a, ha, hle, hiso⟩ := hI
-  simp only [Premodel.HoldsSentence, P.DistinctnessPreservingCollapse.quoted, B.holds_forall M,
+  simp only [Premodel.HoldsSentence, P.TruthsAreNDNecessary.quoted, B.holds_forall M,
     B.holds_imp M, B.holds_exists M, B.holds_conj M, B.holds_box M, B.holds_dia M, holds_var,
     IEnv.get, IEnv.get_map, B.incl_map, Intension.mem_map, Category.comp_id, Category.id_comp]
   intro p hp

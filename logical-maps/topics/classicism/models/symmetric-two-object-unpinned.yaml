@@ -31,6 +31,22 @@ settings:
   individuals: base
   sigma: top
 meets:
+  infinitely-many-individuals-everywhere:
+    when: {individuals: base}
+    text: >-
+      The individuals at both objects are copies of $\mathbb N$.
+  infinitely-many-propositions-everywhere: >-
+    At the first object as recorded (separable-collapses and the shared argument
+    axiom-of-infinity-t). At the second, which has the improper ideal, the sets of arrows
+    $\{f:|f[\mathbb N]|=n\}$, one for each $n\ge1$, are closed under post-composition with
+    permutations, so symmetric and in the domain, and pairwise distinct.
+  finite-extension-properties-everywhere: >-
+    Each object's domains hold every symmetric intension pinned down by a set in its ideal (the
+    finite sets at the first object, the improper ideal at the second). The intension holding at
+    each arrow, into $U$, of exactly the entities of type $\sigma t$ at $U$ with finite extension at
+    $1_U$ depends only on the codomain and is preserved by the symmetries, so it is symmetric and
+    pinned down by $\emptyset$; haecceities are symmetric and pinned down by the sets pinning their
+    entities, so identity is literal.
   infinitely-many-orbits-everywhere: >-
     With the base as individuals, at both objects the properties of being one of a finite set of
     individuals lie in infinitely many orbits, symmetries preserving the size of the set. With one
@@ -158,7 +174,7 @@ arguments:
     and $k_1$. The proposition that the arrow sends $0$ and $1$ to the same individual is closed under
     composition with permutations, so in the domain at the second object, where every symmetric intension
     is; it contains $k_0$ and not $k_1$. So no true proposition at the second object is a strong atom.
-    (Strong Actuality holds at the first object, by Actuality and the Distinctness-preserving collapse.)
+    (Strong Actuality holds at the first object, by Actuality and Truths are ND-necessary.)
 - id: rigid-power
   holds:
   - necessary-rigid-power-r
@@ -247,9 +263,9 @@ history:
   - distinctness-signature-r
 - date: '2026-09-23'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
-  summary: Recorded the Distinctness-preserving collapse; see the notes.
+  summary: Recorded Truths are ND-necessary; see the notes.
   satisfies:
-  - distinctness-preserving-collapse
+  - truths-are-nd-necessary
 - date: '2026-09-23'
   by: Claude Fable 5.1 (Anthropic), prompted by Cian Dorr
   summary: 'Recorded the failure of Relational Choice, at types (e→t) and e: a functional subrelation

@@ -1,6 +1,6 @@
 # Self-atoms are atoms (type t) ∧ BF ⇒ Self-atoms are atoms
 
-<p class='cert'>Result — Source: Misc.; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
+<p class='cert'>Result — Source: Misc., Lean `Classicism.Map.self_atoms_are_atoms_t_and_bf_imply_self_atoms_are_atoms_r`; produced by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</p>
 
 ## Premises
 
@@ -18,6 +18,10 @@ Let $X^{\bar\sigma t}\ne\bot$. As in the recorded [[atomicity-t-and-bf-imply-ato
 ## Notes
 
 The lift of Self-atoms are atoms from type $t$ to every relational type under BF, on the pattern of [[atomicity-t-and-bf-imply-atomicity]]; BF is used at the argument types, to pass from a possible relation to a possible instance. Atoms are strong atoms needs no such lift, since BF at relational types gives it outright ([[barcan-relational-implies-atoms-are-strong-atoms-r]]).
+
+## Revisions
+
+- **2026-10-30** (Claude Opus 5.5 (Anthropic), prompted by Cian Dorr) — Noted that the BF premise is idle: [[self-atoms-are-atoms-t-implies-self-atoms-are-atoms-r]] gives the conclusion from the type-t premise alone. The record is kept as stated.
 
 ## Sources
 

@@ -22,6 +22,14 @@ theorem axiom_of_infinity_e_implies_possible_infinity_e : AxiomOfInfinityE → P
 theorem axiom_of_infinity_t_implies_possible_infinity_t : AxiomOfInfinityT → PossibleInfinityT :=
   dia_intro _
 
+/-- `necessary-axiom-of-infinity-e-implies-axiom-of-infinity-e`: `T`. -/
+theorem necessary_axiom_of_infinity_e_implies_axiom_of_infinity_e :
+    NecAxiomOfInfinityE → AxiomOfInfinityE := box_elim
+
+/-- `necessary-axiom-of-infinity-t-implies-axiom-of-infinity-t`: `T`. -/
+theorem necessary_axiom_of_infinity_t_implies_axiom_of_infinity_t :
+    NecAxiomOfInfinityT → AxiomOfInfinityT := box_elim
+
 /-- `atomlessness-implies-axiom-of-infinity-t`: a finite cardinality `Z` of propositions
 holds only of properties `X` that leave out, below each possible proposition, a possible
 one: by the induction `FiniteCardinality` provides. The empty property leaves out the
@@ -92,5 +100,12 @@ theorem necessary_boolean_completeness_r_implies_necessary_countable_boolean_com
     NecBooleanCompleteness τ → NecCountableBooleanCompleteness σ τ :=
   modal_K _ _ (nec% (boolean_completeness_r_implies_countable_boolean_completeness_r
     (σ := σ) (τ := τ)))
+
+
+/-- `necessary-atomlessness-implies-necessary-axiom-of-infinity-t`: the unboxed record,
+necessitated. -/
+theorem necessary_atomlessness_implies_necessary_axiom_of_infinity_t :
+    NecAtomlessness → NecAxiomOfInfinityT :=
+  modal_K _ _ (nec% atomlessness_implies_axiom_of_infinity_t)
 
 end Classicism.Proofs

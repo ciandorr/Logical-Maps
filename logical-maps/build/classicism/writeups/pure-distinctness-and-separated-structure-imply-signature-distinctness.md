@@ -1,6 +1,6 @@
 # Maximalism (pure) ∧ Separated Structure ⇒ Maximalism (signature Σ)
 
-<p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17 September 2026.</p>
+<p class='cert'>Result — Source: Classicism (2024), Lean `Classicism.Map.pure_distinctness_and_separated_structure_imply_signature_distinctness`; produced by Andrew Bacon and Cian Dorr; recorded by OpenAI Codex (GPT-6), prompted by Zachary Goodsell, 17 September 2026.</p>
 
 ## Premises
 

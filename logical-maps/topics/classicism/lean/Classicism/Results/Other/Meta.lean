@@ -49,7 +49,7 @@ theorem diaNe_not_two : P.DiaNe (¬ TwoIndividuals) → ¬ TwoIndividuals := fun
 
 /-- With `◇_≠T₂` and `◇_≠¬T₂`, the Distinctness-Preserving Collapse at whichever of `T₂`, `¬T₂` is
 true contradicts the other. -/
-theorem dpc_two_contra : P.DistinctnessPreservingCollapse → P.DiaNe TwoIndividuals →
+theorem dpc_two_contra : P.TruthsAreNDNecessary → P.DiaNe TwoIndividuals →
     P.DiaNe (¬ TwoIndividuals) → False := fun h d₁ d₂ =>
   (em TwoIndividuals).elim (fun ht => d₂ (h _ (fun hn => hn ht))) (fun hn => d₁ (h _ hn))
 
@@ -244,7 +244,7 @@ theorem strongPossibility_diaNe_twoE {Ax : AxiomSet Signature.pure} (h : strongP
 
 /-- `strong-possibility-and-distinctness-preserving-collapse-incompatible`. -/
 theorem strongPossibility_dpc_inconsistent :
-    ¬ Consistent (strongPossibility Signature.pure ∪ P.DistinctnessPreservingCollapse.schema) :=
+    ¬ Consistent (strongPossibility Signature.pure ∪ P.TruthsAreNDNecessary.schema) :=
   fun hc => hc <|
   have h := strongPossibility_diaNe_twoE (Ax := strongPossibility _ ∪ _) (subset_union_left _ _)
   Derivable.notE h.2 (Theorem.mp₂ (Theorem.ofCMinus dpc_two_contra.derivable) (Theorem.ax (Or.inr rfl)) h.1)

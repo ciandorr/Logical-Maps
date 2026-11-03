@@ -1,6 +1,6 @@
 # Rigid Comprehension ∧ BF (type t) ⇒ □BF (type t)
 
-<p class='cert'>Result — Source: Classicism (2024); produced by Andrew Bacon and Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), 16 October 2026, at Cian Dorr's direction.</p>
+<p class='cert'>Result — Source: Classicism (2024), Lean `Classicism.Map.rigid_comprehension_and_bf_t_imply_necessary_bf_t`; produced by Andrew Bacon and Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), 16 October 2026, at Cian Dorr's direction.</p>
 
 ## Premises
 

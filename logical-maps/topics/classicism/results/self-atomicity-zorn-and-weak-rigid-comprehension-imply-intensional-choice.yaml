@@ -1,0 +1,35 @@
+id: self-atomicity-zorn-and-weak-rigid-comprehension-imply-intensional-choice
+premises:
+- self-atomicity-r
+- zorn-r
+- weak-rigid-comprehension-r
+conclusion: intensional-choice-r
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the construction, with Transversal Choice and Rigid Comprehension, 30 October 2026);
+    the maximal-antichain repair by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, the same day
+  recorded_by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 30 October 2026
+  checked_by: []
+  date: '2026-10-30'
+  lean: stated
+sources:
+- Cian Dorr, argument of 30 October 2026 from Self-Atomicity, Transversal Choice and Rigid Comprehension; gap
+  and repair by Claude Opus 5.5 (Anthropic) the same day (session transcript).
+source_names:
+- Dorr 30 Oct
+proof: >-
+  See the write-up. Given $\Box\exists y\, .\,Fy$, Zorn's Lemma gives a maximal family $A$ of self-atoms below
+  $F$, any two of them identical or incompatible (not possibly both instantiated). Weak Rigid Comprehension
+  gives a weakly rigid $A^*$ coextensive with $A$; put $G:=\lambda x\, .\,\exists Y\, .\,A^*Y\land Yx$. Weak
+  inextensibility carries to every world that each member is a self-atom below $F$ and that any two members
+  are identical or incompatible, so $G\le F$ and $G$ has at most one instance at every world. If $G$ were possibly
+  uninstantiated, Self-Atomicity would give a self-atom below $\lambda x\, .\,Fx\land\neg\exists Y(A^*Y\land\exists
+  Y)$, incompatible with every member of $A$ by weak persistence, contradicting maximality.
+notes: >-
+  With Transversal Choice ⇒ Zorn ([[transversal-choice-r-implies-zorn-r]]) and Rigid Comprehension ⇒ Weak Rigid
+  Comprehension, this gives Cian Dorr's form, Self-Atomicity + Transversal Choice + Rigid Comprehension ⇒ Intensional
+  Choice. His transversal of the relation of being possibly both instantiated needs repair without 5, since
+  that relation need not be transitive (the write-up has a three-object countermodel to transitivity); the
+  maximal antichain replaces it. Compare [[self-atomicity-atomicity-t-weak-rigid-comprehension-and-relational-choice-imply-intensional-choice]],
+  where the type-t atoms do the antichain's work.

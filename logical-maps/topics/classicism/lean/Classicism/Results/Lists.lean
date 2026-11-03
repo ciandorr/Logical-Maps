@@ -288,6 +288,39 @@ theorem nec_plenitude_of_codes {σ τ : Type} [Ty σ] [Rel τ] :
     NecPlenitude ((σ → Prop) → Prop) τ → NecPlenitude σ τ :=
   modal_K _ _ (nec% (plenitude_of_codes (σ := σ) (τ := τ)))
 
+/-- An instance of `F` gives a code of one. -/
+theorem codes_instantiated {σ : Type} [Ty σ] (F : σ → Prop) :
+    (∃ x, F x) → ∃ c : (σ → Prop) → Prop, ∃ x, c = (λ R ↦ R x) ∧ F x :=
+  fun h => h.elim fun x hx => ⟨λ R ↦ R x, x, rfl, hx⟩
+
+/-- A property of codes of instances of `F`, read back at `σ`, entails `F`. -/
+theorem codes_le {σ : Type} [Ty σ] (F : σ → Prop) (G : ((σ → Prop) → Prop) → Prop) :
+    (∀ c, G c → ∃ x, c = (λ R ↦ R x) ∧ F x) → ∀ x, G (λ R ↦ R x) → F x :=
+  fun f x h => (f _ h).elim fun x' hx' => code_injective x' x hx'.1.symm ▸ hx'.2
+
+/-- A uniquely instantiated property of codes of instances of `F`, read back at `σ`, is
+uniquely instantiated. -/
+theorem codes_unique {σ : Type} [Ty σ] (F : σ → Prop) (G : ((σ → Prop) → Prop) → Prop) :
+    (∀ c, G c → ∃ x, c = (λ R ↦ R x) ∧ F x) → (∃ c, G c ∧ ∀ c', G c' → c' = c) →
+      ∃ x, G (λ R ↦ R x) ∧ ∀ y, G (λ R ↦ R y) → y = x :=
+  fun f h => h.elim fun c hc => (f c hc.1).elim fun x hx =>
+    ⟨x, hx.1 ▸ hc.1, fun y hy => code_injective y x ((hc.2 _ hy).trans hx.1)⟩
+
+/-- Intensional Choice at `σ`, from Intensional Choice at the codes: choose among the codes of
+instances, and read the choice back. -/
+theorem intensional_choice_of_codes {σ : Type} [Ty σ] :
+    IntensionalChoice ((σ → Prop) → Prop) → IntensionalChoice σ := fun ic F hF =>
+  (ic (λ c ↦ ∃ x, c = (λ R ↦ R x) ∧ F x)
+      (modal_K _ _ (nec% (codes_instantiated F)) hF)).elim fun G hG =>
+    ⟨λ x ↦ G (λ R ↦ R x),
+      (le_iff _ _).2 (modal_K _ _ (nec% (codes_le F G)) ((le_iff _ _).1 hG.1)),
+      modal_K _ _ (modal_K _ _ (nec% (codes_unique F G)) ((le_iff _ _).1 hG.1)) hG.2⟩
+
+/-- `□`Intensional Choice at `σ`, from `□`Intensional Choice at the codes. -/
+theorem nec_intensional_choice_of_codes {σ : Type} [Ty σ] :
+    NecIntensionalChoice ((σ → Prop) → Prop) → NecIntensionalChoice σ :=
+  modal_K _ _ (nec% (intensional_choice_of_codes (σ := σ)))
+
 /-- The property of the codes of the objects with `Z`, read back on the objects, is `Z`. -/
 theorem decode_codes {σ : Type} [Ty σ] (Z : σ → Prop) :
     (λ y ↦ ∃ y', (λ R : σ → Prop ↦ R y) = (λ R ↦ R y') ∧ Z y') = Z :=
@@ -384,6 +417,7 @@ end Lists
   Classicism.Lists.relational_choice_cons Classicism.Lists.nec_relational_choice_cons
   Classicism.Lists.relational_choice_nil Classicism.Lists.nec_relational_choice_nil
   Classicism.Lists.plenitude_of_codes Classicism.Lists.nec_plenitude_of_codes
+  Classicism.Lists.intensional_choice_of_codes Classicism.Lists.nec_intensional_choice_of_codes
   Classicism.Lists.actual_profile_of_codes Classicism.Lists.modalized_plenitude_cons
 #classicism_derive Classicism.Lists.barcan_nil Classicism.Lists.nec_barcan_nil
   Classicism.Lists.tractarianism_nil Classicism.Lists.nec_tractarianism_nil
@@ -590,6 +624,20 @@ theorem _root_.Classicism.P.NecPlenitude.schema_entails_listSchema :
   exact (Theorem.ofC (nec_plenitude_of_codes.listRule σs ρ hρ)).mp
     (Theorem.ax ⟨.rel (.rel (σs ⇒* .t) ⇒ .t), ρ, ⟨(RTy.closed_arrs σs .t).2 ⟨hσs, trivial⟩, trivial⟩, hρ,
       rfl⟩)
+
+/-- **Intensional Choice over every list, from Intensional Choice**, at the code type. -/
+theorem _root_.Classicism.P.IntensionalChoice.schema_entails_listSchema :
+    P.IntensionalChoice.schema ⟹ P.IntensionalChoice.listSchema := by
+  rintro a ⟨σs, hσs, rfl⟩
+  exact (Theorem.ofC (intensional_choice_of_codes.listRule σs)).mp
+    (Theorem.ax ⟨.rel (.rel (σs ⇒* .t) ⇒ .t), ⟨(RTy.closed_arrs σs .t).2 ⟨hσs, trivial⟩, trivial⟩, rfl⟩)
+
+/-- **`□`Intensional Choice over every list, from `□`Intensional Choice**, at the code type. -/
+theorem _root_.Classicism.P.NecIntensionalChoice.schema_entails_listSchema :
+    P.NecIntensionalChoice.schema ⟹ P.NecIntensionalChoice.listSchema := by
+  rintro a ⟨σs, hσs, rfl⟩
+  exact (Theorem.ofC (nec_intensional_choice_of_codes.listRule σs)).mp
+    (Theorem.ax ⟨.rel (.rel (σs ⇒* .t) ⇒ .t), ⟨(RTy.closed_arrs σs .t).2 ⟨hσs, trivial⟩, trivial⟩, rfl⟩)
 
 /-- **Actual Profile over every list, from Actual Profile**, at the code type. -/
 theorem _root_.Classicism.P.ActualProfile.schema_entails_listSchema :

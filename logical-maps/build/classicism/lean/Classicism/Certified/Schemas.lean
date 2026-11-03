@@ -41,8 +41,8 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.SelfAtomsAreAtoms Classicism.P.NecSelfAtomsAreAtoms Classicism.P.SelfAtomsAreAtomsT Classicism.P.NecSelfAtomsAreAtomsT
   Classicism.P.SelfAtomsAreStrongAtoms Classicism.P.NecSelfAtomsAreStrongAtoms Classicism.P.SelfAtomsAreStrongAtomsT Classicism.P.NecSelfAtomsAreStrongAtomsT
   Classicism.P.AtomsAreStrongAtoms Classicism.P.NecAtomsAreStrongAtoms Classicism.P.AtomsAreStrongAtomsT Classicism.P.NecAtomsAreStrongAtomsT
-  Classicism.P.NecStrongAtomicityT Classicism.P.DistinctnessPreservingCollapse
-  Classicism.P.NecDistinctnessPreservingCollapse Classicism.P.TruthImpliesFiveNecessity
+  Classicism.P.NecStrongAtomicityT Classicism.P.TruthsAreNDNecessary
+  Classicism.P.NecTruthsAreNDNecessary Classicism.P.TruthImpliesFiveNecessity
   Classicism.P.TruthImpliesTwoHatNecessity Classicism.P.FiveImpliesTwoHatNecessity
   Classicism.P.FiveImpliesNdNecessity Classicism.P.TwoHatImpliesNdNecessity
   Classicism.P.NecTruthImpliesFiveNecessity Classicism.P.NecTruthImpliesTwoHatNecessity
@@ -54,7 +54,8 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.Vicinity Classicism.P.NecVicinity Classicism.P.ModalizedPlenitude
   Classicism.P.StrongActuality Classicism.P.NecStrongActuality
   Classicism.P.AxiomOfInfinityE Classicism.P.AxiomOfInfinityT Classicism.P.PossibleInfinityE
-  Classicism.P.PossibleInfinityT Classicism.P.CountableBooleanCompleteness
+  Classicism.P.PossibleInfinityT Classicism.P.NecAxiomOfInfinityE Classicism.P.NecAxiomOfInfinityT
+  Classicism.P.CountableBooleanCompleteness
   Classicism.P.NecCountableBooleanCompleteness Classicism.P.NecAtomicityT
   Classicism.P.NecBooleanCompletenessT Classicism.P.NecWeakRigidComprehension
   Classicism.P.NecWeakRigidComprehensionPersistent
@@ -66,7 +67,7 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.NecWeaklyRigidWeakRigidity Classicism.P.BarcanRelational
   Classicism.P.NecBarcanRelational Classicism.P.WellOrdering Classicism.P.NecWellOrdering
   Classicism.P.ModalWellOrdering Classicism.P.Zorn Classicism.P.ModalizedRelationalChoice
-  Classicism.P.NecModalizedRelationalChoice
+  Classicism.P.NecModalizedRelationalChoice Classicism.P.ArithmeticNecessitism
   -- the equivalent forms (`Principles/`)
   Classicism.P.ModalKDual Classicism.P.ModalTDual Classicism.P.ModalFourDual
   Classicism.P.ConverseBarcanDual Classicism.P.ModalBDual Classicism.P.NecModalBDual
@@ -80,7 +81,7 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.NecNecessityOfDistinctnessTDual Classicism.P.BarcanTDual
   Classicism.P.NecBarcanTDual Classicism.P.AtomicityTDual
   Classicism.P.BooleanCompletenessTLUB Classicism.P.StrongAtomicityTDual
-  Classicism.P.NecStrongAtomicityTDual Classicism.P.DistinctnessPreservingCollapseDual
+  Classicism.P.NecStrongAtomicityTDual Classicism.P.TruthsAreNDNecessaryDual
 
 /-! ### Every principle's schema is in the paper's language
 

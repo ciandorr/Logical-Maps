@@ -20,6 +20,7 @@ lemma of the shallow layer is carried into a signature by `Term.ofPure`
 | `PossibilityDistinctness.lean` | Distinctness and Possibility are equivalent, relative to any theory over any signature; `Max T` entails both. The one object-level step, `◇(x ≠ y) → x ≠ y`, is a shallow lemma certified once. |
 | `Contingency.lean` | No Pure Contingency necessitates every schema of pure sentences, `NPC ∪ Ax ⟹ Ax.box` — the map's twenty `no-pure-contingency-and-X-imply-necessary-X` records as one theorem; the arrows among No Contingency, No Pure Contingency, B for the signature and B for pure sentences; B and the Fregean Axiom as sources. |
 | `Incompatibilities.lean` | Possibility, Distinctness and `Max T` refute the necessitation of anything refutable in a model (`possibility_box_inconsistent`); Maximalist Classicism against `ND`, `□`Actuality, `□`Atomicity, `□`Boolean Completeness; Possibility against No Pure Contingency and against B for pure sentences. |
+| `SeparatedStructure.lean` | The Σ-combinatorialism results that put variables for constants in derivations (`Completeness/ConstantBlocks.lean`: `CMap.block`, `Term.exists_abstract`, `Term.cmap_block_subst_consts`): iterated Separated Structure (`ss_iter`, and for a formula `ss_box`: `□P[d̄/x̄] → λx̄. P = λx̄. ⊤`); Separated Structure ⇒ Possibly Witnessed Possibility and Independence; Distinctness (Σ) ⇒ Separated Structure and Witnessed Possibility; Possibly Witnessed Possibility and Logical Necessity ⇒ Separated Structure; Logical Necessity ⇒ Modal Freedom; Witnessed Possibility ⇒ Independence; pure Distinctness and Separated Structure ⇒ Distinctness (Σ). |
 | `Arithmetic.lean`, `ArithmeticMeta.lean` | `C5` gives the Necessity of Arithmetic (Bacon, Theorem 4.4, in the map's formulation). The steps of the induction on arithmetical sentences — numbers are necessarily numbers, sums and products are necessary when true and, with B, impossible when false, identities by `NI` and `ND`, the connectives, and the quantifier restricted to numbers by `BF` at the type of numbers — are shallow theorems derived in `Arithmetic.lean`, with the vocabulary `ℕ`, `𝟎`, `Suc`, `Sum`, `Prod` taken as variables equal to the definitions; `ArithmeticMeta.lean` composes their derivations by induction on `AForm`, instantiating the vocabulary at the quoted terms of `Certified/Arithmetic.lean`, the equations discharged by reflexivity, with one β-conversion at the quantifier. |
 
 ## The map's records covered
@@ -49,6 +50,15 @@ lemma of the shallow layer is carried into a signature by `Term.ofPure`
 | `maximalist-distinctness-incompatible-with-necessary-actuality` | `maximalist_necActuality_inconsistent` (the permutation model) |
 | `maximalist-distinctness-incompatible-with-necessary-atomicity-r` | `maximalist_necAtomicity_inconsistent` (through `t`, the permutation model) |
 | `maximalist-distinctness-incompatible-with-necessary-boolean-completeness-r` | `maximalist_necBooleanCompleteness_inconsistent` (through `e → t`, the permutation model; the `P.NecBooleanCompleteness` form with a prime) |
+| `distinctness-signature-r-implies-separated-structure-r` | `distinctness_entails_separatedStructure` (`SeparatedStructure.lean`) |
+| `possibility-signature-r-implies-witnessed-possibility-r` | `distinctness_entails_witnessedPossibility` |
+| `separated-structure-r-implies-possibly-witnessed-possibility-r` | `separatedStructure_entails_possiblyWitnessedPossibility` |
+| `possibly-witnessed-possibility-r-implies-separated-structure-r` | `possiblyWitnessedPossibility_entails_separatedStructure` |
+| `logical-necessity-r-implies-separated-structure-r` | `logicalNecessity_entails_separatedStructure` (through Possibly Witnessed Possibility) |
+| `logical-necessity-r-implies-modal-freedom-signature-r` | `logicalNecessity_entails_modalFreedom` |
+| `separated-structure-r-implies-independence-signature-r` | `separatedStructure_entails_independence` |
+| `witnessed-possibility-r-implies-independence-signature-r` | `witnessedPossibility_entails_independence` |
+| `pure-distinctness-and-separated-structure-imply-signature-distinctness` | `pureDistinctness_separatedStructure_entails_distinctness` |
 | `c5-implies-necessity-of-arithmetic` | `c5_entails_necessityOfArithmetic` (`ArithmeticMeta.lean`; `nc_of_aform`, the induction) |
 
 The necessitation of a schema `Ax` is `Ax.box`, so that of a principle's schema is

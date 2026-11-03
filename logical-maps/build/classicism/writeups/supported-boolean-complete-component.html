@@ -1,0 +1,408 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Supported model over the ultrafilters of a complete homogeneous algebra</title><link rel="icon" type="image/png" href="../favicon.png">
+<style>/* Fixed forest palette, adapted from the supplied style example.
+   Semantic and source hues retain their meaning in both modes. */
+:root {
+  --bg: #f3f1e8;
+  --panel: #f8f7f0;
+  --panel-2: #e9ecdf;
+  --line: #d4d9c9;
+  --line-strong: #a2ae97;
+  --ink: #283c28;
+  --ink-2: #4f604b;
+  --ink-3: #5f6d58;
+  --accent: #356044;
+  --link-hover: #914b30;
+  --human: #3e7052;
+  --assisted: #746044;
+  --ai: #a35b36;
+  --derived: #7b8271;
+  --indep: #a0483a;
+  --open: #e2e5d9;
+  --open-ink: #65705f;
+  --conj: #896b27;
+  --node-fill: #f8f7f0;
+  --node-stroke: #98a68b;
+  --junction: #52634b;
+  --hl: #e0e7cd;
+  --focus: #914b30;
+  --badge-ink: #ffffff;
+  --warning-bg: #f4e6dc;
+  --source-forest: #3e7052;
+  --source-rust: #a25336;
+  --source-ochre: #896b27;
+  --source-slate: #4c7279;
+  --source-berry: #80556d;
+  --source-olive: #69753c;
+  --source-misc: #696d61;
+  --shadow: 0 4px 24px rgb(40 60 40 / 12%);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: var(--sans);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0e1912;
+  --panel: #142018;
+  --panel-2: #1d2b20;
+  --line: #304332;
+  --line-strong: #596e51;
+  --ink: #d7dfca;
+  --ink-2: #b3c1a7;
+  --ink-3: #96aa8d;
+  --accent: #a6c699;
+  --link-hover: #dfab89;
+  --human: #94bc95;
+  --assisted: #c1ad8d;
+  --ai: #dca17b;
+  --derived: #83937c;
+  --indep: #e09b86;
+  --open: #243327;
+  --open-ink: #a2b398;
+  --conj: #d0b36b;
+  --node-fill: #19261c;
+  --node-stroke: #627957;
+  --junction: #b3c1a7;
+  --hl: #30422a;
+  --focus: #dfab89;
+  --badge-ink: #0e1912;
+  --warning-bg: #32251f;
+  --source-forest: #94bc95;
+  --source-rust: #dca17b;
+  --source-ochre: #d0b36b;
+  --source-slate: #95bcc1;
+  --source-berry: #c5a0b7;
+  --source-olive: #b6c383;
+  --source-misc: #a9b09c;
+  --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scrollbar-color: var(--line-strong) var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.6 var(--sans); }
+button, input, select { font: inherit; color: inherit; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 3px; }
+input[type="checkbox"] { accent-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+::selection { background: var(--hl); color: var(--ink); }
+.theme-toggle { border: 0; padding: 6px 0; background: transparent; color: var(--ink-2); cursor: pointer; font: 13px var(--sans); white-space: nowrap; }
+.theme-toggle:hover { color: var(--link-hover); }
+.display-toggles { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 16px; }
+.theme-toggle[aria-pressed="true"] { color: var(--accent); }
+
+/* A prismatic name: one rainbow wheel around a point in the word, spinning;
+   --prism-x and --prism-y move that point off the middle.
+   Pure spectral stops, turned by a registered angle rather than a hue
+   filter, which would muddy them. */
+@property --prism { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.prismatic { font-weight: 600; color: transparent; background: conic-gradient(from var(--prism) at var(--prism-x, 50%) var(--prism-y, 50%), #ff1a1a, #ff8a00, #ffd000, #22c33a, #00a8f0, #3d4bff, #b026ff, #ff1a1a); -webkit-background-clip: text; background-clip: text; animation: prism-spin 6s linear infinite; }
+/* As a link it keeps the gradient on hover, under an accent underline. */
+a.prismatic, a.prismatic:hover { color: transparent; }
+a.prismatic:hover { text-decoration-color: var(--accent); }
+@keyframes prism-spin { to { --prism: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .prismatic { animation: none; } }
+
+/* Standalone write-ups use the same quiet, ruled typography as the map. */
+html:has(body.writeup-page) { background: var(--bg); }
+body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; font: 16px/1.7 var(--sans); overflow-wrap: anywhere; }
+.writeup-nav { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; font-size: 13px; }
+.writeup-page h1 { font-size: 1.4em; line-height: 1.4; margin: 0 0 20px; color: var(--ink); }
+.writeup-page h2 { font-size: 1.15em; line-height: 1.4; margin: 1.8em 0 .5em; padding-top: 14px; border-top: 1px solid var(--line); }
+.writeup-page h3 { font-size: 1em; }
+.writeup-page p { margin: 0 0 12px; }
+.writeup-page .cert { color: var(--ink-2); font-size: .85em; }
+.writeup-page code, .writeup-page pre { font: .85em/1.6 var(--mono); color: var(--ink); }
+.writeup-page pre { padding: 14px; background: var(--panel-2); overflow-x: auto; }
+.writeup-page blockquote { color: var(--ink-2); border-left: 2px solid var(--line-strong); margin-left: 0; padding-left: 20px; }
+.writeup-page math[display="block"] { display: block; overflow-x: auto; padding: 8px 0; }
+.writeup-page table { display: block; overflow-x: auto; border-collapse: collapse; }
+.writeup-page th, .writeup-page td { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+@media (max-width: 600px) {
+  body.writeup-page { margin: 1.5em auto; padding: 0 1em 2em; }
+}
+@media print {
+  :root, :root[data-theme="dark"] { --bg: white; --ink: #283c28; --ink-2: #4f604b; --accent: #356044; --line: #d4d9c9; color-scheme: light; }
+  .writeup-nav { display: none; }
+  body.writeup-page { max-width: none; margin: 0; padding: 0; }
+}
+
+/* Teal-grey, muted rust, deep teal and warm stone. Screen-only overrides
+   preserve print styling. */
+@media screen {
+  :root {
+    --bg: #ebf1f1;
+    --panel: #e1eae9;
+    --panel-2: #d0dfde;
+    --line: #c0cecd;
+    --line-strong: #849997;
+    --ink: #303b3a;
+    --ink-2: #4a5a59;
+    --ink-3: #526160;
+    --accent: #884932;
+    --link-hover: #6f3827;
+    --derived: #6f8180;
+    --open: #d6e2e1;
+    --open-ink: #526160;
+    --node-fill: #f1f6f6;
+    --node-stroke: #7f9391;
+    --junction: #596b6a;
+    --human: #2f6b66;
+    --source-forest: #2f6b66;
+    --hl: #e6ddd0;
+    --focus: #884932;
+    --shadow: 0 4px 24px rgb(48 59 58 / 10%);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #171e1d;
+    --panel: #202a29;
+    --panel-2: #2b3736;
+    --line: #3d4b4a;
+    --line-strong: #6b817f;
+    --ink: #dbe8e7;
+    --ink-2: #b9cbca;
+    --ink-3: #a6bdbb;
+    --accent: #e2ad92;
+    --link-hover: #f0c3aa;
+    --derived: #87a09e;
+    --open: #303d3c;
+    --open-ink: #aec6c4;
+    --node-fill: #263130;
+    --node-stroke: #738d8b;
+    --junction: #b3cbc9;
+    --human: #86c0b6;
+    --source-forest: #86c0b6;
+    --hl: #463f37;
+    --focus: #e2ad92;
+    --badge-ink: #171e1a;
+    --shadow: 0 4px 24px rgb(0 0 0 / 24%);
+  }
+}
+
+/* Shared Okabe–Ito palette: https://jfly.uni-koeln.de/color/#pallet
+   Loaded after topic themes. Sky blue and orange distinguish positive and
+   negative relations; darker inks keep small labels readable in light mode.
+   Neutral surfaces are identical across maps. Print uses the shared theme. */
+@media screen {
+  :root[data-palette="colourblind"] {
+    --bg: #f4f5f6;
+    --panel: #ffffff;
+    --panel-2: #e9edf0;
+    --line: #d0d6da;
+    --line-strong: #87949d;
+    --ink: #202930;
+    --ink-2: #45535d;
+    --ink-3: #586670;
+    --accent: #0072b2;
+    --link-hover: #925f00;
+    --human: #0072b2;
+    --assisted: #80506a;
+    --ai: #a44500;
+    --derived: #687780;
+    --indep: #925f00;
+    --open: #e9edf0;
+    --open-ink: #586670;
+    --conj: #80506a;
+    --node-fill: #ffffff;
+    --node-stroke: #7a8b96;
+    --junction: #45535d;
+    --hl: #dce4ea;
+    --focus: #0072b2;
+    --badge-ink: #ffffff;
+    --warning-bg: #fff0ce;
+    --source-forest: #56b4e9;
+    --source-rust: #e69f00;
+    --source-ochre: #d55e00;
+    --source-slate: #0072b2;
+    --source-berry: #cc79a7;
+    --source-olive: #009e73;
+    --source-misc: #687780;
+    --rel-positive: #56b4e9;
+    --rel-negative: #e69f00;
+    --shadow: 0 4px 24px rgb(32 41 48 / 12%);
+  }
+  :root[data-palette="colourblind"][data-theme="dark"] {
+    --bg: #111820;
+    --panel: #18222b;
+    --panel-2: #23303b;
+    --line: #354550;
+    --line-strong: #718492;
+    --ink: #edf2f5;
+    --ink-2: #c1ced7;
+    --ink-3: #a5b5c1;
+    --accent: #56b4e9;
+    --link-hover: #e69f00;
+    --human: #56b4e9;
+    --assisted: #cc79a7;
+    --ai: #e69f00;
+    --derived: #91a1ad;
+    --indep: #e69f00;
+    --open: #23303b;
+    --open-ink: #a5b5c1;
+    --conj: #cc79a7;
+    --node-fill: #1c2933;
+    --node-stroke: #8094a3;
+    --junction: #c1ced7;
+    --hl: #354654;
+    --focus: #56b4e9;
+    --badge-ink: #111820;
+    --warning-bg: #352b18;
+    --source-misc: #91a1ad;
+    --shadow: 0 4px 24px rgb(0 0 0 / 25%);
+  }
+  /* Source swatches use the unmodified palette; outlined badges allow their
+     text to keep the normal contrast on both light and dark surfaces. */
+  :root[data-palette="colourblind"] .badge.source {
+    background: var(--panel);
+    color: var(--ink);
+    border: 1px solid var(--source-color);
+    border-left-width: 4px;
+  }
+}
+</style>
+<script>/* Apply before paint; share the preference between every map and write-up. */
+(() => {
+  const key = 'pmap-theme';
+  const paletteKey = 'pmap-palette';
+  const system = window.matchMedia?.('(prefers-color-scheme: dark)');
+  let preference;
+  let palette;
+  try { preference = localStorage.getItem(key); } catch (_) {}
+  try { palette = localStorage.getItem(paletteKey); } catch (_) {}
+  if (!['light', 'dark'].includes(preference)) preference = null;
+  if (palette !== 'colourblind') palette = 'default';
+  function apply(theme) {
+    document.documentElement.dataset.theme = theme;
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.textContent = theme === 'dark' ? '[Light mode]' : '[Dark mode]';
+      button.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    });
+  }
+  function applyPalette() {
+    document.documentElement.dataset.palette = palette;
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.setAttribute('aria-pressed', String(palette === 'colourblind'));
+      button.textContent = `[Colourblind mode: ${palette === 'colourblind' ? 'on' : 'off'}]`;
+    });
+  }
+  const initial = () => preference || (system?.matches ? 'dark' : 'light');
+  apply(initial());
+  applyPalette();
+  document.addEventListener('DOMContentLoaded', () => {
+    apply(initial());
+    applyPalette();
+    document.querySelectorAll('[data-theme-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        preference = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        apply(preference);
+        try { localStorage.setItem(key, preference); } catch (_) {}
+      });
+    });
+    document.querySelectorAll('[data-colourblind-toggle]').forEach(button => {
+      button.addEventListener('click', () => {
+        palette = palette === 'colourblind' ? 'default' : 'colourblind';
+        applyPalette();
+        try { localStorage.setItem(paletteKey, palette); } catch (_) {}
+      });
+    });
+  });
+  system?.addEventListener('change', () => { if (!preference) apply(initial()); });
+  window.addEventListener('storage', event => {
+    if (event.key === key || event.key === null) {
+      preference = ['light', 'dark'].includes(event.newValue) ? event.newValue : null;
+      apply(initial());
+    }
+    if (event.key === paletteKey || event.key === null) {
+      palette = event.newValue === 'colourblind' ? 'colourblind' : 'default';
+      applyPalette();
+    }
+  });
+})();
+</script>
+<link rel="stylesheet" href="../math/katex.min.css">
+<script defer src="../math/katex.min.js"></script>
+<script defer src="../math/contrib/auto-render.min.js"></script>
+<script defer src="../math/math.js"></script></head><body class="writeup-page"><nav class="writeup-nav" aria-label="Write-up navigation"><a href="../index.html">← Back to map</a><div class="display-toggles"><button type="button" class="theme-toggle" data-theme-toggle>[Dark mode]</button><button type="button" class="theme-toggle" data-colourblind-toggle aria-label="Colourblind mode" aria-pressed="false">[Colourblind mode: off]</button></div></nav><header id="title-block-header"><h1>Supported model over the ultrafilters of a complete homogeneous algebra</h1></header><p class="cert">
+Model — Source: Misc.; produced by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026 (as a Boolean-valued model, the component of a model with a root); reformulated as an action model by Cian Dorr, 29 October 2026; the component recorded on its own by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr; recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 29 October 2026.
+</p>
+<h2 id="package">Package</h2>
+<ul>
+<li><strong>□Boolean Completeness (type t).</strong> Necessarily, every property of propositions has a greatest lower bound.</li>
+<li><strong>□Atomlessness.</strong> Necessarily, every possible proposition has a possible proposition strictly below it.</li>
+<li><strong>□Transversal.</strong> Necessarily, there is a property of properties that picks out exactly one property from each coextension class, that is, exactly one property coextensive with any given property.</li>
+<li><strong>□BF.</strong> Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.</li>
+<li><strong>□ND.</strong> Necessarily, distinct things of any type are necessarily distinct.</li>
+<li><strong>□Intensional Choice.</strong> Necessarily, if a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.</li>
+<li><strong>□Self-atoms are atoms.</strong> Necessarily, at each relational type, every self-atom is an atom.</li>
+<li><strong>□Self-atoms are strong atoms.</strong> Necessarily, at each relational type, every self-atom is a strong atom: it necessarily entails every entity of the type or its negation.</li>
+<li><strong>□Atoms are self-atoms.</strong> Necessarily, at each relational type, every atom is a self-atom: necessarily, if it is instantiated, it is an atom.</li>
+<li><strong>□Atoms are strong atoms.</strong> Necessarily, at each relational type, every atom is a strong atom: it necessarily entails every entity of the type or its negation.</li>
+<li><strong>¬ Actuality.</strong> There is a true proposition that entails every true proposition.</li>
+<li><strong>¬ Relational Choice.</strong> Every serial binary relation has a functional subrelation.</li>
+<li><strong>¬ Self-Atomicity (type t).</strong> Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.</li>
+<li><strong>¬ Axiom of Infinity (type e).</strong> There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.</li>
+<li><strong>¬ Infinity Schema (type e).</strong> There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.</li>
+<li><strong>¬ Possible Infinity (type e).</strong> Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.</li>
+<li><strong>¬ Witnessed Possibility.</strong> For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.</li>
+<li><strong>¬ Separated Structure.</strong> For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.</li>
+<li><strong>¬ Independence (signature Σ).</strong> No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.</li>
+<li><strong>¬ Maximalism (signature Σ).</strong> The Maximalism schema for the fixed nonlogical signature Σ: every closed identity of its language not provable in C(Σ) is false.</li>
+</ul>
+<h2 id="definition">Definition</h2>
+<p>Fix a set <span class="math inline">W</span> of worlds, a set <span class="math inline">D</span> of individuals, a group <span class="math inline">G</span> acting on <span class="math inline">W</span> and on <span class="math inline">D</span>, and a set <span class="math inline">X</span> of support points on which <span class="math inline">G</span> acts. Here <span class="math inline">B</span> is the regular open algebra of Cantor space, complete, atomless and homogeneous (every nonzero interval is isomorphic to <span class="math inline">B</span>). The worlds <span class="math inline">W</span> are the ultrafilters of <span class="math inline">B</span>, <span class="math inline">D</span> is a single individual, <span class="math inline">G=\operatorname{Aut}(B)</span> acting on the ultrafilters, and the support points are the elements of <span class="math inline">B</span>. A relation is admitted only if, for each tuple <span class="math inline">\bar x</span>, the set of worlds at which it holds of <span class="math inline">\bar x</span> is <span class="math inline">\hat b:=\{U:b\in U\}</span> for some <span class="math inline">b\in B</span>; so the propositions are the sets <span class="math inline">\hat b</span>, a copy of <span class="math inline">B</span>. The component is the action model on the category with object set <span class="math inline">W</span> and exactly one arrow between any two objects, every arrow acting on <span class="math inline">D</span> as the identity. Transport between its objects is then trivial, so an entity of relational type <span class="math inline">\bar\sigma t</span> there is a relation <span class="math inline">F\subseteq D_{\bar\sigma}\times W</span>, giving its extension at each world, and the same entities are available at every world. <span class="math inline">G</span> acts on these relations by <span class="math inline">g\cdot F:=\{(g\bar x,gw):(\bar x,w)\in F\}</span>, its action on the argument entities being defined in the same way by recursion on their types. <span class="math inline">F</span> is supported by a finite <span class="math inline">P\subseteq X</span> if <span class="math inline">g\cdot F=F</span> for every <span class="math inline">g</span> fixing <span class="math inline">P</span> pointwise. The component’s domains hold the supported relations satisfying the member’s further restriction, if any. Identity is genuine identity, transports being bijective. The evaluation point is a world of the component. Every constant of Σ is relational and denotes the top element of its type.</p>
+<p><em>A member of the group Supported models over an S5 component, which supplies this definition with the record’s settings, and the arguments marked as shared.</em></p>
+<h2 id="arguments">Arguments</h2>
+<h3 id="holds-boolean-completeness-type-t.">Holds □Boolean Completeness (type t).</h3>
+<p>For finite <span class="math inline">P\subseteq B</span>, the elements of <span class="math inline">B</span> fixed by the automorphisms fixing <span class="math inline">P</span> pointwise are the joins of the cells of <span class="math inline">\langle P\rangle</span>, and the join of a set invariant under those automorphisms is attained by at most two members per cell, by homogeneity (write-up, Lemmas 1–2). So at any world a family of propositions in the domain, being supported, has as union a finite union, which is a proposition and its least upper bound.</p>
+<p><em>Write-up: <a href="supported-boolean-complete-predecessor.html">supported-boolean-complete-predecessor</a>. Address: <code>supported-boolean-complete-component#boolean-completeness-t</code>. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.</em></p>
+<h3 id="fails-actuality.">Fails Actuality.</h3>
+<p>At a world <span class="math inline">U</span>, an actual-world proposition would be some <span class="math inline">\hat b</span> with <span class="math inline">b\in U</span> and <span class="math inline">\hat b\subseteq\hat c</span> for every <span class="math inline">c\in U</span>, so <span class="math inline">b</span> would be an atom of <span class="math inline">B</span>. <span class="math inline">B</span> is atomless.</p>
+<p><em>Write-up: <a href="supported-boolean-complete-predecessor.html">supported-boolean-complete-predecessor</a>. Address: <code>supported-boolean-complete-component#no-actuality</code>. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.</em></p>
+<h3 id="holds-atomlessness.">Holds □Atomlessness.</h3>
+<p>A possible proposition is <span class="math inline">\hat b</span> with <span class="math inline">b\ne0</span>. Since <span class="math inline">B</span> is atomless there is <span class="math inline">0&lt;d&lt;b</span>, and <span class="math inline">\hat d</span> is possible, entails <span class="math inline">\hat b</span> and differs from it. Every world sees every world, so this holds at every world.</p>
+<p><em>Write-up: <a href="supported-boolean-complete-predecessor.html">supported-boolean-complete-predecessor</a>. Address: <code>supported-boolean-complete-component#atomlessness</code>. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.</em></p>
+<h3 id="fails-relational-choice.">Fails Relational Choice.</h3>
+<p>At input and output type <span class="math inline">t</span>. Let <span class="math inline">R:=\lambda p\,q\,.\,p\to(q\land q\le p\land q\ne p)</span>, serial at the world of evaluation <span class="math inline">U_0</span> since <span class="math inline">B</span> is atomless. Suppose <span class="math inline">S\le R</span> is functional at <span class="math inline">U_0</span>, with fibres <span class="math inline">s(p,q)</span> and support <span class="math inline">P</span>, and let <span class="math inline">k</span> be the cell of <span class="math inline">\langle P\rangle</span> in <span class="math inline">U_0</span>; the automorphisms <span class="math inline">H_P</span> fixing <span class="math inline">P</span> pointwise fix <span class="math inline">S</span> and <span class="math inline">k</span>. Let <span class="math inline">q</span> be the unique proposition with <span class="math inline">Skq</span> at <span class="math inline">U_0</span>. Then <span class="math inline">0&lt;q&lt;k</span>, and <span class="math inline">c:=s(k,q)\wedge k</span> is in <span class="math inline">U_0</span> and below <span class="math inline">q</span>, since <span class="math inline">S\le R</span>. The fibre of the claim that <span class="math inline">Sk</span> is functional is fixed by <span class="math inline">H_P</span>, so it is a join of cells, and it contains <span class="math inline">U_0</span>, so it contains <span class="math inline">\hat k</span>. Shrinking <span class="math inline">c</span> if <span class="math inline">c=q</span>, we may take <span class="math inline">0&lt;c&lt;q</span>. Homogeneity gives an automorphism of <span class="math inline">[0,k-c]</span> moving <span class="math inline">q-c</span>; with the identity below <span class="math inline">c</span> and below <span class="math inline">\neg k</span> it is an <span class="math inline">h\in H_P</span> with <span class="math inline">hq\ne q</span>. Then <span class="math inline">s(k,hq)=h\,s(k,q)\ge h c=c</span>. So at the worlds in <span class="math inline">\hat c</span>, inside <span class="math inline">\hat k</span>, both <span class="math inline">q</span> and <span class="math inline">hq</span> bear <span class="math inline">Sk</span>, and <span class="math inline">Sk</span> is not functional there: a contradiction.</p>
+<p><em>Write-up: <a href="supported-boolean-complete-predecessor.html">supported-boolean-complete-predecessor</a>. Address: <code>supported-boolean-complete-component#no-relational-choice</code>. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.</em></p>
+<h3 id="holds-transversal.">Holds □Transversal.</h3>
+<p>At every type and every world. Coextension at a world <span class="math inline">U</span> is sharing a germ at <span class="math inline">U</span>: agreeing below some <span class="math inline">b\in U</span>. Two facts about <span class="math inline">G=\operatorname{Aut}(B)</span> give each germ a canonical representative. First, supports intersect: the automorphisms fixing finite subalgebras <span class="math inline">A_1</span> and <span class="math inline">A_2</span> generate those fixing <span class="math inline">A_1\cap A_2</span>. So every entity, and with a further step every germ, has a least support. Second, propagation: two entities supported by <span class="math inline">A</span> that agree below a nonzero <span class="math inline">b</span> under an <span class="math inline">A</span>-cell <span class="math inline">c</span> agree under all of <span class="math inline">c</span>. Some automorphism fixing <span class="math inline">A</span> swaps <span class="math inline">b</span> and <span class="math inline">c-b</span>. The canonical representative of a germ at <span class="math inline">U</span> is any representative with the germ’s least support, cut down to the cell of that support containing <span class="math inline">U</span> and made <span class="math inline">0</span> elsewhere. The witness <span class="math inline">\Phi</span> holds of <span class="math inline">Y</span> at <span class="math inline">U</span> just when <span class="math inline">Y</span> is the canonical representative of its own germ there. <span class="math inline">\Phi</span> is invariant under <span class="math inline">G</span>, and its fibre at <span class="math inline">Y</span> is a join of cells of the least support of <span class="math inline">Y</span>, so it is admitted (write-up).</p>
+<p><em>Write-up: <a href="transversal-supported-boolean-component.html">transversal-supported-boolean-component</a>. Address: <code>supported-boolean-complete-component#transversal</code>. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 29 October 2026; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-30.</em></p>
+<h3 id="holds-bf.">Holds □BF.</h3>
+<p>At every type. In the component the same entities are available at every world, transport being trivial. With a free root <span class="math inline">r</span>, every component entity is the transport of a root entity, the one with empty current extension; so what holds necessarily of every root entity holds at every world of every entity there.</p>
+<p><em>From the group </em>Supported models over an S5 component<em>, shared argument <code>supported-s5-components#barcan</code>. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, for supported-boolean-complete-predecessor; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, and stated for the group, 2026-10-29.</em></p>
+<h3 id="holds-nd.">Holds □ND.</h3>
+<p>At every type. Every arrow acts as the identity and an entity is the same relation at every world, so distinct entities are distinct at every world.</p>
+<p><em>From the group </em>Supported models over an S5 component<em>, shared argument <code>supported-s5-components#component-distinctness</code>. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.</em></p>
+<h3 id="holds-intensional-choice.">Holds □Intensional Choice.</h3>
+<p>At every type. In the component, let <span class="math inline">F</span> be instantiated at every world, with fibre <span class="math inline">\hat c_x</span> at <span class="math inline">x</span>. The clopen sets <span class="math inline">\hat c_x</span> cover the Stone space of <span class="math inline">B</span>, so by compactness finitely many do, those of <span class="math inline">x_1,\dots,x_k</span>, distinct. Let <span class="math inline">G</span> hold of <span class="math inline">x_i</span> exactly on <span class="math inline">\hat e_i</span>, where <span class="math inline">e_i:=c_{x_i}\wedge\neg\bigvee_{j&lt;i}c_{x_j}</span>, and of nothing else. Its fibres are in <span class="math inline">B</span>, and it is supported by the supports of the <span class="math inline">x_i</span> together with the <span class="math inline">e_i</span>, which are support points; so <span class="math inline">G</span> is admitted, <span class="math inline">G\le F</span>, and at each world exactly one <span class="math inline">x_i</span> has <span class="math inline">G</span>. With a free root <span class="math inline">r</span>, a root <span class="math inline">F=(R,a)</span> with <span class="math inline">\Box\exists x\,Fx</span> has a nonempty current extension and a component part <span class="math inline">a</span> as above; pair a singleton <span class="math inline">\{x_0\}\subseteq R</span> with the <span class="math inline">G</span> built for <span class="math inline">a</span>. Only finitely many choices are made. So Intensional Choice holds at every world the evaluation point sees, and at <span class="math inline">r</span>.</p>
+<p><em>From the group </em>Supported models over an S5 component<em>, shared argument <code>supported-s5-components#intensional-choice-compactness</code>. It requires that The worlds are the ultrafilters of a Boolean algebra <span class="math inline">B</span>, each fibre of an admitted relation is <span class="math inline">\hat b:=\{U:b\in U\}</span> for some <span class="math inline">b\in B</span>, and the elements of <span class="math inline">B</span> are among the support points. Here: The worlds are the ultrafilters of <span class="math inline">B</span>, the fibres are its elements’ clopen sets, and its elements are the support points. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.</em></p>
+<h3 id="holds-self-atoms-are-atoms-self-atoms-are-strong-atoms.-fails-self-atomicity-type-t.">Holds □Self-atoms are atoms, □Self-atoms are strong atoms. Fails Self-Atomicity (type t).</h3>
+<p>A self-atom of any relational type at an object <span class="math inline">W</span> is instantiated at some arrow <span class="math inline">k</span> out of <span class="math inline">W</span>, and its transport along <span class="math inline">k</span> is an atom at <span class="math inline">k</span>’s target instantiated at the identity there. The existential projection of an atom <span class="math inline">I</span> of a relational type, the proposition <span class="math inline">\exists\bar x\, .\,I\bar x</span>, is an atom of type <span class="math inline">t</span>: it is in the domain, it is not bottom, and for any proposition <span class="math inline">p</span> the entity <span class="math inline">I\land\lambda\bar x\, .\,p</span> lies below the atom <span class="math inline">I</span>, so is <span class="math inline">I</span> or bottom, which puts <span class="math inline">p</span> above the projection or disjoint from it. So the projection is a true atom at <span class="math inline">k</span>’s target, which the condition excludes. Hence no reachable object has a self-atom, and Self-atoms are atoms and Self-atoms are strong atoms hold vacuously at every type and every reachable object, while Self-Atomicity (type t) fails at the evaluation point, the top proposition having no self-atom below it.</p>
+<p><em>General argument <code>arguments/no-actuality-no-self-atoms</code>. It requires that Actuality fails at the identity of every object reachable from the evaluation point: no atom of the domain of propositions there contains that identity. In a one-object model this is the failure of Actuality at the evaluation point, Actuality being a closed sentence. Here: Every world sees every world, and at none of them does Actuality hold (argument no-actuality). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</em></p>
+<h3 id="holds-atomlessness-atoms-are-self-atoms-atoms-are-strong-atoms-self-atoms-are-atoms-self-atoms-are-strong-atoms.-fails-self-atomicity-type-t.">Holds □Atomlessness, □Atoms are self-atoms, □Atoms are strong atoms, □Self-atoms are atoms, □Self-atoms are strong atoms. Fails Self-Atomicity (type t).</h3>
+<p>An atom of a relational type at a reachable object would give, by existential projection, an atom of type <span class="math inline">t</span> there (as in the argument no-actuality-no-self-atoms), which the condition excludes; so no reachable object has an atom of any relational type, nor a self-atom, since a self-atom is an atom where it is instantiated. All four bridge principles therefore hold vacuously at every type and every reachable object, and Self-Atomicity (type t) fails at the evaluation point.</p>
+<p><em>General argument <code>arguments/no-atoms-no-self-atoms</code>. It requires that At every object reachable from the evaluation point, no proposition in the domain is an atom. Here: Every world sees every world, and no proposition is an atom (argument atomlessness). By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.</em></p>
+<p><em>Revised 2026-10-29 by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr:</em> Now also gives □Atomlessness, which the condition states: a reachable object with no atom of type <span class="math inline">t</span> satisfies Atomlessness. The bridge verdicts and the failure of Self-Atomicity are now also consequences of □Atomlessness by recorded results.</p>
+<h3 id="fails-axiom-of-infinity-type-e-infinity-schema-type-e-possible-infinity-type-e.">Fails Axiom of Infinity (type e), Infinity Schema (type e), Possible Infinity (type e).</h3>
+<p>No two individuals are distinct, and the numeral <span class="math inline">\operatorname{Suc}_e\mathbf{0}_e</span> holds of the universal property at type <span class="math inline">e</span> at every world.</p>
+<p><em>General argument <code>arguments/one-individual</code>. It requires that There is exactly one individual, at every world. Here: There is a single individual. By Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction, 2026-10-02.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic.</p>
+<h3 id="fails-witnessed-possibility-separated-structure-independence-signature-σ-maximalism-signature-σ.">Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).</h3>
+<p>Let <span class="math inline">c\in\Sigma</span> have relational type <span class="math inline">\tau</span>, so <span class="math inline">c=\top_\tau</span> necessarily. Witnessed Possibility fails for the pure formula <span class="math inline">x\ne\top_\tau</span>, witnessed by <span class="math inline">\bot_\tau</span> but impossible of <span class="math inline">c</span>; Separated Structure fails since <span class="math inline">\lambda x\, .\,x</span> and <span class="math inline">\lambda x\, .\,\top_\tau</span> agree on <span class="math inline">c</span> and differ; Independence (signature Σ) fails since <span class="math inline">c</span> denotes what the closed pure term <span class="math inline">\top_\tau</span> denotes; Distinctness Maximalism (signature Σ) fails since <span class="math inline">c=\top_\tau</span> is a true identity that C(Σ) does not prove.</p>
+<p><em>General argument <code>arguments/sigma-top</code>. It requires that Every constant of Σ is relational, and each denotes the top element of its type. Here: This is the interpretation the definition fixes. By Claude Fable 5.1 (Anthropic), at Cian Dorr’s request, 2026-09-22.</em></p>
+<p><em>Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr’s direction:</em> Moved from the group finite-support-one-object to the topic; it uses nothing about the model.</p>
+<h2 id="notes">Notes</h2>
+<p>The component of supported-boolean-complete-predecessor, recorded on its own: a model of C5 with □Boolean Completeness (type <span class="math inline">t</span>), □BF, □Atomlessness and □Intensional Choice, in which Actuality and Relational Choice fail. It separates Intensional Choice with Boolean Completeness (type <span class="math inline">t</span>), even with BF or Vicinity, from Actuality. Transversal holds, so Transversal Choice fails with Relational Choice; the model does not separate Intensional Choice from Transversal; supported-diagonal-tail-permutations, with a smaller symmetry group, does.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><strong>Astra via Kodsi 25 Oct</strong> — GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, Observer separation with propositional completeness and divergent possibilities, research note of 25 October 2026, §§1–3 (unpaginated), in Daniel Kodsi’s pull request #18 (complete-boolean-root.md in the integration register).</li>
+<li><strong>Dorr 29 Oct</strong> — Cian Dorr, reformulation as an action model, 29 October 2026, in conversation with Claude Opus 5.5 (Anthropic).</li>
+</ul>
+<p class="cert">
+Record: <code>topics/classicism/models/supported-boolean-complete-component.yaml</code>
+</p>
+<h2 id="paper-references">Paper references</h2>
+<ul>
+<li><strong>Background: Classicism.</strong> Bacon, Andrew, and Cian Dorr (2024). Classicism. In Peter Fritz and Nicholas K. Jones (eds), Higher-Order Metaphysics, Oxford University Press, pp. 109–190. The map was built from the draft dated 16 May 2023, 87 pages, which does not differ materially from the published version; all page, proposition and footnote locators in this map refer to that draft’s numbering. — §3.5, pp. 58–61. Action models.</li>
+</ul>
+</body></html>

@@ -121,6 +121,7 @@ preorders: coextensive but distinct relations each include the other.
 
 ::: lemma {#bourbaki-witt}
 title: the Bourbaki–Witt fixed-point lemma
+lean: [Classicism.BW.bourbaki_witt, Classicism.BW.bourbaki_witt_fixed_point₀]
 ---
 Work at any type $\sigma$, including $e$. Let $X^{\sigma t}$ be a property, and
 $R^{\sigma\sigma t}$ and $F^{\sigma\sigma t}$ relations; write $x\preccurlyeq y$ for
@@ -238,6 +239,7 @@ property, show that the members of $M$ having it form a closed property.
 
 ::: lemma {#bourbaki-witt-admissible}
 title: the Bourbaki–Witt lemma for admissible chains
+lean: [Classicism.BW.bourbaki_witt_admissible, Classicism.BW.bourbaki_witt_fixed_point]
 ---
 The [[bourbaki-witt|Bourbaki–Witt lemma]] has a variant for the case where only some
 chains are known to have suprema. These are the chains singled out by a property

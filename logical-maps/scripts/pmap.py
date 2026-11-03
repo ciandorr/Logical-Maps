@@ -2777,6 +2777,24 @@ def validate_topic(topic_id: str, *, quiet=False) -> bool:
                 for c in m["lean"].get("meets") or {}:
                     if c not in (m.get("met") or {}):
                         errors.append(f"{m['_file']}: lean.meets '{c}', which the record does not meet")
+                # A model of its variants at other settings: keyed as the settings that change the model.
+                group = next((g for g in data.get("groups", []) if g["id"] == m.get("group")), None)
+                variants = {lean_variant_key(group, m, v, lean_config(data)): v for v in data["models"]
+                            if v.get("variant_of") == m["id"]} if group else {}
+                for key, e in (m["lean"].get("variants") or {}).items():
+                    v = variants.get(key)
+                    if not key or v is None:
+                        errors.append(f"{m['_file']}: lean.variants '{key}' is no variant's settings other than Σ's "
+                                      f"(variants: {', '.join(sorted(k for k in variants if k)) or 'none'})")
+                        continue
+                    if not (e.get("model") and e.get("is_model")) and not e.get("param"):
+                        errors.append(f"{m['_file']}: lean.variants '{key}' needs `model` and `is_model`, or `param`")
+                    elif not e.get("model") and lean_block(v, data) is None:
+                        errors.append(f"{m['_file']}: lean.variants '{key}' gives `param`, but the group's lean.settings "
+                                      "do not cover the variant's settings; give `model` and `is_model`")
+                    for c in e.get("meets") or {}:
+                        if c not in (v.get("met") or {}):
+                            errors.append(f"{m['_file']}: lean.variants '{key}' meets '{c}', which the variant does not meet")
         # A verdict proved in Lean must be one the map gives the model: the map's verdicts are
         # its arguments' (and what follows from them), and Lean only certifies them.
         E, seen = an["engine"], set()
@@ -3667,10 +3685,46 @@ def lean_relative_model(m: dict, model: str, is_model: str | None, cfg: dict) ->
             "meets": {k: f(v) for k, v in (spec.get("meets") or {}).items()}, "given": spec.get("given")}
 
 
+def lean_variant_key(group: dict, member: dict, variant: dict, cfg: dict) -> str:
+    """The settings in which a generated variant differs from its member, other than the one by
+    which the topic interprets Σ (`lean.verdict.relative_models`), written as in a variant's id:
+    "" when the two have the same Lean model of the pure language."""
+    sigma = (cfg["verdict"].get("relative_models") or {}).get("setting")
+    ms, vs = member.get("settings") or {}, variant.get("settings") or {}
+    return "-".join(f"{k}-{vs.get(k)}" for k in (group.get("parameters") or {})
+                    if k != sigma and vs.get(k) != ms.get(k))
+
+
+def lean_block(m: dict, data: dict, cfg: dict | None = None) -> dict | None:
+    """A model's `lean`. A generated variant has none in its file; its Lean model is its member's
+    when the two differ only in the setting that interprets Σ, which the topic applies to the model
+    of the pure language (`lean_relative_model`): the member's `lean` then serves, marked
+    `inherited` with the member's id. A variant differing in another setting has the model its
+    member's `lean.variants` gives at those settings, if any, with no verdicts of its own."""
+    if not m.get("variant_of"):
+        return m.get("lean") if isinstance(m.get("lean"), dict) else None
+    member = next((x for x in data["models"] if x["id"] == m["variant_of"]), None)
+    group = next((g for g in data.get("groups", []) if g["id"] == m.get("group")), None)
+    base = (member or {}).get("lean")
+    if not isinstance(base, dict) or not group:
+        return None
+    key = lean_variant_key(group, member, m, cfg or lean_config(data))
+    if not key:
+        return {**base, "inherited": member["id"]}
+    entry = (base.get("variants") or {}).get(key)
+    if not isinstance(entry, dict):
+        return None
+    glean = group.get("lean") or {}
+    if not entry.get("model") and not (glean and settings_match(glean.get("settings"), m.get("settings") or {})):
+        return None  # `param` names the group's construction, which does not cover these settings
+    return dict(entry)
+
+
 def lean_verdicts(data: dict) -> list[dict]:
     """The single verdicts of models proved in Lean: a model record's `lean.verdicts`, each
     with the model's id and Lean term, the principle, whether it holds, and its generated
-    statement's name, `Models.<model>.<principle>` under the topic's `Statements`."""
+    statement's name, `Models.<model>.<principle>` under the topic's `Statements`. A generated
+    variant's are not here: those of its member's that carry over are in `lean_derived_verdicts`."""
     cfg = lean_config(data)
     relative = {p["id"] for p in data["principles"] if p.get("category") in cfg["verdict"]["relative_categories"]}
     out = []
@@ -3769,7 +3823,11 @@ def lean_derived_verdicts(data: dict) -> list[dict]:
     map applies to the model (a group's shared argument, or a topic argument whose conditions it
     meets) with a verdict proved in Lean, when the model's record (or its group) proves in Lean
     each condition the argument requires. The certificate applies the argument's to the model;
-    `lean_verdicts` gives the model's own verdicts, which take precedence."""
+    `lean_verdicts` gives the model's own verdicts, which take precedence.
+
+    A generated variant is certified the same way on its Lean model (`lean_block`). One with its
+    member's model also gets the member's verified own verdicts on principles not relative to Σ
+    that the map gives it directly, each certified by the member's certificate (`via` None)."""
     groups = {g["id"]: g for g in data.get("groups", [])}
     general = {c.get("id"): c for c in data.get("general_arguments", [])}
     defs = {p["id"]: p.get("lean_def") for p in data["principles"]}
@@ -3779,8 +3837,8 @@ def lean_derived_verdicts(data: dict) -> list[dict]:
     own = {(v["model"], v["principle"]): v for v in lean_verdicts(data)}
     out = []
     for m in data["models"]:
-        lean = m.get("lean")
-        if not isinstance(lean, dict) or m.get("variant_of") or m.get("_companion_of") \
+        lean = lean_block(m, data, cfg)
+        if not isinstance(lean, dict) or m.get("_companion_of") \
                 or choiceless(groups.get(m.get("group")), m.get("settings") or {}):  # Lean's metatheory has choice
             continue
         group = groups.get(m.get("group"))
@@ -3802,6 +3860,21 @@ def lean_derived_verdicts(data: dict) -> list[dict]:
                 proofs[c] = fill(glean["meets"][c])
         holding = {v["principle"]: v["ref"] for k, v in own.items() if k[0] == m["id"] and v["holds"]}
         done = {k[1] for k in own if k[0] == m["id"]}
+        name = lambda pid: f"Classicism.Map.Models.{_lean_name(m['id'])}.{_lean_name(pid)}"
+        entry = lambda pid, holds, cert, via: {
+            "model": m["id"], "term": model, "principle": pid, "holds": holds, "ref": name(pid), "status": "stated",
+            "_file": m["_file"], "cert": cert, "derived": True, "via": via,
+            "statement": f"Models.{_lean_name(m['id'])}.{_lean_name(pid)}"}
+        if lean.get("inherited"):  # the member's own verdicts about the same model of the pure language
+            for k, v in own.items():
+                pid = v["principle"]
+                if k[0] != lean["inherited"] or pid in relative or v["status"] != "verified" or pid in done \
+                        or pid not in (m.get("satisfies" if v["holds"] else "violates") or []):
+                    continue
+                done.add(pid)
+                if v["holds"]:
+                    holding[pid] = name(pid)
+                out.append(entry(pid, v["holds"], v["ref"], None))
         rm = lean_relative_model(m, model, is_model, cfg)
         # Verdicts on the relative categories second, so that their `given` can cite the others.
         for phase in (False, True):
@@ -3848,12 +3921,9 @@ def lean_derived_verdicts(data: dict) -> list[dict]:
                         cert = f"⟨{is_model}, {e['ref']} ({model}) ({is_model}) {' '.join(args + givens)}⟩"
                     done.add(pid)
                     if holds:
-                        holding[pid] = f"Classicism.Map.Models.{_lean_name(m['id'])}.{_lean_name(pid)}"
-                    out.append({"model": m["id"], "term": term, "principle": pid, "holds": holds,
-                                "ref": f"Classicism.Map.Models.{_lean_name(m['id'])}.{_lean_name(pid)}",
-                                "status": "stated", "_file": m["_file"], "cert": cert, "derived": True,
-                                "via": {"group": gid, "argument": source.get("id")} if gid else {"argument": source.get("id")},
-                                "statement": f"Models.{_lean_name(m['id'])}.{_lean_name(pid)}"})
+                        holding[pid] = name(pid)
+                    via = {"group": gid, "argument": source.get("id")} if gid else {"argument": source.get("id")}
+                    out.append({**entry(pid, holds, cert, via), "term": term})
     return out
 
 
@@ -4014,10 +4084,14 @@ def generate_lean_statements(topic_id: str) -> Path | None:
                     "Each verdict a general argument gives a model on the map, certified by applying the",
                     "argument's certificate (`MapArguments.lean`) to the model: to its proof of being a model,",
                     "and its proofs of the conditions the argument requires (its record's `lean.meets`, or its",
-                    "group's).", "-/", "", f"namespace {ns}.Map.Models", f"open {ns}", ""]
+                    "group's). A group's generated variant with its member's model (differing only in how `Σ`",
+                    "is interpreted) gets them the same way, and its member's own verdicts on the principles",
+                    "not relative to `Σ`, by the member's certificates.", "-/", "",
+                    f"namespace {ns}.Map.Models", f"open {ns}", ""]
             for v in derived:
                 via = v["via"]
-                where = f"`{via['group']}`'s argument `{via['argument']}`" if via.get("group") else f"the argument `{via['argument']}`"
+                where = (f"`{via['group']}`'s argument `{via['argument']}`" if via.get("group") else f"the argument `{via['argument']}`") \
+                    if via else f"its member's certificate, on the same model (`{v['cert']}`)"
                 dout += [f"/-- `{v['model']}`: {names.get(v['principle'], v['principle'])} "
                          + ("holds" if v["holds"] else "fails") + f", by {where}. -/",
                          f"theorem {v['statement'].removeprefix('Models.')} : Statements.{v['statement']} :=",
@@ -5436,6 +5510,18 @@ def _selftest_groups():
     assert got == sorted(tuple(sorted(d.items())) for d in [{"ind": "many", "meta": "choice"}, {"ind": "one", "meta": "reals"},
                                                             {"ind": "many", "meta": "reals"}, {"ind": "many", "meta": "socks"}]), got
     assert "numbered" in conditions_met(xm, xg, {"ind": "one", "meta": "reals"}) and "numbered" not in conditions_met(xm, xg, {"ind": "many", "meta": "socks"})
+    # A variant's Lean model: its member's when only Σ's setting differs; else what lean.variants gives.
+    lg = {"id": "g", "parameters": {"sigma": {"generate": True, "values": {"top": "T.", "atom": "A."}},
+                                    "ind": {"generate": True, "values": {"one": "O.", "many": "M."}}},
+          "lean": {"model": "G {param}", "is_model": "G.ok {param}", "settings": {"ind": "many"}}}
+    lm = {"id": "m", "group": "g", "settings": {"sigma": "top", "ind": "many"}, "_file": "m",
+          "lean": {"param": "p", "variants": {"ind-one": {"param": "q"}}}}
+    ld = {"topic": {"lean": {"verdict": {"relative_models": {"setting": "sigma"}}}}, "principles": [], "groups": [lg], "models": [lm]}
+    lv = lambda s: {"id": "v", "group": "g", "variant_of": "m", "settings": s}
+    assert lean_block(lv({"sigma": "atom", "ind": "many"}), ld)["inherited"] == "m"
+    assert lean_block(lv({"sigma": "atom", "ind": "one"}), ld) is None  # `param` is the group's construction, for ind many
+    lm["lean"]["variants"]["ind-one"] = {"model": "H", "is_model": "H.ok"}
+    assert lean_block(lv({"sigma": "top", "ind": "one"}), ld) == {"model": "H", "is_model": "H.ok"}
 
     # A credit does not repeat a date its author string already gives.
     assert _with_date("C, 20 September 2026", "2026-09-20") == "C, 20 September 2026" and _with_date("C", "2026-09-20") == "C, 2026-09-20"

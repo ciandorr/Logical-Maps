@@ -231,7 +231,7 @@
   "lean": {
    "type": "object",
    "additionalProperties": false,
-   "description": "The model formalized in Lean: its verdicts proved there one by one, and what the verdicts that the map's general arguments give it need. The model's own record only: a group's generated variants are other models.",
+   "description": "The model formalized in Lean: its verdicts proved there one by one, and what the verdicts that the map's general arguments give it need. A group's generated variants are other models: one differing from the member only in the setting by which the topic interprets Σ (lean.verdict.relative_models) has the member's Lean model, and gets the verdicts the map's arguments give it there and the member's own verdicts on principles not relative to Σ; another has the model `variants` gives it, if any.",
    "properties": {
     "model": {
      "type": "string",
@@ -241,6 +241,20 @@
     "param": {"type": "string", "pattern": "\\S", "description": "For a member of a group with lean: the value of the group's variable."},
     "is_model": {"type": "string", "pattern": "\\S", "description": "A proof that the Lean model is a model; a member with a `param` may leave it to its group's."},
     "meets": {"type": "object", "additionalProperties": {"type": "string"}, "description": "For each condition the record meets: a proof of the condition's Lean predicate, for the model (a condition of the topic) or for `param` (a group's)."},
+    "variants": {
+     "type": "object",
+     "description": "For a group's member: the Lean model of its generated variants at settings that change the model. Each key is the settings that differ from the member's, other than the topic's lean.verdict.relative_models setting, written as in a variant's id (`individuals-singleton`); each value gives the model as the member's own lean does, by `model` and `is_model` or by `param`, and its `meets`. A variant differing only in that setting has the member's model; one with no entry here has none.",
+     "additionalProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+       "model": {"type": "string", "pattern": "\\S"},
+       "param": {"type": "string", "pattern": "\\S"},
+       "is_model": {"type": "string", "pattern": "\\S"},
+       "meets": {"type": "object", "additionalProperties": {"type": "string"}}
+      }
+     }
+    },
     "verdicts": {
      "type": "array",
      "minItems": 1,

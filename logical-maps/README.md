@@ -160,8 +160,16 @@ generated statement, `Models.<model>.<principle>`, in `ModelStatements.lean`, fr
 topic's `lean.verdict` templates (`holds`, `fails`, with `{model}` and `{def}`; `imports`;
 and a `relative` conjunct for principles in `relative_categories`). Validation requires each
 such verdict to be one the map already gives the model. The viewer counts the verified ones
-on the model's badge and shows each on the argument that gives it. The record covers that model alone: a
-group's generated variants do not inherit it.
+on the model's badge and shows each on the argument that gives it. A group's generated variant
+has no `lean` of its own. When it differs from its member only in the setting by which the topic
+interprets Σ (`lean.verdict.relative_models.setting`, which builds the Σ-model from the model of
+the pure language), its Lean model is the member's: it gets the verdicts the general arguments
+give it there (below), and the member's verified own verdicts on principles not relative to Σ
+that the map gives it directly, certified by the member's certificates. A variant differing in
+another setting has a different model, given, if at all, by the member's `lean.variants`, keyed by
+those settings as in the variant's id (`individuals-singleton: {model, is_model, meets}`, or
+`param` where the group's `lean.settings` cover them). The variants' certificates are generated
+into `MapDerived.lean`, so no status is written to a file.
 
 General arguments are formalised the same way, so that a model's verdicts follow in Lean
 along the route the map gives them:
@@ -470,7 +478,8 @@ claims of the same standing as the rest. Inheritance at such a value is opt-in: 
 gets only the arguments, its own, its group's and the topic's, marked `choice: free`, reviewed
 as not using the axiom of choice; an argument marked `choice: uses`, or not marked (unreviewed),
 does not apply there. The engine's derivations, being theorems of C, apply as everywhere. Such
-a model gets no Lean certificates, Lean's metatheory having choice. Mark an argument
+a model gets no Lean certificates, Lean's metatheory having choice. Another variant gets Lean
+certificates as its member does when only the interpretation of Σ differs (README, "Lean"). Mark an argument
 `choice: free` only after reading it for uses of choice, and `choice: uses` when it chooses
 (from a serial relation, an equivalence relation, an ultrafilter, a well-ordering).
 

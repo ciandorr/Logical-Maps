@@ -405,6 +405,26 @@ def Models.finite_support_dyadic_roundings.independence_signature_r : Prop :=
 def Models.finite_support_dyadic_roundings.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.pow2))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.pow2))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.pow2))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `finite-support-dyadic-roundings-sigma-true-atom`: BF fails. -/
+def Models.finite_support_dyadic_roundings_sigma_true_atom.barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).HoldsAx Classicism.P.Barcan.schemaIn
+
+/-- `finite-support-dyadic-roundings-sigma-true-atom`: Boolean Completeness fails. -/
+def Models.finite_support_dyadic_roundings_sigma_true_atom.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
+
+/-- `finite-support-dyadic-roundings-sigma-true-atom`: Actuality holds. -/
+def Models.finite_support_dyadic_roundings_sigma_true_atom.actuality : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).HoldsAx Classicism.P.Actuality.schemaIn
+
+/-- `finite-support-dyadic-roundings-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.finite_support_dyadic_roundings_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `finite-support-dyadic-roundings-sigma-true-atom`: Transversal Choice holds. -/
+def Models.finite_support_dyadic_roundings_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.pow2)).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
 /-- `finite-support-identity-or-collapse-surjections`: Actuality holds. -/
 def Models.finite_support_identity_or_collapse_surjections.actuality : Prop :=
   (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx Classicism.P.Actuality.schemaIn
@@ -436,6 +456,34 @@ def Models.finite_support_identity_or_collapse_surjections.independence_signatur
 /-- `finite-support-identity-or-collapse-surjections`: No Contingency (signature Σ) holds. -/
 def Models.finite_support_identity_or_collapse_surjections.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.monoSurj01))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.monoSurj01))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.monoSurj01))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
+
+/-- `finite-support-identity-or-collapse-surjections-sigma-true-atom`: Boolean Completeness fails. -/
+def Models.finite_support_identity_or_collapse_surjections_sigma_true_atom.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
+
+/-- `finite-support-identity-or-collapse-surjections-sigma-true-atom`: Actuality holds. -/
+def Models.finite_support_identity_or_collapse_surjections_sigma_true_atom.actuality : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx Classicism.P.Actuality.schemaIn
+
+/-- `finite-support-identity-or-collapse-surjections-sigma-true-atom`: Atomicity fails. -/
+def Models.finite_support_identity_or_collapse_surjections_sigma_true_atom.atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx Classicism.P.Atomicity.schemaIn
+
+/-- `finite-support-identity-or-collapse-surjections-sigma-true-atom`: Atomicity (type t) fails. -/
+def Models.finite_support_identity_or_collapse_surjections_sigma_true_atom.atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx Classicism.P.AtomicityT.schemaIn
+
+/-- `finite-support-identity-or-collapse-surjections-sigma-true-atom`: BF holds. -/
+def Models.finite_support_identity_or_collapse_surjections_sigma_true_atom.barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx Classicism.P.Barcan.schemaIn
+
+/-- `finite-support-identity-or-collapse-surjections-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.finite_support_identity_or_collapse_surjections_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `finite-support-identity-or-collapse-surjections-sigma-true-atom`: Transversal Choice holds. -/
+def Models.finite_support_identity_or_collapse_surjections_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.monoSurj01)).HoldsAx Classicism.P.TransversalChoice.schemaIn
 
 /-- `finite-support-identity-or-collapse`: Actuality holds. -/
 def Models.finite_support_identity_or_collapse.actuality : Prop :=
@@ -469,6 +517,34 @@ def Models.finite_support_identity_or_collapse.independence_signature_r : Prop :
 def Models.finite_support_identity_or_collapse.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono01))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono01))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono01))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `finite-support-identity-or-collapse-sigma-true-atom`: Boolean Completeness fails. -/
+def Models.finite_support_identity_or_collapse_sigma_true_atom.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
+
+/-- `finite-support-identity-or-collapse-sigma-true-atom`: Actuality holds. -/
+def Models.finite_support_identity_or_collapse_sigma_true_atom.actuality : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).HoldsAx Classicism.P.Actuality.schemaIn
+
+/-- `finite-support-identity-or-collapse-sigma-true-atom`: Atomicity fails. -/
+def Models.finite_support_identity_or_collapse_sigma_true_atom.atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).HoldsAx Classicism.P.Atomicity.schemaIn
+
+/-- `finite-support-identity-or-collapse-sigma-true-atom`: Atomicity (type t) fails. -/
+def Models.finite_support_identity_or_collapse_sigma_true_atom.atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).HoldsAx Classicism.P.AtomicityT.schemaIn
+
+/-- `finite-support-identity-or-collapse-sigma-true-atom`: BF fails. -/
+def Models.finite_support_identity_or_collapse_sigma_true_atom.barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).HoldsAx Classicism.P.Barcan.schemaIn
+
+/-- `finite-support-identity-or-collapse-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.finite_support_identity_or_collapse_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `finite-support-identity-or-collapse-sigma-true-atom`: Transversal Choice holds. -/
+def Models.finite_support_identity_or_collapse_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono01)).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
 /-- `finite-support-monotone-maps`: BF fails. -/
 def Models.finite_support_monotone_maps.barcan_r : Prop :=
   (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).HoldsAx Classicism.P.Barcan.schemaIn
@@ -480,6 +556,34 @@ def Models.finite_support_monotone_maps.no_pure_contingency_r : Prop :=
 /-- `finite-support-monotone-maps`: Transversal Choice holds. -/
 def Models.finite_support_monotone_maps.transversal_choice_r : Prop :=
   (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
+/-- `finite-support-monotone-maps-sigma-top`: Atomlessness holds. -/
+def Models.finite_support_monotone_maps_sigma_top.atomlessness : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).HoldsAx Classicism.P.Atomlessness.schemaIn
+
+/-- `finite-support-monotone-maps-sigma-top`: Boolean Completeness fails. -/
+def Models.finite_support_monotone_maps_sigma_top.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
+
+/-- `finite-support-monotone-maps-sigma-top`: BF fails. -/
+def Models.finite_support_monotone_maps_sigma_top.barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).HoldsAx Classicism.P.Barcan.schemaIn
+
+/-- `finite-support-monotone-maps-sigma-top`: No Pure Contingency holds. -/
+def Models.finite_support_monotone_maps_sigma_top.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `finite-support-monotone-maps-sigma-top`: Transversal Choice holds. -/
+def Models.finite_support_monotone_maps_sigma_top.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
+/-- `finite-support-monotone-maps-sigma-top`: Independence (signature Σ) fails. -/
+def Models.finite_support_monotone_maps_sigma_top.independence_signature_r : Prop :=
+  (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono))).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono))).HoldsAx (Classicism.Meta.AxiomSet.independence _)
+
+/-- `finite-support-monotone-maps-sigma-top`: No Contingency (signature Σ) holds. -/
+def Models.finite_support_monotone_maps_sigma_top.no_contingency_signature_r : Prop :=
+  (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.mono)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.mono))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
 /-- `finite-support-monotone-surjections`: BF holds. -/
 def Models.finite_support_monotone_surjections.barcan_r : Prop :=
@@ -556,6 +660,26 @@ def Models.finite_support_truncated_shifts.independence_signature_r : Prop :=
 /-- `finite-support-truncated-shifts`: No Contingency (signature Σ) holds. -/
 def Models.finite_support_truncated_shifts.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.shifts))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.shifts))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)) (Classicism.Meta.Intensional.MonoidModel.model_isModel (Classicism.Meta.Intensional.Monoids.shifts))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
+
+/-- `finite-support-truncated-shifts-sigma-true-atom`: Boolean Completeness fails. -/
+def Models.finite_support_truncated_shifts_sigma_true_atom.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
+
+/-- `finite-support-truncated-shifts-sigma-true-atom`: Actuality holds. -/
+def Models.finite_support_truncated_shifts_sigma_true_atom.actuality : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).HoldsAx Classicism.P.Actuality.schemaIn
+
+/-- `finite-support-truncated-shifts-sigma-true-atom`: BF holds. -/
+def Models.finite_support_truncated_shifts_sigma_true_atom.barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).HoldsAx Classicism.P.Barcan.schemaIn
+
+/-- `finite-support-truncated-shifts-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.finite_support_truncated_shifts_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `finite-support-truncated-shifts-sigma-true-atom`: Transversal Choice holds. -/
+def Models.finite_support_truncated_shifts_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).IsModel ∧ (Classicism.Meta.Intensional.MonoidModel.model (Classicism.Meta.Intensional.Monoids.shifts)).HoldsAx Classicism.P.TransversalChoice.schemaIn
 
 /-- `finite-support-truncations`: No Pure Contingency holds. -/
 def Models.finite_support_truncations.no_pure_contingency_r : Prop :=
@@ -805,6 +929,22 @@ def Models.full_henkin_finite_base.transversal_choice_r : Prop :=
 def Models.full_henkin_finite_base.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.Henkin.model (Fin 2)) (Classicism.Meta.Intensional.Henkin.isModel (Fin 2))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.Henkin.model (Fin 2)) (Classicism.Meta.Intensional.Henkin.isModel (Fin 2))).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.Henkin.model (Fin 2)) (Classicism.Meta.Intensional.Henkin.isModel (Fin 2))).HoldsAx (Classicism.Meta.AxiomSet.independence _)
 
+/-- `full-henkin-finite-base-sigma-independent`: Extensionality holds. -/
+def Models.full_henkin_finite_base_sigma_independent.extensionality_r : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (Fin 2)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (Fin 2)).HoldsAx Classicism.P.Extensionality.schemaIn
+
+/-- `full-henkin-finite-base-sigma-independent`: Functional Choice holds. -/
+def Models.full_henkin_finite_base_sigma_independent.functional_choice_r : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (Fin 2)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (Fin 2)).HoldsAx Classicism.P.FunctionalChoice.schemaIn
+
+/-- `full-henkin-finite-base-sigma-independent`: Infinity Schema (type e) fails. -/
+def Models.full_henkin_finite_base_sigma_independent.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (Fin 2)).IsModel ∧ ¬ (Classicism.Meta.Intensional.Henkin.model (Fin 2)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-henkin-finite-base-sigma-independent`: Transversal Choice holds. -/
+def Models.full_henkin_finite_base_sigma_independent.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (Fin 2)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (Fin 2)).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
 /-- `full-henkin-infinite-base`: Extensionality holds. -/
 def Models.full_henkin_infinite_base.extensionality_r : Prop :=
   (Classicism.Meta.Intensional.Henkin.model (ℕ)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (ℕ)).HoldsAx Classicism.P.Extensionality.schemaIn
@@ -828,6 +968,26 @@ def Models.full_henkin_infinite_base.transversal_choice_r : Prop :=
 /-- `full-henkin-infinite-base`: Independence (signature Σ) fails. -/
 def Models.full_henkin_infinite_base.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.Henkin.model (ℕ)) (Classicism.Meta.Intensional.Henkin.isModel (ℕ))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.Henkin.model (ℕ)) (Classicism.Meta.Intensional.Henkin.isModel (ℕ))).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.Henkin.model (ℕ)) (Classicism.Meta.Intensional.Henkin.isModel (ℕ))).HoldsAx (Classicism.Meta.AxiomSet.independence _)
+
+/-- `full-henkin-infinite-base-sigma-independent`: Extensionality holds. -/
+def Models.full_henkin_infinite_base_sigma_independent.extensionality_r : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (ℕ)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (ℕ)).HoldsAx Classicism.P.Extensionality.schemaIn
+
+/-- `full-henkin-infinite-base-sigma-independent`: Functional Choice holds. -/
+def Models.full_henkin_infinite_base_sigma_independent.functional_choice_r : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (ℕ)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (ℕ)).HoldsAx Classicism.P.FunctionalChoice.schemaIn
+
+/-- `full-henkin-infinite-base-sigma-independent`: Axiom of Infinity (type e) holds. -/
+def Models.full_henkin_infinite_base_sigma_independent.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (ℕ)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (ℕ)).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-henkin-infinite-base-sigma-independent`: Infinity Schema (type e) holds. -/
+def Models.full_henkin_infinite_base_sigma_independent.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (ℕ)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (ℕ)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-henkin-infinite-base-sigma-independent`: Transversal Choice holds. -/
+def Models.full_henkin_infinite_base_sigma_independent.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.Henkin.model (ℕ)).IsModel ∧ (Classicism.Meta.Intensional.Henkin.model (ℕ)).HoldsAx Classicism.P.TransversalChoice.schemaIn
 
 /-- `full-henkin-singleton-base`: Extensionality holds. -/
 def Models.full_henkin_singleton_base.extensionality_r : Prop :=
@@ -929,6 +1089,70 @@ def Models.full_idempotent_monoid.independence_signature_r : Prop :=
 def Models.full_idempotent_monoid.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `full-idempotent-monoid-sigma-true-atom`: Truths are ND-necessary holds. -/
+def Models.full_idempotent_monoid_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Possible Infinity (type t) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.possible_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.PossibleInfinityT.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Infinity Schema (type t) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Axiom of Infinity (type t) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: □Atomicity holds. -/
+def Models.full_idempotent_monoid_sigma_true_atom.necessary_atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.NecAtomicity.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: □Rigid Comprehension holds. -/
+def Models.full_idempotent_monoid_sigma_true_atom.necessary_rigid_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.full_idempotent_monoid_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Strong Atomicity (type t) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Fregean Axiom fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.fregean_axiom : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.FregeanAxiom.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Infinity Schema (type e) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Axiom of Infinity (type e) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Possible Infinity (type e) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.possible_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.PossibleInfinityE.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: □Relational Choice holds. -/
+def Models.full_idempotent_monoid_sigma_true_atom.necessary_relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.NecRelationalChoice.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Relational Choice holds. -/
+def Models.full_idempotent_monoid_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: Transversal Choice holds. -/
+def Models.full_idempotent_monoid_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
+/-- `full-idempotent-monoid-sigma-true-atom`: ND (type t) fails. -/
+def Models.full_idempotent_monoid_sigma_true_atom.distinctness_necessary_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.NecessityOfDistinctnessT.schemaIn
+
 /-- `full-involution-group`: Gallin Extensional Comprehension holds. -/
 def Models.full_involution_group.gallin_extensional_comprehension_r : Prop :=
   (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.GallinExtensionalComprehension.schemaIn
@@ -1005,6 +1229,74 @@ def Models.full_involution_group.independence_signature_r : Prop :=
 def Models.full_involution_group.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol)).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Invol)).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `full-involution-group-sigma-true-atom`: Gallin Extensional Comprehension holds. -/
+def Models.full_involution_group_sigma_true_atom.gallin_extensional_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.GallinExtensionalComprehension.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: Truths are ND-necessary fails. -/
+def Models.full_involution_group_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: Possible Infinity (type t) fails. -/
+def Models.full_involution_group_sigma_true_atom.possible_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.PossibleInfinityT.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: Infinity Schema (type t) fails. -/
+def Models.full_involution_group_sigma_true_atom.infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `full-involution-group-sigma-true-atom`: Axiom of Infinity (type t) fails. -/
+def Models.full_involution_group_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: □Atomicity holds. -/
+def Models.full_involution_group_sigma_true_atom.necessary_atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.NecAtomicity.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: □BF holds. -/
+def Models.full_involution_group_sigma_true_atom.necessary_barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.NecBarcan.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: □Rigid Comprehension holds. -/
+def Models.full_involution_group_sigma_true_atom.necessary_rigid_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: □ND holds. -/
+def Models.full_involution_group_sigma_true_atom.necessary_distinctness_necessary_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.NecNecessityOfDistinctness.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.full_involution_group_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `full-involution-group-sigma-true-atom`: Fregean Axiom fails. -/
+def Models.full_involution_group_sigma_true_atom.fregean_axiom : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.FregeanAxiom.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: Infinity Schema (type e) fails. -/
+def Models.full_involution_group_sigma_true_atom.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-involution-group-sigma-true-atom`: Axiom of Infinity (type e) fails. -/
+def Models.full_involution_group_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: Possible Infinity (type e) fails. -/
+def Models.full_involution_group_sigma_true_atom.possible_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.PossibleInfinityE.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: □Relational Choice holds. -/
+def Models.full_involution_group_sigma_true_atom.necessary_relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.NecRelationalChoice.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: Relational Choice holds. -/
+def Models.full_involution_group_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `full-involution-group-sigma-true-atom`: Transversal Choice holds. -/
+def Models.full_involution_group_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Invol).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
 /-- `full-permutation-group-infinite-set`: Gallin Extensional Comprehension holds. -/
 def Models.full_permutation_group_infinite_set.gallin_extensional_comprehension_r : Prop :=
   (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.GallinExtensionalComprehension.schemaIn
@@ -1077,6 +1369,70 @@ def Models.full_permutation_group_infinite_set.independence_signature_r : Prop :
 def Models.full_permutation_group_infinite_set.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)) (Classicism.Meta.Intensional.MSet.model_isModel (Equiv.Perm ℕ))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Gallin Extensional Comprehension holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.gallin_extensional_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.GallinExtensionalComprehension.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Truths are ND-necessary fails. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: □Atomicity holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.necessary_atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.NecAtomicity.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: □BF holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.necessary_barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.NecBarcan.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: □Rigid Comprehension holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.necessary_rigid_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Axiom of Infinity (type t) holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Infinity Schema (type t) holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: □ND holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.necessary_distinctness_necessary_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.NecNecessityOfDistinctness.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Fregean Axiom fails. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.fregean_axiom : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.FregeanAxiom.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Infinity Schema (type e) fails. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Axiom of Infinity (type e) fails. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Possible Infinity (type e) fails. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.possible_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.PossibleInfinityE.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: □Relational Choice holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.necessary_relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.NecRelationalChoice.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Relational Choice holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `full-permutation-group-infinite-set-sigma-true-atom`: Transversal Choice holds. -/
+def Models.full_permutation_group_infinite_set_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).IsModel ∧ (Classicism.Meta.Intensional.MSet.model (Equiv.Perm ℕ)).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
 /-- `full-surjection-monoid`: Truths are ND-necessary fails. -/
 def Models.full_surjection_monoid.distinctness_preserving_collapse : Prop :=
   (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
@@ -1144,6 +1500,66 @@ def Models.full_surjection_monoid.independence_signature_r : Prop :=
 /-- `full-surjection-monoid`: No Contingency (signature Σ) holds. -/
 def Models.full_surjection_monoid.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj)).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.FullActionModels.surj)).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
+
+/-- `full-surjection-monoid-sigma-true-atom`: Truths are ND-necessary fails. -/
+def Models.full_surjection_monoid_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: □Atomicity holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.necessary_atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.NecAtomicity.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: □BF holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.necessary_barcan_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.NecBarcan.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: □Rigid Comprehension holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.necessary_rigid_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: Axiom of Infinity (type t) holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: Infinity Schema (type t) holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.infinity_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `full-surjection-monoid-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `full-surjection-monoid-sigma-true-atom`: Fregean Axiom fails. -/
+def Models.full_surjection_monoid_sigma_true_atom.fregean_axiom : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.FregeanAxiom.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: Infinity Schema (type e) fails. -/
+def Models.full_surjection_monoid_sigma_true_atom.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-surjection-monoid-sigma-true-atom`: Axiom of Infinity (type e) fails. -/
+def Models.full_surjection_monoid_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: Possible Infinity (type e) fails. -/
+def Models.full_surjection_monoid_sigma_true_atom.possible_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.PossibleInfinityE.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: □Relational Choice holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.necessary_relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.NecRelationalChoice.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: Relational Choice holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: Transversal Choice holds. -/
+def Models.full_surjection_monoid_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
+/-- `full-surjection-monoid-sigma-true-atom`: ND (type t) fails. -/
+def Models.full_surjection_monoid_sigma_true_atom.distinctness_necessary_t : Prop :=
+  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.FullActionModels.surj).HoldsAx Classicism.P.NecessityOfDistinctnessT.schemaIn
 
 /-- `full-two-object-chain`: Truths are ND-necessary holds. -/
 def Models.full_two_object_chain.distinctness_preserving_collapse : Prop :=
@@ -1213,6 +1629,70 @@ def Models.full_two_object_chain.distinctness_necessary_t : Prop :=
 def Models.full_two_object_chain.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.chain) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).HoldsAx (Classicism.Meta.AxiomSet.independence _)
 
+/-- `full-two-object-chain-sigma-true-atom`: Truths are ND-necessary holds. -/
+def Models.full_two_object_chain_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: B for pure sentences fails. -/
+def Models.full_two_object_chain_sigma_true_atom.pure_b_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.signatureB)
+
+/-- `full-two-object-chain-sigma-true-atom`: Possible Infinity (type t) fails. -/
+def Models.full_two_object_chain_sigma_true_atom.possible_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.PossibleInfinityT.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: Infinity Schema (type t) fails. -/
+def Models.full_two_object_chain_sigma_true_atom.infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `full-two-object-chain-sigma-true-atom`: Axiom of Infinity (type t) fails. -/
+def Models.full_two_object_chain_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: □Atomicity holds. -/
+def Models.full_two_object_chain_sigma_true_atom.necessary_atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.NecAtomicity.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: □BF holds. -/
+def Models.full_two_object_chain_sigma_true_atom.necessary_barcan_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.NecBarcan.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: □Rigid Comprehension holds. -/
+def Models.full_two_object_chain_sigma_true_atom.necessary_rigid_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: Fregean Axiom fails. -/
+def Models.full_two_object_chain_sigma_true_atom.fregean_axiom : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.FregeanAxiom.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: Infinity Schema (type e) fails. -/
+def Models.full_two_object_chain_sigma_true_atom.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-two-object-chain-sigma-true-atom`: Axiom of Infinity (type e) fails. -/
+def Models.full_two_object_chain_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: Possible Infinity (type e) fails. -/
+def Models.full_two_object_chain_sigma_true_atom.possible_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.PossibleInfinityE.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: □Relational Choice holds. -/
+def Models.full_two_object_chain_sigma_true_atom.necessary_relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.NecRelationalChoice.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: Relational Choice holds. -/
+def Models.full_two_object_chain_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: Transversal Choice holds. -/
+def Models.full_two_object_chain_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
+/-- `full-two-object-chain-sigma-true-atom`: ND (type t) fails. -/
+def Models.full_two_object_chain_sigma_true_atom.distinctness_necessary_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.chain).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.chain).HoldsAx Classicism.P.NecessityOfDistinctnessT.schemaIn
+
 /-- `full-two-object-double-retraction`: Truths are ND-necessary fails. -/
 def Models.full_two_object_double_retraction.distinctness_preserving_collapse : Prop :=
   (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
@@ -1280,6 +1760,70 @@ def Models.full_two_object_double_retraction.transversal_choice_r : Prop :=
 /-- `full-two-object-double-retraction`: Independence (signature Σ) fails. -/
 def Models.full_two_object_double_retraction.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.doubleRetraction) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).HoldsAx (Classicism.Meta.AxiomSet.independence _)
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Truths are ND-necessary fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Possible Infinity (type t) fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.possible_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.PossibleInfinityT.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Infinity Schema (type t) fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Axiom of Infinity (type t) fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: □Atomicity holds. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.necessary_atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.NecAtomicity.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: □Rigid Comprehension holds. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.necessary_rigid_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Strong Atomicity (type t) fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Fregean Axiom fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.fregean_axiom : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.FregeanAxiom.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Infinity Schema (type e) fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Axiom of Infinity (type e) fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Possible Infinity (type e) fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.possible_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.PossibleInfinityE.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: □Relational Choice holds. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.necessary_relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.NecRelationalChoice.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Relational Choice holds. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: ND holds. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.distinctness_necessary_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.NecessityOfDistinctness.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Strong Actuality fails. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.strong_actuality : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.StrongActuality.schemaIn
+
+/-- `full-two-object-double-retraction-sigma-true-atom`: Transversal Choice holds. -/
+def Models.full_two_object_double_retraction_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.doubleRetraction).HoldsAx Classicism.P.TransversalChoice.schemaIn
 
 /-- `full-two-object-retract`: Gallin Extensional Comprehension holds. -/
 def Models.full_two_object_retract.gallin_extensional_comprehension_r : Prop :=
@@ -1357,6 +1901,78 @@ def Models.full_two_object_retract.transversal_choice_r : Prop :=
 def Models.full_two_object_retract.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FullActionModels.retract) (Classicism.Meta.Intensional.FullActionModels.unitModel_isModel _)).HoldsAx (Classicism.Meta.AxiomSet.independence _)
 
+/-- `full-two-object-retract-sigma-true-atom`: Gallin Extensional Comprehension holds. -/
+def Models.full_two_object_retract_sigma_true_atom.gallin_extensional_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.GallinExtensionalComprehension.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Truths are ND-necessary fails. -/
+def Models.full_two_object_retract_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Possible Infinity (type t) fails. -/
+def Models.full_two_object_retract_sigma_true_atom.possible_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.PossibleInfinityT.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Infinity Schema (type t) fails. -/
+def Models.full_two_object_retract_sigma_true_atom.infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityT)
+
+/-- `full-two-object-retract-sigma-true-atom`: Axiom of Infinity (type t) fails. -/
+def Models.full_two_object_retract_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: □Atomicity holds. -/
+def Models.full_two_object_retract_sigma_true_atom.necessary_atomicity_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.NecAtomicity.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: □Rigid Comprehension holds. -/
+def Models.full_two_object_retract_sigma_true_atom.necessary_rigid_comprehension_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.NecRigidComprehension.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Strong Atomicity (type t) fails. -/
+def Models.full_two_object_retract_sigma_true_atom.strong_atomicity_t : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.StrongAtomicityT.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Fregean Axiom fails. -/
+def Models.full_two_object_retract_sigma_true_atom.fregean_axiom : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.FregeanAxiom.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Infinity Schema (type e) fails. -/
+def Models.full_two_object_retract_sigma_true_atom.infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.infinityE)
+
+/-- `full-two-object-retract-sigma-true-atom`: Axiom of Infinity (type e) fails. -/
+def Models.full_two_object_retract_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Possible Infinity (type e) fails. -/
+def Models.full_two_object_retract_sigma_true_atom.possible_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ ¬ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.PossibleInfinityE.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: □Relational Choice holds. -/
+def Models.full_two_object_retract_sigma_true_atom.necessary_relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.NecRelationalChoice.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Relational Choice holds. -/
+def Models.full_two_object_retract_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: ND holds. -/
+def Models.full_two_object_retract_sigma_true_atom.distinctness_necessary_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.NecessityOfDistinctness.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Strong Actuality holds. -/
+def Models.full_two_object_retract_sigma_true_atom.strong_actuality : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.StrongActuality.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: □Strong Actuality holds. -/
+def Models.full_two_object_retract_sigma_true_atom.necessary_strong_actuality : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.NecStrongActuality.schemaIn
+
+/-- `full-two-object-retract-sigma-true-atom`: Transversal Choice holds. -/
+def Models.full_two_object_retract_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FullActionModels.retract).IsModel ∧ (Classicism.Meta.Intensional.FullActionModels.retract).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
 /-- `symmetric-all-surjections`: Relational Choice fails. -/
 def Models.symmetric_all_surjections.relational_choice_r : Prop :=
   (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.allSurj)).IsModel ∧ ¬ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.allSurj)).HoldsAx Classicism.P.RelationalChoice.schemaIn
@@ -1425,9 +2041,49 @@ def Models.symmetric_collapse_pair.independence_signature_r : Prop :=
 def Models.symmetric_collapse_pair.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `symmetric-collapse-pair-sigma-true-atom`: Relational Choice fails. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ ¬ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `symmetric-collapse-pair-sigma-true-atom`: Axiom of Infinity (type e) holds. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `symmetric-collapse-pair-sigma-true-atom`: Axiom of Infinity (type t) holds. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `symmetric-collapse-pair-sigma-true-atom`: BF holds. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.barcan_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx Classicism.P.Barcan.schemaIn
+
+/-- `symmetric-collapse-pair-sigma-true-atom`: Actuality holds. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.actuality : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx Classicism.P.Actuality.schemaIn
+
+/-- `symmetric-collapse-pair-sigma-true-atom`: Boolean Completeness holds. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
+
+/-- `symmetric-collapse-pair-sigma-true-atom`: Truths are ND-necessary holds. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `symmetric-collapse-pair-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.symmetric_collapse_pair_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
 /-- `symmetric-entrance-qualitative-links`: Independence (signature Σ) fails. -/
 def Models.symmetric_entrance_qualitative_links.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model) (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model) (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model) (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)).HoldsAx (Classicism.Meta.AxiomSet.independence _)
+
+/-- `symmetric-entrance-qualitative-links-sigma-true-atom`: Relational Choice holds. -/
+def Models.symmetric_entrance_qualitative_links_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).IsModel ∧ (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `symmetric-entrance-qualitative-links-sigma-true-atom`: BF (type t) fails. -/
+def Models.symmetric_entrance_qualitative_links_sigma_true_atom.barcan_t : Prop :=
+  (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).IsModel ∧ ¬ (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model).HoldsAx Classicism.P.BarcanT.schemaIn
 
 /-- `symmetric-finite-compression-entrance`: Independence (signature Σ) fails. -/
 def Models.symmetric_finite_compression_entrance.independence_signature_r : Prop :=
@@ -1472,6 +2128,10 @@ def Models.symmetric_qualitative_contrast.axiom_of_infinity_e : Prop :=
 /-- `symmetric-qualitative-contrast`: Independence (signature Σ) fails. -/
 def Models.symmetric_qualitative_contrast.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.contrastBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.contrastBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase))).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.contrastBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase))).HoldsAx (Classicism.Meta.AxiomSet.independence _)
+
+/-- `symmetric-qualitative-contrast-sigma-true-atom`: Axiom of Infinity (type e) holds. -/
+def Models.symmetric_qualitative_contrast_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.contrastBase)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.contrastBase)).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
 
 /-- `symmetric-range-gap-without-actuality`: Relational Choice fails. -/
 def Models.symmetric_range_gap_without_actuality.relational_choice_r : Prop :=
@@ -1541,6 +2201,38 @@ def Models.symmetric_range_gap.independence_signature_r : Prop :=
 def Models.symmetric_range_gap.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap))).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap))).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `symmetric-range-gap-sigma-true-atom`: Relational Choice fails. -/
+def Models.symmetric_range_gap_sigma_true_atom.relational_choice_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ ¬ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx Classicism.P.RelationalChoice.schemaIn
+
+/-- `symmetric-range-gap-sigma-true-atom`: Axiom of Infinity (type e) holds. -/
+def Models.symmetric_range_gap_sigma_true_atom.axiom_of_infinity_e : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx Classicism.P.AxiomOfInfinityE.schemaIn
+
+/-- `symmetric-range-gap-sigma-true-atom`: Axiom of Infinity (type t) holds. -/
+def Models.symmetric_range_gap_sigma_true_atom.axiom_of_infinity_t : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx Classicism.P.AxiomOfInfinityT.schemaIn
+
+/-- `symmetric-range-gap-sigma-true-atom`: Actuality holds. -/
+def Models.symmetric_range_gap_sigma_true_atom.actuality : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx Classicism.P.Actuality.schemaIn
+
+/-- `symmetric-range-gap-sigma-true-atom`: BF fails. -/
+def Models.symmetric_range_gap_sigma_true_atom.barcan_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ ¬ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx Classicism.P.Barcan.schemaIn
+
+/-- `symmetric-range-gap-sigma-true-atom`: Boolean Completeness holds. -/
+def Models.symmetric_range_gap_sigma_true_atom.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
+
+/-- `symmetric-range-gap-sigma-true-atom`: Truths are ND-necessary holds. -/
+def Models.symmetric_range_gap_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `symmetric-range-gap-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.symmetric_range_gap_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
 /-- `symmetric-two-object-unpinned`: Boolean Completeness holds. -/
 def Models.symmetric_two_object_unpinned.boolean_completeness_r : Prop :=
   (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
@@ -1548,6 +2240,14 @@ def Models.symmetric_two_object_unpinned.boolean_completeness_r : Prop :=
 /-- `symmetric-two-object-unpinned`: Independence (signature Σ) fails. -/
 def Models.symmetric_two_object_unpinned.independence_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase))).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase))).IsModel ∧ ¬ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase))).HoldsAx (Classicism.Meta.AxiomSet.independence _)
+
+/-- `symmetric-two-object-unpinned-sigma-true-atom`: □Boolean Completeness holds. -/
+def Models.symmetric_two_object_unpinned_sigma_true_atom.necessary_boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)).HoldsAx Classicism.P.NecBooleanCompleteness.schemaIn
+
+/-- `symmetric-two-object-unpinned-sigma-true-atom`: Boolean Completeness holds. -/
+def Models.symmetric_two_object_unpinned_sigma_true_atom.boolean_completeness_r : Prop :=
+  (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)).IsModel ∧ (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)).HoldsAx Classicism.P.BooleanCompleteness.schemaIn
 
 /-- `symmetry-constrained-full-all-maps`: Truths are ND-necessary holds. -/
 def Models.symmetry_constrained_full_all_maps.distinctness_preserving_collapse : Prop :=
@@ -1569,6 +2269,18 @@ def Models.symmetry_constrained_full_all_maps.independence_signature_r : Prop :=
 def Models.symmetry_constrained_full_all_maps.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps)).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.allMaps)).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
+/-- `symmetry-constrained-full-all-maps-sigma-true-atom`: Truths are ND-necessary holds. -/
+def Models.symmetry_constrained_full_all_maps_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps).IsModel ∧ (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `symmetry-constrained-full-all-maps-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.symmetry_constrained_full_all_maps_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps).IsModel ∧ (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `symmetry-constrained-full-all-maps-sigma-true-atom`: Transversal Choice holds. -/
+def Models.symmetry_constrained_full_all_maps_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps).IsModel ∧ (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.allMaps).HoldsAx Classicism.P.TransversalChoice.schemaIn
+
 /-- `symmetry-constrained-full-collapse`: Truths are ND-necessary holds. -/
 def Models.symmetry_constrained_full_collapse.distinctness_preserving_collapse : Prop :=
   (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).IsModel ∧ (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
@@ -1588,6 +2300,18 @@ def Models.symmetry_constrained_full_collapse.independence_signature_r : Prop :=
 /-- `symmetry-constrained-full-collapse`: No Contingency (signature Σ) holds. -/
 def Models.symmetry_constrained_full_collapse.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses)).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses) (Classicism.Meta.Intensional.SymFull.model_isModel Classicism.Meta.Intensional.SymFull.permsCollapses)).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
+
+/-- `symmetry-constrained-full-collapse-sigma-true-atom`: Truths are ND-necessary holds. -/
+def Models.symmetry_constrained_full_collapse_sigma_true_atom.distinctness_preserving_collapse : Prop :=
+  (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).IsModel ∧ (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).HoldsAx Classicism.P.DistinctnessPreservingCollapse.schemaIn
+
+/-- `symmetry-constrained-full-collapse-sigma-true-atom`: No Pure Contingency holds. -/
+def Models.symmetry_constrained_full_collapse_sigma_true_atom.no_pure_contingency_r : Prop :=
+  (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).IsModel ∧ (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).HoldsAx (Classicism.Meta.AxiomSet.pureVersion Classicism.Meta.AxiomSet.noContingency)
+
+/-- `symmetry-constrained-full-collapse-sigma-true-atom`: Transversal Choice holds. -/
+def Models.symmetry_constrained_full_collapse_sigma_true_atom.transversal_choice_r : Prop :=
+  (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).IsModel ∧ (Classicism.Meta.Intensional.SymFull.model Classicism.Meta.Intensional.SymFull.permsCollapses).HoldsAx Classicism.P.TransversalChoice.schemaIn
 
 /-- argument `barcan-d6`: BF holds in every model meeting its conditions. -/
 def Arguments.barcan_d6.barcan_r : Prop :=

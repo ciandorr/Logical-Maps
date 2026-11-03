@@ -1217,10 +1217,6 @@ def Models.full_idempotent_monoid.independence_signature_r : Prop :=
 def Models.full_idempotent_monoid.no_contingency_signature_r : Prop :=
   (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)).Admitted ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)).IsModel ∧ (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem) (Classicism.Meta.Intensional.MSet.model_isModel Classicism.Meta.Intensional.Idem)).HoldsAx (Classicism.Meta.AxiomSet.noContingency _)
 
-/-- `full-idempotent-monoid-sigma-true-atom`: Atoms are self-atoms (type t) fails. -/
-def Models.full_idempotent_monoid_sigma_true_atom.atoms_are_self_atoms_t : Prop :=
-  (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.AtomsAreSelfAtomsT.schemaIn
-
 /-- `full-idempotent-monoid-sigma-true-atom`: Possible Infinity (type t) fails. -/
 def Models.full_idempotent_monoid_sigma_true_atom.possible_infinity_t : Prop :=
   (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).IsModel ∧ ¬ (Classicism.Meta.Intensional.MSet.model Classicism.Meta.Intensional.Idem).HoldsAx Classicism.P.PossibleInfinityT.schemaIn

@@ -3818,6 +3818,57 @@ def lean_argument_statement(item: dict, data: dict, cfg: dict | None = None) -> 
     return " ".join([binder, *(h + " →" for h in hyps), verdict])
 
 
+_LEAN_DECL = _re.compile(r"^\s*(?:@\[[^\]]*\]\s*)?(?:(?:private|protected|noncomputable|nonrec)\s+)*"
+                        r"(?:theorem|lemma|def|abbrev|instance|axiom|opaque)\s+([^\s:({\[]+)")
+_LEAN_SCOPE = _re.compile(r"^(namespace|section|end)\b\s*(\S*)")
+
+
+def lean_citable_from_derived(data: dict) -> dict[str, bool]:
+    """For each declaration of the topic's Lean library (scanned from its sources), whether
+    `MapDerived.lean` can cite it: false when its file imports `MapDerived` (directly or not), as
+    `MapWitnesses.lean` does, or is that file itself. Empty without a library."""
+    topic_id = (data.get("topic") or {}).get("id")
+    loc = lean_lib_dir(topic_id, data) if topic_id else None
+    if loc is None:
+        return {}
+    root, lib = loc
+    target = f"{lib}.MapDerived"
+    imports, decls = {}, {}
+    for path in sorted((root / lib).rglob("*.lean")):
+        if ".lake" in path.parts:
+            continue
+        module = ".".join(path.relative_to(root).with_suffix("").parts)
+        lines = path.read_text(encoding="utf-8").splitlines()
+        imports[module] = [ln.split()[1] for ln in lines if ln.startswith("import ") and len(ln.split()) > 1]
+        stack, in_comment = [], 0
+        for ln in lines:
+            s = ln.strip()
+            in_comment += s.count("/-") - s.count("-/")
+            if in_comment > 0 or s.startswith("-/"):
+                continue
+            sc = _LEAN_SCOPE.match(s)
+            if sc:
+                kind, name = sc.groups()
+                if kind == "end":
+                    if stack:
+                        stack.pop()
+                else:
+                    stack.append(name if kind == "namespace" else "")
+                continue
+            d = _LEAN_DECL.match(ln)
+            if d:
+                prefix = ".".join(p for p in stack if p)
+                decls.setdefault(f"{prefix}.{d.group(1)}" if prefix else d.group(1), module)
+    downstream, changed = {target}, True
+    while changed:
+        changed = False
+        for mod, imps in imports.items():
+            if mod not in downstream and any(i in downstream for i in imps):
+                downstream.add(mod)
+                changed = True
+    return {n: mod not in downstream for n, mod in decls.items()}
+
+
 def lean_derived_verdicts(data: dict) -> list[dict]:
     """The verdicts a model gets in Lean from the map's general arguments: for each argument the
     map applies to the model (a group's shared argument, or a topic argument whose conditions it
@@ -3835,6 +3886,7 @@ def lean_derived_verdicts(data: dict) -> list[dict]:
     relative = {p["id"] for p in data["principles"] if p.get("category") in cfg["verdict"]["relative_categories"]}
     by_arg = {(a["group"], a["argument"], a["principle"]): a for a in lean_arguments(data)}
     own = {(v["model"], v["principle"]): v for v in lean_verdicts(data)}
+    citable = None  # computed on the first inherited verdict
     out = []
     for m in data["models"]:
         lean = lean_block(m, data, cfg)
@@ -3871,6 +3923,10 @@ def lean_derived_verdicts(data: dict) -> list[dict]:
                 if k[0] != lean["inherited"] or pid in relative or v["status"] != "verified" or pid in done \
                         or pid not in (m.get("satisfies" if v["holds"] else "violates") or []):
                     continue
+                if citable is None:
+                    citable = lean_citable_from_derived(data)
+                if citable and not citable.get(v["ref"], False):
+                    continue  # its certificate is downstream of MapDerived (e.g. MapWitnesses), or not found
                 done.add(pid)
                 if v["holds"]:
                     holding[pid] = name(pid)

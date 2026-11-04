@@ -154,3 +154,11 @@ notes: 'Found on 16 October 2026 to show that the closed pure sentence "each ind
   Completeness, and the rigidity family (Tame
   Rigidity, Rigid Power, Rigid Rigidity and their weak forms), whose recorded arguments assume all
   surjections or section arrows, the latter failing here. No Lean verification is claimed.'
+lean:
+  param: Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect
+  meets:
+    finite-pinning: fun _ _ h => h
+    surjective-arrows: Classicism.Meta.Intensional.SymIdeal.classReflect_surjectiveArrows
+    infinitely-many-individuals: Classicism.Meta.Intensional.SymIdeal.infinitelyManyIndividuals Classicism.Meta.Intensional.SymIdeal.classReflect
+    one-object-action-model: Classicism.Meta.Intensional.Premodel.oneObject_of_subsingleton _
+    transposable: Classicism.Meta.Intensional.SymIdeal.classReflect_transposable

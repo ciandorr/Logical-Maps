@@ -10,6 +10,7 @@ import Classicism.Results.SentenceSchemas.ArithmeticNecessitism
 import Classicism.Coalesced.TransferBC
 import Classicism.Coalesced.TransferChoice
 import Classicism.Coalesced.TransferSelfAtoms
+import Classicism.Coalesced.PureSentencesPossible
 import Mathlib.SetTheory.Cardinal.NatCard
 
 /-!
@@ -565,6 +566,49 @@ theorem arithmetic_necessitism :
       (not_iStar_consistent σ))
 
 end arithmetic_necessitism_complete_components
+
+/-! #### Pure sentences possible at the root (`Coalesced/PureSentencesPossible.lean`) -/
+
+namespace pure_sentences_possible
+
+/-- `¬`Vicinity is consistent (the truncation model), so possible at the root
+(`Coalesced.SumData.not_holds_necVicinity`). -/
+theorem necessary_vicinity :
+    Statements.Arguments.coalesced_sums.pure_sentences_possible.necessary_vicinity :=
+  fun _ hc => Coalesced.SumData.not_holds_necVicinity hc
+
+/-- The negation of an instance of Weakly Inextensible Comprehension is consistent (the truncation
+model), so possible at the root (`Coalesced.SumData.not_holds_necWIC`). -/
+theorem necessary_weakly_inextensible_comprehension_r :
+    Statements.Arguments.coalesced_sums.pure_sentences_possible.necessary_weakly_inextensible_comprehension_r :=
+  fun _ hc => Coalesced.SumData.not_holds_necWIC hc
+
+end pure_sentences_possible
+
+namespace transversal_boxed
+
+/-- The negation of Transversal at `e` is consistent (`symmetric-infinite-classes`), so possible at
+the root (`Coalesced.SumData.not_holds_necTransversal`). -/
+theorem necessary_transversal_r :
+    Statements.Arguments.coalesced_sums.transversal_boxed.necessary_transversal_r :=
+  fun _ hc => Coalesced.SumData.not_holds_necTransversal hc
+
+end transversal_boxed
+
+namespace necessary_axiom_of_infinity_complete_components
+
+/-- The negation of the Axiom of Infinity at `e` holds in the full model with one world and one
+individual, so it is possible at the root (`Coalesced.SumData.not_holds_necAxInfE`). -/
+theorem necessary_axiom_of_infinity_e :
+    Statements.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e :=
+  fun _ hc => Coalesced.SumData.not_holds_necAxInfE hc
+
+/-- The same at `t`, with two propositions (`Coalesced.SumData.not_holds_necAxInfT`). -/
+theorem necessary_axiom_of_infinity_t :
+    Statements.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t :=
+  fun _ hc => Coalesced.SumData.not_holds_necAxInfT hc
+
+end necessary_axiom_of_infinity_complete_components
 
 /-! #### Witness transfers (`Coalesced/TransferBC.lean`) -/
 

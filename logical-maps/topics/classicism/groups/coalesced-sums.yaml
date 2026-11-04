@@ -371,6 +371,11 @@ arguments:
   - date: '2026-10-02'
     by: Claude Opus 5.5 (Anthropic), at Cian Dorr's direction
     note: The three members' verbatim copies stated once.
+  lean:
+  - fails: necessary-vicinity
+    ref: Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_vicinity
+  - fails: necessary-weakly-inextensible-comprehension-r
+    ref: Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_weakly_inextensible_comprehension_r
 
 - id: transversal-boxed
   requires: [complete-components]
@@ -385,6 +390,9 @@ arguments:
   - date: '2026-10-02'
     by: Claude Opus 5.5 (Anthropic), at Cian Dorr's direction
     note: The three members' verbatim copies stated once; "By the same argument" became a reference to pure-sentences-possible.
+  lean:
+  - fails: necessary-transversal-r
+    ref: Classicism.Map.Arguments.coalesced_sums.transversal_boxed.necessary_transversal_r
 - id: arithmetic-necessitism-complete-components
   requires: [complete-components]
   holds: [arithmetic-necessitism]
@@ -412,6 +420,11 @@ arguments:
     with C: both hold in the full model with one world, one individual and two propositions, where a
     numeral holds of the universal property at each type. So they are possible at the root
     (pure-sentences-possible), and the boxed Axioms fail there.
+  lean:
+  - fails: necessary-axiom-of-infinity-e
+    ref: Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e
+  - fails: necessary-axiom-of-infinity-t
+    ref: Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t
 - id: necessity-of-analysis-complete-components
   requires: [complete-components]
   fails: [necessity-of-analysis]

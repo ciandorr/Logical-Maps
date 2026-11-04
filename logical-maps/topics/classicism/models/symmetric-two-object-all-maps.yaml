@@ -84,3 +84,11 @@ arguments:
 notes: >-
   Without the symmetry this is finite-support-two-object-all-maps. Separates Boolean Completeness (every type), □BC (type $t$) and BF from □BF (type $t$), the separation that
   GPT-6 Astra's Ω-valued cofinite-interior model gave (Daniel Kodsi's pull request #18, item 20).
+lean:
+  param: Classicism.Meta.Intensional.SymIdeal.allMapsBase
+  meets:
+    finite-pinning: fun _ _ h => h
+    infinitely-many-individuals: Classicism.Meta.Intensional.SymIdeal.allMaps_infinitelyManyIndividuals
+    transposable: Classicism.Meta.Intensional.SymIdeal.allMaps_transposable
+    separable-collapses: Classicism.Meta.Intensional.SymIdeal.allMaps_separable
+    hull-conditions: Classicism.Meta.Intensional.SymIdeal.allMaps_hullConditions

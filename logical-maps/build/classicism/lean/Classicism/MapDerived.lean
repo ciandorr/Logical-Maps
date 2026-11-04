@@ -103,6 +103,14 @@ theorem coalesced_constant_indexed_root.boolean_completeness_t : Statements.Mode
 theorem coalesced_constant_indexed_root.arithmetic_necessitism : Statements.Models.coalesced_constant_indexed_root.arithmetic_necessitism :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete)⟩
 
+/-- `coalesced-constant-indexed-root`: □Axiom of Infinity (type e) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_constant_indexed_root.necessary_axiom_of_infinity_e : Statements.Models.coalesced_constant_indexed_root.necessary_axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete)⟩
+
+/-- `coalesced-constant-indexed-root`: □Axiom of Infinity (type t) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_constant_indexed_root.necessary_axiom_of_infinity_t : Statements.Models.coalesced_constant_indexed_root.necessary_axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete)⟩
+
 /-- `coalesced-constant-indexed-root`: Self-Atomicity (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
 theorem coalesced_constant_indexed_root.self_atomicity_t : Statements.Models.coalesced_constant_indexed_root.self_atomicity_t :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.constantIndexedData), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t (Classicism.Meta.Coalesced.constantIndexedData) (Classicism.Meta.Coalesced.constantIndexedData_complete) (Classicism.Meta.Coalesced.constantIndexedData_distinguished) (Classicism.Meta.Coalesced.constantIndexedData_fullest)⟩
@@ -151,6 +159,14 @@ theorem coalesced_maximalist_root.boolean_completeness_t : Statements.Models.coa
 theorem coalesced_maximalist_root.arithmetic_necessitism : Statements.Models.coalesced_maximalist_root.arithmetic_necessitism :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed)⟩
 
+/-- `coalesced-maximalist-root`: □Axiom of Infinity (type e) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_maximalist_root.necessary_axiom_of_infinity_e : Statements.Models.coalesced_maximalist_root.necessary_axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed)⟩
+
+/-- `coalesced-maximalist-root`: □Axiom of Infinity (type t) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_maximalist_root.necessary_axiom_of_infinity_t : Statements.Models.coalesced_maximalist_root.necessary_axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed)⟩
+
 /-- `coalesced-maximalist-root`: Self-Atomicity (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
 theorem coalesced_maximalist_root.self_atomicity_t : Statements.Models.coalesced_maximalist_root.self_atomicity_t :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t (Classicism.Meta.Coalesced.maximalistRoot) (Classicism.Meta.Coalesced.maximalistData_complete Classicism.Meta.Coalesced.sigmaTop_closed) (Classicism.Meta.Coalesced.maximalistData_distinguished) (Classicism.Meta.Coalesced.maximalistData_fullest)⟩
@@ -163,9 +179,65 @@ theorem coalesced_maximalist_root.atoms_are_self_atoms_t : Statements.Models.coa
 theorem coalesced_maximalist_root.truths_are_nd_necessary : Statements.Models.coalesced_maximalist_root.truths_are_nd_necessary :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.maximalistRoot)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.maximalistRoot)) (Classicism.Meta.Coalesced.maximalistData_isolated)⟩
 
+/-- `coalesced-pinned-interpretations-root`: Relational Choice holds, by `coalesced-sums`'s argument `relational-choice-free-root`. -/
+theorem coalesced_pinned_interpretations_root.relational_choice_r : Statements.Models.coalesced_pinned_interpretations_root.relational_choice_r :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.relational_choice_free_root.relational_choice_r (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpData_free)⟩
+
+/-- `coalesced-pinned-interpretations-root`: Actuality holds, by `coalesced-sums`'s argument `actuality-singleton-root`. -/
+theorem coalesced_pinned_interpretations_root.actuality : Statements.Models.coalesced_pinned_interpretations_root.actuality :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.actuality_singleton_root.actuality (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpRoot_actualWorldIsolated)⟩
+
+/-- `coalesced-pinned-interpretations-root`: □Vicinity fails, by `coalesced-sums`'s argument `pure-sentences-possible`. -/
+theorem coalesced_pinned_interpretations_root.necessary_vicinity : Statements.Models.coalesced_pinned_interpretations_root.necessary_vicinity :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_vicinity (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpData_complete)⟩
+
+/-- `coalesced-pinned-interpretations-root`: □Weakly Inextensible Comprehension fails, by `coalesced-sums`'s argument `pure-sentences-possible`. -/
+theorem coalesced_pinned_interpretations_root.necessary_weakly_inextensible_comprehension_r : Statements.Models.coalesced_pinned_interpretations_root.necessary_weakly_inextensible_comprehension_r :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_weakly_inextensible_comprehension_r (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpData_complete)⟩
+
+/-- `coalesced-pinned-interpretations-root`: □Transversal fails, by `coalesced-sums`'s argument `transversal-boxed`. -/
+theorem coalesced_pinned_interpretations_root.necessary_transversal_r : Statements.Models.coalesced_pinned_interpretations_root.necessary_transversal_r :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.transversal_boxed.necessary_transversal_r (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpData_complete)⟩
+
+/-- `coalesced-pinned-interpretations-root`: Arithmetic Necessitism holds, by `coalesced-sums`'s argument `arithmetic-necessitism-complete-components`. -/
+theorem coalesced_pinned_interpretations_root.arithmetic_necessitism : Statements.Models.coalesced_pinned_interpretations_root.arithmetic_necessitism :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpData_complete)⟩
+
+/-- `coalesced-pinned-interpretations-root`: □Axiom of Infinity (type e) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_pinned_interpretations_root.necessary_axiom_of_infinity_e : Statements.Models.coalesced_pinned_interpretations_root.necessary_axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpData_complete)⟩
+
+/-- `coalesced-pinned-interpretations-root`: □Axiom of Infinity (type t) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_pinned_interpretations_root.necessary_axiom_of_infinity_t : Statements.Models.coalesced_pinned_interpretations_root.necessary_axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t (Classicism.Meta.Coalesced.pinnedInterpData) (Classicism.Meta.Coalesced.pinnedInterpData_complete)⟩
+
 /-- `coalesced-pinned-interpretations-root`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
 theorem coalesced_pinned_interpretations_root.truths_are_nd_necessary : Statements.Models.coalesced_pinned_interpretations_root.truths_are_nd_necessary :=
   ⟨Classicism.Meta.Coalesced.pinnedInterpRoot_isModel, Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.pinnedInterpRoot) (Classicism.Meta.Coalesced.pinnedInterpRoot_isModel) (Classicism.Meta.Coalesced.pinnedInterpRoot_actualWorldIsolated)⟩
+
+/-- `coalesced-pinned-substitutions-root`: □Vicinity fails, by `coalesced-sums`'s argument `pure-sentences-possible`. -/
+theorem coalesced_pinned_substitutions_root.necessary_vicinity : Statements.Models.coalesced_pinned_substitutions_root.necessary_vicinity :=
+  ⟨Classicism.Meta.Coalesced.pinnedSubstRoot_isModel, Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_vicinity (Classicism.Meta.Coalesced.pinnedSubstData) (Classicism.Meta.Coalesced.pinnedSubstData_complete)⟩
+
+/-- `coalesced-pinned-substitutions-root`: □Weakly Inextensible Comprehension fails, by `coalesced-sums`'s argument `pure-sentences-possible`. -/
+theorem coalesced_pinned_substitutions_root.necessary_weakly_inextensible_comprehension_r : Statements.Models.coalesced_pinned_substitutions_root.necessary_weakly_inextensible_comprehension_r :=
+  ⟨Classicism.Meta.Coalesced.pinnedSubstRoot_isModel, Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_weakly_inextensible_comprehension_r (Classicism.Meta.Coalesced.pinnedSubstData) (Classicism.Meta.Coalesced.pinnedSubstData_complete)⟩
+
+/-- `coalesced-pinned-substitutions-root`: □Transversal fails, by `coalesced-sums`'s argument `transversal-boxed`. -/
+theorem coalesced_pinned_substitutions_root.necessary_transversal_r : Statements.Models.coalesced_pinned_substitutions_root.necessary_transversal_r :=
+  ⟨Classicism.Meta.Coalesced.pinnedSubstRoot_isModel, Classicism.Map.Arguments.coalesced_sums.transversal_boxed.necessary_transversal_r (Classicism.Meta.Coalesced.pinnedSubstData) (Classicism.Meta.Coalesced.pinnedSubstData_complete)⟩
+
+/-- `coalesced-pinned-substitutions-root`: Arithmetic Necessitism holds, by `coalesced-sums`'s argument `arithmetic-necessitism-complete-components`. -/
+theorem coalesced_pinned_substitutions_root.arithmetic_necessitism : Statements.Models.coalesced_pinned_substitutions_root.arithmetic_necessitism :=
+  ⟨Classicism.Meta.Coalesced.pinnedSubstRoot_isModel, Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.pinnedSubstData) (Classicism.Meta.Coalesced.pinnedSubstData_complete)⟩
+
+/-- `coalesced-pinned-substitutions-root`: □Axiom of Infinity (type e) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_pinned_substitutions_root.necessary_axiom_of_infinity_e : Statements.Models.coalesced_pinned_substitutions_root.necessary_axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Coalesced.pinnedSubstRoot_isModel, Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e (Classicism.Meta.Coalesced.pinnedSubstData) (Classicism.Meta.Coalesced.pinnedSubstData_complete)⟩
+
+/-- `coalesced-pinned-substitutions-root`: □Axiom of Infinity (type t) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_pinned_substitutions_root.necessary_axiom_of_infinity_t : Statements.Models.coalesced_pinned_substitutions_root.necessary_axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Coalesced.pinnedSubstRoot_isModel, Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t (Classicism.Meta.Coalesced.pinnedSubstData) (Classicism.Meta.Coalesced.pinnedSubstData_complete)⟩
 
 /-- `coalesced-single-individual-root`: Intensional Choice fails, by `coalesced-sums`'s argument `intensional-choice-component`. -/
 theorem coalesced_single_individual_root.intensional_choice_r : Statements.Models.coalesced_single_individual_root.intensional_choice_r :=
@@ -195,6 +267,14 @@ theorem coalesced_single_individual_root.boolean_completeness_t : Statements.Mod
 theorem coalesced_single_individual_root.arithmetic_necessitism : Statements.Models.coalesced_single_individual_root.arithmetic_necessitism :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete)⟩
 
+/-- `coalesced-single-individual-root`: □Axiom of Infinity (type e) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_single_individual_root.necessary_axiom_of_infinity_e : Statements.Models.coalesced_single_individual_root.necessary_axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete)⟩
+
+/-- `coalesced-single-individual-root`: □Axiom of Infinity (type t) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_single_individual_root.necessary_axiom_of_infinity_t : Statements.Models.coalesced_single_individual_root.necessary_axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete)⟩
+
 /-- `coalesced-single-individual-root`: Self-Atomicity (type t) fails, by `coalesced-sums`'s argument `self-atomicity-component`. -/
 theorem coalesced_single_individual_root.self_atomicity_t : Statements.Models.coalesced_single_individual_root.self_atomicity_t :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.coalesced_sums.self_atomicity_component.self_atomicity_t (Classicism.Meta.Coalesced.singleIndividualData) (Classicism.Meta.Coalesced.singleIndividualData_complete) (Classicism.Meta.Coalesced.singleIndividualData_distinguished) (Classicism.Meta.Coalesced.singleIndividualData_fullest)⟩
@@ -206,6 +286,34 @@ theorem coalesced_single_individual_root.atoms_are_self_atoms_t : Statements.Mod
 /-- `coalesced-single-individual-root`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
 theorem coalesced_single_individual_root.truths_are_nd_necessary : Statements.Models.coalesced_single_individual_root.truths_are_nd_necessary :=
   ⟨Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Coalesced.SumData.model (Classicism.Meta.Coalesced.singleIndividualData)) (Classicism.Meta.Coalesced.SumData.isModel (Classicism.Meta.Coalesced.singleIndividualData)) (Classicism.Meta.Coalesced.singleIndividualData_isolated)⟩
+
+/-- `coalesced-substitutions-fullest-root`: Relational Choice holds, by `coalesced-sums`'s argument `relational-choice-free-root`. -/
+theorem coalesced_substitutions_fullest_root.relational_choice_r : Statements.Models.coalesced_substitutions_fullest_root.relational_choice_r :=
+  ⟨Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel, Classicism.Map.Arguments.coalesced_sums.relational_choice_free_root.relational_choice_r (Classicism.Meta.Coalesced.substitutionsFullestData) (Classicism.Meta.Coalesced.substitutionsFullestData_free)⟩
+
+/-- `coalesced-substitutions-fullest-root`: □Vicinity fails, by `coalesced-sums`'s argument `pure-sentences-possible`. -/
+theorem coalesced_substitutions_fullest_root.necessary_vicinity : Statements.Models.coalesced_substitutions_fullest_root.necessary_vicinity :=
+  ⟨Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel, Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_vicinity (Classicism.Meta.Coalesced.substitutionsFullestData) (Classicism.Meta.Coalesced.substitutionsFullestData_complete)⟩
+
+/-- `coalesced-substitutions-fullest-root`: □Weakly Inextensible Comprehension fails, by `coalesced-sums`'s argument `pure-sentences-possible`. -/
+theorem coalesced_substitutions_fullest_root.necessary_weakly_inextensible_comprehension_r : Statements.Models.coalesced_substitutions_fullest_root.necessary_weakly_inextensible_comprehension_r :=
+  ⟨Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel, Classicism.Map.Arguments.coalesced_sums.pure_sentences_possible.necessary_weakly_inextensible_comprehension_r (Classicism.Meta.Coalesced.substitutionsFullestData) (Classicism.Meta.Coalesced.substitutionsFullestData_complete)⟩
+
+/-- `coalesced-substitutions-fullest-root`: □Transversal fails, by `coalesced-sums`'s argument `transversal-boxed`. -/
+theorem coalesced_substitutions_fullest_root.necessary_transversal_r : Statements.Models.coalesced_substitutions_fullest_root.necessary_transversal_r :=
+  ⟨Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel, Classicism.Map.Arguments.coalesced_sums.transversal_boxed.necessary_transversal_r (Classicism.Meta.Coalesced.substitutionsFullestData) (Classicism.Meta.Coalesced.substitutionsFullestData_complete)⟩
+
+/-- `coalesced-substitutions-fullest-root`: Arithmetic Necessitism holds, by `coalesced-sums`'s argument `arithmetic-necessitism-complete-components`. -/
+theorem coalesced_substitutions_fullest_root.arithmetic_necessitism : Statements.Models.coalesced_substitutions_fullest_root.arithmetic_necessitism :=
+  ⟨Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel, Classicism.Map.Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism (Classicism.Meta.Coalesced.substitutionsFullestData) (Classicism.Meta.Coalesced.substitutionsFullestData_complete)⟩
+
+/-- `coalesced-substitutions-fullest-root`: □Axiom of Infinity (type e) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_substitutions_fullest_root.necessary_axiom_of_infinity_e : Statements.Models.coalesced_substitutions_fullest_root.necessary_axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel, Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e (Classicism.Meta.Coalesced.substitutionsFullestData) (Classicism.Meta.Coalesced.substitutionsFullestData_complete)⟩
+
+/-- `coalesced-substitutions-fullest-root`: □Axiom of Infinity (type t) fails, by `coalesced-sums`'s argument `necessary-axiom-of-infinity-complete-components`. -/
+theorem coalesced_substitutions_fullest_root.necessary_axiom_of_infinity_t : Statements.Models.coalesced_substitutions_fullest_root.necessary_axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel, Classicism.Map.Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t (Classicism.Meta.Coalesced.substitutionsFullestData) (Classicism.Meta.Coalesced.substitutionsFullestData_complete)⟩
 
 /-- `finite-support-dyadic-roundings`: Actuality holds, by `finite-support-one-object`'s argument `actual-world`. -/
 theorem finite_support_dyadic_roundings.actuality : Statements.Models.finite_support_dyadic_roundings.actuality :=
@@ -1207,6 +1315,58 @@ theorem symmetric_all_surjections.independence_signature_r : Statements.Models.s
 theorem symmetric_all_surjections.no_contingency_signature_r : Statements.Models.symmetric_all_surjections.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.allSurj)), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.allSurj)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.allSurj))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.allSurj))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.allSurj))) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetric_all_surjections.no_pure_contingency_r).2))⟩
 
+/-- `symmetric-class-reflecting-surjections`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_class_reflecting_surjections.relational_choice_r : Statements.Models.symmetric_class_reflecting_surjections.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect) (Classicism.Meta.Intensional.SymIdeal.classReflect_transposable)⟩
+
+/-- `symmetric-class-reflecting-surjections`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_class_reflecting_surjections.axiom_of_infinity_e : Statements.Models.symmetric_class_reflecting_surjections.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect) (Classicism.Meta.Intensional.SymIdeal.infinitelyManyIndividuals Classicism.Meta.Intensional.SymIdeal.classReflect)⟩
+
+/-- `symmetric-class-reflecting-surjections`: BF holds, by `symmetric-ideally-full`'s argument `barcan-surjective`. -/
+theorem symmetric_class_reflecting_surjections.barcan_r : Statements.Models.symmetric_class_reflecting_surjections.barcan_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect), Classicism.Map.Arguments.symmetric_ideally_full.barcan_surjective.barcan_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect) (Classicism.Meta.Intensional.SymIdeal.classReflect_surjectiveArrows) (fun _ _ h => h)⟩
+
+/-- `symmetric-class-reflecting-surjections`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
+theorem symmetric_class_reflecting_surjections.no_pure_contingency_r : Statements.Models.symmetric_class_reflecting_surjections.no_pure_contingency_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect), Classicism.Map.Arguments.no_pure_contingency_one_object.no_pure_contingency_r (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect)) (Classicism.Meta.Intensional.Premodel.oneObject_of_subsingleton _)⟩
+
+/-- `symmetric-class-reflecting-surjections`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
+theorem symmetric_class_reflecting_surjections.independence_signature_r : Statements.Models.symmetric_class_reflecting_surjections.independence_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect)))⟩
+
+/-- `symmetric-class-reflecting-surjections`: No Contingency (signature Σ) holds, by the argument `sigma-top-npc`. -/
+theorem symmetric_class_reflecting_surjections.no_contingency_signature_r : Statements.Models.symmetric_class_reflecting_surjections.no_contingency_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect)), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.classReflect))) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetric_class_reflecting_surjections.no_pure_contingency_r).2))⟩
+
+/-- `symmetric-collapse-pair-and-point`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_collapse_pair_and_point.relational_choice_r : Statements.Models.symmetric_collapse_pair_and_point.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.ptBase) (Classicism.Meta.Intensional.SymIdeal.pt_transposable)⟩
+
+/-- `symmetric-collapse-pair-and-point`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_collapse_pair_and_point.axiom_of_infinity_e : Statements.Models.symmetric_collapse_pair_and_point.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.SymIdeal.ptBase) (Classicism.Meta.Intensional.SymIdeal.pt_infinitelyManyIndividuals)⟩
+
+/-- `symmetric-collapse-pair-and-point`: Axiom of Infinity (type t) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-t`. -/
+theorem symmetric_collapse_pair_and_point.axiom_of_infinity_t : Statements.Models.symmetric_collapse_pair_and_point.axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_t.axiom_of_infinity_t (Classicism.Meta.Intensional.SymIdeal.ptBase) (Classicism.Meta.Intensional.SymIdeal.pt_separable)⟩
+
+/-- `symmetric-collapse-pair-and-point`: Actuality holds, by `symmetric-ideally-full`'s argument `actuality`. -/
+theorem symmetric_collapse_pair_and_point.actuality : Statements.Models.symmetric_collapse_pair_and_point.actuality :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase), Classicism.Map.Arguments.symmetric_ideally_full.actuality.actuality (Classicism.Meta.Intensional.SymIdeal.ptBase) (Classicism.Meta.Intensional.SymIdeal.pt_symmetryGroupPinned)⟩
+
+/-- `symmetric-collapse-pair-and-point`: Boolean Completeness holds, by `symmetric-ideally-full`'s argument `boolean-completeness`. -/
+theorem symmetric_collapse_pair_and_point.boolean_completeness_r : Statements.Models.symmetric_collapse_pair_and_point.boolean_completeness_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.ptBase) (Classicism.Meta.Intensional.SymIdeal.pt_hullConditions)⟩
+
+/-- `symmetric-collapse-pair-and-point`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetric_collapse_pair_and_point.truths_are_nd_necessary : Statements.Models.symmetric_collapse_pair_and_point.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.ptBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase)) (Classicism.Meta.Intensional.SymIdeal.pt_actualWorldIsolated)⟩
+
+/-- `symmetric-collapse-pair-and-point`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
+theorem symmetric_collapse_pair_and_point.independence_signature_r : Statements.Models.symmetric_collapse_pair_and_point.independence_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.ptBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.ptBase)))⟩
+
 /-- `symmetric-collapse-pair`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
 theorem symmetric_collapse_pair.relational_choice_r : Statements.Models.symmetric_collapse_pair.relational_choice_r :=
   ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.collapsePair) (Classicism.Meta.Intensional.SymIdeal.collapsePair_transposable)⟩
@@ -1251,6 +1411,22 @@ theorem symmetric_collapse_pair.no_contingency_signature_r : Statements.Models.s
 theorem symmetric_entrance_qualitative_links.independence_signature_r : Statements.Models.symmetric_entrance_qualitative_links.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.model) (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel)) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.FixedPointEntrance.Qualitative.isModel))⟩
 
+/-- `symmetric-finite-compression-entrance`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_finite_compression_entrance.relational_choice_r : Statements.Models.symmetric_finite_compression_entrance.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A) (Classicism.Meta.Intensional.FiniteCompression.transposable)⟩
+
+/-- `symmetric-finite-compression-entrance`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_finite_compression_entrance.axiom_of_infinity_e : Statements.Models.symmetric_finite_compression_entrance.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A) (Classicism.Meta.Intensional.FiniteCompression.infinitelyManyIndividuals)⟩
+
+/-- `symmetric-finite-compression-entrance`: Axiom of Infinity (type t) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-t`. -/
+theorem symmetric_finite_compression_entrance.axiom_of_infinity_t : Statements.Models.symmetric_finite_compression_entrance.axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_t.axiom_of_infinity_t (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A) (Classicism.Meta.Intensional.FiniteCompression.separable)⟩
+
+/-- `symmetric-finite-compression-entrance`: Boolean Completeness holds, by `symmetric-ideally-full`'s argument `boolean-completeness`. -/
+theorem symmetric_finite_compression_entrance.boolean_completeness_r : Statements.Models.symmetric_finite_compression_entrance.boolean_completeness_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A) (Classicism.Meta.Intensional.FiniteCompression.hullConditions)⟩
+
 /-- `symmetric-finite-compression-entrance`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
 theorem symmetric_finite_compression_entrance.independence_signature_r : Statements.Models.symmetric_finite_compression_entrance.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.FiniteCompression.base Classicism.Meta.Intensional.FiniteCompression.A)))⟩
@@ -1283,9 +1459,53 @@ theorem symmetric_infinite_classes.independence_signature_r : Statements.Models.
 theorem symmetric_infinite_classes.no_contingency_signature_r : Statements.Models.symmetric_infinite_classes.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.infClasses)), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.infClasses)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.infClasses))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.infClasses))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.infClasses))) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetric_infinite_classes.no_pure_contingency_r).2))⟩
 
+/-- `symmetric-old-new-individuals`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_old_new_individuals.relational_choice_r : Statements.Models.symmetric_old_new_individuals.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.OldNew.base), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.OldNew.base) (Classicism.Meta.Intensional.OldNew.transposable)⟩
+
+/-- `symmetric-old-new-individuals`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_old_new_individuals.axiom_of_infinity_e : Statements.Models.symmetric_old_new_individuals.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.OldNew.base), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.OldNew.base) (Classicism.Meta.Intensional.OldNew.infinitelyManyIndividuals)⟩
+
 /-- `symmetric-old-new-individuals`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
 theorem symmetric_old_new_individuals.independence_signature_r : Statements.Models.symmetric_old_new_individuals.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.OldNew.base)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.OldNew.base)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.OldNew.base))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.OldNew.base))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.OldNew.base)))⟩
+
+/-- `symmetric-permutations-infinite-classes`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_permutations_infinite_classes.relational_choice_r : Statements.Models.symmetric_permutations_infinite_classes.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses) (Classicism.Meta.Intensional.SymIdeal.permInfClasses_transposable)⟩
+
+/-- `symmetric-permutations-infinite-classes`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_permutations_infinite_classes.axiom_of_infinity_e : Statements.Models.symmetric_permutations_infinite_classes.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses) (Classicism.Meta.Intensional.SymIdeal.infinitelyManyIndividuals Classicism.Meta.Intensional.SymIdeal.permInfClasses)⟩
+
+/-- `symmetric-permutations-infinite-classes`: BF holds, by `symmetric-ideally-full`'s argument `barcan-surjective`. -/
+theorem symmetric_permutations_infinite_classes.barcan_r : Statements.Models.symmetric_permutations_infinite_classes.barcan_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses), Classicism.Map.Arguments.symmetric_ideally_full.barcan_surjective.barcan_r (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses) (Classicism.Meta.Intensional.SymIdeal.permInfClasses_surjectiveArrows) (fun _ _ h => h)⟩
+
+/-- `symmetric-permutations-infinite-classes`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
+theorem symmetric_permutations_infinite_classes.no_pure_contingency_r : Statements.Models.symmetric_permutations_infinite_classes.no_pure_contingency_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses), Classicism.Map.Arguments.no_pure_contingency_one_object.no_pure_contingency_r (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses)) (Classicism.Meta.Intensional.Premodel.oneObject_of_subsingleton _)⟩
+
+/-- `symmetric-permutations-infinite-classes`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
+theorem symmetric_permutations_infinite_classes.independence_signature_r : Statements.Models.symmetric_permutations_infinite_classes.independence_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses)))⟩
+
+/-- `symmetric-permutations-infinite-classes`: No Contingency (signature Σ) holds, by the argument `sigma-top-npc`. -/
+theorem symmetric_permutations_infinite_classes.no_contingency_signature_r : Statements.Models.symmetric_permutations_infinite_classes.no_contingency_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses)), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses))) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetric_permutations_infinite_classes.no_pure_contingency_r).2))⟩
+
+/-- `symmetric-qualitative-contrast-at-w1`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_qualitative_contrast_at_w1.axiom_of_infinity_e : Statements.Models.symmetric_qualitative_contrast_at_w1.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBaseW₁), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.SymIdeal.contrastBaseW₁) (Classicism.Meta.Intensional.SymIdeal.contrastW₁_infinitelyManyIndividuals)⟩
+
+/-- `symmetric-qualitative-contrast-at-w1`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
+theorem symmetric_qualitative_contrast_at_w1.independence_signature_r : Statements.Models.symmetric_qualitative_contrast_at_w1.independence_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBaseW₁)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.contrastBaseW₁)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBaseW₁))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBaseW₁))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBaseW₁)))⟩
+
+/-- `symmetric-qualitative-contrast`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_qualitative_contrast.relational_choice_r : Statements.Models.symmetric_qualitative_contrast.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.contrastBase) (Classicism.Meta.Intensional.SymIdeal.contrast_transposable)⟩
 
 /-- `symmetric-qualitative-contrast`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
 theorem symmetric_qualitative_contrast.axiom_of_infinity_e : Statements.Models.symmetric_qualitative_contrast.axiom_of_infinity_e :=
@@ -1294,6 +1514,42 @@ theorem symmetric_qualitative_contrast.axiom_of_infinity_e : Statements.Models.s
 /-- `symmetric-qualitative-contrast`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
 theorem symmetric_qualitative_contrast.independence_signature_r : Statements.Models.symmetric_qualitative_contrast.independence_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.contrastBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.contrastBase)))⟩
+
+/-- `symmetric-qualitative-links`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_qualitative_links.relational_choice_r : Statements.Models.symmetric_qualitative_links.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.QualitativeLinks.base) (Classicism.Meta.Intensional.QualitativeLinks.transposable)⟩
+
+/-- `symmetric-qualitative-links`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_qualitative_links.axiom_of_infinity_e : Statements.Models.symmetric_qualitative_links.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.QualitativeLinks.base) (Classicism.Meta.Intensional.QualitativeLinks.infinitelyManyIndividuals)⟩
+
+/-- `symmetric-qualitative-links`: Axiom of Infinity (type t) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-t`. -/
+theorem symmetric_qualitative_links.axiom_of_infinity_t : Statements.Models.symmetric_qualitative_links.axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_t.axiom_of_infinity_t (Classicism.Meta.Intensional.QualitativeLinks.base) (Classicism.Meta.Intensional.QualitativeLinks.separable)⟩
+
+/-- `symmetric-qualitative-links`: BF holds, by `symmetric-ideally-full`'s argument `barcan-surjective`. -/
+theorem symmetric_qualitative_links.barcan_r : Statements.Models.symmetric_qualitative_links.barcan_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base), Classicism.Map.Arguments.symmetric_ideally_full.barcan_surjective.barcan_r (Classicism.Meta.Intensional.QualitativeLinks.base) (Classicism.Meta.Intensional.QualitativeLinks.surjectiveArrows) (fun _ _ h => h)⟩
+
+/-- `symmetric-qualitative-links`: Actuality holds, by `symmetric-ideally-full`'s argument `actuality`. -/
+theorem symmetric_qualitative_links.actuality : Statements.Models.symmetric_qualitative_links.actuality :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base), Classicism.Map.Arguments.symmetric_ideally_full.actuality.actuality (Classicism.Meta.Intensional.QualitativeLinks.base) (Classicism.Meta.Intensional.QualitativeLinks.symmetryGroupPinned)⟩
+
+/-- `symmetric-qualitative-links`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetric_qualitative_links.truths_are_nd_necessary : Statements.Models.symmetric_qualitative_links.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.QualitativeLinks.base)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base)) (Classicism.Meta.Intensional.QualitativeLinks.actualWorldIsolated)⟩
+
+/-- `symmetric-qualitative-links`: No Pure Contingency holds, by the argument `no-pure-contingency-one-object`. -/
+theorem symmetric_qualitative_links.no_pure_contingency_r : Statements.Models.symmetric_qualitative_links.no_pure_contingency_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base), Classicism.Map.Arguments.no_pure_contingency_one_object.no_pure_contingency_r (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.QualitativeLinks.base)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base)) (Classicism.Meta.Intensional.QualitativeLinks.oneObject)⟩
+
+/-- `symmetric-qualitative-links`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
+theorem symmetric_qualitative_links.independence_signature_r : Statements.Models.symmetric_qualitative_links.independence_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.QualitativeLinks.base)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base)))⟩
+
+/-- `symmetric-qualitative-links`: No Contingency (signature Σ) holds, by the argument `sigma-top-npc`. -/
+theorem symmetric_qualitative_links.no_contingency_signature_r : Statements.Models.symmetric_qualitative_links.no_contingency_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base)), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.QualitativeLinks.base)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.QualitativeLinks.base))) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetric_qualitative_links.no_pure_contingency_r).2))⟩
 
 /-- `symmetric-range-gap-without-actuality`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
 theorem symmetric_range_gap_without_actuality.relational_choice_r : Statements.Models.symmetric_range_gap_without_actuality.relational_choice_r :=
@@ -1363,9 +1619,69 @@ theorem symmetric_range_gap.independence_signature_r : Statements.Models.symmetr
 theorem symmetric_range_gap.no_contingency_signature_r : Statements.Models.symmetric_range_gap.no_contingency_signature_r :=
   ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)), Classicism.Map.Arguments.sigma_top_npc.no_contingency_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.rangeGap))) (Classicism.Meta.Intensional.Premodel.holdsAx_interp_ofPure.2 ((Classicism.Map.Models.symmetric_range_gap.no_pure_contingency_r).2))⟩
 
+/-- `symmetric-recurrent-colours`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_recurrent_colours.relational_choice_r : Statements.Models.symmetric_recurrent_colours.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.colourBase) (Classicism.Meta.Intensional.SymIdeal.colour_transposable)⟩
+
+/-- `symmetric-recurrent-colours`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_recurrent_colours.axiom_of_infinity_e : Statements.Models.symmetric_recurrent_colours.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.SymIdeal.colourBase) (Classicism.Meta.Intensional.SymIdeal.colour_infinitelyManyIndividuals)⟩
+
+/-- `symmetric-recurrent-colours`: Axiom of Infinity (type t) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-t`. -/
+theorem symmetric_recurrent_colours.axiom_of_infinity_t : Statements.Models.symmetric_recurrent_colours.axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_t.axiom_of_infinity_t (Classicism.Meta.Intensional.SymIdeal.colourBase) (Classicism.Meta.Intensional.SymIdeal.colour_separable)⟩
+
+/-- `symmetric-recurrent-colours`: BF holds, by `symmetric-ideally-full`'s argument `barcan-surjective`. -/
+theorem symmetric_recurrent_colours.barcan_r : Statements.Models.symmetric_recurrent_colours.barcan_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase), Classicism.Map.Arguments.symmetric_ideally_full.barcan_surjective.barcan_r (Classicism.Meta.Intensional.SymIdeal.colourBase) (Classicism.Meta.Intensional.SymIdeal.colour_surjectiveArrows) (fun _ _ h => h)⟩
+
+/-- `symmetric-recurrent-colours`: Boolean Completeness holds, by `symmetric-ideally-full`'s argument `boolean-completeness`. -/
+theorem symmetric_recurrent_colours.boolean_completeness_r : Statements.Models.symmetric_recurrent_colours.boolean_completeness_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.colourBase) (Classicism.Meta.Intensional.SymIdeal.colour_hullConditions)⟩
+
+/-- `symmetric-recurrent-colours`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
+theorem symmetric_recurrent_colours.independence_signature_r : Statements.Models.symmetric_recurrent_colours.independence_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.colourBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.colourBase)))⟩
+
+/-- `symmetric-two-object-all-maps`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_two_object_all_maps.relational_choice_r : Statements.Models.symmetric_two_object_all_maps.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.allMapsBase) (Classicism.Meta.Intensional.SymIdeal.allMaps_transposable)⟩
+
+/-- `symmetric-two-object-all-maps`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_two_object_all_maps.axiom_of_infinity_e : Statements.Models.symmetric_two_object_all_maps.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.SymIdeal.allMapsBase) (Classicism.Meta.Intensional.SymIdeal.allMaps_infinitelyManyIndividuals)⟩
+
+/-- `symmetric-two-object-all-maps`: Axiom of Infinity (type t) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-t`. -/
+theorem symmetric_two_object_all_maps.axiom_of_infinity_t : Statements.Models.symmetric_two_object_all_maps.axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_t.axiom_of_infinity_t (Classicism.Meta.Intensional.SymIdeal.allMapsBase) (Classicism.Meta.Intensional.SymIdeal.allMaps_separable)⟩
+
+/-- `symmetric-two-object-all-maps`: Boolean Completeness holds, by `symmetric-ideally-full`'s argument `boolean-completeness`. -/
+theorem symmetric_two_object_all_maps.boolean_completeness_r : Statements.Models.symmetric_two_object_all_maps.boolean_completeness_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.allMapsBase) (Classicism.Meta.Intensional.SymIdeal.allMaps_hullConditions)⟩
+
+/-- `symmetric-two-object-all-maps`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
+theorem symmetric_two_object_all_maps.independence_signature_r : Statements.Models.symmetric_two_object_all_maps.independence_signature_r :=
+  ⟨Classicism.Meta.Signature.sigmaTop_admitted, Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase)), Classicism.Map.Arguments.sigma_top.independence_signature_r (Classicism.Meta.Intensional.Premodel.withTop (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.allMapsBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase))) (Classicism.Meta.Intensional.Premodel.withTop_isModel (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase))) (Classicism.Meta.Signature.sigmaTop_admitted) (Classicism.Meta.Intensional.Premodel.withTop_sigmaTop (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.allMapsBase)))⟩
+
+/-- `symmetric-two-object-unpinned`: Relational Choice fails, by `symmetric-ideally-full`'s argument `relational-choice`. -/
+theorem symmetric_two_object_unpinned.relational_choice_r : Statements.Models.symmetric_two_object_unpinned.relational_choice_r :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase), Classicism.Map.Arguments.symmetric_ideally_full.relational_choice.relational_choice_r (Classicism.Meta.Intensional.SymIdeal.twoBase) (Classicism.Meta.Intensional.SymIdeal.two_transposable)⟩
+
+/-- `symmetric-two-object-unpinned`: Axiom of Infinity (type e) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-e`. -/
+theorem symmetric_two_object_unpinned.axiom_of_infinity_e : Statements.Models.symmetric_two_object_unpinned.axiom_of_infinity_e :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_e.axiom_of_infinity_e (Classicism.Meta.Intensional.SymIdeal.twoBase) (Classicism.Meta.Intensional.SymIdeal.two_infinitelyManyIndividuals)⟩
+
+/-- `symmetric-two-object-unpinned`: Axiom of Infinity (type t) holds, by `symmetric-ideally-full`'s argument `axiom-of-infinity-t`. -/
+theorem symmetric_two_object_unpinned.axiom_of_infinity_t : Statements.Models.symmetric_two_object_unpinned.axiom_of_infinity_t :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase), Classicism.Map.Arguments.symmetric_ideally_full.axiom_of_infinity_t.axiom_of_infinity_t (Classicism.Meta.Intensional.SymIdeal.twoBase) (Classicism.Meta.Intensional.SymIdeal.two_separable)⟩
+
 /-- `symmetric-two-object-unpinned`: Boolean Completeness holds, by `symmetric-ideally-full`'s argument `boolean-completeness`. -/
 theorem symmetric_two_object_unpinned.boolean_completeness_r : Statements.Models.symmetric_two_object_unpinned.boolean_completeness_r :=
   ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase), Classicism.Map.Arguments.symmetric_ideally_full.boolean_completeness.boolean_completeness_r (Classicism.Meta.Intensional.SymIdeal.twoBase) (Classicism.Meta.Intensional.SymIdeal.two_hullConditions)⟩
+
+/-- `symmetric-two-object-unpinned`: Truths are ND-necessary holds, by the argument `nd-necessity-isolated-actual-world`. -/
+theorem symmetric_two_object_unpinned.truths_are_nd_necessary : Statements.Models.symmetric_two_object_unpinned.truths_are_nd_necessary :=
+  ⟨Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase), Classicism.Map.Arguments.nd_necessity_isolated_actual_world.truths_are_nd_necessary (Classicism.Meta.Intensional.SymBase.model (Classicism.Meta.Intensional.SymIdeal.twoBase)) (Classicism.Meta.Intensional.SymBase.model_isModel (Classicism.Meta.Intensional.SymIdeal.twoBase)) (Classicism.Meta.Intensional.SymIdeal.two_actualWorldIsolated)⟩
 
 /-- `symmetric-two-object-unpinned`: Independence (signature Σ) fails, by the argument `sigma-top`. -/
 theorem symmetric_two_object_unpinned.independence_signature_r : Statements.Models.symmetric_two_object_unpinned.independence_signature_r :=

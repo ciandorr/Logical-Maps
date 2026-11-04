@@ -111,3 +111,15 @@ notes: 'coalesced-pinned-substitutions-root without the finite pinning, suggeste
   Maximalism. The argument that it is a model of C is that of coalesced-maximalist-root with the
   substitutions added (see the write-up) and has not been checked by a second reader. No Lean
   verification is claimed.'
+lean:
+  model: Classicism.Meta.Coalesced.substitutionsFullestRoot
+  is_model: Classicism.Meta.Coalesced.substitutionsFullestRoot_isModel
+  param: Classicism.Meta.Coalesced.substitutionsFullestData
+  meets:
+    complete-components: Classicism.Meta.Coalesced.substitutionsFullestData_complete
+    fullest-domains: Classicism.Meta.Coalesced.substitutionsFullestData_fullest
+    free-root-component: Classicism.Meta.Coalesced.substitutionsFullestData_free
+  verdicts:
+  - holds: actuality
+    ref: Classicism.Map.Models.coalesced_substitutions_fullest_root.actuality
+    status: verified

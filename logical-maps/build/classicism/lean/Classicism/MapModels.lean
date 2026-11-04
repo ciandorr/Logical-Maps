@@ -10,6 +10,7 @@ import Classicism.Models.FixedPointEntranceChoice
 import Classicism.Coalesced.SumData
 import Classicism.Models.CoalescedFinite
 import Classicism.Models.CoalescedInterpretations
+import Classicism.Models.CoalescedInterpretationSums
 import Classicism.Models.GluedFreeMonoid
 import Classicism.Models.GluedFreeProduct
 import Classicism.Semantics.OneIndividual

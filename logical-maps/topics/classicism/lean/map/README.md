@@ -168,11 +168,17 @@ factors uniquely through one to the component's root), `SumData.FreeRootComponen
 distinguished arrows with the fullest root domains a root entity is its extension at the root
 and its parts in the components, chosen freely (`SumData.thread`), and inclusion is
 componentwise, so a counterexample at a component's root, from a Lean model of `¬BF(t)` or
-`¬Atomicity(t)`, transfers to the root. The other transfer arguments need a Lean model
-refuting BC at `t`, Intensional Choice, Atoms are self-atoms (`t`), Tame Rigidity at a
-relational argument type, or Rigid Power at `t → t`; `pure-sentences-possible` and
-`transversal-boxed` need a Lean model refuting Vicinity, Weakly Inextensible Comprehension or
-Transversal. The members `coalesced-maximalist-root` (at
+`¬Atomicity(t)`, transfers to the root. BC at `t`, Intensional Choice and Atoms are self-atoms
+(`t`) transfer likewise (`TransferBC`, `TransferChoice`, `TransferSelfAtoms`); not yet in Lean:
+`tame-rigidity-component`, `rigid-power-component` and `self-atom-of-two-actual-components`.
+`pure-sentences-possible`, `transversal-boxed` and `necessary-axiom-of-infinity-complete-components`
+(since 3 November, `Coalesced/PureSentencesPossible.lean`) use complete components alone, whatever
+the root arrows: the necessitation of what a Lean model refutes fails at the root. The
+interpretation-arrow members are group data too (`Models/CoalescedInterpretationSums.lean`,
+`SumData.ofInterp`): `coalesced-pinned-interpretations-root`, `coalesced-pinned-substitutions-root`
+and `coalesced-substitutions-fullest-root` (the fullest root domains over the substitution arrows);
+`coalesced-definable-root`'s model is the pure reduct of such a sum, and its verdicts from the
+group's arguments are certified one by one through it (`MapWitnesses.lean`). The members `coalesced-maximalist-root` (at
 `Σ = {c : t}`), `coalesced-single-individual-root` and `coalesced-constant-indexed-root` are built
 over the complete family of `Completeness/` (`Coalesced/Complete.lean`, where every sentence
 consistent with `C` is possible at the root: Maximalism).

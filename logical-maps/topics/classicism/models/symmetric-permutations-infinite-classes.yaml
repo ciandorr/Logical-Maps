@@ -155,3 +155,11 @@ notes: >-
   argument intensional-choice-moved-instances). Recorded with the
   base as individuals; the argument against Transversal does not apply to the generated variant with one
   individual.
+lean:
+  param: Classicism.Meta.Intensional.SymIdeal.Base.toSym Classicism.Meta.Intensional.SymIdeal.permInfClasses
+  meets:
+    finite-pinning: fun _ _ h => h
+    surjective-arrows: Classicism.Meta.Intensional.SymIdeal.permInfClasses_surjectiveArrows
+    infinitely-many-individuals: Classicism.Meta.Intensional.SymIdeal.infinitelyManyIndividuals Classicism.Meta.Intensional.SymIdeal.permInfClasses
+    one-object-action-model: Classicism.Meta.Intensional.Premodel.oneObject_of_subsingleton _
+    transposable: Classicism.Meta.Intensional.SymIdeal.permInfClasses_transposable

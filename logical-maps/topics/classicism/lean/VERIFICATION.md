@@ -1422,3 +1422,57 @@ certificates in the database's sense, because the statements they prove are hand
 rather than generated from the records. The statements were checked against the records by hand and
 by name; that is the current level of assurance, and the report says so rather than
 claiming more.
+
+## The symmetric ideally-full group's conditions, 3 November
+
+Lean models for eight more members of `symmetric-ideally-full`, and the group's conditions proved
+for members that had a Lean base but no proof of them, so that the group's arguments (all already
+certified) apply in Lean.
+
+- `Models/SymTransposable.lean`: `transposable` for any base (`SymBase.transposable_of_moves`):
+  a property `P` preserved by the symmetries, and for each finite `K` and `P`-point outside it a
+  symmetry fixing `K` pointwise and moving it; `symmetryGroupPinned_of_one` and
+  `actualWorldIsolated_of_pinned` for the actual world as the symmetry group.
+- `Models/SymmetricIdealMeets.lean`: new bases for the class-reflecting surjections
+  (`classReflect`), the permutations of infinitely many infinite classes (`permInfClasses`), the
+  two-object all-maps model (`allMapsBase`, with its hull conditions), the qualitative contrast
+  at `W₁` (`contrastBaseW₁`) and the recurrent colours (`colourBase`, with its hull conditions,
+  `M₀ = {0}`); `transposable`, infinitely many individuals and separable collapses for the
+  qualitative contrast, the two-object unpinned model (and its isolated actual world), the old
+  and new individuals and the finite-compression entrance (and its hull conditions, the second
+  half conjugated from Base 1 through `Nat.pairEquiv`).
+- `Models/QualitativeLinksMeets.lean`: Base 3 (`QualitativeLinks.base`) meets `transposable`
+  (links over the same two points transposed), surjective arrows, `symmetry-group-pinned`,
+  `actual-world-isolated` and `separable-collapses` (`collapseBy`, an arrow for any surjection of
+  the points merging `0` and `1`).
+- `Models/SymmetricCollapsePoint.lean`: the collapse pair and a point (`ptBase`), with all its
+  recorded conditions including the hull conditions (`M₀ = {0, 1}`, as for Base 2).
+
+Not done: the Boolean-prefix model (bases of countable atomless Boolean algebras), the members'
+own arguments, and the general arguments with no Lean proof yet (Arithmetic Necessitism from
+finitely pinned domains, the necessary Axioms of Infinity, the self-atom arguments).
+
+*Checked.* The full build passes; `lean-check` reports 473 of 473 model verdicts verified (52
+new, all from the group's and the topic's certified arguments), OK (pending proofs remain).
+
+## Coalesced sums: the members as group data, 3 November
+
+`Coalesced/PureSentencesPossible.lean` takes from `Results/Other/Witnesses.lean` the lemma that the
+necessitation of a schema some Lean model refutes fails at a coalesced root with complete components
+(`SumData.not_holdsAx_box_of_complete`, which no longer asks for distinguished arrows), with the
+truncation model's failures of Vicinity and Weakly Inextensible Comprehension and the soundness
+lemmas they use, so that the group's arguments `pure-sentences-possible`, `transversal-boxed` and
+`necessary-axiom-of-infinity-complete-components` are certified as arguments (`MapArguments.lean`).
+The Axioms of Infinity at `e` and `t` fail in the full model with one world, one individual and two
+propositions (`MSet.model Unit`).
+
+`Models/CoalescedInterpretationSums.lean`: the sum over the interpretation arrows into the canonical
+family is a `SumData` (`SumData.ofInterp`) meeting `complete-components`; with the fullest root
+domains it meets `fullest-domains` and `free-root-component`, and the finitely pinned root with only
+the identity meets `free-root-component`. New member in Lean: `coalesced-substitutions-fullest-root`
+(`substitutionsFullestRoot`), whose Actuality follows from a free root component alone
+(`SumData.holds_actuality_of_free`). `coalesced-definable-root`'s model is the reduct of such a sum;
+its seven verdicts from the group's arguments are certified through it (`MapWitnesses.lean`).
+
+*Checked.* `lean-check` OK (pending proofs remain): 456 model verdicts verified. The group's
+certified verdicts went from 75 (48 from arguments, 27 member by member) to 110 (75 and 35).

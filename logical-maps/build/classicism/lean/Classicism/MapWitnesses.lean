@@ -173,4 +173,61 @@ theorem necessary_transversal_r : Statements.Models.coalesced_constant_indexed_r
 
 end coalesced_constant_indexed_root
 
+namespace coalesced_definable_root
+
+/-! The record's model is the pure reduct of the sum over `Σ₀ = {d}` (`Coalesced.definableData`), to
+which the group's arguments apply: a pure schema holds or fails in the reduct as in the sum
+(`Coalesced.holdsAx_reduct_of`, `Coalesced.not_holdsAx_reduct_of`). 3 November 2026. -/
+
+local notation "M" => Coalesced.definableRoot_isModel
+local notation "hc" => Coalesced.definableData_complete
+
+/-- `pure-sentences-possible`, applied to the sum. -/
+theorem necessary_vicinity : Statements.Models.coalesced_definable_root.necessary_vicinity :=
+  ⟨M, Coalesced.not_holdsAx_reduct_of
+    (Arguments.coalesced_sums.pure_sentences_possible.necessary_vicinity _ hc)⟩
+
+theorem necessary_weakly_inextensible_comprehension_r :
+    Statements.Models.coalesced_definable_root.necessary_weakly_inextensible_comprehension_r :=
+  ⟨M, Coalesced.not_holdsAx_reduct_of
+    (Arguments.coalesced_sums.pure_sentences_possible.necessary_weakly_inextensible_comprehension_r _ hc)⟩
+
+/-- `transversal-boxed`, applied to the sum. -/
+theorem necessary_transversal_r : Statements.Models.coalesced_definable_root.necessary_transversal_r :=
+  ⟨M, Coalesced.not_holdsAx_reduct_of
+    (Arguments.coalesced_sums.transversal_boxed.necessary_transversal_r _ hc)⟩
+
+/-- `arithmetic-necessitism-complete-components`, applied to the sum. -/
+theorem arithmetic_necessitism : Statements.Models.coalesced_definable_root.arithmetic_necessitism :=
+  ⟨M, Coalesced.holdsAx_reduct_of
+    (Arguments.coalesced_sums.arithmetic_necessitism_complete_components.arithmetic_necessitism _ hc)⟩
+
+/-- `necessary-axiom-of-infinity-complete-components`, applied to the sum. -/
+theorem necessary_axiom_of_infinity_e :
+    Statements.Models.coalesced_definable_root.necessary_axiom_of_infinity_e :=
+  ⟨M, Coalesced.not_holdsAx_reduct_of
+    (Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_e _ hc)⟩
+
+theorem necessary_axiom_of_infinity_t :
+    Statements.Models.coalesced_definable_root.necessary_axiom_of_infinity_t :=
+  ⟨M, Coalesced.not_holdsAx_reduct_of
+    (Arguments.coalesced_sums.necessary_axiom_of_infinity_complete_components.necessary_axiom_of_infinity_t _ hc)⟩
+
+/-- `actuality-singleton-root`: the actual world is isolated (`Coalesced.definableRoot_actualWorldIsolated`). -/
+theorem actuality : Statements.Models.coalesced_definable_root.actuality :=
+  ⟨M, (Premodel.holdsAx_schemaIn_iff _ _).2 fun _ e =>
+    e ▸ Coalesced.AllFinite.holds_actuality_of_isolated M Coalesced.definableRoot_actualWorldIsolated⟩
+
+end coalesced_definable_root
+
+namespace coalesced_substitutions_fullest_root
+
+/-- The record's argument `actuality`: the singleton of the root's identity arrow is in the fullest
+root domains (`Coalesced.SumData.holds_actuality_of_free`). -/
+theorem actuality : Statements.Models.coalesced_substitutions_fullest_root.actuality :=
+  ⟨Coalesced.substitutionsFullestRoot_isModel,
+    Coalesced.SumData.holds_actuality_of_free Coalesced.substitutionsFullestData_free⟩
+
+end coalesced_substitutions_fullest_root
+
 end Classicism.Map.Models

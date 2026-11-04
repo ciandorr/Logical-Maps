@@ -345,7 +345,7 @@ file, so no `lean` of its own (`pmap.lean_block`). The rule:
 
 Its certificates are in `MapDerived.lean`, named by the variant's id, and the index lists them
 under it, so the viewer's counts include them; `lean-check --update` writes no status for them.
-On 3 November this gave 181 verdicts in 21 variants (the `sigma` variants of the members with a
+On 4 November this gave 199 verdicts in 23 variants (the `sigma` variants of the members with a
 Lean model). A member's certificate that `MapDerived.lean` cannot import (one in `MapWitnesses.lean`,
 which imports it) is not inherited (`pmap.lean_citable_from_derived`). No `lean.variants` is given yet: the `individuals` variants need Lean models of
 their own (the finite-support group's construction is over `ℕ`; the full action models' over one

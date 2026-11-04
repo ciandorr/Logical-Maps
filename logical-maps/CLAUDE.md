@@ -99,7 +99,15 @@ and reports unless it is asked for by name.
   recounts every point, and bumping `HISTORY_VERSION` does so too, for when what counts as a
   question changes. Run it after merges to main, having fetched. A build only reads the ledger,
   adding this build as a live last point, for the Changes tab's "Progress over time"
-  (`check_history_ui.cjs`).
+  (`check_history_ui.cjs`). That chart's default view, Contributions, needs no ledger: the
+  viewer sizes each day's work from the record dates (a new principle, result or model 1, an
+  argument with verdicts on an older model ½, revisions nothing).
+- Lean-checked counts: `lean_checked` keeps the proved results and model verdicts whose
+  certificates in the topic's Lean index (`lean.index.file`) rest on `LEAN_ALLOWED_AXIOMS`, and
+  `Lynchpins.settled_by` counts how many of the full map's questions that part settles alone (the
+  questions stay the full map's). The build adds them to `progress` (`lean`, and two more entries
+  per selection group) for the High-Value and Core counts; the ledger records them per point
+  (`lean_settled`, `core_lean_settled`), reading each commit's own index.
 - `python3 scripts/pmap.py starter` — build the reusable starter ZIP. Normal
   builds also regenerate it and add a relative Contribute download. Keep its
   allowlist limited to shared tooling and `starter/` assets. Run

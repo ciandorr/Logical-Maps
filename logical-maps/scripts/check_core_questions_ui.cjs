@@ -54,5 +54,21 @@ try{
   assert.deepEqual(keys('open-core'),['q|a+b|c']);
   assert.equal(d.getElementById('open-core-progress').textContent,'1 (20.0%) of 5 Core Questions are open.');
   assert.deepEqual(errors.map(String),[]);
-  console.log('PASS: Core Questions sit below the renamed High-Value Questions, list only core questions in core order with core scores, and count their open ones over the shown principles.');
 }finally{w.close();}
+// With a Lean index each group also carries what the Lean-checked evidence alone settles, and both
+// counts add the questions it leaves open.
+{
+  const lean=[['0x3',null],['0x0','open'],['0x0','open'],['0x8','open'],['0x0','refuted']];
+  const sel={...selection,groups:selection.groups.map((g,i)=>[...g,...lean[i]])};
+  const prog={...progress,selection:sel,lean:{settled:4,core_settled:3}};
+  const data2={...data,progress:[prog],lynchpins:{...data.lynchpins,reports:[{...data.lynchpins.reports[0],progress:prog}]}};
+  const errs=[],vc2=new VirtualConsole();vc2.on('jsdomError',e=>errs.push(e));
+  const dom2=new JSDOM(template.replace('/*__PMAP_DATA__*/null',()=>JSON.stringify(data2)),{url:'http://localhost/?assume=',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc2});
+  try{
+    const d2=dom2.window.document;d2.querySelector('[data-tab="open"]').click();
+    assert.equal(d2.getElementById('open-progress').textContent,'7 (46.7%) of 15 questions with up to two premises are open. With Lean-checked work only, 11 (73.3%).');
+    assert.equal(d2.getElementById('open-core-progress').textContent,'5 (41.7%) of 12 Core Questions are open. With Lean-checked work only, 9 (75.0%).');
+    assert.deepEqual(errs.map(String),[]);
+  }finally{dom2.window.close();}
+}
+console.log('PASS: Core Questions sit below the renamed High-Value Questions, list only core questions in core order with core scores, and count their open ones over the shown principles, and with a Lean index the ones Lean-checked work alone leaves open.');

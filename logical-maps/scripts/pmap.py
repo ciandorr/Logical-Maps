@@ -1081,7 +1081,7 @@ class Lynchpins:
     included, and a question by the geometric mean of the two.
     """
 
-    def __init__(self, data: dict, background=(), negative_background=()):
+    def __init__(self, data: dict, background=(), negative_background=(), *, universe: bool = True):
         self.names = {FALSE: "⊥", **{p["id"]: p["name"] for p in data["principles"]}}
         self.ids = ids = [p["id"] for p in data["principles"]]
         results = [r for r in data["results"] if r["status"] == "proved"]
@@ -1100,6 +1100,9 @@ class Lynchpins:
         self.E = E = Engine(ids, results, models, self.background, negative)
         self.inconsistent = E.conflict([]) is not None
         self.witnesses = [m for m in models if m["id"] not in E.model_conflicts]
+        self._index()
+        if not universe:
+            return  # closures only: for counting another map's questions (settled_by)
         self.trivial = [] if self.inconsistent else [a for a in ids if a in E.cl([])[0]]
         self.classes, seen = [], set()
         for a in ids:
@@ -1114,6 +1117,21 @@ class Lynchpins:
                         for m in self.witnesses}
         self._rows = self._ranked = self._auto = self._recorded_rows = None
         self._universe()
+
+    def _index(self):
+        """Bits over ids ∪ {False}, the rules indexed by premise atom, and the witnesses' closures."""
+        E = self.E
+        self.bit = bit = {x: 1 << i for i, x in enumerate([*self.ids, FALSE])}
+        self.id_of = {b: x for x, b in bit.items()}
+        self.BAD = bit[FALSE] | sum(bit[v] for v in self.negative if v in bit)
+        self._ext_cache = {}
+        self.by_prem, self.rules_by_atom = {}, {}
+        for _, prem, concl in E.rules:
+            pm = self._mask(prem)
+            for x in prem:
+                self.by_prem.setdefault(x, []).append(pm)
+                self.rules_by_atom.setdefault(x, []).append((pm, bit[concl], concl))
+        self.wit = [(self._mask(E.holds[m["id"]]), self._mask(E.fails[m["id"]])) for m in self.witnesses]
 
     # -- closures as bitmasks over ids ∪ {False} ----------------------------
     def _mask(self, F):
@@ -1159,22 +1177,12 @@ class Lynchpins:
     def _universe(self):
         """Enumerate the questions, their status, and the closures the scores need."""
         from itertools import combinations
-        E, atoms = self.E, self.proper
-        self.bit = bit = {x: 1 << i for i, x in enumerate([*self.ids, FALSE])}
-        self.id_of = {b: x for x, b in bit.items()}
-        self.BAD = BAD = bit[FALSE] | sum(bit[v] for v in self.negative if v in bit)
+        E, atoms, bit, BAD = self.E, self.proper, self.bit, self.BAD
         self.ALL = ALL = sum(bit[a] for a in atoms)
-        self._ext_cache = {}
         # Memo tables for the scores (with_rule, with_model): what each depends on is the
         # conclusion, a witness or a closure, not the question being scored, so it is computed
         # once per engine instead of once per question. Filled lazily.
         self._refutes, self._witness_ext, self._witness_nf, self._subsets, self._ext_by = {}, {}, {}, {}, {}
-        self.by_prem, self.rules_by_atom = {}, {}
-        for _, prem, concl in E.rules:
-            pm = self._mask(prem)
-            for x in prem:
-                self.by_prem.setdefault(x, []).append(pm)
-                self.rules_by_atom.setdefault(x, []).append((pm, bit[concl], concl))
         # Premises from which False or a denied principle can be reached: only a rule
         # concluding one of these can turn a question into an exclusion.
         toward, grow = {x for x in self.ids if bit[x] & BAD}, True
@@ -1188,7 +1196,6 @@ class Lynchpins:
         # sets[j] = (premise ids, premise mask, closure mask); qmask/settled/openmask are conclusion
         # masks per set; qfalse is the status of the consistency question (None: not asked).
         self.sets, self.qmask, self.settled, self.qfalse = [], [], [], []
-        self.wit = [(self._mask(E.holds[m["id"]]), self._mask(E.fails[m["id"]])) for m in self.witnesses]
         if self.inconsistent:
             self.openmask, self.openq, self.T, self.coremask = [], [], {}, []
             return
@@ -1314,8 +1321,33 @@ class Lynchpins:
         out += [(S, FALSE) for (S, _, _), st in zip(self.sets, self.qfalse) if st == "open"]
         return out
 
-    def progress(self, *, include_selection: bool = False) -> dict:
-        """Share of the questions settled; optionally include counts filterable by shown principles."""
+    def settled_by(self, data: dict) -> list:
+        """These questions as a part of the evidence settles them: data's results and models
+        (a subset of this map's, such as the Lean-checked part) under the same background. Per
+        premise set, (settled conclusions, consistency status), in the terms of `settled` and
+        `qfalse`. The questions stay this map's, so the counts are comparable."""
+        other = Lynchpins(data, self.background[len(data["topic"].get("background", [])):], self.negative, universe=False)
+        assert other.ids == self.ids
+        out = []
+        for (S, pm, _), g, st in zip(self.sets, self.qmask, self.qfalse):
+            F = other._cl(S)
+            if F & other.BAD:
+                out.append((g, None if st is None else "proved")); continue
+            held = [Fm for H, Fm in other.wit if H & pm == pm]
+            refuted = 0
+            for Fm in held:
+                refuted |= Fm
+            s = g & (F | refuted)
+            for low in self._bits(g & ~s):
+                if other._ext(F, self.id_of[low]) & other.BAD:
+                    s |= low
+            out.append((s, None if st is None else "refuted" if held else "open"))
+        return out
+
+    def progress(self, *, include_selection: bool = False, lean: dict | None = None) -> dict:
+        """Share of the questions settled; optionally include counts filterable by shown principles.
+        With lean (the Lean-checked part of the evidence, see lean_checked), also how many of the
+        same questions it settles alone."""
         by = [[0, 0], [0, 0], [0, 0]]
         for (S, _, _), g, s, st in zip(self.sets, self.qmask, self.settled, self.qfalse):
             by[len(S)][0] += self._count(g) + (st is not None)
@@ -1327,13 +1359,19 @@ class Lynchpins:
             cq += self._count(cm) + (st is not None)
             cs += self._count(s & cm) + (st in ("proved", "refuted"))
         out["core"] = {"questions": cq, "settled": cs, "open": cq - cs}
+        part = self.settled_by(lean) if lean is not None and not self.inconsistent else None
+        if part is not None:
+            done = lambda st: st in ("proved", "refuted")
+            out["lean"] = {"settled": sum(self._count(s) + done(st) for s, st in part),
+                           "core_settled": sum(self._count(s & cm) + done(st) for (s, st), cm in zip(part, self.coremask))}
         if include_selection:
             # Each group is [premises, question-conclusion mask, settled-conclusion
             # mask, consistency status, core-conclusion mask]. Hex strings preserve masks beyond 53 bits
             # in JavaScript; their bit positions follow the principle IDs below.
+            # With lean, two more: its settled-conclusion mask and consistency status.
             out["selection"] = {"principles": self.ids, "groups": [
-                [list(S), hex(g), hex(s), st, hex(cm)]
-                for (S, _, _), g, s, st, cm in zip(self.sets, self.qmask, self.settled, self.qfalse, self.coremask)
+                [list(S), hex(g), hex(s), st, hex(cm), *((hex(part[j][0]), part[j][1]) if part else ())]
+                for j, ((S, _, _), g, s, st, cm) in enumerate(zip(self.sets, self.qmask, self.settled, self.qfalse, self.coremask))
             ]}
         if self.inconsistent:
             out["inconsistent_background"] = True
@@ -1771,8 +1809,44 @@ def _open_share(p: dict) -> float:
 
 def progress_report(data: dict) -> list[dict]:
     """The settled share under the topic background and under each preset; see Lynchpins.progress."""
-    return [{"background": bid, "name": name, "principles": L.background, "negative": [], **L.progress(include_selection=True)}
+    lean = lean_checked(data)
+    return [{"background": bid, "name": name, "principles": L.background, "negative": [], **L.progress(include_selection=True, lean=lean)}
             for bid, name, L in _engines(data)]
+
+
+def lean_index_axioms(topic_dir: Path, topic: dict) -> dict:
+    """For each result and model verdict the topic's Lean index certifies, the axioms its
+    certificate rests on (None when the index does not say)."""
+    file = ((topic.get("lean") or {}).get("index") or {}).get("file")
+    path = topic_dir / "lean" / file if file else None
+    if not path or not path.exists():
+        return {"results": {}, "models": {}}
+    idx = json.loads(path.read_text(encoding="utf-8"))
+    ax = lambda e: (e.get("certificate") or {}).get("axioms") if isinstance(e, dict) else None
+    return {"results": {r: ax(e) for r, e in (idx.get("results") or {}).items()},
+            "models": {m: {p: ax(e) for p, e in vs.items()} for m, vs in (idx.get("models") or {}).items()}}
+
+
+def lean_checked(data: dict) -> dict | None:
+    """The part of the evidence checked in Lean: the proved results, and the verdicts of each
+    model, whose certificates in the topic's Lean index rest on the allowed axioms only, as the
+    viewer's "verified" (lean_source_links). None for a topic without a Lean index. The history
+    passes the axioms of its commit's index as data["lean_axioms"]."""
+    axioms = data.get("lean_axioms")
+    if axioms is None:
+        axioms = lean_index_axioms(TOPICS / data["topic"]["id"], data["topic"])
+    if not axioms["results"] and not axioms["models"]:
+        return None
+    sound = lambda a: a is not None and set(a) <= LEAN_ALLOWED_AXIOMS
+    results = [r for r in data["results"] if r.get("status") == "proved" and sound(axioms["results"].get(r["id"], None))]
+    models = []
+    for m in data["models"]:
+        vs = axioms["models"].get(m["id"]) or {}
+        sat = [p for p in m.get("satisfies") or [] if sound(vs.get(p))]
+        vio = [p for p in m.get("violates") or [] if sound(vs.get(p))]
+        if m.get("status") == "proved" and (sat or vio):
+            models.append({**m, "satisfies": sat, "violates": vio})
+    return {**data, "results": results, "models": models}
 
 
 # ---------------------------------------------------------------------------- progress history
@@ -1784,17 +1858,28 @@ def progress_report(data: dict) -> list[dict]:
 # history` then recounts every point. The ledger is written only by that command, never by a
 # build, which adds the current records as a live point of its own.
 HISTORY_REF = "origin/main"
-HISTORY_VERSION = 1
+HISTORY_VERSION = 2  # 2: the Lean-checked counts
 _HISTORY_EXTRACT = r"""
 import json, sys
 sys.path.insert(0, 'scripts')
 import pmap
+def lean_axioms(topic_dir, topic):
+    file = ((topic.get("lean") or {}).get("index") or {}).get("file")
+    path = topic_dir / "lean" / file if file else None
+    if not path or not path.exists():
+        return {"results": {}, "models": {}}
+    idx = json.loads(path.read_text(encoding="utf-8"))
+    ax = lambda e: (e.get("certificate") or {}).get("axioms") if isinstance(e, dict) else None
+    return {"results": {r: ax(e) for r, e in (idx.get("results") or {}).items()},
+            "models": {m: {p: ax(e) for p, e in vs.items()} for m, vs in (idx.get("models") or {}).items()}}
 d = pmap.load_topic(sys.argv[1])
 keep = lambda x, ks: {k: x.get(k) for k in ks}
 json.dump({"topic": {"id": d["topic"].get("id"), "background": d["topic"].get("background") or []},
            "principles": [keep(p, ("id", "name")) for p in d["principles"]],
            "results": [keep(r, ("id", "premises", "conclusion", "status")) for r in d["results"]],
-           "models": [keep(m, ("id", "satisfies", "violates", "status")) for m in d["models"]]},
+           "models": [keep(m, ("id", "satisfies", "violates", "status")) for m in d["models"]],
+           # As pmap.lean_index_axioms, which this commit's pmap may lack.
+           "lean_axioms": lean_axioms(pmap.TOPICS / sys.argv[1], d["topic"])},
           open(sys.argv[2], "w"))
 """
 
@@ -1805,12 +1890,15 @@ def history_path(topic_id: str) -> Path:
 
 def history_counts(data: dict) -> dict:
     """The counts one point of the history records, under the topic background alone."""
-    p = Lynchpins(data).progress()
+    lean = lean_checked(data)
+    p = Lynchpins(data).progress(lean=lean)
+    part = p.get("lean") or {"settled": 0, "core_settled": 0}
     return {"principles": len(data["principles"]),
             "results": sum(r.get("status") == "proved" for r in data["results"]),
             "models": sum(m.get("status") == "proved" for m in data["models"]),
             "questions": p["questions"], "settled": p["settled"],
-            "core_questions": p["core"]["questions"], "core_settled": p["core"]["settled"]}
+            "core_questions": p["core"]["questions"], "core_settled": p["core"]["settled"],
+            "lean_settled": part["settled"], "core_lean_settled": part["core_settled"]}
 
 
 def _history_inputs(topic_id: str, commit: str) -> dict | None:
@@ -1862,7 +1950,7 @@ def update_history(topic_id: str, ref: str = HISTORY_REF, rebuild: bool = False)
         if inputs is None:
             continue
         point = {"date": day, "commit": short, **history_counts(inputs)}
-        print(f"{day} {short}: {point['settled']:,} of {point['questions']:,} settled; core {point['core_settled']:,} of {point['core_questions']:,}")
+        print(f"{day} {short}: {point['settled']:,} of {point['questions']:,} settled ({point['lean_settled']:,} in Lean); core {point['core_settled']:,} of {point['core_questions']:,} ({point['core_lean_settled']:,})")
         points.append(point)
     path.write_text(json.dumps({"version": HISTORY_VERSION, "ref": ref, "points": points}, indent=1) + "\n", encoding="utf-8")
     return path

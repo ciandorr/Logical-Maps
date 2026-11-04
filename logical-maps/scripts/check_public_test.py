@@ -40,7 +40,7 @@ def main():
         (topic / 'sources/paper.txt').write_text('public paper')
         (topic / 'lean/Proof.lean').write_text('-- public proof')
         (topic / 'lean/_pmap_audit_test.lean').write_text('-- temporary')
-        payload = {'topic': {'id': 'sample', 'title': 'Sample'}, 'principles': [], 'results': [], 'models': []}
+        payload = {'topic': {'id': 'sample', 'title': 'Sample'}, 'principles': [], 'results': [], 'models': [], 'papers': []}
         with patch.object(pmap, 'TOPICS', topics), patch.object(pmap, 'BUILD', root / 'build'), \
              patch.object(pmap, 'validate_topic', return_value=True), \
              patch.object(pmap, 'load_topic', return_value=payload), \

@@ -1,0 +1,39 @@
+id: cardinal-ch-boundedly-many-individuals
+requires: [boundedly-many-individuals]
+choice: free
+holds: [possible-failure-of-cardinal-ch]
+fails: [possible-cardinal-ch]
+by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+date: '2026-11-25'
+text: >-
+  Cardinal CH fails at every world, so it is not possible, and its failure, being actual, is possible.
+  Write $z=\lambda A\, .\,\top$ for at-least zero, $N=\operatorname{LowerNat}_e$, and $S$ for the rigid
+  subproperties of $N$. Let $n$ bound the number of individuals at the objects reachable from the evaluation
+  point, and argue at the identity arrow of such an object (in a Kripke-style model, at a world the evaluation
+  point sees); a closed sentence holds at an arrow out of the evaluation object exactly when it holds at
+  the identity arrow of the arrow's target.
+
+
+  *$N$ has exactly $m$ instances, for some $m$ with $2\le m\le n+2$.* The numeral
+  $\operatorname{Suc}^{n+1}z$ holds of the properties with $n+1$ pairwise distinct instances, so necessarily of
+  none; it is $\lambda A\, .\,\bot$ by Intensionality, and so is its successor. Being one of
+  $z,\operatorname{Suc}z,\ldots,\operatorname{Suc}^{n+1}z$ is therefore a property of cardinalities that
+  $z$ has and that passes to successors, and every instance of $N$ has it; each of these numerals is an instance
+  of $N$. Let $m$ be the number of them that are pairwise distinct. And $z\ne\operatorname{Suc}z$: the
+  empty property is not one with an instance.
+
+
+  *$S$ has exactly $2^m$ instances.* Let $a_1,\ldots,a_m$ be the instances of $N$, and for a set $I$ of indices
+  let $D_I:=\lambda x\, .\,\bigvee_{i\in I}x=a_i$. Haecceities are rigid in C and so are finite disjunctions
+  of rigid properties, so each $D_I$ is a rigid subproperty of $N$; they are pairwise distinct, the $a_i$
+  being so. Conversely let $X$ be a rigid subproperty of $N$, and $I$ the set of $i$ with $Xa_i$. By
+  persistence $D_I\le X$. Each instance of $X$ is some $a_i$ with $i\in I$, so is necessarily
+  $D_I$; by inextensibility $X\le D_I$. So $X=D_I$, by Intensionality.
+
+
+  *A subcollection in between.* Since $m+1\le 2^m$, the disjunction $T$ of the haecceities of $m+1$
+  of the $D_I$ is a subcollection of $S$ with exactly $m+1$ instances. A relation injecting $T$ into $N$
+  would send those $m+1$ to pairwise distinct ones among $a_1,\ldots,a_m$. A bijection between $T$ and $S$
+  would pair the $2^m$ instances of $S$ with pairwise distinct instances of $T$, and $m+1<2^m$ because
+  $m\ge2$. So $T$ neither injects into $N$ nor is in bijection with $S$. No choice is used: the cases are
+  finitely many.

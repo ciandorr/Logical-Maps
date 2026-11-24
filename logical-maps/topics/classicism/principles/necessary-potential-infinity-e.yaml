@@ -1,0 +1,74 @@
+id: necessary-potential-infinity-e
+name: □Potential Infinity (type e)
+category: infinity
+statement: >-
+  Necessarily, for every natural number there could be at least that many individuals.
+formal: $\Box\forall n\in\mathbb N_e\, .\,\Diamond\exists X^{et}\, .\,nX$
+definitions: >-
+  $\mathbb N_e$ is $\operatorname{FiniteCardinality}_e$, the numbers counted at type $e$, of type $(et)t$;
+  $nX$ says that $X$ has exactly $n$ instances. See Background, Cardinality, arithmetic and analysis.
+date: '2026-11-24'
+sources:
+- Zachary Goodsell, suggestion of 24 November 2026 (the principle, its name, and its identification with
+  Barton and Goodsell's Infinity and with Bacon's necessary lower-Peano conditions).
+- Neil Barton and Zachary Goodsell, Continuum Contingency, draft of 14 October 2026, §5.6, eq. (22), p. 17.
+- Andrew Bacon, CH contingency formalization and repository proposal, 27 October 2026, with OpenAI Codex; checkpoint
+  140, natural_CH_contingency_closedBounds.
+source_names:
+- Goodsell 24 Nov
+- Continuum Contingency
+- Bacon / Codex CH project
+references:
+- paper: barton-goodsell-continuum-contingency
+  role: formulation
+  locator: §5.6, eq. (22), p. 17
+  note: Their axiom of Infinity, that necessarily successor is injective on the natural numbers, which they
+    count at type e, is the Peano form.
+- paper: goodsell-arithmetic-necessary
+  role: formulation
+  locator: §4, Definitions 3–5 and 8, pp. 11–13, 19
+  note: The Peano form is $\Box I^*$ at the numbers counted at type $e$.
+aliases:
+- Necessary Peano conditions (at-least numbers)
+- Necessary lower-Peano
+variants:
+- id: peano
+  lean:
+    ref: Classicism.P.NecPotentialInfinityEPeano.schemaIn
+    equivalence_ref: Classicism.Map.necessary_potential_infinity_e.peano
+    status: verified
+  name: Peano form
+  statement: Necessarily, zero is not a successor and successor is injective, on the numbers counted at
+    type $e$ ($\Box I^*_e$; Barton and Goodsell's Infinity).
+  formal: $\Box\forall m\,n\in\mathbb N_e\, .\,\mathbf 0_e\ne\operatorname{Suc}_e m\land(\operatorname{Suc}_e
+    m=\operatorname{Suc}_e n\to m=n)$
+  equivalence: The unboxed forms are equivalent in C (Background, [[potential-infinity-forms]]); necessitating
+    the two derivations and applying K carries the equivalence to the boxed forms.
+- id: at-least
+  lean:
+    ref: Classicism.P.NecPotentialInfinityEAtLeast.schemaIn
+    equivalence_ref: Classicism.Map.necessary_potential_infinity_e.at_least
+    status: verified
+  name: At-least form
+  statement: Necessarily, at-least zero is not a successor of an at-least natural number, and successor is
+    injective on those numbers (Bacon's necessary lower-Peano conditions, which his formalization states
+    as two conjuncts, DraftBoxInfinity e).
+  formal: $\Box\forall m\,n\in\operatorname{LowerNat}_e\, .\,\mathbf 0^{\ge}_e\ne\operatorname{Suc}_e m\land(\operatorname{Suc}_e
+    m=\operatorname{Suc}_e n\to m=n)$
+  definitions: $\mathbf 0^{\ge}_e:=\lambda X^{et}\, .\,\top$, at-least zero, and $\operatorname{LowerNat}_e$ is the
+    least property of cardinalities containing it and closed under $\operatorname{Suc}_e$, with successor given
+    by deleting one member of the tested property; the successor operation is the existing cardinal successor
+    (Background, the at-least numbers).
+  equivalence: The unboxed forms are equivalent in C (Background, [[at-least-numbers]], with [[potential-infinity-forms]]);
+    necessitating the derivations and applying K carries the equivalence to the boxed forms.
+notes: >-
+  The necessitated form of [[potential-infinity-e]], which implies it by T and is implied by it given B for
+  pure sentences ([[potential-infinity-e-and-pure-b-imply-necessary-potential-infinity-e]]). The boxed Axiom
+  of Infinity at $e$ implies it ([[necessary-axiom-of-infinity-e-implies-necessary-potential-infinity-e]]),
+  and it is strictly weaker: in [[symmetric-two-object-all-maps]] a world with one individual sees one
+  with infinitely many. It is the antecedent $\Box I^*_e$ of Arithmetic Necessitism at $e$, so with □Rigid
+  Comprehension the numbers counted at $e$ are a rigid property with necessarily distinct instances. It
+  is the infinity premise of the cardinal CH results ([[power-closed-mp-and-choice-imply-cardinal-ch-contingency]]),
+  whose formalization states it in the at-least form, as necessary lower-Peano. Possibility Maximalism
+  (pure) refutes it ([[possibility-and-necessary-potential-infinity-e-incompatible]]).
+lean_def: Classicism.P.NecPotentialInfinityE.schemaIn

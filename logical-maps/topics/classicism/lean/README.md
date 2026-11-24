@@ -307,7 +307,7 @@ Classicism/Background/                  the lemmas of the map's Background pages
   RigidityClosure.lean                    haecceities are rigid; rigid unions, direct images, inverse images
   Varieties.lean                          the chain □ ≤ □_≠ ≤ □̂̂ ≤ □₅ ≤ λp. p
   Relations.lean                          well-orders; Modalized Plenitude at output t and σ' → t
-  Arithmetic.lean                         the finite cardinalities 𝟎, Suc, FiniteCardinality, and countability Ctbl
+  Arithmetic.lean                         the finite cardinalities 𝟎, Suc, FiniteCardinality, and countability Ctbl; I*, Potential Infinity and the at-least numbers, with the Background's lemmas on them
 Classicism/Principles/                  one Prop per principle of the map, a file per category; its forms and their equivalences beside it
 
 Classicism/Syntax/Types.lean            the types of R as an inductive, with type variables; closed types; σs ⇒* ρ
@@ -381,6 +381,7 @@ Classicism/Certified/Derivations.lean   the record theorems derived; home of foo
 Classicism/Certified/Entailed.lean      the records as entailments; home of foo.entails
 Classicism/Certified/Vectorized.lean    checks of the vectorization on three principles and one arrow
 Classicism/Certified/Signatures.lean    each principle as a schema at every signature: P.X.schemaIn, pureVersion
+Classicism/Certified/CardinalCH.lean    the three cardinal CH principles stated (vocabulary transcribed from Bacon's Lean package, pull request #28), with their schemas, and the three records that Contingency of Cardinal CH is the conjunction of the other two
 Classicism/Statements.lean              the map's statements, written by the map's generator (pmap lean classicism)
 Classicism/Map.lean                     one certificate per map result proved and per form, of its generated statement: the map's lean_refs
 Classicism/ModelStatements.lean         the map's models' single verdicts, written by the map's generator

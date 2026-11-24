@@ -10,6 +10,13 @@ with the numbers `ℕ_σ` the finite cardinalities at `σ`. Persistence of the n
 of `C`; inextensibility and necessary distinctness come from `C5`, or from `□`Rigid
 Comprehension and the antecedent `□I*_σ`. The conventions are in `Results/Records.lean`;
 helper lemmas are stated unfolded, so that the audits do not read them as records.
+
+Since 25 November 2026 also the two records by which weakly inextensible numbers carry
+Potential Infinity at `t` to Possible Infinity at `t` (Goodsell's argument,
+`possibleInfinity_of_weaklyInextensible` in `Background/Arithmetic.lean`): from Countable
+Boolean Completeness, which makes the numbers weakly inextensible
+(`finiteCardinality_weaklyInextensible_of_cbc`), and from Arithmetic Necessitism with the
+necessitation.
 -/
 
 namespace Classicism.Proofs
@@ -20,26 +27,14 @@ variable {σ : Type} [Ty σ]
 
 /-! ### Numbers, in `C` -/
 
-/-- **Numbers are necessarily numbers**, in `C`: the property `λn. □ℕn` holds of `𝟎`, since
-`ℕ𝟎` is a theorem, and passes to successors by `K`, so every number has it. -/
-theorem finiteCardinality_box (n : (σ → Prop) → Prop) :
-    FiniteCardinality n → □ (FiniteCardinality n) := fun hn =>
-  hn (fun Z => □ (FiniteCardinality Z))
-    ⟨nec% (finiteCardinality_zero (σ := σ)),
-     fun Y hY => modal_K _ _ (nec% (finiteCardinality_suc (σ := σ) Y)) hY⟩
+-- `finiteCardinality_box` (numbers are necessarily numbers) and `finiteCardinality_zero_or_suc`
+-- (a number is zero or a successor) are in `Background/Arithmetic.lean` since 24 November 2026,
+-- where the lemmas on Potential Infinity use them.
 
 /-- The numbers are persistent, `□∀n. ℕn → □ℕn`: the last lemma, necessitated. -/
 theorem finiteCardinality_persistent :
     □ (∀ n : (σ → Prop) → Prop, FiniteCardinality n → □ (FiniteCardinality n)) :=
   nec% (finiteCardinality_box (σ := σ))
-
-/-- A number is zero or the successor of a number, by induction. -/
-theorem finiteCardinality_zero_or_suc (n : (σ → Prop) → Prop) (hn : FiniteCardinality n) :
-    n = ZeroCard σ ∨ ∃ k : (σ → Prop) → Prop, FiniteCardinality k ∧ n = SucCard k :=
-  (hn (fun Z => FiniteCardinality Z ∧
-      (Z = ZeroCard σ ∨ ∃ k : (σ → Prop) → Prop, FiniteCardinality k ∧ Z = SucCard k))
-    ⟨⟨finiteCardinality_zero, Or.inl rfl⟩,
-     fun Y hY => ⟨finiteCardinality_suc Y hY.1, Or.inr ⟨Y, hY.1, rfl⟩⟩⟩).2
 
 /-! ### Necessary distinctness of numbers, from `□I*` -/
 
@@ -129,5 +124,64 @@ theorem necessary_rigid_comprehension_implies_arithmetic_necessitism {σ : Type}
     ⟨⟨finiteCardinality_persistent,
       modal_K _ _ (nec% (finiteCardinality_weaklyInextensible_of_rc (σ := σ))) hrc⟩,
      fun m n hm hn => finiteCardinality_nd hI m hm n hn⟩
+
+/-! ### Weakly inextensible numbers, and Possible Infinity at `t` (25 November 2026) -/
+
+/-- **Countable Boolean Completeness makes the numbers weakly inextensible.** The
+haecceities of the numbers at `σ` are countable relative to `σ`; let `Z` be their least upper
+bound. Then `Z` necessarily holds of each number, so of zero; `λx. Z(Suc x)` is another upper
+bound, so `Z` is necessarily closed under successor, and the numbers are necessarily among its
+instances. And whatever necessarily holds of each number is an upper bound, so lies above
+`Z`. -/
+theorem finiteCardinality_weaklyInextensible_of_cbc {σ : Type} [Ty σ] :
+    CountableBooleanCompleteness σ (((σ → Prop) → Prop) → Prop) →
+      WeaklyInextensible (FiniteCardinality (σ := σ)) := fun cbc X hX =>
+  (cbc (λ Y ↦ ∃ n : (σ → Prop) → Prop, FiniteCardinality n ∧ Y = (λ x ↦ x = n))
+    ⟨λ Y n ↦ Y = (λ x ↦ x = n), fun _ _ hyz =>
+      ⟨fun h => h.elim fun _ hn => hn.2.1.trans hn.2.2.symm,
+       fun e => hyz.1.elim fun n hn => ⟨n, hn.1, hn.2, e ▸ hn.2⟩⟩⟩).elim fun Z hZ =>
+    have ub : ∀ n : (σ → Prop) → Prop, FiniteCardinality n → □ (Z n) := fun n hn =>
+      modal_K _ _ (nec% (fun (h : ∀ x : (σ → Prop) → Prop, x = n → Z x) => h n rfl))
+        ((Order.le_iff _ _).1 (((hZ Z).2 (le_refl_arrow_prop Z)) (λ x ↦ x = n) ⟨n, hn, rfl⟩))
+    have ubS : UB (λ x ↦ Z (SucCard x))
+        (λ Y ↦ ∃ n : (σ → Prop) → Prop, FiniteCardinality n ∧ Y = (λ x ↦ x = n)) :=
+      fun _ hY => hY.elim fun n hn => hn.2 ▸ le_of_box_incl (modal_K _ _
+        (nec% (fun (h : Z (SucCard n)) (x : (σ → Prop) → Prop) (e : x = n) =>
+          (e ▸ h : Z (SucCard x))))
+        (ub (SucCard n) (finiteCardinality_suc n hn.1)))
+    have hS : □ (∀ x : (σ → Prop) → Prop, Z x → Z (SucCard x)) :=
+      (Order.le_iff _ _).1 ((hZ _).1 ubS)
+    have hNZ : □ (∀ n : (σ → Prop) → Prop, FiniteCardinality n → Z n) :=
+      modal_K _ _ (modal_K _ _
+        (nec% (fun (h0 : Z (ZeroCard σ)) (hs : ∀ Y, Z Y → Z (SucCard Y)) n
+          (hn : FiniteCardinality n) => hn Z ⟨h0, hs⟩)) (ub _ finiteCardinality_zero)) hS
+    have ubX : UB X (λ Y ↦ ∃ n : (σ → Prop) → Prop, FiniteCardinality n ∧ Y = (λ x ↦ x = n)) :=
+      fun _ hY => hY.elim fun n hn => hn.2 ▸ le_of_box_incl (modal_K _ _
+        (nec% (fun (h : X n) (x : (σ → Prop) → Prop) (e : x = n) => (e ▸ h : X x)))
+        (hX n hn.1))
+    have hZX : □ (∀ x : (σ → Prop) → Prop, Z x → X x) := (Order.le_iff _ _).1 ((hZ X).1 ubX)
+    modal_K _ _ (modal_K _ _
+      (nec% (fun (a : ∀ n : (σ → Prop) → Prop, FiniteCardinality n → Z n)
+          (b : ∀ x : (σ → Prop) → Prop, Z x → X x) n (hn : FiniteCardinality n) => b n (a n hn)))
+      hNZ) hZX
+
+/-- `countable-boolean-completeness-and-potential-infinity-t-imply-possible-infinity-t`:
+Countable Boolean Completeness makes the numbers counted at `t` weakly inextensible, and
+then Potential Infinity gives Possible Infinity (`possibleInfinity_of_weaklyInextensible`). -/
+theorem countable_boolean_completeness_and_potential_infinity_t_imply_possible_infinity_t :
+    CountableBooleanCompleteness Prop (((Prop → Prop) → Prop) → Prop) → PotentialInfinityT →
+      PossibleInfinityT :=
+  fun cbc hP => possibleInfinity_of_weaklyInextensible
+    (finiteCardinality_weaklyInextensible_of_cbc cbc) hP
+
+/-- `arithmetic-necessitism-and-necessary-potential-infinity-t-imply-possible-infinity-t`:
+`□`Potential Infinity is `□I*`, so Arithmetic Necessitism makes the numbers counted at `t`
+rigid, hence weakly inextensible. -/
+theorem arithmetic_necessitism_and_necessary_potential_infinity_t_imply_possible_infinity_t :
+    ArithmeticNecessitism Prop → NecPotentialInfinityT → PossibleInfinityT :=
+  fun an hP => possibleInfinity_of_weaklyInextensible
+    (weaklyInextensible_of_inextensible
+      (an (modal_K _ _ (nec% (iStar_of_potentialInfinity (σ := Prop))) hP)).1.2)
+    (box_elim hP)
 
 end Classicism.Proofs

@@ -2,7 +2,7 @@
 
 Andrew Bacon's forcing argument, formalized by OpenAI Codex (GPT-6), prompted by Andrew Bacon.
 
-Let $N$ be the inductive property of the at-least cardinalities over individuals, generated from $\lambda A.\top$ by cardinal successor. Let $S$ consist of its rigid subproperties. Write $C$ for the assertion that every subcollection of $S$ either embeds into $N$ or admits a bijection with $S$. All maps are relations at the evaluation world. Necessary lower-Peano says that necessarily the zero of $N$ is outside the range of successor and successor is injective on $N$.
+Let $N$ be the inductive property of the at-least cardinalities over individuals, generated from $\lambda A.\top$ by cardinal successor. Let $S$ consist of its rigid subproperties. Write $C$ for the assertion that every subcollection of $S$ either embeds into $N$ or admits a bijection with $S$. All maps are relations at the evaluation world. Necessary lower-Peano says that necessarily the zero of $N$ is outside the range of successor and successor is injective on $N$. It is the at-least form of □Potential Infinity (type $e$), the premise as the map records it; the two are equivalent in C (Background, the Peano conditions on the at-least numbers).
 
 | Conclusion | Premises in addition to Mathematical Possibilism, necessary Rigid Comprehension, Intensional Choice and necessary lower-Peano |
 | --- | --- |

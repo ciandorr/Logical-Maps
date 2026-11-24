@@ -84,7 +84,7 @@ instantiated as $(\sigma t)t$ at every type $\sigma$ (see Background; until 16 O
 | Source | Connections recorded |
 | --- | --- |
 | §3, Definitions 1 and 6, pp. 7–8, 13 | Countable Boolean Completeness; Boolean Completeness restricts to it |
-| §4, Definitions 3–5 and 8, pp. 11–13, 19 | The arithmetical vocabulary, $I$, arithmetical sentences |
+| §4, Definitions 3–5 and 8, pp. 11–13, 19 | The arithmetical vocabulary, $I$, arithmetical sentences; $I^*$ and $I$ at the numbers counted at $e$ and at $t$ are recorded as Potential Infinity (types e and t), whose official form says that every number possibly holds of some property (24 November 2026) |
 | §5, Lemmas 2–8 and Theorem 9, pp. 14–21 | Countable Boolean Completeness implies the Necessity of Arithmetic |
 | §6, Theorem 11, pp. 24–26 | Possibility Maximalism (pure) is incompatible with the Necessity of Arithmetic, hence with Countable and full Boolean Completeness and with Rigid Comprehension |
 

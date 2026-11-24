@@ -27,6 +27,7 @@ Read a matching `writeups/<id>.md` when it exists.
 | Logical Combinatorialism, No Brute Necessities, separation, freedom, independence | `logical-necessity-r`, `witnessed-possibility-r` (No Brute Necessities), `possibly-witnessed-possibility-r`, `separated-structure-r`, `modal-freedom-signature-r`, `independence-signature-r` |
 | No contingency, pure B, signature B | `no-pure-contingency-r`, `no-contingency-signature-r`, `pure-b-r`, `signature-b-r` |
 | Infinity, arithmetic, countable completeness | `infinity-e`, `infinity-t` (schemata), `axiom-of-infinity-e`, `axiom-of-infinity-t`, `possible-infinity-e`, `possible-infinity-t`, `countable-boolean-completeness-r`, `necessity-of-arithmetic` |
+| Potential infinity, $I^*$, $I$, lower-Peano, at-least numbers | `potential-infinity-e`, `potential-infinity-t`, with `necessary-` forms; the Peano, possible Peano and at-least forms are variants; `background/arithmetic.md`, Potential infinity |
 
 ## Constructions and sources
 

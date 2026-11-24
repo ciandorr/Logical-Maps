@@ -1,0 +1,82 @@
+id: potential-infinity-e
+name: Potential Infinity (type e)
+category: infinity
+statement: >-
+  For every natural number, there could be at least that many individuals: each number counted at type
+  $e$ possibly holds of some property of individuals.
+formal: $\forall n\in\mathbb N_e\, .\,\Diamond\exists X^{et}\, .\,nX$
+definitions: >-
+  $\mathbb N_e$ is $\operatorname{FiniteCardinality}_e$, the numbers counted at type $e$, of type $(et)t$;
+  $nX$ says that $X$ has exactly $n$ instances. See Background, Cardinality, arithmetic and analysis.
+date: '2026-11-24'
+sources:
+- Zachary Goodsell, suggestion of 24 November 2026 (the principle, its name, and its identification with
+  $I^*$ and with Bacon's lower-Peano conditions).
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §4, Definitions 3–5 and 8, pp. 11–13, 19.
+source_names:
+- Goodsell 24 Nov
+- Arithmetic is Necessary
+references:
+- paper: goodsell-arithmetic-necessary
+  role: formulation
+  locator: §4, Definitions 3–5 and 8, pp. 11–13, 19
+  note: The source's $I^*$, that zero is not a successor and successor is injective on numbers, with the
+    numbers counted at type $e$, is the Peano form; its $I:=\Diamond I^*$ is the possible Peano form. Both
+    are equivalent in C to the official form, which is not the source's wording.
+variants:
+- id: peano
+  lean:
+    ref: Classicism.P.PotentialInfinityEPeano.schemaIn
+    equivalence_ref: Classicism.Map.potential_infinity_e.peano
+    status: verified
+  name: Peano form
+  statement: Zero is not a successor and successor is injective, on the numbers counted at type $e$
+    (Goodsell's $I^*_e$).
+  formal: $\forall m\,n\in\mathbb N_e\, .\,\mathbf 0_e\ne\operatorname{Suc}_e m\land(\operatorname{Suc}_e
+    m=\operatorname{Suc}_e n\to m=n)$
+  equivalence: 'Background, [[potential-infinity-forms]], at $\sigma=e$. From the official form: if $\operatorname{Suc}m=\operatorname{Suc}n$,
+    a property that could have cardinality $\operatorname{Suc}m$ has an instance whose removal leaves a property
+    with both cardinalities $m$ and $n$, and numbers that could hold of one property are identical. Conversely:
+    were some number never instantiated, the least such, $\operatorname{Suc}k$, and its successor would
+    be necessarily empty, hence identical by Intensionality, so $k=\operatorname{Suc}k$ by injectivity,
+    though $k$ is possibly instantiated.'
+- id: possible-peano
+  lean:
+    ref: Classicism.P.PotentialInfinityEPossiblePeano.schemaIn
+    equivalence_ref: Classicism.Map.potential_infinity_e.possible_peano
+    status: verified
+  name: Possible Peano form
+  statement: Possibly, zero is not a successor and successor is injective, on the numbers counted at type
+    $e$ (Goodsell's $I_e$).
+  formal: $\Diamond\forall m\,n\in\mathbb N_e\, .\,\mathbf 0_e\ne\operatorname{Suc}_e m\land(\operatorname{Suc}_e
+    m=\operatorname{Suc}_e n\to m=n)$
+  equivalence: 'Background, [[potential-infinity-forms]], at $\sigma=e$. The Peano form gives it by T. Conversely
+    the official form is true if possible: a number that is never instantiated is necessarily a number
+    that is never instantiated, by 4; and the Peano form is necessarily equivalent to the official form.'
+- id: at-least
+  lean:
+    ref: Classicism.P.PotentialInfinityEAtLeast.schemaIn
+    equivalence_ref: Classicism.Map.potential_infinity_e.at_least
+    status: verified
+  name: At-least form
+  statement: At-least zero is not a successor and successor is injective, on the at-least numbers over
+    individuals (Bacon's lower-Peano conditions).
+  formal: $\forall m\,n\in\operatorname{LowerNat}_e\, .\,\mathbf 0^{\ge}_e\ne\operatorname{Suc}_e m\land(\operatorname{Suc}_e
+    m=\operatorname{Suc}_e n\to m=n)$
+  definitions: $\mathbf 0^{\ge}_e:=\lambda X^{et}\, .\,\top$, and $\operatorname{LowerNat}_e$ is the least
+    property of cardinalities containing it and closed under $\operatorname{Suc}_e$ (Background, the at-least
+    numbers).
+  equivalence: 'Background, [[at-least-numbers]], at $\sigma=e$: the Peano form and this one are equivalent
+    in C. Sending a number $n$ to $\lambda X\, .\,\exists X^\prime\subseteq X\, .\,nX^\prime$, at least $n$,
+    carries the numbers onto the at-least numbers, commutes with successor, and is injective, a number
+    being recovered as at least it and not at least its successor.'
+notes: >-
+  Weaker than the Axiom of Infinity at this type ([[axiom-of-infinity-e-implies-potential-infinity-e]]) and
+  than Possible Infinity ([[possible-infinity-e-implies-potential-infinity-e]]): it holds wherever there
+  could be ever more individuals, even if no possibility has infinitely many, as in [[full-omega-chain-new-individuals]].
+  It is true if possible, so it has no separate diamond form. Its necessitation is a separate principle
+  ([[necessary-potential-infinity-e]]), equivalent to it given B for pure sentences ([[potential-infinity-e-and-pure-b-imply-necessary-potential-infinity-e]]),
+  so in C5. With BF it gives the Axiom of Infinity back ([[potential-infinity-e-and-bf-imply-axiom-of-infinity-e]]);
+  whether it does with No Pure Contingency, as Possible Infinity does, is not settled here. It is the antecedent
+  $I_e$ of the Necessity of Arithmetic at $e$.
+lean_def: Classicism.P.PotentialInfinityE.schemaIn

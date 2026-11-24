@@ -1,0 +1,89 @@
+id: potential-infinity-t
+name: Potential Infinity (type t)
+category: infinity
+statement: >-
+  For every natural number, there could be at least that many propositions: each number counted at type
+  $t$ possibly holds of some property of propositions.
+formal: $\forall n\in\mathbb N_t\, .\,\Diamond\exists X^{tt}\, .\,nX$
+definitions: >-
+  $\mathbb N_t$ is $\operatorname{FiniteCardinality}_t$, the numbers counted at type $t$, of type $(tt)t$;
+  $nX$ says that $X$ has exactly $n$ instances. See Background, Cardinality, arithmetic and analysis.
+date: '2026-11-24'
+sources:
+- Zachary Goodsell, suggestion of 24 November 2026 (the principle, its name, and its identification with
+  $I^*$ and with Bacon's lower-Peano conditions).
+- Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §4, Definitions 3–5 and 8, pp. 11–13, 19.
+source_names:
+- Goodsell 24 Nov
+- Arithmetic is Necessary
+references:
+- paper: goodsell-arithmetic-necessary
+  role: formulation
+  locator: §4, Definitions 3–5 and 8, pp. 11–13, 19
+  note: The source's $I^*$, that zero is not a successor and successor is injective on numbers, with the
+    numbers counted at type $t$, is the Peano form; its $I:=\Diamond I^*$ is the possible Peano form. Both
+    are equivalent in C to the official form, which is not the source's wording.
+variants:
+- id: peano
+  lean:
+    ref: Classicism.P.PotentialInfinityTPeano.schemaIn
+    equivalence_ref: Classicism.Map.potential_infinity_t.peano
+    status: verified
+  name: Peano form
+  statement: Zero is not a successor and successor is injective, on the numbers counted at type $t$
+    (Goodsell's $I^*_t$).
+  formal: $\forall m\,n\in\mathbb N_t\, .\,\mathbf 0_t\ne\operatorname{Suc}_t m\land(\operatorname{Suc}_t
+    m=\operatorname{Suc}_t n\to m=n)$
+  equivalence: 'Background, [[potential-infinity-forms]], at $\sigma=t$; the argument is the one given for
+    the Peano form of [[potential-infinity-e]].'
+- id: possible-peano
+  lean:
+    ref: Classicism.P.PotentialInfinityTPossiblePeano.schemaIn
+    equivalence_ref: Classicism.Map.potential_infinity_t.possible_peano
+    status: verified
+  name: Possible Peano form
+  statement: Possibly, zero is not a successor and successor is injective, on the numbers counted at type
+    $t$ (Goodsell's $I_t$).
+  formal: $\Diamond\forall m\,n\in\mathbb N_t\, .\,\mathbf 0_t\ne\operatorname{Suc}_t m\land(\operatorname{Suc}_t
+    m=\operatorname{Suc}_t n\to m=n)$
+  equivalence: 'Background, [[potential-infinity-forms]], at $\sigma=t$: the Peano form gives it by T, and
+    the official form is true if possible, by 4.'
+- id: at-least
+  lean:
+    ref: Classicism.P.PotentialInfinityTAtLeast.schemaIn
+    equivalence_ref: Classicism.Map.potential_infinity_t.at_least
+    status: verified
+  name: At-least form
+  statement: At-least zero is not a successor and successor is injective, on the at-least numbers over
+    propositions.
+  formal: $\forall m\,n\in\operatorname{LowerNat}_t\, .\,\mathbf 0^{\ge}_t\ne\operatorname{Suc}_t m\land(\operatorname{Suc}_t
+    m=\operatorname{Suc}_t n\to m=n)$
+  definitions: $\mathbf 0^{\ge}_t:=\lambda X^{tt}\, .\,\top$, and $\operatorname{LowerNat}_t$ is the least
+    property of cardinalities containing it and closed under $\operatorname{Suc}_t$ (Background, the at-least
+    numbers).
+  equivalence: 'Background, [[at-least-numbers]], at $\sigma=t$: the Peano form and this one are equivalent
+    in C.'
+notes: >-
+  Weaker than the Axiom of Infinity at this type ([[axiom-of-infinity-t-implies-potential-infinity-t]]) and
+  than Possible Infinity ([[possible-infinity-t-implies-potential-infinity-t]]). It is true if possible, so
+  it has no separate diamond form; its necessitation is [[necessary-potential-infinity-t]], equivalent to
+  it given B for pure sentences ([[potential-infinity-t-and-pure-b-imply-necessary-potential-infinity-t]]).
+  With BF (type $t$) it gives the Axiom of Infinity back ([[potential-infinity-t-and-bf-t-imply-axiom-of-infinity-t]]),
+  so the Fregean Axiom, which gives BF and leaves only two propositions, refutes it. It is the antecedent
+  $I_t$ of the Necessity of Arithmetic at $t$.
+
+
+  With weakly inextensible numbers it implies Possible Infinity (type $t$) (Goodsell's argument; Background,
+  [[potential-infinity-and-possible-infinity]]): each possible count of the propositions is then one of our
+  numbers, and the propositions that there are exactly $n$ propositions, for possible counts $n$, are pairwise
+  distinct, so that unboundedly many possible counts would make our propositions infinitely many. Countable
+  Boolean Completeness supplies the weak inextensibility ([[countable-boolean-completeness-and-potential-infinity-t-imply-possible-infinity-t]]),
+  and so therefore do Boolean Completeness and Rigid Comprehension; Arithmetic Necessitism supplies it from the
+  necessitation ([[arithmetic-necessitism-and-necessary-potential-infinity-t-imply-possible-infinity-t]]).
+  No recorded model separates the two, and no action model whose numbers at type $t$ are the numerals at every
+  reachable object can. Whether Potential Infinity (type $t$) implies Possible Infinity (type $t$) in C alone
+  is open. A countermodel would need worlds that are finite by their own numbers and larger than every number
+  of the evaluation point: for instance an entrance with four propositions and one absorbing arrow into a
+  hyperfinite world, such as [[ultraproduct-finite-full-s5]]; that this is a model of C has not been checked.
+  At type $e$ the two do come apart ([[full-omega-chain-new-individuals]]).
+lean_def: Classicism.P.PotentialInfinityT.schemaIn

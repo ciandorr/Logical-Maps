@@ -226,7 +226,7 @@ Theorem 5.2 (Theorem C.2) as
 `c5-and-necessary-rigid-comprehension-imply-second-order-analytic-necessitism` (so □Plenitude and
 Extensionality give Analytic Necessitism on the map); No Pure Contingency gives the schema directly
 (`no-pure-contingency-implies-necessity-of-second-order-analysis`); Theorem 6.1 as the conjecture
-`necessary-rigid-comprehension-intensional-choice-and-forcing-possibilism-incompatible-with-non-contingency-of-ch`,
+the historical structural conjecture (superseded by `power-closed-mp-and-choice-imply-cardinal-ch-contingency`),
 its proof not being in the draft; Lemmas C.1 and C.3 and Proposition C.3 in the proofs of
 `analytic-necessitism-implies-necessity-of-analysis` and its second-order form. Not yet recorded:
 Theorem 5.1's model of C5 with Rigid Comprehension in which CH is structurally contingent (Appendix

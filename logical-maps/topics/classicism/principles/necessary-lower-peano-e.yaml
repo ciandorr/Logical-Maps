@@ -1,0 +1,19 @@
+id: necessary-lower-peano-e
+name: Necessary Peano conditions (at-least numbers)
+category: infinity
+statement: Necessarily, at-least zero is not a successor of an at-least natural number, and successor is injective
+  on those numbers.
+formal: $\Box\bigl((\forall n^\nu\, .\,Nn\to z\ne\operatorname{Suc}_e n)\land(\forall m^\nu n^\nu\, .\,Nm\land
+  Nn\land\operatorname{Suc}_e m=\operatorname{Suc}_e n\to m=n)\bigr)$
+definitions: $\nu=(et)t$, $z:=\lambda A^{et}.\top$, and N is the least property containing z and closed under
+  $\operatorname{Suc}_e$, with successor given by deleting one member of the tested property. The successor operation
+  is the existing cardinal successor. This is DraftBoxInfinity e in the CH formalization.
+date: '2026-10-27'
+sources:
+- Andrew Bacon, CH contingency formalization and repository proposal, 27 October 2026, with OpenAI Codex; checkpoint
+  140, natural_CH_contingency_closedBounds.
+source_names:
+- Bacon / Codex CH project
+notes: Kept explicit to match the checked theorem. It is not silently identified with the repository's unboxed
+  exact-cardinality [[axiom-of-infinity-e]], or with that axiom's necessitation; the comparison is a separate
+  obligation.

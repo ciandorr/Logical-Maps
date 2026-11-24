@@ -25,19 +25,15 @@ settings:
   family: Fix a strong limit cardinal μ>ω with cf(μ)=ω. Use one representative of every nontrivial complete
     Boolean algebra of cardinality <μ (Definition 6.4).
 arguments:
-- text: At the root all relations on the identity classes are realized, so internal complete Boolean algebras
-    and relation-based cardinal comparisons are external ones (Lemmas 6.6–6.7). For strong limit μ of
-    countable cofinality, |RO(F)|=2^μ=μ^ω. Pierce’s theorem |C|^ω=|C| excludes complete Boolean algebras
-    of size in [μ,2^μ). Every algebra that is finite or strictly smaller than the propositions therefore
-    has size <μ. It occurs as a lottery factor and is realized below its component proposition; the degenerate
-    algebra is realized below bottom. A root relation witnesses the isomorphism.
-  source:
-    paper: bacon-modalized-domains-2026
-    locator: Theorem 6.8 and Corollary 6.9, p. 29
-  by: Andrew Bacon and Claude Opus 5.5 (Anthropic)
-  date: '2026-10-21'
-  holds:
-  - forcing-possibilism
+- id: mathematical-possibilism
+  holds: [forcing-possibilism]
+  by: OpenAI Codex (GPT-6), prompted by Andrew Bacon
+  date: '2026-11-16'
+  choice: uses
+  standing: conjectured
+  text: >-
+    The lottery represents all complete Boolean algebras of size below μ. To obtain the revised verdict it suffices to prove that the root inexact ordinal carrier has size below μ. Then any carrier of size at least μ contains a subset of size μ, strictly larger than H and power-closed by strong limit and full current extensions. The strict-propositional-smallness calculation alone does not give the ordinal bound.
+
 - id: ch-contingent
   fails: [non-contingency-of-ch]
   choice: uses
@@ -52,8 +48,7 @@ arguments:
     sets of naturals satisfying $\neg\mathrm{CH}$, those of the second one satisfying CH; the root sees
     both, so neither disjunct of Non-contingency of CH holds at type $e\to t$.
 notes: There are 2^μ propositions at the root and 2^ℵ₀ rigid properties of individuals up to root identity.
-  Choosing μ above any prescribed cardinal gives the unbounded-size assertion of Corollary 6.9. MP uses
-  finite or strictly smaller, not the non-strict reading; it is not asserted necessary. This model implements
+  Choosing μ above any prescribed cardinal gives the unbounded-size assertion of Corollary 6.9. The original source uses strict propositional smallness. This model implements
   the paper’s full modalized-domain semantics. Bacon’s handout of 19 October 2026 presents the same frame,
   proposition algebra and individuals with constant domains, the functions self-related at every point, and
   quantifiers as meets and joins over them; it was recorded until 23 October 2026 as the separate model

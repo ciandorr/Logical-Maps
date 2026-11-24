@@ -165,17 +165,14 @@ arguments:
     only $!$ and constant maps; so $\neg\{!\}$ is ND-necessary there and $\Diamond_{\ne}q$ fails at
     every $c_n$. So every truth $p$ at $W_1$ has $\Box(\Diamond_{\ne}q\to p)$ with $q$ true: it is two-
     hat necessary.
-- id: forcing-possibilism
-  holds: [forcing-possibilism]
+- id: mathematical-possibilism
+  fails: [forcing-possibilism]
+  by: OpenAI Codex (GPT-6), prompted by Andrew Bacon
+  date: '2026-11-16'
   choice: uses
-  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
-  date: '2026-10-29'
   text: >-
-    The propositions at $W_1$ are all the sets of its arrows out, continuum many, and the model is
-    extensionally full there, so completeness, finiteness, size and isomorphism are the external
-    notions. A complete Boolean algebra that is Dedekind finite or smaller than the continuum is finite,
-    with $2^k$ elements, and isomorphic to the propositions below $\{c_0,\ldots,c_{k-1}\}$, which is not
-    $\top$.
+    The arrows from the singleton object reach the object with infinitely many individuals, where each successive closed finite ordinal threshold is distinguished. Their root intensions are therefore distinct. Each root interval is a powerset, hence atomic or trivial. Current extensions at the root are full, so countably many of the thresholds inject into H. Code the atomless Cantor regular-open algebra at a higher type by subsets of these thresholds. Its carrier is small by the countable-subset power argument in the revised full-action verdict. It cannot be an entailment interval.
+
 notes: 'Suggested by Cian Dorr on 16 October 2026 as a separation of Atomicity from □Atomicity, which no
   recorded model gave: Atomicity holds at every type at the singleton object, and fails at type t at the
   worlds into $W_0$. No Lean verification is claimed.'

@@ -3701,7 +3701,7 @@ function openShare(c) {
   return c.open && share < 0.1 ? '<0.1' : c.open < c.questions && share > 99.9 ? '>99.9' : share === 100 ? '100' : share.toFixed(1);
 }
 const SETTLED = new Set(['proved', 'refuted', 'excluded', 'consistent', 'inconsistent']);
-function rankedTable(rep, rows, mode = 'questions') {
+function rankedTable(rep, rows, mode = 'questions', tail = '') {
   // The class of theorems is shown as True, as elsewhere in the viewer.
   const trivial = new Set(rep.trivial);
   const pb = id => id === FALSE ? esc(name(FALSE)) : trivial.has(id) ? esc(name(TRUE)) : `<button class="lnk" data-principle="${esc(id)}">${esc(name(id))}</button>`;
@@ -3732,13 +3732,27 @@ function rankedTable(rep, rows, mode = 'questions') {
   const num = x => x === null || x === undefined ? '—' : x;
   const scores = r => mode === 'core' ? [r.core_yes, r.core_no] : denies(r) ? [r.no, r.yes] : [r.yes, r.no];
   return `<table class="results lynchpin"><thead><tr><th class="num">${mode === 'auto' ? '“If no” rank' : 'Rank'}</th><th>${conjectures ? 'Conjecture' : 'Question'}</th><th class="num">if yes</th><th class="num">if no</th></tr></thead><tbody>${
-    rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${r.tier ? ` data-starred="${esc(r.tier)}"` : ''}${r.status && r.status !== 'open' ? ` data-status="${esc(r.status)}"` : ''}${denies(r) ? ' data-claim="not"' : ''}><td class="num rank">${num(rankOf(r))}</td><td class="stmt">${star(r)}${stmt(r)}${status(r)}${links(r) ? ` <span class="links">${links(r)}</span>` : ''}</td><td class="num">${num(scores(r)[0])}</td><td class="num">${num(scores(r)[1])}</td></tr>`).join('')}</tbody></table>`;
+    rows.map(r => `<tr data-lynchpin="${esc(key(r))}"${r.tier ? ` data-starred="${esc(r.tier)}"` : ''}${r.status && r.status !== 'open' ? ` data-status="${esc(r.status)}"` : ''}${denies(r) ? ' data-claim="not"' : ''}><td class="num rank">${num(rankOf(r))}</td><td class="stmt">${star(r)}${stmt(r)}${status(r)}${links(r) ? ` <span class="links">${links(r)}</span>` : ''}</td><td class="num">${num(scores(r)[0])}</td><td class="num">${num(scores(r)[1])}</td></tr>`).join('')}${tail ? `<tr class="truncated"><td colspan="4" class="note">${tail}</td></tr>` : ''}</tbody></table>`;
 }
 // The core questions are the ranked rows that carry a core rank (Lynchpins.rank), in that order.
 const coreRanked = new WeakMap();
 function coreRows(rep) {
   if (!coreRanked.has(rep)) coreRanked.set(rep, (rep.rows || []).filter(r => r.core_rank != null).sort((a, b) => a.core_rank - b.core_rank));
   return coreRanked.get(rep);
+}
+// The open questions among the shown principles that a cut ranking does not store
+// (truncate_rankings in scripts/pmap.py). The status table counts them all (shownProgress), and
+// a stored row stands for one question per shown premise combination and shown consequent.
+function unstoredQuestions(rep, shown) {
+  const p = shownProgress(storedProgress());
+  if (!p || !p.selection) return 0;
+  let stored = 0;
+  for (const r of rep.rows || []) {
+    if (r.kind === 'check') continue;
+    const sets = (r.premise_sets || [r.premises]).filter(S => S.every(shown)).length;
+    if (sets) stored += sets * (r.conclusions || [r.conclusion]).filter(shown).length;
+  }
+  return Math.max(0, p.open - stored);
 }
 function renderLynchpins() {
   renderProgress();
@@ -3758,6 +3772,7 @@ function renderLynchpins() {
     const conclusions = (r.conclusions || [r.conclusion]).filter(shown);
     return conclusions.length ? {...r, premises: premise_sets[0], premise_sets, conclusion: conclusions[0], conclusions} : null;
   };
+  let unstored = null;   // counted once, and only when a list reaches below the cut
   for (const [id, key] of [['lynchpins', 'rows'], ['open-core', 'core'], ['open-auto', 'auto'], ['open-recorded', 'recorded']]) {
     const el = document.getElementById(id); if (!el) continue;
     const body = el.querySelector('.lynchpin-body');
@@ -3776,11 +3791,19 @@ function renderLynchpins() {
     // Keep the full rankings in the export: hidden principles must not consume
     // any of the 30 places. Recorded conjectures remain an uncapped catalogue.
     const rows = key === 'recorded' ? matching : matching.slice(0, 30);
+    // A cut ranking is whole down to rank rep.truncated.rank and partial below it. A list that
+    // reaches below ends with the number of open questions the page does not store.
+    const cut = (key === 'rows' || key === 'auto') && rep.truncated ? rep.truncated.rank : null;
+    const below = cut !== null && (rows.length < 30 || rows.some(r => (key === 'auto' ? r.auto_rank : r.rank) > cut));
+    if (below && unstored === null) unstored = unstoredQuestions(rep, shown);
+    const bundle = (DATA.downloads || {}).bundle;
+    const truncated = below && unstored ? `Open questions truncated: ${unstored.toLocaleString('en-US')} more among the shown principles, ranked after ${cut.toLocaleString('en-US')}, ${unstored === 1 ? 'is' : 'are'} not stored on this page.${bundle ? ` The <a href="${esc(bundle)}">content bundle</a> has the full ranking.` : ''}` : '';
+    if (!rows.length && truncated) { body.innerHTML = `<p class="note truncated">${truncated}</p>`; continue; }
     if (!rows.length) {
       body.innerHTML = `<p class="note">${eligible.length ? 'No questions match the shown principles.' : key !== 'recorded' ? 'Nothing is open.' : (rep.recorded || []).length ? 'Every recorded conjecture is settled; Show resolved lists them.' : 'No conjectures have been recorded.'}</p>`;
       continue;
     }
-    body.innerHTML = rankedTable(rep, rows, key === 'rows' ? 'questions' : key);
+    body.innerHTML = rankedTable(rep, rows, key === 'rows' ? 'questions' : key, truncated);
     wire(body);
   }
 }

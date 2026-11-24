@@ -478,6 +478,44 @@ try {
   assert.equal(stmt(negativeModelPage,'check|m1|r','open-recorded'),'★M1: ¬R details');
   assert.deepEqual(scores(negativeModelPage,'check|m1|r','open-recorded'),[3,6]);
 
+  // A cut ranking (truncate_rankings in scripts/pmap.py) is whole down to its cut and partial below.
+  // A list that reaches below ends with the open questions among the shown principles that the
+  // page does not store, counted from the status table; a list the stored rows complete does not.
+  const keptBelow=[autoNone[0],autoNone[3],autoNone[6]];   // r ⊢ ⊥, ⊢ r and ⊢ p, ranked 21, 23 and 25
+  const cutRows=[...rowsNone,...keptBelow];
+  const cutData={...fixture,downloads:{bundle:'fixture-map.zip'},lynchpins:{skipped:null,reports:[
+    {...report([],[['p'],['q'],['r'],['s']],[],share([],33,6),cutRows,[...cutRows].sort((a,b)=>a.auto_rank-b.auto_rank),recordedNone),truncated:{rank:14,rows:28}}]}};
+  const cutPage=page(cutData),cd=cutPage.window.document;
+  show(cutPage,'open');['lynchpins','open-auto','open-core'].forEach(id=>open(cutPage,true,id));
+  const tail=id=>cd.querySelector(`#${id} tr.truncated`)?.textContent||cd.querySelector(`#${id} p.truncated`)?.textContent||null;
+  const listed=id=>cd.querySelectorAll(`#${id} [data-lynchpin]`).length;
+  const ctoggle=id=>cd.querySelector(`#pr-filters [data-show-positive="${id}"]`).click();
+  // 27 questions are open and the 16 stored question rows stand for one each.
+  assert.equal(listed('lynchpins'),17);
+  assert.equal(tail('lynchpins'),'Open questions truncated: 11 more among the shown principles, ranked after 14, are not stored on this page. The content bundle has the full ranking.');
+  assert.equal(cd.querySelector('#lynchpins tr.truncated a').getAttribute('href'),'fixture-map.zip');
+  assert.equal(cd.querySelector('#lynchpins tbody').lastElementChild.className,'truncated','the message ends the list');
+  assert.equal(tail('open-auto'),tail('lynchpins'),'both rankings leave out the same questions');
+  assert.equal(tail('open-core'),null,'the core questions are stored whole');
+  ctoggle('s');   // p, q, r: 12 open, 8 stored
+  assert.equal(listed('lynchpins'),9);
+  assert.match(tail('lynchpins'),/^Open questions truncated: 4 more among the shown principles, ranked after 14, are not stored/);
+  ctoggle('q');   // p, r: the six open questions are all stored, three of them below the cut
+  assert.equal(listed('lynchpins'),7);
+  assert.equal(tail('lynchpins'),null,'nothing is left out, so nothing is said');
+  assert.equal(tail('open-auto'),null);
+  ctoggle('q');ctoggle('r');   // p, q: ⊢ p is stored; ⊢ q and q ⊢ p are not
+  assert.equal(listed('lynchpins'),1);
+  assert.match(tail('lynchpins'),/^Open questions truncated: 2 more /);
+  ctoggle('p');   // q: ⊢ q alone is open, and no stored row is shown
+  assert.equal(listed('lynchpins'),0);
+  assert.equal(tail('lynchpins'),'Open questions truncated: 1 more among the shown principles, ranked after 14, is not stored on this page. The content bundle has the full ranking.');
+  // Without the mark nothing changes: a short list is simply short.
+  const wholePage=page({...cutData,lynchpins:{skipped:null,reports:[report([],[['p'],['q'],['r'],['s']],[],share([],33,6),cutRows,[...cutRows].sort((a,b)=>a.auto_rank-b.auto_rank),recordedNone)]}});
+  show(wholePage,'open');open(wholePage,true,'lynchpins');
+  assert.equal(wholePage.window.document.querySelectorAll('#lynchpins [data-lynchpin]').length,17);
+  assert.equal(wholePage.window.document.querySelector('#lynchpins .truncated'),null);
+
   assert.deepEqual(errors,[]);
   console.log('PASS: settled share, Central Questions by the harmonic mean, Automatically Generated Conjectures stated as the answer to expect, and Conjectures in their records\' direction at their central rank, all in one format with tiered stars and a details link, collapsed and lazy, True class under a stored background, none for an ad-hoc background, sparse maps, and inconsistent backgrounds.');
 } finally {

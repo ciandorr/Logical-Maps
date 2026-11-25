@@ -10,6 +10,8 @@ import Classicism.Results.SentenceSchemas.Constants
 import Classicism.Results.SentenceSchemas.SeparatedStructure
 import Classicism.Results.SentenceSchemas.ArithmeticMeta
 import Classicism.Results.SentenceSchemas.ArithmeticNecessitism
+import Classicism.Results.SentenceSchemas.PotentialInfinity
+import Classicism.Certified.CardinalCH
 import Classicism.Certified.Research
 import Classicism.Results.Research.NPCC5Atomicity
 import Classicism.Results.Research.RigidityClosureResearchAtomicPowerCertificates
@@ -2300,5 +2302,135 @@ theorem necessary_axiom_of_infinity_t_implies_axiom_of_infinity_t : Statements.n
 
 theorem necessary_atomlessness_implies_necessary_axiom_of_infinity_t : Statements.necessary_atomlessness_implies_necessary_axiom_of_infinity_t := by
   map_cert Proofs.necessary_atomlessness_implies_necessary_axiom_of_infinity_t.entails
+
+/-! ## Potential Infinity (24–25 November 2026) -/
+
+/-- `axiom-of-infinity-e-implies-potential-infinity-e` -/
+theorem axiom_of_infinity_e_implies_potential_infinity_e : Statements.axiom_of_infinity_e_implies_potential_infinity_e := by
+  map_cert Proofs.axiom_of_infinity_e_implies_potential_infinity_e.entails
+
+/-- `possible-infinity-e-implies-potential-infinity-e` -/
+theorem possible_infinity_e_implies_potential_infinity_e : Statements.possible_infinity_e_implies_potential_infinity_e := by
+  map_cert Proofs.possible_infinity_e_implies_potential_infinity_e.entails
+
+/-- `necessary-potential-infinity-e-implies-potential-infinity-e` -/
+theorem necessary_potential_infinity_e_implies_potential_infinity_e : Statements.necessary_potential_infinity_e_implies_potential_infinity_e := by
+  map_cert Proofs.necessary_potential_infinity_e_implies_potential_infinity_e.entails
+
+/-- `necessary-axiom-of-infinity-e-implies-necessary-potential-infinity-e` -/
+theorem necessary_axiom_of_infinity_e_implies_necessary_potential_infinity_e : Statements.necessary_axiom_of_infinity_e_implies_necessary_potential_infinity_e := by
+  map_cert Proofs.necessary_axiom_of_infinity_e_implies_necessary_potential_infinity_e.entails
+
+/-- `potential-infinity-e-and-pure-b-imply-necessary-potential-infinity-e` -/
+theorem potential_infinity_e_and_pure_b_imply_necessary_potential_infinity_e : Statements.potential_infinity_e_and_pure_b_imply_necessary_potential_infinity_e := by
+  map_cert pureB_potentialInfinityE_entails_necPotentialInfinityE
+
+/-- `possibility-and-necessary-potential-infinity-e-incompatible` -/
+theorem possibility_and_necessary_potential_infinity_e_incompatible : Statements.possibility_and_necessary_potential_infinity_e_incompatible := by
+  map_cert_incompatible possibility_necPotentialInfinityE_inconsistent
+
+/-- `axiom-of-infinity-t-implies-potential-infinity-t` -/
+theorem axiom_of_infinity_t_implies_potential_infinity_t : Statements.axiom_of_infinity_t_implies_potential_infinity_t := by
+  map_cert Proofs.axiom_of_infinity_t_implies_potential_infinity_t.entails
+
+/-- `possible-infinity-t-implies-potential-infinity-t` -/
+theorem possible_infinity_t_implies_potential_infinity_t : Statements.possible_infinity_t_implies_potential_infinity_t := by
+  map_cert Proofs.possible_infinity_t_implies_potential_infinity_t.entails
+
+/-- `necessary-potential-infinity-t-implies-potential-infinity-t` -/
+theorem necessary_potential_infinity_t_implies_potential_infinity_t : Statements.necessary_potential_infinity_t_implies_potential_infinity_t := by
+  map_cert Proofs.necessary_potential_infinity_t_implies_potential_infinity_t.entails
+
+/-- `necessary-axiom-of-infinity-t-implies-necessary-potential-infinity-t` -/
+theorem necessary_axiom_of_infinity_t_implies_necessary_potential_infinity_t : Statements.necessary_axiom_of_infinity_t_implies_necessary_potential_infinity_t := by
+  map_cert Proofs.necessary_axiom_of_infinity_t_implies_necessary_potential_infinity_t.entails
+
+/-- `potential-infinity-t-and-pure-b-imply-necessary-potential-infinity-t` -/
+theorem potential_infinity_t_and_pure_b_imply_necessary_potential_infinity_t : Statements.potential_infinity_t_and_pure_b_imply_necessary_potential_infinity_t := by
+  map_cert pureB_potentialInfinityT_entails_necPotentialInfinityT
+
+/-- `possibility-and-necessary-potential-infinity-t-incompatible` -/
+theorem possibility_and_necessary_potential_infinity_t_incompatible : Statements.possibility_and_necessary_potential_infinity_t_incompatible := by
+  map_cert_incompatible possibility_necPotentialInfinityT_inconsistent
+
+/-- `potential-infinity-e-and-bf-imply-axiom-of-infinity-e` -/
+theorem potential_infinity_e_and_bf_imply_axiom_of_infinity_e : Statements.potential_infinity_e_and_bf_imply_axiom_of_infinity_e := by
+  map_cert Proofs.potential_infinity_e_and_bf_imply_axiom_of_infinity_e.entails
+
+/-- `potential-infinity-t-and-bf-t-imply-axiom-of-infinity-t` -/
+theorem potential_infinity_t_and_bf_t_imply_axiom_of_infinity_t : Statements.potential_infinity_t_and_bf_t_imply_axiom_of_infinity_t := by
+  map_cert Proofs.potential_infinity_t_and_bf_t_imply_axiom_of_infinity_t.entails
+
+/-- `countable-boolean-completeness-and-potential-infinity-t-imply-possible-infinity-t` -/
+theorem countable_boolean_completeness_and_potential_infinity_t_imply_possible_infinity_t : Statements.countable_boolean_completeness_and_potential_infinity_t_imply_possible_infinity_t := by
+  map_cert Proofs.countable_boolean_completeness_and_potential_infinity_t_imply_possible_infinity_t.entails
+
+/-- `arithmetic-necessitism-and-necessary-potential-infinity-t-imply-possible-infinity-t` -/
+theorem arithmetic_necessitism_and_necessary_potential_infinity_t_imply_possible_infinity_t : Statements.arithmetic_necessitism_and_necessary_potential_infinity_t_imply_possible_infinity_t := by
+  map_cert Proofs.arithmetic_necessitism_and_necessary_potential_infinity_t_imply_possible_infinity_t.entails
+
+/-- `potential-infinity-e`, variant `peano`. -/
+theorem potential_infinity_e.peano : Statements.potential_infinity_e.peano := by
+  map_form P.PotentialInfinityE.to_peano.entails
+    P.PotentialInfinityE.of_peano.entails
+
+/-- `potential-infinity-e`, variant `possible-peano`. -/
+theorem potential_infinity_e.possible_peano : Statements.potential_infinity_e.possible_peano := by
+  map_form P.PotentialInfinityE.to_possible_peano.entails
+    P.PotentialInfinityE.of_possible_peano.entails
+
+/-- `potential-infinity-e`, variant `at-least`. -/
+theorem potential_infinity_e.at_least : Statements.potential_infinity_e.at_least := by
+  map_form P.PotentialInfinityE.to_at_least.entails
+    P.PotentialInfinityE.of_at_least.entails
+
+/-- `potential-infinity-t`, variant `peano`. -/
+theorem potential_infinity_t.peano : Statements.potential_infinity_t.peano := by
+  map_form P.PotentialInfinityT.to_peano.entails
+    P.PotentialInfinityT.of_peano.entails
+
+/-- `potential-infinity-t`, variant `possible-peano`. -/
+theorem potential_infinity_t.possible_peano : Statements.potential_infinity_t.possible_peano := by
+  map_form P.PotentialInfinityT.to_possible_peano.entails
+    P.PotentialInfinityT.of_possible_peano.entails
+
+/-- `potential-infinity-t`, variant `at-least`. -/
+theorem potential_infinity_t.at_least : Statements.potential_infinity_t.at_least := by
+  map_form P.PotentialInfinityT.to_at_least.entails
+    P.PotentialInfinityT.of_at_least.entails
+
+/-- `necessary-potential-infinity-e`, variant `peano`. -/
+theorem necessary_potential_infinity_e.peano : Statements.necessary_potential_infinity_e.peano := by
+  map_form P.NecPotentialInfinityE.to_peano.entails
+    P.NecPotentialInfinityE.of_peano.entails
+
+/-- `necessary-potential-infinity-e`, variant `at-least`. -/
+theorem necessary_potential_infinity_e.at_least : Statements.necessary_potential_infinity_e.at_least := by
+  map_form P.NecPotentialInfinityE.to_at_least.entails
+    P.NecPotentialInfinityE.of_at_least.entails
+
+/-- `necessary-potential-infinity-t`, variant `peano`. -/
+theorem necessary_potential_infinity_t.peano : Statements.necessary_potential_infinity_t.peano := by
+  map_form P.NecPotentialInfinityT.to_peano.entails
+    P.NecPotentialInfinityT.of_peano.entails
+
+/-- `necessary-potential-infinity-t`, variant `at-least`. -/
+theorem necessary_potential_infinity_t.at_least : Statements.necessary_potential_infinity_t.at_least := by
+  map_form P.NecPotentialInfinityT.to_at_least.entails
+    P.NecPotentialInfinityT.of_at_least.entails
+
+/-! ## Cardinal CH: contingency is the conjunction (25 November 2026) -/
+
+/-- `contingency-of-cardinal-ch-implies-possible-cardinal-ch` -/
+theorem contingency_of_cardinal_ch_implies_possible_cardinal_ch : Statements.contingency_of_cardinal_ch_implies_possible_cardinal_ch := by
+  map_cert Proofs.contingency_of_cardinal_ch_implies_possible_cardinal_ch.entails
+
+/-- `contingency-of-cardinal-ch-implies-possible-failure-of-cardinal-ch` -/
+theorem contingency_of_cardinal_ch_implies_possible_failure_of_cardinal_ch : Statements.contingency_of_cardinal_ch_implies_possible_failure_of_cardinal_ch := by
+  map_cert Proofs.contingency_of_cardinal_ch_implies_possible_failure_of_cardinal_ch.entails
+
+/-- `possible-cardinal-ch-and-possible-failure-of-cardinal-ch-imply-contingency-of-cardinal-ch` -/
+theorem possible_cardinal_ch_and_possible_failure_of_cardinal_ch_imply_contingency_of_cardinal_ch : Statements.possible_cardinal_ch_and_possible_failure_of_cardinal_ch_imply_contingency_of_cardinal_ch := by
+  map_cert Proofs.possible_cardinal_ch_and_possible_failure_of_cardinal_ch_imply_contingency_of_cardinal_ch.entails
 
 end Classicism.Map

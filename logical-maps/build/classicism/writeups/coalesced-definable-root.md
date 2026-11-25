@@ -1,5 +1,7 @@
 # Coalesced sum: interpretation arrows into every component object, definable root
 
+The strict-smallness argument below concerns the earlier axiom. The current model record proves failure of the revised Mathematical Possibilism by the Cantor regular-open algebra.
+
 Cian Dorr gave this construction on 20 October 2026, for the sentence $\Psi$
 below; Claude Fable 5.1 (Anthropic) wrote the verification and the arguments.
 No second reader has checked it, and no Lean verification is claimed.

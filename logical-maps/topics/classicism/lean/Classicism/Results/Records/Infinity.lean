@@ -5,7 +5,8 @@ import Classicism.Principles
 # Proofs of map records: Infinity, and Countable Boolean Completeness
 
 Records among the Axioms of Infinity and Possible Infinity, and Countable Boolean
-Completeness.
+Completeness; and, since 24 November 2026, the records of Potential Infinity, whose
+arguments are the Background's lemmas on it (`Background/Arithmetic.lean`).
 The conventions are in `Results/Records.lean`.
 -/
 
@@ -107,5 +108,59 @@ necessitated. -/
 theorem necessary_atomlessness_implies_necessary_axiom_of_infinity_t :
     NecAtomlessness → NecAxiomOfInfinityT :=
   modal_K _ _ (nec% atomlessness_implies_axiom_of_infinity_t)
+
+/-! ## Potential Infinity (24 November 2026) -/
+
+/-- `axiom-of-infinity-e-implies-potential-infinity-e`: under the Axiom every number holds of
+some property (`potentialInfinity_of_axiomOfInfinity`). -/
+theorem axiom_of_infinity_e_implies_potential_infinity_e :
+    AxiomOfInfinityE → PotentialInfinityE := potentialInfinity_of_axiomOfInfinity
+
+/-- `axiom-of-infinity-t-implies-potential-infinity-t`. -/
+theorem axiom_of_infinity_t_implies_potential_infinity_t :
+    AxiomOfInfinityT → PotentialInfinityT := potentialInfinity_of_axiomOfInfinity
+
+/-- `possible-infinity-e-implies-potential-infinity-e`: the last record, necessitated, and
+Potential Infinity is true if possible (`potentialInfinity_of_dia`). -/
+theorem possible_infinity_e_implies_potential_infinity_e :
+    PossibleInfinityE → PotentialInfinityE := fun h =>
+  potentialInfinity_of_dia
+    (dia_mono _ _ (nec% (potentialInfinity_of_axiomOfInfinity (σ := e))) h)
+
+/-- `possible-infinity-t-implies-potential-infinity-t`. -/
+theorem possible_infinity_t_implies_potential_infinity_t :
+    PossibleInfinityT → PotentialInfinityT := fun h =>
+  potentialInfinity_of_dia
+    (dia_mono _ _ (nec% (potentialInfinity_of_axiomOfInfinity (σ := Prop))) h)
+
+/-- `necessary-potential-infinity-e-implies-potential-infinity-e`: `T`. -/
+theorem necessary_potential_infinity_e_implies_potential_infinity_e :
+    NecPotentialInfinityE → PotentialInfinityE := box_elim
+
+/-- `necessary-potential-infinity-t-implies-potential-infinity-t`: `T`. -/
+theorem necessary_potential_infinity_t_implies_potential_infinity_t :
+    NecPotentialInfinityT → PotentialInfinityT := box_elim
+
+/-- `necessary-axiom-of-infinity-e-implies-necessary-potential-infinity-e`: the unboxed
+record, necessitated. -/
+theorem necessary_axiom_of_infinity_e_implies_necessary_potential_infinity_e :
+    NecAxiomOfInfinityE → NecPotentialInfinityE :=
+  modal_K _ _ (nec% axiom_of_infinity_e_implies_potential_infinity_e)
+
+/-- `necessary-axiom-of-infinity-t-implies-necessary-potential-infinity-t`. -/
+theorem necessary_axiom_of_infinity_t_implies_necessary_potential_infinity_t :
+    NecAxiomOfInfinityT → NecPotentialInfinityT :=
+  modal_K _ _ (nec% axiom_of_infinity_t_implies_potential_infinity_t)
+
+/-- `potential-infinity-e-and-bf-imply-axiom-of-infinity-e`: under BF a finite count is a
+necessary bound (`finite_count_bound`), against Potential Infinity at its successor. -/
+theorem potential_infinity_e_and_bf_imply_axiom_of_infinity_e :
+    PotentialInfinityE → Barcan e → AxiomOfInfinityE :=
+  fun h bf => axiomOfInfinity_of_potentialInfinity_bf bf h
+
+/-- `potential-infinity-t-and-bf-t-imply-axiom-of-infinity-t`: the same at `t`. -/
+theorem potential_infinity_t_and_bf_t_imply_axiom_of_infinity_t :
+    PotentialInfinityT → BarcanT → AxiomOfInfinityT :=
+  fun h bf => axiomOfInfinity_of_potentialInfinity_bf bf h
 
 end Classicism.Proofs

@@ -1,0 +1,129 @@
+id: coalesced-definable-root-signature
+name: 'Coalesced sum: exits into pointed components for Σ, definable root'
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the definable root, 20 October 2026) and GPT-6 Astra (OpenAI), prompted by Cian
+    Dorr (the version with a signature interpreted in the components and freely chosen root extensions
+    for its constants, 1 November 2026), with Claude Fable 5.2 (Anthropic), prompted by Cian Dorr, who
+    wrote this description and the verification, 21–22 November 2026
+  recorded_by: Claude Fable 5.2 (Anthropic), prompted by Cian Dorr, 22 November 2026
+  checked_by: []
+  date: '2026-11-22'
+  lean: none
+sources:
+- Cian Dorr, construction of 20 October 2026 (coalesced-definable-root), adapted to a signature interpreted
+  in the components by GPT-6 Astra (OpenAI), prompted by Cian Dorr, 1 November 2026, and written out
+  by Claude Fable 5.2 (Anthropic), prompted by Cian Dorr, 21–22 November 2026.
+- Andrew Bacon and Cian Dorr, Classicism, draft of 16 May 2023, Appendix E, Definition E.2, pp. 80–83;
+  Theorem 3.26, §3.6, pp. 62–64.
+source_names:
+- Dorr, Astra, Fable 22 Nov
+- Classicism
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: Appendix E, Definition E.2, pp. 80–83; Theorem 3.26, §3.6, pp. 62–64
+  note: The coalesced sum, here with the root domains cut down to the intensions definable by closed
+    terms of the signature, and completeness of the action models for C(Σ).
+group: coalesced-sums
+settings:
+  root-arrows: pointed-exits
+  sigma: construction
+  construction: 'Let $\Sigma^{+}$ be $\Sigma$, with an individual constant $d$ added if $\Sigma$ has
+    none. Fix a set $A$ of pointed action models for $\mathcal L(\Sigma^{+})$, with disjoint objects
+    and arrows, complete for C($\Sigma^{+}$): every closed sentence consistent with C($\Sigma^{+}$) is
+    true at the distinguished object $V_{\mathfrak A}$ of some $\mathfrak A\in A$. Add an object $W_0$.
+    Its arrows out are its identity and, for each $\mathfrak A$ and each arrow $k$ of $\mathfrak A$ out
+    of $V_{\mathfrak A}$, an arrow $k\circ\varepsilon_{\mathfrak A}$, where $\varepsilon_{\mathfrak A}$
+    is the exit from $W_0$ to $V_{\mathfrak A}$; composition is $k^{\prime}\circ(k\circ\varepsilon_{
+    \mathfrak A}):=(k^{\prime}k)\circ\varepsilon_{\mathfrak A}$. The individuals at $W_0$ are the
+    individual constants of $\Sigma^{+}$, and $\varepsilon_{\mathfrak A}$ sends each to its denotation
+    at $V_{\mathfrak A}$. Evaluation point: $W_0$, at its identity arrow. Interpretation of Σ: an
+    individual constant denotes itself, and a relational constant $c$ denotes the root entity with the
+    closed term $c$ and a root extension $E_c$ that may be chosen freely. The recorded verdicts hold
+    for every choice of the $E_c$.'
+  domains:
+    text: 'An entity at $W_0$ of a relational type $\bar\tau t$ is an intension over the arrows out of
+      $W_0$ for which there is a closed term $u$ of $\mathcal L(\Sigma^{+})$ such that its value at
+      $k\circ\varepsilon_{\mathfrak A}$ is the extension at $k$ of the entity $u$ denotes in $\mathfrak
+      A$, for every $\mathfrak A$ and $k$; its value at the identity is an unconstrained set of tuples
+      of root entities of the types $\bar\tau$. Write it $(E,u)$, $E$ its value at the identity. Its
+      transport along $\varepsilon_{\mathfrak A}$ is the entity $u$ denotes at $V_{\mathfrak A}$, so it
+      lands in the component domain. $(E,u)$ and $(E^{\prime},u^{\prime})$ are the same entity iff
+      $E=E^{\prime}$ and C($\Sigma^{+}$) proves $u=u^{\prime}$.'
+meets:
+  complete-components: The models in $A$ are complete for C($\Sigma^{+}$), so in particular for C, and
+    a closed pure sentence at the exit into a component has its truth value at that component's
+    distinguished object.
+  free-root-component: The value of a root entity at the identity arrow is unconstrained, the identity
+    being the only arrow into $W_0$.
+arguments:
+- id: maximalism-signature
+  holds:
+  - possibility-plus-signature-r
+  by: Claude Fable 5.2 (Anthropic), prompted by Cian Dorr
+  date: '2026-11-22'
+  choice: free
+  writeup: coalesced-definable-root-signature
+  text: >-
+    A closed sentence of $\mathcal L(\Sigma^{+})$ holds at $\varepsilon_{\mathfrak A}$ iff it holds at
+    $V_{\mathfrak A}$ in $\mathfrak A$, since the transport of each constant's denotation along the
+    exit is $\mathfrak A$'s interpretation of it. Every closed sentence consistent with C($\Sigma$) is
+    consistent with C($\Sigma^{+}$) and so holds at some $V_{\mathfrak A}$; hence it is possible at
+    $W_0$. For an instance of Possibility+ (signature Σ) with free individual variables $\bar x$,
+    assign them pairwise distinct root individuals distinct from the constants in $P$. Root
+    individuals are individual constants of $\Sigma^{+}$, so these are distinct constants $\bar
+    c^{\prime}$ not occurring in $P$, and $P[\bar c^{\prime}/\bar x]$ is consistent with
+    C($\Sigma^{+}$) because $P$ is consistent and the $\bar c^{\prime}$ are fresh and distinct. So it
+    holds at some $V_{\mathfrak A}$, and $P$ is possible at $W_0$ under that assignment. In the
+    distinctness form: a closed identity of $\mathcal L(\Sigma)$ is true at $W_0$ iff C($\Sigma$)
+    proves it, by the identity criterion for root entities and conservativity of C($\Sigma^{+}$) over
+    C($\Sigma$).
+- id: root-algebra
+  fails:
+  - boolean-completeness-t
+  - self-atoms-are-atoms-t
+  - self-atoms-are-strong-atoms-t
+  by: Claude Opus 5.5 (Anthropic), prompted by Cian Dorr
+  date: '2026-11-23'
+  choice: free
+  writeup: coalesced-definable-root-signature
+  text: >-
+    Let $L$ be the Lindenbaum algebra of C($\Sigma^{+}$). A root proposition is a pair $(e,[v])$ with
+    $e$ its truth value at the identity and $v$ a closed sentence. Since the components are complete for
+    C($\Sigma^{+}$), $\Box(e,v)$ holds at $W_0$ iff $e=1$ and $\vdash v$, and $(e,v)\le(f,w)$ holds there
+    iff $e\le f$ and $\vdash v\to w$. So the propositions at $W_0$ form $2\times L$, and any set of them is
+    the root extension of a root property. Boolean Completeness (type $t$) fails because $L$ is never
+    complete. If $\Sigma^{+}$ is countable, the pure sentences "there are exactly $n$ individuals"
+    ($n\ge1$) are consistent and pairwise inconsistent, and in a complete $L$ the map $S\mapsto\bigvee S$
+    on sets of them would inject $\mathcal P(\omega)$ into a countable set. If $\Sigma^{+}$ has infinitely
+    many constants, fresh constants give an antichain whose even members have no join (write-up). For the
+    bridge principles let $\mathrm F$ be the Fregean Axiom $\forall p\, .\,p=\top\lor p=\bot$ and
+    $s:=(0,\mathrm F)$. C proves $\mathrm F\to\operatorname{Atom}(\mathrm F)$, a true proposition being
+    $\top$ under $\mathrm F$, so $s$ is a self-atom at $W_0$. It is neither an atom nor a strong atom:
+    $(0,\mathrm F\land\forall x\forall y\, .\,x=y)$ lies strictly between $\bot$ and $s$, the full one-world
+    models with one and with two individuals both satisfying $\mathrm F$ under any interpretation of
+    $\Sigma^{+}$.
+notes: >-
+  The version of coalesced-definable-root in which the signature is interpreted in the components and
+  each constant keeps a freely chosen root extension. It is a model of Maximalism (signature Σ) for
+  every Σ and every choice of root extensions, and the freedom of choice is what it is for. The
+  write-up proves from it that a constant is injective on closed terms modulo C(Σ): for a constant
+  $c$ and closed $A$, $B$ of the type of one of its arguments, C(Σ) proves $\forall\bar w\bar
+  w^{\prime}\, .\,c[\bar w,A,\bar w^{\prime}]\leftrightarrow c[\bar w,B,\bar w^{\prime}]$ only if it
+  proves $A=B$. Two members of the family, differing in one root extension, are the models used in
+  the write-up of [[strong-possibility-signature-r-inconsistent]].
+
+
+  The one verdict recorded is the one that holds for every Σ and every choice and that the map does
+  not derive. From it and the arguments of the group the map derives, among others, Actuality, the
+  failure of ND and of Strong Possibility (signature Σ), Relational Choice and Well-Ordering. The
+  argument root-algebra (23 November 2026) adds the failure of Boolean Completeness (type $t$) and of the
+  bridge principles from self-atoms. Eighteen principles are left open, listed in the write-up. These
+  hold for some Σ and fail for others: BF at each type, Functionality, Tractarianism, the two Infinity
+  principles at type $e$, and the principles that atoms are strong atoms. Tame Rigidity, the Rigid Power
+  principles, and the principles that atoms are self-atoms are open even for particular Σ. Forcing
+  Possibilism and the three Cardinal CH principles, as revised on 24 November 2026, have not been
+  examined. That it is a model of C is argued in
+  the write-up; Cian Dorr has checked the construction against the use made of it in the injectivity
+  proof, and no Lean verification is claimed.

@@ -1476,3 +1476,73 @@ its seven verdicts from the group's arguments are certified through it (`MapWitn
 
 *Checked.* `lean-check` OK (pending proofs remain): 456 model verdicts verified. The group's
 certified verdicts went from 75 (48 from arguments, 27 member by member) to 110 (75 and 35).
+
+## Potential Infinity, 24–25 November
+
+`Background/Arithmetic.lean` takes `IStar` from `Principles/Arithmetic.lean` and adds Potential
+Infinity, `PotInf σ := ∀n ∈ ℕ_σ. ◇∃X. nX`, the at-least numbers (`ZeroLower`, `LowerNat`,
+`LowerPeano`, `AtLeast`) and reachability between cardinalities (`Reach`). All of it is in the
+shallow layer and passes the gate, so these are theorems of `C⁻`:
+
+- the arithmetic of finite cardinalities that the rest uses: exchange, removal and addition of
+  an instance, subproperties, and that numbers which could hold of one property are identical
+  (`finiteCardinality_exchange`, `_remove`, `_add`, `_subset`, `finiteCardinality_eq_of_dia_common`);
+- `PotInf σ ↔ IStar σ` (`iStar_of_potentialInfinity`, `potentialInfinity_of_iStar`) and
+  `◇PotInf σ → PotInf σ` (`potentialInfinity_of_dia`), so that `I*_σ`, `◇I*_σ` and Potential
+  Infinity are one principle;
+- the Axiom of Infinity gives Potential Infinity, and with BF Potential Infinity gives it back
+  (`potentialInfinity_of_axiomOfInfinity`, `axiomOfInfinity_of_potentialInfinity_bf`, by
+  `finite_count_bound`: under BF a finite count is a necessary bound);
+- the Peano conditions on the at-least numbers are `I*_σ` (`lowerPeano_of_iStar`,
+  `iStar_of_lowerPeano`, through `lowerNat_eq_atLeast` and `atLeast_inj`), which identifies
+  Bacon's lower-Peano conditions with Potential Infinity;
+- Goodsell's argument: with weakly inextensible numbers at `t`, Potential Infinity at `t` gives
+  the possibility of the Axiom of Infinity at `t` (`possibleInfinity_of_weaklyInextensible`, with
+  `counts_bounded` and `reach_comparable`). Countable Boolean Completeness makes the numbers
+  weakly inextensible (`Proofs.finiteCardinality_weaklyInextensible_of_cbc`).
+
+`Principles/Infinity.lean` has the four principles (`PotentialInfinityE`, `PotentialInfinityT`
+and their necessitations) and the ten variants, with each equivalence as a `to_`/`of_` pair.
+`Results/Records/Infinity.lean` and `Results/Records/Arithmetic.lean` have the twelve records
+derived in the shallow layer; `Results/SentenceSchemas/PotentialInfinity.lean` has the four that
+are about a closed pure sentence: B for pure sentences carries Potential Infinity to its
+necessitation, and Possibility refutes the necessitation, the negation of Potential Infinity
+being consistent (`not_iStar_consistent`). `Map.lean` certifies the sixteen results and the ten
+variant equivalences.
+
+`Certified/CardinalCH.lean` states the three cardinal CH principles of Bacon's revised
+Mathematical Possibilism, `◇C_N`, `◇¬C_N` and their conjunction, with `N` the at-least numbers
+over individuals and `S` the rigid subproperties of `N`. The vocabulary (`Maps`, `Injects`,
+`Surjects`, `Bijects`, `Embeds`, `Equinumerous`, `RigidPower`, `CardinalCH`) is transcribed
+from his Lean package for the three derivations (pull request #28,
+`verification/finite-power-ch/`), under the same names. The four closed statements pass the type-system check, the three principles
+get schemas (declared there, as Necessity of Arithmetic's is in `Certified/Arithmetic.lean`,
+and imported by `Statements.lean`), and the three records that say Contingency of Cardinal CH
+is the conjunction of the other two are derived and certified. With the principles stated,
+a model's statement can again be generated when it has a verdict on them: the general
+arguments `cardinal-ch-one-individual` and `cardinal-ch-boundedly-many-individuals` give such
+verdicts to ten models whose records say `lean: stated`.
+
+Not formalized: the two records that rerun the write-up for the Necessity of Second-Order
+Analysis from □Potential Infinity, the general arguments giving verdicts in models, and the
+model `full-omega-chain-new-individuals`. Bacon's three cardinal CH results are not checked
+by this library: they are the subject of his own package (pull request #28, not merged with
+this entry), their records say `lean: none`, and they cannot be stated here while Mathematical
+Possibilism has no `lean_def`.
+
+*Checked.* The library builds (1384 modules, no `sorry`). `lean-check` OK (pending proofs
+remain): 577 proofs verified of 627 generated statements, 62 variant equivalences, 508 model
+verdicts in 51 models, and 61 argument verdicts. Of this entry's records, 19 results and 10
+variants are verified.
+
+*Credit corrected, 25 November.* Two of the lemmas above were Bacon's first. `iStar_of_lowerPeano`,
+that the Peano conditions on the at-least numbers give `I*_σ`, is his `exactPeano_of_lowerPeano`,
+and `lowerNat_eq_atLeast` with `atLeast_inj`, the correspondence between the numbers and the
+at-least numbers, is what his `exactLowerPair_upward` and `exactLowerBijection_of_lowerPeano`
+establish (GPT-6 Astra Pro, prompted by Andrew Bacon, 28 October 2026:
+`Results/Research/ExactLowerPeanoTransfer.lean` and `ExactLowerCorrespondence.lean` of pull request
+#19, which was not merged). They were proved again here without his files to hand. The converse,
+`lowerPeano_of_iStar`, and everything about `PotInf` are new. The Background's lemma
+`at-least-numbers` and the four principles now say so; the docstrings of
+`Background/Arithmetic.lean` will at the library's next full rebuild, a change there rebuilding
+every module.

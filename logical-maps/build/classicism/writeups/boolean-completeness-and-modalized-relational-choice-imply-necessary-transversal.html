@@ -328,21 +328,15 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <p><strong>The idea.</strong> Grow a necessarily partial transversal by adding, wherever a coextension class is missed, one member of it chosen by a necessarily functional selector. Partial transversals are compared by <span class="math inline">\le</span>, which is antisymmetric, and Boolean Completeness supplies joins of chains, which are again necessarily partial transversals. The Bourbaki–Witt lemma then gives a fixed point <span class="math inline">m</span>, and since the growth step is a single operation, <span class="math inline">m</span> is <em>identical</em> to its own extension. That identity, unlike a coextension at the actual world, holds at every world, and it is what rules out a missed class anywhere.</p>
 <h2 id="set-up">Set-up</h2>
 <p>Write <span class="math inline">x\equiv y</span>, for <span class="math inline">x,y</span> of type <span class="math inline">\rho</span>, when <span class="math inline">x</span> and <span class="math inline">y</span> are coextensive. It is a theorem of C that <span class="math inline">\equiv</span> is an equivalence relation, so it is necessarily one. For <span class="math inline">B^{\rho t}</span> let</p>
-<p><span class="math display">
-(\Gamma B)x:=\forall y\, .\,By\land x\equiv y\to x=y .
-</span></p>
+<p><span class="math display">(\Gamma B)x:=\forall y\, .\,By\land x\equiv y\to x=y .</span></p>
 <p>Unpacking <span class="math inline">\le</span> as necessary inclusion,</p>
-<p><span class="math display">
-A\le\Gamma B\quad\text{iff}\quad\Box\forall x\,y\, .\,Ax\land By\land x\equiv y\to x=y. \tag{1}
-</span></p>
+<p><span class="math display">A\le\Gamma B\quad\text{iff}\quad\Box\forall x\,y\, .\,Ax\land By\land x\equiv y\to x=y. \tag{1}</span></p>
 <p>The right side is symmetric in <span class="math inline">A</span> and <span class="math inline">B</span>, since <span class="math inline">\equiv</span> is necessarily symmetric, so <span class="math inline">A\le\Gamma B</span> iff <span class="math inline">B\le\Gamma A</span>. Also <span class="math inline">\Gamma</span> is antitone: if <span class="math inline">A\le B</span> then <span class="math inline">\Gamma B\le\Gamma A</span>. Call <span class="math inline">Y^{\rho t}</span> <em>separated</em> if <span class="math inline">Y\le\Gamma Y</span>, that is, if necessarily no two distinct instances of <span class="math inline">Y</span> are coextensive.</p>
 <p><strong>The selector.</strong> Modalized Relational Choice at <span class="math inline">(\rho t,\rho)</span> gives, as in the proof of Modalized Relational Choice ⇒ □Modalized Relational Choice, an <span class="math inline">S^{(\rho t)\rho t}</span> such that necessarily, for every <span class="math inline">P^{\rho t}</span>, exactly one <span class="math inline">y</span> has <span class="math inline">(SP)y</span>, and it is an instance of <span class="math inline">P</span> if <span class="math inline">P</span> has one. (Apply the principle to <span class="math inline">\lambda P\,y\, .\,Py\lor\neg\exists z\,.\,Pz</span>, which is necessarily serial.)</p>
 <p><strong>The step.</strong> For <span class="math inline">Y^{\rho t}</span> let</p>
-<p><span class="math display">
-\mathrm{Miss}_Y:=\lambda y\, .\,\neg\exists x\, .\,Yx\land x\equiv y,\qquad
+<p><span class="math display">\mathrm{Miss}_Y:=\lambda y\, .\,\neg\exists x\, .\,Yx\land x\equiv y,\qquad
 D_Y:=\lambda y\, .\,\mathrm{Miss}_Yy\land(S\,\mathrm{Miss}_Y)y,\qquad
-\Phi Y:=Y\lor D_Y .
-</span></p>
+\Phi Y:=Y\lor D_Y .</span></p>
 <p>So <span class="math inline">D_Y</span> is necessarily instantiated by at most one thing, and is necessarily instantiated whenever <span class="math inline">\mathrm{Miss}_Y</span> is. <span class="math inline">\Phi</span> is given by a closed term, so it is a single operation on properties.</p>
 <h2 id="applying-the-bourbakiwitt-lemma">Applying the Bourbaki–Witt lemma</h2>
 <p>Use the lemma (Background, <em>Relations, orders and fixed points</em>) in its special case for partial orders, at type <span class="math inline">\rho t</span>, with</p>

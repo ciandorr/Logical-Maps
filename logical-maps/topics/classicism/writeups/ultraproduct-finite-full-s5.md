@@ -1,5 +1,7 @@
 # Henkin ultraproduct: finite full S5 models, n worlds and n individuals
 
+The strict-smallness calculation below records the original verdict. For the revised Mathematical Possibilism in the countable-world, finite-individual factors, use the finite ordinal threshold argument in the current model record.
+
 Construction by GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked
 and written up for the map by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr,
 25 October 2026. The same write-up covers

@@ -21,13 +21,14 @@
 - **□Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
 - **□Relational Choice.** Necessarily, every serial binary relation has a functional subrelation.
 - **□Transversal Choice.** Necessarily, every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **Necessity of Arithmetic.** Every arithmetical sentence is either necessarily true or necessarily false, given that possibly zero is not a successor and successor is injective on numbers, where the numbers are the finite cardinalities of properties of a type $\sigma$. One sentence for each type $\sigma$ and each arithmetical sentence at $\sigma$.
 - **No Pure Contingency.** Each closed sentence of the pure language, if true, is necessary. This is a sentence schema, not a quantifier over propositions.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Tame Rigidity.** Every weakly rigid relation, including a proposition, is rigid.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
 - **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
 - **¬ Self-atoms are strong atoms (type t).** Every self-atom is a strong atom.
-- **¬ Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
+- **¬ Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
 - **¬ Atomicity.** Every non-bottom entity of each relational type has an atom below it.
 - **¬ Atomicity (type t).** Every non-bottom proposition has an atom below it.
 - **¬ Boolean Completeness.** Every property of entities of a relational type has a greatest lower bound in that type.
@@ -62,7 +63,7 @@ $\{1\}$ is in the domain and is the only atom, the propositions over the collaps
 
 *By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
-### Fails Forcing Possibilism.
+### Fails Mathematical Possibilism.
 
 The only atom is $\{1\}$: a nonempty set of collapsing arrows pinned down by $\{0,\ldots,M\}$ is split by the value at $M+1$, both values extending to arrows. So no proposition has exactly four below it, while $\bot$, $\{1\}$, its negation and $\top$ form a complete four-element algebra.
 
@@ -221,6 +222,14 @@ As for individuals (necessary-axiom-of-infinity-individuals), at type $t$. At th
 At any reachable object $W$, let $U$ be a serial relation in the domain there. Using the axiom of choice, pick for each $x$ a $y$ with $(x,y)$ in the extension of $U$ at the identity, and let $S$ be the intension whose value at every arrow $W\to W$ is the graph of this choice and whose value at arrows with any other codomain is empty; it depends only on the codomain, so the condition puts it in the domain, and at the identity it is a functional subrelation of $U$. Likewise a set of representatives of an equivalence relation at $W$, made into such an intension, is a transversal. Since $W$ was any reachable object, both principles hold at every world.
 
 *General argument `arguments/necessary-relational-choice-codomain-intensions`. It requires that At every object reachable from the evaluation point, the domain contains every intension whose value at an arrow depends only on the arrow's codomain. Here: With one object such an intension is constant, so it is pinned down by $\emptyset$, and the domain holds every finitely pinned intension. By Claude Fable 5.1 (Anthropic), at Cian Dorr's direction, 2026-10-14.*
+
+### Holds Necessity of Arithmetic.
+
+At each type $\sigma$. At any object $v$ reachable from the evaluation point the numbers at $\sigma$ are the numerals there, as in the argument arithmetic-necessitism-extensionally-full. If the numerals are pairwise distinct at $v$, as they are when $\sigma$ has infinitely many entities there, the $n$th being the cardinality of the properties with $n$ instances, then $\operatorname{Sum}_\sigma$ and $\operatorname{Prod}_\sigma$ are the least relations closed under their clauses, and by extensional fullness the relations whose extensions are the graphs of addition and multiplication on the numerals are present and closed under them, so the two are standard. So an arithmetical sentence $A$ at $\sigma$ has at $v$ its truth value in the standard model. If two numerals coincide at $v$, then $I^*_\sigma$ fails at $v$, since zero is a numeral other than every successor and successor is injective on the numerals only when they are pairwise distinct; and then $I_\sigma=\Diamond I^*_\sigma$ is false at $v$ too, $I^*_\sigma$ being true if possible (Background, [[potential-infinity-forms]]). So $\Box(I_\sigma\to A)$ holds when $A$ is true in the standard model and $\Box(I_\sigma\to\neg A)$ when it is false. No choice is used.
+
+*General argument `arguments/necessity-of-arithmetic-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: The model is ideally full, hence extensionally full at every object (Appendix D, the remark after Definition D.3): for any set $R$ of tuples from the domains at an object $V$, the intension that assigns to every arrow out of $V$ into an object $U$ a fixed set $R_U$ of tuples from $U$’s domains, with $R_V=R$, is pinned down by $\emptyset$, so it is the intension of an element of $V^{\bar\sigma\to t}$ with extension $R$ at $1_V$. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-30.*
+
+*Revised 2026-11-24 by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell:* The case of a type with finitely many entities at $v$ had argued that two numerals then coincide at every object $v$ sees, the type being finite at each by the condition finite-types-stay-finite. That needs a finite bound on those objects, not only that each is finite: in [[full-omega-chain-new-individuals]] every object has finitely many individuals and the numerals at type $e$ are pairwise distinct at each. The cases are now divided by whether the numerals are pairwise distinct at $v$, and the condition is no longer required: where they coincide $I^*_\sigma$ fails, and with it $I_\sigma$, which is Potential Infinity at $\sigma$.
 
 ### Holds No Pure Contingency.
 

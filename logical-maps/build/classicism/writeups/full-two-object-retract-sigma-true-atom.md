@@ -8,6 +8,7 @@
 - **Second-Order Analytic Necessitism.** If there could be a real number structure, there is a rigid one, necessarily a real number structure, together with represented powers of every arity up to $n$: rigid properties of rigid relations among the structure's elements that necessarily represent every relation on them. One sentence for each type $\sigma$ and each $n\ge1$.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
+- **Possible failure of Cardinal CH.** Cardinal CH possibly fails.
 - **Gallin Extensional Comprehension.** Every relation is coextensive with one that is persistent and has a persistent pointwise negation. This is the source’s comparison with Gallin’s different rigidity convention.
 - **□Truths are 5-necessary.** Necessarily, every truth is 5-necessary: necessary under every S5 operator. In C this is the identity $\Box_5=\lambda p\, .\,p$.
 - **□Atomicity.** Necessarily, every non-bottom entity of each relational type has an atom below it.
@@ -17,6 +18,7 @@
 - **□Intensional Choice.** Necessarily, if a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
 - **□Relational Choice.** Necessarily, every serial binary relation has a functional subrelation.
 - **□Transversal Choice.** Necessarily, every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **Necessity of Arithmetic.** Every arithmetical sentence is either necessarily true or necessarily false, given that possibly zero is not a successor and successor is injective on numbers, where the numbers are the finite cardinalities of properties of a type $\sigma$. One sentence for each type $\sigma$ and each arithmetical sentence at $\sigma$.
 - **Relational Choice.** Every serial binary relation has a functional subrelation.
 - **ND.** Distinct things of any type are necessarily distinct.
 - **Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
@@ -24,6 +26,8 @@
 - **Strong Actuality.** There is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 - **□Strong Actuality.** Necessarily, there is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
+- **¬ Potential Infinity (type t).** For every natural number, there could be at least that many propositions: each number counted at type $t$ possibly holds of some property of propositions.
+- **¬ Possible Cardinal CH.** Cardinal CH possibly holds.
 - **¬ Possible Infinity (type t).** Possibly there are not finitely many propositions: the Axiom of Infinity at this type, under a diamond.
 - **¬ Infinity Schema (type t).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
@@ -35,6 +39,7 @@
 - **¬ Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **¬ Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Possible Infinity (type e).** Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.
+- **¬ Potential Infinity (type e).** For every natural number, there could be at least that many individuals: each number counted at type $e$ possibly holds of some property of individuals.
 - **¬ No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
 - **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
@@ -67,6 +72,18 @@ Every type is finite at every object $v$ reachable from the evaluation point, by
 The numbers at a type $\sigma$ are the instances of $\mathbb N_\sigma$, the least property containing $\mathbf 0_\sigma$ and closed under $\operatorname{Suc}_\sigma$ (Background); the numerals $\mathbf 0_\sigma$, $\operatorname{Suc}_\sigma\mathbf 0_\sigma,\ldots$ are closed terms, so each denotes at every object, and transport along an arrow carries its denotation at the source to its denotation at the target. At any object $v$ reachable from the evaluation point, extensional fullness gives a property whose extension at $v$ is exactly the numerals there; it contains $\mathbf 0_\sigma$ and is closed under successor, so the numbers at $v$ are exactly the numerals, every numeral being an instance of every inductive property. Persistence of $\mathbb N_\sigma$ and, given $\Box I^*_\sigma$, the necessary distinctness of the numbers are theorems of C (the proof of necessary-rigid-comprehension-implies-arithmetic-necessitism). Inextensibility, $\Box\forall X\,.\,(\forall n\,.\,\mathbb N_\sigma n\to\Box Xn)\to\mathbb N_\sigma\le X$: at a reachable $v$ and for an arrow $j$ from $v$ to $u$, the numbers at $u$ are the numerals there, which are the transports along $j$ of the numbers at $v$, so any $X$ that necessarily holds of the numbers at $v$ holds at $u$ of the numbers there. So $\mathbb N_\sigma$ is rigid, and Arithmetic Necessitism holds at every type. No choice is used.
 
 *General argument `arguments/arithmetic-necessitism-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: A full model contains every intension, so in particular one with any given extension at the identity. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
+
+### Fails Potential Infinity (type t).
+
+As for individuals (the argument boundedly-many-individuals), at type $t$. Let $n$ bound the number of propositions at the objects reachable from the evaluation point. The numeral $\operatorname{Suc}^{n+1}_t\mathbf 0_t$ denotes a finite cardinality, and at the identity arrow of a reachable object it holds of no property of propositions, a property it holds of having $n+1$ instances any two of which are distinct, hence literally distinct. A closed sentence holds at an arrow exactly when it holds at the identity arrow of the arrow's target, so at no world does that numeral hold of a property, and Potential Infinity (type $t$) fails. No choice is used.
+
+*General argument `arguments/boundedly-many-propositions`. It requires that There is a natural number $n$ such that every object reachable from the evaluation point has at most $n$ propositions. Here: $W_0$ has four propositions and $W_1$ eight, and there is no other object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
+
+### Holds Possible failure of Cardinal CH. Fails Possible Cardinal CH.
+
+Cardinal CH fails at every world, so it is not possible, and its failure, being actual, is possible. With one individual at every world, $N=\operatorname{LowerNat}_e$ has exactly three instances at every world. At-least zero, $z=\lambda A\, .\,\top$, and its successor, which holds of the properties with an instance, differ at the empty property. The successor of that holds of the properties with two distinct instances, so of none at any world; it is $\lambda A\, .\,\bot$ by Intensionality, so is its own successor, and differs from the other two, which hold of the universal property. Being one of the three is a property of cardinalities that $z$ has and that passes to successors, so $N$ has no other instance. The rest is the argument cardinal-ch-boundedly-many-individuals with $m=3$: the rigid subproperties of $N$ are the eight disjunctions of haecceities of its instances, and a property holding of four of them neither injects into the three instances of $N$ nor is in bijection with the eight. No choice is used.
+
+*General argument `arguments/cardinal-ch-one-individual`. It requires that There is exactly one individual, at every world. Here: There is a single individual at every object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-25.*
 
 ### Holds Gallin Extensional Comprehension.
 
@@ -150,6 +167,14 @@ At any reachable object $W$, let $U$ be a serial relation in the domain there. U
 
 *General argument `arguments/necessary-relational-choice-codomain-intensions`. It requires that At every object reachable from the evaluation point, the domain contains every intension whose value at an arrow depends only on the arrow's codomain. Here: The domains are full at every object. By Claude Fable 5.1 (Anthropic), at Cian Dorr's direction, 2026-10-14.*
 
+### Holds Necessity of Arithmetic.
+
+At each type $\sigma$. At any object $v$ reachable from the evaluation point the numbers at $\sigma$ are the numerals there, as in the argument arithmetic-necessitism-extensionally-full. If the numerals are pairwise distinct at $v$, as they are when $\sigma$ has infinitely many entities there, the $n$th being the cardinality of the properties with $n$ instances, then $\operatorname{Sum}_\sigma$ and $\operatorname{Prod}_\sigma$ are the least relations closed under their clauses, and by extensional fullness the relations whose extensions are the graphs of addition and multiplication on the numerals are present and closed under them, so the two are standard. So an arithmetical sentence $A$ at $\sigma$ has at $v$ its truth value in the standard model. If two numerals coincide at $v$, then $I^*_\sigma$ fails at $v$, since zero is a numeral other than every successor and successor is injective on the numerals only when they are pairwise distinct; and then $I_\sigma=\Diamond I^*_\sigma$ is false at $v$ too, $I^*_\sigma$ being true if possible (Background, [[potential-infinity-forms]]). So $\Box(I_\sigma\to A)$ holds when $A$ is true in the standard model and $\Box(I_\sigma\to\neg A)$ when it is false. No choice is used.
+
+*General argument `arguments/necessity-of-arithmetic-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: A full model contains every intension, so in particular one with any given extension at the identity. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-30.*
+
+*Revised 2026-11-24 by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell:* The case of a type with finitely many entities at $v$ had argued that two numerals then coincide at every object $v$ sees, the type being finite at each by the condition finite-types-stay-finite. That needs a finite bound on those objects, not only that each is finite: in [[full-omega-chain-new-individuals]] every object has finitely many individuals and the numerals at type $e$ are pairwise distinct at each. The cases are now divided by whether the numerals are pairwise distinct at $v$, and the condition is no longer required: where they coincide $I^*_\sigma$ fails, and with it $I_\sigma$, which is Potential Infinity at $\sigma$.
+
 ### Fails Strong Atomicity (type t).
 
 Let $k$ out of the evaluation object have distinct $j\ne j^{\prime}$ after it with $j\circ k= j^{\prime}\circ k$. The proposition $\{j\circ k\}$, in the domain since the model is full, is possible, and the only possible proposition below it is itself. It is not a strong atom: under $k$ it becomes $\{m : m\circ k=j\circ k\}$, which contains $j$ and $j^{\prime}$, and the proposition $\{j\}$ at $k$'s target, in the domain there, neither contains nor excludes it. So the type-$t$ Strong Atomicity fails. (The idempotent monoid's and the retract's own arguments of 22–23 September, stated once.)
@@ -169,6 +194,12 @@ No two individuals are distinct, and the numeral $\operatorname{Suc}_e\mathbf{0}
 *General argument `arguments/one-individual`. It requires that There is exactly one individual, at every world. Here: There is a single individual at every object. By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-02.*
 
 *Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* Moved from the group finite-support-one-object to the topic.
+
+### Fails Potential Infinity (type e).
+
+The numeral $\operatorname{Suc}_e\operatorname{Suc}_e\mathbf{0}_e$, a finite cardinality, holds of no property at any world: a property it holds of has two distinct instances, and no two individuals are distinct. So Potential Infinity (type $e$) fails, at that number. This is the strongest of the failures of infinity at type $e$ in such a model, the Axiom of Infinity and Possible Infinity each implying Potential Infinity.
+
+*General argument `arguments/potential-infinity-one-individual`. It requires that There is exactly one individual, at every world. Here: There is a single individual at every object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
 
 ### Holds □Relational Choice.
 

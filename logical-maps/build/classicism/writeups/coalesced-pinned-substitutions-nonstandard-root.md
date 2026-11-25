@@ -6,6 +6,7 @@
 
 - **□Atomlessness.** Necessarily, every possible proposition has a possible proposition strictly below it.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
+- **□Potential Infinity (type e).** Necessarily, for every natural number there could be at least that many individuals.
 - **BF.** The Barcan Formula at every type. The predicate formulation closes the formula schema using lambda abstraction.
 - **Two-hat necessities are ND-necessary.** Whatever is two-hat necessary is ND-necessary: the distinctness-preserving modality agrees with its hat.
 - **5-necessities are two-hat necessary.** Whatever is 5-necessary is two-hat necessary.
@@ -48,6 +49,12 @@ The arrows out of $W_0$ end at $W_0$ (the maps of the constants) or at objects o
 At type $e$. $W_0$ is extensionally full at its identity: any set of tuples there is the extension of the entity with that value at every map of the constants and $\bot$ at every arrow into the component, pinned down by $\emptyset$ and landing. So the property with the numerals as its extension is an inductive property at $W_0$, the numbers there are the standard numerals, and Sum and Prod are standard on them (a relation refuting a false instance is in the domain). The individuals at $W_0$ are the infinitely many individual constants, so distinct numerals are distinct there and $I^*_e$ holds at $W_0$, and it holds throughout the component by $\Box I^*_e$ at $V_2$; so $\Box I^*_e$ holds at $W_0$. With $A:=\operatorname{Con}(T)$, an arithmetical sentence, $A$ holds at $W_0$, whose arithmetic is standard, and fails at $V_2$; so neither $\Box(I\to A)$ nor $\Box(I\to\neg A)$ holds at $W_0$, and the Necessity of Arithmetic fails. The Necessity of Analysis fails as in coalesced-two-extensional-arithmetics-root, with $W_0$ and $V_2$ for the two components: the Dedekind cuts over the numbers form a real number structure at each, every real number structure at a world is isomorphic to it, and $\exists n\in N\,.\,\operatorname{Proof}_T(n,\bot)$ is false in those at $W_0$ and true in those at $V_2$. Arithmetic Necessitism fails by the inextensibility of $\mathbb N_e$: let $X:=\lambda x\, .\,\mathbb N x\land\neg\exists m\in\mathbb N\, .\,m<x\land \operatorname{Proof}_T(m,\bot)$, a closed pure term. Each number at $W_0$ is a numeral $\mathbf n$, and at every world $X\mathbf n$ holds, since under $I^*_e$ the numbers below $\mathbf n$ are the numerals below it and each $\neg\operatorname{Proof}_T(\mathbf m,\bot)$ is a true bounded sentence, $T$ being consistent. But at $V_2$ some number $m$ codes a proof of $\bot$ from $T$, and $\operatorname{Suc}m$ is a number lacking $X$; so $\mathbb N_e\le X$ fails. The Axiom of Infinity (type e) holds at $W_0$: its finite cardinalities are the numerals, and none holds of the universal property, which has infinitely many instances there.
 
 *Address: `coalesced-pinned-substitutions-nonstandard-root#arithmetic`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; audited by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
+
+### Holds □Potential Infinity (type e).
+
+The argument arithmetic shows $\Box I^*_e$ at $W_0$: $I^*_e$ holds at $W_0$, whose numbers are the numerals, pairwise distinct there, and throughout the component by $\Box I^*_e$ at $V_2$. That is the Peano form of □Potential Infinity (type e), equivalent to it in C (Background, [[potential-infinity-forms]], necessitated), and the model is a model of C.
+
+*Address: `coalesced-pinned-substitutions-nonstandard-root#necessary-potential-infinity-e`. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
 
 ### Fails □BF (type t).
 

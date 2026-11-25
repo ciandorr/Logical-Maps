@@ -332,10 +332,8 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <p>There is one individual at each object, and <span class="math inline">d</span> is a pinning point only. Every relational constant of Σ denotes the top element of its type. Evaluation point: <span class="math inline">1_A</span>.</p>
 <h2 id="the-entities-at-a">1. The entities at <span class="math inline">A</span></h2>
 <p>The arrows out of <span class="math inline">A</span> are <span class="math inline">1_A</span> and <span class="math inline">i</span> (as <span class="math inline">m\circ i=i</span>). So an intension at <span class="math inline">A</span> of a relational type is determined by two sets: <span class="math inline">E</span>, its extension at <span class="math inline">1_A</span>, a set of tuples from <span class="math inline">A</span>’s domains, and <span class="math inline">S</span>, its extension at <span class="math inline">i</span>, a set of tuples from <span class="math inline">B</span>’s. Symmetry at <span class="math inline">i</span> says <span class="math inline">S=gS</span> for every <span class="math inline">g\in G</span>, as <span class="math inline">g\circ i=i</span>; and the empty set pins it. So</p>
-<p><span class="math display">
-\text{the entities at }A\text{ are exactly the pairs }(E,S)\text{ with }S\ G\text{-invariant.}
-\tag{1}
-</span></p>
+<p><span class="math display">\text{the entities at }A\text{ are exactly the pairs }(E,S)\text{ with }S\ G\text{-invariant.}
+\tag{1}</span></p>
 <p>Transport along <span class="math inline">i</span> sends <span class="math inline">(E,S)</span> to the intension at <span class="math inline">B</span> that is <span class="math inline">S</span> at every arrow, a <em>constant</em> intension, fixed by every arrow out of <span class="math inline">B</span>.</p>
 <p>Write <span class="math inline">i\cdot E</span> for the set of transports along <span class="math inline">i</span> of the tuples in <span class="math inline">E</span>, and <span class="math inline">T_A(E):=(E,\,i\cdot E)</span>; it is an entity by (1), its tuples being fixed by <span class="math inline">G</span>. Similarly, at <span class="math inline">B</span>, for a set <span class="math inline">D</span> of tuples fixed by every arrow, <span class="math inline">T_B(D)</span> is the constant intension <span class="math inline">D</span>.</p>
 <h2 id="rigid-comprehension">2. Rigid Comprehension</h2>
@@ -344,16 +342,12 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <p>So every relation at <span class="math inline">A</span>, with extension <span class="math inline">E</span>, has the rigid coextension <span class="math inline">T_A(E)</span>.</p>
 <h2 id="atomicity-and-relational-choice">3. Atomicity and Relational Choice</h2>
 <p>By (1), at each relational type the entities at <span class="math inline">A</span> form the algebra</p>
-<p><span class="math display">
-\mathcal P(\text{tuples at }A)\times\{\text{unions of }G\text{-orbits of tuples at }B\},
-</span></p>
+<p><span class="math display">\mathcal P(\text{tuples at }A)\times\{\text{unions of }G\text{-orbits of tuples at }B\},</span></p>
 <p>ordered componentwise: a complete atomic Boolean algebra, whose atoms are the <span class="math inline">(\{\bar x\},\varnothing)</span> and the <span class="math inline">(\varnothing,O)</span> for <span class="math inline">O</span> a <span class="math inline">G</span>-orbit. So Atomicity holds at <span class="math inline">A</span>.</p>
 <p>For a relation <span class="math inline">U</span> serial at <span class="math inline">A</span>, choose (in the metatheory) a value <span class="math inline">y_x</span> for each input <span class="math inline">x</span>; the pair <span class="math inline">(\{\langle x,y_x\rangle\},\varnothing)</span> is an entity by (1), and it is a functional subrelation of <span class="math inline">U</span> at <span class="math inline">A</span>. So Relational Choice holds at <span class="math inline">A</span>.</p>
 <h2 id="weakly-rigid-power">4. Weakly Rigid Power</h2>
 <p>Let <span class="math inline">F</span> be weakly rigid at <span class="math inline">A</span>. By Rigid Comprehension and Sun’s lemma (coextensive weakly rigid relations are identical), <span class="math inline">F=T_A(E)</span> for its extension <span class="math inline">E</span>. Let</p>
-<p><span class="math display">
-P_F:=\lambda Y\, .\,\operatorname{WeaklyRigid}(Y)\land Y\le F .
-</span></p>
+<p><span class="math display">P_F:=\lambda Y\, .\,\operatorname{WeaklyRigid}(Y)\land Y\le F .</span></p>
 <p><em>At <span class="math inline">A</span></em>, by the same argument, its instances are the <span class="math inline">T_A(E&#39;)</span> with <span class="math inline">E&#39;\subseteq E</span>.</p>
 <p><em>At <span class="math inline">B</span></em>, after <span class="math inline">i</span>: if <span class="math inline">Y</span> is weakly rigid there and <span class="math inline">Y\le i\cdot F</span>, the constant <span class="math inline">i\cdot E</span>, then its extension <span class="math inline">D</span> is a subset of <span class="math inline">i\cdot E</span>, so of tuples fixed by every arrow; <span class="math inline">T_B(D)</span> is rigid (Lemma 1) and coextensive with <span class="math inline">Y</span>, so <span class="math inline">Y=T_B(D)</span>. And <span class="math inline">T_B(D)=i\cdot T_A(E_D)</span> for <span class="math inline">E_D:=\{\bar x\in E:i\cdot\bar x\in D\}</span>.</p>
 <p>So the extension of <span class="math inline">P_F</span> at <span class="math inline">i</span> is the image of its extension at <span class="math inline">1_A</span>: <span class="math inline">P_F</span> is <span class="math inline">T_A</span> of its extension, rigid by Lemma 1, and so weakly rigid.</p>

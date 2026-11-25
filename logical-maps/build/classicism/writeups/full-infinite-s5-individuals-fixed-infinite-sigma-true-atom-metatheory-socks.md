@@ -19,6 +19,7 @@
 - **□ND.** Necessarily, distinct things of any type are necessarily distinct.
 - **□Axiom of Infinity (type e).** Necessarily, there are not finitely many individuals.
 - **□Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
+- **Necessity of Arithmetic.** Every arithmetical sentence is either necessarily true or necessarily false, given that possibly zero is not a successor and successor is injective on numbers, where the numbers are the finite cardinalities of properties of a type $\sigma$. One sentence for each type $\sigma$ and each arithmetical sentence at $\sigma$.
 - **ND.** Distinct things of any type are necessarily distinct.
 - **Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **□Rigid Power.** Necessarily, if a relation is rigid, so is the property of being a rigid relation that entails it.
@@ -27,7 +28,6 @@
 - **□Strong Actuality.** Necessarily, there is a true strong atom: a true proposition that necessarily entails every proposition or its negation.
 - **¬ Intensional Choice.** If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
 - **¬ Relational Choice.** Every serial binary relation has a functional subrelation.
-- **¬ Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
 - **¬ Truths are ND-necessary.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
 - **¬ Fregean Axiom.** Materially equivalent propositions are identical.
 - **¬ No Contingency (signature Σ).** Each closed sentence of the language of the fixed signature Sigma, if true, is necessary. A sentence schema, standing to No Pure Contingency as Possibility Maximalism (signature Σ) stands to Possibility Maximalism (pure).
@@ -61,12 +61,6 @@ Any two objects are isomorphic, by the unique arrow between them, and composing 
 At type $t$, with the worlds the union $W$ of the socks. The propositions at a world are the sets of arrows out of it, one for each set of worlds; write $[v]$ for the one true at world $v$ alone. Intensional Choice: let $F$ hold at (the arrow to) each world $w$ of the propositions $[v]$ with $v$ in the pair after $w$'s. It is in the domain, the model being full, and necessarily instantiated. A $G\le F$ necessarily uniquely instantiated holds at each $w$ of a single $[v]$, so $w\mapsto v$ sends each sock to a sock of the next pair, and iterated from one member of $P_0$ it would choose a sock from every pair. Relational Choice: let $U$ relate, at the evaluation world, each $[w]$ to the $[v]$ with $v$ in the pair after $w$'s, and every other proposition to every proposition; a functional subrelation gives the same function. So both fail, with one individual as with the socks as individuals. (Cian Dorr's construction of the choiceless S5 model, with the relation "lies in the next pair" for $F$.)
 
 *By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, after Cian Dorr's construction of 7 October 2026, 2026-10-08.*
-
-### Fails Forcing Possibilism.
-
-As in the general argument forcing-possibilism-continuum-arrows, with the worlds the union $W$ of the socks $P_n$, so that the propositions are the sets of worlds. The regular-open algebra $B$ of Cantor space has the size of the continuum in ZF, and it injects into the propositions, $S\mapsto\bigcup_{n\in S}P_n$ injecting the sets of natural numbers. The propositions do not inject into $B$: an injection would give one of $W$ into the sets of natural numbers, through $w\mapsto\{w\}$, and the lexicographic order of those sets would then choose a member of each sock. So $B$, realised at type $t$ by fullness, is a small complete Boolean algebra, atomless, while every entailment algebra below a proposition is atomic or has one element. (From Astra's note "Forcing Possibilism, Choice and Infinity", §6, in Daniel Kodsi's submission of 24 October 2026.)
-
-*Address: `full-infinite-s5-individuals-fixed-infinite-sigma-true-atom-metatheory-socks#forcing-possibilism-socks`. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
 
 ### Holds Analytic Necessitism, Second-Order Analytic Necessitism.
 
@@ -146,6 +140,14 @@ As for individuals (necessary-axiom-of-infinity-individuals), at type $t$. At th
 
 *General argument `arguments/necessary-axiom-of-infinity-propositions`. It requires that At every object $v$ reachable from the evaluation point, and for $\sigma=e$ and $\sigma=t$: identity at type $\sigma$ is literal at the identity arrow of $v$, and some entity of type $(\sigma t)t$ in the domain at $v$ holds, at the identity arrow of $v$, of exactly those entities of type $\sigma t$ in the domain there whose extension at that arrow is finite. Extensional fullness at every object gives this, and so does codomain-intensions, the intension with value $S_U$ at every arrow into $U$ being in the domain for any sets $S_U$. Here: The domains are full at every object, so they contain the haecceities, making identity literal, and an intension with any given extension at each identity arrow. It requires that There are infinitely many propositions at every object reachable from the evaluation point. Here: Every object is reachable and like the evaluation object: its propositions are the sets of arrows out of it, one for each subset of $W$. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
 
+### Holds Necessity of Arithmetic.
+
+At each type $\sigma$. At any object $v$ reachable from the evaluation point the numbers at $\sigma$ are the numerals there, as in the argument arithmetic-necessitism-extensionally-full. If the numerals are pairwise distinct at $v$, as they are when $\sigma$ has infinitely many entities there, the $n$th being the cardinality of the properties with $n$ instances, then $\operatorname{Sum}_\sigma$ and $\operatorname{Prod}_\sigma$ are the least relations closed under their clauses, and by extensional fullness the relations whose extensions are the graphs of addition and multiplication on the numerals are present and closed under them, so the two are standard. So an arithmetical sentence $A$ at $\sigma$ has at $v$ its truth value in the standard model. If two numerals coincide at $v$, then $I^*_\sigma$ fails at $v$, since zero is a numeral other than every successor and successor is injective on the numerals only when they are pairwise distinct; and then $I_\sigma=\Diamond I^*_\sigma$ is false at $v$ too, $I^*_\sigma$ being true if possible (Background, [[potential-infinity-forms]]). So $\Box(I_\sigma\to A)$ holds when $A$ is true in the standard model and $\Box(I_\sigma\to\neg A)$ when it is false. No choice is used.
+
+*General argument `arguments/necessity-of-arithmetic-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: A full model contains every intension, so in particular one with any given extension at the identity. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-30.*
+
+*Revised 2026-11-24 by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell:* The case of a type with finitely many entities at $v$ had argued that two numerals then coincide at every object $v$ sees, the type being finite at each by the condition finite-types-stay-finite. That needs a finite bound on those objects, not only that each is finite: in [[full-omega-chain-new-individuals]] every object has finitely many individuals and the numerals at type $e$ are pairwise distinct at each. The cases are now divided by whether the numerals are pairwise distinct at $v$, and the condition is no longer required: where they coincide $I^*_\sigma$ fails, and with it $I_\sigma$, which is Potential Infinity at $\sigma$.
+
 ### Fails Fregean Axiom.
 
 The propositions $\top$ and $\{1\}$ are in the domain, the model being full; they are both true at the evaluation point and differ at the other arrow, so the Fregean Axiom fails.
@@ -195,7 +197,7 @@ Let $V$ be the evaluation object or the target of an arrow out of it, and $w:=\{
 
 ## Notes
 
-A basic reference model, recorded at Cian Dorr's request: the full S5 model with infinitely many worlds. Except for Forcing Possibilism, no recorded verdict depends on which infinite set $W$ is. In the variant with infinitely many individuals the group fixes them as the natural numbers; any infinite set gives the same verdicts under choice. Its verdicts are those of the full permutation group model, whose arrows are likewise all invertible, again except for Forcing Possibilism, which the map leaves unknown here. Under choice, Forcing Possibilism holds iff $2^{|W|}=2^{\aleph_0}$ (GPT-6 Astra, prompted by Daniel Kodsi, 23 October 2026): if so, every small or Dedekind-finite complete Boolean algebra is finite, an infinite one having at least continuum many elements, and is isomorphic to the subsets of a finite set of worlds; if not, the regular-open algebra of Cantor space is small and atomless, while the algebra below any proposition is atomic. So it holds for $W=\mathbb N$ and fails for $|W|=2^{\aleph_0}$. With $W$ the union of Russell's socks it fails without choice (forcing-possibilism-socks).
+In the choice metatheory the revised Mathematical Possibilism holds on the singleton variant, for any infinite set of worlds, and fails on the fixed-infinite-individual variant, including countably many worlds and individuals. See the general full-action arguments. The former socks argument used the cardinality of the propositions. Its conclusion about the revised principle in the choiceless variant is open here.
 
 ## Sources
 

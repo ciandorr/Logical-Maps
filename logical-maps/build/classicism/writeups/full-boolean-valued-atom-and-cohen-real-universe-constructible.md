@@ -18,7 +18,7 @@
 - **¬ □Boolean Completeness (type t).** Necessarily, every property of propositions has a greatest lower bound.
 - **¬ □Countable Boolean Completeness.** Necessarily, every countable property of entities of a relational type has a least upper bound in that type, with countability relative to a type $\sigma$ as in Countable Boolean Completeness; one instance for each $\sigma$.
 - **¬ Analytic Necessitism.** If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type $\sigma$.
-- **¬ Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
+- **¬ Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
 - **¬ Necessity of Analysis.** Every first-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each first-order analytical sentence.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
 - **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
@@ -73,7 +73,7 @@ The arguments of full-boolean-valued-atom-and-atomless for these verdicts use on
 
 *By Andrew Bacon (underlying Boolean-valued construction and analytical contingency); GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 25 October 2026 (the Cohen algebra over L, with the additional premises), 2026-10-28.*
 
-### Fails Forcing Possibilism.
+### Fails Mathematical Possibilism.
 
 As in full-boolean-valued-atom-and-atomless: no proposition has exactly four propositions entailing it, $A$ being atomless.
 

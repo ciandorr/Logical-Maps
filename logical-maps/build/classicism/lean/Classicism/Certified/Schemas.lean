@@ -55,6 +55,8 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.StrongActuality Classicism.P.NecStrongActuality
   Classicism.P.AxiomOfInfinityE Classicism.P.AxiomOfInfinityT Classicism.P.PossibleInfinityE
   Classicism.P.PossibleInfinityT Classicism.P.NecAxiomOfInfinityE Classicism.P.NecAxiomOfInfinityT
+  Classicism.P.PotentialInfinityE Classicism.P.PotentialInfinityT
+  Classicism.P.NecPotentialInfinityE Classicism.P.NecPotentialInfinityT
   Classicism.P.CountableBooleanCompleteness
   Classicism.P.NecCountableBooleanCompleteness Classicism.P.NecAtomicityT
   Classicism.P.NecBooleanCompletenessT Classicism.P.NecWeakRigidComprehension
@@ -82,6 +84,12 @@ Ty-parameter, also its list form: `P.listQuoted`, the instance at a list of type
   Classicism.P.NecBarcanTDual Classicism.P.AtomicityTDual
   Classicism.P.BooleanCompletenessTLUB Classicism.P.StrongAtomicityTDual
   Classicism.P.NecStrongAtomicityTDual Classicism.P.TruthsAreNDNecessaryDual
+  -- the forms of Potential Infinity (`Principles/Infinity.lean`)
+  Classicism.P.PotentialInfinityEPeano Classicism.P.PotentialInfinityEPossiblePeano
+  Classicism.P.PotentialInfinityEAtLeast Classicism.P.PotentialInfinityTPeano
+  Classicism.P.PotentialInfinityTPossiblePeano Classicism.P.PotentialInfinityTAtLeast
+  Classicism.P.NecPotentialInfinityEPeano Classicism.P.NecPotentialInfinityEAtLeast
+  Classicism.P.NecPotentialInfinityTPeano Classicism.P.NecPotentialInfinityTAtLeast
 
 /-! ### Every principle's schema is in the paper's language
 

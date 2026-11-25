@@ -329,78 +329,48 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <h2 id="lemma-4-bf-at-relational-types">Lemma 4: BF at relational types</h2>
 <p><em>Let <span class="math inline">\sigma</span> be relational, and assume Strong Atomicity at <span class="math inline">\sigma</span>, and Rigid Comprehension and Rigid Power at <span class="math inline">\sigma t</span>.</em> Then BF holds at <span class="math inline">\sigma</span>.</p>
 <p><em>Proof.</em> Let <span class="math inline">A^{\sigma t}</span> be the cover of Lemma 1, and by Rigid Power let</p>
-<p><span class="math display">
-\mathcal P:=\lambda R^{\sigma t}\, .\,\operatorname{Rigid}(R)\land R\le A,
-</span></p>
+<p><span class="math display">\mathcal P:=\lambda R^{\sigma t}\, .\,\operatorname{Rigid}(R)\land R\le A,</span></p>
 <p>which is rigid. By Lemmas 2 and 3,</p>
-<p><span class="math display">
-\Box\forall Y^\sigma\, .\,\mathcal P(\operatorname{Cut}_Y)\land Y=\operatorname{Union}(\operatorname{Cut}_Y).
-\tag{1}
-</span></p>
+<p><span class="math display">\Box\forall Y^\sigma\, .\,\mathcal P(\operatorname{Cut}_Y)\land Y=\operatorname{Union}(\operatorname{Cut}_Y).
+\tag{1}</span></p>
 <p>Let <span class="math inline">X^{\sigma t}</span> satisfy <span class="math inline">\forall Y\, .\,\Box XY</span>. Every <span class="math inline">R</span> with <span class="math inline">\mathcal PR</span> has <span class="math inline">\Box X(\operatorname{Union}(R))</span>. By weak inextensibility of <span class="math inline">\mathcal P</span>,</p>
-<p><span class="math display">
-\Box\forall R\, .\,\mathcal PR\to X(\operatorname{Union}(R)),
-</span></p>
+<p><span class="math display">\Box\forall R\, .\,\mathcal PR\to X(\operatorname{Union}(R)),</span></p>
 <p>and with (1), <span class="math inline">\Box\forall Y\, .\,XY</span>. <span class="math inline">\square</span></p>
 <p>Strong Atomicity implies Atomicity, and Atomicity with Rigid Comprehension implies Rigid Power (both recorded), so the premises of the theorem give BF at every relational type.</p>
 <h2 id="lemma-5-one-relational-argument">Lemma 5: one relational argument</h2>
 <p><em>Let <span class="math inline">\sigma</span> be relational. Assume Strong Atomicity at <span class="math inline">t</span>, Rigid Comprehension at <span class="math inline">\sigma t</span> and at <span class="math inline">tt</span>, and BF at <span class="math inline">\sigma</span> and at <span class="math inline">\sigma t</span>.</em> Then</p>
-<p><span class="math display">
-\Box\forall X^{\sigma t}\, .\,\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\landX\equiv Y.
-</span></p>
+<p><span class="math display">\Box\forall X^{\sigma t}\, .\,\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\landX\equiv Y.</span></p>
 <p><em>Proof.</em> Let <span class="math inline">A^{tt}</span> be the cover of Lemma 1 at <span class="math inline">t</span>. Here <span class="math inline">\operatorname{Decides}(w)</span> is <span class="math inline">\forall q^t\, .\,w\le q\lor w\le\neg q</span>, and (c) says <span class="math inline">\Box\exists w\, .\,Aw\land w</span>. For <span class="math inline">X^{\sigma t}</span> put</p>
-<p><span class="math display">
-\operatorname{HasRigidCoext}(X):=\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\landX\equiv Y.
-</span></p>
+<p><span class="math display">\operatorname{HasRigidCoext}(X):=\exists Y^{\sigma t}\, .\,\operatorname{Rigid}(Y)\landX\equiv Y.</span></p>
 <p>Fix <span class="math inline">X^{\sigma t}</span>, and let <span class="math inline">w</span> be an instance of <span class="math inline">A</span>. By Rigid Comprehension at <span class="math inline">\sigma t</span> there are rigid <span class="math inline">P</span> and <span class="math inline">Q</span> with</p>
-<p><span class="math display">
-\forall z\, .\,(Pz\leftrightarrow w\le Xz),\qquad\forall z\, .\,(Qz\leftrightarrow w\le\neg Xz).
-</span></p>
+<p><span class="math display">\forall z\, .\,(Pz\leftrightarrow w\le Xz),\qquad\forall z\, .\,(Qz\leftrightarrow w\le\neg Xz).</span></p>
 <p>Each <span class="math inline">z</span> with <span class="math inline">Pz</span> has <span class="math inline">\Box(w\to Xz)</span>, and each <span class="math inline">z</span> with <span class="math inline">Qz</span> has <span class="math inline">\Box(w\to\neg Xz)</span>; by weak inextensibility of <span class="math inline">P</span> and of <span class="math inline">Q</span>,</p>
-<p><span class="math display">
-\Box\forall z\, .\,Pz\to(w\to Xz),\qquad\Box\forall z\, .\,Qz\to(w\to\neg Xz).
-\tag{2}
-</span></p>
+<p><span class="math display">\Box\forall z\, .\,Pz\to(w\to Xz),\qquad\Box\forall z\, .\,Qz\to(w\to\neg Xz).
+\tag{2}</span></p>
 <p>By <span class="math inline">\operatorname{Decides}(w)</span>, every <span class="math inline">z</span> has <span class="math inline">Pz\lor Qz</span>, so <span class="math inline">\Box(Pz\lor Qz)</span> by persistence, and by BF at <span class="math inline">\sigma</span></p>
-<p><span class="math display">
-\Box\forall z\, .\,Pz\lor Qz .
-\tag{3}
-</span></p>
+<p><span class="math display">\Box\forall z\, .\,Pz\lor Qz .
+\tag{3}</span></p>
 <p>From (2) and (3),</p>
-<p><span class="math display">
-\Box\bigl(w\toX\equiv P\bigr),
-</span></p>
+<p><span class="math display">\Box\bigl(w\toX\equiv P\bigr),</span></p>
 <p>and as <span class="math inline">\operatorname{Rigid}(P)</span> is necessary, <span class="math inline">\Box(w\to\operatorname{HasRigidCoext}(X))</span>. This holds for every instance <span class="math inline">w</span> of <span class="math inline">A</span>:</p>
-<p><span class="math display">
-\forall w\, .\,Aw\to\Box\bigl(w\to\operatorname{HasRigidCoext}(X)\bigr).
-</span></p>
+<p><span class="math display">\forall w\, .\,Aw\to\Box\bigl(w\to\operatorname{HasRigidCoext}(X)\bigr).</span></p>
 <p>By weak inextensibility of <span class="math inline">A</span>, <span class="math inline">\Box\forall w\, .\,Aw\to(w\to\operatorname{HasRigidCoext}(X))</span>, and with <span class="math inline">\Box\exists w\, .\,Aw\land w</span>,</p>
-<p><span class="math display">
-\Box\operatorname{HasRigidCoext}(X).
-</span></p>
+<p><span class="math display">\Box\operatorname{HasRigidCoext}(X).</span></p>
 <p>This holds for every <span class="math inline">X^{\sigma t}</span>, and BF at <span class="math inline">\sigma t</span> gives <span class="math inline">\Box\forall X\, .\,\operatorname{HasRigidCoext}(X)</span>. <span class="math inline">\square</span></p>
 <p>Only the actual instances of BF are used, and <span class="math inline">P</span> and <span class="math inline">Q</span> may depend on <span class="math inline">w</span>; no choice is made uniformly in <span class="math inline">w</span>.</p>
 <h2 id="lemma-6-coding-tuples-by-haecceities">Lemma 6: coding tuples by haecceities</h2>
 <p>For a tuple <span class="math inline">\bar\sigma</span> (possibly containing <span class="math inline">e</span>, possibly empty) let <span class="math inline">\delta:=\bar\sigma t</span>, and for <span class="math inline">\bar x^{\bar\sigma}</span> let <span class="math inline">H_{\bar x}:=\lambda\bar z\, .\,\bar z=\bar x</span>, of type <span class="math inline">\delta</span>. Put <span class="math inline">\operatorname{Code}(H):=\exists\bar x\, .\,H=H_{\bar x}</span>. C proves <span class="math inline">H_{\bar x}=H_{\bar y}\leftrightarrow\bar x=\bar y</span>.</p>
 <p><em>Claim.</em> It is a theorem of C that if Rigid Comprehension holds for properties of type <span class="math inline">\delta t</span>, it holds for relations of type <span class="math inline">\bar\sigma t</span>.</p>
 <p><em>Proof.</em> Let <span class="math inline">X^{\bar\sigma t}</span>. Take a rigid <span class="math inline">P^{\delta t}</span> coextensive with <span class="math inline">\lambda H\, .\,\exists\bar x\, .\,H=H_{\bar x}\land X[\bar x]</span>, and put</p>
-<p><span class="math display">
-Y:=\lambda\bar x\, .\,P(H_{\bar x}).
-</span></p>
+<p><span class="math display">Y:=\lambda\bar x\, .\,P(H_{\bar x}).</span></p>
 <p>By injectivity of the codes, <span class="math inline">Y</span> is coextensive with <span class="math inline">X</span>.</p>
 <p><em><span class="math inline">P</span> contains only codes.</em> Each instance <span class="math inline">H</span> of <span class="math inline">P</span> is <span class="math inline">H_{\bar a}</span> for some <span class="math inline">\bar a</span>, so <span class="math inline">\Box\operatorname{Code}(H)</span>. By weak inextensibility of <span class="math inline">P</span>,</p>
-<p><span class="math display">
-P\le\operatorname{Code}.
-\tag{4}
-</span></p>
+<p><span class="math display">P\le\operatorname{Code}.
+\tag{4}</span></p>
 <p><em><span class="math inline">Y</span> is rigid.</em> Persistence of <span class="math inline">Y</span> is persistence of <span class="math inline">P</span> at the arguments <span class="math inline">H_{\bar x}</span>. For weak inextensibility, work at any world and suppose</p>
-<p><span class="math display">
-\forall\bar x\, .\,Y[\bar x]\to\Box Z[\bar x].
-</span></p>
+<p><span class="math display">\forall\bar x\, .\,Y[\bar x]\to\Box Z[\bar x].</span></p>
 <p>Let <span class="math inline">PH</span>. By (4), <span class="math inline">H=H_{\bar a}</span> for some <span class="math inline">\bar a</span>; then <span class="math inline">Y[\bar a]</span>, so <span class="math inline">\Box Z[\bar a]</span>, and <span class="math inline">\Box(H=H_{\bar a})</span>. By injectivity of the codes,</p>
-<p><span class="math display">
-\Box\forall\bar x\, .\,H=H_{\bar x}\to Z[\bar x].
-</span></p>
+<p><span class="math display">\Box\forall\bar x\, .\,H=H_{\bar x}\to Z[\bar x].</span></p>
 <p>So weak inextensibility of <span class="math inline">P</span>, applied to <span class="math inline">\lambda H\, .\,\forall\bar x\, .\,H=H_{\bar x}\to Z[\bar x]</span>, gives <span class="math inline">\Box\forall H\, .\,PH\to\forall\bar x\, .\,(H=H_{\bar x}\to Z[\bar x])</span>. Taking <span class="math inline">H:=H_{\bar x}</span> gives <span class="math inline">Y\le Z</span>. Since <span class="math inline">\operatorname{Rigid}(P)</span> and (4) are necessary, this holds at every world, so <span class="math inline">Y</span> is rigid. <span class="math inline">\square</span></p>
 <h2 id="proof-of-the-theorem">Proof of the theorem</h2>
 <p>By Lemma 4 and the remark after it, BF holds at every relational type. For a tuple <span class="math inline">\bar\sigma</span>, apply Lemma 5 with <span class="math inline">\sigma:=\delta=\bar\sigma t</span> (a relational type): necessarily, Rigid Comprehension holds for properties of type <span class="math inline">\delta t</span>. The necessitation of Lemma 6 then gives, necessarily, Rigid Comprehension for relations of type <span class="math inline">\bar\sigma t</span>. <span class="math inline">\square</span></p>

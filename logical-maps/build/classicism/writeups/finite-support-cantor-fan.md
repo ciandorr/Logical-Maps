@@ -29,8 +29,10 @@
 - **¬ 5.** Every possible proposition is necessarily possible.
 - **¬ Boolean Completeness (type t).** Every property of propositions has a greatest lower bound.
 - **¬ Countable Boolean Completeness.** Every countable property of entities of a relational type has a least upper bound in that type, where a property is countable relative to a type $\sigma$ when it injects into the finite cardinalities of properties of type $\sigma$; one instance for each $\sigma$.
-- **¬ Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
+- **¬ Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
 - **¬ B for pure sentences.** The B instance for every closed sentence in the pure language.
+- **¬ □Potential Infinity (type e).** Necessarily, for every natural number there could be at least that many individuals.
+- **¬ □Potential Infinity (type t).** Necessarily, for every natural number there could be at least that many propositions.
 - **¬ □Axiom of Infinity (type e).** Necessarily, there are not finitely many individuals.
 - **¬ □Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
@@ -84,7 +86,7 @@ At $W_0$ extensional fullness makes a well-order of the domain at the identity a
 
 *Address: `finite-support-cantor-fan#well-ordering`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-29.*
 
-### Fails Boolean Completeness (type t), Countable Boolean Completeness, Forcing Possibilism, B for pure sentences.
+### Fails Boolean Completeness (type t), Countable Boolean Completeness, Mathematical Possibilism, B for pure sentences.
 
 The propositions at $W_0$ are $\{1_{W_0}\}$ or not with a clopen subset of Cantor space, so the family $a_{2m}$ of finite-support-sections-and-projection has no least upper bound; it is countable relative to $e$, the numerals at $e$ being standard and distinct, and the relation pairing $a_{2m}$ with the $m$th numeral being an extension. $\{1_{W_0}\}$ is the only atom, so no proposition has exactly four below it, though $\bot$, $\{1_{W_0}\}$, its negation and $\top$ form a complete algebra. And there are at least three individuals at $W_0$ and not at $V$, which every $k_u$ sees alone.
 
@@ -95,6 +97,18 @@ The propositions at $W_0$ are $\{1_{W_0}\}$ or not with a clopen subset of Canto
 The numbers at a type $\sigma$ are the instances of $\mathbb N_\sigma$, the least property containing $\mathbf 0_\sigma$ and closed under $\operatorname{Suc}_\sigma$ (Background); the numerals $\mathbf 0_\sigma$, $\operatorname{Suc}_\sigma\mathbf 0_\sigma,\ldots$ are closed terms, so each denotes at every object, and transport along an arrow carries its denotation at the source to its denotation at the target. At any object $v$ reachable from the evaluation point, extensional fullness gives a property whose extension at $v$ is exactly the numerals there; it contains $\mathbf 0_\sigma$ and is closed under successor, so the numbers at $v$ are exactly the numerals, every numeral being an instance of every inductive property. Persistence of $\mathbb N_\sigma$ and, given $\Box I^*_\sigma$, the necessary distinctness of the numbers are theorems of C (the proof of necessary-rigid-comprehension-implies-arithmetic-necessitism). Inextensibility, $\Box\forall X\,.\,(\forall n\,.\,\mathbb N_\sigma n\to\Box Xn)\to\mathbb N_\sigma\le X$: at a reachable $v$ and for an arrow $j$ from $v$ to $u$, the numbers at $u$ are the numerals there, which are the transports along $j$ of the numbers at $v$, so any $X$ that necessarily holds of the numbers at $v$ holds at $u$ of the numbers there. So $\mathbb N_\sigma$ is rigid, and Arithmetic Necessitism holds at every type. No choice is used.
 
 *General argument `arguments/arithmetic-necessitism-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: At $W_0$ the identity is the only arrow into $W_0$, so an intension with any value at the identity and $\varnothing$ at the $k_u$ is pinned down by $\varnothing$; at $V$ the domain is full. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
+
+### Fails □Potential Infinity (type e).
+
+Let $v$ and $n$ be as the condition says. By the argument boundedly-many-individuals, with $v$ in place of the evaluation object, Potential Infinity (type $e$) fails at the identity arrow of $v$: the numeral $\operatorname{Suc}^{n+1}_e\mathbf 0_e$ is a finite cardinality there and holds of no property at the identity arrow of any object reachable from $v$. A closed sentence holds at an arrow out of the evaluation object exactly when it holds at the identity arrow of the arrow's target (at the world seen, in a Kripke-style model), so the arrow into $v$ is a world at which Potential Infinity fails, and its necessitation fails at the evaluation point. No choice is used.
+
+*General argument `arguments/boundedly-many-individuals-somewhere`. It requires that There are an object $v$ reachable from the evaluation point and a natural number $n$ such that every object reachable from $v$ has at most $n$ individuals. Here: The terminal object $V$, reached by every $k_u$, has the two individuals $0$ and $1$, and only its identity leaves it. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
+
+### Fails □Potential Infinity (type t).
+
+As for individuals (the argument boundedly-many-individuals-somewhere), at type $t$. With $v$ and $n$ as the condition says, the numeral $\operatorname{Suc}^{n+1}_t\mathbf 0_t$ is a finite cardinality at $v$ and holds of no property of propositions at the identity arrow of any object reachable from $v$, so Potential Infinity (type $t$) fails at the identity arrow of $v$, and at the arrow into $v$; its necessitation fails at the evaluation point. No choice is used.
+
+*General argument `arguments/boundedly-many-propositions-somewhere`. It requires that There are an object $v$ reachable from the evaluation point and a natural number $n$ such that every object reachable from $v$ has at most $n$ propositions. Here: The terminal object $V$, reached by every $k_u$, has the two propositions $\varnothing$ and $\{1_V\}$, and only its identity leaves it. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
 
 ### Fails □Axiom of Infinity (type e).
 
@@ -139,6 +153,14 @@ For a true $p$, $a\le p$, since $a$ entails every truth. Take $q:=a$ in the defi
 At any reachable object $W$, let $U$ be a serial relation in the domain there. Using the axiom of choice, pick for each $x$ a $y$ with $(x,y)$ in the extension of $U$ at the identity, and let $S$ be the intension whose value at every arrow $W\to W$ is the graph of this choice and whose value at arrows with any other codomain is empty; it depends only on the codomain, so the condition puts it in the domain, and at the identity it is a functional subrelation of $U$. Likewise a set of representatives of an equivalence relation at $W$, made into such an intension, is a transversal. Since $W$ was any reachable object, both principles hold at every world.
 
 *General argument `arguments/necessary-relational-choice-codomain-intensions`. It requires that At every object reachable from the evaluation point, the domain contains every intension whose value at an arrow depends only on the arrow's codomain. Here: An intension depending only on the codomain is pinned down by $\varnothing$, and the model is ideally full. By Claude Fable 5.1 (Anthropic), at Cian Dorr's direction, 2026-10-14.*
+
+### Holds Necessity of Arithmetic.
+
+At each type $\sigma$. At any object $v$ reachable from the evaluation point the numbers at $\sigma$ are the numerals there, as in the argument arithmetic-necessitism-extensionally-full. If the numerals are pairwise distinct at $v$, as they are when $\sigma$ has infinitely many entities there, the $n$th being the cardinality of the properties with $n$ instances, then $\operatorname{Sum}_\sigma$ and $\operatorname{Prod}_\sigma$ are the least relations closed under their clauses, and by extensional fullness the relations whose extensions are the graphs of addition and multiplication on the numerals are present and closed under them, so the two are standard. So an arithmetical sentence $A$ at $\sigma$ has at $v$ its truth value in the standard model. If two numerals coincide at $v$, then $I^*_\sigma$ fails at $v$, since zero is a numeral other than every successor and successor is injective on the numerals only when they are pairwise distinct; and then $I_\sigma=\Diamond I^*_\sigma$ is false at $v$ too, $I^*_\sigma$ being true if possible (Background, [[potential-infinity-forms]]). So $\Box(I_\sigma\to A)$ holds when $A$ is true in the standard model and $\Box(I_\sigma\to\neg A)$ when it is false. No choice is used.
+
+*General argument `arguments/necessity-of-arithmetic-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: At $W_0$ the identity is the only arrow into $W_0$, so an intension with any value at the identity and $\varnothing$ at the $k_u$ is pinned down by $\varnothing$; at $V$ the domain is full. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-30.*
+
+*Revised 2026-11-24 by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell:* The case of a type with finitely many entities at $v$ had argued that two numerals then coincide at every object $v$ sees, the type being finite at each by the condition finite-types-stay-finite. That needs a finite bound on those objects, not only that each is finite: in [[full-omega-chain-new-individuals]] every object has finitely many individuals and the numerals at type $e$ are pairwise distinct at each. The cases are now divided by whether the numerals are pairwise distinct at $v$, and the condition is no longer required: where they coincide $I^*_\sigma$ fails, and with it $I_\sigma$, which is Potential Infinity at $\sigma$.
 
 ### Holds Necessity of Second-Order Analysis.
 

@@ -328,32 +328,24 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <p><span class="math inline">\Box_{\ne}p:=\exists q\, .\,q\land\Box(\Diamond q\to p)</span>, with dual <span class="math inline">\Diamond_{\ne}p\leftrightarrow\forall q\, .\,q\to\Diamond(\Diamond q\land p)</span>. <span class="math inline">\Box_5</span> is necessity under every S5 operator, with dual <span class="math inline">\Diamond_5</span> (Background, Varieties of necessity). C proves <span class="math inline">\Box_{\ne}\le\Box_5</span>. The premise <span class="math inline">\forall p\, .\,\Box_5p\to\Box_{\ne}p</span> therefore makes the two operators coextensive, and so also their duals. Inextensibility and Actuality are as in the BF write-up. Let <span class="math inline">a</span> witness Actuality.</p>
 <h2 id="step-1-actuality-gives-diamond_ne-a-simple-form">Step 1: Actuality gives <span class="math inline">\Diamond_{\ne}</span> a simple form</h2>
 <p>Put <span class="math inline">D_ap:=\Diamond(\Diamond a\land p)</span>. Then</p>
-<p><span class="math display">
-(1)\qquad \forall p\, .\,D_ap\leftrightarrow\Diamond_{\ne}p.
-</span></p>
+<p><span class="math display">(1)\qquad \forall p\, .\,D_ap\leftrightarrow\Diamond_{\ne}p.</span></p>
 <p>Right to left, take <span class="math inline">q:=a</span>, which is true. Left to right, let <span class="math inline">q</span> be true. Then <span class="math inline">a\le q</span>, so <span class="math inline">\Box(\Diamond a\to\Diamond q)</span> by 4 and K, and <span class="math inline">\Diamond(\Diamond a\land p)</span> gives <span class="math inline">\Diamond(\Diamond q\land p)</span>.</p>
 <h2 id="step-2-the-5-necessity-collapse">Step 2: the 5-necessity collapse</h2>
 <p>With the premise, (1) gives</p>
-<p><span class="math display">
-(2)\qquad \forall p\, .\,D_ap\leftrightarrow\Diamond_5p.
-</span></p>
+<p><span class="math display">(2)\qquad \forall p\, .\,D_ap\leftrightarrow\Diamond_5p.</span></p>
 <p>This is coextensiveness at the actual world only. The argument never needs the operators to be identical or necessarily coextensive.</p>
 <h2 id="step-3-a-barcan-formula-restricted-to-diamond-a">Step 3: a Barcan formula restricted to <span class="math inline">\Diamond a</span></h2>
 <p><span class="math inline">\Box_5</span> obeys the Barcan formula at every type, as a theorem of C. This is shown in <em>The Bounds of Possibility</em>, Appendix D: fact (C5), p. 402, from Theorem D16 and Corollary D6, which rests on Prior’s derivation from B, Proposition D3 (Background, [[box5-barcan]]). Dually, for tuples, <span class="math inline">\Diamond_5\exists\bar x\, .\,R[\bar x]\to\exists\bar x\, .\,\Diamond_5R[\bar x]</span>.</p>
 <p>Transfer this through (2), applying (2) once to <span class="math inline">\exists\bar x\, .\,R[\bar x]</span> and once to each <span class="math inline">R[\bar x]</span>:</p>
-<p><span class="math display">
-\text{(RB)}\qquad
+<p><span class="math display">\text{(RB)}\qquad
 \Diamond\exists\bar x\, .\,\Diamond a\land R[\bar x]
-\ \to\ \exists\bar x\, .\,\Diamond(\Diamond a\land R[\bar x]).
-</span></p>
+\ \to\ \exists\bar x\, .\,\Diamond(\Diamond a\land R[\bar x]).</span></p>
 <p>This holds at the actual world, for every relation <span class="math inline">R</span> and at every type.</p>
 <h2 id="step-4-inextensibility">Step 4: inextensibility</h2>
 <p>The strategy for this part of the proof is due to Christopher Sun. It was used in the earlier proof that BF and Actuality imply Inextensible Comprehension.</p>
 <p>Fix <span class="math inline">F</span> of type <span class="math inline">\bar\sigma t</span> and put <span class="math inline">C:=\lambda\bar z\, .\,\Diamond(a\land F[\bar z])</span>. As in the BF write-up, Actuality makes <span class="math inline">C</span> coextensive with <span class="math inline">F</span>. Suppose <span class="math inline">C</span> is not inextensible. With <span class="math inline">A(X):=\forall\bar y\, .\,C[\bar y]\to\Box X[\bar y]</span>,</p>
-<p><span class="math display">
-(3)\qquad \Diamond\exists X\, .\,A(X)\land\Diamond\exists\bar z\, .\,
-  C[\bar z]\land\neg X[\bar z].
-</span></p>
+<p><span class="math display">(3)\qquad \Diamond\exists X\, .\,A(X)\land\Diamond\exists\bar z\, .\,
+  C[\bar z]\land\neg X[\bar z].</span></p>
 <ol type="1">
 <li><strong>Extract <span class="math inline">X</span>.</strong> The matrix of (3) implies <span class="math inline">\Diamond a</span>. Its second conjunct gives <span class="math inline">\Diamond\Diamond a</span>, since <span class="math inline">C[\bar z]</span> implies <span class="math inline">\Diamond a</span>, and then 4 applies. So (RB), at the type of <span class="math inline">X</span>, gives an <span class="math inline">X</span> with <span class="math display">(4)\qquad\Diamond(\Diamond a\land A(X)\land\Diamond\exists\bar z\, .\,C[\bar z]\land\neg X[\bar z]).</span></li>
 <li><strong>Extract <span class="math inline">\bar z</span>.</strong> By 4, <span class="math inline">\Diamond\exists\bar z\, .\,C[\bar z]\land\neg X[\bar z]</span>. Its matrix implies <span class="math inline">\Diamond a</span>, so (RB) at the types <span class="math inline">\bar\sigma</span> gives <span class="math inline">\bar z</span> with <span class="math inline">\Diamond(C[\bar z]\land\neg X[\bar z])</span>.</li>

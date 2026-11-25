@@ -1,10 +1,10 @@
-# Forcing Possibilism ⇒ Axiom of Infinity (type t)
+# Mathematical Possibilism ⇒ Axiom of Infinity (type t)
 
 <p class='cert'>Result — Source: Could the truths of mathematics have been different? (draft); produced by Andrew Bacon (§6, the remark that Mathematical Possibilism entails the axiom of infinity); proof written out by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026; recorded by Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 23 October 2026.</p>
 
 ## Premises
 
-- **Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
+- **Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
 
 ## Conclusion
 
@@ -12,11 +12,15 @@
 
 ## Proof
 
-Suppose some finite cardinality holds of the universal property of propositions, say there are exactly $N$ propositions, $q_1,\dots,q_N$ (with $N\ge2$, as $\top\ne\bot$). At type $tt$ the properties $\lambda p\, .\,p=q_{i_1}\lor\dots\lor p=q_{i_k}$, one for each subset of $\{q_1,\dots,q_N\}$, are pairwise distinct, since two of them differ at some $q_i$, and under inclusion they form a complete Boolean algebra with $2^N$ elements: a finite Boolean algebra is complete, and its carrier, order, meets and joins are given by abstraction. It is finite, hence small. Forcing Possibilism gives a proposition $p\ne\top$ whose entailment algebra is isomorphic to it, so there are at least $2^N>N$ propositions, those entailing $p$. Contradiction. Hence no finite cardinality holds of the universal property of propositions.
+Suppose some finite cardinality holds of the universal property of propositions, say there are exactly $N$ propositions, $q_1,\dots,q_N$ (with $N\ge2$, as $\top\ne\bot$). At type $tt$ the properties $\lambda p\, .\,p=q_{i_1}\lor\dots\lor p=q_{i_k}$, one for each subset of $\{q_1,\dots,q_N\}$, are pairwise distinct, since two of them differ at some $q_i$, and under inclusion they form a complete Boolean algebra with $2^N$ elements: a finite Boolean algebra is complete, and its carrier, order, meets and joins are given by abstraction. It is finite, hence small by the finite-carrier argument below. Forcing Possibilism gives a proposition $p$ whose entailment algebra is isomorphic to it, so there are at least $2^N>N$ propositions, those entailing $p$. Contradiction. Hence no finite cardinality holds of the universal property of propositions.
 
 ## Notes
 
-The one general consequence of Forcing Possibilism the map records: the principle is about the propositions there could be below some proposition, so any model with finitely many propositions refutes it, and through this result every such model on the map does, which settles the questions whether principles true in finite models, Atomicity, ND or BF for instance, imply it. Its other verdicts on the map come from Bacon's lottery model, which has it with □Rigid Comprehension and □Intensional Choice and without Atomicity.
+Every finite carrier is small. In any nonempty finite subcollection of size k, removing one member gives a smaller subcollection whose power has 2^(k−1) members, at least k. It cannot be represented by a smaller part of that subcollection. The empty subcollection cannot be larger than H. Finite enumerations and their subset codes are definable by finite disjunctions. The proof applies even when the representing proposition is top.
+
+## Revisions
+
+- **2026-11-16** (OpenAI Codex (GPT-6), prompted by Andrew Bacon) — Checked the finite-algebra argument for the revised smallness and interval clauses.
 
 ## Sources
 

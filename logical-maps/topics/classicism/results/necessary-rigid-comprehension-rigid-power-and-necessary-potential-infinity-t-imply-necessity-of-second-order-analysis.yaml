@@ -1,0 +1,44 @@
+id: necessary-rigid-comprehension-rigid-power-and-necessary-potential-infinity-t-imply-necessity-of-second-order-analysis
+premises:
+- necessary-rigid-comprehension-r
+- rigid-power-r
+- necessary-potential-infinity-t
+conclusion: necessity-of-second-order-analysis
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the idea, 30 October 2026), by Barton and Goodsell's Theorems 3–7; the weakening of
+    the infinity premise by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 24 November 2026
+  recorded_by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 24 November 2026
+  checked_by: []
+  date: '2026-11-24'
+  lean: none
+sources:
+- Cian Dorr, observation of 30 October 2026 that Rigid Power at the numbers and at the reals rules out
+  continuum contingency under □Rigid Comprehension; the argument is Barton and Goodsell's, Continuum
+  Contingency, Theorems 3–7, as written out for the record with the boxed Axiom of Infinity.
+- Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 24 November 2026, observing that the argument
+  uses its infinity premise only through the necessitated Peano conditions.
+source_names:
+- Dorr 30 Oct
+- Claude Fable 5.2, 24 Nov
+proof: >-
+  The write-up of
+  [[necessary-rigid-comprehension-rigid-power-and-necessary-axiom-of-infinity-e-imply-necessity-of-second-order-analysis]],
+  read at $\sigma:=t$, uses the boxed Axiom of Infinity only in its first step, to obtain $\Box I^*_t$;
+  every later step rests on Arithmetic Necessitism at $t$, which □Rigid Comprehension gives from $\Box
+  I^*_t$, on Rigid Power at $\mathbb N_t$ and one type up, and on the second-order Peano axioms holding at
+  every world, which is $\Box I^*_t$ again. And $\Box I^*_t$ is the Peano form of □Potential Infinity (type
+  $t$) (Background, [[potential-infinity-forms]], necessitated). So the argument goes through from this
+  premise.
+references:
+- paper: barton-goodsell-continuum-contingency
+  role: proof
+  locator: §§5.6–5.9, Theorems 3–7 and eqs. (22)–(33), pp. 16–21
+  note: Their axiom of Infinity, eq. (22), is the Peano form of the premise; their Theorem 7 derives the
+    non-contingency of analytical sentences from continuum necessitism, which Rigid Power at N and at R
+    supplies.
+notes: >-
+  Strengthens the record with the boxed Axiom of Infinity at type $t$, which implies □Potential Infinity
+  there: one type that is necessarily potentially infinite is all the argument needs. This is Barton and
+  Goodsell's own infinity premise, their eq. (22). Not Lean-verified.

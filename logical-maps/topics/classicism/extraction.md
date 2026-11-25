@@ -84,7 +84,7 @@ instantiated as $(\sigma t)t$ at every type $\sigma$ (see Background; until 16 O
 | Source | Connections recorded |
 | --- | --- |
 | §3, Definitions 1 and 6, pp. 7–8, 13 | Countable Boolean Completeness; Boolean Completeness restricts to it |
-| §4, Definitions 3–5 and 8, pp. 11–13, 19 | The arithmetical vocabulary, $I$, arithmetical sentences |
+| §4, Definitions 3–5 and 8, pp. 11–13, 19 | The arithmetical vocabulary, $I$, arithmetical sentences; $I^*$ and $I$ at the numbers counted at $e$ and at $t$ are recorded as Potential Infinity (types e and t), whose official form says that every number possibly holds of some property (24 November 2026) |
 | §5, Lemmas 2–8 and Theorem 9, pp. 14–21 | Countable Boolean Completeness implies the Necessity of Arithmetic |
 | §6, Theorem 11, pp. 24–26 | Possibility Maximalism (pure) is incompatible with the Necessity of Arithmetic, hence with Countable and full Boolean Completeness and with Rigid Comprehension |
 
@@ -226,7 +226,7 @@ Theorem 5.2 (Theorem C.2) as
 `c5-and-necessary-rigid-comprehension-imply-second-order-analytic-necessitism` (so □Plenitude and
 Extensionality give Analytic Necessitism on the map); No Pure Contingency gives the schema directly
 (`no-pure-contingency-implies-necessity-of-second-order-analysis`); Theorem 6.1 as the conjecture
-`necessary-rigid-comprehension-intensional-choice-and-forcing-possibilism-incompatible-with-non-contingency-of-ch`,
+the historical structural conjecture (superseded by `power-closed-mp-and-choice-imply-cardinal-ch-contingency`),
 its proof not being in the draft; Lemmas C.1 and C.3 and Proposition C.3 in the proofs of
 `analytic-necessitism-implies-necessity-of-analysis` and its second-order form. Not yet recorded:
 Theorem 5.1's model of C5 with Rigid Comprehension in which CH is structurally contingent (Appendix

@@ -14,7 +14,7 @@ topic puts into it.
 | a result's certificate | its record's `certificate.lean_ref`, e.g. `Classicism.Map.barcan_r_implies_functionality_r`; `certificate.lean`, which `lean-check --update` writes |
 | the statements the certificates prove | `Classicism/Statements.lean`, written by `pmap lean classicism` from the records. Never edited by hand. |
 | the certificates | `Classicism/Map.lean`: one theorem per result proved, named by its id, and per variant, `<principle>.<variant>`, each one line citing the proof |
-| a model's verdicts proved one by one | the model record's `lean`: `model`, a Lean term for it, and `verdicts`, each `holds` or `fails` a principle with its `ref` and `status`, which `lean-check --update` writes |
+| a model's verdicts proved one by one | the model record's `lean`: `model`, a Lean term for it, and `verdicts`, each `holds` or `fails` a principle with its `ref` and `status`, which `lean-check --update` writes; for a group member, `variants`, the models of its generated variants at other settings (below, "Generated variants") |
 | the statements of those verdicts | `Classicism/ModelStatements.lean`, written by `pmap lean classicism`. Never edited by hand. |
 | their certificates | `Classicism/MapModels.lean`: one theorem per verdict, `Models.<model id>.<principle id>`, citing the verdict proved in `Models/` |
 | where every certificate, proof and principle definition is | `map/index.json`, written by `scripts/MapIndex.lean` (`Classicism/Tools/MapIndex.lean`) |
@@ -325,6 +325,31 @@ the map's prose:
 
 Not proved yet for other reasons: `intensional-choice-well-ordering` and `rigid-power-tight` (their principles have no
 `lean_def`).
+
+**Generated variants.** A group's variant (README, "Model groups") is a model of its own with no
+file, so no `lean` of its own (`pmap.lean_block`). The rule:
+
+- A variant differing from its member only in `sigma`, the setting `relative_models` reads, has
+  the member's Lean model: every record's model is of the pure language, and `Σ` is interpreted
+  on top of it. It gets the verdicts the map's arguments give *it* (its own `when`s, conditions
+  and `given`s, not the member's) with the member's proofs of the conditions it meets; its
+  relative verdicts are on the model `relative_models` builds at *its* `sigma` (none at
+  `true-atom` or `independent`, which have no Lean construction yet); and the member's verified
+  own verdicts on principles not relative to `Σ`, where the map gives the variant the verdict
+  directly, certified by the member's certificate.
+- A variant differing in any other setting (`individuals`, …) has another model. The member's
+  `lean.variants` may give it, keyed by those settings as in the variant's id:
+  `individuals-singleton: {model, is_model, meets}`, or `param` when the group's `lean.settings`
+  cover the variant. Without one it gets nothing.
+- A variant at a `choiceless` value gets nothing, as before.
+
+Its certificates are in `MapDerived.lean`, named by the variant's id, and the index lists them
+under it, so the viewer's counts include them; `lean-check --update` writes no status for them.
+On 4 November this gave 199 verdicts in 23 variants (the `sigma` variants of the members with a
+Lean model). A member's certificate that `MapDerived.lean` cannot import (one in `MapWitnesses.lean`,
+which imports it) is not inherited (`pmap.lean_citable_from_derived`). No `lean.variants` is given yet: the `individuals` variants need Lean models of
+their own (the finite-support group's construction is over `ℕ`; the full action models' over one
+individual).
 
 **Models with `Σ` interpreted.** A verdict on a principle relative to the signature is about
 a model of an admitted signature, and the statement also asks `Admitted`. The record's Lean

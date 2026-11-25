@@ -23,6 +23,8 @@
 - **Second-Order Analytic Necessitism.** If there could be a real number structure, there is a rigid one, necessarily a real number structure, together with represented powers of every arity up to $n$: rigid properties of rigid relations among the structure's elements that necessarily represent every relation on them. One sentence for each type $\sigma$ and each $n\ge1$.
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
+- **Possible failure of Cardinal CH.** Cardinal CH possibly fails.
+- **Necessity of Arithmetic.** Every arithmetical sentence is either necessarily true or necessarily false, given that possibly zero is not a successor and successor is injective on numbers, where the numbers are the finite cardinalities of properties of a type $\sigma$. One sentence for each type $\sigma$ and each arithmetical sentence at $\sigma$.
 - **Rigid Power.** If a relation is rigid, so is the property of being a rigid relation that entails it.
 - **□Rigid Power.** Necessarily, if a relation is rigid, so is the property of being a rigid relation that entails it.
 - **Transversal Choice.** Every equivalence relation, at any type including e, has a transversal, that is, a property with exactly one instance in each of its cells.
@@ -33,6 +35,9 @@
 - **¬ Infinity Schema (type t).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
 - **¬ Atoms are self-atoms (type t).** Every atom is a self-atom: necessarily, if it is true, it is an atom.
+- **¬ Potential Infinity (type e).** For every natural number, there could be at least that many individuals: each number counted at type $e$ possibly holds of some property of individuals.
+- **¬ Potential Infinity (type t).** For every natural number, there could be at least that many propositions: each number counted at type $t$ possibly holds of some property of propositions.
+- **¬ Possible Cardinal CH.** Cardinal CH possibly holds.
 - **¬ Possible Infinity (type t).** Possibly there are not finitely many propositions: the Axiom of Infinity at this type, under a diamond.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
 - **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
@@ -141,11 +146,49 @@ The numbers at a type $\sigma$ are the instances of $\mathbb N_\sigma$, the leas
 
 *General argument `arguments/arithmetic-necessitism-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: Any set $S$ of tuples at the identity of $W_0$ is the extension there of a symmetric intension: put $S$ at the identity and the empty set at the arrows into $X$. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
 
+### Fails Potential Infinity (type e).
+
+Let $n$ bound the number of individuals at the objects reachable from the evaluation point (in a Kripke-style model, at the worlds the evaluation point sees). The numeral $\operatorname{Suc}^{n+1}_e\mathbf 0_e$ is a closed term, and it denotes a finite cardinality, zero and the successor of a finite cardinality being finite cardinalities in C. At the identity arrow of a reachable object it holds of no property: a property it holds of has $n+1$ instances any two of which are distinct, hence literally distinct, identity being reflexive, and there are at most $n$ individuals there. A closed sentence holds at an arrow out of the evaluation object exactly when it holds at the identity arrow of the arrow's target, so at no world does that numeral hold of a property. So Potential Infinity (type $e$) fails, at that number. No choice is used.
+
+*General argument `arguments/boundedly-many-individuals`. It requires that There is a natural number $n$ such that every object reachable from the evaluation point has at most $n$ individuals. Here: The individuals are the three elements of $X$ or one, and in the two-object member the single point of $W_0$: at most three at every object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
+
+### Fails Potential Infinity (type t).
+
+As for individuals (the argument boundedly-many-individuals), at type $t$. Let $n$ bound the number of propositions at the objects reachable from the evaluation point. The numeral $\operatorname{Suc}^{n+1}_t\mathbf 0_t$ denotes a finite cardinality, and at the identity arrow of a reachable object it holds of no property of propositions, a property it holds of having $n+1$ instances any two of which are distinct, hence literally distinct. A closed sentence holds at an arrow exactly when it holds at the identity arrow of the arrow's target, so at no world does that numeral hold of a property, and Potential Infinity (type $t$) fails. No choice is used.
+
+*General argument `arguments/boundedly-many-propositions`. It requires that There is a natural number $n$ such that every object reachable from the evaluation point has at most $n$ propositions. Here: There are one or two objects, each with finitely many arrows out of it, and the propositions at an object are symmetric sets of those arrows; so their number is bounded. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
+
+### Holds Possible failure of Cardinal CH. Fails Possible Cardinal CH.
+
+Cardinal CH fails at every world, so it is not possible, and its failure, being actual, is possible. Write $z=\lambda A\, .\,\top$ for at-least zero, $N=\operatorname{LowerNat}_e$, and $S$ for the rigid subproperties of $N$. Let $n$ bound the number of individuals at the objects reachable from the evaluation point, and argue at the identity arrow of such an object (in a Kripke-style model, at a world the evaluation point sees); a closed sentence holds at an arrow out of the evaluation object exactly when it holds at the identity arrow of the arrow's target.
+
+*$N$ has exactly $m$ instances, for some $m$ with $2\le m\le n+2$.* The numeral $\operatorname{Suc}^{n+1}z$ holds of the properties with $n+1$ pairwise distinct instances, so necessarily of none; it is $\lambda A\, .\,\bot$ by Intensionality, and so is its successor. Being one of $z,\operatorname{Suc}z,\ldots,\operatorname{Suc}^{n+1}z$ is therefore a property of cardinalities that $z$ has and that passes to successors, and every instance of $N$ has it; each of these numerals is an instance of $N$. Let $m$ be the number of them that are pairwise distinct. And $z\ne\operatorname{Suc}z$: the empty property is not one with an instance.
+
+*$S$ has exactly $2^m$ instances.* Let $a_1,\ldots,a_m$ be the instances of $N$, and for a set $I$ of indices let $D_I:=\lambda x\, .\,\bigvee_{i\in I}x=a_i$. Haecceities are rigid in C and so are finite disjunctions of rigid properties, so each $D_I$ is a rigid subproperty of $N$; they are pairwise distinct, the $a_i$ being so. Conversely let $X$ be a rigid subproperty of $N$, and $I$ the set of $i$ with $Xa_i$. By persistence $D_I\le X$. Each instance of $X$ is some $a_i$ with $i\in I$, so is necessarily $D_I$; by inextensibility $X\le D_I$. So $X=D_I$, by Intensionality.
+
+*A subcollection in between.* Since $m+1\le 2^m$, the disjunction $T$ of the haecceities of $m+1$ of the $D_I$ is a subcollection of $S$ with exactly $m+1$ instances. A relation injecting $T$ into $N$ would send those $m+1$ to pairwise distinct ones among $a_1,\ldots,a_m$. A bijection between $T$ and $S$ would pair the $2^m$ instances of $S$ with pairwise distinct instances of $T$, and $m+1<2^m$ because $m\ge2$. So $T$ neither injects into $N$ nor is in bijection with $S$. No choice is used: the cases are finitely many.
+
+*General argument `arguments/cardinal-ch-boundedly-many-individuals`. It requires that There is a natural number $n$ such that every object reachable from the evaluation point has at most $n$ individuals. Here: The individuals are the three elements of $X$ or one, and in the two-object member the single point of $W_0$: at most three at every object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-25.*
+
+### Holds Possible failure of Cardinal CH. Fails Possible Cardinal CH.
+
+Cardinal CH fails at every world, so it is not possible, and its failure, being actual, is possible. With one individual at every world, $N=\operatorname{LowerNat}_e$ has exactly three instances at every world. At-least zero, $z=\lambda A\, .\,\top$, and its successor, which holds of the properties with an instance, differ at the empty property. The successor of that holds of the properties with two distinct instances, so of none at any world; it is $\lambda A\, .\,\bot$ by Intensionality, so is its own successor, and differs from the other two, which hold of the universal property. Being one of the three is a property of cardinalities that $z$ has and that passes to successors, so $N$ has no other instance. The rest is the argument cardinal-ch-boundedly-many-individuals with $m=3$: the rigid subproperties of $N$ are the eight disjunctions of haecceities of its instances, and a property holding of four of them neither injects into the three instances of $N$ nor is in bijection with the eight. No choice is used.
+
+*General argument `arguments/cardinal-ch-one-individual`. It requires that There is exactly one individual, at every world. Here: The only individual is fixed by every arrow, at the sole object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-25.*
+
 ### Fails Possible Infinity (type t).
 
 At a world with $n$ propositions, the numeral $\operatorname{Suc}^n_t\mathbf{0}_t$, a finite cardinality, holds of the universal property of propositions, so the Axiom of Infinity at type $t$ fails there. It fails at every world, so Possible Infinity at type $t$ fails.
 
 *General argument `arguments/finitely-many-propositions-everywhere`. It requires that There are finitely many propositions at every object reachable from the evaluation point. Here: Four propositions at $W_0$, sixty-four at $X$. By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-06.*
+
+### Holds Necessity of Arithmetic.
+
+At each type $\sigma$. At any object $v$ reachable from the evaluation point the numbers at $\sigma$ are the numerals there, as in the argument arithmetic-necessitism-extensionally-full. If the numerals are pairwise distinct at $v$, as they are when $\sigma$ has infinitely many entities there, the $n$th being the cardinality of the properties with $n$ instances, then $\operatorname{Sum}_\sigma$ and $\operatorname{Prod}_\sigma$ are the least relations closed under their clauses, and by extensional fullness the relations whose extensions are the graphs of addition and multiplication on the numerals are present and closed under them, so the two are standard. So an arithmetical sentence $A$ at $\sigma$ has at $v$ its truth value in the standard model. If two numerals coincide at $v$, then $I^*_\sigma$ fails at $v$, since zero is a numeral other than every successor and successor is injective on the numerals only when they are pairwise distinct; and then $I_\sigma=\Diamond I^*_\sigma$ is false at $v$ too, $I^*_\sigma$ being true if possible (Background, [[potential-infinity-forms]]). So $\Box(I_\sigma\to A)$ holds when $A$ is true in the standard model and $\Box(I_\sigma\to\neg A)$ when it is false. No choice is used.
+
+*General argument `arguments/necessity-of-arithmetic-extensionally-full`. It requires that The model is extensionally full at every object: every set of tuples from the domains at an object is the extension, at the identity arrow, of an element of the domain of the matching relational type there. Here: Any set $S$ of tuples at the identity of $W_0$ is the extension there of a symmetric intension: put $S$ at the identity and the empty set at the arrows into $X$. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-30.*
+
+*Revised 2026-11-24 by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell:* The case of a type with finitely many entities at $v$ had argued that two numerals then coincide at every object $v$ sees, the type being finite at each by the condition finite-types-stay-finite. That needs a finite bound on those objects, not only that each is finite: in [[full-omega-chain-new-individuals]] every object has finitely many individuals and the numerals at type $e$ are pairwise distinct at each. The cases are now divided by whether the numerals are pairwise distinct at $v$, and the condition is no longer required: where they coincide $I^*_\sigma$ fails, and with it $I_\sigma$, which is Potential Infinity at $\sigma$.
 
 ### Fails Axiom of Infinity (type e), Infinity Schema (type e), Possible Infinity (type e).
 
@@ -154,6 +197,12 @@ No two individuals are distinct, and the numeral $\operatorname{Suc}_e\mathbf{0}
 *General argument `arguments/one-individual`. It requires that There is exactly one individual, at every world. Here: The only individual is fixed by every arrow, at the sole object. By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-02.*
 
 *Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* Moved from the group finite-support-one-object to the topic.
+
+### Fails Potential Infinity (type e).
+
+The numeral $\operatorname{Suc}_e\operatorname{Suc}_e\mathbf{0}_e$, a finite cardinality, holds of no property at any world: a property it holds of has two distinct instances, and no two individuals are distinct. So Potential Infinity (type $e$) fails, at that number. This is the strongest of the failures of infinity at type $e$ in such a model, the Axiom of Infinity and Possible Infinity each implying Potential Infinity.
+
+*General argument `arguments/potential-infinity-one-individual`. It requires that There is exactly one individual, at every world. Here: The only individual is fixed by every arrow, at the sole object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
 
 ### Holds Rigid Power, □Rigid Power.
 

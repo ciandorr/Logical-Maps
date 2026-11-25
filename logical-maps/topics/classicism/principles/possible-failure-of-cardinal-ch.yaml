@@ -1,0 +1,21 @@
+id: possible-failure-of-cardinal-ch
+name: Possible failure of Cardinal CH
+category: mathematical-contingency
+statement: Cardinal CH possibly fails.
+formal: $\Diamond\neg C_N$
+definitions: Let $N=\mathrm{LowerNat}_e$ be the least property containing at-least zero and closed under cardinal
+  successor. Let $S$ consist of the rigid subproperties of $N$. Write $C_N$ for the claim that each subcollection
+  of $S$ injects into $N$ or is in bijection with $S$. Injections and bijections are relations at the evaluation
+  world.
+date: '2026-11-16'
+sources:
+- Andrew Bacon, finite-power forcing proof of cardinal CH contingency, checkpoint 151 version 349 (14 November
+  2026), formalized by OpenAI Codex, prompted by Andrew Bacon.
+source_names:
+- Bacon, finite-power CH
+changes:
+- date: '2026-11-25'
+  by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+  summary: Lean statement added (`lean_def`), with the vocabulary transcribed from Bacon's Lean package
+    for the three derivations (pull request #28); see `Certified/CardinalCH.lean`.
+lean_def: Classicism.P.PossibleFailureOfCardinalCH.schemaIn

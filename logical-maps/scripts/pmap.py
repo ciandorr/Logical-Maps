@@ -3598,6 +3598,96 @@ def compact_viewer_payload(payload: dict) -> dict:
     return out
 
 
+HOST_FILE_LIMIT = 25 * 2 ** 20        # bytes: the website host serves no larger file
+VIEWER_PAYLOAD_TARGET = 20 * 2 ** 20  # bytes: what the page's data is cut to when it would exceed this
+RANKING_LISTED = 30                   # the rows the viewer lists from a ranking
+
+
+def _ranking_selections(payload: dict) -> list:
+    """The principle lists a reader is likeliest to narrow the Conjectures tab to: each category
+    of principles and each named view."""
+    topic = payload.get("topic") or {}
+    by_category: dict = {}
+    for p in payload.get("principles", []):
+        by_category.setdefault(p.get("category"), set()).add(p["id"])
+    out = [by_category[c["id"]] for c in topic.get("principle_categories") or [] if by_category.get(c["id"])]
+    out += [set(v["principles"]) for key in ("views", "lattice_views") for v in topic.get(key) or [] if v.get("principles")]
+    return out
+
+
+def _row_shown(row: dict, shown, trivial) -> bool:
+    """Whether the viewer lists a ranked row when only `shown` are shown (shownQuestion in viewer/template.html)."""
+    ok = lambda i: i == FALSE or i in trivial or i in shown
+    if row.get("kind") == "check":
+        return ok(row["principle"])
+    return (any(all(ok(x) for x in S) for S in row.get("premise_sets") or [row["premises"]])
+            and any(ok(c) for c in row.get("conclusions") or [row["conclusion"]]))
+
+
+def truncate_rankings(payload: dict, target: int = VIEWER_PAYLOAD_TARGET) -> dict:
+    """The payload with its rankings of open questions cut down, when it would otherwise outgrow
+    the page: a payload that encodes within `target` is returned as it is.
+
+    The viewer lists thirty rows of a ranking after filtering by the shown principles, so its deep
+    rows are seen only under a narrow filter. A cut report keeps
+    - every row to rank `cut` of the high-value questions, and to `cut` of the automatic conjectures;
+    - every core question, every model check, and every row a recorded conjecture asks about;
+    - the first thirty rows, in either order, among the principles of each category and each named view.
+    `cut` is the same in every report, a multiple of 1000, and the largest for which the encoded
+    payload fits `target`. A report that lost rows is marked `truncated: {"rank": cut, "rows": n}`,
+    n its rows before the cut. Every kept row keeps its ranks and scores, so the viewer's lists are
+    exact down to `cut`; below it they list what is stored, and the viewer, which counts the open
+    questions among the shown principles from the status table (`progress.selection`), ends such a
+    list with the number of questions it leaves out. The bundle's data.json keeps every row.
+    The input is not modified."""
+    lp = payload.get("lynchpins")
+    if not (isinstance(lp, dict) and lp.get("reports")):
+        return payload
+    size = lambda p: len(json.dumps(compact_viewer_payload(p), ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    if size(payload) <= target:
+        return payload
+    selections = _ranking_selections(payload)
+    always = []   # per report, the indices of the rows kept at any cut
+    for rep in lp["reports"]:
+        rows, trivial = rep.get("rows") or [], set(rep.get("trivial") or [])
+        keep = {i for i, r in enumerate(rows)
+                if r.get("core_rank") is not None or r.get("kind") == "check" or r.get("conjectures") or r.get("tier")}
+        for key in ("rank", "auto_rank"):
+            order = sorted((i for i, r in enumerate(rows) if r.get(key) is not None), key=lambda i: rows[i][key])
+            for shown in selections:
+                found = 0
+                for i in order:
+                    if _row_shown(rows[i], shown, trivial):
+                        keep.add(i)
+                        found += 1
+                        if found == RANKING_LISTED:
+                            break
+        always.append(keep)
+
+    def cut_at(cut: int) -> dict:
+        reports = []
+        for rep, keep in zip(lp["reports"], always):
+            rows = rep.get("rows") or []
+            kept = [r for i, r in enumerate(rows)
+                    if i in keep or (r.get("rank") or cut + 1) <= cut or (r.get("auto_rank") or cut + 1) <= cut]
+            if len(kept) == len(rows):
+                reports.append(rep)
+                continue
+            reports.append({**rep, "rows": kept, "truncated": {"rank": cut, "rows": len(rows)},
+                            "auto": sorted((r for r in kept if r.get("auto_rank") is not None), key=lambda r: r["auto_rank"])})
+        return {**payload, "lynchpins": {**lp, "reports": reports}}
+
+    step = 1000
+    lo, hi = 0, max(len(rep.get("rows") or []) for rep in lp["reports"]) // step + 1   # in steps: lo fits or is 0
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if size(cut_at(mid * step)) <= target:
+            lo = mid
+        else:
+            hi = mid
+    return cut_at(lo * step)
+
+
 def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = False, starter_archive: Path | None = None) -> Path:
     """Build build/<topic>/ : index.html (viewer), data.json, source.zip, <topic>-map.zip, writeups/, sources/, lean/.
     With --out, write only the viewer HTML to that path (fragment=True omits the page skeleton)."""
@@ -3613,7 +3703,7 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
     generate_lean_statements(topic_id)
     files = render_writeups(topic_id, data, outdir)
     # database + source + lean + AI bundle
-    zip_tree(TOPICS / topic_id, topic_id, outdir / "source.zip")
+    zip_tree(TOPICS / topic_id, topic_id, outdir / "source.zip", exclude_top=DOWNLOAD_EXCLUDED_TOPIC_DIRS)
     sources_dir = TOPICS / topic_id / "sources"
     # Replace managed download directories so removed files cannot survive a
     # rebuild. Git ignore rules alone do not govern website copies or ZIPs.
@@ -3697,7 +3787,8 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
                 if isinstance(a, dict) and a.get("lean") and (a.get("general") or a.get("group")):
                     a["lean"] = mark(a["lean"], a["general"] if a.get("general") else f"{a['group']}/{a.get('id')}")
     # Compact: the website host serves no file over 25 MiB, and indentation alone added half again.
-    viewer_payload = compact_viewer_payload(payload)
+    # The rankings of open questions are cut first when the page would still come too near it.
+    viewer_payload = compact_viewer_payload(truncate_rankings(payload))
     (outdir / "data.json").write_text(json.dumps(viewer_payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     bundle_topic(topic_id, data=data, an=an, base=base)
     html = TEMPLATE.read_text(encoding="utf-8").replace("<!--__PMAP_THEME__-->", theme_head(topic_id, math_path=None if out else 'math'))
@@ -3709,8 +3800,14 @@ def build_topic(topic_id: str, out: Path | None = None, *, fragment: bool = Fals
         html = ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
                 '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
                 f'{head}</head>\n<body>\n<div class="app">{body}\n</body>\n</html>\n')
-    out = out or outdir / "index.html"
+    page = outdir / "index.html"
+    out = out or page
     out.write_text(html, encoding="utf-8")
+    if out == page:
+        for f in (page, outdir / "data.json", outdir / "source.zip", outdir / f"{topic_id}-map.zip"):
+            if f.exists() and f.stat().st_size > HOST_FILE_LIMIT:
+                print(f"WARNING: {f.relative_to(ROOT)} is {f.stat().st_size / 2 ** 20:.1f} MiB; "
+                      "the website host serves no file over 25 MiB", file=sys.stderr)
     return out
 
 
@@ -4489,15 +4586,23 @@ def _ignored(name: str) -> bool:
     return any(fnmatch(name, pat) for pat in IGNORE)
 
 
-def zip_tree(root: Path, base: str, dest: Path) -> Path:
-    """Zip root as base/... , skipping build caches. Replaces make_archive, which cannot filter."""
+# A topic's `verification/` holds standalone replay packages: Lake projects of their own, with
+# the proof data they check, far beyond the website host's limit per file. They stay in the
+# repository and are left out of the site's downloads (source.zip and the working bundle).
+DOWNLOAD_EXCLUDED_TOPIC_DIRS = ("verification",)
+
+
+def zip_tree(root: Path, base: str, dest: Path, *, exclude_top: tuple = ()) -> Path:
+    """Zip root as base/... , skipping build caches. Replaces make_archive, which cannot filter.
+
+    `exclude_top` names directories directly under root to leave out."""
     import zipfile
     if dest.exists():
         dest.unlink()
     with zipfile.ZipFile(dest, "w", zipfile.ZIP_DEFLATED) as z:
         for path in sorted(root.rglob("*")):
             rel = path.relative_to(root)
-            if any(_ignored(part) for part in rel.parts):
+            if any(_ignored(part) for part in rel.parts) or rel.parts[0] in exclude_top:
                 continue
             if path.is_file():
                 z.write(path, str(Path(base) / rel))
@@ -5231,8 +5336,12 @@ def bundle_topic(topic_id: str, *, data: dict | None = None, an: dict | None = N
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp) / f"{topic_id}-map"
         (root / "topics").mkdir(parents=True)
+        topic_root = (TOPICS / topic_id).resolve()
+        skip = shutil.ignore_patterns(*IGNORE)
         shutil.copytree(TOPICS / topic_id, root / "topics" / topic_id,
-                        ignore=shutil.ignore_patterns(*IGNORE))
+                        ignore=lambda d, names: set(skip(d, names)) | (
+                            set(DOWNLOAD_EXCLUDED_TOPIC_DIRS) & set(names)
+                            if Path(d).resolve() == topic_root else set()))
         (root / "scripts").mkdir()
         shutil.copy2(Path(__file__).resolve(), root / "scripts" / "pmap.py")
         check = ROOT / "scripts" / "check_falsity.py"
@@ -6022,6 +6131,35 @@ def selftest():
     assert Lb.trivial == ["p", "q"] and Lb.reps == ["p", "r", "s"] and Lb.witnesses == [ly["models"][0]], (Lb.trivial, Lb.reps)
     assert sorted(Lb.open_questions()) == [((), "r"), (("r",), FALSE), (("r",), "s"), (("r", "s"), FALSE), (("s",), FALSE), (("s",), "r")], Lb.open_questions()
     agree(Lb)
+    # The page's rankings are cut only when the payload would outgrow it, and then to a common rank:
+    # whole above it, and below it the core questions, model checks, recorded conjectures and the
+    # first rows among each category's principles. The stored rows of a ranking account for its
+    # open questions one for each premise combination and consequent, which the viewer counts by.
+    full = Lr.rank(top=None)
+    assert sum(len(r.get("premise_sets", [r["premises"]])) * len(r.get("conclusions", [r["conclusion"]]))
+               for r in full["rows"] if r["kind"] == "question") == full["open"], "a ranking's rows cover its open questions exactly"
+    n = 4000
+    synth = [{"kind": "question", "premises": [f"x{i % 50}"], "conclusion": f"x{(i * 7 + 1) % 50}", "yes": n - i, "no": 1,
+              "score": 1.0, "rank": i + 1, "auto_rank": n - i, "auto_claim": "not"} for i in range(n)]
+    synth[2500]["core_rank"], synth[2700]["tier"] = 1, "bronze"
+    synth[2600] = {"kind": "check", "model": "m", "principle": "x1", "yes": 1, "no": 1, "score": 1.0, "rank": 2601, "auto_rank": n - 2600, "auto_claim": "not"}
+    synth[2800].update(premises=["c1"], conclusion="c2")
+    big = {"topic": {"principle_categories": [{"id": "k", "name": "K"}]},
+           "principles": [{"id": "c1", "category": "k"}, {"id": "c2", "category": "k"}] + [{"id": f"x{i}"} for i in range(50)],
+           "lynchpins": {"skipped": None, "reports": [{"trivial": [], "rows": synth, "auto": sorted(synth, key=lambda r: r["auto_rank"]), "recorded": []}]}}
+    encoded = lambda p: len(json.dumps(compact_viewer_payload(p), ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    assert truncate_rankings(big, encoded(big)) is big, "a payload that fits is left alone"
+    target = encoded(big) // 2
+    small = truncate_rankings(big, target)
+    rep = small["lynchpins"]["reports"][0]
+    cut = rep["truncated"]["rank"]
+    assert encoded(small) <= target and cut % 1000 == 0 and 0 < cut < n and rep["truncated"]["rows"] == n, rep["truncated"]
+    kept = {r["rank"] for r in rep["rows"]}
+    assert {r["rank"] for r in synth if r["rank"] <= cut or r["auto_rank"] <= cut} <= kept, "whole down to the cut, in both orders"
+    assert {2501, 2601, 2701, 2801} <= kept, "core questions, model checks, recorded conjectures and a category's first rows survive the cut"
+    assert len(kept) < n and [r["rank"] for r in rep["rows"]] == sorted(kept) and [r["auto_rank"] for r in rep["auto"]] == sorted(r["auto_rank"] for r in rep["rows"])
+    assert "auto" not in compact_viewer_payload(small)["lynchpins"]["reports"][0], "the cut rows still rebuild the automatic conjectures"
+    assert len(synth) == n and "truncated" not in big["lynchpins"]["reports"][0], "the input is not modified"
     print("selftest OK")
 
 

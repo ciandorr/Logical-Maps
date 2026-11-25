@@ -18,7 +18,7 @@
 - **¬ Boolean Completeness (type t).** Every property of propositions has a greatest lower bound.
 - **¬ Countable Boolean Completeness.** Every countable property of entities of a relational type has a least upper bound in that type, where a property is countable relative to a type $\sigma$ when it injects into the finite cardinalities of properties of type $\sigma$; one instance for each $\sigma$.
 - **¬ Atomlessness.** Atomlessness in the displayed closed propositional formulation.
-- **¬ Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
+- **¬ Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
 - **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
 - **¬ Independence (signature Σ).** No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.
@@ -66,9 +66,9 @@ The numerals at $t$ form a property pinned down by $\varnothing$, so finite card
 
 *Address: `symmetric-qualitative-contrast-at-w1#infinity-t`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
 
-### Fails Atomlessness, Forcing Possibilism.
+### Fails Atomlessness, Mathematical Possibilism.
 
-Any two arrows into $W_0$ differ by a member of $G_{W_0}$, so a proposition contains all of them or none; the proposition $q_0$ of the arrows into $W_0$, pinned down by $\varnothing$, is an atom. A nonzero set of arrows into $W_1$, pinned down by a finite $N$, is split by the value of the arrow at a point outside $N$; so the propositions below a proposition other than $\top$ number $1$, $2$ or infinitely many. But $\bot$, $q_0$, $\neg q_0$ and $\top$ form a complete four-element Boolean algebra, so Forcing Possibilism fails.
+Any two arrows into $W_0$ differ by a member of $G_{W_0}$, so a proposition contains all of them or none; the proposition $q_0$ of the arrows into $W_0$, pinned down by $\varnothing$, is an atom. A nonzero set of arrows into $W_1$, pinned down by a finite $N$, is split by the value of the arrow at a point outside $N$; so the propositions below a proposition number $1$, $2$ or infinitely many. But $\bot$, $q_0$, $\neg q_0$ and $\top$ form a complete four-element Boolean algebra, so Forcing Possibilism fails.
 
 *Address: `symmetric-qualitative-contrast-at-w1#atom-at-w0`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
 

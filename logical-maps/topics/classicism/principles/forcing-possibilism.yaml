@@ -1,23 +1,30 @@
 id: forcing-possibilism
-name: Forcing Possibilism
+name: Mathematical Possibilism
 category: mathematical-contingency
-statement: Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
-formal: >-
-  $\forall X^{\sigma t}\,\forall R^{\sigma\sigma t}\, .\,
-  (\operatorname{CBA}(X,R)\land(\operatorname{Fin}(X)\lor X\prec\lambda p^t.\top))
-  \to\exists p^t\, .\,p\ne\top\land (X,R)\cong(\lambda q^t.\,q\le p,\le)$
-definitions: |-
-  CBA says that R partially orders the Xs as a Boolean algebra and every property of Xs has a least upper bound. Fin means Dedekind finiteness, expressed with binary relations representing injections. X ≺ Y means that an injective relation from X to Y exists and none exists from Y to X; this is defined across the two carrier types. Isomorphism is witnessed by a binary relation giving an order-preserving and order-reflecting bijection. All these quantifiers are unboxed. Degenerate one-element Boolean algebras are allowed, represented by p = bottom. Type σ ranges over the map's admitted types, including e.
+statement: At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed
+  subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic
+  to the propositions entailing some proposition.
+formal: $\forall B^{\sigma t}E^{\sigma\sigma t}\, .\,(\operatorname{CBA}(B,E)\land\operatorname{Small}_{\sigma}(B))\to\exists
+  p^t I^{\sigma tt}\,\operatorname{OrderIso}(I,B,E,D_p,\preceq_t)$
+definitions: $q\preceq_t r$ means $\Box(q\to r)$ and $D_p(q)$ means $q\preceq_t p$. Small means $\neg\exists Y^{\sigma
+  t}(Y\subseteq B\land H<Y\land\operatorname{PowerClosed}(Y))$. PowerClosed(Y) means that every $A\subseteq Y$
+  with $A<Y$ has $C\subseteq Y$ with $C<Y$ and Pow(C,A). Pow uses a typed relation with unique codes for coextensive
+  rows and a code for every subcollection of A, including nonrigid subcollections. Comparisons use actual relational
+  injections, and subsethood is pointwise. H is the inexact inductive Ordinal_e at type rho = (e -> e -> t) ->
+  (e -> t) -> t, closed under zero, successor and limits of rigid subcollections. Successor evaluates a property
+  on a restricted initial-segment relation. The full chain of definitions is in the cardinal CH proof and its
+  finite-power smallness lemma.
 date: '2026-10-19'
 sources:
-- Andrew Bacon, Arbitrarily Large Models of Classicism with BoxRigid Comprehension, Intensional Choice and Mathematical Possibilism, handout supplied 19 October 2026, §1 and §9.
+- Andrew Bacon, proposed power-closed-exclusion definition of Mathematical Possibilism and Finite-Power CH Strategy,
+  formalized by OpenAI Codex, prompted by Andrew Bacon, October 2026.
 source_names:
-- Large models handout
-notes: >-
-  Uses the handout's strict smallness convention (finite or strictly fewer propositions), attributed there to the body of Could the truths of mathematics have been different?. It does not use the appendix's non-strict reading, no bigger than the propositions. The two readings are not identified. No Lean verification is claimed.
-
+- Bacon / Codex Finite-Power CH
+notes: The former entry required a Dedekind-finite carrier or a carrier strictly smaller than the propositions,
+  and required the representing proposition to differ from top. The revised schema permits top. The two smallness
+  tests are different. The old definition appears in the cited paper. The correction is due to Andrew Bacon.
 aliases:
-- Mathematical Possibilism (Bacon 2025)
+- Forcing Possibilism (former map name)
 references:
 - paper: bacon-modalized-domains-2026
   role: formulation
@@ -25,15 +32,18 @@ references:
 - paper: bacon-mathematical-contingency
   role: origin
   locator: §6, p. 27; Appendix A.3, Figure 2
-  note: Bacon's Mathematical Possibilism. The map's name records what the principle says, that every small
-    complete Boolean algebra, hence every small forcing, is realised below some proposition.
+  note: Bacon's Mathematical Possibilism. The map's name records what the principle says, that every small complete
+    Boolean algebra, hence every small forcing, is realised below some proposition.
 changes:
 - date: '2026-10-21'
   by: OpenAI Codex, prompted by Andrew Bacon
   summary: Linked the existing strict-smallness formulation to Modalized Domains §6.1; statement unchanged.
 - date: '2026-10-23'
   by: Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell
-  summary: Renamed Forcing Possibilism, with Bacon's Mathematical Possibilism as an alias, and placed in
-    the new category Mathematical contingency. Up to forcing equivalence, forcing notions are the complete
-    Boolean algebras, so the principle says that every small forcing is broadly possible; the statement is
-    unchanged.
+  summary: Renamed Forcing Possibilism, with Bacon's Mathematical Possibilism as an alias, and placed in the new
+    category Mathematical contingency. Up to forcing equivalence, forcing notions are the complete Boolean algebras,
+    so the principle says that every small forcing is broadly possible; the statement is unchanged.
+- date: '2026-11-16'
+  by: OpenAI Codex (GPT-6), prompted by Andrew Bacon
+  summary: Replaced strict propositional smallness with the power-closed test at the inexact ordinal carrier and
+    admitted top as a representing proposition.

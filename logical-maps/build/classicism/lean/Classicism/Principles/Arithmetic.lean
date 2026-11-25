@@ -6,20 +6,11 @@ import Classicism.Background.Arithmetic
 # Principles of the map's category `mathematical-contingency`
 
 Arithmetic Necessitism, at a type `σ`, with the finite cardinalities of the Background
-(`Background/Arithmetic.lean`) as the numbers `ℕ_σ`. The Necessity of Arithmetic is a schema
+(`Background/Arithmetic.lean`) as the numbers `ℕ_σ`; its antecedent's `I*_σ` is `Classicism.IStar`,
+defined there since 24 November 2026, with Potential Infinity, of which it is a form. The Necessity of Arithmetic is a schema
 over arithmetical sentences, in `Certified/Arithmetic.lean`. See `Classicism/Principles.lean`
 for how a principle is stated and where its forms go.
 -/
-
-namespace Classicism
-
-/-- `I*_σ := ∀m n ∈ ℕ_σ. 𝟎_σ ≠ Suc_σ m ∧ (Suc_σ m = Suc_σ n → m = n)`: zero is not a
-successor and successor is injective on numbers. -/
-def IStar (σ : Type) [Ty σ] : Prop :=
-  ∀ m n : (σ → Prop) → Prop, FiniteCardinality m → FiniteCardinality n →
-    ZeroCard σ ≠ SucCard m ∧ (SucCard m = SucCard n → m = n)
-
-end Classicism
 
 namespace Classicism.P
 open Classicism.Paper

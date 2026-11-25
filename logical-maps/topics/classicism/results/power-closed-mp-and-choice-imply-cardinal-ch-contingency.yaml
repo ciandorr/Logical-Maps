@@ -1,0 +1,29 @@
+id: power-closed-mp-and-choice-imply-cardinal-ch-contingency
+premises:
+- forcing-possibilism
+- necessary-rigid-comprehension-r
+- intensional-choice-r
+- necessary-potential-infinity-e
+- relational-choice-r
+conclusion: contingency-of-cardinal-ch
+status: proved
+certificate:
+  source_id: misc
+  produced_by: Andrew Bacon (forcing argument), formalized by OpenAI Codex (GPT-6), prompted by Andrew Bacon
+  recorded_by: OpenAI Codex (GPT-6), prompted by Andrew Bacon
+  checked_by: []
+  date: '2026-11-16'
+  lean: none
+sources:
+- Andrew Bacon, finite-power forcing proof of cardinal CH contingency, checkpoint 151 version 349 (14 November
+  2026), formalized by OpenAI Codex, prompted by Andrew Bacon.
+source_names:
+- Bacon, finite-power CH
+proof: Conjoin the positive and negative possibility conclusions for the same lower-natural carrier and its rigid
+  power. The negative proof uses no Relational Choice.
+changes:
+- date: '2026-11-24'
+  by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+  summary: The infinity premise, stated in the formalization as necessary lower-Peano, is recorded as □Potential
+    Infinity (type e), of which necessary lower-Peano is the at-least form; the two are equivalent in C (Background,
+    the Peano conditions on the at-least numbers), so the result is unchanged.

@@ -1534,3 +1534,15 @@ Possibilism has no `lean_def`.
 remain): 577 proofs verified of 627 generated statements, 62 variant equivalences, 508 model
 verdicts in 51 models, and 61 argument verdicts. Of this entry's records, 19 results and 10
 variants are verified.
+
+*Credit corrected, 25 November.* Two of the lemmas above were Bacon's first. `iStar_of_lowerPeano`,
+that the Peano conditions on the at-least numbers give `I*_σ`, is his `exactPeano_of_lowerPeano`,
+and `lowerNat_eq_atLeast` with `atLeast_inj`, the correspondence between the numbers and the
+at-least numbers, is what his `exactLowerPair_upward` and `exactLowerBijection_of_lowerPeano`
+establish (GPT-6 Astra Pro, prompted by Andrew Bacon, 28 October 2026:
+`Results/Research/ExactLowerPeanoTransfer.lean` and `ExactLowerCorrespondence.lean` of pull request
+#19, which was not merged). They were proved again here without his files to hand. The converse,
+`lowerPeano_of_iStar`, and everything about `PotInf` are new. The Background's lemma
+`at-least-numbers` and the four principles now say so; the docstrings of
+`Background/Arithmetic.lean` will at the library's next full rebuild, a change there rebuilding
+every module.

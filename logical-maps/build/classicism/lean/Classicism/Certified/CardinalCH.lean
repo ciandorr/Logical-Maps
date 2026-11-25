@@ -28,7 +28,9 @@ The three principles are closed pure sentences. Their schemas are declared here 
 `Certified/Schemas.lean`, as Necessity of Arithmetic's is in `Certified/Arithmetic.lean`; the
 generated `Statements.lean` imports this module.
 
-Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 25 November 2026.
+The vocabulary is by OpenAI Codex, prompted by Andrew Bacon (25 and 26 October 2026). Its
+transcription here, the schemas and the three records are by Claude Fable 5.2 (Anthropic),
+prompted by Zachary Goodsell, 25 November 2026.
 -/
 
 namespace Classicism.MathematicalContingency

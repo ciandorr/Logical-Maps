@@ -7,6 +7,25 @@ $$
 \qquad \Diamond_{\ne}p:=\neg\Box_{\ne}\neg p.
 $$
 
+::: lemma {#box-ne-identity-distinctness}
+title: identity and distinctness are $\Box_{\ne}$-necessary
+credit: Cian Dorr, with Claude Opus 5.5 (Anthropic), 25 November 2026
+sources: Classicism, §2.6, p. 42
+---
+At every type $\sigma$, C proves $\forall xy^\sigma\, .\,x=y\to\Box_{\ne}(x=y)$ and
+$\forall xy^\sigma\, .\,x\ne y\to\Box_{\ne}(x\ne y)$.
+
+*Proof.* Identity: $x=y$ gives $\Box(x=y)$ by [[identity-necessary-r]], and
+$\Box\le\Box_{\ne}$ (take $q:=\top$). Distinctness: take $q:=(x\ne y)$, which is
+true. Necessarily, $\Diamond(x\ne y)\to x\ne y$, the contrapositive of the necessity
+of identity; so $\Box(\Diamond q\to x\ne y)$. $\square$
+
+Since $\Box_{\ne}$ is N and K, it follows that C proves $\varphi\to\Box_{\ne}\varphi$
+for every conjunction $\varphi$ of identities and distinctnesses, and
+$\exists\bar x\,\varphi\to\Box_{\ne}\exists\bar x\,\varphi$ for its existential
+closures.
+:::
+
 **Hats, two-hat necessity and 5-necessity.** For an operator $X^{tt}$ put
 
 $$

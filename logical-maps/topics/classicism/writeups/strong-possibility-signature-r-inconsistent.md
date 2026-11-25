@@ -1,24 +1,22 @@
 # Strong Possibility (signature Σ) ⇒ ⊥ (conjecture)
 
-Cian Dorr conjectured this on 22 November 2026, with the mechanism of the
-partial proof: Classicism forces a Russell–Myhill collision, and different
+The question of the consistency of Strong Possibility is raised at the end of *Classicism*.  This conjecture was added on 22 November 2026, as a site for the proof below, which shows that it holds for a broad range of signatures Σ. Essentially: classicism forces a Russell–Myhill collision, and different
 maximalist models can place its witness differently. Claude Fable 5.2
 (Anthropic), prompted by Cian Dorr, found the sentences and the models and
-wrote the proofs below, 21–22 November 2026. Cian Dorr has read the argument
-of the Appendix for a constant of type $(t\to t)\to t$. The general proof
-in the main text has had no second reader. No Lean verification is claimed.
+wrote the proofs below, 21–22 November 2026. Cian Dorr checked the argument on 25 November 2026. No Lean verification exists yet.
 
-**Status.** Proved when $\Sigma$ has a constant with an argument of a type
-other than $e$. Open when every constant of $\Sigma$ is an individual
-constant, a propositional constant or a predicate of individuals; see the
-last section.
+**Status.** Proved when $\Sigma$ has a constant of type 
+$\beta_1\cdots\beta_n t$, with some $\beta_i\ne e$.  Open when $\Sigma$ is a *first-order* signature: one in which every constant is an individual
+constant, a propositional constant, or a predicate of individuals.
+
+The Appendix below proves an easier version of the theorem, which requires a constant of type $\beta_1\cdots\beta_n t$ where some $\beta_i$ itself has an argument of a type other than $e$: for instance $\beta_i=t\to t$, but not $\beta_i=et$.  
 
 ## The theorem
 
 **Theorem.** Suppose $\Sigma$ has a constant $c$ of type
 $\beta_1\cdots\beta_n t$ with some $\beta_i\ne e$. Then there are closed
 sentences $E_1$, $E_2$ of $\mathcal L(\Sigma)$, each an existential closure
-of a conjunction of identities and distinctnesses, such that
+of a conjunction of identity and distinctness claims, such that
 
 1. C($\Sigma$) proves $E_1\lor E_2$;
 2. Maximalism (signature Σ) is consistent with $\neg E_1$, and with
@@ -37,7 +35,9 @@ $[u]$ for the class of $u$. A root proposition is a pair $(b,[v])$ of a
 truth value at the identity and a class of closed sentences. A *root
 operator* is a root entity $F=(E',u)$ of type $t\to t$; $E'$ is a set of
 root propositions, and $Fp$ is the root proposition
-$([p\in E'],[uv])$ for $p=(b,[v])$.
+$([p\in E'],[uv])$ for $p=(b,[v])$. A root proposition is *true* or *false*
+according to its truth value, and a closed sentence is true or false in a
+model according to the root proposition it denotes.
 
 ## A free operator on propositions
 
@@ -48,9 +48,13 @@ z^{\bar\zeta}\,.\,x,\ \bar w'],$$
 
 of type $t\to t$, where $\bar w$, $\bar w'$ have the types of the arguments
 of $c$ before and after the $i$th. The map $x\mapsto\lambda\bar z\,.\,x$ is
-injective on root propositions: $(b,[v])$ goes to the root entity with
+injective on root propositions. It sends $(b,[v])$ to the root entity with
 descriptor $\lambda\bar z\,.\,v$ whose root extension is everything if $b$
-is true and empty if not, the root domains being nonempty. So for **any**
+is true and empty if not. Different truth values give different root
+extensions, the root domains being nonempty. Different classes give
+different descriptors: if $\lambda\bar z\,.\,v\equiv\lambda\bar z\,.\,v'$,
+applying both sides to closed terms of the types $\bar\zeta$ gives $v\equiv
+v'$. So for **any**
 set $R$ of root propositions there is a choice of the root extension of
 $c$, namely the tuples whose $i$th member is the image of a member of $R$,
 for which
@@ -63,11 +67,13 @@ Maximalism (signature Σ). A closed sentence $v$ denotes a root proposition
 with descriptor $v$ in all of them; only its truth value depends on $R$.
 
 To show that two closed sentences are not provably identical it suffices to
-find an $R$ for which they differ in truth value at the identity. Below,
+find an $R$ for which they differ in truth value. Below,
 "descriptors $D$" as a choice of $R$ means: all root propositions, of
 either truth value, whose descriptor is in $D$.
 
 ## Pairing, and the term $Q$
+
+Define
 
 $$\langle x,y\rangle:=r(rx)\land r(\neg ry),\qquad
 Q:=\lambda f^{t\to t}\,.\,\forall p\,.\,r(rp)\to r\langle p,fp\rangle,\qquad
@@ -84,7 +90,9 @@ x,y\rangle\equiv\langle x',y'\rangle$ only if $x\equiv x'$ and $y\equiv y'$.
 only if $v'\equiv v$. (ii) $R$ := everything: $rv$ and $\langle
 x,y\rangle$ are true and $\neg rw$ is false. $R$ := descriptors $\{[v]\}$:
 $rv$ is true, while $\langle x,y\rangle$ would need both $rx\equiv v$ and
-$\neg ry\equiv v$, impossible by the first part. (iii) $R$ := descriptors
+$\neg ry\equiv v$. That is impossible: $rx\equiv\neg ry$ would put a class
+in both $\mathcal P$ and $\mathcal N$, which the first choice of $R$ ruled
+out. (iii) $R$ := descriptors
 $\{[rx]\}\cup\mathcal N$: $\langle x,y\rangle$ is true, and $\langle
 x',y'\rangle$ is true only if $rx'\equiv rx$, so $x'\equiv x$ by (i). $R$ :=
 descriptors $\mathcal P\cup\{[\neg ry]\}$: likewise $\neg ry'\equiv\neg ry$,
@@ -94,21 +102,39 @@ so $y'\equiv y$. $\square$
 $\mathcal P\cup\mathcal N\cup\Pi$ and is not $[\top]$. $[\top]$ is not in
 $\mathcal P\cup\mathcal N\cup\Pi$.
 
-*Proof.* $R$ := nothing: $Qu$ and $\top$ are true, $rv$ and $\langle
-x,y\rangle$ false. $R$ := everything: $Qu$ and $\top$ are true, $\neg rw$
-false. $R$ := descriptors $\mathcal P$: every $r(rp)$ is true and every
-$r\langle p,up\rangle$ false, its argument having a descriptor in $\Pi$; so
-$Qu$ is false. $\square$
+*Proof.* Three choices of $R$.
 
-**Lemma 3.** $\rho\top$ is false at the identity in every model with $R$.
+- $R$ := nothing. $Qu$ and $\top$ are true, $rv$ and $\langle x,y\rangle$
+  false. So $[Qu]$ and $[\top]$ are outside $\mathcal P\cup\Pi$.
+- $R$ := everything. $Qu$ and $\top$ are true, $\neg rw$ false. So they are
+  outside $\mathcal N$.
+- $R$ := descriptors $\mathcal P$. Every $r(rp)$ is true and every
+  $r\langle p,up\rangle$ false, its argument having a descriptor in $\Pi$;
+  so $Qu$ is false, while $\top$ is true. So $[Qu]\ne[\top]$. $\square$
+
+**Lemma 3.** $\rho\top$ is false in every model with $R$.
 $[\rho\top]$ is not in $\mathcal P\cup\mathcal N\cup\Pi$, is not $[\top]$,
 and is not $[Qu]$ for any closed $u$. And $\rho(Q\rho)\equiv\top$.
 
 *Proof.* $\rho\top$ says that some $F$ has $\top=QF$ and $\neg F\top$. No
 root operator $(E',u)$ has $QF=\top$, the descriptors $[Qu]$ and $[\top]$
-being different by Lemma 2. With $R$ := everything, $rv$ and $\langle
-x,y\rangle$ are true; with $R$ := nothing, $\neg rw$ and $Qu$ are true. The
-last claim is the Russell–Myhill argument: if $\neg\rho(Q\rho)$,
+being different by Lemma 2. So $\rho\top$ is false in
+every model with $R$.
+
+For the separations: suppose a closed sentence $s$ is true
+in some model with $R$. If $s\equiv\rho\top$, then C($\Sigma$) proves
+$s=\rho\top$, so $s$ and $\rho\top$ denote the same root proposition in
+that model and have the same truth value there; but $\rho\top$ is false
+there. So $s\not\equiv\rho\top$. It is therefore enough to show that every
+member of each class to be excluded is true in some model with $R$:
+
+- $R$ := everything. Every $rv$ and every $\langle x,y\rangle$ is true. So
+  $[\rho\top]$ is outside $\mathcal P\cup\Pi$.
+- $R$ := nothing. Every $\neg rw$ and every $Qu$ is true (Lemma 2). So
+  $[\rho\top]$ is outside $\mathcal N$ and is no $[Qu]$.
+- $\top$ is true in every model. So $[\rho\top]\ne[\top]$.
+
+The last claim is the Russell–Myhill argument: if $\neg\rho(Q\rho)$,
 instantiating $F:=\rho$ gives $\rho(Q\rho)$; so C proves $\rho(Q\rho)$.
 $\square$
 
@@ -133,19 +159,21 @@ $$E_2:=\exists F\,.\,QF=Q\rho\land F(Q\rho)\ne\rho(Q\rho)\land F\top\ne\rho\top.
 $F$ with $Q\rho=QF$ and $\neg F(Q\rho)$. So $F(Q\rho)$ and $\rho(Q\rho)$
 differ in truth value and are distinct. And $F\top=\rho\top$ or not.
 
-**C proves $E_i\to\Box_{\ne}E_i$.** Recall
-$\Box_{\ne}p:=\exists q\,.\,q\land\Box(\Diamond q\to p)$. Given a witness
-$F$ for $E_i$, let $q$ be the conjunction of its distinctnesses. It is
-true. At any world where $q$ is possible each distinctness holds, identity
-being necessary; and the identities of $E_i$ hold there, being true at the
-starting world. So $E_i$ holds there, with the same witness.
+**C proves $E_i\to\Box_{\ne}E_i$.** Each $E_i$ is an existential closure
+of a conjunction of identity and distinctness claims, and C proves that
+identity and distinctness are $\Box_{\ne}$-necessary (Background,
+*Varieties of necessity*).
+
+So it remains to show $\neg E_1$ and $\neg E_2$ are both consistent with Maximalism (signature Σ).  We will do this by finding models.  Both will be models with $R$ for appropriate choices of $R$.  
 
 ## The two models
 
-Call a class *free* if it is outside $\mathcal P\cup\mathcal N\cup\Pi$. By
-Lemmas 2 and 3, $[\top]$, $[Q\rho]$ and $[\rho\top]$ are three different
-free classes. For a set $\mathcal V$ of classes and a set $R_0$ of root
-propositions with free descriptors, let $R(\mathcal V,R_0)$ consist of
+By Lemmas 2 and 3, $[\top]$, $[Q\rho]$ and $[\rho\top]$ are three
+different classes outside $\mathcal P\cup\mathcal N\cup\Pi$.
+
+For a set $\mathcal V$ of classes and a set $R_0$ of root propositions
+whose descriptors are not in $\mathcal P\cup\mathcal N\cup\Pi$, let
+$R(\mathcal V,R_0)$ consist of
 
 - $(\text{true},d)$ for every $d\in\mathcal P\cup\mathcal N\cup\Pi$;
 - $(\text{false},[\langle x,y\rangle])$ whenever $[x]\notin\mathcal V$;
@@ -153,10 +181,21 @@ propositions with free descriptors, let $R(\mathcal V,R_0)$ consist of
 
 This is well defined by Lemma 1.
 
+**Observation.** A root proposition with descriptor in $\mathcal
+P\cup\mathcal N$ is in $R(\mathcal V,R_0)$ iff its value is true. One with
+descriptor $[\langle x,y\rangle]\in\Pi$ is in it iff its value is true or
+$[x]\notin\mathcal V$. A root
+proposition whose descriptor is not in $\mathcal P\cup\mathcal N\cup\Pi$
+is in $R(\mathcal V,R_0)$ iff it is in $R_0$. The first two clauses only
+add root propositions with descriptors in $\mathcal P\cup\mathcal
+N\cup\Pi$, and $R_0$ only adds ones with descriptors outside it. So, for instance,
+$(\text{false},[\top])$, $(\text{false},[\rho\top])$ and
+$(\text{true},[Q\rho])$ are in $R$ only if they are in $R_0$.
+
 **Lemma 5.** In the model with $R=R(\mathcal V,R_0)$, for every root
 operator $F$:
 
-$$QF\text{ is true at the identity}\iff Fp\notin R\text{ for every }p\in
+$$QF\text{ is true}\iff Fp\notin R\text{ for every }p\in
 R\text{ whose descriptor is in }\mathcal V.$$
 
 *Proof.* Let $p=(b,[v])$ and $F=(E',u)$. By (1), $rp=([p\in R],[rv])$,
@@ -178,14 +217,16 @@ it is $QF$ for some root operator $F=(E',u)$ whose $E'$ omits it; its
 descriptor is then $[Qu]$. So $c_\top\notin P$, and $\rho\top$ denotes
 $(\text{false},[\rho\top])$.
 
-Call a root operator $(E',u)$ *$\rho$-like* if $Qu\equiv Q\rho$. By Lemmas
-3 and 4, a $\rho$-like $F$ has $F c_\top=([c_\top\in E'],[\rho\top])$ and
-$Fp=([p\in E'],[\top])$ for any $p$ with descriptor $Q\rho$. And $QF=Q\rho$
+Call a root operator $F = (E',u)$ *$\rho$-like* if $Qu\equiv Q\rho$. A $\rho$-like $F$ has
+$F c_\top=([c_\top\in E'],[\rho\top])$, by Lemma 4 with $v:=\top$. It has
+$Fp=([p\in E'],[\top])$ for any $p$ with descriptor $Q\rho$, by Lemma 4 with
+$v:=Q\rho$, which gives $u(Q\rho)\equiv\rho(Q\rho)$, together with
+$\rho(Q\rho)\equiv\top$ from Lemma 3. And $QF=Q\rho$
 iff $F$ is $\rho$-like and $QF$, $Q\rho$ have the same truth value.
 
 **Model A.** The only member of $R$ with descriptor in $\mathcal V$ is
 $c_\top$. For $\rho$-like $F$, $Fc_\top\in R$ iff $c_\top\in E'$, since $e$
-is in $R$ and $(\text{false},[\rho\top])$ is not. So by Lemma 5
+is in $R$ and, by the Observation, $(\text{false},[\rho\top])$ is not. So by Lemma 5
 
 $$QF\text{ is true}\iff c_\top\notin E'\qquad(F\ \rho\text{-like}).$$
 
@@ -200,7 +241,7 @@ So no $F$ witnesses $E_2$: **$E_2$ fails and $E_1$ holds.**
 **Model B.** The members of $R$ with descriptor in $\mathcal V$ are
 $c_\top$ and $a$. For $\rho$-like $F$, $Fc_\top\in R$ iff $c_\top\in E'$ as
 before, and $Fa=([a\in E'],[\top])$ is in $R$ iff $a\in E'$, since $c_\top$
-is in $R$ and $(\text{false},[\top])$ is not. So
+is in $R$ and, by the Observation, $(\text{false},[\top])$ is not. So
 
 $$QF\text{ is true}\iff c_\top\notin E'\text{ and }a\notin E'\qquad(F\
 \rho\text{-like}).$$
@@ -222,11 +263,18 @@ This proves the Theorem.
 ## Remarks
 
 - In a model of Maximalism (signature Σ) where $E_i$ holds with witness
-  $F$, the conjunction of the distinctnesses of $E_i$ is a true proposition
-  that no closed sentence denotes: it necessitates $E_i$ in the sense
-  above, and if it were named, Maximalism would prove $E_i$. So for these
-  signatures every model of Maximalism has a proposition, and an entity of
-  type $t\to t$, that no closed term denotes.
+  $F$, the conjunction $q$ of the distinctness conjuncts of $E_i$ is a true
+  proposition that no closed sentence denotes. Suppose a closed sentence $s$
+  denoted it. Then $\Box(\Diamond s\to E_i)$ holds in the model. If
+  $\Diamond s\land\neg E_i$ were consistent with C($\Sigma$), Maximalism
+  would make it possible there, and at a world where it holds, $\Diamond s$
+  would give $E_i$. So C($\Sigma$) proves $\Diamond s\to E_i$. But $s$ is
+  consistent, being true in this model, so Maximalism proves $\Diamond s$,
+  and hence $E_i$. That contradicts the model of Maximalism in which $E_i$
+  fails. If a closed term $u$ denoted $F$, the distinctness conjuncts of $E_i$ at
+  $u$ would name $q$. So for these signatures every model of Maximalism has
+  a proposition, and an entity of type $t\to t$, that no closed term
+  denotes.
 - No model of C($\Sigma$) embeds, by an injective homomorphism for all term
   operations, into elementary extensions of both Model A and Model B: such
   an embedding preserves $E_1$ and $E_2$, and one of them holds in the
@@ -278,8 +326,7 @@ entity $F=(E',u)$ of type $t\to t$; $E'$ is a set of root propositions.
 **(a) $h$ is onto the root propositions.** For a root proposition $(b,v)$
 take the root entity $x:=(E,\lambda\bar z\,.\,v)$ with $E$ everything if
 $b$ is true and empty if not. Then $h\,x$ has descriptor
-$\exists\bar z\,.\,v$, provably identical to $v$, and is true at the
-identity iff $E$ is nonempty.
+$\exists\bar z\,.\,v$, provably identical to $v$, and is true iff $E$ is nonempty.
 
 **(b) $G$ is injective on root operators.** $GF$ is the root entity with
 descriptor $Gu$ and root extension $\{\bar x:h\,x_j\in E'\}$. If
@@ -290,10 +337,10 @@ $Gu=Gu'$, applying both to a tuple with $x_j:=\lambda\bar z\,.\,p$ gives
 $up=u'p$ for a variable $p$, and then $u=u'$.
 
 **(c)** For a root operator $F=(E',u)$, the root proposition $QF$ has
-descriptor $Qu$ and is true at the identity iff $GF\in\mathfrak E$, the
+descriptor $Qu$ and is true iff $GF\in\mathfrak E$, the
 root domains being nonempty. By (b), for **any** set $\mathcal S$ of root
 operators there is a choice of $\mathfrak E$, namely
-$\{GF:F\in\mathcal S\}$, for which $QF$ is true at the identity exactly for
+$\{GF:F\in\mathcal S\}$, for which $QF$ is true exactly for
 $F\in\mathcal S$.
 
 **(d) $Q$ is injective on closed terms.** If C($\Sigma$) does not prove
@@ -316,7 +363,7 @@ operators
 $$\{(E',u):u\text{ is not provably identical to }\rho,\ c_\top\in E'\}\ \cup\
 \{(E',\rho):E'\ne P,\ E'\ne S\},$$
 
-and choose $\mathfrak E$ by (c) so that $QF$ is true at the identity
+and choose $\mathfrak E$ by (c) so that $QF$ is true
 exactly for $F\in\mathcal S_S$.
 
 - **Model A:** $S_A:=P\setminus\{a\}$.
@@ -326,7 +373,7 @@ Both satisfy Maximalism (signature Σ), as every member of the family does.
 
 **The root extension of $\rho$ is $P$, in both.** A root proposition $x$ is
 in it iff some root operator $F=(E',u)$ has $x=QF$ and $x\notin E'$. $QF$
-is the proposition with descriptor $Qu$ that is true at the identity iff
+is the proposition with descriptor $Qu$ that is true iff
 $F\in\mathcal S_S$. So $x$ has a descriptor $Qu$, and by (d) $u$ is
 determined up to provable identity. Conversely let
 $x=(b,Qu)$.
@@ -343,15 +390,15 @@ Nothing here is circular: $P$, $a$, $c_\top$ and $S$ were fixed before
 $\mathfrak E$.
 
 **The twins.** So $\rho$ denotes $(P,\rho)$, which is not in
-$\mathcal S_S$; hence $Q\rho$ is false at the identity and denotes $a$. A
+$\mathcal S_S$; hence $Q\rho$ is false and denotes $a$. A
 root operator $F=(E',u)$ has $QF=Q\rho$ iff $Qu$ is provably $Q\rho$ and
 $F\notin\mathcal S_S$, that is, by (d), iff $u$ is provably $\rho$ and
 $E'\in\{P,S\}$. The only such $F$ other than $\rho$ is $F^*:=(S,\rho)$.
 
 **The verdicts.** $F^*$ differs from $\rho$ at $Q\rho$: $a\in P$ and
 $a\notin S$. $\rho\top$ is the proposition with descriptor $\rho\top$ that
-is false at the identity, since $c_\top\notin P$. $F^*\top$ has the same
-descriptor and is true at the identity iff $c_\top\in S$.
+is false, since $c_\top\notin P$. $F^*\top$ has the same
+descriptor and is true iff $c_\top\in S$.
 
 - Model A: $c_\top\notin S_A$, so $F^*\top=\rho\top$. $E_1$ holds and $E_2$
   fails.

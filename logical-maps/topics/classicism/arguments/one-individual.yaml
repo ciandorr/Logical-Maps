@@ -1,23 +1,16 @@
 id: one-individual
 requires: [one-individual]
 choice: free
-fails: [axiom-of-infinity-e, infinity-e, possible-infinity-e, potential-infinity-e]
+fails: [axiom-of-infinity-e, infinity-e, possible-infinity-e]
 by: Claude Opus 5.5 (Anthropic), at Cian Dorr's direction
 date: '2026-10-02'
 text: >-
   No two individuals are distinct, and the numeral $\operatorname{Suc}_e\mathbf{0}_e$ holds of the
-  universal property at type $e$ at every world. And the numeral
-  $\operatorname{Suc}_e\operatorname{Suc}_e\mathbf{0}_e$, a finite cardinality, holds of no property at any
-  world, a property it holds of having two distinct instances; so Potential Infinity (type $e$) fails.
+  universal property at type $e$ at every world.
 revisions:
 - date: '2026-10-02'
   by: Claude Opus 5.5 (Anthropic), at Cian Dorr's direction
   note: Moved from the group finite-support-one-object to the topic.
-- date: '2026-11-24'
-  by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
-  note: >-
-    The failure of Potential Infinity (type e) added, with its sentence of the text. It is the strongest
-    of the four verdicts: the Axiom of Infinity and Possible Infinity each imply Potential Infinity.
 # Proved in Lean (Classicism/MapArguments.lean), for every intensional action model meeting the conditions.
 lean:
 - fails: infinity-e

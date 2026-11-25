@@ -5,7 +5,7 @@
 ## Package
 
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
-- **Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
+- **Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
 - **□Functional Choice.** Necessarily, every serial binary relation admits a selecting operation. Its output type is relational, as required by the type system.
 - **□Intensional Choice.** Necessarily, if a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
 - **□BF.** Necessarily, the Barcan Formula holds at every type. The predicate formulation closes the formula schema using lambda abstraction.
@@ -42,11 +42,11 @@ In each factor there are infinitely many propositions, and the finite cardinalit
 
 *Write-up: [ultraproduct-finite-full-s5](ultraproduct-finite-full-s5.html). By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026, 2026-10-25.*
 
-### Holds Forcing Possibilism.
+### Holds Mathematical Possibilism.
 
-In each factor the propositions are the $2^{\aleph_0}$ subsets of $\mathbb N$, and every relation on each domain is present. An infinite complete Boolean algebra has a countably infinite antichain, so at least $2^{\aleph_0}$ elements; so a complete Boolean algebra represented in a factor that is Dedekind-finite or strictly smaller than the propositions is finite, with $k$ atoms say, and is isomorphic to the propositions below any proposition true at exactly $k$ worlds, which is not $\top$. So each instance holds in every factor, hence in $M$.
+In the factor with n fixed individuals the n+2 length thresholds (including the impossible threshold) form a closed family of inexact ordinal intensions. At each world the same rigid thresholds occur, successor advances the threshold with saturation, and a limit over a rigid family takes their maximum (zero for the empty family). Full S5 transports the members of a rigid family bijectively. The ordinal benchmark is finite. Each infinite carrier contains a countable power-closed subset larger than this benchmark. Each small Boolean algebra is therefore finite, represented by the interval on as many worlds as it has atoms. At each fixed type the entire revised instance is a sentence in the many-sorted presentation, and Łoś transfers it from all factors. This argument does not compute cardinalities externally in the ultraproduct.
 
-*Write-up: [ultraproduct-finite-full-s5](ultraproduct-finite-full-s5.html). By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026, 2026-10-25.*
+*Address: `ultraproduct-countable-full-s5-finite-individuals#mathematical-possibilism`. By OpenAI Codex (GPT-6), prompted by Andrew Bacon, 2026-11-16.*
 
 ### Holds □Functional Choice, □Intensional Choice, □BF, □ND, □Atomicity, □Actuality, □Rigid Comprehension, □Strong Atomicity, □Well-Ordering, No Pure Contingency.
 

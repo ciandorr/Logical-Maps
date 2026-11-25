@@ -10,12 +10,15 @@
 - **Necessity of Second-Order Analysis.** Every second-order analytical sentence is either true in every real number structure in every possible world or false in every real number structure in every possible world. One sentence for each type $\sigma$ and each second-order analytical sentence.
 - **Axiom of Infinity (type t).** There are not finitely many propositions. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **Arithmetic Necessitism.** Given that necessarily zero is not a successor and successor is injective on numbers, the numbers at $\sigma$ form a rigid property with necessarily distinct instances. One sentence for each type $\sigma$.
+- **Possible failure of Cardinal CH.** Cardinal CH possibly fails.
 - **□Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
 - **¬ Atomlessness.** Atomlessness in the displayed closed propositional formulation.
-- **¬ Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
+- **¬ Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
+- **¬ Possible Cardinal CH.** Cardinal CH possibly holds.
 - **¬ Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **¬ Infinity Schema (type e).** There are arbitrarily many pairwise distinct entities of this fixed type; one sentence for each positive integer n.
 - **¬ Possible Infinity (type e).** Possibly there are not finitely many individuals: the Axiom of Infinity at this type, under a diamond.
+- **¬ Potential Infinity (type e).** For every natural number, there could be at least that many individuals: each number counted at type $e$ possibly holds of some property of individuals.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
 - **¬ Separated Structure.** For each typed nonlogical constant c and closed same-typed terms F,G not containing c, equality after application to c implies equality of F and G.
 - **¬ Independence (signature Σ).** No constant of Sigma is a pure operation applied to other constants: for a closed pure term A and distinct constants c, d_1,…,d_n with n ≥ 0, c differs from A applied to the d’s. With n = 0, no constant denotes a pure entity.
@@ -57,9 +60,9 @@ The numerals at $t$ form a property pinned down by $\varnothing$, so finite card
 
 *Address: `symmetric-qualitative-contrast-at-w1-individuals-singleton#infinity-t`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
 
-### Fails Atomlessness, Forcing Possibilism.
+### Fails Atomlessness, Mathematical Possibilism.
 
-Any two arrows into $W_0$ differ by a member of $G_{W_0}$, so a proposition contains all of them or none; the proposition $q_0$ of the arrows into $W_0$, pinned down by $\varnothing$, is an atom. A nonzero set of arrows into $W_1$, pinned down by a finite $N$, is split by the value of the arrow at a point outside $N$; so the propositions below a proposition other than $\top$ number $1$, $2$ or infinitely many. But $\bot$, $q_0$, $\neg q_0$ and $\top$ form a complete four-element Boolean algebra, so Forcing Possibilism fails.
+Any two arrows into $W_0$ differ by a member of $G_{W_0}$, so a proposition contains all of them or none; the proposition $q_0$ of the arrows into $W_0$, pinned down by $\varnothing$, is an atom. A nonzero set of arrows into $W_1$, pinned down by a finite $N$, is split by the value of the arrow at a point outside $N$; so the propositions below a proposition number $1$, $2$ or infinitely many. But $\bot$, $q_0$, $\neg q_0$ and $\top$ form a complete four-element Boolean algebra, so Forcing Possibilism fails.
 
 *Address: `symmetric-qualitative-contrast-at-w1-individuals-singleton#atom-at-w0`. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, in a trawl for cheaply settled verdicts; checked by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
 
@@ -69,19 +72,27 @@ As the argument arithmetic-necessitism-extensionally-full, with the property of 
 
 *General argument `arguments/arithmetic-necessitism-finitely-pinned`. It requires that Write an entity of relational type at the evaluation object as its intension $k\mapsto Y_k$ over the arrows $k$ out of it, so that $Y\bar a$ holds at $k$ iff $k\cdot\bar a\in Y_k$; $Y$ is pinned down by a finite set $N$ of the points the arrows act on when $Y_k=Y_{k^{\prime}}$ for any arrows $k,k^{\prime}$ agreeing on $N$. Every entity in a domain is pinned down by a finite set, in the sense that $k\cdot x=k^{\prime}\cdot x$ for arrows agreeing on it, and the domain of each relational type at the evaluation object holds every intension pinned down by a finite set (in a symmetric model, every symmetric one). Here: Each object carries the ideal of finite sets, and the domains hold the finitely pinned symmetric entities of every type. By Claude Fable 5.1 (Anthropic), prompted by Zachary Goodsell, 2026-10-23.*
 
+### Holds Possible failure of Cardinal CH. Fails Possible Cardinal CH.
+
+Cardinal CH fails at every world, so it is not possible, and its failure, being actual, is possible. With one individual at every world, $N=\operatorname{LowerNat}_e$ has exactly three instances at every world. At-least zero, $z=\lambda A\, .\,\top$, and its successor, which holds of the properties with an instance, differ at the empty property. The successor of that holds of the properties with two distinct instances, so of none at any world; it is $\lambda A\, .\,\bot$ by Intensionality, so is its own successor, and differs from the other two, which hold of the universal property. Being one of the three is a property of cardinalities that $z$ has and that passes to successors, so $N$ has no other instance. The rest is the argument cardinal-ch-boundedly-many-individuals with $m=3$: the rigid subproperties of $N$ are the eight disjunctions of haecceities of its instances, and a property holding of four of them neither injects into the three instances of $N$ nor is in bijection with the eight. No choice is used.
+
+*General argument `arguments/cardinal-ch-one-individual`. It requires that There is exactly one individual, at every world. Here: There is a single individual at every object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-25.*
+
 ### Holds □Axiom of Infinity (type t).
 
 As for individuals (necessary-axiom-of-infinity-individuals), at type $t$. At the identity arrow of each reachable object $v$, with $\Phi$ of type $(tt)t$ holding there of exactly the properties of propositions with finite extension, $\lambda Y^{(tt)t}\, .\,\forall X^{tt}\, .\,YX\to\Phi X$ is in the domain, holds of $\mathbf 0_t$, and passes to successors, identity at $t$ being literal at $1_v$; so every finite cardinality holds only of properties with finite extension, and none holds of the universal property of propositions, whose extension is the infinite set of propositions at $v$. So the Axiom of Infinity at type $t$ holds at every reachable object, and its necessitation at the evaluation point.
 
 *General argument `arguments/necessary-axiom-of-infinity-propositions`. It requires that At every object $v$ reachable from the evaluation point, and for $\sigma=e$ and $\sigma=t$: identity at type $\sigma$ is literal at the identity arrow of $v$, and some entity of type $(\sigma t)t$ in the domain at $v$ holds, at the identity arrow of $v$, of exactly those entities of type $\sigma t$ in the domain there whose extension at that arrow is finite. Extensional fullness at every object gives this, and so does codomain-intensions, the intension with value $S_U$ at every arrow into $U$ being in the domain for any sets $S_U$. Here: Each object's domains hold every symmetric intension pinned down by a set in its ideal (the finite sets, at both objects). The intension holding at each arrow, into $U$, of exactly the entities of type $\sigma t$ at $U$ with finite extension at $1_U$ depends only on the codomain and is preserved by the symmetries, so it is symmetric and pinned down by $\emptyset$; haecceities are symmetric and pinned down by the sets pinning their entities, so identity is literal. It requires that There are infinitely many propositions at every object reachable from the evaluation point. Here: Both objects are reachable from each. At either object the sets $\{h:\operatorname{cod}h=W_1,\ h(0)=n\}$, one for each $n$, are pinned down by $\{0\}$ and symmetric, $W_1$'s symmetry group being trivial; they are pairwise distinct. By Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-31.*
 
-### Fails Axiom of Infinity (type e), Infinity Schema (type e), Possible Infinity (type e).
+### Fails Axiom of Infinity (type e), Infinity Schema (type e), Possible Infinity (type e), Potential Infinity (type e).
 
-No two individuals are distinct, and the numeral $\operatorname{Suc}_e\mathbf{0}_e$ holds of the universal property at type $e$ at every world.
+No two individuals are distinct, and the numeral $\operatorname{Suc}_e\mathbf{0}_e$ holds of the universal property at type $e$ at every world. And the numeral $\operatorname{Suc}_e\operatorname{Suc}_e\mathbf{0}_e$, a finite cardinality, holds of no property at any world, a property it holds of having two distinct instances; so Potential Infinity (type $e$) fails.
 
 *General argument `arguments/one-individual`. It requires that There is exactly one individual, at every world. Here: There is a single individual at every object. By Claude Opus 5.5 (Anthropic), at Cian Dorr's direction, 2026-10-02.*
 
 *Revised 2026-10-02 by Claude Opus 5.5 (Anthropic), at Cian Dorr's direction:* Moved from the group finite-support-one-object to the topic.
+
+*Revised 2026-11-24 by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell:* The failure of Potential Infinity (type e) added, with its sentence of the text. It is the strongest of the four verdicts: the Axiom of Infinity and Possible Infinity each imply Potential Infinity.
 
 ### Fails Witnessed Possibility, Separated Structure, Independence (signature Σ), Maximalism (signature Σ).
 

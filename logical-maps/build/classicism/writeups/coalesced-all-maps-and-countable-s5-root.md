@@ -4,7 +4,6 @@
 
 ## Package
 
-- **Forcing Possibilism.** Every complete Boolean algebra that is finite or has strictly fewer elements than there are propositions is isomorphic to the entailment algebra below some proposition other than top.
 - **Axiom of Infinity (type e).** There are not finitely many individuals. No finite cardinality holds of the universal property, so the domain of the type cannot be exhausted by finitely many steps from the empty property.
 - **□Atomicity.** Necessarily, every non-bottom entity of each relational type has an atom below it.
 - **□Rigid Comprehension.** Necessarily, every relation, including a proposition, is coextensive with a rigid one.
@@ -13,6 +12,7 @@
 - **Relational Choice.** Every serial binary relation has a functional subrelation.
 - **Actuality.** There is a true proposition that entails every true proposition.
 - **Truths are ND-necessary.** Every truth is ND-necessary, that is, necessary under the distinctness-preserving modality.
+- **¬ Mathematical Possibilism.** At each admitted carrier type, every complete Boolean algebra whose carrier contains no power-closed subcollection strictly larger than the inexact ordinal benchmark over individuals is relationally order-isomorphic to the propositions entailing some proposition.
 - **¬ Intensional Choice.** If a property is necessarily instantiated, then some property entailing it is necessarily uniquely instantiated.
 - **¬ □Truths are 5-necessary.** Necessarily, every truth is 5-necessary: necessary under every S5 operator. In C this is the identity $\Box_5=\lambda p\, .\,p$.
 - **¬ Self-Atomicity (type t).** Every possible proposition is entailed by a self-atom: a possible proposition that necessarily, if true, is an atom, that is, one that entails that it is the actual world.
@@ -20,6 +20,8 @@
 - **¬ Analytic Necessitism.** If there could be a real number structure, there is a rigid one that is necessarily a real number structure: a rigid property with necessarily distinct instances, with rigid order, addition, multiplication and natural numbers, which necessarily form a complete ordered field. One sentence for each type $\sigma$.
 - **¬ Self-atoms are atoms (type t).** Every self-atom is an atom.
 - **¬ Self-atoms are strong atoms (type t).** Every self-atom is a strong atom.
+- **¬ □Potential Infinity (type e).** Necessarily, for every natural number there could be at least that many individuals.
+- **¬ □Potential Infinity (type t).** Necessarily, for every natural number there could be at least that many propositions.
 - **¬ □Axiom of Infinity (type e).** Necessarily, there are not finitely many individuals.
 - **¬ □Axiom of Infinity (type t).** Necessarily, there are not finitely many propositions.
 - **¬ Witnessed Possibility.** For pure-formulas P with free variables among a finite tuple x, and distinct matching nonlogical constants c, a witness to P entails that P at those constants is possible.
@@ -39,11 +41,11 @@ Root domains are as full as compatibility allows: a root proposition is a choice
 
 ## Arguments
 
-### Holds Forcing Possibilism.
+### Fails Mathematical Possibilism.
 
-At every type. Every set of tuples of root entities is the root component of a root relation, so internal completeness, injections and isomorphisms at the root agree with the external ones. A root proposition is a truth value with a proposition of $A$ (of which there are $32$) and one of $B$ (a set of worlds), so there are continuum many, and among them infinitely many atoms, those false at the root, bottom in $A$, and a singleton in $B$. An infinite complete Boolean algebra has at least continuum many elements (it has infinitely many pairwise disjoint nonzero elements, whose subfamilies have distinct joins), so a complete Boolean algebra that is Dedekind finite, or has fewer elements than there are root propositions, is finite. A finite one with $k$ atoms is isomorphic to the propositions below the join of $k$ of those atoms, which is not $\top$.
+The root has infinitely many individuals. Its proposition algebra is the product of a two-element algebra, the finite proposition algebra of the all-maps component and the powerset of the countable S5 worlds. All three factors are atomic, as is every nontrivial principal interval. Current extensions at the root are full, so countably many of the thresholds inject into H. Code the atomless Cantor regular-open algebra at a higher type by subsets of these thresholds. Its carrier is small by the countable-subset power argument in the revised full-action verdict. It cannot be an entailment interval.
 
-*Address: `coalesced-all-maps-and-countable-s5-root#forcing-possibilism`. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
+*Address: `coalesced-all-maps-and-countable-s5-root#mathematical-possibilism`. By OpenAI Codex (GPT-6), prompted by Andrew Bacon, 2026-11-16.*
 
 ### Fails Intensional Choice.
 
@@ -53,7 +55,7 @@ Intensional Choice fails at the root of $A$ (symmetry-constrained-full-all-maps,
 
 ### Holds Axiom of Infinity (type e).
 
-There are infinitely many individuals at the root, and identity there is literal. Every set of root entities is the root component of a root property, so the finite cardinalities at the root are the standard ones, and none of them holds of the universal property of individuals. (The Axiom of Infinity at type $t$ follows from Forcing Possibilism.)
+There are infinitely many individuals at the root, and identity there is literal. Every set of root entities is the root component of a root property, so the finite cardinalities at the root are the standard ones, and none of them holds of the universal property of individuals. (The Axiom of There are infinitely many distinct finite cardinalities at type $t$ by full root extensions.)
 
 *Address: `coalesced-all-maps-and-countable-s5-root#infinity`. By GPT-6 Astra (OpenAI), prompted by Daniel Kodsi, 23 October 2026; checked and recorded by Claude Opus 5.5 (Anthropic), prompted by Cian Dorr, 2026-10-28.*
 
@@ -109,6 +111,18 @@ Let $N$ and $M$ be two components whose roots satisfy Actuality, with true atoms
 
 *From the group *Coalesced sums at a new root*, shared argument `coalesced-sums#self-atom-of-two-actual-components`. It requires that At least two components are action models whose roots satisfy Actuality, and the root domain contains every family of component propositions with a truth value at the root (the fullest root domains). Here: $A$ and $B$ are action models whose roots satisfy Actuality, and the root domains are the fullest. By Claude Fable 5.1 (Anthropic), prompted by Cian Dorr, 25 October 2026.*
 
+### Fails □Potential Infinity (type e).
+
+Let $v$ and $n$ be as the condition says. By the argument boundedly-many-individuals, with $v$ in place of the evaluation object, Potential Infinity (type $e$) fails at the identity arrow of $v$: the numeral $\operatorname{Suc}^{n+1}_e\mathbf 0_e$ is a finite cardinality there and holds of no property at the identity arrow of any object reachable from $v$. A closed sentence holds at an arrow out of the evaluation object exactly when it holds at the identity arrow of the arrow's target (at the world seen, in a Kripke-style model), so the arrow into $v$ is a world at which Potential Infinity fails, and its necessitation fails at the evaluation point. No choice is used.
+
+*General argument `arguments/boundedly-many-individuals-somewhere`. It requires that There are an object $v$ reachable from the evaluation point and a natural number $n$ such that every object reachable from $v$ has at most $n$ individuals. Here: The root of $A$, reached by the distinguished arrow, has three individuals, and $A$ has no other object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
+
+### Fails □Potential Infinity (type t).
+
+As for individuals (the argument boundedly-many-individuals-somewhere), at type $t$. With $v$ and $n$ as the condition says, the numeral $\operatorname{Suc}^{n+1}_t\mathbf 0_t$ is a finite cardinality at $v$ and holds of no property of propositions at the identity arrow of any object reachable from $v$, so Potential Infinity (type $t$) fails at the identity arrow of $v$, and at the arrow into $v$; its necessitation fails at the evaluation point. No choice is used.
+
+*General argument `arguments/boundedly-many-propositions-somewhere`. It requires that There are an object $v$ reachable from the evaluation point and a natural number $n$ such that every object reachable from $v$ has at most $n$ propositions. Here: The root of $A$, reached by the distinguished arrow, has $32$ propositions, and $A$ has no other object. By Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, 2026-11-24.*
+
 ### Fails □Axiom of Infinity (type e).
 
 At the identity arrow of a reachable object $v$ with $n$ individuals there are not $n+1$ individuals any two of which are distinct, distinctness implying literal distinctness, identity being reflexive. So the Infinity schema at type $e$ fails there, and with it the Axiom of Infinity at type $e$, which implies it in C (axiom-of-infinity-e-implies-infinity-e). A closed sentence holds at an arrow out of the evaluation object exactly when it holds at the identity arrow of the arrow's target (at the world seen, in a Kripke-style model), so the arrow into $v$ is a world at which the Axiom fails, and its necessitation fails at the evaluation point.
@@ -140,7 +154,7 @@ Let $c\in\Sigma$ have relational type $\tau$, so $c=\top_\tau$ necessarily. Witn
 
 ## Notes
 
-Recorded for the separation of Forcing Possibilism, even with both Axioms of Infinity, from Intensional Choice; every other recorded model of Forcing Possibilism satisfies Intensional Choice. Forcing Possibilism is not claimed to be necessary here: it fails at the root of $A$, whose 32 propositions have only five atoms. Relational Choice and Actuality hold at the root by the group's arguments.
+The original separation used strict propositional smallness. The revised smallness condition admits the Cantor regular-open algebra in this model.
 
 ## Sources
 

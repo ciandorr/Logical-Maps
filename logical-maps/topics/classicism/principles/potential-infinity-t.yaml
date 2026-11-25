@@ -10,12 +10,15 @@ definitions: >-
   $nX$ says that $X$ has exactly $n$ instances. See Background, Cardinality, arithmetic and analysis.
 date: '2026-11-24'
 sources:
-- Zachary Goodsell, suggestion of 24 November 2026 (the principle, its name, and its identification with
-  $I^*$ and with Bacon's lower-Peano conditions).
+- Zachary Goodsell, suggestion of 24 November 2026 (the statement as Potential Infinity, its name, and that
+  it coincides with $I^*$ and with Bacon's lower-Peano conditions).
 - Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §4, Definitions 3–5 and 8, pp. 11–13, 19.
+- Andrew Bacon, exact/at-least cardinality comparison formalized with OpenAI GPT-6, 28 October 2026, in the
+  CH checkpoint and Logical-Maps Lean projects.
 source_names:
 - Goodsell 24 Nov
 - Arithmetic is Necessary
+- Bacon / Codex CH project
 references:
 - paper: goodsell-arithmetic-necessary
   role: formulation
@@ -62,7 +65,8 @@ variants:
     property of cardinalities containing it and closed under $\operatorname{Suc}_t$ (Background, the at-least
     numbers).
   equivalence: 'Background, [[at-least-numbers]], at $\sigma=t$: the Peano form and this one are equivalent
-    in C.'
+    in C. That this form implies the Peano form is Bacon''s, proved with GPT-6 Astra Pro at every
+    type (28 October 2026; pull request #19 of this repository). The converse is new.'
 notes: >-
   Weaker than the Axiom of Infinity at this type ([[axiom-of-infinity-t-implies-potential-infinity-t]]) and
   than Possible Infinity ([[possible-infinity-t-implies-potential-infinity-t]]). It is true if possible, so
@@ -86,4 +90,9 @@ notes: >-
   of the evaluation point: for instance an entrance with four propositions and one absorbing arrow into a
   hyperfinite world, such as [[ultraproduct-finite-full-s5]]; that this is a model of C has not been checked.
   At type $e$ the two do come apart ([[full-omega-chain-new-individuals]]).
+changes:
+- date: '2026-11-25'
+  by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+  summary: 'Credit corrected: Bacon''s comparison of the exact and at-least numbers (28 October 2026, pull request
+    #19 of this repository) is added to the sources. It proved that the at-least form implies the Peano form.'
 lean_def: Classicism.P.PotentialInfinityT.schemaIn

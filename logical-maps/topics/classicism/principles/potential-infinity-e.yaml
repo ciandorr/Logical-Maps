@@ -10,12 +10,15 @@ definitions: >-
   $nX$ says that $X$ has exactly $n$ instances. See Background, Cardinality, arithmetic and analysis.
 date: '2026-11-24'
 sources:
-- Zachary Goodsell, suggestion of 24 November 2026 (the principle, its name, and its identification with
-  $I^*$ and with Bacon's lower-Peano conditions).
+- Zachary Goodsell, suggestion of 24 November 2026 (the statement as Potential Infinity, its name, and that
+  it coincides with $I^*$ and with Bacon's lower-Peano conditions).
 - Zachary Goodsell, Arithmetic is Necessary, draft of 5 June 2024, §4, Definitions 3–5 and 8, pp. 11–13, 19.
+- Andrew Bacon, exact/at-least cardinality comparison formalized with OpenAI GPT-6, 28 October 2026, in the
+  CH checkpoint and Logical-Maps Lean projects.
 source_names:
 - Goodsell 24 Nov
 - Arithmetic is Necessary
+- Bacon / Codex CH project
 references:
 - paper: goodsell-arithmetic-necessary
   role: formulation
@@ -69,7 +72,9 @@ variants:
   equivalence: 'Background, [[at-least-numbers]], at $\sigma=e$: the Peano form and this one are equivalent
     in C. Sending a number $n$ to $\lambda X\, .\,\exists X^\prime\subseteq X\, .\,nX^\prime$, at least $n$,
     carries the numbers onto the at-least numbers, commutes with successor, and is injective, a number
-    being recovered as at least it and not at least its successor.'
+    being recovered as at least it and not at least its successor. That this form implies the Peano form,
+    with the correspondence between the numbers and the at-least numbers, is Bacon''s, proved with GPT-6
+    Astra Pro (28 October 2026; pull request #19 of this repository). The converse is new.'
 notes: >-
   Weaker than the Axiom of Infinity at this type ([[axiom-of-infinity-e-implies-potential-infinity-e]]) and
   than Possible Infinity ([[possible-infinity-e-implies-potential-infinity-e]]): it holds wherever there
@@ -78,5 +83,11 @@ notes: >-
   ([[necessary-potential-infinity-e]]), equivalent to it given B for pure sentences ([[potential-infinity-e-and-pure-b-imply-necessary-potential-infinity-e]]),
   so in C5. With BF it gives the Axiom of Infinity back ([[potential-infinity-e-and-bf-imply-axiom-of-infinity-e]]);
   whether it does with No Pure Contingency, as Possible Infinity does, is not settled here. It is the antecedent
-  $I_e$ of the Necessity of Arithmetic at $e$.
+  $I_e$ of the Necessity of Arithmetic at $e$. Bacon recorded the Peano form at this type as Peano separation
+  for exact finite cardinalities (28 October 2026, in pull request #19, which was not merged).
+changes:
+- date: '2026-11-25'
+  by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+  summary: 'Credit corrected: Bacon''s comparison of the exact and at-least numbers (28 October 2026, pull request
+    #19 of this repository) is added to the sources. It proved that the at-least form implies the Peano form.'
 lean_def: Classicism.P.PotentialInfinityE.schemaIn

@@ -173,9 +173,9 @@ $\operatorname{LowerNat}_\sigma(Z):=\forall W^{((\sigma t)t)t}\, .\,
 \bigl(W\mathbf 0^{\ge}_\sigma\land\forall Y\, .\,WY\to W(\operatorname{Suc}_\sigma Y)\bigr)\to WZ$.
 Where $\mathbf 0_\sigma$ holds of the properties with no instance,
 $\mathbf 0^{\ge}_\sigma$ holds of every property, and the $n$th at-least number holds of the
-properties with at least $n$ instances. Bacon's formalization of the cardinal continuum hypothesis
-counts with them, and states Potential Infinity as the Peano conditions on them
-([[at-least-numbers]]).
+properties with at least $n$ instances. The at-least numbers are Bacon's: his formalization of the
+cardinal continuum hypothesis counts with them, and its infinity premise is the Peano conditions on
+them, his lower-Peano conditions, which are a form of Potential Infinity ([[at-least-numbers]]).
 
 ::: lemma {#finite-cardinality-arithmetic}
 title: exchange, removal, addition and subproperties
@@ -287,7 +287,7 @@ so $\neg Xy$ for some $y$, and $\operatorname{Suc}k$ holds of $X$ with $y$ added
 ::: lemma {#at-least-numbers}
 title: the Peano conditions on the at-least numbers
 lean: [Classicism.lowerPeano_of_iStar, Classicism.iStar_of_lowerPeano]
-credit: Zachary Goodsell (that Bacon's lower-Peano conditions are Potential Infinity, 24 November 2026); proof by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+credit: Andrew Bacon with GPT-6 Astra Pro (OpenAI), 28 October 2026 (that the conditions on the at-least numbers imply $I^*_\sigma$, and the correspondence between the numbers and the at-least numbers; Lean-verified as exactPeano_of_lowerPeano and exactLowerBijection_of_lowerPeano in pull request 19 of the map's repository); the converse, and the proof given here, by Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell, who suggested that the lower-Peano conditions are Potential Infinity (24 November 2026)
 ---
 In C, at each type $\sigma$, $I^*_\sigma$ is equivalent to the same conditions on the at-least
 numbers,

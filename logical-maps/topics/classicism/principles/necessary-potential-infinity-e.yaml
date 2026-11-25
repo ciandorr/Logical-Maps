@@ -7,17 +7,21 @@ formal: $\Box\forall n\in\mathbb N_e\, .\,\Diamond\exists X^{et}\, .\,nX$
 definitions: >-
   $\mathbb N_e$ is $\operatorname{FiniteCardinality}_e$, the numbers counted at type $e$, of type $(et)t$;
   $nX$ says that $X$ has exactly $n$ instances. See Background, Cardinality, arithmetic and analysis.
-date: '2026-11-24'
+date: '2026-10-27'
 sources:
-- Zachary Goodsell, suggestion of 24 November 2026 (the principle, its name, and its identification with
-  Barton and Goodsell's Infinity and with Bacon's necessary lower-Peano conditions).
-- Neil Barton and Zachary Goodsell, Continuum Contingency, draft of 14 October 2026, §5.6, eq. (22), p. 17.
 - Andrew Bacon, CH contingency formalization and repository proposal, 27 October 2026, with OpenAI Codex; checkpoint
   140, natural_CH_contingency_closedBounds.
+- Andrew Bacon, exact/at-least cardinality comparison formalized with OpenAI GPT-6, 28 October 2026, in the
+  CH checkpoint and Logical-Maps Lean projects.
+- Neil Barton and Zachary Goodsell, Continuum Contingency, draft of 14 October 2026, §5.6, eq. (22), p. 17.
+- Zachary Goodsell, suggestion of 24 November 2026 (the statement as the necessitation of Potential Infinity,
+  its name, and that it coincides with Barton and Goodsell's Infinity and with Bacon's necessary lower-Peano
+  conditions).
 source_names:
-- Goodsell 24 Nov
-- Continuum Contingency
 - Bacon / Codex CH project
+- Bacon / Codex CH project
+- Continuum Contingency
+- Goodsell 24 Nov
 references:
 - paper: barton-goodsell-continuum-contingency
   role: formulation
@@ -60,7 +64,8 @@ variants:
     by deleting one member of the tested property; the successor operation is the existing cardinal successor
     (Background, the at-least numbers).
   equivalence: The unboxed forms are equivalent in C (Background, [[at-least-numbers]], with [[potential-infinity-forms]]);
-    necessitating the derivations and applying K carries the equivalence to the boxed forms.
+    necessitating the derivations and applying K carries the equivalence to the boxed forms. That the at-least
+    form implies the Peano form, boxed and unboxed, is Bacon's, proved with GPT-6 Astra Pro (28 October 2026).
 notes: >-
   The necessitated form of [[potential-infinity-e]], which implies it by T and is implied by it given B for
   pure sentences ([[potential-infinity-e-and-pure-b-imply-necessary-potential-infinity-e]]). The boxed Axiom
@@ -70,5 +75,19 @@ notes: >-
   Comprehension the numbers counted at $e$ are a rigid property with necessarily distinct instances. It
   is the infinity premise of the cardinal CH results ([[power-closed-mp-and-choice-imply-cardinal-ch-contingency]]),
   whose formalization states it in the at-least form, as necessary lower-Peano. Possibility Maximalism
-  (pure) refutes it ([[possibility-and-necessary-potential-infinity-e-incompatible]]).
+  (pure) refutes it ([[possibility-and-necessary-potential-infinity-e-incompatible]]). The record
+  began as Bacon's Necessary Peano conditions (at-least numbers), of 27 October 2026, the infinity premise
+  of his CH formalization. It was restated on 24 November 2026 as the necessitation of Potential Infinity,
+  with his statement kept as the at-least form.
+changes:
+- date: '2026-11-24'
+  by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+  summary: Restated as the necessitation of Potential Infinity (type e), with Bacon's statement kept as the
+    at-least form and the Peano form added; the forms are equivalent in C. The record was `necessary-lower-peano-e`,
+    Necessary Peano conditions (at-least numbers).
+- date: '2026-11-25'
+  by: Claude Fable 5.2 (Anthropic), prompted by Zachary Goodsell
+  summary: 'Credit corrected: the record keeps the date of Bacon''s, 27 October 2026, and lists his formalization
+    first among its sources. His comparison of the exact and at-least numbers (28 October 2026, pull request
+    #19 of this repository), which proved that the at-least form implies the Peano form, is added.'
 lean_def: Classicism.P.NecPotentialInfinityE.schemaIn

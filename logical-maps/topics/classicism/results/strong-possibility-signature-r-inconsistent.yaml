@@ -1,0 +1,52 @@
+id: strong-possibility-signature-r-inconsistent
+premises:
+- strong-possibility-signature-r
+conclusion: false
+status: conjectured
+certificate:
+  source_id: misc
+  produced_by: Cian Dorr (the conjecture, and the idea that different maximalist models can place the
+    witness of a Russell–Myhill collision differently), with Claude Fable 5.2 (Anthropic), prompted by
+    Cian Dorr, who found the sentences and the models and wrote the partial proof, 21–22 November
+    2026
+  recorded_by: Claude Fable 5.2 (Anthropic), prompted by Cian Dorr, 22 November 2026
+  checked_by: []
+  date: '2026-11-22'
+  lean: none
+sources:
+- Cian Dorr, conjecture of 22 November 2026.
+- Claude Fable 5.2 (Anthropic), prompted by Cian Dorr, 21–22 November 2026, for the partial proof in the
+  write-up.
+source_names:
+- Dorr 22 Nov
+- Fable 22 Nov
+proof: ''
+references:
+- paper: bacon-dorr-classicism
+  role: background
+  locator: §2.5, pp. 37–39; §2.6, pp. 41–42
+  note: Strong Possibility and the distinctness-preserving modality; its consistency is left open there.
+notes: >-
+  Conjectured for every signature $\Sigma$ of the kind the map assumes. Proved, in the write-up, when
+  $\Sigma$ has a constant with an argument of a type other than $e$: for instance a constant of type
+  $t\to t$, $(e\to t)\to t$ or $(t\to t)\to t$. For such a $\Sigma$ a closed term $r$ of type $t\to t$
+  built from the constant can be made true of any chosen set of root propositions in the model
+  coalesced-definable-root-signature. From $r$ one defines a pairing, a closed term $Q$ of type
+  $(t\to t)\to t$, and two existential sentences $E_1$, $E_2$ that split the Russell–Myhill collision
+  for $Q$ by whether its witness agrees with $\rho$ at $\top$. C($\Sigma$) proves $E_1\lor E_2$, and
+  Maximalism (signature Σ) is consistent with $\neg E_1$ and with $\neg E_2$, by two members of that
+  family of models that differ in the root extension of the constant. Each $E_i$ is an existential
+  closure of identities and distinctnesses, so C proves $E_i\to\Box_{\ne}E_i$, and Strong Possibility
+  (signature Σ) is refuted outright.
+
+
+  Not proved: the signatures every constant of which is an individual constant, a propositional
+  constant or a predicate of individuals. No closed term then has a freely choosable root extension
+  on relational arguments. This case contains the question for the pure language, Strong Possibility
+  (pure), which the source leaves open.
+
+
+  What would settle it: for such a signature, either a disjunction of existential identity sentences
+  that Maximalism (signature Σ) proves without proving a disjunct, or a model of Strong Possibility
+  (signature Σ). A model for some $\Sigma$ would refute the conjecture as stated for arbitrary
+  $\Sigma$.

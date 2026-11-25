@@ -18,6 +18,12 @@ references:
 # component for every interpretation of a signature, and whose root domains are finitely pinned. The
 # shared arguments that carry a component's counterexample to the root through the distinguished
 # arrow now apply only at `root-arrows: distinguished`.
+#
+# Revised 22 November 2026 (Claude Fable 5.2, prompted by Cian Dorr): the value `pointed-exits` of
+# `root-arrows` added for coalesced-definable-root-signature. Its arrows factor through one arrow per
+# component, as at `distinguished`, but it does not declare `distinguished-arrows`: the shared
+# arguments that require that condition build root entities with freely chosen component parts,
+# which the definable root domains of that member do not contain.
 
 definition: >-
   {{construction}}
@@ -59,6 +65,17 @@ parameters:
           type-preserving map of the signature's constants to themselves, acting on the root's
           individuals and composing with the interpretation arrows by precomposition.
         label: interpretation and substitution arrows
+      pointed-exits:
+        text: >-
+          Each component is pointed. The root has one exit arrow to the distinguished object of each
+          component, every arrow from the root into a component factors through it, and the root's
+          individuals are the signature's individual constants.
+        label: exits into pointed components
+        meets:
+          actual-world-isolated: >-
+            The singleton root proposition, true at the root's identity arrow and nowhere in a
+            component, is in the domain and entails every truth; the components have no arrows back
+            to the root (Classicism, Appendix E, p. 83, on the distinctness-preserving collapse).
   construction:
     text: The components, how their individuals and constants meet at the root, and the evaluation
       point, as the member's source gives them.

@@ -963,7 +963,7 @@
         </div>
       </section>
       <section class="pane" id="pane-models"><div class="list" id="models"></div></section>
-      <section class="pane" id="pane-results"><div class="list"><details class="history" id="history" hidden><summary>Progress over time</summary><div class="history-controls"><span class="seg" role="group" aria-label="Questions"><button type="button" data-history-kind="two" aria-pressed="true">Two-premise</button><button type="button" data-history-kind="core" aria-pressed="false">Core</button></span><span class="seg" role="group" aria-label="Measure"><button type="button" data-history-measure="share" aria-pressed="true">Open share</button><button type="button" data-history-measure="counts" aria-pressed="false">Counts</button></span></div><div class="history-chart" id="history-chart"></div><p class="history-note" id="history-note"></p></details><div class="changes-filter" id="changes-filter" hidden></div><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
+      <section class="pane" id="pane-results"><div class="list"><details class="history" id="history" hidden><summary>Progress over time</summary><div class="history-controls"><span class="seg" role="group" aria-label="Questions"><button type="button" data-history-kind="two" aria-pressed="true">Two-premise</button><button type="button" data-history-kind="core" aria-pressed="false">Core</button></span><span class="seg" role="group" aria-label="Measure"><button type="button" data-history-measure="share" aria-pressed="true">Open share</button><button type="button" data-history-measure="counts" aria-pressed="false">Counts</button></span></div><div class="history-chart" id="history-chart"></div><p class="history-note" id="history-note"></p></details><div class="changes-filter" id="changes-filter" hidden></div><div class="changes-controls"><input class="search" id="search" type="search" placeholder="Filter" aria-label="Filter changes"><label class="minor-toggle" title="Housekeeping that leaves what a record says unchanged"><input type="checkbox" id="show-minor"> minor changes <span class="n" id="n-minor"></span></label><label class="minor-toggle" title="A verdict reached in several models at once has one row; this also lists each of those models"><input type="checkbox" id="show-shared"> list each model separately <span class="n" id="n-shared"></span></label></div><div class="changes-summary" id="changes-summary"></div><div id="results"></div></div></section>
       <section class="pane" id="pane-theorems"><div class="open-content"><div class="list" id="theorems"></div></div></section>
       <section class="pane" id="pane-open"><div class="open-content"><div id="open-warning" class="graph-warning" role="alert" hidden></div><div class="list" id="open"></div></div></section>
       <section class="pane" id="pane-page"><div class="page" id="page"></div></section>
@@ -1254,7 +1254,7 @@ const sourceColor = s => {
   return `var(--source-${sourceHues[s.id] || sourcePalette[hash % sourcePalette.length]})`;
 };
 const sourceMarker = s => 'source-' + sourceCatalog.indexOf(s);
-const state = { allowed: new Set(sourceCatalog.map(s => s.id)), showMinor: false, leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, core: false, recorded: false, auto: false, showIso: true, selected: null, modelId: null, groupId: null, openGroups: new Set(), variantsOpen: new Map(), tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set(), flipped: false };
+const state = { allowed: new Set(sourceCatalog.map(s => s.id)), showMinor: false, showShared: false, leanOnly: false, showConj: false, conjectureOnly: false, unpublishedOnly: false, reduced: true, trivial: false, focus: null, showResolved: backgroundParams.get('resolved') === '1', lynchpins: false, core: false, recorded: false, auto: false, showIso: true, selected: null, modelId: null, groupId: null, openGroups: new Set(), variantsOpen: new Map(), tab: 'graph', search: '', excluded: new Set(), negativeShown: new Set(), collapsed: new Set(), flipped: false };
 // The theory explorer keeps its own assumptions, apart from the graph's
 // background, so trying out a theory there leaves the graph as it was.
 const theoryParam = (key, fallback) => backgroundParams.has(key) ? (backgroundParams.get(key) || '').split(',').filter(id => byPid.has(id)) : fallback;
@@ -3333,17 +3333,56 @@ function dateOf(x) {
   if (x.companion_of) return (x.arguments || []).map(a => String(a.date || x.certificate.date || '')).sort().pop() || '';  // dated by its conjectured arguments
   return x.satisfies || x.premises ? (x.certificate.date || '') : (x.date || '');
 }
-// A record written as arguments logs its earlier revisions as history; an argument or
-// revision dated after everything logged there is a change of its own. A companion's
-// changes are the revisions of its conjectured arguments.
+// A record written as arguments keeps no log of its own. What changed for a model on a day is
+// the arguments it gained that day and the revisions of its arguments, each dated after everything
+// in the record's history. An argument that many models share, a general argument or a group's,
+// reaches each of them as one of its own, marked with where it comes from.
+function argumentEvents(x) {
+  if (!x.arguments || x.companion_of) return [];
+  const since = [x.certificate.date || '', ...(x.history || []).map(ch => String(ch.date || ''))].sort().pop();
+  const shared = a => a.general ? 'general/' + a.general : a.group ? 'group/' + a.group + '/' + (a.id || '') : null;
+  return x.arguments.flatMap(a => [
+    { date: String(a.date || x.certificate.date || ''), by: a.by || x.certificate.produced_by, a, shared: shared(a), added: true },
+    ...(a.revisions || []).map(r => ({ date: String(r.date || ''), by: r.by, a, shared: shared(a), note: r.note }))
+  ]).filter(ev => ev.date > since);
+}
+// One change a model a day: how many verdicts its new arguments record that none of its earlier
+// ones does, and which; its own conjectured arguments; and the revisions of its own arguments.
+// A day that brought it only shared arguments is `shared`: those arguments have rows of their own
+// (sharedArgumentRows), and the model's row waits behind a checkbox. A companion's changes are
+// the revisions of its conjectured arguments.
 function laterArguments(x) {
   if (x.companion_of) return (x.arguments || []).flatMap(a => (a.revisions || []).map(r => ({ date: String(r.date || ''), by: r.by, summary: r.note })));
-  if (!x.arguments) return [];
-  const since = [x.certificate.date || '', ...(x.history || []).map(ch => String(ch.date || ''))].sort().pop();
-  return x.arguments.flatMap(a => [
-    { date: String(a.date || x.certificate.date || ''), by: a.by || x.certificate.produced_by, summary: (a.standing === 'conjectured' ? 'Conjectured argument' : 'Argument') + ` added${a.text ? ': ' + (a.text.length > 300 ? a.text.slice(0, 300) + '…' : a.text) : '.'}`, satisfies: a.standing === 'conjectured' ? [] : a.holds, violates: a.standing === 'conjectured' ? [] : a.fails },
-    ...(a.revisions || []).map(r => ({ date: String(r.date || ''), by: r.by, summary: r.note }))
-  ]).filter(ch => ch.date > since);
+  const days = new Map();
+  for (const ev of argumentEvents(x)) (days.get(ev.date) || days.set(ev.date, []).get(ev.date)).push(ev);
+  const counts = a => !a.withdrawn && a.standing !== 'conjectured';
+  const clip = t => t.length > 300 ? t.slice(0, 300) + '…' : t;
+  return [...days].map(([date, evs]) => {
+    const earlier = x.arguments.filter(a => counts(a) && String(a.date || x.certificate.date || '') < date);
+    const added = evs.filter(ev => ev.added), own = evs.filter(ev => !ev.shared);
+    const gained = k => [...new Set(added.filter(ev => counts(ev.a)).flatMap(ev => ev.a[k] || []))].filter(p => !earlier.some(a => (a[k] || []).includes(p)));
+    const satisfies = gained('holds'), violates = gained('fails'), n = satisfies.length + violates.length;
+    const established = own.filter(ev => ev.added && counts(ev.a)).length;
+    const parts = [];
+    if (n) parts.push(`${n} new verdict${n > 1 ? 's' : ''}.`);
+    else if (established) parts.push(`${established > 1 ? established + ' arguments' : 'Argument'} added, with no new verdict.`);
+    for (const ev of own) if (ev.added && ev.a.standing === 'conjectured') parts.push('Conjectured argument added' + (ev.a.text ? ': ' + clip(ev.a.text) : '.'));
+    for (const ev of own) if (!ev.added && ev.note) parts.push(ev.note);
+    return { date, by: [...new Set(evs.map(ev => ev.by).filter(Boolean))].join('; '), summary: parts.join(' '), satisfies, violates, shared: !own.length };
+  }).filter(ch => ch.summary);
+}
+// An argument shared by many models is one change, however many it reaches: a row when it is
+// added, and one for each revision, with the models it reached then.
+function sharedArgumentRows() {
+  const rows = new Map();
+  for (const x of MODELS) for (const ev of argumentEvents(x)) {
+    if (!ev.shared) continue;
+    const key = [ev.shared, ev.date, ev.added ? '' : ev.note].join('\u0001');
+    let row = rows.get(key);
+    if (!row) rows.set(key, row = { date: ev.date, argument: { a: ev.a, added: !!ev.added, note: ev.note, by: ev.by, models: [] } });
+    row.argument.models.push(x);
+  }
+  return [...rows.values()];
 }
 function kindOf(x) { return x.satisfies ? 'model' : x.premises ? 'result' : 'principle'; }
 // ---------------------------------------------------------------- changes
@@ -3371,6 +3410,7 @@ function changesRows() {
   // the per-record search text and the drawing that cost, not this.
   return [...P, ...R, ...MODELS]
     .flatMap(x => [{ date: dateOf(x), x }, ...[...(x.changes || []), ...(x.history || []), ...laterArguments(x)].map(change => ({ date: String(change.date || ''), x, change }))])
+    .concat(sharedArgumentRows())
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 function changesText(x) {
@@ -3381,7 +3421,30 @@ function changesText(x) {
   }
   return text;
 }
-function changesRowHtml({ date, x, change }) {
+// A shared argument's row says what it settles, not what it is called: which principles hold or
+// fail, and in which models: two by name, in brackets, and the rest counted, or the group when it is every
+// model of one. A revision repeats that and gives its note. The row opens the argument.
+function sharedArgumentRowHtml({ date, argument: s }) {
+  const general = s.a.general, group = general ? null : byGid.get(s.a.group);
+  const and = xs => xs.length > 1 ? xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1] : xs.join('');
+  const named = ids => and((ids || []).map(id => `<b>${esc(name(id))}</b>`));
+  const holds = s.a.holds || [], fails = s.a.fails || [];
+  const verdicts = [holds.length ? `${named(holds)} hold${holds.length > 1 ? '' : 's'}` : '', fails.length ? `${named(fails)} fail${fails.length > 1 ? '' : 's'}` : ''].filter(Boolean).join(' and ');
+  const models = [...s.models.filter(m => !m.variant_of), ...s.models.filter(m => m.variant_of)];
+  const whole = group && models.length === MODELS.filter(m => m.group === group.id && !m.companion_of).length;
+  const bracket = n => `[${esc(n)}]`;   // a name is marked as one: model names read like prose, with commas and colons
+  const where = whole ? bracket(group.name)
+    : group ? `${models.length} model${models.length > 1 ? 's' : ''} of ${bracket(group.name)}`
+    : and([...models.slice(0, 2).map(m => bracket(m.name)), ...(models.length > 2 ? [`${models.length - 2} further model${models.length > 3 ? 's' : ''}`] : [])]);
+  const conjectured = s.a.standing === 'conjectured' ? 'Conjectured: ' : '';
+  const stmt = `${conjectured}${verdicts || 'An argument applies'} in ${where}.${s.added ? '' : ` <span class="revision-list">Argument revised: ${esc(s.note || '')}</span>`}`;
+  const badge = `<span class="badge indep${s.added ? '' : ' revised'}">model verdict${holds.length + fails.length > 1 ? 's' : ''}</span>`;
+  const cls = [s.added ? '' : 'revision', date >= lastVisit.since ? 'new' : ''].join(' ').trim();
+  return `<tr data-kind="${general ? 'argument' : 'group'}" data-id="${esc(general || s.a.group)}" class="${cls}"><td class="mono nowrap">${esc(date)}</td><td>${badge}</td><td class="stmt">${stmt}</td><td></td><td class="mono">${esc(s.by || '')}</td></tr>`;
+}
+function changesRowHtml(row) {
+  if (row.argument) return sharedArgumentRowHtml(row);
+  const { date, x, change } = row;
   const k = kindOf(x);
   const title = k === 'principle' ? `<b>${esc(x.name)}</b>` : k === 'result' ? resultStmt(x) : `<b>${esc(x.name)}</b>`;
   const stmt = change
@@ -3403,10 +3466,11 @@ function renderResults() {
   const all = changesRows();
   const range = changesView.range;
   const dated = range ? all.filter(r => r.date > range.after && r.date <= range.through) : all;
-  const matching = qf ? dated.filter(r => changesText(r.x).includes(qf)) : dated;
+  const matching = qf ? dated.filter(r => changesText(r.argument ? r.argument.a : r.x).includes(qf)) : dated;
   const minor = matching.filter(r => r.change?.minor).length;
-  const rows = matching.filter(r => state.showMinor || !r.change?.minor);
-  const fresh = all.filter(r => !r.change?.minor && r.date >= lastVisit.since).length;
+  const perModel = matching.filter(r => r.change?.shared).length;
+  const rows = matching.filter(r => (state.showMinor || !r.change?.minor) && (state.showShared || !r.change?.shared));
+  const fresh = all.filter(r => !r.change?.minor && !r.change?.shared && r.date >= lastVisit.since).length;
   const shown = rows.slice(0, changesView.limit);
   let h = `<table class="results changes"><tbody>`;
   for (const row of shown) h += changesRowHtml(row);
@@ -3415,12 +3479,17 @@ function renderResults() {
   if (rest > 0) h += `<button class="changes-more" id="changes-more">Show the next ${Math.min(CHANGES_PAGE, rest)} of ${rest} more</button>`;
   const el = document.getElementById('results'); el.innerHTML = h;
   renderSubscripts(el);
-  el.querySelectorAll('tr[data-id]').forEach(tr => tr.addEventListener('click', () => select({ type: tr.dataset.kind, id: tr.dataset.id })));
+  el.querySelectorAll('tr[data-id]').forEach(tr => tr.addEventListener('click', () => {
+    const sel = { type: tr.dataset.kind, id: tr.dataset.id };
+    sel.type === 'argument' || sel.type === 'group' ? openPage(sel) : select(sel);
+  }));
   el.querySelector('#changes-more')?.addEventListener('click', () => { changesView.limit += CHANGES_PAGE; renderResults(); });
   document.getElementById('n-results').textContent = fresh;
   document.getElementById('changes-summary').textContent = `${fresh} ${fresh === 1 ? 'change' : 'changes'} ${lastVisit.label} · ${rows.length} ${qf ? 'matching' : 'in all'}`;
   document.getElementById('n-minor').textContent = minor;
   document.getElementById('show-minor').closest('label').hidden = !minor && !state.showMinor;
+  document.getElementById('n-shared').textContent = perModel;
+  document.getElementById('show-shared').closest('label').hidden = !perModel && !state.showShared;
   const filter = document.getElementById('changes-filter');
   filter.hidden = !range;
   if (range) {
@@ -5280,6 +5349,7 @@ document.getElementById('fit').addEventListener('click', fit);
 })();
 document.getElementById('search').addEventListener('input', e => { state.search = e.target.value; scheduleChanges(); });
 document.getElementById('show-minor').addEventListener('change', e => { state.showMinor = e.target.checked; changesView.limit = CHANGES_PAGE; renderResults(); });
+document.getElementById('show-shared').addEventListener('change', e => { state.showShared = e.target.checked; changesView.limit = CHANGES_PAGE; renderResults(); });
 // Typing schedules the search, which redraws the graph or lattice to reveal matches; it runs once
 // the typing pauses, or at once from the keyboard shortcuts and the checks (flushGraphSearch).
 const graphSearchPending = { timer: null, value: '' };

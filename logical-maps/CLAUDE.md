@@ -219,6 +219,15 @@ When you (an AI) add or edit a result or model:
   argument with `standing: conjectured`, not a separate record. Such a record
   lists only the verdicts from which the engine derives the rest, its source's
   first (README); add an argument only for a verdict the engine cannot derive.
+  A revision never adds a verdict, and an existing argument's text is not extended
+  with new mathematics under its author's name: both are new arguments. The Changes
+  tab reads the arguments: a model gets one row a day, counting and listing the
+  verdicts its new arguments record that no earlier one does, and an argument shared
+  by many models (a general argument or a group's) gets one row of its own when added
+  and one for each revision, a "model verdict" that says which principles hold or fail
+  in which models (two named and the rest counted, or the group); the rows of models
+  that gained only shared arguments wait behind a checkbox (`laterArguments`,
+  `sharedArgumentRows`; `check_model_verdicts_ui.cjs`).
 - A model in a group (README, "Model groups") gets the group's shared arguments that
   match its settings and the conditions it `meets`. An argument that would hold
   for every member that meets some condition belongs in the group as a

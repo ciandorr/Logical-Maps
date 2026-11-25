@@ -204,7 +204,7 @@ try{
   w2.eval('state.search="";renderResults()');
   const changes=[...d2.querySelectorAll('#results tr')].map(tr=>tr.textContent);
   assert.ok(changes.some(x=>x.includes('An old change.')),'History entries are changes');
-  assert.ok(changes.some(x=>x.includes('Argument added.')&&x.includes('2026-02-01')),'A later argument is one');
+  assert.ok(changes.some(x=>x.includes('Argument added, with no new verdict.')&&x.includes('2026-02-01')),'A later argument is one, and says when it adds no verdict');
   assert.ok(changes.some(x=>x.includes('Tidied.')),'And so is its revision');
   assert.ok(!changes.some(x=>x.includes('Why A holds')),'An argument as old as the record is not');
   assert.ok(changes.some(x=>x.includes('Conjectured argument added: Why E might hold.')),'A later conjectured argument is a change too');
@@ -213,6 +213,14 @@ try{
   const rows=[...d2.querySelectorAll('#results tr')];
   assert.ok(rows.some(tr=>tr.dataset.id==='n-conj'&&tr.textContent.includes('Conjecture restated.')),'A companion\'s changes are its arguments\' revisions');
   assert.ok(rows.some(tr=>tr.dataset.id==='n-conj'&&tr.textContent.includes('2026-01-20')&&!tr.classList.contains('revision')),'And it is dated by its latest argument, not by the model');
+  // One change a model a day: the arguments of a day are merged, and the row counts and lists the
+  // verdicts they record that no earlier argument of the model does.
+  w2.eval(`byMid.get('n').arguments.push({holds:['c'],fails:['d'],date:'2026-02-03',by:'Third author',text:'New.'},{holds:['c'],fails:['b'],date:'2026-02-03',by:'Fourth author',text:'Again.'});renderResults()`);
+  const day=[...d2.querySelectorAll('#results tr')].filter(tr=>tr.dataset.id==='n'&&tr.textContent.includes('2026-02-03'));
+  assert.equal(day.length,1,'Two arguments of one day are one change');
+  assert.match(day[0].textContent,/2 new verdicts\. Now satisfies: C\. Now violates: D\./,'It counts and lists the new verdicts, not the one the model had');
+  assert.match(day[0].textContent,/Third author; Fourth author/,'And names both authors');
+  assert.ok(!day[0].textContent.includes('New.'),'The arguments\' text stays on the model\'s page');
   assert.deepEqual(errors2.map(String),[]);
   console.log('PASS: a model page sorts every principle into three columns, satisfied, violated and unsettled, counts each, gives each principle one control to its evidence or arguments and a derived verdict its derivation in place, starting from the verdicts it uses and linking each to its argument, a back button that retraces the pages, holds the derived verdicts behind a closed toggle, keeps Lean status on the pop-up of a verdict while the explorer list keeps its marks; a model written as arguments shows its definition, then three columns of principles with one control each and no sources, each argument once in record order headed by its verdicts with who supplied it inside (for a trawl argument, who found, reviewed and admitted it), its history behind a toggle, a write-up that does not replace the definition, and its companion.');
 }finally{w2.close();}
@@ -358,6 +366,35 @@ try{
   // A list of witnesses gathers a group's models into one entry.
   const line=d3.createElement('div');line.innerHTML=w3.eval('statusLine("X", {status:"independent", models:["gm","gm-sigma-atom"]})');
   assert.match(line.textContent,/Fixture group 2 of 2 models$/,'Witnesses from a group are one entry');
+  // The Changes tab gives a shared argument one row, however many models it reaches, and keeps
+  // the rows of models that gained only shared arguments behind a checkbox.
+  w3.eval('showTab("results");state.search="";renderResults()');
+  const changeRows=()=>[...d3.querySelectorAll('#results tr')];
+  const sharedRows=changeRows().filter(tr=>tr.dataset.kind==='argument'||tr.dataset.kind==='group');
+  assert.deepEqual(sharedRows.map(tr=>[tr.dataset.kind,tr.dataset.id,tr.querySelector('td').textContent]),
+    [['argument','gen-c','2026-03-04'],['group','g','2026-03-03'],['group','g','2026-03-02'],['group','g','2026-03-01']],'One row an argument');
+  assert.match(sharedRows[0].textContent,/model verdictC holds in \[Fixture: group member\]\.Topic author/,'It says what holds where, not what the argument is called');
+  assert.match(sharedRows[2].textContent,/model verdictB fails in \[Fixture group\]\./,'A verdict in every model of a group names the group');
+  assert.match(sharedRows[1].textContent,/model verdictE fails in 1 model of \[Fixture group\]\./,'And one in some of them counts them');
+  assert.ok(!changeRows().some(tr=>tr.dataset.kind==='model'&&tr.classList.contains('revision')),'A model that gained only shared arguments has no row of its own');
+  const sharedToggle=d3.getElementById('show-shared');
+  assert.equal(sharedToggle.closest('label').hidden,false);
+  assert.equal(d3.getElementById('n-shared').textContent,'6','Three days for the member and three for its variant');
+  sharedToggle.checked=true;sharedToggle.dispatchEvent(new w3.Event('change',{bubbles:true}));
+  const memberDays=changeRows().filter(tr=>tr.dataset.id==='gm'&&tr.classList.contains('revision'));
+  assert.deepEqual(memberDays.map(tr=>tr.querySelector('td').textContent),['2026-03-04','2026-03-02','2026-03-01']);
+  assert.match(memberDays[0].textContent,/1 new verdict\. Now satisfies: C\./);
+  assert.match(memberDays[1].textContent,/1 new verdict\. Now violates: B\./);
+  sharedToggle.checked=false;sharedToggle.dispatchEvent(new w3.Event('change',{bubbles:true}));
+  // A revision of a shared argument is one row too, with its note.
+  w3.eval(`for (const m of MODELS) for (const a of m.arguments) if (a.general==='gen-c') a.revisions=[{date:'2026-03-05',by:'Reviser',note:'A gap closed.'}];renderResults()`);
+  const revisedRows=changeRows().filter(tr=>tr.textContent.includes('A gap closed.'));
+  assert.equal(revisedRows.length,1);
+  assert.match(revisedRows[0].textContent,/model verdictC holds in \[Fixture: group member\]\. Argument revised: A gap closed\.Reviser/);
+  w3.eval(`const extra=n=>({...byMid.get('gm'),id:'gm'+n,name:'Fixture: copy '+n,arguments:byMid.get('gm').arguments.filter(a=>a.general)});MODELS.push(extra(1),extra(2));renderResults()`);
+  const many=changeRows().find(tr=>tr.dataset.id==='gen-c'&&!tr.classList.contains('revision'));
+  assert.match(many.textContent,/C holds in \[Fixture: group member\], \[Fixture: copy 1\] and 1 further model\./,'Two models by name, in brackets, and the rest counted');
+  sharedRows[0].click();
   assert.deepEqual(errors3.map(String),[]);
   console.log('PASS: the theory explorer lists a group once, counting the models that fit the assumptions and saying which, inspects a group through them (all hold, all fail, or split), and a list of witnesses gathers a group\'s models into one entry;');
   console.log('PASS: a group\'s member lists its own arguments, then the shared arguments that apply under their group, each saying which condition it relies on and why the member meets it; a group\'s page shows a grid of its members, adds a generated parameter\'s variants and the columns they need on request, says what the parameter changes, shows a cell\'s arguments and a row\'s settings, and lists its definition, parameters, conditions and shared arguments with where each applies.');

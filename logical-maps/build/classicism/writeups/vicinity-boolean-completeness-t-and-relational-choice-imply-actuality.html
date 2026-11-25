@@ -353,11 +353,17 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <p>So assume that <span class="math inline">h\le s</span> is true and that every nonzero <span class="math inline">p\le h</span> has some <span class="math inline">q</span> with <span class="math inline">\bot&lt;q&lt;p</span>. We derive a contradiction.</p>
 <h2 id="partitions-by-relational-choice">2. Partitions, by Relational Choice</h2>
 <p>Let</p>
-<p><span class="math display">R(p,q):=\bigl[\bot&lt;p\le h\land\bot&lt;q&lt;p\bigr]\lor\bigl[\neg(\bot&lt;p\le h)\land q=\bot\bigr].</span></p>
+<p><span class="math display">
+R(p,q):=\bigl[\bot&lt;p\le h\land\bot&lt;q&lt;p\bigr]\lor\bigl[\neg(\bot&lt;p\le h)\land q=\bot\bigr].
+</span></p>
 <p><span class="math inline">R</span> is serial and settled. Relational Choice gives a functional <span class="math inline">K</span> with <span class="math inline">K\subseteq R</span>. Following Astra, put</p>
-<p><span class="math display">c_p(q):=K(p,q)\land R(p,q)\land\forall z\, .\,(K(p,z)\land R(p,z))\to z=q,\qquad
-d_p:=\exists q\, .\,c_p(q),</span></p>
-<p><span class="math display">a:=h\land\forall p\, .\,d_p,\qquad u_0(p,q):=p\land c_p(q)\land q,\qquad u_1(p,q):=p\land c_p(q)\land\neg q .</span></p>
+<p><span class="math display">
+c_p(q):=K(p,q)\land R(p,q)\land\forall z\, .\,(K(p,z)\land R(p,z))\to z=q,\qquad
+d_p:=\exists q\, .\,c_p(q),
+</span></p>
+<p><span class="math display">
+a:=h\land\forall p\, .\,d_p,\qquad u_0(p,q):=p\land c_p(q)\land q,\qquad u_1(p,q):=p\land c_p(q)\land\neg q .
+</span></p>
 <p>Each <span class="math inline">d_p</span> is true, since the <span class="math inline">K</span>-value of <span class="math inline">p</span> makes some <span class="math inline">c_p(q)</span> true. So <span class="math inline">a</span> is true, and <span class="math inline">a\le h\le s</span>.</p>
 <p>Fix <span class="math inline">\bot&lt;p\le a</span>. The values <span class="math inline">u_i(p,q)</span> have three properties.</p>
 <ul>
@@ -366,11 +372,15 @@ d_p:=\exists q\, .\,c_p(q),</span></p>
 <li><strong>Their join is <span class="math inline">p</span>.</strong> <span class="math inline">\exists q\, .\,(u_0(p,q)\lor u_1(p,q))=p\land d_p=p</span>. And if <span class="math inline">w</span> bounds every value, then <span class="math inline">s\le(u_0(p,q)\lor u_1(p,q)\to w)</span> for every <span class="math inline">q</span>. So, by Lemma 2, <span class="math inline">p=s\land p\le w</span>.</li>
 </ul>
 <p>Let</p>
-<p><span class="math display">\operatorname{Child}(p,r):=\bot&lt;p\le a\land r\ne\bot\land\exists q\, .\,(r=u_0(p,q)\lor r=u_1(p,q)),</span></p>
+<p><span class="math display">
+\operatorname{Child}(p,r):=\bot&lt;p\le a\land r\ne\bot\land\exists q\, .\,(r=u_0(p,q)\lor r=u_1(p,q)),
+</span></p>
 <p>which is settled by Lemma 3. For <span class="math inline">\bot&lt;p\le a</span>, the <span class="math inline">r</span> with <span class="math inline">\operatorname{Child}(p,r)</span>, the <em>children</em> of <span class="math inline">p</span>, are pairwise disjoint and strictly below <span class="math inline">p</span>, and their join is <span class="math inline">p</span>. In particular <span class="math inline">p</span> has at least two children. By Lemma 4 and <span class="math inline">p\le s</span>, <span class="math inline">p=s\land\exists r\, .\,(\operatorname{Child}(p,r)\land r)</span>. So if <span class="math inline">p</span> is true, exactly one child of <span class="math inline">p</span> is true: at least one by this identity, and at most one by disjointness.</p>
 <h2 id="the-chain-of-true-parts">3. The chain of true parts</h2>
 <p>On <span class="math inline">X:=\lambda p\, .\,p\le a</span>, ordered by <span class="math inline">\ge</span> (so that suprema are glbs), let</p>
-<p><span class="math display">F(p,r):=\bigl[\neg p\land r=p\bigr]\lor\bigl[p\land\operatorname{Child}(p,r)\land r\bigr].</span></p>
+<p><span class="math display">
+F(p,r):=\bigl[\neg p\land r=p\bigr]\lor\bigl[p\land\operatorname{Child}(p,r)\land r\bigr].
+</span></p>
 <p><span class="math inline">F</span> is a functional relation on <span class="math inline">X</span> with <span class="math inline">F(p)\le p</span>, strictly when <span class="math inline">p</span> is true. Boolean Completeness at <span class="math inline">t</span> gives every chain in <span class="math inline">X</span> a glb, which lies in <span class="math inline">X</span> (the empty chain has supremum <span class="math inline">a</span>).</p>
 <p>The Bourbaki–Witt lemma, in its case for partial orders, gives a tower <span class="math inline">M</span>, the least property closed under <span class="math inline">F</span> and glbs of chains. Its glb <span class="math inline">m</span> satisfies <span class="math inline">Mm</span> and <span class="math inline">F(m)=m</span>. Four facts about <span class="math inline">M</span> follow.</p>
 <ol type="1">
@@ -381,17 +391,23 @@ d_p:=\exists q\, .\,c_p(q),</span></p>
 </ol>
 <h2 id="the-discarded-parts-coded-by-a-second-choice">4. The discarded parts, coded by a second choice</h2>
 <p>Let</p>
-<p><span class="math display">\Delta(d):=\exists p\,r\, .\,Mp\land p\land F(p,r)\land\operatorname{Child}(p,d)\land d\ne r,</span></p>
+<p><span class="math display">
+\Delta(d):=\exists p\,r\, .\,Mp\land p\land F(p,r)\land\operatorname{Child}(p,d)\land d\ne r,
+</span></p>
 <p>so that the members of <span class="math inline">\Delta</span> are the false children of true members of <span class="math inline">M</span>.</p>
 <ul>
 <li><strong>They are pairwise disjoint.</strong> Two discarded at the same parent are disjoint children. If <span class="math inline">d</span> is discarded at <span class="math inline">p</span> and <span class="math inline">d&#39;</span> at <span class="math inline">q&lt;p</span>, then <span class="math inline">d&#39;\le q\le F(p)</span>, while <span class="math inline">d</span> is a child of <span class="math inline">p</span> other than <span class="math inline">F(p)</span>, so <span class="math inline">d\land F(p)=\bot</span>.</li>
 <li><strong>Every true member of <span class="math inline">M</span> has one</strong>, since it has at least two children and only one is true.</li>
 </ul>
 <p>Relational Choice, applied to the serial relation <span class="math inline">[\Delta(d)\land\operatorname{Child}(d,r)]\lor[\neg\Delta(d)\land r=\bot]</span>, gives a functional subrelation, whose value at <span class="math inline">d\in\Delta</span> we write <span class="math inline">r_d</span>. So <span class="math inline">r_d</span> is a child of <span class="math inline">d</span>. By Boolean Completeness, let <span class="math inline">b</span> be the join of the <span class="math inline">r_d</span>. For every <span class="math inline">d\in\Delta</span>,</p>
-<p><span class="math display">b\land d=r_d .</span></p>
+<p><span class="math display">
+b\land d=r_d .
+</span></p>
 <p>For <span class="math inline">r_d\le b\land d</span>, and <span class="math inline">\neg d\lor r_d</span> bounds every <span class="math inline">r_e</span>, since <span class="math inline">r_e\le e\le\neg d</span> for <span class="math inline">e\ne d</span>. Let</p>
-<p><span class="math display">\operatorname{Mixed}(x):=x\land b\ne\bot\land x\land\neg b\ne\bot,\qquad
-H(c):=\exists e\, .\,\operatorname{Child}(c,e)\land\operatorname{Mixed}(e),</span></p>
+<p><span class="math display">
+\operatorname{Mixed}(x):=x\land b\ne\bot\land x\land\neg b\ne\bot,\qquad
+H(c):=\exists e\, .\,\operatorname{Child}(c,e)\land\operatorname{Mixed}(e),
+</span></p>
 <p>both settled by Lemma 3.</p>
 <ul>
 <li><strong><span class="math inline">H</span> fails at every <span class="math inline">d\in\Delta</span>.</strong> A child <span class="math inline">e</span> of <span class="math inline">d</span> is <span class="math inline">r_d</span>, which is below <span class="math inline">b</span>, or else disjoint from <span class="math inline">r_d</span>, in which case <span class="math inline">e\land b=e\land d\land b=e\land r_d=\bot</span>. Either way <span class="math inline">e</span> is not mixed.</li>
@@ -400,9 +416,13 @@ H(c):=\exists e\, .\,\operatorname{Child}(c,e)\land\operatorname{Mixed}(e),</spa
 <p>So at a true member <span class="math inline">p</span> of <span class="math inline">M</span>, exactly one child satisfies <span class="math inline">H</span>, namely <span class="math inline">F(p)</span>. It is a true member of <span class="math inline">M</span>, while the other children are in <span class="math inline">\Delta</span>.</p>
 <h2 id="the-decoded-step">5. The decoded step</h2>
 <p>Let</p>
-<p><span class="math display">g:=\lambda p\, .\,p\land\exists c\, .\,(\operatorname{Child}(p,c)\land H(c)\land c),</span></p>
+<p><span class="math display">
+g:=\lambda p\, .\,p\land\exists c\, .\,(\operatorname{Child}(p,c)\land H(c)\land c),
+</span></p>
 <p>a term of type <span class="math inline">tt</span>. Let <span class="math inline">p</span> be a true member of <span class="math inline">M</span>. The property <span class="math inline">\lambda c\, .\,\operatorname{Child}(p,c)\land H(c)</span> is settled, and <span class="math inline">F(p)</span> is its only instance. So, by Lemma 4 and <span class="math inline">F(p)\le p\le s</span>,</p>
-<p><span class="math display">g(p)=F(p).</span></p>
+<p><span class="math display">
+g(p)=F(p).
+</span></p>
 <p>This is an identity, not merely an agreement in truth value.</p>
 <h2 id="the-settled-chain-and-the-contradiction">6. The settled chain, and the contradiction</h2>
 <p>Apply the Bourbaki–Witt lemma for admissible chains to <span class="math inline">X</span>, ordered by <span class="math inline">\ge</span>, with the graph of <span class="math inline">g</span> as the step and the settled properties as the admissible ones. Its hypotheses hold:</p>

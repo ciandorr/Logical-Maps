@@ -327,10 +327,14 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <p><strong>The idea.</strong> The Zermelo-style argument grows a partial transversal by adding chosen points, and partial transversals are compared by <span class="math inline">\le</span>, necessary inclusion. That order is antisymmetric, so coextensive but distinct partial transversals cause no trouble. In C, what fails is the step to suprema: the union of a chain need not be its least upper bound under <span class="math inline">\le</span>. Vicinity supplies a truth <span class="math inline">s</span> that settles every identity statement and lets universal quantifiers commute with “<span class="math inline">s\le\cdots</span>”. That is enough for suprema of chains whose membership is settled by <span class="math inline">s</span>. The Bourbaki–Witt lemma for admissible chains (Background, <em>Relations, orders and fixed points</em>) needs suprema only for such chains, provided the properties its proof forms are settled too, and they are.</p>
 <h2 id="what-vicinity-provides">What Vicinity provides</h2>
 <p>Let <span class="math inline">v</span> witness Vicinity, so that <span class="math inline">v</span> is true and <span class="math inline">\forall q\, .\,q\to v\le\Diamond q</span>. Put</p>
-<p><span class="math display">A:=\forall r\, .\,r\to v\le\Diamond r,\qquad s:=v\land A .</span></p>
+<p><span class="math display">
+A:=\forall r\, .\,r\to v\le\Diamond r,\qquad s:=v\land A .
+</span></p>
 <p>Both conjuncts are true, so <span class="math inline">s</span> is true. Call a proposition <span class="math inline">p</span> <em>settled</em> if <span class="math inline">s\le p</span> or <span class="math inline">s\le\neg p</span>, and a property <span class="math inline">Y^{\tau t}</span> <em>settled</em> if each of its instances is:</p>
-<p><span class="math display">\operatorname{Settled}(p):=s\le p\lor s\le\neg p,\qquad
-\operatorname{Settled}(Y):=\forall b^\tau\, .\,\operatorname{Settled}(Yb).</span></p>
+<p><span class="math display">
+\operatorname{Settled}(p):=s\le p\lor s\le\neg p,\qquad
+\operatorname{Settled}(Y):=\forall b^\tau\, .\,\operatorname{Settled}(Yb).
+</span></p>
 <p>Because <span class="math inline">s</span> is true, a settled proposition is true if and only if <span class="math inline">s\le p</span>. Call this fact (∗).</p>
 <p><strong>Lemma 1 (<span class="math inline">s</span> settles identities).</strong> For any <span class="math inline">a,b</span> of the same type, <span class="math inline">\operatorname{Settled}(a=b)</span>.</p>
 <p><em>Proof.</em> If <span class="math inline">a=b</span> is true, it is <span class="math inline">\top</span> by NI. If it is false, <span class="math inline">A</span> applied to the truth <span class="math inline">a\ne b</span> gives <span class="math inline">v\le\Diamond(a\ne b)</span>, and by NI <span class="math inline">\Diamond(a\ne b)\le(a\ne b)</span>. So <span class="math inline">s\le v\le(a\ne b)</span>. <span class="math inline">\square</span></p>
@@ -343,23 +347,31 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <li>atoms <span class="math inline">Y_ib</span>, where <span class="math inline">b</span> is any term.</li>
 </ul>
 <p>Quantifiers binding a <span class="math inline">Y_i</span> must be restricted to settled properties, in the form <span class="math inline">\forall Y_i\, .\,\operatorname{Settled}(Y_i)\to\psi</span> or <span class="math inline">\exists Y_i\, .\,\operatorname{Settled}(Y_i)\land\psi</span>. Quantifiers binding other variables are unrestricted. Then it is a theorem of C, universally closed over the free variables, that if <span class="math inline">v</span> witnesses Vicinity, then</p>
-<p><span class="math display">\operatorname{Settled}(Y_1)\land\cdots\land\operatorname{Settled}(Y_n)\to\operatorname{Settled}(\varphi).</span></p>
+<p><span class="math display">
+\operatorname{Settled}(Y_1)\land\cdots\land\operatorname{Settled}(Y_n)\to\operatorname{Settled}(\varphi).
+</span></p>
 <p><em>Proof.</em> By induction on <span class="math inline">\varphi</span>, for all lists <span class="math inline">Y_1,\dots,Y_n</span> at once. Identities are settled by Lemma 1, and atoms <span class="math inline">Y_ib</span> by the hypothesis on <span class="math inline">Y_i</span>. Connectives are immediate.</p>
 <p>Take <span class="math inline">\forall x\, .\,\varphi(x)</span>, where <span class="math inline">x</span> is not among the <span class="math inline">Y_i</span>. Every instance <span class="math inline">\varphi(a)</span> is settled, by induction. If every instance is true, then by (∗) <span class="math inline">s\le\varphi(a)</span> for every <span class="math inline">a</span>, so <span class="math inline">s\le\forall x\, .\,\varphi(x)</span> by Lemma 2. If some instance <span class="math inline">\varphi(a)</span> is false, then by (∗) <span class="math inline">s\le\neg\varphi(a)\le\neg\forall x\, .\,\varphi(x)</span>. The existential quantifier is dual.</p>
 <p>Take <span class="math inline">\forall Y\, .\,\operatorname{Settled}(Y)\to\psi</span>. The formula <span class="math inline">\operatorname{Settled}(Y)</span> is built from identities (<span class="math inline">s\le Yb</span> is the identity <span class="math inline">s\land Yb=s</span>), so it is settled. If it is false, then <span class="math inline">s\le\neg\operatorname{Settled}(Y)</span>, and the instance <span class="math inline">\operatorname{Settled}(Y)\to\psi</span> is settled. If it is true, the induction hypothesis for <span class="math inline">\psi</span>, with <span class="math inline">Y</span> added to the list, shows that <span class="math inline">\psi</span> is settled, and so is the instance. So every instance is settled, and the previous case applies. The restricted existential quantifier is dual. <span class="math inline">\square</span></p>
 <p>Lemmas 1–3 are all that Vicinity contributes.</p>
 <h2 id="the-construction">The construction</h2>
 <p>Fix <span class="math inline">\sigma</span> and an equivalence relation <span class="math inline">R^{\sigma\sigma t}</span>, which need only be an equivalence relation actually. The variables <span class="math inline">B,D,\dots</span> range over properties of type <span class="math inline">\sigma t</span>. Put</p>
-<p><span class="math display">(Qx)y:=\forall z\, .\,(Rx)z\leftrightarrow(Ry)z,\qquad
-\overline B:=\lambda x\, .\,\exists y\, .\,(Qx)y\land By,</span></p>
-<p><span class="math display">\operatorname{PT}(B):=\forall x\,y\, .\,Bx\land By\land(Qx)y\to x=y,\qquad
-\operatorname{Full}(B):=\forall x\, .\,\overline Bx .</span></p>
+<p><span class="math display">
+(Qx)y:=\forall z\, .\,(Rx)z\leftrightarrow(Ry)z,\qquad
+\overline B:=\lambda x\, .\,\exists y\, .\,(Qx)y\land By,
+</span></p>
+<p><span class="math display">
+\operatorname{PT}(B):=\forall x\,y\, .\,Bx\land By\land(Qx)y\to x=y,\qquad
+\operatorname{Full}(B):=\forall x\, .\,\overline Bx .
+</span></p>
 <p><span class="math inline">Q</span> is an equivalence relation by pure logic, hence necessarily, and it is actually coextensive with <span class="math inline">R</span>, since <span class="math inline">R</span> is actually an equivalence relation. A property <span class="math inline">B</span> with <span class="math inline">\operatorname{PT}(B)\land\operatorname{Full}(B)</span> is therefore a transversal of <span class="math inline">R</span>. We use <span class="math inline">Q</span> rather than <span class="math inline">R</span> so that its symmetry and transitivity can be used under <span class="math inline">\Box</span>.</p>
 <p><strong>Candidates.</strong> <span class="math inline">B</span> is a <em>candidate</em> if <span class="math inline">B\le\lambda x\, .\,s</span> and <span class="math inline">\Box\operatorname{PT}(B)</span>. That is, every instance of <span class="math inline">B</span> entails <span class="math inline">s</span>, and <span class="math inline">B</span> is necessarily a partial transversal of <span class="math inline">Q</span>.</p>
 <p><strong>The step.</strong> The relation <span class="math inline">(UB)a:=\operatorname{Full}(B)\lor\neg\overline Ba</span> is serial: if <span class="math inline">B</span> is not full, some <span class="math inline">a</span> lies outside <span class="math inline">\overline B</span>. Relational Choice gives a functional <span class="math inline">K^{(\sigma t)\sigma t}</span> with <span class="math inline">K\subseteq U</span>. For each <span class="math inline">B</span> put</p>
-<p><span class="math display">D_B:=\lambda x\, .\,s\land(KB)x\land\bigl(\forall y\, .\,(KB)y\land(Qx)y\to y=x\bigr)
+<p><span class="math display">
+D_B:=\lambda x\, .\,s\land(KB)x\land\bigl(\forall y\, .\,(KB)y\land(Qx)y\to y=x\bigr)
 \land\neg\overline Bx,\qquad
-fB:=\lambda x\, .\,Bx\lor D_Bx .</span></p>
+fB:=\lambda x\, .\,Bx\lor D_Bx .
+</span></p>
 <p>The uniqueness clause in <span class="math inline">D_B</span> is needed because <span class="math inline">K</span> is functional only actually, while candidates must be partial transversals necessarily. Here <span class="math inline">f</span> is a term of type <span class="math inline">(\sigma t)\sigma t</span> with <span class="math inline">s</span> and <span class="math inline">K</span> as parameters. So statements such as <span class="math inline">D=fB</span> and <span class="math inline">fB\le D</span> are identity statements, whatever <span class="math inline">K</span> is.</p>
 <h2 id="applying-the-bourbakiwitt-lemma">Applying the Bourbaki–Witt lemma</h2>
 <p>Apply the Bourbaki–Witt lemma for admissible chains at type <span class="math inline">\sigma t</span>, with:</p>
@@ -376,13 +388,19 @@ fB:=\lambda x\, .\,Bx\lor D_Bx .</span></p>
 <p><span class="math inline">\le</span> is reflexive and transitive, and it is antisymmetric as well.</p>
 <h2 id="hypothesis-2-every-settled-chain-has-a-supremum">Hypothesis 2: every settled chain has a supremum</h2>
 <p>Let <span class="math inline">Z</span> be a settled property of properties, with <span class="math inline">Z\subseteq X</span> and <span class="math inline">\operatorname{Total}(R,Z)</span>. Its members are the <span class="math inline">B</span> with <span class="math inline">ZB</span> true, or equivalently, by (∗), the <span class="math inline">B</span> with <span class="math inline">s\le ZB</span>. Put</p>
-<p><span class="math display">J:=\lambda x\, .\,s\land\exists B\, .\,ZB\land Bx .</span></p>
+<p><span class="math display">
+J:=\lambda x\, .\,s\land\exists B\, .\,ZB\land Bx .
+</span></p>
 <p><em><span class="math inline">J</span> bounds the members.</em> If <span class="math inline">ZB</span> is true, then <span class="math inline">s\le ZB</span>, and this identity is <span class="math inline">\top</span>. Since <span class="math inline">B\le\lambda x\, .\,s</span>, pointwise <span class="math inline">Bx\le s\land ZB\land Bx\le Jx</span>. So <span class="math inline">B\le J</span>.</p>
 <p><em><span class="math inline">J</span> is a candidate.</em> <span class="math inline">J\le\lambda x\, .\,s</span> is clear. For <span class="math inline">\Box\operatorname{PT}(J)</span>, it suffices to show <span class="math inline">s\le\operatorname{PT}(J)</span>: since <span class="math inline">Jx</span> entails <span class="math inline">s</span>, <span class="math inline">\neg s\to\operatorname{PT}(J)</span> is a theorem. By Lemma 2, applied to each of the four quantifiers, it suffices to show, for all <span class="math inline">x,y,B,B&#39;</span>,</p>
-<p><span class="math display">s\le\bigl(ZB\land ZB&#39;\land Bx\land B&#39;y\land(Qx)y\to x=y\bigr).</span></p>
+<p><span class="math display">
+s\le\bigl(ZB\land ZB&#39;\land Bx\land B&#39;y\land(Qx)y\to x=y\bigr).
+</span></p>
 <p>If <span class="math inline">B</span> or <span class="math inline">B&#39;</span> is not a member, this holds because <span class="math inline">s\le\neg ZB</span> or <span class="math inline">s\le\neg ZB&#39;</span>, as <span class="math inline">Z</span> is settled. If both are members, they are comparable, say <span class="math inline">B\le B&#39;</span>. Then <span class="math inline">Bx</span> entails <span class="math inline">B&#39;x</span>, and since <span class="math inline">B&#39;</span> is a candidate, <span class="math inline">s\le\operatorname{PT}(B&#39;)\le(B&#39;x\land B&#39;y\land(Qx)y\to x=y)</span>.</p>
 <p><em><span class="math inline">J</span> is the least candidate bounding the members.</em> Let <span class="math inline">D</span> be a candidate with <span class="math inline">B\le D</span> for every member <span class="math inline">B</span>. For each <span class="math inline">B</span>,</p>
-<p><span class="math display">s\le\bigl(ZB\to\forall x\, .\,Bx\to Dx\bigr):</span></p>
+<p><span class="math display">
+s\le\bigl(ZB\to\forall x\, .\,Bx\to Dx\bigr):
+</span></p>
 <p>for a member because <span class="math inline">B\le D</span>, and for a non-member because <span class="math inline">s\le\neg ZB</span>. Lemma 2 gives <span class="math inline">s\le\forall B\, .\,ZB\to\forall x\, .\,Bx\to Dx</span>, so <span class="math inline">s\le\forall x\, .\,Jx\to Dx</span>. Where <span class="math inline">s</span> is false, <span class="math inline">J</span> has no instances, so <span class="math inline">J\le D</span>.</p>
 <p>So <span class="math inline">J</span> is a supremum of <span class="math inline">Z</span> in <span class="math inline">X</span>. The settledness of <span class="math inline">Z</span> was used twice, both times to apply Lemma 2. Without it, the union of a chain bounds it only at the evaluation point.</p>
 <h2 id="hypothesis-3-f-is-progressive">Hypothesis 3: <span class="math inline">F</span> is progressive</h2>

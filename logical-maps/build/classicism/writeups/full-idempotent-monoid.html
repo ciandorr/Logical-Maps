@@ -328,13 +328,19 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <h2 id="quantification-at-a-successor">Quantification at a successor</h2>
 <p>We use Bacon and Dorr, <em>Classicism</em>, draft of 16 May 2023, Definition 3.19, pp.55–56, and the satisfaction clauses on p.57. At an arrow from an object W to an object V, assigned entities are transported to V, while newly bound variables range over V’s entire domain. They do not range merely over the image of W’s domain under that arrow.</p>
 <p>For a one-object model let A be its monoid and P its type-t domain. Its proposition action is</p>
-<p><span class="math display">h^t p=\{u\in A:u\circ h\in p\}.</span></p>
+<p><span class="math display">
+h^t p=\{u\in A:u\circ h\in p\}.
+</span></p>
 <p>At the basepoint, possibility means nonemptiness and entailment means set inclusion. Consequently an admitted proposition w is a strong atom exactly when it is nonempty and, for every arrow h and every <strong>target-domain</strong> proposition Y in P,</p>
-<p><span class="math display">h^t w\subseteq Y\quad\text{or}\quad h^t w\subseteq A\setminus Y.</span></p>
+<p><span class="math display">
+h^t w\subseteq Y\quad\text{or}\quad h^t w\subseteq A\setminus Y.
+</span></p>
 <p>The quantifier over Y here is inside the box in the definition of a strong atom. Restricting it to propositions of the form h^t p changes the definition and gives the wrong answer in the examples below.</p>
 <h2 id="a-nonidentity-idempotent-refutes-strong-atomicity">A nonidentity idempotent refutes Strong Atomicity</h2>
 <p>Suppose h is a nonidentity idempotent arrow and the singleton p={h} is an admitted proposition. Then p is possible, and the only possible proposition w entailing p is p itself. But</p>
-<p><span class="math display">1,h\in h^t\{h\},</span></p>
+<p><span class="math display">
+1,h\in h^t\{h\},
+</span></p>
 <p>because both 1∘h and h∘h equal h. At the successor h, take the independently quantified proposition Y={h}. The shift h^t{h} meets Y at h and meets its complement at 1. It therefore entails neither Y nor its negation. Thus p is not a strong atom, and the possible p has no strong atom below it.</p>
 <p>This proves failure of Strong Atomicity at type t in each of the following existing models:</p>
 <ul>
@@ -346,21 +352,27 @@ body.writeup-page { max-width: 82ch; margin: 3em auto; padding: 0 1.5em 3em; fon
 <p>For comparison, in a group h<sup>t{g}={g∘h</sup>{-1}} is a singleton, and in the truncated-shift monoid k_n∘k_m=k_{n+m}, each such precomposition fibre is empty or a singleton. Their singleton worlds therefore do decide every target proposition. Those positive Strong Atomicity verdicts already follow from the map’s Atomicity and Barcan rules.</p>
 <h2 id="a-finitely-pinned-bft-witness-in-the-truncation-model">A finitely pinned BF(t) witness in the truncation model</h2>
 <p>Let A and P now be the truncation monoid and its proposition domain. Define an intension for a property X of propositions by assigning the following extensions to arrows:</p>
-<p><span class="math display">I_h=
+<p><span class="math display">
+I_h=
 \begin{cases}
 \{\varnothing,A\},&amp;h=g_0,\\
 P,&amp;h\ne g_0.
-\end{cases}</span></p>
+\end{cases}
+</span></p>
 <p>This is an admissible type-tt entity. Indeed h=g_0 exactly when h(1)=0, so the intension is pinned down by the finite individual set {1}. Definition D.3’s equivalent intension characterization on p.74 places every such finitely pinned intension in this ideally full model’s domain.</p>
 <p>For every proposition p assigned at the base and every arrow h, h^t p belongs to I_h. For h≠g_0 this is immediate. For h=g_0, the identity u∘g_0=g_0 for every arrow u gives</p>
-<p><span class="math display">g_0^t p=
+<p><span class="math display">
+g_0^t p=
 \begin{cases}
 A,&amp;g_0\in p,\\
 \varnothing,&amp;g_0\notin p,
-\end{cases}</span></p>
+\end{cases}
+</span></p>
 <p>and both values belong to I_{g_0}. Thus forall p Box Xp holds at the base.</p>
 <p>At the successor g_0 the quantifier ranges over all of P. In particular, the admitted proposition {g_0} is neither A nor empty and does not belong to I_{g_0}. Hence forall p Xp is false there, and Box forall p Xp is false at the base. This X refutes</p>
-<p><span class="math display">\forall X^{tt}\bigl((\forall p\,\Box Xp)\to\Box\forall p\,Xp\bigr).</span></p>
+<p><span class="math display">
+\forall X^{tt}\bigl((\forall p\,\Box Xp)\to\Box\forall p\,Xp\bigr).
+</span></p>
 <p>The boxed BF(t) sentence fails by T. Appendix D, footnote 92 on p.74 also explicitly covers BF failure at every type in this example. The direct witness above makes clear why no converse to Proposition 3.24(ii) is being assumed for an arbitrary non-full model.</p>
 <h2 id="sources-and-verification">Sources and verification</h2>
 <ul>
